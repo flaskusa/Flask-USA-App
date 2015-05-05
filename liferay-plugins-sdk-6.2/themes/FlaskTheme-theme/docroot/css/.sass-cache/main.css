@@ -2224,4 +2224,8 @@ body:first-of-type .portlet-content:hover .lfr-icon-actions .taglib-text {
   animation: lfr-drop-active 1s ease 0.2s infinite; }
 
 /* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+.flask-nav-item {
+  color: red;
+  cursor: pointer;
+  font-size: 16px; }
 

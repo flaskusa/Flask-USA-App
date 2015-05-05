@@ -1,2 +1,6 @@
 /* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+.flask-nav-item {
+  color: red;
+  cursor: pointer;
+  font-size: 16px; }
 
