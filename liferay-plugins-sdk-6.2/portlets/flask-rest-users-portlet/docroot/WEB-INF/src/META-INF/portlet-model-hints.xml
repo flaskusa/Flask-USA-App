@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.rumbasolutions.flask.model.FlaskAdmin">
+		<field name="userId" type="long" />
+		<field name="roleId" type="long" />
+		<field name="firstName" type="String" />
+		<field name="middleName" type="String" />
+		<field name="lastName" type="String" />
+		<field name="screenName" type="String" />
+		<field name="email" type="String" />
+		<field name="DOB" type="Date" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.FlaskRole">
+		<field name="roleId" type="long" />
+		<field name="roleName" type="String" />
+		<field name="roleDesc" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.FlaskUser">
+		<field name="userId" type="long" />
+		<field name="roleId" type="long" />
+		<field name="firstName" type="String" />
+		<field name="middleName" type="String" />
+		<field name="lastName" type="String" />
+		<field name="screenName" type="String" />
+		<field name="email" type="String" />
+		<field name="DOB" type="Date" />
+	</model>
+</model-hints>
