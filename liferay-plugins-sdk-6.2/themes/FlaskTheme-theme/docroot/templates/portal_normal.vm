@@ -10,6 +10,13 @@
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />
 
 	$theme.include($top_head_include)
+	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+
+
+
+
+
 </head>
 
 <body class="$css_class">
@@ -18,14 +25,24 @@
 
 $theme.include($body_top_include)
 
-#if ($is_signed_in)
-	#dockbar()
-#end
+
+
+
+
+
+
+
+
+
+ #if ($is_signed_in)
+	 #dockbar()
+ #end
+
 
 <div class="container-fluid" id="wrapper">
 	<header id="banner" role="banner">
 		<div id="heading">
-			<h1 class="site-title">
+		<!--	<h1 class="site-title">
 				<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
 					<img alt="$logo_description" height="$site_logo_height" src="$company_logo_src" width="$site_logo_width" />
 				</a>
@@ -36,6 +53,7 @@ $theme.include($body_top_include)
 					</span>
 				#end
 			</h1>
+			-->
 		#if (!$is_signed_in)
 			<a data-redirect="$is_login_redirect_required" href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
 		#end
