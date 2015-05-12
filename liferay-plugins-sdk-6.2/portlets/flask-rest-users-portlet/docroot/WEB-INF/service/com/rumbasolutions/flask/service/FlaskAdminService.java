@@ -70,4 +70,48 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskContentManagers();
+
+	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskAdmin(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.rumbasolutions.flask.model.FlaskAdmin updateFlaskAdmin(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskContentManager(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Update content managers
+	*/
+	public com.rumbasolutions.flask.model.FlaskAdmin updateFlaskContentManager(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public void deleteFlaskAdmins(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

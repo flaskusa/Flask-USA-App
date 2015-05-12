@@ -18,13 +18,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.rumbasolutions.flask.model.FlaskAdmin;
 import com.rumbasolutions.flask.model.FlaskRole;
 import com.rumbasolutions.flask.service.base.FlaskRoleServiceBaseImpl;
+import com.rumbasolutions.flask.service.impl.ModelUtil.FlaskRoleEnum;
 
 /**
  * The implementation of the flask role remote service.
@@ -47,16 +45,18 @@ public class FlaskRoleServiceImpl extends FlaskRoleServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.rumbasolutions.flask.service.FlaskRoleServiceUtil} to access the flask role remote service.
 	 */
 	
+
+	@Override
 	public List<FlaskRole> getFlaskRoles(){
 		List<FlaskRole> roleList = new ArrayList<FlaskRole>();
 		try{
-			Role admin = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), ModelUtil.FLASK_ADMIN);
-			Role contentMgr = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), ModelUtil.FLASK_CONTENT_ADMIN);
-			Role user = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), ModelUtil.FLASK_USER);
-			
-			roleList.add(ModelUtil.getFlaskRole(admin));
-			roleList.add(ModelUtil.getFlaskRole(contentMgr));
-			roleList.add(ModelUtil.getFlaskRole(user));
+			for (FlaskRoleEnum eRole : FlaskRoleEnum.values()){
+				Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(),eRole.getRoleName());
+				if(role != null){
+					roleList.add(ModelUtil.getFlaskRole(role));
+				}
+
+			}
 		}catch(Exception ex){
 			
 		}

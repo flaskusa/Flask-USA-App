@@ -39,6 +39,46 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		_methodName4 = "getFlaskContentManagers";
 
 		_methodParameterTypes4 = new String[] {  };
+
+		_methodName5 = "addFlaskAdmin";
+
+		_methodParameterTypes5 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName6 = "updateFlaskAdmin";
+
+		_methodParameterTypes6 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName7 = "addFlaskContentManager";
+
+		_methodParameterTypes7 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName8 = "updateFlaskContentManager";
+
+		_methodParameterTypes8 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName9 = "deleteFlaskAdmins";
+
+		_methodParameterTypes9 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -137,6 +177,265 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		return (java.util.List<com.rumbasolutions.flask.model.FlaskAdmin>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskAdmin(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5,
+					new Object[] {
+						ClpSerializer.translateInput(firstName),
+						
+					ClpSerializer.translateInput(middleName),
+						
+					ClpSerializer.translateInput(lastName),
+						
+					ClpSerializer.translateInput(email),
+						
+					ClpSerializer.translateInput(screenName),
+						
+					ClpSerializer.translateInput(password1),
+						
+					ClpSerializer.translateInput(password2),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.FlaskAdmin)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin updateFlaskAdmin(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6,
+					new Object[] {
+						userId,
+						
+					ClpSerializer.translateInput(firstName),
+						
+					ClpSerializer.translateInput(middleName),
+						
+					ClpSerializer.translateInput(lastName),
+						
+					ClpSerializer.translateInput(email),
+						
+					ClpSerializer.translateInput(screenName),
+						
+					ClpSerializer.translateInput(password1),
+						
+					ClpSerializer.translateInput(password2),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.FlaskAdmin)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskContentManager(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7,
+					new Object[] {
+						ClpSerializer.translateInput(firstName),
+						
+					ClpSerializer.translateInput(middleName),
+						
+					ClpSerializer.translateInput(lastName),
+						
+					ClpSerializer.translateInput(email),
+						
+					ClpSerializer.translateInput(screenName),
+						
+					ClpSerializer.translateInput(password1),
+						
+					ClpSerializer.translateInput(password2),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.FlaskAdmin)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin updateFlaskContentManager(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
+					new Object[] {
+						userId,
+						
+					ClpSerializer.translateInput(firstName),
+						
+					ClpSerializer.translateInput(middleName),
+						
+					ClpSerializer.translateInput(lastName),
+						
+					ClpSerializer.translateInput(email),
+						
+					ClpSerializer.translateInput(screenName),
+						
+					ClpSerializer.translateInput(password1),
+						
+					ClpSerializer.translateInput(password2),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.FlaskAdmin)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void deleteFlaskAdmins(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9,
+				new Object[] {
+					userId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -146,4 +445,14 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	private String[] _methodParameterTypes3;
 	private String _methodName4;
 	private String[] _methodParameterTypes4;
+	private String _methodName5;
+	private String[] _methodParameterTypes5;
+	private String _methodName6;
+	private String[] _methodParameterTypes6;
+	private String _methodName7;
+	private String[] _methodParameterTypes7;
+	private String _methodName8;
+	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
 }

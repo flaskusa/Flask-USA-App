@@ -71,6 +71,68 @@ public class FlaskAdminServiceUtil {
 		return getService().getFlaskContentManagers();
 	}
 
+	public static com.rumbasolutions.flask.model.FlaskAdmin addFlaskAdmin(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addFlaskAdmin(firstName, middleName, lastName, email,
+			screenName, password1, password2, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.FlaskAdmin updateFlaskAdmin(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateFlaskAdmin(userId, firstName, middleName, lastName,
+			email, screenName, password1, password2, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.FlaskAdmin addFlaskContentManager(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addFlaskContentManager(firstName, middleName, lastName,
+			email, screenName, password1, password2, serviceContext);
+	}
+
+	/**
+	* Update content managers
+	*/
+	public static com.rumbasolutions.flask.model.FlaskAdmin updateFlaskContentManager(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateFlaskContentManager(userId, firstName, middleName,
+			lastName, email, screenName, password1, password2, serviceContext);
+	}
+
+	public static void deleteFlaskAdmins(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteFlaskAdmins(userId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

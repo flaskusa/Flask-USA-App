@@ -66,6 +66,71 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		return _flaskAdminService.getFlaskContentManagers();
 	}
 
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskAdmin(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _flaskAdminService.addFlaskAdmin(firstName, middleName,
+			lastName, email, screenName, password1, password2, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin updateFlaskAdmin(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _flaskAdminService.updateFlaskAdmin(userId, firstName,
+			middleName, lastName, email, screenName, password1, password2,
+			serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskContentManager(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _flaskAdminService.addFlaskContentManager(firstName, middleName,
+			lastName, email, screenName, password1, password2, serviceContext);
+	}
+
+	/**
+	* Update content managers
+	*/
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin updateFlaskContentManager(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _flaskAdminService.updateFlaskContentManager(userId, firstName,
+			middleName, lastName, email, screenName, password1, password2,
+			serviceContext);
+	}
+
+	@Override
+	public void deleteFlaskAdmins(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_flaskAdminService.deleteFlaskAdmins(userId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -46,6 +46,7 @@ public class FlaskUserServiceImpl extends FlaskUserServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.rumbasolutions.flask.service.FlaskUserServiceUtil} to access the flask user remote service.
 	 */
 	
+	@Override
 	public List<FlaskAdmin> getFlaskUsers(){
 		List<FlaskAdmin> userList = new ArrayList<FlaskAdmin>();
 		try{

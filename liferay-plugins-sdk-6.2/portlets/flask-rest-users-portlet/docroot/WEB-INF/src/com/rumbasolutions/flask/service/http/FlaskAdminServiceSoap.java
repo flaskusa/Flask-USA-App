@@ -92,5 +92,105 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap addFlaskAdmin(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.addFlaskAdmin(firstName,
+					middleName, lastName, email, screenName, password1,
+					password2, serviceContext);
+
+			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap updateFlaskAdmin(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.updateFlaskAdmin(userId,
+					firstName, middleName, lastName, email, screenName,
+					password1, password2, serviceContext);
+
+			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap addFlaskContentManager(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.addFlaskContentManager(firstName,
+					middleName, lastName, email, screenName, password1,
+					password2, serviceContext);
+
+			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* Update content managers
+	*/
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap updateFlaskContentManager(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.updateFlaskContentManager(userId,
+					firstName, middleName, lastName, email, screenName,
+					password1, password2, serviceContext);
+
+			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteFlaskAdmins(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			FlaskAdminServiceUtil.deleteFlaskAdmins(userId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskAdminServiceSoap.class);
 }
