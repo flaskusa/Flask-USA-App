@@ -36,21 +36,42 @@ String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "li
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
- $(document).ready(function(){
+
+  $(document).ready(function(){
   $("#_145_navSiteNavigationNavbarBtn").css("display","inline-block");
   $("#_145_navSiteNavigationNavbarBtn").css("float","left");
-  $("#navigation").css("margin-left","-50px");
+   /* $("#navigation").css("margin-left","-50px"); */
+   
+  if ($(window).width() > 978) 
+  {
+	  $("#_145_navSiteNavigationNavbarBtn").hide();
+  }
+  else  $("#_145_navSiteNavigationNavbarBtn").show();
+   
+  $(window).resize(function () {
+      if ($(this).width() > 978)
+      {
+    	  $("#_145_navSiteNavigationNavbarBtn").hide();
+      }
+      else  $("#_145_navSiteNavigationNavbarBtn").show();
+  });
+   
+   
  });
+  
 </script>
 
 
 <aui:nav-bar cssClass="navbar-static-top dockbar" data-namespace="<%= renderResponse.getNamespace() %>" id="dockbar">
 	
 	
-	
+	 
 	 <div align="center" style="position:relative;margin-left:30%;margin-right:30%;margin-top:8px;"><img alt="Liferay" src="/FlaskTheme-theme/images/flasklogo.png" width="30" height="30">
- <span style="font-weight:900; font-size: 18px;">FLASK</span></div>
-
+    
+     <span style="font-weight:900; font-size: 18px;">FLASK</span>
+ 
+     </div>
+     
 
 	<c:if test="<%= group.isControlPanel() %>">
 
