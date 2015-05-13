@@ -88,6 +88,7 @@ function fnSave(){
 	    		alert("Password does no matched");
 	    		return false;
 	    	default:
+	    		//Show success msg here.
 				$("#adminDataTable").show();
 				$("#adminForm").hide();
 				return false;	    			
