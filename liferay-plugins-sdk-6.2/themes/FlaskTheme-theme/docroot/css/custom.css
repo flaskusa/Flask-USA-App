@@ -27,6 +27,17 @@
     text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
 }
 
+@media screen and (min-width: 760px)
+ {
+   
+    .menuitem
+    {
+    
+       float: left;
+       display:block;
+    }
+ }
+
 .menuitem:hover {
   color: #ff9900;
   cursor:pointer;

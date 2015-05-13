@@ -81,6 +81,23 @@ $theme.include($body_bottom_include)
 
 $theme.include($bottom_include)
 
+
+
+<script type="text/javascript">
+
+$(document).ready(function(){
+$(".container-fluid").click(function(){
+
+if($("#navigation").hasClass("open"))
+  $("#navigation").attr("class","");
+ 
+});
+});
+
+</script>
+
+
+
 </body>
 
 </html>
