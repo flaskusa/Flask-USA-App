@@ -1,0 +1,12 @@
+.imgDeleteIcon {
+  background-image: url("Icons/removeIcon.png");
+  display: block;
+  height: 25px;
+  width: 25px; }
+
+.imgEditIcon {
+  background-image: url("Icons/editIcon.png");
+  display: block;
+  height: 25px;
+  width: 25px; }
+
