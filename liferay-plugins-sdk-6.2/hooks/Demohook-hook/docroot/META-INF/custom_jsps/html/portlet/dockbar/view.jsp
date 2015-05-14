@@ -29,6 +29,20 @@ boolean hasLayoutCustomizePermission = LayoutPermissionUtil.contains(permissionC
 boolean hasLayoutUpdatePermission = LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE);
 
 String toggleControlsState = GetterUtil.getString(SessionClicks.get(request, "liferay_toggle_controls", "visible"));
+
+/*  Flask CUSTOMIZATION BEGIN*/
+boolean bShowFlaskAdminMenu = false;
+String ADMIN_ROLE_NAME = "Administrator";
+String FLASK_ADMIN_ROLE_NAME = "Flask Admin";
+
+List<Role> roles = themeDisplay.getUser().getRoles();
+for (Role role : roles){
+	if (role.getName().contentEquals(ADMIN_ROLE_NAME) || role.getName().contentEquals(FLASK_ADMIN_ROLE_NAME) ){
+		bShowFlaskAdminMenu = true;
+		break;
+	}
+}
+/*  Flask CUSTOMIZATION END*/
 %>
 
 <link async href="http://fonts.googleapis.com/css?family=Coda" 
