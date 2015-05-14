@@ -47,6 +47,7 @@ function complete(id, o, args) {
             summary: ""
         });
         table.render("#adminDataTable");
+       
 	});        
 };
 
@@ -60,8 +61,10 @@ function fnDelete(AdminId){
 		  },
 		  function(obj) {
 		    console.log(obj);
+			window.location.reload(true);
 		  }
 		);
+	  
 	}
 	else
 		{
@@ -95,6 +98,7 @@ function fnSave(){
 	    }
 	    return false;
 	  });    	
+	
 }
 
 
@@ -117,8 +121,11 @@ $(document).ready(function(){
 			}	
 		});
 });
+
+
 </script>
-<div id="adminDataTable" >
+<body >
+<div id="adminDataTable"  >
 	<input class="btn btn-info" type="submit" value="Add">
 </div>
 
@@ -175,3 +182,4 @@ $(document).ready(function(){
   <input class="btn btn-info" type="submit" value="Save">
   <input class="btn btn-primary" type="reset" value="Cancel">
 </form>
+</body>
