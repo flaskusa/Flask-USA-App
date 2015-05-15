@@ -1,5 +1,5 @@
-.imgDeleteIcon{
-	background-image: url("Icons/removeIcon.png");
+.imgSettingIcon{
+	background-image: url("Icons/Setting.png");
 	display:block;
 	height: 25px;
 	width: 25px;
@@ -14,4 +14,16 @@
 
 #adminForm{
 	display: none;
+}
+
+.aui .dropdown-menu{
+	margin:2px 0px 0px -90px
+}
+
+#AdminSettings{
+	display: none;
+}
+
+.yui3-skin-sam .yui3-datatable-table{
+	font-size:12px;
 }

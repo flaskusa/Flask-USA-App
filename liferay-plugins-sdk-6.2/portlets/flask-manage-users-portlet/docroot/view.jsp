@@ -16,116 +16,16 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+<script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+<script src="<%=request.getContextPath()%>/js/alertifyjs/alertify.min.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/js/alertifyjs/css/alertify.min.css" />
+<link rel="stylesheet" href="<%=request.getContextPath()%>/js/alertifyjs/css/themes/default.min.css" />
+<script src="<%=request.getContextPath()%>/js/taffy-min.js"></script>
+
 <portlet:defineObjects />
-<script>
-//Create a YUI instance using io-base module.
-YUI().use("io-base","aui-form-validator",function(Y) {
-	var uri = '/api/jsonws/flask-rest-users-portlet.flaskadmin/get-flask-admins';
-    Y.on('io:complete', complete, Y, []);
-    var request = Y.io(uri);
-    new Y.FormValidator({boundingBox: '#adminForm'});
-});
-
-function complete(id, o, args) {
-    var id = id; // Transaction ID.
-    var data = o.responseText; // Response data.
-	YUI().use('datatable', function (Y) {
-        var table = new Y.DataTable({
-		    columns: [{key: "firstName", label: "First Name", sortable: true },
-		              {key: "lastName", label: "Last Name", sortable: true  },
-		              {key: "email", label: "Email", sortable: true  },
-		              	{
-		            	  key: "userId", 
-		            	  label: "Action", 
-		            	  sortable: false, 
-		            	  allowHTML: true,
-		            	  formatter: '<a href="#" onclick="fnDelete({value});" class="imgDeleteIcon"></a>'
-						}
-		              ],
-            data: JSON.parse(data),
-            caption: "Admin users",
-            summary: ""
-        });
-        table.render("#adminDataTable");
-       
-	});        
-};
-
-function fnDelete(AdminId){
-	var a = window.confirm("Delete?");
-	if(a){
-	  	Liferay.Service(
-		  '/flask-rest-users-portlet.flaskadmin/delete-flask-admins',
-		  {
-		    userId: AdminId
-		  },
-		  function(obj) {
-		    console.log(obj);
-			window.location.reload(true);
-		  }
-		);
-	  
-	}
-	else
-		{
-		return false;
-		}
-}
-
-function fnSave(){
-	alert("In fnSave");		
-	Liferay.Service(
-	  '/flask-rest-users-portlet.flaskadmin/add-flask-admin',
-	  {
-	    firstName: $("#firstName").val(),
-	    middleName: $("#middleName").val(),
-	    lastName: $("#lastName").val(),
-	    email: $("#email").val(),
-	    screenName: $("#screenName").val(),
-	    password1: $("#password1").val(),
-	    password2: $("#password2").val()
-	  },
-	  function(obj) {
-	    switch(obj.responseText){
-	    	case "com.liferay.portal.UserPasswordExeption":
-	    		alert("Password does no matched");
-	    		return false;
-	    	default:
-	    		//Show success msg here.
-				$("#adminDataTable").show();
-				$("#adminForm").hide();
-				return false;	    			
-	    }
-	    return false;
-	  });    	
-	
-}
-
-
-$(document).ready(function(){
-	$(".btn").click(function(){
-		var btnType = $(this).val();
-		switch (btnType) { 
-		    case 'Add': 
-		        $("#adminDataTable").hide();
-		        $("#adminForm").show();
-		        break;
-		    case 'Save': 
-		        return fnSave();
-		        break;
-		    case 'Cancel': 
-		        //alert('Cancel Wins!');
-		        break;      
-		    default:
-		        //alert('test');
-			}	
-		});
-});
-
-
-</script>
-<body >
-<div id="adminDataTable"  >
+<body>
+<div id="adminDataTable" class="table-condensed">
 	<input class="btn btn-info" type="submit" value="Add">
 </div>
 
@@ -182,4 +82,16 @@ $(document).ready(function(){
   <input class="btn btn-info" type="submit" value="Save">
   <input class="btn btn-primary" type="reset" value="Cancel">
 </form>
+
+<div id="AdminSettings">
+    <div class="col-md-12">
+        <a data-toggle="dropdown" href="#"><img src="<%=request.getContextPath()%>/css/Icons/Setting.png" height="28" width="28" /></a>
+        <ul class="dropdown-menu">
+            <li><a href="#" onclick="fnShowForm({value});">Edit</a></li>
+            <li><a href="#" onclick="fnDelete({value});">Delete</a></li>
+            <li><a href="#" onclick="fnPasswordReset({value});">Reset Password</a></li>
+            <li><a href="#" onclick="fnChangeRole({value});">Change Role</a></li>
+        </ul>
+    </div>
+</div>
 </body>
