@@ -23,6 +23,8 @@
 <script src="<%=request.getContextPath()%>/js/alertifyjs/alertify.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/js/alertifyjs/css/alertify.min.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/js/alertifyjs/css/themes/default.min.css" />
+<script src="<%=request.getContextPath()%>/js/jquery.bootgrid.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/jquery.bootgrid.min.css" />
 
 <portlet:defineObjects />
 <body>
@@ -95,4 +97,15 @@
         </ul>
     </div>
 </div>
+
+<table id="grid-basic" class="table">
+    <thead>
+        <tr>
+        	<th data-column-id="userId" data-identifier="true">Id</th>
+            <th data-column-id="firstName">First Name</th>
+            <th data-column-id="lastName">Last Name</th>
+            <th data-column-id="link" data-formatter="link" data-sortable="false" data-width="75px"></th>
+        </tr>
+    </thead>
+</table>
 </body>
