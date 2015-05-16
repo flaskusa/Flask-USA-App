@@ -16,12 +16,13 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
+
+<script src="<%=request.getContextPath()%>/js/jquery-2.1.4.js"></script>
 <script src="<%=request.getContextPath()%>/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/bootstrap.min.css">
 <script src="<%=request.getContextPath()%>/js/alertifyjs/alertify.min.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/js/alertifyjs/css/alertify.min.css" />
 <link rel="stylesheet" href="<%=request.getContextPath()%>/js/alertifyjs/css/themes/default.min.css" />
-<script src="<%=request.getContextPath()%>/js/taffy-min.js"></script>
 
 <portlet:defineObjects />
 <body>
