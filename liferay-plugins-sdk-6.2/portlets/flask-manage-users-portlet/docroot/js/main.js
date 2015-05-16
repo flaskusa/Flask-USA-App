@@ -51,7 +51,7 @@ function fnDelete(AdminId){
 function fnSave(AdminId){
 	var uri;
 	if(AdminId > 0)
-		//uri = '/flask-rest-users-portlet.flaskadmin/update-flask-admin';
+		uri = '/flask-rest-users-portlet.flaskadmin/update-flask-admin';
 	else
 		uri = '/flask-rest-users-portlet.flaskadmin/add-flask-admin'
 		
