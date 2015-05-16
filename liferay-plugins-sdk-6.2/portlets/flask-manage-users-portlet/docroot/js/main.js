@@ -10,27 +10,8 @@ YUI().use("io-base","aui-form-validator",function(Y) {
 function complete(id, o, args) {
     var id = id; // Transaction ID.
     var data = o.responseText; // Response data.
-    GlobalJSON_Admin  = JSON.parse(data);
-	YUI().use('datatable', function (Y) {
-        var table = new Y.DataTable({
-		    columns: [{key: "firstName", label: "First Name", sortable: true },
-		              {key: "lastName", label: "Last Name", sortable: true  },
-		              {key: "email", label: "Email", sortable: true  },
-		              	{
-		            	  key: "userId", 
-		            	  sortable: false, 
-		            	  allowHTML: true,
-		            	  label: " ",
-		            	  formatter: $("#AdminSettings").html()
-						}
-		              ],
-            data: JSON.parse(data),
-            caption: "Admin users",
-            summary: ""
-        });
-        table.render("#adminDataTable");
-       
-	});        
+    init();    
+    $("#grid-basic").bootgrid("append",JSON.parse(data));	
 };
 
 function fnDelete(AdminId){
@@ -116,6 +97,14 @@ $(document).ready(function(){
 			}	
 		});
 });
+
+function init()
+{
+	$("#grid-basic").bootgrid({
+        rowCount: [-1, 25, 50, 75]
+    });
+}
+
 
 function fnPasswordReset(){
   alertify.confirm("Reset password?", function (e) {
