@@ -1,17 +1,153 @@
 var GlobalJSON_Admin;
 
-YUI().use("io-base","aui-form-validator",function(Y) {
+YUI().use("io-base","aui-form-validator","aui-dropdown","aui-datepicker",function(Y) {
 	var uri = '/api/jsonws/flask-rest-users-portlet.flaskadmin/get-flask-admins';
     Y.on('io:complete', complete, Y, []);
     var request = Y.io(uri);
-    new Y.FormValidator({boundingBox: '#adminForm'});
+    var rules = {
+    		name: {
+    				name:true,
+	        		required: true
+    	      		},
+    	      	scname: {
+    				scname:true,
+	        		required: true
+    	      		},
+    	      	lname: {
+    				lname:true,
+	        		required: true
+    	      		},
+    	      	password: {
+	        		password: true,
+	        		required: true
+    	      		},
+    	      	passwordConfirmation: {
+	        		passwordConfirmation: true,
+	        		equalTo: '#password',
+	        		required: true
+    	      		},
+    	      	email: {
+	        		email: true,
+	        		required: true
+    	      		},
+    			Gender :{
+					boundingBox: '#myDropdown',
+					trigger: '#myTrigger'
+    				},
+    			zipcode: {
+    				zipcode: true,
+    				required: true
+				}
+    	    };    
+    
+
+    var fieldStrings = {
+    		name: {
+    			required: 'Please provide your name.'
+         	},
+        	lname: {
+        		required: 'Please enter your last name.'
+        	},
+        	scname:{
+        		required: 'Please enter your screen name.'
+        	},
+         	email: {
+         		required: 'Type your Email in this field.'
+         	},
+         	password: {
+         		required: 'Type your password in this field.'
+         	},
+        	passwordConfirmation: {
+        		required: 'Please re-enter your password.'
+        	},
+        	zipcode:{
+        		required: 'Please enter your Zipcode'
+        	}
+    };
+    
+    new Y.FormValidator({boundingBox: '#adminForm',
+        fieldStrings: fieldStrings,
+        rules: rules,
+        showAllMessages: true});
 });
 
 function complete(id, o, args) {
     var id = id; // Transaction ID.
     var data = o.responseText; // Response data.
-    init();    
-    $("#grid-basic").bootgrid("append",JSON.parse(data));	
+    GlobalJSON_Admin = JSON.parse(data);
+    console.log(GlobalJSON_Admin);
+    
+    var theme = prepareSimulator("grid");
+
+    var data = GlobalJSON_Admin;
+    console.log("data"+GlobalJSON_Admin);
+    var source =
+    {
+        localdata: data,
+        datatype: "json",
+        datafields:
+        [
+            { name: 'firstName', type: 'string' },
+            { name: 'lastName', type: 'string' },
+            { name: 'email', type: 'string' }
+        ]
+    };
+    console.log("source"+source);
+    var dataAdapter = new $.jqx.dataAdapter(source);
+    
+    var cellsrenderer = function (row, columnfield, value, defaulthtml, columnproperties) {
+    	return '<i class="icon-wrench"></i>'
+	}
+    
+    $("#grid").jqxGrid(
+    {
+        width: '100%',
+        height: '100%',
+        source: dataAdapter,
+        theme: theme,
+        columnsheight: 40,
+        columnsmenuwidth: 40,
+        rowsheight: 34,
+        columns: [
+          { text: 'First Name', dataField: 'firstName', width: '30%' },
+          { text: 'Last Name', dataField: 'lastName', width: '30%'},
+          { text: 'Email', dataField: 'email', width: '30%'},
+          { text: ' ', cellsrenderer:cellsrenderer}
+        ]
+    });
+    initSimulator("grid");
+    // create context menu
+    var contextMenu = $("#Menu").jqxMenu({ width: 200, height: 116, autoOpenPopup: false, mode: 'popup'});
+    $("#grid").on('contextmenu', function () {
+        return false;
+    });
+
+    $("#grid").bind('cellclick', function (event) {
+        if (event.args.columnindex == 3) {
+            var scrollTop = $(window).scrollTop();
+            var scrollLeft = $(window).scrollLeft();
+            editrow = event.args.rowindex;
+            var rowsheight = $("#grid").jqxGrid('rowsheight');
+            var top = $("#grid").offset().top + (2 + editrow) * rowsheight;
+            var left = $("#grid").offset().left;
+            $("#Menu").jqxMenu('open',left, top + 5 + scrollTop);
+        };
+    });    
+    
+    $("#Menu").on('itemclick', function (event) {
+        var args = event.args;
+        var rowindex = $("#grid").jqxGrid('getselectedrowindex');
+        if ($.trim($(args).text()) == "Edit") {
+            editrow = rowindex;
+            fnShowForm(20897);
+            return false;
+        }
+        else {
+            var rowid = $("#jqxgrid").jqxGrid('getrowid', rowindex);
+            $("#jqxgrid").jqxGrid('deleterow', rowid);
+        }
+    });
+    
 };
 
 function fnDelete(AdminId){
@@ -97,13 +233,6 @@ $(document).ready(function(){
 			}	
 		});
 });
-
-function init()
-{
-	$("#grid-basic").bootgrid({
-        rowCount: [-1, 25, 50, 75]
-    });
-}
 
 
 function fnPasswordReset(){
