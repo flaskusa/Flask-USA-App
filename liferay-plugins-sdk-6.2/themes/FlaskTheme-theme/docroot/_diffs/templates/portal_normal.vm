@@ -12,9 +12,21 @@
 	$theme.include($top_head_include)
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
+<link async href="http://fonts.googleapis.com/css?family=Coda" data-generated="http://enjoycss.com" rel="stylesheet" type="text/css"/>
 
-
-
+<link rel="stylesheet" href="$javascript_folder/jqwidgets/styles/jqx.base.css" type="text/css" />
+<link rel="stylesheet" href="$javascript_folder/jqwidgets/styles/jqu.css" type="text/css" />
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxcore.js"></script>
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxdata.js"></script>
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxbuttons.js"></script>
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxscrollbar.js"></script>
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxlistbox.js"></script>
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxdropdownlist.js"></script>
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxmenu.js"></script>
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxgrid.js"></script>
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxgrid.pager.js"></script>
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxgrid.selection.js"></script>
+<script type="text/javascript" src="$javascript_folder/jqwidgets/jqxpanel.js"></script>
 
 
 </head>
