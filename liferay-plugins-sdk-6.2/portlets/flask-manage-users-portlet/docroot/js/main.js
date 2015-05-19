@@ -1,98 +1,112 @@
 var GlobalJSON_Admin;
 
-YUI().use("io-base","aui-form-validator","aui-dropdown","aui-datepicker",function(Y) {
-	var uri = '/api/jsonws/flask-rest-users-portlet.flaskadmin/get-flask-admins';
-    Y.on('io:complete', complete, Y, []);
-    var request = Y.io(uri);
-    var rules = {
-    		name: {
-    				name:true,
-	        		required: true
-    	      		},
-    	      	scname: {
-    				scname:true,
-	        		required: true
-    	      		},
-    	      	lname: {
-    				lname:true,
-	        		required: true
-    	      		},
-    	      	password: {
-	        		password: true,
-	        		required: true
-    	      		},
-    	      	passwordConfirmation: {
-	        		passwordConfirmation: true,
-	        		equalTo: '#password',
-	        		required: true
-    	      		},
-    	      	email: {
-	        		email: true,
-	        		required: true
-    	      		},
-    			Gender :{
-					boundingBox: '#myDropdown',
-					trigger: '#myTrigger'
-    				},
-    			zipcode: {
-    				zipcode: true,
-    				required: true
-				}
-    	    };    
-    
+function fnLoadAdminUserList(){
+	$("spinningSquaresG").show();
+    var params = "";
+    var request = new Request();	
+	request.sendGETRequest(SERVICE_ENDPOINTS.GET_FLASK_ADMIN_ENDPOINT, params,function(data){
+		if(data.responseStatus == 1){
+			GlobalJSON_Admin = data.responseJson;
+			$("#grid").show();
+			fnRenderGrid(GlobalJSON_Admin);
+			$("#adminForm").hide();
+		}else{
+			alert("MESSAGES.ERRORR_REGISTER_USER");
+		}
+	});
+	$("spinningSquaresG").hide();
+}
 
-    var fieldStrings = {
-    		name: {
-    			required: 'Please provide your name.'
-         	},
-        	lname: {
-        		required: 'Please enter your last name.'
-        	},
-        	scname:{
-        		required: 'Please enter your screen name.'
-        	},
-         	email: {
-         		required: 'Type your Email in this field.'
-         	},
-         	password: {
-         		required: 'Type your password in this field.'
-         	},
-        	passwordConfirmation: {
-        		required: 'Please re-enter your password.'
-        	},
-        	zipcode:{
-        		required: 'Please enter your Zipcode'
-        	}
-    };
-    
-    new Y.FormValidator({boundingBox: '#adminForm',
-        fieldStrings: fieldStrings,
-        rules: rules,
-        showAllMessages: true});
-});
 
-function complete(id, o, args) {
-    var id = id; // Transaction ID.
-    var data = o.responseText; // Response data.
-    GlobalJSON_Admin = JSON.parse(data);
-    console.log(GlobalJSON_Admin);
-    
-    var theme = prepareSimulator("grid");
+function fnDelete(AdminId){
+	  	Liferay.Service('/flask-rest-users-portlet.flaskadmin/delete-flask-admins',
+  		  {
+  		    userId: AdminId
+  		  },
+  		  function(obj) {
+  		    closeEvent.cancel = true
+  		    alertify.success('Admin user deleted!');
+  		  }
+  		);
+}
 
-    var data = GlobalJSON_Admin;
-    console.log("data"+GlobalJSON_Admin);
+function fnSave(AdminId){
+	$("spinningSquaresG").show();
+	var uri;
+	if(AdminId > 0)
+		uri = SERVICE_ENDPOINTS.UPDATE_FLASK_ADMIN_ENDPOINT;
+	else
+		uri = SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT;
+	
+    var params = [{
+    	    firstName: $("#firstName").val(),
+    	    middleName: $("#middleName").val(),
+    	    lastName: $("#lastName").val(),
+    	    email: $("#email").val(),
+    	    screenName: $("#screenName").val(),
+    	    password1: $("#password1").val(),
+    	    password2: $("#password2").val()
+    	  }];
+    var request = new Request();	
+	request.sendPOSTRequest(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT, params,function(data){
+		if(!data.responseJson.exception){
+			GlobalJSON_Admin = data.responseJson;
+			fnRenderGrid(GlobalJSON_Admin);
+			$("#adminForm").hide();
+		}else{
+			console.log(data.responseJson.exception+" - "+ data.responseJson.message);
+			alert("Service failed [Lookout console for more details]");
+		}
+	});
+	$("spinningSquaresG").hide();	
+	/*Liferay.Service(uri,
+	  {
+	    firstName: $("#firstName").val(),
+	    middleName: $("#middleName").val(),
+	    lastName: $("#lastName").val(),
+	    email: $("#email").val(),
+	    screenName: $("#screenName").val(),
+	    password1: $("#password1").val(),
+	    password2: $("#password2").val()
+	  },
+	  function(obj) {
+		  	console.log(obj);
+      	$("#grid").show();
+  		LoadAdminUserList();
+			$("#adminForm").hide();
+			return false;	    		            	
+	  });	*/	
+}
+
+function fnShowForm(AdminId){
+	var objTemp;	
+	console.log(GlobalJSON_Admin);
+	 for (var i = 0; i < GlobalJSON_Admin.length; i++) {
+         if (GlobalJSON_Admin[i].userId == AdminId) {
+     	    $("#firstName").val(GlobalJSON_Admin[i].firstName);
+    	    $("#middleName").val(GlobalJSON_Admin[i].middleName);
+    	    $("#lastName").val(GlobalJSON_Admin[i].lastName);
+    	    $("#email").val(GlobalJSON_Admin[i].email);
+    	    $("#screenName").val(GlobalJSON_Admin[i].screenName);
+    	    $("#password1").val(GlobalJSON_Admin[i].password1);
+    	    $("#password2").val(GlobalJSON_Admin[i].password2);        	 
+         }
+    }
+	$("#grid").hide();
+	$("#adminForm").show();
+}
+
+function fnPasswordReset(){
+	alert("fnPasswordReset");
+}
+
+function fnRenderGrid(tdata){
     var source =
     {
-        localdata: data,
+        localdata: tdata,
         datatype: "json",
-        datafields:
-        [
-            { name: 'firstName', type: 'string' },
-            { name: 'lastName', type: 'string' },
-            { name: 'email', type: 'string' }
-        ]
+        datafields: DATA_SOURCE.GET_FLASK_ADMIN_GRID
     };
-    console.log("source"+source);
     var dataAdapter = new $.jqx.dataAdapter(source);
     
     var cellsrenderer = function (row, columnfield, value, defaulthtml, columnproperties) {
@@ -104,7 +118,7 @@ function complete(id, o, args) {
         width: '100%',
         height: '100%',
         source: dataAdapter,
-        theme: theme,
+        theme: APP_CONFIG.JQX_THEME,
         columnsheight: 40,
         columnsmenuwidth: 40,
         rowsheight: 34,
@@ -115,7 +129,6 @@ function complete(id, o, args) {
           { text: ' ', cellsrenderer:cellsrenderer}
         ]
     });
-    initSimulator("grid");
     // create context menu
     var contextMenu = $("#Menu").jqxMenu({ width: 200, height: 116, autoOpenPopup: false, mode: 'popup'});
     $("#grid").on('contextmenu', function () {
@@ -143,83 +156,22 @@ function complete(id, o, args) {
             return false;
         }
         else {
-            var rowid = $("#jqxgrid").jqxGrid('getrowid', rowindex);
-            $("#jqxgrid").jqxGrid('deleterow', rowid);
+            var rowid = $("#grid").jqxGrid('getrowid', rowindex);
+            $("#grid").jqxGrid('deleterow', rowid);
         }
     });
-    
-};
-
-function fnDelete(AdminId){
-	alertify.confirm('Do you wish to delete this admin user?').set('onok', function(closeEvent){ 
-	  	Liferay.Service('/flask-rest-users-portlet.flaskadmin/delete-flask-admins',
-  		  {
-  		    userId: AdminId
-  		  },
-  		  function(obj) {
-  		    console.log(obj);
-  		    closeEvent.cancel = true
-  		    alertify.success('Admin user deleted!');
-  		  }
-  		);
-	},""); 	
-}
-
-function fnSave(AdminId){
-	var uri;
-	if(AdminId > 0)
-		uri = '/flask-rest-users-portlet.flaskadmin/update-flask-admin';
-	else
-		uri = '/flask-rest-users-portlet.flaskadmin/add-flask-admin'
-		
-	Liferay.Service(uri,
-	  {
-	    firstName: $("#firstName").val(),
-	    middleName: $("#middleName").val(),
-	    lastName: $("#lastName").val(),
-	    email: $("#email").val(),
-	    screenName: $("#screenName").val(),
-	    password1: $("#password1").val(),
-	    password2: $("#password2").val()
-	  },
-	  function(obj) {
-	    switch(obj.responseText){
-	    	case "com.liferay.portal.UserPasswordExeption":
-	    		alert("Password does no matched");
-	    		return false;
-	    	default:
-				$("#adminDataTable").show();
-				$("#adminForm").hide();
-				return false;	    			
-	    }
-	    return false;
-	  });    	
-}
-
-function fnShowForm(AdminId){
-	var objTemp;	
-	console.log(GlobalJSON_Admin);
-	 for (var i = 0; i < GlobalJSON_Admin.length; i++) {
-         if (GlobalJSON_Admin[i].userId == AdminId) {
-     	    $("#firstName").val(GlobalJSON_Admin[i].firstName);
-    	    $("#middleName").val(GlobalJSON_Admin[i].middleName);
-    	    $("#lastName").val(GlobalJSON_Admin[i].lastName);
-    	    $("#email").val(GlobalJSON_Admin[i].email);
-    	    $("#screenName").val(GlobalJSON_Admin[i].screenName);
-    	    $("#password1").val(GlobalJSON_Admin[i].password1);
-    	    $("#password2").val(GlobalJSON_Admin[i].password2);        	 
-         }
-    }
-	$("#adminDataTable").hide();
-	$("#adminForm").show();
+    $("#grid").show();
 }
 
 $(document).ready(function(){
+	
+	fnLoadAdminUserList();
 	$(".btn").click(function(){
+		$("spinningSquaresG").show();
 		var btnType = $(this).val();
 		switch (btnType) { 
 		    case 'Add': 
-		        $("#adminDataTable").hide();
+		        $("#grid").hide();
 		        $("#adminForm").show();
 		        break;
 		    case 'Save': 
@@ -232,31 +184,61 @@ $(document).ready(function(){
 		        //alert('test');
 			}	
 		});
+		$("spinningSquaresG").hide();
 });
 
 
-function fnPasswordReset(){
-  alertify.confirm("Reset password?", function (e) {
-    if (e) {
-        secondconfirm();
-    } else {
-    	return false;
-    }
-  });
-}
 
-function secondconfirm() {
-    setTimeout(function () {
-        alertify.confirm("Password is changed<br>Mail it to the user?", function (e) {
-            if (e) {
-                //Done
-                alertify.success("Password reset and mailed to user.");
-            } else {
-                // user clicked "cancel"
-                alertify.success("Password reset.");
-            }
-        });
-    }, 1000); // I went as low as 300 ms, but higher value is safer :)
-    return true;
-}
+/*YUI().use("aui-form-validator","aui-dropdown","aui-datepicker",function(Y) {
+    var rules = {
+    		name: {
+    				name:true,
+	        		required: true
+    	      		},
+    	      	scname: {
+    				scname:true,
+	        		required: true
+    	      		},
+    	      	lname: {
+    				lname:true,
+	        		required: true
+    	      		},
+    	      	password: {
+	        		password: true,
+	        		required: true
+    	      		},
+    	      	passwordConfirmation: {
+	        		passwordConfirmation: true,
+	        		equalTo: '#password',
+	        		required: true
+    	      		}
+    	    };    
+    
 
+    var fieldStrings = {
+    		name: {
+    			required: 'Please provide your name.'
+         	},
+        	lname: {
+        		required: 'Please enter your last name.'
+        	},
+        	scname:{
+        		required: 'Please enter your screen name.'
+        	},
+         	email: {
+         		required: 'Type your Email in this field.'
+         	},
+         	password: {
+         		required: 'Type your password in this field.'
+         	},
+        	passwordConfirmation: {
+        		required: 'Please re-enter your password.'
+        	}
+    };
+    
+    new Y.FormValidator({boundingBox: '#adminForm',
+        fieldStrings: fieldStrings,
+        rules: rules,
+        showAllMessages: true});
+});
+*/
