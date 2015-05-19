@@ -66,7 +66,7 @@ public class FlaskModelUtil {
 			
 			List<Address> addrList = AddressLocalServiceUtil.getAddresses(user.getCompanyId(),
 					Contact.class.getName(),
-					userContact.getContactId()) ;
+					userContact.getClassPK()) ;
 			if( addrList.size() > 0){
 				Address addr = addrList.get(0);
 				admin.setAptNo(addr.getStreet1());
@@ -92,7 +92,7 @@ public class FlaskModelUtil {
 		String phoneNo="";
 		try {
 			 List<Phone> phoneList = PhoneLocalServiceUtil.getPhones(user.getCompanyId(), Contact.class.getName(),
-				     user.getContactId());
+				     user.getContact().getClassPK());
 			 
 			if(phoneList.size() > 0){
 				phoneNo = phoneList.get(0).getNumber();
