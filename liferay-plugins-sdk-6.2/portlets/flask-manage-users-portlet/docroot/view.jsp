@@ -21,6 +21,7 @@
 <!-- JQX Plugin Includes [start]-->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/simulator.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/generatedata.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/jqx-all.js"></script>
 <!-- JQX Plugin Includes [End]-->
 
 <portlet:defineObjects />
@@ -50,6 +51,21 @@
       <input name="lastName" id="lastName" class="form-control" type="text">
     </div>
   </div>
+  
+	<div class="form-group">
+	    <label class="control-label" for="gender">Gender:</label>
+	    <div class="controls">
+	      <input name="gender" type="radio" value="Male">Male
+		  <input name="gender" type="radio" value="Female">Female
+	    </div>
+	</div>
+  
+  <div class="form-group">
+    <label class="control-label" for="screenName">Screen Name:</label>
+    <div class="controls">
+      <input name="screenName" id="screenName" class="form-control" type="text">
+    </div>
+  </div>
 
   <div class="form-group">
     <label class="control-label" for="email">E-mail:</label>
@@ -59,12 +75,38 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="screenName">Screen Name:</label>
-    <div class="controls">
-      <input name="screenName" id="screenName" class="form-control" type="text">
-    </div>
+	<label class="control-label" for="dob">Date of Birth:</label>
+	<div id="dob" class="aui-datepicker aui-helper-clearfix">
+		<input type="text" size="50" id="birth" />
+	</div>
   </div>
   
+  <div class="form-group">
+    <label class="control-label" for="address">Address:</label>
+    <div class="controls">
+       <textarea class="form-control" type="text" placeholder="mm/dd/yy">Address here</textarea>
+    </div>
+  </div>
+    <div class="form-group">
+    <label class="control-label" for="zipcode">Zip code:</label>
+    <div class="controls">
+      <input name="zipcode" id="zipcode" class="form-control" type="text">
+    </div>
+  </div>
+      <div class="form-group">
+    <label class="control-label" for="mobile">Mobile:</label>
+    <div class="controls">
+      <input name="mobile" id="mobile" class="form-control" type="text">
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label class="control-label" for="pref">Preferences:</label>
+    <div class="controls">
+      <div id="myTreeView"></div>
+    </div>
+  </div>
+
   <div class="form-group">
     <label class="control-label" for="password">Password:</label>
     <div class="controls">
