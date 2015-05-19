@@ -275,37 +275,63 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				 		true, /*boolean sendEmail*/
 				 		null);
 			 
-			 int addressTypeId = FlaskModelUtil.getPersonalAddressId();
-			 long countryId = FlaskModelUtil.getCountryId(country);
-			 int mobileTypeId = FlaskModelUtil.getMobilePhoneTypeId();
 			 
-			 Address address = AddressLocalServiceUtil.addAddress( user.getUserId()/*long userId*/,
-                     Contact.class.getName()/*String className*/,
-                     0/*long classPK*/,
-                     aptNo/*String street1*/,
-                     streetName /*String street2*/,
-                     "" /*String street1*/,
-                     city /*String City*/,
-                     areaCode /*String zipCode*/,
-                     0 /*String street1*/,
-                     countryId/*long countryId*/,
-                     addressTypeId,
-                     false	/*boolean mailing*/,
-                     true	/*boolean primary*/,
-                     serviceContext);
+			 addAddress(streetName, aptNo, areaCode, city, country,
+					serviceContext, user);
 			 
 			 if(!mobileNo.isEmpty()){
-				 
-				 Phone phone = PhoneLocalServiceUtil.addPhone( user.getUserId()/*long userId*/,
-						 Contact.class.getName()/*String className*/,
-	                     0/*long classPK*/,
-	                     mobileNo,
-	                     ""/*String extension*/,
-	                     mobileTypeId/*int typeId*/,
-	                     true,
-	                     serviceContext);
+				 addMobile(mobileNo, serviceContext, user);
 			 }
 			 return user;
+	}
+
+	private void addMobile(String mobileNo, ServiceContext serviceContext,
+			User user){
+		int mobileTypeId = FlaskModelUtil.getMobilePhoneTypeId();
+		try {
+			Phone phone = PhoneLocalServiceUtil.addPhone( user.getUserId()/*long userId*/,
+					 Contact.class.getName()/*String className*/,
+					 user.getContact().getClassPK()/*long classPK*/,
+			         mobileNo,
+			         ""/*String extension*/,
+			         mobileTypeId/*int typeId*/,
+			         true,
+			         serviceContext);
+			if(phone == null){
+				LOGGER.error("Error in adding phone");
+			}
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+		
+	}
+
+	private void addAddress(String streetName, String aptNo, String areaCode,
+			String city, String country, ServiceContext serviceContext,
+			User user){
+		long countryId = FlaskModelUtil.getCountryId(country);
+		 int addressTypeId = FlaskModelUtil.getPersonalAddressId();
+		 try {
+			Address address = AddressLocalServiceUtil.addAddress( user.getUserId()/*long userId*/,
+			         Contact.class.getName()/*String className*/,
+			         user.getContact().getClassPK()/*long classPK*/,
+			         aptNo/*String street1*/,
+			         streetName /*String street2*/,
+			         "" /*String street1*/,
+			         city /*String City*/,
+			         areaCode /*String zipCode*/,
+			         0 /*String street1*/,
+			         countryId/*long countryId*/,
+			         addressTypeId,
+			         false	/*boolean mailing*/,
+			         true	/*boolean primary*/,
+			         serviceContext);
+			if(address == null){
+				LOGGER.error("Error in adding address");
+			}
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
 	}
 	
 	private User updateUser(long userId, long roleId, long loggedInUser, String firstName, String middleName, 
