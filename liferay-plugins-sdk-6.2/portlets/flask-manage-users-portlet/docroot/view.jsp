@@ -74,16 +74,16 @@
   </div>
   
   <div class="form-group">
-    <label class="control-label" for="password1">Password:</label>
+    <label class="control-label" for="password">Password:</label>
     <div class="controls">
-      <input name="password1" id="password1" class="form-control" type="text">
+      <input name="password" id="password" class="form-control" type="text">
     </div>
   </div>
   
   <div class="form-group">
-    <label class="control-label" for="password2">Confirm Password:</label>
+    <label class="control-label" for="passwordConfirmation">Confirm Password:</label>
     <div class="controls">
-      <input name="password2" id="password2" class="form-control" type="text">
+      <input name="passwordConfirmation" id="passwordConfirmation" class="form-control" type="text">
     </div>
   </div>  
 
