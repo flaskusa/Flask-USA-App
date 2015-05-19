@@ -19,11 +19,18 @@
 		<column name="screenName" type="String" />
 		<column name="email" type="String" />
 		<column name="DOB" type="Date" />
+		<column name="isMale" type="Boolean" />	
+		<column name="streetName" type="String" />
+		<column name="aptNo" type="String" />
+		<column name="areaCode" type="String" />
+		<column name="city" type="String" />
+		<column name="state" type="String" />
+		<column name="country" type="String" />
+		<column name="mobileNumber" type="String" />
+		<column name="portraitURL" type="String" />
+		<column name="userInterests" type="String" />	
 	</entity>
-	
 	<entity name="FlaskUser" local-service="false" remote-service="true">
-
-	
 
 		<column name="userId" type="long" primary="true" />
 
@@ -36,6 +43,16 @@
 		<column name="screenName" type="String" />
 		<column name="email" type="String" />
 		<column name="DOB" type="Date" />
+		<column name="isMale" type="Boolean" />	
+		<column name="streetName" type="String" />
+		<column name="aptNo" type="String" />
+		<column name="areaCode" type="String" />
+		<column name="city" type="String" />
+		<column name="state" type="String" />
+		<column name="country" type="String" />
+		<column name="mobileNumber" type="String" />
+		<column name="portraitURL" type="String" />
+		<column name="userInterests" type="String" />
 	</entity>
 
 	<entity name="FlaskRole" local-service="false" remote-service="true">

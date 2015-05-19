@@ -73,9 +73,19 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 			{ "lastName", Types.VARCHAR },
 			{ "screenName", Types.VARCHAR },
 			{ "email", Types.VARCHAR },
-			{ "DOB", Types.TIMESTAMP }
+			{ "DOB", Types.TIMESTAMP },
+			{ "isMale", Types.BOOLEAN },
+			{ "streetName", Types.VARCHAR },
+			{ "aptNo", Types.VARCHAR },
+			{ "areaCode", Types.VARCHAR },
+			{ "city", Types.VARCHAR },
+			{ "state_", Types.VARCHAR },
+			{ "country", Types.VARCHAR },
+			{ "mobileNumber", Types.VARCHAR },
+			{ "portraitURL", Types.VARCHAR },
+			{ "userInterests", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskusers_FlaskUser (userId LONG not null primary key,roleId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,screenName VARCHAR(75) null,email VARCHAR(75) null,DOB DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskusers_FlaskUser (userId LONG not null primary key,roleId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,screenName VARCHAR(75) null,email VARCHAR(75) null,DOB DATE null,isMale BOOLEAN,streetName VARCHAR(75) null,aptNo VARCHAR(75) null,areaCode VARCHAR(75) null,city VARCHAR(75) null,state_ VARCHAR(75) null,country VARCHAR(75) null,mobileNumber VARCHAR(75) null,portraitURL VARCHAR(75) null,userInterests VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskusers_FlaskUser";
 	public static final String ORDER_BY_JPQL = " ORDER BY flaskUser.userId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskusers_FlaskUser.userId ASC";
@@ -111,6 +121,16 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 		model.setScreenName(soapModel.getScreenName());
 		model.setEmail(soapModel.getEmail());
 		model.setDOB(soapModel.getDOB());
+		model.setIsMale(soapModel.getIsMale());
+		model.setStreetName(soapModel.getStreetName());
+		model.setAptNo(soapModel.getAptNo());
+		model.setAreaCode(soapModel.getAreaCode());
+		model.setCity(soapModel.getCity());
+		model.setState(soapModel.getState());
+		model.setCountry(soapModel.getCountry());
+		model.setMobileNumber(soapModel.getMobileNumber());
+		model.setPortraitURL(soapModel.getPortraitURL());
+		model.setUserInterests(soapModel.getUserInterests());
 
 		return model;
 	}
@@ -183,6 +203,16 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 		attributes.put("screenName", getScreenName());
 		attributes.put("email", getEmail());
 		attributes.put("DOB", getDOB());
+		attributes.put("isMale", getIsMale());
+		attributes.put("streetName", getStreetName());
+		attributes.put("aptNo", getAptNo());
+		attributes.put("areaCode", getAreaCode());
+		attributes.put("city", getCity());
+		attributes.put("state", getState());
+		attributes.put("country", getCountry());
+		attributes.put("mobileNumber", getMobileNumber());
+		attributes.put("portraitURL", getPortraitURL());
+		attributes.put("userInterests", getUserInterests());
 
 		return attributes;
 	}
@@ -235,6 +265,66 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 
 		if (DOB != null) {
 			setDOB(DOB);
+		}
+
+		Boolean isMale = (Boolean)attributes.get("isMale");
+
+		if (isMale != null) {
+			setIsMale(isMale);
+		}
+
+		String streetName = (String)attributes.get("streetName");
+
+		if (streetName != null) {
+			setStreetName(streetName);
+		}
+
+		String aptNo = (String)attributes.get("aptNo");
+
+		if (aptNo != null) {
+			setAptNo(aptNo);
+		}
+
+		String areaCode = (String)attributes.get("areaCode");
+
+		if (areaCode != null) {
+			setAreaCode(areaCode);
+		}
+
+		String city = (String)attributes.get("city");
+
+		if (city != null) {
+			setCity(city);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
+		}
+
+		String country = (String)attributes.get("country");
+
+		if (country != null) {
+			setCountry(country);
+		}
+
+		String mobileNumber = (String)attributes.get("mobileNumber");
+
+		if (mobileNumber != null) {
+			setMobileNumber(mobileNumber);
+		}
+
+		String portraitURL = (String)attributes.get("portraitURL");
+
+		if (portraitURL != null) {
+			setPortraitURL(portraitURL);
+		}
+
+		String userInterests = (String)attributes.get("userInterests");
+
+		if (userInterests != null) {
+			setUserInterests(userInterests);
 		}
 	}
 
@@ -361,6 +451,161 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 		_DOB = DOB;
 	}
 
+	@JSON
+	@Override
+	public Boolean getIsMale() {
+		return _isMale;
+	}
+
+	@Override
+	public void setIsMale(Boolean isMale) {
+		_isMale = isMale;
+	}
+
+	@JSON
+	@Override
+	public String getStreetName() {
+		if (_streetName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _streetName;
+		}
+	}
+
+	@Override
+	public void setStreetName(String streetName) {
+		_streetName = streetName;
+	}
+
+	@JSON
+	@Override
+	public String getAptNo() {
+		if (_aptNo == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _aptNo;
+		}
+	}
+
+	@Override
+	public void setAptNo(String aptNo) {
+		_aptNo = aptNo;
+	}
+
+	@JSON
+	@Override
+	public String getAreaCode() {
+		if (_areaCode == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _areaCode;
+		}
+	}
+
+	@Override
+	public void setAreaCode(String areaCode) {
+		_areaCode = areaCode;
+	}
+
+	@JSON
+	@Override
+	public String getCity() {
+		if (_city == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _city;
+		}
+	}
+
+	@Override
+	public void setCity(String city) {
+		_city = city;
+	}
+
+	@JSON
+	@Override
+	public String getState() {
+		if (_state == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _state;
+		}
+	}
+
+	@Override
+	public void setState(String state) {
+		_state = state;
+	}
+
+	@JSON
+	@Override
+	public String getCountry() {
+		if (_country == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _country;
+		}
+	}
+
+	@Override
+	public void setCountry(String country) {
+		_country = country;
+	}
+
+	@JSON
+	@Override
+	public String getMobileNumber() {
+		if (_mobileNumber == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _mobileNumber;
+		}
+	}
+
+	@Override
+	public void setMobileNumber(String mobileNumber) {
+		_mobileNumber = mobileNumber;
+	}
+
+	@JSON
+	@Override
+	public String getPortraitURL() {
+		if (_portraitURL == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _portraitURL;
+		}
+	}
+
+	@Override
+	public void setPortraitURL(String portraitURL) {
+		_portraitURL = portraitURL;
+	}
+
+	@JSON
+	@Override
+	public String getUserInterests() {
+		if (_userInterests == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _userInterests;
+		}
+	}
+
+	@Override
+	public void setUserInterests(String userInterests) {
+		_userInterests = userInterests;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -396,6 +641,16 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 		flaskUserImpl.setScreenName(getScreenName());
 		flaskUserImpl.setEmail(getEmail());
 		flaskUserImpl.setDOB(getDOB());
+		flaskUserImpl.setIsMale(getIsMale());
+		flaskUserImpl.setStreetName(getStreetName());
+		flaskUserImpl.setAptNo(getAptNo());
+		flaskUserImpl.setAreaCode(getAreaCode());
+		flaskUserImpl.setCity(getCity());
+		flaskUserImpl.setState(getState());
+		flaskUserImpl.setCountry(getCountry());
+		flaskUserImpl.setMobileNumber(getMobileNumber());
+		flaskUserImpl.setPortraitURL(getPortraitURL());
+		flaskUserImpl.setUserInterests(getUserInterests());
 
 		flaskUserImpl.resetOriginalValues();
 
@@ -505,12 +760,86 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 			flaskUserCacheModel.DOB = Long.MIN_VALUE;
 		}
 
+		flaskUserCacheModel.isMale = getIsMale();
+
+		flaskUserCacheModel.streetName = getStreetName();
+
+		String streetName = flaskUserCacheModel.streetName;
+
+		if ((streetName != null) && (streetName.length() == 0)) {
+			flaskUserCacheModel.streetName = null;
+		}
+
+		flaskUserCacheModel.aptNo = getAptNo();
+
+		String aptNo = flaskUserCacheModel.aptNo;
+
+		if ((aptNo != null) && (aptNo.length() == 0)) {
+			flaskUserCacheModel.aptNo = null;
+		}
+
+		flaskUserCacheModel.areaCode = getAreaCode();
+
+		String areaCode = flaskUserCacheModel.areaCode;
+
+		if ((areaCode != null) && (areaCode.length() == 0)) {
+			flaskUserCacheModel.areaCode = null;
+		}
+
+		flaskUserCacheModel.city = getCity();
+
+		String city = flaskUserCacheModel.city;
+
+		if ((city != null) && (city.length() == 0)) {
+			flaskUserCacheModel.city = null;
+		}
+
+		flaskUserCacheModel.state = getState();
+
+		String state = flaskUserCacheModel.state;
+
+		if ((state != null) && (state.length() == 0)) {
+			flaskUserCacheModel.state = null;
+		}
+
+		flaskUserCacheModel.country = getCountry();
+
+		String country = flaskUserCacheModel.country;
+
+		if ((country != null) && (country.length() == 0)) {
+			flaskUserCacheModel.country = null;
+		}
+
+		flaskUserCacheModel.mobileNumber = getMobileNumber();
+
+		String mobileNumber = flaskUserCacheModel.mobileNumber;
+
+		if ((mobileNumber != null) && (mobileNumber.length() == 0)) {
+			flaskUserCacheModel.mobileNumber = null;
+		}
+
+		flaskUserCacheModel.portraitURL = getPortraitURL();
+
+		String portraitURL = flaskUserCacheModel.portraitURL;
+
+		if ((portraitURL != null) && (portraitURL.length() == 0)) {
+			flaskUserCacheModel.portraitURL = null;
+		}
+
+		flaskUserCacheModel.userInterests = getUserInterests();
+
+		String userInterests = flaskUserCacheModel.userInterests;
+
+		if ((userInterests != null) && (userInterests.length() == 0)) {
+			flaskUserCacheModel.userInterests = null;
+		}
+
 		return flaskUserCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{userId=");
 		sb.append(getUserId());
@@ -528,6 +857,26 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 		sb.append(getEmail());
 		sb.append(", DOB=");
 		sb.append(getDOB());
+		sb.append(", isMale=");
+		sb.append(getIsMale());
+		sb.append(", streetName=");
+		sb.append(getStreetName());
+		sb.append(", aptNo=");
+		sb.append(getAptNo());
+		sb.append(", areaCode=");
+		sb.append(getAreaCode());
+		sb.append(", city=");
+		sb.append(getCity());
+		sb.append(", state=");
+		sb.append(getState());
+		sb.append(", country=");
+		sb.append(getCountry());
+		sb.append(", mobileNumber=");
+		sb.append(getMobileNumber());
+		sb.append(", portraitURL=");
+		sb.append(getPortraitURL());
+		sb.append(", userInterests=");
+		sb.append(getUserInterests());
 		sb.append("}");
 
 		return sb.toString();
@@ -535,7 +884,7 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.FlaskUser");
@@ -573,6 +922,46 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 			"<column><column-name>DOB</column-name><column-value><![CDATA[");
 		sb.append(getDOB());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>isMale</column-name><column-value><![CDATA[");
+		sb.append(getIsMale());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>streetName</column-name><column-value><![CDATA[");
+		sb.append(getStreetName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>aptNo</column-name><column-value><![CDATA[");
+		sb.append(getAptNo());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>areaCode</column-name><column-value><![CDATA[");
+		sb.append(getAreaCode());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>city</column-name><column-value><![CDATA[");
+		sb.append(getCity());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>state</column-name><column-value><![CDATA[");
+		sb.append(getState());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>country</column-name><column-value><![CDATA[");
+		sb.append(getCountry());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>mobileNumber</column-name><column-value><![CDATA[");
+		sb.append(getMobileNumber());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>portraitURL</column-name><column-value><![CDATA[");
+		sb.append(getPortraitURL());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userInterests</column-name><column-value><![CDATA[");
+		sb.append(getUserInterests());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -592,5 +981,15 @@ public class FlaskUserModelImpl extends BaseModelImpl<FlaskUser>
 	private String _screenName;
 	private String _email;
 	private Date _DOB;
+	private Boolean _isMale;
+	private String _streetName;
+	private String _aptNo;
+	private String _areaCode;
+	private String _city;
+	private String _state;
+	private String _country;
+	private String _mobileNumber;
+	private String _portraitURL;
+	private String _userInterests;
 	private FlaskUser _escapedModel;
 }

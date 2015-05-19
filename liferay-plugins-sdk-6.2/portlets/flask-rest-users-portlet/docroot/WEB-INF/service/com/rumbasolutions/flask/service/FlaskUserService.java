@@ -66,5 +66,6 @@ public interface FlaskUserService extends BaseService, InvokableService {
 		throws java.lang.Throwable;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskUsers();
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskUsers(
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

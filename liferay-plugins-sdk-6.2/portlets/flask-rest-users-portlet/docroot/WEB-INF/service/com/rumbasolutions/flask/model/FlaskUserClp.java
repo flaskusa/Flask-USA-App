@@ -81,6 +81,16 @@ public class FlaskUserClp extends BaseModelImpl<FlaskUser> implements FlaskUser 
 		attributes.put("screenName", getScreenName());
 		attributes.put("email", getEmail());
 		attributes.put("DOB", getDOB());
+		attributes.put("isMale", getIsMale());
+		attributes.put("streetName", getStreetName());
+		attributes.put("aptNo", getAptNo());
+		attributes.put("areaCode", getAreaCode());
+		attributes.put("city", getCity());
+		attributes.put("state", getState());
+		attributes.put("country", getCountry());
+		attributes.put("mobileNumber", getMobileNumber());
+		attributes.put("portraitURL", getPortraitURL());
+		attributes.put("userInterests", getUserInterests());
 
 		return attributes;
 	}
@@ -133,6 +143,66 @@ public class FlaskUserClp extends BaseModelImpl<FlaskUser> implements FlaskUser 
 
 		if (DOB != null) {
 			setDOB(DOB);
+		}
+
+		Boolean isMale = (Boolean)attributes.get("isMale");
+
+		if (isMale != null) {
+			setIsMale(isMale);
+		}
+
+		String streetName = (String)attributes.get("streetName");
+
+		if (streetName != null) {
+			setStreetName(streetName);
+		}
+
+		String aptNo = (String)attributes.get("aptNo");
+
+		if (aptNo != null) {
+			setAptNo(aptNo);
+		}
+
+		String areaCode = (String)attributes.get("areaCode");
+
+		if (areaCode != null) {
+			setAreaCode(areaCode);
+		}
+
+		String city = (String)attributes.get("city");
+
+		if (city != null) {
+			setCity(city);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
+		}
+
+		String country = (String)attributes.get("country");
+
+		if (country != null) {
+			setCountry(country);
+		}
+
+		String mobileNumber = (String)attributes.get("mobileNumber");
+
+		if (mobileNumber != null) {
+			setMobileNumber(mobileNumber);
+		}
+
+		String portraitURL = (String)attributes.get("portraitURL");
+
+		if (portraitURL != null) {
+			setPortraitURL(portraitURL);
+		}
+
+		String userInterests = (String)attributes.get("userInterests");
+
+		if (userInterests != null) {
+			setUserInterests(userInterests);
 		}
 	}
 
@@ -330,6 +400,236 @@ public class FlaskUserClp extends BaseModelImpl<FlaskUser> implements FlaskUser 
 		}
 	}
 
+	@Override
+	public Boolean getIsMale() {
+		return _isMale;
+	}
+
+	@Override
+	public void setIsMale(Boolean isMale) {
+		_isMale = isMale;
+
+		if (_flaskUserRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskUserRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setIsMale", Boolean.class);
+
+				method.invoke(_flaskUserRemoteModel, isMale);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getStreetName() {
+		return _streetName;
+	}
+
+	@Override
+	public void setStreetName(String streetName) {
+		_streetName = streetName;
+
+		if (_flaskUserRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskUserRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStreetName", String.class);
+
+				method.invoke(_flaskUserRemoteModel, streetName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getAptNo() {
+		return _aptNo;
+	}
+
+	@Override
+	public void setAptNo(String aptNo) {
+		_aptNo = aptNo;
+
+		if (_flaskUserRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskUserRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setAptNo", String.class);
+
+				method.invoke(_flaskUserRemoteModel, aptNo);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getAreaCode() {
+		return _areaCode;
+	}
+
+	@Override
+	public void setAreaCode(String areaCode) {
+		_areaCode = areaCode;
+
+		if (_flaskUserRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskUserRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setAreaCode", String.class);
+
+				method.invoke(_flaskUserRemoteModel, areaCode);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCity() {
+		return _city;
+	}
+
+	@Override
+	public void setCity(String city) {
+		_city = city;
+
+		if (_flaskUserRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskUserRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCity", String.class);
+
+				method.invoke(_flaskUserRemoteModel, city);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getState() {
+		return _state;
+	}
+
+	@Override
+	public void setState(String state) {
+		_state = state;
+
+		if (_flaskUserRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskUserRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setState", String.class);
+
+				method.invoke(_flaskUserRemoteModel, state);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCountry() {
+		return _country;
+	}
+
+	@Override
+	public void setCountry(String country) {
+		_country = country;
+
+		if (_flaskUserRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskUserRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCountry", String.class);
+
+				method.invoke(_flaskUserRemoteModel, country);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getMobileNumber() {
+		return _mobileNumber;
+	}
+
+	@Override
+	public void setMobileNumber(String mobileNumber) {
+		_mobileNumber = mobileNumber;
+
+		if (_flaskUserRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskUserRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setMobileNumber", String.class);
+
+				method.invoke(_flaskUserRemoteModel, mobileNumber);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getPortraitURL() {
+		return _portraitURL;
+	}
+
+	@Override
+	public void setPortraitURL(String portraitURL) {
+		_portraitURL = portraitURL;
+
+		if (_flaskUserRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskUserRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setPortraitURL", String.class);
+
+				method.invoke(_flaskUserRemoteModel, portraitURL);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getUserInterests() {
+		return _userInterests;
+	}
+
+	@Override
+	public void setUserInterests(String userInterests) {
+		_userInterests = userInterests;
+
+		if (_flaskUserRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskUserRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setUserInterests", String.class);
+
+				method.invoke(_flaskUserRemoteModel, userInterests);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getFlaskUserRemoteModel() {
 		return _flaskUserRemoteModel;
 	}
@@ -397,6 +697,16 @@ public class FlaskUserClp extends BaseModelImpl<FlaskUser> implements FlaskUser 
 		clone.setScreenName(getScreenName());
 		clone.setEmail(getEmail());
 		clone.setDOB(getDOB());
+		clone.setIsMale(getIsMale());
+		clone.setStreetName(getStreetName());
+		clone.setAptNo(getAptNo());
+		clone.setAreaCode(getAreaCode());
+		clone.setCity(getCity());
+		clone.setState(getState());
+		clone.setCountry(getCountry());
+		clone.setMobileNumber(getMobileNumber());
+		clone.setPortraitURL(getPortraitURL());
+		clone.setUserInterests(getUserInterests());
 
 		return clone;
 	}
@@ -449,7 +759,7 @@ public class FlaskUserClp extends BaseModelImpl<FlaskUser> implements FlaskUser 
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{userId=");
 		sb.append(getUserId());
@@ -467,6 +777,26 @@ public class FlaskUserClp extends BaseModelImpl<FlaskUser> implements FlaskUser 
 		sb.append(getEmail());
 		sb.append(", DOB=");
 		sb.append(getDOB());
+		sb.append(", isMale=");
+		sb.append(getIsMale());
+		sb.append(", streetName=");
+		sb.append(getStreetName());
+		sb.append(", aptNo=");
+		sb.append(getAptNo());
+		sb.append(", areaCode=");
+		sb.append(getAreaCode());
+		sb.append(", city=");
+		sb.append(getCity());
+		sb.append(", state=");
+		sb.append(getState());
+		sb.append(", country=");
+		sb.append(getCountry());
+		sb.append(", mobileNumber=");
+		sb.append(getMobileNumber());
+		sb.append(", portraitURL=");
+		sb.append(getPortraitURL());
+		sb.append(", userInterests=");
+		sb.append(getUserInterests());
 		sb.append("}");
 
 		return sb.toString();
@@ -474,7 +804,7 @@ public class FlaskUserClp extends BaseModelImpl<FlaskUser> implements FlaskUser 
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(58);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.FlaskUser");
@@ -512,6 +842,46 @@ public class FlaskUserClp extends BaseModelImpl<FlaskUser> implements FlaskUser 
 			"<column><column-name>DOB</column-name><column-value><![CDATA[");
 		sb.append(getDOB());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>isMale</column-name><column-value><![CDATA[");
+		sb.append(getIsMale());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>streetName</column-name><column-value><![CDATA[");
+		sb.append(getStreetName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>aptNo</column-name><column-value><![CDATA[");
+		sb.append(getAptNo());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>areaCode</column-name><column-value><![CDATA[");
+		sb.append(getAreaCode());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>city</column-name><column-value><![CDATA[");
+		sb.append(getCity());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>state</column-name><column-value><![CDATA[");
+		sb.append(getState());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>country</column-name><column-value><![CDATA[");
+		sb.append(getCountry());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>mobileNumber</column-name><column-value><![CDATA[");
+		sb.append(getMobileNumber());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>portraitURL</column-name><column-value><![CDATA[");
+		sb.append(getPortraitURL());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>userInterests</column-name><column-value><![CDATA[");
+		sb.append(getUserInterests());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -527,6 +897,16 @@ public class FlaskUserClp extends BaseModelImpl<FlaskUser> implements FlaskUser 
 	private String _screenName;
 	private String _email;
 	private Date _DOB;
+	private Boolean _isMale;
+	private String _streetName;
+	private String _aptNo;
+	private String _areaCode;
+	private String _city;
+	private String _state;
+	private String _country;
+	private String _mobileNumber;
+	private String _portraitURL;
+	private String _userInterests;
 	private BaseModel<?> _flaskUserRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

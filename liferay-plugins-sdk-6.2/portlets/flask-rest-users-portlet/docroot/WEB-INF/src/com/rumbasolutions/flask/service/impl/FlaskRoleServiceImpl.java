@@ -22,7 +22,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.rumbasolutions.flask.model.FlaskRole;
 import com.rumbasolutions.flask.service.base.FlaskRoleServiceBaseImpl;
-import com.rumbasolutions.flask.service.impl.ModelUtil.FlaskRoleEnum;
+import com.rumbasolutions.flask.service.impl.FlaskModelUtil.FlaskRoleEnum;
 
 /**
  * The implementation of the flask role remote service.
@@ -53,7 +53,7 @@ public class FlaskRoleServiceImpl extends FlaskRoleServiceBaseImpl {
 			for (FlaskRoleEnum eRole : FlaskRoleEnum.values()){
 				Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(),eRole.getRoleName());
 				if(role != null){
-					roleList.add(ModelUtil.getFlaskRole(role));
+					roleList.add(FlaskModelUtil.getFlaskRole(role));
 				}
 
 			}

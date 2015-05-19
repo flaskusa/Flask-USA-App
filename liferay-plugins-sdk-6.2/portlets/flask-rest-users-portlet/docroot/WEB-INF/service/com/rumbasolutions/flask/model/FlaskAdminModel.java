@@ -192,6 +192,155 @@ public interface FlaskAdminModel extends BaseModel<FlaskAdmin> {
 	 */
 	public void setDOB(Date DOB);
 
+	/**
+	 * Returns the is male of this flask admin.
+	 *
+	 * @return the is male of this flask admin
+	 */
+	public Boolean getIsMale();
+
+	/**
+	 * Sets the is male of this flask admin.
+	 *
+	 * @param isMale the is male of this flask admin
+	 */
+	public void setIsMale(Boolean isMale);
+
+	/**
+	 * Returns the street name of this flask admin.
+	 *
+	 * @return the street name of this flask admin
+	 */
+	@AutoEscape
+	public String getStreetName();
+
+	/**
+	 * Sets the street name of this flask admin.
+	 *
+	 * @param streetName the street name of this flask admin
+	 */
+	public void setStreetName(String streetName);
+
+	/**
+	 * Returns the apt no of this flask admin.
+	 *
+	 * @return the apt no of this flask admin
+	 */
+	@AutoEscape
+	public String getAptNo();
+
+	/**
+	 * Sets the apt no of this flask admin.
+	 *
+	 * @param aptNo the apt no of this flask admin
+	 */
+	public void setAptNo(String aptNo);
+
+	/**
+	 * Returns the area code of this flask admin.
+	 *
+	 * @return the area code of this flask admin
+	 */
+	@AutoEscape
+	public String getAreaCode();
+
+	/**
+	 * Sets the area code of this flask admin.
+	 *
+	 * @param areaCode the area code of this flask admin
+	 */
+	public void setAreaCode(String areaCode);
+
+	/**
+	 * Returns the city of this flask admin.
+	 *
+	 * @return the city of this flask admin
+	 */
+	@AutoEscape
+	public String getCity();
+
+	/**
+	 * Sets the city of this flask admin.
+	 *
+	 * @param city the city of this flask admin
+	 */
+	public void setCity(String city);
+
+	/**
+	 * Returns the state of this flask admin.
+	 *
+	 * @return the state of this flask admin
+	 */
+	@AutoEscape
+	public String getState();
+
+	/**
+	 * Sets the state of this flask admin.
+	 *
+	 * @param state the state of this flask admin
+	 */
+	public void setState(String state);
+
+	/**
+	 * Returns the country of this flask admin.
+	 *
+	 * @return the country of this flask admin
+	 */
+	@AutoEscape
+	public String getCountry();
+
+	/**
+	 * Sets the country of this flask admin.
+	 *
+	 * @param country the country of this flask admin
+	 */
+	public void setCountry(String country);
+
+	/**
+	 * Returns the mobile number of this flask admin.
+	 *
+	 * @return the mobile number of this flask admin
+	 */
+	@AutoEscape
+	public String getMobileNumber();
+
+	/**
+	 * Sets the mobile number of this flask admin.
+	 *
+	 * @param mobileNumber the mobile number of this flask admin
+	 */
+	public void setMobileNumber(String mobileNumber);
+
+	/**
+	 * Returns the portrait u r l of this flask admin.
+	 *
+	 * @return the portrait u r l of this flask admin
+	 */
+	@AutoEscape
+	public String getPortraitURL();
+
+	/**
+	 * Sets the portrait u r l of this flask admin.
+	 *
+	 * @param portraitURL the portrait u r l of this flask admin
+	 */
+	public void setPortraitURL(String portraitURL);
+
+	/**
+	 * Returns the user interests of this flask admin.
+	 *
+	 * @return the user interests of this flask admin
+	 */
+	@AutoEscape
+	public String getUserInterests();
+
+	/**
+	 * Sets the user interests of this flask admin.
+	 *
+	 * @param userInterests the user interests of this flask admin
+	 */
+	public void setUserInterests(String userInterests);
+
 	@Override
 	public boolean isNew();
 

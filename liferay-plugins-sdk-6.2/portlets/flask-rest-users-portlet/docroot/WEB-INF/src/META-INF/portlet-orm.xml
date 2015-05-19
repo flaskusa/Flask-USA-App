@@ -19,6 +19,18 @@
 			<basic name="DOB">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="isMale" />
+			<basic name="streetName" />
+			<basic name="aptNo" />
+			<basic name="areaCode" />
+			<basic name="city" />
+			<basic name="state">
+				<column name="STATE_" />
+			</basic>
+			<basic name="country" />
+			<basic name="mobileNumber" />
+			<basic name="portraitURL" />
+			<basic name="userInterests" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -47,6 +59,18 @@
 			<basic name="DOB">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
+			<basic name="isMale" />
+			<basic name="streetName" />
+			<basic name="aptNo" />
+			<basic name="areaCode" />
+			<basic name="city" />
+			<basic name="state">
+				<column name="STATE_" />
+			</basic>
+			<basic name="country" />
+			<basic name="mobileNumber" />
+			<basic name="portraitURL" />
+			<basic name="userInterests" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

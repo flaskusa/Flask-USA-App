@@ -20,6 +20,7 @@ import java.util.List;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.rumbasolutions.flask.model.FlaskAdmin;
@@ -47,10 +48,10 @@ public class FlaskUserServiceImpl extends FlaskUserServiceBaseImpl {
 	 */
 	
 	@Override
-	public List<FlaskAdmin> getFlaskUsers(){
+	public List<FlaskAdmin> getFlaskUsers(ServiceContext serviceContext){
 		List<FlaskAdmin> userList = new ArrayList<FlaskAdmin>();
 		try{
-			Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), ModelUtil.FLASK_USER);
+			Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FLASK_USER);
 			int flaskUsers = UserLocalServiceUtil.getRoleUsersCount(role.getRoleId());
 			
 			//AR TODO implement paging/filtering
@@ -58,7 +59,7 @@ public class FlaskUserServiceImpl extends FlaskUserServiceBaseImpl {
 			flaskUsers = flaskUsers < 100 ? flaskUsers : 100;
 			List<User> users= UserLocalServiceUtil.getRoleUsers(role.getRoleId(), 0, flaskUsers);
 			for(User user : users){
-				userList.add(ModelUtil.getFlaskAdmin(user));
+				userList.add(FlaskModelUtil.getFlaskAdmin(user, serviceContext));
 			}
 		}catch(Exception ex){
 			

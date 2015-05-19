@@ -66,16 +66,22 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		throws java.lang.Throwable;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskAdmins();
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskAdmins(
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskContentManagers();
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskContentManagers(
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskAdmin(
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -93,7 +99,11 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

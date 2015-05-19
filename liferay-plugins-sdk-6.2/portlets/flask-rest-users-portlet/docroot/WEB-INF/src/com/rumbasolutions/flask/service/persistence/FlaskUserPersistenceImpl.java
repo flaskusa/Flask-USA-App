@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
@@ -46,6 +47,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The persistence implementation for the flask user service.
@@ -327,6 +329,16 @@ public class FlaskUserPersistenceImpl extends BasePersistenceImpl<FlaskUser>
 		flaskUserImpl.setScreenName(flaskUser.getScreenName());
 		flaskUserImpl.setEmail(flaskUser.getEmail());
 		flaskUserImpl.setDOB(flaskUser.getDOB());
+		flaskUserImpl.setIsMale(flaskUser.getIsMale());
+		flaskUserImpl.setStreetName(flaskUser.getStreetName());
+		flaskUserImpl.setAptNo(flaskUser.getAptNo());
+		flaskUserImpl.setAreaCode(flaskUser.getAreaCode());
+		flaskUserImpl.setCity(flaskUser.getCity());
+		flaskUserImpl.setState(flaskUser.getState());
+		flaskUserImpl.setCountry(flaskUser.getCountry());
+		flaskUserImpl.setMobileNumber(flaskUser.getMobileNumber());
+		flaskUserImpl.setPortraitURL(flaskUser.getPortraitURL());
+		flaskUserImpl.setUserInterests(flaskUser.getUserInterests());
 
 		return flaskUserImpl;
 	}
@@ -603,6 +615,11 @@ public class FlaskUserPersistenceImpl extends BasePersistenceImpl<FlaskUser>
 		return count.intValue();
 	}
 
+	@Override
+	protected Set<String> getBadColumnNames() {
+		return _badColumnNames;
+	}
+
 	/**
 	 * Initializes the flask user persistence.
 	 */
@@ -642,6 +659,9 @@ public class FlaskUserPersistenceImpl extends BasePersistenceImpl<FlaskUser>
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(FlaskUserPersistenceImpl.class);
+	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
+				"state"
+			});
 	private static FlaskUser _nullFlaskUser = new FlaskUserImpl() {
 			@Override
 			public Object clone() {

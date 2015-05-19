@@ -63,8 +63,9 @@ public class FlaskUserServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskUsers() {
-		return getService().getFlaskUsers();
+	public static java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskUsers(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getFlaskUsers(serviceContext);
 	}
 
 	public static void clearService() {

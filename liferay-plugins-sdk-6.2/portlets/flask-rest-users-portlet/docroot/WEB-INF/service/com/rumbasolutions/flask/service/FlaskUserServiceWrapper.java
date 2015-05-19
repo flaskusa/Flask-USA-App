@@ -57,8 +57,9 @@ public class FlaskUserServiceWrapper implements FlaskUserService,
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskUsers() {
-		return _flaskUserService.getFlaskUsers();
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskUsers(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskUserService.getFlaskUsers(serviceContext);
 	}
 
 	/**

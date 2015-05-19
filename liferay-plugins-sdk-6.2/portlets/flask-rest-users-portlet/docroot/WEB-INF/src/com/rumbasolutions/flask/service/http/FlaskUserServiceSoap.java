@@ -62,11 +62,12 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class FlaskUserServiceSoap {
-	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getFlaskUsers()
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getFlaskUsers(
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> returnValue =
-				FlaskUserServiceUtil.getFlaskUsers();
+				FlaskUserServiceUtil.getFlaskUsers(serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModels(returnValue);
 		}

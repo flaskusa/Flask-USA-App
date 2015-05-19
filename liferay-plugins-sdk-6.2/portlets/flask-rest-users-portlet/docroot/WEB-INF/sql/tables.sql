@@ -6,7 +6,17 @@ create table flaskusers_FlaskAdmin (
 	lastName VARCHAR(75) null,
 	screenName VARCHAR(75) null,
 	email VARCHAR(75) null,
-	DOB DATE null
+	DOB DATE null,
+	isMale BOOLEAN,
+	streetName VARCHAR(75) null,
+	aptNo VARCHAR(75) null,
+	areaCode VARCHAR(75) null,
+	city VARCHAR(75) null,
+	state_ VARCHAR(75) null,
+	country VARCHAR(75) null,
+	mobileNumber VARCHAR(75) null,
+	portraitURL VARCHAR(75) null,
+	userInterests VARCHAR(75) null
 );
 
 create table flaskusers_FlaskRole (
@@ -23,5 +33,15 @@ create table flaskusers_FlaskUser (
 	lastName VARCHAR(75) null,
 	screenName VARCHAR(75) null,
 	email VARCHAR(75) null,
-	DOB DATE null
+	DOB DATE null,
+	isMale BOOLEAN,
+	streetName VARCHAR(75) null,
+	aptNo VARCHAR(75) null,
+	areaCode VARCHAR(75) null,
+	city VARCHAR(75) null,
+	state_ VARCHAR(75) null,
+	country VARCHAR(75) null,
+	mobileNumber VARCHAR(75) null,
+	portraitURL VARCHAR(75) null,
+	userInterests VARCHAR(75) null
 );

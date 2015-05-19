@@ -10,6 +10,16 @@
 		<field name="screenName" type="String" />
 		<field name="email" type="String" />
 		<field name="DOB" type="Date" />
+		<field name="isMale" type="Boolean" />
+		<field name="streetName" type="String" />
+		<field name="aptNo" type="String" />
+		<field name="areaCode" type="String" />
+		<field name="city" type="String" />
+		<field name="state" type="String" />
+		<field name="country" type="String" />
+		<field name="mobileNumber" type="String" />
+		<field name="portraitURL" type="String" />
+		<field name="userInterests" type="String" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.FlaskRole">
 		<field name="roleId" type="long" />
@@ -25,5 +35,15 @@
 		<field name="screenName" type="String" />
 		<field name="email" type="String" />
 		<field name="DOB" type="Date" />
+		<field name="isMale" type="Boolean" />
+		<field name="streetName" type="String" />
+		<field name="aptNo" type="String" />
+		<field name="areaCode" type="String" />
+		<field name="city" type="String" />
+		<field name="state" type="String" />
+		<field name="country" type="String" />
+		<field name="mobileNumber" type="String" />
+		<field name="portraitURL" type="String" />
+		<field name="userInterests" type="String" />
 	</model>
 </model-hints>

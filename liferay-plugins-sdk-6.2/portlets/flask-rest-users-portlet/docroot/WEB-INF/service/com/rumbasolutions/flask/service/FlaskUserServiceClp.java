@@ -34,7 +34,9 @@ public class FlaskUserServiceClp implements FlaskUserService {
 
 		_methodName3 = "getFlaskUsers";
 
-		_methodParameterTypes3 = new String[] {  };
+		_methodParameterTypes3 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -88,12 +90,14 @@ public class FlaskUserServiceClp implements FlaskUserService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskUsers() {
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskUsers(
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName3,
-					_methodParameterTypes3, new Object[] {  });
+					_methodParameterTypes3,
+					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

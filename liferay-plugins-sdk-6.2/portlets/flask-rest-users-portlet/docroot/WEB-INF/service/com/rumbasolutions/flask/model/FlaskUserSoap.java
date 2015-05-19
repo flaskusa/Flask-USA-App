@@ -39,6 +39,16 @@ public class FlaskUserSoap implements Serializable {
 		soapModel.setScreenName(model.getScreenName());
 		soapModel.setEmail(model.getEmail());
 		soapModel.setDOB(model.getDOB());
+		soapModel.setIsMale(model.getIsMale());
+		soapModel.setStreetName(model.getStreetName());
+		soapModel.setAptNo(model.getAptNo());
+		soapModel.setAreaCode(model.getAreaCode());
+		soapModel.setCity(model.getCity());
+		soapModel.setState(model.getState());
+		soapModel.setCountry(model.getCountry());
+		soapModel.setMobileNumber(model.getMobileNumber());
+		soapModel.setPortraitURL(model.getPortraitURL());
+		soapModel.setUserInterests(model.getUserInterests());
 
 		return soapModel;
 	}
@@ -155,6 +165,86 @@ public class FlaskUserSoap implements Serializable {
 		_DOB = DOB;
 	}
 
+	public Boolean getIsMale() {
+		return _isMale;
+	}
+
+	public void setIsMale(Boolean isMale) {
+		_isMale = isMale;
+	}
+
+	public String getStreetName() {
+		return _streetName;
+	}
+
+	public void setStreetName(String streetName) {
+		_streetName = streetName;
+	}
+
+	public String getAptNo() {
+		return _aptNo;
+	}
+
+	public void setAptNo(String aptNo) {
+		_aptNo = aptNo;
+	}
+
+	public String getAreaCode() {
+		return _areaCode;
+	}
+
+	public void setAreaCode(String areaCode) {
+		_areaCode = areaCode;
+	}
+
+	public String getCity() {
+		return _city;
+	}
+
+	public void setCity(String city) {
+		_city = city;
+	}
+
+	public String getState() {
+		return _state;
+	}
+
+	public void setState(String state) {
+		_state = state;
+	}
+
+	public String getCountry() {
+		return _country;
+	}
+
+	public void setCountry(String country) {
+		_country = country;
+	}
+
+	public String getMobileNumber() {
+		return _mobileNumber;
+	}
+
+	public void setMobileNumber(String mobileNumber) {
+		_mobileNumber = mobileNumber;
+	}
+
+	public String getPortraitURL() {
+		return _portraitURL;
+	}
+
+	public void setPortraitURL(String portraitURL) {
+		_portraitURL = portraitURL;
+	}
+
+	public String getUserInterests() {
+		return _userInterests;
+	}
+
+	public void setUserInterests(String userInterests) {
+		_userInterests = userInterests;
+	}
+
 	private long _userId;
 	private long _roleId;
 	private String _firstName;
@@ -163,4 +253,14 @@ public class FlaskUserSoap implements Serializable {
 	private String _screenName;
 	private String _email;
 	private Date _DOB;
+	private Boolean _isMale;
+	private String _streetName;
+	private String _aptNo;
+	private String _areaCode;
+	private String _city;
+	private String _state;
+	private String _country;
+	private String _mobileNumber;
+	private String _portraitURL;
+	private String _userInterests;
 }

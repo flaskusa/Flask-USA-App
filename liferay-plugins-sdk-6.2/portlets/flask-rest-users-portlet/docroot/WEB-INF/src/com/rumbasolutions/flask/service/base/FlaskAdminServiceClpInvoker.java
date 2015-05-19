@@ -34,18 +34,26 @@ public class FlaskAdminServiceClpInvoker {
 
 		_methodName30 = "getFlaskAdmins";
 
-		_methodParameterTypes30 = new String[] {  };
+		_methodParameterTypes30 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName31 = "getFlaskContentManagers";
 
-		_methodParameterTypes31 = new String[] {  };
+		_methodParameterTypes31 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName33 = "addFlaskAdmin";
 
 		_methodParameterTypes33 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.util.Date", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName34 = "updateFlaskAdmin";
@@ -62,7 +70,11 @@ public class FlaskAdminServiceClpInvoker {
 		_methodParameterTypes35 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.util.Date", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName36 = "updateFlaskContentManager";
@@ -97,12 +109,12 @@ public class FlaskAdminServiceClpInvoker {
 
 		if (_methodName30.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
-			return FlaskAdminServiceUtil.getFlaskAdmins();
+			return FlaskAdminServiceUtil.getFlaskAdmins((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
 		if (_methodName31.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
-			return FlaskAdminServiceUtil.getFlaskContentManagers();
+			return FlaskAdminServiceUtil.getFlaskContentManagers((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
 		if (_methodName33.equals(name) &&
@@ -111,7 +123,17 @@ public class FlaskAdminServiceClpInvoker {
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(com.liferay.portal.service.ServiceContext)arguments[7]);
+				(java.util.Date)arguments[7],
+				((Boolean)arguments[8]).booleanValue(),
+				(java.lang.String)arguments[9],
+				(java.lang.String)arguments[10],
+				(java.lang.String)arguments[11],
+				(java.lang.String)arguments[12],
+				(java.lang.String)arguments[13],
+				(java.lang.String)arguments[14],
+				(java.lang.String)arguments[15],
+				(java.lang.String)arguments[16],
+				(com.liferay.portal.service.ServiceContext)arguments[17]);
 		}
 
 		if (_methodName34.equals(name) &&
@@ -130,7 +152,17 @@ public class FlaskAdminServiceClpInvoker {
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(com.liferay.portal.service.ServiceContext)arguments[7]);
+				(java.util.Date)arguments[7],
+				((Boolean)arguments[8]).booleanValue(),
+				(java.lang.String)arguments[9],
+				(java.lang.String)arguments[10],
+				(java.lang.String)arguments[11],
+				(java.lang.String)arguments[12],
+				(java.lang.String)arguments[13],
+				(java.lang.String)arguments[14],
+				(java.lang.String)arguments[15],
+				(java.lang.String)arguments[16],
+				(com.liferay.portal.service.ServiceContext)arguments[17]);
 		}
 
 		if (_methodName36.equals(name) &&

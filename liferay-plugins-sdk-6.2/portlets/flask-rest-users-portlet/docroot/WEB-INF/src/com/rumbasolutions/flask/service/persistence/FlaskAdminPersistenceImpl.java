@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.InstanceFactory;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropsKeys;
 import com.liferay.portal.kernel.util.PropsUtil;
+import com.liferay.portal.kernel.util.SetUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnmodifiableList;
@@ -46,6 +47,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 /**
  * The persistence implementation for the flask admin service.
@@ -327,6 +329,16 @@ public class FlaskAdminPersistenceImpl extends BasePersistenceImpl<FlaskAdmin>
 		flaskAdminImpl.setScreenName(flaskAdmin.getScreenName());
 		flaskAdminImpl.setEmail(flaskAdmin.getEmail());
 		flaskAdminImpl.setDOB(flaskAdmin.getDOB());
+		flaskAdminImpl.setIsMale(flaskAdmin.getIsMale());
+		flaskAdminImpl.setStreetName(flaskAdmin.getStreetName());
+		flaskAdminImpl.setAptNo(flaskAdmin.getAptNo());
+		flaskAdminImpl.setAreaCode(flaskAdmin.getAreaCode());
+		flaskAdminImpl.setCity(flaskAdmin.getCity());
+		flaskAdminImpl.setState(flaskAdmin.getState());
+		flaskAdminImpl.setCountry(flaskAdmin.getCountry());
+		flaskAdminImpl.setMobileNumber(flaskAdmin.getMobileNumber());
+		flaskAdminImpl.setPortraitURL(flaskAdmin.getPortraitURL());
+		flaskAdminImpl.setUserInterests(flaskAdmin.getUserInterests());
 
 		return flaskAdminImpl;
 	}
@@ -603,6 +615,11 @@ public class FlaskAdminPersistenceImpl extends BasePersistenceImpl<FlaskAdmin>
 		return count.intValue();
 	}
 
+	@Override
+	protected Set<String> getBadColumnNames() {
+		return _badColumnNames;
+	}
+
 	/**
 	 * Initializes the flask admin persistence.
 	 */
@@ -642,6 +659,9 @@ public class FlaskAdminPersistenceImpl extends BasePersistenceImpl<FlaskAdmin>
 	private static final boolean _HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE = GetterUtil.getBoolean(PropsUtil.get(
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(FlaskAdminPersistenceImpl.class);
+	private static Set<String> _badColumnNames = SetUtil.fromArray(new String[] {
+				"state"
+			});
 	private static FlaskAdmin _nullFlaskAdmin = new FlaskAdminImpl() {
 			@Override
 			public Object clone() {

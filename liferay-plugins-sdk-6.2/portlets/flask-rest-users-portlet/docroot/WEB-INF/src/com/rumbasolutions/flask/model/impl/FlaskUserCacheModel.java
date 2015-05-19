@@ -38,7 +38,7 @@ public class FlaskUserCacheModel implements CacheModel<FlaskUser>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{userId=");
 		sb.append(userId);
@@ -56,6 +56,26 @@ public class FlaskUserCacheModel implements CacheModel<FlaskUser>,
 		sb.append(email);
 		sb.append(", DOB=");
 		sb.append(DOB);
+		sb.append(", isMale=");
+		sb.append(isMale);
+		sb.append(", streetName=");
+		sb.append(streetName);
+		sb.append(", aptNo=");
+		sb.append(aptNo);
+		sb.append(", areaCode=");
+		sb.append(areaCode);
+		sb.append(", city=");
+		sb.append(city);
+		sb.append(", state=");
+		sb.append(state);
+		sb.append(", country=");
+		sb.append(country);
+		sb.append(", mobileNumber=");
+		sb.append(mobileNumber);
+		sb.append(", portraitURL=");
+		sb.append(portraitURL);
+		sb.append(", userInterests=");
+		sb.append(userInterests);
 		sb.append("}");
 
 		return sb.toString();
@@ -110,6 +130,71 @@ public class FlaskUserCacheModel implements CacheModel<FlaskUser>,
 			flaskUserImpl.setDOB(new Date(DOB));
 		}
 
+		flaskUserImpl.setIsMale(isMale);
+
+		if (streetName == null) {
+			flaskUserImpl.setStreetName(StringPool.BLANK);
+		}
+		else {
+			flaskUserImpl.setStreetName(streetName);
+		}
+
+		if (aptNo == null) {
+			flaskUserImpl.setAptNo(StringPool.BLANK);
+		}
+		else {
+			flaskUserImpl.setAptNo(aptNo);
+		}
+
+		if (areaCode == null) {
+			flaskUserImpl.setAreaCode(StringPool.BLANK);
+		}
+		else {
+			flaskUserImpl.setAreaCode(areaCode);
+		}
+
+		if (city == null) {
+			flaskUserImpl.setCity(StringPool.BLANK);
+		}
+		else {
+			flaskUserImpl.setCity(city);
+		}
+
+		if (state == null) {
+			flaskUserImpl.setState(StringPool.BLANK);
+		}
+		else {
+			flaskUserImpl.setState(state);
+		}
+
+		if (country == null) {
+			flaskUserImpl.setCountry(StringPool.BLANK);
+		}
+		else {
+			flaskUserImpl.setCountry(country);
+		}
+
+		if (mobileNumber == null) {
+			flaskUserImpl.setMobileNumber(StringPool.BLANK);
+		}
+		else {
+			flaskUserImpl.setMobileNumber(mobileNumber);
+		}
+
+		if (portraitURL == null) {
+			flaskUserImpl.setPortraitURL(StringPool.BLANK);
+		}
+		else {
+			flaskUserImpl.setPortraitURL(portraitURL);
+		}
+
+		if (userInterests == null) {
+			flaskUserImpl.setUserInterests(StringPool.BLANK);
+		}
+		else {
+			flaskUserImpl.setUserInterests(userInterests);
+		}
+
 		flaskUserImpl.resetOriginalValues();
 
 		return flaskUserImpl;
@@ -125,6 +210,16 @@ public class FlaskUserCacheModel implements CacheModel<FlaskUser>,
 		screenName = objectInput.readUTF();
 		email = objectInput.readUTF();
 		DOB = objectInput.readLong();
+		isMale = objectInput.readBoolean();
+		streetName = objectInput.readUTF();
+		aptNo = objectInput.readUTF();
+		areaCode = objectInput.readUTF();
+		city = objectInput.readUTF();
+		state = objectInput.readUTF();
+		country = objectInput.readUTF();
+		mobileNumber = objectInput.readUTF();
+		portraitURL = objectInput.readUTF();
+		userInterests = objectInput.readUTF();
 	}
 
 	@Override
@@ -169,6 +264,70 @@ public class FlaskUserCacheModel implements CacheModel<FlaskUser>,
 		}
 
 		objectOutput.writeLong(DOB);
+		objectOutput.writeBoolean(isMale);
+
+		if (streetName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(streetName);
+		}
+
+		if (aptNo == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(aptNo);
+		}
+
+		if (areaCode == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(areaCode);
+		}
+
+		if (city == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(city);
+		}
+
+		if (state == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(state);
+		}
+
+		if (country == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(country);
+		}
+
+		if (mobileNumber == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(mobileNumber);
+		}
+
+		if (portraitURL == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(portraitURL);
+		}
+
+		if (userInterests == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(userInterests);
+		}
 	}
 
 	public long userId;
@@ -179,4 +338,14 @@ public class FlaskUserCacheModel implements CacheModel<FlaskUser>,
 	public String screenName;
 	public String email;
 	public long DOB;
+	public Boolean isMale;
+	public String streetName;
+	public String aptNo;
+	public String areaCode;
+	public String city;
+	public String state;
+	public String country;
+	public String mobileNumber;
+	public String portraitURL;
+	public String userInterests;
 }

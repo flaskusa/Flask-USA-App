@@ -57,6 +57,16 @@ public class FlaskUserWrapper implements FlaskUser, ModelWrapper<FlaskUser> {
 		attributes.put("screenName", getScreenName());
 		attributes.put("email", getEmail());
 		attributes.put("DOB", getDOB());
+		attributes.put("isMale", getIsMale());
+		attributes.put("streetName", getStreetName());
+		attributes.put("aptNo", getAptNo());
+		attributes.put("areaCode", getAreaCode());
+		attributes.put("city", getCity());
+		attributes.put("state", getState());
+		attributes.put("country", getCountry());
+		attributes.put("mobileNumber", getMobileNumber());
+		attributes.put("portraitURL", getPortraitURL());
+		attributes.put("userInterests", getUserInterests());
 
 		return attributes;
 	}
@@ -109,6 +119,66 @@ public class FlaskUserWrapper implements FlaskUser, ModelWrapper<FlaskUser> {
 
 		if (DOB != null) {
 			setDOB(DOB);
+		}
+
+		Boolean isMale = (Boolean)attributes.get("isMale");
+
+		if (isMale != null) {
+			setIsMale(isMale);
+		}
+
+		String streetName = (String)attributes.get("streetName");
+
+		if (streetName != null) {
+			setStreetName(streetName);
+		}
+
+		String aptNo = (String)attributes.get("aptNo");
+
+		if (aptNo != null) {
+			setAptNo(aptNo);
+		}
+
+		String areaCode = (String)attributes.get("areaCode");
+
+		if (areaCode != null) {
+			setAreaCode(areaCode);
+		}
+
+		String city = (String)attributes.get("city");
+
+		if (city != null) {
+			setCity(city);
+		}
+
+		String state = (String)attributes.get("state");
+
+		if (state != null) {
+			setState(state);
+		}
+
+		String country = (String)attributes.get("country");
+
+		if (country != null) {
+			setCountry(country);
+		}
+
+		String mobileNumber = (String)attributes.get("mobileNumber");
+
+		if (mobileNumber != null) {
+			setMobileNumber(mobileNumber);
+		}
+
+		String portraitURL = (String)attributes.get("portraitURL");
+
+		if (portraitURL != null) {
+			setPortraitURL(portraitURL);
+		}
+
+		String userInterests = (String)attributes.get("userInterests");
+
+		if (userInterests != null) {
+			setUserInterests(userInterests);
 		}
 	}
 
@@ -312,6 +382,206 @@ public class FlaskUserWrapper implements FlaskUser, ModelWrapper<FlaskUser> {
 	@Override
 	public void setDOB(java.util.Date DOB) {
 		_flaskUser.setDOB(DOB);
+	}
+
+	/**
+	* Returns the is male of this flask user.
+	*
+	* @return the is male of this flask user
+	*/
+	@Override
+	public java.lang.Boolean getIsMale() {
+		return _flaskUser.getIsMale();
+	}
+
+	/**
+	* Sets the is male of this flask user.
+	*
+	* @param isMale the is male of this flask user
+	*/
+	@Override
+	public void setIsMale(java.lang.Boolean isMale) {
+		_flaskUser.setIsMale(isMale);
+	}
+
+	/**
+	* Returns the street name of this flask user.
+	*
+	* @return the street name of this flask user
+	*/
+	@Override
+	public java.lang.String getStreetName() {
+		return _flaskUser.getStreetName();
+	}
+
+	/**
+	* Sets the street name of this flask user.
+	*
+	* @param streetName the street name of this flask user
+	*/
+	@Override
+	public void setStreetName(java.lang.String streetName) {
+		_flaskUser.setStreetName(streetName);
+	}
+
+	/**
+	* Returns the apt no of this flask user.
+	*
+	* @return the apt no of this flask user
+	*/
+	@Override
+	public java.lang.String getAptNo() {
+		return _flaskUser.getAptNo();
+	}
+
+	/**
+	* Sets the apt no of this flask user.
+	*
+	* @param aptNo the apt no of this flask user
+	*/
+	@Override
+	public void setAptNo(java.lang.String aptNo) {
+		_flaskUser.setAptNo(aptNo);
+	}
+
+	/**
+	* Returns the area code of this flask user.
+	*
+	* @return the area code of this flask user
+	*/
+	@Override
+	public java.lang.String getAreaCode() {
+		return _flaskUser.getAreaCode();
+	}
+
+	/**
+	* Sets the area code of this flask user.
+	*
+	* @param areaCode the area code of this flask user
+	*/
+	@Override
+	public void setAreaCode(java.lang.String areaCode) {
+		_flaskUser.setAreaCode(areaCode);
+	}
+
+	/**
+	* Returns the city of this flask user.
+	*
+	* @return the city of this flask user
+	*/
+	@Override
+	public java.lang.String getCity() {
+		return _flaskUser.getCity();
+	}
+
+	/**
+	* Sets the city of this flask user.
+	*
+	* @param city the city of this flask user
+	*/
+	@Override
+	public void setCity(java.lang.String city) {
+		_flaskUser.setCity(city);
+	}
+
+	/**
+	* Returns the state of this flask user.
+	*
+	* @return the state of this flask user
+	*/
+	@Override
+	public java.lang.String getState() {
+		return _flaskUser.getState();
+	}
+
+	/**
+	* Sets the state of this flask user.
+	*
+	* @param state the state of this flask user
+	*/
+	@Override
+	public void setState(java.lang.String state) {
+		_flaskUser.setState(state);
+	}
+
+	/**
+	* Returns the country of this flask user.
+	*
+	* @return the country of this flask user
+	*/
+	@Override
+	public java.lang.String getCountry() {
+		return _flaskUser.getCountry();
+	}
+
+	/**
+	* Sets the country of this flask user.
+	*
+	* @param country the country of this flask user
+	*/
+	@Override
+	public void setCountry(java.lang.String country) {
+		_flaskUser.setCountry(country);
+	}
+
+	/**
+	* Returns the mobile number of this flask user.
+	*
+	* @return the mobile number of this flask user
+	*/
+	@Override
+	public java.lang.String getMobileNumber() {
+		return _flaskUser.getMobileNumber();
+	}
+
+	/**
+	* Sets the mobile number of this flask user.
+	*
+	* @param mobileNumber the mobile number of this flask user
+	*/
+	@Override
+	public void setMobileNumber(java.lang.String mobileNumber) {
+		_flaskUser.setMobileNumber(mobileNumber);
+	}
+
+	/**
+	* Returns the portrait u r l of this flask user.
+	*
+	* @return the portrait u r l of this flask user
+	*/
+	@Override
+	public java.lang.String getPortraitURL() {
+		return _flaskUser.getPortraitURL();
+	}
+
+	/**
+	* Sets the portrait u r l of this flask user.
+	*
+	* @param portraitURL the portrait u r l of this flask user
+	*/
+	@Override
+	public void setPortraitURL(java.lang.String portraitURL) {
+		_flaskUser.setPortraitURL(portraitURL);
+	}
+
+	/**
+	* Returns the user interests of this flask user.
+	*
+	* @return the user interests of this flask user
+	*/
+	@Override
+	public java.lang.String getUserInterests() {
+		return _flaskUser.getUserInterests();
+	}
+
+	/**
+	* Sets the user interests of this flask user.
+	*
+	* @param userInterests the user interests of this flask user
+	*/
+	@Override
+	public void setUserInterests(java.lang.String userInterests) {
+		_flaskUser.setUserInterests(userInterests);
 	}
 
 	@Override

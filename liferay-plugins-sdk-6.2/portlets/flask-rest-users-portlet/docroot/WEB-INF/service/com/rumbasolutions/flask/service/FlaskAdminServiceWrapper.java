@@ -57,13 +57,15 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskAdmins() {
-		return _flaskAdminService.getFlaskAdmins();
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskAdmins(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskAdminService.getFlaskAdmins(serviceContext);
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskContentManagers() {
-		return _flaskAdminService.getFlaskContentManagers();
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskContentManagers(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskAdminService.getFlaskContentManagers(serviceContext);
 	}
 
 	@Override
@@ -71,12 +73,18 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _flaskAdminService.addFlaskAdmin(firstName, middleName,
-			lastName, email, screenName, password1, password2, serviceContext);
+			lastName, email, screenName, password1, password2, DOB, isMale,
+			streetName, aptNo, areaCode, city, state, country, mobileNo,
+			userInterests, serviceContext);
 	}
 
 	@Override
@@ -98,12 +106,18 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _flaskAdminService.addFlaskContentManager(firstName, middleName,
-			lastName, email, screenName, password1, password2, serviceContext);
+			lastName, email, screenName, password1, password2, DOB, isMale,
+			streetName, aptNo, areaCode, city, state, country, mobileNo,
+			userInterests, serviceContext);
 	}
 
 	/**

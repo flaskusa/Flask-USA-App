@@ -34,7 +34,9 @@ public class FlaskUserServiceClpInvoker {
 
 		_methodName30 = "getFlaskUsers";
 
-		_methodParameterTypes30 = new String[] {  };
+		_methodParameterTypes30 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -53,7 +55,7 @@ public class FlaskUserServiceClpInvoker {
 
 		if (_methodName30.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
-			return FlaskUserServiceUtil.getFlaskUsers();
+			return FlaskUserServiceUtil.getFlaskUsers((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
 		throw new UnsupportedOperationException();

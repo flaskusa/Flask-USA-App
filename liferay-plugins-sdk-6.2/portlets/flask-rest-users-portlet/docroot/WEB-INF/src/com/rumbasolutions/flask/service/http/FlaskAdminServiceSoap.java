@@ -62,11 +62,12 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class FlaskAdminServiceSoap {
-	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getFlaskAdmins()
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getFlaskAdmins(
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> returnValue =
-				FlaskAdminServiceUtil.getFlaskAdmins();
+				FlaskAdminServiceUtil.getFlaskAdmins(serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModels(returnValue);
 		}
@@ -77,11 +78,12 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
-	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getFlaskContentManagers()
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getFlaskContentManagers(
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> returnValue =
-				FlaskAdminServiceUtil.getFlaskContentManagers();
+				FlaskAdminServiceUtil.getFlaskContentManagers(serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModels(returnValue);
 		}
@@ -96,13 +98,18 @@ public class FlaskAdminServiceSoap {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.addFlaskAdmin(firstName,
 					middleName, lastName, email, screenName, password1,
-					password2, serviceContext);
+					password2, DOB, isMale, streetName, aptNo, areaCode, city,
+					state, country, mobileNo, userInterests, serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
 		}
@@ -138,13 +145,18 @@ public class FlaskAdminServiceSoap {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.addFlaskContentManager(firstName,
 					middleName, lastName, email, screenName, password1,
-					password2, serviceContext);
+					password2, DOB, isMale, streetName, aptNo, areaCode, city,
+					state, country, mobileNo, userInterests, serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
 		}

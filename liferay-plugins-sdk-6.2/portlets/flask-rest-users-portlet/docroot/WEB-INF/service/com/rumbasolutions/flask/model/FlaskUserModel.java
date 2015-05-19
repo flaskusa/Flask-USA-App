@@ -192,6 +192,155 @@ public interface FlaskUserModel extends BaseModel<FlaskUser> {
 	 */
 	public void setDOB(Date DOB);
 
+	/**
+	 * Returns the is male of this flask user.
+	 *
+	 * @return the is male of this flask user
+	 */
+	public Boolean getIsMale();
+
+	/**
+	 * Sets the is male of this flask user.
+	 *
+	 * @param isMale the is male of this flask user
+	 */
+	public void setIsMale(Boolean isMale);
+
+	/**
+	 * Returns the street name of this flask user.
+	 *
+	 * @return the street name of this flask user
+	 */
+	@AutoEscape
+	public String getStreetName();
+
+	/**
+	 * Sets the street name of this flask user.
+	 *
+	 * @param streetName the street name of this flask user
+	 */
+	public void setStreetName(String streetName);
+
+	/**
+	 * Returns the apt no of this flask user.
+	 *
+	 * @return the apt no of this flask user
+	 */
+	@AutoEscape
+	public String getAptNo();
+
+	/**
+	 * Sets the apt no of this flask user.
+	 *
+	 * @param aptNo the apt no of this flask user
+	 */
+	public void setAptNo(String aptNo);
+
+	/**
+	 * Returns the area code of this flask user.
+	 *
+	 * @return the area code of this flask user
+	 */
+	@AutoEscape
+	public String getAreaCode();
+
+	/**
+	 * Sets the area code of this flask user.
+	 *
+	 * @param areaCode the area code of this flask user
+	 */
+	public void setAreaCode(String areaCode);
+
+	/**
+	 * Returns the city of this flask user.
+	 *
+	 * @return the city of this flask user
+	 */
+	@AutoEscape
+	public String getCity();
+
+	/**
+	 * Sets the city of this flask user.
+	 *
+	 * @param city the city of this flask user
+	 */
+	public void setCity(String city);
+
+	/**
+	 * Returns the state of this flask user.
+	 *
+	 * @return the state of this flask user
+	 */
+	@AutoEscape
+	public String getState();
+
+	/**
+	 * Sets the state of this flask user.
+	 *
+	 * @param state the state of this flask user
+	 */
+	public void setState(String state);
+
+	/**
+	 * Returns the country of this flask user.
+	 *
+	 * @return the country of this flask user
+	 */
+	@AutoEscape
+	public String getCountry();
+
+	/**
+	 * Sets the country of this flask user.
+	 *
+	 * @param country the country of this flask user
+	 */
+	public void setCountry(String country);
+
+	/**
+	 * Returns the mobile number of this flask user.
+	 *
+	 * @return the mobile number of this flask user
+	 */
+	@AutoEscape
+	public String getMobileNumber();
+
+	/**
+	 * Sets the mobile number of this flask user.
+	 *
+	 * @param mobileNumber the mobile number of this flask user
+	 */
+	public void setMobileNumber(String mobileNumber);
+
+	/**
+	 * Returns the portrait u r l of this flask user.
+	 *
+	 * @return the portrait u r l of this flask user
+	 */
+	@AutoEscape
+	public String getPortraitURL();
+
+	/**
+	 * Sets the portrait u r l of this flask user.
+	 *
+	 * @param portraitURL the portrait u r l of this flask user
+	 */
+	public void setPortraitURL(String portraitURL);
+
+	/**
+	 * Returns the user interests of this flask user.
+	 *
+	 * @return the user interests of this flask user
+	 */
+	@AutoEscape
+	public String getUserInterests();
+
+	/**
+	 * Sets the user interests of this flask user.
+	 *
+	 * @param userInterests the user interests of this flask user
+	 */
+	public void setUserInterests(String userInterests);
+
 	@Override
 	public boolean isNew();
 

@@ -17,6 +17,16 @@
 		<property name="screenName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="DOB" type="org.hibernate.type.TimestampType" />
+		<property name="isMale" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="streetName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="aptNo" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="areaCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="state" type="com.liferay.portal.dao.orm.hibernate.StringType" column="state_" />
+		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mobileNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="portraitURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userInterests" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.FlaskRoleImpl" table="flaskusers_FlaskRole">
 		<cache usage="read-write" />
@@ -38,5 +48,15 @@
 		<property name="screenName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="DOB" type="org.hibernate.type.TimestampType" />
+		<property name="isMale" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="streetName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="aptNo" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="areaCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="state" type="com.liferay.portal.dao.orm.hibernate.StringType" column="state_" />
+		<property name="country" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mobileNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="portraitURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userInterests" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

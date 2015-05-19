@@ -38,7 +38,7 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(37);
 
 		sb.append("{userId=");
 		sb.append(userId);
@@ -56,6 +56,26 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 		sb.append(email);
 		sb.append(", DOB=");
 		sb.append(DOB);
+		sb.append(", isMale=");
+		sb.append(isMale);
+		sb.append(", streetName=");
+		sb.append(streetName);
+		sb.append(", aptNo=");
+		sb.append(aptNo);
+		sb.append(", areaCode=");
+		sb.append(areaCode);
+		sb.append(", city=");
+		sb.append(city);
+		sb.append(", state=");
+		sb.append(state);
+		sb.append(", country=");
+		sb.append(country);
+		sb.append(", mobileNumber=");
+		sb.append(mobileNumber);
+		sb.append(", portraitURL=");
+		sb.append(portraitURL);
+		sb.append(", userInterests=");
+		sb.append(userInterests);
 		sb.append("}");
 
 		return sb.toString();
@@ -110,6 +130,71 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 			flaskAdminImpl.setDOB(new Date(DOB));
 		}
 
+		flaskAdminImpl.setIsMale(isMale);
+
+		if (streetName == null) {
+			flaskAdminImpl.setStreetName(StringPool.BLANK);
+		}
+		else {
+			flaskAdminImpl.setStreetName(streetName);
+		}
+
+		if (aptNo == null) {
+			flaskAdminImpl.setAptNo(StringPool.BLANK);
+		}
+		else {
+			flaskAdminImpl.setAptNo(aptNo);
+		}
+
+		if (areaCode == null) {
+			flaskAdminImpl.setAreaCode(StringPool.BLANK);
+		}
+		else {
+			flaskAdminImpl.setAreaCode(areaCode);
+		}
+
+		if (city == null) {
+			flaskAdminImpl.setCity(StringPool.BLANK);
+		}
+		else {
+			flaskAdminImpl.setCity(city);
+		}
+
+		if (state == null) {
+			flaskAdminImpl.setState(StringPool.BLANK);
+		}
+		else {
+			flaskAdminImpl.setState(state);
+		}
+
+		if (country == null) {
+			flaskAdminImpl.setCountry(StringPool.BLANK);
+		}
+		else {
+			flaskAdminImpl.setCountry(country);
+		}
+
+		if (mobileNumber == null) {
+			flaskAdminImpl.setMobileNumber(StringPool.BLANK);
+		}
+		else {
+			flaskAdminImpl.setMobileNumber(mobileNumber);
+		}
+
+		if (portraitURL == null) {
+			flaskAdminImpl.setPortraitURL(StringPool.BLANK);
+		}
+		else {
+			flaskAdminImpl.setPortraitURL(portraitURL);
+		}
+
+		if (userInterests == null) {
+			flaskAdminImpl.setUserInterests(StringPool.BLANK);
+		}
+		else {
+			flaskAdminImpl.setUserInterests(userInterests);
+		}
+
 		flaskAdminImpl.resetOriginalValues();
 
 		return flaskAdminImpl;
@@ -125,6 +210,16 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 		screenName = objectInput.readUTF();
 		email = objectInput.readUTF();
 		DOB = objectInput.readLong();
+		isMale = objectInput.readBoolean();
+		streetName = objectInput.readUTF();
+		aptNo = objectInput.readUTF();
+		areaCode = objectInput.readUTF();
+		city = objectInput.readUTF();
+		state = objectInput.readUTF();
+		country = objectInput.readUTF();
+		mobileNumber = objectInput.readUTF();
+		portraitURL = objectInput.readUTF();
+		userInterests = objectInput.readUTF();
 	}
 
 	@Override
@@ -169,6 +264,70 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 		}
 
 		objectOutput.writeLong(DOB);
+		objectOutput.writeBoolean(isMale);
+
+		if (streetName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(streetName);
+		}
+
+		if (aptNo == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(aptNo);
+		}
+
+		if (areaCode == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(areaCode);
+		}
+
+		if (city == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(city);
+		}
+
+		if (state == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(state);
+		}
+
+		if (country == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(country);
+		}
+
+		if (mobileNumber == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(mobileNumber);
+		}
+
+		if (portraitURL == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(portraitURL);
+		}
+
+		if (userInterests == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(userInterests);
+		}
 	}
 
 	public long userId;
@@ -179,4 +338,14 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 	public String screenName;
 	public String email;
 	public long DOB;
+	public Boolean isMale;
+	public String streetName;
+	public String aptNo;
+	public String areaCode;
+	public String city;
+	public String state;
+	public String country;
+	public String mobileNumber;
+	public String portraitURL;
+	public String userInterests;
 }

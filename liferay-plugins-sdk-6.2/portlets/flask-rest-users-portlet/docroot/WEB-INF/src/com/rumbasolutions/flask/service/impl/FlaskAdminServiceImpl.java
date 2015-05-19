@@ -15,6 +15,8 @@
 package com.rumbasolutions.flask.service.impl;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -23,8 +25,13 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.Address;
+import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.AddressLocalServiceUtil;
+import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -62,10 +69,10 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	private static Log LOGGER = LogFactoryUtil.getLog(FlaskAdminServiceImpl.class);
 			
 	@Override
-	public List<FlaskAdmin> getFlaskAdmins(){
+	public List<FlaskAdmin> getFlaskAdmins(ServiceContext  serviceContext){
 		List<FlaskAdmin> adminList=null;
 		try{
-			adminList = getFlaskAdmins(ModelUtil.FLASK_ADMIN);
+			adminList = getFlaskAdmins(FlaskModelUtil.FLASK_ADMIN, serviceContext);
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
@@ -79,10 +86,10 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	 */
 	
 	@Override
-	public List<FlaskAdmin> getFlaskContentManagers(){
+	public List<FlaskAdmin> getFlaskContentManagers(ServiceContext serviceContext){
 		List<FlaskAdmin> adminList=null;
 		try{
-			adminList = getFlaskAdmins(ModelUtil.FLASK_CONTENT_ADMIN);
+			adminList = getFlaskAdmins(FlaskModelUtil.FLASK_CONTENT_ADMIN, serviceContext);
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
@@ -94,7 +101,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	 * @throws PortalException
 	 * @throws SystemException
 	 */
-	private List<FlaskAdmin> getFlaskAdmins(String adminType)
+	private List<FlaskAdmin> getFlaskAdmins(String adminType,ServiceContext serviceContext)
 			throws PortalException, SystemException {
 		
 		List<FlaskAdmin> adminList= new ArrayList<FlaskAdmin>();
@@ -102,7 +109,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		int adminUsersCnt = UserLocalServiceUtil.getRoleUsersCount(role.getRoleId());
 		List<User> users= UserLocalServiceUtil.getRoleUsers(role.getRoleId(), 0, adminUsersCnt);
 		for(User user : users){
-			adminList.add(ModelUtil.getFlaskAdmin(user));
+			adminList.add(FlaskModelUtil.getFlaskAdmin(user, serviceContext));
 		}
 		return adminList;
 	}
@@ -114,15 +121,27 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	 */
 	
 	@Override
-	public  FlaskAdmin addFlaskAdmin(String firstName, String middleName, String lastName, 
-			String email, String screenName,String password1, String password2,  
-			ServiceContext serviceContext) throws SystemException, PortalException
+
+	public	FlaskAdmin addFlaskAdmin(String firstName, String middleName, String lastName, 
+					String email, String screenName,String password1, String password2,  
+					Date DOB, boolean isMale,
+					String streetName, String aptNo,
+					String areaCode, String city,
+					String state, String country,
+					String mobileNo, String userInterests, 
+					ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		FlaskAdmin adminUser=null;
-		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), ModelUtil.FlaskRoleEnum.FLASK_ADMIN.getRoleName());
-		User user = addUser(role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, screenName, email, password1,  password2 );
+		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_ADMIN.getRoleName());
+		User user = addUser(role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, 
+				screenName, email, password1,  password2,
+				DOB, isMale,
+				streetName, aptNo,
+				areaCode, city,
+				state, country,
+				mobileNo, userInterests, serviceContext);
 		if(user != null)
-			adminUser = ModelUtil.getFlaskAdmin(user);
+			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
 		return adminUser;
 	}
 	
@@ -133,10 +152,10 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		FlaskAdmin adminUser=null;
-		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), ModelUtil.FlaskRoleEnum.FLASK_ADMIN.getRoleName());
+		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_ADMIN.getRoleName());
 		User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, screenName, email, password1,  password2 );
 		if(user != null)
-			adminUser = ModelUtil.getFlaskAdmin(user);
+			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
 		return adminUser;
 	}
 	
@@ -150,13 +169,26 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	@Override
 	public  FlaskAdmin addFlaskContentManager(String firstName, String middleName, String lastName, 
 			String email, String screenName,String password1, String password2,  
+			Date DOB, boolean isMale,
+			String streetName, String aptNo,
+			String areaCode, String city,
+			String state, String country,
+			String mobileNo, String userInterests, 
 			ServiceContext serviceContext) throws SystemException, PortalException
 	{
+		
+			
 		FlaskAdmin adminUser=null;
-		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), ModelUtil.FlaskRoleEnum.FLASK_CONTENT_ADMIN.getRoleName());
-		User user = addUser(role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, screenName, email, password1,  password2 );
+		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_CONTENT_ADMIN.getRoleName());
+		User user = addUser(role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, 
+				screenName, email, password1,  password2,
+				DOB, isMale,
+				streetName, aptNo,
+				areaCode, city,
+				state, country,
+				mobileNo, userInterests, serviceContext);
 		if(user != null)
-			adminUser = ModelUtil.getFlaskAdmin(user);
+			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
 		return adminUser;
 	}
 	
@@ -169,10 +201,10 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		FlaskAdmin adminUser=null;
-		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), ModelUtil.FlaskRoleEnum.FLASK_CONTENT_ADMIN.getRoleName());
+		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_CONTENT_ADMIN.getRoleName());
 		User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, screenName, email, password1,  password2 );
 		if(user != null)
-			adminUser = ModelUtil.getFlaskAdmin(user);
+			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
 		return adminUser;
 	}
 	
@@ -189,7 +221,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		User user = UserLocalServiceUtil.getUser(userId);
 		List<Role> roles = user.getRoles();
 		for(Role role :roles){
-			if(role.getName().contentEquals(ModelUtil.LIFERAY_ADMIN)){
+			if(role.getName().contentEquals(FlaskModelUtil.LIFERAY_ADMIN)){
 				throw new ReservedUserIdException("Administrators cannot be deleted");
 			}
 		}
@@ -200,9 +232,17 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	
 	
 	private User addUser(long roldId, long loggedInUser, String firstName, String middleName, 
-			String lastName, String screenName, String email, String password1, String password2 ) throws PortalException, SystemException
-	{
-		User user=null;
+			String lastName, String screenName, String email,
+			String password1, String password2,
+			Date DOB, boolean isMale,
+			String streetName, String aptNo,
+			String areaCode, String city,
+			String state, String country,
+			String mobileNo, String userInterests, ServiceContext serviceContext) throws PortalException, SystemException {
+		
+			User user=null;
+			Calendar cal = Calendar.getInstance();
+			cal.setTime(DOB);
 	
 			 long[] emptyLong = {};
 			 long[] roleIds ={roldId};
@@ -223,10 +263,10 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				 		lastName /*String lastName*/,
 				 		0/*int prefixId*/,
 				 		0 /*int suffixId*/,
-				 		true /*boolean male*/,
-				 		1 /*int birthdayMonth*/,
-				 		1 /*int birthdayDay*/,
-				 		1970 /*int birthdayYear*/,
+				 		isMale /*boolean male*/,
+				 		cal.get(Calendar.MONTH) /*int birthdayMonth*/,
+				 		cal.get(Calendar.DAY_OF_MONTH) /*int birthdayDay*/,
+				 		cal.get(Calendar.YEAR) /*int birthdayYear*/,
 				 		null /*String jobTitle*/,
 				 		emptyLong, /*groupIds*/
 				 		emptyLong, /*long[] organizationIds*/
@@ -234,8 +274,38 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				 		emptyLong, /*long[] userGroupId*/
 				 		true, /*boolean sendEmail*/
 				 		null);
-	
-			return user;
+			 
+			 int addressTypeId = FlaskModelUtil.getPersonalAddressId();
+			 long countryId = FlaskModelUtil.getCountryId(country);
+			 int mobileTypeId = FlaskModelUtil.getMobilePhoneTypeId();
+			 
+			 Address address = AddressLocalServiceUtil.addAddress( user.getUserId()/*long userId*/,
+                     Contact.class.getName()/*String className*/,
+                     0/*long classPK*/,
+                     aptNo/*String street1*/,
+                     streetName /*String street2*/,
+                     "" /*String street1*/,
+                     city /*String City*/,
+                     areaCode /*String zipCode*/,
+                     0 /*String street1*/,
+                     countryId/*long countryId*/,
+                     addressTypeId,
+                     false	/*boolean mailing*/,
+                     true	/*boolean primary*/,
+                     serviceContext);
+			 
+			 if(!mobileNo.isEmpty()){
+				 
+				 Phone phone = PhoneLocalServiceUtil.addPhone( user.getUserId()/*long userId*/,
+						 Contact.class.getName()/*String className*/,
+	                     0/*long classPK*/,
+	                     mobileNo,
+	                     ""/*String extension*/,
+	                     mobileTypeId/*int typeId*/,
+	                     true,
+	                     serviceContext);
+			 }
+			 return user;
 	}
 	
 	private User updateUser(long userId, long roleId, long loggedInUser, String firstName, String middleName, 
@@ -244,7 +314,6 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			 User user=null;
 			 long[] roleIds ={roleId};
 			 user = UserLocalServiceUtil.getUser(userId);
-			 
 			 user.setFirstName(firstName);
 			 user.setMiddleName(middleName);
 			 user.setLastName(lastName);
@@ -258,5 +327,6 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			 
 			 return user;
 	}
+
 	
 }
