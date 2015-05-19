@@ -16,20 +16,12 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
-
-<script src="<%=request.getContextPath()%>/js/alertifyjs/alertify.min.js"></script>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/js/alertifyjs/css/alertify.min.css" />
-<link rel="stylesheet" href="<%=request.getContextPath()%>/js/alertifyjs/css/themes/default.min.css" />
+<script type="text/javascript" src="<%=request.getContextPath()%>/js/Flask-lib.js"></script>
 
 <!-- JQX Plugin Includes [start]-->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/simulator.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/generatedata.js"></script>
 <!-- JQX Plugin Includes [End]-->
-<script type="text/javascript">
-        $(document).ready(function () {
-            // prepares the simulator. 
-        });
-</script>
 
 <portlet:defineObjects />
 <body>
@@ -87,7 +79,7 @@
     </div>
   </div>  
 
-  <input class="btn btn-info" type="submit" value="Save">
+  <input class="btn btn-info" type="button" value="Save">
   <input class="btn btn-primary" type="reset" value="Cancel">
 </form>
 
@@ -104,5 +96,10 @@
        </div>
         
     </div>
+</div>
+
+<div id="spinningSquaresG" style="display: none;">
+	<div class="ball"></div>
+	<div class="ball1"></div>
 </div>
 </body>
