@@ -1,4 +1,11 @@
 /* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+@import url('http://fonts.googleapis.com/css?family=Coda');
+
+.aui body
+{
+	background-color:#F5F5F5;
+	 font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+}
 
 .flask-nav-item{
 	color: red;
@@ -66,3 +73,145 @@
 	color:  #ff9900;
 	text-decoration: none;
 }
+
+
+/* Slide Out */
+	.slideout-menu {
+		position: fixed;
+		top: 0;
+		left: -250px;
+		width: 250px;
+		height: 100%;
+		background: #231F20;
+		z-index: 1000;
+	}
+	.slideout-menu h3 {
+		position: relative;
+		padding: 12px 10px;
+		color: #fff;
+		font-size: 1.2em;
+		font-weight: 400;
+	}
+	.slideout-menu .slideout-menu-toggle {
+		position: absolute;
+		top: 12px;
+		right: 10px;
+		display: inline-block;
+		padding: 6px 9px 5px;
+		font-family: Arial, sans-serif;
+		font-weight: bold;
+		line-height: 1;
+		background: #231F20;
+		color: #999;
+		text-decoration: none;
+		vertical-align: top;
+	}
+	.slideout-menu .slideout-menu-toggle:hover {
+		color: #fff;
+	}
+
+	
+	.header {
+		padding: 15px;
+		background: #000;
+	}
+	.header .slideout-menu-toggle {
+		font-size: 1.2em;
+		color: #999;
+		text-decoration: none;
+	}
+	.header .slideout-menu-toggle:hover {
+		color: #fff;
+	}
+	.header .slideout-menu-toggle i {
+		vertical-align: top;
+		margin: 5px 3px 0 0;
+	}
+
+
+
+
+/* Buttons CSS */ 
+.aui .btn
+{
+	 
+	padding: 5px 25px;
+	color: #00AFF0;
+	background: #FFFFFF;
+	font-size:20px;
+}
+
+.aui .btn-info
+{
+	
+	background: #00AFF0;
+	font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+	color: #fff;
+	font-size:20px;
+	cursor:pointer;
+    -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	  margin-top: 10px;
+	  text-shadow:none;
+	  margin-right:40px;
+	
+}
+.aui .btn-info:hover{
+    color: #fff;
+	background: #00c3f0;
+    
+     -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.aui .btn-primary
+{
+	padding: 5px 20px;
+	font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+	background: #00AFF0;
+	color: #fff;
+	font-size:20px;
+	margin-top: 10px;
+	text-shadow:none;
+}
+.aui .btn-primary:hover{
+	
+     color: #fff;
+	background: #00c3f0;
+     -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	text-shadow:none;
+}
+
+
+.aui input[type="text"]
+{
+	border-radius: 5px;
+	font-size: 14px;
+	height: 40px;
+	width:500px;
+	margin-bottom: 10px;
+}
+
+.aui input[type="password"]
+{
+	border-radius: 5px;
+	font-size: 14px;
+	height: 40px;
+	width:500px;
+}
+
+.aui label
+{
+	font-size: 14px;
+}
+
+.required {
+  font-size: 12px;
+  color: chocolate;
+}
+
+
