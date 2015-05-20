@@ -49,26 +49,7 @@
 </head>
 
 <body class="$css_class">
- <div class="slideout-menu">
-	<h3>Menu <a href="#" class="slideout-menu-toggle">&times;</a></h3>
-	<ul>
-            <li class="menuitem highlight">TODAY'S EVENT(S)</li>
-            <li class="menuitem"><span>PRE-GAME</span><br/> LOCAL NEWS</li>
-            <li class="menuitem">PARKING & EVENT MAP</li>
-            <li class="menuitem"><span>AT-THE-GAME</span><br/>EVENT NEWS</li>
-            <li class="menuitem">VENUE MAP</li>
-            <li class="menuitem">FLASK PROMOTIONS</li>
-            <li class="menuitem"><span>POST-GAME</span><br/>ENTERTAINMENT OPTIONS</li>
-            <li class="menuitem">FLASK PROMOTIONS</li>
-            <li class="menuitem highlight">PROFILE</li>
-            <li class="menuitem">MY EVENTS</li>
-            <li class="menuitem">MY TAILGATE</li>
-            <li class="menuitem">MY GROUPS</li>
-            <li class="menuitem">MY FRIENDS</li>
-            <li class="menuitem">NOTIFICATIONS</li>
-            <li class="menuitem highlight">EVENT AND CITY SEARCH</li>
-        </ul>
-</div>
+ 
 
 
 <div class="header">
@@ -82,11 +63,11 @@
 
 $theme.include($body_top_include)
 
-
+<!--
  #if ($is_signed_in)
 	 #dockbar()
  #end
-
+-->
 
 <div class="container-fluid" id="wrapper">
 	<header id="banner" role="banner">
@@ -144,6 +125,14 @@ if($("#navigation").hasClass("open"))
 });
 
 </script>
+
+
+
+<div id="spinningSquaresG">
+ <div class="ball"></div>
+ <div class="ball1"></div>
+</div>
+
 
 </body>
 
