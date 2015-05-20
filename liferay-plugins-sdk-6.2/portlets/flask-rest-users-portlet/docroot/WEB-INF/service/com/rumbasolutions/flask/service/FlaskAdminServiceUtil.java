@@ -147,6 +147,22 @@ public class FlaskAdminServiceUtil {
 		getService().deleteFlaskAdmins(userId, serviceContext);
 	}
 
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	public static long getUserIdForScreenName(java.lang.String screenName,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getUserIdForScreenName(screenName, serviceContext);
+	}
+
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	public static long getUserIdForEmail(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getUserIdForEmail(emailAddress, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

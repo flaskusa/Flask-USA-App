@@ -230,6 +230,50 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	}
 	
 	
+	/**
+	 *  Returns valid user id if user found else 0. -1 when there is unknown system exception
+	 */
+	@Override
+	public  long getUserIdForScreenName(String screenName, ServiceContext serviceContext) 
+	{
+		
+		long userId = 0;
+		User  user=null;;
+		try{
+			user = UserLocalServiceUtil.getUserByScreenName(PortalUtil.getDefaultCompanyId(), screenName);
+			userId = user.getUserId();
+		}catch(PortalException  ex){
+			//no user with screen name.. hence unique
+			
+		}catch(SystemException ex){
+			LOGGER.error("Exception in getUserIdForEmail " + ex.getMessage());
+			userId = -1;
+		}
+		return userId;
+	}
+	
+	/**
+	 *  Returns valid user id if user found else 0. -1 when there is unknown system exception
+	 */
+	@Override
+	public  long getUserIdForEmail(String  emailAddress, ServiceContext serviceContext)
+	{
+		long userId = 0;
+		User  user;
+		try{
+			user = UserLocalServiceUtil.getUserByEmailAddress(PortalUtil.getDefaultCompanyId(), emailAddress);
+			userId = user.getUserId();
+		}catch(PortalException  ex){
+			return 0;
+		}catch(SystemException ex){
+			LOGGER.error("Exception in getUserIdForEmail " + ex.getMessage());
+			userId = -1;
+		}
+		return userId;
+	}
+	
+	
+	
 	
 	
 	private User addUser(long roldId, long loggedInUser, String firstName, String middleName, 

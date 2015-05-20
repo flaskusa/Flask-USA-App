@@ -124,4 +124,18 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getUserIdForScreenName(java.lang.String screenName,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getUserIdForEmail(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

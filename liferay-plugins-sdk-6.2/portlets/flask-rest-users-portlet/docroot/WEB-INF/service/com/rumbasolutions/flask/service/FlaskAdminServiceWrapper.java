@@ -146,6 +146,25 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 	}
 
 	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	@Override
+	public long getUserIdForScreenName(java.lang.String screenName,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskAdminService.getUserIdForScreenName(screenName,
+			serviceContext);
+	}
+
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	@Override
+	public long getUserIdForEmail(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskAdminService.getUserIdForEmail(emailAddress, serviceContext);
+	}
+
+	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
 	public FlaskAdminService getWrappedFlaskAdminService() {

@@ -204,5 +204,43 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	public static long getUserIdForScreenName(java.lang.String screenName,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			long returnValue = FlaskAdminServiceUtil.getUserIdForScreenName(screenName,
+					serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	public static long getUserIdForEmail(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			long returnValue = FlaskAdminServiceUtil.getUserIdForEmail(emailAddress,
+					serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskAdminServiceSoap.class);
 }
