@@ -18,7 +18,6 @@ import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.rumbasolutions.flask.model.FlaskAdmin;
 import com.rumbasolutions.flask.model.FlaskRole;
 import com.rumbasolutions.flask.model.impl.FlaskAdminImpl;
@@ -32,7 +31,10 @@ public class FlaskModelUtil {
 	public static final String FLASK_USER=  "User";
 	public static final String USA_COUNTRY_NAME= "United States";
 	public static final String MOBILE_PHONE_TYPE= "mobile";
-	private static final String PERSONAL_ADDR_TYPE = "personal";
+	public static final String PERSONAL_ADDR_TYPE = "personal";
+	public static final String EXPANDO_COL_USER_INTERESTS = "userinterests";
+	
+	
 	private static Log LOGGER = LogFactoryUtil.getLog(FlaskModelUtil.class);
 	
 	public enum FlaskRoleEnum{
@@ -76,11 +78,13 @@ public class FlaskModelUtil {
 				admin.setCountry(addr.getCountry().getName());
 				admin.setAreaCode(addr.getZip());			
 			}
-			ThemeDisplay theme = serviceContext.getThemeDisplay();
-			if(theme !=null){
-				String porttraitURL = theme.getPortalURL() == null ? "" : theme.getPortalURL();
-				admin.setPortraitURL(porttraitURL);
+
+			admin.setPortraitURL(String.valueOf(user.getPortraitId()));
+			if(user.getExpandoBridge().hasAttribute(EXPANDO_COL_USER_INTERESTS)){
+				admin.setUserInterests(user.getExpandoBridge().getAttribute(EXPANDO_COL_USER_INTERESTS).toString());
 			}
+			
+			
 			admin.setIsMale(user.isMale());
 		} catch (Exception e) {
 			LOGGER.error("Exception in getFlaskAdmin " + e.getMessage());
@@ -93,7 +97,6 @@ public class FlaskModelUtil {
 		try {
 			 List<Phone> phoneList = PhoneLocalServiceUtil.getPhones(user.getCompanyId(), Contact.class.getName(),
 				     user.getContact().getClassPK());
-			 
 			if(phoneList.size() > 0){
 				phoneNo = phoneList.get(0).getNumber();
 			}

@@ -36,6 +36,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.rumbasolutions.flask.model.FlaskAdmin;
 import com.rumbasolutions.flask.service.base.FlaskAdminServiceBaseImpl;
 
@@ -275,7 +276,11 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				 		true, /*boolean sendEmail*/
 				 		null);
 			 
-			 
+			 if (!user.getExpandoBridge().hasAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS)){
+				 
+				 user.getExpandoBridge().addAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, ExpandoColumnConstants.STRING);
+			 }
+			 user.getExpandoBridge().setAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, userInterests, false);
 			 addAddress(streetName, aptNo, areaCode, city, country,
 					serviceContext, user);
 			 
