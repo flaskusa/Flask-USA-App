@@ -1,21 +1,18 @@
-var GlobalJSON_Admin;
+var GlobalJSON_Admin = [];
 
 function fnLoadAdminUserList() {
-	$("spinningSquaresG").show();
 	var params = "";
 	var request = new Request();
 	request.sendGETRequest(SERVICE_ENDPOINTS.GET_FLASK_ADMIN_ENDPOINT, params,
 			function(data) {
 				if (data.responseStatus == 1) {
 					GlobalJSON_Admin = data.responseJson;
-					$("#grid").show();
 					fnRenderGrid(GlobalJSON_Admin);
 					$("#adminForm").hide();
 				} else {
 					alert("MESSAGES.ERRORR_REGISTER_USER");
 				}
 			});
-	$("spinningSquaresG").hide();
 }
 
 function fnDelete(AdminId) {
@@ -24,65 +21,54 @@ function fnDelete(AdminId) {
 				userId : AdminId
 			}, function(obj) {
 				closeEvent.cancel = true
-				alertify.success('Admin user deleted!');
 			});
 }
 
-function fnSave(AdminId) {
-	$("spinningSquaresG").show();
-	var uri;
-	if (AdminId > 0)
-		uri = SERVICE_ENDPOINTS.UPDATE_FLASK_ADMIN_ENDPOINT;
-	else
-		uri = SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT;
-
-	var params = [ {
+function fnSave(){
+	var params =  {
 		firstName : $("#firstName").val(),
 		middleName : $("#middleName").val(),
 		lastName : $("#lastName").val(),
-		email : $("#email").val(),
+		isMale: true,
 		screenName : $("#screenName").val(),
-		password1 : $("#password1").val(),
-		password2 : $("#password2").val()
-	} ];
-	var request = new Request();
-	request.sendPOSTRequest(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT, params,
-			function(data) {
-				if (!data.responseJson.exception) {
-					GlobalJSON_Admin = data.responseJson;
-					fnRenderGrid(GlobalJSON_Admin);
-					$("#adminForm").hide();
-				} else {
-					console.log(data.responseJson.exception + " - "
-							+ data.responseJson.message);
-					alert("Service failed [Lookout console for more details]");
-				}
-			});
-	$("spinningSquaresG").hide();
-	/*
-	 * Liferay.Service(uri, { firstName: $("#firstName").val(), middleName:
-	 * $("#middleName").val(), lastName: $("#lastName").val(), email:
-	 * $("#email").val(), screenName: $("#screenName").val(), password1:
-	 * $("#password1").val(), password2: $("#password2").val() }, function(obj) {
-	 * console.log(obj); $("#grid").show(); LoadAdminUserList();
-	 * $("#adminForm").hide(); return false; });
-	 */
+		email : $("#email").val(),
+		DOB:  '05-10-2015',
+		streetName: $("#streetName").val(),
+		aptNo: $("#aptNo").val(),
+		areaCode: $("#areaCode").val(),
+		city: $("#city").val(),
+		state: $("#state").val(),
+		country: $("#country").val(),
+		password1 : $("#password").val(),
+		password2 : $("#passwordConfirmation").val(),
+		mobileNo: $("#mobileNo").val(),
+		userInterests: "{sports: true}"		
+	};
+	alert("Show Spin");
+	$("#spinningSquaresG").show();	
+	console.log('insave');
+	console.log(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT);
+	Liferay.Service(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT,params,
+	 function(obj) {
+	   console.log(obj);
+	 });
+	console.log('end insave');
+	$.wait( function(){ fnLoadAdminUserList(); $("#spinningSquaresG").hide();}, 3);	
+	
+	alert("Hide Spin");
 }
 
-function fnShowForm(AdminId) {
+function fnShowForm(rowIndex) {
 	var objTemp;
 	console.log(GlobalJSON_Admin);
-	for (var i = 0; i < GlobalJSON_Admin.length; i++) {
-		if (GlobalJSON_Admin[i].userId == AdminId) {
-			$("#firstName").val(GlobalJSON_Admin[i].firstName);
-			$("#middleName").val(GlobalJSON_Admin[i].middleName);
-			$("#lastName").val(GlobalJSON_Admin[i].lastName);
-			$("#email").val(GlobalJSON_Admin[i].email);
-			$("#screenName").val(GlobalJSON_Admin[i].screenName);
-			$("#password1").val(GlobalJSON_Admin[i].password1);
-			$("#password2").val(GlobalJSON_Admin[i].password2);
-		}
-	}
+	$("#firstName").val(GlobalJSON_Admin[rowIndex].firstName);
+	$("#middleName").val(GlobalJSON_Admin[rowIndex].middleName);
+	$("#lastName").val(GlobalJSON_Admin[rowIndex].lastName);
+	$("#email").val(GlobalJSON_Admin[rowIndex].email);
+	$("#screenName").val(GlobalJSON_Admin[rowIndex].screenName);
+	$("#password").val(GlobalJSON_Admin[rowIndex].password1);
+	$("#passwordConfirmation").val(GlobalJSON_Admin[rowIndex].password2);
+	
 	$("#grid").hide();
 	$("#adminForm").show();
 }
@@ -158,8 +144,7 @@ function fnRenderGrid(tdata) {
 		var args = event.args;
 		var rowindex = $("#grid").jqxGrid('getselectedrowindex');
 		if ($.trim($(args).text()) == "Edit") {
-			editrow = rowindex;
-			fnShowForm(20897);
+			fnShowForm(rowindex);
 			return false;
 		} else {
 			var rowid = $("#grid").jqxGrid('getrowid', rowindex);
@@ -170,19 +155,15 @@ function fnRenderGrid(tdata) {
 }
 
 $(document).ready(function() {
-
+	$("#spinningSquaresG").show();
 	fnLoadAdminUserList();
 	$(".btn").click(function() {
-		$("spinningSquaresG").show();
 		var btnType = $(this).val();
 		switch (btnType) {
 		case 'Add':
 			$(this).hide();
 			$("#grid").hide();
 			$("#adminForm").show();
-			break;
-		case 'Save':
-			return fnSave(0);
 			break;
 		case 'Cancel':
 			// alert('Cancel Wins!');
@@ -191,56 +172,49 @@ $(document).ready(function() {
 			// alert('test');
 		}
 	});
-	$("spinningSquaresG").hide();
+	$("#spinningSquaresG").hide();
 });
 
-YUI().use('aui-tree-view',function(Y) {
-	var children = [{//We can have more child under this node
-                  children: [{label: 'Professional' , leaf: true, type: 'task'},
-                             {label: 'College' , leaf: true, type: 'task'},
-                             {label: 'We can have more child under this node' , leaf: true, type: 'task'}],
-                             expanded: true,
-                             label: 'Sports',
-                             type: 'task'
-                	},{
-                  children: [{label: 'COUNTRY' , leaf: true, type: 'task'},
-                             {label: 'POP' , leaf: true, type: 'task'},
-                             {label: 'ROCK' , leaf: true, type: 'task'},
-                             {label: 'RAP' , leaf: true, type: 'task'},
-                             {label: 'ALTERNATIVE' , leaf: true, type: 'task'},
-                             {label: 'ELECTRONIC' , leaf: true, type: 'task'}],
-                             expanded: true,
-                             label: 'Concerts',
-                             type: 'task'},{
-                     children: [{label: 'Comedy' , leaf: true, type: 'task'}],
-                                expanded: true,
-                                label: 'Special Eevnts',
-                                type: 'task'
-                             }
-                 ];
-			
-              // Create a TreeView Component
-              new Y.TreeView(
-                {
-                  boundingBox: '#myTreeView',
-                  children: children
-                }
-              ).render();
+YUI().use("aui-form-validator","aui-dropdown","aui-datepicker","aui-tree-view",function(Y) {
+	  var rules = { firstName: { firstName:true, required: true }, screenName: { screenName:true,
+	  required: true }, lastName: { lastName:true, required: true }, password1: {password1: true, required: true }, email: {email: true, required: true},
+	  password2: { password2: true, equalTo: '#password1', required: true }, gender:{ gender:true, required: true }, mobileNo: {mobileNo: true, required: true, digits: true},
+	  areaCode: { areaCode: true,required: true} };
+	  
+	  
+	  var fieldStrings = { firstName: { required: 'Please provide your name.' }, lastName: {
+	  required: 'Please enter your last name.' }, screenName:{ required: 'Please enter  your screen name.' }, 
+	  gender:{ required: 'Please Select your gender.' },
+	  email: { required: 'Type your Email in this field.' },
+	  password1: { required: 'Type your password in this field.' },
+	  password2: { required: 'Please re-enter your password.' },
+	  areaCode: {required: 'Please enter your Zipcode'},
+	  mobileNo: {required: 'Please enter your Mobile Number'}};
+	  
+	 new Y.FormValidator({boundingBox: '#adminForm', fieldStrings: fieldStrings,
+	 rules: rules, showAllMessages: true});
 });
-/*
- * YUI().use("aui-form-validator","aui-dropdown","aui-datepicker",function(Y) {
- * var rules = { name: { name:true, required: true }, scname: { scname:true,
- * required: true }, lname: { lname:true, required: true }, password: {
- * password: true, required: true }, passwordConfirmation: {
- * passwordConfirmation: true, equalTo: '#password', required: true } };
- * 
- * 
- * var fieldStrings = { name: { required: 'Please provide your name.' }, lname: {
- * required: 'Please enter your last name.' }, scname:{ required: 'Please enter
- * your screen name.' }, email: { required: 'Type your Email in this field.' },
- * password: { required: 'Type your password in this field.' },
- * passwordConfirmation: { required: 'Please re-enter your password.' } };
- * 
- * new Y.FormValidator({boundingBox: '#adminForm', fieldStrings: fieldStrings,
- * rules: rules, showAllMessages: true}); });
- */
+
+$.wait = function( callback, seconds){
+	console.log("start>>"+callback);
+	return window.setTimeout( callback, seconds * 1000 );
+	console.log("finish>>"+callback)
+}
+
+$(document).ready(function () {
+     $(document).ready(function () {
+         // Create jqxTree
+         $('#userInterests').jqxTree({theme:"base",hasThreeStates:true, checkboxes:true, height: '300px', width: '100%' });
+         $("#userInterests").on('change',function(event){
+        	 var Items = $("#userInterests").jqxTree('getItems');
+        	 var ItemArray = new Array();
+        	 $.each(Items, function () {
+                 if (this.checked) {
+                	 var tempid = "#"+this.id;
+                	 ItemArray.push($(tempid).attr("data-id"));
+                 };
+             });
+        	 console.log(ItemArray);
+         });
+     });     
+});

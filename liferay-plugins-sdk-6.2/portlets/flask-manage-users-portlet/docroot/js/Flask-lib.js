@@ -1,11 +1,8 @@
-var username ="test@liferay.com";
-var password ="test"; 
-
 var SERVICE_ENDPOINTS = {
 	GET_FLASK_ADMIN_ENDPOINT 	: "/api/jsonws/flask-rest-users-portlet.flaskadmin/get-flask-admins",
-	ADD_FLASK_ADMIN_ENDPOINT 	: "/api/jsonws/flask-rest-users-portlet.flaskadmin/add-flask-admin",
-	UPDATE_FLASK_ADMIN_ENDPOINT	: "http://localhost:8080/api/jsonws/flask-rest-users-portlet.flaskadmin/update-flask-admin",
-	DELETE_FLASK_ADMIN_ENDPOINT	: "/api/jsonws/flask-rest-users-portlet.flaskadmin/delete-flask-admin",
+	ADD_FLASK_ADMIN_ENDPOINT 	: "/flask-rest-users-portlet.flaskadmin/add-flask-admin",
+	UPDATE_FLASK_ADMIN_ENDPOINT	: "/flask-rest-users-portlet.flaskadmin/update-flask-admin",
+	DELETE_FLASK_ADMIN_ENDPOINT	: "/flask-rest-users-portlet.flaskadmin/delete-flask-admin",
 	TERMS_AND_CONDITION         : "http://www.rumbasolutions.com", 
 	SERVICE_TIMEOUT 			: 30000	
 };
@@ -111,9 +108,6 @@ Request.prototype.sendPOSTRequest = function(url, params, responseHandler){
         dataType: "text",
         contentType: "application/json",
         timeout:SERVICE_ENDPOINTS.SERVICE_TIMEOUT,
-        beforeSend:function(xhr){
-        	xhr.setRequestHeader('Authorization',make_base_auth(username, password));
-        },
         success: function(data){
 			resObj.setResponseStatus(STATUS_CODE.SUCCESS);
 			resObj.setResponseJson(data);
@@ -136,13 +130,6 @@ function responseHandler(msg){
 	console.log(msg);
 	return false;
 }
-
-function make_base_auth(user, password) {
-  var tok = user + ':' + password;
-  var hash = btoa(tok);
-  return "Basic " + hash;
-}
-
 // ************************************ APIS FOR FLASK
 // **************************************
 

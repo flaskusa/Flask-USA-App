@@ -61,6 +61,55 @@
 	</div>
   
   <div class="form-group">
+	<label class="control-label" for="dob">Date of Birth:</label>
+	<div class="controls">
+		<input type="text" size="50" id="dob" type="date"/>
+	</div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label" for="streetName">Street:</label>
+    <div class="controls">
+      <input name="streetName" id="streetName" class="form-control" type="text">
+    </div>
+  </div>
+  
+  <div class="form-group">
+    <label class="control-label" for="aptNo">Apartment#:</label>
+    <div class="controls">
+      <input name="aptNo" id="aptNo" class="form-control" type="text">
+    </div>
+  </div>  
+  
+   <div class="form-group">
+    <label class="control-label" for="areaCode">Area Code:</label>
+    <div class="controls">
+      <input name="areaCode" id="areaCode" class="form-control" type="text">
+    </div>
+  </div>
+  
+   <div class="form-group">
+    <label class="control-label" for="city">City:</label>
+    <div class="controls">
+      <input name="city" id="city" class="form-control" type="text">
+    </div>
+  </div>  
+  
+   <div class="form-group">
+    <label class="control-label" for="state">State:</label>
+    <div class="controls">
+      <input name="state" id="state" class="form-control" type="text">
+    </div>
+  </div>  
+    
+  <div class="form-group">
+    <label class="control-label" for="country">Country:</label>
+    <div class="controls">
+      <input name="country" id="country" class="form-control" type="text">
+    </div>
+  </div>
+
+  <div class="form-group">
     <label class="control-label" for="screenName">Screen Name:</label>
     <div class="controls">
       <input name="screenName" id="screenName" class="form-control" type="text">
@@ -71,39 +120,6 @@
     <label class="control-label" for="email">E-mail:</label>
     <div class="controls">
       <input name="email" id="email" class="form-control" type="text">
-    </div>
-  </div>
-
-  <div class="form-group">
-	<label class="control-label" for="dob">Date of Birth:</label>
-	<div id="dob" class="aui-datepicker aui-helper-clearfix">
-		<input type="text" size="50" id="birth" />
-	</div>
-  </div>
-  
-  <div class="form-group">
-    <label class="control-label" for="address">Address:</label>
-    <div class="controls">
-       <textarea class="form-control" type="text" placeholder="mm/dd/yy">Address here</textarea>
-    </div>
-  </div>
-    <div class="form-group">
-    <label class="control-label" for="zipcode">Zip code:</label>
-    <div class="controls">
-      <input name="zipcode" id="zipcode" class="form-control" type="text">
-    </div>
-  </div>
-      <div class="form-group">
-    <label class="control-label" for="mobile">Mobile:</label>
-    <div class="controls">
-      <input name="mobile" id="mobile" class="form-control" type="text">
-    </div>
-  </div>
-
-  <div class="form-group">
-    <label class="control-label" for="pref">Preferences:</label>
-    <div class="controls">
-      <div id="myTreeView"></div>
     </div>
   </div>
 
@@ -120,8 +136,63 @@
       <input name="passwordConfirmation" id="passwordConfirmation" class="form-control" type="text">
     </div>
   </div>  
+  
+  <div class="form-group">
+    <label class="control-label" for="mobileNo">Mobile:</label>
+    <div class="controls">
+      <input name="mobileNo" id="mobileNo" class="form-control" type="text">
+    </div>
+  </div>  
 
-  <input class="btn btn-info" type="button" value="Save">
+  <div class="form-group">
+    <label class="control-label" for="pref">Preferences:</label>
+    <div class="form-group" style="padding:10px;">
+	  <div style="border: none;" id="userInterests">
+		<ul>
+	        <li item-expanded='true' data-id="SPORTS">Sports
+		         <ul>
+	                <li data-id="SPORTS-PRO">Professional
+	                	<ul>
+	                		<li data-id="SPORTS-PRO-BASKETBALL">BASKETBALL</li>
+	                		<li data-id="SPORTS-PRO-BASEBBALL">BASEBBALL</li>
+	                		<li data-id="SPORTS-PRO-FOOTBALL">FOOTBALL</li>
+	                		<li data-id="SPORTS-PRO-HOCKEY">HOCKEY</li>
+	                		<li data-id="SPORTS-PRO-SOCCER">SOCCER</li>
+	                		<li data-id="SPORTS-PRO-TENNIS">TENNIS</li>
+	                	</ul>
+	                </li>
+	                <li data-id="SPORTS-COL">College
+	                	<ul>
+	                		<li data-id="SPORTS-COL-BASKETBALL">BASKETBALL</li>
+	                		<li data-id="SPORTS-COL-BASEBBALL">BASEBBALL</li>
+	                		<li data-id="SPORTS-COL-FOOTBALL">FOOTBALL</li>
+	                		<li data-id="SPORTS-COL-HOCKEY">HOCKEY</li>
+	                		<li data-id="SPORTS-COL-SOCCER">SOCCER</li>
+	                		<li data-id="SPORTS-COL-TENNIS">TENNIS</li>
+	                	</ul>	                
+	                </li>
+	            </ul>
+			</li>
+	        <li item-expanded='true' data-id="CONCERTS">Concerts
+	            <ul>
+	                <li data-id="CONCERTS-COUNTRY">Country</li>
+	                <li data-id="CONCERTS-POP">POP</li>
+	                <li data-id="CONCERTS-ROCK">ROCK</li>
+	                <li data-id="CONCERTS-RAP">RAP</li>
+	                <li data-id="CONCERTS-ALTERNATIVE">Alternative</li>
+	                <li data-id="CONCERTS-ELECTRONIC">Electronic</li>
+	            </ul>
+	        </li>
+	        <li item-expanded='true' data-id="SPECIAL-EVENTS">
+	        	Special Events
+	        	<ul><li data-id="SPECIAL-EVENTS-COMEDY">Comedy</li></ul>
+	        </li>
+	    </ul>	  
+	  </div>      
+    </div>
+  </div>
+
+  <input class="btn btn-info" type="button" value="Save" onclick="fnSave()" />
   <input class="btn btn-primary" type="reset" value="Cancel">
 </form>
 
@@ -140,7 +211,7 @@
     </div>
 </div>
 
-<div id="spinningSquaresG" style="display: none;">
+<div id="spinningSquaresG">
 	<div class="ball"></div>
 	<div class="ball1"></div>
 </div>
