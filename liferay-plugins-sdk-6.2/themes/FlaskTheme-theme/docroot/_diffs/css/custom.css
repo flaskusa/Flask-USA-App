@@ -192,10 +192,21 @@
 
 .aui input[type="text"]
 {
+	
 	border-radius: 5px;
 	font-size: 14px;
-	height: 40px;
+	height: 30px;
 	width:500px;
+	padding-left:10px;
+	margin-bottom: 10px;
+}
+
+.aui input[type="date"]
+{
+	border-radius: 5px;
+	font-size: 14px;
+	height: 30px;
+	padding-left:10px;
 	margin-bottom: 10px;
 }
 
@@ -205,6 +216,7 @@
 	font-size: 14px;
 	height: 40px;
 	width:500px;
+	padding-left:10px;
 }
 
 .aui label
@@ -212,6 +224,69 @@
 	font-size: 14px;
 }
 
+.aui textarea
+{
+	border-radius: 5px;
+	font-size: 14px;
+	height: 30px;
+	width:500px;
+	padding-left:10px;
+	margin-bottom: 10px;
+}
+
+@media (max-width: 767px)
+{
+.aui input[type="date"]
+{
+	 height: 20px;
+}	
+	
+.aui textarea
+  {
+    height: 20px;
+    width: 98%;
+    padding:4px 0px;
+    padding-left: 10px; 
+  }
+	
+ .aui input[type="text"]
+ {
+    height: 20px;
+    width: 98%;
+    padding:4px 0px;  
+	padding-left: 10px;
+ }
+ .aui input[type="password"]
+{
+	height: 20px;
+    width: 98%;
+    padding:4px 0px;  
+	padding-left: 10px;
+}
+ .aui label 
+ {
+   margin-bottom: 4px;
+ }
+
+.aui body 
+{
+  padding-left: 0px;
+  padding-right: 0px;
+}
+
+.aui input[type="button"]
+{
+	padding: 4px 25px;
+	width:100%;
+}
+
+.aui input[type="reset"]
+{
+	padding: 4px 25px;
+	width:100%;
+}
+
+}
 .required {
   font-size: 12px;
   color: chocolate;
