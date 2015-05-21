@@ -61,9 +61,9 @@
 	</div>
   
   <div class="form-group">
-	<label class="control-label" for="dob">Date of Birth:</label>
+	<label class="control-label" for="DOB">Date of Birth:</label>
 	<div class="controls">
-		<input type="text" size="50" id="dob" type="date"/>
+		<input size="50" id="DOB" type="date"/>
 	</div>
   </div>
   
@@ -124,16 +124,16 @@
   </div>
 
   <div class="form-group">
-    <label class="control-label" for="password">Password:</label>
+    <label class="control-label" for="password1">Password:</label>
     <div class="controls">
-      <input name="password" id="password" class="form-control" type="text">
+      <input name="password1" id="password1" class="form-control" type="password">
     </div>
   </div>
   
   <div class="form-group">
-    <label class="control-label" for="passwordConfirmation">Confirm Password:</label>
+    <label class="control-label" for="password2">Confirm Password:</label>
     <div class="controls">
-      <input name="passwordConfirmation" id="passwordConfirmation" class="form-control" type="text">
+      <input name="password2" id="password2" class="form-control" type="password">
     </div>
   </div>  
   
@@ -149,56 +149,58 @@
     <div class="form-group" style="padding:10px;">
 	  <div style="border: none;" id="userInterests">
 		<ul>
-	        <li item-expanded='true' data-id="SPORTS">Sports
+	        <li item-expanded='true' id="sports">Sports
 		         <ul>
-	                <li data-id="SPORTS-PRO">Professional
+	                <li item-expanded='true' id="sports-pro">Professional
 	                	<ul>
-	                		<li data-id="SPORTS-PRO-BASKETBALL">BASKETBALL</li>
-	                		<li data-id="SPORTS-PRO-BASEBBALL">BASEBBALL</li>
-	                		<li data-id="SPORTS-PRO-FOOTBALL">FOOTBALL</li>
-	                		<li data-id="SPORTS-PRO-HOCKEY">HOCKEY</li>
-	                		<li data-id="SPORTS-PRO-SOCCER">SOCCER</li>
-	                		<li data-id="SPORTS-PRO-TENNIS">TENNIS</li>
+	                		<li id="sports-pro-basketball">Basketball</li>
+	                		<li id="sports-pro-baseball">Baseball</li>
+	                		<li id="sports-pro-football">Football</li>
+	                		<li id="sports-pro-hockey">Hockey</li>
+	                		<li id="sports-pro-soccer">Soccer</li>
+	                		<li id="sports-pro-tennis">Tennis</li>
 	                	</ul>
 	                </li>
-	                <li data-id="SPORTS-COL">College
+	                <li item-expanded='true' id="sports-col">College
 	                	<ul>
-	                		<li data-id="SPORTS-COL-BASKETBALL">BASKETBALL</li>
-	                		<li data-id="SPORTS-COL-BASEBBALL">BASEBBALL</li>
-	                		<li data-id="SPORTS-COL-FOOTBALL">FOOTBALL</li>
-	                		<li data-id="SPORTS-COL-HOCKEY">HOCKEY</li>
-	                		<li data-id="SPORTS-COL-SOCCER">SOCCER</li>
-	                		<li data-id="SPORTS-COL-TENNIS">TENNIS</li>
+	                		<li id="sports-col-basketball">Basketball</li>
+	                		<li id="sports-col-baseball">Baseball</li>
+	                		<li id="sports-col-football">Football</li>
+	                		<li id="sports-col-hockey">Hockey</li>
+	                		<li id="sports-col-soccer">Soccer</li>
+	                		<li id="sports-col-tennis">Tennis</li>	                	
 	                	</ul>	                
 	                </li>
 	            </ul>
 			</li>
-	        <li item-expanded='true' data-id="CONCERTS">Concerts
+	        <li item-expanded='true' id="concerts">Concerts
 	            <ul>
-	                <li data-id="CONCERTS-COUNTRY">Country</li>
-	                <li data-id="CONCERTS-POP">POP</li>
-	                <li data-id="CONCERTS-ROCK">ROCK</li>
-	                <li data-id="CONCERTS-RAP">RAP</li>
-	                <li data-id="CONCERTS-ALTERNATIVE">Alternative</li>
-	                <li data-id="CONCERTS-ELECTRONIC">Electronic</li>
+	                <li id="concerts-country">Country</li>
+	                <li id="concerts-pop">POP</li>
+	                <li id="concerts-rock">ROCK</li>
+	                <li id="concerts-rap">RAP</li>
+	                <li id="concerts-alternative">Alternative</li>
+	                <li id="concerts-electronic">Electronic</li>
 	            </ul>
 	        </li>
-	        <li item-expanded='true' data-id="SPECIAL-EVENTS">
+	        <li item-expanded='true' id="special-events">
 	        	Special Events
-	        	<ul><li data-id="SPECIAL-EVENTS-COMEDY">Comedy</li></ul>
+	        	<ul><li id="special-events-comedy">Comedy</li></ul>
 	        </li>
 	    </ul>	  
 	  </div>      
     </div>
   </div>
 
-  <input class="btn btn-info" type="button" value="Save" onclick="fnSave()" />
+  <input class="btn btn-info clsSave" type="button" value="Save" onclick="fnSave()" />
   <input class="btn btn-primary" type="reset" value="Cancel">
 </form>
 
 <div id="demoContainer" class="device-mobile-tablet">
     <div id="container" class="device-mobile-tablet-container">
         <div style="border: none;" id='grid'></div>
+    </div>
+</div>
 		<div id='Menu'>
 	        <ul>
 				<li>Edit</li> 					<!--fnShowForm({value}); -->
@@ -207,9 +209,6 @@
             	<li>Change Role</li>	        <!--fnChangeRole({value}); -->
 			</ul>
        </div>
-        
-    </div>
-</div>
 
 <div id="spinningSquaresG">
 	<div class="ball"></div>
