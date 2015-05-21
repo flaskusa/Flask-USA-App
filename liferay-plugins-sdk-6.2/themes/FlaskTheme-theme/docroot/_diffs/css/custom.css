@@ -347,3 +347,24 @@
  0% { -webkit-transform:rotate(0deg); }
  100% { -webkit-transform:rotate(-360deg); }
 }
+
+#left {
+    float:left;
+    width:100px;
+}
+#container {
+    width:100%;
+    text-align:center;
+}
+
+#center {
+    display: inline-block;
+    margin:0 auto;
+    width:100px;
+    align:center;
+}
+
+#right {
+    float:right;
+    width:100px;
+}

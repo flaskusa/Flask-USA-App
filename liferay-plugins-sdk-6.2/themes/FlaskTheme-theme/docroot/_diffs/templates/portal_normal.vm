@@ -49,15 +49,29 @@
 </head>
 
 <body class="$css_class">
- 
-
-
-<div class="header">
-	<a href="#" class="slideout-menu-toggle"><i class="fa fa-bars"></i></a>
-	
-	
+<div class="navbar navbar-fixed-top" style="margin-left: 0px; margin-right: 0px;">
+      <div class="navbar-inner">
+		  <div id="left">
+		    <div class="btn slideout-menu-toggle"  id="slideoutbtn">
+				<i class="fa fa-bars"></i>          				
+  			</div>
+		  </div>
+		  <div id="center">
+      			<img alt="$logo_description" height="$site_logo_height" src="$company_logo_src" width="$site_logo_width" />
+				<span class="site-name" title="#language_format ("go-to-x", [$site_name])">
+					$site_name
+				</span>
+		  </div>
+		  <div id="right">
+      			<a href="#" class="btn btn-primary" id="logout"><img class="logout-gotoquotes"><span class="hidden-phone" style="color:white;margin-right:2px;">&nbsp;Logout</span></a>
+		  </div>
+	</div>  
 </div>
 
+<div id="spinningSquaresG">
+	<div class="ball"></div>
+	<div class="ball1"></div>
+</div>
 
 <a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
 
@@ -68,23 +82,9 @@ $theme.include($body_top_include)
 	 #dockbar()
  #end
 -->
-
 <div class="container-fluid" id="wrapper">
 	<header id="banner" role="banner">
-	
 		<div id="heading">
-		<!--	<h1 class="site-title">
-				<a class="$logo_css_class" href="$site_default_url" title="#language_format ("go-to-x", [$site_name])">
-					<img alt="$logo_description" height="$site_logo_height" src="$company_logo_src" width="$site_logo_width" />
-				</a>
-
-				#if ($show_site_name)
-					<span class="site-name" title="#language_format ("go-to-x", [$site_name])">
-						$site_name
-					</span>
-				#end
-			</h1>
-			-->
 		#if (!$is_signed_in)
 			<a data-redirect="$is_login_redirect_required" href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
 		#end
@@ -99,41 +99,22 @@ $theme.include($body_top_include)
 			$theme.include($content_include)
 		#else
 			$portletDisplay.recycle()
-
 			$portletDisplay.setTitle($the_title)
-
 			$theme.wrapPortlet("portlet.vm", $content_include)
 		#end
 	</div>
 </div>
 
 $theme.include($body_bottom_include)
-
 $theme.include($bottom_include)
 
-
-
 <script type="text/javascript">
-
 $(document).ready(function(){
-$(".container-fluid").click(function(){
-
-if($("#navigation").hasClass("open"))
-  $("#navigation").attr("class","");
- 
+	$(".container-fluid").click(function(){
+	if($("#navigation").hasClass("open"))
+	  $("#navigation").attr("class","");
+	});
 });
-});
-
 </script>
-
-
-
-<div id="spinningSquaresG">
- <div class="ball"></div>
- <div class="ball1"></div>
-</div>
-
-
 </body>
-
 </html>
