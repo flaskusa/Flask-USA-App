@@ -1,19 +1,19 @@
 <nav class="slideout-menu" id="navigation" role="navigation">
-<ul aria-label="#language ("site-pages")" role="menubar">
-	<li class="menuitem highlight">TODAY'S EVENT(S)</li>
-	<li class="menuitem"><span>PRE-GAME</span><br/> LOCAL NEWS</li>
-	<li class="menuitem">PARKING & EVENT MAP</li>
-	<li class="menuitem"><span>AT-THE-GAME</span><br/>EVENT NEWS</li>
-	<li class="menuitem">VENUE MAP</li>
-	<li class="menuitem">FLASK PROMOTIONS</li>
-	<li class="menuitem"><span>POST-GAME</span><br/>ENTERTAINMENT OPTIONS</li>
-	<li class="menuitem">FLASK PROMOTIONS</li>
-	<li class="menuitem highlight">PROFILE</li>
-	<li class="menuitem">MY EVENTS</li>
-	<li class="menuitem">MY TAILGATE</li>
-	<li class="menuitem">MY GROUPS</li>
-	<li class="menuitem">MY FRIENDS</li>
-	<li class="menuitem">NOTIFICATIONS</li>
-	<li class="menuitem highlight">EVENT AND CITY SEARCH</li>
-</ul>            
+ <ul aria-label="#language ("site-pages")" role="menubar">
+           <li class="menuitem highlight">TODAY'S EVENT(S)</li>
+            <li class="menuitem"><span class="menuitem highlight">PRE-GAME</span><br/>  <a href="http://localhost:8080/web/guest/home">LOCAL NEWS</a> </li>
+			<li class="menuitem"><a href="http://localhost:8080/web/guest/parking-event-maps">PARKING & EVENT MAP</a></li>
+            <li class="menuitem"><span class="menuitem highlight">AT-THE-GAME</span><br/> <a href="http://localhost:8080/web/guest/event-news">EVENT NEWS</a></li>
+            <li class="menuitem"><a href="http://localhost:8080/web/guest/venue-map">VENUE MAP</a></li>
+            <li class="menuitem"><a href="http://localhost:8080/web/guest/flask-promotion-s">FLASK PROMOTIONS</a></li>
+            <li class="menuitem"><span class="menuitem highlight">POST-GAME</span><br/><a href="http://localhost:8080/web/guest/entertainment-options">ENTERTAINMENT OPTIONS</a></li>
+            <li class="menuitem"><a href="http://localhost:8080/web/guest/flask-promotions">FLASK PROMOTIONS</a></li>
+            <li class="menuitem highlight">PROFILE</li>
+            <li class="menuitem"><a href="http://localhost:8080/web/guest/my-events">MY EVENTS</a></li>
+            <li class="menuitem"><a href="http://localhost:8080/web/guest/my-tailgates">MY TAILGATE</a></li>
+            <li class="menuitem"><a href="http://localhost:8080/web/guest/my-groups">MY GROUPS</a></li>
+            <li class="menuitem"><a href="http://localhost:8080/web/guest/my-friends">MY FRIENDS</a></li>
+            <li class="menuitem"><a href="http://localhost:8080/web/guest/notifications">NOTIFICATIONS</a></li>
+            <li class="menuitem highlight">EVENT AND CITY SEARCH</li>
+ </ul>            
 </nav>
