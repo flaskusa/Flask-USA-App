@@ -32,19 +32,56 @@ function fnSave(){
 		isMale: true,
 		screenName : $("#screenName").val(),
 		email : $("#email").val(),
-		DOB:  '05-10-2015',
+		//DOB:  '05-10-2015',
+		DOB : $("#DOB").val(),
 		streetName: $("#streetName").val(),
 		aptNo: $("#aptNo").val(),
 		areaCode: $("#areaCode").val(),
 		city: $("#city").val(),
 		state: $("#state").val(),
 		country: $("#country").val(),
-		password1 : $("#password").val(),
-		password2 : $("#passwordConfirmation").val(),
+		password1 : $("#password1").val(),
+		password2 : $("#password2").val(),
 		mobileNo: $("#mobileNo").val(),
 		userInterests: "{sports: true}"		
 	};
-	alert("Show Spin");
+
+	$("#spinningSquaresG").show();	
+	console.log('insave');
+	console.log(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT);
+	Liferay.Service(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT,params,
+	 function(obj) {
+	   console.log(obj);
+	 });
+	console.log('end insave');
+	$.wait( function(){ fnLoadAdminUserList(); $("#spinningSquaresG").hide();}, 3);
+	$(".clsSave").attr("onclick","fnSave()");
+}
+
+function fnUpdate(uid){
+	alert("I'm in update");
+	var params =  {
+        userId:uid,			
+		firstName : $("#firstName").val(),
+		middleName : $("#middleName").val(),
+		lastName : $("#lastName").val(),
+		isMale: true,
+		screenName : $("#screenName").val(),
+		email : $("#email").val(),
+		//DOB:  '05-10-2015',
+		DOB : $("#DOB").val(),
+		streetName: $("#streetName").val(),
+		aptNo: $("#aptNo").val(),
+		areaCode: $("#areaCode").val(),
+		city: $("#city").val(),
+		state: $("#state").val(),
+		country: $("#country").val(),
+		password1 : $("#password1").val(),
+		password2 : $("#password2").val(),
+		mobileNo: $("#mobileNo").val(),
+		userInterests: fnGetCheckBoxSelected()
+	};
+
 	$("#spinningSquaresG").show();	
 	console.log('insave');
 	console.log(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT);
@@ -54,11 +91,10 @@ function fnSave(){
 	 });
 	console.log('end insave');
 	$.wait( function(){ fnLoadAdminUserList(); $("#spinningSquaresG").hide();}, 3);	
-	
-	alert("Hide Spin");
 }
 
 function fnShowForm(rowIndex) {
+	$(".clsSave").attr("onclick","fnUpdate(" +GlobalJSON_Admin[rowIndex].userId+ ")");
 	var objTemp;
 	console.log(GlobalJSON_Admin);
 	$("#firstName").val(GlobalJSON_Admin[rowIndex].firstName);
@@ -66,8 +102,16 @@ function fnShowForm(rowIndex) {
 	$("#lastName").val(GlobalJSON_Admin[rowIndex].lastName);
 	$("#email").val(GlobalJSON_Admin[rowIndex].email);
 	$("#screenName").val(GlobalJSON_Admin[rowIndex].screenName);
-	$("#password").val(GlobalJSON_Admin[rowIndex].password1);
-	$("#passwordConfirmation").val(GlobalJSON_Admin[rowIndex].password2);
+	$("#password1").val(GlobalJSON_Admin[rowIndex].password1);
+	$("#password2").val(GlobalJSON_Admin[rowIndex].password2);
+	$("#city").val(GlobalJSON_Admin[rowIndex].city);
+	$("#mobileNo").val(GlobalJSON_Admin[rowIndex].mobileNo);
+	$("#country").val(GlobalJSON_Admin[rowIndex].country);
+	$("#DOB").val(GlobalJSON_Admin[rowIndex].DOB);
+	$("#streetName").val(GlobalJSON_Admin[rowIndex].streetName);
+	$("#aptNo").val(GlobalJSON_Admin[rowIndex].aptNo);
+	$("#areaCode").val(GlobalJSON_Admin[rowIndex].areaCode);
+	$("#state").val(GlobalJSON_Admin[rowIndex].state);
 	
 	$("#grid").hide();
 	$("#adminForm").show();
@@ -84,6 +128,71 @@ function fnRenderGrid(tdata) {
 		datafields : DATA_SOURCE.GET_FLASK_ADMIN_GRID
 	};
 
+	//initrow creation
+	
+	var initrowdetails = function (index, parentElement, gridElement, datarecord) 
+	{
+	        var tabsdiv = null;
+	        var information = null;
+	        var notes = null;
+	        tabsdiv = $($(parentElement).children()[0]);
+	        if (tabsdiv != null) 
+	        {
+	            information = tabsdiv.find('.information');
+	            summary = tabsdiv.find('.summary');
+	            var title = tabsdiv.find('.title');
+	            var container = $('<div style="margin: 5px;"></div>')
+	            container.appendTo($(information));
+	            var photocolumn = $('<div style="float: left; width: 15%;"></div>');
+	            var leftcolumn = $('<div style="float: left; width: 35%;"></div>');
+	            var rightcolumn = $('<div style="float: left; width: 30%;"></div>');
+	            container.append(photocolumn);
+	            container.append(leftcolumn);
+	            container.append(rightcolumn);
+	            var photo = $("<div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>");
+	            var image = $("<div style='margin-top: 10px;'></div>");
+	            var imgurl = '' + datarecord.firstName.toLowerCase() + '.png';
+	            var img = $('<img height="60" src="' + imgurl + '"/>');
+	            image.append(img);
+	            image.appendTo(photo);
+	            photocolumn.append(photo);
+	            var firstname = "<div style='margin: 10px;'><b>First Name:</b> " + datarecord.firstName + "</div>";
+	            var middlename = "<div style='margin: 10px;'><b>Middle Name:</b> " + datarecord.middleName + "</div>";
+	            var lastname = "<div style='margin: 10px;'><b>Last Name:</b> " + datarecord.lastName + "</div>";
+	            var Email = "<div style='margin: 10px;'><b>Email:</b> " + datarecord.email + "</div>";
+	            var screenname = "<div style='margin: 10px;'><b>Screen Name:</b> " + datarecord.screenName + "</div>";
+	            var dob1 = "<div style='margin: 10px;'><b>Date Of Birth:</b> " + datarecord.DOB + "</div>";
+	            var streetname = "<div style='margin: 10px;'><b>Street Name:</b> " + datarecord.streetName + "</div>";
+	            var aptno = "<div style='margin: 10px;'><b>Appartment No:</b> " + datarecord.aptNo + "</div>";
+	            var areacode = "<div style='margin: 10px;'><b>Area Code:</b> " + datarecord.areaCode + "</div>";
+	            var City = "<div style='margin: 10px;'><b>City:</b> " + datarecord.city + "</div>";
+	            var State = "<div style='margin: 10px;'><b>State:</b> " + datarecord.state + "</div>";
+	            var Country = "<div style='margin: 10px;'><b>Country:</b> " + datarecord.country + "</div>";
+	            var Mobileno = "<div style='margin: 10px;'><b>Mobile No:</b> " + datarecord.mobileNo + "</div>";
+	            $(leftcolumn).append(firstname);
+	            $(leftcolumn).append(middlename);
+	            $(leftcolumn).append(lastname);
+	            $(rightcolumn).append(Email);
+	            $(rightcolumn).append(screenname);
+	            $(rightcolumn).append(dob1);
+	            $(rightcolumn).append(Mobileno);
+	            var container1 = $('<div style="margin: 5px;"></div>')
+	            container1.appendTo($(summary));
+	            var leftcolumn1 = $('<div style="float: left; width: 45%;"></div>');
+	            var rightcolumn1 = $('<div style="float: left; width: 40%;"></div>');
+	            container1.append(leftcolumn1);
+	            container1.append(rightcolumn1);
+	            $(leftcolumn1).append(streetname);
+	            $(leftcolumn1).append(aptno);
+	            $(leftcolumn1).append(areacode);
+	            $(rightcolumn1).append(City);
+	            $(rightcolumn1).append(State);
+	            $(rightcolumn1).append(Country);
+	            $(tabsdiv).jqxTabs({ width: '100%', height: '100%'});
+	        }
+	 }
+	
+	//end initrow
 	var dataAdapter = new $.jqx.dataAdapter(source);
 	console.log(source);
 	var cellsrenderer = function(row, columnfield, value, defaulthtml,
@@ -99,23 +208,25 @@ function fnRenderGrid(tdata) {
 		columnsheight : 40,
 		columnsmenuwidth : 40,
 		rowsheight : 34,
-		columns : [ {
-			text : 'First Name',
-			dataField : 'firstName',
-			width : '33%'
-		}, {
-			text : 'Last Name',
-			dataField : 'lastName',
-			width : '33%'
-		}, {
-			text : 'Email',
-			dataField : 'email',
-			width : '30%'
-		}, {
-			text : ' ',
-			cellsrenderer : cellsrenderer
-		} ]
+		//adding new row details to display data
+		rowdetails: true,
+        rowdetailstemplate: { rowdetails: "<div style='margin: 10px;'><ul style='margin-left: 10px; height: 10px;'><li>Personal</li><li>Address</li></ul><div class='information'></div><div class='summary'></div></div>", rowdetailsheight: 200 },
+        ready: function () 
+        {
+           // $("#grid").jqxGrid('showrowdetails', 0);
+           // $("#grid").jqxGrid('showrowdetails', 1);
+        },
+        
+        initrowdetails: initrowdetails,
+        
+		columns : [ 
+		            { text : 'First Name', dataField : 'firstName', width : '33%' }, 
+		            { text : 'Last Name', dataField : 'lastName', width : '33%'	}, 
+		            { text : 'Email', dataField : 'email', 	width : '30%' }, 
+		            { text : ' ', cellsrenderer : cellsrenderer	} 
+		         ]
 	});
+	
 	// create context menu
 	var contextMenu = $("#Menu").jqxMenu({
 		width : 200,
@@ -141,15 +252,31 @@ function fnRenderGrid(tdata) {
 	});
 
 	$("#Menu").on('itemclick', function(event) {
+		$("#spinningSquaresG").show();
 		var args = event.args;
 		var rowindex = $("#grid").jqxGrid('getselectedrowindex');
+		
 		if ($.trim($(args).text()) == "Edit") {
 			fnShowForm(rowindex);
+			$("#spinningSquaresG").hide();
 			return false;
-		} else {
-			var rowid = $("#grid").jqxGrid('getrowid', rowindex);
-			$("#grid").jqxGrid('deleterow', rowid);
+		} 
+		
+		if ($.trim($(args).text()) == "Delete") {
+			var a  = window.confirm("Are you sure ?");
+			if (a){
+				fnDelete(GlobalJSON_Admin[rowindex].userId);
+				var rowid = $("#grid").jqxGrid('getrowid', rowindex);
+				$("#grid").jqxGrid('deleterow', rowid);
+				$("#spinningSquaresG").hide();
+				return false;
+				}
+			else
+				{
+				return false;
+				}
 		}
+		
 	});
 	$("#grid").show();
 }
@@ -202,19 +329,32 @@ $.wait = function( callback, seconds){
 }
 
 $(document).ready(function () {
-     $(document).ready(function () {
-         // Create jqxTree
-         $('#userInterests').jqxTree({theme:"base",hasThreeStates:true, checkboxes:true, height: '300px', width: '100%' });
-         $("#userInterests").on('change',function(event){
-        	 var Items = $("#userInterests").jqxTree('getItems');
-        	 var ItemArray = new Array();
-        	 $.each(Items, function () {
-                 if (this.checked) {
-                	 var tempid = "#"+this.id;
-                	 ItemArray.push($(tempid).attr("data-id"));
-                 };
-             });
-        	 console.log(ItemArray);
-         });
-     });     
+     $('#userInterests').jqxTree({theme:"base",hasThreeStates:true, checkboxes:true, height: '300px', width: '100%' });
+     //fnGetCheckBoxSelected();
 });
+
+function fnGetCheckBoxSelected(){
+	 var Items = $("#userInterests").jqxTree('getItems');
+	 var ItemArray = new Array();
+	 $.each(Items, function () {
+         if (this.checked) {
+        	 var tempid = "#"+this.id;
+        	 ItemArray.push($(tempid).attr("id"));
+         };
+     });
+	 console.log(ItemArray.join("#"));
+	 return ItemArray.join("#");
+}
+
+function fnSetCheckBoxSelected(strCheckList){
+	
+	var tempArray = new Array(); 
+	tempArray = strCheckList.split("#");
+    var i;
+    console.log("tempArray length = "+tempArray.length)
+    for (i = 0; i < tempArray.length; i++) { 
+   	    var tempObj = "#"+tempArray[i];
+   	    $("#userInterests").jqxTree('checkItem', $(tempObj)[0], true);
+    }
+    console.log("Working fine");
+}
