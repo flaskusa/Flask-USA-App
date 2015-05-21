@@ -1,10 +1,14 @@
-/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+/* This file allows you to override default 
+
+styles in one central location for easier 
+
+upgrade and maintenance. */
 @import url('http://fonts.googleapis.com/css?family=Coda');
 
 .aui body
 {
-	background-color:#F5F5F5;
-	 font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+	background-color:#FFFFFF;
+	 font: normal 16px/1 "Coda" ,Helvetica, sans-serif;
 }
 
 .flask-nav-item{
@@ -23,7 +27,7 @@
     padding: 5px;
     overflow: hidden;
     border: none;
-    font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+    font: normal 16px/1 "Coda" , Helvetica,sans-serif;
     color: #ffffff;
     text-align: left;
     -o-text-overflow: ellipsis;
@@ -65,7 +69,7 @@
 {
 	color: white;
 	text-decoration: none;
-	 font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+	 font: normal 16px/1 "Coda" ,Helvetica, sans-serif;
 }
 
 .menuitem a:hover
@@ -78,7 +82,7 @@
 /* Slide Out */
 	.slideout-menu {
 		position: fixed;
-		margin-top: 53px;
+		margin-top: 64px;
 		left: -250px;
 		width: 250px;
 		height: 100%;
@@ -93,7 +97,9 @@
 		font-size: 1.2em;
 		font-weight: 400;
 	}
-	.slideout-menu .slideout-menu-toggle {
+	.slideout-menu .slideout-menu-toggle 
+
+    {
 		position: absolute;
 		top: 12px;
 		right: 10px;
@@ -114,17 +120,21 @@
 	
 	.header {
 		padding: 15px;
-		background: #000;
+		background: #F5F3F4;
 	}
 	.header .slideout-menu-toggle {
 		font-size: 1.2em;
 		color: #999;
 		text-decoration: none;
 	}
-	.header .slideout-menu-toggle:hover {
-		color: #fff;
+	
+	.header .slideout-menu-toggle:hover 
+
+    {
+		color: #000000;
 	}
-	.header .slideout-menu-toggle i {
+	.header .slideout-menu-toggle i 
+	{
 		vertical-align: top;
 		margin: 5px 3px 0 0;
 	}
@@ -148,7 +158,7 @@
 {
 	
 	background: #231F20;
-	font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+	font: normal 16px/1 "Coda" ,Helvetica, sans-serif;
 	color: #fff;
 	font-size:20px;
 	cursor:pointer;
@@ -172,7 +182,7 @@
 .aui .btn-primary
 {
 	padding: 5px 20px;
-	font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+	font: normal 16px/1 "Coda" ,Helvetica, sans-serif;
 	background: #231F20;
 	color: #fff;
 	font-size:20px;
@@ -292,13 +302,18 @@
   color: chocolate;
 }
 
+
+
+
+
+
+
 #spinningSquaresG{
  position: absolute;
  background: rgba(255, 255, 255, 0.75);
  width: 100%;
- top: 50px;
+ top: 50;
  min-height: 100%;
- padding-top:20%;
  height: 100%;
  z-index: 99999;
  display: none;
@@ -314,7 +329,9 @@
  height:50px;
  margin:0 auto;
  -moz-animation:spin 1.8s infinite linear;
- -webkit-animation:spin 1.8s infinite linear;
+ -webkit-animation:spin 1.8s infinite 
+
+linear;
 }
 .ball1 {
  background-color: rgba(0,0,0,0);
@@ -329,7 +346,9 @@
  position:relative;
  top:-50px;
  -moz-animation:spinoff 1s infinite linear;
- -webkit-animation:spinoff 1s infinite linear;
+ -webkit-animation:spinoff 1s infinite 
+
+linear;
 }
 @-moz-keyframes spin {
  0% { -moz-transform:rotate(0deg); }
@@ -346,25 +365,4 @@
 @-webkit-keyframes spinoff {
  0% { -webkit-transform:rotate(0deg); }
  100% { -webkit-transform:rotate(-360deg); }
-}
-
-#left {
-    float:left;
-    width:100px;
-}
-#container {
-    width:100%;
-    text-align:center;
-}
-
-#center {
-    display: inline-block;
-    margin:0 auto;
-    width:100px;
-    align:center;
-}
-
-#right {
-    float:right;
-    width:100px;
 }
