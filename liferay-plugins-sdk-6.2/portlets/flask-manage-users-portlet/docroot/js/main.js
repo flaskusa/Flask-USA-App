@@ -83,13 +83,13 @@ function fnUpdate(uid){
 	};
 
 	$("#spinningSquaresG").show();	
-	console.log('insave');
-	console.log(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT);
-	Liferay.Service(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT,params,
+	//console.log('insave');
+	console.log(SERVICE_ENDPOINTS.UPDATE_FLASK_ADMIN_ENDPOINT);
+	Liferay.Service(SERVICE_ENDPOINTS.UPDATE_FLASK_ADMIN_ENDPOINT,params,
 	 function(obj) {
 	   console.log(obj);
 	 });
-	console.log('end insave');
+	//console.log('end insave');
 	$.wait( function(){ fnLoadAdminUserList(); $("#spinningSquaresG").hide();}, 3);	
 }
 
@@ -144,8 +144,8 @@ function fnRenderGrid(tdata) {
 	            var container = $('<div style="margin: 5px;"></div>')
 	            container.appendTo($(information));
 	            var photocolumn = $('<div style="float: left; width: 15%;"></div>');
-	            var leftcolumn = $('<div style="float: left; width: 35%;"></div>');
-	            var rightcolumn = $('<div style="float: left; width: 30%;"></div>');
+	            var leftcolumn = $('<div style="float: left; width: 45%;"></div>');
+	            var rightcolumn = $('<div style="float: left; width: 40%;"></div>');
 	            container.append(photocolumn);
 	            container.append(leftcolumn);
 	            container.append(rightcolumn);
@@ -208,6 +208,7 @@ function fnRenderGrid(tdata) {
 		columnsheight : 40,
 		columnsmenuwidth : 40,
 		rowsheight : 34,
+		
 		//adding new row details to display data
 		rowdetails: true,
         rowdetailstemplate: { rowdetails: "<div style='margin: 10px;'><ul style='margin-left: 10px; height: 10px;'><li>Personal</li><li>Address</li></ul><div class='information'></div><div class='summary'></div></div>", rowdetailsheight: 200 },
@@ -239,7 +240,7 @@ function fnRenderGrid(tdata) {
 	});
 
 	$("#grid").bind('cellclick', function(event) {
-		if (event.args.columnindex == 3) {
+		if (event.args.columnindex == 4) {
 			var scrollTop = $(window).scrollTop();
 			var scrollLeft = $(window).scrollLeft();
 			editrow = event.args.rowindex;
