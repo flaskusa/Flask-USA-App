@@ -124,13 +124,19 @@ public class FlaskAdminServiceSoap {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.updateFlaskAdmin(userId,
 					firstName, middleName, lastName, email, screenName,
-					password1, password2, serviceContext);
+					password1, password2, DOB, isMale, streetName, aptNo,
+					areaCode, city, state, country, mobileNo, userInterests,
+					serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
 		}
@@ -174,13 +180,19 @@ public class FlaskAdminServiceSoap {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.updateFlaskContentManager(userId,
 					firstName, middleName, lastName, email, screenName,
-					password1, password2, serviceContext);
+					password1, password2, DOB, isMale, streetName, aptNo,
+					areaCode, city, state, country, mobileNo, userInterests,
+					serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
 		}

@@ -61,7 +61,10 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		_methodParameterTypes6 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.util.Date",
+				"boolean", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -82,7 +85,10 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		_methodParameterTypes8 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.util.Date",
+				"boolean", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -289,7 +295,11 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -314,6 +324,26 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 					ClpSerializer.translateInput(password1),
 						
 					ClpSerializer.translateInput(password2),
+						
+					ClpSerializer.translateInput(DOB),
+						
+					isMale,
+						
+					ClpSerializer.translateInput(streetName),
+						
+					ClpSerializer.translateInput(aptNo),
+						
+					ClpSerializer.translateInput(areaCode),
+						
+					ClpSerializer.translateInput(city),
+						
+					ClpSerializer.translateInput(state),
+						
+					ClpSerializer.translateInput(country),
+						
+					ClpSerializer.translateInput(mobileNo),
+						
+					ClpSerializer.translateInput(userInterests),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -425,7 +455,11 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -450,6 +484,26 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 					ClpSerializer.translateInput(password1),
 						
 					ClpSerializer.translateInput(password2),
+						
+					ClpSerializer.translateInput(DOB),
+						
+					isMale,
+						
+					ClpSerializer.translateInput(streetName),
+						
+					ClpSerializer.translateInput(aptNo),
+						
+					ClpSerializer.translateInput(areaCode),
+						
+					ClpSerializer.translateInput(city),
+						
+					ClpSerializer.translateInput(state),
+						
+					ClpSerializer.translateInput(country),
+						
+					ClpSerializer.translateInput(mobileNo),
+						
+					ClpSerializer.translateInput(userInterests),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

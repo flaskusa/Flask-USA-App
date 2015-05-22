@@ -96,13 +96,19 @@ public class FlaskAdminServiceUtil {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateFlaskAdmin(userId, firstName, middleName, lastName,
-			email, screenName, password1, password2, serviceContext);
+			email, screenName, password1, password2, DOB, isMale, streetName,
+			aptNo, areaCode, city, state, country, mobileNo, userInterests,
+			serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.FlaskAdmin addFlaskContentManager(
@@ -131,13 +137,19 @@ public class FlaskAdminServiceUtil {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2,
+		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city,
+		java.lang.String state, java.lang.String country,
+		java.lang.String mobileNo, java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .updateFlaskContentManager(userId, firstName, middleName,
-			lastName, email, screenName, password1, password2, serviceContext);
+			lastName, email, screenName, password1, password2, DOB, isMale,
+			streetName, aptNo, areaCode, city, state, country, mobileNo,
+			userInterests, serviceContext);
 	}
 
 	public static void deleteFlaskAdmins(long userId,

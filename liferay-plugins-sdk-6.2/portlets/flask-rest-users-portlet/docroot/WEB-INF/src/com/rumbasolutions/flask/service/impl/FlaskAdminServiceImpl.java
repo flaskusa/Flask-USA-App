@@ -150,11 +150,22 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	@Override
 	public  FlaskAdmin updateFlaskAdmin(long userId, String firstName, String middleName, String lastName, 
 			String email, String screenName,String password1, String password2,  
+			Date DOB, boolean isMale,
+			String streetName, String aptNo,
+			String areaCode, String city,
+			String state, String country,
+			String mobileNo, String userInterests,
 			ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		FlaskAdmin adminUser=null;
 		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_ADMIN.getRoleName());
-		User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, screenName, email, password1,  password2 );
+		User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(), firstName, middleName, 
+				lastName, screenName, email, password1,  password2,
+				DOB,isMale,
+				streetName, aptNo,
+				areaCode, city,
+				state, country,
+				mobileNo, userInterests, serviceContext);
 		if(user != null)
 			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
 		return adminUser;
@@ -198,12 +209,23 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
  */
 	@Override
 	public  FlaskAdmin updateFlaskContentManager(long userId, String firstName, String middleName, String lastName, 
-			String email, String screenName,String password1, String password2,  
+			String email, String screenName,String password1, String password2,
+			Date DOB, boolean isMale,
+			String streetName, String aptNo,
+			String areaCode, String city,
+			String state, String country,
+			String mobileNo, String userInterests,
 			ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		FlaskAdmin adminUser=null;
 		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_CONTENT_ADMIN.getRoleName());
-		User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, screenName, email, password1,  password2 );
+		User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(), firstName,
+						middleName, lastName, screenName, email, password1,  password2, 
+						DOB, isMale,
+						streetName, aptNo,
+						areaCode, city,
+						state, country,
+						mobileNo, userInterests, serviceContext);
 		if(user != null)
 			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
 		return adminUser;
@@ -320,22 +342,32 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				 		true, /*boolean sendEmail*/
 				 		null);
 			 
-			 if (!user.getExpandoBridge().hasAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS)){
+			 addUserInterest(userInterests, user);
 				 
-				 user.getExpandoBridge().addAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, ExpandoColumnConstants.STRING);
-			 }
-			 user.getExpandoBridge().setAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, userInterests, false);
+			 
 			 addAddress(streetName, aptNo, areaCode, city, country,
 					serviceContext, user);
 			 
 			 if(!mobileNo.isEmpty()){
-				 addMobile(mobileNo, serviceContext, user);
+				 addMobile(mobileNo, user, serviceContext);
 			 }
 			 return user;
 	}
 
-	private void addMobile(String mobileNo, ServiceContext serviceContext,
-			User user){
+	private void addUserInterest(String userInterests, User user)
+			throws PortalException {
+		
+		if(userInterests.isEmpty()) return;
+		
+		//JSONArray json = JSONFactoryUtil.createJSONArray(userInterests); //this should validate JSON else throw JSON exception
+		
+		if (!user.getExpandoBridge().hasAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS)){
+			 user.getExpandoBridge().addAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, ExpandoColumnConstants.STRING);
+		}
+		user.getExpandoBridge().setAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, userInterests, false);
+	}
+
+	private void addMobile(String mobileNo, User user, ServiceContext serviceContext){
 		int mobileTypeId = FlaskModelUtil.getMobilePhoneTypeId();
 		try {
 			Phone phone = PhoneLocalServiceUtil.addPhone( user.getUserId()/*long userId*/,
@@ -369,7 +401,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			         "" /*String street1*/,
 			         city /*String City*/,
 			         areaCode /*String zipCode*/,
-			         0 /*String street1*/,
+			         0 ,
 			         countryId/*long countryId*/,
 			         addressTypeId,
 			         false	/*boolean mailing*/,
@@ -384,21 +416,83 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	}
 	
 	private User updateUser(long userId, long roleId, long loggedInUser, String firstName, String middleName, 
-			String lastName, String screenName, String email, String password1, String password2 ) throws PortalException, SystemException
-	{
-			 User user=null;
-			 long[] roleIds ={roleId};
-			 user = UserLocalServiceUtil.getUser(userId);
-			 user.setFirstName(firstName);
-			 user.setMiddleName(middleName);
-			 user.setLastName(lastName);
-			 user.setScreenName(screenName);
-			 user.setEmailAddress(email);
-			 user.setPassword(password1);
-			 user = UserLocalServiceUtil.updateUser(user) ;
+			String lastName, String screenName, String email, String password1, String password2,
+			Date DOB, boolean isMale,
+			String streetName, String aptNo,
+			String areaCode, String city,
+			String state, String country,
+			String mobileNo, String userInterests, ServiceContext serviceContext) throws PortalException, SystemException {
+		
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(DOB);
+		
+		long[] roleIds = {roleId};
+		User user =	UserLocalServiceUtil.getUser(userId);
+		
+		
+				
+		user = UserLocalServiceUtil.updateUser( userId /*long userId*/,
+				password1/*String oldPassword*/,
+                null /*String newPassword1*/,
+                null/*String newPassword2*/,
+                false/*boolean passwordReset*/,
+                user.getReminderQueryQuestion() /*String reminderQueryQuestion*/,
+                user.getReminderQueryAnswer() /*String reminderQueryAnswer*/,
+                screenName/*String screenName*/,
+                email/*String emailAddress*/,
+                user.getFacebookId()/*long facebookId*/,
+                user.getOpenId()/*String openId*/,
+                user.getLanguageId() /*String languageId*/,
+                user.getTimeZoneId()/*String timeZoneId*/,
+                user.getGreeting()/*String greeting*/,
+                user.getComments()/*String comments*/,
+                firstName/*String firstName*/,
+                middleName/*String middleName*/,
+                lastName/*String lastName*/,
+                0/*int prefixId*/,
+                0/*int suffixId*/,
+                isMale/*boolean male*/,
+            	cal.get(Calendar.MONTH) /*int birthdayMonth*/,
+		 		cal.get(Calendar.DAY_OF_MONTH) /*int birthdayDay*/,
+		 		cal.get(Calendar.YEAR) /*int birthdayYear*/,
+		 		null/*String smsSn*/,
+		 		null/*String aimSn*/,
+                null /*String facebookSn*/,
+                null /*String icqSn*/,
+                null /*String jabberSn*/,
+                null /*String msnSn*/,
+                null /*String mySpaceSn*/,
+                null/*String skypeSn*/,
+                null /*String twitterSn*/,
+                null /*String ymSn*/,
+                user.getJobTitle() /*String jobTitle*/,
+                user.getGroupIds(),
+                user.getOrganizationIds()/*long[] organizationIds*/,
+                roleIds/*long[] roleIds*/,
+                null/*List<UserGroupRole> userGroupRoles*/,
+                user.getGroupIds(),
+                serviceContext);
 			 
-			 RoleLocalServiceUtil.deleteUserRoles(userId, user.getRoleIds());
-			 RoleLocalServiceUtil.addUserRoles(userId, roleIds);
+			Address addr = user.getAddresses().get(0);
+			if(addr != null){
+				addr.setStreet1(aptNo);
+				addr.setStreet2(streetName);
+				addr.setCity(city);
+				addr.setZip(areaCode);
+				AddressLocalServiceUtil.updateAddress(addr);
+			}
+			Phone phone = user.getPhones().get(0);
+			if(phone != null){
+				phone.setNumber(mobileNo);
+				PhoneLocalServiceUtil.updatePhone(phone);
+			}else{
+				addMobile(mobileNo, user, serviceContext);
+			}
+				
+			
+			
+			 
+			// List<Addresses>user.getAddresses();
 			 
 			 return user;
 	}
