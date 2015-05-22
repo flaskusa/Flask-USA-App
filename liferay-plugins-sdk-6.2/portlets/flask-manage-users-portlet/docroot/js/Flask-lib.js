@@ -8,15 +8,29 @@ var SERVICE_ENDPOINTS = {
 };
 
 var DATA_SOURCE  = {
-	GET_FLASK_ADMIN_GRID: [{ name: 'userId', type: 'string' },
+	GET_FLASK_ADMIN_GRID: 
+		[
+	                     { name: 'userId', type: 'string' },
 						 { name: 'firstName', type: 'string' },
+						 { name: 'middleName', type: 'string' },
 						 { name: 'lastName', type: 'string' },
-						 { name: 'email', type: 'string' }]
+						 { name: 'email', type: 'string' },
+						 { name: 'mobileNo', type: 'string' },
+						 { name: 'screenName', type: 'string' },
+						 { name: 'DOB', type: 'date' },
+						 { name: 'streetName', type: 'string' },
+						 { name: 'aptNo', type: 'string' },
+						 { name: 'areaCode', type: 'string' },
+						 { name: 'city', type: 'string' },
+						 { name: 'state', type: 'string' },
+						 { name: 'country', type: 'string' }
+						 
+		]
 }
 
 var MESSAGES = {
 		MANDATORY_FIRST_NAME        : "Please enter first name.",
-		MANDATORY_FIRST_NAME        : "Please enter last name.",
+		MANDATORY_LAST_NAME         : "Please enter last name.",
     	MANDATORY_EMAIL				: "Please Enter Email ID",
     	ERRORR_REGISTER_USER        : "Error Registering New User. Please verify details and try again.",
     	ERROR_VERIFY_USER           : "Invalid User ID. Please Check User ID and try again.",
