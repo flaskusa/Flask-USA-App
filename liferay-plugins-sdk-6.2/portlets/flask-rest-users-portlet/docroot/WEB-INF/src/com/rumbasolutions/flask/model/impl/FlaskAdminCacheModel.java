@@ -38,7 +38,7 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{userId=");
 		sb.append(userId);
@@ -66,10 +66,14 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 		sb.append(areaCode);
 		sb.append(", city=");
 		sb.append(city);
-		sb.append(", state=");
-		sb.append(state);
-		sb.append(", country=");
-		sb.append(country);
+		sb.append(", stateId=");
+		sb.append(stateId);
+		sb.append(", stateName=");
+		sb.append(stateName);
+		sb.append(", countryId=");
+		sb.append(countryId);
+		sb.append(", countryName=");
+		sb.append(countryName);
 		sb.append(", mobileNumber=");
 		sb.append(mobileNumber);
 		sb.append(", portraitURL=");
@@ -160,18 +164,22 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 			flaskAdminImpl.setCity(city);
 		}
 
-		if (state == null) {
-			flaskAdminImpl.setState(StringPool.BLANK);
+		flaskAdminImpl.setStateId(stateId);
+
+		if (stateName == null) {
+			flaskAdminImpl.setStateName(StringPool.BLANK);
 		}
 		else {
-			flaskAdminImpl.setState(state);
+			flaskAdminImpl.setStateName(stateName);
 		}
 
-		if (country == null) {
-			flaskAdminImpl.setCountry(StringPool.BLANK);
+		flaskAdminImpl.setCountryId(countryId);
+
+		if (countryName == null) {
+			flaskAdminImpl.setCountryName(StringPool.BLANK);
 		}
 		else {
-			flaskAdminImpl.setCountry(country);
+			flaskAdminImpl.setCountryName(countryName);
 		}
 
 		if (mobileNumber == null) {
@@ -215,8 +223,10 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 		aptNo = objectInput.readUTF();
 		areaCode = objectInput.readUTF();
 		city = objectInput.readUTF();
-		state = objectInput.readUTF();
-		country = objectInput.readUTF();
+		stateId = objectInput.readLong();
+		stateName = objectInput.readUTF();
+		countryId = objectInput.readLong();
+		countryName = objectInput.readUTF();
 		mobileNumber = objectInput.readUTF();
 		portraitURL = objectInput.readUTF();
 		userInterests = objectInput.readUTF();
@@ -294,18 +304,22 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 			objectOutput.writeUTF(city);
 		}
 
-		if (state == null) {
+		objectOutput.writeLong(stateId);
+
+		if (stateName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(state);
+			objectOutput.writeUTF(stateName);
 		}
 
-		if (country == null) {
+		objectOutput.writeLong(countryId);
+
+		if (countryName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(country);
+			objectOutput.writeUTF(countryName);
 		}
 
 		if (mobileNumber == null) {
@@ -343,8 +357,10 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 	public String aptNo;
 	public String areaCode;
 	public String city;
-	public String state;
-	public String country;
+	public long stateId;
+	public String stateName;
+	public long countryId;
+	public String countryName;
 	public String mobileNumber;
 	public String portraitURL;
 	public String userInterests;

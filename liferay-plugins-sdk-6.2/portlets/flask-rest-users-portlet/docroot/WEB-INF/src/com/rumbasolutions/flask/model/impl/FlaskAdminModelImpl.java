@@ -79,13 +79,15 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 			{ "aptNo", Types.VARCHAR },
 			{ "areaCode", Types.VARCHAR },
 			{ "city", Types.VARCHAR },
-			{ "state_", Types.VARCHAR },
-			{ "country", Types.VARCHAR },
+			{ "stateId", Types.BIGINT },
+			{ "stateName", Types.VARCHAR },
+			{ "countryId", Types.BIGINT },
+			{ "countryName", Types.VARCHAR },
 			{ "mobileNumber", Types.VARCHAR },
 			{ "portraitURL", Types.VARCHAR },
 			{ "userInterests", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskusers_FlaskAdmin (userId LONG not null primary key,roleId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,screenName VARCHAR(75) null,email VARCHAR(75) null,DOB DATE null,isMale BOOLEAN,streetName VARCHAR(75) null,aptNo VARCHAR(75) null,areaCode VARCHAR(75) null,city VARCHAR(75) null,state_ VARCHAR(75) null,country VARCHAR(75) null,mobileNumber VARCHAR(75) null,portraitURL VARCHAR(75) null,userInterests VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskusers_FlaskAdmin (userId LONG not null primary key,roleId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,screenName VARCHAR(75) null,email VARCHAR(75) null,DOB DATE null,isMale BOOLEAN,streetName VARCHAR(75) null,aptNo VARCHAR(75) null,areaCode VARCHAR(75) null,city VARCHAR(75) null,stateId LONG,stateName VARCHAR(75) null,countryId LONG,countryName VARCHAR(75) null,mobileNumber VARCHAR(75) null,portraitURL VARCHAR(75) null,userInterests VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskusers_FlaskAdmin";
 	public static final String ORDER_BY_JPQL = " ORDER BY flaskAdmin.userId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskusers_FlaskAdmin.userId ASC";
@@ -126,8 +128,10 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 		model.setAptNo(soapModel.getAptNo());
 		model.setAreaCode(soapModel.getAreaCode());
 		model.setCity(soapModel.getCity());
-		model.setState(soapModel.getState());
-		model.setCountry(soapModel.getCountry());
+		model.setStateId(soapModel.getStateId());
+		model.setStateName(soapModel.getStateName());
+		model.setCountryId(soapModel.getCountryId());
+		model.setCountryName(soapModel.getCountryName());
 		model.setMobileNumber(soapModel.getMobileNumber());
 		model.setPortraitURL(soapModel.getPortraitURL());
 		model.setUserInterests(soapModel.getUserInterests());
@@ -208,8 +212,10 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 		attributes.put("aptNo", getAptNo());
 		attributes.put("areaCode", getAreaCode());
 		attributes.put("city", getCity());
-		attributes.put("state", getState());
-		attributes.put("country", getCountry());
+		attributes.put("stateId", getStateId());
+		attributes.put("stateName", getStateName());
+		attributes.put("countryId", getCountryId());
+		attributes.put("countryName", getCountryName());
 		attributes.put("mobileNumber", getMobileNumber());
 		attributes.put("portraitURL", getPortraitURL());
 		attributes.put("userInterests", getUserInterests());
@@ -297,16 +303,28 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 			setCity(city);
 		}
 
-		String state = (String)attributes.get("state");
+		Long stateId = (Long)attributes.get("stateId");
 
-		if (state != null) {
-			setState(state);
+		if (stateId != null) {
+			setStateId(stateId);
 		}
 
-		String country = (String)attributes.get("country");
+		String stateName = (String)attributes.get("stateName");
 
-		if (country != null) {
-			setCountry(country);
+		if (stateName != null) {
+			setStateName(stateName);
+		}
+
+		Long countryId = (Long)attributes.get("countryId");
+
+		if (countryId != null) {
+			setCountryId(countryId);
+		}
+
+		String countryName = (String)attributes.get("countryName");
+
+		if (countryName != null) {
+			setCountryName(countryName);
 		}
 
 		String mobileNumber = (String)attributes.get("mobileNumber");
@@ -528,34 +546,56 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 
 	@JSON
 	@Override
-	public String getState() {
-		if (_state == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _state;
-		}
+	public long getStateId() {
+		return _stateId;
 	}
 
 	@Override
-	public void setState(String state) {
-		_state = state;
+	public void setStateId(long stateId) {
+		_stateId = stateId;
 	}
 
 	@JSON
 	@Override
-	public String getCountry() {
-		if (_country == null) {
+	public String getStateName() {
+		if (_stateName == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _country;
+			return _stateName;
 		}
 	}
 
 	@Override
-	public void setCountry(String country) {
-		_country = country;
+	public void setStateName(String stateName) {
+		_stateName = stateName;
+	}
+
+	@JSON
+	@Override
+	public long getCountryId() {
+		return _countryId;
+	}
+
+	@Override
+	public void setCountryId(long countryId) {
+		_countryId = countryId;
+	}
+
+	@JSON
+	@Override
+	public String getCountryName() {
+		if (_countryName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _countryName;
+		}
+	}
+
+	@Override
+	public void setCountryName(String countryName) {
+		_countryName = countryName;
 	}
 
 	@JSON
@@ -646,8 +686,10 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 		flaskAdminImpl.setAptNo(getAptNo());
 		flaskAdminImpl.setAreaCode(getAreaCode());
 		flaskAdminImpl.setCity(getCity());
-		flaskAdminImpl.setState(getState());
-		flaskAdminImpl.setCountry(getCountry());
+		flaskAdminImpl.setStateId(getStateId());
+		flaskAdminImpl.setStateName(getStateName());
+		flaskAdminImpl.setCountryId(getCountryId());
+		flaskAdminImpl.setCountryName(getCountryName());
 		flaskAdminImpl.setMobileNumber(getMobileNumber());
 		flaskAdminImpl.setPortraitURL(getPortraitURL());
 		flaskAdminImpl.setUserInterests(getUserInterests());
@@ -794,20 +836,24 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 			flaskAdminCacheModel.city = null;
 		}
 
-		flaskAdminCacheModel.state = getState();
+		flaskAdminCacheModel.stateId = getStateId();
 
-		String state = flaskAdminCacheModel.state;
+		flaskAdminCacheModel.stateName = getStateName();
 
-		if ((state != null) && (state.length() == 0)) {
-			flaskAdminCacheModel.state = null;
+		String stateName = flaskAdminCacheModel.stateName;
+
+		if ((stateName != null) && (stateName.length() == 0)) {
+			flaskAdminCacheModel.stateName = null;
 		}
 
-		flaskAdminCacheModel.country = getCountry();
+		flaskAdminCacheModel.countryId = getCountryId();
 
-		String country = flaskAdminCacheModel.country;
+		flaskAdminCacheModel.countryName = getCountryName();
 
-		if ((country != null) && (country.length() == 0)) {
-			flaskAdminCacheModel.country = null;
+		String countryName = flaskAdminCacheModel.countryName;
+
+		if ((countryName != null) && (countryName.length() == 0)) {
+			flaskAdminCacheModel.countryName = null;
 		}
 
 		flaskAdminCacheModel.mobileNumber = getMobileNumber();
@@ -839,7 +885,7 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{userId=");
 		sb.append(getUserId());
@@ -867,10 +913,14 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 		sb.append(getAreaCode());
 		sb.append(", city=");
 		sb.append(getCity());
-		sb.append(", state=");
-		sb.append(getState());
-		sb.append(", country=");
-		sb.append(getCountry());
+		sb.append(", stateId=");
+		sb.append(getStateId());
+		sb.append(", stateName=");
+		sb.append(getStateName());
+		sb.append(", countryId=");
+		sb.append(getCountryId());
+		sb.append(", countryName=");
+		sb.append(getCountryName());
 		sb.append(", mobileNumber=");
 		sb.append(getMobileNumber());
 		sb.append(", portraitURL=");
@@ -884,7 +934,7 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.FlaskAdmin");
@@ -943,12 +993,20 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 		sb.append(getCity());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>state</column-name><column-value><![CDATA[");
-		sb.append(getState());
+			"<column><column-name>stateId</column-name><column-value><![CDATA[");
+		sb.append(getStateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>country</column-name><column-value><![CDATA[");
-		sb.append(getCountry());
+			"<column><column-name>stateName</column-name><column-value><![CDATA[");
+		sb.append(getStateName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryId</column-name><column-value><![CDATA[");
+		sb.append(getCountryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryName</column-name><column-value><![CDATA[");
+		sb.append(getCountryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mobileNumber</column-name><column-value><![CDATA[");
@@ -986,8 +1044,10 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 	private String _aptNo;
 	private String _areaCode;
 	private String _city;
-	private String _state;
-	private String _country;
+	private long _stateId;
+	private String _stateName;
+	private long _countryId;
+	private String _countryName;
 	private String _mobileNumber;
 	private String _portraitURL;
 	private String _userInterests;

@@ -51,9 +51,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.util.Date", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName6 = "updateFlaskAdmin";
@@ -63,8 +62,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.util.Date",
 				"boolean", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
+				"java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -75,9 +74,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.util.Date", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName8 = "updateFlaskContentManager";
@@ -87,8 +85,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.util.Date",
 				"boolean", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
+				"java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -218,9 +216,9 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -256,11 +254,11 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 						
 					ClpSerializer.translateInput(city),
 						
-					ClpSerializer.translateInput(state),
+					stateId,
 						
-					ClpSerializer.translateInput(country),
+					countryId,
 						
-					ClpSerializer.translateInput(mobileNo),
+					ClpSerializer.translateInput(mobileNumber),
 						
 					ClpSerializer.translateInput(userInterests),
 						
@@ -297,9 +295,9 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -337,11 +335,11 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 						
 					ClpSerializer.translateInput(city),
 						
-					ClpSerializer.translateInput(state),
+					stateId,
 						
-					ClpSerializer.translateInput(country),
+					countryId,
 						
-					ClpSerializer.translateInput(mobileNo),
+					ClpSerializer.translateInput(mobileNumber),
 						
 					ClpSerializer.translateInput(userInterests),
 						
@@ -378,9 +376,9 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -416,11 +414,11 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 						
 					ClpSerializer.translateInput(city),
 						
-					ClpSerializer.translateInput(state),
+					stateId,
 						
-					ClpSerializer.translateInput(country),
+					countryId,
 						
-					ClpSerializer.translateInput(mobileNo),
+					ClpSerializer.translateInput(mobileNumber),
 						
 					ClpSerializer.translateInput(userInterests),
 						
@@ -457,9 +455,9 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long state,
+		long country, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -497,11 +495,11 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 						
 					ClpSerializer.translateInput(city),
 						
-					ClpSerializer.translateInput(state),
+					state,
 						
-					ClpSerializer.translateInput(country),
+					country,
 						
-					ClpSerializer.translateInput(mobileNo),
+					ClpSerializer.translateInput(mobileNumber),
 						
 					ClpSerializer.translateInput(userInterests),
 						

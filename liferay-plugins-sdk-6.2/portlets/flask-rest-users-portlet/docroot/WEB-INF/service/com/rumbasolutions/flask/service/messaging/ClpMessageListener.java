@@ -20,7 +20,6 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.rumbasolutions.flask.service.ClpSerializer;
 import com.rumbasolutions.flask.service.FlaskAdminServiceUtil;
 import com.rumbasolutions.flask.service.FlaskRoleServiceUtil;
-import com.rumbasolutions.flask.service.FlaskUserServiceUtil;
 
 /**
  * @author Ashutosh Rai
@@ -40,8 +39,6 @@ public class ClpMessageListener extends BaseMessageListener {
 			FlaskAdminServiceUtil.clearService();
 
 			FlaskRoleServiceUtil.clearService();
-
-			FlaskUserServiceUtil.clearService();
 		}
 	}
 }

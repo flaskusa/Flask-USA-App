@@ -75,16 +75,16 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _flaskAdminService.addFlaskAdmin(firstName, middleName,
 			lastName, email, screenName, password1, password2, DOB, isMale,
-			streetName, aptNo, areaCode, city, state, country, mobileNo,
-			userInterests, serviceContext);
+			streetName, aptNo, areaCode, city, stateId, countryId,
+			mobileNumber, userInterests, serviceContext);
 	}
 
 	@Override
@@ -94,16 +94,16 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _flaskAdminService.updateFlaskAdmin(userId, firstName,
 			middleName, lastName, email, screenName, password1, password2, DOB,
-			isMale, streetName, aptNo, areaCode, city, state, country,
-			mobileNo, userInterests, serviceContext);
+			isMale, streetName, aptNo, areaCode, city, stateId, countryId,
+			mobileNumber, userInterests, serviceContext);
 	}
 
 	@Override
@@ -113,16 +113,16 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _flaskAdminService.addFlaskContentManager(firstName, middleName,
 			lastName, email, screenName, password1, password2, DOB, isMale,
-			streetName, aptNo, areaCode, city, state, country, mobileNo,
-			userInterests, serviceContext);
+			streetName, aptNo, areaCode, city, stateId, countryId,
+			mobileNumber, userInterests, serviceContext);
 	}
 
 	/**
@@ -135,16 +135,16 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long state,
+		long country, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _flaskAdminService.updateFlaskContentManager(userId, firstName,
 			middleName, lastName, email, screenName, password1, password2, DOB,
 			isMale, streetName, aptNo, areaCode, city, state, country,
-			mobileNo, userInterests, serviceContext);
+			mobileNumber, userInterests, serviceContext);
 	}
 
 	@Override

@@ -5,6 +5,4 @@
 	<bean id="com.rumbasolutions.flask.service.persistence.FlaskAdminPersistence" class="com.rumbasolutions.flask.service.persistence.FlaskAdminPersistenceImpl" parent="basePersistence" />
 	<bean id="com.rumbasolutions.flask.service.FlaskRoleService" class="com.rumbasolutions.flask.service.impl.FlaskRoleServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.FlaskRolePersistence" class="com.rumbasolutions.flask.service.persistence.FlaskRolePersistenceImpl" parent="basePersistence" />
-	<bean id="com.rumbasolutions.flask.service.FlaskUserService" class="com.rumbasolutions.flask.service.impl.FlaskUserServiceImpl" />
-	<bean id="com.rumbasolutions.flask.service.persistence.FlaskUserPersistence" class="com.rumbasolutions.flask.service.persistence.FlaskUserPersistenceImpl" parent="basePersistence" />
 </beans>

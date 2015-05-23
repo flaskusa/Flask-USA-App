@@ -87,8 +87,10 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 		attributes.put("aptNo", getAptNo());
 		attributes.put("areaCode", getAreaCode());
 		attributes.put("city", getCity());
-		attributes.put("state", getState());
-		attributes.put("country", getCountry());
+		attributes.put("stateId", getStateId());
+		attributes.put("stateName", getStateName());
+		attributes.put("countryId", getCountryId());
+		attributes.put("countryName", getCountryName());
 		attributes.put("mobileNumber", getMobileNumber());
 		attributes.put("portraitURL", getPortraitURL());
 		attributes.put("userInterests", getUserInterests());
@@ -176,16 +178,28 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 			setCity(city);
 		}
 
-		String state = (String)attributes.get("state");
+		Long stateId = (Long)attributes.get("stateId");
 
-		if (state != null) {
-			setState(state);
+		if (stateId != null) {
+			setStateId(stateId);
 		}
 
-		String country = (String)attributes.get("country");
+		String stateName = (String)attributes.get("stateName");
 
-		if (country != null) {
-			setCountry(country);
+		if (stateName != null) {
+			setStateName(stateName);
+		}
+
+		Long countryId = (Long)attributes.get("countryId");
+
+		if (countryId != null) {
+			setCountryId(countryId);
+		}
+
+		String countryName = (String)attributes.get("countryName");
+
+		if (countryName != null) {
+			setCountryName(countryName);
 		}
 
 		String mobileNumber = (String)attributes.get("mobileNumber");
@@ -517,21 +531,21 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 	}
 
 	@Override
-	public String getState() {
-		return _state;
+	public long getStateId() {
+		return _stateId;
 	}
 
 	@Override
-	public void setState(String state) {
-		_state = state;
+	public void setStateId(long stateId) {
+		_stateId = stateId;
 
 		if (_flaskAdminRemoteModel != null) {
 			try {
 				Class<?> clazz = _flaskAdminRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setState", String.class);
+				Method method = clazz.getMethod("setStateId", long.class);
 
-				method.invoke(_flaskAdminRemoteModel, state);
+				method.invoke(_flaskAdminRemoteModel, stateId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -540,21 +554,67 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 	}
 
 	@Override
-	public String getCountry() {
-		return _country;
+	public String getStateName() {
+		return _stateName;
 	}
 
 	@Override
-	public void setCountry(String country) {
-		_country = country;
+	public void setStateName(String stateName) {
+		_stateName = stateName;
 
 		if (_flaskAdminRemoteModel != null) {
 			try {
 				Class<?> clazz = _flaskAdminRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setCountry", String.class);
+				Method method = clazz.getMethod("setStateName", String.class);
 
-				method.invoke(_flaskAdminRemoteModel, country);
+				method.invoke(_flaskAdminRemoteModel, stateName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getCountryId() {
+		return _countryId;
+	}
+
+	@Override
+	public void setCountryId(long countryId) {
+		_countryId = countryId;
+
+		if (_flaskAdminRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskAdminRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCountryId", long.class);
+
+				method.invoke(_flaskAdminRemoteModel, countryId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCountryName() {
+		return _countryName;
+	}
+
+	@Override
+	public void setCountryName(String countryName) {
+		_countryName = countryName;
+
+		if (_flaskAdminRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskAdminRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCountryName", String.class);
+
+				method.invoke(_flaskAdminRemoteModel, countryName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -703,8 +763,10 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 		clone.setAptNo(getAptNo());
 		clone.setAreaCode(getAreaCode());
 		clone.setCity(getCity());
-		clone.setState(getState());
-		clone.setCountry(getCountry());
+		clone.setStateId(getStateId());
+		clone.setStateName(getStateName());
+		clone.setCountryId(getCountryId());
+		clone.setCountryName(getCountryName());
 		clone.setMobileNumber(getMobileNumber());
 		clone.setPortraitURL(getPortraitURL());
 		clone.setUserInterests(getUserInterests());
@@ -760,7 +822,7 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(41);
 
 		sb.append("{userId=");
 		sb.append(getUserId());
@@ -788,10 +850,14 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 		sb.append(getAreaCode());
 		sb.append(", city=");
 		sb.append(getCity());
-		sb.append(", state=");
-		sb.append(getState());
-		sb.append(", country=");
-		sb.append(getCountry());
+		sb.append(", stateId=");
+		sb.append(getStateId());
+		sb.append(", stateName=");
+		sb.append(getStateName());
+		sb.append(", countryId=");
+		sb.append(getCountryId());
+		sb.append(", countryName=");
+		sb.append(getCountryName());
 		sb.append(", mobileNumber=");
 		sb.append(getMobileNumber());
 		sb.append(", portraitURL=");
@@ -805,7 +871,7 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(64);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.FlaskAdmin");
@@ -864,12 +930,20 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 		sb.append(getCity());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>state</column-name><column-value><![CDATA[");
-		sb.append(getState());
+			"<column><column-name>stateId</column-name><column-value><![CDATA[");
+		sb.append(getStateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>country</column-name><column-value><![CDATA[");
-		sb.append(getCountry());
+			"<column><column-name>stateName</column-name><column-value><![CDATA[");
+		sb.append(getStateName());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryId</column-name><column-value><![CDATA[");
+		sb.append(getCountryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryName</column-name><column-value><![CDATA[");
+		sb.append(getCountryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>mobileNumber</column-name><column-value><![CDATA[");
@@ -903,8 +977,10 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 	private String _aptNo;
 	private String _areaCode;
 	private String _city;
-	private String _state;
-	private String _country;
+	private long _stateId;
+	private String _stateName;
+	private long _countryId;
+	private String _countryName;
 	private String _mobileNumber;
 	private String _portraitURL;
 	private String _userInterests;

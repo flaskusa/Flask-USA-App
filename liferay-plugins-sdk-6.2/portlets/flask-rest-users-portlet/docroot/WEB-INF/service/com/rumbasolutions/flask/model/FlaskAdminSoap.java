@@ -44,8 +44,10 @@ public class FlaskAdminSoap implements Serializable {
 		soapModel.setAptNo(model.getAptNo());
 		soapModel.setAreaCode(model.getAreaCode());
 		soapModel.setCity(model.getCity());
-		soapModel.setState(model.getState());
-		soapModel.setCountry(model.getCountry());
+		soapModel.setStateId(model.getStateId());
+		soapModel.setStateName(model.getStateName());
+		soapModel.setCountryId(model.getCountryId());
+		soapModel.setCountryName(model.getCountryName());
 		soapModel.setMobileNumber(model.getMobileNumber());
 		soapModel.setPortraitURL(model.getPortraitURL());
 		soapModel.setUserInterests(model.getUserInterests());
@@ -205,20 +207,36 @@ public class FlaskAdminSoap implements Serializable {
 		_city = city;
 	}
 
-	public String getState() {
-		return _state;
+	public long getStateId() {
+		return _stateId;
 	}
 
-	public void setState(String state) {
-		_state = state;
+	public void setStateId(long stateId) {
+		_stateId = stateId;
 	}
 
-	public String getCountry() {
-		return _country;
+	public String getStateName() {
+		return _stateName;
 	}
 
-	public void setCountry(String country) {
-		_country = country;
+	public void setStateName(String stateName) {
+		_stateName = stateName;
+	}
+
+	public long getCountryId() {
+		return _countryId;
+	}
+
+	public void setCountryId(long countryId) {
+		_countryId = countryId;
+	}
+
+	public String getCountryName() {
+		return _countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		_countryName = countryName;
 	}
 
 	public String getMobileNumber() {
@@ -258,8 +276,10 @@ public class FlaskAdminSoap implements Serializable {
 	private String _aptNo;
 	private String _areaCode;
 	private String _city;
-	private String _state;
-	private String _country;
+	private long _stateId;
+	private String _stateName;
+	private long _countryId;
+	private String _countryName;
 	private String _mobileNumber;
 	private String _portraitURL;
 	private String _userInterests;

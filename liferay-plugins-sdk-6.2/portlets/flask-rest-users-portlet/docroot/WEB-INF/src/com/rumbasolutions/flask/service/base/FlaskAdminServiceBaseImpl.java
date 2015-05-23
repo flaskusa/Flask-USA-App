@@ -26,7 +26,6 @@ import com.rumbasolutions.flask.model.FlaskAdmin;
 import com.rumbasolutions.flask.service.FlaskAdminService;
 import com.rumbasolutions.flask.service.persistence.FlaskAdminPersistence;
 import com.rumbasolutions.flask.service.persistence.FlaskRolePersistence;
-import com.rumbasolutions.flask.service.persistence.FlaskUserPersistence;
 
 import javax.sql.DataSource;
 
@@ -124,44 +123,6 @@ public abstract class FlaskAdminServiceBaseImpl extends BaseServiceImpl
 	public void setFlaskRolePersistence(
 		FlaskRolePersistence flaskRolePersistence) {
 		this.flaskRolePersistence = flaskRolePersistence;
-	}
-
-	/**
-	 * Returns the flask user remote service.
-	 *
-	 * @return the flask user remote service
-	 */
-	public com.rumbasolutions.flask.service.FlaskUserService getFlaskUserService() {
-		return flaskUserService;
-	}
-
-	/**
-	 * Sets the flask user remote service.
-	 *
-	 * @param flaskUserService the flask user remote service
-	 */
-	public void setFlaskUserService(
-		com.rumbasolutions.flask.service.FlaskUserService flaskUserService) {
-		this.flaskUserService = flaskUserService;
-	}
-
-	/**
-	 * Returns the flask user persistence.
-	 *
-	 * @return the flask user persistence
-	 */
-	public FlaskUserPersistence getFlaskUserPersistence() {
-		return flaskUserPersistence;
-	}
-
-	/**
-	 * Sets the flask user persistence.
-	 *
-	 * @param flaskUserPersistence the flask user persistence
-	 */
-	public void setFlaskUserPersistence(
-		FlaskUserPersistence flaskUserPersistence) {
-		this.flaskUserPersistence = flaskUserPersistence;
 	}
 
 	/**
@@ -343,10 +304,6 @@ public abstract class FlaskAdminServiceBaseImpl extends BaseServiceImpl
 	protected com.rumbasolutions.flask.service.FlaskRoleService flaskRoleService;
 	@BeanReference(type = FlaskRolePersistence.class)
 	protected FlaskRolePersistence flaskRolePersistence;
-	@BeanReference(type = com.rumbasolutions.flask.service.FlaskUserService.class)
-	protected com.rumbasolutions.flask.service.FlaskUserService flaskUserService;
-	@BeanReference(type = FlaskUserPersistence.class)
-	protected FlaskUserPersistence flaskUserPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

@@ -128,8 +128,8 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 					Date DOB, boolean isMale,
 					String streetName, String aptNo,
 					String areaCode, String city,
-					String state, String country,
-					String mobileNo, String userInterests, 
+					long stateId, long countryId,
+					String mobileNumber, String userInterests, 
 					ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		FlaskAdmin adminUser=null;
@@ -139,10 +139,11 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				DOB, isMale,
 				streetName, aptNo,
 				areaCode, city,
-				state, country,
-				mobileNo, userInterests, serviceContext);
-		if(user != null)
+				stateId, countryId,
+				mobileNumber, userInterests, serviceContext);
+		if(user != null) {
 			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
+		}
 		return adminUser;
 	}
 	
@@ -153,21 +154,23 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			Date DOB, boolean isMale,
 			String streetName, String aptNo,
 			String areaCode, String city,
-			String state, String country,
-			String mobileNo, String userInterests,
+			long stateId, long countryId,
+			String mobileNumber, String userInterests,
 			ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		FlaskAdmin adminUser=null;
 		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_ADMIN.getRoleName());
-		User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(), firstName, middleName, 
-				lastName, screenName, email, password1,  password2,
-				DOB,isMale,
+		User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(),
+				firstName, middleName, lastName, 
+				screenName, email, password1,  password2,
+				DOB, isMale,
 				streetName, aptNo,
 				areaCode, city,
-				state, country,
-				mobileNo, userInterests, serviceContext);
-		if(user != null)
+				stateId, countryId,
+				mobileNumber, userInterests, serviceContext);
+		if(user != null) {
 			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
+		}
 		return adminUser;
 	}
 	
@@ -184,8 +187,8 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			Date DOB, boolean isMale,
 			String streetName, String aptNo,
 			String areaCode, String city,
-			String state, String country,
-			String mobileNo, String userInterests, 
+			long stateId, long countryId,
+			String mobileNumber, String userInterests, 
 			ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		
@@ -197,10 +200,11 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				DOB, isMale,
 				streetName, aptNo,
 				areaCode, city,
-				state, country,
-				mobileNo, userInterests, serviceContext);
-		if(user != null)
+				stateId, countryId,
+				mobileNumber, userInterests, serviceContext);
+		if(user != null) {
 			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
+		}
 		return adminUser;
 	}
 	
@@ -213,8 +217,8 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			Date DOB, boolean isMale,
 			String streetName, String aptNo,
 			String areaCode, String city,
-			String state, String country,
-			String mobileNo, String userInterests,
+			long state, long country,
+			String mobileNumber, String userInterests,
 			ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		FlaskAdmin adminUser=null;
@@ -225,9 +229,10 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 						streetName, aptNo,
 						areaCode, city,
 						state, country,
-						mobileNo, userInterests, serviceContext);
-		if(user != null)
+						mobileNumber, userInterests, serviceContext);
+		if(user != null) {
 			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
+		}
 		return adminUser;
 	}
 	
@@ -304,8 +309,8 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			Date DOB, boolean isMale,
 			String streetName, String aptNo,
 			String areaCode, String city,
-			String state, String country,
-			String mobileNo, String userInterests, ServiceContext serviceContext) throws PortalException, SystemException {
+ long stateId, long countryId,
+			String mobileNumber, String userInterests, ServiceContext serviceContext) throws PortalException, SystemException {
 		
 			User user=null;
 			Calendar cal = Calendar.getInstance();
@@ -343,13 +348,12 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				 		null);
 			 
 			 addUserInterest(userInterests, user);
-				 
 			 
-			 addAddress(streetName, aptNo, areaCode, city, country,
+		addAddress(streetName, aptNo, areaCode, city, stateId, countryId,
 					serviceContext, user);
 			 
-			 if(!mobileNo.isEmpty()){
-				 addMobile(mobileNo, user, serviceContext);
+			 if(!mobileNumber.isEmpty()){
+				 addMobile(mobileNumber, user, serviceContext);
 			 }
 			 return user;
 	}
@@ -357,7 +361,9 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	private void addUserInterest(String userInterests, User user)
 			throws PortalException {
 		
-		if(userInterests.isEmpty()) return;
+		if(userInterests.isEmpty()) {
+			return;
+		}
 		
 		//JSONArray json = JSONFactoryUtil.createJSONArray(userInterests); //this should validate JSON else throw JSON exception
 		
@@ -367,13 +373,13 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		user.getExpandoBridge().setAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, userInterests, false);
 	}
 
-	private void addMobile(String mobileNo, User user, ServiceContext serviceContext){
+	private void addMobile(String mobileNumber, User user, ServiceContext serviceContext){
 		int mobileTypeId = FlaskModelUtil.getMobilePhoneTypeId();
 		try {
 			Phone phone = PhoneLocalServiceUtil.addPhone( user.getUserId()/*long userId*/,
 					 Contact.class.getName()/*String className*/,
 					 user.getContact().getClassPK()/*long classPK*/,
-			         mobileNo,
+			         mobileNumber,
 			         ""/*String extension*/,
 			         mobileTypeId/*int typeId*/,
 			         true,
@@ -388,9 +394,9 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	}
 
 	private void addAddress(String streetName, String aptNo, String areaCode,
-			String city, String country, ServiceContext serviceContext,
-			User user){
-		long countryId = FlaskModelUtil.getCountryId(country);
+							String city, long stateId, long countryId,
+							ServiceContext serviceContext,User user){
+		
 		 int addressTypeId = FlaskModelUtil.getPersonalAddressId();
 		 try {
 			Address address = AddressLocalServiceUtil.addAddress( user.getUserId()/*long userId*/,
@@ -401,8 +407,8 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			         "" /*String street1*/,
 			         city /*String City*/,
 			         areaCode /*String zipCode*/,
-			         0 ,
-			         countryId/*long countryId*/,
+			         stateId /*  long regionId*/,
+ 					 countryId/* long countryId */,
 			         addressTypeId,
 			         false	/*boolean mailing*/,
 			         true	/*boolean primary*/,
@@ -415,26 +421,79 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		}
 	}
 	
+	/**
+	 * THis function sets address fields to passed Address Object and saves the address
+	 * @param streetName
+	 * @param aptNo
+	 * @param areaCode
+	 * @param city
+	 * @param stateId
+	 * @param countryId
+	 * @param addr
+	 * @throws SystemException
+	 */
+	
+	private void setAddress(
+		String streetName, String aptNo, String areaCode, String city, long stateId, long countryId, Address addr)
+		throws SystemException {
+
+		addr.setStreet1(aptNo);
+		addr.setStreet2(streetName);
+		addr.setCity(city);
+		addr.setRegionId(stateId);
+		addr.setCountryId(countryId);
+		addr.setZip(areaCode);
+		AddressLocalServiceUtil.updateAddress(addr);
+	}
+	/**
+	 * 
+	 * @param userId
+	 * @param roleId
+	 * @param loggedInUser
+	 * @param firstName
+	 * @param middleName
+	 * @param lastName
+	 * @param screenName
+	 * @param email
+	 * @param password1
+	 * @param password2
+	 * @param DOB
+	 * @param isMale
+	 * @param streetName
+	 * @param aptNo
+	 * @param areaCode
+	 * @param city
+	 * @param stateId
+	 * @param countryId
+	 * @param mobileNumber
+	 * @param userInterests
+	 * @param serviceContext
+	 * @return
+	 * @throws PortalException
+	 * @throws SystemException
+	 */
 	private User updateUser(long userId, long roleId, long loggedInUser, String firstName, String middleName, 
 			String lastName, String screenName, String email, String password1, String password2,
 			Date DOB, boolean isMale,
 			String streetName, String aptNo,
 			String areaCode, String city,
-			String state, String country,
-			String mobileNo, String userInterests, ServiceContext serviceContext) throws PortalException, SystemException {
+			long stateId, long countryId,
+			String mobileNumber, String userInterests, 
+			ServiceContext serviceContext) throws PortalException, SystemException {
 		
 		Calendar cal = Calendar.getInstance();
 		cal.setTime(DOB);
 		
 		long[] roleIds = {roleId};
+		
 		User user =	UserLocalServiceUtil.getUser(userId);
 		
 		
 				
 		user = UserLocalServiceUtil.updateUser( userId /*long userId*/,
 				password1/*String oldPassword*/,
-                null /*String newPassword1*/,
-                null/*String newPassword2*/,
+				password1 /*String newPassword1*/,
+				password1/*String newPassword2*/,
                 false/*boolean passwordReset*/,
                 user.getReminderQueryQuestion() /*String reminderQueryQuestion*/,
                 user.getReminderQueryAnswer() /*String reminderQueryAnswer*/,
@@ -455,16 +514,16 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
             	cal.get(Calendar.MONTH) /*int birthdayMonth*/,
 		 		cal.get(Calendar.DAY_OF_MONTH) /*int birthdayDay*/,
 		 		cal.get(Calendar.YEAR) /*int birthdayYear*/,
-		 		null/*String smsSn*/,
-		 		null/*String aimSn*/,
-                null /*String facebookSn*/,
-                null /*String icqSn*/,
-                null /*String jabberSn*/,
-                null /*String msnSn*/,
-                null /*String mySpaceSn*/,
-                null/*String skypeSn*/,
-                null /*String twitterSn*/,
-                null /*String ymSn*/,
+		 		""/*String smsSn*/,
+		 		""/*String aimSn*/,
+                "" /*String facebookSn*/,
+                "" /*String icqSn*/,
+                "" /*String jabberSn*/,
+                "" /*String msnSn*/,
+                "" /*String mySpaceSn*/,
+                ""/*String skypeSn*/,
+                "" /*String twitterSn*/,
+                "" /*String ymSn*/,
                 user.getJobTitle() /*String jobTitle*/,
                 user.getGroupIds(),
                 user.getOrganizationIds()/*long[] organizationIds*/,
@@ -472,30 +531,21 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
                 null/*List<UserGroupRole> userGroupRoles*/,
                 user.getGroupIds(),
                 serviceContext);
-			 
-			Address addr = user.getAddresses().get(0);
-			if(addr != null){
-				addr.setStreet1(aptNo);
-				addr.setStreet2(streetName);
-				addr.setCity(city);
-				addr.setZip(areaCode);
-				AddressLocalServiceUtil.updateAddress(addr);
+		
+			if(user.getAddresses().size() > 0){
+				Address addr = user.getAddresses().get(0);
+				setAddress(streetName, aptNo, areaCode, city, stateId, countryId, addr);
+			}else{
+				addAddress(streetName, aptNo, areaCode, city, stateId, countryId,
+					serviceContext, user);
 			}
-			Phone phone = user.getPhones().get(0);
-			if(phone != null){
-				phone.setNumber(mobileNo);
+			if(user.getPhones().size() > 0 ){
+				Phone phone = user.getPhones().get(0);
+				phone.setNumber(mobileNumber);
 				PhoneLocalServiceUtil.updatePhone(phone);
 			}else{
-				addMobile(mobileNo, user, serviceContext);
-			}
-				
-			
-			
-			 
-			// List<Addresses>user.getAddresses();
-			 
-			 return user;
-	}
-
-	
+				addMobile(mobileNumber, user, serviceContext);
+			}	
+			return user;
+	}	
 }

@@ -79,9 +79,9 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -92,9 +92,9 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -105,9 +105,9 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -121,9 +121,9 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		java.lang.String screenName, java.lang.String password1,
 		java.lang.String password2, java.util.Date DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city,
-		java.lang.String state, java.lang.String country,
-		java.lang.String mobileNo, java.lang.String userInterests,
+		java.lang.String areaCode, java.lang.String city, long state,
+		long country, java.lang.String mobileNumber,
+		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;

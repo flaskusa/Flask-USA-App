@@ -24,10 +24,10 @@
 			<basic name="aptNo" />
 			<basic name="areaCode" />
 			<basic name="city" />
-			<basic name="state">
-				<column name="STATE_" />
-			</basic>
-			<basic name="country" />
+			<basic name="stateId" />
+			<basic name="stateName" />
+			<basic name="countryId" />
+			<basic name="countryName" />
 			<basic name="mobileNumber" />
 			<basic name="portraitURL" />
 			<basic name="userInterests" />
@@ -47,46 +47,12 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
-	<mapped-superclass class="com.rumbasolutions.flask.model.impl.FlaskUserModelImpl">
-		<attributes>
-			<id name="userId" />
-			<basic name="roleId" />
-			<basic name="firstName" />
-			<basic name="middleName" />
-			<basic name="lastName" />
-			<basic name="screenName" />
-			<basic name="email" />
-			<basic name="DOB">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="isMale" />
-			<basic name="streetName" />
-			<basic name="aptNo" />
-			<basic name="areaCode" />
-			<basic name="city" />
-			<basic name="state">
-				<column name="STATE_" />
-			</basic>
-			<basic name="country" />
-			<basic name="mobileNumber" />
-			<basic name="portraitURL" />
-			<basic name="userInterests" />
-			<transient name="modelAttributes" />
-			<transient name="primaryKey" />
-			<transient name="primaryKeyObj" />
-			<transient name="userUuid" />
-		</attributes>
-	</mapped-superclass>
 	<entity class="com.rumbasolutions.flask.model.impl.FlaskAdminImpl" name="FlaskAdmin">
 		<table name="flaskusers_FlaskAdmin" />
 		<attributes />
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.FlaskRoleImpl" name="FlaskRole">
 		<table name="flaskusers_FlaskRole" />
-		<attributes />
-	</entity>
-	<entity class="com.rumbasolutions.flask.model.impl.FlaskUserImpl" name="FlaskUser">
-		<table name="flaskusers_FlaskUser" />
 		<attributes />
 	</entity>
 </entity-mappings>

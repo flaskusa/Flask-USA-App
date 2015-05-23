@@ -62,8 +62,10 @@ public class FlaskAdminWrapper implements FlaskAdmin, ModelWrapper<FlaskAdmin> {
 		attributes.put("aptNo", getAptNo());
 		attributes.put("areaCode", getAreaCode());
 		attributes.put("city", getCity());
-		attributes.put("state", getState());
-		attributes.put("country", getCountry());
+		attributes.put("stateId", getStateId());
+		attributes.put("stateName", getStateName());
+		attributes.put("countryId", getCountryId());
+		attributes.put("countryName", getCountryName());
 		attributes.put("mobileNumber", getMobileNumber());
 		attributes.put("portraitURL", getPortraitURL());
 		attributes.put("userInterests", getUserInterests());
@@ -151,16 +153,28 @@ public class FlaskAdminWrapper implements FlaskAdmin, ModelWrapper<FlaskAdmin> {
 			setCity(city);
 		}
 
-		String state = (String)attributes.get("state");
+		Long stateId = (Long)attributes.get("stateId");
 
-		if (state != null) {
-			setState(state);
+		if (stateId != null) {
+			setStateId(stateId);
 		}
 
-		String country = (String)attributes.get("country");
+		String stateName = (String)attributes.get("stateName");
 
-		if (country != null) {
-			setCountry(country);
+		if (stateName != null) {
+			setStateName(stateName);
+		}
+
+		Long countryId = (Long)attributes.get("countryId");
+
+		if (countryId != null) {
+			setCountryId(countryId);
+		}
+
+		String countryName = (String)attributes.get("countryName");
+
+		if (countryName != null) {
+			setCountryName(countryName);
 		}
 
 		String mobileNumber = (String)attributes.get("mobileNumber");
@@ -485,43 +499,83 @@ public class FlaskAdminWrapper implements FlaskAdmin, ModelWrapper<FlaskAdmin> {
 	}
 
 	/**
-	* Returns the state of this flask admin.
+	* Returns the state ID of this flask admin.
 	*
-	* @return the state of this flask admin
+	* @return the state ID of this flask admin
 	*/
 	@Override
-	public java.lang.String getState() {
-		return _flaskAdmin.getState();
+	public long getStateId() {
+		return _flaskAdmin.getStateId();
 	}
 
 	/**
-	* Sets the state of this flask admin.
+	* Sets the state ID of this flask admin.
 	*
-	* @param state the state of this flask admin
+	* @param stateId the state ID of this flask admin
 	*/
 	@Override
-	public void setState(java.lang.String state) {
-		_flaskAdmin.setState(state);
+	public void setStateId(long stateId) {
+		_flaskAdmin.setStateId(stateId);
 	}
 
 	/**
-	* Returns the country of this flask admin.
+	* Returns the state name of this flask admin.
 	*
-	* @return the country of this flask admin
+	* @return the state name of this flask admin
 	*/
 	@Override
-	public java.lang.String getCountry() {
-		return _flaskAdmin.getCountry();
+	public java.lang.String getStateName() {
+		return _flaskAdmin.getStateName();
 	}
 
 	/**
-	* Sets the country of this flask admin.
+	* Sets the state name of this flask admin.
 	*
-	* @param country the country of this flask admin
+	* @param stateName the state name of this flask admin
 	*/
 	@Override
-	public void setCountry(java.lang.String country) {
-		_flaskAdmin.setCountry(country);
+	public void setStateName(java.lang.String stateName) {
+		_flaskAdmin.setStateName(stateName);
+	}
+
+	/**
+	* Returns the country ID of this flask admin.
+	*
+	* @return the country ID of this flask admin
+	*/
+	@Override
+	public long getCountryId() {
+		return _flaskAdmin.getCountryId();
+	}
+
+	/**
+	* Sets the country ID of this flask admin.
+	*
+	* @param countryId the country ID of this flask admin
+	*/
+	@Override
+	public void setCountryId(long countryId) {
+		_flaskAdmin.setCountryId(countryId);
+	}
+
+	/**
+	* Returns the country name of this flask admin.
+	*
+	* @return the country name of this flask admin
+	*/
+	@Override
+	public java.lang.String getCountryName() {
+		return _flaskAdmin.getCountryName();
+	}
+
+	/**
+	* Sets the country name of this flask admin.
+	*
+	* @param countryName the country name of this flask admin
+	*/
+	@Override
+	public void setCountryName(java.lang.String countryName) {
+		_flaskAdmin.setCountryName(countryName);
 	}
 
 	/**

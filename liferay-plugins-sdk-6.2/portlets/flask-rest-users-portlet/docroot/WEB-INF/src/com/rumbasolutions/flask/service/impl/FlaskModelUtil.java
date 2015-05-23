@@ -2,6 +2,7 @@ package com.rumbasolutions.flask.service.impl;
 
 import java.util.List;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Address;
@@ -10,10 +11,10 @@ import com.liferay.portal.model.Country;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.Region;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.AddressLocalServiceUtil;
-import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -51,6 +52,13 @@ public class FlaskModelUtil {
 		}
 		
 	}
+	/**
+	 * Get flask user specific information from liferay User 
+	 * getFlaskAdmin
+	 * @param user
+	 * @param serviceContext
+	 * @return
+	 */
 	public static FlaskAdmin getFlaskAdmin(User user, ServiceContext serviceContext) {
 		
 		FlaskAdmin admin = new FlaskAdminImpl(); 
@@ -62,34 +70,66 @@ public class FlaskModelUtil {
 			admin.setMiddleName(user.getMiddleName());
 			admin.setEmail(user.getEmailAddress());
 			admin.setScreenName(user.getScreenName());
+			admin.setDOB(user.getBirthday());
+			admin.setRoleId(getFlaskRoleId(user));
 			Contact userContact = user.getContact();
-			
 			admin.setMobileNumber(getPhoneNumber(user));
-			
+			setAddress(user, admin, userContact);
+			admin.setPortraitURL(String.valueOf(user.getPortraitId()));
+			if(user.getExpandoBridge().hasAttribute(EXPANDO_COL_USER_INTERESTS) 
+							&& user.getExpandoBridge().getAttribute(EXPANDO_COL_USER_INTERESTS) != null){
+				String interest = user.getExpandoBridge().getAttribute(EXPANDO_COL_USER_INTERESTS).toString();
+				admin.setUserInterests(interest);
+			}
+			admin.setIsMale(user.isMale());
+		} catch (Exception e) {
+			LOGGER.error("Exception in getFlaskAdmin " + e.getMessage());
+			e.printStackTrace();
+		} 
+		return admin;
+	}
+
+	private static long getFlaskRoleId(User user)
+		throws SystemException {
+		long roleId=0;
+		if(user.getRoleIds().length > 0 ){
+			roleId = user.getRoleIds()[0];
+		}
+		return roleId;
+	}
+
+	private static void setAddress(User user, FlaskAdmin admin, Contact userContact)
+		throws SystemException {
+
+		try {
 			List<Address> addrList = AddressLocalServiceUtil.getAddresses(user.getCompanyId(),
 					Contact.class.getName(),
 					userContact.getClassPK()) ;
 			if( addrList.size() > 0){
 				Address addr = addrList.get(0);
+				
 				admin.setAptNo(addr.getStreet1());
 				admin.setStreetName(addr.getStreet2());
-				admin.setState(addr.getRegion().getName());			
 				admin.setCity(addr.getCity());
-				admin.setCountry(addr.getCountry().getName());
 				admin.setAreaCode(addr.getZip());			
-			}
+				
+				Region region = addr.getRegion();
+				if(region != null){
+					admin.setStateId(region.getRegionId());
+					admin.setStateName(region.getName());
+				}
+				Country  country = addr.getCountry();
+				if(country != null){
+					admin.setCountryId(country.getCountryId());
+					admin.setCountryName(country.getNameCurrentValue());
+				}
 
-			admin.setPortraitURL(String.valueOf(user.getPortraitId()));
-			if(user.getExpandoBridge().hasAttribute(EXPANDO_COL_USER_INTERESTS)){
-				admin.setUserInterests(user.getExpandoBridge().getAttribute(EXPANDO_COL_USER_INTERESTS).toString());
 			}
-			
-			
-			admin.setIsMale(user.isMale());
-		} catch (Exception e) {
-			LOGGER.error("Exception in getFlaskAdmin " + e.getMessage());
-		} 
-		return admin;
+		}
+		catch (Exception e) {
+			LOGGER.error("Exception in setAddress " + e.getMessage());
+			e.printStackTrace();
+		}
 	}
 
 	private static String getPhoneNumber(User user){
@@ -156,20 +196,4 @@ public class FlaskModelUtil {
 		}
 		return id;	
 	}
-
-	public static long getCountryId(String countryName) {
-		long countryId =19;
-		if(countryName == null || countryName.isEmpty())
-			countryName = USA_COUNTRY_NAME;
-		 try {
-			Country country = CountryServiceUtil.getCountryByName(USA_COUNTRY_NAME);
-			countryId = country.getCountryId();
-		} catch (Exception e) {
-			LOGGER.error("Exception in get countryID " + e.getMessage());;
-		} 
-		 return countryId;
-	}
-	
-	
-	
 }

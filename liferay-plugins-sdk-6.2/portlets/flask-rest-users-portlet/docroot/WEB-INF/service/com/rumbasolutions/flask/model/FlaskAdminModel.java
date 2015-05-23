@@ -267,34 +267,62 @@ public interface FlaskAdminModel extends BaseModel<FlaskAdmin> {
 	public void setCity(String city);
 
 	/**
-	 * Returns the state of this flask admin.
+	 * Returns the state ID of this flask admin.
 	 *
-	 * @return the state of this flask admin
+	 * @return the state ID of this flask admin
+	 */
+	public long getStateId();
+
+	/**
+	 * Sets the state ID of this flask admin.
+	 *
+	 * @param stateId the state ID of this flask admin
+	 */
+	public void setStateId(long stateId);
+
+	/**
+	 * Returns the state name of this flask admin.
+	 *
+	 * @return the state name of this flask admin
 	 */
 	@AutoEscape
-	public String getState();
+	public String getStateName();
 
 	/**
-	 * Sets the state of this flask admin.
+	 * Sets the state name of this flask admin.
 	 *
-	 * @param state the state of this flask admin
+	 * @param stateName the state name of this flask admin
 	 */
-	public void setState(String state);
+	public void setStateName(String stateName);
 
 	/**
-	 * Returns the country of this flask admin.
+	 * Returns the country ID of this flask admin.
 	 *
-	 * @return the country of this flask admin
+	 * @return the country ID of this flask admin
+	 */
+	public long getCountryId();
+
+	/**
+	 * Sets the country ID of this flask admin.
+	 *
+	 * @param countryId the country ID of this flask admin
+	 */
+	public void setCountryId(long countryId);
+
+	/**
+	 * Returns the country name of this flask admin.
+	 *
+	 * @return the country name of this flask admin
 	 */
 	@AutoEscape
-	public String getCountry();
+	public String getCountryName();
 
 	/**
-	 * Sets the country of this flask admin.
+	 * Sets the country name of this flask admin.
 	 *
-	 * @param country the country of this flask admin
+	 * @param countryName the country name of this flask admin
 	 */
-	public void setCountry(String country);
+	public void setCountryName(String countryName);
 
 	/**
 	 * Returns the mobile number of this flask admin.
