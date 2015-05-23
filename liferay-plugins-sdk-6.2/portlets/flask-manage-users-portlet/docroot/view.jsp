@@ -55,7 +55,7 @@
 	<div class="form-group">
 	    <label class="control-label" for="gender">Gender:</label>
 	    <div class="controls">
-	      <input name="gender" type="radio" value="Male">Male
+	      <input name="gender" type="radio" value="Male" checked>Male
 		  <input name="gender" type="radio" value="Female">Female
 	    </div>
 	</div>
@@ -96,16 +96,16 @@
   </div>  
   
    <div class="form-group">
-    <label class="control-label" for="state">State:</label>
+    <label class="control-label" for="stateId">State:</label>
     <div class="controls">
-      <input name="state" id="state" class="form-control" type="text">
+      <input name="stateId" id="stateId" class="form-control" type="text">
     </div>
   </div>  
     
   <div class="form-group">
-    <label class="control-label" for="country">Country:</label>
+    <label class="control-label" for="countryId">Country:</label>
     <div class="controls">
-      <input name="country" id="country" class="form-control" type="text">
+      <input name="countryId" id="countryId" class="form-control" type="text">
     </div>
   </div>
 
@@ -138,9 +138,9 @@
   </div>  
   
   <div class="form-group">
-    <label class="control-label" for="mobileNo">Mobile:</label>
+    <label class="control-label" for="mobileNumber">Mobile:</label>
     <div class="controls">
-      <input name="mobileNo" id="mobileNo" class="form-control" type="text">
+      <input name="mobileNumber" id="mobileNumber" class="form-control" type="text">
     </div>
   </div>  
 
@@ -148,45 +148,51 @@
     <label class="control-label" for="pref">Preferences:</label>
     <div class="form-group" style="padding:10px;">
 	  <div style="border: none;" id="userInterests">
-		<ul>
-	        <li item-expanded='true' id="sports">Sports
-		         <ul>
-	                <li item-expanded='true' id="sports-pro">Professional
+		<ul>        
+		<table style="width:100%; height:100%;">
+		<tr>
+		<td style="vertical-align:top">
+            <li item-expanded='true' id="sports">Sports
 	                	<ul>
-	                		<li id="sports-pro-basketball">Basketball</li>
-	                		<li id="sports-pro-baseball">Baseball</li>
-	                		<li id="sports-pro-football">Football</li>
-	                		<li id="sports-pro-hockey">Hockey</li>
-	                		<li id="sports-pro-soccer">Soccer</li>
-	                		<li id="sports-pro-tennis">Tennis</li>
+	                		<li id="sports-basketball">Basketball</li>
+	                		<li id="sports-baseball">Baseball</li>
+	                		<li id="sports-football">Football</li>
+	                		<li id="sports-hockey">Hockey</li>
+	                		<li id="sports-soccer">Soccer</li>
+	                		<li id="sports-tennis">Tennis</li>
 	                	</ul>
-	                </li>
-	                <li item-expanded='true' id="sports-col">College
+	        </li>
+</td>
+<td style="vertical-align:top">
+            <li item-expanded='true' id="level">Level
 	                	<ul>
-	                		<li id="sports-col-basketball">Basketball</li>
-	                		<li id="sports-col-baseball">Baseball</li>
-	                		<li id="sports-col-football">Football</li>
-	                		<li id="sports-col-hockey">Hockey</li>
-	                		<li id="sports-col-soccer">Soccer</li>
-	                		<li id="sports-col-tennis">Tennis</li>	                	
+	                		<li id="level-basketball">Professional</li>
+	                		<li id="level-baseball">College</li>               	
 	                	</ul>	                
-	                </li>
-	            </ul>
-			</li>
-	        <li item-expanded='true' id="concerts">Concerts
+	        </li>
+	        </td>
+	        </tr>
+	        <tr>
+	        <td style="vertical-align:top">
+	        <li item-expanded='true' id="music">Concerts
 	            <ul>
-	                <li id="concerts-country">Country</li>
-	                <li id="concerts-pop">POP</li>
-	                <li id="concerts-rock">ROCK</li>
-	                <li id="concerts-rap">RAP</li>
-	                <li id="concerts-alternative">Alternative</li>
-	                <li id="concerts-electronic">Electronic</li>
+	                <li id="music-country">Country</li>
+	                <li id="music-pop">POP</li>
+	                <li id="music-rock">ROCK</li>
+	                <li id="music-rap">RAP</li>
+	                <li id="music-alternative">Alternative</li>
+	                <li id="music-electronic">Electronic</li>
 	            </ul>
 	        </li>
+	        </td>
+	        <td style="vertical-align:top">
 	        <li item-expanded='true' id="special-events">
 	        	Special Events
 	        	<ul><li id="special-events-comedy">Comedy</li></ul>
 	        </li>
+	        </td>
+	        </tr>
+	       </table>
 	    </ul>	  
 	  </div>      
     </div>
