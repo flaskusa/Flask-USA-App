@@ -15,15 +15,17 @@ var DATA_SOURCE  = {
 						 { name: 'middleName', type: 'string' },
 						 { name: 'lastName', type: 'string' },
 						 { name: 'email', type: 'string' },
-						 { name: 'mobileNo', type: 'string' },
+						 { name: 'mobileNumber', type: 'string' },
 						 { name: 'screenName', type: 'string' },
 						 { name: 'DOB', type: 'date' },
 						 { name: 'streetName', type: 'string' },
 						 { name: 'aptNo', type: 'string' },
 						 { name: 'areaCode', type: 'string' },
 						 { name: 'city', type: 'string' },
-						 { name: 'state', type: 'string' },
-						 { name: 'country', type: 'string' }
+						 { name: 'stateId', type: 'string' },
+						 { name: 'stateName', type: 'string' },
+						 { name: 'countryId', type: 'string' },
+						 { name: 'countryName', type: 'string' }
 						 
 		]
 }

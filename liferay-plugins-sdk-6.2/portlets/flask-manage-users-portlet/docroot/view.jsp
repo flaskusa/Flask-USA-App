@@ -207,7 +207,7 @@
         <div style="border: none;" id='grid'></div>
     </div>
 </div>
-		<div id='Menu'>
+		<div id='Menu' style="display:none">
 	        <ul>
 				<li>Edit</li> 					<!--fnShowForm({value}); -->
             	<li>Delete</li>					<!--fnDelete({value}); -->
