@@ -43,7 +43,7 @@ function fnSave(){
 		password1 : $("#password1").val(),
 		password2 : $("#password2").val(),
 		mobileNumber: $("#mobileNumber").val(),
-		userInterests: "{sports: true}"		
+		userInterests: fnGetCheckBoxSelected()	
 	};
 
 	
@@ -106,12 +106,12 @@ function fnShowForm(rowIndex) {
 	$("#password2").val(GlobalJSON_Admin[rowIndex].password2);
 	$("#city").val(GlobalJSON_Admin[rowIndex].city);
 	$("#mobileNo").val(GlobalJSON_Admin[rowIndex].mobileNumber);
-	$("#country").val(GlobalJSON_Admin[rowIndex].countryId);
+	$("#countryId").val(GlobalJSON_Admin[rowIndex].countryId);
 	$("#DOB").val(GlobalJSON_Admin[rowIndex].DOB);
 	$("#streetName").val(GlobalJSON_Admin[rowIndex].streetName);
 	$("#aptNo").val(GlobalJSON_Admin[rowIndex].aptNo);
 	$("#areaCode").val(GlobalJSON_Admin[rowIndex].areaCode);
-	$("#state").val(GlobalJSON_Admin[rowIndex].stateId);
+	$("#stateId").val(GlobalJSON_Admin[rowIndex].stateId);
 	
 	$("#grid").hide();
 	$("#adminForm").show();
@@ -181,6 +181,7 @@ function fnRenderGrid(tdata) {
 	            container1.appendTo($(summary));
 	            var leftcolumn1 = $('<div style="float: left; width: 45%;"></div>');
 	            var rightcolumn1 = $('<div style="float: left; width: 40%;"></div>');
+	            var intrest1 = "<div style='margin: 10px;'><b>Interest:</b> " + datarecord.userInterests + "</div>";
 	            container1.append(leftcolumn1);
 	            container1.append(rightcolumn1);
 	            $(leftcolumn1).append(streetname);
@@ -189,6 +190,7 @@ function fnRenderGrid(tdata) {
 	            $(rightcolumn1).append(City);
 	            $(rightcolumn1).append(State);
 	            $(rightcolumn1).append(Country);
+	            $(rightcolumn1).append(intrest1);
 	            $(tabsdiv).jqxTabs({ width: '90%', height: 200});
 	        }
 	 }
@@ -198,7 +200,8 @@ function fnRenderGrid(tdata) {
 	console.log(source);
 	var cellsrenderer = function(row, columnfield, value, defaulthtml,
 			columnproperties) {
-		return '<i class="icon-wrench"></i>'
+		//return '<i class="icon-wrench"></i>'
+		return '<input type="Button" value="Edit">'
 	}
 
 	grid.jqxGrid({
@@ -228,7 +231,7 @@ function fnRenderGrid(tdata) {
 		            { text : 'First Name', dataField : 'firstName', width : '33%' }, 
 		            { text : 'Last Name', dataField : 'lastName', width : '33%'	}, 
 		            { text : 'Email', dataField : 'email', 	width : '30%' }, 
-		            { text : 'Edit', dataField:'userId',  cellsalign: 'center',  cellsrenderer : cellsrenderer	} 
+		            { text : 'Edit', dataField:'userId',  cellsalign: 'center',  cellsrenderer : cellsrenderer	} ,
 		         ]
 	});
 	
@@ -353,9 +356,14 @@ $.wait = function( callback, seconds){
 }
 
 $(document).ready(function () {
-     $('#userInterests').jqxTree({theme:"base",hasThreeStates:true, checkboxes:true, height: '300px', width: '100%' });
-     //fnGetCheckBoxSelected();
+   $('#userInterests').jqxTree({theme:"base",hasThreeStates:true, checkboxes:true, height: '300px', width: '100%' });
+     fnGetCheckBoxSelected();
 });
+
+$('input:checkbox[name=Sports]:checked').each(function() 
+	    {
+	       alert( $(this).val());
+	    });
 
 function fnGetCheckBoxSelected(){
 	 var Items = $("#userInterests").jqxTree('getItems');
