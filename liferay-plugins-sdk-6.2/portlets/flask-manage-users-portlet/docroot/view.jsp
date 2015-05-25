@@ -98,14 +98,14 @@
    <div class="form-group">
     <label class="control-label" for="stateId">State:</label>
     <div class="controls">
-      <input name="stateId" id="stateId" class="form-control" type="text">
+      <select id="stateId" name="stateId" class="form-control"></select>
     </div>
   </div>  
     
   <div class="form-group">
     <label class="control-label" for="countryId">Country:</label>
     <div class="controls">
-      <input name="countryId" id="countryId" class="form-control" type="text">
+      <select id="countryId" name="countryId" class="form-control" ></select>
     </div>
   </div>
 
@@ -144,9 +144,8 @@
     </div>
   </div>  
 
-  <div >
+<div>
     <label class="control-label" for="pref">Preferences:</label>
-
 	  <div id="userInterests" style="overlow:hidden;">
 		<ul>        
 		<table style="width:100%; height:100%;">
@@ -162,8 +161,8 @@
 	                		<li id="sports-tennis">Tennis</li>
 	                	</ul>
 	        </li>
-</td>
-<td style="vertical-align:top">
+		</td>
+		<td style="vertical-align:top">
             <li item-expanded='true' id="level">Level
 	                	<ul>
 	                		<li id="level-basketball">Professional</li>
@@ -202,7 +201,7 @@
   <input class="btn btn-primary" type="button" value="Cancel" >
 </form>
 
-<div id="demoContainer" class="device-mobile-tablet">
+<div id="GridContainer" class="device-mobile-tablet">
     <div id="container" class="device-mobile-tablet-container">
         <div style="border: none;" id='grid'></div>
     </div>
