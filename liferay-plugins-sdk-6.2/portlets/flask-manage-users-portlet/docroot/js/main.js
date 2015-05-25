@@ -200,8 +200,7 @@ function fnRenderGrid(tdata) {
 	console.log(source);
 	var cellsrenderer = function(row, columnfield, value, defaulthtml,
 			columnproperties) {
-		//return '<i class="icon-wrench"></i>'
-		return '<input type="Button" value="Edit">'
+		return '<i class="icon-wrench"></i>'
 	}
 
 	grid.jqxGrid({
