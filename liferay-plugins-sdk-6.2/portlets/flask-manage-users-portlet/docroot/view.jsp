@@ -144,10 +144,10 @@
     </div>
   </div>  
 
-  <div class="form-group">
+  <div >
     <label class="control-label" for="pref">Preferences:</label>
 
-	  <div style="border: none; width:100%; height:100%;" id="userInterests">
+	  <div id="userInterests" style="overlow:hidden;">
 		<ul>        
 		<table style="width:100%; height:100%;">
 		<tr>
