@@ -146,8 +146,8 @@
 
   <div class="form-group">
     <label class="control-label" for="pref">Preferences:</label>
-    <div class="form-group" style="padding:10px;">
-	  <div style="border: none;" id="userInterests">
+
+	  <div style="border: none; width:100%; height:100%;" id="userInterests">
 		<ul>        
 		<table style="width:100%; height:100%;">
 		<tr>
@@ -195,11 +195,11 @@
 	       </table>
 	    </ul>	  
 	  </div>      
-    </div>
+
   </div>
 
   <input class="btn btn-info clsSave" type="button" value="Save" onclick="fnSave()" />
-  <input class="btn btn-primary" type="reset" value="Cancel">
+  <input class="btn btn-primary" type="button" value="Cancel" >
 </form>
 
 <div id="demoContainer" class="device-mobile-tablet">
