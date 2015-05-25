@@ -355,7 +355,7 @@ $.wait = function( callback, seconds){
 }
 
 $(document).ready(function () {
-   $('#userInterests').jqxTree({theme:"base",hasThreeStates:true, checkboxes:true, height: '300px', width: '100%' });
+   $('#userInterests').jqxTree({theme:"base",hasThreeStates:true, checkboxes:true, height: 'auto', width: '100%' });
      fnGetCheckBoxSelected();
 });
 
