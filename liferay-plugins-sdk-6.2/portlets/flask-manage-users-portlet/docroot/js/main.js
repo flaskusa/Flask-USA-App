@@ -355,8 +355,13 @@ $.wait = function( callback, seconds){
 }
 
 $(document).ready(function () {
+<<<<<<< .mine
+     $('#userInterests').jqxTree({theme:"base",hasThreeStates:true, checkboxes:true, height: 'auto', width: '100%' });
+     //fnGetCheckBoxSelected();
+=======
    $('#userInterests').jqxTree({theme:"base",hasThreeStates:true, checkboxes:true, height: 'auto', width: '100%' });
      fnGetCheckBoxSelected();
+>>>>>>> .r94
 });
 
 $('input:checkbox[name=Sports]:checked').each(function() 
@@ -389,3 +394,59 @@ function fnSetCheckBoxSelected(strCheckList){
     }
     console.log("Working fine");
 }
+
+function fnGetCountry(countryId) {
+	var params = 19;
+	var request = new Request();
+	request.sendGETRequest("/api/jsonws/country/get-country/country-id/19", params,
+			function(data) {
+				if (data.responseStatus == 1) {
+					var countryObj = data.responseJson;
+					var myDropDownList = $("#countryId");
+					myDropDownList.append($("<option></option>").val(0).html("-Select your country-"));
+					  console.log(countryObj);
+					  console.log("TEST");
+					  //Loop here
+				          myDropDownList.append($("<option></option>").val(countryObj.countryId).html(countryObj.name));
+			          // End Loop here				          
+				} else {
+					alert("MESSAGES.ERRORR_REGISTER_USER");
+				}
+			});
+}
+
+function fnGetRegions(countryId) {
+	var params = 19;
+	var request = new Request();
+	request.sendGETRequest("/api/jsonws/region/get-regions/country-id/"+countryId, params,
+			function(data) {
+				if (data.responseStatus == 1) {
+					var regionObj = data.responseJson;
+					console.log(regionObj);
+					var myStateList = $("#stateId");
+					myStateList.empty();
+					myStateList.append($("<option></option>").val(0).html("-Select your region-"));
+					for (var i = 0; i < regionObj.length; i++) {
+						//console.log(regionObj[i].name);
+						myStateList.append($("<option></option>").val(regionObj[i].regionId).html(regionObj[i].name));
+					}					  
+				} else {
+					alert("MESSAGES.ERRORR_REGISTER_USER");
+				}
+			});
+}
+
+
+$(document).ready(function(){
+	console.log('Start ');
+	fnGetCountry(19);
+	console.log('End ')
+	$("#countryId").change(function(){
+		console.log($(this).val());
+		fnGetRegions($(this).val());
+		return false;
+	});
+	var myStateList = $("#stateId");
+	myStateList.empty();	
+	myStateList.append($("<option></option>").val(0).html("-Select your region-"));		
+});
