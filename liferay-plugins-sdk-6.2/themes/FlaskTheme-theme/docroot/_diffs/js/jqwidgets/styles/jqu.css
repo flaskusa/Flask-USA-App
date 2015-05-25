@@ -7,22 +7,22 @@
   color: #222222;
   text-shadow: none;
   border-color: #aaaaaa;
-  background: #EFD1A7;
+  background: #ffffff;
   font-family: Verdana;
 }
 .jqx-widget-header-custom, .jqx-grid-custom .jqx-widget-header-custom
 {
-  color: #222222;
+  color: #FFFFFF;
   text-shadow: none;
   border-color: #aaaaaa;
-  background-color: #F2C076;
-  background-image: -moz-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -ms-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -o-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -webkit-gradient(linear, center top, center bottom, from(#F2C076), to(#FF9900));
-  background-image: -webkit-linear-gradient(top, #F2C076, #FF9900);
-  background-image: linear-gradient(top, #F2C076, #FF9900);
-  background-image: linear-gradient(to bottom, #F2C076, #FF9900);
+  background-color: #656262;
+  background-image: -moz-linear-gradient(top, #656262, #231F20);
+  background-image: -ms-linear-gradient(top, #656262, #231F20);
+  background-image: -o-linear-gradient(top, #656262, #231F20);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#656262), to(#231F20));
+  background-image: -webkit-linear-gradient(top, #656262, #231F20);
+  background-image: linear-gradient(top, #656262, #231F20);
+  background-image: linear-gradient(to bottom, #656262, #231F20);
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
@@ -34,7 +34,7 @@
 }
 .jqx-grid-cell-custom, .jqx-widget-custom .jqx-grid-cell-custom
 {
-  background-color: #EFD1A7;
+  background-color: #ffffff;
   color: #222222;
   text-shadow: none;
 }
@@ -96,14 +96,14 @@
   color: #FFFFFF;
   text-shadow: none;
   border-color: #999;
-  background-color: #F2C076;
-  background-image: -moz-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -ms-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -o-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -webkit-gradient(linear, center top, center bottom, from(#F2C076), to(#FF9900));
-  background-image: -webkit-linear-gradient(top, #F2C076, #FF9900);
-  background-image: linear-gradient(top, #F2C076, #FF9900);
-  background-image: linear-gradient(to bottom, #F2C076, #FF9900);
+  background-color: #FFAD32;
+  background-image: -moz-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: -ms-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: -o-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#FFAD32), to(#FF9900));
+  background-image: -webkit-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: linear-gradient(top, #FFAD32, #FF9900);
+  background-image: linear-gradient(to bottom, #FFAD32, #FF9900);
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
@@ -111,17 +111,17 @@
 }
 .jqx-fill-state-pressed-custom, .jqx-widget-custom .jqx-grid-cell-selected-custom
 {
-  color: #222222;
+  color: #000000;
   text-shadow: none;
   border-color: #999999;
-  background-color: #F2C076;
-  background-image: -moz-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -ms-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -o-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -webkit-gradient(linear, center top, center bottom, from(#F2C076), to(#FF9900));
-  background-image: -webkit-linear-gradient(top, #F2C076, #FF9900);
-  background-image: linear-gradient(top, #F2C076, #FF9900);
-  background-image: linear-gradient(to bottom, #F2C076, #FF9900);
+  background-color: #FFAD32;
+  background-image: -moz-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: -ms-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: -o-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#FFAD32), to(#FF9900));
+  background-image: -webkit-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: linear-gradient(top, #FFAD32, #FF9900);
+  background-image: linear-gradient(to bottom, #FFAD32, #FF9900);
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
@@ -129,17 +129,17 @@
 }
 .jqx-switchbutton-label-on-custom
 {
-  color: #222222;
+  color: #000000;
   text-shadow: none;
   border-color: #999999;
-  background-color: #F2C076;
-  background-image: -moz-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -ms-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -o-linear-gradient(top, #F2C076, #FF9900);
-  background-image: -webkit-gradient(linear, center top, center bottom, from(#F2C076), to(#FF9900));
-  background-image: -webkit-linear-gradient(top, #F2C076, #FF9900);
-  background-image: linear-gradient(top, #F2C076, #FF9900);
-  background-image: linear-gradient(to bottom, #F2C076, #FF9900);
+  background-color: #FFAD32;
+  background-image: -moz-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: -ms-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: -o-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#FFAD32), to(#FF9900));
+  background-image: -webkit-linear-gradient(top, #FFAD32, #FF9900);
+  background-image: linear-gradient(top, #FFAD32, #FF9900);
+  background-image: linear-gradient(to bottom, #FFAD32, #FF9900);
   -moz-background-clip: padding;
   background-clip: padding-box;
   -webkit-background-clip: padding-box;
@@ -149,22 +149,22 @@
   color: #222222;
   text-shadow: none;
   border-color: #aaaaaa;
-  border-bottom: 1px solid #EFD1A7;
+  border-bottom: 1px solid #ffffff;
   background-image: none ;
-  background-color: #EFD1A7;
+  background-color: #ffffff;
 }
 .jqx-tabs-title-selected-bottom-custom, .jqx-tabs-selection-tracker-bottom-custom
 {
   color: #222222;
   text-shadow: none;
   border-color: #aaaaaa;
-  border-top: 1px solid #EFD1A7;
+  border-top: 1px solid #ffffff;
   background-image: none ;
-  background-color: #EFD1A7;
+  background-color: #ffffff;
 }
 .jqx-splitter-splitbar-hover-custom
 {
-  background: #F2C076;
+  background: #FFAD32;
 }
 .jqx-splitter-splitbar-vertical-custom, .jqx-splitter-splitbar-horizontal-custom, .jqx-slider-track-horizontal-custom, .jqx-slider-track-vertical-custom
 {
@@ -172,7 +172,7 @@
 }
 .jqx-splitter-collapse-button-horizontal-custom, .jqx-splitter-collapse-button-vertical-custom, .jqx-slider-rangebar-custom
 {
-  background: #F2C076;
+  background: #FFAD32;
 }
 .jqx-scrollbar-state-normal-custom
 {
