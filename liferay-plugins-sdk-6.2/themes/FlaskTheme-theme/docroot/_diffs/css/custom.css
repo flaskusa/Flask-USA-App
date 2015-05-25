@@ -79,69 +79,6 @@ upgrade and maintenance. */
 }
 
 
-/* Slide Out */
-	.slideout-menu {
-		position: fixed;
-		margin-top: 64px;
-		left: -250px;
-		width: 250px;
-		height: 100%;
-		background: #231F20;
-		z-index: 1000;
-		top:0;
-	}
-	.slideout-menu h3 {
-		position: relative;
-		padding: 12px 10px;
-		color: #fff;
-		font-size: 1.2em;
-		font-weight: 400;
-	}
-	.slideout-menu .slideout-menu-toggle 
-
-    {
-		position: absolute;
-		top: 12px;
-		right: 10px;
-		display: inline-block;
-		padding: 6px 9px 5px;
-		font-family: Arial, sans-serif;
-		font-weight: bold;
-		line-height: 1;
-		background: #231F20;
-		color: #999;
-		text-decoration: none;
-		vertical-align: top;
-	}
-	.slideout-menu .slideout-menu-toggle:hover {
-		color: #fff;
-	}
-
-	
-	.header {
-		padding: 15px;
-		background: #F5F3F4;
-	}
-	.header .slideout-menu-toggle {
-		font-size: 1.2em;
-		color: #999;
-		text-decoration: none;
-	}
-	
-	.header .slideout-menu-toggle:hover 
-
-    {
-		color: #000000;
-	}
-	.header .slideout-menu-toggle i 
-	{
-		vertical-align: top;
-		margin: 5px 3px 0 0;
-	}
-
-
-
-
 /* Buttons CSS */ 
 
 
@@ -224,9 +161,10 @@ upgrade and maintenance. */
 {
 	border-radius: 5px;
 	font-size: 14px;
-	height: 40px;
+	height: 30px;
 	width:500px;
 	padding-left:10px;
+	margin-bottom: 10px;
 }
 
 .aui label
@@ -244,57 +182,71 @@ upgrade and maintenance. */
 	margin-bottom: 10px;
 }
 
+.aui input[type="radio"]
+{
+  width: 30px;
+  margin-bottom: 7px;
+}
+
+
 @media (max-width: 767px)
 {
-.aui input[type="date"]
-{
-	 height: 20px;
-}	
+
+	.aui input[type="date"]
+	  {
+		 height: 20px;
+      }	
+		
+	.aui textarea
+	  {
+	    height: 20px;
+	    width: 98%;
+	    padding:4px 0px;
+	    padding-left: 10px; 
+	  }
+		
+	 .aui input[type="text"]
+	 {
+	    height: 20px;
+	    width: 98%;
+	    padding:4px 0px;  
+		padding-left: 10px;
+	 }
+	 .aui input[type="password"]
+	 {
+		height: 20px;
+	    width: 98%;
+	    padding:4px 0px;  
+		padding-left: 10px;
+	 }
+	 .aui label 
+	 {
+	   margin-bottom: 0px;
+	   font-size: 14px;
+	 }
+
+	/*
+	.aui body 
+	{
+	  padding-left: 0px;
+	  padding-right: 0px;
+	}
+	*/
+	.aui input[type="button"]
+	{
+		padding: 4px 25px;
+		width:100%;
+	}
 	
-.aui textarea
-  {
-    height: 20px;
-    width: 98%;
-    padding:4px 0px;
-    padding-left: 10px; 
-  }
+	.aui input[type="reset"]
+	{
+		padding: 4px 25px;
+		width:100%;
+	}
 	
- .aui input[type="text"]
- {
-    height: 20px;
-    width: 98%;
-    padding:4px 0px;  
-	padding-left: 10px;
- }
- .aui input[type="password"]
-{
-	height: 20px;
-    width: 98%;
-    padding:4px 0px;  
-	padding-left: 10px;
-}
- .aui label 
- {
-   margin-bottom: 4px;
- }
-
-.aui body 
-{
-  padding-left: 0px;
-  padding-right: 0px;
-}
-
-.aui input[type="button"]
-{
-	padding: 4px 25px;
-	width:100%;
-}
-
-.aui input[type="reset"]
-{
-	padding: 4px 25px;
-	width:100%;
-}
+	.portlet-content{
+	  padding: 5px 3px 10px;
+	}
 
 }
 .required {
