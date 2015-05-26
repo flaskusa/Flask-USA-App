@@ -27,7 +27,12 @@
 <portlet:defineObjects />
 <body>
 <div id="adminDataTable" class="table-condensed">
-	<input class="btn btn-info" type="submit" value="Add">
+	<div class="cssAddUser"><div class="iconAddUser"></div></div>
+	<div id="GridContainer" class="device-mobile-tablet">
+	    <div id="container" class="device-mobile-tablet-container">
+	        <div style="border: none;" id='grid'></div>
+	    </div>
+	</div>
 </div>
 
 <form id="adminForm">
@@ -146,74 +151,41 @@
 
 <div>
     <label class="control-label" for="pref">Preferences:</label>
-	  <div id="userInterests" style="overlow:hidden;">
-		<ul>        
-		<table style="width:100%; height:100%;">
+	  <div>
+		<table>
 		<tr>
-		<td style="vertical-align:top">
-            <li item-expanded='true' id="sports">Sports
-	                	<ul>
-	                		<li id="sports-basketball">Basketball</li>
-	                		<li id="sports-baseball">Baseball</li>
-	                		<li id="sports-football">Football</li>
-	                		<li id="sports-hockey">Hockey</li>
-	                		<li id="sports-soccer">Soccer</li>
-	                		<li id="sports-tennis">Tennis</li>
-	                	</ul>
-	        </li>
+		<td style="vertical-align: top">
+            <div id="myTreeView"></div>
 		</td>
-		<td style="vertical-align:top">
-            <li item-expanded='true' id="level">Level
-	                	<ul>
-	                		<li id="level-basketball">Professional</li>
-	                		<li id="level-baseball">College</li>               	
-	                	</ul>	                
-	        </li>
+		<td style="vertical-align: top">
+            <div id="myTreeView0"></div>
 	        </td>
 	        </tr>
 	        <tr>
-	        <td style="vertical-align:top">
-	        <li item-expanded='true' id="music">Concerts
-	            <ul>
-	                <li id="music-country">Country</li>
-	                <li id="music-pop">POP</li>
-	                <li id="music-rock">ROCK</li>
-	                <li id="music-rap">RAP</li>
-	                <li id="music-alternative">Alternative</li>
-	                <li id="music-electronic">Electronic</li>
-	            </ul>
-	        </li>
+	        <td style="vertical-align: top">
+	        <div id="myTreeView1"></div>
 	        </td>
-	        <td style="vertical-align:top">
-	        <li item-expanded='true' id="special-events">
-	        	Special Events
-	        	<ul><li id="special-events-comedy">Comedy</li></ul>
-	        </li>
+	        <td style="vertical-align: top">
+	       <div id="myTreeView2"></div>
 	        </td>
 	        </tr>
-	       </table>
-	    </ul>	  
+	       </table>  
 	  </div>      
 
   </div>
-
+ 
   <input class="btn btn-info clsSave" type="button" value="Save" onclick="fnSave()" />
   <input class="btn btn-primary" type="button" value="Cancel" >
 </form>
 
-<div id="GridContainer" class="device-mobile-tablet">
-    <div id="container" class="device-mobile-tablet-container">
-        <div style="border: none;" id='grid'></div>
-    </div>
+<div id='Menu' style="display:none">
+    <ul>
+		<li>Edit</li> 					<!--fnShowForm({value}); -->
+		<li>Delete</li>					<!--fnDelete({value}); -->
+    	<li>Reset Password</li>			<!--fnPasswordReset({value}); -->
+        <li>Change Role</li>	        <!--fnChangeRole({value}); -->
+	</ul>
 </div>
-		<div id='Menu' style="display:none">
-	        <ul>
-				<li>Edit</li> 					<!--fnShowForm({value}); -->
-            	<li>Delete</li>					<!--fnDelete({value}); -->
-            	<li>Reset Password</li>			<!--fnPasswordReset({value}); -->
-            	<li>Change Role</li>	        <!--fnChangeRole({value}); -->
-			</ul>
-       </div>
 
 <div id="spinningSquaresG">
 	<div class="ball"></div>

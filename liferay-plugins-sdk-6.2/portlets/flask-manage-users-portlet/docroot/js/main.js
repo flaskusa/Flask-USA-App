@@ -236,7 +236,8 @@ function fnRenderGrid(tdata) {
 				showrowdetailscolumn : false,
 				rowdetailstemplate : {
 					rowdetails : "<div style='margin: 10px;'><ul style='margin-left: 10px; height: 10px;'><li>Personal</li><li>Address</li></ul><div class='information'></div><div class='summary'></div></div>",
-					rowdetailsheight : 200
+					rowdetailsheight : 200,
+					rowdetailshidden: true,
 				},
 				initrowdetails : initrowdetails,
 				columns : [ {
@@ -316,13 +317,10 @@ function fnRenderGrid(tdata) {
 				fnDelete(GlobalJSON_Admin[rowindex].userId);
 				var rowid = $("#grid").jqxGrid('getrowid', rowindex);
 				$("#grid").jqxGrid('deleterow', rowid);
-				$("#spinningSquaresG").hide();
-				return false;
-			} else {
-				return false;
 			}
+			$("#spinningSquaresG").hide();
+			return false;			
 		}
-
 	});
 	$("#grid").show();
 }
@@ -330,28 +328,108 @@ function fnRenderGrid(tdata) {
 $(document).ready(function() {
 	$("#spinningSquaresG").show();
 	fnLoadAdminUserList();
-	$(".btn").click(function() {
-		var btnType = $(this).val();
-		switch (btnType) {
-		case 'Add':
-			$(this).hide();
-			$("#grid").hide();
-			$("#adminForm").show();
-			break;
-		case 'Cancel':
-			$("#grid").show();
-			$("#adminForm").hide;
-
-			break;
-		default:
-			// alert('test');
-		}
-	});
 	$("#spinningSquaresG").hide();
 });
 
-YUI().use("aui-form-validator", "aui-dropdown", "aui-datepicker",
-		"aui-tree-view", function(Y) {
+YUI().use(
+		  'aui-tree-view',
+		  function(Y) {
+			  Y.TreeNode.ATTRS.cssClasses.value.file.iconLeaf = 'none';
+		    new Y.TreeViewDD(
+		      {
+		        boundingBox: '#myTreeView',
+		        children: [
+		          
+		          {
+		            children: [
+		              {label: 'Basketball', leaf: true, type: 'task'},
+		              {label: 'Baseball', leaf: true, type: 'task'},
+		              {label: 'Football', leaf: true,  type: 'task'},
+		              {label: 'Hockey', leaf: true, type: 'task'},
+		              {label: 'Soccer', leaf: true, type: 'task'},
+		              {label: 'Tennis', leaf: true,  type: 'task'}
+		            ],
+		            expanded: true,
+		            label: 'sports',
+		            type: 'task'
+		          }
+		        ]
+		      }
+		    ).render();
+		  }
+		);
+YUI().use(
+		  'aui-tree-view',
+		  function(Y) {
+			  Y.TreeNode.ATTRS.cssClasses.value.file.iconLeaf = 'none';
+		    new Y.TreeViewDD(
+		      {
+		        boundingBox: '#myTreeView0',
+		        children: [
+		          {
+			            children: [
+			              {label: 'Professional', leaf: true, type: 'task'},
+			              {label: 'College', leaf: true, type: 'task'}
+			            ],
+			            expanded: true,
+			            label: 'Level',
+			            type: 'task'
+			          }
+		        ]
+		      }
+		    ).render();
+		  }
+		);
+
+YUI().use(
+		  'aui-tree-view',
+		  function(Y) {
+			  Y.TreeNode.ATTRS.cssClasses.value.file.iconLeaf = 'none';
+		    new Y.TreeViewDD(
+		      {
+		        boundingBox: '#myTreeView1',
+		        children: [
+			          {
+				            children: [
+				              {label: 'Country', leaf: true, type: 'task'},
+				              {label: 'POP', leaf: true, type: 'task'},
+				              {label: 'ROCK', leaf: true, type: 'task'},
+				              {label: 'RAP', leaf: true, type: 'task'},
+				              {label: 'Alternative', leaf: true, type: 'task'},
+				              {label: 'Electronic', leaf: true, type: 'task'},
+				            ],
+				            expanded: true,
+				            label: 'music',
+				            type: 'task'
+				          }
+		        ]
+		      }
+		    ).render();
+		  }
+		);
+YUI().use(
+		  'aui-tree-view',
+		  function(Y) {
+			  Y.TreeNode.ATTRS.cssClasses.value.file.iconLeaf = 'none';
+		    new Y.TreeViewDD(
+		      {
+		        boundingBox: '#myTreeView2',
+		        children: [
+				          {
+					            children: [
+					              {label: 'Comedy', leaf: true, type: 'task'}
+					            ],
+					            expanded: true,
+					            label: 'Special Events',
+					            type: 'task'
+					          }
+		        ]
+		      }
+		    ).render();
+		  }
+		);
+
+YUI().use("aui-form-validator", "aui-dropdown", "aui-datepicker","aui-tree-view","panel", function(Y) {
 			var rules = {
 				firstName : {
 					firstName : true,
@@ -429,23 +507,44 @@ YUI().use("aui-form-validator", "aui-dropdown", "aui-datepicker",
 				rules : rules,
 				showAllMessages : true
 			});
+			
+			 var dialog = new Y.Panel({
+			        contentBox : Y.Node.create('<div id="dialog" />'),
+			        bodyContent: '<div class="message icon-warn">Are you sure you want to delete?</div>',
+			        width      : 410,
+			        zIndex     : 6,
+			        centered   : true,
+			        modal      : false, // modal behavior
+			        render     : '.example',
+			        visible    : false, // make visible explicitly with .show()
+			        buttons    : {
+			            footer: [
+			                {
+			                    name  : 'cancel',
+			                    label : 'Cancel',
+			                    action: 'onCancel'
+			                },
+
+			                {
+			                    name     : 'proceed',
+			                    label    : 'OK',
+			                    action   : 'onOK'
+			                }
+			            ]
+			        }
+			    });		
 		});
 
 $.wait = function(callback, seconds) {
 	console.log("start>>" + callback);
 	return window.setTimeout(callback, seconds * 1000);
-	console.log("finish>>" + callback)
+	console.log("finish>>" + callback);
 }
 
 $(document).ready(function() {
-	$('#userInterests').jqxTree({
-		theme : "base",
-		hasThreeStates : true,
-		checkboxes : true,
-		height : 'auto',
-		width : '100%'
-	});
-	// fnGetCheckBoxSelected();
+	$.wait(function(){
+		$(".icon-folder-open").hide();
+	},1);
 });
 
 function fnGetCheckBoxSelected() {
@@ -522,16 +621,23 @@ function fnGetRegions(countryId) {
 
 $(document).ready(
 		function() {
-			console.log('Start ');
-			fnGetCountry(19);
-			console.log('End ')
-			$("#countryId").change(function() {
-				console.log($(this).val());
-				fnGetRegions($(this).val());
-				return false;
-			});
-			var myStateList = $("#stateId");
-			myStateList.empty();
-			myStateList.append($("<option></option>").val(0).html(
-					"-Select your region-"));
+		console.log('Start ');
+		fnGetCountry(19);
+		console.log('End ')
+		$("#countryId").change(function() {
+			console.log($(this).val());
+			fnGetRegions($(this).val());
+			return false;
 		});
+		var myStateList = $("#stateId");
+		myStateList.empty();
+		myStateList.append($("<option></option>").val(0).html("-Select your region-"));
+		
+		$(".portlet-icon-back").hide();
+		$(".panel-page-menu").hide();		
+		$(".cssAddUser").click(function(){
+			$(this).hide();
+			$("#grid").hide();
+			$("#adminForm").show();
+		});
+});
