@@ -715,7 +715,9 @@
 .jqx-menu-vertical {
   background-color: #fff;
 }
-.jqx-menu-ul
+
+.jqx-widget-content 
 {
+	box-shadow: 0px 6px 6px #CCC;
 	opacity: 0.90;
 }
