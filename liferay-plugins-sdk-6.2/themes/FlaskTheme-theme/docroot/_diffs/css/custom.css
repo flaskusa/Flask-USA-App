@@ -449,6 +449,7 @@ linear;
   	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#656262),color-stop(1,#231f20));
   	background-image: -webkit-linear-gradient(top,#656262 0,#231f20 100%);
   	background-image: linear-gradient(to bottom,#656262 0,#231f20 100%);
-  	margin-right: 9px;
-  	margin-bottom: 9px;
+	margin-right: 2%;
+	margin-bottom: 9px;
+	float: right;
 }

@@ -1,3 +1,5 @@
 #set ($css_class = "${css_class} dockbar-split")
 #set ($company_logo_src = "$images_folder/flasklogo.png") 
 #set ($site_name="FLASK")
+#set ($site_logo_width="30px")
+#set ($site_logo_height="40px")
