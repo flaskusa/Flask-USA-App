@@ -404,3 +404,51 @@ linear;
  0% { -webkit-transform:rotate(0deg); }
  100% { -webkit-transform:rotate(-360deg); }
 }
+/*AddUser button*/
+.iconAddUser{
+  	height: 50px;
+  	width: 50px;	
+	background-image:url(../images/Flask-Icons/AddUserWhite.png);
+ 	background-repeat:no-repeat;
+    background-position:center; 
+	background-size:30px 30px;
+}
+
+.iconAddUser:hover{
+  	height: 50px;
+  	width: 50px;	
+	background-image:url(../images/Flask-Icons/AddUserOrange.png);
+ 	background-repeat:no-repeat;
+    background-position:center; 
+	background-size:30px 30px;
+}
+
+.iconAddUser:active{
+  	height: 50px;
+  	width: 50px;	
+	background-image:url(../images/Flask-Icons/AddUserOrange.png);
+ 	background-repeat:no-repeat;
+    background-position:center; 
+	background-size:30px 30px;
+}
+
+.cssAddUser{
+	border:1px solid #363434;
+	opacity:.9;
+	border-radius:50px;
+	width:50px;
+	height:50px;
+	margin:0 auto;
+  	cursor: pointer;
+  	-webkit-transition: all .3s;
+  	-moz-transition: all .3s;
+  	transition: all .3s;
+  	text-shadow: none;
+	background-image: -ms-linear-gradient(top,#656262 0,#231f20 100%);
+  	background-image: -moz-linear-gradient(top,#656262 0,#231f20 100%);
+  	background-image: -o-linear-gradient(top,#656262 0,#231f20 100%);
+  	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#656262),color-stop(1,#231f20));
+  	background-image: -webkit-linear-gradient(top,#656262 0,#231f20 100%);
+  	background-image: linear-gradient(to bottom,#656262 0,#231f20 100%);
+  	margin-right: 9px;
+}
