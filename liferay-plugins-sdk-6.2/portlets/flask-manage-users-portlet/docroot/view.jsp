@@ -154,28 +154,27 @@
 	  <div>
 		<table>
 		<tr>
-		<td style="vertical-align: top">
+		<td style="vertical-align: top" width="50%">
             <div id="myTreeView"></div>
 		</td>
-		<td style="vertical-align: top">
+		<td style="vertical-align: top" width="50%">
             <div id="myTreeView0"></div>
-	        </td>
-	        </tr>
-	        <tr>
-	        <td style="vertical-align: top">
-	        <div id="myTreeView1"></div>
-	        </td>
-	        <td style="vertical-align: top">
+	    </td>
+	    </tr>
+	    <tr>
+	    <td style="vertical-align: top">
+	    	<div id="myTreeView1"></div>
+		</td>
+	    <td style="vertical-align: top">
 	       <div id="myTreeView2"></div>
-	        </td>
-	        </tr>
-	       </table>  
+	    </td>
+	    </tr>
+	    </table>  
 	  </div>      
-
   </div>
  
   <input class="btn btn-info clsSave" type="button" value="Save" onclick="fnSave()" />
-  <input class="btn btn-primary" type="button" value="Cancel" >
+  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
 </form>
 
 <div id='Menu' style="display:none">

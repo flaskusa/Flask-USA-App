@@ -13,6 +13,8 @@ function fnLoadAdminUserList() {
 					alert("MESSAGES.ERRORR_REGISTER_USER");
 				}
 			});
+	$("#adminDataTable").show();
+	$("#adminForm").hide();	
 }
 
 function fnDelete(AdminId) {
@@ -62,7 +64,6 @@ function fnSave() {
 }
 
 function fnUpdate(uid) {
-	alert("I'm in update");
 	var params = {
 		userId : uid,
 		firstName : $("#firstName").val(),
@@ -85,7 +86,7 @@ function fnUpdate(uid) {
 	};
 
 	$("#spinningSquaresG").show();
-	// console.log('insave');
+	console.log('insave');
 	console.log(SERVICE_ENDPOINTS.UPDATE_FLASK_ADMIN_ENDPOINT);
 	Liferay.Service(SERVICE_ENDPOINTS.UPDATE_FLASK_ADMIN_ENDPOINT, params,
 			function(obj) {
@@ -119,7 +120,7 @@ function fnShowForm(rowIndex) {
 	$("#areaCode").val(GlobalJSON_Admin[rowIndex].areaCode);
 	$("#state").val(GlobalJSON_Admin[rowIndex].stateId);
 
-	$("#grid").hide();
+	$("#adminDataTable").hide();
 	$("#adminForm").show();
 }
 
@@ -350,7 +351,7 @@ YUI().use(
 		              {label: 'Tennis', leaf: true,  type: 'task'}
 		            ],
 		            expanded: true,
-		            label: 'sports',
+		            label: 'Sports',
 		            type: 'task'
 		          }
 		        ]
@@ -399,7 +400,7 @@ YUI().use(
 				              {label: 'Electronic', leaf: true, type: 'task'},
 				            ],
 				            expanded: true,
-				            label: 'music',
+				            label: 'Music',
 				            type: 'task'
 				          }
 		        ]
@@ -548,7 +549,7 @@ $(document).ready(function() {
 });
 
 function fnGetCheckBoxSelected() {
-	var Items = $("#userInterests").jqxTree('getItems');
+	/*var Items = $("#userInterests").jqxTree('getItems');
 	var ItemArray = new Array();
 	$.each(Items, function() {
 		if (this.checked) {
@@ -558,11 +559,11 @@ function fnGetCheckBoxSelected() {
 		;
 	});
 	console.log(ItemArray.join("#"));
-	return ItemArray.join("#");
+	return ItemArray.join("#");*/
 }
 
 function fnSetCheckBoxSelected(strCheckList) {
-
+/*
 	var tempArray = new Array();
 	tempArray = strCheckList.split("#");
 	var i;
@@ -571,7 +572,7 @@ function fnSetCheckBoxSelected(strCheckList) {
 		var tempObj = "#" + tempArray[i];
 		$("#userInterests").jqxTree('checkItem', $(tempObj)[0], true);
 	}
-	console.log("Working fine");
+	console.log("Working fine");*/
 }
 
 function fnGetCountry(countryId) {
@@ -588,7 +589,7 @@ function fnGetCountry(countryId) {
 					console.log("TEST");
 					// Loop here
 					myDropDownList.append($("<option></option>").val(
-							countryObj.countryId).html(countryObj.name));
+							countryObj.countryId).html(countryObj.nameCurrentValue));
 					// End Loop here
 				} else {
 					alert("MESSAGES.ERRORR_REGISTER_USER");
@@ -636,8 +637,12 @@ $(document).ready(
 		$(".portlet-icon-back").hide();
 		$(".panel-page-menu").hide();		
 		$(".cssAddUser").click(function(){
-			$(this).hide();
-			$("#grid").hide();
+			$("#adminDataTable").hide();
 			$("#adminForm").show();
+		});
+		
+		$(".clsCancel").click(function(){
+			$("#adminDataTable").show();
+			$("#adminForm").hide();
 		});
 });
