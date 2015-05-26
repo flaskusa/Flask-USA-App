@@ -18,69 +18,7 @@ upgrade and maintenance. */
 }
 
 
- .menuitem
-{
-    -webkit-box-sizing: content-box;
-    -moz-box-sizing: content-box;
-    box-sizing: content-box;
-    width: 200px;
-    padding: 5px;
-    overflow: hidden;
-    border: none;
-    font: normal 16px/1 "Coda" , Helvetica,sans-serif;
-    color: #ffffff;
-    text-align: left;
-    -o-text-overflow: ellipsis;
-    text-overflow: ellipsis;
-    background: #231F20;
-    -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3);
-    box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3);
-    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
-}
-
-@media screen and (min-width: 760px)
- {
-   
-    .menuitem
-    {
-    
-       float: left;
-       display:block;
-    }
- }
-
-.menuitem:hover {
-  color: #ff9900;
-  cursor:pointer;
-}
-.menuitem span 
-{
-    font-size: 12px;
-}
-.menuitem:hover span
-{
-    color:  #ff9900;
-}
-.highlight
-{
-    color:   #ff9900;
-}
-.menuitem a
-{
-	color: white;
-	text-decoration: none;
-	 font: normal 16px/1 "Coda" ,Helvetica, sans-serif;
-}
-
-.menuitem a:hover
-{
-	color:  #ff9900;
-	text-decoration: none;
-}
-
-
 /* Buttons CSS */ 
-
 
 
 .aui input[type="button"]
@@ -153,6 +91,22 @@ upgrade and maintenance. */
 
 }
 
+.aui .btn-info:focus{
+    color: #ff9900;
+	background: #231F20;
+    
+     -webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	 background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%);
+	  background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%);
+	  background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%);
+	  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262), color-stop(1, #231F20));
+	  background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
+	  background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);	
+
+}
+
 .aui .btn-primary
 {
 	padding: 5px 20px;
@@ -185,6 +139,20 @@ upgrade and maintenance. */
 	  background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);	
 }
 
+.aui .btn-primary:focus{
+	
+     color: #ff9900;
+	background: #231F20;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	 background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%);
+	  background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%);
+	  background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%);
+	  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262), color-stop(1, #231F20));
+	  background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
+	  background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);	
+}
 
 .aui input[type="text"]
 {
