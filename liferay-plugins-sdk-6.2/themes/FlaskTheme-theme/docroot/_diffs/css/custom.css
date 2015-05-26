@@ -438,7 +438,6 @@ linear;
 	border-radius:50px;
 	width:50px;
 	height:50px;
-	margin:0 auto;
   	cursor: pointer;
   	-webkit-transition: all .3s;
   	-moz-transition: all .3s;
@@ -451,4 +450,5 @@ linear;
   	background-image: -webkit-linear-gradient(top,#656262 0,#231f20 100%);
   	background-image: linear-gradient(to bottom,#656262 0,#231f20 100%);
   	margin-right: 9px;
+  	margin-bottom: 9px;
 }
