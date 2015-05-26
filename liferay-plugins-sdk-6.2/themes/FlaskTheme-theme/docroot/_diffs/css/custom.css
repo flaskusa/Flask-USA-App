@@ -375,7 +375,10 @@ linear;
 /*AddUser button*/
 .iconAddUser{
   	height: 50px;
-  	width: 50px;	
+  	width: 50px;
+  	-webkit-transition: all 0.3s;
+	 -moz-transition: all 0.3s;
+	 transition: all 0.3s;	
 	background-image:url(../images/Flask-Icons/AddUserWhite.png);
  	background-repeat:no-repeat;
     background-position:center; 
@@ -385,6 +388,9 @@ linear;
 .iconAddUser:hover{
   	height: 50px;
   	width: 50px;	
+  	-webkit-transition: all 0.3s;
+	 -moz-transition: all 0.3s;
+	 transition: all 0.3s;
 	background-image:url(../images/Flask-Icons/AddUserOrange.png);
  	background-repeat:no-repeat;
     background-position:center; 
@@ -393,7 +399,10 @@ linear;
 
 .iconAddUser:active{
   	height: 50px;
-  	width: 50px;	
+  	width: 50px;
+  	-webkit-transition: all 0.3s;
+	 -moz-transition: all 0.3s;
+	 transition: all 0.3s;	
 	background-image:url(../images/Flask-Icons/AddUserOrange.png);
  	background-repeat:no-repeat;
     background-position:center; 
