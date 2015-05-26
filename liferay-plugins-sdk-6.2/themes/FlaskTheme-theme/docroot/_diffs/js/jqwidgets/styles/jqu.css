@@ -702,3 +702,20 @@
 {
   background-image: url('images/icon-plus.png');
 }
+
+/*JQX Drop down */
+.jqx-fill-state-hover 
+{
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  color:#FF9900;
+  background: #F7F7F7;
+}
+
+.jqx-menu-vertical {
+  background-color: #fff;
+}
+.jqx-menu-ul
+{
+	opacity: 0.90;
+}
