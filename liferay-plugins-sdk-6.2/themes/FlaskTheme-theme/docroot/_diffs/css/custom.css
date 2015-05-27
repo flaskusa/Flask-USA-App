@@ -374,74 +374,151 @@ linear;
 }
 /*AddUser button*/
 .iconAddUser{
-  	height: 50px;
-  	width: 50px;
+  	height: 32px;
+  	width: 32px;
   	-webkit-transition: all 0.3s;
 	 -moz-transition: all 0.3s;
 	 transition: all 0.3s;	
 	background-image:url(../images/Flask-Icons/AddUserWhite.png);
  	background-repeat:no-repeat;
     background-position:center; 
-	background-size:30px 30px;
+	background-size:20px 20px;
 }
 
 .iconAddUser:hover{
-  	height: 50px;
-  	width: 50px;	
+  	height: 32px;
+  	width: 32px;	
   	-webkit-transition: all 0.3s;
 	 -moz-transition: all 0.3s;
 	 transition: all 0.3s;
 	background-image:url(../images/Flask-Icons/AddUserOrange.png);
  	background-repeat:no-repeat;
     background-position:center; 
-	background-size:30px 30px;
+	background-size:20px 20px;
 }
 
 .iconAddUser:active{
-  	height: 50px;
-  	width: 50px;
+  	height: 32px;
+  	width: 32px;
   	-webkit-transition: all 0.3s;
 	 -moz-transition: all 0.3s;
 	 transition: all 0.3s;	
 	background-image:url(../images/Flask-Icons/AddUserOrange.png);
  	background-repeat:no-repeat;
     background-position:center; 
-	background-size:30px 30px;
+	background-size:20px 20px;
 }
 
 .cssAddUser{
-	border:1px solid #363434;
 	opacity:.9;
-	border-radius:50px;
-	width:50px;
-	height:50px;
+	border-radius:32px;
+	width:32px;
+	height:32px;
   	cursor: pointer;
   	-webkit-transition: all .3s;
   	-moz-transition: all .3s;
   	transition: all .3s;
   	text-shadow: none;
-	background-image: -ms-linear-gradient(top,#656262 0,#231f20 100%);
-  	background-image: -moz-linear-gradient(top,#656262 0,#231f20 100%);
-  	background-image: -o-linear-gradient(top,#656262 0,#231f20 100%);
-  	background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#656262),color-stop(1,#231f20));
-  	background-image: -webkit-linear-gradient(top,#656262 0,#231f20 100%);
-  	background-image: linear-gradient(to bottom,#656262 0,#231f20 100%);
+	background: -moz-radial-gradient(center, ellipse cover,  #7d7e7d 0%, #0e0e0e 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#7d7e7d), color-stop(100%,#0e0e0e)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  #7d7e7d 0%,#0e0e0e 100%); /* Chrome10+,Safari5.1+ */	
+	background: -o-radial-gradient(center, ellipse cover,  #7d7e7d 0%,#0e0e0e 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  #7d7e7d 0%,#0e0e0e 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  #7d7e7d 0%,#0e0e0e 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	margin-right: 2%;
+	margin-bottom: 9px;
+	float: right;
+}
+/*Delete Icon*/
+.iconDelUser{
+	margin: 8px;
+	color:#fff;
+}
+
+.iconDelUser:hover{
+	margin: 8px;
+	color:#373535;
+}
+
+.iconDelUser:active{
+	margin: 8px;
+	color:#373535;
+}
+
+.cssDelUser{
+	opacity:.9;
+	border-radius:32px;
+	width:32px;
+	height:32px;
+  	cursor: pointer;
+  	-webkit-transition: all .3s;
+  	-moz-transition: all .3s;
+  	transition: all .3s;
+  	text-shadow: none;
+	background: -moz-radial-gradient(center, ellipse cover,  #7d7e7d 0%, #0e0e0e 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#7d7e7d), color-stop(100%,#0e0e0e)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  #7d7e7d 0%,#0e0e0e 100%); /* Chrome10+,Safari5.1+ */	
+	background: -o-radial-gradient(center, ellipse cover,  #7d7e7d 0%,#0e0e0e 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  #7d7e7d 0%,#0e0e0e 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  #7d7e7d 0%,#0e0e0e 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
 	margin-right: 2%;
 	margin-bottom: 9px;
 	float: right;
 }
 
+/*Search Icon*/
+.iconSearchUser{
+	margin: 8px;
+	color:#fff;
+}
+
+
+.iconSearchUser:hover{
+	margin: 8px;
+	color:#373535;
+}
+
+.iconSearchUser:active{
+	margin: 8px;
+	color:#373535;
+}
+
+.cssSearchUser{
+	opacity:.9;
+	border-radius:32px;
+	width:32px;
+	height:32px;
+  	cursor: pointer;
+  	-webkit-transition: all .3s;
+  	-moz-transition: all .3s;
+  	transition: all .3s;
+  	text-shadow: none;
+	background: -moz-radial-gradient(center, ellipse cover,  #7d7e7d 0%, #0e0e0e 100%); /* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%,#7d7e7d), color-stop(100%,#0e0e0e)); /* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover,  #7d7e7d 0%,#0e0e0e 100%); /* Chrome10+,Safari5.1+ */	
+	background: -o-radial-gradient(center, ellipse cover,  #7d7e7d 0%,#0e0e0e 100%); /* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover,  #7d7e7d 0%,#0e0e0e 100%); /* IE10+ */
+	background: radial-gradient(ellipse at center,  #7d7e7d 0%,#0e0e0e 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d', endColorstr='#0e0e0e',GradientType=1 ); /* IE6-9 fallback on horizontal gradient */
+	margin-right: 2%;
+	margin-bottom: 9px;
+	float: right;
+}
 
 @media (max-width: 979px)
 {
-.aui .dockbar-split .dockbar .navbar-inner 
-{
-  width: 100%;
-  position: fixed;
-  z-index: 10000;
-}
-}
-div#content 
-{
-  margin-top: 47px;
+	.aui .dockbar-split .dockbar .navbar-inner 
+	{
+	  width: 100%;
+	  position: fixed;
+	  z-index: 10000;
+	}
+	
+	
+	div#content 
+	{
+	  margin-top: 47px;
+	}
 }
