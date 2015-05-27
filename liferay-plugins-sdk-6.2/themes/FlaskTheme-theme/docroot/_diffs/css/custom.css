@@ -430,3 +430,18 @@ linear;
 	margin-bottom: 9px;
 	float: right;
 }
+
+
+@media (max-width: 979px)
+{
+.aui .dockbar-split .dockbar .navbar-inner 
+{
+  width: 100%;
+  position: fixed;
+  z-index: 10000;
+}
+}
+div#content 
+{
+  margin-top: 47px;
+}
