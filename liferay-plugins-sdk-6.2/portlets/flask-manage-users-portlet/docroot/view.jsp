@@ -26,8 +26,13 @@
 
 <portlet:defineObjects />
 <body>
+
 <div id="adminDataTable" class="table-condensed">
-	<div class="cssAddUser"><div class="iconAddUser"></div></div>
+	<div class="cssGridMenu">
+		<div class="cssAddUser"><div class="iconAddUser"></div></div>
+		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
+		<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
+	</div>
 	<div id="GridContainer" class="device-mobile-tablet">
 	    <div id="container" class="device-mobile-tablet-container">
 	        <div style="border: none;" id='grid'></div>
@@ -175,6 +180,7 @@
  
   <input class="btn btn-info clsSave" type="button" value="Save" onclick="fnSave()" />
   <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
+  <input id="userId" type="hidden" value="0">
 </form>
 
 <div id='Menu' style="display:none">

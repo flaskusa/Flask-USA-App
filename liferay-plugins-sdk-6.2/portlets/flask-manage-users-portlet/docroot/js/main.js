@@ -27,6 +27,8 @@ function fnDelete(AdminId) {
 }
 
 function fnSave() {
+	console.log('insave');
+	console.log(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT);
 	var params = {
 		firstName : $("#firstName").val(),
 		middleName : $("#middleName").val(),
@@ -48,24 +50,29 @@ function fnSave() {
 		userInterests : "{sports: true}"
 	};
 
-	$("#spinningSquaresG").show();
-	console.log('insave');
-	console.log(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT);
 	Liferay.Service(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT, params,
-			function(obj) {
-				console.log(obj);
-			});
-	console.log('end insave');
-	$.wait(function() {
-		fnLoadAdminUserList();
-		$("#spinningSquaresG").hide();
-	}, 3);
-	$(".clsSave").attr("onclick", "fnSave()");
+		function(obj) {
+			console.log(typeof obj);
+			if(typeof obj =='object')
+			{
+				$("#spinningSquaresG").show();
+				$.wait(function() {
+					fnLoadAdminUserList();
+					$("#spinningSquaresG").hide();
+				}, 3);	
+			}
+			else
+			{
+			  console.log(obj);
+			  return false;
+			}
+			console.log('end insave');			
+	});
 }
 
 function fnUpdate(uid) {
 	var params = {
-		userId : uid,
+		userId : $("#userId").val(),
 		firstName : $("#firstName").val(),
 		middleName : $("#middleName").val(),
 		lastName : $("#lastName").val(),
@@ -82,44 +89,49 @@ function fnUpdate(uid) {
 		password1 : $("#password1").val(),
 		password2 : $("#password2").val(),
 		mobileNumber : $("#mobileNumber").val(),
-		userInterests : fnGetCheckBoxSelected()
+		userInterests :  "{sports: true}"//fnGetCheckBoxSelected()
 	};
 
-	$("#spinningSquaresG").show();
-	console.log('insave');
-	console.log(SERVICE_ENDPOINTS.UPDATE_FLASK_ADMIN_ENDPOINT);
 	Liferay.Service(SERVICE_ENDPOINTS.UPDATE_FLASK_ADMIN_ENDPOINT, params,
 			function(obj) {
 				console.log(obj);
-			});
-	// console.log('end insave');
-	$.wait(function() {
-		fnLoadAdminUserList();
-		$("#spinningSquaresG").hide();
-	}, 3);
+				console.log(params);
+				if(typeof obj =='object')
+				{
+					console.log('inUpdate');
+					$("#spinningSquaresG").show();
+					$.wait(function() {
+						fnLoadAdminUserList();
+						$("#spinningSquaresG").hide();
+					}, 3);	
+				}
+				else
+				{
+				  console.log(obj);
+				  return false;
+				}
+				console.log('end Update');			
+		});	
 }
 
 function fnShowForm(rowIndex) {
-	$(".clsSave").attr("onclick",
-			"fnUpdate(" + GlobalJSON_Admin[rowIndex].userId + ")");
-	var objTemp;
-	console.log(GlobalJSON_Admin);
+	$("#userId").val(GlobalJSON_Admin[rowIndex].userId);
+	console.log(GlobalJSON_Admin[rowIndex].userId);
 	$("#firstName").val(GlobalJSON_Admin[rowIndex].firstName);
 	$("#middleName").val(GlobalJSON_Admin[rowIndex].middleName);
 	$("#lastName").val(GlobalJSON_Admin[rowIndex].lastName);
 	$("#email").val(GlobalJSON_Admin[rowIndex].email);
 	$("#screenName").val(GlobalJSON_Admin[rowIndex].screenName);
-	$("#password1").val(GlobalJSON_Admin[rowIndex].password1);
-	$("#password2").val(GlobalJSON_Admin[rowIndex].password2);
+	$("#password1").val("");//GlobalJSON_Admin[rowIndex].password1
+	$("#password2").val("");//GlobalJSON_Admin[rowIndex].password2
 	$("#city").val(GlobalJSON_Admin[rowIndex].city);
-	$("#mobileNo").val(GlobalJSON_Admin[rowIndex].mobileNumber);
+	$("#mobileNumber").val(GlobalJSON_Admin[rowIndex].mobileNumber);
 	$("#country").val(GlobalJSON_Admin[rowIndex].countryId);
 	$("#DOB").val(GlobalJSON_Admin[rowIndex].DOB);
 	$("#streetName").val(GlobalJSON_Admin[rowIndex].streetName);
 	$("#aptNo").val(GlobalJSON_Admin[rowIndex].aptNo);
 	$("#areaCode").val(GlobalJSON_Admin[rowIndex].areaCode);
 	$("#state").val(GlobalJSON_Admin[rowIndex].stateId);
-
 	$("#adminDataTable").hide();
 	$("#adminForm").show();
 }
@@ -187,6 +199,8 @@ function fnRenderGrid(tdata) {
 					+ datarecord.countryName + "</div>";
 			var Mobileno = "<div style='margin: 10px;'><b>Mobile No:</b> "
 					+ datarecord.mobileNumber + "</div>";
+			var Intr = "<div style='margin: 10px;'><b>Interests :</b> "
+				+ datarecord.userInterests + "</div>";
 			$(leftcolumn).append(firstname);
 			$(leftcolumn).append(middlename);
 			$(leftcolumn).append(lastname);
@@ -206,6 +220,7 @@ function fnRenderGrid(tdata) {
 			$(rightcolumn1).append(City);
 			$(rightcolumn1).append(State);
 			$(rightcolumn1).append(Country);
+			$(rightcolumn1).append(Intr);
 			$(tabsdiv).jqxTabs({
 				width : '90%',
 				height : 200
@@ -218,9 +233,9 @@ function fnRenderGrid(tdata) {
 	console.log(source);
 	var cellsrenderer = function(row, columnfield, value, defaulthtml,
 			columnproperties) {
-		return '<i class="icon-wrench"></i>'
+		return '<i class="icon-wrench" style="margin:3px;"></i>'
 	}
-
+		
 	grid.jqxGrid({
 				width : '98%',
 				source : dataAdapter,
@@ -332,8 +347,55 @@ $(document).ready(function() {
 	$("#spinningSquaresG").hide();
 });
 
-YUI().use(
-		  'aui-tree-view',
+$(document).ready(function () {
+    var theme = prepareSimulator("validator");
+    $('.clsSave').jqxButton({ theme: theme });
+    $('.clsSave').on('click', function () {
+    	if($('#adminForm').jqxValidator('validate'))
+    	{
+    		if($("#userId").val()=="0")
+    			fnSave();
+    		else
+    			fnUpdate();
+    		
+    		console.log("fnSave called");
+    		return false;
+    	}	
+    	else
+    	{
+    		console.log("test False");
+    		return false;
+    	}
+	});
+    // initialize validator.
+    $('#adminForm').jqxValidator
+    ({
+        hintType: 'label',
+        animationDuration: 0,
+        rules: [
+               { input: '#firstName', message: 'First name is required!', action: 'keyup, blur', rule: 'required' },
+               { input: '#lastName', message: 'Last name is required!', action: 'keyup, blur', rule: 'required' },
+               { input: '#mobileNumber', message: 'Mobile number is required!', action: 'keyup, blur', rule: 'required' },
+               { input: '#screenName', message: 'Screen name is required!', action: 'keyup, blur', rule: 'required' },
+               { input: '#areaCode', message: 'Zip code is required!', action: 'keyup, blur', rule: 'required' },
+               { input: '#password1', message: 'Password is required!', action: 'keyup, blur', rule: 'required' },
+               { input: '#password2', message: 'Password is required!', action: 'keyup, blur', rule: 'required' },
+               {
+                   input: '#password2', message: 'Passwords doesn\'t match!', action: 'keyup, focus', rule: function (input, commit) {
+                       // call commit with false, when you are doing server validation and you want to display a validation error on this field. 
+                       if (input.val() === $('#password1').val()) {
+                           return true;
+                       }
+                       return false;
+                   }
+               },
+               { input: '#email', message: 'E-mail is required!', action: 'keyup, blur', rule: 'required' },
+               { input: '#email', message: 'Invalid e-mail!', action: 'keyup', rule: 'email' }]
+    });
+    initSimulator("validator");
+});
+
+YUI().use('aui-tree-view',
 		  function(Y) {
 			  Y.TreeNode.ATTRS.cssClasses.value.file.iconLeaf = 'none';
 		    new Y.TreeViewDD(
@@ -430,112 +492,6 @@ YUI().use(
 		  }
 		);
 
-YUI().use("aui-form-validator", "aui-dropdown", "aui-datepicker","aui-tree-view","panel", function(Y) {
-			var rules = {
-				firstName : {
-					firstName : true,
-					required : true
-				},
-				screenName : {
-					screenName : true,
-					required : true
-				},
-				lastName : {
-					lastName : true,
-					required : true
-				},
-				password1 : {
-					password1 : true,
-					required : true
-				},
-				email : {
-					email : true,
-					required : true
-				},
-				password2 : {
-					password2 : true,
-					equalTo : '#password1',
-					required : true
-				},
-				gender : {
-					gender : true,
-					required : true
-				},
-				mobileNo : {
-					mobileNo : true,
-					required : true,
-					digits : true
-				},
-				areaCode : {
-					areaCode : true,
-					required : true
-				}
-			};
-
-			var fieldStrings = {
-				firstName : {
-					required : 'Please provide your name.'
-				},
-				lastName : {
-					required : 'Please enter your last name.'
-				},
-				screenName : {
-					required : 'Please enter  your screen name.'
-				},
-				gender : {
-					required : 'Please Select your gender.'
-				},
-				email : {
-					required : 'Type your Email in this field.'
-				},
-				password1 : {
-					required : 'Type your password in this field.'
-				},
-				password2 : {
-					required : 'Please re-enter your password.'
-				},
-				areaCode : {
-					required : 'Please enter your Zipcode'
-				},
-				mobileNo : {
-					required : 'Please enter your Mobile Number'
-				}
-			};
-
-			new Y.FormValidator({
-				boundingBox : '#adminForm',
-				fieldStrings : fieldStrings,
-				rules : rules,
-				showAllMessages : true
-			});
-			
-			 var dialog = new Y.Panel({
-			        contentBox : Y.Node.create('<div id="dialog" />'),
-			        bodyContent: '<div class="message icon-warn">Are you sure you want to delete?</div>',
-			        width      : 410,
-			        zIndex     : 6,
-			        centered   : true,
-			        modal      : false, // modal behavior
-			        render     : '.example',
-			        visible    : false, // make visible explicitly with .show()
-			        buttons    : {
-			            footer: [
-			                {
-			                    name  : 'cancel',
-			                    label : 'Cancel',
-			                    action: 'onCancel'
-			                },
-
-			                {
-			                    name     : 'proceed',
-			                    label    : 'OK',
-			                    action   : 'onOK'
-			                }
-			            ]
-			        }
-			    });		
-		});
-
 $.wait = function(callback, seconds) {
 	console.log("start>>" + callback);
 	return window.setTimeout(callback, seconds * 1000);
@@ -560,6 +516,7 @@ function fnGetCheckBoxSelected() {
 	});
 	console.log(ItemArray.join("#"));
 	return ItemArray.join("#");*/
+	return '{}';
 }
 
 function fnSetCheckBoxSelected(strCheckList) {
@@ -645,4 +602,16 @@ $(document).ready(
 			$("#adminDataTable").show();
 			$("#adminForm").hide();
 		});
+		
+		$(".cssDelUser").click(function() {
+			$("#grid").jqxGrid({selectionmode:'checkbox'});
+        });
+		
+		$(".cssSearchUser").click(function() {
+			$("#grid").jqxGrid({
+                showfilterrow: true,
+                filterable: true,
+                filterrowheight: 34
+			});
+        });		
 });
