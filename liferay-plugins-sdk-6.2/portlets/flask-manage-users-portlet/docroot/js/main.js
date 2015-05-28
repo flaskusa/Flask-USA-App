@@ -158,11 +158,11 @@ function fnRenderGrid(tdata) {
 			information = tabsdiv.find('.information');
 			summary = tabsdiv.find('.summary');
 			var title = tabsdiv.find('.title');
-			var container = $('<div style="margin: 5px;"></div>')
+			var container = $('<div class="row-fluid"></div>');
 			container.appendTo($(information));
-			var photocolumn = $('<div style="float: left; width: 15%;"></div>');
-			var leftcolumn = $('<div style="float: left; width: 45%;"></div>');
-			var rightcolumn = $('<div style="float: left; width: 40%;"></div>');
+			var photocolumn = $('<div class="span2"></div>');
+			var leftcolumn = $('<div class="span5"></div>');
+			var rightcolumn = $('<div class="span5"></div>');
 			container.append(photocolumn);
 			container.append(leftcolumn);
 			container.append(rightcolumn);
@@ -173,57 +173,80 @@ function fnRenderGrid(tdata) {
 			image.append(img);
 			image.appendTo(photo);
 			photocolumn.append(photo);
-			var firstname = "<div style='margin: 10px;'><b>First Name:</b> "
-					+ datarecord.firstName + "</div>";
-			var middlename = "<div style='margin: 10px;'><b>Middle Name:</b> "
-					+ datarecord.middleName + "</div>";
-			var lastname = "<div style='margin: 10px;'><b>Last Name:</b> "
-					+ datarecord.lastName + "</div>";
-			var Email = "<div style='margin: 10px;'><b>Email:</b> "
-					+ datarecord.email + "</div>";
-			var screenname = "<div style='margin: 10px;'><b>Screen Name:</b> "
-					+ datarecord.screenName + "</div>";
-			var dob1 = "<div style='margin: 10px;'><b>Date Of Birth:</b> "
-					+ datarecord.DOB + "</div>";
-			var streetname = "<div style='margin: 10px;'><b>Street Name:</b> "
-					+ datarecord.streetName + "</div>";
-			var aptno = "<div style='margin: 10px;'><b>Appartment No:</b> "
-					+ datarecord.aptNo + "</div>";
-			var areacode = "<div style='margin: 10px;'><b>Area Code:</b> "
-					+ datarecord.areaCode + "</div>";
-			var City = "<div style='margin: 10px;'><b>City:</b> "
-					+ datarecord.city + "</div>";
-			var State = "<div style='margin: 10px;'><b>State:</b> "
-					+ datarecord.stateName + "</div>";
-			var Country = "<div style='margin: 10px;'><b>Country:</b> "
-					+ datarecord.countryName + "</div>";
-			var Mobileno = "<div style='margin: 10px;'><b>Mobile No:</b> "
-					+ datarecord.mobileNumber + "</div>";
-			var Intr = "<div style='margin: 10px;'><b>Interests :</b> "
-				+ datarecord.userInterests + "</div>";
+		
+			var firstname = "<tr><td class='filledWidth'> <b>First Name:</b></td><td> "
+				+ datarecord.firstName + "</td></tr>";
+		    var middlename = "<tr><td class='filledWidth'><b>Middle Name:</b></td><td> "
+				+ datarecord.middleName + "</td></tr>";
+		    var lastname = "<tr><td class='filledWidth'><b>Last Name:</b></td><td> "
+				+ datarecord.lastName + "</td></tr>";
+			
+		    
+			var Email = "<tr><td class='filledWidth'> <b>Email:</b></td><td>"
+					+ datarecord.email + "</td></tr>";
+			var screenname = "<tr><td class='filledWidth'><b>Screen Name:</b></td><td>"
+					+ datarecord.screenName + "</td></tr>";
+			var dob1 = "<tr><td class='filledWidth'><b>Date Of Birth:</b></td><td> "
+					+ datarecord.DOB + "</td></tr>";
+			var streetname = "<tr><td class='filledWidth'><b>Street Name:</b></td><td> "
+					+ datarecord.streetName + "</td></tr>";
+			var aptno = "<tr><td class='filledWidth'><b>Appartment No:</b></td><td> "
+					+ datarecord.aptNo + "</td></tr>";
+			var areacode = "<tr><td class='filledWidth'><b>Area Code:</b> </td><td>"
+					+ datarecord.areaCode + "</td></tr>";
+			var City = "<tr><td class='filledWidth'><b>City:</b></td><td> "
+					+ datarecord.city + "</td></tr>";
+			var State = "<tr><td class='filledWidth'><b>State:</b></td><td> "
+					+ datarecord.stateName + "</td></tr>";
+			var Country = "<tr><td class='filledWidth'><b>Country:</b></td><td> "
+					+ datarecord.countryName + "</td></tr>";
+			var Mobileno = "<tr><td class='filledWidth'><b>Mobile No:</b></td><td> "
+					+ datarecord.mobileNumber + "</td></tr>";
+			var Intr = "<tr><td class='filledWidth'><b>Interests :</b> </td><td>"
+				+ datarecord.userInterests + "</td></tr>";
+			
+			$(leftcolumn).append("<table>");
+			
 			$(leftcolumn).append(firstname);
 			$(leftcolumn).append(middlename);
 			$(leftcolumn).append(lastname);
+			
+			$(leftcolumn).append("</table>");
+			
+			$(rightcolumn).append("<table>");
+			
 			$(rightcolumn).append(Email);
 			$(rightcolumn).append(screenname);
 			$(rightcolumn).append(dob1);
 			$(rightcolumn).append(Mobileno);
-			var container1 = $('<div style="margin: 5px;"></div>')
+			
+			$(rightcolumn).append("</table>");
+			
+			
+			var container1 = $('<div class="row-fluid"></div>')
 			container1.appendTo($(summary));
-			var leftcolumn1 = $('<div style="float: left; width: 45%;"></div>');
-			var rightcolumn1 = $('<div style="float: left; width: 40%;"></div>');
+			var leftcolumn1 = $('<div class="span6"></div>');
+			var rightcolumn1 = $('<div class="span6"></div>');
 			container1.append(leftcolumn1);
 			container1.append(rightcolumn1);
+			
+			$(leftcolumn).append("<table>");
 			$(leftcolumn1).append(streetname);
 			$(leftcolumn1).append(aptno);
 			$(leftcolumn1).append(areacode);
+			$(leftcolumn).append("</table>");
+			
+			$(rightcolumn).append("<table>");
 			$(rightcolumn1).append(City);
 			$(rightcolumn1).append(State);
 			$(rightcolumn1).append(Country);
 			$(rightcolumn1).append(Intr);
+			$(rightcolumn).append("</table>");
+			
+			
 			$(tabsdiv).jqxTabs({
 				width : '90%',
-				height : 200
+				height : 180
 			});
 		}
 	}
