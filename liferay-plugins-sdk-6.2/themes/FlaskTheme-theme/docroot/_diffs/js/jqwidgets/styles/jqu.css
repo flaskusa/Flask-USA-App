@@ -719,5 +719,9 @@
 .jqx-widget-content 
 {
 	box-shadow: 0px 6px 6px #CCC;
-	opacity: 0.90;
+}
+
+.jqx-widget-header 
+{
+	background: antiquewhite;
 }
