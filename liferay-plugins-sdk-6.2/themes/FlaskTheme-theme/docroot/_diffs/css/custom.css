@@ -522,3 +522,65 @@ linear;
 	  margin-top: 47px;
 	}
 }
+
+
+/* Splash Screen */
+
+
+#flaskStyle1 {
+    color: #544F4B;
+    font-family: 'Ubuntu', sans-serif;
+    letter-spacing: 13px;
+    line-height: 0.8;
+    font-size: 4.500em;
+    font-weight: bolder; 
+}
+
+#flaskStyle2  {
+    color: #EB8C49;
+    font-family: Coda;
+    line-height: 1.375;
+    font-size: 1.150em;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 0.75px;
+}
+#splash {
+ 	
+  text-align:center;
+  height: 420px;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+   display:none;
+}
+
+ @media (max-width: 600px) 
+{
+    .logoSize 
+    {
+        width:209px;
+        height:234px;
+    }
+}
+
+@media (max-width: 400px) 
+{
+    .flaskStyle1 
+    {
+        font-size: 3.500em;
+    }
+
+    .flaskStyle2  
+    {
+    font-size: 0.950em;
+    }
+    .logoSize 
+    {
+        width:152px;
+        height:175px;
+    } 
+}
