@@ -79,7 +79,7 @@ function fnUpdate(uid) {
 		isMale : true,
 		screenName : $("#screenName").val(),
 		email : $("#email").val(),
-		DOB : $("#DOB").val(),
+		DOB : $('#DOB').jqxDateTimeInput('getDate'),
 		streetName : $("#streetName").val(),
 		aptNo : $("#aptNo").val(),
 		areaCode : $("#areaCode").val(),
@@ -116,7 +116,6 @@ function fnUpdate(uid) {
 
 function fnShowForm(rowIndex) {
 	$("#userId").val(GlobalJSON_Admin[rowIndex].userId);
-	console.log(GlobalJSON_Admin[rowIndex].userId);
 	$("#firstName").val(GlobalJSON_Admin[rowIndex].firstName);
 	$("#middleName").val(GlobalJSON_Admin[rowIndex].middleName);
 	$("#lastName").val(GlobalJSON_Admin[rowIndex].lastName);
@@ -126,12 +125,16 @@ function fnShowForm(rowIndex) {
 	$("#password2").val("");//GlobalJSON_Admin[rowIndex].password2
 	$("#city").val(GlobalJSON_Admin[rowIndex].city);
 	$("#mobileNumber").val(GlobalJSON_Admin[rowIndex].mobileNumber);
-	$("#country").val(GlobalJSON_Admin[rowIndex].countryId);
-	$("#DOB").val(GlobalJSON_Admin[rowIndex].DOB);
+	$("#countryId").val(GlobalJSON_Admin[rowIndex].countryId);
+	//Fill states here
+	fnFillRegionList(GlobalJSON_Admin[rowIndex].countryId,GlobalJSON_Admin[rowIndex].stateId);
+	//Set selected state here
+	console.log($("#stateId").val()+ " - "+GlobalJSON_Admin[rowIndex].stateId)
+	var date = new Date(parseInt(GlobalJSON_Admin[rowIndex].DOB))
+	$('#DOB').jqxDateTimeInput('setDate', date);
 	$("#streetName").val(GlobalJSON_Admin[rowIndex].streetName);
 	$("#aptNo").val(GlobalJSON_Admin[rowIndex].aptNo);
 	$("#areaCode").val(GlobalJSON_Admin[rowIndex].areaCode);
-	$("#state").val(GlobalJSON_Admin[rowIndex].stateId);
 	$("#adminDataTable").hide();
 	$("#adminForm").show();
 }
@@ -376,12 +379,18 @@ $(document).ready(function () {
     $('.clsSave').on('click', function () {
     	if($('#adminForm').jqxValidator('validate'))
     	{
-    		if($("#userId").val()=="0")
-    			fnSave();
-    		else
+    		console.log($("#userId").val());
+    		if($("#userId").val()>0){
+    			console.log("fnUpdate called");
     			fnUpdate();
-    		
-    		console.log("fnSave called");
+    		}
+    		else{
+    			console.log("fnSave called");
+    			fnSave();
+    			var myStateList = $("#stateId");
+    			myStateList.empty();
+    			myStateList.append($("<option></option>").val(0).html("-Select your region-"));
+    		}
     		return false;
     	}	
     	else
@@ -528,7 +537,7 @@ $(document).ready(function() {
 });
 
 function fnGetCheckBoxSelected() {
-	/*var Items = $("#userInterests").jqxTree('getItems');
+	var Items = $("#userInterests").jqxTree('getItems');
 	var ItemArray = new Array();
 	$.each(Items, function() {
 		if (this.checked) {
@@ -538,12 +547,11 @@ function fnGetCheckBoxSelected() {
 		;
 	});
 	console.log(ItemArray.join("#"));
-	return ItemArray.join("#");*/
-	return '{}';
+	return ItemArray.join("#");
+	//return '{}';
 }
 
 function fnSetCheckBoxSelected(strCheckList) {
-/*
 	var tempArray = new Array();
 	tempArray = strCheckList.split("#");
 	var i;
@@ -552,67 +560,57 @@ function fnSetCheckBoxSelected(strCheckList) {
 		var tempObj = "#" + tempArray[i];
 		$("#userInterests").jqxTree('checkItem', $(tempObj)[0], true);
 	}
-	console.log("Working fine");*/
+	console.log("Working fine");
 }
 
-function fnGetCountry(countryId) {
-	var params = 19;
+function fnFillCountryList() {
+	var params = "";
 	var request = new Request();
-	request.sendGETRequest("/api/jsonws/country/get-country/country-id/19",
-			params, function(data) {
-				if (data.responseStatus == 1) {
-					var countryObj = data.responseJson;
-					var myDropDownList = $("#countryId");
-					myDropDownList.append($("<option></option>").val(0).html(
-							"-Select your country-"));
-					console.log(countryObj);
-					console.log("TEST");
-					// Loop here
-					myDropDownList.append($("<option></option>").val(
-							countryObj.countryId).html(countryObj.nameCurrentValue));
-					// End Loop here
-				} else {
-					alert("MESSAGES.ERRORR_REGISTER_USER");
-				}
-			});
+	var myDropDownList = $("#countryId");
+	myDropDownList.append($("<option></option>").val(0).html("-Select your country-"));
+	$.each(ALLOWED_COUNTRIES, function(index, value) {
+		if(value==DEFAULT_COUNTRY){
+			
+		}
+		request.sendGETRequest("/api/jsonws/country/get-country-by-name/name/"+value,params, function(data) {
+			if (data.responseStatus == 1) {
+				var countryObj = data.responseJson;
+				myDropDownList.append($("<option></option>").val(countryObj.countryId).html(countryObj.nameCurrentValue));
+			} else {
+				alert("MESSAGES.ERRORR_REGISTER_USER");
+			}
+		});
+	  
+	});	
 }
 
-function fnGetRegions(countryId) {
-	var params = 19;
+function fnFillRegionList(countryId,defStateId) {
+	var params = "";
 	var request = new Request();
-	request.sendGETRequest("/api/jsonws/region/get-regions/country-id/"
-			+ countryId, params, function(data) {
+	request.sendGETRequest("/api/jsonws/region/get-regions/country-id/"+countryId, params, function(data) {
 		if (data.responseStatus == 1) {
 			var regionObj = data.responseJson;
 			console.log(regionObj);
 			var myStateList = $("#stateId");
 			myStateList.empty();
-			myStateList.append($("<option></option>").val(0).html(
-					"-Select your region-"));
+			myStateList.append($("<option></option>").val(0).html("-Select your region-"));
 			for (var i = 0; i < regionObj.length; i++) {
-				// console.log(regionObj[i].name);
-				myStateList.append($("<option></option>").val(
-						regionObj[i].regionId).html(regionObj[i].name));
+				myStateList.append($("<option></option>").val(regionObj[i].regionId).html(regionObj[i].name));
 			}
+			myStateList.val(defStateId);
 		} else {
 			alert("MESSAGES.ERRORR_REGISTER_USER");
 		}
 	});
 }
 
-$(document).ready(
-		function() {
-		console.log('Start ');
-		fnGetCountry(19);
-		console.log('End ')
+$(document).ready(function() {
+		fnFillCountryList();
 		$("#countryId").change(function() {
 			console.log($(this).val());
-			fnGetRegions($(this).val());
+			fnFillRegionList($(this).val(),0);
 			return false;
 		});
-		var myStateList = $("#stateId");
-		myStateList.empty();
-		myStateList.append($("<option></option>").val(0).html("-Select your region-"));
 		
 		$(".portlet-icon-back").hide();
 		$(".panel-page-menu").hide();		
@@ -637,4 +635,10 @@ $(document).ready(
                 filterrowheight: 34
 			});
         });		
+});
+
+$(document).ready(function () {
+	$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
+	$('#userInterests').jqxTree({ height: '400px', hasThreeStates: true, checkboxes: true, width: '330px'});	
+    console.log("Cal Done");    
 });

@@ -30,6 +30,9 @@ var DATA_SOURCE  = {
 		]
 }
 
+var ALLOWED_COUNTRIES = ['united-states','canada']
+var DEFAULT_COUNTRY = 'united-states';
+
 var MESSAGES = {
 		MANDATORY_FIRST_NAME        : "Please enter first name.",
 		MANDATORY_LAST_NAME         : "Please enter last name.",
