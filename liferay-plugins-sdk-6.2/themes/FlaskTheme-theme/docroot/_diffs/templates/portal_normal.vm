@@ -13,7 +13,7 @@
 	<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
 
 <link async href="http://fonts.googleapis.com/css?family=Coda" rel="stylesheet" type="text/css"/>
-
+<link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
 
  <script type="text/javascript" src="$javascript_folder/jqwidgets/jqx-all.js"></script>
  
@@ -34,6 +34,15 @@ $theme.include($body_top_include)
  #if ($is_signed_in)
 	 #dockbar()
  #end
+
+<div id="splash">
+    
+        <img class="logoSize" src="$images_folder/flasklogo2.png" />
+       
+         <h1 id="flaskStyle1">FLASK</h1>
+         <h2 id="flaskStyle2">YOUR GAME PLAN FOR GAME DAY</h2>
+        
+</div>
 
 <div class="container-fluid" id="wrapper">
 	<header id="banner" role="banner">
