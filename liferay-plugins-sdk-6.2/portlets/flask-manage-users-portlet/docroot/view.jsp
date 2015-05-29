@@ -23,7 +23,6 @@
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/generatedata.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jqx-all.js"></script>
 <!-- JQX Plugin Includes [End]-->
-
 <portlet:defineObjects />
 <body>
 
@@ -73,7 +72,7 @@
   <div class="form-group">
 	<label class="control-label" for="DOB">Date of Birth:</label>
 	<div class="controls">
-		<input size="50" id="DOB" type="date"/>
+		<div id="DOB"></div>
 	</div>
   </div>
   
@@ -154,29 +153,55 @@
     </div>
   </div>  
 
-<div>
+  <div class="form-group">
     <label class="control-label" for="pref">Preferences:</label>
-	  <div>
-		<table>
-		<tr>
-		<td style="vertical-align: top" width="50%">
-            <div id="myTreeView"></div>
-		</td>
-		<td style="vertical-align: top" width="50%">
-            <div id="myTreeView0"></div>
-	    </td>
-	    </tr>
-	    <tr>
-	    <td style="vertical-align: top">
-	    	<div id="myTreeView1"></div>
-		</td>
-	    <td style="vertical-align: top">
-	       <div id="myTreeView2"></div>
-	    </td>
-	    </tr>
-	    </table>  
+	  <div style="border: none;" id="userInterests">
+		<ul>
+	        <li item-expanded='true' data-id="sports">Sports
+		         <ul>
+	                <li data-id="sports-pro">Professional
+	                	<ul>
+	                		<li data-id="sports-pro-basketball">Basketball</li>
+	                		<li data-id="sports-pro-basebball">Basebball</li>
+	                		<li data-id="sports-pro-football">Football</li>
+	                		<li data-id="sports-pro-hockey">Hockey</li>
+	                		<li data-id="sports-pro-soccer">Soccer</li>
+	                		<li data-id="sports-pro-tennis">Tennis</li>
+	                	</ul>
+	                </li>
+	                <li data-id="sports-col">College
+	                	<ul>
+	                		<li data-id="sports-col-basketball">Basketball</li>
+	                		<li data-id="sports-col-basebball">Basebball</li>
+	                		<li data-id="sports-col-football">Football</li>
+	                		<li data-id="sports-col-hockey">Hockey</li>
+	                		<li data-id="sports-col-soccer">Soccer</li>
+	                		<li data-id="sports-col-tennis">Tennis</li>
+	                	</ul>	                
+	                </li>
+	            </ul>
+			</li>
+		</ul>
+		<ul>			
+	        <li item-expanded='true' data-id="concerts">Concerts
+	            <ul>
+	                <li data-id="concerts-country">Country</li>
+	                <li data-id="concerts-pop">POP</li>
+	                <li data-id="concerts-rock">ROCK</li>
+	                <li data-id="concerts-rap">RAP</li>
+	                <li data-id="concerts-alternative">Alternative</li>
+	                <li data-id="concerts-electronic">Electronic</li>
+	            </ul>
+	        </li>
+		</ul>
+		<ul>	        
+	        <li item-expanded='true' data-id="special-events">
+	        	Special Events
+	        	<ul><li data-id="special-events-comedy">Comedy</li></ul>
+	        </li>
+	    </ul>	  
 	  </div>      
-  </div>
+	</div>
  
   <input class="btn btn-info clsSave" type="button" value="Save" onclick="fnSave()" />
   <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
