@@ -507,8 +507,6 @@ linear;
 	float: right;
 }
 
-@media (max-width: 979px)
-{
 	.aui .dockbar-split .dockbar .navbar-inner 
 	{
 	  width: 100%;
@@ -521,10 +519,14 @@ linear;
 	{
 	  margin-top: 47px;
 	}
-}
 
 
-/* Splash Screen */
+/*	.aui #navigation.open 
+	{
+	  margin-top: 47px;
+	}
+*/
+/* Splash Screen Starts*/
 
 
 #flaskStyle1 {
@@ -584,3 +586,60 @@ linear;
         height:175px;
     } 
 }
+
+/* Splash Screen Ends*/
+
+/* Dockbar Starts*/
+.aui .dockbar-split .dockbar 
+{
+  height: auto;
+  position: relative;
+}
+
+
+.navbar .container .btn-navbar 
+{
+  color: #000;
+  display: inline-block;
+  margin-bottom: 5px;
+  width: auto;
+}
+
+/* Dockbar Ends*/
+
+
+/* Slider Starts*/
+
+#navigation
+{
+	font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+	position: fixed;
+	top: 47px;
+	left: -285px;
+	height: 100%;
+	width: 250px;
+	background: #544F4B;
+	box-shadow: 1px 2px 15px #444;
+	z-index: 99999;
+	overflow: auto;
+	list-style:none;
+	padding: 10px;
+      	
+}
+
+#navigation li
+{
+	list-style: none;
+}
+
+#navigation a
+{
+	color: #FFFFFF; 
+	text-decoration: none;
+}
+#navigation a:hover
+{
+	color: #EB8C49; 
+}
+
+/* Slider Ends */
