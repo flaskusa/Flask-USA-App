@@ -21,22 +21,22 @@
 <body>
 <div class="table-responsive">          
 
-  <table style="width:100%; top-margin:20px; ">
+  <table id="viewevent">
     <tbody>
       <tr>
         <td><div class="imgalig"><img src="<%=request.getContextPath()%>/img/lion.gif" class="imga" ></div>
         <div class="txtalig">
-        <label class="control-label"><font color="#FFA215">Detroit Liions vs. Chicago Bears</font></label>
+        <label class="control-label labelcolor">Detroit Liions vs. Chicago Bears</label>
         <label class="control-label">1:00 p.m. at Ford Field</label></div> </td>
       </tr>
       <tr>
         <td><div class="imgalig"><img src="<%=request.getContextPath()%>/img/d.gif" class="imga" ></div>
         <div class="txtalig">
-        <label class="control-label"><font color="#FFA215">Detroit Tigers vs. Milwaukee Brewers</font></label>
+        <label class="control-label labelcolor">Detroit Tigers vs. Milwaukee Brewers</label>
         <label class="control-label">7:05 p.m. at Comerica Park</label></div> </td>
       </tr>
       <tr>
-         <td> <button type="button" class="button" style="text-align: left">SEARCH FOR AN EVENT
+         <td> <button type="button" class="button" >SEARCH FOR AN EVENT
    </button>
    </td>
       </tr>
