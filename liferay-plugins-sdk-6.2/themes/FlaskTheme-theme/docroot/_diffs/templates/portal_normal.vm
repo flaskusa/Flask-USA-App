@@ -20,6 +20,29 @@
 <link rel="stylesheet" href="$javascript_folder/jqwidgets/styles/jqx.base.css" type="text/css" />
 <link rel="stylesheet" href="$javascript_folder/jqwidgets/styles/jqu.css" type="text/css" />
 
+
+<script>
+$( document ).ready(function() {
+ if($(".splash").is(":visible"))
+ {
+  $("#wrapper").css({"opacity":"0"});
+ }
+ $(".splash-arrow").click(function()
+ {
+  $(".splash").slideUp("800", function() {
+     $("#wrapper").delay(100).animate({"opacity":"1.0"},800);
+   });
+ });
+});
+
+$(window).scroll(function() {
+     $(window).off("scroll");
+   $(".splash").slideUp("800", function() {
+       $("#wrapper").delay(100).animate({"opacity":"1.0"},800);
+      });
+});
+</script>
+
 </head>
 
 <body class="$css_class">
@@ -33,6 +56,14 @@ $theme.include($body_top_include)
 
  #if ($is_signed_in)
 	 #dockbar()
+ #else
+ <div class="splash fade-in">
+  <img class="logoSize" src="$images_folder/flasklogo2.png" />
+  <h1 class="splash-title fade-in">Flask</h1>
+  <P class="splash-para">YOUR GAME PLAN FOR GAME DAY</P>
+  <a href="#" class="splash-arrow fade-in"><span class="icon-circle-arrow-down"><span/></a>
+ </div>
+	 
  #end
 
 <div id="splash">
