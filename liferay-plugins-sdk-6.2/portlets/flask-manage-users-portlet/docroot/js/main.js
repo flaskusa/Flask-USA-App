@@ -553,4 +553,5 @@ $(document).ready(function () {
 	$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
 	$('.userInterests').jqxTree({ height: '400px', hasThreeStates: true, checkboxes: true});	
     console.log("Cal Done");    
+	$(".jqx-checkbox").css("margin-top","6.5px");
 });
