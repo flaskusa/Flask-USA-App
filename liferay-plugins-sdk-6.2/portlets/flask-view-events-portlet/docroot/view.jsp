@@ -42,17 +42,17 @@
       </tr>
 		<tr >
          <td  style="padding-top:10px;">
-			<input class="form-control input-lg" type="text" placeholder="TYPE:">
+			<input id="textbx1" class="form-control input-lg" type="text" placeholder="TYPE:">
          </td>
       </tr>
 		<tr>
-         <td class="textb"> <input class="textcl" type="text" placeholder="DATE:"></td>
+         <td class="textb"> <input id="textbx2"  type="text" placeholder="DATE:"></td>
       </tr>
 		<tr>
-         <td class="textb">   <input class="textcl" type="text" placeholder="CITY:"></td>
+         <td class="textb">   <input id="textbx3" type="text" placeholder="CITY:"></td>
       </tr>
 		<tr>
-         <td class="textb">   <input class="textcl" type="text" placeholder="KEY WORDS:"></td>
+         <td class="textb">   <input id="textbx4" type="text" placeholder="KEY WORDS:"></td>
       </tr>
       <tr>
         <td>  </td>
@@ -61,5 +61,5 @@
   </table>
 
   </div>
-   <div id="fixedfooter"><img src="<%=request.getContextPath()%>/img/banner.jpg"/></div> 
+   <div id="fixedfooter"><img src="<%=request.getContextPath()%>/img/banner.jpg" /></div> 
 </body>
