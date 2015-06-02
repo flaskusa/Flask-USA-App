@@ -205,8 +205,8 @@ upgrade and maintenance. */
 .aui select {
     border-radius: 5px;
 	font-size: 14px;
-	height: 40px;
-    width: 519px;
+	height: 30px;
+    width: 500px;
 	padding-left:10px;
 	margin-bottom: 10px;
 };
@@ -255,7 +255,7 @@ div#adminDataTable
 		
 	.aui textarea
 	  {
-	    height: 20px;
+	    height: 30px;
 	    width: 98%;
 	    padding:4px 0px;
 	    padding-left: 10px; 
@@ -263,14 +263,14 @@ div#adminDataTable
 		
 	 .aui input[type="text"]
 	 {
-	    height: 20px;
+	    height: 30px;
 	    width: 98%;
 	    padding:4px 0px;  
 		padding-left: 10px;
 	 }
 	 .aui input[type="password"]
 	 {
-		height: 20px;
+		height: 30px;
 	    width: 98%;
 	    padding:4px 0px;  
 		padding-left: 10px;
@@ -434,16 +434,25 @@ linear;
 .iconDelUser{
 	margin: 8px;
 	color:#fff;
+	-webkit-transition: all 0.3s;
+	 -moz-transition: all 0.3s;
+	 transition: all 0.3s;
 }
 
 .iconDelUser:hover{
 	margin: 8px;
-	color:#373535;
+	color: #ff9900;
+	-webkit-transition: all 0.3s;
+	 -moz-transition: all 0.3s;
+	 transition: all 0.3s;
 }
 
 .iconDelUser:active{
 	margin: 8px;
-	color:#373535;
+	color: #ff9900;
+	-webkit-transition: all 0.3s;
+	 -moz-transition: all 0.3s;
+	 transition: all 0.3s;
 }
 
 .cssDelUser{
@@ -472,17 +481,26 @@ linear;
 .iconSearchUser{
 	margin: 8px;
 	color:#fff;
+	-webkit-transition: all 0.3s;
+	 -moz-transition: all 0.3s;
+	 transition: all 0.3s;
 }
 
 
 .iconSearchUser:hover{
 	margin: 8px;
-	color:#373535;
+	color: #ff9900;
+	-webkit-transition: all 0.3s;
+	 -moz-transition: all 0.3s;
+	 transition: all 0.3s;
 }
 
 .iconSearchUser:active{
 	margin: 8px;
-	color:#373535;
+	color: #ff9900;
+	-webkit-transition: all 0.3s;
+	 -moz-transition: all 0.3s;
+	 transition: all 0.3s;
 }
 
 .cssSearchUser{
@@ -507,6 +525,9 @@ linear;
 	float: right;
 }
 
+
+/* Dockbar Starts*/
+
 	.aui .dockbar-split .dockbar .navbar-inner 
 	{
 	  width: 100%;
@@ -526,70 +547,9 @@ linear;
 	  margin-top: 47px;
 	}
 */
-/* Splash Screen Starts*/
 
 
-#flaskStyle1 {
-    color: #544F4B;
-    font-family: 'Ubuntu', sans-serif;
-    letter-spacing: 13px;
-    line-height: 0.8;
-    font-size: 4.500em;
-    font-weight: bolder; 
-}
 
-#flaskStyle2  {
-    color: #EB8C49;
-    font-family: Coda;
-    line-height: 1.375;
-    font-size: 1.150em;
-    font-weight: normal;
-    font-style: normal;
-    letter-spacing: 0.75px;
-}
-#splash {
- 	
-  text-align:center;
-  height: 420px;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-   display:none;
-}
-
- @media (max-width: 600px) 
-{
-    .logoSize 
-    {
-        width:209px;
-        height:234px;
-    }
-}
-
-@media (max-width: 400px) 
-{
-    .flaskStyle1 
-    {
-        font-size: 3.500em;
-    }
-
-    .flaskStyle2  
-    {
-    font-size: 0.950em;
-    }
-    .logoSize 
-    {
-        width:152px;
-        height:175px;
-    } 
-}
-
-/* Splash Screen Ends*/
-
-/* Dockbar Starts*/
 .aui .dockbar-split .dockbar 
 {
   height: auto;
@@ -607,6 +567,37 @@ linear;
 
 /* Dockbar Ends*/
 
+/* Drop Down Account Controls Starts*/
+ .aui .nav-collapse .dropdown-menu a 
+ {
+ 	color: #000000;
+ }
+ span.nav-item-label 
+ {
+	 color: #000000;
+ }
+ 
+ .aui .dockbar-split .dockbar .navbar-inner .nav>li 
+ {
+ 	 background-color: #FFFFFF;
+ }
+ 
+ .aui .dockbar-split .dockbar.navbar-static-top .collapse .nav-account-controls 
+ {
+ 	 
+	  background-color: #fff;
+	  border-radius: 5px;
+	  box-shadow: 0px 5px 10px #CCC;
+ 	  border: 1px solid transparent;
+
+ }
+ 
+ .aui .dockbar-split .dockbar .navbar-inner .nav li.dropdown.open>.dropdown-toggle 
+ {
+  background-color: #F7F7F7;
+ }
+ 
+/* Drop Down Account Controls Ends*/
 
 /* Slider Starts*/
 
@@ -631,6 +622,7 @@ linear;
 #navigation li
 {
 	list-style: none;
+	padding-bottom: 10px;
 }
 
 #navigation a
@@ -643,12 +635,14 @@ linear;
 	color: #EB8C49; 
 }
 
+.modify-pages .lfr-nav-sortable>a>span 
+{
+  padding-left: 5px;
+}
+
 /* Slider Ends */
 
-
-
-
-/* Splash Image */
+/* Splash Starts */
 * {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -680,22 +674,36 @@ linear;
 }
 
 .splash {
+ text-align:center;
  background-color:#FFF;
- position: fixed;
- top: 10%;
+ /* position: fixed; */
+ /*top:10%;*/
  right: 0;
  bottom: 0;
  left: 0;
- min-height: 360px;
+/* min-height: 360px; */
  z-index: 999;
  background-size: cover;
  background-attachment: fixed;
- text-align: center;
+ 
+ 
+ 
+
+  height: 420px;
+  position: absolute;
+  top: 0;
+  margin: auto;
 }
 
 .splash-title {
- font-size: 3em;
- margin-top: 100px;
+	color: #544F4B;
+	font-family: 'Ubuntu', sans-serif;
+	letter-spacing: 13px;
+	line-height: 0.0;
+    font-size: 4.500em;
+    font-weight: bolder;
+ /* font-size: 3em; */
+/* margin-top: 100px; */
  /*text-shadow: 0 2px 10px #000;*/
  -webkit-animation-delay: 1s;
  -moz-animation-delay: 1s;
@@ -703,8 +711,16 @@ linear;
 }
 
 .splash-para{
- font-size: 2em;
- color: #f89734;
+/* font-size: 2em; */
+ /*  color: #f89734; */
+ 
+     color: #EB8C49;
+    font-family: Coda;
+    line-height: 0.0;
+    font-size: 1.150em;
+    font-weight: normal;
+    font-style: normal;
+    letter-spacing: 0.75px;
 }
 
 a.splash-arrow {
@@ -734,16 +750,56 @@ a.splash-arrow:hover {
 }
 
 @media all and (max-width: 690px) {
-  .splash-title {font-size: 2em;}
+  /*.splash-title {font-size: 2em;}
   .splash-para{font-size: 1.5em;}
+  */
+   .logoSize 
+    {
+        width:209px;
+        height:234px;
+    }
 }
 
 @media all and (max-width: 480px) {
- .splash-title {font-size: 1.5em;}
+ /*.splash-title {font-size: 1.5em;}
  .splash-para{font-size: 1em;}
+ */
+ 
+   .splash-title 
+    {
+        font-size: 3.500em;
+    }
+
+    .splash-para  
+    {
+        font-size: 0.950em;
+    }
+}
+/* Splash Ends */
+
+/* For Edit Page Icons */
+.modify-pages .drag-handle 
+{
+  display: none;
 }
 
+/* Login Screen Starts*/
 
+.taglib-icon-list li 
+	{
+	  float: left;
+	  margin-right: 1em;
+	  width: 100%;
+	}
 
-
-
+.portlet-login .navigation 
+	{
+	  /* background: #E8E1E1; */
+	  /* border-top: 1px solid #bfbfbf; */
+	  background: none;
+	  border: none;
+	  padding: 10px;
+	}
+/* Login Screen Ends*/	
+	
+	
