@@ -53,7 +53,9 @@ div#fixedfooter
 	width:100%; 
 	top-margin:20px;	
 }
-.button {
+
+.button 
+{
   padding: 5px 25px;
   background: #FB9A33;
   font-size: 20px;
