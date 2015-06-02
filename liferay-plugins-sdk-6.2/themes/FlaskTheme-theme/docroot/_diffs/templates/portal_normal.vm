@@ -65,6 +65,7 @@ function fnSplashSlideUp(){
 <a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
 $theme.include($body_top_include)
 
+
  #if ($is_signed_in)
 	 #dockbar()
  #else
@@ -72,7 +73,8 @@ $theme.include($body_top_include)
 	  <img class="logoSize" src="$images_folder/flasklogo2.png" />
 	  <h1 class="splash-title">FLASK</h1>
 	  <P class="splash-para">YOUR GAME PLAN FOR GAME DAY</P>
-	  <a href="#" class="splash-arrow fade-in"><span class="icon-circle-arrow-down"><span/></a>
+	 
+	 
 	 </div>
 	 
  #end
@@ -94,7 +96,7 @@ $theme.include($body_top_include)
 			</h1>
 			-->
 		#if (!$is_signed_in)
-			<a data-redirect="$is_login_redirect_required" href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
+			<a data-redirect="$is_login_redirect_required" href="$sign_in_url" id="sign-in" rel="nofollow"><input type="button" class="btn btn-primary" value="$sign_in_text" /></a>
 		#end
 
 		#if ($has_navigation || $is_signed_in)
