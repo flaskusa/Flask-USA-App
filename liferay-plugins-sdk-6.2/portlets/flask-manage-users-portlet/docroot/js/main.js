@@ -47,7 +47,7 @@ function fnSave() {
 		password1 : $("#password1").val(),
 		password2 : $("#password2").val(),
 		mobileNumber : $("#mobileNumber").val(),
-		userInterests : "{sports: true}"
+		userInterests : fnGetCheckBoxSelected()//fnGet
 	};
 
 	Liferay.Service(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT, params,
@@ -89,7 +89,7 @@ function fnUpdate(uid) {
 		password1 : $("#password1").val(),
 		password2 : $("#password2").val(),
 		mobileNumber : $("#mobileNumber").val(),
-		userInterests :  "{sports: true}"//fnGetCheckBoxSelected()
+		userInterests : fnGetCheckBoxSelected()
 	};
 
 	Liferay.Service(SERVICE_ENDPOINTS.UPDATE_FLASK_ADMIN_ENDPOINT, params,
@@ -135,6 +135,7 @@ function fnShowForm(rowIndex) {
 	$("#streetName").val(GlobalJSON_Admin[rowIndex].streetName);
 	$("#aptNo").val(GlobalJSON_Admin[rowIndex].aptNo);
 	$("#areaCode").val(GlobalJSON_Admin[rowIndex].areaCode);
+	fnSetCheckBoxSelected(GlobalJSON_Admin[rowIndex].userInterests);
 	$("#adminDataTable").hide();
 	$("#adminForm").show();
 }
@@ -425,6 +426,7 @@ $(document).ready(function () {
                { input: '#email', message: 'Invalid e-mail!', action: 'keyup', rule: 'email' }]
     });
     initSimulator("validator");
+    $(".jqx-checkbox").css("margin-top","6.5px");
 });
 
 $.wait = function(callback, seconds) {
@@ -440,15 +442,16 @@ $(document).ready(function() {
 });
 
 function fnGetCheckBoxSelected() {
-	var Items = $("#userInterests").jqxTree('getItems');
+	var Items = $(".userInterests").jqxTree('getItems');
+
 	var ItemArray = new Array();
 	$.each(Items, function() {
 		if (this.checked) {
 			var tempid = "#" + this.id;
 			ItemArray.push($(tempid).attr("id"));
-		}
-		;
+		};
 	});
+	
 	console.log(ItemArray.join("#"));
 	return ItemArray.join("#");
 	//return '{}';
@@ -461,7 +464,7 @@ function fnSetCheckBoxSelected(strCheckList) {
 	console.log("tempArray length = " + tempArray.length)
 	for (i = 0; i < tempArray.length; i++) {
 		var tempObj = "#" + tempArray[i];
-		$("#userInterests").jqxTree('checkItem', $(tempObj)[0], true);
+		$(".userInterests").jqxTree('checkItem', $(tempObj)[0], true);
 	}
 	console.log("Working fine");
 }
@@ -496,6 +499,7 @@ function fnFillRegionList(countryId,defStateId) {
 			console.log(regionObj);
 			var myStateList = $("#stateId");
 			myStateList.empty();
+			
 			myStateList.append($("<option></option>").val(0).html("-Select your region-"));
 			for (var i = 0; i < regionObj.length; i++) {
 				myStateList.append($("<option></option>").val(regionObj[i].regionId).html(regionObj[i].name));
@@ -510,10 +514,15 @@ function fnFillRegionList(countryId,defStateId) {
 $(document).ready(function() {
 		fnFillCountryList();
 		$("#countryId").change(function() {
-			console.log($(this).val());
+			
 			fnFillRegionList($(this).val(),0);
 			return false;
 		});
+		console.log($("#countryId").val());
+		if($("#countryId").val()=="0")
+			{
+				fnFillRegionList(0,0);
+			}
 		
 		$(".portlet-icon-back").hide();
 		$(".panel-page-menu").hide();		
@@ -542,6 +551,6 @@ $(document).ready(function() {
 
 $(document).ready(function () {
 	$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
-	$('#userInterests').jqxTree({ height: '400px', hasThreeStates: true, checkboxes: true, width: '330px'});	
+	$('.userInterests').jqxTree({ height: '400px', hasThreeStates: true, checkboxes: true});	
     console.log("Cal Done");    
 });
