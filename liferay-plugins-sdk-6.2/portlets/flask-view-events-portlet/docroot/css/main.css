@@ -32,7 +32,8 @@ div#fixedfooter
 	width:100%;
 }
 
-.textcl {
+#textbx1, #textbx2 ,#textbx3 ,#textbx4
+{
   border-radius: 0px;
   font-size: 14px;
   height: 30px;
@@ -42,10 +43,21 @@ div#fixedfooter
   text-shadow: none;
 }
 
+.labelcolor
+{
+	color : #FB9A33;
+}
+
+#viewevent
+{
+	width:100%; 
+	top-margin:20px;	
+}
 .button {
   padding: 5px 25px;
   background: #FB9A33;
   font-size: 20px;
   text-shadow: none;
   width:100%;
+  text-align: left;
 }
