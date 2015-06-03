@@ -151,6 +151,25 @@ upgrade and maintenance. */
 	margin-bottom: 10px;
 }
 
+/* by navnath css for event form*/
+.table-responsive input[type="text"]
+{
+  border-radius: 0;
+  font-size: 14px;
+  height: 35px;
+  width: 100%;
+  padding: 3px;
+  margin-bottom: 10px;
+  text-shadow: none;
+  margin-left: 2.4px;
+}
+
+.aui.ios input, .aui.ios input.input-large, .aui.ios textarea, .aui.ios .uneditable-input
+{
+	max-width: 100% !important;
+}
+/*end css of event form*/
+
 .aui input[type="date"] {
 	border: 1px solid #ccc;
 	background-color: white;
