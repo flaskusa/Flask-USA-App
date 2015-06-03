@@ -41,7 +41,8 @@
 
 <form id="adminForm">
   <div class="row-fluid">
-  <div class="span4">
+  <div class="span4 group">
+  <h4><span>Category1</span></h4>
    <div class="form-group">
      <label class="control-label" for="firstName">First Name:</label>
      <div class="controls">
@@ -78,7 +79,8 @@
   </div>
    </div>  
   </div>
-  <div class="span4">
+  <div class="span4 group">
+  <h4><span>Category2</span></h4>
    <div class="form-group">
      <label class="control-label" for="streetName">Street:</label>
      <div class="controls">
@@ -121,7 +123,8 @@
      </div>
    </div>  
   </div>
-  <div class="span4">
+  <div class="span4 group">
+  <h4><span>Category3</span></h4>
    <div class="form-group">
      <label class="control-label" for="screenName">Screen Name:</label>
      <div class="controls">
@@ -159,36 +162,36 @@
   </div>
 </div>
 <div class="form-group">
-    <label class="control-label" for="pref">Preferences:</label>
- <div class="row-fluid mt">
+    
+ <div class="row-fluid group">
+ <h4><span>Preferences</span></h4>
+ <div class="row-fluid">
  <div style="border: none;" class="userInterests span4">
   <ul>
          <li item-expanded='true' id="sports">Sports
            <ul>
-                 <li id="sports-pro">Professional
-                  <ul>
-                   <li id="sports-pro-basketball">Basketball</li>
+           		   <li id="sports-pro-basketball">Basketball</li>
                    <li id="sports-pro-basebball">Basebball</li>
                    <li id="sports-pro-football">Football</li>
-                   <li  id="sports-pro-hockey">Hockey</li>
-                   <li  id="sports-pro-soccer">Soccer</li>
-                   <li  id="sports-pro-tennis">Tennis</li>
-                  </ul>
-                 </li>
-                 <li id="sports-col">College
-                  <ul>
-                   <li id="sports-col-basketball">Basketball</li>
-                   <li id="sports-col-basebball">Basebball</li>
-                   <li id="sports-col-football">Football</li>
-                   <li id="sports-col-hockey">Hockey</li>
-                   <li id="sports-col-soccer">Soccer</li>
-                   <li id="sports-col-tennis">Tennis</li>
-                  </ul>                 
-                 </li>
-             </ul>
+                   <li id="sports-pro-hockey">Hockey</li>
+                   <li id="sports-pro-soccer">Soccer</li>
+                   <li id="sports-pro-tennis">Tennis</li>
+          </ul>
    </li>
   </ul>
  </div>
+ <div style="border: none;" class="userInterests span4">
+  <ul>
+         <li item-expanded='true' id="sports">Level
+           <ul>
+                 <li id="sports-pro">Professional</li>
+                 <li id="sports-col">College</li>
+           </ul>
+   </li>
+  </ul>
+ </div>
+ </div>
+ <div class="row-fluid">
  <div style="border: none;" class="userInterests span4">
   <ul>   
          <li item-expanded='true' id="concerts">Concerts
@@ -211,6 +214,7 @@
          </li>
      </ul>   
  </div> 
+ </div>
  </div>
 </div>
  
