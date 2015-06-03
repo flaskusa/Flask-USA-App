@@ -559,37 +559,6 @@ span.nav-item-label {
 
 /* Drop Down Account Controls Ends*/
 
-/* Slider Starts*/
-#navigation {
-	font: normal 16px/1 "Coda", Helvetica, sans-serif;
-	position: fixed;
-	top: 47px;
-	left: -285px;
-	height: 100%;
-	width: 250px;
-	background: #231F20;
-	box-shadow: 1px 2px 15px #444;
-	z-index: 99999;
-	overflow: auto;
-	list-style: none;
-	text-decoration: none;
-	padding: 10px;
-}
-
-#navigation li {
-	list-style: none;
-	padding-bottom: 10px;
-}
-
-#navigation a {
-	color: #FFFFFF;
-	text-decoration: none;
-}
-
-#navigation a:hover {
-	color: #EB8C49;
-}
-
 .modify-pages .lfr-nav-sortable>a>span {
 	padding-left: 5px;
 }
@@ -736,7 +705,7 @@ a.splash-arrow:hover {
 	-webkit-box-sizing: content-box;
 	-moz-box-sizing: content-box;
 	box-sizing: content-box;
-	padding: 10px;
+	padding: 6px;
 	overflow: hidden;
 	border: none;
 	font: normal 16px/1 "Coda", Helvetica, sans-serif;
@@ -762,6 +731,43 @@ a.splash-arrow:hover {
 	color: rgba(255, 255, 255, 1);
 }
 
-a.highlight {
+#navigation ul{
+	margin-left:5px;
+}
+
+/* Slider Starts*/
+#navigation {
+	font: normal 16px/1 "Coda", Helvetica, sans-serif;
+	position: fixed;
+	top: 47px;
+	left: -265px;
+	height: 100%;
+	width: 250px;
+	background: #231F20;
+	box-shadow: 1px 2px 15px #444;
+	z-index: 99999;
+	overflow: auto;
+	list-style: none;
+	text-decoration: none;
+	padding: 6px;
+}
+
+#navigation li {
+	list-style: none;
+	padding-bottom: 6px;
+}
+
+#navigation a {
+	color: #FFFFFF;
+	text-decoration: none;
+}
+
+a.MenuHighlight {
 	color: rgba(255, 153, 0, 1);
+	text-decoration:none;
+}
+
+#navigation a:hover {
+	color: rgba(255, 153, 0, 1);
+	text-decoration:none;
 }
