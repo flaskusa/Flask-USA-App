@@ -40,9 +40,8 @@
 </div>
 
 <form id="adminForm">
-  <div class="row-fluid">
-  <div class="span4 group">
-  <h4><span>Category1</span></h4>
+  <div class="">
+  <div class="">
    <div class="form-group">
      <label class="control-label" for="firstName">First Name:</label>
      <div class="controls">
@@ -79,8 +78,7 @@
   </div>
    </div>  
   </div>
-  <div class="span4 group">
-  <h4><span>Category2</span></h4>
+  <div class="">
    <div class="form-group">
      <label class="control-label" for="streetName">Street:</label>
      <div class="controls">
@@ -123,8 +121,7 @@
      </div>
    </div>  
   </div>
-  <div class="span4 group">
-  <h4><span>Category3</span></h4>
+  <div class="">
    <div class="form-group">
      <label class="control-label" for="screenName">Screen Name:</label>
      <div class="controls">
@@ -163,7 +160,7 @@
 </div>
 <div class="form-group">
     
- <div class="row-fluid group">
+ <div class="row-fluid">
  <h4><span>Preferences</span></h4>
  <div class="row-fluid">
  <div style="border: none;" class="userInterests span4">
