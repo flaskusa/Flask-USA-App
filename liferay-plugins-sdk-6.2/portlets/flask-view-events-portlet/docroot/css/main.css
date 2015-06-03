@@ -1,65 +1,22 @@
-.textb
-{
-width:100%;
-margin-left:10px;
-margin-right:10px;
-}
-
-.imgalig
-{
-float:left;
-}
-
-.imga
-{
-height:100px;
-width:100px;
-}
-
-.txtalig
-{
-float:left;
-margin-left:15px; 
-float:left; 
-margin-top:20px;
-}
-
-div#fixedfooter 
-{
-	position:fixed;
-	bottom:0px;
-	left:0px;
-	width:100%;
-}
-
-#textbx1, #textbx2 ,#textbx3 ,#textbx4
-{
-  border-radius: 0px;
-  font-size: 14px;
-  height: 30px;
-  width: 100%;
-  padding-left: 10px;
-  margin-bottom: 10px;
-  text-shadow: none;
-}
-
-.labelcolor
-{
-	color : #FB9A33;
-}
-
-#viewevent
-{
-	width:100%; 
-	top-margin:20px;	
-}
-
+.imgdiv{float:left; width:20%;}
+.lbldiv{float:left; width:80%;}
+#teamlbl, #teamlbl1{font-size:12px; line-height: 7px; margin-top: 12px; color : #FB9A33; margin-left: 6px;}
+#timelbl1, #timelbl{font-size:12px; margin-left: 6px;}
+#txt1,#txt2,#txt3,#txt4{padding : 3px;}
+div#fixedfooter {position:fixed; bottom:0px; left:0px; width:100%; background-color: #D8D7D5; height: 15%;}
+.gap{padding-top:10px;}
+.gap1{padding-top:3px;}
+.asans{  font: normal 17px/1 "Average Sans", Helvetica, sans-serif; color: #ED1B24; text-align:center; padding-top:20px;}
+.gochi{  font: normal 16px/1 "Gochi Hand", Helvetica, sans-serif; text-align:center; color: #046BB6; }
+#viewevent{	width:100%; top-margin:20px;}
+.footerimg{ width:80px; height:80px;}
+.footertxt{width:20%; text-align:center;}
+.footertable{width:100%;}
 .button 
 {
-  padding: 5px 25px;
-  background: #FB9A33;
+  padding: 5px 6px;
+  background: #fb9a33;
   font-size: 20px;
-  text-shadow: none;
-  width:100%;
+  width: 100%;
   text-align: left;
 }
