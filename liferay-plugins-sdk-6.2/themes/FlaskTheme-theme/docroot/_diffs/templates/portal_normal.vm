@@ -22,19 +22,11 @@
 
 
 <script>
-<<<<<<< .mine
 var wait = function(callback, seconds) {
 	return window.setTimeout(callback, seconds * 1000);
 }
 
-=======
-var wait = function(callback, seconds) {
- return window.setTimeout(callback, seconds * 1000);
-}
-
->>>>>>> .r159
 $( document ).ready(function() {
-<<<<<<< .mine
 	 if($(".splash").is(":visible"))
 	 {
 	  $("#wrapper").css({"opacity":"0"});
@@ -47,38 +39,15 @@ $( document ).ready(function() {
  	//$(".drag-handle").hide();
  	
  	wait(function(){fnSplashSlideUp();},2)
-=======
-  if($(".splash").is(":visible"))
-  {
-   $("#wrapper").css({"opacity":"0"});
-  }
-
-  $(".splash-arrow").click(function()
-  {
-    fnSplashSlideUp();
-  });
-  //$(".drag-handle").hide();
-  
-  wait(function(){fnSplashSlideUp();},2)
->>>>>>> .r159
 });
 
 $(window).scroll(function() {
-<<<<<<< .mine
     $(window).off("scroll");
     fnSplashSlideUp();
 });
 
 function fnSplashSlideUp(){
 	$(".splash").slideUp("800", function() {
-=======
-    $(window).off("scroll");
-    fnSplashSlideUp();
-});
-
-function fnSplashSlideUp(){
- $(".splash").slideUp("800", function() {
->>>>>>> .r159
        $("#wrapper").delay(100).animate({"opacity":"1.0"},800);
     });
 }
@@ -92,28 +61,20 @@ function fnSplashSlideUp(){
 	 <div class="ball1"></div>
 </div>
  
-<<<<<<< .mine
-=======
-<div id="spinningSquaresG">
- <div class="ball"></div>
- <div class="ball1"></div>
-</div>
-
->>>>>>> .r159
 <a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
+
 $theme.include($body_top_include)
 
 
  #if ($is_signed_in)
 	 #dockbar()
  #else
-	 <div class="splash fade-in">
-	  <img class="logoSize" src="$images_folder/flasklogo2.png" />
-	  <h1 class="splash-title">FLASK</h1>
-	  <P class="splash-para">YOUR GAME PLAN FOR GAME DAY</P>
-	 
-	 </div>
-	 
+ <div class="splash fade-in">
+  <img class="logoSize" src="$images_folder/flasklogo2.png" />
+  <h1 class="splash-title fade-in">Flask</h1>
+  <P class="splash-para">YOUR GAME PLAN FOR GAME DAY</P>
+  <a href="#" class="splash-arrow fade-in"><span class="icon-circle-arrow-down"><span/></a>
+ </div>
  #end
 
 <div class="container-fluid" id="wrapper">
@@ -133,7 +94,7 @@ $theme.include($body_top_include)
 			</h1>
 			-->
 		#if (!$is_signed_in)
-			<a data-redirect="$is_login_redirect_required" href="$sign_in_url" id="sign-in" rel="nofollow"><input type="button" class="btn btn-primary" value="$sign_in_text" /></a>
+			<a data-redirect="$is_login_redirect_required" href="$sign_in_url" id="sign-in" rel="nofollow">$sign_in_text</a>
 		#end
 
 		#if ($has_navigation || $is_signed_in)
@@ -157,9 +118,7 @@ $theme.include($body_top_include)
 $theme.include($body_bottom_include)
 
 $theme.include($bottom_include)
-<<<<<<< .mine
 
-=======
->>>>>>> .r159
 </body>
+
 </html>
