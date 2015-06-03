@@ -318,10 +318,10 @@ div#adminDataTable {
 	-webkit-animation: spinoff 1s infinite linear;
 }
 
-@-moz-keyframes spin { 0% {-moz-transform: rotate(0deg);}100%{-moz-transform:rotate(360deg);}}
-@-moz-keyframes spinoff { 0% {-moz-transform: rotate(0deg);}100%{-moz-transform:rotate(-360deg);}}
-@-webkit-keyframes spin { 0% {-webkit-transform: rotate(0deg);}100%{-webkit-transform:rotate(360deg);}}
-@-webkit-keyframes spinoff { 0% {-webkit-transform: rotate(0deg);}100%{-webkit-transform:rotate(-360deg);}}
+@-moz-keyframes spin { 0% {	-moz-transform: rotate(0deg);}100%{-moz-transform:rotate(360deg);}}
+@-moz-keyframes spinoff { 0% {	-moz-transform: rotate(0deg);}100%{-moz-transform:rotate(-360deg);}}
+@-webkit-keyframes spin { 0% {	-webkit-transform: rotate(0deg);}100%{-webkit-transform:rotate(360deg);}}
+@-webkit-keyframes spinoff { 0% {	-webkit-transform: rotate(0deg);}100%{-webkit-transform:rotate(-360deg);}}
 /*AddUser button*/
 .iconAddUser {
 	height: 32px;
@@ -600,7 +600,6 @@ span.nav-item-label {
 @-webkit-keyframes fadeIn {from { opacity:0;}to {opacity: 1;}}
 @-moz-keyframes fadeIn {from { opacity:0;}to {opacity: 1;}}
 @keyframes fadeIn {from { opacity:0;}to {opacity: 1;}}
-
 .fade-in {
 	opacity: 0;
 	-webkit-animation: fadeIn ease-in 1;
@@ -763,7 +762,6 @@ a.splash-arrow:hover {
 	color: rgba(255, 255, 255, 1);
 }
 
-.highlight a {
+a.highlight {
 	color: rgba(255, 153, 0, 1);
 }
-
