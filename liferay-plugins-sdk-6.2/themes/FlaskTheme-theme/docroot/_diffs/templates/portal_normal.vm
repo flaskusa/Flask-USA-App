@@ -22,11 +22,32 @@
 
 
 <script>
+<<<<<<< .mine
+var wait = function(callback, seconds) {
+	return window.setTimeout(callback, seconds * 1000);
+}
+
+=======
 var wait = function(callback, seconds) {
  return window.setTimeout(callback, seconds * 1000);
 }
 
+>>>>>>> .r159
 $( document ).ready(function() {
+<<<<<<< .mine
+	 if($(".splash").is(":visible"))
+	 {
+	  $("#wrapper").css({"opacity":"0"});
+	 }
+
+	 $(".splash-arrow").click(function()
+	 {
+	  	fnSplashSlideUp();
+	 });
+ 	//$(".drag-handle").hide();
+ 	
+ 	wait(function(){fnSplashSlideUp();},2)
+=======
   if($(".splash").is(":visible"))
   {
    $("#wrapper").css({"opacity":"0"});
@@ -39,15 +60,25 @@ $( document ).ready(function() {
   //$(".drag-handle").hide();
   
   wait(function(){fnSplashSlideUp();},2)
+>>>>>>> .r159
 });
 
 $(window).scroll(function() {
+<<<<<<< .mine
+    $(window).off("scroll");
+    fnSplashSlideUp();
+});
+
+function fnSplashSlideUp(){
+	$(".splash").slideUp("800", function() {
+=======
     $(window).off("scroll");
     fnSplashSlideUp();
 });
 
 function fnSplashSlideUp(){
  $(".splash").slideUp("800", function() {
+>>>>>>> .r159
        $("#wrapper").delay(100).animate({"opacity":"1.0"},800);
     });
 }
@@ -56,12 +87,19 @@ function fnSplashSlideUp(){
 </head>
 
 <body class="$css_class">
+<div id="spinningSquaresG">
+	 <div class="ball"></div>
+	 <div class="ball1"></div>
+</div>
  
+<<<<<<< .mine
+=======
 <div id="spinningSquaresG">
  <div class="ball"></div>
  <div class="ball1"></div>
 </div>
 
+>>>>>>> .r159
 <a href="#main-content" id="skip-to-content">#language ("skip-to-content")</a>
 $theme.include($body_top_include)
 
@@ -73,7 +111,6 @@ $theme.include($body_top_include)
 	  <img class="logoSize" src="$images_folder/flasklogo2.png" />
 	  <h1 class="splash-title">FLASK</h1>
 	  <P class="splash-para">YOUR GAME PLAN FOR GAME DAY</P>
-	 
 	 
 	 </div>
 	 
@@ -120,5 +157,9 @@ $theme.include($body_top_include)
 $theme.include($body_bottom_include)
 
 $theme.include($bottom_include)
+<<<<<<< .mine
+
+=======
+>>>>>>> .r159
 </body>
 </html>

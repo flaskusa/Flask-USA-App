@@ -3,3 +3,5 @@
 #set ($site_name="FLASK")
 #set ($site_logo_width="30px")
 #set ($site_logo_height="40px")
+#set ($menu_home_url="/home")
+#set ($menu_admin_user_url="/admin-users")
