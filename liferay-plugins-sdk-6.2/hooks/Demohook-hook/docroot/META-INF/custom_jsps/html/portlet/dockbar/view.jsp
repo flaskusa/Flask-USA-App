@@ -63,9 +63,7 @@ for (Role role : roles){
 	  	      } ,200
 		        ,function(){
 		  	    	if($('#navigation').offset().left >=0){
-		  	    		$("body").addClass("hideoverflow");	  	    			  	    		
-		  	  		}else{
-		  	  			$("body").removeClass("hideoverflow");
+		  	    		$("body").addClass("hideoverflow");	  
 		  	  		}
 				}
 	  	      );   		
@@ -83,6 +81,7 @@ for (Role role : roles){
 				}
 	  		);  
 	  	});
+	  	
 	  	$('#navigation').click(function(event){
 	  	     event.stopPropagation();
 	  	});
