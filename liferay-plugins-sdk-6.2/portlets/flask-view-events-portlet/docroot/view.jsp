@@ -17,49 +17,66 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <portlet:defineObjects />
-
+<link async href="http://fonts.googleapis.com/css?family=Average%20Sans" rel="stylesheet" type="text/css"/>
+<link async href="http://fonts.googleapis.com/css?family=Gochi%20Hand" rel="stylesheet" type="text/css"/>
 <body>
 <div class="table-responsive">          
 
   <table id="viewevent">
     <tbody>
       <tr>
-        <td><div class="imgalig"><img src="<%=request.getContextPath()%>/img/lion.gif" class="imga" ></div>
-        <div class="txtalig">
-        <label class="control-label labelcolor">Detroit Liions vs. Chicago Bears</label>
-        <label class="control-label">1:00 p.m. at Ford Field</label></div> </td>
+        <td><div class="imgdiv"><img src="<%=request.getContextPath()%>/img/lion.gif"  ></div>
+        <div class="lbldiv">
+        <label id="teamlbl" class="control-label">Detroit Liions vs. Chicago Bears</label>
+        <label id="timelbl" class="control-label" >1:00 p.m. at Ford Field</label></div> </td>
       </tr>
       <tr>
-        <td><div class="imgalig"><img src="<%=request.getContextPath()%>/img/d.gif" class="imga" ></div>
-        <div class="txtalig">
-        <label class="control-label labelcolor">Detroit Tigers vs. Milwaukee Brewers</label>
-        <label class="control-label">7:05 p.m. at Comerica Park</label></div> </td>
+       	<td><div class="imgdiv"><img src="<%=request.getContextPath()%>/img/d.gif" ></div>
+	        <div class="lbldiv">
+		        <label id="teamlbl1" class="control-label" >Detroit Tigers vs. Milwaukee Brewers</label>
+		        <label id="timelbl1" class="control-label" >7:05 p.m. at Comerica Park</label>
+	        </div> 
+      	</td>
       </tr>
       <tr>
-         <td> <button type="button" class="button" >SEARCH FOR AN EVENT
+         <td class="gap"> <button type="button" class="button" >SEARCH FOR AN EVENT
    </button>
    </td>
       </tr>
-		<tr >
-         <td  style="padding-top:10px;">
-			<input id="textbx1" class="form-control input-lg" type="text" placeholder="TYPE:">
-         </td>
-      </tr>
 		<tr>
-         <td class="textb"> <input id="textbx2"  type="text" placeholder="DATE:"></td>
-      </tr>
+	         <td class="gap">
+				<input id="txt1" type="text" placeholder="TYPE:">
+	         </td>
+      	</tr>
 		<tr>
-         <td class="textb">   <input id="textbx3" type="text" placeholder="CITY:"></td>
-      </tr>
+         	<td >
+         	<input id="txt2"   type="text" placeholder="DATE:">
+         	</td>
+      	</tr>
 		<tr>
-         <td class="textb">   <input id="textbx4" type="text" placeholder="KEY WORDS:"></td>
-      </tr>
-      <tr>
-        <td>  </td>
-      </tr>
+        	 <td >
+        	 <input id="txt3"  type="text" placeholder="CITY:">
+        	 </td>
+     	 </tr>
+		<tr>
+        	 <td >
+        	 <input id="txt4"  type="text" placeholder="KEY WORDS:">
+        	 </td>
+     	</tr>
     </tbody>
   </table>
-
+<div id="fixedfooter">
+<table >
+            <tr>
+                <td class="footertxt">
+                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
+                </td>
+                <td class="asans"><b>FREE PINT WITH WITH A BURGER</b>
+                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
+                <span class="gochi">ON GAMEDAY!</span>
+                </td>
+            </tr>
+        </table>
+</div>
   </div>
-   <div id="fixedfooter"><img src="<%=request.getContextPath()%>/img/banner.jpg" /></div> 
 </body>
