@@ -802,4 +802,38 @@ a.splash-arrow:hover {
 	}
 /* Login Screen Ends*/	
 	
-	
+/*Menu*/
+.menuitem
+{
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 10px;
+    overflow: hidden;
+    border: none;
+    font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+    color: rgba(255,255,255,1);
+    text-align: left;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    background: #231F20;
+    height:auto;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+}
+
+.menuitem:hover {
+	color: #FF9900;
+	cursor:pointer;
+}
+.menuitem span 
+{
+    font-size: 12px;
+}
+.menuitem:hover span
+{
+    color: rgba(255,255,255,1);
+}
+.highlight a
+{
+    color:  rgba(255,153,0,1);
+}	
