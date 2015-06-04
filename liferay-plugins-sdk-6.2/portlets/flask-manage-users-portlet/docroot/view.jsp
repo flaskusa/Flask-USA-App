@@ -31,6 +31,7 @@
 		<div class="cssAddUser"><div class="iconAddUser"></div></div>
 		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
 		<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
+		<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
 	</div>
 	<div id="GridContainer" class="device-mobile-tablet">
 	    <div id="container" class="device-mobile-tablet-container">
