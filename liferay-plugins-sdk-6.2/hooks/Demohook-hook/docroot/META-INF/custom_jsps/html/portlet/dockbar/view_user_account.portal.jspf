@@ -70,24 +70,23 @@
 
 					<aui:nav-item cssClass="current-user-language" href='<%= HttpUtil.setParameter(PortalUtil.getCurrentURL(request), "doAsUserLanguageId", doAsUserLanguageId) %>' label="<%= changeLanguageMessage %>" />
 				</c:if>
-			</c:if>
-			
-
-			
-			
+			</c:if>			
 			<c:if test="<%= userSetupComplete && Validator.isNotNull(themeDisplay.getURLMyAccount()) %>">
 
 				<%
 				String myAccountURL = themeDisplay.getURLMyAccount().toString();
 
 				myAccountURL = HttpUtil.setParameter(myAccountURL, "controlPanelCategory", PortletCategoryKeys.MY);
+				String manageUserUrl = themeDisplay.getURLPortal() + "/web/flask/musers";
+				String manageEventUrl = themeDisplay.getURLPortal() + "/web/flask/mevents";
+				String manageVenueUrl = themeDisplay.getURLPortal() + "/web/flask/mvenues";
 				%>
 				<c:if test="<%= bShowFlaskAdminMenu %>">
-					<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-user" label="Flask Admins" title="Manage Flask Admins"  />
-					<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-user" label="Content Managers" title="Manage Content Managers"  />
-					<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-user" label="Manage Users" title="Manage Users"  />
+						
+					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-user" label="Manage Users" title="Manage Flask Users"  />
+					<aui:nav-item href="<%= manageEventUrl %>" iconCssClass="icon-user" label="Manage Events" title="Manage Events"  />
+					<aui:nav-item href="<%= manageVenueUrl %>" iconCssClass="icon-user" label="Manage Venue" title="Manage Venue"  />
 				</c:if>
-			
 				<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-user" label="my-account" title="my-account"  />
 			</c:if>
 
