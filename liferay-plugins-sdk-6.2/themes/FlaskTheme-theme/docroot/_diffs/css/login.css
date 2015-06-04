@@ -1,0 +1,125 @@
+.container1 {
+  display: table;
+  height: 100%;
+  min-height: 100%;
+  position: relative;
+  width: 100%;
+}
+.login-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.bg-image-holder {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+
+.loginForm {
+  position: relative;
+}
+
+
+@media only screen and (min-width: 30.063em) {
+  /* 481px */
+  .container1 {
+    /* introduce a background image */
+    background: #eaeaea;
+  }
+  .loginpane {
+    background: transparent;
+    margin: 0 auto;
+    width: 430px;
+  }
+  .loginpane_header {
+    background: #ffffff;
+    /* fallback */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5em 0;
+  }
+  .loginpane_body {
+    background: #ffffff;
+    /* fallback */
+    background: rgba(255, 255, 255, 0.9);
+  }
+  .loginpane_footer {
+    background: #e1e1e1;
+    /* fallback */
+    background: rgba(225, 225, 225, 0.95);
+  }
+  
+}
+
+
+
+
+@media only screen and (max-width: 30em) {
+  /* 480 */
+  .loginpane {
+    background: #fff;
+  }
+  .bg-image-holder {
+    background: #fff !important;
+  }
+  .btn-login {
+    max-width: 320px;
+    width: 100%;
+  }
+  .login-content {
+    vertical-align: top;
+  }
+}
+
+
+/* ================================
+  Login Panel
+================================ */
+.loginpane {
+  background: #fff;
+  text-align: center;
+  width: 100%;
+}
+.loginpane_header {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 1.5em 0;
+}
+.form-header {
+  margin-top: 0;
+}
+.loginpane_body {
+  padding: 1.5em 2em;
+}
+.loginpane_footer {
+  background: #e8e8e8;
+  font-size: 0.875em;
+  padding: 1em 0;
+}
+.forgot {
+  font-size: 0.813em;
+  margin: 0;
+}
+
+
+
+
+.form-control {
+  margin: 0 auto;
+  max-width: 320px;
+  position: relative;
+}
+
+.username-field img,
+.password-field img {
+  position: absolute;
+  top: 14px;
+  left: 10px;
+}
+.password-field img {
+  top: 19px;
+}
