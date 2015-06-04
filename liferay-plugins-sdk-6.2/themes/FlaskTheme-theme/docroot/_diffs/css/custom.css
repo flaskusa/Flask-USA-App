@@ -669,55 +669,33 @@ span.nav-item-label {
 }
 /* Login Screen Ends*/
 
-/*Menu Styles Starts*/
-.menuitem {
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
-	padding: 6px;
-	overflow: hidden;
-	border: none;
-	font: normal 14px "Coda", Helvetica, sans-serif;
-	color: rgba(255, 255, 255, 1);
-	text-align: left;
-	-o-text-overflow: ellipsis;
-	text-overflow: ellipsis;
-	background: #231F20;
-	height: auto;
-	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
-}
-
-.menuitem:hover {
-	color: #FF9900;
-	cursor: pointer;
-}
-
-.menuitem span {
-	font-size: 11px;
-}
-
-.menuitem:hover span {
-	color: rgba(255, 255, 255, 1);
-}
-
-/*Menu Styles Ends*/
-
-
 /* Slider Starts*/
 #navigation {
-	font: normal 16px/1 "Coda", Helvetica, sans-serif;
+	font: normal 14px "Coda", Helvetica, sans-serif;
 	position: fixed;
 	top: 47px;
 	left: -265px;
 	height: 100%;
-	width: 250px;
+	width: 230px;
 	background: #231F20;
-	box-shadow: 1px 2px 15px #444;
+	box-shadow: 5px 0 15px -5px #444;
 	z-index: 99999;
 	overflow: auto;
 	list-style: none;
 	text-decoration: none;
 	padding: 6px;
+	color: #FFFFFF;
+	text-align: left;
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	border: none;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+}
+
+#navigation span {
+	font-size: 11px;
 }
 
 #navigation ul{
@@ -732,11 +710,6 @@ span.nav-item-label {
 #navigation a {
 	color: #FFFFFF;
 	text-decoration: none;
-}
-
-a.MenuHighlight {
-	color: #EB8C49;
-	text-decoration:none;
 }
 
 #navigation a:hover {
