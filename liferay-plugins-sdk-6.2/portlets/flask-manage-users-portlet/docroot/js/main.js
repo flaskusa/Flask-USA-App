@@ -535,17 +535,63 @@ $(document).ready(function() {
 			$("#adminDataTable").show();
 			$("#adminForm").hide();
 		});
-		
+		$(".cssDelete").hide();	
 		$(".cssDelUser").click(function() {
 			$("#grid").jqxGrid({selectionmode:'checkbox'});
+			$(".jqx-checkbox-default").click(function(){
+				var flag1=true;
+				 if (flag1==true) {
+					 $(".cssDelete").show();	
+					 $(".cssDelUser").hide();	
+    			}
+    			else{
+    				 $(".cssDelUser").show();
+    			}
+			}) ;
         });
 		
+		$(".cssDelete").click(function () {
+	          var rows = $("#grid").jqxGrid('selectedrowindexes');
+	          var clonerows = rows;
+
+	             console.log(clonerows);
+	             for (var m1 = 0; m1 <=clonerows.length+1; m1++) {
+	            	 console.log(clonerows[m1]);
+	            	 var row = $("#grid").jqxGrid('getrowdata', clonerows[m1]);
+	            	console.log(clonerows[m1]);
+	            	
+	                fnDelete(row.userId);
+	             }
+	             
+	            
+	             console.log(rows);
+	             console.log(rows.length);
+	             for (var m = 0; m <= rows.length+1; m++) {
+	           	console.log(m);
+	           	console.log(rows[m]);
+	            	var rowid = $("#grid").jqxGrid('getrowid',  rows[m]);
+				 	$("#grid").jqxGrid('deleterow', rowid);
+	             }
+	          
+	        });
+		 var flag=true;
+			
 		$(".cssSearchUser").click(function() {
 			$("#grid").jqxGrid({
-                showfilterrow: true,
+                showfilterrow: flag,
                 filterable: true,
                 filterrowheight: 34
 			});
+			if(flag==true){
+				flag=false;
+
+			}
+			else{
+				flag=true;
+				
+			}
+			$(".jqx-grid-cell-filter-row-custom:last").hide();
+        
         });		
 });
 
