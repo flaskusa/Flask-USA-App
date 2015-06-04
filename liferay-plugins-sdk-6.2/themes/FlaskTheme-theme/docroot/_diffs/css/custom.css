@@ -154,12 +154,11 @@ upgrade and maintenance. */
   padding: 3px;
   margin-bottom: 10px;
   text-shadow: none;
-  margin-left: 2.4px;
 }
 
 .aui.ios input, .aui.ios input.input-large, .aui.ios textarea, .aui.ios .uneditable-input
 {
-	max-width: 100% !important;
+	max-width: 97% !important;
 }
 /*end css of event form*/
 
@@ -226,14 +225,14 @@ div#adminDataTable {
 
 @media ( max-width : 767px) {
 	.aui select {
-		height: 31px;
+		height: 30px;
 		width: 100%;
 		padding-left: 10px;
 		margin-bottom: 10px;
 	}
 	;
 	.aui input[type="date"] {
-		height: 20px;
+		height: 30px;
 		width: 98%;
 		padding: 4px 0px;
 		padding-left: 10px;
