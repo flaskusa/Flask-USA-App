@@ -139,7 +139,7 @@ upgrade and maintenance. */
 	border-radius: 5px;
 	font-size: 14px;
 	height: 30px;
-	width: 98%;
+	width: 500px;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -169,7 +169,7 @@ upgrade and maintenance. */
 	border-radius: 5px;
 	font-size: 14px;
 	height: 30px;
-	width: 98%;
+	width: 500px;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -178,7 +178,7 @@ upgrade and maintenance. */
 	border-radius: 5px;
 	font-size: 14px;
 	height: 30px;
-	width: 98%;
+	width: 500px;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -191,7 +191,7 @@ upgrade and maintenance. */
 	border-radius: 5px;
 	font-size: 14px;
 	height: 30px;
-	width: 98%;
+	width: 500px;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -200,7 +200,7 @@ upgrade and maintenance. */
 	border-radius: 5px;
 	font-size: 14px;
 	height: 30px;
-	width: 98%;
+	width: 500px;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -457,6 +457,64 @@ div#adminDataTable {
 	float: right;
 }
 
+/*trash Icon*/
+.iconDelete {
+	margin:8px;
+	 color: #fff;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.iconDelete:hover {
+	margin:8px;
+	color: #ff9900;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.iconDelete:active {
+	margin:8px;
+	color: #ff9900;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+}
+
+.cssDelete {
+	opacity: .9;
+	border-radius: 32px;
+	width: 32px;
+	height: 32px;
+	cursor: pointer;
+	-webkit-transition: all .3s;
+	-moz-transition: all .3s;
+	transition: all .3s;
+	text-shadow: none;
+	background: -moz-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+	/* FF3.6+ */
+	background: -webkit-gradient(radial, center center, 0px, center center, 100%,
+		color-stop(0%, #7d7e7d), color-stop(100%, #0e0e0e));
+	/* Chrome,Safari4+ */
+	background: -webkit-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+	/* Chrome10+,Safari5.1+ */
+	background: -o-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+	/* Opera 12+ */
+	background: -ms-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+	/* IE10+ */
+	background: radial-gradient(ellipse at center, #7d7e7d 0%, #0e0e0e 100%);
+	/* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#7d7e7d',
+		endColorstr='#0e0e0e', GradientType=1);
+	/* IE6-9 fallback on horizontal gradient */
+	margin-right: 2%;
+	margin-bottom: 9px;
+	float: right;
+}
+
+
+
 /*Search Icon*/
 .iconSearchUser {
 	margin: 8px;
@@ -668,65 +726,4 @@ span.nav-item-label {
 	padding: 10px;
 }
 /* Login Screen Ends*/
-
-/* Slider Starts*/
-#navigation {
-	font: normal 14px "Coda", Helvetica, sans-serif;
-	position: fixed;
-	top: 47px;
-	left: -265px;
-	height: 100%;
-	width: 230px;
-	background: #231F20;
-	box-shadow: 5px 0 15px -5px #444;
-	z-index: 99999;
-	overflow: auto;
-	list-style: none;
-	text-decoration: none;
-	padding: 6px;
-	color: #FFFFFF;
-	text-align: left;
-	-webkit-box-sizing: content-box;
-	-moz-box-sizing: content-box;
-	box-sizing: content-box;
-	border: none;
-	-o-text-overflow: ellipsis;
-	text-overflow: ellipsis;
-}
-
-#navigation span {
-	font-size: 11px;
-}
-
-#navigation ul{
-	margin-left:5px;
-}
-
-#navigation li {
-	list-style: none;
-	padding-bottom: 6px;
-}
-
-#navigation a {
-	color: #FFFFFF;
-	text-decoration: none;
-}
-
-#navigation a:hover {
-	color: #EB8C49;
-	text-decoration:none;
-}
-
-.modify-pages .lfr-nav-sortable>a>span {
-	padding-left: 5px;
-}
-/* Slider Ends */
-
-
-
-
-
-
-
-
 
