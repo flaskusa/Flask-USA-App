@@ -55,6 +55,26 @@
 			<portlet:param name="struts_action" value="/login/login" />
 		</portlet:actionURL>
 
+
+<div class="container1">
+   <div class="login-content">
+		 <div class="bg-image-holder" style="background-image: url('https://www.lifetimefitness.com/content/ltfweb/en/login/jcr:content/login-content/child_content_contai/theme-content/background_image.img.png/1426857381331.png');">
+         </div>
+		 <div class="loginForm">
+	       <div class="loginpane">
+            <div class="loginpane_header">
+             <div id="cq-image-jsp-/content/ltfweb/en/login/jcr:content/login-content/child_content_contai/theme-content/background_image/bg-image-content/loginform/login-logo">
+                 <img title="logo_2" alt="logo_2" class="cq-dd-image" src="/FlaskTheme-theme/images/flasklogo.png" />
+             </div>
+		     </div>
+		     <div class="loginpane_body">
+				<h3 class="form-header">Log in to continue.</h3>
+            
+
+
+
+
+
 		<aui:form action="<%= loginURL %>" autocomplete='<%= PropsValues.COMPANY_SECURITY_LOGIN_FORM_AUTOCOMPLETE ? "on" : "off" %>' cssClass="sign-in-form" method="post" name="fm">
 			<aui:input name="saveLastPath" type="hidden" value="<%= false %>" />
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
@@ -125,13 +145,26 @@
 				}
 				%>
 
-				<aui:input autoFocus="<%= windowState.equals(LiferayWindowState.EXCLUSIVE) || windowState.equals(WindowState.MAXIMIZED) %>" cssClass="clearable" label="<%= loginLabel %>" name="login" showRequiredLabel="<%= false %>" type="text" value="<%= login %>">
-					<aui:validator name="required" />
-				</aui:input>
 
-				<aui:input name="password" showRequiredLabel="<%= false %>" type="password" value="<%= password %>">
-					<aui:validator name="required" />
-				</aui:input>
+
+ 						<div class="form-control username-field">
+                            <img src="https://www.lifetimefitness.com/etc/designs/ltfweb/clientlibs/login/images/icon-username.svg" />
+                             <!--  <input name="username" type="text" placeholder="Username, Email, or Member Number" /> --> 
+				                <aui:input autoFocus="<%= windowState.equals(LiferayWindowState.EXCLUSIVE) || windowState.equals(WindowState.MAXIMIZED) %>" cssClass="clearable" label="<%= loginLabel %>" name="login" showRequiredLabel="<%= false %>" type="text" value="<%= login %>">
+									<aui:validator name="required" />
+								</aui:input>
+                        </div>
+
+                        <div class="form-control password-field">
+                            <img src="https://www.lifetimefitness.com/etc/designs/ltfweb/clientlibs/login/images/icon-password.svg" />
+                            <!-- <input name="password" type="password" placeholder="Password" autocorrect="off" autocapitalize="off" /> --> 
+			                <aui:input name="password" showRequiredLabel="<%= false %>" type="password" value="<%= password %>">
+								<aui:validator name="required" />
+							</aui:input>
+                        </div>
+
+
+ 			  
 
 				<span id="<portlet:namespace />passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
 
@@ -140,11 +173,15 @@
 				</c:if>
 			</aui:fieldset>
 
+			
+            
+			<div class="form-control">
 			<aui:button-row>
 				<aui:button type="submit" value="sign-in" />
 			</aui:button-row>
+			</div>
 		</aui:form>
-
+		
 		<liferay-util:include page="/html/portlet/login/navigation.jsp" />
 
 		<aui:script use="aui-base">
@@ -159,5 +196,22 @@
 				);
 			}
 		</aui:script>
+        
+             <p class="forgot">
+                            Forgot your<a href="">username</a>or<a href="">password?</a>
+                    </div>
+
+                    <div class="loginpane_footer">
+                    <a href="">Create Account</a>
+                    </div>
+
+
+                </div>
+            </div>
+
+        </div>
+    </div>   
+            
+		
 	</c:otherwise>
 </c:choose>
