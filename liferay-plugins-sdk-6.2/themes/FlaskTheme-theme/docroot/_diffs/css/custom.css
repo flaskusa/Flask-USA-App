@@ -677,7 +677,7 @@ span.nav-item-label {
 	padding: 6px;
 	overflow: hidden;
 	border: none;
-	font: normal 16px/1 "Coda", Helvetica, sans-serif;
+	font: normal 14px "Coda", Helvetica, sans-serif;
 	color: rgba(255, 255, 255, 1);
 	text-align: left;
 	-o-text-overflow: ellipsis;
@@ -693,7 +693,7 @@ span.nav-item-label {
 }
 
 .menuitem span {
-	font-size: 12px;
+	font-size: 11px;
 }
 
 .menuitem:hover span {
