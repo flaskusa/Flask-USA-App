@@ -1,5 +1,5 @@
-<nav class="$nav_css_class" id="navigation" role="navigation">
-	<ul>
+<div id="slideoutmenupanel" style="left: -270px;">	
+	<ul class="menuitem">
 		<li><a href="$menu_home_url">TODAY'S EVENT(S)</a></li>
 		<li><span>PRE-GAME</span><br/><a href="#">LOCAL NEWS</a></li>
 		<li><a href="#">PARKING & EVENT MAP</a></li>
@@ -16,4 +16,4 @@
 		<li><a href="#">NOTIFICATIONS</a></li>
 		<li><a href="#">EVENT AND CITY SEARCH</a></li>
 	</ul>
-</nav>
+</div>

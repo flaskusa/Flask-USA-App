@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="$javascript_folder/jqwidgets/styles/jqx.base.css" type="text/css" />
 <link rel="stylesheet" href="$javascript_folder/jqwidgets/styles/jqu.css" type="text/css" />
 
+<link async href="http://fonts.googleapis.com/css?family=Coda" rel="stylesheet" type="text/css"/>
 
 <script>
 var wait = function(callback, seconds) {
@@ -51,8 +52,8 @@ function fnSplashSlideUp(){
        $("#wrapper").delay(100).animate({"opacity":"1.0"},800);
     });
 }
-</script>
 
+</script>
 </head>
 
 <body class="$css_class">
