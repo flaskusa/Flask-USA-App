@@ -1,19 +1,19 @@
 <nav class="$nav_css_class" id="navigation" role="navigation">
 	<ul>
-		<li class="menuitem"><a class="MenuHighlight" href="$menu_home_url">TODAY'S EVENT(S)</a></li>
-		<li class="menuitem"><span>PRE-GAME</span><br/><a href="#">LOCAL NEWS</a></li>
-		<li class="menuitem"><a href="#">PARKING & EVENT MAP</a></li>
-		<li class="menuitem"><span>AT-THE-GAME</span><br/><a href="#">EVENT NEWS</a></li>
-		<li class="menuitem"><a href="#">VENUE MAP</a></li>
-		<li class="menuitem"><a href="#">FLASK PROMOTIONS</a></li>
-		<li class="menuitem"><span>POST-GAME</span><br/><a href="#">ENTERTAINMENT OPTIONS</a></li>
-		<li class="menuitem"><a href="#">FLASK PROMOTIONS</a></li>
-		<li class="menuitem"><a class="MenuHighlight" href="$menu_admin_user_url">PROFILE</a></li>
-		<li class="menuitem"><a href="#">MY EVENTS</a></li>
-		<li class="menuitem"><a href="#">MY TAILGATE</a></li>
-		<li class="menuitem"><a href="#">MY GROUPS</a></li>
-		<li class="menuitem"><a href="#">MY FRIENDS</a></li>
-		<li class="menuitem"><a href="#">NOTIFICATIONS</a></li>
-		<li class="menuitem"><a class="MenuHighlight" href="#">EVENT AND CITY SEARCH</a></li>
+		<li><a href="$menu_home_url">TODAY'S EVENT(S)</a></li>
+		<li><span>PRE-GAME</span><br/><a href="#">LOCAL NEWS</a></li>
+		<li><a href="#">PARKING & EVENT MAP</a></li>
+		<li><span>AT-THE-GAME</span><br/><a href="#">EVENT NEWS</a></li>
+		<li><a href="#">VENUE MAP</a></li>
+		<li><a href="#">FLASK PROMOTIONS</a></li>
+		<li><span>POST-GAME</span><br/><a href="#">ENTERTAINMENT OPTIONS</a></li>
+		<li><a href="#">FLASK PROMOTIONS</a></li>
+		<li><a href="$menu_admin_user_url">PROFILE</a></li>
+		<li><a href="#">MY EVENTS</a></li>
+		<li><a href="#">MY TAILGATE</a></li>
+		<li><a href="#">MY GROUPS</a></li>
+		<li><a href="#">MY FRIENDS</a></li>
+		<li><a href="#">NOTIFICATIONS</a></li>
+		<li><a href="#">EVENT AND CITY SEARCH</a></li>
 	</ul>
 </nav>
