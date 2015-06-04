@@ -1,0 +1,61 @@
+#slideoutmenupanel{
+	position: fixed;
+	top: 47px;
+	left: -285px;
+	height: 100%;
+	width: 250px;
+  	border-right: 1.5px solid #F89734;
+  	border-top: 0.5px solid #F89734;
+  	border-bottom: 0.5px solid #F89734;
+  	box-shadow: 5px 0px 15px -5px #444;
+	z-index: 99999;
+	overflow: auto;
+	background: #231F20;	
+}
+	
+#slideoutmenupanel .hideoverflow {
+ 	overflow: hidden !important;
+}	
+
+#slideoutmenupanel .menuitem
+{
+    overflow: hidden;
+    border: none;
+    font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+    color: rgba(255,255,255,1);
+    text-align: left;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    height:auto;
+    text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+    margin:auto;
+    
+}
+
+#slideoutmenupanel .menuitem li {
+	padding: 6px 0px 3px 10px;
+	-webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;.
+    font-size: 14px;
+}
+
+#slideoutmenupanel .menuitem li a {
+	text-decoration:none !important;	
+	font-size: 14px;
+  	color: #FFF;
+  	cursor:pointer;
+}
+
+#slideoutmenupanel .menuitem li a:hover {
+  	color: #FF9900;
+  	cursor:pointer;
+}
+#slideoutmenupanel .menuitem span 
+{
+    font-size: 10px;
+}
+#slideoutmenupanel .menuitem:hover span
+{
+    color: rgba(255,255,255,1);
+}
