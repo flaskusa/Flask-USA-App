@@ -631,6 +631,11 @@ span.nav-item-label {
   color: #000000;
  }
 
+.aui .dockbar-split .dockbar .navbar-inner .nav-account-controls 
+{
+  right: 3.4em;
+}
+
 /* Drop Down Account Controls Ends*/
 
 /* Splash Starts */
