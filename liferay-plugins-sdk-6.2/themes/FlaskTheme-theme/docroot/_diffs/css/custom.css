@@ -198,8 +198,8 @@ upgrade and maintenance. */
 .aui select {
 	border-radius: 5px;
 	font-size: 14px;
-	height: 30px;
-	width: 40%;
+	height: 40px;
+	width: 41.3%;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -225,7 +225,7 @@ div#adminDataTable {
 
 @media ( max-width : 767px) {
 	.aui select {
-		height: 30px;
+		height: 40px;
 		width: 100%;
 		padding-left: 10px;
 		margin-bottom: 10px;
@@ -245,13 +245,13 @@ div#adminDataTable {
 	}
 	.aui input[type="text"] {
 		height: 30px;
-		width: 98%;
+		width: 96.2%;
 		padding: 4px 0px;
 		padding-left: 10px;
 	}
 	.aui input[type="password"] {
 		height: 30px;
-		width: 98%;
+		width: 96.2%;
 		padding: 4px 0px;
 		padding-left: 10px;
 	}
