@@ -271,7 +271,7 @@ function fnRenderGrid(tdata) {
 				columnsmenuwidth : 40,
 				rowsheight : 34,
 				// Pageing config
-				autoheight : false,
+				autoheight : true,
 				pageable : true,
 				pagermode : 'default',
 				// adding new row details to display data
@@ -375,8 +375,6 @@ $(document).ready(function() {
 });
 
 $(document).ready(function () {
-    var theme = prepareSimulator("validator");
-    $('.clsSave').jqxButton({ theme: theme });
     $('.clsSave').on('click', function () {
     	if($('#adminForm').jqxValidator('validate'))
     	{
