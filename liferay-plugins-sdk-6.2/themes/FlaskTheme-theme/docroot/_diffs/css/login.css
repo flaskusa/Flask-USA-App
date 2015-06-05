@@ -1,15 +1,19 @@
+
 .container1 {
   display: table;
   height: 100%;
   min-height: 100%;
   position: relative;
   width: 100%;
+  
 }
 .login-content {
   display: table-cell;
   vertical-align: middle;
 }
-
+.loginForm {
+  position: relative;
+}
 .bg-image-holder {
   position: absolute;
   top: 0;
@@ -20,63 +24,6 @@
   background-repeat: no-repeat;
   background-position: top center;
 }
-
-.loginForm {
-  position: relative;
-}
-
-
-@media only screen and (min-width: 30.063em) {
-  /* 481px */
-  .container1 {
-    /* introduce a background image */
-    background: #eaeaea;
-  }
-  .loginpane {
-    background: transparent;
-    margin: 0 auto;
-    width: 430px;
-  }
-  .loginpane_header {
-    background: #ffffff;
-    /* fallback */
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5em 0;
-  }
-  .loginpane_body {
-    background: #ffffff;
-    /* fallback */
-    background: rgba(255, 255, 255, 0.9);
-  }
-  .loginpane_footer {
-    background: #e1e1e1;
-    /* fallback */
-    background: rgba(225, 225, 225, 0.95);
-  }
-  
-}
-
-
-
-
-@media only screen and (max-width: 30em) {
-  /* 480 */
-  .loginpane {
-    background: #fff;
-  }
-  .bg-image-holder {
-    background: #fff !important;
-  }
-  .btn-login {
-    max-width: 320px;
-    width: 100%;
-  }
-  .login-content {
-    vertical-align: top;
-  }
-}
-
-
 /* ================================
   Login Panel
 ================================ */
@@ -104,16 +51,30 @@
   font-size: 0.813em;
   margin: 0;
 }
-
-
-
-
+/* ================================
+  Form Elements
+================================ */
+/* placeholder text */
+::-webkit-input-placeholder {
+  color: #999;
+  -webkit-font-smoothing: antialiased;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #999;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #999;
+}
+:-ms-input-placeholder {
+  color: #999;
+}
 .form-control {
   margin: 0 auto;
   max-width: 320px;
   position: relative;
 }
-
 .username-field img,
 .password-field img {
   position: absolute;
@@ -122,4 +83,56 @@
 }
 .password-field img {
   top: 19px;
+}
+
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media only screen and (max-width: 30em) {
+  /* 480 */
+  .loginpane {
+    background: #fff;
+  }
+  .bg-image-holder {
+    background: #fff !important;
+  }
+  .login-content {
+    vertical-align: top;
+  }
+}
+@media only screen and (min-width: 30.063em) {
+  /* 481px */
+  .container1 {
+    /* introduce a background image */
+    background: #eaeaea;
+  }
+  .loginpane {
+    background: transparent;
+    margin: 0 auto;
+    width: 430px;
+  }
+  .loginpane_header {
+    background: #ffffff;
+    /* fallback */
+    background: rgba(255, 255, 255, 0.95);
+    padding: 2.5em 0;
+  }
+  .loginpane_body {
+    background: #ffffff;
+    /* fallback */
+    background: rgba(255, 255, 255, 0.9);
+  }
+  .loginpane_footer {
+    background: #e1e1e1;
+    /* fallback */
+    background: rgba(225, 225, 225, 0.95);
+  }
+}
+/* position centered vertically if viewport is taller than the login pane */
+@media only screen and (min-width: 30.063em) and (min-height: 660px) {
+  .login-wrap {
+    padding-top: 0;
+    vertical-align: middle;
+  }
 }
