@@ -55,25 +55,16 @@
 			<portlet:param name="struts_action" value="/login/login" />
 		</portlet:actionURL>
 
-
-<div class="container1">
-   <div class="login-content">
-		 <div class="bg-image-holder" style="background-image: url('/FlaskTheme-theme/images/Cover.jpg');">
-         </div>
+	<div class="bg-image-holder" style="background-image: url('/FlaskTheme-theme/images/Cover.jpg');">
+	</div>
 		 <div class="loginForm">
 	       <div class="loginpane">
             <div class="loginpane_header">
-            <img title="logo_2" alt="logo_2" class="cq-dd-image" src="/FlaskTheme-theme/images/flasklogo.png" />
+            <img title="logo_2" alt="logo_2" class="cq-dd-image" style="zoom:0.5" src="/FlaskTheme-theme/images/flasklogo.png" />
             </div>
 		     <div class="loginpane_body">
 				<h3 class="form-header">Log in to continue.</h3>
-            
-
-
-
-
-
-		<aui:form action="<%= loginURL %>" autocomplete='<%= PropsValues.COMPANY_SECURITY_LOGIN_FORM_AUTOCOMPLETE ? "on" : "off" %>' cssClass="sign-in-form" method="post" name="fm">
+			<aui:form action="<%= loginURL %>" autocomplete='<%= PropsValues.COMPANY_SECURITY_LOGIN_FORM_AUTOCOMPLETE ? "on" : "off" %>' cssClass="sign-in-form" method="post" name="fm">
 			<aui:input name="saveLastPath" type="hidden" value="<%= false %>" />
 			<aui:input name="redirect" type="hidden" value="<%= redirect %>" />
 			<aui:input name="doActionAfterLogin" type="hidden" value="<%= portletName.equals(PortletKeys.FAST_LOGIN) ? true : false %>" />
@@ -128,7 +119,6 @@
 			<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="authentication-failed" />
 
 			<aui:fieldset>
-
 				<%
 				String loginLabel = null;
 
@@ -142,72 +132,47 @@
 					loginLabel = "id";
 				}
 				%>
-
-
-
-		<div id="Happy" class="form-control username-field">
-           <img src="https://www.lifetimefitness.com/etc/designs/ltfweb/clientlibs/login/images/icon-username.svg" />
-           <aui:input  autoFocus="<%= windowState.equals(LiferayWindowState.EXCLUSIVE) || windowState.equals(WindowState.MAXIMIZED) %>" cssClass="clearable" label="<%= loginLabel %>" name="login" showRequiredLabel="<%= false %>" type="text" class="happy1" placeholder="Username or Email" value="<%= login %>">
-		   <aui:validator name="required" />
-		   </aui:input>
-        </div>
-
-        <div class="form-control password-field">
-	        <img src="https://www.lifetimefitness.com/etc/designs/ltfweb/clientlibs/login/images/icon-password.svg" />
-	        <aui:input name="password" showRequiredLabel="<%= false %>" type="password" placeholder="Password" value="<%= password %>">
-			<aui:validator name="required" />
-			</aui:input>
-        </div>
-
-
- 			  
+				<div class="form-control username-field">
+		           <aui:input  autoFocus="<%= windowState.equals(LiferayWindowState.EXCLUSIVE) || windowState.equals(WindowState.MAXIMIZED) %>" cssClass="clearable" label="<%= loginLabel %>" name="login" showRequiredLabel="<%= false %>" type="text" class="happy1" placeholder="Username or Email" value="<%= login %>">
+				   <aui:validator name="required" />
+				   </aui:input>
+		        </div>
+		
+		        <div class="form-control password-field">
+			        <aui:input name="password" showRequiredLabel="<%= false %>" type="password" placeholder="Password" value="<%= password %>">
+					<aui:validator name="required" />
+					</aui:input>
+		        </div>
 
 				<span id="<portlet:namespace />passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
-
+				<aui:button-row>
+					<aui:button type="submit" value="sign-in" style="width:310px;margin:auto"/>
+				</aui:button-row>
 				<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
+					<span style="margin:auto">
 					<aui:input checked="<%= rememberMe %>" name="rememberMe" type="checkbox" />
+					</span>
 				</c:if>
 			</aui:fieldset>
-
-			
-            
-			<div class="form-control">
-			<aui:button-row>
-				<aui:button type="submit" value="sign-in" />
-			</aui:button-row>
-			</div>
 		</aui:form>
+				<aui:script use="aui-base">
+					var password = A.one('#<portlet:namespace />password');
 		
-		<liferay-util:include page="/html/portlet/login/navigation.jsp" />
-
-		<aui:script use="aui-base">
-			var password = A.one('#<portlet:namespace />password');
-
-			if (password) {
-				password.on(
-					'keypress',
-					function(event) {
-						Liferay.Util.showCapsLock(event, '<portlet:namespace />passwordCapsLockSpan');
+					if (password) {
+						password.on(
+							'keypress',
+							function(event) {
+								Liferay.Util.showCapsLock(event, '<portlet:namespace />passwordCapsLockSpan');
+							}
+						);
 					}
-				);
-			}
-		</aui:script>
-        
-             <p class="forgot">
-                            Forgot your<a href="">username</a>or<a href="">password?</a>
-                    </div>
-
-                    <div class="loginpane_footer">
-                    <a href="">Create Account</a>
-                    </div>
-
-
+					
+					$(".taglib-icon:first").hide()
+				</aui:script>
                 </div>
+				<div class="loginpane_footer">
+                   	<liferay-util:include page="/html/portlet/login/navigation.jsp" />
+				</div>
             </div>
-
-        </div>
-    </div>   
-            
-		
 	</c:otherwise>
 </c:choose>
