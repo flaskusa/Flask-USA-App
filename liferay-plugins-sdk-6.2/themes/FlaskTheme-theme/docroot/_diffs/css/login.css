@@ -1,12 +1,26 @@
-
-.container1 {
-  display: table;
-  height: 100%;
-  min-height: 100%;
-  position: relative;
-  width: 100%;
-  
+.sign-in-form input[type="text"]{
+	width:280px;
+	padding-left:20px;
 }
+
+.sign-in-form input[type="password"]{
+	width:280px;
+	padding-left:20px;
+}
+
+.sign-in-form input[type="submit"]{
+	width:300px;
+	margin: auto;	
+}
+
+.sign-in-form label.control-label {
+  text-align: left;
+}
+
+.sign-in-form  .cq-dd-image{
+	zoom:0.5;
+}
+
 .login-content {
   display: table-cell;
   vertical-align: middle;
@@ -31,6 +45,7 @@
   background: #fff;
   text-align: center;
   width: 100%;
+  
 }
 .loginpane_header {
   border-bottom: 1px solid #e8e8e8;
@@ -40,7 +55,7 @@
   margin-top: 0;
 }
 .loginpane_body {
-  padding: 1.5em 2em;
+  padding: 15px 15px;
 }
 .loginpane_footer {
   background: #e8e8e8;
@@ -75,58 +90,56 @@
   max-width: 320px;
   position: relative;
 }
-.username-field img,
-.password-field img {
-  position: absolute;
-  top: 14px;
-  left: 10px;
-}
-.password-field img {
-  top: 19px;
+
+.loginpane {
+  background: transparent;
 }
 
-
+.loginpane_header {
+  background: #ffffff;
+  /* fallback */
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1em 0;
+}
+.loginpane_body {
+  background: #ffffff;
+  /* fallback */
+  background: rgba(255, 255, 255, 0.9);
+}
+.loginpane_footer {
+  background: #e1e1e1;
+  /* fallback */
+  background: rgba(225, 225, 225, 0.95);
+}
 /* ==========================================================================
    Media Queries
    ========================================================================== */
 @media only screen and (max-width: 30em) {
   /* 480 */
-  .loginpane {
-    background: #fff;
-  }
-  .bg-image-holder {
-    background: #fff !important;
-  }
   .login-content {
     vertical-align: top;
+  }
+  
+  .loginpane {
+    margin: 0 auto;
+    width: 350px;
+  }
+  
+   .login-wrap {
+    padding-top: 0;
+    vertical-align: middle;
   }
 }
 @media only screen and (min-width: 30.063em) {
   /* 481px */
-  .container1 {
-    /* introduce a background image */
-    background: #eaeaea;
-  }
   .loginpane {
-    background: transparent;
     margin: 0 auto;
-    width: 430px;
+    width: 380px;
   }
-  .loginpane_header {
-    background: #ffffff;
-    /* fallback */
-    background: rgba(255, 255, 255, 0.95);
-    padding: 2.5em 0;
-  }
-  .loginpane_body {
-    background: #ffffff;
-    /* fallback */
-    background: rgba(255, 255, 255, 0.9);
-  }
-  .loginpane_footer {
-    background: #e1e1e1;
-    /* fallback */
-    background: rgba(225, 225, 225, 0.95);
+  
+   .login-wrap {
+    padding-top: 0;
+    vertical-align: middle;
   }
 }
 /* position centered vertically if viewport is taller than the login pane */
@@ -135,4 +148,19 @@
     padding-top: 0;
     vertical-align: middle;
   }
+}
+
+.sign-in-form .button-holder{
+	margin: 0px;
+}
+
+@media (max-width: 767px) and (max-width: 979px){
+	.sign-in-form .aui .btn {
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+	  /* display: block; */
+	  margin-top: 5px;
+	  width: 310px;
+	}
 }
