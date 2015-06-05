@@ -58,15 +58,13 @@
 
 <div class="container1">
    <div class="login-content">
-		 <div class="bg-image-holder" style="background-image: url('https://www.lifetimefitness.com/content/ltfweb/en/login/jcr:content/login-content/child_content_contai/theme-content/background_image.img.png/1426857381331.png');">
+		 <div class="bg-image-holder" style="background-image: url('/FlaskTheme-theme/images/Cover.jpg');">
          </div>
 		 <div class="loginForm">
 	       <div class="loginpane">
             <div class="loginpane_header">
-             <div id="cq-image-jsp-/content/ltfweb/en/login/jcr:content/login-content/child_content_contai/theme-content/background_image/bg-image-content/loginform/login-logo">
-                 <img title="logo_2" alt="logo_2" class="cq-dd-image" src="/FlaskTheme-theme/images/flasklogo.png" />
-             </div>
-		     </div>
+            <img title="logo_2" alt="logo_2" class="cq-dd-image" src="/FlaskTheme-theme/images/flasklogo.png" />
+            </div>
 		     <div class="loginpane_body">
 				<h3 class="form-header">Log in to continue.</h3>
             
@@ -147,21 +145,19 @@
 
 
 
- 						<div class="form-control username-field">
-                            <img src="https://www.lifetimefitness.com/etc/designs/ltfweb/clientlibs/login/images/icon-username.svg" />
-                             <!--  <input name="username" type="text" placeholder="Username, Email, or Member Number" /> --> 
-				                <aui:input autoFocus="<%= windowState.equals(LiferayWindowState.EXCLUSIVE) || windowState.equals(WindowState.MAXIMIZED) %>" cssClass="clearable" label="<%= loginLabel %>" name="login" showRequiredLabel="<%= false %>" type="text" value="<%= login %>">
-									<aui:validator name="required" />
-								</aui:input>
-                        </div>
+		<div id="Happy" class="form-control username-field">
+           <img src="https://www.lifetimefitness.com/etc/designs/ltfweb/clientlibs/login/images/icon-username.svg" />
+           <aui:input  autoFocus="<%= windowState.equals(LiferayWindowState.EXCLUSIVE) || windowState.equals(WindowState.MAXIMIZED) %>" cssClass="clearable" label="<%= loginLabel %>" name="login" showRequiredLabel="<%= false %>" type="text" class="happy1" placeholder="Username or Email" value="<%= login %>">
+		   <aui:validator name="required" />
+		   </aui:input>
+        </div>
 
-                        <div class="form-control password-field">
-                            <img src="https://www.lifetimefitness.com/etc/designs/ltfweb/clientlibs/login/images/icon-password.svg" />
-                            <!-- <input name="password" type="password" placeholder="Password" autocorrect="off" autocapitalize="off" /> --> 
-			                <aui:input name="password" showRequiredLabel="<%= false %>" type="password" value="<%= password %>">
-								<aui:validator name="required" />
-							</aui:input>
-                        </div>
+        <div class="form-control password-field">
+	        <img src="https://www.lifetimefitness.com/etc/designs/ltfweb/clientlibs/login/images/icon-password.svg" />
+	        <aui:input name="password" showRequiredLabel="<%= false %>" type="password" placeholder="Password" value="<%= password %>">
+			<aui:validator name="required" />
+			</aui:input>
+        </div>
 
 
  			  
