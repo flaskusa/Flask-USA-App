@@ -72,7 +72,7 @@ $theme.include($body_top_include)
  #else
  <div class="splash fade-in">
   <img class="logoSize" src="$images_folder/flasklogo2.png" />
-  <h1 class="splash-title">Flask</h1>
+  <h1 class="splash-title">FLASK</h1>
   <P class="splash-para">YOUR GAME PLAN FOR GAME DAY</P>
  </div>
  #end

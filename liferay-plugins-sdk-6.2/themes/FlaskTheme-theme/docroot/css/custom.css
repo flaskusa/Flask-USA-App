@@ -139,7 +139,7 @@ upgrade and maintenance. */
 	border-radius: 5px;
 	font-size: 14px;
 	height: 30px;
-	width: 500px;
+	width: 40%;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -154,12 +154,11 @@ upgrade and maintenance. */
   padding: 3px;
   margin-bottom: 10px;
   text-shadow: none;
-  margin-left: 2.4px;
 }
 
 .aui.ios input, .aui.ios input.input-large, .aui.ios textarea, .aui.ios .uneditable-input
 {
-	max-width: 100% !important;
+	max-width: 97% !important;
 }
 /*end css of event form*/
 
@@ -169,7 +168,7 @@ upgrade and maintenance. */
 	border-radius: 5px;
 	font-size: 14px;
 	height: 30px;
-	width: 500px;
+	width: 40%;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -178,7 +177,7 @@ upgrade and maintenance. */
 	border-radius: 5px;
 	font-size: 14px;
 	height: 30px;
-	width: 500px;
+	width: 40%;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -191,7 +190,7 @@ upgrade and maintenance. */
 	border-radius: 5px;
 	font-size: 14px;
 	height: 30px;
-	width: 500px;
+	width: 40%;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -199,8 +198,8 @@ upgrade and maintenance. */
 .aui select {
 	border-radius: 5px;
 	font-size: 14px;
-	height: 30px;
-	width: 500px;
+	height: 40px;
+	width: 41.3%;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -226,14 +225,14 @@ div#adminDataTable {
 
 @media ( max-width : 767px) {
 	.aui select {
-		height: 31px;
+		height: 40px;
 		width: 100%;
 		padding-left: 10px;
 		margin-bottom: 10px;
 	}
 	;
 	.aui input[type="date"] {
-		height: 20px;
+		height: 30px;
 		width: 98%;
 		padding: 4px 0px;
 		padding-left: 10px;
@@ -246,13 +245,13 @@ div#adminDataTable {
 	}
 	.aui input[type="text"] {
 		height: 30px;
-		width: 98%;
+		width: 96.2%;
 		padding: 4px 0px;
 		padding-left: 10px;
 	}
 	.aui input[type="password"] {
 		height: 30px;
-		width: 98%;
+		width: 96.2%;
 		padding: 4px 0px;
 		padding-left: 10px;
 	}

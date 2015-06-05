@@ -585,7 +585,10 @@ body.html-editor {
   /* ---------- Staging dockbar ---------- */
   /* ---------- Add content ---------- */
   /* ---------- Menus ---------- */
-  /* ---------- Customization bar ---------- */ }
+  /* ---------- Customization bar ---------- */
+  /*@include respond-to(phone, tablet) {
+  }
+  */ }
   .aui .dockbar {
     left: 0;
     right: 0;
@@ -1015,18 +1018,17 @@ body.html-editor {
   @media (max-width: 1140px) {
     .aui .dockbar-split .dockbar .info-items {
       width: 515px; } }
-  @media (max-width: 979px) {
-    .aui #navigation {
-      display: none; }
-      .aui #navigation.open {
-        display: block; }
-    .aui .dockbar-split .dockbar {
-      height: auto;
-      position: relative; }
-      .aui .dockbar-split .dockbar .navbar-inner {
-        width: auto; }
-    .aui .user-avatar-image {
-      width: 18px; } }
+  .aui #navigation {
+    display: none; }
+    .aui #navigation.open {
+      display: block; }
+  .aui .dockbar-split .dockbar {
+    height: auto;
+    position: relative; }
+    .aui .dockbar-split .dockbar .navbar-inner {
+      width: auto; }
+  .aui .user-avatar-image {
+    width: 18px; }
 
 /* ---------- Add/remove page ---------- */
 .modify-pages li {
@@ -2230,56 +2232,12 @@ styles in one central location for easier
 upgrade and maintenance. */
 .aui body {
   background-color: #FFFFFF;
-  font: normal 16px/1 "Coda" ,Helvetica, sans-serif; }
+  font: normal 16px/1 "Coda", Helvetica, sans-serif; }
 
 .flask-nav-item {
   color: red;
   cursor: pointer;
   font-size: 16px; }
-
-.menuitem {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  width: 200px;
-  padding: 5px;
-  overflow: hidden;
-  border: none;
-  font: normal 16px/1 "Coda" , Helvetica,sans-serif;
-  color: #ffffff;
-  text-align: left;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  background: #231F20;
-  -webkit-box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.3);
-  box-shadow: 1px 1px 1px 0 rgba(0, 0, 0, 0.3);
-  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2); }
-
-@media screen and (min-width: 760px) {
-  .menuitem {
-    float: left;
-    display: block; } }
-.menuitem:hover {
-  color: #ff9900;
-  cursor: pointer; }
-
-.menuitem span {
-  font-size: 12px; }
-
-.menuitem:hover span {
-  color: #ff9900; }
-
-.highlight {
-  color: #ff9900; }
-
-.menuitem a {
-  color: white;
-  text-decoration: none;
-  font: normal 16px/1 "Coda" ,Helvetica, sans-serif; }
-
-.menuitem a:hover {
-  color: #ff9900;
-  text-decoration: none; }
 
 /* Buttons CSS */
 .aui input[type="button"] {
@@ -2307,7 +2265,7 @@ upgrade and maintenance. */
 
 .aui .btn-info {
   background: #231F20;
-  font: normal 16px/1 "Coda" ,Helvetica, sans-serif;
+  font: normal 16px/1 "Coda", Helvetica, sans-serif;
   color: #fff;
   font-size: 20px;
   cursor: pointer;
@@ -2337,9 +2295,22 @@ upgrade and maintenance. */
   background-image: -webkit-linear-gradient(top, #656262 0%, #231f20 100%);
   background-image: linear-gradient(to bottom, #656262 0%, #231f20 100%); }
 
+.aui .btn-info:focus {
+  color: #ff9900;
+  background: #231F20;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  background-image: -ms-linear-gradient(top, #656262 0%, #231f20 100%);
+  background-image: -moz-linear-gradient(top, #656262 0%, #231f20 100%);
+  background-image: -o-linear-gradient(top, #656262 0%, #231f20 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262), color-stop(1, #231f20));
+  background-image: -webkit-linear-gradient(top, #656262 0%, #231f20 100%);
+  background-image: linear-gradient(to bottom, #656262 0%, #231f20 100%); }
+
 .aui .btn-primary {
   padding: 5px 20px;
-  font: normal 16px/1 "Coda" ,Helvetica, sans-serif;
+  font: normal 16px/1 "Coda", Helvetica, sans-serif;
   background: #231F20;
   color: #fff;
   font-size: 20px;
@@ -2365,21 +2336,48 @@ upgrade and maintenance. */
   background-image: -webkit-linear-gradient(top, #656262 0%, #231f20 100%);
   background-image: linear-gradient(to bottom, #656262 0%, #231f20 100%); }
 
+.aui .btn-primary:focus {
+  color: #ff9900;
+  background: #231F20;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
+  background-image: -ms-linear-gradient(top, #656262 0%, #231f20 100%);
+  background-image: -moz-linear-gradient(top, #656262 0%, #231f20 100%);
+  background-image: -o-linear-gradient(top, #656262 0%, #231f20 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262), color-stop(1, #231f20));
+  background-image: -webkit-linear-gradient(top, #656262 0%, #231f20 100%);
+  background-image: linear-gradient(to bottom, #656262 0%, #231f20 100%); }
+
 .aui input[type="text"] {
   border-radius: 5px;
   font-size: 14px;
   height: 30px;
-  width: 500px;
+  width: 40%;
   padding-left: 10px;
   margin-bottom: 10px; }
 
+/* by navnath css for event form*/
+.table-responsive input[type="text"] {
+  border-radius: 0;
+  font-size: 14px;
+  height: 35px;
+  width: 100%;
+  padding: 3px;
+  margin-bottom: 10px;
+  text-shadow: none; }
+
+.aui.ios input, .aui.ios input.input-large, .aui.ios textarea, .aui.ios .uneditable-input {
+  max-width: 97% !important; }
+
+/*end css of event form*/
 .aui input[type="date"] {
   border: 1px solid #ccc;
   background-color: white;
   border-radius: 5px;
   font-size: 14px;
   height: 30px;
-  width: 500px;
+  width: 40%;
   padding-left: 10px;
   margin-bottom: 10px; }
 
@@ -2387,7 +2385,7 @@ upgrade and maintenance. */
   border-radius: 5px;
   font-size: 14px;
   height: 30px;
-  width: 500px;
+  width: 40%;
   padding-left: 10px;
   margin-bottom: 10px; }
 
@@ -2398,7 +2396,7 @@ upgrade and maintenance. */
   border-radius: 5px;
   font-size: 14px;
   height: 30px;
-  width: 500px;
+  width: 40%;
   padding-left: 10px;
   margin-bottom: 10px; }
 
@@ -2406,7 +2404,7 @@ upgrade and maintenance. */
   border-radius: 5px;
   font-size: 14px;
   height: 40px;
-  width: 519px;
+  width: 41.3%;
   padding-left: 10px;
   margin-bottom: 10px; }
 
@@ -2425,32 +2423,32 @@ div#adminDataTable {
 
 @media (max-width: 767px) {
   .aui select {
-    height: 31px;
+    height: 40px;
     width: 100%;
     padding-left: 10px;
     margin-bottom: 10px; }
 
   .aui input[type="date"] {
-    height: 20px;
+    height: 30px;
     width: 98%;
     padding: 4px 0px;
     padding-left: 10px; }
 
   .aui textarea {
-    height: 20px;
+    height: 30px;
     width: 98%;
     padding: 4px 0px;
     padding-left: 10px; }
 
   .aui input[type="text"] {
-    height: 20px;
-    width: 98%;
+    height: 30px;
+    width: 96.2%;
     padding: 4px 0px;
     padding-left: 10px; }
 
   .aui input[type="password"] {
-    height: 20px;
-    width: 98%;
+    height: 30px;
+    width: 96.2%;
     padding: 4px 0px;
     padding-left: 10px; }
 
@@ -2503,7 +2501,7 @@ div#adminDataTable {
   height: 50px;
   margin: 0 auto;
   -moz-animation: spin 1.8s infinite linear;
-  -webkit-animation: spin 1.8s infinite  linear; }
+  -webkit-animation: spin 1.8s infinite linear; }
 
 .ball1 {
   background-color: rgba(0, 0, 0, 0);
@@ -2518,7 +2516,7 @@ div#adminDataTable {
   position: relative;
   top: -50px;
   -moz-animation: spinoff 1s infinite linear;
-  -webkit-animation: spinoff 1s infinite  linear; }
+  -webkit-animation: spinoff 1s infinite linear; }
 
 @-moz-keyframes spin {
   0% {
@@ -2550,47 +2548,558 @@ div#adminDataTable {
 
 /*AddUser button*/
 .iconAddUser {
-  height: 50px;
-  width: 50px;
+  height: 32px;
+  width: 32px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
   background-image: url(@base_url@/css/../images/Flask-Icons/AddUserWhite.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 30px 30px; }
+  background-size: 20px 20px; }
 
 .iconAddUser:hover {
-  height: 50px;
-  width: 50px;
+  height: 32px;
+  width: 32px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
   background-image: url(@base_url@/css/../images/Flask-Icons/AddUserOrange.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 30px 30px; }
+  background-size: 20px 20px; }
 
 .iconAddUser:active {
-  height: 50px;
-  width: 50px;
+  height: 32px;
+  width: 32px;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s;
   background-image: url(@base_url@/css/../images/Flask-Icons/AddUserOrange.png);
   background-repeat: no-repeat;
   background-position: center;
-  background-size: 30px 30px; }
+  background-size: 20px 20px; }
 
 .cssAddUser {
-  border: 1px solid #363434;
   opacity: .9;
-  border-radius: 50px;
-  width: 50px;
-  height: 50px;
+  border-radius: 32px;
+  width: 32px;
+  height: 32px;
   cursor: pointer;
   -webkit-transition: all .3s;
   -moz-transition: all .3s;
   transition: all .3s;
   text-shadow: none;
-  background-image: -ms-linear-gradient(top, #656262 0, #231f20 100%);
-  background-image: -moz-linear-gradient(top, #656262 0, #231f20 100%);
-  background-image: -o-linear-gradient(top, #656262 0, #231f20 100%);
-  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262), color-stop(1, #231f20));
-  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
-  background-image: linear-gradient(to bottom, #656262 0%, #231f20 100%);
+  background: -moz-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #7d7e7d), color-stop(100%, #0e0e0e));
+  /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* IE10+ */
+  background: radial-gradient(ellipse at center, #7d7e7d 0%, #0e0e0e 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7d7e7d', endColorstr='#0e0e0e', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
   margin-right: 2%;
   margin-bottom: 9px;
   float: right; }
+
+/*Delete Icon*/
+.iconDelUser {
+  margin: 8px;
+  color: #fff;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.iconDelUser:hover {
+  margin: 8px;
+  color: #ff9900;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.iconDelUser:active {
+  margin: 8px;
+  color: #ff9900;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.cssDelUser {
+  opacity: .9;
+  border-radius: 32px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  transition: all .3s;
+  text-shadow: none;
+  background: -moz-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #7d7e7d), color-stop(100%, #0e0e0e));
+  /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* IE10+ */
+  background: radial-gradient(ellipse at center, #7d7e7d 0%, #0e0e0e 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7d7e7d', endColorstr='#0e0e0e', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+  margin-right: 2%;
+  margin-bottom: 9px;
+  float: right; }
+
+/*trash Icon*/
+.iconDelete {
+  margin: 8px;
+  color: #fff;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.iconDelete:hover {
+  margin: 8px;
+  color: #ff9900;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.iconDelete:active {
+  margin: 8px;
+  color: #ff9900;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.cssDelete {
+  opacity: .9;
+  border-radius: 32px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  transition: all .3s;
+  text-shadow: none;
+  background: -moz-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #7d7e7d), color-stop(100%, #0e0e0e));
+  /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* IE10+ */
+  background: radial-gradient(ellipse at center, #7d7e7d 0%, #0e0e0e 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7d7e7d', endColorstr='#0e0e0e', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+  margin-right: 2%;
+  margin-bottom: 9px;
+  float: right; }
+
+/*Search Icon*/
+.iconSearchUser {
+  margin: 8px;
+  color: #fff;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.iconSearchUser:hover {
+  margin: 8px;
+  color: #ff9900;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.iconSearchUser:active {
+  margin: 8px;
+  color: #ff9900;
+  -webkit-transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  transition: all 0.3s; }
+
+.cssSearchUser {
+  opacity: .9;
+  border-radius: 32px;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  -webkit-transition: all .3s;
+  -moz-transition: all .3s;
+  transition: all .3s;
+  text-shadow: none;
+  background: -moz-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* FF3.6+ */
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, #7d7e7d), color-stop(100%, #0e0e0e));
+  /* Chrome,Safari4+ */
+  background: -webkit-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* Chrome10+,Safari5.1+ */
+  background: -o-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* Opera 12+ */
+  background: -ms-radial-gradient(center, ellipse cover, #7d7e7d 0%, #0e0e0e 100%);
+  /* IE10+ */
+  background: radial-gradient(ellipse at center, #7d7e7d 0%, #0e0e0e 100%);
+  /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#7d7e7d', endColorstr='#0e0e0e', GradientType=1);
+  /* IE6-9 fallback on horizontal gradient */
+  margin-right: 2%;
+  margin-bottom: 9px;
+  float: right; }
+
+/* Dockbar Starts*/
+.aui .dockbar-split .dockbar .navbar-inner {
+  width: 100%;
+  position: fixed;
+  z-index: 10000; }
+
+div#content {
+  margin-top: 47px; }
+
+/*	.aui #navigation.open 
+	{
+	  margin-top: 47px;
+	}
+*/
+.aui .dockbar-split .dockbar {
+  height: auto;
+  position: relative; }
+
+.navbar .container .btn-navbar {
+  color: #000;
+  display: inline-block;
+  margin-bottom: 5px;
+  width: auto; }
+
+/* Dockbar Ends*/
+/* Drop Down Account Controls Starts*/
+.aui .nav-collapse .dropdown-menu a {
+  color: #000000; }
+
+span.nav-item-label {
+  color: #000000; }
+
+.aui .dockbar-split .dockbar .navbar-inner .nav > li {
+  background-color: #FFFFFF; }
+
+.aui .dockbar-split .dockbar.navbar-static-top .collapse .nav-account-controls {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0px 5px 10px #CCC;
+  border: 1px solid transparent; }
+
+.aui .dockbar-split .dockbar .navbar-inner .nav li.dropdown.open > .dropdown-toggle {
+  background-color: #F7F7F7; }
+
+.aui .dockbar-split .dockbar .navbar-inner .nav > li > a [class^="icon-"], .aui .dockbar-split .dockbar .navbar-inner .nav > li > a [class*=" icon-"] {
+  color: #000000; }
+
+/* Drop Down Account Controls Ends*/
+/* Splash Starts */
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@-moz-keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+@keyframes fadeIn {
+  from {
+    opacity: 0; }
+
+  to {
+    opacity: 1; } }
+
+.fade-in {
+  opacity: 0;
+  -webkit-animation: fadeIn ease-in 1;
+  -moz-animation: fadeIn ease-in 1;
+  animation: fadeIn ease-in 1;
+  -webkit-animation-fill-mode: forwards;
+  -moz-animation-fill-mode: forwards;
+  animation-fill-mode: forwards;
+  -webkit-animation-duration: 0.3s;
+  -moz-animation-duration: 0.3s;
+  animation-duration: 0.3s;
+  -webkit-animation-delay: 0.5s;
+  -moz-animation-delay: 0.5s;
+  animation-delay: 0.5s; }
+
+.splash {
+  text-align: center;
+  background-color: #FFF;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 999;
+  background-size: cover;
+  background-attachment: fixed;
+  height: 420px;
+  position: absolute;
+  top: 0;
+  margin: auto; }
+
+.splash-title {
+  color: #544F4B;
+  font-family: 'Ubuntu', sans-serif;
+  letter-spacing: 13px;
+  line-height: 0.0;
+  font-size: 4.500em;
+  font-weight: bolder;
+  -webkit-animation-delay: 1s;
+  -moz-animation-delay: 1s;
+  animation-delay: 1s; }
+
+.splash-para {
+  color: #EB8C49;
+  font-family: Coda;
+  line-height: 0.0;
+  font-size: 1.150em;
+  font-weight: normal;
+  font-style: normal;
+  letter-spacing: 0.75px; }
+
+@media all and (max-width: 690px) {
+  .logoSize {
+    width: 209px;
+    height: 234px; } }
+@media all and (max-width: 480px) {
+  .splash-title {
+    font-size: 3.500em; }
+
+  .splash-para {
+    font-size: 0.950em; } }
+/* Splash Ends */
+/* For Edit Page Icons */
+.modify-pages .drag-handle {
+  display: none; }
+
+/* Login Screen Starts*/
+.taglib-icon-list li {
+  float: left;
+  margin-right: 1em;
+  width: 100%; }
+
+.portlet-login .navigation {
+  background: none;
+  border: none;
+  padding: 10px; }
+
+/* Login Screen Ends*/
+#slideoutmenupanel {
+  position: fixed;
+  top: 47px;
+  left: -285px;
+  height: 100%;
+  width: 250px;
+  border-right: 1.5px solid #F89734;
+  border-top: 0.5px solid #F89734;
+  border-bottom: 0.5px solid #F89734;
+  box-shadow: 5px 0px 15px -5px #444;
+  z-index: 99999;
+  overflow: auto;
+  background: #231F20; }
+
+#slideoutmenupanel .hideoverflow {
+  overflow: hidden !important; }
+
+#slideoutmenupanel .menuitem {
+  overflow: hidden;
+  border: none;
+  font: normal 16px/1 "Coda" , Helvetica, sans-serif;
+  color: white;
+  text-align: left;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  height: auto;
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+  margin: auto; }
+
+#slideoutmenupanel .menuitem li {
+  padding: 6px 0px 3px 10px;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  .
+    font-size: 14px; }
+
+#slideoutmenupanel .menuitem li a {
+  text-decoration: none !important;
+  font-size: 14px;
+  color: #FFF;
+  cursor: pointer; }
+
+#slideoutmenupanel .menuitem li a:hover {
+  color: #FF9900;
+  cursor: pointer; }
+
+#slideoutmenupanel .menuitem span {
+  font-size: 10px; }
+
+#slideoutmenupanel .menuitem:hover span {
+  color: white; }
+
+.sign-in-form input[type="text"] {
+  width: 280px;
+  padding-left: 20px; }
+
+.sign-in-form input[type="password"] {
+  width: 280px;
+  padding-left: 20px; }
+
+.sign-in-form input[type="submit"] {
+  width: 300px;
+  margin: auto; }
+
+.sign-in-form label.control-label {
+  text-align: left; }
+
+.sign-in-form .cq-dd-image {
+  zoom: 0.5; }
+
+.login-content {
+  display: table-cell;
+  vertical-align: middle; }
+
+.loginForm {
+  position: relative; }
+
+.bg-image-holder {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center; }
+
+/* ================================
+  Login Panel
+================================ */
+.loginpane {
+  background: #fff;
+  text-align: center;
+  width: 100%; }
+
+.loginpane_header {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 1.5em 0; }
+
+.form-header {
+  margin-top: 0; }
+
+.loginpane_body {
+  padding: 15px 15px; }
+
+.loginpane_footer {
+  background: #e8e8e8;
+  font-size: 0.875em;
+  padding: 1em 0; }
+
+.forgot {
+  font-size: 0.813em;
+  margin: 0; }
+
+/* ================================
+  Form Elements
+================================ */
+/* placeholder text */
+::-webkit-input-placeholder {
+  color: #999;
+  -webkit-font-smoothing: antialiased; }
+
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #999; }
+
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #999; }
+
+:-ms-input-placeholder {
+  color: #999; }
+
+.form-control {
+  margin: 0 auto;
+  max-width: 320px;
+  position: relative; }
+
+.loginpane {
+  background: transparent; }
+
+.loginpane_header {
+  background: #ffffff;
+  /* fallback */
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1em 0; }
+
+.loginpane_body {
+  background: #ffffff;
+  /* fallback */
+  background: rgba(255, 255, 255, 0.9); }
+
+.loginpane_footer {
+  background: #e1e1e1;
+  /* fallback */
+  background: rgba(225, 225, 225, 0.95); }
+
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media only screen and (max-width: 30em) {
+  /* 480 */
+  .login-content {
+    vertical-align: top; }
+
+  .loginpane {
+    margin: 0 auto;
+    width: 350px; }
+
+  .login-wrap {
+    padding-top: 0;
+    vertical-align: middle; } }
+@media only screen and (min-width: 30.063em) {
+  /* 481px */
+  .loginpane {
+    margin: 0 auto;
+    width: 380px; }
+
+  .login-wrap {
+    padding-top: 0;
+    vertical-align: middle; } }
+/* position centered vertically if viewport is taller than the login pane */
+@media only screen and (min-width: 30.063em) and (min-height: 660px) {
+  .login-wrap {
+    padding-top: 0;
+    vertical-align: middle; } }
+.sign-in-form .button-holder {
+  margin: 0px; }
+
+@media (max-width: 767px) and (max-width: 979px) {
+  .sign-in-form .aui .btn {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    /* display: block; */
+    margin-top: 5px;
+    width: 310px; } }
 

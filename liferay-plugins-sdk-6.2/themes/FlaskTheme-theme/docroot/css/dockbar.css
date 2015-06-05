@@ -752,7 +752,9 @@ $editLayoutPanelWidth: 460px;
 		}
 	}
 
-	@include respond-to(phone, tablet) {
+	/*@include respond-to(phone, tablet) {
+	}
+	*/
 		#navigation {
 			display: none;
 
@@ -773,5 +775,5 @@ $editLayoutPanelWidth: 460px;
 		.user-avatar-image {
 			width: 18px;
 		}
-	}
+	
 }
