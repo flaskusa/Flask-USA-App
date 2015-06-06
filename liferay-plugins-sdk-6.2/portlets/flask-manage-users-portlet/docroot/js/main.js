@@ -198,15 +198,15 @@ function fnRenderGrid(tdata) {
 					+ datarecord.aptNo + "</td></tr>";
 			var areacode = "<tr><td class='filledWidth'><b>Area Code:</b> </td><td>"
 					+ datarecord.areaCode + "</td></tr>";
-			var City = "<tr><td class='filledWidth'><b>City:</b></td><td> "
+			var City = "<tr><td class='filledWidth1'><b>City:</b></td><td> "
 					+ datarecord.city + "</td></tr>";
-			var State = "<tr><td class='filledWidth'><b>State:</b></td><td> "
+			var State = "<tr><td class='filledWidth1'><b>State:</b></td><td> "
 					+ datarecord.stateName + "</td></tr>";
-			var Country = "<tr><td class='filledWidth'><b>Country:</b></td><td> "
+			var Country = "<tr><td class='filledWidth1'><b>Country:</b></td><td> "
 					+ datarecord.countryName + "</td></tr>";
 			var Mobileno = "<tr><td class='filledWidth'><b>Mobile No:</b></td><td> "
 					+ datarecord.mobileNumber + "</td></tr>";
-			var Intr = "<tr><td class='filledWidth'><b>Interests :</b> </td><td>"
+			var Intr = "<tr><td class='filledWidth1'><b>Interests :</b> </td><td>"
 				+ datarecord.userInterests + "</td></tr>";
 			
 			$(leftcolumn).append("<table>");
