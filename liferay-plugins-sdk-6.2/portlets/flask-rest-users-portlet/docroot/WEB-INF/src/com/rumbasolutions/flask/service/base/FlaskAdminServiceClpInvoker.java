@@ -49,7 +49,7 @@ public class FlaskAdminServiceClpInvoker {
 		_methodParameterTypes29 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.util.Date", "boolean",
+				"java.lang.String", "java.lang.String", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
@@ -60,7 +60,7 @@ public class FlaskAdminServiceClpInvoker {
 		_methodParameterTypes30 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.util.Date",
+				"java.lang.String", "java.lang.String", "java.lang.String",
 				"boolean", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String",
@@ -72,7 +72,7 @@ public class FlaskAdminServiceClpInvoker {
 		_methodParameterTypes31 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.util.Date", "boolean",
+				"java.lang.String", "java.lang.String", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
@@ -83,7 +83,7 @@ public class FlaskAdminServiceClpInvoker {
 		_methodParameterTypes32 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.util.Date",
+				"java.lang.String", "java.lang.String", "java.lang.String",
 				"boolean", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String",
@@ -106,6 +106,40 @@ public class FlaskAdminServiceClpInvoker {
 
 		_methodParameterTypes35 = new String[] {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName42 = "addFlaskUser";
+
+		_methodParameterTypes42 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName43 = "updateLoggedInUser";
+
+		_methodParameterTypes43 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName44 = "getCountryByName";
+
+		_methodParameterTypes44 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName45 = "getRegion";
+
+		_methodParameterTypes45 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -139,7 +173,7 @@ public class FlaskAdminServiceClpInvoker {
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(java.util.Date)arguments[7],
+				(java.lang.String)arguments[7],
 				((Boolean)arguments[8]).booleanValue(),
 				(java.lang.String)arguments[9],
 				(java.lang.String)arguments[10],
@@ -158,7 +192,7 @@ public class FlaskAdminServiceClpInvoker {
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(java.lang.String)arguments[7], (java.util.Date)arguments[8],
+				(java.lang.String)arguments[7], (java.lang.String)arguments[8],
 				((Boolean)arguments[9]).booleanValue(),
 				(java.lang.String)arguments[10],
 				(java.lang.String)arguments[11],
@@ -177,7 +211,7 @@ public class FlaskAdminServiceClpInvoker {
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(java.util.Date)arguments[7],
+				(java.lang.String)arguments[7],
 				((Boolean)arguments[8]).booleanValue(),
 				(java.lang.String)arguments[9],
 				(java.lang.String)arguments[10],
@@ -196,7 +230,7 @@ public class FlaskAdminServiceClpInvoker {
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(java.lang.String)arguments[7], (java.util.Date)arguments[8],
+				(java.lang.String)arguments[7], (java.lang.String)arguments[8],
 				((Boolean)arguments[9]).booleanValue(),
 				(java.lang.String)arguments[10],
 				(java.lang.String)arguments[11],
@@ -229,6 +263,56 @@ public class FlaskAdminServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
+		if (_methodName42.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
+			return FlaskAdminServiceUtil.addFlaskUser((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
+				(java.lang.String)arguments[7],
+				((Boolean)arguments[8]).booleanValue(),
+				(java.lang.String)arguments[9],
+				(java.lang.String)arguments[10],
+				(java.lang.String)arguments[11],
+				(java.lang.String)arguments[12],
+				((Long)arguments[13]).longValue(),
+				((Long)arguments[14]).longValue(),
+				(java.lang.String)arguments[15],
+				(java.lang.String)arguments[16],
+				(com.liferay.portal.service.ServiceContext)arguments[17]);
+		}
+
+		if (_methodName43.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
+			return FlaskAdminServiceUtil.updateLoggedInUser((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
+				(java.lang.String)arguments[7],
+				((Boolean)arguments[8]).booleanValue(),
+				(java.lang.String)arguments[9],
+				(java.lang.String)arguments[10],
+				(java.lang.String)arguments[11],
+				(java.lang.String)arguments[12],
+				((Long)arguments[13]).longValue(),
+				((Long)arguments[14]).longValue(),
+				(java.lang.String)arguments[15],
+				(java.lang.String)arguments[16],
+				(com.liferay.portal.service.ServiceContext)arguments[17]);
+		}
+
+		if (_methodName44.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
+			return FlaskAdminServiceUtil.getCountryByName((java.lang.String)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName45.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
+			return FlaskAdminServiceUtil.getRegion(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -254,4 +338,12 @@ public class FlaskAdminServiceClpInvoker {
 	private String[] _methodParameterTypes34;
 	private String _methodName35;
 	private String[] _methodParameterTypes35;
+	private String _methodName42;
+	private String[] _methodParameterTypes42;
+	private String _methodName43;
+	private String[] _methodParameterTypes43;
+	private String _methodName44;
+	private String[] _methodParameterTypes44;
+	private String _methodName45;
+	private String[] _methodParameterTypes45;
 }

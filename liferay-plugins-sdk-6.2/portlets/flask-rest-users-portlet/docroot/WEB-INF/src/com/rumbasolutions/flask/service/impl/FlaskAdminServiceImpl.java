@@ -16,7 +16,6 @@ package com.rumbasolutions.flask.service.impl;
 
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -27,14 +26,19 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.Region;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.persistence.CountryUtil;
+import com.liferay.portal.service.persistence.RegionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.rumbasolutions.flask.model.FlaskAdmin;
@@ -110,7 +114,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		int adminUsersCnt = UserLocalServiceUtil.getRoleUsersCount(role.getRoleId());
 		List<User> users= UserLocalServiceUtil.getRoleUsers(role.getRoleId(), 0, adminUsersCnt);
 		for(User user : users){
-			adminList.add(FlaskModelUtil.getFlaskAdmin(user, serviceContext));
+			adminList.add(FlaskModelUtil.getFlaskUser(user, serviceContext));
 		}
 		return adminList;
 	}
@@ -122,10 +126,9 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	 */
 	
 	@Override
-
 	public	FlaskAdmin addFlaskAdmin(String firstName, String middleName, String lastName, 
 					String email, String screenName,String password1, String password2,  
-					Date DOB, boolean isMale,
+					String DOB, boolean isMale,
 					String streetName, String aptNo,
 					String areaCode, String city,
 					long stateId, long countryId,
@@ -142,7 +145,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				stateId, countryId,
 				mobileNumber, userInterests, serviceContext);
 		if(user != null) {
-			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
+			adminUser = FlaskModelUtil.getFlaskUser(user, serviceContext);
 		}
 		return adminUser;
 	}
@@ -151,7 +154,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	@Override
 	public  FlaskAdmin updateFlaskAdmin(long userId, String firstName, String middleName, String lastName, 
 			String email, String screenName,String password1, String password2,  
-			Date DOB, boolean isMale,
+			String DOB, boolean isMale,
 			String streetName, String aptNo,
 			String areaCode, String city,
 			long stateId, long countryId,
@@ -169,7 +172,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				stateId, countryId,
 				mobileNumber, userInterests, serviceContext);
 		if(user != null) {
-			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
+			adminUser = FlaskModelUtil.getFlaskUser(user, serviceContext);
 		}
 		return adminUser;
 	}
@@ -184,7 +187,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	@Override
 	public  FlaskAdmin addFlaskContentManager(String firstName, String middleName, String lastName, 
 			String email, String screenName,String password1, String password2,  
-			Date DOB, boolean isMale,
+			String DOB, boolean isMale,
 			String streetName, String aptNo,
 			String areaCode, String city,
 			long stateId, long countryId,
@@ -203,10 +206,13 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				stateId, countryId,
 				mobileNumber, userInterests, serviceContext);
 		if(user != null) {
-			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
+			adminUser = FlaskModelUtil.getFlaskUser(user, serviceContext);
 		}
 		return adminUser;
 	}
+	
+	
+	
 	
 /**
  * Update content managers
@@ -214,7 +220,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	@Override
 	public  FlaskAdmin updateFlaskContentManager(long userId, String firstName, String middleName, String lastName, 
 			String email, String screenName,String password1, String password2,
-			Date DOB, boolean isMale,
+			String DOB, boolean isMale,
 			String streetName, String aptNo,
 			String areaCode, String city,
 			long state, long country,
@@ -231,7 +237,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 						state, country,
 						mobileNumber, userInterests, serviceContext);
 		if(user != null) {
-			adminUser = FlaskModelUtil.getFlaskAdmin(user, serviceContext);
+			adminUser = FlaskModelUtil.getFlaskUser(user, serviceContext);
 		}
 		return adminUser;
 	}
@@ -306,16 +312,16 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	private User addUser(long roldId, long loggedInUser, String firstName, String middleName, 
 			String lastName, String screenName, String email,
 			String password1, String password2,
-			Date DOB, boolean isMale,
+			String DOB, boolean isMale,
 			String streetName, String aptNo,
 			String areaCode, String city,
- long stateId, long countryId,
+			long stateId, long countryId,
 			String mobileNumber, String userInterests, ServiceContext serviceContext) throws PortalException, SystemException {
 		
 			User user=null;
-			Calendar cal = Calendar.getInstance();
-			cal.setTime(DOB);
+			Calendar cal = FlaskModelUtil.parseDate(DOB);
 	
+			
 			 long[] emptyLong = {};
 			 long[] roleIds ={roldId};
 			 user = UserLocalServiceUtil.addUser(
@@ -358,6 +364,8 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			 return user;
 	}
 
+
+
 	private void addUserInterest(String userInterests, User user)
 			throws PortalException {
 		
@@ -374,6 +382,10 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	}
 
 	private void addMobile(String mobileNumber, User user, ServiceContext serviceContext){
+		if(mobileNumber == null || mobileNumber.isEmpty()){
+			LOGGER.warn("Empty mobile number");
+			return;
+		}
 		int mobileTypeId = FlaskModelUtil.getMobilePhoneTypeId();
 		try {
 			Phone phone = PhoneLocalServiceUtil.addPhone( user.getUserId()/*long userId*/,
@@ -474,22 +486,16 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	 */
 	private User updateUser(long userId, long roleId, long loggedInUser, String firstName, String middleName, 
 			String lastName, String screenName, String email, String password1, String password2,
-			Date DOB, boolean isMale,
+			String DOB, boolean isMale,
 			String streetName, String aptNo,
 			String areaCode, String city,
 			long stateId, long countryId,
 			String mobileNumber, String userInterests, 
 			ServiceContext serviceContext) throws PortalException, SystemException {
 		
-		Calendar cal = Calendar.getInstance();
-		cal.setTime(DOB);
-		
 		long[] roleIds = {roleId};
-		
 		User user =	UserLocalServiceUtil.getUser(userId);
-		
-		
-				
+		Calendar cal = FlaskModelUtil.parseDate(DOB);
 		user = UserLocalServiceUtil.updateUser( userId /*long userId*/,
 				password1/*String oldPassword*/,
 				password1 /*String newPassword1*/,
@@ -540,7 +546,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 					serviceContext, user);
 			}
 			if(user.getPhones().size() > 0 ){
-				Phone phone = user.getPhones().get(0);
+				Phone phone = PhoneLocalServiceUtil.getPhones(PortalUtil.getDefaultCompanyId(), Contact.class.getName(), user.getContactId()).get(0);
 				phone.setNumber(mobileNumber);
 				PhoneLocalServiceUtil.updatePhone(phone);
 			}else{
@@ -548,4 +554,88 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			}	
 			return user;
 	}	
+	
+	/*
+	 * This method adds flask admins
+	 * 
+	 * 
+	 */
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public	FlaskAdmin addFlaskUser(String firstName, String middleName, String lastName, 
+					String email, String screenName,String password1, String password2,  
+					String DOB, boolean isMale,
+					String streetName, String aptNo,
+					String areaCode, String city,
+					long stateId, long countryId,
+					String mobileNumber, String userInterests, 
+					ServiceContext serviceContext) throws SystemException, PortalException
+	{
+		FlaskAdmin adminUser=null;
+		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_USER.getRoleName());
+		User user = addUser(role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, 
+				screenName, email, password1,  password2,
+				DOB, isMale,
+				streetName, aptNo,
+				areaCode, city,
+				stateId, countryId,
+				mobileNumber, userInterests, serviceContext);
+		if(user != null) {
+			adminUser = FlaskModelUtil.getFlaskUser(user, serviceContext);
+		}
+		return adminUser;
+	}
+	
+	@Override
+	public  FlaskAdmin updateLoggedInUser(String firstName, String middleName, String lastName, 
+			String email, String screenName,String password1, String password2,  
+			String DOB, boolean isMale,
+			String streetName, String aptNo,
+			String areaCode, String city,
+			long stateId, long countryId,
+			String mobileNumber, String userInterests,
+			ServiceContext serviceContext) throws SystemException, PortalException
+	{
+		FlaskAdmin adminUser=null;
+		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_ADMIN.getRoleName());
+		User user = updateUser(serviceContext.getGuestOrUserId(), role.getRoleId(), serviceContext.getUserId(),
+				firstName, middleName, lastName, 
+				screenName, email, password1,  password2,
+				DOB, isMale,
+				streetName, aptNo,
+				areaCode, city,
+				stateId, countryId,
+				mobileNumber, userInterests, serviceContext);
+		if(user != null) {
+			adminUser = FlaskModelUtil.getFlaskUser(user, serviceContext);
+		}
+		return adminUser;
+	}
+	
+	/*
+	 * This method adds flask admins
+	 * 
+	 * 
+	 */
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public	Country getCountryByName( String name, ServiceContext serviceContext) throws SystemException, PortalException
+	{ 
+		return  CountryUtil.fetchByName(name);
+	
+	}
+	
+	/*
+	 * This method is accesible by guest users and returns all regions for specified country id
+	 * 
+	 * 
+	 */
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public	List<Region> getRegion(long countryId, ServiceContext serviceContext) throws SystemException, PortalException
+	{ 
+		
+		return RegionUtil.findByCountryId(countryId);
+	}
+	
 }

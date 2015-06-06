@@ -49,7 +49,7 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		_methodParameterTypes5 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.util.Date", "boolean",
+				"java.lang.String", "java.lang.String", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
@@ -60,7 +60,7 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		_methodParameterTypes6 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.util.Date",
+				"java.lang.String", "java.lang.String", "java.lang.String",
 				"boolean", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String",
@@ -72,7 +72,7 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		_methodParameterTypes7 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.util.Date", "boolean",
+				"java.lang.String", "java.lang.String", "boolean",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
@@ -83,7 +83,7 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		_methodParameterTypes8 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.util.Date",
+				"java.lang.String", "java.lang.String", "java.lang.String",
 				"boolean", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String",
@@ -106,6 +106,40 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 
 		_methodParameterTypes11 = new String[] {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName12 = "addFlaskUser";
+
+		_methodParameterTypes12 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName13 = "updateLoggedInUser";
+
+		_methodParameterTypes13 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName14 = "getCountryByName";
+
+		_methodParameterTypes14 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName15 = "getRegion";
+
+		_methodParameterTypes15 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -214,7 +248,7 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -293,7 +327,7 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -374,7 +408,7 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -453,7 +487,7 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long state,
 		long country, java.lang.String mobileNumber,
@@ -622,6 +656,243 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		return ((Long)returnObj).longValue();
 	}
 
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskUser(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName12,
+					_methodParameterTypes12,
+					new Object[] {
+						ClpSerializer.translateInput(firstName),
+						
+					ClpSerializer.translateInput(middleName),
+						
+					ClpSerializer.translateInput(lastName),
+						
+					ClpSerializer.translateInput(email),
+						
+					ClpSerializer.translateInput(screenName),
+						
+					ClpSerializer.translateInput(password1),
+						
+					ClpSerializer.translateInput(password2),
+						
+					ClpSerializer.translateInput(DOB),
+						
+					isMale,
+						
+					ClpSerializer.translateInput(streetName),
+						
+					ClpSerializer.translateInput(aptNo),
+						
+					ClpSerializer.translateInput(areaCode),
+						
+					ClpSerializer.translateInput(city),
+						
+					stateId,
+						
+					countryId,
+						
+					ClpSerializer.translateInput(mobileNumber),
+						
+					ClpSerializer.translateInput(userInterests),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.FlaskAdmin)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin updateLoggedInUser(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName13,
+					_methodParameterTypes13,
+					new Object[] {
+						ClpSerializer.translateInput(firstName),
+						
+					ClpSerializer.translateInput(middleName),
+						
+					ClpSerializer.translateInput(lastName),
+						
+					ClpSerializer.translateInput(email),
+						
+					ClpSerializer.translateInput(screenName),
+						
+					ClpSerializer.translateInput(password1),
+						
+					ClpSerializer.translateInput(password2),
+						
+					ClpSerializer.translateInput(DOB),
+						
+					isMale,
+						
+					ClpSerializer.translateInput(streetName),
+						
+					ClpSerializer.translateInput(aptNo),
+						
+					ClpSerializer.translateInput(areaCode),
+						
+					ClpSerializer.translateInput(city),
+						
+					stateId,
+						
+					countryId,
+						
+					ClpSerializer.translateInput(mobileNumber),
+						
+					ClpSerializer.translateInput(userInterests),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.FlaskAdmin)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.model.Country getCountryByName(
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName14,
+					_methodParameterTypes14,
+					new Object[] {
+						ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.model.Country)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.liferay.portal.model.Region> getRegion(
+		long countryId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName15,
+					_methodParameterTypes15,
+					new Object[] {
+						countryId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.portal.model.Region>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -645,4 +916,12 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	private String[] _methodParameterTypes10;
 	private String _methodName11;
 	private String[] _methodParameterTypes11;
+	private String _methodName12;
+	private String[] _methodParameterTypes12;
+	private String _methodName13;
+	private String[] _methodParameterTypes13;
+	private String _methodName14;
+	private String[] _methodParameterTypes14;
+	private String _methodName15;
+	private String[] _methodParameterTypes15;
 }

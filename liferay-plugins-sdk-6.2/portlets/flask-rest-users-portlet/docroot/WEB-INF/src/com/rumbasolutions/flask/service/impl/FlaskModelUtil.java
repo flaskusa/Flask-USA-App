@@ -1,6 +1,10 @@
 package com.rumbasolutions.flask.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -59,7 +63,7 @@ public class FlaskModelUtil {
 	 * @param serviceContext
 	 * @return
 	 */
-	public static FlaskAdmin getFlaskAdmin(User user, ServiceContext serviceContext) {
+	public static FlaskAdmin getFlaskUser(User user, ServiceContext serviceContext) {
 		
 		FlaskAdmin admin = new FlaskAdminImpl(); 
 		
@@ -195,5 +199,23 @@ public class FlaskModelUtil {
 			LOGGER.error("Error in getPersonalAddressId:" + e.getMessage());
 		}
 		return id;	
+	}
+	public static Calendar parseDate(String DOB){
+		Calendar cal = Calendar.getInstance();
+		Date dt =null;
+		String[] validFormats = {"MM-dd-yyyy", "yyyy-MM-dd", "MM/dd/yyyy" };
+		for(String format : validFormats ){
+				SimpleDateFormat sf  =new SimpleDateFormat(format, Locale.US);
+				try {
+					dt= sf.parse(DOB);
+					LOGGER.debug(dt);
+					LOGGER.debug(sf.format(dt));
+					cal.setTime(dt);				
+					return cal;
+				}catch (Exception e) {
+					
+				}
+		}	
+		return cal;
 	}
 }

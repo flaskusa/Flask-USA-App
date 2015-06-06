@@ -77,7 +77,7 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -90,7 +90,7 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -103,7 +103,7 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -119,7 +119,7 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long state,
 		long country, java.lang.String mobileNumber,
@@ -146,4 +146,46 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public long getUserIdForEmail(java.lang.String emailAddress,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskUser(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	public com.rumbasolutions.flask.model.FlaskAdmin updateLoggedInUser(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.Country getCountryByName(
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Region> getRegion(
+		long countryId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
 }

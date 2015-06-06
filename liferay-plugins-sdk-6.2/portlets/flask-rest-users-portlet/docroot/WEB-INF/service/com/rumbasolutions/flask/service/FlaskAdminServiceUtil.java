@@ -77,7 +77,7 @@ public class FlaskAdminServiceUtil {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -96,7 +96,7 @@ public class FlaskAdminServiceUtil {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -115,7 +115,7 @@ public class FlaskAdminServiceUtil {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -137,7 +137,7 @@ public class FlaskAdminServiceUtil {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long state,
 		long country, java.lang.String mobileNumber,
@@ -173,6 +173,59 @@ public class FlaskAdminServiceUtil {
 	public static long getUserIdForEmail(java.lang.String emailAddress,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService().getUserIdForEmail(emailAddress, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.FlaskAdmin addFlaskUser(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addFlaskUser(firstName, middleName, lastName, email,
+			screenName, password1, password2, DOB, isMale, streetName, aptNo,
+			areaCode, city, stateId, countryId, mobileNumber, userInterests,
+			serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.FlaskAdmin updateLoggedInUser(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .updateLoggedInUser(firstName, middleName, lastName, email,
+			screenName, password1, password2, DOB, isMale, streetName, aptNo,
+			areaCode, city, stateId, countryId, mobileNumber, userInterests,
+			serviceContext);
+	}
+
+	public static com.liferay.portal.model.Country getCountryByName(
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getCountryByName(name, serviceContext);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Region> getRegion(
+		long countryId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRegion(countryId, serviceContext);
 	}
 
 	public static void clearService() {

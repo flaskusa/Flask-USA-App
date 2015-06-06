@@ -98,7 +98,7 @@ public class FlaskAdminServiceSoap {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -125,7 +125,7 @@ public class FlaskAdminServiceSoap {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -152,7 +152,7 @@ public class FlaskAdminServiceSoap {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
@@ -182,7 +182,7 @@ public class FlaskAdminServiceSoap {
 		long userId, java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
 		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.util.Date DOB, boolean isMale,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long state,
 		long country, java.lang.String mobileNumber,
@@ -248,6 +248,93 @@ public class FlaskAdminServiceSoap {
 					serviceContext);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap addFlaskUser(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.addFlaskUser(firstName,
+					middleName, lastName, email, screenName, password1,
+					password2, DOB, isMale, streetName, aptNo, areaCode, city,
+					stateId, countryId, mobileNumber, userInterests,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap updateLoggedInUser(
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.updateLoggedInUser(firstName,
+					middleName, lastName, email, screenName, password1,
+					password2, DOB, isMale, streetName, aptNo, areaCode, city,
+					stateId, countryId, mobileNumber, userInterests,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.Country getCountryByName(
+		java.lang.String name,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Country returnValue = FlaskAdminServiceUtil.getCountryByName(name,
+					serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.RegionSoap[] getRegion(
+		long countryId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Region> returnValue = FlaskAdminServiceUtil.getRegion(countryId,
+					serviceContext);
+
+			return com.liferay.portal.model.RegionSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
