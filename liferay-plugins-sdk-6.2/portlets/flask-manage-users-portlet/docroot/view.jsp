@@ -49,14 +49,6 @@
        <input name="firstName" id="firstName" class="form-control" type="text">
      </div>
    </div>
- 
-   <div class="form-group">
-     <label class="control-label" for="middleName">Middle Name:</label>
-     <div class="controls">
-       <input name="middleName" id="middleName" class="form-control" type="text">
-     </div>
-   </div>
- 
    <div class="form-group">
      <label class="control-label" for="lastName">Last Name:</label>
      <div class="controls">
@@ -64,21 +56,35 @@
      </div>
    </div>
    
-  <div class="form-group">
-      <label class="control-label" for="gender">Gender:</label>
-      <div class="controls">
-        <input name="gender" type="radio" value="Male" checked>Male
-     <input name="gender" type="radio" value="Female">Female
-      </div>
-  </div>
+     <div class="">
+   <div class="form-group">
+     <label class="control-label" for="screenName">Screen Name:</label>
+     <div class="controls">
+       <input name="screenName" id="screenName" class="form-control" type="text">
+     </div>
+   </div>
+ 
+   <div class="form-group">
+     <label class="control-label" for="email">E-mail:</label>
+     <div class="controls">
+       <input name="email" id="email" class="form-control" type="text">
+     </div>
+   </div>
+ 
+   <div class="form-group">
+     <label class="control-label" for="password1">Password:</label>
+     <div class="controls">
+       <input name="password1" id="password1" class="form-control" type="password">
+     </div>
+   </div>
    
    <div class="form-group">
-  <label class="control-label" for="DOB">Date of Birth:</label>
-  <div class="controls">
-   <div id="DOB"></div>
-  </div>
-   </div>  
-  </div>
+     <label class="control-label" for="password2">Confirm Password:</label>
+     <div class="controls">
+       <input name="password2" id="password2" class="form-control" type="password">
+     </div>
+   </div> 
+   
   <div class="">
    <div class="form-group">
      <label class="control-label" for="streetName">Street:</label>
@@ -122,34 +128,21 @@
      </div>
    </div>  
   </div>
-  <div class="">
    <div class="form-group">
-     <label class="control-label" for="screenName">Screen Name:</label>
-     <div class="controls">
-       <input name="screenName" id="screenName" class="form-control" type="text">
-     </div>
-   </div>
- 
-   <div class="form-group">
-     <label class="control-label" for="email">E-mail:</label>
-     <div class="controls">
-       <input name="email" id="email" class="form-control" type="text">
-     </div>
-   </div>
- 
-   <div class="form-group">
-     <label class="control-label" for="password1">Password:</label>
-     <div class="controls">
-       <input name="password1" id="password1" class="form-control" type="password">
-     </div>
-   </div>
+      <label class="control-label" for="gender">Gender:</label>
+      <div class="controls">
+        <input name="gender" type="radio" value="Male" checked>Male
+     <input name="gender" type="radio" value="Female">Female
+      </div>
+  </div>
    
    <div class="form-group">
-     <label class="control-label" for="password2">Confirm Password:</label>
-     <div class="controls">
-       <input name="password2" id="password2" class="form-control" type="password">
-     </div>
+  <label class="control-label" for="DOB">Date of Birth:</label>
+  <div class="controls">
+   <div id="DOB"></div>
+  </div>
    </div>  
+  </div>
    
    <div class="form-group">
      <label class="control-label" for="mobileNumber">Mobile:</label>
@@ -195,9 +188,9 @@
          <li item-expanded='true' id="concerts">Concerts
              <ul>
                  <li  id="concerts-country">Country</li>
-                 <li id="concerts-pop">POP</li>
-                 <li id="concerts-rock">ROCK</li>
-                 <li id="concerts-rap">RAP</li>
+                 <li id="concerts-pop">Pop</li>
+                 <li id="concerts-rock">Rock</li>
+                 <li id="concerts-rap">Rap</li>
                  <li id="concerts-alternative">Alternative</li>
                  <li id="concerts-electronic">Electronic</li>
              </ul>
@@ -219,6 +212,7 @@
   <input class="btn btn-info clsSave" type="button" value="Save" onclick="fnSave()" />
   <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
   <input id="userId" type="hidden" value="0">
+  <input name="middleName" id="middleName" type="hidden">
 </form>
 
 <div id='Menu' style="display:none">
