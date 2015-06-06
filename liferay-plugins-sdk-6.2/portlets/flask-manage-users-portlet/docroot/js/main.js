@@ -264,7 +264,7 @@ function fnRenderGrid(tdata) {
 	}
 		
 	grid.jqxGrid({
-				width : '98%',
+				width : '100%',
 				source : dataAdapter,
 				theme : APP_CONFIG.JQX_THEME,
 				columnsheight : 40,
