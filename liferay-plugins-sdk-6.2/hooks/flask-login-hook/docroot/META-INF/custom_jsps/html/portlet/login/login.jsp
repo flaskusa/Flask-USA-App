@@ -133,7 +133,7 @@
 				}
 				%>
 				<div class="form-control username-field">
-		           <aui:input  autoFocus="<%= windowState.equals(LiferayWindowState.EXCLUSIVE) || windowState.equals(WindowState.MAXIMIZED) %>" cssClass="clearable" label="<%= loginLabel %>" name="login" showRequiredLabel="<%= false %>" type="text" class="happy1" placeholder="Username or Email" value="<%= login %>">
+		           <aui:input  autoFocus="<%= windowState.equals(LiferayWindowState.EXCLUSIVE) || windowState.equals(WindowState.MAXIMIZED) %>" cssClass="clearable" label="<%= loginLabel %>" name="login" showRequiredLabel="<%= false %>" type="text" placeholder="Username or Email">
 				   <aui:validator name="required" />
 				   </aui:input>
 		        </div>
