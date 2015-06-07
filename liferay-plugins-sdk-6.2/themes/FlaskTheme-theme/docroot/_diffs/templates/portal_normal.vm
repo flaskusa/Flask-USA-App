@@ -66,10 +66,8 @@ function fnSplashSlideUp(){
 
 $theme.include($body_top_include)
 
-
- #if ($is_signed_in)
-	 #dockbar()
- #else
+#dockbar()
+ #if (!$is_signed_in)
  <div class="splash fade-in">
   <img class="logoSize" src="$images_folder/flasklogo2.png" />
   <h1 class="splash-title">FLASK</h1>
