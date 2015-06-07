@@ -74,9 +74,9 @@
 			<c:if test="<%= userSetupComplete && Validator.isNotNull(themeDisplay.getURLMyAccount()) %>">
 
 				<%
-				String myAccountURL = themeDisplay.getURLMyAccount().toString();
-
-				myAccountURL = HttpUtil.setParameter(myAccountURL, "controlPanelCategory", PortletCategoryKeys.MY);
+				//String myAccountURL = themeDisplay.getURLMyAccount().toString();
+				String myAccountURL = themeDisplay.getURLPortal() +"/web/guest/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Fcreate_account";
+				//myAccountURL = HttpUtil.setParameter(myAccountURL, "controlPanelCategory", PortletCategoryKeys.MY);
 				String manageUserUrl = themeDisplay.getURLPortal() + "/web/flask/musers";
 				String manageEventUrl = themeDisplay.getURLPortal() + "/web/flask/mevents";
 				String manageVenueUrl = themeDisplay.getURLPortal() + "/web/flask/mvenues";
