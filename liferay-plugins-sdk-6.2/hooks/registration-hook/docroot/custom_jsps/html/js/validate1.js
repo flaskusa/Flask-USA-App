@@ -1,7 +1,7 @@
 
 function fnSave() {
 	console.log('insave');
-	console.log(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT);
+	console.log(SERVICE_ENDPOINTS.ADD_USER_ENDPOINT);
 	var params = {
 		firstName : $("#firstName").val(),
 		middleName : $("#middleName").val(),
@@ -23,7 +23,7 @@ function fnSave() {
 		userInterests : fnGetCheckBoxSelected()//fnGet
 	};
 
-	Liferay.Service(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT, params,
+	Liferay.Service(SERVICE_ENDPOINTS.ADD_USER_ENDPOINT, params,
 		function(obj) {
 			console.log(typeof obj);
 			if(typeof obj =='object')
@@ -66,7 +66,7 @@ function fnUpdate(uid) {
 		userInterests : fnGetCheckBoxSelected()
 	};
 
-	Liferay.Service(SERVICE_ENDPOINTS.UPDATE_FLASK_ADMIN_ENDPOINT, params,
+	Liferay.Service(SERVICE_ENDPOINTS.UPDATE_USER_ENDPOINT, params,
 			function(obj) {
 				console.log(obj);
 				console.log(params);
