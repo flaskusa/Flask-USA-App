@@ -181,7 +181,7 @@
  </div>
 </div>
  
-  <input class="btn btn-info clsSave" type="button" value="Save" onclick="fnSave()" onload="fnupdate(uid)" />
+  <input class="btn btn-info clsSave" type="button" value="Save" onclick="fnSave()" />
   <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
   <input id="userId" type="hidden" value="0">
 </form>

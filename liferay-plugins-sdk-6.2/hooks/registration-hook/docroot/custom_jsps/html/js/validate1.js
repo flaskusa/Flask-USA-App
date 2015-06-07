@@ -232,4 +232,7 @@ $(document).ready(function() {
 		{
 			fnFillRegionList(0,0);
 		}
+	$(".clsCancel").click(function(){
+		$(".sign-in").show();
+	});
 });
