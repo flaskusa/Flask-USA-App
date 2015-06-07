@@ -146,7 +146,7 @@
 
 				<span id="<portlet:namespace />passwordCapsLockSpan" style="display: none;"><liferay-ui:message key="caps-lock-is-on" /></span>
 				<aui:button-row>
-					<aui:button type="submit" value="sign-in" style="width:310px;margin:auto"/>
+					<aui:button type="submit" value="sign-in"/>
 				</aui:button-row>
 				<c:if test="<%= company.isAutoLogin() && !PropsValues.SESSION_DISABLED %>">
 					<span style="margin:auto">
