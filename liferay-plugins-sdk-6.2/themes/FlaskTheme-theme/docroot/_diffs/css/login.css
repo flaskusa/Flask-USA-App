@@ -34,6 +34,7 @@
   right: 0;
   bottom: 0;
   left: 0;
+  margin:0;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: top center;
@@ -122,13 +123,38 @@
   
   .loginpane {
     margin: 0 auto;
-    width: 350px;
+    width: 100%;
   }
+  
+  .sign-in-form .aui .btn {
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+	  /* display: block; */
+	  margin-top: 0px;
+	  width: 100%;
+	}
   
    .login-wrap {
     padding-top: 0;
     vertical-align: middle;
   }
+  .sign-in-form input[type="text"]{
+	width:90%;
+	padding-left:20px;
+}
+
+.sign-in-form input[type="password"]{
+	width:90%;
+	padding-left:20px;
+}
+
+.sign-in-form input[type="submit"]{
+	width:100%;
+	text-align:center;
+	margin: auto;	
+}
+  
 }
 @media only screen and (min-width: 30.063em) {
   /* 481px */
@@ -154,13 +180,16 @@
 	margin: 0px;
 }
 
-@media (max-width: 767px) and (max-width: 979px){
-	.sign-in-form .aui .btn {
+@media (max-width: 767px) and (max-width: 979px)
+{
+	.sign-in-form .aui .btn 
+	{
 	  -webkit-box-sizing: border-box;
 	  -moz-box-sizing: border-box;
 	  box-sizing: border-box;
 	  /* display: block; */
 	  margin-top: 5px;
+	  text-align:center;
 	  width: 310px;
 	}
 }
