@@ -181,6 +181,15 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		return _flaskAdminService.getUserIdForEmail(emailAddress, serviceContext);
 	}
 
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin getUserById(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskAdminService.getUserById(userId, serviceContext);
+	}
+
 	@Override
 	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskUser(
 		java.lang.String firstName, java.lang.String middleName,

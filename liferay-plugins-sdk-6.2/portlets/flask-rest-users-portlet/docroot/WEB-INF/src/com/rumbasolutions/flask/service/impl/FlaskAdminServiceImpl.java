@@ -331,9 +331,23 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		return userId;
 	}
 	
-	
-	
-	
+	/**
+	 *  Returns valid user id if user found else 0. -1 when there is unknown system exception
+	 */
+	@Override
+	public  FlaskAdmin getUserById(long userId, ServiceContext serviceContext)
+	{
+		FlaskAdmin flaskUser=null;
+		try{
+			User  user = UserLocalServiceUtil.getUser(userId);
+			flaskUser =FlaskModelUtil.getFlaskUser(user, serviceContext);
+		}catch(PortalException  ex){
+			LOGGER.error("Exception in getUserIdById" + ex.getMessage());
+		}catch(SystemException ex){
+			LOGGER.error("Exception in getUserIdById" + ex.getMessage());
+		}
+		return flaskUser;
+	}
 	
 	private User addUser(long roldId, long loggedInUser, String firstName, String middleName, 
 			String lastName, String screenName, String email,

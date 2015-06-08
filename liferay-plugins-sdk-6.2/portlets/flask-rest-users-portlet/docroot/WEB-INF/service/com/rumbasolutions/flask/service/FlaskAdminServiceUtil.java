@@ -181,6 +181,14 @@ public class FlaskAdminServiceUtil {
 		return getService().getUserIdForEmail(emailAddress, serviceContext);
 	}
 
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	public static com.rumbasolutions.flask.model.FlaskAdmin getUserById(
+		long userId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getUserById(userId, serviceContext);
+	}
+
 	public static com.rumbasolutions.flask.model.FlaskAdmin addFlaskUser(
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,

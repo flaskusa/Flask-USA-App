@@ -273,6 +273,25 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap getUserById(
+		long userId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.getUserById(userId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.FlaskAdminSoap addFlaskUser(
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,

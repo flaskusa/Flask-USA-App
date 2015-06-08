@@ -114,18 +114,13 @@ public class FlaskAdminServiceClpInvoker {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName43 = "addFlaskUser";
+		_methodName37 = "getUserById";
 
-		_methodParameterTypes43 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "boolean",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+		_methodParameterTypes37 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName44 = "updateLoggedInUser";
+		_methodName44 = "addFlaskUser";
 
 		_methodParameterTypes44 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
@@ -136,27 +131,38 @@ public class FlaskAdminServiceClpInvoker {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName45 = "getCountryByName";
+		_methodName45 = "updateLoggedInUser";
 
 		_methodParameterTypes45 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName46 = "getCountries";
+		_methodName46 = "getCountryByName";
 
 		_methodParameterTypes46 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName47 = "getCountries";
+
+		_methodParameterTypes47 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName47 = "getRegion";
+		_methodName48 = "getRegion";
 
-		_methodParameterTypes47 = new String[] {
+		_methodParameterTypes48 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName48 = "getUSARegions";
+		_methodName49 = "getUSARegions";
 
-		_methodParameterTypes48 = new String[] {
+		_methodParameterTypes49 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -287,28 +293,15 @@ public class FlaskAdminServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
-		if (_methodName43.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
-			return FlaskAdminServiceUtil.addFlaskUser((java.lang.String)arguments[0],
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
-				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(java.lang.String)arguments[7],
-				((Boolean)arguments[8]).booleanValue(),
-				(java.lang.String)arguments[9],
-				(java.lang.String)arguments[10],
-				(java.lang.String)arguments[11],
-				(java.lang.String)arguments[12],
-				((Long)arguments[13]).longValue(),
-				((Long)arguments[14]).longValue(),
-				(java.lang.String)arguments[15],
-				(java.lang.String)arguments[16],
-				(com.liferay.portal.service.ServiceContext)arguments[17]);
+		if (_methodName37.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
+			return FlaskAdminServiceUtil.getUserById(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName44.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
-			return FlaskAdminServiceUtil.updateLoggedInUser((java.lang.String)arguments[0],
+			return FlaskAdminServiceUtil.addFlaskUser((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
@@ -327,23 +320,42 @@ public class FlaskAdminServiceClpInvoker {
 
 		if (_methodName45.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes45, parameterTypes)) {
-			return FlaskAdminServiceUtil.getCountryByName((java.lang.String)arguments[0],
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return FlaskAdminServiceUtil.updateLoggedInUser((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
+				(java.lang.String)arguments[7],
+				((Boolean)arguments[8]).booleanValue(),
+				(java.lang.String)arguments[9],
+				(java.lang.String)arguments[10],
+				(java.lang.String)arguments[11],
+				(java.lang.String)arguments[12],
+				((Long)arguments[13]).longValue(),
+				((Long)arguments[14]).longValue(),
+				(java.lang.String)arguments[15],
+				(java.lang.String)arguments[16],
+				(com.liferay.portal.service.ServiceContext)arguments[17]);
 		}
 
 		if (_methodName46.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
-			return FlaskAdminServiceUtil.getCountries((com.liferay.portal.service.ServiceContext)arguments[0]);
+			return FlaskAdminServiceUtil.getCountryByName((java.lang.String)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName47.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes47, parameterTypes)) {
-			return FlaskAdminServiceUtil.getRegion(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return FlaskAdminServiceUtil.getCountries((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+			return FlaskAdminServiceUtil.getRegion(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
 			return FlaskAdminServiceUtil.getUSARegions((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
@@ -374,8 +386,8 @@ public class FlaskAdminServiceClpInvoker {
 	private String[] _methodParameterTypes35;
 	private String _methodName36;
 	private String[] _methodParameterTypes36;
-	private String _methodName43;
-	private String[] _methodParameterTypes43;
+	private String _methodName37;
+	private String[] _methodParameterTypes37;
 	private String _methodName44;
 	private String[] _methodParameterTypes44;
 	private String _methodName45;
@@ -386,4 +398,6 @@ public class FlaskAdminServiceClpInvoker {
 	private String[] _methodParameterTypes47;
 	private String _methodName48;
 	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
 }

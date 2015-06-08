@@ -152,6 +152,13 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 	public long getUserIdForEmail(java.lang.String emailAddress,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	/**
+	* Returns valid user id if user found else 0. -1 when there is unknown system exception
+	*/
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.rumbasolutions.flask.model.FlaskAdmin getUserById(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskUser(
 		java.lang.String firstName, java.lang.String middleName,
