@@ -4,14 +4,11 @@ var SERVICE_ENDPOINTS = {
 	UPDATE_FLASK_ADMIN_ENDPOINT	: "/flask-rest-users-portlet.flaskadmin/update-flask-admin",
 	DELETE_FLASK_ADMIN_ENDPOINT	: "/flask-rest-users-portlet.flaskadmin/delete-flask-admin",
 	TERMS_AND_CONDITION         : "http://www.rumbasolutions.com", 
-	
-	GET_COUNTRY_ENDPOINT		:  "/flask-rest-users-portlet.flaskadmin/get-country-by-name",
-	GET_REGION_ENDPOINT			:  "/flask-rest-users-portlet.flaskadmin/get-region",
-	ADD_USER_ENDPOINT			:  "/flask-rest-users-portlet.flaskadmin/add-flask-user",
-	UPDATE_USER_ENDPOINT		:  "/flask-rest-users-portlet.flaskadmin/update-logged-in-user",
-
-	
-	
+	GET_COUNTRY_ENDPOINT		: "/flask-rest-users-portlet.flaskadmin/get-country-by-name",
+	GET_REGION_ENDPOINT			: "/flask-rest-users-portlet.flaskadmin/get-region",
+	ADD_USER_ENDPOINT			: "/flask-rest-users-portlet.flaskadmin/add-flask-user",
+	UPDATE_USER_ENDPOINT		: "/flask-rest-users-portlet.flaskadmin/update-logged-in-user",
+	GET_FLASK_USER_ENDPOINT 	: "/api/jsonws/user/get-user-by-id", // -user-id
 	SERVICE_TIMEOUT 			: 30000	
 };
 
