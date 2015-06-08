@@ -48,12 +48,7 @@ function successHandler(data){
 	console.log("Successfully set new data" );
 }
 
-
 </script>
-
-
-
-
 
 <div id="action-msg" style="display:none">
 		Hide the message field
@@ -62,7 +57,7 @@ function successHandler(data){
 
 <div id="venueDataTable" class="table-condensed">
 	<div class="cssGridMenu">
-		<div class="cssAddUser"><div class="iconAddUser"></div></div>
+		<div class="cssAddUser"><div class="iconAddVenue"></div></div>
 		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
 		<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
 	</div>
