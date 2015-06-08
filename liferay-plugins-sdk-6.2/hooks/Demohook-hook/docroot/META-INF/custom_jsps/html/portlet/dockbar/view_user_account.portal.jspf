@@ -25,7 +25,7 @@
 		<%= HtmlUtil.escape(user.getFullName()) %>
 	</span>
 </liferay-util:buffer>
-
+<input type="hidden" value="<%=user.getUserId()%>" id="hdnUserId"/>
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
 		<aui:nav-item anchorCssClass="user-avatar-link" cssClass='<%= themeDisplay.isImpersonated() ? "user-avatar impersonating-user" : "user-avatar" %>' dropdown="<%= true %>" id="userAvatar" label="<%= userName %>">
