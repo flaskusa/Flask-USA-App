@@ -126,10 +126,7 @@ function fnShowForm(rowIndex) {
 	$("#city").val(GlobalJSON_Admin[rowIndex].city);
 	$("#mobileNumber").val(GlobalJSON_Admin[rowIndex].mobileNumber);
 	$("#countryId").val(GlobalJSON_Admin[rowIndex].countryId);
-	//Fill states here
 	fnFillRegionList(GlobalJSON_Admin[rowIndex].countryId,GlobalJSON_Admin[rowIndex].stateId);
-	//Set selected state here
-	console.log($("#stateId").val()+ " - "+GlobalJSON_Admin[rowIndex].stateId)
 	var date = new Date(parseInt(GlobalJSON_Admin[rowIndex].DOB))
 	$('#DOB').jqxDateTimeInput('setDate', date);
 	$("#streetName").val(GlobalJSON_Admin[rowIndex].streetName);
@@ -375,11 +372,11 @@ $(document).ready(function() {
 });
 
 $(document).ready(function () {
-    $('.clsSave').on('click', function () {
+    $('.cssSave').on('click', function () {
     	if($('#adminForm').jqxValidator('validate'))
     	{
     		console.log($("#userId").val());
-    		if($("#userId").val()>0){
+    		if(parseInt($("#userId").val())>0){
     			console.log("fnUpdate called");
     			fnUpdate();
     		}
@@ -433,38 +430,29 @@ $.wait = function(callback, seconds) {
 	console.log("finish>>" + callback);
 }
 
-$(document).ready(function() {
-	$.wait(function(){
-		$(".icon-folder-open").hide();
-	},1);
-});
-
 function fnGetCheckBoxSelected() {
-	var Items = $(".userInterests").jqxTree('getItems');
-
 	var ItemArray = new Array();
-	$.each(Items, function() {
-		if (this.checked) {
-			var tempid = "#" + this.id;
-			ItemArray.push($(tempid).attr("id"));
-		};
+	$(".userInterests").each(function(){
+		var Items = $(this).jqxTree('getItems');
+		$.each(Items, function() {
+			if (this.checked) {
+				var tempid = "#" + this.id;
+				ItemArray.push($(tempid).attr("id"));
+			};
+		});
 	});
-	
 	console.log(ItemArray.join("#"));
 	return ItemArray.join("#");
-	//return '{}';
 }
 
 function fnSetCheckBoxSelected(strCheckList) {
 	var tempArray = new Array();
 	tempArray = strCheckList.split("#");
 	var i;
-	console.log("tempArray length = " + tempArray.length)
 	for (i = 0; i < tempArray.length; i++) {
 		var tempObj = "#" + tempArray[i];
 		$(".userInterests").jqxTree('checkItem', $(tempObj)[0], true);
 	}
-	console.log("Working fine");
 }
 
 function fnFillCountryList() {
@@ -529,7 +517,7 @@ $(document).ready(function() {
 			$("#adminForm").show();
 		});
 		
-		$(".clsCancel").click(function(){
+		$(".cssCancel").click(function(){
 			$("#adminDataTable").show();
 			$("#adminForm").hide();
 		});
@@ -591,11 +579,13 @@ $(document).ready(function() {
 			$(".jqx-grid-cell-filter-row-custom:last").hide();
         
         });		
+		
+		$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
+		$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
+	    console.log("Cal Done");    
+		$(".jqx-checkbox").css("margin-top","6.5px");
+		$.wait(function(){
+			$(".icon-folder-open").hide();
+		},1);		
 });
 
-$(document).ready(function () {
-	$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
-	$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
-    console.log("Cal Done");    
-	$(".jqx-checkbox").css("margin-top","6.5px");
-});

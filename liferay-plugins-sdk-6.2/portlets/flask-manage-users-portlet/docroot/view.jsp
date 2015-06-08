@@ -209,8 +209,8 @@
  </div>
 </div>
  
-  <input class="btn btn-info clsSave" type="button" value="Save" onclick="fnSave()" />
-  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
+  <input class="btn btn-info cssSave" type="button" value="Save"/>
+  <input class="btn btn-primary cssCancel" type="button" value="Cancel" >
   <input id="userId" type="hidden" value="0">
   <input name="middleName" id="middleName" type="hidden">
 </form>
