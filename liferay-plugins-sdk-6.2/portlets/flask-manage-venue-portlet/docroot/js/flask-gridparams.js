@@ -145,13 +145,13 @@ function createTable(data, model, grid, menuDivId, actionColText, detailDivArr){
 						return '<i class="icon-wrench" style="margin:3px;"></i>'
 	}
     
-    var vanueColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'venueName', width: '20%' },
+    var vanueColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'venueName', width: '30%' },
     	 {
-    	     text: 'Description', datafield: 'venueDescription', width: '20%'
+    	     text: 'Description', datafield: 'venueDescription', width: '30%'
     	 },
-    	 { text: 'City', datafield: 'venueCity',  width: '30%'},
-    	 { text: 'Metro Area', datafield: 'metroArea', width: '20%'},
-    	 { text: 'Edit',  datafield: 'venueId', width: '10%', cellsalign: 'center', cellsrenderer: actionRenderer}];
+    	 { text: 'City', datafield: 'venueCity',  width: '20%'},
+    	 { text: 'Metro Area', datafield: 'metroArea', width: '15%'},
+    	 { text: 'Edit',  datafield: 'venueId', width: '5%', cellsalign: 'center', cellsrenderer: actionRenderer}];
     	
     
     
@@ -174,10 +174,12 @@ function createTable(data, model, grid, menuDivId, actionColText, detailDivArr){
 	var dataAdapter = new $.jqx.dataAdapter(GRID_PARAM.source(model, data));
     grid.jqxGrid(
             {
-                width: '90%',
-                height: '95%',
+                width: '100%',
                 source: dataAdapter,
-                theme:	'orange',
+                columnsheight : 40,
+				columnsmenuwidth : 40,
+				rowsheight : 34,
+                theme:	'custom',
                 rowdetails: true,
                 showrowdetailscolumn:false,
                 rowdetailstemplate: GRID_PARAM.rowDetailTemplate(rowDetailDivArr , 200),
