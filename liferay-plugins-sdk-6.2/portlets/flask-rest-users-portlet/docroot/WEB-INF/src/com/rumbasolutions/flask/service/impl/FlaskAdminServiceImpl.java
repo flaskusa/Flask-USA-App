@@ -77,7 +77,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	public List<FlaskAdmin> getFlaskAdmins(ServiceContext  serviceContext){
 		List<FlaskAdmin> adminList=null;
 		try{
-			adminList = getFlaskAdmins(FlaskModelUtil.FLASK_ADMIN, serviceContext);
+			adminList = getFlaskUsers(FlaskModelUtil.FLASK_ADMIN, serviceContext);
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
@@ -94,24 +94,50 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	public List<FlaskAdmin> getFlaskContentManagers(ServiceContext serviceContext){
 		List<FlaskAdmin> adminList=null;
 		try{
-			adminList = getFlaskAdmins(FlaskModelUtil.FLASK_CONTENT_ADMIN, serviceContext);
+			adminList = getFlaskUsers(FlaskModelUtil.FLASK_CONTENT_ADMIN, serviceContext);
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
 		return adminList;
 	}
+	
+	
+	/*
+	 * This method gets list of all users with the content manager role 
+	 *  
+	 *  Get list of users based on filter
+	 *  Possible filter values "All" , "Users", "Flask Admin", "Flask Content Manager"
+	 */
+	
+	@Override
+	public List<FlaskAdmin> getAllUsers(String userType,ServiceContext serviceContext){
+		List<FlaskAdmin> adminList=new ArrayList<FlaskAdmin>(100);;
+		try{
+			if(userType.toLowerCase().contentEquals(FlaskModelUtil.All_USERS)){
+				adminList.addAll(getFlaskUsers(FlaskModelUtil.FLASK_ADMIN, serviceContext));
+				adminList.addAll(getFlaskUsers(FlaskModelUtil.FLASK_CONTENT_ADMIN, serviceContext));
+				adminList.addAll(getFlaskUsers(FlaskModelUtil.FLASK_USER, serviceContext));
+			}
+		}catch(Exception ex){
+			LOGGER.error(ex);
+		}
+		return adminList;
+	}
+	
+	
 
 	/**
-	 * @param cmList
+	 * @param User List
 	 * @throws PortalException
 	 * @throws SystemException
 	 */
-	private List<FlaskAdmin> getFlaskAdmins(String adminType,ServiceContext serviceContext)
+	private List<FlaskAdmin> getFlaskUsers(String adminType,ServiceContext serviceContext)
 			throws PortalException, SystemException {
 		
 		List<FlaskAdmin> adminList= new ArrayList<FlaskAdmin>();
 		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), adminType );
 		int adminUsersCnt = UserLocalServiceUtil.getRoleUsersCount(role.getRoleId());
+		adminUsersCnt = adminUsersCnt < FlaskModelUtil.MAX_USER_LIMIT ? adminUsersCnt : FlaskModelUtil.MAX_USER_LIMIT;
 		List<User> users= UserLocalServiceUtil.getRoleUsers(role.getRoleId(), 0, adminUsersCnt);
 		for(User user : users){
 			adminList.add(FlaskModelUtil.getFlaskUser(user, serviceContext));
@@ -613,7 +639,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	}
 	
 	/*
-	 * This method adds flask admins
+	 * This method get details of country 
 	 * 
 	 * 
 	 */
@@ -623,6 +649,25 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	{ 
 		return  CountryUtil.fetchByName(name);
 	
+	}
+	/*
+	 * This get list of supported countries
+	 * 
+	 * 
+	 */
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public	List<Country> getCountries(ServiceContext serviceContext) throws SystemException, PortalException
+	{ 	
+		List<Country> countryList = new ArrayList<Country>();
+		for (String name : FlaskModelUtil.COUNTRY_LIST){
+			try{
+				countryList.add(CountryUtil.fetchByName(name));
+			}catch(Exception ex){
+				
+			}
+		}
+		return  countryList;
 	}
 	
 	/*
@@ -636,6 +681,19 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	{ 
 		
 		return RegionUtil.findByCountryId(countryId);
+	}
+	
+	/*
+	 * This method is accesible by guest users and returns all regions for specified country id
+	 * 
+	 * 
+	 */
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public	List<Region> getUSARegions(ServiceContext serviceContext) throws SystemException, PortalException
+	{ 
+		Country country = CountryUtil.fetchByName("united-states");
+		return RegionUtil.findByCountryId(country.getCountryId());
 	}
 	
 }

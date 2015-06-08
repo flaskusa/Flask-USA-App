@@ -73,6 +73,11 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskContentManagers(
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getAllUsers(
+		java.lang.String userType,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskAdmin(
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
@@ -184,8 +189,22 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Country> getCountries(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.model.Region> getRegion(
 		long countryId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.model.Region> getUSARegions(
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 }

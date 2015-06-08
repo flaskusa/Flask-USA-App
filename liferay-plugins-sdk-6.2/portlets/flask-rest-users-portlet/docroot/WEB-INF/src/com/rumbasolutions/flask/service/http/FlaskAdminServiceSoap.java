@@ -94,6 +94,23 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getAllUsers(
+		java.lang.String userType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> returnValue =
+				FlaskAdminServiceUtil.getAllUsers(userType, serviceContext);
+
+			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.FlaskAdminSoap addFlaskAdmin(
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
@@ -327,12 +344,42 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.CountrySoap[] getCountries(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Country> returnValue = FlaskAdminServiceUtil.getCountries(serviceContext);
+
+			return com.liferay.portal.model.CountrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.RegionSoap[] getRegion(
 		long countryId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portal.model.Region> returnValue = FlaskAdminServiceUtil.getRegion(countryId,
 					serviceContext);
+
+			return com.liferay.portal.model.RegionSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.RegionSoap[] getUSARegions(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.model.Region> returnValue = FlaskAdminServiceUtil.getUSARegions(serviceContext);
 
 			return com.liferay.portal.model.RegionSoap.toSoapModels(returnValue);
 		}

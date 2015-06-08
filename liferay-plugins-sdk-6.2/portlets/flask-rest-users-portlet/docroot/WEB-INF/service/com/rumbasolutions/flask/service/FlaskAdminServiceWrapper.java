@@ -69,6 +69,13 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 	}
 
 	@Override
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getAllUsers(
+		java.lang.String userType,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskAdminService.getAllUsers(userType, serviceContext);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskAdmin(
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
@@ -222,11 +229,27 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 	}
 
 	@Override
+	public java.util.List<com.liferay.portal.model.Country> getCountries(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _flaskAdminService.getCountries(serviceContext);
+	}
+
+	@Override
 	public java.util.List<com.liferay.portal.model.Region> getRegion(
 		long countryId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _flaskAdminService.getRegion(countryId, serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.liferay.portal.model.Region> getUSARegions(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _flaskAdminService.getUSARegions(serviceContext);
 	}
 
 	/**

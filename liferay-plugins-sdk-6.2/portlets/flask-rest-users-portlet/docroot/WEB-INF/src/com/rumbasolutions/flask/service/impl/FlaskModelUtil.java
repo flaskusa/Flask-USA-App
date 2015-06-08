@@ -34,6 +34,11 @@ public class FlaskModelUtil {
 	public static final String LIFERAY_ADMIN=  "Administrator";
 	public static final String FLASK_CONTENT_ADMIN=  "Flask Content Manager";
 	public static final String FLASK_USER=  "User";
+	public static final String All_USERS=  "all";
+	public static final int MAX_USER_LIMIT=  1000;
+	public static final String[] COUNTRY_LIST=  {"united-states","canada"};
+	
+	
 	public static final String USA_COUNTRY_NAME= "United States";
 	public static final String MOBILE_PHONE_TYPE= "mobile";
 	public static final String PERSONAL_ADDR_TYPE = "personal";
