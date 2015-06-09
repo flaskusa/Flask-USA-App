@@ -113,16 +113,16 @@ function successHandler(data){
   </div>
   
    <div class="form-group">
-    <label class="control-label" for="city">City:</label>
+    <label class="control-label" for="venueCity">City:</label>
     <div class="controls">
       <input name="venueCity" id="venueCity" class="form-control" type="text">
     </div>
   </div>  
   
   <div class="form-group">
-    <label class="control-label" for="city">Metro Area:</label>
+    <label class="control-label" for="venueMetroArea">Metro Area:</label>
     <div class="controls">
-      <input name="venueCity" id="venueCity" class="form-control" type="text">
+      <input name="venueMetroArea" id="venueMetroArea" class="form-control" type="text">
     </div>
   </div>  
   
