@@ -275,7 +275,7 @@ function fnRenderGrid(tdata) {
 				rowdetails : true,
 				showrowdetailscolumn : false,
 				rowdetailstemplate : {
-					rowdetails : "<div style='margin: 10px;'><ul style='margin-left: 10px; height: 10px;'><li>Personal</li><li>Address</li></ul><div class='information'></div><div class='summary'></div></div>",
+					rowdetails : "<div style='margin: 2px;'><ul style='margin-left: 10px; height: 10px;'><li>Personal</li><li>Address</li></ul><div class='information'></div><div class='summary'></div></div>",
 					rowdetailsheight : 200,
 					rowdetailshidden: true,
 				},
