@@ -73,7 +73,27 @@ public interface VenueService extends BaseService, InvokableService {
 		java.lang.String venueName, java.lang.String venueDescription,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String venueZipCode, java.lang.String venueCity,
-		long venueStateId, long venueCountryId,
+		java.lang.String venueMetroArea, long venueStateId,
+		long venueCountryId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.rumbasolutions.flask.model.Venue updateVenue(long venueId,
+		java.lang.String venueName, java.lang.String venueDescription,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String venueZipCode, java.lang.String venueCity,
+		java.lang.String venueMetroArea, long venueStateId,
+		long venueCountryId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteVenue(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	/**
+	* @param venueList comms seperated venueId list
+	* @param serviceContext
+	* @return
+	*/
+	public void deleteVenues(java.lang.String venueList,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void addVenueImage(long venueId, java.lang.String title,

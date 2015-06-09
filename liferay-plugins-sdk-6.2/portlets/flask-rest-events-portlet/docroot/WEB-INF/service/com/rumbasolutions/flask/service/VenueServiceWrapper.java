@@ -67,11 +67,42 @@ public class VenueServiceWrapper implements VenueService,
 		java.lang.String venueName, java.lang.String venueDescription,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String venueZipCode, java.lang.String venueCity,
-		long venueStateId, long venueCountryId,
+		java.lang.String venueMetroArea, long venueStateId,
+		long venueCountryId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.addVenue(venueName, venueDescription, addrLine1,
-			addrLine2, venueZipCode, venueCity, venueStateId, venueCountryId,
-			serviceContext);
+			addrLine2, venueZipCode, venueCity, venueMetroArea, venueStateId,
+			venueCountryId, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.Venue updateVenue(long venueId,
+		java.lang.String venueName, java.lang.String venueDescription,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String venueZipCode, java.lang.String venueCity,
+		java.lang.String venueMetroArea, long venueStateId,
+		long venueCountryId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.updateVenue(venueId, venueName, venueDescription,
+			addrLine1, addrLine2, venueZipCode, venueCity, venueMetroArea,
+			venueStateId, venueCountryId, serviceContext);
+	}
+
+	@Override
+	public void deleteVenue(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_venueService.deleteVenue(venueId, serviceContext);
+	}
+
+	/**
+	* @param venueList comms seperated venueId list
+	* @param serviceContext
+	* @return
+	*/
+	@Override
+	public void deleteVenues(java.lang.String venueList,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_venueService.deleteVenues(venueList, serviceContext);
 	}
 
 	@Override

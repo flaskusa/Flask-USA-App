@@ -81,15 +81,71 @@ public class VenueServiceSoap {
 		java.lang.String venueName, java.lang.String venueDescription,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String venueZipCode, java.lang.String venueCity,
-		long venueStateId, long venueCountryId,
+		java.lang.String venueMetroArea, long venueStateId,
+		long venueCountryId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.Venue returnValue = VenueServiceUtil.addVenue(venueName,
 					venueDescription, addrLine1, addrLine2, venueZipCode,
-					venueCity, venueStateId, venueCountryId, serviceContext);
+					venueCity, venueMetroArea, venueStateId, venueCountryId,
+					serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueSoap updateVenue(
+		long venueId, java.lang.String venueName,
+		java.lang.String venueDescription, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String venueZipCode,
+		java.lang.String venueCity, java.lang.String venueMetroArea,
+		long venueStateId, long venueCountryId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.Venue returnValue = VenueServiceUtil.updateVenue(venueId,
+					venueName, venueDescription, addrLine1, addrLine2,
+					venueZipCode, venueCity, venueMetroArea, venueStateId,
+					venueCountryId, serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteVenue(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.deleteVenue(venueId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	/**
+	* @param venueList comms seperated venueId list
+	* @param serviceContext
+	* @return
+	*/
+	public static void deleteVenues(java.lang.String venueList,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.deleteVenues(venueList, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

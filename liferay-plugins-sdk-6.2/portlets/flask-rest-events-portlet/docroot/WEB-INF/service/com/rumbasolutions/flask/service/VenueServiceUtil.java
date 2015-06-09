@@ -72,12 +72,41 @@ public class VenueServiceUtil {
 		java.lang.String venueName, java.lang.String venueDescription,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String venueZipCode, java.lang.String venueCity,
-		long venueStateId, long venueCountryId,
+		java.lang.String venueMetroArea, long venueStateId,
+		long venueCountryId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addVenue(venueName, venueDescription, addrLine1, addrLine2,
-			venueZipCode, venueCity, venueStateId, venueCountryId,
-			serviceContext);
+			venueZipCode, venueCity, venueMetroArea, venueStateId,
+			venueCountryId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.Venue updateVenue(
+		long venueId, java.lang.String venueName,
+		java.lang.String venueDescription, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String venueZipCode,
+		java.lang.String venueCity, java.lang.String venueMetroArea,
+		long venueStateId, long venueCountryId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateVenue(venueId, venueName, venueDescription,
+			addrLine1, addrLine2, venueZipCode, venueCity, venueMetroArea,
+			venueStateId, venueCountryId, serviceContext);
+	}
+
+	public static void deleteVenue(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteVenue(venueId, serviceContext);
+	}
+
+	/**
+	* @param venueList comms seperated venueId list
+	* @param serviceContext
+	* @return
+	*/
+	public static void deleteVenues(java.lang.String venueList,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteVenues(venueList, serviceContext);
 	}
 
 	public static void addVenueImage(long venueId, java.lang.String title,

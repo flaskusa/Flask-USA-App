@@ -43,12 +43,34 @@ public class VenueServiceClp implements VenueService {
 		_methodParameterTypes4 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"long", "long", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "long", "long",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName5 = "addVenueImage";
+		_methodName5 = "updateVenue";
 
 		_methodParameterTypes5 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName6 = "deleteVenue";
+
+		_methodParameterTypes6 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName7 = "deleteVenues";
+
+		_methodParameterTypes7 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName8 = "addVenueImage";
+
+		_methodParameterTypes8 = new String[] {
 				"long", "java.lang.String", "java.sql.Blob",
 				"com.liferay.portal.service.ServiceContext"
 			};
@@ -134,7 +156,8 @@ public class VenueServiceClp implements VenueService {
 		java.lang.String venueName, java.lang.String venueDescription,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String venueZipCode, java.lang.String venueCity,
-		long venueStateId, long venueCountryId,
+		java.lang.String venueMetroArea, long venueStateId,
+		long venueCountryId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -153,6 +176,8 @@ public class VenueServiceClp implements VenueService {
 					ClpSerializer.translateInput(venueZipCode),
 						
 					ClpSerializer.translateInput(venueCity),
+						
+					ClpSerializer.translateInput(venueMetroArea),
 						
 					venueStateId,
 						
@@ -177,12 +202,114 @@ public class VenueServiceClp implements VenueService {
 	}
 
 	@Override
+	public com.rumbasolutions.flask.model.Venue updateVenue(long venueId,
+		java.lang.String venueName, java.lang.String venueDescription,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String venueZipCode, java.lang.String venueCity,
+		java.lang.String venueMetroArea, long venueStateId,
+		long venueCountryId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5,
+					new Object[] {
+						venueId,
+						
+					ClpSerializer.translateInput(venueName),
+						
+					ClpSerializer.translateInput(venueDescription),
+						
+					ClpSerializer.translateInput(addrLine1),
+						
+					ClpSerializer.translateInput(addrLine2),
+						
+					ClpSerializer.translateInput(venueZipCode),
+						
+					ClpSerializer.translateInput(venueCity),
+						
+					ClpSerializer.translateInput(venueMetroArea),
+						
+					venueStateId,
+						
+					venueCountryId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.Venue)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void deleteVenue(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableService.invokeMethod(_methodName6,
+				_methodParameterTypes6,
+				new Object[] {
+					venueId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void deleteVenues(java.lang.String venueList,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableService.invokeMethod(_methodName7,
+				_methodParameterTypes7,
+				new Object[] {
+					ClpSerializer.translateInput(venueList),
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
 	public void addVenueImage(long venueId, java.lang.String title,
 		java.sql.Blob venueImageData,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName5,
-				_methodParameterTypes5,
+			_invokableService.invokeMethod(_methodName8,
+				_methodParameterTypes8,
 				new Object[] {
 					venueId,
 					
@@ -217,4 +344,10 @@ public class VenueServiceClp implements VenueService {
 	private String[] _methodParameterTypes4;
 	private String _methodName5;
 	private String[] _methodParameterTypes5;
+	private String _methodName6;
+	private String[] _methodParameterTypes6;
+	private String _methodName7;
+	private String[] _methodParameterTypes7;
+	private String _methodName8;
+	private String[] _methodParameterTypes8;
 }

@@ -19,6 +19,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -70,8 +71,8 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	
 	@Override
 	public Venue addVenue(String venueName, String venueDescription, String addrLine1, 
-								String addrLine2, String venueZipCode, String venueCity, 
-								long venueStateId, long venueCountryId, 
+								String addrLine2, String venueZipCode, String venueCity,
+								String venueMetroArea, long venueStateId, long venueCountryId, 
 								ServiceContext  serviceContext){
 		Venue venue=null;
 		try{
@@ -84,6 +85,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venue.setAddrLine2(addrLine2);
 			venue.setVenueZipCode(venueZipCode);
 			venue.setVenueCity(venueCity);
+			venue.setVenueMetroArea(venueMetroArea);
 			venue.setVenueStateId(venueStateId);
 			venue.setVenueCountryId(venueCountryId);
 			venue = VenueLocalServiceUtil.addVenue(venue);
@@ -95,20 +97,80 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	}
 	
 	@Override
+	public Venue updateVenue(long venueId, String venueName, String venueDescription, String addrLine1, 
+								String addrLine2, String venueZipCode, String venueCity,
+								String venueMetroArea, long venueStateId, long venueCountryId, 
+								ServiceContext  serviceContext){
+		Venue venue=null;
+		try{
+			
+			venue= VenueLocalServiceUtil.getVenue(venueId);
+
+			venue.setVenueName(venueName);
+			venue.setVenueDescription(venueDescription);
+			venue.setAddrLine1(addrLine1);
+			venue.setAddrLine2(addrLine2);
+			venue.setVenueZipCode(venueZipCode);
+			venue.setVenueCity(venueCity);
+			venue.setVenueMetroArea(venueMetroArea);
+			venue.setVenueStateId(venueStateId);
+			venue.setVenueCountryId(venueCountryId);
+			venue = VenueLocalServiceUtil.updateVenue(venue);
+			
+		}catch(Exception ex){
+			LOGGER.error("Exception in addVenue: " + ex.getMessage());
+		}
+		return venue;
+	}
+	
+	@Override
+	public void deleteVenue(long venueId, ServiceContext  serviceContext){
+		
+			try {
+				VenueLocalServiceUtil.deleteVenue(venueId);
+			}
+			catch (PortalException e) {
+				
+				LOGGER.error("Exception in addVenue: " + e.getMessage());
+			}
+			catch (SystemException e) {
+				LOGGER.error("Exception in addVenue: " + e.getMessage());
+			}
+	}
+	
+	/**
+	 * 
+	 * @param venueList comms seperated venueId list
+	 * @param serviceContext
+	 * @return
+	 */
+	@Override
+	public void deleteVenues(String venueList,
+								ServiceContext  serviceContext){
+	
+		String[] venueArr = venueList.split(",");
+		for (String venueId :venueArr){
+				try{
+					VenueLocalServiceUtil.deleteVenue(Integer.valueOf(venueId));
+				}catch(Exception ex){
+					LOGGER.error("Error in deleting venue:" + venueId );
+				}
+		}
+	}
+
+		
+	@Override
 	public void addVenueImage(long venueId, String title, Blob venueImageData ,ServiceContext  serviceContext){
 		try{
 			VenueImage venueImage = VenueImageLocalServiceUtil.createVenueImage(CounterLocalServiceUtil.increment());
 			VenueImageLocalServiceUtil.addVenueImage(venueImage);
 			venueImage.setTitle(title);
 			venueImage.setVenueImage(venueImageData);
-			
 			VenueImageLocalServiceUtil.addVenueImage(venueImage);
-				
 			
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
-		
 	}
 
 	
