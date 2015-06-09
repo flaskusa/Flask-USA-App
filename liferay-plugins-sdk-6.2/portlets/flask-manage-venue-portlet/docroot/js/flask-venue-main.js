@@ -17,7 +17,7 @@ function addClickHandlers(){
 	
 	$(".clsCancel").click(function(){
 		$("#venueDataTable").show();
-		$("#venueForm").hide();
+		venueForm.hide();
 	});
 	
 	$(".cssDelUser").click(function() {
