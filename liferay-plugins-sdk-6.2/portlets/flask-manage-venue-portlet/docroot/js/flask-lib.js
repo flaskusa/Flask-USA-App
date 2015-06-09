@@ -11,7 +11,7 @@ _flaskLib.getFormData = function(formId, model, customGetData){
 	try {
 			$.each(model, function(index, column){
 					var ele = $('#'+ formId + ' #'+column.name);
-					if(ele !=null && typeof ele != undefined ){
+					if(ele.length == 1 ){
 						var val = $.trim(ele.val());
 						if(column.type == 'long' && val !=''){
 							val = Number(val)
@@ -34,7 +34,7 @@ _flaskLib.loadDataToForm = function(formId, model, data,  customSetData){
 	try {
 		$.each(model, function(index, column){
 				var ele = $('#'+ formId + ' #'+column.name);
-				if( typeof ele != undefined && typeof ele[0].tagName != undefined){
+				if( ele.length == 1 && typeof ele[0].tagName != undefined){
 					if(ele[0].tagName.toLowerCase() =='input'){
 						var tempVal =eval("data." + column.name);
 						tempVal = tempVal == undefined ? "" : tempVal;
