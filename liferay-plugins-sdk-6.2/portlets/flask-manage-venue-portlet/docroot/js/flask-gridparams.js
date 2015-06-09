@@ -110,10 +110,12 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 				+ datarecord.venueZipCode + "</td></tr>";
 		var City = "<tr><td class='filledWidth1'><b>City:</b></td><td> "
 				+ datarecord.venueCity + "</td></tr>";
+		var Metro = "<tr><td class='filledWidth1'><b>Metro Area:</b></td><td> "
+			+ datarecord.venueMetroArea + "</td></tr>";	
 		var State = "<tr><td class='filledWidth1'><b>State:</b></td><td> "
 				+ datarecord.venueStateName + "</td></tr>";
 		var Country = "<tr><td class='filledWidth1'><b>Country:</b></td><td> "
-				+ datarecord.venuecountryName + "</td></tr>";		
+				+ datarecord.venueCountryName + "</td></tr>";		
 		$(leftcolumn).append("<table>");
 		
 		$(leftcolumn).append(venue_Name);
@@ -127,6 +129,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		
 		
 		$(rightcolumn).append(City);
+		$(rightcolumn).append(Metro);
 		$(rightcolumn).append(State);
 		$(rightcolumn).append(Country);
 		
@@ -178,7 +181,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
     	     text: 'Description', datafield: 'venueDescription', width: '30%'
     	 },
     	 { text: 'City', datafield: 'venueCity',  width: '20%'},
-    	 { text: 'Metro Area', datafield: 'metroArea', width: '15%'},
+    	 { text: 'Metro Area', datafield: 'venueMetroArea', width: '15%'},
     	 { text: 'Edit',  datafield: 'venueId', width: '5%', cellsalign: 'center', cellsrenderer: actionRenderer}];
     	
     
@@ -209,6 +212,10 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 				columnsmenuwidth : 40,
 				rowsheight : 34,
                 theme:	'custom',
+                autoheight: true,
+             // Pageing config
+                pageable : true,
+                pagermode : 'default',
                 rowdetails: true,
                 showrowdetailscolumn:false,
                 rowdetailstemplate: GRID_PARAM.rowDetailTemplate(rowDetailDivArr , 200),
