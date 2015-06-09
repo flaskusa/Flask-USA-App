@@ -273,10 +273,10 @@ $(document).ready(function() {
 		if(parseInt($("#hdnUserId").val()) > 0)	{
 			fnShowForm(parseInt($("#hdnUserId").val()));
 		}	
-		$(".cssCancel").click(function(){
-			  var url = "/web/guest/home";
+		 $(".cssCancel").click(function(){
+			  var url = "/web/guest/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
 			  $(location).attr('href',url);
-		 });
+			 });
 });
 
 
