@@ -25,7 +25,9 @@
 		<footer-portlet-javascript>/js/flask-gridparams.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-venuemodel.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-venue-main.js</footer-portlet-javascript>
-		
+		<footer-portlet-javascript>/js/jqxdropdownlist.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxgrid.pager.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
 		<css-class-wrapper>flask-manage-venue-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>
