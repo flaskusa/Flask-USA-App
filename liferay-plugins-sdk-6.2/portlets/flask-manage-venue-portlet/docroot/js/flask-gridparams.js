@@ -6,6 +6,7 @@ var rowMenuDivId;
 var rowMenuColumnText;
 var rowDetailDivArr;
 var _dataModel
+var _contextMenuHandler;
 GRID_PARAM.source = function(model, data){
 	return {
 			localdata: data,
@@ -17,7 +18,14 @@ GRID_PARAM.updateGrid = function(data){
 	var dataAdapter =  new $.jqx.dataAdapter(GRID_PARAM.source(_dataModel, data));
 	gridObj.jqxGrid({ source: dataAdapter });
 }
-
+GRID_PARAM.onContextMenuItemClick =function (event) 
+{
+	var args = event.args;
+	var menuItemtext= $.trim($(args).text());
+	var rowindex = gridObj.jqxGrid('getselectedrowindex');
+	var rowData = gridObj.jqxGrid('getrowdata', rowindex);
+	_contextMenuHandler(menuItemtext, rowData);
+}
 GRID_PARAM.onRowClick =function (event) 
 {
 	var grid = gridObj;
@@ -51,28 +59,7 @@ GRID_PARAM.onRowClick =function (event)
 	}
 }
 
-GRID_PARAM.contextMenuClick =  function (event){
-		$("#spinningSquaresG").show();
-		var args = event.args;
-		var rowindex = $("#grid").jqxGrid('getselectedrowindex');
 
-		if ($.trim($(args).text()) == "Edit") {
-			fnShowForm(rowindex);
-			$("#spinningSquaresG").hide();
-			return false;
-		}
-
-		if ($.trim($(args).text()) == "Delete") {
-			var a = window.confirm("Are you sure ?");
-			if (a) {
-				fnDelete(GlobalJSON_Admin[rowindex].userId);
-				var rowid = $("#grid").jqxGrid('getrowid', rowindex);
-				$("#grid").jqxGrid('deleterow', rowid);
-			}
-			$("#spinningSquaresG").hide();
-			return false;			
-		}
-};
 
 
 GRID_PARAM.rowDetailTemplate = function(tabs, height)  
@@ -116,7 +103,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 /*
  *  This method creates grid
  */
-function createTable(data, model, grid, menuDivId, actionColText, detailDivArr){
+function createTable(data, model, grid, menuDivId, actionColText,contextMenuHandler, detailDivArr){
 	
 		if(typeof gridId == undefined){
 			throw 'a valid grid div object must be provided';
@@ -157,7 +144,8 @@ function createTable(data, model, grid, menuDivId, actionColText, detailDivArr){
     
     grid.on('cellclick', GRID_PARAM.onRowClick);
     //set menu item click
-	$('#' + rowMenuDivId).on('itemclick',GRID_PARAM.contextMenuClick);
+    _contextMenuHandler = contextMenuHandler
+	$('#' + rowMenuDivId).on('itemclick',GRID_PARAM.onContextMenuItemClick);
 	
 	// create context menu
 	var contextMenu = $("#" + menuDivId).jqxMenu({

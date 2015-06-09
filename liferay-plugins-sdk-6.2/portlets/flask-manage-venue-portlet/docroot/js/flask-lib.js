@@ -11,18 +11,10 @@ _flaskLib.getFormData = function(formId, model, customGetData){
 	try {
 			$.each(model, function(index, column){
 					var ele = $('#'+ formId + ' #'+column.name);
-					if(ele !=null){
-						var val = ele.val();
-						if(val == null || val == undefined){
-							if(column.type =='string'){
-								val = "";
-							}else if(column.type =='long'){
-								val = 0;
-							}else if(column.type =='date'){
-								val = "";
-							}else{
-								val = "";
-							}
+					if(ele !=null && typeof ele != undefined ){
+						var val = $.trim(ele.val());
+						if(column.type == 'long' && val !=''){
+							val = Number(val)
 						}
 						formData[column.name] = val;
 					}
@@ -38,28 +30,40 @@ _flaskLib.getFormData = function(formId, model, customGetData){
 	return formData;
 }
 
-_flaskLib.loadDataToForm = function(formId, data, model, customSetData){
+_flaskLib.loadDataToForm = function(formId, model, data,  customSetData){
 	try {
-		if (customSetData) {
-			customSetData(formId, data, model);
+		$.each(model, function(index, column){
+				var ele = $('#'+ formId + ' #'+column.name);
+				if( typeof ele != undefined && typeof ele[0].tagName != undefined){
+					if(ele[0].tagName.toLowerCase() =='input'){
+						var tempVal =eval("data." + column.name);
+						tempVal = tempVal == undefined ? "" : tempVal;
+						ele.val(tempVal)
+					}
+				}
+		});
+		if (typeof customSetData == undefined) {
+			customSetData(formId, model, data)
 		}
 	} catch (e) {
 		console.log("Error in setting form data. Excception: " + e.message);
 	}
 }
 
-_flaskLib.loadCountries = function(elementId){
+_flaskLib.loadCountries = function(elementId,selectedId){
 	var request = new Request();
 	var selectList = $('#' + elementId);
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_COUNTRIES , params, 
+	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_COUNTRIES , {}, 
 					function (data){
+							selectList.empty();
 							$.each(data, function(key, country) {
 								selectList.append($("<option/>", {
 							        value: country.countryId,
 							        text: country.nameCurrentValue
 							    }));
 							});
+							selectList.val(selectedId);
 					} ,
 					function (data){
 						console.log("Error in getting countries: " + data );
@@ -67,19 +71,24 @@ _flaskLib.loadCountries = function(elementId){
 	
 }
 
-_flaskLib.loadRegions = function(elementId, countryId){
+/**
+ * 
+ */
+_flaskLib.loadRegions = function(elementId, countryId, selectedId){
 	var request = new Request();
 	var selectList = $('#' + elementId);
 	var flaskRequest = new Request();
-	var param = {'countryId': countryId};
-	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_REGION , params, 
+	var param = {countryId: countryId};
+	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_REGION , param, 
 					function (data){
+							selectList.empty();
 							$.each(data, function(key, country) {
 								selectList.append($("<option/>", {
 							        value: country.countryId,
 							        text: country.name
 							    }));
 							});
+							selectList.val(selectedId);
 					} ,
 					function (data){
 						console.log("Error in getting regions: " + data );
@@ -88,19 +97,21 @@ _flaskLib.loadRegions = function(elementId, countryId){
 	
 }
 
-_flaskLib.loadUSARegions = function(elementId){
+_flaskLib.loadUSARegions = function(elementId, selectedId){
 	var param = {};
 	var request = new Request();
 	var selectList = $('#' + elementId);
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_USA_REGION , params, 
+	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_USA_REGION , param, 
 					function (data){
+							selectList.empty();
 							$.each(data, function(key, region) {
 								selectList.append($("<option/>", {
 							        value: region.regionId,
 							        text: region.name
 							    }));
 							});
+							selectList.val(selectedId);
 					} ,
 					function (data){
 						console.log("Error in getting USA regions: " + data );
@@ -108,20 +119,20 @@ _flaskLib.loadUSARegions = function(elementId){
 	
 }
 
-function showErrorMessage(elementId, msg){
+_flaskLib.showErrorMessage =   function (elementId, msg){
 	var ele = $('#'+ elementId);
 	ele.text(msg);
 	ele.removeClass().addClass('alert alert-error');
 	ele.show();
 }
-function showSuccessMessage(elementId, msg){
+_flaskLib.showSuccessMessage = function (elementId, msg){
 	var ele = $('#'+ elementId);
 	ele.text(msg);
 	ele.removeClass().addClass('alert alert-success');
 	ele.show();
 }
 
-function hideMessage(elementId){
+_flaskLib.hideMessage = function (elementId){
 	var ele = $('#'+ elementId);
 	ele.text('');
 	ele.hide();

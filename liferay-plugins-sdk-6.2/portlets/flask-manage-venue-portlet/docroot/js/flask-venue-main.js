@@ -1,7 +1,10 @@
+var venueForm;
 function addClickHandlers(){
+	venueForm = $("#venueForm");
 	$(".cssAddUser").click(function(){
+		venueForm.trigger('reset')
 		$("#venueDataTable").hide();
-		$("#venueForm").show();
+		venueForm.show();
 		_flaskLib.loadCountries('venueCountryId');
 		_flaskLib.loadUSARegions('venueStateId');
 		
@@ -14,7 +17,7 @@ function addClickHandlers(){
 	
 	$(".clsCancel").click(function(){
 		$("#venueDataTable").show();
-		$("#venueForm").hide();
+		venueForm.hide();
 	});
 	
 	$(".cssDelUser").click(function() {
@@ -29,39 +32,87 @@ function addClickHandlers(){
 		});
     });		
 	
+	$("#venueCountryId").change(function() {
+		_flaskLib.loadRegions('venueStateId', $("#venueCountryId").val());
+    });		
 }
 
+function contextMenuHandler(menuItemText, rowData){
+	var args = event.args;
+	if (menuItemText  == "Edit") {
+		editVenue(rowData);
+		return false;
+	}else if(menuItemText == "Delete"){
+		var a = window.confirm("Are you sure ?");
+		if (a) {
+			deleteVenue(rowData.venueId);
+		}
+		return false;			
 
-function fnDelete(id) {
-	alert("fnDelete" + id)
-	//show spinner
-	 //call rest 
-	//on success remove from row update message
-	//on failure just update message
-}
+	}
+};
 
-function fnEdit(rowData) {
-	//show form
-	 //hide table 
-	alert("fnDelete" + rowData)
+function deleteVenue(venueId) {
+	var param = {'venueId': venueId};
+	var request = new Request();
+	var flaskRequest = new Request();
+	flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUE, param, 
+					function (data){
+							_flaskLib.showSuccessMessage('action-msg', MESSAGE.DEL_SUCCESS);
+					} ,
+					function (data){
+							_flaskLib.showErrorMessage('action-msg', MESSAGE.DEL_ERR);
+					});
 	
-		// make ajax calls for any new data
+}
+
+function deleteMultipleVenues(venueList) {
+	var param = {venueList: venueList};
+	var request = new Request();
+	var flaskRequest = new Request();
+	flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUES, param, 
+					function (data){
+							_flaskLib.showSuccessMessage('action-msg', MESSAGE.DEL_SUCCESS);
+					} ,
+					function (data){
+							_flaskLib.showErrorMessage('action-msg', MESSAGE.DEL_ERR);
+					});
+	
+}
+
+function editVenue(rowData) {
+	_flaskLib.loadDataToForm("venueForm",  _venueModel.DATA_MODEL.VENUE, rowData, function(){
+		
+	});
+	$("#venueDataTable").hide();
+	venueForm.show();
+	_flaskLib.loadCountries('venueCountryId', rowData.venueCountryId);
+	_flaskLib.loadUSARegions('venueStateId', rowData.venueStateId);
 	
 }
 
 function saveVenue(){
-	params = _flaskLib.getFormData('venueForm',DATA_MODEL.VENUE,function(formId, model, formData){
-		return formData;
-	});
-	params.countryId = 19;
-	params.stateId = 19023;
+	
+	params = _flaskLib.getFormData('venueForm',_venueModel.DATA_MODEL.VENUE,
+				function(formId, model, formData){
+	//						delete formData.venueStateName;
+	//						delete formData.venueCountryName;
+							return formData;
+				});
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(SERVICE_ENDPOINTS.ADD_VENUE, params, 
+	var url = ""
+		if(params.venueId == 0){
+			url = _venueModel.SERVICE_ENDPOINTS.ADD_VENUE;
+		}else{
+			url =_venueModel.SERVICE_ENDPOINTS.UPDATE_VENUE
+		}
+	
+	flaskRequest.sendGETRequest(url, params, 
 				function (data){
-					showSuccessMessage('action-msg', MESSAGE.SAVE);
+					_flaskLib.showSuccessMessage('action-msg', MESSAGE.SAVE);
 				} ,
 				function (data){
-					showErrorMessage('action-msg', MESSAGE.ERROR);
+					_flaskLib.showErrorMessage('action-msg', MESSAGE.ERROR);
 				});
 
 }

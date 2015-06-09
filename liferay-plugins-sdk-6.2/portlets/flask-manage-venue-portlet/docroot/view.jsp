@@ -27,13 +27,13 @@ function initialize(portletId, portlet){
 	console.log(portletId);
 	$("#venueForm").hide();
 	
-	createTable({},DATA_MODEL.VENUE, $('#grid'), "actionMenu", "Edit",["Venue", "Images"]);
+	createTable({},_venueModel.DATA_MODEL.VENUE, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Venue", "Images"]);
 
 	var flaskRequest = new Request();
 	params = {};
 	if(portletId == "flaskmanagevenue_WAR_flaskmanagevenueportlet") {
 		addClickHandlers();
-		flaskRequest.sendGETRequest(SERVICE_ENDPOINTS.GET_VENUE, params, 
+		flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE, params, 
 				successHandler , failureHandler);
 	}
 }
@@ -114,6 +114,13 @@ function successHandler(data){
   
    <div class="form-group">
     <label class="control-label" for="city">City:</label>
+    <div class="controls">
+      <input name="venueCity" id="venueCity" class="form-control" type="text">
+    </div>
+  </div>  
+  
+  <div class="form-group">
+    <label class="control-label" for="city">Metro Area:</label>
     <div class="controls">
       <input name="venueCity" id="venueCity" class="form-control" type="text">
     </div>
