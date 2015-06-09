@@ -87,13 +87,54 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		var venueDiv = tabsdiv.find('.venue');
 		var imagesDiv = tabsdiv.find('.images');
 		
-		var container1 = $('<div class="row-fluid">The is venue div</div>');
+		var container1 = $('<div class="row-fluid"></div>');
 		
-		var container2 = $('<div class="row-fluid">The is image div</div>');
+		var container2 = $('<div class="row-fluid"></div>');
 		venueDiv.append(container1);
+		
+		var leftcolumn = $('<div class="span5"></div>');
+		var rightcolumn = $('<div class="span5"></div>');
+		
+		container1.append(leftcolumn);
+		container1.append(rightcolumn);
+	
+		var venue_Name = "<tr><td class='filledWidth'> <b>venue Name:</b></td><td> "
+			+ datarecord.venueName + "</td></tr>";
+	    var venue_Description = "<tr><td class='filledWidth'><b>venue Description:</b></td><td> "
+			+ datarecord.venueDescription + "</td></tr>";
+	    var addrLine_1 = "<tr><td class='filledWidth'><b>AddrLine 1:</b></td><td> "
+			+ datarecord.addrLine1 + "</td></tr>";
+		var addrLine_2 = "<tr><td class='filledWidth'> <b>addrLine 2:</b></td><td>"
+				+ datarecord.addrLine2 + "</td></tr>";
+		var venue_ZipCode = "<tr><td class='filledWidth'><b>ZipCode:</b></td><td>"
+				+ datarecord.venueZipCode + "</td></tr>";
+		var City = "<tr><td class='filledWidth1'><b>City:</b></td><td> "
+				+ datarecord.venueCity + "</td></tr>";
+		var State = "<tr><td class='filledWidth1'><b>State:</b></td><td> "
+				+ datarecord.venueStateName + "</td></tr>";
+		var Country = "<tr><td class='filledWidth1'><b>Country:</b></td><td> "
+				+ datarecord.venuecountryName + "</td></tr>";		
+		$(leftcolumn).append("<table>");
+		
+		$(leftcolumn).append(venue_Name);
+		$(leftcolumn).append(venue_Description);
+		$(leftcolumn).append(addrLine_1);
+		$(leftcolumn).append(addrLine_2);
+		$(leftcolumn).append(venue_ZipCode);
+		$(leftcolumn).append("</table>");
+		
+		$(rightcolumn).append("<table>");
+		
+		
+		$(rightcolumn).append(City);
+		$(rightcolumn).append(State);
+		$(rightcolumn).append(Country);
+		
+		$(rightcolumn).append("</table>");		
 		imagesDiv.append(container2);
 		
-    	$(tabsdiv).jqxTabs({
+		
+		$(tabsdiv).jqxTabs({
 			width : '90%',
 			height : 180
 		});
