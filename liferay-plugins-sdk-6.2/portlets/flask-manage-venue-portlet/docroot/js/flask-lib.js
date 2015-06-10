@@ -20,7 +20,7 @@ _flaskLib.getFormData = function(formId, model, customGetData){
 					}
 			});
 			
-			if (typeof customGetData == undefined) {
+			if (typeof customGetData != undefined) {
 				formData = customGetData(formId, model, formData)
 			}
 			
@@ -42,7 +42,7 @@ _flaskLib.loadDataToForm = function(formId, model, data,  customSetData){
 					}
 				}
 		});
-		if (typeof customSetData == undefined) {
+		if (typeof customSetData != undefined) {
 			customSetData(formId, model, data)
 		}
 	} catch (e) {

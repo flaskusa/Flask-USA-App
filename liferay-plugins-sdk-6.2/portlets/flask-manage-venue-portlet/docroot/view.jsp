@@ -24,42 +24,26 @@ var bCreated;
 Liferay.Portlet.ready(initialize);
 
 function initialize(portletId, portlet){
-	console.log(portletId);
-	$("#venueForm").hide();
-	
-	createTable({},_venueModel.DATA_MODEL.VENUE, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Venue", "Images"]);
-
-	var flaskRequest = new Request();
-	params = {};
 	if(portletId == "flaskmanagevenue_WAR_flaskmanagevenueportlet") {
+		$("#venueForm").hide();
+		createTable({},_venueModel.DATA_MODEL.VENUE, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Venue", "Images"]);
+		loadData();
 		addClickHandlers();
-		flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE, params, 
-				successHandler , failureHandler);
 	}
-}
-
-function failureHandler(error){
-	showErrorMessage("There was an error in getting data.");
-	console.log("Error in getting data: " + error);
-}
-
-function successHandler(data){
-	GRID_PARAM.updateGrid(data);
-	console.log("Successfully set new data" );
 }
 
 </script>
 
 <div id="action-msg" style="display:none">
-		Hide the message field
 </div>
 
 
 <div id="venueDataTable" class="table-condensed">
 	<div class="cssGridMenu">
-		<div class="cssAddUser"><div class="iconAddVenue"></div></div>
+		<div class="cssAddUser"><div class="iconAddUser"></div></div>
 		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
 		<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
+		<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
 	</div>
 
 	<div id="GridContainer" class="device-mobile-tablet"> 

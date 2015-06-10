@@ -30,7 +30,8 @@ _venueModel.DATA_MODEL= {
 	};
 
 
-var MESSAGE= {
+_venueModel.MESSAGES= {
+		GET_ERROR: "There was an error in getting data",
 		ADD: "Venue successfully added",
 		SAVE: "Venue successfully saved",
 		ERROR: "There was an error in saving venue",

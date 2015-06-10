@@ -18,6 +18,39 @@ GRID_PARAM.updateGrid = function(data){
 	var dataAdapter =  new $.jqx.dataAdapter(GRID_PARAM.source(_dataModel, data));
 	gridObj.jqxGrid({ source: dataAdapter });
 }
+GRID_PARAM.toggleSelectionMode= function(){
+	if(gridObj.jqxGrid('selectionmode') == 'checkbox'){
+		gridObj.jqxGrid({selectionmode:'singlerow'});
+	}else{
+		gridObj.jqxGrid({selectionmode:'checkbox'});
+	}
+	
+}
+GRID_PARAM.toggleSearchBoxes = function(){
+	gridObj.jqxGrid({
+            showfilterrow: !(gridObj.jqxGrid('showfilterrow')),
+            filterable: true,
+            filterrowheight: 34
+		});
+		$(".jqx-grid-cell-filter-row-custom:last").hide();
+}
+
+GRID_PARAM.getCheckedIdList= function(idDataAttribute){
+    var rows = gridObj.jqxGrid('selectedrowindexes');
+    var dataList="";
+    $.each(rows, function(i, rowIndex){
+    	var rowData = gridObj.jqxGrid('getrowdata', rowIndex);
+    	dataList = dataList +"," + eval('rowData.'+ idDataAttribute);
+    });
+    return dataList;
+}
+
+
+GRID_PARAM.getDeleteList = function(idDataAttribute){
+	
+}
+
+
 GRID_PARAM.onContextMenuItemClick =function (event) 
 {
 	var args = event.args;
