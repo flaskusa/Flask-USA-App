@@ -262,7 +262,7 @@ $(document).ready(function() {
 			fnFillRegionList(0,0);
 		}
 
-		$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
+		$("#DOB").jqxDateTimeInput({ width: '257px', height: '35px', formatString: "MM-dd-yyyy" });
 		$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
 	    console.log("Cal Done");    
 		$(".jqx-checkbox").css("margin-top","6.5px");
@@ -358,14 +358,14 @@ $(document).ready(function() {
     <div class="form-group">
      <label class="control-label" for="stateId">State:</label>
      <div class="controls">
-       <select id="stateId" name="stateId" class="form-control"></select>
+       <select id="stateId" name="stateId" class="form-control-select"></select>
      </div>
    </div>  
      
    <div class="form-group">
      <label class="control-label" for="countryId">Country:</label>
      <div class="controls">
-       <select id="countryId" name="countryId" class="form-control" ></select>
+       <select id="countryId" name="countryId" class="form-control-select" ></select>
      </div>
    </div>  
   </div>
