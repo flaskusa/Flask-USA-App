@@ -195,11 +195,18 @@ upgrade and maintenance. */
 	margin-bottom: 10px;
 }
 
+.form-control-select
+{
+  margin: 0 auto;
+  max-width: 350px;
+  position: relative;
+}
+
 .aui select {
 	border-radius: 5px;
 	font-size: 14px;
 	height: 40px;
-	width: 41.3%;
+	width: 340px;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -223,6 +230,14 @@ div#adminDataTable {
 	margin-bottom: 10px;
 }
 
+
+@media only screen and (min-width:768px) and (max-width: 979px)
+{
+	.aui select 
+	{
+		width: 43%;
+	}
+}
 @media ( max-width : 767px) {
 	.aui select {
 		height: 40px;
@@ -230,7 +245,6 @@ div#adminDataTable {
 		padding-left: 10px;
 		margin-bottom: 10px;
 	}
-	;
 	.aui input[type="date"] {
 		height: 30px;
 		width: 98%;
