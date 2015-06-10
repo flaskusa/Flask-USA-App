@@ -117,14 +117,14 @@
     <div class="form-group">
      <label class="control-label" for="stateId">State:</label>
      <div class="controls">
-       <select id="stateId" name="stateId" class="form-control"></select>
+       <select id="stateId" name="stateId" class="form-control-select"></select>
      </div>
    </div>  
      
    <div class="form-group">
      <label class="control-label" for="countryId">Country:</label>
      <div class="controls">
-       <select id="countryId" name="countryId" class="form-control" ></select>
+       <select id="countryId" name="countryId" class="form-control-select" ></select>
      </div>
    </div>  
   </div>
