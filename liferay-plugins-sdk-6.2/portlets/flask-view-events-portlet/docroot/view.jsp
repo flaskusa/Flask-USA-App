@@ -27,14 +27,14 @@
       <tr>
         <td><div class="imgdiv"><img src="<%=request.getContextPath()%>/img/lion.gif"  ></div>
         <div class="lbldiv">
-        <label id="teamlbl" class="control-label">Detroit Liions vs. Chicago Bears</label>
-        <label id="timelbl" class="control-label" >1:00 p.m. at Ford Field</label></div> </td>
+        <label class="control-label-color">Detroit Liions vs. Chicago Bears</label>
+        <label class="control-label-nocolor" >1:00 p.m. at Ford Field</label></div> </td>
       </tr>
       <tr>
        	<td><div class="imgdiv"><img src="<%=request.getContextPath()%>/img/d.gif" ></div>
 	        <div class="lbldiv">
-		        <label id="teamlbl1" class="control-label" >Detroit Tigers vs. Milwaukee Brewers</label>
-		        <label id="timelbl1" class="control-label" >7:05 p.m. at Comerica Park</label>
+		        <label  class="control-label-color" >Detroit Tigers vs. Milwaukee Brewers</label>
+		        <label  class="control-label-nocolor" >7:05 p.m. at Comerica Park</label>
 	        </div> 
       	</td>
       </tr>
@@ -45,22 +45,22 @@
       </tr>
 		<tr>
 	         <td class="gap">
-				<input id="txt1" type="text" placeholder="TYPE:">
+				<input  type="text" placeholder="TYPE:">
 	         </td>
       	</tr>
 		<tr>
          	<td >
-         	<input id="txt2"   type="text" placeholder="DATE:">
+         	<input type="text" placeholder="DATE:">
          	</td>
       	</tr>
 		<tr>
         	 <td >
-        	 <input id="txt3"  type="text" placeholder="CITY:">
+        	 <input  type="text" placeholder="CITY:">
         	 </td>
      	 </tr>
 		<tr>
         	 <td >
-        	 <input id="txt4"  type="text" placeholder="KEY WORDS:">
+        	 <input type="text" placeholder="KEY WORDS:">
         	 </td>
      	</tr>
     </tbody>
