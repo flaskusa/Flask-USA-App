@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.0.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_0_0.dtd">
+<service-builder package-path="com.fl.uploadfile">
+	<author>Manisha</author>
+	<namespace>TK</namespace>
+
+	<entity name="UploadFile" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="fileUploadId" type="long" primary="true" />
+		<column name="fileEntryId" type="long"/>
+		<column name="title" type="String" />
+		<column name="description" type="String" />
+		<column name="size" type="long" />
+		<order by="asc">
+			<order-column name="title" />
+		</order>
+
+	</entity>
+</service-builder>

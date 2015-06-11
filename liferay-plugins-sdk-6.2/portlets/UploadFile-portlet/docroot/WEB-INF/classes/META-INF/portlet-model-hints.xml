@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.fl.uploadfile.model.UploadFile">
+		<field name="fileUploadId" type="long" />
+		<field name="fileEntryId" type="long" />
+		<field name="title" type="String" />
+		<field name="description" type="String" />
+		<field name="size" type="long" />
+	</model>
+</model-hints>
