@@ -13,25 +13,21 @@
  * details.
  */
 %>
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
-<portlet:defineObjects />
 <body class='default'>
 
 <form id="EventForm">
   <div class="form-group">
     <div class="controls">
 	     <label class="control-label" for="eventName">Event Name:</label>
-	    <input name="eventName" id="eventName" class="form-control" type="text" ></div> 
-	    <div id='Active'>Active</div>
+	    <input name="eventName" id="eventName" class="form-control" type="text" > <div id='Active'>Active</div>
+	</div> 
+	   
     </div>
-  </div>
 
     <div class="form-group">
-    <label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
+    	<label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
 	   			<div id="eventDate"></div>
 	  	</div>
-
    </div> 
 
    <div class="form-group">
@@ -39,8 +35,7 @@
     <div class="controls">
       <div id="startTime"></div>
     </div>
-
-     </div>
+  </div>
 
 	<div class="form-group">
 	<label  id="EndTime" class="control-label" for="endTime">End Time:</label>
@@ -68,32 +63,30 @@
 	        <li>Post Event</li>
 	    </ul>
 	    <div>
-	     <div class="flipster" style="overflow: hidden;">
-       <input class="btn btn-info floatPosition" type="button" value="Add Content"/>
-    	<ul style="margin-top:50px;">
-		     <li>
-		      <img src="<%=request.getContextPath()%>/images/Sport-1.jpeg">
-		     </li>
-		     <li>
-		      <img src="<%=request.getContextPath()%>/images/Sport-2.jpeg">
-		     </li>
-		     <li>
-		      <img src="<%=request.getContextPath()%>/images/Sport-3.jpeg">
-		     </li>
-		     <li>
-		      <img src="<%=request.getContextPath()%>/images/Sport-4.jpeg">
-		     </li>
-		     <li>
-		      <img src="<%=request.getContextPath()%>/images/Sport-7.jpeg">
-		     </li>
-		     <li>
-		      <img src="<%=request.getContextPath()%>/images/Sport-5.jpeg">
-		     </li>
-		     <li>
-		      <img src="<%=request.getContextPath()%>/images/Sport-6.jpeg">
-		     </li>
-		    </ul>
-		 </div>
+	<div style="height: 45px;">
+		<input class="btn btn-info floatPosition" type="button" value="Add Content" />
+	</div>
+	<div>    
+	<div id="wowslider-container1">
+	<div class="ws_images"><ul>
+		<li><img src="<%=request.getContextPath()%>/images/seagull.jpg" alt="seagull" title="seagull" id="wows1_0"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/solarpower.jpg" alt="solarpower" title="solarpower" id="wows1_1"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/attic.jpg" alt="attic" title="attic" id="wows1_2"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/aurora.jpg" alt="aurora" title="aurora" id="wows1_3"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/barbecue.jpg" alt="barbecue" title="barbecue" id="wows1_4"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/blackswan.jpg" alt="blackswan" title="blackswan" id="wows1_5"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/chess.jpg" alt="chess" title="chess" id="wows1_6"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/diveevo.jpg" alt="diveevo" title="diveevo" id="wows1_7"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/fire.jpg" alt="fire" title="fire" id="wows1_8"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/keyboard.jpg" alt="keyboard" title="keyboard" id="wows1_9"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/locomotive.jpg" alt="locomotive" title="locomotive" id="wows1_10"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/person.jpg" alt="carousel jquery" title="person" id="wows1_11"/></li>
+		<li><img src="<%=request.getContextPath()%>/images/rose.jpg" alt="rose" title="rose" id="wows1_12"/></li>
+	</ul>
+	</div>
+	<div class="ws_shadow"></div>
+	</div>
+	</div>
 	</div>
 	    <div>
 	    <input class="btn btn-info floatPosition" type="button" value="Add Content"/>
@@ -105,4 +98,7 @@
 	    <input class="btn btn-info floatPosition" type="button" value="Add Content"/>
 	    </div>
 	</div>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/slide.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath()%>/js/script.js"></script> 
 </body>
+</html>
