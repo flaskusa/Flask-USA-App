@@ -16,12 +16,13 @@ package com.fl.uploadfile.service.messaging;
 
 import com.fl.uploadfile.service.ClpSerializer;
 import com.fl.uploadfile.service.UploadFileLocalServiceUtil;
+import com.fl.uploadfile.service.UploadFileServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 
 /**
- * @author Manisha
+ * @author Rumba Solutions
  */
 public class ClpMessageListener extends BaseMessageListener {
 	public static String getServletContextName() {
@@ -36,6 +37,8 @@ public class ClpMessageListener extends BaseMessageListener {
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
 			UploadFileLocalServiceUtil.clearService();
+
+			UploadFileServiceUtil.clearService();
 		}
 	}
 }

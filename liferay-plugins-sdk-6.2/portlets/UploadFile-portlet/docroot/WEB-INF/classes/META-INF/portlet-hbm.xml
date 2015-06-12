@@ -3,7 +3,7 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.fl.uploadfile.model.UploadFile" />
-	<class name="com.fl.uploadfile.model.impl.UploadFileImpl" table="TK_UploadFile">
+	<class name="com.fl.uploadfile.model.impl.UploadFileImpl" table="flaskupload_UploadFile">
 		<cache usage="read-write" />
 		<id name="fileUploadId" type="long">
 			<generator class="assigned" />

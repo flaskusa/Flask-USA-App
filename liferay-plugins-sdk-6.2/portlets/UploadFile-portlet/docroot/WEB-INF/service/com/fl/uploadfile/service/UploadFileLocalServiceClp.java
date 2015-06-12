@@ -17,7 +17,7 @@ package com.fl.uploadfile.service;
 import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * @author Manisha
+ * @author Rumba Solutions
  * @generated
  */
 public class UploadFileLocalServiceClp implements UploadFileLocalService {

@@ -20,9 +20,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This class is used by SOAP remote services.
+ * This class is used by SOAP remote services, specifically {@link com.fl.uploadfile.service.http.UploadFileServiceSoap}.
  *
- * @author Manisha
+ * @author Rumba Solutions
+ * @see com.fl.uploadfile.service.http.UploadFileServiceSoap
  * @generated
  */
 public class UploadFileSoap implements Serializable {

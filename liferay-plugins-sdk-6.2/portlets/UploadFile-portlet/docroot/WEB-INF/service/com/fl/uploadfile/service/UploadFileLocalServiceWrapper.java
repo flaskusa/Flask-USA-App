@@ -19,7 +19,7 @@ import com.liferay.portal.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link UploadFileLocalService}.
  *
- * @author Manisha
+ * @author Rumba Solutions
  * @see UploadFileLocalService
  * @generated
  */

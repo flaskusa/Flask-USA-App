@@ -56,7 +56,7 @@ import java.util.Set;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Manisha
+ * @author Rumba Solutions
  * @see UploadFilePersistence
  * @see UploadFileUtil
  * @generated

@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * @author Manisha
+ * @author Rumba Solutions
  * @generated
  */
 public abstract class UploadFileActionableDynamicQuery

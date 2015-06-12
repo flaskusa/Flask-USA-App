@@ -25,7 +25,7 @@ import java.util.Map;
  * This class is a wrapper for {@link UploadFile}.
  * </p>
  *
- * @author Manisha
+ * @author Rumba Solutions
  * @see UploadFile
  * @generated
  */

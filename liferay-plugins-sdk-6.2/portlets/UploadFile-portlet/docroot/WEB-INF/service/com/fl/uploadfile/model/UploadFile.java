@@ -17,9 +17,9 @@ package com.fl.uploadfile.model;
 import com.liferay.portal.model.PersistedModel;
 
 /**
- * The extended model interface for the UploadFile service. Represents a row in the &quot;TK_UploadFile&quot; database table, with each column mapped to a property of this class.
+ * The extended model interface for the UploadFile service. Represents a row in the &quot;flaskupload_UploadFile&quot; database table, with each column mapped to a property of this class.
  *
- * @author Manisha
+ * @author Rumba Solutions
  * @see UploadFileModel
  * @see com.fl.uploadfile.model.impl.UploadFileImpl
  * @see com.fl.uploadfile.model.impl.UploadFileModelImpl

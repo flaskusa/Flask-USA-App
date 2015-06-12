@@ -25,7 +25,7 @@ import com.liferay.portal.service.persistence.BasePersistence;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author Manisha
+ * @author Rumba Solutions
  * @see UploadFilePersistenceImpl
  * @see UploadFileUtil
  * @generated

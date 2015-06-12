@@ -28,7 +28,7 @@ import java.io.ObjectOutput;
 /**
  * The cache model class for representing UploadFile in entity cache.
  *
- * @author Manisha
+ * @author Rumba Solutions
  * @see UploadFile
  * @generated
  */

@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Manisha
+ * @author Rumba Solutions
  */
 public class UploadFileClp extends BaseModelImpl<UploadFile>
 	implements UploadFile {

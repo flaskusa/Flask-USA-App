@@ -5,3 +5,11 @@ create table TK_UploadFile (
 	description VARCHAR(75) null,
 	size_ LONG
 );
+
+create table flaskupload_UploadFile (
+	fileUploadId LONG not null primary key,
+	fileEntryId LONG,
+	title VARCHAR(75) null,
+	description VARCHAR(75) null,
+	size_ LONG
+);

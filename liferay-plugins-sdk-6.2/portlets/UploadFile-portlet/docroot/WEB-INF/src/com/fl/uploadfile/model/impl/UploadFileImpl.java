@@ -21,7 +21,7 @@ package com.fl.uploadfile.model.impl;
  * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.fl.uploadfile.model.UploadFile} interface.
  * </p>
  *
- * @author Manisha
+ * @author Rumba
  */
 public class UploadFileImpl extends UploadFileBaseImpl {
 	/*

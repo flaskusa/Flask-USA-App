@@ -22,7 +22,7 @@
 		</attributes>
 	</mapped-superclass>
 	<entity class="com.fl.uploadfile.model.impl.UploadFileImpl" name="UploadFile">
-		<table name="TK_UploadFile" />
+		<table name="flaskupload_UploadFile" />
 		<attributes />
 	</entity>
 </entity-mappings>

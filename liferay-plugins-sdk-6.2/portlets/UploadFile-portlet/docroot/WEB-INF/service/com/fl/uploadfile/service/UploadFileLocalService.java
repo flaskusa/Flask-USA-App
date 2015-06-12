@@ -30,7 +30,7 @@ import com.liferay.portal.service.PersistedModelLocalService;
  * credentials because this service can only be accessed from within the same
  * VM.
  *
- * @author Manisha
+ * @author Rumba Solutions
  * @see UploadFileLocalServiceUtil
  * @see com.fl.uploadfile.service.base.UploadFileLocalServiceBaseImpl
  * @see com.fl.uploadfile.service.impl.UploadFileLocalServiceImpl
