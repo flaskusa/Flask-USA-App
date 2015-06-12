@@ -24,10 +24,6 @@ label#StartTime,label#EndTime
 	  margin-top: 10px;
 }
 
-label#EventDate
-{
-	margin-top: -20px;
-}
 
 div#startTime,div#endTime
 {	
