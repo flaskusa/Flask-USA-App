@@ -150,7 +150,7 @@ upgrade and maintenance. */
   border-radius: 0;
   font-size: 14px;
   height: 35px;
-  width: 100%;
+  width: 40%;
   padding: 3px;
   margin-bottom: 10px;
   text-shadow: none;
@@ -195,11 +195,18 @@ upgrade and maintenance. */
 	margin-bottom: 10px;
 }
 
+.form-control-select
+{
+  margin: 0 auto;
+  max-width: 350px;
+  position: relative;
+}
+
 .aui select {
 	border-radius: 5px;
 	font-size: 14px;
 	height: 40px;
-	width: 41.3%;
+	width: 340px;
 	padding-left: 10px;
 	margin-bottom: 10px;
 }
@@ -223,6 +230,14 @@ div#adminDataTable {
 	margin-bottom: 10px;
 }
 
+
+@media only screen and (min-width:768px) and (max-width: 979px)
+{
+	.aui select 
+	{
+		width: 43%;
+	}
+}
 @media ( max-width : 767px) {
 	.aui select {
 		height: 40px;
@@ -230,7 +245,6 @@ div#adminDataTable {
 		padding-left: 10px;
 		margin-bottom: 10px;
 	}
-	;
 	.aui input[type="date"] {
 		height: 30px;
 		width: 98%;
@@ -333,6 +347,45 @@ div#adminDataTable {
 @-moz-keyframes spinoff { 0% {	-moz-transform: rotate(0deg);}100%{-moz-transform:rotate(-360deg);}}
 @-webkit-keyframes spin { 0% {	-webkit-transform: rotate(0deg);}100%{-webkit-transform:rotate(360deg);}}
 @-webkit-keyframes spinoff { 0% {	-webkit-transform: rotate(0deg);}100%{-webkit-transform:rotate(-360deg);}}
+
+/* Add Venue Icon */ 
+.iconAddVenue {
+	height: 32px;
+	width: 32px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	background-image: url(../images/Flask-Icons/addVenueWhite.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20px 20px;
+}
+
+.iconAddVenue:hover {
+	height: 32px;
+	width: 32px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	background-image: url(../images/Flask-Icons/addVenueOrange.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20px 20px;
+}
+
+.iconAddVenue:active {
+	height: 32px;
+	width: 32px;
+	-webkit-transition: all 0.3s;
+	-moz-transition: all 0.3s;
+	transition: all 0.3s;
+	background-image: url(../images/Flask-Icons/addVenueOrange.png);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 20px 20px;
+}
+
+
 /*AddUser button*/
 .iconAddUser {
 	height: 32px;
@@ -601,9 +654,18 @@ div#content {
 /* Dockbar Ends*/
 
 /* Drop Down Account Controls Starts*/
-.aui .nav-collapse .dropdown-menu a {
+.aui .nav-collapse .dropdown-menu a 
+{
 	color: #000000;
+	padding: 9px 25px;
 }
+
+.aui .nav-collapse .dropdown-menu 
+{
+  width: 200px;
+  margin: 0 0px;
+}
+
 
 span.nav-item-label {
 	color: #000000;
@@ -621,6 +683,7 @@ span.nav-item-label {
 	border: 1px solid transparent;
 }
 
+
 .aui .dockbar-split .dockbar .navbar-inner .nav li.dropdown.open>.dropdown-toggle
 	{
 	background-color: #F7F7F7;
@@ -630,6 +693,11 @@ span.nav-item-label {
  {
   color: #000000;
  }
+
+.aui .dockbar-split .dockbar .navbar-inner .nav-account-controls 
+{
+  right: 3.4em;
+}
 
 /* Drop Down Account Controls Ends*/
 
