@@ -3,7 +3,7 @@ $(document).ready(function() {
 	$("#eventDate").jqxDateTimeInput({width: '260px', height: '35px',formatString: "MM-dd-yyyy" });
 	$("#Active").jqxCheckBox({ width: 120, height: 25 });
 	//create jqxtabs.
-	$('#jqxtabs').jqxTabs({width: '100%',height: 250});
+	$('#jqxtabs').jqxTabs({width: '100%',height: 350});
 	$("#startTime").jqxDateTimeInput({ formatString: 'hh:mm tt', showCalendarButton: false});
 	$("#endTime").jqxDateTimeInput({ formatString: 'hh:mm tt', showCalendarButton: false});
 	$('#jqxtabs').bind('selected', function (event) {
@@ -12,10 +12,6 @@ $(document).ready(function() {
 	});
 	
 	fnFillCountryList();
-	
-	 $(".flipster").flipster({
-		   enableNav: true
-	 });
 });
 
 function fnFillCountryList() {
