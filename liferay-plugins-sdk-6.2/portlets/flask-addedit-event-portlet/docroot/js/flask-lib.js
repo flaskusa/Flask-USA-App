@@ -1,9 +1,10 @@
-var SERVICE_ENDPOINTS = {
+var _flaskLib = {};
+
+_flaskLib.SERVICE_ENDPOINTS = {
 		API_PREFIX					:"/api/jsonws",
 		GET_COUNTRIES 				: "/flask-rest-users-portlet.flaskadmin/get-countries",
 		GET_REGION 					: "/flask-rest-users-portlet.flaskadmin/get-region",
-		GET_USA_REGION 				: "/flask-rest-users-portlet.flaskadmin/get-usa-regions",
-	SERVICE_TIMEOUT 			: 30000	
+		GET_USA_REGION 				: "/flask-rest-users-portlet.flaskadmin/get-usa-regions"
 };
 
 _flaskLib.getFormData = function(formId, model, customGetData){
