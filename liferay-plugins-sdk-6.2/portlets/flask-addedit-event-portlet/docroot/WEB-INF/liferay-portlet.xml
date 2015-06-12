@@ -7,12 +7,9 @@
 		<icon>/icon.png</icon>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<header-portlet-css>/css/jqx.base.css</header-portlet-css>
-		
-		<header-portlet-css>/css/flipsternavtabs.css</header-portlet-css>
-  		<header-portlet-css>/css/jquery.flipster.css</header-portlet-css>
+		<header-portlet-css>/css/style.css</header-portlet-css>
 		
 		<footer-portlet-javascript>/js/jquery-2.1.4.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxmenu.js</footer-portlet-javascript>
@@ -28,8 +25,6 @@
 		<footer-portlet-javascript>/js/jqxcheckbox.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdatetimeinput.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxtooltip.js</footer-portlet-javascript>
-		
-		<footer-portlet-javascript>/js/jquery.flipster.js</footer-portlet-javascript>
 		
 		<footer-portlet-javascript>/js/jqxcalendar.js</footer-portlet-javascript>
 		<css-class-wrapper>flask-addedit-event-portlet</css-class-wrapper>
