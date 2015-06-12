@@ -92,7 +92,7 @@ Request.prototype.sendGETRequest = function(url, params, responseHandler){
         url:  url,
         data: params,
         cache:false,
-        timeout:SERVICE_ENDPOINTS.SERVICE_TIMEOUT,
+        timeout:_flaskLib.SERVICE_TIMEOUT,
         success: function(data){
 			resObj.setResponseStatus(STATUS_CODE.SUCCESS);
 			resObj.setResponseJson(data);
