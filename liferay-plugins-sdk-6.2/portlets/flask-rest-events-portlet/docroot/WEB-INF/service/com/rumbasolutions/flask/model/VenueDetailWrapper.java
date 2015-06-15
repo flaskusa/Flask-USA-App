@@ -58,21 +58,22 @@ public class VenueDetailWrapper implements VenueDetail,
 		attributes.put("venueId", getVenueId());
 		attributes.put("infoTypeId", getInfoTypeId());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
-		attributes.put("venueDetailInfoName", getVenueDetailInfoName());
-		attributes.put("venueDetailInfoDesc", getVenueDetailInfoDesc());
-		attributes.put("venueDetailInfoComment", getVenueDetailInfoComment());
-		attributes.put("venueDetailAddressLine1", getVenueDetailAddressLine1());
-		attributes.put("venueDetailAddressLine2", getVenueDetailAddressLine2());
-		attributes.put("venueDetailCity", getVenueDetailCity());
-		attributes.put("venueDetailState", getVenueDetailState());
-		attributes.put("venueDetailCountry", getVenueDetailCountry());
-		attributes.put("venueDetailLatitude", getVenueDetailLatitude());
-		attributes.put("venueDetailLongitude", getVenueDetailLongitude());
-		attributes.put("venueDetailPhone", getVenueDetailPhone());
-		attributes.put("venueDetailWebsite", getVenueDetailWebsite());
-		attributes.put("venueDetailCost", getVenueDetailCost());
-		attributes.put("venueDetailhoursOfOperation",
-			getVenueDetailhoursOfOperation());
+		attributes.put("infoTitle", getInfoTitle());
+		attributes.put("infoDesc", getInfoDesc());
+		attributes.put("addrLine1", getAddrLine1());
+		attributes.put("addrLine2", getAddrLine2());
+		attributes.put("city", getCity());
+		attributes.put("zipCode", getZipCode());
+		attributes.put("stateId", getStateId());
+		attributes.put("stateName", getStateName());
+		attributes.put("countryId", getCountryId());
+		attributes.put("countryName", getCountryName());
+		attributes.put("latitude", getLatitude());
+		attributes.put("longitude", getLongitude());
+		attributes.put("phone", getPhone());
+		attributes.put("website", getWebsite());
+		attributes.put("cost", getCost());
+		attributes.put("hoursOfOperation", getHoursOfOperation());
 
 		return attributes;
 	}
@@ -127,96 +128,100 @@ public class VenueDetailWrapper implements VenueDetail,
 			setInfoTypeCategoryId(infoTypeCategoryId);
 		}
 
-		String venueDetailInfoName = (String)attributes.get(
-				"venueDetailInfoName");
+		String infoTitle = (String)attributes.get("infoTitle");
 
-		if (venueDetailInfoName != null) {
-			setVenueDetailInfoName(venueDetailInfoName);
+		if (infoTitle != null) {
+			setInfoTitle(infoTitle);
 		}
 
-		String venueDetailInfoDesc = (String)attributes.get(
-				"venueDetailInfoDesc");
+		String infoDesc = (String)attributes.get("infoDesc");
 
-		if (venueDetailInfoDesc != null) {
-			setVenueDetailInfoDesc(venueDetailInfoDesc);
+		if (infoDesc != null) {
+			setInfoDesc(infoDesc);
 		}
 
-		String venueDetailInfoComment = (String)attributes.get(
-				"venueDetailInfoComment");
+		String addrLine1 = (String)attributes.get("addrLine1");
 
-		if (venueDetailInfoComment != null) {
-			setVenueDetailInfoComment(venueDetailInfoComment);
+		if (addrLine1 != null) {
+			setAddrLine1(addrLine1);
 		}
 
-		String venueDetailAddressLine1 = (String)attributes.get(
-				"venueDetailAddressLine1");
+		String addrLine2 = (String)attributes.get("addrLine2");
 
-		if (venueDetailAddressLine1 != null) {
-			setVenueDetailAddressLine1(venueDetailAddressLine1);
+		if (addrLine2 != null) {
+			setAddrLine2(addrLine2);
 		}
 
-		String venueDetailAddressLine2 = (String)attributes.get(
-				"venueDetailAddressLine2");
+		String city = (String)attributes.get("city");
 
-		if (venueDetailAddressLine2 != null) {
-			setVenueDetailAddressLine2(venueDetailAddressLine2);
+		if (city != null) {
+			setCity(city);
 		}
 
-		String venueDetailCity = (String)attributes.get("venueDetailCity");
+		String zipCode = (String)attributes.get("zipCode");
 
-		if (venueDetailCity != null) {
-			setVenueDetailCity(venueDetailCity);
+		if (zipCode != null) {
+			setZipCode(zipCode);
 		}
 
-		String venueDetailState = (String)attributes.get("venueDetailState");
+		Long stateId = (Long)attributes.get("stateId");
 
-		if (venueDetailState != null) {
-			setVenueDetailState(venueDetailState);
+		if (stateId != null) {
+			setStateId(stateId);
 		}
 
-		String venueDetailCountry = (String)attributes.get("venueDetailCountry");
+		String stateName = (String)attributes.get("stateName");
 
-		if (venueDetailCountry != null) {
-			setVenueDetailCountry(venueDetailCountry);
+		if (stateName != null) {
+			setStateName(stateName);
 		}
 
-		String venueDetailLatitude = (String)attributes.get(
-				"venueDetailLatitude");
+		Long countryId = (Long)attributes.get("countryId");
 
-		if (venueDetailLatitude != null) {
-			setVenueDetailLatitude(venueDetailLatitude);
+		if (countryId != null) {
+			setCountryId(countryId);
 		}
 
-		String venueDetailLongitude = (String)attributes.get(
-				"venueDetailLongitude");
+		String countryName = (String)attributes.get("countryName");
 
-		if (venueDetailLongitude != null) {
-			setVenueDetailLongitude(venueDetailLongitude);
+		if (countryName != null) {
+			setCountryName(countryName);
 		}
 
-		String venueDetailPhone = (String)attributes.get("venueDetailPhone");
+		String latitude = (String)attributes.get("latitude");
 
-		if (venueDetailPhone != null) {
-			setVenueDetailPhone(venueDetailPhone);
+		if (latitude != null) {
+			setLatitude(latitude);
 		}
 
-		String venueDetailWebsite = (String)attributes.get("venueDetailWebsite");
+		String longitude = (String)attributes.get("longitude");
 
-		if (venueDetailWebsite != null) {
-			setVenueDetailWebsite(venueDetailWebsite);
+		if (longitude != null) {
+			setLongitude(longitude);
 		}
 
-		Double venueDetailCost = (Double)attributes.get("venueDetailCost");
+		String phone = (String)attributes.get("phone");
 
-		if (venueDetailCost != null) {
-			setVenueDetailCost(venueDetailCost);
+		if (phone != null) {
+			setPhone(phone);
 		}
 
-		String venueDetailhoursOfOperation = (String)attributes.get(
-				"venueDetailhoursOfOperation");
+		String website = (String)attributes.get("website");
 
-		if (venueDetailhoursOfOperation != null) {
-			setVenueDetailhoursOfOperation(venueDetailhoursOfOperation);
+		if (website != null) {
+			setWebsite(website);
+		}
+
+		Double cost = (Double)attributes.get("cost");
+
+		if (cost != null) {
+			setCost(cost);
+		}
+
+		String hoursOfOperation = (String)attributes.get("hoursOfOperation");
+
+		if (hoursOfOperation != null) {
+			setHoursOfOperation(hoursOfOperation);
 		}
 	}
 
@@ -423,287 +428,323 @@ public class VenueDetailWrapper implements VenueDetail,
 	}
 
 	/**
-	* Returns the venue detail info name of this venue detail.
+	* Returns the info title of this venue detail.
 	*
-	* @return the venue detail info name of this venue detail
+	* @return the info title of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailInfoName() {
-		return _venueDetail.getVenueDetailInfoName();
+	public java.lang.String getInfoTitle() {
+		return _venueDetail.getInfoTitle();
 	}
 
 	/**
-	* Sets the venue detail info name of this venue detail.
+	* Sets the info title of this venue detail.
 	*
-	* @param venueDetailInfoName the venue detail info name of this venue detail
+	* @param infoTitle the info title of this venue detail
 	*/
 	@Override
-	public void setVenueDetailInfoName(java.lang.String venueDetailInfoName) {
-		_venueDetail.setVenueDetailInfoName(venueDetailInfoName);
+	public void setInfoTitle(java.lang.String infoTitle) {
+		_venueDetail.setInfoTitle(infoTitle);
 	}
 
 	/**
-	* Returns the venue detail info desc of this venue detail.
+	* Returns the info desc of this venue detail.
 	*
-	* @return the venue detail info desc of this venue detail
+	* @return the info desc of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailInfoDesc() {
-		return _venueDetail.getVenueDetailInfoDesc();
+	public java.lang.String getInfoDesc() {
+		return _venueDetail.getInfoDesc();
 	}
 
 	/**
-	* Sets the venue detail info desc of this venue detail.
+	* Sets the info desc of this venue detail.
 	*
-	* @param venueDetailInfoDesc the venue detail info desc of this venue detail
+	* @param infoDesc the info desc of this venue detail
 	*/
 	@Override
-	public void setVenueDetailInfoDesc(java.lang.String venueDetailInfoDesc) {
-		_venueDetail.setVenueDetailInfoDesc(venueDetailInfoDesc);
+	public void setInfoDesc(java.lang.String infoDesc) {
+		_venueDetail.setInfoDesc(infoDesc);
 	}
 
 	/**
-	* Returns the venue detail info comment of this venue detail.
+	* Returns the addr line1 of this venue detail.
 	*
-	* @return the venue detail info comment of this venue detail
+	* @return the addr line1 of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailInfoComment() {
-		return _venueDetail.getVenueDetailInfoComment();
+	public java.lang.String getAddrLine1() {
+		return _venueDetail.getAddrLine1();
 	}
 
 	/**
-	* Sets the venue detail info comment of this venue detail.
+	* Sets the addr line1 of this venue detail.
 	*
-	* @param venueDetailInfoComment the venue detail info comment of this venue detail
+	* @param addrLine1 the addr line1 of this venue detail
 	*/
 	@Override
-	public void setVenueDetailInfoComment(
-		java.lang.String venueDetailInfoComment) {
-		_venueDetail.setVenueDetailInfoComment(venueDetailInfoComment);
+	public void setAddrLine1(java.lang.String addrLine1) {
+		_venueDetail.setAddrLine1(addrLine1);
 	}
 
 	/**
-	* Returns the venue detail address line1 of this venue detail.
+	* Returns the addr line2 of this venue detail.
 	*
-	* @return the venue detail address line1 of this venue detail
+	* @return the addr line2 of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailAddressLine1() {
-		return _venueDetail.getVenueDetailAddressLine1();
+	public java.lang.String getAddrLine2() {
+		return _venueDetail.getAddrLine2();
 	}
 
 	/**
-	* Sets the venue detail address line1 of this venue detail.
+	* Sets the addr line2 of this venue detail.
 	*
-	* @param venueDetailAddressLine1 the venue detail address line1 of this venue detail
+	* @param addrLine2 the addr line2 of this venue detail
 	*/
 	@Override
-	public void setVenueDetailAddressLine1(
-		java.lang.String venueDetailAddressLine1) {
-		_venueDetail.setVenueDetailAddressLine1(venueDetailAddressLine1);
+	public void setAddrLine2(java.lang.String addrLine2) {
+		_venueDetail.setAddrLine2(addrLine2);
 	}
 
 	/**
-	* Returns the venue detail address line2 of this venue detail.
+	* Returns the city of this venue detail.
 	*
-	* @return the venue detail address line2 of this venue detail
+	* @return the city of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailAddressLine2() {
-		return _venueDetail.getVenueDetailAddressLine2();
+	public java.lang.String getCity() {
+		return _venueDetail.getCity();
 	}
 
 	/**
-	* Sets the venue detail address line2 of this venue detail.
+	* Sets the city of this venue detail.
 	*
-	* @param venueDetailAddressLine2 the venue detail address line2 of this venue detail
+	* @param city the city of this venue detail
 	*/
 	@Override
-	public void setVenueDetailAddressLine2(
-		java.lang.String venueDetailAddressLine2) {
-		_venueDetail.setVenueDetailAddressLine2(venueDetailAddressLine2);
+	public void setCity(java.lang.String city) {
+		_venueDetail.setCity(city);
 	}
 
 	/**
-	* Returns the venue detail city of this venue detail.
+	* Returns the zip code of this venue detail.
 	*
-	* @return the venue detail city of this venue detail
+	* @return the zip code of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailCity() {
-		return _venueDetail.getVenueDetailCity();
+	public java.lang.String getZipCode() {
+		return _venueDetail.getZipCode();
 	}
 
 	/**
-	* Sets the venue detail city of this venue detail.
+	* Sets the zip code of this venue detail.
 	*
-	* @param venueDetailCity the venue detail city of this venue detail
+	* @param zipCode the zip code of this venue detail
 	*/
 	@Override
-	public void setVenueDetailCity(java.lang.String venueDetailCity) {
-		_venueDetail.setVenueDetailCity(venueDetailCity);
+	public void setZipCode(java.lang.String zipCode) {
+		_venueDetail.setZipCode(zipCode);
 	}
 
 	/**
-	* Returns the venue detail state of this venue detail.
+	* Returns the state ID of this venue detail.
 	*
-	* @return the venue detail state of this venue detail
+	* @return the state ID of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailState() {
-		return _venueDetail.getVenueDetailState();
+	public long getStateId() {
+		return _venueDetail.getStateId();
 	}
 
 	/**
-	* Sets the venue detail state of this venue detail.
+	* Sets the state ID of this venue detail.
 	*
-	* @param venueDetailState the venue detail state of this venue detail
+	* @param stateId the state ID of this venue detail
 	*/
 	@Override
-	public void setVenueDetailState(java.lang.String venueDetailState) {
-		_venueDetail.setVenueDetailState(venueDetailState);
+	public void setStateId(long stateId) {
+		_venueDetail.setStateId(stateId);
 	}
 
 	/**
-	* Returns the venue detail country of this venue detail.
+	* Returns the state name of this venue detail.
 	*
-	* @return the venue detail country of this venue detail
+	* @return the state name of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailCountry() {
-		return _venueDetail.getVenueDetailCountry();
+	public java.lang.String getStateName() {
+		return _venueDetail.getStateName();
 	}
 
 	/**
-	* Sets the venue detail country of this venue detail.
+	* Sets the state name of this venue detail.
 	*
-	* @param venueDetailCountry the venue detail country of this venue detail
+	* @param stateName the state name of this venue detail
 	*/
 	@Override
-	public void setVenueDetailCountry(java.lang.String venueDetailCountry) {
-		_venueDetail.setVenueDetailCountry(venueDetailCountry);
+	public void setStateName(java.lang.String stateName) {
+		_venueDetail.setStateName(stateName);
 	}
 
 	/**
-	* Returns the venue detail latitude of this venue detail.
+	* Returns the country ID of this venue detail.
 	*
-	* @return the venue detail latitude of this venue detail
+	* @return the country ID of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailLatitude() {
-		return _venueDetail.getVenueDetailLatitude();
+	public long getCountryId() {
+		return _venueDetail.getCountryId();
 	}
 
 	/**
-	* Sets the venue detail latitude of this venue detail.
+	* Sets the country ID of this venue detail.
 	*
-	* @param venueDetailLatitude the venue detail latitude of this venue detail
+	* @param countryId the country ID of this venue detail
 	*/
 	@Override
-	public void setVenueDetailLatitude(java.lang.String venueDetailLatitude) {
-		_venueDetail.setVenueDetailLatitude(venueDetailLatitude);
+	public void setCountryId(long countryId) {
+		_venueDetail.setCountryId(countryId);
 	}
 
 	/**
-	* Returns the venue detail longitude of this venue detail.
+	* Returns the country name of this venue detail.
 	*
-	* @return the venue detail longitude of this venue detail
+	* @return the country name of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailLongitude() {
-		return _venueDetail.getVenueDetailLongitude();
+	public java.lang.String getCountryName() {
+		return _venueDetail.getCountryName();
 	}
 
 	/**
-	* Sets the venue detail longitude of this venue detail.
+	* Sets the country name of this venue detail.
 	*
-	* @param venueDetailLongitude the venue detail longitude of this venue detail
+	* @param countryName the country name of this venue detail
 	*/
 	@Override
-	public void setVenueDetailLongitude(java.lang.String venueDetailLongitude) {
-		_venueDetail.setVenueDetailLongitude(venueDetailLongitude);
+	public void setCountryName(java.lang.String countryName) {
+		_venueDetail.setCountryName(countryName);
 	}
 
 	/**
-	* Returns the venue detail phone of this venue detail.
+	* Returns the latitude of this venue detail.
 	*
-	* @return the venue detail phone of this venue detail
+	* @return the latitude of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailPhone() {
-		return _venueDetail.getVenueDetailPhone();
+	public java.lang.String getLatitude() {
+		return _venueDetail.getLatitude();
 	}
 
 	/**
-	* Sets the venue detail phone of this venue detail.
+	* Sets the latitude of this venue detail.
 	*
-	* @param venueDetailPhone the venue detail phone of this venue detail
+	* @param latitude the latitude of this venue detail
 	*/
 	@Override
-	public void setVenueDetailPhone(java.lang.String venueDetailPhone) {
-		_venueDetail.setVenueDetailPhone(venueDetailPhone);
+	public void setLatitude(java.lang.String latitude) {
+		_venueDetail.setLatitude(latitude);
 	}
 
 	/**
-	* Returns the venue detail website of this venue detail.
+	* Returns the longitude of this venue detail.
 	*
-	* @return the venue detail website of this venue detail
+	* @return the longitude of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailWebsite() {
-		return _venueDetail.getVenueDetailWebsite();
+	public java.lang.String getLongitude() {
+		return _venueDetail.getLongitude();
 	}
 
 	/**
-	* Sets the venue detail website of this venue detail.
+	* Sets the longitude of this venue detail.
 	*
-	* @param venueDetailWebsite the venue detail website of this venue detail
+	* @param longitude the longitude of this venue detail
 	*/
 	@Override
-	public void setVenueDetailWebsite(java.lang.String venueDetailWebsite) {
-		_venueDetail.setVenueDetailWebsite(venueDetailWebsite);
+	public void setLongitude(java.lang.String longitude) {
+		_venueDetail.setLongitude(longitude);
 	}
 
 	/**
-	* Returns the venue detail cost of this venue detail.
+	* Returns the phone of this venue detail.
 	*
-	* @return the venue detail cost of this venue detail
+	* @return the phone of this venue detail
 	*/
 	@Override
-	public double getVenueDetailCost() {
-		return _venueDetail.getVenueDetailCost();
+	public java.lang.String getPhone() {
+		return _venueDetail.getPhone();
 	}
 
 	/**
-	* Sets the venue detail cost of this venue detail.
+	* Sets the phone of this venue detail.
 	*
-	* @param venueDetailCost the venue detail cost of this venue detail
+	* @param phone the phone of this venue detail
 	*/
 	@Override
-	public void setVenueDetailCost(double venueDetailCost) {
-		_venueDetail.setVenueDetailCost(venueDetailCost);
+	public void setPhone(java.lang.String phone) {
+		_venueDetail.setPhone(phone);
 	}
 
 	/**
-	* Returns the venue detailhours of operation of this venue detail.
+	* Returns the website of this venue detail.
 	*
-	* @return the venue detailhours of operation of this venue detail
+	* @return the website of this venue detail
 	*/
 	@Override
-	public java.lang.String getVenueDetailhoursOfOperation() {
-		return _venueDetail.getVenueDetailhoursOfOperation();
+	public java.lang.String getWebsite() {
+		return _venueDetail.getWebsite();
 	}
 
 	/**
-	* Sets the venue detailhours of operation of this venue detail.
+	* Sets the website of this venue detail.
 	*
-	* @param venueDetailhoursOfOperation the venue detailhours of operation of this venue detail
+	* @param website the website of this venue detail
 	*/
 	@Override
-	public void setVenueDetailhoursOfOperation(
-		java.lang.String venueDetailhoursOfOperation) {
-		_venueDetail.setVenueDetailhoursOfOperation(venueDetailhoursOfOperation);
+	public void setWebsite(java.lang.String website) {
+		_venueDetail.setWebsite(website);
+	}
+
+	/**
+	* Returns the cost of this venue detail.
+	*
+	* @return the cost of this venue detail
+	*/
+	@Override
+	public double getCost() {
+		return _venueDetail.getCost();
+	}
+
+	/**
+	* Sets the cost of this venue detail.
+	*
+	* @param cost the cost of this venue detail
+	*/
+	@Override
+	public void setCost(double cost) {
+		_venueDetail.setCost(cost);
+	}
+
+	/**
+	* Returns the hours of operation of this venue detail.
+	*
+	* @return the hours of operation of this venue detail
+	*/
+	@Override
+	public java.lang.String getHoursOfOperation() {
+		return _venueDetail.getHoursOfOperation();
+	}
+
+	/**
+	* Sets the hours of operation of this venue detail.
+	*
+	* @param hoursOfOperation the hours of operation of this venue detail
+	*/
+	@Override
+	public void setHoursOfOperation(java.lang.String hoursOfOperation) {
+		_venueDetail.setHoursOfOperation(hoursOfOperation);
 	}
 
 	@Override

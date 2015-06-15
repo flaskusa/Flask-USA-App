@@ -188,214 +188,241 @@ public interface VenueDetailModel extends BaseModel<VenueDetail> {
 	public void setInfoTypeCategoryId(long infoTypeCategoryId);
 
 	/**
-	 * Returns the venue detail info name of this venue detail.
+	 * Returns the info title of this venue detail.
 	 *
-	 * @return the venue detail info name of this venue detail
+	 * @return the info title of this venue detail
 	 */
 	@AutoEscape
-	public String getVenueDetailInfoName();
+	public String getInfoTitle();
 
 	/**
-	 * Sets the venue detail info name of this venue detail.
+	 * Sets the info title of this venue detail.
 	 *
-	 * @param venueDetailInfoName the venue detail info name of this venue detail
+	 * @param infoTitle the info title of this venue detail
 	 */
-	public void setVenueDetailInfoName(String venueDetailInfoName);
+	public void setInfoTitle(String infoTitle);
 
 	/**
-	 * Returns the venue detail info desc of this venue detail.
+	 * Returns the info desc of this venue detail.
 	 *
-	 * @return the venue detail info desc of this venue detail
-	 */
-	@AutoEscape
-	public String getVenueDetailInfoDesc();
-
-	/**
-	 * Sets the venue detail info desc of this venue detail.
-	 *
-	 * @param venueDetailInfoDesc the venue detail info desc of this venue detail
-	 */
-	public void setVenueDetailInfoDesc(String venueDetailInfoDesc);
-
-	/**
-	 * Returns the venue detail info comment of this venue detail.
-	 *
-	 * @return the venue detail info comment of this venue detail
+	 * @return the info desc of this venue detail
 	 */
 	@AutoEscape
-	public String getVenueDetailInfoComment();
+	public String getInfoDesc();
 
 	/**
-	 * Sets the venue detail info comment of this venue detail.
+	 * Sets the info desc of this venue detail.
 	 *
-	 * @param venueDetailInfoComment the venue detail info comment of this venue detail
+	 * @param infoDesc the info desc of this venue detail
 	 */
-	public void setVenueDetailInfoComment(String venueDetailInfoComment);
+	public void setInfoDesc(String infoDesc);
 
 	/**
-	 * Returns the venue detail address line1 of this venue detail.
+	 * Returns the addr line1 of this venue detail.
 	 *
-	 * @return the venue detail address line1 of this venue detail
-	 */
-	@AutoEscape
-	public String getVenueDetailAddressLine1();
-
-	/**
-	 * Sets the venue detail address line1 of this venue detail.
-	 *
-	 * @param venueDetailAddressLine1 the venue detail address line1 of this venue detail
-	 */
-	public void setVenueDetailAddressLine1(String venueDetailAddressLine1);
-
-	/**
-	 * Returns the venue detail address line2 of this venue detail.
-	 *
-	 * @return the venue detail address line2 of this venue detail
+	 * @return the addr line1 of this venue detail
 	 */
 	@AutoEscape
-	public String getVenueDetailAddressLine2();
+	public String getAddrLine1();
 
 	/**
-	 * Sets the venue detail address line2 of this venue detail.
+	 * Sets the addr line1 of this venue detail.
 	 *
-	 * @param venueDetailAddressLine2 the venue detail address line2 of this venue detail
+	 * @param addrLine1 the addr line1 of this venue detail
 	 */
-	public void setVenueDetailAddressLine2(String venueDetailAddressLine2);
+	public void setAddrLine1(String addrLine1);
 
 	/**
-	 * Returns the venue detail city of this venue detail.
+	 * Returns the addr line2 of this venue detail.
 	 *
-	 * @return the venue detail city of this venue detail
-	 */
-	@AutoEscape
-	public String getVenueDetailCity();
-
-	/**
-	 * Sets the venue detail city of this venue detail.
-	 *
-	 * @param venueDetailCity the venue detail city of this venue detail
-	 */
-	public void setVenueDetailCity(String venueDetailCity);
-
-	/**
-	 * Returns the venue detail state of this venue detail.
-	 *
-	 * @return the venue detail state of this venue detail
+	 * @return the addr line2 of this venue detail
 	 */
 	@AutoEscape
-	public String getVenueDetailState();
+	public String getAddrLine2();
 
 	/**
-	 * Sets the venue detail state of this venue detail.
+	 * Sets the addr line2 of this venue detail.
 	 *
-	 * @param venueDetailState the venue detail state of this venue detail
+	 * @param addrLine2 the addr line2 of this venue detail
 	 */
-	public void setVenueDetailState(String venueDetailState);
+	public void setAddrLine2(String addrLine2);
 
 	/**
-	 * Returns the venue detail country of this venue detail.
+	 * Returns the city of this venue detail.
 	 *
-	 * @return the venue detail country of this venue detail
-	 */
-	@AutoEscape
-	public String getVenueDetailCountry();
-
-	/**
-	 * Sets the venue detail country of this venue detail.
-	 *
-	 * @param venueDetailCountry the venue detail country of this venue detail
-	 */
-	public void setVenueDetailCountry(String venueDetailCountry);
-
-	/**
-	 * Returns the venue detail latitude of this venue detail.
-	 *
-	 * @return the venue detail latitude of this venue detail
+	 * @return the city of this venue detail
 	 */
 	@AutoEscape
-	public String getVenueDetailLatitude();
+	public String getCity();
 
 	/**
-	 * Sets the venue detail latitude of this venue detail.
+	 * Sets the city of this venue detail.
 	 *
-	 * @param venueDetailLatitude the venue detail latitude of this venue detail
+	 * @param city the city of this venue detail
 	 */
-	public void setVenueDetailLatitude(String venueDetailLatitude);
+	public void setCity(String city);
 
 	/**
-	 * Returns the venue detail longitude of this venue detail.
+	 * Returns the zip code of this venue detail.
 	 *
-	 * @return the venue detail longitude of this venue detail
-	 */
-	@AutoEscape
-	public String getVenueDetailLongitude();
-
-	/**
-	 * Sets the venue detail longitude of this venue detail.
-	 *
-	 * @param venueDetailLongitude the venue detail longitude of this venue detail
-	 */
-	public void setVenueDetailLongitude(String venueDetailLongitude);
-
-	/**
-	 * Returns the venue detail phone of this venue detail.
-	 *
-	 * @return the venue detail phone of this venue detail
+	 * @return the zip code of this venue detail
 	 */
 	@AutoEscape
-	public String getVenueDetailPhone();
+	public String getZipCode();
 
 	/**
-	 * Sets the venue detail phone of this venue detail.
+	 * Sets the zip code of this venue detail.
 	 *
-	 * @param venueDetailPhone the venue detail phone of this venue detail
+	 * @param zipCode the zip code of this venue detail
 	 */
-	public void setVenueDetailPhone(String venueDetailPhone);
+	public void setZipCode(String zipCode);
 
 	/**
-	 * Returns the venue detail website of this venue detail.
+	 * Returns the state ID of this venue detail.
 	 *
-	 * @return the venue detail website of this venue detail
+	 * @return the state ID of this venue detail
 	 */
-	@AutoEscape
-	public String getVenueDetailWebsite();
+	public long getStateId();
 
 	/**
-	 * Sets the venue detail website of this venue detail.
+	 * Sets the state ID of this venue detail.
 	 *
-	 * @param venueDetailWebsite the venue detail website of this venue detail
+	 * @param stateId the state ID of this venue detail
 	 */
-	public void setVenueDetailWebsite(String venueDetailWebsite);
+	public void setStateId(long stateId);
 
 	/**
-	 * Returns the venue detail cost of this venue detail.
+	 * Returns the state name of this venue detail.
 	 *
-	 * @return the venue detail cost of this venue detail
-	 */
-	public double getVenueDetailCost();
-
-	/**
-	 * Sets the venue detail cost of this venue detail.
-	 *
-	 * @param venueDetailCost the venue detail cost of this venue detail
-	 */
-	public void setVenueDetailCost(double venueDetailCost);
-
-	/**
-	 * Returns the venue detailhours of operation of this venue detail.
-	 *
-	 * @return the venue detailhours of operation of this venue detail
+	 * @return the state name of this venue detail
 	 */
 	@AutoEscape
-	public String getVenueDetailhoursOfOperation();
+	public String getStateName();
 
 	/**
-	 * Sets the venue detailhours of operation of this venue detail.
+	 * Sets the state name of this venue detail.
 	 *
-	 * @param venueDetailhoursOfOperation the venue detailhours of operation of this venue detail
+	 * @param stateName the state name of this venue detail
 	 */
-	public void setVenueDetailhoursOfOperation(
-		String venueDetailhoursOfOperation);
+	public void setStateName(String stateName);
+
+	/**
+	 * Returns the country ID of this venue detail.
+	 *
+	 * @return the country ID of this venue detail
+	 */
+	public long getCountryId();
+
+	/**
+	 * Sets the country ID of this venue detail.
+	 *
+	 * @param countryId the country ID of this venue detail
+	 */
+	public void setCountryId(long countryId);
+
+	/**
+	 * Returns the country name of this venue detail.
+	 *
+	 * @return the country name of this venue detail
+	 */
+	@AutoEscape
+	public String getCountryName();
+
+	/**
+	 * Sets the country name of this venue detail.
+	 *
+	 * @param countryName the country name of this venue detail
+	 */
+	public void setCountryName(String countryName);
+
+	/**
+	 * Returns the latitude of this venue detail.
+	 *
+	 * @return the latitude of this venue detail
+	 */
+	@AutoEscape
+	public String getLatitude();
+
+	/**
+	 * Sets the latitude of this venue detail.
+	 *
+	 * @param latitude the latitude of this venue detail
+	 */
+	public void setLatitude(String latitude);
+
+	/**
+	 * Returns the longitude of this venue detail.
+	 *
+	 * @return the longitude of this venue detail
+	 */
+	@AutoEscape
+	public String getLongitude();
+
+	/**
+	 * Sets the longitude of this venue detail.
+	 *
+	 * @param longitude the longitude of this venue detail
+	 */
+	public void setLongitude(String longitude);
+
+	/**
+	 * Returns the phone of this venue detail.
+	 *
+	 * @return the phone of this venue detail
+	 */
+	@AutoEscape
+	public String getPhone();
+
+	/**
+	 * Sets the phone of this venue detail.
+	 *
+	 * @param phone the phone of this venue detail
+	 */
+	public void setPhone(String phone);
+
+	/**
+	 * Returns the website of this venue detail.
+	 *
+	 * @return the website of this venue detail
+	 */
+	@AutoEscape
+	public String getWebsite();
+
+	/**
+	 * Sets the website of this venue detail.
+	 *
+	 * @param website the website of this venue detail
+	 */
+	public void setWebsite(String website);
+
+	/**
+	 * Returns the cost of this venue detail.
+	 *
+	 * @return the cost of this venue detail
+	 */
+	public double getCost();
+
+	/**
+	 * Sets the cost of this venue detail.
+	 *
+	 * @param cost the cost of this venue detail
+	 */
+	public void setCost(double cost);
+
+	/**
+	 * Returns the hours of operation of this venue detail.
+	 *
+	 * @return the hours of operation of this venue detail
+	 */
+	@AutoEscape
+	public String getHoursOfOperation();
+
+	/**
+	 * Sets the hours of operation of this venue detail.
+	 *
+	 * @param hoursOfOperation the hours of operation of this venue detail
+	 */
+	public void setHoursOfOperation(String hoursOfOperation);
 
 	@Override
 	public boolean isNew();

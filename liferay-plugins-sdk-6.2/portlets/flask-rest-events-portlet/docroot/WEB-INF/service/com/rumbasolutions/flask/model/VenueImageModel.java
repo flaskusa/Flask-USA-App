@@ -24,8 +24,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
-import java.sql.Blob;
-
 import java.util.Date;
 
 /**
@@ -163,18 +161,19 @@ public interface VenueImageModel extends BaseModel<VenueImage> {
 	public void setTitle(String title);
 
 	/**
-	 * Returns the venue image of this venue image.
+	 * Returns the venue image path of this venue image.
 	 *
-	 * @return the venue image of this venue image
+	 * @return the venue image path of this venue image
 	 */
-	public Blob getVenueImage();
+	@AutoEscape
+	public String getVenueImagePath();
 
 	/**
-	 * Sets the venue image of this venue image.
+	 * Sets the venue image path of this venue image.
 	 *
-	 * @param venueImage the venue image of this venue image
+	 * @param venueImagePath the venue image path of this venue image
 	 */
-	public void setVenueImage(Blob venueImage);
+	public void setVenueImagePath(String venueImagePath);
 
 	/**
 	 * Returns the venue ID of this venue image.

@@ -108,17 +108,13 @@ public class VenueDetailImageLocalServiceClp
 				"com.rumbasolutions.flask.model.VenueDetailImage"
 			};
 
-		_methodName16 = "getVenueDetailImageDataBlobModel";
+		_methodName16 = "getBeanIdentifier";
 
-		_methodParameterTypes16 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes16 = new String[] {  };
 
-		_methodName17 = "getBeanIdentifier";
+		_methodName17 = "setBeanIdentifier";
 
-		_methodParameterTypes17 = new String[] {  };
-
-		_methodName18 = "setBeanIdentifier";
-
-		_methodParameterTypes18 = new String[] { "java.lang.String" };
+		_methodParameterTypes17 = new String[] { "java.lang.String" };
 	}
 
 	@Override
@@ -625,42 +621,12 @@ public class VenueDetailImageLocalServiceClp
 	}
 
 	@Override
-	public com.rumbasolutions.flask.model.VenueDetailImageVenueDetailImageDataBlobModel getVenueDetailImageDataBlobModel(
-		java.io.Serializable primaryKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName16,
-					_methodParameterTypes16,
-					new Object[] { ClpSerializer.translateInput(primaryKey) });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.rumbasolutions.flask.model.VenueDetailImageVenueDetailImageDataBlobModel)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
 	public java.lang.String getBeanIdentifier() {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableLocalService.invokeMethod(_methodName17,
-					_methodParameterTypes17, new Object[] {  });
+			returnObj = _invokableLocalService.invokeMethod(_methodName16,
+					_methodParameterTypes16, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -680,8 +646,8 @@ public class VenueDetailImageLocalServiceClp
 	@Override
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		try {
-			_invokableLocalService.invokeMethod(_methodName18,
-				_methodParameterTypes18,
+			_invokableLocalService.invokeMethod(_methodName17,
+				_methodParameterTypes17,
 				new Object[] { ClpSerializer.translateInput(beanIdentifier) });
 		}
 		catch (Throwable t) {
@@ -741,6 +707,4 @@ public class VenueDetailImageLocalServiceClp
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
-	private String _methodName18;
-	private String[] _methodParameterTypes18;
 }

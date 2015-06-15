@@ -32,12 +32,9 @@ import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.rumbasolutions.flask.model.VenueImage;
 import com.rumbasolutions.flask.model.VenueImageModel;
 import com.rumbasolutions.flask.model.VenueImageSoap;
-import com.rumbasolutions.flask.model.VenueImageVenueImageBlobModel;
-import com.rumbasolutions.flask.service.VenueImageLocalServiceUtil;
 
 import java.io.Serializable;
 
-import java.sql.Blob;
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -75,10 +72,10 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 			{ "createdDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "title", Types.VARCHAR },
-			{ "venueImage", Types.BLOB },
+			{ "venueImagePath", Types.VARCHAR },
 			{ "venueId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueImage (venueImageId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,venueImage BLOB,venueId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueImage (venueImageId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,title VARCHAR(100) null,venueImagePath VARCHAR(255) null,venueId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_VenueImage";
 	public static final String ORDER_BY_JPQL = " ORDER BY venueImage.title ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_VenueImage.title ASC";
@@ -116,7 +113,7 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 		model.setCreatedDate(soapModel.getCreatedDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setTitle(soapModel.getTitle());
-		model.setVenueImage(soapModel.getVenueImage());
+		model.setVenueImagePath(soapModel.getVenueImagePath());
 		model.setVenueId(soapModel.getVenueId());
 
 		return model;
@@ -188,7 +185,7 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("title", getTitle());
-		attributes.put("venueImage", getVenueImage());
+		attributes.put("venueImagePath", getVenueImagePath());
 		attributes.put("venueId", getVenueId());
 
 		return attributes;
@@ -232,10 +229,10 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 			setTitle(title);
 		}
 
-		Blob venueImage = (Blob)attributes.get("venueImage");
+		String venueImagePath = (String)attributes.get("venueImagePath");
 
-		if (venueImage != null) {
-			setVenueImage(venueImage);
+		if (venueImagePath != null) {
+			setVenueImagePath(venueImagePath);
 		}
 
 		Long venueId = (Long)attributes.get("venueId");
@@ -330,33 +327,18 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 
 	@JSON
 	@Override
-	public Blob getVenueImage() {
-		if (_venueImageBlobModel == null) {
-			try {
-				_venueImageBlobModel = VenueImageLocalServiceUtil.getVenueImageBlobModel(getPrimaryKey());
-			}
-			catch (Exception e) {
-			}
+	public String getVenueImagePath() {
+		if (_venueImagePath == null) {
+			return StringPool.BLANK;
 		}
-
-		Blob blob = null;
-
-		if (_venueImageBlobModel != null) {
-			blob = _venueImageBlobModel.getVenueImageBlob();
+		else {
+			return _venueImagePath;
 		}
-
-		return blob;
 	}
 
 	@Override
-	public void setVenueImage(Blob venueImage) {
-		if (_venueImageBlobModel == null) {
-			_venueImageBlobModel = new VenueImageVenueImageBlobModel(getPrimaryKey(),
-					venueImage);
-		}
-		else {
-			_venueImageBlobModel.setVenueImageBlob(venueImage);
-		}
+	public void setVenueImagePath(String venueImagePath) {
+		_venueImagePath = venueImagePath;
 	}
 
 	@JSON
@@ -419,6 +401,7 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 		venueImageImpl.setCreatedDate(getCreatedDate());
 		venueImageImpl.setModifiedDate(getModifiedDate());
 		venueImageImpl.setTitle(getTitle());
+		venueImageImpl.setVenueImagePath(getVenueImagePath());
 		venueImageImpl.setVenueId(getVenueId());
 
 		venueImageImpl.resetOriginalValues();
@@ -470,8 +453,6 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 	public void resetOriginalValues() {
 		VenueImageModelImpl venueImageModelImpl = this;
 
-		venueImageModelImpl._venueImageBlobModel = null;
-
 		venueImageModelImpl._originalVenueId = venueImageModelImpl._venueId;
 
 		venueImageModelImpl._setOriginalVenueId = false;
@@ -515,6 +496,14 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 			venueImageCacheModel.title = null;
 		}
 
+		venueImageCacheModel.venueImagePath = getVenueImagePath();
+
+		String venueImagePath = venueImageCacheModel.venueImagePath;
+
+		if ((venueImagePath != null) && (venueImagePath.length() == 0)) {
+			venueImageCacheModel.venueImagePath = null;
+		}
+
 		venueImageCacheModel.venueId = getVenueId();
 
 		return venueImageCacheModel;
@@ -536,6 +525,8 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 		sb.append(getModifiedDate());
 		sb.append(", title=");
 		sb.append(getTitle());
+		sb.append(", venueImagePath=");
+		sb.append(getVenueImagePath());
 		sb.append(", venueId=");
 		sb.append(getVenueId());
 		sb.append("}");
@@ -576,6 +567,10 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>venueImagePath</column-name><column-value><![CDATA[");
+		sb.append(getVenueImagePath());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>venueId</column-name><column-value><![CDATA[");
 		sb.append(getVenueId());
 		sb.append("]]></column-value></column>");
@@ -596,7 +591,7 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private String _title;
-	private VenueImageVenueImageBlobModel _venueImageBlobModel;
+	private String _venueImagePath;
 	private long _venueId;
 	private long _originalVenueId;
 	private boolean _setOriginalVenueId;

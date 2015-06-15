@@ -1,19 +1,43 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<hint-collection name="FLASK-TEXTFIELD">
+		<hint name="max-length">100</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-DESC">
+		<hint name="max-length">255</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-IMAGE-PATH">
+		<hint name="max-length">255</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-ZIPCODE">
+		<hint name="max-length">20</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-SPATIAL">
+		<hint name="max-length">20</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-PHONE">
+		<hint name="max-length">20</hint>
+	</hint-collection>
 	<model name="com.rumbasolutions.flask.model.Event">
 		<field name="eventId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="eventName" type="String" />
-		<field name="description" type="String" />
+		<field name="eventName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="description" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 		<field name="eventDate" type="Date" />
 		<field name="startTime" type="Date" />
 		<field name="endTime" type="Date" />
 		<field name="eventTypeId" type="long" />
-		<field name="eventImage" type="Blob" />
+		<field name="eventImagePath" type="String">
+			<hint-collection name="FLASK-IMAGE-PATH" />
+		</field>
 		<field name="venueId" type="long" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.EventDetail">
@@ -25,21 +49,42 @@
 		<field name="eventId" type="long" />
 		<field name="infoTypeId" type="long" />
 		<field name="infoTypeCategoryId" type="long" />
-		<field name="eventDetailInfoName" type="String" />
-		<field name="eventDetailInfoDesc" type="String" />
-		<field name="eventDetailInfoComment" type="String" />
-		<field name="eventDetailAddressLine1" type="String" />
-		<field name="eventDetailAddressLine2" type="String" />
-		<field name="eventDetailInfocity" type="String" />
-		<field name="eventDetailZip" type="String" />
-		<field name="eventDetailState" type="String" />
-		<field name="eventDetailCountry" type="String" />
-		<field name="eventDetailLatitude" type="String" />
-		<field name="eventDetailLongitude" type="String" />
-		<field name="eventDetailPhone" type="String" />
-		<field name="eventDetailWebsite" type="String" />
-		<field name="eventDetailCost" type="double" />
-		<field name="hoursOfOperation" type="String" />
+		<field name="infoName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="infoDesc" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
+		<field name="addrLine1" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="addrLine2" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="city" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="zipCode" type="String">
+			<hint-collection name="FLASK-ZIPCODE" />
+		</field>
+		<field name="stateId" type="long" />
+		<field name="countryId" type="long" />
+		<field name="latitude" type="String">
+			<hint-collection name="FLASK-SPATIAL" />
+		</field>
+		<field name="longitude" type="String">
+			<hint-collection name="FLASK-SPATIAL" />
+		</field>
+		<field name="phone" type="String">
+			<hint-collection name="FLASK-PHONE" />
+		</field>
+		<field name="website" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
+		<field name="cost" type="double" />
+		<field name="hoursOfOperation" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 	</model>
 	<model name="com.rumbasolutions.flask.model.EventDetailImage">
 		<field name="eventDetailImageId" type="long" />
@@ -48,23 +93,37 @@
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="eventDetailId" type="long" />
-		<field name="eventDetailImagetitle" type="String" />
-		<field name="eventDetailImageDesc" type="String" />
-		<field name="eventDetailImageData" type="Blob" />
+		<field name="imagetitle" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="imageDesc" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
+		<field name="imagePath" type="String">
+			<hint-collection name="FLASK-IMAGE-PATH" />
+		</field>
 	</model>
 	<model name="com.rumbasolutions.flask.model.EventType">
 		<field name="eventTypeId" type="long" />
 		<field name="eventTypeKey" type="String" />
-		<field name="eventTypeName" type="String" />
+		<field name="eventTypeName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 	</model>
 	<model name="com.rumbasolutions.flask.model.InfoType">
 		<field name="infoTypeId" type="long" />
-		<field name="infoTypeName" type="String" />
+		<field name="infoTypeName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 	</model>
 	<model name="com.rumbasolutions.flask.model.InfoTypeCategory">
 		<field name="infoTypeCategoryId" type="long" />
-		<field name="infoTypeCategoryName" type="String" />
-		<field name="displayTemplate" type="String" />
+		<field name="infoTypeCategoryName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="displayTemplate" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 	</model>
 	<model name="com.rumbasolutions.flask.model.Venue">
 		<field name="venueId" type="long" />
@@ -72,12 +131,24 @@
 		<field name="userId" type="long" />
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="venueName" type="String" />
-		<field name="venueDescription" type="String" />
-		<field name="venueZipCode" type="String" />
-		<field name="addrLine1" type="String" />
-		<field name="addrLine2" type="String" />
-		<field name="venueCity" type="String" />
+		<field name="venueName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="venueDescription" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
+		<field name="venueZipCode" type="String">
+			<hint-collection name="FLASK-ZIPCODE" />
+		</field>
+		<field name="addrLine1" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="addrLine2" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="venueCity" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 		<field name="venueStateId" type="long" />
 		<field name="venueCountryId" type="long" />
 		<field name="venueMetroArea" type="String" />
@@ -91,20 +162,48 @@
 		<field name="venueId" type="long" />
 		<field name="infoTypeId" type="long" />
 		<field name="infoTypeCategoryId" type="long" />
-		<field name="venueDetailInfoName" type="String" />
-		<field name="venueDetailInfoDesc" type="String" />
-		<field name="venueDetailInfoComment" type="String" />
-		<field name="venueDetailAddressLine1" type="String" />
-		<field name="venueDetailAddressLine2" type="String" />
-		<field name="venueDetailCity" type="String" />
-		<field name="venueDetailState" type="String" />
-		<field name="venueDetailCountry" type="String" />
-		<field name="venueDetailLatitude" type="String" />
-		<field name="venueDetailLongitude" type="String" />
-		<field name="venueDetailPhone" type="String" />
-		<field name="venueDetailWebsite" type="String" />
-		<field name="venueDetailCost" type="double" />
-		<field name="venueDetailhoursOfOperation" type="String" />
+		<field name="infoTitle" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="infoDesc" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
+		<field name="addrLine1" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="addrLine2" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="city" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="zipCode" type="String">
+			<hint-collection name="FLASK-ZIPCODE" />
+		</field>
+		<field name="stateId" type="long" />
+		<field name="stateName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="countryId" type="long" />
+		<field name="countryName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="latitude" type="String">
+			<hint-collection name="FLASK-SPATIAL" />
+		</field>
+		<field name="longitude" type="String">
+			<hint-collection name="FLASK-SPATIAL" />
+		</field>
+		<field name="phone" type="String">
+			<hint-collection name="FLASK-PHONE" />
+		</field>
+		<field name="website" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
+		<field name="cost" type="double" />
+		<field name="hoursOfOperation" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 	</model>
 	<model name="com.rumbasolutions.flask.model.VenueDetailImage">
 		<field name="venueDetailImageId" type="long" />
@@ -113,9 +212,15 @@
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="venueDetailId" type="long" />
-		<field name="venueDetailImageTitle" type="String" />
-		<field name="venueDetailImageDesc" type="String" />
-		<field name="venueDetailImageData" type="Blob" />
+		<field name="imageTitle" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="imageDesc" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
+		<field name="imagePath" type="String">
+			<hint-collection name="FLASK-IMAGE-PATH" />
+		</field>
 	</model>
 	<model name="com.rumbasolutions.flask.model.VenueImage">
 		<field name="venueImageId" type="long" />
@@ -123,8 +228,12 @@
 		<field name="userId" type="long" />
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="title" type="String" />
-		<field name="venueImage" type="Blob" />
+		<field name="title" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="venueImagePath" type="String">
+			<hint-collection name="FLASK-IMAGE-PATH" />
+		</field>
 		<field name="venueId" type="long" />
 	</model>
 </model-hints>

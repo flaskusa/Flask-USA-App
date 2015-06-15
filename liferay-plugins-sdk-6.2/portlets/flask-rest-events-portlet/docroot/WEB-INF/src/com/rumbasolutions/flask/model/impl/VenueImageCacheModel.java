@@ -38,7 +38,7 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{venueImageId=");
 		sb.append(venueImageId);
@@ -52,6 +52,8 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 		sb.append(modifiedDate);
 		sb.append(", title=");
 		sb.append(title);
+		sb.append(", venueImagePath=");
+		sb.append(venueImagePath);
 		sb.append(", venueId=");
 		sb.append(venueId);
 		sb.append("}");
@@ -88,6 +90,13 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 			venueImageImpl.setTitle(title);
 		}
 
+		if (venueImagePath == null) {
+			venueImageImpl.setVenueImagePath(StringPool.BLANK);
+		}
+		else {
+			venueImageImpl.setVenueImagePath(venueImagePath);
+		}
+
 		venueImageImpl.setVenueId(venueId);
 
 		venueImageImpl.resetOriginalValues();
@@ -103,6 +112,7 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 		createdDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		title = objectInput.readUTF();
+		venueImagePath = objectInput.readUTF();
 		venueId = objectInput.readLong();
 	}
 
@@ -122,6 +132,13 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 			objectOutput.writeUTF(title);
 		}
 
+		if (venueImagePath == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(venueImagePath);
+		}
+
 		objectOutput.writeLong(venueId);
 	}
 
@@ -131,5 +148,6 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 	public long createdDate;
 	public long modifiedDate;
 	public String title;
+	public String venueImagePath;
 	public long venueId;
 }

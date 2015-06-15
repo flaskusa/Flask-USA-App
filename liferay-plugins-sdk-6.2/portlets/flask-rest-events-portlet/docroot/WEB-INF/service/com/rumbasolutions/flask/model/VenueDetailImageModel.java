@@ -24,8 +24,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
-import java.sql.Blob;
-
 import java.util.Date;
 
 /**
@@ -162,48 +160,49 @@ public interface VenueDetailImageModel extends BaseModel<VenueDetailImage> {
 	public void setVenueDetailId(long venueDetailId);
 
 	/**
-	 * Returns the venue detail image title of this venue detail image.
+	 * Returns the image title of this venue detail image.
 	 *
-	 * @return the venue detail image title of this venue detail image
+	 * @return the image title of this venue detail image
 	 */
 	@AutoEscape
-	public String getVenueDetailImageTitle();
+	public String getImageTitle();
 
 	/**
-	 * Sets the venue detail image title of this venue detail image.
+	 * Sets the image title of this venue detail image.
 	 *
-	 * @param venueDetailImageTitle the venue detail image title of this venue detail image
+	 * @param imageTitle the image title of this venue detail image
 	 */
-	public void setVenueDetailImageTitle(String venueDetailImageTitle);
+	public void setImageTitle(String imageTitle);
 
 	/**
-	 * Returns the venue detail image desc of this venue detail image.
+	 * Returns the image desc of this venue detail image.
 	 *
-	 * @return the venue detail image desc of this venue detail image
+	 * @return the image desc of this venue detail image
 	 */
 	@AutoEscape
-	public String getVenueDetailImageDesc();
+	public String getImageDesc();
 
 	/**
-	 * Sets the venue detail image desc of this venue detail image.
+	 * Sets the image desc of this venue detail image.
 	 *
-	 * @param venueDetailImageDesc the venue detail image desc of this venue detail image
+	 * @param imageDesc the image desc of this venue detail image
 	 */
-	public void setVenueDetailImageDesc(String venueDetailImageDesc);
+	public void setImageDesc(String imageDesc);
 
 	/**
-	 * Returns the venue detail image data of this venue detail image.
+	 * Returns the image path of this venue detail image.
 	 *
-	 * @return the venue detail image data of this venue detail image
+	 * @return the image path of this venue detail image
 	 */
-	public Blob getVenueDetailImageData();
+	@AutoEscape
+	public String getImagePath();
 
 	/**
-	 * Sets the venue detail image data of this venue detail image.
+	 * Sets the image path of this venue detail image.
 	 *
-	 * @param venueDetailImageData the venue detail image data of this venue detail image
+	 * @param imagePath the image path of this venue detail image
 	 */
-	public void setVenueDetailImageData(Blob venueDetailImageData);
+	public void setImagePath(String imagePath);
 
 	@Override
 	public boolean isNew();

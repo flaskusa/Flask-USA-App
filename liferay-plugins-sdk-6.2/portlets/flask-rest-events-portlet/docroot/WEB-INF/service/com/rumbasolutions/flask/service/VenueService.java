@@ -97,6 +97,91 @@ public interface VenueService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void addVenueImage(long venueId, java.lang.String title,
-		java.sql.Blob venueImageData,
+		java.lang.String venueImagePath,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImages(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.rumbasolutions.flask.model.VenueImage getVenueImage(
+		long venueImageId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void updateVenueImage(long venueImageId, java.lang.String title,
+		java.lang.String venueImagePath,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteVenueImage(long venueImageId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteAllVenueImages(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.rumbasolutions.flask.model.VenueDetail addVenueDetail(
+		long venueId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		java.lang.String stateName, long countryId,
+		java.lang.String countryName, java.lang.String lattitude,
+		java.lang.String longitude, java.lang.String phone,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.rumbasolutions.flask.model.VenueDetail updateVenueDetail(
+		long venueDetailId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		java.lang.String stateName, long countryId,
+		java.lang.String countryName, java.lang.String lattitude,
+		java.lang.String longitude, java.lang.String phone,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.rumbasolutions.flask.model.VenueDetail getVenueDetail(
+		long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetail> getVenueDetails(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteVenueDetail(long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteAllVenueDetails(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.rumbasolutions.flask.model.VenueDetailImage addVenueDetailImage(
+		long venueDetailId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
+		long venueDetailImageId, long venueDetailId,
+		java.lang.String imageTitle, java.lang.String imageDesc,
+		java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.rumbasolutions.flask.model.VenueDetailImage getVenueDetailImage(
+		long venueDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> getVenueDetailImages(
+		long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteVenueDetailImage(long venueDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteAllVenueDetailImages(long venueDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 }

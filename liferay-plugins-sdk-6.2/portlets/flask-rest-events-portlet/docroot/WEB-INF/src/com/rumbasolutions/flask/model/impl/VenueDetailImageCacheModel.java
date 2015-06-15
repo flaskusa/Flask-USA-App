@@ -38,7 +38,7 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{venueDetailImageId=");
 		sb.append(venueDetailImageId);
@@ -52,10 +52,13 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 		sb.append(modifiedDate);
 		sb.append(", venueDetailId=");
 		sb.append(venueDetailId);
-		sb.append(", venueDetailImageTitle=");
-		sb.append(venueDetailImageTitle);
-		sb.append(", venueDetailImageDesc=");
-		sb.append(venueDetailImageDesc);
+		sb.append(", imageTitle=");
+		sb.append(imageTitle);
+		sb.append(", imageDesc=");
+		sb.append(imageDesc);
+		sb.append(", imagePath=");
+		sb.append(imagePath);
+		sb.append("}");
 
 		return sb.toString();
 	}
@@ -84,18 +87,25 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 
 		venueDetailImageImpl.setVenueDetailId(venueDetailId);
 
-		if (venueDetailImageTitle == null) {
-			venueDetailImageImpl.setVenueDetailImageTitle(StringPool.BLANK);
+		if (imageTitle == null) {
+			venueDetailImageImpl.setImageTitle(StringPool.BLANK);
 		}
 		else {
-			venueDetailImageImpl.setVenueDetailImageTitle(venueDetailImageTitle);
+			venueDetailImageImpl.setImageTitle(imageTitle);
 		}
 
-		if (venueDetailImageDesc == null) {
-			venueDetailImageImpl.setVenueDetailImageDesc(StringPool.BLANK);
+		if (imageDesc == null) {
+			venueDetailImageImpl.setImageDesc(StringPool.BLANK);
 		}
 		else {
-			venueDetailImageImpl.setVenueDetailImageDesc(venueDetailImageDesc);
+			venueDetailImageImpl.setImageDesc(imageDesc);
+		}
+
+		if (imagePath == null) {
+			venueDetailImageImpl.setImagePath(StringPool.BLANK);
+		}
+		else {
+			venueDetailImageImpl.setImagePath(imagePath);
 		}
 
 		venueDetailImageImpl.resetOriginalValues();
@@ -111,8 +121,9 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 		createdDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		venueDetailId = objectInput.readLong();
-		venueDetailImageTitle = objectInput.readUTF();
-		venueDetailImageDesc = objectInput.readUTF();
+		imageTitle = objectInput.readUTF();
+		imageDesc = objectInput.readUTF();
+		imagePath = objectInput.readUTF();
 	}
 
 	@Override
@@ -125,18 +136,25 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeLong(venueDetailId);
 
-		if (venueDetailImageTitle == null) {
+		if (imageTitle == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailImageTitle);
+			objectOutput.writeUTF(imageTitle);
 		}
 
-		if (venueDetailImageDesc == null) {
+		if (imageDesc == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailImageDesc);
+			objectOutput.writeUTF(imageDesc);
+		}
+
+		if (imagePath == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(imagePath);
 		}
 	}
 
@@ -146,6 +164,7 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 	public long createdDate;
 	public long modifiedDate;
 	public long venueDetailId;
-	public String venueDetailImageTitle;
-	public String venueDetailImageDesc;
+	public String imageTitle;
+	public String imageDesc;
+	public String imagePath;
 }

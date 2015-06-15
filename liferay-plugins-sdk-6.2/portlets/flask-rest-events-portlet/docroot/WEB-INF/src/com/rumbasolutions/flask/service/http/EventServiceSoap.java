@@ -81,13 +81,13 @@ public class EventServiceSoap {
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.lang.String startTime,
 		java.lang.String endTime, long eventTypeId, long venueId,
-		java.sql.Blob eventImage,
+		java.lang.String eventImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.Event returnValue = EventServiceUtil.addEvent(eventName,
 					description, eventDate, startTime, endTime, eventTypeId,
-					venueId, eventImage, serviceContext);
+					venueId, eventImagePath, serviceContext);
 
 			return com.rumbasolutions.flask.model.EventSoap.toSoapModel(returnValue);
 		}

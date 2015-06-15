@@ -14,7 +14,6 @@
 
 package com.rumbasolutions.flask.service.impl;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,22 +61,12 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		return events;
 	}
 	
- /*   <column name="eventName" type="String" />
-    <column name="description" type="String" />
-    <column name="eventDate" type="Date" />
-    <column name="startTime" type="Date" />
-    <column name="endTime" type="Date" />
-    <column name="eventTypeId" type="long" />
-    
-    <column name="eventImage" type="Blob" />
-    
-     
-    <column name="venueId" type="long" />*/
+
 	
 	@Override
 	public Event addEvent(String eventName, String description, 
 						String eventDate, String startTime, String endTime,
-						long eventTypeId, long venueId, Blob eventImage,
+						long eventTypeId, long venueId, String eventImagePath,
 								ServiceContext  serviceContext){
 		Event event=null;
 		try{
@@ -90,7 +79,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			event.setEndTime(FlaskUtil.parseTime(endTime).getTime());
 			event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
-			event.setEventImage(eventImage);
+			event.setEventImagePath(eventImagePath);
 
 			
 		}catch(Exception ex){

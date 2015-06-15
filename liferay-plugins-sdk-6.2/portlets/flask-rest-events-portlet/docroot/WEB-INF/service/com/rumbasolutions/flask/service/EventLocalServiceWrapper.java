@@ -253,13 +253,6 @@ public class EventLocalServiceWrapper implements EventLocalService,
 		return _eventLocalService.updateEvent(event);
 	}
 
-	@Override
-	public com.rumbasolutions.flask.model.EventEventImageBlobModel getEventImageBlobModel(
-		java.io.Serializable primaryKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _eventLocalService.getEventImageBlobModel(primaryKey);
-	}
-
 	/**
 	* Returns the Spring bean ID for this bean.
 	*

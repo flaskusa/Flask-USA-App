@@ -247,12 +247,6 @@ public class EventLocalServiceUtil {
 		return getService().updateEvent(event);
 	}
 
-	public static com.rumbasolutions.flask.model.EventEventImageBlobModel getEventImageBlobModel(
-		java.io.Serializable primaryKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getEventImageBlobModel(primaryKey);
-	}
-
 	/**
 	* Returns the Spring bean ID for this bean.
 	*

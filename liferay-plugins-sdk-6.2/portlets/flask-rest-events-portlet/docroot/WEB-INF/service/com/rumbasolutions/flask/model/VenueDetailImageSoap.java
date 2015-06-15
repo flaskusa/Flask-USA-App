@@ -16,8 +16,6 @@ package com.rumbasolutions.flask.model;
 
 import java.io.Serializable;
 
-import java.sql.Blob;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,9 +37,9 @@ public class VenueDetailImageSoap implements Serializable {
 		soapModel.setCreatedDate(model.getCreatedDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setVenueDetailId(model.getVenueDetailId());
-		soapModel.setVenueDetailImageTitle(model.getVenueDetailImageTitle());
-		soapModel.setVenueDetailImageDesc(model.getVenueDetailImageDesc());
-		soapModel.setVenueDetailImageData(model.getVenueDetailImageData());
+		soapModel.setImageTitle(model.getImageTitle());
+		soapModel.setImageDesc(model.getImageDesc());
+		soapModel.setImagePath(model.getImagePath());
 
 		return soapModel;
 	}
@@ -144,28 +142,28 @@ public class VenueDetailImageSoap implements Serializable {
 		_venueDetailId = venueDetailId;
 	}
 
-	public String getVenueDetailImageTitle() {
-		return _venueDetailImageTitle;
+	public String getImageTitle() {
+		return _imageTitle;
 	}
 
-	public void setVenueDetailImageTitle(String venueDetailImageTitle) {
-		_venueDetailImageTitle = venueDetailImageTitle;
+	public void setImageTitle(String imageTitle) {
+		_imageTitle = imageTitle;
 	}
 
-	public String getVenueDetailImageDesc() {
-		return _venueDetailImageDesc;
+	public String getImageDesc() {
+		return _imageDesc;
 	}
 
-	public void setVenueDetailImageDesc(String venueDetailImageDesc) {
-		_venueDetailImageDesc = venueDetailImageDesc;
+	public void setImageDesc(String imageDesc) {
+		_imageDesc = imageDesc;
 	}
 
-	public Blob getVenueDetailImageData() {
-		return _venueDetailImageData;
+	public String getImagePath() {
+		return _imagePath;
 	}
 
-	public void setVenueDetailImageData(Blob venueDetailImageData) {
-		_venueDetailImageData = venueDetailImageData;
+	public void setImagePath(String imagePath) {
+		_imagePath = imagePath;
 	}
 
 	private long _venueDetailImageId;
@@ -174,7 +172,7 @@ public class VenueDetailImageSoap implements Serializable {
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private long _venueDetailId;
-	private String _venueDetailImageTitle;
-	private String _venueDetailImageDesc;
-	private Blob _venueDetailImageData;
+	private String _imageTitle;
+	private String _imageDesc;
+	private String _imagePath;
 }

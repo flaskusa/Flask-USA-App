@@ -38,7 +38,7 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{eventDetailImageId=");
 		sb.append(eventDetailImageId);
@@ -52,10 +52,13 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 		sb.append(modifiedDate);
 		sb.append(", eventDetailId=");
 		sb.append(eventDetailId);
-		sb.append(", eventDetailImagetitle=");
-		sb.append(eventDetailImagetitle);
-		sb.append(", eventDetailImageDesc=");
-		sb.append(eventDetailImageDesc);
+		sb.append(", imagetitle=");
+		sb.append(imagetitle);
+		sb.append(", imageDesc=");
+		sb.append(imageDesc);
+		sb.append(", imagePath=");
+		sb.append(imagePath);
+		sb.append("}");
 
 		return sb.toString();
 	}
@@ -84,18 +87,25 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 
 		eventDetailImageImpl.setEventDetailId(eventDetailId);
 
-		if (eventDetailImagetitle == null) {
-			eventDetailImageImpl.setEventDetailImagetitle(StringPool.BLANK);
+		if (imagetitle == null) {
+			eventDetailImageImpl.setImagetitle(StringPool.BLANK);
 		}
 		else {
-			eventDetailImageImpl.setEventDetailImagetitle(eventDetailImagetitle);
+			eventDetailImageImpl.setImagetitle(imagetitle);
 		}
 
-		if (eventDetailImageDesc == null) {
-			eventDetailImageImpl.setEventDetailImageDesc(StringPool.BLANK);
+		if (imageDesc == null) {
+			eventDetailImageImpl.setImageDesc(StringPool.BLANK);
 		}
 		else {
-			eventDetailImageImpl.setEventDetailImageDesc(eventDetailImageDesc);
+			eventDetailImageImpl.setImageDesc(imageDesc);
+		}
+
+		if (imagePath == null) {
+			eventDetailImageImpl.setImagePath(StringPool.BLANK);
+		}
+		else {
+			eventDetailImageImpl.setImagePath(imagePath);
 		}
 
 		eventDetailImageImpl.resetOriginalValues();
@@ -111,8 +121,9 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 		createdDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		eventDetailId = objectInput.readLong();
-		eventDetailImagetitle = objectInput.readUTF();
-		eventDetailImageDesc = objectInput.readUTF();
+		imagetitle = objectInput.readUTF();
+		imageDesc = objectInput.readUTF();
+		imagePath = objectInput.readUTF();
 	}
 
 	@Override
@@ -125,18 +136,25 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeLong(eventDetailId);
 
-		if (eventDetailImagetitle == null) {
+		if (imagetitle == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailImagetitle);
+			objectOutput.writeUTF(imagetitle);
 		}
 
-		if (eventDetailImageDesc == null) {
+		if (imageDesc == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailImageDesc);
+			objectOutput.writeUTF(imageDesc);
+		}
+
+		if (imagePath == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(imagePath);
 		}
 	}
 
@@ -146,6 +164,7 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 	public long createdDate;
 	public long modifiedDate;
 	public long eventDetailId;
-	public String eventDetailImagetitle;
-	public String eventDetailImageDesc;
+	public String imagetitle;
+	public String imageDesc;
+	public String imagePath;
 }

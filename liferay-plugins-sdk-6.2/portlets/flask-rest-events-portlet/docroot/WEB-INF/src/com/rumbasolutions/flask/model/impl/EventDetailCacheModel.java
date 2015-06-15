@@ -38,7 +38,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{eventDetailId=");
 		sb.append(eventDetailId);
@@ -56,34 +56,32 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		sb.append(infoTypeId);
 		sb.append(", infoTypeCategoryId=");
 		sb.append(infoTypeCategoryId);
-		sb.append(", eventDetailInfoName=");
-		sb.append(eventDetailInfoName);
-		sb.append(", eventDetailInfoDesc=");
-		sb.append(eventDetailInfoDesc);
-		sb.append(", eventDetailInfoComment=");
-		sb.append(eventDetailInfoComment);
-		sb.append(", eventDetailAddressLine1=");
-		sb.append(eventDetailAddressLine1);
-		sb.append(", eventDetailAddressLine2=");
-		sb.append(eventDetailAddressLine2);
-		sb.append(", eventDetailInfocity=");
-		sb.append(eventDetailInfocity);
-		sb.append(", eventDetailZip=");
-		sb.append(eventDetailZip);
-		sb.append(", eventDetailState=");
-		sb.append(eventDetailState);
-		sb.append(", eventDetailCountry=");
-		sb.append(eventDetailCountry);
-		sb.append(", eventDetailLatitude=");
-		sb.append(eventDetailLatitude);
-		sb.append(", eventDetailLongitude=");
-		sb.append(eventDetailLongitude);
-		sb.append(", eventDetailPhone=");
-		sb.append(eventDetailPhone);
-		sb.append(", eventDetailWebsite=");
-		sb.append(eventDetailWebsite);
-		sb.append(", eventDetailCost=");
-		sb.append(eventDetailCost);
+		sb.append(", infoName=");
+		sb.append(infoName);
+		sb.append(", infoDesc=");
+		sb.append(infoDesc);
+		sb.append(", addrLine1=");
+		sb.append(addrLine1);
+		sb.append(", addrLine2=");
+		sb.append(addrLine2);
+		sb.append(", city=");
+		sb.append(city);
+		sb.append(", zipCode=");
+		sb.append(zipCode);
+		sb.append(", stateId=");
+		sb.append(stateId);
+		sb.append(", countryId=");
+		sb.append(countryId);
+		sb.append(", latitude=");
+		sb.append(latitude);
+		sb.append(", longitude=");
+		sb.append(longitude);
+		sb.append(", phone=");
+		sb.append(phone);
+		sb.append(", website=");
+		sb.append(website);
+		sb.append(", cost=");
+		sb.append(cost);
 		sb.append(", hoursOfOperation=");
 		sb.append(hoursOfOperation);
 		sb.append("}");
@@ -117,98 +115,80 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		eventDetailImpl.setInfoTypeId(infoTypeId);
 		eventDetailImpl.setInfoTypeCategoryId(infoTypeCategoryId);
 
-		if (eventDetailInfoName == null) {
-			eventDetailImpl.setEventDetailInfoName(StringPool.BLANK);
+		if (infoName == null) {
+			eventDetailImpl.setInfoName(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setEventDetailInfoName(eventDetailInfoName);
+			eventDetailImpl.setInfoName(infoName);
 		}
 
-		if (eventDetailInfoDesc == null) {
-			eventDetailImpl.setEventDetailInfoDesc(StringPool.BLANK);
+		if (infoDesc == null) {
+			eventDetailImpl.setInfoDesc(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setEventDetailInfoDesc(eventDetailInfoDesc);
+			eventDetailImpl.setInfoDesc(infoDesc);
 		}
 
-		if (eventDetailInfoComment == null) {
-			eventDetailImpl.setEventDetailInfoComment(StringPool.BLANK);
+		if (addrLine1 == null) {
+			eventDetailImpl.setAddrLine1(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setEventDetailInfoComment(eventDetailInfoComment);
+			eventDetailImpl.setAddrLine1(addrLine1);
 		}
 
-		if (eventDetailAddressLine1 == null) {
-			eventDetailImpl.setEventDetailAddressLine1(StringPool.BLANK);
+		if (addrLine2 == null) {
+			eventDetailImpl.setAddrLine2(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setEventDetailAddressLine1(eventDetailAddressLine1);
+			eventDetailImpl.setAddrLine2(addrLine2);
 		}
 
-		if (eventDetailAddressLine2 == null) {
-			eventDetailImpl.setEventDetailAddressLine2(StringPool.BLANK);
+		if (city == null) {
+			eventDetailImpl.setCity(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setEventDetailAddressLine2(eventDetailAddressLine2);
+			eventDetailImpl.setCity(city);
 		}
 
-		if (eventDetailInfocity == null) {
-			eventDetailImpl.setEventDetailInfocity(StringPool.BLANK);
+		if (zipCode == null) {
+			eventDetailImpl.setZipCode(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setEventDetailInfocity(eventDetailInfocity);
+			eventDetailImpl.setZipCode(zipCode);
 		}
 
-		if (eventDetailZip == null) {
-			eventDetailImpl.setEventDetailZip(StringPool.BLANK);
+		eventDetailImpl.setStateId(stateId);
+		eventDetailImpl.setCountryId(countryId);
+
+		if (latitude == null) {
+			eventDetailImpl.setLatitude(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setEventDetailZip(eventDetailZip);
+			eventDetailImpl.setLatitude(latitude);
 		}
 
-		if (eventDetailState == null) {
-			eventDetailImpl.setEventDetailState(StringPool.BLANK);
+		if (longitude == null) {
+			eventDetailImpl.setLongitude(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setEventDetailState(eventDetailState);
+			eventDetailImpl.setLongitude(longitude);
 		}
 
-		if (eventDetailCountry == null) {
-			eventDetailImpl.setEventDetailCountry(StringPool.BLANK);
+		if (phone == null) {
+			eventDetailImpl.setPhone(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setEventDetailCountry(eventDetailCountry);
+			eventDetailImpl.setPhone(phone);
 		}
 
-		if (eventDetailLatitude == null) {
-			eventDetailImpl.setEventDetailLatitude(StringPool.BLANK);
+		if (website == null) {
+			eventDetailImpl.setWebsite(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setEventDetailLatitude(eventDetailLatitude);
+			eventDetailImpl.setWebsite(website);
 		}
 
-		if (eventDetailLongitude == null) {
-			eventDetailImpl.setEventDetailLongitude(StringPool.BLANK);
-		}
-		else {
-			eventDetailImpl.setEventDetailLongitude(eventDetailLongitude);
-		}
-
-		if (eventDetailPhone == null) {
-			eventDetailImpl.setEventDetailPhone(StringPool.BLANK);
-		}
-		else {
-			eventDetailImpl.setEventDetailPhone(eventDetailPhone);
-		}
-
-		if (eventDetailWebsite == null) {
-			eventDetailImpl.setEventDetailWebsite(StringPool.BLANK);
-		}
-		else {
-			eventDetailImpl.setEventDetailWebsite(eventDetailWebsite);
-		}
-
-		eventDetailImpl.setEventDetailCost(eventDetailCost);
+		eventDetailImpl.setCost(cost);
 
 		if (hoursOfOperation == null) {
 			eventDetailImpl.setHoursOfOperation(StringPool.BLANK);
@@ -232,20 +212,19 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		eventId = objectInput.readLong();
 		infoTypeId = objectInput.readLong();
 		infoTypeCategoryId = objectInput.readLong();
-		eventDetailInfoName = objectInput.readUTF();
-		eventDetailInfoDesc = objectInput.readUTF();
-		eventDetailInfoComment = objectInput.readUTF();
-		eventDetailAddressLine1 = objectInput.readUTF();
-		eventDetailAddressLine2 = objectInput.readUTF();
-		eventDetailInfocity = objectInput.readUTF();
-		eventDetailZip = objectInput.readUTF();
-		eventDetailState = objectInput.readUTF();
-		eventDetailCountry = objectInput.readUTF();
-		eventDetailLatitude = objectInput.readUTF();
-		eventDetailLongitude = objectInput.readUTF();
-		eventDetailPhone = objectInput.readUTF();
-		eventDetailWebsite = objectInput.readUTF();
-		eventDetailCost = objectInput.readDouble();
+		infoName = objectInput.readUTF();
+		infoDesc = objectInput.readUTF();
+		addrLine1 = objectInput.readUTF();
+		addrLine2 = objectInput.readUTF();
+		city = objectInput.readUTF();
+		zipCode = objectInput.readUTF();
+		stateId = objectInput.readLong();
+		countryId = objectInput.readLong();
+		latitude = objectInput.readUTF();
+		longitude = objectInput.readUTF();
+		phone = objectInput.readUTF();
+		website = objectInput.readUTF();
+		cost = objectInput.readDouble();
 		hoursOfOperation = objectInput.readUTF();
 	}
 
@@ -261,98 +240,80 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		objectOutput.writeLong(infoTypeId);
 		objectOutput.writeLong(infoTypeCategoryId);
 
-		if (eventDetailInfoName == null) {
+		if (infoName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailInfoName);
+			objectOutput.writeUTF(infoName);
 		}
 
-		if (eventDetailInfoDesc == null) {
+		if (infoDesc == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailInfoDesc);
+			objectOutput.writeUTF(infoDesc);
 		}
 
-		if (eventDetailInfoComment == null) {
+		if (addrLine1 == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailInfoComment);
+			objectOutput.writeUTF(addrLine1);
 		}
 
-		if (eventDetailAddressLine1 == null) {
+		if (addrLine2 == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailAddressLine1);
+			objectOutput.writeUTF(addrLine2);
 		}
 
-		if (eventDetailAddressLine2 == null) {
+		if (city == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailAddressLine2);
+			objectOutput.writeUTF(city);
 		}
 
-		if (eventDetailInfocity == null) {
+		if (zipCode == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailInfocity);
+			objectOutput.writeUTF(zipCode);
 		}
 
-		if (eventDetailZip == null) {
+		objectOutput.writeLong(stateId);
+		objectOutput.writeLong(countryId);
+
+		if (latitude == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailZip);
+			objectOutput.writeUTF(latitude);
 		}
 
-		if (eventDetailState == null) {
+		if (longitude == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailState);
+			objectOutput.writeUTF(longitude);
 		}
 
-		if (eventDetailCountry == null) {
+		if (phone == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailCountry);
+			objectOutput.writeUTF(phone);
 		}
 
-		if (eventDetailLatitude == null) {
+		if (website == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(eventDetailLatitude);
+			objectOutput.writeUTF(website);
 		}
 
-		if (eventDetailLongitude == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(eventDetailLongitude);
-		}
-
-		if (eventDetailPhone == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(eventDetailPhone);
-		}
-
-		if (eventDetailWebsite == null) {
-			objectOutput.writeUTF(StringPool.BLANK);
-		}
-		else {
-			objectOutput.writeUTF(eventDetailWebsite);
-		}
-
-		objectOutput.writeDouble(eventDetailCost);
+		objectOutput.writeDouble(cost);
 
 		if (hoursOfOperation == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -370,19 +331,18 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	public long eventId;
 	public long infoTypeId;
 	public long infoTypeCategoryId;
-	public String eventDetailInfoName;
-	public String eventDetailInfoDesc;
-	public String eventDetailInfoComment;
-	public String eventDetailAddressLine1;
-	public String eventDetailAddressLine2;
-	public String eventDetailInfocity;
-	public String eventDetailZip;
-	public String eventDetailState;
-	public String eventDetailCountry;
-	public String eventDetailLatitude;
-	public String eventDetailLongitude;
-	public String eventDetailPhone;
-	public String eventDetailWebsite;
-	public double eventDetailCost;
+	public String infoName;
+	public String infoDesc;
+	public String addrLine1;
+	public String addrLine2;
+	public String city;
+	public String zipCode;
+	public long stateId;
+	public long countryId;
+	public String latitude;
+	public String longitude;
+	public String phone;
+	public String website;
+	public double cost;
 	public String hoursOfOperation;
 }

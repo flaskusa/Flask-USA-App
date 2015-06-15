@@ -779,12 +779,8 @@ public class VenueImagePersistenceImpl extends BasePersistenceImpl<VenueImage>
 				venueImage.setNew(false);
 			}
 			else {
-				session.evict(venueImage);
-				session.saveOrUpdate(venueImage);
+				session.merge(venueImage);
 			}
-
-			session.flush();
-			session.clear();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -821,8 +817,6 @@ public class VenueImagePersistenceImpl extends BasePersistenceImpl<VenueImage>
 		EntityCacheUtil.putResult(VenueImageModelImpl.ENTITY_CACHE_ENABLED,
 			VenueImageImpl.class, venueImage.getPrimaryKey(), venueImage);
 
-		venueImage.resetOriginalValues();
-
 		return venueImage;
 	}
 
@@ -842,7 +836,7 @@ public class VenueImagePersistenceImpl extends BasePersistenceImpl<VenueImage>
 		venueImageImpl.setCreatedDate(venueImage.getCreatedDate());
 		venueImageImpl.setModifiedDate(venueImage.getModifiedDate());
 		venueImageImpl.setTitle(venueImage.getTitle());
-		venueImageImpl.setVenueImage(venueImage.getVenueImage());
+		venueImageImpl.setVenueImagePath(venueImage.getVenueImagePath());
 		venueImageImpl.setVenueId(venueImage.getVenueId());
 
 		return venueImageImpl;

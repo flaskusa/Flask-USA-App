@@ -30,14 +30,11 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 
 import com.rumbasolutions.flask.model.EventDetailImage;
-import com.rumbasolutions.flask.model.EventDetailImageEventDetailImageDataBlobModel;
 import com.rumbasolutions.flask.model.EventDetailImageModel;
 import com.rumbasolutions.flask.model.EventDetailImageSoap;
-import com.rumbasolutions.flask.service.EventDetailImageLocalServiceUtil;
 
 import java.io.Serializable;
 
-import java.sql.Blob;
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -75,11 +72,11 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 			{ "createdDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "eventDetailId", Types.BIGINT },
-			{ "eventDetailImagetitle", Types.VARCHAR },
-			{ "eventDetailImageDesc", Types.VARCHAR },
-			{ "eventDetailImageData", Types.BLOB }
+			{ "imagetitle", Types.VARCHAR },
+			{ "imageDesc", Types.VARCHAR },
+			{ "imagePath", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetailImage (eventDetailImageId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventDetailId LONG,eventDetailImagetitle VARCHAR(75) null,eventDetailImageDesc VARCHAR(75) null,eventDetailImageData BLOB)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetailImage (eventDetailImageId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventDetailId LONG,imagetitle VARCHAR(100) null,imageDesc VARCHAR(255) null,imagePath VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_EventDetailImage";
 	public static final String ORDER_BY_JPQL = " ORDER BY eventDetailImage.eventDetailImageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_EventDetailImage.eventDetailImageId ASC";
@@ -117,9 +114,9 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 		model.setCreatedDate(soapModel.getCreatedDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setEventDetailId(soapModel.getEventDetailId());
-		model.setEventDetailImagetitle(soapModel.getEventDetailImagetitle());
-		model.setEventDetailImageDesc(soapModel.getEventDetailImageDesc());
-		model.setEventDetailImageData(soapModel.getEventDetailImageData());
+		model.setImagetitle(soapModel.getImagetitle());
+		model.setImageDesc(soapModel.getImageDesc());
+		model.setImagePath(soapModel.getImagePath());
 
 		return model;
 	}
@@ -191,9 +188,9 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("eventDetailId", getEventDetailId());
-		attributes.put("eventDetailImagetitle", getEventDetailImagetitle());
-		attributes.put("eventDetailImageDesc", getEventDetailImageDesc());
-		attributes.put("eventDetailImageData", getEventDetailImageData());
+		attributes.put("imagetitle", getImagetitle());
+		attributes.put("imageDesc", getImageDesc());
+		attributes.put("imagePath", getImagePath());
 
 		return attributes;
 	}
@@ -236,24 +233,22 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 			setEventDetailId(eventDetailId);
 		}
 
-		String eventDetailImagetitle = (String)attributes.get(
-				"eventDetailImagetitle");
+		String imagetitle = (String)attributes.get("imagetitle");
 
-		if (eventDetailImagetitle != null) {
-			setEventDetailImagetitle(eventDetailImagetitle);
+		if (imagetitle != null) {
+			setImagetitle(imagetitle);
 		}
 
-		String eventDetailImageDesc = (String)attributes.get(
-				"eventDetailImageDesc");
+		String imageDesc = (String)attributes.get("imageDesc");
 
-		if (eventDetailImageDesc != null) {
-			setEventDetailImageDesc(eventDetailImageDesc);
+		if (imageDesc != null) {
+			setImageDesc(imageDesc);
 		}
 
-		Blob eventDetailImageData = (Blob)attributes.get("eventDetailImageData");
+		String imagePath = (String)attributes.get("imagePath");
 
-		if (eventDetailImageData != null) {
-			setEventDetailImageData(eventDetailImageData);
+		if (imagePath != null) {
+			setImagePath(imagePath);
 		}
 	}
 
@@ -347,65 +342,50 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 
 	@JSON
 	@Override
-	public String getEventDetailImagetitle() {
-		if (_eventDetailImagetitle == null) {
+	public String getImagetitle() {
+		if (_imagetitle == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailImagetitle;
+			return _imagetitle;
 		}
 	}
 
 	@Override
-	public void setEventDetailImagetitle(String eventDetailImagetitle) {
-		_eventDetailImagetitle = eventDetailImagetitle;
+	public void setImagetitle(String imagetitle) {
+		_imagetitle = imagetitle;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailImageDesc() {
-		if (_eventDetailImageDesc == null) {
+	public String getImageDesc() {
+		if (_imageDesc == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailImageDesc;
+			return _imageDesc;
 		}
 	}
 
 	@Override
-	public void setEventDetailImageDesc(String eventDetailImageDesc) {
-		_eventDetailImageDesc = eventDetailImageDesc;
+	public void setImageDesc(String imageDesc) {
+		_imageDesc = imageDesc;
 	}
 
 	@JSON
 	@Override
-	public Blob getEventDetailImageData() {
-		if (_eventDetailImageDataBlobModel == null) {
-			try {
-				_eventDetailImageDataBlobModel = EventDetailImageLocalServiceUtil.getEventDetailImageDataBlobModel(getPrimaryKey());
-			}
-			catch (Exception e) {
-			}
+	public String getImagePath() {
+		if (_imagePath == null) {
+			return StringPool.BLANK;
 		}
-
-		Blob blob = null;
-
-		if (_eventDetailImageDataBlobModel != null) {
-			blob = _eventDetailImageDataBlobModel.getEventDetailImageDataBlob();
+		else {
+			return _imagePath;
 		}
-
-		return blob;
 	}
 
 	@Override
-	public void setEventDetailImageData(Blob eventDetailImageData) {
-		if (_eventDetailImageDataBlobModel == null) {
-			_eventDetailImageDataBlobModel = new EventDetailImageEventDetailImageDataBlobModel(getPrimaryKey(),
-					eventDetailImageData);
-		}
-		else {
-			_eventDetailImageDataBlobModel.setEventDetailImageDataBlob(eventDetailImageData);
-		}
+	public void setImagePath(String imagePath) {
+		_imagePath = imagePath;
 	}
 
 	public long getColumnBitmask() {
@@ -445,8 +425,9 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 		eventDetailImageImpl.setCreatedDate(getCreatedDate());
 		eventDetailImageImpl.setModifiedDate(getModifiedDate());
 		eventDetailImageImpl.setEventDetailId(getEventDetailId());
-		eventDetailImageImpl.setEventDetailImagetitle(getEventDetailImagetitle());
-		eventDetailImageImpl.setEventDetailImageDesc(getEventDetailImageDesc());
+		eventDetailImageImpl.setImagetitle(getImagetitle());
+		eventDetailImageImpl.setImageDesc(getImageDesc());
+		eventDetailImageImpl.setImagePath(getImagePath());
 
 		eventDetailImageImpl.resetOriginalValues();
 
@@ -503,8 +484,6 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 
 		eventDetailImageModelImpl._setOriginalEventDetailId = false;
 
-		eventDetailImageModelImpl._eventDetailImageDataBlobModel = null;
-
 		eventDetailImageModelImpl._columnBitmask = 0;
 	}
 
@@ -538,22 +517,28 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 
 		eventDetailImageCacheModel.eventDetailId = getEventDetailId();
 
-		eventDetailImageCacheModel.eventDetailImagetitle = getEventDetailImagetitle();
+		eventDetailImageCacheModel.imagetitle = getImagetitle();
 
-		String eventDetailImagetitle = eventDetailImageCacheModel.eventDetailImagetitle;
+		String imagetitle = eventDetailImageCacheModel.imagetitle;
 
-		if ((eventDetailImagetitle != null) &&
-				(eventDetailImagetitle.length() == 0)) {
-			eventDetailImageCacheModel.eventDetailImagetitle = null;
+		if ((imagetitle != null) && (imagetitle.length() == 0)) {
+			eventDetailImageCacheModel.imagetitle = null;
 		}
 
-		eventDetailImageCacheModel.eventDetailImageDesc = getEventDetailImageDesc();
+		eventDetailImageCacheModel.imageDesc = getImageDesc();
 
-		String eventDetailImageDesc = eventDetailImageCacheModel.eventDetailImageDesc;
+		String imageDesc = eventDetailImageCacheModel.imageDesc;
 
-		if ((eventDetailImageDesc != null) &&
-				(eventDetailImageDesc.length() == 0)) {
-			eventDetailImageCacheModel.eventDetailImageDesc = null;
+		if ((imageDesc != null) && (imageDesc.length() == 0)) {
+			eventDetailImageCacheModel.imageDesc = null;
+		}
+
+		eventDetailImageCacheModel.imagePath = getImagePath();
+
+		String imagePath = eventDetailImageCacheModel.imagePath;
+
+		if ((imagePath != null) && (imagePath.length() == 0)) {
+			eventDetailImageCacheModel.imagePath = null;
 		}
 
 		return eventDetailImageCacheModel;
@@ -575,10 +560,13 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 		sb.append(getModifiedDate());
 		sb.append(", eventDetailId=");
 		sb.append(getEventDetailId());
-		sb.append(", eventDetailImagetitle=");
-		sb.append(getEventDetailImagetitle());
-		sb.append(", eventDetailImageDesc=");
-		sb.append(getEventDetailImageDesc());
+		sb.append(", imagetitle=");
+		sb.append(getImagetitle());
+		sb.append(", imageDesc=");
+		sb.append(getImageDesc());
+		sb.append(", imagePath=");
+		sb.append(getImagePath());
+		sb.append("}");
 
 		return sb.toString();
 	}
@@ -616,12 +604,16 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 		sb.append(getEventDetailId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailImagetitle</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailImagetitle());
+			"<column><column-name>imagetitle</column-name><column-value><![CDATA[");
+		sb.append(getImagetitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailImageDesc</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailImageDesc());
+			"<column><column-name>imageDesc</column-name><column-value><![CDATA[");
+		sb.append(getImageDesc());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imagePath</column-name><column-value><![CDATA[");
+		sb.append(getImagePath());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -642,9 +634,9 @@ public class EventDetailImageModelImpl extends BaseModelImpl<EventDetailImage>
 	private long _eventDetailId;
 	private long _originalEventDetailId;
 	private boolean _setOriginalEventDetailId;
-	private String _eventDetailImagetitle;
-	private String _eventDetailImageDesc;
-	private EventDetailImageEventDetailImageDataBlobModel _eventDetailImageDataBlobModel;
+	private String _imagetitle;
+	private String _imageDesc;
+	private String _imagePath;
 	private long _columnBitmask;
 	private EventDetailImage _escapedModel;
 }

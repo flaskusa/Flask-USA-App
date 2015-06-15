@@ -27,16 +27,8 @@
 		<property name="startTime" type="org.hibernate.type.TimestampType" />
 		<property name="endTime" type="org.hibernate.type.TimestampType" />
 		<property name="eventTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<one-to-one name="eventImageBlobModel" access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" class="com.rumbasolutions.flask.model.EventEventImageBlobModel" cascade="save-update" outer-join="false" constrained="true" />
+		<property name="eventImagePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="venueId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-	</class>
-	<class name="com.rumbasolutions.flask.model.EventEventImageBlobModel" table="flaskevents_Event" lazy="true">
-		<id name="eventId" column="eventId">
-			<generator class="foreign">
-				<param name="property">com.rumbasolutions.flask.model.impl.EventImpl</param>
-			</generator>
-		</id>
-		<property column="eventImage" name="eventImageBlob" type="blob" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.EventDetailImpl" table="flaskevents_EventDetail">
 		<cache usage="read-write" />
@@ -50,20 +42,19 @@
 		<property name="eventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="infoTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="infoTypeCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="eventDetailInfoName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailInfoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailInfoComment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailAddressLine1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailAddressLine2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailInfocity" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailZip" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailState" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailCountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailLatitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailLongitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailPhone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailWebsite" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailCost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="infoName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="infoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="addrLine1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="addrLine2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zipCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="stateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="countryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="latitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="longitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="phone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="website" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="hoursOfOperation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.EventDetailImageImpl" table="flaskevents_EventDetailImage">
@@ -76,17 +67,9 @@
 		<property name="createdDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="eventDetailId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="eventDetailImagetitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="eventDetailImageDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<one-to-one name="eventDetailImageDataBlobModel" access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" class="com.rumbasolutions.flask.model.EventDetailImageEventDetailImageDataBlobModel" cascade="save-update" outer-join="false" constrained="true" />
-	</class>
-	<class name="com.rumbasolutions.flask.model.EventDetailImageEventDetailImageDataBlobModel" table="flaskevents_EventDetailImage" lazy="true">
-		<id name="eventDetailImageId" column="eventDetailImageId">
-			<generator class="foreign">
-				<param name="property">com.rumbasolutions.flask.model.impl.EventDetailImageImpl</param>
-			</generator>
-		</id>
-		<property column="eventDetailImageData" name="eventDetailImageDataBlob" type="blob" />
+		<property name="imagetitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imageDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imagePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.EventTypeImpl" table="flaskevents_EventType">
 		<cache usage="read-write" />
@@ -142,20 +125,22 @@
 		<property name="venueId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="infoTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="infoTypeCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="venueDetailInfoName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailInfoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailInfoComment" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailAddressLine1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailAddressLine2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailCity" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailState" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailCountry" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailLatitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailLongitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailPhone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailWebsite" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailCost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
-		<property name="venueDetailhoursOfOperation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="infoTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="infoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="addrLine1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="addrLine2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zipCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="stateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="stateName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="countryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="countryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="latitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="longitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="phone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="website" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="cost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="hoursOfOperation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.VenueDetailImageImpl" table="flaskevents_VenueDetailImage">
 		<cache usage="read-write" />
@@ -167,17 +152,9 @@
 		<property name="createdDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="venueDetailId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="venueDetailImageTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="venueDetailImageDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<one-to-one name="venueDetailImageDataBlobModel" access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" class="com.rumbasolutions.flask.model.VenueDetailImageVenueDetailImageDataBlobModel" cascade="save-update" outer-join="false" constrained="true" />
-	</class>
-	<class name="com.rumbasolutions.flask.model.VenueDetailImageVenueDetailImageDataBlobModel" table="flaskevents_VenueDetailImage" lazy="true">
-		<id name="venueDetailImageId" column="venueDetailImageId">
-			<generator class="foreign">
-				<param name="property">com.rumbasolutions.flask.model.impl.VenueDetailImageImpl</param>
-			</generator>
-		</id>
-		<property column="venueDetailImageData" name="venueDetailImageDataBlob" type="blob" />
+		<property name="imageTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imageDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imagePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.VenueImageImpl" table="flaskevents_VenueImage">
 		<cache usage="read-write" />
@@ -189,15 +166,7 @@
 		<property name="createdDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="title" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<one-to-one name="venueImageBlobModel" access="com.liferay.portal.dao.orm.hibernate.PrivatePropertyAccessor" class="com.rumbasolutions.flask.model.VenueImageVenueImageBlobModel" cascade="save-update" outer-join="false" constrained="true" />
+		<property name="venueImagePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="venueId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-	</class>
-	<class name="com.rumbasolutions.flask.model.VenueImageVenueImageBlobModel" table="flaskevents_VenueImage" lazy="true">
-		<id name="venueImageId" column="venueImageId">
-			<generator class="foreign">
-				<param name="property">com.rumbasolutions.flask.model.impl.VenueImageImpl</param>
-			</generator>
-		</id>
-		<property column="venueImage" name="venueImageBlob" type="blob" />
 	</class>
 </hibernate-mapping>

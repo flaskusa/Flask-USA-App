@@ -43,7 +43,7 @@ public class EventServiceClp implements EventService {
 		_methodParameterTypes4 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long", "long",
-				"java.sql.Blob", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -127,7 +127,7 @@ public class EventServiceClp implements EventService {
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.lang.String startTime,
 		java.lang.String endTime, long eventTypeId, long venueId,
-		java.sql.Blob eventImage,
+		java.lang.String eventImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -149,7 +149,7 @@ public class EventServiceClp implements EventService {
 						
 					venueId,
 						
-					ClpSerializer.translateInput(eventImage),
+					ClpSerializer.translateInput(eventImagePath),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

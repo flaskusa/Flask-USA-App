@@ -16,8 +16,6 @@ package com.rumbasolutions.flask.model;
 
 import java.io.Serializable;
 
-import java.sql.Blob;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,7 +37,7 @@ public class VenueImageSoap implements Serializable {
 		soapModel.setCreatedDate(model.getCreatedDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setTitle(model.getTitle());
-		soapModel.setVenueImage(model.getVenueImage());
+		soapModel.setVenueImagePath(model.getVenueImagePath());
 		soapModel.setVenueId(model.getVenueId());
 
 		return soapModel;
@@ -141,12 +139,12 @@ public class VenueImageSoap implements Serializable {
 		_title = title;
 	}
 
-	public Blob getVenueImage() {
-		return _venueImage;
+	public String getVenueImagePath() {
+		return _venueImagePath;
 	}
 
-	public void setVenueImage(Blob venueImage) {
-		_venueImage = venueImage;
+	public void setVenueImagePath(String venueImagePath) {
+		_venueImagePath = venueImagePath;
 	}
 
 	public long getVenueId() {
@@ -163,6 +161,6 @@ public class VenueImageSoap implements Serializable {
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private String _title;
-	private Blob _venueImage;
+	private String _venueImagePath;
 	private long _venueId;
 }

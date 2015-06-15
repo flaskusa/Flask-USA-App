@@ -80,7 +80,7 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 			{ "venueCountryId", Types.BIGINT },
 			{ "venueMetroArea", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_Venue (venueId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueName VARCHAR(75) null,venueDescription VARCHAR(75) null,venueZipCode VARCHAR(75) null,addrLine1 VARCHAR(75) null,addrLine2 VARCHAR(75) null,venueCity VARCHAR(75) null,venueStateId LONG,venueCountryId LONG,venueMetroArea VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_Venue (venueId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueName VARCHAR(100) null,venueDescription VARCHAR(255) null,venueZipCode VARCHAR(20) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,venueCity VARCHAR(100) null,venueStateId LONG,venueCountryId LONG,venueMetroArea VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_Venue";
 	public static final String ORDER_BY_JPQL = " ORDER BY venue.venueName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_Venue.venueName ASC";
@@ -97,7 +97,8 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 				"value.object.column.bitmask.enabled.com.rumbasolutions.flask.model.Venue"),
 			true);
 	public static long VENUEMETROAREA_COLUMN_BITMASK = 1L;
-	public static long VENUENAME_COLUMN_BITMASK = 2L;
+	public static long VENUEZIPCODE_COLUMN_BITMASK = 2L;
+	public static long VENUENAME_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -407,7 +408,17 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 
 	@Override
 	public void setVenueZipCode(String venueZipCode) {
+		_columnBitmask |= VENUEZIPCODE_COLUMN_BITMASK;
+
+		if (_originalVenueZipCode == null) {
+			_originalVenueZipCode = _venueZipCode;
+		}
+
 		_venueZipCode = venueZipCode;
+	}
+
+	public String getOriginalVenueZipCode() {
+		return GetterUtil.getString(_originalVenueZipCode);
 	}
 
 	@JSON
@@ -600,6 +611,8 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 	@Override
 	public void resetOriginalValues() {
 		VenueModelImpl venueModelImpl = this;
+
+		venueModelImpl._originalVenueZipCode = venueModelImpl._venueZipCode;
 
 		venueModelImpl._originalVenueMetroArea = venueModelImpl._venueMetroArea;
 
@@ -815,6 +828,7 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 	private String _venueName;
 	private String _venueDescription;
 	private String _venueZipCode;
+	private String _originalVenueZipCode;
 	private String _addrLine1;
 	private String _addrLine2;
 	private String _venueCity;

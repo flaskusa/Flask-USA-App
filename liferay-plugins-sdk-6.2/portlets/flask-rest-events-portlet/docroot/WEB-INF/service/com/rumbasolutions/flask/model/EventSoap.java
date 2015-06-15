@@ -16,8 +16,6 @@ package com.rumbasolutions.flask.model;
 
 import java.io.Serializable;
 
-import java.sql.Blob;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -44,7 +42,7 @@ public class EventSoap implements Serializable {
 		soapModel.setStartTime(model.getStartTime());
 		soapModel.setEndTime(model.getEndTime());
 		soapModel.setEventTypeId(model.getEventTypeId());
-		soapModel.setEventImage(model.getEventImage());
+		soapModel.setEventImagePath(model.getEventImagePath());
 		soapModel.setVenueId(model.getVenueId());
 
 		return soapModel;
@@ -186,12 +184,12 @@ public class EventSoap implements Serializable {
 		_eventTypeId = eventTypeId;
 	}
 
-	public Blob getEventImage() {
-		return _eventImage;
+	public String getEventImagePath() {
+		return _eventImagePath;
 	}
 
-	public void setEventImage(Blob eventImage) {
-		_eventImage = eventImage;
+	public void setEventImagePath(String eventImagePath) {
+		_eventImagePath = eventImagePath;
 	}
 
 	public long getVenueId() {
@@ -213,6 +211,6 @@ public class EventSoap implements Serializable {
 	private Date _startTime;
 	private Date _endTime;
 	private long _eventTypeId;
-	private Blob _eventImage;
+	private String _eventImagePath;
 	private long _venueId;
 }

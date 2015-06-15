@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
-import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexable;
@@ -33,7 +32,6 @@ import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.rumbasolutions.flask.model.VenueDetailImage;
-import com.rumbasolutions.flask.model.VenueDetailImageVenueDetailImageDataBlobModel;
 import com.rumbasolutions.flask.service.VenueDetailImageLocalService;
 import com.rumbasolutions.flask.service.persistence.EventDetailImagePersistence;
 import com.rumbasolutions.flask.service.persistence.EventDetailPersistence;
@@ -289,25 +287,6 @@ public abstract class VenueDetailImageLocalServiceBaseImpl
 	public VenueDetailImage updateVenueDetailImage(
 		VenueDetailImage venueDetailImage) throws SystemException {
 		return venueDetailImagePersistence.update(venueDetailImage);
-	}
-
-	@Override
-	public VenueDetailImageVenueDetailImageDataBlobModel getVenueDetailImageDataBlobModel(
-		Serializable primaryKey) throws SystemException {
-		Session session = null;
-
-		try {
-			session = venueDetailImagePersistence.openSession();
-
-			return (com.rumbasolutions.flask.model.VenueDetailImageVenueDetailImageDataBlobModel)session.get(VenueDetailImageVenueDetailImageDataBlobModel.class,
-				primaryKey);
-		}
-		catch (Exception e) {
-			throw venueDetailImagePersistence.processException(e);
-		}
-		finally {
-			venueDetailImagePersistence.closeSession(session);
-		}
 	}
 
 	/**

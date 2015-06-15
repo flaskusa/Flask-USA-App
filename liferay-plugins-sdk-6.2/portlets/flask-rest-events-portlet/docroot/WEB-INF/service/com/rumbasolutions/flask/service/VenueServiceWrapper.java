@@ -107,10 +107,152 @@ public class VenueServiceWrapper implements VenueService,
 
 	@Override
 	public void addVenueImage(long venueId, java.lang.String title,
-		java.sql.Blob venueImageData,
+		java.lang.String venueImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		_venueService.addVenueImage(venueId, title, venueImageData,
+		_venueService.addVenueImage(venueId, title, venueImagePath,
 			serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImages(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.getVenueImages(venueId, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueImage getVenueImage(
+		long venueImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.getVenueImage(venueImageId, serviceContext);
+	}
+
+	@Override
+	public void updateVenueImage(long venueImageId, java.lang.String title,
+		java.lang.String venueImagePath,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_venueService.updateVenueImage(venueImageId, title, venueImagePath,
+			serviceContext);
+	}
+
+	@Override
+	public void deleteVenueImage(long venueImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_venueService.deleteVenueImage(venueImageId, serviceContext);
+	}
+
+	@Override
+	public void deleteAllVenueImages(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_venueService.deleteAllVenueImages(venueId, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDetail addVenueDetail(
+		long venueId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		java.lang.String stateName, long countryId,
+		java.lang.String countryName, java.lang.String lattitude,
+		java.lang.String longitude, java.lang.String phone,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.addVenueDetail(venueId, infoTypeId,
+			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
+			zipCode, city, stateId, stateName, countryId, countryName,
+			lattitude, longitude, phone, website, cost, hoursOfOperation,
+			serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDetail updateVenueDetail(
+		long venueDetailId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		java.lang.String stateName, long countryId,
+		java.lang.String countryName, java.lang.String lattitude,
+		java.lang.String longitude, java.lang.String phone,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.updateVenueDetail(venueDetailId, infoTypeId,
+			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
+			zipCode, city, stateId, stateName, countryId, countryName,
+			lattitude, longitude, phone, website, cost, hoursOfOperation,
+			serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDetail getVenueDetail(
+		long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.getVenueDetail(venueDetailId, serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetail> getVenueDetails(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.getVenueDetails(venueId, serviceContext);
+	}
+
+	@Override
+	public void deleteVenueDetail(long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_venueService.deleteVenueDetail(venueDetailId, serviceContext);
+	}
+
+	@Override
+	public void deleteAllVenueDetails(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_venueService.deleteAllVenueDetails(venueId, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDetailImage addVenueDetailImage(
+		long venueDetailId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.addVenueDetailImage(venueDetailId, imageTitle,
+			imageDesc, imagePath, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
+		long venueDetailImageId, long venueDetailId,
+		java.lang.String imageTitle, java.lang.String imageDesc,
+		java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.updateVenueDetailImage(venueDetailImageId,
+			venueDetailId, imageTitle, imageDesc, imagePath, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDetailImage getVenueDetailImage(
+		long venueDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.getVenueDetailImage(venueDetailImageId,
+			serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> getVenueDetailImages(
+		long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.getVenueDetailImages(venueDetailId, serviceContext);
+	}
+
+	@Override
+	public void deleteVenueDetailImage(long venueDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_venueService.deleteVenueDetailImage(venueDetailImageId, serviceContext);
+	}
+
+	@Override
+	public void deleteAllVenueDetailImages(long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_venueService.deleteAllVenueDetailImages(venueDetailId, serviceContext);
 	}
 
 	/**

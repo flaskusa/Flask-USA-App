@@ -797,12 +797,8 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 				eventDetailImage.setNew(false);
 			}
 			else {
-				session.evict(eventDetailImage);
-				session.saveOrUpdate(eventDetailImage);
+				session.merge(eventDetailImage);
 			}
-
-			session.flush();
-			session.clear();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -842,8 +838,6 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 			EventDetailImageImpl.class, eventDetailImage.getPrimaryKey(),
 			eventDetailImage);
 
-		eventDetailImage.resetOriginalValues();
-
 		return eventDetailImage;
 	}
 
@@ -864,9 +858,9 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 		eventDetailImageImpl.setCreatedDate(eventDetailImage.getCreatedDate());
 		eventDetailImageImpl.setModifiedDate(eventDetailImage.getModifiedDate());
 		eventDetailImageImpl.setEventDetailId(eventDetailImage.getEventDetailId());
-		eventDetailImageImpl.setEventDetailImagetitle(eventDetailImage.getEventDetailImagetitle());
-		eventDetailImageImpl.setEventDetailImageDesc(eventDetailImage.getEventDetailImageDesc());
-		eventDetailImageImpl.setEventDetailImageData(eventDetailImage.getEventDetailImageData());
+		eventDetailImageImpl.setImagetitle(eventDetailImage.getImagetitle());
+		eventDetailImageImpl.setImageDesc(eventDetailImage.getImageDesc());
+		eventDetailImageImpl.setImagePath(eventDetailImage.getImagePath());
 
 		return eventDetailImageImpl;
 	}

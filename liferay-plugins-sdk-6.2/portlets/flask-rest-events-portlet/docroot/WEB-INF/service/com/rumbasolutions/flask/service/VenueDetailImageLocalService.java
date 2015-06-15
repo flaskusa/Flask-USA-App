@@ -235,11 +235,6 @@ public interface VenueDetailImageLocalService extends BaseLocalService,
 		com.rumbasolutions.flask.model.VenueDetailImage venueDetailImage)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.rumbasolutions.flask.model.VenueDetailImageVenueDetailImageDataBlobModel getVenueDetailImageDataBlobModel(
-		java.io.Serializable primaryKey)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	/**
 	* Returns the Spring bean ID for this bean.
 	*

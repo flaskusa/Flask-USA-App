@@ -83,21 +83,22 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		attributes.put("venueId", getVenueId());
 		attributes.put("infoTypeId", getInfoTypeId());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
-		attributes.put("venueDetailInfoName", getVenueDetailInfoName());
-		attributes.put("venueDetailInfoDesc", getVenueDetailInfoDesc());
-		attributes.put("venueDetailInfoComment", getVenueDetailInfoComment());
-		attributes.put("venueDetailAddressLine1", getVenueDetailAddressLine1());
-		attributes.put("venueDetailAddressLine2", getVenueDetailAddressLine2());
-		attributes.put("venueDetailCity", getVenueDetailCity());
-		attributes.put("venueDetailState", getVenueDetailState());
-		attributes.put("venueDetailCountry", getVenueDetailCountry());
-		attributes.put("venueDetailLatitude", getVenueDetailLatitude());
-		attributes.put("venueDetailLongitude", getVenueDetailLongitude());
-		attributes.put("venueDetailPhone", getVenueDetailPhone());
-		attributes.put("venueDetailWebsite", getVenueDetailWebsite());
-		attributes.put("venueDetailCost", getVenueDetailCost());
-		attributes.put("venueDetailhoursOfOperation",
-			getVenueDetailhoursOfOperation());
+		attributes.put("infoTitle", getInfoTitle());
+		attributes.put("infoDesc", getInfoDesc());
+		attributes.put("addrLine1", getAddrLine1());
+		attributes.put("addrLine2", getAddrLine2());
+		attributes.put("city", getCity());
+		attributes.put("zipCode", getZipCode());
+		attributes.put("stateId", getStateId());
+		attributes.put("stateName", getStateName());
+		attributes.put("countryId", getCountryId());
+		attributes.put("countryName", getCountryName());
+		attributes.put("latitude", getLatitude());
+		attributes.put("longitude", getLongitude());
+		attributes.put("phone", getPhone());
+		attributes.put("website", getWebsite());
+		attributes.put("cost", getCost());
+		attributes.put("hoursOfOperation", getHoursOfOperation());
 
 		return attributes;
 	}
@@ -152,96 +153,100 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 			setInfoTypeCategoryId(infoTypeCategoryId);
 		}
 
-		String venueDetailInfoName = (String)attributes.get(
-				"venueDetailInfoName");
+		String infoTitle = (String)attributes.get("infoTitle");
 
-		if (venueDetailInfoName != null) {
-			setVenueDetailInfoName(venueDetailInfoName);
+		if (infoTitle != null) {
+			setInfoTitle(infoTitle);
 		}
 
-		String venueDetailInfoDesc = (String)attributes.get(
-				"venueDetailInfoDesc");
+		String infoDesc = (String)attributes.get("infoDesc");
 
-		if (venueDetailInfoDesc != null) {
-			setVenueDetailInfoDesc(venueDetailInfoDesc);
+		if (infoDesc != null) {
+			setInfoDesc(infoDesc);
 		}
 
-		String venueDetailInfoComment = (String)attributes.get(
-				"venueDetailInfoComment");
+		String addrLine1 = (String)attributes.get("addrLine1");
 
-		if (venueDetailInfoComment != null) {
-			setVenueDetailInfoComment(venueDetailInfoComment);
+		if (addrLine1 != null) {
+			setAddrLine1(addrLine1);
 		}
 
-		String venueDetailAddressLine1 = (String)attributes.get(
-				"venueDetailAddressLine1");
+		String addrLine2 = (String)attributes.get("addrLine2");
 
-		if (venueDetailAddressLine1 != null) {
-			setVenueDetailAddressLine1(venueDetailAddressLine1);
+		if (addrLine2 != null) {
+			setAddrLine2(addrLine2);
 		}
 
-		String venueDetailAddressLine2 = (String)attributes.get(
-				"venueDetailAddressLine2");
+		String city = (String)attributes.get("city");
 
-		if (venueDetailAddressLine2 != null) {
-			setVenueDetailAddressLine2(venueDetailAddressLine2);
+		if (city != null) {
+			setCity(city);
 		}
 
-		String venueDetailCity = (String)attributes.get("venueDetailCity");
+		String zipCode = (String)attributes.get("zipCode");
 
-		if (venueDetailCity != null) {
-			setVenueDetailCity(venueDetailCity);
+		if (zipCode != null) {
+			setZipCode(zipCode);
 		}
 
-		String venueDetailState = (String)attributes.get("venueDetailState");
+		Long stateId = (Long)attributes.get("stateId");
 
-		if (venueDetailState != null) {
-			setVenueDetailState(venueDetailState);
+		if (stateId != null) {
+			setStateId(stateId);
 		}
 
-		String venueDetailCountry = (String)attributes.get("venueDetailCountry");
+		String stateName = (String)attributes.get("stateName");
 
-		if (venueDetailCountry != null) {
-			setVenueDetailCountry(venueDetailCountry);
+		if (stateName != null) {
+			setStateName(stateName);
 		}
 
-		String venueDetailLatitude = (String)attributes.get(
-				"venueDetailLatitude");
+		Long countryId = (Long)attributes.get("countryId");
 
-		if (venueDetailLatitude != null) {
-			setVenueDetailLatitude(venueDetailLatitude);
+		if (countryId != null) {
+			setCountryId(countryId);
 		}
 
-		String venueDetailLongitude = (String)attributes.get(
-				"venueDetailLongitude");
+		String countryName = (String)attributes.get("countryName");
 
-		if (venueDetailLongitude != null) {
-			setVenueDetailLongitude(venueDetailLongitude);
+		if (countryName != null) {
+			setCountryName(countryName);
 		}
 
-		String venueDetailPhone = (String)attributes.get("venueDetailPhone");
+		String latitude = (String)attributes.get("latitude");
 
-		if (venueDetailPhone != null) {
-			setVenueDetailPhone(venueDetailPhone);
+		if (latitude != null) {
+			setLatitude(latitude);
 		}
 
-		String venueDetailWebsite = (String)attributes.get("venueDetailWebsite");
+		String longitude = (String)attributes.get("longitude");
 
-		if (venueDetailWebsite != null) {
-			setVenueDetailWebsite(venueDetailWebsite);
+		if (longitude != null) {
+			setLongitude(longitude);
 		}
 
-		Double venueDetailCost = (Double)attributes.get("venueDetailCost");
+		String phone = (String)attributes.get("phone");
 
-		if (venueDetailCost != null) {
-			setVenueDetailCost(venueDetailCost);
+		if (phone != null) {
+			setPhone(phone);
 		}
 
-		String venueDetailhoursOfOperation = (String)attributes.get(
-				"venueDetailhoursOfOperation");
+		String website = (String)attributes.get("website");
 
-		if (venueDetailhoursOfOperation != null) {
-			setVenueDetailhoursOfOperation(venueDetailhoursOfOperation);
+		if (website != null) {
+			setWebsite(website);
+		}
+
+		Double cost = (Double)attributes.get("cost");
+
+		if (cost != null) {
+			setCost(cost);
+		}
+
+		String hoursOfOperation = (String)attributes.get("hoursOfOperation");
+
+		if (hoursOfOperation != null) {
+			setHoursOfOperation(hoursOfOperation);
 		}
 	}
 
@@ -441,22 +446,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailInfoName() {
-		return _venueDetailInfoName;
+	public String getInfoTitle() {
+		return _infoTitle;
 	}
 
 	@Override
-	public void setVenueDetailInfoName(String venueDetailInfoName) {
-		_venueDetailInfoName = venueDetailInfoName;
+	public void setInfoTitle(String infoTitle) {
+		_infoTitle = infoTitle;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailInfoName",
-						String.class);
+				Method method = clazz.getMethod("setInfoTitle", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailInfoName);
+				method.invoke(_venueDetailRemoteModel, infoTitle);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -465,22 +469,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailInfoDesc() {
-		return _venueDetailInfoDesc;
+	public String getInfoDesc() {
+		return _infoDesc;
 	}
 
 	@Override
-	public void setVenueDetailInfoDesc(String venueDetailInfoDesc) {
-		_venueDetailInfoDesc = venueDetailInfoDesc;
+	public void setInfoDesc(String infoDesc) {
+		_infoDesc = infoDesc;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailInfoDesc",
-						String.class);
+				Method method = clazz.getMethod("setInfoDesc", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailInfoDesc);
+				method.invoke(_venueDetailRemoteModel, infoDesc);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -489,22 +492,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailInfoComment() {
-		return _venueDetailInfoComment;
+	public String getAddrLine1() {
+		return _addrLine1;
 	}
 
 	@Override
-	public void setVenueDetailInfoComment(String venueDetailInfoComment) {
-		_venueDetailInfoComment = venueDetailInfoComment;
+	public void setAddrLine1(String addrLine1) {
+		_addrLine1 = addrLine1;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailInfoComment",
-						String.class);
+				Method method = clazz.getMethod("setAddrLine1", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailInfoComment);
+				method.invoke(_venueDetailRemoteModel, addrLine1);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -513,22 +515,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailAddressLine1() {
-		return _venueDetailAddressLine1;
+	public String getAddrLine2() {
+		return _addrLine2;
 	}
 
 	@Override
-	public void setVenueDetailAddressLine1(String venueDetailAddressLine1) {
-		_venueDetailAddressLine1 = venueDetailAddressLine1;
+	public void setAddrLine2(String addrLine2) {
+		_addrLine2 = addrLine2;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailAddressLine1",
-						String.class);
+				Method method = clazz.getMethod("setAddrLine2", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailAddressLine1);
+				method.invoke(_venueDetailRemoteModel, addrLine2);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -537,22 +538,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailAddressLine2() {
-		return _venueDetailAddressLine2;
+	public String getCity() {
+		return _city;
 	}
 
 	@Override
-	public void setVenueDetailAddressLine2(String venueDetailAddressLine2) {
-		_venueDetailAddressLine2 = venueDetailAddressLine2;
+	public void setCity(String city) {
+		_city = city;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailAddressLine2",
-						String.class);
+				Method method = clazz.getMethod("setCity", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailAddressLine2);
+				method.invoke(_venueDetailRemoteModel, city);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -561,22 +561,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailCity() {
-		return _venueDetailCity;
+	public String getZipCode() {
+		return _zipCode;
 	}
 
 	@Override
-	public void setVenueDetailCity(String venueDetailCity) {
-		_venueDetailCity = venueDetailCity;
+	public void setZipCode(String zipCode) {
+		_zipCode = zipCode;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailCity",
-						String.class);
+				Method method = clazz.getMethod("setZipCode", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailCity);
+				method.invoke(_venueDetailRemoteModel, zipCode);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -585,22 +584,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailState() {
-		return _venueDetailState;
+	public long getStateId() {
+		return _stateId;
 	}
 
 	@Override
-	public void setVenueDetailState(String venueDetailState) {
-		_venueDetailState = venueDetailState;
+	public void setStateId(long stateId) {
+		_stateId = stateId;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailState",
-						String.class);
+				Method method = clazz.getMethod("setStateId", long.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailState);
+				method.invoke(_venueDetailRemoteModel, stateId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -609,22 +607,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailCountry() {
-		return _venueDetailCountry;
+	public String getStateName() {
+		return _stateName;
 	}
 
 	@Override
-	public void setVenueDetailCountry(String venueDetailCountry) {
-		_venueDetailCountry = venueDetailCountry;
+	public void setStateName(String stateName) {
+		_stateName = stateName;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailCountry",
-						String.class);
+				Method method = clazz.getMethod("setStateName", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailCountry);
+				method.invoke(_venueDetailRemoteModel, stateName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -633,22 +630,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailLatitude() {
-		return _venueDetailLatitude;
+	public long getCountryId() {
+		return _countryId;
 	}
 
 	@Override
-	public void setVenueDetailLatitude(String venueDetailLatitude) {
-		_venueDetailLatitude = venueDetailLatitude;
+	public void setCountryId(long countryId) {
+		_countryId = countryId;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailLatitude",
-						String.class);
+				Method method = clazz.getMethod("setCountryId", long.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailLatitude);
+				method.invoke(_venueDetailRemoteModel, countryId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -657,22 +653,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailLongitude() {
-		return _venueDetailLongitude;
+	public String getCountryName() {
+		return _countryName;
 	}
 
 	@Override
-	public void setVenueDetailLongitude(String venueDetailLongitude) {
-		_venueDetailLongitude = venueDetailLongitude;
+	public void setCountryName(String countryName) {
+		_countryName = countryName;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailLongitude",
-						String.class);
+				Method method = clazz.getMethod("setCountryName", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailLongitude);
+				method.invoke(_venueDetailRemoteModel, countryName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -681,22 +676,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailPhone() {
-		return _venueDetailPhone;
+	public String getLatitude() {
+		return _latitude;
 	}
 
 	@Override
-	public void setVenueDetailPhone(String venueDetailPhone) {
-		_venueDetailPhone = venueDetailPhone;
+	public void setLatitude(String latitude) {
+		_latitude = latitude;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailPhone",
-						String.class);
+				Method method = clazz.getMethod("setLatitude", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailPhone);
+				method.invoke(_venueDetailRemoteModel, latitude);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -705,22 +699,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailWebsite() {
-		return _venueDetailWebsite;
+	public String getLongitude() {
+		return _longitude;
 	}
 
 	@Override
-	public void setVenueDetailWebsite(String venueDetailWebsite) {
-		_venueDetailWebsite = venueDetailWebsite;
+	public void setLongitude(String longitude) {
+		_longitude = longitude;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailWebsite",
-						String.class);
+				Method method = clazz.getMethod("setLongitude", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailWebsite);
+				method.invoke(_venueDetailRemoteModel, longitude);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -729,22 +722,21 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public double getVenueDetailCost() {
-		return _venueDetailCost;
+	public String getPhone() {
+		return _phone;
 	}
 
 	@Override
-	public void setVenueDetailCost(double venueDetailCost) {
-		_venueDetailCost = venueDetailCost;
+	public void setPhone(String phone) {
+		_phone = phone;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailCost",
-						double.class);
+				Method method = clazz.getMethod("setPhone", String.class);
 
-				method.invoke(_venueDetailRemoteModel, venueDetailCost);
+				method.invoke(_venueDetailRemoteModel, phone);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -753,24 +745,68 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
-	public String getVenueDetailhoursOfOperation() {
-		return _venueDetailhoursOfOperation;
+	public String getWebsite() {
+		return _website;
 	}
 
 	@Override
-	public void setVenueDetailhoursOfOperation(
-		String venueDetailhoursOfOperation) {
-		_venueDetailhoursOfOperation = venueDetailhoursOfOperation;
+	public void setWebsite(String website) {
+		_website = website;
 
 		if (_venueDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailhoursOfOperation",
+				Method method = clazz.getMethod("setWebsite", String.class);
+
+				method.invoke(_venueDetailRemoteModel, website);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public double getCost() {
+		return _cost;
+	}
+
+	@Override
+	public void setCost(double cost) {
+		_cost = cost;
+
+		if (_venueDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _venueDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCost", double.class);
+
+				method.invoke(_venueDetailRemoteModel, cost);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getHoursOfOperation() {
+		return _hoursOfOperation;
+	}
+
+	@Override
+	public void setHoursOfOperation(String hoursOfOperation) {
+		_hoursOfOperation = hoursOfOperation;
+
+		if (_venueDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _venueDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setHoursOfOperation",
 						String.class);
 
-				method.invoke(_venueDetailRemoteModel,
-					venueDetailhoursOfOperation);
+				method.invoke(_venueDetailRemoteModel, hoursOfOperation);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -855,20 +891,22 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		clone.setVenueId(getVenueId());
 		clone.setInfoTypeId(getInfoTypeId());
 		clone.setInfoTypeCategoryId(getInfoTypeCategoryId());
-		clone.setVenueDetailInfoName(getVenueDetailInfoName());
-		clone.setVenueDetailInfoDesc(getVenueDetailInfoDesc());
-		clone.setVenueDetailInfoComment(getVenueDetailInfoComment());
-		clone.setVenueDetailAddressLine1(getVenueDetailAddressLine1());
-		clone.setVenueDetailAddressLine2(getVenueDetailAddressLine2());
-		clone.setVenueDetailCity(getVenueDetailCity());
-		clone.setVenueDetailState(getVenueDetailState());
-		clone.setVenueDetailCountry(getVenueDetailCountry());
-		clone.setVenueDetailLatitude(getVenueDetailLatitude());
-		clone.setVenueDetailLongitude(getVenueDetailLongitude());
-		clone.setVenueDetailPhone(getVenueDetailPhone());
-		clone.setVenueDetailWebsite(getVenueDetailWebsite());
-		clone.setVenueDetailCost(getVenueDetailCost());
-		clone.setVenueDetailhoursOfOperation(getVenueDetailhoursOfOperation());
+		clone.setInfoTitle(getInfoTitle());
+		clone.setInfoDesc(getInfoDesc());
+		clone.setAddrLine1(getAddrLine1());
+		clone.setAddrLine2(getAddrLine2());
+		clone.setCity(getCity());
+		clone.setZipCode(getZipCode());
+		clone.setStateId(getStateId());
+		clone.setStateName(getStateName());
+		clone.setCountryId(getCountryId());
+		clone.setCountryName(getCountryName());
+		clone.setLatitude(getLatitude());
+		clone.setLongitude(getLongitude());
+		clone.setPhone(getPhone());
+		clone.setWebsite(getWebsite());
+		clone.setCost(getCost());
+		clone.setHoursOfOperation(getHoursOfOperation());
 
 		return clone;
 	}
@@ -921,7 +959,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{venueDetailId=");
 		sb.append(getVenueDetailId());
@@ -939,34 +977,38 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		sb.append(getInfoTypeId());
 		sb.append(", infoTypeCategoryId=");
 		sb.append(getInfoTypeCategoryId());
-		sb.append(", venueDetailInfoName=");
-		sb.append(getVenueDetailInfoName());
-		sb.append(", venueDetailInfoDesc=");
-		sb.append(getVenueDetailInfoDesc());
-		sb.append(", venueDetailInfoComment=");
-		sb.append(getVenueDetailInfoComment());
-		sb.append(", venueDetailAddressLine1=");
-		sb.append(getVenueDetailAddressLine1());
-		sb.append(", venueDetailAddressLine2=");
-		sb.append(getVenueDetailAddressLine2());
-		sb.append(", venueDetailCity=");
-		sb.append(getVenueDetailCity());
-		sb.append(", venueDetailState=");
-		sb.append(getVenueDetailState());
-		sb.append(", venueDetailCountry=");
-		sb.append(getVenueDetailCountry());
-		sb.append(", venueDetailLatitude=");
-		sb.append(getVenueDetailLatitude());
-		sb.append(", venueDetailLongitude=");
-		sb.append(getVenueDetailLongitude());
-		sb.append(", venueDetailPhone=");
-		sb.append(getVenueDetailPhone());
-		sb.append(", venueDetailWebsite=");
-		sb.append(getVenueDetailWebsite());
-		sb.append(", venueDetailCost=");
-		sb.append(getVenueDetailCost());
-		sb.append(", venueDetailhoursOfOperation=");
-		sb.append(getVenueDetailhoursOfOperation());
+		sb.append(", infoTitle=");
+		sb.append(getInfoTitle());
+		sb.append(", infoDesc=");
+		sb.append(getInfoDesc());
+		sb.append(", addrLine1=");
+		sb.append(getAddrLine1());
+		sb.append(", addrLine2=");
+		sb.append(getAddrLine2());
+		sb.append(", city=");
+		sb.append(getCity());
+		sb.append(", zipCode=");
+		sb.append(getZipCode());
+		sb.append(", stateId=");
+		sb.append(getStateId());
+		sb.append(", stateName=");
+		sb.append(getStateName());
+		sb.append(", countryId=");
+		sb.append(getCountryId());
+		sb.append(", countryName=");
+		sb.append(getCountryName());
+		sb.append(", latitude=");
+		sb.append(getLatitude());
+		sb.append(", longitude=");
+		sb.append(getLongitude());
+		sb.append(", phone=");
+		sb.append(getPhone());
+		sb.append(", website=");
+		sb.append(getWebsite());
+		sb.append(", cost=");
+		sb.append(getCost());
+		sb.append(", hoursOfOperation=");
+		sb.append(getHoursOfOperation());
 		sb.append("}");
 
 		return sb.toString();
@@ -974,7 +1016,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.VenueDetail");
@@ -1013,60 +1055,68 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		sb.append(getInfoTypeCategoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailInfoName</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailInfoName());
+			"<column><column-name>infoTitle</column-name><column-value><![CDATA[");
+		sb.append(getInfoTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailInfoDesc</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailInfoDesc());
+			"<column><column-name>infoDesc</column-name><column-value><![CDATA[");
+		sb.append(getInfoDesc());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailInfoComment</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailInfoComment());
+			"<column><column-name>addrLine1</column-name><column-value><![CDATA[");
+		sb.append(getAddrLine1());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailAddressLine1</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailAddressLine1());
+			"<column><column-name>addrLine2</column-name><column-value><![CDATA[");
+		sb.append(getAddrLine2());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailAddressLine2</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailAddressLine2());
+			"<column><column-name>city</column-name><column-value><![CDATA[");
+		sb.append(getCity());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailCity</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailCity());
+			"<column><column-name>zipCode</column-name><column-value><![CDATA[");
+		sb.append(getZipCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailState</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailState());
+			"<column><column-name>stateId</column-name><column-value><![CDATA[");
+		sb.append(getStateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailCountry</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailCountry());
+			"<column><column-name>stateName</column-name><column-value><![CDATA[");
+		sb.append(getStateName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailLatitude</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailLatitude());
+			"<column><column-name>countryId</column-name><column-value><![CDATA[");
+		sb.append(getCountryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailLongitude</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailLongitude());
+			"<column><column-name>countryName</column-name><column-value><![CDATA[");
+		sb.append(getCountryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailPhone</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailPhone());
+			"<column><column-name>latitude</column-name><column-value><![CDATA[");
+		sb.append(getLatitude());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailWebsite</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailWebsite());
+			"<column><column-name>longitude</column-name><column-value><![CDATA[");
+		sb.append(getLongitude());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailCost</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailCost());
+			"<column><column-name>phone</column-name><column-value><![CDATA[");
+		sb.append(getPhone());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailhoursOfOperation</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailhoursOfOperation());
+			"<column><column-name>website</column-name><column-value><![CDATA[");
+		sb.append(getWebsite());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cost</column-name><column-value><![CDATA[");
+		sb.append(getCost());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hoursOfOperation</column-name><column-value><![CDATA[");
+		sb.append(getHoursOfOperation());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -1083,20 +1133,22 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	private long _venueId;
 	private long _infoTypeId;
 	private long _infoTypeCategoryId;
-	private String _venueDetailInfoName;
-	private String _venueDetailInfoDesc;
-	private String _venueDetailInfoComment;
-	private String _venueDetailAddressLine1;
-	private String _venueDetailAddressLine2;
-	private String _venueDetailCity;
-	private String _venueDetailState;
-	private String _venueDetailCountry;
-	private String _venueDetailLatitude;
-	private String _venueDetailLongitude;
-	private String _venueDetailPhone;
-	private String _venueDetailWebsite;
-	private double _venueDetailCost;
-	private String _venueDetailhoursOfOperation;
+	private String _infoTitle;
+	private String _infoDesc;
+	private String _addrLine1;
+	private String _addrLine2;
+	private String _city;
+	private String _zipCode;
+	private long _stateId;
+	private String _stateName;
+	private long _countryId;
+	private String _countryName;
+	private String _latitude;
+	private String _longitude;
+	private String _phone;
+	private String _website;
+	private double _cost;
+	private String _hoursOfOperation;
 	private BaseModel<?> _venueDetailRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

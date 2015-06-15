@@ -110,10 +110,139 @@ public class VenueServiceUtil {
 	}
 
 	public static void addVenueImage(long venueId, java.lang.String title,
-		java.sql.Blob venueImageData,
+		java.lang.String venueImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService()
-			.addVenueImage(venueId, title, venueImageData, serviceContext);
+			.addVenueImage(venueId, title, venueImagePath, serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImages(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getVenueImages(venueId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.VenueImage getVenueImage(
+		long venueImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getVenueImage(venueImageId, serviceContext);
+	}
+
+	public static void updateVenueImage(long venueImageId,
+		java.lang.String title, java.lang.String venueImagePath,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService()
+			.updateVenueImage(venueImageId, title, venueImagePath,
+			serviceContext);
+	}
+
+	public static void deleteVenueImage(long venueImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteVenueImage(venueImageId, serviceContext);
+	}
+
+	public static void deleteAllVenueImages(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteAllVenueImages(venueId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetail addVenueDetail(
+		long venueId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		java.lang.String stateName, long countryId,
+		java.lang.String countryName, java.lang.String lattitude,
+		java.lang.String longitude, java.lang.String phone,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .addVenueDetail(venueId, infoTypeId, infoTypeCategoryId,
+			infoTitle, infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
+			stateName, countryId, countryName, lattitude, longitude, phone,
+			website, cost, hoursOfOperation, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetail updateVenueDetail(
+		long venueDetailId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		java.lang.String stateName, long countryId,
+		java.lang.String countryName, java.lang.String lattitude,
+		java.lang.String longitude, java.lang.String phone,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateVenueDetail(venueDetailId, infoTypeId,
+			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
+			zipCode, city, stateId, stateName, countryId, countryName,
+			lattitude, longitude, phone, website, cost, hoursOfOperation,
+			serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetail getVenueDetail(
+		long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getVenueDetail(venueDetailId, serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.VenueDetail> getVenueDetails(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getVenueDetails(venueId, serviceContext);
+	}
+
+	public static void deleteVenueDetail(long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteVenueDetail(venueDetailId, serviceContext);
+	}
+
+	public static void deleteAllVenueDetails(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteAllVenueDetails(venueId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailImage addVenueDetailImage(
+		long venueDetailId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .addVenueDetailImage(venueDetailId, imageTitle, imageDesc,
+			imagePath, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
+		long venueDetailImageId, long venueDetailId,
+		java.lang.String imageTitle, java.lang.String imageDesc,
+		java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateVenueDetailImage(venueDetailImageId, venueDetailId,
+			imageTitle, imageDesc, imagePath, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailImage getVenueDetailImage(
+		long venueDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .getVenueDetailImage(venueDetailImageId, serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> getVenueDetailImages(
+		long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getVenueDetailImages(venueDetailId, serviceContext);
+	}
+
+	public static void deleteVenueDetailImage(long venueDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteVenueDetailImage(venueDetailImageId, serviceContext);
+	}
+
+	public static void deleteAllVenueDetailImages(long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteAllVenueDetailImages(venueDetailId, serviceContext);
 	}
 
 	public static void clearService() {

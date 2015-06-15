@@ -251,12 +251,6 @@ public class VenueDetailImageLocalServiceUtil {
 		return getService().updateVenueDetailImage(venueDetailImage);
 	}
 
-	public static com.rumbasolutions.flask.model.VenueDetailImageVenueDetailImageDataBlobModel getVenueDetailImageDataBlobModel(
-		java.io.Serializable primaryKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return getService().getVenueDetailImageDataBlobModel(primaryKey);
-	}
-
 	/**
 	* Returns the Spring bean ID for this bean.
 	*

@@ -231,11 +231,6 @@ public interface EventLocalService extends BaseLocalService,
 		com.rumbasolutions.flask.model.Event event)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.rumbasolutions.flask.model.EventEventImageBlobModel getEventImageBlobModel(
-		java.io.Serializable primaryKey)
-		throws com.liferay.portal.kernel.exception.SystemException;
-
 	/**
 	* Returns the Spring bean ID for this bean.
 	*

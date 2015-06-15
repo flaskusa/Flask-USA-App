@@ -17,8 +17,6 @@ package com.rumbasolutions.flask.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
-import java.sql.Blob;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -57,7 +55,7 @@ public class VenueImageWrapper implements VenueImage, ModelWrapper<VenueImage> {
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("title", getTitle());
-		attributes.put("venueImage", getVenueImage());
+		attributes.put("venueImagePath", getVenueImagePath());
 		attributes.put("venueId", getVenueId());
 
 		return attributes;
@@ -101,10 +99,10 @@ public class VenueImageWrapper implements VenueImage, ModelWrapper<VenueImage> {
 			setTitle(title);
 		}
 
-		Blob venueImage = (Blob)attributes.get("venueImage");
+		String venueImagePath = (String)attributes.get("venueImagePath");
 
-		if (venueImage != null) {
-			setVenueImage(venueImage);
+		if (venueImagePath != null) {
+			setVenueImagePath(venueImagePath);
 		}
 
 		Long venueId = (Long)attributes.get("venueId");
@@ -277,23 +275,23 @@ public class VenueImageWrapper implements VenueImage, ModelWrapper<VenueImage> {
 	}
 
 	/**
-	* Returns the venue image of this venue image.
+	* Returns the venue image path of this venue image.
 	*
-	* @return the venue image of this venue image
+	* @return the venue image path of this venue image
 	*/
 	@Override
-	public java.sql.Blob getVenueImage() {
-		return _venueImage.getVenueImage();
+	public java.lang.String getVenueImagePath() {
+		return _venueImage.getVenueImagePath();
 	}
 
 	/**
-	* Sets the venue image of this venue image.
+	* Sets the venue image path of this venue image.
 	*
-	* @param venueImage the venue image of this venue image
+	* @param venueImagePath the venue image path of this venue image
 	*/
 	@Override
-	public void setVenueImage(java.sql.Blob venueImage) {
-		_venueImage.setVenueImage(venueImage);
+	public void setVenueImagePath(java.lang.String venueImagePath) {
+		_venueImage.setVenueImagePath(venueImagePath);
 	}
 
 	/**

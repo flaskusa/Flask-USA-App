@@ -106,17 +106,13 @@ public class VenueImageLocalServiceClpInvoker {
 				"com.rumbasolutions.flask.model.VenueImage"
 			};
 
-		_methodName16 = "getVenueImageBlobModel";
+		_methodName88 = "getBeanIdentifier";
 
-		_methodParameterTypes16 = new String[] { "java.io.Serializable" };
+		_methodParameterTypes88 = new String[] {  };
 
-		_methodName89 = "getBeanIdentifier";
+		_methodName89 = "setBeanIdentifier";
 
-		_methodParameterTypes89 = new String[] {  };
-
-		_methodName90 = "setBeanIdentifier";
-
-		_methodParameterTypes90 = new String[] { "java.lang.String" };
+		_methodParameterTypes89 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -208,18 +204,13 @@ public class VenueImageLocalServiceClpInvoker {
 			return VenueImageLocalServiceUtil.updateVenueImage((com.rumbasolutions.flask.model.VenueImage)arguments[0]);
 		}
 
-		if (_methodName16.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes16, parameterTypes)) {
-			return VenueImageLocalServiceUtil.getVenueImageBlobModel((java.io.Serializable)arguments[0]);
+		if (_methodName88.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
+			return VenueImageLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName89.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
-			return VenueImageLocalServiceUtil.getBeanIdentifier();
-		}
-
-		if (_methodName90.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
 			VenueImageLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -260,10 +251,8 @@ public class VenueImageLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName16;
-	private String[] _methodParameterTypes16;
+	private String _methodName88;
+	private String[] _methodParameterTypes88;
 	private String _methodName89;
 	private String[] _methodParameterTypes89;
-	private String _methodName90;
-	private String[] _methodParameterTypes90;
 }

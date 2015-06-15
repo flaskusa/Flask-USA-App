@@ -17,8 +17,6 @@ package com.rumbasolutions.flask.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
-import java.sql.Blob;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -62,7 +60,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
 		attributes.put("eventTypeId", getEventTypeId());
-		attributes.put("eventImage", getEventImage());
+		attributes.put("eventImagePath", getEventImagePath());
 		attributes.put("venueId", getVenueId());
 
 		return attributes;
@@ -136,10 +134,10 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 			setEventTypeId(eventTypeId);
 		}
 
-		Blob eventImage = (Blob)attributes.get("eventImage");
+		String eventImagePath = (String)attributes.get("eventImagePath");
 
-		if (eventImage != null) {
-			setEventImage(eventImage);
+		if (eventImagePath != null) {
+			setEventImagePath(eventImagePath);
 		}
 
 		Long venueId = (Long)attributes.get("venueId");
@@ -412,23 +410,23 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	}
 
 	/**
-	* Returns the event image of this event.
+	* Returns the event image path of this event.
 	*
-	* @return the event image of this event
+	* @return the event image path of this event
 	*/
 	@Override
-	public java.sql.Blob getEventImage() {
-		return _event.getEventImage();
+	public java.lang.String getEventImagePath() {
+		return _event.getEventImagePath();
 	}
 
 	/**
-	* Sets the event image of this event.
+	* Sets the event image path of this event.
 	*
-	* @param eventImage the event image of this event
+	* @param eventImagePath the event image path of this event
 	*/
 	@Override
-	public void setEventImage(java.sql.Blob eventImage) {
-		_event.setEventImage(eventImage);
+	public void setEventImagePath(java.lang.String eventImagePath) {
+		_event.setEventImagePath(eventImagePath);
 	}
 
 	/**

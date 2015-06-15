@@ -74,23 +74,22 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			{ "eventId", Types.BIGINT },
 			{ "infoTypeId", Types.BIGINT },
 			{ "infoTypeCategoryId", Types.BIGINT },
-			{ "eventDetailInfoName", Types.VARCHAR },
-			{ "eventDetailInfoDesc", Types.VARCHAR },
-			{ "eventDetailInfoComment", Types.VARCHAR },
-			{ "eventDetailAddressLine1", Types.VARCHAR },
-			{ "eventDetailAddressLine2", Types.VARCHAR },
-			{ "eventDetailInfocity", Types.VARCHAR },
-			{ "eventDetailZip", Types.VARCHAR },
-			{ "eventDetailState", Types.VARCHAR },
-			{ "eventDetailCountry", Types.VARCHAR },
-			{ "eventDetailLatitude", Types.VARCHAR },
-			{ "eventDetailLongitude", Types.VARCHAR },
-			{ "eventDetailPhone", Types.VARCHAR },
-			{ "eventDetailWebsite", Types.VARCHAR },
-			{ "eventDetailCost", Types.DOUBLE },
+			{ "infoName", Types.VARCHAR },
+			{ "infoDesc", Types.VARCHAR },
+			{ "addrLine1", Types.VARCHAR },
+			{ "addrLine2", Types.VARCHAR },
+			{ "city", Types.VARCHAR },
+			{ "zipCode", Types.VARCHAR },
+			{ "stateId", Types.BIGINT },
+			{ "countryId", Types.BIGINT },
+			{ "latitude", Types.VARCHAR },
+			{ "longitude", Types.VARCHAR },
+			{ "phone", Types.VARCHAR },
+			{ "website", Types.VARCHAR },
+			{ "cost", Types.DOUBLE },
 			{ "hoursOfOperation", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeCategoryId LONG,eventDetailInfoName VARCHAR(75) null,eventDetailInfoDesc VARCHAR(75) null,eventDetailInfoComment VARCHAR(75) null,eventDetailAddressLine1 VARCHAR(75) null,eventDetailAddressLine2 VARCHAR(75) null,eventDetailInfocity VARCHAR(75) null,eventDetailZip VARCHAR(75) null,eventDetailState VARCHAR(75) null,eventDetailCountry VARCHAR(75) null,eventDetailLatitude VARCHAR(75) null,eventDetailLongitude VARCHAR(75) null,eventDetailPhone VARCHAR(75) null,eventDetailWebsite VARCHAR(75) null,eventDetailCost DOUBLE,hoursOfOperation VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeCategoryId LONG,infoName VARCHAR(100) null,infoDesc VARCHAR(255) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,countryId LONG,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_EventDetail";
 	public static final String ORDER_BY_JPQL = " ORDER BY eventDetail.eventDetailId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_EventDetail.eventDetailId ASC";
@@ -107,7 +106,9 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 				"value.object.column.bitmask.enabled.com.rumbasolutions.flask.model.EventDetail"),
 			true);
 	public static long EVENTID_COLUMN_BITMASK = 1L;
-	public static long EVENTDETAILID_COLUMN_BITMASK = 2L;
+	public static long INFOTYPECATEGORYID_COLUMN_BITMASK = 2L;
+	public static long INFOTYPEID_COLUMN_BITMASK = 4L;
+	public static long EVENTDETAILID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -130,20 +131,19 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		model.setEventId(soapModel.getEventId());
 		model.setInfoTypeId(soapModel.getInfoTypeId());
 		model.setInfoTypeCategoryId(soapModel.getInfoTypeCategoryId());
-		model.setEventDetailInfoName(soapModel.getEventDetailInfoName());
-		model.setEventDetailInfoDesc(soapModel.getEventDetailInfoDesc());
-		model.setEventDetailInfoComment(soapModel.getEventDetailInfoComment());
-		model.setEventDetailAddressLine1(soapModel.getEventDetailAddressLine1());
-		model.setEventDetailAddressLine2(soapModel.getEventDetailAddressLine2());
-		model.setEventDetailInfocity(soapModel.getEventDetailInfocity());
-		model.setEventDetailZip(soapModel.getEventDetailZip());
-		model.setEventDetailState(soapModel.getEventDetailState());
-		model.setEventDetailCountry(soapModel.getEventDetailCountry());
-		model.setEventDetailLatitude(soapModel.getEventDetailLatitude());
-		model.setEventDetailLongitude(soapModel.getEventDetailLongitude());
-		model.setEventDetailPhone(soapModel.getEventDetailPhone());
-		model.setEventDetailWebsite(soapModel.getEventDetailWebsite());
-		model.setEventDetailCost(soapModel.getEventDetailCost());
+		model.setInfoName(soapModel.getInfoName());
+		model.setInfoDesc(soapModel.getInfoDesc());
+		model.setAddrLine1(soapModel.getAddrLine1());
+		model.setAddrLine2(soapModel.getAddrLine2());
+		model.setCity(soapModel.getCity());
+		model.setZipCode(soapModel.getZipCode());
+		model.setStateId(soapModel.getStateId());
+		model.setCountryId(soapModel.getCountryId());
+		model.setLatitude(soapModel.getLatitude());
+		model.setLongitude(soapModel.getLongitude());
+		model.setPhone(soapModel.getPhone());
+		model.setWebsite(soapModel.getWebsite());
+		model.setCost(soapModel.getCost());
 		model.setHoursOfOperation(soapModel.getHoursOfOperation());
 
 		return model;
@@ -217,20 +217,19 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		attributes.put("eventId", getEventId());
 		attributes.put("infoTypeId", getInfoTypeId());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
-		attributes.put("eventDetailInfoName", getEventDetailInfoName());
-		attributes.put("eventDetailInfoDesc", getEventDetailInfoDesc());
-		attributes.put("eventDetailInfoComment", getEventDetailInfoComment());
-		attributes.put("eventDetailAddressLine1", getEventDetailAddressLine1());
-		attributes.put("eventDetailAddressLine2", getEventDetailAddressLine2());
-		attributes.put("eventDetailInfocity", getEventDetailInfocity());
-		attributes.put("eventDetailZip", getEventDetailZip());
-		attributes.put("eventDetailState", getEventDetailState());
-		attributes.put("eventDetailCountry", getEventDetailCountry());
-		attributes.put("eventDetailLatitude", getEventDetailLatitude());
-		attributes.put("eventDetailLongitude", getEventDetailLongitude());
-		attributes.put("eventDetailPhone", getEventDetailPhone());
-		attributes.put("eventDetailWebsite", getEventDetailWebsite());
-		attributes.put("eventDetailCost", getEventDetailCost());
+		attributes.put("infoName", getInfoName());
+		attributes.put("infoDesc", getInfoDesc());
+		attributes.put("addrLine1", getAddrLine1());
+		attributes.put("addrLine2", getAddrLine2());
+		attributes.put("city", getCity());
+		attributes.put("zipCode", getZipCode());
+		attributes.put("stateId", getStateId());
+		attributes.put("countryId", getCountryId());
+		attributes.put("latitude", getLatitude());
+		attributes.put("longitude", getLongitude());
+		attributes.put("phone", getPhone());
+		attributes.put("website", getWebsite());
+		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
 
 		return attributes;
@@ -286,96 +285,82 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			setInfoTypeCategoryId(infoTypeCategoryId);
 		}
 
-		String eventDetailInfoName = (String)attributes.get(
-				"eventDetailInfoName");
+		String infoName = (String)attributes.get("infoName");
 
-		if (eventDetailInfoName != null) {
-			setEventDetailInfoName(eventDetailInfoName);
+		if (infoName != null) {
+			setInfoName(infoName);
 		}
 
-		String eventDetailInfoDesc = (String)attributes.get(
-				"eventDetailInfoDesc");
+		String infoDesc = (String)attributes.get("infoDesc");
 
-		if (eventDetailInfoDesc != null) {
-			setEventDetailInfoDesc(eventDetailInfoDesc);
+		if (infoDesc != null) {
+			setInfoDesc(infoDesc);
 		}
 
-		String eventDetailInfoComment = (String)attributes.get(
-				"eventDetailInfoComment");
+		String addrLine1 = (String)attributes.get("addrLine1");
 
-		if (eventDetailInfoComment != null) {
-			setEventDetailInfoComment(eventDetailInfoComment);
+		if (addrLine1 != null) {
+			setAddrLine1(addrLine1);
 		}
 
-		String eventDetailAddressLine1 = (String)attributes.get(
-				"eventDetailAddressLine1");
+		String addrLine2 = (String)attributes.get("addrLine2");
 
-		if (eventDetailAddressLine1 != null) {
-			setEventDetailAddressLine1(eventDetailAddressLine1);
+		if (addrLine2 != null) {
+			setAddrLine2(addrLine2);
 		}
 
-		String eventDetailAddressLine2 = (String)attributes.get(
-				"eventDetailAddressLine2");
+		String city = (String)attributes.get("city");
 
-		if (eventDetailAddressLine2 != null) {
-			setEventDetailAddressLine2(eventDetailAddressLine2);
+		if (city != null) {
+			setCity(city);
 		}
 
-		String eventDetailInfocity = (String)attributes.get(
-				"eventDetailInfocity");
+		String zipCode = (String)attributes.get("zipCode");
 
-		if (eventDetailInfocity != null) {
-			setEventDetailInfocity(eventDetailInfocity);
+		if (zipCode != null) {
+			setZipCode(zipCode);
 		}
 
-		String eventDetailZip = (String)attributes.get("eventDetailZip");
+		Long stateId = (Long)attributes.get("stateId");
 
-		if (eventDetailZip != null) {
-			setEventDetailZip(eventDetailZip);
+		if (stateId != null) {
+			setStateId(stateId);
 		}
 
-		String eventDetailState = (String)attributes.get("eventDetailState");
+		Long countryId = (Long)attributes.get("countryId");
 
-		if (eventDetailState != null) {
-			setEventDetailState(eventDetailState);
+		if (countryId != null) {
+			setCountryId(countryId);
 		}
 
-		String eventDetailCountry = (String)attributes.get("eventDetailCountry");
+		String latitude = (String)attributes.get("latitude");
 
-		if (eventDetailCountry != null) {
-			setEventDetailCountry(eventDetailCountry);
+		if (latitude != null) {
+			setLatitude(latitude);
 		}
 
-		String eventDetailLatitude = (String)attributes.get(
-				"eventDetailLatitude");
+		String longitude = (String)attributes.get("longitude");
 
-		if (eventDetailLatitude != null) {
-			setEventDetailLatitude(eventDetailLatitude);
+		if (longitude != null) {
+			setLongitude(longitude);
 		}
 
-		String eventDetailLongitude = (String)attributes.get(
-				"eventDetailLongitude");
+		String phone = (String)attributes.get("phone");
 
-		if (eventDetailLongitude != null) {
-			setEventDetailLongitude(eventDetailLongitude);
+		if (phone != null) {
+			setPhone(phone);
 		}
 
-		String eventDetailPhone = (String)attributes.get("eventDetailPhone");
+		String website = (String)attributes.get("website");
 
-		if (eventDetailPhone != null) {
-			setEventDetailPhone(eventDetailPhone);
+		if (website != null) {
+			setWebsite(website);
 		}
 
-		String eventDetailWebsite = (String)attributes.get("eventDetailWebsite");
+		Double cost = (Double)attributes.get("cost");
 
-		if (eventDetailWebsite != null) {
-			setEventDetailWebsite(eventDetailWebsite);
-		}
-
-		Double eventDetailCost = (Double)attributes.get("eventDetailCost");
-
-		if (eventDetailCost != null) {
-			setEventDetailCost(eventDetailCost);
+		if (cost != null) {
+			setCost(cost);
 		}
 
 		String hoursOfOperation = (String)attributes.get("hoursOfOperation");
@@ -481,7 +466,19 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public void setInfoTypeId(long infoTypeId) {
+		_columnBitmask |= INFOTYPEID_COLUMN_BITMASK;
+
+		if (!_setOriginalInfoTypeId) {
+			_setOriginalInfoTypeId = true;
+
+			_originalInfoTypeId = _infoTypeId;
+		}
+
 		_infoTypeId = infoTypeId;
+	}
+
+	public long getOriginalInfoTypeId() {
+		return _originalInfoTypeId;
 	}
 
 	@JSON
@@ -492,226 +489,212 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public void setInfoTypeCategoryId(long infoTypeCategoryId) {
+		_columnBitmask |= INFOTYPECATEGORYID_COLUMN_BITMASK;
+
+		if (!_setOriginalInfoTypeCategoryId) {
+			_setOriginalInfoTypeCategoryId = true;
+
+			_originalInfoTypeCategoryId = _infoTypeCategoryId;
+		}
+
 		_infoTypeCategoryId = infoTypeCategoryId;
 	}
 
+	public long getOriginalInfoTypeCategoryId() {
+		return _originalInfoTypeCategoryId;
+	}
+
 	@JSON
 	@Override
-	public String getEventDetailInfoName() {
-		if (_eventDetailInfoName == null) {
+	public String getInfoName() {
+		if (_infoName == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailInfoName;
+			return _infoName;
 		}
 	}
 
 	@Override
-	public void setEventDetailInfoName(String eventDetailInfoName) {
-		_eventDetailInfoName = eventDetailInfoName;
+	public void setInfoName(String infoName) {
+		_infoName = infoName;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailInfoDesc() {
-		if (_eventDetailInfoDesc == null) {
+	public String getInfoDesc() {
+		if (_infoDesc == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailInfoDesc;
+			return _infoDesc;
 		}
 	}
 
 	@Override
-	public void setEventDetailInfoDesc(String eventDetailInfoDesc) {
-		_eventDetailInfoDesc = eventDetailInfoDesc;
+	public void setInfoDesc(String infoDesc) {
+		_infoDesc = infoDesc;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailInfoComment() {
-		if (_eventDetailInfoComment == null) {
+	public String getAddrLine1() {
+		if (_addrLine1 == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailInfoComment;
+			return _addrLine1;
 		}
 	}
 
 	@Override
-	public void setEventDetailInfoComment(String eventDetailInfoComment) {
-		_eventDetailInfoComment = eventDetailInfoComment;
+	public void setAddrLine1(String addrLine1) {
+		_addrLine1 = addrLine1;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailAddressLine1() {
-		if (_eventDetailAddressLine1 == null) {
+	public String getAddrLine2() {
+		if (_addrLine2 == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailAddressLine1;
+			return _addrLine2;
 		}
 	}
 
 	@Override
-	public void setEventDetailAddressLine1(String eventDetailAddressLine1) {
-		_eventDetailAddressLine1 = eventDetailAddressLine1;
+	public void setAddrLine2(String addrLine2) {
+		_addrLine2 = addrLine2;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailAddressLine2() {
-		if (_eventDetailAddressLine2 == null) {
+	public String getCity() {
+		if (_city == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailAddressLine2;
+			return _city;
 		}
 	}
 
 	@Override
-	public void setEventDetailAddressLine2(String eventDetailAddressLine2) {
-		_eventDetailAddressLine2 = eventDetailAddressLine2;
+	public void setCity(String city) {
+		_city = city;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailInfocity() {
-		if (_eventDetailInfocity == null) {
+	public String getZipCode() {
+		if (_zipCode == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailInfocity;
+			return _zipCode;
 		}
 	}
 
 	@Override
-	public void setEventDetailInfocity(String eventDetailInfocity) {
-		_eventDetailInfocity = eventDetailInfocity;
+	public void setZipCode(String zipCode) {
+		_zipCode = zipCode;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailZip() {
-		if (_eventDetailZip == null) {
+	public long getStateId() {
+		return _stateId;
+	}
+
+	@Override
+	public void setStateId(long stateId) {
+		_stateId = stateId;
+	}
+
+	@JSON
+	@Override
+	public long getCountryId() {
+		return _countryId;
+	}
+
+	@Override
+	public void setCountryId(long countryId) {
+		_countryId = countryId;
+	}
+
+	@JSON
+	@Override
+	public String getLatitude() {
+		if (_latitude == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailZip;
+			return _latitude;
 		}
 	}
 
 	@Override
-	public void setEventDetailZip(String eventDetailZip) {
-		_eventDetailZip = eventDetailZip;
+	public void setLatitude(String latitude) {
+		_latitude = latitude;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailState() {
-		if (_eventDetailState == null) {
+	public String getLongitude() {
+		if (_longitude == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailState;
+			return _longitude;
 		}
 	}
 
 	@Override
-	public void setEventDetailState(String eventDetailState) {
-		_eventDetailState = eventDetailState;
+	public void setLongitude(String longitude) {
+		_longitude = longitude;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailCountry() {
-		if (_eventDetailCountry == null) {
+	public String getPhone() {
+		if (_phone == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailCountry;
+			return _phone;
 		}
 	}
 
 	@Override
-	public void setEventDetailCountry(String eventDetailCountry) {
-		_eventDetailCountry = eventDetailCountry;
+	public void setPhone(String phone) {
+		_phone = phone;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailLatitude() {
-		if (_eventDetailLatitude == null) {
+	public String getWebsite() {
+		if (_website == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _eventDetailLatitude;
+			return _website;
 		}
 	}
 
 	@Override
-	public void setEventDetailLatitude(String eventDetailLatitude) {
-		_eventDetailLatitude = eventDetailLatitude;
+	public void setWebsite(String website) {
+		_website = website;
 	}
 
 	@JSON
 	@Override
-	public String getEventDetailLongitude() {
-		if (_eventDetailLongitude == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _eventDetailLongitude;
-		}
+	public double getCost() {
+		return _cost;
 	}
 
 	@Override
-	public void setEventDetailLongitude(String eventDetailLongitude) {
-		_eventDetailLongitude = eventDetailLongitude;
-	}
-
-	@JSON
-	@Override
-	public String getEventDetailPhone() {
-		if (_eventDetailPhone == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _eventDetailPhone;
-		}
-	}
-
-	@Override
-	public void setEventDetailPhone(String eventDetailPhone) {
-		_eventDetailPhone = eventDetailPhone;
-	}
-
-	@JSON
-	@Override
-	public String getEventDetailWebsite() {
-		if (_eventDetailWebsite == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _eventDetailWebsite;
-		}
-	}
-
-	@Override
-	public void setEventDetailWebsite(String eventDetailWebsite) {
-		_eventDetailWebsite = eventDetailWebsite;
-	}
-
-	@JSON
-	@Override
-	public double getEventDetailCost() {
-		return _eventDetailCost;
-	}
-
-	@Override
-	public void setEventDetailCost(double eventDetailCost) {
-		_eventDetailCost = eventDetailCost;
+	public void setCost(double cost) {
+		_cost = cost;
 	}
 
 	@JSON
@@ -769,20 +752,19 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		eventDetailImpl.setEventId(getEventId());
 		eventDetailImpl.setInfoTypeId(getInfoTypeId());
 		eventDetailImpl.setInfoTypeCategoryId(getInfoTypeCategoryId());
-		eventDetailImpl.setEventDetailInfoName(getEventDetailInfoName());
-		eventDetailImpl.setEventDetailInfoDesc(getEventDetailInfoDesc());
-		eventDetailImpl.setEventDetailInfoComment(getEventDetailInfoComment());
-		eventDetailImpl.setEventDetailAddressLine1(getEventDetailAddressLine1());
-		eventDetailImpl.setEventDetailAddressLine2(getEventDetailAddressLine2());
-		eventDetailImpl.setEventDetailInfocity(getEventDetailInfocity());
-		eventDetailImpl.setEventDetailZip(getEventDetailZip());
-		eventDetailImpl.setEventDetailState(getEventDetailState());
-		eventDetailImpl.setEventDetailCountry(getEventDetailCountry());
-		eventDetailImpl.setEventDetailLatitude(getEventDetailLatitude());
-		eventDetailImpl.setEventDetailLongitude(getEventDetailLongitude());
-		eventDetailImpl.setEventDetailPhone(getEventDetailPhone());
-		eventDetailImpl.setEventDetailWebsite(getEventDetailWebsite());
-		eventDetailImpl.setEventDetailCost(getEventDetailCost());
+		eventDetailImpl.setInfoName(getInfoName());
+		eventDetailImpl.setInfoDesc(getInfoDesc());
+		eventDetailImpl.setAddrLine1(getAddrLine1());
+		eventDetailImpl.setAddrLine2(getAddrLine2());
+		eventDetailImpl.setCity(getCity());
+		eventDetailImpl.setZipCode(getZipCode());
+		eventDetailImpl.setStateId(getStateId());
+		eventDetailImpl.setCountryId(getCountryId());
+		eventDetailImpl.setLatitude(getLatitude());
+		eventDetailImpl.setLongitude(getLongitude());
+		eventDetailImpl.setPhone(getPhone());
+		eventDetailImpl.setWebsite(getWebsite());
+		eventDetailImpl.setCost(getCost());
 		eventDetailImpl.setHoursOfOperation(getHoursOfOperation());
 
 		eventDetailImpl.resetOriginalValues();
@@ -840,6 +822,14 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 		eventDetailModelImpl._setOriginalEventId = false;
 
+		eventDetailModelImpl._originalInfoTypeId = eventDetailModelImpl._infoTypeId;
+
+		eventDetailModelImpl._setOriginalInfoTypeId = false;
+
+		eventDetailModelImpl._originalInfoTypeCategoryId = eventDetailModelImpl._infoTypeCategoryId;
+
+		eventDetailModelImpl._setOriginalInfoTypeCategoryId = false;
+
 		eventDetailModelImpl._columnBitmask = 0;
 	}
 
@@ -877,119 +867,91 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 		eventDetailCacheModel.infoTypeCategoryId = getInfoTypeCategoryId();
 
-		eventDetailCacheModel.eventDetailInfoName = getEventDetailInfoName();
+		eventDetailCacheModel.infoName = getInfoName();
 
-		String eventDetailInfoName = eventDetailCacheModel.eventDetailInfoName;
+		String infoName = eventDetailCacheModel.infoName;
 
-		if ((eventDetailInfoName != null) &&
-				(eventDetailInfoName.length() == 0)) {
-			eventDetailCacheModel.eventDetailInfoName = null;
+		if ((infoName != null) && (infoName.length() == 0)) {
+			eventDetailCacheModel.infoName = null;
 		}
 
-		eventDetailCacheModel.eventDetailInfoDesc = getEventDetailInfoDesc();
+		eventDetailCacheModel.infoDesc = getInfoDesc();
 
-		String eventDetailInfoDesc = eventDetailCacheModel.eventDetailInfoDesc;
+		String infoDesc = eventDetailCacheModel.infoDesc;
 
-		if ((eventDetailInfoDesc != null) &&
-				(eventDetailInfoDesc.length() == 0)) {
-			eventDetailCacheModel.eventDetailInfoDesc = null;
+		if ((infoDesc != null) && (infoDesc.length() == 0)) {
+			eventDetailCacheModel.infoDesc = null;
 		}
 
-		eventDetailCacheModel.eventDetailInfoComment = getEventDetailInfoComment();
+		eventDetailCacheModel.addrLine1 = getAddrLine1();
 
-		String eventDetailInfoComment = eventDetailCacheModel.eventDetailInfoComment;
+		String addrLine1 = eventDetailCacheModel.addrLine1;
 
-		if ((eventDetailInfoComment != null) &&
-				(eventDetailInfoComment.length() == 0)) {
-			eventDetailCacheModel.eventDetailInfoComment = null;
+		if ((addrLine1 != null) && (addrLine1.length() == 0)) {
+			eventDetailCacheModel.addrLine1 = null;
 		}
 
-		eventDetailCacheModel.eventDetailAddressLine1 = getEventDetailAddressLine1();
+		eventDetailCacheModel.addrLine2 = getAddrLine2();
 
-		String eventDetailAddressLine1 = eventDetailCacheModel.eventDetailAddressLine1;
+		String addrLine2 = eventDetailCacheModel.addrLine2;
 
-		if ((eventDetailAddressLine1 != null) &&
-				(eventDetailAddressLine1.length() == 0)) {
-			eventDetailCacheModel.eventDetailAddressLine1 = null;
+		if ((addrLine2 != null) && (addrLine2.length() == 0)) {
+			eventDetailCacheModel.addrLine2 = null;
 		}
 
-		eventDetailCacheModel.eventDetailAddressLine2 = getEventDetailAddressLine2();
+		eventDetailCacheModel.city = getCity();
 
-		String eventDetailAddressLine2 = eventDetailCacheModel.eventDetailAddressLine2;
+		String city = eventDetailCacheModel.city;
 
-		if ((eventDetailAddressLine2 != null) &&
-				(eventDetailAddressLine2.length() == 0)) {
-			eventDetailCacheModel.eventDetailAddressLine2 = null;
+		if ((city != null) && (city.length() == 0)) {
+			eventDetailCacheModel.city = null;
 		}
 
-		eventDetailCacheModel.eventDetailInfocity = getEventDetailInfocity();
+		eventDetailCacheModel.zipCode = getZipCode();
 
-		String eventDetailInfocity = eventDetailCacheModel.eventDetailInfocity;
+		String zipCode = eventDetailCacheModel.zipCode;
 
-		if ((eventDetailInfocity != null) &&
-				(eventDetailInfocity.length() == 0)) {
-			eventDetailCacheModel.eventDetailInfocity = null;
+		if ((zipCode != null) && (zipCode.length() == 0)) {
+			eventDetailCacheModel.zipCode = null;
 		}
 
-		eventDetailCacheModel.eventDetailZip = getEventDetailZip();
+		eventDetailCacheModel.stateId = getStateId();
 
-		String eventDetailZip = eventDetailCacheModel.eventDetailZip;
+		eventDetailCacheModel.countryId = getCountryId();
 
-		if ((eventDetailZip != null) && (eventDetailZip.length() == 0)) {
-			eventDetailCacheModel.eventDetailZip = null;
+		eventDetailCacheModel.latitude = getLatitude();
+
+		String latitude = eventDetailCacheModel.latitude;
+
+		if ((latitude != null) && (latitude.length() == 0)) {
+			eventDetailCacheModel.latitude = null;
 		}
 
-		eventDetailCacheModel.eventDetailState = getEventDetailState();
+		eventDetailCacheModel.longitude = getLongitude();
 
-		String eventDetailState = eventDetailCacheModel.eventDetailState;
+		String longitude = eventDetailCacheModel.longitude;
 
-		if ((eventDetailState != null) && (eventDetailState.length() == 0)) {
-			eventDetailCacheModel.eventDetailState = null;
+		if ((longitude != null) && (longitude.length() == 0)) {
+			eventDetailCacheModel.longitude = null;
 		}
 
-		eventDetailCacheModel.eventDetailCountry = getEventDetailCountry();
+		eventDetailCacheModel.phone = getPhone();
 
-		String eventDetailCountry = eventDetailCacheModel.eventDetailCountry;
+		String phone = eventDetailCacheModel.phone;
 
-		if ((eventDetailCountry != null) && (eventDetailCountry.length() == 0)) {
-			eventDetailCacheModel.eventDetailCountry = null;
+		if ((phone != null) && (phone.length() == 0)) {
+			eventDetailCacheModel.phone = null;
 		}
 
-		eventDetailCacheModel.eventDetailLatitude = getEventDetailLatitude();
+		eventDetailCacheModel.website = getWebsite();
 
-		String eventDetailLatitude = eventDetailCacheModel.eventDetailLatitude;
+		String website = eventDetailCacheModel.website;
 
-		if ((eventDetailLatitude != null) &&
-				(eventDetailLatitude.length() == 0)) {
-			eventDetailCacheModel.eventDetailLatitude = null;
+		if ((website != null) && (website.length() == 0)) {
+			eventDetailCacheModel.website = null;
 		}
 
-		eventDetailCacheModel.eventDetailLongitude = getEventDetailLongitude();
-
-		String eventDetailLongitude = eventDetailCacheModel.eventDetailLongitude;
-
-		if ((eventDetailLongitude != null) &&
-				(eventDetailLongitude.length() == 0)) {
-			eventDetailCacheModel.eventDetailLongitude = null;
-		}
-
-		eventDetailCacheModel.eventDetailPhone = getEventDetailPhone();
-
-		String eventDetailPhone = eventDetailCacheModel.eventDetailPhone;
-
-		if ((eventDetailPhone != null) && (eventDetailPhone.length() == 0)) {
-			eventDetailCacheModel.eventDetailPhone = null;
-		}
-
-		eventDetailCacheModel.eventDetailWebsite = getEventDetailWebsite();
-
-		String eventDetailWebsite = eventDetailCacheModel.eventDetailWebsite;
-
-		if ((eventDetailWebsite != null) && (eventDetailWebsite.length() == 0)) {
-			eventDetailCacheModel.eventDetailWebsite = null;
-		}
-
-		eventDetailCacheModel.eventDetailCost = getEventDetailCost();
+		eventDetailCacheModel.cost = getCost();
 
 		eventDetailCacheModel.hoursOfOperation = getHoursOfOperation();
 
@@ -1004,7 +966,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{eventDetailId=");
 		sb.append(getEventDetailId());
@@ -1022,34 +984,32 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeId());
 		sb.append(", infoTypeCategoryId=");
 		sb.append(getInfoTypeCategoryId());
-		sb.append(", eventDetailInfoName=");
-		sb.append(getEventDetailInfoName());
-		sb.append(", eventDetailInfoDesc=");
-		sb.append(getEventDetailInfoDesc());
-		sb.append(", eventDetailInfoComment=");
-		sb.append(getEventDetailInfoComment());
-		sb.append(", eventDetailAddressLine1=");
-		sb.append(getEventDetailAddressLine1());
-		sb.append(", eventDetailAddressLine2=");
-		sb.append(getEventDetailAddressLine2());
-		sb.append(", eventDetailInfocity=");
-		sb.append(getEventDetailInfocity());
-		sb.append(", eventDetailZip=");
-		sb.append(getEventDetailZip());
-		sb.append(", eventDetailState=");
-		sb.append(getEventDetailState());
-		sb.append(", eventDetailCountry=");
-		sb.append(getEventDetailCountry());
-		sb.append(", eventDetailLatitude=");
-		sb.append(getEventDetailLatitude());
-		sb.append(", eventDetailLongitude=");
-		sb.append(getEventDetailLongitude());
-		sb.append(", eventDetailPhone=");
-		sb.append(getEventDetailPhone());
-		sb.append(", eventDetailWebsite=");
-		sb.append(getEventDetailWebsite());
-		sb.append(", eventDetailCost=");
-		sb.append(getEventDetailCost());
+		sb.append(", infoName=");
+		sb.append(getInfoName());
+		sb.append(", infoDesc=");
+		sb.append(getInfoDesc());
+		sb.append(", addrLine1=");
+		sb.append(getAddrLine1());
+		sb.append(", addrLine2=");
+		sb.append(getAddrLine2());
+		sb.append(", city=");
+		sb.append(getCity());
+		sb.append(", zipCode=");
+		sb.append(getZipCode());
+		sb.append(", stateId=");
+		sb.append(getStateId());
+		sb.append(", countryId=");
+		sb.append(getCountryId());
+		sb.append(", latitude=");
+		sb.append(getLatitude());
+		sb.append(", longitude=");
+		sb.append(getLongitude());
+		sb.append(", phone=");
+		sb.append(getPhone());
+		sb.append(", website=");
+		sb.append(getWebsite());
+		sb.append(", cost=");
+		sb.append(getCost());
 		sb.append(", hoursOfOperation=");
 		sb.append(getHoursOfOperation());
 		sb.append("}");
@@ -1059,7 +1019,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(70);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.EventDetail");
@@ -1098,60 +1058,56 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeCategoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailInfoName</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailInfoName());
+			"<column><column-name>infoName</column-name><column-value><![CDATA[");
+		sb.append(getInfoName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailInfoDesc</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailInfoDesc());
+			"<column><column-name>infoDesc</column-name><column-value><![CDATA[");
+		sb.append(getInfoDesc());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailInfoComment</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailInfoComment());
+			"<column><column-name>addrLine1</column-name><column-value><![CDATA[");
+		sb.append(getAddrLine1());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailAddressLine1</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailAddressLine1());
+			"<column><column-name>addrLine2</column-name><column-value><![CDATA[");
+		sb.append(getAddrLine2());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailAddressLine2</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailAddressLine2());
+			"<column><column-name>city</column-name><column-value><![CDATA[");
+		sb.append(getCity());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailInfocity</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailInfocity());
+			"<column><column-name>zipCode</column-name><column-value><![CDATA[");
+		sb.append(getZipCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailZip</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailZip());
+			"<column><column-name>stateId</column-name><column-value><![CDATA[");
+		sb.append(getStateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailState</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailState());
+			"<column><column-name>countryId</column-name><column-value><![CDATA[");
+		sb.append(getCountryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailCountry</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailCountry());
+			"<column><column-name>latitude</column-name><column-value><![CDATA[");
+		sb.append(getLatitude());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailLatitude</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailLatitude());
+			"<column><column-name>longitude</column-name><column-value><![CDATA[");
+		sb.append(getLongitude());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailLongitude</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailLongitude());
+			"<column><column-name>phone</column-name><column-value><![CDATA[");
+		sb.append(getPhone());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailPhone</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailPhone());
+			"<column><column-name>website</column-name><column-value><![CDATA[");
+		sb.append(getWebsite());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailWebsite</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailWebsite());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>eventDetailCost</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailCost());
+			"<column><column-name>cost</column-name><column-value><![CDATA[");
+		sb.append(getCost());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>hoursOfOperation</column-name><column-value><![CDATA[");
@@ -1177,21 +1133,24 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 	private long _originalEventId;
 	private boolean _setOriginalEventId;
 	private long _infoTypeId;
+	private long _originalInfoTypeId;
+	private boolean _setOriginalInfoTypeId;
 	private long _infoTypeCategoryId;
-	private String _eventDetailInfoName;
-	private String _eventDetailInfoDesc;
-	private String _eventDetailInfoComment;
-	private String _eventDetailAddressLine1;
-	private String _eventDetailAddressLine2;
-	private String _eventDetailInfocity;
-	private String _eventDetailZip;
-	private String _eventDetailState;
-	private String _eventDetailCountry;
-	private String _eventDetailLatitude;
-	private String _eventDetailLongitude;
-	private String _eventDetailPhone;
-	private String _eventDetailWebsite;
-	private double _eventDetailCost;
+	private long _originalInfoTypeCategoryId;
+	private boolean _setOriginalInfoTypeCategoryId;
+	private String _infoName;
+	private String _infoDesc;
+	private String _addrLine1;
+	private String _addrLine2;
+	private String _city;
+	private String _zipCode;
+	private long _stateId;
+	private long _countryId;
+	private String _latitude;
+	private String _longitude;
+	private String _phone;
+	private String _website;
+	private double _cost;
 	private String _hoursOfOperation;
 	private long _columnBitmask;
 	private EventDetail _escapedModel;

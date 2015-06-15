@@ -17,8 +17,6 @@ package com.rumbasolutions.flask.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
-import java.sql.Blob;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,9 +56,9 @@ public class VenueDetailImageWrapper implements VenueDetailImage,
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("venueDetailId", getVenueDetailId());
-		attributes.put("venueDetailImageTitle", getVenueDetailImageTitle());
-		attributes.put("venueDetailImageDesc", getVenueDetailImageDesc());
-		attributes.put("venueDetailImageData", getVenueDetailImageData());
+		attributes.put("imageTitle", getImageTitle());
+		attributes.put("imageDesc", getImageDesc());
+		attributes.put("imagePath", getImagePath());
 
 		return attributes;
 	}
@@ -103,24 +101,22 @@ public class VenueDetailImageWrapper implements VenueDetailImage,
 			setVenueDetailId(venueDetailId);
 		}
 
-		String venueDetailImageTitle = (String)attributes.get(
-				"venueDetailImageTitle");
+		String imageTitle = (String)attributes.get("imageTitle");
 
-		if (venueDetailImageTitle != null) {
-			setVenueDetailImageTitle(venueDetailImageTitle);
+		if (imageTitle != null) {
+			setImageTitle(imageTitle);
 		}
 
-		String venueDetailImageDesc = (String)attributes.get(
-				"venueDetailImageDesc");
+		String imageDesc = (String)attributes.get("imageDesc");
 
-		if (venueDetailImageDesc != null) {
-			setVenueDetailImageDesc(venueDetailImageDesc);
+		if (imageDesc != null) {
+			setImageDesc(imageDesc);
 		}
 
-		Blob venueDetailImageData = (Blob)attributes.get("venueDetailImageData");
+		String imagePath = (String)attributes.get("imagePath");
 
-		if (venueDetailImageData != null) {
-			setVenueDetailImageData(venueDetailImageData);
+		if (imagePath != null) {
+			setImagePath(imagePath);
 		}
 	}
 
@@ -287,63 +283,63 @@ public class VenueDetailImageWrapper implements VenueDetailImage,
 	}
 
 	/**
-	* Returns the venue detail image title of this venue detail image.
+	* Returns the image title of this venue detail image.
 	*
-	* @return the venue detail image title of this venue detail image
+	* @return the image title of this venue detail image
 	*/
 	@Override
-	public java.lang.String getVenueDetailImageTitle() {
-		return _venueDetailImage.getVenueDetailImageTitle();
+	public java.lang.String getImageTitle() {
+		return _venueDetailImage.getImageTitle();
 	}
 
 	/**
-	* Sets the venue detail image title of this venue detail image.
+	* Sets the image title of this venue detail image.
 	*
-	* @param venueDetailImageTitle the venue detail image title of this venue detail image
+	* @param imageTitle the image title of this venue detail image
 	*/
 	@Override
-	public void setVenueDetailImageTitle(java.lang.String venueDetailImageTitle) {
-		_venueDetailImage.setVenueDetailImageTitle(venueDetailImageTitle);
+	public void setImageTitle(java.lang.String imageTitle) {
+		_venueDetailImage.setImageTitle(imageTitle);
 	}
 
 	/**
-	* Returns the venue detail image desc of this venue detail image.
+	* Returns the image desc of this venue detail image.
 	*
-	* @return the venue detail image desc of this venue detail image
+	* @return the image desc of this venue detail image
 	*/
 	@Override
-	public java.lang.String getVenueDetailImageDesc() {
-		return _venueDetailImage.getVenueDetailImageDesc();
+	public java.lang.String getImageDesc() {
+		return _venueDetailImage.getImageDesc();
 	}
 
 	/**
-	* Sets the venue detail image desc of this venue detail image.
+	* Sets the image desc of this venue detail image.
 	*
-	* @param venueDetailImageDesc the venue detail image desc of this venue detail image
+	* @param imageDesc the image desc of this venue detail image
 	*/
 	@Override
-	public void setVenueDetailImageDesc(java.lang.String venueDetailImageDesc) {
-		_venueDetailImage.setVenueDetailImageDesc(venueDetailImageDesc);
+	public void setImageDesc(java.lang.String imageDesc) {
+		_venueDetailImage.setImageDesc(imageDesc);
 	}
 
 	/**
-	* Returns the venue detail image data of this venue detail image.
+	* Returns the image path of this venue detail image.
 	*
-	* @return the venue detail image data of this venue detail image
+	* @return the image path of this venue detail image
 	*/
 	@Override
-	public java.sql.Blob getVenueDetailImageData() {
-		return _venueDetailImage.getVenueDetailImageData();
+	public java.lang.String getImagePath() {
+		return _venueDetailImage.getImagePath();
 	}
 
 	/**
-	* Sets the venue detail image data of this venue detail image.
+	* Sets the image path of this venue detail image.
 	*
-	* @param venueDetailImageData the venue detail image data of this venue detail image
+	* @param imagePath the image path of this venue detail image
 	*/
 	@Override
-	public void setVenueDetailImageData(java.sql.Blob venueDetailImageData) {
-		_venueDetailImage.setVenueDetailImageData(venueDetailImageData);
+	public void setImagePath(java.lang.String imagePath) {
+		_venueDetailImage.setImagePath(imagePath);
 	}
 
 	@Override

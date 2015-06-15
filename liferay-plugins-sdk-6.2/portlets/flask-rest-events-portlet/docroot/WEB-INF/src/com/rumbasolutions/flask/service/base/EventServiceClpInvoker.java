@@ -43,7 +43,7 @@ public class EventServiceClpInvoker {
 		_methodParameterTypes79 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long", "long",
-				"java.sql.Blob", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -72,7 +72,8 @@ public class EventServiceClpInvoker {
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				((Long)arguments[5]).longValue(),
-				((Long)arguments[6]).longValue(), (java.sql.Blob)arguments[7],
+				((Long)arguments[6]).longValue(),
+				(java.lang.String)arguments[7],
 				(com.liferay.portal.service.ServiceContext)arguments[8]);
 		}
 

@@ -117,10 +117,10 @@ public class VenueDetailImageUtil {
 	* @return the matching venue detail images
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> findByvenueDetailId(
+	public static java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> findByVenueDetailId(
 		long venueDetailId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByvenueDetailId(venueDetailId);
+		return getPersistence().findByVenueDetailId(venueDetailId);
 	}
 
 	/**
@@ -136,10 +136,10 @@ public class VenueDetailImageUtil {
 	* @return the range of matching venue detail images
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> findByvenueDetailId(
+	public static java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> findByVenueDetailId(
 		long venueDetailId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().findByvenueDetailId(venueDetailId, start, end);
+		return getPersistence().findByVenueDetailId(venueDetailId, start, end);
 	}
 
 	/**
@@ -156,12 +156,12 @@ public class VenueDetailImageUtil {
 	* @return the ordered range of matching venue detail images
 	* @throws SystemException if a system exception occurred
 	*/
-	public static java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> findByvenueDetailId(
+	public static java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> findByVenueDetailId(
 		long venueDetailId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .findByvenueDetailId(venueDetailId, start, end,
+				   .findByVenueDetailId(venueDetailId, start, end,
 			orderByComparator);
 	}
 
@@ -174,13 +174,13 @@ public class VenueDetailImageUtil {
 	* @throws com.rumbasolutions.flask.NoSuchVenueDetailImageException if a matching venue detail image could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rumbasolutions.flask.model.VenueDetailImage findByvenueDetailId_First(
+	public static com.rumbasolutions.flask.model.VenueDetailImage findByVenueDetailId_First(
 		long venueDetailId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rumbasolutions.flask.NoSuchVenueDetailImageException {
 		return getPersistence()
-				   .findByvenueDetailId_First(venueDetailId, orderByComparator);
+				   .findByVenueDetailId_First(venueDetailId, orderByComparator);
 	}
 
 	/**
@@ -191,12 +191,12 @@ public class VenueDetailImageUtil {
 	* @return the first matching venue detail image, or <code>null</code> if a matching venue detail image could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rumbasolutions.flask.model.VenueDetailImage fetchByvenueDetailId_First(
+	public static com.rumbasolutions.flask.model.VenueDetailImage fetchByVenueDetailId_First(
 		long venueDetailId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByvenueDetailId_First(venueDetailId, orderByComparator);
+				   .fetchByVenueDetailId_First(venueDetailId, orderByComparator);
 	}
 
 	/**
@@ -208,13 +208,13 @@ public class VenueDetailImageUtil {
 	* @throws com.rumbasolutions.flask.NoSuchVenueDetailImageException if a matching venue detail image could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rumbasolutions.flask.model.VenueDetailImage findByvenueDetailId_Last(
+	public static com.rumbasolutions.flask.model.VenueDetailImage findByVenueDetailId_Last(
 		long venueDetailId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rumbasolutions.flask.NoSuchVenueDetailImageException {
 		return getPersistence()
-				   .findByvenueDetailId_Last(venueDetailId, orderByComparator);
+				   .findByVenueDetailId_Last(venueDetailId, orderByComparator);
 	}
 
 	/**
@@ -225,12 +225,12 @@ public class VenueDetailImageUtil {
 	* @return the last matching venue detail image, or <code>null</code> if a matching venue detail image could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rumbasolutions.flask.model.VenueDetailImage fetchByvenueDetailId_Last(
+	public static com.rumbasolutions.flask.model.VenueDetailImage fetchByVenueDetailId_Last(
 		long venueDetailId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException {
 		return getPersistence()
-				   .fetchByvenueDetailId_Last(venueDetailId, orderByComparator);
+				   .fetchByVenueDetailId_Last(venueDetailId, orderByComparator);
 	}
 
 	/**
@@ -243,13 +243,13 @@ public class VenueDetailImageUtil {
 	* @throws com.rumbasolutions.flask.NoSuchVenueDetailImageException if a venue detail image with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public static com.rumbasolutions.flask.model.VenueDetailImage[] findByvenueDetailId_PrevAndNext(
+	public static com.rumbasolutions.flask.model.VenueDetailImage[] findByVenueDetailId_PrevAndNext(
 		long venueDetailImageId, long venueDetailId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
 			com.rumbasolutions.flask.NoSuchVenueDetailImageException {
 		return getPersistence()
-				   .findByvenueDetailId_PrevAndNext(venueDetailImageId,
+				   .findByVenueDetailId_PrevAndNext(venueDetailImageId,
 			venueDetailId, orderByComparator);
 	}
 
@@ -259,9 +259,9 @@ public class VenueDetailImageUtil {
 	* @param venueDetailId the venue detail ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public static void removeByvenueDetailId(long venueDetailId)
+	public static void removeByVenueDetailId(long venueDetailId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		getPersistence().removeByvenueDetailId(venueDetailId);
+		getPersistence().removeByVenueDetailId(venueDetailId);
 	}
 
 	/**
@@ -271,9 +271,9 @@ public class VenueDetailImageUtil {
 	* @return the number of matching venue detail images
 	* @throws SystemException if a system exception occurred
 	*/
-	public static int countByvenueDetailId(long venueDetailId)
+	public static int countByVenueDetailId(long venueDetailId)
 		throws com.liferay.portal.kernel.exception.SystemException {
-		return getPersistence().countByvenueDetailId(venueDetailId);
+		return getPersistence().countByVenueDetailId(venueDetailId);
 	}
 
 	/**

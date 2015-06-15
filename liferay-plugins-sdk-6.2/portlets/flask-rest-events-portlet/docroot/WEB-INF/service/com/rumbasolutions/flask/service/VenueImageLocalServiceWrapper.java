@@ -259,13 +259,6 @@ public class VenueImageLocalServiceWrapper implements VenueImageLocalService,
 		return _venueImageLocalService.updateVenueImage(venueImage);
 	}
 
-	@Override
-	public com.rumbasolutions.flask.model.VenueImageVenueImageBlobModel getVenueImageBlobModel(
-		java.io.Serializable primaryKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _venueImageLocalService.getVenueImageBlobModel(primaryKey);
-	}
-
 	/**
 	* Returns the Spring bean ID for this bean.
 	*

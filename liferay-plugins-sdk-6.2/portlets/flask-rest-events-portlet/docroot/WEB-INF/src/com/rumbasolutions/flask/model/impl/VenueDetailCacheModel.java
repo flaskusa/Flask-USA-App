@@ -38,7 +38,7 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{venueDetailId=");
 		sb.append(venueDetailId);
@@ -56,34 +56,38 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		sb.append(infoTypeId);
 		sb.append(", infoTypeCategoryId=");
 		sb.append(infoTypeCategoryId);
-		sb.append(", venueDetailInfoName=");
-		sb.append(venueDetailInfoName);
-		sb.append(", venueDetailInfoDesc=");
-		sb.append(venueDetailInfoDesc);
-		sb.append(", venueDetailInfoComment=");
-		sb.append(venueDetailInfoComment);
-		sb.append(", venueDetailAddressLine1=");
-		sb.append(venueDetailAddressLine1);
-		sb.append(", venueDetailAddressLine2=");
-		sb.append(venueDetailAddressLine2);
-		sb.append(", venueDetailCity=");
-		sb.append(venueDetailCity);
-		sb.append(", venueDetailState=");
-		sb.append(venueDetailState);
-		sb.append(", venueDetailCountry=");
-		sb.append(venueDetailCountry);
-		sb.append(", venueDetailLatitude=");
-		sb.append(venueDetailLatitude);
-		sb.append(", venueDetailLongitude=");
-		sb.append(venueDetailLongitude);
-		sb.append(", venueDetailPhone=");
-		sb.append(venueDetailPhone);
-		sb.append(", venueDetailWebsite=");
-		sb.append(venueDetailWebsite);
-		sb.append(", venueDetailCost=");
-		sb.append(venueDetailCost);
-		sb.append(", venueDetailhoursOfOperation=");
-		sb.append(venueDetailhoursOfOperation);
+		sb.append(", infoTitle=");
+		sb.append(infoTitle);
+		sb.append(", infoDesc=");
+		sb.append(infoDesc);
+		sb.append(", addrLine1=");
+		sb.append(addrLine1);
+		sb.append(", addrLine2=");
+		sb.append(addrLine2);
+		sb.append(", city=");
+		sb.append(city);
+		sb.append(", zipCode=");
+		sb.append(zipCode);
+		sb.append(", stateId=");
+		sb.append(stateId);
+		sb.append(", stateName=");
+		sb.append(stateName);
+		sb.append(", countryId=");
+		sb.append(countryId);
+		sb.append(", countryName=");
+		sb.append(countryName);
+		sb.append(", latitude=");
+		sb.append(latitude);
+		sb.append(", longitude=");
+		sb.append(longitude);
+		sb.append(", phone=");
+		sb.append(phone);
+		sb.append(", website=");
+		sb.append(website);
+		sb.append(", cost=");
+		sb.append(cost);
+		sb.append(", hoursOfOperation=");
+		sb.append(hoursOfOperation);
 		sb.append("}");
 
 		return sb.toString();
@@ -115,97 +119,101 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		venueDetailImpl.setInfoTypeId(infoTypeId);
 		venueDetailImpl.setInfoTypeCategoryId(infoTypeCategoryId);
 
-		if (venueDetailInfoName == null) {
-			venueDetailImpl.setVenueDetailInfoName(StringPool.BLANK);
+		if (infoTitle == null) {
+			venueDetailImpl.setInfoTitle(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailInfoName(venueDetailInfoName);
+			venueDetailImpl.setInfoTitle(infoTitle);
 		}
 
-		if (venueDetailInfoDesc == null) {
-			venueDetailImpl.setVenueDetailInfoDesc(StringPool.BLANK);
+		if (infoDesc == null) {
+			venueDetailImpl.setInfoDesc(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailInfoDesc(venueDetailInfoDesc);
+			venueDetailImpl.setInfoDesc(infoDesc);
 		}
 
-		if (venueDetailInfoComment == null) {
-			venueDetailImpl.setVenueDetailInfoComment(StringPool.BLANK);
+		if (addrLine1 == null) {
+			venueDetailImpl.setAddrLine1(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailInfoComment(venueDetailInfoComment);
+			venueDetailImpl.setAddrLine1(addrLine1);
 		}
 
-		if (venueDetailAddressLine1 == null) {
-			venueDetailImpl.setVenueDetailAddressLine1(StringPool.BLANK);
+		if (addrLine2 == null) {
+			venueDetailImpl.setAddrLine2(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailAddressLine1(venueDetailAddressLine1);
+			venueDetailImpl.setAddrLine2(addrLine2);
 		}
 
-		if (venueDetailAddressLine2 == null) {
-			venueDetailImpl.setVenueDetailAddressLine2(StringPool.BLANK);
+		if (city == null) {
+			venueDetailImpl.setCity(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailAddressLine2(venueDetailAddressLine2);
+			venueDetailImpl.setCity(city);
 		}
 
-		if (venueDetailCity == null) {
-			venueDetailImpl.setVenueDetailCity(StringPool.BLANK);
+		if (zipCode == null) {
+			venueDetailImpl.setZipCode(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailCity(venueDetailCity);
+			venueDetailImpl.setZipCode(zipCode);
 		}
 
-		if (venueDetailState == null) {
-			venueDetailImpl.setVenueDetailState(StringPool.BLANK);
+		venueDetailImpl.setStateId(stateId);
+
+		if (stateName == null) {
+			venueDetailImpl.setStateName(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailState(venueDetailState);
+			venueDetailImpl.setStateName(stateName);
 		}
 
-		if (venueDetailCountry == null) {
-			venueDetailImpl.setVenueDetailCountry(StringPool.BLANK);
+		venueDetailImpl.setCountryId(countryId);
+
+		if (countryName == null) {
+			venueDetailImpl.setCountryName(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailCountry(venueDetailCountry);
+			venueDetailImpl.setCountryName(countryName);
 		}
 
-		if (venueDetailLatitude == null) {
-			venueDetailImpl.setVenueDetailLatitude(StringPool.BLANK);
+		if (latitude == null) {
+			venueDetailImpl.setLatitude(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailLatitude(venueDetailLatitude);
+			venueDetailImpl.setLatitude(latitude);
 		}
 
-		if (venueDetailLongitude == null) {
-			venueDetailImpl.setVenueDetailLongitude(StringPool.BLANK);
+		if (longitude == null) {
+			venueDetailImpl.setLongitude(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailLongitude(venueDetailLongitude);
+			venueDetailImpl.setLongitude(longitude);
 		}
 
-		if (venueDetailPhone == null) {
-			venueDetailImpl.setVenueDetailPhone(StringPool.BLANK);
+		if (phone == null) {
+			venueDetailImpl.setPhone(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailPhone(venueDetailPhone);
+			venueDetailImpl.setPhone(phone);
 		}
 
-		if (venueDetailWebsite == null) {
-			venueDetailImpl.setVenueDetailWebsite(StringPool.BLANK);
+		if (website == null) {
+			venueDetailImpl.setWebsite(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailWebsite(venueDetailWebsite);
+			venueDetailImpl.setWebsite(website);
 		}
 
-		venueDetailImpl.setVenueDetailCost(venueDetailCost);
+		venueDetailImpl.setCost(cost);
 
-		if (venueDetailhoursOfOperation == null) {
-			venueDetailImpl.setVenueDetailhoursOfOperation(StringPool.BLANK);
+		if (hoursOfOperation == null) {
+			venueDetailImpl.setHoursOfOperation(StringPool.BLANK);
 		}
 		else {
-			venueDetailImpl.setVenueDetailhoursOfOperation(venueDetailhoursOfOperation);
+			venueDetailImpl.setHoursOfOperation(hoursOfOperation);
 		}
 
 		venueDetailImpl.resetOriginalValues();
@@ -223,20 +231,22 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		venueId = objectInput.readLong();
 		infoTypeId = objectInput.readLong();
 		infoTypeCategoryId = objectInput.readLong();
-		venueDetailInfoName = objectInput.readUTF();
-		venueDetailInfoDesc = objectInput.readUTF();
-		venueDetailInfoComment = objectInput.readUTF();
-		venueDetailAddressLine1 = objectInput.readUTF();
-		venueDetailAddressLine2 = objectInput.readUTF();
-		venueDetailCity = objectInput.readUTF();
-		venueDetailState = objectInput.readUTF();
-		venueDetailCountry = objectInput.readUTF();
-		venueDetailLatitude = objectInput.readUTF();
-		venueDetailLongitude = objectInput.readUTF();
-		venueDetailPhone = objectInput.readUTF();
-		venueDetailWebsite = objectInput.readUTF();
-		venueDetailCost = objectInput.readDouble();
-		venueDetailhoursOfOperation = objectInput.readUTF();
+		infoTitle = objectInput.readUTF();
+		infoDesc = objectInput.readUTF();
+		addrLine1 = objectInput.readUTF();
+		addrLine2 = objectInput.readUTF();
+		city = objectInput.readUTF();
+		zipCode = objectInput.readUTF();
+		stateId = objectInput.readLong();
+		stateName = objectInput.readUTF();
+		countryId = objectInput.readLong();
+		countryName = objectInput.readUTF();
+		latitude = objectInput.readUTF();
+		longitude = objectInput.readUTF();
+		phone = objectInput.readUTF();
+		website = objectInput.readUTF();
+		cost = objectInput.readDouble();
+		hoursOfOperation = objectInput.readUTF();
 	}
 
 	@Override
@@ -251,97 +261,101 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		objectOutput.writeLong(infoTypeId);
 		objectOutput.writeLong(infoTypeCategoryId);
 
-		if (venueDetailInfoName == null) {
+		if (infoTitle == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailInfoName);
+			objectOutput.writeUTF(infoTitle);
 		}
 
-		if (venueDetailInfoDesc == null) {
+		if (infoDesc == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailInfoDesc);
+			objectOutput.writeUTF(infoDesc);
 		}
 
-		if (venueDetailInfoComment == null) {
+		if (addrLine1 == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailInfoComment);
+			objectOutput.writeUTF(addrLine1);
 		}
 
-		if (venueDetailAddressLine1 == null) {
+		if (addrLine2 == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailAddressLine1);
+			objectOutput.writeUTF(addrLine2);
 		}
 
-		if (venueDetailAddressLine2 == null) {
+		if (city == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailAddressLine2);
+			objectOutput.writeUTF(city);
 		}
 
-		if (venueDetailCity == null) {
+		if (zipCode == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailCity);
+			objectOutput.writeUTF(zipCode);
 		}
 
-		if (venueDetailState == null) {
+		objectOutput.writeLong(stateId);
+
+		if (stateName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailState);
+			objectOutput.writeUTF(stateName);
 		}
 
-		if (venueDetailCountry == null) {
+		objectOutput.writeLong(countryId);
+
+		if (countryName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailCountry);
+			objectOutput.writeUTF(countryName);
 		}
 
-		if (venueDetailLatitude == null) {
+		if (latitude == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailLatitude);
+			objectOutput.writeUTF(latitude);
 		}
 
-		if (venueDetailLongitude == null) {
+		if (longitude == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailLongitude);
+			objectOutput.writeUTF(longitude);
 		}
 
-		if (venueDetailPhone == null) {
+		if (phone == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailPhone);
+			objectOutput.writeUTF(phone);
 		}
 
-		if (venueDetailWebsite == null) {
+		if (website == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailWebsite);
+			objectOutput.writeUTF(website);
 		}
 
-		objectOutput.writeDouble(venueDetailCost);
+		objectOutput.writeDouble(cost);
 
-		if (venueDetailhoursOfOperation == null) {
+		if (hoursOfOperation == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueDetailhoursOfOperation);
+			objectOutput.writeUTF(hoursOfOperation);
 		}
 	}
 
@@ -353,18 +367,20 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 	public long venueId;
 	public long infoTypeId;
 	public long infoTypeCategoryId;
-	public String venueDetailInfoName;
-	public String venueDetailInfoDesc;
-	public String venueDetailInfoComment;
-	public String venueDetailAddressLine1;
-	public String venueDetailAddressLine2;
-	public String venueDetailCity;
-	public String venueDetailState;
-	public String venueDetailCountry;
-	public String venueDetailLatitude;
-	public String venueDetailLongitude;
-	public String venueDetailPhone;
-	public String venueDetailWebsite;
-	public double venueDetailCost;
-	public String venueDetailhoursOfOperation;
+	public String infoTitle;
+	public String infoDesc;
+	public String addrLine1;
+	public String addrLine2;
+	public String city;
+	public String zipCode;
+	public long stateId;
+	public String stateName;
+	public long countryId;
+	public String countryName;
+	public String latitude;
+	public String longitude;
+	public String phone;
+	public String website;
+	public double cost;
+	public String hoursOfOperation;
 }

@@ -67,7 +67,7 @@
         <column name="endTime" type="Date" />
         <column name="eventTypeId" type="long" />
         
-        <column name="eventImage" type="Blob" />
+        <column name="eventImagePath" type="String" />
         
          
         <column name="venueId" type="long" />
@@ -106,26 +106,33 @@
        	 <column name="eventId" type="long" />
         <column name="infoTypeId" type="long" />
         <column name="infoTypeCategoryId" type="long" />
-        <column name="eventDetailInfoName" type="String" />
-        <column name="eventDetailInfoDesc" type="String" />
-        <column name="eventDetailInfoComment" type="String" />
-        <column name="eventDetailAddressLine1" type="String" />
-        <column name="eventDetailAddressLine2" type="String" />
-        <column name="eventDetailInfocity" type="String" />
-        <column name="eventDetailZip" type="String" />
-        <column name="eventDetailState" type="String" />
-       	<column name="eventDetailCountry" type="String" />
-        <column name="eventDetailLatitude" type="String" />
-        <column name="eventDetailLongitude" type="String" />
-        <column name="eventDetailPhone" type="String" />
-        <column name="eventDetailWebsite" type="String" />
-        <column name="eventDetailCost" type="double" />
+        <column name="infoName" type="String" />
+        <column name="infoDesc" type="String" />
+        <column name="addrLine1" type="String" />
+        <column name="addrLine2" type="String" />
+        <column name="city" type="String" />
+        <column name="zipCode" type="String" />
+        <column name="stateId" type="long" />
+       	<column name="countryId" type="long" />
+        <column name="latitude" type="String" />
+        <column name="longitude" type="String" />
+        <column name="phone" type="String" />
+        <column name="website" type="String" />
+        <column name="cost" type="double" />
         <column name="hoursOfOperation" type="String" />
         
 		<!-- Finder methods -->
 
-        <finder name="eventId" return-type="Collection">
+        <finder name="EventId" return-type="Collection">
 			<finder-column name="eventId" />
+		</finder>
+		
+		<finder name="EventInfoType" return-type="Collection">
+			<finder-column name="infoTypeId" />
+		</finder>
+		<finder name="EventInfoTypeCategory" return-type="Collection">
+			<finder-column name="infoTypeId" />
+			<finder-column name="infoTypeCategoryId" />
 		</finder>
    </entity>
  
@@ -142,9 +149,9 @@
         
         <!-- Other fields-->
         <column name="eventDetailId" type="long" />
-        <column name="eventDetailImagetitle" type="String" />
-        <column name="eventDetailImageDesc" type="String" />
-        <column name="eventDetailImageData" type="Blob" />
+        <column name="imagetitle" type="String" />
+        <column name="imageDesc" type="String" />
+        <column name="imagePath" type="String" />
 		
 		       <!-- Finder methods -->
         <finder name="eventDetailId" return-type="Collection">
@@ -184,9 +191,14 @@
         </order>
 
         <!-- Finder methods -->
-         <finder name="venueMetroArea" return-type="Collection">
+         <finder name="VenueMetroArea" return-type="Collection">
 			<finder-column name="venueMetroArea" />
 		</finder>
+		
+		<finder name="VenueZipCode" return-type="Collection">
+			<finder-column name="venueZipCode" />
+		</finder>
+        
         
 
     </entity>
@@ -208,7 +220,7 @@
         <!-- Other fields -->
 
         <column name="title" type="String" />
-        <column name="venueImage" type="Blob" />
+        <column name="venueImagePath" type="String" />
 	    <column name="venueId" type="long" />
 	
         <!-- Order -->
@@ -237,24 +249,27 @@
        	<column name="venueId" type="long" />
         <column name="infoTypeId" type="long" />
         <column name="infoTypeCategoryId" type="long" />
-        <column name="venueDetailInfoName" type="String" />
-        <column name="venueDetailInfoDesc" type="String" />
-        <column name="venueDetailInfoComment" type="String" />
-        <column name="venueDetailAddressLine1" type="String" />
-        <column name="venueDetailAddressLine2" type="String" />
-        <column name="venueDetailCity" type="String" />
-        <column name="venueDetailState" type="String" />
-       	<column name="venueDetailCountry" type="String" />
-        <column name="venueDetailLatitude" type="String" />
-        <column name="venueDetailLongitude" type="String" />
-        <column name="venueDetailPhone" type="String" />
-        <column name="venueDetailWebsite" type="String" />
-        <column name="venueDetailCost" type="double" />
-        <column name="venueDetailhoursOfOperation" type="String" />
+        <column name="infoTitle" type="String" />
+        <column name="infoDesc" type="String" />
+        <column name="addrLine1" type="String" />
+        <column name="addrLine2" type="String" />
+        <column name="city" type="String" />
+        <column name="zipCode" type="String" />
+        <column name="stateId" type="long" />
+        <column name="stateName" type="String" />
+       	<column name="countryId" type="long" />
+       	<column name="countryName" type="String" />
+       	
+        <column name="latitude" type="String" />
+        <column name="longitude" type="String" />
+        <column name="phone" type="String" />
+        <column name="website" type="String" />
+        <column name="cost" type="double" />
+        <column name="hoursOfOperation" type="String" />
         
 		<!-- Finder methods -->
 
-        <finder name="venueId" return-type="Collection">
+        <finder name="VenueId" return-type="Collection">
 			<finder-column name="venueId" />
 		</finder>
    </entity>
@@ -271,11 +286,11 @@
         
         <!-- Other fields-->
          <column name="venueDetailId" type="long" />
-        <column name="venueDetailImageTitle" type="String" />
-        <column name="venueDetailImageDesc" type="String" />
-        <column name="venueDetailImageData" type="Blob" />
+        <column name="imageTitle" type="String" />
+        <column name="imageDesc" type="String" />
+        <column name="imagePath" type="String" />
         <!-- Finder methods -->
-        <finder name="venueDetailId" return-type="Collection">
+        <finder name="VenueDetailId" return-type="Collection">
 			<finder-column name="venueDetailId" />
 		</finder>
  	</entity>

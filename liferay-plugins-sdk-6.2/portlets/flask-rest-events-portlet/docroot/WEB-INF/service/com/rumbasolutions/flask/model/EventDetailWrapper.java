@@ -58,20 +58,19 @@ public class EventDetailWrapper implements EventDetail,
 		attributes.put("eventId", getEventId());
 		attributes.put("infoTypeId", getInfoTypeId());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
-		attributes.put("eventDetailInfoName", getEventDetailInfoName());
-		attributes.put("eventDetailInfoDesc", getEventDetailInfoDesc());
-		attributes.put("eventDetailInfoComment", getEventDetailInfoComment());
-		attributes.put("eventDetailAddressLine1", getEventDetailAddressLine1());
-		attributes.put("eventDetailAddressLine2", getEventDetailAddressLine2());
-		attributes.put("eventDetailInfocity", getEventDetailInfocity());
-		attributes.put("eventDetailZip", getEventDetailZip());
-		attributes.put("eventDetailState", getEventDetailState());
-		attributes.put("eventDetailCountry", getEventDetailCountry());
-		attributes.put("eventDetailLatitude", getEventDetailLatitude());
-		attributes.put("eventDetailLongitude", getEventDetailLongitude());
-		attributes.put("eventDetailPhone", getEventDetailPhone());
-		attributes.put("eventDetailWebsite", getEventDetailWebsite());
-		attributes.put("eventDetailCost", getEventDetailCost());
+		attributes.put("infoName", getInfoName());
+		attributes.put("infoDesc", getInfoDesc());
+		attributes.put("addrLine1", getAddrLine1());
+		attributes.put("addrLine2", getAddrLine2());
+		attributes.put("city", getCity());
+		attributes.put("zipCode", getZipCode());
+		attributes.put("stateId", getStateId());
+		attributes.put("countryId", getCountryId());
+		attributes.put("latitude", getLatitude());
+		attributes.put("longitude", getLongitude());
+		attributes.put("phone", getPhone());
+		attributes.put("website", getWebsite());
+		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
 
 		return attributes;
@@ -127,96 +126,82 @@ public class EventDetailWrapper implements EventDetail,
 			setInfoTypeCategoryId(infoTypeCategoryId);
 		}
 
-		String eventDetailInfoName = (String)attributes.get(
-				"eventDetailInfoName");
+		String infoName = (String)attributes.get("infoName");
 
-		if (eventDetailInfoName != null) {
-			setEventDetailInfoName(eventDetailInfoName);
+		if (infoName != null) {
+			setInfoName(infoName);
 		}
 
-		String eventDetailInfoDesc = (String)attributes.get(
-				"eventDetailInfoDesc");
+		String infoDesc = (String)attributes.get("infoDesc");
 
-		if (eventDetailInfoDesc != null) {
-			setEventDetailInfoDesc(eventDetailInfoDesc);
+		if (infoDesc != null) {
+			setInfoDesc(infoDesc);
 		}
 
-		String eventDetailInfoComment = (String)attributes.get(
-				"eventDetailInfoComment");
+		String addrLine1 = (String)attributes.get("addrLine1");
 
-		if (eventDetailInfoComment != null) {
-			setEventDetailInfoComment(eventDetailInfoComment);
+		if (addrLine1 != null) {
+			setAddrLine1(addrLine1);
 		}
 
-		String eventDetailAddressLine1 = (String)attributes.get(
-				"eventDetailAddressLine1");
+		String addrLine2 = (String)attributes.get("addrLine2");
 
-		if (eventDetailAddressLine1 != null) {
-			setEventDetailAddressLine1(eventDetailAddressLine1);
+		if (addrLine2 != null) {
+			setAddrLine2(addrLine2);
 		}
 
-		String eventDetailAddressLine2 = (String)attributes.get(
-				"eventDetailAddressLine2");
+		String city = (String)attributes.get("city");
 
-		if (eventDetailAddressLine2 != null) {
-			setEventDetailAddressLine2(eventDetailAddressLine2);
+		if (city != null) {
+			setCity(city);
 		}
 
-		String eventDetailInfocity = (String)attributes.get(
-				"eventDetailInfocity");
+		String zipCode = (String)attributes.get("zipCode");
 
-		if (eventDetailInfocity != null) {
-			setEventDetailInfocity(eventDetailInfocity);
+		if (zipCode != null) {
+			setZipCode(zipCode);
 		}
 
-		String eventDetailZip = (String)attributes.get("eventDetailZip");
+		Long stateId = (Long)attributes.get("stateId");
 
-		if (eventDetailZip != null) {
-			setEventDetailZip(eventDetailZip);
+		if (stateId != null) {
+			setStateId(stateId);
 		}
 
-		String eventDetailState = (String)attributes.get("eventDetailState");
+		Long countryId = (Long)attributes.get("countryId");
 
-		if (eventDetailState != null) {
-			setEventDetailState(eventDetailState);
+		if (countryId != null) {
+			setCountryId(countryId);
 		}
 
-		String eventDetailCountry = (String)attributes.get("eventDetailCountry");
+		String latitude = (String)attributes.get("latitude");
 
-		if (eventDetailCountry != null) {
-			setEventDetailCountry(eventDetailCountry);
+		if (latitude != null) {
+			setLatitude(latitude);
 		}
 
-		String eventDetailLatitude = (String)attributes.get(
-				"eventDetailLatitude");
+		String longitude = (String)attributes.get("longitude");
 
-		if (eventDetailLatitude != null) {
-			setEventDetailLatitude(eventDetailLatitude);
+		if (longitude != null) {
+			setLongitude(longitude);
 		}
 
-		String eventDetailLongitude = (String)attributes.get(
-				"eventDetailLongitude");
+		String phone = (String)attributes.get("phone");
 
-		if (eventDetailLongitude != null) {
-			setEventDetailLongitude(eventDetailLongitude);
+		if (phone != null) {
+			setPhone(phone);
 		}
 
-		String eventDetailPhone = (String)attributes.get("eventDetailPhone");
+		String website = (String)attributes.get("website");
 
-		if (eventDetailPhone != null) {
-			setEventDetailPhone(eventDetailPhone);
+		if (website != null) {
+			setWebsite(website);
 		}
 
-		String eventDetailWebsite = (String)attributes.get("eventDetailWebsite");
+		Double cost = (Double)attributes.get("cost");
 
-		if (eventDetailWebsite != null) {
-			setEventDetailWebsite(eventDetailWebsite);
-		}
-
-		Double eventDetailCost = (Double)attributes.get("eventDetailCost");
-
-		if (eventDetailCost != null) {
-			setEventDetailCost(eventDetailCost);
+		if (cost != null) {
+			setCost(cost);
 		}
 
 		String hoursOfOperation = (String)attributes.get("hoursOfOperation");
@@ -429,286 +414,263 @@ public class EventDetailWrapper implements EventDetail,
 	}
 
 	/**
-	* Returns the event detail info name of this event detail.
+	* Returns the info name of this event detail.
 	*
-	* @return the event detail info name of this event detail
+	* @return the info name of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailInfoName() {
-		return _eventDetail.getEventDetailInfoName();
+	public java.lang.String getInfoName() {
+		return _eventDetail.getInfoName();
 	}
 
 	/**
-	* Sets the event detail info name of this event detail.
+	* Sets the info name of this event detail.
 	*
-	* @param eventDetailInfoName the event detail info name of this event detail
+	* @param infoName the info name of this event detail
 	*/
 	@Override
-	public void setEventDetailInfoName(java.lang.String eventDetailInfoName) {
-		_eventDetail.setEventDetailInfoName(eventDetailInfoName);
+	public void setInfoName(java.lang.String infoName) {
+		_eventDetail.setInfoName(infoName);
 	}
 
 	/**
-	* Returns the event detail info desc of this event detail.
+	* Returns the info desc of this event detail.
 	*
-	* @return the event detail info desc of this event detail
+	* @return the info desc of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailInfoDesc() {
-		return _eventDetail.getEventDetailInfoDesc();
+	public java.lang.String getInfoDesc() {
+		return _eventDetail.getInfoDesc();
 	}
 
 	/**
-	* Sets the event detail info desc of this event detail.
+	* Sets the info desc of this event detail.
 	*
-	* @param eventDetailInfoDesc the event detail info desc of this event detail
+	* @param infoDesc the info desc of this event detail
 	*/
 	@Override
-	public void setEventDetailInfoDesc(java.lang.String eventDetailInfoDesc) {
-		_eventDetail.setEventDetailInfoDesc(eventDetailInfoDesc);
+	public void setInfoDesc(java.lang.String infoDesc) {
+		_eventDetail.setInfoDesc(infoDesc);
 	}
 
 	/**
-	* Returns the event detail info comment of this event detail.
+	* Returns the addr line1 of this event detail.
 	*
-	* @return the event detail info comment of this event detail
+	* @return the addr line1 of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailInfoComment() {
-		return _eventDetail.getEventDetailInfoComment();
+	public java.lang.String getAddrLine1() {
+		return _eventDetail.getAddrLine1();
 	}
 
 	/**
-	* Sets the event detail info comment of this event detail.
+	* Sets the addr line1 of this event detail.
 	*
-	* @param eventDetailInfoComment the event detail info comment of this event detail
+	* @param addrLine1 the addr line1 of this event detail
 	*/
 	@Override
-	public void setEventDetailInfoComment(
-		java.lang.String eventDetailInfoComment) {
-		_eventDetail.setEventDetailInfoComment(eventDetailInfoComment);
+	public void setAddrLine1(java.lang.String addrLine1) {
+		_eventDetail.setAddrLine1(addrLine1);
 	}
 
 	/**
-	* Returns the event detail address line1 of this event detail.
+	* Returns the addr line2 of this event detail.
 	*
-	* @return the event detail address line1 of this event detail
+	* @return the addr line2 of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailAddressLine1() {
-		return _eventDetail.getEventDetailAddressLine1();
+	public java.lang.String getAddrLine2() {
+		return _eventDetail.getAddrLine2();
 	}
 
 	/**
-	* Sets the event detail address line1 of this event detail.
+	* Sets the addr line2 of this event detail.
 	*
-	* @param eventDetailAddressLine1 the event detail address line1 of this event detail
+	* @param addrLine2 the addr line2 of this event detail
 	*/
 	@Override
-	public void setEventDetailAddressLine1(
-		java.lang.String eventDetailAddressLine1) {
-		_eventDetail.setEventDetailAddressLine1(eventDetailAddressLine1);
+	public void setAddrLine2(java.lang.String addrLine2) {
+		_eventDetail.setAddrLine2(addrLine2);
 	}
 
 	/**
-	* Returns the event detail address line2 of this event detail.
+	* Returns the city of this event detail.
 	*
-	* @return the event detail address line2 of this event detail
+	* @return the city of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailAddressLine2() {
-		return _eventDetail.getEventDetailAddressLine2();
+	public java.lang.String getCity() {
+		return _eventDetail.getCity();
 	}
 
 	/**
-	* Sets the event detail address line2 of this event detail.
+	* Sets the city of this event detail.
 	*
-	* @param eventDetailAddressLine2 the event detail address line2 of this event detail
+	* @param city the city of this event detail
 	*/
 	@Override
-	public void setEventDetailAddressLine2(
-		java.lang.String eventDetailAddressLine2) {
-		_eventDetail.setEventDetailAddressLine2(eventDetailAddressLine2);
+	public void setCity(java.lang.String city) {
+		_eventDetail.setCity(city);
 	}
 
 	/**
-	* Returns the event detail infocity of this event detail.
+	* Returns the zip code of this event detail.
 	*
-	* @return the event detail infocity of this event detail
+	* @return the zip code of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailInfocity() {
-		return _eventDetail.getEventDetailInfocity();
+	public java.lang.String getZipCode() {
+		return _eventDetail.getZipCode();
 	}
 
 	/**
-	* Sets the event detail infocity of this event detail.
+	* Sets the zip code of this event detail.
 	*
-	* @param eventDetailInfocity the event detail infocity of this event detail
+	* @param zipCode the zip code of this event detail
 	*/
 	@Override
-	public void setEventDetailInfocity(java.lang.String eventDetailInfocity) {
-		_eventDetail.setEventDetailInfocity(eventDetailInfocity);
+	public void setZipCode(java.lang.String zipCode) {
+		_eventDetail.setZipCode(zipCode);
 	}
 
 	/**
-	* Returns the event detail zip of this event detail.
+	* Returns the state ID of this event detail.
 	*
-	* @return the event detail zip of this event detail
+	* @return the state ID of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailZip() {
-		return _eventDetail.getEventDetailZip();
+	public long getStateId() {
+		return _eventDetail.getStateId();
 	}
 
 	/**
-	* Sets the event detail zip of this event detail.
+	* Sets the state ID of this event detail.
 	*
-	* @param eventDetailZip the event detail zip of this event detail
+	* @param stateId the state ID of this event detail
 	*/
 	@Override
-	public void setEventDetailZip(java.lang.String eventDetailZip) {
-		_eventDetail.setEventDetailZip(eventDetailZip);
+	public void setStateId(long stateId) {
+		_eventDetail.setStateId(stateId);
 	}
 
 	/**
-	* Returns the event detail state of this event detail.
+	* Returns the country ID of this event detail.
 	*
-	* @return the event detail state of this event detail
+	* @return the country ID of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailState() {
-		return _eventDetail.getEventDetailState();
+	public long getCountryId() {
+		return _eventDetail.getCountryId();
 	}
 
 	/**
-	* Sets the event detail state of this event detail.
+	* Sets the country ID of this event detail.
 	*
-	* @param eventDetailState the event detail state of this event detail
+	* @param countryId the country ID of this event detail
 	*/
 	@Override
-	public void setEventDetailState(java.lang.String eventDetailState) {
-		_eventDetail.setEventDetailState(eventDetailState);
+	public void setCountryId(long countryId) {
+		_eventDetail.setCountryId(countryId);
 	}
 
 	/**
-	* Returns the event detail country of this event detail.
+	* Returns the latitude of this event detail.
 	*
-	* @return the event detail country of this event detail
+	* @return the latitude of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailCountry() {
-		return _eventDetail.getEventDetailCountry();
+	public java.lang.String getLatitude() {
+		return _eventDetail.getLatitude();
 	}
 
 	/**
-	* Sets the event detail country of this event detail.
+	* Sets the latitude of this event detail.
 	*
-	* @param eventDetailCountry the event detail country of this event detail
+	* @param latitude the latitude of this event detail
 	*/
 	@Override
-	public void setEventDetailCountry(java.lang.String eventDetailCountry) {
-		_eventDetail.setEventDetailCountry(eventDetailCountry);
+	public void setLatitude(java.lang.String latitude) {
+		_eventDetail.setLatitude(latitude);
 	}
 
 	/**
-	* Returns the event detail latitude of this event detail.
+	* Returns the longitude of this event detail.
 	*
-	* @return the event detail latitude of this event detail
+	* @return the longitude of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailLatitude() {
-		return _eventDetail.getEventDetailLatitude();
+	public java.lang.String getLongitude() {
+		return _eventDetail.getLongitude();
 	}
 
 	/**
-	* Sets the event detail latitude of this event detail.
+	* Sets the longitude of this event detail.
 	*
-	* @param eventDetailLatitude the event detail latitude of this event detail
+	* @param longitude the longitude of this event detail
 	*/
 	@Override
-	public void setEventDetailLatitude(java.lang.String eventDetailLatitude) {
-		_eventDetail.setEventDetailLatitude(eventDetailLatitude);
+	public void setLongitude(java.lang.String longitude) {
+		_eventDetail.setLongitude(longitude);
 	}
 
 	/**
-	* Returns the event detail longitude of this event detail.
+	* Returns the phone of this event detail.
 	*
-	* @return the event detail longitude of this event detail
+	* @return the phone of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailLongitude() {
-		return _eventDetail.getEventDetailLongitude();
+	public java.lang.String getPhone() {
+		return _eventDetail.getPhone();
 	}
 
 	/**
-	* Sets the event detail longitude of this event detail.
+	* Sets the phone of this event detail.
 	*
-	* @param eventDetailLongitude the event detail longitude of this event detail
+	* @param phone the phone of this event detail
 	*/
 	@Override
-	public void setEventDetailLongitude(java.lang.String eventDetailLongitude) {
-		_eventDetail.setEventDetailLongitude(eventDetailLongitude);
+	public void setPhone(java.lang.String phone) {
+		_eventDetail.setPhone(phone);
 	}
 
 	/**
-	* Returns the event detail phone of this event detail.
+	* Returns the website of this event detail.
 	*
-	* @return the event detail phone of this event detail
+	* @return the website of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailPhone() {
-		return _eventDetail.getEventDetailPhone();
+	public java.lang.String getWebsite() {
+		return _eventDetail.getWebsite();
 	}
 
 	/**
-	* Sets the event detail phone of this event detail.
+	* Sets the website of this event detail.
 	*
-	* @param eventDetailPhone the event detail phone of this event detail
+	* @param website the website of this event detail
 	*/
 	@Override
-	public void setEventDetailPhone(java.lang.String eventDetailPhone) {
-		_eventDetail.setEventDetailPhone(eventDetailPhone);
+	public void setWebsite(java.lang.String website) {
+		_eventDetail.setWebsite(website);
 	}
 
 	/**
-	* Returns the event detail website of this event detail.
+	* Returns the cost of this event detail.
 	*
-	* @return the event detail website of this event detail
+	* @return the cost of this event detail
 	*/
 	@Override
-	public java.lang.String getEventDetailWebsite() {
-		return _eventDetail.getEventDetailWebsite();
+	public double getCost() {
+		return _eventDetail.getCost();
 	}
 
 	/**
-	* Sets the event detail website of this event detail.
+	* Sets the cost of this event detail.
 	*
-	* @param eventDetailWebsite the event detail website of this event detail
+	* @param cost the cost of this event detail
 	*/
 	@Override
-	public void setEventDetailWebsite(java.lang.String eventDetailWebsite) {
-		_eventDetail.setEventDetailWebsite(eventDetailWebsite);
-	}
-
-	/**
-	* Returns the event detail cost of this event detail.
-	*
-	* @return the event detail cost of this event detail
-	*/
-	@Override
-	public double getEventDetailCost() {
-		return _eventDetail.getEventDetailCost();
-	}
-
-	/**
-	* Sets the event detail cost of this event detail.
-	*
-	* @param eventDetailCost the event detail cost of this event detail
-	*/
-	@Override
-	public void setEventDetailCost(double eventDetailCost) {
-		_eventDetail.setEventDetailCost(eventDetailCost);
+	public void setCost(double cost) {
+		_eventDetail.setCost(cost);
 	}
 
 	/**

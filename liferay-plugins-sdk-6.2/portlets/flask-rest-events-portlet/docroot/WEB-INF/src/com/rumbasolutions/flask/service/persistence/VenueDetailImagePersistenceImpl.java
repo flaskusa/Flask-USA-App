@@ -88,7 +88,7 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 		new FinderPath(VenueDetailImageModelImpl.ENTITY_CACHE_ENABLED,
 			VenueDetailImageModelImpl.FINDER_CACHE_ENABLED,
 			VenueDetailImageImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByvenueDetailId",
+			"findByVenueDetailId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -99,12 +99,12 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 		new FinderPath(VenueDetailImageModelImpl.ENTITY_CACHE_ENABLED,
 			VenueDetailImageModelImpl.FINDER_CACHE_ENABLED,
 			VenueDetailImageImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByvenueDetailId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByVenueDetailId",
 			new String[] { Long.class.getName() },
 			VenueDetailImageModelImpl.VENUEDETAILID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_VENUEDETAILID = new FinderPath(VenueDetailImageModelImpl.ENTITY_CACHE_ENABLED,
 			VenueDetailImageModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByvenueDetailId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByVenueDetailId",
 			new String[] { Long.class.getName() });
 
 	/**
@@ -115,9 +115,9 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<VenueDetailImage> findByvenueDetailId(long venueDetailId)
+	public List<VenueDetailImage> findByVenueDetailId(long venueDetailId)
 		throws SystemException {
-		return findByvenueDetailId(venueDetailId, QueryUtil.ALL_POS,
+		return findByVenueDetailId(venueDetailId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -135,9 +135,9 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<VenueDetailImage> findByvenueDetailId(long venueDetailId,
+	public List<VenueDetailImage> findByVenueDetailId(long venueDetailId,
 		int start, int end) throws SystemException {
-		return findByvenueDetailId(venueDetailId, start, end, null);
+		return findByVenueDetailId(venueDetailId, start, end, null);
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<VenueDetailImage> findByvenueDetailId(long venueDetailId,
+	public List<VenueDetailImage> findByVenueDetailId(long venueDetailId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		boolean pagination = true;
@@ -267,10 +267,10 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public VenueDetailImage findByvenueDetailId_First(long venueDetailId,
+	public VenueDetailImage findByVenueDetailId_First(long venueDetailId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVenueDetailImageException, SystemException {
-		VenueDetailImage venueDetailImage = fetchByvenueDetailId_First(venueDetailId,
+		VenueDetailImage venueDetailImage = fetchByVenueDetailId_First(venueDetailId,
 				orderByComparator);
 
 		if (venueDetailImage != null) {
@@ -298,9 +298,9 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public VenueDetailImage fetchByvenueDetailId_First(long venueDetailId,
+	public VenueDetailImage fetchByVenueDetailId_First(long venueDetailId,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<VenueDetailImage> list = findByvenueDetailId(venueDetailId, 0, 1,
+		List<VenueDetailImage> list = findByVenueDetailId(venueDetailId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -320,10 +320,10 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public VenueDetailImage findByvenueDetailId_Last(long venueDetailId,
+	public VenueDetailImage findByVenueDetailId_Last(long venueDetailId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVenueDetailImageException, SystemException {
-		VenueDetailImage venueDetailImage = fetchByvenueDetailId_Last(venueDetailId,
+		VenueDetailImage venueDetailImage = fetchByVenueDetailId_Last(venueDetailId,
 				orderByComparator);
 
 		if (venueDetailImage != null) {
@@ -351,15 +351,15 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public VenueDetailImage fetchByvenueDetailId_Last(long venueDetailId,
+	public VenueDetailImage fetchByVenueDetailId_Last(long venueDetailId,
 		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByvenueDetailId(venueDetailId);
+		int count = countByVenueDetailId(venueDetailId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<VenueDetailImage> list = findByvenueDetailId(venueDetailId,
+		List<VenueDetailImage> list = findByVenueDetailId(venueDetailId,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -380,7 +380,7 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public VenueDetailImage[] findByvenueDetailId_PrevAndNext(
+	public VenueDetailImage[] findByVenueDetailId_PrevAndNext(
 		long venueDetailImageId, long venueDetailId,
 		OrderByComparator orderByComparator)
 		throws NoSuchVenueDetailImageException, SystemException {
@@ -393,12 +393,12 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 
 			VenueDetailImage[] array = new VenueDetailImageImpl[3];
 
-			array[0] = getByvenueDetailId_PrevAndNext(session,
+			array[0] = getByVenueDetailId_PrevAndNext(session,
 					venueDetailImage, venueDetailId, orderByComparator, true);
 
 			array[1] = venueDetailImage;
 
-			array[2] = getByvenueDetailId_PrevAndNext(session,
+			array[2] = getByVenueDetailId_PrevAndNext(session,
 					venueDetailImage, venueDetailId, orderByComparator, false);
 
 			return array;
@@ -411,7 +411,7 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 		}
 	}
 
-	protected VenueDetailImage getByvenueDetailId_PrevAndNext(Session session,
+	protected VenueDetailImage getByVenueDetailId_PrevAndNext(Session session,
 		VenueDetailImage venueDetailImage, long venueDetailId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -523,9 +523,9 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByvenueDetailId(long venueDetailId)
+	public void removeByVenueDetailId(long venueDetailId)
 		throws SystemException {
-		for (VenueDetailImage venueDetailImage : findByvenueDetailId(
+		for (VenueDetailImage venueDetailImage : findByVenueDetailId(
 				venueDetailId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(venueDetailImage);
 		}
@@ -539,7 +539,7 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByvenueDetailId(long venueDetailId)
+	public int countByVenueDetailId(long venueDetailId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_VENUEDETAILID;
 
@@ -797,12 +797,8 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 				venueDetailImage.setNew(false);
 			}
 			else {
-				session.evict(venueDetailImage);
-				session.saveOrUpdate(venueDetailImage);
+				session.merge(venueDetailImage);
 			}
-
-			session.flush();
-			session.clear();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -842,8 +838,6 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 			VenueDetailImageImpl.class, venueDetailImage.getPrimaryKey(),
 			venueDetailImage);
 
-		venueDetailImage.resetOriginalValues();
-
 		return venueDetailImage;
 	}
 
@@ -864,9 +858,9 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 		venueDetailImageImpl.setCreatedDate(venueDetailImage.getCreatedDate());
 		venueDetailImageImpl.setModifiedDate(venueDetailImage.getModifiedDate());
 		venueDetailImageImpl.setVenueDetailId(venueDetailImage.getVenueDetailId());
-		venueDetailImageImpl.setVenueDetailImageTitle(venueDetailImage.getVenueDetailImageTitle());
-		venueDetailImageImpl.setVenueDetailImageDesc(venueDetailImage.getVenueDetailImageDesc());
-		venueDetailImageImpl.setVenueDetailImageData(venueDetailImage.getVenueDetailImageData());
+		venueDetailImageImpl.setImageTitle(venueDetailImage.getImageTitle());
+		venueDetailImageImpl.setImageDesc(venueDetailImage.getImageDesc());
+		venueDetailImageImpl.setImagePath(venueDetailImage.getImagePath());
 
 		return venueDetailImageImpl;
 	}

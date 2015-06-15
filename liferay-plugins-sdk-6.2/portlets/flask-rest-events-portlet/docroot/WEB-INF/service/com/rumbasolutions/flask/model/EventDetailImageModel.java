@@ -24,8 +24,6 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
-import java.sql.Blob;
-
 import java.util.Date;
 
 /**
@@ -162,48 +160,49 @@ public interface EventDetailImageModel extends BaseModel<EventDetailImage> {
 	public void setEventDetailId(long eventDetailId);
 
 	/**
-	 * Returns the event detail imagetitle of this event detail image.
+	 * Returns the imagetitle of this event detail image.
 	 *
-	 * @return the event detail imagetitle of this event detail image
+	 * @return the imagetitle of this event detail image
 	 */
 	@AutoEscape
-	public String getEventDetailImagetitle();
+	public String getImagetitle();
 
 	/**
-	 * Sets the event detail imagetitle of this event detail image.
+	 * Sets the imagetitle of this event detail image.
 	 *
-	 * @param eventDetailImagetitle the event detail imagetitle of this event detail image
+	 * @param imagetitle the imagetitle of this event detail image
 	 */
-	public void setEventDetailImagetitle(String eventDetailImagetitle);
+	public void setImagetitle(String imagetitle);
 
 	/**
-	 * Returns the event detail image desc of this event detail image.
+	 * Returns the image desc of this event detail image.
 	 *
-	 * @return the event detail image desc of this event detail image
+	 * @return the image desc of this event detail image
 	 */
 	@AutoEscape
-	public String getEventDetailImageDesc();
+	public String getImageDesc();
 
 	/**
-	 * Sets the event detail image desc of this event detail image.
+	 * Sets the image desc of this event detail image.
 	 *
-	 * @param eventDetailImageDesc the event detail image desc of this event detail image
+	 * @param imageDesc the image desc of this event detail image
 	 */
-	public void setEventDetailImageDesc(String eventDetailImageDesc);
+	public void setImageDesc(String imageDesc);
 
 	/**
-	 * Returns the event detail image data of this event detail image.
+	 * Returns the image path of this event detail image.
 	 *
-	 * @return the event detail image data of this event detail image
+	 * @return the image path of this event detail image
 	 */
-	public Blob getEventDetailImageData();
+	@AutoEscape
+	public String getImagePath();
 
 	/**
-	 * Sets the event detail image data of this event detail image.
+	 * Sets the image path of this event detail image.
 	 *
-	 * @param eventDetailImageData the event detail image data of this event detail image
+	 * @param imagePath the image path of this event detail image
 	 */
-	public void setEventDetailImageData(Blob eventDetailImageData);
+	public void setImagePath(String imagePath);
 
 	@Override
 	public boolean isNew();

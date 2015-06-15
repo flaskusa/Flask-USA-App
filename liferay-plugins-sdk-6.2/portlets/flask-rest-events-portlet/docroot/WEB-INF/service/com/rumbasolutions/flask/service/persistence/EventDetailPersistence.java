@@ -44,7 +44,7 @@ public interface EventDetailPersistence extends BasePersistence<EventDetail> {
 	* @return the matching event details
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByeventId(
+	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByEventId(
 		long eventId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -61,7 +61,7 @@ public interface EventDetailPersistence extends BasePersistence<EventDetail> {
 	* @return the range of matching event details
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByeventId(
+	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByEventId(
 		long eventId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -79,7 +79,7 @@ public interface EventDetailPersistence extends BasePersistence<EventDetail> {
 	* @return the ordered range of matching event details
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByeventId(
+	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByEventId(
 		long eventId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -93,7 +93,7 @@ public interface EventDetailPersistence extends BasePersistence<EventDetail> {
 	* @throws com.rumbasolutions.flask.NoSuchEventDetailException if a matching event detail could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.EventDetail findByeventId_First(
+	public com.rumbasolutions.flask.model.EventDetail findByEventId_First(
 		long eventId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -107,7 +107,7 @@ public interface EventDetailPersistence extends BasePersistence<EventDetail> {
 	* @return the first matching event detail, or <code>null</code> if a matching event detail could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.EventDetail fetchByeventId_First(
+	public com.rumbasolutions.flask.model.EventDetail fetchByEventId_First(
 		long eventId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -121,7 +121,7 @@ public interface EventDetailPersistence extends BasePersistence<EventDetail> {
 	* @throws com.rumbasolutions.flask.NoSuchEventDetailException if a matching event detail could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.EventDetail findByeventId_Last(
+	public com.rumbasolutions.flask.model.EventDetail findByEventId_Last(
 		long eventId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -135,7 +135,7 @@ public interface EventDetailPersistence extends BasePersistence<EventDetail> {
 	* @return the last matching event detail, or <code>null</code> if a matching event detail could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.EventDetail fetchByeventId_Last(
+	public com.rumbasolutions.flask.model.EventDetail fetchByEventId_Last(
 		long eventId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -150,7 +150,7 @@ public interface EventDetailPersistence extends BasePersistence<EventDetail> {
 	* @throws com.rumbasolutions.flask.NoSuchEventDetailException if a event detail with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.EventDetail[] findByeventId_PrevAndNext(
+	public com.rumbasolutions.flask.model.EventDetail[] findByEventId_PrevAndNext(
 		long eventDetailId, long eventId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -162,7 +162,7 @@ public interface EventDetailPersistence extends BasePersistence<EventDetail> {
 	* @param eventId the event ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByeventId(long eventId)
+	public void removeByEventId(long eventId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -172,7 +172,295 @@ public interface EventDetailPersistence extends BasePersistence<EventDetail> {
 	* @return the number of matching event details
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByeventId(long eventId)
+	public int countByEventId(long eventId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the event details where infoTypeId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @return the matching event details
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByEventInfoType(
+		long infoTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the event details where infoTypeId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.EventDetailModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param infoTypeId the info type ID
+	* @param start the lower bound of the range of event details
+	* @param end the upper bound of the range of event details (not inclusive)
+	* @return the range of matching event details
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByEventInfoType(
+		long infoTypeId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the event details where infoTypeId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.EventDetailModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param infoTypeId the info type ID
+	* @param start the lower bound of the range of event details
+	* @param end the upper bound of the range of event details (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching event details
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByEventInfoType(
+		long infoTypeId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first event detail in the ordered set where infoTypeId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching event detail
+	* @throws com.rumbasolutions.flask.NoSuchEventDetailException if a matching event detail could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.EventDetail findByEventInfoType_First(
+		long infoTypeId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchEventDetailException;
+
+	/**
+	* Returns the first event detail in the ordered set where infoTypeId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching event detail, or <code>null</code> if a matching event detail could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.EventDetail fetchByEventInfoType_First(
+		long infoTypeId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last event detail in the ordered set where infoTypeId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching event detail
+	* @throws com.rumbasolutions.flask.NoSuchEventDetailException if a matching event detail could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.EventDetail findByEventInfoType_Last(
+		long infoTypeId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchEventDetailException;
+
+	/**
+	* Returns the last event detail in the ordered set where infoTypeId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching event detail, or <code>null</code> if a matching event detail could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.EventDetail fetchByEventInfoType_Last(
+		long infoTypeId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the event details before and after the current event detail in the ordered set where infoTypeId = &#63;.
+	*
+	* @param eventDetailId the primary key of the current event detail
+	* @param infoTypeId the info type ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next event detail
+	* @throws com.rumbasolutions.flask.NoSuchEventDetailException if a event detail with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.EventDetail[] findByEventInfoType_PrevAndNext(
+		long eventDetailId, long infoTypeId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchEventDetailException;
+
+	/**
+	* Removes all the event details where infoTypeId = &#63; from the database.
+	*
+	* @param infoTypeId the info type ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByEventInfoType(long infoTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of event details where infoTypeId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @return the number of matching event details
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByEventInfoType(long infoTypeId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the event details where infoTypeId = &#63; and infoTypeCategoryId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @param infoTypeCategoryId the info type category ID
+	* @return the matching event details
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByEventInfoTypeCategory(
+		long infoTypeId, long infoTypeCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the event details where infoTypeId = &#63; and infoTypeCategoryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.EventDetailModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param infoTypeId the info type ID
+	* @param infoTypeCategoryId the info type category ID
+	* @param start the lower bound of the range of event details
+	* @param end the upper bound of the range of event details (not inclusive)
+	* @return the range of matching event details
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByEventInfoTypeCategory(
+		long infoTypeId, long infoTypeCategoryId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the event details where infoTypeId = &#63; and infoTypeCategoryId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.EventDetailModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param infoTypeId the info type ID
+	* @param infoTypeCategoryId the info type category ID
+	* @param start the lower bound of the range of event details
+	* @param end the upper bound of the range of event details (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching event details
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rumbasolutions.flask.model.EventDetail> findByEventInfoTypeCategory(
+		long infoTypeId, long infoTypeCategoryId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first event detail in the ordered set where infoTypeId = &#63; and infoTypeCategoryId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @param infoTypeCategoryId the info type category ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching event detail
+	* @throws com.rumbasolutions.flask.NoSuchEventDetailException if a matching event detail could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.EventDetail findByEventInfoTypeCategory_First(
+		long infoTypeId, long infoTypeCategoryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchEventDetailException;
+
+	/**
+	* Returns the first event detail in the ordered set where infoTypeId = &#63; and infoTypeCategoryId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @param infoTypeCategoryId the info type category ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching event detail, or <code>null</code> if a matching event detail could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.EventDetail fetchByEventInfoTypeCategory_First(
+		long infoTypeId, long infoTypeCategoryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last event detail in the ordered set where infoTypeId = &#63; and infoTypeCategoryId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @param infoTypeCategoryId the info type category ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching event detail
+	* @throws com.rumbasolutions.flask.NoSuchEventDetailException if a matching event detail could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.EventDetail findByEventInfoTypeCategory_Last(
+		long infoTypeId, long infoTypeCategoryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchEventDetailException;
+
+	/**
+	* Returns the last event detail in the ordered set where infoTypeId = &#63; and infoTypeCategoryId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @param infoTypeCategoryId the info type category ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching event detail, or <code>null</code> if a matching event detail could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.EventDetail fetchByEventInfoTypeCategory_Last(
+		long infoTypeId, long infoTypeCategoryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the event details before and after the current event detail in the ordered set where infoTypeId = &#63; and infoTypeCategoryId = &#63;.
+	*
+	* @param eventDetailId the primary key of the current event detail
+	* @param infoTypeId the info type ID
+	* @param infoTypeCategoryId the info type category ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next event detail
+	* @throws com.rumbasolutions.flask.NoSuchEventDetailException if a event detail with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.EventDetail[] findByEventInfoTypeCategory_PrevAndNext(
+		long eventDetailId, long infoTypeId, long infoTypeCategoryId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchEventDetailException;
+
+	/**
+	* Removes all the event details where infoTypeId = &#63; and infoTypeCategoryId = &#63; from the database.
+	*
+	* @param infoTypeId the info type ID
+	* @param infoTypeCategoryId the info type category ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByEventInfoTypeCategory(long infoTypeId,
+		long infoTypeCategoryId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of event details where infoTypeId = &#63; and infoTypeCategoryId = &#63;.
+	*
+	* @param infoTypeId the info type ID
+	* @param infoTypeCategoryId the info type category ID
+	* @return the number of matching event details
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByEventInfoTypeCategory(long infoTypeId,
+		long infoTypeCategoryId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

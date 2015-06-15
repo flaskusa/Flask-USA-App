@@ -83,20 +83,19 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		attributes.put("eventId", getEventId());
 		attributes.put("infoTypeId", getInfoTypeId());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
-		attributes.put("eventDetailInfoName", getEventDetailInfoName());
-		attributes.put("eventDetailInfoDesc", getEventDetailInfoDesc());
-		attributes.put("eventDetailInfoComment", getEventDetailInfoComment());
-		attributes.put("eventDetailAddressLine1", getEventDetailAddressLine1());
-		attributes.put("eventDetailAddressLine2", getEventDetailAddressLine2());
-		attributes.put("eventDetailInfocity", getEventDetailInfocity());
-		attributes.put("eventDetailZip", getEventDetailZip());
-		attributes.put("eventDetailState", getEventDetailState());
-		attributes.put("eventDetailCountry", getEventDetailCountry());
-		attributes.put("eventDetailLatitude", getEventDetailLatitude());
-		attributes.put("eventDetailLongitude", getEventDetailLongitude());
-		attributes.put("eventDetailPhone", getEventDetailPhone());
-		attributes.put("eventDetailWebsite", getEventDetailWebsite());
-		attributes.put("eventDetailCost", getEventDetailCost());
+		attributes.put("infoName", getInfoName());
+		attributes.put("infoDesc", getInfoDesc());
+		attributes.put("addrLine1", getAddrLine1());
+		attributes.put("addrLine2", getAddrLine2());
+		attributes.put("city", getCity());
+		attributes.put("zipCode", getZipCode());
+		attributes.put("stateId", getStateId());
+		attributes.put("countryId", getCountryId());
+		attributes.put("latitude", getLatitude());
+		attributes.put("longitude", getLongitude());
+		attributes.put("phone", getPhone());
+		attributes.put("website", getWebsite());
+		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
 
 		return attributes;
@@ -152,96 +151,82 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 			setInfoTypeCategoryId(infoTypeCategoryId);
 		}
 
-		String eventDetailInfoName = (String)attributes.get(
-				"eventDetailInfoName");
+		String infoName = (String)attributes.get("infoName");
 
-		if (eventDetailInfoName != null) {
-			setEventDetailInfoName(eventDetailInfoName);
+		if (infoName != null) {
+			setInfoName(infoName);
 		}
 
-		String eventDetailInfoDesc = (String)attributes.get(
-				"eventDetailInfoDesc");
+		String infoDesc = (String)attributes.get("infoDesc");
 
-		if (eventDetailInfoDesc != null) {
-			setEventDetailInfoDesc(eventDetailInfoDesc);
+		if (infoDesc != null) {
+			setInfoDesc(infoDesc);
 		}
 
-		String eventDetailInfoComment = (String)attributes.get(
-				"eventDetailInfoComment");
+		String addrLine1 = (String)attributes.get("addrLine1");
 
-		if (eventDetailInfoComment != null) {
-			setEventDetailInfoComment(eventDetailInfoComment);
+		if (addrLine1 != null) {
+			setAddrLine1(addrLine1);
 		}
 
-		String eventDetailAddressLine1 = (String)attributes.get(
-				"eventDetailAddressLine1");
+		String addrLine2 = (String)attributes.get("addrLine2");
 
-		if (eventDetailAddressLine1 != null) {
-			setEventDetailAddressLine1(eventDetailAddressLine1);
+		if (addrLine2 != null) {
+			setAddrLine2(addrLine2);
 		}
 
-		String eventDetailAddressLine2 = (String)attributes.get(
-				"eventDetailAddressLine2");
+		String city = (String)attributes.get("city");
 
-		if (eventDetailAddressLine2 != null) {
-			setEventDetailAddressLine2(eventDetailAddressLine2);
+		if (city != null) {
+			setCity(city);
 		}
 
-		String eventDetailInfocity = (String)attributes.get(
-				"eventDetailInfocity");
+		String zipCode = (String)attributes.get("zipCode");
 
-		if (eventDetailInfocity != null) {
-			setEventDetailInfocity(eventDetailInfocity);
+		if (zipCode != null) {
+			setZipCode(zipCode);
 		}
 
-		String eventDetailZip = (String)attributes.get("eventDetailZip");
+		Long stateId = (Long)attributes.get("stateId");
 
-		if (eventDetailZip != null) {
-			setEventDetailZip(eventDetailZip);
+		if (stateId != null) {
+			setStateId(stateId);
 		}
 
-		String eventDetailState = (String)attributes.get("eventDetailState");
+		Long countryId = (Long)attributes.get("countryId");
 
-		if (eventDetailState != null) {
-			setEventDetailState(eventDetailState);
+		if (countryId != null) {
+			setCountryId(countryId);
 		}
 
-		String eventDetailCountry = (String)attributes.get("eventDetailCountry");
+		String latitude = (String)attributes.get("latitude");
 
-		if (eventDetailCountry != null) {
-			setEventDetailCountry(eventDetailCountry);
+		if (latitude != null) {
+			setLatitude(latitude);
 		}
 
-		String eventDetailLatitude = (String)attributes.get(
-				"eventDetailLatitude");
+		String longitude = (String)attributes.get("longitude");
 
-		if (eventDetailLatitude != null) {
-			setEventDetailLatitude(eventDetailLatitude);
+		if (longitude != null) {
+			setLongitude(longitude);
 		}
 
-		String eventDetailLongitude = (String)attributes.get(
-				"eventDetailLongitude");
+		String phone = (String)attributes.get("phone");
 
-		if (eventDetailLongitude != null) {
-			setEventDetailLongitude(eventDetailLongitude);
+		if (phone != null) {
+			setPhone(phone);
 		}
 
-		String eventDetailPhone = (String)attributes.get("eventDetailPhone");
+		String website = (String)attributes.get("website");
 
-		if (eventDetailPhone != null) {
-			setEventDetailPhone(eventDetailPhone);
+		if (website != null) {
+			setWebsite(website);
 		}
 
-		String eventDetailWebsite = (String)attributes.get("eventDetailWebsite");
+		Double cost = (Double)attributes.get("cost");
 
-		if (eventDetailWebsite != null) {
-			setEventDetailWebsite(eventDetailWebsite);
-		}
-
-		Double eventDetailCost = (Double)attributes.get("eventDetailCost");
-
-		if (eventDetailCost != null) {
-			setEventDetailCost(eventDetailCost);
+		if (cost != null) {
+			setCost(cost);
 		}
 
 		String hoursOfOperation = (String)attributes.get("hoursOfOperation");
@@ -447,22 +432,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailInfoName() {
-		return _eventDetailInfoName;
+	public String getInfoName() {
+		return _infoName;
 	}
 
 	@Override
-	public void setEventDetailInfoName(String eventDetailInfoName) {
-		_eventDetailInfoName = eventDetailInfoName;
+	public void setInfoName(String infoName) {
+		_infoName = infoName;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailInfoName",
-						String.class);
+				Method method = clazz.getMethod("setInfoName", String.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailInfoName);
+				method.invoke(_eventDetailRemoteModel, infoName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -471,22 +455,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailInfoDesc() {
-		return _eventDetailInfoDesc;
+	public String getInfoDesc() {
+		return _infoDesc;
 	}
 
 	@Override
-	public void setEventDetailInfoDesc(String eventDetailInfoDesc) {
-		_eventDetailInfoDesc = eventDetailInfoDesc;
+	public void setInfoDesc(String infoDesc) {
+		_infoDesc = infoDesc;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailInfoDesc",
-						String.class);
+				Method method = clazz.getMethod("setInfoDesc", String.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailInfoDesc);
+				method.invoke(_eventDetailRemoteModel, infoDesc);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -495,22 +478,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailInfoComment() {
-		return _eventDetailInfoComment;
+	public String getAddrLine1() {
+		return _addrLine1;
 	}
 
 	@Override
-	public void setEventDetailInfoComment(String eventDetailInfoComment) {
-		_eventDetailInfoComment = eventDetailInfoComment;
+	public void setAddrLine1(String addrLine1) {
+		_addrLine1 = addrLine1;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailInfoComment",
-						String.class);
+				Method method = clazz.getMethod("setAddrLine1", String.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailInfoComment);
+				method.invoke(_eventDetailRemoteModel, addrLine1);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -519,22 +501,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailAddressLine1() {
-		return _eventDetailAddressLine1;
+	public String getAddrLine2() {
+		return _addrLine2;
 	}
 
 	@Override
-	public void setEventDetailAddressLine1(String eventDetailAddressLine1) {
-		_eventDetailAddressLine1 = eventDetailAddressLine1;
+	public void setAddrLine2(String addrLine2) {
+		_addrLine2 = addrLine2;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailAddressLine1",
-						String.class);
+				Method method = clazz.getMethod("setAddrLine2", String.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailAddressLine1);
+				method.invoke(_eventDetailRemoteModel, addrLine2);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -543,22 +524,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailAddressLine2() {
-		return _eventDetailAddressLine2;
+	public String getCity() {
+		return _city;
 	}
 
 	@Override
-	public void setEventDetailAddressLine2(String eventDetailAddressLine2) {
-		_eventDetailAddressLine2 = eventDetailAddressLine2;
+	public void setCity(String city) {
+		_city = city;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailAddressLine2",
-						String.class);
+				Method method = clazz.getMethod("setCity", String.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailAddressLine2);
+				method.invoke(_eventDetailRemoteModel, city);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -567,22 +547,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailInfocity() {
-		return _eventDetailInfocity;
+	public String getZipCode() {
+		return _zipCode;
 	}
 
 	@Override
-	public void setEventDetailInfocity(String eventDetailInfocity) {
-		_eventDetailInfocity = eventDetailInfocity;
+	public void setZipCode(String zipCode) {
+		_zipCode = zipCode;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailInfocity",
-						String.class);
+				Method method = clazz.getMethod("setZipCode", String.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailInfocity);
+				method.invoke(_eventDetailRemoteModel, zipCode);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -591,22 +570,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailZip() {
-		return _eventDetailZip;
+	public long getStateId() {
+		return _stateId;
 	}
 
 	@Override
-	public void setEventDetailZip(String eventDetailZip) {
-		_eventDetailZip = eventDetailZip;
+	public void setStateId(long stateId) {
+		_stateId = stateId;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailZip",
-						String.class);
+				Method method = clazz.getMethod("setStateId", long.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailZip);
+				method.invoke(_eventDetailRemoteModel, stateId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -615,22 +593,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailState() {
-		return _eventDetailState;
+	public long getCountryId() {
+		return _countryId;
 	}
 
 	@Override
-	public void setEventDetailState(String eventDetailState) {
-		_eventDetailState = eventDetailState;
+	public void setCountryId(long countryId) {
+		_countryId = countryId;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailState",
-						String.class);
+				Method method = clazz.getMethod("setCountryId", long.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailState);
+				method.invoke(_eventDetailRemoteModel, countryId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -639,22 +616,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailCountry() {
-		return _eventDetailCountry;
+	public String getLatitude() {
+		return _latitude;
 	}
 
 	@Override
-	public void setEventDetailCountry(String eventDetailCountry) {
-		_eventDetailCountry = eventDetailCountry;
+	public void setLatitude(String latitude) {
+		_latitude = latitude;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailCountry",
-						String.class);
+				Method method = clazz.getMethod("setLatitude", String.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailCountry);
+				method.invoke(_eventDetailRemoteModel, latitude);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -663,22 +639,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailLatitude() {
-		return _eventDetailLatitude;
+	public String getLongitude() {
+		return _longitude;
 	}
 
 	@Override
-	public void setEventDetailLatitude(String eventDetailLatitude) {
-		_eventDetailLatitude = eventDetailLatitude;
+	public void setLongitude(String longitude) {
+		_longitude = longitude;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailLatitude",
-						String.class);
+				Method method = clazz.getMethod("setLongitude", String.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailLatitude);
+				method.invoke(_eventDetailRemoteModel, longitude);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -687,22 +662,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailLongitude() {
-		return _eventDetailLongitude;
+	public String getPhone() {
+		return _phone;
 	}
 
 	@Override
-	public void setEventDetailLongitude(String eventDetailLongitude) {
-		_eventDetailLongitude = eventDetailLongitude;
+	public void setPhone(String phone) {
+		_phone = phone;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailLongitude",
-						String.class);
+				Method method = clazz.getMethod("setPhone", String.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailLongitude);
+				method.invoke(_eventDetailRemoteModel, phone);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -711,22 +685,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailPhone() {
-		return _eventDetailPhone;
+	public String getWebsite() {
+		return _website;
 	}
 
 	@Override
-	public void setEventDetailPhone(String eventDetailPhone) {
-		_eventDetailPhone = eventDetailPhone;
+	public void setWebsite(String website) {
+		_website = website;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailPhone",
-						String.class);
+				Method method = clazz.getMethod("setWebsite", String.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailPhone);
+				method.invoke(_eventDetailRemoteModel, website);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -735,46 +708,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getEventDetailWebsite() {
-		return _eventDetailWebsite;
+	public double getCost() {
+		return _cost;
 	}
 
 	@Override
-	public void setEventDetailWebsite(String eventDetailWebsite) {
-		_eventDetailWebsite = eventDetailWebsite;
+	public void setCost(double cost) {
+		_cost = cost;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailWebsite",
-						String.class);
+				Method method = clazz.getMethod("setCost", double.class);
 
-				method.invoke(_eventDetailRemoteModel, eventDetailWebsite);
-			}
-			catch (Exception e) {
-				throw new UnsupportedOperationException(e);
-			}
-		}
-	}
-
-	@Override
-	public double getEventDetailCost() {
-		return _eventDetailCost;
-	}
-
-	@Override
-	public void setEventDetailCost(double eventDetailCost) {
-		_eventDetailCost = eventDetailCost;
-
-		if (_eventDetailRemoteModel != null) {
-			try {
-				Class<?> clazz = _eventDetailRemoteModel.getClass();
-
-				Method method = clazz.getMethod("setEventDetailCost",
-						double.class);
-
-				method.invoke(_eventDetailRemoteModel, eventDetailCost);
+				method.invoke(_eventDetailRemoteModel, cost);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -883,20 +831,19 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		clone.setEventId(getEventId());
 		clone.setInfoTypeId(getInfoTypeId());
 		clone.setInfoTypeCategoryId(getInfoTypeCategoryId());
-		clone.setEventDetailInfoName(getEventDetailInfoName());
-		clone.setEventDetailInfoDesc(getEventDetailInfoDesc());
-		clone.setEventDetailInfoComment(getEventDetailInfoComment());
-		clone.setEventDetailAddressLine1(getEventDetailAddressLine1());
-		clone.setEventDetailAddressLine2(getEventDetailAddressLine2());
-		clone.setEventDetailInfocity(getEventDetailInfocity());
-		clone.setEventDetailZip(getEventDetailZip());
-		clone.setEventDetailState(getEventDetailState());
-		clone.setEventDetailCountry(getEventDetailCountry());
-		clone.setEventDetailLatitude(getEventDetailLatitude());
-		clone.setEventDetailLongitude(getEventDetailLongitude());
-		clone.setEventDetailPhone(getEventDetailPhone());
-		clone.setEventDetailWebsite(getEventDetailWebsite());
-		clone.setEventDetailCost(getEventDetailCost());
+		clone.setInfoName(getInfoName());
+		clone.setInfoDesc(getInfoDesc());
+		clone.setAddrLine1(getAddrLine1());
+		clone.setAddrLine2(getAddrLine2());
+		clone.setCity(getCity());
+		clone.setZipCode(getZipCode());
+		clone.setStateId(getStateId());
+		clone.setCountryId(getCountryId());
+		clone.setLatitude(getLatitude());
+		clone.setLongitude(getLongitude());
+		clone.setPhone(getPhone());
+		clone.setWebsite(getWebsite());
+		clone.setCost(getCost());
 		clone.setHoursOfOperation(getHoursOfOperation());
 
 		return clone;
@@ -950,7 +897,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(47);
+		StringBundler sb = new StringBundler(45);
 
 		sb.append("{eventDetailId=");
 		sb.append(getEventDetailId());
@@ -968,34 +915,32 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeId());
 		sb.append(", infoTypeCategoryId=");
 		sb.append(getInfoTypeCategoryId());
-		sb.append(", eventDetailInfoName=");
-		sb.append(getEventDetailInfoName());
-		sb.append(", eventDetailInfoDesc=");
-		sb.append(getEventDetailInfoDesc());
-		sb.append(", eventDetailInfoComment=");
-		sb.append(getEventDetailInfoComment());
-		sb.append(", eventDetailAddressLine1=");
-		sb.append(getEventDetailAddressLine1());
-		sb.append(", eventDetailAddressLine2=");
-		sb.append(getEventDetailAddressLine2());
-		sb.append(", eventDetailInfocity=");
-		sb.append(getEventDetailInfocity());
-		sb.append(", eventDetailZip=");
-		sb.append(getEventDetailZip());
-		sb.append(", eventDetailState=");
-		sb.append(getEventDetailState());
-		sb.append(", eventDetailCountry=");
-		sb.append(getEventDetailCountry());
-		sb.append(", eventDetailLatitude=");
-		sb.append(getEventDetailLatitude());
-		sb.append(", eventDetailLongitude=");
-		sb.append(getEventDetailLongitude());
-		sb.append(", eventDetailPhone=");
-		sb.append(getEventDetailPhone());
-		sb.append(", eventDetailWebsite=");
-		sb.append(getEventDetailWebsite());
-		sb.append(", eventDetailCost=");
-		sb.append(getEventDetailCost());
+		sb.append(", infoName=");
+		sb.append(getInfoName());
+		sb.append(", infoDesc=");
+		sb.append(getInfoDesc());
+		sb.append(", addrLine1=");
+		sb.append(getAddrLine1());
+		sb.append(", addrLine2=");
+		sb.append(getAddrLine2());
+		sb.append(", city=");
+		sb.append(getCity());
+		sb.append(", zipCode=");
+		sb.append(getZipCode());
+		sb.append(", stateId=");
+		sb.append(getStateId());
+		sb.append(", countryId=");
+		sb.append(getCountryId());
+		sb.append(", latitude=");
+		sb.append(getLatitude());
+		sb.append(", longitude=");
+		sb.append(getLongitude());
+		sb.append(", phone=");
+		sb.append(getPhone());
+		sb.append(", website=");
+		sb.append(getWebsite());
+		sb.append(", cost=");
+		sb.append(getCost());
 		sb.append(", hoursOfOperation=");
 		sb.append(getHoursOfOperation());
 		sb.append("}");
@@ -1005,7 +950,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(73);
+		StringBundler sb = new StringBundler(70);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.EventDetail");
@@ -1044,60 +989,56 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeCategoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailInfoName</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailInfoName());
+			"<column><column-name>infoName</column-name><column-value><![CDATA[");
+		sb.append(getInfoName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailInfoDesc</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailInfoDesc());
+			"<column><column-name>infoDesc</column-name><column-value><![CDATA[");
+		sb.append(getInfoDesc());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailInfoComment</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailInfoComment());
+			"<column><column-name>addrLine1</column-name><column-value><![CDATA[");
+		sb.append(getAddrLine1());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailAddressLine1</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailAddressLine1());
+			"<column><column-name>addrLine2</column-name><column-value><![CDATA[");
+		sb.append(getAddrLine2());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailAddressLine2</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailAddressLine2());
+			"<column><column-name>city</column-name><column-value><![CDATA[");
+		sb.append(getCity());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailInfocity</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailInfocity());
+			"<column><column-name>zipCode</column-name><column-value><![CDATA[");
+		sb.append(getZipCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailZip</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailZip());
+			"<column><column-name>stateId</column-name><column-value><![CDATA[");
+		sb.append(getStateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailState</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailState());
+			"<column><column-name>countryId</column-name><column-value><![CDATA[");
+		sb.append(getCountryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailCountry</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailCountry());
+			"<column><column-name>latitude</column-name><column-value><![CDATA[");
+		sb.append(getLatitude());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailLatitude</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailLatitude());
+			"<column><column-name>longitude</column-name><column-value><![CDATA[");
+		sb.append(getLongitude());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailLongitude</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailLongitude());
+			"<column><column-name>phone</column-name><column-value><![CDATA[");
+		sb.append(getPhone());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailPhone</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailPhone());
+			"<column><column-name>website</column-name><column-value><![CDATA[");
+		sb.append(getWebsite());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailWebsite</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailWebsite());
-		sb.append("]]></column-value></column>");
-		sb.append(
-			"<column><column-name>eventDetailCost</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailCost());
+			"<column><column-name>cost</column-name><column-value><![CDATA[");
+		sb.append(getCost());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>hoursOfOperation</column-name><column-value><![CDATA[");
@@ -1118,20 +1059,19 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	private long _eventId;
 	private long _infoTypeId;
 	private long _infoTypeCategoryId;
-	private String _eventDetailInfoName;
-	private String _eventDetailInfoDesc;
-	private String _eventDetailInfoComment;
-	private String _eventDetailAddressLine1;
-	private String _eventDetailAddressLine2;
-	private String _eventDetailInfocity;
-	private String _eventDetailZip;
-	private String _eventDetailState;
-	private String _eventDetailCountry;
-	private String _eventDetailLatitude;
-	private String _eventDetailLongitude;
-	private String _eventDetailPhone;
-	private String _eventDetailWebsite;
-	private double _eventDetailCost;
+	private String _infoName;
+	private String _infoDesc;
+	private String _addrLine1;
+	private String _addrLine2;
+	private String _city;
+	private String _zipCode;
+	private long _stateId;
+	private long _countryId;
+	private String _latitude;
+	private String _longitude;
+	private String _phone;
+	private String _website;
+	private double _cost;
 	private String _hoursOfOperation;
 	private BaseModel<?> _eventDetailRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;

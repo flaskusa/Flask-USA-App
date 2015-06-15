@@ -1298,12 +1298,8 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 				event.setNew(false);
 			}
 			else {
-				session.evict(event);
-				session.saveOrUpdate(event);
+				session.merge(event);
 			}
-
-			session.flush();
-			session.clear();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -1357,8 +1353,6 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 		EntityCacheUtil.putResult(EventModelImpl.ENTITY_CACHE_ENABLED,
 			EventImpl.class, event.getPrimaryKey(), event);
 
-		event.resetOriginalValues();
-
 		return event;
 	}
 
@@ -1383,7 +1377,7 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 		eventImpl.setStartTime(event.getStartTime());
 		eventImpl.setEndTime(event.getEndTime());
 		eventImpl.setEventTypeId(event.getEventTypeId());
-		eventImpl.setEventImage(event.getEventImage());
+		eventImpl.setEventImagePath(event.getEventImagePath());
 		eventImpl.setVenueId(event.getVenueId());
 
 		return eventImpl;

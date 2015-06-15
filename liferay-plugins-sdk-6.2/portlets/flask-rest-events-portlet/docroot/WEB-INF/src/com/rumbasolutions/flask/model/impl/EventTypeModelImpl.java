@@ -67,7 +67,7 @@ public class EventTypeModelImpl extends BaseModelImpl<EventType>
 			{ "eventTypeKey", Types.VARCHAR },
 			{ "eventTypeName", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventType (eventTypeId LONG not null primary key,eventTypeKey VARCHAR(75) null,eventTypeName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventType (eventTypeId LONG not null primary key,eventTypeKey VARCHAR(75) null,eventTypeName VARCHAR(100) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_EventType";
 	public static final String ORDER_BY_JPQL = " ORDER BY eventType.eventTypeId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_EventType.eventTypeId ASC";

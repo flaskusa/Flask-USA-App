@@ -21,7 +21,6 @@ import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.Projection;
-import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.search.Indexable;
@@ -33,7 +32,6 @@ import com.liferay.portal.service.PersistedModelLocalServiceRegistryUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.rumbasolutions.flask.model.EventDetailImage;
-import com.rumbasolutions.flask.model.EventDetailImageEventDetailImageDataBlobModel;
 import com.rumbasolutions.flask.service.EventDetailImageLocalService;
 import com.rumbasolutions.flask.service.persistence.EventDetailImagePersistence;
 import com.rumbasolutions.flask.service.persistence.EventDetailPersistence;
@@ -289,25 +287,6 @@ public abstract class EventDetailImageLocalServiceBaseImpl
 	public EventDetailImage updateEventDetailImage(
 		EventDetailImage eventDetailImage) throws SystemException {
 		return eventDetailImagePersistence.update(eventDetailImage);
-	}
-
-	@Override
-	public EventDetailImageEventDetailImageDataBlobModel getEventDetailImageDataBlobModel(
-		Serializable primaryKey) throws SystemException {
-		Session session = null;
-
-		try {
-			session = eventDetailImagePersistence.openSession();
-
-			return (com.rumbasolutions.flask.model.EventDetailImageEventDetailImageDataBlobModel)session.get(EventDetailImageEventDetailImageDataBlobModel.class,
-				primaryKey);
-		}
-		catch (Exception e) {
-			throw eventDetailImagePersistence.processException(e);
-		}
-		finally {
-			eventDetailImagePersistence.closeSession(session);
-		}
 	}
 
 	/**

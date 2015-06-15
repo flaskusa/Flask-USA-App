@@ -44,7 +44,7 @@ public interface VenueDetailPersistence extends BasePersistence<VenueDetail> {
 	* @return the matching venue details
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.rumbasolutions.flask.model.VenueDetail> findByvenueId(
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetail> findByVenueId(
 		long venueId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -61,7 +61,7 @@ public interface VenueDetailPersistence extends BasePersistence<VenueDetail> {
 	* @return the range of matching venue details
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.rumbasolutions.flask.model.VenueDetail> findByvenueId(
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetail> findByVenueId(
 		long venueId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -79,7 +79,7 @@ public interface VenueDetailPersistence extends BasePersistence<VenueDetail> {
 	* @return the ordered range of matching venue details
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.rumbasolutions.flask.model.VenueDetail> findByvenueId(
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetail> findByVenueId(
 		long venueId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -93,7 +93,7 @@ public interface VenueDetailPersistence extends BasePersistence<VenueDetail> {
 	* @throws com.rumbasolutions.flask.NoSuchVenueDetailException if a matching venue detail could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.VenueDetail findByvenueId_First(
+	public com.rumbasolutions.flask.model.VenueDetail findByVenueId_First(
 		long venueId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -107,7 +107,7 @@ public interface VenueDetailPersistence extends BasePersistence<VenueDetail> {
 	* @return the first matching venue detail, or <code>null</code> if a matching venue detail could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.VenueDetail fetchByvenueId_First(
+	public com.rumbasolutions.flask.model.VenueDetail fetchByVenueId_First(
 		long venueId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -121,7 +121,7 @@ public interface VenueDetailPersistence extends BasePersistence<VenueDetail> {
 	* @throws com.rumbasolutions.flask.NoSuchVenueDetailException if a matching venue detail could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.VenueDetail findByvenueId_Last(
+	public com.rumbasolutions.flask.model.VenueDetail findByVenueId_Last(
 		long venueId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -135,7 +135,7 @@ public interface VenueDetailPersistence extends BasePersistence<VenueDetail> {
 	* @return the last matching venue detail, or <code>null</code> if a matching venue detail could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.VenueDetail fetchByvenueId_Last(
+	public com.rumbasolutions.flask.model.VenueDetail fetchByVenueId_Last(
 		long venueId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -150,7 +150,7 @@ public interface VenueDetailPersistence extends BasePersistence<VenueDetail> {
 	* @throws com.rumbasolutions.flask.NoSuchVenueDetailException if a venue detail with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.VenueDetail[] findByvenueId_PrevAndNext(
+	public com.rumbasolutions.flask.model.VenueDetail[] findByVenueId_PrevAndNext(
 		long venueDetailId, long venueId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -162,7 +162,7 @@ public interface VenueDetailPersistence extends BasePersistence<VenueDetail> {
 	* @param venueId the venue ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByvenueId(long venueId)
+	public void removeByVenueId(long venueId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -172,7 +172,7 @@ public interface VenueDetailPersistence extends BasePersistence<VenueDetail> {
 	* @return the number of matching venue details
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByvenueId(long venueId)
+	public int countByVenueId(long venueId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

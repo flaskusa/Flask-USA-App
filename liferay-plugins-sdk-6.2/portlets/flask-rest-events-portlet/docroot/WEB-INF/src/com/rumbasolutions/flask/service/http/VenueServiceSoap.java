@@ -155,11 +155,301 @@ public class VenueServiceSoap {
 	}
 
 	public static void addVenueImage(long venueId, java.lang.String title,
-		java.sql.Blob venueImageData,
+		java.lang.String venueImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			VenueServiceUtil.addVenueImage(venueId, title, venueImageData,
+			VenueServiceUtil.addVenueImage(venueId, title, venueImagePath,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueImageSoap[] getVenueImages(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.VenueImage> returnValue =
+				VenueServiceUtil.getVenueImages(venueId, serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueImageSoap getVenueImage(
+		long venueImageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.VenueImage returnValue = VenueServiceUtil.getVenueImage(venueImageId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void updateVenueImage(long venueImageId,
+		java.lang.String title, java.lang.String venueImagePath,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.updateVenueImage(venueImageId, title,
+				venueImagePath, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteVenueImage(long venueImageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.deleteVenueImage(venueImageId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteAllVenueImages(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.deleteAllVenueImages(venueId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailSoap addVenueDetail(
+		long venueId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		java.lang.String stateName, long countryId,
+		java.lang.String countryName, java.lang.String lattitude,
+		java.lang.String longitude, java.lang.String phone,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.VenueDetail returnValue = VenueServiceUtil.addVenueDetail(venueId,
+					infoTypeId, infoTypeCategoryId, infoTitle, infoDesc,
+					addrLine1, addrLine2, zipCode, city, stateId, stateName,
+					countryId, countryName, lattitude, longitude, phone,
+					website, cost, hoursOfOperation, serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueDetailSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailSoap updateVenueDetail(
+		long venueDetailId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		java.lang.String stateName, long countryId,
+		java.lang.String countryName, java.lang.String lattitude,
+		java.lang.String longitude, java.lang.String phone,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.VenueDetail returnValue = VenueServiceUtil.updateVenueDetail(venueDetailId,
+					infoTypeId, infoTypeCategoryId, infoTitle, infoDesc,
+					addrLine1, addrLine2, zipCode, city, stateId, stateName,
+					countryId, countryName, lattitude, longitude, phone,
+					website, cost, hoursOfOperation, serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueDetailSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailSoap getVenueDetail(
+		long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.VenueDetail returnValue = VenueServiceUtil.getVenueDetail(venueDetailId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueDetailSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailSoap[] getVenueDetails(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.VenueDetail> returnValue =
+				VenueServiceUtil.getVenueDetails(venueId, serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueDetailSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteVenueDetail(long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.deleteVenueDetail(venueDetailId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteAllVenueDetails(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.deleteAllVenueDetails(venueId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailImageSoap addVenueDetailImage(
+		long venueDetailId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.VenueDetailImage returnValue = VenueServiceUtil.addVenueDetailImage(venueDetailId,
+					imageTitle, imageDesc, imagePath, serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueDetailImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailImageSoap updateVenueDetailImage(
+		long venueDetailImageId, long venueDetailId,
+		java.lang.String imageTitle, java.lang.String imageDesc,
+		java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.VenueDetailImage returnValue = VenueServiceUtil.updateVenueDetailImage(venueDetailImageId,
+					venueDetailId, imageTitle, imageDesc, imagePath,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueDetailImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailImageSoap getVenueDetailImage(
+		long venueDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.VenueDetailImage returnValue = VenueServiceUtil.getVenueDetailImage(venueDetailImageId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueDetailImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDetailImageSoap[] getVenueDetailImages(
+		long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> returnValue =
+				VenueServiceUtil.getVenueDetailImages(venueDetailId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueDetailImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteVenueDetailImage(long venueDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.deleteVenueDetailImage(venueDetailImageId,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteAllVenueDetailImages(long venueDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.deleteAllVenueDetailImages(venueDetailId,
 				serviceContext);
 		}
 		catch (Exception e) {

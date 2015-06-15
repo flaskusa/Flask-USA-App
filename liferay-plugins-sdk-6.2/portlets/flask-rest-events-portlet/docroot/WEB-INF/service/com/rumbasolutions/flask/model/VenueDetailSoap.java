@@ -39,20 +39,22 @@ public class VenueDetailSoap implements Serializable {
 		soapModel.setVenueId(model.getVenueId());
 		soapModel.setInfoTypeId(model.getInfoTypeId());
 		soapModel.setInfoTypeCategoryId(model.getInfoTypeCategoryId());
-		soapModel.setVenueDetailInfoName(model.getVenueDetailInfoName());
-		soapModel.setVenueDetailInfoDesc(model.getVenueDetailInfoDesc());
-		soapModel.setVenueDetailInfoComment(model.getVenueDetailInfoComment());
-		soapModel.setVenueDetailAddressLine1(model.getVenueDetailAddressLine1());
-		soapModel.setVenueDetailAddressLine2(model.getVenueDetailAddressLine2());
-		soapModel.setVenueDetailCity(model.getVenueDetailCity());
-		soapModel.setVenueDetailState(model.getVenueDetailState());
-		soapModel.setVenueDetailCountry(model.getVenueDetailCountry());
-		soapModel.setVenueDetailLatitude(model.getVenueDetailLatitude());
-		soapModel.setVenueDetailLongitude(model.getVenueDetailLongitude());
-		soapModel.setVenueDetailPhone(model.getVenueDetailPhone());
-		soapModel.setVenueDetailWebsite(model.getVenueDetailWebsite());
-		soapModel.setVenueDetailCost(model.getVenueDetailCost());
-		soapModel.setVenueDetailhoursOfOperation(model.getVenueDetailhoursOfOperation());
+		soapModel.setInfoTitle(model.getInfoTitle());
+		soapModel.setInfoDesc(model.getInfoDesc());
+		soapModel.setAddrLine1(model.getAddrLine1());
+		soapModel.setAddrLine2(model.getAddrLine2());
+		soapModel.setCity(model.getCity());
+		soapModel.setZipCode(model.getZipCode());
+		soapModel.setStateId(model.getStateId());
+		soapModel.setStateName(model.getStateName());
+		soapModel.setCountryId(model.getCountryId());
+		soapModel.setCountryName(model.getCountryName());
+		soapModel.setLatitude(model.getLatitude());
+		soapModel.setLongitude(model.getLongitude());
+		soapModel.setPhone(model.getPhone());
+		soapModel.setWebsite(model.getWebsite());
+		soapModel.setCost(model.getCost());
+		soapModel.setHoursOfOperation(model.getHoursOfOperation());
 
 		return soapModel;
 	}
@@ -169,117 +171,132 @@ public class VenueDetailSoap implements Serializable {
 		_infoTypeCategoryId = infoTypeCategoryId;
 	}
 
-	public String getVenueDetailInfoName() {
-		return _venueDetailInfoName;
+	public String getInfoTitle() {
+		return _infoTitle;
 	}
 
-	public void setVenueDetailInfoName(String venueDetailInfoName) {
-		_venueDetailInfoName = venueDetailInfoName;
+	public void setInfoTitle(String infoTitle) {
+		_infoTitle = infoTitle;
 	}
 
-	public String getVenueDetailInfoDesc() {
-		return _venueDetailInfoDesc;
+	public String getInfoDesc() {
+		return _infoDesc;
 	}
 
-	public void setVenueDetailInfoDesc(String venueDetailInfoDesc) {
-		_venueDetailInfoDesc = venueDetailInfoDesc;
+	public void setInfoDesc(String infoDesc) {
+		_infoDesc = infoDesc;
 	}
 
-	public String getVenueDetailInfoComment() {
-		return _venueDetailInfoComment;
+	public String getAddrLine1() {
+		return _addrLine1;
 	}
 
-	public void setVenueDetailInfoComment(String venueDetailInfoComment) {
-		_venueDetailInfoComment = venueDetailInfoComment;
+	public void setAddrLine1(String addrLine1) {
+		_addrLine1 = addrLine1;
 	}
 
-	public String getVenueDetailAddressLine1() {
-		return _venueDetailAddressLine1;
+	public String getAddrLine2() {
+		return _addrLine2;
 	}
 
-	public void setVenueDetailAddressLine1(String venueDetailAddressLine1) {
-		_venueDetailAddressLine1 = venueDetailAddressLine1;
+	public void setAddrLine2(String addrLine2) {
+		_addrLine2 = addrLine2;
 	}
 
-	public String getVenueDetailAddressLine2() {
-		return _venueDetailAddressLine2;
+	public String getCity() {
+		return _city;
 	}
 
-	public void setVenueDetailAddressLine2(String venueDetailAddressLine2) {
-		_venueDetailAddressLine2 = venueDetailAddressLine2;
+	public void setCity(String city) {
+		_city = city;
 	}
 
-	public String getVenueDetailCity() {
-		return _venueDetailCity;
+	public String getZipCode() {
+		return _zipCode;
 	}
 
-	public void setVenueDetailCity(String venueDetailCity) {
-		_venueDetailCity = venueDetailCity;
+	public void setZipCode(String zipCode) {
+		_zipCode = zipCode;
 	}
 
-	public String getVenueDetailState() {
-		return _venueDetailState;
+	public long getStateId() {
+		return _stateId;
 	}
 
-	public void setVenueDetailState(String venueDetailState) {
-		_venueDetailState = venueDetailState;
+	public void setStateId(long stateId) {
+		_stateId = stateId;
 	}
 
-	public String getVenueDetailCountry() {
-		return _venueDetailCountry;
+	public String getStateName() {
+		return _stateName;
 	}
 
-	public void setVenueDetailCountry(String venueDetailCountry) {
-		_venueDetailCountry = venueDetailCountry;
+	public void setStateName(String stateName) {
+		_stateName = stateName;
 	}
 
-	public String getVenueDetailLatitude() {
-		return _venueDetailLatitude;
+	public long getCountryId() {
+		return _countryId;
 	}
 
-	public void setVenueDetailLatitude(String venueDetailLatitude) {
-		_venueDetailLatitude = venueDetailLatitude;
+	public void setCountryId(long countryId) {
+		_countryId = countryId;
 	}
 
-	public String getVenueDetailLongitude() {
-		return _venueDetailLongitude;
+	public String getCountryName() {
+		return _countryName;
 	}
 
-	public void setVenueDetailLongitude(String venueDetailLongitude) {
-		_venueDetailLongitude = venueDetailLongitude;
+	public void setCountryName(String countryName) {
+		_countryName = countryName;
 	}
 
-	public String getVenueDetailPhone() {
-		return _venueDetailPhone;
+	public String getLatitude() {
+		return _latitude;
 	}
 
-	public void setVenueDetailPhone(String venueDetailPhone) {
-		_venueDetailPhone = venueDetailPhone;
+	public void setLatitude(String latitude) {
+		_latitude = latitude;
 	}
 
-	public String getVenueDetailWebsite() {
-		return _venueDetailWebsite;
+	public String getLongitude() {
+		return _longitude;
 	}
 
-	public void setVenueDetailWebsite(String venueDetailWebsite) {
-		_venueDetailWebsite = venueDetailWebsite;
+	public void setLongitude(String longitude) {
+		_longitude = longitude;
 	}
 
-	public double getVenueDetailCost() {
-		return _venueDetailCost;
+	public String getPhone() {
+		return _phone;
 	}
 
-	public void setVenueDetailCost(double venueDetailCost) {
-		_venueDetailCost = venueDetailCost;
+	public void setPhone(String phone) {
+		_phone = phone;
 	}
 
-	public String getVenueDetailhoursOfOperation() {
-		return _venueDetailhoursOfOperation;
+	public String getWebsite() {
+		return _website;
 	}
 
-	public void setVenueDetailhoursOfOperation(
-		String venueDetailhoursOfOperation) {
-		_venueDetailhoursOfOperation = venueDetailhoursOfOperation;
+	public void setWebsite(String website) {
+		_website = website;
+	}
+
+	public double getCost() {
+		return _cost;
+	}
+
+	public void setCost(double cost) {
+		_cost = cost;
+	}
+
+	public String getHoursOfOperation() {
+		return _hoursOfOperation;
+	}
+
+	public void setHoursOfOperation(String hoursOfOperation) {
+		_hoursOfOperation = hoursOfOperation;
 	}
 
 	private long _venueDetailId;
@@ -290,18 +307,20 @@ public class VenueDetailSoap implements Serializable {
 	private long _venueId;
 	private long _infoTypeId;
 	private long _infoTypeCategoryId;
-	private String _venueDetailInfoName;
-	private String _venueDetailInfoDesc;
-	private String _venueDetailInfoComment;
-	private String _venueDetailAddressLine1;
-	private String _venueDetailAddressLine2;
-	private String _venueDetailCity;
-	private String _venueDetailState;
-	private String _venueDetailCountry;
-	private String _venueDetailLatitude;
-	private String _venueDetailLongitude;
-	private String _venueDetailPhone;
-	private String _venueDetailWebsite;
-	private double _venueDetailCost;
-	private String _venueDetailhoursOfOperation;
+	private String _infoTitle;
+	private String _infoDesc;
+	private String _addrLine1;
+	private String _addrLine2;
+	private String _city;
+	private String _zipCode;
+	private long _stateId;
+	private String _stateName;
+	private long _countryId;
+	private String _countryName;
+	private String _latitude;
+	private String _longitude;
+	private String _phone;
+	private String _website;
+	private double _cost;
+	private String _hoursOfOperation;
 }

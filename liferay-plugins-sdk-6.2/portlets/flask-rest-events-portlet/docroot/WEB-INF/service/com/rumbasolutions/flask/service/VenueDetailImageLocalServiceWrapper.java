@@ -261,13 +261,6 @@ public class VenueDetailImageLocalServiceWrapper
 		return _venueDetailImageLocalService.updateVenueDetailImage(venueDetailImage);
 	}
 
-	@Override
-	public com.rumbasolutions.flask.model.VenueDetailImageVenueDetailImageDataBlobModel getVenueDetailImageDataBlobModel(
-		java.io.Serializable primaryKey)
-		throws com.liferay.portal.kernel.exception.SystemException {
-		return _venueDetailImageLocalService.getVenueDetailImageDataBlobModel(primaryKey);
-	}
-
 	/**
 	* Returns the Spring bean ID for this bean.
 	*

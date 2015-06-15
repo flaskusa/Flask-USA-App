@@ -17,8 +17,6 @@ package com.rumbasolutions.flask.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
-import java.sql.Blob;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -58,9 +56,9 @@ public class EventDetailImageWrapper implements EventDetailImage,
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("eventDetailId", getEventDetailId());
-		attributes.put("eventDetailImagetitle", getEventDetailImagetitle());
-		attributes.put("eventDetailImageDesc", getEventDetailImageDesc());
-		attributes.put("eventDetailImageData", getEventDetailImageData());
+		attributes.put("imagetitle", getImagetitle());
+		attributes.put("imageDesc", getImageDesc());
+		attributes.put("imagePath", getImagePath());
 
 		return attributes;
 	}
@@ -103,24 +101,22 @@ public class EventDetailImageWrapper implements EventDetailImage,
 			setEventDetailId(eventDetailId);
 		}
 
-		String eventDetailImagetitle = (String)attributes.get(
-				"eventDetailImagetitle");
+		String imagetitle = (String)attributes.get("imagetitle");
 
-		if (eventDetailImagetitle != null) {
-			setEventDetailImagetitle(eventDetailImagetitle);
+		if (imagetitle != null) {
+			setImagetitle(imagetitle);
 		}
 
-		String eventDetailImageDesc = (String)attributes.get(
-				"eventDetailImageDesc");
+		String imageDesc = (String)attributes.get("imageDesc");
 
-		if (eventDetailImageDesc != null) {
-			setEventDetailImageDesc(eventDetailImageDesc);
+		if (imageDesc != null) {
+			setImageDesc(imageDesc);
 		}
 
-		Blob eventDetailImageData = (Blob)attributes.get("eventDetailImageData");
+		String imagePath = (String)attributes.get("imagePath");
 
-		if (eventDetailImageData != null) {
-			setEventDetailImageData(eventDetailImageData);
+		if (imagePath != null) {
+			setImagePath(imagePath);
 		}
 	}
 
@@ -287,63 +283,63 @@ public class EventDetailImageWrapper implements EventDetailImage,
 	}
 
 	/**
-	* Returns the event detail imagetitle of this event detail image.
+	* Returns the imagetitle of this event detail image.
 	*
-	* @return the event detail imagetitle of this event detail image
+	* @return the imagetitle of this event detail image
 	*/
 	@Override
-	public java.lang.String getEventDetailImagetitle() {
-		return _eventDetailImage.getEventDetailImagetitle();
+	public java.lang.String getImagetitle() {
+		return _eventDetailImage.getImagetitle();
 	}
 
 	/**
-	* Sets the event detail imagetitle of this event detail image.
+	* Sets the imagetitle of this event detail image.
 	*
-	* @param eventDetailImagetitle the event detail imagetitle of this event detail image
+	* @param imagetitle the imagetitle of this event detail image
 	*/
 	@Override
-	public void setEventDetailImagetitle(java.lang.String eventDetailImagetitle) {
-		_eventDetailImage.setEventDetailImagetitle(eventDetailImagetitle);
+	public void setImagetitle(java.lang.String imagetitle) {
+		_eventDetailImage.setImagetitle(imagetitle);
 	}
 
 	/**
-	* Returns the event detail image desc of this event detail image.
+	* Returns the image desc of this event detail image.
 	*
-	* @return the event detail image desc of this event detail image
+	* @return the image desc of this event detail image
 	*/
 	@Override
-	public java.lang.String getEventDetailImageDesc() {
-		return _eventDetailImage.getEventDetailImageDesc();
+	public java.lang.String getImageDesc() {
+		return _eventDetailImage.getImageDesc();
 	}
 
 	/**
-	* Sets the event detail image desc of this event detail image.
+	* Sets the image desc of this event detail image.
 	*
-	* @param eventDetailImageDesc the event detail image desc of this event detail image
+	* @param imageDesc the image desc of this event detail image
 	*/
 	@Override
-	public void setEventDetailImageDesc(java.lang.String eventDetailImageDesc) {
-		_eventDetailImage.setEventDetailImageDesc(eventDetailImageDesc);
+	public void setImageDesc(java.lang.String imageDesc) {
+		_eventDetailImage.setImageDesc(imageDesc);
 	}
 
 	/**
-	* Returns the event detail image data of this event detail image.
+	* Returns the image path of this event detail image.
 	*
-	* @return the event detail image data of this event detail image
+	* @return the image path of this event detail image
 	*/
 	@Override
-	public java.sql.Blob getEventDetailImageData() {
-		return _eventDetailImage.getEventDetailImageData();
+	public java.lang.String getImagePath() {
+		return _eventDetailImage.getImagePath();
 	}
 
 	/**
-	* Sets the event detail image data of this event detail image.
+	* Sets the image path of this event detail image.
 	*
-	* @param eventDetailImageData the event detail image data of this event detail image
+	* @param imagePath the image path of this event detail image
 	*/
 	@Override
-	public void setEventDetailImageData(java.sql.Blob eventDetailImageData) {
-		_eventDetailImage.setEventDetailImageData(eventDetailImageData);
+	public void setImagePath(java.lang.String imagePath) {
+		_eventDetailImage.setImagePath(imagePath);
 	}
 
 	@Override

@@ -30,8 +30,6 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
-import java.sql.Blob;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -88,7 +86,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
 		attributes.put("eventTypeId", getEventTypeId());
-		attributes.put("eventImage", getEventImage());
+		attributes.put("eventImagePath", getEventImagePath());
 		attributes.put("venueId", getVenueId());
 
 		return attributes;
@@ -162,10 +160,10 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 			setEventTypeId(eventTypeId);
 		}
 
-		Blob eventImage = (Blob)attributes.get("eventImage");
+		String eventImagePath = (String)attributes.get("eventImagePath");
 
-		if (eventImage != null) {
-			setEventImage(eventImage);
+		if (eventImagePath != null) {
+			setEventImagePath(eventImagePath);
 		}
 
 		Long venueId = (Long)attributes.get("venueId");
@@ -439,21 +437,22 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 	}
 
 	@Override
-	public Blob getEventImage() {
-		return _eventImage;
+	public String getEventImagePath() {
+		return _eventImagePath;
 	}
 
 	@Override
-	public void setEventImage(Blob eventImage) {
-		_eventImage = eventImage;
+	public void setEventImagePath(String eventImagePath) {
+		_eventImagePath = eventImagePath;
 
 		if (_eventRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventImage", Blob.class);
+				Method method = clazz.getMethod("setEventImagePath",
+						String.class);
 
-				method.invoke(_eventRemoteModel, eventImage);
+				method.invoke(_eventRemoteModel, eventImagePath);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -564,7 +563,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		clone.setStartTime(getStartTime());
 		clone.setEndTime(getEndTime());
 		clone.setEventTypeId(getEventTypeId());
-		clone.setEventImage(getEventImage());
+		clone.setEventImagePath(getEventImagePath());
 		clone.setVenueId(getVenueId());
 
 		return clone;
@@ -642,8 +641,8 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		sb.append(getEndTime());
 		sb.append(", eventTypeId=");
 		sb.append(getEventTypeId());
-		sb.append(", eventImage=");
-		sb.append(getEventImage());
+		sb.append(", eventImagePath=");
+		sb.append(getEventImagePath());
 		sb.append(", venueId=");
 		sb.append(getVenueId());
 		sb.append("}");
@@ -704,8 +703,8 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		sb.append(getEventTypeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventImage</column-name><column-value><![CDATA[");
-		sb.append(getEventImage());
+			"<column><column-name>eventImagePath</column-name><column-value><![CDATA[");
+		sb.append(getEventImagePath());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>venueId</column-name><column-value><![CDATA[");
@@ -729,7 +728,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 	private Date _startTime;
 	private Date _endTime;
 	private long _eventTypeId;
-	private Blob _eventImage;
+	private String _eventImagePath;
 	private long _venueId;
 	private BaseModel<?> _eventRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;

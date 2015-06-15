@@ -39,20 +39,19 @@ public class EventDetailSoap implements Serializable {
 		soapModel.setEventId(model.getEventId());
 		soapModel.setInfoTypeId(model.getInfoTypeId());
 		soapModel.setInfoTypeCategoryId(model.getInfoTypeCategoryId());
-		soapModel.setEventDetailInfoName(model.getEventDetailInfoName());
-		soapModel.setEventDetailInfoDesc(model.getEventDetailInfoDesc());
-		soapModel.setEventDetailInfoComment(model.getEventDetailInfoComment());
-		soapModel.setEventDetailAddressLine1(model.getEventDetailAddressLine1());
-		soapModel.setEventDetailAddressLine2(model.getEventDetailAddressLine2());
-		soapModel.setEventDetailInfocity(model.getEventDetailInfocity());
-		soapModel.setEventDetailZip(model.getEventDetailZip());
-		soapModel.setEventDetailState(model.getEventDetailState());
-		soapModel.setEventDetailCountry(model.getEventDetailCountry());
-		soapModel.setEventDetailLatitude(model.getEventDetailLatitude());
-		soapModel.setEventDetailLongitude(model.getEventDetailLongitude());
-		soapModel.setEventDetailPhone(model.getEventDetailPhone());
-		soapModel.setEventDetailWebsite(model.getEventDetailWebsite());
-		soapModel.setEventDetailCost(model.getEventDetailCost());
+		soapModel.setInfoName(model.getInfoName());
+		soapModel.setInfoDesc(model.getInfoDesc());
+		soapModel.setAddrLine1(model.getAddrLine1());
+		soapModel.setAddrLine2(model.getAddrLine2());
+		soapModel.setCity(model.getCity());
+		soapModel.setZipCode(model.getZipCode());
+		soapModel.setStateId(model.getStateId());
+		soapModel.setCountryId(model.getCountryId());
+		soapModel.setLatitude(model.getLatitude());
+		soapModel.setLongitude(model.getLongitude());
+		soapModel.setPhone(model.getPhone());
+		soapModel.setWebsite(model.getWebsite());
+		soapModel.setCost(model.getCost());
 		soapModel.setHoursOfOperation(model.getHoursOfOperation());
 
 		return soapModel;
@@ -170,116 +169,108 @@ public class EventDetailSoap implements Serializable {
 		_infoTypeCategoryId = infoTypeCategoryId;
 	}
 
-	public String getEventDetailInfoName() {
-		return _eventDetailInfoName;
+	public String getInfoName() {
+		return _infoName;
 	}
 
-	public void setEventDetailInfoName(String eventDetailInfoName) {
-		_eventDetailInfoName = eventDetailInfoName;
+	public void setInfoName(String infoName) {
+		_infoName = infoName;
 	}
 
-	public String getEventDetailInfoDesc() {
-		return _eventDetailInfoDesc;
+	public String getInfoDesc() {
+		return _infoDesc;
 	}
 
-	public void setEventDetailInfoDesc(String eventDetailInfoDesc) {
-		_eventDetailInfoDesc = eventDetailInfoDesc;
+	public void setInfoDesc(String infoDesc) {
+		_infoDesc = infoDesc;
 	}
 
-	public String getEventDetailInfoComment() {
-		return _eventDetailInfoComment;
+	public String getAddrLine1() {
+		return _addrLine1;
 	}
 
-	public void setEventDetailInfoComment(String eventDetailInfoComment) {
-		_eventDetailInfoComment = eventDetailInfoComment;
+	public void setAddrLine1(String addrLine1) {
+		_addrLine1 = addrLine1;
 	}
 
-	public String getEventDetailAddressLine1() {
-		return _eventDetailAddressLine1;
+	public String getAddrLine2() {
+		return _addrLine2;
 	}
 
-	public void setEventDetailAddressLine1(String eventDetailAddressLine1) {
-		_eventDetailAddressLine1 = eventDetailAddressLine1;
+	public void setAddrLine2(String addrLine2) {
+		_addrLine2 = addrLine2;
 	}
 
-	public String getEventDetailAddressLine2() {
-		return _eventDetailAddressLine2;
+	public String getCity() {
+		return _city;
 	}
 
-	public void setEventDetailAddressLine2(String eventDetailAddressLine2) {
-		_eventDetailAddressLine2 = eventDetailAddressLine2;
+	public void setCity(String city) {
+		_city = city;
 	}
 
-	public String getEventDetailInfocity() {
-		return _eventDetailInfocity;
+	public String getZipCode() {
+		return _zipCode;
 	}
 
-	public void setEventDetailInfocity(String eventDetailInfocity) {
-		_eventDetailInfocity = eventDetailInfocity;
+	public void setZipCode(String zipCode) {
+		_zipCode = zipCode;
 	}
 
-	public String getEventDetailZip() {
-		return _eventDetailZip;
+	public long getStateId() {
+		return _stateId;
 	}
 
-	public void setEventDetailZip(String eventDetailZip) {
-		_eventDetailZip = eventDetailZip;
+	public void setStateId(long stateId) {
+		_stateId = stateId;
 	}
 
-	public String getEventDetailState() {
-		return _eventDetailState;
+	public long getCountryId() {
+		return _countryId;
 	}
 
-	public void setEventDetailState(String eventDetailState) {
-		_eventDetailState = eventDetailState;
+	public void setCountryId(long countryId) {
+		_countryId = countryId;
 	}
 
-	public String getEventDetailCountry() {
-		return _eventDetailCountry;
+	public String getLatitude() {
+		return _latitude;
 	}
 
-	public void setEventDetailCountry(String eventDetailCountry) {
-		_eventDetailCountry = eventDetailCountry;
+	public void setLatitude(String latitude) {
+		_latitude = latitude;
 	}
 
-	public String getEventDetailLatitude() {
-		return _eventDetailLatitude;
+	public String getLongitude() {
+		return _longitude;
 	}
 
-	public void setEventDetailLatitude(String eventDetailLatitude) {
-		_eventDetailLatitude = eventDetailLatitude;
+	public void setLongitude(String longitude) {
+		_longitude = longitude;
 	}
 
-	public String getEventDetailLongitude() {
-		return _eventDetailLongitude;
+	public String getPhone() {
+		return _phone;
 	}
 
-	public void setEventDetailLongitude(String eventDetailLongitude) {
-		_eventDetailLongitude = eventDetailLongitude;
+	public void setPhone(String phone) {
+		_phone = phone;
 	}
 
-	public String getEventDetailPhone() {
-		return _eventDetailPhone;
+	public String getWebsite() {
+		return _website;
 	}
 
-	public void setEventDetailPhone(String eventDetailPhone) {
-		_eventDetailPhone = eventDetailPhone;
+	public void setWebsite(String website) {
+		_website = website;
 	}
 
-	public String getEventDetailWebsite() {
-		return _eventDetailWebsite;
+	public double getCost() {
+		return _cost;
 	}
 
-	public void setEventDetailWebsite(String eventDetailWebsite) {
-		_eventDetailWebsite = eventDetailWebsite;
-	}
-
-	public double getEventDetailCost() {
-		return _eventDetailCost;
-	}
-
-	public void setEventDetailCost(double eventDetailCost) {
-		_eventDetailCost = eventDetailCost;
+	public void setCost(double cost) {
+		_cost = cost;
 	}
 
 	public String getHoursOfOperation() {
@@ -298,19 +289,18 @@ public class EventDetailSoap implements Serializable {
 	private long _eventId;
 	private long _infoTypeId;
 	private long _infoTypeCategoryId;
-	private String _eventDetailInfoName;
-	private String _eventDetailInfoDesc;
-	private String _eventDetailInfoComment;
-	private String _eventDetailAddressLine1;
-	private String _eventDetailAddressLine2;
-	private String _eventDetailInfocity;
-	private String _eventDetailZip;
-	private String _eventDetailState;
-	private String _eventDetailCountry;
-	private String _eventDetailLatitude;
-	private String _eventDetailLongitude;
-	private String _eventDetailPhone;
-	private String _eventDetailWebsite;
-	private double _eventDetailCost;
+	private String _infoName;
+	private String _infoDesc;
+	private String _addrLine1;
+	private String _addrLine2;
+	private String _city;
+	private String _zipCode;
+	private long _stateId;
+	private long _countryId;
+	private String _latitude;
+	private String _longitude;
+	private String _phone;
+	private String _website;
+	private double _cost;
 	private String _hoursOfOperation;
 }

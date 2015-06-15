@@ -188,213 +188,196 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	public void setInfoTypeCategoryId(long infoTypeCategoryId);
 
 	/**
-	 * Returns the event detail info name of this event detail.
+	 * Returns the info name of this event detail.
 	 *
-	 * @return the event detail info name of this event detail
+	 * @return the info name of this event detail
 	 */
 	@AutoEscape
-	public String getEventDetailInfoName();
+	public String getInfoName();
 
 	/**
-	 * Sets the event detail info name of this event detail.
+	 * Sets the info name of this event detail.
 	 *
-	 * @param eventDetailInfoName the event detail info name of this event detail
+	 * @param infoName the info name of this event detail
 	 */
-	public void setEventDetailInfoName(String eventDetailInfoName);
+	public void setInfoName(String infoName);
 
 	/**
-	 * Returns the event detail info desc of this event detail.
+	 * Returns the info desc of this event detail.
 	 *
-	 * @return the event detail info desc of this event detail
-	 */
-	@AutoEscape
-	public String getEventDetailInfoDesc();
-
-	/**
-	 * Sets the event detail info desc of this event detail.
-	 *
-	 * @param eventDetailInfoDesc the event detail info desc of this event detail
-	 */
-	public void setEventDetailInfoDesc(String eventDetailInfoDesc);
-
-	/**
-	 * Returns the event detail info comment of this event detail.
-	 *
-	 * @return the event detail info comment of this event detail
+	 * @return the info desc of this event detail
 	 */
 	@AutoEscape
-	public String getEventDetailInfoComment();
+	public String getInfoDesc();
 
 	/**
-	 * Sets the event detail info comment of this event detail.
+	 * Sets the info desc of this event detail.
 	 *
-	 * @param eventDetailInfoComment the event detail info comment of this event detail
+	 * @param infoDesc the info desc of this event detail
 	 */
-	public void setEventDetailInfoComment(String eventDetailInfoComment);
+	public void setInfoDesc(String infoDesc);
 
 	/**
-	 * Returns the event detail address line1 of this event detail.
+	 * Returns the addr line1 of this event detail.
 	 *
-	 * @return the event detail address line1 of this event detail
-	 */
-	@AutoEscape
-	public String getEventDetailAddressLine1();
-
-	/**
-	 * Sets the event detail address line1 of this event detail.
-	 *
-	 * @param eventDetailAddressLine1 the event detail address line1 of this event detail
-	 */
-	public void setEventDetailAddressLine1(String eventDetailAddressLine1);
-
-	/**
-	 * Returns the event detail address line2 of this event detail.
-	 *
-	 * @return the event detail address line2 of this event detail
+	 * @return the addr line1 of this event detail
 	 */
 	@AutoEscape
-	public String getEventDetailAddressLine2();
+	public String getAddrLine1();
 
 	/**
-	 * Sets the event detail address line2 of this event detail.
+	 * Sets the addr line1 of this event detail.
 	 *
-	 * @param eventDetailAddressLine2 the event detail address line2 of this event detail
+	 * @param addrLine1 the addr line1 of this event detail
 	 */
-	public void setEventDetailAddressLine2(String eventDetailAddressLine2);
+	public void setAddrLine1(String addrLine1);
 
 	/**
-	 * Returns the event detail infocity of this event detail.
+	 * Returns the addr line2 of this event detail.
 	 *
-	 * @return the event detail infocity of this event detail
-	 */
-	@AutoEscape
-	public String getEventDetailInfocity();
-
-	/**
-	 * Sets the event detail infocity of this event detail.
-	 *
-	 * @param eventDetailInfocity the event detail infocity of this event detail
-	 */
-	public void setEventDetailInfocity(String eventDetailInfocity);
-
-	/**
-	 * Returns the event detail zip of this event detail.
-	 *
-	 * @return the event detail zip of this event detail
+	 * @return the addr line2 of this event detail
 	 */
 	@AutoEscape
-	public String getEventDetailZip();
+	public String getAddrLine2();
 
 	/**
-	 * Sets the event detail zip of this event detail.
+	 * Sets the addr line2 of this event detail.
 	 *
-	 * @param eventDetailZip the event detail zip of this event detail
+	 * @param addrLine2 the addr line2 of this event detail
 	 */
-	public void setEventDetailZip(String eventDetailZip);
+	public void setAddrLine2(String addrLine2);
 
 	/**
-	 * Returns the event detail state of this event detail.
+	 * Returns the city of this event detail.
 	 *
-	 * @return the event detail state of this event detail
-	 */
-	@AutoEscape
-	public String getEventDetailState();
-
-	/**
-	 * Sets the event detail state of this event detail.
-	 *
-	 * @param eventDetailState the event detail state of this event detail
-	 */
-	public void setEventDetailState(String eventDetailState);
-
-	/**
-	 * Returns the event detail country of this event detail.
-	 *
-	 * @return the event detail country of this event detail
+	 * @return the city of this event detail
 	 */
 	@AutoEscape
-	public String getEventDetailCountry();
+	public String getCity();
 
 	/**
-	 * Sets the event detail country of this event detail.
+	 * Sets the city of this event detail.
 	 *
-	 * @param eventDetailCountry the event detail country of this event detail
+	 * @param city the city of this event detail
 	 */
-	public void setEventDetailCountry(String eventDetailCountry);
+	public void setCity(String city);
 
 	/**
-	 * Returns the event detail latitude of this event detail.
+	 * Returns the zip code of this event detail.
 	 *
-	 * @return the event detail latitude of this event detail
-	 */
-	@AutoEscape
-	public String getEventDetailLatitude();
-
-	/**
-	 * Sets the event detail latitude of this event detail.
-	 *
-	 * @param eventDetailLatitude the event detail latitude of this event detail
-	 */
-	public void setEventDetailLatitude(String eventDetailLatitude);
-
-	/**
-	 * Returns the event detail longitude of this event detail.
-	 *
-	 * @return the event detail longitude of this event detail
+	 * @return the zip code of this event detail
 	 */
 	@AutoEscape
-	public String getEventDetailLongitude();
+	public String getZipCode();
 
 	/**
-	 * Sets the event detail longitude of this event detail.
+	 * Sets the zip code of this event detail.
 	 *
-	 * @param eventDetailLongitude the event detail longitude of this event detail
+	 * @param zipCode the zip code of this event detail
 	 */
-	public void setEventDetailLongitude(String eventDetailLongitude);
+	public void setZipCode(String zipCode);
 
 	/**
-	 * Returns the event detail phone of this event detail.
+	 * Returns the state ID of this event detail.
 	 *
-	 * @return the event detail phone of this event detail
+	 * @return the state ID of this event detail
+	 */
+	public long getStateId();
+
+	/**
+	 * Sets the state ID of this event detail.
+	 *
+	 * @param stateId the state ID of this event detail
+	 */
+	public void setStateId(long stateId);
+
+	/**
+	 * Returns the country ID of this event detail.
+	 *
+	 * @return the country ID of this event detail
+	 */
+	public long getCountryId();
+
+	/**
+	 * Sets the country ID of this event detail.
+	 *
+	 * @param countryId the country ID of this event detail
+	 */
+	public void setCountryId(long countryId);
+
+	/**
+	 * Returns the latitude of this event detail.
+	 *
+	 * @return the latitude of this event detail
 	 */
 	@AutoEscape
-	public String getEventDetailPhone();
+	public String getLatitude();
 
 	/**
-	 * Sets the event detail phone of this event detail.
+	 * Sets the latitude of this event detail.
 	 *
-	 * @param eventDetailPhone the event detail phone of this event detail
+	 * @param latitude the latitude of this event detail
 	 */
-	public void setEventDetailPhone(String eventDetailPhone);
+	public void setLatitude(String latitude);
 
 	/**
-	 * Returns the event detail website of this event detail.
+	 * Returns the longitude of this event detail.
 	 *
-	 * @return the event detail website of this event detail
+	 * @return the longitude of this event detail
 	 */
 	@AutoEscape
-	public String getEventDetailWebsite();
+	public String getLongitude();
 
 	/**
-	 * Sets the event detail website of this event detail.
+	 * Sets the longitude of this event detail.
 	 *
-	 * @param eventDetailWebsite the event detail website of this event detail
+	 * @param longitude the longitude of this event detail
 	 */
-	public void setEventDetailWebsite(String eventDetailWebsite);
+	public void setLongitude(String longitude);
 
 	/**
-	 * Returns the event detail cost of this event detail.
+	 * Returns the phone of this event detail.
 	 *
-	 * @return the event detail cost of this event detail
+	 * @return the phone of this event detail
 	 */
-	public double getEventDetailCost();
+	@AutoEscape
+	public String getPhone();
 
 	/**
-	 * Sets the event detail cost of this event detail.
+	 * Sets the phone of this event detail.
 	 *
-	 * @param eventDetailCost the event detail cost of this event detail
+	 * @param phone the phone of this event detail
 	 */
-	public void setEventDetailCost(double eventDetailCost);
+	public void setPhone(String phone);
+
+	/**
+	 * Returns the website of this event detail.
+	 *
+	 * @return the website of this event detail
+	 */
+	@AutoEscape
+	public String getWebsite();
+
+	/**
+	 * Sets the website of this event detail.
+	 *
+	 * @param website the website of this event detail
+	 */
+	public void setWebsite(String website);
+
+	/**
+	 * Returns the cost of this event detail.
+	 *
+	 * @return the cost of this event detail
+	 */
+	public double getCost();
+
+	/**
+	 * Sets the cost of this event detail.
+	 *
+	 * @param cost the cost of this event detail
+	 */
+	public void setCost(double cost);
 
 	/**
 	 * Returns the hours of operation of this event detail.

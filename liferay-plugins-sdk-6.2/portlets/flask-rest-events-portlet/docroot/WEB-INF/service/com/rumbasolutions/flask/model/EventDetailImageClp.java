@@ -29,8 +29,6 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
-import java.sql.Blob;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,9 +81,9 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("eventDetailId", getEventDetailId());
-		attributes.put("eventDetailImagetitle", getEventDetailImagetitle());
-		attributes.put("eventDetailImageDesc", getEventDetailImageDesc());
-		attributes.put("eventDetailImageData", getEventDetailImageData());
+		attributes.put("imagetitle", getImagetitle());
+		attributes.put("imageDesc", getImageDesc());
+		attributes.put("imagePath", getImagePath());
 
 		return attributes;
 	}
@@ -128,24 +126,22 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 			setEventDetailId(eventDetailId);
 		}
 
-		String eventDetailImagetitle = (String)attributes.get(
-				"eventDetailImagetitle");
+		String imagetitle = (String)attributes.get("imagetitle");
 
-		if (eventDetailImagetitle != null) {
-			setEventDetailImagetitle(eventDetailImagetitle);
+		if (imagetitle != null) {
+			setImagetitle(imagetitle);
 		}
 
-		String eventDetailImageDesc = (String)attributes.get(
-				"eventDetailImageDesc");
+		String imageDesc = (String)attributes.get("imageDesc");
 
-		if (eventDetailImageDesc != null) {
-			setEventDetailImageDesc(eventDetailImageDesc);
+		if (imageDesc != null) {
+			setImageDesc(imageDesc);
 		}
 
-		Blob eventDetailImageData = (Blob)attributes.get("eventDetailImageData");
+		String imagePath = (String)attributes.get("imagePath");
 
-		if (eventDetailImageData != null) {
-			setEventDetailImageData(eventDetailImageData);
+		if (imagePath != null) {
+			setImagePath(imagePath);
 		}
 	}
 
@@ -299,23 +295,21 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 	}
 
 	@Override
-	public String getEventDetailImagetitle() {
-		return _eventDetailImagetitle;
+	public String getImagetitle() {
+		return _imagetitle;
 	}
 
 	@Override
-	public void setEventDetailImagetitle(String eventDetailImagetitle) {
-		_eventDetailImagetitle = eventDetailImagetitle;
+	public void setImagetitle(String imagetitle) {
+		_imagetitle = imagetitle;
 
 		if (_eventDetailImageRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailImageRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailImagetitle",
-						String.class);
+				Method method = clazz.getMethod("setImagetitle", String.class);
 
-				method.invoke(_eventDetailImageRemoteModel,
-					eventDetailImagetitle);
+				method.invoke(_eventDetailImageRemoteModel, imagetitle);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -324,22 +318,21 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 	}
 
 	@Override
-	public String getEventDetailImageDesc() {
-		return _eventDetailImageDesc;
+	public String getImageDesc() {
+		return _imageDesc;
 	}
 
 	@Override
-	public void setEventDetailImageDesc(String eventDetailImageDesc) {
-		_eventDetailImageDesc = eventDetailImageDesc;
+	public void setImageDesc(String imageDesc) {
+		_imageDesc = imageDesc;
 
 		if (_eventDetailImageRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailImageRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailImageDesc",
-						String.class);
+				Method method = clazz.getMethod("setImageDesc", String.class);
 
-				method.invoke(_eventDetailImageRemoteModel, eventDetailImageDesc);
+				method.invoke(_eventDetailImageRemoteModel, imageDesc);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -348,22 +341,21 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 	}
 
 	@Override
-	public Blob getEventDetailImageData() {
-		return _eventDetailImageData;
+	public String getImagePath() {
+		return _imagePath;
 	}
 
 	@Override
-	public void setEventDetailImageData(Blob eventDetailImageData) {
-		_eventDetailImageData = eventDetailImageData;
+	public void setImagePath(String imagePath) {
+		_imagePath = imagePath;
 
 		if (_eventDetailImageRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailImageRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventDetailImageData",
-						Blob.class);
+				Method method = clazz.getMethod("setImagePath", String.class);
 
-				method.invoke(_eventDetailImageRemoteModel, eventDetailImageData);
+				method.invoke(_eventDetailImageRemoteModel, imagePath);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -448,9 +440,9 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		clone.setCreatedDate(getCreatedDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setEventDetailId(getEventDetailId());
-		clone.setEventDetailImagetitle(getEventDetailImagetitle());
-		clone.setEventDetailImageDesc(getEventDetailImageDesc());
-		clone.setEventDetailImageData(getEventDetailImageData());
+		clone.setImagetitle(getImagetitle());
+		clone.setImageDesc(getImageDesc());
+		clone.setImagePath(getImagePath());
 
 		return clone;
 	}
@@ -517,12 +509,12 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		sb.append(getModifiedDate());
 		sb.append(", eventDetailId=");
 		sb.append(getEventDetailId());
-		sb.append(", eventDetailImagetitle=");
-		sb.append(getEventDetailImagetitle());
-		sb.append(", eventDetailImageDesc=");
-		sb.append(getEventDetailImageDesc());
-		sb.append(", eventDetailImageData=");
-		sb.append(getEventDetailImageData());
+		sb.append(", imagetitle=");
+		sb.append(getImagetitle());
+		sb.append(", imageDesc=");
+		sb.append(getImageDesc());
+		sb.append(", imagePath=");
+		sb.append(getImagePath());
 		sb.append("}");
 
 		return sb.toString();
@@ -561,16 +553,16 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		sb.append(getEventDetailId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailImagetitle</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailImagetitle());
+			"<column><column-name>imagetitle</column-name><column-value><![CDATA[");
+		sb.append(getImagetitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailImageDesc</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailImageDesc());
+			"<column><column-name>imageDesc</column-name><column-value><![CDATA[");
+		sb.append(getImageDesc());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventDetailImageData</column-name><column-value><![CDATA[");
-		sb.append(getEventDetailImageData());
+			"<column><column-name>imagePath</column-name><column-value><![CDATA[");
+		sb.append(getImagePath());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -585,9 +577,9 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private long _eventDetailId;
-	private String _eventDetailImagetitle;
-	private String _eventDetailImageDesc;
-	private Blob _eventDetailImageData;
+	private String _imagetitle;
+	private String _imageDesc;
+	private String _imagePath;
 	private BaseModel<?> _eventDetailImageRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

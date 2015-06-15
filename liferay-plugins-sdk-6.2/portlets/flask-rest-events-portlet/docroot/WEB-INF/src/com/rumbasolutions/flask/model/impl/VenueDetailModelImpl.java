@@ -74,22 +74,24 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 			{ "venueId", Types.BIGINT },
 			{ "infoTypeId", Types.BIGINT },
 			{ "infoTypeCategoryId", Types.BIGINT },
-			{ "venueDetailInfoName", Types.VARCHAR },
-			{ "venueDetailInfoDesc", Types.VARCHAR },
-			{ "venueDetailInfoComment", Types.VARCHAR },
-			{ "venueDetailAddressLine1", Types.VARCHAR },
-			{ "venueDetailAddressLine2", Types.VARCHAR },
-			{ "venueDetailCity", Types.VARCHAR },
-			{ "venueDetailState", Types.VARCHAR },
-			{ "venueDetailCountry", Types.VARCHAR },
-			{ "venueDetailLatitude", Types.VARCHAR },
-			{ "venueDetailLongitude", Types.VARCHAR },
-			{ "venueDetailPhone", Types.VARCHAR },
-			{ "venueDetailWebsite", Types.VARCHAR },
-			{ "venueDetailCost", Types.DOUBLE },
-			{ "venueDetailhoursOfOperation", Types.VARCHAR }
+			{ "infoTitle", Types.VARCHAR },
+			{ "infoDesc", Types.VARCHAR },
+			{ "addrLine1", Types.VARCHAR },
+			{ "addrLine2", Types.VARCHAR },
+			{ "city", Types.VARCHAR },
+			{ "zipCode", Types.VARCHAR },
+			{ "stateId", Types.BIGINT },
+			{ "stateName", Types.VARCHAR },
+			{ "countryId", Types.BIGINT },
+			{ "countryName", Types.VARCHAR },
+			{ "latitude", Types.VARCHAR },
+			{ "longitude", Types.VARCHAR },
+			{ "phone", Types.VARCHAR },
+			{ "website", Types.VARCHAR },
+			{ "cost", Types.DOUBLE },
+			{ "hoursOfOperation", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueDetail (venueDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueId LONG,infoTypeId LONG,infoTypeCategoryId LONG,venueDetailInfoName VARCHAR(75) null,venueDetailInfoDesc VARCHAR(75) null,venueDetailInfoComment VARCHAR(75) null,venueDetailAddressLine1 VARCHAR(75) null,venueDetailAddressLine2 VARCHAR(75) null,venueDetailCity VARCHAR(75) null,venueDetailState VARCHAR(75) null,venueDetailCountry VARCHAR(75) null,venueDetailLatitude VARCHAR(75) null,venueDetailLongitude VARCHAR(75) null,venueDetailPhone VARCHAR(75) null,venueDetailWebsite VARCHAR(75) null,venueDetailCost DOUBLE,venueDetailhoursOfOperation VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueDetail (venueDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueId LONG,infoTypeId LONG,infoTypeCategoryId LONG,infoTitle VARCHAR(100) null,infoDesc VARCHAR(255) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(100) null,countryId LONG,countryName VARCHAR(100) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_VenueDetail";
 	public static final String ORDER_BY_JPQL = " ORDER BY venueDetail.venueDetailId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_VenueDetail.venueDetailId ASC";
@@ -129,20 +131,22 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		model.setVenueId(soapModel.getVenueId());
 		model.setInfoTypeId(soapModel.getInfoTypeId());
 		model.setInfoTypeCategoryId(soapModel.getInfoTypeCategoryId());
-		model.setVenueDetailInfoName(soapModel.getVenueDetailInfoName());
-		model.setVenueDetailInfoDesc(soapModel.getVenueDetailInfoDesc());
-		model.setVenueDetailInfoComment(soapModel.getVenueDetailInfoComment());
-		model.setVenueDetailAddressLine1(soapModel.getVenueDetailAddressLine1());
-		model.setVenueDetailAddressLine2(soapModel.getVenueDetailAddressLine2());
-		model.setVenueDetailCity(soapModel.getVenueDetailCity());
-		model.setVenueDetailState(soapModel.getVenueDetailState());
-		model.setVenueDetailCountry(soapModel.getVenueDetailCountry());
-		model.setVenueDetailLatitude(soapModel.getVenueDetailLatitude());
-		model.setVenueDetailLongitude(soapModel.getVenueDetailLongitude());
-		model.setVenueDetailPhone(soapModel.getVenueDetailPhone());
-		model.setVenueDetailWebsite(soapModel.getVenueDetailWebsite());
-		model.setVenueDetailCost(soapModel.getVenueDetailCost());
-		model.setVenueDetailhoursOfOperation(soapModel.getVenueDetailhoursOfOperation());
+		model.setInfoTitle(soapModel.getInfoTitle());
+		model.setInfoDesc(soapModel.getInfoDesc());
+		model.setAddrLine1(soapModel.getAddrLine1());
+		model.setAddrLine2(soapModel.getAddrLine2());
+		model.setCity(soapModel.getCity());
+		model.setZipCode(soapModel.getZipCode());
+		model.setStateId(soapModel.getStateId());
+		model.setStateName(soapModel.getStateName());
+		model.setCountryId(soapModel.getCountryId());
+		model.setCountryName(soapModel.getCountryName());
+		model.setLatitude(soapModel.getLatitude());
+		model.setLongitude(soapModel.getLongitude());
+		model.setPhone(soapModel.getPhone());
+		model.setWebsite(soapModel.getWebsite());
+		model.setCost(soapModel.getCost());
+		model.setHoursOfOperation(soapModel.getHoursOfOperation());
 
 		return model;
 	}
@@ -215,21 +219,22 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		attributes.put("venueId", getVenueId());
 		attributes.put("infoTypeId", getInfoTypeId());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
-		attributes.put("venueDetailInfoName", getVenueDetailInfoName());
-		attributes.put("venueDetailInfoDesc", getVenueDetailInfoDesc());
-		attributes.put("venueDetailInfoComment", getVenueDetailInfoComment());
-		attributes.put("venueDetailAddressLine1", getVenueDetailAddressLine1());
-		attributes.put("venueDetailAddressLine2", getVenueDetailAddressLine2());
-		attributes.put("venueDetailCity", getVenueDetailCity());
-		attributes.put("venueDetailState", getVenueDetailState());
-		attributes.put("venueDetailCountry", getVenueDetailCountry());
-		attributes.put("venueDetailLatitude", getVenueDetailLatitude());
-		attributes.put("venueDetailLongitude", getVenueDetailLongitude());
-		attributes.put("venueDetailPhone", getVenueDetailPhone());
-		attributes.put("venueDetailWebsite", getVenueDetailWebsite());
-		attributes.put("venueDetailCost", getVenueDetailCost());
-		attributes.put("venueDetailhoursOfOperation",
-			getVenueDetailhoursOfOperation());
+		attributes.put("infoTitle", getInfoTitle());
+		attributes.put("infoDesc", getInfoDesc());
+		attributes.put("addrLine1", getAddrLine1());
+		attributes.put("addrLine2", getAddrLine2());
+		attributes.put("city", getCity());
+		attributes.put("zipCode", getZipCode());
+		attributes.put("stateId", getStateId());
+		attributes.put("stateName", getStateName());
+		attributes.put("countryId", getCountryId());
+		attributes.put("countryName", getCountryName());
+		attributes.put("latitude", getLatitude());
+		attributes.put("longitude", getLongitude());
+		attributes.put("phone", getPhone());
+		attributes.put("website", getWebsite());
+		attributes.put("cost", getCost());
+		attributes.put("hoursOfOperation", getHoursOfOperation());
 
 		return attributes;
 	}
@@ -284,96 +289,100 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 			setInfoTypeCategoryId(infoTypeCategoryId);
 		}
 
-		String venueDetailInfoName = (String)attributes.get(
-				"venueDetailInfoName");
+		String infoTitle = (String)attributes.get("infoTitle");
 
-		if (venueDetailInfoName != null) {
-			setVenueDetailInfoName(venueDetailInfoName);
+		if (infoTitle != null) {
+			setInfoTitle(infoTitle);
 		}
 
-		String venueDetailInfoDesc = (String)attributes.get(
-				"venueDetailInfoDesc");
+		String infoDesc = (String)attributes.get("infoDesc");
 
-		if (venueDetailInfoDesc != null) {
-			setVenueDetailInfoDesc(venueDetailInfoDesc);
+		if (infoDesc != null) {
+			setInfoDesc(infoDesc);
 		}
 
-		String venueDetailInfoComment = (String)attributes.get(
-				"venueDetailInfoComment");
+		String addrLine1 = (String)attributes.get("addrLine1");
 
-		if (venueDetailInfoComment != null) {
-			setVenueDetailInfoComment(venueDetailInfoComment);
+		if (addrLine1 != null) {
+			setAddrLine1(addrLine1);
 		}
 
-		String venueDetailAddressLine1 = (String)attributes.get(
-				"venueDetailAddressLine1");
+		String addrLine2 = (String)attributes.get("addrLine2");
 
-		if (venueDetailAddressLine1 != null) {
-			setVenueDetailAddressLine1(venueDetailAddressLine1);
+		if (addrLine2 != null) {
+			setAddrLine2(addrLine2);
 		}
 
-		String venueDetailAddressLine2 = (String)attributes.get(
-				"venueDetailAddressLine2");
+		String city = (String)attributes.get("city");
 
-		if (venueDetailAddressLine2 != null) {
-			setVenueDetailAddressLine2(venueDetailAddressLine2);
+		if (city != null) {
+			setCity(city);
 		}
 
-		String venueDetailCity = (String)attributes.get("venueDetailCity");
+		String zipCode = (String)attributes.get("zipCode");
 
-		if (venueDetailCity != null) {
-			setVenueDetailCity(venueDetailCity);
+		if (zipCode != null) {
+			setZipCode(zipCode);
 		}
 
-		String venueDetailState = (String)attributes.get("venueDetailState");
+		Long stateId = (Long)attributes.get("stateId");
 
-		if (venueDetailState != null) {
-			setVenueDetailState(venueDetailState);
+		if (stateId != null) {
+			setStateId(stateId);
 		}
 
-		String venueDetailCountry = (String)attributes.get("venueDetailCountry");
+		String stateName = (String)attributes.get("stateName");
 
-		if (venueDetailCountry != null) {
-			setVenueDetailCountry(venueDetailCountry);
+		if (stateName != null) {
+			setStateName(stateName);
 		}
 
-		String venueDetailLatitude = (String)attributes.get(
-				"venueDetailLatitude");
+		Long countryId = (Long)attributes.get("countryId");
 
-		if (venueDetailLatitude != null) {
-			setVenueDetailLatitude(venueDetailLatitude);
+		if (countryId != null) {
+			setCountryId(countryId);
 		}
 
-		String venueDetailLongitude = (String)attributes.get(
-				"venueDetailLongitude");
+		String countryName = (String)attributes.get("countryName");
 
-		if (venueDetailLongitude != null) {
-			setVenueDetailLongitude(venueDetailLongitude);
+		if (countryName != null) {
+			setCountryName(countryName);
 		}
 
-		String venueDetailPhone = (String)attributes.get("venueDetailPhone");
+		String latitude = (String)attributes.get("latitude");
 
-		if (venueDetailPhone != null) {
-			setVenueDetailPhone(venueDetailPhone);
+		if (latitude != null) {
+			setLatitude(latitude);
 		}
 
-		String venueDetailWebsite = (String)attributes.get("venueDetailWebsite");
+		String longitude = (String)attributes.get("longitude");
 
-		if (venueDetailWebsite != null) {
-			setVenueDetailWebsite(venueDetailWebsite);
+		if (longitude != null) {
+			setLongitude(longitude);
 		}
 
-		Double venueDetailCost = (Double)attributes.get("venueDetailCost");
+		String phone = (String)attributes.get("phone");
 
-		if (venueDetailCost != null) {
-			setVenueDetailCost(venueDetailCost);
+		if (phone != null) {
+			setPhone(phone);
 		}
 
-		String venueDetailhoursOfOperation = (String)attributes.get(
-				"venueDetailhoursOfOperation");
+		String website = (String)attributes.get("website");
 
-		if (venueDetailhoursOfOperation != null) {
-			setVenueDetailhoursOfOperation(venueDetailhoursOfOperation);
+		if (website != null) {
+			setWebsite(website);
+		}
+
+		Double cost = (Double)attributes.get("cost");
+
+		if (cost != null) {
+			setCost(cost);
+		}
+
+		String hoursOfOperation = (String)attributes.get("hoursOfOperation");
+
+		if (hoursOfOperation != null) {
+			setHoursOfOperation(hoursOfOperation);
 		}
 	}
 
@@ -489,222 +498,243 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 	@JSON
 	@Override
-	public String getVenueDetailInfoName() {
-		if (_venueDetailInfoName == null) {
+	public String getInfoTitle() {
+		if (_infoTitle == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailInfoName;
+			return _infoTitle;
 		}
 	}
 
 	@Override
-	public void setVenueDetailInfoName(String venueDetailInfoName) {
-		_venueDetailInfoName = venueDetailInfoName;
+	public void setInfoTitle(String infoTitle) {
+		_infoTitle = infoTitle;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailInfoDesc() {
-		if (_venueDetailInfoDesc == null) {
+	public String getInfoDesc() {
+		if (_infoDesc == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailInfoDesc;
+			return _infoDesc;
 		}
 	}
 
 	@Override
-	public void setVenueDetailInfoDesc(String venueDetailInfoDesc) {
-		_venueDetailInfoDesc = venueDetailInfoDesc;
+	public void setInfoDesc(String infoDesc) {
+		_infoDesc = infoDesc;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailInfoComment() {
-		if (_venueDetailInfoComment == null) {
+	public String getAddrLine1() {
+		if (_addrLine1 == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailInfoComment;
+			return _addrLine1;
 		}
 	}
 
 	@Override
-	public void setVenueDetailInfoComment(String venueDetailInfoComment) {
-		_venueDetailInfoComment = venueDetailInfoComment;
+	public void setAddrLine1(String addrLine1) {
+		_addrLine1 = addrLine1;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailAddressLine1() {
-		if (_venueDetailAddressLine1 == null) {
+	public String getAddrLine2() {
+		if (_addrLine2 == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailAddressLine1;
+			return _addrLine2;
 		}
 	}
 
 	@Override
-	public void setVenueDetailAddressLine1(String venueDetailAddressLine1) {
-		_venueDetailAddressLine1 = venueDetailAddressLine1;
+	public void setAddrLine2(String addrLine2) {
+		_addrLine2 = addrLine2;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailAddressLine2() {
-		if (_venueDetailAddressLine2 == null) {
+	public String getCity() {
+		if (_city == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailAddressLine2;
+			return _city;
 		}
 	}
 
 	@Override
-	public void setVenueDetailAddressLine2(String venueDetailAddressLine2) {
-		_venueDetailAddressLine2 = venueDetailAddressLine2;
+	public void setCity(String city) {
+		_city = city;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailCity() {
-		if (_venueDetailCity == null) {
+	public String getZipCode() {
+		if (_zipCode == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailCity;
+			return _zipCode;
 		}
 	}
 
 	@Override
-	public void setVenueDetailCity(String venueDetailCity) {
-		_venueDetailCity = venueDetailCity;
+	public void setZipCode(String zipCode) {
+		_zipCode = zipCode;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailState() {
-		if (_venueDetailState == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _venueDetailState;
-		}
+	public long getStateId() {
+		return _stateId;
 	}
 
 	@Override
-	public void setVenueDetailState(String venueDetailState) {
-		_venueDetailState = venueDetailState;
+	public void setStateId(long stateId) {
+		_stateId = stateId;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailCountry() {
-		if (_venueDetailCountry == null) {
+	public String getStateName() {
+		if (_stateName == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailCountry;
+			return _stateName;
 		}
 	}
 
 	@Override
-	public void setVenueDetailCountry(String venueDetailCountry) {
-		_venueDetailCountry = venueDetailCountry;
+	public void setStateName(String stateName) {
+		_stateName = stateName;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailLatitude() {
-		if (_venueDetailLatitude == null) {
-			return StringPool.BLANK;
-		}
-		else {
-			return _venueDetailLatitude;
-		}
+	public long getCountryId() {
+		return _countryId;
 	}
 
 	@Override
-	public void setVenueDetailLatitude(String venueDetailLatitude) {
-		_venueDetailLatitude = venueDetailLatitude;
+	public void setCountryId(long countryId) {
+		_countryId = countryId;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailLongitude() {
-		if (_venueDetailLongitude == null) {
+	public String getCountryName() {
+		if (_countryName == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailLongitude;
+			return _countryName;
 		}
 	}
 
 	@Override
-	public void setVenueDetailLongitude(String venueDetailLongitude) {
-		_venueDetailLongitude = venueDetailLongitude;
+	public void setCountryName(String countryName) {
+		_countryName = countryName;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailPhone() {
-		if (_venueDetailPhone == null) {
+	public String getLatitude() {
+		if (_latitude == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailPhone;
+			return _latitude;
 		}
 	}
 
 	@Override
-	public void setVenueDetailPhone(String venueDetailPhone) {
-		_venueDetailPhone = venueDetailPhone;
+	public void setLatitude(String latitude) {
+		_latitude = latitude;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailWebsite() {
-		if (_venueDetailWebsite == null) {
+	public String getLongitude() {
+		if (_longitude == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailWebsite;
+			return _longitude;
 		}
 	}
 
 	@Override
-	public void setVenueDetailWebsite(String venueDetailWebsite) {
-		_venueDetailWebsite = venueDetailWebsite;
+	public void setLongitude(String longitude) {
+		_longitude = longitude;
 	}
 
 	@JSON
 	@Override
-	public double getVenueDetailCost() {
-		return _venueDetailCost;
+	public String getPhone() {
+		if (_phone == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _phone;
+		}
 	}
 
 	@Override
-	public void setVenueDetailCost(double venueDetailCost) {
-		_venueDetailCost = venueDetailCost;
+	public void setPhone(String phone) {
+		_phone = phone;
 	}
 
 	@JSON
 	@Override
-	public String getVenueDetailhoursOfOperation() {
-		if (_venueDetailhoursOfOperation == null) {
+	public String getWebsite() {
+		if (_website == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueDetailhoursOfOperation;
+			return _website;
 		}
 	}
 
 	@Override
-	public void setVenueDetailhoursOfOperation(
-		String venueDetailhoursOfOperation) {
-		_venueDetailhoursOfOperation = venueDetailhoursOfOperation;
+	public void setWebsite(String website) {
+		_website = website;
+	}
+
+	@JSON
+	@Override
+	public double getCost() {
+		return _cost;
+	}
+
+	@Override
+	public void setCost(double cost) {
+		_cost = cost;
+	}
+
+	@JSON
+	@Override
+	public String getHoursOfOperation() {
+		if (_hoursOfOperation == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _hoursOfOperation;
+		}
+	}
+
+	@Override
+	public void setHoursOfOperation(String hoursOfOperation) {
+		_hoursOfOperation = hoursOfOperation;
 	}
 
 	public long getColumnBitmask() {
@@ -746,20 +776,22 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		venueDetailImpl.setVenueId(getVenueId());
 		venueDetailImpl.setInfoTypeId(getInfoTypeId());
 		venueDetailImpl.setInfoTypeCategoryId(getInfoTypeCategoryId());
-		venueDetailImpl.setVenueDetailInfoName(getVenueDetailInfoName());
-		venueDetailImpl.setVenueDetailInfoDesc(getVenueDetailInfoDesc());
-		venueDetailImpl.setVenueDetailInfoComment(getVenueDetailInfoComment());
-		venueDetailImpl.setVenueDetailAddressLine1(getVenueDetailAddressLine1());
-		venueDetailImpl.setVenueDetailAddressLine2(getVenueDetailAddressLine2());
-		venueDetailImpl.setVenueDetailCity(getVenueDetailCity());
-		venueDetailImpl.setVenueDetailState(getVenueDetailState());
-		venueDetailImpl.setVenueDetailCountry(getVenueDetailCountry());
-		venueDetailImpl.setVenueDetailLatitude(getVenueDetailLatitude());
-		venueDetailImpl.setVenueDetailLongitude(getVenueDetailLongitude());
-		venueDetailImpl.setVenueDetailPhone(getVenueDetailPhone());
-		venueDetailImpl.setVenueDetailWebsite(getVenueDetailWebsite());
-		venueDetailImpl.setVenueDetailCost(getVenueDetailCost());
-		venueDetailImpl.setVenueDetailhoursOfOperation(getVenueDetailhoursOfOperation());
+		venueDetailImpl.setInfoTitle(getInfoTitle());
+		venueDetailImpl.setInfoDesc(getInfoDesc());
+		venueDetailImpl.setAddrLine1(getAddrLine1());
+		venueDetailImpl.setAddrLine2(getAddrLine2());
+		venueDetailImpl.setCity(getCity());
+		venueDetailImpl.setZipCode(getZipCode());
+		venueDetailImpl.setStateId(getStateId());
+		venueDetailImpl.setStateName(getStateName());
+		venueDetailImpl.setCountryId(getCountryId());
+		venueDetailImpl.setCountryName(getCountryName());
+		venueDetailImpl.setLatitude(getLatitude());
+		venueDetailImpl.setLongitude(getLongitude());
+		venueDetailImpl.setPhone(getPhone());
+		venueDetailImpl.setWebsite(getWebsite());
+		venueDetailImpl.setCost(getCost());
+		venueDetailImpl.setHoursOfOperation(getHoursOfOperation());
 
 		venueDetailImpl.resetOriginalValues();
 
@@ -853,118 +885,114 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 		venueDetailCacheModel.infoTypeCategoryId = getInfoTypeCategoryId();
 
-		venueDetailCacheModel.venueDetailInfoName = getVenueDetailInfoName();
+		venueDetailCacheModel.infoTitle = getInfoTitle();
 
-		String venueDetailInfoName = venueDetailCacheModel.venueDetailInfoName;
+		String infoTitle = venueDetailCacheModel.infoTitle;
 
-		if ((venueDetailInfoName != null) &&
-				(venueDetailInfoName.length() == 0)) {
-			venueDetailCacheModel.venueDetailInfoName = null;
+		if ((infoTitle != null) && (infoTitle.length() == 0)) {
+			venueDetailCacheModel.infoTitle = null;
 		}
 
-		venueDetailCacheModel.venueDetailInfoDesc = getVenueDetailInfoDesc();
+		venueDetailCacheModel.infoDesc = getInfoDesc();
 
-		String venueDetailInfoDesc = venueDetailCacheModel.venueDetailInfoDesc;
+		String infoDesc = venueDetailCacheModel.infoDesc;
 
-		if ((venueDetailInfoDesc != null) &&
-				(venueDetailInfoDesc.length() == 0)) {
-			venueDetailCacheModel.venueDetailInfoDesc = null;
+		if ((infoDesc != null) && (infoDesc.length() == 0)) {
+			venueDetailCacheModel.infoDesc = null;
 		}
 
-		venueDetailCacheModel.venueDetailInfoComment = getVenueDetailInfoComment();
+		venueDetailCacheModel.addrLine1 = getAddrLine1();
 
-		String venueDetailInfoComment = venueDetailCacheModel.venueDetailInfoComment;
+		String addrLine1 = venueDetailCacheModel.addrLine1;
 
-		if ((venueDetailInfoComment != null) &&
-				(venueDetailInfoComment.length() == 0)) {
-			venueDetailCacheModel.venueDetailInfoComment = null;
+		if ((addrLine1 != null) && (addrLine1.length() == 0)) {
+			venueDetailCacheModel.addrLine1 = null;
 		}
 
-		venueDetailCacheModel.venueDetailAddressLine1 = getVenueDetailAddressLine1();
+		venueDetailCacheModel.addrLine2 = getAddrLine2();
 
-		String venueDetailAddressLine1 = venueDetailCacheModel.venueDetailAddressLine1;
+		String addrLine2 = venueDetailCacheModel.addrLine2;
 
-		if ((venueDetailAddressLine1 != null) &&
-				(venueDetailAddressLine1.length() == 0)) {
-			venueDetailCacheModel.venueDetailAddressLine1 = null;
+		if ((addrLine2 != null) && (addrLine2.length() == 0)) {
+			venueDetailCacheModel.addrLine2 = null;
 		}
 
-		venueDetailCacheModel.venueDetailAddressLine2 = getVenueDetailAddressLine2();
+		venueDetailCacheModel.city = getCity();
 
-		String venueDetailAddressLine2 = venueDetailCacheModel.venueDetailAddressLine2;
+		String city = venueDetailCacheModel.city;
 
-		if ((venueDetailAddressLine2 != null) &&
-				(venueDetailAddressLine2.length() == 0)) {
-			venueDetailCacheModel.venueDetailAddressLine2 = null;
+		if ((city != null) && (city.length() == 0)) {
+			venueDetailCacheModel.city = null;
 		}
 
-		venueDetailCacheModel.venueDetailCity = getVenueDetailCity();
+		venueDetailCacheModel.zipCode = getZipCode();
 
-		String venueDetailCity = venueDetailCacheModel.venueDetailCity;
+		String zipCode = venueDetailCacheModel.zipCode;
 
-		if ((venueDetailCity != null) && (venueDetailCity.length() == 0)) {
-			venueDetailCacheModel.venueDetailCity = null;
+		if ((zipCode != null) && (zipCode.length() == 0)) {
+			venueDetailCacheModel.zipCode = null;
 		}
 
-		venueDetailCacheModel.venueDetailState = getVenueDetailState();
+		venueDetailCacheModel.stateId = getStateId();
 
-		String venueDetailState = venueDetailCacheModel.venueDetailState;
+		venueDetailCacheModel.stateName = getStateName();
 
-		if ((venueDetailState != null) && (venueDetailState.length() == 0)) {
-			venueDetailCacheModel.venueDetailState = null;
+		String stateName = venueDetailCacheModel.stateName;
+
+		if ((stateName != null) && (stateName.length() == 0)) {
+			venueDetailCacheModel.stateName = null;
 		}
 
-		venueDetailCacheModel.venueDetailCountry = getVenueDetailCountry();
+		venueDetailCacheModel.countryId = getCountryId();
 
-		String venueDetailCountry = venueDetailCacheModel.venueDetailCountry;
+		venueDetailCacheModel.countryName = getCountryName();
 
-		if ((venueDetailCountry != null) && (venueDetailCountry.length() == 0)) {
-			venueDetailCacheModel.venueDetailCountry = null;
+		String countryName = venueDetailCacheModel.countryName;
+
+		if ((countryName != null) && (countryName.length() == 0)) {
+			venueDetailCacheModel.countryName = null;
 		}
 
-		venueDetailCacheModel.venueDetailLatitude = getVenueDetailLatitude();
+		venueDetailCacheModel.latitude = getLatitude();
 
-		String venueDetailLatitude = venueDetailCacheModel.venueDetailLatitude;
+		String latitude = venueDetailCacheModel.latitude;
 
-		if ((venueDetailLatitude != null) &&
-				(venueDetailLatitude.length() == 0)) {
-			venueDetailCacheModel.venueDetailLatitude = null;
+		if ((latitude != null) && (latitude.length() == 0)) {
+			venueDetailCacheModel.latitude = null;
 		}
 
-		venueDetailCacheModel.venueDetailLongitude = getVenueDetailLongitude();
+		venueDetailCacheModel.longitude = getLongitude();
 
-		String venueDetailLongitude = venueDetailCacheModel.venueDetailLongitude;
+		String longitude = venueDetailCacheModel.longitude;
 
-		if ((venueDetailLongitude != null) &&
-				(venueDetailLongitude.length() == 0)) {
-			venueDetailCacheModel.venueDetailLongitude = null;
+		if ((longitude != null) && (longitude.length() == 0)) {
+			venueDetailCacheModel.longitude = null;
 		}
 
-		venueDetailCacheModel.venueDetailPhone = getVenueDetailPhone();
+		venueDetailCacheModel.phone = getPhone();
 
-		String venueDetailPhone = venueDetailCacheModel.venueDetailPhone;
+		String phone = venueDetailCacheModel.phone;
 
-		if ((venueDetailPhone != null) && (venueDetailPhone.length() == 0)) {
-			venueDetailCacheModel.venueDetailPhone = null;
+		if ((phone != null) && (phone.length() == 0)) {
+			venueDetailCacheModel.phone = null;
 		}
 
-		venueDetailCacheModel.venueDetailWebsite = getVenueDetailWebsite();
+		venueDetailCacheModel.website = getWebsite();
 
-		String venueDetailWebsite = venueDetailCacheModel.venueDetailWebsite;
+		String website = venueDetailCacheModel.website;
 
-		if ((venueDetailWebsite != null) && (venueDetailWebsite.length() == 0)) {
-			venueDetailCacheModel.venueDetailWebsite = null;
+		if ((website != null) && (website.length() == 0)) {
+			venueDetailCacheModel.website = null;
 		}
 
-		venueDetailCacheModel.venueDetailCost = getVenueDetailCost();
+		venueDetailCacheModel.cost = getCost();
 
-		venueDetailCacheModel.venueDetailhoursOfOperation = getVenueDetailhoursOfOperation();
+		venueDetailCacheModel.hoursOfOperation = getHoursOfOperation();
 
-		String venueDetailhoursOfOperation = venueDetailCacheModel.venueDetailhoursOfOperation;
+		String hoursOfOperation = venueDetailCacheModel.hoursOfOperation;
 
-		if ((venueDetailhoursOfOperation != null) &&
-				(venueDetailhoursOfOperation.length() == 0)) {
-			venueDetailCacheModel.venueDetailhoursOfOperation = null;
+		if ((hoursOfOperation != null) && (hoursOfOperation.length() == 0)) {
+			venueDetailCacheModel.hoursOfOperation = null;
 		}
 
 		return venueDetailCacheModel;
@@ -972,7 +1000,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{venueDetailId=");
 		sb.append(getVenueDetailId());
@@ -990,34 +1018,38 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		sb.append(getInfoTypeId());
 		sb.append(", infoTypeCategoryId=");
 		sb.append(getInfoTypeCategoryId());
-		sb.append(", venueDetailInfoName=");
-		sb.append(getVenueDetailInfoName());
-		sb.append(", venueDetailInfoDesc=");
-		sb.append(getVenueDetailInfoDesc());
-		sb.append(", venueDetailInfoComment=");
-		sb.append(getVenueDetailInfoComment());
-		sb.append(", venueDetailAddressLine1=");
-		sb.append(getVenueDetailAddressLine1());
-		sb.append(", venueDetailAddressLine2=");
-		sb.append(getVenueDetailAddressLine2());
-		sb.append(", venueDetailCity=");
-		sb.append(getVenueDetailCity());
-		sb.append(", venueDetailState=");
-		sb.append(getVenueDetailState());
-		sb.append(", venueDetailCountry=");
-		sb.append(getVenueDetailCountry());
-		sb.append(", venueDetailLatitude=");
-		sb.append(getVenueDetailLatitude());
-		sb.append(", venueDetailLongitude=");
-		sb.append(getVenueDetailLongitude());
-		sb.append(", venueDetailPhone=");
-		sb.append(getVenueDetailPhone());
-		sb.append(", venueDetailWebsite=");
-		sb.append(getVenueDetailWebsite());
-		sb.append(", venueDetailCost=");
-		sb.append(getVenueDetailCost());
-		sb.append(", venueDetailhoursOfOperation=");
-		sb.append(getVenueDetailhoursOfOperation());
+		sb.append(", infoTitle=");
+		sb.append(getInfoTitle());
+		sb.append(", infoDesc=");
+		sb.append(getInfoDesc());
+		sb.append(", addrLine1=");
+		sb.append(getAddrLine1());
+		sb.append(", addrLine2=");
+		sb.append(getAddrLine2());
+		sb.append(", city=");
+		sb.append(getCity());
+		sb.append(", zipCode=");
+		sb.append(getZipCode());
+		sb.append(", stateId=");
+		sb.append(getStateId());
+		sb.append(", stateName=");
+		sb.append(getStateName());
+		sb.append(", countryId=");
+		sb.append(getCountryId());
+		sb.append(", countryName=");
+		sb.append(getCountryName());
+		sb.append(", latitude=");
+		sb.append(getLatitude());
+		sb.append(", longitude=");
+		sb.append(getLongitude());
+		sb.append(", phone=");
+		sb.append(getPhone());
+		sb.append(", website=");
+		sb.append(getWebsite());
+		sb.append(", cost=");
+		sb.append(getCost());
+		sb.append(", hoursOfOperation=");
+		sb.append(getHoursOfOperation());
 		sb.append("}");
 
 		return sb.toString();
@@ -1025,7 +1057,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.VenueDetail");
@@ -1064,60 +1096,68 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		sb.append(getInfoTypeCategoryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailInfoName</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailInfoName());
+			"<column><column-name>infoTitle</column-name><column-value><![CDATA[");
+		sb.append(getInfoTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailInfoDesc</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailInfoDesc());
+			"<column><column-name>infoDesc</column-name><column-value><![CDATA[");
+		sb.append(getInfoDesc());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailInfoComment</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailInfoComment());
+			"<column><column-name>addrLine1</column-name><column-value><![CDATA[");
+		sb.append(getAddrLine1());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailAddressLine1</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailAddressLine1());
+			"<column><column-name>addrLine2</column-name><column-value><![CDATA[");
+		sb.append(getAddrLine2());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailAddressLine2</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailAddressLine2());
+			"<column><column-name>city</column-name><column-value><![CDATA[");
+		sb.append(getCity());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailCity</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailCity());
+			"<column><column-name>zipCode</column-name><column-value><![CDATA[");
+		sb.append(getZipCode());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailState</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailState());
+			"<column><column-name>stateId</column-name><column-value><![CDATA[");
+		sb.append(getStateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailCountry</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailCountry());
+			"<column><column-name>stateName</column-name><column-value><![CDATA[");
+		sb.append(getStateName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailLatitude</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailLatitude());
+			"<column><column-name>countryId</column-name><column-value><![CDATA[");
+		sb.append(getCountryId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailLongitude</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailLongitude());
+			"<column><column-name>countryName</column-name><column-value><![CDATA[");
+		sb.append(getCountryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailPhone</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailPhone());
+			"<column><column-name>latitude</column-name><column-value><![CDATA[");
+		sb.append(getLatitude());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailWebsite</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailWebsite());
+			"<column><column-name>longitude</column-name><column-value><![CDATA[");
+		sb.append(getLongitude());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailCost</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailCost());
+			"<column><column-name>phone</column-name><column-value><![CDATA[");
+		sb.append(getPhone());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailhoursOfOperation</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailhoursOfOperation());
+			"<column><column-name>website</column-name><column-value><![CDATA[");
+		sb.append(getWebsite());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>cost</column-name><column-value><![CDATA[");
+		sb.append(getCost());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>hoursOfOperation</column-name><column-value><![CDATA[");
+		sb.append(getHoursOfOperation());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -1140,20 +1180,22 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 	private boolean _setOriginalVenueId;
 	private long _infoTypeId;
 	private long _infoTypeCategoryId;
-	private String _venueDetailInfoName;
-	private String _venueDetailInfoDesc;
-	private String _venueDetailInfoComment;
-	private String _venueDetailAddressLine1;
-	private String _venueDetailAddressLine2;
-	private String _venueDetailCity;
-	private String _venueDetailState;
-	private String _venueDetailCountry;
-	private String _venueDetailLatitude;
-	private String _venueDetailLongitude;
-	private String _venueDetailPhone;
-	private String _venueDetailWebsite;
-	private double _venueDetailCost;
-	private String _venueDetailhoursOfOperation;
+	private String _infoTitle;
+	private String _infoDesc;
+	private String _addrLine1;
+	private String _addrLine2;
+	private String _city;
+	private String _zipCode;
+	private long _stateId;
+	private String _stateName;
+	private long _countryId;
+	private String _countryName;
+	private String _latitude;
+	private String _longitude;
+	private String _phone;
+	private String _website;
+	private double _cost;
+	private String _hoursOfOperation;
 	private long _columnBitmask;
 	private VenueDetail _escapedModel;
 }

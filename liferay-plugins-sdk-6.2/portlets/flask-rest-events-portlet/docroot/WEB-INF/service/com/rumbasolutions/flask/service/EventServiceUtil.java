@@ -72,11 +72,11 @@ public class EventServiceUtil {
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.lang.String startTime,
 		java.lang.String endTime, long eventTypeId, long venueId,
-		java.sql.Blob eventImage,
+		java.lang.String eventImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addEvent(eventName, description, eventDate, startTime,
-			endTime, eventTypeId, venueId, eventImage, serviceContext);
+			endTime, eventTypeId, venueId, eventImagePath, serviceContext);
 	}
 
 	public static void clearService() {

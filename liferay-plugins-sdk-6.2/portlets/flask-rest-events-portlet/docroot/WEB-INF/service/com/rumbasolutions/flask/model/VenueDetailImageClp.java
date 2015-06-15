@@ -29,8 +29,6 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
-import java.sql.Blob;
-
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -83,9 +81,9 @@ public class VenueDetailImageClp extends BaseModelImpl<VenueDetailImage>
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("venueDetailId", getVenueDetailId());
-		attributes.put("venueDetailImageTitle", getVenueDetailImageTitle());
-		attributes.put("venueDetailImageDesc", getVenueDetailImageDesc());
-		attributes.put("venueDetailImageData", getVenueDetailImageData());
+		attributes.put("imageTitle", getImageTitle());
+		attributes.put("imageDesc", getImageDesc());
+		attributes.put("imagePath", getImagePath());
 
 		return attributes;
 	}
@@ -128,24 +126,22 @@ public class VenueDetailImageClp extends BaseModelImpl<VenueDetailImage>
 			setVenueDetailId(venueDetailId);
 		}
 
-		String venueDetailImageTitle = (String)attributes.get(
-				"venueDetailImageTitle");
+		String imageTitle = (String)attributes.get("imageTitle");
 
-		if (venueDetailImageTitle != null) {
-			setVenueDetailImageTitle(venueDetailImageTitle);
+		if (imageTitle != null) {
+			setImageTitle(imageTitle);
 		}
 
-		String venueDetailImageDesc = (String)attributes.get(
-				"venueDetailImageDesc");
+		String imageDesc = (String)attributes.get("imageDesc");
 
-		if (venueDetailImageDesc != null) {
-			setVenueDetailImageDesc(venueDetailImageDesc);
+		if (imageDesc != null) {
+			setImageDesc(imageDesc);
 		}
 
-		Blob venueDetailImageData = (Blob)attributes.get("venueDetailImageData");
+		String imagePath = (String)attributes.get("imagePath");
 
-		if (venueDetailImageData != null) {
-			setVenueDetailImageData(venueDetailImageData);
+		if (imagePath != null) {
+			setImagePath(imagePath);
 		}
 	}
 
@@ -299,23 +295,21 @@ public class VenueDetailImageClp extends BaseModelImpl<VenueDetailImage>
 	}
 
 	@Override
-	public String getVenueDetailImageTitle() {
-		return _venueDetailImageTitle;
+	public String getImageTitle() {
+		return _imageTitle;
 	}
 
 	@Override
-	public void setVenueDetailImageTitle(String venueDetailImageTitle) {
-		_venueDetailImageTitle = venueDetailImageTitle;
+	public void setImageTitle(String imageTitle) {
+		_imageTitle = imageTitle;
 
 		if (_venueDetailImageRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailImageRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailImageTitle",
-						String.class);
+				Method method = clazz.getMethod("setImageTitle", String.class);
 
-				method.invoke(_venueDetailImageRemoteModel,
-					venueDetailImageTitle);
+				method.invoke(_venueDetailImageRemoteModel, imageTitle);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -324,22 +318,21 @@ public class VenueDetailImageClp extends BaseModelImpl<VenueDetailImage>
 	}
 
 	@Override
-	public String getVenueDetailImageDesc() {
-		return _venueDetailImageDesc;
+	public String getImageDesc() {
+		return _imageDesc;
 	}
 
 	@Override
-	public void setVenueDetailImageDesc(String venueDetailImageDesc) {
-		_venueDetailImageDesc = venueDetailImageDesc;
+	public void setImageDesc(String imageDesc) {
+		_imageDesc = imageDesc;
 
 		if (_venueDetailImageRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailImageRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailImageDesc",
-						String.class);
+				Method method = clazz.getMethod("setImageDesc", String.class);
 
-				method.invoke(_venueDetailImageRemoteModel, venueDetailImageDesc);
+				method.invoke(_venueDetailImageRemoteModel, imageDesc);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -348,22 +341,21 @@ public class VenueDetailImageClp extends BaseModelImpl<VenueDetailImage>
 	}
 
 	@Override
-	public Blob getVenueDetailImageData() {
-		return _venueDetailImageData;
+	public String getImagePath() {
+		return _imagePath;
 	}
 
 	@Override
-	public void setVenueDetailImageData(Blob venueDetailImageData) {
-		_venueDetailImageData = venueDetailImageData;
+	public void setImagePath(String imagePath) {
+		_imagePath = imagePath;
 
 		if (_venueDetailImageRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueDetailImageRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueDetailImageData",
-						Blob.class);
+				Method method = clazz.getMethod("setImagePath", String.class);
 
-				method.invoke(_venueDetailImageRemoteModel, venueDetailImageData);
+				method.invoke(_venueDetailImageRemoteModel, imagePath);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -448,9 +440,9 @@ public class VenueDetailImageClp extends BaseModelImpl<VenueDetailImage>
 		clone.setCreatedDate(getCreatedDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setVenueDetailId(getVenueDetailId());
-		clone.setVenueDetailImageTitle(getVenueDetailImageTitle());
-		clone.setVenueDetailImageDesc(getVenueDetailImageDesc());
-		clone.setVenueDetailImageData(getVenueDetailImageData());
+		clone.setImageTitle(getImageTitle());
+		clone.setImageDesc(getImageDesc());
+		clone.setImagePath(getImagePath());
 
 		return clone;
 	}
@@ -517,12 +509,12 @@ public class VenueDetailImageClp extends BaseModelImpl<VenueDetailImage>
 		sb.append(getModifiedDate());
 		sb.append(", venueDetailId=");
 		sb.append(getVenueDetailId());
-		sb.append(", venueDetailImageTitle=");
-		sb.append(getVenueDetailImageTitle());
-		sb.append(", venueDetailImageDesc=");
-		sb.append(getVenueDetailImageDesc());
-		sb.append(", venueDetailImageData=");
-		sb.append(getVenueDetailImageData());
+		sb.append(", imageTitle=");
+		sb.append(getImageTitle());
+		sb.append(", imageDesc=");
+		sb.append(getImageDesc());
+		sb.append(", imagePath=");
+		sb.append(getImagePath());
 		sb.append("}");
 
 		return sb.toString();
@@ -561,16 +553,16 @@ public class VenueDetailImageClp extends BaseModelImpl<VenueDetailImage>
 		sb.append(getVenueDetailId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailImageTitle</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailImageTitle());
+			"<column><column-name>imageTitle</column-name><column-value><![CDATA[");
+		sb.append(getImageTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailImageDesc</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailImageDesc());
+			"<column><column-name>imageDesc</column-name><column-value><![CDATA[");
+		sb.append(getImageDesc());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueDetailImageData</column-name><column-value><![CDATA[");
-		sb.append(getVenueDetailImageData());
+			"<column><column-name>imagePath</column-name><column-value><![CDATA[");
+		sb.append(getImagePath());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -585,9 +577,9 @@ public class VenueDetailImageClp extends BaseModelImpl<VenueDetailImage>
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private long _venueDetailId;
-	private String _venueDetailImageTitle;
-	private String _venueDetailImageDesc;
-	private Blob _venueDetailImageData;
+	private String _imageTitle;
+	private String _imageDesc;
+	private String _imagePath;
 	private BaseModel<?> _venueDetailImageRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

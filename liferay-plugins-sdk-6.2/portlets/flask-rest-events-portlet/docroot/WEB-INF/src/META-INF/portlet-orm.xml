@@ -30,7 +30,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="eventTypeId" />
-			<basic name="eventImage" />
+			<basic name="eventImagePath" />
 			<basic name="venueId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
@@ -52,20 +52,19 @@
 			<basic name="eventId" />
 			<basic name="infoTypeId" />
 			<basic name="infoTypeCategoryId" />
-			<basic name="eventDetailInfoName" />
-			<basic name="eventDetailInfoDesc" />
-			<basic name="eventDetailInfoComment" />
-			<basic name="eventDetailAddressLine1" />
-			<basic name="eventDetailAddressLine2" />
-			<basic name="eventDetailInfocity" />
-			<basic name="eventDetailZip" />
-			<basic name="eventDetailState" />
-			<basic name="eventDetailCountry" />
-			<basic name="eventDetailLatitude" />
-			<basic name="eventDetailLongitude" />
-			<basic name="eventDetailPhone" />
-			<basic name="eventDetailWebsite" />
-			<basic name="eventDetailCost" />
+			<basic name="infoName" />
+			<basic name="infoDesc" />
+			<basic name="addrLine1" />
+			<basic name="addrLine2" />
+			<basic name="city" />
+			<basic name="zipCode" />
+			<basic name="stateId" />
+			<basic name="countryId" />
+			<basic name="latitude" />
+			<basic name="longitude" />
+			<basic name="phone" />
+			<basic name="website" />
+			<basic name="cost" />
 			<basic name="hoursOfOperation" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
@@ -85,9 +84,9 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="eventDetailId" />
-			<basic name="eventDetailImagetitle" />
-			<basic name="eventDetailImageDesc" />
-			<basic name="eventDetailImageData" />
+			<basic name="imagetitle" />
+			<basic name="imageDesc" />
+			<basic name="imagePath" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -163,20 +162,22 @@
 			<basic name="venueId" />
 			<basic name="infoTypeId" />
 			<basic name="infoTypeCategoryId" />
-			<basic name="venueDetailInfoName" />
-			<basic name="venueDetailInfoDesc" />
-			<basic name="venueDetailInfoComment" />
-			<basic name="venueDetailAddressLine1" />
-			<basic name="venueDetailAddressLine2" />
-			<basic name="venueDetailCity" />
-			<basic name="venueDetailState" />
-			<basic name="venueDetailCountry" />
-			<basic name="venueDetailLatitude" />
-			<basic name="venueDetailLongitude" />
-			<basic name="venueDetailPhone" />
-			<basic name="venueDetailWebsite" />
-			<basic name="venueDetailCost" />
-			<basic name="venueDetailhoursOfOperation" />
+			<basic name="infoTitle" />
+			<basic name="infoDesc" />
+			<basic name="addrLine1" />
+			<basic name="addrLine2" />
+			<basic name="city" />
+			<basic name="zipCode" />
+			<basic name="stateId" />
+			<basic name="stateName" />
+			<basic name="countryId" />
+			<basic name="countryName" />
+			<basic name="latitude" />
+			<basic name="longitude" />
+			<basic name="phone" />
+			<basic name="website" />
+			<basic name="cost" />
+			<basic name="hoursOfOperation" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -195,9 +196,9 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="venueDetailId" />
-			<basic name="venueDetailImageTitle" />
-			<basic name="venueDetailImageDesc" />
-			<basic name="venueDetailImageData" />
+			<basic name="imageTitle" />
+			<basic name="imageDesc" />
+			<basic name="imagePath" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -216,7 +217,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="title" />
-			<basic name="venueImage" />
+			<basic name="venueImagePath" />
 			<basic name="venueId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

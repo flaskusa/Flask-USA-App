@@ -16,8 +16,6 @@ package com.rumbasolutions.flask.model;
 
 import java.io.Serializable;
 
-import java.sql.Blob;
-
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -39,9 +37,9 @@ public class EventDetailImageSoap implements Serializable {
 		soapModel.setCreatedDate(model.getCreatedDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setEventDetailId(model.getEventDetailId());
-		soapModel.setEventDetailImagetitle(model.getEventDetailImagetitle());
-		soapModel.setEventDetailImageDesc(model.getEventDetailImageDesc());
-		soapModel.setEventDetailImageData(model.getEventDetailImageData());
+		soapModel.setImagetitle(model.getImagetitle());
+		soapModel.setImageDesc(model.getImageDesc());
+		soapModel.setImagePath(model.getImagePath());
 
 		return soapModel;
 	}
@@ -144,28 +142,28 @@ public class EventDetailImageSoap implements Serializable {
 		_eventDetailId = eventDetailId;
 	}
 
-	public String getEventDetailImagetitle() {
-		return _eventDetailImagetitle;
+	public String getImagetitle() {
+		return _imagetitle;
 	}
 
-	public void setEventDetailImagetitle(String eventDetailImagetitle) {
-		_eventDetailImagetitle = eventDetailImagetitle;
+	public void setImagetitle(String imagetitle) {
+		_imagetitle = imagetitle;
 	}
 
-	public String getEventDetailImageDesc() {
-		return _eventDetailImageDesc;
+	public String getImageDesc() {
+		return _imageDesc;
 	}
 
-	public void setEventDetailImageDesc(String eventDetailImageDesc) {
-		_eventDetailImageDesc = eventDetailImageDesc;
+	public void setImageDesc(String imageDesc) {
+		_imageDesc = imageDesc;
 	}
 
-	public Blob getEventDetailImageData() {
-		return _eventDetailImageData;
+	public String getImagePath() {
+		return _imagePath;
 	}
 
-	public void setEventDetailImageData(Blob eventDetailImageData) {
-		_eventDetailImageData = eventDetailImageData;
+	public void setImagePath(String imagePath) {
+		_imagePath = imagePath;
 	}
 
 	private long _eventDetailImageId;
@@ -174,7 +172,7 @@ public class EventDetailImageSoap implements Serializable {
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private long _eventDetailId;
-	private String _eventDetailImagetitle;
-	private String _eventDetailImageDesc;
-	private Blob _eventDetailImageData;
+	private String _imagetitle;
+	private String _imageDesc;
+	private String _imagePath;
 }

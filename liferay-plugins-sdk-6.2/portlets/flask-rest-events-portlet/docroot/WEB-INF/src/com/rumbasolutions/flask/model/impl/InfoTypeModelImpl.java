@@ -66,7 +66,7 @@ public class InfoTypeModelImpl extends BaseModelImpl<InfoType>
 			{ "infoTypeId", Types.BIGINT },
 			{ "infoTypeName", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_InfoType (infoTypeId LONG not null primary key,infoTypeName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_InfoType (infoTypeId LONG not null primary key,infoTypeName VARCHAR(100) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_InfoType";
 	public static final String ORDER_BY_JPQL = " ORDER BY infoType.infoTypeId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_InfoType.infoTypeId ASC";
