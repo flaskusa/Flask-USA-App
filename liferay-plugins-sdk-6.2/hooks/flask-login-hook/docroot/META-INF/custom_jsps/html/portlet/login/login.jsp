@@ -174,5 +174,6 @@
                    	<liferay-util:include page="/html/portlet/login/navigation.jsp" />
 				</div>
             </div>
+		</div>            
 	</c:otherwise>
 </c:choose>
