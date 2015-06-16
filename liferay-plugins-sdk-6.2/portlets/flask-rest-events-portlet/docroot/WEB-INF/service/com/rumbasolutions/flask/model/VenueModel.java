@@ -250,6 +250,21 @@ public interface VenueModel extends BaseModel<Venue> {
 	public void setVenueStateId(long venueStateId);
 
 	/**
+	 * Returns the venue state name of this venue.
+	 *
+	 * @return the venue state name of this venue
+	 */
+	@AutoEscape
+	public String getVenueStateName();
+
+	/**
+	 * Sets the venue state name of this venue.
+	 *
+	 * @param venueStateName the venue state name of this venue
+	 */
+	public void setVenueStateName(String venueStateName);
+
+	/**
 	 * Returns the venue country ID of this venue.
 	 *
 	 * @return the venue country ID of this venue
@@ -262,6 +277,21 @@ public interface VenueModel extends BaseModel<Venue> {
 	 * @param venueCountryId the venue country ID of this venue
 	 */
 	public void setVenueCountryId(long venueCountryId);
+
+	/**
+	 * Returns the venue country name of this venue.
+	 *
+	 * @return the venue country name of this venue
+	 */
+	@AutoEscape
+	public String getVenueCountryName();
+
+	/**
+	 * Sets the venue country name of this venue.
+	 *
+	 * @param venueCountryName the venue country name of this venue
+	 */
+	public void setVenueCountryName(String venueCountryName);
 
 	/**
 	 * Returns the venue metro area of this venue.

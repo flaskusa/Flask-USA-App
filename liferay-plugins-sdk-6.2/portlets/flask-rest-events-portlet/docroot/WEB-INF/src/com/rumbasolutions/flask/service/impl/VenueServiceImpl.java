@@ -18,12 +18,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.rumbasolutions.flask.NoSuchVenueImageException;
 import com.rumbasolutions.flask.model.Venue;
 import com.rumbasolutions.flask.model.VenueDetail;
 import com.rumbasolutions.flask.model.VenueDetailImage;
@@ -199,7 +197,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			try {
 				venueImage = VenueImageUtil.findByPrimaryKey(venueImageId);
 			}
-			catch (NoSuchVenueImageException | SystemException e) {
+			catch (Exception e) {
 				LOGGER.error("Error in getVenueImage:" + venueImageId );
 			}
 			return venueImage;
@@ -456,7 +454,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			deleteAllVenueImages(venueId, serviceContext);
 			VenueLocalServiceUtil.deleteVenue(venueId);
 		}
-		catch (PortalException | SystemException e) {
+		catch (Exception e) {
 			LOGGER.error(e);
 		}
 	}

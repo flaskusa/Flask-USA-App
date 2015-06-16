@@ -43,7 +43,9 @@ public class VenueSoap implements Serializable {
 		soapModel.setAddrLine2(model.getAddrLine2());
 		soapModel.setVenueCity(model.getVenueCity());
 		soapModel.setVenueStateId(model.getVenueStateId());
+		soapModel.setVenueStateName(model.getVenueStateName());
 		soapModel.setVenueCountryId(model.getVenueCountryId());
+		soapModel.setVenueCountryName(model.getVenueCountryName());
 		soapModel.setVenueMetroArea(model.getVenueMetroArea());
 
 		return soapModel;
@@ -193,12 +195,28 @@ public class VenueSoap implements Serializable {
 		_venueStateId = venueStateId;
 	}
 
+	public String getVenueStateName() {
+		return _venueStateName;
+	}
+
+	public void setVenueStateName(String venueStateName) {
+		_venueStateName = venueStateName;
+	}
+
 	public long getVenueCountryId() {
 		return _venueCountryId;
 	}
 
 	public void setVenueCountryId(long venueCountryId) {
 		_venueCountryId = venueCountryId;
+	}
+
+	public String getVenueCountryName() {
+		return _venueCountryName;
+	}
+
+	public void setVenueCountryName(String venueCountryName) {
+		_venueCountryName = venueCountryName;
 	}
 
 	public String getVenueMetroArea() {
@@ -221,6 +239,8 @@ public class VenueSoap implements Serializable {
 	private String _addrLine2;
 	private String _venueCity;
 	private long _venueStateId;
+	private String _venueStateName;
 	private long _venueCountryId;
+	private String _venueCountryName;
 	private String _venueMetroArea;
 }

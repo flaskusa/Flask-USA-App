@@ -837,6 +837,7 @@ public class VenueDetailPersistenceImpl extends BasePersistenceImpl<VenueDetail>
 		venueDetailImpl.setModifiedDate(venueDetail.getModifiedDate());
 		venueDetailImpl.setVenueId(venueDetail.getVenueId());
 		venueDetailImpl.setInfoTypeId(venueDetail.getInfoTypeId());
+		venueDetailImpl.setInfoTypeName(venueDetail.getInfoTypeName());
 		venueDetailImpl.setInfoTypeCategoryId(venueDetail.getInfoTypeCategoryId());
 		venueDetailImpl.setInfoTitle(venueDetail.getInfoTitle());
 		venueDetailImpl.setInfoDesc(venueDetail.getInfoDesc());

@@ -82,6 +82,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("venueId", getVenueId());
 		attributes.put("infoTypeId", getInfoTypeId());
+		attributes.put("infoTypeName", getInfoTypeName());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTitle", getInfoTitle());
 		attributes.put("infoDesc", getInfoDesc());
@@ -145,6 +146,12 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 		if (infoTypeId != null) {
 			setInfoTypeId(infoTypeId);
+		}
+
+		String infoTypeName = (String)attributes.get("infoTypeName");
+
+		if (infoTypeName != null) {
+			setInfoTypeName(infoTypeName);
 		}
 
 		Long infoTypeCategoryId = (Long)attributes.get("infoTypeCategoryId");
@@ -414,6 +421,29 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 				Method method = clazz.getMethod("setInfoTypeId", long.class);
 
 				method.invoke(_venueDetailRemoteModel, infoTypeId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getInfoTypeName() {
+		return _infoTypeName;
+	}
+
+	@Override
+	public void setInfoTypeName(String infoTypeName) {
+		_infoTypeName = infoTypeName;
+
+		if (_venueDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _venueDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setInfoTypeName", String.class);
+
+				method.invoke(_venueDetailRemoteModel, infoTypeName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -890,6 +920,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		clone.setModifiedDate(getModifiedDate());
 		clone.setVenueId(getVenueId());
 		clone.setInfoTypeId(getInfoTypeId());
+		clone.setInfoTypeName(getInfoTypeName());
 		clone.setInfoTypeCategoryId(getInfoTypeCategoryId());
 		clone.setInfoTitle(getInfoTitle());
 		clone.setInfoDesc(getInfoDesc());
@@ -959,7 +990,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{venueDetailId=");
 		sb.append(getVenueDetailId());
@@ -975,6 +1006,8 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		sb.append(getVenueId());
 		sb.append(", infoTypeId=");
 		sb.append(getInfoTypeId());
+		sb.append(", infoTypeName=");
+		sb.append(getInfoTypeName());
 		sb.append(", infoTypeCategoryId=");
 		sb.append(getInfoTypeCategoryId());
 		sb.append(", infoTitle=");
@@ -1016,7 +1049,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.VenueDetail");
@@ -1049,6 +1082,10 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		sb.append(
 			"<column><column-name>infoTypeId</column-name><column-value><![CDATA[");
 		sb.append(getInfoTypeId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>infoTypeName</column-name><column-value><![CDATA[");
+		sb.append(getInfoTypeName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>infoTypeCategoryId</column-name><column-value><![CDATA[");
@@ -1132,6 +1169,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	private Date _modifiedDate;
 	private long _venueId;
 	private long _infoTypeId;
+	private String _infoTypeName;
 	private long _infoTypeCategoryId;
 	private String _infoTitle;
 	private String _infoDesc;

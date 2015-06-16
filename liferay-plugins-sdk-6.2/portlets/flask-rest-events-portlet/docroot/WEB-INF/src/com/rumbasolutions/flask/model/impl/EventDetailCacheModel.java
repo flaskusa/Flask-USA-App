@@ -38,7 +38,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{eventDetailId=");
 		sb.append(eventDetailId);
@@ -54,8 +54,12 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		sb.append(eventId);
 		sb.append(", infoTypeId=");
 		sb.append(infoTypeId);
+		sb.append(", infoTypeName=");
+		sb.append(infoTypeName);
 		sb.append(", infoTypeCategoryId=");
 		sb.append(infoTypeCategoryId);
+		sb.append(", infoTypeCategoryName=");
+		sb.append(infoTypeCategoryName);
 		sb.append(", infoName=");
 		sb.append(infoName);
 		sb.append(", infoDesc=");
@@ -113,7 +117,16 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 
 		eventDetailImpl.setEventId(eventId);
 		eventDetailImpl.setInfoTypeId(infoTypeId);
+
+		if (infoTypeName == null) {
+			eventDetailImpl.setInfoTypeName(StringPool.BLANK);
+		}
+		else {
+			eventDetailImpl.setInfoTypeName(infoTypeName);
+		}
+
 		eventDetailImpl.setInfoTypeCategoryId(infoTypeCategoryId);
+		eventDetailImpl.setInfoTypeCategoryName(infoTypeCategoryName);
 
 		if (infoName == null) {
 			eventDetailImpl.setInfoName(StringPool.BLANK);
@@ -211,7 +224,9 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		modifiedDate = objectInput.readLong();
 		eventId = objectInput.readLong();
 		infoTypeId = objectInput.readLong();
+		infoTypeName = objectInput.readUTF();
 		infoTypeCategoryId = objectInput.readLong();
+		infoTypeCategoryName = objectInput.readLong();
 		infoName = objectInput.readUTF();
 		infoDesc = objectInput.readUTF();
 		addrLine1 = objectInput.readUTF();
@@ -238,7 +253,16 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeLong(eventId);
 		objectOutput.writeLong(infoTypeId);
+
+		if (infoTypeName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(infoTypeName);
+		}
+
 		objectOutput.writeLong(infoTypeCategoryId);
+		objectOutput.writeLong(infoTypeCategoryName);
 
 		if (infoName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -330,7 +354,9 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	public long modifiedDate;
 	public long eventId;
 	public long infoTypeId;
+	public String infoTypeName;
 	public long infoTypeCategoryId;
+	public long infoTypeCategoryName;
 	public String infoName;
 	public String infoDesc;
 	public String addrLine1;

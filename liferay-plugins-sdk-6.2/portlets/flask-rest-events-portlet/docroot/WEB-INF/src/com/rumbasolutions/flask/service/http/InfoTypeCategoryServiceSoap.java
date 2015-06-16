@@ -14,6 +14,13 @@
 
 package com.rumbasolutions.flask.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.rumbasolutions.flask.service.InfoTypeCategoryServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.rumbasolutions.flask.service.InfoTypeCategoryServiceUtil} service utility. The
@@ -55,4 +62,38 @@ package com.rumbasolutions.flask.service.http;
  * @generated
  */
 public class InfoTypeCategoryServiceSoap {
+	public static com.rumbasolutions.flask.model.InfoTypeCategorySoap[] getInfoTypeCategories(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.InfoTypeCategory> returnValue =
+				InfoTypeCategoryServiceUtil.getInfoTypeCategories(serviceContext);
+
+			return com.rumbasolutions.flask.model.InfoTypeCategorySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.InfoTypeCategorySoap getInfoTypeCategory(
+		long InfoTypeCategoryId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.InfoTypeCategory returnValue = InfoTypeCategoryServiceUtil.getInfoTypeCategory(InfoTypeCategoryId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.InfoTypeCategorySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(InfoTypeCategoryServiceSoap.class);
 }

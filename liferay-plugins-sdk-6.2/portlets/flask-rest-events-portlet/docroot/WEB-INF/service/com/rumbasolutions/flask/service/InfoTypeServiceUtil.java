@@ -63,6 +63,17 @@ public class InfoTypeServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.rumbasolutions.flask.model.InfoType> getInfoTypes(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getInfoTypes(serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.InfoType getInfoType(
+		long infoTypeId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getInfoType(infoTypeId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

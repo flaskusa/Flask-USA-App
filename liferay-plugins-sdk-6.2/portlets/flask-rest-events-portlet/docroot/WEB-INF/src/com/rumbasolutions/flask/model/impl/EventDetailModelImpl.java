@@ -73,7 +73,9 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "eventId", Types.BIGINT },
 			{ "infoTypeId", Types.BIGINT },
+			{ "infoTypeName", Types.VARCHAR },
 			{ "infoTypeCategoryId", Types.BIGINT },
+			{ "infoTypeCategoryName", Types.BIGINT },
 			{ "infoName", Types.VARCHAR },
 			{ "infoDesc", Types.VARCHAR },
 			{ "addrLine1", Types.VARCHAR },
@@ -89,7 +91,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			{ "cost", Types.DOUBLE },
 			{ "hoursOfOperation", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeCategoryId LONG,infoName VARCHAR(100) null,infoDesc VARCHAR(255) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,countryId LONG,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName LONG,infoName VARCHAR(100) null,infoDesc VARCHAR(255) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,countryId LONG,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_EventDetail";
 	public static final String ORDER_BY_JPQL = " ORDER BY eventDetail.eventDetailId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_EventDetail.eventDetailId ASC";
@@ -130,7 +132,9 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setEventId(soapModel.getEventId());
 		model.setInfoTypeId(soapModel.getInfoTypeId());
+		model.setInfoTypeName(soapModel.getInfoTypeName());
 		model.setInfoTypeCategoryId(soapModel.getInfoTypeCategoryId());
+		model.setInfoTypeCategoryName(soapModel.getInfoTypeCategoryName());
 		model.setInfoName(soapModel.getInfoName());
 		model.setInfoDesc(soapModel.getInfoDesc());
 		model.setAddrLine1(soapModel.getAddrLine1());
@@ -216,7 +220,9 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("eventId", getEventId());
 		attributes.put("infoTypeId", getInfoTypeId());
+		attributes.put("infoTypeName", getInfoTypeName());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
+		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
 		attributes.put("infoName", getInfoName());
 		attributes.put("infoDesc", getInfoDesc());
 		attributes.put("addrLine1", getAddrLine1());
@@ -279,10 +285,22 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			setInfoTypeId(infoTypeId);
 		}
 
+		String infoTypeName = (String)attributes.get("infoTypeName");
+
+		if (infoTypeName != null) {
+			setInfoTypeName(infoTypeName);
+		}
+
 		Long infoTypeCategoryId = (Long)attributes.get("infoTypeCategoryId");
 
 		if (infoTypeCategoryId != null) {
 			setInfoTypeCategoryId(infoTypeCategoryId);
+		}
+
+		Long infoTypeCategoryName = (Long)attributes.get("infoTypeCategoryName");
+
+		if (infoTypeCategoryName != null) {
+			setInfoTypeCategoryName(infoTypeCategoryName);
 		}
 
 		String infoName = (String)attributes.get("infoName");
@@ -483,6 +501,22 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@JSON
 	@Override
+	public String getInfoTypeName() {
+		if (_infoTypeName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _infoTypeName;
+		}
+	}
+
+	@Override
+	public void setInfoTypeName(String infoTypeName) {
+		_infoTypeName = infoTypeName;
+	}
+
+	@JSON
+	@Override
 	public long getInfoTypeCategoryId() {
 		return _infoTypeCategoryId;
 	}
@@ -502,6 +536,17 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	public long getOriginalInfoTypeCategoryId() {
 		return _originalInfoTypeCategoryId;
+	}
+
+	@JSON
+	@Override
+	public long getInfoTypeCategoryName() {
+		return _infoTypeCategoryName;
+	}
+
+	@Override
+	public void setInfoTypeCategoryName(long infoTypeCategoryName) {
+		_infoTypeCategoryName = infoTypeCategoryName;
 	}
 
 	@JSON
@@ -751,7 +796,9 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		eventDetailImpl.setModifiedDate(getModifiedDate());
 		eventDetailImpl.setEventId(getEventId());
 		eventDetailImpl.setInfoTypeId(getInfoTypeId());
+		eventDetailImpl.setInfoTypeName(getInfoTypeName());
 		eventDetailImpl.setInfoTypeCategoryId(getInfoTypeCategoryId());
+		eventDetailImpl.setInfoTypeCategoryName(getInfoTypeCategoryName());
 		eventDetailImpl.setInfoName(getInfoName());
 		eventDetailImpl.setInfoDesc(getInfoDesc());
 		eventDetailImpl.setAddrLine1(getAddrLine1());
@@ -865,7 +912,17 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 		eventDetailCacheModel.infoTypeId = getInfoTypeId();
 
+		eventDetailCacheModel.infoTypeName = getInfoTypeName();
+
+		String infoTypeName = eventDetailCacheModel.infoTypeName;
+
+		if ((infoTypeName != null) && (infoTypeName.length() == 0)) {
+			eventDetailCacheModel.infoTypeName = null;
+		}
+
 		eventDetailCacheModel.infoTypeCategoryId = getInfoTypeCategoryId();
+
+		eventDetailCacheModel.infoTypeCategoryName = getInfoTypeCategoryName();
 
 		eventDetailCacheModel.infoName = getInfoName();
 
@@ -966,7 +1023,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{eventDetailId=");
 		sb.append(getEventDetailId());
@@ -982,8 +1039,12 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getEventId());
 		sb.append(", infoTypeId=");
 		sb.append(getInfoTypeId());
+		sb.append(", infoTypeName=");
+		sb.append(getInfoTypeName());
 		sb.append(", infoTypeCategoryId=");
 		sb.append(getInfoTypeCategoryId());
+		sb.append(", infoTypeCategoryName=");
+		sb.append(getInfoTypeCategoryName());
 		sb.append(", infoName=");
 		sb.append(getInfoName());
 		sb.append(", infoDesc=");
@@ -1019,7 +1080,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.EventDetail");
@@ -1054,8 +1115,16 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>infoTypeName</column-name><column-value><![CDATA[");
+		sb.append(getInfoTypeName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>infoTypeCategoryId</column-name><column-value><![CDATA[");
 		sb.append(getInfoTypeCategoryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>infoTypeCategoryName</column-name><column-value><![CDATA[");
+		sb.append(getInfoTypeCategoryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>infoName</column-name><column-value><![CDATA[");
@@ -1135,9 +1204,11 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 	private long _infoTypeId;
 	private long _originalInfoTypeId;
 	private boolean _setOriginalInfoTypeId;
+	private String _infoTypeName;
 	private long _infoTypeCategoryId;
 	private long _originalInfoTypeCategoryId;
 	private boolean _setOriginalInfoTypeCategoryId;
+	private long _infoTypeCategoryName;
 	private String _infoName;
 	private String _infoDesc;
 	private String _addrLine1;

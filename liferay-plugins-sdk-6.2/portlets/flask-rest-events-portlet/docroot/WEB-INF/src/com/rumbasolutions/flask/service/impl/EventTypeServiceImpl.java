@@ -14,7 +14,16 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.rumbasolutions.flask.model.EventType;
 import com.rumbasolutions.flask.service.base.EventTypeServiceBaseImpl;
+import com.rumbasolutions.flask.service.persistence.EventTypeUtil;
 
 /**
  * The implementation of the event type remote service.
@@ -36,4 +45,31 @@ public class EventTypeServiceImpl extends EventTypeServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.rumbasolutions.flask.service.EventTypeServiceUtil} to access the event type remote service.
 	 */
+	
+	private static Log LOGGER = LogFactoryUtil.getLog(EventTypeServiceImpl.class);
+	
+	@Override
+	public List<EventType> getEventTypes(ServiceContext  serviceContext){
+		List<EventType> eventTypes= new ArrayList<EventType>();
+		try {
+			eventTypes  = EventTypeUtil.findAll();
+		}
+		catch (SystemException e) {
+			LOGGER.error("Exception in getEventTypes. " + e.getMessage());
+		}
+		return eventTypes;
+	}
+	
+	@Override
+	public EventType getEventType(long eventTypeId, ServiceContext  serviceContext){
+		EventType eventType= null;
+		try {
+			eventType  = EventTypeUtil.fetchByPrimaryKey(eventTypeId);
+		}
+		catch (SystemException e) {
+			LOGGER.error("Exception in getEventType. " + e.getMessage());
+		}
+		return eventType;
+	}
+	
 }

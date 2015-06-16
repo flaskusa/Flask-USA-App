@@ -57,6 +57,7 @@ public class VenueDetailWrapper implements VenueDetail,
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("venueId", getVenueId());
 		attributes.put("infoTypeId", getInfoTypeId());
+		attributes.put("infoTypeName", getInfoTypeName());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTitle", getInfoTitle());
 		attributes.put("infoDesc", getInfoDesc());
@@ -120,6 +121,12 @@ public class VenueDetailWrapper implements VenueDetail,
 
 		if (infoTypeId != null) {
 			setInfoTypeId(infoTypeId);
+		}
+
+		String infoTypeName = (String)attributes.get("infoTypeName");
+
+		if (infoTypeName != null) {
+			setInfoTypeName(infoTypeName);
 		}
 
 		Long infoTypeCategoryId = (Long)attributes.get("infoTypeCategoryId");
@@ -405,6 +412,26 @@ public class VenueDetailWrapper implements VenueDetail,
 	@Override
 	public void setInfoTypeId(long infoTypeId) {
 		_venueDetail.setInfoTypeId(infoTypeId);
+	}
+
+	/**
+	* Returns the info type name of this venue detail.
+	*
+	* @return the info type name of this venue detail
+	*/
+	@Override
+	public java.lang.String getInfoTypeName() {
+		return _venueDetail.getInfoTypeName();
+	}
+
+	/**
+	* Sets the info type name of this venue detail.
+	*
+	* @param infoTypeName the info type name of this venue detail
+	*/
+	@Override
+	public void setInfoTypeName(java.lang.String infoTypeName) {
+		_venueDetail.setInfoTypeName(infoTypeName);
 	}
 
 	/**

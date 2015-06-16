@@ -1456,7 +1456,9 @@ public class VenuePersistenceImpl extends BasePersistenceImpl<Venue>
 		venueImpl.setAddrLine2(venue.getAddrLine2());
 		venueImpl.setVenueCity(venue.getVenueCity());
 		venueImpl.setVenueStateId(venue.getVenueStateId());
+		venueImpl.setVenueStateName(venue.getVenueStateName());
 		venueImpl.setVenueCountryId(venue.getVenueCountryId());
+		venueImpl.setVenueCountryName(venue.getVenueCountryName());
 		venueImpl.setVenueMetroArea(venue.getVenueMetroArea());
 
 		return venueImpl;

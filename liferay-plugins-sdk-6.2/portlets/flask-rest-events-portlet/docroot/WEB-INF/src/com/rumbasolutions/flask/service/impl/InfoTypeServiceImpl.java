@@ -14,7 +14,16 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.rumbasolutions.flask.model.InfoType;
 import com.rumbasolutions.flask.service.base.InfoTypeServiceBaseImpl;
+import com.rumbasolutions.flask.service.persistence.InfoTypeUtil;
 
 /**
  * The implementation of the info type remote service.
@@ -36,4 +45,31 @@ public class InfoTypeServiceImpl extends InfoTypeServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.rumbasolutions.flask.service.InfoTypeServiceUtil} to access the info type remote service.
 	 */
+	
+	private static Log LOGGER = LogFactoryUtil.getLog(InfoTypeServiceImpl.class);
+	
+	@Override
+	public List<InfoType> getInfoTypes(ServiceContext  serviceContext){
+		List<InfoType> infoTypes= new ArrayList<InfoType>();
+		try {
+			infoTypes  = InfoTypeUtil.findAll();
+		}
+		catch (SystemException e) {
+			LOGGER.error("Exception in getInfoTypes. " + e.getMessage());
+		}
+		return infoTypes;
+	}
+	
+	@Override
+	public InfoType getInfoType(long infoTypeId, ServiceContext  serviceContext){
+		InfoType infoType= null;
+		try {
+			infoType  = InfoTypeUtil.fetchByPrimaryKey(infoTypeId);
+		}
+		catch (SystemException e) {
+			LOGGER.error("Exception in getInfoType. " + e.getMessage());
+		}
+		return infoType;
+	}
+	
 }

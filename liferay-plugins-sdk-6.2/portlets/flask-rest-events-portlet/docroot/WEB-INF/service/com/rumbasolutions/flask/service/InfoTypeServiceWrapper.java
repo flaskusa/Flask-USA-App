@@ -56,6 +56,19 @@ public class InfoTypeServiceWrapper implements InfoTypeService,
 		return _infoTypeService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.InfoType> getInfoTypes(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _infoTypeService.getInfoTypes(serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.InfoType getInfoType(
+		long infoTypeId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _infoTypeService.getInfoType(infoTypeId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -31,6 +31,18 @@ public class EventTypeServiceClpInvoker {
 		_methodName73 = "setBeanIdentifier";
 
 		_methodParameterTypes73 = new String[] { "java.lang.String" };
+
+		_methodName78 = "getEventTypes";
+
+		_methodParameterTypes78 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName79 = "getEventType";
+
+		_methodParameterTypes79 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -47,6 +59,17 @@ public class EventTypeServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+			return EventTypeServiceUtil.getEventTypes((com.liferay.portal.service.ServiceContext)arguments[0]);
+		}
+
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+			return EventTypeServiceUtil.getEventType(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -54,4 +77,8 @@ public class EventTypeServiceClpInvoker {
 	private String[] _methodParameterTypes72;
 	private String _methodName73;
 	private String[] _methodParameterTypes73;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
 }

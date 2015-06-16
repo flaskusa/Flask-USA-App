@@ -1914,7 +1914,9 @@ public class EventDetailPersistenceImpl extends BasePersistenceImpl<EventDetail>
 		eventDetailImpl.setModifiedDate(eventDetail.getModifiedDate());
 		eventDetailImpl.setEventId(eventDetail.getEventId());
 		eventDetailImpl.setInfoTypeId(eventDetail.getInfoTypeId());
+		eventDetailImpl.setInfoTypeName(eventDetail.getInfoTypeName());
 		eventDetailImpl.setInfoTypeCategoryId(eventDetail.getInfoTypeCategoryId());
+		eventDetailImpl.setInfoTypeCategoryName(eventDetail.getInfoTypeCategoryName());
 		eventDetailImpl.setInfoName(eventDetail.getInfoName());
 		eventDetailImpl.setInfoDesc(eventDetail.getInfoDesc());
 		eventDetailImpl.setAddrLine1(eventDetail.getAddrLine1());

@@ -73,6 +73,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "venueId", Types.BIGINT },
 			{ "infoTypeId", Types.BIGINT },
+			{ "infoTypeName", Types.VARCHAR },
 			{ "infoTypeCategoryId", Types.BIGINT },
 			{ "infoTitle", Types.VARCHAR },
 			{ "infoDesc", Types.VARCHAR },
@@ -91,7 +92,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 			{ "cost", Types.DOUBLE },
 			{ "hoursOfOperation", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueDetail (venueDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueId LONG,infoTypeId LONG,infoTypeCategoryId LONG,infoTitle VARCHAR(100) null,infoDesc VARCHAR(255) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(100) null,countryId LONG,countryName VARCHAR(100) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueDetail (venueDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTitle VARCHAR(100) null,infoDesc VARCHAR(255) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(100) null,countryId LONG,countryName VARCHAR(100) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_VenueDetail";
 	public static final String ORDER_BY_JPQL = " ORDER BY venueDetail.venueDetailId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_VenueDetail.venueDetailId ASC";
@@ -130,6 +131,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setVenueId(soapModel.getVenueId());
 		model.setInfoTypeId(soapModel.getInfoTypeId());
+		model.setInfoTypeName(soapModel.getInfoTypeName());
 		model.setInfoTypeCategoryId(soapModel.getInfoTypeCategoryId());
 		model.setInfoTitle(soapModel.getInfoTitle());
 		model.setInfoDesc(soapModel.getInfoDesc());
@@ -218,6 +220,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("venueId", getVenueId());
 		attributes.put("infoTypeId", getInfoTypeId());
+		attributes.put("infoTypeName", getInfoTypeName());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTitle", getInfoTitle());
 		attributes.put("infoDesc", getInfoDesc());
@@ -281,6 +284,12 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 		if (infoTypeId != null) {
 			setInfoTypeId(infoTypeId);
+		}
+
+		String infoTypeName = (String)attributes.get("infoTypeName");
+
+		if (infoTypeName != null) {
+			setInfoTypeName(infoTypeName);
 		}
 
 		Long infoTypeCategoryId = (Long)attributes.get("infoTypeCategoryId");
@@ -483,6 +492,22 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 	@Override
 	public void setInfoTypeId(long infoTypeId) {
 		_infoTypeId = infoTypeId;
+	}
+
+	@JSON
+	@Override
+	public String getInfoTypeName() {
+		if (_infoTypeName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _infoTypeName;
+		}
+	}
+
+	@Override
+	public void setInfoTypeName(String infoTypeName) {
+		_infoTypeName = infoTypeName;
 	}
 
 	@JSON
@@ -775,6 +800,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		venueDetailImpl.setModifiedDate(getModifiedDate());
 		venueDetailImpl.setVenueId(getVenueId());
 		venueDetailImpl.setInfoTypeId(getInfoTypeId());
+		venueDetailImpl.setInfoTypeName(getInfoTypeName());
 		venueDetailImpl.setInfoTypeCategoryId(getInfoTypeCategoryId());
 		venueDetailImpl.setInfoTitle(getInfoTitle());
 		venueDetailImpl.setInfoDesc(getInfoDesc());
@@ -882,6 +908,14 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		venueDetailCacheModel.venueId = getVenueId();
 
 		venueDetailCacheModel.infoTypeId = getInfoTypeId();
+
+		venueDetailCacheModel.infoTypeName = getInfoTypeName();
+
+		String infoTypeName = venueDetailCacheModel.infoTypeName;
+
+		if ((infoTypeName != null) && (infoTypeName.length() == 0)) {
+			venueDetailCacheModel.infoTypeName = null;
+		}
 
 		venueDetailCacheModel.infoTypeCategoryId = getInfoTypeCategoryId();
 
@@ -1000,7 +1034,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{venueDetailId=");
 		sb.append(getVenueDetailId());
@@ -1016,6 +1050,8 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		sb.append(getVenueId());
 		sb.append(", infoTypeId=");
 		sb.append(getInfoTypeId());
+		sb.append(", infoTypeName=");
+		sb.append(getInfoTypeName());
 		sb.append(", infoTypeCategoryId=");
 		sb.append(getInfoTypeCategoryId());
 		sb.append(", infoTitle=");
@@ -1057,7 +1093,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(79);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.VenueDetail");
@@ -1090,6 +1126,10 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		sb.append(
 			"<column><column-name>infoTypeId</column-name><column-value><![CDATA[");
 		sb.append(getInfoTypeId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>infoTypeName</column-name><column-value><![CDATA[");
+		sb.append(getInfoTypeName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>infoTypeCategoryId</column-name><column-value><![CDATA[");
@@ -1179,6 +1219,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 	private long _originalVenueId;
 	private boolean _setOriginalVenueId;
 	private long _infoTypeId;
+	private String _infoTypeName;
 	private long _infoTypeCategoryId;
 	private String _infoTitle;
 	private String _infoDesc;

@@ -77,10 +77,12 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			{ "startTime", Types.TIMESTAMP },
 			{ "endTime", Types.TIMESTAMP },
 			{ "eventTypeId", Types.BIGINT },
+			{ "eventTypeName", Types.VARCHAR },
 			{ "eventImagePath", Types.VARCHAR },
-			{ "venueId", Types.BIGINT }
+			{ "venueId", Types.BIGINT },
+			{ "venueName", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_Event (eventId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventName VARCHAR(100) null,description VARCHAR(255) null,eventDate DATE null,startTime DATE null,endTime DATE null,eventTypeId LONG,eventImagePath VARCHAR(255) null,venueId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_Event (eventId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventName VARCHAR(100) null,description VARCHAR(255) null,eventDate DATE null,startTime DATE null,endTime DATE null,eventTypeId LONG,eventTypeName VARCHAR(75) null,eventImagePath VARCHAR(255) null,venueId LONG,venueName LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_Event";
 	public static final String ORDER_BY_JPQL = " ORDER BY event.eventDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_Event.eventDate DESC";
@@ -123,8 +125,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		model.setStartTime(soapModel.getStartTime());
 		model.setEndTime(soapModel.getEndTime());
 		model.setEventTypeId(soapModel.getEventTypeId());
+		model.setEventTypeName(soapModel.getEventTypeName());
 		model.setEventImagePath(soapModel.getEventImagePath());
 		model.setVenueId(soapModel.getVenueId());
+		model.setVenueName(soapModel.getVenueName());
 
 		return model;
 	}
@@ -200,8 +204,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
 		attributes.put("eventTypeId", getEventTypeId());
+		attributes.put("eventTypeName", getEventTypeName());
 		attributes.put("eventImagePath", getEventImagePath());
 		attributes.put("venueId", getVenueId());
+		attributes.put("venueName", getVenueName());
 
 		return attributes;
 	}
@@ -274,6 +280,12 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			setEventTypeId(eventTypeId);
 		}
 
+		String eventTypeName = (String)attributes.get("eventTypeName");
+
+		if (eventTypeName != null) {
+			setEventTypeName(eventTypeName);
+		}
+
 		String eventImagePath = (String)attributes.get("eventImagePath");
 
 		if (eventImagePath != null) {
@@ -284,6 +296,12 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		if (venueId != null) {
 			setVenueId(venueId);
+		}
+
+		Long venueName = (Long)attributes.get("venueName");
+
+		if (venueName != null) {
+			setVenueName(venueName);
 		}
 	}
 
@@ -440,6 +458,22 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@JSON
 	@Override
+	public String getEventTypeName() {
+		if (_eventTypeName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _eventTypeName;
+		}
+	}
+
+	@Override
+	public void setEventTypeName(String eventTypeName) {
+		_eventTypeName = eventTypeName;
+	}
+
+	@JSON
+	@Override
 	public String getEventImagePath() {
 		if (_eventImagePath == null) {
 			return StringPool.BLANK;
@@ -475,6 +509,17 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	public long getOriginalVenueId() {
 		return _originalVenueId;
+	}
+
+	@JSON
+	@Override
+	public long getVenueName() {
+		return _venueName;
+	}
+
+	@Override
+	public void setVenueName(long venueName) {
+		_venueName = venueName;
 	}
 
 	public long getColumnBitmask() {
@@ -519,8 +564,10 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		eventImpl.setStartTime(getStartTime());
 		eventImpl.setEndTime(getEndTime());
 		eventImpl.setEventTypeId(getEventTypeId());
+		eventImpl.setEventTypeName(getEventTypeName());
 		eventImpl.setEventImagePath(getEventImagePath());
 		eventImpl.setVenueId(getVenueId());
+		eventImpl.setVenueName(getVenueName());
 
 		eventImpl.resetOriginalValues();
 
@@ -655,6 +702,14 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		eventCacheModel.eventTypeId = getEventTypeId();
 
+		eventCacheModel.eventTypeName = getEventTypeName();
+
+		String eventTypeName = eventCacheModel.eventTypeName;
+
+		if ((eventTypeName != null) && (eventTypeName.length() == 0)) {
+			eventCacheModel.eventTypeName = null;
+		}
+
 		eventCacheModel.eventImagePath = getEventImagePath();
 
 		String eventImagePath = eventCacheModel.eventImagePath;
@@ -665,12 +720,14 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		eventCacheModel.venueId = getVenueId();
 
+		eventCacheModel.venueName = getVenueName();
+
 		return eventCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{eventId=");
 		sb.append(getEventId());
@@ -694,10 +751,14 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		sb.append(getEndTime());
 		sb.append(", eventTypeId=");
 		sb.append(getEventTypeId());
+		sb.append(", eventTypeName=");
+		sb.append(getEventTypeName());
 		sb.append(", eventImagePath=");
 		sb.append(getEventImagePath());
 		sb.append(", venueId=");
 		sb.append(getVenueId());
+		sb.append(", venueName=");
+		sb.append(getVenueName());
 		sb.append("}");
 
 		return sb.toString();
@@ -705,7 +766,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.Event");
@@ -756,12 +817,20 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 		sb.append(getEventTypeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>eventTypeName</column-name><column-value><![CDATA[");
+		sb.append(getEventTypeName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>eventImagePath</column-name><column-value><![CDATA[");
 		sb.append(getEventImagePath());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>venueId</column-name><column-value><![CDATA[");
 		sb.append(getVenueId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>venueName</column-name><column-value><![CDATA[");
+		sb.append(getVenueName());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -784,10 +853,12 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	private Date _startTime;
 	private Date _endTime;
 	private long _eventTypeId;
+	private String _eventTypeName;
 	private String _eventImagePath;
 	private long _venueId;
 	private long _originalVenueId;
 	private boolean _setOriginalVenueId;
+	private long _venueName;
 	private long _columnBitmask;
 	private Event _escapedModel;
 }

@@ -60,8 +60,10 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
 		attributes.put("eventTypeId", getEventTypeId());
+		attributes.put("eventTypeName", getEventTypeName());
 		attributes.put("eventImagePath", getEventImagePath());
 		attributes.put("venueId", getVenueId());
+		attributes.put("venueName", getVenueName());
 
 		return attributes;
 	}
@@ -134,6 +136,12 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 			setEventTypeId(eventTypeId);
 		}
 
+		String eventTypeName = (String)attributes.get("eventTypeName");
+
+		if (eventTypeName != null) {
+			setEventTypeName(eventTypeName);
+		}
+
 		String eventImagePath = (String)attributes.get("eventImagePath");
 
 		if (eventImagePath != null) {
@@ -144,6 +152,12 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 
 		if (venueId != null) {
 			setVenueId(venueId);
+		}
+
+		Long venueName = (Long)attributes.get("venueName");
+
+		if (venueName != null) {
+			setVenueName(venueName);
 		}
 	}
 
@@ -410,6 +424,26 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	}
 
 	/**
+	* Returns the event type name of this event.
+	*
+	* @return the event type name of this event
+	*/
+	@Override
+	public java.lang.String getEventTypeName() {
+		return _event.getEventTypeName();
+	}
+
+	/**
+	* Sets the event type name of this event.
+	*
+	* @param eventTypeName the event type name of this event
+	*/
+	@Override
+	public void setEventTypeName(java.lang.String eventTypeName) {
+		_event.setEventTypeName(eventTypeName);
+	}
+
+	/**
 	* Returns the event image path of this event.
 	*
 	* @return the event image path of this event
@@ -447,6 +481,26 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	@Override
 	public void setVenueId(long venueId) {
 		_event.setVenueId(venueId);
+	}
+
+	/**
+	* Returns the venue name of this event.
+	*
+	* @return the venue name of this event
+	*/
+	@Override
+	public long getVenueName() {
+		return _event.getVenueName();
+	}
+
+	/**
+	* Sets the venue name of this event.
+	*
+	* @param venueName the venue name of this event
+	*/
+	@Override
+	public void setVenueName(long venueName) {
+		_event.setVenueName(venueName);
 	}
 
 	@Override

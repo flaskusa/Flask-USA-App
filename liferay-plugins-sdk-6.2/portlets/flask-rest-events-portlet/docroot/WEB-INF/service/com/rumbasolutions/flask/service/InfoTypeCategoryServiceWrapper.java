@@ -58,6 +58,20 @@ public class InfoTypeCategoryServiceWrapper implements InfoTypeCategoryService,
 			arguments);
 	}
 
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.InfoTypeCategory> getInfoTypeCategories(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _infoTypeCategoryService.getInfoTypeCategories(serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.InfoTypeCategory getInfoTypeCategory(
+		long InfoTypeCategoryId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _infoTypeCategoryService.getInfoTypeCategory(InfoTypeCategoryId,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -86,8 +86,10 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		attributes.put("startTime", getStartTime());
 		attributes.put("endTime", getEndTime());
 		attributes.put("eventTypeId", getEventTypeId());
+		attributes.put("eventTypeName", getEventTypeName());
 		attributes.put("eventImagePath", getEventImagePath());
 		attributes.put("venueId", getVenueId());
+		attributes.put("venueName", getVenueName());
 
 		return attributes;
 	}
@@ -160,6 +162,12 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 			setEventTypeId(eventTypeId);
 		}
 
+		String eventTypeName = (String)attributes.get("eventTypeName");
+
+		if (eventTypeName != null) {
+			setEventTypeName(eventTypeName);
+		}
+
 		String eventImagePath = (String)attributes.get("eventImagePath");
 
 		if (eventImagePath != null) {
@@ -170,6 +178,12 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 
 		if (venueId != null) {
 			setVenueId(venueId);
+		}
+
+		Long venueName = (Long)attributes.get("venueName");
+
+		if (venueName != null) {
+			setVenueName(venueName);
 		}
 	}
 
@@ -437,6 +451,29 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 	}
 
 	@Override
+	public String getEventTypeName() {
+		return _eventTypeName;
+	}
+
+	@Override
+	public void setEventTypeName(String eventTypeName) {
+		_eventTypeName = eventTypeName;
+
+		if (_eventRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setEventTypeName", String.class);
+
+				method.invoke(_eventRemoteModel, eventTypeName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getEventImagePath() {
 		return _eventImagePath;
 	}
@@ -476,6 +513,29 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 				Method method = clazz.getMethod("setVenueId", long.class);
 
 				method.invoke(_eventRemoteModel, venueId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getVenueName() {
+		return _venueName;
+	}
+
+	@Override
+	public void setVenueName(long venueName) {
+		_venueName = venueName;
+
+		if (_eventRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setVenueName", long.class);
+
+				method.invoke(_eventRemoteModel, venueName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -563,8 +623,10 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		clone.setStartTime(getStartTime());
 		clone.setEndTime(getEndTime());
 		clone.setEventTypeId(getEventTypeId());
+		clone.setEventTypeName(getEventTypeName());
 		clone.setEventImagePath(getEventImagePath());
 		clone.setVenueId(getVenueId());
+		clone.setVenueName(getVenueName());
 
 		return clone;
 	}
@@ -617,7 +679,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{eventId=");
 		sb.append(getEventId());
@@ -641,10 +703,14 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		sb.append(getEndTime());
 		sb.append(", eventTypeId=");
 		sb.append(getEventTypeId());
+		sb.append(", eventTypeName=");
+		sb.append(getEventTypeName());
 		sb.append(", eventImagePath=");
 		sb.append(getEventImagePath());
 		sb.append(", venueId=");
 		sb.append(getVenueId());
+		sb.append(", venueName=");
+		sb.append(getVenueName());
 		sb.append("}");
 
 		return sb.toString();
@@ -652,7 +718,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(43);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.Event");
@@ -703,12 +769,20 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		sb.append(getEventTypeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>eventTypeName</column-name><column-value><![CDATA[");
+		sb.append(getEventTypeName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>eventImagePath</column-name><column-value><![CDATA[");
 		sb.append(getEventImagePath());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>venueId</column-name><column-value><![CDATA[");
 		sb.append(getVenueId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>venueName</column-name><column-value><![CDATA[");
+		sb.append(getVenueName());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -728,8 +802,10 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 	private Date _startTime;
 	private Date _endTime;
 	private long _eventTypeId;
+	private String _eventTypeName;
 	private String _eventImagePath;
 	private long _venueId;
+	private long _venueName;
 	private BaseModel<?> _eventRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

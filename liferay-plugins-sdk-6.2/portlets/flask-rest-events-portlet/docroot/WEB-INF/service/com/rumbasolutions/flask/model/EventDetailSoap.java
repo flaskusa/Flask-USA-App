@@ -38,7 +38,9 @@ public class EventDetailSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setEventId(model.getEventId());
 		soapModel.setInfoTypeId(model.getInfoTypeId());
+		soapModel.setInfoTypeName(model.getInfoTypeName());
 		soapModel.setInfoTypeCategoryId(model.getInfoTypeCategoryId());
+		soapModel.setInfoTypeCategoryName(model.getInfoTypeCategoryName());
 		soapModel.setInfoName(model.getInfoName());
 		soapModel.setInfoDesc(model.getInfoDesc());
 		soapModel.setAddrLine1(model.getAddrLine1());
@@ -161,12 +163,28 @@ public class EventDetailSoap implements Serializable {
 		_infoTypeId = infoTypeId;
 	}
 
+	public String getInfoTypeName() {
+		return _infoTypeName;
+	}
+
+	public void setInfoTypeName(String infoTypeName) {
+		_infoTypeName = infoTypeName;
+	}
+
 	public long getInfoTypeCategoryId() {
 		return _infoTypeCategoryId;
 	}
 
 	public void setInfoTypeCategoryId(long infoTypeCategoryId) {
 		_infoTypeCategoryId = infoTypeCategoryId;
+	}
+
+	public long getInfoTypeCategoryName() {
+		return _infoTypeCategoryName;
+	}
+
+	public void setInfoTypeCategoryName(long infoTypeCategoryName) {
+		_infoTypeCategoryName = infoTypeCategoryName;
 	}
 
 	public String getInfoName() {
@@ -288,7 +306,9 @@ public class EventDetailSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _eventId;
 	private long _infoTypeId;
+	private String _infoTypeName;
 	private long _infoTypeCategoryId;
+	private long _infoTypeCategoryName;
 	private String _infoName;
 	private String _infoDesc;
 	private String _addrLine1;

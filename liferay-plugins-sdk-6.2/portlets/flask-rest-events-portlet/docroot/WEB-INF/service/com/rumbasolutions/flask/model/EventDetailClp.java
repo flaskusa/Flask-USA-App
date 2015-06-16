@@ -82,7 +82,9 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("eventId", getEventId());
 		attributes.put("infoTypeId", getInfoTypeId());
+		attributes.put("infoTypeName", getInfoTypeName());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
+		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
 		attributes.put("infoName", getInfoName());
 		attributes.put("infoDesc", getInfoDesc());
 		attributes.put("addrLine1", getAddrLine1());
@@ -145,10 +147,22 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 			setInfoTypeId(infoTypeId);
 		}
 
+		String infoTypeName = (String)attributes.get("infoTypeName");
+
+		if (infoTypeName != null) {
+			setInfoTypeName(infoTypeName);
+		}
+
 		Long infoTypeCategoryId = (Long)attributes.get("infoTypeCategoryId");
 
 		if (infoTypeCategoryId != null) {
 			setInfoTypeCategoryId(infoTypeCategoryId);
+		}
+
+		Long infoTypeCategoryName = (Long)attributes.get("infoTypeCategoryName");
+
+		if (infoTypeCategoryName != null) {
+			setInfoTypeCategoryName(infoTypeCategoryName);
 		}
 
 		String infoName = (String)attributes.get("infoName");
@@ -408,6 +422,29 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
+	public String getInfoTypeName() {
+		return _infoTypeName;
+	}
+
+	@Override
+	public void setInfoTypeName(String infoTypeName) {
+		_infoTypeName = infoTypeName;
+
+		if (_eventDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setInfoTypeName", String.class);
+
+				method.invoke(_eventDetailRemoteModel, infoTypeName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getInfoTypeCategoryId() {
 		return _infoTypeCategoryId;
 	}
@@ -424,6 +461,30 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 						long.class);
 
 				method.invoke(_eventDetailRemoteModel, infoTypeCategoryId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getInfoTypeCategoryName() {
+		return _infoTypeCategoryName;
+	}
+
+	@Override
+	public void setInfoTypeCategoryName(long infoTypeCategoryName) {
+		_infoTypeCategoryName = infoTypeCategoryName;
+
+		if (_eventDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setInfoTypeCategoryName",
+						long.class);
+
+				method.invoke(_eventDetailRemoteModel, infoTypeCategoryName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -830,7 +891,9 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		clone.setModifiedDate(getModifiedDate());
 		clone.setEventId(getEventId());
 		clone.setInfoTypeId(getInfoTypeId());
+		clone.setInfoTypeName(getInfoTypeName());
 		clone.setInfoTypeCategoryId(getInfoTypeCategoryId());
+		clone.setInfoTypeCategoryName(getInfoTypeCategoryName());
 		clone.setInfoName(getInfoName());
 		clone.setInfoDesc(getInfoDesc());
 		clone.setAddrLine1(getAddrLine1());
@@ -897,7 +960,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(45);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("{eventDetailId=");
 		sb.append(getEventDetailId());
@@ -913,8 +976,12 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		sb.append(getEventId());
 		sb.append(", infoTypeId=");
 		sb.append(getInfoTypeId());
+		sb.append(", infoTypeName=");
+		sb.append(getInfoTypeName());
 		sb.append(", infoTypeCategoryId=");
 		sb.append(getInfoTypeCategoryId());
+		sb.append(", infoTypeCategoryName=");
+		sb.append(getInfoTypeCategoryName());
 		sb.append(", infoName=");
 		sb.append(getInfoName());
 		sb.append(", infoDesc=");
@@ -950,7 +1017,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(70);
+		StringBundler sb = new StringBundler(76);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.EventDetail");
@@ -985,8 +1052,16 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>infoTypeName</column-name><column-value><![CDATA[");
+		sb.append(getInfoTypeName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>infoTypeCategoryId</column-name><column-value><![CDATA[");
 		sb.append(getInfoTypeCategoryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>infoTypeCategoryName</column-name><column-value><![CDATA[");
+		sb.append(getInfoTypeCategoryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>infoName</column-name><column-value><![CDATA[");
@@ -1058,7 +1133,9 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	private Date _modifiedDate;
 	private long _eventId;
 	private long _infoTypeId;
+	private String _infoTypeName;
 	private long _infoTypeCategoryId;
+	private long _infoTypeCategoryName;
 	private String _infoName;
 	private String _infoDesc;
 	private String _addrLine1;

@@ -56,6 +56,19 @@ public class EventTypeServiceWrapper implements EventTypeService,
 		return _eventTypeService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.EventType> getEventTypes(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventTypeService.getEventTypes(serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.EventType getEventType(
+		long eventTypeId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventTypeService.getEventType(eventTypeId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

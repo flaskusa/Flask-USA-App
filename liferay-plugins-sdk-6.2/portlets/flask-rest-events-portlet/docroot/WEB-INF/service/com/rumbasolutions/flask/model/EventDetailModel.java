@@ -174,6 +174,21 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	public void setInfoTypeId(long infoTypeId);
 
 	/**
+	 * Returns the info type name of this event detail.
+	 *
+	 * @return the info type name of this event detail
+	 */
+	@AutoEscape
+	public String getInfoTypeName();
+
+	/**
+	 * Sets the info type name of this event detail.
+	 *
+	 * @param infoTypeName the info type name of this event detail
+	 */
+	public void setInfoTypeName(String infoTypeName);
+
+	/**
 	 * Returns the info type category ID of this event detail.
 	 *
 	 * @return the info type category ID of this event detail
@@ -186,6 +201,20 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	 * @param infoTypeCategoryId the info type category ID of this event detail
 	 */
 	public void setInfoTypeCategoryId(long infoTypeCategoryId);
+
+	/**
+	 * Returns the info type category name of this event detail.
+	 *
+	 * @return the info type category name of this event detail
+	 */
+	public long getInfoTypeCategoryName();
+
+	/**
+	 * Sets the info type category name of this event detail.
+	 *
+	 * @param infoTypeCategoryName the info type category name of this event detail
+	 */
+	public void setInfoTypeCategoryName(long infoTypeCategoryName);
 
 	/**
 	 * Returns the info name of this event detail.

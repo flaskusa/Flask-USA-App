@@ -14,7 +14,16 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.rumbasolutions.flask.model.InfoTypeCategory;
 import com.rumbasolutions.flask.service.base.InfoTypeCategoryServiceBaseImpl;
+import com.rumbasolutions.flask.service.persistence.InfoTypeCategoryUtil;
 
 /**
  * The implementation of the info type category remote service.
@@ -36,4 +45,30 @@ public class InfoTypeCategoryServiceImpl extends InfoTypeCategoryServiceBaseImpl
 	 *
 	 * Never reference this interface directly. Always use {@link com.rumbasolutions.flask.service.InfoTypeCategoryServiceUtil} to access the info type category remote service.
 	 */
+	
+	private static Log LOGGER = LogFactoryUtil.getLog(InfoTypeCategoryServiceImpl.class);
+	
+	@Override
+	public List<InfoTypeCategory> getInfoTypeCategories(ServiceContext  serviceContext){
+		List<InfoTypeCategory> infoTypeCategorys= new ArrayList<InfoTypeCategory>();
+		try {
+			infoTypeCategorys  = InfoTypeCategoryUtil.findAll();
+		}
+		catch (SystemException e) {
+			LOGGER.error("Exception in getInfoTypeCategorys. " + e.getMessage());
+		}
+		return infoTypeCategorys;
+	}
+	
+	@Override
+	public InfoTypeCategory getInfoTypeCategory(long InfoTypeCategoryId, ServiceContext  serviceContext){
+		InfoTypeCategory infoTypeCategory= null;
+		try {
+			infoTypeCategory  = InfoTypeCategoryUtil.fetchByPrimaryKey(InfoTypeCategoryId);
+		}
+		catch (SystemException e) {
+			LOGGER.error("Exception in getInfoTypeCategory. " + e.getMessage());
+		}
+		return infoTypeCategory;
+	}
 }

@@ -37,7 +37,7 @@ import java.util.Date;
 public class EventCacheModel implements CacheModel<Event>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(27);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{eventId=");
 		sb.append(eventId);
@@ -61,10 +61,14 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		sb.append(endTime);
 		sb.append(", eventTypeId=");
 		sb.append(eventTypeId);
+		sb.append(", eventTypeName=");
+		sb.append(eventTypeName);
 		sb.append(", eventImagePath=");
 		sb.append(eventImagePath);
 		sb.append(", venueId=");
 		sb.append(venueId);
+		sb.append(", venueName=");
+		sb.append(venueName);
 		sb.append("}");
 
 		return sb.toString();
@@ -129,6 +133,13 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 
 		eventImpl.setEventTypeId(eventTypeId);
 
+		if (eventTypeName == null) {
+			eventImpl.setEventTypeName(StringPool.BLANK);
+		}
+		else {
+			eventImpl.setEventTypeName(eventTypeName);
+		}
+
 		if (eventImagePath == null) {
 			eventImpl.setEventImagePath(StringPool.BLANK);
 		}
@@ -137,6 +148,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		}
 
 		eventImpl.setVenueId(venueId);
+		eventImpl.setVenueName(venueName);
 
 		eventImpl.resetOriginalValues();
 
@@ -156,8 +168,10 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		startTime = objectInput.readLong();
 		endTime = objectInput.readLong();
 		eventTypeId = objectInput.readLong();
+		eventTypeName = objectInput.readUTF();
 		eventImagePath = objectInput.readUTF();
 		venueId = objectInput.readLong();
+		venueName = objectInput.readLong();
 	}
 
 	@Override
@@ -188,6 +202,13 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		objectOutput.writeLong(endTime);
 		objectOutput.writeLong(eventTypeId);
 
+		if (eventTypeName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(eventTypeName);
+		}
+
 		if (eventImagePath == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -196,6 +217,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		}
 
 		objectOutput.writeLong(venueId);
+		objectOutput.writeLong(venueName);
 	}
 
 	public long eventId;
@@ -209,6 +231,8 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 	public long startTime;
 	public long endTime;
 	public long eventTypeId;
+	public String eventTypeName;
 	public String eventImagePath;
 	public long venueId;
+	public long venueName;
 }

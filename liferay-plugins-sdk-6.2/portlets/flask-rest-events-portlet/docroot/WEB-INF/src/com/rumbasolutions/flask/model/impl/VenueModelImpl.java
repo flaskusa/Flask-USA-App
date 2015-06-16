@@ -77,10 +77,12 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 			{ "addrLine2", Types.VARCHAR },
 			{ "venueCity", Types.VARCHAR },
 			{ "venueStateId", Types.BIGINT },
+			{ "venueStateName", Types.VARCHAR },
 			{ "venueCountryId", Types.BIGINT },
+			{ "venueCountryName", Types.VARCHAR },
 			{ "venueMetroArea", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_Venue (venueId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueName VARCHAR(100) null,venueDescription VARCHAR(255) null,venueZipCode VARCHAR(20) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,venueCity VARCHAR(100) null,venueStateId LONG,venueCountryId LONG,venueMetroArea VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_Venue (venueId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueName VARCHAR(100) null,venueDescription VARCHAR(255) null,venueZipCode VARCHAR(20) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,venueCity VARCHAR(100) null,venueStateId LONG,venueStateName VARCHAR(75) null,venueCountryId LONG,venueCountryName VARCHAR(75) null,venueMetroArea VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_Venue";
 	public static final String ORDER_BY_JPQL = " ORDER BY venue.venueName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_Venue.venueName ASC";
@@ -125,7 +127,9 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 		model.setAddrLine2(soapModel.getAddrLine2());
 		model.setVenueCity(soapModel.getVenueCity());
 		model.setVenueStateId(soapModel.getVenueStateId());
+		model.setVenueStateName(soapModel.getVenueStateName());
 		model.setVenueCountryId(soapModel.getVenueCountryId());
+		model.setVenueCountryName(soapModel.getVenueCountryName());
 		model.setVenueMetroArea(soapModel.getVenueMetroArea());
 
 		return model;
@@ -203,7 +207,9 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 		attributes.put("addrLine2", getAddrLine2());
 		attributes.put("venueCity", getVenueCity());
 		attributes.put("venueStateId", getVenueStateId());
+		attributes.put("venueStateName", getVenueStateName());
 		attributes.put("venueCountryId", getVenueCountryId());
+		attributes.put("venueCountryName", getVenueCountryName());
 		attributes.put("venueMetroArea", getVenueMetroArea());
 
 		return attributes;
@@ -283,10 +289,22 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 			setVenueStateId(venueStateId);
 		}
 
+		String venueStateName = (String)attributes.get("venueStateName");
+
+		if (venueStateName != null) {
+			setVenueStateName(venueStateName);
+		}
+
 		Long venueCountryId = (Long)attributes.get("venueCountryId");
 
 		if (venueCountryId != null) {
 			setVenueCountryId(venueCountryId);
+		}
+
+		String venueCountryName = (String)attributes.get("venueCountryName");
+
+		if (venueCountryName != null) {
+			setVenueCountryName(venueCountryName);
 		}
 
 		String venueMetroArea = (String)attributes.get("venueMetroArea");
@@ -482,6 +500,22 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 
 	@JSON
 	@Override
+	public String getVenueStateName() {
+		if (_venueStateName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _venueStateName;
+		}
+	}
+
+	@Override
+	public void setVenueStateName(String venueStateName) {
+		_venueStateName = venueStateName;
+	}
+
+	@JSON
+	@Override
 	public long getVenueCountryId() {
 		return _venueCountryId;
 	}
@@ -489,6 +523,22 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 	@Override
 	public void setVenueCountryId(long venueCountryId) {
 		_venueCountryId = venueCountryId;
+	}
+
+	@JSON
+	@Override
+	public String getVenueCountryName() {
+		if (_venueCountryName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _venueCountryName;
+		}
+	}
+
+	@Override
+	public void setVenueCountryName(String venueCountryName) {
+		_venueCountryName = venueCountryName;
 	}
 
 	@JSON
@@ -560,7 +610,9 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 		venueImpl.setAddrLine2(getAddrLine2());
 		venueImpl.setVenueCity(getVenueCity());
 		venueImpl.setVenueStateId(getVenueStateId());
+		venueImpl.setVenueStateName(getVenueStateName());
 		venueImpl.setVenueCountryId(getVenueCountryId());
+		venueImpl.setVenueCountryName(getVenueCountryName());
 		venueImpl.setVenueMetroArea(getVenueMetroArea());
 
 		venueImpl.resetOriginalValues();
@@ -697,7 +749,23 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 
 		venueCacheModel.venueStateId = getVenueStateId();
 
+		venueCacheModel.venueStateName = getVenueStateName();
+
+		String venueStateName = venueCacheModel.venueStateName;
+
+		if ((venueStateName != null) && (venueStateName.length() == 0)) {
+			venueCacheModel.venueStateName = null;
+		}
+
 		venueCacheModel.venueCountryId = getVenueCountryId();
+
+		venueCacheModel.venueCountryName = getVenueCountryName();
+
+		String venueCountryName = venueCacheModel.venueCountryName;
+
+		if ((venueCountryName != null) && (venueCountryName.length() == 0)) {
+			venueCacheModel.venueCountryName = null;
+		}
 
 		venueCacheModel.venueMetroArea = getVenueMetroArea();
 
@@ -712,7 +780,7 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{venueId=");
 		sb.append(getVenueId());
@@ -738,8 +806,12 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 		sb.append(getVenueCity());
 		sb.append(", venueStateId=");
 		sb.append(getVenueStateId());
+		sb.append(", venueStateName=");
+		sb.append(getVenueStateName());
 		sb.append(", venueCountryId=");
 		sb.append(getVenueCountryId());
+		sb.append(", venueCountryName=");
+		sb.append(getVenueCountryName());
 		sb.append(", venueMetroArea=");
 		sb.append(getVenueMetroArea());
 		sb.append("}");
@@ -749,7 +821,7 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.Venue");
@@ -804,8 +876,16 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 		sb.append(getVenueStateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>venueStateName</column-name><column-value><![CDATA[");
+		sb.append(getVenueStateName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>venueCountryId</column-name><column-value><![CDATA[");
 		sb.append(getVenueCountryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>venueCountryName</column-name><column-value><![CDATA[");
+		sb.append(getVenueCountryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>venueMetroArea</column-name><column-value><![CDATA[");
@@ -833,7 +913,9 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 	private String _addrLine2;
 	private String _venueCity;
 	private long _venueStateId;
+	private String _venueStateName;
 	private long _venueCountryId;
+	private String _venueCountryName;
 	private String _venueMetroArea;
 	private String _originalVenueMetroArea;
 	private long _columnBitmask;

@@ -63,6 +63,18 @@ public class InfoTypeCategoryServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.rumbasolutions.flask.model.InfoTypeCategory> getInfoTypeCategories(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getInfoTypeCategories(serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.InfoTypeCategory getInfoTypeCategory(
+		long InfoTypeCategoryId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .getInfoTypeCategory(InfoTypeCategoryId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

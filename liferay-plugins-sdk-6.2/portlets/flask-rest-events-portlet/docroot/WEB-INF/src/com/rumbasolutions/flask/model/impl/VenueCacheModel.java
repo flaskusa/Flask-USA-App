@@ -37,7 +37,7 @@ import java.util.Date;
 public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{venueId=");
 		sb.append(venueId);
@@ -63,8 +63,12 @@ public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 		sb.append(venueCity);
 		sb.append(", venueStateId=");
 		sb.append(venueStateId);
+		sb.append(", venueStateName=");
+		sb.append(venueStateName);
 		sb.append(", venueCountryId=");
 		sb.append(venueCountryId);
+		sb.append(", venueCountryName=");
+		sb.append(venueCountryName);
 		sb.append(", venueMetroArea=");
 		sb.append(venueMetroArea);
 		sb.append("}");
@@ -137,7 +141,22 @@ public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 		}
 
 		venueImpl.setVenueStateId(venueStateId);
+
+		if (venueStateName == null) {
+			venueImpl.setVenueStateName(StringPool.BLANK);
+		}
+		else {
+			venueImpl.setVenueStateName(venueStateName);
+		}
+
 		venueImpl.setVenueCountryId(venueCountryId);
+
+		if (venueCountryName == null) {
+			venueImpl.setVenueCountryName(StringPool.BLANK);
+		}
+		else {
+			venueImpl.setVenueCountryName(venueCountryName);
+		}
 
 		if (venueMetroArea == null) {
 			venueImpl.setVenueMetroArea(StringPool.BLANK);
@@ -165,7 +184,9 @@ public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 		addrLine2 = objectInput.readUTF();
 		venueCity = objectInput.readUTF();
 		venueStateId = objectInput.readLong();
+		venueStateName = objectInput.readUTF();
 		venueCountryId = objectInput.readLong();
+		venueCountryName = objectInput.readUTF();
 		venueMetroArea = objectInput.readUTF();
 	}
 
@@ -221,7 +242,22 @@ public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 		}
 
 		objectOutput.writeLong(venueStateId);
+
+		if (venueStateName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(venueStateName);
+		}
+
 		objectOutput.writeLong(venueCountryId);
+
+		if (venueCountryName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(venueCountryName);
+		}
 
 		if (venueMetroArea == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -243,6 +279,8 @@ public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 	public String addrLine2;
 	public String venueCity;
 	public long venueStateId;
+	public String venueStateName;
 	public long venueCountryId;
+	public String venueCountryName;
 	public String venueMetroArea;
 }

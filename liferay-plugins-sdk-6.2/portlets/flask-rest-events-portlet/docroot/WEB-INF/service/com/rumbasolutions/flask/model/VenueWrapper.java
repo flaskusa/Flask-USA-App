@@ -61,7 +61,9 @@ public class VenueWrapper implements Venue, ModelWrapper<Venue> {
 		attributes.put("addrLine2", getAddrLine2());
 		attributes.put("venueCity", getVenueCity());
 		attributes.put("venueStateId", getVenueStateId());
+		attributes.put("venueStateName", getVenueStateName());
 		attributes.put("venueCountryId", getVenueCountryId());
+		attributes.put("venueCountryName", getVenueCountryName());
 		attributes.put("venueMetroArea", getVenueMetroArea());
 
 		return attributes;
@@ -141,10 +143,22 @@ public class VenueWrapper implements Venue, ModelWrapper<Venue> {
 			setVenueStateId(venueStateId);
 		}
 
+		String venueStateName = (String)attributes.get("venueStateName");
+
+		if (venueStateName != null) {
+			setVenueStateName(venueStateName);
+		}
+
 		Long venueCountryId = (Long)attributes.get("venueCountryId");
 
 		if (venueCountryId != null) {
 			setVenueCountryId(venueCountryId);
+		}
+
+		String venueCountryName = (String)attributes.get("venueCountryName");
+
+		if (venueCountryName != null) {
+			setVenueCountryName(venueCountryName);
 		}
 
 		String venueMetroArea = (String)attributes.get("venueMetroArea");
@@ -437,6 +451,26 @@ public class VenueWrapper implements Venue, ModelWrapper<Venue> {
 	}
 
 	/**
+	* Returns the venue state name of this venue.
+	*
+	* @return the venue state name of this venue
+	*/
+	@Override
+	public java.lang.String getVenueStateName() {
+		return _venue.getVenueStateName();
+	}
+
+	/**
+	* Sets the venue state name of this venue.
+	*
+	* @param venueStateName the venue state name of this venue
+	*/
+	@Override
+	public void setVenueStateName(java.lang.String venueStateName) {
+		_venue.setVenueStateName(venueStateName);
+	}
+
+	/**
 	* Returns the venue country ID of this venue.
 	*
 	* @return the venue country ID of this venue
@@ -454,6 +488,26 @@ public class VenueWrapper implements Venue, ModelWrapper<Venue> {
 	@Override
 	public void setVenueCountryId(long venueCountryId) {
 		_venue.setVenueCountryId(venueCountryId);
+	}
+
+	/**
+	* Returns the venue country name of this venue.
+	*
+	* @return the venue country name of this venue
+	*/
+	@Override
+	public java.lang.String getVenueCountryName() {
+		return _venue.getVenueCountryName();
+	}
+
+	/**
+	* Sets the venue country name of this venue.
+	*
+	* @param venueCountryName the venue country name of this venue
+	*/
+	@Override
+	public void setVenueCountryName(java.lang.String venueCountryName) {
+		_venue.setVenueCountryName(venueCountryName);
 	}
 
 	/**

@@ -42,8 +42,10 @@ public class EventSoap implements Serializable {
 		soapModel.setStartTime(model.getStartTime());
 		soapModel.setEndTime(model.getEndTime());
 		soapModel.setEventTypeId(model.getEventTypeId());
+		soapModel.setEventTypeName(model.getEventTypeName());
 		soapModel.setEventImagePath(model.getEventImagePath());
 		soapModel.setVenueId(model.getVenueId());
+		soapModel.setVenueName(model.getVenueName());
 
 		return soapModel;
 	}
@@ -184,6 +186,14 @@ public class EventSoap implements Serializable {
 		_eventTypeId = eventTypeId;
 	}
 
+	public String getEventTypeName() {
+		return _eventTypeName;
+	}
+
+	public void setEventTypeName(String eventTypeName) {
+		_eventTypeName = eventTypeName;
+	}
+
 	public String getEventImagePath() {
 		return _eventImagePath;
 	}
@@ -200,6 +210,14 @@ public class EventSoap implements Serializable {
 		_venueId = venueId;
 	}
 
+	public long getVenueName() {
+		return _venueName;
+	}
+
+	public void setVenueName(long venueName) {
+		_venueName = venueName;
+	}
+
 	private long _eventId;
 	private long _companyId;
 	private long _userId;
@@ -211,6 +229,8 @@ public class EventSoap implements Serializable {
 	private Date _startTime;
 	private Date _endTime;
 	private long _eventTypeId;
+	private String _eventTypeName;
 	private String _eventImagePath;
 	private long _venueId;
+	private long _venueName;
 }

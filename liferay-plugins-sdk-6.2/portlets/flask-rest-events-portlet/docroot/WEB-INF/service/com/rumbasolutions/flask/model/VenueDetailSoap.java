@@ -38,6 +38,7 @@ public class VenueDetailSoap implements Serializable {
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setVenueId(model.getVenueId());
 		soapModel.setInfoTypeId(model.getInfoTypeId());
+		soapModel.setInfoTypeName(model.getInfoTypeName());
 		soapModel.setInfoTypeCategoryId(model.getInfoTypeCategoryId());
 		soapModel.setInfoTitle(model.getInfoTitle());
 		soapModel.setInfoDesc(model.getInfoDesc());
@@ -161,6 +162,14 @@ public class VenueDetailSoap implements Serializable {
 
 	public void setInfoTypeId(long infoTypeId) {
 		_infoTypeId = infoTypeId;
+	}
+
+	public String getInfoTypeName() {
+		return _infoTypeName;
+	}
+
+	public void setInfoTypeName(String infoTypeName) {
+		_infoTypeName = infoTypeName;
 	}
 
 	public long getInfoTypeCategoryId() {
@@ -306,6 +315,7 @@ public class VenueDetailSoap implements Serializable {
 	private Date _modifiedDate;
 	private long _venueId;
 	private long _infoTypeId;
+	private String _infoTypeName;
 	private long _infoTypeCategoryId;
 	private String _infoTitle;
 	private String _infoDesc;

@@ -86,7 +86,9 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 		attributes.put("addrLine2", getAddrLine2());
 		attributes.put("venueCity", getVenueCity());
 		attributes.put("venueStateId", getVenueStateId());
+		attributes.put("venueStateName", getVenueStateName());
 		attributes.put("venueCountryId", getVenueCountryId());
+		attributes.put("venueCountryName", getVenueCountryName());
 		attributes.put("venueMetroArea", getVenueMetroArea());
 
 		return attributes;
@@ -166,10 +168,22 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 			setVenueStateId(venueStateId);
 		}
 
+		String venueStateName = (String)attributes.get("venueStateName");
+
+		if (venueStateName != null) {
+			setVenueStateName(venueStateName);
+		}
+
 		Long venueCountryId = (Long)attributes.get("venueCountryId");
 
 		if (venueCountryId != null) {
 			setVenueCountryId(venueCountryId);
+		}
+
+		String venueCountryName = (String)attributes.get("venueCountryName");
+
+		if (venueCountryName != null) {
+			setVenueCountryName(venueCountryName);
 		}
 
 		String venueMetroArea = (String)attributes.get("venueMetroArea");
@@ -467,6 +481,30 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 	}
 
 	@Override
+	public String getVenueStateName() {
+		return _venueStateName;
+	}
+
+	@Override
+	public void setVenueStateName(String venueStateName) {
+		_venueStateName = venueStateName;
+
+		if (_venueRemoteModel != null) {
+			try {
+				Class<?> clazz = _venueRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setVenueStateName",
+						String.class);
+
+				method.invoke(_venueRemoteModel, venueStateName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getVenueCountryId() {
 		return _venueCountryId;
 	}
@@ -482,6 +520,30 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 				Method method = clazz.getMethod("setVenueCountryId", long.class);
 
 				method.invoke(_venueRemoteModel, venueCountryId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getVenueCountryName() {
+		return _venueCountryName;
+	}
+
+	@Override
+	public void setVenueCountryName(String venueCountryName) {
+		_venueCountryName = venueCountryName;
+
+		if (_venueRemoteModel != null) {
+			try {
+				Class<?> clazz = _venueRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setVenueCountryName",
+						String.class);
+
+				method.invoke(_venueRemoteModel, venueCountryName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -594,7 +656,9 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 		clone.setAddrLine2(getAddrLine2());
 		clone.setVenueCity(getVenueCity());
 		clone.setVenueStateId(getVenueStateId());
+		clone.setVenueStateName(getVenueStateName());
 		clone.setVenueCountryId(getVenueCountryId());
+		clone.setVenueCountryName(getVenueCountryName());
 		clone.setVenueMetroArea(getVenueMetroArea());
 
 		return clone;
@@ -646,7 +710,7 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{venueId=");
 		sb.append(getVenueId());
@@ -672,8 +736,12 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 		sb.append(getVenueCity());
 		sb.append(", venueStateId=");
 		sb.append(getVenueStateId());
+		sb.append(", venueStateName=");
+		sb.append(getVenueStateName());
 		sb.append(", venueCountryId=");
 		sb.append(getVenueCountryId());
+		sb.append(", venueCountryName=");
+		sb.append(getVenueCountryName());
 		sb.append(", venueMetroArea=");
 		sb.append(getVenueMetroArea());
 		sb.append("}");
@@ -683,7 +751,7 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.Venue");
@@ -738,8 +806,16 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 		sb.append(getVenueStateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>venueStateName</column-name><column-value><![CDATA[");
+		sb.append(getVenueStateName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>venueCountryId</column-name><column-value><![CDATA[");
 		sb.append(getVenueCountryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>venueCountryName</column-name><column-value><![CDATA[");
+		sb.append(getVenueCountryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>venueMetroArea</column-name><column-value><![CDATA[");
@@ -764,7 +840,9 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 	private String _addrLine2;
 	private String _venueCity;
 	private long _venueStateId;
+	private String _venueStateName;
 	private long _venueCountryId;
+	private String _venueCountryName;
 	private String _venueMetroArea;
 	private BaseModel<?> _venueRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;

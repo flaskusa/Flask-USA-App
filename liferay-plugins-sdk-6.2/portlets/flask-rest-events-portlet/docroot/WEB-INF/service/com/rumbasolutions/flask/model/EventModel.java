@@ -232,6 +232,21 @@ public interface EventModel extends BaseModel<Event> {
 	public void setEventTypeId(long eventTypeId);
 
 	/**
+	 * Returns the event type name of this event.
+	 *
+	 * @return the event type name of this event
+	 */
+	@AutoEscape
+	public String getEventTypeName();
+
+	/**
+	 * Sets the event type name of this event.
+	 *
+	 * @param eventTypeName the event type name of this event
+	 */
+	public void setEventTypeName(String eventTypeName);
+
+	/**
 	 * Returns the event image path of this event.
 	 *
 	 * @return the event image path of this event
@@ -259,6 +274,20 @@ public interface EventModel extends BaseModel<Event> {
 	 * @param venueId the venue ID of this event
 	 */
 	public void setVenueId(long venueId);
+
+	/**
+	 * Returns the venue name of this event.
+	 *
+	 * @return the venue name of this event
+	 */
+	public long getVenueName();
+
+	/**
+	 * Sets the venue name of this event.
+	 *
+	 * @param venueName the venue name of this event
+	 */
+	public void setVenueName(long venueName);
 
 	@Override
 	public boolean isNew();

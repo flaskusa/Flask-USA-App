@@ -66,11 +66,13 @@
         <column name="startTime" type="Date" />
         <column name="endTime" type="Date" />
         <column name="eventTypeId" type="long" />
+        <column name="eventTypeName" type="String" />
         
         <column name="eventImagePath" type="String" />
-        
-         
+
         <column name="venueId" type="long" />
+	    <column name="venueName" type="long" />
+	        
 
         <!-- Order -->
 
@@ -105,7 +107,9 @@
        		<!-- Other fields -->
        	 <column name="eventId" type="long" />
         <column name="infoTypeId" type="long" />
+		<column name="infoTypeName" type="String" />
         <column name="infoTypeCategoryId" type="long" />
+        <column name="infoTypeCategoryName" type="long" />
         <column name="infoName" type="String" />
         <column name="infoDesc" type="String" />
         <column name="addrLine1" type="String" />
@@ -120,9 +124,7 @@
         <column name="website" type="String" />
         <column name="cost" type="double" />
         <column name="hoursOfOperation" type="String" />
-        
 		<!-- Finder methods -->
-
         <finder name="EventId" return-type="Collection">
 			<finder-column name="eventId" />
 		</finder>
@@ -183,7 +185,9 @@
         <column name="addrLine2" type="String" />
         <column name="venueCity" type="String" />
         <column name="venueStateId" type="long" />
+        <column name="venueStateName" type="String" />
         <column name="venueCountryId" type="long" />
+        <column name="venueCountryName" type="String" />
         <column name="venueMetroArea" type="String" />
         <!-- Order -->
         <order by="asc">
@@ -248,6 +252,7 @@
        		<!-- Other fields -->
        	<column name="venueId" type="long" />
         <column name="infoTypeId" type="long" />
+        <column name="infoTypeName" type="String" />
         <column name="infoTypeCategoryId" type="long" />
         <column name="infoTitle" type="String" />
         <column name="infoDesc" type="String" />

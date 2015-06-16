@@ -63,6 +63,17 @@ public class EventTypeServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.rumbasolutions.flask.model.EventType> getEventTypes(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getEventTypes(serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.EventType getEventType(
+		long eventTypeId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getEventType(eventTypeId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -38,7 +38,7 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(51);
 
 		sb.append("{venueDetailId=");
 		sb.append(venueDetailId);
@@ -54,6 +54,8 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		sb.append(venueId);
 		sb.append(", infoTypeId=");
 		sb.append(infoTypeId);
+		sb.append(", infoTypeName=");
+		sb.append(infoTypeName);
 		sb.append(", infoTypeCategoryId=");
 		sb.append(infoTypeCategoryId);
 		sb.append(", infoTitle=");
@@ -117,6 +119,14 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 
 		venueDetailImpl.setVenueId(venueId);
 		venueDetailImpl.setInfoTypeId(infoTypeId);
+
+		if (infoTypeName == null) {
+			venueDetailImpl.setInfoTypeName(StringPool.BLANK);
+		}
+		else {
+			venueDetailImpl.setInfoTypeName(infoTypeName);
+		}
+
 		venueDetailImpl.setInfoTypeCategoryId(infoTypeCategoryId);
 
 		if (infoTitle == null) {
@@ -230,6 +240,7 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		modifiedDate = objectInput.readLong();
 		venueId = objectInput.readLong();
 		infoTypeId = objectInput.readLong();
+		infoTypeName = objectInput.readUTF();
 		infoTypeCategoryId = objectInput.readLong();
 		infoTitle = objectInput.readUTF();
 		infoDesc = objectInput.readUTF();
@@ -259,6 +270,14 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeLong(venueId);
 		objectOutput.writeLong(infoTypeId);
+
+		if (infoTypeName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(infoTypeName);
+		}
+
 		objectOutput.writeLong(infoTypeCategoryId);
 
 		if (infoTitle == null) {
@@ -366,6 +385,7 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 	public long modifiedDate;
 	public long venueId;
 	public long infoTypeId;
+	public String infoTypeName;
 	public long infoTypeCategoryId;
 	public String infoTitle;
 	public String infoDesc;
