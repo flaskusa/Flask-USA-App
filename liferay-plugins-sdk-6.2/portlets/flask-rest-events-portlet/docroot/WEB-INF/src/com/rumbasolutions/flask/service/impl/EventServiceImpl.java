@@ -24,6 +24,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.Event;
 import com.rumbasolutions.flask.service.EventLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.EventServiceBaseImpl;
+import com.rumbasolutions.flask.service.persistence.EventUtil;
 
 /**
  * The implementation of the event remote service.
@@ -52,10 +53,10 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	public List<Event> getAllEvents(ServiceContext  serviceContext){
 		List<Event> events= new ArrayList<Event>();
 		try {
-			return  EventLocalServiceUtil.getEvents(0, 1000);
+			events =  EventUtil.findAll();
 		}
 		catch (Exception e) {
-			LOGGER.error("Exception in getAllVenues. " + e.getMessage());
+			LOGGER.error("Exception in getAllEvents. " + e.getMessage());
 			e.printStackTrace();
 		}
 		return events;
@@ -80,6 +81,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
 			event.setEventImagePath(eventImagePath);
+			EventLocalServiceUtil.addEvent(event);
 
 			
 		}catch(Exception ex){
