@@ -1,0 +1,15 @@
+insert into flaskevents_eventtype values (1,'sports-professional-football', 'Football');
+insert into flaskevents_eventtype values(2,'sports-professional-baseball', 'Baseball');
+insert into flaskevents_eventtype values(3,'sports-professional-hockey', 'Hockey');
+insert into flaskevents_eventtype value(4,'sports-professional-basketball', 'Basketball');
+insert into flaskevents_eventtype values (5,'college-professional-football', 'College Football');
+insert into flaskevents_eventtype values(6,'college-professional-baseball', 'College Baseball');
+insert into flaskevents_eventtype values(7,'college-professional-hockey', 'College Hockey');
+insert into flaskevents_eventtype value(8,'college-professional-basketball', 'College Basketball');
+insert into flaskevents_eventtype values (9,'concerts-country', 'Country');
+insert into flaskevents_eventtype values(10,'concerts-pop', 'Pop');
+insert into flaskevents_eventtype values(11,'concerts-rock', 'Rock');
+insert into flaskevents_eventtype values(12,'concerts-rap', 'Rap');
+insert into flaskevents_eventtype values(13,'concerts-alternative', 'Alternative');
+insert into flaskevents_eventtype values(14,'concerts-electronic', 'Electronic');
+insert into flaskevents_eventtype values(15,'special-events-comedy', 'Comedy');
