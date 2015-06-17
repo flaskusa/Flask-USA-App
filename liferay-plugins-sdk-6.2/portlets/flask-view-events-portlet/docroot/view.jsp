@@ -13,58 +13,11 @@
  * details.
  */
 %>
-
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
 <portlet:defineObjects />
-<link async href="http://fonts.googleapis.com/css?family=Average%20Sans" rel="stylesheet" type="text/css"/>
-<link async href="http://fonts.googleapis.com/css?family=Gochi%20Hand" rel="stylesheet" type="text/css"/>
 <body>
 <div class="table-responsive">          
-
-  <table id="viewevent">
-    <tbody>
-      <tr>
-        <td><div class="imgdiv"><img src="<%=request.getContextPath()%>/img/lion.gif"  ></div>
-        <div class="lbldiv">
-        <label class="control-label-color">Detroit Liions vs. Chicago Bears</label>
-        <label class="control-label-nocolor" >1:00 p.m. at Ford Field</label></div> </td>
-      </tr>
-      <tr>
-       	<td><div class="imgdiv"><img src="<%=request.getContextPath()%>/img/d.gif" ></div>
-	        <div class="lbldiv">
-		        <label  class="control-label-color" >Detroit Tigers vs. Milwaukee Brewers</label>
-		        <label  class="control-label-nocolor" >7:05 p.m. at Comerica Park</label>
-	        </div> 
-      	</td>
-      </tr>
-      <tr>
-         <td class="gap"> <button type="button" class="button" >SEARCH FOR AN EVENT
-   </button>
-   </td>
-      </tr>
-		<tr>
-	         <td class="gap">
-				<input  type="text" placeholder="TYPE:">
-	         </td>
-      	</tr>
-		<tr>
-         	<td >
-         	<input type="text" placeholder="DATE:">
-         	</td>
-      	</tr>
-		<tr>
-        	 <td >
-        	 <input  type="text" placeholder="CITY:">
-        	 </td>
-     	 </tr>
-		<tr>
-        	 <td >
-        	 <input type="text" placeholder="KEY WORDS:">
-        	 </td>
-     	</tr>
-    </tbody>
-  </table>
+<div style="border: none;" id="listbox"></div>  
 <div id="fixedfooter">
 <table >
             <tr>
