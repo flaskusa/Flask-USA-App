@@ -183,3 +183,22 @@ div#placeholder
 {
 	width: 100%; height: auto;
 }
+
+
+div#verticalScrollBarlistbox {
+  visibility: collapse !important;
+  left: 244px;
+  top: 0px;
+  position: absolute;
+  width: 10px;
+  height: 186px;
+}
+
+div#horizontalScrollBarlistbox {
+  visibility: collapse !important;
+  left: 0px;
+  top: 186px;
+  position: absolute;
+  height: 10px;
+  width: 244px;
+}
