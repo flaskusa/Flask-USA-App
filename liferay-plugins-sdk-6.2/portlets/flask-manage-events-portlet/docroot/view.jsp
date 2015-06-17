@@ -13,167 +13,190 @@
  * details.
  */
 %>
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
 
-<%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
+<%
+  com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+  long repositoryId = themeDisplay.getLayout().getGroupId();
+  themeDisplay.getLayout().getUuid();
+%>
 
-
-<portlet:defineObjects />
-
-<liferay-theme:defineObjects />
-
-<script type="text/javascript">
-
+<aui:script>
 var bCreated;
-
-Liferay.Portlet.ready(initializeGrid);
-		
-function initializeGrid(portletId, portlet){
-	console.log('initialize');
-	
-	if(portletId != null && portletId.indexOf('flask') >= 0) {//this is a hack need better solution
-	
-		console.log('getdata');
-		getData();
+Liferay.Portlet.ready(initialize);
+function initialize(portletId, portlet){
+	if(portletId == "flaskmanageevents_WAR_flaskmanageeventsportlet") {
+		$("#eventForm").hide();
+		createTable({},_eventModel.DATA_MODEL.EVENT, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Event"]);
+		loadData();
+		addClickHandlers();
+		initForm();
+		displayImages(<%=repositoryId%>,29655);
 	}
-	
 }
 
-function createTable(data){
-	var grid = $('#jqxgrid');
-	
-    var source =
-    {
-        showfilterrow: true,
-        filterable: true,
-        pageable: true,
-        autoheight: true,
-        localdata: data,
-        datafields:
-        [
-            { name: 'firstName', type: 'string' },
-            { name: 'lastName', type: 'string' },
-            { name: 'email', type: 'string' },
-            { name: 'screenName', type: 'string'},
-            { name: 'userId', type: 'long'}
-        ],
-        datatype: "json"
-    };
-
-    var dataAdapter = new $.jqx.dataAdapter(source);
-    
-    var actionCellRenderer = function (value) {
-    	return 	"<div id='AdminSettings'>"
-		       +	"<a data-toggle='dropdown' href='#'><img src='${themeDisplay.pathThemeImages}/common/tool.png' height='16' width='16' /></a>"
-		       +	"<ul class='dropdown-menu'>"
-		       +	"<li><a href='#' onclick='fnShowForm({value});'>Edit</a></li>"
-		       +	"<li><a href='#' onclick='fnDelete({value});'>Delete</a></li>"
-		       +   	"<li><a href='#' onclick='fnPasswordReset({value});'>Reset Password</a></li>"
-		       +    "<li><a href='#' onclick='fnChangeRole({value});'>Change Role</a></li>"
-		       +    "</ul></div>"; 
-	}
-    
-    var initrowdetails = function(index, parentElement, gridElement, datarecord){
-    	 var tabsdiv = null;
-         var information = null;
-         var notes = null;
-         tabsdiv = $($(parentElement).children()[0]);
-         if (tabsdiv != null) {
-             information = tabsdiv.find('.profile');
-             notes = tabsdiv.find('.interests');
-             var title = tabsdiv.find('.title');
-             title.text(datarecord.firstName);
-             
-             var notescontainer = $('<div style="white-space: normal; margin: 5px;"><span>' + datarecord.email + '</span></div>');
-             $(notes).append(notescontainer);
-             $(tabsdiv).jqxTabs({ width: '95%', height: 250, theme: 'orange'});
-             
-         }
-    	
-    }
-    
-    grid.on('rowclick', function (event) 
-    		{
-    		    var args = event.args;
-    		    // row's bound index.
-    		    var boundIndex = args.rowindex;
-    		    // row's visible index.
-    		    var visibleIndex = args.visibleindex;
-    		    // right click.
-    		    var rightclick = args.rightclick; 
-    		    // original event.
-    		    var ev = args.originalEvent;    
-    		    
-    		    grid.jqxGrid('selectrow', boundIndex);
-    		    
-    		    var details = grid.jqxGrid('getrowdetails', boundIndex);
-    		    if(details.rowdetailshidden ==true){
-    		    	grid.jqxGrid('showrowdetails', boundIndex);	
-    		    }else{
-    		    	grid.jqxGrid('hiderowdetails', boundIndex);
-    		    }
-    		    
-    		    
-    		});
-    
-    
-    var rodetailsTemplate = "<div style='margin: 2px;'> \
-    						<ul style='margin-left: 30px;'> \
-    							<li class='title'>Provile</li>\
-    							<li>Interests</li></ul> \
-    						<div class='profile'></div> \
-    						<div class='interests'></div></div>";
-	
-    grid.jqxGrid(
-            {
-                width: '90%',
-                height: '95%',
-                source: dataAdapter,
-                theme:	'orange',
-                rowdetails: true,
-                showrowdetailscolumn:false,
-                rowdetailstemplate: { rowdetails: rodetailsTemplate, rowdetailsheight: 200 },
-                initrowdetails: initrowdetails,
-                columns: [
-                  { text: 'First Name', columntype: 'textbox',  datafield: 'firstName', width: '20%' },
-                  {
-                      text: 'Last Name', datafield: 'lastName', width: '20%'
-                  },
-                  { text: 'Email', datafield: 'email',  width: '30%'},
-                  { text: 'Screen Name', datafield: 'screenName', width: '20%'},
-                  { text: 'Action',  datafield: 'userId', width: '10%', cellsalign: 'center', cellsrenderer: actionCellRenderer}
-                  
-                ]
-                
-            });
-    
-	}
-
-
-function getData(){
-	var adminDataUrl= '/api/jsonws/flask-rest-users-portlet.flaskadmin/get-flask-admins';
-	var jqxhr = $.ajax( {
-		  url: adminDataUrl,
-		  method: "GET",
-		  dataType: "json",
-		  cache : false
-		} )
-	  .done(function(data) {
-		  if(bCreated){
-			  updateTable();
-		  }else{
-			  createTable(data);
-		  }
-	  })
-	  .fail(function(jqXHR, textStatus ) {
-	   	console.log('Data request failed' + textStatus);
-	    //TODO add logic for error display
-	  })
+function createFolder(repositoryId,parentFolderId,folderName,folderDesc){
+	 Liferay.Service(
+	   '/dlapp/add-folder',
+	   {
+	     repositoryId: repositoryId,
+	     parentFolderId: parentFolderId,
+	     name: folderName,
+	     description: folderDesc
+	   },
+	   function(obj) {
+	    if(obj=="com.liferay.portlet.documentlibrary.DuplicateFolderNameException")
+	    {
+		     Liferay.Service(
+		       '/dlapp/get-folder',
+		       {
+			         repositoryId: repositoryId,
+			         parentFolderId: parentFolderId,
+			         name: folderName
+		       },
+		       function(obj) {
+		        	 console.log(obj);
+		       });
+	    }
+	    else
+	    {
+	    	 return obj.folderId;
+	    }
+	   }
+	 );
 }
 
+function displayImages(repositoryId, folderId)
+{
+	var images;
+	Liferay.Service('/dlapp/get-file-entries',{
+		    repositoryId: 20182,
+		    folderId: 29655
+		  },
+		  function(obj) {
+		    console.log(obj);
+		    var temp_html;
+		    temp_html="<ul>";
+		    var imageurl;
+		    var uploadedby;
+		    for(var i=0;i<obj.length;i++)
+				{
+		    		console.log(obj[i].title);
+		    		imageurl = "/documents/"+repositoryId+"/"+folderId+"/"+obj[i].title;
+		    		uploadedby = "uploaded by " + obj[i].userName;
+		    		temp_html=temp_html+"<li><img src="+imageurl+" alt='"+uploadedby+"' title='"+uploadedby+"' id='wows1_0'/></li>";
+		    	}
+		    temp_html=temp_html+"</ul>";
+			$("#ws_images").html(temp_html);
+			$("#wowslider-container1").wowSlider();
+	});
+}
 
-</script>
+</aui:script>
 
- <div id="jqxgrid">
-
+<body class='default'>
+<input type="hidden" id="repositoryId" value="<%=repositoryId%>"/>
+<div id="action-msg" style="display:none">
 </div>
+
+
+<div id="eventDataTable" class="table-condensed">
+	<div class="cssGridMenu">
+		<div class="cssAddUser"><div class="iconAddVenue"></div></div>
+		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
+		<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
+		<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
+	</div>
+
+	<div id="GridContainer" class="device-mobile-tablet"> 
+	    <div id="container" class="device-mobile-tablet-container">
+	        <div style="border: none;" id='grid'></div>
+	    </div>
+	</div>
+</div>
+
+<div id='actionMenu' style="display:none">
+    <ul>
+		<li>Edit</li> 					<!--fnShowForm({value}); -->
+		<li>Delete</li>					<!--fnDelete({value}); -->
+	</ul>
+</div>
+
+<form id="eventForm" style="display:none">
+  <div class="form-group">
+    <div class="controls">
+	     <label class="control-label" for="eventName">Event Name:</label>
+	    <input name="eventName" id="eventName" class="form-control" type="text" > <div id='Active'>Active</div>
+	</div> 
+	   
+    </div>
+
+    <div class="form-group">
+    	<label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
+	   			<div id="eventDate"></div>
+	  	</div>
+   </div> 
+
+   <div class="form-group">
+    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
+    <div class="controls">
+      <div id="startTime"></div>
+    </div>
+  </div>
+
+	<div class="form-group">
+	<label  id="EndTime" class="control-label" for="endTime">End Time:</label>
+    	<div class="controls">
+    		 <div id="endTime"></div>
+    	</div>
+  </div>
+  <br/>
+  <div class="form-group">
+	    <label class="control-label" for="eventVenueId">Venue:</label>
+		<div class="controls">
+			<select id="eventVenueId" name="eventVenueId" class="form-control-select"></select>
+			<input id="AddVenue" class="btn btn-info" type="button" value="Add Venue"/>
+		</div>
+   </div>
+   <div class="form-group">
+		<div id='jqxtabs'>
+		    <ul style='margin-left: 20px;'>
+		        <li>General</li>
+		        <li>Pre Event</li>
+		        <li>During Event</li>
+		        <li>Post Event</li>
+		    </ul>
+		    <div>
+		<div style="height: 45px;">
+			<input class="btn btn-info floatPosition" type="button" value="Add Content" />
+		</div>
+		<div>    
+		<div id="wowslider-container1">
+		<div class="ws_images" id="ws_images">
+			<!-- <ul>
+					<li><img src="http://localhost:8080/documents/20182/29655/daisetsuzan_national_park_japan-wallpaper-1920x1080.jpg" alt="seagull" title="seagull" id="wows1_0" /></li>
+			</ul> -->
+		</div>
+		<div class="ws_shadow"></div>
+		</div>
+		</div>
+		</div>
+		    <div>
+		    	<input class="btn btn-info floatPosition" type="button" value="Add Content"/>
+		    </div>
+		    <div>
+		    	<input class="btn btn-info floatPosition" type="button" value="Add Content"/>
+		    </div>
+		    <div>
+		    	<input class="btn btn-info floatPosition" type="button" value="Add Content"/>
+		    </div>
+		</div>
+	</div>
+<input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
+  <input class="btn btn-info clsDelete" type="button" value="Delete"/>
+  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
+  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
+</form>
+</body>
+</html>
