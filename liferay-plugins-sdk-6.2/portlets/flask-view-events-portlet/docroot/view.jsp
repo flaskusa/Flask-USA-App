@@ -13,23 +13,96 @@
  * details.
  */
 %>
+
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
+
 <portlet:defineObjects />
+<link async href="http://fonts.googleapis.com/css?family=Average%20Sans" rel="stylesheet" type="text/css"/>
+<link async href="http://fonts.googleapis.com/css?family=Gochi%20Hand" rel="stylesheet" type="text/css"/>
 <body>
+
 <div class="table-responsive">          
-<div style="border: none;" id="listbox"></div>  
-<div id="fixedfooter">
-<table >
-            <tr>
-                <td class="footertxt">
-                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
-                </td>
-                <td class="asans"><b>FREE PINT WITH WITH A BURGER</b>
-                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
-                <span class="gochi">ON GAMEDAY!</span>
-                </td>
-            </tr>
-        </table>
-</div>
+<div id="one">
+    <div style="overflow: hidden;">
+            <div style="border: none;" id="listbox">
+            </div>
+    </div>
+  <table id="viewevent">
+    <tbody>
+		<tr>
+		<td>
+		 <div style="border: none;" id="listbox"></div>
+		</td>
+		</tr>
+      <tr>
+         <td class="gap"> <button type="button" class="button" >SEARCH FOR AN EVENT
+   </button>
+   </td>
+      </tr>
+		<tr>
+	         <td class="gap">
+				<input  type="text" placeholder="SEARCH:">
+	         </td>
+      	</tr>
+		<tr>
+        	 <td style="display:none;">
+        	 <input type="text" placeholder="KEY WORDS:" >
+        	 </td>
+     	</tr>
+    </tbody>
+  </table>
+
+		 
+		<div id="fixedfooter">
+				<table >
+		            <tr>
+		                <td class="footertxt">
+		                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
+		                </td>
+		                <td class="asans"><b>FREE PINT WITH WITH A BURGER</b>
+		                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
+		                <span class="gochi">ON GAMEDAY!</span>
+		                </td>
+		            </tr>
+		        </table>
+		</div>
   </div>
+ </div>
+    
+ <div id="two" style="display:none; width:100%; ">
+<!-- 			
+  <div id="splitter">
+        <div style="overflow: hidden;">
+            <div style="border: none;" id="listbox">
+            </div>
+        </div>
+        <div style="overflow: hidden;" id="ContentPanel">
+        </div>
+    </div>
+    
+     -->
+  <div id="image1">
+        <img id="banner" src="<%=request.getContextPath()%>/img/stripe.png" style=" height: 458px;" />
+    </div>
+
+    <div id="section"> 
+        
+
+    <div>
+        <img src="<%=request.getContextPath()%>/img/Fotolia_81101979_Subscription_Monthly_M.jpg" class="imgside" />
+    </div>
+    <div>
+        <img src="<%=request.getContextPath()%>/img/Fotolia_2932277_Subscription_Monthly_M.jpg" class="imgside" />
+    </div>
+    <div>
+        <img src="<%=request.getContextPath()%>/img/Fotolia_20387372_Subscription_Monthly_M.jpg" class="imgside" />
+    </div>
+    </div>
+    <div align="center" id="fixedfooter2">
+
+        <b>YOUR GAME PLAN FOR GAME DAY</b>
+
+    </div>
+
+</div>
 </body>
