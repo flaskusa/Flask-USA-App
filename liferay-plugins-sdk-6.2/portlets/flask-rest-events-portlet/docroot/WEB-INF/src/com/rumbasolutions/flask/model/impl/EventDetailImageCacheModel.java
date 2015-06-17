@@ -52,8 +52,8 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 		sb.append(modifiedDate);
 		sb.append(", eventDetailId=");
 		sb.append(eventDetailId);
-		sb.append(", imagetitle=");
-		sb.append(imagetitle);
+		sb.append(", imageTitle=");
+		sb.append(imageTitle);
 		sb.append(", imageDesc=");
 		sb.append(imageDesc);
 		sb.append(", imagePath=");
@@ -87,11 +87,11 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 
 		eventDetailImageImpl.setEventDetailId(eventDetailId);
 
-		if (imagetitle == null) {
-			eventDetailImageImpl.setImagetitle(StringPool.BLANK);
+		if (imageTitle == null) {
+			eventDetailImageImpl.setImageTitle(StringPool.BLANK);
 		}
 		else {
-			eventDetailImageImpl.setImagetitle(imagetitle);
+			eventDetailImageImpl.setImageTitle(imageTitle);
 		}
 
 		if (imageDesc == null) {
@@ -121,7 +121,7 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 		createdDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		eventDetailId = objectInput.readLong();
-		imagetitle = objectInput.readUTF();
+		imageTitle = objectInput.readUTF();
 		imageDesc = objectInput.readUTF();
 		imagePath = objectInput.readUTF();
 	}
@@ -136,11 +136,11 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 		objectOutput.writeLong(modifiedDate);
 		objectOutput.writeLong(eventDetailId);
 
-		if (imagetitle == null) {
+		if (imageTitle == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(imagetitle);
+			objectOutput.writeUTF(imageTitle);
 		}
 
 		if (imageDesc == null) {
@@ -164,7 +164,7 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 	public long createdDate;
 	public long modifiedDate;
 	public long eventDetailId;
-	public String imagetitle;
+	public String imageTitle;
 	public String imageDesc;
 	public String imagePath;
 }

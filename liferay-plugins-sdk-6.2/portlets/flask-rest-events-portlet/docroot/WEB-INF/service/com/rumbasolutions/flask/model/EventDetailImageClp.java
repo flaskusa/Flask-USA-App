@@ -81,7 +81,7 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("eventDetailId", getEventDetailId());
-		attributes.put("imagetitle", getImagetitle());
+		attributes.put("imageTitle", getImageTitle());
 		attributes.put("imageDesc", getImageDesc());
 		attributes.put("imagePath", getImagePath());
 
@@ -126,10 +126,10 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 			setEventDetailId(eventDetailId);
 		}
 
-		String imagetitle = (String)attributes.get("imagetitle");
+		String imageTitle = (String)attributes.get("imageTitle");
 
-		if (imagetitle != null) {
-			setImagetitle(imagetitle);
+		if (imageTitle != null) {
+			setImageTitle(imageTitle);
 		}
 
 		String imageDesc = (String)attributes.get("imageDesc");
@@ -295,21 +295,21 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 	}
 
 	@Override
-	public String getImagetitle() {
-		return _imagetitle;
+	public String getImageTitle() {
+		return _imageTitle;
 	}
 
 	@Override
-	public void setImagetitle(String imagetitle) {
-		_imagetitle = imagetitle;
+	public void setImageTitle(String imageTitle) {
+		_imageTitle = imageTitle;
 
 		if (_eventDetailImageRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailImageRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setImagetitle", String.class);
+				Method method = clazz.getMethod("setImageTitle", String.class);
 
-				method.invoke(_eventDetailImageRemoteModel, imagetitle);
+				method.invoke(_eventDetailImageRemoteModel, imageTitle);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -440,7 +440,7 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		clone.setCreatedDate(getCreatedDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setEventDetailId(getEventDetailId());
-		clone.setImagetitle(getImagetitle());
+		clone.setImageTitle(getImageTitle());
 		clone.setImageDesc(getImageDesc());
 		clone.setImagePath(getImagePath());
 
@@ -509,8 +509,8 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		sb.append(getModifiedDate());
 		sb.append(", eventDetailId=");
 		sb.append(getEventDetailId());
-		sb.append(", imagetitle=");
-		sb.append(getImagetitle());
+		sb.append(", imageTitle=");
+		sb.append(getImageTitle());
 		sb.append(", imageDesc=");
 		sb.append(getImageDesc());
 		sb.append(", imagePath=");
@@ -553,8 +553,8 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		sb.append(getEventDetailId());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>imagetitle</column-name><column-value><![CDATA[");
-		sb.append(getImagetitle());
+			"<column><column-name>imageTitle</column-name><column-value><![CDATA[");
+		sb.append(getImageTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>imageDesc</column-name><column-value><![CDATA[");
@@ -577,7 +577,7 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private long _eventDetailId;
-	private String _imagetitle;
+	private String _imageTitle;
 	private String _imageDesc;
 	private String _imagePath;
 	private BaseModel<?> _eventDetailImageRemoteModel;

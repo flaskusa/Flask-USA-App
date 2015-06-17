@@ -44,7 +44,7 @@ public interface EventDetailImagePersistence extends BasePersistence<EventDetail
 	* @return the matching event detail images
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.rumbasolutions.flask.model.EventDetailImage> findByeventDetailId(
+	public java.util.List<com.rumbasolutions.flask.model.EventDetailImage> findByEventDetailId(
 		long eventDetailId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -61,7 +61,7 @@ public interface EventDetailImagePersistence extends BasePersistence<EventDetail
 	* @return the range of matching event detail images
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.rumbasolutions.flask.model.EventDetailImage> findByeventDetailId(
+	public java.util.List<com.rumbasolutions.flask.model.EventDetailImage> findByEventDetailId(
 		long eventDetailId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
@@ -79,7 +79,7 @@ public interface EventDetailImagePersistence extends BasePersistence<EventDetail
 	* @return the ordered range of matching event detail images
 	* @throws SystemException if a system exception occurred
 	*/
-	public java.util.List<com.rumbasolutions.flask.model.EventDetailImage> findByeventDetailId(
+	public java.util.List<com.rumbasolutions.flask.model.EventDetailImage> findByEventDetailId(
 		long eventDetailId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -93,7 +93,7 @@ public interface EventDetailImagePersistence extends BasePersistence<EventDetail
 	* @throws com.rumbasolutions.flask.NoSuchEventDetailImageException if a matching event detail image could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.EventDetailImage findByeventDetailId_First(
+	public com.rumbasolutions.flask.model.EventDetailImage findByEventDetailId_First(
 		long eventDetailId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -107,7 +107,7 @@ public interface EventDetailImagePersistence extends BasePersistence<EventDetail
 	* @return the first matching event detail image, or <code>null</code> if a matching event detail image could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.EventDetailImage fetchByeventDetailId_First(
+	public com.rumbasolutions.flask.model.EventDetailImage fetchByEventDetailId_First(
 		long eventDetailId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -121,7 +121,7 @@ public interface EventDetailImagePersistence extends BasePersistence<EventDetail
 	* @throws com.rumbasolutions.flask.NoSuchEventDetailImageException if a matching event detail image could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.EventDetailImage findByeventDetailId_Last(
+	public com.rumbasolutions.flask.model.EventDetailImage findByEventDetailId_Last(
 		long eventDetailId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -135,7 +135,7 @@ public interface EventDetailImagePersistence extends BasePersistence<EventDetail
 	* @return the last matching event detail image, or <code>null</code> if a matching event detail image could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.EventDetailImage fetchByeventDetailId_Last(
+	public com.rumbasolutions.flask.model.EventDetailImage fetchByEventDetailId_Last(
 		long eventDetailId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
@@ -150,7 +150,7 @@ public interface EventDetailImagePersistence extends BasePersistence<EventDetail
 	* @throws com.rumbasolutions.flask.NoSuchEventDetailImageException if a event detail image with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
-	public com.rumbasolutions.flask.model.EventDetailImage[] findByeventDetailId_PrevAndNext(
+	public com.rumbasolutions.flask.model.EventDetailImage[] findByEventDetailId_PrevAndNext(
 		long eventDetailImageId, long eventDetailId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException,
@@ -162,7 +162,7 @@ public interface EventDetailImagePersistence extends BasePersistence<EventDetail
 	* @param eventDetailId the event detail ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByeventDetailId(long eventDetailId)
+	public void removeByEventDetailId(long eventDetailId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -172,7 +172,7 @@ public interface EventDetailImagePersistence extends BasePersistence<EventDetail
 	* @return the number of matching event detail images
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByeventDetailId(long eventDetailId)
+	public int countByEventDetailId(long eventDetailId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

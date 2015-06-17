@@ -60,14 +60,16 @@ public class EventDetailWrapper implements EventDetail,
 		attributes.put("infoTypeName", getInfoTypeName());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
-		attributes.put("infoName", getInfoName());
+		attributes.put("infoTitle", getInfoTitle());
 		attributes.put("infoDesc", getInfoDesc());
 		attributes.put("addrLine1", getAddrLine1());
 		attributes.put("addrLine2", getAddrLine2());
 		attributes.put("city", getCity());
 		attributes.put("zipCode", getZipCode());
 		attributes.put("stateId", getStateId());
+		attributes.put("stateName", getStateName());
 		attributes.put("countryId", getCountryId());
+		attributes.put("countryName", getCountryName());
 		attributes.put("latitude", getLatitude());
 		attributes.put("longitude", getLongitude());
 		attributes.put("phone", getPhone());
@@ -140,10 +142,10 @@ public class EventDetailWrapper implements EventDetail,
 			setInfoTypeCategoryName(infoTypeCategoryName);
 		}
 
-		String infoName = (String)attributes.get("infoName");
+		String infoTitle = (String)attributes.get("infoTitle");
 
-		if (infoName != null) {
-			setInfoName(infoName);
+		if (infoTitle != null) {
+			setInfoTitle(infoTitle);
 		}
 
 		String infoDesc = (String)attributes.get("infoDesc");
@@ -182,10 +184,22 @@ public class EventDetailWrapper implements EventDetail,
 			setStateId(stateId);
 		}
 
+		String stateName = (String)attributes.get("stateName");
+
+		if (stateName != null) {
+			setStateName(stateName);
+		}
+
 		Long countryId = (Long)attributes.get("countryId");
 
 		if (countryId != null) {
 			setCountryId(countryId);
+		}
+
+		String countryName = (String)attributes.get("countryName");
+
+		if (countryName != null) {
+			setCountryName(countryName);
 		}
 
 		String latitude = (String)attributes.get("latitude");
@@ -468,23 +482,23 @@ public class EventDetailWrapper implements EventDetail,
 	}
 
 	/**
-	* Returns the info name of this event detail.
+	* Returns the info title of this event detail.
 	*
-	* @return the info name of this event detail
+	* @return the info title of this event detail
 	*/
 	@Override
-	public java.lang.String getInfoName() {
-		return _eventDetail.getInfoName();
+	public java.lang.String getInfoTitle() {
+		return _eventDetail.getInfoTitle();
 	}
 
 	/**
-	* Sets the info name of this event detail.
+	* Sets the info title of this event detail.
 	*
-	* @param infoName the info name of this event detail
+	* @param infoTitle the info title of this event detail
 	*/
 	@Override
-	public void setInfoName(java.lang.String infoName) {
-		_eventDetail.setInfoName(infoName);
+	public void setInfoTitle(java.lang.String infoTitle) {
+		_eventDetail.setInfoTitle(infoTitle);
 	}
 
 	/**
@@ -608,6 +622,26 @@ public class EventDetailWrapper implements EventDetail,
 	}
 
 	/**
+	* Returns the state name of this event detail.
+	*
+	* @return the state name of this event detail
+	*/
+	@Override
+	public java.lang.String getStateName() {
+		return _eventDetail.getStateName();
+	}
+
+	/**
+	* Sets the state name of this event detail.
+	*
+	* @param stateName the state name of this event detail
+	*/
+	@Override
+	public void setStateName(java.lang.String stateName) {
+		_eventDetail.setStateName(stateName);
+	}
+
+	/**
 	* Returns the country ID of this event detail.
 	*
 	* @return the country ID of this event detail
@@ -625,6 +659,26 @@ public class EventDetailWrapper implements EventDetail,
 	@Override
 	public void setCountryId(long countryId) {
 		_eventDetail.setCountryId(countryId);
+	}
+
+	/**
+	* Returns the country name of this event detail.
+	*
+	* @return the country name of this event detail
+	*/
+	@Override
+	public java.lang.String getCountryName() {
+		return _eventDetail.getCountryName();
+	}
+
+	/**
+	* Sets the country name of this event detail.
+	*
+	* @param countryName the country name of this event detail
+	*/
+	@Override
+	public void setCountryName(java.lang.String countryName) {
+		_eventDetail.setCountryName(countryName);
 	}
 
 	/**

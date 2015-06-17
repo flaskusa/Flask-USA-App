@@ -124,11 +124,9 @@ public interface VenueService extends BaseService, InvokableService {
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		java.lang.String stateName, long countryId,
-		java.lang.String countryName, java.lang.String lattitude,
-		java.lang.String longitude, java.lang.String phone,
-		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String website,
+		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.VenueDetail updateVenueDetail(
@@ -136,11 +134,9 @@ public interface VenueService extends BaseService, InvokableService {
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		java.lang.String stateName, long countryId,
-		java.lang.String countryName, java.lang.String lattitude,
-		java.lang.String longitude, java.lang.String phone,
-		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String website,
+		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

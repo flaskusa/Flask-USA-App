@@ -217,19 +217,19 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	public void setInfoTypeCategoryName(long infoTypeCategoryName);
 
 	/**
-	 * Returns the info name of this event detail.
+	 * Returns the info title of this event detail.
 	 *
-	 * @return the info name of this event detail
+	 * @return the info title of this event detail
 	 */
 	@AutoEscape
-	public String getInfoName();
+	public String getInfoTitle();
 
 	/**
-	 * Sets the info name of this event detail.
+	 * Sets the info title of this event detail.
 	 *
-	 * @param infoName the info name of this event detail
+	 * @param infoTitle the info title of this event detail
 	 */
-	public void setInfoName(String infoName);
+	public void setInfoTitle(String infoTitle);
 
 	/**
 	 * Returns the info desc of this event detail.
@@ -321,6 +321,21 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	public void setStateId(long stateId);
 
 	/**
+	 * Returns the state name of this event detail.
+	 *
+	 * @return the state name of this event detail
+	 */
+	@AutoEscape
+	public String getStateName();
+
+	/**
+	 * Sets the state name of this event detail.
+	 *
+	 * @param stateName the state name of this event detail
+	 */
+	public void setStateName(String stateName);
+
+	/**
 	 * Returns the country ID of this event detail.
 	 *
 	 * @return the country ID of this event detail
@@ -333,6 +348,21 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	 * @param countryId the country ID of this event detail
 	 */
 	public void setCountryId(long countryId);
+
+	/**
+	 * Returns the country name of this event detail.
+	 *
+	 * @return the country name of this event detail
+	 */
+	@AutoEscape
+	public String getCountryName();
+
+	/**
+	 * Sets the country name of this event detail.
+	 *
+	 * @param countryName the country name of this event detail
+	 */
+	public void setCountryName(String countryName);
 
 	/**
 	 * Returns the latitude of this event detail.

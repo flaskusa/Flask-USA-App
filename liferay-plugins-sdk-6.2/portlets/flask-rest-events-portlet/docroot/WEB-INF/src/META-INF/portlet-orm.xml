@@ -56,14 +56,16 @@
 			<basic name="infoTypeName" />
 			<basic name="infoTypeCategoryId" />
 			<basic name="infoTypeCategoryName" />
-			<basic name="infoName" />
+			<basic name="infoTitle" />
 			<basic name="infoDesc" />
 			<basic name="addrLine1" />
 			<basic name="addrLine2" />
 			<basic name="city" />
 			<basic name="zipCode" />
 			<basic name="stateId" />
+			<basic name="stateName" />
 			<basic name="countryId" />
+			<basic name="countryName" />
 			<basic name="latitude" />
 			<basic name="longitude" />
 			<basic name="phone" />
@@ -88,7 +90,7 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="eventDetailId" />
-			<basic name="imagetitle" />
+			<basic name="imageTitle" />
 			<basic name="imageDesc" />
 			<basic name="imagePath" />
 			<transient name="modelAttributes" />

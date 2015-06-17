@@ -98,5 +98,250 @@ public class EventServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.EventSoap updateEvent(
+		long eventId, java.lang.String eventName, java.lang.String description,
+		java.lang.String eventDate, java.lang.String startTime,
+		java.lang.String endTime, long eventTypeId, long venueId,
+		java.lang.String eventImagePath,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.Event returnValue = EventServiceUtil.updateEvent(eventId,
+					eventName, description, eventDate, startTime, endTime,
+					eventTypeId, venueId, eventImagePath, serviceContext);
+
+			return com.rumbasolutions.flask.model.EventSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EventServiceUtil.deleteEvent(eventId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteEvents(java.lang.String eventIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EventServiceUtil.deleteEvents(eventIds, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailSoap addEventDetail(
+		long eventId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String website,
+		java.lang.Double cost, java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.EventDetail returnValue = EventServiceUtil.addEventDetail(eventId,
+					infoTypeId, infoTypeCategoryId, infoTitle, infoDesc,
+					addrLine1, addrLine2, zipCode, city, stateId, countryId,
+					lattitude, longitude, phone, website, cost,
+					hoursOfOperation, serviceContext);
+
+			return com.rumbasolutions.flask.model.EventDetailSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailSoap updateEventDetail(
+		long eventDetailId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String website,
+		java.lang.Double cost, java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.EventDetail returnValue = EventServiceUtil.updateEventDetail(eventDetailId,
+					infoTypeId, infoTypeCategoryId, infoTitle, infoDesc,
+					addrLine1, addrLine2, zipCode, city, stateId, countryId,
+					lattitude, longitude, phone, website, cost,
+					hoursOfOperation, serviceContext);
+
+			return com.rumbasolutions.flask.model.EventDetailSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailSoap getEventDetail(
+		long eventDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.EventDetail returnValue = EventServiceUtil.getEventDetail(eventDetailId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.EventDetailSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailSoap[] getEventDetails(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.EventDetail> returnValue =
+				EventServiceUtil.getEventDetails(eventId, serviceContext);
+
+			return com.rumbasolutions.flask.model.EventDetailSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteEventDetail(long eventDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EventServiceUtil.deleteEventDetail(eventDetailId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteAllEventDetails(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EventServiceUtil.deleteAllEventDetails(eventId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailImageSoap addEventDetailImage(
+		long EventDetailId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.EventDetailImage returnValue = EventServiceUtil.addEventDetailImage(EventDetailId,
+					imageTitle, imageDesc, imagePath, serviceContext);
+
+			return com.rumbasolutions.flask.model.EventDetailImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailImageSoap updateEventDetailImage(
+		long EventDetailImageId, long EventDetailId,
+		java.lang.String imageTitle, java.lang.String imageDesc,
+		java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.EventDetailImage returnValue = EventServiceUtil.updateEventDetailImage(EventDetailImageId,
+					EventDetailId, imageTitle, imageDesc, imagePath,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.EventDetailImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailImageSoap getEventDetailImage(
+		long eventDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.EventDetailImage returnValue = EventServiceUtil.getEventDetailImage(eventDetailImageId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.EventDetailImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailImageSoap[] getEventDetailImages(
+		long eventDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.EventDetailImage> returnValue =
+				EventServiceUtil.getEventDetailImages(eventDetailId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.EventDetailImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteEventDetailImage(long eventDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EventServiceUtil.deleteEventDetailImage(eventDetailImageId,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(EventServiceSoap.class);
 }

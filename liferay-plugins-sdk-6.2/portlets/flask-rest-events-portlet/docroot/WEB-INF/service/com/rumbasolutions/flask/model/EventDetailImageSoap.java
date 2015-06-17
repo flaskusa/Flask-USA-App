@@ -37,7 +37,7 @@ public class EventDetailImageSoap implements Serializable {
 		soapModel.setCreatedDate(model.getCreatedDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setEventDetailId(model.getEventDetailId());
-		soapModel.setImagetitle(model.getImagetitle());
+		soapModel.setImageTitle(model.getImageTitle());
 		soapModel.setImageDesc(model.getImageDesc());
 		soapModel.setImagePath(model.getImagePath());
 
@@ -142,12 +142,12 @@ public class EventDetailImageSoap implements Serializable {
 		_eventDetailId = eventDetailId;
 	}
 
-	public String getImagetitle() {
-		return _imagetitle;
+	public String getImageTitle() {
+		return _imageTitle;
 	}
 
-	public void setImagetitle(String imagetitle) {
-		_imagetitle = imagetitle;
+	public void setImageTitle(String imageTitle) {
+		_imageTitle = imageTitle;
 	}
 
 	public String getImageDesc() {
@@ -172,7 +172,7 @@ public class EventDetailImageSoap implements Serializable {
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private long _eventDetailId;
-	private String _imagetitle;
+	private String _imageTitle;
 	private String _imageDesc;
 	private String _imagePath;
 }

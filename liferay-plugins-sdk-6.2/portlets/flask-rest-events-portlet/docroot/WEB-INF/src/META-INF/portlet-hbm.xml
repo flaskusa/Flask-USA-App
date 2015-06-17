@@ -46,14 +46,16 @@
 		<property name="infoTypeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoTypeCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="infoTypeCategoryName" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="infoName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="infoTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="addrLine1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="addrLine2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="zipCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="stateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="stateName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="countryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="countryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="latitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="longitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="phone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -71,7 +73,7 @@
 		<property name="createdDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 		<property name="eventDetailId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="imagetitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imageTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="imageDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="imagePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>

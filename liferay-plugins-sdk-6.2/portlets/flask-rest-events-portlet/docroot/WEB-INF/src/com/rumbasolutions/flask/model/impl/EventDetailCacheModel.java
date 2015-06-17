@@ -38,7 +38,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{eventDetailId=");
 		sb.append(eventDetailId);
@@ -60,8 +60,8 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		sb.append(infoTypeCategoryId);
 		sb.append(", infoTypeCategoryName=");
 		sb.append(infoTypeCategoryName);
-		sb.append(", infoName=");
-		sb.append(infoName);
+		sb.append(", infoTitle=");
+		sb.append(infoTitle);
 		sb.append(", infoDesc=");
 		sb.append(infoDesc);
 		sb.append(", addrLine1=");
@@ -74,8 +74,12 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		sb.append(zipCode);
 		sb.append(", stateId=");
 		sb.append(stateId);
+		sb.append(", stateName=");
+		sb.append(stateName);
 		sb.append(", countryId=");
 		sb.append(countryId);
+		sb.append(", countryName=");
+		sb.append(countryName);
 		sb.append(", latitude=");
 		sb.append(latitude);
 		sb.append(", longitude=");
@@ -128,11 +132,11 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		eventDetailImpl.setInfoTypeCategoryId(infoTypeCategoryId);
 		eventDetailImpl.setInfoTypeCategoryName(infoTypeCategoryName);
 
-		if (infoName == null) {
-			eventDetailImpl.setInfoName(StringPool.BLANK);
+		if (infoTitle == null) {
+			eventDetailImpl.setInfoTitle(StringPool.BLANK);
 		}
 		else {
-			eventDetailImpl.setInfoName(infoName);
+			eventDetailImpl.setInfoTitle(infoTitle);
 		}
 
 		if (infoDesc == null) {
@@ -171,7 +175,22 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		}
 
 		eventDetailImpl.setStateId(stateId);
+
+		if (stateName == null) {
+			eventDetailImpl.setStateName(StringPool.BLANK);
+		}
+		else {
+			eventDetailImpl.setStateName(stateName);
+		}
+
 		eventDetailImpl.setCountryId(countryId);
+
+		if (countryName == null) {
+			eventDetailImpl.setCountryName(StringPool.BLANK);
+		}
+		else {
+			eventDetailImpl.setCountryName(countryName);
+		}
 
 		if (latitude == null) {
 			eventDetailImpl.setLatitude(StringPool.BLANK);
@@ -227,14 +246,16 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		infoTypeName = objectInput.readUTF();
 		infoTypeCategoryId = objectInput.readLong();
 		infoTypeCategoryName = objectInput.readLong();
-		infoName = objectInput.readUTF();
+		infoTitle = objectInput.readUTF();
 		infoDesc = objectInput.readUTF();
 		addrLine1 = objectInput.readUTF();
 		addrLine2 = objectInput.readUTF();
 		city = objectInput.readUTF();
 		zipCode = objectInput.readUTF();
 		stateId = objectInput.readLong();
+		stateName = objectInput.readUTF();
 		countryId = objectInput.readLong();
+		countryName = objectInput.readUTF();
 		latitude = objectInput.readUTF();
 		longitude = objectInput.readUTF();
 		phone = objectInput.readUTF();
@@ -264,11 +285,11 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		objectOutput.writeLong(infoTypeCategoryId);
 		objectOutput.writeLong(infoTypeCategoryName);
 
-		if (infoName == null) {
+		if (infoTitle == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(infoName);
+			objectOutput.writeUTF(infoTitle);
 		}
 
 		if (infoDesc == null) {
@@ -307,7 +328,22 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		}
 
 		objectOutput.writeLong(stateId);
+
+		if (stateName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(stateName);
+		}
+
 		objectOutput.writeLong(countryId);
+
+		if (countryName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(countryName);
+		}
 
 		if (latitude == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -357,14 +393,16 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	public String infoTypeName;
 	public long infoTypeCategoryId;
 	public long infoTypeCategoryName;
-	public String infoName;
+	public String infoTitle;
 	public String infoDesc;
 	public String addrLine1;
 	public String addrLine2;
 	public String city;
 	public String zipCode;
 	public long stateId;
+	public String stateName;
 	public long countryId;
+	public String countryName;
 	public String latitude;
 	public String longitude;
 	public String phone;

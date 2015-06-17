@@ -88,36 +88,33 @@
 		<finder name="eventDate" return-type="Collection">
 			<finder-column name="eventDate" />
 		</finder>
-		
-		
-
     </entity>
 
 
   <entity name="EventDetail" local-service="true" remote-service="true">
         <!-- PK fields -->
         <column name="eventDetailId" type="long" primary="true" />
-
         <!-- Audit fields -->
         <column name="companyId" type="long" />
         <column name="userId" type="long" />
         <column name="createdDate" type="Date" />
         <column name="modifiedDate" type="Date" />
-
        		<!-- Other fields -->
        	 <column name="eventId" type="long" />
         <column name="infoTypeId" type="long" />
 		<column name="infoTypeName" type="String" />
         <column name="infoTypeCategoryId" type="long" />
         <column name="infoTypeCategoryName" type="long" />
-        <column name="infoName" type="String" />
+        <column name="infoTitle" type="String" />
         <column name="infoDesc" type="String" />
         <column name="addrLine1" type="String" />
         <column name="addrLine2" type="String" />
         <column name="city" type="String" />
         <column name="zipCode" type="String" />
         <column name="stateId" type="long" />
+        <column name="stateName" type="String" />  <!-- Only for display -->
        	<column name="countryId" type="long" />
+        <column name="countryName" type="String" />  <!-- Only for display -->
         <column name="latitude" type="String" />
         <column name="longitude" type="String" />
         <column name="phone" type="String" />
@@ -128,7 +125,6 @@
         <finder name="EventId" return-type="Collection">
 			<finder-column name="eventId" />
 		</finder>
-		
 		<finder name="EventInfoType" return-type="Collection">
 			<finder-column name="infoTypeId" />
 		</finder>
@@ -151,12 +147,12 @@
         
         <!-- Other fields-->
         <column name="eventDetailId" type="long" />
-        <column name="imagetitle" type="String" />
+        <column name="imageTitle" type="String" />
         <column name="imageDesc" type="String" />
         <column name="imagePath" type="String" />
 		
 		       <!-- Finder methods -->
-        <finder name="eventDetailId" return-type="Collection">
+        <finder name="EventDetailId" return-type="Collection">
 			<finder-column name="eventDetailId" />
 		</finder>
 	</entity>

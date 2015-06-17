@@ -53,9 +53,7 @@
 		<field name="infoTypeName" type="String" />
 		<field name="infoTypeCategoryId" type="long" />
 		<field name="infoTypeCategoryName" type="long" />
-		<field name="infoName" type="String">
-			<hint-collection name="FLASK-TEXTFIELD" />
-		</field>
+		<field name="infoTitle" type="String" />
 		<field name="infoDesc" type="String">
 			<hint-collection name="FLASK-DESC" />
 		</field>
@@ -72,7 +70,9 @@
 			<hint-collection name="FLASK-ZIPCODE" />
 		</field>
 		<field name="stateId" type="long" />
+		<field name="stateName" type="String" />
 		<field name="countryId" type="long" />
+		<field name="countryName" type="String" />
 		<field name="latitude" type="String">
 			<hint-collection name="FLASK-SPATIAL" />
 		</field>
@@ -97,9 +97,7 @@
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="eventDetailId" type="long" />
-		<field name="imagetitle" type="String">
-			<hint-collection name="FLASK-TEXTFIELD" />
-		</field>
+		<field name="imageTitle" type="String" />
 		<field name="imageDesc" type="String">
 			<hint-collection name="FLASK-DESC" />
 		</field>

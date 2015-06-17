@@ -76,14 +76,16 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			{ "infoTypeName", Types.VARCHAR },
 			{ "infoTypeCategoryId", Types.BIGINT },
 			{ "infoTypeCategoryName", Types.BIGINT },
-			{ "infoName", Types.VARCHAR },
+			{ "infoTitle", Types.VARCHAR },
 			{ "infoDesc", Types.VARCHAR },
 			{ "addrLine1", Types.VARCHAR },
 			{ "addrLine2", Types.VARCHAR },
 			{ "city", Types.VARCHAR },
 			{ "zipCode", Types.VARCHAR },
 			{ "stateId", Types.BIGINT },
+			{ "stateName", Types.VARCHAR },
 			{ "countryId", Types.BIGINT },
+			{ "countryName", Types.VARCHAR },
 			{ "latitude", Types.VARCHAR },
 			{ "longitude", Types.VARCHAR },
 			{ "phone", Types.VARCHAR },
@@ -91,7 +93,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			{ "cost", Types.DOUBLE },
 			{ "hoursOfOperation", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName LONG,infoName VARCHAR(100) null,infoDesc VARCHAR(255) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,countryId LONG,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName LONG,infoTitle VARCHAR(75) null,infoDesc VARCHAR(255) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(75) null,countryId LONG,countryName VARCHAR(75) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_EventDetail";
 	public static final String ORDER_BY_JPQL = " ORDER BY eventDetail.eventDetailId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_EventDetail.eventDetailId ASC";
@@ -135,14 +137,16 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		model.setInfoTypeName(soapModel.getInfoTypeName());
 		model.setInfoTypeCategoryId(soapModel.getInfoTypeCategoryId());
 		model.setInfoTypeCategoryName(soapModel.getInfoTypeCategoryName());
-		model.setInfoName(soapModel.getInfoName());
+		model.setInfoTitle(soapModel.getInfoTitle());
 		model.setInfoDesc(soapModel.getInfoDesc());
 		model.setAddrLine1(soapModel.getAddrLine1());
 		model.setAddrLine2(soapModel.getAddrLine2());
 		model.setCity(soapModel.getCity());
 		model.setZipCode(soapModel.getZipCode());
 		model.setStateId(soapModel.getStateId());
+		model.setStateName(soapModel.getStateName());
 		model.setCountryId(soapModel.getCountryId());
+		model.setCountryName(soapModel.getCountryName());
 		model.setLatitude(soapModel.getLatitude());
 		model.setLongitude(soapModel.getLongitude());
 		model.setPhone(soapModel.getPhone());
@@ -223,14 +227,16 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		attributes.put("infoTypeName", getInfoTypeName());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
-		attributes.put("infoName", getInfoName());
+		attributes.put("infoTitle", getInfoTitle());
 		attributes.put("infoDesc", getInfoDesc());
 		attributes.put("addrLine1", getAddrLine1());
 		attributes.put("addrLine2", getAddrLine2());
 		attributes.put("city", getCity());
 		attributes.put("zipCode", getZipCode());
 		attributes.put("stateId", getStateId());
+		attributes.put("stateName", getStateName());
 		attributes.put("countryId", getCountryId());
+		attributes.put("countryName", getCountryName());
 		attributes.put("latitude", getLatitude());
 		attributes.put("longitude", getLongitude());
 		attributes.put("phone", getPhone());
@@ -303,10 +309,10 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			setInfoTypeCategoryName(infoTypeCategoryName);
 		}
 
-		String infoName = (String)attributes.get("infoName");
+		String infoTitle = (String)attributes.get("infoTitle");
 
-		if (infoName != null) {
-			setInfoName(infoName);
+		if (infoTitle != null) {
+			setInfoTitle(infoTitle);
 		}
 
 		String infoDesc = (String)attributes.get("infoDesc");
@@ -345,10 +351,22 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			setStateId(stateId);
 		}
 
+		String stateName = (String)attributes.get("stateName");
+
+		if (stateName != null) {
+			setStateName(stateName);
+		}
+
 		Long countryId = (Long)attributes.get("countryId");
 
 		if (countryId != null) {
 			setCountryId(countryId);
+		}
+
+		String countryName = (String)attributes.get("countryName");
+
+		if (countryName != null) {
+			setCountryName(countryName);
 		}
 
 		String latitude = (String)attributes.get("latitude");
@@ -551,18 +569,18 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@JSON
 	@Override
-	public String getInfoName() {
-		if (_infoName == null) {
+	public String getInfoTitle() {
+		if (_infoTitle == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _infoName;
+			return _infoTitle;
 		}
 	}
 
 	@Override
-	public void setInfoName(String infoName) {
-		_infoName = infoName;
+	public void setInfoTitle(String infoTitle) {
+		_infoTitle = infoTitle;
 	}
 
 	@JSON
@@ -658,6 +676,22 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@JSON
 	@Override
+	public String getStateName() {
+		if (_stateName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _stateName;
+		}
+	}
+
+	@Override
+	public void setStateName(String stateName) {
+		_stateName = stateName;
+	}
+
+	@JSON
+	@Override
 	public long getCountryId() {
 		return _countryId;
 	}
@@ -665,6 +699,22 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 	@Override
 	public void setCountryId(long countryId) {
 		_countryId = countryId;
+	}
+
+	@JSON
+	@Override
+	public String getCountryName() {
+		if (_countryName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _countryName;
+		}
+	}
+
+	@Override
+	public void setCountryName(String countryName) {
+		_countryName = countryName;
 	}
 
 	@JSON
@@ -799,14 +849,16 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		eventDetailImpl.setInfoTypeName(getInfoTypeName());
 		eventDetailImpl.setInfoTypeCategoryId(getInfoTypeCategoryId());
 		eventDetailImpl.setInfoTypeCategoryName(getInfoTypeCategoryName());
-		eventDetailImpl.setInfoName(getInfoName());
+		eventDetailImpl.setInfoTitle(getInfoTitle());
 		eventDetailImpl.setInfoDesc(getInfoDesc());
 		eventDetailImpl.setAddrLine1(getAddrLine1());
 		eventDetailImpl.setAddrLine2(getAddrLine2());
 		eventDetailImpl.setCity(getCity());
 		eventDetailImpl.setZipCode(getZipCode());
 		eventDetailImpl.setStateId(getStateId());
+		eventDetailImpl.setStateName(getStateName());
 		eventDetailImpl.setCountryId(getCountryId());
+		eventDetailImpl.setCountryName(getCountryName());
 		eventDetailImpl.setLatitude(getLatitude());
 		eventDetailImpl.setLongitude(getLongitude());
 		eventDetailImpl.setPhone(getPhone());
@@ -924,12 +976,12 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 		eventDetailCacheModel.infoTypeCategoryName = getInfoTypeCategoryName();
 
-		eventDetailCacheModel.infoName = getInfoName();
+		eventDetailCacheModel.infoTitle = getInfoTitle();
 
-		String infoName = eventDetailCacheModel.infoName;
+		String infoTitle = eventDetailCacheModel.infoTitle;
 
-		if ((infoName != null) && (infoName.length() == 0)) {
-			eventDetailCacheModel.infoName = null;
+		if ((infoTitle != null) && (infoTitle.length() == 0)) {
+			eventDetailCacheModel.infoTitle = null;
 		}
 
 		eventDetailCacheModel.infoDesc = getInfoDesc();
@@ -974,7 +1026,23 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 		eventDetailCacheModel.stateId = getStateId();
 
+		eventDetailCacheModel.stateName = getStateName();
+
+		String stateName = eventDetailCacheModel.stateName;
+
+		if ((stateName != null) && (stateName.length() == 0)) {
+			eventDetailCacheModel.stateName = null;
+		}
+
 		eventDetailCacheModel.countryId = getCountryId();
+
+		eventDetailCacheModel.countryName = getCountryName();
+
+		String countryName = eventDetailCacheModel.countryName;
+
+		if ((countryName != null) && (countryName.length() == 0)) {
+			eventDetailCacheModel.countryName = null;
+		}
 
 		eventDetailCacheModel.latitude = getLatitude();
 
@@ -1023,7 +1091,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{eventDetailId=");
 		sb.append(getEventDetailId());
@@ -1045,8 +1113,8 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeCategoryId());
 		sb.append(", infoTypeCategoryName=");
 		sb.append(getInfoTypeCategoryName());
-		sb.append(", infoName=");
-		sb.append(getInfoName());
+		sb.append(", infoTitle=");
+		sb.append(getInfoTitle());
 		sb.append(", infoDesc=");
 		sb.append(getInfoDesc());
 		sb.append(", addrLine1=");
@@ -1059,8 +1127,12 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getZipCode());
 		sb.append(", stateId=");
 		sb.append(getStateId());
+		sb.append(", stateName=");
+		sb.append(getStateName());
 		sb.append(", countryId=");
 		sb.append(getCountryId());
+		sb.append(", countryName=");
+		sb.append(getCountryName());
 		sb.append(", latitude=");
 		sb.append(getLatitude());
 		sb.append(", longitude=");
@@ -1080,7 +1152,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.EventDetail");
@@ -1127,8 +1199,8 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeCategoryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>infoName</column-name><column-value><![CDATA[");
-		sb.append(getInfoName());
+			"<column><column-name>infoTitle</column-name><column-value><![CDATA[");
+		sb.append(getInfoTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>infoDesc</column-name><column-value><![CDATA[");
@@ -1155,8 +1227,16 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getStateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>stateName</column-name><column-value><![CDATA[");
+		sb.append(getStateName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>countryId</column-name><column-value><![CDATA[");
 		sb.append(getCountryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryName</column-name><column-value><![CDATA[");
+		sb.append(getCountryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>latitude</column-name><column-value><![CDATA[");
@@ -1209,14 +1289,16 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 	private long _originalInfoTypeCategoryId;
 	private boolean _setOriginalInfoTypeCategoryId;
 	private long _infoTypeCategoryName;
-	private String _infoName;
+	private String _infoTitle;
 	private String _infoDesc;
 	private String _addrLine1;
 	private String _addrLine2;
 	private String _city;
 	private String _zipCode;
 	private long _stateId;
+	private String _stateName;
 	private long _countryId;
+	private String _countryName;
 	private String _latitude;
 	private String _longitude;
 	private String _phone;

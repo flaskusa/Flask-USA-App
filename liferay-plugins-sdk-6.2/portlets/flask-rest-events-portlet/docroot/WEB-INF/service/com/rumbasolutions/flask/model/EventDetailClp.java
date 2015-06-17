@@ -85,14 +85,16 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		attributes.put("infoTypeName", getInfoTypeName());
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
-		attributes.put("infoName", getInfoName());
+		attributes.put("infoTitle", getInfoTitle());
 		attributes.put("infoDesc", getInfoDesc());
 		attributes.put("addrLine1", getAddrLine1());
 		attributes.put("addrLine2", getAddrLine2());
 		attributes.put("city", getCity());
 		attributes.put("zipCode", getZipCode());
 		attributes.put("stateId", getStateId());
+		attributes.put("stateName", getStateName());
 		attributes.put("countryId", getCountryId());
+		attributes.put("countryName", getCountryName());
 		attributes.put("latitude", getLatitude());
 		attributes.put("longitude", getLongitude());
 		attributes.put("phone", getPhone());
@@ -165,10 +167,10 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 			setInfoTypeCategoryName(infoTypeCategoryName);
 		}
 
-		String infoName = (String)attributes.get("infoName");
+		String infoTitle = (String)attributes.get("infoTitle");
 
-		if (infoName != null) {
-			setInfoName(infoName);
+		if (infoTitle != null) {
+			setInfoTitle(infoTitle);
 		}
 
 		String infoDesc = (String)attributes.get("infoDesc");
@@ -207,10 +209,22 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 			setStateId(stateId);
 		}
 
+		String stateName = (String)attributes.get("stateName");
+
+		if (stateName != null) {
+			setStateName(stateName);
+		}
+
 		Long countryId = (Long)attributes.get("countryId");
 
 		if (countryId != null) {
 			setCountryId(countryId);
+		}
+
+		String countryName = (String)attributes.get("countryName");
+
+		if (countryName != null) {
+			setCountryName(countryName);
 		}
 
 		String latitude = (String)attributes.get("latitude");
@@ -493,21 +507,21 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public String getInfoName() {
-		return _infoName;
+	public String getInfoTitle() {
+		return _infoTitle;
 	}
 
 	@Override
-	public void setInfoName(String infoName) {
-		_infoName = infoName;
+	public void setInfoTitle(String infoTitle) {
+		_infoTitle = infoTitle;
 
 		if (_eventDetailRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setInfoName", String.class);
+				Method method = clazz.getMethod("setInfoTitle", String.class);
 
-				method.invoke(_eventDetailRemoteModel, infoName);
+				method.invoke(_eventDetailRemoteModel, infoTitle);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -654,6 +668,29 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
+	public String getStateName() {
+		return _stateName;
+	}
+
+	@Override
+	public void setStateName(String stateName) {
+		_stateName = stateName;
+
+		if (_eventDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setStateName", String.class);
+
+				method.invoke(_eventDetailRemoteModel, stateName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public long getCountryId() {
 		return _countryId;
 	}
@@ -669,6 +706,29 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 				Method method = clazz.getMethod("setCountryId", long.class);
 
 				method.invoke(_eventDetailRemoteModel, countryId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getCountryName() {
+		return _countryName;
+	}
+
+	@Override
+	public void setCountryName(String countryName) {
+		_countryName = countryName;
+
+		if (_eventDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCountryName", String.class);
+
+				method.invoke(_eventDetailRemoteModel, countryName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -894,14 +954,16 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		clone.setInfoTypeName(getInfoTypeName());
 		clone.setInfoTypeCategoryId(getInfoTypeCategoryId());
 		clone.setInfoTypeCategoryName(getInfoTypeCategoryName());
-		clone.setInfoName(getInfoName());
+		clone.setInfoTitle(getInfoTitle());
 		clone.setInfoDesc(getInfoDesc());
 		clone.setAddrLine1(getAddrLine1());
 		clone.setAddrLine2(getAddrLine2());
 		clone.setCity(getCity());
 		clone.setZipCode(getZipCode());
 		clone.setStateId(getStateId());
+		clone.setStateName(getStateName());
 		clone.setCountryId(getCountryId());
+		clone.setCountryName(getCountryName());
 		clone.setLatitude(getLatitude());
 		clone.setLongitude(getLongitude());
 		clone.setPhone(getPhone());
@@ -960,7 +1022,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{eventDetailId=");
 		sb.append(getEventDetailId());
@@ -982,8 +1044,8 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeCategoryId());
 		sb.append(", infoTypeCategoryName=");
 		sb.append(getInfoTypeCategoryName());
-		sb.append(", infoName=");
-		sb.append(getInfoName());
+		sb.append(", infoTitle=");
+		sb.append(getInfoTitle());
 		sb.append(", infoDesc=");
 		sb.append(getInfoDesc());
 		sb.append(", addrLine1=");
@@ -996,8 +1058,12 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		sb.append(getZipCode());
 		sb.append(", stateId=");
 		sb.append(getStateId());
+		sb.append(", stateName=");
+		sb.append(getStateName());
 		sb.append(", countryId=");
 		sb.append(getCountryId());
+		sb.append(", countryName=");
+		sb.append(getCountryName());
 		sb.append(", latitude=");
 		sb.append(getLatitude());
 		sb.append(", longitude=");
@@ -1017,7 +1083,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(76);
+		StringBundler sb = new StringBundler(82);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.EventDetail");
@@ -1064,8 +1130,8 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeCategoryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>infoName</column-name><column-value><![CDATA[");
-		sb.append(getInfoName());
+			"<column><column-name>infoTitle</column-name><column-value><![CDATA[");
+		sb.append(getInfoTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>infoDesc</column-name><column-value><![CDATA[");
@@ -1092,8 +1158,16 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		sb.append(getStateId());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>stateName</column-name><column-value><![CDATA[");
+		sb.append(getStateName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>countryId</column-name><column-value><![CDATA[");
 		sb.append(getCountryId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>countryName</column-name><column-value><![CDATA[");
+		sb.append(getCountryName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>latitude</column-name><column-value><![CDATA[");
@@ -1136,14 +1210,16 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	private String _infoTypeName;
 	private long _infoTypeCategoryId;
 	private long _infoTypeCategoryName;
-	private String _infoName;
+	private String _infoTitle;
 	private String _infoDesc;
 	private String _addrLine1;
 	private String _addrLine2;
 	private String _city;
 	private String _zipCode;
 	private long _stateId;
+	private String _stateName;
 	private long _countryId;
+	private String _countryName;
 	private String _latitude;
 	private String _longitude;
 	private String _phone;

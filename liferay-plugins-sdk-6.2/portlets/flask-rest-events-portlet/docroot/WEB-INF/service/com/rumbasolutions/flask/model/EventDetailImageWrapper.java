@@ -56,7 +56,7 @@ public class EventDetailImageWrapper implements EventDetailImage,
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("eventDetailId", getEventDetailId());
-		attributes.put("imagetitle", getImagetitle());
+		attributes.put("imageTitle", getImageTitle());
 		attributes.put("imageDesc", getImageDesc());
 		attributes.put("imagePath", getImagePath());
 
@@ -101,10 +101,10 @@ public class EventDetailImageWrapper implements EventDetailImage,
 			setEventDetailId(eventDetailId);
 		}
 
-		String imagetitle = (String)attributes.get("imagetitle");
+		String imageTitle = (String)attributes.get("imageTitle");
 
-		if (imagetitle != null) {
-			setImagetitle(imagetitle);
+		if (imageTitle != null) {
+			setImageTitle(imageTitle);
 		}
 
 		String imageDesc = (String)attributes.get("imageDesc");
@@ -283,23 +283,23 @@ public class EventDetailImageWrapper implements EventDetailImage,
 	}
 
 	/**
-	* Returns the imagetitle of this event detail image.
+	* Returns the image title of this event detail image.
 	*
-	* @return the imagetitle of this event detail image
+	* @return the image title of this event detail image
 	*/
 	@Override
-	public java.lang.String getImagetitle() {
-		return _eventDetailImage.getImagetitle();
+	public java.lang.String getImageTitle() {
+		return _eventDetailImage.getImageTitle();
 	}
 
 	/**
-	* Sets the imagetitle of this event detail image.
+	* Sets the image title of this event detail image.
 	*
-	* @param imagetitle the imagetitle of this event detail image
+	* @param imageTitle the image title of this event detail image
 	*/
 	@Override
-	public void setImagetitle(java.lang.String imagetitle) {
-		_eventDetailImage.setImagetitle(imagetitle);
+	public void setImageTitle(java.lang.String imageTitle) {
+		_eventDetailImage.setImageTitle(imageTitle);
 	}
 
 	/**

@@ -1917,14 +1917,16 @@ public class EventDetailPersistenceImpl extends BasePersistenceImpl<EventDetail>
 		eventDetailImpl.setInfoTypeName(eventDetail.getInfoTypeName());
 		eventDetailImpl.setInfoTypeCategoryId(eventDetail.getInfoTypeCategoryId());
 		eventDetailImpl.setInfoTypeCategoryName(eventDetail.getInfoTypeCategoryName());
-		eventDetailImpl.setInfoName(eventDetail.getInfoName());
+		eventDetailImpl.setInfoTitle(eventDetail.getInfoTitle());
 		eventDetailImpl.setInfoDesc(eventDetail.getInfoDesc());
 		eventDetailImpl.setAddrLine1(eventDetail.getAddrLine1());
 		eventDetailImpl.setAddrLine2(eventDetail.getAddrLine2());
 		eventDetailImpl.setCity(eventDetail.getCity());
 		eventDetailImpl.setZipCode(eventDetail.getZipCode());
 		eventDetailImpl.setStateId(eventDetail.getStateId());
+		eventDetailImpl.setStateName(eventDetail.getStateName());
 		eventDetailImpl.setCountryId(eventDetail.getCountryId());
+		eventDetailImpl.setCountryName(eventDetail.getCountryName());
 		eventDetailImpl.setLatitude(eventDetail.getLatitude());
 		eventDetailImpl.setLongitude(eventDetail.getLongitude());
 		eventDetailImpl.setPhone(eventDetail.getPhone());

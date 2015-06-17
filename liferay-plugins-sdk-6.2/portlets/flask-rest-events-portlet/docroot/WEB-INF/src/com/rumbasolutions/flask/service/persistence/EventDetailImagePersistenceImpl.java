@@ -88,7 +88,7 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 		new FinderPath(EventDetailImageModelImpl.ENTITY_CACHE_ENABLED,
 			EventDetailImageModelImpl.FINDER_CACHE_ENABLED,
 			EventDetailImageImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
-			"findByeventDetailId",
+			"findByEventDetailId",
 			new String[] {
 				Long.class.getName(),
 				
@@ -99,12 +99,12 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 		new FinderPath(EventDetailImageModelImpl.ENTITY_CACHE_ENABLED,
 			EventDetailImageModelImpl.FINDER_CACHE_ENABLED,
 			EventDetailImageImpl.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByeventDetailId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByEventDetailId",
 			new String[] { Long.class.getName() },
 			EventDetailImageModelImpl.EVENTDETAILID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_EVENTDETAILID = new FinderPath(EventDetailImageModelImpl.ENTITY_CACHE_ENABLED,
 			EventDetailImageModelImpl.FINDER_CACHE_ENABLED, Long.class,
-			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByeventDetailId",
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEventDetailId",
 			new String[] { Long.class.getName() });
 
 	/**
@@ -115,9 +115,9 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<EventDetailImage> findByeventDetailId(long eventDetailId)
+	public List<EventDetailImage> findByEventDetailId(long eventDetailId)
 		throws SystemException {
-		return findByeventDetailId(eventDetailId, QueryUtil.ALL_POS,
+		return findByEventDetailId(eventDetailId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
@@ -135,9 +135,9 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<EventDetailImage> findByeventDetailId(long eventDetailId,
+	public List<EventDetailImage> findByEventDetailId(long eventDetailId,
 		int start, int end) throws SystemException {
-		return findByeventDetailId(eventDetailId, start, end, null);
+		return findByEventDetailId(eventDetailId, start, end, null);
 	}
 
 	/**
@@ -155,7 +155,7 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<EventDetailImage> findByeventDetailId(long eventDetailId,
+	public List<EventDetailImage> findByEventDetailId(long eventDetailId,
 		int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		boolean pagination = true;
@@ -267,10 +267,10 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventDetailImage findByeventDetailId_First(long eventDetailId,
+	public EventDetailImage findByEventDetailId_First(long eventDetailId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEventDetailImageException, SystemException {
-		EventDetailImage eventDetailImage = fetchByeventDetailId_First(eventDetailId,
+		EventDetailImage eventDetailImage = fetchByEventDetailId_First(eventDetailId,
 				orderByComparator);
 
 		if (eventDetailImage != null) {
@@ -298,9 +298,9 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventDetailImage fetchByeventDetailId_First(long eventDetailId,
+	public EventDetailImage fetchByEventDetailId_First(long eventDetailId,
 		OrderByComparator orderByComparator) throws SystemException {
-		List<EventDetailImage> list = findByeventDetailId(eventDetailId, 0, 1,
+		List<EventDetailImage> list = findByEventDetailId(eventDetailId, 0, 1,
 				orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -320,10 +320,10 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventDetailImage findByeventDetailId_Last(long eventDetailId,
+	public EventDetailImage findByEventDetailId_Last(long eventDetailId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEventDetailImageException, SystemException {
-		EventDetailImage eventDetailImage = fetchByeventDetailId_Last(eventDetailId,
+		EventDetailImage eventDetailImage = fetchByEventDetailId_Last(eventDetailId,
 				orderByComparator);
 
 		if (eventDetailImage != null) {
@@ -351,15 +351,15 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventDetailImage fetchByeventDetailId_Last(long eventDetailId,
+	public EventDetailImage fetchByEventDetailId_Last(long eventDetailId,
 		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByeventDetailId(eventDetailId);
+		int count = countByEventDetailId(eventDetailId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<EventDetailImage> list = findByeventDetailId(eventDetailId,
+		List<EventDetailImage> list = findByEventDetailId(eventDetailId,
 				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
@@ -380,7 +380,7 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public EventDetailImage[] findByeventDetailId_PrevAndNext(
+	public EventDetailImage[] findByEventDetailId_PrevAndNext(
 		long eventDetailImageId, long eventDetailId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEventDetailImageException, SystemException {
@@ -393,12 +393,12 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 
 			EventDetailImage[] array = new EventDetailImageImpl[3];
 
-			array[0] = getByeventDetailId_PrevAndNext(session,
+			array[0] = getByEventDetailId_PrevAndNext(session,
 					eventDetailImage, eventDetailId, orderByComparator, true);
 
 			array[1] = eventDetailImage;
 
-			array[2] = getByeventDetailId_PrevAndNext(session,
+			array[2] = getByEventDetailId_PrevAndNext(session,
 					eventDetailImage, eventDetailId, orderByComparator, false);
 
 			return array;
@@ -411,7 +411,7 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 		}
 	}
 
-	protected EventDetailImage getByeventDetailId_PrevAndNext(Session session,
+	protected EventDetailImage getByEventDetailId_PrevAndNext(Session session,
 		EventDetailImage eventDetailImage, long eventDetailId,
 		OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
@@ -523,9 +523,9 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByeventDetailId(long eventDetailId)
+	public void removeByEventDetailId(long eventDetailId)
 		throws SystemException {
-		for (EventDetailImage eventDetailImage : findByeventDetailId(
+		for (EventDetailImage eventDetailImage : findByEventDetailId(
 				eventDetailId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(eventDetailImage);
 		}
@@ -539,7 +539,7 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByeventDetailId(long eventDetailId)
+	public int countByEventDetailId(long eventDetailId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_EVENTDETAILID;
 
@@ -858,7 +858,7 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 		eventDetailImageImpl.setCreatedDate(eventDetailImage.getCreatedDate());
 		eventDetailImageImpl.setModifiedDate(eventDetailImage.getModifiedDate());
 		eventDetailImageImpl.setEventDetailId(eventDetailImage.getEventDetailId());
-		eventDetailImageImpl.setImagetitle(eventDetailImage.getImagetitle());
+		eventDetailImageImpl.setImageTitle(eventDetailImage.getImageTitle());
 		eventDetailImageImpl.setImageDesc(eventDetailImage.getImageDesc());
 		eventDetailImageImpl.setImagePath(eventDetailImage.getImagePath());
 

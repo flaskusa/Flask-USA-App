@@ -152,17 +152,14 @@ public class VenueServiceWrapper implements VenueService,
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		java.lang.String stateName, long countryId,
-		java.lang.String countryName, java.lang.String lattitude,
-		java.lang.String longitude, java.lang.String phone,
-		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String website,
+		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.addVenueDetail(venueId, infoTypeId,
 			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
-			zipCode, city, stateId, stateName, countryId, countryName,
-			lattitude, longitude, phone, website, cost, hoursOfOperation,
-			serviceContext);
+			zipCode, city, stateId, countryId, lattitude, longitude, phone,
+			website, cost, hoursOfOperation, serviceContext);
 	}
 
 	@Override
@@ -171,17 +168,14 @@ public class VenueServiceWrapper implements VenueService,
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		java.lang.String stateName, long countryId,
-		java.lang.String countryName, java.lang.String lattitude,
-		java.lang.String longitude, java.lang.String phone,
-		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String website,
+		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.updateVenueDetail(venueDetailId, infoTypeId,
 			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
-			zipCode, city, stateId, stateName, countryId, countryName,
-			lattitude, longitude, phone, website, cost, hoursOfOperation,
-			serviceContext);
+			zipCode, city, stateId, countryId, lattitude, longitude, phone,
+			website, cost, hoursOfOperation, serviceContext);
 	}
 
 	@Override

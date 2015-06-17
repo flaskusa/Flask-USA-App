@@ -41,14 +41,16 @@ public class EventDetailSoap implements Serializable {
 		soapModel.setInfoTypeName(model.getInfoTypeName());
 		soapModel.setInfoTypeCategoryId(model.getInfoTypeCategoryId());
 		soapModel.setInfoTypeCategoryName(model.getInfoTypeCategoryName());
-		soapModel.setInfoName(model.getInfoName());
+		soapModel.setInfoTitle(model.getInfoTitle());
 		soapModel.setInfoDesc(model.getInfoDesc());
 		soapModel.setAddrLine1(model.getAddrLine1());
 		soapModel.setAddrLine2(model.getAddrLine2());
 		soapModel.setCity(model.getCity());
 		soapModel.setZipCode(model.getZipCode());
 		soapModel.setStateId(model.getStateId());
+		soapModel.setStateName(model.getStateName());
 		soapModel.setCountryId(model.getCountryId());
+		soapModel.setCountryName(model.getCountryName());
 		soapModel.setLatitude(model.getLatitude());
 		soapModel.setLongitude(model.getLongitude());
 		soapModel.setPhone(model.getPhone());
@@ -187,12 +189,12 @@ public class EventDetailSoap implements Serializable {
 		_infoTypeCategoryName = infoTypeCategoryName;
 	}
 
-	public String getInfoName() {
-		return _infoName;
+	public String getInfoTitle() {
+		return _infoTitle;
 	}
 
-	public void setInfoName(String infoName) {
-		_infoName = infoName;
+	public void setInfoTitle(String infoTitle) {
+		_infoTitle = infoTitle;
 	}
 
 	public String getInfoDesc() {
@@ -243,12 +245,28 @@ public class EventDetailSoap implements Serializable {
 		_stateId = stateId;
 	}
 
+	public String getStateName() {
+		return _stateName;
+	}
+
+	public void setStateName(String stateName) {
+		_stateName = stateName;
+	}
+
 	public long getCountryId() {
 		return _countryId;
 	}
 
 	public void setCountryId(long countryId) {
 		_countryId = countryId;
+	}
+
+	public String getCountryName() {
+		return _countryName;
+	}
+
+	public void setCountryName(String countryName) {
+		_countryName = countryName;
 	}
 
 	public String getLatitude() {
@@ -309,14 +327,16 @@ public class EventDetailSoap implements Serializable {
 	private String _infoTypeName;
 	private long _infoTypeCategoryId;
 	private long _infoTypeCategoryName;
-	private String _infoName;
+	private String _infoTitle;
 	private String _infoDesc;
 	private String _addrLine1;
 	private String _addrLine2;
 	private String _city;
 	private String _zipCode;
 	private long _stateId;
+	private String _stateName;
 	private long _countryId;
+	private String _countryName;
 	private String _latitude;
 	private String _longitude;
 	private String _phone;

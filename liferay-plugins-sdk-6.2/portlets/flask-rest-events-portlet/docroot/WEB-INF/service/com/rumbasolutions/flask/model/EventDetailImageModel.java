@@ -160,19 +160,19 @@ public interface EventDetailImageModel extends BaseModel<EventDetailImage> {
 	public void setEventDetailId(long eventDetailId);
 
 	/**
-	 * Returns the imagetitle of this event detail image.
+	 * Returns the image title of this event detail image.
 	 *
-	 * @return the imagetitle of this event detail image
+	 * @return the image title of this event detail image
 	 */
 	@AutoEscape
-	public String getImagetitle();
+	public String getImageTitle();
 
 	/**
-	 * Sets the imagetitle of this event detail image.
+	 * Sets the image title of this event detail image.
 	 *
-	 * @param imagetitle the imagetitle of this event detail image
+	 * @param imageTitle the image title of this event detail image
 	 */
-	public void setImagetitle(String imagetitle);
+	public void setImageTitle(String imageTitle);
 
 	/**
 	 * Returns the image desc of this event detail image.

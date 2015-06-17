@@ -79,6 +79,118 @@ public class EventServiceUtil {
 			endTime, eventTypeId, venueId, eventImagePath, serviceContext);
 	}
 
+	public static com.rumbasolutions.flask.model.Event updateEvent(
+		long eventId, java.lang.String eventName, java.lang.String description,
+		java.lang.String eventDate, java.lang.String startTime,
+		java.lang.String endTime, long eventTypeId, long venueId,
+		java.lang.String eventImagePath,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateEvent(eventId, eventName, description, eventDate,
+			startTime, endTime, eventTypeId, venueId, eventImagePath,
+			serviceContext);
+	}
+
+	public static void deleteEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteEvent(eventId, serviceContext);
+	}
+
+	public static void deleteEvents(java.lang.String eventIds,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteEvents(eventIds, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetail addEventDetail(
+		long eventId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String website,
+		java.lang.Double cost, java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .addEventDetail(eventId, infoTypeId, infoTypeCategoryId,
+			infoTitle, infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
+			countryId, lattitude, longitude, phone, website, cost,
+			hoursOfOperation, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetail updateEventDetail(
+		long eventDetailId, long infoTypeId, long infoTypeCategoryId,
+		java.lang.String infoTitle, java.lang.String infoDesc,
+		java.lang.String addrLine1, java.lang.String addrLine2,
+		java.lang.String zipCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String website,
+		java.lang.Double cost, java.lang.String hoursOfOperation,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateEventDetail(eventDetailId, infoTypeId,
+			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
+			zipCode, city, stateId, countryId, lattitude, longitude, phone,
+			website, cost, hoursOfOperation, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetail getEventDetail(
+		long eventDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getEventDetail(eventDetailId, serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.EventDetail> getEventDetails(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getEventDetails(eventId, serviceContext);
+	}
+
+	public static void deleteEventDetail(long eventDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteEventDetail(eventDetailId, serviceContext);
+	}
+
+	public static void deleteAllEventDetails(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteAllEventDetails(eventId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailImage addEventDetailImage(
+		long EventDetailId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .addEventDetailImage(EventDetailId, imageTitle, imageDesc,
+			imagePath, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(
+		long EventDetailImageId, long EventDetailId,
+		java.lang.String imageTitle, java.lang.String imageDesc,
+		java.lang.String imagePath,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateEventDetailImage(EventDetailImageId, EventDetailId,
+			imageTitle, imageDesc, imagePath, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.EventDetailImage getEventDetailImage(
+		long eventDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .getEventDetailImage(eventDetailImageId, serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.EventDetailImage> getEventDetailImages(
+		long eventDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getEventDetailImages(eventDetailId, serviceContext);
+	}
+
+	public static void deleteEventDetailImage(long eventDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteEventDetailImage(eventDetailImageId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

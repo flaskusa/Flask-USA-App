@@ -241,8 +241,9 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	@Override
 	public VenueDetail addVenueDetail(long venueId , long infoTypeId, long infoTypeCategoryId, 
 		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
-		String city, long stateId, String stateName, long countryId, String countryName, 
-		String lattitude, String longitude, String phone, String website, Double cost, String hoursOfOperation,
+		String city, long stateId, long countryId, String lattitude, 
+		String longitude, String phone, String website, 
+		Double cost, String hoursOfOperation,
 		ServiceContext  serviceContext){
 		VenueDetail venueDetail=null;
 		try{
@@ -259,9 +260,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setZipCode(zipCode);
 			venueDetail.setCity(city);
 			venueDetail.setStateId(stateId);
-			venueDetail.setStateName(stateName);
 			venueDetail.setCountryId(countryId);
-			venueDetail.setCountryName(countryName);
 			venueDetail.setLatitude(lattitude);
 			venueDetail.setLongitude(longitude);
 			venueDetail.setPhone(phone);
@@ -279,12 +278,11 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	@Override
 	public VenueDetail updateVenueDetail(long venueDetailId , long infoTypeId, long infoTypeCategoryId, 
 		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
-		String city, long stateId, String stateName, long countryId, String countryName, 
+		String city, long stateId, long countryId, 
 		String lattitude, String longitude, String phone, String website, Double cost, String hoursOfOperation,
 		ServiceContext  serviceContext){
 		VenueDetail venueDetail=null;
 		try{
-			
 			venueDetail= VenueDetailLocalServiceUtil.getVenueDetail(venueDetailId);
 			venueDetail.setInfoTypeId(infoTypeId);
 			venueDetail.setInfoTypeCategoryId(infoTypeCategoryId);
@@ -295,9 +293,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setZipCode(zipCode);
 			venueDetail.setCity(city);
 			venueDetail.setStateId(stateId);
-			venueDetail.setStateName(stateName);
 			venueDetail.setCountryId(countryId);
-			venueDetail.setCountryName(countryName);
 			venueDetail.setLatitude(lattitude);
 			venueDetail.setLongitude(longitude);
 			venueDetail.setPhone(phone);

@@ -111,10 +111,10 @@ public class VenueServiceClp implements VenueService {
 		_methodParameterTypes14 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "java.lang.String", "long",
+				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Double", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName15 = "updateVenueDetail";
@@ -122,10 +122,10 @@ public class VenueServiceClp implements VenueService {
 		_methodParameterTypes15 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "java.lang.String", "long",
+				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Double", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName16 = "getVenueDetail";
@@ -593,11 +593,9 @@ public class VenueServiceClp implements VenueService {
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		java.lang.String stateName, long countryId,
-		java.lang.String countryName, java.lang.String lattitude,
-		java.lang.String longitude, java.lang.String phone,
-		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String website,
+		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -625,11 +623,7 @@ public class VenueServiceClp implements VenueService {
 						
 					stateId,
 						
-					ClpSerializer.translateInput(stateName),
-						
 					countryId,
-						
-					ClpSerializer.translateInput(countryName),
 						
 					ClpSerializer.translateInput(lattitude),
 						
@@ -667,11 +661,9 @@ public class VenueServiceClp implements VenueService {
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		java.lang.String stateName, long countryId,
-		java.lang.String countryName, java.lang.String lattitude,
-		java.lang.String longitude, java.lang.String phone,
-		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String website,
+		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -699,11 +691,7 @@ public class VenueServiceClp implements VenueService {
 						
 					stateId,
 						
-					ClpSerializer.translateInput(stateName),
-						
 					countryId,
-						
-					ClpSerializer.translateInput(countryName),
 						
 					ClpSerializer.translateInput(lattitude),
 						
