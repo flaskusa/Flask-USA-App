@@ -70,24 +70,12 @@
  </div>
     
  <div id="two" style="display:none; width:100%; ">
-<!-- 			
-  <div id="splitter">
-        <div style="overflow: hidden;">
-            <div style="border: none;" id="listbox">
-            </div>
-        </div>
-        <div style="overflow: hidden;" id="ContentPanel">
-        </div>
-    </div>
-    
-     -->
+
   <div id="image1">
         <img id="banner" src="<%=request.getContextPath()%>/img/stripe.png" style=" height: 458px;" />
     </div>
 
     <div id="section"> 
-        
-
     <div>
         <img src="<%=request.getContextPath()%>/img/Fotolia_81101979_Subscription_Monthly_M.jpg" class="imgside" />
     </div>
@@ -98,11 +86,25 @@
         <img src="<%=request.getContextPath()%>/img/Fotolia_20387372_Subscription_Monthly_M.jpg" class="imgside" />
     </div>
     </div>
-    <div align="center" id="fixedfooter2">
-
-        <b>YOUR GAME PLAN FOR GAME DAY</b>
-
-    </div>
+    <input class="btn btn-info cssback" type="button" value="Back"/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <br/>
+    <div id="fixedfooter">
+				<table >
+		            <tr>
+		                <td class="footertxt">
+		                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
+		                </td>
+		                <td class="asans"><b>FREE PINT WITH WITH A BURGER</b>
+		                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
+		                <span class="gochi">ON GAMEDAY!</span>
+		                </td>
+		            </tr>
+		        </table>
+	</div>
 
 </div>
 </body>
