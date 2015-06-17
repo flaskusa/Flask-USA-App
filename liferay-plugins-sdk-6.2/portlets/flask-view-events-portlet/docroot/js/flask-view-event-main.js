@@ -46,7 +46,7 @@ function fnlist(tdata) {
     });
 
     // Create jqxListBox
-    $('#listbox').jqxListBox({   source: dataAdapter, displayMember: "Eventname", itemHeight: 70, height: '100%', width: '100%',
+    $('#listbox').jqxListBox({   source: dataAdapter, displayMember: "Eventname", itemHeight: 70, scrollBarSize: 0, height: '100%', width: '100%', 
         renderer: function (index, label, value) {
             var datarecord = tdata[index];
             var imgurl = datarecord.eventImagePath;
@@ -61,4 +61,19 @@ function fnlist(tdata) {
 $(document).ready(function() {
  
  fnLoadList();
+ 
+ $('#listbox').on('select', function (event) {
+		$('#one').hide();
+		$('#two').show();
+		
+updatePanel(event.args.index);
+});
+ 
+ $(".cssback").click(function(){
+	 $('#one').show();
+	$('#two').hide();
+});
+ 
+ 
+ 
 });
