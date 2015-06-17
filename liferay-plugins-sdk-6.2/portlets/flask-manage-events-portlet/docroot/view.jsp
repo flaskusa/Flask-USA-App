@@ -36,36 +36,6 @@ function initialize(portletId, portlet){
 	}
 }
 
-function createFolder(repositoryId,parentFolderId,folderName,folderDesc){
-	 Liferay.Service(
-	   '/dlapp/add-folder',
-	   {
-	     repositoryId: repositoryId,
-	     parentFolderId: parentFolderId,
-	     name: folderName,
-	     description: folderDesc
-	   },
-	   function(obj) {
-	    if(obj=="com.liferay.portlet.documentlibrary.DuplicateFolderNameException")
-	    {
-		     Liferay.Service(
-		       '/dlapp/get-folder',
-		       {
-			         repositoryId: repositoryId,
-			         parentFolderId: parentFolderId,
-			         name: folderName
-		       },
-		       function(obj) {
-		        	 console.log(obj);
-		       });
-	    }
-	    else
-	    {
-	    	 return obj.folderId;
-	    }
-	   }
-	 );
-}
 
 function displayImages(repositoryId, folderId)
 {

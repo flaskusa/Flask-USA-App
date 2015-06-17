@@ -30,6 +30,7 @@ function addClickHandlers(){
 			eventName=$("#eventName").val();
 			eventDesc=$("#eventName").val();
 			createFolder(repositoryId, eventfolder, eventName, eventDesc);
+			getFolderId(repositoryId,0,"Events");
 		}		
 	});
 
@@ -176,6 +177,38 @@ function initForm(){
 }
 
 /* Need to change code as per standard*/
+
+function createFolder(repositoryId,parentFolderId,folderName,folderDesc){
+	 Liferay.Service(
+	   '/dlapp/add-folder',
+	   {
+	     repositoryId: repositoryId,
+	     parentFolderId: parentFolderId,
+	     name: folderName,
+	     description: folderDesc
+	   },
+	   function(obj) {
+	    if(obj=="com.liferay.portlet.documentlibrary.DuplicateFolderNameException")
+	    {
+		     Liferay.Service(
+		       '/dlapp/get-folder',
+		       {
+			         repositoryId: repositoryId,
+			         parentFolderId: parentFolderId,
+			         name: folderName
+		       },
+		       function(obj) {
+		        	 console.log(obj);
+		       });
+	    }
+	    else
+	    {
+	    	 return obj.folderId;
+	    }
+	   }
+	 );
+}
+
 function eventFolder(repositoryId, eventsFolderId, eventName){
 	Liferay.Service(
 			  '/dlapp/get-folder',
@@ -189,7 +222,7 @@ function eventFolder(repositoryId, eventsFolderId, eventName){
 				    if(obj=="com.liferay.portlet.documentlibrary.NoSuchFolderException")
 				    	{
 				    		createFolder(repositoryId, eventsFolderId, eventName, eventName);
-				    		setTimeout(function(){createInfoTypeFolders(repositoryId, eventsFolderId, eventName)},10);
+				    		setTimeout(function(){createInfoTypeFolders(repositoryId, eventsFolderId, eventName)},100);
 				    			
 				    	}
 				    else
