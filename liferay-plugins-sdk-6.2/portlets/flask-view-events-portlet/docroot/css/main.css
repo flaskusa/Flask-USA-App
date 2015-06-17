@@ -73,13 +73,17 @@ div#fixedfooter {
 {
 		.imgdiv 
 		{
-		  width: 15%;
+		  width: 20%;
 		}
 		
 		.lbldiv{
 			width:80%;
 		
 		}
+div#placeholder {
+  height: 100px;
+  overflow: auto;
+}
 
 }
 
@@ -87,7 +91,7 @@ div#fixedfooter {
 {
 		.table-responsive .button
 		{
-		  width: 97.5%;
+		  width: 100%;
 		}
 		
 		.control-label-color
@@ -105,13 +109,16 @@ div#fixedfooter {
 			font-size:12px !important; 
 			margin-left: 6px;
 		}
-
+		div#placeholder {
+		  height: 130px;
+		  overflow: auto;
+		}
 }
 
 .control-label-color
 {
-	font-size:14px ; 
-	line-height: 7px; 
+	font-size: 14px;
+  	line-height: 7px !important;
 	margin-top: 12px; 
 	color : #FB9A33; 
 	margin-left: 6px;
@@ -121,4 +128,58 @@ div#fixedfooter {
 {
 	font-size:14px; 
 	margin-left: 6px;
+}
+
+div#placeholder 
+{
+	  height: 200px;
+	  overflow: auto;
+}
+
+
+       div#fixedfooter2 {
+            position: fixed;
+            bottom: 0px;
+            left: 0px;
+            background-color: white;
+            color: #ff9900;
+            font: normal 16px/1 "Coda", Helvetica, sans-serif;
+            font-size: 14px;
+            width: 100%;
+            letter-spacing: 10px;
+            height: 5%;
+        }
+
+
+        @media (max-width:667px) {
+            div#fixedfooter2 {
+                	font-size: 14px;
+				  height: 5%;
+				  letter-spacing: initial;
+				  /* margin-top: 10px; */
+				  padding-top: 10px;
+            }
+        }
+            #image1 
+            {
+                left: 0px;
+                float:left;
+                background-color:#231F20;
+                top: 0px;
+                width:10%;
+            }
+    
+           #section 
+           {
+            width:90%;
+            float:left;    
+          }
+
+           img#banner {
+          height: 1720px;
+          width: 100px;
+            }
+.imgside
+{
+	width: 100%; height: auto;
 }
