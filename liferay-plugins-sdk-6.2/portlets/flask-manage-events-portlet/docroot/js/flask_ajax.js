@@ -28,7 +28,6 @@ Request.prototype.sendGETRequest = function(url, params, succcessHandler, failur
 		Liferay.Service(url, params,function(obj) {
 			if(typeof obj != "object"){
 				if(failureHandler){
-					console.log(obj);
 					failureHandler(obj);
 				}else{
 					console.log("sendGETRequest faliled:" + obj);
