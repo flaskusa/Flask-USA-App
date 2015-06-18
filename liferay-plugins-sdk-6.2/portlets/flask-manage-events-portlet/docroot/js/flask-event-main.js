@@ -11,7 +11,8 @@ function addClickHandlers(){
 		eventForm.trigger('reset')
 		$("#eventDataTable").hide();
 		eventForm.show();
-		_eventModel.loadEvents('eventVenueId');
+		_eventModel.loadVenues('eventVenueId');
+		_eventModel.loadContentType('contentTypeId');
 	});
 
 	/* Click handler for save button*/
@@ -132,7 +133,7 @@ function editEvent(rowData) {
 	});
 	$("#eventDataTable").hide();
 	eventForm.show();
-	_eventModel.loadEvents('eventVenueId',  rowData.eventVenueId);
+	_eventModel.loadVenues('eventVenueId',  rowData.eventVenueId);
 }
 
 
@@ -292,3 +293,190 @@ function createInfoTypeFolders(repositoryId, eventsFolderId, eventName)
 		     });
 }
 /*End*/
+/* Dynamic content type generation logic here [Start]*/
+var formArea;
+var JsonObj;
+$(document).ready(function(){
+    formArea = $("#contentTypeForm"); // Parent Div        
+    JsonObj = [{                    // JSON Field List, Content Type Wise
+            "general":[{
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Title",
+                        "id":"Title",
+                        "value":"",
+                        "placeholder":"Enter title here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Description",
+                        "id":"Description",
+                        "value":"",
+                        "placeholder":"Enter description here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    }],
+            "tradition":[{
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Name",
+                        "id":"Title",
+                        "value":"",
+                        "placeholder":"Enter title here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Description",
+                        "id":"Description",
+                        "value":"",
+                        "placeholder":"Enter description here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Comment",
+                        "id":"Comment",
+                        "value":"",
+                        "placeholder":"Enter Comment here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    }],
+            "parking":[{
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Name",
+                        "id":"Title",
+                        "value":"",
+                        "placeholder":"Enter Name here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Address",
+                        "id":"Description",
+                        "value":"",
+                        "placeholder":"Enter Address here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Cost",
+                        "id":"Cost",
+                        "value":"",
+                        "placeholder":"Enter Cost here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"boolean",
+                    "attr":[{ 
+                        "id":"IsAvailable",
+                        "name":"IsAvailable",
+                        "caption":"Is Available?",
+                        "value":"Yes",
+                        "items":["Yes","No"]
+                        }]
+                    }]                            
+            }];
+                      
+    $("#contentTypeId").change(function(){
+        $(formArea).html("");
+        var selectedContentType = $(this).val();
+        fnRenderForm(selectedContentType);
+    });
+});
+
+function fnRenderForm(contentType){
+    var ObjJSON = fnSelectJSON(contentType)
+    fnBuildHtml(ObjJSON);
+}
+
+function fnSelectJSON(cType){
+    switch(cType) {
+        case "general":
+            return JsonObj[0].general;
+            break;
+        case "tradition":
+            return JsonObj[0].tradition;
+            break;
+        case "parking":
+            return JsonObj[0].parking;
+            break;
+        default:
+            console.log("Nothing selected");
+    }        
+}
+
+function fnBuildHtml(Obj){
+    var items = Obj.filter(function(item) {
+        switch(item.type) {
+            case "text":
+                return fnBuildInput(item.attr);
+                break;
+            case "select":
+                return fnBuildSelect(item.attr);
+                break;
+            case "boolean":
+                return fnBuildBoolean(item.attr);
+                break;
+            default:
+                console.log("Nothing selected");
+        }        
+    });        
+}
+
+function fnBuildInput(Obj){
+    var strHtml = "";
+    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo(formArea);
+    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].id}).appendTo(objFormGroup);
+    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
+    $('<input/>', {
+        'type': 'Text',
+        'value':Obj[0].value,
+        'placeholder':Obj[0].placeholder,   
+        'maxlength':Obj[0].maxlength
+    }).appendTo(objControls);            
+}
+
+function fnBuildBoolean(Obj){
+    var strSelected = "";
+    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo(formArea);
+    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].id}).appendTo(objFormGroup);
+    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);        
+    for(var iCount=0;iCount<Obj[0].items.length;iCount++){
+        console.log(Obj[0].items[iCount].value);
+        if(Obj[0].items[0].value==Obj[0].value)
+            strSelected = "selected"    
+        else
+            strSelected = ""                                            
+            
+         $('<input/>', {
+            'type': 'Radio',
+            'id':Obj[0].id,
+            'name':Obj[0].name,
+            'value':Obj[0].value,
+            'Selected':strSelected
+        }).appendTo(objControls);       
+    }
+}
+/* Dynamic content type generation logic here [End]*/

@@ -9,9 +9,9 @@ _eventModel.SERVICE_ENDPOINTS = {
 	DELETE_EVENT				: "/flask-rest-events-portlet.event/delete-event",
 	DELETE_EVENTS				: "/flask-rest-events-portlet.event/delete-events",
 	GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types",
+	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues",
 	GET_INFO_TYPE 				: "/flask-rest-events-portlet.infotype/get-info-types",
-	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
-	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues"		
+	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories"	
 };
 
 _eventModel.DATA_MODEL= {
@@ -38,7 +38,7 @@ _eventModel.MESSAGES= {
 		DEL_ERR: "Error in deleting Event",
  };
 
-_eventModel.loadEvents = function(elementId,selectedId){
+_eventModel.loadVenues = function(elementId,selectedId){
 	var request = new Request();
 	var selectList = $('#' + elementId);
 	var flaskRequest = new Request();
@@ -55,6 +55,27 @@ _eventModel.loadEvents = function(elementId,selectedId){
 					} ,
 					function (data){
 						console.log("Error in getting venues: " + data );
+					});
+	
+}
+
+_eventModel.loadContentType = function(elementId,selectedId){
+	var request = new Request();
+	var selectList = $('#' + elementId);
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_INFO_CATEGORY , {}, 
+					function (data){
+							selectList.empty();
+							$.each(data, function(key, Content) {
+								selectList.append($("<option/>", {
+							        value: Content.displayTemplate,
+							        text: Content.infoTypeCategoryName
+							    }));
+							});
+							selectList.val(selectedId);
+					} ,
+					function (data){
+						console.log("Error in getting content types: " + data );
 					});
 	
 }
