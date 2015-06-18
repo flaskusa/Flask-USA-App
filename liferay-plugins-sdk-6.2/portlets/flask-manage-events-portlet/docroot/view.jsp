@@ -130,6 +130,14 @@ function displayImages(repositoryId, folderId)
 			<input id="AddVenue" class="btn btn-info" type="button" value="Add Venue"/>
 		</div>
    </div>
+  <div class="form-group">
+	    <label class="control-label" for="eventVenueId">Content Type:</label>
+		<div class="controls">
+			<select id="contentTypeId" name="contentTypeId" class="form-control-select"></select>
+		</div>
+   </div>   
+   <div class="contentTypeForm">
+   </div>
    <div class="form-group">
 		<div id="jqxtabs">
 		    <ul style="margin-left: 20px;">
