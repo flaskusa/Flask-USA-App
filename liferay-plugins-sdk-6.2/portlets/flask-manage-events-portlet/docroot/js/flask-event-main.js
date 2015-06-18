@@ -139,27 +139,53 @@ function editEvent(rowData) {
 function saveEvent(){
 	params = _flaskLib.getFormData('eventForm',_eventModel.DATA_MODEL.EVENT,
 				function(formId, model, formData){
-						formData.eventVenueName=$('#eventVenueId').children(':selected').text();;
+						formData.venueId=$('#eventVenueId').val();
 						return formData;
 				});
 	var flaskRequest = new Request();
-	var url = ""
-		console.log(params.eventId);
-		console.log(params);
-		if(parseInt(params.eventId) > 0){
-			url =_eventModel.SERVICE_ENDPOINTS.UPDATE_EVENT
+	var url = "";
+		if(params.eventName == ""){
+			url =_eventModel.SERVICE_ENDPOINTS.ADD_EVENT;
 		}else{
-			url = _eventModel.SERVICE_ENDPOINTS.ADD_EVENT;
+			url = _eventModel.SERVICE_ENDPOINTS.UPDATE_EVENT;
 		}
 	console.log(url);
+	console.log(params);
 	flaskRequest.sendGETRequest(url, params, 
 				function (data){
+					//console.log(data);
 					_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.SAVE);
 					loadData();
 				} ,
 				function (data){
-					console.log(data);
+					//console.log(data);
 					_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.ERROR);
+				});
+
+}
+
+function saveVenue(){
+	params = _flaskLib.getFormData('venueForm',_venueModel.DATA_MODEL.VENUE,
+				function(formId, model, formData){
+						formData.venueStateName = $('#venueStateId').children(':selected').text();
+						formData.venueCountryName=$('#venueCountryId').children(':selected').text();;
+						return formData;
+				});
+	var flaskRequest = new Request();
+	var url = ""
+		if(params.venueId == 0){
+			url = _venueModel.SERVICE_ENDPOINTS.ADD_VENUE;
+		}else{
+			url =_venueModel.SERVICE_ENDPOINTS.UPDATE_VENUE
+		}
+	
+	flaskRequest.sendGETRequest(url, params, 
+				function (data){
+					_flaskLib.showSuccessMessage('action-msg', _venueModel.MESSAGES.SAVE);
+					loadData();
+				} ,
+				function (data){
+					_flaskLib.showErrorMessage('action-msg', _venueModel.MESSAGES.ERROR);
 				});
 
 }
@@ -222,7 +248,7 @@ function eventFolder(repositoryId, eventsFolderId, eventName){
 				    if(obj=="com.liferay.portlet.documentlibrary.NoSuchFolderException")
 				    	{
 				    		createFolder(repositoryId, eventsFolderId, eventName, eventName);
-				    		setTimeout(function(){createInfoTypeFolders(repositoryId, eventsFolderId, eventName)},100);
+				    		setTimeout(function(){createInfoTypeFolders(repositoryId, eventsFolderId, eventName)},400);
 				    			
 				    	}
 				    else

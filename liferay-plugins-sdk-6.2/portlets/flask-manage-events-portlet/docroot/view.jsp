@@ -32,7 +32,7 @@ function initialize(portletId, portlet){
 		loadData();
 		addClickHandlers();
 		initForm();
-		displayImages(<%=repositoryId%>,29655);
+		displayImages(<%=repositoryId%>,29918);
 	}
 }
 
@@ -41,8 +41,8 @@ function displayImages(repositoryId, folderId)
 {
 	var images;
 	Liferay.Service('/dlapp/get-file-entries',{
-		    repositoryId: 20182,
-		    folderId: 29655
+		    repositoryId: repositoryId,
+		    folderId: folderId
 		  },
 		  function(obj) {
 		    console.log(obj);
@@ -96,11 +96,12 @@ function displayImages(repositoryId, folderId)
 <form id="eventForm" style="display:none">
   <div class="form-group">
     <div class="controls">
-	     <label class="control-label" for="eventName">Event Name:</label>
-	    <input name="eventName" id="eventName" class="form-control" type="text" > <div id='Active'>Active</div>
+	    <label class="control-label" for="eventName">Event Name:</label>
+	    <input name="eventName" id="eventName" class="form-control" type="text" /> <div id='Active'>Active</div>
+	    <input type="hidden" name="eventTypeId" id="eventTypeId" value="1"/>
+	    <input type="hidden" name="description" id="description" value="Demo_Description"/>
 	</div> 
-	   
-    </div>
+  </div>
 
     <div class="form-group">
     	<label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
@@ -130,8 +131,8 @@ function displayImages(repositoryId, folderId)
 		</div>
    </div>
    <div class="form-group">
-		<div id='jqxtabs'>
-		    <ul style='margin-left: 20px;'>
+		<div id="jqxtabs">
+		    <ul style="margin-left: 20px;">
 		        <li>General</li>
 		        <li>Pre Event</li>
 		        <li>During Event</li>

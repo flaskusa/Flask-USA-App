@@ -17,13 +17,15 @@ _eventModel.SERVICE_ENDPOINTS = {
 _eventModel.DATA_MODEL= {
 	EVENT: 
 		[
-             { name: 'eventId', type: 'long' },
-			 { name: 'eventName', type: 'string' },
-			 { name: 'description', type: 'string' },
-			 { name: 'startTime', type: 'string' },
-			 { name: 'endTime', type: 'string' },
-			 { name: 'eventDate', type: 'string' },
-			 { name: 'venueId', type:'long' }
+		 	 { name: 'eventId', type: 'long' },
+		 	 { name: 'eventName', type: 'string' },
+		 	 { name: 'description', type: 'string' },
+		 	 { name: 'eventDate', type: 'string' },
+		 	 { name: 'startTime', type: 'string' },
+		 	 { name: 'endTime', type: 'string' },
+		 	 { name: 'eventTypeId', type: 'long' },
+		 	 { name: 'venueId', type:'long' }
+            
 		]
 	};
 
