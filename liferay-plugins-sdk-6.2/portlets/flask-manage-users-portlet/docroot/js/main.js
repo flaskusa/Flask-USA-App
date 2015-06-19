@@ -1,3 +1,5 @@
+var RepositoryID;
+var FolderId;
 var GlobalJSON_Admin = [];
 
 function fnLoadAdminUserList() {
@@ -52,9 +54,10 @@ function fnSave() {
 
 	Liferay.Service(SERVICE_ENDPOINTS.ADD_FLASK_ADMIN_ENDPOINT, params,
 		function(obj) {
-			console.log(typeof obj);
 			if(typeof obj =='object')
 			{
+				console.log(obj.userId)
+				fnUpdateProfilePic(obj.userId);
 				$("#spinningSquaresG").show();
 				$.wait(function() {
 					fnLoadAdminUserList();
@@ -99,6 +102,7 @@ function fnUpdate(uid) {
 				if(typeof obj =='object')
 				{
 					console.log('inUpdate');
+					fnUpdateProfilePic(obj.userId);
 					$("#spinningSquaresG").show();
 					$.wait(function() {
 						fnLoadAdminUserList();
@@ -170,7 +174,7 @@ function fnRenderGrid(tdata) {
 			var photo = $("<div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>");
 			var image = $("<div style='margin-top: 10px;'></div>");
 			var imgurl = '' + datarecord.firstName.toLowerCase() + '.png';
-			var img = $('<img height="60" src="' + imgurl + '"/>');
+			var img = $('<img style="max-height: 96px;" src="/documents/'+RepositoryID+'/0/' + datarecord.userId + '"/>');
 			image.append(img);
 			image.appendTo(photo);
 			photocolumn.append(photo);
@@ -257,7 +261,7 @@ function fnRenderGrid(tdata) {
 	console.log(source);
 	var cellsrenderer = function(row, columnfield, value, defaulthtml,
 			columnproperties) {
-		return '<i class="icon-wrench" style="margin:3px;"></i>'
+		return '<i class="icon-wrench" style="margin:3px;"></i>';
 	}
 		
 	grid.jqxGrid({
@@ -366,12 +370,15 @@ function fnRenderGrid(tdata) {
 }
 
 $(document).ready(function() {
-	$("#spinningSquaresG").show();
-	fnLoadAdminUserList();
-	$("#spinningSquaresG").hide();
 });
 
 $(document).ready(function () {
+	RepositoryID = $("#repositoryId").val();
+	FolderId = 0;
+	$("#spinningSquaresG").show();
+	fnLoadAdminUserList();
+	$("#spinningSquaresG").hide();
+	
     $('.cssSave').on('click', function () {
     	if($('#adminForm').jqxValidator('validate'))
     	{
@@ -589,3 +596,93 @@ $(document).ready(function() {
 		},1);		
 });
 
+function fnUpdateProfilePic(uid){
+	Liferay.Service(
+		  '/dlapp/get-file-entry',
+		  {
+		    fileEntryId: $("#fileEntryId").val()
+		  },
+		  function(obj) {
+		    console.log(obj);
+		    fnDeleteFileEntry(uid);
+			Liferay.Service(
+					  '/dlapp/update-file-entry',
+					  {
+					    fileEntryId: obj.fileEntryId,
+					    sourceFileName:uid,
+					    mimeType:obj.mimeType,
+					    title: uid,
+					    description:uid,
+					    changeLog: obj.createDate,
+					    majorVersion: true,
+					    bytes: null
+					  },
+					  function(obj) {
+					    console.log(obj);
+					  }
+					);			    
+		  }
+	);	
+}
+
+function fnDeleteFileEntry(uid){
+	Liferay.Service(
+			  '/dlapp/delete-file-entry',
+			  {
+			    fileEntryId: uid
+			  },
+			  function(obj) {
+			    console.log(obj);
+			  }
+			);
+}
+
+function loadFile() {
+    var input, file, fr;
+    input = document.getElementById('fileinput');
+    if (!input.files[0]) {
+        console.log("Please select a file before clicking 'Load'");
+    }
+    else {
+        file = input.files[0];
+        fr = new FileReader();
+        fr.onload = receivedBinary;
+        fr.readAsBinaryString(file);
+    }
+
+    function receivedBinary() {
+        uploadFile(fr);
+    }
+}
+
+function uploadFile(fr) {
+    var markup, result, n, aByte, byteStr;
+    markup = [];
+    result = fr.result;
+    for (n = 0; n < result.length; ++n) {
+        aByte = result.charCodeAt(n);
+        markup.push(aByte);
+    }
+    console.log(fr);
+    input = document.getElementById('fileinput');
+    if(markup.length > 0){   
+    	Liferay.Service(
+   			  '/dlapp/add-file-entry',
+   			  {
+   			    repositoryId: RepositoryID,
+   			    folderId: FolderId,
+   			    sourceFileName: input.files[0].name,
+   			    mimeType: input.files[0].type,
+   			    title: input.files[0].name,
+   			    description: input.files[0].name,
+   			    changeLog: '1',
+   			    bytes: markup
+   			  },
+   			  function(obj) {
+				console.log(obj);
+   			    if(typeof obj =='object')
+   			 		$("#fileEntryId").val(obj.fileEntryId);
+   			  }
+   			);            
+    }        
+}

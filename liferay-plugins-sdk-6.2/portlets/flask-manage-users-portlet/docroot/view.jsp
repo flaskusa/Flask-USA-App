@@ -16,16 +16,37 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%
+  com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+  long repositoryId = themeDisplay.getLayout().getGroupId();
+%>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/Flask-lib.js"></script>
-
 <!-- JQX Plugin Includes [start]-->
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/simulator.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/generatedata.js"></script>
 <script type="text/javascript" src="<%=request.getContextPath()%>/js/jqx-all.js"></script>
 <!-- JQX Plugin Includes [End]-->
+<style>
+#ProfilePic {
+  display: block;
+  width: 150px;
+  height: 150px;
+  margin: 1em auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-border-radius: 99em;
+  -moz-border-radius: 99em;
+  border-radius: 99em;
+  border: 5px solid #eee;
+  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);  
+}
+
+</style>
 <portlet:defineObjects />
 <body>
-
+<input type="hidden" id="repositoryId" value="<%=repositoryId%>"> 
 <div id="adminDataTable" class="table-condensed">
 	<div class="cssGridMenu">
 		<div class="cssAddUser"><div class="iconAddUser"></div></div>
@@ -42,7 +63,14 @@
 
 <form id="adminForm">
   <div class="">
-  <div class="">
+  	<div id="ProfilePic" style="background-image:url('http://localhost:8080/documents/20181/0/21491')"></div>
+   <div id="Upload-Photo">
+     <label class="control-label" for="firstName">Upload photo:</label>
+     <div class="controls">
+		<input type='file' id='fileinput' multiple="multiple">
+		<input type='button' id='btnLoad' value='Load' onclick='loadFile();'>
+     </div>
+   </div>  
    <div class="form-group">
      <label class="control-label" for="firstName">First Name:</label>
      <div class="controls">
@@ -151,7 +179,6 @@
      </div>
    </div>    
   </div>
-</div>
 <div class="form-group">
     
  <div class="row-fluid">
@@ -212,6 +239,7 @@
   <input class="btn btn-info cssSave" type="button" value="Save"/>
   <input class="btn btn-primary cssCancel" type="button" value="Cancel" >
   <input id="userId" type="hidden" value="0">
+  <input id="fileEntryId" type="hidden" value="0">
   <input name="middleName" id="middleName" type="hidden">
 </form>
 
