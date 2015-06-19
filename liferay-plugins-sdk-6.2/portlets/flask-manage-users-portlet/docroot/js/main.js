@@ -580,7 +580,7 @@ $(document).ready(function() {
         
         });		
 		
-		$("#DOB").jqxDateTimeInput({ width: '257px', height: '35px', formatString: "MM-dd-yyyy" });
+		$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
 		$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
 	    console.log("Cal Done");    
 		$(".jqx-checkbox").css("margin-top","6.5px");

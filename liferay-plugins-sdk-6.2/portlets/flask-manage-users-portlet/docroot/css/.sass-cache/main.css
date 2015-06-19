@@ -12,12 +12,6 @@
 .filledWidth {
   width: 110px; }
 
-.filledWidth1 {
-  width: 110px; }
-
-@media (max-width: 767px) {
-  .filledWidth1 {
-    width: 125px; } }
 .group {
   border: 1px solid #aaa;
   width: 100%;
