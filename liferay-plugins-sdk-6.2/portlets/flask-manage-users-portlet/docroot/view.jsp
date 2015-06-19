@@ -1,5 +1,4 @@
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
-<%@ page import="com.liferay.util.BeanParamUtil"%>
 <%
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
@@ -70,7 +69,6 @@ AUI().use(
 	    	        on: {
 	    	            complete: function(){
 	    	            	console.log("File Upload Complete!");
-	    	                //our functionality after file upload;
 	    	            }
 	    	        }
 	    	    };
