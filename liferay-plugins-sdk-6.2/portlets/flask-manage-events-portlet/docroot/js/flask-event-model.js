@@ -9,9 +9,10 @@ _eventModel.SERVICE_ENDPOINTS = {
 	DELETE_EVENT				: "/flask-rest-events-portlet.event/delete-event",
 	DELETE_EVENTS				: "/flask-rest-events-portlet.event/delete-events",
 	GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types",
+	GET_INFO_TYPES 				: "/flask-rest-events-portlet.infotype/get-info-types",
+	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
 	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues",
-	GET_INFO_TYPE 				: "/flask-rest-events-portlet.infotype/get-info-types",
-	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories"	
+	GET_FOLDER					: "/dlapp/get-folder"
 };
 
 _eventModel.DATA_MODEL= {
@@ -24,10 +25,13 @@ _eventModel.DATA_MODEL= {
 		 	 { name: 'startTime', type: 'string' },
 		 	 { name: 'endTime', type: 'string' },
 		 	 { name: 'eventTypeId', type: 'long' },
-		 	 { name: 'venueId', type:'long' }
-            
+		 	 { name: 'eventTypeName', type: 'string' },
+		 	 { name: 'venueId', type:'long' },
+		 	 { name: 'venueName', type:'string' },
+		 	 { name: 'eventImagePath', type:'string' }
 		]
 	};
+
 
 _eventModel.MESSAGES= {
 		GET_ERROR: "There was an error in getting data",
@@ -58,24 +62,23 @@ _eventModel.loadVenues = function(elementId,selectedId){
 					});
 	
 }
-
-_eventModel.loadContentType = function(elementId,selectedId){
+_eventModel.loadEventType = function(elementId,selectedId){
 	var request = new Request();
 	var selectList = $('#' + elementId);
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_INFO_CATEGORY , {}, 
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT_TYPES , {}, 
 					function (data){
 							selectList.empty();
-							$.each(data, function(key, Content) {
+							$.each(data, function(key, eventType) {
 								selectList.append($("<option/>", {
-							        value: Content.displayTemplate,
-							        text: Content.infoTypeCategoryName
+							        value: eventType.eventTypeId,
+							        text: eventType.eventTypeName
 							    }));
 							});
 							selectList.val(selectedId);
 					} ,
 					function (data){
-						console.log("Error in getting content types: " + data );
+						console.log("Error in getting Event Type: " + data );
 					});
 	
 }

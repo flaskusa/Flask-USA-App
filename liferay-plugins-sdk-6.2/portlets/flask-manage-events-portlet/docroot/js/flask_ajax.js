@@ -39,14 +39,11 @@ Request.prototype.sendGETRequest = function(url, params, succcessHandler, failur
 				 }else{
 					 console.log("sendGETRequest success:" + obj);
 				 }
-				
 			}	
 		});
 	}catch(ex){
 		console.log(ex.message);
 	}
-
-	
 }
 Request.prototype.sendPOSTRequest = function(url, params, succcessHandler, failureHandler){
 	var resObj = new Response();
@@ -66,13 +63,12 @@ Request.prototype.sendPOSTRequest = function(url, params, succcessHandler, failu
 				 }else{
 					 console.log("sendGETRequest success:" + obj);
 				 }
-				
+	
 			}	
 		});
 	}catch(ex){
 		console.log(ex.message);
 	}
-
 }
 
 function responseHandler(msg){

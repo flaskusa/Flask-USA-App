@@ -32,7 +32,7 @@ function initialize(portletId, portlet){
 		loadData();
 		addClickHandlers();
 		initForm();
-		displayImages(<%=repositoryId%>,29918);
+		displayImages(<%=repositoryId%>,21751);
 	}
 }
 
@@ -97,12 +97,16 @@ function displayImages(repositoryId, folderId)
   <div class="form-group">
     <div class="controls">
 	    <label class="control-label" for="eventName">Event Name:</label>
-	    <input name="eventName" id="eventName" class="form-control" type="text" /> <div id='Active'>Active</div>
-	    <input type="hidden" name="eventTypeId" id="eventTypeId" value="1"/>
-	    <input type="hidden" name="description" id="description" value="Demo_Description"/>
+	    <input name="eventName" id="eventName" class="form-control" type="text" onchange="$('#description').val($(this).val());"/> <div id='Active'>Active</div>
+	    <input type="hidden" id="description" value=""/>
 	</div> 
   </div>
-
+   <div class="form-group">
+	    <label class="control-label" for="eventTypeId">Event Type:</label>
+		<div class="controls">
+			<select id="eventTypeId" name="eventTypeId" class="form-control-select"></select>
+		</div>
+   </div>
     <div class="form-group">
     	<label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
 	   			<div id="eventDate"></div>
@@ -124,19 +128,11 @@ function displayImages(repositoryId, folderId)
   </div>
   <br/>
   <div class="form-group">
-	    <label class="control-label" for="eventVenueId">Venue:</label>
+	    <label class="control-label" for="venueId">Venue:</label>
 		<div class="controls">
-			<select id="eventVenueId" name="eventVenueId" class="form-control-select"></select>
+			<select id="venueId" name="venueId" class="form-control-select"></select>
 			<input id="AddVenue" class="btn btn-info" type="button" value="Add Venue"/>
 		</div>
-   </div>
-  <div class="form-group">
-	    <label class="control-label" for="eventVenueId">Content Type:</label>
-		<div class="controls">
-			<select id="contentTypeId" name="contentTypeId" class="form-control-select"></select>
-		</div>
-   </div>   
-   <div class="contentTypeForm">
    </div>
    <div class="form-group">
 		<div id="jqxtabs">
@@ -157,6 +153,7 @@ function displayImages(repositoryId, folderId)
 					<li><img src="http://localhost:8080/documents/20182/29655/daisetsuzan_national_park_japan-wallpaper-1920x1080.jpg" alt="seagull" title="seagull" id="wows1_0" /></li>
 			</ul> -->
 		</div>
+		<input type="hidden" id="eventImagePath" value="">
 		<div class="ws_shadow"></div>
 		</div>
 		</div>
@@ -172,10 +169,11 @@ function displayImages(repositoryId, folderId)
 		    </div>
 		</div>
 	</div>
-<input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
+  <input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
   <input class="btn btn-info clsDelete" type="button" value="Delete"/>
   <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
   <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
+  <input id="eventId" type="hidden" value="0">
 </form>
 </body>
 </html>
