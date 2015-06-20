@@ -6,7 +6,30 @@
 		<portlet-name>FlaskAdmin</portlet-name>
 		<icon>/icon.png</icon>
 		<header-portlet-css>/css/main.css</header-portlet-css>
-		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
+		<header-portlet-css>/css/jqx.base.css</header-portlet-css>
+		<header-portlet-css>/css/jqx.orange.css</header-portlet-css>
+		<footer-portlet-javascript>/js/jquery-2.1.4.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxgrid.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxmenu.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxscrollbar.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxgrid.selection.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxdropdownbutton.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxcheckbox.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxtabs.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxfileupload.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/flask-ajax.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/flask-gridparams.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/flask-manage-user-model.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/flask-manage-user-main.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxdropdownlist.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxgrid.filter.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxgrid.pager.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqx-all.js</footer-portlet-javascript>		
 		<css-class-wrapper>FlaskAdmin-portlet</css-class-wrapper>
 	</portlet>
 

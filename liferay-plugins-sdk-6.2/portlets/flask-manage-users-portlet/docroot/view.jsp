@@ -21,56 +21,66 @@
   com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
   long repositoryId = themeDisplay.getLayout().getGroupId();
 %>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/Flask-lib.js"></script>
-<!-- JQX Plugin Includes [start]-->
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/simulator.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/generatedata.js"></script>
-<script type="text/javascript" src="<%=request.getContextPath()%>/js/jqx-all.js"></script>
-<!-- JQX Plugin Includes [End]-->
-<style>
-#ProfilePic {
-  display: block;
-  width: 150px;
-  height: 150px;
-  margin: 1em auto;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  -webkit-border-radius: 99em;
-  -moz-border-radius: 99em;
-  border-radius: 99em;
-  border: 5px solid #eee;
-  box-shadow: 0 3px 2px rgba(0, 0, 0, 0.3);  
+
+<script type="text/javascript">
+
+var bCreated;
+Liferay.Portlet.ready(initialize);
+
+function initialize(portletId, portlet){
+	if(portletId == "Manage_User_WAR_Manage_Userportlet") {
+		$("#adminForm").hide();
+		createTable({},_adminModel.DATA_MODEL.ADMIN, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Admin", "Images"]);
+		loadData();
+		addClickHandlers();
+		$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
+		$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
+	    console.log("Cal Done");    
+		$(".jqx-checkbox").css("margin-top","6.5px");
+	}
 }
 
-</style>
+</script>
 <portlet:defineObjects />
 <body>
 <input type="hidden" id="repositoryId" value="<%=repositoryId%>"> 
+<div class="yui3-skin-sam">
+  <div id="modal">
+  </div>
+ <div id="Upload-Photo">
+    <label class="control-label" for="firstName">Upload photo:</label>
+    <div class="controls">
+  <input type='file' id='fileinput' multiple="multiple">
+   </div>
+ </div>    
+</div>
+<div id="action-msg" style="display:none">
+</div>
 <div id="adminDataTable" class="table-condensed">
 	<div class="cssGridMenu">
-		<div class="cssAddUser"><div class="iconAddUser"></div></div>
+		<div class="cssAddUser"><div class="iconAddVenue"></div></div>
 		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
 		<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
 		<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
 	</div>
-	<div id="GridContainer" class="device-mobile-tablet">
+
+	<div id="GridContainer" class="device-mobile-tablet"> 
 	    <div id="container" class="device-mobile-tablet-container">
 	        <div style="border: none;" id='grid'></div>
 	    </div>
 	</div>
 </div>
 
+<div id='actionMenu' style="display:none">
+    <ul>
+		<li>Edit</li> 					<!--fnShowForm({value}); -->
+		<li>Delete</li>					<!--fnDelete({value}); -->
+	</ul>
+</div>
+
 <form id="adminForm">
   <div class="">
-  	<div id="ProfilePic" style="background-image:url('http://localhost:8080/documents/20181/0/21491')"></div>
-   <div id="Upload-Photo">
-     <label class="control-label" for="firstName">Upload photo:</label>
-     <div class="controls">
-		<input type='file' id='fileinput' multiple="multiple">
-		<input type='button' id='btnLoad' value='Load' onclick='loadFile();'>
-     </div>
-   </div>  
+  	<div id="ProfilePic" style="background-image:url('http://localhost:8080/documents/20181/0/21491')"></div>  
    <div class="form-group">
      <label class="control-label" for="firstName">First Name:</label>
      <div class="controls">
@@ -159,8 +169,8 @@
    <div class="form-group">
       <label class="control-label" for="gender">Gender:</label>
       <div class="controls">
-        <input name="gender" type="radio" value="Male" checked>Male
-     <input name="gender" type="radio" value="Female">Female
+        <input name="gender" class="gender" type="radio" value="Male" checked>Male
+     <input name="gender" class="gender" type="radio" value="Female">Female
       </div>
   </div>
    
@@ -236,7 +246,7 @@
  </div>
 </div>
  
-  <input class="btn btn-info cssSave" type="button" value="Save"/>
+  <input class="btn btn-info clsSave" type="button" value="Save"/>
   <input class="btn btn-primary cssCancel" type="button" value="Cancel" >
   <input id="userId" type="hidden" value="0">
   <input id="fileEntryId" type="hidden" value="0">

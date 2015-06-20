@@ -1,153 +1,140 @@
-var SERVICE_ENDPOINTS = {
-	GET_FLASK_ADMIN_ENDPOINT 	: "/api/jsonws/flask-rest-users-portlet.flaskadmin/get-flask-admins",
-	ADD_FLASK_ADMIN_ENDPOINT 	: "/flask-rest-users-portlet.flaskadmin/add-flask-admin",
-	UPDATE_FLASK_ADMIN_ENDPOINT	: "/flask-rest-users-portlet.flaskadmin/update-flask-admin",
-	DELETE_FLASK_ADMIN_ENDPOINT	: "/flask-rest-users-portlet.flaskadmin/delete-flask-admin",
-	TERMS_AND_CONDITION         : "http://www.rumbasolutions.com", 
-	SERVICE_TIMEOUT 			: 30000	
-};
-
-var DATA_SOURCE  = {
-	GET_FLASK_ADMIN_GRID: 
-		[
-	                     { name: 'userId', type: 'string' },
-						 { name: 'firstName', type: 'string' },
-						 { name: 'middleName', type: 'string' },
-						 { name: 'lastName', type: 'string' },
-						 { name: 'email', type: 'string' },
-						 { name: 'mobileNumber', type: 'string' },
-						 { name: 'screenName', type: 'string' },
-						 { name: 'DOB', type: 'date' },
-						 { name: 'streetName', type: 'string' },
-						 { name: 'aptNo', type: 'string' },
-						 { name: 'areaCode', type: 'string' },
-						 { name: 'city', type: 'string' },
-						 { name: 'stateId', type: 'string' },
-						 { name: 'stateName', type: 'string' },
-						 { name: 'countryId', type: 'string' },
-						 { name: 'countryName', type: 'string' }
-						 
-		]
+var _flaskLib = {};
+_flaskLib.SERVICE_ENDPOINTS = {
+				API_PREFIX					:"/api/jsonws",
+				GET_COUNTRIES 				: "/flask-rest-users-portlet.flaskadmin/get-countries",
+				GET_REGION 					: "/flask-rest-users-portlet.flaskadmin/get-region",
+				GET_USA_REGION 				: "/flask-rest-users-portlet.flaskadmin/get-usa-regions",
 }
 
-var ALLOWED_COUNTRIES = ['united-states','canada']
-var DEFAULT_COUNTRY = 'united-states';
+_flaskLib.getFormData = function(formId, model, customGetData){
+	var formData = {};
+	try {
+			$.each(model, function(index, column){
+					var ele = $('#'+ formId + ' #'+column.name);
+					if(ele.length == 1 ){
+						var val = $.trim(ele.val());
+						if(column.type == 'long' && val !=''){
+							val = Number(val)
+						}
+						formData[column.name] = val;
+					}
+			});
+			
+			if (typeof customGetData != undefined) {
+				formData = customGetData(formId, model, formData)
+			}
+			
+		} catch (e) {
+		console.log("Error in getting form data. Excception: " + e.message);
+	}
+	return formData;
+}
 
-var MESSAGES = {
-		MANDATORY_FIRST_NAME        : "Please enter first name.",
-		MANDATORY_LAST_NAME         : "Please enter last name.",
-    	MANDATORY_EMAIL				: "Please Enter Email ID",
-    	ERRORR_REGISTER_USER        : "Error Registering New User. Please verify details and try again.",
-    	ERROR_VERIFY_USER           : "Invalid User ID. Please Check User ID and try again.",
-    	REQUEST_SUBMIT_SUCCESSFULY  : "Request Submitted Successfully.",
-		FORGOTUSERNAME_EMAIL_SENT  	: "Username has been sent to your email address.",
-		FORGOTPASSWORD_EMAIL_SENT	: "Password has been sent to your email address.",
-    	END_USER_AGGREMENT          : "By clicking <strong>Accept</strong> , you are accepting to the <a class='decorate-link' onclick='showTermsAndCondition();'> Terms and Conditions</a> of VARStreet's End User License Agreement which will enable you to use VARStreet A2Q application on your mobile device."
-};
-var APP_CONFIG = {
-		PAGE_SIZE : 10,
-		JQX_THEME : "custom",
-		PAYMENT_TYPE : { 
-			CASH_ON_DELIVERY : "Cash On Delivery",
-			MONEY_ORDER : "Money Order",
-			COMPANY_CHECK : "Company Check",
-			CASHIERS_CHECK : "Cashiers Check",
-			CREDIT_CARD : "Credit Card",
-			COMPANY_PO : "Company PO",
-			PURCHASE_CARD:"Purchase Card",
-			PERSONAL_CHECK:"Personal Check",
-			PAYROLL_DEDUCTION:"Payroll Deductions",
-			GOVT_ISSUED_CREDIT_CARD:"Govt. Issued Credit Card",
-			GOVT_ISSUED_PURCHASE_ORDER:"Govt. Issued Purchase Order"
+_flaskLib.loadDataToForm = function(formId, model, data,  customSetData){
+	try {
+		$.each(model, function(index, column){
+				var ele = $('#'+ formId + ' #'+column.name);
+				if( ele.length == 1 && typeof ele[0].tagName != undefined){
+					if(ele[0].tagName.toLowerCase() =='input'){
+						var tempVal =eval("data." + column.name);
+						tempVal = tempVal == undefined ? "" : tempVal;
+						ele.val(tempVal)
+					}
+				}
+		});
+		
+		if (typeof customSetData != undefined) {
+			customSetData(formId, model, data)
 		}
-}
-
-var STATUS_CODE = {
-	SUCCESS :1,
-	TIMEDOUT:2,
-	ERROR:3,
-	UNEXPECTED_ERROR: 4 
-}
-
-var curSession = null;
-
-//Class Resposne 
-function Response(){
-	this.responseStatus = 0;
-	this.responseJson;
-}
-// Methods of response
-Response.prototype.setResponseStatus = function(statusCode){
-	this.responseStatus = statusCode;
-}
-Response.prototype.setResponseJson = function(json){
-	this.responseJson = json;
-}
-Response.prototype.getResponseStatus = function(){
-	return this.responseStatus;
-}
-Response.prototype.getResponseJson = function(){
-	return this.responseJson;
-}
-//Class Request
-function Request(){
-}
-
-Request.prototype.sendGETRequest = function(url, params, responseHandler){
-	var resObj = new Response();
-	var headerData = {};
-	resObj.responseJson = "";
-	$.ajax({
-        type: "GET",
-        url:  url,
-        data: params,
-        cache:false,
-        timeout:SERVICE_ENDPOINTS.SERVICE_TIMEOUT,
-        success: function(data){
-			resObj.setResponseStatus(STATUS_CODE.SUCCESS);
-			resObj.setResponseJson(data);
-			responseHandler(resObj);
-		},
-		error:function(){ 
-			resObj.setResponseStatus(STATUS_CODE.UNEXPECTED_ERROR);
-			resObj.setResponseJson("{\"Message\":[\"Unexpected error occurred.\"],\"Success\":false}");			
-			responseHandler(resObj);
-		}
-	});
-}
-Request.prototype.sendPOSTRequest = function(url, params, responseHandler){
-	var resObj = new Response();
-	resObj.responseJson = "";
-	try{
-	$.ajax({
-        type: "POST",
-        url:  url,
-        data: params,
-        cache:false,
-        dataType: "text",
-        contentType: "application/json",
-        timeout:SERVICE_ENDPOINTS.SERVICE_TIMEOUT,
-        success: function(data){
-			resObj.setResponseStatus(STATUS_CODE.SUCCESS);
-			resObj.setResponseJson(data);
-			responseHandler(resObj);
-		},
-		error:function(){ 
-			resObj.setResponseStatus(STATUS_CODE.UNEXPECTED_ERROR);
-			resObj.setResponseJson("{\"Message\":[\"Unexpected error occurred.\"],\"Success\":false}");
-			responseHandler(resObj);
-		}
-	});
-	} catch (ex){
-		resObj.setResponseStatus(STATUS_CODE.UNEXPECTED_ERROR);
-		resObj.setResponseJson("{\"Message\":[\"Unexpected error occurred.\"],\"Success\":false}");
-		responseHandler(resObj);
+	} catch (e) {
+		console.log("Error in setting form data. Excception: " + e.message);
 	}
 }
 
-function responseHandler(msg){
-	console.log(msg);
-	return false;
+_flaskLib.loadCountries = function(elementId,selectedId){
+	var request = new Request();
+	var selectList = $('#' + elementId);
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_COUNTRIES , {}, 
+					function (data){
+							selectList.empty();
+							$.each(data, function(key, country) {
+								selectList.append($("<option/>", {
+							        value: country.countryId,
+							        text: country.nameCurrentValue
+							    }));
+							});
+							selectList.val(selectedId);
+					} ,
+					function (data){
+						console.log("Error in getting countries: " + data );
+					});
+	
 }
-// ************************************ APIS FOR FLASK
-// **************************************
+
+/**
+ * 
+ */
+_flaskLib.loadRegions = function(elementId, countryId, selectedId){
+	var request = new Request();
+	var selectList = $('#' + elementId);
+	var flaskRequest = new Request();
+	var param = {countryId: countryId};
+	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_REGION , param, 
+					function (data){
+							selectList.empty();
+							$.each(data, function(key, country) {
+								selectList.append($("<option/>", {
+							        value: country.countryId,
+							        text: country.name
+							    }));
+							});
+							selectList.val(selectedId);
+					} ,
+					function (data){
+						console.log("Error in getting regions: " + data );
+					});
+	
+	
+}
+
+_flaskLib.loadUSARegions = function(elementId, selectedId){
+	var param = {};
+	var request = new Request();
+	var selectList = $('#' + elementId);
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_USA_REGION , param, 
+					function (data){
+							selectList.empty();
+							$.each(data, function(key, region) {
+								selectList.append($("<option/>", {
+							        value: region.regionId,
+							        text: region.name
+							    }));
+							});
+							selectList.val(selectedId);
+					} ,
+					function (data){
+						console.log("Error in getting USA regions: " + data );
+					});
+	
+}
+
+_flaskLib.showErrorMessage =   function (elementId, msg){
+	var ele = $('#'+ elementId);
+	ele.text(msg);
+	ele.removeClass().addClass('alert alert-error');
+	ele.show();
+}
+_flaskLib.showSuccessMessage = function (elementId, msg){
+	var ele = $('#'+ elementId);
+	ele.text(msg);
+	ele.removeClass().addClass('alert alert-success');
+	ele.show();
+}
+
+_flaskLib.hideMessage = function (elementId){
+	var ele = $('#'+ elementId);
+	ele.text('');
+	ele.hide();
+}
