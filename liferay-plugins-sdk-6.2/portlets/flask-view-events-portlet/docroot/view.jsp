@@ -52,46 +52,31 @@
     </tbody>
   </table>
 
-		 
-		<div id="fixedfooter">
-				<table >
-		            <tr>
-		                <td class="footertxt">
-		                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
-		                </td>
-		                <td class="asans"><b>FREE PINT WITH WITH A BURGER</b>
-		                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
-		                <span class="gochi">ON GAMEDAY!</span>
-		                </td>
-		            </tr>
-		        </table>
-		</div>
   </div>
  </div>
     
  <div id="two" style="display:none; width:100%; ">
 
-  <div id="image1">
-        <img id="banner" src="<%=request.getContextPath()%>/img/stripe.png" style=" height: 458px;" />
-    </div>
-
     <div id="section"> 
     <div>
-        <img src="<%=request.getContextPath()%>/img/Fotolia_81101979_Subscription_Monthly_M.jpg" class="imgside" />
+     <img src="<%=request.getContextPath()%>/img/1.jpg" class="imgside" />
     </div>
     <div>
-        <img src="<%=request.getContextPath()%>/img/Fotolia_2932277_Subscription_Monthly_M.jpg" class="imgside" />
+      <img src="<%=request.getContextPath()%>/img/2.jpg" class="imgside" />
     </div>
     <div>
-        <img src="<%=request.getContextPath()%>/img/Fotolia_20387372_Subscription_Monthly_M.jpg" class="imgside" />
+     <img src="<%=request.getContextPath()%>/img/3.jpg" class="imgside" />
     </div>
     </div>
     <input class="btn btn-info cssback" type="button" value="Back"/>
+    
     <br/>
     <br/>
     <br/>
-    <br/>
-    <br/>
+     <div align="center" id="fixedfooter2">
+        <b>YOUR GAME PLAN FOR GAME DAY</b>
+ 	</div>
+</div>
     <div id="fixedfooter">
 				<table >
 		            <tr>
@@ -105,6 +90,4 @@
 		            </tr>
 		        </table>
 	</div>
-
-</div>
 </body>
