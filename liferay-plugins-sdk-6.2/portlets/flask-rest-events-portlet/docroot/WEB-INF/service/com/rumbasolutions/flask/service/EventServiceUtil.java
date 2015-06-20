@@ -155,22 +155,21 @@ public class EventServiceUtil {
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetailImage addEventDetailImage(
-		long EventDetailId, java.lang.String imageTitle,
+		long eventDetailId, java.lang.String imageTitle,
 		java.lang.String imageDesc, java.lang.String imagePath,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
-				   .addEventDetailImage(EventDetailId, imageTitle, imageDesc,
+				   .addEventDetailImage(eventDetailId, imageTitle, imageDesc,
 			imagePath, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(
-		long EventDetailImageId, long EventDetailId,
-		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imagePath,
+		long eventDetailImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imagePath,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
-				   .updateEventDetailImage(EventDetailImageId, EventDetailId,
-			imageTitle, imageDesc, imagePath, serviceContext);
+				   .updateEventDetailImage(eventDetailImageId, imageTitle,
+			imageDesc, imagePath, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetailImage getEventDetailImage(

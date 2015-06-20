@@ -130,7 +130,13 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		}
 
 		eventDetailImpl.setInfoTypeCategoryId(infoTypeCategoryId);
-		eventDetailImpl.setInfoTypeCategoryName(infoTypeCategoryName);
+
+		if (infoTypeCategoryName == null) {
+			eventDetailImpl.setInfoTypeCategoryName(StringPool.BLANK);
+		}
+		else {
+			eventDetailImpl.setInfoTypeCategoryName(infoTypeCategoryName);
+		}
 
 		if (infoTitle == null) {
 			eventDetailImpl.setInfoTitle(StringPool.BLANK);
@@ -245,7 +251,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		infoTypeId = objectInput.readLong();
 		infoTypeName = objectInput.readUTF();
 		infoTypeCategoryId = objectInput.readLong();
-		infoTypeCategoryName = objectInput.readLong();
+		infoTypeCategoryName = objectInput.readUTF();
 		infoTitle = objectInput.readUTF();
 		infoDesc = objectInput.readUTF();
 		addrLine1 = objectInput.readUTF();
@@ -283,7 +289,13 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		}
 
 		objectOutput.writeLong(infoTypeCategoryId);
-		objectOutput.writeLong(infoTypeCategoryName);
+
+		if (infoTypeCategoryName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(infoTypeCategoryName);
+		}
 
 		if (infoTitle == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -392,7 +404,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	public long infoTypeId;
 	public String infoTypeName;
 	public long infoTypeCategoryId;
-	public long infoTypeCategoryName;
+	public String infoTypeCategoryName;
 	public String infoTitle;
 	public String infoDesc;
 	public String addrLine1;

@@ -15,6 +15,7 @@
 package com.rumbasolutions.flask.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -87,6 +88,13 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
 			event.setEventImagePath(eventImagePath);
+
+			Date now = new Date();
+			event.setCompanyId(serviceContext.getCompanyId());
+		    event.setUserId(serviceContext.getGuestOrUserId());
+		    event.setCreatedDate(serviceContext.getCreateDate(now));
+		    event.setModifiedDate(serviceContext.getModifiedDate(now));
+		    
 			EventLocalServiceUtil.addEvent(event);
 
 			
@@ -109,9 +117,16 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			event.setEventDate(FlaskUtil.parseDate(eventDate).getTime());
 			event.setStartTime(FlaskUtil.parseTime(startTime).getTime());
 			event.setEndTime(FlaskUtil.parseTime(endTime).getTime());
-			event.setEventTypeId(eventTypeId);
+			
+			Date now = new Date();
+		    event.setUserId(serviceContext.getGuestOrUserId());
+		    event.setModifiedDate(serviceContext.getModifiedDate(now));
+
+		    event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
 			event.setEventImagePath(eventImagePath);
+			
+			
 			EventLocalServiceUtil.updateEvent(event);
 		}catch(Exception ex){
 			LOGGER.error("Exception in addEvent: " + ex.getMessage());
@@ -152,6 +167,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		EventDetail eventDetail=null;
 		try{
 			eventDetail= EventDetailLocalServiceUtil.createEventDetail(CounterLocalServiceUtil.increment());
+			eventDetail.setEventId(eventId);
 			eventDetail.setInfoTypeId(infoTypeId);
 			eventDetail.setInfoTypeCategoryId(infoTypeCategoryId);
 			eventDetail.setInfoTitle(infoTitle);
@@ -168,6 +184,14 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setWebsite(website);
 			eventDetail.setCost(cost);
 			eventDetail.setHoursOfOperation(hoursOfOperation);
+			
+			Date now = new Date();
+			eventDetail.setCompanyId(serviceContext.getCompanyId());
+		    eventDetail.setUserId(serviceContext.getGuestOrUserId());
+		    eventDetail.setCreatedDate(serviceContext.getCreateDate(now));
+		    eventDetail.setModifiedDate(serviceContext.getModifiedDate(now));
+
+		    
 			eventDetail = EventDetailLocalServiceUtil.addEventDetail(eventDetail);
 		}catch(Exception ex){
 			LOGGER.error("Exception in addEventDetail: " + ex.getMessage());
@@ -200,6 +224,12 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setWebsite(website);
 			eventDetail.setCost(cost);
 			eventDetail.setHoursOfOperation(hoursOfOperation);
+			
+			Date now = new Date();
+		    eventDetail.setUserId(serviceContext.getGuestOrUserId());
+		    eventDetail.setModifiedDate(serviceContext.getModifiedDate(now));
+
+		    
 			eventDetail = EventDetailLocalServiceUtil.updateEventDetail(eventDetail);
 							
 		}catch(Exception ex){
@@ -254,15 +284,24 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	}
 	
 	@Override
-	public EventDetailImage addEventDetailImage(long EventDetailId, String imageTitle,
+	public EventDetailImage addEventDetailImage(long eventDetailId, String imageTitle,
 									String imageDesc, String imagePath,
 									ServiceContext  serviceContext){
 		EventDetailImage eventDetailImage =null;
 		try{
 			eventDetailImage =EventDetailImageLocalServiceUtil.createEventDetailImage(CounterLocalServiceUtil.increment());
+			eventDetailImage.setEventDetailId(eventDetailId);
 			eventDetailImage.setImageTitle(imageTitle);
 			eventDetailImage.setImageDesc(imageDesc);
 			eventDetailImage.setImagePath(imagePath);
+			
+			Date now = new Date();
+			eventDetailImage.setCompanyId(serviceContext.getCompanyId());
+		    eventDetailImage.setUserId(serviceContext.getGuestOrUserId());
+		    eventDetailImage.setCreatedDate(serviceContext.getCreateDate(now));
+		    eventDetailImage.setModifiedDate(serviceContext.getModifiedDate(now));
+
+		    
 			EventDetailImageLocalServiceUtil.addEventDetailImage(eventDetailImage);
 			
 		}catch(Exception ex){
@@ -272,16 +311,22 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	}
 	
 	@Override
-	public EventDetailImage updateEventDetailImage(long EventDetailImageId,
-									long EventDetailId, String imageTitle,
+	public EventDetailImage updateEventDetailImage(long eventDetailImageId,
+									String imageTitle,
 									String imageDesc, String imagePath,
 									ServiceContext  serviceContext){
 		EventDetailImage eventDetailImage =null;
 		try{
-			eventDetailImage =EventDetailImageLocalServiceUtil.getEventDetailImage(EventDetailImageId);
+			eventDetailImage =EventDetailImageLocalServiceUtil.getEventDetailImage(eventDetailImageId);
 			eventDetailImage.setImageTitle(imageTitle);
 			eventDetailImage.setImageDesc(imageDesc);
 			eventDetailImage.setImagePath(imagePath);
+			
+			Date now = new Date();
+			eventDetailImage.setUserId(serviceContext.getGuestOrUserId());
+		    eventDetailImage.setModifiedDate(serviceContext.getModifiedDate(now));
+
+		    
 			EventDetailImageLocalServiceUtil.updateEventDetailImage(eventDetailImage);
 			
 		}catch(Exception ex){

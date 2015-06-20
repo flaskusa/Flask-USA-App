@@ -136,7 +136,8 @@ public class EventDetailWrapper implements EventDetail,
 			setInfoTypeCategoryId(infoTypeCategoryId);
 		}
 
-		Long infoTypeCategoryName = (Long)attributes.get("infoTypeCategoryName");
+		String infoTypeCategoryName = (String)attributes.get(
+				"infoTypeCategoryName");
 
 		if (infoTypeCategoryName != null) {
 			setInfoTypeCategoryName(infoTypeCategoryName);
@@ -467,7 +468,7 @@ public class EventDetailWrapper implements EventDetail,
 	* @return the info type category name of this event detail
 	*/
 	@Override
-	public long getInfoTypeCategoryName() {
+	public java.lang.String getInfoTypeCategoryName() {
 		return _eventDetail.getInfoTypeCategoryName();
 	}
 
@@ -477,7 +478,7 @@ public class EventDetailWrapper implements EventDetail,
 	* @param infoTypeCategoryName the info type category name of this event detail
 	*/
 	@Override
-	public void setInfoTypeCategoryName(long infoTypeCategoryName) {
+	public void setInfoTypeCategoryName(java.lang.String infoTypeCategoryName) {
 		_eventDetail.setInfoTypeCategoryName(infoTypeCategoryName);
 	}
 

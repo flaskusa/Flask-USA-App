@@ -13,7 +13,7 @@ create table flaskevents_Event (
 	eventTypeName VARCHAR(75) null,
 	eventImagePath VARCHAR(255) null,
 	venueId LONG,
-	venueName LONG
+	venueName VARCHAR(75) null
 );
 
 create table flaskevents_EventDetail (
@@ -26,7 +26,7 @@ create table flaskevents_EventDetail (
 	infoTypeId LONG,
 	infoTypeName VARCHAR(75) null,
 	infoTypeCategoryId LONG,
-	infoTypeCategoryName LONG,
+	infoTypeCategoryName VARCHAR(75) null,
 	infoTitle VARCHAR(75) null,
 	infoDesc VARCHAR(255) null,
 	addrLine1 VARCHAR(100) null,

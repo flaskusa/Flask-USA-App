@@ -207,14 +207,15 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	 *
 	 * @return the info type category name of this event detail
 	 */
-	public long getInfoTypeCategoryName();
+	@AutoEscape
+	public String getInfoTypeCategoryName();
 
 	/**
 	 * Sets the info type category name of this event detail.
 	 *
 	 * @param infoTypeCategoryName the info type category name of this event detail
 	 */
-	public void setInfoTypeCategoryName(long infoTypeCategoryName);
+	public void setInfoTypeCategoryName(String infoTypeCategoryName);
 
 	/**
 	 * Returns the info title of this event detail.

@@ -181,11 +181,11 @@ public class EventDetailSoap implements Serializable {
 		_infoTypeCategoryId = infoTypeCategoryId;
 	}
 
-	public long getInfoTypeCategoryName() {
+	public String getInfoTypeCategoryName() {
 		return _infoTypeCategoryName;
 	}
 
-	public void setInfoTypeCategoryName(long infoTypeCategoryName) {
+	public void setInfoTypeCategoryName(String infoTypeCategoryName) {
 		_infoTypeCategoryName = infoTypeCategoryName;
 	}
 
@@ -326,7 +326,7 @@ public class EventDetailSoap implements Serializable {
 	private long _infoTypeId;
 	private String _infoTypeName;
 	private long _infoTypeCategoryId;
-	private long _infoTypeCategoryName;
+	private String _infoTypeCategoryName;
 	private String _infoTitle;
 	private String _infoDesc;
 	private String _addrLine1;

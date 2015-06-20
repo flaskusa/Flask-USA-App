@@ -210,11 +210,11 @@ public class EventSoap implements Serializable {
 		_venueId = venueId;
 	}
 
-	public long getVenueName() {
+	public String getVenueName() {
 		return _venueName;
 	}
 
-	public void setVenueName(long venueName) {
+	public void setVenueName(String venueName) {
 		_venueName = venueName;
 	}
 
@@ -232,5 +232,5 @@ public class EventSoap implements Serializable {
 	private String _eventTypeName;
 	private String _eventImagePath;
 	private long _venueId;
-	private long _venueName;
+	private String _venueName;
 }

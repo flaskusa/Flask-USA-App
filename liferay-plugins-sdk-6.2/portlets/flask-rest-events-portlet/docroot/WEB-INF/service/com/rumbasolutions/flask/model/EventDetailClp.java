@@ -161,7 +161,8 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 			setInfoTypeCategoryId(infoTypeCategoryId);
 		}
 
-		Long infoTypeCategoryName = (Long)attributes.get("infoTypeCategoryName");
+		String infoTypeCategoryName = (String)attributes.get(
+				"infoTypeCategoryName");
 
 		if (infoTypeCategoryName != null) {
 			setInfoTypeCategoryName(infoTypeCategoryName);
@@ -483,12 +484,12 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	}
 
 	@Override
-	public long getInfoTypeCategoryName() {
+	public String getInfoTypeCategoryName() {
 		return _infoTypeCategoryName;
 	}
 
 	@Override
-	public void setInfoTypeCategoryName(long infoTypeCategoryName) {
+	public void setInfoTypeCategoryName(String infoTypeCategoryName) {
 		_infoTypeCategoryName = infoTypeCategoryName;
 
 		if (_eventDetailRemoteModel != null) {
@@ -496,7 +497,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 				Class<?> clazz = _eventDetailRemoteModel.getClass();
 
 				Method method = clazz.getMethod("setInfoTypeCategoryName",
-						long.class);
+						String.class);
 
 				method.invoke(_eventDetailRemoteModel, infoTypeCategoryName);
 			}
@@ -1209,7 +1210,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	private long _infoTypeId;
 	private String _infoTypeName;
 	private long _infoTypeCategoryId;
-	private long _infoTypeCategoryName;
+	private String _infoTypeCategoryName;
 	private String _infoTitle;
 	private String _infoDesc;
 	private String _addrLine1;

@@ -123,7 +123,7 @@ public class EventServiceClp implements EventService {
 		_methodName15 = "updateEventDetailImage";
 
 		_methodParameterTypes15 = new String[] {
-				"long", "long", "java.lang.String", "java.lang.String",
+				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
@@ -614,7 +614,7 @@ public class EventServiceClp implements EventService {
 
 	@Override
 	public com.rumbasolutions.flask.model.EventDetailImage addEventDetailImage(
-		long EventDetailId, java.lang.String imageTitle,
+		long eventDetailId, java.lang.String imageTitle,
 		java.lang.String imageDesc, java.lang.String imagePath,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
@@ -623,7 +623,7 @@ public class EventServiceClp implements EventService {
 			returnObj = _invokableService.invokeMethod(_methodName14,
 					_methodParameterTypes14,
 					new Object[] {
-						EventDetailId,
+						eventDetailId,
 						
 					ClpSerializer.translateInput(imageTitle),
 						
@@ -651,9 +651,8 @@ public class EventServiceClp implements EventService {
 
 	@Override
 	public com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(
-		long EventDetailImageId, long EventDetailId,
-		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imagePath,
+		long eventDetailImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imagePath,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -661,9 +660,7 @@ public class EventServiceClp implements EventService {
 			returnObj = _invokableService.invokeMethod(_methodName15,
 					_methodParameterTypes15,
 					new Object[] {
-						EventDetailImageId,
-						
-					EventDetailId,
+						eventDetailImageId,
 						
 					ClpSerializer.translateInput(imageTitle),
 						

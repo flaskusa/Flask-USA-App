@@ -15,6 +15,7 @@
 package com.rumbasolutions.flask.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -93,7 +94,14 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venue.setVenueMetroArea(venueMetroArea);
 			venue.setVenueStateId(venueStateId);
 			venue.setVenueCountryId(venueCountryId);
-			venue = VenueLocalServiceUtil.addVenue(venue);
+			
+			Date now = new Date();
+			venue.setCompanyId(serviceContext.getCompanyId());
+		    venue.setUserId(serviceContext.getGuestOrUserId());
+		    venue.setCreatedDate(serviceContext.getCreateDate(now));
+		    venue.setModifiedDate(serviceContext.getModifiedDate(now));
+			
+		    venue = VenueLocalServiceUtil.addVenue(venue);
 			
 		}catch(Exception ex){
 			LOGGER.error("Exception in addVenue: " + ex.getMessage());
@@ -120,6 +128,11 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venue.setVenueMetroArea(venueMetroArea);
 			venue.setVenueStateId(venueStateId);
 			venue.setVenueCountryId(venueCountryId);
+			
+			Date now = new Date();
+			venue.setUserId(serviceContext.getGuestOrUserId());
+		    venue.setModifiedDate(serviceContext.getModifiedDate(now));
+		    
 			venue = VenueLocalServiceUtil.updateVenue(venue);
 			
 		}catch(Exception ex){
@@ -167,9 +180,16 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	public void addVenueImage(long venueId, String title, String venueImagePath ,ServiceContext  serviceContext){
 		try{
 			VenueImage venueImage = VenueImageLocalServiceUtil.createVenueImage(CounterLocalServiceUtil.increment());
-
+			venueImage.setVenueId(venueId);	
 			venueImage.setTitle(title);
 			venueImage.setVenueImagePath(venueImagePath);
+			
+			Date now = new Date();
+			venueImage.setCompanyId(serviceContext.getCompanyId());
+		    venueImage.setUserId(serviceContext.getGuestOrUserId());
+		    venueImage.setCreatedDate(serviceContext.getCreateDate(now));
+		    venueImage.setModifiedDate(serviceContext.getModifiedDate(now));
+		    
 			VenueImageLocalServiceUtil.addVenueImage(venueImage);
 			
 		}catch(Exception ex){
@@ -209,6 +229,11 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			VenueImage venueImage = VenueImageLocalServiceUtil.getVenueImage(venueImageId);
 			venueImage.setTitle(title);
 			venueImage.setVenueImagePath(venueImagePath);
+			
+			Date now = new Date();
+			venueImage.setUserId(serviceContext.getGuestOrUserId());
+		    venueImage.setModifiedDate(serviceContext.getModifiedDate(now));
+		    
 			VenueImageLocalServiceUtil.updateVenueImage(venueImage);
 			
 		}catch(Exception ex){
@@ -249,7 +274,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		try{
 			
 			venueDetail= VenueDetailLocalServiceUtil.createVenueDetail(CounterLocalServiceUtil.increment());
-
+			venueDetail.setVenueId(venueId);
 			venueDetail.setInfoTypeId(infoTypeId);
 			venueDetail.setInfoTypeCategoryId(infoTypeCategoryId);
 			
@@ -267,6 +292,13 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setWebsite(website);
 			venueDetail.setCost(cost);
 			venueDetail.setHoursOfOperation(hoursOfOperation);
+			
+			Date now = new Date();
+			venueDetail.setCompanyId(serviceContext.getCompanyId());
+		    venueDetail.setUserId(serviceContext.getGuestOrUserId());
+		    venueDetail.setCreatedDate(serviceContext.getCreateDate(now));
+		    venueDetail.setModifiedDate(serviceContext.getModifiedDate(now));
+		    
 			venueDetail = VenueDetailLocalServiceUtil.addVenueDetail(venueDetail);
 			
 		}catch(Exception ex){
@@ -300,6 +332,11 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setWebsite(website);
 			venueDetail.setCost(cost);
 			venueDetail.setHoursOfOperation(hoursOfOperation);
+			
+			Date now = new Date();
+			venueDetail.setUserId(serviceContext.getGuestOrUserId());
+		    venueDetail.setModifiedDate(serviceContext.getModifiedDate(now));
+		    
 			venueDetail = VenueDetailLocalServiceUtil.updateVenueDetail(venueDetail);
 							
 		}catch(Exception ex){
@@ -360,9 +397,17 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		VenueDetailImage venueDetailImage =null;
 		try{
 			venueDetailImage =VenueDetailImageLocalServiceUtil.createVenueDetailImage(CounterLocalServiceUtil.increment());
+			venueDetailImage.setVenueDetailId(venueDetailId);
 			venueDetailImage.setImageTitle(imageTitle);
 			venueDetailImage.setImageDesc(imageDesc);
 			venueDetailImage.setImagePath(imagePath);
+			
+			Date now = new Date();
+			venueDetailImage.setCompanyId(serviceContext.getCompanyId());
+		    venueDetailImage.setUserId(serviceContext.getGuestOrUserId());
+		    venueDetailImage.setCreatedDate(serviceContext.getCreateDate(now));
+		    venueDetailImage.setModifiedDate(serviceContext.getModifiedDate(now));
+		    
 			VenueDetailImageLocalServiceUtil.addVenueDetailImage(venueDetailImage);
 			
 		}catch(Exception ex){
@@ -382,6 +427,11 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetailImage.setImageTitle(imageTitle);
 			venueDetailImage.setImageDesc(imageDesc);
 			venueDetailImage.setImagePath(imagePath);
+			
+			Date now = new Date();
+			venueDetailImage.setUserId(serviceContext.getGuestOrUserId());
+		    venueDetailImage.setModifiedDate(serviceContext.getModifiedDate(now));
+		    
 			VenueDetailImageLocalServiceUtil.updateVenueDetailImage(venueDetailImage);
 			
 		}catch(Exception ex){

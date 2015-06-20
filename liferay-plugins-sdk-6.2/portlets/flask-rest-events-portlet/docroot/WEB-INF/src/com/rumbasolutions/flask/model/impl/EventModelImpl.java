@@ -80,9 +80,9 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			{ "eventTypeName", Types.VARCHAR },
 			{ "eventImagePath", Types.VARCHAR },
 			{ "venueId", Types.BIGINT },
-			{ "venueName", Types.BIGINT }
+			{ "venueName", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_Event (eventId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventName VARCHAR(100) null,description VARCHAR(255) null,eventDate DATE null,startTime DATE null,endTime DATE null,eventTypeId LONG,eventTypeName VARCHAR(75) null,eventImagePath VARCHAR(255) null,venueId LONG,venueName LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_Event (eventId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventName VARCHAR(100) null,description VARCHAR(255) null,eventDate DATE null,startTime DATE null,endTime DATE null,eventTypeId LONG,eventTypeName VARCHAR(75) null,eventImagePath VARCHAR(255) null,venueId LONG,venueName VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_Event";
 	public static final String ORDER_BY_JPQL = " ORDER BY event.eventDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_Event.eventDate DESC";
@@ -298,7 +298,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			setVenueId(venueId);
 		}
 
-		Long venueName = (Long)attributes.get("venueName");
+		String venueName = (String)attributes.get("venueName");
 
 		if (venueName != null) {
 			setVenueName(venueName);
@@ -513,12 +513,17 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@JSON
 	@Override
-	public long getVenueName() {
-		return _venueName;
+	public String getVenueName() {
+		if (_venueName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _venueName;
+		}
 	}
 
 	@Override
-	public void setVenueName(long venueName) {
+	public void setVenueName(String venueName) {
 		_venueName = venueName;
 	}
 
@@ -722,6 +727,12 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 		eventCacheModel.venueName = getVenueName();
 
+		String venueName = eventCacheModel.venueName;
+
+		if ((venueName != null) && (venueName.length() == 0)) {
+			eventCacheModel.venueName = null;
+		}
+
 		return eventCacheModel;
 	}
 
@@ -858,7 +869,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	private long _venueId;
 	private long _originalVenueId;
 	private boolean _setOriginalVenueId;
-	private long _venueName;
+	private String _venueName;
 	private long _columnBitmask;
 	private Event _escapedModel;
 }

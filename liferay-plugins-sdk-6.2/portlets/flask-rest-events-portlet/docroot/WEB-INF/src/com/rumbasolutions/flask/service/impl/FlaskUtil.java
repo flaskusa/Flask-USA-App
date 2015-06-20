@@ -36,7 +36,7 @@ public class FlaskUtil {
 	public static Calendar parseTime(String timeVal){
 		Calendar cal = Calendar.getInstance();
 		Date dt =null;
-		String[] validFormats = {"hh:mm", "hh:mm a"};
+		String[] validFormats = {"hh:mm a", "hh:mm"};
 		for(String format : validFormats ){
 				SimpleDateFormat sf  =new SimpleDateFormat(format, Locale.US);
 				try {

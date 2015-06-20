@@ -75,7 +75,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			{ "infoTypeId", Types.BIGINT },
 			{ "infoTypeName", Types.VARCHAR },
 			{ "infoTypeCategoryId", Types.BIGINT },
-			{ "infoTypeCategoryName", Types.BIGINT },
+			{ "infoTypeCategoryName", Types.VARCHAR },
 			{ "infoTitle", Types.VARCHAR },
 			{ "infoDesc", Types.VARCHAR },
 			{ "addrLine1", Types.VARCHAR },
@@ -93,7 +93,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			{ "cost", Types.DOUBLE },
 			{ "hoursOfOperation", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName LONG,infoTitle VARCHAR(75) null,infoDesc VARCHAR(255) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(75) null,countryId LONG,countryName VARCHAR(75) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName VARCHAR(75) null,infoTitle VARCHAR(75) null,infoDesc VARCHAR(255) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(75) null,countryId LONG,countryName VARCHAR(75) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_EventDetail";
 	public static final String ORDER_BY_JPQL = " ORDER BY eventDetail.eventDetailId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_EventDetail.eventDetailId ASC";
@@ -303,7 +303,8 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			setInfoTypeCategoryId(infoTypeCategoryId);
 		}
 
-		Long infoTypeCategoryName = (Long)attributes.get("infoTypeCategoryName");
+		String infoTypeCategoryName = (String)attributes.get(
+				"infoTypeCategoryName");
 
 		if (infoTypeCategoryName != null) {
 			setInfoTypeCategoryName(infoTypeCategoryName);
@@ -558,12 +559,17 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@JSON
 	@Override
-	public long getInfoTypeCategoryName() {
-		return _infoTypeCategoryName;
+	public String getInfoTypeCategoryName() {
+		if (_infoTypeCategoryName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _infoTypeCategoryName;
+		}
 	}
 
 	@Override
-	public void setInfoTypeCategoryName(long infoTypeCategoryName) {
+	public void setInfoTypeCategoryName(String infoTypeCategoryName) {
 		_infoTypeCategoryName = infoTypeCategoryName;
 	}
 
@@ -976,6 +982,13 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 		eventDetailCacheModel.infoTypeCategoryName = getInfoTypeCategoryName();
 
+		String infoTypeCategoryName = eventDetailCacheModel.infoTypeCategoryName;
+
+		if ((infoTypeCategoryName != null) &&
+				(infoTypeCategoryName.length() == 0)) {
+			eventDetailCacheModel.infoTypeCategoryName = null;
+		}
+
 		eventDetailCacheModel.infoTitle = getInfoTitle();
 
 		String infoTitle = eventDetailCacheModel.infoTitle;
@@ -1288,7 +1301,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 	private long _infoTypeCategoryId;
 	private long _originalInfoTypeCategoryId;
 	private boolean _setOriginalInfoTypeCategoryId;
-	private long _infoTypeCategoryName;
+	private String _infoTypeCategoryName;
 	private String _infoTitle;
 	private String _infoDesc;
 	private String _addrLine1;

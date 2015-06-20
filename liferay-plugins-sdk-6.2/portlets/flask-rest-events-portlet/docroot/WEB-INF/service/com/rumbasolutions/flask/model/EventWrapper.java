@@ -154,7 +154,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 			setVenueId(venueId);
 		}
 
-		Long venueName = (Long)attributes.get("venueName");
+		String venueName = (String)attributes.get("venueName");
 
 		if (venueName != null) {
 			setVenueName(venueName);
@@ -489,7 +489,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	* @return the venue name of this event
 	*/
 	@Override
-	public long getVenueName() {
+	public java.lang.String getVenueName() {
 		return _event.getVenueName();
 	}
 
@@ -499,7 +499,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	* @param venueName the venue name of this event
 	*/
 	@Override
-	public void setVenueName(long venueName) {
+	public void setVenueName(java.lang.String venueName) {
 		_event.setVenueName(venueName);
 	}
 

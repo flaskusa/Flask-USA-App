@@ -280,14 +280,15 @@ public interface EventModel extends BaseModel<Event> {
 	 *
 	 * @return the venue name of this event
 	 */
-	public long getVenueName();
+	@AutoEscape
+	public String getVenueName();
 
 	/**
 	 * Sets the venue name of this event.
 	 *
 	 * @param venueName the venue name of this event
 	 */
-	public void setVenueName(long venueName);
+	public void setVenueName(String venueName);
 
 	@Override
 	public boolean isNew();

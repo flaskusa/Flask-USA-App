@@ -30,7 +30,7 @@
 		<property name="eventTypeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="eventImagePath" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="venueId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="venueName" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="venueName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.EventDetailImpl" table="flaskevents_EventDetail">
 		<cache usage="read-write" />
@@ -45,7 +45,7 @@
 		<property name="infoTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="infoTypeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoTypeCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="infoTypeCategoryName" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="infoTypeCategoryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="addrLine1" type="com.liferay.portal.dao.orm.hibernate.StringType" />

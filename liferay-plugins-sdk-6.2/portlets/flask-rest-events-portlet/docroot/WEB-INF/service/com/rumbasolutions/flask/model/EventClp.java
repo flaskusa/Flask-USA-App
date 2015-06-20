@@ -180,7 +180,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 			setVenueId(venueId);
 		}
 
-		Long venueName = (Long)attributes.get("venueName");
+		String venueName = (String)attributes.get("venueName");
 
 		if (venueName != null) {
 			setVenueName(venueName);
@@ -521,19 +521,19 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 	}
 
 	@Override
-	public long getVenueName() {
+	public String getVenueName() {
 		return _venueName;
 	}
 
 	@Override
-	public void setVenueName(long venueName) {
+	public void setVenueName(String venueName) {
 		_venueName = venueName;
 
 		if (_eventRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueName", long.class);
+				Method method = clazz.getMethod("setVenueName", String.class);
 
 				method.invoke(_eventRemoteModel, venueName);
 			}
@@ -805,7 +805,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 	private String _eventTypeName;
 	private String _eventImagePath;
 	private long _venueId;
-	private long _venueName;
+	private String _venueName;
 	private BaseModel<?> _eventRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

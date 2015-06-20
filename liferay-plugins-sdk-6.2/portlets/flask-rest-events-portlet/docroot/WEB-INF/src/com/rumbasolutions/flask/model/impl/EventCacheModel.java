@@ -148,7 +148,13 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		}
 
 		eventImpl.setVenueId(venueId);
-		eventImpl.setVenueName(venueName);
+
+		if (venueName == null) {
+			eventImpl.setVenueName(StringPool.BLANK);
+		}
+		else {
+			eventImpl.setVenueName(venueName);
+		}
 
 		eventImpl.resetOriginalValues();
 
@@ -171,7 +177,7 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		eventTypeName = objectInput.readUTF();
 		eventImagePath = objectInput.readUTF();
 		venueId = objectInput.readLong();
-		venueName = objectInput.readLong();
+		venueName = objectInput.readUTF();
 	}
 
 	@Override
@@ -217,7 +223,13 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 		}
 
 		objectOutput.writeLong(venueId);
-		objectOutput.writeLong(venueName);
+
+		if (venueName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(venueName);
+		}
 	}
 
 	public long eventId;
@@ -234,5 +246,5 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 	public String eventTypeName;
 	public String eventImagePath;
 	public long venueId;
-	public long venueName;
+	public String venueName;
 }

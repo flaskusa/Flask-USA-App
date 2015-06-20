@@ -40,7 +40,7 @@
 			<hint-collection name="FLASK-IMAGE-PATH" />
 		</field>
 		<field name="venueId" type="long" />
-		<field name="venueName" type="long" />
+		<field name="venueName" type="String" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.EventDetail">
 		<field name="eventDetailId" type="long" />
@@ -52,7 +52,7 @@
 		<field name="infoTypeId" type="long" />
 		<field name="infoTypeName" type="String" />
 		<field name="infoTypeCategoryId" type="long" />
-		<field name="infoTypeCategoryName" type="long" />
+		<field name="infoTypeCategoryName" type="String" />
 		<field name="infoTitle" type="String" />
 		<field name="infoDesc" type="String">
 			<hint-collection name="FLASK-DESC" />

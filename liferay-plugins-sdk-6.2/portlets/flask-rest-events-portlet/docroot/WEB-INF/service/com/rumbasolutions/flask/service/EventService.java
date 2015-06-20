@@ -125,14 +125,13 @@ public interface EventService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.EventDetailImage addEventDetailImage(
-		long EventDetailId, java.lang.String imageTitle,
+		long eventDetailId, java.lang.String imageTitle,
 		java.lang.String imageDesc, java.lang.String imagePath,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(
-		long EventDetailImageId, long EventDetailId,
-		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imagePath,
+		long eventDetailImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imagePath,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
