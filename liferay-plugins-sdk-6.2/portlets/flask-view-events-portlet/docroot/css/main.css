@@ -151,7 +151,8 @@ div#placeholder
         }
 
 
-        @media (max-width:667px) {
+        @media (max-width:667px) 
+        {
             div#fixedfooter2 {
                 	font-size: 14px;
 				  height: 5%;
@@ -159,7 +160,23 @@ div#placeholder
 				  /* margin-top: 10px; */
 				  padding-top: 10px;
             }
+            
+			div#content {
+			  margin-top: 47px !important;
+			  margin-left: -30.5px !important;
+			  padding: 0 0 0 0;
+			  margin-right: -28px !important;
+			}
+			
+			div#wrapper {
+			  padding: 0 0.5em 0!important;
+			  position: relative;
+			}
+			div#section {
+						  width: auto;
+						}
         }
+        
             #image1 
             {
                 left: 0px;
@@ -185,20 +202,7 @@ div#placeholder
 }
 
 
-div#verticalScrollBarlistbox {
+div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
   visibility: collapse !important;
-  left: 244px;
-  top: 0px;
-  position: absolute;
-  width: 10px;
-  height: 186px;
-}
 
-div#horizontalScrollBarlistbox {
-  visibility: collapse !important;
-  left: 0px;
-  top: 186px;
-  position: absolute;
-  height: 10px;
-  width: 244px;
 }
