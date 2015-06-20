@@ -23,30 +23,16 @@ function fnlist(tdata) {
 
  };
  var dataAdapter = new $.jqx.dataAdapter(source);
-    var updatePanel = function (index) {
-        var container = $('<div style="margin: 5px;"></div>')
-        var leftcolumn = $('<div style="float: left; width: 45%;"></div>');
-        var rightcolumn = $('<div style="float: left; width: 40%;"></div>');
-        container.append(leftcolumn);
-        container.append(rightcolumn);
-        var datarecord = tdata[index];
-        var Eventname = "<div style='margin: 10px;'><b>Event Name:</b> " + datarecord.eventName + "</div>";
-        var Description = "<div style='margin: 10px;'><b>Description:</b> " + datarecord.description + "</div>";
-        var Image = "<div style='margin: 10px;'><b>Image:</b> <img height='50' width='40'src=" + datarecord.eventImagePath + "</div>";
-        $(leftcolumn).append(Eventname);
-        $(leftcolumn).append(Description);
-        $(leftcolumn).append(Image);
-        $("#ContentPanel").html(container.html());
-    }
-    $('#listbox').on('select', function (event) {
+
+    $('#listbox').on('click', function (event) {
+    	
     		$('#one').hide();
     		$('#two').show();
-    		
-     updatePanel(event.args.index);
+
     });
 
     // Create jqxListBox
-    $('#listbox').jqxListBox({   source: dataAdapter, displayMember: "Eventname", itemHeight: 70, scrollBarSize: 0, height: '100%', width: '100%', 
+    $('#listbox').jqxListBox({ source: dataAdapter, displayMember: "Eventname", itemHeight: 70, scrollBarSize: 0, height: '100%', width: '100%', 
         renderer: function (index, label, value) {
             var datarecord = tdata[index];
             var imgurl = datarecord.eventImagePath;
@@ -55,25 +41,17 @@ function fnlist(tdata) {
             return table;
         }
     });
-    updatePanel();
+    $('#listbox').jqxListBox('refresh');
 }
 
-$(document).ready(function() {
- 
- fnLoadList();
- 
- $('#listbox').on('select', function (event) {
-		$('#one').hide();
-		$('#two').show();
+$(document).ready(function() 
 		
-updatePanel(event.args.index);
-});
- 
- $(".cssback").click(function(){
-	 $('#one').show();
-	$('#two').hide();
-});
- 
- 
- 
+{
+	$('#listbox').jqxListBox('refresh');
+		fnLoadList();
+		 $(".cssback").click(function(){
+			 
+			$('#one').show();
+			$('#two').hide();
+		});
 });
