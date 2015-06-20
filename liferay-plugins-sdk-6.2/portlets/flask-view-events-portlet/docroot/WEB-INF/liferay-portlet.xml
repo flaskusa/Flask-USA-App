@@ -5,16 +5,22 @@
 	<portlet>
 		<portlet-name>flask-view-events</portlet-name>
 		<icon>/icon.png</icon>
-		 <header-portlet-css>/css/main.css</header-portlet-css>
-  <footer-portlet-javascript>/js/jquery-2.1.4.js</footer-portlet-javascript>
-  <footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
-  <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
-  <footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
-  <footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
-  <footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
-  <footer-portlet-javascript>/js/jqxsplitter.js</footer-portlet-javascript>
-  <footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
-  <footer-portlet-javascript>/js/jqxscrollbar.js</footer-portlet-javascript>
+		<header-portlet-css>/css/main.css</header-portlet-css>
+		<header-portlet-css>/css/style3.css</header-portlet-css>
+		<header-portlet-css>/css/style2.css</header-portlet-css>
+		<header-portlet-css>/css/style1.css</header-portlet-css>
+		<header-portlet-css>/css/style.css</header-portlet-css>
+		  <footer-portlet-javascript>/js/jquery-2.1.4.js</footer-portlet-javascript>
+		  <footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
+		  <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
+		  <footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
+		  <footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
+		  <footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
+		  <footer-portlet-javascript>/js/jqxsplitter.js</footer-portlet-javascript>
+		  <footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
+		  <footer-portlet-javascript>/js/jqxscrollbar.js</footer-portlet-javascript>
+
+
     	<css-class-wrapper>flask-view-events-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>
