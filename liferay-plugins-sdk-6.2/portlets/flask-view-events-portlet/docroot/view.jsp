@@ -64,7 +64,7 @@
  	<div id="wowContainer"></div>
 
 	<input class="btn btn-info cssback" type="button" value="Back"/>
-	</br>
+	</br></br></br>
 </div>	
     <div id="fixedfooter">
 	    <table>
