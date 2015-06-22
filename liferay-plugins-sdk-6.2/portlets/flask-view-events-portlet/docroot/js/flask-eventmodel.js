@@ -9,7 +9,8 @@ _venueModel.SERVICE_ENDPOINTS = {
 	DELETE_VENUE				: "/flask-rest-events-portlet.venue/delete-venue",
 	DELETE_VENUES				: "/flask-rest-events-portlet.venue/delete-venues",
 	DELETE_VENUE_IMAGE			: "/flask-rest-events-portlet.venue/delete-venue-image",
-	GET_ALL_EVENTS				: "/flask-rest-events-portlet.event/get-all-events"
+	GET_ALL_EVENTS				: "/flask-rest-events-portlet.event/get-all-events",
+	GET_ALL_FILES				: "/dlapp/get-file-entries"
 };
 
 _venueModel.DATA_MODEL= {
