@@ -15,7 +15,12 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-
+<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%
+  com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+  long repositoryId = themeDisplay.getLayout().getGroupId();
+%>
 <portlet:defineObjects />
 <link async href="http://fonts.googleapis.com/css?family=Average%20Sans" rel="stylesheet" type="text/css"/>
 <link async href="http://fonts.googleapis.com/css?family=Gochi%20Hand" rel="stylesheet" type="text/css"/>
@@ -55,39 +60,25 @@
   </div>
  </div>
     
- <div id="two" style="display:none; width:100%; ">
+ <div id="two" style="display:none; width:100%;">
+ 	<div id="wowContainer"></div>
 
-    <div id="section"> 
-    <div>
-     <img src="<%=request.getContextPath()%>/img/1.jpg" class="imgside" />
-    </div>
-    <div>
-      <img src="<%=request.getContextPath()%>/img/2.jpg" class="imgside" />
-    </div>
-    <div>
-     <img src="<%=request.getContextPath()%>/img/3.jpg" class="imgside" />
-    </div>
-    </div>
-    <input class="btn btn-info cssback" type="button" value="Back"/>
-    
-    <br/>
-    <br/>
-    <br/>
-     <div align="center" id="fixedfooter2">
-        <b>YOUR GAME PLAN FOR GAME DAY</b>
- 	</div>
-</div>
+	<input class="btn btn-info cssback" type="button" value="Back"/>
+	</br>
+</div>	
     <div id="fixedfooter">
-				<table >
-		            <tr>
-		                <td class="footertxt">
-		                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
-		                </td>
-		                <td class="asans"><b>FREE PINT WITH WITH A BURGER</b>
-		                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
-		                <span class="gochi">ON GAMEDAY!</span>
-		                </td>
-		            </tr>
-		        </table>
+	    <table>
+            <tr>
+                <td class="footertxt">
+                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
+                </td>
+                <td class="asans"><b>FREE PINT WITH WITH A BURGER</b>
+                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
+                <span class="gochi">ON GAMEDAY!</span>
+                </td>
+            </tr>
+        </table>
 	</div>
+	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
+
 </body>
