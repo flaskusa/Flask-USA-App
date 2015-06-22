@@ -114,18 +114,11 @@ function deleteEvent(eventId) {
 
 /* Delete Multiple Events */
 function deleteMultipleEvents(eventList) {
-		var param = {eventList: eventList};
-		var request = new Request();
-		var flaskRequest = new Request();
-		flaskRequest.sendPOSTRequest(_eventModel.SERVICE_ENDPOINTS.DELETE_EVENTS, param, 
-						function (data){
-								_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
-								loadData();
-						} ,
-						function (data){
-								_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);
-						});
-	
+	for(var i=0;i<eventList.length;i++)
+	{
+		var temp = eventList[i].eventId;
+		deleteEvent(temp);
+	}	
 }
 
 /* Edit Event */
@@ -157,15 +150,14 @@ function saveEvent(){
 					});
 		var flaskRequest = new Request();
 		var url = "";
-		console.log(params);
 			if(params.eventId == 0){
 				url =_eventModel.SERVICE_ENDPOINTS.ADD_EVENT;
 			}else{
 				url = _eventModel.SERVICE_ENDPOINTS.UPDATE_EVENT;
 			}
-		console.log(url);
 		flaskRequest.sendGETRequest(url, params, 
 					function (data){
+						
 						_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.SAVE);
 						loadData();
 					} ,
@@ -189,56 +181,33 @@ function initForm(){
 /* Need to change code as per standard*/
 /* Creates Folder */
 function createFolder(repositoryId,parentFolderId,folderName,folderDesc){
-		 Liferay.Service(
-		   '/dlapp/add-folder',
-		   {
-			     repositoryId: repositoryId,
-			     parentFolderId: parentFolderId,
-			     name: folderName,
-			     description: folderDesc
+	
+	var flaskRequest = new Request();
+	params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName, 'description': folderDesc};
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.ADD_FOLDER , params,
+		   function(obj) {
+			    
 		   },
 		   function(obj) {
-			    if(obj=="com.liferay.portlet.documentlibrary.DuplicateFolderNameException")
-			    {
-				     Liferay.Service(
-				       '/dlapp/get-folder',
-				       {
-					         repositoryId: repositoryId,
-					         parentFolderId: parentFolderId,
-					         name: folderName
-				       },
-				       function(obj) {
-				        	 console.log(obj);
-				       });
-			    }
-			    else
-			    {
-			    	 return obj.folderId;
-			    }
+			   console.log("Error in creating Folder: " + data );
 		   });
 }
 
 /* creates folder for Event */
 function eventFolder(repositoryId, eventsFolderId, eventName){
-		Liferay.Service(
-			  '/dlapp/get-folder',
-			  {
-				    repositoryId: repositoryId,
-				    parentFolderId: eventsFolderId,
-				    name: eventName
+	var flaskRequest = new Request();
+	params= {'repositoryId': repositoryId, 'parentFolderId': eventsFolderId, 'name': eventName};
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
+			  function(data){
+				    console.log(data);
 			  },
-			  function(obj) {
-				    console.log(obj);
-				    if(obj=="com.liferay.portlet.documentlibrary.NoSuchFolderException")
-				    	{
-				    		createFolder(repositoryId, eventsFolderId, eventName, eventName);
-				    		setTimeout(function(){createInfoTypeFolders(repositoryId, eventsFolderId, eventName)},500);	
-				    	}
-				    else
-				    	{
-				    		return obj;
-				    	}
-			  });
+			  function (data){
+				  if(data=="com.liferay.portlet.documentlibrary.NoSuchFolderException")
+			    	{
+			    		createFolder(repositoryId, eventsFolderId, eventName, eventName);
+			    		setTimeout(function(){createInfoTypeFolders(repositoryId, eventsFolderId, eventName)},500);	
+			    	}
+		      });
 }
 
 /* Get complete folder details */
