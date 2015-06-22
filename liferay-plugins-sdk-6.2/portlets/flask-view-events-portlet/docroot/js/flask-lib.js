@@ -1,5 +1,6 @@
 var SERVICE_ENDPOINTS = {
-		GET_ALL_EVENTS				: "api/jsonws/flask-rest-events-portlet.event/get-all-events"
+		GET_ALL_EVENTS:"/api/jsonws/flask-rest-events-portlet.event/get-all-events",
+		GET_ALL_IMAGES:"/api/jsonws/dlapp/get-file-entries"
 };
 
 var DATA_SOURCE  = {
