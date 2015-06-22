@@ -18,6 +18,10 @@
 
 <%@ include file="init.jsp" %>
 
+
+<portlet:actionURL  var="addImagesActionURL" name="addImages">
+</portlet:actionURL>
+
 <script type="text/javascript">
 
 var bCreated;
@@ -124,15 +128,17 @@ function initialize(portletId, portlet){
     </div>
   </div>
 
- <div class="form-group">
-    <label class="control-label" for="venueImage">Venue Pictures:</label>
-    <div class="controls">
-        
-    </div>
-  </div>
+
+  
  
   <input class="btn btn-info clsSave" type="button" value="Save"/>
   <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
   <input id="venueId" type="hidden" value="0">
-  
 </form>
+
+ <div class="form-group">
+    <label class="control-label" for="venueImage">Venue Pictures Form:</label>
+    <form class="dropzone" id="venueImages" action="<%=addImagesActionURL %>">
+   		 <input id="venueId" type="hidden" value="1001">
+    </form>
+  </div>

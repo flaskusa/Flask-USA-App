@@ -4,6 +4,10 @@ _flaskLib.SERVICE_ENDPOINTS = {
 				GET_COUNTRIES 				: "/flask-rest-users-portlet.flaskadmin/get-countries",
 				GET_REGION 					: "/flask-rest-users-portlet.flaskadmin/get-region",
 				GET_USA_REGION 				: "/flask-rest-users-portlet.flaskadmin/get-usa-regions",
+				GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types",
+				GET_INFO_TYPE 				: "/flask-rest-events-portlet.infotype/get-info-types",
+				GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
+
 }
 
 _flaskLib.getFormData = function(formId, model, customGetData){
@@ -119,6 +123,27 @@ _flaskLib.loadUSARegions = function(elementId, selectedId){
 	
 }
 
+_flaskLib.loadEventTypes = function(elementId, selectedId){
+	var param = {};
+	var request = new Request();
+	var selectList = $('#' + elementId);
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_EVENT_TYPES , param, 
+					function (data){
+							selectList.empty();
+							$.each(data, function(key, eventType) {
+								selectList.append($("<option/>", {
+							        value: eventType.eventTypeId,
+							        text: eventType.eventTypeName
+							    }));
+							});
+							selectList.val(selectedId);
+					} ,
+					function (data){
+						console.log("Error in getting EventTypes: " + data );
+					});
+	
+}
 _flaskLib.showErrorMessage =   function (elementId, msg){
 	var ele = $('#'+ elementId);
 	ele.text(msg);

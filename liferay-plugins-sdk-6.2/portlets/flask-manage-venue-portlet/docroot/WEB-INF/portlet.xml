@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>flask-manage-venue</portlet-name>
 		<display-name>Flask Manage Venue</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>com.rumbasolutions.flask.managevenue.ManageVenuePortletAction</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
