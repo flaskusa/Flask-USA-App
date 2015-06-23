@@ -128,18 +128,19 @@ function initialize(portletId, portlet){
       <select id="venueCountryId" name="venueCountryId" class="form-control" ></select>
     </div>
   </div>
-
-
-  
- 
   <input class="btn btn-info clsSave" type="button" value="Save"/>
   <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
   <input id="venueId" type="hidden" value="0">
 </form>
 
-<div class="form-group">
-    <label class="control-label" for="venueImage">Venue Pictures Form:</label>
-    <form class="dropzone" id="venueImages" action="<%=addImagesActionURL %>">
-   		 <input id="venueId" type="hidden" value="1001">
-    </form>
-  </div>
+<form id="venueDetailsForm" style="display:none">
+  <div class="form-group">
+	    <label class="control-label" for="InfoTypeCategoryId">Content Type:</label>
+		<div class="controls">
+			<select id="InfoTypeCategoryId" name="InfoTypeCategoryId" class="form-control-select"></select>
+		</div>
+   </div>   
+   <div id="contentTypeForm">
+   		This is content type form.
+   </div>
+</form>
