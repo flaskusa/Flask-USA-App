@@ -62,8 +62,38 @@ function addClickHandlers(){
     });		
 }
 
+$(document).ready(function () {
+	  // initialize validator.
+   
+});
 
 function loadData(){
+	
+	 $('#adminForm').jqxValidator
+	    ({
+	        hintType: 'label',
+	        animationDuration: 0,
+	        rules: [
+	               { input: '#firstName', message: 'First name is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#lastName', message: 'Last name is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#mobileNumber', message: 'Mobile number is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#screenName', message: 'Screen name is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#areaCode', message: 'Zip code is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#password1', message: 'Password is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#password2', message: 'Password is required!', action: 'keyup, blur', rule: 'required' },
+	               {
+	                   input: '#password2', message: 'Passwords doesn\'t match!', action: 'keyup, focus', rule: function (input, commit) {
+	                       // call commit with false, when you are doing server validation and you want to display a validation error on this field. 
+	                       if (input.val() === $('#password1').val()) {
+	                           return true;
+	                       }
+	                       return false;
+	                   }
+	               },
+	               { input: '#email', message: 'E-mail is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#email', message: 'Invalid e-mail!', action: 'keyup', rule: 'email' }]
+	    });
+	
 	var flaskRequest = new Request();
 	params = {};
 	flaskRequest.sendGETRequest(_adminModel.SERVICE_ENDPOINTS.GET_ADMIN, params, 

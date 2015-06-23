@@ -291,7 +291,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
                 autoheight: true,
              // Pageing config
                 pageable : true,
-                pagermode : 'default',
+                pagermode : 'simple',
                 rowdetails: true,
                 showrowdetailscolumn:false,
                 //rowdetailstemplate: GRID_PARAM.rowDetailTemplate(rowDetailDivArr , 200),
