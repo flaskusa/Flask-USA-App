@@ -4,7 +4,6 @@ function addClickHandlers(){
 	/*	Initialize display elements*/
 	
 	$(".cssDelete").hide();	
-	
 	/* Click handler for add user button*/
 	
 	$(".cssAddUser").click(function(){
@@ -14,7 +13,6 @@ function addClickHandlers(){
 			_eventModel.loadVenues('venueId');
 			_eventModel.loadEventType('eventTypeId');
 	});
-
 	/* Click handler for save button*/
 	
 	$(".clsSave").click(function(){
@@ -130,6 +128,7 @@ function deleteMultipleEvents(eventList) {
 
 /* Edit Event */
 function editEvent(rowData) {
+		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("eventForm",  _eventModel.DATA_MODEL.EVENT, rowData, function(){});
 		$("#eventDataTable").hide();
 		eventForm.show();
@@ -141,8 +140,7 @@ function editEvent(rowData) {
 		$('#startTime').jqxDateTimeInput('setDate', sTime);
 		var eTime = new Date(parseInt(rowData.endTime));
 		$('#endTime').jqxDateTimeInput('setDate', eTime);
-		console.log(sTime);
-		console.log(eTime);
+		fnRenderEvents(repositoryId,0,"Events");
 }
 
 /* Save Event */
@@ -188,7 +186,6 @@ function initForm(){
 /* Need to change code as per standard*/
 /* Creates Folder */
 function createFolder(repositoryId,parentFolderId,folderName,folderDesc){
-	
 	var flaskRequest = new Request();
 	params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName, 'description': folderDesc};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.ADD_FOLDER , params,
@@ -207,6 +204,7 @@ function eventFolder(repositoryId, eventsFolderId, eventName){
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
 			  function(data){
 				    console.log(data);
+				    return data.folderId;
 			  },
 			  function (data){
 				  if(data=="com.liferay.portlet.documentlibrary.NoSuchFolderException")
@@ -225,12 +223,96 @@ function getFolderId(repositoryId,parentFolderId,folderName){
 			function (data){
 					eventName=$("#eventName").val();
 			 		eventDesc=$("#eventName").val();
-			        console.log(data);
 			        eventFolder($("#repositoryId").val(), data.folderId, eventName);
 			} ,
 			function (data){
 					console.log("Error in getting Folder: " + data );
 			});
+}
+
+function fnRenderEvents(repositoryId,parentFolderId,folderName){
+	var folderId = 0;
+	var flaskRequest = new Request();
+		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
+		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
+			function (data){
+				folderId = data.folderId;
+				fnGetEventFolder(repositoryId,folderId,$("#eventName").val());
+			} ,
+			function (data){
+				folderId = 0;
+				console.log("Error in getting Folder: " + data );
+			});
+		return folderId;
+}
+
+function fnGetEventFolder(repositoryId,parentFolderId,folderName){
+	var folderId = 0;
+	//var eventType = [{"General":1,"PreEvent":2,"DuringEvent":3,"PostEvent":4}];
+	var flaskRequest = new Request();
+		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
+		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
+			function (data){
+					folderId = data.folderId;
+					fnRenderSliders(repositoryId,folderId,"General",1);
+					fnRenderSliders(repositoryId,folderId,"Pre-Event",2);
+					fnRenderSliders(repositoryId,folderId,"During-Event",3);
+					fnRenderSliders(repositoryId,folderId,"Post-Event",4);
+			} ,
+			function (data){
+				folderId = 0;
+				console.log("Error in getting Folder: " + data );
+			});
+		return folderId;
+}
+
+function fnRenderSliders(repositoryId,parentFolderId,folderName,Count){
+	var folderId = 0;
+	var ws_images = "#ws_images"+Count;
+	var wowslider_container = "#wowslider-container"+Count;
+	var flaskRequest = new Request();
+		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
+		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
+			function (data){
+				folderId = data.folderId;
+				displayImages(repositoryId, folderId, ws_images, wowslider_container)
+			} ,
+			function (data){
+				folderId = 0;
+				console.log("Error in getting Folder:"+data);
+			});
+		return folderId;
+}
+
+function displayImages(repositoryId, folderId, ws_images, wowslider_container)
+{
+ var images;
+ Liferay.Service('/dlapp/get-file-entries',{
+      repositoryId: repositoryId,
+      folderId: folderId
+    },
+    function(obj) {
+      if(typeof obj=="object" && obj.length > 0){
+			var temp_html;
+			var imageUrl;
+			var uploadedby;
+			temp_html="<ul>";
+			for(var i=0;i<obj.length;i++)
+			{
+				imageUrl = "/documents/"+repositoryId+"/"+folderId+"/"+obj[i].title;
+				uploadedby = "uploaded by " + obj[i].userName;
+				temp_html=temp_html+"<li><img src="+imageUrl+" alt='"+uploadedby+"' title='"+uploadedby+"' id='wows1_0'/></li>";
+			}
+			temp_html=temp_html+"</ul>";
+			console.log(ws_images);
+			console.log(wowslider_container);
+			$(ws_images).html(temp_html);
+			$(wowslider_container).wowSlider();
+      }
+      else{
+    	  //$(wowslider_container).html("No images found");
+      }
+ });
 }
 
 /* creates folders for each info type */
@@ -258,3 +340,8 @@ function createInfoTypeFolders(repositoryId, eventsFolderId, eventName)
 		});
 }
 /*End*/
+
+/*Add Event details*/
+$(".AddContent").click(function(){
+	alert($(this).attr("alt"));
+});

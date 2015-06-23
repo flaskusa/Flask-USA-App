@@ -18,4 +18,11 @@ jQuery.extend(jQuery.easing,{easeInOutQuart:function(e,f,a,h,g){if((f/=g/2)<1){r
 // Obfuscated by Javascript Obfuscator
 // http://javascript-source.com
 //***********************************************
-jQuery("#wowslider-container1").wowSlider({effect:"carousel",prev:"",next:"",duration:20*100,delay:20*100,width:640,height:360,autoPlay:false,autoPlayVideo:false,playPause:false,stopOnHover:false,loop:false,bullets:0,caption:false,captionEffect:"parallax",controls:false,controlsThumb:false,responsive:1,fullScreen:false,gestures:2,onBeforeStep:0,images:0});
+jQuery(document).ready(function(){
+	/*
+	jQuery("#wowslider-container2").wowSlider({effect:"carousel",prev:"",next:"",duration:20*100,delay:20*100,width:640,height:360,autoPlay:false,autoPlayVideo:false,playPause:false,stopOnHover:false,loop:false,bullets:0,caption:false,captionEffect:"parallax",controls:false,controlsThumb:false,responsive:1,fullScreen:false,gestures:2,onBeforeStep:0,images:0});
+	jQuery("#wowslider-container3").wowSlider({effect:"carousel",prev:"",next:"",duration:20*100,delay:20*100,width:640,height:360,autoPlay:false,autoPlayVideo:false,playPause:false,stopOnHover:false,loop:false,bullets:0,caption:false,captionEffect:"parallax",controls:false,controlsThumb:false,responsive:1,fullScreen:false,gestures:2,onBeforeStep:0,images:0});
+	jQuery("#wowslider-container4").wowSlider({effect:"carousel",prev:"",next:"",duration:20*100,delay:20*100,width:640,height:360,autoPlay:false,autoPlayVideo:false,playPause:false,stopOnHover:false,loop:false,bullets:0,caption:false,captionEffect:"parallax",controls:false,controlsThumb:false,responsive:1,fullScreen:false,gestures:2,onBeforeStep:0,images:0});
+	*/
+});
+//jQuery("#wowslider-container1").wowSlider({effect:"carousel",prev:"",next:"",duration:20*100,delay:20*100,width:640,height:360,autoPlay:false,autoPlayVideo:false,playPause:false,stopOnHover:false,loop:false,bullets:0,caption:false,captionEffect:"parallax",controls:false,controlsThumb:false,responsive:1,fullScreen:false,gestures:2,onBeforeStep:0,images:0});

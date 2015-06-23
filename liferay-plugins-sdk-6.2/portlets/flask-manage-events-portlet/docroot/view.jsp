@@ -32,38 +32,7 @@ function initialize(portletId, portlet){
 		loadData();
 		addClickHandlers();
 		initForm();
-		var repositoryId= <%=repositoryId%>;
-	    displayImages(repositoryId,22113,"#ws_images", "#wowslider-container1"); //General tab
-	    displayImages(repositoryId,22115,"#ws_images1", "#wowslider-container2");//pregame tab
-	    displayImages(repositoryId,22114,"#ws_images2", "#wowslider-container3"); //during Game tab
-	    displayImages(repositoryId,22116,"#ws_images3", "#wowslider-container4"); //Post Game tab
 	}
-}
-
-function displayImages(repositoryId, folderId, ws_images, wowslider_container)
-{
- var images;
- Liferay.Service('/dlapp/get-file-entries',{
-      repositoryId: repositoryId,
-      folderId: folderId
-    },
-    function(obj) {
-      console.log(obj);
-      var temp_html;
-      temp_html="<ul>";
-      var imageurl;
-      var uploadedby;
-      for(var i=0;i<obj.length;i++)
-      {
-        console.log(obj[i].title);
-        imageurl = "/documents/"+repositoryId+"/"+folderId+"/"+obj[i].title;
-        uploadedby = "uploaded by " + obj[i].userName;
-        temp_html=temp_html+"<li><img src="+imageurl+" alt='"+uploadedby+"' title='"+uploadedby+"' id='wows1_0'/></li>";
-      }
-      temp_html=temp_html+"</ul>";
-   $(ws_images).html(temp_html);
-   $(wowslider_container).wowSlider();
- });
 }
 </aui:script>
 
@@ -140,64 +109,53 @@ function displayImages(repositoryId, folderId, ws_images, wowslider_container)
 		<div id="jqxtabs">
 		    <ul style="margin-left: 20px;">
 		        <li>General</li>
-		        <li>Pre Event</li>
-		        <li>During Event</li>
-		        <li>Post Event</li>
+		        <li>Pre-Event</li>
+		        <li>During-Event</li>
+		        <li>Post-Event</li>
 		    </ul>
 		    <div>
 					<div style="height: 45px;">
-						<input class="btn btn-info floatPosition" type="button" value="Add Content" />
+						<input class="btn btn-info floatPosition AddContent" type="button" value="Add Content" alt="1"/>
 					</div>
 					<div>    
-					<div id="wowslider-container1" class="wowslider-container">
-					<div class="ws_images" id="ws_images">
-
-					</div>
-					<input type="hidden" id="eventImagePath" value="">
-					</div>
+						<div id="wowslider-container1" class="wowslider-container">
+							<div class="ws_images" id="ws_images1"></div>
+						</div>
 					</div>
 		    </div>
 		    <div>
 					<div style="height: 45px;">
-						<input class="btn btn-info floatPosition" type="button" value="Add Content" />
+						<input class="btn btn-info floatPosition AddContent" type="button" value="Add Content" alt="2"/>
 					</div>
 					<div>    
-					<div id="wowslider-container2" class="wowslider-container">
-					<div class="ws_images" id="ws_images1">
-
-					</div>
-					<input type="hidden" id="eventImagePath" value="">
-					</div>
+						<div id="wowslider-container2" class="wowslider-container">
+							<div class="ws_images" id="ws_images2"></div>
+						</div>
 					</div>
 		    </div>
 		    <div>
 					<div style="height: 45px;">
-						<input class="btn btn-info floatPosition" type="button" value="Add Content" />
+						<input class="btn btn-info floatPosition AddContent" type="button" value="Add Content" alt="3"/>
 					</div>
 					<div>    
-					<div id="wowslider-container3" class="wowslider-container">
-					<div class="ws_images" id="ws_images2">
-
-					</div>
-					<input type="hidden" id="eventImagePath" value="">
-					</div>
+						<div id="wowslider-container3" class="wowslider-container">
+							<div class="ws_images" id="ws_images3"></div>
+						</div>
 					</div>
 		    </div>
 		    <div>
 					<div style="height: 45px;">
-						<input class="btn btn-info floatPosition" type="button" value="Add Content" />
+						<input class="btn btn-info floatPosition AddContent" type="button" value="Add Content" alt="4"/>
 					</div>
 					<div>    
-					<div id="wowslider-container4" class="wowslider-container">
-					<div class="ws_images" id="ws_images3">
-
-					</div>
-					<input type="hidden" id="eventImagePath" value="">
-					</div>
+						<div id="wowslider-container4" class="wowslider-container">
+							<div class="ws_images" id="ws_images4"></div>
+						</div>
 					</div>
 		    </div>
 		</div>
 	</div>
+  <input type="hidden" id="eventImagePath" value="">	
   <input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
   <input class="btn btn-info clsDelete" type="button" value="Delete"/>
   <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
