@@ -65,18 +65,21 @@ public class ManageVenuePortletAction extends MVCPortlet {
 		upload.setFileSizeMax(MAX_FILE_SIZE);
 		upload.setSizeMax(REQUEST_SIZE);
 		
-		_venueId = getVenueId(actionRequest);
+		
 		
 		// constructs the directory path to store upload file
 		String uploadPath = getPortletContext().getRealPath("")
 			+ File.separator + UPLOAD_DIRECTORY;
 		
-		createUploadFolder(uploadPath);
+		
 		
 		try {
 			// parses the request's content to extract file data
 			List<FileItem> formItems = upload.parseRequest(actionRequest);
 
+			createUploadFolder(uploadPath);
+			_venueId = getVenueId(formItems);
+			
 			int index=0;
 			for(FileItem item: formItems){
 
@@ -94,7 +97,7 @@ public class ManageVenuePortletAction extends MVCPortlet {
 						storeFile, mimeType, _serviceContext);
 					
 				}else{
-					
+
 				}
 			}
 			actionRequest.setAttribute("message", "Upload has been done successfully!");
@@ -134,12 +137,13 @@ public class ManageVenuePortletAction extends MVCPortlet {
 		return serviceContext;
 	}
 	
-	private long getVenueId(ActionRequest actionRequest){
+	private long getVenueId(List<FileItem> formItems){
 		long venueId = 0;
-		String venueParam = actionRequest.getParameter(VENUE_ID_QSTR);
-		venueParam = venueParam ==null ? "" : venueParam.trim();
-		if(!venueParam.isEmpty()){
-			venueId = Long.parseLong(venueParam);	
+		for (FileItem item : formItems){
+			if(item.getFieldName().contentEquals(VENUE_ID_QSTR)){
+				venueId = Long.parseLong(item.getString());
+				break;
+			}
 		}
 		return venueId;
 	}
