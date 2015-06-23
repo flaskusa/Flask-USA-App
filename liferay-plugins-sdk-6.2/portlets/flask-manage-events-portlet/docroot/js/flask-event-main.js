@@ -114,11 +114,18 @@ function deleteEvent(eventId) {
 
 /* Delete Multiple Events */
 function deleteMultipleEvents(eventList) {
-	for(var i=0;i<eventList.length;i++)
-	{
-		var temp = eventList[i].eventId;
-		deleteEvent(temp);
-	}	
+	var param = {'eventIds': eventList};
+	var request = new Request();
+	var flaskRequest = new Request();
+	flaskRequest.sendPOSTRequest(_eventModel.SERVICE_ENDPOINTS.DELETE_EVENTS, param, 
+					function (data){
+							_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
+							loadData();
+					} ,
+					function (data){
+							_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);
+					});
+	
 }
 
 /* Edit Event */

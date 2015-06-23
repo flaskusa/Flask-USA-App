@@ -37,12 +37,15 @@ GRID_PARAM.toggleSearchBoxes = function(){
 
 GRID_PARAM.getCheckedIdList= function(idDataAttribute){
     var rows = gridObj.jqxGrid('selectedrowindexes');
-    var dataList =[];
+    var dataList=[];
     $.each(rows, function(i, rowIndex){
     	var rowData = gridObj.jqxGrid('getrowdata', rowIndex);
-    	dataList[i]=rowData;
+    	dataList[i] = rowData.eventId;
+    	
     });
-    return dataList;
+    var temp= dataList.toString();
+    console.log(temp);
+    return temp;
 }
 
 GRID_PARAM.getDeleteList = function(idDataAttribute){
