@@ -6,8 +6,6 @@ _flaskLib.SERVICE_ENDPOINTS = {
 				GET_USA_REGION 				: "/flask-rest-users-portlet.flaskadmin/get-usa-regions",
 				GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types",
 				GET_INFO_TYPE 				: "/flask-rest-events-portlet.infotype/get-info-types",
-				GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
-
 }
 
 _flaskLib.getFormData = function(formId, model, customGetData){
@@ -17,7 +15,7 @@ _flaskLib.getFormData = function(formId, model, customGetData){
 					var ele = $('#'+ formId + ' #'+column.name);
 					if(ele.length == 1 ){
 						var val = $.trim(ele.val());
-						if(column.type == 'long' && val !=''){
+						if(column.type == 'long' && val ==''){
 							val = Number(val)
 						}
 						formData[column.name] = val;
@@ -162,3 +160,5 @@ _flaskLib.hideMessage = function (elementId){
 	ele.text('');
 	ele.hide();
 }
+
+
