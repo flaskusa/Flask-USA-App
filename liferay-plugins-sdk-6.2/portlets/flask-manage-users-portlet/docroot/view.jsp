@@ -28,7 +28,8 @@ var bCreated;
 Liferay.Portlet.ready(initialize);
 
 function initialize(portletId, portlet){
-	if(portletId == "Manage_User_WAR_Manage_Userportlet") {
+	if(portletId == "FlaskAdmin_WAR_Manage_Userportlet") {
+		alert("i am in portlet");
 		$("#adminForm").hide();
 		createTable({},_adminModel.DATA_MODEL.ADMIN, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Admin", "Images"]);
 		loadData();
@@ -58,7 +59,7 @@ function initialize(portletId, portlet){
 </div>
 <div id="adminDataTable" class="table-condensed">
 	<div class="cssGridMenu">
-		<div class="cssAddUser"><div class="iconAddVenue"></div></div>
+		<div class="cssAddUser"><div class="iconAddUser"></div></div>
 		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
 		<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
 		<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
