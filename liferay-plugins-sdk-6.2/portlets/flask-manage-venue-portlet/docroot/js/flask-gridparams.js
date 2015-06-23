@@ -35,14 +35,18 @@ GRID_PARAM.toggleSearchBoxes = function(){
 		$(".jqx-grid-cell-filter-row-custom:last").hide();
 }
 
+
+
 GRID_PARAM.getCheckedIdList= function(idDataAttribute){
     var rows = gridObj.jqxGrid('selectedrowindexes');
-    var dataList="";
+    var dataList=[];
     $.each(rows, function(i, rowIndex){
     	var rowData = gridObj.jqxGrid('getrowdata', rowIndex);
-    	dataList = dataList +"," + eval('rowData.'+ idDataAttribute);
+    	dataList[i] = rowData.venueId;
+    	
     });
-    return dataList;
+    var temp= dataList.toString();
+    return temp;
 }
 
 

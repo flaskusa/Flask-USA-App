@@ -65,6 +65,7 @@ function initialize(portletId, portlet){
 </div>
 
 <form id="venueForm" style="display:none">
+<input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
   <div class="form-group">
     <label class="control-label" for="venuName">Name:</label>
     <div class="controls">
@@ -136,7 +137,7 @@ function initialize(portletId, portlet){
   <input id="venueId" type="hidden" value="0">
 </form>
 
- <div class="form-group">
+<div class="form-group">
     <label class="control-label" for="venueImage">Venue Pictures Form:</label>
     <form class="dropzone" id="venueImages" action="<%=addImagesActionURL %>">
    		 <input id="venueId" type="hidden" value="1001">

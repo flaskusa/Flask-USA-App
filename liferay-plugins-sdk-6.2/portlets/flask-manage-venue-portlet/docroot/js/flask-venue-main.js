@@ -103,7 +103,8 @@ function deleteVenue(venueId) {
 }
 
 function deleteMultipleVenues(venueList) {
-	var param = {venueList: venueList};
+	var param = {'venueList': venueList};
+	console.log(param);
 	var request = new Request();
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUES, param, 
