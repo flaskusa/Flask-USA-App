@@ -28,8 +28,7 @@ var bCreated;
 Liferay.Portlet.ready(initialize);
 
 function initialize(portletId, portlet){
-	if(portletId == "FlaskAdmin_WAR_Manage_Userportlet") {
-		alert("i am in portlet");
+	if(portletId == "FlaskAdmin_WAR_flaskmanageusersportlet") {
 		$("#adminForm").hide();
 		createTable({},_adminModel.DATA_MODEL.ADMIN, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Admin", "Images"]);
 		loadData();
