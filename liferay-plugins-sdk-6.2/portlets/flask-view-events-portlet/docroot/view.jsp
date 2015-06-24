@@ -62,7 +62,7 @@
   <table>
  <tr>
   <td style="background-color: #231F20;">
-           <img src="<%=request.getContextPath()%>/img/Pre111.png"/>
+           <img src="<%=request.getContextPath()%>/img/Pre.png"/>
   </td>
   <td>
     
@@ -75,7 +75,7 @@
     
     <tr>
   <td style="background-color: #231F20;">
-       <img src="<%=request.getContextPath()%>/img/at111.png"/>
+       <img src="<%=request.getContextPath()%>/img/at.png"/>
          </td>
   <td> 
   
@@ -87,7 +87,7 @@
  </tr> 
  <tr>
   <td style="background-color: #231F20;">
-       <img src="<%=request.getContextPath()%>/img/Post111.png"/>
+       <img src="<%=request.getContextPath()%>/img/Post.png"/>
   </td>
   <td>   
    
