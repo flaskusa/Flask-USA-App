@@ -14,10 +14,12 @@
  */
 %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
-<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
+<%@ include file="init.jsp" %>
+
+<portlet:actionURL  var="addImagesActionURL" name="addImages">
+</portlet:actionURL>
 
 <%
-  com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
   long repositoryId = themeDisplay.getLayout().getGroupId();
   themeDisplay.getLayout().getUuid();
 %>
@@ -28,7 +30,10 @@ Liferay.Portlet.ready(initialize);
 function initialize(portletId, portlet){
 	if(portletId == "flaskmanageevents_WAR_flaskmanageeventsportlet") {
 		$("#eventForm").hide();
-		createTable({},_eventModel.DATA_MODEL.EVENT, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Event"]);
+		var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
+			return '<i class="icon-wrench" style="margin:3px;"></i>';
+		}
+		createTable({},_eventModel.DATA_MODEL.EVENT, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Event"],_eventModel.GRID_DATA_MODEL.EVENT);
 		loadData();
 		addClickHandlers();
 		initForm();
@@ -161,6 +166,26 @@ function initialize(portletId, portlet){
   <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
   <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
   <input id="eventId" type="hidden" value="0">
+  <div class="yui3-skin-sam">
+	 <div id="modal"></div>
+  </div>  
+</form>
+
+<form id="venueDetailsForm" style="display:none">
+  <input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
+  <div class="form-group">
+	    <label class="control-label" for="InfoTypeCategoryId">Content Type:</label>
+		<div class="controls">
+			<select id="InfoTypeCategoryId" name="InfoTypeCategoryId" class="form-control-select"></select>
+		</div>
+   </div>   
+   <div id="contentTypeForm">
+   		Please select content type.
+   </div>
+	<div id="gridDetails"></div>   
+  <input id="infoTypeId" type="hidden" value=1>
+  <input class="btn btn-info cssVdSave" type="button" value="Save"/>
+  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel" >
 </form>
 </body>
 </html>
