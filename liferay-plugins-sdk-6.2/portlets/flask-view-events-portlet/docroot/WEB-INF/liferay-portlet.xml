@@ -11,12 +11,12 @@
 		  <footer-portlet-javascript>/js/jquery-2.1.4.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
+		  <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/jqxsplitter.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
-		  
 		  <footer-portlet-javascript>/js/slide.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/script.js</footer-portlet-javascript>
 		  
