@@ -15,11 +15,13 @@
 %>
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
-<%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
+
 <%
   com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
   long repositoryId = themeDisplay.getLayout().getGroupId();
+  themeDisplay.getLayout().getUuid();
 %>
 <portlet:defineObjects />
 <link async href="http://fonts.googleapis.com/css?family=Average%20Sans" rel="stylesheet" type="text/css"/>
@@ -34,11 +36,6 @@
     </div>
   <table id="viewevent">
     <tbody>
-		<tr>
-		<td>
-		 <div style="border: none;" id="listbox"></div>
-		</td>
-		</tr>
       <tr>
          <td class="gap"> <button type="button" class="button" >SEARCH FOR AN EVENT
    </button>
@@ -61,11 +58,51 @@
  </div>
     
  <div id="two" style="display:none; width:100%;">
- 	<div id="wowContainer"></div>
+ <div style="overflow: hidden; display:none" id="ContentPanel"></div>
+  <table>
+ <tr>
+  <td style="background-color: #231F20;">
+           <img src="<%=request.getContextPath()%>/img/Pre111.png"/>
+  </td>
+  <td>
+    
+						<div id="wowslider-container2" class="wowslider-container">
+							<div class="ws_images" id="ws_images2"></div>
+						</div>
 
+		     </td>
+    </tr>
+    
+    <tr>
+  <td style="background-color: #231F20;">
+       <img src="<%=request.getContextPath()%>/img/at111.png"/>
+         </td>
+  <td> 
+  
+						<div id="wowslider-container3" class="wowslider-container">
+							<div class="ws_images" id="ws_images3"></div>
+						</div>
+
+		     </td>
+ </tr> 
+ <tr>
+  <td style="background-color: #231F20;">
+       <img src="<%=request.getContextPath()%>/img/Post111.png"/>
+  </td>
+  <td>   
+   
+						<div id="wowslider-container4" class="wowslider-container">
+							<div class="ws_images" id="ws_images4"></div>
+						</div>
+
+ </td>
+ </tr>
+</table>
 	<input class="btn btn-info cssback" type="button" value="Back"/>
 	</br></br></br>
 </div>	
+
+	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
     <div id="fixedfooter">
 	    <table>
             <tr>
@@ -79,6 +116,5 @@
             </tr>
         </table>
 	</div>
-	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
 
 </body>
