@@ -85,8 +85,15 @@ div#placeholder {
 		  height: 130px;
 		  overflow: auto;
 		}
+		.aui input[type="text"] {
+		  height: 30px;
+		  width: 96.7% !important;
+		  padding: 4px 0;
+		  padding-left: 10px;
+		}
 }
 
+		
 .control-label-color
 {
 	font-size: 14px;
@@ -157,4 +164,8 @@ div#fixedfooter2
 div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
   visibility: collapse !important;
 
+}
+
+.ws-title-wrapper {
+  display: none !important;
 }
