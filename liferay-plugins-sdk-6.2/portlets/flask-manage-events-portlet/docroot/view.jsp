@@ -39,6 +39,7 @@ function initialize(portletId, portlet){
 		initForm();
 	}
 }
+
 </aui:script>
 
 <body class='default'>
@@ -182,10 +183,11 @@ function initialize(portletId, portlet){
    <div id="contentTypeForm">
    		Please select content type.
    </div>
-	<div id="gridDetails"></div>   
+	 
   <input id="infoTypeId" type="hidden" value=1>
   <input class="btn btn-info cssVdSave" type="button" value="Save"/>
   <input class="btn btn-primary cssVdCancel" type="button" value="Cancel" >
+  <div id="gridDetails"></div>  
 </form>
 </body>
 </html>

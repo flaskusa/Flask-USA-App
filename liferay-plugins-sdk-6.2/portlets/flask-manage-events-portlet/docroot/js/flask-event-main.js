@@ -207,8 +207,8 @@ function initForm(){
 		$("#eventDate").jqxDateTimeInput({width: '260px', height: '35px',formatString: "MM-dd-yyyy" });
 		$("#Active").jqxCheckBox({ width: 120, height: 25 });
 		$('#jqxtabs').jqxTabs({width: '100%',height: 350});
-		$("#startTime").jqxDateTimeInput({ width: '100px', height: '23px', formatString: 'T', showCalendarButton: false});
-		$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'T', showCalendarButton: false});
+		$("#startTime").jqxDateTimeInput({ width: '100px', height: '23px', formatString: 'hh:mm tt', showCalendarButton: false});
+		$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'hh:mm tt', showCalendarButton: false});
 		$('#jqxtabs').bind('selected', function (event) {
 			    var item = event.args.item;
 			    var title = $('#jqxtabs').jqxTabs('getTitleAt', item);

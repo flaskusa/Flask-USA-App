@@ -120,12 +120,11 @@ function formatUnixToTime(tdate)
 	var hours = date.getHours();
 	// minutes part from the timestamp
 	var minutes = "0" + date.getMinutes();
-	// seconds part from the timestamp
-	var seconds = "0" + date.getSeconds();
+
 	var ampm = hours >= 12 ? 'PM' : 'AM';
 	hours = hours % 12;
 	// will display time in 10:30:23 format
-	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2) + ' ' + ampm;
+	return hours + ':' + minutes.substr(-2)  + ' ' + ampm;
 }
 
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord){
