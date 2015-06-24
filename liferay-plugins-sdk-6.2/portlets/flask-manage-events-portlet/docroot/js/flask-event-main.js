@@ -32,8 +32,17 @@ function addClickHandlers(){
 				getFolderId(repositoryId,0,"Events");
 			}		
 	});
+	
 
+	$(".cssVdSave").click(function(){
+		saveVenueDetails();
+	});	
 
+	$(".cssVdCancel").click(function(){
+		$("#eventDataTable").hide();
+		$("#venueDetailsForm").hide();
+		eventForm.show();
+	});	
 	/* Click handler for cancel button*/
 
 	$(".clsCancel").click(function(){
@@ -65,33 +74,51 @@ function addClickHandlers(){
 	    });
 	
 		/*	Toggle search boxes */
-		$(".cssSearchUser").click(GRID_PARAM.toggleSearchBoxes);			
+		$(".cssSearchUser").click(GRID_PARAM.toggleSearchBoxes);
+		
+	$("#AddVenue").click(function(){
+		window.location.href="/mvenues"
+	});		
 }
 
 function loadData(){
-		var flaskRequest = new Request();
-		params = {};
-		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params, 
-		function(data){/*success handler*/
-			GRID_PARAM.updateGrid(data);
-		} , function(error){ /*failure handler*/
-			_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
-			console.log("Error in getting data: " + error);
-		});
+	var flaskRequest = new Request();
+	params = {};
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params, 
+	function(data){/*success handler*/
+		GRID_PARAM.updateGrid(data);
+	} , function(error){ /*failure handler*/
+		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
+		console.log("Error in getting data: " + error);
+	});
+}
+
+function loadVenueDetailsData(venueId){
+	var flaskRequest = new Request();
+	params = {'venueId':venueId};
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_VENUE_DETAILS, params, 
+	function(data){/*success handler*/
+		console.log(data);
+		GRID_PARAM.updateGrid(data);
+	} , function(error){ /*failure handler*/
+		console.log(error);
+		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
+		console.log("Error in getting data: " + error);
+	});
 }
 
 function contextMenuHandler(menuItemText, rowData){
-		var args = event.args;
-		if (menuItemText  == "Edit") {
-			editEvent(rowData);
-			return false;
-		}else if(menuItemText == "Delete"){
-			var a = window.confirm("Are you sure ?");
-			if (a) {
-				deleteEvent(rowData.eventId);
-			}
-			return false;			
+	var args = event.args;
+	if (menuItemText  == "Edit") {
+		editEvent(rowData);
+		return false;
+	}else if(menuItemText == "Delete"){
+		var a = window.confirm("Are you sure ?");
+		if (a) {
+			deleteEvent(rowData.eventId);
 		}
+		return false;			
+	}
 };
 
 /* Delete Single Event */
@@ -141,6 +168,11 @@ function editEvent(rowData) {
 		var eTime = new Date(parseInt(rowData.endTime));
 		$('#endTime').jqxDateTimeInput('setDate', eTime);
 		fnRenderEvents(repositoryId,0,"Events");
+		$(".AddContent").click(function(){
+			loadVenueDetailsData(rowData.venueId);
+			_eventModel.loadContentType('InfoTypeCategoryId');
+			fnRenderContentType($(this).attr("alt"));
+		})
 }
 
 /* Save Event */
@@ -181,6 +213,7 @@ function initForm(){
 			    var item = event.args.item;
 			    var title = $('#jqxtabs').jqxTabs('getTitleAt', item);
 		});
+		$("#venueDetailsForm").hide();
 }
 
 /* Need to change code as per standard*/
@@ -341,7 +374,283 @@ function createInfoTypeFolders(repositoryId, eventsFolderId, eventName)
 }
 /*End*/
 
-/*Add Event details*/
-$(".AddContent").click(function(){
-	alert($(this).attr("alt"));
+/* Dynamic content type generation logic [Start]*/
+var formArea;
+var JsonObj;
+
+function fnRenderContentType(InfoTypeID){
+	$("#infoTypeId").val(InfoTypeID);
+	$("#venueDetailsForm").show();
+	var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
+		return '<i class="icon-wrench" style="margin:3px;"></i>';
+	}
+	createTable({},_eventModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenu", "Edit", contextMenuHandler, ["Images"],_eventModel.GRID_DATA_MODEL.VENUEDETAILS);
+	$("#eventForm").hide();
+}
+
+$(document).ready(function(){
+    formArea = $("#contentTypeForm"); // Parent Div        
+    JsonObj = [{                    // JSON Field List, Content Type Wise
+            "general":[{
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Title",
+                        "id":"infoTitle",
+                        "value":"",
+                        "placeholder":"Enter title here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Description",
+                        "id":"infoDesc",
+                        "value":"",
+                        "placeholder":"Enter description here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"upload",
+                    "attr":[{ 
+                    	"caption":"Upload Pictures",
+                        "action":$("#imgActionUrl").val(),
+                        "id":"venueId",
+                    	"value":$("#venueId").val(),
+                        "Class":""
+                        }]
+                    }],
+            "tradition":[{
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Name",
+                        "id":"infoTitle",
+                        "value":"",
+                        "placeholder":"Enter title here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Description",
+                        "id":"infoDesc",
+                        "value":"",
+                        "placeholder":"Enter description here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Comment",
+                        "id":"Comment",
+                        "value":"",
+                        "placeholder":"Enter Comment here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    }],
+            "parking":[{
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Name",
+                        "id":"Title",
+                        "value":"",
+                        "placeholder":"Enter Name here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Address",
+                        "id":"Description",
+                        "value":"",
+                        "placeholder":"Enter Address here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"text",
+                    "attr":[{ 
+                        "caption":"Cost",
+                        "id":"Cost",
+                        "value":"",
+                        "placeholder":"Enter Cost here",
+                        "maxlength":"30",
+                        "Class":""
+                        }]
+                    },
+                    {                                
+                    "type":"boolean",
+                    "attr":[{ 
+                        "id":"IsAvailable",
+                        "name":"IsAvailable",
+                        "caption":"Is Available?",
+                        "value":"Yes",
+                        "items":["Yes","No"]
+                        }]
+                    }]                            
+            }];
+                      
+    $("#InfoTypeCategoryId").change(function(){
+        $(formArea).html("");
+        var selectedContentType = $("option:selected", this).text().toLowerCase();;
+        fnRenderForm(selectedContentType);
+    });
 });
+
+function fnRenderForm(contentType){
+    var ObjJSON = fnSelectJSON(contentType)
+    console.log(eval("JsonObj[0]."+contentType));
+    fnBuildHtml(ObjJSON);
+}
+
+function fnSelectJSON(cType){
+    switch(cType) {
+        case "general":
+            return JsonObj[0].general;
+            break;
+        case "tradition":
+            return JsonObj[0].tradition;
+            break;
+        case "parking":
+            return JsonObj[0].parking;
+            break;
+        default:
+            console.log("Nothing selected");
+    }        
+}
+
+function fnBuildHtml(Obj){
+    var items = Obj.filter(function(item) {
+        switch(item.type) {
+            case "text":
+                return fnBuildInput(item.attr);
+                break;
+            case "select":
+                return fnBuildSelect(item.attr);
+                break;
+            case "boolean":
+                return fnBuildBoolean(item.attr);
+                break;
+            case "upload":
+                return fnBuildUpload(item.attr);
+                break;
+            default:
+                console.log("Nothing selected");
+        }        
+    });        
+}
+
+function fnBuildInput(Obj){
+    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo($(formArea));
+    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].id}).appendTo(objFormGroup);
+    $(objControlLable).html(Obj[0].caption);
+    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
+    $('<input/>', {
+        'type': 'Text',
+        'id':Obj[0].id,
+        'value':Obj[0].value,
+        'placeholder':Obj[0].placeholder,   
+        'maxlength':Obj[0].maxlength
+    }).appendTo(objControls);
+}
+
+function fnBuildBoolean(Obj){
+    var strSelected = "";
+    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo($(formArea));
+    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].id}).appendTo(objFormGroup);
+    $(objControlLable).html(Obj[0].caption);
+    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
+    for(var iCount=0;iCount<Obj[0].items.length;iCount++){
+        console.log(Obj[0].items[iCount].value);
+        if(Obj[0].items[0].value==Obj[0].value)
+            strSelected = "selected"    
+        else
+            strSelected = ""                                            
+            
+         $('<input/>', {
+            'type': 'Radio',
+            'id':Obj[0].id,
+            'name':Obj[0].name,
+            'value':Obj[0].value,
+            'Selected':strSelected
+        }).appendTo(objControls);
+        var objItemCaptionLable = $('<span/>',{'class':'control-label'}).appendTo(objControls);
+        $(objItemCaptionLable).html(Obj[0].items[iCount]);
+    }
+}
+
+function fnBuildUpload(Obj){
+	  var strSelected = "";
+	    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo($(formArea));
+	    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].caption}).appendTo(objFormGroup);
+	    $(objControlLable).html(Obj[0].caption);
+	    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
+	    var objForm = $('<form/>',{'class':'dropzone','id':'venueImages','action':Obj[0].action}).appendTo(objFormGroup);
+	    $(objForm).appendTo(objControls);
+	    var objHiddenId = $('<input/>',{'id':Obj[0].id,'type':'hidden','value':'24490'}).appendTo($(formArea));
+	    $(objHiddenId).appendTo(objForm);
+	    var dropZone = new Dropzone($(objForm).get(0),{});	
+	    dropZone.on("addedfile", function(file) {
+	        //alert("Do you wish to add information about images?");
+	    });	    
+}
+/* Dynamic content type generation logic [End]*/
+function saveVenueDetails(){
+	params = _flaskLib.getFormData('venueDetailsForm',_eventModel.DATA_MODEL.VENUEDETAILS,
+			function(formId, model, formData){
+				$.each(model, function(i, item) {
+					var ele = $('#'+ formId + ' #'+item.name);
+					var val = $.trim(ele.val());
+					if(item.type == 'long' && val ==''){
+						val = Number(val)
+					}
+					formData[item.name] = val;	
+					formData['venueId'] = parseInt($("#venueId").val());
+					formData['infoTypeCategoryId'] = parseInt($("#InfoTypeCategoryId").val());
+					formData['infoTypeId'] = parseInt($("#infoTypeId").val());
+				});
+				return formData;
+			});
+	//console.log(params);
+	var flaskRequest = new Request();
+	var url = ""
+		//if(params.infoTypeId == 0){
+			url = _eventModel.SERVICE_ENDPOINTS.ADD_VENUE_DETAILS;
+		//}else{
+		//	url =_eventModel.SERVICE_ENDPOINTS.UPDATE_VENUE_DETAILS;
+		//}
+    console.log(url);
+	console.log(params);	
+	flaskRequest.sendGETRequest(url, params, 
+				function (data){
+					_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.V_SAVE);
+					//loadData();
+				} ,
+				function (data){
+					console.log(data);
+					_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.V_ERROR);
+				});
+
+}
+
+function formatUnixToTime(tdate){var date = new Date(tdate);
+	//hours part from the timestamp
+	var hours = date.getHours();
+	//minutes part from the timestamp
+	var minutes = "0" + date.getMinutes();
+	//seconds part from the timestamp
+	var seconds = "0" + date.getSeconds();
+	//will display time in 10:30:23 format
+	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+}

@@ -113,17 +113,31 @@ GRID_PARAM.rowDetailTemplate = function(tabs, height)
 	 return { rowdetails: rowDetailTemplate, rowdetailsheight: height };
 }
 
+function formatUnixToTime(tdate)
+{
+	var date = new Date(tdate);
+	// hours part from the timestamp
+	var hours = date.getHours();
+	// minutes part from the timestamp
+	var minutes = "0" + date.getMinutes();
+	// seconds part from the timestamp
+	var seconds = "0" + date.getSeconds();
+	var ampm = hours >= 12 ? 'PM' : 'AM';
+	hours = hours % 12;
+	// will display time in 10:30:23 format
+	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2) + ' ' + ampm;
+}
+
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord){
-	 var tabsdiv = null; 
-    tabsdiv = $($(parentElement).children()[0]);
-    if (tabsdiv != null) {
-		var eventDiv = tabsdiv.find('.event');
-		var container1 = $('<div class="row-fluid"></div>');
-		var leftcolumn = $('<div class="span5"></div>');
-		//var rightcolumn = $('<div class="span5"></div>');
-		var d = new Date(datarecord.eventDate);
-		var d1 = new Date(datarecord.startTime);
-		var d2 = new Date(datarecord.endTime);
+	  var tabsdiv = null; 
+	    tabsdiv = $($(parentElement).children()[0]);
+	    if (tabsdiv != null) {
+	  var eventDiv = tabsdiv.find('.event');
+	  var container1 = $('<div class="row-fluid"></div>');
+	  var leftcolumn = $('<div class="span5"></div>');
+	  var d = new Date(datarecord.eventDate);
+	  var d1 = formatUnixToTime(datarecord.startTime);
+	  var d2 = formatUnixToTime(datarecord.endTime);
 		container1.append(leftcolumn);
 		var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
 				+ datarecord.venueId + "</td></tr>";
@@ -151,7 +165,9 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 /*
  *  This method creates grid
  */
-function createTable(data, model, grid, menuDivId, actionColText,contextMenuHandler, detailDivArr){
+
+
+function createTable(data, model, grid, menuDivId, actionColText,contextMenuHandler, detailDivArr, Columns){
 	
 		if(typeof gridId == undefined){
 			throw 'a valid grid div object must be provided';
@@ -176,19 +192,6 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 		gridObj = grid;
 		rowDetailDivArr = detailDivArr
 		
-    var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
-						return '<i class="icon-wrench" style="margin:3px;"></i>';
-	}
-			 
-    var vanueColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'eventName', width: '45%' },
-    	 {text: 'Description', datafield: 'description', width: '45%'},
-    	 //{ text: 'Date', datafield: 'eventDate', type: "date", format: 'MM-dd-yyyy',  width: '15%'},
-    	 //{ text: 'Start Time', datafield: 'startTime', type: "date", format: 'MM-dd-yyyy', width: '10%'},
-    	 //{ text: 'End Time', datafield: 'endTime',type: "date",  format: 'MM-dd-yyyy',width: '10%'},
-    	 { text: 'Edit',  datafield: 'eventId', width: '10%', cellsalign: 'center', cellsrenderer: actionRenderer}];
-    	
-    
-    
     grid.on('cellclick', GRID_PARAM.onRowClick);
     //set menu item click
     _contextMenuHandler = contextMenuHandler
@@ -223,7 +226,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
                 showrowdetailscolumn:false,
                 rowdetailstemplate: GRID_PARAM.rowDetailTemplate(rowDetailDivArr , 200),
                 initrowdetails: GRID_PARAM.initrowdetails,
-                columns: vanueColumns
+                columns: Columns
             });
     
 	}

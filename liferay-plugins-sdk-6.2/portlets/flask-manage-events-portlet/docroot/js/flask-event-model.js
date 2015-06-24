@@ -13,7 +13,10 @@ _eventModel.SERVICE_ENDPOINTS = {
 	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
 	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues",
 	GET_FOLDER					: "/dlapp/get-folder",
-	ADD_FOLDER					: "/dlapp/add-folder"
+	ADD_FOLDER					: "/dlapp/add-folder",
+	ADD_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/add-venue-detail",
+	UPDATE_VENUE_DETAILS		: "/flask-rest-events-portlet.venue/update-venue-detail",
+	GET_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/get-venue-details"
 };
 
 _eventModel.DATA_MODEL= {
@@ -30,9 +33,51 @@ _eventModel.DATA_MODEL= {
 		 	 { name: 'venueId', type:'long' },
 		 	 { name: 'venueName', type:'string' },
 		 	 { name: 'eventImagePath', type:'string' }
-		]
+		],
+		VENUEDETAILS: 
+			[
+	             { name: 'venueId', type: 'long' },
+	             { name: 'infoTypeId', type: 'long' },
+	             { name: 'infoTypeCategoryId', type: 'long' },
+				 { name: 'infoTitle', type: 'string' },
+				 { name: 'infoDesc', type: 'string' },
+				 { name: 'addrLine1', type: 'string'},
+				 { name: 'addrLine2', type: 'string'},
+				 { name: 'zipCode', type: 'string'},
+				 { name: 'city', type: 'string'},
+				 { name: 'stateId', type: 'long' },
+				 { name: 'countryId', type: 'long' },
+				 { name: 'lattitude', type: 'string'},
+				 { name: 'longitude', type: 'string'},
+				 { name: 'phone', type: 'string'},
+				 { name: 'website', type: 'string'},
+				 { name: 'cost', type: 'long' },
+				 { name: 'hoursOfOperation', type: 'string' }
+			]
 	};
 
+var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
+	return '<i class="icon-wrench" style="margin:3px;"></i>'
+}
+_eventModel.GRID_CONTEXT_MENU = {
+		EVENT:function(row, columnfield, value, defaulthtml, columnproperties) {
+			return '<i class="icon-wrench" style="margin:3px;"></i>'
+		},
+		VENUEDETAILS:function(row, columnfield, value, defaulthtml, columnproperties) {
+			return '<i class="icon-wrench" style="margin:3px;"></i>'
+		}
+}
+
+_eventModel.GRID_DATA_MODEL= {
+		EVENT: 
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'eventName', width: '45%' },
+      		 {text: 'Description', datafield: 'description', width: '45%'},
+      		 { text: 'Edit',  datafield: 'eventId', width: '10%', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.EVENT }],
+		VENUEDETAILS: 
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '45%' },
+      		 {text: 'Description', datafield: 'infoDesc', width: '45%'},
+      		 { text: 'Edit',  datafield: 'venueDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.VENUEDETAILS }]
+		};
 
 _eventModel.MESSAGES= {
 		GET_ERROR: "There was an error in getting data",
@@ -41,6 +86,12 @@ _eventModel.MESSAGES= {
 		ERROR: "There was an error in saving Event",
 		DEL_SUCCESS: "Event successfully deleted",
 		DEL_ERR: "Error in deleting Event",
+		V_GET_ERROR: "There was an error in getting data",
+		V_ADD: "Venue details successfully added",
+		V_SAVE: "Venue successfully saved",
+		V_ERROR: "There was an error in saving details",
+		V_DEL_SUCCESS: "Venue details successfully deleted",
+		V_DEL_ERR: "Error in deleting venue details"
  };
 
 _eventModel.loadVenues = function(elementId,selectedId){
@@ -80,6 +131,31 @@ _eventModel.loadEventType = function(elementId,selectedId){
 					} ,
 					function (data){
 						console.log("Error in getting Event Type: " + data );
+					});
+	
+}
+
+_eventModel.loadContentType = function(elementId,selectedId){
+	var request = new Request();
+	var selectList = $('#' + elementId);
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_INFO_CATEGORY , {}, 
+					function (data){
+							selectList.empty();
+							selectList.append($("<option/>", {
+								value: 0,
+								text: '-Select content type-'
+							}));
+							$.each(data, function(key, Content) {
+								selectList.append($("<option/>", {
+									value: Content.infoTypeCategoryId,
+									text: Content.infoTypeCategoryName
+								}));
+							});
+							selectList.val(selectedId);
+					} ,
+					function (data){
+						console.log("Error in getting content types: " + data );
 					});
 	
 }
