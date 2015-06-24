@@ -1,14 +1,3 @@
-.imgdiv{
-	float:left; 
-	width:20%;
-}
-
-.lbldiv{
-	float:left; 
-	width:80%;
-	margin-top: 15px;
-}
-
 div#fixedfooter {
 	position:fixed; 
 	z-index:99;
@@ -21,10 +10,6 @@ div#fixedfooter {
 	
 .gap{
 	padding-top:10px;
-	}
-	
-.gap1{
-	padding-top:3px;
 	}
 	
 .asans{  
@@ -72,15 +57,7 @@ div#fixedfooter {
 
 @media (min-width: 767px)
 {
-		.imgdiv 
-		{
-		  width: 20%;
-		}
-		
-		.lbldiv{
-			width:80%;
-		
-		}
+
 div#placeholder {
   height: 100px;
   overflow: auto;
@@ -98,12 +75,6 @@ div#placeholder {
 		.control-label-color
 		{
 			font-size:12px !important; 
-		}
-		.lbldiv
-		{
-			float:left; 
-			width:80%;
-			margin-top: 0px !important;
 		}
 		.control-label-nocolor
 		{
