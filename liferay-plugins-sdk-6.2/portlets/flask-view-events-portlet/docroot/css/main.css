@@ -187,8 +187,3 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
   visibility: collapse !important;
 
 }
-
-div#listbox 
-{
-	  height: 350px !important;
-}
