@@ -15,8 +15,10 @@ _eventModel.SERVICE_ENDPOINTS = {
 	GET_FOLDER					: "/dlapp/get-folder",
 	ADD_FOLDER					: "/dlapp/add-folder",
 	ADD_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/add-venue-detail",
+	GET_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/get-venue-details",
 	UPDATE_VENUE_DETAILS		: "/flask-rest-events-portlet.venue/update-venue-detail",
-	GET_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/get-venue-details"
+	DELETE_VENUE_DETAIL			: "/flask-rest-events-portlet.venue/delete-venue-detail",
+	DELETE_ALL_VENUE_DETAILS	: "/flask-rest-events-portlet.venue/delete-all-venue-details"
 };
 
 _eventModel.DATA_MODEL= {
@@ -36,6 +38,7 @@ _eventModel.DATA_MODEL= {
 		],
 		VENUEDETAILS: 
 			[
+	             { name: 'venueDetailId', type: 'long' },
 	             { name: 'venueId', type: 'long' },
 	             { name: 'infoTypeId', type: 'long' },
 	             { name: 'infoTypeCategoryId', type: 'long' },
