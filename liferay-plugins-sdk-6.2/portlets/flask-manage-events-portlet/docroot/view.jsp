@@ -14,7 +14,7 @@
  */
 %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
-<%@ include file="init.jsp" %>
+<%@include file="init.jsp"%>
 
 <portlet:actionURL  var="addImagesActionURL" name="addImages">
 </portlet:actionURL>
@@ -187,7 +187,14 @@ function initialize(portletId, portlet){
   <input id="infoTypeId" type="hidden" value=1>
   <input class="btn btn-info cssVdSave" type="button" value="Save"/>
   <input class="btn btn-primary cssVdCancel" type="button" value="Cancel" >
-  <div id="gridDetails"></div>  
+  <div id="gridDetails"></div>
+  <div id='actionMenuDetails' style="display:none">
+	<ul>
+		<li>Edit</li> 					<!--fnShowForm({value}); -->
+		<li>Delete</li>					<!--fnDelete({value}); -->
+	</ul>
+  </div>
+    
 </form>
 </body>
 </html>
