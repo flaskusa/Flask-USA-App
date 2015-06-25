@@ -113,21 +113,22 @@ GRID_PARAM.rowDetailTemplate = function(tabs, height)
 	 return { rowdetails: rowDetailTemplate, rowdetailsheight: height };
 }
 
-function formatUnixToTime(tdate)
-{
-	var date = new Date(tdate);
-	// hours part from the timestamp
-	var hours = date.getHours();
-	// minutes part from the timestamp
-	var minutes = "0" + date.getMinutes();
 
-	var ampm = hours >= 12 ? 'PM' : 'AM';
-	hours = hours % 12;
-	// will display time in 10:30:23 format
-	return hours + ':' + minutes.substr(-2)  + ' ' + ampm;
-}
 
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord){
+	function formatUnixToTime(tdate)
+	{
+		var date = new Date(tdate);
+		// hours part from the timestamp
+		var hours = date.getHours();
+		// minutes part from the timestamp
+		var minutes = "0" + date.getMinutes();
+
+		var ampm = hours >= 12 ? 'PM' : 'AM';
+		hours = hours % 12;
+		// will display time in 10:30 PM format
+		return hours + ':' + minutes.substr(-2) + ' ' + ampm;
+	}
 	  var tabsdiv = null; 
 	    tabsdiv = $($(parentElement).children()[0]);
 	    if (tabsdiv != null) {
