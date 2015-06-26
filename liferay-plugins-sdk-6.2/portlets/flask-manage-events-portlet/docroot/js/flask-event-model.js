@@ -59,9 +59,6 @@ _eventModel.DATA_MODEL= {
 			]
 	};
 
-var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
-	return '<i class="icon-wrench" style="margin:3px;"></i>'
-}
 _eventModel.GRID_CONTEXT_MENU = {
 		EVENT:function(row, columnfield, value, defaulthtml, columnproperties) {
 			return '<i class="icon-wrench" style="margin:3px;"></i>'

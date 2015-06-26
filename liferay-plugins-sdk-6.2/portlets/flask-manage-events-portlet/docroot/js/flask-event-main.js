@@ -33,14 +33,13 @@ function addClickHandlers(){
 			}		
 	});
 	
-
 	$(".cssVdSave").click(function(){
 		saveVenueDetails();
 	});	
 
 	$(".cssVdCancel").click(function(){
 		$("#eventDataTable").hide();
-		$("#venueDetailsForm").hide();
+		$("#venueDetailsContainer").hide();
 		eventForm.show();
 	});	
 	/* Click handler for cancel button*/
@@ -77,8 +76,19 @@ function addClickHandlers(){
 		$(".cssSearchUser").click(GRID_PARAM.toggleSearchBoxes);
 		
 	$("#AddVenue").click(function(){
-		window.location.href="/mvenues"
-	});		
+		window.location.href="/web/flask/mvenues"
+	});
+	
+	$(".cssAddVenueDetails").click(function(){
+		$('#venueDetailsForm').show();
+		$('#venueDetailsDataTable').hide();
+	});	
+
+	$(".cssGoToEvents").click(function(){
+		$("#eventDataTable").hide();
+		$("#venueDetailsContainer").hide();
+		eventForm.show();
+	});	
 }
 
 function loadData(){
@@ -98,7 +108,7 @@ function loadVenueDetailsData(venueId){
 	params = {'venueId':venueId};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_VENUE_DETAILS, params, 
 	function(data){/*success handler*/
-		console.log(data);
+		console.log(venueId);
 		GRID_PARAM.updateGrid(data);
 	} , function(error){ /*failure handler*/
 		console.log(error);
@@ -110,6 +120,7 @@ function loadVenueDetailsData(venueId){
 function contextMenuHandler(menuItemText, rowData){
 	var args = event.args;
 	if (menuItemText  == "Edit") {
+		console.log(rowData);
 		editEvent(rowData);
 		return false;
 	}else if(menuItemText == "Delete"){
@@ -124,13 +135,12 @@ function contextMenuHandler(menuItemText, rowData){
 function contextMenuHandlerDetails(menuItemText, rowData){
 	var args = event.args;
 	if (menuItemText  == "Edit") {
-		//editEvent(rowData);
+		editVenueDetail(rowData);
 		return false;
 	}else if(menuItemText == "Delete"){
 		var a = window.confirm("Are you sure ?");
 		if (a) {
-			console.log(rowData);
-			deleteVenueDetail(rowData.venueDetailId);
+			deleteVenueDetail(rowData.venueDetailId,rowData.venueId);
 		}
 		return false;			
 	}
@@ -186,7 +196,7 @@ function editEvent(rowData) {
 		fnRenderEvents(repositoryId,0,"Events");
 		$(".AddContent").click(function(){
 			loadVenueDetailsData(rowData.venueId);
-			_eventModel.loadContentType('InfoTypeCategoryId');
+			_eventModel.loadContentType('infoTypeCategoryId');
 			fnRenderContentType($(this).attr("alt"));
 		})
 }
@@ -195,8 +205,8 @@ function editEvent(rowData) {
 function saveEvent(){
 		params = _flaskLib.getFormData('eventForm',_eventModel.DATA_MODEL.EVENT,
 					function(formId, model, formData){
-							formData.venueId=$('#venueId').val();
-							formData.venueName = $('#venueId').children(':selected').text();
+							formData.venueId=$('#eventForm #venueId').val();
+							formData.venueName = $('#eventForm #venueId').children(':selected').text();
 							formData.eventTypeId=$('#eventTypeId').val();
 							formData.eventTypeName = $('#eventTypeName').children(':selected').text();
 							return formData;
@@ -229,7 +239,7 @@ function initForm(){
 			    var item = event.args.item;
 			    var title = $('#jqxtabs').jqxTabs('getTitleAt', item);
 		});
-		$("#venueDetailsForm").hide();
+		$("#venueDetailsContainer").hide();
 }
 
 /* Need to change code as per standard*/
@@ -242,7 +252,7 @@ function createFolder(repositoryId,parentFolderId,folderName,folderDesc){
 			    
 		   },
 		   function(obj) {
-			   console.log("Error in creating Folder: " + data );
+			   console.log("Error in creating Folder: "+obj);
 		   });
 }
 
@@ -252,7 +262,6 @@ function eventFolder(repositoryId, eventsFolderId, eventName){
 	params= {'repositoryId': repositoryId, 'parentFolderId': eventsFolderId, 'name': eventName};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
 			  function(data){
-				    console.log(data);
 				    return data.folderId;
 			  },
 			  function (data){
@@ -353,8 +362,6 @@ function displayImages(repositoryId, folderId, ws_images, wowslider_container)
 				temp_html=temp_html+"<li><img src="+imageUrl+" alt='"+uploadedby+"' title='"+uploadedby+"' id='wows1_0'/></li>";
 			}
 			temp_html=temp_html+"</ul>";
-			console.log(ws_images);
-			console.log(wowslider_container);
 			$(ws_images).html(temp_html);
 			$(wowslider_container).wowSlider();
       }
@@ -396,7 +403,7 @@ var JsonObj;
 
 function fnRenderContentType(InfoTypeID){
 	$("#infoTypeId").val(InfoTypeID);
-	$("#venueDetailsForm").show();
+	$("#venueDetailsContainer").show();
 	createTable({},_eventModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventModel.GRID_DATA_MODEL.VENUEDETAILS);
 	$("#eventForm").hide();
 }
@@ -514,7 +521,7 @@ $(document).ready(function(){
                     }]                            
             }];
                       
-    $("#InfoTypeCategoryId").change(function(){
+    $("#infoTypeCategoryId").change(function(){
         $(formArea).html("");
         var selectedContentType = $("option:selected", this).text().toLowerCase();;
         fnRenderForm(selectedContentType);
@@ -523,7 +530,6 @@ $(document).ready(function(){
 
 function fnRenderForm(contentType){
     var ObjJSON = fnSelectJSON(contentType)
-    console.log(eval("JsonObj[0]."+contentType));
     fnBuildHtml(ObjJSON);
 }
 
@@ -585,7 +591,6 @@ function fnBuildBoolean(Obj){
     $(objControlLable).html(Obj[0].caption);
     var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
     for(var iCount=0;iCount<Obj[0].items.length;iCount++){
-        console.log(Obj[0].items[iCount].value);
         if(Obj[0].items[0].value==Obj[0].value)
             strSelected = "selected"    
         else
@@ -629,50 +634,47 @@ function saveVenueDetails(){
 						val = Number(val)
 					}
 					formData[item.name] = val;	
-					formData['venueId'] = parseInt($("#venueId").val());
-					formData['infoTypeCategoryId'] = parseInt($("#InfoTypeCategoryId").val());
-					formData['infoTypeId'] = parseInt($("#infoTypeId").val());
 				});
+				formData.venueId=$('#eventForm #venueId').val();
 				return formData;
 			});
-	//console.log(params);
 	var flaskRequest = new Request();
 	var url = ""
-		//if(params.infoTypeId == 0){
+		if(params.venueDetailId == 0){
 			url = _eventModel.SERVICE_ENDPOINTS.ADD_VENUE_DETAILS;
-		//}else{
-		//	url =_eventModel.SERVICE_ENDPOINTS.UPDATE_VENUE_DETAILS;
-		//}
-    console.log(url);
-	console.log(params);	
+		}else{
+			url =_eventModel.SERVICE_ENDPOINTS.UPDATE_VENUE_DETAILS;
+		}
 	flaskRequest.sendGETRequest(url, params, 
 				function (data){
 					_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.V_SAVE);
-					//loadData();
+					loadVenueDetailsData(params.venueId);
+					$('#venueDetailsForm').hide();
+					$('#venueDetailsDataTable').show();	
 				} ,
 				function (data){
-					console.log(data);
 					_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.V_ERROR);
 				});
-
+	$("#venueDetailId").val(0);
+	$("#infoTypeCategoryId").val(0);
+	$("#infoTypeCategoryId").change();
 }
 
 //
 
 /* Delete Single Event */
-function deleteVenueDetail(venueDetailId) {
+function deleteVenueDetail(venueDetailId,venueId) {
 		var param = {'venueDetailId': venueDetailId};
 		var request = new Request();
 		var flaskRequest = new Request();
 		flaskRequest.sendPOSTRequest(_eventModel.SERVICE_ENDPOINTS.DELETE_VENUE_DETAIL , param, 
-						function (data){
-								_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
-								loadData();
-						} ,
-						function (data){
-								_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);
-						});
-	
+			function (data){
+					_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
+					loadVenueDetailsData(venueId);
+			} ,
+			function (data){
+					_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);
+			});
 }
 
 /* Delete Multiple Events */
@@ -681,46 +683,30 @@ function deleteMultipleVenueDetail(eventList) {
 	var request = new Request();
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_eventModel.SERVICE_ENDPOINTS.DELETE_ALL_VENUE_DETAILS, param, 
-					function (data){
-							_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
-							loadData();
-					} ,
-					function (data){
-							_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);
-					});
-	
+		function (data){
+				_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
+				//loadVenueDetailsData(venueId);
+		} ,
+		function (data){
+				_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);
+		});
 }
 
 /* Edit Event */
 function editVenueDetail(rowData) {
-		/*var repositoryId = $("#repositoryId").val();
-		_flaskLib.loadDataToForm("eventForm",  _eventModel.DATA_MODEL.EVENT, rowData, function(){});
-		$("#eventDataTable").hide();
-		eventForm.show();
-		_eventModel.loadVenues('venueId',  rowData.venueId);
-		_eventModel.loadEventType('eventTypeId',  rowData.eventTypeId);
-		var date = new Date(parseInt(rowData.eventDate));
-		$('#eventDate').jqxDateTimeInput('setDate', date);
-		var sTime = new Date(parseInt(rowData.startTime));
-		$('#startTime').jqxDateTimeInput('setDate', sTime);
-		var eTime = new Date(parseInt(rowData.endTime));
-		$('#endTime').jqxDateTimeInput('setDate', eTime);
-		fnRenderEvents(repositoryId,0,"Events");
-		$(".AddContent").click(function(){
-			loadVenueDetailsData(rowData.venueId);
-			_eventModel.loadContentType('InfoTypeCategoryId');
-			fnRenderContentType($(this).attr("alt"));
-		})*/
+		var repositoryId = $("#repositoryId").val();
+		$('#venueDetailsForm #venueId').val($('#eventForm #venueId').val());
+		$("#venueDetailId").val(rowData.venueDetailId);
+		$("#infoTypeCategoryId").val(rowData.infoTypeCategoryId);
+		$("#infoTypeCategoryId").change();
+		$('#venueDetailsForm').show();
+		$('#venueDetailsDataTable').hide();
+		_flaskLib.loadDataToForm("venueDetailsForm",  _eventModel.DATA_MODEL.VENUEDETAILS, rowData, function(){});
 }
 
-
 function formatUnixToTime(tdate){var date = new Date(tdate);
-	//hours part from the timestamp
 	var hours = date.getHours();
-	//minutes part from the timestamp
 	var minutes = "0" + date.getMinutes();
-	//seconds part from the timestamp
 	var seconds = "0" + date.getSeconds();
-	//will display time in 10:30:23 format
 	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }

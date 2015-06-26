@@ -196,7 +196,6 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
     //set menu item click
     _contextMenuHandler = contextMenuHandler
 	$('#' + rowMenuDivId).on('itemclick',GRID_PARAM.onContextMenuItemClick);
-	
 	// create context menu
 	var contextMenu = $("#" + menuDivId).jqxMenu({
 		width : 160,
