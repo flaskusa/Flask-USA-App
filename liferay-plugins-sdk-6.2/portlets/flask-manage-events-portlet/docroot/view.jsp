@@ -30,9 +30,6 @@ Liferay.Portlet.ready(initialize);
 function initialize(portletId, portlet){
 	if(portletId == "flaskmanageevents_WAR_flaskmanageeventsportlet") {
 		$("#eventForm").hide();
-		var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
-			return '<i class="icon-wrench" style="margin:3px;"></i>';
-		}
 		createTable({},_eventModel.DATA_MODEL.EVENT, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Event"],_eventModel.GRID_DATA_MODEL.EVENT);
 		loadData();
 		addClickHandlers();
@@ -172,29 +169,37 @@ function initialize(portletId, portlet){
   </div>  
 </form>
 
-<form id="venueDetailsForm" style="display:none">
-  <input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
-  <div class="form-group">
-	    <label class="control-label" for="InfoTypeCategoryId">Content Type:</label>
-		<div class="controls">
-			<select id="InfoTypeCategoryId" name="InfoTypeCategoryId" class="form-control-select"></select>
-		</div>
-   </div>   
-   <div id="contentTypeForm">
-   		Please select content type.
-   </div>
-	 
-  <input id="infoTypeId" type="hidden" value=1>
-  <input class="btn btn-info cssVdSave" type="button" value="Save"/>
-  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel" >
-  <div id="gridDetails"></div>
-  <div id='actionMenuDetails' style="display:none">
-	<ul>
-		<li>Edit</li> 					<!--fnShowForm({value}); -->
-		<li>Delete</li>					<!--fnDelete({value}); -->
-	</ul>
-  </div>
-    
-</form>
+<div id="venueDetailsContainer">
+	<form id="venueDetailsForm" style="display:none">
+	  <input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
+	  <div class="form-group">
+		    <label class="control-label" for="infoTypeCategoryId">Content Type:</label>
+			<div class="controls">
+				<select id="infoTypeCategoryId" name="infoTypeCategoryId" class="form-control-select"></select>
+			</div>
+	   </div>   
+	   <div id="contentTypeForm">
+	   		Please select content type.
+	   </div>
+		 
+	  <input id="infoTypeId" type="hidden" value=1>
+	  <input id="venueId" type="hidden" name="venueId" value=0>
+	  <input id="venueDetailId" type="hidden" name="venueDetailId" value=0>
+	  <input class="btn btn-info cssVdSave" type="button" value="Save"/>
+	  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel" >
+	</form>
+	
+	<div id="venueDetailsDataTable" class="table-condensed">
+	  <input class="btn btn-info cssAddVenueDetails" type="button" value="Add Venue Details"/>
+	  <input class="btn btn-info cssGoToEvents" type="button" value="Events List"/>	
+	  <div id="gridDetails"></div>
+	  <div id='actionMenuDetails' style="display:none">
+		<ul>
+			<li>Edit</li> 					<!--fnShowForm({value}); -->
+			<li>Delete</li>					<!--fnDelete({value}); -->
+		</ul>
+	  </div>
+	</div>
+</div>
 </body>
 </html>
