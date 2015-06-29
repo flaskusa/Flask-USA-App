@@ -26,12 +26,13 @@
 <portlet:defineObjects />
 <link async href="http://fonts.googleapis.com/css?family=Average%20Sans" rel="stylesheet" type="text/css"/>
 <link async href="http://fonts.googleapis.com/css?family=Gochi%20Hand" rel="stylesheet" type="text/css"/>
+
 <body>
 
 <div class="table-responsive">          
 <div id="one">
     <div style="overflow: hidden;">
-            <div style="border: none;" id="listbox">
+            <div id="placeholder">
             </div>
     </div>
   <table id="viewevent">
@@ -59,45 +60,41 @@
     
  <div id="two" style="display:none; width:100%;">
  <div style="overflow: hidden; display:none" id="ContentPanel"></div>
-  <table>
- <tr>
+
+<table>
+<tr>
   <td style="background-color: #231F20;">
            <img src="<%=request.getContextPath()%>/img/Pre.png"/>
   </td>
   <td>
+          <div id="wowslider-container2" class="wowslider-container">
+		  <div class="ws_images" id="ws_images2"></div>
+		  </div>
+  </td>
+</tr>
     
-						<div id="wowslider-container2" class="wowslider-container">
-							<div class="ws_images" id="ws_images2"></div>
-						</div>
-
-		     </td>
-    </tr>
-    
-    <tr>
+<tr>
   <td style="background-color: #231F20;">
        <img src="<%=request.getContextPath()%>/img/at.png"/>
-         </td>
+  </td>
   <td> 
-  
-						<div id="wowslider-container3" class="wowslider-container">
-							<div class="ws_images" id="ws_images3"></div>
-						</div>
-
-		     </td>
- </tr> 
- <tr>
+       <div id="wowslider-container3" class="wowslider-container">
+	   <div class="ws_images" id="ws_images3"></div>
+	   </div>
+  </td>
+</tr> 
+<tr>
   <td style="background-color: #231F20;">
        <img src="<%=request.getContextPath()%>/img/Post.png"/>
   </td>
   <td>   
-   
-						<div id="wowslider-container4" class="wowslider-container">
-							<div class="ws_images" id="ws_images4"></div>
-						</div>
-
- </td>
- </tr>
+    	<div id="wowslider-container4" class="wowslider-container">
+		<div class="ws_images" id="ws_images4"></div>
+		</div>
+  </td>
+</tr>
 </table>
+
 	<input class="btn btn-info cssback" type="button" value="Back"/>
 	</br></br></br>
 </div>	
@@ -116,5 +113,4 @@
             </tr>
         </table>
 	</div>
-
 </body>
