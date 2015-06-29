@@ -13,74 +13,53 @@ function fnLoadList() {
      alert("MESSAGES.ERRORR_REGISTER_USER");
     }
    });
-
-	
 }
 
 function fnlist(tdata) {
- var source = {
-  localdata : tdata,
-  datatype : "json",
-  datafields : DATA_SOURCE.GET_FLASK_EVENT_LIST,
- };
- var dataAdapter = new $.jqx.dataAdapter(source);
- 
- var updatePanel = function (index) {
-     var container = $('<div style="margin: 5px;"></div>')
-     var leftcolumn = $('<div style="float: left; width: 45%;"></div>');
-     var rightcolumn = $('<div style="float: left; width: 40%;"></div>');
-     container.append(leftcolumn);
-     var datarecord = tdata[index];
-     var Eventname = "<div style='margin: 10px;'><b>Event Name:</b> <input id='eventName' type='text' value="+ datarecord.eventName +"></input></div>";
-     var Description = "<div style='margin: 10px;'><b>Description:</b> " + datarecord.description + "</div>";
-     var Image = "<div style='margin: 10px;'><b>Image:</b> <img height='50' width='40'src=" + datarecord.eventImagePath + "</div>";
-     $(leftcolumn).append(Eventname);
-     $(leftcolumn).append(Description);
-     $(leftcolumn).append(Image);
-     $("#ContentPanel").html(container.html());
- }
- 
- 
- 
-    $('#listbox').on('click', function (event) {
-    		$('#one').hide();
-    		$('#two').show();
-    		fnRenderEvents($("#repositoryId").val(),0,"Events");
-    });
-    // Create jqxListBox
-    $('#listbox').jqxListBox({ source: dataAdapter, displayMember: "Eventname", itemHeight: 70, scrollBarSize: 0, height: '100%', width: '100%', 
-        renderer: function (index, label, value) {
-            var datarecord = tdata[index];
-            var imgurl = datarecord.eventImagePath;
-            var img = '<img height="50" src="' + imgurl + '"/>';
-            var table = '<table><tr><td style="width: 55px;" rowspan="2">' + img + '</td><td><label class="control-label-color">' + datarecord.eventName + '</label></td></tr><tr><td><label class="control-label-nocolor" >' + datarecord.description + '</label></td></tr></table>';
-            return table;
-        }
-   
-    });
-    updatePanel(0);
-    $('#listbox').jqxListBox('refresh');
+	 var source = {
+	  localdata : tdata,
+	  datatype : "json",
+	  datafields : DATA_SOURCE.GET_FLASK_EVENT_LIST,
+	 };
+	 var divRow = $('<table/>',{'class':'tableSize'});
+	 for(var i in tdata)
+		{
+		    var divRowItem = $('<div/>',{'title':tdata[i].eventName});
+		 	var tempHTML = '<tr><td style="width:20%;"><div class="imgdiv"><img src="'+ tdata[i].eventImagePath + '" ></div><div class="lbldiv"><label class="control-label-color">' + tdata[i].eventName + '</label><label class="control-label-nocolor">' + tdata[i].description + '</label></div></td></tr>';
+		 	$(divRowItem).html(tempHTML);
+		 	$(divRowItem).appendTo($(divRow));
+		 	$(divRowItem).click(function(){
+		 		 $('#one').hide();
+		 		 $('#two').show();	
+		 		 
+		 		fnRenderEvents($("#repositoryId").val(),0,'Events',$(this).attr('title'));	 		
+		 	});
+	    }
+	 	$(divRow).appendTo($("#placeholder"));
 }
 
 $(document).ready(function(){
-		$('#listbox').jqxListBox('refresh');
-		fnLoadList();
-		$(".cssback").click(function(){
-			$('#one').show();
-			$('#two').hide();
-		});
+	
+	fnLoadList();
+	$(".cssback").click(function(){
+		$('#one').show();
+		$('#two').hide();
+	});
+	 var targetUrl = $(this).attr('#one');
+	  window.history.pushState({url: "" + targetUrl + ""}, null, targetUrl);
+	  window.onpopstate = function(e) {
+		    window.history.go(e.state ? e.state.url : null);
+		};
 });
 
-function fnRenderEvents(repositoryId,parentFolderId,folderName){
-	//var folderId = 0;
+function fnRenderEvents(repositoryId,parentFolderId,folderName,eventName){
 	var folderId;
 	var flaskRequest = new Request();
 		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
 		flaskRequest.sendGETRequest('/api/jsonws/dlapp/get-folder', params, 
 			function (data){
 				folderId = data.responseJson.folderId;
-				var eventFolderName = renderSliders();
-				fnGetEventFolder(repositoryId,folderId,eventFolderName);
+				fnGetEventFolder(repositoryId,folderId,eventName);
 			} ,
 			function (data){
 				folderId = 0;
@@ -91,13 +70,13 @@ function fnRenderEvents(repositoryId,parentFolderId,folderName){
 
 function fnGetEventFolder(repositoryId,parentFolderId,folderName){
 	var folderId;
-	//var eventType = [{"General":1,"PreEvent":2,"DuringEvent":3,"PostEvent":4}];
 	var flaskRequest = new Request();
 		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
 		console.log(params);
 		flaskRequest.sendGETRequest('/api/jsonws/dlapp/get-folder', params, 
 			function (data){
 					folderId = data.responseJson.folderId;
+					console.log(folderId);
 					fnRenderSliders(repositoryId,folderId,"Pre-Event",2);
 					fnRenderSliders(repositoryId,folderId,"During-Event",3);
 					fnRenderSliders(repositoryId,folderId,"Post-Event",4);
