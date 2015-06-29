@@ -1,3 +1,17 @@
+.imgdiv{
+	float:left; 
+	width:50px;
+	height:auto;
+}
+
+.lbldiv{
+	width:80%;
+	margin-left: 60px;
+}
+
+.tableSize{ width:100%;}
+
+
 div#fixedfooter {
 	position:fixed; 
 	z-index:99;
@@ -54,17 +68,6 @@ div#fixedfooter {
   text-align: left;
 }
 
-
-@media (min-width: 767px)
-{
-
-div#placeholder {
-  height: 100px;
-  overflow: auto;
-}
-
-}
-
 @media (max-width: 767px)
 {
 		.table-responsive .button
@@ -76,15 +79,18 @@ div#placeholder {
 		{
 			font-size:12px !important; 
 		}
+		
+		.lbldiv
+		{ 
+			margin-top: 0px !important;
+		}
+		
 		.control-label-nocolor
 		{
 			font-size:12px !important; 
 			margin-left: 6px;
 		}
-		div#placeholder {
-		  height: 130px;
-		  overflow: auto;
-		}
+	
 		.aui input[type="text"] {
 		  height: 30px;
 		  width: 96.7% !important;
@@ -109,9 +115,12 @@ div#placeholder {
 	margin-left: 6px;
 }
 
+div#one {
+  padding: 10px;
+}
 div#placeholder 
 {
-	  height: 200px;
+	  height: 300px;
 	  overflow: auto;
 }
 div#fixedfooter2 
