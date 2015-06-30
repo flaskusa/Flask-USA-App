@@ -153,6 +153,7 @@ _eventModel.loadContentType = function(elementId,selectedId){
 								}));
 							});
 							selectList.val(selectedId);
+							selectList.change();
 					} ,
 					function (data){
 						console.log("Error in getting content types: " + data );

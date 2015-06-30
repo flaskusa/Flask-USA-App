@@ -9,7 +9,7 @@ function addClickHandlers(){
 	$(".cssAddUser").click(function(){
 			eventForm.trigger('reset')
 			$("#eventDataTable").hide();
-			eventForm.show();
+			$("#formContainer").show();
 			_eventModel.loadVenues('venueId');
 			_eventModel.loadEventType('eventTypeId');
 	});
@@ -36,17 +36,22 @@ function addClickHandlers(){
 	$(".cssVdSave").click(function(){
 		saveVenueDetails();
 	});	
+	
+	$(".cssAddVenueDetails").click(function(){
+		_eventModel.loadContentType('infoTypeCategoryId',0);
+		$("#venueDetailsForm").show();
+		$("#venueDetailsDataTable").hide();
+	});	
 
 	$(".cssVdCancel").click(function(){
-		$("#eventDataTable").hide();
-		$("#venueDetailsContainer").hide();
-		eventForm.show();
+		$("#venueDetailsForm").hide();
+		$("#venueDetailsDataTable").show();
 	});	
 	/* Click handler for cancel button*/
 
 	$(".clsCancel").click(function(){
 			$("#eventDataTable").show();
-			eventForm.hide();
+			$("#formContainer").hide();
 	});
 	
 	$(".cssDelUser").click(function() {
@@ -74,21 +79,6 @@ function addClickHandlers(){
 	
 		/*	Toggle search boxes */
 		$(".cssSearchUser").click(GRID_PARAM.toggleSearchBoxes);
-		
-	$("#AddVenue").click(function(){
-		window.location.href="/web/flask/mvenues"
-	});
-	
-	$(".cssAddVenueDetails").click(function(){
-		$('#venueDetailsForm').show();
-		$('#venueDetailsDataTable').hide();
-	});	
-
-	$(".cssGoToEvents").click(function(){
-		$("#eventDataTable").hide();
-		$("#venueDetailsContainer").hide();
-		eventForm.show();
-	});	
 }
 
 function loadData(){
@@ -103,12 +93,17 @@ function loadData(){
 	});
 }
 
-function loadVenueDetailsData(venueId){
+function loadVenueDetailsData(venueId,infoTypeId){
 	var flaskRequest = new Request();
 	params = {'venueId':venueId};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_VENUE_DETAILS, params, 
 	function(data){/*success handler*/
-		console.log(venueId);
+		if(infoTypeId>0){
+		    var returnedData = $.grep(data, function(element, index){
+		    	return element.infoTypeId == infoTypeId;
+		    });
+		    data = returnedData;
+		}
 		GRID_PARAM.updateGrid(data);
 	} , function(error){ /*failure handler*/
 		console.log(error);
@@ -120,7 +115,6 @@ function loadVenueDetailsData(venueId){
 function contextMenuHandler(menuItemText, rowData){
 	var args = event.args;
 	if (menuItemText  == "Edit") {
-		console.log(rowData);
 		editEvent(rowData);
 		return false;
 	}else if(menuItemText == "Delete"){
@@ -184,7 +178,8 @@ function editEvent(rowData) {
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("eventForm",  _eventModel.DATA_MODEL.EVENT, rowData, function(){});
 		$("#eventDataTable").hide();
-		eventForm.show();
+		//eventForm.show();
+		$("#formContainer").show();
 		_eventModel.loadVenues('venueId',  rowData.venueId);
 		_eventModel.loadEventType('eventTypeId',  rowData.eventTypeId);
 		var date = new Date(parseInt(rowData.eventDate));
@@ -193,13 +188,37 @@ function editEvent(rowData) {
 		$('#startTime').jqxDateTimeInput('setDate', sTime);
 		var eTime = new Date(parseInt(rowData.endTime));
 		$('#endTime').jqxDateTimeInput('setDate', eTime);
-		fnRenderEvents(repositoryId,0,"Events");
 		$(".AddContent").click(function(){
-			loadVenueDetailsData(rowData.venueId);
-			_eventModel.loadContentType('infoTypeCategoryId');
-			fnRenderContentType($(this).attr("alt"));
+			//eventForm.hide();
+			$("#formContainer").hide();
+			$('#venueDetailsForm').hide();
+			$("#venueDetailsContainer").show();
+			$("#venueDetailsDataTable").show();			
+			$("#infoTypeId").val($(this).attr("alt"));
 		})
 }
+
+$(".infoTypeCat").click(function(){
+	var InfoTypeCd = Number($(this).attr('data-value'));
+	console.log(InfoTypeCd);
+	createTable({},_eventModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventModel.GRID_DATA_MODEL.VENUEDETAILS);
+	loadVenueDetailsData($('#eventForm #venueId').val(),InfoTypeCd);
+	$("#venueDetailsContainer").show();
+    switch($(this).attr('data-value')) {
+    case "1":
+    	$('.title-text').html('General');
+        break;
+    case "2":
+    	$('.title-text').html('Pre-Event');
+        break;
+    case "3":
+    	$('.title-text').html('During-Event');
+        break;
+    case "4":
+    	$('.title-text').html('Post-Event');
+        break;
+    }        
+});
 
 /* Save Event */
 function saveEvent(){
@@ -232,13 +251,13 @@ function saveEvent(){
 function initForm(){
 		$("#eventDate").jqxDateTimeInput({width: '260px', height: '35px',formatString: "MM-dd-yyyy" });
 		$("#Active").jqxCheckBox({ width: 120, height: 25 });
-		$('#jqxtabs').jqxTabs({width: '100%',height: 350});
+		/*$('#jqxtabs').jqxTabs({width: '100%',height: 350});*/
 		$("#startTime").jqxDateTimeInput({ width: '100px', height: '23px', formatString: 'hh:mm tt', showCalendarButton: false});
 		$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'hh:mm tt', showCalendarButton: false});
-		$('#jqxtabs').bind('selected', function (event) {
+		/*$('#jqxtabs').bind('selected', function (event) {
 			    var item = event.args.item;
 			    var title = $('#jqxtabs').jqxTabs('getTitleAt', item);
-		});
+		});*/
 		$("#venueDetailsContainer").hide();
 }
 
@@ -267,8 +286,8 @@ function eventFolder(repositoryId, eventsFolderId, eventName){
 			  function (data){
 				  if(data=="com.liferay.portlet.documentlibrary.NoSuchFolderException")
 			    	{
-			    		createFolder(repositoryId, eventsFolderId, eventName, eventName);
-			    		setTimeout(function(){createInfoTypeFolders(repositoryId, eventsFolderId, eventName)},500);	
+			    		//createFolder(repositoryId, eventsFolderId, eventName, eventName);
+			    		//setTimeout(function(){createInfoTypeFolders(repositoryId, eventsFolderId, eventName)},500);	
 			    	}
 		      });
 }
@@ -288,91 +307,8 @@ function getFolderId(repositoryId,parentFolderId,folderName){
 			});
 }
 
-function fnRenderEvents(repositoryId,parentFolderId,folderName){
-	var folderId = 0;
-	var flaskRequest = new Request();
-		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
-		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
-			function (data){
-				folderId = data.folderId;
-				fnGetEventFolder(repositoryId,folderId,$("#eventName").val());
-			} ,
-			function (data){
-				folderId = 0;
-				console.log("Error in getting Folder: " + data );
-			});
-		return folderId;
-}
-
-function fnGetEventFolder(repositoryId,parentFolderId,folderName){
-	var folderId = 0;
-	//var eventType = [{"General":1,"PreEvent":2,"DuringEvent":3,"PostEvent":4}];
-	var flaskRequest = new Request();
-		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
-		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
-			function (data){
-					folderId = data.folderId;
-					fnRenderSliders(repositoryId,folderId,"General",1);
-					fnRenderSliders(repositoryId,folderId,"Pre-Event",2);
-					fnRenderSliders(repositoryId,folderId,"During-Event",3);
-					fnRenderSliders(repositoryId,folderId,"Post-Event",4);
-			} ,
-			function (data){
-				folderId = 0;
-				console.log("Error in getting Folder: " + data );
-			});
-		return folderId;
-}
-
-function fnRenderSliders(repositoryId,parentFolderId,folderName,Count){
-	var folderId = 0;
-	var ws_images = "#ws_images"+Count;
-	var wowslider_container = "#wowslider-container"+Count;
-	var flaskRequest = new Request();
-		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
-		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
-			function (data){
-				folderId = data.folderId;
-				displayImages(repositoryId, folderId, ws_images, wowslider_container)
-			} ,
-			function (data){
-				folderId = 0;
-				console.log("Error in getting Folder:"+data);
-			});
-		return folderId;
-}
-
-function displayImages(repositoryId, folderId, ws_images, wowslider_container)
-{
- var images;
- Liferay.Service('/dlapp/get-file-entries',{
-      repositoryId: repositoryId,
-      folderId: folderId
-    },
-    function(obj) {
-      if(typeof obj=="object" && obj.length > 0){
-			var temp_html;
-			var imageUrl;
-			var uploadedby;
-			temp_html="<ul>";
-			for(var i=0;i<obj.length;i++)
-			{
-				imageUrl = "/documents/"+repositoryId+"/"+folderId+"/"+obj[i].title;
-				uploadedby = "uploaded by " + obj[i].userName;
-				temp_html=temp_html+"<li><img src="+imageUrl+" alt='"+uploadedby+"' title='"+uploadedby+"' id='wows1_0'/></li>";
-			}
-			temp_html=temp_html+"</ul>";
-			$(ws_images).html(temp_html);
-			$(wowslider_container).wowSlider();
-      }
-      else{
-    	  //$(wowslider_container).html("No images found");
-      }
- });
-}
-
 /* creates folders for each info type */
-function createInfoTypeFolders(repositoryId, eventsFolderId, eventName)
+/*function createInfoTypeFolders(repositoryId, eventsFolderId, eventName)
 {
 	var flaskRequest = new Request();
 	params= {'repositoryId': repositoryId, 'parentFolderId': eventsFolderId, 'name': eventName};
@@ -405,7 +341,8 @@ function fnRenderContentType(InfoTypeID){
 	$("#infoTypeId").val(InfoTypeID);
 	$("#venueDetailsContainer").show();
 	createTable({},_eventModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventModel.GRID_DATA_MODEL.VENUEDETAILS);
-	$("#eventForm").hide();
+	//$("#eventForm").hide();
+	$("#formContainer").hide();
 }
 
 $(document).ready(function(){
@@ -523,7 +460,7 @@ $(document).ready(function(){
                       
     $("#infoTypeCategoryId").change(function(){
         $(formArea).html("");
-        var selectedContentType = $("option:selected", this).text().toLowerCase();;
+        var selectedContentType = $("option:selected", this).text().toLowerCase();
         fnRenderForm(selectedContentType);
     });
 });
@@ -567,7 +504,7 @@ function fnBuildHtml(Obj){
             default:
                 console.log("Nothing selected");
         }        
-    });        
+    });      
 }
 
 function fnBuildInput(Obj){
@@ -616,8 +553,8 @@ function fnBuildUpload(Obj){
 	    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
 	    var objForm = $('<form/>',{'class':'dropzone','id':'venueImages','action':Obj[0].action}).appendTo(objFormGroup);
 	    $(objForm).appendTo(objControls);
-	    var objHiddenId = $('<input/>',{'id':Obj[0].id,'type':'hidden','value':'24490'}).appendTo($(formArea));
-	    $(objHiddenId).appendTo(objForm);
+	    //var objHiddenId = $('<input/>',{'id':Obj[0].id,'type':'hidden','value':'24490'}).appendTo($(formArea));
+	    //$(objHiddenId).appendTo(objForm);
 	    var dropZone = new Dropzone($(objForm).get(0),{});	
 	    dropZone.on("addedfile", function(file) {
 	        //alert("Do you wish to add information about images?");
@@ -636,6 +573,7 @@ function saveVenueDetails(){
 					formData[item.name] = val;	
 				});
 				formData.venueId=$('#eventForm #venueId').val();
+				formData.eventId=$('#eventForm #eventId').val();
 				return formData;
 			});
 	var flaskRequest = new Request();
@@ -648,7 +586,9 @@ function saveVenueDetails(){
 	flaskRequest.sendGETRequest(url, params, 
 				function (data){
 					_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.V_SAVE);
-					loadVenueDetailsData(params.venueId);
+					//createTable({},_eventModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventModel.GRID_DATA_MODEL.VENUEDETAILS);
+					//need to change logic here for active
+					loadVenueDetailsData(params.venueId,params.infoTypeId);
 					$('#venueDetailsForm').hide();
 					$('#venueDetailsDataTable').show();	
 				} ,
@@ -670,7 +610,9 @@ function deleteVenueDetail(venueDetailId,venueId) {
 		flaskRequest.sendPOSTRequest(_eventModel.SERVICE_ENDPOINTS.DELETE_VENUE_DETAIL , param, 
 			function (data){
 					_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
-					loadVenueDetailsData(venueId);
+					createTable({},_eventModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventModel.GRID_DATA_MODEL.VENUEDETAILS);
+					//Change
+					loadVenueDetailsData(venueId,1);
 			} ,
 			function (data){
 					_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);
@@ -697,11 +639,14 @@ function editVenueDetail(rowData) {
 		var repositoryId = $("#repositoryId").val();
 		$('#venueDetailsForm #venueId').val($('#eventForm #venueId').val());
 		$("#venueDetailId").val(rowData.venueDetailId);
-		$("#infoTypeCategoryId").val(rowData.infoTypeCategoryId);
-		$("#infoTypeCategoryId").change();
 		$('#venueDetailsForm').show();
 		$('#venueDetailsDataTable').hide();
-		_flaskLib.loadDataToForm("venueDetailsForm",  _eventModel.DATA_MODEL.VENUEDETAILS, rowData, function(){});
+		_eventModel.loadContentType('infoTypeCategoryId',rowData.infoTypeCategoryId);
+		setTimeout(
+				  function() 
+				  {
+					  _flaskLib.loadDataToForm("venueDetailsForm",  _eventModel.DATA_MODEL.VENUEDETAILS, rowData, function(){});
+				  }, 500);		
 }
 
 function formatUnixToTime(tdate){var date = new Date(tdate);

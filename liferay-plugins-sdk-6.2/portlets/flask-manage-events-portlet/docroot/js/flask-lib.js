@@ -37,6 +37,8 @@ _flaskLib.loadDataToForm = function(formId, model, data,  customSetData){
 				if( ele.length == 1 && typeof ele[0].tagName != undefined){
 					if(ele[0].tagName.toLowerCase() =='input'){
 						var tempVal =eval("data." + column.name);
+						console.log(column.name);
+						console.log(tempVal);
 						tempVal = tempVal == undefined ? "" : tempVal;
 						ele.val(tempVal)
 					}
