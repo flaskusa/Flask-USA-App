@@ -29,7 +29,6 @@ var bCreated;
 Liferay.Portlet.ready(initialize);
 function initialize(portletId, portlet){
 	if(portletId == "flaskmanageevents_WAR_flaskmanageeventsportlet") {
-		$("#eventForm").hide();
 		createTable({},_eventModel.DATA_MODEL.EVENT, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Event"],_eventModel.GRID_DATA_MODEL.EVENT);
 		loadData();
 		addClickHandlers();
@@ -42,6 +41,106 @@ function initialize(portletId, portlet){
 <body class='default'>
 <input type="hidden" id="repositoryId" value="<%=repositoryId%>"/>
 <div id="action-msg" style="display:none">
+</div>
+<div id='formContainer' style="display:none">
+	<ul class="nav nav-tabs">
+	  <li><a href="#events" data-toggle="tab">Manage Events</a></li>
+	  <li class="dropdown">
+	  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Content<b class="caret"></b></a>
+	    <ul class="dropdown-menu">
+	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="1">General</a></li>
+	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="2">Pre-Event</a></li>
+	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="3">During-Event</a></li>
+	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="4">Pre-Event</a></li>
+	    </ul>
+	  </li>  
+	</ul>
+	<div class="tab-content">
+	  <div class="tab-pane active" id="events">
+		<form id="eventForm">
+		  <div class="form-group">
+		    <div class="controls">
+			    <label class="control-label" for="eventName">Event Name:</label>
+			    <input name="eventName" id="eventName" class="form-control" type="text" onchange="$('#description').val($(this).val());"/> <div id='Active'>Active</div>
+			    <input type="hidden" id="description" value=""/>
+			</div> 
+		  </div>
+		   <div class="form-group">
+			    <label class="control-label" for="eventTypeId">Event Type:</label>
+				<div class="controls">
+					<select id="eventTypeId" name="eventTypeId" class="form-control-select"></select>
+				</div>
+		   </div>
+		    <div class="form-group">
+		    	<label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
+			   			<div id="eventDate"></div>
+			  	</div>
+		   </div> 
+		
+		   <div class="form-group">
+		    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
+		    <div class="controls">
+		      <div id="startTime"></div>
+		    </div>
+		  </div>
+		
+			<div class="form-group">
+			<label  id="EndTime" class="control-label" for="endTime">End Time:</label>
+		    	<div class="controls">
+		    		 <div id="endTime"></div>
+		    	</div>
+		  </div>
+		  <br/>
+		  <div class="form-group">
+			    <label class="control-label" for="venueId">Venue:</label>
+				<div class="controls">
+					<select id="venueId" name="venueId" class="form-control-select"></select>
+				</div>
+		   </div>
+		  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
+		  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
+		  <input type="hidden" id="eventImagePath" value="">	
+		  <input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
+		  <input id="eventId" type="hidden" value="0">
+		</form>  
+	  </div>
+	  <div class="tab-pane" id="contents">
+		<div id="venueDetailsContainer">
+			<h3><span class="title-text"></span></h3>
+			<form id="venueDetailsForm" style="display:none">
+			  <input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
+			  <div class="form-group">
+				    <label class="control-label" for="infoTypeCategoryId">Content Type:</label>
+					<div class="controls">
+						<select id="infoTypeCategoryId" name="infoTypeCategoryId" class="form-control-select"></select>
+					</div>
+			   </div>   
+			   <div id="contentTypeForm">
+			   		Please select content type.
+			   </div>
+			  
+			  <input id="venueId" type="hidden" name="venueId" value=0>
+			  <input id="eventId" type="hidden" value="25912">
+			  <input id="infoTypeId" type="hidden" value=1>
+			  <input id="venueDetailId" type="hidden" name="venueDetailId" value=0>
+			  <input class="btn btn-info cssVdSave" type="button" value="Save"/>
+			  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel" >
+			</form>
+			
+			<div id="venueDetailsDataTable" class="table-condensed">
+			  <input class="btn btn-info cssAddVenueDetails" type="button" value="Add Event Details"/>
+			  <div id="gridDetails"></div>
+			</div>
+			
+			<div id='actionMenuDetails' style="display:none">
+				<ul>
+					<li>Edit</li> 					<!--fnShowForm({value}); -->
+					<li>Delete</li>					<!--fnDelete({value}); -->
+				</ul>
+		  	</div>
+		</div>  
+	  </div>
+	</div>
 </div>
 
 
@@ -65,141 +164,6 @@ function initialize(portletId, portlet){
 		<li>Edit</li> 					<!--fnShowForm({value}); -->
 		<li>Delete</li>					<!--fnDelete({value}); -->
 	</ul>
-</div>
-
-<form id="eventForm" style="display:none">
-  <div class="form-group">
-    <div class="controls">
-	    <label class="control-label" for="eventName">Event Name:</label>
-	    <input name="eventName" id="eventName" class="form-control" type="text" onchange="$('#description').val($(this).val());"/> <div id='Active'>Active</div>
-	    <input type="hidden" id="description" value=""/>
-	</div> 
-  </div>
-   <div class="form-group">
-	    <label class="control-label" for="eventTypeId">Event Type:</label>
-		<div class="controls">
-			<select id="eventTypeId" name="eventTypeId" class="form-control-select"></select>
-		</div>
-   </div>
-    <div class="form-group">
-    	<label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
-	   			<div id="eventDate"></div>
-	  	</div>
-   </div> 
-
-   <div class="form-group">
-    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
-    <div class="controls">
-      <div id="startTime"></div>
-    </div>
-  </div>
-
-	<div class="form-group">
-	<label  id="EndTime" class="control-label" for="endTime">End Time:</label>
-    	<div class="controls">
-    		 <div id="endTime"></div>
-    	</div>
-  </div>
-  <br/>
-  <div class="form-group">
-	    <label class="control-label" for="venueId">Venue:</label>
-		<div class="controls">
-			<select id="venueId" name="venueId" class="form-control-select"></select>
-			<input id="AddVenue" class="btn btn-info" type="button" value="Add Venue"/>
-		</div>
-   </div>
-   <div class="form-group">
-		<div id="jqxtabs">
-		    <ul style="margin-left: 20px;">
-		        <li>General</li>
-		        <li>Pre-Event</li>
-		        <li>During-Event</li>
-		        <li>Post-Event</li>
-		    </ul>
-		    <div>
-					<div style="height: 45px;">
-						<input class="btn btn-info floatPosition AddContent" type="button" value="Add Content" alt="1"/>
-					</div>
-					<div>    
-						<div id="wowslider-container1" class="wowslider-container">
-							<div class="ws_images" id="ws_images1"></div>
-						</div>
-					</div>
-		    </div>
-		    <div>
-					<div style="height: 45px;">
-						<input class="btn btn-info floatPosition AddContent" type="button" value="Add Content" alt="2"/>
-					</div>
-					<div>    
-						<div id="wowslider-container2" class="wowslider-container">
-							<div class="ws_images" id="ws_images2"></div>
-						</div>
-					</div>
-		    </div>
-		    <div>
-					<div style="height: 45px;">
-						<input class="btn btn-info floatPosition AddContent" type="button" value="Add Content" alt="3"/>
-					</div>
-					<div>    
-						<div id="wowslider-container3" class="wowslider-container">
-							<div class="ws_images" id="ws_images3"></div>
-						</div>
-					</div>
-		    </div>
-		    <div>
-					<div style="height: 45px;">
-						<input class="btn btn-info floatPosition AddContent" type="button" value="Add Content" alt="4"/>
-					</div>
-					<div>    
-						<div id="wowslider-container4" class="wowslider-container">
-							<div class="ws_images" id="ws_images4"></div>
-						</div>
-					</div>
-		    </div>
-		</div>
-	</div>
-  <input type="hidden" id="eventImagePath" value="">	
-  <input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
-  <input class="btn btn-info clsDelete" type="button" value="Delete"/>
-  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
-  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
-  <input id="eventId" type="hidden" value="0">
-  <div class="yui3-skin-sam">
-	 <div id="modal"></div>
-  </div>  
-</form>
-
-<div id="venueDetailsContainer">
-	<form id="venueDetailsForm" style="display:none">
-	  <input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
-	  <div class="form-group">
-		    <label class="control-label" for="infoTypeCategoryId">Content Type:</label>
-			<div class="controls">
-				<select id="infoTypeCategoryId" name="infoTypeCategoryId" class="form-control-select"></select>
-			</div>
-	   </div>   
-	   <div id="contentTypeForm">
-	   		Please select content type.
-	   </div>
-		 
-	  <input id="infoTypeId" type="hidden" value=1>
-	  <input id="venueId" type="hidden" name="venueId" value=0>
-	  <input id="venueDetailId" type="hidden" name="venueDetailId" value=0>
-	  <input class="btn btn-info cssVdSave" type="button" value="Save"/>
-	  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel" >
-	</form>
-	
-	<div id="venueDetailsDataTable" class="table-condensed">
-	  <input class="btn btn-info cssAddVenueDetails" type="button" value="Add Venue Details"/>
-	  <input class="btn btn-info cssGoToEvents" type="button" value="Events List"/>	
-	  <div id="gridDetails"></div>
-	  <div id='actionMenuDetails' style="display:none">
-		<ul>
-			<li>Edit</li> 					<!--fnShowForm({value}); -->
-			<li>Delete</li>					<!--fnDelete({value}); -->
-		</ul>
-	  </div>
-	</div>
 </div>
 </body>
 </html>
