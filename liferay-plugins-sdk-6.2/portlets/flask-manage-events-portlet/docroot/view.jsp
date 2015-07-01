@@ -51,7 +51,7 @@ function initialize(portletId, portlet){
 	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="1">General</a></li>
 	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="2">Pre-Event</a></li>
 	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="3">During-Event</a></li>
-	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="4">Pre-Event</a></li>
+	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="4">Post-Event</a></li>
 	    </ul>
 	  </li>  
 	</ul>
