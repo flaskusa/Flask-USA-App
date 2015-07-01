@@ -138,6 +138,12 @@ function initialize(portletId, portlet){
 					<li>Delete</li>					<!--fnDelete({value}); -->
 				</ul>
 		  	</div>
+		  	
+		  	<div id='displayImages'>
+		  		    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 809px; height: 150px; overflow: hidden;">
+				        <div u="slides" id="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 809px; height: 150px; overflow: hidden;"></div>
+					</div>
+		  	</div>
 		</div>  
 	  </div>
 	</div>
