@@ -191,6 +191,23 @@ $(".infoTypeCat").click(function(){
 	var InfoTypeCd = Number($(this).attr('data-value'));
 	createTable({},_eventModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventModel.GRID_DATA_MODEL.VENUEDETAILS);
 	loadVenueDetailsData($('#eventForm #venueId').val(),InfoTypeCd);
+	
+	var click = new Date();
+	var lastClick = new Date();
+	var lastRow = -1;
+	$("#gridDetails").bind('rowclick', function (event) {
+	    click = new Date();
+	    if (click - lastClick < 300) {
+	        if (lastRow == event.args.rowindex) {
+	        	var row = event.args.rowindex;
+        	 	var datarow = $(this).jqxGrid('getrowdata', row);
+        	 	editVenueDetail(datarow);
+	        }
+	    }
+	    lastClick = new Date();
+	    lastRow = event.args.rowindex;
+	});
+	
 	$("#venueDetailsContainer").show();
     switch($(this).attr('data-value')) {
     case "1":
