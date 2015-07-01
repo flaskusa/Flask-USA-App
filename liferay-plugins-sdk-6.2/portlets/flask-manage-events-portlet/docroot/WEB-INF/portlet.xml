@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>flask-manage-events</portlet-name>
 		<display-name>Flask Manage Events</display-name>
-		<portlet-class>com.rumbasolutions.flask.managevenue.ManageVenuePortletAction</portlet-class>
+		<portlet-class>com.rumbasolutions.flask.manageevent.ManageEventPortletAction</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>
