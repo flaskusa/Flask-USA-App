@@ -115,7 +115,9 @@ function displayImages(repositoryId, folderId, ws_images, wowslider_container)
       folderId: folderId
     },
     function(obj) {
-      if(typeof obj=="object" && obj.length > 0){
+    	
+      if(typeof obj=="object" && obj.length > 0)
+      {
 			var temp_html;
 			var imageUrl;
 			var uploadedby;
@@ -132,8 +134,20 @@ function displayImages(repositoryId, folderId, ws_images, wowslider_container)
 			$(ws_images).html(temp_html);
 			$(wowslider_container).wowSlider();
       }
-      else{
-    	  //$(wowslider_container).html("No images found");
+      else
+      {
+    	  var temp_html;
+			var imageUrl;
+			var uploadedby;
+			temp_html="<ul>";
+				imageUrl = "/flask-view-events-portlet/img/NoData.png";
+				uploadedby = "No data";
+				temp_html=temp_html+"<li><img src='"+imageUrl+"' alt='"+uploadedby+"' title='"+uploadedby+"' id='wows1_0'/></li>";
+			temp_html=temp_html+"</ul>";
+			console.log(ws_images);
+			console.log(wowslider_container);
+			$(ws_images).html(temp_html);
+			$(wowslider_container).wowSlider();
       }
  });
 }
