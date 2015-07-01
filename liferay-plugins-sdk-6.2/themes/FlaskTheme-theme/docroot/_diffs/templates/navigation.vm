@@ -8,12 +8,8 @@
 		<li><a href="#">FLASK PROMOTIONS</a></li>
 		<li><span>POST-GAME</span><br/><a href="#">ENTERTAINMENT OPTIONS</a></li>
 		<li><a href="#">FLASK PROMOTIONS</a></li>
-		<li><a href="$menu_admin_user_url">PROFILE</a></li>
-		<li><a href="#">MY EVENTS</a></li>
-		<li><a href="#">MY TAILGATE</a></li>
-		<li><a href="#">MY GROUPS</a></li>
-		<li><a href="#">MY FRIENDS</a></li>
-		<li><a href="#">NOTIFICATIONS</a></li>
+	<!--	<li><a href="$menu_admin_user_url">PROFILE</a></li> -->
+		
 		<li><a href="#">EVENT AND CITY SEARCH</a></li>
 	</ul>
 </div>
