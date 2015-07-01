@@ -54,15 +54,16 @@ public class FlaskDocLibUtil {
 		return folder;
 	}
 	
-	public static Folder createEventContentTypeFolder(long eventId, long infoTypeId, long infoTypeCategoryId, ServiceContext serviceContext) throws PortalException, SystemException{
+	public static Folder createEventContentTypeFolder(long eventId, long infoTypeId, long infoTypeCategoryId,long venueDetailId, ServiceContext serviceContext) throws PortalException, SystemException{
 		long repositoryId = getFlaskRepositoryId();
 		long userId = serviceContext.getUserId();
 		Folder folder = getOrCreateFolder(_eventRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
-		String eventFolderName = folder.getName();
+		String eventFolderName = folder.getName()+"-"+eventId;
 		Folder eventFolder = getOrCreateFolder(eventFolderName, folder.getFolderId(), folder.getRepositoryId(), userId, serviceContext);
 		Folder infoTypeFolder = getOrCreateFolder(String.valueOf(infoTypeId), eventFolder.getFolderId(), eventFolder.getRepositoryId(),userId, serviceContext);
 		Folder infoTypeContentFolder = getOrCreateFolder(String.valueOf(infoTypeCategoryId), infoTypeFolder.getFolderId(), infoTypeFolder.getRepositoryId(),userId, serviceContext);
-		return infoTypeContentFolder;
+		Folder venueDetailFolder = getOrCreateFolder(String.valueOf(venueDetailId), infoTypeContentFolder.getFolderId(), infoTypeContentFolder.getRepositoryId(),userId, serviceContext);
+		return venueDetailFolder;
 	}
 	
 	public static Folder getEventRootFolder(ServiceContext serviceContext) throws PortalException, SystemException{

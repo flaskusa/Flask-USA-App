@@ -37,12 +37,14 @@ public class ManageEventPortletAction extends MVCPortlet {
 	
 	private static Log LOGGER = LogFactoryUtil.getLog(ManageEventPortletAction.class);
 	
-	private final String EVENT_ID_QSTR = "eventId";
-	private final String INFO_TYPE_ID_QSTR = "infoTypeId";
-	private final String INFO_TYPE_CON_ID_QSTR = "infoTypeCategoryId";
+	private final String EVENT_ID_QSTR = "_eventId";
+	private final String INFO_TYPE_ID_QSTR = "_infoTypeId";
+	private final String INFO_TYPE_CON_ID_QSTR = "_infoTypeCategoryId";
+	private final String EVENT_DETAIL_ID_QSTR= "_venueDetailId";
 	private long _eventId = 0;
 	private long _infoTypeId = 0;
 	private long _infoTypeCategoryId = 0;
+	private long _venueDetailId = 0;
 	private ServiceContext _serviceContext;
 	Folder _eventFolder=null;
 	
@@ -73,6 +75,7 @@ public class ManageEventPortletAction extends MVCPortlet {
 			_eventId = getEventId(formItems);
 			_infoTypeId = getInfoTypeId(formItems);		
 			_infoTypeCategoryId = getInfoTypeContentId(formItems);
+			_venueDetailId = getEventDetailId(formItems);
 			
 			createUploadFolder(uploadPath);
 			
@@ -109,7 +112,7 @@ public class ManageEventPortletAction extends MVCPortlet {
 			uploadDir.mkdir();
 		}
 		try {
-			_eventFolder = FlaskDocLibUtil.createEventContentTypeFolder(_eventId,_infoTypeId,_infoTypeCategoryId, _serviceContext);
+			_eventFolder = FlaskDocLibUtil.createEventContentTypeFolder(_eventId,_infoTypeId,_infoTypeCategoryId,_venueDetailId, _serviceContext);
 		}
 		catch (Exception e) {
 			LOGGER.error("Error in creating venue folder in Document Media Library", e);
@@ -165,5 +168,17 @@ public class ManageEventPortletAction extends MVCPortlet {
 		}
 		return eventId;
 	}
-	
+
+	private long getEventDetailId(List<FileItem> formItems){
+		long infoTypeContId = 0;
+		 
+		for (FileItem item : formItems){
+			if(item.getFieldName().contentEquals(EVENT_DETAIL_ID_QSTR)){
+				infoTypeContId =  Long.parseLong(item.getString());
+				break;
+			}
+		}
+		return infoTypeContId;
+	}
+		
 }
