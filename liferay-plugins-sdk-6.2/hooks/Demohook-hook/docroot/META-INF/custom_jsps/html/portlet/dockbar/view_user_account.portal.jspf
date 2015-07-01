@@ -87,7 +87,13 @@
 					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-user" label="Manage Users" title="Manage Flask Users"  />
 					<aui:nav-item href="<%= manageEventUrl %>" iconCssClass="icon-user" label="Manage Events" title="Manage Events"  />
 					<aui:nav-item href="<%= manageVenueUrl %>" iconCssClass="icon-user" label="Manage Venue" title="Manage Venue"  />
-					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="Manage Advertisements" title="Manage Advertisements"/>
+					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="Manage Ads" title="Manage Advertisements"/>
+				
+					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="My Events" title="My Events"/>
+					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="My Tailgate" title="My Tailgate"/>
+					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="My Groups" title="My Groups"/>
+					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="My Friends" title="My Friends"/>
+					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="Notification" title="Notification"/>
 				</c:if>
 				<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-user" label="my-account" title="my-account"  />
 			</c:if>
