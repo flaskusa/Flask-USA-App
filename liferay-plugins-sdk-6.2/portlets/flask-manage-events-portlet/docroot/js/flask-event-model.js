@@ -13,6 +13,7 @@ _eventModel.SERVICE_ENDPOINTS = {
 	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
 	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues",
 	GET_FOLDER					: "/dlapp/get-folder",
+	GET_FILES					: "/dlapp/get-file-entries",
 	ADD_FOLDER					: "/dlapp/add-folder",
 	ADD_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/add-venue-detail",
 	GET_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/get-venue-details",
