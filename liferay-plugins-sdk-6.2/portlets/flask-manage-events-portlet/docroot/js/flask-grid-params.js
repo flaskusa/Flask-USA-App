@@ -79,7 +79,7 @@ GRID_PARAM.onRowClick =function (event)
 		editrow = event.args.rowindex;
 		var rowsheight = grid.jqxGrid('rowsheight');
 		var top = $(this).offset().top + (2 + editrow) * rowsheight;
-		var left = ($(this).offset().left + parseInt($('.device-mobile-tablet').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
+		var left = ($(this).offset().left + parseInt($('#GridContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
 		$('#' +rowMenuDivId).jqxMenu('open', left, top + 5 + scrollTop);
 	} else {
 		// original event.
@@ -156,7 +156,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		eventDiv.append(container1);
 
 		$(tabsdiv).jqxTabs({
-			width : '98%',
+			width : '90%',
 			height : 180
 		});
     }

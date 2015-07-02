@@ -264,6 +264,7 @@ function initForm(){
 			    var title = $('#jqxtabs').jqxTabs('getTitleAt', item);
 		});*/
 		$("#venueDetailsContainer").hide();
+		$("#displayImages").hide(); 
 		var repositoryId = $("#repositoryId").val();		
 }
 
@@ -633,7 +634,7 @@ function deleteVenueDetail(venueDetailId,venueId) {
 		flaskRequest.sendPOSTRequest(_eventModel.SERVICE_ENDPOINTS.DELETE_VENUE_DETAIL , param, 
 			function (data){
 					_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
-					//createTable({},_eventModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventModel.GRID_DATA_MODEL.VENUEDETAILS);
+					createTable({},_eventModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventModel.GRID_DATA_MODEL.VENUEDETAILS);
 					//Change
 					loadVenueDetailsData(venueId,1);
 			} ,
