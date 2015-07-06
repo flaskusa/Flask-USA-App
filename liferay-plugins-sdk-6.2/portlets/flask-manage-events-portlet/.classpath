@@ -9,9 +9,6 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_45"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="docroot/WEB-INF/src"/>
-	<classpathentry kind="lib" path="D:/Work/liferay-portal-6.2-ce-ga4/tomcat-7.0.42/webapps/ROOT/WEB-INF/lib/jstl-api.jar"/>
-	<classpathentry kind="lib" path="D:/Work/liferay-portal-6.2-ce-ga4/tomcat-7.0.42/webapps/ROOT/WEB-INF/lib/jstl-impl.jar"/>
 	<classpathentry kind="output" path="docroot/WEB-INF/classes"/>
 </classpath>

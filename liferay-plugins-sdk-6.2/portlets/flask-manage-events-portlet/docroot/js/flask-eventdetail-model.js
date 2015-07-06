@@ -47,7 +47,7 @@ _eventDetailModel.GRID_DATA_MODEL= {
 		EVENTDETAILS: 
 			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '45%' },
       		 {text: 'Description', datafield: 'infoDesc', width: '45%'},
-      		 { text: 'Edit',  datafield: 'venueDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.VENUEDETAILS }]
+      		 { text: 'Edit',  datafield: 'venueDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _eventDetailModel.GRID_CONTEXT_MENU.EVENTDETAILS }]
 		};
 
 _eventDetailModel.MESSAGES= {

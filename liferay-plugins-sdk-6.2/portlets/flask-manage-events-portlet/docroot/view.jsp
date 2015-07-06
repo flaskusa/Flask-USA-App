@@ -97,6 +97,12 @@ function initialize(portletId, portlet){
 					<select id="venueId" name="venueId" class="form-control-select"></select>
 				</div>
 		   </div>
+		  <div class="form-group">
+			    <label class="control-label" for="eventImage">Event Image:</label>
+				<div class="controls">
+					<div id="eventImage"></div>
+				</div>
+		   </div>		   
 		  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
 		  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
 		  <input type="hidden" id="eventImagePath" value="">	
@@ -105,9 +111,9 @@ function initialize(portletId, portlet){
 		</form>  
 	  </div>
 	  <div class="tab-pane" id="contents">
-		<div id="venueDetailsContainer">
+		<div id="eventDetailsContainer">
 			<h3><span class="title-text"></span></h3>
-			<form id="venueDetailsForm" style="display:none">
+			<form id="eventDetailsForm" style="display:none">
 			  <input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
 			  <div class="form-group">
 				    <label class="control-label" for="infoTypeCategoryId">Content Type:</label>
@@ -119,16 +125,15 @@ function initialize(portletId, portlet){
 			   		Please select content type.
 			   </div>
 			  
-			  <input id="venueId" type="hidden" name="venueId" value=0>
-			  <input id="eventId" type="hidden" value="25912">
-			  <input id="infoTypeId" type="hidden" value=1>
-			  <input id="venueDetailId" type="hidden" name="venueDetailId" value=0>
+			  <input id="eventId" type="hidden" value="0">
+			  <input id="infoTypeId" type="hidden" value="1">
+			  <input id="eventDetailId" type="hidden" name="eventDetailId" value="0">
 			  <input class="btn btn-info cssVdSave" type="button" value="Save"/>
 			  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel" >
 			</form>
 			
-			<div id="venueDetailsDataTable" class="table-condensed">
-			  <input class="btn btn-info cssAddVenueDetails" type="button" value="Add Event Details"/>
+			<div id="eventDetailsDataTable" class="table-condensed">
+			  <input class="btn btn-info cssAddEventDetails" type="button" value="Add Event Details"/>
 			  <div id="gridDetails"></div>
 			</div>
 			
@@ -137,12 +142,6 @@ function initialize(portletId, portlet){
 					<li>Edit</li> 					<!--fnShowForm({value}); -->
 					<li>Delete</li>					<!--fnDelete({value}); -->
 				</ul>
-		  	</div>
-		  	
-		  	<div id='displayImages' style='display:none'>
-		  		    <div id="slider1_container" style="position: relative; top: 0px; left: 0px; width: 809px; height: 150px; overflow: hidden;">
-				        <div u="slides" id="slides" style="cursor: move; position: absolute; left: 0px; top: 0px; width: 809px; height: 150px; overflow: hidden;"></div>
-					</div>
 		  	</div>
 		</div>  
 	  </div>

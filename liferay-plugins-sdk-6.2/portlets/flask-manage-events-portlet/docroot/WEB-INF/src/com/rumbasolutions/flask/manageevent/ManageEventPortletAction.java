@@ -40,11 +40,13 @@ public class ManageEventPortletAction extends MVCPortlet {
 	private final String EVENT_ID_QSTR = "_eventId";
 	private final String INFO_TYPE_ID_QSTR = "_infoTypeId";
 	private final String INFO_TYPE_CON_ID_QSTR = "_infoTypeCategoryId";
-	private final String EVENT_DETAIL_ID_QSTR= "_venueDetailId";
+	private final String EVENT_DETAIL_ID_QSTR= "_eventDetailId";
+	private final String EVENT_ISLOGO_QSTR= "_isLogo";
 	private long _eventId = 0;
 	private long _infoTypeId = 0;
 	private long _infoTypeCategoryId = 0;
-	private long _venueDetailId = 0;
+	private long _eventDetailId = 0;
+	private String _isLogo = "N";
 	private ServiceContext _serviceContext;
 	Folder _eventFolder=null;
 	
@@ -75,23 +77,25 @@ public class ManageEventPortletAction extends MVCPortlet {
 			_eventId = getEventId(formItems);
 			_infoTypeId = getInfoTypeId(formItems);		
 			_infoTypeCategoryId = getInfoTypeContentId(formItems);
-			_venueDetailId = getEventDetailId(formItems);
-			
+			_eventDetailId = getEventDetailId(formItems);
+			_isLogo = getIsLogo(formItems);
 			createUploadFolder(uploadPath);
 			
 			for(FileItem item: formItems){
-
 				if (!item.isFormField()) {
 					String fileName = new File(item.getName()).getName();
+					String fileTitle = fileName;
+					String fileDesc = fileName; // Change is later for description 
+					boolean IsLogo =  _isLogo.equals("Y");
+					if(IsLogo){
+						fileTitle = "EventLogo";
+					}
 					String filePath = uploadPath + File.separator + fileName;
 					File storeFile = new File(filePath);
 					// saves the file on disk
 					item.write(storeFile);
-					
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
-					
-					FlaskDocLibUtil.addFileEntry(_eventFolder, fileName, fileName, "This is test 1", 
-						storeFile, mimeType, _serviceContext);
+					FlaskDocLibUtil.addFileEntry(_eventFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
 					
 				}else{
 					
@@ -112,7 +116,11 @@ public class ManageEventPortletAction extends MVCPortlet {
 			uploadDir.mkdir();
 		}
 		try {
-			_eventFolder = FlaskDocLibUtil.createEventContentTypeFolder(_eventId,_infoTypeId,_infoTypeCategoryId,_venueDetailId, _serviceContext);
+			boolean IsLogo =  _isLogo.equals("Y");
+			if(IsLogo)
+				_eventFolder = FlaskDocLibUtil.createEventFolder(_eventId,_serviceContext);
+			else
+				_eventFolder = FlaskDocLibUtil.createEventContentTypeFolder(_eventId,_infoTypeId,_infoTypeCategoryId,_eventDetailId, _serviceContext);
 		}
 		catch (Exception e) {
 			LOGGER.error("Error in creating venue folder in Document Media Library", e);
@@ -180,5 +188,16 @@ public class ManageEventPortletAction extends MVCPortlet {
 		}
 		return infoTypeContId;
 	}
-		
+
+	private String getIsLogo(List<FileItem> formItems){
+		String isLogo = "N";
+		 
+		for (FileItem item : formItems){
+			if(item.getFieldName().contentEquals(EVENT_ISLOGO_QSTR)){
+				isLogo = item.getString();
+				break;
+			}
+		}
+		return isLogo;
+	}	
 }

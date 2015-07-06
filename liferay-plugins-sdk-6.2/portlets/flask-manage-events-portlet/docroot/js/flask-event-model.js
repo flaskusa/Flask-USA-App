@@ -9,17 +9,7 @@ _eventModel.SERVICE_ENDPOINTS = {
 	DELETE_EVENT				: "/flask-rest-events-portlet.event/delete-event",
 	DELETE_EVENTS				: "/flask-rest-events-portlet.event/delete-events",
 	GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types",
-	GET_INFO_TYPES 				: "/flask-rest-events-portlet.infotype/get-info-types",
-	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
-	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues",
-	GET_FOLDER					: "/dlapp/get-folder",
-	GET_FILES					: "/dlapp/get-file-entries",
-	ADD_FOLDER					: "/dlapp/add-folder",
-	ADD_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/add-venue-detail",
-	GET_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/get-venue-details",
-	UPDATE_VENUE_DETAILS		: "/flask-rest-events-portlet.venue/update-venue-detail",
-	DELETE_VENUE_DETAIL			: "/flask-rest-events-portlet.venue/delete-venue-detail",
-	DELETE_ALL_VENUE_DETAILS	: "/flask-rest-events-portlet.venue/delete-all-venue-details"
+	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues"
 };
 
 _eventModel.DATA_MODEL= {
@@ -36,35 +26,11 @@ _eventModel.DATA_MODEL= {
 		 	 { name: 'venueId', type:'long' },
 		 	 { name: 'venueName', type:'string' },
 		 	 { name: 'eventImagePath', type:'string' }
-		],
-		VENUEDETAILS: 
-			[
-	             { name: 'venueDetailId', type: 'long' },
-	             { name: 'venueId', type: 'long' },
-	             { name: 'infoTypeId', type: 'long' },
-	             { name: 'infoTypeCategoryId', type: 'long' },
-				 { name: 'infoTitle', type: 'string' },
-				 { name: 'infoDesc', type: 'string' },
-				 { name: 'addrLine1', type: 'string'},
-				 { name: 'addrLine2', type: 'string'},
-				 { name: 'zipCode', type: 'string'},
-				 { name: 'city', type: 'string'},
-				 { name: 'stateId', type: 'long' },
-				 { name: 'countryId', type: 'long' },
-				 { name: 'lattitude', type: 'string'},
-				 { name: 'longitude', type: 'string'},
-				 { name: 'phone', type: 'string'},
-				 { name: 'website', type: 'string'},
-				 { name: 'cost', type: 'long' },
-				 { name: 'hoursOfOperation', type: 'string' }
-			]
+		]
 	};
 
 _eventModel.GRID_CONTEXT_MENU = {
 		EVENT:function(row, columnfield, value, defaulthtml, columnproperties) {
-			return '<i class="icon-wrench" style="margin:3px;"></i>'
-		},
-		VENUEDETAILS:function(row, columnfield, value, defaulthtml, columnproperties) {
 			return '<i class="icon-wrench" style="margin:3px;"></i>'
 		}
 }
@@ -73,11 +39,7 @@ _eventModel.GRID_DATA_MODEL= {
 		EVENT: 
 			[{ text: 'Name', columntype: 'textbox',  datafield: 'eventName', width: '45%' },
       		 {text: 'Description', datafield: 'description', width: '45%'},
-      		 { text: 'Edit',  datafield: 'eventId', width: '10%', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.EVENT }],
-		VENUEDETAILS: 
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '45%' },
-      		 {text: 'Description', datafield: 'infoDesc', width: '45%'},
-      		 { text: 'Edit',  datafield: 'venueDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.VENUEDETAILS }]
+      		 { text: 'Edit',  datafield: 'eventId', width: '10%', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.EVENT }]
 		};
 
 _eventModel.MESSAGES= {

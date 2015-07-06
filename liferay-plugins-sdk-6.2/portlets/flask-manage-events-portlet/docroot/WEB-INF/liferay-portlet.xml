@@ -23,12 +23,14 @@
 		<footer-portlet-javascript>/js/jqxdropdownbutton.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxcheckbox.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxtabs.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxfileupload.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask_ajax.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-grid-params.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-event-model.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-event-main.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/flask-grid-details-params.js</footer-portlet-javascript>		
+		<footer-portlet-javascript>/js/flask-eventdetail-model.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/flask-eventdetail-main.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdropdownlist.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.filter.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.pager.js</footer-portlet-javascript>

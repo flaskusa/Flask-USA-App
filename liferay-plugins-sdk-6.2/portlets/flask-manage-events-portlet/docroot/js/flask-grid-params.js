@@ -1,4 +1,4 @@
-    
+var _repositoryId = $("#repositoryId").val();    
 var GRID_PARAM = {};
 
 var gridObj;
@@ -41,7 +41,6 @@ GRID_PARAM.getCheckedIdList= function(idDataAttribute){
     $.each(rows, function(i, rowIndex){
     	var rowData = gridObj.jqxGrid('getrowdata', rowIndex);
     	dataList[i] = rowData.eventId;
-    	
     });
     var temp= dataList.toString();
     console.log(temp);
@@ -139,6 +138,40 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 	  var d1 = formatUnixToTime(datarecord.startTime);
 	  var d2 = formatUnixToTime(datarecord.endTime);
 		container1.append(leftcolumn);
+		$(leftcolumn).append("<table>");		
+		///LOGO START
+		var LogoURL = "";
+		var flaskRequest = new Request();
+		params= {'repositoryId': _repositoryId, 'parentFolderId': 0, 'name': 'Event'};
+		flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
+			function (data){
+				folderName = 'Event-'+datarecord.eventId;
+				console.log(folderName);
+				var flaskRequestChild = new Request();
+				paramsChild= {'repositoryId': _repositoryId, 'parentFolderId': data.folderId, 'name': folderName};
+				flaskRequestChild.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
+					function (data){
+						//data.folderId;
+						LogoURL = "/documents/"+_repositoryId+"/"+data.folderId+"/EventLogo";
+						var eventImage = "<tr><td colspan='2'><img src='" + LogoURL + "' height='90px' width='90px'/></td></tr>";
+						$(leftcolumn).append(eventImage);
+						console.log(LogoURL);
+					} ,
+					function (data){
+						LogoURL = "/documents/"+_repositoryId+"/0/welcome_community"
+						var eventImage = "<tr><td colspan='2'><img src='" + LogoURL + "' height='90px' width='90px'/></td></tr>";
+						$(leftcolumn).append(eventImage);
+						console.log(LogoURL);
+				});
+			} ,
+			function (data){
+				LogoURL = "/documents/"+_repositoryId+"/0/welcome_community"
+				var eventImage = "<tr><td colspan='2'><img src='" + LogoURL + "' height='90px' width='90px'/></td></tr>";
+				$(leftcolumn).append(eventImage);
+				console.log(LogoURL);
+		});
+		//LOGO END
+		
 		var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
 				+ datarecord.venueId + "</td></tr>";
 		var EventDate = "<tr><td class='filledWidth1'><b>Event Date:</b></td><td> "
@@ -147,7 +180,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 			+ d1 + "</td></tr>";
 		var EndTime = "<tr><td class='filledWidth1'><b>End Time:</b></td><td> "
 			+ d2 + "</td></tr>";
-		$(leftcolumn).append("<table>");
+		
 		$(leftcolumn).append(venueId);
 		$(leftcolumn).append(EventDate);
 		$(leftcolumn).append(StartTime);
@@ -229,5 +262,3 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
             });
     
 	}
-
-		
