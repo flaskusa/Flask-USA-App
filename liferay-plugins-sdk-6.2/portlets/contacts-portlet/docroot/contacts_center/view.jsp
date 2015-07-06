@@ -19,13 +19,14 @@
 
 <%@ include file="/init.jsp" %>
 
-
 <%
 String filterBy = ParamUtil.getString(request, "filterBy", ContactsConstants.FILTER_BY_DEFAULT);
 
 String name = ParamUtil.getString(request, "name");
 
 boolean userPublicPage = false;
+
+int connectionUsersCount = 0;
 
 Group group = themeDisplay.getScopeGroup();
 
@@ -91,15 +92,64 @@ portletURL.setWindowState(WindowState.NORMAL);
 			<aui:input name="userIds" type="hidden" value="" />
 			<aui:input name="type" type="hidden" value="" />
 			<div id="topButtons"></div>
-			<aui:button value="Find Friends" id="ff" cssClass="btn btn-primary ffd" name="FindFriends" onClick="document.getElementById('findFrnds').click()" />
-			<aui:button value="My Friends" id="mf" cssClass="btn btn-primary mfd" name="MyFriends" onClick="document.getElementById('myFrnds').click()" />
-			<aui:layout cssClass="hideme toolbar">
+			<aui:button value="Find Friends" id="ff" cssClass="btn btn-primary ffd" name="FindFriends" onClick="document.getElementById('findFrnds').click(); userDetailsDrop();" />
+			<aui:button value="My Friends" id="mf" cssClass="btn btn-primary mfd" name="MyFriends" onClick="document.getElementById('myFrnds').click(); userDetailsDrop();" />
+			<aui:layout cssClass="toolbar">
 				<div class="filter-container">
 					<aui:layout cssClass="contact-group-filter">
 						<aui:input label="" name="checkAll" type="checkbox" />
 
 						<c:if test="<%= !userPublicPage %>">
-							<aui:select cssClass="contact-group-filter-select" inlineField="true" label="" name="filterBy">
+						<aui:layout cssClass="contacts-center-home">
+								<c:choose>
+									<c:when test="<%= !showOnlySiteMembers %>">
+										<liferay-ui:header title="contacts-center" />
+									</c:when>
+									<c:otherwise>
+										<liferay-ui:header title="members" />
+									</c:otherwise>
+								</c:choose>
+
+								<%
+								int allUsersCount = 0;
+
+								
+									allUsersCount = EntryLocalServiceUtil.searchUsersAndContactsCount(themeDisplay.getCompanyId(), themeDisplay.getUserId(), StringPool.BLANK);
+								
+
+								params.put("socialRelationType", new Long[] {themeDisplay.getUserId(), new Long(SocialRelationConstants.TYPE_BI_CONNECTION)});
+
+								connectionUsersCount = UserLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED, params);
+
+								params.put("socialRelationType", new Long[] {themeDisplay.getUserId(), new Long(SocialRelationConstants.TYPE_UNI_FOLLOWER)});
+
+								int followingUsersCount = UserLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED, params);
+
+								int followerUsersCount = SocialRelationLocalServiceUtil.getInverseRelationsCount(themeDisplay.getUserId(), SocialRelationConstants.TYPE_UNI_FOLLOWER);
+								%>
+								<aui:layout cssClass="contacts-count connections">
+									<a id="myFrnds" class="yui3-widget btn btn-primary"><liferay-ui:message arguments="<%= String.valueOf(connectionUsersCount) %>" key='' translateArguments="<%= false %>" />My Friends</a>
+								</aui:layout>
+
+								<c:if test="<%= !showOnlySiteMembers %>">
+
+									<%
+									int myContactsCount = EntryLocalServiceUtil.getEntriesCount(user.getUserId());
+									%>
+
+								</c:if>
+
+								<aui:layout cssClass="contacts-count all">
+									<a id="findFrnds" class="yui3-widget btn btn-primary" href="javascript:;"><liferay-ui:message arguments="<%= String.valueOf(allUsersCount) %>" key="" translateArguments="<%= false %>" />Find Friends</a>
+								</aui:layout>
+
+								<c:if test="<%= !showOnlySiteMembers && (connectionUsersCount <= 0) && (followingUsersCount <= 0) %>">
+									<aui:layout cssClass="contacts-center-introduction">
+										<liferay-ui:message key="contacts-center-allows-you-to-search-view-and-establish-social-relations-with-other-users" />
+									</aui:layout>
+								</c:if>
+							</aui:layout>
+							<aui:select cssClass="hideme contact-group-filter-select" inlineField="true" label="" name="filterBy">
 								<aui:option label="connections" selected="<%= filterBy.equals(ContactsConstants.FILTER_BY_TYPE_BI_CONNECTION) %>" value="<%= ContactsConstants.FILTER_BY_TYPE_BI_CONNECTION %>" />
 								<aui:option label="all" selected="<%= filterBy.equals(ContactsConstants.FILTER_BY_DEFAULT) %>" value="<%= ContactsConstants.FILTER_BY_DEFAULT %>" />
 
@@ -138,9 +188,7 @@ portletURL.setWindowState(WindowState.NORMAL);
 					</aui:layout>
 				</div>
 
-				<c:if test="<%= !showOnlySiteMembers && !userPublicPage %>">
-					<aui:button cssClass="add-contact" icon="icon-plus-sign" id='<%= renderResponse.getNamespace() + "addContact" %>' value="add-contact" />
-				</c:if>
+				
 			</aui:layout>
 		</aui:form>
 
@@ -200,7 +248,7 @@ portletURL.setWindowState(WindowState.NORMAL);
 										<portlet:param name="portalUser" value="<%= Boolean.TRUE.toString() %>" />
 									</liferay-portlet:renderURL>
 
-									<div class="lfr-contact-grid-item" data-userId="<%= user2.getUserId() %>" data-viewSummaryURL="<%= viewUserSummaryURL %>">
+									<div class="lfr-contact-grid-item" onClick="userDetailsDrop()" data-userId="<%= user2.getUserId() %>" data-viewSummaryURL="<%= viewUserSummaryURL %>">
 										<div class="lfr-contact-thumb">
 											<img alt="<%= HtmlUtil.escape(user2.getFullName()) %>" src="<%= user2.getPortraitURL(themeDisplay) %>" />
 										</div>
@@ -258,14 +306,14 @@ portletURL.setWindowState(WindowState.NORMAL);
 										<portlet:param name="portalUser" value="<%= Boolean.FALSE.toString() %>" />
 									</liferay-portlet:renderURL>
 
-									<div class="lfr-contact-grid-item" data-userId="" data-viewSummaryURL="<%= viewContactSummaryURL %>">
+									<div class="lfr-contact-grid-item" onClick="userDetailsDrop()" data-userId="" data-viewSummaryURL="<%= viewContactSummaryURL %>">
 										<div class="lfr-contact-thumb">
 											<img alt="<%= HtmlUtil.escape(fullName) %>" src='<%= themeDisplay.getPathImage() + "/user_male_portrait?img_id=0&t=" %>' />
 										</div>
 
 										<div class="lfr-contact-info">
 											<div class="lfr-contact-name">
-												<a class="friendList" id="xyz"><%= HtmlUtil.escape(fullName) %></a>
+												<a class="friendList"><%= HtmlUtil.escape(fullName) %></a>
 											</div>
 
 											
@@ -305,8 +353,60 @@ portletURL.setWindowState(WindowState.NORMAL);
 							<%
 							request.setAttribute(WebKeys.CONTACTS_USER, contacts.get(0));
 							%>
-
 							<liferay-util:include page="/contacts_center/view_user.jsp" servletContext="<%= application %>" />
+							<aui:layout cssClass="contacts-center-home">
+								<c:choose>
+									<c:when test="<%= !showOnlySiteMembers %>">
+										<liferay-ui:header title="contacts-center" />
+									</c:when>
+									<c:otherwise>
+										<liferay-ui:header title="members" />
+									</c:otherwise>
+								</c:choose>
+
+								<%
+								int allUsersCount = 0;
+
+								if (userPublicPage || showOnlySiteMembers || !filterBy.equals(ContactsConstants.FILTER_BY_DEFAULT)) {
+									allUsersCount = UserLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), StringPool.BLANK, WorkflowConstants.STATUS_APPROVED, params);
+								}
+								else {
+									allUsersCount = EntryLocalServiceUtil.searchUsersAndContactsCount(themeDisplay.getCompanyId(), themeDisplay.getUserId(), StringPool.BLANK);
+								}
+
+								params.put("socialRelationType", new Long[] {themeDisplay.getUserId(), new Long(SocialRelationConstants.TYPE_BI_CONNECTION)});
+
+								connectionUsersCount = UserLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED, params);
+
+								params.put("socialRelationType", new Long[] {themeDisplay.getUserId(), new Long(SocialRelationConstants.TYPE_UNI_FOLLOWER)});
+
+								int followingUsersCount = UserLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED, params);
+
+								int followerUsersCount = SocialRelationLocalServiceUtil.getInverseRelationsCount(themeDisplay.getUserId(), SocialRelationConstants.TYPE_UNI_FOLLOWER);
+								%>
+								<aui:layout cssClass="contacts-count connections">
+									<a id="myFrnds" class="yui3-widget btn btn-primary"><liferay-ui:message arguments="<%= String.valueOf(connectionUsersCount) %>" key='' translateArguments="<%= false %>" />My Friends</a>
+								</aui:layout>
+
+								<c:if test="<%= !showOnlySiteMembers %>">
+
+									<%
+									int myContactsCount = EntryLocalServiceUtil.getEntriesCount(user.getUserId());
+									%>
+
+								</c:if>
+
+								<aui:layout cssClass="contacts-count all">
+									<a id="findFrnds" class="yui3-widget btn btn-primary" href="javascript:;"><liferay-ui:message arguments="<%= String.valueOf(allUsersCount) %>" key="" translateArguments="<%= false %>" />Find Friends</a>
+								</aui:layout>
+
+								<c:if test="<%= !showOnlySiteMembers && (connectionUsersCount <= 0) && (followingUsersCount <= 0) %>">
+									<aui:layout cssClass="contacts-center-introduction">
+										<liferay-ui:message key="contacts-center-allows-you-to-search-view-and-establish-social-relations-with-other-users" />
+									</aui:layout>
+								</c:if>
+							</aui:layout>
+
 						</c:when>
 						<c:otherwise>
 							<aui:layout cssClass="contacts-center-home">
@@ -331,7 +431,7 @@ portletURL.setWindowState(WindowState.NORMAL);
 
 								params.put("socialRelationType", new Long[] {themeDisplay.getUserId(), new Long(SocialRelationConstants.TYPE_BI_CONNECTION)});
 
-								int connectionUsersCount = UserLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED, params);
+								connectionUsersCount = UserLocalServiceUtil.searchCount(themeDisplay.getCompanyId(), null, WorkflowConstants.STATUS_APPROVED, params);
 
 								params.put("socialRelationType", new Long[] {themeDisplay.getUserId(), new Long(SocialRelationConstants.TYPE_UNI_FOLLOWER)});
 
@@ -371,6 +471,7 @@ portletURL.setWindowState(WindowState.NORMAL);
 				<div id="<portlet:namespace />selectedUsersView"><!-- --></div>
 			</aui:column>
 		</aui:layout>
+
 
 		<aui:script use="aui-io-deprecated,aui-loading-mask-deprecated,datatype-number,liferay-contacts-center">
 			var searchInput = A.one('.contacts-portlet #<portlet:namespace />name');
@@ -539,6 +640,10 @@ portletURL.setWindowState(WindowState.NORMAL);
 				'.contact-ids'
 			);
 
+			$(".contacts-container-content").each(function(){
+				
+			});
+
 			A.one('.contacts-container-content').delegate(
 				'click',
 				function(event) {
@@ -661,7 +766,42 @@ portletURL.setWindowState(WindowState.NORMAL);
 	</c:otherwise>
 </c:choose>
 <script type="text/javascript">
+
+function userDetailsDrop(){
+	setTimeout(function(){
+		$( ".lfr-contact-grid-item" ).bind( "click", function() {
+			$(".lfr-contact-grid-item").animate({height: "70px"});
+			$(".contacts-container-content").appendTo($(this));
+			$(this).animate({height: "350px"});	 
+			if($("#_1_WAR_contactsportlet_addConnectionButton").is(":visible"))
+			{
+				$(".addFrnd").show();
+				$(".rmvFrnd").hide();
+			}
+		if($("#_1_WAR_contactsportlet_removeConnectionButton").is(":visible"))
+		{
+			$(".addFrnd").hide();
+			$(".rmvFrnd").show();
+		}
+		});
+	}, 1000);
+}
+
+
 $(document).ready(function() {
+setTimeout(function(){
+	$(".lfr-contact-grid-item").each(function(){
+		$(this).click();
+	});
+	userDetailsDrop();
+	
+	
+	}, 500);
+
+
+
+
+
 $(".ffd").show();
 $(".mfd").hide();
 
@@ -673,10 +813,6 @@ $(".mfd").click(function(){
 	$(this).hide();
 	$(".ffd").show();
 });
-$(".lfr-contact-grid-item").click(function(){
-	console.log("i am in function");
-	$(".contacts-container-content").appendTo($(this));
-	$(this).css('height','100%');
-	});
+
 });
 </script>
