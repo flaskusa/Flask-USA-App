@@ -28,7 +28,7 @@
 <link async href="http://fonts.googleapis.com/css?family=Gochi%20Hand" rel="stylesheet" type="text/css"/>
 
 <body>
-
+   
 <div class="table-responsive">          
 <div id="one">
     <div style="overflow: hidden;">
@@ -58,13 +58,14 @@
   </div>
  </div>
     
+ 
  <div id="two" style="display:none; width:100%;">
  <div style="overflow: hidden; display:none" id="ContentPanel"></div>
 
 <table>
 <tr>
   <td style="background-color: #231F20;">
-           <img src="<%=request.getContextPath()%>/img/Pre.png"/>
+           <img class="SliderCaption" src="<%=request.getContextPath()%>/img/Pre.png"/>
   </td>
   <td>
           <div id="wowslider-container2" class="wowslider-container">
@@ -75,7 +76,7 @@
     
 <tr>
   <td style="background-color: #231F20;">
-       <img src="<%=request.getContextPath()%>/img/at.png"/>
+       <img class="SliderCaption" src="<%=request.getContextPath()%>/img/at.png"/>
   </td>
   <td> 
        <div id="wowslider-container3" class="wowslider-container">
@@ -85,7 +86,7 @@
 </tr> 
 <tr>
   <td style="background-color: #231F20;">
-       <img src="<%=request.getContextPath()%>/img/Post.png"/>
+       <img class="SliderCaption" src="<%=request.getContextPath()%>/img/Post.png"/>
   </td>
   <td>   
     	<div id="wowslider-container4" class="wowslider-container">
@@ -96,7 +97,7 @@
 </table>
 
 	<input class="btn btn-info cssback" type="button" value="Back"/>
-	</br></br></br>
+	</br></br></br></br>
 </div>	
 
 	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
@@ -107,7 +108,9 @@
                     <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
                 </td>
                 <td class="asans"><b>FREE PINT WITH WITH A BURGER</b>
+                <br/>
                 <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
+                <br/>
                 <span class="gochi">ON GAMEDAY!</span>
                 </td>
             </tr>
