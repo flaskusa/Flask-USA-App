@@ -18,7 +18,7 @@
 	zoom: 1; 
 	position: relative;
 	width: 100%;
-	max-width: 640px;
+	max-width: 400px;
 	max-height:360px;
 	margin:0px auto 0px;
 	z-index:90;
@@ -86,7 +86,7 @@
 	margin:0;
 }
 .wowslider-container .ws_images > div > img {
-	max-height:360px;
+	max-height:250px;
 }
 
 .wowslider-container .ws_images iframe {
