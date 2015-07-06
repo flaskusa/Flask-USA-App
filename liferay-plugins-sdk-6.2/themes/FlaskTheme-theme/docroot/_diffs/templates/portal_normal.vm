@@ -15,10 +15,8 @@
 <link async href="http://fonts.googleapis.com/css?family=Coda" rel="stylesheet" type="text/css"/>
 <link href='http://fonts.googleapis.com/css?family=Ubuntu:400,500,700' rel='stylesheet' type='text/css'>
 
- <script type="text/javascript" src="$javascript_folder/jqwidgets/jqx-all.js"></script>
- 
-<link rel="stylesheet" href="$javascript_folder/jqwidgets/styles/jqx.base.css" type="text/css" />
-<link rel="stylesheet" href="$javascript_folder/jqwidgets/styles/jqu.css" type="text/css" />
+<link rel="stylesheet" href="$javascript_folder/jqx.base.css" type="text/css" />
+<link rel="stylesheet" href="$javascript_folder/jqu.css" type="text/css" />
 
 <link async href="http://fonts.googleapis.com/css?family=Coda" rel="stylesheet" type="text/css"/>
 
