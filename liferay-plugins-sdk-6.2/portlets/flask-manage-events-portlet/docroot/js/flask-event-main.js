@@ -1,3 +1,4 @@
+var imageContainer = $("#eventImage");
 var eventForm;
 var dropZoneLogo;
 function addClickHandlers(){
@@ -179,7 +180,7 @@ function initForm(){
 }
 
 function fnBuildEventUpload(Obj){
-	var imageContainer = $("#eventImage");
+	$(imageContainer).html(""); 
   	var strSelected = "";
   	dropZoneLogo = "";
     var objForm = $('<form/>',{'class':'dropzone','id':'eventLogoImage','action':$("#imgActionUrl").val()});
