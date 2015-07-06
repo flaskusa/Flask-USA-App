@@ -100,6 +100,8 @@ AUI.add(
 						'<div class="lfr-contact-name">' +
 							'<a>{lastName} {firstName}</a>' +
 						'</div>' +
+						'<div>'+'<a class="btn frndbtn addFrnd">+Add Friend</a>'+'</div>'+
+						'<div>'+'<a class="btn frndbtn rmvFrnd">-Unfriend</a>'+'</div>'+
 						'<div class="lfr-contact-extra">' +
 							'{emailAddress}' +
 						'</div>' +
@@ -118,6 +120,8 @@ AUI.add(
 					'<div class="lfr-contact-name">' +
 						'<a>{lastName}, {firstName}</a>' +
 					'</div>' +
+					'<div>'+'<a class="btn frndbtn addFrnd">+Add Friend</a>'+'</div>'+
+					'<div>'+'<a class="btn frndbtn rmvFrnd">-Unfriend</a>'+'</div>'+
 					'<div class="lfr-contact-extra">' +
 						'{emailAddress}' +
 					'</div>' +
@@ -189,7 +193,7 @@ AUI.add(
 
 					addContactResult: function(data) {
 						var instance = this;
-
+						console.log(data);
 						instance._setVisibleSelectedUsersView();
 
 						var contact = instance._renderContact(data);
@@ -907,14 +911,16 @@ AUI.add(
 								if (user.connected) {
 									if (instance._removeConnectionButton) {
 										instance._showButton(instance._removeConnectionButton);
-
+										$(".addFrnd").hide();
+										$(".rmvFrnd").show();
 										instance._buttonRemoveConnectionUserIds.push(user.userId);
 									}
 								}
 								else {
 									if (instance._addConnectionButton) {
 										instance._showButton(instance._addConnectionButton);
-
+										$(".addFrnd").show();
+										$(".rmvFrnd").hide();
 										instance._buttonAddConnectionUserIds.push(user.userId);
 									}
 								}
@@ -1081,6 +1087,8 @@ AUI.add(
 							removeConnectionButton.hide();
 							instance._showButton(unblockButton);
 							unfollowButton.hide();
+							$(".addFrnd").hide();
+							$(".rmvFrnd").hide();
 						}
 						else {
 							instance._showButton(blockButton);
@@ -1089,14 +1097,20 @@ AUI.add(
 							if (user.connectionRequested) {
 								addConnectionButton.hide();
 								removeConnectionButton.hide();
+								$(".addFrnd").hide();
+								$(".rmvFrnd").hide();
 							}
 							else if (user.connected) {
 								addConnectionButton.hide();
 								instance._showButton(removeConnectionButton);
+								$(".addFrnd").hide();
+								$(".rmvFrnd").show();
 							}
 							else {
 								instance._showButton(addConnectionButton);
 								removeConnectionButton.hide();
+								$(".addFrnd").show();
+								$(".rmvFrnd").hide();
 							}
 
 							if (user.following) {
