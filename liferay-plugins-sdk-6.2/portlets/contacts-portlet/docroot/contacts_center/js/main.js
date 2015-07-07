@@ -100,11 +100,15 @@ AUI.add(
 						'<div class="lfr-contact-name">' +
 							'<a>{lastName} {firstName}</a>' +
 						'</div>' +
-						'<div>'+'<a class="btn frndbtn addFrnd">+Add Friend</a>'+'</div>'+
-						'<div>'+'<a class="btn frndbtn rmvFrnd">-Unfriend</a>'+'</div>'+
-						'<div class="lfr-contact-extra">' +
+						'<div class="addFrnd"></div>'+
+						'<div class="rmvFrnd"></div>'+
+						'<div class="lfr-contact-extra hideme">' +
 							'{emailAddress}' +
 						'</div>' +
+						'<div class="lfr-social-relations">' +
+							'{connectionRequested}' + '{connected}' +
+						'</div>' +
+						'<div class="btns"></div>' +
 					'</div>' +
 					'<div class="clear"></div>' +
 				'</div>' +
@@ -120,12 +124,12 @@ AUI.add(
 					'<div class="lfr-contact-name">' +
 						'<a>{lastName}, {firstName}</a>' +
 					'</div>' +
-					'<div>'+'<a class="btn frndbtn addFrnd">+Add Friend</a>'+'</div>'+
-					'<div>'+'<a class="btn frndbtn rmvFrnd">-Unfriend</a>'+'</div>'+
+					'<div class="addFrnd"></div>'+
+					'<div class="rmvFrnd"></div>'+
 					'<div class="lfr-contact-extra">' +
 						'{emailAddress}' +
 					'</div>' +
-					'<div class="lfr-social-relations">' +
+					'<div class="hideme lfr-social-relations">' +
 						'{connectionRequested}' + '{connected}' + '{following}' + '{block}' +
 					'</div>' +
 				'</div>' +
@@ -767,17 +771,18 @@ AUI.add(
 							if (selectedUsersNodes.size() > 0) {
 								selectedUsersIds = selectedUsersNodes.val();
 							}
-
+							
 							buffer.push(
 								Array.map(
 									results,
 									function(result) {
+									
 										var displayLastNameAnchor = false;
 
 										var nameAnchor;
 
 										var name;
-
+										
 										if (result.portalUser) {
 											name = result.lastName;
 										}
@@ -799,9 +804,12 @@ AUI.add(
 										}
 
 										if (result.portalUser) {
+											var instance = result.userId;
 											return Lang.sub(
 												TPL_USER_DATA,
 												{
+													connectionRequested: result.connectionRequested ? TPL_CONNECTION_REQUESTED_IMG : '',
+													connected: result.connected ? TPL_CONNECTED_IMG : '',
 													checked: ((Array.indexOf(selectedUsersIds, result.userId) != -1) ? 'checked="true"' : ''),
 													disabled: (themeDisplay.getUserId() == result.userId) ? 'disabled="true"' : '',
 													emailAddress: (result.emailAddress ? result.emailAddress : ''),
