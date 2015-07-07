@@ -184,6 +184,29 @@ div#yui_patched_v3_11_0_1_1435679839323_901 {
   text-decoration: underline;
 }
 
+.contacts-portlet .contacts-profile .lfr-contact-thumb{display:none !important; }
+
+@media (max-width: 767px)
+{
+	 .contacts-portlet.show-user .edit-toolbar{
+	   float: right !important;
+	   width: auto !important;
+	 }
+
+	 a.btn.frndbtn {
+	   padding: 5px 25px !important;
+	   background: #fff !important;
+	   border-color: #f79634 !important;
+	   color: #f79634 !important;
+	   padding-left: 25px !important;
+	   height: 30px !important;
+	   font-size: small !important; 
+	   margin-left: 0% !important;
+	   width: 120px !important;
+	   float: right !important;
+	 }
+
+}
 /*
 .contacts-portlet .contacts-result-container-content .contacts-list {
   bottom: 0;

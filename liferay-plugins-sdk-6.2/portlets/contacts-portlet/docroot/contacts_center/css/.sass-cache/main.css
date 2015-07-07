@@ -442,7 +442,21 @@ display: none;
   width: 300px; }
 .private-messaging-portlet .message-body {
   width: 90%; }
+@media (max-width: 767px) and (max-width: 979px){
+.aui .btn-group, .aui .button-holder {
+  display: block;
+  width: 35%;
+  float: right;
+}
+.contacts-portlet .contacts-result-container-content .contacts-list .contacts-search .search-input {
+  padding-right: 25px;
+  width: 94%;
+}
 
+}
+html.aui body {
+  padding: 0 !important;
+}
 /* ---------- Responsive ---------- */
 @media (max-width: 767px) {
   .contacts-portlet .layout .toolbar-content .filter-container {
@@ -555,7 +569,7 @@ display: none;
 		  font: normal 16px/1 "Coda", Helvetica, sans-serif !important;
 		  background: #231F20 !important;
 		  color: #fff !important;
-		  font-size: 20px !important;
+		  font-size: 15px !important;
 		  margin-top: 10px !important;
 		  text-shadow: none !important;
 		  background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) !important;
@@ -599,9 +613,7 @@ display: none;
 }
 
 .lfr-contact-extra{
-display: none;
-  border-bottom: 1px solid #c9c9c9;
-  font: 16px "Coda",Helvetica,sans-serif;
+  font: 14px "Coda",Helvetica,sans-serif;
 }
 
 .layout-content .contacts-result-content
@@ -843,4 +855,29 @@ a.btn.frndbtn {
     max-height: 500px;
     background: #fff;
    padding: 10px 20px 15px 40px;
+}
+.contacts-portlet .contacts-result-container-content .contacts-container .lfr-button-column{
+	display: none !important;
+}
+.contacts-portlet .contacts-profile .lfr-contact-thumb{display:none !important; }
+@media (max-width: 767px)
+{
+	 .contacts-portlet.show-user .edit-toolbar{
+	   float: right !important;
+	   width: auto !important;
+	 }
+
+	 a.btn.frndbtn {
+	   padding: 5px 25px !important;
+	   background: #fff !important;
+	   border-color: #f79634 !important;
+	   color: #f79634 !important;
+	   padding-left: 25px !important;
+	   height: 30px !important;
+	   font-size: small !important; 
+	   margin-left: 0% !important;
+	   width: 120px !important;
+	   float: right !important;
+	 }
+
 }
