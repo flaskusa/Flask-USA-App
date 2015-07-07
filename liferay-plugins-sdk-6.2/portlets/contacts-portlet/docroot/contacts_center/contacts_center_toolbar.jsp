@@ -269,13 +269,13 @@ if (user2 != null) {
 
 	var editToolbar = A.one('.edit-toolbar');
 
-	editToolbar.toggleClass('hide-more-buttons', true);
+	//editToolbar.toggleClass('hide-more-buttons', true);
 
 	var buttonColumn = A.one('#<portlet:namespace />buttonColumn');
 
-	var viewMoreButton = buttonColumn.one('.view-more-button');
+	//var viewMoreButton = buttonColumn.one('.view-more-button');
 
-	buttonColumn.delegate(
+	/*buttonColumn.delegate(
 		'click',
 		function(event) {
 			editToolbar.toggleClass('hide-more-buttons', false);
@@ -283,7 +283,7 @@ if (user2 != null) {
 			viewMoreButton.hide();
 		},
 		'.view-more-button'
-	);
+	);*/
 
 	function <portlet:namespace />relationAction(event, uri) {
 		var end = <%= ContactsConstants.MAX_RESULT_COUNT %>;
