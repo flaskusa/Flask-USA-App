@@ -501,3 +501,137 @@
 		}
 	}
 }
+
+
+
+.aui .dockbar .nav li.dropdown.dockbar-user-notifications .dropdown-menu {
+  left: auto;
+  max-height: none;
+  padding: 10px;
+  right: 0;
+  width: 332px !important;
+}
+/*----------- For Dockbar width --------------------*/
+.aui .dockbar-split .dockbar.navbar-static-top .collapse .nav-account-controls 
+{
+  background-color: #fff !important;
+  border-radius: 5px !important;
+  box-shadow: 0 5px 10px #CCC !important;
+  border: 1px solid transparent !important;
+}
+
+@media (max-width: 979px){
+.aui .dockbar-split .dockbar.navbar-static-top .collapse .nav-account-controls {
+  background-color: #fff !important;
+  border-radius: 5px !important;
+  box-shadow: 0 5px 10px #CCC !important;
+  border: 1px solid transparent !important;
+  width: 230px !important;
+}
+}
+/*----------- End of Dockbar width --------------------*/
+
+/*----------- For notification menu dropdown--------------------*/
+	.dockbar-user-notifications .dockbar-user-notifications-container .user-notifications-list .actionable .btn
+	{
+		  margin-right: 10px ;
+		  padding: 5px 20px;
+		  font: 16px "Coda", Helvetica, sans-serif;
+		  background: #231F20;
+		  color: #fff;  
+		  font-size: 20px ;
+		  margin-top: 10px ;
+		  text-shadow: none ;
+		  background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) ;
+		  background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%) ;
+		  background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%) ;
+		  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20));
+		  background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
+		  background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);
+	}
+	
+	.dockbar-user-notifications .dockbar-user-notifications-container .user-notifications-list .actionable .btn:hover
+	{
+		color: #ff9900;
+		background: #231F20;
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+		transition: all 0.3s;
+		background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20));
+		background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);
+	}
+	
+	@media (max-width: 767px)
+	{
+		.notifications-portlet .user-notifications-list .user-notification .body-container .btn, .dockbar-user-notifications .user-notifications-list .user-notification .body-container .btn {
+		  display: inline-block;
+		  margin-left: 0px;
+		  margin-right: 0px;
+		  width: 100%;
+		}
+	}
+	/*-------------- Drop down menu ----------------------*/
+.aui .nav-collapse .dropdown-menu {
+  width: 328px !important;
+  margin: 0;
+}
+@media (max-width: 979px)
+{
+	.aui .nav-collapse .dropdown-menu 
+	{
+	  width: 211px!important;
+	  margin: 0;
+	}
+}
+/*---------- End of Drop Down menu -----------------*/
+/*--------------------- End of notification menu Dropdown ----------------------*/
+
+/*--------------------- Buttons on request page ----------------------*/
+.clearfix .user-notification-delete .btn
+	{
+		  margin-right: 10px ;
+		  padding: 5px 20px;
+		  font: 16px "Coda", Helvetica, sans-serif;
+		  background: #231F20;
+		  color: #fff;  
+		  font-size: 20px ;
+		  margin-top: 10px ;
+		  text-shadow: none ;
+		  background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) ;
+		  background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%) ;
+		  background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%) ;
+		  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20));
+		  background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
+		  background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);
+	}
+.clearfix .user-notification-delete .btn:hover {
+		color: #ff9900;
+		background: #231F20;
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+		transition: all 0.3s;
+		background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20));
+		background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);
+}
+.clearfix .user-notification-delete .btn:focus {
+		color: #ff9900;
+		background: #231F20;
+		-webkit-transition: all 0.3s;
+		-moz-transition: all 0.3s;
+		transition: all 0.3s;
+		background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20));
+		background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
+		background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);
+}
+/*---------------------End of Buttons on request page ----------------------*/
