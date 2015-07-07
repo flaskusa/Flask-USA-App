@@ -140,7 +140,7 @@ portletURL.setWindowState(WindowState.NORMAL);
 								</c:if>
 
 								<aui:layout cssClass="contacts-count all">
-									<a id="findFrnds" class="yui3-widget btn btn-primary" href="javascript:;"><liferay-ui:message arguments="<%= String.valueOf(allUsersCount) %>" key="" translateArguments="<%= false %>" />Find Friends</a>
+									<a id="findFrnds" class="yui3-widget btn btn-primary" href="javascript:;"><liferay-ui:message arguments="<%= String.valueOf(0) %>" key="" translateArguments="<%= false %>" />Find Friends</a>
 								</aui:layout>
 
 								<c:if test="<%= !showOnlySiteMembers && (connectionUsersCount <= 0) && (followingUsersCount <= 0) %>">
@@ -195,9 +195,7 @@ portletURL.setWindowState(WindowState.NORMAL);
 		<aui:layout cssClass="contacts-result-container lfr-app-column-view">
 			<aui:column columnWidth="50" cssClass="contacts-list" first="<%= true %>">
 			
-				<div class="toggle-user">
-					<i class="icon-chevron-left"></i>
-				</div>
+				
 				
 				<div class="lfr-search-column contacts-search search-bar">
 					<aui:input cssClass="search-input" id="name" label="" name="name" size="30" type="text" value="<%= HtmlUtil.escape(name) %>" />
@@ -521,7 +519,7 @@ portletURL.setWindowState(WindowState.NORMAL);
 
 			var contactsCenterNode = A.one('#p_p_id<portlet:namespace />');
 
-			var toggleUser = A.one('.contacts-portlet .toggle-user');
+			var toggleUser = A.one('.contacts-portlet');
 
 			if (toggleUser) {
 				toggleUser.on(
@@ -537,6 +535,8 @@ portletURL.setWindowState(WindowState.NORMAL);
 			contactsResult.delegate(
 				'click',
 				function(event) {
+					var contactsContainer = A.one('.contacts-portlet .contacts-container');
+				
 					contactsCenterNode.toggleClass('show-user', true);
 
 					var contactsContainer = A.one('.contacts-portlet .contacts-container');
@@ -544,7 +544,8 @@ portletURL.setWindowState(WindowState.NORMAL);
 					contactsContainer.plug(A.LoadingMask);
 
 					//contactsContainer.loadingmask.show();
-
+					console.log(contactsResult);
+					console.log(contactsContainer);
 					var node = event.currentTarget;
 
 					A.io.request(
@@ -767,40 +768,44 @@ portletURL.setWindowState(WindowState.NORMAL);
 </c:choose>
 <script type="text/javascript">
 
+$( ".lfr-contact-grid-item" ).bind( "click", function() {
+	$(".lfr-contact-grid-item").animate({height: "70px"});
+	$(".contacts-container-content").appendTo($(this));
+	
+	$(this).animate({height: "300px"});	 
+});
+
+function userDetailsPrepend(){
+	$(".contacts-container-content").appendTo($(".contacts-container "));
+} 
+
 function userDetailsDrop(){
 	setTimeout(function(){
 		$( ".lfr-contact-grid-item" ).bind( "click", function() {
 			$(".lfr-contact-grid-item").animate({height: "70px"});
 			$(".contacts-container-content").appendTo($(this));
-			$(this).animate({height: "350px"});	 
-			if($("#_1_WAR_contactsportlet_addConnectionButton").is(":visible"))
-			{
-				$(".addFrnd").show();
-				$(".rmvFrnd").hide();
-			}
-		if($("#_1_WAR_contactsportlet_removeConnectionButton").is(":visible"))
-		{
-			$(".addFrnd").hide();
-			$(".rmvFrnd").show();
-		}
+			
+			$(this).animate({height: "300px"});	 
 		});
-	}, 1000);
+	}, 800);
 }
 
 
 $(document).ready(function() {
+
+$(".btn").bind( "click", function() {
+	alert("btn");
+	$(".contacts-container-content").appendTo($(".contacts-container "));
+});
+
 setTimeout(function(){
-	$(".lfr-contact-grid-item").each(function(){
-		$(this).click();
+	$( ".lfr-contact-grid-item" ).bind( "click", function() {
+		$(".lfr-contact-grid-item").animate({height: "70px"});
+		$(".contacts-container-content").appendTo($(this));
+		
+		$(this).animate({height: "300px"});	 
 	});
-	userDetailsDrop();
-	
-	
-	}, 500);
-
-
-
-
+	}, 1000);
 
 $(".ffd").show();
 $(".mfd").hide();
