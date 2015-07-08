@@ -15,7 +15,7 @@ function addClickHandlers(){
 			$("#formContainer").show();
 			_eventModel.loadVenues('venueId');
 			_eventModel.loadEventType('eventTypeId');
-			fnBuildEventUpload($("#eventImage").val());		
+			fnBuildEventUpload(imageContainer);		
 	});
 	/* Click handler for save button*/
 	
@@ -164,6 +164,8 @@ function saveEvent(){
 					function (data){
 						_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.SAVE);
 						fnSaveEventLogo(data.eventId);
+						$("#eventDataTable").show();
+						$("#formContainer").hide();
 						loadData();
 					} ,
 					function (data){

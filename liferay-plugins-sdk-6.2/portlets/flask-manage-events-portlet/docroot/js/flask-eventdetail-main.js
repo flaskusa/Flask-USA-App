@@ -389,20 +389,20 @@ function fnRenderSlider(folderId,_divObj){
 				    			$(objDel).click(function(){
 				    				$("#spinningSquaresG").show();
 				    				$(".activeImage").each(function(){
-				    					console.log($(this).attr("data-fileEntryId"));
 				    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
 				    					$(this).remove();
 				    				});
 				    				if($(".activeImage").length==0){
 				    					$("#spinningSquaresG").hide();
-				    					$(objDel).remove();
+				    					$(this).remove();
 				    					iSelected = false;
 				    				}
 				    			});
 				    		}
 				    	}
 				    	else{
-				    			iSelected = false;
+				    		$(".cssDelImages").remove();
+				    		iSelected = false;
 				    	}
 				    });
 		    	}
