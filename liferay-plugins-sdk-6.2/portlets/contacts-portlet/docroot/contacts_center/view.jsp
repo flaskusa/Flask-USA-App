@@ -794,7 +794,6 @@ function userDetailsDrop(){
 $(document).ready(function() {
 
 $(".btn").bind( "click", function() {
-	alert("btn");
 	$(".contacts-container-content").appendTo($(".contacts-container "));
 });
 

@@ -129,7 +129,7 @@ AUI.add(
 					'<div class="lfr-contact-extra">' +
 						'{emailAddress}' +
 					'</div>' +
-					'<div class="hideme lfr-social-relations">' +
+					'<div class="lfr-social-relations">' +
 						'{connectionRequested}' + '{connected}' + '{following}' + '{block}' +
 					'</div>' +
 				'</div>' +
