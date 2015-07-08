@@ -781,6 +781,7 @@ function userDetailsPrepend(){
 
 function userDetailsDrop(){
 	setTimeout(function(){
+		
 		$( ".lfr-contact-grid-item" ).bind( "click", function() {
 			$(".lfr-contact-grid-item").animate({height: "70px"});
 			$(".contacts-container-content").appendTo($(this));
@@ -798,6 +799,14 @@ $(".btn").bind( "click", function() {
 });
 
 setTimeout(function(){
+	$(".search-input").change(function(){
+		$( ".lfr-contact-grid-item" ).bind( "click", function() {
+			$(".lfr-contact-grid-item").animate({height: "70px"});
+			$(".contacts-container-content").appendTo($(this));
+			
+			$(this).animate({height: "300px"});	 
+		});
+	});
 	$( ".lfr-contact-grid-item" ).bind( "click", function() {
 		$(".lfr-contact-grid-item").animate({height: "70px"});
 		$(".contacts-container-content").appendTo($(this));
