@@ -26,7 +26,7 @@ public class FlaskDocLibUtil {
 	//public static final String _durFolder = "3";
 	//public static final String _posFolder = "4";
 	
-	public static String APP_NAME = "guest";
+	public static String APP_NAME = "flask";
 	
 	public static long _repositoryId = 0; 
 	//group id is used as repository id
