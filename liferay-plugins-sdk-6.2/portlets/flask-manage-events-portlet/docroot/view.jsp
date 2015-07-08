@@ -16,9 +16,7 @@
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@include file="init.jsp"%>
 
-<portlet:actionURL  var="addImagesActionURL" name="addImages">
-</portlet:actionURL>
-
+<portlet:actionURL  var="addImagesActionURL" name="addImages"/>
 <%
   long repositoryId = themeDisplay.getLayout().getGroupId();
   themeDisplay.getLayout().getUuid();
