@@ -21,6 +21,7 @@ import java.util.List;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.Event;
 import com.rumbasolutions.flask.model.EventDetail;
@@ -56,11 +57,13 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	
 	private static Log LOGGER = LogFactoryUtil.getLog(EventServiceImpl.class);
 	
+	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public List<Event> getAllEvents(ServiceContext  serviceContext){
 		List<Event> events= new ArrayList<Event>();
 		try {
 			events =  EventUtil.findAll();
+			events = FlaskUtil.setVenueName(events);
 		}
 		catch (Exception e) {
 			LOGGER.error("Exception in getAllEvents. " + e.getMessage());

@@ -22,6 +22,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.Venue;
 import com.rumbasolutions.flask.model.VenueDetail;
@@ -60,6 +61,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	
 	private static Log LOGGER = LogFactoryUtil.getLog(VenueServiceImpl.class);
 	
+	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public List<Venue> getAllVenues(ServiceContext  serviceContext){
 		List<Venue> venue = new ArrayList<Venue>();

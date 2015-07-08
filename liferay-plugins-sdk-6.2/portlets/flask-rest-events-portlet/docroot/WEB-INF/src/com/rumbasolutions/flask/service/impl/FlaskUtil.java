@@ -3,10 +3,15 @@ package com.rumbasolutions.flask.service.impl;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 
+import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.rumbasolutions.flask.model.Event;
+import com.rumbasolutions.flask.model.Venue;
+import com.rumbasolutions.flask.service.persistence.VenueUtil;
 
 
 public class FlaskUtil {
@@ -51,5 +56,25 @@ public class FlaskUtil {
 		}	
 		return cal;
 	}
+	
+	public static List<Event> setVenueName(List<Event> eventList){
+		
+		
+		for (Event event : eventList){
+			
+			try {
+				Venue venue = VenueUtil.fetchByPrimaryKey(event.getVenueId());
+				event.setVenueName(venue.getVenueName());
+			}
+			catch (SystemException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return eventList;
+		
+	}
+	
 
 }
