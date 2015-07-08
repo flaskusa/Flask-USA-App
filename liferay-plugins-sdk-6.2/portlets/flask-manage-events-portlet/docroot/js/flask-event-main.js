@@ -15,7 +15,7 @@ function addClickHandlers(){
 			$("#formContainer").show();
 			_eventModel.loadVenues('venueId');
 			_eventModel.loadEventType('eventTypeId');
-			fnBuildEventUpload();		
+			fnBuildEventUpload($("#eventImage").val());		
 	});
 	/* Click handler for save button*/
 	
@@ -139,6 +139,7 @@ function editEvent(rowData) {
 			$("#eventDetailsDataTable").show();			
 			$("#infoTypeId").val($(this).attr("alt"));
 		})
+		fnShowEventLogo(repositoryId,rowData.eventId,$("#eventImage"), true)
 }
 
 
@@ -178,7 +179,7 @@ function initForm(){
 		$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'hh:mm tt', showCalendarButton: false});
 }
 
-function fnBuildEventUpload(){
+function fnBuildEventUpload(imageContainer){
 	$(imageContainer).html(""); 
   	var strSelected = "";
   	dropZoneLogo = "";

@@ -143,7 +143,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		console.log(datarecord);
 		
 		$(rightcolumn).append("<table>");		
-		fnShowEventLogo(_repositoryId,datarecord.eventId,leftcolumn)
+		fnShowEventLogo(_repositoryId,datarecord.eventId,leftcolumn,false)
 		var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
 				+ datarecord.venueId + "</td></tr>";
 		var EventDate = "<tr><td class='filledWidth1'><b>Event Date:</b></td><td> "
@@ -235,7 +235,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
     
 	}
 
-function fnShowEventLogo(_repositoryId,_eventId,_leftcolumn){
+function fnShowEventLogo(_repositoryId,_eventId,_leftcolumn, _showUpload){
 	///LOGO START
 	var LogoURL = "";
 	var flaskRequest = new Request();
@@ -248,39 +248,51 @@ function fnShowEventLogo(_repositoryId,_eventId,_leftcolumn){
 			flaskRequestChild.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
 				function (data){
 					//data.folderId;
-					LogoURL = "/documents/"+_repositoryId+"/"+data.folderId+"/EventLogo";
-					console.log(data);
-				    var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+LogoURL+')','data-folderId':data.folderId,'data-title':'EventLogo'});
-					$(_leftcolumn).append(objdiv);
-					$(objdiv).click(function(){
-						var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
-				    	$(this).toggleClass("activeImage");
-				    	if($(this).hasClass("activeImage")){
-			    			$(objDel).appendTo($(_leftcolumn));
-			    			$(objDel).click(function(){
-		    					fnDeleteFileByTitle(_repositoryId,$(objdiv).attr("data-folderId"),$(objdiv).attr("data-title"));
-		    					$(this).remove();
-		    					$(objdiv).remove();
-			    			});
-				    	}
-				    	else{
-				    			$(objDel).remove();
-				    	}
-				    });					
-					console.log(LogoURL);
+					var _folderId = data.folderId;
+					var flaskRequestChild0 = new Request();
+					paramsChild0= {'groupId': _repositoryId, 'folderId':data.folderId, 'title': 'EventLogo'};
+					console.log(paramsChild0)
+					console.log(_eventDetailModel.SERVICE_ENDPOINTS.GET_FILE_BY_TITLE);
+					flaskRequestChild0.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_FILE_BY_TITLE , paramsChild0, 
+						function (data){
+							LogoURL = "/documents/"+_repositoryId+"/"+_folderId+"/EventLogo";
+						    var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+LogoURL+')','data-folderId':_folderId,'data-title':'EventLogo'});
+							$(_leftcolumn).append(objdiv);
+							$(objdiv).click(function(){
+								var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+						    	$(this).toggleClass("activeImage");
+						    	if($(this).hasClass("activeImage")){
+					    			$(objDel).appendTo($(_leftcolumn));
+					    			$(objDel).click(function(){
+				    					fnDeleteFileByTitle(_repositoryId,$(objdiv).attr("data-folderId"),$(objdiv).attr("data-title"));
+				    					$(this).remove();
+				    					$(objdiv).remove();
+				    					if(_showUpload){
+											fnBuildEventUpload(_leftcolumn);
+										}				    					
+					    			});
+						    	}
+						    	else{
+					    			$(objDel).remove();
+						    	}
+						    });					
+						} ,
+						function (data){
+							if(_showUpload){
+								fnBuildEventUpload(_leftcolumn);
+							}
+					});				
 				} ,
 				function (data){
-					console.log(data);
-					LogoURL = "/documents/"+_repositoryId+"/0/welcome_community"
-					var eventImage = "<div class='eventLogo' style='background-image:url("+LogoURL+")'></div>";
-					$(_leftcolumn).append(eventImage);
+					if(_showUpload){
+						fnBuildEventUpload(_leftcolumn);
+					}
 			});
 		} ,
 		function (data){
-			console.log(data);
-			LogoURL = "/documents/"+_repositoryId+"/0/welcome_community"
-			var eventImage = "<div class='eventLogo' style='background-image:url("+LogoURL+")'></div>";
-			$(_leftcolumn).append(eventImage);
+			if(_showUpload){
+				fnBuildEventUpload(_leftcolumn);
+			}
 	});
 	//LOGO END
 }
