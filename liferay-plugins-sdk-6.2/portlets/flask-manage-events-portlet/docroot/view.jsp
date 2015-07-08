@@ -130,6 +130,7 @@ function initialize(portletId, portlet){
 			  <input id="eventDetailId" type="hidden" name="eventDetailId" value="0">
 			  <input class="btn btn-info cssVdSave" type="button" value="Save"/>
 			  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel" >
+			  <div id="eventDetailGallery"></div>
 			</form>
 			
 			<div id="eventDetailsDataTable" class="table-condensed">

@@ -116,18 +116,11 @@ GRID_PARAM_DETAILS.initrowdetails = function(index, parentElement, gridElement, 
     tabsdiv = $($(parentElement).children()[0]);
 	    if (tabsdiv != null) {
 	    	var eventDiv = tabsdiv.find('.images');
-	    	var container1 = $('<div class="row-fluid"></div>');
-	    	var leftcolumn = $('<div class="span5"></div>');
-	  	  	var d0 = datarecord.infoTitle;
-	  	  	var d1 = datarecord.infoDesc
-	    	container1.append(leftcolumn);
-	  	  	$(container1).appendTo($(eventDiv));
-	  	    //if($("#eventDetailId").val()>0){
-	  	    	fnShowSlider(datarecord.eventId,leftcolumn,datarecord.eventDetailId,datarecord.infoTypeId,datarecord.infoTypeCategoryId);
-	  	    //}
-	  	    	
+	    	var container = $('<div/>');
+  	    	fnShowSlider(datarecord.eventId,container,datarecord.eventDetailId,datarecord.infoTypeId,datarecord.infoTypeCategoryId);	    	
+	  	  	$(container).appendTo($(eventDiv));
     	$(tabsdiv).jqxTabs({
-			width : '90%',
+			width : '98%',
 			height : 180
 		});	  	    	
 	}
@@ -184,7 +177,6 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 				rowsheight : 34,
                 theme:	'custom',
                 autoheight: true,
-             // Pageing config
                 pageable : true,
                 pagermode : 'default',
                 rowdetails: true,

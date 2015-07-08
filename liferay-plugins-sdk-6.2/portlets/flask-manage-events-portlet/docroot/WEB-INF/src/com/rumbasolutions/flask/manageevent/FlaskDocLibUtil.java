@@ -17,7 +17,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
-
+//import com.rumbasolutions.flask.service.impl.EventServiceImpl;
 
 public class FlaskDocLibUtil {
 	public static final String _eventRootFolder = "Event";
@@ -131,7 +131,6 @@ public class FlaskDocLibUtil {
 														 throws PortalException, SystemException{
 		FileEntry fileEntry=null;	
 		try{	
-			
 			fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), folder.getRepositoryId(), 
 												folder.getFolderId(), sourcefileName, mimeType, 
 												title, desc, 
@@ -160,5 +159,17 @@ public class FlaskDocLibUtil {
 		return mimeType;
 	}
 	
+	public static String updateEventLogoPath(String FilePath){
+		String filePath="";
+		try {
+			//EventServiceImpl t = new EventServiceImpl();
+			//t.updateEvent(eventId, eventName, description, eventDate, startTime, endTime, eventTypeId, venueId, eventImagePath, serviceContext);
+			return filePath; 
+		}
+		catch (Exception e) {
+			//e.printStackTrace();
+		}
+		return filePath;
+	}
 	
 }

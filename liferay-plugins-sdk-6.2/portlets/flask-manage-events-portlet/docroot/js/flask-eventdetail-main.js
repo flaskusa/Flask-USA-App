@@ -278,6 +278,8 @@ function deleteMultipleEventDetail(eventList) {
 
 /* Edit Event */
 function editEventDetail(rowData) {
+		var container = $('#eventDetailGallery');
+		container.html("");
 		var repositoryId = $("#repositoryId").val();
 		$('#eventDetailsForm #eventId').val($('#eventForm #eventId').val());
 		$('#eventDetailId').val(rowData.eventDetailId);
@@ -285,12 +287,10 @@ function editEventDetail(rowData) {
 		$('#eventDetailsForm').show();
 		$('#eventDetailsDataTable').hide();
 		_eventDetailModel.loadContentType('infoTypeCategoryId',rowData.infoTypeCategoryId);
-		setTimeout(
-				  function() 
-				  {
-					  _flaskLib.loadDataToForm("eventDetailsForm",  _eventDetailModel.DATA_MODEL.EVENTDETAILS, rowData, function(){});
-				  }, 500);		
-		
+		setTimeout(function(){
+			_flaskLib.loadDataToForm("eventDetailsForm",  _eventDetailModel.DATA_MODEL.EVENTDETAILS, rowData, function(){});
+		}, 500);		
+    	fnShowSlider(rowData.eventId,container,rowData.eventDetailId,rowData.infoTypeId,rowData.infoTypeCategoryId);	
 }
 
 function formatUnixToTime(tdate){var date = new Date(tdate);
@@ -366,21 +366,61 @@ function fnShowSlider(_eventId,_divObj,_eventDetailId,_infoTypeId,_infoTypeCateg
 }
 
 function fnRenderSlider(folderId,_divObj){
+	$(_divObj).html("");
+	$(".eventLogo").removeClass("activeImage");
 	var flaskRequest = new Request();
 	params= {'repositoryId': $("#repositoryId").val(), 'folderId': folderId};
 	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_FILES , params, 
 		function (data){
 			if(typeof data=="object"){
+				console.log(data);
+				var iSelected = false;
 		    	for(var iCount=0;iCount<data.length;iCount++){
 		    		var imgURL = '/documents/'+data[iCount].groupId+'/'+data[iCount].folderId+'/'+data[iCount].title;
-				    var objdiv = $('<div/>',{'class':'form-group'});
-				    var objimg = $('<img/>',{'src':imgURL,'height':'60px','weight':'60px'}).appendTo(objdiv);
+				    var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-fileEntryId':data[iCount].fileEntryId});
 				    $(objdiv).appendTo($(_divObj));
+				    $(objdiv).click(function(){
+				    	$(this).toggleClass("activeImage");
+				    	if($(".activeImage").length>0){
+				    		if(iSelected==false){
+				    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+				    			$(objDel).appendTo($(_divObj));
+				    			iSelected = true;
+				    			$(objDel).click(function(){
+				    				$("#spinningSquaresG").show();
+				    				$(".activeImage").each(function(){
+				    					console.log($(this).attr("data-fileEntryId"));
+				    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
+				    					$(this).remove();
+				    				});
+				    				if($(".activeImage").length==0){
+				    					$("#spinningSquaresG").hide();
+				    					$(objDel).remove();
+				    					iSelected = false;
+				    				}
+				    			});
+				    		}
+				    	}
+				    	else{
+				    			iSelected = false;
+				    	}
+				    });
 		    	}
 		    }		
 		} ,
 		function (data){
 			console.log("Error in getting Folder: " + data );
 		});	
-			 
+}
+
+function fnDeleteFileByEntryId(fileEntryId,objDel){
+	params= {'fileEntryId': fileEntryId};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.DELETE_FILES , params, 
+		function (data){
+			if(typeof data=="object"){
+				
+			}		
+		},
+		function (data){$("#spinningSquaresG").hide();});	
 }

@@ -4,13 +4,16 @@ _eventDetailModel.SERVICE_ENDPOINTS = {
 	API_PREFIX					:"/api/jsonws",
 	GET_INFO_TYPES 				: "/flask-rest-events-portlet.infotype/get-info-types",
 	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
-	GET_FOLDER					: "/dlapp/get-folder",
-	GET_FILES					: "/dlapp/get-file-entries",
 	ADD_EVENT_DETAILS			: "/flask-rest-events-portlet.event/add-event-detail",
 	GET_EVENT_DETAILS			: "/flask-rest-events-portlet.event/get-event-details",
 	UPDATE_EVENT_DETAILS		: "/flask-rest-events-portlet.event/update-event-detail",
 	DELETE_EVENT_DETAIL			: "/flask-rest-events-portlet.event/delete-event-detail",
-	DELETE_ALL_EVENT_DETAILS	: "/flask-rest-events-portlet.event/delete-all-event-details"
+	DELETE_ALL_EVENT_DETAILS	: "/flask-rest-events-portlet.event/delete-all-event-details",
+	GET_FOLDER					: "/dlapp/get-folder",
+	GET_FILE_BY_TITLE			: "/dlapp/get-file-entry",
+	GET_FILES					: "/dlapp/get-file-entries",	
+	DELETE_FILES				: "/dlapp/delete-file-entry",
+	DELETE_FILE_BY_TITLE		: "/dlapp/delete-file-entry-by-title"
 };
 
 _eventDetailModel.DATA_MODEL= {
@@ -33,7 +36,7 @@ _eventDetailModel.DATA_MODEL= {
 				 { name: 'phone', type: 'string'},
 				 { name: 'website', type: 'string'},
 				 { name: 'cost', type: 'long' },
-				 { name: 'hoursOfOperation', type: 'string' }
+				 { name: 'hoursOfOperation', type:'string'}
 			]
 	};
 

@@ -139,7 +139,6 @@ function editEvent(rowData) {
 			$("#eventDetailsDataTable").show();			
 			$("#infoTypeId").val($(this).attr("alt"));
 		})
-		fnBuildEventUpload();		
 }
 
 
@@ -179,7 +178,7 @@ function initForm(){
 		$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'hh:mm tt', showCalendarButton: false});
 }
 
-function fnBuildEventUpload(Obj){
+function fnBuildEventUpload(){
 	$(imageContainer).html(""); 
   	var strSelected = "";
   	dropZoneLogo = "";
@@ -204,4 +203,18 @@ function fnSaveEventLogo(eventId){
 	dropZoneLogo.on("queuecomplete", function (file) {
 		$("#eventImage").html(""); // Clear upload component
 	});	
+}
+
+function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel){
+	params= {repositoryId:_repositoryId ,folderId: _folderId,title:_title};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.DELETE_FILE_BY_TITLE , params, 
+		function (data){
+			if(typeof data=="object"){
+				
+			}		
+		},
+		function (data){
+			
+		});	
 }

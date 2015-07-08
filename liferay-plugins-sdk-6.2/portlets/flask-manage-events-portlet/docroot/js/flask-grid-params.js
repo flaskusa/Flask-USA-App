@@ -133,45 +133,17 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 	    if (tabsdiv != null) {
 	  var eventDiv = tabsdiv.find('.event');
 	  var container1 = $('<div class="row-fluid"></div>');
-	  var leftcolumn = $('<div class="span5"></div>');
+	  var leftcolumn = $('<div class="span3 GridLogo"></div>');
+	  var rightcolumn = $('<div class="span9"></div>');
 	  var d = new Date(datarecord.eventDate);
 	  var d1 = formatUnixToTime(datarecord.startTime);
 	  var d2 = formatUnixToTime(datarecord.endTime);
 		container1.append(leftcolumn);
-		$(leftcolumn).append("<table>");		
-		///LOGO START
-		var LogoURL = "";
-		var flaskRequest = new Request();
-		params= {'repositoryId': _repositoryId, 'parentFolderId': 0, 'name': 'Event'};
-		flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
-			function (data){
-				folderName = 'Event-'+datarecord.eventId;
-				console.log(folderName);
-				var flaskRequestChild = new Request();
-				paramsChild= {'repositoryId': _repositoryId, 'parentFolderId': data.folderId, 'name': folderName};
-				flaskRequestChild.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
-					function (data){
-						//data.folderId;
-						LogoURL = "/documents/"+_repositoryId+"/"+data.folderId+"/EventLogo";
-						var eventImage = "<tr><td colspan='2'><img src='" + LogoURL + "' height='90px' width='90px'/></td></tr>";
-						$(leftcolumn).append(eventImage);
-						console.log(LogoURL);
-					} ,
-					function (data){
-						LogoURL = "/documents/"+_repositoryId+"/0/welcome_community"
-						var eventImage = "<tr><td colspan='2'><img src='" + LogoURL + "' height='90px' width='90px'/></td></tr>";
-						$(leftcolumn).append(eventImage);
-						console.log(LogoURL);
-				});
-			} ,
-			function (data){
-				LogoURL = "/documents/"+_repositoryId+"/0/welcome_community"
-				var eventImage = "<tr><td colspan='2'><img src='" + LogoURL + "' height='90px' width='90px'/></td></tr>";
-				$(leftcolumn).append(eventImage);
-				console.log(LogoURL);
-		});
-		//LOGO END
+		container1.append(rightcolumn);
+		console.log(datarecord);
 		
+		$(rightcolumn).append("<table>");		
+		fnShowEventLogo(_repositoryId,datarecord.eventId,leftcolumn)
 		var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
 				+ datarecord.venueId + "</td></tr>";
 		var EventDate = "<tr><td class='filledWidth1'><b>Event Date:</b></td><td> "
@@ -181,11 +153,11 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		var EndTime = "<tr><td class='filledWidth1'><b>End Time:</b></td><td> "
 			+ d2 + "</td></tr>";
 		
-		$(leftcolumn).append(venueId);
-		$(leftcolumn).append(EventDate);
-		$(leftcolumn).append(StartTime);
-		$(leftcolumn).append(EndTime);
-		$(leftcolumn).append("</table>");
+		$(rightcolumn).append(venueId);
+		$(rightcolumn).append(EventDate);
+		$(rightcolumn).append(StartTime);
+		$(rightcolumn).append(EndTime);
+		$(rightcolumn).append("</table>");
 		eventDiv.append(container1);
 
 		$(tabsdiv).jqxTabs({
@@ -262,3 +234,53 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
             });
     
 	}
+
+function fnShowEventLogo(_repositoryId,_eventId,_leftcolumn){
+	///LOGO START
+	var LogoURL = "";
+	var flaskRequest = new Request();
+	params= {'repositoryId': _repositoryId, 'parentFolderId': 0, 'name': 'Event'};
+	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
+		function (data){
+			folderName = 'Event-'+_eventId;
+			var flaskRequestChild = new Request();
+			paramsChild= {'repositoryId': _repositoryId, 'parentFolderId': data.folderId, 'name': folderName};
+			flaskRequestChild.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
+				function (data){
+					//data.folderId;
+					LogoURL = "/documents/"+_repositoryId+"/"+data.folderId+"/EventLogo";
+					console.log(data);
+				    var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+LogoURL+')','data-folderId':data.folderId,'data-title':'EventLogo'});
+					$(_leftcolumn).append(objdiv);
+					$(objdiv).click(function(){
+						var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+				    	$(this).toggleClass("activeImage");
+				    	if($(this).hasClass("activeImage")){
+			    			$(objDel).appendTo($(_leftcolumn));
+			    			$(objDel).click(function(){
+		    					fnDeleteFileByTitle(_repositoryId,$(objdiv).attr("data-folderId"),$(objdiv).attr("data-title"));
+		    					$(this).remove();
+		    					$(objdiv).remove();
+			    			});
+				    	}
+				    	else{
+				    			$(objDel).remove();
+				    	}
+				    });					
+					console.log(LogoURL);
+				} ,
+				function (data){
+					console.log(data);
+					LogoURL = "/documents/"+_repositoryId+"/0/welcome_community"
+					var eventImage = "<div class='eventLogo' style='background-image:url("+LogoURL+")'></div>";
+					$(_leftcolumn).append(eventImage);
+			});
+		} ,
+		function (data){
+			console.log(data);
+			LogoURL = "/documents/"+_repositoryId+"/0/welcome_community"
+			var eventImage = "<div class='eventLogo' style='background-image:url("+LogoURL+")'></div>";
+			$(_leftcolumn).append(eventImage);
+	});
+	//LOGO END
+}
