@@ -20,11 +20,27 @@ function fnlist(tdata) {
 	  datatype : "json",
 	  datafields : DATA_SOURCE.GET_FLASK_EVENT_LIST,
 	 };
+	 
+	 function formatUnixToTime(tdate)
+		{
+			var date = new Date(tdate);
+			// hours part from the timestamp
+			var hours = date.getHours();
+			// minutes part from the timestamp
+			var minutes = "0" + date.getMinutes();
+
+			var ampm = hours >= 12 ? 'PM' : 'AM';
+			hours = hours % 12;
+			// will display time in 10:30 PM format
+			return hours + ':' + minutes.substr(-2) + ' ' + ampm;
+		}
+	 
 	 var divRow = $('<table/>',{'class':'tableSize'});
 	 for(var i in tdata)
 		{
+		    var st = formatUnixToTime(tdata[i].startTime);
 		    var divRowItem = $('<div/>',{'title':tdata[i].eventName, 'class':'rowHeight'});
-		 	var tempHTML = '<tr><td style="width:20%;"><div class="imgdiv"><img src="'+ tdata[i].eventImagePath + '" ></div><div class="lbldiv"><label class="control-label-color">' + tdata[i].eventName + '</label><label class="control-label-nocolor">' + tdata[i].description + '</label></div></td></tr>';
+		 	var tempHTML = '<tr><td style="width:20%;"><div class="imgdiv"><img src="'+ tdata[i].eventImagePath + '" ></div><div class="lbldiv"><label class="control-label-color">' + tdata[i].eventName + '</label><label class="control-label-nocolor">'+ st + ' at ' + tdata[i].venueId + '</label></div></td></tr>';
 		 	$(divRowItem).html(tempHTML);
 		 	$(divRowItem).appendTo($(divRow));
 		 	$(divRowItem).click(function(){
