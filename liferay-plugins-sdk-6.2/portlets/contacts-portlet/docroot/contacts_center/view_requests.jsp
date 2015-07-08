@@ -71,7 +71,7 @@
 				</portlet:actionURL >
 
 				<span class="lfr-user-action-item lfr-user-action-confirm">
-					<a href="<%= confirmURL %>"><liferay-ui:message key="confirm" /></a>
+					<a id="notify2" href="<%= confirmURL %>"><liferay-ui:message key="confirm" /></a>
 				</span>
 
 				<portlet:actionURL name="updateSocialRequest" var="ignoreURL">
@@ -81,7 +81,7 @@
 				</portlet:actionURL >
 
 				<span class="lfr-user-action-item lfr-user-action-ignore">
-					<a href="<%= ignoreURL %>"><liferay-ui:message key="ignore" /></a>
+					<a id="notify3" href="<%= ignoreURL %>"><liferay-ui:message key="ignore" /></a>
 				</span>
 			</div>
 		</liferay-ui:search-container-column-text>
