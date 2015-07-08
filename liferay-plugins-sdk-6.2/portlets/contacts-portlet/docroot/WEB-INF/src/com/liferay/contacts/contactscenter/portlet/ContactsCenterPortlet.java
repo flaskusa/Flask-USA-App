@@ -78,7 +78,6 @@ import com.liferay.portal.model.UserNotificationDeliveryConstants;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
-import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
@@ -292,7 +291,7 @@ public class ContactsCenterPortlet extends MVCPortlet {
 		writeJSON(resourceRequest, resourceResponse, jsonObject);
 	}
 
-	@Override
+
 	public void processAction(
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws PortletException {
@@ -392,7 +391,7 @@ public class ContactsCenterPortlet extends MVCPortlet {
 		}
 	}
 
-	@Override
+
 	public void serveResource(
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws PortletException {
@@ -1099,12 +1098,13 @@ public class ContactsCenterPortlet extends MVCPortlet {
 
 		User user = themeDisplay.getUser();
 
-		ServiceContext serviceContext = ServiceContextFactory.getInstance(
-			User.class.getName(), actionRequest);
+		long[] assetCategoryIds = StringUtil.split(
+			ParamUtil.getString(actionRequest, "assetCategoryNames"), 0L);
+		String[] assetTagNames = StringUtil.split(
+			ParamUtil.getString(actionRequest, "assetTagNames"));
 
 		UserLocalServiceUtil.updateAsset(
-			user.getUserId(), user, serviceContext.getAssetCategoryIds(),
-			serviceContext.getAssetTagNames());
+			user.getUserId(), user, assetCategoryIds, assetTagNames);
 	}
 
 	protected void updatePhoneNumbers(ActionRequest actionRequest)

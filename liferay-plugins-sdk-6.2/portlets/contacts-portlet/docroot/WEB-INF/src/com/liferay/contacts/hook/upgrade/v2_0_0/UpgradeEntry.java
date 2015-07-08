@@ -30,7 +30,7 @@ import java.util.List;
  */
 public class UpgradeEntry extends UpgradeProcess {
 
-	@Override
+
 	protected void doUpgrade() throws Exception {
 		List<Entry> entries = EntryLocalServiceUtil.getEntries(
 			QueryUtil.ALL_POS, QueryUtil.ALL_POS);

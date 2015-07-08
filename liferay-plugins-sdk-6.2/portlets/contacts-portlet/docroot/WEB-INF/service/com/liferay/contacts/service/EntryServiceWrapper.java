@@ -34,7 +34,7 @@ public class EntryServiceWrapper implements EntryService,
 	*
 	* @return the Spring bean ID for this bean
 	*/
-	@Override
+
 	public java.lang.String getBeanIdentifier() {
 		return _entryService.getBeanIdentifier();
 	}
@@ -44,19 +44,19 @@ public class EntryServiceWrapper implements EntryService,
 	*
 	* @param beanIdentifier the Spring bean ID for this bean
 	*/
-	@Override
+
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		_entryService.setBeanIdentifier(beanIdentifier);
 	}
 
-	@Override
+
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
 		return _entryService.invokeMethod(name, parameterTypes, arguments);
 	}
 
-	@Override
+
 	public com.liferay.portal.kernel.json.JSONArray searchUsersAndContacts(
 		long companyId, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
@@ -79,12 +79,12 @@ public class EntryServiceWrapper implements EntryService,
 		_entryService = entryService;
 	}
 
-	@Override
+
 	public EntryService getWrappedService() {
 		return _entryService;
 	}
 
-	@Override
+
 	public void setWrappedService(EntryService entryService) {
 		_entryService = entryService;
 	}

@@ -35,7 +35,7 @@ import java.util.Date;
  * @generated
  */
 public class EntryCacheModel implements CacheModel<Entry>, Externalizable {
-	@Override
+
 	public String toString() {
 		StringBundler sb = new StringBundler(21);
 
@@ -64,7 +64,7 @@ public class EntryCacheModel implements CacheModel<Entry>, Externalizable {
 		return sb.toString();
 	}
 
-	@Override
+
 	public Entry toEntityModel() {
 		EntryImpl entryImpl = new EntryImpl();
 
@@ -120,7 +120,7 @@ public class EntryCacheModel implements CacheModel<Entry>, Externalizable {
 		return entryImpl;
 	}
 
-	@Override
+
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		entryId = objectInput.readLong();
 		groupId = objectInput.readLong();
@@ -134,7 +134,7 @@ public class EntryCacheModel implements CacheModel<Entry>, Externalizable {
 		comments = objectInput.readUTF();
 	}
 
-	@Override
+
 	public void writeExternal(ObjectOutput objectOutput)
 		throws IOException {
 		objectOutput.writeLong(entryId);

@@ -39,7 +39,7 @@ public class EntryServiceClp implements EntryService {
 			};
 	}
 
-	@Override
+
 	public java.lang.String getBeanIdentifier() {
 		Object returnObj = null;
 
@@ -62,7 +62,7 @@ public class EntryServiceClp implements EntryService {
 		return (java.lang.String)ClpSerializer.translateOutput(returnObj);
 	}
 
-	@Override
+
 	public void setBeanIdentifier(java.lang.String beanIdentifier) {
 		try {
 			_invokableService.invokeMethod(_methodName1,
@@ -82,14 +82,14 @@ public class EntryServiceClp implements EntryService {
 		}
 	}
 
-	@Override
+
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable {
 		throw new UnsupportedOperationException();
 	}
 
-	@Override
+
 	public com.liferay.portal.kernel.json.JSONArray searchUsersAndContacts(
 		long companyId, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
