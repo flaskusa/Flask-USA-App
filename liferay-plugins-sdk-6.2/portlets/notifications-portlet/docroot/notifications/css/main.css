@@ -195,7 +195,59 @@
 }
 
 /* ---------- Dockbar notifications ---------- */
+.notifications-portlet .nav a.selected {
+  background-color: #383634 !important;
+  color: #FFFFFF !important;
+}
+.notifications-portlet .nav a:hover {
+  background-color: #383634 !important;
+  color: #F79634 !important;
+}
 
+.notifications-portlet .nav a .title {
+  float: left;
+  color: #F79634 !important;
+}
+
+.notifications-portlet .nav a .count {
+  float: right;
+  color: #F79634 !important;
+}
+.notifications-portlet .user-notifications-list .user-notification .body-container {
+  padding-left: 37px;
+}
+
+.notifications-portlet .user-notifications-list .user-notification .body-container .title a {
+  color: rgb(247, 150, 52) !important;
+}
+.clearfix .user-notification-delete .notifications-portlet .sender{width:70px !important; height:70px !important;}
+
+.notifications-portlet .user-notifications-list .user-notification .sender .user-thumbnail {
+ -webkit-border-radius: 5%;
+  -moz-border-radius: 50%;
+  -ms-border-radius: 50%;
+  -o-border-radius: 50%;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 0 0 2px #131211;
+  -moz-box-shadow: 0 0 0 2px #f38a23;
+  box-shadow: 0 0 0 0px #000000;
+  display: block;
+  height: 70px!important;
+  margin: 5px 10px 0 0;
+  overflow: hidden;
+}
+.notifications-portlet .user-notifications-list .user-notification .sender .user-thumbnail img {
+  width: 60px;
+}
+
+@media (max-width: 767px)
+{
+.notifications-portlet .user-notifications-list .user-notification .body-container, .dockbar-user-notifications .user-notifications-list .user-notification .body-container {
+  width: 100%;
+  margin-top: -78px;
+  margin-left: 10px;
+}
+}
 .aui {
 	.dockbar .nav li.dropdown.dockbar-user-notifications .dropdown-menu {
 		left: auto;
@@ -534,10 +586,9 @@
 	{
 		  margin-right: 10px !important;
 		  padding: 5px 20px !important;
-		  font: 16px "Coda", Helvetica, sans-serif !important;
+		  font: 14px "Coda", Helvetica, sans-serif !important;
 		  background: #231F20 !important;
 		  color: #fff !important;
-		  font-size: 20px !important;
 		  margin-top: 10px !important;
 		  text-shadow: none !important;
 		  background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) !important;
@@ -569,7 +620,6 @@
 		  display: inline-block;
 		  margin-left: 0px;
 		  margin-right: 0px;
-		  width: 100%;
 		}
 	}
 	/*-------------- Drop down menu ----------------------*/
@@ -593,10 +643,9 @@
 	{
 		  margin-right: 10px !important;
 		  padding: 5px 20px !important;
-		  font: 16px "Coda", Helvetica, sans-serif !important;
+		  font: 14px "Coda", Helvetica, sans-serif !important;
 		  background: #231F20 !important;
 		  color: #fff !important;  
-		  font-size: 20px !important;
 		  margin-top: 10px !important;
 		  text-shadow: none !important;
 		  background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) !important;
