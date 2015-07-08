@@ -501,9 +501,7 @@
 		}
 	}
 }
-
-
-
+/*
 .aui .dockbar .nav li.dropdown.dockbar-user-notifications .dropdown-menu {
   left: auto;
   max-height: none;
@@ -511,7 +509,7 @@
   right: 0;
   width: 332px !important;
 }
-/*----------- For Dockbar width --------------------*/
+----------- For Dockbar width --------------------*/
 .aui .dockbar-split .dockbar.navbar-static-top .collapse .nav-account-controls 
 {
   background-color: #fff !important;
@@ -534,35 +532,35 @@
 /*----------- For notification menu dropdown--------------------*/
 	.dockbar-user-notifications .dockbar-user-notifications-container .user-notifications-list .actionable .btn
 	{
-		  margin-right: 10px ;
-		  padding: 5px 20px;
-		  font: 16px "Coda", Helvetica, sans-serif;
-		  background: #231F20;
-		  color: #fff;  
-		  font-size: 20px ;
-		  margin-top: 10px ;
-		  text-shadow: none ;
-		  background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) ;
-		  background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%) ;
-		  background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%) ;
-		  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20));
-		  background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
-		  background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);
+		  margin-right: 10px !important;
+		  padding: 5px 20px !important;
+		  font: 16px "Coda", Helvetica, sans-serif !important;
+		  background: #231F20 !important;
+		  color: #fff !important;
+		  font-size: 20px !important;
+		  margin-top: 10px !important;
+		  text-shadow: none !important;
+		  background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		  background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		  background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20)) !important;
+		  background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		  background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%) !important;
 	}
 	
 	.dockbar-user-notifications .dockbar-user-notifications-container .user-notifications-list .actionable .btn:hover
 	{
-		color: #ff9900;
-		background: #231F20;
-		-webkit-transition: all 0.3s;
-		-moz-transition: all 0.3s;
-		transition: all 0.3s;
-		background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20));
-		background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);
+		color: #ff9900 !important;
+		background: #231F20 !important;
+		-webkit-transition: all 0.3s !important;
+		-moz-transition: all 0.3s !important;
+		transition: all 0.3s !important;
+		background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20)) !important;
+		background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%) !important;
 	}
 	
 	@media (max-width: 767px)
@@ -593,45 +591,45 @@
 /*--------------------- Buttons on request page ----------------------*/
 .clearfix .user-notification-delete .btn
 	{
-		  margin-right: 10px ;
-		  padding: 5px 20px;
-		  font: 16px "Coda", Helvetica, sans-serif;
-		  background: #231F20;
-		  color: #fff;  
-		  font-size: 20px ;
-		  margin-top: 10px ;
-		  text-shadow: none ;
-		  background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) ;
-		  background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%) ;
-		  background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%) ;
-		  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20));
-		  background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
-		  background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);
+		  margin-right: 10px !important;
+		  padding: 5px 20px !important;
+		  font: 16px "Coda", Helvetica, sans-serif !important;
+		  background: #231F20 !important;
+		  color: #fff !important;  
+		  font-size: 20px !important;
+		  margin-top: 10px !important;
+		  text-shadow: none !important;
+		  background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		  background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		  background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20)) !important;
+		  background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		  background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%) !important;
 	}
 .clearfix .user-notification-delete .btn:hover {
-		color: #ff9900;
-		background: #231F20;
-		-webkit-transition: all 0.3s;
-		-moz-transition: all 0.3s;
-		transition: all 0.3s;
-		background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20));
-		background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);
+		color: #ff9900 !important;
+		background: #231F20 !important;
+		-webkit-transition: all 0.3s !important;
+		-moz-transition: all 0.3s !important;
+		transition: all 0.3s !important;
+		background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20)) !important;
+		background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%) !important;
 }
 .clearfix .user-notification-delete .btn:focus {
-		color: #ff9900;
-		background: #231F20;
-		-webkit-transition: all 0.3s;
-		-moz-transition: all 0.3s;
-		transition: all 0.3s;
-		background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20));
-		background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%);
-		background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%);
+		color: #ff9900 !important;
+		background: #231F20 !important;
+		-webkit-transition: all 0.3s !important;
+		-moz-transition: all 0.3s !important;
+		transition: all 0.3s !important;
+		background-image: -ms-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: -moz-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: -o-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262),color-stop(1, #231F20)) !important;
+		background-image: -webkit-linear-gradient(top, #656262 0%, #231F20 100%) !important;
+		background-image: linear-gradient(to bottom, #656262 0%, #231F20 100%) !important;
 }
 /*---------------------End of Buttons on request page ----------------------*/
