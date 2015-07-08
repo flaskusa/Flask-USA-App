@@ -89,7 +89,7 @@ catch (NoSuchRoleException nsre) {
 		</div>
 	</liferay-util:body-top>
 	--%>
-
+<%--
 	<aui:script>
 		function <portlet:namespace />openWindow() {
 			Liferay.Util.openWindow(
@@ -175,5 +175,5 @@ catch (NoSuchRoleException nsre) {
 				}
 			);
 		}
-	</aui:script>
+	</aui:script> --%>
 </c:if>

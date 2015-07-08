@@ -63,7 +63,7 @@ pageContext.setAttribute("portletURL", portletURL);
 
 <div id="<portlet:namespace />messages"><!-- --></div>
 
-<form action="<%= portletURL.toString() %>" method="get" name="<portlet:namespace />fm">
+<form style="display: none;" action="<%= portletURL.toString() %>" method="get" name="<portlet:namespace />fm">
 	<liferay-portlet:renderURLParams varImpl="portletURL" />
 
 	<div class="sites-tabs">

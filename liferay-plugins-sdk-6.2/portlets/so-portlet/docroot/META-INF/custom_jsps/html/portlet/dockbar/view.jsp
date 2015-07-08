@@ -17,8 +17,8 @@
  */
 --%>
 
-<%@ include file="/html/portlet/dockbar/init.jsp" %>
 
-<liferay-util:include page="/html/portlet/dockbar/view.portal.jsp" />
+
+<liferay-util:include page="/portlet/dockbar/view.portal.jsp" />
 
 <liferay-util:include page="/html/portlet/dockbar/license_warning.jsp" />
