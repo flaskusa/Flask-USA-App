@@ -34,14 +34,7 @@
 		<add-default-resource>true</add-default-resource>
 		<system>true</system>
 	</portlet>
-	<portlet>
-		<portlet-name>8</portlet-name>
-		<icon>/user_bar/icon.png</icon>
-		<use-default-template>false</use-default-template>
-		<css-class-wrapper>so-portlet-user-bar</css-class-wrapper>
-		<add-default-resource>true</add-default-resource>
-		<system>true</system>
-	</portlet>
+	
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
