@@ -4,43 +4,31 @@
 <service-builder package-path="com.liferay.contacts">
 	<namespace>Contacts</namespace>
 	<entity name="Entry" local-service="true" remote-service="true">
-
 		<!-- PK fields -->
-
-		<column name="entryId" type="long" primary="true" />
-
+		<column name="entryId" type="long" primary="true"></column>
 		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
+		<column name="groupId" type="long"></column>
 		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
+		<column name="companyId" type="long"></column>
+		<column name="userId" type="long"></column>
+		<column name="userName" type="String"></column>
+		<column name="createDate" type="Date"></column>
+		<column name="modifiedDate" type="Date"></column>
 		<!-- Other fields -->
-
-		<column name="fullName" type="String" />
-		<column name="emailAddress" type="String" />
-		<column name="comments" type="String" />
-
+		<column name="fullName" type="String"></column>
+		<column name="emailAddress" type="String"></column>
+		<column name="comments" type="String"></column>
 		<!-- Order -->
-
 		<order by="asc">
-			<order-column name="fullName" case-sensitive="false" />
+			<order-column name="fullName" case-sensitive="false"></order-column>
 		</order>
-
 		<!-- Finder methods -->
-
 		<finder name="UserId" return-type="Collection">
-			<finder-column name="userId" />
+			<finder-column name="userId"></finder-column>
 		</finder>
 		<finder name="U_EA" return-type="Entry">
-			<finder-column name="userId" />
-			<finder-column name="emailAddress" />
+			<finder-column name="userId"></finder-column>
+			<finder-column name="emailAddress"></finder-column>
 		</finder>
 	</entity>
 	<exceptions>
