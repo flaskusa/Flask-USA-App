@@ -21,10 +21,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 public class FlaskDocLibUtil {
 	public static final String _eventRootFolder = "Event";
-	//public static final String _genFolder = "1";
-	//public static final String _preFolder = "2";
-	//public static final String _durFolder = "3";
-	//public static final String _posFolder = "4";
+	public static final String _venueRootFolder = "Venue";	
 	
 	public static String APP_NAME = "flask";
 	
@@ -52,6 +49,20 @@ public class FlaskDocLibUtil {
 		Folder folder = getOrCreateFolder(_eventRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
 		return folder;
 	}
+	
+	public static Folder createVenueFolder(long venueId, ServiceContext serviceContext) throws PortalException, SystemException{
+		
+		long repositoryId = getFlaskRepositoryId();
+		long userId = serviceContext.getUserId();
+		Folder folder = getOrCreateFolder(_venueRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
+		
+		String venueFolderName = getVenueFolderName(venueId);
+		Folder venueFolder = getOrCreateFolder(venueFolderName, folder.getFolderId(), folder.getRepositoryId(), userId, serviceContext);
+		 
+		
+		return venueFolder;
+	}
+	
 	
 	public static Folder createEventFolder(long eventId,ServiceContext serviceContext) throws PortalException, SystemException{
 		Folder folder = createEventRootFolder(serviceContext);
@@ -95,7 +106,9 @@ public class FlaskDocLibUtil {
 		return folder;
 	}
 
-
+	public static String getVenueFolderName(long venueId){
+		return String.format("%s-%s",_venueRootFolder, String.valueOf(venueId));
+	}
 	
 	public static Folder getOrCreateFolder(String eventFolderName, long parentFolderId, long repositoryId, long userId, ServiceContext serviceContext) throws PortalException, SystemException{
 		Folder folder= null;

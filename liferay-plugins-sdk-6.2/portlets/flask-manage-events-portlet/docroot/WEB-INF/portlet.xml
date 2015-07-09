@@ -7,7 +7,7 @@
 		<portlet-class>com.rumbasolutions.flask.manageevent.ManageEventPortletAction</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/view.jsp</value>
+			<value>/ManageEvent.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -31,4 +31,34 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>flask-manage-venue</portlet-name>
+		<display-name>Flask Manage Venue</display-name>
+		<portlet-class>com.rumbasolutions.flask.manageevent.ManageVenuePortletAction</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/ManageVenue.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Flask Manage Venue</title>
+			<short-title>Flask Manage Venue</short-title>
+			<keywords>Flask Manage Venue</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>	
 </portlet-app>

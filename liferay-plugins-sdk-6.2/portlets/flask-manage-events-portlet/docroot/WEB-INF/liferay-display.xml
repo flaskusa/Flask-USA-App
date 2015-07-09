@@ -4,5 +4,6 @@
 <display>
 	<category name="Flask">
 		<portlet id="flask-manage-events" />
+		<portlet id="flask-manage-venue" />
 	</category>
 </display>
