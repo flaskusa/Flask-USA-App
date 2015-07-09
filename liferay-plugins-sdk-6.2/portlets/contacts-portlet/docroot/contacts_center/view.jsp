@@ -20,7 +20,7 @@
 <%@ include file="/init.jsp" %>
 
 <%
-String filterBy = ParamUtil.getString(request, "filterBy", ContactsConstants.FILTER_BY_DEFAULT);
+String filterBy = ParamUtil.getString(request, "filterBy", ContactsConstants.FILTER_BY_TYPE_BI_CONNECTION);
 
 String name = ParamUtil.getString(request, "name");
 
@@ -246,7 +246,7 @@ portletURL.setWindowState(WindowState.NORMAL);
 										<portlet:param name="portalUser" value="<%= Boolean.TRUE.toString() %>" />
 									</liferay-portlet:renderURL>
 
-									<div class="lfr-contact-grid-item" onClick="userDetailsDrop()" data-userId="<%= user2.getUserId() %>" data-viewSummaryURL="<%= viewUserSummaryURL %>">
+									<div class="lfr-contact-grid-item newClass" onClick="userDetailsDrop()" data-userId="<%= user2.getUserId() %>" data-viewSummaryURL="<%= viewUserSummaryURL %>">
 										<div class="lfr-contact-thumb">
 											<img alt="<%= HtmlUtil.escape(user2.getFullName()) %>" src="<%= user2.getPortraitURL(themeDisplay) %>" />
 										</div>
@@ -304,7 +304,7 @@ portletURL.setWindowState(WindowState.NORMAL);
 										<portlet:param name="portalUser" value="<%= Boolean.FALSE.toString() %>" />
 									</liferay-portlet:renderURL>
 
-									<div class="lfr-contact-grid-item" onClick="userDetailsDrop()" data-userId="" data-viewSummaryURL="<%= viewContactSummaryURL %>">
+									<div class="lfr-contact-grid-item newClass" onClick="userDetailsDrop()" data-userId="" data-viewSummaryURL="<%= viewContactSummaryURL %>">
 										<div class="lfr-contact-thumb">
 											<img alt="<%= HtmlUtil.escape(fullName) %>" src='<%= themeDisplay.getPathImage() + "/user_male_portrait?img_id=0&t=" %>' />
 										</div>
@@ -499,12 +499,12 @@ portletURL.setWindowState(WindowState.NORMAL);
 			var contactsCenter = Liferay.component('contactsCenter');
 
 			<c:if test="<%= !userPublicPage %>">
-				$(document).ready(function(){
+				/* $(document).ready(function(){
 					var contactFilterSelect = A.one('#<portlet:namespace />filterBy');
 					contactFilterSelect.set('value', '<%= ContactsConstants.FILTER_BY_TYPE_BI_CONNECTION %>');
 					searchInput.set('value', '');
 					contactsCenter.updateContacts(searchInput.get('value'), contactFilterSelect.get('value'));
-				});
+				}); */
 				var contactFilterSelect = A.one('#<portlet:namespace />filterBy');
 				//contactFilterSelect.set('value', '<%= ContactsConstants.FILTER_BY_TYPE_BI_CONNECTION %>');
 				contactFilterSelect.on(
@@ -767,65 +767,51 @@ portletURL.setWindowState(WindowState.NORMAL);
 	</c:otherwise>
 </c:choose>
 <script type="text/javascript">
-
-$( ".lfr-contact-grid-item" ).bind( "click", function() {
-	$(".lfr-contact-grid-item").animate({height: "70px"});
-	$(".contacts-container-content").appendTo($(this));
-	
-	$(this).animate({height: "300px"});	 
-});
-
 function userDetailsPrepend(){
 	$(".contacts-container-content").appendTo($(".contacts-container "));
 } 
 
 function userDetailsDrop(){
 	setTimeout(function(){
-		
-		$( ".lfr-contact-grid-item" ).bind( "click", function() {
-			$(".lfr-contact-grid-item").animate({height: "70px"});
-			$(".contacts-container-content").appendTo($(this));
-			
-			$(this).animate({height: "300px"});	 
-		});
+		setItemClick();
 	}, 800);
 }
 
-
-$(document).ready(function() {
-
-$(".btn").bind( "click", function() {
-	$(".contacts-container-content").appendTo($(".contacts-container "));
-});
-
-setTimeout(function(){
-	$(".search-input").change(function(){
-		$( ".lfr-contact-grid-item" ).bind( "click", function() {
-			$(".lfr-contact-grid-item").animate({height: "70px"});
-			$(".contacts-container-content").appendTo($(this));
-			
-			$(this).animate({height: "300px"});	 
-		});
-	});
+function setItemClick(){
 	$( ".lfr-contact-grid-item" ).bind( "click", function() {
-		$(".lfr-contact-grid-item").animate({height: "70px"});
+		$(".lfr-contact-grid-item").css({"height":"70px"});
 		$(".contacts-container-content").appendTo($(this));
 		
-		$(this).animate({height: "300px"});	 
+		if($(this).height()==70)
+		{
+			$(this).animate({height: "300px"});
+		}
+		else{
+			$(this).animate({height: "70px"});
+		}
 	});
-	}, 1000);
+}
+$(document).ready(function() {
+	$(".lfr-contact-grid-item").css({"height":"70px"});
+	$(".btn").bind( "click", function() {
+		$(".contacts-container-content").appendTo($(".contacts-container "));
+	});
+	setItemClick();
+	$(".search-input").change(function(){
+		setItemClick();
+	});
 
-$(".ffd").show();
-$(".mfd").hide();
-
-$(".ffd").click(function(){
-	$(this).hide();
-	$(".mfd").show();
-});
-$(".mfd").click(function(){
-	$(this).hide();
 	$(".ffd").show();
-});
+	$(".mfd").hide();
+
+	$(".ffd").click(function(){
+		$(this).hide();
+		$(".mfd").show();
+	});
+	$(".mfd").click(function(){
+		$(this).hide();
+		$(".ffd").show();
+	});
 
 });
 </script>
