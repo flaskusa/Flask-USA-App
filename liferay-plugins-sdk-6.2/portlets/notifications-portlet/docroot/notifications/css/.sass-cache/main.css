@@ -540,6 +540,9 @@
   background-image: linear-gradient(to bottom, #656262 0%, #231f20 100%) !important; }
 
 @media (max-width: 767px) {
+  .dockbar-user-notifications .dockbar-user-notifications-container .user-notifications-list .actionable .btn {
+    width: 65% !important; }
+
   .notifications-portlet .user-notifications-list .user-notification .body-container .btn, .dockbar-user-notifications .user-notifications-list .user-notification .body-container .btn {
     display: inline-block;
     margin-left: 0px;

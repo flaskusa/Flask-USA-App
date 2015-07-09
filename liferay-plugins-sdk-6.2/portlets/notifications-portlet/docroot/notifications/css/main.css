@@ -584,6 +584,7 @@
 /*----------- For notification menu dropdown--------------------*/
 	.dockbar-user-notifications .dockbar-user-notifications-container .user-notifications-list .actionable .btn
 	{
+		
 		  margin-right: 10px !important;
 		  padding: 5px 20px !important;
 		  font: 14px "Coda", Helvetica, sans-serif !important;
@@ -616,6 +617,11 @@
 	
 	@media (max-width: 767px)
 	{
+
+		.dockbar-user-notifications .dockbar-user-notifications-container .user-notifications-list .actionable .btn {
+		  width: 65% !important;
+		}
+
 		.notifications-portlet .user-notifications-list .user-notification .body-container .btn, .dockbar-user-notifications .user-notifications-list .user-notification .body-container .btn {
 		  display: inline-block;
 		  margin-left: 0px;
