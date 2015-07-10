@@ -40,7 +40,7 @@ GRID_PARAM.getCheckedIdList= function(idDataAttribute){
     var dataList=[];
     $.each(rows, function(i, rowIndex){
     	var rowData = gridObj.jqxGrid('getrowdata', rowIndex);
-    	dataList[i] = rowData.eventId;
+    	dataList[i] = rowData.venueId;
     });
     var temp= dataList.toString();
     console.log(temp);
@@ -52,18 +52,18 @@ GRID_PARAM.getDeleteList = function(idDataAttribute){
 }
 
 
-GRID_PARAM.onContextMenuItemClick =function (event) 
+GRID_PARAM.onContextMenuItemClick =function (venue) 
 {
-	var args = event.args;
+	var args = venue.args;
 	var menuItemtext= $.trim($(args).text());
 	var rowindex = gridObj.jqxGrid('getselectedrowindex');
 	var rowData = gridObj.jqxGrid('getrowdata', rowindex);
 	_contextMenuHandler(menuItemtext, rowData);
 }
-GRID_PARAM.onRowClick =function (event) 
+GRID_PARAM.onRowClick =function (venue) 
 {
 	var grid = gridObj;
-	var args = event.args;
+	var args = venue.args;
 	// row's bound index.
 	var boundIndex = args.rowindex;
 	// row's visible index.
@@ -75,7 +75,7 @@ GRID_PARAM.onRowClick =function (event)
 	if (args.column.text == rowMenuColumnText) {
 		var scrollTop = $(window).scrollTop();
 		var scrollLeft = $(window).scrollLeft();
-		editrow = event.args.rowindex;
+		editrow = venue.args.rowindex;
 		var rowsheight = grid.jqxGrid('rowsheight');
 		var top = $(this).offset().top + (2 + editrow) * rowsheight;
 		var left = ($(this).offset().left + parseInt($('#GridContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
@@ -131,7 +131,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 	  var tabsdiv = null; 
 	    tabsdiv = $($(parentElement).children()[0]);
 	    if (tabsdiv != null) {
-	  var eventDiv = tabsdiv.find('.event');
+	  var eventDiv = tabsdiv.find('.venue');
 	  var container1 = $('<div class="row-fluid"></div>');
 	  var leftcolumn = $('<div class="span3 GridLogo"></div>');
 	  var rightcolumn = $('<div class="span9"></div>');
@@ -223,7 +223,6 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 				rowsheight : 34,
                 theme:	'custom',
                 autoheight: true,
-             // Pageing config
                 pageable : true,
                 pagermode : 'default',
                 rowdetails: true,

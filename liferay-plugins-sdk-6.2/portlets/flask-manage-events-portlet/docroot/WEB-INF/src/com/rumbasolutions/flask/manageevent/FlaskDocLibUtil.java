@@ -23,7 +23,7 @@ public class FlaskDocLibUtil {
 	public static final String _eventRootFolder = "Event";
 	public static final String _venueRootFolder = "Venue";	
 	
-	public static String APP_NAME = "flask";
+	public static String APP_NAME = "guest";
 	
 	public static long _repositoryId = 0; 
 	//group id is used as repository id
@@ -50,17 +50,11 @@ public class FlaskDocLibUtil {
 		return folder;
 	}
 	
-	public static Folder createVenueFolder(long venueId, ServiceContext serviceContext) throws PortalException, SystemException{
-		
+	public static Folder createVenueRootFolder(long venueId, ServiceContext serviceContext) throws PortalException, SystemException{
 		long repositoryId = getFlaskRepositoryId();
 		long userId = serviceContext.getUserId();
 		Folder folder = getOrCreateFolder(_venueRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
-		
-		String venueFolderName = getVenueFolderName(venueId);
-		Folder venueFolder = getOrCreateFolder(venueFolderName, folder.getFolderId(), folder.getRepositoryId(), userId, serviceContext);
-		 
-		
-		return venueFolder;
+		return folder;
 	}
 	
 	
@@ -70,6 +64,14 @@ public class FlaskDocLibUtil {
 		Folder eventFolder = getOrCreateFolder(eventFolderName, folder.getFolderId(), folder.getRepositoryId(), folder.getUserId(), serviceContext);
 		return eventFolder;
 	}
+	
+	public static Folder createVenueFolder(long venueId,ServiceContext serviceContext) throws PortalException, SystemException{
+		Folder folder = createEventRootFolder(serviceContext);
+		String venueFolderName = folder.getName()+"-"+venueId;
+		Folder venueFolder = getOrCreateFolder(venueFolderName, folder.getFolderId(), folder.getRepositoryId(), folder.getUserId(), serviceContext);
+		return venueFolder;
+	}
+	
 	
 	public static Folder createEventContentTypeFolder(long eventId, long infoTypeId, long infoTypeCategoryId,long venueDetailId, ServiceContext serviceContext) throws PortalException, SystemException{
 		long repositoryId = getFlaskRepositoryId();
@@ -83,6 +85,18 @@ public class FlaskDocLibUtil {
 		return eventDetailFolder;
 	}
 	
+	public static Folder createVenueContentTypeFolder(long venueId, long infoTypeId, long infoTypeCategoryId,long venueDetailId, ServiceContext serviceContext) throws PortalException, SystemException{
+		long repositoryId = getFlaskRepositoryId();
+		long userId = serviceContext.getUserId();
+		Folder folder = getOrCreateFolder(_venueRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
+		String venueFolderName = folder.getName()+"-"+venueId;
+		Folder venueFolder = getOrCreateFolder(venueFolderName, folder.getFolderId(), folder.getRepositoryId(), userId, serviceContext);
+		Folder infoTypeFolder = getOrCreateFolder(String.valueOf(infoTypeId), venueFolder.getFolderId(), venueFolder.getRepositoryId(),userId, serviceContext);
+		Folder infoTypeContentFolder = getOrCreateFolder(String.valueOf(infoTypeCategoryId), infoTypeFolder.getFolderId(), infoTypeFolder.getRepositoryId(),userId, serviceContext);
+		Folder venueDetailFolder = getOrCreateFolder(String.valueOf(venueDetailId), infoTypeContentFolder.getFolderId(), infoTypeContentFolder.getRepositoryId(),userId, serviceContext);
+		return venueDetailFolder;
+	}	
+	
 	public static Folder getEventRootFolder(ServiceContext serviceContext) throws PortalException, SystemException{
 		Folder folder=null;
 		long parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
@@ -95,19 +109,18 @@ public class FlaskDocLibUtil {
 		}
 		return folder;
 	}
-	
-	public static Folder getEventFolderByEventId(){
-		Folder folder = null;
-		return folder;
-	}
-	
-	public static Folder getVenueFolderByVenueId(){
-		Folder folder=null;
-		return folder;
-	}
 
-	public static String getVenueFolderName(long venueId){
-		return String.format("%s-%s",_venueRootFolder, String.valueOf(venueId));
+	public static Folder getVenueRootFolder(ServiceContext serviceContext) throws PortalException, SystemException{
+		Folder folder=null;
+		long parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+		long repositoryId = getFlaskRepositoryId();
+		try {
+		  folder = DLAppLocalServiceUtil.getFolder( repositoryId, parentFolderId, _venueRootFolder);
+		} catch (final NoSuchFolderException e) {
+		  folder = DLAppLocalServiceUtil.addFolder(serviceContext.getUserId(),repositoryId, parentFolderId, _venueRootFolder,
+				  _venueRootFolder, serviceContext);
+		}
+		return folder;
 	}
 	
 	public static Folder getOrCreateFolder(String eventFolderName, long parentFolderId, long repositoryId, long userId, ServiceContext serviceContext) throws PortalException, SystemException{

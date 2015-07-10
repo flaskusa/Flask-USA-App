@@ -72,7 +72,6 @@ function loadData(){
 }
 
 function contextMenuHandler(menuItemText, rowData){
-	var args = event.args;
 	if (menuItemText  == "Edit") {
 		editEvent(rowData);
 		return false;

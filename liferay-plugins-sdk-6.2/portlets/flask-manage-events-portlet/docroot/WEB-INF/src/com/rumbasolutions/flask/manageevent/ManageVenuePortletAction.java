@@ -37,12 +37,20 @@ public class ManageVenuePortletAction extends MVCPortlet {
 	
 	private static Log LOGGER = LogFactoryUtil.getLog(ManageVenuePortletAction.class);
 	
-	private final String VENUE_ID_QSTR = "venueId";
+	private final String VENUE_ID_QSTR = "_venueId";
+	private final String INFO_TYPE_ID_QSTR = "_infoTypeId";
+	private final String INFO_TYPE_CON_ID_QSTR = "_infoTypeCategoryId";
+	private final String VENUE_DETAIL_ID_QSTR= "_venueDetailId";
+	private final String VENUE_ISLOGO_QSTR= "_isLogo";
 	private long _venueId = 0;
+	private long _infoTypeId = 0;
+	private long _infoTypeCategoryId = 0;
+	private long _venueDetailId = 0;
+	private String _isLogo = "N";
 	private ServiceContext _serviceContext;
 	Folder _venueFolder=null;
-
-	public void addImages(ActionRequest actionRequest, ActionResponse actionResponse)throws IOException, PortletException {
+	
+public void addImages(ActionRequest actionRequest, ActionResponse actionResponse)throws IOException, PortletException {
 		
 		if (!PortletFileUpload.isMultipartContent( actionRequest)) {
 			return;
@@ -58,36 +66,39 @@ public class ManageVenuePortletAction extends MVCPortlet {
 		upload.setFileSizeMax(MAX_FILE_SIZE);
 		upload.setSizeMax(REQUEST_SIZE);
 		
-		
-		
 		// constructs the directory path to store upload file
 		String uploadPath = getPortletContext().getRealPath("")
 			+ File.separator + UPLOAD_DIRECTORY;
 		
 		
-		
 		try {
 			// parses the request's content to extract file data
 			List<FileItem> formItems = upload.parseRequest(actionRequest);
-
+			_venueId = getEventId(formItems);
+			_infoTypeId = getInfoTypeId(formItems);		
+			_infoTypeCategoryId = getInfoTypeContentId(formItems);
+			_venueDetailId = getEventDetailId(formItems);
+			_isLogo = getIsLogo(formItems);
 			createUploadFolder(uploadPath);
-			_venueId = getVenueId(formItems);
 			
 			for(FileItem item: formItems){
 				if (!item.isFormField()) {
 					String fileName = new File(item.getName()).getName();
+					String fileTitle = fileName;
+					String fileDesc = fileName; // Change is later for description 
+					boolean IsLogo =  _isLogo.equals("Y");
+					if(IsLogo){
+						fileTitle = "VenueLogo";
+					}
 					String filePath = uploadPath + File.separator + fileName;
 					File storeFile = new File(filePath);
 					// saves the file on disk
 					item.write(storeFile);
-					
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
-					
-					FlaskDocLibUtil.addFileEntry(_venueFolder, fileName, fileName, "This is test 1", 
-						storeFile, mimeType, _serviceContext);
+					FlaskDocLibUtil.addFileEntry(_venueFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
 					
 				}else{
-
+					
 				}
 			}
 			actionRequest.setAttribute("message", "Upload has been done successfully!");
@@ -105,7 +116,11 @@ public class ManageVenuePortletAction extends MVCPortlet {
 			uploadDir.mkdir();
 		}
 		try {
-			_venueFolder = FlaskDocLibUtil.createVenueFolder(_venueId, _serviceContext);
+			boolean IsLogo =  _isLogo.equals("Y");
+			if(IsLogo)
+				_venueFolder = FlaskDocLibUtil.createVenueFolder(_venueId,_serviceContext);
+			else
+				_venueFolder = FlaskDocLibUtil.createVenueContentTypeFolder(_venueId,_infoTypeId,_infoTypeCategoryId,_venueDetailId, _serviceContext);
 		}
 		catch (Exception e) {
 			LOGGER.error("Error in creating venue folder in Document Media Library", e);
@@ -126,15 +141,63 @@ public class ManageVenuePortletAction extends MVCPortlet {
 		}
 		return serviceContext;
 	}
-	
-	private long getVenueId(List<FileItem> formItems){
-		long venueId = 0;
+
+	private long getInfoTypeId(List<FileItem> formItems){
+		long infoTypeId = 0;
 		for (FileItem item : formItems){
-			if(item.getFieldName().contentEquals(VENUE_ID_QSTR)){
-				venueId = Long.parseLong(item.getString());
+			if(item.getFieldName().contentEquals(INFO_TYPE_ID_QSTR)){
+				infoTypeId =  Long.parseLong(item.getString());
 				break;
 			}
 		}
-		return venueId;
+		return infoTypeId;
 	}
+	
+	private long getInfoTypeContentId(List<FileItem> formItems){
+		long infoTypeContId = 0;
+		 
+		for (FileItem item : formItems){
+			if(item.getFieldName().contentEquals(INFO_TYPE_CON_ID_QSTR)){
+				infoTypeContId =  Long.parseLong(item.getString());
+				break;
+			}
+		}
+		return infoTypeContId;
+	}
+	
+	
+	private long getEventId(List<FileItem> formItems){
+		long eventId = 0;
+		for (FileItem item : formItems){
+			if(item.getFieldName().contentEquals(VENUE_ID_QSTR)){
+				eventId = Long.parseLong(item.getString());
+				break;
+			}
+		}
+		return eventId;
+	}
+
+	private long getEventDetailId(List<FileItem> formItems){
+		long infoTypeContId = 0;
+		 
+		for (FileItem item : formItems){
+			if(item.getFieldName().contentEquals(VENUE_DETAIL_ID_QSTR)){
+				infoTypeContId =  Long.parseLong(item.getString());
+				break;
+			}
+		}
+		return infoTypeContId;
+	}
+
+	private String getIsLogo(List<FileItem> formItems){
+		String isLogo = "N";
+		 
+		for (FileItem item : formItems){
+			if(item.getFieldName().contentEquals(VENUE_ISLOGO_QSTR)){
+				isLogo = item.getString();
+				break;
+			}
+		}
+		return isLogo;
+	}	
 }
