@@ -779,7 +779,7 @@ function userDetailsDrop(){
 
 function setItemClick(){
 	$( ".lfr-contact-grid-item" ).bind( "click", function() {
-		$(".lfr-contact-grid-item").css({"height":"70px"});
+		$(".lfr-contact-grid-item").animate({"height":"70px"});
 		$(".contacts-container-content").appendTo($(this));
 		
 		if($(this).height()==70)
