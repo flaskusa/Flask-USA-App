@@ -641,10 +641,6 @@ portletURL.setWindowState(WindowState.NORMAL);
 				'.contact-ids'
 			);
 
-			$(".contacts-container-content").each(function(){
-				
-			});
-
 			A.one('.contacts-container-content').delegate(
 				'click',
 				function(event) {
