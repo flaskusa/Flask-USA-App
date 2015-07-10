@@ -17,11 +17,15 @@
 
 package com.liferay.contacts.contactscenter.notifications;
 
-import com.liferay.compat.portal.kernel.notifications.BaseUserNotificationHandler;
+import javax.portlet.ActionRequest;
+import javax.portlet.PortletURL;
+import javax.portlet.WindowState;
+
 import com.liferay.contacts.util.PortletKeys;
 import com.liferay.contacts.util.SocialRelationConstants;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.notifications.BaseUserNotificationHandler;
 import com.liferay.portal.kernel.portlet.LiferayPortletResponse;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -35,10 +39,6 @@ import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.model.SocialRequestConstants;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.PortletURL;
-import javax.portlet.WindowState;
-
 /**
  * @author Jonathan Lee
  */
@@ -46,11 +46,11 @@ public class ContactsCenterUserNotificationHandler
 	extends BaseUserNotificationHandler {
 
 	public ContactsCenterUserNotificationHandler() {
-		setActionable(true);
+	//	setActionable(true);
 		setPortletId(PortletKeys.CONTACTS_CENTER);
 	}
 
-
+	@Override
 	protected String getBody(
 			UserNotificationEvent userNotificationEvent,
 			ServiceContext serviceContext)
@@ -129,7 +129,13 @@ public class ContactsCenterUserNotificationHandler
 			});
 	}
 
+	private String getBodyTemplate() {
 
+		// TODO Auto-generated method stub
+		return "This is test just to compile";
+	}
+
+	@Override
 	protected String getLink(
 			UserNotificationEvent userNotificationEvent,
 			ServiceContext serviceContext)

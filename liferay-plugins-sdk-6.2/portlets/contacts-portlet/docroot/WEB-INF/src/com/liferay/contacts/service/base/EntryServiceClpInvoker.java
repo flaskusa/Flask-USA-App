@@ -24,37 +24,37 @@ import java.util.Arrays;
  */
 public class EntryServiceClpInvoker {
 	public EntryServiceClpInvoker() {
-		_methodName26 = "getBeanIdentifier";
+		_methodName20 = "getBeanIdentifier";
 
-		_methodParameterTypes26 = new String[] {  };
+		_methodParameterTypes20 = new String[] {  };
 
-		_methodName27 = "setBeanIdentifier";
+		_methodName21 = "setBeanIdentifier";
 
-		_methodParameterTypes27 = new String[] { "java.lang.String" };
+		_methodParameterTypes21 = new String[] { "java.lang.String" };
 
-		_methodName32 = "searchUsersAndContacts";
+		_methodName26 = "searchUsersAndContacts";
 
-		_methodParameterTypes32 = new String[] {
+		_methodParameterTypes26 = new String[] {
 				"long", "java.lang.String", "int", "int"
 			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName26.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
+		if (_methodName20.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes20, parameterTypes)) {
 			return EntryServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName27.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
+		if (_methodName21.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes21, parameterTypes)) {
 			EntryServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName32.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+		if (_methodName26.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes26, parameterTypes)) {
 			return EntryServiceUtil.searchUsersAndContacts(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				((Integer)arguments[2]).intValue(),
@@ -64,10 +64,10 @@ public class EntryServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
 	private String _methodName26;
 	private String[] _methodParameterTypes26;
-	private String _methodName27;
-	private String[] _methodParameterTypes27;
-	private String _methodName32;
-	private String[] _methodParameterTypes32;
 }

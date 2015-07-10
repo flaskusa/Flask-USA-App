@@ -111,7 +111,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the matching entries
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public List<Entry> findByUserId(long userId) throws SystemException {
 		return findByUserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -129,7 +129,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the range of matching entries
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public List<Entry> findByUserId(long userId, int start, int end)
 		throws SystemException {
 		return findByUserId(userId, start, end, null);
@@ -149,7 +149,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the ordered range of matching entries
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public List<Entry> findByUserId(long userId, int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -256,7 +256,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @throws com.liferay.contacts.NoSuchEntryException if a matching entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry findByUserId_First(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
@@ -286,7 +286,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the first matching entry, or <code>null</code> if a matching entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry fetchByUserId_First(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		List<Entry> list = findByUserId(userId, 0, 1, orderByComparator);
@@ -307,7 +307,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @throws com.liferay.contacts.NoSuchEntryException if a matching entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry findByUserId_Last(long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
@@ -337,7 +337,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the last matching entry, or <code>null</code> if a matching entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry fetchByUserId_Last(long userId,
 		OrderByComparator orderByComparator) throws SystemException {
 		int count = countByUserId(userId);
@@ -366,7 +366,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @throws com.liferay.contacts.NoSuchEntryException if a entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry[] findByUserId_PrevAndNext(long entryId, long userId,
 		OrderByComparator orderByComparator)
 		throws NoSuchEntryException, SystemException {
@@ -507,7 +507,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @param userId the user ID
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public void removeByUserId(long userId) throws SystemException {
 		for (Entry entry : findByUserId(userId, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS, null)) {
@@ -522,7 +522,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the number of matching entries
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public int countByUserId(long userId) throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
 
@@ -589,7 +589,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @throws com.liferay.contacts.NoSuchEntryException if a matching entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry findByU_EA(long userId, String emailAddress)
 		throws NoSuchEntryException, SystemException {
 		Entry entry = fetchByU_EA(userId, emailAddress);
@@ -625,7 +625,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the matching entry, or <code>null</code> if a matching entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry fetchByU_EA(long userId, String emailAddress)
 		throws SystemException {
 		return fetchByU_EA(userId, emailAddress, true);
@@ -640,7 +640,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the matching entry, or <code>null</code> if a matching entry could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry fetchByU_EA(long userId, String emailAddress,
 		boolean retrieveFromCache) throws SystemException {
 		Object[] finderArgs = new Object[] { userId, emailAddress };
@@ -754,7 +754,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the entry that was removed
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry removeByU_EA(long userId, String emailAddress)
 		throws NoSuchEntryException, SystemException {
 		Entry entry = findByU_EA(userId, emailAddress);
@@ -770,7 +770,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the number of matching entries
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public int countByU_EA(long userId, String emailAddress)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_U_EA;
@@ -849,7 +849,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 *
 	 * @param entry the entry
 	 */
-
+	@Override
 	public void cacheResult(Entry entry) {
 		EntityCacheUtil.putResult(EntryModelImpl.ENTITY_CACHE_ENABLED,
 			EntryImpl.class, entry.getPrimaryKey(), entry);
@@ -865,7 +865,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 *
 	 * @param entries the entries
 	 */
-
+	@Override
 	public void cacheResult(List<Entry> entries) {
 		for (Entry entry : entries) {
 			if (EntityCacheUtil.getResult(EntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -885,7 +885,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
-
+	@Override
 	public void clearCache() {
 		if (_HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE) {
 			CacheRegistryUtil.clear(EntryImpl.class.getName());
@@ -905,7 +905,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * The {@link com.liferay.portal.kernel.dao.orm.EntityCache} and {@link com.liferay.portal.kernel.dao.orm.FinderCache} are both cleared by this method.
 	 * </p>
 	 */
-
+	@Override
 	public void clearCache(Entry entry) {
 		EntityCacheUtil.removeResult(EntryModelImpl.ENTITY_CACHE_ENABLED,
 			EntryImpl.class, entry.getPrimaryKey());
@@ -916,7 +916,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 		clearUniqueFindersCache(entry);
 	}
 
-
+	@Override
 	public void clearCache(List<Entry> entries) {
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
@@ -981,7 +981,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @param entryId the primary key for the new entry
 	 * @return the new entry
 	 */
-
+	@Override
 	public Entry create(long entryId) {
 		Entry entry = new EntryImpl();
 
@@ -999,7 +999,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @throws com.liferay.contacts.NoSuchEntryException if a entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry remove(long entryId)
 		throws NoSuchEntryException, SystemException {
 		return remove((Serializable)entryId);
@@ -1013,7 +1013,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @throws com.liferay.contacts.NoSuchEntryException if a entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry remove(Serializable primaryKey)
 		throws NoSuchEntryException, SystemException {
 		Session session = null;
@@ -1045,7 +1045,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 		}
 	}
 
-
+	@Override
 	protected Entry removeImpl(Entry entry) throws SystemException {
 		entry = toUnwrappedModel(entry);
 
@@ -1077,7 +1077,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 		return entry;
 	}
 
-
+	@Override
 	public Entry updateImpl(com.liferay.contacts.model.Entry entry)
 		throws SystemException {
 		entry = toUnwrappedModel(entry);
@@ -1171,7 +1171,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @throws com.liferay.contacts.NoSuchEntryException if a entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry findByPrimaryKey(Serializable primaryKey)
 		throws NoSuchEntryException, SystemException {
 		Entry entry = fetchByPrimaryKey(primaryKey);
@@ -1196,7 +1196,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @throws com.liferay.contacts.NoSuchEntryException if a entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry findByPrimaryKey(long entryId)
 		throws NoSuchEntryException, SystemException {
 		return findByPrimaryKey((Serializable)entryId);
@@ -1209,7 +1209,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the entry, or <code>null</code> if a entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry fetchByPrimaryKey(Serializable primaryKey)
 		throws SystemException {
 		Entry entry = (Entry)EntityCacheUtil.getResult(EntryModelImpl.ENTITY_CACHE_ENABLED,
@@ -1256,7 +1256,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the entry, or <code>null</code> if a entry with the primary key could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public Entry fetchByPrimaryKey(long entryId) throws SystemException {
 		return fetchByPrimaryKey((Serializable)entryId);
 	}
@@ -1267,7 +1267,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the entries
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public List<Entry> findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -1284,7 +1284,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the range of entries
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public List<Entry> findAll(int start, int end) throws SystemException {
 		return findAll(start, end, null);
 	}
@@ -1302,7 +1302,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the ordered range of entries
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public List<Entry> findAll(int start, int end,
 		OrderByComparator orderByComparator) throws SystemException {
 		boolean pagination = true;
@@ -1388,7 +1388,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 *
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public void removeAll() throws SystemException {
 		for (Entry entry : findAll()) {
 			remove(entry);
@@ -1401,7 +1401,7 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 	 * @return the number of entries
 	 * @throws SystemException if a system exception occurred
 	 */
-
+	@Override
 	public int countAll() throws SystemException {
 		Long count = (Long)FinderCacheUtil.getResult(FINDER_PATH_COUNT_ALL,
 				FINDER_ARGS_EMPTY, this);
@@ -1476,19 +1476,19 @@ public class EntryPersistenceImpl extends BasePersistenceImpl<Entry>
 				PropsKeys.HIBERNATE_CACHE_USE_SECOND_LEVEL_CACHE));
 	private static Log _log = LogFactoryUtil.getLog(EntryPersistenceImpl.class);
 	private static Entry _nullEntry = new EntryImpl() {
-
+			@Override
 			public Object clone() {
 				return this;
 			}
 
-
+			@Override
 			public CacheModel<Entry> toCacheModel() {
 				return _nullEntryCacheModel;
 			}
 		};
 
 	private static CacheModel<Entry> _nullEntryCacheModel = new CacheModel<Entry>() {
-
+			@Override
 			public Entry toEntityModel() {
 				return _nullEntry;
 			}

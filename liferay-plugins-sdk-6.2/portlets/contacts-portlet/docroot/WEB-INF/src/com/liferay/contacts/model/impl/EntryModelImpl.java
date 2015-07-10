@@ -149,37 +149,37 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 	public EntryModelImpl() {
 	}
 
-
+	@Override
 	public long getPrimaryKey() {
 		return _entryId;
 	}
 
-
+	@Override
 	public void setPrimaryKey(long primaryKey) {
 		setEntryId(primaryKey);
 	}
 
-
+	@Override
 	public Serializable getPrimaryKeyObj() {
 		return _entryId;
 	}
 
-
+	@Override
 	public void setPrimaryKeyObj(Serializable primaryKeyObj) {
 		setPrimaryKey(((Long)primaryKeyObj).longValue());
 	}
 
-
+	@Override
 	public Class<?> getModelClass() {
 		return Entry.class;
 	}
 
-
+	@Override
 	public String getModelClassName() {
 		return Entry.class.getName();
 	}
 
-
+	@Override
 	public Map<String, Object> getModelAttributes() {
 		Map<String, Object> attributes = new HashMap<String, Object>();
 
@@ -197,7 +197,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		return attributes;
 	}
 
-
+	@Override
 	public void setModelAttributes(Map<String, Object> attributes) {
 		Long entryId = (Long)attributes.get("entryId");
 
@@ -261,45 +261,45 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 	}
 
 	@JSON
-
+	@Override
 	public long getEntryId() {
 		return _entryId;
 	}
 
-
+	@Override
 	public void setEntryId(long entryId) {
 		_entryId = entryId;
 	}
 
 	@JSON
-
+	@Override
 	public long getGroupId() {
 		return _groupId;
 	}
 
-
+	@Override
 	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
 	@JSON
-
+	@Override
 	public long getCompanyId() {
 		return _companyId;
 	}
 
-
+	@Override
 	public void setCompanyId(long companyId) {
 		_companyId = companyId;
 	}
 
 	@JSON
-
+	@Override
 	public long getUserId() {
 		return _userId;
 	}
 
-
+	@Override
 	public void setUserId(long userId) {
 		_columnBitmask |= USERID_COLUMN_BITMASK;
 
@@ -312,12 +312,12 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		_userId = userId;
 	}
 
-
+	@Override
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
-
+	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
 	}
@@ -327,7 +327,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 	}
 
 	@JSON
-
+	@Override
 	public String getUserName() {
 		if (_userName == null) {
 			return StringPool.BLANK;
@@ -337,35 +337,35 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		}
 	}
 
-
+	@Override
 	public void setUserName(String userName) {
 		_userName = userName;
 	}
 
 	@JSON
-
+	@Override
 	public Date getCreateDate() {
 		return _createDate;
 	}
 
-
+	@Override
 	public void setCreateDate(Date createDate) {
 		_createDate = createDate;
 	}
 
 	@JSON
-
+	@Override
 	public Date getModifiedDate() {
 		return _modifiedDate;
 	}
 
-
+	@Override
 	public void setModifiedDate(Date modifiedDate) {
 		_modifiedDate = modifiedDate;
 	}
 
 	@JSON
-
+	@Override
 	public String getFullName() {
 		if (_fullName == null) {
 			return StringPool.BLANK;
@@ -375,7 +375,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		}
 	}
 
-
+	@Override
 	public void setFullName(String fullName) {
 		_columnBitmask = -1L;
 
@@ -383,7 +383,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 	}
 
 	@JSON
-
+	@Override
 	public String getEmailAddress() {
 		if (_emailAddress == null) {
 			return StringPool.BLANK;
@@ -393,7 +393,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		}
 	}
 
-
+	@Override
 	public void setEmailAddress(String emailAddress) {
 		_columnBitmask |= EMAILADDRESS_COLUMN_BITMASK;
 
@@ -409,7 +409,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 	}
 
 	@JSON
-
+	@Override
 	public String getComments() {
 		if (_comments == null) {
 			return StringPool.BLANK;
@@ -419,7 +419,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		}
 	}
 
-
+	@Override
 	public void setComments(String comments) {
 		_comments = comments;
 	}
@@ -428,20 +428,20 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		return _columnBitmask;
 	}
 
-
+	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
 			Entry.class.getName(), getPrimaryKey());
 	}
 
-
+	@Override
 	public void setExpandoBridgeAttributes(ServiceContext serviceContext) {
 		ExpandoBridge expandoBridge = getExpandoBridge();
 
 		expandoBridge.setAttributes(serviceContext);
 	}
 
-
+	@Override
 	public Entry toEscapedModel() {
 		if (_escapedModel == null) {
 			_escapedModel = (Entry)ProxyUtil.newProxyInstance(_classLoader,
@@ -451,7 +451,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		return _escapedModel;
 	}
 
-
+	@Override
 	public Object clone() {
 		EntryImpl entryImpl = new EntryImpl();
 
@@ -471,7 +471,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		return entryImpl;
 	}
 
-
+	@Override
 	public int compareTo(Entry entry) {
 		int value = 0;
 
@@ -484,7 +484,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		return 0;
 	}
 
-
+	@Override
 	public boolean equals(Object obj) {
 		if (this == obj) {
 			return true;
@@ -506,12 +506,12 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		}
 	}
 
-
+	@Override
 	public int hashCode() {
 		return (int)getPrimaryKey();
 	}
 
-
+	@Override
 	public void resetOriginalValues() {
 		EntryModelImpl entryModelImpl = this;
 
@@ -524,7 +524,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		entryModelImpl._columnBitmask = 0;
 	}
 
-
+	@Override
 	public CacheModel<Entry> toCacheModel() {
 		EntryCacheModel entryCacheModel = new EntryCacheModel();
 
@@ -589,7 +589,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		return entryCacheModel;
 	}
 
-
+	@Override
 	public String toString() {
 		StringBundler sb = new StringBundler(21);
 
@@ -618,7 +618,7 @@ public class EntryModelImpl extends BaseModelImpl<Entry> implements EntryModel {
 		return sb.toString();
 	}
 
-
+	@Override
 	public String toXmlString() {
 		StringBundler sb = new StringBundler(34);
 

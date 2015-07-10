@@ -34,7 +34,7 @@ public class ContactsHotDeployMessageListener extends HotDeployMessageListener {
 		super(servletContextNames);
 	}
 
-
+	@Override
 	protected void onDeploy(Message message) throws Exception {
 		if (_registerMethodKey == null) {
 			try {
@@ -54,7 +54,7 @@ public class ContactsHotDeployMessageListener extends HotDeployMessageListener {
 			ClpSerializer.getServletContextName(), "/chat/view.jsp");
 	}
 
-
+	@Override
 	protected void onUndeploy(Message message) throws Exception {
 		ContactsExtensionsUtil.unregister(
 			message.getString("servletContextName"));
