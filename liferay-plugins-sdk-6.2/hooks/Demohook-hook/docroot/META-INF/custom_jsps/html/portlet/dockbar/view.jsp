@@ -51,9 +51,17 @@ for (Role role : roles){
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <script>
   $(document).ready(function(){
+	  
 		$("#_145_navSiteNavigationNavbarBtn").css("display","inline-block");
 		$("#_145_navSiteNavigationNavbarBtn").css("float","left");
+		
+		$("#_145_navAccountControlsNavbarBtn").click(function(){
+			 $('ul#_145_navAccountControls').toggle();
+			
+		});
+		
 	 	$("#_145_navSiteNavigationNavbarBtn").click(function(){
+	 		
 	  		var $elem = $("#slideoutmenupanel");           
 	  	    var docwidth =  0;
 	  	    var inileft = docwidth - $elem.outerWidth()-15;
