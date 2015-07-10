@@ -47,7 +47,7 @@ boolean actionable = ParamUtil.getBoolean(request, "actionable");
 				</a>
 			</div>
 
-			<div class="nav">
+			<div class="nav" style="display:none;">
 				<a class="clearfix manage" href="javascript:;">
 					<span class="title"><liferay-ui:message key="notification-delivery" /></span>
 				</a>
