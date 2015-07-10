@@ -263,8 +263,8 @@
 
 .dockbar-user-notifications {
 	.dropdown-toggle .user-notifications-count {
-		background-color: #0066B3;
-		border: 1px solid #0066B3;
+		background-color: #090908;
+        border: 1px solid #18191A;
 
 		@include default-border-radius;
 
@@ -273,7 +273,7 @@
 		margin: 4px 0;
 		padding: 2px 6px;
 		position: relative;
-
+		color: rgb(248, 150, 52);
 		&.alert {
 			background-color: #FAA732;
 			border: 1px solid #FAA732;
