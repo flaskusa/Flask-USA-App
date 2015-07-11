@@ -666,7 +666,7 @@ html.aui body {
   position: absolute;
   top: 0;
   width: 45%;
-  margin-left: 25%;
+  margin-left: 0px;
 }
 
 @media (max-width: 767px){
