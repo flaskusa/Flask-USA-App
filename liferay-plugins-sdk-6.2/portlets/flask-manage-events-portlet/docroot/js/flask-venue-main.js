@@ -10,7 +10,9 @@ function addClickHandlers(){
 	
 	$(".cssAddUser").click(function(){
 			$("#venueId").val(0);
-			venueForm.trigger('reset')
+			venueForm.trigger('reset');
+			_flaskLib.loadCountries('venueCountryId');
+			_flaskLib.loadUSARegions('venueStateId');
 			$("#venueDataTable").hide();
 			$("#formContainer").show();
 			fnBuildVenueUpload(imageContainer);		
@@ -164,10 +166,6 @@ function saveVenue(){
 
 function initForm(){
 		var repositoryId = $("#repositoryId").val();
-		$("#venueDate").jqxDateTimeInput({width: '260px', height: '35px',formatString: "MM-dd-yyyy" });
-		$("#Active").jqxCheckBox({ width: 120, height: 25 });
-		$("#startTime").jqxDateTimeInput({ width: '100px', height: '23px', formatString: 'hh:mm tt', showCalendarButton: false});
-		$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'hh:mm tt', showCalendarButton: false});
 }
 
 function fnBuildVenueUpload(imageContainer){
