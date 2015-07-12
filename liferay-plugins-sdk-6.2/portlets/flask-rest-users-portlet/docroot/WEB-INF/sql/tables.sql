@@ -1,6 +1,7 @@
 create table flaskusers_FlaskAdmin (
 	userId LONG not null primary key,
 	roleId LONG,
+	roleName VARCHAR(75) null,
 	firstName VARCHAR(75) null,
 	middleName VARCHAR(75) null,
 	lastName VARCHAR(75) null,

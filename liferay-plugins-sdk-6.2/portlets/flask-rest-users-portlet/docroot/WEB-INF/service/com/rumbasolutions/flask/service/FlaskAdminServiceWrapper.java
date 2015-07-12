@@ -63,16 +63,11 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskContentManagers(
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskRegularUsers(
+		java.lang.String search, java.lang.String searchColumn,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return _flaskAdminService.getFlaskContentManagers(serviceContext);
-	}
-
-	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getAllUsers(
-		java.lang.String userType,
-		com.liferay.portal.service.ServiceContext serviceContext) {
-		return _flaskAdminService.getAllUsers(userType, serviceContext);
+		return _flaskAdminService.getFlaskRegularUsers(search, searchColumn,
+			serviceContext);
 	}
 
 	@Override
@@ -84,14 +79,14 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
+		java.lang.String userInterests, long roleId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return _flaskAdminService.addFlaskAdmin(firstName, middleName,
 			lastName, email, screenName, password1, password2, DOB, isMale,
 			streetName, aptNo, areaCode, city, stateId, countryId,
-			mobileNumber, userInterests, serviceContext);
+			mobileNumber, userInterests, roleId, serviceContext);
 	}
 
 	@Override
@@ -110,47 +105,6 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		return _flaskAdminService.updateFlaskAdmin(userId, firstName,
 			middleName, lastName, email, screenName, password1, password2, DOB,
 			isMale, streetName, aptNo, areaCode, city, stateId, countryId,
-			mobileNumber, userInterests, serviceContext);
-	}
-
-	@Override
-	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskContentManager(
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String email,
-		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.lang.String DOB, boolean isMale,
-		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _flaskAdminService.addFlaskContentManager(firstName, middleName,
-			lastName, email, screenName, password1, password2, DOB, isMale,
-			streetName, aptNo, areaCode, city, stateId, countryId,
-			mobileNumber, userInterests, serviceContext);
-	}
-
-	/**
-	* Update content managers
-	*/
-	@Override
-	public com.rumbasolutions.flask.model.FlaskAdmin updateFlaskContentManager(
-		long userId, java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String email,
-		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.lang.String DOB, boolean isMale,
-		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city, long state,
-		long country, java.lang.String mobileNumber,
-		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return _flaskAdminService.updateFlaskContentManager(userId, firstName,
-			middleName, lastName, email, screenName, password1, password2, DOB,
-			isMale, streetName, aptNo, areaCode, city, state, country,
 			mobileNumber, userInterests, serviceContext);
 	}
 

@@ -51,6 +51,7 @@ public class FlaskAdminWrapper implements FlaskAdmin, ModelWrapper<FlaskAdmin> {
 
 		attributes.put("userId", getUserId());
 		attributes.put("roleId", getRoleId());
+		attributes.put("roleName", getRoleName());
 		attributes.put("firstName", getFirstName());
 		attributes.put("middleName", getMiddleName());
 		attributes.put("lastName", getLastName());
@@ -85,6 +86,12 @@ public class FlaskAdminWrapper implements FlaskAdmin, ModelWrapper<FlaskAdmin> {
 
 		if (roleId != null) {
 			setRoleId(roleId);
+		}
+
+		String roleName = (String)attributes.get("roleName");
+
+		if (roleName != null) {
+			setRoleName(roleName);
 		}
 
 		String firstName = (String)attributes.get("firstName");
@@ -276,6 +283,26 @@ public class FlaskAdminWrapper implements FlaskAdmin, ModelWrapper<FlaskAdmin> {
 	@Override
 	public void setRoleId(long roleId) {
 		_flaskAdmin.setRoleId(roleId);
+	}
+
+	/**
+	* Returns the role name of this flask admin.
+	*
+	* @return the role name of this flask admin
+	*/
+	@Override
+	public java.lang.String getRoleName() {
+		return _flaskAdmin.getRoleName();
+	}
+
+	/**
+	* Sets the role name of this flask admin.
+	*
+	* @param roleName the role name of this flask admin
+	*/
+	@Override
+	public void setRoleName(java.lang.String roleName) {
+		_flaskAdmin.setRoleName(roleName);
 	}
 
 	/**

@@ -104,6 +104,21 @@ public interface FlaskAdminModel extends BaseModel<FlaskAdmin> {
 	public void setRoleId(long roleId);
 
 	/**
+	 * Returns the role name of this flask admin.
+	 *
+	 * @return the role name of this flask admin
+	 */
+	@AutoEscape
+	public String getRoleName();
+
+	/**
+	 * Sets the role name of this flask admin.
+	 *
+	 * @param roleName the role name of this flask admin
+	 */
+	public void setRoleName(String roleName);
+
+	/**
 	 * Returns the first name of this flask admin.
 	 *
 	 * @return the first name of this flask admin

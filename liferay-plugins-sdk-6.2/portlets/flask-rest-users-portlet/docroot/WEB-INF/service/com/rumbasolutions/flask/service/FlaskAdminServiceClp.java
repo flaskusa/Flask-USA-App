@@ -38,131 +38,104 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "getFlaskContentManagers";
+		_methodName4 = "getFlaskRegularUsers";
 
 		_methodParameterTypes4 = new String[] {
+				"java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName5 = "getAllUsers";
+		_methodName5 = "addFlaskAdmin";
 
 		_methodParameterTypes5 = new String[] {
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName6 = "addFlaskAdmin";
+		_methodName6 = "updateFlaskAdmin";
 
 		_methodParameterTypes6 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "boolean",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"boolean", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
+				"java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName7 = "updateFlaskAdmin";
+		_methodName7 = "deleteFlaskAdmins";
 
 		_methodParameterTypes7 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"boolean", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "long", "long",
-				"java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName8 = "addFlaskContentManager";
+		_methodName8 = "getUserIdForScreenName";
 
 		_methodParameterTypes8 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "boolean",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName9 = "updateFlaskContentManager";
+		_methodName9 = "getUserIdForEmail";
 
 		_methodParameterTypes9 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"boolean", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "long", "long",
-				"java.lang.String", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName10 = "deleteFlaskAdmins";
+		_methodName10 = "getUserById";
 
 		_methodParameterTypes10 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName11 = "getUserIdForScreenName";
+		_methodName11 = "addFlaskUser";
 
 		_methodParameterTypes11 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName12 = "getUserIdForEmail";
+		_methodName12 = "updateLoggedInUser";
 
 		_methodParameterTypes12 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName13 = "getUserById";
+		_methodName13 = "getCountryByName";
 
 		_methodParameterTypes13 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName14 = "addFlaskUser";
+		_methodName14 = "getCountries";
 
 		_methodParameterTypes14 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "boolean",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName15 = "updateLoggedInUser";
-
-		_methodParameterTypes15 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "boolean",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName16 = "getCountryByName";
-
-		_methodParameterTypes16 = new String[] {
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName17 = "getCountries";
-
-		_methodParameterTypes17 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName18 = "getRegion";
+		_methodName15 = "getRegion";
 
-		_methodParameterTypes18 = new String[] {
+		_methodParameterTypes15 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName19 = "getUSARegions";
+		_methodName16 = "getUSARegions";
 
-		_methodParameterTypes19 = new String[] {
+		_methodParameterTypes16 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -243,41 +216,18 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskContentManagers(
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskRegularUsers(
+		java.lang.String search, java.lang.String searchColumn,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName4,
 					_methodParameterTypes4,
-					new Object[] { ClpSerializer.translateInput(serviceContext) });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (java.util.List<com.rumbasolutions.flask.model.FlaskAdmin>)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getAllUsers(
-		java.lang.String userType,
-		com.liferay.portal.service.ServiceContext serviceContext) {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5,
 					new Object[] {
-						ClpSerializer.translateInput(userType),
+						ClpSerializer.translateInput(search),
+						
+					ClpSerializer.translateInput(searchColumn),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -306,15 +256,15 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
+		java.lang.String userInterests, long roleId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5,
 					new Object[] {
 						ClpSerializer.translateInput(firstName),
 						
@@ -349,6 +299,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 					ClpSerializer.translateInput(mobileNumber),
 						
 					ClpSerializer.translateInput(userInterests),
+						
+					roleId,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -392,8 +344,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7,
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6,
 					new Object[] {
 						userId,
 						
@@ -426,166 +378,6 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 					stateId,
 						
 					countryId,
-						
-					ClpSerializer.translateInput(mobileNumber),
-						
-					ClpSerializer.translateInput(userInterests),
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.rumbasolutions.flask.model.FlaskAdmin)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskContentManager(
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String email,
-		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.lang.String DOB, boolean isMale,
-		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName8,
-					_methodParameterTypes8,
-					new Object[] {
-						ClpSerializer.translateInput(firstName),
-						
-					ClpSerializer.translateInput(middleName),
-						
-					ClpSerializer.translateInput(lastName),
-						
-					ClpSerializer.translateInput(email),
-						
-					ClpSerializer.translateInput(screenName),
-						
-					ClpSerializer.translateInput(password1),
-						
-					ClpSerializer.translateInput(password2),
-						
-					ClpSerializer.translateInput(DOB),
-						
-					isMale,
-						
-					ClpSerializer.translateInput(streetName),
-						
-					ClpSerializer.translateInput(aptNo),
-						
-					ClpSerializer.translateInput(areaCode),
-						
-					ClpSerializer.translateInput(city),
-						
-					stateId,
-						
-					countryId,
-						
-					ClpSerializer.translateInput(mobileNumber),
-						
-					ClpSerializer.translateInput(userInterests),
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return (com.rumbasolutions.flask.model.FlaskAdmin)ClpSerializer.translateOutput(returnObj);
-	}
-
-	@Override
-	public com.rumbasolutions.flask.model.FlaskAdmin updateFlaskContentManager(
-		long userId, java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String email,
-		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.lang.String DOB, boolean isMale,
-		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city, long state,
-		long country, java.lang.String mobileNumber,
-		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName9,
-					_methodParameterTypes9,
-					new Object[] {
-						userId,
-						
-					ClpSerializer.translateInput(firstName),
-						
-					ClpSerializer.translateInput(middleName),
-						
-					ClpSerializer.translateInput(lastName),
-						
-					ClpSerializer.translateInput(email),
-						
-					ClpSerializer.translateInput(screenName),
-						
-					ClpSerializer.translateInput(password1),
-						
-					ClpSerializer.translateInput(password2),
-						
-					ClpSerializer.translateInput(DOB),
-						
-					isMale,
-						
-					ClpSerializer.translateInput(streetName),
-						
-					ClpSerializer.translateInput(aptNo),
-						
-					ClpSerializer.translateInput(areaCode),
-						
-					ClpSerializer.translateInput(city),
-						
-					state,
-						
-					country,
 						
 					ClpSerializer.translateInput(mobileNumber),
 						
@@ -623,8 +415,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			_invokableService.invokeMethod(_methodName10,
-				_methodParameterTypes10,
+			_invokableService.invokeMethod(_methodName7,
+				_methodParameterTypes7,
 				new Object[] {
 					userId,
 					
@@ -658,8 +450,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName11,
-					_methodParameterTypes11,
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
 					new Object[] {
 						ClpSerializer.translateInput(screenName),
 						
@@ -687,8 +479,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName12,
-					_methodParameterTypes12,
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9,
 					new Object[] {
 						ClpSerializer.translateInput(emailAddress),
 						
@@ -716,8 +508,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName13,
-					_methodParameterTypes13,
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10,
 					new Object[] {
 						userId,
 						
@@ -755,8 +547,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName14,
-					_methodParameterTypes14,
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11,
 					new Object[] {
 						ClpSerializer.translateInput(firstName),
 						
@@ -834,8 +626,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName15,
-					_methodParameterTypes15,
+			returnObj = _invokableService.invokeMethod(_methodName12,
+					_methodParameterTypes12,
 					new Object[] {
 						ClpSerializer.translateInput(firstName),
 						
@@ -906,8 +698,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName16,
-					_methodParameterTypes16,
+			returnObj = _invokableService.invokeMethod(_methodName13,
+					_methodParameterTypes13,
 					new Object[] {
 						ClpSerializer.translateInput(name),
 						
@@ -945,8 +737,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName17,
-					_methodParameterTypes17,
+			returnObj = _invokableService.invokeMethod(_methodName14,
+					_methodParameterTypes14,
 					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -980,8 +772,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName18,
-					_methodParameterTypes18,
+			returnObj = _invokableService.invokeMethod(_methodName15,
+					_methodParameterTypes15,
 					new Object[] {
 						countryId,
 						
@@ -1019,8 +811,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName19,
-					_methodParameterTypes19,
+			returnObj = _invokableService.invokeMethod(_methodName16,
+					_methodParameterTypes16,
 					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -1079,10 +871,4 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	private String[] _methodParameterTypes15;
 	private String _methodName16;
 	private String[] _methodParameterTypes16;
-	private String _methodName17;
-	private String[] _methodParameterTypes17;
-	private String _methodName18;
-	private String[] _methodParameterTypes18;
-	private String _methodName19;
-	private String[] _methodParameterTypes19;
 }

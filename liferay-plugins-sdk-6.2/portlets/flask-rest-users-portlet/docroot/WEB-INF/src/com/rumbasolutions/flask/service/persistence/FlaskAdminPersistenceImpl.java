@@ -321,6 +321,7 @@ public class FlaskAdminPersistenceImpl extends BasePersistenceImpl<FlaskAdmin>
 
 		flaskAdminImpl.setUserId(flaskAdmin.getUserId());
 		flaskAdminImpl.setRoleId(flaskAdmin.getRoleId());
+		flaskAdminImpl.setRoleName(flaskAdmin.getRoleName());
 		flaskAdminImpl.setFirstName(flaskAdmin.getFirstName());
 		flaskAdminImpl.setMiddleName(flaskAdmin.getMiddleName());
 		flaskAdminImpl.setLastName(flaskAdmin.getLastName());

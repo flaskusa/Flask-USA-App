@@ -14,15 +14,10 @@
 
 package com.rumbasolutions.flask.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.liferay.portal.model.Role;
-import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.rumbasolutions.flask.model.FlaskRole;
 import com.rumbasolutions.flask.service.base.FlaskRoleServiceBaseImpl;
-import com.rumbasolutions.flask.service.impl.FlaskModelUtil.FlaskRoleEnum;
 
 /**
  * The implementation of the flask role remote service.
@@ -48,18 +43,6 @@ public class FlaskRoleServiceImpl extends FlaskRoleServiceBaseImpl {
 
 	@Override
 	public List<FlaskRole> getFlaskRoles(){
-		List<FlaskRole> roleList = new ArrayList<FlaskRole>();
-		try{
-			for (FlaskRoleEnum eRole : FlaskRoleEnum.values()){
-				Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(),eRole.getRoleName());
-				if(role != null){
-					roleList.add(FlaskModelUtil.getFlaskRole(role));
-				}
-
-			}
-		}catch(Exception ex){
-			
-		}
-		return roleList;
+		return FlaskModelUtil.getFlaskRoles();
 	}
 }

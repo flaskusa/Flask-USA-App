@@ -70,12 +70,8 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskContentManagers(
-		com.liferay.portal.service.ServiceContext serviceContext);
-
-	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getAllUsers(
-		java.lang.String userType,
+	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskRegularUsers(
+		java.lang.String search, java.lang.String searchColumn,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskAdmin(
@@ -86,7 +82,7 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
+		java.lang.String userInterests, long roleId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
@@ -99,35 +95,6 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	public com.rumbasolutions.flask.model.FlaskAdmin addFlaskContentManager(
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String email,
-		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.lang.String DOB, boolean isMale,
-		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
-
-	/**
-	* Update content managers
-	*/
-	public com.rumbasolutions.flask.model.FlaskAdmin updateFlaskContentManager(
-		long userId, java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String email,
-		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.lang.String DOB, boolean isMale,
-		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city, long state,
-		long country, java.lang.String mobileNumber,
 		java.lang.String userInterests,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

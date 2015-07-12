@@ -68,6 +68,7 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "userId", Types.BIGINT },
 			{ "roleId", Types.BIGINT },
+			{ "roleName", Types.VARCHAR },
 			{ "firstName", Types.VARCHAR },
 			{ "middleName", Types.VARCHAR },
 			{ "lastName", Types.VARCHAR },
@@ -87,7 +88,7 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 			{ "portraitURL", Types.VARCHAR },
 			{ "userInterests", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskusers_FlaskAdmin (userId LONG not null primary key,roleId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,screenName VARCHAR(75) null,email VARCHAR(75) null,DOB DATE null,isMale BOOLEAN,streetName VARCHAR(75) null,aptNo VARCHAR(75) null,areaCode VARCHAR(75) null,city VARCHAR(75) null,stateId LONG,stateName VARCHAR(75) null,countryId LONG,countryName VARCHAR(75) null,mobileNumber VARCHAR(75) null,portraitURL VARCHAR(75) null,userInterests VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskusers_FlaskAdmin (userId LONG not null primary key,roleId LONG,roleName VARCHAR(75) null,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,screenName VARCHAR(75) null,email VARCHAR(75) null,DOB DATE null,isMale BOOLEAN,streetName VARCHAR(75) null,aptNo VARCHAR(75) null,areaCode VARCHAR(75) null,city VARCHAR(75) null,stateId LONG,stateName VARCHAR(75) null,countryId LONG,countryName VARCHAR(75) null,mobileNumber VARCHAR(75) null,portraitURL VARCHAR(75) null,userInterests VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskusers_FlaskAdmin";
 	public static final String ORDER_BY_JPQL = " ORDER BY flaskAdmin.userId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskusers_FlaskAdmin.userId ASC";
@@ -117,6 +118,7 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 
 		model.setUserId(soapModel.getUserId());
 		model.setRoleId(soapModel.getRoleId());
+		model.setRoleName(soapModel.getRoleName());
 		model.setFirstName(soapModel.getFirstName());
 		model.setMiddleName(soapModel.getMiddleName());
 		model.setLastName(soapModel.getLastName());
@@ -201,6 +203,7 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 
 		attributes.put("userId", getUserId());
 		attributes.put("roleId", getRoleId());
+		attributes.put("roleName", getRoleName());
 		attributes.put("firstName", getFirstName());
 		attributes.put("middleName", getMiddleName());
 		attributes.put("lastName", getLastName());
@@ -235,6 +238,12 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 
 		if (roleId != null) {
 			setRoleId(roleId);
+		}
+
+		String roleName = (String)attributes.get("roleName");
+
+		if (roleName != null) {
+			setRoleName(roleName);
 		}
 
 		String firstName = (String)attributes.get("firstName");
@@ -376,6 +385,22 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 	@Override
 	public void setRoleId(long roleId) {
 		_roleId = roleId;
+	}
+
+	@JSON
+	@Override
+	public String getRoleName() {
+		if (_roleName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _roleName;
+		}
+	}
+
+	@Override
+	public void setRoleName(String roleName) {
+		_roleName = roleName;
 	}
 
 	@JSON
@@ -675,6 +700,7 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 
 		flaskAdminImpl.setUserId(getUserId());
 		flaskAdminImpl.setRoleId(getRoleId());
+		flaskAdminImpl.setRoleName(getRoleName());
 		flaskAdminImpl.setFirstName(getFirstName());
 		flaskAdminImpl.setMiddleName(getMiddleName());
 		flaskAdminImpl.setLastName(getLastName());
@@ -752,6 +778,14 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 		flaskAdminCacheModel.userId = getUserId();
 
 		flaskAdminCacheModel.roleId = getRoleId();
+
+		flaskAdminCacheModel.roleName = getRoleName();
+
+		String roleName = flaskAdminCacheModel.roleName;
+
+		if ((roleName != null) && (roleName.length() == 0)) {
+			flaskAdminCacheModel.roleName = null;
+		}
 
 		flaskAdminCacheModel.firstName = getFirstName();
 
@@ -885,12 +919,14 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{userId=");
 		sb.append(getUserId());
 		sb.append(", roleId=");
 		sb.append(getRoleId());
+		sb.append(", roleName=");
+		sb.append(getRoleName());
 		sb.append(", firstName=");
 		sb.append(getFirstName());
 		sb.append(", middleName=");
@@ -934,7 +970,7 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.FlaskAdmin");
@@ -947,6 +983,10 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 		sb.append(
 			"<column><column-name>roleId</column-name><column-value><![CDATA[");
 		sb.append(getRoleId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>roleName</column-name><column-value><![CDATA[");
+		sb.append(getRoleName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>firstName</column-name><column-value><![CDATA[");
@@ -1033,6 +1073,7 @@ public class FlaskAdminModelImpl extends BaseModelImpl<FlaskAdmin>
 	private long _userId;
 	private String _userUuid;
 	private long _roleId;
+	private String _roleName;
 	private String _firstName;
 	private String _middleName;
 	private String _lastName;

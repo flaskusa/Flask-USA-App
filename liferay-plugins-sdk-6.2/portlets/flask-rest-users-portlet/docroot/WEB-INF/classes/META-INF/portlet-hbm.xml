@@ -10,6 +10,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="roleId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="roleName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="firstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="middleName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lastName" type="com.liferay.portal.dao.orm.hibernate.StringType" />

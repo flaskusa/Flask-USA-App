@@ -78,29 +78,14 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
-	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getFlaskContentManagers(
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getFlaskRegularUsers(
+		java.lang.String search, java.lang.String searchColumn,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> returnValue =
-				FlaskAdminServiceUtil.getFlaskContentManagers(serviceContext);
-
-			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getAllUsers(
-		java.lang.String userType,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> returnValue =
-				FlaskAdminServiceUtil.getAllUsers(userType, serviceContext);
+				FlaskAdminServiceUtil.getFlaskRegularUsers(search,
+					searchColumn, serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModels(returnValue);
 		}
@@ -119,14 +104,14 @@ public class FlaskAdminServiceSoap {
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
+		java.lang.String userInterests, long roleId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.addFlaskAdmin(firstName,
 					middleName, lastName, email, screenName, password1,
 					password2, DOB, isMale, streetName, aptNo, areaCode, city,
-					stateId, countryId, mobileNumber, userInterests,
+					stateId, countryId, mobileNumber, userInterests, roleId,
 					serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
@@ -154,63 +139,6 @@ public class FlaskAdminServiceSoap {
 					firstName, middleName, lastName, email, screenName,
 					password1, password2, DOB, isMale, streetName, aptNo,
 					areaCode, city, stateId, countryId, mobileNumber,
-					userInterests, serviceContext);
-
-			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.rumbasolutions.flask.model.FlaskAdminSoap addFlaskContentManager(
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String email,
-		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.lang.String DOB, boolean isMale,
-		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.addFlaskContentManager(firstName,
-					middleName, lastName, email, screenName, password1,
-					password2, DOB, isMale, streetName, aptNo, areaCode, city,
-					stateId, countryId, mobileNumber, userInterests,
-					serviceContext);
-
-			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	/**
-	* Update content managers
-	*/
-	public static com.rumbasolutions.flask.model.FlaskAdminSoap updateFlaskContentManager(
-		long userId, java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String email,
-		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.lang.String DOB, boolean isMale,
-		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city, long state,
-		long country, java.lang.String mobileNumber,
-		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.updateFlaskContentManager(userId,
-					firstName, middleName, lastName, email, screenName,
-					password1, password2, DOB, isMale, streetName, aptNo,
-					areaCode, city, state, country, mobileNumber,
 					userInterests, serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);

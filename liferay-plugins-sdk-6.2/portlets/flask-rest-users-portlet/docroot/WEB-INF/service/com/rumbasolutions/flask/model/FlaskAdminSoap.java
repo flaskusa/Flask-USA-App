@@ -33,6 +33,7 @@ public class FlaskAdminSoap implements Serializable {
 
 		soapModel.setUserId(model.getUserId());
 		soapModel.setRoleId(model.getRoleId());
+		soapModel.setRoleName(model.getRoleName());
 		soapModel.setFirstName(model.getFirstName());
 		soapModel.setMiddleName(model.getMiddleName());
 		soapModel.setLastName(model.getLastName());
@@ -117,6 +118,14 @@ public class FlaskAdminSoap implements Serializable {
 
 	public void setRoleId(long roleId) {
 		_roleId = roleId;
+	}
+
+	public String getRoleName() {
+		return _roleName;
+	}
+
+	public void setRoleName(String roleName) {
+		_roleName = roleName;
 	}
 
 	public String getFirstName() {
@@ -265,6 +274,7 @@ public class FlaskAdminSoap implements Serializable {
 
 	private long _userId;
 	private long _roleId;
+	private String _roleName;
 	private String _firstName;
 	private String _middleName;
 	private String _lastName;

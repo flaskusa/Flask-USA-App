@@ -76,6 +76,7 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 
 		attributes.put("userId", getUserId());
 		attributes.put("roleId", getRoleId());
+		attributes.put("roleName", getRoleName());
 		attributes.put("firstName", getFirstName());
 		attributes.put("middleName", getMiddleName());
 		attributes.put("lastName", getLastName());
@@ -110,6 +111,12 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 
 		if (roleId != null) {
 			setRoleId(roleId);
+		}
+
+		String roleName = (String)attributes.get("roleName");
+
+		if (roleName != null) {
+			setRoleName(roleName);
 		}
 
 		String firstName = (String)attributes.get("firstName");
@@ -270,6 +277,29 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 				Method method = clazz.getMethod("setRoleId", long.class);
 
 				method.invoke(_flaskAdminRemoteModel, roleId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getRoleName() {
+		return _roleName;
+	}
+
+	@Override
+	public void setRoleName(String roleName) {
+		_roleName = roleName;
+
+		if (_flaskAdminRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskAdminRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setRoleName", String.class);
+
+				method.invoke(_flaskAdminRemoteModel, roleName);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -752,6 +782,7 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 
 		clone.setUserId(getUserId());
 		clone.setRoleId(getRoleId());
+		clone.setRoleName(getRoleName());
 		clone.setFirstName(getFirstName());
 		clone.setMiddleName(getMiddleName());
 		clone.setLastName(getLastName());
@@ -822,12 +853,14 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{userId=");
 		sb.append(getUserId());
 		sb.append(", roleId=");
 		sb.append(getRoleId());
+		sb.append(", roleName=");
+		sb.append(getRoleName());
 		sb.append(", firstName=");
 		sb.append(getFirstName());
 		sb.append(", middleName=");
@@ -871,7 +904,7 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(64);
+		StringBundler sb = new StringBundler(67);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.FlaskAdmin");
@@ -884,6 +917,10 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 		sb.append(
 			"<column><column-name>roleId</column-name><column-value><![CDATA[");
 		sb.append(getRoleId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>roleName</column-name><column-value><![CDATA[");
+		sb.append(getRoleName());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>firstName</column-name><column-value><![CDATA[");
@@ -966,6 +1003,7 @@ public class FlaskAdminClp extends BaseModelImpl<FlaskAdmin>
 	private long _userId;
 	private String _userUuid;
 	private long _roleId;
+	private String _roleName;
 	private String _firstName;
 	private String _middleName;
 	private String _lastName;

@@ -13,6 +13,7 @@
 			<!-- Other fields -->
 			
 		<column name="roleId" type="long" />
+		<column name="roleName" type="String" />
 		<column name="firstName" type="String" />
 		<column name="middleName" type="String" />
 		<column name="lastName" type="String" />

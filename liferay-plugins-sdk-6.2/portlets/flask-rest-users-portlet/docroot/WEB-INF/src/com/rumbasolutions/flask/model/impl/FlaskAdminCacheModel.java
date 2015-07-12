@@ -38,12 +38,14 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(41);
+		StringBundler sb = new StringBundler(43);
 
 		sb.append("{userId=");
 		sb.append(userId);
 		sb.append(", roleId=");
 		sb.append(roleId);
+		sb.append(", roleName=");
+		sb.append(roleName);
 		sb.append(", firstName=");
 		sb.append(firstName);
 		sb.append(", middleName=");
@@ -91,6 +93,13 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 
 		flaskAdminImpl.setUserId(userId);
 		flaskAdminImpl.setRoleId(roleId);
+
+		if (roleName == null) {
+			flaskAdminImpl.setRoleName(StringPool.BLANK);
+		}
+		else {
+			flaskAdminImpl.setRoleName(roleName);
+		}
 
 		if (firstName == null) {
 			flaskAdminImpl.setFirstName(StringPool.BLANK);
@@ -212,6 +221,7 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 	public void readExternal(ObjectInput objectInput) throws IOException {
 		userId = objectInput.readLong();
 		roleId = objectInput.readLong();
+		roleName = objectInput.readUTF();
 		firstName = objectInput.readUTF();
 		middleName = objectInput.readUTF();
 		lastName = objectInput.readUTF();
@@ -237,6 +247,13 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 		throws IOException {
 		objectOutput.writeLong(userId);
 		objectOutput.writeLong(roleId);
+
+		if (roleName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(roleName);
+		}
 
 		if (firstName == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -346,6 +363,7 @@ public class FlaskAdminCacheModel implements CacheModel<FlaskAdmin>,
 
 	public long userId;
 	public long roleId;
+	public String roleName;
 	public String firstName;
 	public String middleName;
 	public String lastName;

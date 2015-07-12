@@ -4,6 +4,7 @@
 	<model name="com.rumbasolutions.flask.model.FlaskAdmin">
 		<field name="userId" type="long" />
 		<field name="roleId" type="long" />
+		<field name="roleName" type="String" />
 		<field name="firstName" type="String" />
 		<field name="middleName" type="String" />
 		<field name="lastName" type="String" />

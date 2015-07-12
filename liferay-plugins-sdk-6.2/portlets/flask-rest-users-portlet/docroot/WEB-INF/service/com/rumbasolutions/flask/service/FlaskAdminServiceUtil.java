@@ -68,15 +68,11 @@ public class FlaskAdminServiceUtil {
 		return getService().getFlaskAdmins(serviceContext);
 	}
 
-	public static java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskContentManagers(
+	public static java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskRegularUsers(
+		java.lang.String search, java.lang.String searchColumn,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return getService().getFlaskContentManagers(serviceContext);
-	}
-
-	public static java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getAllUsers(
-		java.lang.String userType,
-		com.liferay.portal.service.ServiceContext serviceContext) {
-		return getService().getAllUsers(userType, serviceContext);
+		return getService()
+				   .getFlaskRegularUsers(search, searchColumn, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.FlaskAdmin addFlaskAdmin(
@@ -87,7 +83,7 @@ public class FlaskAdminServiceUtil {
 		java.lang.String streetName, java.lang.String aptNo,
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
+		java.lang.String userInterests, long roleId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -95,7 +91,7 @@ public class FlaskAdminServiceUtil {
 				   .addFlaskAdmin(firstName, middleName, lastName, email,
 			screenName, password1, password2, DOB, isMale, streetName, aptNo,
 			areaCode, city, stateId, countryId, mobileNumber, userInterests,
-			serviceContext);
+			roleId, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.FlaskAdmin updateFlaskAdmin(
@@ -114,47 +110,6 @@ public class FlaskAdminServiceUtil {
 				   .updateFlaskAdmin(userId, firstName, middleName, lastName,
 			email, screenName, password1, password2, DOB, isMale, streetName,
 			aptNo, areaCode, city, stateId, countryId, mobileNumber,
-			userInterests, serviceContext);
-	}
-
-	public static com.rumbasolutions.flask.model.FlaskAdmin addFlaskContentManager(
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String email,
-		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.lang.String DOB, boolean isMale,
-		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String mobileNumber,
-		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .addFlaskContentManager(firstName, middleName, lastName,
-			email, screenName, password1, password2, DOB, isMale, streetName,
-			aptNo, areaCode, city, stateId, countryId, mobileNumber,
-			userInterests, serviceContext);
-	}
-
-	/**
-	* Update content managers
-	*/
-	public static com.rumbasolutions.flask.model.FlaskAdmin updateFlaskContentManager(
-		long userId, java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String email,
-		java.lang.String screenName, java.lang.String password1,
-		java.lang.String password2, java.lang.String DOB, boolean isMale,
-		java.lang.String streetName, java.lang.String aptNo,
-		java.lang.String areaCode, java.lang.String city, long state,
-		long country, java.lang.String mobileNumber,
-		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService()
-				   .updateFlaskContentManager(userId, firstName, middleName,
-			lastName, email, screenName, password1, password2, DOB, isMale,
-			streetName, aptNo, areaCode, city, state, country, mobileNumber,
 			userInterests, serviceContext);
 	}
 

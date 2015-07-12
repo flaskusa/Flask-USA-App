@@ -11,6 +11,7 @@
 		<attributes>
 			<id name="userId" />
 			<basic name="roleId" />
+			<basic name="roleName" />
 			<basic name="firstName" />
 			<basic name="middleName" />
 			<basic name="lastName" />
