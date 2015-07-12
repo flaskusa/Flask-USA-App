@@ -3,6 +3,7 @@ var _adminModel = {};
 _adminModel.SERVICE_ENDPOINTS = {
 	API_PREFIX					:"/api/jsonws",
 	GET_ADMIN 					: "/flask-rest-users-portlet.flaskadmin/get-flask-admins",
+	GET_ROLES 					: "/flask-rest-users-portlet.flaskrole/get-flask-roles",
 	ADD_ADMIN 					: "/flask-rest-users-portlet.flaskadmin/add-flask-admin",
 	UPDATE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/update-flask-admin",
 	DELETE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/delete-flask-admins",
@@ -24,6 +25,8 @@ _adminModel.DATA_MODEL= {
 		 { name: 'password1', type: 'string' },
 		 { name: 'password2', type: 'string' },
 		 { name: 'DOB', type: 'date' },
+		 { name: 'roleId', type: 'long' },
+		 { name: 'roleName', type: 'string' },
 		 { name: 'streetName', type: 'string' },
 		 { name: 'aptNo', type: 'string' },
 		 { name: 'areaCode', type: 'string' },

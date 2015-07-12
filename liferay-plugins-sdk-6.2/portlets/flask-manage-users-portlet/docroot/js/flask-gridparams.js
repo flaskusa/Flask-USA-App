@@ -105,7 +105,10 @@ GRID_PARAM.rowDetailTemplate = function(tabs, height)
 		}
 	 return { rowdetails: rowDetailTemplate, rowdetailsheight: height };
 }
-
+GRID_PARAM.formatDate = function (dateVal){
+	var dateObj = new Date(dateVal);
+	return dateObj.toLocaleDateString(); 
+}
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord) {
 	console.log("I am in initrowdetails"+datarecord.firstName);
 	var tabsdiv = null;
@@ -138,14 +141,15 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 			+ datarecord.middleName + "</td></tr>";
 	    var lastname = "<tr><td class='filledWidth'><b>Last Name:</b></td><td> "
 			+ datarecord.lastName + "</td></tr>";
-		
+	    var roleName = "<tr><td class='filledWidth'><b>Role:</b></td><td> "
+			+ datarecord.roleName + "</td></tr>";
 	    
 		var Email = "<tr><td class='filledWidth'> <b>Email:</b></td><td>"
 				+ datarecord.email + "</td></tr>";
 		var screenname = "<tr><td class='filledWidth'><b>Screen Name:</b></td><td>"
 				+ datarecord.screenName + "</td></tr>";
 		var dob1 = "<tr><td class='filledWidth'><b>Date Of Birth:</b></td><td> "
-				+ datarecord.DOB + "</td></tr>";
+				+ GRID_PARAM.formatDate(datarecord.DOB)  + "</td></tr>";
 		var streetname = "<tr><td class='filledWidth'><b>Street Name:</b></td><td> "
 				+ datarecord.streetName + "</td></tr>";
 		var aptno = "<tr><td class='filledWidth'><b>Appartment No:</b></td><td> "
@@ -168,9 +172,8 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		$(leftcolumn).append(firstname);
 		$(leftcolumn).append(middlename);
 		$(leftcolumn).append(lastname);
-		
+		$(leftcolumn).append(roleName);
 		$(leftcolumn).append("</table>");
-		
 		$(rightcolumn).append("<table>");
 		
 		$(rightcolumn).append(Email);
@@ -244,15 +247,19 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
     var adminColumns = [ {
 		text : 'First Name',
 		dataField : 'firstName',
-		width : '33%'
+		width : '20%'
 	}, {
 		text : 'Last Name',
 		dataField : 'lastName',
-		width : '33%'
+		width : '20%'
 	}, {
 		text : 'Email',
 		dataField : 'email'
-		//,width : '30%'
+		,width : '30%'
+	}, {
+		text : 'Role',
+		dataField : 'roleName'
+		,width : '20%'
 	}, {
 		text : 'Edit',
 		dataField : 'userId',

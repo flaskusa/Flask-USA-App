@@ -15,6 +15,7 @@ function addClickHandlers(){
 		adminForm.show();
 		_flaskLib.loadCountries('countryId');
 		_flaskLib.loadUSARegions('stateId');
+		loadFlaskRoles('roleId');
 	});
 
 	/* Click handler for save button*/
@@ -209,6 +210,7 @@ function editAdmin(rowData) {
 	adminForm.show();
 	_flaskLib.loadCountries('countryId', rowData.countryId);
 	_flaskLib.loadUSARegions('stateId', rowData.stateId);
+	loadFlaskRoles('roleId', rowData.roleId);
 	fnUpdateProfilePic(rowData.userId);
 	fnSetCheckBoxSelected(rowData.userInterests);
 	renderPhotoEditMode(rowData.userId);
@@ -329,4 +331,26 @@ function fnUpdateProfilePic(uid){
 	function renderPhotoEditMode(FileId){
 	   var url = "/documents/"+RepositoryID+"/0/"+FileId;
 	   $("#ProfilePic").css("background-image","url('"+url+"')")
+	}
+	
+	function loadFlaskRoles(elementId, selectedId){
+			var param = {};
+			var request = new Request();
+			var selectList = $('#' + elementId);
+			var flaskRequest = new Request();
+			flaskRequest.sendGETRequest(_adminModel.SERVICE_ENDPOINTS.GET_ROLES, param, 
+							function (data){
+									selectList.empty();
+									$.each(data, function(key, role) {
+										selectList.append($("<option/>", {
+									        value: role.roleId,
+									        text: role.roleName
+									    }));
+									});
+									selectList.val(selectedId);
+							} ,
+							function (data){
+								console.log("Error in getting role list: " + data );
+							});
+	
 	}

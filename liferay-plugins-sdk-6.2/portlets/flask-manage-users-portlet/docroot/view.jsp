@@ -122,6 +122,12 @@ function initialize(portletId, portlet){
        <input name="password2" id="password2" class="form-control" type="password">
      </div>
    </div> 
+   <div class="form-group">
+     <label class="control-label" for="roleId">Role:</label>
+     <div class="controls">
+       <select id="roleId" name="roleId" class="form-control"></select>
+     </div>
+   </div>  
    
   <div class="">
    <div class="form-group">
