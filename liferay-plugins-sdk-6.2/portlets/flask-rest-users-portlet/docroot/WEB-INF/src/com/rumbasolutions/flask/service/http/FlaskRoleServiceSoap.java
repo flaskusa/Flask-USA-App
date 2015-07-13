@@ -77,5 +77,18 @@ public class FlaskRoleServiceSoap {
 		}
 	}
 
+	public static void setFlaskRole(long userId, long roleId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			FlaskRoleServiceUtil.setFlaskRole(userId, roleId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskRoleServiceSoap.class);
 }

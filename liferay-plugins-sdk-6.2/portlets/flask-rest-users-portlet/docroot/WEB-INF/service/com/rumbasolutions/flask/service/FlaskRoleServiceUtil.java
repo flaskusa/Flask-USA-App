@@ -67,6 +67,11 @@ public class FlaskRoleServiceUtil {
 		return getService().getFlaskRoles();
 	}
 
+	public static void setFlaskRole(long userId, long roleId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().setFlaskRole(userId, roleId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

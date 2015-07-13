@@ -16,6 +16,16 @@ package com.rumbasolutions.flask.service.impl;
 
 import java.util.List;
 
+import com.liferay.portal.kernel.exception.PortalException;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.rumbasolutions.flask.model.FlaskRole;
 import com.rumbasolutions.flask.service.base.FlaskRoleServiceBaseImpl;
 
@@ -40,9 +50,39 @@ public class FlaskRoleServiceImpl extends FlaskRoleServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link com.rumbasolutions.flask.service.FlaskRoleServiceUtil} to access the flask role remote service.
 	 */
 	
+	private static Log LOGGER = LogFactoryUtil.getLog(FlaskRoleServiceImpl.class);
+
 
 	@Override
 	public List<FlaskRole> getFlaskRoles(){
 		return FlaskModelUtil.getFlaskRoles();
+	}
+	
+	@Override
+	public void setFlaskRole( long userId, long roleId, ServiceContext  serviceContext) {
+	
+		try {
+			User user = UserLocalServiceUtil.getUser(userId);
+			Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.LIFERAY_ADMIN);
+			long[] roleIds = user.getRoleIds();
+			//make sure user is not Liferay administrator
+			for(long id : roleIds){
+				if(id == role.getRoleId()){
+					LOGGER.error("Attempt to delete Administrator user, with id:" +  String.valueOf(userId));
+					throw new PortalException();
+				}
+			}
+			RoleLocalServiceUtil.deleteUserRoles(userId, roleIds);
+			UserLocalServiceUtil.addRoleUser(roleId, userId);
+		}
+		catch (PortalException e) {
+			LOGGER.error(e.getMessage());
+			e.printStackTrace();
+		}
+		catch (SystemException e) {
+			LOGGER.error(e.getMessage());
+			e.printStackTrace();
+		}
+		
 	}
 }

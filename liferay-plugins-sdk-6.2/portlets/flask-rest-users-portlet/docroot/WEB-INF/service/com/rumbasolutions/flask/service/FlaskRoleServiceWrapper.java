@@ -61,6 +61,12 @@ public class FlaskRoleServiceWrapper implements FlaskRoleService,
 		return _flaskRoleService.getFlaskRoles();
 	}
 
+	@Override
+	public void setFlaskRole(long userId, long roleId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_flaskRoleService.setFlaskRole(userId, roleId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

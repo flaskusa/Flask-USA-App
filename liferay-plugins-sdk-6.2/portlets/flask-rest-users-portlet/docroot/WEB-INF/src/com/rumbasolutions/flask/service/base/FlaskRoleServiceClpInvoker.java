@@ -35,6 +35,12 @@ public class FlaskRoleServiceClpInvoker {
 		_methodName26 = "getFlaskRoles";
 
 		_methodParameterTypes26 = new String[] {  };
+
+		_methodName27 = "setFlaskRole";
+
+		_methodParameterTypes27 = new String[] {
+				"long", "long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -56,6 +62,15 @@ public class FlaskRoleServiceClpInvoker {
 			return FlaskRoleServiceUtil.getFlaskRoles();
 		}
 
+		if (_methodName27.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
+			FlaskRoleServiceUtil.setFlaskRole(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -65,4 +80,6 @@ public class FlaskRoleServiceClpInvoker {
 	private String[] _methodParameterTypes21;
 	private String _methodName26;
 	private String[] _methodParameterTypes26;
+	private String _methodName27;
+	private String[] _methodParameterTypes27;
 }

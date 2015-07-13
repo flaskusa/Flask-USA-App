@@ -35,6 +35,12 @@ public class FlaskRoleServiceClp implements FlaskRoleService {
 		_methodName3 = "getFlaskRoles";
 
 		_methodParameterTypes3 = new String[] {  };
+
+		_methodName4 = "setFlaskRole";
+
+		_methodParameterTypes4 = new String[] {
+				"long", "long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -110,6 +116,33 @@ public class FlaskRoleServiceClp implements FlaskRoleService {
 		return (java.util.List<com.rumbasolutions.flask.model.FlaskRole>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public void setFlaskRole(long userId, long roleId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableService.invokeMethod(_methodName4,
+				_methodParameterTypes4,
+				new Object[] {
+					userId,
+					
+				roleId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -117,4 +150,6 @@ public class FlaskRoleServiceClp implements FlaskRoleService {
 	private String[] _methodParameterTypes1;
 	private String _methodName3;
 	private String[] _methodParameterTypes3;
+	private String _methodName4;
+	private String[] _methodParameterTypes4;
 }

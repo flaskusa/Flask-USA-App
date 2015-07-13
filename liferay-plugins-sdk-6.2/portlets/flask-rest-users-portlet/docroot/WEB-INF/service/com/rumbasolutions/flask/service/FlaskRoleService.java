@@ -67,4 +67,7 @@ public interface FlaskRoleService extends BaseService, InvokableService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rumbasolutions.flask.model.FlaskRole> getFlaskRoles();
+
+	public void setFlaskRole(long userId, long roleId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }
