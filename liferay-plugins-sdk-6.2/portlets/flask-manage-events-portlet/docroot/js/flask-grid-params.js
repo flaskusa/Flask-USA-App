@@ -131,7 +131,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 	  var tabsdiv = null; 
 	    tabsdiv = $($(parentElement).children()[0]);
 	    if (tabsdiv != null) {
-	  var eventDiv = tabsdiv.find('.venue');
+	  var eventDiv = tabsdiv.find('.event');
 	  var container1 = $('<div class="row-fluid"></div>');
 	  var leftcolumn = $('<div class="span3 GridLogo"></div>');
 	  var rightcolumn = $('<div class="span9"></div>');
