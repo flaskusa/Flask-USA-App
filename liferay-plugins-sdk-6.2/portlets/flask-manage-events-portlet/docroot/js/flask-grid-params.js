@@ -147,7 +147,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
 				+ datarecord.venueId + "</td></tr>";
 		var EventDate = "<tr><td class='filledWidth1'><b>Event Date:</b></td><td> "
-			+ d + "</td></tr>";		
+			+ GRID_PARAM.formatDate(d) + "</td></tr>";		
 		var StartTime = "<tr><td class='filledWidth1'><b>Start Time:</b></td><td> "
 			+ d1 + "</td></tr>";
 		var EndTime = "<tr><td class='filledWidth1'><b>End Time:</b></td><td> "
@@ -294,4 +294,9 @@ function fnShowEventLogo(_repositoryId,_eventId,_leftcolumn, _showUpload){
 			}
 	});
 	//LOGO END
+}
+
+GRID_PARAM.formatDate = function (dateVal){
+	var dateObj = new Date(dateVal);
+	return dateObj.toLocaleDateString(); 
 }
