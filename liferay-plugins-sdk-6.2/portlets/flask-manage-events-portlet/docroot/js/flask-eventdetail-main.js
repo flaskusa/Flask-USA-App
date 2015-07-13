@@ -6,6 +6,7 @@ function addDetailsClickHandlers(){
 	eventDetailForm = $("#eventForm");
 	/*	Initialize display elements*/
 	$(".cssVdSave").click(function(){
+		if($('#eventDetailsForm').jqxValidator('validate'))
 		saveEventDetails();
 	});	
 	
@@ -114,6 +115,15 @@ $(document).ready(function(){
         $(formArea).html("");
         var selectedContentType = $("option:selected", this).text().toUpperCase().replace(/ /g,'');
         fnRenderForm(selectedContentType);
+		$('#eventDetailsForm').jqxValidator
+	    ({
+	        hintType: 'label',
+	        animationDuration: 0,
+	        rules: [
+	                	{ input: '#infoTitle', message: 'Info Title is required!', action: 'keyup, blur', rule: 'required' },
+	                	{ input: '#infoDesc', message: 'Info Description is required!', action: 'keyup, blur', rule: 'required' }
+	               ]
+	    });        
     });
 });
 
@@ -285,6 +295,7 @@ function editEventDetail(rowData) {
 		$('#eventDetailId').val(rowData.eventDetailId);
 		$('#_eventDetailId').val(rowData.eventDetailId);
 		$('#eventDetailsForm').show();
+		
 		$('#eventDetailsDataTable').hide();
 		_eventDetailModel.loadContentType('infoTypeCategoryId',rowData.infoTypeCategoryId);
 		setTimeout(function(){
@@ -424,3 +435,6 @@ function fnDeleteFileByEntryId(fileEntryId,objDel){
 		},
 		function (data){$("#spinningSquaresG").hide();});	
 }
+
+
+

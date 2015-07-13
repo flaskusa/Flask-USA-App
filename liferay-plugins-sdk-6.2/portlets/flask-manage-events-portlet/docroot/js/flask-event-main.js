@@ -20,7 +20,8 @@ function addClickHandlers(){
 	/* Click handler for save button*/
 	
 	$(".clsSave").click(function(){
-		saveEvent();
+		if($('#eventForm').jqxValidator('validate'))
+			saveEvent();
 	});
 	
 	
@@ -60,6 +61,7 @@ function addClickHandlers(){
 }
 
 function loadData(){
+	
 	var flaskRequest = new Request();
 	params = {};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params, 
@@ -220,3 +222,40 @@ function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel){
 			
 		});	
 }
+
+$(document).ready(function(){
+	$('#eventForm').jqxValidator
+    ({
+        hintType: 'label',
+        animationDuration: 0,
+        rules: [
+		               { input: '#eventName', message: 'Event name is required!', action: 'keyup, blur', rule: 'required' },
+		               { input: '#eventDate', message: 'Enter valid date!', action: 'keyup, blur', rule: function (input, commit) {
+			            	   var date = new Date();
+			            	   var day = date.getDate();
+			            	   var monthIndex = date.getMonth()+1;
+			            	   var year = date.getFullYear();
+			            	   var currentdate= "0"+monthIndex+"-"+day+"-"+year;
+			            	   var inputdate= $("#eventDate").val();
+			            	   var cdate=Date.parse(currentdate);
+			            	   var indate=Date.parse(inputdate);
+		
+			            	   if(cdate<=indate){return true;}
+			            	   else{return false;}
+																								                       
+							}
+		               },
+			
+		               {
+			                input: '#endTime', message: 'End time always greater than start time!', action: 'keyup, focus', rule: function (input, commit) {
+			                	var st=$("#startTime").val();
+			                	var et=$("#endTime").val();
+			                    if (st<et) {return true;}
+			                    else{return false;}
+			                }
+			            }
+               ]
+    });
+	
+});
+

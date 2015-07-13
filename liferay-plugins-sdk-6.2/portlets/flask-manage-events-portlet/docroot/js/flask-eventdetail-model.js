@@ -179,7 +179,7 @@ _eventDetailModel.FORM_DATA_MODEL = {
         "type":"text",
         "attr":[{ 
             "caption":"Description",
-            "id":"addrLine1",
+            "id":"infoDesc",
             "value":"",
             "placeholder":"Enter description here",
             "maxlength":"255",
@@ -244,7 +244,7 @@ _eventDetailModel.FORM_DATA_MODEL = {
             "type":"text",
             "attr":[{ 
                 "caption":"Description",
-                "id":"addrLine1",
+                "id":"infoDesc",
                 "value":"",
                 "placeholder":"Enter description here",
                 "maxlength":"255",
@@ -365,7 +365,7 @@ _eventDetailModel.FORM_DATA_MODEL = {
             "type":"text",
             "attr":[{ 
                 "caption":"Description",
-                "id":"addrLine1",
+                "id":"infoDesc",
                 "value":"",
                 "placeholder":"Enter description here",
                 "maxlength":"255",
@@ -387,7 +387,7 @@ _eventDetailModel.FORM_DATA_MODEL = {
             "type":"text",
             "attr":[{ 
                 "caption":"Description",
-                "id":"addrLine1",
+                "id":"infoDesc",
                 "value":"",
                 "placeholder":"Enter description here",
                 "maxlength":"255",
@@ -409,7 +409,7 @@ _eventDetailModel.FORM_DATA_MODEL = {
         "type":"text",
         "attr":[{ 
             "caption":"Description",
-            "id":"addrLine1",
+            "id":"infoDesc",
             "value":"",
             "placeholder":"Enter description here",
             "maxlength":"255",
@@ -431,7 +431,7 @@ _eventDetailModel.FORM_DATA_MODEL = {
         "type":"text",
         "attr":[{ 
             "caption":"Description",
-            "id":"addrLine1",
+            "id":"infoDesc",
             "value":"",
             "placeholder":"Enter description here",
             "maxlength":"255",
@@ -453,7 +453,7 @@ _eventDetailModel.FORM_DATA_MODEL = {
         "type":"text",
         "attr":[{ 
             "caption":"Description",
-            "id":"addrLine1",
+            "id":"infoDesc",
             "value":"",
             "placeholder":"Enter description here",
             "maxlength":"255",
