@@ -19,6 +19,7 @@ function addDetailsClickHandlers(){
 	$(".cssVdCancel").click(function(){
 		$("#venueDetailsForm").hide();
 		$("#venueDetailsDataTable").show();
+		loadVenueDetailsData($('#venueForm #venueId').val(),$("#infoTypeId").val());
 		$("#slides").html("");
 	});	
 }
@@ -28,12 +29,13 @@ function loadVenueDetailsData(venueId,infoTypeId){
 	params = {'venueId':venueId};
 	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_VENUE_DETAILS, params, 
 	function(data){/*success handler*/
-		if(infoTypeId>0){
+		console.log(data);
+		/*if(infoTypeId>0){
 		    var returnedData = $.grep(data, function(element, index){
 		    	return element.infoTypeId == infoTypeId;
 		    });
 		    data = returnedData;
-		}
+		}*/
 		GRID_PARAM_DETAILS.updateGrid(data);
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_venueDetailModel.MESSAGES.DETAIL_GET_ERROR);

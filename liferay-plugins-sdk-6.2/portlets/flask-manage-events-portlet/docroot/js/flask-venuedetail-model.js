@@ -16,6 +16,8 @@ _venueDetailModel.SERVICE_ENDPOINTS = {
 	DELETE_FILE_BY_TITLE		: "/dlapp/delete-file-entry-by-title"
 };
 
+_venueDetailModel.InfoType = ["General", "Pre-Event","During Event","Post-Event"];
+
 _venueDetailModel.DATA_MODEL= {
 		VENUEDETAILS: 
 			[
@@ -48,9 +50,11 @@ _venueDetailModel.GRID_CONTEXT_MENU = {
 
 _venueDetailModel.GRID_DATA_MODEL= {
 		VENUEDETAILS: 
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '45%' },
-      		 {text: 'Description', datafield: 'infoDesc', width: '45%'},
-      		 { text: 'Edit',  datafield: 'venueDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _venueDetailModel.GRID_CONTEXT_MENU.VENUEDETAILS }]
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '40%' },
+      		 {text: 'Description', datafield: 'infoDesc', width: '40%'},
+      		 {text: 'Info Type', datafield: 'infoTypeId', width: '10%'},
+      		 { text: 'Edit',  datafield: 'venueDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _venueDetailModel.GRID_CONTEXT_MENU.VENUEDETAILS }
+      		 ]
 		};
 
 _venueDetailModel.MESSAGES= {

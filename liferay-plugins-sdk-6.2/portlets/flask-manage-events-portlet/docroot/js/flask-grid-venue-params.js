@@ -214,12 +214,10 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 	}
     
     var vanueColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'venueName', width: '30%' },
-    	 {
-    	     text: 'Description', datafield: 'venueDescription', width: '30%'
-    	 },
-    	 { text: 'City', datafield: 'venueCity',  width: '20%'},
-    	 { text: 'Metro Area', datafield: 'venueMetroArea', width: '15%'},
-    	 { text: 'Edit',  datafield: 'venueId', width: '5%', cellsalign: 'center', cellsrenderer: actionRenderer}];
+                        {text: 'Description', datafield: 'venueDescription', width: '30%'},
+                        { text: 'City', datafield: 'venueCity',  width: '20%'},
+                        { text: 'Metro Area', datafield: 'venueMetroArea', width: '15%'},
+                        { text: 'Edit',  datafield: 'venueId', width: '5%', cellsalign: 'center', cellsrenderer: actionRenderer}];
     	
     
     
@@ -264,24 +262,21 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 
 		
 
-function fnShowVenueLogo(_repositoryId,_eventId,_leftcolumn, _showUpload){
+function fnShowVenueLogo(_repositoryId,_venueId,_leftcolumn, _showUpload){
 	///LOGO START
 	var LogoURL = "";
 	var flaskRequest = new Request();
 	params= {'repositoryId': _repositoryId, 'parentFolderId': 0, 'name': 'Venue'};
 	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
 		function (data){
-			folderName = 'Event-'+_eventId;
+			folderName = 'Venue-'+_venueId;
 			var flaskRequestChild = new Request();
 			paramsChild= {'repositoryId': _repositoryId, 'parentFolderId': data.folderId, 'name': folderName};
 			flaskRequestChild.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
 				function (data){
-					//data.folderId;
 					var _folderId = data.folderId;
 					var flaskRequestChild0 = new Request();
 					paramsChild0= {'groupId': _repositoryId, 'folderId':data.folderId, 'title': 'VenueLogo'};
-					console.log(paramsChild0)
-					console.log(_venueDetailModel.SERVICE_ENDPOINTS.GET_FILE_BY_TITLE);
 					flaskRequestChild0.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_FILE_BY_TITLE , paramsChild0, 
 						function (data){
 							LogoURL = "/documents/"+_repositoryId+"/"+_folderId+"/EventLogo";

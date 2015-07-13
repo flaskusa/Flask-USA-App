@@ -113,6 +113,7 @@ GRID_PARAM_DETAILS.rowDetailTemplate = function(tabs, height)
 
 GRID_PARAM_DETAILS.initrowdetails = function(index, parentElement, gridElement, datarecord){
 	var tabsdiv = null; 
+	console.log(datarecord);
     tabsdiv = $($(parentElement).children()[0]);
 	    if (tabsdiv != null) {
 	    	var eventDiv = tabsdiv.find('.images');
@@ -168,6 +169,7 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 	});
 
 	var dataAdapter = new $.jqx.dataAdapter(GRID_PARAM_DETAILS.source(model, data));
+	
     grid.jqxGrid(
             {
                 width: '100%',
@@ -183,7 +185,8 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
                 showrowdetailscolumn:false,
                 rowdetailstemplate: GRID_PARAM_DETAILS.rowDetailTemplate(rowDetailDivArr , 200),
                 initrowdetails: GRID_PARAM_DETAILS.initrowdetails,
-                columns: Columns
+                columns: Columns//,
+                //groups: ['']
             });
     
 	}
