@@ -183,7 +183,7 @@ _venueDetailModel.FORM_DATA_MODEL = {
         "type":"text",
         "attr":[{ 
             "caption":"Description",
-            "id":"addrLine1",
+            "id":"infoDesc",
             "value":"",
             "placeholder":"Enter description here",
             "maxlength":"255",
@@ -205,7 +205,7 @@ _venueDetailModel.FORM_DATA_MODEL = {
             "type":"text",
             "attr":[{ 
                 "caption":"Address",
-                "id":"addrLine1",
+                "id":"infoDesc",
                 "value":"",
                 "placeholder":"Enter Address here",
                 "maxlength":"255",
@@ -248,7 +248,7 @@ _venueDetailModel.FORM_DATA_MODEL = {
             "type":"text",
             "attr":[{ 
                 "caption":"Description",
-                "id":"addrLine1",
+                "id":"infoDesc",
                 "value":"",
                 "placeholder":"Enter description here",
                 "maxlength":"255",
@@ -336,7 +336,7 @@ _venueDetailModel.FORM_DATA_MODEL = {
         "type":"text",
         "attr":[{ 
             "caption":"Address",
-            "id":"addrLine1",
+            "id":"infoDesc",
             "value":"",
             "placeholder":"Enter Address here",
             "maxlength":"255",
@@ -369,7 +369,7 @@ _venueDetailModel.FORM_DATA_MODEL = {
             "type":"text",
             "attr":[{ 
                 "caption":"Description",
-                "id":"addrLine1",
+                "id":"infoDesc",
                 "value":"",
                 "placeholder":"Enter description here",
                 "maxlength":"255",
@@ -391,7 +391,7 @@ _venueDetailModel.FORM_DATA_MODEL = {
             "type":"text",
             "attr":[{ 
                 "caption":"Description",
-                "id":"addrLine1",
+                "id":"infoDesc",
                 "value":"",
                 "placeholder":"Enter description here",
                 "maxlength":"255",
@@ -413,7 +413,7 @@ _venueDetailModel.FORM_DATA_MODEL = {
         "type":"text",
         "attr":[{ 
             "caption":"Description",
-            "id":"addrLine1",
+            "id":"infoDesc",
             "value":"",
             "placeholder":"Enter description here",
             "maxlength":"255",
@@ -435,7 +435,7 @@ _venueDetailModel.FORM_DATA_MODEL = {
         "type":"text",
         "attr":[{ 
             "caption":"Description",
-            "id":"addrLine1",
+            "id":"infoDesc",
             "value":"",
             "placeholder":"Enter description here",
             "maxlength":"255",
@@ -457,7 +457,7 @@ _venueDetailModel.FORM_DATA_MODEL = {
         "type":"text",
         "attr":[{ 
             "caption":"Description",
-            "id":"addrLine1",
+            "id":"infoDesc",
             "value":"",
             "placeholder":"Enter description here",
             "maxlength":"255",

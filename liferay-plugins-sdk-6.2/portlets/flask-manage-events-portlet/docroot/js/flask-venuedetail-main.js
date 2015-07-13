@@ -6,6 +6,7 @@ function addDetailsClickHandlers(){
 	venueDetailForm = $("#venueDetailsForm");
 	/*	Initialize display elements*/
 	$(".cssVdSave").click(function(){
+		if($('#venueDetailsForm').jqxValidator('validate'))
 		saveVenueDetails();
 	});	
 	
@@ -115,6 +116,15 @@ $(document).ready(function(){
         $(formArea).html("");
         var selectedContentType = $("option:selected", this).text().toUpperCase().replace(/ /g,'');
         fnRenderForm(selectedContentType);
+        $('#venueDetailsForm').jqxValidator
+        ({
+            hintType: 'label',
+            animationDuration: 0,
+            rules: [
+                    	{ input: '#infoTitle', message: 'Info Title is required!', action: 'keyup, blur', rule: 'required' },
+                    	{ input: '#infoDesc', message: 'Info Description is required!', action: 'keyup, blur', rule: 'required' }
+                   ]
+        });    
     });
 });
 
