@@ -16,6 +16,7 @@ GRID_PARAM_DETAILS.source = function(model, data){
 GRID_PARAM_DETAILS.updateGrid = function(data){
 	var dataAdapter =  new $.jqx.dataAdapter(GRID_PARAM_DETAILS.source(_dataModel, data));
 	gridObj.jqxGrid({ source: dataAdapter });
+	gridObj.jqxGrid('addgroup', 'infoTypeId');
 }
 GRID_PARAM_DETAILS.toggleSelectionMode= function(){
 	if(gridObj.jqxGrid('selectionmode') == 'checkbox'){
