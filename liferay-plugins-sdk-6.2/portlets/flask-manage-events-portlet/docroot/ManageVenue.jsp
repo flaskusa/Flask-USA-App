@@ -123,6 +123,12 @@ function initialize(portletId, portlet){
 		      <select id="venueCountryId" name="venueCountryId" class="form-control" ></select>
 		    </div>
 		  </div>
+		  <div class="form-group">
+			    <label class="control-label" for="venueImage">Venue Image:</label>
+				<div class="controls">
+					<div id="venueImage"></div>
+				</div>
+		   </div>		   
 		  <input class="btn btn-info clsSave" type="button" value="Save"/>
 		  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
 		  <input id="venueId" type="hidden" value="0">
