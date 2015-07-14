@@ -28,9 +28,23 @@
 <input type="hidden" value="<%=user.getUserId()%>" id="hdnUserId"/>
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
+		<aui:nav-item anchorCssClass="user-avatar-link" cssClass='<%= themeDisplay.isImpersonated() ? "user-avatar impersonating-user" : "user-avatar" %>' dropdown="<%= true %>" label="Manage Flask">
+				<%
+				String manageUserUrl = themeDisplay.getURLPortal() + "/web/flask/musers";
+				String manageEventUrl = themeDisplay.getURLPortal() + "/web/flask/mevents";
+				String manageVenueUrl = themeDisplay.getURLPortal() + "/web/flask//mvenues";
+				String manageAds = themeDisplay.getURLPortal() + "/web/flask/manageads";
+				%>
+				<c:if test="<%= bShowFlaskAdminMenu %>">
+					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-user" label="Manage Users" title="Manage Flask Users"  />
+					<aui:nav-item href="<%= manageEventUrl %>" iconCssClass="icon-user" label="Manage Events" title="Manage Events"  />
+					<aui:nav-item href="<%= manageVenueUrl %>" iconCssClass="icon-user" label="Manage Venue" title="Manage Venue"  />
+					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="Manage Ads" title="Manage Advertisements"/>
+				</c:if>
+
+		</aui:nav-item>
 		<aui:nav-item anchorCssClass="user-avatar-link" cssClass='<%= themeDisplay.isImpersonated() ? "user-avatar impersonating-user" : "user-avatar" %>' dropdown="<%= true %>" id="userAvatar" label="<%= userName %>">
 			<c:if test="<%= themeDisplay.isImpersonated() %>">
-
 				<%
 				String impersonatingUserLabel = "you-are-impersonating-the-guest-user";
 
@@ -74,23 +88,12 @@
 			<c:if test="<%= userSetupComplete && Validator.isNotNull(themeDisplay.getURLMyAccount()) %>">
 
 				<%
-				//String myAccountURL = themeDisplay.getURLMyAccount().toString();
 				String myAccountURL = themeDisplay.getURLPortal() +"/web/guest/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Fcreate_account";
-				//myAccountURL = HttpUtil.setParameter(myAccountURL, "controlPanelCategory", PortletCategoryKeys.MY);
-				String manageUserUrl = themeDisplay.getURLPortal() + "/web/flask/musers";
-				String manageEventUrl = themeDisplay.getURLPortal() + "/web/flask/mevents";
-				String manageVenueUrl = themeDisplay.getURLPortal() + "/web/flask//mvenues";
 				String manageAds = themeDisplay.getURLPortal() + "/web/flask/manageads";
 				String friends = themeDisplay.getURLPortal() + "/web/flask/friends";
 				String notifications = themeDisplay.getURLPortal() + "/web/flask/notifications";
 				%>
 				<c:if test="<%= bShowFlaskAdminMenu %>">
-						
-					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-user" label="Manage Users" title="Manage Flask Users"  />
-					<aui:nav-item href="<%= manageEventUrl %>" iconCssClass="icon-user" label="Manage Events" title="Manage Events"  />
-					<aui:nav-item href="<%= manageVenueUrl %>" iconCssClass="icon-user" label="Manage Venue" title="Manage Venue"  />
-					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="Manage Ads" title="Manage Advertisements"/>
-				
 					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="My Events" title="My Events"/>
 					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="My Tailgate" title="My Tailgate"/>
 					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="My Groups" title="My Groups"/>
