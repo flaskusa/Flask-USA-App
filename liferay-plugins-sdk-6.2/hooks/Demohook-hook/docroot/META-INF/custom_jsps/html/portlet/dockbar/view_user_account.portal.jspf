@@ -36,6 +36,7 @@
 				String manageAds = themeDisplay.getURLPortal() + "/web/flask/manageads";
 				%>
 				<c:if test="<%= bShowFlaskAdminMenu %>">
+					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-user" label="Manage Admin" title="Manage Flask Admin"  />
 					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-user" label="Manage Users" title="Manage Flask Users"  />
 					<aui:nav-item href="<%= manageEventUrl %>" iconCssClass="icon-user" label="Manage Events" title="Manage Events"  />
 					<aui:nav-item href="<%= manageVenueUrl %>" iconCssClass="icon-user" label="Manage Venue" title="Manage Venue"  />
