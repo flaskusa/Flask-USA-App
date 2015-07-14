@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.rumbasolutions.flask.service.EventLocalService" class="com.rumbasolutions.flask.service.impl.EventLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.EventService" class="com.rumbasolutions.flask.service.impl.EventServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.EventPersistence" class="com.rumbasolutions.flask.service.persistence.EventPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.EventDetailLocalService" class="com.rumbasolutions.flask.service.impl.EventDetailLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.EventDetailService" class="com.rumbasolutions.flask.service.impl.EventDetailServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.EventDetailPersistence" class="com.rumbasolutions.flask.service.persistence.EventDetailPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.EventDetailImageLocalService" class="com.rumbasolutions.flask.service.impl.EventDetailImageLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.EventDetailImageService" class="com.rumbasolutions.flask.service.impl.EventDetailImageServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.EventDetailImagePersistence" class="com.rumbasolutions.flask.service.persistence.EventDetailImagePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.EventTypeLocalService" class="com.rumbasolutions.flask.service.impl.EventTypeLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.EventTypeService" class="com.rumbasolutions.flask.service.impl.EventTypeServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.EventTypePersistence" class="com.rumbasolutions.flask.service.persistence.EventTypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.InfoTypeLocalService" class="com.rumbasolutions.flask.service.impl.InfoTypeLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.InfoTypeService" class="com.rumbasolutions.flask.service.impl.InfoTypeServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.InfoTypePersistence" class="com.rumbasolutions.flask.service.persistence.InfoTypePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.InfoTypeCategoryLocalService" class="com.rumbasolutions.flask.service.impl.InfoTypeCategoryLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.InfoTypeCategoryService" class="com.rumbasolutions.flask.service.impl.InfoTypeCategoryServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.InfoTypeCategoryPersistence" class="com.rumbasolutions.flask.service.persistence.InfoTypeCategoryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.VenueLocalService" class="com.rumbasolutions.flask.service.impl.VenueLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.VenueService" class="com.rumbasolutions.flask.service.impl.VenueServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.VenuePersistence" class="com.rumbasolutions.flask.service.persistence.VenuePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.VenueDetailLocalService" class="com.rumbasolutions.flask.service.impl.VenueDetailLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.VenueDetailService" class="com.rumbasolutions.flask.service.impl.VenueDetailServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.VenueDetailPersistence" class="com.rumbasolutions.flask.service.persistence.VenueDetailPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.VenueDetailImageLocalService" class="com.rumbasolutions.flask.service.impl.VenueDetailImageLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.VenueDetailImageService" class="com.rumbasolutions.flask.service.impl.VenueDetailImageServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.VenueDetailImagePersistence" class="com.rumbasolutions.flask.service.persistence.VenueDetailImagePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.VenueImageLocalService" class="com.rumbasolutions.flask.service.impl.VenueImageLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.VenueImageService" class="com.rumbasolutions.flask.service.impl.VenueImageServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.VenueImagePersistence" class="com.rumbasolutions.flask.service.persistence.VenueImagePersistenceImpl" parent="basePersistence" />
+</beans>

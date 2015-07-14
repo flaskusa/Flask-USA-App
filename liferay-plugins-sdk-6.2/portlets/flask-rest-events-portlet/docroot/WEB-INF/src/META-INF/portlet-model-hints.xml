@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.rumbasolutions.flask.model.Event">
+		<field name="eventId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="eventName" type="String" />
+		<field name="description" type="String" />
+		<field name="eventDate" type="Date" />
+		<field name="startTime" type="Date" />
+		<field name="endTime" type="Date" />
+		<field name="eventTypeId" type="long" />
+		<field name="eventTypeName" type="String" />
+		<field name="eventImagePath" type="String" />
+		<field name="venueId" type="long" />
+		<field name="venueName" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.EventDetail">
+		<field name="eventDetailId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="eventId" type="long" />
+		<field name="infoTypeId" type="long" />
+		<field name="infoTypeName" type="String" />
+		<field name="infoTypeCategoryId" type="long" />
+		<field name="infoTypeCategoryName" type="String" />
+		<field name="infoTitle" type="String" />
+		<field name="infoDesc" type="String" />
+		<field name="addrLine1" type="String" />
+		<field name="addrLine2" type="String" />
+		<field name="city" type="String" />
+		<field name="zipCode" type="String" />
+		<field name="stateId" type="long" />
+		<field name="stateName" type="String" />
+		<field name="countryId" type="long" />
+		<field name="countryName" type="String" />
+		<field name="latitude" type="String" />
+		<field name="longitude" type="String" />
+		<field name="phone" type="String" />
+		<field name="website" type="String" />
+		<field name="cost" type="double" />
+		<field name="hoursOfOperation" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.EventDetailImage">
+		<field name="eventDetailImageId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="eventDetailId" type="long" />
+		<field name="imageTitle" type="String" />
+		<field name="imageDesc" type="String" />
+		<field name="imagePath" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.EventType">
+		<field name="eventTypeId" type="long" />
+		<field name="eventTypeKey" type="String" />
+		<field name="eventTypeName" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.InfoType">
+		<field name="infoTypeId" type="long" />
+		<field name="infoTypeName" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.InfoTypeCategory">
+		<field name="infoTypeCategoryId" type="long" />
+		<field name="infoTypeCategoryName" type="String" />
+		<field name="displayTemplate" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.Venue">
+		<field name="venueId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="venueName" type="String" />
+		<field name="venueDescription" type="String" />
+		<field name="venueZipCode" type="String" />
+		<field name="addrLine1" type="String" />
+		<field name="addrLine2" type="String" />
+		<field name="venueCity" type="String" />
+		<field name="venueStateId" type="long" />
+		<field name="venueStateName" type="String" />
+		<field name="venueCountryId" type="long" />
+		<field name="venueCountryName" type="String" />
+		<field name="venueMetroArea" type="String" />
+		<field name="longitude" type="String" />
+		<field name="latitude" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.VenueDetail">
+		<field name="venueDetailId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="venueId" type="long" />
+		<field name="infoTypeId" type="long" />
+		<field name="infoTypeName" type="String" />
+		<field name="infoTypeCategoryId" type="long" />
+		<field name="infoTitle" type="String" />
+		<field name="infoDesc" type="String" />
+		<field name="addrLine1" type="String" />
+		<field name="addrLine2" type="String" />
+		<field name="city" type="String" />
+		<field name="zipCode" type="String" />
+		<field name="stateId" type="long" />
+		<field name="stateName" type="String" />
+		<field name="countryId" type="long" />
+		<field name="countryName" type="String" />
+		<field name="latitude" type="String" />
+		<field name="longitude" type="String" />
+		<field name="phone" type="String" />
+		<field name="website" type="String" />
+		<field name="cost" type="double" />
+		<field name="hoursOfOperation" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.VenueDetailImage">
+		<field name="venueDetailImageId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="venueDetailId" type="long" />
+		<field name="imageTitle" type="String" />
+		<field name="imageDesc" type="String" />
+		<field name="imagePath" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.VenueImage">
+		<field name="venueImageId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="title" type="String" />
+		<field name="venueImagePath" type="String" />
+		<field name="venueId" type="long" />
+	</model>
+</model-hints>

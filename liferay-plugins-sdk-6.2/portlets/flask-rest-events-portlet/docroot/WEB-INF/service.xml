@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.rumbasolutions.flask">
+	<author>Ashutosh Rai</author>
+	<namespace>flaskevents</namespace>
+	
+
+    <!-- Info type is event/venue information type General, Pre Event, During Event, Post Event -->
+    
+    <entity name="InfoType" local-service="true" remote-service="true">
+
+        <!-- PK fields -->
+        
+        <column name="infoTypeId" type="long" primary="true" />
+
+        <column name="infoTypeName" type="String" /> <!-- General, Pre Event, During Event, Post Event -->
+     </entity>
+   
+   
+	<!-- This is type entity for InformationCategoryType -->
+     <entity name="InfoTypeCategory" local-service="true" remote-service="true">
+
+        <!-- PK fields -->
+        
+        <column name="infoTypeCategoryId" type="long" primary="true" />
+
+        <!-- Other fields -->
+        <column name="infoTypeCategoryName" type="String" />          <!-- General, Tradition, Weather, Parking etc -->
+        
+        <column name="displayTemplate" type="String" />				<!-- JSON display format -->
+        
+     </entity>
+
+	<!-- Event type to facilitate match with user interest information-->
+   
+      <entity name="EventType" local-service="true" remote-service="true">
+
+        <!-- PK fields -->
+        <column name="eventTypeId" type="long" primary="true" />
+		
+		<!-- Other fields -->
+        <column name="eventTypeKey" type="String" />
+        <column name="eventTypeName" type="String" />
+     </entity>
+    
+    
+	<!-- Event details-->
+    <entity name="Event" local-service="true" remote-service="true">
+
+        <!-- PK fields -->
+
+        <column name="eventId" type="long" primary="true" />
+
+        <!-- Audit fields -->
+
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+
+        <!-- Other fields -->
+
+        <column name="eventName" type="String" />
+        <column name="description" type="String" />
+        <column name="eventDate" type="Date" />
+        <column name="startTime" type="Date" />
+        <column name="endTime" type="Date" />
+        <column name="eventTypeId" type="long" />
+        <column name="eventTypeName" type="String" />
+        
+        <column name="eventImagePath" type="String" />
+
+        <column name="venueId" type="long" />
+	    <column name="venueName" type="String" />
+	        
+
+        <!-- Order -->
+
+        <order by="desc">
+                <order-column name="eventDate" />
+        </order>
+
+        <!-- Finder methods -->
+        <finder name="venueId" return-type="Collection">
+			<finder-column name="venueId" />
+		</finder>
+		
+		<finder name="eventDate" return-type="Collection">
+			<finder-column name="eventDate" />
+		</finder>
+    </entity>
+
+
+  <entity name="EventDetail" local-service="true" remote-service="true">
+        <!-- PK fields -->
+        <column name="eventDetailId" type="long" primary="true" />
+        <!-- Audit fields -->
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+       		<!-- Other fields -->
+       	 <column name="eventId" type="long" />
+        <column name="infoTypeId" type="long" />
+		<column name="infoTypeName" type="String" />
+        <column name="infoTypeCategoryId" type="long" />
+        <column name="infoTypeCategoryName" type="String" />
+        <column name="infoTitle" type="String" />
+        <column name="infoDesc" type="String" />
+        <column name="addrLine1" type="String" />
+        <column name="addrLine2" type="String" />
+        <column name="city" type="String" />
+        <column name="zipCode" type="String" />
+        <column name="stateId" type="long" />
+        <column name="stateName" type="String" />  <!-- Only for display -->
+       	<column name="countryId" type="long" />
+        <column name="countryName" type="String" />  <!-- Only for display -->
+        <column name="latitude" type="String" />
+        <column name="longitude" type="String" />
+        <column name="phone" type="String" />
+        <column name="website" type="String" />
+        <column name="cost" type="double" />
+        <column name="hoursOfOperation" type="String" />
+		<!-- Finder methods -->
+        <finder name="EventId" return-type="Collection">
+			<finder-column name="eventId" />
+		</finder>
+		<finder name="EventInfoType" return-type="Collection">
+			<finder-column name="infoTypeId" />
+		</finder>
+		<finder name="EventInfoTypeCategory" return-type="Collection">
+			<finder-column name="infoTypeId" />
+			<finder-column name="infoTypeCategoryId" />
+		</finder>
+   </entity>
+ 
+	<entity name="EventDetailImage" local-service="true" remote-service="true">
+        <!-- PK fields -->
+        <column name="eventDetailImageId" type="long" primary="true" />
+        
+        
+        <!-- Audit fields -->
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+        
+        <!-- Other fields-->
+        <column name="eventDetailId" type="long" />
+        <column name="imageTitle" type="String" />
+        <column name="imageDesc" type="String" />
+        <column name="imagePath" type="String" />
+		
+		       <!-- Finder methods -->
+        <finder name="EventDetailId" return-type="Collection">
+			<finder-column name="eventDetailId" />
+		</finder>
+	</entity>
+         
+	<!-- Venue details-->
+
+    <entity name="Venue" local-service="true" remote-service="true">
+
+        <!-- PK fields -->
+        
+        <column name="venueId" type="long" primary="true" />
+
+        <!-- Audit fields -->
+
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+
+        <!-- Other fields -->
+
+        <column name="venueName" type="String" />
+        <column name="venueDescription" type="String" />
+        <column name="venueZipCode" type="String" />
+        <column name="addrLine1" type="String" />
+        <column name="addrLine2" type="String" />
+        <column name="venueCity" type="String" />
+        <column name="venueStateId" type="long" />
+        <column name="venueStateName" type="String" />
+        <column name="venueCountryId" type="long" />
+        <column name="venueCountryName" type="String" />
+        <column name="venueMetroArea" type="String" />
+        <!-- Order -->
+        <column name="longitude" type="String"></column>
+        <column name="latitude" type="String"></column>
+        <order by="asc">
+                <order-column name="venueName" />
+        </order>
+
+        <!-- Finder methods -->
+         <finder name="VenueMetroArea" return-type="Collection">
+			<finder-column name="venueMetroArea" />
+		</finder>
+		
+		<finder name="VenueZipCode" return-type="Collection">
+			<finder-column name="venueZipCode" />
+		</finder>
+        
+        
+
+    </entity>
+    
+    <!-- Venue image stores images for the venue which can be used when creating events-->
+        <entity name="VenueImage" local-service="true" remote-service="true">
+
+        <!-- PK fields -->
+        
+        <column name="venueImageId" type="long" primary="true" />
+
+        <!-- Audit fields -->
+
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+
+        <!-- Other fields -->
+
+        <column name="title" type="String" />
+        <column name="venueImagePath" type="String" />
+	    <column name="venueId" type="long" />
+	
+        <!-- Order -->
+
+        <order by="asc">
+                <order-column name="title" />
+        </order>
+
+        <!-- Finder methods -->
+        
+        <finder name="venueId" return-type="Collection">
+			<finder-column name="venueId" />
+		</finder>
+    </entity>
+           
+   <entity name="VenueDetail" local-service="true" remote-service="true">
+        <!-- PK fields -->
+        <column name="venueDetailId" type="long" primary="true" />
+        <!-- Audit fields -->
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+
+       		<!-- Other fields -->
+       	<column name="venueId" type="long" />
+        <column name="infoTypeId" type="long" />
+        <column name="infoTypeName" type="String" />
+        <column name="infoTypeCategoryId" type="long" />
+        <column name="infoTitle" type="String" />
+        <column name="infoDesc" type="String" />
+        <column name="addrLine1" type="String" />
+        <column name="addrLine2" type="String" />
+        <column name="city" type="String" />
+        <column name="zipCode" type="String" />
+        <column name="stateId" type="long" />
+        <column name="stateName" type="String" />
+       	<column name="countryId" type="long" />
+       	<column name="countryName" type="String" />
+       	
+        <column name="latitude" type="String" />
+        <column name="longitude" type="String" />
+        <column name="phone" type="String" />
+        <column name="website" type="String" />
+        <column name="cost" type="double" />
+        <column name="hoursOfOperation" type="String" />
+        
+		<!-- Finder methods -->
+
+        <finder name="VenueId" return-type="Collection">
+			<finder-column name="venueId" />
+		</finder>
+   </entity>
+ 
+    <entity name="VenueDetailImage" local-service="true" remote-service="true">
+      <!-- PK fields -->
+        <column name="venueDetailImageId" type="long" primary="true" />
+        
+        <!-- Audit fields -->
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+        
+        <!-- Other fields-->
+         <column name="venueDetailId" type="long" />
+        <column name="imageTitle" type="String" />
+        <column name="imageDesc" type="String" />
+        <column name="imagePath" type="String" />
+        <!-- Finder methods -->
+        <finder name="VenueDetailId" return-type="Collection">
+			<finder-column name="venueDetailId" />
+		</finder>
+ 	</entity>
+  
+   
+</service-builder>
