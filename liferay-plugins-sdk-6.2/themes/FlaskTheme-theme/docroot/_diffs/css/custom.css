@@ -15,6 +15,11 @@ ul#_145_navAccountControls
 		  display:none;
 }
 
+.aui .dockbar .nav li.dropdown.dockbar-user-notifications .dropdown-menu 
+{
+  width: 211px!important;
+}
+
 .aui .dockbar-split .dockbar.navbar-static-top .collapse .nav-account-controls {
   background-color: #fff!important;
   border-radius: 5px!important;
@@ -23,7 +28,7 @@ ul#_145_navAccountControls
   width: 230px!important;
 }
 .aui .nav-collapse .dropdown-menu {
-  width: 211px!important;
+  width: 230px!important;
   margin: 0;
 }
 
