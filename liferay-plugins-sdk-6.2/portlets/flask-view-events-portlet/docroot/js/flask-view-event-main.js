@@ -40,7 +40,7 @@ function fnlist(tdata) {
 		{
 		    var st = formatUnixToTime(tdata[i].startTime);
 		    var divRowItem = $('<div/>',{'title':tdata[i].eventName, 'class':'rowHeight'});
-		 	var tempHTML = '<tr><td style="width:20%;"><div class="imgdiv"><img src="'+ tdata[i].eventImagePath + '" ></div><div class="lbldiv"><label class="control-label-color">' + tdata[i].eventName + '</label><label class="control-label-nocolor">'+ st + ' at ' + tdata[i].venueName + '</label></div></td></tr>';
+		 	var tempHTML = '<tr><td style="width:20%;"><div class="imgdiv"><img src="'+ tdata[i].eventImagePath + '" ></div><div class="lbldiv"><label class="control-label-color">' + tdata[i].eventName + '</label><label class="control-label-nocolor">'+ st + ' at ' + tdata[i].venueId + '</label></div></td></tr>';
 		 	$(divRowItem).html(tempHTML);
 		 	$(divRowItem).appendTo($(divRow));
 		 	$(divRowItem).click(function(){
@@ -65,11 +65,11 @@ $(document).ready(function(){
 		$('#one').show();
 		$('#two').hide();
 	});
-	 var targetUrl = $(this).attr('#one');
+	 /*var targetUrl = $(this).attr('#one');
 	  window.history.pushState({url: "" + targetUrl + ""}, null, targetUrl);
 	  window.onpopstate = function(e) {
 		    window.history.go(e.state ? e.state.url : null);
-		};
+		};*/
 });
 
 function fnRenderEvents(repositoryId,parentFolderId,folderName,eventName){
