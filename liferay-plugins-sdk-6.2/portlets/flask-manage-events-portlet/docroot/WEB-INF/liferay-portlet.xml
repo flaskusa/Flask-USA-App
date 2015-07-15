@@ -10,6 +10,7 @@
 		<header-portlet-css>/css/jqx.orange.css</header-portlet-css>
 		<header-portlet-css>/css/dropzone.css</header-portlet-css>
 		<header-portlet-css>/css/style.css</header-portlet-css>
+		<footer-portlet-javascript>/js/jquery-2.1.4.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
@@ -37,6 +38,9 @@
 		<footer-portlet-javascript>/js/dropzone.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxvalidator.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/globalize.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxtooltip.js</footer-portlet-javascript>
+		
 		<css-class-wrapper>flask-manage-events-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
