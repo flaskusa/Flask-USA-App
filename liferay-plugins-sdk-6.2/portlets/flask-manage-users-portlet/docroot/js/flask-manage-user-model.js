@@ -4,6 +4,7 @@ _adminModel.SERVICE_ENDPOINTS = {
 	API_PREFIX					:"/api/jsonws",
 	GET_ADMIN 					: "/flask-rest-users-portlet.flaskadmin/get-flask-admins",
 	GET_ROLES 					: "/flask-rest-users-portlet.flaskrole/get-flask-roles",
+	SET_ROLES					: "/flask-rest-users-portlet.flaskrole/set-flask-role",
 	ADD_ADMIN 					: "/flask-rest-users-portlet.flaskadmin/add-flask-admin",
 	UPDATE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/update-flask-admin",
 	DELETE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/delete-flask-admins",
