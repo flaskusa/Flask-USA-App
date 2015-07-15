@@ -235,31 +235,19 @@ function fnShowSlider(_eventId,_divObj,_infoTypeId){
 	params= {'repositoryId': repositoryId, 'parentFolderId': 0, 'name': 'Event'};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
 		function (data){
-			if(data.responseJson.exception!=""){
-				fnBlankSlide(ws_images,wowslider_container);
-			}
 			folderName = 'Event-'+eventId;
 			var flaskRequestChild = new Request();
 			paramsChild= {'repositoryId': repositoryId, 'parentFolderId': data.responseJson.folderId, 'name': folderName};
 			flaskRequestChild.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
 				function (data){
-					if(data.responseJson.exception!=""){
-						fnBlankSlide(ws_images,wowslider_container);
-					}
 					var flaskRequestChild1 = new Request();
 					paramsChild1= {'repositoryId': repositoryId, 'parentFolderId': data.responseJson.folderId, 'name': infoTypeId};
 					flaskRequestChild1.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild1, 
 						function (data){
-							if(data.responseJson.exception!=""){
-								fnBlankSlide(ws_images,wowslider_container);
-							}
 							var flaskRequestChild2 = new Request();
 							paramsChild2= {'repositoryId': repositoryId, 'parentFolderId': data.responseJson.folderId};
 							flaskRequestChild2.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDERS , paramsChild2,
 								function (data){
-									if(data.responseJson.exception!=""){
-										fnBlankSlide(ws_images,wowslider_container);
-									}
 									var dataJson = data.responseJson;
 									for(var iCount=0;iCount<dataJson.length;iCount++){
 										folderId = dataJson[iCount].folderId;
@@ -267,9 +255,6 @@ function fnShowSlider(_eventId,_divObj,_infoTypeId){
 										paramsChild2= {'repositoryId': repositoryId, 'parentFolderId': folderId};
 										flaskRequestChild3.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDERS , paramsChild2, 
 											function (data){
-												if(data.responseJson.exception!=""){
-													fnBlankSlide(ws_images,wowslider_container);
-												}
 												var _dataJson = data.responseJson;
 												var tempHtml;
 												var ulObj = $("<ul/>");
