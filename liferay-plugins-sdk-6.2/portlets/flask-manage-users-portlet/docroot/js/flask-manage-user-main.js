@@ -65,7 +65,20 @@ function addClickHandlers(){
 
 $(document).ready(function () {
 	  // initialize validator.
-   
+    $("#jqxwindow").jqxWindow({ height: 168, width: 370, theme: 'custom', isModal: true, autoOpen: false });
+    $("#popup").click(function () {
+        $("#jqxwindow").jqxWindow('open');
+    });
+    $("#button_input").click(function () {
+        var T = $("#text_input").val();
+        $("#textbox").text(T);
+        setFlaskRoles1(userId, roleId );
+        $("#jqxwindow").jqxWindow('close');
+    });
+    $("#button_no").click(function () {
+        $("#jqxwindow").jqxWindow('close');
+    });
+    fillFlaskRoles("roleId");
 });
 
 function loadData(){
@@ -177,6 +190,9 @@ function contextMenuHandler(menuItemText, rowData){
 			deleteAdmin(rowData.userId);
 		}
 		return false;			
+	}else if(menuItemText == "Change Role"){
+		fillFlaskRoles('roleId', rowData.roleId);
+		return false;
 	}
 };
 
@@ -354,3 +370,42 @@ function fnUpdateProfilePic(uid){
 							});
 	
 	}
+	
+	function fillFlaskRoles(elementId, selectedId){
+		var param = {};
+		var request = new Request();
+		var selectList = $('#roleId1');
+		var flaskRequest = new Request();
+		flaskRequest.sendGETRequest(_adminModel.SERVICE_ENDPOINTS.GET_ROLES, param, 
+						function (data){
+								selectList.empty();
+								//alert("List filled role");
+								$.each(data, function(key, role) {
+									selectList.append($("<option/>", {
+								        value: role.roleId,
+								        text: role.roleName
+								    }));
+								});
+								selectList.val(selectedId);
+						} ,
+						function (data){
+							console.log("Error in getting role list: " + data );
+						});
+
+}
+	function setFlaskRoles1(elementId, selectedId){
+		
+		var param ={userId: elementId, roleId: selectedId };
+		var flaskRequest = new Request();
+		flaskRequest.sendGETRequest(_adminModel.SERVICE_ENDPOINTS.SET_ROLES, param, 
+						function (data){
+								//console.log(data);
+								alert("called set role"+ elementId, "and"+selectedId);
+								
+						} ,
+						function (data){
+							console.log("Error in getting role list: " + data );
+						});
+
+}
+	
