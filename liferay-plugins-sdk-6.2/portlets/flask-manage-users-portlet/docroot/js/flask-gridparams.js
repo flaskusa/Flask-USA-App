@@ -164,8 +164,8 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 				+ datarecord.countryName + "</td></tr>";
 		var Mobileno = "<tr><td class='filledWidth'><b>Mobile No:</b></td><td> "
 				+ datarecord.mobileNumber + "</td></tr>";
-		var Intr = "<tr><td class='filledWidth1'><b>Interests :</b> </td><td>"
-			+ datarecord.userInterests + "</td></tr>";
+		/*var Intr = "<tr><td class='filledWidth1'><b>Interests :</b> </td><td>"
+			+ datarecord.userInterests + "</td></tr>";*/
 		
 		$(leftcolumn).append("<table>");
 		
@@ -201,7 +201,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		$(rightcolumn1).append(City);
 		$(rightcolumn1).append(State);
 		$(rightcolumn1).append(Country);
-		$(rightcolumn1).append(Intr);
+	//	$(rightcolumn1).append(Intr);
 		$(rightcolumn).append("</table>");
 		
 		
@@ -255,7 +255,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 	}, {
 		text : 'Email',
 		dataField : 'email'
-		,width : '30%'
+		,width : '25%'
 	}, {
 		text : 'Role',
 		dataField : 'roleName'
@@ -264,7 +264,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 		text : 'Edit',
 		dataField : 'userId',
 		cellsalign : 'center',
-		width:'34px',
+		width:'15%',
 		cellsrenderer : actionRenderer
 	} ];
     	
@@ -277,7 +277,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 	// create context menu
 	var contextMenu = $("#" + menuDivId).jqxMenu({
 		width : 160,
-		height : 60,
+		height : 85,
 		autoOpenPopup : false,
 		mode : 'popup'
 	});
