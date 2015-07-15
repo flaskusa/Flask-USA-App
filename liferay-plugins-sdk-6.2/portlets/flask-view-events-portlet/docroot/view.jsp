@@ -32,9 +32,10 @@
 <div class="table-responsive">          
 <div id="one">
     <div style="overflow: hidden;">
-            <div id="placeholder">
-            </div>
+		<div class="container-fluid fill" id="placeholder">
+		</div>
     </div>
+    
   <table id="viewevent">
     <tbody>
       <tr>
