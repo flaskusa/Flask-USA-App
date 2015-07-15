@@ -4,8 +4,9 @@ _adminModel.SERVICE_ENDPOINTS = {
 	API_PREFIX					:"/api/jsonws",
 	GET_ADMIN 					: "/flask-rest-users-portlet.flaskadmin/get-flask-regular-users",
 	GET_ROLES 					: "/flask-rest-users-portlet.flaskrole/get-flask-roles",
-	ADD_ADMIN 					: "/flask-rest-users-portlet.flaskadmin/add-flask-admin",
-	UPDATE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/update-flask-admin",
+	SET_ROLES					: "/flask-rest-users-portlet.flaskrole/set-flask-role",
+	ADD_ADMIN 					: "/flask-rest-users-portlet.flaskadmin/add-flask-user",
+	UPDATE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/update-logged-in-user",
 	DELETE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/delete-flask-admins",
 
 	TERMS_AND_CONDITION         : "http://www.rumbasolutions.com", 
