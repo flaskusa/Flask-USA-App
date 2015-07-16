@@ -23,7 +23,7 @@ public class FlaskDocLibUtil {
 	public static final String _eventRootFolder = "Event";
 	public static final String _venueRootFolder = "Venue";	
 	
-	public static String APP_NAME = "guest";
+	public static String APP_NAME = "flask";
 	
 	public static long _repositoryId = 0; 
 	//group id is used as repository id

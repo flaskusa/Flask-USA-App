@@ -250,7 +250,11 @@ $(document).ready(function(){
 			                input: '#endTime', message: 'End time always greater than start time!', action: 'keyup, focus', rule: function (input, commit) {
 			                	var st=$("#startTime").val();
 			                	var et=$("#endTime").val();
-			                    if (st<et) {return true;}
+			                	var d= $("#eventDate").val();
+			                	var sTime=Date.parse(d+" "+st);
+			                	var eTime=Date.parse(d+" "+et);
+
+			                    if (sTime<eTime) {return true;}
 			                    else{return false;}
 			                }
 			            }

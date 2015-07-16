@@ -223,9 +223,9 @@ $(document).ready(function(){
         animationDuration: 0,
         rules: [
 	               { input: '#venueName', message: 'Venue name is required!', action: 'keyup, blur', rule: 'required' },
-	               { input: '#venueDescription', message: 'Description is required!', action: 'keyup, blur', rule: 'required' },
+	               //{ input: '#venueDescription', message: 'Description is required!', action: 'keyup, blur', rule: 'required' },
 	               { input: '#addrLine1', message: 'Address 1 is required!', action: 'keyup, blur', rule: 'required' },
-	               { input: '#addrLine2', message: 'Address 2 is required!', action: 'keyup, blur', rule: 'required' },
+	               //{ input: '#addrLine2', message: 'Address 2 is required!', action: 'keyup, blur', rule: 'required' },
 	               { input: '#venueZipCode', message: 'Zip code is required!', action: 'keyup, blur', rule: 'required' },
 	               { input: '#venueCity', message: 'City is required!', action: 'keyup, blur', rule: 'required' },
 	               { input: '#venueMetroArea', message: 'Metro area is required!', action: 'keyup, blur', rule: 'required' }

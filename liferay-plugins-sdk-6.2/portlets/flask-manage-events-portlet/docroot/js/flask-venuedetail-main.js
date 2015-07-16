@@ -122,7 +122,7 @@ $(document).ready(function(){
             animationDuration: 0,
             rules: [
                     	{ input: '#infoTitle', message: 'Info Title is required!', action: 'keyup, blur', rule: 'required' },
-                    	{ input: '#infoDesc', message: 'Info Description is required!', action: 'keyup, blur', rule: 'required' }
+                    	//{ input: '#infoDesc', message: 'Info Description is required!', action: 'keyup, blur', rule: 'required' }
                    ]
         });    
     });
