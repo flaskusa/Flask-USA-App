@@ -59,20 +59,6 @@ function addClickHandlers(){
 	/*	Toggle search boxes */
 	$(".cssSearchUser").click(GRID_PARAM_VENUE.toggleSearchBoxes);
 		
-		
-	$("#venueZipCode").change(function(){
-		var geocoder = new google.maps.Geocoder();
-		var address = $(this).val();
-		geocoder.geocode( { 'address': address}, function(results, status) {
-		  if (status == google.maps.GeocoderStatus.OK) {
-		    var latitude = results[0].geometry.location.lat();
-		    var longitude = results[0].geometry.location.lng();
-		    alert(latitude);
-		    alert(longitude);
-		  } 
-		}); 	
-	});
-	
 	$("#venueCountryId").change(function() {
 		  _flaskLib.loadRegions('venueStateId', $("#venueCountryId").val());
 	});		
@@ -142,7 +128,6 @@ function editVenue(rowData) {
 		_flaskLib.loadCountries('venueCountryId',rowData.venueCountryId);
 		_flaskLib.loadUSARegions('venueStateId',rowData.venueStateId);
 		$("#venueDataTable").hide();
-		//venueForm.show();
 		$("#formContainer").show();
 		$(".AddContent").click(function(){
 			$("#formContainer").hide();
@@ -151,8 +136,8 @@ function editVenue(rowData) {
 			$("#venueDetailsDataTable").show();			
 			$("#infoTypeId").val($(this).attr("alt"));
 		})
-		//fnShowVenueLogo(repositoryId,rowData.venueId,$("#venueImage"), true)
-		fnShowVenueImages(rowData.venueId,$("#venueImage"));
+		fnBuildVenueUpload(imageContainer);		
+		fnShowVenueImages(rowData.venueId,$("#venueGallery"));
 }
 
 
@@ -160,9 +145,6 @@ function editVenue(rowData) {
 function saveVenue(){
 		params = _flaskLib.getFormData('venueForm',_venueModel.DATA_MODEL.VENUE,
 					function(formId, model, formData){
-							/*formData.venueId=$('#venueForm #venueId').val();
-							formData.venueName = $('#venueForm #venueId').children(':selected').text();*/
-							
 							return formData;
 					});
 		var flaskRequest = new Request();
@@ -175,10 +157,14 @@ function saveVenue(){
 		flaskRequest.sendGETRequest(url, params, 
 					function (data){
 						_flaskLib.showSuccessMessage('action-msg', _venueModel.MESSAGES.SAVE);
-						fnSaveVenueLogo(data.venueId);
-						$("#venueDataTable").show();
-						$("#formContainer").hide();
-						loadData();
+						if($('#venueLogoImage').is(':visible')) {					
+							fnSaveVenueLogo(data.venueId);
+						}
+						else{
+							$("#venueDataTable").show();
+							$("#formContainer").hide();
+							loadData();
+						}
 					} ,
 					function (data){
 						_flaskLib.showErrorMessage('action-msg', _venueModel.MESSAGES.ERROR);
@@ -210,6 +196,9 @@ function fnSaveVenueLogo(venueId){
 	dropZoneLogo.processQueue();
 	dropZoneLogo.on("queuecomplete", function (file) {
 		$("#venueImage").html(""); // Clear upload component
+		$("#venueDataTable").show();
+		$("#formContainer").hide();
+		loadData();
 	});	
 }
 
@@ -233,13 +222,13 @@ $(document).ready(function(){
         hintType: 'label',
         animationDuration: 0,
         rules: [
-		               { input: '#venueName', message: 'Venue name is required!', action: 'keyup, blur', rule: 'required' },
-		               { input: '#venueDescription', message: 'Description is required!', action: 'keyup, blur', rule: 'required' },
-		               { input: '#addrLine1', message: 'Address 1 is required!', action: 'keyup, blur', rule: 'required' },
-		               { input: '#addrLine2', message: 'Address 2 is required!', action: 'keyup, blur', rule: 'required' },
-		               { input: '#venueZipCode', message: 'Zip code is required!', action: 'keyup, blur', rule: 'required' },
-		               { input: '#venueCity', message: 'City is required!', action: 'keyup, blur', rule: 'required' },
-		               { input: '#venueMetroArea', message: 'Metro area is required!', action: 'keyup, blur', rule: 'required' }
+	               { input: '#venueName', message: 'Venue name is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#venueDescription', message: 'Description is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#addrLine1', message: 'Address 1 is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#addrLine2', message: 'Address 2 is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#venueZipCode', message: 'Zip code is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#venueCity', message: 'City is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#venueMetroArea', message: 'Metro area is required!', action: 'keyup, blur', rule: 'required' }
                ]
     });
 });
