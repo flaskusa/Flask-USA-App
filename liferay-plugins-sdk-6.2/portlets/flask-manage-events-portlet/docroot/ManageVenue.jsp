@@ -130,6 +130,7 @@ function initialize(portletId, portlet){
 		   </div>		   
 		  <input class="btn btn-info clsSave" type="button" value="Save"/>
 		  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
+		  <div id="venueGallery"></div>
 		  <input id="venueId" type="hidden" value="0">
 		  <input id="latitude" type="hidden" value="0">
 		  <input id="longitude" type="hidden" value="0">
