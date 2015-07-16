@@ -31,7 +31,7 @@ function initialize(portletId, portlet){
 	if(portletId == "regularuser_WAR_flaskmanageusersportlet") 
 	{
 		$("#adminForm").hide();
-		createTable({},_adminModel.DATA_MODEL.ADMIN, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Admin", "Images"]);
+		createTable({},_userModel.DATA_MODEL.ADMIN, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Admin", "Images"]);
 		loadData();
 		addClickHandlers();
 		$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
