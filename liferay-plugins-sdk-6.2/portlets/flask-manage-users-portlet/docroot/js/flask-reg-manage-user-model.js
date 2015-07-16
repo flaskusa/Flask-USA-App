@@ -1,19 +1,19 @@
-var _adminModel = {};
+var _userModel = {};
 
-_adminModel.SERVICE_ENDPOINTS = {
+_userModel.SERVICE_ENDPOINTS = {
 	API_PREFIX					:"/api/jsonws",
-	GET_ADMIN 					: "/flask-rest-users-portlet.flaskadmin/get-flask-regular-users",
+	GET_USERS 					: "/flask-rest-users-portlet.flaskadmin/get-flask-regular-users",
 	GET_ROLES 					: "/flask-rest-users-portlet.flaskrole/get-flask-roles",
 	SET_ROLES					: "/flask-rest-users-portlet.flaskrole/set-flask-role",
-	ADD_ADMIN 					: "/flask-rest-users-portlet.flaskadmin/add-flask-user",
-	UPDATE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/update-logged-in-user",
+	ADD_USERS 					: "/flask-rest-users-portlet.flaskadmin/add-flask-user",
+	UPDATE_USERS				: "/flask-rest-users-portlet.flaskadmin/update-logged-in-user",
 	DELETE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/delete-flask-admins",
 
 	TERMS_AND_CONDITION         : "http://www.rumbasolutions.com", 
 	SERVICE_TIMEOUT 			: 30000	
 };
 
-_adminModel.DATA_MODEL= {
+_userModel.DATA_MODEL= {
 	ADMIN: 
 		[
          { name: 'userId', type: 'string' },
@@ -41,7 +41,7 @@ _adminModel.DATA_MODEL= {
 	};
 
 
-_adminModel.MESSAGES= {
+_userModel.MESSAGES= {
 		GET_ERROR: "There was an error in getting data",
 		ADD: "Admin successfully added",
 		SAVE: "Admin successfully saved",

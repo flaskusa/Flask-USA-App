@@ -65,20 +65,11 @@ function addClickHandlers(){
 
 $(document).ready(function () {
 	  // initialize validator.
-    $("#jqxwindow").jqxWindow({ height: 168, width: 370, theme: 'custom', isModal: true, autoOpen: false });
-    $("#popup").click(function () {
-        $("#jqxwindow").jqxWindow('open');
-    });
-    $("#button_input").click(function () {
-        var T = $("#text_input").val();
-        $("#textbox").text(T);
-        setFlaskRoles1(userId, roleId );
-        $("#jqxwindow").jqxWindow('close');
-    });
-    $("#button_no").click(function () {
-        $("#jqxwindow").jqxWindow('close');
-    });
-    fillFlaskRoles("roleId");
+	 $("#jqxwindow").jqxWindow({ height: 168, width: 370, theme: 'custom', isModal: true, autoOpen: false });
+	    $("#popup").click(function () {
+	        $("#jqxwindow").jqxWindow('open');
+	    });
+    fillFlaskRoles('roleId1');
 });
 
 function loadData(){
@@ -110,7 +101,7 @@ function loadData(){
 	
 	var flaskRequest = new Request();
 	params = { search: '',  searchColumn: ''  };
-	flaskRequest.sendGETRequest(_adminModel.SERVICE_ENDPOINTS.GET_ADMIN, params, 
+	flaskRequest.sendGETRequest(_userModel.SERVICE_ENDPOINTS.GET_USERS, params, 
 	function(data){/*success handler*/
 		GRID_PARAM.updateGrid(data);
 		/*Upload file code*/
@@ -173,7 +164,7 @@ function loadData(){
 		})		
 		/*Upload File Code End*/
 	} , function(error){ /*failure handler*/
-		_flaskLib.showErrorMessage(_adminModel.MESSAGES.GET_ERROR);
+		_flaskLib.showErrorMessage(_userModel.MESSAGES.GET_ERROR);
 		console.log("Error in getting data: " + error);
 	});
 	
@@ -190,20 +181,43 @@ function contextMenuHandler(menuItemText, rowData){
 			deleteAdmin(rowData.userId);
 		}
 		return false;			
+	}else if(menuItemText == "Change Role"){
+		fillFlaskRoles('roleId1', rowData.roleId);
+		pop_window(rowData.userId,rowData.roleId);
+		console.log(rowData.userId);
+		
+		return false;
 	}
 };
+
+function pop_window(uid,rid) {
+	console.log(rid);
+	console.log(roleId1);
+	
+	//alert(rid);
+   
+    $("#button_input").click(function () {
+    	setFlaskRoles(uid,$('#roleId1').val());
+    	//alert($('#userId').val());
+    	//alert($('#roleId1').val());
+        $("#jqxwindow").jqxWindow('close');
+    });
+    $("#button_no").click(function () {
+        $("#jqxwindow").jqxWindow('close');
+    });
+}
 
 function deleteAdmin(adminId) {
 	var param = {'userId': adminId};
 	var request = new Request();
 	var flaskRequest = new Request();
-	flaskRequest.sendPOSTRequest(_adminModel.SERVICE_ENDPOINTS.DELETE_ADMIN, param, 
+	flaskRequest.sendPOSTRequest(_userModel.SERVICE_ENDPOINTS.DELETE_ADMIN, param, 
 					function (data){
-							_flaskLib.showSuccessMessage('action-msg', _adminModel.MESSAGES.DEL_SUCCESS);
+							_flaskLib.showSuccessMessage('action-msg', _userModel.MESSAGES.DEL_SUCCESS);
 							loadData();
 					} ,
 					function (data){
-							_flaskLib.showErrorMessage('action-msg', _adminModel.MESSAGES.DEL_ERR);
+							_flaskLib.showErrorMessage('action-msg', _userModel.MESSAGES.DEL_ERR);
 					});
 	
 }
@@ -217,7 +231,7 @@ function deleteMultipleAdmins(adminList) {
 }
 
 function editAdmin(rowData) {
-	_flaskLib.loadDataToForm("adminForm",  _adminModel.DATA_MODEL.ADMIN, rowData, function(){	
+	_flaskLib.loadDataToForm("adminForm",  _userModel.DATA_MODEL.ADMIN, rowData, function(){	
 	});
 	$("#adminDataTable").hide();
 	adminForm.show();
@@ -257,7 +271,7 @@ function fnSetCheckBoxSelected(strCheckList) {
 
 
 function saveAdmin(){
-	params = _flaskLib.getFormData('adminForm',_adminModel.DATA_MODEL.ADMIN,
+	params = _flaskLib.getFormData('adminForm',_userModel.DATA_MODEL.ADMIN,
 				function(formId, model, formData){
 						if($(".gender").val()=="Male"){formData.isMale=true;}
 						else{formData.isMale=false;}
@@ -267,9 +281,9 @@ function saveAdmin(){
 	var flaskRequest = new Request();
 	var url = ""
 		if(params.userId == 0){
-			url = _adminModel.SERVICE_ENDPOINTS.ADD_ADMIN;
+			url = _userModel.SERVICE_ENDPOINTS.ADD_USERS;
 		}else{
-			url =_adminModel.SERVICE_ENDPOINTS.UPDATE_ADMIN;
+			url =_userModel.SERVICE_ENDPOINTS.UPDATE_USERS;
 		}
 	//console.log(params);
 	//console.log(params.isMale);
@@ -277,12 +291,12 @@ function saveAdmin(){
 	console.log(params.userId);
 	flaskRequest.sendGETRequest(url, params, 
 				function (data){
-					_flaskLib.showSuccessMessage('action-msg', _adminModel.MESSAGES.SAVE);
+					_flaskLib.showSuccessMessage('action-msg', _userModel.MESSAGES.SAVE);
 					fnUpdateProfilePic(data.userId);
 					loadData();
 				} ,
 				function (data){
-					_flaskLib.showErrorMessage('action-msg', _adminModel.MESSAGES.ERROR);
+					_flaskLib.showErrorMessage('action-msg', _userModel.MESSAGES.ERROR);
 				});
 
 }
@@ -351,7 +365,7 @@ function fnUpdateProfilePic(uid){
 			var request = new Request();
 			var selectList = $('#' + elementId);
 			var flaskRequest = new Request();
-			flaskRequest.sendGETRequest(_adminModel.SERVICE_ENDPOINTS.GET_ROLES, param, 
+			flaskRequest.sendGETRequest(_userModel.SERVICE_ENDPOINTS.GET_ROLES, param, 
 							function (data){
 									selectList.empty();
 									$.each(data, function(key, role) {
@@ -371,9 +385,9 @@ function fnUpdateProfilePic(uid){
 	function fillFlaskRoles(elementId, selectedId){
 		var param = {};
 		var request = new Request();
-		var selectList = $('#roleId1');
+		var selectList = $('#' + elementId);
 		var flaskRequest = new Request();
-		flaskRequest.sendGETRequest(_adminModel.SERVICE_ENDPOINTS.GET_ROLES, param, 
+		flaskRequest.sendGETRequest(_userModel.SERVICE_ENDPOINTS.GET_ROLES, param, 
 						function (data){
 								selectList.empty();
 								//alert("List filled role");
@@ -384,24 +398,25 @@ function fnUpdateProfilePic(uid){
 								    }));
 								});
 								selectList.val(selectedId);
+								//alert(selectedId);
 						} ,
 						function (data){
 							console.log("Error in getting role list: " + data );
 						});
 
-}
-	function setFlaskRoles1(elementId, selectedId){
-		
-		var param ={userId: elementId, roleId: selectedId };
+	}
+	
+	function setFlaskRoles(uId, selectedId){
+		console.log(uId);
+		var param ={userId: uId, roleId: selectedId };
 		var flaskRequest = new Request();
-		flaskRequest.sendGETRequest(_adminModel.SERVICE_ENDPOINTS.SET_ROLES, param, 
-						function (data){
-								//console.log(data);
-								alert("called set role"+ elementId, "and"+selectedId);
-								
+		console.log(param.userId);
+		flaskRequest.sendGETRequest(_userModel.SERVICE_ENDPOINTS.SET_ROLES, param, 
+					function (data){
+						console.log(data);
 						} ,
 						function (data){
-							console.log("Error in getting role list: " + data );
+							console.log("Error in setting role: " + data );
 						});
 
-}
+	}

@@ -69,16 +69,7 @@ $(document).ready(function () {
     $("#popup").click(function () {
         $("#jqxwindow").jqxWindow('open');
     });
-    $("#button_input").click(function () {
-        var T = $("#text_input").val();
-        $("#textbox").text(T);
-        setFlaskRoles1(userId, roleId );
-        $("#jqxwindow").jqxWindow('close');
-    });
-    $("#button_no").click(function () {
-        $("#jqxwindow").jqxWindow('close');
-    });
-    fillFlaskRoles("roleId");
+    fillFlaskRoles('roleId1');
 });
 
 function loadData(){
@@ -191,10 +182,26 @@ function contextMenuHandler(menuItemText, rowData){
 		}
 		return false;			
 	}else if(menuItemText == "Change Role"){
-		fillFlaskRoles('roleId', rowData.roleId);
+		fillFlaskRoles('roleId1', rowData.roleId);
+		pop_window(rowData.userId,rowData.roleId);
+		console.log(rowData.userId);
 		return false;
 	}
 };
+
+function pop_window(uid,rid) {
+	console.log(rid);
+	console.log(roleId1);
+    $("#button_input").click(function () {
+    	setFlaskRoles(uid,$('#roleId1').val());
+    	//alert($('#userId').val());
+    	//alert($('#roleId1').val());
+        $("#jqxwindow").jqxWindow('close');
+    });
+    $("#button_no").click(function () {
+        $("#jqxwindow").jqxWindow('close');
+    });
+}
 
 function deleteAdmin(adminId) {
 	var param = {'userId': adminId};
@@ -374,7 +381,7 @@ function fnUpdateProfilePic(uid){
 	function fillFlaskRoles(elementId, selectedId){
 		var param = {};
 		var request = new Request();
-		var selectList = $('#roleId1');
+		var selectList = $('#' + elementId);
 		var flaskRequest = new Request();
 		flaskRequest.sendGETRequest(_adminModel.SERVICE_ENDPOINTS.GET_ROLES, param, 
 						function (data){
@@ -387,25 +394,26 @@ function fnUpdateProfilePic(uid){
 								    }));
 								});
 								selectList.val(selectedId);
+								//alert(selectedId);
 						} ,
 						function (data){
 							console.log("Error in getting role list: " + data );
 						});
 
-}
-	function setFlaskRoles1(elementId, selectedId){
-		
-		var param ={userId: elementId, roleId: selectedId };
+	}
+	
+	function setFlaskRoles(uId, selectedId){
+		console.log(uId);
+		var param ={userId: uId, roleId: selectedId };
 		var flaskRequest = new Request();
+		console.log(param.userId);
 		flaskRequest.sendGETRequest(_adminModel.SERVICE_ENDPOINTS.SET_ROLES, param, 
-						function (data){
-								//console.log(data);
-								alert("called set role"+ elementId, "and"+selectedId);
-								
+					function (data){
+						console.log(data);
 						} ,
 						function (data){
-							console.log("Error in getting role list: " + data );
+							console.log("Error in setting role: " + data );
 						});
 
-}
+	}
 	
