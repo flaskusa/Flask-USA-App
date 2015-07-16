@@ -10,8 +10,8 @@ _eventDetailModel.SERVICE_ENDPOINTS = {
 	DELETE_EVENT_DETAIL			: "/flask-rest-events-portlet.event/delete-event-detail",
 	DELETE_ALL_EVENT_DETAILS	: "/flask-rest-events-portlet.event/delete-all-event-details",
 	GET_FOLDER					: "/dlapp/get-folder",
+	GET_FILES					: "/dlapp/get-file-entries",
 	GET_FILE_BY_TITLE			: "/dlapp/get-file-entry",
-	GET_FILES					: "/dlapp/get-file-entries",	
 	DELETE_FILES				: "/dlapp/delete-file-entry",
 	DELETE_FILE_BY_TITLE		: "/dlapp/delete-file-entry-by-title"
 };

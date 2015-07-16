@@ -120,7 +120,6 @@ function deleteMultipleEvents(eventList) {
 
 /* Edit Event */
 function editEvent(rowData) {
-		console.log(rowData);
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("eventForm",  _eventModel.DATA_MODEL.EVENT, rowData, function(){});
 		$("#eventDataTable").hide();
@@ -153,24 +152,13 @@ function saveEvent(){
 							formData.venueName = $('#eventForm #venueId').children(':selected').text();
 							formData.eventTypeId=$('#eventTypeId').val();
 							formData.eventTypeName = $('#eventTypeName').children(':selected').text();
-							var eventDate=$('#eventDate').val();
-							var startTime=$('#startTime').val();
-							var endTime=$('#endTime').val();
-							formData.startTime=eventDate+" "+startTime;
-							formData.endtTime=eventDate+" "+endTime;
-							console.log(formData.startTime);
-							console.log(formData.endTime);
 							return formData;
 					});
 		var flaskRequest = new Request();
 		var url = "";
 			if(params.eventId == 0){
-				console.log(params.startTime);
-				console.log(params.endTime);
 				url =_eventModel.SERVICE_ENDPOINTS.ADD_EVENT;
 			}else{
-				console.log(params.startTime);
-				console.log(params.endTime);
 				url = _eventModel.SERVICE_ENDPOINTS.UPDATE_EVENT;
 			}
 		flaskRequest.sendGETRequest(url, params, 
@@ -188,10 +176,10 @@ function saveEvent(){
 
 function initForm(){
 		var repositoryId = $("#repositoryId").val();
-		$("#eventDate").jqxDateTimeInput({width: '260px', height: '35px',formatString: "MM/dd/yyyy", showCalendarButton: true });
+		$("#eventDate").jqxDateTimeInput({width: '260px', height: '35px',formatString: "MM-dd-yyyy" });
 		$("#Active").jqxCheckBox({ width: 120, height: 25 });
-		$("#startTime").jqxDateTimeInput({ width: '260px', height: '35px', formatString: 'hh:mm tt', showTimeButton: true, showCalendarButton: false});
-		$("#endTime").jqxDateTimeInput({ width: '250px', height: '35px', formatString: 'hh:mm tt', showTimeButton: true, showCalendarButton: false});
+		$("#startTime").jqxDateTimeInput({ width: '100px', height: '23px', formatString: 'hh:mm tt', showCalendarButton: false});
+		$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'hh:mm tt', showCalendarButton: false});
 }
 
 function fnBuildEventUpload(imageContainer){
@@ -262,10 +250,7 @@ $(document).ready(function(){
 			                input: '#endTime', message: 'End time always greater than start time!', action: 'keyup, focus', rule: function (input, commit) {
 			                	var st=$("#startTime").val();
 			                	var et=$("#endTime").val();
-			                	var d= $("#eventDate").val();
-			                	var sTime=Date.parse(d+" "+st);
-			                	var eTime=Date.parse(d+" "+et);
-			                    if (sTime<eTime) {return true;}
+			                    if (st<et) {return true;}
 			                    else{return false;}
 			                }
 			            }

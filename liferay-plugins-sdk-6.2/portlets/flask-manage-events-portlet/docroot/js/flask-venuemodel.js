@@ -11,7 +11,9 @@ _venueModel.SERVICE_ENDPOINTS = {
 	DELETE_VENUE_IMAGE			: "/flask-rest-events-portlet.venue/delete-venue-image",
 	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
 	ADD_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/add-venue-detail",
-	UPDATE_VENUE_DETAILS		: "/flask-rest-events-portlet.venue/update-venue-detail"	
+	UPDATE_VENUE_DETAILS		: "/flask-rest-events-portlet.venue/update-venue-detail",	
+	GET_FOLDER					: "/dlapp/get-folder",
+	GET_FILES					: "/dlapp/get-file-entries"
 };
 
 _venueModel.DATA_MODEL= {
@@ -28,28 +30,10 @@ _venueModel.DATA_MODEL= {
 			 { name: 'venueCountryId', type:'long' },
 			 { name: 'venueCountryName', type:'string' },
 			 { name: 'venueZipCode', type:'string' },
-			 { name: 'venueMetroArea', type:'string' }
-		],
-	VENUEDETAILS: 
-		[
-             { name: 'venueId', type: 'long' },
-             { name: 'infoTypeId', type: 'long' },
-             { name: 'infoTypeCategoryId', type: 'long' },
-			 { name: 'infoTitle', type: 'string' },
-			 { name: 'infoDesc', type: 'string' },
-			 { name: 'addrLine1', type: 'string'},
-			 { name: 'addrLine2', type: 'string'},
-			 { name: 'zipCode', type: 'string'},
-			 { name: 'City', type: 'string'},
-			 { name: 'stateId', type: 'long' },
-			 { name: 'countryId', type: 'long' },
-			 { name: 'lattitude', type: 'string'},
-			 { name: 'longitude', type: 'string'},
-			 { name: 'Phone', type: 'string'},
-			 { name: 'Website', type: 'string'},
-			 { name: 'cost', type: 'long' },
-			 { name: 'hoursOfOperation', type: 'string' }
-		]		
+			 { name: 'venueMetroArea', type:'string' },
+			 { name: 'longitude', type:'string' },
+			 { name: 'latitude', type:'string' }
+		]
 	};
 
 

@@ -39,7 +39,6 @@ function initialize(portletId, portlet){
 }
 
 </script>
-
 <body class='default'>
 <input type="hidden" id="repositoryId" value="<%=repositoryId%>"/>
 <div id="action-msg" style="display:none">
@@ -132,6 +131,8 @@ function initialize(portletId, portlet){
 		  <input class="btn btn-info clsSave" type="button" value="Save"/>
 		  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
 		  <input id="venueId" type="hidden" value="0">
+		  <input id="latitude" type="hidden" value="0">
+		  <input id="longitude" type="hidden" value="0">
 		</form>		
 	  </div>
 	  <div class="tab-pane" id="contents">

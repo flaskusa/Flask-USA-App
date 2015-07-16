@@ -330,8 +330,6 @@ var wait = function(callback, seconds) {
 	return window.setTimeout(callback, seconds * 1000);
 }
 
-
-
 function fnShowSlider(_eventId,_divObj,_eventDetailId,_infoTypeId,_infoTypeCategoryId){
 	console.log(_eventId);
 	var repositoryId = $("#repositoryId").val();

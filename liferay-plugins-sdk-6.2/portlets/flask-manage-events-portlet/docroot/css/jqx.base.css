@@ -1,4 +1,4 @@
-/*Rounded Corners*/
+ï»¿/*Rounded Corners*/
 /*top-left rounded Corners*/
 .jqx-rc-tl
 {
@@ -2593,11 +2593,11 @@ of the horizontal scrollbar.*/
     overflow: hidden;
     border: 1px solid transparent;
 }
-/*applied to the jqxWindow when it’s disabled*/
+/*applied to the jqxWindow when itâ€™s disabled*/
 .jqx-window-disabled
 {
 }
-/*applied to the window’s header*/
+/*applied to the windowâ€™s header*/
 .jqx-window-header
 {
     outline: none;
@@ -2609,12 +2609,12 @@ of the horizontal scrollbar.*/
     white-space: nowrap;
     overflow: hidden;  
 }
-/*applied to the window’s header when the window is disabled*/
+/*applied to the windowâ€™s header when the window is disabled*/
 .jqx-window-header-disabled
 {
 
 }
-/*applied to the window’s content*/
+/*applied to the windowâ€™s content*/
 .jqx-window-content
 {
     outline: none;
@@ -2624,7 +2624,7 @@ of the horizontal scrollbar.*/
     padding: 5px;
     -webkit-background-clip: padding-box; background-clip: padding-box;
 }
-/*applied to the window’s content when the window is disabled*/
+/*applied to the windowâ€™s content when the window is disabled*/
 .jqx-window-content-disabled
 {
     outline: none;
@@ -2632,7 +2632,7 @@ of the horizontal scrollbar.*/
     text-align: left;
     padding: 5px;
 }
-/*applied to the window’s close button*/
+/*applied to the windowâ€™s close button*/
 .jqx-window-close-button
 {
     cursor: pointer;
@@ -2653,7 +2653,7 @@ of the horizontal scrollbar.*/
     cursor: pointer;
     background-image: url(images/icon-down.png);
 }
-/*setting styles of the modal window’s background*/
+/*setting styles of the modal windowâ€™s background*/
 .jqx-window-modal
 {
    background-color: Black;
@@ -3119,23 +3119,6 @@ of the horizontal scrollbar.*/
     height: 15px !important;
     margin-top: -7.5px !important;
 }
-
-.jqx-icon-time, .jqx-icon-time-hover, .jqx-icon-time-pressed 
-{
-	background-image: url('images/icon-time.png');
-	background-repeat: no-repeat;
-    background-position: left top;
-    position: relative;
-    width: 15px !important;
-    height: 15px !important;
-    margin-top: -7.5px !important;
-}
-.jqx-icon-up.jqx-icon.jqx-icon-arrow-up {
-  margin-top: 0px !important;
-}
-.jqx-icon-up.jqx-icon.jqx-icon-arrow-up {
-  margin-top: 0px !important;
-}
 /*applied to Inputs*/
 .jqx-input{-webkit-user-modify:inherit; -moz-user-modify: inherit;  overflow: hidden; background-color: inherit; border-color: #c7c7c7;}
 .jqx-input-invalid {
@@ -3440,13 +3423,12 @@ of the horizontal scrollbar.*/
 }
 input[type=text].jqx-input, input[type=password].jqx-input {
     min-height: 16px;
-    min-width: 40px !important;
+    min-width: 16px;
     margin: 0px;
     border-width: 1px;
     border-style: solid;
     font-size: 13px;
     padding: 0px;
-    text-align: center;
 }
 .jqx-input::-ms-reveal {
     display: none;
@@ -3590,6 +3572,7 @@ input[type=text].jqx-input, input[type=password].jqx-input {
     margin: 0 auto;
     position: relative;
     top: 50%; 
+    margin-top: -8px;
 }
 .jqx-input-icon
 {
@@ -3606,7 +3589,6 @@ input[type=text].jqx-input, input[type=password].jqx-input {
 .jqx-scrollbar .jqx-icon-arrow-down{width: 100%; height: 100%;}
 .jqx-scrollbar .jqx-icon-arrow-left{width: 100%; height: 100%;}
 .jqx-scrollbar .jqx-icon-arrow-right{width: 100%; height: 100%;}
-
 /*jqx-listmenu*/
 .jqx-listmenu-widget
 {

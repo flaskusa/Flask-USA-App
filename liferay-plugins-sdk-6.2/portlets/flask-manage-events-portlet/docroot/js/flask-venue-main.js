@@ -56,8 +56,26 @@ function addClickHandlers(){
 			 GRID_PARAM_VENUE.toggleSelectionMode();
 	    });
 	
-		/*	Toggle search boxes */
-		$(".cssSearchUser").click(GRID_PARAM_VENUE.toggleSearchBoxes);
+	/*	Toggle search boxes */
+	$(".cssSearchUser").click(GRID_PARAM_VENUE.toggleSearchBoxes);
+		
+		
+	$("#venueZipCode").change(function(){
+		var geocoder = new google.maps.Geocoder();
+		var address = $(this).val();
+		geocoder.geocode( { 'address': address}, function(results, status) {
+		  if (status == google.maps.GeocoderStatus.OK) {
+		    var latitude = results[0].geometry.location.lat();
+		    var longitude = results[0].geometry.location.lng();
+		    alert(latitude);
+		    alert(longitude);
+		  } 
+		}); 	
+	});
+	
+	$("#venueCountryId").change(function() {
+		  _flaskLib.loadRegions('venueStateId', $("#venueCountryId").val());
+	});		
 }
 
 function loadData(){
@@ -121,8 +139,8 @@ function deleteMultipleVenues(venueList) {
 function editVenue(rowData) {
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("venueForm",  _venueModel.DATA_MODEL.VENUE, rowData, function(){});
-		_flaskLib.loadCountries('venueCountryId');
-		_flaskLib.loadUSARegions('venueStateId');
+		_flaskLib.loadCountries('venueCountryId',rowData.venueCountryId);
+		_flaskLib.loadUSARegions('venueStateId',rowData.venueStateId);
 		$("#venueDataTable").hide();
 		//venueForm.show();
 		$("#formContainer").show();
@@ -133,7 +151,8 @@ function editVenue(rowData) {
 			$("#venueDetailsDataTable").show();			
 			$("#infoTypeId").val($(this).attr("alt"));
 		})
-		fnShowVenueLogo(repositoryId,rowData.venueId,$("#venueImage"), true)
+		//fnShowVenueLogo(repositoryId,rowData.venueId,$("#venueImage"), true)
+		fnShowVenueImages(rowData.venueId,$("#venueImage"));
 }
 
 
@@ -143,6 +162,7 @@ function saveVenue(){
 					function(formId, model, formData){
 							/*formData.venueId=$('#venueForm #venueId').val();
 							formData.venueName = $('#venueForm #venueId').children(':selected').text();*/
+							
 							return formData;
 					});
 		var flaskRequest = new Request();
@@ -179,11 +199,8 @@ function fnBuildVenueUpload(imageContainer){
     $(objVenueId).appendTo(objForm);
     var objIsLogo = $('<input/>',{'name':'_isLogo','id':'_isLogo','type':'hidden','value':'Y'});
     $(objIsLogo).appendTo(objForm);
-    
     dropZoneLogo = new Dropzone($(objForm).get(0),{
-    	autoProcessQueue: false,
-    	maxFiles: 1,
-    	addRemoveLinks : true
+    	autoProcessQueue: false
     });
 }
 
@@ -225,8 +242,73 @@ $(document).ready(function(){
 		               { input: '#venueMetroArea', message: 'Metro area is required!', action: 'keyup, blur', rule: 'required' }
                ]
     });
-	
 });
 
 
+function fnShowVenueImages(_eventId,_divObj){
+	console.log(_eventId);
+	var repositoryId = $("#repositoryId").val();
+	var eventId = _eventId;
+	var flaskRequest = new Request();
+	params= {'repositoryId': repositoryId, 'parentFolderId': 0, 'name': 'Venue'};
+	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
+		function (data){
+			folderName = 'Venue-'+eventId;
+			var flaskRequestChild = new Request();
+			paramsChild= {'repositoryId': repositoryId, 'parentFolderId': data.folderId, 'name': folderName};
+			flaskRequestChild.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
+				function (data){
+					fnRenderImages(data.folderId,_divObj);
+				} ,
+				function (data){console.log(2);});
+		} ,
+		function (data){console.log(1);});
+}
 
+function fnRenderImages(folderId,_divObj){
+	$(_divObj).html("");
+	$(".eventLogo").removeClass("activeImage");
+	var flaskRequest = new Request();
+	params= {'repositoryId': $("#repositoryId").val(), 'folderId': folderId};
+	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_FILES , params, 
+		function (data){
+			if(typeof data=="object"){
+				console.log(data);
+				var iSelected = false;
+		    	for(var iCount=0;iCount<data.length;iCount++){
+		    		var imgURL = '/documents/'+data[iCount].groupId+'/'+data[iCount].folderId+'/'+data[iCount].title;
+				    var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-fileEntryId':data[iCount].fileEntryId});
+				    $(objdiv).appendTo($(_divObj));
+				    $(objdiv).click(function(){
+				    	$(this).toggleClass("activeImage");
+				    	if($(".activeImage").length>0){
+				    		if(iSelected==false){
+				    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+				    			$(objDel).appendTo($(_divObj));
+				    			iSelected = true;
+				    			$(objDel).click(function(){
+				    				$("#spinningSquaresG").show();
+				    				$(".activeImage").each(function(){
+				    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
+				    					$(this).remove();
+				    				});
+				    				if($(".activeImage").length==0){
+				    					$("#spinningSquaresG").hide();
+				    					$(this).remove();
+				    					iSelected = false;
+				    				}
+				    			});
+				    		}
+				    	}
+				    	else{
+				    		$(".cssDelImages").remove();
+				    		iSelected = false;
+				    	}
+				    });
+		    	}
+		    }		
+		} ,
+		function (data){
+			console.log("Error in getting Folder: " + data );
+		});	
+}

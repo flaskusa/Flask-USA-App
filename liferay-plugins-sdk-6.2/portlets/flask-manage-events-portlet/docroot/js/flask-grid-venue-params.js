@@ -170,7 +170,8 @@ GRID_PARAM_VENUE.initrowdetails = function(index, parentElement, gridElement, da
 		$(rightcolumn).append(State);
 		$(rightcolumn).append(Country);
 		
-		$(rightcolumn).append("</table>");		
+		$(rightcolumn).append("</table>");	
+		fnShowVenueImages(datarecord.venueId,container2);
 		imagesDiv.append(container2);
 		
 		

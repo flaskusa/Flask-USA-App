@@ -86,10 +86,10 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 					String fileName = new File(item.getName()).getName();
 					String fileTitle = fileName;
 					String fileDesc = fileName; // Change is later for description 
-					boolean IsLogo =  _isLogo.equals("Y");
-					if(IsLogo){
+					//boolean IsLogo =  _isLogo.equals("Y");
+					/*if(IsLogo){
 						fileTitle = "VenueLogo";
-					}
+					}*/
 					String filePath = uploadPath + File.separator + fileName;
 					File storeFile = new File(filePath);
 					// saves the file on disk

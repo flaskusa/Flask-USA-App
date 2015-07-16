@@ -36,13 +36,6 @@ public class FlaskDocLibUtil {
 		return _repositoryId;	
 	}
 	
-	/*public static String getVenueFolderName(long venueId){
-		return String.format("%s-%s",_venueRootFolder, String.valueOf(venueId));
-	}*/
-	/*public static String getEventFolderName(long eventId){
-		return String.format("%s-%s-%s",_eventRootFolder, String.valueOf(eventId));
-	}*/
-	
 	public static Folder createEventRootFolder(ServiceContext serviceContext) throws PortalException, SystemException{
 		long repositoryId = getFlaskRepositoryId();
 		long userId = serviceContext.getUserId();
@@ -50,7 +43,7 @@ public class FlaskDocLibUtil {
 		return folder;
 	}
 	
-	public static Folder createVenueRootFolder(long venueId, ServiceContext serviceContext) throws PortalException, SystemException{
+	public static Folder createVenueRootFolder(ServiceContext serviceContext) throws PortalException, SystemException{
 		long repositoryId = getFlaskRepositoryId();
 		long userId = serviceContext.getUserId();
 		Folder folder = getOrCreateFolder(_venueRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
@@ -66,7 +59,7 @@ public class FlaskDocLibUtil {
 	}
 	
 	public static Folder createVenueFolder(long venueId,ServiceContext serviceContext) throws PortalException, SystemException{
-		Folder folder = createEventRootFolder(serviceContext);
+		Folder folder = createVenueRootFolder(serviceContext);
 		String venueFolderName = folder.getName()+"-"+venueId;
 		Folder venueFolder = getOrCreateFolder(venueFolderName, folder.getFolderId(), folder.getRepositoryId(), folder.getUserId(), serviceContext);
 		return venueFolder;
