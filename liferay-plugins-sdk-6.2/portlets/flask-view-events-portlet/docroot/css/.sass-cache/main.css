@@ -177,3 +177,35 @@ div#verticalScrollBarlistbox, #horizontalScrollBarlistbox {
 input.btn.btn-info.cssback {
   max-width: 100% !important; }
 
+.eventLogo {
+  display: block;
+  width: 60px;
+  height: 60px;
+  margin: 1em 1em auto;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-border-radius: 0.9em;
+  -moz-border-radius: 0.9em;
+  border-radius: 0.9em;
+  border: 2px solid #eee;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
+  float: left; }
+
+.fill {
+  min-height: 100%; }
+
+.filler::after {
+  background-color: inherit;
+  bottom: 0;
+  content: "";
+  right: 0;
+  position: absolute;
+  top: 0;
+  width: inherit;
+  z-index: -1; }
+
+.fill {
+  min-height: 100%;
+  position: relative; }
+

@@ -3,8 +3,9 @@ var alllist = [];
 function fnLoadList() {
  var params = "";
  var request = new Request();
- request.sendGETRequest(SERVICE_ENDPOINTS.GET_ALL_EVENTS, params,
+ request.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params,
    function(data) {
+	 console.log(data);
     if (data.responseStatus == 1) {
      alllist = data.responseJson;
      fnlist(alllist);
@@ -15,12 +16,6 @@ function fnLoadList() {
 }
 
 function fnlist(tdata) {
-	 var source = {
-	  localdata : tdata,
-	  datatype : "json",
-	  datafields : DATA_SOURCE.GET_FLASK_EVENT_LIST,
-	 };
-	 
 	 function formatUnixToTime(tdate)
 		{
 			var date = new Date(tdate);
@@ -83,7 +78,7 @@ function fnRenderEvents(repositoryId,parentFolderId,folderName,eventName){
 	var folderId;
 	var flaskRequest = new Request();
 		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
-		flaskRequest.sendGETRequest(SERVICE_ENDPOINTS.GET_ALL_FOLDERS, params, 
+		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_FOLDERS, params, 
 			function (data){
 				folderId = data.responseJson.folderId;
 				fnGetEventFolder(repositoryId,folderId,eventName);
@@ -98,7 +93,7 @@ function fnGetEventFolder(repositoryId,parentFolderId,folderName){
 	var folderId;
 	var flaskRequest = new Request();
 		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
-		flaskRequest.sendGETRequest(SERVICE_ENDPOINTS.GET_ALL_FOLDERS, params, 
+		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_FOLDERS, params, 
 			function (data){
 					folderId = data.responseJson.folderId;
 					fnRenderSliders(repositoryId,folderId,"Pre-Event",2);
@@ -118,7 +113,7 @@ function fnRenderSliders(repositoryId,parentFolderId,folderName,Count){
 	var wowslider_container = "#wowslider-container"+Count;
 	var flaskRequest = new Request();
 		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
-		flaskRequest.sendGETRequest(SERVICE_ENDPOINTS.GET_ALL_FOLDERS, params, 
+		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_FOLDERS, params, 
 			function (data){
 				folderId = data.responseJson.folderId;
 				displayImages(repositoryId, folderId, ws_images, wowslider_container)
@@ -134,7 +129,7 @@ function displayImages(repositoryId, folderId, ws_images, wowslider_container,ul
 {
 	var flaskRequest = new Request();
 	params= {'repositoryId': repositoryId, 'folderId': folderId};
-	flaskRequest.sendGETRequest(SERVICE_ENDPOINTS.GET_ALL_IMAGES, params, 
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_IMAGES, params, 
     function(obj) {
 	  obj = obj.responseJson;
       if(typeof obj=="object" && obj.length > 0)
