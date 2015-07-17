@@ -31,21 +31,16 @@
    
 <div class="table-responsive">          
 <div id="one">
-    <div style="overflow: hidden;">
-		<div class="container-fluid fill" id="placeholder">
-		</div>
-    </div>
-    
   <table id="viewevent">
     <tbody>
-      <tr>
+      <!-- <tr>
          <td class="gap"> <button type="button" class="button" >SEARCH FOR AN EVENT
    </button>
    </td>
-      </tr>
+      </tr> -->
 		<tr>
 	         <td class="gap">
-				<input  type="text" placeholder="SEARCH:">
+				<input  type="text" placeholder="SEARCH:" id="txtSearch">
 	         </td>
       	</tr>
 		<tr>
@@ -55,7 +50,10 @@
      	</tr>
     </tbody>
   </table>
-
+    <div style="overflow: hidden;">
+		<div class="container-fluid fill" id="placeholder">
+		</div>
+    </div>
   </div>
  </div>
     

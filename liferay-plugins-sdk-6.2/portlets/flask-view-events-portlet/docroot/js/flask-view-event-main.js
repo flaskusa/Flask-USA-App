@@ -32,7 +32,7 @@ function fnlist(tdata) {
 		{
 		    var st = formatUnixToTime(tdata[i].startTime);
 		    var divRowItem = $('<div/>',{'class':'row-fluid','title':tdata[i].eventName,'data-id':tdata[i].eventId});
-		    var divCol3 = $('<div/>',{'class':'span3'});
+		    var divCol3 = $('<div/>',{'class':'span3','style':'width:70px;'});
 		    var divCol9 = $('<div/>',{'class':'span9'});
 		    var divCol9_lbl = $('<div/>',{'class':'lbldiv'});
 		    var eventName_lbl = $('<label/>',{'class':'control-label-color'});
@@ -71,6 +71,15 @@ $(document).ready(function(){
 	$(".cssback").click(function(){
 		$('#one').show();
 		$('#two').hide();
+	});
+	
+	jQuery.expr[':'].case_insensitive_contains = function(a, i, m) {
+		return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+	};	
+	
+	$("#txtSearch").keyup(function(){
+		$(".row-fluid .span9 .lbldiv:case_insensitive_contains("+$(this).val()+")").closest(".row-fluid").show(250, function() {});
+		$(".row-fluid .span9 .lbldiv:not(:case_insensitive_contains("+$(this).val()+"))").closest(".row-fluid").hide(500, function() {});		
 	});
 });
 

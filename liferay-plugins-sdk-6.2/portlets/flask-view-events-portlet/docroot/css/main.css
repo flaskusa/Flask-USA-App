@@ -123,7 +123,7 @@ div#fixedfooter {
 }
 
 div#one {
-  padding: 30px;
+  padding: 0px 30px 0px 30px;
 }
 div#placeholder 
 {
@@ -259,15 +259,15 @@ input.btn.btn-info.cssback {
   display: block;
   width: 60px;
   height: 60px;
-  margin: 1em 1em auto;
+  margin: 1em 0em auto;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  -webkit-border-radius: 0.9em;
-  -moz-border-radius: 0.9em;
-  border-radius: 0.9em;
-  border: 2px solid #eee;
-  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
+  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 0.5em;
+  border-radius: 0.5em;
+  border: 1px solid #eee;
+  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
   float: left;
 }
 
@@ -289,4 +289,8 @@ input.btn.btn-info.cssback {
 .fill { 
     min-height: 100%;
     position: relative;
+}
+
+#placeholder{
+	padding-left: 0px !important;
 }
