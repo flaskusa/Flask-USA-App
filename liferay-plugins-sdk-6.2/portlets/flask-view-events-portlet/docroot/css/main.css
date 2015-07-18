@@ -83,7 +83,6 @@ div#fixedfooter {
 {
 	font-size: 16px!important;
   	line-height: 8px!important;
-	margin-top: 12px; 
 	color : #FB9A33; 
 	margin-left: 6px;
 }
@@ -125,23 +124,21 @@ div#fixedfooter {
 div#one {
   padding: 0px 30px 0px 30px;
 }
+
 div#placeholder 
 {
-	  height: 350px;
-	  overflow: auto;
+	  height: 550px;
+	  overflow: none;
 }
 
 @media(max-width:320px)
 {
 	div#placeholder 
 	{
-		height: 300px;
-	}
-	.control-label-color
-	{
-		font-size:15px !important; 
+		height: 350px;
 	}
 }
+
 @media(min-width:414px)
 {
 	div#placeholder 
@@ -162,7 +159,6 @@ div#fixedfooter2
      letter-spacing: 10px;
      height: 5%;
  }
-
 
 @media (max-width:667px) 
 {
@@ -306,9 +302,10 @@ input.btn.btn-info.cssback {
     -o-transform: rotate(45deg);
     transform: rotate(45deg);
     background-color: #D3D3D3;
-    float: right;
-    margin-right: 50px;
-    margin-bottom: 30px;
+	margin-left: 10px;
+	margin-top: -25px;
+	margin-right: 10px;
+	float: right;
 }
 .heart-shape:before,
 .heart-shape:after{
@@ -353,3 +350,6 @@ input.btn.btn-info.cssback {
     padding-right: 15px;
 }
 
+.aui .row-fluid [class*="span"]{
+	min-height: 15px !important;	
+}
