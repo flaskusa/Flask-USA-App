@@ -56,7 +56,7 @@ _eventDetailModel.GRID_DATA_MODEL= {
 _eventDetailModel.MESSAGES= {
 		DETAIL_GET_ERROR: "There was an error in getting data",
 		DETAIL_ADD: "Event details successfully added",
-		DETAIL_SAVE: "Event successfully saved",
+		DETAIL_SAVE: "Event Details successfully saved",
 		DETAIL_ERROR: "There was an error in saving details",
 		DETAIL_DEL_SUCCESS: "Event details successfully deleted",
 		DETAIL_DEL_ERR: "Error in deleting event details"

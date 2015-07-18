@@ -27,6 +27,7 @@ function addDetailsClickHandlers(){
 
 function loadVenueDetailsData(venueId,infoTypeId){
 	var flaskRequest = new Request();
+	venueId = $("#_venueId").val();
 	params = {'venueId':venueId};
 	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_VENUE_DETAILS, params, 
 	function(data){/*success handler*/
@@ -51,7 +52,8 @@ function contextMenuHandlerDetails(menuItemText, rowData){
 	}else if(menuItemText == "Delete"){
 		var a = window.confirm("Are you sure ?");
 		if (a) {
-			deleteVenueDetail(rowData.venueDetailId,rowData.venueId);
+			deleteVenueDetail(rowData.venueDetailId, rowData.venueId, rowData.infoTypeId);
+			GRID_PARAM_DETAILS.updateGrid(data);
 		}
 		return false;			
 	}
@@ -256,7 +258,7 @@ function saveVenueDetails(){
 }
 
 /* Delete Single Venue */
-function deleteVenueDetail(venueDetailId,venueId) {
+function deleteVenueDetail(venueDetailId, venueId, infoTypeId) {
 		var param = {'venueDetailId': venueDetailId};
 		var request = new Request();
 		var flaskRequest = new Request();
@@ -265,7 +267,7 @@ function deleteVenueDetail(venueDetailId,venueId) {
 					_flaskLib.showSuccessMessage('action-msg', _venueDetailModel.MESSAGES.DETAIL_DEL_SUCCESS);
 					createDetailsTable({},_venueDetailModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
 					//Change
-					loadVenueDetailsData(venueId,1);
+					loadVenueDetailsData(venueId,infoTypeId);
 			} ,
 			function (data){
 					_flaskLib.showErrorMessage('action-msg', _venueDetailModel.MESSAGES.DETAIL_DEL_ERR);
@@ -342,7 +344,6 @@ function fnShowSlider(_venueId,_divObj,_venueDetailId,_infoTypeId,_infoTypeCateg
 	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
 		function (data){
 			folderName = 'Venue-'+_venueId;
-			console.log(folderName);
 			var flaskRequestChild = new Request();
 			paramsChild= {'repositoryId': repositoryId, 'parentFolderId': data.folderId, 'name': folderName};
 			flaskRequestChild.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
@@ -359,8 +360,6 @@ function fnShowSlider(_venueId,_divObj,_venueDetailId,_infoTypeId,_infoTypeCateg
 									folderId = data.folderId;
 									var flaskRequestChild3 = new Request();
 									paramsChild3= {'repositoryId': repositoryId, 'parentFolderId': data.folderId, 'name': venueDetailId};
-									console.log(paramsChild3);
-									console.log(_venueDetailModel.SERVICE_ENDPOINTS.GET_FOLDER );
 									flaskRequestChild3.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild3, 
 										function (data){
 											fnRenderSlider(data.folderId,_divObj);

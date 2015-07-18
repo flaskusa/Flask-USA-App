@@ -119,7 +119,8 @@ GRID_PARAM_DETAILS.initrowdetails = function(index, parentElement, gridElement, 
 	    	var venueDiv = tabsdiv.find('.images');
 	    	var container = $('<div/>');
 	    	console.log(datarecord);
-  	    	fnShowSlider($("#venueId").val(),container,datarecord.venueDetailId,datarecord.infoTypeId,datarecord.infoTypeCategoryId);	    	
+	    	if(typeof(datarecord)!='undefined')
+	    		fnShowSlider($("#venueId").val(),container,datarecord.venueDetailId,datarecord.infoTypeId,datarecord.infoTypeCategoryId);	    	
 	  	  	$(container).appendTo($(venueDiv));
     	$(tabsdiv).jqxTabs({
 			width : '98%',

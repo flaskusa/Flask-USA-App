@@ -173,7 +173,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 
 
 function createTable(data, model, grid, menuDivId, actionColText,contextMenuHandler, detailDivArr, Columns){
-	
+		//grid.jqxGrid('destroy');
 		if(typeof gridId == undefined){
 			throw 'a valid grid div object must be provided';
 		}
@@ -272,7 +272,7 @@ function fnShowEventLogo(_repositoryId,_eventId,_leftcolumn, _showUpload){
 					    			});
 						    	}
 						    	else{
-					    			$(objDel).remove();
+					    			$('.cssDelImages').remove();
 						    	}
 						    });					
 						} ,

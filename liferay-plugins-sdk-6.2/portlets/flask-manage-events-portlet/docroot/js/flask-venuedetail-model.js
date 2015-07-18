@@ -60,7 +60,7 @@ _venueDetailModel.GRID_DATA_MODEL= {
 _venueDetailModel.MESSAGES= {
 		DETAIL_GET_ERROR: "There was an error in getting data",
 		DETAIL_ADD: "Venue details successfully added",
-		DETAIL_SAVE: "Venue successfully saved",
+		DETAIL_SAVE: "Venue Details successfully saved",
 		DETAIL_ERROR: "There was an error in saving details",
 		DETAIL_DEL_SUCCESS: "Venue details successfully deleted",
 		DETAIL_DEL_ERR: "Error in deleting venue details"

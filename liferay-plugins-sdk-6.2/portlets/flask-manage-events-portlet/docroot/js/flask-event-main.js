@@ -24,13 +24,13 @@ function addClickHandlers(){
 			saveEvent();
 	});
 	
-	
 	/* Click handler for cancel button*/
 
 	$(".clsCancel").click(function(){
-			loadData();
 			$("#eventDataTable").show();
 			$("#formContainer").hide();
+			$("#eventImage").html("");
+			loadData();
 	});
 	
 	$(".cssDelUser").click(function() {
@@ -123,7 +123,6 @@ function editEvent(rowData) {
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("eventForm",  _eventModel.DATA_MODEL.EVENT, rowData, function(){});
 		$("#eventDataTable").hide();
-		//eventForm.show();
 		$("#formContainer").show();
 		_eventModel.loadVenues('venueId',  rowData.venueId);
 		_eventModel.loadEventType('eventTypeId',  rowData.eventTypeId);
@@ -140,7 +139,7 @@ function editEvent(rowData) {
 			$("#eventDetailsDataTable").show();			
 			$("#infoTypeId").val($(this).attr("alt"));
 		})
-		fnShowEventLogo(repositoryId,rowData.eventId,$("#eventImage"), true)
+		fnShowEventLogo(repositoryId,rowData.eventId,$("#eventImage"), true);
 }
 
 
@@ -164,10 +163,14 @@ function saveEvent(){
 		flaskRequest.sendGETRequest(url, params, 
 					function (data){
 						_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.SAVE);
-						fnSaveEventLogo(data.eventId);
-						$("#eventDataTable").show();
-						$("#formContainer").hide();
-						loadData();
+						if($('#eventImage').is(':visible')) {					
+							fnSaveEventLogo(data.eventId);
+						}
+						else{
+							$("#eventDataTable").show();
+							$("#formContainer").hide();
+							loadData();
+						}	
 					} ,
 					function (data){
 						_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.ERROR);
@@ -206,6 +209,9 @@ function fnSaveEventLogo(eventId){
 	dropZoneLogo.processQueue();
 	dropZoneLogo.on("queuecomplete", function (file) {
 		$("#eventImage").html(""); // Clear upload component
+		$("#eventDataTable").show();
+		$("#formContainer").hide();
+		loadData();
 	});	
 }
 
