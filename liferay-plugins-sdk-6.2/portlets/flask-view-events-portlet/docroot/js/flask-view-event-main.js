@@ -32,7 +32,8 @@ function fnlist(tdata) {
 		{
 		    var st = formatUnixToTime(tdata[i].startTime);
 		    var divRowItem = $('<div/>',{'class':'row-fluid','title':tdata[i].eventName,'data-id':tdata[i].eventId});
-		    var divCol3 = $('<div/>',{'class':'span3','style':'width:70px;'});
+		    var divCol3 = $('<div/>',{'class':'span3','style':'width:60px;'});
+		    var div_heart = $('<div/>',{'class':'heart-shape'});
 		    var divCol9 = $('<div/>',{'class':'span9'});
 		    var divCol9_lbl = $('<div/>',{'class':'lbldiv'});
 		    var eventName_lbl = $('<label/>',{'class':'control-label-color'});
@@ -44,6 +45,7 @@ function fnlist(tdata) {
 		    $(divCol9_lbl).appendTo($(divCol9));
 		 	$(divCol3).appendTo($(divRowItem));
 		 	$(divCol9).appendTo($(divRowItem));
+		 	$(div_heart).appendTo($(divCol9));		 	
 		 	$(divRowItem).appendTo($(divRow));
 		 	
 		    fnGetVenueName(venue_lbl,tdata[i].venueId);
