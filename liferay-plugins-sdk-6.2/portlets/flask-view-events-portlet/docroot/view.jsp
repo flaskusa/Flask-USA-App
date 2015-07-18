@@ -28,29 +28,18 @@
 <link async href="http://fonts.googleapis.com/css?family=Gochi%20Hand" rel="stylesheet" type="text/css"/>
 
 <body>
-   
 <div class="table-responsive">          
 <div id="one">
   <table id="viewevent">
     <tbody>
-      <!-- <tr>
-         <td class="gap"> <button type="button" class="button" >SEARCH FOR AN EVENT
-   </button>
-   </td>
-      </tr> -->
 		<tr>
 	         <td class="gap">
 				<input  type="text" placeholder="SEARCH:" id="txtSearch">
 	         </td>
       	</tr>
-		<tr>
-        	 <td style="display:none;">
-        	 <input type="text" placeholder="KEY WORDS:" >
-        	 </td>
-     	</tr>
     </tbody>
   </table>
-    <div style="overflow: hidden;">
+    <div id="container1">
 		<div class="container-fluid fill" id="placeholder">
 		</div>
     </div>
