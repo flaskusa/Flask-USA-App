@@ -294,3 +294,62 @@ input.btn.btn-info.cssback {
 #placeholder{
 	padding-left: 0px !important;
 }
+
+
+.heart-shape{
+    position: relative;
+    width: 20px;
+    height: 20px;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    background-color: #D3D3D3;
+    float: right;
+    margin-right: 50px;
+    margin-bottom: 30px;
+}
+.heart-shape:before,
+.heart-shape:after{
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    content: '';
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    -o-border-radius: 50%;
+    border-radius: 50%;
+    background-color: #D3D3D3;
+}
+.heart-shape:before{
+    bottom: 0px;
+    left: -10px;
+}
+.heart-shape:after{
+    top: -10px;
+    right: 0px;
+}
+
+.heart-shape:hover{
+    background-color: #FFAEAE;
+}
+
+.heart-shape:hover:before,
+.heart-shape:hover:after{
+    background-color: #FFAEAE;
+}
+
+#container1{
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#placeholder{
+    width: 100%;
+    height: 99%;
+    overflow: auto;
+    padding-right: 15px;
+}
+
