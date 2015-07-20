@@ -30,7 +30,9 @@ function addClickHandlers(){
 	$(".clsCancel").click(function(){
 		//$("#grid").html("");
 		$("#venueDataTable").show();
+		$("#venueGallery").html("");
 		$("#formContainer").hide();
+		createTable({},_venueModel.DATA_MODEL.VENUE, $("#grid"), "actionMenu", "Edit", contextMenuHandler, ["Venue", "Images"]);
 		loadData();
 	});
 	
@@ -75,6 +77,7 @@ function loadData(){
 		_flaskLib.showErrorMessage('action-msg',_venueModel.MESSAGES.GET_ERROR);
 		console.log("Error in getting data: " + error);
 	});
+	
 }
 
 function contextMenuHandler(menuItemText, rowData){
@@ -137,7 +140,7 @@ function editVenue(rowData) {
 			$("#venueDetailsDataTable").show();			
 			$("#infoTypeId").val($(this).attr("alt"));
 		})
-		fnBuildVenueUpload(imageContainer);		
+		fnBuildVenueUpload(imageContainer);
 		fnShowVenueImages(rowData.venueId,$("#venueGallery"));
 }
 
@@ -256,8 +259,9 @@ function fnShowVenueImages(_eventId,_divObj){
 }
 
 function fnRenderImages(folderId,_divObj){
-	$(_divObj).html("");
 	$(".eventLogo").removeClass("activeImage");
+	//$(_divObj).html("");
+	clearImageGallery();
 	var flaskRequest = new Request();
 	params= {'repositoryId': $("#repositoryId").val(), 'folderId': folderId};
 	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_FILES , params, 
@@ -301,4 +305,9 @@ function fnRenderImages(folderId,_divObj){
 		function (data){
 			console.log("Error in getting Folder: " + data );
 		});	
+}
+
+function clearImageGallery(){
+	$(".eventLogo").remove();
+	$("#venueDetailGallery").html("HELLO WORLD");
 }

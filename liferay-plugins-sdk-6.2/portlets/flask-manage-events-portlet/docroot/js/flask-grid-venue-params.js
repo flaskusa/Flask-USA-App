@@ -49,36 +49,30 @@ GRID_PARAM_VENUE.getCheckedIdList= function(idDataAttribute){
     return temp;
 }
 
-
 GRID_PARAM_VENUE.getDeleteList = function(idDataAttribute){
 	
 }
 
 
-GRID_PARAM_VENUE.onContextMenuItemClick =function (event) 
+GRID_PARAM_VENUE.onContextMenuItemClick =function (venue) 
 {
-	var args = event.args;
+	var args = venue.args;
 	var menuItemtext= $.trim($(args).text());
 	var rowindex = gridObj.jqxGrid('getselectedrowindex');
 	var rowData = gridObj.jqxGrid('getrowdata', rowindex);
 	_contextMenuHandler(menuItemtext, rowData);
 }
-GRID_PARAM_VENUE.onRowClick =function (event) 
+GRID_PARAM_VENUE.onRowClick =function (venue) 
 {
 	var grid = gridObj;
-	var args = event.args;
-	// row's bound index.
+	var args = venue.args;
 	var boundIndex = args.rowindex;
-	// row's visible index.
 	var visibleIndex = args.visibleindex;
-	// right click.
 	
-	
-
 	if (args.column.text == rowMenuColumnText) {
 		var scrollTop = $(window).scrollTop();
 		var scrollLeft = $(window).scrollLeft();
-		editrow = event.args.rowindex;
+		editrow = venue.args.rowindex;
 		var rowsheight = grid.jqxGrid('rowsheight');
 		var top = $(this).offset().top + (2 + editrow) * rowsheight;
 		var left = ($(this).offset().left + parseInt($('#GridContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
