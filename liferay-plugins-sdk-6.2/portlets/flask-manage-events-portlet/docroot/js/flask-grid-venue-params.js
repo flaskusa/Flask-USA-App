@@ -113,6 +113,7 @@ GRID_PARAM_VENUE.initrowdetails = function(index, parentElement, gridElement, da
 	 var tabsdiv = null; 
 	//_flaskLib.loadCountries('venueCountryId',datarecord.venueCountryId);
 	//_flaskLib.loadUSARegions('venueStateId',datarecord.venueStateId);
+
     tabsdiv = $($(parentElement).children()[0]);
     if (tabsdiv != null) {
     	
@@ -144,12 +145,17 @@ GRID_PARAM_VENUE.initrowdetails = function(index, parentElement, gridElement, da
 				+ datarecord.venueCity + "</td></tr>";
 		var Metro = "<tr><td class='filledWidth1'><b>Metro Area:</b></td><td> "
 			+ datarecord.venueMetroArea + "</td></tr>";	
-		var State = "<tr><td class='filledWidth1'><b>State:</b></td><td> "
-				+ datarecord.venueStateId + "</td></tr>";
-		var Country = "<tr><td class='filledWidth1'><b>Country:</b></td><td> "
-				+ datarecord.venueCountryId + "</td></tr>";		
+		 if( typeof datarecord.venueStateName == undefined)
+			var State = "<tr><td class='filledWidth1'><b>State:</b></td><td>-</td></tr>";
+		 else 
+			var State = "<tr><td class='filledWidth1'><b>State:</b></td><td> "+ datarecord.venueStateName + "</td></tr>";
+		 
+		 if( typeof datarecord.venueCountryName == undefined)
+			 	var Country = "<tr><td class='filledWidth1'><b>Country:</b></td><td>-</td></tr>";
+		 else 
+				 var Country  = "<tr><td class='filledWidth1'><b>Country:</b></td><td> "+ datarecord.venueCountryName + "</td></tr>";
+		 
 		$(leftcolumn).append("<table>");
-		
 		$(leftcolumn).append(venue_Name);
 		$(leftcolumn).append(venue_Description);
 		$(leftcolumn).append(addrLine_1);
