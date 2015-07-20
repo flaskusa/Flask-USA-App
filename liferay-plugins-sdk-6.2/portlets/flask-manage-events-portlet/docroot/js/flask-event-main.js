@@ -27,10 +27,7 @@ function addClickHandlers(){
 	/* Click handler for cancel button*/
 
 	$(".clsCancel").click(function(){
-			$("#eventDataTable").show();
-			$("#formContainer").hide();
-			$("#eventImage").html("");
-			loadData();
+		 location.reload();
 	});
 	
 	$(".cssDelUser").click(function() {

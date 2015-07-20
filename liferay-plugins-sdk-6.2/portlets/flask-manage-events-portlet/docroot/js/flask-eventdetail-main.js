@@ -35,7 +35,7 @@ function loadEventDetailsData(eventId,infoTypeId){
 		    });
 		    data = returnedData;
 		}
-		GRID_PARAM_DETAILS.updateGrid(data);
+		GRID_PARAM.updateGrid(data);
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_eventDetailModel.MESSAGES.DETAIL_GET_ERROR);
 		console.log("Error in getting data: " + error);

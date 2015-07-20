@@ -28,12 +28,7 @@ function addClickHandlers(){
 	/* Click handler for cancel button*/
 
 	$(".clsCancel").click(function(){
-		//$("#grid").html("");
-		$("#venueDataTable").show();
-		$("#venueGallery").html("");
-		$("#formContainer").hide();
-		createTable({},_venueModel.DATA_MODEL.VENUE, $("#grid"), "actionMenu", "Edit", contextMenuHandler, ["Venue", "Images"]);
-		loadData();
+		location.reload();
 	});
 	
 	$(".cssDelUser").click(function() {
@@ -139,7 +134,7 @@ function editVenue(rowData) {
 			$("#venueDetailsContainer").show();
 			$("#venueDetailsDataTable").show();			
 			$("#infoTypeId").val($(this).attr("alt"));
-		})
+		});
 		fnBuildVenueUpload(imageContainer);
 		fnShowVenueImages(rowData.venueId,$("#venueGallery"));
 }

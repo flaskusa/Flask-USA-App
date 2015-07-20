@@ -111,7 +111,8 @@ GRID_PARAM_VENUE.rowDetailTemplate = function(tabs, height)
 
 GRID_PARAM_VENUE.initrowdetails = function(index, parentElement, gridElement, datarecord){
 	 var tabsdiv = null; 
-  
+	//_flaskLib.loadCountries('venueCountryId',datarecord.venueCountryId);
+	//_flaskLib.loadUSARegions('venueStateId',datarecord.venueStateId);
     tabsdiv = $($(parentElement).children()[0]);
     if (tabsdiv != null) {
     	
@@ -129,24 +130,24 @@ GRID_PARAM_VENUE.initrowdetails = function(index, parentElement, gridElement, da
 		container1.append(leftcolumn);
 		container1.append(rightcolumn);
 	
-		var venue_Name = "<tr><td class='filledWidth'> <b>venue Name:</b></td><td> "
+		var venue_Name = "<tr><td class='filledWidth'> <b>Name:</b></td><td> "
 			+ datarecord.venueName + "</td></tr>";
-	    var venue_Description = "<tr><td class='filledWidth'><b>venue Description:</b></td><td> "
+	    var venue_Description = "<tr><td class='filledWidth'><b>Description:</b></td><td> "
 			+ datarecord.venueDescription + "</td></tr>";
-	    var addrLine_1 = "<tr><td class='filledWidth'><b>AddrLine 1:</b></td><td> "
+	    var addrLine_1 = "<tr><td class='filledWidth'><b>Address #1:</b></td><td> "
 			+ datarecord.addrLine1 + "</td></tr>";
-		var addrLine_2 = "<tr><td class='filledWidth'> <b>addrLine 2:</b></td><td>"
+		var addrLine_2 = "<tr><td class='filledWidth'> <b>Address #2:</b></td><td>"
 				+ datarecord.addrLine2 + "</td></tr>";
-		var venue_ZipCode = "<tr><td class='filledWidth'><b>ZipCode:</b></td><td>"
+		var venue_ZipCode = "<tr><td class='filledWidth'><b>Zipcode:</b></td><td>"
 				+ datarecord.venueZipCode + "</td></tr>";
 		var City = "<tr><td class='filledWidth1'><b>City:</b></td><td> "
 				+ datarecord.venueCity + "</td></tr>";
 		var Metro = "<tr><td class='filledWidth1'><b>Metro Area:</b></td><td> "
 			+ datarecord.venueMetroArea + "</td></tr>";	
 		var State = "<tr><td class='filledWidth1'><b>State:</b></td><td> "
-				+ datarecord.venueStateName + "</td></tr>";
+				+ datarecord.venueStateId + "</td></tr>";
 		var Country = "<tr><td class='filledWidth1'><b>Country:</b></td><td> "
-				+ datarecord.venueCountryName + "</td></tr>";		
+				+ datarecord.venueCountryId + "</td></tr>";		
 		$(leftcolumn).append("<table>");
 		
 		$(leftcolumn).append(venue_Name);
