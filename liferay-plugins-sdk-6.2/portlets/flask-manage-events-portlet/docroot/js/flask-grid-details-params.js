@@ -16,6 +16,7 @@ GRID_PARAM_DETAILS.source = function(model, data){
 GRID_PARAM_DETAILS.updateGrid = function(data){
 	var dataAdapter =  new $.jqx.dataAdapter(GRID_PARAM_DETAILS.source(_dataModel, data));
 	gridObj.jqxGrid({ source: dataAdapter });
+	gridObj.jqxGrid('addgroup', 'infoTypeName');
 }
 GRID_PARAM_DETAILS.toggleSelectionMode= function(){
 	if(gridObj.jqxGrid('selectionmode') == 'checkbox'){
@@ -168,6 +169,14 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 		return false;
 	});
 
+	var groupsrenderer = function (text, group, expanded, data) {
+		console.log("Inside gr");
+		console.log(data);
+		console.log(group);
+		console.log(text);
+		console.log("Finish gr");
+		return '<div style="padding: 5px; float: left; font-weight: bold;">' + group + '</div>';
+	}
 	var dataAdapter = new $.jqx.dataAdapter(GRID_PARAM_DETAILS.source(model, data));
 	
     grid.jqxGrid(
@@ -182,11 +191,15 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
                 pageable : true,
                 pagermode : 'default',
                 rowdetails: true,
+                groupable: true,
+                showgroupsheader: false,
+                showgroupmenuitems: true,
                 showrowdetailscolumn:false,
+                groupsrenderer: groupsrenderer,
                 rowdetailstemplate: GRID_PARAM_DETAILS.rowDetailTemplate(rowDetailDivArr , 200),
                 initrowdetails: GRID_PARAM_DETAILS.initrowdetails,
-                columns: Columns//,
-                //groups: ['']
+                columns: Columns,
+                groups: ['infoTypeId']
             });
     
 	}

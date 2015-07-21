@@ -22,6 +22,7 @@ _eventDetailModel.DATA_MODEL= {
 	             { name: 'eventDetailId', type: 'long' },
 	             { name: 'eventId', type: 'long' },
 	             { name: 'infoTypeId', type: 'long' },
+	             { name: 'infoTypeName', type: 'string' },
 	             { name: 'infoTypeCategoryId', type: 'long' },
 				 { name: 'infoTitle', type: 'string' },
 				 { name: 'infoDesc', type: 'string' },
@@ -48,9 +49,10 @@ _eventDetailModel.GRID_CONTEXT_MENU = {
 
 _eventDetailModel.GRID_DATA_MODEL= {
 		EVENTDETAILS: 
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '45%' },
-      		 {text: 'Description', datafield: 'infoDesc', width: '45%'},
-      		 { text: 'Edit',  datafield: 'venueDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _eventDetailModel.GRID_CONTEXT_MENU.EVENTDETAILS }]
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '40%' },
+      		 {text: 'Description', datafield: 'infoDesc', width: '40%'},
+      		 {text: 'Info Type', datafield: 'infoTypeName', width: '10%'},
+      		 { text: 'Edit',  datafield: 'eventDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _eventDetailModel.GRID_CONTEXT_MENU.EVENTDETAILS }]
 		};
 
 _eventDetailModel.MESSAGES= {

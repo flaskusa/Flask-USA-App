@@ -24,6 +24,7 @@ _venueDetailModel.DATA_MODEL= {
 	             { name: 'venueDetailId', type: 'long' },
 	             { name: 'venuetId', type: 'long' },
 	             { name: 'infoTypeId', type: 'long' },
+	             { name: 'infoTypeName', type: 'string' },
 	             { name: 'infoTypeCategoryId', type: 'long' },
 				 { name: 'infoTitle', type: 'string' },
 				 { name: 'infoDesc', type: 'string' },
@@ -52,7 +53,7 @@ _venueDetailModel.GRID_DATA_MODEL= {
 		VENUEDETAILS: 
 			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '40%' },
       		 {text: 'Description', datafield: 'infoDesc', width: '40%'},
-      		 {text: 'Info Type', datafield: 'infoTypeId', width: '10%'},
+      		 {text: 'Info Type', datafield: 'infoTypeName', width: '10%'},
       		 { text: 'Edit',  datafield: 'venueDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _venueDetailModel.GRID_CONTEXT_MENU.VENUEDETAILS }
       		 ]
 		};

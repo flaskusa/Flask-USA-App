@@ -29,12 +29,12 @@ function loadEventDetailsData(eventId,infoTypeId){
 	params = {'eventId':eventId};
 	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_EVENT_DETAILS, params, 
 	function(data){/*success handler*/
-		if(infoTypeId>0){
+		/*if(infoTypeId>0){
 		    var returnedData = $.grep(data, function(element, index){
 		    	return element.infoTypeId == infoTypeId;
 		    });
 		    data = returnedData;
-		}
+		}*/
 		GRID_PARAM.updateGrid(data);
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_eventDetailModel.MESSAGES.DETAIL_GET_ERROR);
