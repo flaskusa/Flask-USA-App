@@ -255,7 +255,7 @@ function editEventDetail(rowData) {
 		$('#eventDetailsForm').show();
 		
 		$('#eventDetailsDataTable').hide();
-		_eventDetailModel.loadInfoType('infoTypeId',1);
+		_eventDetailModel.loadInfoType('infoTypeId',rowData.infoTypeId);
 		_eventDetailModel.loadContentType('infoTypeCategoryId',rowData.infoTypeCategoryId);
 		setTimeout(function(){
 			_flaskLib.loadDataToForm("eventDetailsForm",  _eventDetailModel.DATA_MODEL.EVENTDETAILS, rowData, function(){});
