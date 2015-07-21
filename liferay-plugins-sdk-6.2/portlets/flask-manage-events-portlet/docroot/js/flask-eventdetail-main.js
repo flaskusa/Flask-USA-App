@@ -12,6 +12,7 @@ function addDetailsClickHandlers(){
 	
 	$(".cssAddEventDetails").click(function(){
 		$("#eventDetailId").val(0);
+		_eventDetailModel.loadInfoType('infoTypeId',1);
 		_eventDetailModel.loadContentType('infoTypeCategoryId',1);
 		$("#eventDetailsForm").show();
 		$("#eventDetailsDataTable").hide();
@@ -21,21 +22,16 @@ function addDetailsClickHandlers(){
 		$("#eventDetailsForm").hide();
 		$("#eventDetailsDataTable").show();
 		$("#slides").html("");
-	});	
+		loadEventDetailsData($('#eventForm #eventId').val());
+	});
 }
 
-function loadEventDetailsData(eventId,infoTypeId){
+function loadEventDetailsData(eventId){
 	var flaskRequest = new Request();
 	params = {'eventId':eventId};
 	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_EVENT_DETAILS, params, 
 	function(data){/*success handler*/
-		/*if(infoTypeId>0){
-		    var returnedData = $.grep(data, function(element, index){
-		    	return element.infoTypeId == infoTypeId;
-		    });
-		    data = returnedData;
-		}*/
-		GRID_PARAM.updateGrid(data);
+		GRID_PARAM_DETAILS.updateGrid(data);
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_eventDetailModel.MESSAGES.DETAIL_GET_ERROR);
 		console.log("Error in getting data: " + error);
@@ -58,44 +54,8 @@ function contextMenuHandlerDetails(menuItemText, rowData){
 //
 
 $(".infoTypeCat").click(function(){
-	addDetailsClickHandlers();
-	initDetailsForm();
-	var InfoTypeCd = Number($(this).attr('data-value'));
+	var InfoTypeCd = Number($(this).val());
 	$("#infoTypeId").val(InfoTypeCd);
-	createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
-	loadEventDetailsData($('#eventForm #eventId').val(),InfoTypeCd);
-		
-	var click = new Date();
-	var lastClick = new Date();
-	var lastRow = -1;
-	$("#gridDetails").bind('rowclick', function (event) {
-	    click = new Date();
-	    if (click - lastClick < 300) {
-	        if (lastRow == event.args.rowindex) {
-	        	var row = event.args.rowindex;
-        	 	var datarow = $(this).jqxGrid('getrowdata', row);
-        	 	editEventDetail(datarow);
-	        }
-	    }
-	    lastClick = new Date();
-	    lastRow = event.args.rowindex;
-	});
-	
-	$("#eventDetailsContainer").show();
-    switch($(this).attr('data-value')) {
-    case "1":
-    	$('.title-text').html('General');
-        break;
-    case "2":
-    	$('.title-text').html('Pre-Event');
-        break;
-    case "3":
-    	$('.title-text').html('During-Event');
-        break;
-    case "4":
-    	$('.title-text').html('Post-Event');
-        break;
-    }        
 });
 
 function initDetailsForm(){
@@ -243,7 +203,7 @@ function saveEventDetails(){
 	flaskRequest.sendGETRequest(url, params, 
 				function (data){
 					_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);
-					loadEventDetailsData(data.eventId,data.infoTypeId);
+					loadEventDetailsData(data.eventId);
 					if($('#eventImages').is(':visible')) {					
 						fnSaveImages(data.eventDetailId);
 					}
@@ -262,9 +222,7 @@ function deleteEventDetail(eventDetailId,eventId) {
 		flaskRequest.sendPOSTRequest(_eventDetailModel.SERVICE_ENDPOINTS.DELETE_EVENT_DETAIL , param, 
 			function (data){
 					_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_DEL_SUCCESS);
-					createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
-					//Change
-					loadEventDetailsData(eventId,1);
+					loadEventDetailsData(eventId);
 			} ,
 			function (data){
 					_flaskLib.showErrorMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_DEL_ERR);
@@ -297,6 +255,7 @@ function editEventDetail(rowData) {
 		$('#eventDetailsForm').show();
 		
 		$('#eventDetailsDataTable').hide();
+		_eventDetailModel.loadInfoType('infoTypeId',1);
 		_eventDetailModel.loadContentType('infoTypeCategoryId',rowData.infoTypeCategoryId);
 		setTimeout(function(){
 			_flaskLib.loadDataToForm("eventDetailsForm",  _eventDetailModel.DATA_MODEL.EVENTDETAILS, rowData, function(){});
@@ -434,5 +393,26 @@ function fnDeleteFileByEntryId(fileEntryId,objDel){
 		function (data){$("#spinningSquaresG").hide();});	
 }
 
-
-
+$(document).ready(function(){
+	$("#mcontents").click(function(){
+		addDetailsClickHandlers();
+		initDetailsForm();
+		loadEventDetailsData($('#eventForm #eventId').val());
+		var click = new Date();
+		var lastClick = new Date();
+		var lastRow = -1;
+		$("#gridDetails").bind('rowclick', function (event) {
+		    click = new Date();
+		    if (click - lastClick < 300) {
+		        if (lastRow == event.args.rowindex) {
+		        	var row = event.args.rowindex;
+	        	 	var datarow = $(this).jqxGrid('getrowdata', row);
+	        	 	editEventDetail(datarow);
+		        }
+		    }
+		    lastClick = new Date();
+		    lastRow = event.args.rowindex;
+		});
+		$("#eventDetailsContainer").show();
+	});
+});

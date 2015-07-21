@@ -112,76 +112,51 @@ GRID_PARAM.rowDetailTemplate = function(tabs, height)
 
 
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord){
-	if($("#eventDataTable").is(':visible'))
+		function formatUnixToTime(tdate)
 		{
-			function formatUnixToTime(tdate)
-			{
-				var date = new Date(tdate);
-				// hours part from the timestamp
-				var hours = date.getHours();
-				// minutes part from the timestamp
-				var minutes = "0" + date.getMinutes();
-	
-				var ampm = hours >= 12 ? 'PM' : 'AM';
-				hours = hours % 12;
-				// will display time in 10:30 PM format
-				return hours + ':' + minutes.substr(-2) + ' ' + ampm;
-			}
-			  var tabsdiv = null; 
-			    tabsdiv = $($(parentElement).children()[0]);
-			    if (tabsdiv != null) {
-			  var eventDiv = tabsdiv.find('.event');
-			  var container1 = $('<div class="row-fluid"></div>');
-			  var leftcolumn = $('<div class="span3 GridLogo"></div>');
-			  var rightcolumn = $('<div class="span9"></div>');
-			  var d = new Date(datarecord.eventDate);
-			  var d1 = formatUnixToTime(datarecord.startTime);
-			  var d2 = formatUnixToTime(datarecord.endTime);
-				container1.append(leftcolumn);
-				container1.append(rightcolumn);
-				console.log(datarecord);
-				
-				$(rightcolumn).append("<table>");		
-				fnShowEventLogo(_repositoryId,datarecord.eventId,leftcolumn,false)
-				var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
-						+ datarecord.venueName + "</td></tr>";
-				var EventDate = "<tr><td class='filledWidth1'><b>Event Date:</b></td><td> "
-					+ GRID_PARAM.formatDate(d) + "</td></tr>";		
-				var StartTime = "<tr><td class='filledWidth1'><b>Start Time:</b></td><td> "
-					+ d1 + "</td></tr>";
-				var EndTime = "<tr><td class='filledWidth1'><b>End Time:</b></td><td> "
-					+ d2 + "</td></tr>";
-				
-				$(rightcolumn).append(venueId);
-				$(rightcolumn).append(EventDate);
-				$(rightcolumn).append(StartTime);
-				$(rightcolumn).append(EndTime);
-				$(rightcolumn).append("</table>");
-				eventDiv.append(container1);
-	
-				$(tabsdiv).jqxTabs({
-					width : '90%',
-					height : 180
-				});
-		    }
-
+			var date = new Date(tdate);
+			var hours = date.getHours();
+			var minutes = "0" + date.getMinutes();
+			var ampm = hours >= 12 ? 'PM' : 'AM';
+			hours = hours % 12;
+			return hours + ':' + minutes.substr(-2) + ' ' + ampm;
 		}
-	if($("#eventDetailsDataTable").is(':visible'))
-		{
-			var tabsdiv = null; 
-			console.log(datarecord);
+		  var tabsdiv = null; 
 		    tabsdiv = $($(parentElement).children()[0]);
-			    if (tabsdiv != null) {
-			    	var eventDiv = tabsdiv.find('.images');
-			    	var container = $('<div/>');
-		  	    	fnShowSlider(datarecord.eventId,container,datarecord.eventDetailId,datarecord.infoTypeId,datarecord.infoTypeCategoryId);	    	
-			  	  	$(container).appendTo($(eventDiv));
-		    	$(tabsdiv).jqxTabs({
-					width : '98%',
-					height : 180
-				});	  	    	
-			}
-		}
+		    if (tabsdiv != null) {
+		  var eventDiv = tabsdiv.find('.event');
+		  var container1 = $('<div class="row-fluid"></div>');
+		  var leftcolumn = $('<div class="span3 GridLogo"></div>');
+		  var rightcolumn = $('<div class="span9"></div>');
+		  var d = new Date(datarecord.eventDate);
+		  var d1 = formatUnixToTime(datarecord.startTime);
+		  var d2 = formatUnixToTime(datarecord.endTime);
+			container1.append(leftcolumn);
+			container1.append(rightcolumn);
+			
+			$(rightcolumn).append("<table>");		
+			fnShowEventLogo(_repositoryId,datarecord.eventId,leftcolumn,false)
+			var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
+					+ datarecord.venueName + "</td></tr>";
+			var EventDate = "<tr><td class='filledWidth1'><b>Event Date:</b></td><td> "
+				+ GRID_PARAM.formatDate(d) + "</td></tr>";		
+			var StartTime = "<tr><td class='filledWidth1'><b>Start Time:</b></td><td> "
+				+ d1 + "</td></tr>";
+			var EndTime = "<tr><td class='filledWidth1'><b>End Time:</b></td><td> "
+				+ d2 + "</td></tr>";
+			
+			$(rightcolumn).append(venueId);
+			$(rightcolumn).append(EventDate);
+			$(rightcolumn).append(StartTime);
+			$(rightcolumn).append(EndTime);
+			$(rightcolumn).append("</table>");
+			eventDiv.append(container1);
+
+			$(tabsdiv).jqxTabs({
+				width : '90%',
+				height : 180
+			});
+	    }
 	}
 
 

@@ -91,9 +91,6 @@ GRID_PARAM_DETAILS.onRowClick =function (event)
 	}
 }
 
-
-
-
 GRID_PARAM_DETAILS.rowDetailTemplate = function(tabs, height)  
 {
 	var rowDetailTemplate = "<div style='margin: 2px;'> <ul style='margin-left: 30px;'> "
@@ -170,11 +167,6 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 	});
 
 	var groupsrenderer = function (text, group, expanded, data) {
-		console.log("Inside gr");
-		console.log(data);
-		console.log(group);
-		console.log(text);
-		console.log("Finish gr");
 		return '<div style="padding: 5px; float: left; font-weight: bold;">' + group + '</div>';
 	}
 	var dataAdapter = new $.jqx.dataAdapter(GRID_PARAM_DETAILS.source(model, data));
@@ -193,13 +185,14 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
                 rowdetails: true,
                 groupable: true,
                 showgroupsheader: false,
-                showgroupmenuitems: true,
+                showgroupmenuitems: false,
                 showrowdetailscolumn:false,
                 groupsrenderer: groupsrenderer,
                 rowdetailstemplate: GRID_PARAM_DETAILS.rowDetailTemplate(rowDetailDivArr , 200),
                 initrowdetails: GRID_PARAM_DETAILS.initrowdetails,
                 columns: Columns,
-                groups: ['infoTypeId']
+                groups: ['infoTypeId'],
+                groupsexpandedbydefault:true
             });
     
 	}

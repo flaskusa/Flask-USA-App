@@ -58,7 +58,6 @@ function addClickHandlers(){
 }
 
 function loadData(){
-	
 	var flaskRequest = new Request();
 	params = {};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params, 
@@ -71,6 +70,7 @@ function loadData(){
 }
 
 function contextMenuHandler(menuItemText, rowData){
+	var args = event.args;
 	if (menuItemText  == "Edit") {
 		editEvent(rowData);
 		return false;
@@ -137,6 +137,7 @@ function editEvent(rowData) {
 			$("#infoTypeId").val($(this).attr("alt"));
 		})
 		fnShowEventLogo(repositoryId,rowData.eventId,$("#eventImage"), true);
+		createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);		
 }
 
 

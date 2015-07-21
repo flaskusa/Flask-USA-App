@@ -49,9 +49,8 @@ _eventDetailModel.GRID_CONTEXT_MENU = {
 
 _eventDetailModel.GRID_DATA_MODEL= {
 		EVENTDETAILS: 
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '40%' },
-      		 {text: 'Description', datafield: 'infoDesc', width: '40%'},
-      		 {text: 'Info Type', datafield: 'infoTypeName', width: '10%'},
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '45%' },
+      		 {text: 'Description', datafield: 'infoDesc', width: '45%'},
       		 { text: 'Edit',  datafield: 'eventDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _eventDetailModel.GRID_CONTEXT_MENU.EVENTDETAILS }]
 		};
 
@@ -89,6 +88,33 @@ _eventDetailModel.loadContentType = function(elementId,selectedId){
 					});
 	
 }
+
+_eventDetailModel.loadInfoType = function(elementId,selectedId){
+	var request = new Request();
+	var selectList = $('#' + elementId);
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_INFO_TYPES , {}, 
+					function (data){
+							selectList.empty();
+							selectList.append($("<option/>", {
+								value: 0,
+								text: '-Select content type-'
+							}));
+							$.each(data, function(key, Content) {
+								selectList.append($("<option/>", {
+									value: Content.infoTypeId,
+									text: Content.infoTypeName
+								}));
+							});
+							selectList.val(selectedId);
+							selectList.change();
+					} ,
+					function (data){
+						console.log("Error in getting infotype types: " + data );
+					});
+	
+}
+
 
 _eventDetailModel.FORM_DATA_MODEL = {
 		GENERAL:[{//GENERAL
