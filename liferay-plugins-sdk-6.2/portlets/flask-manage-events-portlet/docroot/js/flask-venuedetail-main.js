@@ -12,6 +12,7 @@ function addDetailsClickHandlers(){
 	
 	$(".cssAddVenueDetails").click(function(){
 		$("#venueDetailId").val(0);
+		_venueDetailModel.loadInfoType('infoTypeId',1);
 		_venueDetailModel.loadContentType('infoTypeCategoryId',1);
 		$("#venueDetailsForm").show();
 		$("#venueDetailsDataTable").hide();
@@ -31,13 +32,6 @@ function loadVenueDetailsData(venueId,infoTypeId){
 	params = {'venueId':venueId};
 	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_VENUE_DETAILS, params, 
 	function(data){/*success handler*/
-		console.log(data);
-		/*if(infoTypeId>0){
-		    var returnedData = $.grep(data, function(element, index){
-		    	return element.infoTypeId == infoTypeId;
-		    });
-		    data = returnedData;
-		}*/
 		GRID_PARAM_DETAILS.updateGrid(data);
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_venueDetailModel.MESSAGES.DETAIL_GET_ERROR);
@@ -298,6 +292,7 @@ function editVenueDetail(rowData) {
 		$('#_venueDetailId').val(rowData.venueDetailId);
 		$('#venueDetailsForm').show();
 		$('#venueDetailsDataTable').hide();
+		_venueDetailModel.loadInfoType('infoTypeId',rowData.infoTypeId);
 		_venueDetailModel.loadContentType('infoTypeCategoryId',rowData.infoTypeCategoryId);
 		setTimeout(function(){
 			_flaskLib.loadDataToForm("venueDetailsForm",  _venueDetailModel.DATA_MODEL.VENUEDETAILS, rowData, function(){});
@@ -433,3 +428,27 @@ function fnDeleteFileByEntryId(fileEntryId,objDel){
 		},
 		function (data){$("#spinningSquaresG").hide();});	
 }
+
+$(document).ready(function(){
+	$("#mcontents").click(function(){
+		addDetailsClickHandlers();
+		initDetailsForm();
+		loadVenueDetailsData($('#venueForm #venueId').val());
+		var click = new Date();
+		var lastClick = new Date();
+		var lastRow = -1;
+		$("#gridDetails").bind('rowclick', function (event) {
+		    click = new Date();
+		    if (click - lastClick < 300) {
+		        if (lastRow == event.args.rowindex) {
+		        	var row = event.args.rowindex;
+	        	 	var datarow = $(this).jqxGrid('getrowdata', row);
+	        	 	editVenueDetail(datarow);
+		        }
+		    }
+		    lastClick = new Date();
+		    lastRow = event.args.rowindex;
+		});
+		$("#venueDetailsContainer").show();
+	});
+});

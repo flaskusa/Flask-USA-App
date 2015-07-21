@@ -76,6 +76,7 @@ function loadData(){
 }
 
 function contextMenuHandler(menuItemText, rowData){
+	var args = event.args;
 	if (menuItemText  == "Edit") {
 		editVenue(rowData);
 		return false;
@@ -137,6 +138,7 @@ function editVenue(rowData) {
 		});
 		fnBuildVenueUpload(imageContainer);
 		fnShowVenueImages(rowData.venueId,$("#venueGallery"));
+		createDetailsTable({},_venueDetailModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
 }
 
 
@@ -304,5 +306,4 @@ function fnRenderImages(folderId,_divObj){
 
 function clearImageGallery(){
 	$(".eventLogo").remove();
-	$("#venueDetailGallery").html("HELLO WORLD");
 }

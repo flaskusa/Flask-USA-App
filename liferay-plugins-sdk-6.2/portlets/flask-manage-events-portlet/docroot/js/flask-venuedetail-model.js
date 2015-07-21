@@ -93,6 +93,33 @@ _venueDetailModel.loadContentType = function(elementId,selectedId){
 	
 }
 
+_venueDetailModel.loadInfoType = function(elementId,selectedId){
+	var request = new Request();
+	var selectList = $('#' + elementId);
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_INFO_TYPES , {}, 
+					function (data){
+							selectList.empty();
+							selectList.append($("<option/>", {
+								value: 0,
+								text: '-Select content type-'
+							}));
+							$.each(data, function(key, Content) {
+								selectList.append($("<option/>", {
+									value: Content.infoTypeId,
+									text: Content.infoTypeName
+								}));
+							});
+							selectList.val(selectedId);
+							selectList.change();
+					} ,
+					function (data){
+						console.log("Error in getting infotype types: " + data );
+					});
+	
+}
+
+
 _venueDetailModel.FORM_DATA_MODEL = {
 		GENERAL:[{//GENERAL
             "type":"text",

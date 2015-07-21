@@ -193,7 +193,8 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
                 rowdetailstemplate: GRID_PARAM_DETAILS.rowDetailTemplate(rowDetailDivArr , 200),
                 initrowdetails: GRID_PARAM_DETAILS.initrowdetails,
                 columns: Columns,
-                groups: ['infoTypeId']
+                groups: ['infoTypeId'],
+                groupsexpandedbydefault:true
             });
     
 	}
