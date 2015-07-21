@@ -144,7 +144,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 				$(rightcolumn).append("<table>");		
 				fnShowEventLogo(_repositoryId,datarecord.eventId,leftcolumn,false)
 				var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
-						+ datarecord.venueId + "</td></tr>";
+						+ datarecord.venueName + "</td></tr>";
 				var EventDate = "<tr><td class='filledWidth1'><b>Event Date:</b></td><td> "
 					+ GRID_PARAM.formatDate(d) + "</td></tr>";		
 				var StartTime = "<tr><td class='filledWidth1'><b>Start Time:</b></td><td> "
