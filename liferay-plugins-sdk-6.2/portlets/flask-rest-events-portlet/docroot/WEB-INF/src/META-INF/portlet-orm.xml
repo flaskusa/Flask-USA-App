@@ -173,6 +173,7 @@
 			<basic name="infoTypeId" />
 			<basic name="infoTypeName" />
 			<basic name="infoTypeCategoryId" />
+			<basic name="infoTypeCategoryName" />
 			<basic name="infoTitle" />
 			<basic name="infoDesc" />
 			<basic name="addrLine1" />

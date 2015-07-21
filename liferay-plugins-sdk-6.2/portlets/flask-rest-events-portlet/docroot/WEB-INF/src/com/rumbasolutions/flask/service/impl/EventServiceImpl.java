@@ -63,7 +63,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		List<Event> events= new ArrayList<Event>();
 		try {
 			events =  EventUtil.findAll();
-			events = FlaskUtil.setVenueName(events);
+			events = FlaskUtil.setStringNamesForEvents(events);
 		}
 		catch (Exception e) {
 			LOGGER.error("Exception in getAllEvents. " + e.getMessage());
@@ -246,6 +246,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		EventDetail eventDetail = null;
 		try{
 			eventDetail = EventDetailUtil.fetchByPrimaryKey(eventDetailId);
+			eventDetail = FlaskUtil.setNamesForEventDetail(eventDetail);
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
@@ -257,6 +258,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		List<EventDetail> eventDetails = null;
 		try{
 			eventDetails = EventDetailUtil.findByEventId(eventId);
+			eventDetails = FlaskUtil.setNamesForEventDetail(eventDetails);
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}

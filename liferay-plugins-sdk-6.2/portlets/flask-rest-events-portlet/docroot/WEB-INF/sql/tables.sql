@@ -105,6 +105,7 @@ create table flaskevents_VenueDetail (
 	infoTypeId LONG,
 	infoTypeName VARCHAR(75) null,
 	infoTypeCategoryId LONG,
+	infoTypeCategoryName VARCHAR(75) null,
 	infoTitle VARCHAR(75) null,
 	infoDesc VARCHAR(75) null,
 	addrLine1 VARCHAR(75) null,

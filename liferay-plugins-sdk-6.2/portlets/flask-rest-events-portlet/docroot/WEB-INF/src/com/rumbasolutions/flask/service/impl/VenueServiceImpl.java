@@ -66,7 +66,8 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	public List<Venue> getAllVenues(ServiceContext  serviceContext){
 		List<Venue> venue = new ArrayList<Venue>();
 		try {
-			return  VenueUtil.findAll();
+			venue = VenueUtil.findAll();
+			venue = FlaskUtil.setVenueStringValues(venue);
 		}
 		catch (SystemException e) {
 			LOGGER.error("Exception in getAllVenues. " + e.getMessage());
@@ -355,6 +356,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		VenueDetail venueDetail = null;
 		try{
 			venueDetail = VenueDetailUtil.fetchByPrimaryKey(venueDetailId);
+			venueDetail = FlaskUtil.setNamesForVenueDetail(venueDetail);
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
@@ -367,6 +369,8 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		List<VenueDetail> venueDetails = null;
 		try{
 			venueDetails = VenueDetailUtil.findByVenueId(venueId);
+			venueDetails = FlaskUtil.setNamesForVenueDetail(venueDetails);
+			
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}

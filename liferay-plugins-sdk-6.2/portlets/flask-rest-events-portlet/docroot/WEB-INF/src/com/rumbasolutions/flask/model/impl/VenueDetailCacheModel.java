@@ -38,7 +38,7 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(51);
+		StringBundler sb = new StringBundler(53);
 
 		sb.append("{venueDetailId=");
 		sb.append(venueDetailId);
@@ -58,6 +58,8 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		sb.append(infoTypeName);
 		sb.append(", infoTypeCategoryId=");
 		sb.append(infoTypeCategoryId);
+		sb.append(", infoTypeCategoryName=");
+		sb.append(infoTypeCategoryName);
 		sb.append(", infoTitle=");
 		sb.append(infoTitle);
 		sb.append(", infoDesc=");
@@ -128,6 +130,13 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		}
 
 		venueDetailImpl.setInfoTypeCategoryId(infoTypeCategoryId);
+
+		if (infoTypeCategoryName == null) {
+			venueDetailImpl.setInfoTypeCategoryName(StringPool.BLANK);
+		}
+		else {
+			venueDetailImpl.setInfoTypeCategoryName(infoTypeCategoryName);
+		}
 
 		if (infoTitle == null) {
 			venueDetailImpl.setInfoTitle(StringPool.BLANK);
@@ -242,6 +251,7 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		infoTypeId = objectInput.readLong();
 		infoTypeName = objectInput.readUTF();
 		infoTypeCategoryId = objectInput.readLong();
+		infoTypeCategoryName = objectInput.readUTF();
 		infoTitle = objectInput.readUTF();
 		infoDesc = objectInput.readUTF();
 		addrLine1 = objectInput.readUTF();
@@ -279,6 +289,13 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		}
 
 		objectOutput.writeLong(infoTypeCategoryId);
+
+		if (infoTypeCategoryName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(infoTypeCategoryName);
+		}
 
 		if (infoTitle == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
@@ -387,6 +404,7 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 	public long infoTypeId;
 	public String infoTypeName;
 	public long infoTypeCategoryId;
+	public String infoTypeCategoryName;
 	public String infoTitle;
 	public String infoDesc;
 	public String addrLine1;

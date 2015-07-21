@@ -136,6 +136,7 @@
 		<property name="infoTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="infoTypeName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoTypeCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="infoTypeCategoryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="addrLine1" type="com.liferay.portal.dao.orm.hibernate.StringType" />

@@ -252,6 +252,7 @@
         <column name="infoTypeId" type="long" />
         <column name="infoTypeName" type="String" />
         <column name="infoTypeCategoryId" type="long" />
+        <column name="infoTypeCategoryName" type="String" />
         <column name="infoTitle" type="String" />
         <column name="infoDesc" type="String" />
         <column name="addrLine1" type="String" />

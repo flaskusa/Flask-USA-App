@@ -203,6 +203,21 @@ public interface VenueDetailModel extends BaseModel<VenueDetail> {
 	public void setInfoTypeCategoryId(long infoTypeCategoryId);
 
 	/**
+	 * Returns the info type category name of this venue detail.
+	 *
+	 * @return the info type category name of this venue detail
+	 */
+	@AutoEscape
+	public String getInfoTypeCategoryName();
+
+	/**
+	 * Sets the info type category name of this venue detail.
+	 *
+	 * @param infoTypeCategoryName the info type category name of this venue detail
+	 */
+	public void setInfoTypeCategoryName(String infoTypeCategoryName);
+
+	/**
 	 * Returns the info title of this venue detail.
 	 *
 	 * @return the info title of this venue detail

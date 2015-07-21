@@ -101,6 +101,7 @@
 		<field name="infoTypeId" type="long" />
 		<field name="infoTypeName" type="String" />
 		<field name="infoTypeCategoryId" type="long" />
+		<field name="infoTypeCategoryName" type="String" />
 		<field name="infoTitle" type="String" />
 		<field name="infoDesc" type="String" />
 		<field name="addrLine1" type="String" />
