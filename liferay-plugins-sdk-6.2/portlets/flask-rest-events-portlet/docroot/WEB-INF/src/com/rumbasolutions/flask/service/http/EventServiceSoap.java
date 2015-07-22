@@ -79,8 +79,8 @@ public class EventServiceSoap {
 
 	public static com.rumbasolutions.flask.model.EventSoap addEvent(
 		java.lang.String eventName, java.lang.String description,
-		java.lang.String eventDate, java.lang.String startTime,
-		java.lang.String endTime, long eventTypeId, long venueId,
+		java.lang.String eventDate, java.util.Date startTime,
+		java.util.Date endTime, long eventTypeId, long venueId,
 		java.lang.String eventImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -100,8 +100,8 @@ public class EventServiceSoap {
 
 	public static com.rumbasolutions.flask.model.EventSoap updateEvent(
 		long eventId, java.lang.String eventName, java.lang.String description,
-		java.lang.String eventDate, java.lang.String startTime,
-		java.lang.String endTime, long eventTypeId, long venueId,
+		java.lang.String eventDate, java.util.Date startTime,
+		java.util.Date endTime, long eventTypeId, long venueId,
 		java.lang.String eventImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {

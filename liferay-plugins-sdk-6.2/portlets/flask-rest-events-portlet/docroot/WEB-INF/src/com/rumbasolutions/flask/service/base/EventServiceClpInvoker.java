@@ -42,7 +42,7 @@ public class EventServiceClpInvoker {
 
 		_methodParameterTypes79 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "long", "long",
+				"java.util.Date", "java.util.Date", "long", "long",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
@@ -50,8 +50,8 @@ public class EventServiceClpInvoker {
 
 		_methodParameterTypes80 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"long", "long", "java.lang.String",
+				"java.lang.String", "java.util.Date", "java.util.Date", "long",
+				"long", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -169,7 +169,7 @@ public class EventServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
 			return EventServiceUtil.addEvent((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				(java.util.Date)arguments[3], (java.util.Date)arguments[4],
 				((Long)arguments[5]).longValue(),
 				((Long)arguments[6]).longValue(),
 				(java.lang.String)arguments[7],
@@ -180,9 +180,8 @@ public class EventServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
 			return EventServiceUtil.updateEvent(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
-				(java.lang.String)arguments[5],
-				((Long)arguments[6]).longValue(),
+				(java.lang.String)arguments[3], (java.util.Date)arguments[4],
+				(java.util.Date)arguments[5], ((Long)arguments[6]).longValue(),
 				((Long)arguments[7]).longValue(),
 				(java.lang.String)arguments[8],
 				(com.liferay.portal.service.ServiceContext)arguments[9]);

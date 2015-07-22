@@ -42,7 +42,7 @@ public class EventServiceClp implements EventService {
 
 		_methodParameterTypes4 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "long", "long",
+				"java.util.Date", "java.util.Date", "long", "long",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
@@ -50,8 +50,8 @@ public class EventServiceClp implements EventService {
 
 		_methodParameterTypes5 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"long", "long", "java.lang.String",
+				"java.lang.String", "java.util.Date", "java.util.Date", "long",
+				"long", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -224,8 +224,8 @@ public class EventServiceClp implements EventService {
 	@Override
 	public com.rumbasolutions.flask.model.Event addEvent(
 		java.lang.String eventName, java.lang.String description,
-		java.lang.String eventDate, java.lang.String startTime,
-		java.lang.String endTime, long eventTypeId, long venueId,
+		java.lang.String eventDate, java.util.Date startTime,
+		java.util.Date endTime, long eventTypeId, long venueId,
 		java.lang.String eventImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
@@ -271,8 +271,8 @@ public class EventServiceClp implements EventService {
 	@Override
 	public com.rumbasolutions.flask.model.Event updateEvent(long eventId,
 		java.lang.String eventName, java.lang.String description,
-		java.lang.String eventDate, java.lang.String startTime,
-		java.lang.String endTime, long eventTypeId, long venueId,
+		java.lang.String eventDate, java.util.Date startTime,
+		java.util.Date endTime, long eventTypeId, long venueId,
 		java.lang.String eventImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;

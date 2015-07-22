@@ -72,15 +72,15 @@ public interface EventService extends BaseService, InvokableService {
 
 	public com.rumbasolutions.flask.model.Event addEvent(
 		java.lang.String eventName, java.lang.String description,
-		java.lang.String eventDate, java.lang.String startTime,
-		java.lang.String endTime, long eventTypeId, long venueId,
+		java.lang.String eventDate, java.util.Date startTime,
+		java.util.Date endTime, long eventTypeId, long venueId,
 		java.lang.String eventImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.Event updateEvent(long eventId,
 		java.lang.String eventName, java.lang.String description,
-		java.lang.String eventDate, java.lang.String startTime,
-		java.lang.String endTime, long eventTypeId, long venueId,
+		java.lang.String eventDate, java.util.Date startTime,
+		java.util.Date endTime, long eventTypeId, long venueId,
 		java.lang.String eventImagePath,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
