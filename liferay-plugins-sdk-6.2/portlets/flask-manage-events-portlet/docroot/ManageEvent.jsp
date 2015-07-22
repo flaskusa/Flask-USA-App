@@ -121,8 +121,6 @@ function initialize(portletId, portlet){
 			   <div id="contentTypeForm">
 			   		Please select content type.
 			   </div>
-			  
-			  <input id="eventId" type="hidden" value="0">
 			  <input id="infoTypeId" type="hidden" value="1">
 			  <input id="eventDetailId" type="hidden" name="eventDetailId" value="0">
 			  <input class="btn btn-info cssVdSave" type="button" value="Save"/>
