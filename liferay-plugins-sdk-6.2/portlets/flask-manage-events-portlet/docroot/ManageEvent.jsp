@@ -38,8 +38,8 @@ function initialize(portletId, portlet){
 
 <body class='default'>
 <input type="hidden" id="repositoryId" value="<%=repositoryId%>"/>
-<div id="action-msg" style="display:none">
-</div>
+<div id="action-msg-warning" style="display:none"></div>
+<div id="action-msg" style="display:none"></div>
 <div id='formContainer' style="display:none">
 	<ul class="nav nav-tabs">
 	  <li><a href="#events" data-toggle="tab">Manage Events</a></li>
