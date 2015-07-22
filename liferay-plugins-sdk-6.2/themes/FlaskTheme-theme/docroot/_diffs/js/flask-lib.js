@@ -1,4 +1,7 @@
 var _flaskLib = {};
+
+_flaskLib.GRID_GROUP_EXPAND = true;
+
 _flaskLib.SERVICE_ENDPOINTS = {
 				API_PREFIX					:"/api/jsonws",
 				GET_COUNTRIES 				: "/flask-rest-users-portlet.flaskadmin/get-countries",
@@ -133,6 +136,13 @@ _flaskLib.showSuccessMessage = function (elementId, msg){
 	ele.removeClass().addClass('alert alert-success');
 	ele.show();
 }
+_flaskLib.showWarningMessage = function (elementId, msg){
+	var ele = $('#'+ elementId);
+	ele.text(msg);
+	ele.removeClass().addClass('alert alert-warning');
+	ele.show();
+}
+
 
 _flaskLib.hideMessage = function (elementId){
 	var ele = $('#'+ elementId);
