@@ -20,6 +20,8 @@ function addDetailsClickHandlers(){
 		_eventDetailModel.loadContentType('infoTypeCategoryId',1);
 		$("#eventDetailsForm").show();
 		$("#eventDetailsDataTable").hide();
+		$("#eventDetailGallery").html("");
+		
 	});	
 
 	$(".cssVdCancel").click(function(){
@@ -209,16 +211,16 @@ function saveEventDetails(){
 	flaskRequest.sendGETRequest(url, params, 
 				function (data){
 					_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);
-					loadEventDetailsData(data.eventId);
 					if($('.dz-image').length > 0) {					
-						fnSaveImages(data.eventDetailId);
+						fnSaveImages(data.eventDetailId,data.eventId);
 					}
 					else{
 						$('#eventDetailsForm').hide();
 						$('#eventDetailsDataTable').show();
 			    		$("#eventDetailId").val(0);
 			    		$("#infoTypeCategoryId").val(0);
-			    		$("#infoTypeCategoryId").change();
+			    		//$("#infoTypeCategoryId").change();
+			    		loadEventDetailsData(data.eventId);			    		
 					}
 						
 				} ,
@@ -284,17 +286,19 @@ function formatUnixToTime(tdate){var date = new Date(tdate);
 	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
 
-function fnSaveImages(eventDetailId){
+function fnSaveImages(eventDetailId,eventId){
 	$("#_eventDetailId").val(eventDetailId);
+	console.log(eventDetailId);
 	dropZone.options.autoProcessQueue = true;
 	dropZone.processQueue();
 	dropZone.on("queuecomplete", function (file) {
     	wait(function(){
-    		$('#eventDetailsForm').hide();
+			$('#eventDetailsForm').hide();
 			$('#eventDetailsDataTable').show();
     		$("#eventDetailId").val(0);
     		$("#infoTypeCategoryId").val(0);
-    		$("#infoTypeCategoryId").change();
+    		//$("#infoTypeCategoryId").change();
+    		loadEventDetailsData(eventId);		    		
     	},1)					
     });	
 }

@@ -178,7 +178,8 @@ function saveEvent(){
 			}
 		flaskRequest.sendGETRequest(url, params, 
 					function (data){
-						var IsNew = false; 
+						var IsNew = false;
+						$("#eventForm #eventId").val(data.eventId);						
 						_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.SAVE);
 						if(parseInt(params.eventId) == 0 && parseInt(data.eventId) > 0){
 							$("#mcontents").attr("data-toggle","tab");

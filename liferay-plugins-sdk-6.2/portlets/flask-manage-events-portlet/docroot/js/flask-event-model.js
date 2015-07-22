@@ -49,12 +49,6 @@ _eventModel.MESSAGES= {
 		ERROR: "There was an error in saving Event",
 		DEL_SUCCESS: "Event successfully deleted",
 		DEL_ERR: "Error in deleting Event",
-		V_GET_ERROR: "There was an error in getting data",
-		V_ADD: "Venue details successfully added",
-		V_SAVE: "Venue successfully saved",
-		V_ERROR: "There was an error in saving details",
-		V_DEL_SUCCESS: "Venue details successfully deleted",
-		V_DEL_ERR: "Error in deleting venue details",
 		ADD_EVENT_FIRST_ERR: "Please save event first"
  };
 
