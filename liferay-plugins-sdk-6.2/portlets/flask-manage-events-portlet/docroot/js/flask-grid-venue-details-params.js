@@ -16,7 +16,7 @@ GRID_PARAM_DETAILS.source = function(model, data){
 GRID_PARAM_DETAILS.updateGrid = function(data){
 	var dataAdapter =  new $.jqx.dataAdapter(GRID_PARAM_DETAILS.source(_dataModel, data));
 	gridObj.jqxGrid({ source: dataAdapter });
-	gridObj.jqxGrid('addgroup', 'infoTypeName');
+	gridObj.jqxGrid('addgroup', 'infoTypeId');
 	
 }
 GRID_PARAM_DETAILS.toggleSelectionMode= function(){
@@ -170,7 +170,7 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 	});
 	
 	var groupsrenderer = function (text, group, expanded, data) {
-		return '<div style="padding: 5px; float: left; font-weight: bold;">' + group + '</div>';
+		return '<div style="padding: 5px; float: left; font-weight: bold;">' + data.subItems[0].infoTypeName + '</div>';
 	}
 	var dataAdapter = new $.jqx.dataAdapter(GRID_PARAM_DETAILS.source(model, data));
     grid.jqxGrid(

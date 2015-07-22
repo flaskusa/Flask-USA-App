@@ -51,9 +51,8 @@ _venueDetailModel.GRID_CONTEXT_MENU = {
 
 _venueDetailModel.GRID_DATA_MODEL= {
 		VENUEDETAILS: 
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '40%' },
-      		 {text: 'Description', datafield: 'infoDesc', width: '40%'},
-      		 {text: 'Info Type', datafield: 'infoTypeName', width: '10%'},
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '45%' },
+      		 {text: 'Description', datafield: 'infoDesc', width: '45%'},
       		 { text: 'Edit',  datafield: 'venueDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _venueDetailModel.GRID_CONTEXT_MENU.VENUEDETAILS }
       		 ]
 		};

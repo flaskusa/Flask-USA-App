@@ -47,7 +47,6 @@ function contextMenuHandlerDetails(menuItemText, rowData){
 		var a = window.confirm("Are you sure ?");
 		if (a) {
 			deleteVenueDetail(rowData.venueDetailId, rowData.venueId, rowData.infoTypeId);
-			GRID_PARAM_DETAILS.updateGrid(data);
 		}
 		return false;			
 	}
@@ -266,8 +265,6 @@ function deleteVenueDetail(venueDetailId, venueId, infoTypeId) {
 		flaskRequest.sendPOSTRequest(_venueDetailModel.SERVICE_ENDPOINTS.DELETE_VENUE_DETAIL , param, 
 			function (data){
 					_flaskLib.showSuccessMessage('action-msg', _venueDetailModel.MESSAGES.DETAIL_DEL_SUCCESS);
-					createDetailsTable({},_venueDetailModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
-					//Change
 					loadVenueDetailsData(venueId,infoTypeId);
 			} ,
 			function (data){
