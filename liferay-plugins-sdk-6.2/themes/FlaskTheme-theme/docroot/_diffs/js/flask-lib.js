@@ -137,12 +137,23 @@ _flaskLib.showSuccessMessage = function (elementId, msg){
 	ele.show();
 }
 _flaskLib.showWarningMessage = function (elementId, msg){
-	var ele = $('#'+ elementId);
+	if(typeof elementId=="object")
+		var ele = $(elementId);
+	else
+		var ele = $('#'+ elementId);
 	ele.text(msg);
 	ele.removeClass().addClass('alert alert-warning');
 	ele.show();
 }
-
+_flaskLib.showInformationMessage = function (elementId, msg){
+	if(typeof elementId=="object")
+		var ele = $(elementId);
+	else
+		var ele = $('#'+ elementId);
+	ele.text(msg);
+	ele.removeClass().addClass('alert alert-info');
+	ele.show();
+}
 
 _flaskLib.hideMessage = function (elementId){
 	var ele = $('#'+ elementId);
