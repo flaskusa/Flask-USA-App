@@ -210,7 +210,6 @@ function saveEventDetails(){
 		}
 	flaskRequest.sendGETRequest(url, params, 
 				function (data){
-					_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);
 					if($('.dz-image').length > 0) {					
 						fnSaveImages(data.eventDetailId,data.eventId);
 					}
@@ -219,8 +218,8 @@ function saveEventDetails(){
 						$('#eventDetailsDataTable').show();
 			    		$("#eventDetailId").val(0);
 			    		$("#infoTypeCategoryId").val(0);
-			    		//$("#infoTypeCategoryId").change();
-			    		loadEventDetailsData(data.eventId);			    		
+			    		loadEventDetailsData(data.eventId);
+			    		_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);
 					}
 						
 				} ,
@@ -288,7 +287,6 @@ function formatUnixToTime(tdate){var date = new Date(tdate);
 
 function fnSaveImages(eventDetailId,eventId){
 	$("#_eventDetailId").val(eventDetailId);
-	console.log(eventDetailId);
 	dropZone.options.autoProcessQueue = true;
 	dropZone.processQueue();
 	dropZone.on("queuecomplete", function (file) {
@@ -297,8 +295,8 @@ function fnSaveImages(eventDetailId,eventId){
 			$('#eventDetailsDataTable').show();
     		$("#eventDetailId").val(0);
     		$("#infoTypeCategoryId").val(0);
-    		//$("#infoTypeCategoryId").change();
-    		loadEventDetailsData(eventId);		    		
+    		loadEventDetailsData(eventId);		
+    		_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);    		
     	},1)					
     });	
 }
