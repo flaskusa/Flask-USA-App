@@ -241,8 +241,15 @@ function saveVenueDetails(){
 				function (data){
 					_flaskLib.showSuccessMessage('action-msg', _venueDetailModel.MESSAGES.DETAIL_SAVE);
 					loadVenueDetailsData(data.venueId,data.infoTypeId);
-					if($('#venueImages').is(':visible')) {					
+					if($('.dz-image').length > 0) {					
 						fnSaveImages(data.venueDetailId);
+					}
+					else{
+						$('#venueDetailsForm').hide();
+			    		$('#venueDetailsDataTable').show();
+			    		$("#venueDetailId").val(0);
+			    		$("#infoTypeCategoryId").val(0);
+			    		$("#infoTypeCategoryId").change();
 					}
 				} ,
 				function (data){

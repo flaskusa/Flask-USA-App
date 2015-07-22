@@ -204,9 +204,17 @@ function saveEventDetails(){
 				function (data){
 					_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);
 					loadEventDetailsData(data.eventId);
-					if($('#eventImages').is(':visible')) {					
+					if($('.dz-image').length > 0) {					
 						fnSaveImages(data.eventDetailId);
 					}
+					else{
+						$('#eventDetailsForm').hide();
+						$('#eventDetailsDataTable').show();
+			    		$("#eventDetailId").val(0);
+			    		$("#infoTypeCategoryId").val(0);
+			    		$("#infoTypeCategoryId").change();
+					}
+						
 				} ,
 				function (data){
 					_flaskLib.showErrorMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_ERROR);
@@ -277,7 +285,7 @@ function fnSaveImages(eventDetailId){
 	dropZone.on("queuecomplete", function (file) {
     	wait(function(){
     		$('#eventDetailsForm').hide();
-    		$('#eventDetailsDataTable').show();
+			$('#eventDetailsDataTable').show();
     		$("#eventDetailId").val(0);
     		$("#infoTypeCategoryId").val(0);
     		$("#infoTypeCategoryId").change();

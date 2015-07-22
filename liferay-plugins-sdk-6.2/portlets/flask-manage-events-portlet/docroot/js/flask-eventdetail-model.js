@@ -330,7 +330,7 @@ _eventDetailModel.FORM_DATA_MODEL = {
             "id":"website",
             "value":"",
             "placeholder":"",
-            "maxlength":"10",
+            "maxlength":"30",
             "Class":""
             }]
         },
@@ -341,7 +341,7 @@ _eventDetailModel.FORM_DATA_MODEL = {
             "id":"infoDesc",
             "value":"",
             "placeholder":"",
-            "maxlength":"10",
+            "maxlength":"255",
             "Class":""
             }]
         }],
