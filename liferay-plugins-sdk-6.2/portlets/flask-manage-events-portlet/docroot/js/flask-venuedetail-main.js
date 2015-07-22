@@ -245,16 +245,16 @@ function saveVenueDetails(){
 	flaskRequest.sendGETRequest(url, params, 
 				function (data){
 					_flaskLib.showSuccessMessage('action-msg', _venueDetailModel.MESSAGES.DETAIL_SAVE);
-					loadVenueDetailsData(data.venueId,data.infoTypeId);
 					if($('.dz-image').length > 0) {					
-						fnSaveImages(data.venueDetailId);
+						fnSaveImages(data.venueDetailId, data.infoType);
 					}
 					else{
 						$('#venueDetailsForm').hide();
 			    		$('#venueDetailsDataTable').show();
 			    		$("#venueDetailId").val(0);
 			    		$("#infoTypeCategoryId").val(0);
-			    		$("#infoTypeCategoryId").change();
+			    		//$("#infoTypeCategoryId").change();
+			    		loadVenueDetailsData(data.venueId,data.infoTypeId);
 					}
 				} ,
 				function (data){
@@ -317,7 +317,7 @@ function formatUnixToTime(tdate){var date = new Date(tdate);
 	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
 
-function fnSaveImages(venueDetailId){
+function fnSaveImages(venueDetailId, infoTypeId){
 	$("#_venueDetailId").val(venueDetailId);
 	dropZone.options.autoProcessQueue = true;
 	dropZone.processQueue();
@@ -327,7 +327,8 @@ function fnSaveImages(venueDetailId){
     		$('#venueDetailsDataTable').show();
     		$("#venueDetailId").val(0);
     		$("#infoTypeCategoryId").val(0);
-    		$("#infoTypeCategoryId").change();
+    		//$("#infoTypeCategoryId").change();
+    		loadVenueDetailsData($('#venueForm #venueId').val(),infoTypeId);
     	},1)					
     });	
 }
