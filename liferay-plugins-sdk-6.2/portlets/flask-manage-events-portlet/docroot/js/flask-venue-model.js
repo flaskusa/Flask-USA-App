@@ -44,6 +44,7 @@ _venueModel.MESSAGES= {
 		ERROR: "There was an error in saving venue",
 		DEL_SUCCESS: "Venue successfully deleted",
 		DEL_ERR: "Error in deleting venue",
+		ADD_VENUE_FIRST_ERR: "Please save event first"
  };
 
 _venueModel.loadContentType = function(elementId,selectedId){

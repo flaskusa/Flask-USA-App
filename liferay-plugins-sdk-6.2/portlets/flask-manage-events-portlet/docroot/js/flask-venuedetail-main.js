@@ -42,6 +42,7 @@ function loadVenueDetailsData(venueId,infoTypeId){
 		_flaskLib.showErrorMessage('action-msg',_venueDetailModel.MESSAGES.DETAIL_GET_ERROR);
 		console.log("Error in getting data: " + error);
 	});
+	$("#action-msg-warning").hide();
 }
 
 function contextMenuHandlerDetails(menuItemText, rowData){
@@ -121,7 +122,7 @@ $(document).ready(function(){
             hintType: 'label',
             animationDuration: 0,
             rules: [
-                    	{ input: '#infoTitle', message: 'Info Title is required!', action: 'keyup, blur', rule: 'required' },
+                    	{ input: '#infoTitle', message: 'Info Title is required!', action: 'keyup, blur', rule: 'required' }
                     	//{ input: '#infoDesc', message: 'Info Description is required!', action: 'keyup, blur', rule: 'required' }
                    ]
         });    
