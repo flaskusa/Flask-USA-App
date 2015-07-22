@@ -1,11 +1,15 @@
 var eventDetailForm;
 var dropZone;
 var JsonObj;
+var JsonEventDetails;
 
 function addDetailsClickHandlers(){
 	eventDetailForm = $("#eventForm");
 	/*	Initialize display elements*/
 	$(".cssVdSave").click(function(){
+		if(fnCheckDuplicateTitle($("#infoTitle").val())){
+			_flaskLib.showWarningMessage('action-msg-warning', _eventDetailModel.MESSAGES.DETAIL_DUPLICATE);
+		}
 		if($('#eventDetailsForm').jqxValidator('validate'))
 		saveEventDetails();
 	});	
@@ -31,6 +35,7 @@ function loadEventDetailsData(eventId){
 	params = {'eventId':eventId};
 	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_EVENT_DETAILS, params, 
 	function(data){/*success handler*/
+		JsonEventDetails = data;
 		GRID_PARAM_DETAILS.updateGrid(data);
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_eventDetailModel.MESSAGES.DETAIL_GET_ERROR);
@@ -424,3 +429,22 @@ $(document).ready(function(){
 		$("#eventDetailsContainer").show();
 	});
 });
+
+function fnCheckDuplicateTitle(_infoTitle){
+	if(typeof JsonEventDetails=="object"){
+		var Obj = JsonEventDetails;
+		var iCount = 0;
+	    var items = Obj.filter(function(item) {
+	    	if(item.infoTitle==_infoTitle){
+	    		iCount++;
+	    	}
+	    });
+	    if(iCount>0)
+	    	return true;
+	    else
+	    	return false;
+	}
+	else{
+		return false;
+	}
+}

@@ -60,7 +60,8 @@ _eventDetailModel.MESSAGES= {
 		DETAIL_SAVE: "Event Details successfully saved",
 		DETAIL_ERROR: "There was an error in saving details",
 		DETAIL_DEL_SUCCESS: "Event details successfully deleted",
-		DETAIL_DEL_ERR: "Error in deleting event details"
+		DETAIL_DEL_ERR: "Error in deleting event details",
+		DETAIL_DUPLICATE: "Event detail with same title already exist"
  };
 
 _eventDetailModel.loadContentType = function(elementId,selectedId){
