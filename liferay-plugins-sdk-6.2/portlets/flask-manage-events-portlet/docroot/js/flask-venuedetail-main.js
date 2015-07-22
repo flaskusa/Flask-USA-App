@@ -1,11 +1,15 @@
 var venueDetailForm;
 var dropZone;
 var JsonObj;
+var JsonEventDetails;
 
 function addDetailsClickHandlers(){
 	venueDetailForm = $("#venueDetailsForm");
 	/*	Initialize display elements*/
 	$(".cssVdSave").click(function(){
+		 if(fnCheckDuplicateTitle($("#infoTitle").val())){
+			   _flaskLib.showWarningMessage('action-msg-warning', _venueDetailModel.MESSAGES.DETAIL_DUPLICATE);
+			  }
 		if($('#venueDetailsForm').jqxValidator('validate'))
 		saveVenueDetails();
 	});	
@@ -32,6 +36,7 @@ function loadVenueDetailsData(venueId,infoTypeId){
 	params = {'venueId':venueId};
 	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_VENUE_DETAILS, params, 
 	function(data){/*success handler*/
+		JsonEventDetails = data;
 		GRID_PARAM_DETAILS.updateGrid(data);
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_venueDetailModel.MESSAGES.DETAIL_GET_ERROR);
@@ -363,15 +368,15 @@ function fnShowSlider(_venueId,_divObj,_venueDetailId,_infoTypeId,_infoTypeCateg
 										function (data){
 											fnRenderSlider(data.folderId,_divObj);
 										} ,
-										function (data){console.log(5);});
+										function (data){ _flaskLib.showInformationMessage(_divObj, _venueDetailModel.MESSAGES.DETAIL_NO_IMAGES_INFO); });
 								} ,
-								function (data){console.log(4);});
+								function (data){ _flaskLib.showInformationMessage(_divObj, _venueDetailModel.MESSAGES.DETAIL_NO_IMAGES_INFO); });
 						} ,
-						function (data){console.log(3);});
+						function (data){ _flaskLib.showInformationMessage(_divObj, _venueDetailModel.MESSAGES.DETAIL_NO_IMAGES_INFO); });
 				} ,
-				function (data){console.log(2);});
+				function (data){ _flaskLib.showInformationMessage(_divObj, _venueDetailModel.MESSAGES.DETAIL_NO_IMAGES_INFO); });
 		} ,
-		function (data){console.log(1);});
+		function (data){ _flaskLib.showInformationMessage(_divObj, _venueDetailModel.MESSAGES.DETAIL_NO_IMAGES_INFO); });
 }
 
 function fnRenderSlider(folderId,_divObj){
@@ -456,3 +461,22 @@ $(document).ready(function(){
 		$("#venueDetailsContainer").show();
 	});
 });
+
+function fnCheckDuplicateTitle(_infoTitle){
+	 if(typeof JsonVenueDetails=="object"){
+	  var Obj = JsonVenueDetails;
+	  var iCount = 0;
+	     var items = Obj.filter(function(item) {
+		      if(item.infoTitle==_infoTitle){
+		    	  iCount++;
+		      }
+	     });
+	     if(iCount>0)
+	    	 return true;
+	     else
+	    	 return false;
+	 }
+	 else{
+		 return false;
+	 }
+}

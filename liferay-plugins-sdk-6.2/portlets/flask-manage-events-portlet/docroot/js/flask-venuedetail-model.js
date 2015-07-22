@@ -26,6 +26,7 @@ _venueDetailModel.DATA_MODEL= {
 	             { name: 'infoTypeId', type: 'long' },
 	             { name: 'infoTypeName', type: 'string' },
 	             { name: 'infoTypeCategoryId', type: 'long' },
+	             { name: 'infoTypeCategoryName', type: 'string' },
 				 { name: 'infoTitle', type: 'string' },
 				 { name: 'infoDesc', type: 'string' },
 				 { name: 'addrLine1', type: 'string'},
@@ -51,8 +52,9 @@ _venueDetailModel.GRID_CONTEXT_MENU = {
 
 _venueDetailModel.GRID_DATA_MODEL= {
 		VENUEDETAILS: 
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '45%' },
-      		 {text: 'Description', datafield: 'infoDesc', width: '45%'},
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '35%' },
+      		 {text: 'Description', datafield: 'infoDesc', width: '35%'},
+      		 {text: 'Content Type', datafield: 'infoTypeCategoryName', width: '20%'},
       		 { text: 'Edit',  datafield: 'venueDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _venueDetailModel.GRID_CONTEXT_MENU.VENUEDETAILS }
       		 ]
 		};
@@ -63,7 +65,9 @@ _venueDetailModel.MESSAGES= {
 		DETAIL_SAVE: "Venue Details successfully saved",
 		DETAIL_ERROR: "There was an error in saving details",
 		DETAIL_DEL_SUCCESS: "Venue details successfully deleted",
-		DETAIL_DEL_ERR: "Error in deleting venue details"
+		DETAIL_DEL_ERR: "Error in deleting venue details",
+		DETAIL_DUPLICATE: "Venue detail with same title already exist",
+		DETAIL_NO_IMAGES_INFO: "No images found"
  };
 
 _venueDetailModel.loadContentType = function(elementId,selectedId){
