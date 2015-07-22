@@ -46,15 +46,7 @@ function initialize(portletId, portlet){
 <div id='formContainer' style="display:none">
 	<ul class="nav nav-tabs">
 	  <li><a href="#venues" data-toggle="tab">Manage Venue</a></li>
-	  <li class="dropdown">
-	  	<a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage Content<b class="caret"></b></a>
-	    <ul class="dropdown-menu">
-	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="1">General</a></li>
-	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="2">Pre-Event</a></li>
-	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="3">During-Event</a></li>
-	    	<li class=""><a href="#contents" data-toggle="tab" class="infoTypeCat" data-value="4">Post-Event</a></li>
-	    </ul>
-	  </li>  
+	  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Content</a></li>  
 	</ul>
 	<div class="tab-content">
 	  <div class="tab-pane active" id="venues">
@@ -142,13 +134,18 @@ function initialize(portletId, portlet){
 			<form id="venueDetailsForm" style="display:none">
 			  <input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
 			  <div class="form-group">
+				    <label class="control-label" for="infoTypeId">Info Type:</label>
+					<div class="controls">
+						<select id="infoTypeId" name="infoTypeId" class="form-control-select"></select>
+					</div>
+			  </div>  
+			  <div class="form-group">
 				    <label class="control-label" for="infoTypeCategoryId">Content Type:</label>
 					<div class="controls">
 						<select id="infoTypeCategoryId" name="infoTypeCategoryId" class="form-control-select"></select>
 					</div>
 			   </div>   
 			   <div id="contentTypeForm">
-			   		This is content type form.
 			   </div>
 			  <input id="venueId" type="hidden" value="0">
 			  <input id="infoTypeId" type="hidden" value="1">
