@@ -24,6 +24,7 @@ _eventDetailModel.DATA_MODEL= {
 	             { name: 'infoTypeId', type: 'long' },
 	             { name: 'infoTypeName', type: 'string' },
 	             { name: 'infoTypeCategoryId', type: 'long' },
+	             { name: 'infoTypeCategoryName', type: 'string' },
 				 { name: 'infoTitle', type: 'string' },
 				 { name: 'infoDesc', type: 'string' },
 				 { name: 'addrLine1', type: 'string'},
@@ -49,8 +50,9 @@ _eventDetailModel.GRID_CONTEXT_MENU = {
 
 _eventDetailModel.GRID_DATA_MODEL= {
 		EVENTDETAILS: 
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '45%' },
-      		 {text: 'Description', datafield: 'infoDesc', width: '45%'},
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '35%' },
+      		 {text: 'Description', datafield: 'infoDesc', width: '35%'},
+      		 {text: 'Content Type', datafield: 'infoTypeCategoryName', width: '20%'},
       		 { text: 'Edit',  datafield: 'eventDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _eventDetailModel.GRID_CONTEXT_MENU.EVENTDETAILS }]
 		};
 
@@ -61,7 +63,8 @@ _eventDetailModel.MESSAGES= {
 		DETAIL_ERROR: "There was an error in saving details",
 		DETAIL_DEL_SUCCESS: "Event details successfully deleted",
 		DETAIL_DEL_ERR: "Error in deleting event details",
-		DETAIL_DUPLICATE: "Event detail with same title already exist"
+		DETAIL_DUPLICATE: "Event detail with same title already exist",
+		DETAIL_NO_IMAGES_INFO: "No images found"
  };
 
 _eventDetailModel.loadContentType = function(elementId,selectedId){
@@ -115,7 +118,6 @@ _eventDetailModel.loadInfoType = function(elementId,selectedId){
 					});
 	
 }
-
 
 _eventDetailModel.FORM_DATA_MODEL = {
 		GENERAL:[{//GENERAL

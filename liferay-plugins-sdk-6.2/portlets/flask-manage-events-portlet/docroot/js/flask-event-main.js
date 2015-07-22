@@ -16,6 +16,10 @@ function addClickHandlers(){
 			_eventModel.loadVenues('venueId');
 			_eventModel.loadEventType('eventTypeId');
 			fnBuildEventUpload(imageContainer);		
+			if(parseInt($("#eventId").val())==0){
+				$("#mcontents").attr("data-toggle","");
+				$("#mcontents").css("cursor","not-allowed");
+			}
 	});
 	/* Click handler for save button*/
 	
@@ -55,6 +59,12 @@ function addClickHandlers(){
 	
 		/*	Toggle search boxes */
 		$(".cssSearchUser").click(GRID_PARAM.toggleSearchBoxes);
+		
+		$("#mcontents").click(function(){
+			if(parseInt($("#eventId").val())==0){
+				_flaskLib.showWarningMessage('action-msg-warning', _eventModel.MESSAGES.ADD_EVENT_FIRST_ERR);
+			}
+		});	
 }
 
 function loadData(){
@@ -137,18 +147,26 @@ function editEvent(rowData) {
 			$("#infoTypeId").val($(this).attr("alt"));
 		})
 		fnShowEventLogo(repositoryId,rowData.eventId,$("#eventImage"), true);
-		createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);		
+		createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
+		loadEventDetailsData(rowData.eventId);
 }
 
 
 /* Save Event */
 function saveEvent(){
+		var st=$("#startTime").val();
+	    var et=$("#endTime").val();
+	    var d= $("#eventDate").val();
+	    var sTime=Date.parse(d+" "+st);
+	    var eTime=Date.parse(d+" "+et);
 		params = _flaskLib.getFormData('eventForm',_eventModel.DATA_MODEL.EVENT,
 					function(formId, model, formData){
 							formData.venueId=$('#eventForm #venueId').val();
 							formData.venueName = $('#eventForm #venueId').children(':selected').text();
 							formData.eventTypeId=$('#eventTypeId').val();
 							formData.eventTypeName = $('#eventTypeName').children(':selected').text();
+		                    formData.startTime= sTime;
+		                    formData.endTime= eTime;							
 							return formData;
 					});
 		var flaskRequest = new Request();
@@ -160,14 +178,25 @@ function saveEvent(){
 			}
 		flaskRequest.sendGETRequest(url, params, 
 					function (data){
+						var IsNew = false; 
 						_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.SAVE);
-						if($('#eventImage').is(':visible')) {					
-							fnSaveEventLogo(data.eventId);
+						if(parseInt(params.eventId) == 0 && parseInt(data.eventId) > 0){
+							$("#mcontents").attr("data-toggle","tab");
+							$("#mcontents").css("cursor","default");
+							IsNew = true;
+						}
+						if($(".dz-image").length>0) {					
+							fnSaveEventLogo(data.eventId,IsNew);
 						}
 						else{
-							$("#eventDataTable").show();
-							$("#formContainer").hide();
-							loadData();
+							if(IsNew){
+									$('.nav-tabs > .active').next('li').find('a').trigger('click');
+									createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
+									loadEventDetailsData(data.eventId);}
+							else{
+									$("#eventDataTable").show();
+									$("#formContainer").hide();
+									loadData();}
 						}	
 					} ,
 					function (data){
@@ -201,15 +230,22 @@ function fnBuildEventUpload(imageContainer){
     });
 }
 
-function fnSaveEventLogo(eventId){
+function fnSaveEventLogo(eventId,IsNew){
 	$("#_eventId").val(eventId);
 	dropZoneLogo.options.autoProcessQueue = true;
 	dropZoneLogo.processQueue();
 	dropZoneLogo.on("queuecomplete", function (file) {
-		$("#eventImage").html(""); // Clear upload component
-		$("#eventDataTable").show();
-		$("#formContainer").hide();
-		loadData();
+		if(IsNew){
+			$('.nav-tabs > .active').next('li').find('a').trigger('click');
+			createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
+			loadEventDetailsData(eventId);
+		}
+		else{
+			$("#eventImage").html(""); // Clear upload component
+			$("#eventDataTable").show();
+			$("#formContainer").hide();
+			loadData();
+		}		
 	});	
 }
 
@@ -264,6 +300,5 @@ $(document).ready(function(){
 			            }
                ]
     });
-	
 });
 

@@ -54,7 +54,8 @@ _eventModel.MESSAGES= {
 		V_SAVE: "Venue successfully saved",
 		V_ERROR: "There was an error in saving details",
 		V_DEL_SUCCESS: "Venue details successfully deleted",
-		V_DEL_ERR: "Error in deleting venue details"
+		V_DEL_ERR: "Error in deleting venue details",
+		ADD_EVENT_FIRST_ERR: "Please save event first"
  };
 
 _eventModel.loadVenues = function(elementId,selectedId){

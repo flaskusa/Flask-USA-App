@@ -41,6 +41,7 @@ function loadEventDetailsData(eventId){
 		_flaskLib.showErrorMessage('action-msg',_eventDetailModel.MESSAGES.DETAIL_GET_ERROR);
 		console.log("Error in getting data: " + error);
 	});
+	$("#action-msg-warning").hide();
 }
 
 function contextMenuHandlerDetails(menuItemText, rowData){
@@ -85,8 +86,8 @@ $(document).ready(function(){
 	        hintType: 'label',
 	        animationDuration: 0,
 	        rules: [
-	                	{ input: '#infoTitle', message: 'Info Title is required!', action: 'keyup, blur', rule: 'required' },
-	                	//{ input: '#infoDesc', message: 'Info Description is required!', action: 'keyup, blur', rule: 'required' }
+	                	{ input: '#infoTitle', message: 'Info Title is required!', action: 'keyup, blur', rule: 'required' }
+	                	//,{ input: '#infoDesc', message: 'Info Description is required!', action: 'keyup, blur', rule: 'required' }
 	               ]
 	    });        
     });
@@ -335,15 +336,25 @@ function fnShowSlider(_eventId,_divObj,_eventDetailId,_infoTypeId,_infoTypeCateg
 										function (data){
 											fnRenderSlider(data.folderId,_divObj);
 										} ,
-										function (data){console.log(5);});
+										function (data){
+											_flaskLib.showInformationMessage(_divObj,_eventDetailModel.MESSAGES.DETAIL_NO_IMAGES_INFO);
+										});
 								} ,
-								function (data){console.log(4);});
+								function (data){
+									_flaskLib.showInformationMessage(_divObj,_eventDetailModel.MESSAGES.DETAIL_NO_IMAGES_INFO);
+								});
 						} ,
-						function (data){console.log(3);});
+						function (data){
+							_flaskLib.showInformationMessage(_divObj,_eventDetailModel.MESSAGES.DETAIL_NO_IMAGES_INFO);
+						});
 				} ,
-				function (data){console.log(2);});
+				function (data){
+					_flaskLib.showInformationMessage(_divObj,_eventDetailModel.MESSAGES.DETAIL_NO_IMAGES_INFO);
+				});
 		} ,
-		function (data){console.log(1);});
+		function (data){
+			_flaskLib.showInformationMessage(_divObj,_eventDetailModel.MESSAGES.DETAIL_NO_IMAGES_INFO);
+		});
 }
 
 function fnRenderSlider(folderId,_divObj){
