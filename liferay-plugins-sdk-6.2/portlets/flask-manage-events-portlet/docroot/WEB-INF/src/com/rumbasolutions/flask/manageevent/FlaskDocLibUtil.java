@@ -6,15 +6,28 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.ResourceAction;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.ResourcePermission;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
+import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 //import com.rumbasolutions.flask.service.impl.EventServiceImpl;
@@ -24,6 +37,7 @@ public class FlaskDocLibUtil {
 	public static final String _venueRootFolder = "Venue";	
 	
 	public static String APP_NAME = "guest";
+	public static Role _guestRole =null;
 	
 	public static long _repositoryId = 0; 
 	//group id is used as repository id
@@ -34,6 +48,21 @@ public class FlaskDocLibUtil {
 			_repositoryId = group.getGroupId();
 		}
 		return _repositoryId;	
+	}
+	
+	public static Role getGuestRole(){
+		try {
+			if(_guestRole == null){
+				_guestRole =RoleServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), RoleConstants.GUEST);
+			}
+		}
+		catch (PortalException e) {
+			e.printStackTrace();
+		}
+		catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return _guestRole;
 	}
 	
 	public static Folder createEventRootFolder(ServiceContext serviceContext) throws PortalException, SystemException{
@@ -128,6 +157,7 @@ public class FlaskDocLibUtil {
 			  folder = DLAppLocalServiceUtil.addFolder(userId,
 		            repositoryId, parentFolderId, eventFolderName,
 		            eventFolderName, serviceContext);
+			  setGuestViewFolderPermission(folder);
 		    }
 		return folder;
 	}
@@ -155,10 +185,78 @@ public class FlaskDocLibUtil {
 												title, desc, 
 												"", file, 
 												serviceContext);
+			setGuestViewPermission(fileEntry);
 			}catch(Exception ex){
 			
 			}
 		return fileEntry;
+	}
+	
+	public static void setGuestViewPermission( FileEntry fileEntry) throws PortalException, SystemException{
+		ResourcePermission resourcePermission = null;
+		Role guestRole = getGuestRole();
+		try
+		   {
+			
+		    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(fileEntry.getCompanyId(),
+		    					DLFileEntry.class.getName(),
+		    					ResourceConstants.SCOPE_INDIVIDUAL, 
+		    					String.valueOf(fileEntry.getPrimaryKey()),
+		    					guestRole.getRoleId());
+		        
+		    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+		  
+		    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
+		    {
+		      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+		      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
+		    }
+		   }catch(Exception ex){
+			      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
+			      resourcePermission.setCompanyId(fileEntry.getCompanyId());
+			      resourcePermission.setName(DLFileEntry.class.getName());
+			      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+			      resourcePermission.setPrimKey(String.valueOf(fileEntry.getPrimaryKey()));
+			      resourcePermission.setRoleId(guestRole.getRoleId());
+			    
+			      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+			      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+			      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+			   
+		   }
+	}
+	public static void setGuestViewFolderPermission( Folder dlFolder) throws PortalException, SystemException{
+		ResourcePermission resourcePermission = null;
+		Role guestRole = getGuestRole();
+		try
+		   {
+
+		    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(dlFolder.getCompanyId(),
+		    					DLFolder.class.getName(),
+		    					ResourceConstants.SCOPE_INDIVIDUAL, 
+		    					String.valueOf(dlFolder.getPrimaryKey()),
+		    					guestRole.getRoleId());
+		        
+		    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFolder.class.getName(), ActionKeys.VIEW);
+		  
+		    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
+		    {
+		      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+		      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
+		    }
+		   }catch(Exception ex){
+			      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
+			      resourcePermission.setCompanyId(dlFolder.getCompanyId());
+			      resourcePermission.setName(DLFolder.class.getName());
+			      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+			      resourcePermission.setPrimKey(String.valueOf(dlFolder.getPrimaryKey()));
+			      resourcePermission.setRoleId(guestRole.getRoleId());
+			    
+			      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFolder.class.getName(), ActionKeys.VIEW);
+			      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+			      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+			   
+		   }
 	}
 	/**
 	 * 
