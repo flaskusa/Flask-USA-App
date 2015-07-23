@@ -118,6 +118,7 @@ function deleteMultipleEvents(eventList) {
 					function (data){
 							_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
 							loadData();
+							$('#grid').jqxGrid('clearselection');
 					} ,
 					function (data){
 							_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);

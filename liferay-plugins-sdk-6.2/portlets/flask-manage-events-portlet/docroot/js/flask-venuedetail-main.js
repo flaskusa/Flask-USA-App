@@ -30,9 +30,9 @@ function addDetailsClickHandlers(){
 	});	
 }
 
-function loadVenueDetailsData(venueId,infoTypeId){
+function loadVenueDetailsData(venueId){
 	var flaskRequest = new Request();
-	venueId = $("#_venueId").val();
+	//venueId = $("#_venueId").val();
 	params = {'venueId':venueId};
 	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_VENUE_DETAILS, params, 
 	function(data){/*success handler*/
@@ -65,7 +65,7 @@ $(".infoTypeCat").click(function(){
 	var InfoTypeCd = Number($(this).attr('data-value'));
 	$("#infoTypeId").val(InfoTypeCd);
 	createDetailsTable({},_venueDetailModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
-	loadVenueDetailsData($('#venueForm #venueId').val(),InfoTypeCd);
+	loadVenueDetailsData($('#venueForm #venueId').val());
 		
 	var click = new Date();
 	var lastClick = new Date();

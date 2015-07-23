@@ -43,7 +43,6 @@ GRID_PARAM_VENUE.getCheckedIdList= function(idDataAttribute){
     $.each(rows, function(i, rowIndex){
     	var rowData = gridObj.jqxGrid('getrowdata', rowIndex);
     	dataList[i] = rowData.venueId;
-    	
     });
     var temp= dataList.toString();
     return temp;

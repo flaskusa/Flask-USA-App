@@ -19,10 +19,10 @@ GRID_PARAM.updateGrid = function(data){
 	gridObj.jqxGrid({ source: dataAdapter });
 }
 GRID_PARAM.toggleSelectionMode= function(){
-	if(gridObj.jqxGrid('selectionmode') == 'checkbox'){
-		gridObj.jqxGrid({selectionmode:'singlerow'});
-	}else{
+	if(gridObj.jqxGrid('selectionmode') == 'singlerow'){
 		gridObj.jqxGrid({selectionmode:'checkbox'});
+	}else{
+		gridObj.jqxGrid({selectionmode:'singlerow'});
 	}
 	
 }
@@ -40,10 +40,9 @@ GRID_PARAM.getCheckedIdList= function(idDataAttribute){
     var dataList=[];
     $.each(rows, function(i, rowIndex){
     	var rowData = gridObj.jqxGrid('getrowdata', rowIndex);
-    	dataList[i] = rowData.venueId;
+    	dataList[i] = rowData.eventId;
     });
     var temp= dataList.toString();
-    console.log(temp);
     return temp;
 }
 

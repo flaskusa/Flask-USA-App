@@ -115,13 +115,14 @@ function deleteVenue(venueId) {
 
 /* Delete Multiple Venues */
 function deleteMultipleVenues(venueList) {
-	var param = {'venueIds': venueList};
+	var param = {'venueList': venueList};
 	var request = new Request();
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUES, param, 
 					function (data){
 							_flaskLib.showSuccessMessage('action-msg', _venueModel.MESSAGES.DEL_SUCCESS);
 							loadData();
+							$('#grid').jqxGrid('clearselection');
 					} ,
 					function (data){
 							_flaskLib.showErrorMessage('action-msg', _venueModel.MESSAGES.DEL_ERR);
@@ -185,9 +186,10 @@ function saveVenue(){
 										loadVenueDetailsData(data.venueId);
 									}
 							else{
-									$("#venueDataTable").show();
-									$("#formContainer").hide();
-									loadData();
+									//location.reload();
+									//loadData();
+									$('.nav-tabs > .active').next('li').find('a').trigger('click');
+									loadVenueDetailsData(data.venueId);
 								}
 						}
 					} ,
