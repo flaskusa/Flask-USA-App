@@ -7,7 +7,6 @@
 		<icon>/icon.png</icon>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<header-portlet-css>/css/style.css</header-portlet-css>
-		  <footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
 		  <footer-portlet-javascript>/js/slide.js</footer-portlet-javascript>

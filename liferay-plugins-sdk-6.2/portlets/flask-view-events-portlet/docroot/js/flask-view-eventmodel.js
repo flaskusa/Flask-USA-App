@@ -2,14 +2,13 @@ var _eventModel = {};
 
 _eventModel.SERVICE_ENDPOINTS = {
 	API_PREFIX					:"/api/jsonws",
-	GET_EVENT 					: "/api/jsonws/flask-rest-events-portlet.event/get-all-events",
-	GET_ALL_VENUES	 			: "/api/jsonws/flask-rest-events-portlet.venue/get-all-venues",
-	GET_ALL_EVENT_DETAILS		: "/api/jsonws/flask-rest-events-portlet.event/get-event-details",	
-	GET_FOLDER					: "/api/jsonws/dlapp/get-folder",
-	GET_FOLDERS					: "/api/jsonws/dlapp/get-folders",
-	ADD_FOLDER					: "/api/jsonws/dlapp/add-folder",
-	GET_FOLDER					: "/api/jsonws/dlapp/get-folder",
-	GET_FILES					: "/api/jsonws/dlapp/get-file-entries"
+	GET_EVENT 					:"/flask-rest-events-portlet.event/get-all-events",
+	GET_ALL_VENUES	 			:"/flask-rest-events-portlet.venue/get-all-venues",
+	GET_ALL_EVENT_DETAILS		:"/flask-rest-events-portlet.event/get-event-details",	
+	GET_FOLDER					:"/dlapp/get-folder",
+	GET_FOLDERS					:"/dlapp/get-folders",
+	GET_FILES					:"/dlapp/get-file-entries",
+	GET_FILE_BY_TITLE			:"/dlapp/get-file-entry"
 };
 
 _eventModel.DATA_MODEL= {

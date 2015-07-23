@@ -26,7 +26,16 @@
 <portlet:defineObjects />
 <link async href="http://fonts.googleapis.com/css?family=Average%20Sans" rel="stylesheet" type="text/css"/>
 <link async href="http://fonts.googleapis.com/css?family=Gochi%20Hand" rel="stylesheet" type="text/css"/>
-
+<aui:script use="array-extras">
+	$(document).ready(function(){
+		Liferay.Service(_eventModel.SERVICE_ENDPOINTS.GET_EVENT,
+		  function(obj) {
+			//alllist = obj.responseJson;
+			fnlist(obj);
+		  }
+		);	
+	});
+</aui:script>
 <body>
 <div class="table-responsive">          
 <div id="one">

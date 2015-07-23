@@ -1,18 +1,39 @@
 var alllist = [];
 
 function fnLoadList() {
- var params = "";
- var request = new Request();
- request.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params,
-   function(data) {
-	 console.log(data);
-    if (data.responseStatus == 1) {
-     alllist = data.responseJson;
-     fnlist(alllist);
-    } else {
-     alert("MESSAGES.ERRORR_REGISTER_USER");
-    }
-   });
+	/*var params = "";
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params,
+			function(data) {
+				console.log(data);
+				if (data.responseStatus == 1) {
+					alllist = data.responseJson;
+					fnlist(alllist);
+				} 
+				else {
+					alert("MESSAGES.ERRORR_REGISTER_USER");
+				}
+			},
+			function(data){
+				console.log(data);
+			});
+	
+	var flaskRequest = new Request();
+	params = {};
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params, 
+	function(data){
+		alllist = data.responseJson;
+		fnlist(alllist);
+	} , function(error){ 
+		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
+		console.log("Error in getting data: " + error);
+	});	*/
+	/*Liferay.Service(_eventModel.SERVICE_ENDPOINTS.GET_EVENT,
+			  function(obj) {
+				//alllist = obj.responseJson;
+				fnlist(obj);
+			  }
+			);	*/
 }
 
 function fnlist(tdata) {
@@ -31,7 +52,7 @@ function fnlist(tdata) {
 	 for(var i in tdata)
 		{
 		    var st = formatUnixToTime(tdata[i].startTime);
-		    var divRowItem = $('<div/>',{'class':'row-fluid','title':tdata[i].eventName,'data-id':tdata[i].eventId});
+		    var divRowItem = $('<div/>',{'class':'row-fluid','data-id':tdata[i].eventId});
 		    var divCol3 = $('<div/>',{'class':'span3','style':'width:60px;'});
 		    var div_heart = $('<div/>',{'class':'heart-shape'});
 		    var divCol9 = $('<div/>',{'class':'span9'});
@@ -39,7 +60,7 @@ function fnlist(tdata) {
 		    var eventName_lbl = $('<label/>',{'class':'control-label-color'});
 		    $(eventName_lbl).html(tdata[i].eventName);
 		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
-		    $(venue_lbl).html(st + ' at ');
+		    $(venue_lbl).html(st + ' at ' + tdata[i].venueName);
 		    $(eventName_lbl).appendTo($(divCol9_lbl));
 		    $(venue_lbl).appendTo($(divCol9_lbl));
 		    $(divCol9_lbl).appendTo($(divCol9));
@@ -47,10 +68,7 @@ function fnlist(tdata) {
 		 	$(divCol9).appendTo($(divRowItem));
 		 	$(div_heart).appendTo($(divCol9));		 	
 		 	$(divRowItem).appendTo($(divRow));
-		 	
-		    fnGetVenueName(venue_lbl,tdata[i].venueId);
 		 	fnShowEventLogo($("#repositoryId").val(),tdata[i].eventId,divCol3)
-		 	
 		 	$(divRowItem).click(function(){
 		 		$('#one').hide();
 		 		$("#spinningSquaresG").show(); 
@@ -59,7 +77,6 @@ function fnlist(tdata) {
 					$("#spinningSquaresG").hide();	
 				 	$('#two').show();	
 		 		},3);
-		 		//fnRenderEvents($("#repositoryId").val(),0,'Events',$(this).attr('title'));
 		 		fnShowSlider($(this).attr('data-id'),"",2);
 		 		fnShowSlider($(this).attr('data-id'),"",3);
 		 		fnShowSlider($(this).attr('data-id'),"",4);
@@ -69,7 +86,7 @@ function fnlist(tdata) {
 }
 
 $(document).ready(function(){
-	fnLoadList();
+	//fnLoadList();
 	$(".cssback").click(function(){
 		$('#one').show();
 		$('#two').hide();
@@ -140,9 +157,8 @@ function displayImages(repositoryId, folderId, ws_images, wowslider_container,ul
 {
 	var flaskRequest = new Request();
 	params= {'repositoryId': repositoryId, 'folderId': folderId};
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_IMAGES, params, 
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILES, params, 
     function(obj) {
-	  obj = obj.responseJson;
       if(typeof obj=="object" && obj.length > 0)
       {
 			var temp_html;
@@ -181,12 +197,12 @@ function fnShowEventLogo(_repositoryId,_eventId,_container){
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
 		function (data){
 			folderName = 'Event-'+_eventId;
-			folderId = data.responseJson.folderId;
+			folderId = data.folderId;
 			var flaskRequestChild = new Request();
 			paramsChild= {'repositoryId': _repositoryId, 'parentFolderId': folderId, 'name': folderName};
 			flaskRequestChild.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER, paramsChild, 
 				function (data){
-					var _folderId = data.responseJson.folderId;
+					var _folderId = data.folderId;
 					var flaskRequestChild0 = new Request();
 					paramsChild0= {'groupId': _repositoryId, 'folderId':_folderId, 'title': 'EventLogo'};
 					flaskRequestChild0.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILE_BY_TITLE , paramsChild0, 
@@ -196,40 +212,16 @@ function fnShowEventLogo(_repositoryId,_eventId,_container){
 							$(_container).append(objdiv);
 						} ,
 						function (data){
-							//console.log('test-0');
 					});				
 				} ,
 				function (data){
-					//console.log('test-1');
 			});
 		} ,
 		function (data){
-			//console.log('test-2');
-	});
-	//LOGO END
-}
-
-function fnGetVenueName(_container,_venueId){
-	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_VENUES, "", 
-		function (data){
-			var dataJson = data.responseJson;
-			var returnedData = $.grep(dataJson, function(element, index){
-		    	return element.venueId == _venueId;
-		    });
-			var dataFilterJson =returnedData; 
-		    var t = $("<span/>");
-		    $(t).html(dataFilterJson[0].venueName);
-		    $(t).appendTo($(_container));
-	},
-		function (data){
-			console.log(data);
 	});
 }
-
 
 function fnShowSlider(_eventId,_divObj,_infoTypeId){
-	console.log(_eventId);
 	var ws_images = "#ws_images"+_infoTypeId;
 	var wowslider_container = "#wowslider-container"+_infoTypeId;
 	$(ws_images).html("");
@@ -243,25 +235,25 @@ function fnShowSlider(_eventId,_divObj,_infoTypeId){
 		function (data){
 			folderName = 'Event-'+eventId;
 			var flaskRequestChild = new Request();
-			paramsChild= {'repositoryId': repositoryId, 'parentFolderId': data.responseJson.folderId, 'name': folderName};
+			paramsChild= {'repositoryId': repositoryId, 'parentFolderId': data.folderId, 'name': folderName};
 			flaskRequestChild.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
 				function (data){
 					var flaskRequestChild1 = new Request();
-					paramsChild1= {'repositoryId': repositoryId, 'parentFolderId': data.responseJson.folderId, 'name': infoTypeId};
+					paramsChild1= {'repositoryId': repositoryId, 'parentFolderId': data.folderId, 'name': infoTypeId};
 					flaskRequestChild1.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild1, 
 						function (data){
 							var flaskRequestChild2 = new Request();
-							paramsChild2= {'repositoryId': repositoryId, 'parentFolderId': data.responseJson.folderId};
+							paramsChild2= {'repositoryId': repositoryId, 'parentFolderId': data.folderId};
 							flaskRequestChild2.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDERS , paramsChild2,
 								function (data){
-									var dataJson = data.responseJson;
+									var dataJson = data;
 									for(var iCount=0;iCount<dataJson.length;iCount++){
 										folderId = dataJson[iCount].folderId;
 										var flaskRequestChild3 = new Request();
 										paramsChild2= {'repositoryId': repositoryId, 'parentFolderId': folderId};
 										flaskRequestChild3.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDERS , paramsChild2, 
 											function (data){
-												var _dataJson = data.responseJson;
+												var _dataJson = data;
 												var tempHtml;
 												var ulObj = $("<ul/>");
 												for(var _iCount=0;_iCount<_dataJson.length;_iCount++){
