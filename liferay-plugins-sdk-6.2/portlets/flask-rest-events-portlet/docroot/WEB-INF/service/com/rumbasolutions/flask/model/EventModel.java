@@ -247,19 +247,33 @@ public interface EventModel extends BaseModel<Event> {
 	public void setEventTypeName(String eventTypeName);
 
 	/**
-	 * Returns the event image path of this event.
+	 * Returns the event image u u i d of this event.
 	 *
-	 * @return the event image path of this event
+	 * @return the event image u u i d of this event
 	 */
 	@AutoEscape
-	public String getEventImagePath();
+	public String getEventImageUUID();
 
 	/**
-	 * Sets the event image path of this event.
+	 * Sets the event image u u i d of this event.
 	 *
-	 * @param eventImagePath the event image path of this event
+	 * @param eventImageUUID the event image u u i d of this event
 	 */
-	public void setEventImagePath(String eventImagePath);
+	public void setEventImageUUID(String eventImageUUID);
+
+	/**
+	 * Returns the event image group ID of this event.
+	 *
+	 * @return the event image group ID of this event
+	 */
+	public long getEventImageGroupId();
+
+	/**
+	 * Sets the event image group ID of this event.
+	 *
+	 * @param eventImageGroupId the event image group ID of this event
+	 */
+	public void setEventImageGroupId(long eventImageGroupId);
 
 	/**
 	 * Returns the venue ID of this event.

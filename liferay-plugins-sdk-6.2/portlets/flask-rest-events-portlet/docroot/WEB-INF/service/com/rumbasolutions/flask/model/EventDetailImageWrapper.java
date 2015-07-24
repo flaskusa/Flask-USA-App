@@ -58,7 +58,8 @@ public class EventDetailImageWrapper implements EventDetailImage,
 		attributes.put("eventDetailId", getEventDetailId());
 		attributes.put("imageTitle", getImageTitle());
 		attributes.put("imageDesc", getImageDesc());
-		attributes.put("imagePath", getImagePath());
+		attributes.put("imageUUID", getImageUUID());
+		attributes.put("imageGroupId", getImageGroupId());
 
 		return attributes;
 	}
@@ -113,10 +114,16 @@ public class EventDetailImageWrapper implements EventDetailImage,
 			setImageDesc(imageDesc);
 		}
 
-		String imagePath = (String)attributes.get("imagePath");
+		String imageUUID = (String)attributes.get("imageUUID");
 
-		if (imagePath != null) {
-			setImagePath(imagePath);
+		if (imageUUID != null) {
+			setImageUUID(imageUUID);
+		}
+
+		Long imageGroupId = (Long)attributes.get("imageGroupId");
+
+		if (imageGroupId != null) {
+			setImageGroupId(imageGroupId);
 		}
 	}
 
@@ -323,23 +330,43 @@ public class EventDetailImageWrapper implements EventDetailImage,
 	}
 
 	/**
-	* Returns the image path of this event detail image.
+	* Returns the image u u i d of this event detail image.
 	*
-	* @return the image path of this event detail image
+	* @return the image u u i d of this event detail image
 	*/
 	@Override
-	public java.lang.String getImagePath() {
-		return _eventDetailImage.getImagePath();
+	public java.lang.String getImageUUID() {
+		return _eventDetailImage.getImageUUID();
 	}
 
 	/**
-	* Sets the image path of this event detail image.
+	* Sets the image u u i d of this event detail image.
 	*
-	* @param imagePath the image path of this event detail image
+	* @param imageUUID the image u u i d of this event detail image
 	*/
 	@Override
-	public void setImagePath(java.lang.String imagePath) {
-		_eventDetailImage.setImagePath(imagePath);
+	public void setImageUUID(java.lang.String imageUUID) {
+		_eventDetailImage.setImageUUID(imageUUID);
+	}
+
+	/**
+	* Returns the image group ID of this event detail image.
+	*
+	* @return the image group ID of this event detail image
+	*/
+	@Override
+	public long getImageGroupId() {
+		return _eventDetailImage.getImageGroupId();
+	}
+
+	/**
+	* Sets the image group ID of this event detail image.
+	*
+	* @param imageGroupId the image group ID of this event detail image
+	*/
+	@Override
+	public void setImageGroupId(long imageGroupId) {
+		_eventDetailImage.setImageGroupId(imageGroupId);
 	}
 
 	@Override

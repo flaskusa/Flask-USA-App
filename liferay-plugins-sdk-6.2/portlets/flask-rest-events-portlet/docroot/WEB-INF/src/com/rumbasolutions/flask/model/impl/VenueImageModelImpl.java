@@ -72,10 +72,11 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 			{ "createdDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP },
 			{ "title", Types.VARCHAR },
-			{ "venueImagePath", Types.VARCHAR },
+			{ "venueImageUUId", Types.VARCHAR },
+			{ "venueImageGroupId", Types.BIGINT },
 			{ "venueId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueImage (venueImageId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,venueImagePath VARCHAR(75) null,venueId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueImage (venueImageId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,venueImageUUId VARCHAR(75) null,venueImageGroupId LONG,venueId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_VenueImage";
 	public static final String ORDER_BY_JPQL = " ORDER BY venueImage.title ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_VenueImage.title ASC";
@@ -113,7 +114,8 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 		model.setCreatedDate(soapModel.getCreatedDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setTitle(soapModel.getTitle());
-		model.setVenueImagePath(soapModel.getVenueImagePath());
+		model.setVenueImageUUId(soapModel.getVenueImageUUId());
+		model.setVenueImageGroupId(soapModel.getVenueImageGroupId());
 		model.setVenueId(soapModel.getVenueId());
 
 		return model;
@@ -185,7 +187,8 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("title", getTitle());
-		attributes.put("venueImagePath", getVenueImagePath());
+		attributes.put("venueImageUUId", getVenueImageUUId());
+		attributes.put("venueImageGroupId", getVenueImageGroupId());
 		attributes.put("venueId", getVenueId());
 
 		return attributes;
@@ -229,10 +232,16 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 			setTitle(title);
 		}
 
-		String venueImagePath = (String)attributes.get("venueImagePath");
+		String venueImageUUId = (String)attributes.get("venueImageUUId");
 
-		if (venueImagePath != null) {
-			setVenueImagePath(venueImagePath);
+		if (venueImageUUId != null) {
+			setVenueImageUUId(venueImageUUId);
+		}
+
+		Long venueImageGroupId = (Long)attributes.get("venueImageGroupId");
+
+		if (venueImageGroupId != null) {
+			setVenueImageGroupId(venueImageGroupId);
 		}
 
 		Long venueId = (Long)attributes.get("venueId");
@@ -327,18 +336,29 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 
 	@JSON
 	@Override
-	public String getVenueImagePath() {
-		if (_venueImagePath == null) {
+	public String getVenueImageUUId() {
+		if (_venueImageUUId == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _venueImagePath;
+			return _venueImageUUId;
 		}
 	}
 
 	@Override
-	public void setVenueImagePath(String venueImagePath) {
-		_venueImagePath = venueImagePath;
+	public void setVenueImageUUId(String venueImageUUId) {
+		_venueImageUUId = venueImageUUId;
+	}
+
+	@JSON
+	@Override
+	public long getVenueImageGroupId() {
+		return _venueImageGroupId;
+	}
+
+	@Override
+	public void setVenueImageGroupId(long venueImageGroupId) {
+		_venueImageGroupId = venueImageGroupId;
 	}
 
 	@JSON
@@ -401,7 +421,8 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 		venueImageImpl.setCreatedDate(getCreatedDate());
 		venueImageImpl.setModifiedDate(getModifiedDate());
 		venueImageImpl.setTitle(getTitle());
-		venueImageImpl.setVenueImagePath(getVenueImagePath());
+		venueImageImpl.setVenueImageUUId(getVenueImageUUId());
+		venueImageImpl.setVenueImageGroupId(getVenueImageGroupId());
 		venueImageImpl.setVenueId(getVenueId());
 
 		venueImageImpl.resetOriginalValues();
@@ -496,13 +517,15 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 			venueImageCacheModel.title = null;
 		}
 
-		venueImageCacheModel.venueImagePath = getVenueImagePath();
+		venueImageCacheModel.venueImageUUId = getVenueImageUUId();
 
-		String venueImagePath = venueImageCacheModel.venueImagePath;
+		String venueImageUUId = venueImageCacheModel.venueImageUUId;
 
-		if ((venueImagePath != null) && (venueImagePath.length() == 0)) {
-			venueImageCacheModel.venueImagePath = null;
+		if ((venueImageUUId != null) && (venueImageUUId.length() == 0)) {
+			venueImageCacheModel.venueImageUUId = null;
 		}
+
+		venueImageCacheModel.venueImageGroupId = getVenueImageGroupId();
 
 		venueImageCacheModel.venueId = getVenueId();
 
@@ -511,7 +534,7 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{venueImageId=");
 		sb.append(getVenueImageId());
@@ -525,8 +548,10 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 		sb.append(getModifiedDate());
 		sb.append(", title=");
 		sb.append(getTitle());
-		sb.append(", venueImagePath=");
-		sb.append(getVenueImagePath());
+		sb.append(", venueImageUUId=");
+		sb.append(getVenueImageUUId());
+		sb.append(", venueImageGroupId=");
+		sb.append(getVenueImageGroupId());
 		sb.append(", venueId=");
 		sb.append(getVenueId());
 		sb.append("}");
@@ -536,7 +561,7 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.VenueImage");
@@ -567,8 +592,12 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueImagePath</column-name><column-value><![CDATA[");
-		sb.append(getVenueImagePath());
+			"<column><column-name>venueImageUUId</column-name><column-value><![CDATA[");
+		sb.append(getVenueImageUUId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>venueImageGroupId</column-name><column-value><![CDATA[");
+		sb.append(getVenueImageGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>venueId</column-name><column-value><![CDATA[");
@@ -591,7 +620,8 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private String _title;
-	private String _venueImagePath;
+	private String _venueImageUUId;
+	private long _venueImageGroupId;
 	private long _venueId;
 	private long _originalVenueId;
 	private boolean _setOriginalVenueId;

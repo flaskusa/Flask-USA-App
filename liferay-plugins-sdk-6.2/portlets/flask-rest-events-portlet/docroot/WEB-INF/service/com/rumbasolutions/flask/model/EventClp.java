@@ -87,7 +87,8 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		attributes.put("endTime", getEndTime());
 		attributes.put("eventTypeId", getEventTypeId());
 		attributes.put("eventTypeName", getEventTypeName());
-		attributes.put("eventImagePath", getEventImagePath());
+		attributes.put("eventImageUUID", getEventImageUUID());
+		attributes.put("eventImageGroupId", getEventImageGroupId());
 		attributes.put("venueId", getVenueId());
 		attributes.put("venueName", getVenueName());
 
@@ -168,10 +169,16 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 			setEventTypeName(eventTypeName);
 		}
 
-		String eventImagePath = (String)attributes.get("eventImagePath");
+		String eventImageUUID = (String)attributes.get("eventImageUUID");
 
-		if (eventImagePath != null) {
-			setEventImagePath(eventImagePath);
+		if (eventImageUUID != null) {
+			setEventImageUUID(eventImageUUID);
+		}
+
+		Long eventImageGroupId = (Long)attributes.get("eventImageGroupId");
+
+		if (eventImageGroupId != null) {
+			setEventImageGroupId(eventImageGroupId);
 		}
 
 		Long venueId = (Long)attributes.get("venueId");
@@ -474,22 +481,46 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 	}
 
 	@Override
-	public String getEventImagePath() {
-		return _eventImagePath;
+	public String getEventImageUUID() {
+		return _eventImageUUID;
 	}
 
 	@Override
-	public void setEventImagePath(String eventImagePath) {
-		_eventImagePath = eventImagePath;
+	public void setEventImageUUID(String eventImageUUID) {
+		_eventImageUUID = eventImageUUID;
 
 		if (_eventRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEventImagePath",
+				Method method = clazz.getMethod("setEventImageUUID",
 						String.class);
 
-				method.invoke(_eventRemoteModel, eventImagePath);
+				method.invoke(_eventRemoteModel, eventImageUUID);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getEventImageGroupId() {
+		return _eventImageGroupId;
+	}
+
+	@Override
+	public void setEventImageGroupId(long eventImageGroupId) {
+		_eventImageGroupId = eventImageGroupId;
+
+		if (_eventRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setEventImageGroupId",
+						long.class);
+
+				method.invoke(_eventRemoteModel, eventImageGroupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -624,7 +655,8 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		clone.setEndTime(getEndTime());
 		clone.setEventTypeId(getEventTypeId());
 		clone.setEventTypeName(getEventTypeName());
-		clone.setEventImagePath(getEventImagePath());
+		clone.setEventImageUUID(getEventImageUUID());
+		clone.setEventImageGroupId(getEventImageGroupId());
 		clone.setVenueId(getVenueId());
 		clone.setVenueName(getVenueName());
 
@@ -679,7 +711,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{eventId=");
 		sb.append(getEventId());
@@ -705,8 +737,10 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		sb.append(getEventTypeId());
 		sb.append(", eventTypeName=");
 		sb.append(getEventTypeName());
-		sb.append(", eventImagePath=");
-		sb.append(getEventImagePath());
+		sb.append(", eventImageUUID=");
+		sb.append(getEventImageUUID());
+		sb.append(", eventImageGroupId=");
+		sb.append(getEventImageGroupId());
 		sb.append(", venueId=");
 		sb.append(getVenueId());
 		sb.append(", venueName=");
@@ -718,7 +752,7 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.Event");
@@ -773,8 +807,12 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 		sb.append(getEventTypeName());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>eventImagePath</column-name><column-value><![CDATA[");
-		sb.append(getEventImagePath());
+			"<column><column-name>eventImageUUID</column-name><column-value><![CDATA[");
+		sb.append(getEventImageUUID());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>eventImageGroupId</column-name><column-value><![CDATA[");
+		sb.append(getEventImageGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>venueId</column-name><column-value><![CDATA[");
@@ -803,7 +841,8 @@ public class EventClp extends BaseModelImpl<Event> implements Event {
 	private Date _endTime;
 	private long _eventTypeId;
 	private String _eventTypeName;
-	private String _eventImagePath;
+	private String _eventImageUUID;
+	private long _eventImageGroupId;
 	private long _venueId;
 	private String _venueName;
 	private BaseModel<?> _eventRemoteModel;

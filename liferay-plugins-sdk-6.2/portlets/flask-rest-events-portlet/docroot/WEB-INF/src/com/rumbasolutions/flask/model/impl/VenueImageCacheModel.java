@@ -38,7 +38,7 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{venueImageId=");
 		sb.append(venueImageId);
@@ -52,8 +52,10 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 		sb.append(modifiedDate);
 		sb.append(", title=");
 		sb.append(title);
-		sb.append(", venueImagePath=");
-		sb.append(venueImagePath);
+		sb.append(", venueImageUUId=");
+		sb.append(venueImageUUId);
+		sb.append(", venueImageGroupId=");
+		sb.append(venueImageGroupId);
 		sb.append(", venueId=");
 		sb.append(venueId);
 		sb.append("}");
@@ -90,13 +92,14 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 			venueImageImpl.setTitle(title);
 		}
 
-		if (venueImagePath == null) {
-			venueImageImpl.setVenueImagePath(StringPool.BLANK);
+		if (venueImageUUId == null) {
+			venueImageImpl.setVenueImageUUId(StringPool.BLANK);
 		}
 		else {
-			venueImageImpl.setVenueImagePath(venueImagePath);
+			venueImageImpl.setVenueImageUUId(venueImageUUId);
 		}
 
+		venueImageImpl.setVenueImageGroupId(venueImageGroupId);
 		venueImageImpl.setVenueId(venueId);
 
 		venueImageImpl.resetOriginalValues();
@@ -112,7 +115,8 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 		createdDate = objectInput.readLong();
 		modifiedDate = objectInput.readLong();
 		title = objectInput.readUTF();
-		venueImagePath = objectInput.readUTF();
+		venueImageUUId = objectInput.readUTF();
+		venueImageGroupId = objectInput.readLong();
 		venueId = objectInput.readLong();
 	}
 
@@ -132,13 +136,14 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 			objectOutput.writeUTF(title);
 		}
 
-		if (venueImagePath == null) {
+		if (venueImageUUId == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(venueImagePath);
+			objectOutput.writeUTF(venueImageUUId);
 		}
 
+		objectOutput.writeLong(venueImageGroupId);
 		objectOutput.writeLong(venueId);
 	}
 
@@ -148,6 +153,7 @@ public class VenueImageCacheModel implements CacheModel<VenueImage>,
 	public long createdDate;
 	public long modifiedDate;
 	public String title;
-	public String venueImagePath;
+	public String venueImageUUId;
+	public long venueImageGroupId;
 	public long venueId;
 }

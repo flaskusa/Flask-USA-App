@@ -83,7 +83,8 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		attributes.put("eventDetailId", getEventDetailId());
 		attributes.put("imageTitle", getImageTitle());
 		attributes.put("imageDesc", getImageDesc());
-		attributes.put("imagePath", getImagePath());
+		attributes.put("imageUUID", getImageUUID());
+		attributes.put("imageGroupId", getImageGroupId());
 
 		return attributes;
 	}
@@ -138,10 +139,16 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 			setImageDesc(imageDesc);
 		}
 
-		String imagePath = (String)attributes.get("imagePath");
+		String imageUUID = (String)attributes.get("imageUUID");
 
-		if (imagePath != null) {
-			setImagePath(imagePath);
+		if (imageUUID != null) {
+			setImageUUID(imageUUID);
+		}
+
+		Long imageGroupId = (Long)attributes.get("imageGroupId");
+
+		if (imageGroupId != null) {
+			setImageGroupId(imageGroupId);
 		}
 	}
 
@@ -341,21 +348,44 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 	}
 
 	@Override
-	public String getImagePath() {
-		return _imagePath;
+	public String getImageUUID() {
+		return _imageUUID;
 	}
 
 	@Override
-	public void setImagePath(String imagePath) {
-		_imagePath = imagePath;
+	public void setImageUUID(String imageUUID) {
+		_imageUUID = imageUUID;
 
 		if (_eventDetailImageRemoteModel != null) {
 			try {
 				Class<?> clazz = _eventDetailImageRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setImagePath", String.class);
+				Method method = clazz.getMethod("setImageUUID", String.class);
 
-				method.invoke(_eventDetailImageRemoteModel, imagePath);
+				method.invoke(_eventDetailImageRemoteModel, imageUUID);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getImageGroupId() {
+		return _imageGroupId;
+	}
+
+	@Override
+	public void setImageGroupId(long imageGroupId) {
+		_imageGroupId = imageGroupId;
+
+		if (_eventDetailImageRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventDetailImageRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setImageGroupId", long.class);
+
+				method.invoke(_eventDetailImageRemoteModel, imageGroupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -442,7 +472,8 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		clone.setEventDetailId(getEventDetailId());
 		clone.setImageTitle(getImageTitle());
 		clone.setImageDesc(getImageDesc());
-		clone.setImagePath(getImagePath());
+		clone.setImageUUID(getImageUUID());
+		clone.setImageGroupId(getImageGroupId());
 
 		return clone;
 	}
@@ -495,7 +526,7 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{eventDetailImageId=");
 		sb.append(getEventDetailImageId());
@@ -513,8 +544,10 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		sb.append(getImageTitle());
 		sb.append(", imageDesc=");
 		sb.append(getImageDesc());
-		sb.append(", imagePath=");
-		sb.append(getImagePath());
+		sb.append(", imageUUID=");
+		sb.append(getImageUUID());
+		sb.append(", imageGroupId=");
+		sb.append(getImageGroupId());
 		sb.append("}");
 
 		return sb.toString();
@@ -522,7 +555,7 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.EventDetailImage");
@@ -561,8 +594,12 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 		sb.append(getImageDesc());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>imagePath</column-name><column-value><![CDATA[");
-		sb.append(getImagePath());
+			"<column><column-name>imageUUID</column-name><column-value><![CDATA[");
+		sb.append(getImageUUID());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageGroupId</column-name><column-value><![CDATA[");
+		sb.append(getImageGroupId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -579,7 +616,8 @@ public class EventDetailImageClp extends BaseModelImpl<EventDetailImage>
 	private long _eventDetailId;
 	private String _imageTitle;
 	private String _imageDesc;
-	private String _imagePath;
+	private String _imageUUID;
+	private long _imageGroupId;
 	private BaseModel<?> _eventDetailImageRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

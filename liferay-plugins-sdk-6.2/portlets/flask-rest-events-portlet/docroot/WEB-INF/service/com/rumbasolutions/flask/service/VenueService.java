@@ -100,7 +100,7 @@ public interface VenueService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImagePath,
+		java.lang.String venueImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
@@ -115,7 +115,7 @@ public interface VenueService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void updateVenueImage(long venueImageId, java.lang.String title,
-		java.lang.String venueImagePath,
+		java.lang.String venueImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteVenueImage(long venueImageId,
@@ -163,7 +163,7 @@ public interface VenueService extends BaseService, InvokableService {
 
 	public com.rumbasolutions.flask.model.VenueDetailImage addVenueDetailImage(
 		long venueDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(

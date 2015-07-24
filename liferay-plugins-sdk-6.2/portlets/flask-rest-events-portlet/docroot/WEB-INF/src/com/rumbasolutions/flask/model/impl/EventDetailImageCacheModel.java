@@ -38,7 +38,7 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{eventDetailImageId=");
 		sb.append(eventDetailImageId);
@@ -56,8 +56,10 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 		sb.append(imageTitle);
 		sb.append(", imageDesc=");
 		sb.append(imageDesc);
-		sb.append(", imagePath=");
-		sb.append(imagePath);
+		sb.append(", imageUUID=");
+		sb.append(imageUUID);
+		sb.append(", imageGroupId=");
+		sb.append(imageGroupId);
 		sb.append("}");
 
 		return sb.toString();
@@ -101,12 +103,14 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 			eventDetailImageImpl.setImageDesc(imageDesc);
 		}
 
-		if (imagePath == null) {
-			eventDetailImageImpl.setImagePath(StringPool.BLANK);
+		if (imageUUID == null) {
+			eventDetailImageImpl.setImageUUID(StringPool.BLANK);
 		}
 		else {
-			eventDetailImageImpl.setImagePath(imagePath);
+			eventDetailImageImpl.setImageUUID(imageUUID);
 		}
+
+		eventDetailImageImpl.setImageGroupId(imageGroupId);
 
 		eventDetailImageImpl.resetOriginalValues();
 
@@ -123,7 +127,8 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 		eventDetailId = objectInput.readLong();
 		imageTitle = objectInput.readUTF();
 		imageDesc = objectInput.readUTF();
-		imagePath = objectInput.readUTF();
+		imageUUID = objectInput.readUTF();
+		imageGroupId = objectInput.readLong();
 	}
 
 	@Override
@@ -150,12 +155,14 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 			objectOutput.writeUTF(imageDesc);
 		}
 
-		if (imagePath == null) {
+		if (imageUUID == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(imagePath);
+			objectOutput.writeUTF(imageUUID);
 		}
+
+		objectOutput.writeLong(imageGroupId);
 	}
 
 	public long eventDetailImageId;
@@ -166,5 +173,6 @@ public class EventDetailImageCacheModel implements CacheModel<EventDetailImage>,
 	public long eventDetailId;
 	public String imageTitle;
 	public String imageDesc;
-	public String imagePath;
+	public String imageUUID;
+	public long imageGroupId;
 }

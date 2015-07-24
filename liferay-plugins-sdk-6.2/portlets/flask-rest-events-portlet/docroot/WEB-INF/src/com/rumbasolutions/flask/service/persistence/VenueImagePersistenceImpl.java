@@ -836,7 +836,8 @@ public class VenueImagePersistenceImpl extends BasePersistenceImpl<VenueImage>
 		venueImageImpl.setCreatedDate(venueImage.getCreatedDate());
 		venueImageImpl.setModifiedDate(venueImage.getModifiedDate());
 		venueImageImpl.setTitle(venueImage.getTitle());
-		venueImageImpl.setVenueImagePath(venueImage.getVenueImagePath());
+		venueImageImpl.setVenueImageUUId(venueImage.getVenueImageUUId());
+		venueImageImpl.setVenueImageGroupId(venueImage.getVenueImageGroupId());
 		venueImageImpl.setVenueId(venueImage.getVenueId());
 
 		return venueImageImpl;

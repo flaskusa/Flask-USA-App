@@ -19,6 +19,10 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.security.ac.AccessControlled;
@@ -72,12 +76,26 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		return events;
 	}
 	
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public Event getEvent(long eventId, ServiceContext  serviceContext){
+		Event event= null;
+		try {
+			event =  EventUtil.fetchByPrimaryKey(eventId);
+			event = FlaskUtil.setStringNamesForEvent(event);
+		} catch (SystemException e) {
+			LOGGER.error("Error in get event:" + e.getMessage());
+		}
+		
+		return event;
+	}
+	
 
 	
 	@Override
 	public Event addEvent(String eventName, String description, 
 						String eventDate, Date startTime, Date endTime,
-						long eventTypeId, long venueId, String eventImagePath,
+						long eventTypeId, long venueId, String eventImageUUID,
 								ServiceContext  serviceContext){
 		Event event=null;
 		try{
@@ -90,7 +108,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			event.setEndTime(endTime);
 			event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
-			event.setEventImagePath(eventImagePath);
+			event.setEventImageUUID(eventImageUUID);
 
 			Date now = new Date();
 			event.setCompanyId(serviceContext.getCompanyId());
@@ -127,7 +145,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 
 		    event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
-			event.setEventImagePath(eventImagePath);
+			event.setEventImageUUID(eventImagePath);
 			
 			
 			EventLocalServiceUtil.updateEvent(event);
@@ -264,6 +282,46 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		}
 		return eventDetails;
 	}
+	
+	@AccessControlled(guestAccessEnabled = true)
+	@Override
+	public JSONObject getEventDetailsWithImages(long eventId, ServiceContext  serviceContext){
+		
+		List<EventDetail> eventDetails = null;
+		List<EventDetailImage> detailImgList = null;
+		JSONObject eventJsonObj =  JSONFactoryUtil.createJSONObject();
+		try{
+			Event event  = getEvent(eventId, serviceContext);
+			eventJsonObj.put("Event", JSONFactoryUtil.looseSerialize(event));
+			JSONArray eventDetailArr =  JSONFactoryUtil.createJSONArray();
+			eventJsonObj.put("EventDetails", eventDetailArr);
+			eventDetails = EventDetailUtil.findByEventId(eventId);
+			eventDetails = FlaskUtil.setNamesForEventDetail(eventDetails);
+			
+			for (EventDetail eventDetail : eventDetails) {
+				JSONObject eventDetailJsonObj =  JSONFactoryUtil.createJSONObject();
+				eventDetailJsonObj.put("EventDetail", JSONFactoryUtil.looseSerialize(eventDetail));
+				eventDetailArr.put(eventDetailJsonObj);
+				detailImgList = getEventDetailImages(eventDetail.getEventDetailId(), serviceContext);
+				JSONArray eventDetailImageArr =  JSONFactoryUtil.createJSONArray();
+				eventDetailJsonObj.put("EventDetailImages", eventDetailImageArr);
+				for (EventDetailImage detailImage : detailImgList) {
+					JSONObject eventDetailImageObj =  JSONFactoryUtil.createJSONObject();
+					eventDetailImageObj.put("EventDetailImage", JSONFactoryUtil.looseSerialize(detailImage));
+					eventDetailImageArr.put(eventDetailImageObj);
+				}
+				
+				
+			}
+			
+		}catch(Exception ex){
+			LOGGER.error("Exception in getEventDetailsWithImages. Exception: " +  ex.getMessage());
+			return null;
+		}
+		return eventJsonObj;
+	}
+
+	
 
 	@Override
 	public void deleteEventDetail(long eventDetailId, ServiceContext  serviceContext){
@@ -290,7 +348,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	
 	@Override
 	public EventDetailImage addEventDetailImage(long eventDetailId, String imageTitle,
-									String imageDesc, String imagePath,
+									String imageDesc, String imageUUID,
 									ServiceContext  serviceContext){
 		EventDetailImage eventDetailImage =null;
 		try{
@@ -298,7 +356,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetailImage.setEventDetailId(eventDetailId);
 			eventDetailImage.setImageTitle(imageTitle);
 			eventDetailImage.setImageDesc(imageDesc);
-			eventDetailImage.setImagePath(imagePath);
+			eventDetailImage.setImageUUID(imageUUID);
 			
 			Date now = new Date();
 			eventDetailImage.setCompanyId(serviceContext.getCompanyId());
@@ -325,7 +383,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetailImage =EventDetailImageLocalServiceUtil.getEventDetailImage(eventDetailImageId);
 			eventDetailImage.setImageTitle(imageTitle);
 			eventDetailImage.setImageDesc(imageDesc);
-			eventDetailImage.setImagePath(imagePath);
+			eventDetailImage.setImageUUID(imagePath);
 			
 			Date now = new Date();
 			eventDetailImage.setUserId(serviceContext.getGuestOrUserId());

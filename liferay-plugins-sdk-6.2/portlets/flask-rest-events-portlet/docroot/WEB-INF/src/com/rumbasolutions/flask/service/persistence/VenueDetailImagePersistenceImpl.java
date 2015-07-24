@@ -860,7 +860,8 @@ public class VenueDetailImagePersistenceImpl extends BasePersistenceImpl<VenueDe
 		venueDetailImageImpl.setVenueDetailId(venueDetailImage.getVenueDetailId());
 		venueDetailImageImpl.setImageTitle(venueDetailImage.getImageTitle());
 		venueDetailImageImpl.setImageDesc(venueDetailImage.getImageDesc());
-		venueDetailImageImpl.setImagePath(venueDetailImage.getImagePath());
+		venueDetailImageImpl.setImageUUID(venueDetailImage.getImageUUID());
+		venueDetailImageImpl.setImageGroupId(venueDetailImage.getImageGroupId());
 
 		return venueDetailImageImpl;
 	}

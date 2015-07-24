@@ -68,8 +68,9 @@
         <column name="eventTypeId" type="long" />
         <column name="eventTypeName" type="String" />
         
-        <column name="eventImagePath" type="String" />
-
+        <column name="eventImageUUID" type="String" />
+		<column name="eventImageGroupId" type="long" />
+		
         <column name="venueId" type="long" />
 	    <column name="venueName" type="String" />
 	        
@@ -149,12 +150,14 @@
         <column name="eventDetailId" type="long" />
         <column name="imageTitle" type="String" />
         <column name="imageDesc" type="String" />
-        <column name="imagePath" type="String" />
+        <column name="imageUUID" type="String" />
+        <column name="imageGroupId" type="long" />
 		
 		       <!-- Finder methods -->
         <finder name="EventDetailId" return-type="Collection">
 			<finder-column name="eventDetailId" />
 		</finder>
+		
 	</entity>
          
 	<!-- Venue details-->
@@ -222,8 +225,9 @@
         <!-- Other fields -->
 
         <column name="title" type="String" />
-        <column name="venueImagePath" type="String" />
-	    <column name="venueId" type="long" />
+        <column name="venueImageUUId" type="String" />
+        <column name="venueImageGroupId" type="long" />
+        <column name="venueId" type="long" />
 	
         <!-- Order -->
 
@@ -292,7 +296,9 @@
          <column name="venueDetailId" type="long" />
         <column name="imageTitle" type="String" />
         <column name="imageDesc" type="String" />
-        <column name="imagePath" type="String" />
+        <column name="imageUUID" type="String" />
+        <column name="imageGroupId" type="long" />
+        
         <!-- Finder methods -->
         <finder name="VenueDetailId" return-type="Collection">
 			<finder-column name="venueDetailId" />

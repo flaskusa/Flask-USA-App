@@ -38,7 +38,7 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{venueDetailImageId=");
 		sb.append(venueDetailImageId);
@@ -56,8 +56,10 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 		sb.append(imageTitle);
 		sb.append(", imageDesc=");
 		sb.append(imageDesc);
-		sb.append(", imagePath=");
-		sb.append(imagePath);
+		sb.append(", imageUUID=");
+		sb.append(imageUUID);
+		sb.append(", imageGroupId=");
+		sb.append(imageGroupId);
 		sb.append("}");
 
 		return sb.toString();
@@ -101,12 +103,14 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 			venueDetailImageImpl.setImageDesc(imageDesc);
 		}
 
-		if (imagePath == null) {
-			venueDetailImageImpl.setImagePath(StringPool.BLANK);
+		if (imageUUID == null) {
+			venueDetailImageImpl.setImageUUID(StringPool.BLANK);
 		}
 		else {
-			venueDetailImageImpl.setImagePath(imagePath);
+			venueDetailImageImpl.setImageUUID(imageUUID);
 		}
+
+		venueDetailImageImpl.setImageGroupId(imageGroupId);
 
 		venueDetailImageImpl.resetOriginalValues();
 
@@ -123,7 +127,8 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 		venueDetailId = objectInput.readLong();
 		imageTitle = objectInput.readUTF();
 		imageDesc = objectInput.readUTF();
-		imagePath = objectInput.readUTF();
+		imageUUID = objectInput.readUTF();
+		imageGroupId = objectInput.readLong();
 	}
 
 	@Override
@@ -150,12 +155,14 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 			objectOutput.writeUTF(imageDesc);
 		}
 
-		if (imagePath == null) {
+		if (imageUUID == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
 		else {
-			objectOutput.writeUTF(imagePath);
+			objectOutput.writeUTF(imageUUID);
 		}
+
+		objectOutput.writeLong(imageGroupId);
 	}
 
 	public long venueDetailImageId;
@@ -166,5 +173,6 @@ public class VenueDetailImageCacheModel implements CacheModel<VenueDetailImage>,
 	public long venueDetailId;
 	public String imageTitle;
 	public String imageDesc;
-	public String imagePath;
+	public String imageUUID;
+	public long imageGroupId;
 }

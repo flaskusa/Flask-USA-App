@@ -68,15 +68,20 @@ public class EventServiceUtil {
 		return getService().getAllEvents(serviceContext);
 	}
 
+	public static com.rumbasolutions.flask.model.Event getEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getEvent(eventId, serviceContext);
+	}
+
 	public static com.rumbasolutions.flask.model.Event addEvent(
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImagePath,
+		java.lang.String eventImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addEvent(eventName, description, eventDate, startTime,
-			endTime, eventTypeId, venueId, eventImagePath, serviceContext);
+			endTime, eventTypeId, venueId, eventImageUUID, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.Event updateEvent(
@@ -144,6 +149,11 @@ public class EventServiceUtil {
 		return getService().getEventDetails(eventId, serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject getEventDetailsWithImages(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getEventDetailsWithImages(eventId, serviceContext);
+	}
+
 	public static void deleteEventDetail(long eventDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService().deleteEventDetail(eventDetailId, serviceContext);
@@ -156,11 +166,11 @@ public class EventServiceUtil {
 
 	public static com.rumbasolutions.flask.model.EventDetailImage addEventDetailImage(
 		long eventDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addEventDetailImage(eventDetailId, imageTitle, imageDesc,
-			imagePath, serviceContext);
+			imageUUID, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(

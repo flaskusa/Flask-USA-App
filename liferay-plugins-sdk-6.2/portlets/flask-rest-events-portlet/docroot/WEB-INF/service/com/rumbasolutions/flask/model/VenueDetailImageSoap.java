@@ -39,7 +39,8 @@ public class VenueDetailImageSoap implements Serializable {
 		soapModel.setVenueDetailId(model.getVenueDetailId());
 		soapModel.setImageTitle(model.getImageTitle());
 		soapModel.setImageDesc(model.getImageDesc());
-		soapModel.setImagePath(model.getImagePath());
+		soapModel.setImageUUID(model.getImageUUID());
+		soapModel.setImageGroupId(model.getImageGroupId());
 
 		return soapModel;
 	}
@@ -158,12 +159,20 @@ public class VenueDetailImageSoap implements Serializable {
 		_imageDesc = imageDesc;
 	}
 
-	public String getImagePath() {
-		return _imagePath;
+	public String getImageUUID() {
+		return _imageUUID;
 	}
 
-	public void setImagePath(String imagePath) {
-		_imagePath = imagePath;
+	public void setImageUUID(String imageUUID) {
+		_imageUUID = imageUUID;
+	}
+
+	public long getImageGroupId() {
+		return _imageGroupId;
+	}
+
+	public void setImageGroupId(long imageGroupId) {
+		_imageGroupId = imageGroupId;
 	}
 
 	private long _venueDetailImageId;
@@ -174,5 +183,6 @@ public class VenueDetailImageSoap implements Serializable {
 	private long _venueDetailId;
 	private String _imageTitle;
 	private String _imageDesc;
-	private String _imagePath;
+	private String _imageUUID;
+	private long _imageGroupId;
 }

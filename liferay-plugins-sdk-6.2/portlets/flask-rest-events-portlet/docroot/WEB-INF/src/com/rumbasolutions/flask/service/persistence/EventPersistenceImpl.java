@@ -1378,7 +1378,8 @@ public class EventPersistenceImpl extends BasePersistenceImpl<Event>
 		eventImpl.setEndTime(event.getEndTime());
 		eventImpl.setEventTypeId(event.getEventTypeId());
 		eventImpl.setEventTypeName(event.getEventTypeName());
-		eventImpl.setEventImagePath(event.getEventImagePath());
+		eventImpl.setEventImageUUID(event.getEventImageUUID());
+		eventImpl.setEventImageGroupId(event.getEventImageGroupId());
 		eventImpl.setVenueId(event.getVenueId());
 		eventImpl.setVenueName(event.getVenueName());
 

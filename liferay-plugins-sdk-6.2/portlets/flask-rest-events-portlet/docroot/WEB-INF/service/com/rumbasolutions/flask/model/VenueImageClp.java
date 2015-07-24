@@ -81,7 +81,8 @@ public class VenueImageClp extends BaseModelImpl<VenueImage>
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("title", getTitle());
-		attributes.put("venueImagePath", getVenueImagePath());
+		attributes.put("venueImageUUId", getVenueImageUUId());
+		attributes.put("venueImageGroupId", getVenueImageGroupId());
 		attributes.put("venueId", getVenueId());
 
 		return attributes;
@@ -125,10 +126,16 @@ public class VenueImageClp extends BaseModelImpl<VenueImage>
 			setTitle(title);
 		}
 
-		String venueImagePath = (String)attributes.get("venueImagePath");
+		String venueImageUUId = (String)attributes.get("venueImageUUId");
 
-		if (venueImagePath != null) {
-			setVenueImagePath(venueImagePath);
+		if (venueImageUUId != null) {
+			setVenueImageUUId(venueImageUUId);
+		}
+
+		Long venueImageGroupId = (Long)attributes.get("venueImageGroupId");
+
+		if (venueImageGroupId != null) {
+			setVenueImageGroupId(venueImageGroupId);
 		}
 
 		Long venueId = (Long)attributes.get("venueId");
@@ -287,22 +294,46 @@ public class VenueImageClp extends BaseModelImpl<VenueImage>
 	}
 
 	@Override
-	public String getVenueImagePath() {
-		return _venueImagePath;
+	public String getVenueImageUUId() {
+		return _venueImageUUId;
 	}
 
 	@Override
-	public void setVenueImagePath(String venueImagePath) {
-		_venueImagePath = venueImagePath;
+	public void setVenueImageUUId(String venueImageUUId) {
+		_venueImageUUId = venueImageUUId;
 
 		if (_venueImageRemoteModel != null) {
 			try {
 				Class<?> clazz = _venueImageRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setVenueImagePath",
+				Method method = clazz.getMethod("setVenueImageUUId",
 						String.class);
 
-				method.invoke(_venueImageRemoteModel, venueImagePath);
+				method.invoke(_venueImageRemoteModel, venueImageUUId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getVenueImageGroupId() {
+		return _venueImageGroupId;
+	}
+
+	@Override
+	public void setVenueImageGroupId(long venueImageGroupId) {
+		_venueImageGroupId = venueImageGroupId;
+
+		if (_venueImageRemoteModel != null) {
+			try {
+				Class<?> clazz = _venueImageRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setVenueImageGroupId",
+						long.class);
+
+				method.invoke(_venueImageRemoteModel, venueImageGroupId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -408,7 +439,8 @@ public class VenueImageClp extends BaseModelImpl<VenueImage>
 		clone.setCreatedDate(getCreatedDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setTitle(getTitle());
-		clone.setVenueImagePath(getVenueImagePath());
+		clone.setVenueImageUUId(getVenueImageUUId());
+		clone.setVenueImageGroupId(getVenueImageGroupId());
 		clone.setVenueId(getVenueId());
 
 		return clone;
@@ -460,7 +492,7 @@ public class VenueImageClp extends BaseModelImpl<VenueImage>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{venueImageId=");
 		sb.append(getVenueImageId());
@@ -474,8 +506,10 @@ public class VenueImageClp extends BaseModelImpl<VenueImage>
 		sb.append(getModifiedDate());
 		sb.append(", title=");
 		sb.append(getTitle());
-		sb.append(", venueImagePath=");
-		sb.append(getVenueImagePath());
+		sb.append(", venueImageUUId=");
+		sb.append(getVenueImageUUId());
+		sb.append(", venueImageGroupId=");
+		sb.append(getVenueImageGroupId());
 		sb.append(", venueId=");
 		sb.append(getVenueId());
 		sb.append("}");
@@ -485,7 +519,7 @@ public class VenueImageClp extends BaseModelImpl<VenueImage>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.VenueImage");
@@ -516,8 +550,12 @@ public class VenueImageClp extends BaseModelImpl<VenueImage>
 		sb.append(getTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>venueImagePath</column-name><column-value><![CDATA[");
-		sb.append(getVenueImagePath());
+			"<column><column-name>venueImageUUId</column-name><column-value><![CDATA[");
+		sb.append(getVenueImageUUId());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>venueImageGroupId</column-name><column-value><![CDATA[");
+		sb.append(getVenueImageGroupId());
 		sb.append("]]></column-value></column>");
 		sb.append(
 			"<column><column-name>venueId</column-name><column-value><![CDATA[");
@@ -536,7 +574,8 @@ public class VenueImageClp extends BaseModelImpl<VenueImage>
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private String _title;
-	private String _venueImagePath;
+	private String _venueImageUUId;
+	private long _venueImageGroupId;
 	private long _venueId;
 	private BaseModel<?> _venueImageRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;

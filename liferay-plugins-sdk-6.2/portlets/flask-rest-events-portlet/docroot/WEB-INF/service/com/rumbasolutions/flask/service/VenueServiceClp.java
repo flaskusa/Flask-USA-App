@@ -431,7 +431,7 @@ public class VenueServiceClp implements VenueService {
 
 	@Override
 	public void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImagePath,
+		java.lang.String venueImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
 			_invokableService.invokeMethod(_methodName8,
@@ -441,7 +441,7 @@ public class VenueServiceClp implements VenueService {
 					
 				ClpSerializer.translateInput(title),
 					
-				ClpSerializer.translateInput(venueImagePath),
+				ClpSerializer.translateInput(venueImageUUID),
 					
 				ClpSerializer.translateInput(serviceContext)
 				});
@@ -520,7 +520,7 @@ public class VenueServiceClp implements VenueService {
 
 	@Override
 	public void updateVenueImage(long venueImageId, java.lang.String title,
-		java.lang.String venueImagePath,
+		java.lang.String venueImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
 			_invokableService.invokeMethod(_methodName11,
@@ -530,7 +530,7 @@ public class VenueServiceClp implements VenueService {
 					
 				ClpSerializer.translateInput(title),
 					
-				ClpSerializer.translateInput(venueImagePath),
+				ClpSerializer.translateInput(venueImageUUID),
 					
 				ClpSerializer.translateInput(serviceContext)
 				});
@@ -846,7 +846,7 @@ public class VenueServiceClp implements VenueService {
 	@Override
 	public com.rumbasolutions.flask.model.VenueDetailImage addVenueDetailImage(
 		long venueDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -860,7 +860,7 @@ public class VenueServiceClp implements VenueService {
 						
 					ClpSerializer.translateInput(imageDesc),
 						
-					ClpSerializer.translateInput(imagePath),
+					ClpSerializer.translateInput(imageUUID),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

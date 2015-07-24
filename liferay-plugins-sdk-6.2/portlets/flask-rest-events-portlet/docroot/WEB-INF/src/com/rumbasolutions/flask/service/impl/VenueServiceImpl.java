@@ -181,12 +181,12 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 
 		
 	@Override
-	public void addVenueImage(long venueId, String title, String venueImagePath ,ServiceContext  serviceContext){
+	public void addVenueImage(long venueId, String title, String venueImageUUID ,ServiceContext  serviceContext){
 		try{
 			VenueImage venueImage = VenueImageLocalServiceUtil.createVenueImage(CounterLocalServiceUtil.increment());
 			venueImage.setVenueId(venueId);	
 			venueImage.setTitle(title);
-			venueImage.setVenueImagePath(venueImagePath);
+			venueImage.setVenueImageUUId(venueImageUUID);
 			
 			Date now = new Date();
 			venueImage.setCompanyId(serviceContext.getCompanyId());
@@ -229,11 +229,11 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	}
 	
 	@Override
-	public void updateVenueImage(long venueImageId, String title, String venueImagePath ,ServiceContext  serviceContext){
+	public void updateVenueImage(long venueImageId, String title, String venueImageUUID ,ServiceContext  serviceContext){
 		try{
 			VenueImage venueImage = VenueImageLocalServiceUtil.getVenueImage(venueImageId);
 			venueImage.setTitle(title);
-			venueImage.setVenueImagePath(venueImagePath);
+			venueImage.setVenueImageUUId(venueImageUUID);
 			
 			Date now = new Date();
 			venueImage.setUserId(serviceContext.getGuestOrUserId());
@@ -402,7 +402,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	
 	@Override
 	public VenueDetailImage addVenueDetailImage(long venueDetailId, String imageTitle,
-									String imageDesc, String imagePath,
+									String imageDesc, String imageUUID,
 									ServiceContext  serviceContext){
 		VenueDetailImage venueDetailImage =null;
 		try{
@@ -410,7 +410,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetailImage.setVenueDetailId(venueDetailId);
 			venueDetailImage.setImageTitle(imageTitle);
 			venueDetailImage.setImageDesc(imageDesc);
-			venueDetailImage.setImagePath(imagePath);
+			venueDetailImage.setImageUUID(imageUUID);
 			
 			Date now = new Date();
 			venueDetailImage.setCompanyId(serviceContext.getCompanyId());
@@ -436,7 +436,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetailImage =VenueDetailImageLocalServiceUtil.getVenueDetailImage(venueDetailImageId);
 			venueDetailImage.setImageTitle(imageTitle);
 			venueDetailImage.setImageDesc(imageDesc);
-			venueDetailImage.setImagePath(imagePath);
+			venueDetailImage.setImageUUID(imagePath);
 			
 			Date now = new Date();
 			venueDetailImage.setUserId(serviceContext.getGuestOrUserId());

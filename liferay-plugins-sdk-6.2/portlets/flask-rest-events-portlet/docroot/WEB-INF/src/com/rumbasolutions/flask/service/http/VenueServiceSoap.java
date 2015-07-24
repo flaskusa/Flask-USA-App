@@ -157,11 +157,11 @@ public class VenueServiceSoap {
 	}
 
 	public static void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImagePath,
+		java.lang.String venueImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			VenueServiceUtil.addVenueImage(venueId, title, venueImagePath,
+			VenueServiceUtil.addVenueImage(venueId, title, venueImageUUID,
 				serviceContext);
 		}
 		catch (Exception e) {
@@ -205,12 +205,12 @@ public class VenueServiceSoap {
 	}
 
 	public static void updateVenueImage(long venueImageId,
-		java.lang.String title, java.lang.String venueImagePath,
+		java.lang.String title, java.lang.String venueImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			VenueServiceUtil.updateVenueImage(venueImageId, title,
-				venueImagePath, serviceContext);
+				venueImageUUID, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -358,12 +358,12 @@ public class VenueServiceSoap {
 
 	public static com.rumbasolutions.flask.model.VenueDetailImageSoap addVenueDetailImage(
 		long venueDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.VenueDetailImage returnValue = VenueServiceUtil.addVenueDetailImage(venueDetailId,
-					imageTitle, imageDesc, imagePath, serviceContext);
+					imageTitle, imageDesc, imageUUID, serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueDetailImageSoap.toSoapModel(returnValue);
 		}

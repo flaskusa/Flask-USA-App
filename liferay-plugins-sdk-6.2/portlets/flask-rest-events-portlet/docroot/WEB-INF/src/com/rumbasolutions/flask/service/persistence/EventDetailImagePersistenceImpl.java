@@ -860,7 +860,8 @@ public class EventDetailImagePersistenceImpl extends BasePersistenceImpl<EventDe
 		eventDetailImageImpl.setEventDetailId(eventDetailImage.getEventDetailId());
 		eventDetailImageImpl.setImageTitle(eventDetailImage.getImageTitle());
 		eventDetailImageImpl.setImageDesc(eventDetailImage.getImageDesc());
-		eventDetailImageImpl.setImagePath(eventDetailImage.getImagePath());
+		eventDetailImageImpl.setImageUUID(eventDetailImage.getImageUUID());
+		eventDetailImageImpl.setImageGroupId(eventDetailImage.getImageGroupId());
 
 		return eventDetailImageImpl;
 	}

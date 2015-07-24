@@ -14,7 +14,8 @@
 		<field name="endTime" type="Date" />
 		<field name="eventTypeId" type="long" />
 		<field name="eventTypeName" type="String" />
-		<field name="eventImagePath" type="String" />
+		<field name="eventImageUUID" type="String" />
+		<field name="eventImageGroupId" type="long" />
 		<field name="venueId" type="long" />
 		<field name="venueName" type="String" />
 	</model>
@@ -55,7 +56,8 @@
 		<field name="eventDetailId" type="long" />
 		<field name="imageTitle" type="String" />
 		<field name="imageDesc" type="String" />
-		<field name="imagePath" type="String" />
+		<field name="imageUUID" type="String" />
+		<field name="imageGroupId" type="long" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.EventType">
 		<field name="eventTypeId" type="long" />
@@ -128,7 +130,8 @@
 		<field name="venueDetailId" type="long" />
 		<field name="imageTitle" type="String" />
 		<field name="imageDesc" type="String" />
-		<field name="imagePath" type="String" />
+		<field name="imageUUID" type="String" />
+		<field name="imageGroupId" type="long" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.VenueImage">
 		<field name="venueImageId" type="long" />
@@ -137,7 +140,8 @@
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="title" type="String" />
-		<field name="venueImagePath" type="String" />
+		<field name="venueImageUUId" type="String" />
+		<field name="venueImageGroupId" type="long" />
 		<field name="venueId" type="long" />
 	</model>
 </model-hints>

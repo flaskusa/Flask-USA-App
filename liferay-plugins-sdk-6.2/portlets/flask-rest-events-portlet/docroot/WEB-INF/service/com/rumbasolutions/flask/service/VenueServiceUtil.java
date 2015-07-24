@@ -112,10 +112,10 @@ public class VenueServiceUtil {
 	}
 
 	public static void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImagePath,
+		java.lang.String venueImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService()
-			.addVenueImage(venueId, title, venueImagePath, serviceContext);
+			.addVenueImage(venueId, title, venueImageUUID, serviceContext);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImages(
@@ -130,10 +130,10 @@ public class VenueServiceUtil {
 	}
 
 	public static void updateVenueImage(long venueImageId,
-		java.lang.String title, java.lang.String venueImagePath,
+		java.lang.String title, java.lang.String venueImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService()
-			.updateVenueImage(venueImageId, title, venueImagePath,
+			.updateVenueImage(venueImageId, title, venueImageUUID,
 			serviceContext);
 	}
 
@@ -202,11 +202,11 @@ public class VenueServiceUtil {
 
 	public static com.rumbasolutions.flask.model.VenueDetailImage addVenueDetailImage(
 		long venueDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addVenueDetailImage(venueDetailId, imageTitle, imageDesc,
-			imagePath, serviceContext);
+			imageUUID, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(

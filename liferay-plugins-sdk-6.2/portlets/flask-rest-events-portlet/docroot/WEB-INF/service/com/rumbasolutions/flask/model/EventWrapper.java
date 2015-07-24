@@ -61,7 +61,8 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 		attributes.put("endTime", getEndTime());
 		attributes.put("eventTypeId", getEventTypeId());
 		attributes.put("eventTypeName", getEventTypeName());
-		attributes.put("eventImagePath", getEventImagePath());
+		attributes.put("eventImageUUID", getEventImageUUID());
+		attributes.put("eventImageGroupId", getEventImageGroupId());
 		attributes.put("venueId", getVenueId());
 		attributes.put("venueName", getVenueName());
 
@@ -142,10 +143,16 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 			setEventTypeName(eventTypeName);
 		}
 
-		String eventImagePath = (String)attributes.get("eventImagePath");
+		String eventImageUUID = (String)attributes.get("eventImageUUID");
 
-		if (eventImagePath != null) {
-			setEventImagePath(eventImagePath);
+		if (eventImageUUID != null) {
+			setEventImageUUID(eventImageUUID);
+		}
+
+		Long eventImageGroupId = (Long)attributes.get("eventImageGroupId");
+
+		if (eventImageGroupId != null) {
+			setEventImageGroupId(eventImageGroupId);
 		}
 
 		Long venueId = (Long)attributes.get("venueId");
@@ -444,23 +451,43 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	}
 
 	/**
-	* Returns the event image path of this event.
+	* Returns the event image u u i d of this event.
 	*
-	* @return the event image path of this event
+	* @return the event image u u i d of this event
 	*/
 	@Override
-	public java.lang.String getEventImagePath() {
-		return _event.getEventImagePath();
+	public java.lang.String getEventImageUUID() {
+		return _event.getEventImageUUID();
 	}
 
 	/**
-	* Sets the event image path of this event.
+	* Sets the event image u u i d of this event.
 	*
-	* @param eventImagePath the event image path of this event
+	* @param eventImageUUID the event image u u i d of this event
 	*/
 	@Override
-	public void setEventImagePath(java.lang.String eventImagePath) {
-		_event.setEventImagePath(eventImagePath);
+	public void setEventImageUUID(java.lang.String eventImageUUID) {
+		_event.setEventImageUUID(eventImageUUID);
+	}
+
+	/**
+	* Returns the event image group ID of this event.
+	*
+	* @return the event image group ID of this event
+	*/
+	@Override
+	public long getEventImageGroupId() {
+		return _event.getEventImageGroupId();
+	}
+
+	/**
+	* Sets the event image group ID of this event.
+	*
+	* @param eventImageGroupId the event image group ID of this event
+	*/
+	@Override
+	public void setEventImageGroupId(long eventImageGroupId) {
+		_event.setEventImageGroupId(eventImageGroupId);
 	}
 
 	/**

@@ -31,7 +31,8 @@
 			</basic>
 			<basic name="eventTypeId" />
 			<basic name="eventTypeName" />
-			<basic name="eventImagePath" />
+			<basic name="eventImageUUID" />
+			<basic name="eventImageGroupId" />
 			<basic name="venueId" />
 			<basic name="venueName" />
 			<transient name="modelAttributes" />
@@ -92,7 +93,8 @@
 			<basic name="eventDetailId" />
 			<basic name="imageTitle" />
 			<basic name="imageDesc" />
-			<basic name="imagePath" />
+			<basic name="imageUUID" />
+			<basic name="imageGroupId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -210,7 +212,8 @@
 			<basic name="venueDetailId" />
 			<basic name="imageTitle" />
 			<basic name="imageDesc" />
-			<basic name="imagePath" />
+			<basic name="imageUUID" />
+			<basic name="imageGroupId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -229,7 +232,8 @@
 				<temporal>TIMESTAMP</temporal>
 			</basic>
 			<basic name="title" />
-			<basic name="venueImagePath" />
+			<basic name="venueImageUUId" />
+			<basic name="venueImageGroupId" />
 			<basic name="venueId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

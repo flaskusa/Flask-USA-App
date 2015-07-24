@@ -190,19 +190,33 @@ public interface VenueDetailImageModel extends BaseModel<VenueDetailImage> {
 	public void setImageDesc(String imageDesc);
 
 	/**
-	 * Returns the image path of this venue detail image.
+	 * Returns the image u u i d of this venue detail image.
 	 *
-	 * @return the image path of this venue detail image
+	 * @return the image u u i d of this venue detail image
 	 */
 	@AutoEscape
-	public String getImagePath();
+	public String getImageUUID();
 
 	/**
-	 * Sets the image path of this venue detail image.
+	 * Sets the image u u i d of this venue detail image.
 	 *
-	 * @param imagePath the image path of this venue detail image
+	 * @param imageUUID the image u u i d of this venue detail image
 	 */
-	public void setImagePath(String imagePath);
+	public void setImageUUID(String imageUUID);
+
+	/**
+	 * Returns the image group ID of this venue detail image.
+	 *
+	 * @return the image group ID of this venue detail image
+	 */
+	public long getImageGroupId();
+
+	/**
+	 * Sets the image group ID of this venue detail image.
+	 *
+	 * @param imageGroupId the image group ID of this venue detail image
+	 */
+	public void setImageGroupId(long imageGroupId);
 
 	@Override
 	public boolean isNew();

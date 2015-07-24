@@ -70,11 +70,16 @@ public interface EventService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.Event> getAllEvents(
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.rumbasolutions.flask.model.Event getEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	public com.rumbasolutions.flask.model.Event addEvent(
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImagePath,
+		java.lang.String eventImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.Event updateEvent(long eventId,
@@ -121,6 +126,11 @@ public interface EventService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.EventDetail> getEventDetails(
 		long eventId, com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getEventDetailsWithImages(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext);
+
 	public void deleteEventDetail(long eventDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
@@ -129,7 +139,7 @@ public interface EventService extends BaseService, InvokableService {
 
 	public com.rumbasolutions.flask.model.EventDetailImage addEventDetailImage(
 		long eventDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(

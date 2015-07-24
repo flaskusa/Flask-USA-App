@@ -63,14 +63,20 @@ public class EventServiceWrapper implements EventService,
 	}
 
 	@Override
+	public com.rumbasolutions.flask.model.Event getEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventService.getEvent(eventId, serviceContext);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.Event addEvent(
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImagePath,
+		java.lang.String eventImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.addEvent(eventName, description, eventDate,
-			startTime, endTime, eventTypeId, venueId, eventImagePath,
+			startTime, endTime, eventTypeId, venueId, eventImageUUID,
 			serviceContext);
 	}
 
@@ -144,6 +150,12 @@ public class EventServiceWrapper implements EventService,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.json.JSONObject getEventDetailsWithImages(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventService.getEventDetailsWithImages(eventId, serviceContext);
+	}
+
+	@Override
 	public void deleteEventDetail(long eventDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_eventService.deleteEventDetail(eventDetailId, serviceContext);
@@ -158,10 +170,10 @@ public class EventServiceWrapper implements EventService,
 	@Override
 	public com.rumbasolutions.flask.model.EventDetailImage addEventDetailImage(
 		long eventDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.addEventDetailImage(eventDetailId, imageTitle,
-			imageDesc, imagePath, serviceContext);
+			imageDesc, imageUUID, serviceContext);
 	}
 
 	@Override

@@ -74,9 +74,10 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 			{ "venueDetailId", Types.BIGINT },
 			{ "imageTitle", Types.VARCHAR },
 			{ "imageDesc", Types.VARCHAR },
-			{ "imagePath", Types.VARCHAR }
+			{ "imageUUID", Types.VARCHAR },
+			{ "imageGroupId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueDetailImage (venueDetailImageId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueDetailId LONG,imageTitle VARCHAR(75) null,imageDesc VARCHAR(75) null,imagePath VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueDetailImage (venueDetailImageId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueDetailId LONG,imageTitle VARCHAR(75) null,imageDesc VARCHAR(75) null,imageUUID VARCHAR(75) null,imageGroupId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_VenueDetailImage";
 	public static final String ORDER_BY_JPQL = " ORDER BY venueDetailImage.venueDetailImageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_VenueDetailImage.venueDetailImageId ASC";
@@ -116,7 +117,8 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 		model.setVenueDetailId(soapModel.getVenueDetailId());
 		model.setImageTitle(soapModel.getImageTitle());
 		model.setImageDesc(soapModel.getImageDesc());
-		model.setImagePath(soapModel.getImagePath());
+		model.setImageUUID(soapModel.getImageUUID());
+		model.setImageGroupId(soapModel.getImageGroupId());
 
 		return model;
 	}
@@ -190,7 +192,8 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 		attributes.put("venueDetailId", getVenueDetailId());
 		attributes.put("imageTitle", getImageTitle());
 		attributes.put("imageDesc", getImageDesc());
-		attributes.put("imagePath", getImagePath());
+		attributes.put("imageUUID", getImageUUID());
+		attributes.put("imageGroupId", getImageGroupId());
 
 		return attributes;
 	}
@@ -245,10 +248,16 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 			setImageDesc(imageDesc);
 		}
 
-		String imagePath = (String)attributes.get("imagePath");
+		String imageUUID = (String)attributes.get("imageUUID");
 
-		if (imagePath != null) {
-			setImagePath(imagePath);
+		if (imageUUID != null) {
+			setImageUUID(imageUUID);
+		}
+
+		Long imageGroupId = (Long)attributes.get("imageGroupId");
+
+		if (imageGroupId != null) {
+			setImageGroupId(imageGroupId);
 		}
 	}
 
@@ -374,18 +383,29 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 
 	@JSON
 	@Override
-	public String getImagePath() {
-		if (_imagePath == null) {
+	public String getImageUUID() {
+		if (_imageUUID == null) {
 			return StringPool.BLANK;
 		}
 		else {
-			return _imagePath;
+			return _imageUUID;
 		}
 	}
 
 	@Override
-	public void setImagePath(String imagePath) {
-		_imagePath = imagePath;
+	public void setImageUUID(String imageUUID) {
+		_imageUUID = imageUUID;
+	}
+
+	@JSON
+	@Override
+	public long getImageGroupId() {
+		return _imageGroupId;
+	}
+
+	@Override
+	public void setImageGroupId(long imageGroupId) {
+		_imageGroupId = imageGroupId;
 	}
 
 	public long getColumnBitmask() {
@@ -427,7 +447,8 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 		venueDetailImageImpl.setVenueDetailId(getVenueDetailId());
 		venueDetailImageImpl.setImageTitle(getImageTitle());
 		venueDetailImageImpl.setImageDesc(getImageDesc());
-		venueDetailImageImpl.setImagePath(getImagePath());
+		venueDetailImageImpl.setImageUUID(getImageUUID());
+		venueDetailImageImpl.setImageGroupId(getImageGroupId());
 
 		venueDetailImageImpl.resetOriginalValues();
 
@@ -533,20 +554,22 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 			venueDetailImageCacheModel.imageDesc = null;
 		}
 
-		venueDetailImageCacheModel.imagePath = getImagePath();
+		venueDetailImageCacheModel.imageUUID = getImageUUID();
 
-		String imagePath = venueDetailImageCacheModel.imagePath;
+		String imageUUID = venueDetailImageCacheModel.imageUUID;
 
-		if ((imagePath != null) && (imagePath.length() == 0)) {
-			venueDetailImageCacheModel.imagePath = null;
+		if ((imageUUID != null) && (imageUUID.length() == 0)) {
+			venueDetailImageCacheModel.imageUUID = null;
 		}
+
+		venueDetailImageCacheModel.imageGroupId = getImageGroupId();
 
 		return venueDetailImageCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{venueDetailImageId=");
 		sb.append(getVenueDetailImageId());
@@ -564,8 +587,10 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 		sb.append(getImageTitle());
 		sb.append(", imageDesc=");
 		sb.append(getImageDesc());
-		sb.append(", imagePath=");
-		sb.append(getImagePath());
+		sb.append(", imageUUID=");
+		sb.append(getImageUUID());
+		sb.append(", imageGroupId=");
+		sb.append(getImageGroupId());
 		sb.append("}");
 
 		return sb.toString();
@@ -573,7 +598,7 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.VenueDetailImage");
@@ -612,8 +637,12 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 		sb.append(getImageDesc());
 		sb.append("]]></column-value></column>");
 		sb.append(
-			"<column><column-name>imagePath</column-name><column-value><![CDATA[");
-		sb.append(getImagePath());
+			"<column><column-name>imageUUID</column-name><column-value><![CDATA[");
+		sb.append(getImageUUID());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageGroupId</column-name><column-value><![CDATA[");
+		sb.append(getImageGroupId());
 		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
@@ -636,7 +665,8 @@ public class VenueDetailImageModelImpl extends BaseModelImpl<VenueDetailImage>
 	private boolean _setOriginalVenueDetailId;
 	private String _imageTitle;
 	private String _imageDesc;
-	private String _imagePath;
+	private String _imageUUID;
+	private long _imageGroupId;
 	private long _columnBitmask;
 	private VenueDetailImage _escapedModel;
 }

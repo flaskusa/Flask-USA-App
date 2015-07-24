@@ -80,8 +80,8 @@ public class FlaskUtil {
 		}	
 		return cal;
 	}
-	public static List<Event> setStringNamesForEvents(List<Event> eventList){
-		for (Event event : eventList){
+	
+	public static Event setStringNamesForEvent(Event event){
 			try {
 				Venue venue = VenueUtil.fetchByPrimaryKey(event.getVenueId());
 				event.setVenueName(venue.getVenueName());
@@ -91,6 +91,13 @@ public class FlaskUtil {
 				LOGGER.error(e);
 				e.printStackTrace();
 			}
+		
+			return event;
+	}
+	
+	public static List<Event> setStringNamesForEvents(List<Event> eventList){
+		for (Event event : eventList){
+			setStringNamesForEvent(event);
 		}
 		return eventList;
 	}

@@ -55,7 +55,8 @@ public class VenueImageWrapper implements VenueImage, ModelWrapper<VenueImage> {
 		attributes.put("createdDate", getCreatedDate());
 		attributes.put("modifiedDate", getModifiedDate());
 		attributes.put("title", getTitle());
-		attributes.put("venueImagePath", getVenueImagePath());
+		attributes.put("venueImageUUId", getVenueImageUUId());
+		attributes.put("venueImageGroupId", getVenueImageGroupId());
 		attributes.put("venueId", getVenueId());
 
 		return attributes;
@@ -99,10 +100,16 @@ public class VenueImageWrapper implements VenueImage, ModelWrapper<VenueImage> {
 			setTitle(title);
 		}
 
-		String venueImagePath = (String)attributes.get("venueImagePath");
+		String venueImageUUId = (String)attributes.get("venueImageUUId");
 
-		if (venueImagePath != null) {
-			setVenueImagePath(venueImagePath);
+		if (venueImageUUId != null) {
+			setVenueImageUUId(venueImageUUId);
+		}
+
+		Long venueImageGroupId = (Long)attributes.get("venueImageGroupId");
+
+		if (venueImageGroupId != null) {
+			setVenueImageGroupId(venueImageGroupId);
 		}
 
 		Long venueId = (Long)attributes.get("venueId");
@@ -275,23 +282,43 @@ public class VenueImageWrapper implements VenueImage, ModelWrapper<VenueImage> {
 	}
 
 	/**
-	* Returns the venue image path of this venue image.
+	* Returns the venue image u u ID of this venue image.
 	*
-	* @return the venue image path of this venue image
+	* @return the venue image u u ID of this venue image
 	*/
 	@Override
-	public java.lang.String getVenueImagePath() {
-		return _venueImage.getVenueImagePath();
+	public java.lang.String getVenueImageUUId() {
+		return _venueImage.getVenueImageUUId();
 	}
 
 	/**
-	* Sets the venue image path of this venue image.
+	* Sets the venue image u u ID of this venue image.
 	*
-	* @param venueImagePath the venue image path of this venue image
+	* @param venueImageUUId the venue image u u ID of this venue image
 	*/
 	@Override
-	public void setVenueImagePath(java.lang.String venueImagePath) {
-		_venueImage.setVenueImagePath(venueImagePath);
+	public void setVenueImageUUId(java.lang.String venueImageUUId) {
+		_venueImage.setVenueImageUUId(venueImageUUId);
+	}
+
+	/**
+	* Returns the venue image group ID of this venue image.
+	*
+	* @return the venue image group ID of this venue image
+	*/
+	@Override
+	public long getVenueImageGroupId() {
+		return _venueImage.getVenueImageGroupId();
+	}
+
+	/**
+	* Sets the venue image group ID of this venue image.
+	*
+	* @param venueImageGroupId the venue image group ID of this venue image
+	*/
+	@Override
+	public void setVenueImageGroupId(long venueImageGroupId) {
+		_venueImage.setVenueImageGroupId(venueImageGroupId);
 	}
 
 	/**

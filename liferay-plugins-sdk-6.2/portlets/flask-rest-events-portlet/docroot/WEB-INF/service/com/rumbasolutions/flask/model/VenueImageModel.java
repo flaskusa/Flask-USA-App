@@ -161,19 +161,33 @@ public interface VenueImageModel extends BaseModel<VenueImage> {
 	public void setTitle(String title);
 
 	/**
-	 * Returns the venue image path of this venue image.
+	 * Returns the venue image u u ID of this venue image.
 	 *
-	 * @return the venue image path of this venue image
+	 * @return the venue image u u ID of this venue image
 	 */
 	@AutoEscape
-	public String getVenueImagePath();
+	public String getVenueImageUUId();
 
 	/**
-	 * Sets the venue image path of this venue image.
+	 * Sets the venue image u u ID of this venue image.
 	 *
-	 * @param venueImagePath the venue image path of this venue image
+	 * @param venueImageUUId the venue image u u ID of this venue image
 	 */
-	public void setVenueImagePath(String venueImagePath);
+	public void setVenueImageUUId(String venueImageUUId);
+
+	/**
+	 * Returns the venue image group ID of this venue image.
+	 *
+	 * @return the venue image group ID of this venue image
+	 */
+	public long getVenueImageGroupId();
+
+	/**
+	 * Sets the venue image group ID of this venue image.
+	 *
+	 * @param venueImageGroupId the venue image group ID of this venue image
+	 */
+	public void setVenueImageGroupId(long venueImageGroupId);
 
 	/**
 	 * Returns the venue ID of this venue image.

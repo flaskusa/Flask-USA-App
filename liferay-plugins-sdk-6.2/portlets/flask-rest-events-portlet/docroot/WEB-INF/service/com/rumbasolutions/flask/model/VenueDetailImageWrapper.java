@@ -58,7 +58,8 @@ public class VenueDetailImageWrapper implements VenueDetailImage,
 		attributes.put("venueDetailId", getVenueDetailId());
 		attributes.put("imageTitle", getImageTitle());
 		attributes.put("imageDesc", getImageDesc());
-		attributes.put("imagePath", getImagePath());
+		attributes.put("imageUUID", getImageUUID());
+		attributes.put("imageGroupId", getImageGroupId());
 
 		return attributes;
 	}
@@ -113,10 +114,16 @@ public class VenueDetailImageWrapper implements VenueDetailImage,
 			setImageDesc(imageDesc);
 		}
 
-		String imagePath = (String)attributes.get("imagePath");
+		String imageUUID = (String)attributes.get("imageUUID");
 
-		if (imagePath != null) {
-			setImagePath(imagePath);
+		if (imageUUID != null) {
+			setImageUUID(imageUUID);
+		}
+
+		Long imageGroupId = (Long)attributes.get("imageGroupId");
+
+		if (imageGroupId != null) {
+			setImageGroupId(imageGroupId);
 		}
 	}
 
@@ -323,23 +330,43 @@ public class VenueDetailImageWrapper implements VenueDetailImage,
 	}
 
 	/**
-	* Returns the image path of this venue detail image.
+	* Returns the image u u i d of this venue detail image.
 	*
-	* @return the image path of this venue detail image
+	* @return the image u u i d of this venue detail image
 	*/
 	@Override
-	public java.lang.String getImagePath() {
-		return _venueDetailImage.getImagePath();
+	public java.lang.String getImageUUID() {
+		return _venueDetailImage.getImageUUID();
 	}
 
 	/**
-	* Sets the image path of this venue detail image.
+	* Sets the image u u i d of this venue detail image.
 	*
-	* @param imagePath the image path of this venue detail image
+	* @param imageUUID the image u u i d of this venue detail image
 	*/
 	@Override
-	public void setImagePath(java.lang.String imagePath) {
-		_venueDetailImage.setImagePath(imagePath);
+	public void setImageUUID(java.lang.String imageUUID) {
+		_venueDetailImage.setImageUUID(imageUUID);
+	}
+
+	/**
+	* Returns the image group ID of this venue detail image.
+	*
+	* @return the image group ID of this venue detail image
+	*/
+	@Override
+	public long getImageGroupId() {
+		return _venueDetailImage.getImageGroupId();
+	}
+
+	/**
+	* Sets the image group ID of this venue detail image.
+	*
+	* @param imageGroupId the image group ID of this venue detail image
+	*/
+	@Override
+	public void setImageGroupId(long imageGroupId) {
+		_venueDetailImage.setImageGroupId(imageGroupId);
 	}
 
 	@Override

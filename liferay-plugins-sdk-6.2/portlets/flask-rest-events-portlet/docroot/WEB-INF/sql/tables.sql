@@ -11,7 +11,8 @@ create table flaskevents_Event (
 	endTime DATE null,
 	eventTypeId LONG,
 	eventTypeName VARCHAR(75) null,
-	eventImagePath VARCHAR(75) null,
+	eventImageUUID VARCHAR(75) null,
+	eventImageGroupId LONG,
 	venueId LONG,
 	venueName VARCHAR(75) null
 );
@@ -54,7 +55,8 @@ create table flaskevents_EventDetailImage (
 	eventDetailId LONG,
 	imageTitle VARCHAR(75) null,
 	imageDesc VARCHAR(75) null,
-	imagePath VARCHAR(75) null
+	imageUUID VARCHAR(75) null,
+	imageGroupId LONG
 );
 
 create table flaskevents_EventType (
@@ -133,7 +135,8 @@ create table flaskevents_VenueDetailImage (
 	venueDetailId LONG,
 	imageTitle VARCHAR(75) null,
 	imageDesc VARCHAR(75) null,
-	imagePath VARCHAR(75) null
+	imageUUID VARCHAR(75) null,
+	imageGroupId LONG
 );
 
 create table flaskevents_VenueImage (
@@ -143,6 +146,7 @@ create table flaskevents_VenueImage (
 	createdDate DATE null,
 	modifiedDate DATE null,
 	title VARCHAR(75) null,
-	venueImagePath VARCHAR(75) null,
+	venueImageUUId VARCHAR(75) null,
+	venueImageGroupId LONG,
 	venueId LONG
 );
