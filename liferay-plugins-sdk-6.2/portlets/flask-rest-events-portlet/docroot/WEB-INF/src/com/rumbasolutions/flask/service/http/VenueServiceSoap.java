@@ -377,12 +377,12 @@ public class VenueServiceSoap {
 	public static com.rumbasolutions.flask.model.VenueDetailImageSoap updateVenueDetailImage(
 		long venueDetailImageId, long venueDetailId,
 		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imagePath,
+		java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.VenueDetailImage returnValue = VenueServiceUtil.updateVenueDetailImage(venueDetailImageId,
-					venueDetailId, imageTitle, imageDesc, imagePath,
+					venueDetailId, imageTitle, imageDesc, imageUUID,
 					serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueDetailImageSoap.toSoapModel(returnValue);

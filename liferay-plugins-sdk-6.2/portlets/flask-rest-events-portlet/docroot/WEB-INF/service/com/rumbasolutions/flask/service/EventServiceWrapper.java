@@ -85,11 +85,11 @@ public class EventServiceWrapper implements EventService,
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImagePath,
+		java.lang.String eventImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.updateEvent(eventId, eventName, description,
 			eventDate, startTime, endTime, eventTypeId, venueId,
-			eventImagePath, serviceContext);
+			eventImageUUID, serviceContext);
 	}
 
 	@Override
@@ -179,10 +179,10 @@ public class EventServiceWrapper implements EventService,
 	@Override
 	public com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(
 		long eventDetailImageId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.updateEventDetailImage(eventDetailImageId,
-			imageTitle, imageDesc, imagePath, serviceContext);
+			imageTitle, imageDesc, imageUUID, serviceContext);
 	}
 
 	@Override

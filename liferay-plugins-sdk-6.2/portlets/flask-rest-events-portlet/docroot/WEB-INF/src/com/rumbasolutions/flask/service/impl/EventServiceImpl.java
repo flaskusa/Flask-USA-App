@@ -19,14 +19,18 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.security.ac.AccessControlled;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.rumbasolutions.flask.model.Event;
 import com.rumbasolutions.flask.model.EventDetail;
 import com.rumbasolutions.flask.model.EventDetailImage;
@@ -109,6 +113,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
 			event.setEventImageUUID(eventImageUUID);
+			event.setEventImageGroupId(FlaskUtil.getFlaskRepositoryId());
 
 			Date now = new Date();
 			event.setCompanyId(serviceContext.getCompanyId());
@@ -128,7 +133,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	@Override
 	public Event updateEvent(long eventId, String eventName, String description, 
 						String eventDate, Date startTime, Date endTime,
-						long eventTypeId, long venueId, String eventImagePath,
+						long eventTypeId, long venueId, String eventImageUUID,
 								ServiceContext  serviceContext){
 		Event event=null;
 		try{
@@ -145,8 +150,8 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 
 		    event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
-			event.setEventImageUUID(eventImagePath);
-			
+			event.setEventImageUUID(eventImageUUID);
+			event.setEventImageGroupId(FlaskUtil.getFlaskRepositoryId());
 			
 			EventLocalServiceUtil.updateEvent(event);
 		}catch(Exception ex){
@@ -357,13 +362,13 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetailImage.setImageTitle(imageTitle);
 			eventDetailImage.setImageDesc(imageDesc);
 			eventDetailImage.setImageUUID(imageUUID);
+			eventDetailImage.setImageGroupId(FlaskUtil.getFlaskRepositoryId());
 			
 			Date now = new Date();
 			eventDetailImage.setCompanyId(serviceContext.getCompanyId());
 		    eventDetailImage.setUserId(serviceContext.getGuestOrUserId());
 		    eventDetailImage.setCreatedDate(serviceContext.getCreateDate(now));
 		    eventDetailImage.setModifiedDate(serviceContext.getModifiedDate(now));
-
 		    
 			EventDetailImageLocalServiceUtil.addEventDetailImage(eventDetailImage);
 			
@@ -376,14 +381,15 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	@Override
 	public EventDetailImage updateEventDetailImage(long eventDetailImageId,
 									String imageTitle,
-									String imageDesc, String imagePath,
+									String imageDesc, String imageUUID,
 									ServiceContext  serviceContext){
 		EventDetailImage eventDetailImage =null;
 		try{
 			eventDetailImage =EventDetailImageLocalServiceUtil.getEventDetailImage(eventDetailImageId);
 			eventDetailImage.setImageTitle(imageTitle);
 			eventDetailImage.setImageDesc(imageDesc);
-			eventDetailImage.setImageUUID(imagePath);
+			eventDetailImage.setImageUUID(imageUUID);
+			eventDetailImage.setImageGroupId(FlaskUtil.getFlaskRepositoryId());
 			
 			Date now = new Date();
 			eventDetailImage.setUserId(serviceContext.getGuestOrUserId());

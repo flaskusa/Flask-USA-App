@@ -169,7 +169,7 @@ public interface VenueService extends BaseService, InvokableService {
 	public com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
 		long venueDetailImageId, long venueDetailId,
 		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imagePath,
+		java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)

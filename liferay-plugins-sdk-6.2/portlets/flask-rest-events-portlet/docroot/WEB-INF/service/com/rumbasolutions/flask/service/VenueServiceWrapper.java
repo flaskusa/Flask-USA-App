@@ -218,10 +218,10 @@ public class VenueServiceWrapper implements VenueService,
 	public com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
 		long venueDetailImageId, long venueDetailId,
 		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imagePath,
+		java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.updateVenueDetailImage(venueDetailImageId,
-			venueDetailId, imageTitle, imageDesc, imagePath, serviceContext);
+			venueDetailId, imageTitle, imageDesc, imageUUID, serviceContext);
 	}
 
 	@Override

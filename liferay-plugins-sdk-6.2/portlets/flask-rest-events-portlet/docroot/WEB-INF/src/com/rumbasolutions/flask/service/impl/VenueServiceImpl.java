@@ -411,6 +411,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetailImage.setImageTitle(imageTitle);
 			venueDetailImage.setImageDesc(imageDesc);
 			venueDetailImage.setImageUUID(imageUUID);
+			venueDetailImage.setImageGroupId(FlaskUtil.getFlaskRepositoryId());
 			
 			Date now = new Date();
 			venueDetailImage.setCompanyId(serviceContext.getCompanyId());
@@ -429,14 +430,15 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	@Override
 	public VenueDetailImage updateVenueDetailImage(long venueDetailImageId,
 									long venueDetailId, String imageTitle,
-									String imageDesc, String imagePath,
+									String imageDesc, String imageUUID,
 									ServiceContext  serviceContext){
 		VenueDetailImage venueDetailImage =null;
 		try{
 			venueDetailImage =VenueDetailImageLocalServiceUtil.getVenueDetailImage(venueDetailImageId);
 			venueDetailImage.setImageTitle(imageTitle);
 			venueDetailImage.setImageDesc(imageDesc);
-			venueDetailImage.setImageUUID(imagePath);
+			venueDetailImage.setImageUUID(imageUUID);
+			venueDetailImage.setImageGroupId(FlaskUtil.getFlaskRepositoryId());
 			
 			Date now = new Date();
 			venueDetailImage.setUserId(serviceContext.getGuestOrUserId());

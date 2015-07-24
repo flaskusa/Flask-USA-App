@@ -314,7 +314,7 @@ public class EventServiceClp implements EventService {
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImagePath,
+		java.lang.String eventImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -338,7 +338,7 @@ public class EventServiceClp implements EventService {
 						
 					venueId,
 						
-					ClpSerializer.translateInput(eventImagePath),
+					ClpSerializer.translateInput(eventImageUUID),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -722,7 +722,7 @@ public class EventServiceClp implements EventService {
 	@Override
 	public com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(
 		long eventDetailImageId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -736,7 +736,7 @@ public class EventServiceClp implements EventService {
 						
 					ClpSerializer.translateInput(imageDesc),
 						
-					ClpSerializer.translateInput(imagePath),
+					ClpSerializer.translateInput(imageUUID),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

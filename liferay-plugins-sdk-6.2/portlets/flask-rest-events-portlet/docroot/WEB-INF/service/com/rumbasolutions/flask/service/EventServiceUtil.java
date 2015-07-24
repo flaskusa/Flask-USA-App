@@ -88,11 +88,11 @@ public class EventServiceUtil {
 		long eventId, java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImagePath,
+		java.lang.String eventImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateEvent(eventId, eventName, description, eventDate,
-			startTime, endTime, eventTypeId, venueId, eventImagePath,
+			startTime, endTime, eventTypeId, venueId, eventImageUUID,
 			serviceContext);
 	}
 
@@ -175,11 +175,11 @@ public class EventServiceUtil {
 
 	public static com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(
 		long eventDetailImageId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateEventDetailImage(eventDetailImageId, imageTitle,
-			imageDesc, imagePath, serviceContext);
+			imageDesc, imageUUID, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetailImage getEventDetailImage(

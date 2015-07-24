@@ -13,10 +13,13 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Country;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.CountryUtil;
 import com.liferay.portal.service.persistence.RegionUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.rumbasolutions.flask.model.Event;
 import com.rumbasolutions.flask.model.EventDetail;
 import com.rumbasolutions.flask.model.EventType;
@@ -42,7 +45,16 @@ public class FlaskUtil {
 	public static HashMap<Long, String> _infoType = new HashMap<Long, String>();
 	public static HashMap<Long, String> _infoTypeCategory = new HashMap<Long, String>();
 
-
+	public static long repositoryId = 0;
+	public static long getFlaskRepositoryId() throws PortalException, SystemException{
+		if(repositoryId==0){
+			long companyId = PortalUtil.getDefaultCompanyId();
+			Group group = GroupLocalServiceUtil.getGroup(companyId, "guest");
+			repositoryId = group.getGroupId();
+		}
+		return repositoryId;	
+	}
+	
 	public static Calendar parseDate(String dateVal){
 		Calendar cal = Calendar.getInstance();
 		Date dt =null;

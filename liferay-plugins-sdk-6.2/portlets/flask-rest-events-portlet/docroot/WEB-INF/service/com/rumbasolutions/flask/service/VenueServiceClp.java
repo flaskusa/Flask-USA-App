@@ -884,7 +884,7 @@ public class VenueServiceClp implements VenueService {
 	public com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
 		long venueDetailImageId, long venueDetailId,
 		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imagePath,
+		java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -900,7 +900,7 @@ public class VenueServiceClp implements VenueService {
 						
 					ClpSerializer.translateInput(imageDesc),
 						
-					ClpSerializer.translateInput(imagePath),
+					ClpSerializer.translateInput(imageUUID),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

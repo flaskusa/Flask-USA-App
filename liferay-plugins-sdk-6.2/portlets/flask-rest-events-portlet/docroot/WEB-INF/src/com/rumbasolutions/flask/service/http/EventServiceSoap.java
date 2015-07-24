@@ -118,13 +118,13 @@ public class EventServiceSoap {
 		long eventId, java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImagePath,
+		java.lang.String eventImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.Event returnValue = EventServiceUtil.updateEvent(eventId,
 					eventName, description, eventDate, startTime, endTime,
-					eventTypeId, venueId, eventImagePath, serviceContext);
+					eventTypeId, venueId, eventImageUUID, serviceContext);
 
 			return com.rumbasolutions.flask.model.EventSoap.toSoapModel(returnValue);
 		}
@@ -308,12 +308,12 @@ public class EventServiceSoap {
 
 	public static com.rumbasolutions.flask.model.EventDetailImageSoap updateEventDetailImage(
 		long eventDetailImageId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imagePath,
+		java.lang.String imageDesc, java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.EventDetailImage returnValue = EventServiceUtil.updateEventDetailImage(eventDetailImageId,
-					imageTitle, imageDesc, imagePath, serviceContext);
+					imageTitle, imageDesc, imageUUID, serviceContext);
 
 			return com.rumbasolutions.flask.model.EventDetailImageSoap.toSoapModel(returnValue);
 		}

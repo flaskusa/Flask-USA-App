@@ -212,11 +212,11 @@ public class VenueServiceUtil {
 	public static com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
 		long venueDetailImageId, long venueDetailId,
 		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imagePath,
+		java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateVenueDetailImage(venueDetailImageId, venueDetailId,
-			imageTitle, imageDesc, imagePath, serviceContext);
+			imageTitle, imageDesc, imageUUID, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.VenueDetailImage getVenueDetailImage(
