@@ -1,6 +1,12 @@
 var _flaskLib = {};
+
+_flaskLib.UTILITY = {
+		IMAGES_PATH			: "/c/document_library/get_file",
+		GRID_GROUP_EXPAND   : true
+}
+
 _flaskLib.SERVICE_ENDPOINTS = {
-				API_PREFIX					:"/api/jsonws",
+				API_PREFIX					: "/api/jsonws",
 				GET_COUNTRIES 				: "/flask-rest-users-portlet.flaskadmin/get-countries",
 				GET_REGION 					: "/flask-rest-users-portlet.flaskadmin/get-region",
 				GET_USA_REGION 				: "/flask-rest-users-portlet.flaskadmin/get-usa-regions",
@@ -131,6 +137,24 @@ _flaskLib.showSuccessMessage = function (elementId, msg){
 	var ele = $('#'+ elementId);
 	ele.text(msg);
 	ele.removeClass().addClass('alert alert-success');
+	ele.show();
+}
+_flaskLib.showWarningMessage = function (elementId, msg){
+	if(typeof elementId=="object")
+		var ele = $(elementId);
+	else
+		var ele = $('#'+ elementId);
+	ele.text(msg);
+	ele.removeClass().addClass('alert alert-warning');
+	ele.show();
+}
+_flaskLib.showInformationMessage = function (elementId, msg){
+	if(typeof elementId=="object")
+		var ele = $(elementId);
+	else
+		var ele = $('#'+ elementId);
+	ele.text(msg);
+	ele.removeClass().addClass('alert alert-info');
 	ele.show();
 }
 
