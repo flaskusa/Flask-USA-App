@@ -30,7 +30,10 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.rumbasolutions.flask.model.Event;
 //import com.rumbasolutions.flask.service.impl.EventServiceImpl;
+import com.rumbasolutions.flask.service.EventServiceUtil;
+import com.rumbasolutions.flask.service.VenueServiceUtil;
 
 public class FlaskDocLibUtil {
 	public static final String _eventRootFolder = "Event";
@@ -40,6 +43,7 @@ public class FlaskDocLibUtil {
 	public static Role _guestRole =null;
 	
 	public static long _repositoryId = 0; 
+	public static long _eventId = 0;
 	//group id is used as repository id
 	public static long getFlaskRepositoryId() throws PortalException, SystemException{
 		if(_repositoryId==0){
@@ -95,28 +99,29 @@ public class FlaskDocLibUtil {
 	}
 	
 	
-	public static Folder createEventContentTypeFolder(long eventId, long infoTypeId, long infoTypeCategoryId,long venueDetailId, ServiceContext serviceContext) throws PortalException, SystemException{
+	public static Folder createEventContentTypeFolder(long eventId, long venueDetailId, ServiceContext serviceContext) throws PortalException, SystemException{
 		long repositoryId = getFlaskRepositoryId();
 		long userId = serviceContext.getUserId();
+		_eventId = eventId;
 		Folder folder = getOrCreateFolder(_eventRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
 		String eventFolderName = folder.getName()+"-"+eventId;
 		Folder eventFolder = getOrCreateFolder(eventFolderName, folder.getFolderId(), folder.getRepositoryId(), userId, serviceContext);
-		Folder infoTypeFolder = getOrCreateFolder(String.valueOf(infoTypeId), eventFolder.getFolderId(), eventFolder.getRepositoryId(),userId, serviceContext);
-		Folder infoTypeContentFolder = getOrCreateFolder(String.valueOf(infoTypeCategoryId), infoTypeFolder.getFolderId(), infoTypeFolder.getRepositoryId(),userId, serviceContext);
-		Folder eventDetailFolder = getOrCreateFolder(String.valueOf(venueDetailId), infoTypeContentFolder.getFolderId(), infoTypeContentFolder.getRepositoryId(),userId, serviceContext);
-		return eventDetailFolder;
+		//Folder infoTypeFolder = getOrCreateFolder(String.valueOf(infoTypeId), eventFolder.getFolderId(), eventFolder.getRepositoryId(),userId, serviceContext);
+		//Folder infoTypeContentFolder = getOrCreateFolder(String.valueOf(infoTypeCategoryId), infoTypeFolder.getFolderId(), infoTypeFolder.getRepositoryId(),userId, serviceContext);
+		//Folder eventDetailFolder = getOrCreateFolder(String.valueOf(venueDetailId), eventFolder.getFolderId(), eventFolder.getRepositoryId(),userId, serviceContext);
+		return eventFolder;
 	}
 	
-	public static Folder createVenueContentTypeFolder(long venueId, long infoTypeId, long infoTypeCategoryId,long venueDetailId, ServiceContext serviceContext) throws PortalException, SystemException{
+	public static Folder createVenueContentTypeFolder(long venueId, long venueDetailId, ServiceContext serviceContext) throws PortalException, SystemException{
 		long repositoryId = getFlaskRepositoryId();
 		long userId = serviceContext.getUserId();
 		Folder folder = getOrCreateFolder(_venueRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
 		String venueFolderName = folder.getName()+"-"+venueId;
 		Folder venueFolder = getOrCreateFolder(venueFolderName, folder.getFolderId(), folder.getRepositoryId(), userId, serviceContext);
-		Folder infoTypeFolder = getOrCreateFolder(String.valueOf(infoTypeId), venueFolder.getFolderId(), venueFolder.getRepositoryId(),userId, serviceContext);
-		Folder infoTypeContentFolder = getOrCreateFolder(String.valueOf(infoTypeCategoryId), infoTypeFolder.getFolderId(), infoTypeFolder.getRepositoryId(),userId, serviceContext);
-		Folder venueDetailFolder = getOrCreateFolder(String.valueOf(venueDetailId), infoTypeContentFolder.getFolderId(), infoTypeContentFolder.getRepositoryId(),userId, serviceContext);
-		return venueDetailFolder;
+		//Folder infoTypeFolder = getOrCreateFolder(String.valueOf(infoTypeId), venueFolder.getFolderId(), venueFolder.getRepositoryId(),userId, serviceContext);
+		//Folder infoTypeContentFolder = getOrCreateFolder(String.valueOf(infoTypeCategoryId), infoTypeFolder.getFolderId(), infoTypeFolder.getRepositoryId(),userId, serviceContext);
+		//Folder venueDetailFolder = getOrCreateFolder(String.valueOf(venueDetailId), infoTypeContentFolder.getFolderId(), infoTypeContentFolder.getRepositoryId(),userId, serviceContext);
+		return venueFolder;
 	}	
 	
 	public static Folder getEventRootFolder(ServiceContext serviceContext) throws PortalException, SystemException{
@@ -176,16 +181,26 @@ public class FlaskDocLibUtil {
  */
 	public static FileEntry addFileEntry(Folder folder, String sourcefileName,
 										 String title, String desc, File file,  
-										 String mimeType,  ServiceContext serviceContext) 
+										 String mimeType,  ServiceContext serviceContext, long eventDetailId, long venueDetailId) 
 														 throws PortalException, SystemException{
 		FileEntry fileEntry=null;	
 		try{	
-			fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), folder.getRepositoryId(), 
-												folder.getFolderId(), sourcefileName, mimeType, 
-												title, desc, 
-												"", file, 
-												serviceContext);
-			setGuestViewPermission(fileEntry);
+				fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), folder.getRepositoryId(), 
+													folder.getFolderId(), sourcefileName, mimeType, 
+													title, desc, 
+													"", file, 
+													serviceContext);
+				String imageUUID =  fileEntry.getUuid();
+				setGuestViewPermission(fileEntry);
+				if(eventDetailId>0)
+				{
+					EventServiceUtil.addEventDetailImage(eventDetailId, title, desc, imageUUID, _repositoryId, serviceContext);
+					FlaskDocLibUtil.updateEventLogoPath(imageUUID);
+				}
+				else
+				{
+					VenueServiceUtil.addVenueDetailImage(venueDetailId, title, desc, imageUUID, _repositoryId, serviceContext);
+				}
 			}catch(Exception ex){
 			
 			}
@@ -276,12 +291,24 @@ public class FlaskDocLibUtil {
 		return mimeType;
 	}
 	
-	public static String updateEventLogoPath(String FilePath){
+	public static String updateEventLogoPath(String eventImageUUID){
 		String filePath="";
 		try {
-			//EventServiceImpl t = new EventServiceImpl();
-			//t.updateEvent(eventId, eventName, description, eventDate, startTime, endTime, eventTypeId, venueId, eventImagePath, serviceContext);
-			return filePath; 
+			ServiceContext serviceContext = new ServiceContext();
+			 Event eventInfo = EventServiceUtil.getEvent(_eventId, serviceContext);
+			EventServiceUtil.updateEvent(_eventId, 
+					eventInfo.getEventName(),
+					eventInfo.getDescription(),	
+					eventInfo.getEventDate().toString(), 
+					eventInfo.getStartTime(),
+					eventInfo.getEndTime(), 
+					eventInfo.getEventTypeId(), 
+					eventInfo.getVenueId(), 
+					eventImageUUID, 
+					_repositoryId,
+					serviceContext);
+			
+			return eventImageUUID; 
 		}
 		catch (Exception e) {
 			//e.printStackTrace();
