@@ -1,41 +1,5 @@
 var alllist = [];
 
-function fnLoadList() {
-	/*var params = "";
-	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params,
-			function(data) {
-				console.log(data);
-				if (data.responseStatus == 1) {
-					alllist = data.responseJson;
-					fnlist(alllist);
-				} 
-				else {
-					alert("MESSAGES.ERRORR_REGISTER_USER");
-				}
-			},
-			function(data){
-				console.log(data);
-			});
-	
-	var flaskRequest = new Request();
-	params = {};
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params, 
-	function(data){
-		alllist = data.responseJson;
-		fnlist(alllist);
-	} , function(error){ 
-		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
-		console.log("Error in getting data: " + error);
-	});	*/
-	/*Liferay.Service(_eventModel.SERVICE_ENDPOINTS.GET_EVENT,
-			  function(obj) {
-				//alllist = obj.responseJson;
-				fnlist(obj);
-			  }
-			);	*/
-}
-
 function fnlist(tdata) {
 	 function formatUnixToTime(tdate)
 		{
@@ -72,35 +36,11 @@ function fnlist(tdata) {
 		 	$(divRowItem).click(function(){
 		 		$('#one').hide();
 		 		$("#spinningSquaresG").show(); 
-		 		wait(function()
-		 		{
-					$("#spinningSquaresG").hide();	
-				 	$('#two').show();	
-		 		},3);
-		 		fnShowSlider($(this).attr('data-id'),"",2);
-		 		fnShowSlider($(this).attr('data-id'),"",3);
-		 		fnShowSlider($(this).attr('data-id'),"",4);
+		 		fnGetEventImages(tdata[i].eventId);
 		 	});
 	    }
 	 	$(divRow).appendTo($("#placeholder"));
 }
-
-$(document).ready(function(){
-	//fnLoadList();
-	$(".cssback").click(function(){
-		$('#one').show();
-		$('#two').hide();
-	});
-	
-	jQuery.expr[':'].case_insensitive_contains = function(a, i, m) {
-		return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
-	};	
-	
-	$("#txtSearch").keyup(function(){
-		$(".row-fluid .span9 .lbldiv:case_insensitive_contains("+$(this).val()+")").closest(".row-fluid").show(250, function() {});
-		$(".row-fluid .span9 .lbldiv:not(:case_insensitive_contains("+$(this).val()+"))").closest(".row-fluid").hide(500, function() {});		
-	});
-});
 
 function fnRenderEvents(repositoryId,parentFolderId,folderName,eventName){
 	var folderId;
@@ -135,62 +75,7 @@ function fnGetEventFolder(repositoryId,parentFolderId,folderName){
 		return folderId;
 }
 
-function fnRenderSliders(repositoryId,parentFolderId,folderName,Count){
-	var folderId = 0;
-	var ws_images = "#ws_images"+Count;
-	var wowslider_container = "#wowslider-container"+Count;
-	var flaskRequest = new Request();
-		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
-		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_FOLDERS, params, 
-			function (data){
-				folderId = data.responseJson.folderId;
-				displayImages(repositoryId, folderId, ws_images, wowslider_container)
-			} ,
-			function (data){
-				folderId = 0;
-			});
-		
-		return folderId;
-}
-
-function displayImages(repositoryId, folderId, ws_images, wowslider_container,ulObj)
-{
-	var flaskRequest = new Request();
-	params= {'repositoryId': repositoryId, 'folderId': folderId};
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILES, params, 
-    function(obj) {
-      if(typeof obj=="object" && obj.length > 0)
-      {
-			var temp_html;
-			temp_html = "";
-			var imageUrl;
-			var uploadedby;
-			for(var i=0;i<obj.length;i++)
-			{
-				var liObj = $("<li/>");				
-				imageUrl = "/documents/"+repositoryId+"/"+folderId+"/"+obj[i].title;
-				uploadedby = "uploaded by " + obj[i].userName;
-				$(liObj).html("<img src="+imageUrl+" alt='"+uploadedby+"' title='"+uploadedby+"' id='wows1_0'/>");
-				$(liObj).appendTo(ulObj);
-			}
-      }
-      else
-      {
-    	  	var temp_html;
-			var imageUrl;
-			imageUrl = "/flask-view-events-portlet/img/NoData.png";
-			var liObj = $("<li/>");				
-			uploadedby = "No data";
-			$(liObj).html("<img src="+imageUrl+" alt='"+uploadedby+"' title='"+uploadedby+"' id='wows1_0'/>");
-			$(liObj).appendTo(ulObj);
-      }
-      $(ulObj).appendTo($(ws_images))      
-      $(wowslider_container).wowSlider();
- });
-}
-
 function fnShowEventLogo(_repositoryId,_eventId,_container){
-	///LOGO START
 	var LogoURL = "";
 	var flaskRequest = new Request();
 	params= {'repositoryId': _repositoryId, 'parentFolderId': 0, 'name': 'Event'};
@@ -221,88 +106,69 @@ function fnShowEventLogo(_repositoryId,_eventId,_container){
 	});
 }
 
-function fnShowSlider(_eventId,_divObj,_infoTypeId){
-	var ws_images = "#ws_images"+_infoTypeId;
-	var wowslider_container = "#wowslider-container"+_infoTypeId;
-	$(ws_images).html("");
-	$(_divObj).html("");
-	var repositoryId = $("#repositoryId").val();
-	var eventId = _eventId;
-	var infoTypeId = _infoTypeId;
+function fnGetEventImages(eventId){
 	var flaskRequest = new Request();
-	params= {'repositoryId': repositoryId, 'parentFolderId': 0, 'name': 'Event'};
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
-		function (data){
-			folderName = 'Event-'+eventId;
-			var flaskRequestChild = new Request();
-			paramsChild= {'repositoryId': repositoryId, 'parentFolderId': data.folderId, 'name': folderName};
-			flaskRequestChild.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
-				function (data){
-					var flaskRequestChild1 = new Request();
-					paramsChild1= {'repositoryId': repositoryId, 'parentFolderId': data.folderId, 'name': infoTypeId};
-					flaskRequestChild1.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild1, 
-						function (data){
-							var flaskRequestChild2 = new Request();
-							paramsChild2= {'repositoryId': repositoryId, 'parentFolderId': data.folderId};
-							flaskRequestChild2.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDERS , paramsChild2,
-								function (data){
-									var dataJson = data;
-									for(var iCount=0;iCount<dataJson.length;iCount++){
-										folderId = dataJson[iCount].folderId;
-										var flaskRequestChild3 = new Request();
-										paramsChild2= {'repositoryId': repositoryId, 'parentFolderId': folderId};
-										flaskRequestChild3.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDERS , paramsChild2, 
-											function (data){
-												var _dataJson = data;
-												var tempHtml;
-												var ulObj = $("<ul/>");
-												for(var _iCount=0;_iCount<_dataJson.length;_iCount++){
-													displayImages(repositoryId, _dataJson[_iCount].folderId, ws_images, wowslider_container,ulObj);
-												}
-											} ,
-										function (data){
-											fnBlankSlide(ws_images,wowslider_container)
-										});
-									}
-								} ,
-								function (data){
-									fnBlankSlide(ws_images,wowslider_container)
-								});
-						} ,
-						function (data){
-							fnBlankSlide(ws_images,wowslider_container)
-						});
-
-				} ,
-				function (data){
-					fnBlankSlide(ws_images,wowslider_container)
-				});
-		} ,
-		function (data){
-			fnBlankSlide(ws_images,wowslider_container)
-		});
-}
-
-function fnRenderSlider(folderId,_divObj){
-	var flaskRequest = new Request();
-	params= {'repositoryId': $("#repositoryId").val(), 'folderId': folderId};
-	console.log(params);
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILES , params, 
-		function (data){
-			console.log(data);
-			if(typeof data=="object"){
-				console.log(data);
-				var iSelected = false;
-		    	for(var iCount=0;iCount<data.length;iCount++){
-		    		var imgURL = '/documents/'+data[iCount].groupId+'/'+data[iCount].folderId+'/'+data[iCount].title;
-				    var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-fileEntryId':data[iCount].fileEntryId});
-				    $(objdiv).appendTo($(_divObj));
-		    	}
-		    }		
-		} ,
+	params= {'eventId': eventId};
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL_WITH_IMAGES , params, 
+		function(data){
+			var arrPreEvent = [];
+			var arrDurEvent = [];
+			var arrPosEvent = [];
+			objEventDetails = data.EventDetails;
+			$.each(objEventDetails, function(idx, obj) {
+				objEventDetail = jQuery.parseJSON(obj.EventDetail);
+				var imgURL = "";
+				switch(parseInt(objEventDetail.infoTypeId)) {
+			    case 2:
+			    	fnFillImageArray(obj.EventDetailImages,arrPreEvent)
+			        break;
+			    case 3:
+			    	fnFillImageArray(obj.EventDetailImages,arrDurEvent)
+			        break;
+			    case 4:
+			    	fnFillImageArray(obj.EventDetailImages,arrPosEvent)
+			        break;
+				}				
+			});				
+			fnSlider(2,arrPreEvent);
+			fnSlider(3,arrDurEvent);
+			fnSlider(4,arrPosEvent);
+			fnStopProgress();
+		},
 		function (data){
 			console.log("Error in getting Folder: " + data );
+			fnStopProgress();
 		});	
+}
+
+function fnFillImageArray(eventDetailImages,objArray){
+	$.each(eventDetailImages, function(idx, objImg) {
+		objImage = jQuery.parseJSON(objImg.EventDetailImage);
+		imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
+		objArray.push(imgURL);
+		imgURL = "";
+	});
+	return objArray;
+}
+
+function fnSlider(infoType,arrImage){
+	var ws_images = "#ws_images"+infoType;
+	var wowslider_container = "#wowslider-container"+infoType;
+	$(ws_images).html("");
+	if(arrImage.length>0){
+		var objUl = $("<ul/>");
+		$.each(arrImage, function( index, value ) {
+			var objli = $("<li/>");
+			var objImg = $("<img/>",{'src':value});
+			$(objImg).appendTo(objli);
+			$(objli).appendTo(objUl);
+		});
+	    $(objUl).appendTo($(ws_images));
+	}
+	else{
+		fnBlankSlide(ws_images,wowslider_container);
+	}
+    $(wowslider_container).wowSlider();
 }
 
 function fnBlankSlide(ws_images,wowslider_container){
@@ -312,8 +178,30 @@ function fnBlankSlide(ws_images,wowslider_container){
 	var ulObj = $("<ul/>");
 	var liObj = $("<li/>");				
 	uploadedby = "No data";
-	$(liObj).html("<img src="+imageUrl+" alt='"+uploadedby+"' title='"+uploadedby+"' id='wows1_0'/>");
+	$(liObj).html("<img src="+imageUrl+"></img>");
 	$(liObj).appendTo(ulObj);
 	$(ulObj).appendTo($(ws_images))      
-	$(wowslider_container).wowSlider();
+}
+
+$(document).ready(function(){
+	//fnLoadList();
+	$(".cssback").click(function(){
+		$('#one').show();
+		$('#two').hide();
+	});
+	//Search options
+	jQuery.expr[':'].case_insensitive_contains = function(a, i, m) {
+		return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+	};	
+	
+	$("#txtSearch").keyup(function(){
+		$(".row-fluid .span9 .lbldiv:case_insensitive_contains("+$(this).val()+")").closest(".row-fluid").show(250, function() {});
+		$(".row-fluid .span9 .lbldiv:not(:case_insensitive_contains("+$(this).val()+"))").closest(".row-fluid").hide(500, function() {});		
+	});
+});
+
+function fnStopProgress(){
+	$("#spinningSquaresG").hide();	
+ 	$('#two').show();	
+ 	$(".ws_controls").hide();
 }
