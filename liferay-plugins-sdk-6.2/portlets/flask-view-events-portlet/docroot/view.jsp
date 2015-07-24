@@ -24,16 +24,14 @@
   themeDisplay.getLayout().getUuid();
 %>
 <portlet:defineObjects />
-<link async href="http://fonts.googleapis.com/css?family=Average%20Sans" rel="stylesheet" type="text/css"/>
-<link async href="http://fonts.googleapis.com/css?family=Gochi%20Hand" rel="stylesheet" type="text/css"/>
+
 <aui:script use="array-extras">
 	$(document).ready(function(){
 		Liferay.Service(_eventModel.SERVICE_ENDPOINTS.GET_EVENT,
 		  function(obj) {
-			//alllist = obj.responseJson;
 			fnlist(obj);
 		  }
-		);	
+		);
 	});
 </aui:script>
 <body>
@@ -92,9 +90,8 @@
   </td>
 </tr>
 </table>
-
 	<input class="btn btn-info cssback" type="button" value="Back"/>
-	</br></br></br></br>
+	<!--</br></br></br></br>-->
 </div>	
 
 	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
@@ -104,7 +101,7 @@
                 <td class="footertxt">
                     <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
                 </td>
-                <td class="asans"><b>FREE PINT WITH WITH A BURGER</b>
+                <td class="asans"><b>FREE PINT WITH A BURGER</b>
                 <br/>
                 <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
                 <br/>
