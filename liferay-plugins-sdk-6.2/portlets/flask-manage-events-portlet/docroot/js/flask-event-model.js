@@ -25,7 +25,8 @@ _eventModel.DATA_MODEL= {
 		 	 { name: 'eventTypeName', type: 'string' },
 		 	 { name: 'venueId', type:'long' },
 		 	 { name: 'venueName', type:'string' },
-		 	 { name: 'eventImagePath', type:'string' }
+		 	 { name: 'eventImageUUID', type:'string' },
+		 	 { name: 'eventImageGroupId', type:'string' }
 		]
 	};
 

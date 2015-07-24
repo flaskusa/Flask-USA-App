@@ -13,7 +13,9 @@ _eventDetailModel.SERVICE_ENDPOINTS = {
 	GET_FILES					: "/dlapp/get-file-entries",
 	GET_FILE_BY_TITLE			: "/dlapp/get-file-entry",
 	DELETE_FILES				: "/dlapp/delete-file-entry",
-	DELETE_FILE_BY_TITLE		: "/dlapp/delete-file-entry-by-title"
+	DELETE_FILE_BY_TITLE		: "/dlapp/delete-file-entry-by-title",
+	GET_EVENTDETAIL_IMAGES		: "/flask-rest-events-portlet.event/get-event-detail-images",
+	GET_IMAGE_BY_UUID_GROUPID	: "/dlapp/get-file-entry-by-uuid-and-group-id"
 };
 
 _eventDetailModel.DATA_MODEL= {
@@ -64,7 +66,8 @@ _eventDetailModel.MESSAGES= {
 		DETAIL_DEL_SUCCESS: "Event details successfully deleted",
 		DETAIL_DEL_ERR: "Error in deleting event details",
 		DETAIL_DUPLICATE: "Event detail with same title already exist",
-		DETAIL_NO_IMAGES_INFO: "No images found"
+		DETAIL_NO_IMAGES_INFO: "No images found",
+		DETAIL_IMAGE_DELETE: "Deleted successfully"
  };
 
 _eventDetailModel.loadContentType = function(elementId,selectedId){
