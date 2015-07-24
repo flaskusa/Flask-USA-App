@@ -194,12 +194,13 @@ public class FlaskDocLibUtil {
 				setGuestViewPermission(fileEntry);
 				if(eventDetailId>0)
 				{
-					EventServiceUtil.addEventDetailImage(eventDetailId, title, desc, imageUUID, _repositoryId, serviceContext);
+
+					EventServiceUtil.addEventDetailImage(eventDetailId, title, desc, imageUUID, serviceContext);
 					FlaskDocLibUtil.updateEventLogoPath(imageUUID);
 				}
 				else
 				{
-					VenueServiceUtil.addVenueDetailImage(venueDetailId, title, desc, imageUUID, _repositoryId, serviceContext);
+					VenueServiceUtil.addVenueDetailImage(venueDetailId, title, desc, imageUUID, serviceContext);
 				}
 			}catch(Exception ex){
 			
@@ -296,7 +297,7 @@ public class FlaskDocLibUtil {
 		try {
 			ServiceContext serviceContext = new ServiceContext();
 			 Event eventInfo = EventServiceUtil.getEvent(_eventId, serviceContext);
-			EventServiceUtil.updateEvent(_eventId, 
+			/*EventServiceUtil.updateEvent(_eventId, 
 					eventInfo.getEventName(),
 					eventInfo.getDescription(),	
 					eventInfo.getEventDate().toString(), 
@@ -306,7 +307,7 @@ public class FlaskDocLibUtil {
 					eventInfo.getVenueId(), 
 					eventImageUUID, 
 					_repositoryId,
-					serviceContext);
+					serviceContext);*/
 			
 			return eventImageUUID; 
 		}
