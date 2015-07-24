@@ -95,7 +95,7 @@ function initialize(portletId, portlet){
 		   </div>		   
 		  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
 		  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
-		  <input type="hidden" id="eventImagePath" value="">	
+		  <input type="hidden" id="eventImageUUID" value="">	
 		  <input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
 		  <input id="eventId" type="hidden" value="0">
 		</form>  
