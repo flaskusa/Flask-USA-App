@@ -1,17 +1,16 @@
 var alllist = [];
 
-function fnlist(tdata) {
-	 function formatUnixToTime(tdate)
-		{
-			var date = new Date(tdate);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
+function formatUnixToTime(tdate)
+{
+	var date = new Date(tdate);
+	var hours = date.getHours();
+	var minutes = "0" + date.getMinutes();
+	var ampm = hours >= 12 ? 'PM' : 'AM';
+	hours = hours % 12;
+	return hours + ':' + minutes.substr(-2) + ' ' + ampm;
+}
 
-			var ampm = hours >= 12 ? 'PM' : 'AM';
-			hours = hours % 12;
-			return hours + ':' + minutes.substr(-2) + ' ' + ampm;
-		}
-	 
+function fnlist(tdata) {
 	 var divRow = $('#placeholder');
 	 for(var i in tdata)
 		{
@@ -34,9 +33,9 @@ function fnlist(tdata) {
 		 	$(divRowItem).appendTo($(divRow));
 		 	fnShowEventLogo($("#repositoryId").val(),tdata[i].eventId,divCol3)
 		 	$(divRowItem).click(function(){
-		 		$('#one').hide();
-		 		$("#spinningSquaresG").show(); 
-		 		fnGetEventImages(tdata[i].eventId);
+		 		$("#spinningSquaresG").show();
+		 		$('#one').hide();		 		
+		 		fnGetEventImages($(this).attr("data-id"));
 		 	});
 	    }
 	 	$(divRow).appendTo($("#placeholder"));
