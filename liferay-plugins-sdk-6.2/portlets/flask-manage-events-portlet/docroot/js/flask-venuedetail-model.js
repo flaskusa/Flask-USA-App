@@ -13,7 +13,10 @@ _venueDetailModel.SERVICE_ENDPOINTS = {
 	GET_FILE_BY_TITLE			: "/dlapp/get-file-entry",
 	GET_FILES					: "/dlapp/get-file-entries",	
 	DELETE_FILES				: "/dlapp/delete-file-entry",
-	DELETE_FILE_BY_TITLE		: "/dlapp/delete-file-entry-by-title"
+	DELETE_FILE_BY_TITLE		: "/dlapp/delete-file-entry-by-title",
+	GET_VENUEDETAIL_IMAGES		: "/flask-rest-events-portlet.venue/get-venue-detail-images",
+	GET_IMAGE_BY_UUID_GROUPID	: "/dlapp/get-file-entry-by-uuid-and-group-id",
+	DELETE_VENUEDETAIL_IMAGE	: "/flask-rest-events-portlet.venue/delete-venue-detail-image"
 };
 
 _venueDetailModel.InfoType = ["General", "Pre-Event","During Event","Post-Event"];

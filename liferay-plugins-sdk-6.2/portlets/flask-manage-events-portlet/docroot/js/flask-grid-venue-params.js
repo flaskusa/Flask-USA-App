@@ -171,9 +171,10 @@ GRID_PARAM_VENUE.initrowdetails = function(index, parentElement, gridElement, da
 		$(rightcolumn).append(Country);
 		
 		$(rightcolumn).append("</table>");	
-		fnShowVenueImages(datarecord.venueId,container2);
-		imagesDiv.append(container2);
 		
+		var container = $('<div/>');
+    	fnGetVenueImages(datarecord.venueId,container,false);
+  	  	$(container).appendTo($(imagesDiv));
 		
 		$(tabsdiv).jqxTabs({
 			width : '90%',

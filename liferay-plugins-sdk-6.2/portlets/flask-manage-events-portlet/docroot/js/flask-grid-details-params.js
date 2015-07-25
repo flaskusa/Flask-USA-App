@@ -115,7 +115,7 @@ GRID_PARAM_DETAILS.initrowdetails = function(index, parentElement, gridElement, 
 	    if (tabsdiv != null) {
 	    	var eventDiv = tabsdiv.find('.images');
 	    	var container = $('<div/>');
-	    	fnGetEventDetailImages(datarecord.eventDetailId,container);
+	    	fnGetEventDetailImages(datarecord.eventDetailId,container, false);
 	  	  	$(container).appendTo($(eventDiv));
     	$(tabsdiv).jqxTabs({
 			width : '98%',

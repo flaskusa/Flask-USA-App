@@ -33,7 +33,6 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.rumbasolutions.flask.model.Event;
 //import com.rumbasolutions.flask.service.impl.EventServiceImpl;
 import com.rumbasolutions.flask.service.EventServiceUtil;
-import com.rumbasolutions.flask.service.VenueServiceUtil;
 
 public class FlaskDocLibUtil {
 	public static final String _eventRootFolder = "Event";
@@ -181,7 +180,7 @@ public class FlaskDocLibUtil {
  */
 	public static FileEntry addFileEntry(Folder folder, String sourcefileName,
 										 String title, String desc, File file,  
-										 String mimeType,  ServiceContext serviceContext, long eventDetailId, long venueDetailId) 
+										 String mimeType,  ServiceContext serviceContext) 
 														 throws PortalException, SystemException{
 		FileEntry fileEntry=null;	
 		try{	
@@ -190,18 +189,8 @@ public class FlaskDocLibUtil {
 													title, desc, 
 													"", file, 
 													serviceContext);
-				String imageUUID =  fileEntry.getUuid();
 				setGuestViewPermission(fileEntry);
-				if(eventDetailId>0)
-				{
-
-					EventServiceUtil.addEventDetailImage(eventDetailId, title, desc, imageUUID, serviceContext);
-					FlaskDocLibUtil.updateEventLogoPath(imageUUID);
-				}
-				else
-				{
-					VenueServiceUtil.addVenueDetailImage(venueDetailId, title, desc, imageUUID, serviceContext);
-				}
+				
 			}catch(Exception ex){
 			
 			}
@@ -297,7 +286,7 @@ public class FlaskDocLibUtil {
 		try {
 			ServiceContext serviceContext = new ServiceContext();
 			 Event eventInfo = EventServiceUtil.getEvent(_eventId, serviceContext);
-			/*EventServiceUtil.updateEvent(_eventId, 
+			EventServiceUtil.updateEvent(_eventId, 
 					eventInfo.getEventName(),
 					eventInfo.getDescription(),	
 					eventInfo.getEventDate().toString(), 
@@ -306,8 +295,7 @@ public class FlaskDocLibUtil {
 					eventInfo.getEventTypeId(), 
 					eventInfo.getVenueId(), 
 					eventImageUUID, 
-					_repositoryId,
-					serviceContext);*/
+					serviceContext);
 			
 			return eventImageUUID; 
 		}

@@ -13,7 +13,9 @@ _venueModel.SERVICE_ENDPOINTS = {
 	ADD_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/add-venue-detail",
 	UPDATE_VENUE_DETAILS		: "/flask-rest-events-portlet.venue/update-venue-detail",	
 	GET_FOLDER					: "/dlapp/get-folder",
-	GET_FILES					: "/dlapp/get-file-entries"
+	GET_FILES					: "/dlapp/get-file-entries",
+	GET_VENUE_IMAGES			: "/flask-rest-events-portlet.venue/get-venue-images",
+	DELETE_VENUE_IMAGE			: "/flask-rest-events-portlet.venue/delete-venue-image"
 };
 
 _venueModel.DATA_MODEL= {

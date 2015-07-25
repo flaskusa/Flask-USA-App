@@ -14,12 +14,14 @@ import org.apache.commons.fileupload.portlet.PortletFileUpload;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.rumbasolutions.flask.service.EventServiceUtil;
 
 public class ManageEventPortletAction extends MVCPortlet {
 	
@@ -43,7 +45,6 @@ public class ManageEventPortletAction extends MVCPortlet {
 	private long _eventId = 0;
 	
 	private long _eventDetailId = 0;
-	private long _venueDetailId = 0;
 	private String _isLogo = "N";
 	private ServiceContext _serviceContext;
 	Folder _eventFolder=null;
@@ -91,7 +92,11 @@ public class ManageEventPortletAction extends MVCPortlet {
 					// saves the file on disk
 					item.write(storeFile);
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
-					FlaskDocLibUtil.addFileEntry(_eventFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext, _eventDetailId, _venueDetailId);
+					FileEntry fileEntry = FlaskDocLibUtil.addFileEntry(_eventFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
+					if(IsLogo)
+						FlaskDocLibUtil.updateEventLogoPath(fileEntry.getUuid());
+					else
+						EventServiceUtil.addEventDetailImage(_eventDetailId, fileTitle, fileDesc, fileEntry.getUuid(), _serviceContext);
 					
 				}else{
 					

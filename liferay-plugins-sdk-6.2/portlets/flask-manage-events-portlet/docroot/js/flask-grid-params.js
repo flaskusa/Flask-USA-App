@@ -135,15 +135,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 			
 			$(rightcolumn).append("<table>");		
 			var imgLogoURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+datarecord.eventImageUUID+"&groupId="+datarecord.eventImageGroupId;
-			var image = new Image(); 
-			image.src = imgLogoURL;
-			if (image.width == 0) {
-				var objLogodiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgLogoURL+')'});
-				objLogodiv.html("No logo found");
-			}
-			else{
-				var objLogodiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgLogoURL+')'});
-			}
+			var objLogodiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgLogoURL+')'});
 			
 			objLogodiv.appendTo(leftcolumn);
 			//fnShowEventLogo(_repositoryId,datarecord.eventId,leftcolumn,false)
@@ -162,7 +154,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 			$(rightcolumn).append(EndTime);
 			$(rightcolumn).append("</table>");
 			eventDiv.append(container1);
-
+			
 			$(tabsdiv).jqxTabs({
 				width : '90%',
 				height : 180

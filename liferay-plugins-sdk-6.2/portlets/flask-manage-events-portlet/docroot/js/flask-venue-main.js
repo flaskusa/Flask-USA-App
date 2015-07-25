@@ -1,6 +1,7 @@
 var imageContainer = $("#venueImage");
 var venueForm;
 var dropZoneLogo;
+var iSelected;
 function addClickHandlers(){
 	venueForm = $("#venueForm");
 	/*	Initialize display elements*/
@@ -76,6 +77,7 @@ function loadData(){
 	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE, params, 
 	function(data){/*success handler*/
 		GRID_PARAM_VENUE.updateGrid(data);
+		iSelected = false;
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_venueModel.MESSAGES.GET_ERROR);
 		console.log("Error in getting data: " + error);
@@ -132,6 +134,8 @@ function deleteMultipleVenues(venueList) {
 
 /* Edit Venue */
 function editVenue(rowData) {
+		var container = $('#venueGallery');
+		container.html("");
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("venueForm",  _venueModel.DATA_MODEL.VENUE, rowData, function(){});
 		_flaskLib.loadCountries('venueCountryId',rowData.venueCountryId);
@@ -146,9 +150,10 @@ function editVenue(rowData) {
 			$("#infoTypeId").val($(this).attr("alt"));
 		});
 		fnBuildVenueUpload(imageContainer);
-		fnShowVenueImages(rowData.venueId,$("#venueGallery"));
 		createDetailsTable({},_venueDetailModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
 		loadVenueDetailsData(rowData.venueId);
+		console.log(rowData);
+		fnGetVenueImages(rowData.venueId,container,true);  
 }
 
 
@@ -268,76 +273,63 @@ $(document).ready(function(){
     });
 });
 
-
-function fnShowVenueImages(_eventId,_divObj){
-	console.log(_eventId);
-	var repositoryId = $("#repositoryId").val();
-	var eventId = _eventId;
+function fnDeleteVenueImage(venueImageId){
+	params= {'venueImageId': venueImageId};
 	var flaskRequest = new Request();
-	params= {'repositoryId': repositoryId, 'parentFolderId': 0, 'name': 'Venue'};
-	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
+	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUE_IMAGE , params, 
 		function (data){
-			folderName = 'Venue-'+eventId;
-			var flaskRequestChild = new Request();
-			paramsChild= {'repositoryId': repositoryId, 'parentFolderId': data.folderId, 'name': folderName};
-			flaskRequestChild.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_FOLDER , paramsChild, 
-				function (data){
-					fnRenderImages(data.folderId,_divObj);
-				} ,
-				function (data){console.log(2);});
-		} ,
-		function (data){console.log(1);});
-}
-
-function fnRenderImages(folderId,_divObj){
-	$(".eventLogo").removeClass("activeImage");
-	//$(_divObj).html("");
-	clearImageGallery();
-	var flaskRequest = new Request();
-	params= {'repositoryId': $("#repositoryId").val(), 'folderId': folderId};
-	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_FILES , params, 
+			console.log(data);
+		},
 		function (data){
-			if(typeof data=="object"){
-				console.log(data);
-				var iSelected = false;
-		    	for(var iCount=0;iCount<data.length;iCount++){
-		    		var imgURL = '/documents/'+data[iCount].groupId+'/'+data[iCount].folderId+'/'+data[iCount].title;
-				    var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-fileEntryId':data[iCount].fileEntryId});
-				    $(objdiv).appendTo($(_divObj));
-				    $(objdiv).click(function(){
-				    	$(this).toggleClass("activeImage");
-				    	if($(".activeImage").length>0){
-				    		if(iSelected==false){
-				    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
-				    			$(objDel).appendTo($(_divObj));
-				    			iSelected = true;
-				    			$(objDel).click(function(){
-				    				$("#spinningSquaresG").show();
-				    				$(".activeImage").each(function(){
-				    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
-				    					$(this).remove();
-				    				});
-				    				if($(".activeImage").length==0){
-				    					$("#spinningSquaresG").hide();
-				    					$(this).remove();
-				    					iSelected = false;
-				    				}
-				    			});
-				    		}
-				    	}
-				    	else{
-				    		$(".cssDelImages").remove();
-				    		iSelected = false;
-				    	}
-				    });
-		    	}
-		    }		
-		} ,
-		function (data){
-			console.log("Error in getting Folder: " + data );
+			console.log(data);
 		});	
 }
 
-function clearImageGallery(){
-	$(".eventLogo").remove();
+function fnGetVenueImages(venueId,container,editable){
+	params= {'venueId': venueId};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE_IMAGES , params, 
+		function (data){
+			$.each(data, function(idx, obj) {
+				fnRenderImage(obj.venueImageUUId,obj.venueImageGroupId,data.fileEntryId,container, obj.venueImageId, editable);
+			});			
+		},
+		function (data){
+			console.log(data);
+		});	
+}
+
+function fnRenderImage(venueImageUUId,venueImageGroupId,fileEntryId,container,venueImageId,editable){
+	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+venueImageUUId+"&groupId="+venueImageGroupId;
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-fileEntryId':fileEntryId});
+	$(objdiv).appendTo($(container));
+	if(editable){
+		$(objdiv).click(function(){
+	    	$(this).toggleClass("activeImage");
+	    	if($(".activeImage").length>0){
+	    		if(iSelected==false){
+	    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+	    			$(objDel).appendTo($(container));
+	    			iSelected = true;
+	    			$(objDel).click(function(){
+	    				$("#spinningSquaresG").show();
+	    				$(".activeImage").each(function(){
+	    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
+	    					fnDeleteVenueImage(venueImageId);
+	    					$(this).remove();
+	    				});
+	    				if($(".activeImage").length==0){
+	    					$("#spinningSquaresG").hide();
+	    					$(this).remove();
+	    					iSelected = false;
+	    				}
+	    			});
+	    		}
+	    	}
+	    	else{
+	    		$(".cssDelImages").remove();
+	    		iSelected = false;
+	    	}
+	    });		
+	}
 }

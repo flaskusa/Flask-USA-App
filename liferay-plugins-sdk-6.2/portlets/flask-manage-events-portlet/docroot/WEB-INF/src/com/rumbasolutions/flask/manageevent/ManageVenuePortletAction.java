@@ -16,10 +16,12 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.rumbasolutions.flask.service.VenueServiceUtil;
 
 
 
@@ -42,7 +44,6 @@ public class ManageVenuePortletAction extends MVCPortlet {
 	private final String VENUE_ISLOGO_QSTR= "_isLogo";
 	private long _venueId = 0;
 	private long _venueDetailId = 0;
-	private long _eventDetailId = 0;
 	private String _isLogo = "N";
 	private ServiceContext _serviceContext;
 	Folder _venueFolder=null;
@@ -90,8 +91,11 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 					// saves the file on disk
 					item.write(storeFile);
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
-					FlaskDocLibUtil.addFileEntry(_venueFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext, _eventDetailId, _venueDetailId);
-					
+					FileEntry fileEntry = FlaskDocLibUtil.addFileEntry(_venueFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
+					if(_venueDetailId>0)
+						VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), _serviceContext);
+					else
+						VenueServiceUtil.addVenueImage(_venueId, fileTitle, fileEntry.getUuid(), _serviceContext);
 				}else{
 					
 				}
