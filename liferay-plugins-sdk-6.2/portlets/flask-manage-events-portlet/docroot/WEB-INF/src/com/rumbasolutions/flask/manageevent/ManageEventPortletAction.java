@@ -85,7 +85,9 @@ public class ManageEventPortletAction extends MVCPortlet {
 					String fileDesc = fileName; // Change is later for description 
 					boolean IsLogo =  _isLogo.equals("Y");
 					if(IsLogo){
-						fileTitle = "EventLogo";
+						fileName = "EventLogo_" + new File(item.getName()).getName();
+						fileTitle = fileName;
+						fileDesc = fileName; 
 					}
 					String filePath = uploadPath + File.separator + fileName;
 					File storeFile = new File(filePath);
