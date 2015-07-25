@@ -230,3 +230,8 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
     
 	}
 
+GRID_PARAM.formatDate = function (dateVal){
+	var dateObj = new Date(dateVal);
+	return dateObj.toLocaleDateString(); 
+}
+
