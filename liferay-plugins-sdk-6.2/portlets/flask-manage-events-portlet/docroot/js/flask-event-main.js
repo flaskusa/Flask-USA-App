@@ -147,7 +147,7 @@ function editEvent(rowData) {
 			$("#eventDetailsDataTable").show();			
 			$("#infoTypeId").val($(this).attr("alt"));
 		})
-		fnShowEventLogo(repositoryId,rowData.eventId,$("#eventImage"), true);
+		fnRenderLogo(rowData.eventImageUUID, rowData.eventImageGroupId, $("#eventImage"),false)
 		createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
 		loadEventDetailsData(rowData.eventId);
 }

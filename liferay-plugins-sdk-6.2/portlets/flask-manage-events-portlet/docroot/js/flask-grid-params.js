@@ -138,7 +138,6 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 			var objLogodiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgLogoURL+')'});
 			
 			objLogodiv.appendTo(leftcolumn);
-			//fnShowEventLogo(_repositoryId,datarecord.eventId,leftcolumn,false)
 			var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
 					+ datarecord.venueName + "</td></tr>";
 			var EventDate = "<tr><td class='filledWidth1'><b>Event Date:</b></td><td> "
@@ -230,8 +229,44 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
     
 	}
 
+
+
+function fnRenderLogo(imageUUID, imageGroupId,container ,editable){
+	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')'});
+	$(objdiv).appendTo($(container));
+	if(editable){
+    	$(objdiv).click(function(){
+	    	$(this).toggleClass("activeImage");
+	    	if($(".activeImage").length>0){
+	    		if(iSelected==false){
+	    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+	    			$(objDel).appendTo($(container));
+	    			iSelected = true;
+	    			$(objDel).click(function(){
+	    				$("#spinningSquaresG").show();
+	    				$(".activeImage").each(function(){
+	    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
+	    					$(this).remove();
+	    				});
+	    				if($(".activeImage").length==0){
+	    					$("#spinningSquaresG").hide();
+	    					$(this).remove();
+	    					iSelected = false;
+	    				}
+	    			});
+	    		}
+	    	}
+	    	else{
+	    		$(".cssDelImages").remove();
+	    		iSelected = false;
+	    	}
+	    });	
+    	
+    }
+}
+
 GRID_PARAM.formatDate = function (dateVal){
 	var dateObj = new Date(dateVal);
 	return dateObj.toLocaleDateString(); 
 }
-
