@@ -181,12 +181,13 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 
 		
 	@Override
-	public void addVenueImage(long venueId, String title, String venueImageUUID ,ServiceContext  serviceContext){
+	public void addVenueImage(long venueId, String title, String venueImageUUID, ServiceContext  serviceContext){
 		try{
 			VenueImage venueImage = VenueImageLocalServiceUtil.createVenueImage(CounterLocalServiceUtil.increment());
 			venueImage.setVenueId(venueId);	
 			venueImage.setTitle(title);
 			venueImage.setVenueImageUUId(venueImageUUID);
+			venueImage.setVenueImageGroupId(FlaskUtil.getFlaskRepositoryId());
 			
 			Date now = new Date();
 			venueImage.setCompanyId(serviceContext.getCompanyId());
