@@ -281,11 +281,10 @@ public class FlaskDocLibUtil {
 		return mimeType;
 	}
 	
-	public static String updateEventLogoPath(String eventImageUUID){
-		String filePath="";
+	public static String updateEventLogoPath(long _eventId, String eventImageUUID, ServiceContext _serviceContext){
 		try {
-			ServiceContext serviceContext = new ServiceContext();
-			 Event eventInfo = EventServiceUtil.getEvent(_eventId, serviceContext);
+			 Event eventInfo = EventServiceUtil.getEvent(_eventId, _serviceContext);
+			 System.out.println("eventInfo: "+eventInfo);
 			EventServiceUtil.updateEvent(_eventId, 
 					eventInfo.getEventName(),
 					eventInfo.getDescription(),	
@@ -295,14 +294,14 @@ public class FlaskDocLibUtil {
 					eventInfo.getEventTypeId(), 
 					eventInfo.getVenueId(), 
 					eventImageUUID, 
-					serviceContext);
+					_serviceContext);
 			
 			return eventImageUUID; 
 		}
 		catch (Exception e) {
-			//e.printStackTrace();
+			e.printStackTrace();
 		}
-		return filePath;
+		return "";
 	}
 	
 }
