@@ -12,6 +12,7 @@ function formatUnixToTime(tdate)
 
 function renderEventList(tdata) {
 	 var divRow = $('#placeholder');
+	 $(divRow).html("");
 	 if(tdata.Events.length == 0){
 		$("<span class='control-label-nocolor'>There there are no events</span>").appendTo($("#placeholder"));
 		return;
@@ -26,8 +27,9 @@ function renderEventList(tdata) {
 		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent'});
 		    }else{
 		    	var div_heart = $('<div/>',{'class':'heart-shape'});
+		    	
 		    }
-		    
+		   
 		    var divCol9 = $('<div/>',{'class':'span9'});
 		    var divCol9_lbl = $('<div/>',{'class':'lbldiv'});
 		    var eventName_lbl = $('<label/>',{'class':'control-label-color'});
@@ -41,7 +43,7 @@ function renderEventList(tdata) {
 		 	$(divCol9).appendTo($(divRowItem));
 		 	$(div_heart).appendTo($(divCol9));		 	
 		 	$(divRowItem).appendTo($(divRow));
-		 	fnShowEventLogo($("#repositoryId").val(), flaskEvent.eventId, divCol3)
+		 	fnShowEventLogo(flaskEvent.eventImageUUID, flaskEvent.eventImageGroupId, divCol3,false);
 		 	$(divCol9_lbl).click(function(){
 		 		$("#spinningSquaresG").show();
 		 		$('#one').hide();		 		
@@ -92,35 +94,39 @@ function fnGetEventFolder(repositoryId,parentFolderId,folderName){
 		return folderId;
 }
 
-function fnShowEventLogo(_repositoryId,_eventId,_container){
-	var LogoURL = "";
-	var flaskRequest = new Request();
-	params= {'repositoryId': _repositoryId, 'parentFolderId': 0, 'name': 'Event'};
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , params, 
-		function (data){
-			folderName = 'Event-'+_eventId;
-			folderId = data.folderId;
-			var flaskRequestChild = new Request();
-			paramsChild= {'repositoryId': _repositoryId, 'parentFolderId': folderId, 'name': folderName};
-			flaskRequestChild.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER, paramsChild, 
-				function (data){
-					var _folderId = data.folderId;
-					var flaskRequestChild0 = new Request();
-					paramsChild0= {'groupId': _repositoryId, 'folderId':_folderId, 'title': 'EventLogo'};
-					flaskRequestChild0.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILE_BY_TITLE , paramsChild0, 
-						function (data){
-							LogoURL = "/documents/"+_repositoryId+"/"+_folderId+"/EventLogo";
-						    var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+LogoURL+')','data-folderId':_folderId,'data-title':'EventLogo'});
-							$(_container).append(objdiv);
-						} ,
-						function (data){
-					});				
-				} ,
-				function (data){
-			});
-		} ,
-		function (data){
-	});
+function fnShowEventLogo(imageUUID, imageGroupId,container ,editable){
+	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')'});
+	$(objdiv).appendTo($(container));
+	if(editable){
+    	$(objdiv).click(function(){
+	    	$(this).toggleClass("activeImage");
+	    	if($(".activeImage").length>0){
+	    		if(iSelected==false){
+	    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+	    			$(objDel).appendTo($(container));
+	    			iSelected = true;
+	    			$(objDel).click(function(){
+	    				$("#spinningSquaresG").show();
+	    				$(".activeImage").each(function(){
+	    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
+	    					$(this).remove();
+	    				});
+	    				if($(".activeImage").length==0){
+	    					$("#spinningSquaresG").hide();
+	    					$(this).remove();
+	    					iSelected = false;
+	    				}
+	    			});
+	    		}
+	    	}
+	    	else{
+	    		$(".cssDelImages").remove();
+	    		iSelected = false;
+	    	}
+	    });	
+    	
+    }
 }
 
 function fnGetEventImages(eventId){
@@ -226,13 +232,26 @@ function fnStopProgress(){
 function setMyEvent(flaskEvent, event){
 	var eventId = flaskEvent.eventId;
 	var myEvent = flaskEvent.userEvent;
+	console.log(myEvent);
 	if(myEvent == 0 ){
 		addUserEvent(eventId);
-		$(event.target).attr('class','heart-shape-userevent');
 	}else{
 		removeUserEvent(eventId);
-		$(event.target).attr('class','heart-shape')
 	}
+	
+}
+
+function initEventList(){
+	var request = new Request();
+	var param = {};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT , param, 
+					function (data){
+						renderEventList(data);
+					} ,
+					function (data){
+						console.log("Error ins getting event list" + data );
+					});
 }
 
 function addUserEvent(eventId){
@@ -241,6 +260,7 @@ function addUserEvent(eventId){
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.ADD_USER_EVENT , param, 
 					function (data){
+						initEventList();
 					} ,
 					function (data){
 						console.log("Error ins saving user event" + data );
@@ -252,6 +272,7 @@ function removeUserEvent(eventId){
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.REMOVE_USER_EVENT , param, 
 					function (data){
+						initEventList();
 					} ,
 					function (data){
 						console.log("Error in removing user event" + data );
