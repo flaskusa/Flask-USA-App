@@ -11,5 +11,6 @@ insert into flaskevents_infotypecategory values(10,"First Aid","");
 insert into flaskevents_infotypecategory values(11,"Police Stations","");
 insert into flaskevents_infotypecategory values(12,"Fire Stations","");
 
+SET SQL_SAFE_UPDATES = 0;
 Update flaskevents_infotypecategory set displayTemplate=lower(infoTypeCategoryName) where 1=1;
 
