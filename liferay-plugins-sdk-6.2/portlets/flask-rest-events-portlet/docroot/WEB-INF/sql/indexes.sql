@@ -7,6 +7,11 @@ create index IX_22142ECA on flaskevents_EventDetail (infoTypeId, infoTypeCategor
 
 create index IX_206C6D4D on flaskevents_EventDetailImage (eventDetailId);
 
+create index IX_A604D2BC on flaskevents_UserEvent (userId);
+create index IX_7FFFEC09 on flaskevents_UserEvent (userId, eventId);
+
+create index IX_C63B7D77 on flaskevents_UserEvents (userId);
+
 create index IX_28E8832D on flaskevents_Venue (venueMetroArea);
 create index IX_AA9715D5 on flaskevents_Venue (venueZipCode);
 

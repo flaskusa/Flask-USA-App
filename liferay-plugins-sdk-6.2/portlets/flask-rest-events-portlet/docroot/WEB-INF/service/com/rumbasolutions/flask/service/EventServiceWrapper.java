@@ -57,7 +57,7 @@ public class EventServiceWrapper implements EventService,
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.Event> getAllEvents(
+	public com.liferay.portal.kernel.json.JSONObject getAllEvents(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.getAllEvents(serviceContext);
 	}
@@ -204,6 +204,30 @@ public class EventServiceWrapper implements EventService,
 	public void deleteEventDetailImage(long eventDetailImageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_eventService.deleteEventDetailImage(eventDetailImageId, serviceContext);
+	}
+
+	@Override
+	public void addUserEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_eventService.addUserEvent(eventId, serviceContext);
+	}
+
+	@Override
+	public void removeUserEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_eventService.removeUserEvent(eventId, serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.UserEvent> getUserEvents(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventService.getUserEvents(serviceContext);
+	}
+
+	@Override
+	public java.util.List<java.lang.Long> getUserEventIds(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventService.getUserEventIds(serviceContext);
 	}
 
 	/**

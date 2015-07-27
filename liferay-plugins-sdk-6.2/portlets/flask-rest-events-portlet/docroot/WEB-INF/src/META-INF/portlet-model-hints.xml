@@ -73,6 +73,12 @@
 		<field name="infoTypeCategoryName" type="String" />
 		<field name="displayTemplate" type="String" />
 	</model>
+	<model name="com.rumbasolutions.flask.model.UserEvent">
+		<field name="userEventId" type="long" />
+		<field name="userId" type="long" />
+		<field name="eventId" type="long" />
+		<field name="createdDate" type="Date" />
+	</model>
 	<model name="com.rumbasolutions.flask.model.Venue">
 		<field name="venueId" type="long" />
 		<field name="companyId" type="long" />

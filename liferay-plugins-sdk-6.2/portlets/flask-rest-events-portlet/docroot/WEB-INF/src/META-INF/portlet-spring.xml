@@ -19,6 +19,9 @@
 	<bean id="com.rumbasolutions.flask.service.InfoTypeCategoryLocalService" class="com.rumbasolutions.flask.service.impl.InfoTypeCategoryLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.InfoTypeCategoryService" class="com.rumbasolutions.flask.service.impl.InfoTypeCategoryServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.InfoTypeCategoryPersistence" class="com.rumbasolutions.flask.service.persistence.InfoTypeCategoryPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.UserEventLocalService" class="com.rumbasolutions.flask.service.impl.UserEventLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.UserEventService" class="com.rumbasolutions.flask.service.impl.UserEventServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.UserEventPersistence" class="com.rumbasolutions.flask.service.persistence.UserEventPersistenceImpl" parent="basePersistence" />
 	<bean id="com.rumbasolutions.flask.service.VenueLocalService" class="com.rumbasolutions.flask.service.impl.VenueLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.VenueService" class="com.rumbasolutions.flask.service.impl.VenueServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.VenuePersistence" class="com.rumbasolutions.flask.service.persistence.VenuePersistenceImpl" parent="basePersistence" />

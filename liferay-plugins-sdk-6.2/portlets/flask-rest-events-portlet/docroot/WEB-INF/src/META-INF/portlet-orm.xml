@@ -130,6 +130,20 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.UserEventModelImpl">
+		<attributes>
+			<id name="userEventId" />
+			<basic name="userId" />
+			<basic name="eventId" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.rumbasolutions.flask.model.impl.VenueModelImpl">
 		<attributes>
 			<id name="venueId" />
@@ -263,6 +277,10 @@
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.InfoTypeCategoryImpl" name="InfoTypeCategory">
 		<table name="flaskevents_InfoTypeCategory" />
+		<attributes />
+	</entity>
+	<entity class="com.rumbasolutions.flask.model.impl.UserEventImpl" name="UserEvent">
+		<table name="flaskevents_UserEvent" />
 		<attributes />
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.VenueImpl" name="Venue">

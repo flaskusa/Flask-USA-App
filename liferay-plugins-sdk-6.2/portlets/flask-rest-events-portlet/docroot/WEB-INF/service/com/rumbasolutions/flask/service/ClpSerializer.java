@@ -31,6 +31,7 @@ import com.rumbasolutions.flask.model.EventDetailImageClp;
 import com.rumbasolutions.flask.model.EventTypeClp;
 import com.rumbasolutions.flask.model.InfoTypeCategoryClp;
 import com.rumbasolutions.flask.model.InfoTypeClp;
+import com.rumbasolutions.flask.model.UserEventClp;
 import com.rumbasolutions.flask.model.VenueClp;
 import com.rumbasolutions.flask.model.VenueDetailClp;
 import com.rumbasolutions.flask.model.VenueDetailImageClp;
@@ -135,6 +136,10 @@ public class ClpSerializer {
 			return translateInputInfoTypeCategory(oldModel);
 		}
 
+		if (oldModelClassName.equals(UserEventClp.class.getName())) {
+			return translateInputUserEvent(oldModel);
+		}
+
 		if (oldModelClassName.equals(VenueClp.class.getName())) {
 			return translateInputVenue(oldModel);
 		}
@@ -220,6 +225,16 @@ public class ClpSerializer {
 		InfoTypeCategoryClp oldClpModel = (InfoTypeCategoryClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getInfoTypeCategoryRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputUserEvent(BaseModel<?> oldModel) {
+		UserEventClp oldClpModel = (UserEventClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getUserEventRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -471,6 +486,43 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.rumbasolutions.flask.model.impl.InfoTypeCategoryImpl")) {
 			return translateOutputInfoTypeCategory(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.rumbasolutions.flask.model.impl.UserEventImpl")) {
+			return translateOutputUserEvent(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -761,6 +813,11 @@ public class ClpSerializer {
 			return new com.rumbasolutions.flask.NoSuchInfoTypeCategoryException();
 		}
 
+		if (className.equals(
+					"com.rumbasolutions.flask.NoSuchUserEventException")) {
+			return new com.rumbasolutions.flask.NoSuchUserEventException();
+		}
+
 		if (className.equals("com.rumbasolutions.flask.NoSuchVenueException")) {
 			return new com.rumbasolutions.flask.NoSuchVenueException();
 		}
@@ -839,6 +896,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setInfoTypeCategoryRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputUserEvent(BaseModel<?> oldModel) {
+		UserEventClp newModel = new UserEventClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setUserEventRemoteModel(oldModel);
 
 		return newModel;
 	}

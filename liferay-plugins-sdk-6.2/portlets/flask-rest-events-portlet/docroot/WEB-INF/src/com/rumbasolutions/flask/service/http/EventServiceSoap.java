@@ -62,13 +62,13 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class EventServiceSoap {
-	public static com.rumbasolutions.flask.model.EventSoap[] getAllEvents(
+	public static java.lang.String getAllEvents(
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			java.util.List<com.rumbasolutions.flask.model.Event> returnValue = EventServiceUtil.getAllEvents(serviceContext);
+			com.liferay.portal.kernel.json.JSONObject returnValue = EventServiceUtil.getAllEvents(serviceContext);
 
-			return com.rumbasolutions.flask.model.EventSoap.toSoapModels(returnValue);
+			return returnValue.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -365,6 +365,63 @@ public class EventServiceSoap {
 		try {
 			EventServiceUtil.deleteEventDetailImage(eventDetailImageId,
 				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void addUserEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EventServiceUtil.addUserEvent(eventId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void removeUserEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EventServiceUtil.removeUserEvent(eventId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.UserEventSoap[] getUserEvents(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.UserEvent> returnValue =
+				EventServiceUtil.getUserEvents(serviceContext);
+
+			return com.rumbasolutions.flask.model.UserEventSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.Long[] getUserEventIds(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<java.lang.Long> returnValue = EventServiceUtil.getUserEventIds(serviceContext);
+
+			return returnValue.toArray(new java.lang.Long[returnValue.size()]);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

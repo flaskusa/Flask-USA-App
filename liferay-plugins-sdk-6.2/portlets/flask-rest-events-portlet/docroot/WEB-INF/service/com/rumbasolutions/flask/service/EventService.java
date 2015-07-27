@@ -67,7 +67,7 @@ public interface EventService extends BaseService, InvokableService {
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.Event> getAllEvents(
+	public com.liferay.portal.kernel.json.JSONObject getAllEvents(
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
@@ -160,5 +160,19 @@ public interface EventService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteEventDetailImage(long eventDetailImageId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void addUserEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void removeUserEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.UserEvent> getUserEvents(
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<java.lang.Long> getUserEventIds(
 		com.liferay.portal.service.ServiceContext serviceContext);
 }

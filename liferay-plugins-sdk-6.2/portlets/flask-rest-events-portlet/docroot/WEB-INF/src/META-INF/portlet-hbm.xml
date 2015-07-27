@@ -8,6 +8,7 @@
 	<import class="com.rumbasolutions.flask.model.EventType" />
 	<import class="com.rumbasolutions.flask.model.InfoType" />
 	<import class="com.rumbasolutions.flask.model.InfoTypeCategory" />
+	<import class="com.rumbasolutions.flask.model.UserEvent" />
 	<import class="com.rumbasolutions.flask.model.Venue" />
 	<import class="com.rumbasolutions.flask.model.VenueDetail" />
 	<import class="com.rumbasolutions.flask.model.VenueDetailImage" />
@@ -101,6 +102,15 @@
 		</id>
 		<property name="infoTypeCategoryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="displayTemplate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.UserEventImpl" table="flaskevents_UserEvent">
+		<cache usage="read-write" />
+		<id name="userEventId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="eventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.VenueImpl" table="flaskevents_Venue">
 		<cache usage="read-write" />

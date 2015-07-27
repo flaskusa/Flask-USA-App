@@ -159,6 +159,30 @@
 		</finder>
 		
 	</entity>
+	
+	<entity name="UserEvent" local-service="true" remote-service="true">
+
+	    <!-- PK fields -->
+        <column name="userEventId" type="long" primary="true" />
+
+        <!-- Other fields -->
+
+        <column name="userId" type="long" />
+        <column name="eventId" type="long" />
+        <column name="createdDate" type="Date" />
+
+		<!-- Finder methods -->
+        <finder name="userId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		
+				<!-- Finder methods -->
+        <finder name="userEvent" return-type="UserEvent">
+			<finder-column name="userId" />
+			<finder-column name="eventId" />
+		</finder>
+	</entity>
+	
          
 	<!-- Venue details-->
 

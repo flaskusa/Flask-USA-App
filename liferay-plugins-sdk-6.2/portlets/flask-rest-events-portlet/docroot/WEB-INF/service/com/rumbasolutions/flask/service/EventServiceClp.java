@@ -156,6 +156,30 @@ public class EventServiceClp implements EventService {
 		_methodParameterTypes20 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName21 = "addUserEvent";
+
+		_methodParameterTypes21 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName22 = "removeUserEvent";
+
+		_methodParameterTypes22 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName23 = "getUserEvents";
+
+		_methodParameterTypes23 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName24 = "getUserEventIds";
+
+		_methodParameterTypes24 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -209,7 +233,7 @@ public class EventServiceClp implements EventService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.Event> getAllEvents(
+	public com.liferay.portal.kernel.json.JSONObject getAllEvents(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -230,7 +254,7 @@ public class EventServiceClp implements EventService {
 			}
 		}
 
-		return (java.util.List<com.rumbasolutions.flask.model.Event>)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -841,6 +865,106 @@ public class EventServiceClp implements EventService {
 		}
 	}
 
+	@Override
+	public void addUserEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableService.invokeMethod(_methodName21,
+				_methodParameterTypes21,
+				new Object[] {
+					eventId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void removeUserEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableService.invokeMethod(_methodName22,
+				_methodParameterTypes22,
+				new Object[] {
+					eventId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.UserEvent> getUserEvents(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
+					new Object[] { ClpSerializer.translateInput(serviceContext) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.UserEvent>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<java.lang.Long> getUserEventIds(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
+					new Object[] { ClpSerializer.translateInput(serviceContext) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<java.lang.Long>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -882,4 +1006,12 @@ public class EventServiceClp implements EventService {
 	private String[] _methodParameterTypes19;
 	private String _methodName20;
 	private String[] _methodParameterTypes20;
+	private String _methodName21;
+	private String[] _methodParameterTypes21;
+	private String _methodName22;
+	private String[] _methodParameterTypes22;
+	private String _methodName23;
+	private String[] _methodParameterTypes23;
+	private String _methodName24;
+	private String[] _methodParameterTypes24;
 }

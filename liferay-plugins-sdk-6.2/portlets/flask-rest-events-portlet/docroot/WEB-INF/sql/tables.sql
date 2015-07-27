@@ -76,6 +76,20 @@ create table flaskevents_InfoTypeCategory (
 	displayTemplate VARCHAR(75) null
 );
 
+create table flaskevents_UserEvent (
+	userEventId LONG not null primary key,
+	userId LONG,
+	eventId LONG,
+	createdDate DATE null
+);
+
+create table flaskevents_UserEvents (
+	userEventId LONG not null primary key,
+	userId VARCHAR(75) null,
+	eventId VARCHAR(75) null,
+	createdDate DATE null
+);
+
 create table flaskevents_Venue (
 	venueId LONG not null primary key,
 	companyId LONG,

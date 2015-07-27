@@ -30,6 +30,8 @@ import com.rumbasolutions.flask.service.InfoTypeCategoryLocalServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeCategoryServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeLocalServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeServiceUtil;
+import com.rumbasolutions.flask.service.UserEventLocalServiceUtil;
+import com.rumbasolutions.flask.service.UserEventServiceUtil;
 import com.rumbasolutions.flask.service.VenueDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueDetailImageServiceUtil;
 import com.rumbasolutions.flask.service.VenueDetailLocalServiceUtil;
@@ -72,6 +74,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			InfoTypeCategoryLocalServiceUtil.clearService();
 
 			InfoTypeCategoryServiceUtil.clearService();
+			UserEventLocalServiceUtil.clearService();
+
+			UserEventServiceUtil.clearService();
 			VenueLocalServiceUtil.clearService();
 
 			VenueServiceUtil.clearService();

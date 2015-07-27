@@ -39,6 +39,7 @@ import com.rumbasolutions.flask.service.persistence.EventPersistence;
 import com.rumbasolutions.flask.service.persistence.EventTypePersistence;
 import com.rumbasolutions.flask.service.persistence.InfoTypeCategoryPersistence;
 import com.rumbasolutions.flask.service.persistence.InfoTypePersistence;
+import com.rumbasolutions.flask.service.persistence.UserEventPersistence;
 import com.rumbasolutions.flask.service.persistence.VenueDetailImagePersistence;
 import com.rumbasolutions.flask.service.persistence.VenueDetailPersistence;
 import com.rumbasolutions.flask.service.persistence.VenueImagePersistence;
@@ -630,6 +631,63 @@ public abstract class EventDetailLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the user event local service.
+	 *
+	 * @return the user event local service
+	 */
+	public com.rumbasolutions.flask.service.UserEventLocalService getUserEventLocalService() {
+		return userEventLocalService;
+	}
+
+	/**
+	 * Sets the user event local service.
+	 *
+	 * @param userEventLocalService the user event local service
+	 */
+	public void setUserEventLocalService(
+		com.rumbasolutions.flask.service.UserEventLocalService userEventLocalService) {
+		this.userEventLocalService = userEventLocalService;
+	}
+
+	/**
+	 * Returns the user event remote service.
+	 *
+	 * @return the user event remote service
+	 */
+	public com.rumbasolutions.flask.service.UserEventService getUserEventService() {
+		return userEventService;
+	}
+
+	/**
+	 * Sets the user event remote service.
+	 *
+	 * @param userEventService the user event remote service
+	 */
+	public void setUserEventService(
+		com.rumbasolutions.flask.service.UserEventService userEventService) {
+		this.userEventService = userEventService;
+	}
+
+	/**
+	 * Returns the user event persistence.
+	 *
+	 * @return the user event persistence
+	 */
+	public UserEventPersistence getUserEventPersistence() {
+		return userEventPersistence;
+	}
+
+	/**
+	 * Sets the user event persistence.
+	 *
+	 * @param userEventPersistence the user event persistence
+	 */
+	public void setUserEventPersistence(
+		UserEventPersistence userEventPersistence) {
+		this.userEventPersistence = userEventPersistence;
+	}
+
+	/**
 	 * Returns the venue local service.
 	 *
 	 * @return the venue local service
@@ -1068,6 +1126,12 @@ public abstract class EventDetailLocalServiceBaseImpl
 	protected com.rumbasolutions.flask.service.InfoTypeCategoryService infoTypeCategoryService;
 	@BeanReference(type = InfoTypeCategoryPersistence.class)
 	protected InfoTypeCategoryPersistence infoTypeCategoryPersistence;
+	@BeanReference(type = com.rumbasolutions.flask.service.UserEventLocalService.class)
+	protected com.rumbasolutions.flask.service.UserEventLocalService userEventLocalService;
+	@BeanReference(type = com.rumbasolutions.flask.service.UserEventService.class)
+	protected com.rumbasolutions.flask.service.UserEventService userEventService;
+	@BeanReference(type = UserEventPersistence.class)
+	protected UserEventPersistence userEventPersistence;
 	@BeanReference(type = com.rumbasolutions.flask.service.VenueLocalService.class)
 	protected com.rumbasolutions.flask.service.VenueLocalService venueLocalService;
 	@BeanReference(type = com.rumbasolutions.flask.service.VenueService.class)

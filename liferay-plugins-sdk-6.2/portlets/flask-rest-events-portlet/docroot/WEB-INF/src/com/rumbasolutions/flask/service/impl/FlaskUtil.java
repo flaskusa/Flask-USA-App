@@ -10,6 +10,10 @@ import java.util.Locale;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.Country;
@@ -107,11 +111,24 @@ public class FlaskUtil {
 			return event;
 	}
 	
-	public static List<Event> setStringNamesForEvents(List<Event> eventList){
+	public static JSONArray setStringNamesForEvents(List<Event> eventList, List<Long> myEventList){
+		JSONArray eventListJsonArr =  JSONFactoryUtil.createJSONArray();
+
 		for (Event event : eventList){
 			setStringNamesForEvent(event);
+			try {
+				JSONObject obj = JSONFactoryUtil.createJSONObject(JSONFactoryUtil.looseSerialize(event));
+				int userEvent = 0;
+				if(myEventList != null && myEventList.contains(event.getEventId())){
+					userEvent = 1;
+				}
+				obj.put("userEvent", userEvent);
+				eventListJsonArr.put(obj);
+			} catch (JSONException e) {
+				e.printStackTrace();
+			}
 		}
-		return eventList;
+		return eventListJsonArr;
 	}
 	
 	public static EventDetail setNamesForEventDetail(EventDetail detail){

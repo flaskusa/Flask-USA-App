@@ -34,13 +34,17 @@ import com.liferay.portal.util.PortalUtil;
 import com.rumbasolutions.flask.model.Event;
 import com.rumbasolutions.flask.model.EventDetail;
 import com.rumbasolutions.flask.model.EventDetailImage;
+import com.rumbasolutions.flask.model.UserEvent;
 import com.rumbasolutions.flask.service.EventDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventLocalServiceUtil;
+import com.rumbasolutions.flask.service.UserEventLocalServiceUtil;
+import com.rumbasolutions.flask.service.UserEventsLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.EventServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.EventDetailImageUtil;
 import com.rumbasolutions.flask.service.persistence.EventDetailUtil;
 import com.rumbasolutions.flask.service.persistence.EventUtil;
+import com.rumbasolutions.flask.service.persistence.UserEventUtil;
 
 /**
  * The implementation of the event remote service.
@@ -67,18 +71,29 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
-	public List<Event> getAllEvents(ServiceContext  serviceContext){
+	public JSONObject getAllEvents(ServiceContext  serviceContext){
+		JSONObject eventListJsonObj =  JSONFactoryUtil.createJSONObject();
+
 		List<Event> events= new ArrayList<Event>();
+		List<Long> myEventList = new ArrayList<Long>();
 		try {
 			events =  EventUtil.findAll();
-			events = FlaskUtil.setStringNamesForEvents(events);
+			if(serviceContext.isSignedIn()){
+				myEventList = getUserEventIds(serviceContext);
+			}
+			JSONArray eventArr=  FlaskUtil.setStringNamesForEvents(events, myEventList);
+			eventListJsonObj.put("Events", eventArr);
 		}
 		catch (Exception e) {
 			LOGGER.error("Exception in getAllEvents. " + e.getMessage());
 			e.printStackTrace();
 		}
-		return events;
+		return eventListJsonObj;
 	}
+	
+	
+	
+	
 	
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
@@ -159,6 +174,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		}
 		return event;
 	}
+	
 	
 	@Override
 	public void deleteEvent(long eventId, ServiceContext  serviceContext){
@@ -435,6 +451,61 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}    
+	}
+	
+	@Override
+	public void addUserEvent(long eventId, ServiceContext  serviceContext){
+		try{
+			// check if already exist
+			UserEvent userEvent = UserEventUtil.fetchByuserEvent(serviceContext.getUserId(), eventId);
+			if(userEvent == null){
+				userEvent = UserEventLocalServiceUtil.createUserEvent(CounterLocalServiceUtil.increment());
+				userEvent.setEventId(eventId);
+				userEvent.setUserId(serviceContext.getUserId());
+				Date now = new Date();
+				userEvent.setCreatedDate(now);
+				UserEventLocalServiceUtil.addUserEvent(userEvent);
+			}
+		}catch(Exception ex){
+			LOGGER.error("Exception in addUserEvent: " + ex.getMessage());
+		}
+	}
+	
+	@Override
+	public void removeUserEvent(long eventId, ServiceContext  serviceContext){
+		try{
+			// check if already exist
+			UserEvent userEvent = UserEventUtil.removeByuserEvent(serviceContext.getUserId(), eventId);
+			
+		}catch(Exception ex){
+			LOGGER.error("Exception in removeUserEvent: " + ex.getMessage());
+		}
+	}
+	
+	@Override
+	public List<UserEvent> getUserEvents(ServiceContext  serviceContext){
+		List<UserEvent> userEvents = new ArrayList<UserEvent>();
+		try{
+			userEvents = UserEventUtil.findByuserId(serviceContext.getUserId());
+			
+		}catch(Exception ex){
+			LOGGER.error("Exception in removeUserEvent: " + ex.getMessage());
+		}
+		return userEvents;
+	}
+	
+	@Override
+	public List<Long> getUserEventIds(ServiceContext  serviceContext){
+		List<Long> userEvents = new ArrayList<Long>();
+		try{
+			List<UserEvent> userEventList = UserEventUtil.findByuserId(serviceContext.getUserId());
+			for(UserEvent ue: userEventList){
+				userEvents.add(ue.getEventId());
+			}
+		}catch(Exception ex){
+			LOGGER.error("Exception in getUserEventIds: " + ex.getMessage());
+		}
+		return userEvents;
 	}
 	
 	

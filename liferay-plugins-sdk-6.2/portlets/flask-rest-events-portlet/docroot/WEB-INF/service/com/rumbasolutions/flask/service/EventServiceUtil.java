@@ -63,7 +63,7 @@ public class EventServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.rumbasolutions.flask.model.Event> getAllEvents(
+	public static com.liferay.portal.kernel.json.JSONObject getAllEvents(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService().getAllEvents(serviceContext);
 	}
@@ -198,6 +198,26 @@ public class EventServiceUtil {
 	public static void deleteEventDetailImage(long eventDetailImageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService().deleteEventDetailImage(eventDetailImageId, serviceContext);
+	}
+
+	public static void addUserEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().addUserEvent(eventId, serviceContext);
+	}
+
+	public static void removeUserEvent(long eventId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().removeUserEvent(eventId, serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.UserEvent> getUserEvents(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getUserEvents(serviceContext);
+	}
+
+	public static java.util.List<java.lang.Long> getUserEventIds(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getUserEventIds(serviceContext);
 	}
 
 	public static void clearService() {
