@@ -72,7 +72,8 @@ function loadData(){
 	params = {};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params, 
 	function(data){/*success handler*/
-		GRID_PARAM.updateGrid(data);
+		var events = eval(data);
+		GRID_PARAM.updateGrid(events.Events);
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
 		console.log("Error in getting data: " + error);
