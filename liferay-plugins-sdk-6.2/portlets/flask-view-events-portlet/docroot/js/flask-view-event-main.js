@@ -10,20 +10,30 @@ function formatUnixToTime(tdate)
 	return hours + ':' + minutes.substr(-2) + ' ' + ampm;
 }
 
-function fnlist(tdata) {
+function renderEventList(tdata) {
 	 var divRow = $('#placeholder');
-	 for(var i in tdata)
+	 if(tdata.Events.length == 0){
+		$("<span class='control-label-nocolor'>There there are no events</span>").appendTo($("#placeholder"));
+		return;
+	 }
+	 for(var i=0; i < tdata.Events.length; i++)
 		{
-		    var st = formatUnixToTime(tdata[i].startTime);
-		    var divRowItem = $('<div/>',{'class':'row-fluid','data-id':tdata[i].eventId});
+		 	var flaskEvent = tdata.Events[i];
+		    var st = formatUnixToTime(flaskEvent.startTime);
+		    var divRowItem = $('<div/>',{'class':'row-fluid','data-id':flaskEvent.eventId});
 		    var divCol3 = $('<div/>',{'class':'span3','style':'width:60px;'});
-		    var div_heart = $('<div/>',{'class':'heart-shape'});
+		    if(flaskEvent.userEvent == 1){
+		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent'});
+		    }else{
+		    	var div_heart = $('<div/>',{'class':'heart-shape'});
+		    }
+		    
 		    var divCol9 = $('<div/>',{'class':'span9'});
 		    var divCol9_lbl = $('<div/>',{'class':'lbldiv'});
 		    var eventName_lbl = $('<label/>',{'class':'control-label-color'});
-		    $(eventName_lbl).html(tdata[i].eventName);
+		    $(eventName_lbl).html(flaskEvent.eventName);
 		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
-		    $(venue_lbl).html(st + ' at ' + tdata[i].venueName);
+		    $(venue_lbl).html(st + ' at ' + flaskEvent.venueName);
 		    $(eventName_lbl).appendTo($(divCol9_lbl));
 		    $(venue_lbl).appendTo($(divCol9_lbl));
 		    $(divCol9_lbl).appendTo($(divCol9));
@@ -31,12 +41,20 @@ function fnlist(tdata) {
 		 	$(divCol9).appendTo($(divRowItem));
 		 	$(div_heart).appendTo($(divCol9));		 	
 		 	$(divRowItem).appendTo($(divRow));
-		 	fnShowEventLogo($("#repositoryId").val(),tdata[i].eventId,divCol3)
-		 	$(divRowItem).click(function(){
+		 	fnShowEventLogo($("#repositoryId").val(), flaskEvent.eventId, divCol3)
+		 	$(divCol9_lbl).click(function(){
 		 		$("#spinningSquaresG").show();
 		 		$('#one').hide();		 		
 		 		fnGetEventImages($(this).attr("data-id"));
 		 	});
+		 	if(Liferay.ThemeDisplay.isSignedIn()){
+			 	$(div_heart).click(function(){
+			 		setMyEvent(flaskEvent, event);
+			 	});
+		 	}else{
+		 		$(div_heart).attr("title", "You need to be signed in to save events.");
+		 	}
+		 	
 	    }
 	 	$(divRow).appendTo($("#placeholder"));
 }
@@ -203,4 +221,39 @@ function fnStopProgress(){
 	$("#spinningSquaresG").hide();	
  	$('#two').show();	
  	$(".ws_controls").hide();
+}
+
+function setMyEvent(flaskEvent, event){
+	var eventId = flaskEvent.eventId;
+	var myEvent = flaskEvent.userEvent;
+	if(myEvent == 0 ){
+		addUserEvent(eventId);
+		$(event.target).attr('class','heart-shape-userevent');
+	}else{
+		removeUserEvent(eventId);
+		$(event.target).attr('class','heart-shape')
+	}
+}
+
+function addUserEvent(eventId){
+	var request = new Request();
+	var param = {eventId: eventId};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.ADD_USER_EVENT , param, 
+					function (data){
+					} ,
+					function (data){
+						console.log("Error ins saving user event" + data );
+					});
+}
+function removeUserEvent(eventId){
+	var request = new Request();
+	var param = {eventId: eventId};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.REMOVE_USER_EVENT , param, 
+					function (data){
+					} ,
+					function (data){
+						console.log("Error in removing user event" + data );
+					});
 }

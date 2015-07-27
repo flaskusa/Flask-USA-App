@@ -7,7 +7,11 @@ _eventModel.SERVICE_ENDPOINTS = {
 	GET_FOLDER					:"/dlapp/get-folder",
 	GET_FOLDERS					:"/dlapp/get-folders",
 	GET_FILES					:"/dlapp/get-file-entries",
-	GET_FILE_BY_TITLE			:"/dlapp/get-file-entry"
+	GET_FILE_BY_TITLE			:"/dlapp/get-file-entry",
+	ADD_USER_EVENT				:"/flask-rest-events-portlet.event/add-user-event",
+	REMOVE_USER_EVENT			:"/flask-rest-events-portlet.event/remove-user-event"
+
+		
 };
 
 _eventModel.DATA_MODEL= {

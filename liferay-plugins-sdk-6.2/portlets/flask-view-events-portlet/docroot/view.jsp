@@ -29,7 +29,7 @@
 	$(document).ready(function(){
 		Liferay.Service(_eventModel.SERVICE_ENDPOINTS.GET_EVENT,
 		  function(obj) {
-			fnlist(obj);
+			renderEventList(obj);
 		  }
 		);
 	});
