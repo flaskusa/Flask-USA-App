@@ -68,6 +68,11 @@ public class EventServiceUtil {
 		return getService().getAllEvents(serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject getUserSelectedEvents(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getUserSelectedEvents(serviceContext);
+	}
+
 	public static com.rumbasolutions.flask.model.Event getEvent(long eventId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService().getEvent(eventId, serviceContext);
@@ -208,11 +213,6 @@ public class EventServiceUtil {
 	public static void removeUserEvent(long eventId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService().removeUserEvent(eventId, serviceContext);
-	}
-
-	public static java.util.List<com.rumbasolutions.flask.model.UserEvent> getUserEvents(
-		com.liferay.portal.service.ServiceContext serviceContext) {
-		return getService().getUserEvents(serviceContext);
 	}
 
 	public static java.util.List<java.lang.Long> getUserEventIds(

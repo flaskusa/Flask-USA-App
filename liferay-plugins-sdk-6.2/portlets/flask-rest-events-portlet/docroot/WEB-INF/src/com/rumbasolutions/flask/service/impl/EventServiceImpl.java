@@ -19,6 +19,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -26,6 +29,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -39,7 +44,6 @@ import com.rumbasolutions.flask.service.EventDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventLocalServiceUtil;
 import com.rumbasolutions.flask.service.UserEventLocalServiceUtil;
-import com.rumbasolutions.flask.service.UserEventsLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.EventServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.EventDetailImageUtil;
 import com.rumbasolutions.flask.service.persistence.EventDetailUtil;
@@ -91,10 +95,34 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		return eventListJsonObj;
 	}
 	
-	
-	
-	
-	
+	@Override
+	public JSONObject getUserSelectedEvents(ServiceContext  serviceContext){
+		JSONObject eventListJsonObj =  JSONFactoryUtil.createJSONObject();
+
+		List<Event> events= new ArrayList<Event>();
+		List<Long> myEventList = new ArrayList<Long>();
+		try {
+			if(serviceContext.isSignedIn()){
+				myEventList = getUserEventIds(serviceContext);
+//TODO this logic should be changed to use dynamic query
+				for(Long eventId : myEventList){
+					try {
+						Event event = EventUtil.findByPrimaryKey(eventId);
+						events.add(event);
+					} catch (Exception e) {
+					}
+				}
+				
+				JSONArray eventArr=  FlaskUtil.setStringNamesForEvents(events, myEventList);
+				eventListJsonObj.put("Events", eventArr);
+			}
+		}
+		catch (Exception e) {
+			LOGGER.error("Exception in getUserEvents. " + e.getMessage());
+		}
+		return eventListJsonObj;
+	}
+
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public Event getEvent(long eventId, ServiceContext  serviceContext){
@@ -481,18 +509,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			LOGGER.error("Exception in removeUserEvent: " + ex.getMessage());
 		}
 	}
-	
-	@Override
-	public List<UserEvent> getUserEvents(ServiceContext  serviceContext){
-		List<UserEvent> userEvents = new ArrayList<UserEvent>();
-		try{
-			userEvents = UserEventUtil.findByuserId(serviceContext.getUserId());
-			
-		}catch(Exception ex){
-			LOGGER.error("Exception in removeUserEvent: " + ex.getMessage());
-		}
-		return userEvents;
-	}
+
 	
 	@Override
 	public List<Long> getUserEventIds(ServiceContext  serviceContext){

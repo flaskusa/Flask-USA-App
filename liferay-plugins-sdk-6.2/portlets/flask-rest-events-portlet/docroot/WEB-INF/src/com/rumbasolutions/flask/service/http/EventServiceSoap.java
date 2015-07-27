@@ -77,6 +77,21 @@ public class EventServiceSoap {
 		}
 	}
 
+	public static java.lang.String getUserSelectedEvents(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = EventServiceUtil.getUserSelectedEvents(serviceContext);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.EventSoap getEvent(
 		long eventId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -391,22 +406,6 @@ public class EventServiceSoap {
 		throws RemoteException {
 		try {
 			EventServiceUtil.removeUserEvent(eventId, serviceContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.rumbasolutions.flask.model.UserEventSoap[] getUserEvents(
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			java.util.List<com.rumbasolutions.flask.model.UserEvent> returnValue =
-				EventServiceUtil.getUserEvents(serviceContext);
-
-			return com.rumbasolutions.flask.model.UserEventSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

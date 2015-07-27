@@ -83,13 +83,6 @@ create table flaskevents_UserEvent (
 	createdDate DATE null
 );
 
-create table flaskevents_UserEvents (
-	userEventId LONG not null primary key,
-	userId VARCHAR(75) null,
-	eventId VARCHAR(75) null,
-	createdDate DATE null
-);
-
 create table flaskevents_Venue (
 	venueId LONG not null primary key,
 	companyId LONG,
