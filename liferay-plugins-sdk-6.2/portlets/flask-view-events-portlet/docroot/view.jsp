@@ -27,11 +27,7 @@
 
 <aui:script use="array-extras">
 	$(document).ready(function(){
-		Liferay.Service(_eventModel.SERVICE_ENDPOINTS.GET_EVENT,
-		  function(obj) {
-			renderEventList(obj);
-		  }
-		);
+		initEventList();
 	});
 </aui:script>
 <body>
