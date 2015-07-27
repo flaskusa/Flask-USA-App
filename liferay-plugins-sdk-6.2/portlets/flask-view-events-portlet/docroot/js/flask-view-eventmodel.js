@@ -3,15 +3,14 @@ var _eventModel = {};
 _eventModel.SERVICE_ENDPOINTS = {
 	API_PREFIX					:"/api/jsonws",
 	GET_EVENT 					:"/flask-rest-events-portlet.event/get-all-events",
+	GET_USER_EVENT 				:"/flask-rest-events-portlet.event/get-user-selected-events",
 	GET_EVENTDETAIL_WITH_IMAGES :"/flask-rest-events-portlet.event/get-event-details-with-images",
 	GET_FOLDER					:"/dlapp/get-folder",
 	GET_FOLDERS					:"/dlapp/get-folders",
 	GET_FILES					:"/dlapp/get-file-entries",
 	GET_FILE_BY_TITLE			:"/dlapp/get-file-entry",
 	ADD_USER_EVENT				:"/flask-rest-events-portlet.event/add-user-event",
-	REMOVE_USER_EVENT			:"/flask-rest-events-portlet.event/remove-user-event"
-
-		
+	REMOVE_USER_EVENT			:"/flask-rest-events-portlet.event/remove-user-event"		
 };
 
 _eventModel.DATA_MODEL= {

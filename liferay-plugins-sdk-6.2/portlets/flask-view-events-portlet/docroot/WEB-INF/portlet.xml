@@ -31,4 +31,31 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+		<portlet>
+		<portlet-name>flask-view-user-events</portlet-name>
+		<display-name>Flask View User Events</display-name>
+		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<init-param>
+			<name>view-template</name>
+			<value>/viewuser.jsp</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<portlet-info>
+			<title>Flask View User Events</title>
+			<short-title>Flask View User Events</short-title>
+			<keywords>Flask View User Events</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 </portlet-app>
