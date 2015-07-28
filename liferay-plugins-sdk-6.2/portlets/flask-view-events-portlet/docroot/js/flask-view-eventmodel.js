@@ -38,3 +38,37 @@ _eventModel.MESSAGES= {
 		DEL_SUCCESS: "Event successfully deleted",
 		DEL_ERR: "Error in deleting Event",
  };
+
+_eventModel.DETAIL_DATA_MODEL = {
+		GENERAL:[{
+                "infoTitle":"Title",
+	        	"infoDesc":"Description"
+				}],
+		TRADITION:[{//TRADITION
+                "infoTitle":"Name",
+                "infoDesc":"Description",
+                "Comment":"Comment"
+            	}],
+        WEATHER:[{//WEATHER
+            	"infoTitle":"Name",
+            	"infoDesc":"Description"
+        		}],    		
+        PARKING:[{//PARKING
+	            "infoTitle":"Name",
+	            "addrLine1":"Address",
+	            "cost":"Cost",
+	            "hoursOfOperation":"Is Available?",	            
+            }],
+        TRAFFIC:[{//TRAFFIC
+                "infoTitle":"Name",
+                "infoDesc":"Description",
+            }],
+        FOOD:[{//FOOD
+            "infoTitle":"Name",
+            "infoDesc":"Type of Establishment",
+            "addrLine1":"Address",
+            "phone":"Phone",
+            "website":"Website",
+            "infoDesc":"website",
+            }]
+}

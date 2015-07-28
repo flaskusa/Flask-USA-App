@@ -1,4 +1,5 @@
 var alllist = [];
+var map;
 
 function formatUnixToTime(tdate)
 {
@@ -14,14 +15,14 @@ function renderEventList(tdata) {
 	 var divRow = $('#placeholder');
 	 $(divRow).html("");
 	 if(tdata.Events.length == 0){
-		$("<span class='control-label-nocolor'>There there are no events</span>").appendTo($("#placeholder"));
+		$("<span class='control-label-nocolor'>There are no events</span>").appendTo($("#placeholder"));
 		return;
 	 }
 	 for(var i=0; i < tdata.Events.length; i++)
 		{
 		 	var flaskEvent = tdata.Events[i];
 		    var st = formatUnixToTime(flaskEvent.startTime);
-		    var divRowItem = $('<div/>',{'class':'row-fluid','data-id':flaskEvent.eventId});
+		    var divRowItem = $('<div/>',{'class':'row-fluid'});
 		    var divCol3 = $('<div/>',{'class':'span3','style':'width:60px;'});
 		    if(flaskEvent.userEvent == 1){
 		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent'});
@@ -31,7 +32,7 @@ function renderEventList(tdata) {
 		    }
 		   
 		    var divCol9 = $('<div/>',{'class':'span9'});
-		    var divCol9_lbl = $('<div/>',{'class':'lbldiv'});
+		    var divCol9_lbl = $('<div/>',{'class':'lbldiv','data-id':flaskEvent.eventId});
 		    var eventName_lbl = $('<label/>',{'class':'control-label-color'});
 		    $(eventName_lbl).html(flaskEvent.eventName);
 		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
@@ -143,13 +144,13 @@ function fnGetEventImages(eventId){
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
 			    case 2:
-			    	fnFillImageArray(obj.EventDetailImages,arrPreEvent)
+			    	arrPreEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPreEvent)
 			        break;
 			    case 3:
-			    	fnFillImageArray(obj.EventDetailImages,arrDurEvent)
+			    	arrDurEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrDurEvent)
 			        break;
 			    case 4:
-			    	fnFillImageArray(obj.EventDetailImages,arrPosEvent)
+			    	arrPosEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPosEvent)
 			        break;
 				}				
 			});				
@@ -164,46 +165,91 @@ function fnGetEventImages(eventId){
 		});	
 }
 
-function fnFillImageArray(eventDetailImages,objArray){
-	$.each(eventDetailImages, function(idx, objImg) {
-		objImage = jQuery.parseJSON(objImg.EventDetailImage);
-		imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
-		objArray.push(imgURL);
-		imgURL = "";
-	});
+function fnFillImageArray(eventDetailImages,eventDetails,objArray){
+	var objEventDetails = jQuery.parseJSON(eventDetails);
+	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toUpperCase()
+	var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+infoTypeCategoryName);
+	if(eventDetailImages.length>0){
+		var objtbl = $("<table/>",{'width':'100%','class':'eventDetailBoxWithImages'});
+		$.each(objFields, function(idx, obj){
+			var objtrHead = $("<tr/>");
+			var objth = $("<th/>",{'colspan':'2'});
+			$(objth).html(infoTypeCategoryName);
+			$(objth).appendTo($(objtbl));
+			$.each(obj,function(key,value){
+				var objtr = $("<tr/>");
+				var captionObj = $("<td/>",{'align':'left','style':'padding:10px','width':'20%'});
+				var valueObj = $("<td/>",{'align':'left','style':'padding:10px','width':'80%'});				
+				var evalue = eval("objEventDetails."+key);
+				var caption = value;
+				$(captionObj).html(caption);
+				$(captionObj).appendTo($(objtr));
+				$(valueObj).html(evalue);
+				$(valueObj).appendTo($(objtr));
+				$(objtr).appendTo($(objtbl));
+			});
+		});
+		
+		$.each(eventDetailImages, function(idx, objImg) {
+			var objContent = $("<div/>",{'width':'100%','height':'100%'});
+			objImage = jQuery.parseJSON(objImg.EventDetailImage);
+			var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
+			$(objContent).attr("style","background:url('"+imgURL+"');background-size: cover;width: 100%;height: 100%;");
+			$(objtbl).appendTo($(objContent));
+			objArray.push($(objContent));
+			imgURL = "";
+		});
+	}
+	else{
+		$.each(objFields, function(idx, obj){
+			var objContent = $("<div/>",{'width':'100%','height':'100%','class':'eventDetailBox'});
+			var objtbl = $("<table/>",{'width':'100%'});
+			var objtrHead = $("<tr/>");
+			var objth = $("<th/>",{'colspan':'2'});
+			$(objth).html(infoTypeCategoryName);
+			$(objth).appendTo($(objtbl));
+			$.each(obj,function(key,value){
+				var objtr = $("<tr/>");
+				var captionObj = $("<td/>",{'align':'left','style':'padding:10px','width':'20%'});
+				var valueObj = $("<td/>",{'align':'left','style':'padding:10px','width':'80%'});				
+				var evalue = eval("objEventDetails."+key);
+				var caption = value;
+				$(captionObj).html(caption);
+				$(captionObj).appendTo($(objtr));
+				$(valueObj).html(evalue);
+				$(valueObj).appendTo($(objtr));
+				$(objtr).appendTo($(objtbl));
+				$(objtbl).appendTo($(objContent));
+			});
+			objArray.push(objContent);			
+		});
+	}
 	return objArray;
 }
 
 function fnSlider(infoType,arrImage){
-	var ws_images = "#ws_images"+infoType;
-	var wowslider_container = "#wowslider-container"+infoType;
-	$(ws_images).html("");
+	var Slider = "#wowslider-container"+infoType;
 	if(arrImage.length>0){
-		var objUl = $("<ul/>");
 		$.each(arrImage, function( index, value ) {
-			var objli = $("<li/>");
-			var objImg = $("<img/>",{'src':value});
-			$(objImg).appendTo(objli);
-			$(objli).appendTo(objUl);
+			var objDiv = $("<div/>",{'class':'photo'});
+			var objImg = value;
+			$(objImg).appendTo(objDiv);
+			$(objDiv).appendTo($(Slider));			
 		});
-	    $(objUl).appendTo($(ws_images));
 	}
 	else{
-		fnBlankSlide(ws_images,wowslider_container);
+		fnBlankSlide(Slider);
 	}
-    $(wowslider_container).wowSlider();
+	$(Slider).jqxScrollView({ width: '100%', height: 245});	
 }
 
-function fnBlankSlide(ws_images,wowslider_container){
+function fnBlankSlide(Slider){
   	var temp_html;
 	var imageUrl;
 	imageUrl = "/flask-view-events-portlet/img/NoData.png";
-	var ulObj = $("<ul/>");
-	var liObj = $("<li/>");				
-	uploadedby = "No data";
-	$(liObj).html("<img src="+imageUrl+"></img>");
-	$(liObj).appendTo(ulObj);
-	$(ulObj).appendTo($(ws_images))      
+	var objDiv = $("<div/>");				
+	$(objDiv).html("<img src="+imageUrl+"></img>");
+	$(objDiv).appendTo($(Slider));
 }
 
 $(document).ready(function(){
