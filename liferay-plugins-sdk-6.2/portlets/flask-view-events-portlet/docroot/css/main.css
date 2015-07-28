@@ -209,6 +209,15 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
     width: 36px;
 }
 
+.photo
+ {
+     width: 100%;
+     height: 100%;
+     background-color: #000;
+     background-position: center;
+     background-repeat: no-repeat;
+ }	
+
 @media(max-width:414px)
 {
 	.SliderCaption 
@@ -218,7 +227,12 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
 	.wowslider-container .ws_images 
 	{
 	  height: 195px!important;
-	}	
+	}
+	
+	.photo
+ 	{
+ 		height: 195px!important;
+ 	}	
 }
 
 @media(max-width:375px)
@@ -230,7 +244,12 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
 	.wowslider-container .ws_images 
 	{
 	  height: 175px!important;
-	}	
+	}
+	
+	.photo
+ 	{
+ 		height: 175px!important;
+ 	}	
 }
 
 @media(max-width:320px)
@@ -243,6 +262,11 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
 	{
 	  height: 180px!important;
 	}	
+	
+	.photo
+ 	{
+ 		height: 180px!important;
+ 	}
 }
 /* For Slider Resize issue Ends*/
 
@@ -334,4 +358,42 @@ input.btn.btn-info.cssback {
   	background-size: cover;
   	background-repeat: no-repeat;
   	background-position: center center;
+}
+
+
+.eventDetailBox {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  width: 160px;
+  padding: 10px;
+  overflow: hidden;
+  border: none;
+  font: normal 16px/1 "Coda", Helvetica, sans-serif;
+  color: rgba(255,255,255,1);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: rgba(140,140,140,0.7);
+  -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
+}
+
+.eventDetailBoxWithImages {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  padding: 5px;
+  overflow: hidden;
+  border: none;
+  font: normal 16px/1 "Coda", Helvetica, sans-serif;
+  color: rgba(255,153,0,1);
+  text-align: center;
+  -o-text-overflow: ellipsis;
+  text-overflow: ellipsis;
+  background: rgba(140,140,140,0.7);
+  -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+  text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
 }
