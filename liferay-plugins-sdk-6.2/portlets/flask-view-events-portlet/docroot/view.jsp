@@ -17,6 +17,7 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
+
 <%
   com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
   long repositoryId = themeDisplay.getLayout().getGroupId();
@@ -29,6 +30,8 @@
 		initEventList();
 	});
 </aui:script>
+
+
 <body>
 <div id="viewEvents">
 <div class="table-responsive">          
@@ -99,5 +102,4 @@
         </table>
 	</div>
 </div>
-
 </body>
