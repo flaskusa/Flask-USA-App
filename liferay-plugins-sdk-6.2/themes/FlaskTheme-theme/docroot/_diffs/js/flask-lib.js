@@ -10,6 +10,8 @@ _flaskLib.SERVICE_ENDPOINTS = {
 				GET_COUNTRIES 				: "/flask-rest-users-portlet.flaskadmin/get-countries",
 				GET_REGION 					: "/flask-rest-users-portlet.flaskadmin/get-region",
 				GET_USA_REGION 				: "/flask-rest-users-portlet.flaskadmin/get-usa-regions",
+				DELETE_FILES				: "/dlapp/delete-file-entry",
+				GET_FILE_ENTRY_ID   		: "/dlapp/get-file-entry-by-uuid-and-group-id"
 }
 
 _flaskLib.getFormData = function(formId, model, customGetData){
@@ -182,5 +184,32 @@ _flaskLib.loadCountries = function(elementId,selectedId){
 			function (data){
 				console.log("Error in getting countries: " + data );
 			});
-
 }
+
+
+_flaskLib.deleteImage = function(uuid, groupId, objDel){
+	console.log(uuid);
+			var params = {'uuid': uuid, 'groupId': groupId};
+			var flaskRequest = new Request();
+			flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_FILE_ENTRY_ID , params, 
+					function (data){
+							console.log(data);
+							params2= {'fileEntryId': data.fileEntryId};
+							var flaskRequest2 = new Request();
+							flaskRequest2.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.DELETE_FILES , params2, 
+								function (data){
+									if(typeof data=="object"){
+										console.log("Deleted Image successfully");    		
+									}		
+								},
+								function (data){
+									$("#spinningSquaresG").hide();
+								});	
+							console.log("Image Deleted successfully");
+					} ,
+					function (data){
+						console.log("Error in deleting image");
+					});
+	
+}
+
