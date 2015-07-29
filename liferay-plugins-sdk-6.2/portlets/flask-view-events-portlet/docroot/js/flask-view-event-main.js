@@ -144,6 +144,7 @@ function fnGetEventImages(eventId){
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
 			    case 2:
+			    	console.log(obj);
 			    	arrPreEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPreEvent)
 			        break;
 			    case 3:
@@ -170,34 +171,45 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toUpperCase()
 	var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+infoTypeCategoryName);
 	if(eventDetailImages.length>0){
-		var objtbl = $("<table/>",{'width':'100%','class':'eventDetailBoxWithImages'});
-		$.each(objFields, function(idx, obj){
-			var objtrHead = $("<tr/>");
-			var objth = $("<th/>",{'colspan':'2'});
-			$(objth).html(infoTypeCategoryName);
-			$(objth).appendTo($(objtbl));
-			$.each(obj,function(key,value){
-				var objtr = $("<tr/>");
-				var captionObj = $("<td/>",{'align':'left','style':'padding:10px','width':'20%'});
-				var valueObj = $("<td/>",{'align':'left','style':'padding:10px','width':'80%'});				
-				var evalue = eval("objEventDetails."+key);
-				var caption = value;
-				$(captionObj).html(caption);
-				$(captionObj).appendTo($(objtr));
-				$(valueObj).html(evalue);
-				$(valueObj).appendTo($(objtr));
-				$(objtr).appendTo($(objtbl));
-			});
-		});
-		
 		$.each(eventDetailImages, function(idx, objImg) {
-			var objContent = $("<div/>",{'width':'100%','height':'100%'});
+			var objtbl = $("<table/>",{'width':'100%'});
+			$.each(objFields, function(idx, obj){
+				var objtrHead = $("<tr/>");
+				$.each(obj,function(key,value){
+					var objtr = $("<tr/>");
+					var valueTd = $("<td/>",{'align':'left','style':'padding:10px','width':'100%'});				
+					var evalue = eval("objEventDetails."+key);
+					var caption = value;
+					$(valueTd).html(evalue);
+					$(valueTd).appendTo($(objtr));
+					$(objtr).appendTo($(objtbl));
+				});
+			});
+			
+			var imgURL = "";
+			var objMainTable = $("<table/>",{'width':'100%','class':'eventDetailBoxWithImages'});
+			var objMainTrHead = $("<tr/>");
+			/*Commented header part*/
+			//var objth = $("<th/>",{'colspan':'2'});
+			//$(objth).html(infoTypeCategoryName);
+			//$(objth).appendTo($(objMainTrHead));
+			$(objMainTrHead).appendTo($(objMainTable));
+			var objMainTr = $("<tr/>");
+			var imageTd = $("<td/>",{'align':'left','valign':'top','style':'padding-top:10px;padding-bottom:10px','width':'60%'});
+			var textDataTd = $("<td/>",{'align':'left','valign':'top','style':'padding-top:10px;padding-bottom:10px','width':'40%'});
+			var objContent = $("<div/>",{'width':'100%','height':'245px'});
+
 			objImage = jQuery.parseJSON(objImg.EventDetailImage);
-			var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
-			$(objContent).attr("style","background:url('"+imgURL+"');background-size: cover;width: 100%;height: 100%;");
-			$(objtbl).appendTo($(objContent));
-			objArray.push($(objContent));
-			imgURL = "";
+			imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
+			$(objContent).attr("style","background:url('"+imgURL+"');background-size: cover;width: 100%;height: 200px;");
+			$(objContent).appendTo(imageTd);
+			
+			$(imageTd).appendTo($(objMainTr));
+			$(objtbl).appendTo($(textDataTd));
+			$(textDataTd).appendTo($(objMainTr));
+			$(objMainTr).appendTo($(objMainTable));
+			
+			objArray.push($(objMainTable));
 		});
 	}
 	else{
@@ -210,8 +222,8 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 			$(objth).appendTo($(objtbl));
 			$.each(obj,function(key,value){
 				var objtr = $("<tr/>");
-				var captionObj = $("<td/>",{'align':'left','style':'padding:10px','width':'20%'});
-				var valueObj = $("<td/>",{'align':'left','style':'padding:10px','width':'80%'});				
+				var captionObj = $("<td/>",{'align':'left','style':'padding:10px','width':'30%'});
+				var valueObj = $("<td/>",{'align':'left','style':'padding:10px','width':'70%'});				
 				var evalue = eval("objEventDetails."+key);
 				var caption = value;
 				$(captionObj).html(caption);
