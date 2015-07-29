@@ -213,7 +213,6 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
  {
      width: 100%;
      height: 100%;
-     background-color: #000;
      background-position: center;
      background-repeat: no-repeat;
  }	
@@ -365,11 +364,11 @@ input.btn.btn-info.cssback {
   -webkit-box-sizing: content-box;
   -moz-box-sizing: content-box;
   box-sizing: content-box;
-  width: 160px;
+  width: 100%;
   padding: 10px;
   overflow: hidden;
   border: none;
-  font: normal 16px/1 "Coda", Helvetica, sans-serif;
+  font: normal 14px/1 "Coda", Helvetica, sans-serif;
   color: rgba(255,255,255,1);
   text-align: center;
   -o-text-overflow: ellipsis;
@@ -389,11 +388,19 @@ input.btn.btn-info.cssback {
   border: none;
   font: normal 16px/1 "Coda", Helvetica, sans-serif;
   color: rgba(255,153,0,1);
-  text-align: center;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  background: rgba(140,140,140,0.7);
-  -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
-  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
 }
+
+.jqx-scrollview {
+    -ms-touch-action: auto !important;
+	background-image: -webkit-linear-gradient(45deg, rgba(252,234,187,1) 0, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+	background-image: -moz-linear-gradient(45deg, rgba(252,234,187,1) 0, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+	background-image: linear-gradient(45deg, rgba(252,234,187,1) 0, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+	background-position: 50% 50%;
+	-webkit-background-origin: padding-box;
+	background-origin: padding-box;
+	-webkit-background-clip: border-box;
+	background-clip: border-box;
+	-webkit-background-size: auto auto;
+	background-size: auto auto;    
+}
+
