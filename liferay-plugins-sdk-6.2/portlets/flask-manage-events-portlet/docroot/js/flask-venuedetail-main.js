@@ -431,17 +431,6 @@ function fnRenderSlider(folderId,_divObj){
 		});	
 }
 
-function fnDeleteFileByEntryId(fileEntryId,objDel){
-	params= {'fileEntryId': fileEntryId};
-	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.DELETE_FILES , params, 
-		function (data){
-			if(typeof data=="object"){
-				
-			}		
-		},
-		function (data){$("#spinningSquaresG").hide();});	
-}
 
 $(document).ready(function(){
 	$("#mcontents").click(function(){
@@ -505,7 +494,7 @@ function fnGetVenueDetailImages(venueDetailId,container,editable){
 	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.GET_VENUEDETAIL_IMAGES , params, 
 		function (data){
 			$.each(data, function(idx, obj) {
-				fnRenderImage(obj.imageUUID,obj.imageGroupId,data.fileEntryId,container, obj.venueDetailImageId, editable);
+				fnRenderImage(obj.imageUUID,obj.imageGroupId, container, obj.venueDetailImageId, editable);
 			});			
 		},
 		function (data){
@@ -513,9 +502,9 @@ function fnGetVenueDetailImages(venueDetailId,container,editable){
 		});	
 }
 
-function fnRenderImage(imageUUID, imageGroupId, fileEntryId, container, venueDetailImageId, editable){
+function fnRenderImage(imageUUID, imageGroupId, container, venueDetailImageId, editable){
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-fileEntryId':fileEntryId});
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-venueDetailImageId': venueDetailImageId});
 	$(objdiv).appendTo($(container));
 	if(editable){
 		$(objdiv).click(function(){
@@ -528,8 +517,8 @@ function fnRenderImage(imageUUID, imageGroupId, fileEntryId, container, venueDet
 	    			$(objDel).click(function(){
 	    				$("#spinningSquaresG").show();
 	    				$(".activeImage").each(function(){
-	    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
-	    					fnDeleteVenueDetailImage(venueDetailImageId);
+	    					_flaskLib.deleteImage($(this).attr("data-uuid"), imageGroupId, objDel);
+	    					fnDeleteVenueDetailImage($(this).attr("data-venueDetailImageId"));
 	    					$(this).remove();
 	    				});
 	    				if($(".activeImage").length==0){

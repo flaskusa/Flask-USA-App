@@ -307,18 +307,6 @@ var wait = function(callback, seconds) {
 	return window.setTimeout(callback, seconds * 1000);
 }
 
-function fnDeleteFileByEntryId(fileEntryId,objDel){
-	params= {'fileEntryId': fileEntryId};
-	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.DELETE_FILES , params, 
-		function (data){
-			if(typeof data=="object"){
-				_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_IMAGE_DELETE);    		
-			}		
-		},
-		function (data){$("#spinningSquaresG").hide();});	
-}
-
 $(document).ready(function(){
 	$("#mcontents").click(function(){
 		addDetailsClickHandlers();
@@ -374,14 +362,13 @@ function fnDeleteEventDetailImage(eventDetailImageId){
 		});	
 }
 
-
 function fnGetEventDetailImages(eventDetailId,container, editable){
 	params= {'eventDetailId': eventDetailId};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL_IMAGES , params, 
 		function (data){
 			$.each(data, function(idx, obj) {
-				fnRenderImage(obj.imageUUID, obj.imageGroupId, data.fileEntryId, container, obj.eventDetailImageId, editable);
+				fnRenderImage(obj.imageUUID, obj.imageGroupId, container, obj.eventDetailImageId, editable);
 			});			
 		},
 		function (data){
@@ -389,9 +376,9 @@ function fnGetEventDetailImages(eventDetailId,container, editable){
 		});	
 }
 
-function fnRenderImage(imageUUID, imageGroupId, fileEntryId, container, eventDetailImageId, editable){
+function fnRenderImage(imageUUID, imageGroupId, container, eventDetailImageId, editable){
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-fileEntryId':fileEntryId});
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-eventDetailImageId': eventDetailImageId});
 	$(objdiv).appendTo($(container));
 	if(editable){
     	$(objdiv).click(function(){
@@ -404,8 +391,8 @@ function fnRenderImage(imageUUID, imageGroupId, fileEntryId, container, eventDet
 	    			$(objDel).click(function(){
 	    				$("#spinningSquaresG").show();
 	    				$(".activeImage").each(function(){
-	    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
-	    					fnDeleteEventDetailImage(eventDetailImageId);
+	    					_flaskLib.deleteImage($(this).attr("data-uuid"), imageGroupId, objDel);
+	    					fnDeleteEventDetailImage($(this).attr("data-eventDetailImageId"));
 	    					$(this).remove();
 	    				});
 	    				if($(".activeImage").length==0){

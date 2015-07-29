@@ -26,7 +26,25 @@ function addClickHandlers(){
 	
 	$(".clsSave").click(function(){
 		if($('#venueForm').jqxValidator('validate'))
-		saveVenue();
+			var geocoder = new google.maps.Geocoder(); 
+		geocoder.geocode({
+				address : $('#addrLine1').val(), 
+				region: 'no'
+			},
+		    function(results, status) {
+		    	if (status.toLowerCase() == 'ok') {
+					// Get center
+					var coords = new google.maps.LatLng(
+						results[0]['geometry']['location'].lat(),
+						results[0]['geometry']['location'].lng()
+					);
+				
+					$('#latitude').val(coords.lat());
+					$('#longitude').val(coords.lng());
+					saveVenue();
+		    	}
+		    });
+		
 	});
 	
 	
@@ -93,7 +111,31 @@ function contextMenuHandler(menuItemText, rowData){
 	}else if(menuItemText == "Delete"){
 		var a = window.confirm("Are you sure ?");
 		if (a) {
-			deleteVenue(rowData.venueId);
+				var flag = false;
+				var flaskRequest = new Request();
+				params = {};
+				flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_ALL_EVENTS, params, 
+				function(data){/*success handler*/
+					var obj = data.Events;
+					for(var i=0; i<obj.length; i++){
+							if(obj[i].venueId == rowData.venueId){
+								flag = true;
+							}
+						};					
+					if(!flag)
+						{
+							deleteVenue(rowData.venueId);
+						}
+					else
+						{
+							_flaskLib.showErrorMessage('action-msg',_venueModel.MESSAGES.CAN_NOT_DELETE);
+						}
+				} , function(error){ /*failure handler*/
+					console.log(error);
+				});
+			
+			
+			
 		}
 		return false;			
 	}
@@ -108,7 +150,7 @@ function deleteVenue(venueId) {
 						function (data){
 								_flaskLib.showSuccessMessage('action-msg', _venueModel.MESSAGES.DEL_SUCCESS);
 								loadData();
-						} ,
+						},
 						function (data){
 								_flaskLib.showErrorMessage('action-msg', _venueModel.MESSAGES.DEL_ERR);
 						});
@@ -165,6 +207,7 @@ function saveVenue(){
 					});
 		var flaskRequest = new Request();
 		var url = "";
+			console.log(params);
 			if(params.venueId == 0){
 				url =_venueModel.SERVICE_ENDPOINTS.ADD_VENUE;
 			}else{
@@ -175,7 +218,6 @@ function saveVenue(){
 						var IsNew = false; 
 						$("#venueForm #venueId").val(data.venueId);
 						_flaskLib.showSuccessMessage('action-msg', _venueModel.MESSAGES.SAVE);
-						
 						if(parseInt(params.venueId) == 0 && parseInt(data.venueId) > 0){
 							$("#mcontents").attr("data-toggle","tab");
 							$("#mcontents").css("cursor","default");
@@ -191,8 +233,6 @@ function saveVenue(){
 										loadVenueDetailsData(data.venueId);
 									}
 							else{
-									//location.reload();
-									//loadData();
 									$('.nav-tabs > .active').next('li').find('a').trigger('click');
 									loadVenueDetailsData(data.venueId);
 								}
@@ -291,7 +331,7 @@ function fnGetVenueImages(venueId,container,editable){
 	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE_IMAGES , params, 
 		function (data){
 			$.each(data, function(idx, obj) {
-				fnRenderImage(obj.venueImageUUId,obj.venueImageGroupId,data.fileEntryId,container, obj.venueImageId, editable);
+				fnRenderVenueImage(obj.venueImageUUId,obj.venueImageGroupId, container, obj.venueImageId, editable);
 			});			
 		},
 		function (data){
@@ -299,23 +339,23 @@ function fnGetVenueImages(venueId,container,editable){
 		});	
 }
 
-function fnRenderImage(venueImageUUId,venueImageGroupId,fileEntryId,container,venueImageId,editable){
+function fnRenderVenueImage(venueImageUUId,venueImageGroupId, container,venueImageId,editable){
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+venueImageUUId+"&groupId="+venueImageGroupId;
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-fileEntryId':fileEntryId});
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':venueImageUUId, 'data-venueImageId': venueImageId});
 	$(objdiv).appendTo($(container));
 	if(editable){
 		$(objdiv).click(function(){
 	    	$(this).toggleClass("activeImage");
 	    	if($(".activeImage").length>0){
 	    		if(iSelected==false){
-	    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
-	    			$(objDel).appendTo($(container));
+	    			var objVenueDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+	    			$(objVenueDel).appendTo($(container));
 	    			iSelected = true;
-	    			$(objDel).click(function(){
+	    			$(objVenueDel).click(function(){
 	    				$("#spinningSquaresG").show();
 	    				$(".activeImage").each(function(){
-	    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
-	    					fnDeleteVenueImage(venueImageId);
+	    					_flaskLib.deleteImage($(this).attr("data-uuid"), venueImageGroupId, objVenueDel);
+	    					fnDeleteVenueImage($(this).attr("data-venueImageId"));
 	    					$(this).remove();
 	    				});
 	    				if($(".activeImage").length==0){
@@ -333,3 +373,4 @@ function fnRenderImage(venueImageUUId,venueImageGroupId,fileEntryId,container,ve
 	    });		
 	}
 }
+

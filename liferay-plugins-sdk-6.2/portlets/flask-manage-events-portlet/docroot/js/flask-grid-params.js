@@ -233,7 +233,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 
 function fnRenderLogo(imageUUID, imageGroupId,container ,editable){
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')'});
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID});
 	$(objdiv).appendTo($(container));
 	if(editable){
     	$(objdiv).click(function(){
@@ -246,7 +246,7 @@ function fnRenderLogo(imageUUID, imageGroupId,container ,editable){
 	    			$(objDel).click(function(){
 	    				$("#spinningSquaresG").show();
 	    				$(".activeImage").each(function(){
-	    					fnDeleteFileByEntryId($(this).attr("data-fileEntryId"),objDel);
+	    					_flaskLib.deleteImage($(this).attr("data-uuid"), imageGroupId, objDel);
 	    					$(this).remove();
 	    				});
 	    				if($(".activeImage").length==0){
@@ -266,7 +266,9 @@ function fnRenderLogo(imageUUID, imageGroupId,container ,editable){
     }
 }
 
+
 GRID_PARAM.formatDate = function (dateVal){
 	var dateObj = new Date(dateVal);
 	return dateObj.toLocaleDateString(); 
 }
+

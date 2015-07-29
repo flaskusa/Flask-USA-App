@@ -8,6 +8,7 @@ _venueModel.SERVICE_ENDPOINTS = {
 	UPDATE_VENUE				: "/flask-rest-events-portlet.venue/update-venue",
 	DELETE_VENUE				: "/flask-rest-events-portlet.venue/delete-venue",
 	DELETE_VENUES				: "/flask-rest-events-portlet.venue/delete-venues",
+	DELETE_FILES				: "/dlapp/delete-file-entry",
 	DELETE_VENUE_IMAGE			: "/flask-rest-events-portlet.venue/delete-venue-image",
 	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
 	ADD_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/add-venue-detail",
@@ -15,7 +16,7 @@ _venueModel.SERVICE_ENDPOINTS = {
 	GET_FOLDER					: "/dlapp/get-folder",
 	GET_FILES					: "/dlapp/get-file-entries",
 	GET_VENUE_IMAGES			: "/flask-rest-events-portlet.venue/get-venue-images",
-	DELETE_VENUE_IMAGE			: "/flask-rest-events-portlet.venue/delete-venue-image"
+	GET_ALL_EVENTS				: "/flask-rest-events-portlet.event/get-all-events"
 };
 
 _venueModel.DATA_MODEL= {
@@ -46,7 +47,8 @@ _venueModel.MESSAGES= {
 		ERROR: "There was an error in saving venue",
 		DEL_SUCCESS: "Venue successfully deleted",
 		DEL_ERR: "Error in deleting venue",
-		ADD_VENUE_FIRST_ERR: "Please save event first"
+		ADD_VENUE_FIRST_ERR: "Please save event first",
+		CAN_NOT_DELETE: "Error deleting.. Because There is event containing this venue"
  };
 
 _venueModel.loadContentType = function(elementId,selectedId){
