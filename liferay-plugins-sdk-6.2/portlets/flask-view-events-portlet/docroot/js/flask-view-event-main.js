@@ -172,7 +172,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+infoTypeCategoryName);
 	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
-			var objtbl = $("<table/>",{'width':'100%'});
+			var objtbl = $("<table/>",{'width':'100%','class':'eventDetailBox'});
 			$.each(objFields, function(idx, obj){
 				var objtrHead = $("<tr/>");
 				$.each(obj,function(key,value){
@@ -252,7 +252,10 @@ function fnSlider(infoType,arrImage){
 	else{
 		fnBlankSlide(Slider);
 	}
-	$(Slider).jqxScrollView({ width: '100%', height: 245});	
+	$(Slider).jqxScrollView({ 
+			height: 245,
+		    showButtons:true
+		});	
 }
 
 function fnBlankSlide(Slider){
