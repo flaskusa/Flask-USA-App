@@ -65,12 +65,3 @@ String authType = portletPreferences.getValue("authType", StringPool.BLANK);
 %>
 
 <%@ include file="/html/portlet/login/init-ext.jsp" %>
-<script>
-	$(document).ready(function() {
-	    function disableBack() { window.history.forward() }
-		if(<%= themeDisplay.isSignedIn() %>){
-	    	window.onload = disableBack();
-	    	window.onpageshow = function(evt) { if (evt.persisted) disableBack() }
-		}
-	});
-</script>
