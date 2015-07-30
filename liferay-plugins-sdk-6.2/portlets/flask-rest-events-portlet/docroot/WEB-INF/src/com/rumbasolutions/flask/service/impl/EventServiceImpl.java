@@ -142,7 +142,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	@Override
 	public Event addEvent(String eventName, String description, 
 						String eventDate, Date startTime, Date endTime,
-						long eventTypeId, long venueId, String eventImageUUID,
+						long eventTypeId, long venueId, String eventImageUUID, long eventImageGroupId,
 								ServiceContext  serviceContext){
 		Event event=null;
 		try{
@@ -156,7 +156,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
 			event.setEventImageUUID(eventImageUUID);
-			event.setEventImageGroupId(FlaskUtil.getFlaskRepositoryId());
+			event.setEventImageGroupId(eventImageGroupId);
 
 			Date now = new Date();
 			event.setCompanyId(serviceContext.getCompanyId());
@@ -176,7 +176,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	@Override
 	public Event updateEvent(long eventId, String eventName, String description, 
 						String eventDate, Date startTime, Date endTime,
-						long eventTypeId, long venueId, String eventImageUUID,
+						long eventTypeId, long venueId, String eventImageUUID, long groupId,
 								ServiceContext  serviceContext){
 		Event event=null;
 		try{
@@ -194,7 +194,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		    event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
 			event.setEventImageUUID(eventImageUUID);
-			event.setEventImageGroupId(FlaskUtil.getFlaskRepositoryId());
+			event.setEventImageGroupId(groupId);
 			
 			EventLocalServiceUtil.updateEvent(event);
 		}catch(Exception ex){
@@ -397,7 +397,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	
 	@Override
 	public EventDetailImage addEventDetailImage(long eventDetailId, String imageTitle,
-									String imageDesc, String imageUUID,
+									String imageDesc, String imageUUID, long groupId,
 									ServiceContext  serviceContext){
 		EventDetailImage eventDetailImage =null;
 		try{
@@ -406,7 +406,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetailImage.setImageTitle(imageTitle);
 			eventDetailImage.setImageDesc(imageDesc);
 			eventDetailImage.setImageUUID(imageUUID);
-			eventDetailImage.setImageGroupId(FlaskUtil.getFlaskRepositoryId());
+			eventDetailImage.setImageGroupId(groupId);
 			
 			Date now = new Date();
 			eventDetailImage.setCompanyId(serviceContext.getCompanyId());
@@ -425,7 +425,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	@Override
 	public EventDetailImage updateEventDetailImage(long eventDetailImageId,
 									String imageTitle,
-									String imageDesc, String imageUUID,
+									String imageDesc, String imageUUID, long groupId,
 									ServiceContext  serviceContext){
 		EventDetailImage eventDetailImage =null;
 		try{
@@ -433,7 +433,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetailImage.setImageTitle(imageTitle);
 			eventDetailImage.setImageDesc(imageDesc);
 			eventDetailImage.setImageUUID(imageUUID);
-			eventDetailImage.setImageGroupId(FlaskUtil.getFlaskRepositoryId());
+			eventDetailImage.setImageGroupId(groupId);
 			
 			Date now = new Date();
 			eventDetailImage.setUserId(serviceContext.getGuestOrUserId());
