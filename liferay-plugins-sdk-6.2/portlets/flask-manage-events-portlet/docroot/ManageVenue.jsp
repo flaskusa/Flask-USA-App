@@ -35,6 +35,7 @@ function initialize(portletId, portlet){
 		createTable({},_venueModel.DATA_MODEL.VENUE, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Venue", "Images"]);
 		loadData();
 		addClickHandlers();
+		initForm();
 	}
 }
 
