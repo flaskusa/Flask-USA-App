@@ -25,9 +25,9 @@ function renderEventList(tdata) {
 		    var divRowItem = $('<div/>',{'class':'row-fluid'});
 		    var divCol3 = $('<div/>',{'class':'span3','style':'width:60px;'});
 		    if(flaskEvent.userEvent == 1){
-		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent'});
+		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
 		    }else{
-		    	var div_heart = $('<div/>',{'class':'heart-shape'});
+		    	var div_heart = $('<div/>',{'class':'heart-shape','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
 		    	
 		    }
 		   
@@ -52,7 +52,7 @@ function renderEventList(tdata) {
 		 	});
 		 	if(Liferay.ThemeDisplay.isSignedIn()){
 			 	$(div_heart).click(function(){
-			 		setMyEvent(flaskEvent, event);
+			 		setMyEvent($(this).attr("data-eventId"),$(this).attr("data-userEvent"));
 			 	});
 		 	}else{
 		 		$(div_heart).attr("title", "You need to be signed in to save events.");
@@ -290,10 +290,9 @@ function fnStopProgress(){
  	$(".ws_controls").hide();
 }
 
-function setMyEvent(flaskEvent, event){
-	var eventId = flaskEvent.eventId;
-	var myEvent = flaskEvent.userEvent;
-	console.log(myEvent);
+function setMyEvent(_eventId,_userEvent){
+	var eventId = parseInt(_eventId);
+	var myEvent = parseInt(_userEvent);
 	if(myEvent == 0 ){
 		addUserEvent(eventId);
 	}else{
@@ -301,7 +300,6 @@ function setMyEvent(flaskEvent, event){
 	}
 	
 }
-
 function initEventList(){
 	var request = new Request();
 	var param = {};
