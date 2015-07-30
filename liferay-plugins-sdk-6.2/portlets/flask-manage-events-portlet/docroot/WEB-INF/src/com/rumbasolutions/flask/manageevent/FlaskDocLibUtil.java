@@ -180,7 +180,7 @@ public class FlaskDocLibUtil {
  */
 	public static FileEntry addFileEntry(Folder folder, String sourcefileName,
 										 String title, String desc, File file,  
-										 String mimeType,  ServiceContext serviceContext) 
+										 String mimeType, ServiceContext serviceContext) 
 														 throws PortalException, SystemException{
 		FileEntry fileEntry=null;	
 		try{	
@@ -196,7 +196,7 @@ public class FlaskDocLibUtil {
 			}
 		return fileEntry;
 	}
-	
+
 	public static void setGuestViewPermission( FileEntry fileEntry) throws PortalException, SystemException{
 		ResourcePermission resourcePermission = null;
 		Role guestRole = getGuestRole();
@@ -281,7 +281,7 @@ public class FlaskDocLibUtil {
 		return mimeType;
 	}
 	
-	public static String updateEventLogoPath(long _eventId, String eventImageUUID, ServiceContext _serviceContext){
+	public static String updateEventLogoPath(long _eventId, String eventImageUUID, long groupId, ServiceContext _serviceContext){
 		try {
 			 Event eventInfo = EventServiceUtil.getEvent(_eventId, _serviceContext);
 			 System.out.println("eventInfo: "+eventInfo);
@@ -294,6 +294,7 @@ public class FlaskDocLibUtil {
 					eventInfo.getEventTypeId(), 
 					eventInfo.getVenueId(), 
 					eventImageUUID, 
+					groupId,
 					_serviceContext);
 			
 			return eventImageUUID; 

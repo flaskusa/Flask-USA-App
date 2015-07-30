@@ -96,9 +96,9 @@ public class ManageEventPortletAction extends MVCPortlet {
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
 					FileEntry fileEntry = FlaskDocLibUtil.addFileEntry(_eventFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
 					if(IsLogo)
-						FlaskDocLibUtil.updateEventLogoPath(_eventId, fileEntry.getUuid(), _serviceContext);
+						FlaskDocLibUtil.updateEventLogoPath(_eventId, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 					else
-						EventServiceUtil.addEventDetailImage(_eventDetailId, fileTitle, fileDesc, fileEntry.getUuid(), _serviceContext);
+						EventServiceUtil.addEventDetailImage(_eventDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 					
 				}else{
 					

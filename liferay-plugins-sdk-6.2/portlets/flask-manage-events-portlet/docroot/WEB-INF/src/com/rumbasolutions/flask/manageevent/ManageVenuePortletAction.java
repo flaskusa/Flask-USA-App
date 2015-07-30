@@ -93,9 +93,9 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
 					FileEntry fileEntry = FlaskDocLibUtil.addFileEntry(_venueFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
 					if(_venueDetailId>0)
-						VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), _serviceContext);
+						VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 					else
-						VenueServiceUtil.addVenueImage(_venueId, fileTitle, fileEntry.getUuid(), _serviceContext);
+						VenueServiceUtil.addVenueImage(_venueId, fileTitle, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 				}else{
 					
 				}
