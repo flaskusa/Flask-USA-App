@@ -96,7 +96,9 @@ for (Role role : roles){
 	  	});
 		$('#_145_navSiteNavigationNavbarBtn').click(function(event){
 	 	     event.stopPropagation();
-	 	});	 	
+	 	});	 
+		
+		$(".portlet-topper").remove();
   });	  	
   
 </script>
@@ -105,13 +107,11 @@ for (Role role : roles){
 <aui:nav-bar cssClass="navbar-static-top dockbar" data-namespace="<%= renderResponse.getNamespace() %>" id="dockbar">
 	
 	
-	 
+	<a href="/web/flask/events" style="text-decoration: none;color:#2D2D2D">	 
 	 <div align="center" style="position:relative;margin-left:30%;margin-right:30%;margin-top:8px;"><img alt="Liferay" src="/FlaskTheme-theme/images/flasklogo.png" width="30" height="30">
-    
-     <span style="font-weight:900; font-size: 18px;">FLASK</span>
- 
+     	<span style="font-weight:900; font-size: 18px;">FLASK</span>
      </div>
-     
+	</a>
 
 	<c:if test="<%= group.isControlPanel() %>">
 
@@ -276,15 +276,15 @@ for (Role role : roles){
 
 				<aui:nav-item anchorId="addPanel" cssClass="site-add-controls" data-panelURL="<%= addURL %>" href="javascript:;" iconCssClass="icon-plus" label="add" />
 			</c:if>
-
-			<c:if test="<%= showPreviewControls %>">
-				<portlet:renderURL var="previewContentURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+			<!-- 
+			<c:if test="<%//= showPreviewControls %>">
+				<portlet:renderURL var="previewContentURL" windowState="<%//= LiferayWindowState.EXCLUSIVE.toString() %>">
 					<portlet:param name="struts_action" value="/dockbar/preview_panel" />
 				</portlet:renderURL>
 
-				<aui:nav-item anchorId="previewPanel" cssClass="page-preview-controls" data-panelURL="<%= previewContentURL %>" href="javascript:;" iconCssClass="icon-desktop" label="preview" />
-			</c:if>
-
+				<aui:nav-item anchorId="previewPanel" cssClass="page-preview-controls" data-panelURL="<%//= previewContentURL %>" href="javascript:;" iconCssClass="icon-desktop" label="preview" />
+			</c:if>-->
+ 
 			<c:if test="<%= showEditControls %>">
 				<portlet:renderURL var="editLayoutURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
 					<portlet:param name="struts_action" value="/dockbar/edit_layout_panel" />
@@ -294,10 +294,11 @@ for (Role role : roles){
 
 				<aui:nav-item anchorId="editLayoutPanel" cssClass="page-edit-controls" data-panelURL="<%= editLayoutURL %>" href="javascript:;" iconCssClass="icon-edit" label="edit" />
 			</c:if>
-
-			<c:if test="<%= showToggleControls %>">
-				<aui:nav-item anchorCssClass="toggle-controls-link" cssClass="toggle-controls" iconCssClass='<%= "controls-state-icon " + (toggleControlsState.equals("visible") ? "icon-eye-open" : "icon-eye-close") %>' id="toggleControls" label="edit-controls" />
-			</c:if>
+			
+			<!-- 
+			<c:if test="<%//= showToggleControls %>">
+				<aui:nav-item anchorCssClass="toggle-controls-link" cssClass="toggle-controls" iconCssClass='<%//= "controls-state-icon " + (toggleControlsState.equals("visible") ? "icon-eye-open" : "icon-eye-close") %>' id="toggleControls" label="edit-controls" />
+			</c:if>-->
 		</aui:nav>
 	</c:if>
 
