@@ -1,4 +1,4 @@
-var _repositoryId = $("#repositoryId").val();    
+var _repositoryId;// = $("#repositoryId").val();    
 var GRID_PARAM = {};
 
 var gridObj;

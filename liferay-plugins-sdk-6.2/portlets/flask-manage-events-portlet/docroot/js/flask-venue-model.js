@@ -13,10 +13,11 @@ _venueModel.SERVICE_ENDPOINTS = {
 	GET_INFO_CATEGORY 			: "/flask-rest-events-portlet.infotypecategory/get-info-type-categories",
 	ADD_VENUE_DETAILS			: "/flask-rest-events-portlet.venue/add-venue-detail",
 	UPDATE_VENUE_DETAILS		: "/flask-rest-events-portlet.venue/update-venue-detail",	
-	GET_FOLDER					: "/dlapp/get-folder",
 	GET_FILES					: "/dlapp/get-file-entries",
 	GET_VENUE_IMAGES			: "/flask-rest-events-portlet.venue/get-venue-images",
-	GET_ALL_EVENTS				: "/flask-rest-events-portlet.event/get-all-events"
+	GET_ALL_EVENTS				: "/flask-rest-events-portlet.event/get-all-events",
+	GET_FOLDER		 			: "/dlapp/get-folder",
+    DELETE_FOLDER		 		: "/dlapp/delete-folder"
 };
 
 _venueModel.DATA_MODEL= {

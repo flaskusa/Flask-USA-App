@@ -94,37 +94,61 @@ function contextMenuHandler(menuItemText, rowData){
 	}
 };
 
+function deleteEventFolder(_eventId){
+	var param = {'repositoryId': _repositoryId,'parentFolderId':0,'name':'Event'};
+	var flaskRequest = new Request();
+	flaskRequest.sendPOSTRequest(_eventModel.SERVICE_ENDPOINTS.GET_FOLDER , param, 
+		function (data){
+			var eventFolderName = 'Event-'+_eventId;
+			var param1 = {'repositoryId': _repositoryId,'parentFolderId':data.folderId,'name':eventFolderName};
+			var flaskRequest1 = new Request();
+			flaskRequest1.sendPOSTRequest(_eventModel.SERVICE_ENDPOINTS.DELETE_FOLDER , param1,
+					function (data){
+						console.log(data);
+					},
+					function (data){
+						console.log(data);
+					});	
+		} ,
+		function (data){
+			console.log(data);
+		});		
+}
+
 /* Delete Single Event */
 function deleteEvent(eventId) {
 		var param = {'eventId': eventId};
 		var request = new Request();
 		var flaskRequest = new Request();
 		flaskRequest.sendPOSTRequest(_eventModel.SERVICE_ENDPOINTS.DELETE_EVENT , param, 
-						function (data){
-								_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
-								loadData();
-						} ,
-						function (data){
-								_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);
-						});
-	
+			function (data){
+					_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
+					deleteEventFolder(eventId);
+					loadData();
+			} ,
+			function (data){
+					_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);
+			});
 }
 
 /* Delete Multiple Events */
 function deleteMultipleEvents(eventList) {
 	var param = {'eventIds': eventList};
-	var request = new Request();
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_eventModel.SERVICE_ENDPOINTS.DELETE_EVENTS, param, 
 					function (data){
-							_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);
+							var strEventIdArray = eventList.split(",");
+							for(var iCount=0;iCount<strEventIdArray.length;iCount++){
+								var _eventId = parseInt(strEventIdArray[iCount]);
+								deleteEventFolder(_eventId);
+							}
+							_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.DEL_SUCCESS);							
 							loadData();
 							$('#grid').jqxGrid('clearselection');
 					} ,
 					function (data){
 							_flaskLib.showErrorMessage('action-msg', _eventModel.MESSAGES.DEL_ERR);
 					});
-	
 }
 
 /* Edit Event */
@@ -267,6 +291,7 @@ function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel){
 }
 
 $(document).ready(function(){
+	_repositoryId = $("#repositoryId").val();	
 	$('#eventForm').jqxValidator
     ({
         hintType: 'label',

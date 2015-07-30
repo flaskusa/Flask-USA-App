@@ -1,3 +1,4 @@
+var repositoryId;// = $("#repositoryId").val();
 var imageContainer = $("#venueImage");
 var venueForm;
 var dropZoneLogo;
@@ -148,6 +149,7 @@ function deleteVenue(venueId) {
 		var flaskRequest = new Request();
 		flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUE , param, 
 						function (data){
+								deleteVenueFolder(venueId);
 								_flaskLib.showSuccessMessage('action-msg', _venueModel.MESSAGES.DEL_SUCCESS);
 								loadData();
 						},
@@ -164,6 +166,11 @@ function deleteMultipleVenues(venueList) {
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUES, param, 
 					function (data){
+							var strVenueIdArray = venueList.split(",");
+							for(var iCount=0;iCount<strVenueIdArray.length;iCount++){
+								var _venueId = parseInt(strVenueIdArray[iCount]);
+								deleteVenueFolder(_venueId);
+							}
 							_flaskLib.showSuccessMessage('action-msg', _venueModel.MESSAGES.DEL_SUCCESS);
 							loadData();
 							$('#grid').jqxGrid('clearselection');
@@ -178,7 +185,6 @@ function deleteMultipleVenues(venueList) {
 function editVenue(rowData) {
 		var container = $('#venueGallery');
 		container.html("");
-		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("venueForm",  _venueModel.DATA_MODEL.VENUE, rowData, function(){});
 		_flaskLib.loadCountries('venueCountryId',rowData.venueCountryId);
 		_flaskLib.loadUSARegions('venueStateId',rowData.venueStateId);
@@ -244,7 +250,7 @@ function saveVenue(){
 }
 
 function initForm(){
-		var repositoryId = $("#repositoryId").val();
+	repositoryId = $("#repositoryId").val();
 }
 
 function fnBuildVenueUpload(imageContainer){
@@ -374,3 +380,24 @@ function fnRenderVenueImage(venueImageUUId,venueImageGroupId, container,venueIma
 	}
 }
 
+
+function deleteVenueFolder(_venueId){
+	var param = {'repositoryId': repositoryId,'parentFolderId':0,'name':'Venue'};
+	var flaskRequest = new Request();
+	flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.GET_FOLDER , param, 
+		function (data){
+			var venueFolderName = 'Venue-'+_venueId;
+			var param1 = {'repositoryId': repositoryId,'parentFolderId':data.folderId,'name':venueFolderName};
+			var flaskRequest1 = new Request();
+			flaskRequest1.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_FOLDER , param1,
+					function (data){
+						console.log(data);
+					},
+					function (data){
+						console.log(data);
+					});	
+		} ,
+		function (data){
+			console.log(data);
+		});		
+}

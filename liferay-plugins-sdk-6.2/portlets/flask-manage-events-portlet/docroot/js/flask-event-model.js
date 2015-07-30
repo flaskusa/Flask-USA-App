@@ -9,7 +9,9 @@ _eventModel.SERVICE_ENDPOINTS = {
 	DELETE_EVENT				: "/flask-rest-events-portlet.event/delete-event",
 	DELETE_EVENTS				: "/flask-rest-events-portlet.event/delete-events",
 	GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types",
-	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues"
+	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues",
+	GET_FOLDER		 			: "/dlapp/get-folder",
+    DELETE_FOLDER		 		: "/dlapp/delete-folder"
 };
 
 _eventModel.DATA_MODEL= {
