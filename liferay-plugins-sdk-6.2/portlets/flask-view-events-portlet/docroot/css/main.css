@@ -391,16 +391,15 @@ input.btn.btn-info.cssback {
 }
 
 .jqx-scrollview {
-    -ms-touch-action: auto !important;
-	background-image: -webkit-linear-gradient(45deg, rgba(252,234,187,1) 0, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
-	background-image: -moz-linear-gradient(45deg, rgba(252,234,187,1) 0, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
-	background-image: linear-gradient(45deg, rgba(252,234,187,1) 0, rgba(252,205,77,1) 50%, rgba(248,181,0,1) 51%, rgba(251,223,147,1) 100%);
+	background-image: -webkit-linear-gradient(-45deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
+	background-image: -moz-linear-gradient(135deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
+	background-image: linear-gradient(135deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
 	background-position: 50% 50%;
 	-webkit-background-origin: padding-box;
 	background-origin: padding-box;
 	-webkit-background-clip: border-box;
 	background-clip: border-box;
 	-webkit-background-size: auto auto;
-	background-size: auto auto;    
+	background-size: auto auto;
 }
 
