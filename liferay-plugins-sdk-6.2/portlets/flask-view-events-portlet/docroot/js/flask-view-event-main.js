@@ -143,8 +143,7 @@ function fnGetEventImages(eventId){
 				objEventDetail = jQuery.parseJSON(obj.EventDetail);
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
-			    case 2:
-			    	console.log(obj);
+				case  1: case 2:
 			    	arrPreEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPreEvent)
 			        break;
 			    case 3:
@@ -282,6 +281,7 @@ $(document).ready(function(){
 		$(".row-fluid .span9 .lbldiv:case_insensitive_contains("+$(this).val()+")").closest(".row-fluid").show(250, function() {});
 		$(".row-fluid .span9 .lbldiv:not(:case_insensitive_contains("+$(this).val()+"))").closest(".row-fluid").hide(500, function() {});		
 	});
+	$("#sign-in").hide();
 });
 
 function fnStopProgress(){
