@@ -22,30 +22,45 @@ function renderEventList(tdata) {
 		{
 		 	var flaskEvent = tdata.Events[i];
 		    var st = formatUnixToTime(flaskEvent.startTime);
-		    var divRowItem = $('<div/>',{'class':'row-fluid'});
-		    var divCol3 = $('<div/>',{'class':'span3','style':'width:60px;'});
+		    var objTable = $('<table/>',{'class':'tblRow'});
+		    var objTr = $('<tr/>');
+		    $(objTr).appendTo($(objTable));
+		    var objTd1 = $('<td/>');
+		    $(objTd1).appendTo($(objTr));
+		    
+		    fnShowEventLogo(flaskEvent.eventImageUUID, flaskEvent.eventImageGroupId, objTd1,false);		    
+		    //var divCol9 = $('<div/>',{'class':'span9'});
+		    //var divCol9_lbl = $('<div/>',{'class':'lbldiv','data-id':flaskEvent.eventId});
+		    var eventName_lbl = $('<label/>',{'class':'control-label-color'});
+		    $(eventName_lbl).html(flaskEvent.eventName);
+		    var objTd2 = $('<td/>',{'data-id':flaskEvent.eventId});
+		    
+		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
+		    $(venue_lbl).html(st + ' at ' + flaskEvent.venueName);
+		    //$(eventName_lbl).appendTo($(divCol9_lbl));
+		    //$(venue_lbl).appendTo($(divCol9_lbl));
+		    $(eventName_lbl).appendTo($(objTd2));
+		    $(venue_lbl).appendTo($(objTd2));
+		    $(objTd2).appendTo(objTr);
+		    //$(divCol9_lbl).appendTo($(divCol9));
+		 	//$(divCol3).appendTo($(divRowItem));
+		 	//$(divCol9).appendTo($(divRowItem));
+		 	//$(div_heart).appendTo($(divCol9));		 	
+		 	//$(divRowItem).appendTo($(divRow));
+		    $(objTable).appendTo($(divRow));
+		    var objTd3 = $('<td/>');
+		    //var divRowItem = $('<div/>',{'class':'row-fluid'});
+		    //var divCol3 = $('<div/>',{'class':'span3','style':'width:60px;'});
 		    if(flaskEvent.userEvent == 1){
 		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
 		    }else{
 		    	var div_heart = $('<div/>',{'class':'heart-shape','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
 		    	
 		    }
-		   
-		    var divCol9 = $('<div/>',{'class':'span9'});
-		    var divCol9_lbl = $('<div/>',{'class':'lbldiv','data-id':flaskEvent.eventId});
-		    var eventName_lbl = $('<label/>',{'class':'control-label-color'});
-		    $(eventName_lbl).html(flaskEvent.eventName);
-		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
-		    $(venue_lbl).html(st + ' at ' + flaskEvent.venueName);
-		    $(eventName_lbl).appendTo($(divCol9_lbl));
-		    $(venue_lbl).appendTo($(divCol9_lbl));
-		    $(divCol9_lbl).appendTo($(divCol9));
-		 	$(divCol3).appendTo($(divRowItem));
-		 	$(divCol9).appendTo($(divRowItem));
-		 	$(div_heart).appendTo($(divCol9));		 	
-		 	$(divRowItem).appendTo($(divRow));
-		 	fnShowEventLogo(flaskEvent.eventImageUUID, flaskEvent.eventImageGroupId, divCol3,false);
-		 	$(divCol9_lbl).click(function(){
+		    $(div_heart).appendTo($(objTd3));
+		    $(objTd3).appendTo(objTr);
+		    
+		 	$(objTd2).click(function(){
 		 		$("#spinningSquaresG").show();
 		 		$('#one').hide();		 		
 		 		fnGetEventImages($(this).attr("data-id"));
@@ -57,6 +72,7 @@ function renderEventList(tdata) {
 		 	}else{
 		 		$(div_heart).attr("title", "You need to be signed in to save events.");
 		 	}
+		 	
 		 	
 	    }
 	 	$(divRow).appendTo($("#placeholder"));
@@ -252,6 +268,7 @@ function fnSlider(infoType,arrImage){
 		fnBlankSlide(Slider);
 	}
 	$(Slider).jqxScrollView({ 
+			width:"100%",
 			height: 245,
 		    showButtons:true
 		});	
