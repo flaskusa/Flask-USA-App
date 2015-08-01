@@ -193,7 +193,6 @@ $editLayoutPanelWidth: 460px;
 			.navbar-inner {
 				background-color: transparent;
 				border-width: 0;
-				padding: 0;
 				width: 0;
 
 				.nav {
