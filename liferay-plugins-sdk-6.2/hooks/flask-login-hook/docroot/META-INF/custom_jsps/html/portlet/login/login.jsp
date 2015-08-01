@@ -60,7 +60,7 @@
 		 <div class="loginForm">
 	       <div class="loginpane">
             <div class="loginpane_header">
-            <img title="logo_2" alt="logo_2" class="cq-dd-image" style="zoom:0.5" src="/FlaskTheme-theme/images/flasklogo.png" />
+            <img title="logo_2" alt="logo_2" class="cq-dd-image" style="zoom:0.3" src="/FlaskTheme-theme/images/flasklogo2.png" />
             </div>
 		     <div class="loginpane_body">
 				<h3 class="form-header">Log in to continue.</h3>
