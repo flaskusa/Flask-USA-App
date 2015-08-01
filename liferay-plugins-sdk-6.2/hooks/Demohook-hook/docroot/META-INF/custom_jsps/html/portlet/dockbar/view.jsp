@@ -105,14 +105,11 @@ for (Role role : roles){
 
 
 <aui:nav-bar cssClass="navbar-static-top dockbar" data-namespace="<%= renderResponse.getNamespace() %>" id="dockbar">
-	
-	
-	<a href="/web/flask/events" style="text-decoration: none;color:#2D2D2D">	 
-	 <div align="center" style="position:relative;margin-left:30%;margin-right:30%;margin-top:8px;"><img alt="Liferay" src="/FlaskTheme-theme/images/flasklogo.png" width="30" height="30">
-     	<span style="font-weight:900; font-size: 18px;">FLASK</span>
-     </div>
-	</a>
-
+	 	<div align="center" style="margin-left:0px;margin-right:0px;margin-top:3px;">
+	 		<a href="/web/flask/events" style="text-decoration: none;">	 
+	 			<img alt="Liferay" src="/FlaskTheme-theme/images/flasklogo.png" width="150px">
+	 		</a>
+		</div>
 	<c:if test="<%= group.isControlPanel() %>">
 
 		<%
