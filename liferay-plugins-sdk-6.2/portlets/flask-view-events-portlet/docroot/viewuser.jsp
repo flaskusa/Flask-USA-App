@@ -53,41 +53,56 @@
   </div>
  </div>
     
- 
  <div id="two" style="display:none; width:100%;">
- <div style="overflow: hidden; display:none" id="ContentPanel"></div>
-	<div class="container-fluidX">
-		<div class="row fullwidth">
-		  <div id="col1" class="col-xs-3 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div>
-		  <div id="col2" class="col-xs-9">
-				<div id="wowslider-container2" class="wowslider-container">
-			  		<div class="ws_images" id="ws_images2"></div>
-			  	</div>
+ 	<div style="overflow: hidden; display:none" id="ContentPanel"></div>
+	<div class="container-fluid">
+		<div class="row-fluid fullwidth">
+		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div>
+		  <div id="col2" class="span10 col2">
+				<div id="wowslider-container2" class="Carousel"></div>
 		  </div>
 		</div>
 	</div>
-	<div class="container-fluidX">
-		<div class="row fullwidth">
-		  <div id="col1" class="col-xs-3 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/at.png);"></div>
-		  <div id="col2" class="col-xs-9">
-				<div id="wowslider-container3" class="wowslider-container">
-			  		<div class="ws_images" id="ws_images3"></div>
-			  	</div>
+	<div class="container-fluid">
+		<div class="row-fluid fullwidth">
+		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/at.png);"></div>
+		  <div id="col2" class="span10 col2">
+				<div id="wowslider-container3" class="Carousel"></div>
 		  </div>
 		</div>
 	</div>
-	<div class="container-fluidX">
-		<div class="row fullwidth">
-		  <div id="col1" class="col-xs-3 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Post.png);"></div>
-		  <div id="col2" class="col-xs-9">
-				<div id="wowslider-container4" class="wowslider-container">
-			  		<div class="ws_images" id="ws_images4"></div>
-			  	</div>
+	<div class="container-fluid">
+		<div class="row-fluid fullwidth">
+		  <div class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Post.png);"></div>
+		  <div class="span10 col2">
+				<div id="wowslider-container4" class="Carousel"></div>
 		  </div>
 		</div>
 	</div>
 	<input class="btn btn-info cssback" type="button" value="Back"/>
 </div>	
+
+<div id="three" style="display:none; width:100%;">
+	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places" type="text/javascript"></script>
+	<div id="gmap_canvas"></div>
+	<div class="menustrip">
+		<div class="menuItem">
+			<div class="menuText">
+				LOCAL NEWS
+			</div>
+			<div class="menuText">
+				BATHROOMS
+			</div>
+			<div class="menuText">
+				NOTIFICATION
+			</div>
+			<div class="menuText">
+				PROMOTIONS
+			</div>
+		</div>				
+	</div>	
+</div>
+
 
 	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
     <div id="fixedfooter">
