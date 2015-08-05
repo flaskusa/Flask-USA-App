@@ -238,33 +238,25 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 	var Slider = "#wowslider-container"+infoType;
 	$(Slider).attr('data-eventId',eventId);
 	$(Slider).attr('data-venueId',venueId);
-	
 	$(Slider).slick({
-		  centerMode: true,
-				centerPadding: '0px',
-				slidesToShow: 3,
-				slidesToScroll: 1,					
-				arrows:true,
-				prevArrow: '<span class="slick-prev"></span>', 
-				nextArrow: '<span class="slick-next"></span>', 
-				appendArrows: '.col-xs-9',					
-				speed: 300,
-				infinite: true,
-				  responsive: [
-					{
-					  breakpoint: 640,
-					  settings: {
-						arrows: false,
-						centerMode: false,
-						slidesToShow: 1
-					  }
-					}
-				  ]
-		});	
-
-	/*var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
-	$(objWeatherDiv).html($("#weather-background"));
-	$(Slider).slick('addSlide',	objWeatherDiv);*/
+  		centerMode: true,
+  		centerPadding: '10px',
+		slidesToShow: 3,
+		slidesToScroll: 1,					
+		arrows:true,
+		speed: 300,
+		  responsive: [
+			{
+			  centerPadding: '0px',
+			  breakpoint: 640,
+			  settings: {
+				arrows: false,
+				centerMode: false,
+				slidesToShow: 1
+			  }
+			}
+		  ]
+	});	
 	
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
@@ -272,13 +264,34 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 			var objImg = value;
 			$(objImg).appendTo(objDiv);
 			$(Slider).slick('addSlide',	objDiv)		
-			//$(objDiv).appendTo($(Slider));			
 		});
 	}
 	else{
 		fnBlankSlide(Slider);
 	}
-	$(Slider).width($(document).width()-36);
+	
+	var click = new Date();
+	var lastClick = new Date();
+	var lastRow = -1;
+	$(Slider).click(function(event){
+		click = new Date();
+	    if (click - lastClick < 300) {
+	    	$("#spinningSquaresG").show();
+	 		$('#one').hide();		 
+	 		$('#two').hide();
+	 		$('#three').show();
+	 		$(".menuItem").slick({
+	 			arrows:false,
+	 			centerMode: true,
+		  		centerPadding: '0px',
+	 			slidesToShow: 3,
+				slidesToScroll: 1	
+	 		});
+	 		$("#spinningSquaresG").hide();
+	 		
+	    }
+	    lastClick = new Date();
+	});	
 }
 
 function fnBlankSlide(Slider){
