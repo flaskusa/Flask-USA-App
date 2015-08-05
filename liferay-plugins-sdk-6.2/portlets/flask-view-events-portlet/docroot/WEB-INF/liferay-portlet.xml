@@ -2,38 +2,36 @@
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
 
 <liferay-portlet-app>
-	<portlet>
-		<portlet-name>flask-view-events</portlet-name>
-		<icon>/icon.png</icon>
-		<header-portlet-css>/css/main.css</header-portlet-css>
-		<header-portlet-css>/css/flask-map.css</header-portlet-css>
-		  <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
-		  <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
-		  <footer-portlet-javascript>/js/flask-view-map.js</footer-portlet-javascript>
-		  <footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
-		  <footer-portlet-javascript>/js/jqxscrollview.js</footer-portlet-javascript>
-    	<css-class-wrapper>flask-view-events-portlet</css-class-wrapper>
-	</portlet>
-	<portlet>
-		<portlet-name>flask-view-user-events</portlet-name>
-		<icon>/icon.png</icon>
-		<header-portlet-css>/css/main.css</header-portlet-css>
-		  <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
-		  <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
-    	<css-class-wrapper>flask-view-user-events-portlet</css-class-wrapper>
-	</portlet>
-	<portlet>
-		<portlet-name>flask-maps</portlet-name>
-		<icon>/icon.png</icon>
-		<header-portlet-css>/css/maps.css</header-portlet-css>
-		<footer-portlet-javascript>/js/flask-maps-main.js</footer-portlet-javascript>
-    	<css-class-wrapper>flask-maps</css-class-wrapper>
-	</portlet>
-	<portlet>
-		<portlet-name>flask-weather</portlet-name>
-		<icon>/icon.png</icon>
-    	<css-class-wrapper>flask-weather</css-class-wrapper>
-	</portlet>
+<portlet>
+  <portlet-name>flask-view-events</portlet-name>
+  <icon>/icon.png</icon>
+  <header-portlet-css>/css/main.css</header-portlet-css>
+  <header-portlet-css>/css/slick.css</header-portlet-css>
+  <header-portlet-css>/css/slick-theme.css</header-portlet-css>
+  <header-portlet-css>/css/weather.css</header-portlet-css>
+  <header-portlet-css>/css/flask-map.css</header-portlet-css>
+    <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/flask-view-map.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/slick.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/weather.js</footer-portlet-javascript>
+     <css-class-wrapper>flask-view-events-portlet</css-class-wrapper>
+ </portlet>
+ <portlet>
+  <portlet-name>flask-view-user-events</portlet-name>
+  <icon>/icon.png</icon>
+  <header-portlet-css>/css/main.css</header-portlet-css>
+  <header-portlet-css>/css/slick.css</header-portlet-css>
+  <header-portlet-css>/css/slick-theme.css</header-portlet-css>
+  <header-portlet-css>/css/weather.css</header-portlet-css>
+  <header-portlet-css>/css/flask-map.css</header-portlet-css>
+    <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/flask-view-map.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/slick.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/weather.js</footer-portlet-javascript>
+     <css-class-wrapper>flask-view-user-events-portlet</css-class-wrapper>
+ </portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
