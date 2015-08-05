@@ -1,22 +1,18 @@
 var sample;
-$( document ).ready(function() {
-	var text = '{"city":{"id":5004062,"name":"Novi","coord":{"lon":-83.475487,"lat":42.480591},"country":"US","population":0,"sys":{"population":0}},"cod":"200","message":0.0102,"cnt":15,"list":[{"dt":1438603200,"main":{"temp":290.91,"temp_min":290.91,"temp_max":291.768,"pressure":988.79,"humidity":96,"temp_kf":-0.86},"weather":[{"id":500,"main":"Rain","description":"light rain","icon":"10d"}],"clouds":{"all":48},"wind":{"speed":2.66,"deg":328.504},"rain":{"3h":0.01},"sys":{"pod":"d"},"dt_txt":"2015-08-03 12:00:00"},{"dt":1438614000,"main":{"temp":293.57,"temp_min":293.57,"temp_max":294.136,"pressure":990.23,"humidity":90,"temp_kf":-0.57},"weather":[{"id":500,"main":"Rain","description":"light rain","icon":"10d"}],"clouds":{"all":32},"wind":{"speed":2.42,"deg":331.501},"rain":{"3h":0.02},"sys":{"pod":"d"},"dt_txt":"2015-08-03 15:00:00"},{"dt":1438624800,"main":{"temp":297.61,"temp_min":297.61,"temp_max":297.893,"pressure":990.26,"humidity":68,"temp_kf":-0.29},"weather":[{"id":500,"main":"Rain","description":"light rain","icon":"10d"}],"clouds":{"all":24},"wind":{"speed":2.58,"deg":301.502},"rain":{"3h":0.07},"sys":{"pod":"d"},"dt_txt":"2015-08-03 18:00:00"},{"dt":1438635600,"main":{"temp":297.171,"temp_min":297.171,"temp_max":297.171,"pressure":990.42,"humidity":61,"temp_kf":0},"weather":[{"id":500,"main":"Rain","description":"light rain","icon":"10d"}],"clouds":{"all":0},"wind":{"speed":4.55,"deg":285.001},"rain":{"3h":0.35},"sys":{"pod":"d"},"dt_txt":"2015-08-03 21:00:00"},{"dt":1438646400,"main":{"temp":295.708,"temp_min":295.708,"temp_max":295.708,"pressure":991.23,"humidity":57,"temp_kf":0},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04n"}],"clouds":{"all":68},"wind":{"speed":4.55,"deg":290.501},"rain":{},"sys":{"pod":"n"},"dt_txt":"2015-08-04 00:00:00"},{"dt":1438657200,"main":{"temp":293.746,"temp_min":293.746,"temp_max":293.746,"pressure":992.43,"humidity":58,"temp_kf":0},"weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03n"}],"clouds":{"all":48},"wind":{"speed":3.2,"deg":286.002},"rain":{},"sys":{"pod":"n"},"dt_txt":"2015-08-04 03:00:00"},{"dt":1438668000,"main":{"temp":292.037,"temp_min":292.037,"temp_max":292.037,"pressure":992.99,"humidity":63,"temp_kf":0},"weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03n"}],"clouds":{"all":36},"wind":{"speed":2.72,"deg":288},"rain":{},"sys":{"pod":"n"},"dt_txt":"2015-08-04 06:00:00"},{"dt":1438678800,"main":{"temp":290.372,"temp_min":290.372,"temp_max":290.372,"pressure":993.34,"humidity":68,"temp_kf":0},"weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03n"}],"clouds":{"all":48},"wind":{"speed":1.67,"deg":285.004},"rain":{},"sys":{"pod":"n"},"dt_txt":"2015-08-04 09:00:00"},{"dt":1438689600,"main":{"temp":291.761,"temp_min":291.761,"temp_max":291.761,"pressure":994.32,"humidity":65,"temp_kf":0},"weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03d"}],"clouds":{"all":32},"wind":{"speed":1.76,"deg":269.501},"rain":{},"sys":{"pod":"d"},"dt_txt":"2015-08-04 12:00:00"},{"dt":1438700400,"main":{"temp":295.431,"temp_min":295.431,"temp_max":295.431,"pressure":994.93,"humidity":61,"temp_kf":0},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],"clouds":{"all":80},"wind":{"speed":2.86,"deg":274.5},"rain":{},"sys":{"pod":"d"},"dt_txt":"2015-08-04 15:00:00"},{"dt":1438711200,"main":{"temp":297.443,"temp_min":297.443,"temp_max":297.443,"pressure":994.57,"humidity":54,"temp_kf":0},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],"clouds":{"all":76},"wind":{"speed":4.01,"deg":275.001},"rain":{},"sys":{"pod":"d"},"dt_txt":"2015-08-04 18:00:00"},{"dt":1438722000,"main":{"temp":297.593,"temp_min":297.593,"temp_max":297.593,"pressure":994.22,"humidity":49,"temp_kf":0},"weather":[{"id":803,"main":"Clouds","description":"broken clouds","icon":"04d"}],"clouds":{"all":76},"wind":{"speed":5.11,"deg":283.002},"rain":{},"sys":{"pod":"d"},"dt_txt":"2015-08-04 21:00:00"},{"dt":1438732800,"main":{"temp":296.636,"temp_min":296.636,"temp_max":296.636,"pressure":994.71,"humidity":47,"temp_kf":0},"weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04n"}],"clouds":{"all":88},"wind":{"speed":4.76,"deg":287.5},"rain":{},"sys":{"pod":"n"},"dt_txt":"2015-08-05 00:00:00"},{"dt":1438743600,"main":{"temp":294.173,"temp_min":294.173,"temp_max":294.173,"pressure":995.95,"humidity":51,"temp_kf":0},"weather":[{"id":800,"main":"Clear","description":"sky is clear","icon":"01n"}],"clouds":{"all":0},"wind":{"speed":3.48,"deg":295.001},"rain":{},"sys":{"pod":"n"},"dt_txt":"2015-08-05 03:00:00"},{"dt":1438754400,"main":{"temp":291.23,"temp_min":291.23,"temp_max":291.23,"pressure":996.2,"humidity":62,"temp_kf":0},"weather":[{"id":800,"main":"Clear","description":"sky is clear","icon":"01n"}],"clouds":{"all":0},"wind":{"speed":2.36,"deg":299.002},"rain":{},"sys":{"pod":"n"},"dt_txt":"2015-08-05 06:00:00"}]}';
-	sample = JSON.parse(text);
-	console.log(sample);
-});
+var latitude;
+var longitude;
+
 function showForecastSmall(list)
 {
-	console.log(list);
 	var forecast = [];
 	forecast = list;
 	var time_zone = 1000 * (new Date().getTimezoneOffset())*(-60);
-	console.log(forecast);
  	var curdate = new Date( (new Date()).getTime()- 180 * 60 * 1000 );
 
 	var html = ''
 
 	var cnt=0;
-	for(var i = 0; i <  7 ; i ++){
+	for(var i = 0; i <  6 ; i ++){
 
 		var dt = new Date(forecast[i].dt * 1000);
 	
@@ -44,19 +40,18 @@ function showForecastSmall(list)
 			hours=12;
 		time = hours + ' ' + ampm;
 		
-			html=html+ '<div style="float: left; text-align: center; color: #fff;" >';
+		html=html+ '<div style="float: left; text-align: center; color: #fff;" >';
 		html=html+ '<div class="small_val" title="time">'+time+'</div>\
-		<img alt="'+text+'" src="http://openweathermap.org/img/w/'+icon+'.png"/>\
+		<img style="max-width: 85%;" alt="'+text+'" src="/flask-view-events-portlet/css/images/'+icon+'.png"/>\
 		<div class="small_val" title="Temp">'+temp+'C</div>\
 		</div>';
 	}
-	
 	$("#forecast_small").html(html);
 
 };
+
 var w,
 WeatherInfo = {
-
     settings: {
         tempIcon: $('#temp-icon'),
         weather: $('#weather'),
@@ -117,14 +112,14 @@ WeatherInfo = {
     },
 
     getWeatherData: function(searchQuery) {
-
-        	w.searchQuery = 'http://api.openweathermap.org/data/2.5/weather?lat=42.4805556&lon=-83.4755556';
-        	//w.searchQuery = 'http://api.openweathermap.org/data/2.5/weather?q=' + w.searchLocationInput.val() + '';
-            	//'http://api.openweathermap.org/data/2.5/weather?q=' + w.searchLocationInput.val() + '';
-            $.getJSON(w.searchQuery, function(data) {
-                WeatherInfo.setWeatherData(data);
-            });
-            showForecastSmall(sample.list);
+    	w.searchQuery = 'http://api.openweathermap.org/data/2.5/weather?lat='+ latitude +'&lon='+ longitude +'';
+        $.getJSON(w.searchQuery, function(data) {
+            WeatherInfo.setWeatherData(data);
+        });
+        w.searchQuery1 = 'http://api.openweathermap.org/data/2.5/forecast?lat='+ latitude +'&lon='+ longitude +'&cnt=15';
+        $.getJSON(w.searchQuery1, function(data) {
+        	showForecastSmall(data.list);
+        });
     },
 
     setWeatherData: function(data) {
@@ -140,7 +135,7 @@ WeatherInfo = {
         WeatherInfo.changeTempUnit('celsius');
         var time = Date.now() / 1000;
         WeatherInfo.getDayOrNight(time, data.sys.sunrise, data.sys.sunset);
-        CanvasBackground.chooseBackground(data.weather[0].main);
+        //CanvasBackground.chooseBackground(data.weather[0].main);
     },
 
     getWeatherDirection: function() {
@@ -220,7 +215,7 @@ WeatherInfo = {
         }
     }
 };
-
+/*
 var c,
 CanvasBackground = {
     settings: {
@@ -251,7 +246,7 @@ CanvasBackground = {
         requestCloud: '',
         requestWeather: '',
         requestTime: '',
-        refreshIntervalID: ''
+        refreshIntervalID: ''*//*
     },
 
     init: function() {
@@ -259,7 +254,6 @@ CanvasBackground = {
         CanvasBackground.setupCanvas();
         CanvasBackground.chooseBackground();
     },
-
     setupCanvas: function() {
         CanvasBackground.resizeBackground();
         window.addEventListener('resize', CanvasBackground.resizeBackground, false);
@@ -267,18 +261,18 @@ CanvasBackground = {
     },
     resizeBackground: function() {                 
         /* Resize the canvas to occupy the full page, 
-           by getting the widow width and height and setting it to canvas*/
-         
-        c.weatherCanvas.width  = window.innerWidth;
-        c.weatherCanvas.height = window.innerHeight;
-        c.rainCanvas.width  = window.innerWidth;
-        c.rainCanvas.height = window.innerHeight;
-        c.cloudCanvas.width  = window.innerWidth;
-        c.cloudCanvas.height = window.innerHeight;
-        c.timeCanvas.width  = window.innerWidth;
-        c.timeCanvas.height = window.innerHeight;
-        c.lightningCanvas.width = window.innerWidth;
-        c.lightningCanvas.height = window.innerHeight;
+           by getting the widow width and height and setting it to canvas
+       
+        c.weatherCanvas.width  = 709;
+        c.weatherCanvas.height = 230;
+        c.rainCanvas.width  = 709;
+        c.rainCanvas.height = 230;
+        c.cloudCanvas.width  = 709;
+        c.cloudCanvas.height = 230;
+        c.timeCanvas.width  = 709;
+        c.timeCanvas.height = 230;
+        c.lightningCanvas.width = 709;
+        c.lightningCanvas.height = 230;
     },
 
     chooseBackground: function(condition) {
@@ -358,15 +352,15 @@ CanvasBackground = {
             CanvasBackground.getRandomBackground();
             break;
         }
-    },
-
+    },*/
+/*
     getRandomBackground: function() {
         
         var possibleAnimations = [CanvasBackground.animateSnow, CanvasBackground.animateRain, CanvasBackground.animateClouds];
         var randomAnimation = Math.round(Math.random() * (possibleAnimations.length - 1));
         return possibleAnimations[randomAnimation]();
     },
-
+/*
     clearAllCanvases: function() {
         clearInterval(c.refreshIntervalID);
         cancelAnimationFrame(c.requestRain);
@@ -379,10 +373,9 @@ CanvasBackground = {
         c.cloudCTX.clearRect(0,0,c.cloudCanvas.width,c.cloudCanvas.height);
         c.lightningCTX.clearRect(0,0,c.lightningCanvas.width,c.lightningCanvas.height);
     },
-
+/*
     animateRain: function(condition) {
         var rainSvg = '<svg width="28px" height="39px" viewBox="0 0 28 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><title>rain</title><desc>Created with Sketch.</desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"><g id="rain" sketch:type="MSLayerGroup" transform="translate(-10.000000, -6.000000)" fill="' + color_var + '"><g id="Page-1" sketch:type="MSShapeGroup"><path d="M33.5,33.5 C33.5,40.1273333 28.1266667,45.5 21.5,45.5 C14.8726667,45.5 9.5,40.1273333 9.5,33.5 C9.5,21.5 21.5,3.50000001 21.5,3.50000001 C21.5,3.50000001 33.5,21.5 33.5,33.5 L33.5,33.5 L33.5,33.5 Z" id="rain" transform="translate(21.500000, 24.500000) rotate(-30.000000) translate(-21.500000, -24.500000) "></path></g></g></g></svg>';
-
 
         var rainDrops = [],
             maxSpeed = 10,
@@ -391,7 +384,6 @@ CanvasBackground = {
             n = innerWidth / spacing,
             sizes = [[28,39], [24, 33], [20, 28]],
             i;
-            
 
             if (condition === 'drizzle') {
                 rainSvg = '<svg width="28px" height="39px" viewBox="0 0 28 39" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><title>rain</title><desc>Created with Sketch.</desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"><g id="rain" sketch:type="MSLayerGroup" transform="translate(-10.000000, -6.000000)" fill="' + color_var + '"><g id="Page-1" sketch:type="MSShapeGroup"><path d="M33.5,33.5 C33.5,40.1273333 28.1266667,45.5 21.5,45.5 C14.8726667,45.5 9.5,40.1273333 9.5,33.5 C9.5,21.5 21.5,3.50000001 21.5,3.50000001 C21.5,3.50000001 33.5,21.5 33.5,33.5 L33.5,33.5 L33.5,33.5 Z" id="rain" transform="translate(21.500000, 24.500000) rotate(0.000000) translate(-21.500000, -24.500000) "></path></g></g></g></svg>';
@@ -467,7 +459,7 @@ CanvasBackground = {
             }
             draw();
     },
-
+/*
     animateClouds: function() {
         var cloudSvg = '<svg width="100px" height="55px" viewBox="0 0 100 55" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><title>Group</title><desc>Created with Sketch.</desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"><g id="cloud" sketch:type="MSLayerGroup" fill="' + color_var + '"><g id="Group" sketch:type="MSShapeGroup"><path d="M83.336,20.018 C81.412,13.644 75.501,9 68.5,9 C66.193,9 64.013,9.518 62.046,10.421 C57.008,4.074 49.232,0 40.5,0 C26.11,0 14.31,11.053 13.108,25.132 C5.719,26.064 0,32.358 0,40 C0,48.284 6.716,55 15,55 L83,55 C92.389,55 100,47.165 100,37.5 C100,27.952 92.568,20.204 83.336,20.018 L83.336,20.018 Z" id="Shape"></path><path d="M15,51 C8.935,51 4,46.065 4,40 C4,34.478 8.131,29.792 13.609,29.101 L16.819,28.696 L17.094,25.473 C18.122,13.432 28.403,4 40.5,4 C47.708,4 54.419,7.247 58.913,12.908 L60.864,15.366 L63.716,14.056 C65.241,13.355 66.851,13 68.5,13 C73.528,13 78.054,16.361 79.507,21.173 L80.347,23.958 L83.255,24.017 C90.283,24.158 96,30.207 96,37.5 C96,44.944 90.168,51 83,51 L15,51 L15,51 Z" id="Shape"></path></g></g></g></svg>';
          
@@ -524,7 +516,7 @@ CanvasBackground = {
             }
             draw();
     },
-
+/*
     animateTime: function() {
         var timeSvg;
 
@@ -565,12 +557,12 @@ CanvasBackground = {
         // Load up our image.
         var lightningIMG = new Image();
         lightningIMG.src = lightningSrc;
-
+/*
         thunderDraw();
         
          
 
-            
+  /*          
         function thunderDraw(){
             var i;
             c.lightningCTX.clearRect(0,0,c.lightningCanvas.width,c.lightningCanvas.height);
@@ -598,7 +590,7 @@ CanvasBackground = {
             
         }
     },
-
+/*
     animateAtmosphere: function() {
         var atmosphereSvg = '<svg width="96px" height="84px" viewBox="0 0 96 84" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><title>Shape</title><desc>Created with Sketch.</desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"><g id="smoke" sketch:type="MSLayerGroup" transform="translate(-2.000000, 0.000000)" fill="' + color_var + '" fill-opacity=".5"><path d="M95.117,29.243 C97.344,27.148 97.949,23.727 96.388,20.943 C94.552,17.664 90.386,16.49 87.105,18.329 L86.942,18.42 C85.658,17.878 84.293,17.539 82.895,17.417 C83.716,14.407 83.501,11.099 82.026,8.082 C78.8,1.481 70.802,-1.263 64.202,1.962 C62.176,2.953 60.464,4.417 59.187,6.217 C54.886,2.788 48.852,2.013 43.736,4.512 C36.756,7.924 33.731,16.227 36.765,23.289 C34.461,24.777 32.927,27.152 32.445,29.772 C32.317,29.935 32.175,30.084 32.056,30.253 C27.755,26.823 21.72,26.048 16.604,28.548 C9.626,31.96 6.6,40.263 9.634,47.326 C6.615,49.274 4.907,52.743 5.171,56.297 C2.832,58.262 2.032,61.644 3.434,64.51 C3.82,65.301 4.343,65.976 4.955,66.534 C3.606,71.46 5.152,76.941 9.347,80.379 C15.031,85.035 23.446,84.196 28.1,78.515 C29.53,76.769 30.475,74.725 30.886,72.556 C34.082,73.35 37.446,73.011 40.408,71.671 C43.547,72.414 46.958,72.044 49.986,70.346 C51.954,69.244 53.58,67.687 54.753,65.816 C59.239,69 65.309,69.432 70.275,66.651 C73.293,64.956 75.467,62.338 76.655,59.349 C79.565,59.654 82.574,59.098 85.261,57.59 C91.673,53.996 94.297,46.234 91.66,39.58 C93.289,37.766 94.366,35.546 94.824,33.185 C95.184,31.921 95.293,30.579 95.117,29.243 L95.117,29.243 Z" id="Shape" sketch:type="MSShapeGroup"></path></g></g></svg>';
          
@@ -653,7 +645,7 @@ CanvasBackground = {
             }
             draw();
     },
-
+/*
     animateSnow: function() {
         var snowSvg = '<svg width="89px" height="100px" viewBox="0 0 89 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><title>Shape</title><desc>Created with Sketch.</desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"><g id="Artboard" sketch:type="MSArtboardGroup" fill="'+ color_var + '"><path d="M36.786,50.287 L40.741,56.128 L48.106,56.128 L51.504,50.287 L47.924,44.067 L40.545,44.067 L36.786,50.287 L36.786,50.287 Z M39.819,97.261 L39.819,84.054 L32.44,88.204 L28.681,86.052 L28.681,81.399 L39.624,75.179 L39.624,66.499 L31.685,71.601 L31.685,62.405 L24.096,66.779 L24.096,79.247 L19.945,81.819 L16.437,79.498 L16.437,71.142 L4.919,77.64 L0,75.57 L0,70.3 L12.089,63.691 L4.528,59.89 L4.528,55.068 L8.819,52.719 L19.664,59.105 L27.197,54.759 L27.015,54.62 L19.314,50.203 L26.791,45.563 L19.286,41.217 L8.442,47.589 L4.374,45.563 L4.374,40.755 L11.713,36.632 L0,30.272 L0,25.003 L4.5,22.684 L16.044,29.35 L16.044,20.853 L19.524,18.505 L23.788,20.965 L23.76,33.683 L31.516,38.113 L31.489,29.127 L39.623,33.502 L39.623,24.822 L28.68,18.589 L28.68,13.977 L32.439,11.797 L39.818,15.948 L39.818,2.768 L44.04,0 L48.301,2.768 L48.301,15.948 L55.947,11.713 L59.792,14.257 L59.792,18.408 L48.47,24.822 L48.47,33.502 L56.214,28.778 L56.214,38.226 L64.193,33.878 L64.193,20.28 L68.037,18.491 L72.075,20.28 L72.075,28.974 L83.954,22.558 L88.107,25.088 L88.107,30.007 L76.506,36.604 L83.76,40.67 L83.76,45.367 L80,47.45 L68.862,40.867 L61.16,45.759 L68.609,50.401 L60.936,54.817 L68.862,58.967 L80,52.746 L83.578,55.276 L83.578,59.763 L76.59,63.69 L87.716,70.3 L87.716,75.488 L83.006,77.64 L72.075,71.419 L72.075,79.651 L68.148,81.845 L64.305,79.651 L64.305,67.155 L56.213,62.544 L56.213,71.224 L48.469,66.499 L48.469,75.179 L59.413,81.399 L59.413,86.319 L55.637,88.205 L48.3,84.055 L48.3,97.262 L44.04,100 L39.819,97.261 L39.819,97.261 Z" id="Shape" sketch:type="MSShapeGroup"></path></g></g></svg>';
          
@@ -710,7 +702,7 @@ CanvasBackground = {
             }
             draw();
     },
-
+/*
     animateExtreme: function() {
         var extremeSvg = '<svg width="80px" height="75px" viewBox="0 0 80 75" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns"><title>warning</title><desc>Created with Sketch.</desc><defs></defs><g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage"><g id="Artboard" sketch:type="MSArtboardGroup" fill="' + color_var + '"><g id="warning" sketch:type="MSLayerGroup"><path d="M35.59,2.789 L1.406,64.359 C-1.438,69.543 -0.23,74.5 7.457,74.5 L72.539,74.5 C80.244,74.5 81.435,69.543 78.59,64.359 L43.699,2.953 C42.992,1.57 41.965,0.042 39.785,0.062 C37.467,0.104 36.316,1.406 35.59,2.789 L35.59,2.789 Z M35.5,22.5 L43.5,22.5 L43.5,50.5 L35.5,50.5 L35.5,22.5 L35.5,22.5 Z M35.5,56.5 L43.5,56.5 L43.5,64.5 L35.5,64.5 L35.5,56.5 L35.5,56.5 Z" id="Shape" sketch:type="MSShapeGroup"></path></g></g></g></svg>';
          
@@ -768,12 +760,15 @@ CanvasBackground = {
     }
 
 
-};
+};*/
 
-
-
-
-$(function() {
+function callWeather(lat, lng) {
+	latitude = lat;
+	longitude = lng;
     WeatherInfo.init();
-    CanvasBackground.init();
+    //CanvasBackground.init();
+}
+$(function(){
+	// WeatherInfo.init();
+	 //CanvasBackground.init();
 });

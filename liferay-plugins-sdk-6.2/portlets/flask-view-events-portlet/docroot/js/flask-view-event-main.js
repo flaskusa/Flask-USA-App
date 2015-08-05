@@ -50,7 +50,8 @@ function renderEventList(tdata) {
 		    
 		 	$(objTd2).click(function(){
 		 		$("#spinningSquaresG").show();
-		 		$('#one').hide();		 		
+		 		$('#one').hide();
+		 		$("#weather-background").show();
 		 		fnGetEventImages($(this).attr("data-id"),$(this).attr("data-venueId"));
 		 	});
 		 	if(Liferay.ThemeDisplay.isSignedIn()){
@@ -133,6 +134,7 @@ function fnShowEventLogo(imageUUID, imageGroupId,container ,editable){
 }
 
 function fnGetEventImages(eventId,venueId){
+	getVenueData(venueId);
 	var flaskRequest = new Request();
 	params= {'eventId': eventId};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL_WITH_IMAGES , params, 
@@ -265,6 +267,11 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 			$(objImg).appendTo(objDiv);
 			$(Slider).slick('addSlide',	objDiv)		
 		});
+		var objWeatherDiv1 = $("<div/>",{'class':'photo'});
+		var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
+		$(objWeatherDiv).html($("#weather-background"));
+		$(objWeatherDiv).appendTo(objWeatherDiv1);
+		$(Slider).slick('addSlide',	objWeatherDiv1);
 	}
 	else{
 		fnBlankSlide(Slider);
@@ -377,4 +384,19 @@ function removeUserEvent(eventId){
 					function (data){
 						console.log("Error in removing user event" + data );
 					});
+}
+
+
+function getVenueData(venueId){
+	var flaskRequest = new Request();
+	params = {venueId:venueId};
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_VENUE, params, 
+	function(data){
+		callWeather(data.latitude, data.longitude);
+		//callMap(data.latitude, data.longitude);
+		
+	} , function(error){
+		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
+	});
+	
 }
