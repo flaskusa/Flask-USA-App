@@ -109,9 +109,7 @@
 .slick-vertical .slick-slide
 {
     display: block;
-
     height: auto;
-
     border: 1px solid transparent;
 }
 .slick-arrow.slick-hidden {

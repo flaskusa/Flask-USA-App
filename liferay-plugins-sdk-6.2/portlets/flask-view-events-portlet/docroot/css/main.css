@@ -1,3 +1,12 @@
+html, body{
+		  height:100%;
+		  margin:0px;
+}
+
+#wrapper {
+    padding:0 !important;
+}
+		
 .imgdiv{
 	float:left; 
 	width:70px;
@@ -94,33 +103,6 @@ div#fixedfooter {
 	margin-left: 6px;
 }
 
-@media (max-width: 767px)
-{
-		.table-responsive .button
-		{
-		  width: 100%;
-		}
-		
-		.control-label-color
-		{
-			font-size:15px !important;
-			line-height: 14px!important; 
-		}
-		
-		.control-label-nocolor
-		{
-			font-size:13px !important; 
-			margin-top: 3px;
-		}
-	
-		.aui input[type="text"] {
-		  height: 30px;
-		  width: 96.7% !important;
-		  padding: 4px 0;
-		  padding-left: 10px;
-		}
-}
-
 div#one {
   padding: 0px 15px 0px 15px;
 }
@@ -203,75 +185,20 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
 
 /* For Slider Resize issue Starts*/
 
-.SliderCaption
-{
-    height: 200px;
-    width: 36px;
+.tblRow{
+	width:50%;
+	padding-top:10px;
+	padding-bottom:10px; 	
 }
-
-.photo
- {
-     width: 100%;
-     height: 100%;
-     background-position: center;
-     background-repeat: no-repeat;
- }	
-
-@media(max-width:414px)
+@media(max-width:640px)
 {
-	.SliderCaption 
-	{
-	  height: 195px!important;
+	.tblRow{
+		width:100%;
 	}
-	.wowslider-container .ws_images 
-	{
-	  height: 195px!important;
-	}
-	
-	.photo
- 	{
- 		height: 195px!important;
- 	}	
-}
-
-@media(max-width:375px)
-{
-	.SliderCaption 
-	{
-	  height: 175px!important;
-	}
-	.wowslider-container .ws_images 
-	{
-	  height: 175px!important;
-	}
-	
-	.photo
- 	{
- 		height: 175px!important;
- 	}	
-}
-
-@media(max-width:320px)
-{
-	.SliderCaption 
-	{
-	  height: 180px!important;
-	}
-	.wowslider-container .ws_images 
-	{
-	  height: 180px!important;
-	}	
-	
-	.photo
- 	{
- 		height: 180px!important;
- 	}
 }
 /* For Slider Resize issue Ends*/
-
-/* Slider Back Button */
 input.btn.btn-info.cssback {
-  max-width: 100%!important;
+  max-width: 100% !important;
 }
 
 .eventLogo {
@@ -350,44 +277,15 @@ input.btn.btn-info.cssback {
   	background-position: center center;
 }
 
-
-.eventDetailBox {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  width: 100%;
-  padding: 10px;
-  overflow: hidden;
-  border: none;
-  font: normal 14px/1 "Coda", Helvetica, sans-serif;
-  color: #FFFFFF;
-  text-align: center;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;  
-  text-align: center;
-  -o-text-overflow: ellipsis;
-  text-overflow: ellipsis;
-  background: rgba(140,140,140,0.4) !important;
-  -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
-  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
-  text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
+.control-label-color,.control-label-nocolor {
+	height: 25px !important;
 }
 
-.eventDetailBoxWithImages {
-  -webkit-box-sizing: content-box;
-  -moz-box-sizing: content-box;
-  box-sizing: content-box;
-  padding: 5px;
-  overflow: hidden;
-  border: none;
-  font: normal 16px/1 "Coda", Helvetica, sans-serif;
-  color: rgba(255,153,0,1);
-}
-
-.jqx-scrollview {
-	background-image: -webkit-linear-gradient(-45deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
-	background-image: -moz-linear-gradient(135deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
-	background-image: linear-gradient(135deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
+/*
+.menustrip {
+	background-image: -webkit-linear-gradient(-90deg, rgba(100,100,100,1) 0, rgba(0,0,0,1) 100%);
+	background-image: -moz-linear-gradient(180deg, rgba(100,100,100,1) 0, rgba(0,0,0,1) 100%);
+	background-image: linear-gradient(180deg, rgba(100,100,100,1) 0, rgba(0,0,0,1) 100%);
 	background-position: 50% 50%;
 	-webkit-background-origin: padding-box;
 	background-origin: padding-box;
@@ -395,12 +293,167 @@ input.btn.btn-info.cssback {
 	background-clip: border-box;
 	-webkit-background-size: auto auto;
 	background-size: auto auto;
-}
-
-.control-label-color,.control-label-nocolor {
-	height: 25px !important;
-}
-
-.tblRow{
+	height: 40px;
 	width:100%;
 }
+
+.menuItem {
+	font: normal 16px/0 "Coda", Helvetica, sans-serif;
+	color: rgba(255,255,255,1);
+	text-align: center;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	letter-spacing: 1px;
+	width:auto;
+    height: 40px !important;
+}
+
+.menuText {
+    display: block;
+    margin-top: 12px;
+}*/
+
+		.eventDetailBox {
+		  -webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  padding: 10px;
+		  overflow: hidden;
+		  border: none;
+		  font: normal 14px/1 "Coda", Helvetica, sans-serif;
+		  color: #FFFFFF;
+		  text-align: center;
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;  
+		  text-align: center;
+		  -o-text-overflow: ellipsis;
+		  text-overflow: ellipsis;
+		  background: rgba(140,140,140,0.4) !important;
+		  -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+		  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
+		  text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
+		}
+
+		.eventDetailBoxWithImages {
+		  -webkit-box-sizing: content-box;
+		  -moz-box-sizing: content-box;
+		  box-sizing: content-box;
+		  padding: 5px;
+		  overflow: hidden;
+		  border: none;
+		  font: normal 16px/1 "Coda", Helvetica, sans-serif;
+		  color: rgba(255,153,0,1);
+		}
+
+		.Carousel{
+			background-image: -webkit-linear-gradient(-45deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
+			background-image: -moz-linear-gradient(135deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
+			background-image: linear-gradient(135deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
+			background-position: 50% 50%;
+			-webkit-background-origin: padding-box;
+			background-origin: padding-box;
+			-webkit-background-clip: border-box;
+			background-clip: border-box;
+			-webkit-background-size: auto auto;
+			background-size: auto auto;
+			height:100%;
+			width:1600px;
+			margin-left:45px;
+			margin-right:45px;
+		}
+
+		.col-xs-9{
+		  max-width:100% !important;
+		  max-height:300px !important;
+		  height: 250px; 
+		  width:1690px !important;
+		  padding-left:0px !important;
+		}
+			
+		.SliderCaption
+		{
+		  max-width:36px !important;
+		  max-height:300px !important;
+		  background-size: contain;
+		  height: 250px; 
+		  width: 36px;
+		  border: 1px solid black;	
+		}
+		
+		.fullwidth {
+			width: 100%;
+			margin-left: auto;
+			margin-right: auto;
+			max-width: initial;
+		}
+		.slider {margin: 0;}
+		.slider .slide {width: 500px; height: 100%;}
+		.slick-slide {
+			padding:15px !important; 
+		}
+		
+		.slick-prev:before, .slick-next:before { 
+			color:red !important;
+		}
+		
+		.slick-prev {
+			margin-left: 40px;
+		}
+		.slick-prev:before {
+			content: '<';
+		}
+		.slick-next {
+			margin-right: 40px;
+		}
+		.slick-next:before {
+			content: '>';
+		}
+		
+		.photo{
+			width:300px;
+		} 
+		
+	@media (min-width: 0px) and (max-width: 640px){
+		.Carousel{
+			width:370px;
+			margin-left:0px;
+			margin-right:0px;
+		}
+		.col-xs-9{
+		  max-width:100% !important;
+		  max-height:210px !important;
+		  height: 210px; 
+		  width:370px !important;
+		  padding-left:0px !important;
+		}		
+		
+		.slick-slide {
+			padding: 5px !important;
+		}		
+		
+		.SliderCaption {
+			max-width: 30px !important;
+			max-height: 210px !important;
+			background-size: contain;
+			height: 210px;
+			width: 30px;
+			border: 1px solid black;
+		}		
+		
+		.eventDetailBox{
+			width:90%;
+			height:195px;
+		}
+		
+		.eventDetailBox table{
+			padding:10px;
+		}		
+		.weather-background{
+			height: 210px;
+			width: 350px;
+		}
+
+	}	
+	
+	
+	
