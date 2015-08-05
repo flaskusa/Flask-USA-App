@@ -63,6 +63,12 @@ public class VenueServiceWrapper implements VenueService,
 	}
 
 	@Override
+	public com.rumbasolutions.flask.model.Venue getVenue(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.getVenue(venueId, serviceContext);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.Venue addVenue(
 		java.lang.String venueName, java.lang.String venueDescription,
 		java.lang.String addrLine1, java.lang.String addrLine2,
@@ -109,9 +115,9 @@ public class VenueServiceWrapper implements VenueService,
 
 	@Override
 	public void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImageUUID,
+		java.lang.String venueImageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		_venueService.addVenueImage(venueId, title, venueImageUUID,
+		_venueService.addVenueImage(venueId, title, venueImageUUID, groupId,
 			serviceContext);
 	}
 
@@ -208,20 +214,21 @@ public class VenueServiceWrapper implements VenueService,
 	@Override
 	public com.rumbasolutions.flask.model.VenueDetailImage addVenueDetailImage(
 		long venueDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.addVenueDetailImage(venueDetailId, imageTitle,
-			imageDesc, imageUUID, serviceContext);
+			imageDesc, imageUUID, groupId, serviceContext);
 	}
 
 	@Override
 	public com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
 		long venueDetailImageId, long venueDetailId,
 		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imageUUID,
+		java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.updateVenueDetailImage(venueDetailImageId,
-			venueDetailId, imageTitle, imageDesc, imageUUID, serviceContext);
+			venueDetailId, imageTitle, imageDesc, imageUUID, groupId,
+			serviceContext);
 	}
 
 	@Override

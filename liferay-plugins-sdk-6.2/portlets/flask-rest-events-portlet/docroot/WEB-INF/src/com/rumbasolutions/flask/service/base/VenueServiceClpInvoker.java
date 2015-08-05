@@ -38,18 +38,24 @@ public class VenueServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName85 = "addVenue";
+		_methodName85 = "getVenue";
 
 		_methodParameterTypes85 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName86 = "addVenue";
+
+		_methodParameterTypes86 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName86 = "updateVenue";
+		_methodName87 = "updateVenue";
 
-		_methodParameterTypes86 = new String[] {
+		_methodParameterTypes87 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long", "long",
@@ -57,68 +63,57 @@ public class VenueServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName87 = "deleteVenue";
+		_methodName88 = "deleteVenue";
 
-		_methodParameterTypes87 = new String[] {
+		_methodParameterTypes88 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName88 = "deleteVenues";
+		_methodName89 = "deleteVenues";
 
-		_methodParameterTypes88 = new String[] {
+		_methodParameterTypes89 = new String[] {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName89 = "addVenueImage";
+		_methodName90 = "addVenueImage";
 
-		_methodParameterTypes89 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
+		_methodParameterTypes90 = new String[] {
+				"long", "java.lang.String", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName90 = "getVenueImages";
-
-		_methodParameterTypes90 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName91 = "getVenueImage";
+		_methodName91 = "getVenueImages";
 
 		_methodParameterTypes91 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName92 = "updateVenueImage";
+		_methodName92 = "getVenueImage";
 
 		_methodParameterTypes92 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName93 = "updateVenueImage";
+
+		_methodParameterTypes93 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName93 = "deleteVenueImage";
-
-		_methodParameterTypes93 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName94 = "deleteAllVenueImages";
+		_methodName94 = "deleteVenueImage";
 
 		_methodParameterTypes94 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName95 = "addVenueDetail";
+		_methodName95 = "deleteAllVenueImages";
 
 		_methodParameterTypes95 = new String[] {
-				"long", "long", "long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName96 = "updateVenueDetail";
+		_methodName96 = "addVenueDetail";
 
 		_methodParameterTypes96 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
@@ -129,65 +124,78 @@ public class VenueServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName97 = "getVenueDetail";
+		_methodName97 = "updateVenueDetail";
 
 		_methodParameterTypes97 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.Double", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName98 = "getVenueDetails";
+		_methodName98 = "getVenueDetail";
 
 		_methodParameterTypes98 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName99 = "deleteVenueDetail";
+		_methodName99 = "getVenueDetails";
 
 		_methodParameterTypes99 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName100 = "deleteAllVenueDetails";
+		_methodName100 = "deleteVenueDetail";
 
 		_methodParameterTypes100 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName101 = "addVenueDetailImage";
+		_methodName101 = "deleteAllVenueDetails";
 
 		_methodParameterTypes101 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName102 = "updateVenueDetailImage";
-
-		_methodParameterTypes102 = new String[] {
-				"long", "long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName103 = "getVenueDetailImage";
-
-		_methodParameterTypes103 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName104 = "getVenueDetailImages";
+		_methodName102 = "addVenueDetailImage";
+
+		_methodParameterTypes102 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName103 = "updateVenueDetailImage";
+
+		_methodParameterTypes103 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName104 = "getVenueDetailImage";
 
 		_methodParameterTypes104 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName105 = "deleteVenueDetailImage";
+		_methodName105 = "getVenueDetailImages";
 
 		_methodParameterTypes105 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName106 = "deleteAllVenueDetailImages";
+		_methodName106 = "deleteVenueDetailImage";
 
 		_methodParameterTypes106 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName107 = "deleteAllVenueDetailImages";
+
+		_methodParameterTypes107 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -213,6 +221,12 @@ public class VenueServiceClpInvoker {
 
 		if (_methodName85.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
+			return VenueServiceUtil.getVenue(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName86.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
 			return VenueServiceUtil.addVenue((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -224,8 +238,8 @@ public class VenueServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[11]);
 		}
 
-		if (_methodName86.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
+		if (_methodName87.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
 			return VenueServiceUtil.updateVenue(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -238,17 +252,9 @@ public class VenueServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[12]);
 		}
 
-		if (_methodName87.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
-			VenueServiceUtil.deleteVenue(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
-
-			return null;
-		}
-
 		if (_methodName88.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes88, parameterTypes)) {
-			VenueServiceUtil.deleteVenues((java.lang.String)arguments[0],
+			VenueServiceUtil.deleteVenue(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
@@ -256,27 +262,36 @@ public class VenueServiceClpInvoker {
 
 		if (_methodName89.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes89, parameterTypes)) {
-			VenueServiceUtil.addVenueImage(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(com.liferay.portal.service.ServiceContext)arguments[3]);
+			VenueServiceUtil.deleteVenues((java.lang.String)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
 		if (_methodName90.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
-			return VenueServiceUtil.getVenueImages(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			VenueServiceUtil.addVenueImage(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				((Long)arguments[3]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[4]);
+
+			return null;
 		}
 
 		if (_methodName91.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
-			return VenueServiceUtil.getVenueImage(((Long)arguments[0]).longValue(),
+			return VenueServiceUtil.getVenueImages(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName92.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
+			return VenueServiceUtil.getVenueImage(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName93.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
 			VenueServiceUtil.updateVenueImage(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(com.liferay.portal.service.ServiceContext)arguments[3]);
@@ -284,17 +299,9 @@ public class VenueServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName93.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
-			VenueServiceUtil.deleteVenueImage(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
-
-			return null;
-		}
-
 		if (_methodName94.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes94, parameterTypes)) {
-			VenueServiceUtil.deleteAllVenueImages(((Long)arguments[0]).longValue(),
+			VenueServiceUtil.deleteVenueImage(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
@@ -302,26 +309,15 @@ public class VenueServiceClpInvoker {
 
 		if (_methodName95.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes95, parameterTypes)) {
-			return VenueServiceUtil.addVenueDetail(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				((Long)arguments[2]).longValue(),
-				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
-				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
-				(java.lang.String)arguments[7], (java.lang.String)arguments[8],
-				((Long)arguments[9]).longValue(),
-				((Long)arguments[10]).longValue(),
-				(java.lang.String)arguments[11],
-				(java.lang.String)arguments[12],
-				(java.lang.String)arguments[13],
-				(java.lang.String)arguments[14],
-				(java.lang.Double)arguments[15],
-				(java.lang.String)arguments[16],
-				(com.liferay.portal.service.ServiceContext)arguments[17]);
+			VenueServiceUtil.deleteAllVenueImages(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
 		}
 
 		if (_methodName96.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
-			return VenueServiceUtil.updateVenueDetail(((Long)arguments[0]).longValue(),
+			return VenueServiceUtil.addVenueDetail(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -340,27 +336,38 @@ public class VenueServiceClpInvoker {
 
 		if (_methodName97.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
-			return VenueServiceUtil.getVenueDetail(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return VenueServiceUtil.updateVenueDetail(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
+				(java.lang.String)arguments[7], (java.lang.String)arguments[8],
+				((Long)arguments[9]).longValue(),
+				((Long)arguments[10]).longValue(),
+				(java.lang.String)arguments[11],
+				(java.lang.String)arguments[12],
+				(java.lang.String)arguments[13],
+				(java.lang.String)arguments[14],
+				(java.lang.Double)arguments[15],
+				(java.lang.String)arguments[16],
+				(com.liferay.portal.service.ServiceContext)arguments[17]);
 		}
 
 		if (_methodName98.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
-			return VenueServiceUtil.getVenueDetails(((Long)arguments[0]).longValue(),
+			return VenueServiceUtil.getVenueDetail(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName99.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
-			VenueServiceUtil.deleteVenueDetail(((Long)arguments[0]).longValue(),
+			return VenueServiceUtil.getVenueDetails(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
-
-			return null;
 		}
 
 		if (_methodName100.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
-			VenueServiceUtil.deleteAllVenueDetails(((Long)arguments[0]).longValue(),
+			VenueServiceUtil.deleteVenueDetail(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
@@ -368,43 +375,53 @@ public class VenueServiceClpInvoker {
 
 		if (_methodName101.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
-			return VenueServiceUtil.addVenueDetailImage(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3],
-				(com.liferay.portal.service.ServiceContext)arguments[4]);
+			VenueServiceUtil.deleteAllVenueDetails(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
 		}
 
 		if (_methodName102.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
-			return VenueServiceUtil.updateVenueDetailImage(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
-				(java.lang.String)arguments[4],
+			return VenueServiceUtil.addVenueDetailImage(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3],
+				((Long)arguments[4]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
 		if (_methodName103.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
-			return VenueServiceUtil.getVenueDetailImage(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return VenueServiceUtil.updateVenueDetailImage(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				(java.lang.String)arguments[4],
+				((Long)arguments[5]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
 		if (_methodName104.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
-			return VenueServiceUtil.getVenueDetailImages(((Long)arguments[0]).longValue(),
+			return VenueServiceUtil.getVenueDetailImage(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName105.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
+			return VenueServiceUtil.getVenueDetailImages(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName106.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes106, parameterTypes)) {
 			VenueServiceUtil.deleteVenueDetailImage(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName106.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes106, parameterTypes)) {
+		if (_methodName107.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes107, parameterTypes)) {
 			VenueServiceUtil.deleteAllVenueDetailImages(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
@@ -464,4 +481,6 @@ public class VenueServiceClpInvoker {
 	private String[] _methodParameterTypes105;
 	private String _methodName106;
 	private String[] _methodParameterTypes106;
+	private String _methodName107;
+	private String[] _methodParameterTypes107;
 }

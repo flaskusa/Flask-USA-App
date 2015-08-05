@@ -82,22 +82,23 @@ public class EventServiceUtil {
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID,
+		java.lang.String eventImageUUID, long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addEvent(eventName, description, eventDate, startTime,
-			endTime, eventTypeId, venueId, eventImageUUID, serviceContext);
+			endTime, eventTypeId, venueId, eventImageUUID, eventImageGroupId,
+			serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.Event updateEvent(
 		long eventId, java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID,
+		java.lang.String eventImageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateEvent(eventId, eventName, description, eventDate,
-			startTime, endTime, eventTypeId, venueId, eventImageUUID,
+			startTime, endTime, eventTypeId, venueId, eventImageUUID, groupId,
 			serviceContext);
 	}
 
@@ -171,20 +172,20 @@ public class EventServiceUtil {
 
 	public static com.rumbasolutions.flask.model.EventDetailImage addEventDetailImage(
 		long eventDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addEventDetailImage(eventDetailId, imageTitle, imageDesc,
-			imageUUID, serviceContext);
+			imageUUID, groupId, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(
 		long eventDetailImageId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateEventDetailImage(eventDetailImageId, imageTitle,
-			imageDesc, imageUUID, serviceContext);
+			imageDesc, imageUUID, groupId, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetailImage getEventDetailImage(

@@ -76,7 +76,7 @@ public class VenueImageModelImpl extends BaseModelImpl<VenueImage>
 			{ "venueImageGroupId", Types.BIGINT },
 			{ "venueId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueImage (venueImageId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,title VARCHAR(75) null,venueImageUUId VARCHAR(75) null,venueImageGroupId LONG,venueId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueImage (venueImageId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,title VARCHAR(100) null,venueImageUUId VARCHAR(50) null,venueImageGroupId LONG,venueId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_VenueImage";
 	public static final String ORDER_BY_JPQL = " ORDER BY venueImage.title ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_VenueImage.title ASC";

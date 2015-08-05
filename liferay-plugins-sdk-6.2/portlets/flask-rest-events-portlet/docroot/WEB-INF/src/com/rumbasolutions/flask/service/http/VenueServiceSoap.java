@@ -77,6 +77,22 @@ public class VenueServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.VenueSoap getVenue(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.Venue returnValue = VenueServiceUtil.getVenue(venueId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.VenueSoap addVenue(
 		java.lang.String venueName, java.lang.String venueDescription,
 		java.lang.String addrLine1, java.lang.String addrLine2,
@@ -157,12 +173,12 @@ public class VenueServiceSoap {
 	}
 
 	public static void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImageUUID,
+		java.lang.String venueImageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			VenueServiceUtil.addVenueImage(venueId, title, venueImageUUID,
-				serviceContext);
+				groupId, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -358,12 +374,12 @@ public class VenueServiceSoap {
 
 	public static com.rumbasolutions.flask.model.VenueDetailImageSoap addVenueDetailImage(
 		long venueDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.VenueDetailImage returnValue = VenueServiceUtil.addVenueDetailImage(venueDetailId,
-					imageTitle, imageDesc, imageUUID, serviceContext);
+					imageTitle, imageDesc, imageUUID, groupId, serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueDetailImageSoap.toSoapModel(returnValue);
 		}
@@ -377,12 +393,12 @@ public class VenueServiceSoap {
 	public static com.rumbasolutions.flask.model.VenueDetailImageSoap updateVenueDetailImage(
 		long venueDetailImageId, long venueDetailId,
 		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imageUUID,
+		java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.VenueDetailImage returnValue = VenueServiceUtil.updateVenueDetailImage(venueDetailImageId,
-					venueDetailId, imageTitle, imageDesc, imageUUID,
+					venueDetailId, imageTitle, imageDesc, imageUUID, groupId,
 					serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueDetailImageSoap.toSoapModel(returnValue);

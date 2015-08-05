@@ -4,14 +4,14 @@ create table flaskevents_Event (
 	userId LONG,
 	createdDate DATE null,
 	modifiedDate DATE null,
-	eventName VARCHAR(75) null,
-	description VARCHAR(75) null,
+	eventName VARCHAR(100) null,
+	description VARCHAR(255) null,
 	eventDate DATE null,
 	startTime DATE null,
 	endTime DATE null,
 	eventTypeId LONG,
 	eventTypeName VARCHAR(75) null,
-	eventImageUUID VARCHAR(75) null,
+	eventImageUUID VARCHAR(50) null,
 	eventImageGroupId LONG,
 	venueId LONG,
 	venueName VARCHAR(75) null
@@ -29,21 +29,21 @@ create table flaskevents_EventDetail (
 	infoTypeCategoryId LONG,
 	infoTypeCategoryName VARCHAR(75) null,
 	infoTitle VARCHAR(75) null,
-	infoDesc VARCHAR(75) null,
-	addrLine1 VARCHAR(75) null,
-	addrLine2 VARCHAR(75) null,
-	city VARCHAR(75) null,
-	zipCode VARCHAR(75) null,
+	infoDesc VARCHAR(255) null,
+	addrLine1 VARCHAR(100) null,
+	addrLine2 VARCHAR(100) null,
+	city VARCHAR(100) null,
+	zipCode VARCHAR(20) null,
 	stateId LONG,
 	stateName VARCHAR(75) null,
 	countryId LONG,
 	countryName VARCHAR(75) null,
-	latitude VARCHAR(75) null,
-	longitude VARCHAR(75) null,
-	phone VARCHAR(75) null,
-	website VARCHAR(75) null,
+	latitude VARCHAR(20) null,
+	longitude VARCHAR(20) null,
+	phone VARCHAR(20) null,
+	website VARCHAR(255) null,
 	cost DOUBLE,
-	hoursOfOperation VARCHAR(75) null
+	hoursOfOperation VARCHAR(255) null
 );
 
 create table flaskevents_EventDetailImage (
@@ -54,26 +54,26 @@ create table flaskevents_EventDetailImage (
 	modifiedDate DATE null,
 	eventDetailId LONG,
 	imageTitle VARCHAR(75) null,
-	imageDesc VARCHAR(75) null,
-	imageUUID VARCHAR(75) null,
+	imageDesc VARCHAR(255) null,
+	imageUUID VARCHAR(50) null,
 	imageGroupId LONG
 );
 
 create table flaskevents_EventType (
 	eventTypeId LONG not null primary key,
 	eventTypeKey VARCHAR(75) null,
-	eventTypeName VARCHAR(75) null
+	eventTypeName VARCHAR(100) null
 );
 
 create table flaskevents_InfoType (
 	infoTypeId LONG not null primary key,
-	infoTypeName VARCHAR(75) null
+	infoTypeName VARCHAR(100) null
 );
 
 create table flaskevents_InfoTypeCategory (
 	infoTypeCategoryId LONG not null primary key,
-	infoTypeCategoryName VARCHAR(75) null,
-	displayTemplate VARCHAR(75) null
+	infoTypeCategoryName VARCHAR(100) null,
+	displayTemplate VARCHAR(255) null
 );
 
 create table flaskevents_UserEvent (
@@ -89,19 +89,19 @@ create table flaskevents_Venue (
 	userId LONG,
 	createdDate DATE null,
 	modifiedDate DATE null,
-	venueName VARCHAR(75) null,
-	venueDescription VARCHAR(75) null,
-	venueZipCode VARCHAR(75) null,
-	addrLine1 VARCHAR(75) null,
-	addrLine2 VARCHAR(75) null,
-	venueCity VARCHAR(75) null,
+	venueName VARCHAR(100) null,
+	venueDescription VARCHAR(255) null,
+	venueZipCode VARCHAR(20) null,
+	addrLine1 VARCHAR(100) null,
+	addrLine2 VARCHAR(100) null,
+	venueCity VARCHAR(100) null,
 	venueStateId LONG,
 	venueStateName VARCHAR(75) null,
 	venueCountryId LONG,
 	venueCountryName VARCHAR(75) null,
 	venueMetroArea VARCHAR(75) null,
-	longitude VARCHAR(75) null,
-	latitude VARCHAR(75) null
+	longitude VARCHAR(20) null,
+	latitude VARCHAR(20) null
 );
 
 create table flaskevents_VenueDetail (
@@ -115,22 +115,22 @@ create table flaskevents_VenueDetail (
 	infoTypeName VARCHAR(75) null,
 	infoTypeCategoryId LONG,
 	infoTypeCategoryName VARCHAR(75) null,
-	infoTitle VARCHAR(75) null,
-	infoDesc VARCHAR(75) null,
-	addrLine1 VARCHAR(75) null,
-	addrLine2 VARCHAR(75) null,
-	city VARCHAR(75) null,
-	zipCode VARCHAR(75) null,
+	infoTitle VARCHAR(100) null,
+	infoDesc VARCHAR(255) null,
+	addrLine1 VARCHAR(100) null,
+	addrLine2 VARCHAR(100) null,
+	city VARCHAR(100) null,
+	zipCode VARCHAR(20) null,
 	stateId LONG,
-	stateName VARCHAR(75) null,
+	stateName VARCHAR(100) null,
 	countryId LONG,
-	countryName VARCHAR(75) null,
-	latitude VARCHAR(75) null,
-	longitude VARCHAR(75) null,
-	phone VARCHAR(75) null,
-	website VARCHAR(75) null,
+	countryName VARCHAR(100) null,
+	latitude VARCHAR(20) null,
+	longitude VARCHAR(20) null,
+	phone VARCHAR(20) null,
+	website VARCHAR(255) null,
 	cost DOUBLE,
-	hoursOfOperation VARCHAR(75) null
+	hoursOfOperation VARCHAR(255) null
 );
 
 create table flaskevents_VenueDetailImage (
@@ -140,9 +140,9 @@ create table flaskevents_VenueDetailImage (
 	createdDate DATE null,
 	modifiedDate DATE null,
 	venueDetailId LONG,
-	imageTitle VARCHAR(75) null,
-	imageDesc VARCHAR(75) null,
-	imageUUID VARCHAR(75) null,
+	imageTitle VARCHAR(100) null,
+	imageDesc VARCHAR(255) null,
+	imageUUID VARCHAR(50) null,
 	imageGroupId LONG
 );
 
@@ -152,8 +152,8 @@ create table flaskevents_VenueImage (
 	userId LONG,
 	createdDate DATE null,
 	modifiedDate DATE null,
-	title VARCHAR(75) null,
-	venueImageUUId VARCHAR(75) null,
+	title VARCHAR(100) null,
+	venueImageUUId VARCHAR(50) null,
 	venueImageGroupId LONG,
 	venueId LONG
 );

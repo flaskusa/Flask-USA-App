@@ -55,7 +55,8 @@ public class EventServiceClpInvoker {
 		_methodParameterTypes87 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.util.Date", "java.util.Date", "long", "long",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName88 = "updateEvent";
@@ -63,7 +64,7 @@ public class EventServiceClpInvoker {
 		_methodParameterTypes88 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.util.Date", "java.util.Date", "long",
-				"long", "java.lang.String",
+				"long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -135,14 +136,16 @@ public class EventServiceClpInvoker {
 
 		_methodParameterTypes98 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName99 = "updateEventDetailImage";
 
 		_methodParameterTypes99 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName100 = "getEventDetailImage";
@@ -220,7 +223,8 @@ public class EventServiceClpInvoker {
 				((Long)arguments[5]).longValue(),
 				((Long)arguments[6]).longValue(),
 				(java.lang.String)arguments[7],
-				(com.liferay.portal.service.ServiceContext)arguments[8]);
+				((Long)arguments[8]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 
 		if (_methodName88.equals(name) &&
@@ -231,7 +235,8 @@ public class EventServiceClpInvoker {
 				(java.util.Date)arguments[5], ((Long)arguments[6]).longValue(),
 				((Long)arguments[7]).longValue(),
 				(java.lang.String)arguments[8],
-				(com.liferay.portal.service.ServiceContext)arguments[9]);
+				((Long)arguments[9]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[10]);
 		}
 
 		if (_methodName89.equals(name) &&
@@ -327,7 +332,8 @@ public class EventServiceClpInvoker {
 			return EventServiceUtil.addEventDetailImage(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
-				(com.liferay.portal.service.ServiceContext)arguments[4]);
+				((Long)arguments[4]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
 		if (_methodName99.equals(name) &&
@@ -335,7 +341,8 @@ public class EventServiceClpInvoker {
 			return EventServiceUtil.updateEventDetailImage(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
-				(com.liferay.portal.service.ServiceContext)arguments[4]);
+				((Long)arguments[4]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
 		if (_methodName100.equals(name) &&

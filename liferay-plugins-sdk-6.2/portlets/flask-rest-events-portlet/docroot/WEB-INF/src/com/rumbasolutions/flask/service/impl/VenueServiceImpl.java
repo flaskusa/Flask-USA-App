@@ -76,7 +76,19 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		return venue;
 	}
 	
-	
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public Venue getVenue(long venueId, ServiceContext  serviceContext){
+		Venue venue= null;
+		try {
+			venue =  VenueUtil.fetchByPrimaryKey(venueId);
+			venue = FlaskUtil.setVenueStringValues(venue);
+		} catch (SystemException e) {
+			LOGGER.error("Error in get venue:" + e.getMessage());
+		}
+		
+		return venue;
+	}
 	
 	@Override
 	public Venue addVenue(String venueName, String venueDescription, String addrLine1, 

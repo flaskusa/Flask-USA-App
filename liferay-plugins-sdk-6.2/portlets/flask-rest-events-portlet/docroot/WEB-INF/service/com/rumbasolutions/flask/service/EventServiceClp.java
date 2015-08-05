@@ -55,7 +55,8 @@ public class EventServiceClp implements EventService {
 		_methodParameterTypes6 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.util.Date", "java.util.Date", "long", "long",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName7 = "updateEvent";
@@ -63,7 +64,7 @@ public class EventServiceClp implements EventService {
 		_methodParameterTypes7 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.util.Date", "java.util.Date", "long",
-				"long", "java.lang.String",
+				"long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -135,14 +136,16 @@ public class EventServiceClp implements EventService {
 
 		_methodParameterTypes17 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName18 = "updateEventDetailImage";
 
 		_methodParameterTypes18 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName19 = "getEventDetailImage";
@@ -316,7 +319,7 @@ public class EventServiceClp implements EventService {
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID,
+		java.lang.String eventImageUUID, long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -339,6 +342,8 @@ public class EventServiceClp implements EventService {
 					venueId,
 						
 					ClpSerializer.translateInput(eventImageUUID),
+						
+					eventImageGroupId,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -363,7 +368,7 @@ public class EventServiceClp implements EventService {
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID,
+		java.lang.String eventImageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -388,6 +393,8 @@ public class EventServiceClp implements EventService {
 					venueId,
 						
 					ClpSerializer.translateInput(eventImageUUID),
+						
+					groupId,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -734,7 +741,7 @@ public class EventServiceClp implements EventService {
 	@Override
 	public com.rumbasolutions.flask.model.EventDetailImage addEventDetailImage(
 		long eventDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -749,6 +756,8 @@ public class EventServiceClp implements EventService {
 					ClpSerializer.translateInput(imageDesc),
 						
 					ClpSerializer.translateInput(imageUUID),
+						
+					groupId,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -771,7 +780,7 @@ public class EventServiceClp implements EventService {
 	@Override
 	public com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(
 		long eventDetailImageId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -786,6 +795,8 @@ public class EventServiceClp implements EventService {
 					ClpSerializer.translateInput(imageDesc),
 						
 					ClpSerializer.translateInput(imageUUID),
+						
+					groupId,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

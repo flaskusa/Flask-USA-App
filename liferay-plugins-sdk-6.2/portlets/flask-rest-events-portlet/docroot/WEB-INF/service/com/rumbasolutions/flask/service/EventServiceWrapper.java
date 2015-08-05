@@ -79,11 +79,11 @@ public class EventServiceWrapper implements EventService,
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID,
+		java.lang.String eventImageUUID, long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.addEvent(eventName, description, eventDate,
 			startTime, endTime, eventTypeId, venueId, eventImageUUID,
-			serviceContext);
+			eventImageGroupId, serviceContext);
 	}
 
 	@Override
@@ -91,11 +91,11 @@ public class EventServiceWrapper implements EventService,
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID,
+		java.lang.String eventImageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.updateEvent(eventId, eventName, description,
 			eventDate, startTime, endTime, eventTypeId, venueId,
-			eventImageUUID, serviceContext);
+			eventImageUUID, groupId, serviceContext);
 	}
 
 	@Override
@@ -176,19 +176,19 @@ public class EventServiceWrapper implements EventService,
 	@Override
 	public com.rumbasolutions.flask.model.EventDetailImage addEventDetailImage(
 		long eventDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.addEventDetailImage(eventDetailId, imageTitle,
-			imageDesc, imageUUID, serviceContext);
+			imageDesc, imageUUID, groupId, serviceContext);
 	}
 
 	@Override
 	public com.rumbasolutions.flask.model.EventDetailImage updateEventDetailImage(
 		long eventDetailImageId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.updateEventDetailImage(eventDetailImageId,
-			imageTitle, imageDesc, imageUUID, serviceContext);
+			imageTitle, imageDesc, imageUUID, groupId, serviceContext);
 	}
 
 	@Override

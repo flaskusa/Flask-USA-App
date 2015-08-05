@@ -83,7 +83,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			{ "venueId", Types.BIGINT },
 			{ "venueName", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_Event (eventId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventName VARCHAR(75) null,description VARCHAR(75) null,eventDate DATE null,startTime DATE null,endTime DATE null,eventTypeId LONG,eventTypeName VARCHAR(75) null,eventImageUUID VARCHAR(75) null,eventImageGroupId LONG,venueId LONG,venueName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_Event (eventId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventName VARCHAR(100) null,description VARCHAR(255) null,eventDate DATE null,startTime DATE null,endTime DATE null,eventTypeId LONG,eventTypeName VARCHAR(75) null,eventImageUUID VARCHAR(50) null,eventImageGroupId LONG,venueId LONG,venueName VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_Event";
 	public static final String ORDER_BY_JPQL = " ORDER BY event.eventDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_Event.eventDate DESC";

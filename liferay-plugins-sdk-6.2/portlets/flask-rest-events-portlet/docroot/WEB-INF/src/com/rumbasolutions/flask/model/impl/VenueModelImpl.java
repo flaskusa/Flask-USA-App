@@ -84,7 +84,7 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 			{ "longitude", Types.VARCHAR },
 			{ "latitude", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_Venue (venueId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueName VARCHAR(75) null,venueDescription VARCHAR(75) null,venueZipCode VARCHAR(75) null,addrLine1 VARCHAR(75) null,addrLine2 VARCHAR(75) null,venueCity VARCHAR(75) null,venueStateId LONG,venueStateName VARCHAR(75) null,venueCountryId LONG,venueCountryName VARCHAR(75) null,venueMetroArea VARCHAR(75) null,longitude VARCHAR(75) null,latitude VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_Venue (venueId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueName VARCHAR(100) null,venueDescription VARCHAR(255) null,venueZipCode VARCHAR(20) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,venueCity VARCHAR(100) null,venueStateId LONG,venueStateName VARCHAR(75) null,venueCountryId LONG,venueCountryName VARCHAR(75) null,venueMetroArea VARCHAR(75) null,longitude VARCHAR(20) null,latitude VARCHAR(20) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_Venue";
 	public static final String ORDER_BY_JPQL = " ORDER BY venue.venueName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_Venue.venueName ASC";

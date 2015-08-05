@@ -67,7 +67,7 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 			{ "infoTypeCategoryName", Types.VARCHAR },
 			{ "displayTemplate", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_InfoTypeCategory (infoTypeCategoryId LONG not null primary key,infoTypeCategoryName VARCHAR(75) null,displayTemplate VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_InfoTypeCategory (infoTypeCategoryId LONG not null primary key,infoTypeCategoryName VARCHAR(100) null,displayTemplate VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_InfoTypeCategory";
 	public static final String ORDER_BY_JPQL = " ORDER BY infoTypeCategory.infoTypeCategoryId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_InfoTypeCategory.infoTypeCategoryId ASC";

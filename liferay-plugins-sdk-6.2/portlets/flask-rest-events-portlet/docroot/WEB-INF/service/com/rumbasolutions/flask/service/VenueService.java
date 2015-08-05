@@ -70,6 +70,11 @@ public interface VenueService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.Venue> getAllVenues(
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.rumbasolutions.flask.model.Venue getVenue(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	public com.rumbasolutions.flask.model.Venue addVenue(
 		java.lang.String venueName, java.lang.String venueDescription,
 		java.lang.String addrLine1, java.lang.String addrLine2,
@@ -100,7 +105,7 @@ public interface VenueService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImageUUID,
+		java.lang.String venueImageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
@@ -163,13 +168,13 @@ public interface VenueService extends BaseService, InvokableService {
 
 	public com.rumbasolutions.flask.model.VenueDetailImage addVenueDetailImage(
 		long venueDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
 		long venueDetailImageId, long venueDetailId,
 		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imageUUID,
+		java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)

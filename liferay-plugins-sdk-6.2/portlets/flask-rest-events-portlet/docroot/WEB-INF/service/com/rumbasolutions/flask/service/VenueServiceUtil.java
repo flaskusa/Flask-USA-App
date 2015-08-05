@@ -68,6 +68,11 @@ public class VenueServiceUtil {
 		return getService().getAllVenues(serviceContext);
 	}
 
+	public static com.rumbasolutions.flask.model.Venue getVenue(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getVenue(venueId, serviceContext);
+	}
+
 	public static com.rumbasolutions.flask.model.Venue addVenue(
 		java.lang.String venueName, java.lang.String venueDescription,
 		java.lang.String addrLine1, java.lang.String addrLine2,
@@ -112,10 +117,11 @@ public class VenueServiceUtil {
 	}
 
 	public static void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImageUUID,
+		java.lang.String venueImageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService()
-			.addVenueImage(venueId, title, venueImageUUID, serviceContext);
+			.addVenueImage(venueId, title, venueImageUUID, groupId,
+			serviceContext);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImages(
@@ -202,21 +208,21 @@ public class VenueServiceUtil {
 
 	public static com.rumbasolutions.flask.model.VenueDetailImage addVenueDetailImage(
 		long venueDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addVenueDetailImage(venueDetailId, imageTitle, imageDesc,
-			imageUUID, serviceContext);
+			imageUUID, groupId, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
 		long venueDetailImageId, long venueDetailId,
 		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imageUUID,
+		java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateVenueDetailImage(venueDetailImageId, venueDetailId,
-			imageTitle, imageDesc, imageUUID, serviceContext);
+			imageTitle, imageDesc, imageUUID, groupId, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.VenueDetailImage getVenueDetailImage(

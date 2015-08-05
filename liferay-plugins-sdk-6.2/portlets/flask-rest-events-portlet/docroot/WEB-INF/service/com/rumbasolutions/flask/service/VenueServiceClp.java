@@ -38,18 +38,24 @@ public class VenueServiceClp implements VenueService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "addVenue";
+		_methodName4 = "getVenue";
 
 		_methodParameterTypes4 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName5 = "addVenue";
+
+		_methodParameterTypes5 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName5 = "updateVenue";
+		_methodName6 = "updateVenue";
 
-		_methodParameterTypes5 = new String[] {
+		_methodParameterTypes6 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long", "long",
@@ -57,68 +63,57 @@ public class VenueServiceClp implements VenueService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName6 = "deleteVenue";
+		_methodName7 = "deleteVenue";
 
-		_methodParameterTypes6 = new String[] {
+		_methodParameterTypes7 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName7 = "deleteVenues";
+		_methodName8 = "deleteVenues";
 
-		_methodParameterTypes7 = new String[] {
+		_methodParameterTypes8 = new String[] {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName8 = "addVenueImage";
+		_methodName9 = "addVenueImage";
 
-		_methodParameterTypes8 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
+		_methodParameterTypes9 = new String[] {
+				"long", "java.lang.String", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName9 = "getVenueImages";
-
-		_methodParameterTypes9 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName10 = "getVenueImage";
+		_methodName10 = "getVenueImages";
 
 		_methodParameterTypes10 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName11 = "updateVenueImage";
+		_methodName11 = "getVenueImage";
 
 		_methodParameterTypes11 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName12 = "updateVenueImage";
+
+		_methodParameterTypes12 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName12 = "deleteVenueImage";
-
-		_methodParameterTypes12 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName13 = "deleteAllVenueImages";
+		_methodName13 = "deleteVenueImage";
 
 		_methodParameterTypes13 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName14 = "addVenueDetail";
+		_methodName14 = "deleteAllVenueImages";
 
 		_methodParameterTypes14 = new String[] {
-				"long", "long", "long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName15 = "updateVenueDetail";
+		_methodName15 = "addVenueDetail";
 
 		_methodParameterTypes15 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
@@ -129,65 +124,78 @@ public class VenueServiceClp implements VenueService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName16 = "getVenueDetail";
+		_methodName16 = "updateVenueDetail";
 
 		_methodParameterTypes16 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.Double", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName17 = "getVenueDetails";
+		_methodName17 = "getVenueDetail";
 
 		_methodParameterTypes17 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName18 = "deleteVenueDetail";
+		_methodName18 = "getVenueDetails";
 
 		_methodParameterTypes18 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName19 = "deleteAllVenueDetails";
+		_methodName19 = "deleteVenueDetail";
 
 		_methodParameterTypes19 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName20 = "addVenueDetailImage";
+		_methodName20 = "deleteAllVenueDetails";
 
 		_methodParameterTypes20 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName21 = "updateVenueDetailImage";
-
-		_methodParameterTypes21 = new String[] {
-				"long", "long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName22 = "getVenueDetailImage";
-
-		_methodParameterTypes22 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName23 = "getVenueDetailImages";
+		_methodName21 = "addVenueDetailImage";
+
+		_methodParameterTypes21 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName22 = "updateVenueDetailImage";
+
+		_methodParameterTypes22 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName23 = "getVenueDetailImage";
 
 		_methodParameterTypes23 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName24 = "deleteVenueDetailImage";
+		_methodName24 = "getVenueDetailImages";
 
 		_methodParameterTypes24 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName25 = "deleteAllVenueDetailImages";
+		_methodName25 = "deleteVenueDetailImage";
 
 		_methodParameterTypes25 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName26 = "deleteAllVenueDetailImages";
+
+		_methodParameterTypes26 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -268,6 +276,35 @@ public class VenueServiceClp implements VenueService {
 	}
 
 	@Override
+	public com.rumbasolutions.flask.model.Venue getVenue(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4,
+					new Object[] {
+						venueId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.Venue)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.Venue addVenue(
 		java.lang.String venueName, java.lang.String venueDescription,
 		java.lang.String addrLine1, java.lang.String addrLine2,
@@ -279,8 +316,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4,
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5,
 					new Object[] {
 						ClpSerializer.translateInput(venueName),
 						
@@ -334,8 +371,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5,
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6,
 					new Object[] {
 						venueId,
 						
@@ -383,8 +420,8 @@ public class VenueServiceClp implements VenueService {
 	public void deleteVenue(long venueId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName6,
-				_methodParameterTypes6,
+			_invokableService.invokeMethod(_methodName7,
+				_methodParameterTypes7,
 				new Object[] {
 					venueId,
 					
@@ -408,8 +445,8 @@ public class VenueServiceClp implements VenueService {
 	public void deleteVenues(java.lang.String venueList,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName7,
-				_methodParameterTypes7,
+			_invokableService.invokeMethod(_methodName8,
+				_methodParameterTypes8,
 				new Object[] {
 					ClpSerializer.translateInput(venueList),
 					
@@ -431,17 +468,19 @@ public class VenueServiceClp implements VenueService {
 
 	@Override
 	public void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImageUUID,
+		java.lang.String venueImageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9,
 				new Object[] {
 					venueId,
 					
 				ClpSerializer.translateInput(title),
 					
 				ClpSerializer.translateInput(venueImageUUID),
+					
+				groupId,
 					
 				ClpSerializer.translateInput(serviceContext)
 				});
@@ -465,8 +504,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName9,
-					_methodParameterTypes9,
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10,
 					new Object[] {
 						venueId,
 						
@@ -495,8 +534,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName10,
-					_methodParameterTypes10,
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11,
 					new Object[] {
 						venueImageId,
 						
@@ -523,8 +562,8 @@ public class VenueServiceClp implements VenueService {
 		java.lang.String venueImageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName11,
-				_methodParameterTypes11,
+			_invokableService.invokeMethod(_methodName12,
+				_methodParameterTypes12,
 				new Object[] {
 					venueImageId,
 					
@@ -552,8 +591,8 @@ public class VenueServiceClp implements VenueService {
 	public void deleteVenueImage(long venueImageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName12,
-				_methodParameterTypes12,
+			_invokableService.invokeMethod(_methodName13,
+				_methodParameterTypes13,
 				new Object[] {
 					venueImageId,
 					
@@ -577,8 +616,8 @@ public class VenueServiceClp implements VenueService {
 	public void deleteAllVenueImages(long venueId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName13,
-				_methodParameterTypes13,
+			_invokableService.invokeMethod(_methodName14,
+				_methodParameterTypes14,
 				new Object[] {
 					venueId,
 					
@@ -611,8 +650,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName14,
-					_methodParameterTypes14,
+			returnObj = _invokableService.invokeMethod(_methodName15,
+					_methodParameterTypes15,
 					new Object[] {
 						venueId,
 						
@@ -679,8 +718,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName15,
-					_methodParameterTypes15,
+			returnObj = _invokableService.invokeMethod(_methodName16,
+					_methodParameterTypes16,
 					new Object[] {
 						venueDetailId,
 						
@@ -741,8 +780,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName16,
-					_methodParameterTypes16,
+			returnObj = _invokableService.invokeMethod(_methodName17,
+					_methodParameterTypes17,
 					new Object[] {
 						venueDetailId,
 						
@@ -770,8 +809,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName17,
-					_methodParameterTypes17,
+			returnObj = _invokableService.invokeMethod(_methodName18,
+					_methodParameterTypes18,
 					new Object[] {
 						venueId,
 						
@@ -797,8 +836,8 @@ public class VenueServiceClp implements VenueService {
 	public void deleteVenueDetail(long venueDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName18,
-				_methodParameterTypes18,
+			_invokableService.invokeMethod(_methodName19,
+				_methodParameterTypes19,
 				new Object[] {
 					venueDetailId,
 					
@@ -822,8 +861,8 @@ public class VenueServiceClp implements VenueService {
 	public void deleteAllVenueDetails(long venueId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName19,
-				_methodParameterTypes19,
+			_invokableService.invokeMethod(_methodName20,
+				_methodParameterTypes20,
 				new Object[] {
 					venueId,
 					
@@ -846,13 +885,13 @@ public class VenueServiceClp implements VenueService {
 	@Override
 	public com.rumbasolutions.flask.model.VenueDetailImage addVenueDetailImage(
 		long venueDetailId, java.lang.String imageTitle,
-		java.lang.String imageDesc, java.lang.String imageUUID,
+		java.lang.String imageDesc, java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName20,
-					_methodParameterTypes20,
+			returnObj = _invokableService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] {
 						venueDetailId,
 						
@@ -861,6 +900,8 @@ public class VenueServiceClp implements VenueService {
 					ClpSerializer.translateInput(imageDesc),
 						
 					ClpSerializer.translateInput(imageUUID),
+						
+					groupId,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -884,13 +925,13 @@ public class VenueServiceClp implements VenueService {
 	public com.rumbasolutions.flask.model.VenueDetailImage updateVenueDetailImage(
 		long venueDetailImageId, long venueDetailId,
 		java.lang.String imageTitle, java.lang.String imageDesc,
-		java.lang.String imageUUID,
+		java.lang.String imageUUID, long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName21,
-					_methodParameterTypes21,
+			returnObj = _invokableService.invokeMethod(_methodName22,
+					_methodParameterTypes22,
 					new Object[] {
 						venueDetailImageId,
 						
@@ -901,6 +942,8 @@ public class VenueServiceClp implements VenueService {
 					ClpSerializer.translateInput(imageDesc),
 						
 					ClpSerializer.translateInput(imageUUID),
+						
+					groupId,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -927,8 +970,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName22,
-					_methodParameterTypes22,
+			returnObj = _invokableService.invokeMethod(_methodName23,
+					_methodParameterTypes23,
 					new Object[] {
 						venueDetailImageId,
 						
@@ -957,8 +1000,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName23,
-					_methodParameterTypes23,
+			returnObj = _invokableService.invokeMethod(_methodName24,
+					_methodParameterTypes24,
 					new Object[] {
 						venueDetailId,
 						
@@ -984,8 +1027,8 @@ public class VenueServiceClp implements VenueService {
 	public void deleteVenueDetailImage(long venueDetailImageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName24,
-				_methodParameterTypes24,
+			_invokableService.invokeMethod(_methodName25,
+				_methodParameterTypes25,
 				new Object[] {
 					venueDetailImageId,
 					
@@ -1009,8 +1052,8 @@ public class VenueServiceClp implements VenueService {
 	public void deleteAllVenueDetailImages(long venueDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName25,
-				_methodParameterTypes25,
+			_invokableService.invokeMethod(_methodName26,
+				_methodParameterTypes26,
 				new Object[] {
 					venueDetailId,
 					
@@ -1081,4 +1124,6 @@ public class VenueServiceClp implements VenueService {
 	private String[] _methodParameterTypes24;
 	private String _methodName25;
 	private String[] _methodParameterTypes25;
+	private String _methodName26;
+	private String[] _methodParameterTypes26;
 }
