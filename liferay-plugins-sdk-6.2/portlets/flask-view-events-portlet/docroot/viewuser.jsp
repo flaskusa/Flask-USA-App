@@ -56,42 +56,37 @@
  
  <div id="two" style="display:none; width:100%;">
  <div style="overflow: hidden; display:none" id="ContentPanel"></div>
-
-<table>
-<tr>
-  <td style="background-color: #231F20;">
-           <img class="SliderCaption" src="<%=request.getContextPath()%>/img/Pre.png"/>
-  </td>
-  <td>
-          <div id="wowslider-container2" class="wowslider-container">
-		  <div class="ws_images" id="ws_images2"></div>
+	<div class="container-fluidX">
+		<div class="row fullwidth">
+		  <div id="col1" class="col-xs-3 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div>
+		  <div id="col2" class="col-xs-9">
+				<div id="wowslider-container2" class="wowslider-container">
+			  		<div class="ws_images" id="ws_images2"></div>
+			  	</div>
 		  </div>
-  </td>
-</tr>
-    
-<tr>
-  <td style="background-color: #231F20;">
-       <img class="SliderCaption" src="<%=request.getContextPath()%>/img/at.png"/>
-  </td>
-  <td> 
-       <div id="wowslider-container3" class="wowslider-container">
-	   <div class="ws_images" id="ws_images3"></div>
-	   </div>
-  </td>
-</tr> 
-<tr>
-  <td style="background-color: #231F20;">
-       <img class="SliderCaption" src="<%=request.getContextPath()%>/img/Post.png"/>
-  </td>
-  <td>   
-    	<div id="wowslider-container4" class="wowslider-container">
-		<div class="ws_images" id="ws_images4"></div>
 		</div>
-  </td>
-</tr>
-</table>
+	</div>
+	<div class="container-fluidX">
+		<div class="row fullwidth">
+		  <div id="col1" class="col-xs-3 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/at.png);"></div>
+		  <div id="col2" class="col-xs-9">
+				<div id="wowslider-container3" class="wowslider-container">
+			  		<div class="ws_images" id="ws_images3"></div>
+			  	</div>
+		  </div>
+		</div>
+	</div>
+	<div class="container-fluidX">
+		<div class="row fullwidth">
+		  <div id="col1" class="col-xs-3 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Post.png);"></div>
+		  <div id="col2" class="col-xs-9">
+				<div id="wowslider-container4" class="wowslider-container">
+			  		<div class="ws_images" id="ws_images4"></div>
+			  	</div>
+		  </div>
+		</div>
+	</div>
 	<input class="btn btn-info cssback" type="button" value="Back"/>
-	<!--</br></br></br></br>-->
 </div>	
 
 	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
