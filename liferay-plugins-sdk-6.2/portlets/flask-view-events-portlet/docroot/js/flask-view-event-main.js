@@ -25,37 +25,25 @@ function renderEventList(tdata) {
 		    var objTable = $('<table/>',{'class':'tblRow'});
 		    var objTr = $('<tr/>');
 		    $(objTr).appendTo($(objTable));
-		    var objTd1 = $('<td/>');
+		    var objTd1 = $('<td/>',{'width':'70px'});
 		    $(objTd1).appendTo($(objTr));
 		    
 		    fnShowEventLogo(flaskEvent.eventImageUUID, flaskEvent.eventImageGroupId, objTd1,false);		    
-		    //var divCol9 = $('<div/>',{'class':'span9'});
-		    //var divCol9_lbl = $('<div/>',{'class':'lbldiv','data-id':flaskEvent.eventId});
 		    var eventName_lbl = $('<label/>',{'class':'control-label-color'});
 		    $(eventName_lbl).html(flaskEvent.eventName);
-		    var objTd2 = $('<td/>',{'data-id':flaskEvent.eventId});
+		    var objTd2 = $('<td/>',{'data-id':flaskEvent.eventId,'data-venueId':flaskEvent.venueId});
 		    
 		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
 		    $(venue_lbl).html(st + ' at ' + flaskEvent.venueName);
-		    //$(eventName_lbl).appendTo($(divCol9_lbl));
-		    //$(venue_lbl).appendTo($(divCol9_lbl));
 		    $(eventName_lbl).appendTo($(objTd2));
 		    $(venue_lbl).appendTo($(objTd2));
 		    $(objTd2).appendTo(objTr);
-		    //$(divCol9_lbl).appendTo($(divCol9));
-		 	//$(divCol3).appendTo($(divRowItem));
-		 	//$(divCol9).appendTo($(divRowItem));
-		 	//$(div_heart).appendTo($(divCol9));		 	
-		 	//$(divRowItem).appendTo($(divRow));
 		    $(objTable).appendTo($(divRow));
 		    var objTd3 = $('<td/>');
-		    //var divRowItem = $('<div/>',{'class':'row-fluid'});
-		    //var divCol3 = $('<div/>',{'class':'span3','style':'width:60px;'});
 		    if(flaskEvent.userEvent == 1){
 		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
 		    }else{
 		    	var div_heart = $('<div/>',{'class':'heart-shape','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
-		    	
 		    }
 		    $(div_heart).appendTo($(objTd3));
 		    $(objTd3).appendTo(objTr);
@@ -63,7 +51,7 @@ function renderEventList(tdata) {
 		 	$(objTd2).click(function(){
 		 		$("#spinningSquaresG").show();
 		 		$('#one').hide();		 		
-		 		fnGetEventImages($(this).attr("data-id"));
+		 		fnGetEventImages($(this).attr("data-id"),$(this).attr("data-venueId"));
 		 	});
 		 	if(Liferay.ThemeDisplay.isSignedIn()){
 			 	$(div_heart).click(function(){
@@ -72,8 +60,6 @@ function renderEventList(tdata) {
 		 	}else{
 		 		$(div_heart).attr("title", "You need to be signed in to save events.");
 		 	}
-		 	
-		 	
 	    }
 	 	$(divRow).appendTo($("#placeholder"));
 }
@@ -146,7 +132,7 @@ function fnShowEventLogo(imageUUID, imageGroupId,container ,editable){
     }
 }
 
-function fnGetEventImages(eventId){
+function fnGetEventImages(eventId,venueId){
 	var flaskRequest = new Request();
 	params= {'eventId': eventId};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL_WITH_IMAGES , params, 
@@ -170,9 +156,9 @@ function fnGetEventImages(eventId){
 			        break;
 				}				
 			});				
-			fnSlider(2,arrPreEvent);
-			fnSlider(3,arrDurEvent);
-			fnSlider(4,arrPosEvent);
+			fnSlider(2,arrPreEvent,eventId,venueId);
+			fnSlider(3,arrDurEvent,eventId,venueId);
+			fnSlider(4,arrPosEvent,eventId,venueId);
 			fnStopProgress();
 		},
 		function (data){
@@ -187,12 +173,12 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+infoTypeCategoryName);
 	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
-			var objtbl = $("<table/>",{'width':'100%','class':'eventDetailBox'});
+			var objtbl = $("<table/>",{'class':'eventDetailBox'});
 			$.each(objFields, function(idx, obj){
 				var objtrHead = $("<tr/>");
 				$.each(obj,function(key,value){
 					var objtr = $("<tr/>");
-					var valueTd = $("<td/>",{'align':'left','style':'padding:10px','width':'100%'});				
+					var valueTd = $("<td/>",{'align':'left','width':'100%'});				
 					var evalue = eval("objEventDetails."+key);
 					var caption = value;
 					$(valueTd).html(evalue);
@@ -202,43 +188,37 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 			});
 			
 			var imgURL = "";
-			var objMainTable = $("<table/>",{'width':'100%','class':'eventDetailBoxWithImages'});
-			var objMainTrHead = $("<tr/>");
-			/*Commented header part*/
-			//var objth = $("<th/>",{'colspan':'2'});
-			//$(objth).html(infoTypeCategoryName);
-			//$(objth).appendTo($(objMainTrHead));
-			$(objMainTrHead).appendTo($(objMainTable));
+			var objMainTable = $("<table/>",{'class':'eventDetailBoxWithImages'});
 			var objMainTr = $("<tr/>");
-			var imageTd = $("<td/>",{'align':'left','valign':'top','style':'padding-top:10px;padding-bottom:10px','width':'60%'});
-			var textDataTd = $("<td/>",{'align':'left','valign':'top','style':'padding-top:10px;padding-bottom:10px','width':'40%'});
-			var objContent = $("<div/>",{'width':'100%','height':'245px'});
+			var imageTd = $("<td/>",{'align':'left','valign':'top','width':'60%'});
+			var textDataTd = $("<td/>",{'align':'left','valign':'top','width':'40%'});
+			var objContent = $("<div/>",{'width':'100%'});
 
 			objImage = jQuery.parseJSON(objImg.EventDetailImage);
 			imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
-			$(objContent).attr("style","background:url('"+imgURL+"');background-size: cover;width: 100%;height: 200px;");
+			$(objContent).attr("style","background:url('"+imgURL+"');background-size: cover;width: 250px;height: 200px;");
 			$(objContent).appendTo(imageTd);
 			
 			$(imageTd).appendTo($(objMainTr));
 			$(objtbl).appendTo($(textDataTd));
 			$(textDataTd).appendTo($(objMainTr));
 			$(objMainTr).appendTo($(objMainTable));
-			
+
 			objArray.push($(objMainTable));
 		});
 	}
 	else{
 		$.each(objFields, function(idx, obj){
-			var objContent = $("<div/>",{'width':'100%','height':'100%','class':'eventDetailBox'});
-			var objtbl = $("<table/>",{'width':'100%'});
+			var objContent = $("<div/>",{'class':'eventDetailBox'});
+			var objtbl = $("<table/>");
 			var objtrHead = $("<tr/>");
 			var objth = $("<th/>",{'colspan':'2'});
 			$(objth).html(infoTypeCategoryName);
 			$(objth).appendTo($(objtbl));
 			$.each(obj,function(key,value){
 				var objtr = $("<tr/>");
-				var captionObj = $("<td/>",{'align':'left','style':'padding:10px','width':'30%'});
-				var valueObj = $("<td/>",{'align':'left','style':'padding:10px','width':'70%'});				
+				var captionObj = $("<td/>",{'align':'left','width':'30%'});
+				var valueObj = $("<td/>",{'align':'left','width':'70%'});				
 				var evalue = eval("objEventDetails."+key);
 				var caption = value;
 				$(captionObj).html(caption);
@@ -254,33 +234,61 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	return objArray;
 }
 
-function fnSlider(infoType,arrImage){
+function fnSlider(infoType,arrImage,eventId,venueId){
 	var Slider = "#wowslider-container"+infoType;
+	$(Slider).attr('data-eventId',eventId);
+	$(Slider).attr('data-venueId',venueId);
+	
+	$(Slider).slick({
+		  centerMode: true,
+				centerPadding: '0px',
+				slidesToShow: 3,
+				slidesToScroll: 1,					
+				arrows:true,
+				prevArrow: '<span class="slick-prev"></span>', 
+				nextArrow: '<span class="slick-next"></span>', 
+				appendArrows: '.col-xs-9',					
+				speed: 300,
+				infinite: true,
+				  responsive: [
+					{
+					  breakpoint: 640,
+					  settings: {
+						arrows: false,
+						centerMode: false,
+						slidesToShow: 1
+					  }
+					}
+				  ]
+		});	
+
+	/*var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
+	$(objWeatherDiv).html($("#weather-background"));
+	$(Slider).slick('addSlide',	objWeatherDiv);*/
+	
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
 			var objDiv = $("<div/>",{'class':'photo'});
 			var objImg = value;
 			$(objImg).appendTo(objDiv);
-			$(objDiv).appendTo($(Slider));			
+			$(Slider).slick('addSlide',	objDiv)		
+			//$(objDiv).appendTo($(Slider));			
 		});
 	}
 	else{
 		fnBlankSlide(Slider);
 	}
-	$(Slider).jqxScrollView({ 
-			width:"100%",
-			height: 245,
-		    showButtons:true
-		});	
+	$(Slider).width($(document).width()-36);
 }
 
 function fnBlankSlide(Slider){
   	var temp_html;
 	var imageUrl;
 	imageUrl = "/flask-view-events-portlet/img/NoData.png";
-	var objDiv = $("<div/>");				
+	var objDiv = $("<div/>",{'class':'photo'});				
 	$(objDiv).html("<img src="+imageUrl+"></img>");
-	$(objDiv).appendTo($(Slider));
+	//$(objDiv).appendTo($(Slider));
+	$(Slider).slick('addSlide',	objDiv);		
 }
 
 $(document).ready(function(){
@@ -288,6 +296,9 @@ $(document).ready(function(){
 	$(".cssback").click(function(){
 		$('#one').show();
 		$('#two').hide();
+		$('.Carousel').each(function(){
+			$(this).slick('unslick');
+		});
 	});
 	//Search options
 	jQuery.expr[':'].case_insensitive_contains = function(a, i, m) {
