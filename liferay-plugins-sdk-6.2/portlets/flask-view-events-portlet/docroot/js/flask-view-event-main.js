@@ -148,6 +148,11 @@ function fnGetEventImages(eventId,venueId){
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
 				case  1: case 2:
+					var objWeatherDiv1 = $("<div/>",{'class':'photo'});
+				    var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
+				    $(objWeatherDiv).html($("#weather-background"));
+				    $(objWeatherDiv).appendTo(objWeatherDiv1);
+				    arrPreEvent.push(objWeatherDiv1);					
 			    	arrPreEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPreEvent)
 			        break;
 			    case 3:
@@ -175,7 +180,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+infoTypeCategoryName);
 	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
-			var objtbl = $("<table/>",{'class':'eventDetailBox'});
+			var objtbl = $("<table/>",{'cellpadding':'5px'});
 			$.each(objFields, function(idx, obj){
 				var objtrHead = $("<tr/>");
 				$.each(obj,function(key,value){
@@ -193,12 +198,13 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 			var objMainTable = $("<table/>",{'class':'eventDetailBoxWithImages'});
 			var objMainTr = $("<tr/>");
 			var imageTd = $("<td/>",{'align':'left','valign':'top','width':'60%'});
-			var textDataTd = $("<td/>",{'align':'left','valign':'top','width':'40%'});
+			var textDataTd = $("<td/>",{'align':'left','valign':'top','width':'40%','class':'eventDetailBox'});
 			var objContent = $("<div/>",{'width':'100%'});
 
 			objImage = jQuery.parseJSON(objImg.EventDetailImage);
 			imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
-			$(objContent).attr("style","background:url('"+imgURL+"');background-size: cover;width: 250px;height: 200px;");
+			$(objContent).attr("style","background:url('"+imgURL+"');");
+			$(objContent).addClass("slideImage");
 			$(objContent).appendTo(imageTd);
 			
 			$(imageTd).appendTo($(objMainTr));
@@ -212,7 +218,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	else{
 		$.each(objFields, function(idx, obj){
 			var objContent = $("<div/>",{'class':'eventDetailBox'});
-			var objtbl = $("<table/>");
+			var objtbl = $("<table/>",{'cellpadding':'5px'});
 			var objtrHead = $("<tr/>");
 			var objth = $("<th/>",{'colspan':'2'});
 			$(objth).html(infoTypeCategoryName);
@@ -241,22 +247,32 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 	$(Slider).attr('data-eventId',eventId);
 	$(Slider).attr('data-venueId',venueId);
 	$(Slider).slick({
-  		centerMode: true,
-  		centerPadding: '10px',
-		slidesToShow: 3,
-		slidesToScroll: 1,					
-		arrows:true,
 		speed: 300,
+	    variableWidth: true,
 		  responsive: [
 			{
-			  centerPadding: '0px',
+			  breakpoint: 3000,
+			  settings: {
+			        arrows:true,
+			        dots: true,
+				  	variableWidth: true,
+				  	centerPadding: '20px',
+				  	centerMode: true,
+			        slidesToShow: 3,
+			        slidesToScroll: 3,
+			        infinite: false
+			  },
 			  breakpoint: 640,
 			  settings: {
-				arrows: false,
-				centerMode: false,
-				slidesToShow: 1
+			        dots: true,
+				  	variableWidth: true,
+				  	centerPadding: '0px',
+				  	centerMode: true,
+			        slidesToShow: 1,
+			        slidesToScroll: 1,
+			        infinite: false
 			  }
-			}
+			}		
 		  ]
 	});	
 	
@@ -267,11 +283,6 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 			$(objImg).appendTo(objDiv);
 			$(Slider).slick('addSlide',	objDiv)		
 		});
-		var objWeatherDiv1 = $("<div/>",{'class':'photo'});
-		var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
-		$(objWeatherDiv).html($("#weather-background"));
-		$(objWeatherDiv).appendTo(objWeatherDiv1);
-		$(Slider).slick('addSlide',	objWeatherDiv1);
 	}
 	else{
 		fnBlankSlide(Slider);
@@ -305,10 +316,9 @@ function fnBlankSlide(Slider){
   	var temp_html;
 	var imageUrl;
 	imageUrl = "/flask-view-events-portlet/img/NoData.png";
-	var objDiv = $("<div/>",{'class':'photo'});				
-	$(objDiv).html("<img src="+imageUrl+"></img>");
-	//$(objDiv).appendTo($(Slider));
-	$(Slider).slick('addSlide',	objDiv);		
+	var objBlankSlide = $("<div/>",{'class':'photo'});
+	$(objBlankSlide).attr("style","background:url('"+imageUrl+"');");
+	$(Slider).slick('addSlide',	objBlankSlide);		
 }
 
 $(document).ready(function(){

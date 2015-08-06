@@ -1068,7 +1068,7 @@
         }
 
         if (_.options.variableWidth === true) {
-
+        	
             if (_.slideCount <= _.options.slidesToShow || _.options.infinite === false) {
                 targetSlide = _.$slideTrack.children('.slick-slide').eq(slideIndex);
             } else {
@@ -1729,7 +1729,26 @@
             _.$slideTrack.width(Math.ceil((_.slideWidth * _.$slideTrack.children('.slick-slide').length)));
 
         } else if (_.options.variableWidth === true) {
-            _.$slideTrack.width(5000 * _.slideCount);
+            //_.$slideTrack.width(5000 * _.slideCount);
+            var trackWidth = 0;
+
+            // *** edit
+            // *** HACK for miscalculated track width while progressive lazyLoad (wrong slide widths)
+            if (_.options.lazyLoad == "progressive" && _.$slideTrack.width() !== _.lastTrackWidth ) {
+                trackWidth = 500000;
+            }
+            // *** END edit
+
+            _.slideWidth = Math.ceil(_.listWidth / _.options.slidesToShow);
+            _.$slideTrack.children('.slick-slide').each(function(idx){
+                trackWidth += Math.ceil($(this).outerWidth(true));
+            });
+            _.$slideTrack.width(Math.ceil(trackWidth) + 1);
+
+            // *** edit
+            // *** HACK for miscalculated track width while progressive lazyLoad (wrong slide widths)
+            _.lastTrackWidth = Math.ceil(trackWidth) + 1;
+            // *** END edit            
         } else {
             _.slideWidth = Math.ceil(_.listWidth);
             _.$slideTrack.height(Math.ceil((_.$slides.first().outerHeight(true) * _.$slideTrack.children('.slick-slide').length)));
