@@ -324,10 +324,6 @@ input.btn.btn-info.cssback {
 		background-clip: border-box;
 		-webkit-background-size: auto auto;
 		background-size: auto auto;
-		height:100%;
-		width:1600px !important;
-		margin-left:45px;
-		margin-right:45px;
 	}
 
 	.col2{
@@ -360,16 +356,6 @@ input.btn.btn-info.cssback {
 		padding:15px !important; 
 	}
 	
-	 .slick-prev, .slick-next {
-	    width:60px;
-	    height:34px;
-	    background-color:#999 !important;
-	    padding:10px;
-	}
-	.slick-prev:before, .slick-next:before {
-	    content:"";
-	}
-	
 	.photo{
 		width:500px !important;
 	} 
@@ -381,21 +367,40 @@ input.btn.btn-info.cssback {
 	.slick-next {
 		margin-right: 40px;
 	}
-	
-	
-@media (min-width: 0px) and (max-width: 640px){
-	.Carousel{
-		width:370px !important;
-		margin-left:0px;
-		margin-right:0px;
+
+	.slideImage{
+		background-size: contain !important;	
+		background-repeat: no-repeat !important;
+		width: 300px;
+    	height: 300px;		
 	}
+
+@media (min-width: 0px) and (max-width: 640px){
+	.slideImage{
+		width: 200px;
+    	height: 200px;
+	}
+	
 	.col2{
 	  max-width:100% !important;
-	  max-height:210px !important;
-	  height: 210px !important; 
-	  width:370px !important;
+	  max-height:180px !important;
+	  height: 100% !important; 
+	  width:90% !important;
 	  padding-left:0px !important;
-	}		
+	}
+	
+	.eventDetailBoxWithImages{
+		width:71% !important;
+		margin-left:0px;
+		margin-right:0px;
+		
+	}
+	
+	.Carousel{
+		width:100% !important;
+		margin-left:0px;
+		margin-right:0px;
+	}	
 	
 	.slick-slide {
 		padding: 5px !important;
@@ -403,27 +408,103 @@ input.btn.btn-info.cssback {
 	
 	.SliderCaption {
 		max-width: 30px !important;
-		max-height: 210px !important;
+		max-height: 200px !important;
 		background-size: contain;
-		height: 210px !important;
-		width: 30px;
+		height: 200px !important;
+		width: 25px;
 		border: 1px solid black;
 	}		
 	
 	.eventDetailBox{
-		width:90% !important;
-		height:180px !important
+		width:95% !important;
+		height: 170px !important;
+		font-size:12px;
 	}
 	
 	.eventDetailBox table{
-		padding:10px !important;
+		padding:5px !important;
 	}		
 
-	.photo{
-		width:360px !important;
-	} 	
+	.slider .slide {width: 100% !important; height: 100%!important;}
+	.slick-slide {
+		padding:5px !important; 
+	}		
 	
-	.slider .slide {width: 360px !important; height: 100%!important;}
+	.aui [class*="span"], .aui .uneditable-input[class*="span"], .aui .row-fluid [class*="span"]{
+		float: left !important;
+	}		
+}		
+
+@media (min-width: 641px) and (max-width: 3000px){
+	.slick-dots {
+    	bottom: 9px !important;
+	}	
+	
+	.slick-dots li button {
+        font-size: 2em !important;
+    }	
+	.slick-dots li button:before {
+	    font-size: 2em !important;
+	}    
+	 .slick-prev, .slick-next {
+	    width:60px;
+	    height:34px;
+	    background-color:#999 !important;
+	    padding:10px;
+	}
+	.slick-prev:before, .slick-next:before {
+	    content:"";
+	}	
+	
+	.slideImage{
+	    width: 300px;
+	    height: 270px;
+    	background-repeat: no-repeat !important;	    
+	}
+	
+	.col2{
+	  max-width:100% !important;
+	  max-height:275px !important;
+	  height: 100% !important; 
+	  width:90% !important;
+	  padding-left:0px !important;
+	}
+	
+	.eventDetailBoxWithImages{
+		width:100% !important;
+		margin-left:0px;
+		margin-right:0px;
+	}
+	
+	.Carousel{
+		width:100% !important;
+		margin-left:45px;
+		margin-right:45px;
+	}	
+	
+	.slick-slide {
+		padding: 5px !important;
+	}		
+	
+	.SliderCaption {
+		max-width: 36px !important;
+		max-height: 275px !important;
+		background-size: contain;
+		height: 274px !important;
+		width: 35px;
+		border: 1px solid black;
+		background-repeat: no-repeat;
+	    background-position: center;
+	    background-color: #231F20;		
+	}		
+	
+	.eventDetailBox{
+		width:96% !important;
+		height:250px !important;
+		font-size:12px;
+	}
+	
+	.slider .slide {width: 100% !important; height: 100%!important;}
 	.slick-slide {
 		padding:5px !important; 
 	}		
