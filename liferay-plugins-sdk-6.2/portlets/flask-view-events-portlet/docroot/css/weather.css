@@ -189,7 +189,7 @@ div#location {
 }
 
 .weather-description, .weather-box {
-    padding: 2px 0;
+    padding-top: 2px;
 }
 
 .temp-change-button {
