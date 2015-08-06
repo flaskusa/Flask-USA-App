@@ -30,9 +30,11 @@ function showForecastSmall(list)
 		var pressure = forecast[i].main.pressure ;
 		var cloud=forecast[i].clouds.all ;	
 		var icon = forecast[i].weather[0].icon;
-		var time = parseInt(forecast[i].dt_txt);
+		var time = forecast[i].dt_txt;
+		console.log(forecast[i]);
 
-		var date = new Date(time);
+		var date = new Date(dt);
+		console.log(date);
 		var hours = date.getHours();
 		//var minutes = "0" + date.getMinutes();
 		var ampm = hours >= 12 ? 'PM' : 'AM';
@@ -40,6 +42,7 @@ function showForecastSmall(list)
 		if(hours== 0)
 			hours=12;
 		time = hours + ' ' + ampm;
+		
 		html=html+ '<div style="float: left; text-align: center; color: #fff;" >';
 		html=html+ '<div class="small_val" title="time">'+time+'</div>\
 		<img style="max-width: 85%;" alt="'+text+'" src="/flask-view-events-portlet/css/images/'+icon+'.png"/>\
