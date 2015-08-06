@@ -31,10 +31,8 @@ function showForecastSmall(list)
 		var cloud=forecast[i].clouds.all ;	
 		var icon = forecast[i].weather[0].icon;
 		var time = forecast[i].dt_txt;
-		console.log(forecast[i]);
 
 		var date = new Date(dt);
-		console.log(date);
 		var hours = date.getHours();
 		//var minutes = "0" + date.getMinutes();
 		var ampm = hours >= 12 ? 'PM' : 'AM';
