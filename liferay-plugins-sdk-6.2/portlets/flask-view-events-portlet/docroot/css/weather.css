@@ -30,6 +30,14 @@
     background-color: #fff;
 }
 
+div#tmp_icon{
+	height: 0px !important;
+}
+
+#w_icon{
+	max-width: 25% !important;
+    padding-left: 50px;
+}
 
 .fallback-background {
     background-image:url(images/weather.png);
@@ -100,6 +108,13 @@ div#weather-background{
     background-image: url(images/stardust.png);
 }
 
+.daytime {
+    background-image: url(images/day.jpg);
+}
+
+.temp-change-button {
+    color: white;
+}
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
