@@ -131,6 +131,7 @@
   <div class="location" id="location"></div>
   <div class="weather-container">
     <div id="temperature-info" class="temperature-info">
+    <div id="tmp_icon"></div>
       <div class="temperature" id="temperature"></div>
       <div class="weather-description" id="weather-description"></div>
     </div>
