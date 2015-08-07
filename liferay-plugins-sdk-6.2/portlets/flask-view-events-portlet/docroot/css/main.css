@@ -492,7 +492,8 @@ input.btn.btn-info.cssback {
 	.slideImage{
 	    width: 300px;
 	    height: 270px;
-    	background-repeat: no-repeat !important;	    
+    	background-repeat: no-repeat !important;	
+		background-size: contain !important;    
 	}
 	
 	.col2{
