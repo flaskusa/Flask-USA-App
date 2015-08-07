@@ -17,7 +17,6 @@
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
-
 <%
   com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
   long repositoryId = themeDisplay.getLayout().getGroupId();
@@ -31,7 +30,6 @@
 	});
 </aui:script>
 
-
 <body>
 <div id="viewEvents">
 <div class="table-responsive">          
@@ -41,6 +39,12 @@
 		<tr>
 	         <td class="gap">
 				<input  type="text" placeholder="SEARCH:" id="txtSearch">
+	         </td>
+	         <td>
+				<div id="reportrange" class="pull-right">
+				    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+				    <span></span> <b class="caret"></b>
+				</div>	         
 	         </td>
       	</tr>
     </tbody>

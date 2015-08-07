@@ -37,15 +37,21 @@
 <body>
 <div class="table-responsive">          
 <div id="one">
-  <table id="viewevent">
-    <tbody>
-		<tr>
-	         <td class="gap">
-				<input  type="text" placeholder="SEARCH:" id="txtSearch">
-	         </td>
-      	</tr>
-    </tbody>
-  </table>
+	<table id="viewevent">
+	    <tbody>
+			<tr>
+		         <td class="gap">
+					<input  type="text" placeholder="SEARCH:" id="txtSearch">
+		         </td>
+		         <td>
+					<div id="reportrange" class="pull-right">
+					    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+					    <span></span> <b class="caret"></b>
+					</div>	         
+		         </td>
+	      	</tr>
+	    </tbody>
+	</table>
     <div id="container1">
 		<div class="container-fluid fill" id="placeholder">
 		</div>
@@ -103,7 +109,6 @@
 	</div>	
 </div>
 
-
 	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
     <div id="fixedfooter">
 	    <table>
@@ -120,4 +125,41 @@
             </tr>
         </table>
 	</div>
+	
+<div class="hide">
+<div id="weather-background" class="default-weather">
+<div class="page-wrap">
+<div id="geo-error-message" class="geo-error-message hide">
+  <button id='close-error' class='fa fa-times close-error'></button>
+  Uh oh! It looks like we can't find your location.</div>
+<div id="front-page-description" class="front-page-description middle">
+</div>
+<div id="weather" class="weather middle hide">
+  <div class="location" id="location"></div>
+  <div class="weather-container">
+    <div id="temperature-info" class="temperature-info">
+    <div id="tmp_icon"></div>
+      <div class="temperature" id="temperature"></div>
+      <div class="weather-description" id="weather-description"></div>
+    </div>
+    <div class="weather-box">
+      <ul class="weather-info" id="weather-info">
+        <li class="weather-item humidity">Humidity: <span id="humidity"></span>%</li>
+        <!-- -->
+        <li class="weather-item wind">Wind: <span id="wind-direction"></span> <span id="wind"></span> <span id="speed-unit"></span></li>
+      </ul>
+    </div>
+    <div class="temp-change">
+      <button id="celsius" class="temp-change-button celsius">&deg;C</button>
+      <button id="fahrenheit" class="temp-change-button fahrenheit">&deg;F</button>
+    </div>
+    <div style="align: center;">
+   		<div id="forecast_small" style="font-size: 14px; text-align:center; display: inline-block;"></div>
+   	</div>
+  </div>
+</div>
+</div>
+</div>
+</div>
+	
 </body>
