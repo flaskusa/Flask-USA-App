@@ -10,11 +10,15 @@
   <header-portlet-css>/css/slick-theme.css</header-portlet-css>
   <header-portlet-css>/css/weather.css</header-portlet-css>
   <header-portlet-css>/css/flask-map.css</header-portlet-css>
+  <header-portlet-css>/css/daterangepicker.css</header-portlet-css>
     <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/flask-view-map.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/slick.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/weather.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/moment.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/daterangepicker.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/jquery.ba-bbq.js</footer-portlet-javascript>
      <css-class-wrapper>flask-view-events-portlet</css-class-wrapper>
  </portlet>
  <portlet>
@@ -25,11 +29,15 @@
   <header-portlet-css>/css/slick-theme.css</header-portlet-css>
   <header-portlet-css>/css/weather.css</header-portlet-css>
   <header-portlet-css>/css/flask-map.css</header-portlet-css>
+  <header-portlet-css>/css/daterangepicker.css</header-portlet-css>
     <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/flask-view-map.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/slick.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/weather.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/moment.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/daterangepicker.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/jquery.ba-bbq.js</footer-portlet-javascript>
      <css-class-wrapper>flask-view-user-events-portlet</css-class-wrapper>
  </portlet>
 	<role-mapper>
