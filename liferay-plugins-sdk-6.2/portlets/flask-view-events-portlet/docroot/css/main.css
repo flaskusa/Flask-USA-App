@@ -300,6 +300,7 @@ input.btn.btn-info.cssback {
 	  -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
 	  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
 	  text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
+	  margin: 5px !important;
 	}
 
 	.eventDetailBoxWithImages {
@@ -387,10 +388,10 @@ input.btn.btn-info.cssback {
 	}		
 	
 	.eventDetailBox{
-		width:93% !important;
+		width:99% !important;
 		height: 170px !important;
 		font-size:12px;
-		min-width: 300px !important; 
+		min-width: 300px !important;
 	}
 	
 	.slider .slide {height: 100%!important;}
@@ -411,14 +412,14 @@ input.btn.btn-info.cssback {
 	}
 	
 	.control-label-color {
-    	font-size: 14px !important;
+    	font-size: 13px !important;
     	/* height: 25px; */
     	color: #FB9A33;
     	margin-left: 6px;
 	}	
 
 	.control-label-nocolor {
-    	font-size: 13px !important;
+    	font-size: 12px !important;
     	height: 25px;
     	margin-left: 6px;
 	}
@@ -430,6 +431,15 @@ input.btn.btn-info.cssback {
 }		
 
 @media (min-width: 641px) and (max-width: 3000px){
+	.slick-dots li button:before {
+    	/* font-family: 'slick'; */
+    	font-size: 30px !important;
+    }	
+	.slick-dots {
+		margin: auto !important;
+		bottom: 20px !important;
+	}	
+		
 	.SliderCaption
 	{
 	  max-width:36px !important;
@@ -568,4 +578,55 @@ input.btn.btn-info.cssback {
     margin-top: 12px;
 }
 	
-	
+.btn-calendar{
+	font-size: 14px !Important;
+	margin-top: 0px !Important;
+	margin-right: 0px !Important;
+	padding: 5px 19px !Important;
+}	
+
+.daterangepicker .ranges li.active, .daterangepicker .ranges li:hover {
+    background: #ff9900  !Important;
+    border: 1px solid #B56D00 !Important;
+	color: #fff !important;
+}
+
+.daterangepicker .ranges li {
+    color: #6B6B6B !important;
+}
+
+#reportrange{
+	background: #fff; 
+	cursor: pointer; 
+	padding: 12px 0px 12px 4px; 
+	border: 1px solid #ccc; 
+	width: 95% !important;
+	font-size: 14px !important;
+}
+
+.aui .btn-info:hover, .aui .btn-info:focus, .aui .btn-info:active, .aui .btn-info.active, .aui .btn-info.disabled, .aui .btn-info[disabled] {
+    color: #040404 !important;
+    background-color: #BDBDBD !important;
+}
+
+.daterangepicker .input-mini {
+    padding: 0px 0px !important;
+    padding-left: 30px !important;
+    width: 100px !important;
+}
+
+.daterangepicker .input-mini.active {
+    border: 1px solid #0C0C0C !important;
+}
+
+.daterangepicker .left .daterangepicker_input {
+    padding-right: 0px !important;
+}
+
+.daterangepicker .calendar-table {
+    padding: 0px !important;
+}
+
+.daterangepicker .calendar th, .daterangepicker .calendar td {
+    min-width: 20px !important;
+}
