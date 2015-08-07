@@ -277,9 +277,9 @@ input.btn.btn-info.cssback {
   	background-position: center center;
 }
 
-.control-label-color,.control-label-nocolor {
-	height: 25px !important;
-}
+	.control-label-color,.control-label-nocolor {
+		height: 25px !important;
+	}
 
 	.eventDetailBox {
 	  -webkit-box-sizing: content-box;
@@ -306,11 +306,11 @@ input.btn.btn-info.cssback {
 	  -webkit-box-sizing: content-box;
 	  -moz-box-sizing: content-box;
 	  box-sizing: content-box;
-	  padding: 5px;
+	  /*padding: 5px;*/
 	  overflow: hidden;
 	  border: none;
-	  font: normal 16px/1 "Coda", Helvetica, sans-serif;
-	  color: rgba(255,153,0,1);
+      font: normal 14px/1 "Coda", Helvetica, sans-serif;
+       /* color: #ff9900; */
 	}
 
 	.Carousel{
@@ -325,15 +325,111 @@ input.btn.btn-info.cssback {
 		-webkit-background-size: auto auto;
 		background-size: auto auto;
 	}
-
-	.col2{
-	  max-width:100% !important;
-	  max-height:300px !important;
-	  height: 250px; 
-	  width:1690px !important;
-	  padding-left:25px !important;
-	}
 		
+	.fullwidth {
+		width: 100%;
+		margin-left: auto;
+		margin-right: auto;
+		max-width: initial;
+	}
+
+@media (min-width: 0px) and (max-width: 640px){
+	/*.slick-slider {
+    	position: fixed !important;
+	}*/	
+	.slick-dots li button:before {
+    	/* font-family: 'slick'; */
+    	font-size: 30px !important;
+    }	
+	.slick-dots {
+		margin: auto !important;
+		bottom: 20px !important;
+	}	
+	
+	.slideImage{
+		width: 200px;
+		height: 150px;
+	    background-repeat: no-repeat;
+	    background-size: cover !important;		
+	}
+	
+	.col2{
+		  max-width:100% !important;
+		  max-height:180px !important;
+		  height: 100% !important; 
+		  width:90% !important;
+		  padding-left:0px !important;
+	}
+	
+	.eventDetailBoxWithImages{
+		width: 99% !important;
+		margin-left:0px;
+		margin-right:0px;
+	    font: normal 12px/1 "Coda", Helvetica, sans-serif;
+	    /* color: #ff9900; */
+	    height: 200px !important;
+	}
+	
+	.Carousel{
+		width: 100% !important;
+		margin-left:0px;
+		margin-right:0px;
+	}	
+	
+	.SliderCaption {
+		max-width: 30px !important;
+		max-height: 200px !important;
+		background-size: contain;
+		background-position: center;
+		height: 200px !important;
+		width: 25px !important;
+		border-bottom: 1px solid white;
+	}		
+	
+	.eventDetailBox{
+		width:93% !important;
+		height: 170px !important;
+		font-size:12px;
+		min-width: 300px !important; 
+	}
+	
+	.slider .slide {height: 100%!important;}
+	/*.slick-slide {
+		padding:5px !important; 
+	}*/		
+	
+	.aui [class*="span"], .aui .uneditable-input[class*="span"], .aui .row-fluid [class*="span"]{
+		float: left !important;
+	}	
+	
+	.slick-prev {
+		display:none !important;
+	}
+	
+	.slick-next {
+		display:none !important;
+	}
+	
+	.control-label-color {
+    	font-size: 14px !important;
+    	/* height: 25px; */
+    	color: #FB9A33;
+    	margin-left: 6px;
+	}	
+
+	.control-label-nocolor {
+    	font-size: 13px !important;
+    	height: 25px;
+    	margin-left: 6px;
+	}
+	
+	.eventLogo {
+    	width: 50px !important;
+    	height: 50px !important;
+    }	
+}		
+
+@media (min-width: 641px) and (max-width: 3000px){
 	.SliderCaption
 	{
 	  max-width:36px !important;
@@ -342,14 +438,17 @@ input.btn.btn-info.cssback {
 	  height: 250px; 
 	  width: 36px !important;
 	  border: 1px solid black;	
+	  background-position: center;
+	}
+		
+	.slick-prev {
+		margin-left: 40px;
 	}
 	
-	.fullwidth {
-		width: 100%;
-		margin-left: auto;
-		margin-right: auto;
-		max-width: initial;
+	.slick-next {
+		margin-right: 40px;
 	}
+	
 	.slider {margin: 0;}
 	.slider .slide {width: 500px; height: 100%;}
 	.slick-slide {
@@ -359,83 +458,7 @@ input.btn.btn-info.cssback {
 	.photo{
 		width:500px !important;
 	} 
-	
-	.slick-prev {
-		margin-left: 40px;
-	}
-	
-	.slick-next {
-		margin-right: 40px;
-	}
-
-	.slideImage{
-		background-size: contain !important;	
-		background-repeat: no-repeat !important;
-		width: 300px;
-    	height: 300px;		
-	}
-
-@media (min-width: 0px) and (max-width: 640px){
-	.slideImage{
-		width: 200px;
-    	height: 200px;
-	}
-	
-	.col2{
-	  max-width:100% !important;
-	  max-height:180px !important;
-	  height: 100% !important; 
-	  width:90% !important;
-	  padding-left:0px !important;
-	}
-	
-	.eventDetailBoxWithImages{
-		width:71% !important;
-		margin-left:0px;
-		margin-right:0px;
 		
-	}
-	
-	.Carousel{
-		width:100% !important;
-		margin-left:0px;
-		margin-right:0px;
-	}	
-	
-	.slick-slide {
-		padding: 5px !important;
-	}		
-	
-	.SliderCaption {
-		max-width: 30px !important;
-		max-height: 200px !important;
-		background-size: contain;
-		height: 200px !important;
-		width: 25px;
-		border: 1px solid black;
-	}		
-	
-	.eventDetailBox{
-		width:95% !important;
-		height: 170px !important;
-		font-size:12px;
-	}
-	
-	.eventDetailBox table{
-		padding:5px !important;
-	}		
-
-	.slider .slide {width: 100% !important; height: 100%!important;}
-	.slick-slide {
-		padding:5px !important; 
-	}		
-	
-	.aui [class*="span"], .aui .uneditable-input[class*="span"], .aui .row-fluid [class*="span"]{
-		float: left !important;
-	}		
-}		
-
-@media (min-width: 641px) and (max-width: 3000px){
 	.slick-dots {
     	bottom: 9px !important;
 	}	
