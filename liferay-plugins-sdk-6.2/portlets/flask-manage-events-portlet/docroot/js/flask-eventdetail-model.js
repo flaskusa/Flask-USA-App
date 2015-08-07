@@ -36,7 +36,7 @@ _eventDetailModel.DATA_MODEL= {
 				 { name: 'city', type: 'string'},
 				 { name: 'stateId', type: 'long' },
 				 { name: 'countryId', type: 'long' },
-				 { name: 'lattitude', type: 'string'},
+				 { name: 'latitude', type: 'string'},
 				 { name: 'longitude', type: 'string'},
 				 { name: 'phone', type: 'string'},
 				 { name: 'website', type: 'string'},
