@@ -1,5 +1,8 @@
 var alllist = [];
 var map;
+var lat_marker = [];
+var lng_marker = [];
+var addr_name = [];
 
 function formatUnixToTime(tdate)
 {
@@ -132,6 +135,12 @@ function fnGetEventImages(eventId,venueId){
 			objEventDetails = data.EventDetails;
 			$.each(objEventDetails, function(idx, obj) {
 				objEventDetail = jQuery.parseJSON(obj.EventDetail);
+				if(objEventDetail.latitude != "")
+					{
+						lat_marker.push(objEventDetail.latitude);
+						lng_marker.push(objEventDetail.longitude);
+						addr_name.push(objEventDetail.infoTitle);
+					}
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
 				case  1: case 2:
@@ -285,6 +294,8 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 	 		$('#one').hide();		 
 	 		$('#two').hide();
 	 		$('#three').show();
+			// map initialization
+	 		initialize();
 	 		window.location.hash = '#Details';
 	 		$(".menuItem").slick({
 	 			arrows:false,

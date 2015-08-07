@@ -2,8 +2,6 @@ var geocoder;
 var map;
 var markers = Array();
 var infos = Array();
-var latitude = 42.3400;
-var longitude = -83.0456;
 
 function initialize() {
     // prepare Geocoder
@@ -67,14 +65,38 @@ function findPlaces() {
 // create markers (from 'findPlaces' function)
 function createMarkers(results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-
-        // if we have found something - clear map (overlays)
-        clearOverlays();
-
+    	clearOverlays();
         // and create new markers by search result
         for (var i = 0; i < results.length; i++) {
-            createMarker(results[i]);
+            if(createMarker(results[i])){
+            	var mark = new google.maps.Marker({
+			        position: results[i].geometry.location,
+			        map: map,
+			        title: results[i].name,
+			        icon: '/flask-view-events-portlet/img/flask-marker.png'
+			    });
+            }
+            else{
+				var mark = new google.maps.Marker({
+			        position: results[i].geometry.location,
+			        map: map,
+			        title: results[i].name,
+			    });
+            }
+            markers.push(mark);
+            var infowindow = new google.maps.InfoWindow({
+                content: '<img src="' + results[i].icon + '" /><font style="color:#000;">' + results[i].name + 
+                '<br />Rating: ' + results[i].rating + '<br />Vicinity: ' + results[i].vicinity + '</font>'
+            });
+
+            // add event handler to current marker
+            google.maps.event.addListener(mark, 'click', function() {
+                clearInfos();
+                infowindow.open(map,mark);
+            });
+            infos.push(infowindow);        
         }
+        // prepare info window
     } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
         alert('Sorry, nothing is found');
     }
@@ -82,29 +104,18 @@ function createMarkers(results, status) {
 
 // creare single marker function
 function createMarker(obj) {
-
-    // prepare new Marker object
-    var mark = new google.maps.Marker({
-        position: obj.geometry.location,
-        map: map,
-        title: obj.name,
-        icon: '/flask-view-events-portlet/img/flask-marker.png'
-    });
-    markers.push(mark);
-
-    // prepare info window
-    var infowindow = new google.maps.InfoWindow({
-        content: '<img src="' + obj.icon + '" /><font style="color:#000;">' + obj.name + 
-        '<br />Rating: ' + obj.rating + '<br />Vicinity: ' + obj.vicinity + '</font>'
-    });
-
-    // add event handler to current marker
-    google.maps.event.addListener(mark, 'click', function() {
-        clearInfos();
-        infowindow.open(map,mark);
-    });
-    infos.push(infowindow);
+	var isSubscribed = false;
+	var coords = new google.maps.LatLng(
+			obj['geometry']['location'].lat(),
+			obj['geometry']['location'].lng()
+		);
+	for(var i=0; i<lat_marker.length; i++)
+		{
+			console.log((parseFloat(lat_marker[i]).toFixed(2) == parseFloat(coords.lat()).toFixed(2))&&(parseFloat(lng_marker[i]).toFixed(2) == parseFloat(coords.lng()).toFixed(2))&&(obj.name==addr_name[i]));
+			if((parseFloat(lat_marker[i]).toFixed(2) == parseFloat(coords.lat()).toFixed(2))&&(parseFloat(lng_marker[i]).toFixed(2) == parseFloat(coords.lng()).toFixed(2))&&(obj.name==addr_name[i]))
+			{
+				isSubscribed = true;
+			}
+		}
+	return isSubscribed;
 }
-
-// initialization
-google.maps.event.addDomListener(window, 'load', initialize);
