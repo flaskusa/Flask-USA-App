@@ -53,6 +53,7 @@ function renderEventList(tdata) {
 		 		$('#one').hide();
 		 		$("#weather-background").show();
 		 		fnGetEventImages($(this).attr("data-id"),$(this).attr("data-venueId"));
+		 		window.location.hash = '#Gallery';
 		 	});
 		 	if(Liferay.ThemeDisplay.isSignedIn()){
 			 	$(div_heart).click(function(){
@@ -63,39 +64,25 @@ function renderEventList(tdata) {
 		 	}
 	    }
 	 	$(divRow).appendTo($("#placeholder"));
-}
+	 	
+	 	$(function() {
+		    function cb(start, end) {
+		        $('#reportrange span').html('Today');//start.format('MMM D, YYYY') + ' - ' + end.format('MMM D, YYYY')
+		    }
+		    cb(moment().subtract(29, 'days'), moment());
 
-function fnRenderEvents(repositoryId,parentFolderId,folderName,eventName){
-	var folderId;
-	var flaskRequest = new Request();
-		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
-		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_FOLDERS, params, 
-			function (data){
-				folderId = data.responseJson.folderId;
-				fnGetEventFolder(repositoryId,folderId,eventName);
-			} ,
-			function (data){
-				folderId = 0;
-			});
-		return folderId;
-}
-
-function fnGetEventFolder(repositoryId,parentFolderId,folderName){
-	var folderId;
-	var flaskRequest = new Request();
-		params= {'repositoryId': repositoryId, 'parentFolderId': parentFolderId, 'name': folderName};
-		flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_FOLDERS, params, 
-			function (data){
-					folderId = data.responseJson.folderId;
-					fnRenderSliders(repositoryId,folderId,"Pre-Event",2);
-					fnRenderSliders(repositoryId,folderId,"During-Event",3);
-					fnRenderSliders(repositoryId,folderId,"Post-Event",4);
-			} ,
-			function (data){
-				folderId = 0;
-			});
-		
-		return folderId;
+		    $('#reportrange').daterangepicker({
+		        ranges: {
+		           'Today': [moment(), moment()],
+		           'Next': [moment().add(1, 'days'), moment().subtract(1, 'days')],
+		           'Next 7 days': [moment().add(6, 'days'), moment()],
+		           'Next 30 days': [moment().startOf('month'), moment().endOf('month')],
+		           'Next 60 days': [moment().subtract(1, 'days'), moment().subtract(1, 'days')]
+		        },
+		        "applyClass": "btn btn-info btn-calendar",
+		        "cancelClass": "btn btn-info btn-calendar"
+		    }, cb);
+		});	 	
 }
 
 function fnShowEventLogo(imageUUID, imageGroupId,container ,editable){
@@ -298,6 +285,7 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 	 		$('#one').hide();		 
 	 		$('#two').hide();
 	 		$('#three').show();
+	 		window.location.hash = '#Details';
 	 		$(".menuItem").slick({
 	 			arrows:false,
 	 			centerMode: true,
@@ -340,6 +328,30 @@ $(document).ready(function(){
 		$(".row-fluid .span9 .lbldiv:not(:case_insensitive_contains("+$(this).val()+"))").closest(".row-fluid").hide(500, function() {});		
 	});
 	$("#sign-in").hide();
+	window.location.hash = '#List';
+	
+	$(window).hashchange( function(){
+		var hash = location.hash;
+		switch(hash) {
+	    case "#List":
+			$('#one').show();
+			$('#two').hide();
+			$('#three').hide();
+			break;
+	    case "#Gallery":
+			$('#one').hide();
+			$('#two').show();
+			$('#three').hide();
+	        break;
+	    case "#Details":
+			$('#one').hide();
+			$('#two').hide();
+			$('#three').show();
+	        break;	        
+	    default:
+	    	//alert("This is default");
+		}		
+	})
 });
 
 function fnStopProgress(){
@@ -363,12 +375,12 @@ function initEventList(){
 	var param = {};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT , param, 
-					function (data){
-						renderEventList(data);
-					} ,
-					function (data){
-						console.log("Error ins getting event list" + data );
-					});
+		function (data){
+			renderEventList(data);
+		} ,
+		function (data){
+			console.log("Error ins getting event list" + data );
+	});
 }
 
 function addUserEvent(eventId){
