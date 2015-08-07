@@ -288,8 +288,8 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 	var lastClick = new Date();
 	var lastRow = -1;
 	$(Slider).click(function(event){
-		click = new Date();
-	    if (click - lastClick < 300) {
+		/*click = new Date();
+	    if (click - lastClick < 300) {*/
 	    	$("#spinningSquaresG").show();
 	 		$('#one').hide();		 
 	 		$('#two').hide();
@@ -306,8 +306,8 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 	 		});
 	 		$("#spinningSquaresG").hide();
 	 		
-	    }
-	    lastClick = new Date();
+	    /*}
+	    lastClick = new Date();*/
 	});	
 }
 
