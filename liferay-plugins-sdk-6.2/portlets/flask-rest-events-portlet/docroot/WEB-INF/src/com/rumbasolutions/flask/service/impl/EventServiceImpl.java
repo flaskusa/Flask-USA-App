@@ -230,7 +230,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	@Override
 	public EventDetail addEventDetail(long eventId , long infoTypeId, long infoTypeCategoryId, 
 		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
-		String city, long stateId, long countryId, String lattitude, String longitude, 
+		String city, long stateId, long countryId, String latitude, String longitude, 
 		String phone, String website, Double cost, 
 		String hoursOfOperation,
 		ServiceContext  serviceContext){
@@ -248,7 +248,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setCity(city);
 			eventDetail.setStateId(stateId);
 			eventDetail.setCountryId(countryId);
-			eventDetail.setLatitude(lattitude);
+			eventDetail.setLatitude(latitude);
 			eventDetail.setLongitude(longitude);
 			eventDetail.setPhone(phone);
 			eventDetail.setWebsite(website);
@@ -272,7 +272,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	@Override
 	public EventDetail updateEventDetail(long eventDetailId , long infoTypeId, long infoTypeCategoryId, 
 		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
-		String city, long stateId, long countryId, String lattitude, String longitude, String phone, 
+		String city, long stateId, long countryId, String latitude, String longitude, String phone, 
 		String website, Double cost, String hoursOfOperation,
 		ServiceContext  serviceContext){
 		EventDetail eventDetail=null;
@@ -288,7 +288,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setCity(city);
 			eventDetail.setStateId(stateId);
 			eventDetail.setCountryId(countryId);
-			eventDetail.setLatitude(lattitude);
+			eventDetail.setLatitude(latitude);
 			eventDetail.setLongitude(longitude);
 			eventDetail.setPhone(phone);
 			eventDetail.setWebsite(website);

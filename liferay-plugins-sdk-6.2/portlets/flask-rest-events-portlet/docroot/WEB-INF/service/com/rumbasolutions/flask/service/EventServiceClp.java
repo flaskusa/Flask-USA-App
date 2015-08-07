@@ -470,7 +470,7 @@ public class EventServiceClp implements EventService {
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext) {
@@ -502,7 +502,7 @@ public class EventServiceClp implements EventService {
 						
 					countryId,
 						
-					ClpSerializer.translateInput(lattitude),
+					ClpSerializer.translateInput(latitude),
 						
 					ClpSerializer.translateInput(longitude),
 						
@@ -538,7 +538,7 @@ public class EventServiceClp implements EventService {
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext) {
@@ -570,7 +570,7 @@ public class EventServiceClp implements EventService {
 						
 					countryId,
 						
-					ClpSerializer.translateInput(lattitude),
+					ClpSerializer.translateInput(latitude),
 						
 					ClpSerializer.translateInput(longitude),
 						
