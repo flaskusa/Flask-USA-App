@@ -1,13 +1,12 @@
 #gmap_canvas {
     height: 380px !important;
-    width:1600px !important;
+    width:100% !important;
     position: relative;
 }
 
 @media (min-width: 0px) and (max-width: 640px){
 	#gmap_canvas {
-	    height: 350px !important;
-	    width:410px !important;
+	    height: 250px !important;
 	    position: relative;
 	}
 }
