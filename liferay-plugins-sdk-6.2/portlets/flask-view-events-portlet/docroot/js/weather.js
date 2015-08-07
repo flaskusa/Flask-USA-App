@@ -139,7 +139,7 @@ WeatherInfo = {
         WeatherInfo.getDayOrNight(time, data.sys.sunrise, data.sys.sunset);
         condition = data.weather[0].main;
         $('#weather-background').removeClass();
-        $('#weather-background').addClass(condition);
+        $('#weather-background').addClass(condition.toLowerCase());
         $('#weather-background').addClass(w.dayOrNight);
     },
 
