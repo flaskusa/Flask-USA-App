@@ -197,8 +197,8 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 			var imgURL = "";
 			var objMainTable = $("<table/>",{'class':'eventDetailBoxWithImages'});
 			var objMainTr = $("<tr/>");
-			var imageTd = $("<td/>",{'align':'left','valign':'top','width':'60%'});
-			var textDataTd = $("<td/>",{'align':'left','valign':'top','width':'40%','class':'eventDetailBox'});
+			var imageTd = $("<td/>",{'align':'left','valign':'top'});
+			var textDataTd = $("<td/>",{'align':'left','valign':'top'});
 			var objContent = $("<div/>",{'width':'100%'});
 
 			objImage = jQuery.parseJSON(objImg.EventDetailImage);
@@ -267,7 +267,7 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 			        dots: true,
 				  	variableWidth: true,
 				  	centerPadding: '0px',
-				  	centerMode: true,
+				  	centerMode: false,
 			        slidesToShow: 1,
 			        slidesToScroll: 1,
 			        infinite: false
