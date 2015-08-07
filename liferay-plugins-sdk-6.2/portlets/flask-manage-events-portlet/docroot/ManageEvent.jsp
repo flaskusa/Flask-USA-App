@@ -106,7 +106,8 @@ function initialize(portletId, portlet){
 			<h3><span class="title-text"></span></h3>
 			<form id="eventDetailsForm" style="display:none">
 			  <input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
-
+			  <input id="latitude" type="hidden" name="latitude" value="">
+			  <input id="longitude" type="hidden" name="longitude" value="">
 			  <div class="form-group">
 				    <label class="control-label" for="infoTypeId">Info Type:</label>
 					<div class="controls">
