@@ -74,7 +74,7 @@ div#weather-background{
 .clouds {
     background-color: #3498DB;
 }
-.clearsky, .default-weather {
+.clear, .default-weather {
     background-color: #6FC2D4;
 }
 .extreme-weather {
@@ -100,6 +100,11 @@ div#weather-background{
 .clearsky.nighttime {
     background-color: #222;
 }
+
+.clear.nighttime {
+    background-color: #222;
+}
+
 .extreme-weather.nighttime {
     background-color: #491611;
 }
