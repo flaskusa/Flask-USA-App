@@ -240,33 +240,35 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 
 function fnSlider(infoType,arrImage,eventId,venueId){
 	var Slider = "#wowslider-container"+infoType;
+
+	if($(Slider).hasClass("slick-initialized"))	{
+		$(Slider).slick('unslick');
+		$(Slider).html("");
+	}
+	
 	$(Slider).attr('data-eventId',eventId);
 	$(Slider).attr('data-venueId',venueId);
 	$(Slider).slick({
 		speed: 300,
 	    variableWidth: true,
+	    infinite: false,
+	    dots: true,
 		  responsive: [
 			{
 			  breakpoint: 3000,
 			  settings: {
 			        arrows:true,
-			        dots: true,
-				  	variableWidth: true,
 				  	centerPadding: '20px',
 				  	centerMode: true,
 			        slidesToShow: 3,
 			        slidesToScroll: 3,
-			        infinite: false
 			  },
 			  breakpoint: 640,
 			  settings: {
-			        dots: true,
-				  	variableWidth: true,
-				  	centerPadding: '0px',
+				  	centerPadding: '10px',
 				  	centerMode: false,
 			        slidesToShow: 1,
 			        slidesToScroll: 1,
-			        infinite: false
 			  }
 			}		
 		  ]
