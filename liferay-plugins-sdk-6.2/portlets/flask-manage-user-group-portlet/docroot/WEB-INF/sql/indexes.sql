@@ -1,0 +1,1 @@
+create index IX_8B5198DB on flaskgroup_FlaskGroupUsers (groupId);

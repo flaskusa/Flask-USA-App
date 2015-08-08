@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.rumbasolutions.flask.model.FlaskGroup">
+		<field name="groupId" type="long" />
+		<field name="groupName" type="String" />
+		<field name="groupDescription" type="String" />
+		<field name="createdDate" type="String" />
+		<field name="createdBy" type="String" />
+		<field name="isActive" type="int" />
+		<field name="isDelete" type="int" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.FlaskGroupUsers">
+		<field name="groupUserId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="isAdmin" type="int" />
+	</model>
+</model-hints>

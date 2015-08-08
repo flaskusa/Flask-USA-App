@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.rumbasolutions.flask.service.FlaskGroupLocalService" class="com.rumbasolutions.flask.service.impl.FlaskGroupLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.FlaskGroupService" class="com.rumbasolutions.flask.service.impl.FlaskGroupServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.FlaskGroupPersistence" class="com.rumbasolutions.flask.service.persistence.FlaskGroupPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.persistence.FlaskGroupFinder" class="com.rumbasolutions.flask.service.persistence.FlaskGroupFinderImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.FlaskGroupUsersLocalService" class="com.rumbasolutions.flask.service.impl.FlaskGroupUsersLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.FlaskGroupUsersService" class="com.rumbasolutions.flask.service.impl.FlaskGroupUsersServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.FlaskGroupUsersPersistence" class="com.rumbasolutions.flask.service.persistence.FlaskGroupUsersPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.persistence.FlaskGroupUsersFinder" class="com.rumbasolutions.flask.service.persistence.FlaskGroupUsersFinderImpl" parent="basePersistence" />
+</beans>

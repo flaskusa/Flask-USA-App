@@ -1,0 +1,12 @@
+.se-pre-con {
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  background: url(/flask-manage-advertisement-portlet/img/Preloader_21.gif) center no-repeat white; }
+
+.row-fluid {
+  word-wrap: break-word; }
+

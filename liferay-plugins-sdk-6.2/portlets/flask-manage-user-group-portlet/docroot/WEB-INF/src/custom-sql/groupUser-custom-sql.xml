@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="deleteGroupUser">
+		<![CDATA[
+			DELETE FROM flaskgroup_FlaskGroupUsers WHERE groupId=? AND userId=?
+		]]>
+	</sql>
+	<sql id="deleteGroupUsers">
+		<![CDATA[
+			DELETE FROM flaskgroup_FlaskGroupUsers WHERE groupId=? AND userId IN (?)
+		]]>
+	</sql>
+	<sql id="getGroupUsersListByGroupId">
+		<![CDATA[
+			SELECT fgu.groupUserId, fgu.groupId, fgu.userId, fgu.userName, fgu.isAdmin FROM flaskgroup_FlaskGroupUsers fgu WHERE fgu.groupId=?
+		]]>
+	</sql>
+	<sql id="addGroupOwner">
+		<![CDATA[
+			UPDATE flaskgroup_FlaskGroupUsers SET isAdmin=1 WHERE groupId=? AND userId=?;
+		]]>
+	</sql>
+</custom-sql>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.rumbasolutions.flask">
+	<namespace>flaskgroup</namespace>
+
+	<!-- Info type is event/venue information type General, Pre Event, During 
+		Event, Post Event -->
+
+	<entity name="FlaskGroup" local-service="true"	remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="groupId" type="long" primary="true" />
+
+		<column name="groupName" type="String" />
+		<column name="groupDescription" type="String" />
+		<column name="createdDate" type="String" />
+		<column name="createdBy" type="String" />
+		<column name="isActive" type="int" />
+		<column name="isDelete" type="int" />
+		
+	</entity>
+
+	<entity name="FlaskGroupUsers" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+		<column name="groupUserId" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="groupId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="isAdmin" type="int" />
+
+		<!-- Finder methods -->
+		<finder name="UserGroups" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+	</entity>
+</service-builder>

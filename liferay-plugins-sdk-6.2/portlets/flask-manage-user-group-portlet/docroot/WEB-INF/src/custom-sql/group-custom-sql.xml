@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="getGroupList">
+		<![CDATA[
+			select fg.groupId, fg.groupName, fg.groupDescription, fg.createdDate, fg.createdBy, fg.isDelete, fg.isActive 
+			From flaskgroup_FlaskGroupUsers fgu INNER JOIN flaskgroup_FlaskGroup fg 
+			ON fgu.groupId = fg.groupId 
+			where fgu.userId=? AND fgu.isAdmin=? AND fg.isActive=1 AND fg.isDelete=0
+		]]>
+	</sql>
+	<sql id="getAllMyGroups">
+		<![CDATA[
+			SELECT fg.groupId,fg.groupName,fg.groupDescription,fg.createdDate,fg.createdBy,fg.isActive,fg.isDelete
+			,fgu.isAdmin FROM flaskgroup_FlaskGroupUsers fgu INNER JOIN flaskgroup_FlaskGroup fg 
+			ON fgu.groupId = fg.groupId 
+			WHERE fgu.userId=? AND fg.isActive=1 AND fg.isDelete=0;
+		]]>
+	</sql>
+	<sql id="deleteGroup">
+		<![CDATA[
+			UPDATE flaskgroup_FlaskGroup set isDelete=1 where groupId=?
+		]]>
+	</sql>
+	<sql id="deleteGroups">
+		<![CDATA[
+			UPDATE flaskgroup_FlaskGroup set isDelete=1 where groupId in (?)
+		]]>
+	</sql>
+	<sql id="deActivateGroup">
+		<![CDATA[
+			UPDATE flaskgroup_FlaskGroup set isActive=0 where groupId=?
+		]]>
+	</sql>
+</custom-sql>
