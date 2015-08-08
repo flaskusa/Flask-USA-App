@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.rumbasolutions.flask">
+	<namespace>flaskads</namespace>
+
+	<entity name="AdCustomer" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+		
+		<column name="customerId" type="long" primary="true" />
+
+		<!-- Audit  fields -->
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+        
+		<!-- Other fields -->
+		<column name="customerName" type="String" />
+		<column name="businessType" type="String" />
+		<column name="addrLine1" type="String" />
+		<column name="addrLine2" type="String" />
+		<column name="city" type="String" />
+		<column name="zipCode" type="String" />
+		<column name="stateId" type="long" />
+		<column name="countryId" type="long" />
+		
+		<column name="email" type="String" />
+		<column name="websiteURL" type="String" />
+		<column name="businessPhoneNumber" type="String" />
+		<column name="contactPersonName" type="String" />
+		<column name="contactPersonNumber" type="String" />
+		
+		
+		<finder name="customerName" return-type="Collection">
+			<finder-column name="customerName" />
+		</finder>
+		
+		<finder name="contactPersonName" return-type="Collection">
+			<finder-column name="contactPersonName" />
+		</finder>
+
+
+	</entity>
+
+	<entity name="AdCampaign" local-service="true" remote-service="true">
+		<!-- PK fields -->
+		<column name="campaignId" type="long" primary="true" />
+		
+		<!-- Audit fields -->
+		<column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+        
+        <!-- Other fields -->
+		<column name="campaignName" type="String" />
+		<column name="customerId" type="long"/>
+		<column name="displayGeneral" type="boolean" />
+		<column name="displayPreEvent" type="boolean" />
+		<column name="displayDuringEvent" type="boolean" />
+		<column name="displayPostEvent" type="boolean" />
+		<column name="frequencyPerHour" type="long" />
+		<order by="asc">
+			<order-column name="campaignName" />
+		</order>
+		
+		<!-- Finder methods -->
+        <finder name="customerId" return-type="Collection">
+			<finder-column name="customerId" />
+		</finder>
+	</entity>
+	
+	<entity name="CampaignImage" local-service="true" remote-service="true">
+	
+		<!-- PK fields -->
+		<column name="campaignImageId" type="long" primary="true" />
+		
+		<!-- Audit fields -->
+		<column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+		
+		<!-- Other fields -->		
+		<column name="imageTitle" type="String" />
+        <column name="imageDesc" type="String" />
+        <column name="imageUUID" type="String" />
+        <column name="imageGroupId" type="long" />
+        
+		<finder name="imageUUID" return-type="Campaign_Images">
+			<finder-column name="imageUUID" />
+		</finder>
+	</entity>
+	
+	<entity name="CampaignEvent" local-service="true" remote-service="true">
+		<!-- PK fields -->
+		<column name="campaignEventId" type="long" primary="true" />
+		
+		<!-- Audit fields -->
+		<column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+        
+        
+		<!-- Other fields -->
+		<column name="campaignId" type="long" />
+		<column name="eventId" type="long"/>
+		
+		       <!-- Finder methods -->
+        <finder name="campaignId" return-type="Collection">
+			<finder-column name="campaignId" />
+		</finder>
+		
+		<finder name="eventId" return-type="Collection">
+			<finder-column name="eventId" />
+		</finder>
+	</entity>
+	
+</service-builder>

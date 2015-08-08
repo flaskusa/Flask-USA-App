@@ -1,0 +1,316 @@
+    
+var GRID_PARAM_CAMPAIGN = {};
+
+var gridObj;
+var eventGridObj;
+var rowMenuDivId;
+var rowMenuColumnText;
+var rowDetailDivArr;
+var _dataModel;
+var _campaignContextMenuHandler;
+GRID_PARAM_CAMPAIGN.source = function(model, data){
+	return {
+			localdata: data,
+			datafields: model,
+			datatype: "json"
+	};	
+}
+GRID_PARAM_CAMPAIGN.updateGrid = function(data){
+	var dataAdapter =  new $.jqx.dataAdapter(GRID_PARAM_CAMPAIGN.source(_dataModel, data));
+	gridObj.jqxGrid({ source: dataAdapter });
+}
+GRID_PARAM_CAMPAIGN.toggleSelectionMode= function(){
+	if(gridObj.jqxGrid('selectionmode') == 'checkbox'){
+		gridObj.jqxGrid({selectionmode:'singlerow'});
+	}else{
+		gridObj.jqxGrid({selectionmode:'checkbox'});
+	}
+	
+}
+GRID_PARAM_CAMPAIGN.toggleSearchBoxes = function(){
+	gridObj.jqxGrid({
+            showfilterrow: !(gridObj.jqxGrid('showfilterrow')),
+            filterable: true,
+            filterrowheight: 34
+		});
+		$(".jqx-grid-cell-filter-row-custom:last").hide();
+}
+
+GRID_PARAM_CAMPAIGN.getCheckedIdList= function(idDataAttribute){
+    var rows = gridObj.jqxGrid('selectedrowindexes');
+    var dataList="";
+    $.each(rows, function(i, rowIndex){
+    	var rowData = gridObj.jqxGrid('getrowdata', rowIndex);
+    	dataList += eval('rowData.'+ idDataAttribute);
+    	if(i !== rows.length - 1)
+    		dataList += ", ";
+    });
+    return dataList;
+}
+
+GRID_PARAM_CAMPAIGN.getCheckedEventIdList = function(idDataAttribute){
+	 var rows = eventGridObj.jqxGrid('selectedrowindexes');
+	    var dataList="";
+	    $.each(rows, function(i, rowIndex){
+	    	var rowData = eventGridObj.jqxGrid('getrowdata', rowIndex);
+	    	var id = eval('rowData.'+ idDataAttribute);
+	    	if(i !== rows.length -1){
+	    		dataList = dataList + id + ",";
+	    	}else{
+	    		dataList = dataList + id;
+	    	}
+	    });
+	    return dataList;
+}
+
+
+GRID_PARAM_CAMPAIGN.getDeleteList = function(idDataAttribute){
+	
+}
+
+
+GRID_PARAM_CAMPAIGN.onContextMenuItemClick =function (event) 
+{
+	var args = event.args;
+	var menuItemtext= $.trim($(args).text());
+	var rowindex = gridObj.jqxGrid('getselectedrowindex');
+	var rowData = gridObj.jqxGrid('getrowdata', rowindex);
+	_campaignContextMenuHandler(menuItemtext, rowData);
+}
+GRID_PARAM_CAMPAIGN.onRowClick =function (event) 
+{
+	var grid = gridObj;
+	var args = event.args;
+	// row's bound index.
+	var boundIndex = args.rowindex;
+	// row's visible index.
+	var visibleIndex = args.visibleindex;
+	// right click.
+	
+	
+
+	if (args.column.text == rowMenuColumnText) {
+		var scrollTop = $(window).scrollTop();
+		var scrollLeft = $(window).scrollLeft();
+		editrow = event.args.rowindex;
+		var rowsheight = grid.jqxGrid('rowsheight');
+		var top = $(this).offset().top + (2 + editrow) * rowsheight;
+		var left = ($(this).offset().left + parseInt($('#CampaignGridContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
+		$('#' +rowMenuDivId).jqxMenu('open', left, top + 5 + scrollTop);
+	} else {
+		// original event.
+		var ev = args.originalEvent;
+		grid.jqxGrid('selectrow', boundIndex);
+		var details = grid.jqxGrid('getrowdetails', boundIndex);
+		if (details.rowdetailshidden == true) {
+			grid.jqxGrid('showrowdetails', boundIndex);
+		} else {
+			grid.jqxGrid('hiderowdetails', boundIndex);
+		}
+	}
+}
+
+
+
+
+GRID_PARAM_CAMPAIGN.rowDetailTemplate = function(tabs, height)  
+{
+	var rowDetailTemplate = "<div style='margin: 2px;'> <ul style='margin-left: 30px;'> "
+		if($.isArray(tabs)){
+			$.each(tabs, function(index, tab){
+				rowDetailTemplate = rowDetailTemplate + "<li>" + tab + "</li>";
+			});
+			rowDetailTemplate = rowDetailTemplate + "</ul>";
+			$.each(tabs, function(index, tab){
+				rowDetailTemplate = rowDetailTemplate + "<div class='"+ tab.toLowerCase() +"'></div>";
+			});
+			rowDetailTemplate = rowDetailTemplate +   "</div>";
+		}
+	 return { rowdetails: rowDetailTemplate, rowdetailsheight: height };
+}
+
+GRID_PARAM_CAMPAIGN.initrowdetails = function(index, parentElement, gridElement, datarecord){
+	 var tabsdiv = null; 
+  
+    tabsdiv = $($(parentElement).children()[0]);
+    if (tabsdiv != null) {
+    	
+		var campaignDiv = tabsdiv.find('.campaign');
+//		var imagesDiv = tabsdiv.find('.images');
+		
+		var container1 = $('<div class="row-fluid"></div>');
+		
+		var container2 = $('<div class="row-fluid"></div>');
+		campaignDiv.append(container1);
+		
+		var leftcolumn = $('<div class="span5"></div>');
+		var rightcolumn = $('<div class="span5"></div>');
+		
+		container1.append(leftcolumn);
+		container1.append(rightcolumn);
+	
+		var campaign_Name = "<tr><td class='filledWidth'> <b>Campaign Name:</b></td><td> "
+			+ datarecord.campaignName + "</td></tr>";
+	    var customer_Name = "<tr><td class='filledWidth'><b>Customer Name:</b></td><td> "
+			+ datarecord.customerName + "</td></tr>";
+	    var event_Type = "<tr><td class='filledWidth'><b>Event Type:</b></td><td> "
+			+ datarecord.eventType + "</td></tr>";
+		var events = "<tr><td class='filledWidth'> <b>Events:</b></td><td>"
+				+ datarecord.events + "</td></tr>";
+		var display_At = "<tr><td class='filledWidth'><b>Display At:</b></td><td>"
+				+ datarecord.displayAt + "</td></tr>";
+		var frequency = "<tr><td class='filledWidth1'><b>Frequency:</b></td><td> "
+				+ datarecord.frequency + "</td></tr>";
+			
+		$(leftcolumn).append("<table>");
+		
+		$(leftcolumn).append(campaign_Name);
+		$(leftcolumn).append(customer_Name);
+		$(leftcolumn).append(event_Type);
+		$(leftcolumn).append(display_At);
+		$(leftcolumn).append(frequency);
+		$(leftcolumn).append("</table>");
+		
+		$(rightcolumn).append("<table>");
+		$(rightcolumn).append(events);
+		
+		$(rightcolumn).append("</table>");		
+//		imagesDiv.append(container2);
+		
+		
+		$(tabsdiv).jqxTabs({
+			width : '90%',
+			height : 180
+		});
+    }
+}
+
+/*
+ *  This method creates grid
+ */
+function createCampaignTable(data, model, grid, menuDivId, actionColText,contextMenuHandler, detailDivArr){
+	
+		if(typeof gridId == undefined){
+			throw 'a valid grid div object must be provided';
+		}
+		if(typeof rowMenuColumnText == undefined){
+			throw 'a columnheader needs to be provided to be used for click action';
+		}
+		if(typeof rowMenuDivId == undefined){
+			throw 'a valid menu div needs to be provided to be used for click action';
+		}
+		if (typeof detailDivArr == undefined){
+			throw 'a valid detailDivArr needs to be provided for row detail';
+		}
+		
+		if (typeof model == undefined){
+			throw 'a valid model needs to be provided';
+		}
+		
+		_dataModel = model;
+		rowMenuDivId = menuDivId;
+		rowMenuColumnText =actionColText;
+		gridObj = grid;
+		rowDetailDivArr = detailDivArr
+		
+    var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
+						return '<i class="icon-wrench" style="margin:3px;"></i>'
+	}
+    
+    var campaignColumns = [{ text: 'Campaign Name', columntype: 'textbox',  datafield: 'campaignName', width: '20%' },
+    	 { text: 'Customer Name', datafield: 'customerName', width: '20%'},
+    	 { text: 'Event Type', datafield: 'eventType',  width: '10%'},
+    	 { text: 'Events',  datafield: 'events', width: '20%'},
+    	 { text: 'Display At', datafield: 'displayAt', width: '20%'},
+    	 { text: 'Frequency', datafield: 'frequency', width: '5%'},
+    	 { text: 'Edit',  datafield: 'customerId', width: '5%', cellsalign: 'center', cellsrenderer: actionRenderer}];
+    	
+    
+    
+    grid.on('cellclick', GRID_PARAM_CAMPAIGN.onRowClick);
+    //set menu item click
+    _campaignContextMenuHandler = contextMenuHandler
+	$('#' + rowMenuDivId).on('itemclick',GRID_PARAM_CAMPAIGN.onContextMenuItemClick);
+	
+	// create context menu
+	var contextMenu = $("#" + menuDivId).jqxMenu({
+		width : 160,
+		height : 60,
+		autoOpenPopup : false,
+		mode : 'popup'
+	});
+	
+	grid.on('contextmenu', function() {
+		return false;
+	});
+
+	var dataAdapter = new $.jqx.dataAdapter(GRID_PARAM_CAMPAIGN.source(model, data));
+    grid.jqxGrid(
+            {
+                width: '100%',
+                source: dataAdapter,
+                columnsheight : 40,
+				columnsmenuwidth : 40,
+				rowsheight : 34,
+                theme:	'custom',
+             // Pageing config
+                pageable : true,
+                pagermode : 'default',
+                rowdetails: true,
+                showrowdetailscolumn:false,
+                rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
+                initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
+                columns: campaignColumns
+            });
+    
+	}
+
+/*
+ *  This method creates grid
+ */
+function createEventsTable(data, grid, eventsIndex){
+    var eventsColumns = [{ text: 'Event Name', columntype: 'textbox',  datafield: 'eventName', width: '30%' },
+    	 { text: 'Event Description', datafield: 'description', width: '50%'},
+    	 { text: 'Venue', datafield: 'venueName',  width: '15%'}];
+    var source = {
+			 localdata:data,
+			 datatype:'array',
+			 datafields: [
+			              	{name: 'eventName', type: 'string' },
+			              	{name: 'eventId', type: 'string' },
+		                    {name: 'description', type: 'string' },
+		                    {name:'venueId',type:'string'},
+		                    {name:'venueName',type:'string'},
+		                ],
+		     id : 'eventId'           
+	 };
+    eventGridObj = grid;
+	var dataAdapter = new $.jqx.dataAdapter(source);
+    grid.jqxGrid(
+            {
+                width: '100%',
+                height:'70%',
+                source: dataAdapter,
+                columnsheight : 40,
+				columnsmenuwidth : 40,
+				rowsheight : 34,
+                theme:	'custom',
+             // Pageing config
+                pageable : true,
+                pagermode : 'default',
+                rowdetails: true,
+                selectionmode: 'checkbox',
+                showrowdetailscolumn:false,
+//                rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
+//                initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
+                columns: eventsColumns
+            });
+    if(eventsIndex){
+    	$.each(eventsIndex,function(index, eventIndex){
+    		eventGridObj.jqxGrid("selectrow",eventIndex);
+    	});
+    }
+    
+	}
+
+		

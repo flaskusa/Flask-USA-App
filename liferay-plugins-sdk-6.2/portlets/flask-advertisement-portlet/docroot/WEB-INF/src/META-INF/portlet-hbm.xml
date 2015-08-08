@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.rumbasolutions.flask.model.AdCampaign" />
+	<import class="com.rumbasolutions.flask.model.AdCustomer" />
+	<import class="com.rumbasolutions.flask.model.CampaignEvent" />
+	<import class="com.rumbasolutions.flask.model.CampaignImage" />
+	<class name="com.rumbasolutions.flask.model.impl.AdCampaignImpl" table="flaskads_AdCampaign">
+		<cache usage="read-write" />
+		<id name="campaignId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="campaignName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="customerId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="displayGeneral" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="displayPreEvent" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="displayDuringEvent" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="displayPostEvent" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="frequencyPerHour" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.AdCustomerImpl" table="flaskads_AdCustomer">
+		<cache usage="read-write" />
+		<id name="customerId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="customerName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="businessType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="addrLine1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="addrLine2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="zipCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="stateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="countryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="websiteURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="businessPhoneNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactPersonName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="contactPersonNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.CampaignEventImpl" table="flaskads_CampaignEvent">
+		<cache usage="read-write" />
+		<id name="campaignEventId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="campaignId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="eventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.CampaignImageImpl" table="flaskads_CampaignImage">
+		<cache usage="read-write" />
+		<id name="campaignImageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="imageTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imageDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imageUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="imageGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

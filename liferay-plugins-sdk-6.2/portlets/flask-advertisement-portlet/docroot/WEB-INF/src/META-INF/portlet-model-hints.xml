@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.rumbasolutions.flask.model.AdCampaign">
+		<field name="campaignId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="campaignName" type="String" />
+		<field name="customerId" type="long" />
+		<field name="displayGeneral" type="boolean" />
+		<field name="displayPreEvent" type="boolean" />
+		<field name="displayDuringEvent" type="boolean" />
+		<field name="displayPostEvent" type="boolean" />
+		<field name="frequencyPerHour" type="long" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.AdCustomer">
+		<field name="customerId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="customerName" type="String" />
+		<field name="businessType" type="String" />
+		<field name="addrLine1" type="String" />
+		<field name="addrLine2" type="String" />
+		<field name="city" type="String" />
+		<field name="zipCode" type="String" />
+		<field name="stateId" type="long" />
+		<field name="countryId" type="long" />
+		<field name="email" type="String" />
+		<field name="websiteURL" type="String" />
+		<field name="businessPhoneNumber" type="String" />
+		<field name="contactPersonName" type="String" />
+		<field name="contactPersonNumber" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.CampaignEvent">
+		<field name="campaignEventId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="campaignId" type="long" />
+		<field name="eventId" type="long" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.CampaignImage">
+		<field name="campaignImageId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="imageTitle" type="String" />
+		<field name="imageDesc" type="String" />
+		<field name="imageUUID" type="String" />
+		<field name="imageGroupId" type="long" />
+	</model>
+</model-hints>
