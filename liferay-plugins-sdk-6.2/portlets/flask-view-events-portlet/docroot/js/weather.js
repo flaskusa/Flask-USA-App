@@ -20,8 +20,9 @@ function showForecastSmall(list)
 		if( curdate  > dt )	continue;
 		if(cnt > 10)		break;
 		cnt++;
-
-		var temp = Math.round(10*(forecast[i].main.temp - 273.15))/10 ;
+		var t = forecast[i].main.temp - 273.15;
+		var temp = Math.round(10*(t))/10 ;
+		var tempf = Math.round(10*(9/5 * t + 32))/10 ;
 		var tmin = Math.round(10*(forecast[i].main.temp_min)) / 10;
 		var tmax = Math.round(10*(forecast[i].main.temp_max)) / 10 ;
 
@@ -43,11 +44,12 @@ function showForecastSmall(list)
 		
 		html=html+ '<div style="float: left; text-align: center; color: #fff;" >';
 		html=html+ '<div class="small_val" title="time">'+time+'</div>\
-		<img style="max-width: 85%;" alt="'+text+'" src="/flask-view-events-portlet/css/images/'+icon+'.png"/>\
-		<div class="small_val" title="Temp">'+temp+'C</div>\
-		</div>';
+		<img style="max-width: 85%; height: 30px !important;" alt="'+text+'" src="/flask-view-events-portlet/css/images/'+icon+'.png"/>\
+		<div class="small_val tc" title="Temp">'+temp+'C</div><div class="small_val tf" title="Temp">'+tempf+'f</div>\
+		</div>';	
 	}
 	$("#forecast_small").html(html);
+	$('.tf').hide();
 
 };
 
@@ -175,6 +177,8 @@ WeatherInfo = {
     changeTempUnit: function(unit) {
         var newTemp = w.tempNumber - 273.15;
         if (unit === 'celsius') {
+        	$('.tc').show();
+        	$('.tf').hide();
             w.celsius.addClass('checked');
             w.fahrenheit.removeClass('checked');
             w.temperature.addClass('celsius-degree');
@@ -182,6 +186,8 @@ WeatherInfo = {
             w.temperature.html(Math.round(newTemp));
             WeatherInfo.changeSpeedUnit('km');
         } else if (unit === 'fahrenheit') {
+        	$('.tc').hide();
+        	$('.tf').show();
             w.temperature.html(Math.round(9/5 * newTemp + 32));
             w.celsius.removeClass('checked');
             w.fahrenheit.addClass('checked');

@@ -68,8 +68,9 @@ function createMarkers(results, status) {
     	clearOverlays();
         // and create new markers by search result
         for (var i = 0; i < results.length; i++) {
+        	var mark;
             if(createMarker(results[i])){
-            	var mark = new google.maps.Marker({
+            	mark = new google.maps.Marker({
 			        position: results[i].geometry.location,
 			        map: map,
 			        title: results[i].name,
@@ -77,23 +78,27 @@ function createMarkers(results, status) {
 			    });
             }
             else{
-				var mark = new google.maps.Marker({
+				mark = new google.maps.Marker({
 			        position: results[i].geometry.location,
 			        map: map,
 			        title: results[i].name,
 			    });
             }
             markers.push(mark);
-            var infowindow = new google.maps.InfoWindow({
-                content: '<img src="' + results[i].icon + '" /><font style="color:#000;">' + results[i].name + 
-                '<br />Rating: ' + results[i].rating + '<br />Vicinity: ' + results[i].vicinity + '</font>'
-            });
+           
+            var infowindow = new google.maps.InfoWindow();
 
             // add event handler to current marker
-            google.maps.event.addListener(mark, 'click', function() {
-                clearInfos();
-                infowindow.open(map,mark);
-            });
+            google.maps.event.addListener(mark, 'click', (function(mark, i) {
+            	return function() {
+            		console.log(results[i]);
+	                clearInfos();
+	                var content= '<div style="display: inline-flex;"><img src="' + results[i].icon + '" style="width:20%;"/><font style="color:#000; "><b>' + results[i].name + 
+	                '</b><br /><br />Vicinity: ' + results[i].vicinity + '</font></div>';
+	                infowindow.setContent(content);
+	                infowindow.open(map,mark);
+            	}
+            })(mark, i));
             infos.push(infowindow);        
         }
         // prepare info window
