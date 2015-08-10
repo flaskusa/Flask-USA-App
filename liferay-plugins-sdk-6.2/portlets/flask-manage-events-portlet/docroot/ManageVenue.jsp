@@ -24,7 +24,7 @@
   long repositoryId = themeDisplay.getLayout().getGroupId();
   themeDisplay.getLayout().getUuid();
 %>
-
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places" type="text/javascript"></script>
 <script type="text/javascript">
 
 var bCreated;
