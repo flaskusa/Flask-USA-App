@@ -334,6 +334,21 @@ input.btn.btn-info.cssback {
 		max-width: initial;
 	}
 
+@media (min-width: 374px) and (max-width: 640px){
+	
+	.slick-slide{
+		width: 330px !important;
+	}
+}
+
+@media (min-width: 376px) and (max-width: 640px){
+	
+	.slick-slide{
+		width: 364px !important;
+	}
+}
+
+
 @media (min-width: 0px) and (max-width: 640px){
 	/*.slick-slider {
     	position: fixed !important;
@@ -346,6 +361,10 @@ input.btn.btn-info.cssback {
 		margin: auto !important;
 		bottom: 20px !important;
 	}	
+	
+	.slick-slide{
+		width: 364px;
+	}
 	
 	.slideImage{
 		width: 200px;
@@ -363,7 +382,7 @@ input.btn.btn-info.cssback {
 	}
 	
 	.eventDetailBoxWithImages{
-		width: 99% !important;
+		width: 93% !important;
 		margin-left:0px;
 		margin-right:0px;
 	    font: normal 12px/1 "Coda", Helvetica, sans-serif;
@@ -388,7 +407,7 @@ input.btn.btn-info.cssback {
 	}		
 	
 	.eventDetailBox{
-		width:99% !important;
+		width:93% !important;
 		height: 170px !important;
 		font-size:12px;
 		min-width: 300px !important;
@@ -440,6 +459,13 @@ input.btn.btn-info.cssback {
 		bottom: 20px !important;
 	}	
 		
+	div#location {
+	    padding-top: 40px !important;
+	}
+	div.weather-container {
+	    padding-bottom: 40px !important;
+	}
+	
 	.SliderCaption
 	{
 	  max-width:36px !important;
