@@ -88,22 +88,11 @@
 <div id="three" style="display:none; width:100%;">
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places" type="text/javascript"></script>
 	<div id="gmap_canvas"></div>
-	<div class="menustrip">
-		<div class="menuItem">
-			<div class="menuText">
-				LOCAL NEWS
-			</div>
-			<div class="menuText">
-				BATHROOMS
-			</div>
-			<div class="menuText">
-				NOTIFICATION
-			</div>
-			<div class="menuText">
-				PROMOTIONS
-			</div>
-		</div>				
-	</div>
+	<div id='jqxWidget'>
+        <div style='float: left;' id='jqxTabs'>
+            <ul style="margin-left: 30px;" class="menustrip"></ul>
+        </div>
+    </div>
 </div>
 
 	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
