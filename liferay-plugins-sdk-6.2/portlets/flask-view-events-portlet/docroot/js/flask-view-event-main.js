@@ -3,6 +3,7 @@ var map;
 var lat_marker = [];
 var lng_marker = [];
 var addr_name = [];
+var eventDetailJSON = {};
 
 function formatUnixToTime(tdate)
 {
@@ -133,6 +134,7 @@ function fnGetEventImages(eventId,venueId){
 			var arrDurEvent = [];
 			var arrPosEvent = [];
 			objEventDetails = data.EventDetails;
+			eventDetailJSON = $.extend(true, {}, objEventDetails);
 			$.each(objEventDetails, function(idx, obj) {
 				objEventDetail = jQuery.parseJSON(obj.EventDetail);
 				if(objEventDetail.latitude != "")
@@ -298,16 +300,9 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 	 		$('#three').show();
 			// map initialization
 	 		initialize();
+	 		loadMenuItems(eventId);	 		
 	 		window.location.hash = '#Details';
-	 		$(".menuItem").slick({
-	 			arrows:false,
-	 			centerMode: true,
-		  		centerPadding: '0px',
-	 			slidesToShow: 3,
-				slidesToScroll: 1	
-	 		});
 	 		$("#spinningSquaresG").hide();
-	 		
 	    /*}
 	    lastClick = new Date();*/
 	});	
@@ -413,12 +408,12 @@ function removeUserEvent(eventId){
 	var param = {eventId: eventId};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.REMOVE_USER_EVENT , param, 
-					function (data){
-						initEventList();
-					} ,
-					function (data){
-						console.log("Error in removing user event" + data );
-					});
+		function (data){
+			initEventList();
+		} ,
+		function (data){
+			console.log("Error in removing user event" + data );
+		});
 }
 
 
@@ -428,10 +423,58 @@ function getVenueData(venueId){
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_VENUE, params, 
 	function(data){
 		callWeather(data.latitude, data.longitude);
-		//callMap(data.latitude, data.longitude);
-		
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
 	});
+}
+
+function loadMenuItems(eventId){
+	var request = new Request();
+	var param = {eventId: eventId};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL , param, 
+		function (data){
+			initMenuList(data);
+		} ,
+		function (data){
+			console.log("Error in generating detail menu" + data );
+		});
+}
+
+function initMenuList(eventData){
+	console.log(eventDetailJSON);
+	var objMenuItems = $(".menustrip");
+	var objJqxTabs = $("#jqxTabs");
+	$(objMenuItems).html("");
 	
+	$.each(eventData, function( index, objEventDetail) {
+		var objLi = $("<li/>");
+		$(objLi).html(objEventDetail.infoTypeCategoryName);
+		$(objLi).appendTo($(objMenuItems));
+		var objDetailDiv = $("<div/>");
+		var infoTypeCategoryName = objEventDetail.infoTypeCategoryName.toUpperCase()
+		var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+infoTypeCategoryName);
+		var objtbl = $("<table/>",{'cellpadding':'5px'});
+		$.each(objFields, function(idx, obj){
+			console.log(obj);
+			$.each(obj,function(key,value){
+				var objtr = $("<tr/>");
+				var valueTd = $("<td/>",{'align':'left','width':'100%'});				
+				var evalue = eval("objEventDetail."+key);
+				var caption = value;
+				console.log(evalue );
+				$(valueTd).html(evalue);
+				$(valueTd).appendTo($(objtr));
+				$(objtr).appendTo($(objtbl));
+			});
+		});		
+		$(objtbl).appendTo($(objDetailDiv));
+		$(objDetailDiv).appendTo($(objJqxTabs));
+	});	
+	
+	$('#jqxTabs').jqxTabs({ 
+		width: '100%',
+		height: '100%',
+		scrollPosition: 'both'
+	});
 }
