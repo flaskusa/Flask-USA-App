@@ -45,7 +45,7 @@ function showForecastSmall(list)
 		html=html+ '<div style="float: left; text-align: center; color: #fff;" >';
 		html=html+ '<div class="small_val" title="time">'+time+'</div>\
 		<img style="max-width: 85%; height: 30px !important;" alt="'+text+'" src="/flask-view-events-portlet/css/images/'+icon+'.png"/>\
-		<div class="small_val tc" title="Temp">'+temp+'C</div><div class="small_val tf" title="Temp">'+tempf+'f</div>\
+		<div class="small_val tc" title="Temp">'+temp+'C</div><div class="small_val tf" title="Temp">'+tempf+'F</div>\
 		</div>';	
 	}
 	$("#forecast_small").html(html);
