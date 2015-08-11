@@ -90,7 +90,7 @@
 	<div id="gmap_canvas"></div>
 	<div id='jqxWidget'>
         <div style='float: left;' id='jqxTabs'>
-            <ul style="margin-left: 30px;" class="menustrip"></ul>
+            
         </div>
     </div>
 </div>
