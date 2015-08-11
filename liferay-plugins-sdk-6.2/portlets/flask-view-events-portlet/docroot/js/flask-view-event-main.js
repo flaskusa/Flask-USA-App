@@ -4,6 +4,9 @@ var lat_marker = [];
 var lng_marker = [];
 var addr_name = [];
 var eventDetailJSON = {};
+var marker_infoType;
+var venueName;
+var venueAddr;
 
 function formatUnixToTime(tdate)
 {
@@ -133,24 +136,22 @@ function fnGetEventImages(eventId,venueId){
 			var arrPreEvent = [];
 			var arrDurEvent = [];
 			var arrPosEvent = [];
+			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
+		    $(objWeatherDiv).html($("#weather-background"));
+		    arrPreEvent.push(objWeatherDiv);	
 			objEventDetails = data.EventDetails;
 			eventDetailJSON = $.extend(true, {}, objEventDetails);
 			$.each(objEventDetails, function(idx, obj) {
 				objEventDetail = jQuery.parseJSON(obj.EventDetail);
 				if(objEventDetail.latitude != "")
 					{
-						lat_marker.push(objEventDetail.latitude);
+						lat_marker.push([objEventDetail.latitude, objEventDetail.infoTypeId]);
 						lng_marker.push(objEventDetail.longitude);
 						addr_name.push(objEventDetail.infoTitle);
 					}
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
 				case  1: case 2:
-					var objWeatherDiv1 = $("<div/>",{'class':'photo'});
-				    var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
-				    $(objWeatherDiv).html($("#weather-background"));
-				    $(objWeatherDiv).appendTo(objWeatherDiv1);
-				    arrPreEvent.push(objWeatherDiv1);					
 			    	arrPreEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPreEvent)
 			        break;
 			    case 3:
@@ -298,6 +299,7 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 	 		$('#one').hide();		 
 	 		$('#two').hide();
 	 		$('#three').show();
+			marker_infoType = infoType;
 			// map initialization
 	 		initialize();
 	 		loadMenuItems(eventId);	 		
@@ -309,12 +311,14 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 }
 
 function fnBlankSlide(Slider){
-  	var temp_html;
+  	var temp_html = '<font color="white"><h4>NO DATA FOUND</h4></font>';
 	var imageUrl;
 	imageUrl = "/flask-view-events-portlet/img/NoData.png";
-	var objBlankSlide = $("<div/>",{'class':'photo'});
-	$(objBlankSlide).attr("style","background:url('"+imageUrl+"');");
-	$(Slider).slick('addSlide',	objBlankSlide);		
+	var objBlankSlide1 = $("<div/>",{'class':'photo'});
+	var objBlankSlide = $("<div/>",{'class':'eventDetailBox', 'style':'padding-top: 25% !important;'});
+	$(objBlankSlide).appendTo(objBlankSlide1);
+	$(objBlankSlide).html(temp_html);
+	$(Slider).slick('addSlide',	objBlankSlide1);			
 }
 
 $(document).ready(function(){
@@ -422,6 +426,8 @@ function getVenueData(venueId){
 	params = {venueId:venueId};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_VENUE, params, 
 	function(data){
+		venueName = data.venueName;
+		venueAddr = data.addrLine1;
 		callWeather(data.latitude, data.longitude);
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
