@@ -439,31 +439,35 @@ function initMenuList(){
 	var objMenuItems = $(".menustrip");
 	var objJqxTabs = $("#jqxTabs");
 	$(objMenuItems).html("");
-	eventData = jQuery.parseJSON(eventDetailJSON.EventDetail);
-	$.each(eventData, function( index, objEventDetail) {
-		var objLi = $("<li/>");
-		$(objLi).html(objEventDetail.infoTypeCategoryName);
-		$(objLi).appendTo($(objMenuItems));
-		var objDetailDiv = $("<div/>");
-		var infoTypeCategoryName = objEventDetail.infoTypeCategoryName.toUpperCase()
-		var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+infoTypeCategoryName);
-		var objtbl = $("<table/>",{'cellpadding':'5px'});
-		$.each(objFields, function(idx, obj){
-			console.log(obj);
-			$.each(obj,function(key,value){
-				var objtr = $("<tr/>");
-				var valueTd = $("<td/>",{'align':'left','width':'100%'});				
-				var evalue = eval("objEventDetail."+key);
-				var caption = value;
-				console.log(evalue );
-				$(valueTd).html(evalue);
-				$(valueTd).appendTo($(objtr));
-				$(objtr).appendTo($(objtbl));
-			});
-		});		
-		$(objtbl).appendTo($(objDetailDiv));
-		$(objDetailDiv).appendTo($(objJqxTabs));
-	});	
+	
+	for(var iCount=0;iCount<eventDetailJSON.length;iCount++)
+	{
+		eventData = jQuery.parseJSON(eventDetailJSON[iCount].EventDetail);
+		$.each(eventData, function( index, objEventDetail) {
+			var objLi = $("<li/>");
+			$(objLi).html(objEventDetail.infoTypeCategoryName);
+			$(objLi).appendTo($(objMenuItems));
+			var objDetailDiv = $("<div/>");
+			var infoTypeCategoryName = objEventDetail.infoTypeCategoryName.toUpperCase()
+			var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+infoTypeCategoryName);
+			var objtbl = $("<table/>",{'cellpadding':'5px'});
+			$.each(objFields, function(idx, obj){
+				console.log(obj);
+				$.each(obj,function(key,value){
+					var objtr = $("<tr/>");
+					var valueTd = $("<td/>",{'align':'left','width':'100%'});				
+					var evalue = eval("objEventDetail."+key);
+					var caption = value;
+					console.log(evalue );
+					$(valueTd).html(evalue);
+					$(valueTd).appendTo($(objtr));
+					$(objtr).appendTo($(objtbl));
+				});
+			});		
+			$(objtbl).appendTo($(objDetailDiv));
+			$(objDetailDiv).appendTo($(objJqxTabs));
+		});	
+	}
 	
 	$('#jqxTabs').jqxTabs({ 
 		width: '100%',
