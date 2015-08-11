@@ -59,6 +59,7 @@
 		<column name="displayDuringEvent" type="boolean" />
 		<column name="displayPostEvent" type="boolean" />
 		<column name="frequencyPerHour" type="long" />
+		<column name="eventTypeId" type="long" />
 		<order by="asc">
 			<order-column name="campaignName" />
 		</order>

@@ -24,6 +24,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.rumbasolutions.flask.model.AdCampaign;
 import com.rumbasolutions.flask.service.AdCampaignService;
+import com.rumbasolutions.flask.service.persistence.AdCampaignFinder;
 import com.rumbasolutions.flask.service.persistence.AdCampaignPersistence;
 import com.rumbasolutions.flask.service.persistence.AdCustomerPersistence;
 import com.rumbasolutions.flask.service.persistence.CampaignEventPersistence;
@@ -106,6 +107,24 @@ public abstract class AdCampaignServiceBaseImpl extends BaseServiceImpl
 	public void setAdCampaignPersistence(
 		AdCampaignPersistence adCampaignPersistence) {
 		this.adCampaignPersistence = adCampaignPersistence;
+	}
+
+	/**
+	 * Returns the ad campaign finder.
+	 *
+	 * @return the ad campaign finder
+	 */
+	public AdCampaignFinder getAdCampaignFinder() {
+		return adCampaignFinder;
+	}
+
+	/**
+	 * Sets the ad campaign finder.
+	 *
+	 * @param adCampaignFinder the ad campaign finder
+	 */
+	public void setAdCampaignFinder(AdCampaignFinder adCampaignFinder) {
+		this.adCampaignFinder = adCampaignFinder;
 	}
 
 	/**
@@ -456,6 +475,8 @@ public abstract class AdCampaignServiceBaseImpl extends BaseServiceImpl
 	protected com.rumbasolutions.flask.service.AdCampaignService adCampaignService;
 	@BeanReference(type = AdCampaignPersistence.class)
 	protected AdCampaignPersistence adCampaignPersistence;
+	@BeanReference(type = AdCampaignFinder.class)
+	protected AdCampaignFinder adCampaignFinder;
 	@BeanReference(type = com.rumbasolutions.flask.service.AdCustomerLocalService.class)
 	protected com.rumbasolutions.flask.service.AdCustomerLocalService adCustomerLocalService;
 	@BeanReference(type = com.rumbasolutions.flask.service.AdCustomerService.class)

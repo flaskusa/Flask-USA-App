@@ -4,6 +4,7 @@
 	<bean id="com.rumbasolutions.flask.service.AdCampaignLocalService" class="com.rumbasolutions.flask.service.impl.AdCampaignLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.AdCampaignService" class="com.rumbasolutions.flask.service.impl.AdCampaignServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.AdCampaignPersistence" class="com.rumbasolutions.flask.service.persistence.AdCampaignPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.persistence.AdCampaignFinder" class="com.rumbasolutions.flask.service.persistence.AdCampaignFinderImpl" parent="basePersistence" />
 	<bean id="com.rumbasolutions.flask.service.AdCustomerLocalService" class="com.rumbasolutions.flask.service.impl.AdCustomerLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.AdCustomerService" class="com.rumbasolutions.flask.service.impl.AdCustomerServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.AdCustomerPersistence" class="com.rumbasolutions.flask.service.persistence.AdCustomerPersistenceImpl" parent="basePersistence" />

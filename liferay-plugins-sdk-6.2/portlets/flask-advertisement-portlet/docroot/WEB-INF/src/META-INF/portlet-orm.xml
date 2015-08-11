@@ -24,6 +24,7 @@
 			<basic name="displayDuringEvent" />
 			<basic name="displayPostEvent" />
 			<basic name="frequencyPerHour" />
+			<basic name="eventTypeId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

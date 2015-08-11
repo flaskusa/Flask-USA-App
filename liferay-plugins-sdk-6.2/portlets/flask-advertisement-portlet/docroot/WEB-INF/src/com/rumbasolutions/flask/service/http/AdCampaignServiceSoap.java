@@ -62,13 +62,11 @@ import java.rmi.RemoteException;
  * @generated
  */
 public class AdCampaignServiceSoap {
-	public static com.rumbasolutions.flask.model.AdCampaignSoap[] getAllCampaign()
-		throws RemoteException {
+	public static java.lang.String getAllCampaign() throws RemoteException {
 		try {
-			java.util.List<com.rumbasolutions.flask.model.AdCampaign> returnValue =
-				AdCampaignServiceUtil.getAllCampaign();
+			com.liferay.portal.kernel.json.JSONArray returnValue = AdCampaignServiceUtil.getAllCampaign();
 
-			return com.rumbasolutions.flask.model.AdCampaignSoap.toSoapModels(returnValue);
+			return returnValue.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

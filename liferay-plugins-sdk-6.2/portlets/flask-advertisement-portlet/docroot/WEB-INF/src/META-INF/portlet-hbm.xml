@@ -21,6 +21,7 @@
 		<property name="displayDuringEvent" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="displayPostEvent" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="frequencyPerHour" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="eventTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.AdCustomerImpl" table="flaskads_AdCustomer">
 		<cache usage="read-write" />

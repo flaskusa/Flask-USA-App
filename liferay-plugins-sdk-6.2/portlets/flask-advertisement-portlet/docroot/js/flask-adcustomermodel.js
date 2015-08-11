@@ -20,7 +20,6 @@ _adCustomerModel.DATA_MODEL= {
 			 { name: 'addrLine2', type: 'string', fieldName : 'Address Line 2' },
 			 { name: 'city', type: 'string', fieldName : 'City' },
 			 { name: 'zipCode', type: 'string', fieldName : 'Zip code' },
-
 			 { name: 'stateId', type: 'long', fieldName : 'State Id' },
 			 { name: 'stateName', type: 'string', fieldName : 'State' },
 			 { name: 'countryId', type: 'long', fieldName : 'CountryId' },

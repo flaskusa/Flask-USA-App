@@ -88,38 +88,14 @@ function loadCampaignData() {
 	flaskRequest.sendGETRequest(
 			_adCampaignModel.SERVICE_ENDPOINTS.GET_CAMPAIGN, params, function(
 					data) {
-				var gridData = prepareDataForCampaignGrid(data);
-				GRID_PARAM_CAMPAIGN.updateGrid(gridData);
+				GRID_PARAM_CAMPAIGN.updateGrid(data);
 			}, function(error) { /* failure handler */
 				_flaskLib.showErrorMessage(_adCampaignModel.MESSAGES.GET_ERROR);
 				console.log("Error in getting data: " + error);
 			});
 }
 
-function prepareDataForCampaignGrid(data) {
-	var gridData = [];
-	$
-			.each(
-					data,
-					function(index, campaign) {
-						var rowData = {};
-						rowData.campaignId = campaign.campaignId;
-						rowData.campaignName = campaign.campaignName;
-						rowData.frequency = campaign.frequency;
-						// rowData.customerName =
-						// getCustomerInfo(campaign.customerId).customerName;
-						rowData.customerName = _flaskLib.CustomerList[campaign.customerId].customerName;
-						rowData.eventType = _flaskLib.EventTypeList[campaign.eventType].eventTypeName;
-						rowData.events = prepareEventsNameList(campaign.events);
-						rowData.displayAt = prepareDisplayAtList(campaign.displayAt);
-						rowData.customerId = campaign.customerId;
-						rowData.eventsId = campaign.events;
-						rowData.displayAtId = campaign.displayAt;
-						rowData.eventTypeId = campaign.eventType;
-						gridData.push(rowData);
-					});
-	return gridData;
-}
+
 
 function prepareEventsNameList(eventsList) {
 	var eventsName = "";
@@ -220,8 +196,7 @@ function saveCampaign() {
 			_adCampaignModel.DATA_MODEL.CAMPAIGN, function(formId, model,
 					formData) {
 				var displayAt = [];
-				formData["events"] = GRID_PARAM_CAMPAIGN
-						.getCheckedEventIdList('eventId');
+				formData["events"] = GRID_PARAM_CAMPAIGN.getCheckedEventIdList('eventId');
 				$("input[name='displayAt']:checked").each(function(i) {
 					displayAt.push($(this).val());
 				});

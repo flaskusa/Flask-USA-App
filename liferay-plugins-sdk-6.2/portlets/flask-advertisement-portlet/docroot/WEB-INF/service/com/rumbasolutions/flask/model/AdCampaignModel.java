@@ -258,6 +258,20 @@ public interface AdCampaignModel extends BaseModel<AdCampaign> {
 	 */
 	public void setFrequencyPerHour(long frequencyPerHour);
 
+	/**
+	 * Returns the event type ID of this ad campaign.
+	 *
+	 * @return the event type ID of this ad campaign
+	 */
+	public long getEventTypeId();
+
+	/**
+	 * Sets the event type ID of this ad campaign.
+	 *
+	 * @param eventTypeId the event type ID of this ad campaign
+	 */
+	public void setEventTypeId(long eventTypeId);
+
 	@Override
 	public boolean isNew();
 

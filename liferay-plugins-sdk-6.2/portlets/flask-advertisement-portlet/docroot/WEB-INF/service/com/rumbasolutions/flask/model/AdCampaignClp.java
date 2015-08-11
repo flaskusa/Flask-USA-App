@@ -86,6 +86,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		attributes.put("displayDuringEvent", getDisplayDuringEvent());
 		attributes.put("displayPostEvent", getDisplayPostEvent());
 		attributes.put("frequencyPerHour", getFrequencyPerHour());
+		attributes.put("eventTypeId", getEventTypeId());
 
 		return attributes;
 	}
@@ -157,6 +158,12 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 
 		if (frequencyPerHour != null) {
 			setFrequencyPerHour(frequencyPerHour);
+		}
+
+		Long eventTypeId = (Long)attributes.get("eventTypeId");
+
+		if (eventTypeId != null) {
+			setEventTypeId(eventTypeId);
 		}
 	}
 
@@ -448,6 +455,29 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		}
 	}
 
+	@Override
+	public long getEventTypeId() {
+		return _eventTypeId;
+	}
+
+	@Override
+	public void setEventTypeId(long eventTypeId) {
+		_eventTypeId = eventTypeId;
+
+		if (_adCampaignRemoteModel != null) {
+			try {
+				Class<?> clazz = _adCampaignRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setEventTypeId", long.class);
+
+				method.invoke(_adCampaignRemoteModel, eventTypeId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getAdCampaignRemoteModel() {
 		return _adCampaignRemoteModel;
 	}
@@ -528,6 +558,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		clone.setDisplayDuringEvent(getDisplayDuringEvent());
 		clone.setDisplayPostEvent(getDisplayPostEvent());
 		clone.setFrequencyPerHour(getFrequencyPerHour());
+		clone.setEventTypeId(getEventTypeId());
 
 		return clone;
 	}
@@ -578,7 +609,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{campaignId=");
 		sb.append(getCampaignId());
@@ -602,6 +633,8 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		sb.append(getDisplayPostEvent());
 		sb.append(", frequencyPerHour=");
 		sb.append(getFrequencyPerHour());
+		sb.append(", eventTypeId=");
+		sb.append(getEventTypeId());
 		sb.append("}");
 
 		return sb.toString();
@@ -609,7 +642,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.AdCampaign");
@@ -659,6 +692,10 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 			"<column><column-name>frequencyPerHour</column-name><column-value><![CDATA[");
 		sb.append(getFrequencyPerHour());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>eventTypeId</column-name><column-value><![CDATA[");
+		sb.append(getEventTypeId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -677,6 +714,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 	private boolean _displayDuringEvent;
 	private boolean _displayPostEvent;
 	private long _frequencyPerHour;
+	private long _eventTypeId;
 	private BaseModel<?> _adCampaignRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

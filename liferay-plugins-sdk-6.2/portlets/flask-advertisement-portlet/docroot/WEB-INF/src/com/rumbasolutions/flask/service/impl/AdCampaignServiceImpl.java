@@ -16,11 +16,18 @@ package com.rumbasolutions.flask.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -29,6 +36,7 @@ import com.rumbasolutions.flask.model.CampaignEvent;
 import com.rumbasolutions.flask.service.AdCampaignLocalServiceUtil;
 import com.rumbasolutions.flask.service.CampaignEventLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.AdCampaignServiceBaseImpl;
+import com.rumbasolutions.flask.service.persistence.AdCampaignFinderUtil;
 import com.rumbasolutions.flask.service.persistence.AdCampaignUtil;
 import com.rumbasolutions.flask.service.persistence.CampaignEventUtil;
 
@@ -42,7 +50,6 @@ import com.rumbasolutions.flask.service.persistence.CampaignEventUtil;
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author Brian Wing Shun Chan
  * @see com.rumbasolutions.flask.service.base.AdCampaignServiceBaseImpl
  * @see com.rumbasolutions.flask.service.AdCampaignServiceUtil
  */
@@ -61,15 +68,42 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 	private static Log LOGGER = LogFactoryUtil.getLog(AdCampaignServiceImpl.class);
 	
 	@Override
-	public List<AdCampaign> getAllCampaign() {
-		List<AdCampaign> campaignList = new ArrayList<AdCampaign>();
-		try {
-			campaignList = AdCampaignUtil.findAll();
-		} catch (SystemException e) {
-			LOGGER.error("Exception in getAdCampaigns :" + e.getMessage());
-			e.printStackTrace();
+	public JSONArray getAllCampaign() {
+		List list = AdCampaignFinderUtil.getAdCampaginList();
+		return createCustomModelCampaignList(list);
+	}
+	
+	/*
+	 * Utility method
+	 */
+	private JSONArray createCustomModelCampaignList(List list){
+		JSONArray campaignJsonArray = JSONFactoryUtil.createJSONArray();
+		String serilizeString ="";
+		JSONArray campaignFieldArr=null;
+		
+		try{
+		for (Object ob : list) {
+			
+			serilizeString = JSONFactoryUtil.serialize(ob);
+			campaignFieldArr = JSONFactoryUtil.createJSONArray(serilizeString);
+			
+			JSONObject obj = JSONFactoryUtil.createJSONObject();
+			obj.put("campaignId", campaignFieldArr.getString(0));
+			obj.put("campaignName", campaignFieldArr.getString(1));
+			obj.put("customerId", campaignFieldArr.getString(2));
+			obj.put("customerName", campaignFieldArr.getString(3));
+			obj.put("eventTypeId", campaignFieldArr.getString(4));
+			obj.put("eventTypeName", campaignFieldArr.getString(5));
+			obj.put("adDisplayTime", campaignFieldArr.getString(6));
+			obj.put("frequencyPerHour", campaignFieldArr.getString(7));
+			campaignJsonArray.put(obj);
+			
 		}
-		return campaignList;
+		}catch(JSONException e){
+			LOGGER.error("Exception in createCustomModelList for searchEvent "
+					+ e.getMessage());
+		}
+		return campaignJsonArray;
 	}
 
 	@Override

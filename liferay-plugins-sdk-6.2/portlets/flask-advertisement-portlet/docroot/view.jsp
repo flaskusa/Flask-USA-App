@@ -100,9 +100,9 @@
 						   </div>
 						   
 						   <div class="form-group">
-						     <label class="control-label" for="contactPerson">Contact name:</label>
+						     <label class="control-label" for="contactPersonName">Contact name:</label>
 						     <div class="controls">
-						       <input name="contactPerson" id="contactPerson" class="form-control" type="text">
+						       <input name="contactPersonName" id="contactPersonName" class="form-control" type="text">
 						     </div>
 						   </div>
 		

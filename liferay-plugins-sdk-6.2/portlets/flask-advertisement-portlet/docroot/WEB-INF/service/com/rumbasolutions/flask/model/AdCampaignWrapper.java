@@ -60,6 +60,7 @@ public class AdCampaignWrapper implements AdCampaign, ModelWrapper<AdCampaign> {
 		attributes.put("displayDuringEvent", getDisplayDuringEvent());
 		attributes.put("displayPostEvent", getDisplayPostEvent());
 		attributes.put("frequencyPerHour", getFrequencyPerHour());
+		attributes.put("eventTypeId", getEventTypeId());
 
 		return attributes;
 	}
@@ -131,6 +132,12 @@ public class AdCampaignWrapper implements AdCampaign, ModelWrapper<AdCampaign> {
 
 		if (frequencyPerHour != null) {
 			setFrequencyPerHour(frequencyPerHour);
+		}
+
+		Long eventTypeId = (Long)attributes.get("eventTypeId");
+
+		if (eventTypeId != null) {
+			setEventTypeId(eventTypeId);
 		}
 	}
 
@@ -434,6 +441,26 @@ public class AdCampaignWrapper implements AdCampaign, ModelWrapper<AdCampaign> {
 	@Override
 	public void setFrequencyPerHour(long frequencyPerHour) {
 		_adCampaign.setFrequencyPerHour(frequencyPerHour);
+	}
+
+	/**
+	* Returns the event type ID of this ad campaign.
+	*
+	* @return the event type ID of this ad campaign
+	*/
+	@Override
+	public long getEventTypeId() {
+		return _adCampaign.getEventTypeId();
+	}
+
+	/**
+	* Sets the event type ID of this ad campaign.
+	*
+	* @param eventTypeId the event type ID of this ad campaign
+	*/
+	@Override
+	public void setEventTypeId(long eventTypeId) {
+		_adCampaign.setEventTypeId(eventTypeId);
 	}
 
 	@Override

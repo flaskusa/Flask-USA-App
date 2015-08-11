@@ -76,9 +76,10 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 			{ "displayPreEvent", Types.BOOLEAN },
 			{ "displayDuringEvent", Types.BOOLEAN },
 			{ "displayPostEvent", Types.BOOLEAN },
-			{ "frequencyPerHour", Types.BIGINT }
+			{ "frequencyPerHour", Types.BIGINT },
+			{ "eventTypeId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskads_AdCampaign (campaignId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,campaignName VARCHAR(75) null,customerId LONG,displayGeneral BOOLEAN,displayPreEvent BOOLEAN,displayDuringEvent BOOLEAN,displayPostEvent BOOLEAN,frequencyPerHour LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskads_AdCampaign (campaignId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,campaignName VARCHAR(75) null,customerId LONG,displayGeneral BOOLEAN,displayPreEvent BOOLEAN,displayDuringEvent BOOLEAN,displayPostEvent BOOLEAN,frequencyPerHour LONG,eventTypeId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskads_AdCampaign";
 	public static final String ORDER_BY_JPQL = " ORDER BY adCampaign.campaignName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskads_AdCampaign.campaignName ASC";
@@ -121,6 +122,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		model.setDisplayDuringEvent(soapModel.getDisplayDuringEvent());
 		model.setDisplayPostEvent(soapModel.getDisplayPostEvent());
 		model.setFrequencyPerHour(soapModel.getFrequencyPerHour());
+		model.setEventTypeId(soapModel.getEventTypeId());
 
 		return model;
 	}
@@ -196,6 +198,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		attributes.put("displayDuringEvent", getDisplayDuringEvent());
 		attributes.put("displayPostEvent", getDisplayPostEvent());
 		attributes.put("frequencyPerHour", getFrequencyPerHour());
+		attributes.put("eventTypeId", getEventTypeId());
 
 		return attributes;
 	}
@@ -267,6 +270,12 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 
 		if (frequencyPerHour != null) {
 			setFrequencyPerHour(frequencyPerHour);
+		}
+
+		Long eventTypeId = (Long)attributes.get("eventTypeId");
+
+		if (eventTypeId != null) {
+			setEventTypeId(eventTypeId);
 		}
 	}
 
@@ -440,6 +449,17 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		_frequencyPerHour = frequencyPerHour;
 	}
 
+	@JSON
+	@Override
+	public long getEventTypeId() {
+		return _eventTypeId;
+	}
+
+	@Override
+	public void setEventTypeId(long eventTypeId) {
+		_eventTypeId = eventTypeId;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -482,6 +502,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		adCampaignImpl.setDisplayDuringEvent(getDisplayDuringEvent());
 		adCampaignImpl.setDisplayPostEvent(getDisplayPostEvent());
 		adCampaignImpl.setFrequencyPerHour(getFrequencyPerHour());
+		adCampaignImpl.setEventTypeId(getEventTypeId());
 
 		adCampaignImpl.resetOriginalValues();
 
@@ -585,12 +606,14 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 
 		adCampaignCacheModel.frequencyPerHour = getFrequencyPerHour();
 
+		adCampaignCacheModel.eventTypeId = getEventTypeId();
+
 		return adCampaignCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{campaignId=");
 		sb.append(getCampaignId());
@@ -614,6 +637,8 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		sb.append(getDisplayPostEvent());
 		sb.append(", frequencyPerHour=");
 		sb.append(getFrequencyPerHour());
+		sb.append(", eventTypeId=");
+		sb.append(getEventTypeId());
 		sb.append("}");
 
 		return sb.toString();
@@ -621,7 +646,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(40);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.AdCampaign");
@@ -671,6 +696,10 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 			"<column><column-name>frequencyPerHour</column-name><column-value><![CDATA[");
 		sb.append(getFrequencyPerHour());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>eventTypeId</column-name><column-value><![CDATA[");
+		sb.append(getEventTypeId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -695,6 +724,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 	private boolean _displayDuringEvent;
 	private boolean _displayPostEvent;
 	private long _frequencyPerHour;
+	private long _eventTypeId;
 	private long _columnBitmask;
 	private AdCampaign _escapedModel;
 }

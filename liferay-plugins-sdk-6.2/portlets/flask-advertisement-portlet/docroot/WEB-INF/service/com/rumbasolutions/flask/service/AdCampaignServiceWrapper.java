@@ -57,7 +57,7 @@ public class AdCampaignServiceWrapper implements AdCampaignService,
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.AdCampaign> getAllCampaign() {
+	public com.liferay.portal.kernel.json.JSONArray getAllCampaign() {
 		return _adCampaignService.getAllCampaign();
 	}
 

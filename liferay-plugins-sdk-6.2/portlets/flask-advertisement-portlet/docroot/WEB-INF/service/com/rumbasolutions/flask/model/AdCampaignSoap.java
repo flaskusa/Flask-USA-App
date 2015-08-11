@@ -42,6 +42,7 @@ public class AdCampaignSoap implements Serializable {
 		soapModel.setDisplayDuringEvent(model.getDisplayDuringEvent());
 		soapModel.setDisplayPostEvent(model.getDisplayPostEvent());
 		soapModel.setFrequencyPerHour(model.getFrequencyPerHour());
+		soapModel.setEventTypeId(model.getEventTypeId());
 
 		return soapModel;
 	}
@@ -198,6 +199,14 @@ public class AdCampaignSoap implements Serializable {
 		_frequencyPerHour = frequencyPerHour;
 	}
 
+	public long getEventTypeId() {
+		return _eventTypeId;
+	}
+
+	public void setEventTypeId(long eventTypeId) {
+		_eventTypeId = eventTypeId;
+	}
+
 	private long _campaignId;
 	private long _userId;
 	private Date _createdDate;
@@ -209,4 +218,5 @@ public class AdCampaignSoap implements Serializable {
 	private boolean _displayDuringEvent;
 	private boolean _displayPostEvent;
 	private long _frequencyPerHour;
+	private long _eventTypeId;
 }

@@ -116,7 +116,7 @@ public class AdCampaignServiceClp implements AdCampaignService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.AdCampaign> getAllCampaign() {
+	public com.liferay.portal.kernel.json.JSONArray getAllCampaign() {
 		Object returnObj = null;
 
 		try {
@@ -135,7 +135,7 @@ public class AdCampaignServiceClp implements AdCampaignService {
 			}
 		}
 
-		return (java.util.List<com.rumbasolutions.flask.model.AdCampaign>)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.portal.kernel.json.JSONArray)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override

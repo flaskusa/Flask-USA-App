@@ -63,7 +63,7 @@ public class AdCampaignServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
-	public static java.util.List<com.rumbasolutions.flask.model.AdCampaign> getAllCampaign() {
+	public static com.liferay.portal.kernel.json.JSONArray getAllCampaign() {
 		return getService().getAllCampaign();
 	}
 

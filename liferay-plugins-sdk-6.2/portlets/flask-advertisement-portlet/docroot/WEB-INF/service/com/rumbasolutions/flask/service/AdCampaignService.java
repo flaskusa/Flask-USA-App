@@ -66,7 +66,7 @@ public interface AdCampaignService extends BaseService, InvokableService {
 		throws java.lang.Throwable;
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.AdCampaign> getAllCampaign();
+	public com.liferay.portal.kernel.json.JSONArray getAllCampaign();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.rumbasolutions.flask.model.AdCampaign getCampaign(

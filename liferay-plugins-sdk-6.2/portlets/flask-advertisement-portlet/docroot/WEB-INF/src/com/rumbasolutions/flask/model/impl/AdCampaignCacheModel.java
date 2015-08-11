@@ -38,7 +38,7 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(23);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("{campaignId=");
 		sb.append(campaignId);
@@ -62,6 +62,8 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		sb.append(displayPostEvent);
 		sb.append(", frequencyPerHour=");
 		sb.append(frequencyPerHour);
+		sb.append(", eventTypeId=");
+		sb.append(eventTypeId);
 		sb.append("}");
 
 		return sb.toString();
@@ -101,6 +103,7 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		adCampaignImpl.setDisplayDuringEvent(displayDuringEvent);
 		adCampaignImpl.setDisplayPostEvent(displayPostEvent);
 		adCampaignImpl.setFrequencyPerHour(frequencyPerHour);
+		adCampaignImpl.setEventTypeId(eventTypeId);
 
 		adCampaignImpl.resetOriginalValues();
 
@@ -120,6 +123,7 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		displayDuringEvent = objectInput.readBoolean();
 		displayPostEvent = objectInput.readBoolean();
 		frequencyPerHour = objectInput.readLong();
+		eventTypeId = objectInput.readLong();
 	}
 
 	@Override
@@ -143,6 +147,7 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		objectOutput.writeBoolean(displayDuringEvent);
 		objectOutput.writeBoolean(displayPostEvent);
 		objectOutput.writeLong(frequencyPerHour);
+		objectOutput.writeLong(eventTypeId);
 	}
 
 	public long campaignId;
@@ -156,4 +161,5 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 	public boolean displayDuringEvent;
 	public boolean displayPostEvent;
 	public long frequencyPerHour;
+	public long eventTypeId;
 }

@@ -9,7 +9,8 @@ create table flaskads_AdCampaign (
 	displayPreEvent BOOLEAN,
 	displayDuringEvent BOOLEAN,
 	displayPostEvent BOOLEAN,
-	frequencyPerHour LONG
+	frequencyPerHour LONG,
+	eventTypeId LONG
 );
 
 create table flaskads_AdCustomer (
@@ -41,27 +42,7 @@ create table flaskads_CampaignEvent (
 	eventId LONG
 );
 
-create table flaskads_CampaignEvents (
-	campaignEventId LONG not null primary key,
-	userId LONG,
-	createdDate DATE null,
-	modifiedDate DATE null,
-	campaignId LONG,
-	eventId LONG
-);
-
 create table flaskads_CampaignImage (
-	campaignImageId LONG not null primary key,
-	userId LONG,
-	createdDate DATE null,
-	modifiedDate DATE null,
-	imageTitle VARCHAR(75) null,
-	imageDesc VARCHAR(75) null,
-	imageUUID VARCHAR(75) null,
-	imageGroupId LONG
-);
-
-create table flaskads_CampaignImages (
 	campaignImageId LONG not null primary key,
 	userId LONG,
 	createdDate DATE null,

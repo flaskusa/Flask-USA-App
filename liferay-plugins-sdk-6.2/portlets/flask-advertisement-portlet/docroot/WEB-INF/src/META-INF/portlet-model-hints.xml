@@ -13,6 +13,7 @@
 		<field name="displayDuringEvent" type="boolean" />
 		<field name="displayPostEvent" type="boolean" />
 		<field name="frequencyPerHour" type="long" />
+		<field name="eventTypeId" type="long" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.AdCustomer">
 		<field name="customerId" type="long" />

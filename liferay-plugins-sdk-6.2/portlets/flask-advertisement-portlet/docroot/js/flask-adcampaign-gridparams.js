@@ -1,13 +1,18 @@
     
-var GRID_PARAM_CAMPAIGN = {};
+var GridParam = function(){};
 
-var gridObj;
-var eventGridObj;
-var rowMenuDivId;
-var rowMenuColumnText;
-var rowDetailDivArr;
-var _dataModel;
-var _campaignContextMenuHandler;
+var GRID_PARAM_CAMPAIGN = new GridParam();
+
+
+GRID_PARAM_CAMPAIGN.gridObj = {};
+GRID_PARAM_CAMPAIGN.eventGridObj = {};
+GRID_PARAM_CAMPAIGN.rowMenuDivId = {};
+GRID_PARAM_CAMPAIGN.rowMenuColumnText = {};
+GRID_PARAM_CAMPAIGN.rowDetailDivArr= {};
+GRID_PARAM_CAMPAIGN._dataModel = {};
+GRID_PARAM_CAMPAIGN._campaignContextMenuHandler = {};
+
+
 GRID_PARAM_CAMPAIGN.source = function(model, data){
 	return {
 			localdata: data,
@@ -16,20 +21,20 @@ GRID_PARAM_CAMPAIGN.source = function(model, data){
 	};	
 }
 GRID_PARAM_CAMPAIGN.updateGrid = function(data){
-	var dataAdapter =  new $.jqx.dataAdapter(GRID_PARAM_CAMPAIGN.source(_dataModel, data));
-	gridObj.jqxGrid({ source: dataAdapter });
+	var dataAdapter =  new $.jqx.dataAdapter(GRID_PARAM_CAMPAIGN.source(GRID_PARAM_CAMPAIGN._dataModel, data));
+	GRID_PARAM_CAMPAIGN.gridObj.jqxGrid({ source: dataAdapter });
 }
 GRID_PARAM_CAMPAIGN.toggleSelectionMode= function(){
-	if(gridObj.jqxGrid('selectionmode') == 'checkbox'){
-		gridObj.jqxGrid({selectionmode:'singlerow'});
+	if(GRID_PARAM_CAMPAIGN.gridObj.jqxGrid('selectionmode') == 'checkbox'){
+		GRID_PARAM_CAMPAIGN.gridObj.jqxGrid({selectionmode:'singlerow'});
 	}else{
-		gridObj.jqxGrid({selectionmode:'checkbox'});
+		GRID_PARAM_CAMPAIGN.gridObj.jqxGrid({selectionmode:'checkbox'});
 	}
 	
 }
 GRID_PARAM_CAMPAIGN.toggleSearchBoxes = function(){
-	gridObj.jqxGrid({
-            showfilterrow: !(gridObj.jqxGrid('showfilterrow')),
+	GRID_PARAM_CAMPAIGN.gridObj.jqxGrid({
+            showfilterrow: !(GRID_PARAM_CAMPAIGN.gridObj.jqxGrid('showfilterrow')),
             filterable: true,
             filterrowheight: 34
 		});
@@ -37,10 +42,10 @@ GRID_PARAM_CAMPAIGN.toggleSearchBoxes = function(){
 }
 
 GRID_PARAM_CAMPAIGN.getCheckedIdList= function(idDataAttribute){
-    var rows = gridObj.jqxGrid('selectedrowindexes');
+    var rows = GRID_PARAM_CAMPAIGN.gridObj.jqxGrid('selectedrowindexes');
     var dataList="";
     $.each(rows, function(i, rowIndex){
-    	var rowData = gridObj.jqxGrid('getrowdata', rowIndex);
+    	var rowData = GRID_PARAM_CAMPAIGN.gridObj.jqxGrid('getrowdata', rowIndex);
     	dataList += eval('rowData.'+ idDataAttribute);
     	if(i !== rows.length - 1)
     		dataList += ", ";
@@ -73,13 +78,13 @@ GRID_PARAM_CAMPAIGN.onContextMenuItemClick =function (event)
 {
 	var args = event.args;
 	var menuItemtext= $.trim($(args).text());
-	var rowindex = gridObj.jqxGrid('getselectedrowindex');
-	var rowData = gridObj.jqxGrid('getrowdata', rowindex);
-	_campaignContextMenuHandler(menuItemtext, rowData);
+	var rowindex = GRID_PARAM_CAMPAIGN.gridObj.jqxGrid('getselectedrowindex');
+	var rowData = GRID_PARAM_CAMPAIGN.gridObj.jqxGrid('getrowdata', rowindex);
+	GRID_PARAM_CAMPAIGN._campaignContextMenuHandler(menuItemtext, rowData);
 }
 GRID_PARAM_CAMPAIGN.onRowClick =function (event) 
 {
-	var grid = gridObj;
+	var grid = GRID_PARAM_CAMPAIGN.gridObj;
 	var args = event.args;
 	// row's bound index.
 	var boundIndex = args.rowindex;
@@ -154,13 +159,13 @@ GRID_PARAM_CAMPAIGN.initrowdetails = function(index, parentElement, gridElement,
 	    var customer_Name = "<tr><td class='filledWidth'><b>Customer Name:</b></td><td> "
 			+ datarecord.customerName + "</td></tr>";
 	    var event_Type = "<tr><td class='filledWidth'><b>Event Type:</b></td><td> "
-			+ datarecord.eventType + "</td></tr>";
+			+ datarecord.eventTypeName + "</td></tr>";
 		var events = "<tr><td class='filledWidth'> <b>Events:</b></td><td>"
 				+ datarecord.events + "</td></tr>";
 		var display_At = "<tr><td class='filledWidth'><b>Display At:</b></td><td>"
-				+ datarecord.displayAt + "</td></tr>";
+				+ datarecord.adDisplayTime + "</td></tr>";
 		var frequency = "<tr><td class='filledWidth1'><b>Frequency:</b></td><td> "
-				+ datarecord.frequency + "</td></tr>";
+				+ datarecord.frequencyPerHour + "</td></tr>";
 			
 		$(leftcolumn).append("<table>");
 		
@@ -171,10 +176,11 @@ GRID_PARAM_CAMPAIGN.initrowdetails = function(index, parentElement, gridElement,
 		$(leftcolumn).append(frequency);
 		$(leftcolumn).append("</table>");
 		
-		$(rightcolumn).append("<table>");
+	/*	$(rightcolumn).append("<table>");
 		$(rightcolumn).append(events);
 		
-		$(rightcolumn).append("</table>");		
+		$(rightcolumn).append("</table>");	
+	*/	
 //		imagesDiv.append(container2);
 		
 		
@@ -207,29 +213,29 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
 			throw 'a valid model needs to be provided';
 		}
 		
-		_dataModel = model;
+		GRID_PARAM_CAMPAIGN._dataModel = model;
 		rowMenuDivId = menuDivId;
 		rowMenuColumnText =actionColText;
-		gridObj = grid;
+		GRID_PARAM_CAMPAIGN.gridObj = grid;
 		rowDetailDivArr = detailDivArr
 		
     var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
 						return '<i class="icon-wrench" style="margin:3px;"></i>'
 	}
     
-    var campaignColumns = [{ text: 'Campaign Name', columntype: 'textbox',  datafield: 'campaignName', width: '20%' },
+    var campaignColumns = [{ text: 'Campaign Name', columntype: 'textbox',  
+    		datafield: 'campaignName', width: '20%' },
     	 { text: 'Customer Name', datafield: 'customerName', width: '20%'},
-    	 { text: 'Event Type', datafield: 'eventType',  width: '10%'},
-    	 { text: 'Events',  datafield: 'events', width: '20%'},
-    	 { text: 'Display At', datafield: 'displayAt', width: '20%'},
-    	 { text: 'Frequency', datafield: 'frequency', width: '5%'},
-    	 { text: 'Edit',  datafield: 'customerId', width: '5%', cellsalign: 'center', cellsrenderer: actionRenderer}];
+    	 { text: 'Event Type', datafield: 'eventTypeName', width: '20%'},    	 
+    	 { text: 'Display Times', datafield: 'adDisplayTime', width: '20%'},
+    	 { text: 'Frequency per hour', datafield: 'frequencyPerHour', width: '10%'},
+    	 { text: 'Edit',  datafield: 'campaignId', width: '10%', cellsalign: 'center', cellsrenderer: actionRenderer}];
     	
     
     
     grid.on('cellclick', GRID_PARAM_CAMPAIGN.onRowClick);
     //set menu item click
-    _campaignContextMenuHandler = contextMenuHandler
+    GRID_PARAM_CAMPAIGN._campaignContextMenuHandler = contextMenuHandler
 	$('#' + rowMenuDivId).on('itemclick',GRID_PARAM_CAMPAIGN.onContextMenuItemClick);
 	
 	// create context menu
@@ -253,7 +259,6 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
 				columnsmenuwidth : 40,
 				rowsheight : 34,
                 theme:	'custom',
-             // Pageing config
                 pageable : true,
                 pagermode : 'default',
                 rowdetails: true,
@@ -295,14 +300,11 @@ function createEventsTable(data, grid, eventsIndex){
 				columnsmenuwidth : 40,
 				rowsheight : 34,
                 theme:	'custom',
-             // Pageing config
                 pageable : true,
                 pagermode : 'default',
                 rowdetails: true,
                 selectionmode: 'checkbox',
                 showrowdetailscolumn:false,
-//                rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
-//                initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
                 columns: eventsColumns
             });
     if(eventsIndex){

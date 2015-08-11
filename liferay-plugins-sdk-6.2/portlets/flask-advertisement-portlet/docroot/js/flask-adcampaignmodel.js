@@ -2,60 +2,80 @@ var _adCampaignModel = {};
 
 _adCampaignModel.SERVICE_ENDPOINTS = {
 	API_PREFIX : "/api/jsonws",
-	GET_CAMPAIGN : "/flask-manage-advertisement-portlet.adcampaign/get-all-campaign",
-	ADD_CAMPAIGN : "/flask-manage-advertisement-portlet.adcampaign/add-campaign",
-	UPDATE_CAMPAIGN : "/flask-manage-advertisement-portlet.adcampaign/update-campaign",
-	DELETE_CAMPAIGN : "/flask-manage-advertisement-portlet.adcampaign/delete-campaign",
-	DELETE_CAMPAIGNS : "/flask-manage-advertisement-portlet.adcampaign/delete-campaigns",
+	GET_CAMPAIGN : "/flask-advertisement-portlet.adcampaign/get-all-campaign",
+	ADD_CAMPAIGN : "/flask-advertisement-portlet.adcampaign/add-campaign",
+	UPDATE_CAMPAIGN : "/flask-advertisement-portlet.adcampaign/update-campaign",
+	DELETE_CAMPAIGN : "/flask-advertisement-portlet.adcampaign/delete-campaign",
+	DELETE_CAMPAIGNS : "/flask-advertisement-portlet.adcampaign/delete-campaigns",
 };
 
 _adCampaignModel.DATA_MODEL = {
-	CAMPAIGN : [ {
-		name : 'campaignId',
-		type : 'long',
-		fieldName : 'Campaign Id'
-	}, {
-		name : 'campaignName',
-		type : 'string',
-		fieldName : 'Campaign Name'
-	}, {
-		name : 'customerName',
-		type : 'string',
-		fieldName : 'Customer Name'
-	}, {
-		name : 'eventType',
-		type : 'string',
-		fieldName : 'Event Type'
-	}, {
-		name : 'events',
-		type : 'string',
-		fieldName : 'Events'
-	}, {
-		name : 'displayAt',
-		type : 'string',
-		fieldName : 'Display At'
-	}, {
-		name : 'frequency',
-		type : 'long',
-		fieldName : 'Frequency'
-	},{
-		name : 'eventsId',
-		type : 'string',
-		fieldName : 'Events Id'
-	},{
-		name : 'eventTypeId',
-		type : 'long',
-		fieldName : 'Event Type Id'
-	},{
-		name : 'customerId',
-		type : 'long',
-		fieldName : 'Customer Id'
-	},{
-		name : 'displayAtId',
-		type : 'string',
-		fieldName : 'Display At Id'
-	} ]
-};
+		CAMPAIGN : [ {
+			name : 'campaignId',
+			type : 'long',
+			fieldName : 'Campaign Id'
+		}, {
+			name : 'campaignName',
+			type : 'string',
+			fieldName : 'Campaign Name'
+		}, 
+		{
+			name : 'customerId',
+			type : 'string',
+			fieldName : 'Customer ID'
+		},
+		{
+			name : 'customerName',
+			type : 'string',
+			fieldName : 'Customer Name'
+		},
+		{
+			name : 'eventTypeId',
+			type : 'string',
+			fieldName : 'Event Type ID'
+		},
+		{
+			name : 'eventTypeName',
+			type : 'string',
+			fieldName : 'Event Type'
+		},
+		{
+			name : 'eventIds',
+			type : 'string',
+			fieldName : 'Events Ids'
+		},
+		{
+			name : 'displayGeneral',
+			type : 'boolean',
+			fieldName : 'displayGeneral'
+		},
+		{
+			name : 'displayPreEvent',
+			type : 'string',
+			fieldName : 'Events Ids'
+		},
+		{
+			name : 'displayDuringEvent',
+			type : 'string',
+			fieldName : 'Events Ids'
+		},
+		{
+			name : 'displayPostEvent',
+			type : 'string',
+			fieldName : 'Events Ids'
+		},
+		{
+			name : 'adDisplayTime',
+			type : 'string',
+			fieldName : 'Display Time'
+		},
+		{
+			name : 'frequencyPerHour',
+			type : 'long',
+			fieldName : 'Frequency'
+		}
+		]
+	};
 
 _adCampaignModel.MESSAGES = {
 	GET_ERROR : "There was an error in getting data",

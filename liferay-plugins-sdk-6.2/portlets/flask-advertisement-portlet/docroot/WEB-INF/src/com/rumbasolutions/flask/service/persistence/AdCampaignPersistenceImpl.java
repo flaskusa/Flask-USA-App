@@ -848,6 +848,7 @@ public class AdCampaignPersistenceImpl extends BasePersistenceImpl<AdCampaign>
 		adCampaignImpl.setDisplayDuringEvent(adCampaign.isDisplayDuringEvent());
 		adCampaignImpl.setDisplayPostEvent(adCampaign.isDisplayPostEvent());
 		adCampaignImpl.setFrequencyPerHour(adCampaign.getFrequencyPerHour());
+		adCampaignImpl.setEventTypeId(adCampaign.getEventTypeId());
 
 		return adCampaignImpl;
 	}
