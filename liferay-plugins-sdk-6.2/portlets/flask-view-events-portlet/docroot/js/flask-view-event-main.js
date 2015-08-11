@@ -440,16 +440,14 @@ function initMenuList(){
 	var objJqxTabs = $("#jqxTabs");
 	$(objMenuItems).html("");
 	var arr = [], len;
-	for(key in obj) {
+	for(key in eventDetailJSON) {
 		arr.push(key);
 	}
 	len = arr.length;
 	console.log(len) //2
 	for(var iCount=0;iCount<len;iCount++)
 	{
-		console.log(eventDetailJSON[iCount].EventDetail)
-		eventData = jQuery.parseJSON(eventDetailJSON[iCount].EventDetail);
-		$.each(eventData, function( index, objEventDetail) {
+			var objEventDetail = jQuery.parseJSON(eventDetailJSON[iCount].EventDetail);
 			var objLi = $("<li/>");
 			$(objLi).html(objEventDetail.infoTypeCategoryName);
 			$(objLi).appendTo($(objMenuItems));
@@ -472,7 +470,7 @@ function initMenuList(){
 			});		
 			$(objtbl).appendTo($(objDetailDiv));
 			$(objDetailDiv).appendTo($(objJqxTabs));
-		});	
+			
 	}
 	
 	$('#jqxTabs').jqxTabs({ 
