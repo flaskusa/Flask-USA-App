@@ -302,7 +302,7 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 			marker_infoType = infoType;
 			// map initialization
 	 		initialize();
-	 		loadMenuItems(eventId);	 		
+	 		initMenuList();	 		
 	 		window.location.hash = '#Details';
 	 		$("#spinningSquaresG").hide();
 	    /*}
@@ -434,25 +434,12 @@ function getVenueData(venueId){
 	});
 }
 
-function loadMenuItems(eventId){
-	var request = new Request();
-	var param = {eventId: eventId};
-	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL , param, 
-		function (data){
-			initMenuList(data);
-		} ,
-		function (data){
-			console.log("Error in generating detail menu" + data );
-		});
-}
-
-function initMenuList(eventData){
+function initMenuList(){
 	console.log(eventDetailJSON);
 	var objMenuItems = $(".menustrip");
 	var objJqxTabs = $("#jqxTabs");
 	$(objMenuItems).html("");
-	
+	eventData = jQuery.parseJSON(eventDetailJSON.EventDetail);
 	$.each(eventData, function( index, objEventDetail) {
 		var objLi = $("<li/>");
 		$(objLi).html(objEventDetail.infoTypeCategoryName);
