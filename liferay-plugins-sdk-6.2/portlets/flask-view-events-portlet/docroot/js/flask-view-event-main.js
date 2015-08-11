@@ -436,9 +436,10 @@ function getVenueData(venueId){
 
 function initMenuList(){
 	console.log(eventDetailJSON);
-	var objMenuItems = $(".menustrip");
 	var objJqxTabs = $("#jqxTabs");
-	$(objMenuItems).html("");
+	var objMenuItems = $("<ul/>",{"class":"menustrip","style":"margin-left: 30px"});
+	$(objJqxTabs).html("");
+	$(objMenuItems).appendTo($(objJqxTabs));
 	var arr = [], len;
 	for(key in eventDetailJSON) {
 		arr.push(key);
