@@ -439,9 +439,15 @@ function initMenuList(){
 	var objMenuItems = $(".menustrip");
 	var objJqxTabs = $("#jqxTabs");
 	$(objMenuItems).html("");
-	
-	for(var iCount=0;iCount<eventDetailJSON.length;iCount++)
+	var arr = [], len;
+	for(key in obj) {
+		arr.push(key);
+	}
+	len = arr.length;
+	console.log(len) //2
+	for(var iCount=0;iCount<len;iCount++)
 	{
+		console.log(eventDetailJSON[iCount].EventDetail)
 		eventData = jQuery.parseJSON(eventDetailJSON[iCount].EventDetail);
 		$.each(eventData, function( index, objEventDetail) {
 			var objLi = $("<li/>");
