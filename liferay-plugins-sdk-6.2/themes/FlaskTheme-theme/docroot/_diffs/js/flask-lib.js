@@ -11,7 +11,9 @@ _flaskLib.SERVICE_ENDPOINTS = {
 				GET_REGION 					: "/flask-rest-users-portlet.flaskadmin/get-region",
 				GET_USA_REGION 				: "/flask-rest-users-portlet.flaskadmin/get-usa-regions",
 				DELETE_FILES				: "/dlapp/delete-file-entry",
-				GET_FILE_ENTRY_ID   		: "/dlapp/get-file-entry-by-uuid-and-group-id"
+				GET_FILE_ENTRY_ID   		: "/dlapp/get-file-entry-by-uuid-and-group-id",
+				GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types"
+
 }
 
 _flaskLib.getFormData = function(formId, model, customGetData){
@@ -186,6 +188,26 @@ _flaskLib.loadCountries = function(elementId,selectedId){
 			});
 }
 
+_flaskLib.loadEventType = function(elementId,selectedId){
+	var request = new Request();
+	var selectList = $('#' + elementId);
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_EVENT_TYPES , {}, 
+					function (data){
+							selectList.empty();
+							$.each(data, function(key, eventType) {
+								selectList.append($("<option/>", {
+							        value: eventType.eventTypeId,
+							        text: eventType.eventTypeName
+							    }));
+							});
+							selectList.val(selectedId);
+					} ,
+					function (data){
+						console.log("Error in getting Event Type: " + data );
+					});
+	
+}
 
 _flaskLib.deleteImage = function(uuid, groupId, objDel){
 	console.log(uuid);
