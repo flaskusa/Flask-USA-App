@@ -435,48 +435,67 @@ function getVenueData(venueId){
 }
 
 function initMenuList(){
-	console.log(eventDetailJSON);
-	var objMenuItems = $(".menustrip");
-	var objJqxTabs = $("#jqxTabs");
-	$(objJqxTabs).find("div").remove();
-	$(objMenuItems).html("");
 	var arr = [], len;
+	var menuContainer = $("#jqxWidget"); //tab main div
 	for(key in eventDetailJSON) {
-		arr.push(key);
+		arr.push(key); // get JSON array length
 	}
 	len = arr.length;
-	console.log(len) //2
-	for(var iCount=0;iCount<len;iCount++)
-	{
-			var objEventDetail = jQuery.parseJSON(eventDetailJSON[iCount].EventDetail);
-			var objLi = $("<li/>");
-			$(objLi).html(objEventDetail.infoTypeCategoryName);
-			$(objLi).appendTo($(objMenuItems));
-			var objDetailDiv = $("<div/>");
-			var infoTypeCategoryName = objEventDetail.infoTypeCategoryName.toUpperCase()
-			var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+infoTypeCategoryName);
-			var objtbl = $("<table/>",{'cellpadding':'5px'});
-			$.each(objFields, function(idx, obj){
-				console.log(obj);
-				$.each(obj,function(key,value){
-					var objtr = $("<tr/>");
-					var valueTd = $("<td/>",{'align':'left','width':'100%'});				
-					var evalue = eval("objEventDetail."+key);
-					var caption = value;
-					console.log(evalue );
-					$(valueTd).html(evalue);
-					$(valueTd).appendTo($(objtr));
-					$(objtr).appendTo($(objtbl));
-				});
-			});		
-			$(objtbl).appendTo($(objDetailDiv));
-			$(objDetailDiv).appendTo($(objJqxTabs));
-			
-	}
 	
-	$('#jqxTabs').jqxTabs({ 
+	if(len>0){
+		var menuArray = [];
+		var detailsJSONArray = [];
+		var ulObj = $("<ul/>");
+		for(var iCount=0;iCount<len;iCount++){
+			var eachEventDetailJSON = $.parseJSON(eventDetailJSON[iCount].EventDetail);
+			if($.inArray(eachEventDetailJSON.infoTypeCategoryName, menuArray) == -1){
+				menuArray.push(eachEventDetailJSON.infoTypeCategoryName); 	//Push distinct menu here
+				var liObj = $("<li/>");
+				$(liObj).html(eachEventDetailJSON.infoTypeCategoryName);
+				$(liObj).appendTo($(ulObj));
+			}
+		}
+		$(ulObj).appendTo($(menuContainer));
+		
+		$.each(menuArray,function(a,b){
+			var divObj = $("<div/>",{"class":b});
+			var divSlider = $("<div/>",{"class":"MainSlider","style":"width:95%"});
+			$.each(eventDetailJSON,function(x,y){
+				var EventDetailJSON = $.parseJSON(y.EventDetail);
+				if(EventDetailJSON.infoTypeCategoryName == b){
+					var divSlideObj = $("<div/>",{"class":"infoDetailSlide","style":"width:95%"});
+					//console.log("_eventModel.DETAIL_DATA_MODEL."+EventDetailJSON.infoTypeCategoryName.toUpperCase());
+					var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+EventDetailJSON.infoTypeCategoryName.toUpperCase()); //_eventModel.
+					var objtbl = $("<table/>",{'cellpadding':'5px','width':'100%'});
+					$.each(objFields, function(idx, obj){
+						$.each(obj,function(key,value){
+							var objtr = $("<tr/>");
+							var valueTd = $("<td/>",{'align':'left','width':'100%'});				
+							var evalue = eval("EventDetailJSON."+key);
+							var caption = value;
+							$(valueTd).html(evalue);
+							$(valueTd).appendTo($(objtr));
+							$(objtr).appendTo($(objtbl));
+						});
+						$(objtbl).appendTo($(divSlideObj));							
+						$(divSlideObj).appendTo($(divSlider));								
+					});	
+					$(divSlider).appendTo($(divObj));														
+				}
+			});
+			$(divSlider).slick({
+					speed: 300,
+					variableWidth: false,
+					infinite: false,
+					dots: true
+			});					
+			$(divObj).appendTo($(menuContainer));					
+		});
+	}
+		
+	$(menuContainer).jqxTabs({ 
 		width: '100%',
 		height: '100%',
 		scrollPosition: 'both'
-	});
+	});		
 }
