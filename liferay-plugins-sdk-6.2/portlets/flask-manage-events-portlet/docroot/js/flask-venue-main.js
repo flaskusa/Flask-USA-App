@@ -29,7 +29,7 @@ function addClickHandlers(){
 		if($('#venueForm').jqxValidator('validate'))
 			var geocoder = new google.maps.Geocoder(); 
 		geocoder.geocode({
-				address : $('#addrLine1').val(), 
+				address : $('#venueName').val() +', '+ $('#addrLine1').val(), 
 				region: 'no'
 			},
 		    function(results, status) {
