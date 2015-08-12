@@ -1,4 +1,4 @@
-var adCustomerForm;
+ var adCustomerForm;
 var customerId = "0";
 function adCustomerClickHandlers(){
 	adCustomerForm = $("#addCustomerForm");

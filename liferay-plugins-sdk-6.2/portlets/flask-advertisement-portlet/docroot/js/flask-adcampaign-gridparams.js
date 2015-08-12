@@ -275,17 +275,16 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
  */
 function createEventsTable(data, grid, eventsIndex){
     var eventsColumns = [{ text: 'Event Name', columntype: 'textbox',  datafield: 'eventName', width: '30%' },
-    	 { text: 'Event Description', datafield: 'description', width: '50%'},
-    	 { text: 'Venue', datafield: 'venueName',  width: '15%'}];
+    	 { text: 'Event Description', datafield: 'description', width: '40%'},
+    	 { text: 'Event Date', datafield: 'eventDate',  width: '20%'}];
     var source = {
 			 localdata:data,
 			 datatype:'array',
 			 datafields: [
-			              	{name: 'eventName', type: 'string' },
 			              	{name: 'eventId', type: 'string' },
+			              	{name: 'eventName', type: 'string' },
 		                    {name: 'description', type: 'string' },
-		                    {name:'venueId',type:'string'},
-		                    {name:'venueName',type:'string'},
+		                    {name:'eventDate',type:'string'},
 		                ],
 		     id : 'eventId'           
 	 };
@@ -293,12 +292,12 @@ function createEventsTable(data, grid, eventsIndex){
 	var dataAdapter = new $.jqx.dataAdapter(source);
     grid.jqxGrid(
             {
-                width: '100%',
-                height:'70%',
+                width: '80%',
+                height:'200px',
                 source: dataAdapter,
                 columnsheight : 40,
 				columnsmenuwidth : 40,
-				rowsheight : 34,
+				rowsheight : 20,
                 theme:	'custom',
                 pageable : true,
                 pagermode : 'default',

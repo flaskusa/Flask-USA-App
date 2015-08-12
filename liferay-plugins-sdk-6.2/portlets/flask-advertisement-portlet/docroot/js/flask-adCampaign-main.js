@@ -1,7 +1,10 @@
 var adCampaignForm;
 var campaignId = 0;
+
+var infoTypeJson;
+
 function adCampaignClickHandlers() {
-	adCampaignForm = $("#adCampaignForm");
+	adCampaignForm = $("#addCampaignForm");
 	/* Initialize display elements */
 
 	$("#delCampaignTrash").hide();
@@ -9,50 +12,28 @@ function adCampaignClickHandlers() {
 	/* Click handler for add user button */
 
 	$("#addCampaign").click(function() {
-		adCampaignForm.trigger('reset')
 		$("#adCampaignDataTable").hide();
-		$("#adCampaignModal").modal({
-			show : true,
-			backdrop : 'static'
-		});
-		prepareCustomerDropDownList();
-		prepareEventTypeDropdown();
-		prepareInfoTypesCheckBox();
-		adCampaignForm.show();
-		filterData("1");
+		prepareCustomerDropDownList('customerId');
+		prepareEventTypeDropdown('eventTypeId');
+		loadEventData("1");
+		setCampaignFormVisible(true);
 		campaignId = 0;
 	});
 
 	/* Click handler for save button */
 
-	$(".clsSaveCampaign").click(
+	$("#saveCampaign").click(
 			function() {
-				if (_flaskLib.validateFormData('adCampaignForm','campaign-valid-msg',
-						_adCampaignModel.DATA_MODEL.CAMPAIGN, function(formId,
-								model, isValid) {
-								var x = GRID_PARAM_CAMPAIGN
-										.getCheckedEventIdList('eventId');
-								if (x.length == 0) {
-									_flaskLib.showErrorMessage(
-											'campaign-valid-msg',
-											'Please select Events.');
-									isValid = false;
-								}
-							return isValid;
-						})) {
 					saveCampaign();
 					$("#adCampaignDataTable").show();
-					$("#adCampaignModal").modal('hide');
-					adCampaignForm.hide();
-				}
+					setCampaignFormVisible(false);
 			});
 
 	/* Click handler for cancel button */
 
-	$(".clsCancelCampaign").click(function() {
+	$("#cancelCampaign").click(function() {
 		$("#adCampaignDataTable").show();
-		$("#adCampaignModal").modal("hide");
-		adCampaignForm.hide();
+		setCampaignFormVisible(false);
 	});
 
 	$("#delCampaignList").click(function() {
@@ -82,6 +63,18 @@ function adCampaignClickHandlers() {
 
 }
 
+function setCampaignFormVisible(visible){
+	if(visible == true){
+		$("#adCampaignFormContainer").show();
+		adCampaignForm.show();
+	}else{
+		$("#adCampaignFormContainer").hide();
+		adCampaignForm.hide;
+	}
+	
+	
+}
+
 function loadCampaignData() {
 	var flaskRequest = new Request();
 	params = {};
@@ -96,30 +89,21 @@ function loadCampaignData() {
 }
 
 
-
-function prepareEventsNameList(eventsList) {
-	var eventsName = "";
-	var eventsArray = eventsList.split(",");
-	$.each(eventsArray, function(index, event) {
-		eventsName += _flaskLib.EventList[event].eventName;
-		if (index !== eventsArray.length - 1)
-			eventsName += ",";
+function loadEventData(eventTypeId){
+	var flaskRequest = new Request();
+	params = {};
+	flaskRequest.sendGETRequest(_adCampaignModel.SERVICE_ENDPOINTS.GET_EVENT, params, 
+	function(data){/*success handler*/
+		var events = eval(data);
+		createEventsTable(events.Events, $("#campaignEvents"));
+			
+	} , function(error){ /*failure handler*/
+		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
+		console.log("Error in getting data: " + error);
 	});
-	return eventsName;
-}
-function prepareDisplayAtList(displayAt) {
-	var displayAtName = "";
-	var displayAtArray = displayAt.split(",");
-	$.each(displayAtArray, function(index, displayAt) {
-		displayAtName += _flaskLib.infoTypeList[displayAt].infoTypeName;
-		if (index !== displayAtArray.length - 1)
-			displayAtName += ",";
-	});
-	return displayAtName;
 }
 
 function campaignContextMenuHandler(menuItemText, rowData) {
-	// var args = event.args;
 	campaignId = rowData.campaignId;
 	if (menuItemText == "Edit") {
 		editCampaign(rowData);
@@ -178,17 +162,11 @@ function editCampaign(rowData) {
 
 			});
 	$("#adCampaignDataTable").hide();
-	$("#adCampaignModal").modal({
-		show : true,
-		backdrop : 'static'
-	});
-	prepareCustomerDropDownList(rowData.customerId);
+	prepareCustomerDropDownList('customerId', rowData.customerId);
 	prepareEventTypeDropdown(rowData.eventTypeId);
 	prepareInfoTypesCheckBox(rowData.displayAtId);
-	adCampaignForm.show();
 	filterData(rowData.eventTypeId, rowData.eventsId);
-	// _flaskLib.loadUSARegions('CampaignStateId', rowData.CampaignStateId);
-
+	setCampaignFormVisible(true);
 }
 
 function saveCampaign() {
@@ -243,100 +221,39 @@ function filterData(evenType, eventsId) {
 	}
 	createEventsTable(filterdData, $("#campaignEvents"), eventsIndex);
 }
-function prepareCustomerDropDownList(customerId) {
-	$(".customerName").remove();
-	var customerList = _flaskLib.customers;
-	$.each(customerList, function(i, obj) {
-		if (customerId) {
-			if (customerId == obj.customerId) {
-				$("#customerName").append(
-						"<option value=" + obj.customerId
-								+ " class=customerName selected=selected >"
-								+ obj.customerName + "</option>");
-			} else {
-				$("#customerName").append(
-						"<option value=" + obj.customerId
-								+ " class=customerName >" + obj.customerName
-								+ "</option>");
-			}
-		} else {
-			$("#customerName").append(
-					"<option value=" + obj.customerId + " class=customerName >"
-							+ obj.customerName + "</option>");
-		}
-	});
+function prepareCustomerDropDownList(elementId, selectedId) {
+	var flaskRequest = new Request();
+	var selectList = $('#' + elementId);
+	flaskRequest.sendGETRequest(
+			_adCustomerModel.SERVICE_ENDPOINTS.GET_ALL_CUSTOMER, {}, function(
+					data) {
+				selectList.empty();
+				$.each(data, function(key, customer) {
+					selectList.append($("<option/>", {
+						value : customer.customerId,
+						text : customer.customerName
+					}));
+				});
+				if(selectedId) selectList.val(selectedId);
+				
+			}, function(data) {
+				console.log("Error in getting Customers: " + data);
+			});
+
 }
 
-function prepareEventTypeDropdown(eventTypeId) {
-	$(".eventTypeName").remove();
-	var eventTypeList = _flaskLib.eventTypes;
-	$.each(eventTypeList, function(i, obj) {
-		if (eventTypeId) {
-			if (eventTypeId == obj.eventTypeId) {
-				$("#eventType").append(
-						"<option value=" + obj.eventTypeId
-								+ " class=eventTypeName selected=selected >"
-								+ obj.eventTypeName + "</option>");
-			} else {
-				$("#eventType").append(
-						"<option value=" + obj.eventTypeId
-								+ " class=eventTypeName >" + obj.eventTypeName
-								+ "</option>");
-			}
-		} else {
-			$("#eventType").append(
-					"<option value=" + obj.eventTypeId
-							+ " class=eventTypeName >" + obj.eventTypeName
-							+ "</option>");
-		}
-	});
+function prepareEventTypeDropdown(elementId, selectedEventTypeId) {
+	_flaskLib.loadEventType(elementId, selectedEventTypeId);
 }
 
-function prepareInfoTypesCheckBox(displayAtId) {
-	var displayAtIdList = [];
-	if (displayAtId) {
-		displayAtIdList = displayAtId.split(",");
-	}
-	$(".displayAtChk").remove();
-	var infoTypeList = _flaskLib.infoTypes;
-	$
-			.each(
-					infoTypeList,
-					function(i, obj) {
-						if (displayAtId) {
-							if (displayAtIdList.indexOf(obj.infoTypeId
-									.toString()) >= 0) {
-								$("#displayAttemp")
-										.append(
-												"<span class='displayAtChk'><input type ='checkbox' checked='checked'  name='displayAt' id = 'displayAt'"
-														+ i
-														+ "' value ="
-														+ obj.infoTypeId
-														+ " >"
-														+ obj.infoTypeName
-														+ "</span>&nbsp;&nbsp;");
-							} else {
-								$("#displayAttemp")
-										.append(
-												"<span class='displayAtChk'><input type ='checkbox'  name='displayAt' id = 'displayAt'"
-														+ i
-														+ "' value ="
-														+ obj.infoTypeId
-														+ " >"
-														+ obj.infoTypeName
-														+ "</span>&nbsp;&nbsp;");
-							}
-						} else {
-							$("#displayAttemp")
-									.append(
-											"<span class='displayAtChk'><input type ='checkbox'  name='displayAt' id = 'displayAt'"
-													+ i
-													+ "' value ="
-													+ obj.infoTypeId
-													+ " >"
-													+ obj.infoTypeName
-													+ "</span>&nbsp;&nbsp;");
-						}
+function getInfoTypes(){
+		var flaskRequest = new Request();
+		flaskRequest.sendGETRequest(
+				_adCampaignModel.SERVICE_ENDPOINTS.GET_INFO_TYPES, {},
+				function(data) {
+					infoTypeJson = data;
+				}, function(data) {
+					console.log("Error in getting get info type: " + data);
+				});
 
-					});
 }

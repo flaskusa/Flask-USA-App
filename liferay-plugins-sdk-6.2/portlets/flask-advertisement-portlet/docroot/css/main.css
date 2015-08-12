@@ -125,3 +125,7 @@ ul.flipster-nav
 .icon-wrench {
   zoom: 1.8 !important;
 }
+
+displayAtChk{
+	display:block;
+}

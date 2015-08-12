@@ -33,7 +33,7 @@
 	<div class="tab-content">
 	  <div class="tab-pane active" id="campaigns">
 		<div id="manageCampaignContainer">
-			<div id="campaignDataTable" class="table-condensed">
+			<div id="adCampaignDataTable" class="table-condensed">
 			<div class="cssGridMenu">
 				<div class="cssAddUser" id="addCampaign"><div class="iconAddVenue"></div></div>
 				<div class="cssSearchUser" id="searchCampaign"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
@@ -41,6 +41,73 @@
 				<div class="cssDelete" id="delCampaignTrash"><div class="iconDelete"><i class="icon-trash"></i></div></div>
 			</div>
 			  <div id="campaignGrid"></div>
+			</div>
+			<div id="adCampaignFormContainer" style="display:none;  height:100%; overflow-y: auto;">			  
+				<form id="addCustomerForm">
+				   <div class="form-group">
+				     <label class="control-label" for=campaignName>Campaign Name:</label>
+				     <div class="controls">
+				       <input name="campaignName" id="campaignName" class="form-control" type="text">
+				     </div>
+				   </div>
+					<div class="form-group">
+							<label class="control-label" for="customerId">Customer
+										Name:</label>
+							<div class="controls">
+									<select name="customerId" id="customerId"
+										class="form-control">
+									</select>
+							</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="adDisplayTime">Display At</label>
+						<div class="controls" id="adDisplayTime">
+							<div class='displayAtChk'>
+									<input type ='checkbox' checked='checked'  name='displayAtGeneral' id = 'displayAtGeneral'/>
+									General
+							</div>
+							<div class='displayAtChk'>
+									<input type ='checkbox' checked='checked'  name='displayAtPreEvent' id = 'displayAtPreEvent'/>
+									Pre-Event
+							</div>
+							<div class='displayAtChk'>
+									<input type ='checkbox' checked='checked'  name='displayAtDuringEvent' id = 'displayAtDuringEvent'/>
+									During-Event
+							</div>
+							<div class='displayAtChk'>
+									<input type ='checkbox' checked='checked'  name='displayAtPostEvent' id = 'displayAtPostEvent'/>
+									Post-Event
+							</div>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="frequencyPerHour">Frequency per hour:</label>
+						<div class="controls">
+							<input name="frequencyPerHour" id="frequencyPerHour" class="form-control"
+											type="text">
+						</div>
+					</div>
+					
+					<div class="form-group">
+							<label class="control-label" for="eventTypeId">Event
+										Type:</label>
+							<div class="controls">
+								<select name="eventTypeId" id="eventTypeId" class="form-control"
+										onchange="filterData(this.value)">
+								</select>
+							</div>
+					</div>
+					<div class="form-group">
+							<label class="control-label" for="eventIds">Events</label>
+							<div id="campaignJqxwidget">
+										<div id="campaignEvents"></div>
+							</div>
+					</div>
+					
+					<input class="btn btn-info clsSave" id="saveCampaign" type="button" value="Save"/>
+					<input class="btn btn-primary clsCancel" id="cancelCampaign" type="button" value="Cancel" >
+
+				</form>
 			</div>
 			<div id='campaignActionMenu' style="display:none">
 				<ul>

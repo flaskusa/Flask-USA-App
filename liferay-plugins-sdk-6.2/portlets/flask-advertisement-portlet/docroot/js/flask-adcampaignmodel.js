@@ -7,6 +7,9 @@ _adCampaignModel.SERVICE_ENDPOINTS = {
 	UPDATE_CAMPAIGN : "/flask-advertisement-portlet.adcampaign/update-campaign",
 	DELETE_CAMPAIGN : "/flask-advertisement-portlet.adcampaign/delete-campaign",
 	DELETE_CAMPAIGNS : "/flask-advertisement-portlet.adcampaign/delete-campaigns",
+	GET_INFO_TYPES : "/flask-rest-events-portlet.infotype/get-info-types",
+	GET_EVENT 	   : "/flask-rest-events-portlet.event/get-all-events",
+
 };
 
 _adCampaignModel.DATA_MODEL = {
