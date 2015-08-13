@@ -70,6 +70,13 @@ public interface EventService extends BaseService, InvokableService {
 	public com.liferay.portal.kernel.json.JSONObject getAllEvents(
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getSimpleFilteredEvents(
+		java.lang.String eventTypeIds, java.lang.String startDate,
+		java.lang.String endDate, java.lang.String searchString,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONObject getUserSelectedEvents(
 		com.liferay.portal.service.ServiceContext serviceContext);

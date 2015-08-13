@@ -63,6 +63,15 @@ public class EventServiceWrapper implements EventService,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.json.JSONObject getSimpleFilteredEvents(
+		java.lang.String eventTypeIds, java.lang.String startDate,
+		java.lang.String endDate, java.lang.String searchString,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventService.getSimpleFilteredEvents(eventTypeIds, startDate,
+			endDate, searchString, serviceContext);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.json.JSONObject getUserSelectedEvents(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.getUserSelectedEvents(serviceContext);

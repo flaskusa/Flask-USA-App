@@ -35,6 +35,7 @@ import com.rumbasolutions.flask.model.Event;
 import com.rumbasolutions.flask.service.EventLocalService;
 import com.rumbasolutions.flask.service.persistence.EventDetailImagePersistence;
 import com.rumbasolutions.flask.service.persistence.EventDetailPersistence;
+import com.rumbasolutions.flask.service.persistence.EventFinder;
 import com.rumbasolutions.flask.service.persistence.EventPersistence;
 import com.rumbasolutions.flask.service.persistence.EventTypePersistence;
 import com.rumbasolutions.flask.service.persistence.InfoTypeCategoryPersistence;
@@ -335,6 +336,24 @@ public abstract class EventLocalServiceBaseImpl extends BaseLocalServiceImpl
 	 */
 	public void setEventPersistence(EventPersistence eventPersistence) {
 		this.eventPersistence = eventPersistence;
+	}
+
+	/**
+	 * Returns the event finder.
+	 *
+	 * @return the event finder
+	 */
+	public EventFinder getEventFinder() {
+		return eventFinder;
+	}
+
+	/**
+	 * Sets the event finder.
+	 *
+	 * @param eventFinder the event finder
+	 */
+	public void setEventFinder(EventFinder eventFinder) {
+		this.eventFinder = eventFinder;
 	}
 
 	/**
@@ -1087,6 +1106,8 @@ public abstract class EventLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.rumbasolutions.flask.service.EventService eventService;
 	@BeanReference(type = EventPersistence.class)
 	protected EventPersistence eventPersistence;
+	@BeanReference(type = EventFinder.class)
+	protected EventFinder eventFinder;
 	@BeanReference(type = com.rumbasolutions.flask.service.EventDetailLocalService.class)
 	protected com.rumbasolutions.flask.service.EventDetailLocalService eventDetailLocalService;
 	@BeanReference(type = com.rumbasolutions.flask.service.EventDetailService.class)

@@ -77,6 +77,24 @@ public class EventServiceSoap {
 		}
 	}
 
+	public static java.lang.String getSimpleFilteredEvents(
+		java.lang.String eventTypeIds, java.lang.String startDate,
+		java.lang.String endDate, java.lang.String searchString,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = EventServiceUtil.getSimpleFilteredEvents(eventTypeIds,
+					startDate, endDate, searchString, serviceContext);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String getUserSelectedEvents(
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {

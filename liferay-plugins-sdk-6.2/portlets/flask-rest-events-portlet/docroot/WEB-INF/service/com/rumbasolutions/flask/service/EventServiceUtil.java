@@ -68,6 +68,15 @@ public class EventServiceUtil {
 		return getService().getAllEvents(serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject getSimpleFilteredEvents(
+		java.lang.String eventTypeIds, java.lang.String startDate,
+		java.lang.String endDate, java.lang.String searchString,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .getSimpleFilteredEvents(eventTypeIds, startDate, endDate,
+			searchString, serviceContext);
+	}
+
 	public static com.liferay.portal.kernel.json.JSONObject getUserSelectedEvents(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService().getUserSelectedEvents(serviceContext);

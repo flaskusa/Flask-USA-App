@@ -24,48 +24,48 @@ import java.util.Arrays;
  */
 public class InfoTypeServiceClpInvoker {
 	public InfoTypeServiceClpInvoker() {
-		_methodName78 = "getBeanIdentifier";
+		_methodName80 = "getBeanIdentifier";
 
-		_methodParameterTypes78 = new String[] {  };
+		_methodParameterTypes80 = new String[] {  };
 
-		_methodName79 = "setBeanIdentifier";
+		_methodName81 = "setBeanIdentifier";
 
-		_methodParameterTypes79 = new String[] { "java.lang.String" };
+		_methodParameterTypes81 = new String[] { "java.lang.String" };
 
-		_methodName84 = "getInfoTypes";
+		_methodName86 = "getInfoTypes";
 
-		_methodParameterTypes84 = new String[] {
+		_methodParameterTypes86 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName85 = "getInfoType";
+		_methodName87 = "getInfoType";
 
-		_methodParameterTypes85 = new String[] {
+		_methodParameterTypes87 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName78.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
 			return InfoTypeServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName79.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
 			InfoTypeServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName84.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
+		if (_methodName86.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes86, parameterTypes)) {
 			return InfoTypeServiceUtil.getInfoTypes((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
-		if (_methodName85.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes85, parameterTypes)) {
+		if (_methodName87.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
 			return InfoTypeServiceUtil.getInfoType(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
@@ -73,12 +73,12 @@ public class InfoTypeServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName78;
-	private String[] _methodParameterTypes78;
-	private String _methodName79;
-	private String[] _methodParameterTypes79;
-	private String _methodName84;
-	private String[] _methodParameterTypes84;
-	private String _methodName85;
-	private String[] _methodParameterTypes85;
+	private String _methodName80;
+	private String[] _methodParameterTypes80;
+	private String _methodName81;
+	private String[] _methodParameterTypes81;
+	private String _methodName86;
+	private String[] _methodParameterTypes86;
+	private String _methodName87;
+	private String[] _methodParameterTypes87;
 }

@@ -4,6 +4,7 @@
 	<bean id="com.rumbasolutions.flask.service.EventLocalService" class="com.rumbasolutions.flask.service.impl.EventLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.EventService" class="com.rumbasolutions.flask.service.impl.EventServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.EventPersistence" class="com.rumbasolutions.flask.service.persistence.EventPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.persistence.EventFinder" class="com.rumbasolutions.flask.service.persistence.EventFinderImpl" parent="basePersistence" />
 	<bean id="com.rumbasolutions.flask.service.EventDetailLocalService" class="com.rumbasolutions.flask.service.impl.EventDetailLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.EventDetailService" class="com.rumbasolutions.flask.service.impl.EventDetailServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.EventDetailPersistence" class="com.rumbasolutions.flask.service.persistence.EventDetailPersistenceImpl" parent="basePersistence" />

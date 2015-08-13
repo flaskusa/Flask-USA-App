@@ -38,60 +38,56 @@ public class EventServiceClp implements EventService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "getUserSelectedEvents";
+		_methodName4 = "getSimpleFilteredEvents";
 
 		_methodParameterTypes4 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName5 = "getUserSelectedEvents";
+
+		_methodParameterTypes5 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName5 = "getEvent";
+		_methodName6 = "getEvent";
 
-		_methodParameterTypes5 = new String[] {
+		_methodParameterTypes6 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName6 = "addEvent";
+		_methodName7 = "addEvent";
 
-		_methodParameterTypes6 = new String[] {
+		_methodParameterTypes7 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.util.Date", "java.util.Date", "long", "long",
 				"java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName7 = "updateEvent";
+		_methodName8 = "updateEvent";
 
-		_methodParameterTypes7 = new String[] {
+		_methodParameterTypes8 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.util.Date", "java.util.Date", "long",
 				"long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName8 = "deleteEvent";
+		_methodName9 = "deleteEvent";
 
-		_methodParameterTypes8 = new String[] {
+		_methodParameterTypes9 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName9 = "deleteEvents";
+		_methodName10 = "deleteEvents";
 
-		_methodParameterTypes9 = new String[] {
+		_methodParameterTypes10 = new String[] {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName10 = "addEventDetail";
-
-		_methodParameterTypes10 = new String[] {
-				"long", "long", "long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName11 = "updateEventDetail";
+		_methodName11 = "addEventDetail";
 
 		_methodParameterTypes11 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
@@ -102,45 +98,48 @@ public class EventServiceClp implements EventService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName12 = "getEventDetail";
+		_methodName12 = "updateEventDetail";
 
 		_methodParameterTypes12 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.Double", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName13 = "getEventDetails";
+		_methodName13 = "getEventDetail";
 
 		_methodParameterTypes13 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName14 = "getEventDetailsWithImages";
+		_methodName14 = "getEventDetails";
 
 		_methodParameterTypes14 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName15 = "deleteEventDetail";
+		_methodName15 = "getEventDetailsWithImages";
 
 		_methodParameterTypes15 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName16 = "deleteAllEventDetails";
+		_methodName16 = "deleteEventDetail";
 
 		_methodParameterTypes16 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName17 = "addEventDetailImage";
+		_methodName17 = "deleteAllEventDetails";
 
 		_methodParameterTypes17 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long",
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName18 = "updateEventDetailImage";
+		_methodName18 = "addEventDetailImage";
 
 		_methodParameterTypes18 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
@@ -148,39 +147,47 @@ public class EventServiceClp implements EventService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName19 = "getEventDetailImage";
+		_methodName19 = "updateEventDetailImage";
 
 		_methodParameterTypes19 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName20 = "getEventDetailImages";
+		_methodName20 = "getEventDetailImage";
 
 		_methodParameterTypes20 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName21 = "deleteEventDetailImage";
+		_methodName21 = "getEventDetailImages";
 
 		_methodParameterTypes21 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName22 = "addUserEvent";
+		_methodName22 = "deleteEventDetailImage";
 
 		_methodParameterTypes22 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName23 = "removeUserEvent";
+		_methodName23 = "addUserEvent";
 
 		_methodParameterTypes23 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName24 = "getUserEventIds";
+		_methodName24 = "removeUserEvent";
 
 		_methodParameterTypes24 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName25 = "getUserEventIds";
+
+		_methodParameterTypes25 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -261,13 +268,50 @@ public class EventServiceClp implements EventService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONObject getUserSelectedEvents(
+	public com.liferay.portal.kernel.json.JSONObject getSimpleFilteredEvents(
+		java.lang.String eventTypeIds, java.lang.String startDate,
+		java.lang.String endDate, java.lang.String searchString,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName4,
 					_methodParameterTypes4,
+					new Object[] {
+						ClpSerializer.translateInput(eventTypeIds),
+						
+					ClpSerializer.translateInput(startDate),
+						
+					ClpSerializer.translateInput(endDate),
+						
+					ClpSerializer.translateInput(searchString),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getUserSelectedEvents(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5,
 					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -291,8 +335,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5,
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6,
 					new Object[] {
 						eventId,
 						
@@ -324,8 +368,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7,
 					new Object[] {
 						ClpSerializer.translateInput(eventName),
 						
@@ -373,8 +417,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7,
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
 					new Object[] {
 						eventId,
 						
@@ -418,8 +462,8 @@ public class EventServiceClp implements EventService {
 	public void deleteEvent(long eventId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9,
 				new Object[] {
 					eventId,
 					
@@ -443,8 +487,8 @@ public class EventServiceClp implements EventService {
 	public void deleteEvents(java.lang.String eventIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName9,
-				_methodParameterTypes9,
+			_invokableService.invokeMethod(_methodName10,
+				_methodParameterTypes10,
 				new Object[] {
 					ClpSerializer.translateInput(eventIds),
 					
@@ -477,8 +521,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName10,
-					_methodParameterTypes10,
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11,
 					new Object[] {
 						eventId,
 						
@@ -545,8 +589,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName11,
-					_methodParameterTypes11,
+			returnObj = _invokableService.invokeMethod(_methodName12,
+					_methodParameterTypes12,
 					new Object[] {
 						eventDetailId,
 						
@@ -607,8 +651,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName12,
-					_methodParameterTypes12,
+			returnObj = _invokableService.invokeMethod(_methodName13,
+					_methodParameterTypes13,
 					new Object[] {
 						eventDetailId,
 						
@@ -636,8 +680,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName13,
-					_methodParameterTypes13,
+			returnObj = _invokableService.invokeMethod(_methodName14,
+					_methodParameterTypes14,
 					new Object[] {
 						eventId,
 						
@@ -665,8 +709,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName14,
-					_methodParameterTypes14,
+			returnObj = _invokableService.invokeMethod(_methodName15,
+					_methodParameterTypes15,
 					new Object[] {
 						eventId,
 						
@@ -692,8 +736,8 @@ public class EventServiceClp implements EventService {
 	public void deleteEventDetail(long eventDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName15,
-				_methodParameterTypes15,
+			_invokableService.invokeMethod(_methodName16,
+				_methodParameterTypes16,
 				new Object[] {
 					eventDetailId,
 					
@@ -717,8 +761,8 @@ public class EventServiceClp implements EventService {
 	public void deleteAllEventDetails(long eventId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName16,
-				_methodParameterTypes16,
+			_invokableService.invokeMethod(_methodName17,
+				_methodParameterTypes17,
 				new Object[] {
 					eventId,
 					
@@ -746,8 +790,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName17,
-					_methodParameterTypes17,
+			returnObj = _invokableService.invokeMethod(_methodName18,
+					_methodParameterTypes18,
 					new Object[] {
 						eventDetailId,
 						
@@ -785,8 +829,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName18,
-					_methodParameterTypes18,
+			returnObj = _invokableService.invokeMethod(_methodName19,
+					_methodParameterTypes19,
 					new Object[] {
 						eventDetailImageId,
 						
@@ -823,8 +867,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName19,
-					_methodParameterTypes19,
+			returnObj = _invokableService.invokeMethod(_methodName20,
+					_methodParameterTypes20,
 					new Object[] {
 						eventDetailImageId,
 						
@@ -853,8 +897,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName20,
-					_methodParameterTypes20,
+			returnObj = _invokableService.invokeMethod(_methodName21,
+					_methodParameterTypes21,
 					new Object[] {
 						eventDetailId,
 						
@@ -880,8 +924,8 @@ public class EventServiceClp implements EventService {
 	public void deleteEventDetailImage(long eventDetailImageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName21,
-				_methodParameterTypes21,
+			_invokableService.invokeMethod(_methodName22,
+				_methodParameterTypes22,
 				new Object[] {
 					eventDetailImageId,
 					
@@ -905,8 +949,8 @@ public class EventServiceClp implements EventService {
 	public void addUserEvent(long eventId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName22,
-				_methodParameterTypes22,
+			_invokableService.invokeMethod(_methodName23,
+				_methodParameterTypes23,
 				new Object[] {
 					eventId,
 					
@@ -930,8 +974,8 @@ public class EventServiceClp implements EventService {
 	public void removeUserEvent(long eventId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName23,
-				_methodParameterTypes23,
+			_invokableService.invokeMethod(_methodName24,
+				_methodParameterTypes24,
 				new Object[] {
 					eventId,
 					
@@ -957,8 +1001,8 @@ public class EventServiceClp implements EventService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName24,
-					_methodParameterTypes24,
+			returnObj = _invokableService.invokeMethod(_methodName25,
+					_methodParameterTypes25,
 					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -1025,4 +1069,6 @@ public class EventServiceClp implements EventService {
 	private String[] _methodParameterTypes23;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
 }
