@@ -46,6 +46,18 @@
     <footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>        
      <css-class-wrapper>flask-view-user-events-portlet</css-class-wrapper>
  </portlet>
+ 
+ <portlet>
+  <portlet-name>flask-view-advertisement</portlet-name>
+  <icon>/icon.png</icon>
+  <header-portlet-css>/css/main.css</header-portlet-css>
+  <header-portlet-css>/css/slick.css</header-portlet-css>
+  <header-portlet-css>/css/slick-theme.css</header-portlet-css>
+    <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/slick.js</footer-portlet-javascript>
+     <css-class-wrapper>flask-view-advertisement-portlet</css-class-wrapper>
+ </portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

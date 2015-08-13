@@ -31,7 +31,7 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
-		<portlet>
+	<portlet>
 		<portlet-name>flask-view-user-events</portlet-name>
 		<display-name>Flask View User Events</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
@@ -58,22 +58,23 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	
 	<portlet>
-		<portlet-name>flask-weather</portlet-name>
-		<display-name>Flask weather</display-name>
+		<portlet-name>flask-view-advertisement</portlet-name>
+		<display-name>Flask View Advertisement</display-name>
 		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
 		<init-param>
 			<name>view-template</name>
-			<value>/weather.jsp</value>
+			<value>/viewads.jsp</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
 		<portlet-info>
-			<title>Flask weather</title>
-			<short-title>Flask weather</short-title>
-			<keywords>Flask weather</keywords>
+			<title>Flask View Advertisement</title>
+			<short-title>Flask View Advertisement</short-title>
+			<keywords>Flask View Advertisement</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
@@ -82,40 +83,8 @@
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
-	<portlet>
-		<portlet-name>flask-maps</portlet-name>
-		<display-name>Flask Maps</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
-		<init-param>
-			<name>view-template</name>
-			<value>/map.jsp</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<portlet-info>
-			<title>Flask Maps</title>
-			<short-title>Flask Maps</short-title>
-			<keywords>Flask Maps</keywords>
-		</portlet-info>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
-	</portlet>
+	
 </portlet-app>

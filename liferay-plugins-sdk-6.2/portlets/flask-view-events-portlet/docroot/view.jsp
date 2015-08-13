@@ -57,7 +57,6 @@
  </div>
     
  <div id="two" style="display:none; width:100%;">
- 	<div style="overflow: hidden; display:none" id="ContentPanel"></div>
 	<div class="container-fluid">
 		<div class="row-fluid fullwidth">
 		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div>
@@ -91,22 +90,8 @@
 	<div id='jqxWidget'></div>
 </div>
 
-	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
-    <div id="fixedfooter">
-	    <table>
-            <tr>
-                <td class="footertxt">
-                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
-                </td>
-                <td class="asans"><b>FREE PINT WITH A BURGER</b>
-                <br/>
-                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
-                <br/>
-                <span class="gochi">ON GAMEDAY!</span>
-                </td>
-            </tr>
-        </table>
-	</div>
+<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
+
 </div>
 <div class="hide">
 <div id="weather-background" class="default-weather">
