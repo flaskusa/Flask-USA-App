@@ -7,6 +7,8 @@ var eventDetailJSON = {};
 var marker_infoType;
 var venueName;
 var venueAddr;
+var startdate = "";
+var enddate = "";
 
 function formatUnixToTime(tdate)
 {
@@ -71,25 +73,6 @@ function renderEventList(tdata) {
 		 	}
 	    }
 	 	$(divRow).appendTo($("#placeholder"));
-	 	
-	 	$(function() {
-		    function cb(start, end) {
-		        $('#reportrange span').html('Today');//start.format('MMM D, YYYY') + ' - ' + end.format('MMM D, YYYY')
-		    }
-		    cb(moment().subtract(29, 'days'), moment());
-
-		    $('#reportrange').daterangepicker({
-		        ranges: {
-		           'Today': [moment(), moment()],
-		           'Next': [moment().add(1, 'days'), moment().subtract(1, 'days')],
-		           'Next 7 days': [moment().add(6, 'days'), moment()],
-		           'Next 30 days': [moment().startOf('month'), moment().endOf('month')],
-		           'Next 60 days': [moment().subtract(1, 'days'), moment().subtract(1, 'days')]
-		        },
-		        "applyClass": "btn btn-info btn-calendar",
-		        "cancelClass": "btn btn-info btn-calendar"
-		    }, cb);
-		});	 	
 }
 
 function fnShowEventLogo(imageUUID, imageGroupId,container ,editable){
@@ -364,6 +347,36 @@ $(document).ready(function(){
 	    	//alert("This is default");
 		}		
 	})
+	
+	$(function() {
+	    function cb(start, end, label) {
+	        $('#reportrange span').html(label);
+	        startdate = start;
+	        enddate = end;
+	        getFilteredEvents();
+	    }
+	    
+	    cb(moment(),moment().add(7, 'days'),'Next 7 days');
+
+	    $('#reportrange').daterangepicker({
+	    	"autoApply": true,
+	        ranges: {
+	           'Today': [moment(), moment()],
+	           'Next 7 days': [moment(),moment().add(7, 'days')],
+	           'Next 30 days': [moment(), moment().add(30, 'days')],
+	           'Next 60 days': [moment(),moment().add(60, 'days')]
+	        },
+	        "applyClass": "btn btn-info btn-calendar",
+	        "cancelClass": "btn btn-info btn-calendar"
+	    }, cb);
+	    
+	    $('#reportrange').data('daterangepicker').setStartDate(moment());
+	    $('#reportrange').data('daterangepicker').setEndDate(moment().add(7, 'days'));		    	
+	});	
+ 	
+ 	$("#txtSearch").change(function(){
+ 		getFilteredEvents();
+ 	});	
 });
 
 function fnStopProgress(){
@@ -498,4 +511,17 @@ function initMenuList(){
 		height: '100%',
 		scrollPosition: 'both'
 	});		
+}
+
+
+function getFilteredEvents(){
+	var filterString = $("#txtSearch").val();
+	var flaskRequest = new Request();
+	params = {eventTypeIds: '1',startDate: startdate,endDate: enddate,searchString: filterString};
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS, params, 
+	function(data){
+		renderEventList(data);
+	} , function(error){
+		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.SEARCH_ERR);
+	});	
 }
