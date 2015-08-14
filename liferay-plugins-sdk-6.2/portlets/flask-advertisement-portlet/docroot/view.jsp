@@ -131,7 +131,7 @@
 				  </div>
 			</div>
 			<div id="addCustomerFormContainer" style="display:none;  height:500px; overflow-y: auto;">			  
-				<form id="addCustomerForm">
+				<form id="adCampaignForm">
 						   <div class="form-group">
 						     <label class="control-label" for=customerName>Customer Name:</label>
 						     <div class="controls">
