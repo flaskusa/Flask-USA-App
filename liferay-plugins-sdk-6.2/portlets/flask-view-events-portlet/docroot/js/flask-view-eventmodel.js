@@ -12,7 +12,8 @@ _eventModel.SERVICE_ENDPOINTS = {
 	ADD_USER_EVENT				:"/flask-rest-events-portlet.event/add-user-event",
 	REMOVE_USER_EVENT			:"/flask-rest-events-portlet.event/remove-user-event",
     GET_VENUE     				:"/flask-rest-events-portlet.venue/get-venue",
-    GET_FILTERED_EVENTS			:"/flask-rest-events-portlet.event/get-simple-filtered-events"
+    GET_FILTERED_EVENTS			:"/flask-rest-events-portlet.event/get-simple-filtered-events",
+    GET_ALL_CAMPAIGN			:"/flask-advertisement-portlet.adcampaign/get-all-campaign"
 };
 
 _eventModel.DATA_MODEL= {

@@ -295,8 +295,6 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 
 function fnBlankSlide(Slider){
   	var temp_html = '<font color="white"><h4>NO DATA FOUND</h4></font>';
-	var imageUrl;
-	imageUrl = "/flask-view-events-portlet/img/NoData.png";
 	var objBlankSlide1 = $("<div/>",{'class':'photo'});
 	var objBlankSlide = $("<div/>",{'class':'eventDetailBox', 'style':'padding-top: 25% !important;'});
 	$(objBlankSlide).appendTo(objBlankSlide1);
@@ -396,10 +394,9 @@ function setMyEvent(_eventId,_userEvent){
 	
 }
 function initEventList(){
-	var request = new Request();
-	var param = {};
+	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: ''};
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT , param, 
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){
 			renderEventList(data);
 		} ,
@@ -409,7 +406,6 @@ function initEventList(){
 }
 
 function addUserEvent(eventId){
-	var request = new Request();
 	var param = {eventId: eventId};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.ADD_USER_EVENT , param, 
@@ -420,8 +416,8 @@ function addUserEvent(eventId){
 						console.log("Error ins saving user event" + data );
 					});
 }
+
 function removeUserEvent(eventId){
-	var request = new Request();
 	var param = {eventId: eventId};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.REMOVE_USER_EVENT , param, 
@@ -517,7 +513,7 @@ function initMenuList(){
 function getFilteredEvents(){
 	var filterString = $("#txtSearch").val();
 	var flaskRequest = new Request();
-	params = {eventTypeIds: '1',startDate: startdate,endDate: enddate,searchString: filterString};
+	params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: filterString};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS, params, 
 	function(data){
 		renderEventList(data);
