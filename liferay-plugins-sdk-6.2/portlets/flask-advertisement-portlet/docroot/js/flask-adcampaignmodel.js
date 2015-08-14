@@ -54,22 +54,22 @@ _adCampaignModel.DATA_MODEL = {
 		},
 		{
 			name : 'displayPreEvent',
-			type : 'string',
-			fieldName : 'Events Ids'
+			type : 'boolean',
+			fieldName : 'displayPreEvent'
 		},
 		{
 			name : 'displayDuringEvent',
-			type : 'string',
-			fieldName : 'Events Ids'
+			type : 'boolean',
+			fieldName : 'displayDuringEvent'
 		},
 		{
 			name : 'displayPostEvent',
-			type : 'string',
-			fieldName : 'Events Ids'
+			type : 'boolean',
+			fieldName : 'displayPostEvent'
 		},
 		{
 			name : 'adDisplayTime',
-			type : 'string',
+			type : 'boolean',
 			fieldName : 'Display Time'
 		},
 		{
