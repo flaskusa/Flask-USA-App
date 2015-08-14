@@ -26,46 +26,12 @@
 
 <body>
 <div id="fixedfooter">
-		<div class="container-fluid">
+	<div class="container-fluid">
 		<div class="row-fluid fullwidth">
-		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div>
-		  <div id="col2" class="span10 col2">
-				<div id="wowslider-advertisements" class="Carousel">
-					<div>
-					 <table>
-		            		<tr>
-				                <td class="footertxt">
-				                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
-				                </td>
-				                <td class="asans"><b>FREE PINT WITH A BURGER</b>
-				                <br/>
-				                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
-				                <br/>
-				                <span class="gochi">This is image 1!</span>
-				                </td>
-				            </tr>
-		        	</table>
-		        	</div>	
-		        	<div>
-						 <table>
-			            		<tr>
-					                <td class="footertxt">
-					                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
-					                </td>
-					                <td class="asans"><b>FREE PINT WITH A BURGER</b>
-					                <br/>
-					                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
-					                <br/>
-					                <span class="gochi">This is image 2!</span>
-					                </td>
-					            </tr>
-			        	</table>
-		        	</div>	
-		        </div>
-		  </div>
+			  <div class="span12">
+					<div class="adCarousel"></div>
+			  </div>
 		</div>
 	</div>
- </div>
-  
+</div>
 </body>
-
