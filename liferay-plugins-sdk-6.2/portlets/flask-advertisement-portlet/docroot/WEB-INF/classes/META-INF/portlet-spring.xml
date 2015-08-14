@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.rumbasolutions.flask.service.AdCampaignLocalService" class="com.rumbasolutions.flask.service.impl.AdCampaignLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.AdCampaignService" class="com.rumbasolutions.flask.service.impl.AdCampaignServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.AdCampaignPersistence" class="com.rumbasolutions.flask.service.persistence.AdCampaignPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.persistence.AdCampaignFinder" class="com.rumbasolutions.flask.service.persistence.AdCampaignFinderImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.AdCustomerLocalService" class="com.rumbasolutions.flask.service.impl.AdCustomerLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.AdCustomerService" class="com.rumbasolutions.flask.service.impl.AdCustomerServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.AdCustomerPersistence" class="com.rumbasolutions.flask.service.persistence.AdCustomerPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.CampaignEventLocalService" class="com.rumbasolutions.flask.service.impl.CampaignEventLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.CampaignEventService" class="com.rumbasolutions.flask.service.impl.CampaignEventServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.CampaignEventPersistence" class="com.rumbasolutions.flask.service.persistence.CampaignEventPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.CampaignImageLocalService" class="com.rumbasolutions.flask.service.impl.CampaignImageLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.CampaignImageService" class="com.rumbasolutions.flask.service.impl.CampaignImageServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.CampaignImagePersistence" class="com.rumbasolutions.flask.service.persistence.CampaignImagePersistenceImpl" parent="basePersistence" />
+</beans>

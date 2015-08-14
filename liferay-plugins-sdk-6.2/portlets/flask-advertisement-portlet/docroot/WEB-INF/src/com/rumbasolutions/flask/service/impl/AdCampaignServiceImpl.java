@@ -34,6 +34,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.AdCampaign;
 import com.rumbasolutions.flask.model.CampaignEvent;
 import com.rumbasolutions.flask.service.AdCampaignLocalServiceUtil;
+import com.rumbasolutions.flask.service.AdCustomerServiceUtil;
 import com.rumbasolutions.flask.service.CampaignEventLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.AdCampaignServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.AdCampaignFinderUtil;
@@ -69,10 +70,32 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 	
 	@Override
 	public JSONArray getAllCampaign() {
-		List list = AdCampaignFinderUtil.getAdCampaginList();
-		return createCustomModelCampaignList(list);
+		JSONArray campaignJsonArray = JSONFactoryUtil.createJSONArray();
+		List<AdCampaign> campaignList = new ArrayList<AdCampaign>();
+		try{
+			campaignList = AdCampaignUtil.findAll();
+			for (int i=0; i<campaignList.size(); i++) {
+				AdCampaign campaign = campaignList.get(i);
+				String customerName = AdCustomerServiceUtil.getCustomer(campaign.getCustomerId()).getCustomerName();
+				JSONObject obj = JSONFactoryUtil.createJSONObject();
+				obj.put("campaignId", campaign.getCampaignId());
+				obj.put("campaignName", campaign.getCampaignName());
+				obj.put("customerId", campaign.getCustomerId());
+				obj.put("customerName", customerName);
+				obj.put("eventTypeId", campaign.getEventTypeId());
+				//obj.put("eventTypeName", campaign.getE);
+				//obj.put("adDisplayTime", campaignFieldArr.getString(6));
+				obj.put("frequencyPerHour", campaign.getFrequencyPerHour());
+				campaignJsonArray.put(obj);
+			}
+			
+		} catch(SystemException e) {
+			LOGGER.error("Exception in getAdCampains :" + e.getMessage());
+			e.printStackTrace();
+		}
+		
+		return campaignJsonArray;
 	}
-	
 	/*
 	 * Utility method
 	 */
