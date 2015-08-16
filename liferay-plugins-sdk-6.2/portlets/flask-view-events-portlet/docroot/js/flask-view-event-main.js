@@ -1,3 +1,4 @@
+var showAllEvents = true;
 var alllist = [];
 var map;
 var lat_marker = [];
@@ -394,6 +395,10 @@ function setMyEvent(_eventId,_userEvent){
 	
 }
 function initEventList(){
+	if(showAllEvents){
+		startdate = "";
+		enddate = "";
+	}
 	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: ''};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
@@ -445,13 +450,14 @@ function getVenueData(venueId){
 
 function initMenuList(){
 	var arr = [], len;
-	var menuContainer = $("#jqxWidget"); //tab main div
+	var menuContainer = $("#jqxWidget"); 
 	for(key in eventDetailJSON) {
 		arr.push(key); // get JSON array length
 	}
 	len = arr.length;
-	
+	console.log(len);
 	if(len>0){
+		//var menuContainer = $("#jqxWidget"); //tab main div
 		var menuArray = [];
 		var detailsJSONArray = [];
 		var ulObj = $("<ul/>");
@@ -500,13 +506,17 @@ function initMenuList(){
 			});					
 			$(divObj).appendTo($(menuContainer));					
 		});
+		$(menuContainer).jqxTabs({ 
+			width: '100%',
+			height: '100%',
+			scrollPosition: 'both'
+		});		
 	}
-		
-	$(menuContainer).jqxTabs({ 
-		width: '100%',
-		height: '100%',
-		scrollPosition: 'both'
-	});		
+	else{
+		$(menuContainer).html("No data found");
+		$(menuContainer).addClass("jqxNoDataFound");
+		//_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
+	}
 }
 
 
