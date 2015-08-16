@@ -648,3 +648,11 @@ input.btn.btn-info.cssback {
 .jqx-tabs-titleContentWrapper.jqx-disableselect {
     color: #F69633 !important;
 }
+
+.jqxNoDataFound{
+	text-align: center;
+	text-align: center;
+    padding: 10px;
+    background-color: black;
+    color: antiquewhite;
+}
