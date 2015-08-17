@@ -2,6 +2,8 @@
 <html>
 <head>
 <%@ include file="jsp/init.jsp"%>
+<portlet:actionURL  var="addImagesActionURL" name="addImages"/>
+
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,14 +19,16 @@
 				createCampaignTable({},_adCampaignModel.DATA_MODEL.CAMPAIGN, $('#campaignGrid'), "campaignActionMenu", "Edit", campaignContextMenuHandler, ["Campaign", "Images"]);
 				loadCampaignData();
 				adCampaignClickHandlers();	
-				createCustomerTable({},_adCustomerModel.DATA_MODEL.CUSTOMER, $('#customerGrid'), "customerActionMenu", "Edit", customerContextMenuHandler, ["Customer"]);
-				adCustomerClickHandlers();
-				loadCustomerData();
+				$("#mcontents").click(function(){
+					createCustomerTable({},_adCustomerModel.DATA_MODEL.CUSTOMER, $('#customerGrid'), "customerActionMenu", "Edit", customerContextMenuHandler, ["Customer"]);
+					adCustomerClickHandlers();
+					loadCustomerData();
+				});
 			}
 		}       
    </script>
 
-
+<div id="campaign-action-msg" style="display:none"></div>
 <div id='formContainer'>
 	<ul class="nav nav-tabs">
 	  <li class="active"><a href="#campaigns" data-toggle="tab">Manage Campaigns</a></li>
@@ -43,7 +47,8 @@
 			  <div id="campaignGrid"></div>
 			</div>
 			<div id="adCampaignFormContainer" style="display:none;  height:100%; overflow-y: auto;">			  
-				<form id="addCustomerForm">
+				<form id="adCampaignForm">
+				  <input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
 				   <div class="form-group">
 				     <label class="control-label" for=campaignName>Campaign Name:</label>
 				     <div class="controls">
@@ -103,6 +108,10 @@
 										<div id="campaignEvents"></div>
 							</div>
 					</div>
+					<div class="form-group">
+							<label class="control-label" for="eventIds">Campaign Images</label>
+							<div id="FileUploadComponent"></div>
+					</div>					
 					
 					<input class="btn btn-info clsSave" id="saveCampaign" type="button" value="Save"/>
 					<input class="btn btn-primary clsCancel" id="cancelCampaign" type="button" value="Cancel" >
@@ -131,7 +140,7 @@
 				  </div>
 			</div>
 			<div id="addCustomerFormContainer" style="display:none;  height:500px; overflow-y: auto;">			  
-				<form id="adCampaignForm">
+				<form id="addCustomerForm">
 						   <div class="form-group">
 						     <label class="control-label" for=customerName>Customer Name:</label>
 						     <div class="controls">

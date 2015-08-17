@@ -4,7 +4,7 @@
 	<portlet>
 		<portlet-name>flask-advertisement</portlet-name>
 		<display-name>Flask Advertisement</display-name>
-		<portlet-class>com.liferay.util.bridges.mvc.MVCPortlet</portlet-class>
+		<portlet-class>com.rumbasolutions.flask.managecampaign.ManageCampaignPortletAction</portlet-class>
 		<init-param>
 			<name>view-template</name>
 			<value>/view.jsp</value>

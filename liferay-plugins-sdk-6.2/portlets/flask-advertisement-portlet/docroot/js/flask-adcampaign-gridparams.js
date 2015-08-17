@@ -141,8 +141,11 @@ GRID_PARAM_CAMPAIGN.initrowdetails = function(index, parentElement, gridElement,
     if (tabsdiv != null) {
     	
 		var campaignDiv = tabsdiv.find('.campaign');
-//		var imagesDiv = tabsdiv.find('.images');
-		
+		var imagesDiv = tabsdiv.find('.images');
+    	var container = $('<div/>');
+    	fnGetCampaignImages(datarecord.campaignId,container, false);
+  	  	$(container).appendTo($(imagesDiv));
+  	  	
 		var container1 = $('<div class="row-fluid"></div>');
 		
 		var container2 = $('<div class="row-fluid"></div>');

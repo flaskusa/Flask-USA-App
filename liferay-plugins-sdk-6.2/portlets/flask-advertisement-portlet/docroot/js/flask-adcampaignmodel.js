@@ -1,15 +1,16 @@
 var _adCampaignModel = {};
 
 _adCampaignModel.SERVICE_ENDPOINTS = {
-	API_PREFIX : "/api/jsonws",
-	GET_CAMPAIGN : "/flask-advertisement-portlet.adcampaign/get-all-campaign",
-	ADD_CAMPAIGN : "/flask-advertisement-portlet.adcampaign/add-campaign",
-	UPDATE_CAMPAIGN : "/flask-advertisement-portlet.adcampaign/update-campaign",
-	DELETE_CAMPAIGN : "/flask-advertisement-portlet.adcampaign/delete-campaign",
-	DELETE_CAMPAIGNS : "/flask-advertisement-portlet.adcampaign/delete-campaigns",
-	GET_INFO_TYPES : "/flask-rest-events-portlet.infotype/get-info-types",
-	GET_EVENT 	   : "/flask-rest-events-portlet.event/get-all-events",
-
+	API_PREFIX 				: "/api/jsonws",
+	GET_CAMPAIGN 			: "/flask-advertisement-portlet.adcampaign/get-all-campaign",
+	ADD_CAMPAIGN 			: "/flask-advertisement-portlet.adcampaign/add-campaign",
+	UPDATE_CAMPAIGN 		: "/flask-advertisement-portlet.adcampaign/update-campaign",
+	DELETE_CAMPAIGN 		: "/flask-advertisement-portlet.adcampaign/delete-campaign",
+	DELETE_CAMPAIGNS 		: "/flask-advertisement-portlet.adcampaign/delete-campaigns",
+	GET_INFO_TYPES 			: "/flask-rest-events-portlet.infotype/get-info-types",
+	GET_EVENT 	   			: "/flask-rest-events-portlet.event/get-all-events",
+	GET_CAMPAIGN_IMAGES   	: "/flask-advertisement-portlet.adcampaign/get-campaign-images",
+	DELETE_CAMPAIGN_IMAGE	: "/flask-advertisement-portlet.adcampaign/delete-campaign-image"
 };
 
 _adCampaignModel.DATA_MODEL = {

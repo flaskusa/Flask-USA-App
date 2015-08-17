@@ -1,6 +1,6 @@
 var adCampaignForm;
 var campaignId = 0;
-
+var dropZoneImages;
 var infoTypeJson;
 
 function adCampaignClickHandlers() {
@@ -25,8 +25,6 @@ function adCampaignClickHandlers() {
 	$("#saveCampaign").click(
 			function() {
 					saveCampaign();
-					$("#adCampaignDataTable").show();
-					setCampaignFormVisible(false);
 			});
 
 	/* Click handler for cancel button */
@@ -66,6 +64,7 @@ function adCampaignClickHandlers() {
 function setCampaignFormVisible(visible){
 	if(visible == true){
 		$("#adCampaignFormContainer").show();
+		fnBuildCampaignUpload($("#FileUploadComponent"))
 		adCampaignForm.show();
 	}else{
 		$("#adCampaignFormContainer").hide();
@@ -164,7 +163,7 @@ function editCampaign(rowData) {
 	$("#adCampaignDataTable").hide();
 	prepareCustomerDropDownList('customerId', rowData.customerId);
 	prepareEventTypeDropdown(rowData.eventTypeId);
-	prepareInfoTypesCheckBox(rowData.displayAtId);
+	//prepareInfoTypesCheckBox(rowData.displayAtId);
 	filterData(rowData.eventTypeId, rowData.eventsId);
 	setCampaignFormVisible(true);
 }
@@ -174,7 +173,7 @@ function saveCampaign() {
 			_adCampaignModel.DATA_MODEL.CAMPAIGN, function(formId, model,
 					formData) {
 				var displayAt = [];
-				formData["events"] = GRID_PARAM_CAMPAIGN.getCheckedEventIdList('eventId');
+				formData["Events"] = GRID_PARAM_CAMPAIGN.getCheckedEventIdList('eventId');
 				formData["customerId"] = $('#customerId').val();
 				formData["customerName"] = $('#customerId :selected').text();
 				formData["frequencyPerHour"] = $('#frequencyPerHour').val();
@@ -201,7 +200,21 @@ function saveCampaign() {
 	flaskRequest.sendPOSTRequest(url, params, function(data) {
 		_flaskLib.showSuccessMessage('campaign-action-msg',
 				_adCampaignModel.MESSAGES.SAVE);
-		loadCampaignData();
+		if($(".dz-image").length>0) {					
+			$("#_campaignId").val(data.campaignId);
+			dropZoneImages.options.autoProcessQueue = true;
+			dropZoneImages.processQueue();
+			dropZoneImages.on("queuecomplete", function (file) {
+				loadCampaignData();
+				$("#adCampaignDataTable").show();
+				setCampaignFormVisible(false);
+			});			
+		}
+		else{
+			loadCampaignData();
+			$("#adCampaignDataTable").show();
+			setCampaignFormVisible(false);
+		}			
 	}, function(data) {
 		_flaskLib.showErrorMessage('campaign-action-msg',
 				_adCampaignModel.MESSAGES.ERROR);
@@ -264,4 +277,81 @@ function getInfoTypes(){
 					console.log("Error in getting get info type: " + data);
 				});
 
+}
+
+function fnBuildCampaignUpload(imageContainer){
+	$(imageContainer).html(""); 
+  	var strSelected = "";
+  	dropZoneImages = "";
+    var objForm = $('<form/>',{'class':'dropzone','id':'campaignImages','action':$("#imgActionUrl").val()});
+    $(objForm).appendTo(imageContainer);
+    var objCampaignId = $('<input/>',{'name':'_campaignId','id':'_campaignId','type':'hidden','value':$("#campaignId").val()});
+    $(objCampaignId).appendTo(objForm);
+    
+    dropZoneImages = new Dropzone($(objForm).get(0),{
+    	autoProcessQueue: false,
+    	uploadMultiple: true,
+    	addRemoveLinks : true
+    });
+}
+
+function fnGetCampaignImages(campaignId,container,editable){
+	params= {'campaignId': campaignId};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_adCampaignModel.SERVICE_ENDPOINTS.GET_CAMPAIGN_IMAGES , params, 
+		function (data){
+			$.each(data, function(idx, obj) {
+				fnRenderImage(obj.imageUUID, obj.imageGroupId, container, obj.campaignImageId, editable);
+			});			
+		},
+		function (data){
+			console.log(data);
+		});	
+}
+
+function fnRenderImage(imageUUID, imageGroupId, container, eventDetailImageId, editable){
+	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-campaignImageId': eventDetailImageId});
+	$(objdiv).appendTo($(container));
+	if(editable){
+    	$(objdiv).click(function(){
+	    	$(this).toggleClass("activeImage");
+	    	if($(".activeImage").length>0){
+	    		if(iSelected==false){
+	    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+	    			$(objDel).appendTo($(container));
+	    			iSelected = true;
+	    			$(objDel).click(function(){
+	    				$("#spinningSquaresG").show();
+	    				$(".activeImage").each(function(){
+	    					_flaskLib.deleteImage($(this).attr("data-uuid"), imageGroupId, objDel);
+	    					fnDeleteCampaignImage($(this).attr("data-campaignImageId"));
+	    					$(this).remove();
+	    				});
+	    				if($(".activeImage").length==0){
+	    					$("#spinningSquaresG").hide();
+	    					$(this).remove();
+	    					iSelected = false;
+	    				}
+	    			});
+	    		}
+	    	}
+	    	else{
+	    		$(".cssDelImages").remove();
+	    		iSelected = false;
+	    	}
+	    });	
+    }
+}
+
+function fnDeleteCampaignImage(campaignImageId){
+	params= {'campaignImageId': campaignImageId};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_adCampaignModel.SERVICE_ENDPOINTS.DELETE_CAMPAIGN_IMAGE , params, 
+		function (data){
+			console.log(data);
+		},
+		function (data){
+			console.log(data);
+		});	
 }
