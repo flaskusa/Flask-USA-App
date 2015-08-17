@@ -334,6 +334,499 @@ public class CampaignImagePersistenceImpl extends BasePersistenceImpl<CampaignIm
 	private static final String _FINDER_COLUMN_IMAGEUUID_IMAGEUUID_1 = "campaignImage.imageUUID IS NULL";
 	private static final String _FINDER_COLUMN_IMAGEUUID_IMAGEUUID_2 = "campaignImage.imageUUID = ?";
 	private static final String _FINDER_COLUMN_IMAGEUUID_IMAGEUUID_3 = "(campaignImage.imageUUID IS NULL OR campaignImage.imageUUID = '')";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_CAMPAIGNID =
+		new FinderPath(CampaignImageModelImpl.ENTITY_CACHE_ENABLED,
+			CampaignImageModelImpl.FINDER_CACHE_ENABLED,
+			CampaignImageImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findBycampaignId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CAMPAIGNID =
+		new FinderPath(CampaignImageModelImpl.ENTITY_CACHE_ENABLED,
+			CampaignImageModelImpl.FINDER_CACHE_ENABLED,
+			CampaignImageImpl.class, FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION,
+			"findBycampaignId", new String[] { Long.class.getName() },
+			CampaignImageModelImpl.CAMPAIGNID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_CAMPAIGNID = new FinderPath(CampaignImageModelImpl.ENTITY_CACHE_ENABLED,
+			CampaignImageModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBycampaignId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the campaign images where campaignId = &#63;.
+	 *
+	 * @param campaignId the campaign ID
+	 * @return the matching campaign images
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<CampaignImage> findBycampaignId(long campaignId)
+		throws SystemException {
+		return findBycampaignId(campaignId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the campaign images where campaignId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.CampaignImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param campaignId the campaign ID
+	 * @param start the lower bound of the range of campaign images
+	 * @param end the upper bound of the range of campaign images (not inclusive)
+	 * @return the range of matching campaign images
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<CampaignImage> findBycampaignId(long campaignId, int start,
+		int end) throws SystemException {
+		return findBycampaignId(campaignId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the campaign images where campaignId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.CampaignImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param campaignId the campaign ID
+	 * @param start the lower bound of the range of campaign images
+	 * @param end the upper bound of the range of campaign images (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching campaign images
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<CampaignImage> findBycampaignId(long campaignId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CAMPAIGNID;
+			finderArgs = new Object[] { campaignId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_CAMPAIGNID;
+			finderArgs = new Object[] { campaignId, start, end, orderByComparator };
+		}
+
+		List<CampaignImage> list = (List<CampaignImage>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (CampaignImage campaignImage : list) {
+				if ((campaignId != campaignImage.getCampaignId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_CAMPAIGNIMAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_CAMPAIGNID_CAMPAIGNID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(CampaignImageModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(campaignId);
+
+				if (!pagination) {
+					list = (List<CampaignImage>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<CampaignImage>(list);
+				}
+				else {
+					list = (List<CampaignImage>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first campaign image in the ordered set where campaignId = &#63;.
+	 *
+	 * @param campaignId the campaign ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching campaign image
+	 * @throws com.rumbasolutions.flask.NoSuchCampaignImageException if a matching campaign image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public CampaignImage findBycampaignId_First(long campaignId,
+		OrderByComparator orderByComparator)
+		throws NoSuchCampaignImageException, SystemException {
+		CampaignImage campaignImage = fetchBycampaignId_First(campaignId,
+				orderByComparator);
+
+		if (campaignImage != null) {
+			return campaignImage;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("campaignId=");
+		msg.append(campaignId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCampaignImageException(msg.toString());
+	}
+
+	/**
+	 * Returns the first campaign image in the ordered set where campaignId = &#63;.
+	 *
+	 * @param campaignId the campaign ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching campaign image, or <code>null</code> if a matching campaign image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public CampaignImage fetchBycampaignId_First(long campaignId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<CampaignImage> list = findBycampaignId(campaignId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last campaign image in the ordered set where campaignId = &#63;.
+	 *
+	 * @param campaignId the campaign ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching campaign image
+	 * @throws com.rumbasolutions.flask.NoSuchCampaignImageException if a matching campaign image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public CampaignImage findBycampaignId_Last(long campaignId,
+		OrderByComparator orderByComparator)
+		throws NoSuchCampaignImageException, SystemException {
+		CampaignImage campaignImage = fetchBycampaignId_Last(campaignId,
+				orderByComparator);
+
+		if (campaignImage != null) {
+			return campaignImage;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("campaignId=");
+		msg.append(campaignId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchCampaignImageException(msg.toString());
+	}
+
+	/**
+	 * Returns the last campaign image in the ordered set where campaignId = &#63;.
+	 *
+	 * @param campaignId the campaign ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching campaign image, or <code>null</code> if a matching campaign image could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public CampaignImage fetchBycampaignId_Last(long campaignId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countBycampaignId(campaignId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<CampaignImage> list = findBycampaignId(campaignId, count - 1,
+				count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the campaign images before and after the current campaign image in the ordered set where campaignId = &#63;.
+	 *
+	 * @param campaignImageId the primary key of the current campaign image
+	 * @param campaignId the campaign ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next campaign image
+	 * @throws com.rumbasolutions.flask.NoSuchCampaignImageException if a campaign image with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public CampaignImage[] findBycampaignId_PrevAndNext(long campaignImageId,
+		long campaignId, OrderByComparator orderByComparator)
+		throws NoSuchCampaignImageException, SystemException {
+		CampaignImage campaignImage = findByPrimaryKey(campaignImageId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			CampaignImage[] array = new CampaignImageImpl[3];
+
+			array[0] = getBycampaignId_PrevAndNext(session, campaignImage,
+					campaignId, orderByComparator, true);
+
+			array[1] = campaignImage;
+
+			array[2] = getBycampaignId_PrevAndNext(session, campaignImage,
+					campaignId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected CampaignImage getBycampaignId_PrevAndNext(Session session,
+		CampaignImage campaignImage, long campaignId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_CAMPAIGNIMAGE_WHERE);
+
+		query.append(_FINDER_COLUMN_CAMPAIGNID_CAMPAIGNID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(CampaignImageModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(campaignId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(campaignImage);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<CampaignImage> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the campaign images where campaignId = &#63; from the database.
+	 *
+	 * @param campaignId the campaign ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeBycampaignId(long campaignId) throws SystemException {
+		for (CampaignImage campaignImage : findBycampaignId(campaignId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(campaignImage);
+		}
+	}
+
+	/**
+	 * Returns the number of campaign images where campaignId = &#63;.
+	 *
+	 * @param campaignId the campaign ID
+	 * @return the number of matching campaign images
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countBycampaignId(long campaignId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_CAMPAIGNID;
+
+		Object[] finderArgs = new Object[] { campaignId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_CAMPAIGNIMAGE_WHERE);
+
+			query.append(_FINDER_COLUMN_CAMPAIGNID_CAMPAIGNID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(campaignId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_CAMPAIGNID_CAMPAIGNID_2 = "campaignImage.campaignId = ?";
 
 	public CampaignImagePersistenceImpl() {
 		setModelClass(CampaignImage.class);
@@ -579,6 +1072,8 @@ public class CampaignImagePersistenceImpl extends BasePersistenceImpl<CampaignIm
 
 		boolean isNew = campaignImage.isNew();
 
+		CampaignImageModelImpl campaignImageModelImpl = (CampaignImageModelImpl)campaignImage;
+
 		Session session = null;
 
 		try {
@@ -604,6 +1099,27 @@ public class CampaignImagePersistenceImpl extends BasePersistenceImpl<CampaignIm
 
 		if (isNew || !CampaignImageModelImpl.COLUMN_BITMASK_ENABLED) {
 			FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+		}
+
+		else {
+			if ((campaignImageModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CAMPAIGNID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						campaignImageModelImpl.getOriginalCampaignId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CAMPAIGNID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CAMPAIGNID,
+					args);
+
+				args = new Object[] { campaignImageModelImpl.getCampaignId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_CAMPAIGNID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_CAMPAIGNID,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(CampaignImageModelImpl.ENTITY_CACHE_ENABLED,
@@ -634,6 +1150,7 @@ public class CampaignImagePersistenceImpl extends BasePersistenceImpl<CampaignIm
 		campaignImageImpl.setImageDesc(campaignImage.getImageDesc());
 		campaignImageImpl.setImageUUID(campaignImage.getImageUUID());
 		campaignImageImpl.setImageGroupId(campaignImage.getImageGroupId());
+		campaignImageImpl.setCampaignId(campaignImage.getCampaignId());
 
 		return campaignImageImpl;
 	}

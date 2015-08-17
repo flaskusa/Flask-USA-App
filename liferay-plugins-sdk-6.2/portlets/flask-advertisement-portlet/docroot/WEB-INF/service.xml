@@ -85,9 +85,13 @@
         <column name="imageDesc" type="String" />
         <column name="imageUUID" type="String" />
         <column name="imageGroupId" type="long" />
+        <column name="campaignId" type="long"></column>
         
 		<finder name="imageUUID" return-type="Campaign_Images">
 			<finder-column name="imageUUID" />
+		</finder>
+		<finder name="campaignId" return-type="Collection">
+			<finder-column name="campaignId" />
 		</finder>
 	</entity>
 	

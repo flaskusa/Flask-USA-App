@@ -50,5 +50,6 @@ create table flaskads_CampaignImage (
 	imageTitle VARCHAR(75) null,
 	imageDesc VARCHAR(75) null,
 	imageUUID VARCHAR(75) null,
-	imageGroupId LONG
+	imageGroupId LONG,
+	campaignId LONG
 );

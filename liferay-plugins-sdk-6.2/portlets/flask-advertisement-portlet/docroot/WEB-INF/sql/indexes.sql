@@ -6,4 +6,5 @@ create index IX_7019D966 on flaskads_AdCustomer (customerName);
 create index IX_99234D2D on flaskads_CampaignEvent (campaignId);
 create index IX_6C81EED7 on flaskads_CampaignEvent (eventId);
 
+create index IX_352C1E2E on flaskads_CampaignImage (campaignId);
 create index IX_E7C5FBB7 on flaskads_CampaignImage (imageUUID);

@@ -96,6 +96,144 @@ public interface CampaignImagePersistence extends BasePersistence<CampaignImage>
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
+	* Returns all the campaign images where campaignId = &#63;.
+	*
+	* @param campaignId the campaign ID
+	* @return the matching campaign images
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rumbasolutions.flask.model.CampaignImage> findBycampaignId(
+		long campaignId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the campaign images where campaignId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.CampaignImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param campaignId the campaign ID
+	* @param start the lower bound of the range of campaign images
+	* @param end the upper bound of the range of campaign images (not inclusive)
+	* @return the range of matching campaign images
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rumbasolutions.flask.model.CampaignImage> findBycampaignId(
+		long campaignId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the campaign images where campaignId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.CampaignImageModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param campaignId the campaign ID
+	* @param start the lower bound of the range of campaign images
+	* @param end the upper bound of the range of campaign images (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching campaign images
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.rumbasolutions.flask.model.CampaignImage> findBycampaignId(
+		long campaignId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first campaign image in the ordered set where campaignId = &#63;.
+	*
+	* @param campaignId the campaign ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching campaign image
+	* @throws com.rumbasolutions.flask.NoSuchCampaignImageException if a matching campaign image could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.CampaignImage findBycampaignId_First(
+		long campaignId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchCampaignImageException;
+
+	/**
+	* Returns the first campaign image in the ordered set where campaignId = &#63;.
+	*
+	* @param campaignId the campaign ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching campaign image, or <code>null</code> if a matching campaign image could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.CampaignImage fetchBycampaignId_First(
+		long campaignId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last campaign image in the ordered set where campaignId = &#63;.
+	*
+	* @param campaignId the campaign ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching campaign image
+	* @throws com.rumbasolutions.flask.NoSuchCampaignImageException if a matching campaign image could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.CampaignImage findBycampaignId_Last(
+		long campaignId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchCampaignImageException;
+
+	/**
+	* Returns the last campaign image in the ordered set where campaignId = &#63;.
+	*
+	* @param campaignId the campaign ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching campaign image, or <code>null</code> if a matching campaign image could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.CampaignImage fetchBycampaignId_Last(
+		long campaignId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the campaign images before and after the current campaign image in the ordered set where campaignId = &#63;.
+	*
+	* @param campaignImageId the primary key of the current campaign image
+	* @param campaignId the campaign ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next campaign image
+	* @throws com.rumbasolutions.flask.NoSuchCampaignImageException if a campaign image with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.rumbasolutions.flask.model.CampaignImage[] findBycampaignId_PrevAndNext(
+		long campaignImageId, long campaignId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchCampaignImageException;
+
+	/**
+	* Removes all the campaign images where campaignId = &#63; from the database.
+	*
+	* @param campaignId the campaign ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeBycampaignId(long campaignId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of campaign images where campaignId = &#63;.
+	*
+	* @param campaignId the campaign ID
+	* @return the number of matching campaign images
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countBycampaignId(long campaignId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
 	* Caches the campaign image in the entity cache if it is enabled.
 	*
 	* @param campaignImage the campaign image

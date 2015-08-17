@@ -89,4 +89,34 @@ public interface AdCampaignService extends BaseService, InvokableService {
 	public void deleteCampaign(long campaignId);
 
 	public void deleteCampaigns(java.lang.String campaignList);
+
+	public com.rumbasolutions.flask.model.CampaignImage addCampaignImage(
+		long campaignId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imageUUID,
+		long imageGroupId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.rumbasolutions.flask.model.CampaignImage updateCampaignImage(
+		long campaignImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imageUUID,
+		long imageGroupId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.rumbasolutions.flask.model.CampaignImage getCampaignImage(
+		long campaignImageId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.CampaignImage> getCampaignImages(
+		long campaignId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteCampaignImage(long campaignImageId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getCampaignWithImages(
+		long campaignId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

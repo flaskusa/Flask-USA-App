@@ -83,6 +83,7 @@ public class CampaignImageClp extends BaseModelImpl<CampaignImage>
 		attributes.put("imageDesc", getImageDesc());
 		attributes.put("imageUUID", getImageUUID());
 		attributes.put("imageGroupId", getImageGroupId());
+		attributes.put("campaignId", getCampaignId());
 
 		return attributes;
 	}
@@ -135,6 +136,12 @@ public class CampaignImageClp extends BaseModelImpl<CampaignImage>
 
 		if (imageGroupId != null) {
 			setImageGroupId(imageGroupId);
+		}
+
+		Long campaignId = (Long)attributes.get("campaignId");
+
+		if (campaignId != null) {
+			setCampaignId(campaignId);
 		}
 	}
 
@@ -332,6 +339,29 @@ public class CampaignImageClp extends BaseModelImpl<CampaignImage>
 		}
 	}
 
+	@Override
+	public long getCampaignId() {
+		return _campaignId;
+	}
+
+	@Override
+	public void setCampaignId(long campaignId) {
+		_campaignId = campaignId;
+
+		if (_campaignImageRemoteModel != null) {
+			try {
+				Class<?> clazz = _campaignImageRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setCampaignId", long.class);
+
+				method.invoke(_campaignImageRemoteModel, campaignId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getCampaignImageRemoteModel() {
 		return _campaignImageRemoteModel;
 	}
@@ -410,6 +440,7 @@ public class CampaignImageClp extends BaseModelImpl<CampaignImage>
 		clone.setImageDesc(getImageDesc());
 		clone.setImageUUID(getImageUUID());
 		clone.setImageGroupId(getImageGroupId());
+		clone.setCampaignId(getCampaignId());
 
 		return clone;
 	}
@@ -462,7 +493,7 @@ public class CampaignImageClp extends BaseModelImpl<CampaignImage>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{campaignImageId=");
 		sb.append(getCampaignImageId());
@@ -480,6 +511,8 @@ public class CampaignImageClp extends BaseModelImpl<CampaignImage>
 		sb.append(getImageUUID());
 		sb.append(", imageGroupId=");
 		sb.append(getImageGroupId());
+		sb.append(", campaignId=");
+		sb.append(getCampaignId());
 		sb.append("}");
 
 		return sb.toString();
@@ -487,7 +520,7 @@ public class CampaignImageClp extends BaseModelImpl<CampaignImage>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.CampaignImage");
@@ -525,6 +558,10 @@ public class CampaignImageClp extends BaseModelImpl<CampaignImage>
 			"<column><column-name>imageGroupId</column-name><column-value><![CDATA[");
 		sb.append(getImageGroupId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>campaignId</column-name><column-value><![CDATA[");
+		sb.append(getCampaignId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -540,6 +577,7 @@ public class CampaignImageClp extends BaseModelImpl<CampaignImage>
 	private String _imageDesc;
 	private String _imageUUID;
 	private long _imageGroupId;
+	private long _campaignId;
 	private BaseModel<?> _campaignImageRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

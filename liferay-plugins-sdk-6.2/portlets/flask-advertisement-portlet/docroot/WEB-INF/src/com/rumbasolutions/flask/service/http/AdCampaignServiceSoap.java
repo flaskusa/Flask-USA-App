@@ -157,5 +157,110 @@ public class AdCampaignServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.CampaignImageSoap addCampaignImage(
+		long campaignId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imageUUID,
+		long imageGroupId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.CampaignImage returnValue = AdCampaignServiceUtil.addCampaignImage(campaignId,
+					imageTitle, imageDesc, imageUUID, imageGroupId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.CampaignImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.CampaignImageSoap updateCampaignImage(
+		long campaignImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imageUUID,
+		long imageGroupId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.CampaignImage returnValue = AdCampaignServiceUtil.updateCampaignImage(campaignImageId,
+					imageTitle, imageDesc, imageUUID, imageGroupId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.CampaignImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.CampaignImageSoap getCampaignImage(
+		long campaignImageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.CampaignImage returnValue = AdCampaignServiceUtil.getCampaignImage(campaignImageId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.CampaignImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.CampaignImageSoap[] getCampaignImages(
+		long campaignId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.CampaignImage> returnValue =
+				AdCampaignServiceUtil.getCampaignImages(campaignId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.CampaignImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteCampaignImage(long campaignImageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			AdCampaignServiceUtil.deleteCampaignImage(campaignImageId,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getCampaignWithImages(long campaignId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = AdCampaignServiceUtil.getCampaignWithImages(campaignId,
+					serviceContext);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(AdCampaignServiceSoap.class);
 }

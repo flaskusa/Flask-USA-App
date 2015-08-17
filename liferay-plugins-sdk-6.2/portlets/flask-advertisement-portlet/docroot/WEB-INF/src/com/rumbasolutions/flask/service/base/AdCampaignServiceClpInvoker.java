@@ -63,6 +63,46 @@ public class AdCampaignServiceClpInvoker {
 		_methodName51 = "deleteCampaigns";
 
 		_methodParameterTypes51 = new String[] { "java.lang.String" };
+
+		_methodName52 = "addCampaignImage";
+
+		_methodParameterTypes52 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName53 = "updateCampaignImage";
+
+		_methodParameterTypes53 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName54 = "getCampaignImage";
+
+		_methodParameterTypes54 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName55 = "getCampaignImages";
+
+		_methodParameterTypes55 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName56 = "deleteCampaignImage";
+
+		_methodParameterTypes56 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName57 = "getCampaignWithImages";
+
+		_methodParameterTypes57 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -130,6 +170,50 @@ public class AdCampaignServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName52.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+			return AdCampaignServiceUtil.addCampaignImage(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3],
+				((Long)arguments[4]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
+		}
+
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+			return AdCampaignServiceUtil.updateCampaignImage(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3],
+				((Long)arguments[4]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
+		}
+
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+			return AdCampaignServiceUtil.getCampaignImage(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+			return AdCampaignServiceUtil.getCampaignImages(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+			AdCampaignServiceUtil.deleteCampaignImage(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+			return AdCampaignServiceUtil.getCampaignWithImages(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -149,4 +233,16 @@ public class AdCampaignServiceClpInvoker {
 	private String[] _methodParameterTypes50;
 	private String _methodName51;
 	private String[] _methodParameterTypes51;
+	private String _methodName52;
+	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
+	private String _methodName57;
+	private String[] _methodParameterTypes57;
 }

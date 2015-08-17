@@ -39,6 +39,7 @@ public class CampaignImageSoap implements Serializable {
 		soapModel.setImageDesc(model.getImageDesc());
 		soapModel.setImageUUID(model.getImageUUID());
 		soapModel.setImageGroupId(model.getImageGroupId());
+		soapModel.setCampaignId(model.getCampaignId());
 
 		return soapModel;
 	}
@@ -155,6 +156,14 @@ public class CampaignImageSoap implements Serializable {
 		_imageGroupId = imageGroupId;
 	}
 
+	public long getCampaignId() {
+		return _campaignId;
+	}
+
+	public void setCampaignId(long campaignId) {
+		_campaignId = campaignId;
+	}
+
 	private long _campaignImageId;
 	private long _userId;
 	private Date _createdDate;
@@ -163,4 +172,5 @@ public class CampaignImageSoap implements Serializable {
 	private String _imageDesc;
 	private String _imageUUID;
 	private long _imageGroupId;
+	private long _campaignId;
 }

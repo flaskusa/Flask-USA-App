@@ -68,5 +68,6 @@
 		<property name="imageDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="imageUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="imageGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="campaignId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 </hibernate-mapping>

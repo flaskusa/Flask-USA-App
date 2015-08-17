@@ -190,6 +190,20 @@ public interface CampaignImageModel extends BaseModel<CampaignImage> {
 	 */
 	public void setImageGroupId(long imageGroupId);
 
+	/**
+	 * Returns the campaign ID of this campaign image.
+	 *
+	 * @return the campaign ID of this campaign image
+	 */
+	public long getCampaignId();
+
+	/**
+	 * Sets the campaign ID of this campaign image.
+	 *
+	 * @param campaignId the campaign ID of this campaign image
+	 */
+	public void setCampaignId(long campaignId);
+
 	@Override
 	public boolean isNew();
 

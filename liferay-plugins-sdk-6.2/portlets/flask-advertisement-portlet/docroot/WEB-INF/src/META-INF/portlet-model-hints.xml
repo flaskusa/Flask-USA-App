@@ -51,5 +51,6 @@
 		<field name="imageDesc" type="String" />
 		<field name="imageUUID" type="String" />
 		<field name="imageGroupId" type="long" />
+		<field name="campaignId" type="long" />
 	</model>
 </model-hints>

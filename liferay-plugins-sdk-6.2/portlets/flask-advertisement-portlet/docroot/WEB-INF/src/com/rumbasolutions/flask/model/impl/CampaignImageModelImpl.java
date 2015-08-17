@@ -73,9 +73,10 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 			{ "imageTitle", Types.VARCHAR },
 			{ "imageDesc", Types.VARCHAR },
 			{ "imageUUID", Types.VARCHAR },
-			{ "imageGroupId", Types.BIGINT }
+			{ "imageGroupId", Types.BIGINT },
+			{ "campaignId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskads_CampaignImage (campaignImageId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,imageTitle VARCHAR(75) null,imageDesc VARCHAR(75) null,imageUUID VARCHAR(75) null,imageGroupId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskads_CampaignImage (campaignImageId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,imageTitle VARCHAR(75) null,imageDesc VARCHAR(75) null,imageUUID VARCHAR(75) null,imageGroupId LONG,campaignId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskads_CampaignImage";
 	public static final String ORDER_BY_JPQL = " ORDER BY campaignImage.campaignImageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskads_CampaignImage.campaignImageId ASC";
@@ -91,8 +92,9 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.rumbasolutions.flask.model.CampaignImage"),
 			true);
-	public static long IMAGEUUID_COLUMN_BITMASK = 1L;
-	public static long CAMPAIGNIMAGEID_COLUMN_BITMASK = 2L;
+	public static long CAMPAIGNID_COLUMN_BITMASK = 1L;
+	public static long IMAGEUUID_COLUMN_BITMASK = 2L;
+	public static long CAMPAIGNIMAGEID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -115,6 +117,7 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 		model.setImageDesc(soapModel.getImageDesc());
 		model.setImageUUID(soapModel.getImageUUID());
 		model.setImageGroupId(soapModel.getImageGroupId());
+		model.setCampaignId(soapModel.getCampaignId());
 
 		return model;
 	}
@@ -187,6 +190,7 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 		attributes.put("imageDesc", getImageDesc());
 		attributes.put("imageUUID", getImageUUID());
 		attributes.put("imageGroupId", getImageGroupId());
+		attributes.put("campaignId", getCampaignId());
 
 		return attributes;
 	}
@@ -239,6 +243,12 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 
 		if (imageGroupId != null) {
 			setImageGroupId(imageGroupId);
+		}
+
+		Long campaignId = (Long)attributes.get("campaignId");
+
+		if (campaignId != null) {
+			setCampaignId(campaignId);
 		}
 	}
 
@@ -365,6 +375,29 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 		_imageGroupId = imageGroupId;
 	}
 
+	@JSON
+	@Override
+	public long getCampaignId() {
+		return _campaignId;
+	}
+
+	@Override
+	public void setCampaignId(long campaignId) {
+		_columnBitmask |= CAMPAIGNID_COLUMN_BITMASK;
+
+		if (!_setOriginalCampaignId) {
+			_setOriginalCampaignId = true;
+
+			_originalCampaignId = _campaignId;
+		}
+
+		_campaignId = campaignId;
+	}
+
+	public long getOriginalCampaignId() {
+		return _originalCampaignId;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -404,6 +437,7 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 		campaignImageImpl.setImageDesc(getImageDesc());
 		campaignImageImpl.setImageUUID(getImageUUID());
 		campaignImageImpl.setImageGroupId(getImageGroupId());
+		campaignImageImpl.setCampaignId(getCampaignId());
 
 		campaignImageImpl.resetOriginalValues();
 
@@ -457,6 +491,10 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 		CampaignImageModelImpl campaignImageModelImpl = this;
 
 		campaignImageModelImpl._originalImageUUID = campaignImageModelImpl._imageUUID;
+
+		campaignImageModelImpl._originalCampaignId = campaignImageModelImpl._campaignId;
+
+		campaignImageModelImpl._setOriginalCampaignId = false;
 
 		campaignImageModelImpl._columnBitmask = 0;
 	}
@@ -513,12 +551,14 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 
 		campaignImageCacheModel.imageGroupId = getImageGroupId();
 
+		campaignImageCacheModel.campaignId = getCampaignId();
+
 		return campaignImageCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(17);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{campaignImageId=");
 		sb.append(getCampaignImageId());
@@ -536,6 +576,8 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 		sb.append(getImageUUID());
 		sb.append(", imageGroupId=");
 		sb.append(getImageGroupId());
+		sb.append(", campaignId=");
+		sb.append(getCampaignId());
 		sb.append("}");
 
 		return sb.toString();
@@ -543,7 +585,7 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(28);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.CampaignImage");
@@ -581,6 +623,10 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 			"<column><column-name>imageGroupId</column-name><column-value><![CDATA[");
 		sb.append(getImageGroupId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>campaignId</column-name><column-value><![CDATA[");
+		sb.append(getCampaignId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -601,6 +647,9 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 	private String _imageUUID;
 	private String _originalImageUUID;
 	private long _imageGroupId;
+	private long _campaignId;
+	private long _originalCampaignId;
+	private boolean _setOriginalCampaignId;
 	private long _columnBitmask;
 	private CampaignImage _escapedModel;
 }

@@ -101,6 +101,55 @@ public class AdCampaignServiceWrapper implements AdCampaignService,
 		_adCampaignService.deleteCampaigns(campaignList);
 	}
 
+	@Override
+	public com.rumbasolutions.flask.model.CampaignImage addCampaignImage(
+		long campaignId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imageUUID,
+		long imageGroupId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _adCampaignService.addCampaignImage(campaignId, imageTitle,
+			imageDesc, imageUUID, imageGroupId, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.CampaignImage updateCampaignImage(
+		long campaignImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imageUUID,
+		long imageGroupId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _adCampaignService.updateCampaignImage(campaignImageId,
+			imageTitle, imageDesc, imageUUID, imageGroupId, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.CampaignImage getCampaignImage(
+		long campaignImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _adCampaignService.getCampaignImage(campaignImageId,
+			serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.CampaignImage> getCampaignImages(
+		long campaignId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _adCampaignService.getCampaignImages(campaignId, serviceContext);
+	}
+
+	@Override
+	public void deleteCampaignImage(long campaignImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_adCampaignService.deleteCampaignImage(campaignImageId, serviceContext);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getCampaignWithImages(
+		long campaignId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _adCampaignService.getCampaignWithImages(campaignId,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

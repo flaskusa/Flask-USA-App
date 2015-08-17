@@ -16,12 +16,9 @@ package com.rumbasolutions.flask.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -33,13 +30,14 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.AdCampaign;
 import com.rumbasolutions.flask.model.CampaignEvent;
+import com.rumbasolutions.flask.model.CampaignImage;
 import com.rumbasolutions.flask.service.AdCampaignLocalServiceUtil;
 import com.rumbasolutions.flask.service.AdCustomerServiceUtil;
 import com.rumbasolutions.flask.service.CampaignEventLocalServiceUtil;
+import com.rumbasolutions.flask.service.CampaignImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.AdCampaignServiceBaseImpl;
-import com.rumbasolutions.flask.service.persistence.AdCampaignFinderUtil;
 import com.rumbasolutions.flask.service.persistence.AdCampaignUtil;
-import com.rumbasolutions.flask.service.persistence.CampaignEventUtil;
+import com.rumbasolutions.flask.service.persistence.CampaignImageUtil;
 
 /**
  * The implementation of the ad campaign remote service.
@@ -247,5 +245,105 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 		}
 	}
 	
+	@Override
+	public CampaignImage addCampaignImage(long campaignId, String imageTitle,
+			String imageDesc, String imageUUID, long imageGroupId, ServiceContext  serviceContext){
+		CampaignImage campaignImage = null;
+		try{
+			
+			campaignImage = CampaignImageLocalServiceUtil.createCampaignImage(CounterLocalServiceUtil.increment());
+			campaignImage.setCampaignId(campaignId);
+			campaignImage.setImageTitle(imageTitle);
+			campaignImage.setImageDesc(imageDesc);
+			campaignImage.setImageUUID(imageUUID);
+			campaignImage.setImageGroupId(imageGroupId);
+			
+			Date now = new Date();
+			campaignImage.setUserId(serviceContext.getUserId());
+			campaignImage.setCreatedDate(serviceContext.getCreateDate(now));
+			campaignImage.setModifiedDate(serviceContext.getModifiedDate(now));
+			
+			CampaignImageLocalServiceUtil.addCampaignImage(campaignImage);
+			
+		} catch(Exception e){
+			LOGGER.error(e);
+		}
+		return campaignImage;
+	}
+	
+	@Override
+	public CampaignImage updateCampaignImage(long campaignImageId, String imageTitle,
+			String imageDesc, String imageUUID, long imageGroupId, ServiceContext  serviceContext){
+		CampaignImage campaignImage = null;
+		try{
+			campaignImage = CampaignImageLocalServiceUtil.getCampaignImage(campaignImageId);
+			campaignImage.setImageTitle(imageTitle);
+			campaignImage.setImageDesc(imageDesc);
+			campaignImage.setImageUUID(imageUUID);
+			campaignImage.setImageGroupId(imageGroupId);
+			
+			Date now = new Date();
+			campaignImage.setUserId(serviceContext.getUserId());
+			campaignImage.setModifiedDate(serviceContext.getModifiedDate(now));
+			
+			CampaignImageLocalServiceUtil.updateCampaignImage(campaignImage);
+		}catch(Exception e){
+			LOGGER.error(e);
+		}
+		return campaignImage;
+	}
+
+	@Override
+	public CampaignImage getCampaignImage(long campaignImageId, ServiceContext serviceContext){
+		CampaignImage campaignImage = null;
+		try{
+			campaignImage = CampaignImageUtil.fetchByPrimaryKey(campaignImageId);
+		}catch(Exception e){
+			LOGGER.error(e);
+		}
+		return campaignImage;
+	}
+	
+	@Override
+	public List<CampaignImage> getCampaignImages(long campaignId, ServiceContext serviceContext){
+		List<CampaignImage> campaignImages = null;
+		try{
+			campaignImages = CampaignImageUtil.findBycampaignId(campaignId);
+		}catch(Exception e){
+			LOGGER.error(e);
+		}
+		return campaignImages;
+	}
+	
+	@Override
+	public void deleteCampaignImage(long campaignImageId, ServiceContext serviceContext){
+		try{
+			CampaignImageLocalServiceUtil.deleteCampaignImage(campaignImageId);
+		}catch(Exception e){
+			LOGGER.error(e);
+		}
+	}
+
+	@Override
+	public JSONObject getCampaignWithImages(long campaignId, ServiceContext serviceContext){
+		List<CampaignImage> campaignImageList = null;
+		JSONObject campaignJsonObj = JSONFactoryUtil.createJSONObject();
+		try{
+			AdCampaign adCampaign = getCampaign(campaignId);
+			campaignJsonObj.put("AdCampaign", JSONFactoryUtil.looseSerialize(adCampaign));
+			campaignImageList = getCampaignImages(campaignId, serviceContext);
+			JSONArray campaignImageArr = JSONFactoryUtil.createJSONArray();
+			campaignJsonObj.put("campaignImages", campaignImageArr);
+			for(CampaignImage campaignImage : campaignImageList){
+				JSONObject campaignImageObj = JSONFactoryUtil.createJSONObject();
+				campaignImageObj.put("campaignImage", JSONFactoryUtil.looseSerialize(campaignImage));
+				campaignImageArr.put(campaignImageObj);
+			}
+		}catch(Exception e){
+			LOGGER.error("Exception in getCampaignWithImages. Exception: " +  e.getMessage());
+			return null;
+		}
+		return campaignJsonObj;
+	}
 	
 }

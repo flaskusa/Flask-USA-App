@@ -58,6 +58,7 @@ public class CampaignImageWrapper implements CampaignImage,
 		attributes.put("imageDesc", getImageDesc());
 		attributes.put("imageUUID", getImageUUID());
 		attributes.put("imageGroupId", getImageGroupId());
+		attributes.put("campaignId", getCampaignId());
 
 		return attributes;
 	}
@@ -110,6 +111,12 @@ public class CampaignImageWrapper implements CampaignImage,
 
 		if (imageGroupId != null) {
 			setImageGroupId(imageGroupId);
+		}
+
+		Long campaignId = (Long)attributes.get("campaignId");
+
+		if (campaignId != null) {
+			setCampaignId(campaignId);
 		}
 	}
 
@@ -313,6 +320,26 @@ public class CampaignImageWrapper implements CampaignImage,
 	@Override
 	public void setImageGroupId(long imageGroupId) {
 		_campaignImage.setImageGroupId(imageGroupId);
+	}
+
+	/**
+	* Returns the campaign ID of this campaign image.
+	*
+	* @return the campaign ID of this campaign image
+	*/
+	@Override
+	public long getCampaignId() {
+		return _campaignImage.getCampaignId();
+	}
+
+	/**
+	* Sets the campaign ID of this campaign image.
+	*
+	* @param campaignId the campaign ID of this campaign image
+	*/
+	@Override
+	public void setCampaignId(long campaignId) {
+		_campaignImage.setCampaignId(campaignId);
 	}
 
 	@Override

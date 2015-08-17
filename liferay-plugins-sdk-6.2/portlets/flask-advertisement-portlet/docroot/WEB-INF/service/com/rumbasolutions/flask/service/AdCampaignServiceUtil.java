@@ -104,6 +104,49 @@ public class AdCampaignServiceUtil {
 		getService().deleteCampaigns(campaignList);
 	}
 
+	public static com.rumbasolutions.flask.model.CampaignImage addCampaignImage(
+		long campaignId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imageUUID,
+		long imageGroupId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .addCampaignImage(campaignId, imageTitle, imageDesc,
+			imageUUID, imageGroupId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.CampaignImage updateCampaignImage(
+		long campaignImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc, java.lang.String imageUUID,
+		long imageGroupId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateCampaignImage(campaignImageId, imageTitle, imageDesc,
+			imageUUID, imageGroupId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.CampaignImage getCampaignImage(
+		long campaignImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getCampaignImage(campaignImageId, serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.CampaignImage> getCampaignImages(
+		long campaignId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getCampaignImages(campaignId, serviceContext);
+	}
+
+	public static void deleteCampaignImage(long campaignImageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteCampaignImage(campaignImageId, serviceContext);
+	}
+
+	public static com.liferay.portal.kernel.json.JSONObject getCampaignWithImages(
+		long campaignId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getCampaignWithImages(campaignId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
