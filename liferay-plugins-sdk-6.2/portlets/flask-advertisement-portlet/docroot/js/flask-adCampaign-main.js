@@ -175,10 +175,18 @@ function saveCampaign() {
 					formData) {
 				var displayAt = [];
 				formData["events"] = GRID_PARAM_CAMPAIGN.getCheckedEventIdList('eventId');
-				$("input[name='displayAt']:checked").each(function(i) {
-					displayAt.push($(this).val());
+				formData["customerId"] = $('#customerId').val();
+				formData["customerName"] = $('#customerId :selected').text();
+				formData["frequencyPerHour"] = $('#frequencyPerHour').val();
+				formData["campaignName"] = $('#campaignName').val();
+				$("input[name^='display']").each(function(i) {
+					if($(this).attr("checked")=='checked'){
+						formData[$(this).attr("name")] = true;
+					}
+					else{
+						formData[$(this).attr("name")] = false;
+					}
 				});
-				formData["displayAt"] = displayAt.toString();
 				return formData;
 			});
 	var flaskRequest = new Request();
