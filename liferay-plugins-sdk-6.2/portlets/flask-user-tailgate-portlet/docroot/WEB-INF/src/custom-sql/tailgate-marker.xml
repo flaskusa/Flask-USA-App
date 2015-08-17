@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="getTailgateMarker">
+		<![CDATA[
+			SELECT tailgatemarkerid, tailgateid, latitude, longitude, name, description 
+			FROM flasktailgate_tailgatemarker 
+			WHERE tailgateid=?
+		]]>
+	</sql>
+	<sql id="deleteTailgateMarker">
+		<![CDATA[
+			DELETE FROM flasktailgate_tailgatemarker WHERE tailgateid=?
+		]]>
+	</sql>
+</custom-sql>

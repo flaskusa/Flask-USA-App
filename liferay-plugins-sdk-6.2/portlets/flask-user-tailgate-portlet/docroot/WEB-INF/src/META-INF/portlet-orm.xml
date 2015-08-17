@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+
+<entity-mappings xmlns="http://java.sun.com/xml/ns/persistence/orm" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence/orm http://java.sun.com/xml/ns/persistence/orm_1_0.xsd">
+	<persistence-unit-metadata>
+		<xml-mapping-metadata-complete/>
+		<persistence-unit-defaults>
+			<access>PROPERTY</access>
+		</persistence-unit-defaults>
+	</persistence-unit-metadata>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.TailgateInfoModelImpl">
+		<attributes>
+			<id name="tailgateId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="tailgateName" />
+			<basic name="tailgateDescription" />
+			<basic name="eventId" />
+			<basic name="eventName" />
+			<basic name="tailgateDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="startTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="endTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="isActive" />
+			<basic name="isDelete" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.TailgateMarkerModelImpl">
+		<attributes>
+			<id name="tailgatemarkerid" />
+			<basic name="tailgateid" />
+			<basic name="latitude" />
+			<basic name="longitude" />
+			<basic name="name" />
+			<basic name="description" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.TailgateUsersModelImpl">
+		<attributes>
+			<id name="tailgateUserId" />
+			<basic name="tailgateId" />
+			<basic name="userId" />
+			<basic name="userName" />
+			<basic name="isAdmin" />
+			<basic name="groupId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="tailgateUserUuid" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.rumbasolutions.flask.model.impl.TailgateInfoImpl" name="TailgateInfo">
+		<table name="flasktailgate_TailgateInfo" />
+		<attributes />
+	</entity>
+	<entity class="com.rumbasolutions.flask.model.impl.TailgateMarkerImpl" name="TailgateMarker">
+		<table name="flasktailgate_TailgateMarker" />
+		<attributes />
+	</entity>
+	<entity class="com.rumbasolutions.flask.model.impl.TailgateUsersImpl" name="TailgateUsers">
+		<table name="flasktailgate_TailgateUsers" />
+		<attributes />
+	</entity>
+</entity-mappings>

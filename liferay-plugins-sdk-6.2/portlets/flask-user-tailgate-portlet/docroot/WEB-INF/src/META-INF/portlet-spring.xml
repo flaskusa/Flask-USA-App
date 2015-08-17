@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.rumbasolutions.flask.service.TailgateInfoLocalService" class="com.rumbasolutions.flask.service.impl.TailgateInfoLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.TailgateInfoService" class="com.rumbasolutions.flask.service.impl.TailgateInfoServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.TailgateInfoPersistence" class="com.rumbasolutions.flask.service.persistence.TailgateInfoPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.persistence.TailgateInfoFinder" class="com.rumbasolutions.flask.service.persistence.TailgateInfoFinderImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.TailgateMarkerLocalService" class="com.rumbasolutions.flask.service.impl.TailgateMarkerLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.TailgateMarkerService" class="com.rumbasolutions.flask.service.impl.TailgateMarkerServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.TailgateMarkerPersistence" class="com.rumbasolutions.flask.service.persistence.TailgateMarkerPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.persistence.TailgateMarkerFinder" class="com.rumbasolutions.flask.service.persistence.TailgateMarkerFinderImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.TailgateUsersLocalService" class="com.rumbasolutions.flask.service.impl.TailgateUsersLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.TailgateUsersService" class="com.rumbasolutions.flask.service.impl.TailgateUsersServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.TailgateUsersPersistence" class="com.rumbasolutions.flask.service.persistence.TailgateUsersPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.persistence.TailgateUsersFinder" class="com.rumbasolutions.flask.service.persistence.TailgateUsersFinderImpl" parent="basePersistence" />
+</beans>

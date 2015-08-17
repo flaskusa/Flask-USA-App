@@ -1,0 +1,205 @@
+/**
+ * Google Map Integration and Add/Remove marker for creating Tailgate Information
+ * Added By Mrs Ekta Tejas Patel
+ */
+var tailgateId;
+var map;
+var tailgateMarker = {};
+function initializeMap(tgId) {
+	tailgateId = tgId;
+	if(!tailgateId)
+		tailgateId = 0;
+	 var mapCenter = new google.maps.LatLng(42.48114, -83.49441); //Google map Coordinates
+    	//Google map option
+        var googleMapOptions = 
+        { 
+            center: mapCenter, // map center
+            zoom: 15, //zoom level, 0 = earth view to higher value
+            panControl: true, //enable pan Control
+            zoomControl: true, //enable zoom control
+           /*zoomControlOptions: {
+            style: google.maps.ZoomControlStyle.SMALL //zoom control size
+        }, */
+            scaleControl: true, // enable scale control
+            mapTypeId: google.maps.MapTypeId.ROADMAP // google map type
+        };
+        map = new google.maps.Map(document.getElementById("google_map"), googleMapOptions);
+        addMapEventListener(map);
+}
+function addMapEventListener(map){
+//##### drop a new marker on right click ######
+	// Load markers from tailgatemarker table
+	var isMarkerCreated = false;
+    var flaskRequest = new Request();
+	params = {tailgateId:tailgateId};
+	flaskRequest.sendGETRequest(_tailgateMarkerModel.SERVICE_ENDPOINTS.GET_TAILGATE_MARKER, params, 
+	function(data){/*success handler*/
+		console.log(data);
+		
+		tailgateMarker["name"] = data.name;
+		tailgateMarker["descirption"] = data.description;
+		tailgateMarker["latitude"] = data.latitude;
+		tailgateMarker["longitude"] = data.longitude;
+		tailgateMarker["tailgateId"] = data.tailgateid;
+		tailgateMarker["tailgateMarkerId"] = data.tailgatemarkerid;
+        var point = new google.maps.LatLng(parseFloat(data.latitude),parseFloat(data.longitude));
+
+        //call create_marker() function for xml loaded maker
+        create_marker(point, tailgateMarker.name, tailgateMarker.descirption, false, false, false, "/flask-user-tailgate-portlet/img/new-blue-pin.png");
+	} , function(error){ /*failure handler*/
+		_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
+		console.log("Error in getting data: " + error);
+	});
+    //drop a new marker on right click
+    google.maps.event.addListener(map, 'rightclick', function(event) {
+    	if(!isMarkerCreated){
+        //Edit form to be displayed with new marker
+    	isMarkerCreated = true;
+        var EditForm = '<p><div class="marker-edit">'+
+        '<label for="pName"><span>Place Name : </span><input type="text" name="pName" id="pName" class="save-name" placeholder="Enter Title" maxlength="40" /></label>'+
+        '<label for="pDesc"><span>Description : </span><textarea name="pDesc" id="pDesc" class="save-desc" placeholder="Enter Address" maxlength="150" style="height:60px; width:240px;"></textarea></label>'+
+        '</div></p><button name="save-marker" id="save-marker" class="save-marker">Add</button>';
+        //call create_marker() function
+        create_marker(event.latLng, 'Tailgate Marker', EditForm, true, true, true, "/flask-user-tailgate-portlet/img/new-red-pin.png");
+    	}else{
+    		alert("Marker is already created for the tailgate");
+    	}
+    });
+}
+
+//############### Create Marker Function ##############
+function create_marker(MapPos, MapTitle, MapDesc,  InfoOpenDefault, DragAble, Removable, iconPath)
+{                 
+    //new marker
+    var marker = new google.maps.Marker({
+        position: MapPos,
+        map: map,
+        draggable:DragAble,
+        animation: google.maps.Animation.DROP,
+        title: MapTitle,
+        icon: iconPath
+    });
+    
+    //Content structure of info Window for the Markers
+    var contentString = $('<div class="marker-info-win">'+
+    '<div class="marker-inner-win"><span class="info-content">'+
+    '<h5 class="marker-heading">'+MapTitle+'</h5>'+
+    MapDesc+ 
+    '</span><button name="remove-marker" class="remove-marker" style="margin-left:10px;" title="Remove Marker">Remove</button>'+
+    '</div></div>');    
+
+    
+    //Create an infoWindow
+    var infowindow = new google.maps.InfoWindow();
+    //set the content of infoWindow
+    infowindow.setContent(contentString[0]);
+
+    //Find remove button in infoWindow
+    var removeBtn   = contentString.find('button.remove-marker')[0];
+
+   //Find save button in infoWindow
+    var saveBtn     = contentString.find('button.save-marker')[0];
+
+    //add click listner to remove marker button
+    google.maps.event.addDomListener(removeBtn, "click", function(event) {
+        //call remove_marker function to remove the marker from the map
+        remove_marker(marker);
+    });
+    
+    if(typeof saveBtn !== 'undefined') //continue only when save button is present
+    {
+        //add click listner to save marker button
+        google.maps.event.addDomListener(saveBtn, "click", function(event) {
+            var mReplace = contentString.find('span.info-content'); //html to be replaced after success
+            var mName = contentString.find('input.save-name')[0].value; //name input field value
+            var mDesc  = contentString.find('textarea.save-desc')[0].value; //description input field value
+            var mLatLang = marker.getPosition().toUrlValue(); //get marker position
+            console.log(mLatLang);
+            var lat = mLatLang.split(",")[0];
+            var lng = mLatLang.split(",")[1];
+            if(mName =='' || mDesc =='')
+            {
+                alert("Please enter Name and Description!");
+            }else{
+                //call save_marker function and save the marker details
+                save_marker(marker, mName, mDesc, lat, lng, mReplace);
+            }
+        });
+    }
+    
+    //add click listner to save marker button        
+    google.maps.event.addListener(marker, 'click', function() {
+            infowindow.open(map,marker); // click on marker opens info window 
+    });
+      
+    if(InfoOpenDefault) //whether info window should be open by default
+    {
+      infowindow.open(map,marker);
+    }
+}
+
+//############### Remove Marker Function ##############
+function remove_marker(Marker)
+{
+    /* determine whether marker is draggable 
+    new markers are draggable and saved markers are fixed */
+	
+    if(Marker.getDraggable()) 
+    {
+        Marker.setMap(null); //just remove new marker
+        isMarkerCreated = false;
+    }else if(tailgateMarker.tailgateId == 0){
+    	Marker.setMap(null); //just remove created but not saved marker
+    }
+    else
+    {
+        //Remove saved marker from DB and map using jQuery Ajax
+        var mLatLang = Marker.getPosition().toUrlValue(); //get marker position
+        var flaskRequest = new Request();
+    	params = {tailgateId:tailgateMarker.tailgateId};
+    	flaskRequest.sendGETRequest(_tailgateMarkerModel.SERVICE_ENDPOINTS.REMOVE_TAILGATE_MARKER, params, 
+    	function(data){/*success handler*/
+    		Marker.setMap(null);
+    	} , function(error){ /*failure handler*/
+    		_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
+    		console.log("Error in getting data: " + error);
+    	});
+    }
+}
+
+//############### Save Marker Function ##############
+function save_marker(Marker, mName, mAddress, lat,lang, replaceWin)
+{
+    //Save new marker using jQuery Ajax
+	var mLatLang = Marker.getPosition().toUrlValue(); //get marker position
+	tailgateMarker["name"] = mName;
+	tailgateMarker["description"] = mAddress;
+	tailgateMarker["latitude"] = lat;
+	tailgateMarker["longitude"] = lang;
+	tailgateMarker["tailgateId"] = 0;
+	var markerDesc = "<textarea style='border:none;width:240px;height:60px;background-color:white;margin:0px;' wrap='hard' readonly='true'>"
+					+ mAddress + "</textarea><br>";
+	var point = new google.maps.LatLng(parseFloat(lat),parseFloat(lang));
+	create_marker(point, mName, markerDesc, false, false, false, "/flask-user-tailgate-portlet/img/new-blue-pin.png");
+	Marker.setDraggable(true);
+	remove_marker(Marker);
+//	replaceWin.html(data); //replace info window with new html
+//    Marker.setDraggable(false); //set marker to fixed
+//    Marker.setIcon('/flask-user-tailgate-portlet/img/new-blue-pin.png'); //replace icon
+}
+
+function saveTailgateMarker(tailgateId){
+		tailgateMarker["tailgateId"] = tailgateId;
+		if(tailgateMarker.latitude && tailgateMarker.longitude){
+			var params = {name : tailgateMarker.name, description : tailgateMarker.description, latitude : tailgateMarker.latitude,
+					longitude : tailgateMarker.longitude, tailgateId: tailgateMarker.tailgateId }; //post variables
+		    var flaskRequest = new Request();
+			flaskRequest.sendPOSTRequest(_tailgateMarkerModel.SERVICE_ENDPOINTS.ADD_TAILGATE_MARKER, params, 
+			function(data){/*success handler*/
+				console.log(data);
+			} , function(error){ /*failure handler*/
+				_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
+				console.log("Error in saving tailgate parameter data: " + error);
+			});
+		}
+}

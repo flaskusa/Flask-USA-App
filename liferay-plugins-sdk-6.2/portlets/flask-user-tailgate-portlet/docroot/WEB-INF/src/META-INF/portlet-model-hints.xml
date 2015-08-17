@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.rumbasolutions.flask.model.TailgateInfo">
+		<field name="tailgateId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="tailgateName" type="String" />
+		<field name="tailgateDescription" type="String" />
+		<field name="eventId" type="long" />
+		<field name="eventName" type="String" />
+		<field name="tailgateDate" type="Date" />
+		<field name="startTime" type="Date" />
+		<field name="endTime" type="Date" />
+		<field name="isActive" type="int" />
+		<field name="isDelete" type="int" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.TailgateMarker">
+		<field name="tailgatemarkerid" type="long" />
+		<field name="tailgateid" type="long" />
+		<field name="latitude" type="String" />
+		<field name="longitude" type="String" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.TailgateUsers">
+		<field name="tailgateUserId" type="long" />
+		<field name="tailgateId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="isAdmin" type="int" />
+		<field name="groupId" type="long" />
+	</model>
+</model-hints>

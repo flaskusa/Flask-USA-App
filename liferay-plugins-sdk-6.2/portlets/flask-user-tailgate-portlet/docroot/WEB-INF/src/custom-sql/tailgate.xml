@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="getAllTailgate">
+		<![CDATA[
+			SELECT fti.tailgateId,fti.tailgateName,fti.tailgateDescription,fti.eventId,fti.eventName,
+			fti.tailgateDate,fti.startTime,fti.endTime, fti.isActive, fti.isDelete, ftu.isAdmin 
+			FROM flasktailgate_tailgateinfo fti INNER JOIN flasktailgate_tailgateusers ftu ON fti.tailgateid = ftu.tailgateid 
+			WHERE fti.isActive=1 AND fti.isDelete=0;
+		]]>
+	</sql>
+	<sql id="getMyAllTailgate">
+		<![CDATA[
+			SELECT fti.tailgateId,fti.tailgateName,fti.tailgateDescription,fti.eventId,fti.eventName,
+			fti.tailgateDate,fti.startTime,fti.endTime, fti.isActive, fti.isDelete, ftu.isAdmin
+			FROM flasktailgate_tailgateinfo fti INNER JOIN flasktailgate_tailgateusers ftu ON fti.tailgateid = ftu.tailgateid 
+			WHERE ftu.userId=? AND fti.isActive=1 AND fti.isDelete=0;
+		]]>
+	</sql>
+	<sql id="deleteTailgate">
+		<![CDATA[
+			UPDATE flaskevents_FlaskGroup set isDelete=1 where groupId=?
+		]]>
+	</sql>
+	<sql id="deleteTailgates">
+		<![CDATA[
+			UPDATE flaskevents_FlaskGroup set isDelete=1 where groupId in (?)
+		]]>
+	</sql>
+</custom-sql>

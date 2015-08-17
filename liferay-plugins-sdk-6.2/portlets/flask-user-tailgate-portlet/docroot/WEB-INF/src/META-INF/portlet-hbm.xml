@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.rumbasolutions.flask.model.TailgateInfo" />
+	<import class="com.rumbasolutions.flask.model.TailgateMarker" />
+	<import class="com.rumbasolutions.flask.model.TailgateUsers" />
+	<class name="com.rumbasolutions.flask.model.impl.TailgateInfoImpl" table="flasktailgate_TailgateInfo">
+		<cache usage="read-write" />
+		<id name="tailgateId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="tailgateName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="tailgateDescription" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="eventName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="tailgateDate" type="org.hibernate.type.TimestampType" />
+		<property name="startTime" type="org.hibernate.type.TimestampType" />
+		<property name="endTime" type="org.hibernate.type.TimestampType" />
+		<property name="isActive" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="isDelete" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.TailgateMarkerImpl" table="flasktailgate_TailgateMarker">
+		<cache usage="read-write" />
+		<id name="tailgatemarkerid" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="tailgateid" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="latitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="longitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.TailgateUsersImpl" table="flasktailgate_TailgateUsers">
+		<cache usage="read-write" />
+		<id name="tailgateUserId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="tailgateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="isAdmin" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+</hibernate-mapping>

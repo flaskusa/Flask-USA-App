@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.rumbasolutions.flask">
+	<namespace>flasktailgate</namespace>
+
+	<entity name="TailgateInfo" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="tailgateId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		
+
+		<!-- Audit fields -->
+		
+		<column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date" />
+        <column name="modifiedDate" type="Date" />
+        
+
+		<!-- Other fields -->
+
+		<column name="tailgateName" type="String" />
+		<column name="tailgateDescription" type="String" />
+		<column name="eventId" type="long" />
+		<column name="eventName" type="String" />
+		<column name="tailgateDate" type="Date" />
+		<column name="startTime" type="Date" />
+		<column name="endTime" type="Date" />
+		<column name="isActive" type="int" />
+		<column name="isDelete" type="int" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="tailgateId" />
+		</order>
+
+		<!-- Finder methods -->
+	</entity>
+	<entity name="TailgateUsers" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+		<column name="tailgateUserId" type="long" primary="true" />
+
+		<!-- Other fields -->
+		<column name="tailgateId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="isAdmin" type="int" />
+		<column name="groupId" type="long" />
+
+		<!-- Finder methods -->
+		<finder name="tailgateGroups" return-type="Collection">
+			<finder-column name="tailgateId" />
+		</finder>
+	</entity>
+	<entity name="TailgateMarker" remote-service="true" local-service="true">
+		<column name="tailgatemarkerid" type="long" primary="true"></column>
+		<column name="tailgateid" type="long"></column>
+		<column name="latitude" type="String"></column>
+		<column name="longitude" type="String"></column>
+		<column name="name" type="String"></column>
+		<column name="description" type="String"></column>
+		<!-- Finder methods -->
+        <finder name="tailgateid" return-type="Collection">
+			<finder-column name="tailgateid" />
+		</finder>
+	</entity>
+	
+</service-builder>

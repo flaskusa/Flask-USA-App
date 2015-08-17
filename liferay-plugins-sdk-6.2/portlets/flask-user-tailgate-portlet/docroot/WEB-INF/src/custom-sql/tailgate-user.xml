@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<custom-sql>
+	<sql id="deleteTailgateUser">
+		<![CDATA[
+			DELETE FROM flasktailgate_tailgateusers WHERE tailgateId=? AND userId=?
+		]]>
+	</sql>
+	<sql id="deleteTailgateUsers">
+		<![CDATA[
+			DELETE FROM flasktailgate_tailgateusers WHERE tailgateId=? AND userId IN (?)
+		]]>
+	</sql>
+	<sql id="getTailgateUsersListByTailgateId">
+		<![CDATA[
+			SELECT tailgateUserId, tailgateId, userId, userName, isAdmin, groupId FROM flasktailgate_tailgateInfo where tailgateId=?
+		]]>
+	</sql>
+</custom-sql>
