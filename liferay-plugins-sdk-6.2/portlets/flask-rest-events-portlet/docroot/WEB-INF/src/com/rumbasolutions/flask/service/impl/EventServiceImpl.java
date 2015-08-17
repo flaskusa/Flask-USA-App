@@ -190,7 +190,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	@Override
 	public Event updateEvent(long eventId, String eventName, String description, 
 						String eventDate, Date startTime, Date endTime,
-						long eventTypeId, long venueId, String eventImageUUID, long groupId,
+						long eventTypeId, long venueId, String eventImageUUID, long eventImageGroupId,
 								ServiceContext  serviceContext){
 		Event event=null;
 		try{
@@ -208,7 +208,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		    event.setEventTypeId(eventTypeId);
 			event.setVenueId(venueId);
 			event.setEventImageUUID(eventImageUUID);
-			event.setEventImageGroupId(groupId);
+			event.setEventImageGroupId(eventImageGroupId);
 			
 			EventLocalServiceUtil.updateEvent(event);
 		}catch(Exception ex){
