@@ -63,19 +63,19 @@
 						<label class="control-label" for="adDisplayTime">Display At</label>
 						<div class="controls" id="adDisplayTime">
 							<div class='displayAtChk'>
-									<input type ='checkbox' checked='checked'  name='displayAtGeneral' id = 'displayAtGeneral'/>
+									<input type ='checkbox' checked='checked'  name='displayGeneral' id = 'displayGeneral'/>
 									General
 							</div>
 							<div class='displayAtChk'>
-									<input type ='checkbox' checked='checked'  name='displayAtPreEvent' id = 'displayAtPreEvent'/>
+									<input type ='checkbox' checked='checked'  name='displayPreEvent' id = 'displayPreEvent'/>
 									Pre-Event
 							</div>
 							<div class='displayAtChk'>
-									<input type ='checkbox' checked='checked'  name='displayAtDuringEvent' id = 'displayAtDuringEvent'/>
+									<input type ='checkbox' checked='checked'  name='displayDuringEvent' id = 'displayDuringEvent'/>
 									During-Event
 							</div>
 							<div class='displayAtChk'>
-									<input type ='checkbox' checked='checked'  name='displayAtPostEvent' id = 'displayAtPostEvent'/>
+									<input type ='checkbox' checked='checked'  name='displayPostEvent' id = 'displayPostEvent'/>
 									Post-Event
 							</div>
 						</div>
@@ -106,7 +106,7 @@
 					
 					<input class="btn btn-info clsSave" id="saveCampaign" type="button" value="Save"/>
 					<input class="btn btn-primary clsCancel" id="cancelCampaign" type="button" value="Cancel" >
-
+					<div id="campaignDetailGallery"></div>
 				</form>
 			</div>
 			<div id='campaignActionMenu' style="display:none">
