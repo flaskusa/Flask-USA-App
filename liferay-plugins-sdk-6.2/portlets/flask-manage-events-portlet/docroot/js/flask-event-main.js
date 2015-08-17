@@ -1,6 +1,7 @@
 var imageContainer = $("#eventImage");
 var eventForm;
 var dropZoneLogo;
+var edit = false;
 function addClickHandlers(){
 	eventForm = $("#eventForm");
 	/*	Initialize display elements*/
@@ -153,6 +154,7 @@ function deleteMultipleEvents(eventList) {
 
 /* Edit Event */
 function editEvent(rowData) {
+		edit = true;
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("eventForm",  _eventModel.DATA_MODEL.EVENT, rowData, function(){});
 		$("#eventDataTable").hide();
@@ -175,6 +177,7 @@ function editEvent(rowData) {
 		fnRenderLogo(rowData.eventImageUUID, rowData.eventImageGroupId, $("#eventImage"),false)
 		createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
 		loadEventDetailsData(rowData.eventId);
+		validate();
 }
 
 
@@ -195,6 +198,7 @@ function saveEvent(){
 		                    formData.endTime= eTime;							
 							return formData;
 					});
+		console.log(params);
 		var flaskRequest = new Request();
 		var url = "";
 			if(params.eventId == 0){
@@ -292,6 +296,10 @@ function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel){
 
 $(document).ready(function(){
 	_repositoryId = $("#repositoryId").val();	
+	validate();
+});
+
+function validate(){
 	$('#eventForm').jqxValidator
     ({
         hintType: 'label',
@@ -299,7 +307,10 @@ $(document).ready(function(){
         rules: [
 		               { input: '#eventName', message: 'Event name is required!', action: 'keyup, blur', rule: 'required' },
 		               { input: '#eventDate', message: 'Enter valid date!', action: 'keyup, blur', rule: function (input, commit) {
-			            	   var date = new Date();
+		            	   if(edit){
+		            		   return true;
+		            	   }else{
+		            		   var date = new Date();
 			            	   var day = date.getDate();
 			            	   var monthIndex = date.getMonth()+1;
 			            	   var year = date.getFullYear();
@@ -309,9 +320,10 @@ $(document).ready(function(){
 			            	   var indate=Date.parse(inputdate);
 		
 			            	   if(cdate<=indate){return true;}
-			            	   else{return false;}
-																								                       
+			            	   else{return false;}																                       
 							}
+		            	   }
+			            	  
 		               },
 			
 		               {
@@ -328,5 +340,4 @@ $(document).ready(function(){
 			            }
                ]
     });
-});
-
+}
