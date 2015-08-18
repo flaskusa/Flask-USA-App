@@ -14,7 +14,7 @@ function adCampaignClickHandlers() {
 	$("#addCampaign").click(function() {
 		$("#adCampaignDataTable").hide();
 		prepareCustomerDropDownList('customerId');
-		prepareEventTypeDropdown('eventTypeId');
+		prepareEventTypeDropdown('eventTypeId',0);
 		loadEventData("1");
 		setCampaignFormVisible(true);
 		campaignId = 0;
@@ -162,9 +162,10 @@ function editCampaign(rowData) {
 			});
 	$("#adCampaignDataTable").hide();
 	prepareCustomerDropDownList('customerId', rowData.customerId);
-	prepareEventTypeDropdown(rowData.eventTypeId);
+	prepareEventTypeDropdown('eventTypeId',rowData.eventTypeId);
 	//prepareInfoTypesCheckBox(rowData.displayAtId);
-	filterData(rowData.eventTypeId, rowData.eventsId);
+	fnGetCampaignImages(rowData.campaignId,$("#campaignDetailGallery"), true);
+	//filterData(rowData.eventTypeId, rowData.eventsId);
 	setCampaignFormVisible(true);
 }
 
