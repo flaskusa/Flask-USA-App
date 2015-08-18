@@ -31,8 +31,18 @@ function initialize(portletId, portlet){
 		addClickHandlers();
 		initForm();
 		$('#eventDate').datetimepicker({
-			format: "dd MM yyyy",
-			pickTime: false
+			format: "MM-DD-YYYY",
+			//pickTime: false
+		});
+		$("#startTime").datetimepicker({
+			format: "LT
+			//pickDate: false,  
+			//pick12HourFormat: true
+		});
+		$("#endTime").datetimepicker({
+			format: "LT"
+			//pickDate: false, 
+			//pick12HourFormat: true
 		});
 	}
 }
@@ -75,14 +85,14 @@ function initialize(portletId, portlet){
 		   <div class="form-group">
 		    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
 		    <div class="controls">
-		      <div id="startTime"></div>
+		      <input type='text' class="form-control" id='startTime' />
 		    </div>
 		  </div>
 		
 			<div class="form-group">
 			<label  id="EndTime" class="control-label" for="endTime">End Time:</label>
 		    	<div class="controls">
-		    		 <div id="endTime"></div>
+		    		 <input type='text' class="form-control" id='endTime' />
 		    	</div>
 		  </div>
 		  <br/>
