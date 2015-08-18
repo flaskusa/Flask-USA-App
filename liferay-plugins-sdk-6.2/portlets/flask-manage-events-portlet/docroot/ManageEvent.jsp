@@ -15,7 +15,6 @@
 %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@include file="init.jsp"%>
-
 <portlet:actionURL  var="addImagesActionURL" name="addImages"/>
 <%
   long repositoryId = themeDisplay.getLayout().getGroupId();
@@ -31,6 +30,10 @@ function initialize(portletId, portlet){
 		loadData();
 		addClickHandlers();
 		initForm();
+		$('#eventDate').datetimepicker({
+			format: "dd MM yyyy",
+			pickTime: false
+		});
 	}
 }
 
@@ -63,7 +66,9 @@ function initialize(portletId, portlet){
 		   </div>
 		    <div class="form-group">
 		    	<label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
-			   			<div id="eventDate"></div>
+		    	<div class="controls">
+           				 <input type='text' class="form-control" id='eventDate' />
+           		</div>
 			  	</div>
 		   </div> 
 		
