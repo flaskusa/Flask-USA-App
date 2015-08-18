@@ -13,12 +13,12 @@
 	position: relative;
 
 	@include respond-to(phone) {
-		padding-left: 0.5em;
-		padding-right: 0.5em;
+		padding-left: 0px;
+		padding-right: 0px;
 	}
 
 	@include respond-to(tablet) {
-		padding-left: 2em;
-		padding-right: 2em;
+		padding-left: 0px;
+		padding-right: 0px;
 	}
 }
