@@ -13,6 +13,11 @@ function addDetailsClickHandlers(){
 		}
 		if($('#eventDetailsForm').jqxValidator('validate'))
 		{
+			if($('#addrLine1').val() == undefined){
+				$('#latitude').val(0);
+				$('#longitude').val(0);
+				saveEventDetails();
+			}else{
 				var geocoder = new google.maps.Geocoder(); 
 				geocoder.geocode({
 					address : $('#infoTitle').val()+' '+ $('#addrLine1').val(), 
@@ -31,6 +36,8 @@ function addDetailsClickHandlers(){
 						saveEventDetails();
 			    	}
 			    });
+			}
+				
 		}
 	});	
 	
