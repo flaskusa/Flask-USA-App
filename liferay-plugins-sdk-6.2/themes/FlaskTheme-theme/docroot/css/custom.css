@@ -690,7 +690,7 @@ div#adminDataTable {
 /* Dockbar Starts*/
 .aui .dockbar-split .dockbar .navbar-inner {
 	width: 100%;
-	position: fixed;
+	position: fixed !important;
 	z-index: 10000;
 }
 
