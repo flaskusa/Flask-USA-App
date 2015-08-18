@@ -225,9 +225,10 @@ function saveEvent(){
 									createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
 									loadEventDetailsData(data.eventId);}
 							else{
-									$("#eventDataTable").show();
-									$("#formContainer").hide();
-									loadData();}
+									$('.nav-tabs > .active').next('li').find('a').trigger('click');
+									$('#eventDetailsDataTable').show();
+									loadEventDetailsData(data.eventId);
+								}
 						}	
 					} ,
 					function (data){
@@ -237,7 +238,7 @@ function saveEvent(){
 
 function initForm(){
 		var repositoryId = $("#repositoryId").val();
-		$("#eventDate").jqxDateTimeInput({width: '260px', height: '35px',formatString: "MM-dd-yyyy" });
+		//$("#eventDate").jqxDateTimeInput({width: '260px', height: '35px',formatString: "MM-dd-yyyy" });
 		$("#Active").jqxCheckBox({ width: 120, height: 25 });
 		$("#startTime").jqxDateTimeInput({ width: '100px', height: '23px', formatString: 'hh:mm tt', showTimeButton: true, showCalendarButton: false});
 		$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'hh:mm tt', showTimeButton: true, showCalendarButton: false});
@@ -306,7 +307,7 @@ function validate(){
         animationDuration: 0,
         rules: [
 		               { input: '#eventName', message: 'Event name is required!', action: 'keyup, blur', rule: 'required' },
-		               { input: '#eventDate', message: 'Enter valid date!', action: 'keyup, blur', rule: function (input, commit) {
+		               { input: '#eventDate', message: 'Date must be current date or greater', action: 'keyup, blur', rule: function (input, commit) {
 		            	   if(edit){
 		            		   return true;
 		            	   }else{
