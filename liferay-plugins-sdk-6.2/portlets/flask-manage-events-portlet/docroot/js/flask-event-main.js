@@ -154,6 +154,15 @@ function deleteMultipleEvents(eventList) {
 
 /* Edit Event */
 function editEvent(rowData) {
+	function formatUnixToTime(tdate)
+	{
+		var date = new Date(tdate);
+		var hours = date.getHours();
+		var minutes = "0" + date.getMinutes();
+		var ampm = hours >= 12 ? 'PM' : 'AM';
+		hours = hours % 12;
+		return hours + ':' + minutes.substr(-2) + ' ' + ampm;
+	}
 		edit = true;
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("eventForm",  _eventModel.DATA_MODEL.EVENT, rowData, function(){});
@@ -347,14 +356,4 @@ function validate(){
 			            }
                ]
     });
-}
-
-function formatUnixToTime(tdate)
-{
-	var date = new Date(tdate);
-	var hours = date.getHours();
-	var minutes = "0" + date.getMinutes();
-	var ampm = hours >= 12 ? 'PM' : 'AM';
-	hours = hours % 12;
-	return hours + ':' + minutes.substr(-2) + ' ' + ampm;
 }
