@@ -2,19 +2,25 @@
 <!DOCTYPE liferay-portlet-app PUBLIC "-//Liferay//DTD Portlet Application 6.2.0//EN" "http://www.liferay.com/dtd/liferay-portlet-app_6_2_0.dtd">
 
 <liferay-portlet-app>
-	<portlet>
-		<portlet-name>1</portlet-name>
-		<configuration-action-class>com.liferay.portal.kernel.portlet.DefaultConfigurationAction</configuration-action-class>
-		<friendly-url-mapper-class>com.liferay.portal.kernel.portlet.DefaultFriendlyURLMapper</friendly-url-mapper-class>
-		<friendly-url-mapping>contacts</friendly-url-mapping>
-		<friendly-url-routes>com/liferay/contacts/contactscenter/portlet/contacts-friendly-url-routes.xml</friendly-url-routes>
-		<user-notification-definitions>com/liferay/contacts/contactscenter/portlet/contacts-center-user-notification-definitions.xml</user-notification-definitions>
-		<user-notification-handler-class>com.liferay.contacts.contactscenter.notifications.ContactsCenterUserNotificationHandler</user-notification-handler-class>
-		<control-panel-entry-category>my</control-panel-entry-category>
-		<control-panel-entry-weight>3.0</control-panel-entry-weight>
-		<css-class-wrapper>contacts-portlet</css-class-wrapper>
-		<add-default-resource>true</add-default-resource>
-	</portlet>
+<portlet>
+  <portlet-name>flask-social</portlet-name>
+  <icon>/icon.png</icon>
+  <header-portlet-css>/css/main.css</header-portlet-css>
+  <header-portlet-css>/css/jqx.base.css</header-portlet-css>
+  <header-portlet-css>/css/jqx.windowsphone.css</header-portlet-css>
+  <header-portlet-css>/css/jqx.blackberry.css</header-portlet-css>
+  <header-portlet-css>/css/jqx.android.css</header-portlet-css>
+  <header-portlet-css>/css/jqx.mobile.css</header-portlet-css>
+    <footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/jqxscrollbar.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/flask-social-main.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/flask-social-model.js</footer-portlet-javascript>
+    <css-class-wrapper>flask-view-events-portlet</css-class-wrapper>
+ </portlet>
+
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>
@@ -32,3 +38,4 @@
 		<role-link>User</role-link>
 	</role-mapper>
 </liferay-portlet-app>
+
