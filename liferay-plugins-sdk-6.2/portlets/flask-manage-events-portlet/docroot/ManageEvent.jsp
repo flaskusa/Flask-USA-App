@@ -20,7 +20,6 @@
   long repositoryId = themeDisplay.getLayout().getGroupId();
   themeDisplay.getLayout().getUuid();
 %>
-
 <aui:script>
 var bCreated;
 Liferay.Portlet.ready(initialize);
@@ -35,7 +34,7 @@ function initialize(portletId, portlet){
 			//pickTime: false
 		});
 		$("#startTime").datetimepicker({
-			format: "LT
+			format: "LT"
 			//pickDate: false,  
 			//pick12HourFormat: true
 		});
