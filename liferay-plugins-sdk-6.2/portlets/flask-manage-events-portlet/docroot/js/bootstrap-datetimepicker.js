@@ -209,12 +209,12 @@
 
                 if (isEnabled('h')) {
                     topRow.append($('<td>')
-                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Increment Hour'}).addClass('btn').attr('data-action', 'incrementHours')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Increment Hour', 'style':'color: #F79634 !important;'}).addClass('btN').attr('data-action', 'incrementHours')
                             .append($('<span>').addClass(options.icons.up))));
                     middleRow.append($('<td>')
                         .append($('<span>').addClass('timepicker-hour').attr({'data-time-component':'hours', 'title':'Pick Hour'}).attr('data-action', 'showHours')));
                     bottomRow.append($('<td>')
-                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Decrement Hour'}).addClass('btn').attr('data-action', 'decrementHours')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Decrement Hour', 'style':'color: #F79634 !important;'}).addClass('btN').attr('data-action', 'decrementHours')
                             .append($('<span>').addClass(options.icons.down))));
                 }
                 if (isEnabled('m')) {
@@ -224,12 +224,12 @@
                         bottomRow.append($('<td>').addClass('separator'));
                     }
                     topRow.append($('<td>')
-                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Increment Minute'}).addClass('btn').attr('data-action', 'incrementMinutes')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Increment Minute', 'style':'color: #F79634 !important;'}).addClass('btN').attr('data-action', 'incrementMinutes')
                             .append($('<span>').addClass(options.icons.up))));
                     middleRow.append($('<td>')
                         .append($('<span>').addClass('timepicker-minute').attr({'data-time-component': 'minutes', 'title':'Pick Minute'}).attr('data-action', 'showMinutes')));
                     bottomRow.append($('<td>')
-                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Decrement Minute'}).addClass('btn').attr('data-action', 'decrementMinutes')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Decrement Minute', 'style':'color: #F79634 !important;'}).addClass('btN').attr('data-action', 'decrementMinutes')
                             .append($('<span>').addClass(options.icons.down))));
                 }
                 if (isEnabled('s')) {
@@ -239,19 +239,19 @@
                         bottomRow.append($('<td>').addClass('separator'));
                     }
                     topRow.append($('<td>')
-                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Increment Second'}).addClass('btn').attr('data-action', 'incrementSeconds')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Increment Second', 'style':'color: #F79634 !important;'}).addClass('btN').attr('data-action', 'incrementSeconds')
                             .append($('<span>').addClass(options.icons.up))));
                     middleRow.append($('<td>')
                         .append($('<span>').addClass('timepicker-second').attr({'data-time-component': 'seconds', 'title':'Pick Second'}).attr('data-action', 'showSeconds')));
                     bottomRow.append($('<td>')
-                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Decrement Second'}).addClass('btn').attr('data-action', 'decrementSeconds')
+                        .append($('<a>').attr({href: '#', tabindex: '-1', 'title':'Decrement Second', 'style':'color: #F79634 !important;'}).addClass('btN').attr('data-action', 'decrementSeconds')
                             .append($('<span>').addClass(options.icons.down))));
                 }
 
                 if (!use24Hours) {
                     topRow.append($('<td>').addClass('separator'));
                     middleRow.append($('<td>')
-                        .append($('<button>').addClass('btn btn-primary').attr({'data-action': 'togglePeriod', tabindex: '-1', 'title':'Toggle Period'})));
+                        .append($('<button>').addClass('btN btn-primary').attr({'data-action': 'togglePeriod', tabindex: '-1', 'title':'Toggle Period'})));
                     bottomRow.append($('<td>').addClass('separator'));
                 }
 
@@ -870,7 +870,7 @@
                 if (transitioning) {
                     return picker;
                 }
-                if (component && component.hasClass('btn')) {
+                if (component && component.hasClass('btN')) {
                     component.toggleClass('active');
                 }
                 widget.hide();
@@ -1174,7 +1174,7 @@
                 widget.on('click', '[data-action]', doAction); // this handles clicks on the widget
                 widget.on('mousedown', false);
 
-                if (component && component.hasClass('btn')) {
+                if (component && component.hasClass('btN')) {
                     component.toggleClass('active');
                 }
                 widget.show();
@@ -1397,7 +1397,7 @@
             ///<summary>Disables the input element, the component is attached to, by adding a disabled="true" attribute to it.
             ///If the widget was visible before that call it is hidden. Possibly emits dp.hide</summary>
             hide();
-            if (component && component.hasClass('btn')) {
+            if (component && component.hasClass('btN')) {
                 component.addClass('disabled');
             }
             input.prop('disabled', true);
@@ -1406,7 +1406,7 @@
 
         picker.enable = function () {
             ///<summary>Enables the input element, the component is attached to, by removing disabled attribute from it.</summary>
-            if (component && component.hasClass('btn')) {
+            if (component && component.hasClass('btN')) {
                 component.removeClass('disabled');
             }
             input.prop('disabled', false);
@@ -2325,15 +2325,15 @@
         disabledDates: false,
         enabledDates: false,
         icons: {
-            time: 'glyphicon glyphicon-time',
-            date: 'glyphicon glyphicon-calendar',
-            up: 'glyphicon glyphicon-chevron-up',
-            down: 'glyphicon glyphicon-chevron-down',
-            previous: 'glyphicon glyphicon-chevron-left',
-            next: 'glyphicon glyphicon-chevron-right',
-            today: 'glyphicon glyphicon-screenshot',
-            clear: 'glyphicon glyphicon-trash',
-            close: 'glyphicon glyphicon-remove'
+            time: 'icon icon-time',
+            date: 'icon icon-calendar',
+            up: 'icon icon-chevron-up',
+            down: 'icon icon-chevron-down',
+            previous: 'icon icon-chevron-left',
+            next: 'icon icon-chevron-right',
+            today: 'icon icon-screenshot',
+            clear: 'icon icon-trash',
+            close: 'icon icon-remove'
         },
         tooltips: {
             today: 'Go to today',
@@ -2465,7 +2465,7 @@
             //},
             'control space': function (widget) {
                 if (widget.find('.timepicker').is(':visible')) {
-                    widget.find('.btn[data-action="togglePeriod"]').click();
+                    widget.find('.btN[data-action="togglePeriod"]').click();
                 }
             },
             t: function () {

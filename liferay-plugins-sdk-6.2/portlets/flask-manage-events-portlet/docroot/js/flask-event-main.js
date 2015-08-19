@@ -162,11 +162,17 @@ function editEvent(rowData) {
 		_eventModel.loadVenues('venueId',  rowData.venueId);
 		_eventModel.loadEventType('eventTypeId',  rowData.eventTypeId);
 		var date = new Date(parseInt(rowData.eventDate));
-		$('#eventDate').jqxDateTimeInput('setDate', date);
+		 var dd = date.getDate()
+		   if ( dd < 10 ) dd = '0' + dd;
+		   var mm = date.getMonth()+1;
+		   if ( mm < 10 ) mm = '0' + mm;
+		   var yy = date.getFullYear();
+		   console.log(mm+'-'+dd+'-'+yy);
+		$('#eventDate').val(mm+'-'+dd+'-'+yy);
 		var sTime = new Date(parseInt(rowData.startTime));
-		$('#startTime').jqxDateTimeInput('setDate', sTime);
+		$('#startTime').val(formatUnixToTime(sTime));
 		var eTime = new Date(parseInt(rowData.endTime));
-		$('#endTime').jqxDateTimeInput('setDate', eTime);
+		$('#endTime').val(formatUnixToTime(eTime));
 		$(".AddContent").click(function(){
 			$("#formContainer").hide();
 			$('#eventDetailsForm').hide();
@@ -341,4 +347,14 @@ function validate(){
 			            }
                ]
     });
+}
+
+function formatUnixToTime(tdate)
+{
+	var date = new Date(tdate);
+	var hours = date.getHours();
+	var minutes = "0" + date.getMinutes();
+	var ampm = hours >= 12 ? 'PM' : 'AM';
+	hours = hours % 12;
+	return hours + ':' + minutes.substr(-2) + ' ' + ampm;
 }
