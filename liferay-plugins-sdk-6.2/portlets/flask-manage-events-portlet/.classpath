@@ -10,5 +10,6 @@
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="docroot/WEB-INF/src"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container/flask-rest-events-portlet"/>
 	<classpathentry kind="output" path="docroot/WEB-INF/classes"/>
 </classpath>
