@@ -4,4 +4,8 @@
 <hook>
 	<portal-properties>portal.properties</portal-properties>
 	<language-properties>content/Language*.properties</language-properties>
+    <service>
+        <service-type>com.liferay.portlet.social.service.SocialRequestService</service-type>
+        <service-impl>com.liferay.portlet.social.service.SocialRequestServiceWrapper</service-impl>
+    </service>
 </hook>

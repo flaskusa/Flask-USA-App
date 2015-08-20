@@ -78,5 +78,46 @@ public class EntryServiceSoap {
 		}
 	}
 
+	public static void addSocialRelation(long receiverUserId, int type,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EntryServiceUtil.addSocialRelation(receiverUserId, type,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void requestSocialRelation(long receiverUserId, int type,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EntryServiceUtil.requestSocialRelation(receiverUserId, type,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteSocialRelation(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EntryServiceUtil.deleteSocialRelation(serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(EntryServiceSoap.class);
 }

@@ -37,6 +37,24 @@ public class EntryServiceClpInvoker {
 		_methodParameterTypes26 = new String[] {
 				"long", "java.lang.String", "int", "int"
 			};
+
+		_methodName27 = "addSocialRelation";
+
+		_methodParameterTypes27 = new String[] {
+				"long", "int", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName28 = "requestSocialRelation";
+
+		_methodParameterTypes28 = new String[] {
+				"long", "int", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName30 = "deleteSocialRelation";
+
+		_methodParameterTypes30 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -61,6 +79,31 @@ public class EntryServiceClpInvoker {
 				((Integer)arguments[3]).intValue());
 		}
 
+		if (_methodName27.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
+			EntryServiceUtil.addSocialRelation(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
+
+			return null;
+		}
+
+		if (_methodName28.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
+			EntryServiceUtil.requestSocialRelation(((Long)arguments[0]).longValue(),
+				((Integer)arguments[1]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
+
+			return null;
+		}
+
+		if (_methodName30.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
+			EntryServiceUtil.deleteSocialRelation((com.liferay.portal.service.ServiceContext)arguments[0]);
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -70,4 +113,10 @@ public class EntryServiceClpInvoker {
 	private String[] _methodParameterTypes21;
 	private String _methodName26;
 	private String[] _methodParameterTypes26;
+	private String _methodName27;
+	private String[] _methodParameterTypes27;
+	private String _methodName28;
+	private String[] _methodParameterTypes28;
+	private String _methodName30;
+	private String[] _methodParameterTypes30;
 }
