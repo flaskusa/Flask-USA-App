@@ -1,3 +1,15 @@
+var _socialModel = {};
+
+_socialModel.SERVICE_ENDPOINTS = {
+	API_PREFIX					:"/api/jsonws",
+    GET_ALL_CONTACTS			:"/flask-social-portlet.entry/search-users-and-contacts",
+    SEND_REQUEST				:"/flask-social-portlet.entry/request-social-relation"
+};
+
+_socialModel.MESSAGES = {
+		SEARCH_ERR :"No contacts found"
+}
+
 ContactList = [
         {
             "portraitId": "0",
@@ -44,118 +56,6 @@ ContactList = [
             "userId": "20676",
             "fullName": "Test DLC 10",
             "uuid": "e7835a87-6ddc-404a-8624-101f9706588f",
-            "firstName": "Test",
-            "jobTitle": ""
-          },
-          {
-            "portraitId": "0",
-            "lastName": "DLC 2",
-            "connected": false,
-            "block": false,
-            "emailAddress": "test.dlc.2@liferay.com",
-            "portalUser": true,
-            "following": false,
-            "contactId": "20621",
-            "connectionRequested": false,
-            "userId": "20620",
-            "fullName": "Test DLC 2",
-            "uuid": "7fdc13ba-7131-47c9-8e58-524cf359f951",
-            "firstName": "Test",
-            "jobTitle": ""
-          },
-          {
-            "portraitId": "0",
-            "lastName": "DLC 3",
-            "connected": false,
-            "block": false,
-            "emailAddress": "test.dlc.3@liferay.com",
-            "portalUser": true,
-            "following": false,
-            "contactId": "20628",
-            "connectionRequested": false,
-            "userId": "20627",
-            "fullName": "Test DLC 3",
-            "uuid": "f02c0c89-8ec9-4947-8799-eddcdb57b582",
-            "firstName": "Test",
-            "jobTitle": ""
-          },
-          {
-            "portraitId": "0",
-            "lastName": "DLC 4",
-            "connected": false,
-            "block": false,
-            "emailAddress": "test.dlc.4@liferay.com",
-            "portalUser": true,
-            "following": false,
-            "contactId": "20635",
-            "connectionRequested": false,
-            "userId": "20634",
-            "fullName": "Test DLC 4",
-            "uuid": "cd613b66-f8be-4539-81f1-8850799d95b6",
-            "firstName": "Test",
-            "jobTitle": ""
-          },
-          {
-            "portraitId": "0",
-            "lastName": "DLC 5",
-            "connected": false,
-            "block": false,
-            "emailAddress": "test.dlc.5@liferay.com",
-            "portalUser": true,
-            "following": false,
-            "contactId": "20642",
-            "connectionRequested": false,
-            "userId": "20641",
-            "fullName": "Test DLC 5",
-            "uuid": "d0c0b98d-04f4-4d78-b307-544d46e203ce",
-            "firstName": "Test",
-            "jobTitle": ""
-          },
-          {
-            "portraitId": "0",
-            "lastName": "DLC 6",
-            "connected": false,
-            "block": false,
-            "emailAddress": "test.dlc.6@liferay.com",
-            "portalUser": true,
-            "following": false,
-            "contactId": "20649",
-            "connectionRequested": false,
-            "userId": "20648",
-            "fullName": "Test DLC 6",
-            "uuid": "3f39b497-2e29-40a9-84de-6bcee9da5621",
-            "firstName": "Test",
-            "jobTitle": ""
-          },
-          {
-            "portraitId": "0",
-            "lastName": "DLC 7",
-            "connected": false,
-            "block": false,
-            "emailAddress": "test.dlc.7@liferay.com",
-            "portalUser": true,
-            "following": false,
-            "contactId": "20656",
-            "connectionRequested": false,
-            "userId": "20655",
-            "fullName": "Test DLC 7",
-            "uuid": "d648ac0a-931b-4f5b-9d8e-47ba0fa9ddde",
-            "firstName": "Test",
-            "jobTitle": ""
-          },
-          {
-            "portraitId": "0",
-            "lastName": "DLC 8",
-            "connected": false,
-            "block": false,
-            "emailAddress": "test.dlc.8@liferay.com",
-            "portalUser": true,
-            "following": false,
-            "contactId": "20663",
-            "connectionRequested": false,
-            "userId": "20662",
-            "fullName": "Test DLC 8",
-            "uuid": "2d1df7cf-a95e-40f0-9019-2afdae03ca39",
             "firstName": "Test",
             "jobTitle": ""
           }

@@ -1,34 +1,137 @@
-function initContactList(){
-	var theme = "base";
-    var data = new Array();
-    var firstNames = ["Nancy", "Andrew", "Janet", "Margaret", "Steven", "Michael", "Robert", "Laura", "Anne"];
-    var lastNames = ["Davolio", "Fuller", "Leverling", "Peacock", "Buchanan", "Suyama", "King", "Callahan", "Dodsworth"];
-    var titles = ["Sales Representative", "Vice President, Sales", "Sales Representative", "Sales Representative", "Sales Manager", "Sales Representative", "Sales Representative", "Inside Sales Coordinator", "Sales Representative"];
-    var k = 0;
-    for (var i = 0; i < firstNames.length; i++) {
-        var row = {};
-        row["firstname"] = firstNames[k];
-        row["lastname"] = lastNames[k];
-        row["title"] = titles[k];
-        data[i] = row;
-        k++;
-    }
-    var source =
-    {
-        localdata: data,
-        datatype: "array"
-    };
-    var dataAdapter = new $.jqx.dataAdapter(source);
-    // Create jqxListBox
-    $('#listbox').jqxListBox({
-        selectedIndex: 0, theme: theme, source: dataAdapter, displayMember: "firstname", valueMember: "notes", itemHeight: 70, height: '100%', width: '100%',
-        renderer: function (index, label, value) {
-            var datarecord = data[index];
-            var imgURL = "/webdav/flask/document_library/DefaultProfilePic";//_flaskLib.UTILITY.DEFAULT_PROFILE_PIC;
-            var img = '<img height="50" src="' + imgURL + '"/>';
-            var table = '<table><tr><td style="width: 55px;" rowspan="2">' + img + '</td><td>' + datarecord.firstname + " " + datarecord.lastname + '</td></tr><tr><td>' + datarecord.title + '</td></tr></table>';
-            return table;
-        }
-    });
-    //initSimulator("listbox");
+var _startPos = 0;
+var _endPos = 9;
+function initContactList(startPos,endPos){
+	if(startPos>0)
+		$("#prev").show();
+	var companyId = $("#CompanyId").val();
+	var params = {companyId: companyId,keywords: '',start: startPos,end: endPos};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_ALL_CONTACTS , params, 
+		function (data){
+			renderContactList(data)
+		} ,
+		function (data){
+			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
+	});	
+}
+
+function renderContactList(tdata) {
+	 var divRow = $('#placeholder');
+	 $(divRow).html("");
+	 //console.log(tdata.length);
+	 if(tdata.length == 0){
+		$("<span class='control-label-nocolor'>There are no users available</span>").appendTo($("#placeholder"));
+		return;
+	 }
+	 for(var i=0; i < tdata.length; i++)
+		{
+		 	var flaskUser = tdata[i];
+		 	console.log(flaskUser);
+		    var objTable = $('<table/>',{'class':'tblRow'});
+		    var objTr = $('<tr/>');
+		    $(objTr).appendTo($(objTable));
+		    var objTd1 = $('<td/>',{'width':'70px','rowspan':'2'});
+		    $(objTd1).appendTo($(objTr));
+		    
+		    fnShowEventLogo(flaskUser.uuid, objTd1,false);		    
+		    var userName_lbl = $('<label/>',{'class':'control-label-color'});
+		    $(userName_lbl).html(flaskUser.fullName);
+		    var objTd2 = $('<td/>',{'data-id':flaskUser.userId,'data-uuid':flaskUser.uuid});
+		    
+		    $(userName_lbl).appendTo($(objTd2));
+		    $(objTd2).appendTo(objTr);
+		    var objTd3 = $('<td/>',{'rowspan':'2','align':'right','valign':'top'});
+		    console.log(flaskUser);
+	    	var div_heart = fnBuildMenu(flaskUser);
+	    	
+		    $(div_heart).appendTo($(objTd3));
+		    $(objTd3).appendTo(objTr);
+
+		    var objTr2 = $('<tr/>');
+		    var objtd2_1 = $('<td/>');
+		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
+		    $(objtd2_1).appendTo(objTr2);
+		    $(venue_lbl).html(flaskUser.emailAddress);
+		    $(venue_lbl).appendTo($(objtd2_1));
+		    $(objtd2_1).appendTo($(objTr2));
+		    $(objTr2).appendTo($(objTable));
+		    $(objTable).appendTo($(divRow));		    
+	    }
+	 	$(divRow).appendTo($("#placeholder"));
+}
+
+function fnShowEventLogo(imageUUID, container ,editable){
+	//var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID;
+	var imgURL = "/webdav/flask/document_library/DefaultProfilePic";
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')'});
+	$(objdiv).appendTo($(container));
+}
+
+function fnBuildMenu(obj){
+	var IsFriend = obj.connected;
+	var UserId = obj.userId;
+	var IsRequested = obj.connectionRequested;
+	var dropdown = $('<div/>',{'class':'dropdown'});
+	var ul = $('<ul/>',{'class':'dropdown-menu'});
+	if(IsFriend){
+		var button = $('<button/>',{'class':'btn btn-primary dropdown-toggle','type':'button','data-toggle':'dropdown'})
+		button.html('Friend&nbsp;<span class="caret"></span>');
+		var li1 = $('<li/>');
+		$(li1).html('<a href="#" onclick="fnBlock('+UserId+');">Block</a>');
+		var li2 = $('<li/>');
+		$(li2).html('<a href="#" onclick="fnUnFriend('+UserId+');">Unfriend</a>');
+		$(li1).appendTo($(ul));
+		$(li2).appendTo($(ul));
+		$(ul).appendTo($(dropdown));		
+	}
+	else{
+		if(!IsRequested){
+			var button = $('<button/>',{'class':'btn btn-primary','type':'button','onclick':'sendFriendRequest('+UserId+',this);'})
+			button.html('Add Friend');
+		}
+		else{
+			var button = $('<button/>',{'class':'btn btn-primary','type':'button','disabled':'disabled'})
+			button.html('Request sent');
+		}
+	}
+	$(button).appendTo($(dropdown));
+	return $(dropdown);
+}
+
+function fnBlock(UserId){
+	alert("Block"+UserId);
+}
+
+function fnUnFriend(UserId){
+	alert("UnFriend"+UserId);
+}
+
+function fnShowNextRecords(){
+	_startPos = _startPos + 10;
+	_endPos = _endPos + 10;
+	initContactList(_startPos,_endPos);
+}
+
+function fnShowPrevRecords(){
+	_startPos = _startPos - 10;
+	_endPos = _endPos - 10;
+	initContactList(_startPos,_endPos);
+}
+
+
+function getUserVCard(data){
+	alert("Show user details here");
+}
+
+function sendFriendRequest(UserId,obj){
+	var flaskRequest = new Request();
+	var params = {receiverUserId: UserId,type: 12};
+	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.SEND_REQUEST, params, 
+	function(data){
+		initContactList(_startPos,_endPos);
+		$(obj).html("Request sent");
+		$(obj).attr("disabled","disabled");
+	} , function(error){
+		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
+	});		
 }
