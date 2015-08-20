@@ -10,15 +10,31 @@
 
 <aui:script use="array-extras">
 	$(document).ready(function(){
-		initContactList();
+		$("#prev").hide();
+		initContactList(_startPos,_endPos);
 	});
 </aui:script>
 
-<body class='default'>
-    <div id="demoContainer" class="device-mobile">
-        <div id="container" class="device-mobile-container">
-            <div style="border: none;" id="listbox"></div>
-        </div>
-    </div>
+<body>
+	<input type="hidden" id="CompanyId" value="<%=themeDisplay.getCompanyId()%>">
+	<div id="action-msg"></div>
+	<div class="table-responsive">  
+		<div id="one">
+		  <table id="viewevent">
+		    <tbody>
+				<tr>
+			         <td class="gap">
+						<input  type="text" placeholder="SEARCH:" id="txtSearch">
+			         </td>
+		      	</tr>
+		    </tbody>
+		  </table>
+		    <div id="container1">
+				<div class="container-fluid fill" id="placeholder">
+				</div>
+		    </div>
+		    <a href="#" onclick="fnShowNextRecords();">Next</a>|<a href="#" onclick="fnShowPrevRecords();" id="prev">Prev</a>
+		  </div>
+	</div>
 </body>
 
