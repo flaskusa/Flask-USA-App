@@ -81,7 +81,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		return jsonArray;
 	}
 
-	public void addSocialRelation(long receiverUserId, int type, ServiceContext serviceContext)
+	public void addSocialRelation(long receiverUserId, ServiceContext serviceContext)
 		throws Exception {
 			long socialRequestId;
 			SocialRequest sRequest;
@@ -92,13 +92,15 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 					sRequest = SocialRequestLocalServiceUtil.getSocialRequest(socialRequestId);
 					ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
 					SocialRequestLocalServiceUtil.updateRequest(socialRequestId, 1, themeDisplay);
+					sendNotificationEvent(sRequest);
 				}
 			}
-			SocialRelationLocalServiceUtil.addRelation(serviceContext.getUserId(), receiverUserId, type);
+			SocialRelationLocalServiceUtil.addRelation(serviceContext.getUserId(), receiverUserId, SocialRelationConstants.TYPE_BI_CONNECTION);
 	}
 
-	public void requestSocialRelation(long receiverUserId, int type, ServiceContext serviceContext)throws Exception {
-			SocialRequest socialRequest = SocialRequestLocalServiceUtil.addRequest(serviceContext.getUserId(), 0, User.class.getName(),serviceContext.getUserId(), type, "", receiverUserId);
+	public void requestSocialRelation(long receiverUserId, ServiceContext serviceContext)throws Exception {
+			SocialRequest socialRequest = SocialRequestLocalServiceUtil.addRequest(serviceContext.getUserId(), 0, User.class.getName(),serviceContext.getUserId(),
+					SocialRelationConstants.TYPE_BI_CONNECTION, "", receiverUserId);
 			sendNotificationEvent(socialRequest);
 	}
 	
@@ -131,28 +133,16 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 					socialRequest.getReceiverUserId(), notificationEvent);
 			}
 		}
-	public void deleteSocialRelation(ServiceContext serviceContext)
+	public void deleteSocialRelation(long receiverUserId, ServiceContext serviceContext)
 		throws Exception {
-		HttpServletRequest request = serviceContext.getRequest();
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
-		long[] userIds = getUserIds(request);
-
-		int type = ParamUtil.getInteger(request, "type");
-
-		for (long userId : userIds) {
-			if (userId == themeDisplay.getUserId()) {
-				continue;
-			}
-
+		int type = SocialRelationConstants.TYPE_BI_CONNECTION;
 			try {
 				SocialRelationLocalServiceUtil.deleteRelation(
-					themeDisplay.getUserId(), userId, type);
+					serviceContext.getUserId(), receiverUserId, type);
 			}
 			catch (NoSuchRelationException nsre) {
 			}
-		}
 	}
 
 	protected long[] getUserIds(HttpServletRequest request) {

@@ -78,11 +78,24 @@ public class EntryServiceSoap {
 		}
 	}
 
-	public static void addSocialRelation(long receiverUserId, int type,
+	public static void addSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			EntryServiceUtil.addSocialRelation(receiverUserId, type,
+			EntryServiceUtil.addSocialRelation(receiverUserId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void requestSocialRelation(long receiverUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EntryServiceUtil.requestSocialRelation(receiverUserId,
 				serviceContext);
 		}
 		catch (Exception e) {
@@ -92,25 +105,11 @@ public class EntryServiceSoap {
 		}
 	}
 
-	public static void requestSocialRelation(long receiverUserId, int type,
+	public static void deleteSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			EntryServiceUtil.requestSocialRelation(receiverUserId, type,
-				serviceContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void deleteSocialRelation(
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			EntryServiceUtil.deleteSocialRelation(serviceContext);
+			EntryServiceUtil.deleteSocialRelation(receiverUserId, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -66,24 +66,24 @@ public class EntryServiceWrapper implements EntryService,
 	}
 
 	@Override
-	public void addSocialRelation(long receiverUserId, int type,
+	public void addSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
-		_entryService.addSocialRelation(receiverUserId, type, serviceContext);
+		_entryService.addSocialRelation(receiverUserId, serviceContext);
 	}
 
 	@Override
-	public void requestSocialRelation(long receiverUserId, int type,
+	public void requestSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
-		_entryService.requestSocialRelation(receiverUserId, type, serviceContext);
+		_entryService.requestSocialRelation(receiverUserId, serviceContext);
 	}
 
 	@Override
-	public void deleteSocialRelation(
+	public void deleteSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
-		_entryService.deleteSocialRelation(serviceContext);
+		_entryService.deleteSocialRelation(receiverUserId, serviceContext);
 	}
 
 	/**

@@ -41,19 +41,19 @@ public class EntryServiceClp implements EntryService {
 		_methodName4 = "addSocialRelation";
 
 		_methodParameterTypes4 = new String[] {
-				"long", "int", "com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName5 = "requestSocialRelation";
 
 		_methodParameterTypes5 = new String[] {
-				"long", "int", "com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName6 = "deleteSocialRelation";
 
 		_methodParameterTypes6 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -151,7 +151,7 @@ public class EntryServiceClp implements EntryService {
 	}
 
 	@Override
-	public void addSocialRelation(long receiverUserId, int type,
+	public void addSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
@@ -160,8 +160,6 @@ public class EntryServiceClp implements EntryService {
 				new Object[] {
 					receiverUserId,
 					
-				type,
-					
 				ClpSerializer.translateInput(serviceContext)
 				});
 		}
@@ -183,7 +181,7 @@ public class EntryServiceClp implements EntryService {
 	}
 
 	@Override
-	public void requestSocialRelation(long receiverUserId, int type,
+	public void requestSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
@@ -192,8 +190,6 @@ public class EntryServiceClp implements EntryService {
 				new Object[] {
 					receiverUserId,
 					
-				type,
-					
 				ClpSerializer.translateInput(serviceContext)
 				});
 		}
@@ -215,13 +211,17 @@ public class EntryServiceClp implements EntryService {
 	}
 
 	@Override
-	public void deleteSocialRelation(
+	public void deleteSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
 			_invokableService.invokeMethod(_methodName6,
 				_methodParameterTypes6,
-				new Object[] { ClpSerializer.translateInput(serviceContext) });
+				new Object[] {
+					receiverUserId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

@@ -41,19 +41,19 @@ public class EntryServiceClpInvoker {
 		_methodName27 = "addSocialRelation";
 
 		_methodParameterTypes27 = new String[] {
-				"long", "int", "com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName28 = "requestSocialRelation";
 
 		_methodParameterTypes28 = new String[] {
-				"long", "int", "com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName30 = "deleteSocialRelation";
 
 		_methodParameterTypes30 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -82,8 +82,7 @@ public class EntryServiceClpInvoker {
 		if (_methodName27.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
 			EntryServiceUtil.addSocialRelation(((Long)arguments[0]).longValue(),
-				((Integer)arguments[1]).intValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[2]);
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
@@ -91,15 +90,15 @@ public class EntryServiceClpInvoker {
 		if (_methodName28.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
 			EntryServiceUtil.requestSocialRelation(((Long)arguments[0]).longValue(),
-				((Integer)arguments[1]).intValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[2]);
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
 		if (_methodName30.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
-			EntryServiceUtil.deleteSocialRelation((com.liferay.portal.service.ServiceContext)arguments[0]);
+			EntryServiceUtil.deleteSocialRelation(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}

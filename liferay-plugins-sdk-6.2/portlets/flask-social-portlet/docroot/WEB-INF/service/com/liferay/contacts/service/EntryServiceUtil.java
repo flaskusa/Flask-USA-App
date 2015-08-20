@@ -71,22 +71,22 @@ public class EntryServiceUtil {
 				   .searchUsersAndContacts(companyId, keywords, start, end);
 	}
 
-	public static void addSocialRelation(long receiverUserId, int type,
+	public static void addSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
-		getService().addSocialRelation(receiverUserId, type, serviceContext);
+		getService().addSocialRelation(receiverUserId, serviceContext);
 	}
 
-	public static void requestSocialRelation(long receiverUserId, int type,
+	public static void requestSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
-		getService().requestSocialRelation(receiverUserId, type, serviceContext);
+		getService().requestSocialRelation(receiverUserId, serviceContext);
 	}
 
-	public static void deleteSocialRelation(
+	public static void deleteSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
-		getService().deleteSocialRelation(serviceContext);
+		getService().deleteSocialRelation(receiverUserId, serviceContext);
 	}
 
 	public static void clearService() {
