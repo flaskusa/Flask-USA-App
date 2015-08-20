@@ -65,6 +65,27 @@ public class EntryServiceWrapper implements EntryService,
 			end);
 	}
 
+	@Override
+	public void addSocialRelation(long receiverUserId, int type,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception {
+		_entryService.addSocialRelation(receiverUserId, type, serviceContext);
+	}
+
+	@Override
+	public void requestSocialRelation(long receiverUserId, int type,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception {
+		_entryService.requestSocialRelation(receiverUserId, type, serviceContext);
+	}
+
+	@Override
+	public void deleteSocialRelation(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception {
+		_entryService.deleteSocialRelation(serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

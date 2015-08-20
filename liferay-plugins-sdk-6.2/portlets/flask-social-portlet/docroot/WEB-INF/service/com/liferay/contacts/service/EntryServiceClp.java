@@ -37,6 +37,24 @@ public class EntryServiceClp implements EntryService {
 		_methodParameterTypes3 = new String[] {
 				"long", "java.lang.String", "int", "int"
 			};
+
+		_methodName4 = "addSocialRelation";
+
+		_methodParameterTypes4 = new String[] {
+				"long", "int", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName5 = "requestSocialRelation";
+
+		_methodParameterTypes5 = new String[] {
+				"long", "int", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName6 = "deleteSocialRelation";
+
+		_methodParameterTypes6 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -132,6 +150,96 @@ public class EntryServiceClp implements EntryService {
 		return (com.liferay.portal.kernel.json.JSONArray)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public void addSocialRelation(long receiverUserId, int type,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception {
+		try {
+			_invokableService.invokeMethod(_methodName4,
+				_methodParameterTypes4,
+				new Object[] {
+					receiverUserId,
+					
+				type,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof java.lang.Exception) {
+				throw (java.lang.Exception)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void requestSocialRelation(long receiverUserId, int type,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception {
+		try {
+			_invokableService.invokeMethod(_methodName5,
+				_methodParameterTypes5,
+				new Object[] {
+					receiverUserId,
+					
+				type,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof java.lang.Exception) {
+				throw (java.lang.Exception)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void deleteSocialRelation(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception {
+		try {
+			_invokableService.invokeMethod(_methodName6,
+				_methodParameterTypes6,
+				new Object[] { ClpSerializer.translateInput(serviceContext) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof java.lang.Exception) {
+				throw (java.lang.Exception)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -139,4 +247,10 @@ public class EntryServiceClp implements EntryService {
 	private String[] _methodParameterTypes1;
 	private String _methodName3;
 	private String[] _methodParameterTypes3;
+	private String _methodName4;
+	private String[] _methodParameterTypes4;
+	private String _methodName5;
+	private String[] _methodParameterTypes5;
+	private String _methodName6;
+	private String[] _methodParameterTypes6;
 }

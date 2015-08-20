@@ -70,4 +70,16 @@ public interface EntryService extends BaseService, InvokableService {
 		long companyId, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	public void addSocialRelation(long receiverUserId, int type,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception;
+
+	public void requestSocialRelation(long receiverUserId, int type,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception;
+
+	public void deleteSocialRelation(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception;
 }
