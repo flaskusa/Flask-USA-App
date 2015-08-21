@@ -67,6 +67,16 @@ public class EntryServiceWrapper implements EntryService,
 	}
 
 	@Override
+	public int getUsersAndContactsCount(long companyId,
+		java.lang.String keywords,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _entryService.getUsersAndContactsCount(companyId, keywords,
+			serviceContext);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.json.JSONArray searchMyFriends(
 		long companyId, java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext)

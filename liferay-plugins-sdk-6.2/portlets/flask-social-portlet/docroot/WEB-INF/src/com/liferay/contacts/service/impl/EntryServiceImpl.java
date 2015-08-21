@@ -63,7 +63,6 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 
 		long userId = getUserId();
-
 		List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
 			companyId, userId, keywords, start, end);
 
@@ -75,7 +74,6 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 				}
 				jsonObject = ContactsUtil.getUserJSONObject(
 					userId, (User)contact);
-				
 			}
 			else {
 				jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
@@ -86,6 +84,11 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		return jsonArray;
 	}
 
+	public int getUsersAndContactsCount(long companyId, String keywords, ServiceContext serviceContext)throws PortalException, SystemException {
+		return entryLocalService.searchUsersAndContactsCount(companyId, serviceContext.getUserId(), keywords);
+	}
+	
+	
 	public JSONArray searchMyFriends(long companyId, String keywords, ServiceContext serviceContext)
 			throws PortalException, SystemException{
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();

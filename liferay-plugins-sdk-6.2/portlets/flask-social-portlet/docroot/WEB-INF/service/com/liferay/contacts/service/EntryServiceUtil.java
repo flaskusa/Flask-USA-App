@@ -73,6 +73,15 @@ public class EntryServiceUtil {
 			serviceContext);
 	}
 
+	public static int getUsersAndContactsCount(long companyId,
+		java.lang.String keywords,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getUsersAndContactsCount(companyId, keywords, serviceContext);
+	}
+
 	public static com.liferay.portal.kernel.json.JSONArray searchMyFriends(
 		long companyId, java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext)

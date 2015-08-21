@@ -79,6 +79,23 @@ public class EntryServiceSoap {
 		}
 	}
 
+	public static int getUsersAndContactsCount(long companyId,
+		java.lang.String keywords,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			int returnValue = EntryServiceUtil.getUsersAndContactsCount(companyId,
+					keywords, serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String searchMyFriends(long companyId,
 		java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext)

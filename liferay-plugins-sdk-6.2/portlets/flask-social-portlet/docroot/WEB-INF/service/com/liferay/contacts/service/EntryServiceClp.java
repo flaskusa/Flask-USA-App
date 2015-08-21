@@ -39,28 +39,35 @@ public class EntryServiceClp implements EntryService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "searchMyFriends";
+		_methodName4 = "getUsersAndContactsCount";
 
 		_methodParameterTypes4 = new String[] {
 				"long", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName5 = "addSocialRelation";
+		_methodName5 = "searchMyFriends";
 
 		_methodParameterTypes5 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName6 = "requestSocialRelation";
+		_methodName6 = "addSocialRelation";
 
 		_methodParameterTypes6 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName7 = "deleteSocialRelation";
+		_methodName7 = "requestSocialRelation";
 
 		_methodParameterTypes7 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName8 = "deleteSocialRelation";
+
+		_methodParameterTypes8 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -162,8 +169,8 @@ public class EntryServiceClp implements EntryService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONArray searchMyFriends(
-		long companyId, java.lang.String keywords,
+	public int getUsersAndContactsCount(long companyId,
+		java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -200,27 +207,37 @@ public class EntryServiceClp implements EntryService {
 			}
 		}
 
-		return (com.liferay.portal.kernel.json.JSONArray)ClpSerializer.translateOutput(returnObj);
+		return ((Integer)returnObj).intValue();
 	}
 
 	@Override
-	public void addSocialRelation(long receiverUserId,
+	public com.liferay.portal.kernel.json.JSONArray searchMyFriends(
+		long companyId, java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext)
-		throws java.lang.Exception {
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName5,
-				_methodParameterTypes5,
-				new Object[] {
-					receiverUserId,
-					
-				ClpSerializer.translateInput(serviceContext)
-				});
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5,
+					new Object[] {
+						companyId,
+						
+					ClpSerializer.translateInput(keywords),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
 
-			if (t instanceof java.lang.Exception) {
-				throw (java.lang.Exception)t;
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
 			}
 
 			if (t instanceof RuntimeException) {
@@ -231,10 +248,12 @@ public class EntryServiceClp implements EntryService {
 					" is not a valid exception");
 			}
 		}
+
+		return (com.liferay.portal.kernel.json.JSONArray)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public void requestSocialRelation(long receiverUserId,
+	public void addSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
@@ -264,12 +283,42 @@ public class EntryServiceClp implements EntryService {
 	}
 
 	@Override
-	public void deleteSocialRelation(long receiverUserId,
+	public void requestSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
 			_invokableService.invokeMethod(_methodName7,
 				_methodParameterTypes7,
+				new Object[] {
+					receiverUserId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof java.lang.Exception) {
+				throw (java.lang.Exception)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void deleteSocialRelation(long receiverUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception {
+		try {
+			_invokableService.invokeMethod(_methodName8,
+				_methodParameterTypes8,
 				new Object[] {
 					receiverUserId,
 					
@@ -308,4 +357,6 @@ public class EntryServiceClp implements EntryService {
 	private String[] _methodParameterTypes6;
 	private String _methodName7;
 	private String[] _methodParameterTypes7;
+	private String _methodName8;
+	private String[] _methodParameterTypes8;
 }
