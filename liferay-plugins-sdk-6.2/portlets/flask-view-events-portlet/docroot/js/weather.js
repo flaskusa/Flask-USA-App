@@ -136,13 +136,14 @@ WeatherInfo = {
         w.windSpeed = data.wind.speed;
         w.windDegree = data.wind.deg;
         WeatherInfo.getWeatherDirection();
-        WeatherInfo.changeTempUnit('celsius');
+        WeatherInfo.changeTempUnit('fahrenheit');
         var time = Date.now() / 1000;
         WeatherInfo.getDayOrNight(time, data.sys.sunrise, data.sys.sunset);
         condition = data.weather[0].main;
         $('#weather-background').removeClass();
         $('#weather-background').addClass(condition.toLowerCase());
         $('#weather-background').addClass(w.dayOrNight);
+        w.fahrenheitButton.click();
     },
 
     getWeatherDirection: function() {
