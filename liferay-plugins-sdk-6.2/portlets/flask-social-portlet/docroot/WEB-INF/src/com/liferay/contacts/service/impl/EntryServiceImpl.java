@@ -21,8 +21,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
-import sun.org.mozilla.javascript.internal.Undefined;
-
 import com.liferay.contacts.model.Entry;
 import com.liferay.contacts.service.base.EntryServiceBaseImpl;
 import com.liferay.contacts.util.ContactsUtil;
@@ -38,9 +36,7 @@ import com.liferay.portal.kernel.notifications.NotificationEventFactoryUtil;
 import com.liferay.portal.kernel.notifications.UserNotificationManagerUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.BaseModel;
-import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserNotificationDeliveryConstants;
 import com.liferay.portal.service.ServiceContext;
@@ -49,6 +45,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.social.NoSuchRelationException;
 import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.model.SocialRequest;
+import com.liferay.portlet.social.model.SocialRequestConstants;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
 
@@ -81,10 +78,15 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 			}
 			jsonArray.put(jsonObject);
 		}
-
 		return jsonArray;
 	}
 
+	public List<SocialRequest> getRequestsToConfirm(long receiverUserId, ServiceContext serviceContext)throws PortalException, SystemException {
+		int requestCount = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(receiverUserId);
+		List<SocialRequest> requests = SocialRequestLocalServiceUtil.getReceiverUserRequests(receiverUserId, SocialRequestConstants.STATUS_PENDING, 0, requestCount);
+		return requests;
+	}
+	
 	public void blockUser(long blockUserId, ServiceContext serviceContext)throws PortalException, SystemException{
 		long userId1 = serviceContext.getUserId();
 		SocialRelation socialRelation = SocialRelationLocalServiceUtil.getRelation(userId1, blockUserId, SocialRelationConstants.TYPE_BI_CONNECTION);

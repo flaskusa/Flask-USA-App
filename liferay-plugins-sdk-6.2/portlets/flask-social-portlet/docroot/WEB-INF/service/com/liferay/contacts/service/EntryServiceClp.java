@@ -39,47 +39,53 @@ public class EntryServiceClp implements EntryService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "blockUser";
+		_methodName4 = "getRequestsToConfirm";
 
 		_methodParameterTypes4 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName5 = "unblockUser";
+		_methodName5 = "blockUser";
 
 		_methodParameterTypes5 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName6 = "getUsersAndContactsCount";
+		_methodName6 = "unblockUser";
 
 		_methodParameterTypes6 = new String[] {
-				"long", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName7 = "searchMyFriends";
+		_methodName7 = "getUsersAndContactsCount";
 
 		_methodParameterTypes7 = new String[] {
 				"long", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName8 = "addSocialRelation";
+		_methodName8 = "searchMyFriends";
 
 		_methodParameterTypes8 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName9 = "requestSocialRelation";
+		_methodName9 = "addSocialRelation";
 
 		_methodParameterTypes9 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName10 = "deleteSocialRelation";
+		_methodName10 = "requestSocialRelation";
 
 		_methodParameterTypes10 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName11 = "deleteSocialRelation";
+
+		_methodParameterTypes11 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -181,13 +187,53 @@ public class EntryServiceClp implements EntryService {
 	}
 
 	@Override
+	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getRequestsToConfirm(
+		long receiverUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4,
+					new Object[] {
+						receiverUserId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.liferay.portlet.social.model.SocialRequest>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public void blockUser(long blockUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			_invokableService.invokeMethod(_methodName4,
-				_methodParameterTypes4,
+			_invokableService.invokeMethod(_methodName5,
+				_methodParameterTypes5,
 				new Object[] {
 					blockUserId,
 					
@@ -221,8 +267,8 @@ public class EntryServiceClp implements EntryService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		try {
-			_invokableService.invokeMethod(_methodName5,
-				_methodParameterTypes5,
+			_invokableService.invokeMethod(_methodName6,
+				_methodParameterTypes6,
 				new Object[] {
 					unblockUserId,
 					
@@ -259,8 +305,8 @@ public class EntryServiceClp implements EntryService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7,
 					new Object[] {
 						companyId,
 						
@@ -301,8 +347,8 @@ public class EntryServiceClp implements EntryService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7,
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
 					new Object[] {
 						companyId,
 						
@@ -339,8 +385,8 @@ public class EntryServiceClp implements EntryService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9,
 				new Object[] {
 					receiverUserId,
 					
@@ -369,8 +415,8 @@ public class EntryServiceClp implements EntryService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
-			_invokableService.invokeMethod(_methodName9,
-				_methodParameterTypes9,
+			_invokableService.invokeMethod(_methodName10,
+				_methodParameterTypes10,
 				new Object[] {
 					receiverUserId,
 					
@@ -399,8 +445,8 @@ public class EntryServiceClp implements EntryService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
-			_invokableService.invokeMethod(_methodName10,
-				_methodParameterTypes10,
+			_invokableService.invokeMethod(_methodName11,
+				_methodParameterTypes11,
 				new Object[] {
 					receiverUserId,
 					
@@ -445,4 +491,6 @@ public class EntryServiceClp implements EntryService {
 	private String[] _methodParameterTypes9;
 	private String _methodName10;
 	private String[] _methodParameterTypes10;
+	private String _methodName11;
+	private String[] _methodParameterTypes11;
 }

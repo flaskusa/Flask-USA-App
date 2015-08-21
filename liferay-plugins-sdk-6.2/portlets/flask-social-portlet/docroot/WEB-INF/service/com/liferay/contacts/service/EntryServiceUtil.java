@@ -73,6 +73,14 @@ public class EntryServiceUtil {
 			serviceContext);
 	}
 
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getRequestsToConfirm(
+		long receiverUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRequestsToConfirm(receiverUserId, serviceContext);
+	}
+
 	public static void blockUser(long blockUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
