@@ -39,35 +39,47 @@ public class EntryServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName27 = "getUsersAndContactsCount";
+		_methodName27 = "blockUser";
 
 		_methodParameterTypes27 = new String[] {
-				"long", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName28 = "searchMyFriends";
+		_methodName28 = "unblockUser";
 
 		_methodParameterTypes28 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName29 = "getUsersAndContactsCount";
+
+		_methodParameterTypes29 = new String[] {
 				"long", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName29 = "addSocialRelation";
-
-		_methodParameterTypes29 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName30 = "requestSocialRelation";
+		_methodName30 = "searchMyFriends";
 
 		_methodParameterTypes30 = new String[] {
+				"long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName31 = "addSocialRelation";
+
+		_methodParameterTypes31 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName32 = "deleteSocialRelation";
+		_methodName32 = "requestSocialRelation";
 
 		_methodParameterTypes32 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName34 = "deleteSocialRelation";
+
+		_methodParameterTypes34 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -97,29 +109,37 @@ public class EntryServiceClpInvoker {
 
 		if (_methodName27.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
-			return EntryServiceUtil.getUsersAndContactsCount(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1],
-				(com.liferay.portal.service.ServiceContext)arguments[2]);
-		}
-
-		if (_methodName28.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
-			return EntryServiceUtil.searchMyFriends(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1],
-				(com.liferay.portal.service.ServiceContext)arguments[2]);
-		}
-
-		if (_methodName29.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes29, parameterTypes)) {
-			EntryServiceUtil.addSocialRelation(((Long)arguments[0]).longValue(),
+			EntryServiceUtil.blockUser(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
+		if (_methodName28.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes28, parameterTypes)) {
+			EntryServiceUtil.unblockUser(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName29.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes29, parameterTypes)) {
+			return EntryServiceUtil.getUsersAndContactsCount(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1],
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
+		}
+
 		if (_methodName30.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes30, parameterTypes)) {
-			EntryServiceUtil.requestSocialRelation(((Long)arguments[0]).longValue(),
+			return EntryServiceUtil.searchMyFriends(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1],
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
+		}
+
+		if (_methodName31.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes31, parameterTypes)) {
+			EntryServiceUtil.addSocialRelation(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
@@ -127,6 +147,14 @@ public class EntryServiceClpInvoker {
 
 		if (_methodName32.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+			EntryServiceUtil.requestSocialRelation(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName34.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes34, parameterTypes)) {
 			EntryServiceUtil.deleteSocialRelation(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
@@ -150,6 +178,10 @@ public class EntryServiceClpInvoker {
 	private String[] _methodParameterTypes29;
 	private String _methodName30;
 	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
 	private String _methodName32;
 	private String[] _methodParameterTypes32;
+	private String _methodName34;
+	private String[] _methodParameterTypes34;
 }

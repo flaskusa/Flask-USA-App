@@ -73,6 +73,20 @@ public class EntryServiceUtil {
 			serviceContext);
 	}
 
+	public static void blockUser(long blockUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().blockUser(blockUserId, serviceContext);
+	}
+
+	public static void unblockUser(long unblockUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().unblockUser(unblockUserId, serviceContext);
+	}
+
 	public static int getUsersAndContactsCount(long companyId,
 		java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext)

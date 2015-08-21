@@ -47,6 +47,7 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.social.NoSuchRelationException;
+import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
@@ -84,6 +85,19 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		return jsonArray;
 	}
 
+	public void blockUser(long blockUserId, ServiceContext serviceContext)throws PortalException, SystemException{
+		long userId1 = serviceContext.getUserId();
+		SocialRelation socialRelation = SocialRelationLocalServiceUtil.getRelation(userId1, blockUserId, SocialRelationConstants.TYPE_BI_CONNECTION);
+		SocialRelationLocalServiceUtil.deleteRelation(socialRelation);
+		SocialRelationLocalServiceUtil.addRelation(userId1, blockUserId, SocialRelationConstants.TYPE_UNI_ENEMY);
+	}
+	
+	public void unblockUser(long unblockUserId, ServiceContext serviceContext)throws PortalException, SystemException{
+		long userId1 = serviceContext.getUserId();
+		SocialRelation socialRelation = SocialRelationLocalServiceUtil.getRelation(userId1, unblockUserId, SocialRelationConstants.TYPE_UNI_ENEMY);
+		SocialRelationLocalServiceUtil.deleteRelation(socialRelation);
+	}
+	
 	public int getUsersAndContactsCount(long companyId, String keywords, ServiceContext serviceContext)throws PortalException, SystemException {
 		return entryLocalService.searchUsersAndContactsCount(companyId, serviceContext.getUserId(), keywords);
 	}

@@ -79,6 +79,32 @@ public class EntryServiceSoap {
 		}
 	}
 
+	public static void blockUser(long blockUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EntryServiceUtil.blockUser(blockUserId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unblockUser(long unblockUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			EntryServiceUtil.unblockUser(unblockUserId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getUsersAndContactsCount(long companyId,
 		java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext)
