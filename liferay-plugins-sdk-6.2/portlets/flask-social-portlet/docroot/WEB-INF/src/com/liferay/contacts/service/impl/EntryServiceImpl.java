@@ -21,6 +21,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import sun.org.mozilla.javascript.internal.Undefined;
+
 import com.liferay.contacts.model.Entry;
 import com.liferay.contacts.service.base.EntryServiceBaseImpl;
 import com.liferay.contacts.util.ContactsUtil;
@@ -38,6 +40,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserNotificationDeliveryConstants;
 import com.liferay.portal.service.ServiceContext;
@@ -54,7 +57,7 @@ import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
 public class EntryServiceImpl extends EntryServiceBaseImpl {
 
 	public JSONArray searchUsersAndContacts(
-			long companyId, String keywords, int start, int end)
+			long companyId, String keywords, int start, int end, ServiceContext serviceContext)
 		throws PortalException, SystemException {
 
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
@@ -66,21 +69,47 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 
 		for (BaseModel<?> contact : contacts) {
 			JSONObject jsonObject = null;
-
 			if (contact instanceof User) {
+				if(((User) contact).getContact().getUserId() == serviceContext.getUserId()){
+					continue;
+				}
 				jsonObject = ContactsUtil.getUserJSONObject(
 					userId, (User)contact);
+				
 			}
 			else {
 				jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
 			}
-
 			jsonArray.put(jsonObject);
 		}
 
 		return jsonArray;
 	}
 
+	public JSONArray searchMyFriends(long companyId, String keywords, ServiceContext serviceContext)
+			throws PortalException, SystemException{
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		long userId = getUserId();
+		int cnt = entryLocalService.searchUsersAndContactsCount(companyId, userId, keywords);
+		List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
+			companyId, userId, keywords, 0, cnt);
+		for (BaseModel<?> contact : contacts) {
+			JSONObject jsonObject = null;
+			if(SocialRelationLocalServiceUtil.hasRelation(serviceContext.getUserId(), ((User) contact).getContact().getUserId(), SocialRelationConstants.TYPE_BI_CONNECTION)){
+				if (contact instanceof User) {
+					jsonObject = ContactsUtil.getUserJSONObject(
+						userId, (User)contact);
+				}
+				else {
+					jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
+				}
+				jsonArray.put(jsonObject);
+			}
+		}
+		return jsonArray;
+	}
+	
 	public void addSocialRelation(long receiverUserId, ServiceContext serviceContext)
 		throws Exception {
 			long socialRequestId;

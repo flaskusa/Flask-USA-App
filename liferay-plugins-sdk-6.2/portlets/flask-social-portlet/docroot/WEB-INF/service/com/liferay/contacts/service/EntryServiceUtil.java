@@ -64,11 +64,21 @@ public class EntryServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray searchUsersAndContacts(
-		long companyId, java.lang.String keywords, int start, int end)
+		long companyId, java.lang.String keywords, int start, int end,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
-				   .searchUsersAndContacts(companyId, keywords, start, end);
+				   .searchUsersAndContacts(companyId, keywords, start, end,
+			serviceContext);
+	}
+
+	public static com.liferay.portal.kernel.json.JSONArray searchMyFriends(
+		long companyId, java.lang.String keywords,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().searchMyFriends(companyId, keywords, serviceContext);
 	}
 
 	public static void addSocialRelation(long receiverUserId,

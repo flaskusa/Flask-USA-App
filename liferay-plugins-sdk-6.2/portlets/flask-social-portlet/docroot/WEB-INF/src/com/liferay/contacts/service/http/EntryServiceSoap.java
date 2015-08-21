@@ -63,11 +63,29 @@ import java.rmi.RemoteException;
  */
 public class EntryServiceSoap {
 	public static java.lang.String searchUsersAndContacts(long companyId,
-		java.lang.String keywords, int start, int end)
+		java.lang.String keywords, int start, int end,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONArray returnValue = EntryServiceUtil.searchUsersAndContacts(companyId,
-					keywords, start, end);
+					keywords, start, end, serviceContext);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String searchMyFriends(long companyId,
+		java.lang.String keywords,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONArray returnValue = EntryServiceUtil.searchMyFriends(companyId,
+					keywords, serviceContext);
 
 			return returnValue.toString();
 		}
