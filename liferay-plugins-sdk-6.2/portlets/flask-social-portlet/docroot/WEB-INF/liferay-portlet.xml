@@ -6,18 +6,9 @@
   <portlet-name>flask-social</portlet-name>
   <icon>/icon.png</icon>
   <header-portlet-css>/css/main.css</header-portlet-css>
-  <header-portlet-css>/css/jqx.base.css</header-portlet-css>
-  <header-portlet-css>/css/jqx.windowsphone.css</header-portlet-css>
-  <header-portlet-css>/css/jqx.blackberry.css</header-portlet-css>
-  <header-portlet-css>/css/jqx.android.css</header-portlet-css>
-  <header-portlet-css>/css/jqx.mobile.css</header-portlet-css>
-    <footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
-    <footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
-    <footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
-    <footer-portlet-javascript>/js/jqxscrollbar.js</footer-portlet-javascript>
-    <footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/flask-social-main.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/flask-social-model.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/bootstrap.min.js</footer-portlet-javascript>
     <css-class-wrapper>flask-view-events-portlet</css-class-wrapper>
  </portlet>
 
