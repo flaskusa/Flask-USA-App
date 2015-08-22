@@ -19,7 +19,7 @@ import com.liferay.contacts.service.EntryServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @generated
  */
 public class EntryServiceClpInvoker {
@@ -42,7 +42,7 @@ public class EntryServiceClpInvoker {
 		_methodName27 = "getRequestsToConfirm";
 
 		_methodParameterTypes27 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName28 = "blockUser";
@@ -115,8 +115,7 @@ public class EntryServiceClpInvoker {
 
 		if (_methodName27.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes27, parameterTypes)) {
-			return EntryServiceUtil.getRequestsToConfirm(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return EntryServiceUtil.getRequestsToConfirm((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
 		if (_methodName28.equals(name) &&

@@ -19,7 +19,7 @@ import com.liferay.portal.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link EntryLocalService}.
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see EntryLocalService
  * @generated
  */

@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Kiran
  */
 public class EntryClp extends BaseModelImpl<Entry> implements Entry {
 	public EntryClp() {

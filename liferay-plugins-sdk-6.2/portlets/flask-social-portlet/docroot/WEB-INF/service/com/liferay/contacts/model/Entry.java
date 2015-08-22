@@ -19,7 +19,7 @@ import com.liferay.portal.model.PersistedModel;
 /**
  * The extended model interface for the Entry service. Represents a row in the &quot;Contacts_Entry&quot; database table, with each column mapped to a property of this class.
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see EntryModel
  * @see com.liferay.contacts.model.impl.EntryImpl
  * @see com.liferay.contacts.model.impl.EntryModelImpl

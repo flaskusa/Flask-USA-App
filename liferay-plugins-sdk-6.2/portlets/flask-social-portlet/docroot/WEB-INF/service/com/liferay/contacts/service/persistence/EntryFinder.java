@@ -15,7 +15,7 @@
 package com.liferay.contacts.service.persistence;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Kiran
  */
 public interface EntryFinder {
 	public int countByKeywords(long companyId, long userId,

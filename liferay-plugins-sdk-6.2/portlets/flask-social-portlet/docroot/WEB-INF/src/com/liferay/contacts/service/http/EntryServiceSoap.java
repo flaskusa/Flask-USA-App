@@ -55,7 +55,7 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see EntryServiceHttp
  * @see com.liferay.contacts.model.EntrySoap
  * @see com.liferay.contacts.service.EntryServiceUtil
@@ -80,13 +80,11 @@ public class EntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequestSoap[] getRequestsToConfirm(
-		long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.social.model.SocialRequest> returnValue =
-				EntryServiceUtil.getRequestsToConfirm(receiverUserId,
-					serviceContext);
+				EntryServiceUtil.getRequestsToConfirm(serviceContext);
 
 			return com.liferay.portlet.social.model.SocialRequestSoap.toSoapModels(returnValue);
 		}

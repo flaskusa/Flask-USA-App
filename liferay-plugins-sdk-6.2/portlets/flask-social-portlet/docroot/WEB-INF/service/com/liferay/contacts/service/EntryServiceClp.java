@@ -17,7 +17,7 @@ package com.liferay.contacts.service;
 import com.liferay.portal.service.InvokableService;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @generated
  */
 public class EntryServiceClp implements EntryService {
@@ -42,7 +42,7 @@ public class EntryServiceClp implements EntryService {
 		_methodName4 = "getRequestsToConfirm";
 
 		_methodParameterTypes4 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName5 = "blockUser";
@@ -188,7 +188,6 @@ public class EntryServiceClp implements EntryService {
 
 	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getRequestsToConfirm(
-		long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
@@ -197,11 +196,7 @@ public class EntryServiceClp implements EntryService {
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName4,
 					_methodParameterTypes4,
-					new Object[] {
-						receiverUserId,
-						
-					ClpSerializer.translateInput(serviceContext)
-					});
+					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

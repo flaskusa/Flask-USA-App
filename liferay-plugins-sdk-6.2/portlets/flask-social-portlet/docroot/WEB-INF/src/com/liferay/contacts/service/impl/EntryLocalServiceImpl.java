@@ -34,7 +34,7 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Kiran
  */
 public class EntryLocalServiceImpl extends EntryLocalServiceBaseImpl {
 

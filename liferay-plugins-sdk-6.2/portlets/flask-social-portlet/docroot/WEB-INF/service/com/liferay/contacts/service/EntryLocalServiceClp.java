@@ -17,7 +17,7 @@ package com.liferay.contacts.service;
 import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @generated
  */
 public class EntryLocalServiceClp implements EntryLocalService {

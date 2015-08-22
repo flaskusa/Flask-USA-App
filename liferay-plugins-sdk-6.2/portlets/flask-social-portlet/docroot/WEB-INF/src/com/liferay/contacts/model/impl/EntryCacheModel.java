@@ -30,7 +30,7 @@ import java.util.Date;
 /**
  * The cache model class for representing Entry in entity cache.
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see Entry
  * @generated
  */

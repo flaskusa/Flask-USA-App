@@ -19,7 +19,7 @@ import com.liferay.portal.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link EntryService}.
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see EntryService
  * @generated
  */
@@ -68,11 +68,10 @@ public class EntryServiceWrapper implements EntryService,
 
 	@Override
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getRequestsToConfirm(
-		long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _entryService.getRequestsToConfirm(receiverUserId, serviceContext);
+		return _entryService.getRequestsToConfirm(serviceContext);
 	}
 
 	@Override

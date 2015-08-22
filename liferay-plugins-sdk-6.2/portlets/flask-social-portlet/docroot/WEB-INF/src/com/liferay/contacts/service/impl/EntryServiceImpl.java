@@ -81,9 +81,9 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		return jsonArray;
 	}
 
-	public List<SocialRequest> getRequestsToConfirm(long receiverUserId, ServiceContext serviceContext)throws PortalException, SystemException {
-		int requestCount = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(receiverUserId);
-		List<SocialRequest> requests = SocialRequestLocalServiceUtil.getReceiverUserRequests(receiverUserId, SocialRequestConstants.STATUS_PENDING, 0, requestCount);
+	public List<SocialRequest> getRequestsToConfirm(ServiceContext serviceContext)throws PortalException, SystemException {
+		int requestCount = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(serviceContext.getUserId());
+		List<SocialRequest> requests = SocialRequestLocalServiceUtil.getReceiverUserRequests(serviceContext.getUserId(), SocialRequestConstants.STATUS_PENDING, 0, requestCount);
 		return requests;
 	}
 	

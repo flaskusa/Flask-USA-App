@@ -30,7 +30,7 @@ import com.liferay.portal.service.PersistedModelLocalService;
  * credentials because this service can only be accessed from within the same
  * VM.
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see EntryLocalServiceUtil
  * @see com.liferay.contacts.service.base.EntryLocalServiceBaseImpl
  * @see com.liferay.contacts.service.impl.EntryLocalServiceImpl
