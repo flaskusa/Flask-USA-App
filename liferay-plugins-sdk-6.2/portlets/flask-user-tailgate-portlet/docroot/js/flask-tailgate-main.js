@@ -5,8 +5,6 @@ var tailgateId;
 var events = [];
 function addClickHandlers(){
 	eventForm = $("#tailgateForm");
-	/*	Initialize display elements*/
-	
 	$(".cssDelete").hide();	
 	/* Click handler for add user button*/
 	
@@ -38,6 +36,10 @@ function addClickHandlers(){
 		$("#tailgateDataTable").show();
 		$("#formContainer").hide();
 	});
+	$(".clsCancelGroup").click(function(){
+		$("#tailgateGroupDataGrid").jqxGrid('clearselection');
+		$("#tailgateMemberDataGrid").jqxGrid('clearselection');
+	});
 	
 	$(".cssDelUser").click(function() {
 			GRID_PARAM.toggleSelectionMode();
@@ -64,29 +66,19 @@ function addClickHandlers(){
 	
 		/*	Toggle search boxes */
 		$(".cssSearchUser").click(GRID_PARAM.toggleSearchBoxes);
-		
-//		$("#mcontents").click(function(){
-//			if(parseInt($("#eventId").val())==0){
-//				_flaskLib.showWarningMessage('action-msg-warning', _tailgateModel.MESSAGES.ADD_EVENT_FIRST_ERR);
-//			}
-//		});	
-		
 		$(".clsAddTailgateMembers").click(
 				function() {
 					addTailgateMembers();
-//					$("#tabs").show();
 					$("#tailgateDataTable").show();
 					$("#addTailgateMembersForm").hide();
 				});
 		$(".clsAddTailgateGroup").click(
 				function() {
 					addTailgateGroups();
-//					$("#tabs").show();
 					$("#tailgateDataTable").show();
 					$("#addTailgateGroupForm").hide();
 				});
 		$(".clsBack").click(function() {
-//			$("#tabs").show();
 			$("#tailgateDataTable").show();
 			eventForm.hide();
 			$("#addTailgateMembersForm").hide();
@@ -111,11 +103,9 @@ function loadData(){
 			else
 				tailgate["tailgateRole"] = "Member";
 		});
-		console.log(tailgates);
 		GRID_PARAM.updateGrid(tailgates);
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
-		console.log("Error in getting data: " + error);
 	});
 }
 
@@ -135,7 +125,6 @@ var loadEvents = function(elementId,selectedId){
 				selectList.val(selectedId);
 		} ,
 		function (data){
-			console.log("Error in getting Events: " + data );
 		});
 };
 
@@ -146,6 +135,15 @@ var getSelectedtailgateDate = function(contentToIterate,eventId,element){
 	}
 	$.each(contentToIterate,function(key,event){
 		if((event.eventId+"") == eventId){
+			var flaskRequest = new Request();
+			flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.GET_VENUE , {venueId:event.venueId}, 
+				function (venue){
+				var lat = venue.latitude;
+				var lng = venue.longitude;
+				initializeMap(tailgateId,lat, lng);
+			},function(error){
+					
+				});
 			var date = new Date(event.eventDate);
 			var formatDate = date.getMonth()+1+"-"+date.getDate()+"-"+date.getFullYear();
 			$("#" + element).val(formatDate);
@@ -159,7 +157,6 @@ var getSelectedtailgateDate = function(contentToIterate,eventId,element){
 	});
 };
 var loadTailgateDateAndTime = function(tailgate,element){
-	debugger;
 			var date = new Date(tailgate.tailgateDate);
 			var formatDate = date.getMonth()+1+"-"+date.getDate()+"-"+date.getFullYear();
 			$("#" + element).val(formatDate);
@@ -236,7 +233,6 @@ function editTailgate(rowData) {
 	_flaskLib.hideMessage('action-msg');
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("tailgateForm",  _tailgateModel.DATA_MODEL.TAILGATE, rowData, function(){});
-		console.log(rowData);
 		$("#tailgateDataTable").hide();
 		eventForm.show();
 		$("#formContainer").show();
@@ -255,13 +251,13 @@ function loadEventAndTime(elementId,tailgateId){
 				loadTailgateDateAndTime(data, 'tailgateDate');
 		} ,
 		function (data){
-			console.log("Error in getting Events: " + data );
 		});
 }
 
 
 /* Save Event */
 function saveTailgate(){
+		var isForUpdate = false;
 		var tailgateDate=$("#tailgateDate").val();
 		tailgateDate = new Date(tailgateDate);
 		var stime = $("#startTime").jqxDateTimeInput('value');
@@ -278,21 +274,23 @@ function saveTailgate(){
 			if(params.tailgateId == 0){
 				url =_tailgateModel.SERVICE_ENDPOINTS.ADD_TAILGATE;
 			}else{
+				isForUpdate = true;
 				url = _tailgateModel.SERVICE_ENDPOINTS.UPDATE_TAILGATE;
 			}
 		flaskRequest.sendGETRequest(url, params, 
 					function (data){
 						$("#tailgateDataTable").show();
 						$("#formContainer").hide();
-						console.log(data);
 						saveTailgateMarker(data.tailgateId);
-						var userparams = {};
-						userparams.tailgateId = data.tailgateId;
-						userparams.userId = _tailgateModel.userId;
-						userparams.userName = _tailgateModel.userName;
-						userparams.isAdmin = 1;
-						userparams.groupId = 0;
-						addTailgateUser(userparams)
+						if(!isForUpdate){
+							var userparams = {};
+							userparams.tailgateId = data.tailgateId;
+							userparams.userId = _tailgateModel.userId;
+							userparams.userName = _tailgateModel.userName;
+							userparams.isAdmin = 1;
+							userparams.groupId = 0;
+							addTailgateMember(userparams)
+						}
 						_flaskLib.showSuccessMessage('action-msg', _tailgateModel.MESSAGES.SAVE);
 						loadData();
 					} ,
@@ -300,28 +298,27 @@ function saveTailgate(){
 						_flaskLib.showErrorMessage('action-msg', _tailgateModel.MESSAGES.ERROR);
 					});
 }
-function addTailgateUsers(){
+function addTailgateMembers(){
 	var selectedUserList = GRID_PARAM.getCheckedUsersList();
 	for ( var i = 0 ; i < selectedUserList.length; i ++) {
 		var user = selectedUserList[i];
 		var userrparams = {};
-		userrparams.groupId = groupId;
+		userrparams.groupId = 0;
 		userrparams.userId = user.userId;
 		userrparams.userName = user.firstName;
 		userrparams.isAdmin = 0;
-		addTailgateUser(userrparams)
+		userrparams.tailgateId = tailgateId;
+		addTailgateMember(userrparams)
 	}
 }
-function addTailgateUser(params) {
+function addTailgateMember(params) {
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_tailgateModel.SERVICE_ENDPOINTS.ADD_TAILGATE_USER,
 			params, function(data) {/* success handler */
 		_flaskLib.showSuccessMessage('group-action-msg',
 				_tailgateModel.MESSAGES.ADD_USER);
-//					loadGroupData(loggedInUserId);
 			}, function(error) { /* failure handler */
 				_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
-				console.log("Error in Adding Tailgate User: " + error);
 			});
 }
 
@@ -336,16 +333,13 @@ function leaveTailgateUser(tailgateId, userId) {
 					data) {
 				_flaskLib.showSuccessMessage('group-action-msg',
 						_tailgateModel.MESSAGES.DEL_SUCCESS_USER);
-//				loadGroupData(loggedInUserId);
 			}, function(error) {
 				_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
-				console.log("Error in deleting Group User : " + error);
 			});
 }
 
 function initForm(){
 		var repositoryId = $("#repositoryId").val();
-//		$("#tailgateDate").jqxDateTimeInput({width: '260px', height: '35px',formatString: "MM-dd-yyyy" });
 		$("#startTime").jqxDateTimeInput({ width: '100px', height: '23px', formatString: 'hh:mm tt', showTimeButton: true, showCalendarButton: false});
 		$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'hh:mm tt', showTimeButton: true, showCalendarButton: false});
 }
@@ -387,7 +381,6 @@ function fnSaveEventLogo(eventId,IsNew){
 //		}		
 //	});	
 	dropZoneLogo.on('success',function(file,responsenew){
-		console.log(responsenew);
 	});
 }
 
@@ -450,7 +443,6 @@ function fetchTailgateMemberDetail(tailgateId) {
 				_tailgateModel.allMemberDetails = data;
 			}, function(error) { /* failure handler */
 				_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
-				console.log("Error in fetching all tailgate User : " + error);
 			});
 }
 function fetchTailgateGroupDetail(tailgateId) {
@@ -464,7 +456,6 @@ function fetchTailgateGroupDetail(tailgateId) {
 				_tailgateModel.allGroupDetails = data;
 			}, function(error) { /* failure handler */
 				_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
-				console.log("Error in getting Tailgate Group Detail : " + error);
 			});
 }
 function showAddTailgateMembersForm(rowData) {
@@ -482,14 +473,12 @@ function prepareTailgateMemberGrid(){
 					createTailgateUserTable(gridData, $("#tailgateMemberDataGrid"));
 				}, function(error) {
 					_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
-					console.log("Error in fetching All Users : " + error);
 				});
 }
 
 function showAddTailgateGroupForm(rowData) {
 	fetchTailgateGroupDetail(rowData.tailgateId);
 	prepareTailgateGroupGrid();
-//	$("#tabs").hide();
 	$("#tailgateDataTable").hide();
 	$("#addTailgateGroupForm").show();
 }
@@ -501,7 +490,6 @@ function prepareTailgateGroupGrid(){
 					createTailgateGroupTable(gridData, $("#tailgateGroupDataGrid"));
 				}, function(error) {
 					_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
-					console.log("Error in fetching All Users : " + error);
 				});
 }
 
@@ -535,26 +523,35 @@ function prepareMemberData(memberList, tailgateUserList){
 	}
 	return tempUserList;
 }
-function addGroupOwners(){
-	var selectedUserList = GRID_PARAM.getCheckedUsersList();
-	for ( var i = 0 ; i < selectedUserList.length; i ++) {
-		var user = selectedUserList[i];
-		var userrparams = {};
-		userrparams.groupId = groupId;
-		userrparams.userId = user.userId;
-		userrparams.userName = user.firstName;
-		userrparams.isAdmin = 1;
-		addGroupOwner(userrparams)
+function addTailgateGroups(){
+	var flaskRequest = new Request();
+	var selectedGroupList = GRID_PARAM.getCheckedGroupList();
+	for ( var i = 0 ; i < selectedGroupList.length; i ++) {
+		var group = selectedGroupList[i];
+		var params = {groupId:group.groupId};
+		flaskRequest.sendPOSTRequest(_tailgateModel.SERVICE_ENDPOINTS.GET_ALL_GROUP_USER,
+				params, function(data) {/* success handler */
+			$.each(data, function(index, grpUser) {
+					var userrparams = {};
+					userrparams.tailgateId = tailgateId;
+					userrparams.userId = grpUser.userId;
+					userrparams.userName = grpUser.userName;
+					userrparams.isAdmin = 0;
+					userrparams.groupId = grpUser.groupId;
+					addTailgateGroup(userrparams)
+			});
+		}, function(error){
+			_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
+		});
 	}
 }
-function addGroupOwner(params){
+function addTailgateGroup(params){
 	var flaskRequest = new Request();
-	flaskRequest.sendPOSTRequest(_tailgateModel.SERVICE_ENDPOINTS.ADD_GROUP_OWNER,
+	flaskRequest.sendPOSTRequest(_tailgateModel.SERVICE_ENDPOINTS.ADD_TAILGATE_USER,
 			params, function(data) {/* success handler */
 		_flaskLib.showSuccessMessage('group-action-msg',
 				_tailgateModel.MESSAGES.ADD_GRP_USER);
 			}, function(error) { /* failure handler */
 				_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
-				console.log("Error in getting Group Detaill: " + error);
 			});
 }

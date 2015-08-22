@@ -73,6 +73,8 @@ public interface TailgateUsersService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.TailgateUsers> getTailgateGroups(
 		long tailgateId, long groupId);
 
+	public boolean checkTailgateUserExist(long tailgateId, long userId);
+
 	public com.rumbasolutions.flask.model.TailgateUsers addTailgateUser(
 		long tailgateId, long userId, java.lang.String userName, int isAdmin,
 		int groupId);

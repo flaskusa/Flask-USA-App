@@ -17,6 +17,8 @@ _tailgateModel.SERVICE_ENDPOINTS = {
 	GET_ALL_EVENTS              :"/flask-rest-events-portlet.event/get-all-events",
 	GET_ALL_USERS				:"/flask-rest-users-portlet.flaskadmin/get-users",
 	GET_ALL_GROUPS 				:"/flask-manage-user-group-portlet.flaskgroup/get-all-groups",
+	GET_ALL_GROUP_USER			:"/flask-manage-user-group-portlet.flaskgroupusers/get-all-group-users",
+	GET_VENUE					:"/flask-rest-events-portlet.venue/get-venue"
 };
 
 _tailgateModel.DATA_MODEL= {
@@ -26,13 +28,13 @@ _tailgateModel.DATA_MODEL= {
 		 	 { name: 'tailgateName', type: 'string' },
 		 	 { name: 'tailgateDescription', type: 'string' },
 		 	 { name: 'eventId', type: 'long' },
-		 	 {name:	'eventName', type:'string'},
+		 	 { name: 'eventName', type:'string'},
 		 	 { name: 'tailgateDate', type: 'string' },
 		 	 { name: 'startTime', type: 'string' },
 		 	 { name: 'endTime', type: 'string' },
-		 	{ name: 'eventImage', type: 'string' },
-		 	{ name: 'tailgateRole', type: 'string' },
-		 	{ name: 'isActive', type: 'int'},
+		 	 { name: 'eventImage', type: 'string' },
+		 	 { name: 'tailgateRole', type: 'string' },
+		 	 { name: 'isActive', type: 'int'},
 			 { name: 'isDelete', type: 'int'},
 			 { name: 'isAdmin', type: 'int'}
 		]

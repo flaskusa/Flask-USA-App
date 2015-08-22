@@ -92,6 +92,21 @@ public class TailgateUsersServiceSoap {
 		}
 	}
 
+	public static boolean checkTailgateUserExist(long tailgateId, long userId)
+		throws RemoteException {
+		try {
+			boolean returnValue = TailgateUsersServiceUtil.checkTailgateUserExist(tailgateId,
+					userId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.TailgateUsersSoap addTailgateUser(
 		long tailgateId, long userId, java.lang.String userName, int isAdmin,
 		int groupId) throws RemoteException {

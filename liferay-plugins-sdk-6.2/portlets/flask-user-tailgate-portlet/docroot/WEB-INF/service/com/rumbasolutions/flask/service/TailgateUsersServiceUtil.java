@@ -73,6 +73,10 @@ public class TailgateUsersServiceUtil {
 		return getService().getTailgateGroups(tailgateId, groupId);
 	}
 
+	public static boolean checkTailgateUserExist(long tailgateId, long userId) {
+		return getService().checkTailgateUserExist(tailgateId, userId);
+	}
+
 	public static com.rumbasolutions.flask.model.TailgateUsers addTailgateUser(
 		long tailgateId, long userId, java.lang.String userName, int isAdmin,
 		int groupId) {

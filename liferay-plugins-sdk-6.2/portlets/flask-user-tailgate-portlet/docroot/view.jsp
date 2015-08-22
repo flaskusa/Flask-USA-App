@@ -18,7 +18,7 @@ function initialize(portletId, portlet){
 	if(portletId == "flaskusertailgate_WAR_flaskusertailgateportlet") {
 		_tailgateModel.userId = "<%=userId%>";
 		_tailgateModel.userName ="<%=userName%>";
-		createTable({},_tailgateModel.DATA_MODEL.TAILGATE, $('#grid'), "tailgateActionMenu", "Edit", contextMenuHandler, ["Tailgate"]);
+		createTable({},_tailgateModel.DATA_MODEL.TAILGATE, $('#grid'), "tailgateActionMenu", "Edit", contextMenuHandler, ["Tailgate", "Images"]);
 		loadData();
 		addClickHandlers();
 		initForm();
@@ -108,7 +108,7 @@ function initialize(portletId, portlet){
 		  <input id="tailgateId" type="hidden" value="0">
 		</form>
 		   <div class="form-gorup">
-		   <div align="center">Right Click to Drop a New Marker</div>
+		   <div align="center">Double Click to Drop a New Marker</div>
 		   <div id="google_map"></div>
 		   </div>
 		  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>

@@ -62,6 +62,24 @@ GRID_PARAM.getCheckedIdList= function(idDataAttribute){
     var temp= dataList.toString();
     return temp;
 }
+GRID_PARAM.getCheckedUsersList = function(){
+	 var rows = userGridObj.jqxGrid('selectedrowindexes');
+	    var userList=[];
+	    $.each(rows, function(i, rowIndex){
+	    	var rowData = userGridObj.jqxGrid('getrowdata', rowIndex);
+	    	userList.push(rowData);
+	    });
+	    return userList;
+}
+GRID_PARAM.getCheckedGroupList = function(){
+	 var rows = groupGridObj.jqxGrid('selectedrowindexes');
+	    var groupList=[];
+	    $.each(rows, function(i, rowIndex){
+	    	var rowData = groupGridObj.jqxGrid('getrowdata', rowIndex);
+	    	groupList.push(rowData);
+	    });
+	    return groupList;
+}
 
 GRID_PARAM.getDeleteList = function(idDataAttribute){
 	
@@ -91,7 +109,7 @@ GRID_PARAM.onRowClick =function (venue)
 
 	if (args.column.text == rowMenuColumnText) {
 		GRID_PARAM.prepareContextMenu();
-		var heightCTXMenu = isAdmin == 0 ? 35 : 87;
+		var heightCTXMenu = isAdmin == 0 ? 35 : 110;
 		// create context menu
 		var contextMenu = $("#" + rowMenuDivId).jqxMenu({
 			width : 160,
@@ -151,55 +169,75 @@ GRID_PARAM.rowDetailTemplate = function(tabs, height)
 
 
 
+function formatUnixToTime(tdate)
+{
+	var date = new Date(tdate);
+	var hours = date.getHours();
+	var minutes = "0" + date.getMinutes();
+	var ampm = hours >= 12 ? 'PM' : 'AM';
+	hours = hours % 12;
+	return hours + ':' + minutes.substr(-2) + ' ' + ampm;
+}
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord){
-		function formatUnixToTime(tdate)
-		{
-			var date = new Date(tdate);
-			var hours = date.getHours();
-			var minutes = "0" + date.getMinutes();
-			var ampm = hours >= 12 ? 'PM' : 'AM';
-			hours = hours % 12;
-			return hours + ':' + minutes.substr(-2) + ' ' + ampm;
-		}
-		  var tabsdiv = null; 
-		    tabsdiv = $($(parentElement).children()[0]);
-		    if (tabsdiv != null) {
-		  var eventDiv = tabsdiv.find('.event');
-		  var container1 = $('<div class="row-fluid"></div>');
-		  var leftcolumn = $('<div class="span3 GridLogo"></div>');
-		  var rightcolumn = $('<div class="span9"></div>');
-		  var d = new Date(datarecord.eventDate);
-		  var d1 = formatUnixToTime(datarecord.startTime);
-		  var d2 = formatUnixToTime(datarecord.endTime);
-			container1.append(leftcolumn);
-			container1.append(rightcolumn);
-			
-			$(rightcolumn).append("<table>");		
-			var imgLogoURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+datarecord.eventImageUUID+"&groupId="+datarecord.eventImageGroupId;
-			var objLogodiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgLogoURL+')'});
-			
-			objLogodiv.appendTo(leftcolumn);
-			var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
-					+ datarecord.venueName + "</td></tr>";
-			var EventDate = "<tr><td class='filledWidth1'><b>Event Date:</b></td><td> "
-				+ GRID_PARAM.formatDate(d) + "</td></tr>";		
-			var StartTime = "<tr><td class='filledWidth1'><b>Start Time:</b></td><td> "
-				+ d1 + "</td></tr>";
-			var EndTime = "<tr><td class='filledWidth1'><b>End Time:</b></td><td> "
-				+ d2 + "</td></tr>";
-			
-			$(rightcolumn).append(venueId);
-			$(rightcolumn).append(EventDate);
-			$(rightcolumn).append(StartTime);
-			$(rightcolumn).append(EndTime);
-			$(rightcolumn).append("</table>");
-			eventDiv.append(container1);
-			
-			$(tabsdiv).jqxTabs({
-				width : '90%',
-				height : 180
-			});
-	    }
+	var tabsdiv = null; 
+	//_flaskLib.loadCountries('venueCountryId',datarecord.venueCountryId);
+	//_flaskLib.loadUSARegions('venueStateId',datarecord.venueStateId);
+
+    tabsdiv = $($(parentElement).children()[0]);
+    if (tabsdiv != null) {
+    	
+		var venueDiv = tabsdiv.find('.tailgate');
+		var imagesDiv = tabsdiv.find('.images');
+		
+		var container1 = $('<div class="row-fluid"></div>');
+		
+		var container2 = $('<div class="row-fluid"></div>');
+		venueDiv.append(container1);
+		
+		var leftcolumn = $('<div class="span5"></div>');
+		var rightcolumn = $('<div class="span5"></div>');
+		
+		container1.append(leftcolumn);
+		container1.append(rightcolumn);
+	
+		var tailgate_Name = "<tr><td class='filledWidth'> <b>Name:</b></td><td> "
+			+ datarecord.tailgateName + "</td></tr>";
+		 var tailgate_Description = "<tr><td class='filledWidth'><b>Group Desc:</b></td><td><textarea style='border:none;width:240px;height:70px;background-color:white;margin:0px;' wrap='hard' readonly='true'>"
+				+ datarecord.tailgateDescription + "</textarea></td></tr>";
+	    var eventName = "<tr><td class='filledWidth'><b>Event Name :</b></td><td> "
+			+ datarecord.eventName + "</td></tr>";
+	    var eventDate = "<tr><td class='filledWidth'><b>Tailgate Date :</b></td><td> "
+			+ datarecord.tailgateDate + "</td></tr>";
+		var startTime = "<tr><td class='filledWidth'> <b>Start Time:</b></td><td>"
+				+ datarecord.startTime + "</td></tr>";
+		var endTime = "<tr><td class='filledWidth'><b>End Time:</b></td><td>"
+				+ datarecord.endTime + "</td></tr>";
+		
+		 
+		$(leftcolumn).append("<table>");
+		$(leftcolumn).append(tailgate_Name);
+		$(leftcolumn).append(tailgate_Description);
+		$(leftcolumn).append("</table>");
+		
+		$(rightcolumn).append("<table>");
+		
+		
+		$(rightcolumn).append(eventName);
+		$(rightcolumn).append(eventDate);
+		$(rightcolumn).append(startTime);
+		$(rightcolumn).append(endTime);
+		
+		$(rightcolumn).append("</table>");	
+		
+		var container = $('<div/>');
+//    	fnGetVenueImages(datarecord.venueId,container,false);
+  	  	$(container).appendTo($(imagesDiv));
+		
+		$(tabsdiv).jqxTabs({
+			width : '90%',
+			height : 180
+		});
+    }
 	}
 
 
@@ -259,7 +297,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
     grid.jqxGrid(
             {
                 width: '100%',
-                height : '250',
+                height : '350px',
                 source: dataAdapter,
                 columnsheight : 40,
 				columnsmenuwidth : 40,
@@ -367,7 +405,7 @@ function createTailgateGroupTable(data, grid){
 //	grid.jqxGrid("refresh");
     var eventsColumns = [{ text: 'Group Name', columntype: 'textbox',  datafield: 'groupName', width: '25%' },
     	 { text: 'Description', datafield: 'groupDescription', width: '50%'},
-    	 { text: 'Created By', datafield: 'createdBy',  width: '25%'}];
+    	 { text: 'Created By', datafield: 'createdBy',  width: '22.5%'}];
     var source = {
 			 localdata:data,
 			 datatype:'array',

@@ -1,20 +1,26 @@
 /**
  * Google Map Integration and Add/Remove marker for creating Tailgate Information
- * Added By Mrs Ekta Tejas Patel
  */
 var tailgateId;
 var map;
 var tailgateMarker = {};
-function initializeMap(tgId) {
+var isNewMarker = true;
+var isMarkerCreated = false;
+function initializeMap(tgId, latitude, longitude) {
 	tailgateId = tgId;
 	if(!tailgateId)
 		tailgateId = 0;
-	 var mapCenter = new google.maps.LatLng(42.48114, -83.49441); //Google map Coordinates
+	if(!latitude)
+		latitude = 42.48114;
+	if(!longitude)
+		longitude = -83.49441;
+	
+	 var mapCenter = new google.maps.LatLng(latitude, longitude); //Google map Coordinates
     	//Google map option
         var googleMapOptions = 
         { 
             center: mapCenter, // map center
-            zoom: 15, //zoom level, 0 = earth view to higher value
+            zoom: 16, //zoom level, 0 = earth view to higher value
             panControl: true, //enable pan Control
             zoomControl: true, //enable zoom control
            /*zoomControlOptions: {
@@ -24,18 +30,18 @@ function initializeMap(tgId) {
             mapTypeId: google.maps.MapTypeId.ROADMAP // google map type
         };
         map = new google.maps.Map(document.getElementById("google_map"), googleMapOptions);
+        map.setOptions({disableDoubleClickZoom: true });
         addMapEventListener(map);
 }
 function addMapEventListener(map){
 //##### drop a new marker on right click ######
 	// Load markers from tailgatemarker table
-	var isMarkerCreated = false;
+	isMarkerCreated = false;
     var flaskRequest = new Request();
 	params = {tailgateId:tailgateId};
 	flaskRequest.sendGETRequest(_tailgateMarkerModel.SERVICE_ENDPOINTS.GET_TAILGATE_MARKER, params, 
 	function(data){/*success handler*/
-		console.log(data);
-		
+		isNewMarker = false;
 		tailgateMarker["name"] = data.name;
 		tailgateMarker["descirption"] = data.description;
 		tailgateMarker["latitude"] = data.latitude;
@@ -48,13 +54,13 @@ function addMapEventListener(map){
         create_marker(point, tailgateMarker.name, tailgateMarker.descirption, false, false, false, "/flask-user-tailgate-portlet/img/new-blue-pin.png");
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
-		console.log("Error in getting data: " + error);
 	});
     //drop a new marker on right click
-    google.maps.event.addListener(map, 'rightclick', function(event) {
+    google.maps.event.addListener(map, 'dblclick', function(event) {
     	if(!isMarkerCreated){
         //Edit form to be displayed with new marker
     	isMarkerCreated = true;
+    	isNewMarker = true;
         var EditForm = '<p><div class="marker-edit">'+
         '<label for="pName"><span>Place Name : </span><input type="text" name="pName" id="pName" class="save-name" placeholder="Enter Title" maxlength="40" /></label>'+
         '<label for="pDesc"><span>Description : </span><textarea name="pDesc" id="pDesc" class="save-desc" placeholder="Enter Address" maxlength="150" style="height:60px; width:240px;"></textarea></label>'+
@@ -69,7 +75,7 @@ function addMapEventListener(map){
 
 //############### Create Marker Function ##############
 function create_marker(MapPos, MapTitle, MapDesc,  InfoOpenDefault, DragAble, Removable, iconPath)
-{                 
+{    
     //new marker
     var marker = new google.maps.Marker({
         position: MapPos,
@@ -114,7 +120,6 @@ function create_marker(MapPos, MapTitle, MapDesc,  InfoOpenDefault, DragAble, Re
             var mName = contentString.find('input.save-name')[0].value; //name input field value
             var mDesc  = contentString.find('textarea.save-desc')[0].value; //description input field value
             var mLatLang = marker.getPosition().toUrlValue(); //get marker position
-            console.log(mLatLang);
             var lat = mLatLang.split(",")[0];
             var lng = mLatLang.split(",")[1];
             if(mName =='' || mDesc =='')
@@ -144,10 +149,10 @@ function remove_marker(Marker)
     /* determine whether marker is draggable 
     new markers are draggable and saved markers are fixed */
 	
+	isMarkerCreated = false;
     if(Marker.getDraggable()) 
     {
         Marker.setMap(null); //just remove new marker
-        isMarkerCreated = false;
     }else if(tailgateMarker.tailgateId == 0){
     	Marker.setMap(null); //just remove created but not saved marker
     }
@@ -162,7 +167,6 @@ function remove_marker(Marker)
     		Marker.setMap(null);
     	} , function(error){ /*failure handler*/
     		_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
-    		console.log("Error in getting data: " + error);
     	});
     }
 }
@@ -190,16 +194,14 @@ function save_marker(Marker, mName, mAddress, lat,lang, replaceWin)
 
 function saveTailgateMarker(tailgateId){
 		tailgateMarker["tailgateId"] = tailgateId;
-		if(tailgateMarker.latitude && tailgateMarker.longitude){
+		if(isNewMarker && tailgateMarker.latitude && tailgateMarker.longitude){
 			var params = {name : tailgateMarker.name, description : tailgateMarker.description, latitude : tailgateMarker.latitude,
 					longitude : tailgateMarker.longitude, tailgateId: tailgateMarker.tailgateId }; //post variables
 		    var flaskRequest = new Request();
 			flaskRequest.sendPOSTRequest(_tailgateMarkerModel.SERVICE_ENDPOINTS.ADD_TAILGATE_MARKER, params, 
 			function(data){/*success handler*/
-				console.log(data);
 			} , function(error){ /*failure handler*/
 				_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
-				console.log("Error in saving tailgate parameter data: " + error);
 			});
 		}
 }

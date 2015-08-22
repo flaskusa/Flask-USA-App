@@ -71,6 +71,11 @@ public class TailgateUsersServiceWrapper implements TailgateUsersService,
 	}
 
 	@Override
+	public boolean checkTailgateUserExist(long tailgateId, long userId) {
+		return _tailgateUsersService.checkTailgateUserExist(tailgateId, userId);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.TailgateUsers addTailgateUser(
 		long tailgateId, long userId, java.lang.String userName, int isAdmin,
 		int groupId) {

@@ -85,18 +85,40 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 	}
 	
 	@Override
+	public boolean checkTailgateUserExist(long tailgateId, long userId){
+		boolean isUserExist = false;
+		List<TailgateUsers> tailgateGroups = null;
+//		tailgateMarker = TailgateMarkerFinderUtil.getTailgateMarker(tailgateId);
+		try {
+			DynamicQuery tailgateQuery = DynamicQueryFactoryUtil.forClass(TailgateUsersImpl.class);
+			tailgateQuery.add(PropertyFactoryUtil.forName("tailgateId").eq(new Long(tailgateId)));
+			tailgateQuery.add(PropertyFactoryUtil.forName("userId").eq(new Long(userId)));
+			tailgateGroups = TailgateUsersLocalServiceUtil.dynamicQuery(tailgateQuery);
+			if(tailgateGroups.size() > 0)
+				isUserExist = true;
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			LOGGER.error("Exception in get All Tailgate Group :" + e.getMessage());
+		}
+		return isUserExist;
+	}
+	
+	@Override
 	public TailgateUsers addTailgateUser(long tailgateId, long userId, String userName, int isAdmin, int groupId){
 		TailgateUsers tailgateUsers = null;
 		try{
-			tailgateUsers = TailgateUsersLocalServiceUtil.createTailgateUsers(CounterLocalServiceUtil.increment());
-			tailgateUsers.setTailgateId(tailgateId);
-			tailgateUsers.setIsAdmin(isAdmin);
-			tailgateUsers.setUserId(userId);
-			tailgateUsers.setUserName(userName);
-			tailgateUsers.setGroupId(groupId);
-			
-			tailgateUsers = TailgateUsersLocalServiceUtil.addTailgateUsers(tailgateUsers);
-			String text = "You are invited to be participants of custom group.";
+			if(!checkTailgateUserExist(tailgateId, userId)){
+				tailgateUsers = TailgateUsersLocalServiceUtil.createTailgateUsers(CounterLocalServiceUtil.increment());
+				tailgateUsers.setTailgateId(tailgateId);
+				tailgateUsers.setIsAdmin(isAdmin);
+				tailgateUsers.setUserId(userId);
+				tailgateUsers.setUserName(userName);
+				tailgateUsers.setGroupId(groupId);
+				
+				tailgateUsers = TailgateUsersLocalServiceUtil.addTailgateUsers(tailgateUsers);
+				String text = "You are invited to be participants of custom group.";
+			}
 //			NotificationUtil notificition = new NotificationUtil();
 //			notificition.sendNotifications(userId, text);
 			
@@ -112,7 +134,7 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 		TailgateUsers tailgateUser = null;
 		try{
 			tailgateUser = TailgateUsersLocalServiceUtil.getTailgateUsers(tailgateUserId);
-			tailgateUser.setGroupId(groupId);
+			tailgateUser.setTailgateId(tailgateId);
 			tailgateUser.setIsAdmin(isAdmin);
 			tailgateUser.setUserId(userId);
 			tailgateUser.setUserName(userName);
