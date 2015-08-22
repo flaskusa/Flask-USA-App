@@ -423,7 +423,9 @@ function addUserEvent(eventId){
 }
 
 function removeUserEvent(eventId){
+	
 	var param = {eventId: eventId};
+	
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.REMOVE_USER_EVENT , param, 
 		function (data){
@@ -495,15 +497,15 @@ function initMenuList(){
 						$(objtbl).appendTo($(divSlideObj));							
 						$(divSlideObj).appendTo($(divSlider));								
 					});	
-					$(divSlider).appendTo($(divObj));														
+					$(divSlider).slick({
+						speed: 300,
+						variableWidth: false,
+						infinite: false,
+						dots: true
+					});					
+					$(divSlider).appendTo($(divObj));
 				}
 			});
-			$(divSlider).slick({
-					speed: 300,
-					variableWidth: false,
-					infinite: false,
-					dots: true
-			});					
 			$(divObj).appendTo($(menuContainer));					
 		});
 		$(menuContainer).jqxTabs({ 
