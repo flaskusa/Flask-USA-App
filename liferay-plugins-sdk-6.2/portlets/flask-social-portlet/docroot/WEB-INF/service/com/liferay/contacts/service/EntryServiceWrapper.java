@@ -67,6 +67,30 @@ public class EntryServiceWrapper implements EntryService,
 	}
 
 	@Override
+	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getRequestsToConfirm(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _entryService.getRequestsToConfirm(serviceContext);
+	}
+
+	@Override
+	public void blockUser(long blockUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_entryService.blockUser(blockUserId, serviceContext);
+	}
+
+	@Override
+	public void unblockUser(long unblockUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_entryService.unblockUser(unblockUserId, serviceContext);
+	}
+
+	@Override
 	public int getUsersAndContactsCount(long companyId,
 		java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext)
