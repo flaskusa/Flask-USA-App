@@ -4,7 +4,8 @@ function initContactList(startPos,endPos){
 	if(startPos>0)
 		$("#prev").show();
 	var companyId = $("#CompanyId").val();
-	var params = {companyId: companyId,keywords: '',start: startPos,end: endPos};
+	var searchString = $(".search-query").val();
+	var params = {companyId: companyId,keywords: searchString,start: startPos,end: endPos};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_ALL_CONTACTS , params, 
 		function (data){
@@ -12,21 +13,20 @@ function initContactList(startPos,endPos){
 		} ,
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
-	});	
+	});
 }
 
 function renderContactList(tdata) {
-	 var divRow = $('#placeholder');
+	 var divRow = $('#Friend_placeholder');
 	 $(divRow).html("");
 	 //console.log(tdata.length);
 	 if(tdata.length == 0){
-		$("<span class='control-label-nocolor'>There are no users available</span>").appendTo($("#placeholder"));
+		$("<span class='control-label-nocolor'>There are no users available</span>").appendTo($(divRow));
 		return;
 	 }
 	 for(var i=0; i < tdata.length; i++)
 		{
 		 	var flaskUser = tdata[i];
-		 	console.log(flaskUser);
 		    var objTable = $('<table/>',{'class':'tblRow'});
 		    var objTr = $('<tr/>');
 		    $(objTr).appendTo($(objTable));
@@ -79,7 +79,7 @@ function fnBuildMenu(obj){
 		var li1 = $('<li/>');
 		$(li1).html('<a href="#" onclick="fnBlock('+UserId+');">Block</a>');
 		var li2 = $('<li/>');
-		$(li2).html('<a href="#" onclick="fnUnFriend('+UserId+');">Unfriend</a>');
+		$(li2).html('<a href="#" onclick="fnUnFriend('+UserId+',this);">Unfriend</a>');
 		$(li1).appendTo($(ul));
 		$(li2).appendTo($(ul));
 		$(ul).appendTo($(dropdown));		
@@ -102,10 +102,6 @@ function fnBlock(UserId){
 	alert("Block"+UserId);
 }
 
-function fnUnFriend(UserId){
-	alert("UnFriend"+UserId);
-}
-
 function fnShowNextRecords(){
 	_startPos = _startPos + 10;
 	_endPos = _endPos + 10;
@@ -125,13 +121,34 @@ function getUserVCard(data){
 
 function sendFriendRequest(UserId,obj){
 	var flaskRequest = new Request();
-	var params = {receiverUserId: UserId,type: 12};
+	var params = {receiverUserId: UserId};
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.SEND_REQUEST, params, 
 	function(data){
 		initContactList(_startPos,_endPos);
 		$(obj).html("Request sent");
 		$(obj).attr("disabled","disabled");
 	} , function(error){
-		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
+		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEND_REQ_ERR);
 	});		
+}
+
+function fnUnFriend(UserId,obj){
+	var flaskRequest = new Request();
+	var params = {receiverUserId: UserId};
+	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.UNFRIEND, params, 
+	function(data){
+		initContactList(_startPos,_endPos);
+		$(obj).click(function(){
+			sendFriendRequest(UserId,obj);
+		})		
+		$(obj).html('Add Friend');
+	} , function(error){
+		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.UNFRIEND_ERR);
+	});		
+}
+
+function initSearch(){
+	$("#btnSubmit").click(function(){
+		initContactList(_startPos,_endPos);		
+	});
 }

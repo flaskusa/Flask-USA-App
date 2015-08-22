@@ -81,24 +81,6 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		return jsonArray;
 	}
 
-	public List<SocialRequest> getRequestsToConfirm(ServiceContext serviceContext)throws PortalException, SystemException {
-		int requestCount = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(serviceContext.getUserId());
-		List<SocialRequest> requests = SocialRequestLocalServiceUtil.getReceiverUserRequests(serviceContext.getUserId(), SocialRequestConstants.STATUS_PENDING, 0, requestCount);
-		return requests;
-	}
-	
-	public void blockUser(long blockUserId, ServiceContext serviceContext)throws PortalException, SystemException{
-		long userId1 = serviceContext.getUserId();
-		SocialRelation socialRelation = SocialRelationLocalServiceUtil.getRelation(userId1, blockUserId, SocialRelationConstants.TYPE_BI_CONNECTION);
-		SocialRelationLocalServiceUtil.deleteRelation(socialRelation);
-		SocialRelationLocalServiceUtil.addRelation(userId1, blockUserId, SocialRelationConstants.TYPE_UNI_ENEMY);
-	}
-	
-	public void unblockUser(long unblockUserId, ServiceContext serviceContext)throws PortalException, SystemException{
-		long userId1 = serviceContext.getUserId();
-		SocialRelation socialRelation = SocialRelationLocalServiceUtil.getRelation(userId1, unblockUserId, SocialRelationConstants.TYPE_UNI_ENEMY);
-		SocialRelationLocalServiceUtil.deleteRelation(socialRelation);
-	}
 	
 	public int getUsersAndContactsCount(long companyId, String keywords, ServiceContext serviceContext)throws PortalException, SystemException {
 		return entryLocalService.searchUsersAndContactsCount(companyId, serviceContext.getUserId(), keywords);

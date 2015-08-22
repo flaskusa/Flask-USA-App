@@ -85,15 +85,10 @@ div#one {
   padding: 0px 15px 0px 15px; }
 
 div#placeholder {
-  height: 800px;
-  overflow: none; }
+	height: 100% !important;
+  	overflow: none; 
+}
 
-@media (max-width: 320px) {
-  div#placeholder {
-    height: 400px; } }
-@media (min-width: 414px) {
-  div#placeholder {
-    height: 550px; } }
 div#fixedfooter2 {
   position: fixed;
   bottom: 0px;
@@ -211,3 +206,14 @@ ul.dropdown-menu li {
     background-color: #999 !important;
     width: 125px !important;
 }
+
+.table-responsive {
+    margin: auto;
+    width: 93%;
+}
+
+.searchtable{
+	padding: 5px;
+	width: 100%;
+}
+

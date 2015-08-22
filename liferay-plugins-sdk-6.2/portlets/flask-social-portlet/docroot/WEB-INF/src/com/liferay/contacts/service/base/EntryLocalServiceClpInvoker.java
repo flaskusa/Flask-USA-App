@@ -19,7 +19,7 @@ import com.liferay.contacts.service.EntryLocalServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author Kiran
+ * @author Brian Wing Shun Chan
  * @generated
  */
 public class EntryLocalServiceClpInvoker {

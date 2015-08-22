@@ -26,7 +26,7 @@ import com.liferay.portal.service.InvokableService;
  * checks based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
- * @author Kiran
+ * @author Brian Wing Shun Chan
  * @see EntryService
  * @see com.liferay.contacts.service.base.EntryServiceBaseImpl
  * @see com.liferay.contacts.service.impl.EntryServiceImpl
@@ -71,27 +71,6 @@ public class EntryServiceUtil {
 		return getService()
 				   .searchUsersAndContacts(companyId, keywords, start, end,
 			serviceContext);
-	}
-
-	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getRequestsToConfirm(
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		return getService().getRequestsToConfirm(serviceContext);
-	}
-
-	public static void blockUser(long blockUserId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().blockUser(blockUserId, serviceContext);
-	}
-
-	public static void unblockUser(long unblockUserId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		getService().unblockUser(unblockUserId, serviceContext);
 	}
 
 	public static int getUsersAndContactsCount(long companyId,

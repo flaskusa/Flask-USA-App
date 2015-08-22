@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * @author Kiran
+ * @author Brian Wing Shun Chan
  */
 public class EntryFinderUtil {
 	public static int countByKeywords(long companyId, long userId,

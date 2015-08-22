@@ -55,7 +55,7 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author Kiran
+ * @author Brian Wing Shun Chan
  * @see EntryServiceHttp
  * @see com.liferay.contacts.model.EntrySoap
  * @see com.liferay.contacts.service.EntryServiceUtil
@@ -71,48 +71,6 @@ public class EntryServiceSoap {
 					keywords, start, end, serviceContext);
 
 			return returnValue.toString();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.social.model.SocialRequestSoap[] getRequestsToConfirm(
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.social.model.SocialRequest> returnValue =
-				EntryServiceUtil.getRequestsToConfirm(serviceContext);
-
-			return com.liferay.portlet.social.model.SocialRequestSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void blockUser(long blockUserId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			EntryServiceUtil.blockUser(blockUserId, serviceContext);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void unblockUser(long unblockUserId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws RemoteException {
-		try {
-			EntryServiceUtil.unblockUser(unblockUserId, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

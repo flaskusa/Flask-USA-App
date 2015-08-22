@@ -26,7 +26,7 @@ import java.util.Map;
  * This class is a wrapper for {@link Entry}.
  * </p>
  *
- * @author Kiran
+ * @author Brian Wing Shun Chan
  * @see Entry
  * @generated
  */

@@ -21,7 +21,7 @@ import com.liferay.portal.kernel.dao.orm.BaseActionableDynamicQuery;
 import com.liferay.portal.kernel.exception.SystemException;
 
 /**
- * @author Kiran
+ * @author Brian Wing Shun Chan
  * @generated
  */
 public abstract class EntryActionableDynamicQuery

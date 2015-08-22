@@ -18,5 +18,7 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="E:/LiferaySetup/liferay-portal-tomcat-6.2-ce-ga4/liferay-portal-6.2-ce-ga4/tomcat-7.0.42/webapps/ROOT/WEB-INF/lib/jstl-api.jar"/>
+	<classpathentry kind="lib" path="E:/LiferaySetup/liferay-portal-tomcat-6.2-ce-ga4/liferay-portal-6.2-ce-ga4/tomcat-7.0.42/webapps/ROOT/WEB-INF/lib/jstl-impl.jar"/>
 	<classpathentry kind="output" path="docroot/WEB-INF/classes"/>
 </classpath>
