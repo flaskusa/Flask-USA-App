@@ -166,8 +166,7 @@
 							}
 						);
 					}
-					
-					$(".taglib-icon:first").hide()
+
 				</aui:script>
                 </div>
 				<div class="loginpane_footer">
