@@ -15,7 +15,8 @@
 --%>
 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
+<%@page import="com.liferay.portlet.social.service.SocialRequestLocalServiceUtil"%>
+<%@page import="com.liferay.portlet.social.model.SocialRequestConstants"%>
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 
 <%@ taglib uri="http://liferay.com/tld/aui" prefix="aui" %>

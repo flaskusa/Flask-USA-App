@@ -1,3 +1,6 @@
+
+
+
 AUI.add(
 	'liferay-plugin-dockbar-notifications',
 	function(A) {
@@ -403,10 +406,10 @@ AUI.add(
 												var message = Liferay.Language.get('you-do-not-have-any-notifications');
 
 												if (instance._actionable) {
-													message = Liferay.Language.get('you-do-not-have-any-requests');
+													//message = Liferay.Language.get('you-do-not-have-any-requests');
 												}
 
-												notificationsNode.setHTML('<div class=\"message\">' + message + '</div>');
+												//notificationsNode.setHTML('<div class=\"message\">' + message + '</div>');
 
 												if (markAllAsReadLink) {
 													markAllAsReadLink.hide();
@@ -760,3 +763,4 @@ AUI.add(
 		requires: ['aui-base', 'aui-io', 'aui-loading-mask-deprecated', 'liferay-poller', 'liferay-portlet-base', 'liferay-portlet-url']
 	}
 );
+

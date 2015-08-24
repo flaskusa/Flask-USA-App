@@ -15,5 +15,6 @@
 			<attribute name="org.eclipse.jst.component.nondependency" value=""/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container/flask-social-portlet"/>
 	<classpathentry kind="output" path="docroot/WEB-INF/classes"/>
 </classpath>
