@@ -90,11 +90,12 @@
 
 				<%
 				String myAccountURL = themeDisplay.getURLPortal() +"/web/guest/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Fcreate_account";
-				String userEvents = themeDisplay.getURLPortal() + "/web/flask/userevents";
-				String userGroups = themeDisplay.getURLPortal() + "/web/flask/usergroups";
+				String userEvents = themeDisplay.getURLPortal() + "/web/flask/my-events";
+				String userGroups = themeDisplay.getURLPortal() + "/web/flask/my-groups";
 				String userTailgates = themeDisplay.getURLPortal() + "/web/flask/usertailgates";
-
 				String friends = themeDisplay.getURLPortal() + "/web/flask/friends";
+				String inviteFriends = themeDisplay.getURLPortal() + "/web/flask/invite-friends";
+
 				String notifications = themeDisplay.getURLPortal() + "/web/flask/notifications";
 				%>
 				<c:if test="<%= bShowFlaskAdminMenu %>">
@@ -102,6 +103,7 @@
 					<aui:nav-item href="<%= userTailgates %>" iconCssClass="icon-user" label="My Tailgate" title="My Tailgate"/>
 					<aui:nav-item href="<%= userGroups %>" iconCssClass="icon-user" label="My Groups" title="My Groups"/>
 					<aui:nav-item href="<%= friends %>" iconCssClass="icon-user" label="My Friends" title="My Friends"/>
+					<aui:nav-item href="<%= inviteFriends %>" iconCssClass="icon-user" label="Invite Friends" title="Invite Friends"/>
 					<aui:nav-item href="<%= notifications %>" iconCssClass="icon-user" label="Notification" title="Notification"/>
 				</c:if>
 				<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-user" label="my-account" title="my-account"  />
