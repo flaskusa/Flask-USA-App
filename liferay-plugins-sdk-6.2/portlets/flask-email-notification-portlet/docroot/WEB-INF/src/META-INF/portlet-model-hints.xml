@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<model-hints>
+	<model name="com.rumbasolutions.flask.model.InvitationInfo">
+		<field name="inviationId" type="long" />
+		<field name="name" type="String" />
+		<field name="email" type="String" />
+		<field name="description" type="String" />
+		<field name="invitedDate" type="String" />
+	</model>
+</model-hints>

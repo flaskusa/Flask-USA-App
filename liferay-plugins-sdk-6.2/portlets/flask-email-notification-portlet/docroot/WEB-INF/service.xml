@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.rumbasolutions.flask">
+	<namespace>flaskinvitation</namespace>
+
+	<entity name="InvitationInfo" local-service="true" remote-service="true">
+		<!-- PK fields -->
+		<column name="inviationId" type="long" primary="true" />
+		<!-- Group instance -->
+		<!-- Audit fields -->
+		<column name="name" type="String" />
+        <column name="email" type="String" />
+        <column name="description" type="String" />
+        <column name="invitedDate" type="String" />
+	</entity>
+</service-builder>
