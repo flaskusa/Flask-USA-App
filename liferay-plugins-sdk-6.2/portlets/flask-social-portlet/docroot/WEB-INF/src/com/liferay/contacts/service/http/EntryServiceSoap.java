@@ -95,6 +95,23 @@ public class EntryServiceSoap {
 		}
 	}
 
+	public static java.lang.String getRequestingUsers(long companyId,
+		java.lang.String keywords,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONArray returnValue = EntryServiceUtil.getRequestingUsers(companyId,
+					keywords, serviceContext);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void blockUser(long blockUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {

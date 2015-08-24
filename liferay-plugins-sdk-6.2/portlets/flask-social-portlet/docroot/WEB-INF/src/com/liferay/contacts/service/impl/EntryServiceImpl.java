@@ -53,7 +53,7 @@ import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
  * @author Bruno Farache
  */
 public class EntryServiceImpl extends EntryServiceBaseImpl {
-
+	long socialRequestId;
 	public JSONArray searchUsersAndContacts(
 			long companyId, String keywords, int start, int end, ServiceContext serviceContext)
 		throws PortalException, SystemException {
@@ -82,10 +82,43 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 	}
 
 	public List<SocialRequest> getRequestsToConfirm(ServiceContext serviceContext)throws PortalException, SystemException {
+		
 		 int requestCount = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(serviceContext.getUserId());
 		  List<SocialRequest> requests = SocialRequestLocalServiceUtil.getReceiverUserRequests(serviceContext.getUserId(), SocialRequestConstants.STATUS_PENDING, 0, requestCount);
+		  
 		  return requests;
 	}
+	
+	public JSONArray getRequestingUsers(long companyId, String keywords, ServiceContext serviceContext)
+			throws PortalException, SystemException{
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		long userId = getUserId();
+		int cnt = entryLocalService.searchUsersAndContactsCount(companyId, userId, keywords);
+		List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
+			companyId, userId, keywords, 0, cnt);
+		int requestCount = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(serviceContext.getUserId());
+		  List<SocialRequest> requests = SocialRequestLocalServiceUtil.getReceiverUserRequests(serviceContext.getUserId(), SocialRequestConstants.STATUS_PENDING, 0, requestCount);
+		for (BaseModel<?> contact : contacts) {
+			JSONObject jsonObject = null;
+			
+			for(SocialRequest req: requests){
+				if(req.getUserId() == ((User) contact).getContact().getUserId()){
+					if (contact instanceof User) {
+						jsonObject = ContactsUtil.getUserJSONObject(
+							userId, (User)contact);
+					}
+					else {
+						jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
+					}
+					jsonArray.put(jsonObject);
+				}
+			}
+			
+		}
+		return jsonArray;
+	}
+	
 	
 	public void blockUser(long blockUserId, ServiceContext serviceContext)throws PortalException, SystemException{
 		  long userId1 = serviceContext.getUserId();
@@ -129,21 +162,25 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		return jsonArray;
 	}
 	
+	
 	public void addSocialRelation(long receiverUserId, ServiceContext serviceContext)
 		throws Exception {
-			long socialRequestId;
-			SocialRequest sRequest;
-			List<SocialRequest> request = SocialRequestLocalServiceUtil.getUserRequests(serviceContext.getUserId(), 3, 0, 50);
+			ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
+			int cnt = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(serviceContext.getUserId());
+			List<SocialRequest> request = SocialRequestLocalServiceUtil.getReceiverUserRequests(serviceContext.getUserId(), 3, 0, cnt);
 			for(SocialRequest socialRequest: request ){
-				if(socialRequest.getUserId() == serviceContext.getUserId()){
+				SocialRequest sRequest;
+				if(socialRequest.getUserId() == receiverUserId){
 					socialRequestId = socialRequest.getRequestId();
 					sRequest = SocialRequestLocalServiceUtil.getSocialRequest(socialRequestId);
-					ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
-					SocialRequestLocalServiceUtil.updateRequest(socialRequestId, 1, themeDisplay);
+					
 					sendNotificationEvent(sRequest);
+					SocialRequestLocalServiceUtil.updateRequest(socialRequestId, 1, themeDisplay);
 				}
 			}
+			
 			SocialRelationLocalServiceUtil.addRelation(serviceContext.getUserId(), receiverUserId, SocialRelationConstants.TYPE_BI_CONNECTION);
+			
 	}
 
 	public void requestSocialRelation(long receiverUserId, ServiceContext serviceContext)throws Exception {

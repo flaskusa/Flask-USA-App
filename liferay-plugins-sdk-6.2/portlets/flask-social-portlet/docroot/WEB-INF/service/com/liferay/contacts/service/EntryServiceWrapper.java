@@ -75,6 +75,16 @@ public class EntryServiceWrapper implements EntryService,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.json.JSONArray getRequestingUsers(
+		long companyId, java.lang.String keywords,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _entryService.getRequestingUsers(companyId, keywords,
+			serviceContext);
+	}
+
+	@Override
 	public void blockUser(long blockUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,

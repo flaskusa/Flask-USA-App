@@ -80,6 +80,15 @@ public class EntryServiceUtil {
 		return getService().getRequestsToConfirm(serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONArray getRequestingUsers(
+		long companyId, java.lang.String keywords,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .getRequestingUsers(companyId, keywords, serviceContext);
+	}
+
 	public static void blockUser(long blockUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
