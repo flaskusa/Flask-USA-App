@@ -2,6 +2,8 @@ var _flaskLib = {};
 
 _flaskLib.UTILITY = {
 		IMAGES_PATH			: "/c/document_library/get_file",
+		DEFAULT_PROFILE_PIC	: "/document_library/DefaultProfilePic",
+		DEFAULT_NO_IMAGE	: "/document_library/NoImageFound",
 		GRID_GROUP_EXPAND   : true
 }
 
