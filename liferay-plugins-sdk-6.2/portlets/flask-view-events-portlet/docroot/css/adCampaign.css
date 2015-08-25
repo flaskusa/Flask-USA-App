@@ -1,0 +1,15 @@
+.adCarousel{
+	width: 100% !important;
+	margin-left:0px;
+	margin-right:0px;
+}	
+
+.adSlide{
+	width: 100% !important;
+    height: 90px !important;
+    background-size: contain !important;
+    background-repeat: no-repeat !important;
+	margin-left:0px;
+	margin-right:0px;
+}
+
