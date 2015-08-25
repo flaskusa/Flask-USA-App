@@ -227,71 +227,42 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 
 function fnSlider(infoType,arrImage,eventId,venueId){
 	var Slider = "#wowslider-container"+infoType;
-
-	if($(Slider).hasClass("slick-initialized"))	{
-		$(Slider).slick('unslick');
-		$(Slider).html("");
-	}
-	
 	$(Slider).attr('data-eventId',eventId);
 	$(Slider).attr('data-venueId',venueId);
-	$(Slider).slick({
-		speed: 300,
-	    variableWidth: true,
-	    infinite: false,
-	    dots: true,
-		  responsive: [
-			{
-			  breakpoint: 3000,
-			  settings: {
-			        arrows:true,
-				  	centerPadding: '20px',
-				  	centerMode: true,
-			        slidesToShow: 3,
-			        slidesToScroll: 3,
-			  },
-			  breakpoint: 640,
-			  settings: {
-				  	centerPadding: '10px',
-				  	centerMode: false,
-			        slidesToShow: 1,
-			        slidesToScroll: 1,
-			  }
-			}		
-		  ]
-	});	
-	
+
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
 			var objDiv = $("<div/>",{'class':'photo'});
 			var objImg = value;
 			$(objImg).appendTo(objDiv);
-			$(Slider).slick('addSlide',	objDiv)		
+			$(objDiv).appendTo(Slider);
+			$(objImg).click(function(event){
+		    	$("#spinningSquaresG").show();
+		 		$('#one').hide();		 
+		 		$('#two').hide();
+		 		$('#three').show();
+				marker_infoType = infoType;
+				// map initialization
+		 		initialize();
+		 		initMenuList();	 		
+		 		window.location.hash = '#Details';
+		 		$("#spinningSquaresG").hide();
+			});					
 		});
 	}
 	else{
 		fnBlankSlide(Slider);
 	}
 	
+	$(Slider).owlCarousel({
+		items:3,
+		navigation:true,
+		navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
+		pagination:true
+	});
 	var click = new Date();
 	var lastClick = new Date();
 	var lastRow = -1;
-	$(Slider).click(function(event){
-		/*click = new Date();
-	    if (click - lastClick < 300) {*/
-	    	$("#spinningSquaresG").show();
-	 		$('#one').hide();		 
-	 		$('#two').hide();
-	 		$('#three').show();
-			marker_infoType = infoType;
-			// map initialization
-	 		initialize();
-	 		initMenuList();	 		
-	 		window.location.hash = '#Details';
-	 		$("#spinningSquaresG").hide();
-	    /*}
-	    lastClick = new Date();*/
-	});	
 }
 
 function fnBlankSlide(Slider){
@@ -300,7 +271,7 @@ function fnBlankSlide(Slider){
 	var objBlankSlide = $("<div/>",{'class':'eventDetailBox', 'style':'padding-top: 25% !important;'});
 	$(objBlankSlide).appendTo(objBlankSlide1);
 	$(objBlankSlide).html(temp_html);
-	$(Slider).slick('addSlide',	objBlankSlide1);			
+	$(objBlankSlide1).appendTo(Slider);
 }
 
 $(document).ready(function(){
@@ -308,9 +279,6 @@ $(document).ready(function(){
 	$(".cssback").click(function(){
 		$('#one').show();
 		$('#two').hide();
-		$('.Carousel').each(function(){
-			$(this).slick('unslick');
-		});
 	});
 	//Search options
 	jQuery.expr[':'].case_insensitive_contains = function(a, i, m) {
@@ -455,7 +423,6 @@ function initMenuList(){
 		arr.push(key); // get JSON array length
 	}
 	len = arr.length;
-	console.log(len);
 	if(len>0){
 		//var menuContainer = $("#jqxWidget"); //tab main div
 		var menuArray = [];
@@ -471,17 +438,16 @@ function initMenuList(){
 			}
 		}
 		$(ulObj).appendTo($(menuContainer));
-		
+		var screenWidth = $(document).width();		
 		$.each(menuArray,function(a,b){
-			var divObj = $("<div/>",{"class":b});
-			var divSlider = $("<div/>",{"class":"MainSlider","style":"width:95%"});
+			var divObj = $("<div/>",{"class":b + " Carousel"});
+			var divSlider = $("<div/>",{"class":"MainSlider"});
 			$.each(eventDetailJSON,function(x,y){
 				var EventDetailJSON = $.parseJSON(y.EventDetail);
 				if(EventDetailJSON.infoTypeCategoryName == b){
-					var divSlideObj = $("<div/>",{"class":"infoDetailSlide","style":"width:95%"});
-					//console.log("_eventModel.DETAIL_DATA_MODEL."+EventDetailJSON.infoTypeCategoryName.toUpperCase());
+					var divSlideObj = $("<div/>",{"class":"photo"});
 					var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+EventDetailJSON.infoTypeCategoryName.toUpperCase()); //_eventModel.
-					var objtbl = $("<table/>",{'cellpadding':'5px','width':'100%'});
+					var objtbl = $("<table/>",{'cellpadding':'5px','width':'300px'});
 					$.each(objFields, function(idx, obj){
 						$.each(obj,function(key,value){
 							var objtr = $("<tr/>");
@@ -498,13 +464,8 @@ function initMenuList(){
 					$(divSlider).appendTo($(divObj));														
 				}
 			});
-			$(divSlider).slick({
-					speed: 300,
-					variableWidth: false,
-					infinite: false,
-					dots: true
-			});					
-			$(divObj).appendTo($(menuContainer));					
+			$(divSlider).owlCarousel();
+			$(divObj).appendTo(menuContainer);					
 		});
 		$(menuContainer).jqxTabs({ 
 			width: '100%',

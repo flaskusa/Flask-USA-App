@@ -27,6 +27,7 @@
 <aui:script use="array-extras">
 	$(document).ready(function(){
 		initEventList();
+	  	//$("#owl-example").owlCarousel();
 	});
 </aui:script>
 
@@ -115,10 +116,6 @@
         <!-- -->
         <li class="weather-item wind">Wind: <span id="wind-direction"></span> <span id="wind"></span> <span id="speed-unit"></span></li>
       </ul>
-    </div>
-    <div class="temp-change">
-      <button id="celsius" class="temp-change-button celsius">&deg;C</button>
-      <button id="fahrenheit" class="temp-change-button fahrenheit">&deg;F</button>
     </div>
     <div style="align: center;">
    		<div id="forecast_small" style="font-size: 14px; text-align:center; display: inline-block;"></div>

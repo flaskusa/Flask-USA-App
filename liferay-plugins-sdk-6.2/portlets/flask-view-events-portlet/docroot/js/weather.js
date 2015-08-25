@@ -143,7 +143,7 @@ WeatherInfo = {
         $('#weather-background').removeClass();
         $('#weather-background').addClass(condition.toLowerCase());
         $('#weather-background').addClass(w.dayOrNight);
-        w.fahrenheitButton.click();
+        //w.fahrenheitButton.click();
     },
 
     getWeatherDirection: function() {

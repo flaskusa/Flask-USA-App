@@ -414,9 +414,9 @@ input.btn.btn-info.cssback {
 	}
 	
 	.slider .slide {height: 100%!important;}
-	/*.slick-slide {
+	.slick-slide {
 		padding:5px !important; 
-	}*/		
+	}		
 	
 	.aui [class*="span"], .aui .uneditable-input[class*="span"], .aui .row-fluid [class*="span"]{
 		float: left !important;
@@ -447,6 +447,26 @@ input.btn.btn-info.cssback {
     	width: 50px !important;
     	height: 50px !important;
     }	
+
+	.owl-theme .owl-controls .owl-buttons div {
+	    position: absolute;
+    	margin: 9px !important;
+    	padding: 10px 5px !important;;
+	}
+	
+	.owl-theme .owl-controls .owl-buttons .owl-prev{
+	  left: 0px !important;
+	  top: 70px !important; 
+	}
+	 
+	.owl-theme .owl-controls .owl-buttons .owl-next{
+	  right: 0px !important;
+	  top: 70px !important;
+	}		
+	
+	.owl-pagination {
+ 	   margin-top: -35px !important;
+	}
 }		
 
 @media (min-width: 641px) and (max-width: 3000px){
@@ -538,8 +558,7 @@ input.btn.btn-info.cssback {
 	
 	.Carousel{
 		width:100% !important;
-		margin-left:45px;
-		margin-right:45px;
+		max-height: 274px !important;
 	}	
 	
 	.slick-slide {
@@ -571,7 +590,32 @@ input.btn.btn-info.cssback {
 	
 	.aui [class*="span"], .aui .uneditable-input[class*="span"], .aui .row-fluid [class*="span"]{
 		float: left !important;
+		border-color: white !important;
 	}		
+	
+	.SliderCaption{
+	    min-height: 350px !important;
+	}
+	
+	.owl-theme .owl-controls .owl-buttons div {
+	    position: absolute;
+    	margin: 9px !important;
+    	padding: 13px 8px !important;;
+	}
+	
+	.owl-theme .owl-controls .owl-buttons div {
+	  position: absolute;
+	}
+	 
+	.owl-theme .owl-controls .owl-buttons .owl-prev{
+	  left: -45px;
+	  top: 115px; 
+	}
+	 
+	.owl-theme .owl-controls .owl-buttons .owl-next{
+	  right: -45px;
+	  top: 115px;
+	}	
 }	
 
 .jqx-tabs-headerWrapper {
@@ -655,4 +699,8 @@ input.btn.btn-info.cssback {
     padding: 10px;
     background-color: black;
     color: antiquewhite;
+}
+
+.jqx-tabs-content{
+	min-height: 250px !important;
 }

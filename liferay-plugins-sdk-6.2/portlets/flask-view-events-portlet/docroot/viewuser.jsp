@@ -35,23 +35,24 @@
 	});
 </aui:script>
 <body>
+<div id="viewEvents">
 <div class="table-responsive">          
 <div id="one">
-	<table id="viewevent">
-	    <tbody>
-			<tr>
-		         <td class="gap">
-					<input  type="text" placeholder="SEARCH:" id="txtSearch">
-		         </td>
-		         <td>
-					<div id="reportrange" class="pull-right">
-					    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
-					    <span></span> <b class="caret"></b>
-					</div>	         
-		         </td>
-	      	</tr>
-	    </tbody>
-	</table>
+  <table id="viewevent">
+    <tbody>
+		<tr>
+	         <td class="gap">
+				<input  type="text" placeholder="SEARCH:" id="txtSearch">
+	         </td>
+	         <td>
+				<div id="reportrange" class="pull-right">
+				    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+				    <span></span> <b class="caret"></b>
+				</div>	         
+	         </td>
+      	</tr>
+    </tbody>
+  </table>
     <div id="container1">
 		<div class="container-fluid fill" id="placeholder">
 		</div>
@@ -60,7 +61,6 @@
  </div>
     
  <div id="two" style="display:none; width:100%;">
- 	<div style="overflow: hidden; display:none" id="ContentPanel"></div>
 	<div class="container-fluid">
 		<div class="row-fluid fullwidth">
 		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div>
@@ -91,41 +91,12 @@
 <div id="three" style="display:none; width:100%;">
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places" type="text/javascript"></script>
 	<div id="gmap_canvas"></div>
-	<div class="menustrip">
-		<div class="menuItem">
-			<div class="menuText">
-				LOCAL NEWS
-			</div>
-			<div class="menuText">
-				BATHROOMS
-			</div>
-			<div class="menuText">
-				NOTIFICATION
-			</div>
-			<div class="menuText">
-				PROMOTIONS
-			</div>
-		</div>				
-	</div>	
+	<div id='jqxWidget'></div>
 </div>
 
-	<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
-    <div id="fixedfooter">
-	    <table>
-            <tr>
-                <td class="footertxt">
-                    <img src="<%=request.getContextPath()%>/img/sym.png" class="footerimg" />
-                </td>
-                <td class="asans"><b>FREE PINT WITH A BURGER</b>
-                <br/>
-                <span class="gochi" >BETWEEN 11:00 AM - 2:30 PM</span>
-                <br/>
-                <span class="gochi">ON GAMEDAY!</span>
-                </td>
-            </tr>
-        </table>
-	</div>
-	
+<input id="repositoryId" type="hidden" value="<%=repositoryId%>">
+
+</div>
 <div class="hide">
 <div id="weather-background" class="default-weather">
 <div class="page-wrap">
@@ -149,10 +120,6 @@
         <li class="weather-item wind">Wind: <span id="wind-direction"></span> <span id="wind"></span> <span id="speed-unit"></span></li>
       </ul>
     </div>
-    <div class="temp-change">
-      <button id="celsius" class="temp-change-button celsius">&deg;C</button>
-      <button id="fahrenheit" class="temp-change-button fahrenheit">&deg;F</button>
-    </div>
     <div style="align: center;">
    		<div id="forecast_small" style="font-size: 14px; text-align:center; display: inline-block;"></div>
    	</div>
@@ -161,5 +128,4 @@
 </div>
 </div>
 </div>
-	
 </body>
