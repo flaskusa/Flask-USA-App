@@ -1,15 +1,14 @@
 var _startPos = 0;
 var _endPos = 9;
 function initContactList(startPos,endPos){
-	if(startPos>0)
-		$("#prev").show();
 	var companyId = $("#CompanyId").val();
 	var searchString = $(".search-query").val();
 	var params = {companyId: companyId,keywords: searchString,start: startPos,end: endPos};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_ALL_CONTACTS , params, 
 		function (data){
-			renderContactList(data,false);
+			if(data.length>0)
+				renderContactList(data,false);
 		} ,
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
@@ -17,15 +16,16 @@ function initContactList(startPos,endPos){
 }
 
 function initFriendList(startPos,endPos){
-	if(startPos>0)
-		$("#prev").show();
 	var companyId = $("#CompanyId").val();
 	var searchString = $(".search-query").val();
 	var params = {companyId: companyId,keywords: searchString,start: startPos,end: endPos};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_MY_FRIENDS , params, 
 		function (data){
-			renderContactList(data,true);
+			if(data.length>0)
+				renderContactList(data,true);
+			else{
+			}
 		} ,
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
@@ -139,13 +139,19 @@ function fnBuildMenu(obj){
 function fnShowNextRecords(){
 	_startPos = _startPos + 10;
 	_endPos = _endPos + 10;
-	initContactList(_startPos,_endPos);
+	if($(".active").attr("id")=="Friends")
+		initFriendList(_startPos,_endPos);
+	else
+		initContactList(_startPos,_endPos);
 }
 
 function fnShowPrevRecords(){
 	_startPos = _startPos - 10;
 	_endPos = _endPos - 10;
-	initContactList(_startPos,_endPos);
+	if($(".active").attr("id")=="Friends")
+		initFriendList(_startPos,_endPos);
+	else
+		initContactList(_startPos,_endPos);
 }
 
 
