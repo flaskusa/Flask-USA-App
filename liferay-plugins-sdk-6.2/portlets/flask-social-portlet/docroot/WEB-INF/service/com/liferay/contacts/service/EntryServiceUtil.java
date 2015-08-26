@@ -132,6 +132,13 @@ public class EntryServiceUtil {
 		getService().requestSocialRelation(receiverUserId, serviceContext);
 	}
 
+	public static int getRequestsCount(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getRequestsCount(serviceContext);
+	}
+
 	public static void deleteSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {

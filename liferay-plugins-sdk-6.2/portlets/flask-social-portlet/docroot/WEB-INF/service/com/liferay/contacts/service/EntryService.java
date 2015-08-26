@@ -117,6 +117,12 @@ public interface EntryService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception;
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getRequestsCount(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	public void deleteSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception;

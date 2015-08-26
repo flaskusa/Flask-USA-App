@@ -189,6 +189,9 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 			sendNotificationEvent(socialRequest);
 	}
 	
+	public int getRequestsCount(ServiceContext serviceContext)throws PortalException, SystemException{
+		return SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(serviceContext.getUserId(), 3);
+	}
 	
 	protected void sendNotificationEvent(SocialRequest socialRequest)
 			throws Exception {

@@ -90,9 +90,15 @@ public class EntryServiceClp implements EntryService {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName12 = "deleteSocialRelation";
+		_methodName12 = "getRequestsCount";
 
 		_methodParameterTypes12 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName13 = "deleteSocialRelation";
+
+		_methodParameterTypes13 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -485,12 +491,47 @@ public class EntryServiceClp implements EntryService {
 	}
 
 	@Override
+	public int getRequestsCount(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName12,
+					_methodParameterTypes12,
+					new Object[] { ClpSerializer.translateInput(serviceContext) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
 	public void deleteSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
-			_invokableService.invokeMethod(_methodName12,
-				_methodParameterTypes12,
+			_invokableService.invokeMethod(_methodName13,
+				_methodParameterTypes13,
 				new Object[] {
 					receiverUserId,
 					
@@ -539,4 +580,6 @@ public class EntryServiceClp implements EntryService {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
+	private String _methodName13;
+	private String[] _methodParameterTypes13;
 }

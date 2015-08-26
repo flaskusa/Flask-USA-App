@@ -199,6 +199,21 @@ public class EntryServiceSoap {
 		}
 	}
 
+	public static int getRequestsCount(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			int returnValue = EntryServiceUtil.getRequestsCount(serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {

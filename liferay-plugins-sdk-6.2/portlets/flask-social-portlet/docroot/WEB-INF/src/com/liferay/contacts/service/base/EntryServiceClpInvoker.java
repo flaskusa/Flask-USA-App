@@ -90,9 +90,15 @@ public class EntryServiceClpInvoker {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName36 = "deleteSocialRelation";
+		_methodName35 = "getRequestsCount";
 
-		_methodParameterTypes36 = new String[] {
+		_methodParameterTypes35 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName37 = "deleteSocialRelation";
+
+		_methodParameterTypes37 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -178,8 +184,13 @@ public class EntryServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName36.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
+		if (_methodName35.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
+			return EntryServiceUtil.getRequestsCount((com.liferay.portal.service.ServiceContext)arguments[0]);
+		}
+
+		if (_methodName37.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
 			EntryServiceUtil.deleteSocialRelation(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
@@ -211,6 +222,8 @@ public class EntryServiceClpInvoker {
 	private String[] _methodParameterTypes33;
 	private String _methodName34;
 	private String[] _methodParameterTypes34;
-	private String _methodName36;
-	private String[] _methodParameterTypes36;
+	private String _methodName35;
+	private String[] _methodParameterTypes35;
+	private String _methodName37;
+	private String[] _methodParameterTypes37;
 }

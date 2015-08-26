@@ -134,6 +134,14 @@ public class EntryServiceWrapper implements EntryService,
 	}
 
 	@Override
+	public int getRequestsCount(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _entryService.getRequestsCount(serviceContext);
+	}
+
+	@Override
 	public void deleteSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
