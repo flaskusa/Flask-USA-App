@@ -27,14 +27,9 @@
 <body class='default'>
 <div id="invitation-msg" style="display: none"></div>
 <div id='formContainer'>
-<h3 style="text-align: center;">Enter Email to Send Invitation</h3>
+<h3 style="text-align: center;">Invite friends</h3>
 <form class="form-horizontal" id="emailNotificationForm">
 <!-- Text input-->
-<div class="control-group">
-  <div class="controls">
-    <input id="Add5More" class="btn btn-info clsAdd5More" type="button" value="Add 5 More" />
-  </div>
-</div>
 <div class="divHeight">
 <!-- Text input-->
 <div class="control-group">
@@ -78,6 +73,7 @@
   </div>
 </div>
 </div>
+
 <div class="control-group">
 	<label class="control-label" for="tailgateName">Description </label>
 		<div class="controls">
@@ -88,10 +84,13 @@
 </div>
 <div class="control-group">
 	<div class="controls">
-		<input id="Ok" class="btn btn-info clsSave" type="button" value="Ok" />
-		<input class="btn btn-primary clsCancel" type="button" value="Cancel">
+		<input id="Ok" class="btn btn-primary clsSave" type="button" value="Ok" />
+		<input class="btn btn-info clsCancel" type="button" value="Cancel">
+		<input id="Add5More" class="btn btn-info clsAdd5More" type="button" title="Add 5 more rows to invite friends" value="Add rows" />	
+		
 	</div>
 </div>
+
 </form>
 </div>
 </body>
