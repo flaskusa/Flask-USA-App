@@ -124,11 +124,11 @@ boolean actionable = ParamUtil.getBoolean(request, "actionable");
 			    fnShowEventLogo(flaskUser.uuid, objTd1,false);		    
 			    var userName_lbl = $('<label/>',{'class':'control-label-color'});
 			    $(userName_lbl).html(flaskUser.fullName);
-			    var objTd2 = $('<td/>',{'data-id':flaskUser.userId,'data-uuid':flaskUser.uuid});
+			    var objTd2 = $('<td/>',{'data-id':flaskUser.userId,'data-uuid':flaskUser.uuid, 'style':'width: 250px;'});
 			    
 			    $(userName_lbl).appendTo($(objTd2));
 			    $(objTd2).appendTo(objTr);
-			    var objTd3 = $('<td/>',{'rowspan':'2','align':'right','valign':'top', 'style':'padding-left:35px;'});
+			    var objTd3 = $('<td/>',{'rowspan':'2','align':'right','valign':'top'});
 			    console.log(flaskUser);
 		    	var div_heart = fnBuildRequestMenu(flaskUser, objTable);
 		    	
@@ -153,7 +153,7 @@ boolean actionable = ParamUtil.getBoolean(request, "actionable");
 		var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')'});
 		$(objdiv).appendTo($(container));
 	}
-	function fnBuildRequestMenu(obj,htmlObject){
+	function fnBuildRequestMenu(obj, htmlObject){
 		 var IsBlocked = obj.block;
 		 var UserId = obj.userId;
 		 var dropdown = $('<div/>',{'class':'dropdown'});
@@ -164,7 +164,7 @@ boolean actionable = ParamUtil.getBoolean(request, "actionable");
 		   var buttonAccept = $('<button/>',{'class':'btn btn-primary','type':'button'})
 		   buttonAccept.html('Confirm');
 		   buttonAccept.click(function(){
-		    acceptFriendRequest(UserId,htmlObject);
+		    acceptFriendRequest(UserId, htmlObject);
 		   });
 		   var buttonReject = $('<button/>',{'class':'btn btn-primary','type':'button','style':'margin-left: 10px;', 'onclick':'ignoreFriendRequest('+UserId+','+htmlObject+');'})
 		   buttonReject.html('Ignore');
@@ -181,8 +181,9 @@ boolean actionable = ParamUtil.getBoolean(request, "actionable");
 				    receiverUserId: UserId
 				  },
 				  function(obj) {
-					  //initFriendList(_startPos,_endPos);
 					  $(obj).hide();
+					  initFriendList(_startPos,_endPos);
+					  
 				  }
 				);
 		}
