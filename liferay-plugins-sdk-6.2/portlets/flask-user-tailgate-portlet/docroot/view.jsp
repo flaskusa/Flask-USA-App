@@ -22,6 +22,16 @@ function initialize(portletId, portlet){
 		loadData();
 		addClickHandlers();
 		initForm();
+		$("#startTime").datetimepicker({
+			format: "LT"
+			//pickDate: false,  
+			//pick12HourFormat: true
+		});
+		$("#endTime").datetimepicker({
+			format: "LT"
+			//pickDate: false, 
+			//pick12HourFormat: true
+		});
 	}
 }
 </aui:script>
@@ -86,14 +96,14 @@ function initialize(portletId, portlet){
 		   <div class="form-group">
 		    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
 		    <div class="controls">
-		      <div id="startTime"></div>
+		      <input type='text' class="form-control" id='startTime' />
 		    </div>
 		  </div>
 		
-			<div class="form-group">
+		  <div class="form-group">
 			<label  id="EndTime" class="control-label" for="endTime">End Time:</label>
 		    	<div class="controls">
-		    		 <div id="endTime"></div>
+		    		 <input type='text' class="form-control" id='endTime' />
 		    	</div>
 		  </div>
 		  <br/>
