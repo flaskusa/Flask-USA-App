@@ -227,15 +227,22 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 
 function fnSlider(infoType,arrImage,eventId,venueId){
 	var Slider = "#wowslider-container"+infoType;
+	$(Slider).html("");
+	$(Slider).attr("class","Carousel");
 	$(Slider).attr('data-eventId',eventId);
 	$(Slider).attr('data-venueId',venueId);
-
+	$(Slider).owlCarousel({
+		items:3,
+		navigation:true,
+		navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
+		pagination:true
+	});
+	
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
 			var objDiv = $("<div/>",{'class':'photo'});
 			var objImg = value;
 			$(objImg).appendTo(objDiv);
-			$(objDiv).appendTo(Slider);
 			$(objImg).click(function(event){
 		    	$("#spinningSquaresG").show();
 		 		$('#one').hide();		 
@@ -247,19 +254,20 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 		 		initMenuList();	 		
 		 		window.location.hash = '#Details';
 		 		$("#spinningSquaresG").hide();
-			});					
+			});
+			$(Slider).data('owlCarousel').addItem(objDiv);
 		});
 	}
 	else{
 		fnBlankSlide(Slider);
 	}
 	
-	$(Slider).owlCarousel({
+	/*$(Slider).owlCarousel({
 		items:3,
 		navigation:true,
 		navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
 		pagination:true
-	});
+	});*/
 	var click = new Date();
 	var lastClick = new Date();
 	var lastRow = -1;
@@ -360,7 +368,6 @@ function setMyEvent(_eventId,_userEvent){
 	}else{
 		removeUserEvent(eventId);
 	}
-	
 }
 function initEventList(){
 	if(showAllEvents){
@@ -418,7 +425,9 @@ function getVenueData(venueId){
 
 function initMenuList(){
 	var arr = [], len;
-	var menuContainer = $("#jqxWidget"); 
+	var menuContainer = $("#jqxWidget");
+	menuContainer.html("");
+	var divTabs = $("<div/>",{'style':'width:100%;height:100%'});
 	for(key in eventDetailJSON) {
 		arr.push(key); // get JSON array length
 	}
@@ -437,11 +446,14 @@ function initMenuList(){
 				$(liObj).appendTo($(ulObj));
 			}
 		}
-		$(ulObj).appendTo($(menuContainer));
+		$(ulObj).appendTo(divTabs);
 		var screenWidth = $(document).width();		
 		$.each(menuArray,function(a,b){
+			console.log(a);
+			console.log(b);
 			var divObj = $("<div/>",{"class":b + " Carousel"});
 			var divSlider = $("<div/>",{"class":"MainSlider"});
+			$(divSlider).owlCarousel();
 			$.each(eventDetailJSON,function(x,y){
 				var EventDetailJSON = $.parseJSON(y.EventDetail);
 				if(EventDetailJSON.infoTypeCategoryName == b){
@@ -459,19 +471,20 @@ function initMenuList(){
 							$(objtr).appendTo($(objtbl));
 						});
 						$(objtbl).appendTo($(divSlideObj));							
-						$(divSlideObj).appendTo($(divSlider));								
+						$(divSlider).data('owlCarousel').addItem(divSlideObj);
 					});	
 					$(divSlider).appendTo($(divObj));														
 				}
 			});
-			$(divSlider).owlCarousel();
-			$(divObj).appendTo(menuContainer);					
+			$(divObj).appendTo(divTabs);
+			$(divTabs).appendTo(menuContainer);					
 		});
-		$(menuContainer).jqxTabs({ 
+		
+		$(divTabs).jqxTabs({ 
 			width: '100%',
 			height: '100%',
 			scrollPosition: 'both'
-		});		
+		});	
 	}
 	else{
 		$(menuContainer).html("No data found");
