@@ -87,7 +87,7 @@ AUI.add(
 											var timestamp = response.timestamp;
 											var unreadUserNotificationsCount = response.unreadUserNotificationsCount;
 
-											instance._updateDockbarNotificationsCount(newUserNotificationsCount, timestamp, unreadUserNotificationsCount);
+											//instance._updateDockbarNotificationsCount(newUserNotificationsCount, timestamp, unreadUserNotificationsCount);
 										}
 									}
 								}
@@ -124,7 +124,7 @@ AUI.add(
 							if (dockbarUserNotificationsCount) {
 								dockbarUserNotificationsCount.toggleClass('alert', (newUserNotificationsCount > 0));
 
-								dockbarUserNotificationsCount.setHTML(unreadUserNotificationsCount);
+								//dockbarUserNotificationsCount.setHTML(unreadUserNotificationsCount);
 							}
 						}
 					}
@@ -377,7 +377,7 @@ AUI.add(
 											var notificationsCountNode = notificationsContainer.one(instance._notificationsCount);
 
 											if (notificationsCountNode) {
-												notificationsCountNode.setHTML(newTotalUuserNotificationEventsCount);
+												//notificationsCountNode.setHTML(newTotalUuserNotificationEventsCount);
 											}
 
 											var entries = [];
