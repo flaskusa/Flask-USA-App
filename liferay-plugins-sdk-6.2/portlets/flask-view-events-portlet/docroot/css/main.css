@@ -704,3 +704,7 @@ input.btn.btn-info.cssback {
 .jqx-tabs-content{
 	min-height: 250px !important;
 }
+
+.MainSlider .owl-controls .owl-pagination {
+    margin-top: 50px !important;
+}
