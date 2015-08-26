@@ -22,6 +22,7 @@
 	int newUserNotificationsCount = UserNotificationEventLocalServiceUtil.getDeliveredUserNotificationEventsCount(themeDisplay.getUserId(), false);
 	int unreadUserNotificationsCount = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(themeDisplay.getUserId(), 3);
 
+	System.out.println(unreadUserNotificationsCount);
 	long notificationsPlid = themeDisplay.getPlid();
 
 	if (layout.isTypeControlPanel()) {
@@ -65,13 +66,27 @@
 							<portlet:param name="actionable" value="<%= Boolean.TRUE.toString() %>" />
 						</liferay-portlet:renderURL>
 
-						<span class="title"><a href="<%= viewAllActionableNotifications %>"><liferay-ui:message key="requests" /> (<span class="count"></span>)</a></span>
+						<span class="title"><a href="<%= viewAllActionableNotifications %>"><liferay-ui:message key="requests" /> (<%= unreadUserNotificationsCount %>)</a></span>
 					</div>
 
 					<div class="user-notifications"></div>
 				</div>
 			</ul>
 		</div>
+
+<script>
+function getRequestCount(){
+	var cnt = "#RequestCount";
+	  $(cnt).html("");
+	Liferay.Service(
+			  '/flask-social-portlet.entry/get-requests-count',
+			  function(obj) {
+				  var divCnt = $('<div style="display: -webkit-inline-box;">'+obj+'</div>');
+				  $(divCnt).appendTo($(cnt));
+			  }
+			);
+}
+</script>
 
 		<aui:script use="aui-base,liferay-plugin-dockbar-notifications,liferay-plugin-notifications-list">
 			var nonActionableNotificationsList = new Liferay.NotificationsList(
