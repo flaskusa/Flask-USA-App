@@ -459,7 +459,7 @@ function initMenuList(){
 				if(EventDetailJSON.infoTypeCategoryName == b){
 					var divSlideObj = $("<div/>",{"class":"photo"});
 					var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+EventDetailJSON.infoTypeCategoryName.toUpperCase()); //_eventModel.
-					var objtbl = $("<table/>",{'cellpadding':'5px','width':'300px'});
+					var objtbl = $("<table/>",{'cellpadding':'5px','width':screenWidth + 'px'});
 					$.each(objFields, function(idx, obj){
 						$.each(obj,function(key,value){
 							var objtr = $("<tr/>");
