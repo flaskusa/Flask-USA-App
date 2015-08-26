@@ -15,8 +15,13 @@
 <aui:script use="array-extras">
 	$(document).ready(function(){
 		$("#prev").hide();
-		initFriendList(_startPos,_endPos);
 		initSearch();
+		initFriendList(_startPos,_endPos);
+		$("#frnds").click(function(){
+			$("#prev").hide();
+			initSearch();
+			initFriendList(_startPos,_endPos);	
+		});
 		$("#mcontents").click(function(){
 			initContactList(_startPos,_endPos);			
 		});
@@ -31,7 +36,7 @@
 	<div id="action-msg" style="display:none"></div>
 	<div id='formContainer'>
 		<ul class="nav nav-tabs">
-		  <li class="active"><a href="#Friends" data-toggle="tab">My friends</a></li>
+		  <li class="active"><a href="#Friends" data-toggle="tab" id="frnds">My friends</a></li>
 		  <li><a href="#SearchNewFriends" data-toggle="tab" id="mcontents">Search friends</a></li>
 		  <li><a href="#Notifications" data-toggle="tab" id="notifications">Notifications</a></li>  
 		</ul>
@@ -74,7 +79,7 @@
 					<div class="container">
 					  <div class="panel-group">
 					    <div class="panel panel-default">
-					      <div class="panel-heading">Friend Requests (<span id="RequestCount"><%=unreadActionableUserNotificationsCount%></span>)</div>
+					      <div class="panel-heading">Friend Requests (<span id="RequestCount"></span>)</div>
 					      <div class="panel-body" id="MyFriendRequests">No friend request found</div>
 					    </div>
 					    <div class="panel panel-default">
