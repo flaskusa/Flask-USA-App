@@ -168,7 +168,6 @@ GRID_PARAM.rowDetailTemplate = function(tabs, height)
 }
 
 
-
 function formatUnixToTime(tdate)
 {
 	var date = new Date(tdate);
@@ -178,8 +177,11 @@ function formatUnixToTime(tdate)
 	hours = hours % 12;
 	return hours + ':' + minutes.substr(-2) + ' ' + ampm;
 }
+
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord){
+	
 	var tabsdiv = null; 
+	console.log(datarecord);
 	//_flaskLib.loadCountries('venueCountryId',datarecord.venueCountryId);
 	//_flaskLib.loadUSARegions('venueStateId',datarecord.venueStateId);
 
@@ -196,7 +198,9 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		
 		var leftcolumn = $('<div class="span5"></div>');
 		var rightcolumn = $('<div class="span5"></div>');
-		
+		var d = new Date(datarecord.tailgateDate);
+		var d1 = formatUnixToTime(datarecord.startTime);
+		var d2 = formatUnixToTime(datarecord.endTime);
 		container1.append(leftcolumn);
 		container1.append(rightcolumn);
 	
@@ -207,11 +211,11 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 	    var eventName = "<tr><td class='filledWidth'><b>Event Name :</b></td><td> "
 			+ datarecord.eventName + "</td></tr>";
 	    var eventDate = "<tr><td class='filledWidth'><b>Tailgate Date :</b></td><td> "
-			+ datarecord.tailgateDate + "</td></tr>";
+			+ GRID_PARAM.formatDate(d) + "</td></tr>";
 		var startTime = "<tr><td class='filledWidth'> <b>Start Time:</b></td><td>"
-				+ datarecord.startTime + "</td></tr>";
+				+ d1 + "</td></tr>";
 		var endTime = "<tr><td class='filledWidth'><b>End Time:</b></td><td>"
-				+ datarecord.endTime + "</td></tr>";
+				+ d2 + "</td></tr>";
 		
 		 
 		$(leftcolumn).append("<table>");
@@ -393,7 +397,7 @@ function createTailgateUserTable(data, grid){
                 selectionmode: 'checkbox',
                 showrowdetailscolumn:false,
 //                rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
-//                initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
+                initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
                 columns: eventsColumns
             });
     
@@ -440,3 +444,7 @@ function createTailgateGroupTable(data, grid){
             });
     
 	}
+GRID_PARAM.formatDate = function (dateVal){
+	var dateObj = new Date(dateVal);
+	return dateObj.toLocaleDateString(); 
+}

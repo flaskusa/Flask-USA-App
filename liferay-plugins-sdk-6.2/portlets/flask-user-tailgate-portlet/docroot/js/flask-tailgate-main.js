@@ -147,23 +147,34 @@ var getSelectedtailgateDate = function(contentToIterate,eventId,element){
 			var date = new Date(event.eventDate);
 			var formatDate = date.getMonth()+1+"-"+date.getDate()+"-"+date.getFullYear();
 			$("#" + element).val(formatDate);
-			var stime = new Date(event.startTime);
-			var etime = new Date(event.endTime);
-			$("#startTime").jqxDateTimeInput({formatString: "hh:mm tt",value:stime});
-			$("#endTime").jqxDateTimeInput({formatString: "hh:mm tt",value:etime});
+			
+			var sTime = new Date(parseInt(event.startTime));
+			$('#startTime').val(formatUnixToTime(sTime));
+			var eTime = new Date(parseInt(event.endTime));
+			$('#endTime').val(formatUnixToTime(eTime));
 			$("#eventName").val(event.eventName);
 			return false;
 		}
 	});
 };
+
+function formatUnixToTime(tdate)
+{
+	var date = new Date(tdate);
+	var hours = date.getHours();
+	var minutes = "0" + date.getMinutes();
+	var ampm = hours >= 12 ? 'PM' : 'AM';
+	hours = hours % 12;
+	return hours + ':' + minutes.substr(-2) + ' ' + ampm;
+}
 var loadTailgateDateAndTime = function(tailgate,element){
 			var date = new Date(tailgate.tailgateDate);
 			var formatDate = date.getMonth()+1+"-"+date.getDate()+"-"+date.getFullYear();
 			$("#" + element).val(formatDate);
-			var stime = new Date(tailgate.startTime);
-			var etime = new Date(tailgate.endTime);
-			$("#startTime").jqxDateTimeInput({formatString: "hh:mm tt",value:stime});
-			$("#endTime").jqxDateTimeInput({formatString: "hh:mm tt",value:etime});
+			var sTime = new Date(parseInt(tailgate.startTime));
+			$('#startTime').val(formatUnixToTime(sTime));
+			var eTime = new Date(parseInt(tailgate.endTime));
+			$('#endTime').val(formatUnixToTime(eTime));
 			$("#eventName").val(tailgate.eventName);
 			$("#tailgateId").val(tailgate.tailgateId);
 };
@@ -224,12 +235,12 @@ function deleteMultipleTailgatess(tailgateList) {
 					} ,
 					function (data){
 							_flaskLib.showErrorMessage('action-msg', _tailgateModel.MESSAGES.DEL_ERR);
-					});
-	
+					});	
 }
 
 /* Edit Event */
 function editTailgate(rowData) {
+	console.log(rowData);
 	_flaskLib.hideMessage('action-msg');
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("tailgateForm",  _tailgateModel.DATA_MODEL.TAILGATE, rowData, function(){});
@@ -257,16 +268,19 @@ function loadEventAndTime(elementId,tailgateId){
 
 /* Save Event */
 function saveTailgate(){
+	var st=$("#startTime").val();
+    var et=$("#endTime").val();
+    var d= $("#tailgateDate").val();
+    var sTime=Date.parse(d+" "+st);
+    var eTime=Date.parse(d+" "+et);
 		var isForUpdate = false;
 		var tailgateDate=$("#tailgateDate").val();
 		tailgateDate = new Date(tailgateDate);
-		var stime = $("#startTime").jqxDateTimeInput('value');
-		var etime = $("#endTime").jqxDateTimeInput('value');
 		params = _flaskLib.getFormData('tailgateForm',_tailgateModel.DATA_MODEL.TAILGATE,
 					function(formId, model, formData){
-		                    formData.startTime= stime.getTime();
-		                    formData.endTime= etime.getTime()	;
-		                    formData.tailgateDate = tailgateDate.getTime();
+							formData.startTime= sTime;
+							formData.endTime= eTime;		
+		                    formData.tailgateDate = sTime;
 							return formData;
 					});
 		var flaskRequest = new Request();
@@ -340,8 +354,8 @@ function leaveTailgateUser(tailgateId, userId) {
 
 function initForm(){
 		var repositoryId = $("#repositoryId").val();
-		$("#startTime").jqxDateTimeInput({ width: '100px', height: '23px', formatString: 'hh:mm tt', showTimeButton: true, showCalendarButton: false});
-		$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'hh:mm tt', showTimeButton: true, showCalendarButton: false});
+		//$("#startTime").jqxDateTimeInput({ width: '100px', height: '23px', formatString: 'hh:mm tt', showTimeButton: true, showCalendarButton: false});
+		//$("#endTime").jqxDateTimeInput({ width: '250px', height: '25px', formatString: 'hh:mm tt', showTimeButton: true, showCalendarButton: false});
 }
 
 function fnBuildEventUpload(imageContainer){
