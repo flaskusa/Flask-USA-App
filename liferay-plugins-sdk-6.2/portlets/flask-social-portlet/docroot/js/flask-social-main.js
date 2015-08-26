@@ -1,14 +1,15 @@
 var _startPos = 0;
 var _endPos = 9;
 function initContactList(startPos,endPos){
+	if(startPos>0)
+		$("#prev").show();
 	var companyId = $("#CompanyId").val();
 	var searchString = $(".search-query").val();
 	var params = {companyId: companyId,keywords: searchString,start: startPos,end: endPos};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_ALL_CONTACTS , params, 
 		function (data){
-			if(data.length>0)
-				renderContactList(data,false);
+			renderContactList(data,false);
 		} ,
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
@@ -16,16 +17,15 @@ function initContactList(startPos,endPos){
 }
 
 function initFriendList(startPos,endPos){
+	if(startPos>0)
+		$("#prev").show();
 	var companyId = $("#CompanyId").val();
 	var searchString = $(".search-query").val();
 	var params = {companyId: companyId,keywords: searchString,start: startPos,end: endPos};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_MY_FRIENDS , params, 
 		function (data){
-			if(data.length>0)
-				renderContactList(data,true);
-			else{
-			}
+			renderContactList(data,true);
 		} ,
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
@@ -139,19 +139,13 @@ function fnBuildMenu(obj){
 function fnShowNextRecords(){
 	_startPos = _startPos + 10;
 	_endPos = _endPos + 10;
-	if($(".active").attr("id")=="Friends")
-		initFriendList(_startPos,_endPos);
-	else
-		initContactList(_startPos,_endPos);
+	initContactList(_startPos,_endPos);
 }
 
 function fnShowPrevRecords(){
 	_startPos = _startPos - 10;
 	_endPos = _endPos - 10;
-	if($(".active").attr("id")=="Friends")
-		initFriendList(_startPos,_endPos);
-	else
-		initContactList(_startPos,_endPos);
+	initContactList(_startPos,_endPos);
 }
 
 
@@ -177,8 +171,10 @@ function acceptFriendRequest(UserId,obj){
 	var params = {receiverUserId: UserId};
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.ACCEPT_REQUEST, params, 
 	function(data){
-		initFriendList(_startPos,_endPos);
 		$(obj).hide();
+		getRequestCount();
+		initFriendList(_startPos,_endPos);
+		
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEND_REQ_ERR);
 	});		
@@ -249,7 +245,20 @@ function initSearch(){
 }
 
 function initNotifications(){
+	getRequestCount();
 	getRequestList();
+}
+
+function getRequestCount(){
+	var cnt = "#RequestCount";
+	  $(cnt).html("");
+	Liferay.Service(
+			  '/flask-social-portlet.entry/get-requests-count',
+			  function(obj) {
+				  var divCnt = $('<div style="display: -webkit-inline-box;">'+obj+'</div>');
+				  $(divCnt).appendTo($(cnt));
+			  }
+			);
 }
 
 function fnSendMessage(userId){
@@ -365,7 +374,7 @@ function fnBuildRequestMenu(obj,htmlObject){
 			buttonAccept.click(function(){
 				acceptFriendRequest(UserId,htmlObject);
 			});
-			var buttonReject = $('<button/>',{'class':'btn btn-primary','type':'button','onclick':'ignoreFriendRequest('+UserId+','+htmlObject+');'})
+			var buttonReject = $('<button/>',{'class':'btn btn-primary','type':'button','style':'margin-left: 10px !important;','onclick':'ignoreFriendRequest('+UserId+','+htmlObject+');'})
 			buttonReject.html('Ignore');
 		}
 		$(buttonAccept).appendTo($(dropdown));
