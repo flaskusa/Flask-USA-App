@@ -8,31 +8,48 @@ var isNewMarker = true;
 var isMarkerCreated = false;
 function initializeMap(tgId, latitude, longitude) {
 	tailgateId = tgId;
-	if(!tailgateId)
-		tailgateId = 0;
-	if(!latitude)
-		latitude = 42.48114;
-	if(!longitude)
-		longitude = -83.49441;
+	if(tgId>0){
+		 var flaskRequest = new Request();
+			params = {tailgateId:tgId};
+			flaskRequest.sendGETRequest(_tailgateMarkerModel.SERVICE_ENDPOINTS.GET_TAILGATE_MARKER, params, 
+			function(data){/*success handler*/
+				latitude = data.latitude;
+				longitude = data.longitude;
+				loadMap(latitude, longitude);
+				isMarkerCreated = true;
+			} , function(error){ /*failure handler*/
+				_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
+			});
+	}
+	else{
+			tailgateId = 0;
+			if(!latitude)
+				latitude = 42.48114;
+			if(!longitude)
+				longitude = -83.49441;
+			loadMap(latitude, longitude);
+	}
+
 	
-	 var mapCenter = new google.maps.LatLng(latitude, longitude); //Google map Coordinates
-    	//Google map option
-        var googleMapOptions = 
-        { 
-            center: mapCenter, // map center
-            zoom: 16, //zoom level, 0 = earth view to higher value
-            panControl: true, //enable pan Control
-            zoomControl: true, //enable zoom control
-           /*zoomControlOptions: {
-            style: google.maps.ZoomControlStyle.SMALL //zoom control size
-        }, */
-            scaleControl: true, // enable scale control
-            mapTypeId: google.maps.MapTypeId.ROADMAP // google map type
-        };
-        map = new google.maps.Map(document.getElementById("google_map"), googleMapOptions);
-        map.setOptions({disableDoubleClickZoom: true });
-        addMapEventListener(map);
 }
+
+function loadMap(latitude, longitude){
+	 var mapCenter = new google.maps.LatLng(latitude, longitude); //Google map Coordinates
+ 	//Google map option
+     var googleMapOptions = 
+     { 
+         center: mapCenter, // map center
+         zoom: 16, //zoom level, 0 = earth view to higher value
+         panControl: true, //enable pan Control
+         zoomControl: true, //enable zoom control
+         scaleControl: true, // enable scale control
+         mapTypeId: google.maps.MapTypeId.ROADMAP // google map type
+     };
+     map = new google.maps.Map(document.getElementById("google_map"), googleMapOptions);
+     map.setOptions({disableDoubleClickZoom: true });
+     addMapEventListener(map);
+}
+
 function addMapEventListener(map){
 //##### drop a new marker on right click ######
 	// Load markers from tailgatemarker table
@@ -49,7 +66,7 @@ function addMapEventListener(map){
 		tailgateMarker["tailgateId"] = data.tailgateid;
 		tailgateMarker["tailgateMarkerId"] = data.tailgatemarkerid;
         var point = new google.maps.LatLng(parseFloat(data.latitude),parseFloat(data.longitude));
-
+        
         //call create_marker() function for xml loaded maker
         create_marker(point, tailgateMarker.name, tailgateMarker.descirption, false, false, false, "/flask-user-tailgate-portlet/img/new-blue-pin.png");
 	} , function(error){ /*failure handler*/
@@ -75,7 +92,7 @@ function addMapEventListener(map){
 
 //############### Create Marker Function ##############
 function create_marker(MapPos, MapTitle, MapDesc,  InfoOpenDefault, DragAble, Removable, iconPath)
-{    
+{    console.log(MapPos);
     //new marker
     var marker = new google.maps.Marker({
         position: MapPos,
@@ -122,9 +139,9 @@ function create_marker(MapPos, MapTitle, MapDesc,  InfoOpenDefault, DragAble, Re
             var mLatLang = marker.getPosition().toUrlValue(); //get marker position
             var lat = mLatLang.split(",")[0];
             var lng = mLatLang.split(",")[1];
-            if(mName =='' || mDesc =='')
+            if(mName =='')
             {
-                alert("Please enter Name and Description!");
+                alert("Please enter Name!");
             }else{
                 //call save_marker function and save the marker details
                 save_marker(marker, mName, mDesc, lat, lng, mReplace);
