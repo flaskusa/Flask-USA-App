@@ -61,121 +61,129 @@ function initialize(portletId, portlet){
 	    </div>
 	</div>
 </div>
-
-<div id='tailgateActionMenu' style='display:none;'>
- 		</div>
 <div id='formContainer' style="display:none">
+	<ul class="nav nav-tabs">
+	  <li class="active"><a href="#tailgates" data-toggle="tab">Manage Tailgate</a></li>
+	  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Tailgate Images</a></li>  
+	</ul>
 	
-		<form id="tailgateForm">
-		<input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
-		  <div class="form-group">
-		    <div class="controls">
-			    <label class="control-label" for="tailgateName">Tailgate Name:</label>
-			    <input name="<portlet:namespace />tailgateName" id="tailgateName" class="form-control" type="text" onchange="$('#description').val($(this).val());"/>
-			</div> 
-		  </div>
-		  <div class="form-group">
-		    <div class="controls">
-			    <label class="control-label" for="tailgateDescription">Tailgate Description:</label>
-			    <input name="<portlet:namespace />tailgateDescription" id="tailgateDescription" class="form-control" type="text" onchange="$('#description').val($(this).val());"/> 
-			</div> 
-		  </div>
-		   <div class="form-group">
-			    <label class="control-label" for="eventId">Event:</label>
-				<div class="controls">
-					<select id="eventId" name="<portlet:namespace />eventId" class="form-control-select" ></select>
-				</div>
-		   </div>
-		    <div class="form-group">
+	<div class="tab-content">
+	  	<div class="tab-pane active" id="tailgates">
+			<div id='tailgateActionMenu' style='display:none;'></div>
+		
+			<form id="tailgateForm">
+			<input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
+			  <div class="form-group">
 			    <div class="controls">
-			    	<label  class="control-label" for="tailgateDate">Event date:</label>
-			    	<input type="text" class="form-control" id = "tailgateDate" readonly>
-			  	</div>
-		   </div> 
-		
-		   <div class="form-group">
-		    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
-		    <div class="controls">
-		      <input type='text' class="form-control" id='startTime' />
-		    </div>
-		  </div>
-		
-		  <div class="form-group">
-			<label  id="EndTime" class="control-label" for="endTime">End Time:</label>
-		    	<div class="controls">
-		    		 <input type='text' class="form-control" id='endTime' />
-		    	</div>
-		  </div>
-		  <br/>
-		  <div class="form-group">
-			    <label class="control-label" for="eventImage">Event Image:</label>
-				<div class="controls">
-					<div id="eventImage"></div>
-				</div>
-		   </div>
-		  <input type="hidden" id="eventName" value="">	
-		  <input type="hidden" name="<portlet:namespace />repositoryId" value="<%= repositoryId %>>">
-		  <input id="tailgateId" type="hidden" value="0">
-		</form>
-		   <div class="form-gorup">
-		   <div align="center">Double Click to Drop a New Marker</div>
-		   <div id="google_map"></div>
-		   </div>
-		  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
-		  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
-	  </div>
-	  
-	  <!-- Add Group Start here -->
-	  <div id="addTailgateMembers-valid-msg" style="display: none"></div>
-		<form id="addTailgateMembersForm" style="display: none;">
-		<div class="form-group">
-				<div class="pull-left">
-				<h3>Add Members</h3>
-				</div>
-			</div>
+				    <label class="control-label" for="tailgateName">Tailgate Name:</label>
+				    <input name="<portlet:namespace />tailgateName" id="tailgateName" class="form-control" type="text" onchange="$('#description').val($(this).val());"/>
+				</div> 
+			  </div>
+			  <div class="form-group">
+			    <div class="controls">
+				    <label class="control-label" for="tailgateDescription">Tailgate Description:</label>
+				    <input name="<portlet:namespace />tailgateDescription" id="tailgateDescription" class="form-control" type="text" onchange="$('#description').val($(this).val());"/> 
+				</div> 
+			  </div>
+			   <div class="form-group">
+				    <label class="control-label" for="eventId">Event:</label>
+					<div class="controls">
+						<select id="eventId" name="<portlet:namespace />eventId" class="form-control-select" ></select>
+					</div>
+			   </div>
+			    <div class="form-group">
+				    <div class="controls">
+				    	<label  class="control-label" for="tailgateDate">Event date:</label>
+				    	<input type="text" class="form-control" id = "tailgateDate" readonly>
+				  	</div>
+			   </div> 
+			
+			   <div class="form-group">
+			    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
+			    <div class="controls">
+			      <input type='text' class="form-control" id='startTime' />
+			    </div>
+			  </div>
+			
+			  <div class="form-group">
+				<label  id="EndTime" class="control-label" for="endTime">End Time:</label>
+			    	<div class="controls">
+			    		 <input type='text' class="form-control" id='endTime' />
+			    	</div>
+			  </div>
+			  <br/>
+			  <input type="hidden" id="eventName" value="">	
+			  <input type="hidden" name="<portlet:namespace />repositoryId" value="<%= repositoryId %>>">
+			  <input id="tailgateId" type="hidden" value="0">
+			</form>
+			   <div class="form-gorup">
+			   <div align="center">Double Click to Drop a New Marker</div>
+			   <div id="google_map"></div>
+			   </div>
+			  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
+			  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
+		  
+		  <!-- Add Group Start here -->
+		  	<div id="addTailgateMembers-valid-msg" style="display: none"></div>
+			<form id="addTailgateMembersForm" style="display: none;">
 			<div class="form-group">
-				<div class="cssGridMenu">
-						<div class="cssSearchUser" id="cssSearchUser">
+					<div class="pull-left">
+					<h3>Add Members</h3>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="cssGridMenu">
+							<div class="cssSearchUser" id="cssSearchUser">
+								<div class="iconSearchUser">
+									<i class="icon-search"></i>
+								</div>
+							</div>
+					</div>
+					<div id="campaignJqxwidget">
+						<div id="tailgateMemberDataGrid"></div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary pull-left clsBack">Back</button>
+					<button type="button" class="btn btn-primary clsAddTailgateMembers">Add Members</button>
+					<button type="reset" class="btn btn-primary clsCancelGroup">Cancel</button>
+				</div>
+			</form>
+			<div id="addTailgateGroup-valid-msg" style="display: none"></div>
+			<form id="addTailgateGroupForm" style="display: none;">
+				<div class="form-group">
+					<div class="pull-left">
+					<h3>Add Group</h3>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="cssGridMenu">
+						<div class="cssSearchUser" id="cssSearchGroup">
 							<div class="iconSearchUser">
 								<i class="icon-search"></i>
 							</div>
 						</div>
-				</div>
-				<div id="campaignJqxwidget">
-					<div id="tailgateMemberDataGrid"></div>
-				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary pull-left clsBack">Back</button>
-				<button type="button" class="btn btn-primary clsAddTailgateMembers">Add Members</button>
-				<button type="reset" class="btn btn-primary clsCancelGroup">Cancel</button>
-			</div>
-		</form>
-		
-		<div id="addTailgateGroup-valid-msg" style="display: none"></div>
-		<form id="addTailgateGroupForm" style="display: none;">
-			<div class="form-group">
-				<div class="pull-left">
-				<h3>Add Group</h3>
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="cssGridMenu">
-					<div class="cssSearchUser" id="cssSearchGroup">
-						<div class="iconSearchUser">
-							<i class="icon-search"></i>
-						</div>
+					</div>
+					<div id="campaignJqxwidget">
+						<div id="tailgateGroupDataGrid"></div>
 					</div>
 				</div>
-				<div id="campaignJqxwidget">
-					<div id="tailgateGroupDataGrid"></div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary pull-left clsBack">Back</button>
+					<button type="button" class="btn btn-primary clsAddTailgateGroup">Add Group</button>
+					<button type="reset" class="btn btn-primary clsCancelGroup">Cancel</button>
 				</div>
-			</div>
-			<div class="modal-footer">
-				<button type="button" class="btn btn-primary pull-left clsBack">Back</button>
-				<button type="button" class="btn btn-primary clsAddTailgateGroup">Add Group</button>
-				<button type="reset" class="btn btn-primary clsCancelGroup">Cancel</button>
-			</div>
-		</form>
+			</form>
+		</div>
+		<div class="tab-pane" id="contents">
+			<div class="form-group">
+			    <label class="control-label" for="eventImage">Tailgate Image:</label>
+				<div class="controls">
+					<div id="eventImage"></div>
+				</div>
+		   </div>
+		</div>		
+	</div>	
+</div>		
 </body>
 </html>
