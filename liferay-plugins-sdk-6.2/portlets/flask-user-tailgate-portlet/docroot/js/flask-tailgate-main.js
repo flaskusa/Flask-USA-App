@@ -15,8 +15,11 @@ function addClickHandlers(){
 			$("#tailgateDataTable").hide();
 			$("#formContainer").show();
 			loadEvents('eventId');
-			fnBuildEventUpload(imageContainer);		
 			initializeMap(tailgateId);
+			if(parseInt($("#tailgateId").val())==0){
+				$("#mcontents").attr("data-toggle","");
+				$("#mcontents").css("cursor","not-allowed");
+			}
 	});
 	/* Click handler for save button*/
 	
@@ -88,6 +91,18 @@ function addClickHandlers(){
 		$("#cssSearchGroup").click(GRID_PARAM.toggleGroupSearchBoxes);
 		$("#cssSearchUser").click(GRID_PARAM.toggleUserSearchBoxes);
 		
+		$("#mcontents").click(function(){
+			var _tailgateId = parseInt($("#tailgateId").val());
+			if(parseInt($("#tailgateId").val())!=0){
+				fnBuildEventUpload(imageContainer);			
+				var container = $('#uploadedImages');
+				fnGetEventDetailImages($("#tailgateId").val(),container, true);
+				
+				$("#Upload").click(function(){
+					fnSaveImages(_tailgateId);
+				});
+			}
+		});
 }
 
 function loadData(){
@@ -305,7 +320,6 @@ function saveTailgate(){
 							addTailgateMember(userparams)
 						}
 						_flaskLib.showSuccessMessage('action-msg', _tailgateModel.MESSAGES.SAVE);
-						fnSaveImages(data.tailgateId);
 						loadData();
 					} ,
 					function (data){
@@ -557,8 +571,56 @@ function fnSaveImages(tailgateId){
 	dropZone.on("queuecomplete", function (file) {
     	wait(function(){
     		_flaskLib.showSuccessMessage('action-msg', _tailgateModel.MESSAGES.IMAGE_UPLOAD_SUCCESS);
-    		return true;
     	},1)					
     });
-	return false;
+}
+
+
+function fnGetEventDetailImages(tailgateId,container, editable){
+	params= {'tailgateId': tailgateId};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.GET_ALL_TAILGATE_IMAGES , params, 
+		function (data){
+			$.each(data, function(idx, obj) {
+				fnRenderImage(obj.imageUUID, obj.imageGroupId, container, obj.tailgateImageId, editable);
+			});			
+		},
+		function (data){
+			console.log(data);
+		});	
+}
+
+function fnRenderImage(imageUUID, imageGroupId, container, tailgateImageId, editable){
+	var imgURL ="/c/document_library/get_file?uuid="+imageUUID+"&groupId="+imageGroupId;
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-eventDetailImageId': tailgateImageId});
+	$(objdiv).appendTo($(container));
+	if(editable){
+    	$(objdiv).click(function(){
+	    	$(this).toggleClass("activeImage");
+	    	if($(".activeImage").length>0){
+	    		if(iSelected==false){
+	    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+	    			$(objDel).appendTo($(container));
+	    			iSelected = true;
+	    			$(objDel).click(function(){
+	    				$("#spinningSquaresG").show();
+	    				$(".activeImage").each(function(){
+	    					_flaskLib.deleteImage($(this).attr("data-uuid"), imageGroupId, objDel);
+	    					fnDeleteEventDetailImage($(this).attr("data-eventDetailImageId"));
+	    					$(this).remove();
+	    				});
+	    				if($(".activeImage").length==0){
+	    					$("#spinningSquaresG").hide();
+	    					$(this).remove();
+	    					iSelected = false;
+	    				}
+	    			});
+	    		}
+	    	}
+	    	else{
+	    		$(".cssDelImages").remove();
+	    		iSelected = false;
+	    	}
+	    });	
+    }
 }
