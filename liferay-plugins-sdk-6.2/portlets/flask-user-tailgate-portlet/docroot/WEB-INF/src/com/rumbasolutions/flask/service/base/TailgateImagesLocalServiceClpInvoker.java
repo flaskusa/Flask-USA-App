@@ -14,7 +14,7 @@
 
 package com.rumbasolutions.flask.service.base;
 
-import com.rumbasolutions.flask.service.TailgateMarkerLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateImagesLocalServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,26 +22,26 @@ import java.util.Arrays;
  * @author rajeshj
  * @generated
  */
-public class TailgateMarkerLocalServiceClpInvoker {
-	public TailgateMarkerLocalServiceClpInvoker() {
-		_methodName0 = "addTailgateMarker";
+public class TailgateImagesLocalServiceClpInvoker {
+	public TailgateImagesLocalServiceClpInvoker() {
+		_methodName0 = "addTailgateImages";
 
 		_methodParameterTypes0 = new String[] {
-				"com.rumbasolutions.flask.model.TailgateMarker"
+				"com.rumbasolutions.flask.model.TailgateImages"
 			};
 
-		_methodName1 = "createTailgateMarker";
+		_methodName1 = "createTailgateImages";
 
 		_methodParameterTypes1 = new String[] { "long" };
 
-		_methodName2 = "deleteTailgateMarker";
+		_methodName2 = "deleteTailgateImages";
 
 		_methodParameterTypes2 = new String[] { "long" };
 
-		_methodName3 = "deleteTailgateMarker";
+		_methodName3 = "deleteTailgateImages";
 
 		_methodParameterTypes3 = new String[] {
-				"com.rumbasolutions.flask.model.TailgateMarker"
+				"com.rumbasolutions.flask.model.TailgateImages"
 			};
 
 		_methodName4 = "dynamicQuery";
@@ -80,11 +80,11 @@ public class TailgateMarkerLocalServiceClpInvoker {
 				"com.liferay.portal.kernel.dao.orm.Projection"
 			};
 
-		_methodName10 = "fetchTailgateMarker";
+		_methodName10 = "fetchTailgateImages";
 
 		_methodParameterTypes10 = new String[] { "long" };
 
-		_methodName11 = "getTailgateMarker";
+		_methodName11 = "getTailgateImages";
 
 		_methodParameterTypes11 = new String[] { "long" };
 
@@ -92,18 +92,18 @@ public class TailgateMarkerLocalServiceClpInvoker {
 
 		_methodParameterTypes12 = new String[] { "java.io.Serializable" };
 
-		_methodName13 = "getTailgateMarkers";
+		_methodName13 = "getTailgateImageses";
 
 		_methodParameterTypes13 = new String[] { "int", "int" };
 
-		_methodName14 = "getTailgateMarkersCount";
+		_methodName14 = "getTailgateImagesesCount";
 
 		_methodParameterTypes14 = new String[] {  };
 
-		_methodName15 = "updateTailgateMarker";
+		_methodName15 = "updateTailgateImages";
 
 		_methodParameterTypes15 = new String[] {
-				"com.rumbasolutions.flask.model.TailgateMarker"
+				"com.rumbasolutions.flask.model.TailgateImages"
 			};
 
 		_methodName58 = "getBeanIdentifier";
@@ -119,44 +119,44 @@ public class TailgateMarkerLocalServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName0.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes0, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.addTailgateMarker((com.rumbasolutions.flask.model.TailgateMarker)arguments[0]);
+			return TailgateImagesLocalServiceUtil.addTailgateImages((com.rumbasolutions.flask.model.TailgateImages)arguments[0]);
 		}
 
 		if (_methodName1.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes1, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.createTailgateMarker(((Long)arguments[0]).longValue());
+			return TailgateImagesLocalServiceUtil.createTailgateImages(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName2.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes2, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.deleteTailgateMarker(((Long)arguments[0]).longValue());
+			return TailgateImagesLocalServiceUtil.deleteTailgateImages(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName3.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes3, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.deleteTailgateMarker((com.rumbasolutions.flask.model.TailgateMarker)arguments[0]);
+			return TailgateImagesLocalServiceUtil.deleteTailgateImages((com.rumbasolutions.flask.model.TailgateImages)arguments[0]);
 		}
 
 		if (_methodName4.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes4, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.dynamicQuery();
+			return TailgateImagesLocalServiceUtil.dynamicQuery();
 		}
 
 		if (_methodName5.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes5, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return TailgateImagesLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName6.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes6, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return TailgateImagesLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue());
 		}
 
 		if (_methodName7.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes7, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return TailgateImagesLocalServiceUtil.dynamicQuery((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				((Integer)arguments[1]).intValue(),
 				((Integer)arguments[2]).intValue(),
 				(com.liferay.portal.kernel.util.OrderByComparator)arguments[3]);
@@ -164,54 +164,54 @@ public class TailgateMarkerLocalServiceClpInvoker {
 
 		if (_methodName8.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes8, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
+			return TailgateImagesLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0]);
 		}
 
 		if (_methodName9.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes9, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
+			return TailgateImagesLocalServiceUtil.dynamicQueryCount((com.liferay.portal.kernel.dao.orm.DynamicQuery)arguments[0],
 				(com.liferay.portal.kernel.dao.orm.Projection)arguments[1]);
 		}
 
 		if (_methodName10.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes10, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.fetchTailgateMarker(((Long)arguments[0]).longValue());
+			return TailgateImagesLocalServiceUtil.fetchTailgateImages(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName11.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes11, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.getTailgateMarker(((Long)arguments[0]).longValue());
+			return TailgateImagesLocalServiceUtil.getTailgateImages(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName12.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes12, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
+			return TailgateImagesLocalServiceUtil.getPersistedModel((java.io.Serializable)arguments[0]);
 		}
 
 		if (_methodName13.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes13, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.getTailgateMarkers(((Integer)arguments[0]).intValue(),
+			return TailgateImagesLocalServiceUtil.getTailgateImageses(((Integer)arguments[0]).intValue(),
 				((Integer)arguments[1]).intValue());
 		}
 
 		if (_methodName14.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes14, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.getTailgateMarkersCount();
+			return TailgateImagesLocalServiceUtil.getTailgateImagesesCount();
 		}
 
 		if (_methodName15.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes15, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.updateTailgateMarker((com.rumbasolutions.flask.model.TailgateMarker)arguments[0]);
+			return TailgateImagesLocalServiceUtil.updateTailgateImages((com.rumbasolutions.flask.model.TailgateImages)arguments[0]);
 		}
 
 		if (_methodName58.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
-			return TailgateMarkerLocalServiceUtil.getBeanIdentifier();
+			return TailgateImagesLocalServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName59.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
-			TailgateMarkerLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			TailgateImagesLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}

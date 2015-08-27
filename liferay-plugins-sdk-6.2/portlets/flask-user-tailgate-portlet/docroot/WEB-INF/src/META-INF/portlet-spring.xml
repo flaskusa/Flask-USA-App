@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.rumbasolutions.flask.service.TailgateImagesLocalService" class="com.rumbasolutions.flask.service.impl.TailgateImagesLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.TailgateImagesService" class="com.rumbasolutions.flask.service.impl.TailgateImagesServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.TailgateImagesPersistence" class="com.rumbasolutions.flask.service.persistence.TailgateImagesPersistenceImpl" parent="basePersistence" />
 	<bean id="com.rumbasolutions.flask.service.TailgateInfoLocalService" class="com.rumbasolutions.flask.service.impl.TailgateInfoLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.TailgateInfoService" class="com.rumbasolutions.flask.service.impl.TailgateInfoServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.TailgateInfoPersistence" class="com.rumbasolutions.flask.service.persistence.TailgateInfoPersistenceImpl" parent="basePersistence" />

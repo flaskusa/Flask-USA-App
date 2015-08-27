@@ -18,6 +18,8 @@ import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
 
 import com.rumbasolutions.flask.service.ClpSerializer;
+import com.rumbasolutions.flask.service.TailgateImagesLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateImagesServiceUtil;
 import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateInfoServiceUtil;
 import com.rumbasolutions.flask.service.TailgateMarkerLocalServiceUtil;
@@ -40,6 +42,9 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
+			TailgateImagesLocalServiceUtil.clearService();
+
+			TailgateImagesServiceUtil.clearService();
 			TailgateInfoLocalServiceUtil.clearService();
 
 			TailgateInfoServiceUtil.clearService();

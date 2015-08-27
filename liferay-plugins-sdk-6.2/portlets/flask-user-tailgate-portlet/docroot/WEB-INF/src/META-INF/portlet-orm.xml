@@ -7,6 +7,27 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.TailgateImagesModelImpl">
+		<attributes>
+			<id name="tailgateImageId" />
+			<basic name="tailgateId" />
+			<basic name="userId" />
+			<basic name="imageTitle" />
+			<basic name="imageDesc" />
+			<basic name="imageUUID" />
+			<basic name="imageGroupId" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.rumbasolutions.flask.model.impl.TailgateInfoModelImpl">
 		<attributes>
 			<id name="tailgateId" />
@@ -67,6 +88,10 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<entity class="com.rumbasolutions.flask.model.impl.TailgateImagesImpl" name="TailgateImages">
+		<table name="flasktailgate_TailgateImages" />
+		<attributes />
+	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.TailgateInfoImpl" name="TailgateInfo">
 		<table name="flasktailgate_TailgateInfo" />
 		<attributes />

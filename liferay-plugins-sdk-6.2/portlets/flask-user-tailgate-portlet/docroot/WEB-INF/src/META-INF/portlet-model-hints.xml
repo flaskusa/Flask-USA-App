@@ -1,6 +1,17 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<model name="com.rumbasolutions.flask.model.TailgateImages">
+		<field name="tailgateImageId" type="long" />
+		<field name="tailgateId" type="long" />
+		<field name="userId" type="long" />
+		<field name="imageTitle" type="String" />
+		<field name="imageDesc" type="String" />
+		<field name="imageUUID" type="String" />
+		<field name="imageGroupId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+	</model>
 	<model name="com.rumbasolutions.flask.model.TailgateInfo">
 		<field name="tailgateId" type="long" />
 		<field name="companyId" type="long" />

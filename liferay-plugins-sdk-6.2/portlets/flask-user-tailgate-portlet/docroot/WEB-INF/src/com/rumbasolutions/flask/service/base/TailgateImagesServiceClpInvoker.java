@@ -14,7 +14,7 @@
 
 package com.rumbasolutions.flask.service.base;
 
-import com.rumbasolutions.flask.service.TailgateMarkerServiceUtil;
+import com.rumbasolutions.flask.service.TailgateImagesServiceUtil;
 
 import java.util.Arrays;
 
@@ -22,8 +22,8 @@ import java.util.Arrays;
  * @author rajeshj
  * @generated
  */
-public class TailgateMarkerServiceClpInvoker {
-	public TailgateMarkerServiceClpInvoker() {
+public class TailgateImagesServiceClpInvoker {
+	public TailgateImagesServiceClpInvoker() {
 		_methodName42 = "getBeanIdentifier";
 
 		_methodParameterTypes42 = new String[] {  };
@@ -32,19 +32,30 @@ public class TailgateMarkerServiceClpInvoker {
 
 		_methodParameterTypes43 = new String[] { "java.lang.String" };
 
-		_methodName48 = "getTailgateMarker";
+		_methodName48 = "addTailgateImage";
 
-		_methodParameterTypes48 = new String[] { "long" };
+		_methodParameterTypes48 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
 
-		_methodName49 = "deleteTailgateMarker";
+		_methodName49 = "deleteTailgateImageByTailgateImageId";
 
-		_methodParameterTypes49 = new String[] { "long" };
+		_methodParameterTypes49 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
-		_methodName50 = "addTailgateMarker";
+		_methodName50 = "deleteTailgateImageByTailgateId";
 
 		_methodParameterTypes50 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String"
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName51 = "getTailgateImages";
+
+		_methodParameterTypes51 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -52,33 +63,45 @@ public class TailgateMarkerServiceClpInvoker {
 		Object[] arguments) throws Throwable {
 		if (_methodName42.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
-			return TailgateMarkerServiceUtil.getBeanIdentifier();
+			return TailgateImagesServiceUtil.getBeanIdentifier();
 		}
 
 		if (_methodName43.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
-			TailgateMarkerServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
+			TailgateImagesServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
 		if (_methodName48.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
-			return TailgateMarkerServiceUtil.getTailgateMarker(((Long)arguments[0]).longValue());
+			return TailgateImagesServiceUtil.addTailgateImage(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3],
+				((Long)arguments[4]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
 		}
 
 		if (_methodName49.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
-			TailgateMarkerServiceUtil.deleteTailgateMarker(((Long)arguments[0]).longValue());
+			TailgateImagesServiceUtil.deleteTailgateImageByTailgateImageId(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
 		if (_methodName50.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
-			return TailgateMarkerServiceUtil.addTailgateMarker(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3], (java.lang.String)arguments[4]);
+			TailgateImagesServiceUtil.deleteTailgateImageByTailgateId(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+			return TailgateImagesServiceUtil.getTailgateImages(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -94,4 +117,6 @@ public class TailgateMarkerServiceClpInvoker {
 	private String[] _methodParameterTypes49;
 	private String _methodName50;
 	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
 }

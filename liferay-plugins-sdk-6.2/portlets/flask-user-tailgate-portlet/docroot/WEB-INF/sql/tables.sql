@@ -1,3 +1,15 @@
+create table flasktailgate_TailgateImages (
+	tailgateImageId LONG not null primary key,
+	tailgateId LONG,
+	userId LONG,
+	imageTitle VARCHAR(75) null,
+	imageDesc VARCHAR(75) null,
+	imageUUID VARCHAR(75) null,
+	imageGroupId LONG,
+	createdDate DATE null,
+	modifiedDate DATE null
+);
+
 create table flasktailgate_TailgateInfo (
 	tailgateId LONG not null primary key,
 	companyId LONG,

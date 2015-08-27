@@ -33,6 +33,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.rumbasolutions.flask.model.TailgateUsers;
 import com.rumbasolutions.flask.service.TailgateUsersLocalService;
+import com.rumbasolutions.flask.service.persistence.TailgateImagesPersistence;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoFinder;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoPersistence;
 import com.rumbasolutions.flask.service.persistence.TailgateMarkerFinder;
@@ -283,6 +284,63 @@ public abstract class TailgateUsersLocalServiceBaseImpl
 	public TailgateUsers updateTailgateUsers(TailgateUsers tailgateUsers)
 		throws SystemException {
 		return tailgateUsersPersistence.update(tailgateUsers);
+	}
+
+	/**
+	 * Returns the tailgate images local service.
+	 *
+	 * @return the tailgate images local service
+	 */
+	public com.rumbasolutions.flask.service.TailgateImagesLocalService getTailgateImagesLocalService() {
+		return tailgateImagesLocalService;
+	}
+
+	/**
+	 * Sets the tailgate images local service.
+	 *
+	 * @param tailgateImagesLocalService the tailgate images local service
+	 */
+	public void setTailgateImagesLocalService(
+		com.rumbasolutions.flask.service.TailgateImagesLocalService tailgateImagesLocalService) {
+		this.tailgateImagesLocalService = tailgateImagesLocalService;
+	}
+
+	/**
+	 * Returns the tailgate images remote service.
+	 *
+	 * @return the tailgate images remote service
+	 */
+	public com.rumbasolutions.flask.service.TailgateImagesService getTailgateImagesService() {
+		return tailgateImagesService;
+	}
+
+	/**
+	 * Sets the tailgate images remote service.
+	 *
+	 * @param tailgateImagesService the tailgate images remote service
+	 */
+	public void setTailgateImagesService(
+		com.rumbasolutions.flask.service.TailgateImagesService tailgateImagesService) {
+		this.tailgateImagesService = tailgateImagesService;
+	}
+
+	/**
+	 * Returns the tailgate images persistence.
+	 *
+	 * @return the tailgate images persistence
+	 */
+	public TailgateImagesPersistence getTailgateImagesPersistence() {
+		return tailgateImagesPersistence;
+	}
+
+	/**
+	 * Sets the tailgate images persistence.
+	 *
+	 * @param tailgateImagesPersistence the tailgate images persistence
+	 */
+	public void setTailgateImagesPersistence(
+		TailgateImagesPersistence tailgateImagesPersistence) {
+		this.tailgateImagesPersistence = tailgateImagesPersistence;
 	}
 
 	/**
@@ -687,6 +745,12 @@ public abstract class TailgateUsersLocalServiceBaseImpl
 		}
 	}
 
+	@BeanReference(type = com.rumbasolutions.flask.service.TailgateImagesLocalService.class)
+	protected com.rumbasolutions.flask.service.TailgateImagesLocalService tailgateImagesLocalService;
+	@BeanReference(type = com.rumbasolutions.flask.service.TailgateImagesService.class)
+	protected com.rumbasolutions.flask.service.TailgateImagesService tailgateImagesService;
+	@BeanReference(type = TailgateImagesPersistence.class)
+	protected TailgateImagesPersistence tailgateImagesPersistence;
 	@BeanReference(type = com.rumbasolutions.flask.service.TailgateInfoLocalService.class)
 	protected com.rumbasolutions.flask.service.TailgateInfoLocalService tailgateInfoLocalService;
 	@BeanReference(type = com.rumbasolutions.flask.service.TailgateInfoService.class)

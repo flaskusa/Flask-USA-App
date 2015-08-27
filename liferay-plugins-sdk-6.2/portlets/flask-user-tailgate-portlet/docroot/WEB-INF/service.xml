@@ -71,5 +71,19 @@
 			<finder-column name="tailgateid" />
 		</finder>
 	</entity>
+    <entity name="TailgateImages" local-service="true">
+        <column name="tailgateImageId" type="long" primary="true"></column>
+        <column name="tailgateId" type="long"></column>
+        <column name="userId" type="long"></column>
+        <column name="imageTitle" type="String"></column>
+        <column name="imageDesc" type="String"></column>
+        <column name="imageUUID" type="String"></column>
+        <column name="imageGroupId" type="long"></column>
+        <column name="createdDate" type="Date"></column>
+        <column name="modifiedDate" type="Date"></column>
+        <finder name="tailgateId" return-type="Collection">
+        	<finder-column name="tailgateId" />
+        </finder>
+    </entity>
 	
 </service-builder>

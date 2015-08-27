@@ -25,6 +25,7 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 
+import com.rumbasolutions.flask.model.TailgateImagesClp;
 import com.rumbasolutions.flask.model.TailgateInfoClp;
 import com.rumbasolutions.flask.model.TailgateMarkerClp;
 import com.rumbasolutions.flask.model.TailgateUsersClp;
@@ -104,6 +105,10 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
+		if (oldModelClassName.equals(TailgateImagesClp.class.getName())) {
+			return translateInputTailgateImages(oldModel);
+		}
+
 		if (oldModelClassName.equals(TailgateInfoClp.class.getName())) {
 			return translateInputTailgateInfo(oldModel);
 		}
@@ -129,6 +134,16 @@ public class ClpSerializer {
 		}
 
 		return newList;
+	}
+
+	public static Object translateInputTailgateImages(BaseModel<?> oldModel) {
+		TailgateImagesClp oldClpModel = (TailgateImagesClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getTailgateImagesRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
 	}
 
 	public static Object translateInputTailgateInfo(BaseModel<?> oldModel) {
@@ -177,6 +192,43 @@ public class ClpSerializer {
 		Class<?> oldModelClass = oldModel.getClass();
 
 		String oldModelClassName = oldModelClass.getName();
+
+		if (oldModelClassName.equals(
+					"com.rumbasolutions.flask.model.impl.TailgateImagesImpl")) {
+			return translateOutputTailgateImages(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
 
 		if (oldModelClassName.equals(
 					"com.rumbasolutions.flask.model.impl.TailgateInfoImpl")) {
@@ -370,6 +422,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"com.rumbasolutions.flask.NoSuchTailgateImagesException")) {
+			return new com.rumbasolutions.flask.NoSuchTailgateImagesException();
+		}
+
+		if (className.equals(
 					"com.rumbasolutions.flask.NoSuchTailgateInfoException")) {
 			return new com.rumbasolutions.flask.NoSuchTailgateInfoException();
 		}
@@ -385,6 +442,16 @@ public class ClpSerializer {
 		}
 
 		return throwable;
+	}
+
+	public static Object translateOutputTailgateImages(BaseModel<?> oldModel) {
+		TailgateImagesClp newModel = new TailgateImagesClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setTailgateImagesRemoteModel(oldModel);
+
+		return newModel;
 	}
 
 	public static Object translateOutputTailgateInfo(BaseModel<?> oldModel) {
