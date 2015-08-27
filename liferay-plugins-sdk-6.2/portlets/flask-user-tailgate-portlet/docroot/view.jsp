@@ -181,7 +181,15 @@ function initialize(portletId, portlet){
 				<div class="controls">
 					<div id="eventImage"></div>
 				</div>
+				<input id="Upload" class="btn btn-info clsUpload" type="button" value="Upload"/>
 		   </div>
+		   
+			<div class="form-group">
+			    <label class="control-label" for="eventImage">Uploaded Images:</label>
+				<div class="controls">
+					<div id="uploadedImages"></div>
+				</div>
+		   </div>		   
 		</div>		
 	</div>	
 </div>		
