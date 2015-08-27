@@ -92,8 +92,9 @@ public class TailgateImagesModelImpl extends BaseModelImpl<TailgateImages>
 	public static final boolean COLUMN_BITMASK_ENABLED = GetterUtil.getBoolean(com.liferay.util.service.ServiceProps.get(
 				"value.object.column.bitmask.enabled.com.rumbasolutions.flask.model.TailgateImages"),
 			true);
-	public static long TAILGATEID_COLUMN_BITMASK = 1L;
-	public static long TAILGATEIMAGEID_COLUMN_BITMASK = 2L;
+	public static long IMAGEUUID_COLUMN_BITMASK = 1L;
+	public static long TAILGATEID_COLUMN_BITMASK = 2L;
+	public static long TAILGATEIMAGEID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -351,7 +352,17 @@ public class TailgateImagesModelImpl extends BaseModelImpl<TailgateImages>
 
 	@Override
 	public void setImageUUID(String imageUUID) {
+		_columnBitmask |= IMAGEUUID_COLUMN_BITMASK;
+
+		if (_originalImageUUID == null) {
+			_originalImageUUID = _imageUUID;
+		}
+
 		_imageUUID = imageUUID;
+	}
+
+	public String getOriginalImageUUID() {
+		return GetterUtil.getString(_originalImageUUID);
 	}
 
 	@JSON
@@ -482,6 +493,8 @@ public class TailgateImagesModelImpl extends BaseModelImpl<TailgateImages>
 		tailgateImagesModelImpl._originalTailgateId = tailgateImagesModelImpl._tailgateId;
 
 		tailgateImagesModelImpl._setOriginalTailgateId = false;
+
+		tailgateImagesModelImpl._originalImageUUID = tailgateImagesModelImpl._imageUUID;
 
 		tailgateImagesModelImpl._columnBitmask = 0;
 	}
@@ -633,6 +646,7 @@ public class TailgateImagesModelImpl extends BaseModelImpl<TailgateImages>
 	private String _imageTitle;
 	private String _imageDesc;
 	private String _imageUUID;
+	private String _originalImageUUID;
 	private long _imageGroupId;
 	private Date _createdDate;
 	private Date _modifiedDate;

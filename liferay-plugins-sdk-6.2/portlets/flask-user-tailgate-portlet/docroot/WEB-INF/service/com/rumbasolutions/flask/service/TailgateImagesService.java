@@ -71,10 +71,18 @@ public interface TailgateImagesService extends BaseService, InvokableService {
 		long imageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	public com.rumbasolutions.flask.model.TailgateImages updateTailgateImage(
+		long tailgateImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	public void deleteTailgateImageByTailgateImageId(long tailgateImageId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteTailgateImageByTailgateId(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteTailgateImageByUUID(java.lang.String imageUUID,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

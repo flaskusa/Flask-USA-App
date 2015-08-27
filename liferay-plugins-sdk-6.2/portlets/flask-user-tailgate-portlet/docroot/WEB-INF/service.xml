@@ -84,6 +84,9 @@
         <finder name="tailgateId" return-type="Collection">
         	<finder-column name="tailgateId" />
         </finder>
+        <finder name="imageUUID" return-type="Collection">
+        	<finder-column name="imageUUID" />
+        </finder>
     </entity>
 	
 </service-builder>

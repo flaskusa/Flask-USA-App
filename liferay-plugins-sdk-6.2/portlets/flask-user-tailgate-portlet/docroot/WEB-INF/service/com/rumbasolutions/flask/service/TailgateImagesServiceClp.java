@@ -40,21 +40,34 @@ public class TailgateImagesServiceClp implements TailgateImagesService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "deleteTailgateImageByTailgateImageId";
+		_methodName4 = "updateTailgateImage";
 
 		_methodParameterTypes4 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName5 = "deleteTailgateImageByTailgateId";
+		_methodName5 = "deleteTailgateImageByTailgateImageId";
 
 		_methodParameterTypes5 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName6 = "getTailgateImages";
+		_methodName6 = "deleteTailgateImageByTailgateId";
 
 		_methodParameterTypes6 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName7 = "deleteTailgateImageByUUID";
+
+		_methodParameterTypes7 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName8 = "getTailgateImages";
+
+		_methodParameterTypes8 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -150,11 +163,46 @@ public class TailgateImagesServiceClp implements TailgateImagesService {
 	}
 
 	@Override
+	public com.rumbasolutions.flask.model.TailgateImages updateTailgateImage(
+		long tailgateImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4,
+					new Object[] {
+						tailgateImageId,
+						
+					ClpSerializer.translateInput(imageTitle),
+						
+					ClpSerializer.translateInput(imageDesc),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.TailgateImages)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public void deleteTailgateImageByTailgateImageId(long tailgateImageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName4,
-				_methodParameterTypes4,
+			_invokableService.invokeMethod(_methodName5,
+				_methodParameterTypes5,
 				new Object[] {
 					tailgateImageId,
 					
@@ -178,10 +226,35 @@ public class TailgateImagesServiceClp implements TailgateImagesService {
 	public void deleteTailgateImageByTailgateId(long tailgateId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName5,
-				_methodParameterTypes5,
+			_invokableService.invokeMethod(_methodName6,
+				_methodParameterTypes6,
 				new Object[] {
 					tailgateId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void deleteTailgateImageByUUID(java.lang.String imageUUID,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableService.invokeMethod(_methodName7,
+				_methodParameterTypes7,
+				new Object[] {
+					ClpSerializer.translateInput(imageUUID),
 					
 				ClpSerializer.translateInput(serviceContext)
 				});
@@ -206,8 +279,8 @@ public class TailgateImagesServiceClp implements TailgateImagesService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
 					new Object[] {
 						tailgateId,
 						
@@ -242,4 +315,8 @@ public class TailgateImagesServiceClp implements TailgateImagesService {
 	private String[] _methodParameterTypes5;
 	private String _methodName6;
 	private String[] _methodParameterTypes6;
+	private String _methodName7;
+	private String[] _methodParameterTypes7;
+	private String _methodName8;
+	private String[] _methodParameterTypes8;
 }

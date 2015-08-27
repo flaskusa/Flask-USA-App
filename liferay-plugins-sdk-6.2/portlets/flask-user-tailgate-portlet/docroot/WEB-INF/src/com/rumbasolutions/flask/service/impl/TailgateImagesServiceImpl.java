@@ -70,6 +70,32 @@ public class TailgateImagesServiceImpl extends TailgateImagesServiceBaseImpl {
 	}
 	
 	@Override
+	public TailgateImages updateTailgateImage(long tailgateImageId,
+									String imageTitle,
+									String imageDesc,
+									ServiceContext  serviceContext){
+		TailgateImages tailgateImage=null;
+		try{
+			tailgateImage = TailgateImagesLocalServiceUtil.getTailgateImages(tailgateImageId);
+			tailgateImage.setImageTitle(imageTitle);
+			tailgateImage.setImageDesc(imageDesc);
+			tailgateImage.setImageUUID(tailgateImage.getImageUUID());
+			tailgateImage.setImageGroupId(tailgateImage.getImageGroupId());
+			
+			Date now = new Date();
+			tailgateImage.setUserId(serviceContext.getGuestOrUserId());
+			tailgateImage.setModifiedDate(serviceContext.getModifiedDate(now));
+
+		    
+			TailgateImagesLocalServiceUtil.updateTailgateImages(tailgateImage);
+			
+		}catch(Exception ex){
+			LOGGER.error(ex);
+		}    
+		return tailgateImage;
+	}
+	
+	@Override
 	public void deleteTailgateImageByTailgateImageId(long tailgateImageId,
 									ServiceContext  serviceContext){
 		try{
@@ -85,6 +111,20 @@ public class TailgateImagesServiceImpl extends TailgateImagesServiceBaseImpl {
 									ServiceContext  serviceContext){
 		try{
 			List<TailgateImages> images = TailgateImagesUtil.findBytailgateId(tailgateId);
+			for(TailgateImages tailgate: images){
+				TailgateImagesUtil.removeBytailgateId(tailgate.getTailgateId());
+			}
+
+		}catch(Exception ex){
+			LOGGER.error(ex);
+		}    
+	}
+	
+	@Override
+	public void deleteTailgateImageByUUID(String imageUUID,
+									ServiceContext  serviceContext){
+		try{
+			List<TailgateImages> images = TailgateImagesUtil.findByimageUUID(imageUUID);
 			for(TailgateImages tailgate: images){
 				TailgateImagesUtil.removeBytailgateId(tailgate.getTailgateId());
 			}

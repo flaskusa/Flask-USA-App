@@ -82,6 +82,24 @@ public class TailgateImagesServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.TailgateImagesSoap updateTailgateImage(
+		long tailgateImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.TailgateImages returnValue = TailgateImagesServiceUtil.updateTailgateImage(tailgateImageId,
+					imageTitle, imageDesc, serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateImagesSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteTailgateImageByTailgateImageId(
 		long tailgateImageId,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -102,6 +120,20 @@ public class TailgateImagesServiceSoap {
 		throws RemoteException {
 		try {
 			TailgateImagesServiceUtil.deleteTailgateImageByTailgateId(tailgateId,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteTailgateImageByUUID(java.lang.String imageUUID,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			TailgateImagesServiceUtil.deleteTailgateImageByUUID(imageUUID,
 				serviceContext);
 		}
 		catch (Exception e) {

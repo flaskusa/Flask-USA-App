@@ -69,6 +69,15 @@ public class TailgateImagesServiceWrapper implements TailgateImagesService,
 	}
 
 	@Override
+	public com.rumbasolutions.flask.model.TailgateImages updateTailgateImage(
+		long tailgateImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateImagesService.updateTailgateImage(tailgateImageId,
+			imageTitle, imageDesc, serviceContext);
+	}
+
+	@Override
 	public void deleteTailgateImageByTailgateImageId(long tailgateImageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_tailgateImagesService.deleteTailgateImageByTailgateImageId(tailgateImageId,
@@ -79,6 +88,13 @@ public class TailgateImagesServiceWrapper implements TailgateImagesService,
 	public void deleteTailgateImageByTailgateId(long tailgateId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_tailgateImagesService.deleteTailgateImageByTailgateId(tailgateId,
+			serviceContext);
+	}
+
+	@Override
+	public void deleteTailgateImageByUUID(java.lang.String imageUUID,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_tailgateImagesService.deleteTailgateImageByUUID(imageUUID,
 			serviceContext);
 	}
 

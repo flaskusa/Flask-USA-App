@@ -73,6 +73,15 @@ public class TailgateImagesServiceUtil {
 			imageUUID, imageGroupId, serviceContext);
 	}
 
+	public static com.rumbasolutions.flask.model.TailgateImages updateTailgateImage(
+		long tailgateImageId, java.lang.String imageTitle,
+		java.lang.String imageDesc,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateTailgateImage(tailgateImageId, imageTitle, imageDesc,
+			serviceContext);
+	}
+
 	public static void deleteTailgateImageByTailgateImageId(
 		long tailgateImageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
@@ -84,6 +93,11 @@ public class TailgateImagesServiceUtil {
 	public static void deleteTailgateImageByTailgateId(long tailgateId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService().deleteTailgateImageByTailgateId(tailgateId, serviceContext);
+	}
+
+	public static void deleteTailgateImageByUUID(java.lang.String imageUUID,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteTailgateImageByUUID(imageUUID, serviceContext);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.TailgateImages> getTailgateImages(
