@@ -15,7 +15,7 @@ _tailgateModel.SERVICE_ENDPOINTS = {
 	ADD_TAILGATE_USER			:"/flask-user-tailgate-portlet.tailgateusers/add-tailgate-user",
 	DELETE_TAILGATE_USER		:"/flask-user-tailgate-portlet.tailgateusers/delete-tailgate-user",
 	GET_ALL_EVENTS              :"/flask-rest-events-portlet.event/get-all-events",
-	GET_ALL_USERS				:"/flask-rest-users-portlet.flaskadmin/get-users",
+	GET_ALL_USERS				:"/flask-social-portlet.entry/search-my-friends",
 	GET_ALL_GROUPS 				:"/flask-manage-user-group-portlet.flaskgroup/get-all-groups",
 	GET_ALL_GROUP_USER			:"/flask-manage-user-group-portlet.flaskgroupusers/get-all-group-users",
 	GET_VENUE					:"/flask-rest-events-portlet.venue/get-venue"
@@ -60,7 +60,9 @@ _tailgateModel.MESSAGES= {
 		ERROR: "There was an error in saving User Tailgate",
 		DEL_SUCCESS: "Tailgate successfully deleted",
 		DEL_ERR: "Error in deleting Tailgate",
-		ADD_EVENT_FIRST_ERR: "Please save Tailgate first"
+		ADD_EVENT_FIRST_ERR: "Please save Tailgate first",
+		IMAGE_UPLOAD_SUCCESS: "Images uploaded successfully",
+		IMAGE_UPLOAD_ERROR: "There was an error while saving images"
  };
 _tailgateModel.allGroupDetails = [];
 _tailgateModel.allMemberDetails = [];

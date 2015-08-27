@@ -1,6 +1,6 @@
 var imageContainer = $("#eventImage");
 var tailgateForm;
-var dropZoneLogo;
+var dropZone;
 var tailgateId;
 var events = [];
 function addClickHandlers(){
@@ -9,7 +9,6 @@ function addClickHandlers(){
 	/* Click handler for add user button*/
 	
 	$(".cssAddUser").click(function(){
-		
 			$("#tailgateId").val(0);
 			tailgateId = 0;
 			eventForm.trigger('reset')
@@ -306,6 +305,7 @@ function saveTailgate(){
 							addTailgateMember(userparams)
 						}
 						_flaskLib.showSuccessMessage('action-msg', _tailgateModel.MESSAGES.SAVE);
+						fnSaveImages(data.tailgateId);
 						loadData();
 					} ,
 					function (data){
@@ -361,41 +361,19 @@ function initForm(){
 function fnBuildEventUpload(imageContainer){
 	$(imageContainer).html(""); 
   	var strSelected = "";
-  	dropZoneLogo = "";
-    var objForm = $('<form/>',{'class':'dropzone','id':'eventLogoImage','action':$("#imgActionUrl").val()});
+  	dropZone = "";
+    var objForm = $('<form/>',{'class':'dropzone','id':'tailgateImage','action':$("#imgActionUrl").val()});
     $(objForm).appendTo(imageContainer);
-    var objEventId = $('<input/>',{'name':'_tailgateIdId','id':'_tailgateIdId','type':'hidden','value':$("#tailgateId").val()});
-    $(objEventId).appendTo(objForm);
-    var objIsLogo = $('<input/>',{'name':'_isLogo','id':'_isLogo','type':'hidden','value':'Y'});
-    $(objIsLogo).appendTo(objForm);
+    var objTailgateId = $('<input/>',{'name':'_tailgateId','id':'_tailgateId','type':'hidden','value':$("#tailgateId").val()});
+    $(objTailgateId).appendTo(objForm);
+    //var objIsLogo = $('<input/>',{'name':'_isLogo','id':'_isLogo','type':'hidden','value':'Y'});
+    //$(objIsLogo).appendTo(objForm);
     
-    dropZoneLogo = new Dropzone($(objForm).get(0),{
+    dropZone = new Dropzone($(objForm).get(0),{
     	autoProcessQueue: false,
     	addRemoveLinks : true,
     	uploadMultiple : true
-    });
-}
-
-function fnSaveEventLogo(eventId,IsNew){
-	$("#_eventId").val(eventId);
-	dropZoneLogo.options.autoProcessQueue = true;
-	dropZoneLogo.processQueue();
-//	dropZoneLogo.on("queuecomplete", function (file) {
-//		if(IsNew){
-//			var files = $("#imgActionUrl").val();
-//			$('.nav-tabs > .active').next('li').find('a').trigger('click');
-//			createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
-//			loadEventDetailsData(eventId);
-//		}
-//		else{
-//			$("#eventImage").html(""); // Clear upload component
-//			$("#eventDataTable").show();
-//			$("#formContainer").hide();
-//			loadData();
-//		}		
-//	});	
-	dropZoneLogo.on('success',function(file,responsenew){
-	});
+    });	
 }
 
 function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel){
@@ -419,7 +397,6 @@ $(document).ready(function(){
         animationDuration: 0,
         rules: [
 	               { input: '#tailgateName', message: 'Tailgate name is required!', action: 'keyup, blur', rule: 'required' },
-	               { input: '#tailgateDescription', message: 'Tailgate Description is required!', action: 'keyup, blur', rule: 'required' },
 	               {
 		                input: '#endTime', message: 'End time always greater than start time!', action: 'keyup, focus', rule: function (input, commit) {
 		                	var st=$("#startTime").val();
@@ -459,6 +436,7 @@ function fetchTailgateMemberDetail(tailgateId) {
 				_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
 			});
 }
+
 function fetchTailgateGroupDetail(tailgateId) {
 	var flaskRequest = new Request();
 	params = {
@@ -481,8 +459,10 @@ function showAddTailgateMembersForm(rowData) {
 }
 function prepareTailgateMemberGrid(){
 		var flaskRequest = new Request();
+		var _companyId = Liferay.ThemeDisplay.getCompanyId();
+		var params = {companyId:_companyId,keywords:''};
 		flaskRequest.sendGETRequest(
-				_tailgateModel.SERVICE_ENDPOINTS.GET_ALL_USERS, {}, function(data) {
+				_tailgateModel.SERVICE_ENDPOINTS.GET_ALL_USERS, params, function(data) {
 					var gridData = prepareMemberData(data, _tailgateModel.allMemberDetails);
 					createTailgateUserTable(gridData, $("#tailgateMemberDataGrid"));
 				}, function(error) {
@@ -568,4 +548,17 @@ function addTailgateGroup(params){
 			}, function(error) { /* failure handler */
 				_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
 			});
+}
+
+function fnSaveImages(tailgateId){
+	$("#_tailgateId").val(tailgateId);
+	dropZone.options.autoProcessQueue = true;
+	dropZone.processQueue();
+	dropZone.on("queuecomplete", function (file) {
+    	wait(function(){
+    		_flaskLib.showSuccessMessage('action-msg', _tailgateModel.MESSAGES.IMAGE_UPLOAD_SUCCESS);
+    		return true;
+    	},1)					
+    });
+	return false;
 }
