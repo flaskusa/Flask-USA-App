@@ -30,10 +30,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
-//import com.rumbasolutions.flask.model.TailgateInfo;
-//import com.rumbasolutions.flask.service.impl.EventServiceImpl;
-//import com.rumbasolutions.flask.service.TailgateInfoLocalService;
-//import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 
 public class FlaskDocLibUtil {
 	public static final String _tailgateRootFolder = "TailGate";

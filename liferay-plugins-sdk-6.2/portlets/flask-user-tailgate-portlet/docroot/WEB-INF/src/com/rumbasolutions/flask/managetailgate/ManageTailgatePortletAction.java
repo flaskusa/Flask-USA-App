@@ -14,13 +14,14 @@ import org.apache.commons.fileupload.portlet.PortletFileUpload;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.rumbasolutions.flask.service.TailgateImagesServiceUtil;
 //import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 
 public class ManageTailgatePortletAction extends MVCPortlet {
@@ -83,8 +84,7 @@ public class ManageTailgatePortletAction extends MVCPortlet {
 					item.write(storeFile);
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
 					FileEntry fileEntry = FlaskDocLibUtil.addFileEntry(_eventFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
-					//TailgateInfoLocalServiceUtil.addEventDetailImage(_eventDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
-					
+					TailgateImagesServiceUtil.addTailgateImage(_tailgateId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 				}else{
 					
 				}
