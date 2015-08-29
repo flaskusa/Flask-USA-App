@@ -64,8 +64,7 @@ function initialize(portletId, portlet){
 <div id='formContainer' style="display:none">
 	<ul class="nav nav-tabs">
 	  <li class="active"><a href="#tailgates" data-toggle="tab">Manage Tailgate</a></li>
-	  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Tailgate Images</a></li>  
-	  <li><a href="#users" data-toggle="tab" id="musers">Manage Tailgate Members</a></li>  
+	  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Gallery</a></li>  
 	</ul>
 	
 	<div class="tab-content">
