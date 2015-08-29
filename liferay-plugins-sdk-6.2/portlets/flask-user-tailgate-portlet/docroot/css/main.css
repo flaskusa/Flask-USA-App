@@ -146,13 +146,33 @@ ul.flipster-nav
     filter: progid:DXImageTransform.Microsoft.Alpha(opacity=0.5);
     border-radius: 10px;
 }
+
 @media (max-width: 767px){
+	.aui .modal.fade {
+    	top: -300px;
+	}
+	
 	.aui .modal.fade.in {
 	    top: 100px !important;
 	}
+	
+	.aui .modal-body {
+	    max-height: 350px !important;
+	    padding: 6px !important;
+	}	
 }
 
 .eventImageLarge{
-	width: 350px !important;
-    height: 200px !important;
+	width: 335px !important;
+    height: 150px !important;
+    margin: 25px auto !important;
+}
+
+.controlsInline {
+    display: inline-block !important;
+    width: 100% !important;
+}
+
+#btnSaveImageDetails{
+	margin-left: 0px !important;
 }
