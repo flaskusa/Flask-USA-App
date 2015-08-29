@@ -94,11 +94,10 @@ function addClickHandlers(){
 		
 		$("#mcontents").click(function(){
 			var _tailgateId = parseInt($("#tailgateId").val());
-			if(parseInt($("#tailgateId").val())!=0){
+			if(parseInt(_tailgateId)!=0){
 				fnBuildEventUpload(imageContainer);			
 				var container = $('#uploadedImages');
-				fnGetEventDetailImages($("#tailgateId").val(),container, true);
-				
+				fnGetEventDetailImages(_tailgateId,container, true);
 				$("#Upload").click(function(){
 					fnSaveImages(_tailgateId);
 				});
@@ -625,29 +624,29 @@ function fnGetEventDetailImages(tailgateId,container, editable){
 
 function fnRenderImage(imageUUID, imageGroupId, container, tailgateImageId, editable,imageTitle,imageDescription){
 	var imgURL ="/c/document_library/get_file?uuid="+imageUUID+"&groupId="+imageGroupId;
-	//var objdivContainer = $('<div/>',{'class':'X'});
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-eventDetailImageId': tailgateImageId});
-	//var objdivtext = $('<div/>').html("title");
-	//objdivtext.appendTo(objdivContainer);
-	//objdiv.appendTo(objdivContainer);
-	var objdivDropDown = $('<div/>',{'class':'dropdown'});
-	var objAnchor = $('<a/>',{'class':'dropdown-toggle editIcon','data-toggle':'dropdown','href':'#'});
-	objAnchor.html('<i class="icon-pencil"></i>');
-	var objUL = $('<ul/>',{'class':'dropdown-menu imageMenu','role':'menu','aria-labelledby':'dLabel'});
-	var objLI1 = $('<li/>',{'data-uuid':imageUUID, 'data-eventDetailImageId': tailgateImageId,'data-imageURL':imgURL,'data-title':imageTitle,'data-description':imageDescription});
-	var objLI2 = $('<li/>');
-	objLI1.html('<a href="#" data-toggle="modal" data-target="#myModal"><i class="icon-edit"></i> Edit</a>');
-	$(objLI1).click(function(){
-		fnFillImageModal(this);
-	});
-	objLI2.html('<a href="#"><i class="icon-trash"></i> Remove</a>');
-	objdivDropDown.appendTo(objdiv);
-	objAnchor.appendTo(objdivDropDown);
-	objUL.appendTo(objdivDropDown);
-	objLI1.appendTo(objUL);
-	objLI2.appendTo(objUL);	
-	$(objdiv).appendTo($(container));
+	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-tailgateImageId': tailgateImageId});
+	objdiv.appendTo(container);
 	if(editable){
+		var objdivDropDown = $('<div/>',{'class':'dropdown'});
+		var objAnchor = $('<a/>',{'class':'dropdown-toggle editIcon','data-toggle':'dropdown','href':'#'});
+		objAnchor.html('<i class="icon-pencil"></i>');
+		var objUL = $('<ul/>',{'class':'dropdown-menu imageMenu','role':'menu','aria-labelledby':'dLabel'});
+		var objLI1 = $('<li/>',{'data-uuid':imageUUID, 'data-tailgateImageId': tailgateImageId,'data-imageURL':imgURL,'data-title':imageTitle,'data-description':imageDescription});
+		var objLI2 = $('<li/>',{'data-tailgateImageId': tailgateImageId});
+		objLI1.html('<a href="#" data-toggle="modal" data-target="#myModal"><i class="icon-edit"></i> Edit</a>');
+		$(objLI1).click(function(){
+			fnFillImageModal(this);
+		});
+		objLI2.html('<a href="#"><i class="icon-trash"></i> Remove</a>');
+		$(objLI2).click(function(){
+			fnDeleteImage(this);
+		});
+		
+		objdivDropDown.appendTo(objdiv);
+		objAnchor.appendTo(objdivDropDown);
+		objUL.appendTo(objdivDropDown);
+		objLI1.appendTo(objUL);
+		objLI2.appendTo(objUL);	
     	$(objdiv).click(function(){
 	    	$(this).toggleClass("activeImage");
 	    	if($(".activeImage").length>0){
@@ -658,9 +657,8 @@ function fnRenderImage(imageUUID, imageGroupId, container, tailgateImageId, edit
 	    			$(objDel).click(function(){
 	    				$("#spinningSquaresG").show();
 	    				$(".activeImage").each(function(){
-	    					_flaskLib.deleteImage($(this).attr("data-uuid"), imageGroupId, objDel);
-	    					fnDeleteEventDetailImage($(this).attr("data-eventDetailImageId"));
-	    					$(this).remove();
+	    					fnDeleteImage(this);
+	    					$("#spinningSquaresG").hide();
 	    				});
 	    				if($(".activeImage").length==0){
 	    					$("#spinningSquaresG").hide();
@@ -686,7 +684,7 @@ function fnFillImageModal(obj){
 	var description = _obj.attr("data-description");
 	var objImage = $('<div/>',{'class':'eventLogo eventImageLarge','style':'background-image:url('+imgURL+')'});
 	objImage.appendTo($(".tailgateImageDetail"));
-	var tailgateImageId = _obj.attr("data-eventDetailImageId");
+	var tailgateImageId = _obj.attr("data-tailgateImageId");
 	$("#imageTitle").val(title);
 	$("#imageDescription").val(description);
 	$("#btnSaveImageDetails").click(function(){
@@ -705,13 +703,16 @@ function fnFillImageModal(obj){
 	});
 }
 
-function fnDeleteImage(tailgateImageId){
-	params= {'tailgateImageId': tailgateImageId,imageTitle:$("#imageTitle").val(),imageDesc:$("#imageDescription").val()};
+function fnDeleteImage(obj){
+	var _obj = $(obj);
+	var _tailgateImageId = _obj.attr("data-tailgateImageId"); 
+	params= {'tailgateImageId': _tailgateImageId};
 	var flaskRequest = new Request();
 	console.log(params);
-	flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.UPDATE_IMAGES_DETAIL , params, 
+	flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.DELETE_TAILGATE_IMAGE , params, 
 		function (data){
-			$('#myModal').modal('hide');
+			var $div = _obj.closest('div[class^="eventLogo"]');
+			$div.hide('slow', function(){ $div.remove(); });
 		},
 		function (data){
 			console.log(data);

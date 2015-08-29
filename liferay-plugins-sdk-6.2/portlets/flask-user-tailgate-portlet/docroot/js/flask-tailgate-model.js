@@ -19,7 +19,9 @@ _tailgateModel.SERVICE_ENDPOINTS = {
 	GET_ALL_GROUPS 				:"/flask-manage-user-group-portlet.flaskgroup/get-all-groups",
 	GET_ALL_GROUP_USER			:"/flask-manage-user-group-portlet.flaskgroupusers/get-all-group-users",
 	GET_VENUE					:"/flask-rest-events-portlet.venue/get-venue",
-	GET_ALL_TAILGATE_IMAGES		:"/flask-user-tailgate-portlet.tailgateimages/get-tailgate-images"
+	GET_ALL_TAILGATE_IMAGES		:"/flask-user-tailgate-portlet.tailgateimages/get-tailgate-images",
+	UPDATE_IMAGES_DETAIL		:"/flask-user-tailgate-portlet.tailgateimages/update-tailgate-image",
+	DELETE_TAILGATE_IMAGE		:"/flask-user-tailgate-portlet.tailgateimages/delete-tailgate-image-by-tailgate-image-id"	
 };
 
 _tailgateModel.DATA_MODEL= {
