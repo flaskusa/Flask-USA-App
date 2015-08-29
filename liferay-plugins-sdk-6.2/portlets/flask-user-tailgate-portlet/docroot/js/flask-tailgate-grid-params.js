@@ -363,9 +363,9 @@ GRID_PARAM.formatDate = function (dateVal){
  */
 function createTailgateUserTable(data, grid){
 //	grid.jqxGrid("refresh");
-    var eventsColumns = [{ text: 'First Name', columntype: 'textbox',  datafield: 'firstName', width: '20%' },
-    	 { text: 'Last Name', datafield: 'lastName', width: '20%'},
-    	 { text: 'Screen Name', datafield: 'screenName',  width: '20%'},
+	console.log(data);
+    var eventsColumns = [{ text: 'First Name', columntype: 'textbox',  datafield: 'firstName', width: '30%' },
+    	 { text: 'Last Name', datafield: 'lastName', width: '30%'},
     	 { text: 'Email', datafield: 'emailAddress',  width: '37.5%'}];
     var source = {
 			 localdata:data,
@@ -373,7 +373,7 @@ function createTailgateUserTable(data, grid){
 			 datafields: [
 			              	{name: 'firstName', type: 'string' },
 			              	{name: 'lastName', type: 'string' },
-		                    {name: 'screenName', type: 'string' },
+			              	{name: 'lastName', type: 'string' },
 		                    {name:'emailAddress',type:'string'},
 		                    {name:'userId',type:'string'}
 		                ],
@@ -390,14 +390,54 @@ function createTailgateUserTable(data, grid){
 				columnsmenuwidth : 40,
 				rowsheight : 34,
                 theme:	'custom',
-             // Pageing config
+                // Pageing config
                 pageable : true,
                 pagermode : 'default',
                 rowdetails: true,
                 selectionmode: 'checkbox',
                 showrowdetailscolumn:false,
-//                rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
-                initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
+                //rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
+                //initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
+                columns: eventsColumns
+            });
+    
+	}
+
+function createTailgateMemberTable(data, grid){
+//	grid.jqxGrid("refresh");
+    var eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '30%' },
+    	 { text: 'Email', datafield: 'emailAddress', width: '30%'},
+    	 { text: 'Role', datafield: 'isAdmin',  width: '37.5%'}];
+    var source = {
+			 localdata:data,
+			 datatype:'array',
+			 datafields: [
+			              	{name: 'userName', type: 'string' },
+			              	{name: 'emailAddress', type: 'string' },
+		                    {name: 'isAdmin',type:'string'},
+		                    {name: 'userId',type:'string'}
+		                ],
+		     id : 'userId'           
+	 };
+    userGridObj = grid;
+	var dataAdapter = new $.jqx.dataAdapter(source);
+    grid.jqxGrid(
+            {
+                width: '100%',
+                height : '250',
+                source: dataAdapter,
+                columnsheight : 40,
+				columnsmenuwidth : 40,
+				rowsheight : 34,
+                theme:	'custom',
+                // Pageing config
+                pageable : true,
+                pagermode : 'default',
+                rowdetails: true,
+                selectionmode: 'checkbox',
+                showrowdetailscolumn:false,
+                //rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
+                //initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
                 columns: eventsColumns
             });
     

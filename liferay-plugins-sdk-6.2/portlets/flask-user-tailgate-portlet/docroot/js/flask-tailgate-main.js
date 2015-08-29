@@ -3,6 +3,7 @@ var tailgateForm;
 var dropZone;
 var tailgateId;
 var events = [];
+var iSelected = false;
 function addClickHandlers(){
 	eventForm = $("#tailgateForm");
 	$(".cssDelete").hide();	
@@ -102,6 +103,9 @@ function addClickHandlers(){
 					fnSaveImages(_tailgateId);
 				});
 			}
+		});
+		$("#musers").click(function(){
+			$("#tailgateMembersDataGridShow").show();
 		});
 }
 
@@ -259,6 +263,7 @@ function editTailgate(rowData) {
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("tailgateForm",  _tailgateModel.DATA_MODEL.TAILGATE, rowData, function(){});
 		$("#tailgateDataTable").hide();
+		prepareTailgateMembersGridShow(rowData.tailgateId);
 		eventForm.show();
 		$("#formContainer").show();
 		loadEventAndTime('eventId',  rowData.tailgateId);
@@ -330,16 +335,19 @@ function addTailgateMembers(){
 	var selectedUserList = GRID_PARAM.getCheckedUsersList();
 	for ( var i = 0 ; i < selectedUserList.length; i ++) {
 		var user = selectedUserList[i];
+		console.log(user);
 		var userrparams = {};
 		userrparams.groupId = 0;
 		userrparams.userId = user.userId;
-		userrparams.userName = user.firstName;
+		userrparams.userName = user.firstName+" "+user.lastName;
+		userrparams.emailAddress = user.emailAddress;
 		userrparams.isAdmin = 0;
 		userrparams.tailgateId = tailgateId;
-		addTailgateMember(userrparams)
+		addTailgateMember(userrparams);
 	}
 }
 function addTailgateMember(params) {
+	console.log(params)
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_tailgateModel.SERVICE_ENDPOINTS.ADD_TAILGATE_USER,
 			params, function(data) {/* success handler */
@@ -470,7 +478,18 @@ function showAddTailgateMembersForm(rowData) {
 //	$("#tabs").hide();
 	$("#tailgateDataTable").hide();
 	$("#addTailgateMembersForm").show();
+	$("#tailgateMemberDataGrid").show();
 }
+
+function showAddTailgateMembersForm(rowData) {
+	fetchTailgateMemberDetail(rowData.tailgateId);
+	prepareTailgateMemberGrid();
+//	$("#tabs").hide();
+	$("#tailgateDataTable").hide();
+	$("#addTailgateMembersForm").show();
+	$("#tailgateMemberDataGrid").show();
+}
+
 function prepareTailgateMemberGrid(){
 		var flaskRequest = new Request();
 		var _companyId = Liferay.ThemeDisplay.getCompanyId();
@@ -482,6 +501,20 @@ function prepareTailgateMemberGrid(){
 				}, function(error) {
 					_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
 				});
+}
+
+function prepareTailgateMembersGridShow(tailgateId){
+	var flaskRequest = new Request();
+	var params = {tailgateId:tailgateId};
+	flaskRequest.sendGETRequest(
+			_tailgateModel.SERVICE_ENDPOINTS.GET_TAILGATE_MEMBERS, params, function(data) {
+				console.log("i m in fn");
+				console.log(data);
+				var gridData = prepareMemberData(data, _tailgateModel.allMemberDetails);
+				createTailgateMemberTable(gridData, $("#tailgateMembersDataGridShow"));
+			}, function(error) {
+				_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
+			});
 }
 
 function showAddTailgateGroupForm(rowData) {
@@ -582,7 +615,7 @@ function fnGetEventDetailImages(tailgateId,container, editable){
 	flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.GET_ALL_TAILGATE_IMAGES , params, 
 		function (data){
 			$.each(data, function(idx, obj) {
-				fnRenderImage(obj.imageUUID, obj.imageGroupId, container, obj.tailgateImageId, editable);
+				fnRenderImage(obj.imageUUID, obj.imageGroupId, container, obj.tailgateImageId, editable,obj.imageTitle,obj.imageDesc);
 			});			
 		},
 		function (data){
@@ -590,9 +623,29 @@ function fnGetEventDetailImages(tailgateId,container, editable){
 		});	
 }
 
-function fnRenderImage(imageUUID, imageGroupId, container, tailgateImageId, editable){
+function fnRenderImage(imageUUID, imageGroupId, container, tailgateImageId, editable,imageTitle,imageDescription){
 	var imgURL ="/c/document_library/get_file?uuid="+imageUUID+"&groupId="+imageGroupId;
+	//var objdivContainer = $('<div/>',{'class':'X'});
 	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-eventDetailImageId': tailgateImageId});
+	//var objdivtext = $('<div/>').html("title");
+	//objdivtext.appendTo(objdivContainer);
+	//objdiv.appendTo(objdivContainer);
+	var objdivDropDown = $('<div/>',{'class':'dropdown'});
+	var objAnchor = $('<a/>',{'class':'dropdown-toggle editIcon','data-toggle':'dropdown','href':'#'});
+	objAnchor.html('<i class="icon-pencil"></i>');
+	var objUL = $('<ul/>',{'class':'dropdown-menu imageMenu','role':'menu','aria-labelledby':'dLabel'});
+	var objLI1 = $('<li/>',{'data-uuid':imageUUID, 'data-eventDetailImageId': tailgateImageId,'data-imageURL':imgURL,'data-title':imageTitle,'data-description':imageDescription});
+	var objLI2 = $('<li/>');
+	objLI1.html('<a href="#" data-toggle="modal" data-target="#myModal"><i class="icon-edit"></i> Edit</a>');
+	$(objLI1).click(function(){
+		fnFillImageModal(this);
+	});
+	objLI2.html('<a href="#"><i class="icon-trash"></i> Remove</a>');
+	objdivDropDown.appendTo(objdiv);
+	objAnchor.appendTo(objdivDropDown);
+	objUL.appendTo(objdivDropDown);
+	objLI1.appendTo(objUL);
+	objLI2.appendTo(objUL);	
 	$(objdiv).appendTo($(container));
 	if(editable){
     	$(objdiv).click(function(){
@@ -623,4 +676,44 @@ function fnRenderImage(imageUUID, imageGroupId, container, tailgateImageId, edit
 	    	}
 	    });	
     }
+}
+
+function fnFillImageModal(obj){
+	$(".tailgateImageDetail").html("");
+	var _obj = $(obj);
+	var imgURL = _obj.attr("data-imageURL");
+	var title = _obj.attr("data-title");
+	var description = _obj.attr("data-description");
+	var objImage = $('<div/>',{'class':'eventLogo eventImageLarge','style':'background-image:url('+imgURL+')'});
+	objImage.appendTo($(".tailgateImageDetail"));
+	var tailgateImageId = _obj.attr("data-eventDetailImageId");
+	$("#imageTitle").val(title);
+	$("#imageDescription").val(description);
+	$("#btnSaveImageDetails").click(function(){
+		params= {'tailgateImageId': tailgateImageId,imageTitle:$("#imageTitle").val(),imageDesc:$("#imageDescription").val()};
+		var flaskRequest = new Request();
+		console.log(params);
+		flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.UPDATE_IMAGES_DETAIL , params, 
+			function (data){
+				_obj.attr("data-title",$("#imageTitle").val());
+				_obj.attr("data-description",$("#imageDescription").val());
+				$('#myModal').modal('hide');
+			},
+			function (data){
+				console.log(data);
+			});			
+	});
+}
+
+function fnDeleteImage(tailgateImageId){
+	params= {'tailgateImageId': tailgateImageId,imageTitle:$("#imageTitle").val(),imageDesc:$("#imageDescription").val()};
+	var flaskRequest = new Request();
+	console.log(params);
+	flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.UPDATE_IMAGES_DETAIL , params, 
+		function (data){
+			$('#myModal').modal('hide');
+		},
+		function (data){
+			console.log(data);
+		});		
 }
