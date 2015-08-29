@@ -65,6 +65,7 @@ function initialize(portletId, portlet){
 	<ul class="nav nav-tabs">
 	  <li class="active"><a href="#tailgates" data-toggle="tab">Manage Tailgate</a></li>
 	  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Tailgate Images</a></li>  
+	  <li><a href="#users" data-toggle="tab" id="musers">Manage Tailgate Members</a></li>  
 	</ul>
 	
 	<div class="tab-content">
@@ -122,7 +123,63 @@ function initialize(portletId, portlet){
 			   </div>
 			  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
 			  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
-		  
+
+	</div>	
+	<div class="tab-pane" id="contents">
+		<div class="form-group">
+		    <label class="control-label" for="eventImage">Tailgate Image:</label>
+			<div class="controls">
+				<div id="eventImage"></div>
+			</div>
+			<input id="Upload" class="btn btn-info clsUpload" type="button" value="Upload"/>
+	   </div>
+	   
+		<div class="form-group">
+		    <label class="control-label" for="eventImage">Uploaded Images:</label>
+			<div class="controls">
+				<div id="uploadedImages"></div>
+			</div>
+	   </div>		   
+	</div>
+	<div class="tab-pane" id="users">
+			<div class="form-group">
+					<div id="campaignJqxwidget">
+						<div id="tailgateMembersDataGridShow"></div>
+					</div>
+			</div>
+	</div>	
+	
+</div>
+</div>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Image details</h4>
+      </div>
+      <div class="modal-body">
+  <div class="tailgateImageDetail"></div>        
+  <div class="form-group">
+      <div class="controls controlsInline">
+       <label class="control-label" for="imageTitle">Title:</label>
+       <input name="<portlet:namespace />imageTitle" id="imageTitle" class="form-control" type="text"/>
+   </div> 
+    </div>
+    <div class="form-group">
+      <div class="controls controlsInline">
+       <label class="control-label" for="imageDescription">Description:</label>
+       <input name="<portlet:namespace />imageDescription" id="imageDescription" class="form-control" type="text"/> 
+   </div> 
+    </div>
+   </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal" id="btnClose">Close</button>
+        <button type="button" class="btn btn-primary" id="btnSaveImageDetails">Save</button>
+      </div>
+    </div>
+  </div>
+</div>		
 		  <!-- Add Group Start here -->
 		  	<div id="addTailgateMembers-valid-msg" style="display: none"></div>
 			<form id="addTailgateMembersForm" style="display: none;">
@@ -174,24 +231,5 @@ function initialize(portletId, portlet){
 					<button type="reset" class="btn btn-primary clsCancelGroup">Cancel</button>
 				</div>
 			</form>
-		</div>
-		<div class="tab-pane" id="contents">
-			<div class="form-group">
-			    <label class="control-label" for="eventImage">Tailgate Image:</label>
-				<div class="controls">
-					<div id="eventImage"></div>
-				</div>
-				<input id="Upload" class="btn btn-info clsUpload" type="button" value="Upload"/>
-		   </div>
-		   
-			<div class="form-group">
-			    <label class="control-label" for="eventImage">Uploaded Images:</label>
-				<div class="controls">
-					<div id="uploadedImages"></div>
-				</div>
-		   </div>		   
-		</div>		
-	</div>	
-</div>		
 </body>
 </html>
