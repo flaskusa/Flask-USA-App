@@ -81,6 +81,7 @@
 			<basic name="userName" />
 			<basic name="isAdmin" />
 			<basic name="groupId" />
+			<basic name="emailAddress" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

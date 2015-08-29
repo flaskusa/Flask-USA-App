@@ -80,6 +80,7 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 		attributes.put("userName", getUserName());
 		attributes.put("isAdmin", getIsAdmin());
 		attributes.put("groupId", getGroupId());
+		attributes.put("emailAddress", getEmailAddress());
 
 		return attributes;
 	}
@@ -120,6 +121,12 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 
 		if (groupId != null) {
 			setGroupId(groupId);
+		}
+
+		String emailAddress = (String)attributes.get("emailAddress");
+
+		if (emailAddress != null) {
+			setEmailAddress(emailAddress);
 		}
 	}
 
@@ -282,6 +289,29 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 		}
 	}
 
+	@Override
+	public String getEmailAddress() {
+		return _emailAddress;
+	}
+
+	@Override
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
+
+		if (_tailgateUsersRemoteModel != null) {
+			try {
+				Class<?> clazz = _tailgateUsersRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setEmailAddress", String.class);
+
+				method.invoke(_tailgateUsersRemoteModel, emailAddress);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getTailgateUsersRemoteModel() {
 		return _tailgateUsersRemoteModel;
 	}
@@ -358,6 +388,7 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 		clone.setUserName(getUserName());
 		clone.setIsAdmin(getIsAdmin());
 		clone.setGroupId(getGroupId());
+		clone.setEmailAddress(getEmailAddress());
 
 		return clone;
 	}
@@ -410,7 +441,7 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{tailgateUserId=");
 		sb.append(getTailgateUserId());
@@ -424,6 +455,8 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 		sb.append(getIsAdmin());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", emailAddress=");
+		sb.append(getEmailAddress());
 		sb.append("}");
 
 		return sb.toString();
@@ -431,7 +464,7 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.TailgateUsers");
@@ -461,6 +494,10 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>emailAddress</column-name><column-value><![CDATA[");
+		sb.append(getEmailAddress());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -475,6 +512,7 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 	private String _userName;
 	private int _isAdmin;
 	private long _groupId;
+	private String _emailAddress;
 	private BaseModel<?> _tailgateUsersRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

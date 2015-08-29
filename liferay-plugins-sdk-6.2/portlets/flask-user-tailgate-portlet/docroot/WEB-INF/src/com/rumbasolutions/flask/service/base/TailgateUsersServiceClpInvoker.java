@@ -47,7 +47,8 @@ public class TailgateUsersServiceClpInvoker {
 		_methodName51 = "addTailgateUser";
 
 		_methodParameterTypes51 = new String[] {
-				"long", "long", "java.lang.String", "int", "int"
+				"long", "long", "java.lang.String", "java.lang.String", "int",
+				"int"
 			};
 
 		_methodName52 = "updateTailgateUser";
@@ -96,9 +97,9 @@ public class TailgateUsersServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
 			return TailgateUsersServiceUtil.addTailgateUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2],
-				((Integer)arguments[3]).intValue(),
-				((Integer)arguments[4]).intValue());
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				((Integer)arguments[4]).intValue(),
+				((Integer)arguments[5]).intValue());
 		}
 
 		if (_methodName52.equals(name) &&

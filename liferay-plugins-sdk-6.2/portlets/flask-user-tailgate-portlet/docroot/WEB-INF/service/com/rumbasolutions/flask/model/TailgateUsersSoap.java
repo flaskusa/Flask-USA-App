@@ -36,6 +36,7 @@ public class TailgateUsersSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setIsAdmin(model.getIsAdmin());
 		soapModel.setGroupId(model.getGroupId());
+		soapModel.setEmailAddress(model.getEmailAddress());
 
 		return soapModel;
 	}
@@ -136,10 +137,19 @@ public class TailgateUsersSoap implements Serializable {
 		_groupId = groupId;
 	}
 
+	public String getEmailAddress() {
+		return _emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
+	}
+
 	private long _tailgateUserId;
 	private long _tailgateId;
 	private long _userId;
 	private String _userName;
 	private int _isAdmin;
 	private long _groupId;
+	private String _emailAddress;
 }

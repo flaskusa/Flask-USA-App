@@ -173,6 +173,21 @@ public interface TailgateUsersModel extends BaseModel<TailgateUsers> {
 	 */
 	public void setGroupId(long groupId);
 
+	/**
+	 * Returns the email address of this tailgate users.
+	 *
+	 * @return the email address of this tailgate users
+	 */
+	@AutoEscape
+	public String getEmailAddress();
+
+	/**
+	 * Sets the email address of this tailgate users.
+	 *
+	 * @param emailAddress the email address of this tailgate users
+	 */
+	public void setEmailAddress(String emailAddress);
+
 	@Override
 	public boolean isNew();
 

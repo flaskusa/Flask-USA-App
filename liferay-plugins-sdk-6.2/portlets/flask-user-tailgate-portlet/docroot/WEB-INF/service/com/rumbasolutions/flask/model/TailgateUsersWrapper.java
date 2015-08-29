@@ -55,6 +55,7 @@ public class TailgateUsersWrapper implements TailgateUsers,
 		attributes.put("userName", getUserName());
 		attributes.put("isAdmin", getIsAdmin());
 		attributes.put("groupId", getGroupId());
+		attributes.put("emailAddress", getEmailAddress());
 
 		return attributes;
 	}
@@ -95,6 +96,12 @@ public class TailgateUsersWrapper implements TailgateUsers,
 
 		if (groupId != null) {
 			setGroupId(groupId);
+		}
+
+		String emailAddress = (String)attributes.get("emailAddress");
+
+		if (emailAddress != null) {
+			setEmailAddress(emailAddress);
 		}
 	}
 
@@ -280,6 +287,26 @@ public class TailgateUsersWrapper implements TailgateUsers,
 	@Override
 	public void setGroupId(long groupId) {
 		_tailgateUsers.setGroupId(groupId);
+	}
+
+	/**
+	* Returns the email address of this tailgate users.
+	*
+	* @return the email address of this tailgate users
+	*/
+	@Override
+	public java.lang.String getEmailAddress() {
+		return _tailgateUsers.getEmailAddress();
+	}
+
+	/**
+	* Sets the email address of this tailgate users.
+	*
+	* @param emailAddress the email address of this tailgate users
+	*/
+	@Override
+	public void setEmailAddress(java.lang.String emailAddress) {
+		_tailgateUsers.setEmailAddress(emailAddress);
 	}
 
 	@Override

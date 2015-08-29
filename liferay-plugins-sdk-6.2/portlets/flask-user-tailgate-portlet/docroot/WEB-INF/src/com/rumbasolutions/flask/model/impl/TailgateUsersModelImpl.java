@@ -70,9 +70,10 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
 			{ "isAdmin", Types.INTEGER },
-			{ "groupId", Types.BIGINT }
+			{ "groupId", Types.BIGINT },
+			{ "emailAddress", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateUsers (tailgateUserId LONG not null primary key,tailgateId LONG,userId LONG,userName VARCHAR(75) null,isAdmin INTEGER,groupId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateUsers (tailgateUserId LONG not null primary key,tailgateId LONG,userId LONG,userName VARCHAR(75) null,isAdmin INTEGER,groupId LONG,emailAddress VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flasktailgate_TailgateUsers";
 	public static final String ORDER_BY_JPQL = " ORDER BY tailgateUsers.tailgateUserId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flasktailgate_TailgateUsers.tailgateUserId ASC";
@@ -110,6 +111,7 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 		model.setUserName(soapModel.getUserName());
 		model.setIsAdmin(soapModel.getIsAdmin());
 		model.setGroupId(soapModel.getGroupId());
+		model.setEmailAddress(soapModel.getEmailAddress());
 
 		return model;
 	}
@@ -180,6 +182,7 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 		attributes.put("userName", getUserName());
 		attributes.put("isAdmin", getIsAdmin());
 		attributes.put("groupId", getGroupId());
+		attributes.put("emailAddress", getEmailAddress());
 
 		return attributes;
 	}
@@ -220,6 +223,12 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 
 		if (groupId != null) {
 			setGroupId(groupId);
+		}
+
+		String emailAddress = (String)attributes.get("emailAddress");
+
+		if (emailAddress != null) {
+			setEmailAddress(emailAddress);
 		}
 	}
 
@@ -327,6 +336,22 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 		_groupId = groupId;
 	}
 
+	@JSON
+	@Override
+	public String getEmailAddress() {
+		if (_emailAddress == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _emailAddress;
+		}
+	}
+
+	@Override
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -364,6 +389,7 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 		tailgateUsersImpl.setUserName(getUserName());
 		tailgateUsersImpl.setIsAdmin(getIsAdmin());
 		tailgateUsersImpl.setGroupId(getGroupId());
+		tailgateUsersImpl.setEmailAddress(getEmailAddress());
 
 		tailgateUsersImpl.resetOriginalValues();
 
@@ -445,12 +471,20 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 
 		tailgateUsersCacheModel.groupId = getGroupId();
 
+		tailgateUsersCacheModel.emailAddress = getEmailAddress();
+
+		String emailAddress = tailgateUsersCacheModel.emailAddress;
+
+		if ((emailAddress != null) && (emailAddress.length() == 0)) {
+			tailgateUsersCacheModel.emailAddress = null;
+		}
+
 		return tailgateUsersCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{tailgateUserId=");
 		sb.append(getTailgateUserId());
@@ -464,6 +498,8 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 		sb.append(getIsAdmin());
 		sb.append(", groupId=");
 		sb.append(getGroupId());
+		sb.append(", emailAddress=");
+		sb.append(getEmailAddress());
 		sb.append("}");
 
 		return sb.toString();
@@ -471,7 +507,7 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.TailgateUsers");
@@ -501,6 +537,10 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 			"<column><column-name>groupId</column-name><column-value><![CDATA[");
 		sb.append(getGroupId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>emailAddress</column-name><column-value><![CDATA[");
+		sb.append(getEmailAddress());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -521,6 +561,7 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 	private String _userName;
 	private int _isAdmin;
 	private long _groupId;
+	private String _emailAddress;
 	private long _columnBitmask;
 	private TailgateUsers _escapedModel;
 }

@@ -78,11 +78,11 @@ public class TailgateUsersServiceUtil {
 	}
 
 	public static com.rumbasolutions.flask.model.TailgateUsers addTailgateUser(
-		long tailgateId, long userId, java.lang.String userName, int isAdmin,
-		int groupId) {
+		long tailgateId, long userId, java.lang.String userName,
+		java.lang.String emailAddress, int isAdmin, int groupId) {
 		return getService()
-				   .addTailgateUser(tailgateId, userId, userName, isAdmin,
-			groupId);
+				   .addTailgateUser(tailgateId, userId, userName, emailAddress,
+			isAdmin, groupId);
 	}
 
 	public static com.rumbasolutions.flask.model.TailgateUsers updateTailgateUser(

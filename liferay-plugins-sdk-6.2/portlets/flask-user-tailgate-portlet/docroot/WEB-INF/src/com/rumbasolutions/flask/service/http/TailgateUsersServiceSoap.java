@@ -108,11 +108,12 @@ public class TailgateUsersServiceSoap {
 	}
 
 	public static com.rumbasolutions.flask.model.TailgateUsersSoap addTailgateUser(
-		long tailgateId, long userId, java.lang.String userName, int isAdmin,
-		int groupId) throws RemoteException {
+		long tailgateId, long userId, java.lang.String userName,
+		java.lang.String emailAddress, int isAdmin, int groupId)
+		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.TailgateUsers returnValue = TailgateUsersServiceUtil.addTailgateUser(tailgateId,
-					userId, userName, isAdmin, groupId);
+					userId, userName, emailAddress, isAdmin, groupId);
 
 			return com.rumbasolutions.flask.model.TailgateUsersSoap.toSoapModel(returnValue);
 		}

@@ -105,7 +105,7 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 	}
 	
 	@Override
-	public TailgateUsers addTailgateUser(long tailgateId, long userId, String userName, int isAdmin, int groupId){
+	public TailgateUsers addTailgateUser(long tailgateId, long userId, String userName, String emailAddress, int isAdmin, int groupId){
 		TailgateUsers tailgateUsers = null;
 		try{
 			if(!checkTailgateUserExist(tailgateId, userId)){
@@ -114,6 +114,7 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 				tailgateUsers.setIsAdmin(isAdmin);
 				tailgateUsers.setUserId(userId);
 				tailgateUsers.setUserName(userName);
+				tailgateUsers.setEmailAddress(emailAddress);
 				tailgateUsers.setGroupId(groupId);
 				
 				tailgateUsers = TailgateUsersLocalServiceUtil.addTailgateUsers(tailgateUsers);

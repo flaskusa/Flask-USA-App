@@ -55,6 +55,7 @@
 		<column name="groupId" type="long" />
 
 		<!-- Finder methods -->
+        <column name="emailAddress" type="String"></column>
 		<finder name="tailgateGroups" return-type="Collection">
 			<finder-column name="tailgateId" />
 		</finder>

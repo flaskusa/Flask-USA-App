@@ -42,7 +42,8 @@ create table flasktailgate_TailgateUsers (
 	userId LONG,
 	userName VARCHAR(75) null,
 	isAdmin INTEGER,
-	groupId LONG
+	groupId LONG,
+	emailAddress VARCHAR(75) null
 );
 
 create table flasktailgate_UserTailgate (
