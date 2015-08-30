@@ -66,9 +66,10 @@ public class EventServiceWrapper implements EventService,
 	public com.liferay.portal.kernel.json.JSONObject getSimpleFilteredEvents(
 		java.lang.String eventTypeIds, java.lang.String startDate,
 		java.lang.String endDate, java.lang.String searchString,
+		java.lang.String lattitude, java.lang.String longitude,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.getSimpleFilteredEvents(eventTypeIds, startDate,
-			endDate, searchString, serviceContext);
+			endDate, searchString, lattitude, longitude, serviceContext);
 	}
 
 	@Override
@@ -100,11 +101,11 @@ public class EventServiceWrapper implements EventService,
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID, long groupId,
+		java.lang.String eventImageUUID, long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.updateEvent(eventId, eventName, description,
 			eventDate, startTime, endTime, eventTypeId, venueId,
-			eventImageUUID, groupId, serviceContext);
+			eventImageUUID, eventImageGroupId, serviceContext);
 	}
 
 	@Override

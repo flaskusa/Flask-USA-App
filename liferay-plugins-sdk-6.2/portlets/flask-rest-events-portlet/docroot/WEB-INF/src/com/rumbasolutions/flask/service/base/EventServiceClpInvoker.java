@@ -42,7 +42,8 @@ public class EventServiceClpInvoker {
 
 		_methodParameterTypes87 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName88 = "getUserSelectedEvents";
@@ -215,8 +216,9 @@ public class EventServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes87, parameterTypes)) {
 			return EventServiceUtil.getSimpleFilteredEvents((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3],
-				(com.liferay.portal.service.ServiceContext)arguments[4]);
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				(java.lang.String)arguments[5],
+				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
 		if (_methodName88.equals(name) &&

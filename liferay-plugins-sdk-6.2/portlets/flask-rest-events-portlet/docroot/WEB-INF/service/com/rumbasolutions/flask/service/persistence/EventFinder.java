@@ -20,5 +20,6 @@ package com.rumbasolutions.flask.service.persistence;
 public interface EventFinder {
 	public java.util.List<com.rumbasolutions.flask.model.Event> getSimpleFilteredEvents(
 		java.lang.String eventTypeIds, java.lang.String startDate,
-		java.lang.String endDate, java.lang.String stringFilter);
+		java.lang.String endDate, java.lang.String stringFilter,
+		java.util.Map<java.lang.String, java.lang.Double> geoRange);
 }

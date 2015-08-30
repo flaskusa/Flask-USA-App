@@ -17,6 +17,7 @@ package com.rumbasolutions.flask.service.impl;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -89,13 +90,19 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
-	public JSONObject getSimpleFilteredEvents(String eventTypeIds, String startDate, String endDate, String searchString, ServiceContext  serviceContext){
+	public JSONObject getSimpleFilteredEvents(String eventTypeIds, String startDate, String endDate, String searchString, String latitude, String longitude, ServiceContext  serviceContext){
 		JSONObject eventListJsonObj =  JSONFactoryUtil.createJSONObject();
 
 		List<Event> events= new ArrayList<Event>();
 		List<Long> myEventList = new ArrayList<Long>();
 		try {
-			events =  EventFinderUtil.getSimpleFilteredEvents(eventTypeIds, startDate, endDate, searchString);
+			Double dLat =  FlaskUtil.parseLatitude(latitude);
+			Double dLong = FlaskUtil.parseLatitude(longitude);
+			Map<String, Double>  geoRange = null;
+			if(dLat != null && dLong != null){
+				geoRange = FlaskUtil.getLatitudeAndLongitudeRange(dLat, dLong, FlaskUtil.DEFAULT_RANGE);
+			}
+			events =  EventFinderUtil.getSimpleFilteredEvents(eventTypeIds, startDate, endDate, searchString, geoRange);
 		
 			JSONArray eventArr=  FlaskUtil.setStringNamesForEvents(events, myEventList);
 			eventListJsonObj.put("Events", eventArr);
@@ -106,6 +113,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		}
 		return eventListJsonObj;
 	}
+	
 	
 	
 	

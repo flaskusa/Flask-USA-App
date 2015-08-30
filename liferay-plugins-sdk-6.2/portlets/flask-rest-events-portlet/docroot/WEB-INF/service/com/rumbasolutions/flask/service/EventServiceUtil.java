@@ -71,10 +71,11 @@ public class EventServiceUtil {
 	public static com.liferay.portal.kernel.json.JSONObject getSimpleFilteredEvents(
 		java.lang.String eventTypeIds, java.lang.String startDate,
 		java.lang.String endDate, java.lang.String searchString,
+		java.lang.String lattitude, java.lang.String longitude,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .getSimpleFilteredEvents(eventTypeIds, startDate, endDate,
-			searchString, serviceContext);
+			searchString, lattitude, longitude, serviceContext);
 	}
 
 	public static com.liferay.portal.kernel.json.JSONObject getUserSelectedEvents(
@@ -103,12 +104,12 @@ public class EventServiceUtil {
 		long eventId, java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID, long groupId,
+		java.lang.String eventImageUUID, long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateEvent(eventId, eventName, description, eventDate,
-			startTime, endTime, eventTypeId, venueId, eventImageUUID, groupId,
-			serviceContext);
+			startTime, endTime, eventTypeId, venueId, eventImageUUID,
+			eventImageGroupId, serviceContext);
 	}
 
 	public static void deleteEvent(long eventId,

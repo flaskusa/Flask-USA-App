@@ -42,7 +42,8 @@ public class EventServiceClp implements EventService {
 
 		_methodParameterTypes4 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName5 = "getUserSelectedEvents";
@@ -271,6 +272,7 @@ public class EventServiceClp implements EventService {
 	public com.liferay.portal.kernel.json.JSONObject getSimpleFilteredEvents(
 		java.lang.String eventTypeIds, java.lang.String startDate,
 		java.lang.String endDate, java.lang.String searchString,
+		java.lang.String lattitude, java.lang.String longitude,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -285,6 +287,10 @@ public class EventServiceClp implements EventService {
 					ClpSerializer.translateInput(endDate),
 						
 					ClpSerializer.translateInput(searchString),
+						
+					ClpSerializer.translateInput(lattitude),
+						
+					ClpSerializer.translateInput(longitude),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -412,7 +418,7 @@ public class EventServiceClp implements EventService {
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID, long groupId,
+		java.lang.String eventImageUUID, long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -438,7 +444,7 @@ public class EventServiceClp implements EventService {
 						
 					ClpSerializer.translateInput(eventImageUUID),
 						
-					groupId,
+					eventImageGroupId,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

@@ -7,6 +7,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -48,6 +49,11 @@ public class FlaskUtil {
 	public static HashMap<Long, String> _eventType = new HashMap<Long, String>();
 	public static HashMap<Long, String> _infoType = new HashMap<Long, String>();
 	public static HashMap<Long, String> _infoTypeCategory = new HashMap<Long, String>();
+	public static int DEFAULT_RANGE = 100; //miles
+	public static Double DEFAULT_LATITUDE = 42.3400; //miles
+	public static Double DEFAULT_LONGITUDE = 83.0456; //miles
+
+
 
 	public static long repositoryId = 0;
 	public static long getFlaskRepositoryId() throws PortalException, SystemException{
@@ -58,6 +64,7 @@ public class FlaskUtil {
 		}
 		return repositoryId;	
 	}
+	
 	
 	public static Calendar parseDate(String dateVal){
 		Calendar cal = Calendar.getInstance();
@@ -96,7 +103,26 @@ public class FlaskUtil {
 		}	
 		return cal;
 	}
-	
+
+	public static Double parseLatitude(String latitude){
+		Double dLatitude = DEFAULT_LATITUDE;
+		try{
+			dLatitude = Math.abs(Double.valueOf(latitude));
+		}catch(Exception ex){
+			LOGGER.error(ex.getMessage() + "Value:" + latitude);
+		}
+		return dLatitude;
+	}
+	public static Double parseLongitude(String longitude){
+		Double dLongitude = DEFAULT_LONGITUDE;
+		try{
+			dLongitude = Math.abs(Double.valueOf(longitude));
+		}catch(Exception ex){
+			LOGGER.error(ex.getMessage() + "Value:" + longitude);
+		}
+		return dLongitude;
+		
+	}
 	public static Event setStringNamesForEvent(Event event){
 			try {
 				Venue venue = VenueUtil.fetchByPrimaryKey(event.getVenueId());
@@ -105,7 +131,6 @@ public class FlaskUtil {
 			}
 			catch (SystemException e) {
 				LOGGER.error(e);
-				e.printStackTrace();
 			}
 		
 			return event;
@@ -303,4 +328,46 @@ public class FlaskUtil {
 	
 		return infoTypeCategoryName;
 	}
+	
+	public static Map<String, Double> getLatitudeAndLongitudeRange(
+			double latitude, double longitude, int distance) {
+		Map<String, Double> latitudeLongitudeMap = new HashMap<String, Double>();
+		
+		double radius = 3959;
+		Double latN = Math.asin(Math.sin(Math.toRadians(latitude))
+				* Math.cos(distance / radius)
+				+ Math.cos(Math.toRadians(latitude))
+				* Math.sin(distance / radius) * Math.cos(Math.toRadians(0)));
+
+		Double latS = Math.asin(Math.sin(Math.toRadians(latitude))
+				* Math.cos(distance / radius)
+				+ Math.cos(Math.toRadians(latitude))
+				* Math.sin(distance / radius) * Math.cos(Math.toRadians(180)));
+
+		Double longE = Math.toRadians(longitude)
+				+ Math.atan2(
+						Math.sin(Math.toRadians(90))
+								* Math.sin(distance / radius)
+								* Math.cos(Math.toRadians(latitude)),
+						Math.cos(Math.toRadians(distance / radius))
+								- Math.sin(Math.toRadians(latitude))
+								* Math.sin(Math.toRadians(latN)));
+
+		Double longW = Math.toRadians(longitude)
+				+ Math.atan2(
+						Math.sin(Math.toRadians(270))
+								* Math.sin(distance / radius)
+								* Math.cos(Math.toRadians(latitude)),
+						Math.cos(Math.toRadians(distance / radius))
+								- Math.sin(Math.toRadians(latitude))
+								* Math.sin(Math.toRadians(latN)));
+
+		latitudeLongitudeMap.put("latitudeNorth", Math.toDegrees(latN));
+		latitudeLongitudeMap.put("latitudeSouth", Math.toDegrees(latS));
+		latitudeLongitudeMap.put("longitudeEast", Math.toDegrees(longE));
+		latitudeLongitudeMap.put("longitudeWest", Math.toDegrees(longW));
+		return latitudeLongitudeMap;
+	}
+
+	
 }

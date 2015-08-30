@@ -23,10 +23,11 @@ import com.liferay.portal.kernel.util.ReferenceRegistry;
 public class EventFinderUtil {
 	public static java.util.List<com.rumbasolutions.flask.model.Event> getSimpleFilteredEvents(
 		java.lang.String eventTypeIds, java.lang.String startDate,
-		java.lang.String endDate, java.lang.String stringFilter) {
+		java.lang.String endDate, java.lang.String stringFilter,
+		java.util.Map<java.lang.String, java.lang.Double> geoRange) {
 		return getFinder()
 				   .getSimpleFilteredEvents(eventTypeIds, startDate, endDate,
-			stringFilter);
+			stringFilter, geoRange);
 	}
 
 	public static EventFinder getFinder() {

@@ -75,6 +75,7 @@ public interface EventService extends BaseService, InvokableService {
 	public com.liferay.portal.kernel.json.JSONObject getSimpleFilteredEvents(
 		java.lang.String eventTypeIds, java.lang.String startDate,
 		java.lang.String endDate, java.lang.String searchString,
+		java.lang.String lattitude, java.lang.String longitude,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -97,7 +98,7 @@ public interface EventService extends BaseService, InvokableService {
 		java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID, long groupId,
+		java.lang.String eventImageUUID, long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteEvent(long eventId,

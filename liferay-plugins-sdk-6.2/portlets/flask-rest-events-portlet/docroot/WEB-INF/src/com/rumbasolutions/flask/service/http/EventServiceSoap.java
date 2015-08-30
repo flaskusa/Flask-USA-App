@@ -80,11 +80,13 @@ public class EventServiceSoap {
 	public static java.lang.String getSimpleFilteredEvents(
 		java.lang.String eventTypeIds, java.lang.String startDate,
 		java.lang.String endDate, java.lang.String searchString,
+		java.lang.String lattitude, java.lang.String longitude,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONObject returnValue = EventServiceUtil.getSimpleFilteredEvents(eventTypeIds,
-					startDate, endDate, searchString, serviceContext);
+					startDate, endDate, searchString, lattitude, longitude,
+					serviceContext);
 
 			return returnValue.toString();
 		}
@@ -151,13 +153,13 @@ public class EventServiceSoap {
 		long eventId, java.lang.String eventName, java.lang.String description,
 		java.lang.String eventDate, java.util.Date startTime,
 		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID, long groupId,
+		java.lang.String eventImageUUID, long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.Event returnValue = EventServiceUtil.updateEvent(eventId,
 					eventName, description, eventDate, startTime, endTime,
-					eventTypeId, venueId, eventImageUUID, groupId,
+					eventTypeId, venueId, eventImageUUID, eventImageGroupId,
 					serviceContext);
 
 			return com.rumbasolutions.flask.model.EventSoap.toSoapModel(returnValue);
