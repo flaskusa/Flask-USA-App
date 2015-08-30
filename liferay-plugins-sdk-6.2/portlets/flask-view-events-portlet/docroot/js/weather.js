@@ -229,7 +229,13 @@ WeatherInfo = {
 };
 
 function callWeather(lat, lng) {
-	latitude = lat;
-	longitude = lng;
-    WeatherInfo.init();
+	try{
+		latitude = lat;
+		longitude = lng;
+	    WeatherInfo.init();
+	}catch(ex){
+		 _flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.WEATHER_ERROR + " Exception: " + ex.message);
+	}
+	
+   
 }

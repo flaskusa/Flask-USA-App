@@ -11,7 +11,6 @@
   <header-portlet-css>/css/daterangepicker.css</header-portlet-css>
   <header-portlet-css>/css/owl.carousel.css</header-portlet-css>
   <header-portlet-css>/css/owl.theme.css</header-portlet-css>
-    <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/flask-view-map.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/weather.js</footer-portlet-javascript>
@@ -21,8 +20,8 @@
     <footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/jqxtabs.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
-    <footer-portlet-javascript>/js/owl.carousel.js</footer-portlet-javascript>    
-    
+    <footer-portlet-javascript>/js/owl.carousel.js</footer-portlet-javascript>
+    <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
      <css-class-wrapper>flask-view-events-portlet</css-class-wrapper>
  </portlet>
  <portlet>

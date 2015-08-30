@@ -16,6 +16,14 @@ _eventModel.SERVICE_ENDPOINTS = {
     GET_ALL_CAMPAIGN			:"/flask-advertisement-portlet.adcampaign/get-all-campaign"
 };
 
+_eventModel.detroitGeoLocation = {latitude: 42.3400 ,longitude: 83.0456 };
+_eventModel.currentGeoLocation = {latitude: "" ,longitude: "" };
+
+_eventModel.setDetroitAsGeoLocation = function(){
+	_eventModel.currentGeoLocation.latitude= _eventModel.detroitGeoLocation.latitude;
+	_eventModel.currentGeoLocation.longitude = _eventModel.detroitGeoLocation.longitude;
+	
+}
 _eventModel.DATA_MODEL= {
 		EVENT: 
 			[
@@ -40,7 +48,10 @@ _eventModel.MESSAGES= {
 		ERROR: "There was an error in saving venue",
 		DEL_SUCCESS: "Event successfully deleted",
 		DEL_ERR: "Error in deleting Event",
-		SEARCH_ERR: "No search result found"
+		SEARCH_ERR: "No search result found",
+		WEATHER_ERROR: "Error in getting weather information",
+		LOCATION_ERROR : "Failed to determine location, showing events from michigan area. User search to find events in your area."
+		
  };
 
 _eventModel.DETAIL_DATA_MODEL = {

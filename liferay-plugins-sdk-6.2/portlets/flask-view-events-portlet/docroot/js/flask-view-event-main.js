@@ -76,6 +76,26 @@ function renderEventList(tdata) {
 	 	$(divRow).appendTo($("#placeholder"));
 }
 
+function getEventsForLocation(){
+	   if (navigator.geolocation) {
+	        navigator.geolocation.getCurrentPosition(setLocationObject, locationError);
+	    } else {
+	        _flaskLib.showErrorMessage(_eventModel.LOCATION_ERROR);
+	        locationError();
+	    }
+}
+
+function setLocationObject(position){
+	_eventModel.currentGeoLocation.latitude =  position.coords.latitude;
+	_eventModel.currentGeoLocation.longitude = position.coords.longitude;
+	getFilteredEvents();
+}
+function locationError(error){
+	_flaskLib.showErrorMessage(_eventModel.LOCATION_ERROR);
+	_eventModel.setDetroitAsGeoLocation()
+	getFilteredEvents();
+}
+
 function fnShowEventLogo(imageUUID, imageGroupId,container ,editable){
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
 	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')'});
@@ -282,7 +302,7 @@ function fnBlankSlide(Slider){
 	$(objBlankSlide1).appendTo(Slider);
 }
 
-$(document).ready(function(){
+Liferay.Portlet.ready(function(){
 	//fnLoadList();
 	$(".cssback").click(function(){
 		$('#one').show();
@@ -328,7 +348,7 @@ $(document).ready(function(){
 	        $('#reportrange span').html(label);
 	        startdate = start;
 	        enddate = end;
-	        getFilteredEvents();
+	        getEventsForLocation();
 	    }
 	    
 	    cb(moment(),moment().add(7, 'days'),'Next 7 days');
@@ -374,7 +394,7 @@ function initEventList(){
 		startdate = "";
 		enddate = "";
 	}
-	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: ''};
+	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){
@@ -497,7 +517,7 @@ function initMenuList(){
 function getFilteredEvents(){
 	var filterString = $("#txtSearch").val();
 	var flaskRequest = new Request();
-	params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: filterString};
+	params = {eventTypeIds: '', startDate: startdate, endDate: enddate,searchString: filterString, latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS, params, 
 	function(data){
 		renderEventList(data);

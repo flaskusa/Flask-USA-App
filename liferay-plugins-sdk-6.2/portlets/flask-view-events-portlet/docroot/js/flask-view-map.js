@@ -3,16 +3,22 @@ var map;
 var markers = Array();
 var infos = Array();
 var cur_location;
-function initialize() {
-    geocoder = new google.maps.Geocoder();
-    var myLatlng = new google.maps.LatLng(latitude,longitude);
-    var myOptions = {
-        zoom: 16,
-        center: myLatlng,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-    };
-    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-    findPlaces();
+function initializeMap() {
+	try{
+	    geocoder = new google.maps.Geocoder();
+	    var myLatlng = new google.maps.LatLng(latitude,longitude);
+	    var myOptions = {
+	        zoom: 16,
+	        center: myLatlng,
+	        mapTypeId: google.maps.MapTypeId.ROADMAP
+	    };
+	    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+	    findPlaces();
+	}catch(ex){
+		Console.log("Error in loading google map");
+		_flaskLib.showErrorMessage('action-msg',ex.message);
+	}
+
 }
 function clearOverlays() {
     if (markers) {

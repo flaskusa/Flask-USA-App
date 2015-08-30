@@ -16,11 +16,19 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@	page import="com.liferay.portal.model.Address" %>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
 <%
   com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
   long repositoryId = themeDisplay.getLayout().getGroupId();
   themeDisplay.getLayout().getUuid();
+  String userZipCode =  "";
+  if(themeDisplay.isSignedIn() && themeDisplay.getRealUser().getAddresses().size() > 0){
+	  Address addr =themeDisplay.getRealUser().getAddresses().get(0); 
+	  if(addr != null){
+		  userZipCode = addr.getZip();
+	  }
+  }
 %>
 <portlet:defineObjects />
 
@@ -32,6 +40,11 @@
 </aui:script>
 
 <body>
+<input  type="hidden"  id="userZipCode" value ="<%= userZipCode %>" >
+
+<div id="action-msg" style="display:none">
+</div>
+
 <div id="viewEvents">
 <div class="table-responsive">          
 <div id="one">
