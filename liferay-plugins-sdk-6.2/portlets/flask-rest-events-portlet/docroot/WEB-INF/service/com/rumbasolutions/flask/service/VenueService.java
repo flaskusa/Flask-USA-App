@@ -194,4 +194,9 @@ public interface VenueService extends BaseService, InvokableService {
 
 	public void deleteAllVenueDetailImages(long venueDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getVenueDetailsWithImages(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext);
 }

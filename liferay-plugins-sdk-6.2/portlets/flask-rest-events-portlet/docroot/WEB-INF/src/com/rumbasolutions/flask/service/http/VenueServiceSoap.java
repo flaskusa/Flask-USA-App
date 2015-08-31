@@ -473,5 +473,21 @@ public class VenueServiceSoap {
 		}
 	}
 
+	public static java.lang.String getVenueDetailsWithImages(long venueId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = VenueServiceUtil.getVenueDetailsWithImages(venueId,
+					serviceContext);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(VenueServiceSoap.class);
 }

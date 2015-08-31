@@ -258,6 +258,12 @@ public class VenueServiceWrapper implements VenueService,
 		_venueService.deleteAllVenueDetailImages(venueDetailId, serviceContext);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getVenueDetailsWithImages(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.getVenueDetailsWithImages(venueId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

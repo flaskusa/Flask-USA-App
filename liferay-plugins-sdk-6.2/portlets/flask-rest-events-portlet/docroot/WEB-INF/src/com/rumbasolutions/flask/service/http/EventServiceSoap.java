@@ -80,12 +80,12 @@ public class EventServiceSoap {
 	public static java.lang.String getSimpleFilteredEvents(
 		java.lang.String eventTypeIds, java.lang.String startDate,
 		java.lang.String endDate, java.lang.String searchString,
-		java.lang.String lattitude, java.lang.String longitude,
+		java.lang.String latitude, java.lang.String longitude,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.liferay.portal.kernel.json.JSONObject returnValue = EventServiceUtil.getSimpleFilteredEvents(eventTypeIds,
-					startDate, endDate, searchString, lattitude, longitude,
+					startDate, endDate, searchString, latitude, longitude,
 					serviceContext);
 
 			return returnValue.toString();

@@ -198,6 +198,12 @@ public class VenueServiceClpInvoker {
 		_methodParameterTypes109 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName110 = "getVenueDetailsWithImages";
+
+		_methodParameterTypes110 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -428,6 +434,12 @@ public class VenueServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
+			return VenueServiceUtil.getVenueDetailsWithImages(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -483,4 +495,6 @@ public class VenueServiceClpInvoker {
 	private String[] _methodParameterTypes108;
 	private String _methodName109;
 	private String[] _methodParameterTypes109;
+	private String _methodName110;
+	private String[] _methodParameterTypes110;
 }

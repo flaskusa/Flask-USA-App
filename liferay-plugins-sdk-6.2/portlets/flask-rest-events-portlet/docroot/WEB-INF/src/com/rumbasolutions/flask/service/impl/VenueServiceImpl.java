@@ -20,6 +20,9 @@ import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.security.ac.AccessControlled;
@@ -512,14 +515,55 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		}    
 	}
 	
+	@AccessControlled(guestAccessEnabled = true)
+	@Override
+	public JSONObject getVenueDetailsWithImages(long venueId, ServiceContext  serviceContext){
+		List<VenueImage> venueImgList = null;
+		List<VenueDetail> venueDetails = null;
+		List<VenueDetailImage> detailImgList = null;
+		JSONObject venueJsonObj =  JSONFactoryUtil.createJSONObject();
+		try{
+			Venue venue = getVenue(venueId, serviceContext);
+			venueJsonObj.put("Venue", JSONFactoryUtil.looseSerialize(venue));
+			venueImgList = getVenueImages( venueId , serviceContext);
+			//Add venue image information
+			JSONArray venueImageArr =  JSONFactoryUtil.createJSONArray();
+			venueJsonObj.put("VenueImages", venueImageArr);
+			for (VenueImage venueImage : venueImgList) {
+				JSONObject venueImageObj =  JSONFactoryUtil.createJSONObject();
+				venueImageObj.put("VenueImage", JSONFactoryUtil.looseSerialize(venueImage));
+				venueImageArr.put(venueImageObj);
+			}
+			//Add venue detail information
+			JSONArray venueDetailArr =  JSONFactoryUtil.createJSONArray();
+			venueJsonObj.put("VenueDetails", venueDetailArr);
+			venueDetails = getVenueDetails(venueId, serviceContext);
+			for (VenueDetail venueDetail : venueDetails) {
+				JSONObject venueDetailJsonObj =  JSONFactoryUtil.createJSONObject();
+				venueDetailJsonObj.put("VenueDetail", JSONFactoryUtil.looseSerialize(venueDetail));
+				venueDetailArr.put(venueDetailJsonObj);
+				detailImgList = getVenueDetailImages(venueDetail.getVenueDetailId(), serviceContext);
+				JSONArray venueDetailImageArr =  JSONFactoryUtil.createJSONArray();
+				venueDetailJsonObj.put("VenueDetailImages", venueDetailImageArr);
+				for (VenueDetailImage detailImage : detailImgList) {
+					JSONObject venueDetailImageObj =  JSONFactoryUtil.createJSONObject();
+					venueDetailImageObj.put("VenueDetailImage", JSONFactoryUtil.looseSerialize(detailImage));
+					venueDetailImageArr.put(venueDetailImageObj);
+				}
+			}			
+		}catch(Exception ex){
+			
+			LOGGER.error("Exception in getting venue information " + ex.getMessage());
+		}
+		
+
+		return venueJsonObj;
+	}
 	
 	private void deleteVenueCascade(long venueId, ServiceContext serviceContext){
 		try {
-			
 			List<VenueDetail> venueDetails = VenueDetailUtil.findByVenueId(venueId);
-			
 			for (VenueDetail vd: venueDetails){
-				
 				deleteDetailCascade(vd.getVenueDetailId(), serviceContext);
 			}
 			deleteAllVenueImages(venueId, serviceContext);
@@ -539,6 +583,8 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			LOGGER.error(e);
 		}
 	}
+	
+	
 	
 	
 }

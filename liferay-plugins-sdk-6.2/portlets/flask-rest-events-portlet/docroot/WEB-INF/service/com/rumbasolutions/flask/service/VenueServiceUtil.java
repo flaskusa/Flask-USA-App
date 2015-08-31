@@ -248,6 +248,11 @@ public class VenueServiceUtil {
 		getService().deleteAllVenueDetailImages(venueDetailId, serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject getVenueDetailsWithImages(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getVenueDetailsWithImages(venueId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

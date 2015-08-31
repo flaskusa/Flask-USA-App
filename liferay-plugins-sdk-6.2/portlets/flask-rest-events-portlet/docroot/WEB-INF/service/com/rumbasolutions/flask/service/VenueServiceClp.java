@@ -198,6 +198,12 @@ public class VenueServiceClp implements VenueService {
 		_methodParameterTypes26 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName27 = "getVenueDetailsWithImages";
+
+		_methodParameterTypes27 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -1073,6 +1079,35 @@ public class VenueServiceClp implements VenueService {
 		}
 	}
 
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getVenueDetailsWithImages(
+		long venueId, com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName27,
+					_methodParameterTypes27,
+					new Object[] {
+						venueId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1126,4 +1161,6 @@ public class VenueServiceClp implements VenueService {
 	private String[] _methodParameterTypes25;
 	private String _methodName26;
 	private String[] _methodParameterTypes26;
+	private String _methodName27;
+	private String[] _methodParameterTypes27;
 }
