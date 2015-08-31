@@ -281,7 +281,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 		
 		var groupColumns = [{ text: 'Tailgate', columntype: 'textbox',  datafield: 'tailgateName'},
 		{ text: 'Event Name', datafield: 'eventName', width: '20%'},
-		{ text: 'Date', datafield: 'tailgateDate', width: '15%'},
+		{ text: 'Date', datafield: 'tailgateDate', width: '20%'},
 		{ text: 'Start Time', datafield: 'startTime', width: '15%'},
 		{ text: 'Edit',  datafield: 'tailgateId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
 		
