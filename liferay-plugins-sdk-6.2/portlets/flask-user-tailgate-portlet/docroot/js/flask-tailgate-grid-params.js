@@ -403,9 +403,9 @@ function createTailgateUserTable(data, grid){
 
 function createTailgateMemberTable(data, grid){
 //	grid.jqxGrid("refresh");
-    var eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '30%' },
-    	 { text: 'Email', datafield: 'emailAddress', width: '30%'},
-    	 { text: 'Role', datafield: 'isAdmin',  width: '37.5%'}];
+    var eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '33.33%' },
+    	 { text: 'Email', datafield: 'emailAddress', width: '33.33%'},
+    	 { text: 'Is Admin', datafield: 'isAdmin',  width: '33.33%'}];
     var source = {
 			 localdata:data,
 			 datatype:'array',
@@ -432,13 +432,12 @@ function createTailgateMemberTable(data, grid){
                 pageable : true,
                 pagermode : 'default',
                 rowdetails: true,
-                selectionmode: 'checkbox',
+                //selectionmode: 'checkbox',
                 showrowdetailscolumn:false,
                 //rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
                 //initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
                 columns: eventsColumns
             });
-    
 	}
 /*
  *  Create Group Table
