@@ -270,7 +270,7 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 		 		$('#three').show();
 				marker_infoType = infoType;
 				// map initialization
-		 		initialize();
+				initializeMap();
 		 		initMenuList();	 		
 		 		window.location.hash = '#Details';
 		 		$("#spinningSquaresG").hide();
@@ -302,7 +302,7 @@ function fnBlankSlide(Slider){
 	$(objBlankSlide1).appendTo(Slider);
 }
 
-Liferay.Portlet.ready(function(){
+$(document).ready(function(){
 	//fnLoadList();
 	$(".cssback").click(function(){
 		$('#one').show();
