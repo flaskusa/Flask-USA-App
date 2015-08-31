@@ -235,6 +235,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		
 		var container = $('<div/>');
 //    	fnGetVenueImages(datarecord.venueId,container,false);
+		fnGetEventDetailImages(datarecord.tailgateId,imagesDiv, false);		
   	  	$(container).appendTo($(imagesDiv));
 		
 		$(tabsdiv).jqxTabs({

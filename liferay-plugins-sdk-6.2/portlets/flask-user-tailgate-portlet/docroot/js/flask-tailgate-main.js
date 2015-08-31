@@ -97,6 +97,7 @@ function addClickHandlers(){
 			if(parseInt(_tailgateId)!=0){
 				fnBuildEventUpload(imageContainer);			
 				var container = $('#uploadedImages');
+				container.html("");
 				fnGetEventDetailImages(_tailgateId,container, true);
 				$("#Upload").click(function(){
 					fnSaveImages(_tailgateId);
