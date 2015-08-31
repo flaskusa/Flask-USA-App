@@ -279,14 +279,11 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 			return '<i class="icon-wrench" style="margin:3px;"></i>';
 		}
 		
-		var groupColumns = [{ text: 'Tailgate', columntype: 'textbox',  datafield: 'tailgateName', width: '15%' },
-		{ text: 'Description', datafield: 'tailgateDescription', width: '30%'},
-		{ text: 'Event Name', datafield: 'eventName', width: '10%'},
-		{ text: 'Date', datafield: 'tailgateDate', width: '10%'},
-		{ text: 'Start Time', datafield: 'startTime', width: '10%'},
-		{ text: 'End Time', datafield: 'endTime', width: '10%'},
-		{ text: 'Role', datafield: 'tailgateRole', width: '10%'},
-		{ text: 'Edit',  datafield: 'tailgateId', width: '5%', cellsalign: 'center', cellsrenderer: actionRenderer}];
+		var groupColumns = [{ text: 'Tailgate', columntype: 'textbox',  datafield: 'tailgateName'},
+		{ text: 'Event Name', datafield: 'eventName', width: '20%'},
+		{ text: 'Date', datafield: 'tailgateDate', width: '15%'},
+		{ text: 'Start Time', datafield: 'startTime', width: '15%'},
+		{ text: 'Edit',  datafield: 'tailgateId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
 		
 		grid.on('cellclick', GRID_PARAM.onRowClick);
 		//set menu item click
