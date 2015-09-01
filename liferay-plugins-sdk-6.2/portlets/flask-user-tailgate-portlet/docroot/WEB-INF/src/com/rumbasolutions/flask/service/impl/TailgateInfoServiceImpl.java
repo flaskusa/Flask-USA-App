@@ -19,6 +19,11 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -26,7 +31,6 @@ import com.rumbasolutions.flask.model.TailgateInfo;
 import com.rumbasolutions.flask.model.impl.TailgateInfoImpl;
 import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.TailgateInfoServiceBaseImpl;
-import com.rumbasolutions.flask.service.persistence.TailgateInfoFinderUtil;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoUtil;
 
 /**
@@ -97,7 +101,10 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 	public List<TailgateInfo> getAllMyTailgate(long userId){
 		List<TailgateInfo> tailgateList = null;
 		try{
-			tailgateList = TailgateInfoFinderUtil.getAllMyTailgate(userId);
+			DynamicQuery tailgateQuery = DynamicQueryFactoryUtil.forClass(TailgateInfoImpl.class);
+			tailgateQuery.add(PropertyFactoryUtil.forName("userId").eq(new Long(userId)));
+			tailgateList = TailgateInfoLocalServiceUtil.dynamicQuery(tailgateQuery);
+			
 		}catch(Exception ex){
 			LOGGER.error("Exception in get All My Tailgate: " + ex.getMessage());
 			tailgateList = new ArrayList<TailgateInfo>(100);
