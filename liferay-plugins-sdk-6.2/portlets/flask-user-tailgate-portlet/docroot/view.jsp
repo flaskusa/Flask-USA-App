@@ -1,3 +1,4 @@
+<%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@include file="init.jsp"%>
 <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOsZgER635konTZQ_MP2Ss8ZjPrmlRMyI&callback=initializeMap">
@@ -8,7 +9,14 @@
 long userId = user.getUserId();
 String userName = user.getFullName();
   long repositoryId = themeDisplay.getLayout().getGroupId();
+  long isAdmin = 0;
   themeDisplay.getLayout().getUuid();
+  long rol[] = themeDisplay.getUser().getRoleIds();
+  for(long role: rol){
+	  if(role==20161){
+		  isAdmin = 1;
+	  }
+  }
 %>
 
 <aui:script>
@@ -38,6 +46,7 @@ function initialize(portletId, portlet){
 
 <body class='default'>
 <input type="hidden" id="repositoryId" value="<%=repositoryId%>"/>
+<input type="hidden" id="isAdmin" value="<%=isAdmin%>"/>
 <div id="action-msg-warning" style="display:none"></div>
 <div id="action-msg" style="display:none"></div>
 
@@ -65,6 +74,7 @@ function initialize(portletId, portlet){
 	<ul class="nav nav-tabs">
 	  <li class="active"><a href="#tailgates" data-toggle="tab">Manage Tailgate</a></li>
 	  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Gallery</a></li>  
+	  <li><a href="#users" data-toggle="tab" id="musers">Manage Tailgate Members</a></li>  
 	</ul>
 	
 	<div class="tab-content">
