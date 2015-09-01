@@ -198,6 +198,7 @@ var loadTailgateDateAndTime = function(tailgate,element){
 };
 
 function contextMenuHandler(menuItemText, rowData){
+	console.log(rowData);
 	tailgateId = rowData.tailgateId;
 	var args = event.args;
 	if (menuItemText  == "Edit") {

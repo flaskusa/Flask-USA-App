@@ -1,7 +1,7 @@
 var _repositoryId = $("#repositoryId").val();    
 var GRID_PARAM = {};
-var isAdmin =0;
 var gridObj;
+var isAdmin = $("#isAdmin").val();
 var groupGridObj;
 var userGridObj;
 var rowMenuDivId;
@@ -104,7 +104,6 @@ GRID_PARAM.onRowClick =function (venue)
 	var visibleIndex = args.visibleindex;
 	// right click.
 	var rowData = gridObj.jqxGrid('getrowdata', boundIndex);
-	isAdmin = rowData.isAdmin;
 	
 
 	if (args.column.text == rowMenuColumnText) {
@@ -280,10 +279,18 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 			return '<i class="icon-wrench" style="margin:3px;"></i>';
 		}
 		
+		var cellsrenderer = function(row, column, value, defaultHtml, columnSettings, rowData) {
+			return formatUnixToTime(value);
+		}		
+		
+		var datecellsrenderer = function(row, column, value, defaultHtml, columnSettings, rowData) {
+			return GRID_PARAM.formatDate(value);
+		}
+		
 		var groupColumns = [{ text: 'Tailgate', columntype: 'textbox',  datafield: 'tailgateName'},
 		{ text: 'Event Name', datafield: 'eventName', width: '20%'},
-		{ text: 'Date', datafield: 'tailgateDate', width: '20%'},
-		{ text: 'Start Time', datafield: 'startTime', width: '15%'},
+		{ text: 'Date', datafield: 'tailgateDate', width: '20%',cellsrenderer:datecellsrenderer},
+		{ text: 'Start Time', datafield: 'startTime', width: '15%',cellsrenderer:cellsrenderer},
 		{ text: 'Edit',  datafield: 'tailgateId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
 		
 		grid.on('cellclick', GRID_PARAM.onRowClick);
