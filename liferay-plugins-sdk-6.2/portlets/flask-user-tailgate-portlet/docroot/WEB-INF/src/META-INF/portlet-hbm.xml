@@ -38,7 +38,7 @@
 		<property name="endTime" type="org.hibernate.type.TimestampType" />
 		<property name="isActive" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="isDelete" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
-		<property name="amountToPay" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
+		<property name="amountToPay" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.TailgateMarkerImpl" table="flasktailgate_TailgateMarker">
 		<cache usage="read-write" />

@@ -37,7 +37,7 @@ public class TailgateInfoServiceClpInvoker {
 		_methodParameterTypes48 = new String[] {
 				"java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "double",
+				"java.util.Date", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -58,7 +58,7 @@ public class TailgateInfoServiceClpInvoker {
 		_methodParameterTypes52 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "double",
+				"java.util.Date", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -88,7 +88,7 @@ public class TailgateInfoServiceClpInvoker {
 				((Long)arguments[2]).longValue(),
 				(java.lang.String)arguments[3], (java.util.Date)arguments[4],
 				(java.util.Date)arguments[5], (java.util.Date)arguments[6],
-				((Double)arguments[7]).doubleValue(),
+				((Long)arguments[7]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[8]);
 		}
 
@@ -114,7 +114,7 @@ public class TailgateInfoServiceClpInvoker {
 				((Long)arguments[3]).longValue(),
 				(java.lang.String)arguments[4], (java.util.Date)arguments[5],
 				(java.util.Date)arguments[6], (java.util.Date)arguments[7],
-				((Double)arguments[8]).doubleValue(),
+				((Long)arguments[8]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 

@@ -210,11 +210,11 @@ public class TailgateInfoSoap implements Serializable {
 		_isDelete = isDelete;
 	}
 
-	public double getAmountToPay() {
+	public long getAmountToPay() {
 		return _amountToPay;
 	}
 
-	public void setAmountToPay(double amountToPay) {
+	public void setAmountToPay(long amountToPay) {
 		_amountToPay = amountToPay;
 	}
 
@@ -232,5 +232,5 @@ public class TailgateInfoSoap implements Serializable {
 	private Date _endTime;
 	private int _isActive;
 	private int _isDelete;
-	private double _amountToPay;
+	private long _amountToPay;
 }

@@ -279,14 +279,14 @@ public interface TailgateInfoModel extends BaseModel<TailgateInfo> {
 	 *
 	 * @return the amount to pay of this tailgate info
 	 */
-	public double getAmountToPay();
+	public long getAmountToPay();
 
 	/**
 	 * Sets the amount to pay of this tailgate info.
 	 *
 	 * @param amountToPay the amount to pay of this tailgate info
 	 */
-	public void setAmountToPay(double amountToPay);
+	public void setAmountToPay(long amountToPay);
 
 	@Override
 	public boolean isNew();

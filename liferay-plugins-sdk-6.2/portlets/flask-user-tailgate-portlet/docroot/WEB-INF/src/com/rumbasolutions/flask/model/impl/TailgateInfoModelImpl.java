@@ -80,9 +80,9 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 			{ "endTime", Types.TIMESTAMP },
 			{ "isActive", Types.INTEGER },
 			{ "isDelete", Types.INTEGER },
-			{ "amountToPay", Types.DOUBLE }
+			{ "amountToPay", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(75) null,tailgateDescription VARCHAR(75) null,eventId LONG,eventName VARCHAR(75) null,tailgateDate DATE null,startTime DATE null,endTime DATE null,isActive INTEGER,isDelete INTEGER,amountToPay DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(75) null,tailgateDescription VARCHAR(75) null,eventId LONG,eventName VARCHAR(75) null,tailgateDate DATE null,startTime DATE null,endTime DATE null,isActive INTEGER,isDelete INTEGER,amountToPay LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flasktailgate_TailgateInfo";
 	public static final String ORDER_BY_JPQL = " ORDER BY tailgateInfo.tailgateId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flasktailgate_TailgateInfo.tailgateId ASC";
@@ -295,7 +295,7 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 			setIsDelete(isDelete);
 		}
 
-		Double amountToPay = (Double)attributes.get("amountToPay");
+		Long amountToPay = (Long)attributes.get("amountToPay");
 
 		if (amountToPay != null) {
 			setAmountToPay(amountToPay);
@@ -483,12 +483,12 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 
 	@JSON
 	@Override
-	public double getAmountToPay() {
+	public long getAmountToPay() {
 		return _amountToPay;
 	}
 
 	@Override
-	public void setAmountToPay(double amountToPay) {
+	public void setAmountToPay(long amountToPay) {
 		_amountToPay = amountToPay;
 	}
 
@@ -815,6 +815,6 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 	private Date _endTime;
 	private int _isActive;
 	private int _isDelete;
-	private double _amountToPay;
+	private long _amountToPay;
 	private TailgateInfo _escapedModel;
 }

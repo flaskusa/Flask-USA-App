@@ -181,7 +181,7 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 			setIsDelete(isDelete);
 		}
 
-		Double amountToPay = (Double)attributes.get("amountToPay");
+		Long amountToPay = (Long)attributes.get("amountToPay");
 
 		if (amountToPay != null) {
 			setAmountToPay(amountToPay);
@@ -522,19 +522,19 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 	}
 
 	@Override
-	public double getAmountToPay() {
+	public long getAmountToPay() {
 		return _amountToPay;
 	}
 
 	@Override
-	public void setAmountToPay(double amountToPay) {
+	public void setAmountToPay(long amountToPay) {
 		_amountToPay = amountToPay;
 
 		if (_tailgateInfoRemoteModel != null) {
 			try {
 				Class<?> clazz = _tailgateInfoRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setAmountToPay", double.class);
+				Method method = clazz.getMethod("setAmountToPay", long.class);
 
 				method.invoke(_tailgateInfoRemoteModel, amountToPay);
 			}
@@ -812,7 +812,7 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 	private Date _endTime;
 	private int _isActive;
 	private int _isDelete;
-	private double _amountToPay;
+	private long _amountToPay;
 	private BaseModel<?> _tailgateInfoRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

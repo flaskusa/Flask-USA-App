@@ -166,7 +166,7 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 		endTime = objectInput.readLong();
 		isActive = objectInput.readInt();
 		isDelete = objectInput.readInt();
-		amountToPay = objectInput.readDouble();
+		amountToPay = objectInput.readLong();
 	}
 
 	@Override
@@ -206,7 +206,7 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 		objectOutput.writeLong(endTime);
 		objectOutput.writeInt(isActive);
 		objectOutput.writeInt(isDelete);
-		objectOutput.writeDouble(amountToPay);
+		objectOutput.writeLong(amountToPay);
 	}
 
 	public long tailgateId;
@@ -223,5 +223,5 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 	public long endTime;
 	public int isActive;
 	public int isDelete;
-	public double amountToPay;
+	public long amountToPay;
 }

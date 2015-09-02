@@ -37,7 +37,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		_methodParameterTypes3 = new String[] {
 				"java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "double",
+				"java.util.Date", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -58,7 +58,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		_methodParameterTypes7 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "double",
+				"java.util.Date", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -121,7 +121,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 	public com.rumbasolutions.flask.model.TailgateInfo addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, double amountToPay,
+		java.util.Date startTime, java.util.Date endTime, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -239,7 +239,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, double amountToPay,
+		java.util.Date startTime, java.util.Date endTime, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 

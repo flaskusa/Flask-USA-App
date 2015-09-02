@@ -35,7 +35,7 @@
 		<column name="isDelete" type="int" />
 
 		<!-- Order -->
-        <column name="amountToPay" type="double"></column>
+        <column name="amountToPay" type="long"></column>
 
 		<order by="asc">
 			<order-column name="tailgateId" />

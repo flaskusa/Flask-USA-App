@@ -65,7 +65,7 @@ public class TailgateInfoServiceSoap {
 	public static com.rumbasolutions.flask.model.TailgateInfoSoap addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, double amountToPay,
+		java.util.Date startTime, java.util.Date endTime, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -130,7 +130,7 @@ public class TailgateInfoServiceSoap {
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, double amountToPay,
+		java.util.Date startTime, java.util.Date endTime, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {

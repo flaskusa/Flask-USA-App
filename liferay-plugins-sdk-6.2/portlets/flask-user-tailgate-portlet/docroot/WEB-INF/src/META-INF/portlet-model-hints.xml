@@ -27,7 +27,7 @@
 		<field name="endTime" type="Date" />
 		<field name="isActive" type="int" />
 		<field name="isDelete" type="int" />
-		<field name="amountToPay" type="double" />
+		<field name="amountToPay" type="long" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.TailgateMarker">
 		<field name="tailgatemarkerid" type="long" />

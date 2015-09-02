@@ -60,7 +60,7 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 	 */
 	private static Log LOGGER = LogFactoryUtil.getLog(TailgateInfoServiceImpl.class);
 	
-	public TailgateInfo addTailgateInfo(String tailgateName, String tailgateDescription,long eventId, String eventName,Date tailgateDate,Date startTime, Date endTime, double amountToPay, ServiceContext  serviceContext){
+	public TailgateInfo addTailgateInfo(String tailgateName, String tailgateDescription,long eventId, String eventName,Date tailgateDate,Date startTime, Date endTime, long amountToPay, ServiceContext  serviceContext){
 		TailgateInfo userTailgate = null;
 		try{
 		userTailgate = TailgateInfoLocalServiceUtil.createTailgateInfo(CounterLocalServiceUtil.increment());
@@ -124,7 +124,7 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 		return userTailgate;
 	}
 	
-	public TailgateInfo updateTailgateInfo(long tailgateId, String tailgateName, String tailgateDescription,long eventId, String eventName,Date tailgateDate,Date startTime, Date endTime, double amountToPay, ServiceContext  serviceContext){
+	public TailgateInfo updateTailgateInfo(long tailgateId, String tailgateName, String tailgateDescription,long eventId, String eventName,Date tailgateDate,Date startTime, Date endTime, long amountToPay, ServiceContext  serviceContext){
 		TailgateInfo userTailgate = null;
 		try{
 		userTailgate = TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId);
