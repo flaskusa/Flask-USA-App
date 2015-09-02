@@ -63,6 +63,7 @@
       	</tr>
     </tbody>
   </table>
+  <img id="eventImg" alt="" src="" style="display: none;">
     <div id="container1">
 		<div class="container-fluid fill" id="placeholder">
 		</div>

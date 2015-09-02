@@ -57,6 +57,11 @@ function renderEventList(tdata) {
 		    }
 		    $(div_heart).appendTo($(objTd3));
 		    $(objTd3).appendTo(objTr);
+		    //Export Event as PDF
+		    var objTd4 = $('<td/>');
+		    	var div_pdf = $('<div/>',{'class':'pdf-download'});
+		    $(div_pdf).appendTo($(objTd4));
+		    $(objTd4).appendTo(objTr);
 		    
 		 	$(objTd2).click(function(){
 		 		$("#spinningSquaresG").show();
@@ -72,8 +77,26 @@ function renderEventList(tdata) {
 		 	}else{
 		 		$(div_heart).attr("title", "You need to be signed in to save events.");
 		 	}
+		 	//Export PDF click Function
+		 	$(div_pdf).click(function(){
+		 		exportEvent(flaskEvent);
+		 	});
+		 	
 	    }
 	 	$(divRow).appendTo($("#placeholder"));
+}
+
+function exportEvent(flaskEvent){
+	var flaskRequest = new Request();
+	params= {'eventId': flaskEvent.eventId};
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL_WITH_IMAGES , params, 
+		function(flaskEventWithImages){
+			flask_export.exportEventAsPDF(flaskEventWithImages);
+		},
+		function (data){
+			console.log("Error in getting Folder: " + data );
+			fnStopProgress();
+		});	
 }
 
 function getEventsForLocation(){
@@ -303,6 +326,10 @@ function fnBlankSlide(Slider){
 }
 
 $(document).ready(function(){
+	//Export Event List
+	$(".exportEvent").click(function(){
+		flask_export.exportEventAsPDF();
+	});
 	//fnLoadList();
 	$(".cssback").click(function(){
 		$('#one').show();
@@ -396,8 +423,9 @@ function initEventList(){
 	}
 	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT , {}, 
 		function (data){
+		console.log(data);
 			renderEventList(data);
 		} ,
 		function (data){

@@ -241,6 +241,18 @@ input.btn.btn-info.cssback {
 	padding-left: 0px !important;
 }
 
+.pdf-download{
+	position: relative;
+	background-image: url("../img/export_pdf.png");
+  	display: block;
+  	width: 32px;
+  	height: 32px;
+	float: right;
+  	background-size: cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+  	cursor : pointer;
+}
 .heart-shape{
 	position: relative;
 	background-image: url("../img/FlaskBW.png");
