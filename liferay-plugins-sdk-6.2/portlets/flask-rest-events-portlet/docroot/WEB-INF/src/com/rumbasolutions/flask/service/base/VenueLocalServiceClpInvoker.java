@@ -113,6 +113,10 @@ public class VenueLocalServiceClpInvoker {
 		_methodName97 = "setBeanIdentifier";
 
 		_methodParameterTypes97 = new String[] { "java.lang.String" };
+
+		_methodName102 = "getVenueDetailsWithImages";
+
+		_methodParameterTypes102 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -216,6 +220,11 @@ public class VenueLocalServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName102.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
+			return VenueLocalServiceUtil.getVenueDetailsWithImages(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -255,4 +264,6 @@ public class VenueLocalServiceClpInvoker {
 	private String[] _methodParameterTypes96;
 	private String _methodName97;
 	private String[] _methodParameterTypes97;
+	private String _methodName102;
+	private String[] _methodParameterTypes102;
 }

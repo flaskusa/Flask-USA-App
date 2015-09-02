@@ -271,6 +271,11 @@ public class VenueLocalServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject getVenueDetailsWithImages(
+		long venueId) {
+		return getService().getVenueDetailsWithImages(venueId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

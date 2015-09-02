@@ -170,6 +170,12 @@ public class EventServiceUtil {
 		return getService().getEventDetailsWithImages(eventId, serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject getEventVenueDetailsWithImages(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .getEventVenueDetailsWithImages(eventId, serviceContext);
+	}
+
 	public static void deleteEventDetail(long eventDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService().deleteEventDetail(eventDetailId, serviceContext);

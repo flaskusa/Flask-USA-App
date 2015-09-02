@@ -298,6 +298,22 @@ public class EventServiceSoap {
 		}
 	}
 
+	public static java.lang.String getEventVenueDetailsWithImages(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = EventServiceUtil.getEventVenueDetailsWithImages(eventId,
+					serviceContext);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteEventDetail(long eventDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {

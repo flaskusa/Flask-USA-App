@@ -280,6 +280,12 @@ public class VenueLocalServiceWrapper implements VenueLocalService,
 		return _venueLocalService.invokeMethod(name, parameterTypes, arguments);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getVenueDetailsWithImages(
+		long venueId) {
+		return _venueLocalService.getVenueDetailsWithImages(venueId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

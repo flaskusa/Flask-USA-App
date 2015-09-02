@@ -22,6 +22,7 @@ import java.util.Map;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
@@ -36,6 +37,7 @@ import com.rumbasolutions.flask.service.EventDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventLocalServiceUtil;
 import com.rumbasolutions.flask.service.UserEventLocalServiceUtil;
+import com.rumbasolutions.flask.service.VenueLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.EventServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.EventDetailImageUtil;
 import com.rumbasolutions.flask.service.persistence.EventDetailUtil;
@@ -381,15 +383,33 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 					eventDetailImageObj.put("EventDetailImage", JSONFactoryUtil.looseSerialize(detailImage));
 					eventDetailImageArr.put(eventDetailImageObj);
 				}
-				
-				
 			}
-			
 		}catch(Exception ex){
 			LOGGER.error("Exception in getEventDetailsWithImages. Exception: " +  ex.getMessage());
 			return null;
 		}
 		return eventJsonObj;
+	}
+	
+	@AccessControlled(guestAccessEnabled = true)
+	@Override
+	public JSONObject getEventVenueDetailsWithImages(long eventId, ServiceContext  serviceContext){
+		JSONObject eventObj = getEventDetailsWithImages(eventId, serviceContext);
+		JSONObject event=null;
+		try {
+			event = JSONFactoryUtil.createJSONObject(eventObj.getString("Event"));
+		} catch (JSONException e) {
+			LOGGER.error("Exception in getEventVenueDetailsWithImages. Exception: " +  e.getMessage());
+
+		}
+		
+		long venueId = event.getLong("venueId");
+
+		JSONObject venueJsonObj = VenueLocalServiceUtil.getVenueDetailsWithImages(venueId);
+		
+		eventObj.put("Venue", venueJsonObj);
+		
+		return eventObj;
 	}
 
 	

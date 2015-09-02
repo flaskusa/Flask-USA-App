@@ -172,6 +172,13 @@ public class EventServiceWrapper implements EventService,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.json.JSONObject getEventVenueDetailsWithImages(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventService.getEventVenueDetailsWithImages(eventId,
+			serviceContext);
+	}
+
+	@Override
 	public void deleteEventDetail(long eventDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_eventService.deleteEventDetail(eventDetailId, serviceContext);

@@ -143,6 +143,11 @@ public interface EventService extends BaseService, InvokableService {
 	public com.liferay.portal.kernel.json.JSONObject getEventDetailsWithImages(
 		long eventId, com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getEventVenueDetailsWithImages(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext);
+
 	public void deleteEventDetail(long eventDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
