@@ -27,6 +27,7 @@
 		<field name="endTime" type="Date" />
 		<field name="isActive" type="int" />
 		<field name="isDelete" type="int" />
+		<field name="amountToPay" type="double" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.TailgateMarker">
 		<field name="tailgatemarkerid" type="long" />
@@ -44,5 +45,7 @@
 		<field name="isAdmin" type="int" />
 		<field name="groupId" type="long" />
 		<field name="emailAddress" type="String" />
+		<field name="isPaid" type="boolean" />
+		<field name="paymentMode" type="String" />
 	</model>
 </model-hints>

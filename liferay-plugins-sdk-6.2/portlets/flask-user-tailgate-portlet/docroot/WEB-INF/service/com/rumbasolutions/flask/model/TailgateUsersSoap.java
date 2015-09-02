@@ -37,6 +37,8 @@ public class TailgateUsersSoap implements Serializable {
 		soapModel.setIsAdmin(model.getIsAdmin());
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setEmailAddress(model.getEmailAddress());
+		soapModel.setIsPaid(model.getIsPaid());
+		soapModel.setPaymentMode(model.getPaymentMode());
 
 		return soapModel;
 	}
@@ -145,6 +147,26 @@ public class TailgateUsersSoap implements Serializable {
 		_emailAddress = emailAddress;
 	}
 
+	public boolean getIsPaid() {
+		return _isPaid;
+	}
+
+	public boolean isIsPaid() {
+		return _isPaid;
+	}
+
+	public void setIsPaid(boolean isPaid) {
+		_isPaid = isPaid;
+	}
+
+	public String getPaymentMode() {
+		return _paymentMode;
+	}
+
+	public void setPaymentMode(String paymentMode) {
+		_paymentMode = paymentMode;
+	}
+
 	private long _tailgateUserId;
 	private long _tailgateId;
 	private long _userId;
@@ -152,4 +174,6 @@ public class TailgateUsersSoap implements Serializable {
 	private int _isAdmin;
 	private long _groupId;
 	private String _emailAddress;
+	private boolean _isPaid;
+	private String _paymentMode;
 }

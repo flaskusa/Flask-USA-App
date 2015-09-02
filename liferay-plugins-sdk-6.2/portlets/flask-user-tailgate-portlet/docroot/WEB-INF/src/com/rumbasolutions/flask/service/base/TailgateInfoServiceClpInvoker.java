@@ -37,7 +37,8 @@ public class TailgateInfoServiceClpInvoker {
 		_methodParameterTypes48 = new String[] {
 				"java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "com.liferay.portal.service.ServiceContext"
+				"java.util.Date", "double",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName49 = "getAllTailgate";
@@ -57,7 +58,8 @@ public class TailgateInfoServiceClpInvoker {
 		_methodParameterTypes52 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "com.liferay.portal.service.ServiceContext"
+				"java.util.Date", "double",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName53 = "deleteTailgateInfo";
@@ -86,7 +88,8 @@ public class TailgateInfoServiceClpInvoker {
 				((Long)arguments[2]).longValue(),
 				(java.lang.String)arguments[3], (java.util.Date)arguments[4],
 				(java.util.Date)arguments[5], (java.util.Date)arguments[6],
-				(com.liferay.portal.service.ServiceContext)arguments[7]);
+				((Double)arguments[7]).doubleValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[8]);
 		}
 
 		if (_methodName49.equals(name) &&
@@ -111,7 +114,8 @@ public class TailgateInfoServiceClpInvoker {
 				((Long)arguments[3]).longValue(),
 				(java.lang.String)arguments[4], (java.util.Date)arguments[5],
 				(java.util.Date)arguments[6], (java.util.Date)arguments[7],
-				(com.liferay.portal.service.ServiceContext)arguments[8]);
+				((Double)arguments[8]).doubleValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 
 		if (_methodName53.equals(name) &&

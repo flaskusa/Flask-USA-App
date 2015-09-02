@@ -36,7 +36,7 @@ public class TailgateUsersCacheModel implements CacheModel<TailgateUsers>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{tailgateUserId=");
 		sb.append(tailgateUserId);
@@ -52,6 +52,10 @@ public class TailgateUsersCacheModel implements CacheModel<TailgateUsers>,
 		sb.append(groupId);
 		sb.append(", emailAddress=");
 		sb.append(emailAddress);
+		sb.append(", isPaid=");
+		sb.append(isPaid);
+		sb.append(", paymentMode=");
+		sb.append(paymentMode);
 		sb.append("}");
 
 		return sb.toString();
@@ -82,6 +86,15 @@ public class TailgateUsersCacheModel implements CacheModel<TailgateUsers>,
 			tailgateUsersImpl.setEmailAddress(emailAddress);
 		}
 
+		tailgateUsersImpl.setIsPaid(isPaid);
+
+		if (paymentMode == null) {
+			tailgateUsersImpl.setPaymentMode(StringPool.BLANK);
+		}
+		else {
+			tailgateUsersImpl.setPaymentMode(paymentMode);
+		}
+
 		tailgateUsersImpl.resetOriginalValues();
 
 		return tailgateUsersImpl;
@@ -96,6 +109,8 @@ public class TailgateUsersCacheModel implements CacheModel<TailgateUsers>,
 		isAdmin = objectInput.readInt();
 		groupId = objectInput.readLong();
 		emailAddress = objectInput.readUTF();
+		isPaid = objectInput.readBoolean();
+		paymentMode = objectInput.readUTF();
 	}
 
 	@Override
@@ -121,6 +136,15 @@ public class TailgateUsersCacheModel implements CacheModel<TailgateUsers>,
 		else {
 			objectOutput.writeUTF(emailAddress);
 		}
+
+		objectOutput.writeBoolean(isPaid);
+
+		if (paymentMode == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(paymentMode);
+		}
 	}
 
 	public long tailgateUserId;
@@ -130,4 +154,6 @@ public class TailgateUsersCacheModel implements CacheModel<TailgateUsers>,
 	public int isAdmin;
 	public long groupId;
 	public String emailAddress;
+	public boolean isPaid;
+	public String paymentMode;
 }

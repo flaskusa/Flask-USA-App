@@ -188,6 +188,42 @@ public interface TailgateUsersModel extends BaseModel<TailgateUsers> {
 	 */
 	public void setEmailAddress(String emailAddress);
 
+	/**
+	 * Returns the is paid of this tailgate users.
+	 *
+	 * @return the is paid of this tailgate users
+	 */
+	public boolean getIsPaid();
+
+	/**
+	 * Returns <code>true</code> if this tailgate users is is paid.
+	 *
+	 * @return <code>true</code> if this tailgate users is is paid; <code>false</code> otherwise
+	 */
+	public boolean isIsPaid();
+
+	/**
+	 * Sets whether this tailgate users is is paid.
+	 *
+	 * @param isPaid the is paid of this tailgate users
+	 */
+	public void setIsPaid(boolean isPaid);
+
+	/**
+	 * Returns the payment mode of this tailgate users.
+	 *
+	 * @return the payment mode of this tailgate users
+	 */
+	@AutoEscape
+	public String getPaymentMode();
+
+	/**
+	 * Sets the payment mode of this tailgate users.
+	 *
+	 * @param paymentMode the payment mode of this tailgate users
+	 */
+	public void setPaymentMode(String paymentMode);
+
 	@Override
 	public boolean isNew();
 

@@ -37,7 +37,8 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		_methodParameterTypes3 = new String[] {
 				"java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "com.liferay.portal.service.ServiceContext"
+				"java.util.Date", "double",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName4 = "getAllTailgate";
@@ -57,7 +58,8 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		_methodParameterTypes7 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "com.liferay.portal.service.ServiceContext"
+				"java.util.Date", "double",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName8 = "deleteTailgateInfo";
@@ -119,7 +121,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 	public com.rumbasolutions.flask.model.TailgateInfo addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime,
+		java.util.Date startTime, java.util.Date endTime, double amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -140,6 +142,8 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 					ClpSerializer.translateInput(startTime),
 						
 					ClpSerializer.translateInput(endTime),
+						
+					amountToPay,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -235,7 +239,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime,
+		java.util.Date startTime, java.util.Date endTime, double amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -258,6 +262,8 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 					ClpSerializer.translateInput(startTime),
 						
 					ClpSerializer.translateInput(endTime),
+						
+					amountToPay,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

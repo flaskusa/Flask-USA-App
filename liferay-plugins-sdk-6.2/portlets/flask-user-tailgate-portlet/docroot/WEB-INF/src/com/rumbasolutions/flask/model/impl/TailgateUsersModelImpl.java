@@ -71,9 +71,11 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 			{ "userName", Types.VARCHAR },
 			{ "isAdmin", Types.INTEGER },
 			{ "groupId", Types.BIGINT },
-			{ "emailAddress", Types.VARCHAR }
+			{ "emailAddress", Types.VARCHAR },
+			{ "isPaid", Types.BOOLEAN },
+			{ "paymentMode", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateUsers (tailgateUserId LONG not null primary key,tailgateId LONG,userId LONG,userName VARCHAR(75) null,isAdmin INTEGER,groupId LONG,emailAddress VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateUsers (tailgateUserId LONG not null primary key,tailgateId LONG,userId LONG,userName VARCHAR(75) null,isAdmin INTEGER,groupId LONG,emailAddress VARCHAR(75) null,isPaid BOOLEAN,paymentMode VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flasktailgate_TailgateUsers";
 	public static final String ORDER_BY_JPQL = " ORDER BY tailgateUsers.tailgateUserId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flasktailgate_TailgateUsers.tailgateUserId ASC";
@@ -112,6 +114,8 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 		model.setIsAdmin(soapModel.getIsAdmin());
 		model.setGroupId(soapModel.getGroupId());
 		model.setEmailAddress(soapModel.getEmailAddress());
+		model.setIsPaid(soapModel.getIsPaid());
+		model.setPaymentMode(soapModel.getPaymentMode());
 
 		return model;
 	}
@@ -183,6 +187,8 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 		attributes.put("isAdmin", getIsAdmin());
 		attributes.put("groupId", getGroupId());
 		attributes.put("emailAddress", getEmailAddress());
+		attributes.put("isPaid", getIsPaid());
+		attributes.put("paymentMode", getPaymentMode());
 
 		return attributes;
 	}
@@ -229,6 +235,18 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 
 		if (emailAddress != null) {
 			setEmailAddress(emailAddress);
+		}
+
+		Boolean isPaid = (Boolean)attributes.get("isPaid");
+
+		if (isPaid != null) {
+			setIsPaid(isPaid);
+		}
+
+		String paymentMode = (String)attributes.get("paymentMode");
+
+		if (paymentMode != null) {
+			setPaymentMode(paymentMode);
 		}
 	}
 
@@ -352,6 +370,38 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 		_emailAddress = emailAddress;
 	}
 
+	@JSON
+	@Override
+	public boolean getIsPaid() {
+		return _isPaid;
+	}
+
+	@Override
+	public boolean isIsPaid() {
+		return _isPaid;
+	}
+
+	@Override
+	public void setIsPaid(boolean isPaid) {
+		_isPaid = isPaid;
+	}
+
+	@JSON
+	@Override
+	public String getPaymentMode() {
+		if (_paymentMode == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _paymentMode;
+		}
+	}
+
+	@Override
+	public void setPaymentMode(String paymentMode) {
+		_paymentMode = paymentMode;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -390,6 +440,8 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 		tailgateUsersImpl.setIsAdmin(getIsAdmin());
 		tailgateUsersImpl.setGroupId(getGroupId());
 		tailgateUsersImpl.setEmailAddress(getEmailAddress());
+		tailgateUsersImpl.setIsPaid(getIsPaid());
+		tailgateUsersImpl.setPaymentMode(getPaymentMode());
 
 		tailgateUsersImpl.resetOriginalValues();
 
@@ -479,12 +531,22 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 			tailgateUsersCacheModel.emailAddress = null;
 		}
 
+		tailgateUsersCacheModel.isPaid = getIsPaid();
+
+		tailgateUsersCacheModel.paymentMode = getPaymentMode();
+
+		String paymentMode = tailgateUsersCacheModel.paymentMode;
+
+		if ((paymentMode != null) && (paymentMode.length() == 0)) {
+			tailgateUsersCacheModel.paymentMode = null;
+		}
+
 		return tailgateUsersCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(19);
 
 		sb.append("{tailgateUserId=");
 		sb.append(getTailgateUserId());
@@ -500,6 +562,10 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 		sb.append(getGroupId());
 		sb.append(", emailAddress=");
 		sb.append(getEmailAddress());
+		sb.append(", isPaid=");
+		sb.append(getIsPaid());
+		sb.append(", paymentMode=");
+		sb.append(getPaymentMode());
 		sb.append("}");
 
 		return sb.toString();
@@ -507,7 +573,7 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.TailgateUsers");
@@ -541,6 +607,14 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 			"<column><column-name>emailAddress</column-name><column-value><![CDATA[");
 		sb.append(getEmailAddress());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>isPaid</column-name><column-value><![CDATA[");
+		sb.append(getIsPaid());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>paymentMode</column-name><column-value><![CDATA[");
+		sb.append(getPaymentMode());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -562,6 +636,8 @@ public class TailgateUsersModelImpl extends BaseModelImpl<TailgateUsers>
 	private int _isAdmin;
 	private long _groupId;
 	private String _emailAddress;
+	private boolean _isPaid;
+	private String _paymentMode;
 	private long _columnBitmask;
 	private TailgateUsers _escapedModel;
 }

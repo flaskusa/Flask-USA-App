@@ -274,6 +274,20 @@ public interface TailgateInfoModel extends BaseModel<TailgateInfo> {
 	 */
 	public void setIsDelete(int isDelete);
 
+	/**
+	 * Returns the amount to pay of this tailgate info.
+	 *
+	 * @return the amount to pay of this tailgate info
+	 */
+	public double getAmountToPay();
+
+	/**
+	 * Sets the amount to pay of this tailgate info.
+	 *
+	 * @param amountToPay the amount to pay of this tailgate info
+	 */
+	public void setAmountToPay(double amountToPay);
+
 	@Override
 	public boolean isNew();
 

@@ -64,6 +64,7 @@ public class TailgateInfoWrapper implements TailgateInfo,
 		attributes.put("endTime", getEndTime());
 		attributes.put("isActive", getIsActive());
 		attributes.put("isDelete", getIsDelete());
+		attributes.put("amountToPay", getAmountToPay());
 
 		return attributes;
 	}
@@ -153,6 +154,12 @@ public class TailgateInfoWrapper implements TailgateInfo,
 
 		if (isDelete != null) {
 			setIsDelete(isDelete);
+		}
+
+		Double amountToPay = (Double)attributes.get("amountToPay");
+
+		if (amountToPay != null) {
+			setAmountToPay(amountToPay);
 		}
 	}
 
@@ -476,6 +483,26 @@ public class TailgateInfoWrapper implements TailgateInfo,
 	@Override
 	public void setIsDelete(int isDelete) {
 		_tailgateInfo.setIsDelete(isDelete);
+	}
+
+	/**
+	* Returns the amount to pay of this tailgate info.
+	*
+	* @return the amount to pay of this tailgate info
+	*/
+	@Override
+	public double getAmountToPay() {
+		return _tailgateInfo.getAmountToPay();
+	}
+
+	/**
+	* Sets the amount to pay of this tailgate info.
+	*
+	* @param amountToPay the amount to pay of this tailgate info
+	*/
+	@Override
+	public void setAmountToPay(double amountToPay) {
+		_tailgateInfo.setAmountToPay(amountToPay);
 	}
 
 	@Override

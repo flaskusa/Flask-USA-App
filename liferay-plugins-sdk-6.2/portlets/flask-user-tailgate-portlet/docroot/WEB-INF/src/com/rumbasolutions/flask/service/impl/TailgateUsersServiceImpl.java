@@ -105,7 +105,7 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 	}
 	
 	@Override
-	public TailgateUsers addTailgateUser(long tailgateId, long userId, String userName, String emailAddress, int isAdmin, int groupId){
+	public TailgateUsers addTailgateUser(long tailgateId, long userId, String userName, String emailAddress, int isAdmin, boolean isPaid, String paymentMode, int groupId){
 		TailgateUsers tailgateUsers = null;
 		try{
 			if(!checkTailgateUserExist(tailgateId, userId)){
@@ -115,6 +115,8 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 				tailgateUsers.setUserId(userId);
 				tailgateUsers.setUserName(userName);
 				tailgateUsers.setEmailAddress(emailAddress);
+				tailgateUsers.setIsPaid(isPaid);
+				tailgateUsers.setPaymentMode(paymentMode);
 				tailgateUsers.setGroupId(groupId);
 				
 				tailgateUsers = TailgateUsersLocalServiceUtil.addTailgateUsers(tailgateUsers);
@@ -131,17 +133,19 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 	}
 	
 	@Override
-	public TailgateUsers updateTailgateUser(long tailgateUserId,long tailgateId, long userId, String userName, int isAdmin, int groupId){
-		TailgateUsers tailgateUser = null;
+	public TailgateUsers updateTailgateUser(long tailgateUserId,long tailgateId, long userId, String userName, int isAdmin, boolean isPaid, String paymentMode, int groupId){
+		TailgateUsers tailgateUsers = null;
 		try{
-			tailgateUser = TailgateUsersLocalServiceUtil.getTailgateUsers(tailgateUserId);
-			tailgateUser.setTailgateId(tailgateId);
-			tailgateUser.setIsAdmin(isAdmin);
-			tailgateUser.setUserId(userId);
-			tailgateUser.setUserName(userName);
-			tailgateUser.setGroupId(groupId);
+			tailgateUsers = TailgateUsersLocalServiceUtil.getTailgateUsers(tailgateUserId);
+			tailgateUsers.setTailgateId(tailgateId);
+			tailgateUsers.setIsAdmin(isAdmin);
+			tailgateUsers.setUserId(userId);
+			tailgateUsers.setUserName(userName);
+			tailgateUsers.setIsPaid(isPaid);
+			tailgateUsers.setPaymentMode(paymentMode);
+			tailgateUsers.setGroupId(groupId);
 			
-			tailgateUser = TailgateUsersLocalServiceUtil.updateTailgateUsers(tailgateUser);
+			tailgateUsers = TailgateUsersLocalServiceUtil.updateTailgateUsers(tailgateUsers);
 		}catch(SystemException e){
 			LOGGER.error("Exception in Update Tailgate User :" + e.getMessage());
 			e.printStackTrace();
@@ -149,7 +153,7 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return tailgateUser;
+		return tailgateUsers;
 	}
 	
 	@Override

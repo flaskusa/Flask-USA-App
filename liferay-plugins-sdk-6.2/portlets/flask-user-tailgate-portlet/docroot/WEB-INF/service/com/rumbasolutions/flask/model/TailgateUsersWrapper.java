@@ -56,6 +56,8 @@ public class TailgateUsersWrapper implements TailgateUsers,
 		attributes.put("isAdmin", getIsAdmin());
 		attributes.put("groupId", getGroupId());
 		attributes.put("emailAddress", getEmailAddress());
+		attributes.put("isPaid", getIsPaid());
+		attributes.put("paymentMode", getPaymentMode());
 
 		return attributes;
 	}
@@ -102,6 +104,18 @@ public class TailgateUsersWrapper implements TailgateUsers,
 
 		if (emailAddress != null) {
 			setEmailAddress(emailAddress);
+		}
+
+		Boolean isPaid = (Boolean)attributes.get("isPaid");
+
+		if (isPaid != null) {
+			setIsPaid(isPaid);
+		}
+
+		String paymentMode = (String)attributes.get("paymentMode");
+
+		if (paymentMode != null) {
+			setPaymentMode(paymentMode);
 		}
 	}
 
@@ -307,6 +321,56 @@ public class TailgateUsersWrapper implements TailgateUsers,
 	@Override
 	public void setEmailAddress(java.lang.String emailAddress) {
 		_tailgateUsers.setEmailAddress(emailAddress);
+	}
+
+	/**
+	* Returns the is paid of this tailgate users.
+	*
+	* @return the is paid of this tailgate users
+	*/
+	@Override
+	public boolean getIsPaid() {
+		return _tailgateUsers.getIsPaid();
+	}
+
+	/**
+	* Returns <code>true</code> if this tailgate users is is paid.
+	*
+	* @return <code>true</code> if this tailgate users is is paid; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isIsPaid() {
+		return _tailgateUsers.isIsPaid();
+	}
+
+	/**
+	* Sets whether this tailgate users is is paid.
+	*
+	* @param isPaid the is paid of this tailgate users
+	*/
+	@Override
+	public void setIsPaid(boolean isPaid) {
+		_tailgateUsers.setIsPaid(isPaid);
+	}
+
+	/**
+	* Returns the payment mode of this tailgate users.
+	*
+	* @return the payment mode of this tailgate users
+	*/
+	@Override
+	public java.lang.String getPaymentMode() {
+		return _tailgateUsers.getPaymentMode();
+	}
+
+	/**
+	* Sets the payment mode of this tailgate users.
+	*
+	* @param paymentMode the payment mode of this tailgate users
+	*/
+	@Override
+	public void setPaymentMode(java.lang.String paymentMode) {
+		_tailgateUsers.setPaymentMode(paymentMode);
 	}
 
 	@Override

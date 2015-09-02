@@ -78,17 +78,19 @@ public class TailgateUsersServiceWrapper implements TailgateUsersService,
 	@Override
 	public com.rumbasolutions.flask.model.TailgateUsers addTailgateUser(
 		long tailgateId, long userId, java.lang.String userName,
-		java.lang.String emailAddress, int isAdmin, int groupId) {
+		java.lang.String emailAddress, int isAdmin, boolean isPaid,
+		java.lang.String paymentMode, int groupId) {
 		return _tailgateUsersService.addTailgateUser(tailgateId, userId,
-			userName, emailAddress, isAdmin, groupId);
+			userName, emailAddress, isAdmin, isPaid, paymentMode, groupId);
 	}
 
 	@Override
 	public com.rumbasolutions.flask.model.TailgateUsers updateTailgateUser(
 		long tailgateUserId, long tailgateId, long userId,
-		java.lang.String userName, int isAdmin, int groupId) {
+		java.lang.String userName, int isAdmin, boolean isPaid,
+		java.lang.String paymentMode, int groupId) {
 		return _tailgateUsersService.updateTailgateUser(tailgateUserId,
-			tailgateId, userId, userName, isAdmin, groupId);
+			tailgateId, userId, userName, isAdmin, isPaid, paymentMode, groupId);
 	}
 
 	@Override

@@ -89,6 +89,7 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 		attributes.put("endTime", getEndTime());
 		attributes.put("isActive", getIsActive());
 		attributes.put("isDelete", getIsDelete());
+		attributes.put("amountToPay", getAmountToPay());
 
 		return attributes;
 	}
@@ -178,6 +179,12 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 
 		if (isDelete != null) {
 			setIsDelete(isDelete);
+		}
+
+		Double amountToPay = (Double)attributes.get("amountToPay");
+
+		if (amountToPay != null) {
+			setAmountToPay(amountToPay);
 		}
 	}
 
@@ -514,6 +521,29 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 		}
 	}
 
+	@Override
+	public double getAmountToPay() {
+		return _amountToPay;
+	}
+
+	@Override
+	public void setAmountToPay(double amountToPay) {
+		_amountToPay = amountToPay;
+
+		if (_tailgateInfoRemoteModel != null) {
+			try {
+				Class<?> clazz = _tailgateInfoRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setAmountToPay", double.class);
+
+				method.invoke(_tailgateInfoRemoteModel, amountToPay);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getTailgateInfoRemoteModel() {
 		return _tailgateInfoRemoteModel;
 	}
@@ -597,6 +627,7 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 		clone.setEndTime(getEndTime());
 		clone.setIsActive(getIsActive());
 		clone.setIsDelete(getIsDelete());
+		clone.setAmountToPay(getAmountToPay());
 
 		return clone;
 	}
@@ -655,7 +686,7 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(29);
+		StringBundler sb = new StringBundler(31);
 
 		sb.append("{tailgateId=");
 		sb.append(getTailgateId());
@@ -685,6 +716,8 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 		sb.append(getIsActive());
 		sb.append(", isDelete=");
 		sb.append(getIsDelete());
+		sb.append(", amountToPay=");
+		sb.append(getAmountToPay());
 		sb.append("}");
 
 		return sb.toString();
@@ -692,7 +725,7 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(46);
+		StringBundler sb = new StringBundler(49);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.TailgateInfo");
@@ -754,6 +787,10 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 			"<column><column-name>isDelete</column-name><column-value><![CDATA[");
 		sb.append(getIsDelete());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>amountToPay</column-name><column-value><![CDATA[");
+		sb.append(getAmountToPay());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -775,6 +812,7 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 	private Date _endTime;
 	private int _isActive;
 	private int _isDelete;
+	private double _amountToPay;
 	private BaseModel<?> _tailgateInfoRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

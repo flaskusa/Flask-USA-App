@@ -333,6 +333,7 @@ public class TailgateInfoPersistenceImpl extends BasePersistenceImpl<TailgateInf
 		tailgateInfoImpl.setEndTime(tailgateInfo.getEndTime());
 		tailgateInfoImpl.setIsActive(tailgateInfo.getIsActive());
 		tailgateInfoImpl.setIsDelete(tailgateInfo.getIsDelete());
+		tailgateInfoImpl.setAmountToPay(tailgateInfo.getAmountToPay());
 
 		return tailgateInfoImpl;
 	}

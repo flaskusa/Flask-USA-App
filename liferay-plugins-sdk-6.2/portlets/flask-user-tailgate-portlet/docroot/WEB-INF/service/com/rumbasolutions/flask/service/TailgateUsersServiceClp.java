@@ -48,13 +48,14 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 
 		_methodParameterTypes6 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String", "int",
-				"int"
+				"boolean", "java.lang.String", "int"
 			};
 
 		_methodName7 = "updateTailgateUser";
 
 		_methodParameterTypes7 = new String[] {
-				"long", "long", "long", "java.lang.String", "int", "int"
+				"long", "long", "long", "java.lang.String", "int", "boolean",
+				"java.lang.String", "int"
 			};
 
 		_methodName8 = "deleteTailgateUser";
@@ -186,7 +187,8 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 	@Override
 	public com.rumbasolutions.flask.model.TailgateUsers addTailgateUser(
 		long tailgateId, long userId, java.lang.String userName,
-		java.lang.String emailAddress, int isAdmin, int groupId) {
+		java.lang.String emailAddress, int isAdmin, boolean isPaid,
+		java.lang.String paymentMode, int groupId) {
 		Object returnObj = null;
 
 		try {
@@ -202,6 +204,10 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 					ClpSerializer.translateInput(emailAddress),
 						
 					isAdmin,
+						
+					isPaid,
+						
+					ClpSerializer.translateInput(paymentMode),
 						
 					groupId
 					});
@@ -224,7 +230,8 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 	@Override
 	public com.rumbasolutions.flask.model.TailgateUsers updateTailgateUser(
 		long tailgateUserId, long tailgateId, long userId,
-		java.lang.String userName, int isAdmin, int groupId) {
+		java.lang.String userName, int isAdmin, boolean isPaid,
+		java.lang.String paymentMode, int groupId) {
 		Object returnObj = null;
 
 		try {
@@ -240,6 +247,10 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 					ClpSerializer.translateInput(userName),
 						
 					isAdmin,
+						
+					isPaid,
+						
+					ClpSerializer.translateInput(paymentMode),
 						
 					groupId
 					});

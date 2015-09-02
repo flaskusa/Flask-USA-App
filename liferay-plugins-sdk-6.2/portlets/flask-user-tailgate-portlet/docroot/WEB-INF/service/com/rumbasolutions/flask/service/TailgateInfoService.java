@@ -68,7 +68,7 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 	public com.rumbasolutions.flask.model.TailgateInfo addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime,
+		java.util.Date startTime, java.util.Date endTime, double amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -86,7 +86,7 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime,
+		java.util.Date startTime, java.util.Date endTime, double amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteTailgateInfo(long tailgateId);

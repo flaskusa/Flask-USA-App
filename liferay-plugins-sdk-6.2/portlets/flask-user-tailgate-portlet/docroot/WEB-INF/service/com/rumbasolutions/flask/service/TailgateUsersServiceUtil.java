@@ -79,18 +79,20 @@ public class TailgateUsersServiceUtil {
 
 	public static com.rumbasolutions.flask.model.TailgateUsers addTailgateUser(
 		long tailgateId, long userId, java.lang.String userName,
-		java.lang.String emailAddress, int isAdmin, int groupId) {
+		java.lang.String emailAddress, int isAdmin, boolean isPaid,
+		java.lang.String paymentMode, int groupId) {
 		return getService()
 				   .addTailgateUser(tailgateId, userId, userName, emailAddress,
-			isAdmin, groupId);
+			isAdmin, isPaid, paymentMode, groupId);
 	}
 
 	public static com.rumbasolutions.flask.model.TailgateUsers updateTailgateUser(
 		long tailgateUserId, long tailgateId, long userId,
-		java.lang.String userName, int isAdmin, int groupId) {
+		java.lang.String userName, int isAdmin, boolean isPaid,
+		java.lang.String paymentMode, int groupId) {
 		return getService()
 				   .updateTailgateUser(tailgateUserId, tailgateId, userId,
-			userName, isAdmin, groupId);
+			userName, isAdmin, isPaid, paymentMode, groupId);
 	}
 
 	public static void deleteTailgateUser(long tailgateId, long userId) {

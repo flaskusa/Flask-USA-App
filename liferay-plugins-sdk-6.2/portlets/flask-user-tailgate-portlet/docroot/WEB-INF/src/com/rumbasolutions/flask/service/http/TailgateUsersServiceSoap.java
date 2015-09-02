@@ -109,11 +109,12 @@ public class TailgateUsersServiceSoap {
 
 	public static com.rumbasolutions.flask.model.TailgateUsersSoap addTailgateUser(
 		long tailgateId, long userId, java.lang.String userName,
-		java.lang.String emailAddress, int isAdmin, int groupId)
-		throws RemoteException {
+		java.lang.String emailAddress, int isAdmin, boolean isPaid,
+		java.lang.String paymentMode, int groupId) throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.TailgateUsers returnValue = TailgateUsersServiceUtil.addTailgateUser(tailgateId,
-					userId, userName, emailAddress, isAdmin, groupId);
+					userId, userName, emailAddress, isAdmin, isPaid,
+					paymentMode, groupId);
 
 			return com.rumbasolutions.flask.model.TailgateUsersSoap.toSoapModel(returnValue);
 		}
@@ -126,11 +127,12 @@ public class TailgateUsersServiceSoap {
 
 	public static com.rumbasolutions.flask.model.TailgateUsersSoap updateTailgateUser(
 		long tailgateUserId, long tailgateId, long userId,
-		java.lang.String userName, int isAdmin, int groupId)
-		throws RemoteException {
+		java.lang.String userName, int isAdmin, boolean isPaid,
+		java.lang.String paymentMode, int groupId) throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.TailgateUsers returnValue = TailgateUsersServiceUtil.updateTailgateUser(tailgateUserId,
-					tailgateId, userId, userName, isAdmin, groupId);
+					tailgateId, userId, userName, isAdmin, isPaid, paymentMode,
+					groupId);
 
 			return com.rumbasolutions.flask.model.TailgateUsersSoap.toSoapModel(returnValue);
 		}

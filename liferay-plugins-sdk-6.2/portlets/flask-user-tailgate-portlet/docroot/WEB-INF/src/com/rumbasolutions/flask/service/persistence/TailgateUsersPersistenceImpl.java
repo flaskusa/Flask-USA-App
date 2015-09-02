@@ -850,6 +850,8 @@ public class TailgateUsersPersistenceImpl extends BasePersistenceImpl<TailgateUs
 		tailgateUsersImpl.setIsAdmin(tailgateUsers.getIsAdmin());
 		tailgateUsersImpl.setGroupId(tailgateUsers.getGroupId());
 		tailgateUsersImpl.setEmailAddress(tailgateUsers.getEmailAddress());
+		tailgateUsersImpl.setIsPaid(tailgateUsers.isIsPaid());
+		tailgateUsersImpl.setPaymentMode(tailgateUsers.getPaymentMode());
 
 		return tailgateUsersImpl;
 	}
