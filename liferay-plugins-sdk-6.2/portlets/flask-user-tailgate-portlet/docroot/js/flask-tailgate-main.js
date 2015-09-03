@@ -198,7 +198,6 @@ var loadTailgateDateAndTime = function(tailgate,element){
 };
 
 function contextMenuHandler(menuItemText, rowData){
-	console.log(rowData);
 	tailgateId = rowData.tailgateId;
 	var args = event.args;
 	if (menuItemText  == "Edit") {
@@ -259,7 +258,6 @@ function deleteMultipleTailgatess(tailgateList) {
 
 /* Edit Event */
 function editTailgate(rowData) {
-	console.log(rowData);
 	_flaskLib.hideMessage('action-msg');
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("tailgateForm",  _tailgateModel.DATA_MODEL.TAILGATE, rowData, function(){});
@@ -336,7 +334,6 @@ function addTailgateMembers(){
 	var selectedUserList = GRID_PARAM.getCheckedUsersList();
 	for ( var i = 0 ; i < selectedUserList.length; i ++) {
 		var user = selectedUserList[i];
-		console.log(user);
 		var userrparams = {};
 		userrparams.groupId = 0;
 		userrparams.userId = user.userId;
@@ -344,17 +341,20 @@ function addTailgateMembers(){
 		userrparams.emailAddress = user.emailAddress;
 		userrparams.isAdmin = 0;
 		userrparams.tailgateId = tailgateId;
+		userrparams.isPaid = 0;
+		userrparams.paymentMode = "None"; 
 		addTailgateMember(userrparams);
 	}
 }
 function addTailgateMember(params) {
-	console.log(params)
+	console.log(params);
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_tailgateModel.SERVICE_ENDPOINTS.ADD_TAILGATE_USER,
 			params, function(data) {/* success handler */
-		_flaskLib.showSuccessMessage('group-action-msg',
-				_tailgateModel.MESSAGES.ADD_USER);
+				console.log(data);
+				_flaskLib.showSuccessMessage('group-action-msg',_tailgateModel.MESSAGES.ADD_USER);
 			}, function(error) { /* failure handler */
+				console.log(error);
 				_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
 			});
 }
@@ -509,8 +509,6 @@ function prepareTailgateMembersGridShow(tailgateId){
 	var params = {tailgateId:tailgateId};
 	flaskRequest.sendGETRequest(
 			_tailgateModel.SERVICE_ENDPOINTS.GET_TAILGATE_MEMBERS, params, function(data) {
-				console.log("i m in fn");
-				console.log(data);
 				var gridData = prepareMemberData(data, _tailgateModel.allMemberDetails);
 				createTailgateMemberTable(gridData, $("#tailgateMembersDataGridShow"));
 			}, function(error) {
@@ -692,7 +690,6 @@ function fnFillImageModal(obj){
 	$("#btnSaveImageDetails").click(function(){
 		params= {'tailgateImageId': tailgateImageId,imageTitle:$("#imageTitle").val(),imageDesc:$("#imageDescription").val()};
 		var flaskRequest = new Request();
-		console.log(params);
 		flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.UPDATE_IMAGES_DETAIL , params, 
 			function (data){
 				_obj.attr("data-title",$("#imageTitle").val());
@@ -710,7 +707,6 @@ function fnDeleteImage(obj){
 	var _tailgateImageId = _obj.attr("data-tailgateImageId"); 
 	params= {'tailgateImageId': _tailgateImageId};
 	var flaskRequest = new Request();
-	console.log(params);
 	flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.DELETE_TAILGATE_IMAGE , params, 
 		function (data){
 			var $div = _obj.closest('div[class^="eventLogo"]');

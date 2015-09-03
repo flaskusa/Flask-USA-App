@@ -215,7 +215,8 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 				+ d1 + "</td></tr>";
 		var endTime = "<tr><td class='filledWidth'><b>End Time:</b></td><td>"
 				+ d2 + "</td></tr>";
-		
+		var amountToPay = "<tr><td class='filledWidth'><b>Fees:</b></td><td>"
+			   + datarecord.amountToPay + "</td></tr>";		
 		 
 		$(leftcolumn).append("<table>");
 		$(leftcolumn).append(tailgate_Name);
@@ -229,6 +230,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		$(rightcolumn).append(eventDate);
 		$(rightcolumn).append(startTime);
 		$(rightcolumn).append(endTime);
+		$(rightcolumn).append(amountToPay);
 		
 		$(rightcolumn).append("</table>");	
 		
@@ -410,20 +412,39 @@ function createTailgateUserTable(data, grid){
 
 function createTailgateMemberTable(data, grid){
 //	grid.jqxGrid("refresh");
-    var eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '33.33%' },
-    	 { text: 'Email', datafield: 'emailAddress', width: '33.33%'},
-    	 { text: 'Is Admin', datafield: 'isAdmin',  width: '33.33%'}];
-    var source = {
+	 var datecellsrenderer = function(row, column, value, defaultHtml, columnSettings, rowData) {
+		  if(value == 1)
+			  return "Yes";
+		  else
+			  return "No";
+	 }
+	 
+	 var recordcellsrenderer = function(row, column, value, defaultHtml, columnSettings, rowData) {
+		 console.log(rowData);
+		  if(value == 1)
+			  return "Yes []";
+		  else
+			  return "No";
+	 }
+	 //recordcellsrenderer
+	 var eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '25%' },
+	                      { text: 'Email', datafield: 'emailAddress', width: '25%'},
+	                      { text: 'Is Admin?', datafield: 'isAdmin',  width: '16.66%', cellsrenderer: datecellsrenderer},
+	                      { text: 'Is Paid?', datafield: 'isPaid', width: '16.66%', cellsrenderer: datecellsrenderer}];
+	 //,{ text: 'Payment Mode', datafield: 'paymentMode', width: '16.66%'}
+	 var source = {
 			 localdata:data,
 			 datatype:'array',
 			 datafields: [
-			              	{name: 'userName', type: 'string' },
-			              	{name: 'emailAddress', type: 'string' },
-		                    {name: 'isAdmin',type:'string'},
-		                    {name: 'userId',type:'string'}
-		                ],
-		     id : 'userId'           
-	 };
+			              {name: 'userName', type: 'string' },
+			              {name: 'emailAddress', type: 'string' },
+			              {name: 'isAdmin',type:'string'},
+			              {name: 'isPaid',type:'string'},
+			              {name: 'paymentMode',type:'string'},
+			              {name: 'userId',type:'string'}
+			              ],
+			              id : 'userId'};
+	 
     userGridObj = grid;
 	var dataAdapter = new $.jqx.dataAdapter(source);
     grid.jqxGrid(

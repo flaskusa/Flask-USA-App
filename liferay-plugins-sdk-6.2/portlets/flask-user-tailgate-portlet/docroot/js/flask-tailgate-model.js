@@ -39,7 +39,8 @@ _tailgateModel.DATA_MODEL= {
 		 	 { name: 'tailgateRole', type: 'string' },
 		 	 { name: 'isActive', type: 'int'},
 			 { name: 'isDelete', type: 'int'},
-			 { name: 'isAdmin', type: 'int'}
+			 { name: 'isAdmin', type: 'int'},
+			 { name: 'amountToPay', type: 'long'}
 		]
 	};
 
