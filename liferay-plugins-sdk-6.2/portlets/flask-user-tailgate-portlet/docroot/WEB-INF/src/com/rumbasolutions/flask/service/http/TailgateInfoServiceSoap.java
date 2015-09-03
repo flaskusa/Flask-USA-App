@@ -112,6 +112,21 @@ public class TailgateInfoServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.TailgateInfoSoap[] getAllTailgeteByUserId(
+		long userId) throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.TailgateInfo> returnValue =
+				TailgateInfoServiceUtil.getAllTailgeteByUserId(userId);
+
+			return com.rumbasolutions.flask.model.TailgateInfoSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.TailgateInfoSoap getTailgate(
 		int tailgateId) throws RemoteException {
 		try {

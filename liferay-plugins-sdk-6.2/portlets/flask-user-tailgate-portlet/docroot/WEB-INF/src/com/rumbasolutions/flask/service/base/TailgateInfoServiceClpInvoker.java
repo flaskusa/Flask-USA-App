@@ -49,22 +49,26 @@ public class TailgateInfoServiceClpInvoker {
 
 		_methodParameterTypes50 = new String[] { "long" };
 
-		_methodName51 = "getTailgate";
+		_methodName51 = "getAllTailgeteByUserId";
 
-		_methodParameterTypes51 = new String[] { "int" };
+		_methodParameterTypes51 = new String[] { "long" };
 
-		_methodName52 = "updateTailgateInfo";
+		_methodName52 = "getTailgate";
 
-		_methodParameterTypes52 = new String[] {
+		_methodParameterTypes52 = new String[] { "int" };
+
+		_methodName53 = "updateTailgateInfo";
+
+		_methodParameterTypes53 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
 				"java.util.Date", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName53 = "deleteTailgateInfo";
+		_methodName54 = "deleteTailgateInfo";
 
-		_methodParameterTypes53 = new String[] { "long" };
+		_methodParameterTypes54 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -104,11 +108,16 @@ public class TailgateInfoServiceClpInvoker {
 
 		if (_methodName51.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
-			return TailgateInfoServiceUtil.getTailgate(((Integer)arguments[0]).intValue());
+			return TailgateInfoServiceUtil.getAllTailgeteByUserId(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName52.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+			return TailgateInfoServiceUtil.getTailgate(((Integer)arguments[0]).intValue());
+		}
+
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
 			return TailgateInfoServiceUtil.updateTailgateInfo(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				((Long)arguments[3]).longValue(),
@@ -118,8 +127,8 @@ public class TailgateInfoServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
 			TailgateInfoServiceUtil.deleteTailgateInfo(((Long)arguments[0]).longValue());
 
 			return null;
@@ -144,4 +153,6 @@ public class TailgateInfoServiceClpInvoker {
 	private String[] _methodParameterTypes52;
 	private String _methodName53;
 	private String[] _methodParameterTypes53;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
 }

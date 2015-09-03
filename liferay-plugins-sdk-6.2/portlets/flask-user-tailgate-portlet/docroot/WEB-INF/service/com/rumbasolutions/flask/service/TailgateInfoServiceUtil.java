@@ -83,6 +83,11 @@ public class TailgateInfoServiceUtil {
 		return getService().getAllMyTailgate(userId);
 	}
 
+	public static java.util.List<com.rumbasolutions.flask.model.TailgateInfo> getAllTailgeteByUserId(
+		long userId) {
+		return getService().getAllTailgeteByUserId(userId);
+	}
+
 	public static com.rumbasolutions.flask.model.TailgateInfo getTailgate(
 		int tailgateId) {
 		return getService().getTailgate(tailgateId);

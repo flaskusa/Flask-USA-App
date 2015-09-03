@@ -49,22 +49,26 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 
 		_methodParameterTypes5 = new String[] { "long" };
 
-		_methodName6 = "getTailgate";
+		_methodName6 = "getAllTailgeteByUserId";
 
-		_methodParameterTypes6 = new String[] { "int" };
+		_methodParameterTypes6 = new String[] { "long" };
 
-		_methodName7 = "updateTailgateInfo";
+		_methodName7 = "getTailgate";
 
-		_methodParameterTypes7 = new String[] {
+		_methodParameterTypes7 = new String[] { "int" };
+
+		_methodName8 = "updateTailgateInfo";
+
+		_methodParameterTypes8 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
 				"java.util.Date", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName8 = "deleteTailgateInfo";
+		_methodName9 = "deleteTailgateInfo";
 
-		_methodParameterTypes8 = new String[] { "long" };
+		_methodParameterTypes9 = new String[] { "long" };
 	}
 
 	@Override
@@ -211,13 +215,37 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 	}
 
 	@Override
+	public java.util.List<com.rumbasolutions.flask.model.TailgateInfo> getAllTailgeteByUserId(
+		long userId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6, new Object[] { userId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.TailgateInfo>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.TailgateInfo getTailgate(
 		int tailgateId) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6, new Object[] { tailgateId });
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7, new Object[] { tailgateId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -244,8 +272,8 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7,
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
 					new Object[] {
 						tailgateId,
 						
@@ -286,8 +314,8 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 	@Override
 	public void deleteTailgateInfo(long tailgateId) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8, new Object[] { tailgateId });
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9, new Object[] { tailgateId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -319,4 +347,6 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
 }

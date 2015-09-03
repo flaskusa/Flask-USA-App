@@ -79,6 +79,10 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 		long userId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.TailgateInfo> getAllTailgeteByUserId(
+		long userId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.rumbasolutions.flask.model.TailgateInfo getTailgate(
 		int tailgateId);
 
