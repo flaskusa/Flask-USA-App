@@ -21,6 +21,7 @@ String userName = user.getFullName();
 
 <aui:script>
 var bCreated;
+var isAdmin = $("#isAdmin").val();
 Liferay.Portlet.ready(initialize);
 function initialize(portletId, portlet){
 	if(portletId == "flaskusertailgate_WAR_flaskusertailgateportlet") {
