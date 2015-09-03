@@ -21,7 +21,8 @@ _tailgateModel.SERVICE_ENDPOINTS = {
 	GET_VENUE					:"/flask-rest-events-portlet.venue/get-venue",
 	GET_ALL_TAILGATE_IMAGES		:"/flask-user-tailgate-portlet.tailgateimages/get-tailgate-images",
 	UPDATE_IMAGES_DETAIL		:"/flask-user-tailgate-portlet.tailgateimages/update-tailgate-image",
-	DELETE_TAILGATE_IMAGE		:"/flask-user-tailgate-portlet.tailgateimages/delete-tailgate-image-by-tailgate-image-id"	
+	DELETE_TAILGATE_IMAGE		:"/flask-user-tailgate-portlet.tailgateimages/delete-tailgate-image-by-tailgate-image-id",
+	GET_TAILGATES_BY_USERID		:"/flask-user-tailgate-portlet.tailgateinfo/get-all-tailgete-by-user-id"
 };
 
 _tailgateModel.DATA_MODEL= {

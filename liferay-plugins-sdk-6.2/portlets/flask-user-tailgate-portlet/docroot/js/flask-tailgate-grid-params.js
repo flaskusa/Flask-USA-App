@@ -1,7 +1,6 @@
 var _repositoryId = $("#repositoryId").val();    
 var GRID_PARAM = {};
 var gridObj;
-var isAdmin = $("#isAdmin").val();
 var groupGridObj;
 var userGridObj;
 var rowMenuDivId;
@@ -216,7 +215,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		var endTime = "<tr><td class='filledWidth'><b>End Time:</b></td><td>"
 				+ d2 + "</td></tr>";
 		var amountToPay = "<tr><td class='filledWidth'><b>Fees:</b></td><td>"
-			   + datarecord.amountToPay + "</td></tr>";		
+			   + datarecord.amountToPay + " <button class='btn btn-primary'>Pay</button></td></tr>";
 		 
 		$(leftcolumn).append("<table>");
 		$(leftcolumn).append(tailgate_Name);
@@ -427,11 +426,15 @@ function createTailgateMemberTable(data, grid){
 			  return "No";
 	 }
 	 //recordcellsrenderer
-	 var eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '25%' },
-	                      { text: 'Email', datafield: 'emailAddress', width: '25%'},
-	                      { text: 'Is Admin?', datafield: 'isAdmin',  width: '16.66%', cellsrenderer: datecellsrenderer},
-	                      { text: 'Is Paid?', datafield: 'isPaid', width: '16.66%', cellsrenderer: datecellsrenderer}];
+	 if(isAdmin == 1){
+	 var eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '33.33%' },
+	                      { text: 'Email', datafield: 'emailAddress', width: '33.33%'},
+	                      { text: 'Is Paid?', datafield: 'isPaid', width: '33.33%', cellsrenderer: datecellsrenderer}];
 	 //,{ text: 'Payment Mode', datafield: 'paymentMode', width: '16.66%'}
+	 }else{
+		 var eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '50%' },
+		                      { text: 'Email', datafield: 'emailAddress', width: '50%'}];
+	 }
 	 var source = {
 			 localdata:data,
 			 datatype:'array',

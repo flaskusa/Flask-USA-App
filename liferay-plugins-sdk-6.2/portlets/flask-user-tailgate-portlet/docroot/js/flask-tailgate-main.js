@@ -111,8 +111,12 @@ function addClickHandlers(){
 
 function loadData(){
 	var flaskRequest = new Request();
+	if(isAdmin == 1)
+		url = _tailgateModel.SERVICE_ENDPOINTS.GET_ALL_MY_TAILGATE;
+	else
+		url = _tailgateModel.SERVICE_ENDPOINTS.GET_TAILGATES_BY_USERID;
 	params = {userId:_tailgateModel.userId};
-	flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.GET_ALL_MY_TAILGATE, params, 
+	flaskRequest.sendGETRequest(url, params, 
 	function(data){/*success handler*/
 		var tailgates = eval(data);
 		$.each(tailgates, function(index, tailgate) {
@@ -573,12 +577,15 @@ function addTailgateGroups(){
 				params, function(data) {/* success handler */
 			$.each(data, function(index, grpUser) {
 					var userrparams = {};
-					userrparams.tailgateId = tailgateId;
+					userrparams.groupId = grpUser.groupId;
 					userrparams.userId = grpUser.userId;
 					userrparams.userName = grpUser.userName;
-					userrparams.isAdmin = 0;
-					userrparams.groupId = grpUser.groupId;
-					addTailgateGroup(userrparams)
+					userrparams.emailAddress = grpUser.emailAddress;
+					userrparams.isAdmin = grpUser.isAdmin;
+					userrparams.tailgateId = tailgateId;
+					userrparams.isPaid = 0;
+					userrparams.paymentMode = "None"; 
+					addTailgateMember(userrparams);
 			});
 		}, function(error){
 			_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
