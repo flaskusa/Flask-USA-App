@@ -73,8 +73,8 @@ function initialize(portletId, portlet){
 <div id='formContainer' style="display:none">
 	<ul class="nav nav-tabs">
 	  <li class="active"><a href="#tailgates" data-toggle="tab">Manage Tailgate</a></li>
-	  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Gallery</a></li>  
-	  <li><a href="#users" data-toggle="tab" id="musers">Manage Tailgate Members</a></li>  
+	  <li><a href="#contents" data-toggle="tab" id="mcontents">Gallery</a></li>  
+	  <li><a href="#users" data-toggle="tab" id="musers">Members</a></li>  
 	</ul>
 	
 	<div class="tab-content">
@@ -109,18 +109,26 @@ function initialize(portletId, portlet){
 			   </div> 
 			
 			   <div class="form-group">
-			    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
+			    <label class="control-label" for="startTime">Start Time:</label>
 			    <div class="controls">
 			      <input type='text' class="form-control" id='startTime' />
 			    </div>
 			  </div>
 			
 			  <div class="form-group">
-				<label  id="EndTime" class="control-label" for="endTime">End Time:</label>
+				<label class="control-label" for="endTime">End Time:</label>
 			    	<div class="controls">
 			    		 <input type='text' class="form-control" id='endTime' />
 			    	</div>
 			  </div>
+
+			  <div class="form-group">
+				<label class="control-label" for="amountToPay">Amount:</label>
+			    	<div class="controls">
+			    		 <input type='text' class="form-control" id='amountToPay' />
+			    	</div>
+			  </div>
+			  
 			  <br/>
 			  <input type="hidden" id="eventName" value="">	
 			  <input type="hidden" name="<portlet:namespace />repositoryId" value="<%= repositoryId %>>">
