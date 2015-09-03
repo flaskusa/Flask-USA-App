@@ -78,11 +78,11 @@ public class FlaskGroupUsersServiceSoap {
 	}
 
 	public static com.rumbasolutions.flask.model.FlaskGroupUsersSoap addGroupUser(
-		long groupId, long userId, java.lang.String userName, int isAdmin)
-		throws RemoteException {
+		long groupId, long userId, java.lang.String userName,
+		java.lang.String emailAddress, int isAdmin) throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.FlaskGroupUsers returnValue = FlaskGroupUsersServiceUtil.addGroupUser(groupId,
-					userId, userName, isAdmin);
+					userId, userName, emailAddress, isAdmin);
 
 			return com.rumbasolutions.flask.model.FlaskGroupUsersSoap.toSoapModel(returnValue);
 		}
@@ -95,10 +95,10 @@ public class FlaskGroupUsersServiceSoap {
 
 	public static com.rumbasolutions.flask.model.FlaskGroupUsersSoap updateGroupUser(
 		long groupUserId, long groupId, long userId, java.lang.String userName,
-		int isAdmin) throws RemoteException {
+		java.lang.String emailAddress, int isAdmin) throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.FlaskGroupUsers returnValue = FlaskGroupUsersServiceUtil.updateGroupUser(groupUserId,
-					groupId, userId, userName, isAdmin);
+					groupId, userId, userName, emailAddress, isAdmin);
 
 			return com.rumbasolutions.flask.model.FlaskGroupUsersSoap.toSoapModel(returnValue);
 		}

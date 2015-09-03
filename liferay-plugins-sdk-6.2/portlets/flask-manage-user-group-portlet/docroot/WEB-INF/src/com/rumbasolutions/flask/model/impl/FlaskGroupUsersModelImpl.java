@@ -69,9 +69,10 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 			{ "groupId", Types.BIGINT },
 			{ "userId", Types.BIGINT },
 			{ "userName", Types.VARCHAR },
-			{ "isAdmin", Types.INTEGER }
+			{ "isAdmin", Types.INTEGER },
+			{ "emailAddress", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskgroup_FlaskGroupUsers (groupUserId LONG not null primary key,groupId LONG,userId LONG,userName VARCHAR(75) null,isAdmin INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table flaskgroup_FlaskGroupUsers (groupUserId LONG not null primary key,groupId LONG,userId LONG,userName VARCHAR(75) null,isAdmin INTEGER,emailAddress VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskgroup_FlaskGroupUsers";
 	public static final String ORDER_BY_JPQL = " ORDER BY flaskGroupUsers.groupUserId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskgroup_FlaskGroupUsers.groupUserId ASC";
@@ -108,6 +109,7 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
 		model.setIsAdmin(soapModel.getIsAdmin());
+		model.setEmailAddress(soapModel.getEmailAddress());
 
 		return model;
 	}
@@ -178,6 +180,7 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("isAdmin", getIsAdmin());
+		attributes.put("emailAddress", getEmailAddress());
 
 		return attributes;
 	}
@@ -212,6 +215,12 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 
 		if (isAdmin != null) {
 			setIsAdmin(isAdmin);
+		}
+
+		String emailAddress = (String)attributes.get("emailAddress");
+
+		if (emailAddress != null) {
+			setEmailAddress(emailAddress);
 		}
 	}
 
@@ -307,6 +316,22 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 		_isAdmin = isAdmin;
 	}
 
+	@JSON
+	@Override
+	public String getEmailAddress() {
+		if (_emailAddress == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _emailAddress;
+		}
+	}
+
+	@Override
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -343,6 +368,7 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 		flaskGroupUsersImpl.setUserId(getUserId());
 		flaskGroupUsersImpl.setUserName(getUserName());
 		flaskGroupUsersImpl.setIsAdmin(getIsAdmin());
+		flaskGroupUsersImpl.setEmailAddress(getEmailAddress());
 
 		flaskGroupUsersImpl.resetOriginalValues();
 
@@ -422,12 +448,20 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 
 		flaskGroupUsersCacheModel.isAdmin = getIsAdmin();
 
+		flaskGroupUsersCacheModel.emailAddress = getEmailAddress();
+
+		String emailAddress = flaskGroupUsersCacheModel.emailAddress;
+
+		if ((emailAddress != null) && (emailAddress.length() == 0)) {
+			flaskGroupUsersCacheModel.emailAddress = null;
+		}
+
 		return flaskGroupUsersCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{groupUserId=");
 		sb.append(getGroupUserId());
@@ -439,6 +473,8 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 		sb.append(getUserName());
 		sb.append(", isAdmin=");
 		sb.append(getIsAdmin());
+		sb.append(", emailAddress=");
+		sb.append(getEmailAddress());
 		sb.append("}");
 
 		return sb.toString();
@@ -446,7 +482,7 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.FlaskGroupUsers");
@@ -472,6 +508,10 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 			"<column><column-name>isAdmin</column-name><column-value><![CDATA[");
 		sb.append(getIsAdmin());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>emailAddress</column-name><column-value><![CDATA[");
+		sb.append(getEmailAddress());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -491,6 +531,7 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 	private String _userUuid;
 	private String _userName;
 	private int _isAdmin;
+	private String _emailAddress;
 	private long _columnBitmask;
 	private FlaskGroupUsers _escapedModel;
 }

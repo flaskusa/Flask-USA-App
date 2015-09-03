@@ -28,6 +28,7 @@
 			<basic name="userId" />
 			<basic name="userName" />
 			<basic name="isAdmin" />
+			<basic name="emailAddress" />
 			<transient name="groupUserUuid" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

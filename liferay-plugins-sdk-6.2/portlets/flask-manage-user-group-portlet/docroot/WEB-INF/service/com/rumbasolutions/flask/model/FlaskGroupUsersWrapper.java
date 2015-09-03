@@ -54,6 +54,7 @@ public class FlaskGroupUsersWrapper implements FlaskGroupUsers,
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("isAdmin", getIsAdmin());
+		attributes.put("emailAddress", getEmailAddress());
 
 		return attributes;
 	}
@@ -88,6 +89,12 @@ public class FlaskGroupUsersWrapper implements FlaskGroupUsers,
 
 		if (isAdmin != null) {
 			setIsAdmin(isAdmin);
+		}
+
+		String emailAddress = (String)attributes.get("emailAddress");
+
+		if (emailAddress != null) {
+			setEmailAddress(emailAddress);
 		}
 	}
 
@@ -253,6 +260,26 @@ public class FlaskGroupUsersWrapper implements FlaskGroupUsers,
 	@Override
 	public void setIsAdmin(int isAdmin) {
 		_flaskGroupUsers.setIsAdmin(isAdmin);
+	}
+
+	/**
+	* Returns the email address of this flask group users.
+	*
+	* @return the email address of this flask group users
+	*/
+	@Override
+	public java.lang.String getEmailAddress() {
+		return _flaskGroupUsers.getEmailAddress();
+	}
+
+	/**
+	* Sets the email address of this flask group users.
+	*
+	* @param emailAddress the email address of this flask group users
+	*/
+	@Override
+	public void setEmailAddress(java.lang.String emailAddress) {
+		_flaskGroupUsers.setEmailAddress(emailAddress);
 	}
 
 	@Override

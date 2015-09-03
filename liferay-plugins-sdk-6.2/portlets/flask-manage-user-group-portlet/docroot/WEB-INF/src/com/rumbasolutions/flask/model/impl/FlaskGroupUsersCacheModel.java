@@ -36,7 +36,7 @@ public class FlaskGroupUsersCacheModel implements CacheModel<FlaskGroupUsers>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{groupUserId=");
 		sb.append(groupUserId);
@@ -48,6 +48,8 @@ public class FlaskGroupUsersCacheModel implements CacheModel<FlaskGroupUsers>,
 		sb.append(userName);
 		sb.append(", isAdmin=");
 		sb.append(isAdmin);
+		sb.append(", emailAddress=");
+		sb.append(emailAddress);
 		sb.append("}");
 
 		return sb.toString();
@@ -70,6 +72,13 @@ public class FlaskGroupUsersCacheModel implements CacheModel<FlaskGroupUsers>,
 
 		flaskGroupUsersImpl.setIsAdmin(isAdmin);
 
+		if (emailAddress == null) {
+			flaskGroupUsersImpl.setEmailAddress(StringPool.BLANK);
+		}
+		else {
+			flaskGroupUsersImpl.setEmailAddress(emailAddress);
+		}
+
 		flaskGroupUsersImpl.resetOriginalValues();
 
 		return flaskGroupUsersImpl;
@@ -82,6 +91,7 @@ public class FlaskGroupUsersCacheModel implements CacheModel<FlaskGroupUsers>,
 		userId = objectInput.readLong();
 		userName = objectInput.readUTF();
 		isAdmin = objectInput.readInt();
+		emailAddress = objectInput.readUTF();
 	}
 
 	@Override
@@ -99,6 +109,13 @@ public class FlaskGroupUsersCacheModel implements CacheModel<FlaskGroupUsers>,
 		}
 
 		objectOutput.writeInt(isAdmin);
+
+		if (emailAddress == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(emailAddress);
+		}
 	}
 
 	public long groupUserId;
@@ -106,4 +123,5 @@ public class FlaskGroupUsersCacheModel implements CacheModel<FlaskGroupUsers>,
 	public long userId;
 	public String userName;
 	public int isAdmin;
+	public String emailAddress;
 }

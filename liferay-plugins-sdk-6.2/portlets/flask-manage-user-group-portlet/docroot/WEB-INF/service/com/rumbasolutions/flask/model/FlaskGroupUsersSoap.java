@@ -35,6 +35,7 @@ public class FlaskGroupUsersSoap implements Serializable {
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setIsAdmin(model.getIsAdmin());
+		soapModel.setEmailAddress(model.getEmailAddress());
 
 		return soapModel;
 	}
@@ -129,9 +130,18 @@ public class FlaskGroupUsersSoap implements Serializable {
 		_isAdmin = isAdmin;
 	}
 
+	public String getEmailAddress() {
+		return _emailAddress;
+	}
+
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
+	}
+
 	private long _groupUserId;
 	private long _groupId;
 	private long _userId;
 	private String _userName;
 	private int _isAdmin;
+	private String _emailAddress;
 }

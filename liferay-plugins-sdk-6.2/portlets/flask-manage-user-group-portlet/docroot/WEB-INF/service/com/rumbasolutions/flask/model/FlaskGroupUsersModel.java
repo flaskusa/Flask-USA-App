@@ -159,6 +159,21 @@ public interface FlaskGroupUsersModel extends BaseModel<FlaskGroupUsers> {
 	 */
 	public void setIsAdmin(int isAdmin);
 
+	/**
+	 * Returns the email address of this flask group users.
+	 *
+	 * @return the email address of this flask group users
+	 */
+	@AutoEscape
+	public String getEmailAddress();
+
+	/**
+	 * Sets the email address of this flask group users.
+	 *
+	 * @param emailAddress the email address of this flask group users
+	 */
+	public void setEmailAddress(String emailAddress);
+
 	@Override
 	public boolean isNew();
 

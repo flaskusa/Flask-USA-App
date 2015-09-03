@@ -14,15 +14,18 @@
 
 package com.rumbasolutions.flask.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.rumbasolutions.flask.model.FlaskGroupUsers;
+import com.rumbasolutions.flask.model.impl.FlaskGroupUsersImpl;
 import com.rumbasolutions.flask.service.FlaskGroupUsersLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.FlaskGroupUsersServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupUsersFinderUtil;
@@ -52,13 +55,20 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 
 	@Override
 	public List<FlaskGroupUsers> getAllGroupUsers(long groupId) {
-		List<FlaskGroupUsers> groupUsersList = new ArrayList<FlaskGroupUsers>();
-		groupUsersList = FlaskGroupUsersFinderUtil.getGroupUsersListByGroupId(groupId);
+		List<FlaskGroupUsers> groupUsersList = null;
+		try{
+			DynamicQuery flaskGroupQuery = DynamicQueryFactoryUtil.forClass(FlaskGroupUsersImpl.class);
+			flaskGroupQuery.add(PropertyFactoryUtil.forName("groupId").eq(new Long(groupId)));
+			groupUsersList = FlaskGroupUsersLocalServiceUtil.dynamicQuery(flaskGroupQuery);
+		}catch(Exception ex){
+			LOGGER.error("Exception in Add Group User :" + ex.getMessage());
+		}
+		
 		return groupUsersList;
 	}
 	
 	@Override
-	public FlaskGroupUsers addGroupUser(long groupId, long userId, String userName, int isAdmin){
+	public FlaskGroupUsers addGroupUser(long groupId, long userId, String userName, String emailAddress, int isAdmin){
 		FlaskGroupUsers groupUsers = null;
 		try{
 			groupUsers = FlaskGroupUsersLocalServiceUtil.createFlaskGroupUsers(CounterLocalServiceUtil.increment());
@@ -66,6 +76,7 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 			groupUsers.setIsAdmin(isAdmin);
 			groupUsers.setUserId(userId);
 			groupUsers.setUserName(userName);
+			groupUsers.setEmailAddress(emailAddress);
 			
 			groupUsers = FlaskGroupUsersLocalServiceUtil.addFlaskGroupUsers(groupUsers);
 			String text = "You are invited to be participants of custom group.";
@@ -80,7 +91,7 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 	}
 	
 	@Override
-	public FlaskGroupUsers updateGroupUser(long groupUserId,long groupId, long userId, String userName, int isAdmin){
+	public FlaskGroupUsers updateGroupUser(long groupUserId,long groupId, long userId, String userName, String emailAddress, int isAdmin){
 		FlaskGroupUsers groupUser = null;
 		try{
 			groupUser = FlaskGroupUsersLocalServiceUtil.getFlaskGroupUsers(groupUserId);
@@ -88,6 +99,7 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 			groupUser.setIsAdmin(isAdmin);
 			groupUser.setUserId(userId);
 			groupUser.setUserName(userName);
+			groupUser.setEmailAddress(emailAddress);
 			
 			groupUser = FlaskGroupUsersLocalServiceUtil.updateFlaskGroupUsers(groupUser);
 		}catch(SystemException e){

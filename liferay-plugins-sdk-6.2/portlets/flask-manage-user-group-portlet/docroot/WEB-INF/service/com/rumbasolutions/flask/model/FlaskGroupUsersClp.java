@@ -79,6 +79,7 @@ public class FlaskGroupUsersClp extends BaseModelImpl<FlaskGroupUsers>
 		attributes.put("userId", getUserId());
 		attributes.put("userName", getUserName());
 		attributes.put("isAdmin", getIsAdmin());
+		attributes.put("emailAddress", getEmailAddress());
 
 		return attributes;
 	}
@@ -113,6 +114,12 @@ public class FlaskGroupUsersClp extends BaseModelImpl<FlaskGroupUsers>
 
 		if (isAdmin != null) {
 			setIsAdmin(isAdmin);
+		}
+
+		String emailAddress = (String)attributes.get("emailAddress");
+
+		if (emailAddress != null) {
+			setEmailAddress(emailAddress);
 		}
 	}
 
@@ -251,6 +258,29 @@ public class FlaskGroupUsersClp extends BaseModelImpl<FlaskGroupUsers>
 		}
 	}
 
+	@Override
+	public String getEmailAddress() {
+		return _emailAddress;
+	}
+
+	@Override
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
+
+		if (_flaskGroupUsersRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskGroupUsersRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setEmailAddress", String.class);
+
+				method.invoke(_flaskGroupUsersRemoteModel, emailAddress);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getFlaskGroupUsersRemoteModel() {
 		return _flaskGroupUsersRemoteModel;
 	}
@@ -327,6 +357,7 @@ public class FlaskGroupUsersClp extends BaseModelImpl<FlaskGroupUsers>
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setIsAdmin(getIsAdmin());
+		clone.setEmailAddress(getEmailAddress());
 
 		return clone;
 	}
@@ -379,7 +410,7 @@ public class FlaskGroupUsersClp extends BaseModelImpl<FlaskGroupUsers>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{groupUserId=");
 		sb.append(getGroupUserId());
@@ -391,6 +422,8 @@ public class FlaskGroupUsersClp extends BaseModelImpl<FlaskGroupUsers>
 		sb.append(getUserName());
 		sb.append(", isAdmin=");
 		sb.append(getIsAdmin());
+		sb.append(", emailAddress=");
+		sb.append(getEmailAddress());
 		sb.append("}");
 
 		return sb.toString();
@@ -398,7 +431,7 @@ public class FlaskGroupUsersClp extends BaseModelImpl<FlaskGroupUsers>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.FlaskGroupUsers");
@@ -424,6 +457,10 @@ public class FlaskGroupUsersClp extends BaseModelImpl<FlaskGroupUsers>
 			"<column><column-name>isAdmin</column-name><column-value><![CDATA[");
 		sb.append(getIsAdmin());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>emailAddress</column-name><column-value><![CDATA[");
+		sb.append(getEmailAddress());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -437,6 +474,7 @@ public class FlaskGroupUsersClp extends BaseModelImpl<FlaskGroupUsers>
 	private String _userUuid;
 	private String _userName;
 	private int _isAdmin;
+	private String _emailAddress;
 	private BaseModel<?> _flaskGroupUsersRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

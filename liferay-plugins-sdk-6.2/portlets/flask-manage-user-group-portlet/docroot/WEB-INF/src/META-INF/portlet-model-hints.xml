@@ -16,5 +16,6 @@
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="isAdmin" type="int" />
+		<field name="emailAddress" type="String" />
 	</model>
 </model-hints>

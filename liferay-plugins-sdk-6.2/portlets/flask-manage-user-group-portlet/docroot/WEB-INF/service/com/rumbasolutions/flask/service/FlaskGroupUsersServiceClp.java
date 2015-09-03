@@ -39,13 +39,14 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 		_methodName4 = "addGroupUser";
 
 		_methodParameterTypes4 = new String[] {
-				"long", "long", "java.lang.String", "int"
+				"long", "long", "java.lang.String", "java.lang.String", "int"
 			};
 
 		_methodName5 = "updateGroupUser";
 
 		_methodParameterTypes5 = new String[] {
-				"long", "long", "long", "java.lang.String", "int"
+				"long", "long", "long", "java.lang.String", "java.lang.String",
+				"int"
 			};
 
 		_methodName6 = "addGroupOwner";
@@ -137,7 +138,8 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 
 	@Override
 	public com.rumbasolutions.flask.model.FlaskGroupUsers addGroupUser(
-		long groupId, long userId, java.lang.String userName, int isAdmin) {
+		long groupId, long userId, java.lang.String userName,
+		java.lang.String emailAddress, int isAdmin) {
 		Object returnObj = null;
 
 		try {
@@ -149,6 +151,8 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 					userId,
 						
 					ClpSerializer.translateInput(userName),
+						
+					ClpSerializer.translateInput(emailAddress),
 						
 					isAdmin
 					});
@@ -171,7 +175,7 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 	@Override
 	public com.rumbasolutions.flask.model.FlaskGroupUsers updateGroupUser(
 		long groupUserId, long groupId, long userId, java.lang.String userName,
-		int isAdmin) {
+		java.lang.String emailAddress, int isAdmin) {
 		Object returnObj = null;
 
 		try {
@@ -185,6 +189,8 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 					userId,
 						
 					ClpSerializer.translateInput(userName),
+						
+					ClpSerializer.translateInput(emailAddress),
 						
 					isAdmin
 					});

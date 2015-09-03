@@ -848,6 +848,7 @@ public class FlaskGroupUsersPersistenceImpl extends BasePersistenceImpl<FlaskGro
 		flaskGroupUsersImpl.setUserId(flaskGroupUsers.getUserId());
 		flaskGroupUsersImpl.setUserName(flaskGroupUsers.getUserName());
 		flaskGroupUsersImpl.setIsAdmin(flaskGroupUsers.getIsAdmin());
+		flaskGroupUsersImpl.setEmailAddress(flaskGroupUsers.getEmailAddress());
 
 		return flaskGroupUsersImpl;
 	}

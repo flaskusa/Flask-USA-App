@@ -69,16 +69,19 @@ public class FlaskGroupUsersServiceUtil {
 	}
 
 	public static com.rumbasolutions.flask.model.FlaskGroupUsers addGroupUser(
-		long groupId, long userId, java.lang.String userName, int isAdmin) {
-		return getService().addGroupUser(groupId, userId, userName, isAdmin);
+		long groupId, long userId, java.lang.String userName,
+		java.lang.String emailAddress, int isAdmin) {
+		return getService()
+				   .addGroupUser(groupId, userId, userName, emailAddress,
+			isAdmin);
 	}
 
 	public static com.rumbasolutions.flask.model.FlaskGroupUsers updateGroupUser(
 		long groupUserId, long groupId, long userId, java.lang.String userName,
-		int isAdmin) {
+		java.lang.String emailAddress, int isAdmin) {
 		return getService()
 				   .updateGroupUser(groupUserId, groupId, userId, userName,
-			isAdmin);
+			emailAddress, isAdmin);
 	}
 
 	public static void addGroupOwner(long groupId, long userId) {

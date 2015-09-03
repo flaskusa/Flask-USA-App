@@ -13,5 +13,6 @@ create table flaskgroup_FlaskGroupUsers (
 	groupId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
-	isAdmin INTEGER
+	isAdmin INTEGER,
+	emailAddress VARCHAR(75) null
 );

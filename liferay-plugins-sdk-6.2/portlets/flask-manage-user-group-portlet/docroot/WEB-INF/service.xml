@@ -33,6 +33,7 @@
 		<column name="isAdmin" type="int" />
 
 		<!-- Finder methods -->
+        <column name="emailAddress" type="String"></column>
 		<finder name="UserGroups" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>

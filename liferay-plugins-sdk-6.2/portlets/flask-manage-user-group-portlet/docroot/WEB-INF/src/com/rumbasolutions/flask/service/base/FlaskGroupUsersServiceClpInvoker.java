@@ -39,13 +39,14 @@ public class FlaskGroupUsersServiceClpInvoker {
 		_methodName35 = "addGroupUser";
 
 		_methodParameterTypes35 = new String[] {
-				"long", "long", "java.lang.String", "int"
+				"long", "long", "java.lang.String", "java.lang.String", "int"
 			};
 
 		_methodName36 = "updateGroupUser";
 
 		_methodParameterTypes36 = new String[] {
-				"long", "long", "long", "java.lang.String", "int"
+				"long", "long", "long", "java.lang.String", "java.lang.String",
+				"int"
 			};
 
 		_methodName37 = "addGroupOwner";
@@ -84,8 +85,8 @@ public class FlaskGroupUsersServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
 			return FlaskGroupUsersServiceUtil.addGroupUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
-				(java.lang.String)arguments[2],
-				((Integer)arguments[3]).intValue());
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				((Integer)arguments[4]).intValue());
 		}
 
 		if (_methodName36.equals(name) &&
@@ -93,8 +94,8 @@ public class FlaskGroupUsersServiceClpInvoker {
 			return FlaskGroupUsersServiceUtil.updateGroupUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
-				(java.lang.String)arguments[3],
-				((Integer)arguments[4]).intValue());
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				((Integer)arguments[5]).intValue());
 		}
 
 		if (_methodName37.equals(name) &&

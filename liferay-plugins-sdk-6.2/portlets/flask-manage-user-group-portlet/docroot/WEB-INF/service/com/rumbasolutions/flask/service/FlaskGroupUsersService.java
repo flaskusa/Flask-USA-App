@@ -70,11 +70,12 @@ public interface FlaskGroupUsersService extends BaseService, InvokableService {
 		long groupId);
 
 	public com.rumbasolutions.flask.model.FlaskGroupUsers addGroupUser(
-		long groupId, long userId, java.lang.String userName, int isAdmin);
+		long groupId, long userId, java.lang.String userName,
+		java.lang.String emailAddress, int isAdmin);
 
 	public com.rumbasolutions.flask.model.FlaskGroupUsers updateGroupUser(
 		long groupUserId, long groupId, long userId, java.lang.String userName,
-		int isAdmin);
+		java.lang.String emailAddress, int isAdmin);
 
 	public void addGroupOwner(long groupId, long userId);
 
