@@ -228,6 +228,7 @@ function saveGroup() {
 		userrparams.groupId = data.groupId;
 		userrparams.userId = params.userId;
 		userrparams.userName = params.userName;
+		userrparams.emailAddress = params.emailAddress;
 		userrparams.isAdmin = 1;
 		addGroupUser(userrparams)
 	}, function(data) {
@@ -258,6 +259,7 @@ function addGroupUsers(){
 		var user = selectedUserList[i];
 		var userrparams = {};
 		userrparams.groupId = groupId;
+		userrparams.emailAddress = user.emailAddress;
 		userrparams.userId = user.userId;
 		userrparams.userName = user.firstName;
 		userrparams.isAdmin = 0;
@@ -362,6 +364,7 @@ function addGroupOwners(){
 		userrparams.groupId = groupId;
 		userrparams.userId = user.userId;
 		userrparams.userName = user.firstName;
+		userrparams.emailAddress = user.emailAddress;
 		userrparams.isAdmin = 1;
 		addGroupOwner(userrparams)
 	}

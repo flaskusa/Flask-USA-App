@@ -42,6 +42,7 @@ _groupModel.DATA_MODEL= {
 				 { name: 'groupId', type: 'string', fieldName : 'Group Id' },
 				 { name: 'userId', type: 'string', fieldName : 'User Id' },
 				 { name: 'userName', type: 'string', fieldName : 'User Name' },
+				 { name: 'emailAddress', type: 'string', fieldName : 'Email Address' },
 				 { name: 'isAdmin', type: 'int', fieldName : 'Is User Admin' }
 			]
 	};
