@@ -10,7 +10,9 @@ _flaskLib.getFormData = function(formId, model, customGetData){
 	var formData = {};
 	try {
 			$.each(model, function(index, column){
+					console.log(column.name + ' - ' +column.type);
 					var ele = $('#'+ formId + ' #'+column.name);
+					console.log(ele);
 					if(ele.length == 1 ){
 						var val = $.trim(ele.val());
 						if(column.type == 'long' && val !=''){
