@@ -35,21 +35,21 @@ function renderEventList(tdata) {
 		    var objTable = $('<table/>',{'class':'tblRow'});
 		    var objTr = $('<tr/>');
 		    $(objTr).appendTo($(objTable));
-		    var objTd1 = $('<td/>',{'width':'70px'});
+		    var objTd1 = $('<td/>',{'width':'34px'});
 		    $(objTd1).appendTo($(objTr));
 		    
 		    fnShowEventLogo(flaskEvent.eventImageUUID, flaskEvent.eventImageGroupId, objTd1,false);		    
-		    var eventName_lbl = $('<label/>',{'class':'control-label-color'});
+		    var eventName_lbl = $('<div/>',{'class':'control-label-color'});
 		    $(eventName_lbl).html(flaskEvent.eventName);
 		    var objTd2 = $('<td/>',{'data-id':flaskEvent.eventId,'data-venueId':flaskEvent.venueId});
 		    
-		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
+		    var venue_lbl = $('<div/>',{'class':'control-label-nocolor'});
 		    $(venue_lbl).html(st + ' at ' + flaskEvent.venueName);
 		    $(eventName_lbl).appendTo($(objTd2));
 		    $(venue_lbl).appendTo($(objTd2));
 		    $(objTd2).appendTo(objTr);
 		    $(objTable).appendTo($(divRow));
-		    var objTd3 = $('<td/>');
+		    var objTd3 = $('<td/>',{'width':'34px'});
 		    if(flaskEvent.userEvent == 1){
 		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
 		    }else{
@@ -57,11 +57,6 @@ function renderEventList(tdata) {
 		    }
 		    $(div_heart).appendTo($(objTd3));
 		    $(objTd3).appendTo(objTr);
-		    //Export Event as PDF
-		    var objTd4 = $('<td/>');
-		    	var div_pdf = $('<div/>',{'class':'pdf-download'});
-		    $(div_pdf).appendTo($(objTd4));
-		    $(objTd4).appendTo(objTr);
 		    
 		 	$(objTd2).click(function(){
 		 		$("#spinningSquaresG").show();
@@ -77,26 +72,8 @@ function renderEventList(tdata) {
 		 	}else{
 		 		$(div_heart).attr("title", "You need to be signed in to save events.");
 		 	}
-		 	//Export PDF click Function
-		 	$(div_pdf).click(function(){
-		 		exportEvent(flaskEvent);
-		 	});
-		 	
 	    }
 	 	$(divRow).appendTo($("#placeholder"));
-}
-
-function exportEvent(flaskEvent){
-	var flaskRequest = new Request();
-	params= {'eventId': flaskEvent.eventId};
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL_WITH_IMAGES , params, 
-		function(flaskEventWithImages){
-			flask_export.exportEventAsPDF(flaskEventWithImages);
-		},
-		function (data){
-			console.log("Error in getting Folder: " + data );
-			fnStopProgress();
-		});	
 }
 
 function getEventsForLocation(){
@@ -326,10 +303,6 @@ function fnBlankSlide(Slider){
 }
 
 $(document).ready(function(){
-	//Export Event List
-	$(".exportEvent").click(function(){
-		flask_export.exportEventAsPDF();
-	});
 	//fnLoadList();
 	$(".cssback").click(function(){
 		$('#one').show();
@@ -423,9 +396,8 @@ function initEventList(){
 	}
 	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT , {}, 
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){
-		console.log(data);
 			renderEventList(data);
 		} ,
 		function (data){

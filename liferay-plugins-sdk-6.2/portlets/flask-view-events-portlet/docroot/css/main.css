@@ -91,15 +91,13 @@ div#fixedfooter {
 .control-label-color
 {
 	font-size: 15px!important;
-  	height:25px;
 	color : #FB9A33; 
 	margin-left: 6px;
 }
 	
 .control-label-nocolor
 {
-	font-size:14px; 
-	height:25px;
+	font-size:14px;
 	margin-left: 6px;
 }
 
@@ -186,9 +184,10 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
 /* For Slider Resize issue Starts*/
 
 .tblRow{
-	width:50%;
+	width:100%;
 	padding-top:10px;
 	padding-bottom:10px; 	
+	align:left;
 }
 @media(max-width:640px)
 {
@@ -668,9 +667,8 @@ input.btn.btn-info.cssback {
 #reportrange{
 	background: #fff; 
 	cursor: pointer; 
-	padding: 12px 0px 12px 4px; 
-	border: 1px solid #ccc; 
-	width: 95% !important;
+	padding: 5px 0px 5px 5px; 
+	border: 1px solid #ccc;
 	font-size: 14px !important;
 }
 

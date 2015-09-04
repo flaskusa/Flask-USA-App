@@ -8,7 +8,7 @@ function initializeMap() {
 	    geocoder = new google.maps.Geocoder();
 	    var myLatlng = new google.maps.LatLng(latitude,longitude);
 	    var myOptions = {
-	        zoom: 16,
+	        zoom: 14,
 	        center: myLatlng,
 	        mapTypeId: google.maps.MapTypeId.ROADMAP
 	    };
