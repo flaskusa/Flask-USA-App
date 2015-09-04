@@ -14,7 +14,6 @@ div#jqxtabs {
    margin-right: 12px !important;
 }
 
-
 div#Active 
 {
 	height: none;
@@ -24,7 +23,6 @@ label#StartTime,label#EndTime
 {
 	  margin-top: 10px;
 }
-
 
 div#startTime,div#endTime
 {	
@@ -175,4 +173,36 @@ ul.flipster-nav
 
 #btnSaveImageDetails{
 	margin-left: 0px !important;
+}
+
+.filledWidth{
+	vertical-align: top !important;
+}
+
+.btnPay {
+  background: #f0b51f;
+  background-image: -webkit-linear-gradient(top, #f0b51f, #fc9f14);
+  background-image: -moz-linear-gradient(top, #f0b51f, #fc9f14);
+  background-image: -ms-linear-gradient(top, #f0b51f, #fc9f14);
+  background-image: -o-linear-gradient(top, #f0b51f, #fc9f14);
+  background-image: linear-gradient(to bottom, #f0b51f, #fc9f14);
+  -webkit-border-radius: 20;
+  -moz-border-radius: 20;
+  border-radius: 20px;
+  font-family: Arial;
+  color: #ffffff !important;
+  font-size: 14px;
+  padding: 10px 20px 10px 20px;
+  text-decoration: none !important;
+  display:inline-block;
+}
+
+.btnPay:hover {
+  background: #fc9f14;
+  background-image: -webkit-linear-gradient(top, #fc9f14, #f0b51f);
+  background-image: -moz-linear-gradient(top, #fc9f14, #f0b51f);
+  background-image: -ms-linear-gradient(top, #fc9f14, #f0b51f);
+  background-image: -o-linear-gradient(top, #fc9f14, #f0b51f);
+  background-image: linear-gradient(to bottom, #fc9f14, #f0b51f);
+  text-decoration: none;
 }
