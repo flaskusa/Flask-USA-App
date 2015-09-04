@@ -723,3 +723,21 @@ function fnDeleteImage(obj){
 			console.log(data);
 		});		
 }
+
+function fnPayNow(tailgateId){
+	var currentUserId = Liferay.ThemeDisplay.getUserId(); 
+	var params= {userId: currentUserId,
+		    tailgateId: tailgateId,
+		    isPaid: true,
+		    paymentMode: 'Venmo',
+		    description: 'Test Payment Description'};
+	console.log(params);
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.PAY_FOR_TAILGATE , params, 
+		function (data){
+			console.log(data);
+		},
+		function (error){
+			console.log(error);
+		});	
+}	  

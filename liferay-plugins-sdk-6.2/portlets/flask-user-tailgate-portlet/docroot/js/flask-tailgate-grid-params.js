@@ -177,12 +177,7 @@ function formatUnixToTime(tdate)
 }
 
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord){
-	
 	var tabsdiv = null; 
-	console.log(datarecord);
-	//_flaskLib.loadCountries('venueCountryId',datarecord.venueCountryId);
-	//_flaskLib.loadUSARegions('venueStateId',datarecord.venueStateId);
-
     tabsdiv = $($(parentElement).children()[0]);
     if (tabsdiv != null) {
     	
@@ -196,50 +191,50 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		
 		var leftcolumn = $('<div class="span5"></div>');
 		var rightcolumn = $('<div class="span5"></div>');
+		var rightButtoncolumn = $('<div class="span2" style="padding:20px"></div>');
 		var d = new Date(datarecord.tailgateDate);
 		var d1 = formatUnixToTime(datarecord.startTime);
 		var d2 = formatUnixToTime(datarecord.endTime);
 		container1.append(leftcolumn);
 		container1.append(rightcolumn);
+		container1.append(rightButtoncolumn);
 	
 		var tailgate_Name = "<tr><td class='filledWidth'> <b>Name:</b></td><td> "
 			+ datarecord.tailgateName + "</td></tr>";
-		 var tailgate_Description = "<tr><td class='filledWidth'><b>Group Desc:</b></td><td><textarea style='border:none;width:240px;height:70px;background-color:white;margin:0px;' wrap='hard' readonly='true'>"
-				+ datarecord.tailgateDescription + "</textarea></td></tr>";
+		var tailgate_Description = "<tr><td class='filledWidth'><b>Group Desc:</b></td><td><textarea style='border:none;width:240px;height:70px;background-color:white;margin:0px;' wrap='hard' readonly='true'>"
+			+ datarecord.tailgateDescription + "</textarea></td></tr>";
 	    var eventName = "<tr><td class='filledWidth'><b>Event Name :</b></td><td> "
 			+ datarecord.eventName + "</td></tr>";
 	    var eventDate = "<tr><td class='filledWidth'><b>Tailgate Date :</b></td><td> "
 			+ GRID_PARAM.formatDate(d) + "</td></tr>";
 		var startTime = "<tr><td class='filledWidth'> <b>Start Time:</b></td><td>"
-				+ d1 + "</td></tr>";
+			+ d1 + "</td></tr>";
 		var endTime = "<tr><td class='filledWidth'><b>End Time:</b></td><td>"
-				+ d2 + "</td></tr>";
-		var amountToPay = "<tr><td class='filledWidth'><b>Fees:</b></td><td>"
-			   + datarecord.amountToPay + " <button class='btn btn-primary'>Pay</button></td></tr>";
-		 
-		$(leftcolumn).append("<table>");
-		$(leftcolumn).append(tailgate_Name);
-		$(leftcolumn).append(tailgate_Description);
-		$(leftcolumn).append("</table>");
+			+ d2 + "</td></tr>";
+		var table1= $("<table/>")
+		$(table1).append(tailgate_Name);
+		$(table1).append(tailgate_Description);
+		table1.appendTo(leftcolumn);
 		
-		$(rightcolumn).append("<table>");
-		
-		
-		$(rightcolumn).append(eventName);
-		$(rightcolumn).append(eventDate);
-		$(rightcolumn).append(startTime);
-		$(rightcolumn).append(endTime);
-		$(rightcolumn).append(amountToPay);
-		
-		$(rightcolumn).append("</table>");	
-		
+		var table2= $("<table/>")
+		$(table2).append(eventName);
+		$(table2).append(eventDate);
+		$(table2).append(startTime);
+		$(table2).append(endTime);
+		table2.appendTo(rightcolumn);	
+
+		var table3= $("<table/>")
+		var amountToPay = "<tr><td class='filledWidth'><b>Fees:</b></td><td>$"+datarecord.amountToPay + "</td></tr>";
+		var ButtonToPay = "<tr><td class='filledWidth' colspan='2'><a href='#' class='btnPay' onclick='fnPayNow("+datarecord.tailgateId+")'>Pay Now</a></td></tr>";
+		$(table3).append(amountToPay);
+		$(table3).append(ButtonToPay);
+		$(rightButtoncolumn).append(table3);		
 		var container = $('<div/>');
-//    	fnGetVenueImages(datarecord.venueId,container,false);
 		fnGetEventDetailImages(datarecord.tailgateId,imagesDiv, false);		
   	  	$(container).appendTo($(imagesDiv));
 		
 		$(tabsdiv).jqxTabs({
-			width : '90%',
+			width : '98%',
 			height : 180
 		});
     }
