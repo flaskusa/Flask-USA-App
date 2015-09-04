@@ -81,9 +81,8 @@ public interface TailgateUsersService extends BaseService, InvokableService {
 		java.lang.String paymentMode, int groupId);
 
 	public com.rumbasolutions.flask.model.TailgateUsers updateTailgateUser(
-		long tailgateUserId, long tailgateId, long userId,
-		java.lang.String userName, int isAdmin, boolean isPaid,
-		java.lang.String paymentMode, int groupId);
+		long tailgateUserId, boolean isPaid, java.lang.String paymentMode,
+		java.lang.String description);
 
 	public void deleteTailgateUser(long tailgateId, long userId);
 }

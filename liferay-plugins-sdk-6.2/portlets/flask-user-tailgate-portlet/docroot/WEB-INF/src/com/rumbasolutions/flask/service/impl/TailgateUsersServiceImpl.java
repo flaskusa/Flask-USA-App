@@ -133,17 +133,13 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 	}
 	
 	@Override
-	public TailgateUsers updateTailgateUser(long tailgateUserId,long tailgateId, long userId, String userName, int isAdmin, boolean isPaid, String paymentMode, int groupId){
+	public TailgateUsers updateTailgateUser(long tailgateUserId, boolean isPaid, String paymentMode, String description){
 		TailgateUsers tailgateUsers = null;
 		try{
 			tailgateUsers = TailgateUsersLocalServiceUtil.getTailgateUsers(tailgateUserId);
-			tailgateUsers.setTailgateId(tailgateId);
-			tailgateUsers.setIsAdmin(isAdmin);
-			tailgateUsers.setUserId(userId);
-			tailgateUsers.setUserName(userName);
 			tailgateUsers.setIsPaid(isPaid);
 			tailgateUsers.setPaymentMode(paymentMode);
-			tailgateUsers.setGroupId(groupId);
+			tailgateUsers.setDescription(description);
 			
 			tailgateUsers = TailgateUsersLocalServiceUtil.updateTailgateUsers(tailgateUsers);
 		}catch(SystemException e){

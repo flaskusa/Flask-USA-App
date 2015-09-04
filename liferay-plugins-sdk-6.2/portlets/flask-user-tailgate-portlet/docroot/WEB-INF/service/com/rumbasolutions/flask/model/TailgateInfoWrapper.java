@@ -65,6 +65,7 @@ public class TailgateInfoWrapper implements TailgateInfo,
 		attributes.put("isActive", getIsActive());
 		attributes.put("isDelete", getIsDelete());
 		attributes.put("amountToPay", getAmountToPay());
+		attributes.put("showMembers", getShowMembers());
 
 		return attributes;
 	}
@@ -160,6 +161,12 @@ public class TailgateInfoWrapper implements TailgateInfo,
 
 		if (amountToPay != null) {
 			setAmountToPay(amountToPay);
+		}
+
+		Boolean showMembers = (Boolean)attributes.get("showMembers");
+
+		if (showMembers != null) {
+			setShowMembers(showMembers);
 		}
 	}
 
@@ -503,6 +510,36 @@ public class TailgateInfoWrapper implements TailgateInfo,
 	@Override
 	public void setAmountToPay(long amountToPay) {
 		_tailgateInfo.setAmountToPay(amountToPay);
+	}
+
+	/**
+	* Returns the show members of this tailgate info.
+	*
+	* @return the show members of this tailgate info
+	*/
+	@Override
+	public boolean getShowMembers() {
+		return _tailgateInfo.getShowMembers();
+	}
+
+	/**
+	* Returns <code>true</code> if this tailgate info is show members.
+	*
+	* @return <code>true</code> if this tailgate info is show members; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isShowMembers() {
+		return _tailgateInfo.isShowMembers();
+	}
+
+	/**
+	* Sets whether this tailgate info is show members.
+	*
+	* @param showMembers the show members of this tailgate info
+	*/
+	@Override
+	public void setShowMembers(boolean showMembers) {
+		_tailgateInfo.setShowMembers(showMembers);
 	}
 
 	@Override

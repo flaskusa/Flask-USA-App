@@ -61,7 +61,7 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 	 */
 	private static Log LOGGER = LogFactoryUtil.getLog(TailgateInfoServiceImpl.class);
 	
-	public TailgateInfo addTailgateInfo(String tailgateName, String tailgateDescription,long eventId, String eventName,Date tailgateDate,Date startTime, Date endTime, long amountToPay, ServiceContext  serviceContext){
+	public TailgateInfo addTailgateInfo(String tailgateName, String tailgateDescription,long eventId, String eventName,Date tailgateDate,Date startTime, Date endTime, boolean showMembers, long amountToPay, ServiceContext  serviceContext){
 		TailgateInfo userTailgate = null;
 		try{
 		userTailgate = TailgateInfoLocalServiceUtil.createTailgateInfo(CounterLocalServiceUtil.increment());
@@ -74,6 +74,8 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 		userTailgate.setEndTime(endTime);
 		userTailgate.setIsActive(1);
 		userTailgate.setIsDelete(0);
+		userTailgate.setShowMembers(showMembers);
+		
 		userTailgate.setAmountToPay(amountToPay);
 		Date now = new Date();
 		userTailgate.setCompanyId(serviceContext.getCompanyId());
@@ -145,7 +147,7 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 		return userTailgate;
 	}
 	
-	public TailgateInfo updateTailgateInfo(long tailgateId, String tailgateName, String tailgateDescription,long eventId, String eventName,Date tailgateDate,Date startTime, Date endTime, long amountToPay, ServiceContext  serviceContext){
+	public TailgateInfo updateTailgateInfo(long tailgateId, String tailgateName, String tailgateDescription,long eventId, String eventName,Date tailgateDate,Date startTime, Date endTime, boolean showMembers, long amountToPay, ServiceContext  serviceContext){
 		TailgateInfo userTailgate = null;
 		try{
 		userTailgate = TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId);
@@ -156,6 +158,7 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 		userTailgate.setTailgateDate(tailgateDate);
 		userTailgate.setStartTime(startTime);
 		userTailgate.setEndTime(endTime);
+		userTailgate.setShowMembers(showMembers);
 		userTailgate.setAmountToPay(amountToPay);
 		Date now = new Date();
 		userTailgate.setCompanyId(serviceContext.getCompanyId());

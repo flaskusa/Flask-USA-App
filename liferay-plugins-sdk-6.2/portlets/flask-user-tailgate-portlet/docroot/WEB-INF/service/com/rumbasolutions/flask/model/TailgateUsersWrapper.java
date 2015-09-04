@@ -58,6 +58,7 @@ public class TailgateUsersWrapper implements TailgateUsers,
 		attributes.put("emailAddress", getEmailAddress());
 		attributes.put("isPaid", getIsPaid());
 		attributes.put("paymentMode", getPaymentMode());
+		attributes.put("description", getDescription());
 
 		return attributes;
 	}
@@ -116,6 +117,12 @@ public class TailgateUsersWrapper implements TailgateUsers,
 
 		if (paymentMode != null) {
 			setPaymentMode(paymentMode);
+		}
+
+		String description = (String)attributes.get("description");
+
+		if (description != null) {
+			setDescription(description);
 		}
 	}
 
@@ -371,6 +378,26 @@ public class TailgateUsersWrapper implements TailgateUsers,
 	@Override
 	public void setPaymentMode(java.lang.String paymentMode) {
 		_tailgateUsers.setPaymentMode(paymentMode);
+	}
+
+	/**
+	* Returns the description of this tailgate users.
+	*
+	* @return the description of this tailgate users
+	*/
+	@Override
+	public java.lang.String getDescription() {
+		return _tailgateUsers.getDescription();
+	}
+
+	/**
+	* Sets the description of this tailgate users.
+	*
+	* @param description the description of this tailgate users
+	*/
+	@Override
+	public void setDescription(java.lang.String description) {
+		_tailgateUsers.setDescription(description);
 	}
 
 	@Override

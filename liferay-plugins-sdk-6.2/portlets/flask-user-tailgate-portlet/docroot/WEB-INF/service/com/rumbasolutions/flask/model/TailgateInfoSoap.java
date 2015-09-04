@@ -46,6 +46,7 @@ public class TailgateInfoSoap implements Serializable {
 		soapModel.setIsActive(model.getIsActive());
 		soapModel.setIsDelete(model.getIsDelete());
 		soapModel.setAmountToPay(model.getAmountToPay());
+		soapModel.setShowMembers(model.getShowMembers());
 
 		return soapModel;
 	}
@@ -218,6 +219,18 @@ public class TailgateInfoSoap implements Serializable {
 		_amountToPay = amountToPay;
 	}
 
+	public boolean getShowMembers() {
+		return _showMembers;
+	}
+
+	public boolean isShowMembers() {
+		return _showMembers;
+	}
+
+	public void setShowMembers(boolean showMembers) {
+		_showMembers = showMembers;
+	}
+
 	private long _tailgateId;
 	private long _companyId;
 	private long _userId;
@@ -233,4 +246,5 @@ public class TailgateInfoSoap implements Serializable {
 	private int _isActive;
 	private int _isDelete;
 	private long _amountToPay;
+	private boolean _showMembers;
 }

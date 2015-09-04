@@ -60,11 +60,12 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 	public com.rumbasolutions.flask.model.TailgateInfo addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, long amountToPay,
+		java.util.Date startTime, java.util.Date endTime, boolean showMembers,
+		long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _tailgateInfoService.addTailgateInfo(tailgateName,
 			tailgateDescription, eventId, eventName, tailgateDate, startTime,
-			endTime, amountToPay, serviceContext);
+			endTime, showMembers, amountToPay, serviceContext);
 	}
 
 	@Override
@@ -95,11 +96,13 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, long amountToPay,
+		java.util.Date startTime, java.util.Date endTime, boolean showMembers,
+		long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _tailgateInfoService.updateTailgateInfo(tailgateId,
 			tailgateName, tailgateDescription, eventId, eventName,
-			tailgateDate, startTime, endTime, amountToPay, serviceContext);
+			tailgateDate, startTime, endTime, showMembers, amountToPay,
+			serviceContext);
 	}
 
 	@Override

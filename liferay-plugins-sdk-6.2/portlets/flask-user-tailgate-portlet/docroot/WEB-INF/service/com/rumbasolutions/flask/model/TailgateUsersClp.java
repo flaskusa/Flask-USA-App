@@ -83,6 +83,7 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 		attributes.put("emailAddress", getEmailAddress());
 		attributes.put("isPaid", getIsPaid());
 		attributes.put("paymentMode", getPaymentMode());
+		attributes.put("description", getDescription());
 
 		return attributes;
 	}
@@ -141,6 +142,12 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 
 		if (paymentMode != null) {
 			setPaymentMode(paymentMode);
+		}
+
+		String description = (String)attributes.get("description");
+
+		if (description != null) {
+			setDescription(description);
 		}
 	}
 
@@ -377,6 +384,29 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 		}
 	}
 
+	@Override
+	public String getDescription() {
+		return _description;
+	}
+
+	@Override
+	public void setDescription(String description) {
+		_description = description;
+
+		if (_tailgateUsersRemoteModel != null) {
+			try {
+				Class<?> clazz = _tailgateUsersRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setDescription", String.class);
+
+				method.invoke(_tailgateUsersRemoteModel, description);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getTailgateUsersRemoteModel() {
 		return _tailgateUsersRemoteModel;
 	}
@@ -456,6 +486,7 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 		clone.setEmailAddress(getEmailAddress());
 		clone.setIsPaid(getIsPaid());
 		clone.setPaymentMode(getPaymentMode());
+		clone.setDescription(getDescription());
 
 		return clone;
 	}
@@ -508,7 +539,7 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(21);
 
 		sb.append("{tailgateUserId=");
 		sb.append(getTailgateUserId());
@@ -528,6 +559,8 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 		sb.append(getIsPaid());
 		sb.append(", paymentMode=");
 		sb.append(getPaymentMode());
+		sb.append(", description=");
+		sb.append(getDescription());
 		sb.append("}");
 
 		return sb.toString();
@@ -535,7 +568,7 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(34);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.TailgateUsers");
@@ -577,6 +610,10 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 			"<column><column-name>paymentMode</column-name><column-value><![CDATA[");
 		sb.append(getPaymentMode());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>description</column-name><column-value><![CDATA[");
+		sb.append(getDescription());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -594,6 +631,7 @@ public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 	private String _emailAddress;
 	private boolean _isPaid;
 	private String _paymentMode;
+	private String _description;
 	private BaseModel<?> _tailgateUsersRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

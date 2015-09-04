@@ -224,6 +224,21 @@ public interface TailgateUsersModel extends BaseModel<TailgateUsers> {
 	 */
 	public void setPaymentMode(String paymentMode);
 
+	/**
+	 * Returns the description of this tailgate users.
+	 *
+	 * @return the description of this tailgate users
+	 */
+	@AutoEscape
+	public String getDescription();
+
+	/**
+	 * Sets the description of this tailgate users.
+	 *
+	 * @param description the description of this tailgate users
+	 */
+	public void setDescription(String description);
+
 	@Override
 	public boolean isNew();
 

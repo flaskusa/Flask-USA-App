@@ -25,7 +25,8 @@ create table flasktailgate_TailgateInfo (
 	endTime DATE null,
 	isActive INTEGER,
 	isDelete INTEGER,
-	amountToPay LONG
+	amountToPay LONG,
+	showMembers BOOLEAN
 );
 
 create table flasktailgate_TailgateMarker (
@@ -46,7 +47,8 @@ create table flasktailgate_TailgateUsers (
 	groupId LONG,
 	emailAddress VARCHAR(75) null,
 	isPaid BOOLEAN,
-	paymentMode VARCHAR(75) null
+	paymentMode VARCHAR(75) null,
+	description VARCHAR(75) null
 );
 
 create table flasktailgate_UserTailgate (

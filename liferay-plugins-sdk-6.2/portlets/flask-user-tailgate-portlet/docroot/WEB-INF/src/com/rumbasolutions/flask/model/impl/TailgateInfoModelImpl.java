@@ -80,9 +80,10 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 			{ "endTime", Types.TIMESTAMP },
 			{ "isActive", Types.INTEGER },
 			{ "isDelete", Types.INTEGER },
-			{ "amountToPay", Types.BIGINT }
+			{ "amountToPay", Types.BIGINT },
+			{ "showMembers", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(75) null,tailgateDescription VARCHAR(75) null,eventId LONG,eventName VARCHAR(75) null,tailgateDate DATE null,startTime DATE null,endTime DATE null,isActive INTEGER,isDelete INTEGER,amountToPay LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(75) null,tailgateDescription VARCHAR(75) null,eventId LONG,eventName VARCHAR(75) null,tailgateDate DATE null,startTime DATE null,endTime DATE null,isActive INTEGER,isDelete INTEGER,amountToPay LONG,showMembers BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table flasktailgate_TailgateInfo";
 	public static final String ORDER_BY_JPQL = " ORDER BY tailgateInfo.tailgateId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flasktailgate_TailgateInfo.tailgateId ASC";
@@ -125,6 +126,7 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		model.setIsActive(soapModel.getIsActive());
 		model.setIsDelete(soapModel.getIsDelete());
 		model.setAmountToPay(soapModel.getAmountToPay());
+		model.setShowMembers(soapModel.getShowMembers());
 
 		return model;
 	}
@@ -204,6 +206,7 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		attributes.put("isActive", getIsActive());
 		attributes.put("isDelete", getIsDelete());
 		attributes.put("amountToPay", getAmountToPay());
+		attributes.put("showMembers", getShowMembers());
 
 		return attributes;
 	}
@@ -299,6 +302,12 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 
 		if (amountToPay != null) {
 			setAmountToPay(amountToPay);
+		}
+
+		Boolean showMembers = (Boolean)attributes.get("showMembers");
+
+		if (showMembers != null) {
+			setShowMembers(showMembers);
 		}
 	}
 
@@ -492,6 +501,22 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		_amountToPay = amountToPay;
 	}
 
+	@JSON
+	@Override
+	public boolean getShowMembers() {
+		return _showMembers;
+	}
+
+	@Override
+	public boolean isShowMembers() {
+		return _showMembers;
+	}
+
+	@Override
+	public void setShowMembers(boolean showMembers) {
+		_showMembers = showMembers;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -534,6 +559,7 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		tailgateInfoImpl.setIsActive(getIsActive());
 		tailgateInfoImpl.setIsDelete(getIsDelete());
 		tailgateInfoImpl.setAmountToPay(getAmountToPay());
+		tailgateInfoImpl.setShowMembers(getShowMembers());
 
 		tailgateInfoImpl.resetOriginalValues();
 
@@ -680,12 +706,14 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 
 		tailgateInfoCacheModel.amountToPay = getAmountToPay();
 
+		tailgateInfoCacheModel.showMembers = getShowMembers();
+
 		return tailgateInfoCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{tailgateId=");
 		sb.append(getTailgateId());
@@ -717,6 +745,8 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		sb.append(getIsDelete());
 		sb.append(", amountToPay=");
 		sb.append(getAmountToPay());
+		sb.append(", showMembers=");
+		sb.append(getShowMembers());
 		sb.append("}");
 
 		return sb.toString();
@@ -724,7 +754,7 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(49);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.TailgateInfo");
@@ -790,6 +820,10 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 			"<column><column-name>amountToPay</column-name><column-value><![CDATA[");
 		sb.append(getAmountToPay());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>showMembers</column-name><column-value><![CDATA[");
+		sb.append(getShowMembers());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -816,5 +850,6 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 	private int _isActive;
 	private int _isDelete;
 	private long _amountToPay;
+	private boolean _showMembers;
 	private TailgateInfo _escapedModel;
 }
