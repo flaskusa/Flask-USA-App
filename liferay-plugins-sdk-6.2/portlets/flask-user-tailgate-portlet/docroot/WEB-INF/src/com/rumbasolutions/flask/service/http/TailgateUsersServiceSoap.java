@@ -126,11 +126,12 @@ public class TailgateUsersServiceSoap {
 	}
 
 	public static com.rumbasolutions.flask.model.TailgateUsersSoap updateTailgateUser(
-		long tailgateUserId, boolean isPaid, java.lang.String paymentMode,
-		java.lang.String description) throws RemoteException {
+		long userId, long tailgateId, boolean isPaid,
+		java.lang.String paymentMode, java.lang.String description)
+		throws RemoteException {
 		try {
-			com.rumbasolutions.flask.model.TailgateUsers returnValue = TailgateUsersServiceUtil.updateTailgateUser(tailgateUserId,
-					isPaid, paymentMode, description);
+			com.rumbasolutions.flask.model.TailgateUsers returnValue = TailgateUsersServiceUtil.updateTailgateUser(userId,
+					tailgateId, isPaid, paymentMode, description);
 
 			return com.rumbasolutions.flask.model.TailgateUsersSoap.toSoapModel(returnValue);
 		}

@@ -87,10 +87,10 @@ public class TailgateUsersServiceUtil {
 	}
 
 	public static com.rumbasolutions.flask.model.TailgateUsers updateTailgateUser(
-		long tailgateUserId, boolean isPaid, java.lang.String paymentMode,
-		java.lang.String description) {
+		long userId, long tailgateId, boolean isPaid,
+		java.lang.String paymentMode, java.lang.String description) {
 		return getService()
-				   .updateTailgateUser(tailgateUserId, isPaid, paymentMode,
+				   .updateTailgateUser(userId, tailgateId, isPaid, paymentMode,
 			description);
 	}
 

@@ -20,7 +20,6 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -133,23 +132,26 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 	}
 	
 	@Override
-	public TailgateUsers updateTailgateUser(long tailgateUserId, boolean isPaid, String paymentMode, String description){
-		TailgateUsers tailgateUsers = null;
+	public TailgateUsers updateTailgateUser(long userId, long tailgateId, boolean isPaid, String paymentMode, String description){
+		List<TailgateUsers> tailgateUsers = null;
+		TailgateUsers tailgateUser = null;
 		try{
-			tailgateUsers = TailgateUsersLocalServiceUtil.getTailgateUsers(tailgateUserId);
-			tailgateUsers.setIsPaid(isPaid);
-			tailgateUsers.setPaymentMode(paymentMode);
-			tailgateUsers.setDescription(description);
+			DynamicQuery tailgateQuery = DynamicQueryFactoryUtil.forClass(TailgateUsersImpl.class);
+			tailgateQuery.add(PropertyFactoryUtil.forName("userId").eq(new Long(userId)));
+			tailgateQuery.add(PropertyFactoryUtil.forName("tailgateId").eq(new Long(tailgateId)));
+			tailgateUsers = TailgateUsersLocalServiceUtil.dynamicQuery(tailgateQuery);
+			for(TailgateUsers tUser: tailgateUsers){
+				tUser.setIsPaid(isPaid);
+				tUser.setPaymentMode(paymentMode);
+				tUser.setDescription(description);
+				tailgateUser = TailgateUsersLocalServiceUtil.updateTailgateUsers(tUser);
+			}
 			
-			tailgateUsers = TailgateUsersLocalServiceUtil.updateTailgateUsers(tailgateUsers);
-		}catch(SystemException e){
+		}catch(Exception e){
 			LOGGER.error("Exception in Update Tailgate User :" + e.getMessage());
 			e.printStackTrace();
-		} catch (PortalException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		}
-		return tailgateUsers;
+		return tailgateUser;
 	}
 	
 	@Override

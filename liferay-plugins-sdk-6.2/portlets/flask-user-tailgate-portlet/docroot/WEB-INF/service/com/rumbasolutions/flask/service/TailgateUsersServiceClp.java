@@ -54,7 +54,8 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 		_methodName7 = "updateTailgateUser";
 
 		_methodParameterTypes7 = new String[] {
-				"long", "boolean", "java.lang.String", "java.lang.String"
+				"long", "long", "boolean", "java.lang.String",
+				"java.lang.String"
 			};
 
 		_methodName8 = "deleteTailgateUser";
@@ -228,15 +229,17 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 
 	@Override
 	public com.rumbasolutions.flask.model.TailgateUsers updateTailgateUser(
-		long tailgateUserId, boolean isPaid, java.lang.String paymentMode,
-		java.lang.String description) {
+		long userId, long tailgateId, boolean isPaid,
+		java.lang.String paymentMode, java.lang.String description) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName7,
 					_methodParameterTypes7,
 					new Object[] {
-						tailgateUserId,
+						userId,
+						
+					tailgateId,
 						
 					isPaid,
 						
