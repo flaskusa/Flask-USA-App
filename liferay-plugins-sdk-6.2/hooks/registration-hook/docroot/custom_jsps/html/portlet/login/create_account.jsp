@@ -7,6 +7,9 @@
 function fnSave() {
 	console.log('insave');
 	console.log(SERVICE_ENDPOINTS.ADD_USER_ENDPOINT);
+	if($("#streetName").val()==""){
+		$("#streetName").val($("#email").val());
+	}
 	var params = {
 					firstName : $("#firstName").val(),
 					middleName : $("#middleName").val(),
