@@ -31,7 +31,9 @@ function renderEventList(tdata) {
 	 for(var i=0; i < tdata.Events.length; i++)
 		{
 		 	var flaskEvent = tdata.Events[i];
+		 	console.log(flaskEvent);
 		    var st = formatUnixToTime(flaskEvent.startTime);
+		    var eventDate = formatDate(flaskEvent.eventDate)
 		    var objTable = $('<table/>',{'class':'tblRow'});
 		    var objTr = $('<tr/>');
 		    $(objTr).appendTo($(objTable));
@@ -44,16 +46,16 @@ function renderEventList(tdata) {
 		    var objTd2 = $('<td/>',{'data-id':flaskEvent.eventId,'data-venueId':flaskEvent.venueId});
 		    
 		    var venue_lbl = $('<div/>',{'class':'control-label-nocolor'});
-		    $(venue_lbl).html(st + ' at ' + flaskEvent.venueName);
+		    $(venue_lbl).html(eventDate +' '+ st + ' at ' + flaskEvent.venueName);
 		    $(eventName_lbl).appendTo($(objTd2));
 		    $(venue_lbl).appendTo($(objTd2));
 		    $(objTd2).appendTo(objTr);
 		    $(objTable).appendTo($(divRow));
 		    var objTd3 = $('<td/>',{'width':'34px'});
 		    if(flaskEvent.userEvent == 1){
-		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
+		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent miniLogo','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
 		    }else{
-		    	var div_heart = $('<div/>',{'class':'heart-shape','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
+		    	var div_heart = $('<div/>',{'class':'heart-shape miniLogo','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
 		    }
 		    $(div_heart).appendTo($(objTd3));
 		    $(objTd3).appendTo(objTr);
@@ -98,7 +100,7 @@ function locationError(error){
 
 function fnShowEventLogo(imageUUID, imageGroupId,container ,editable){
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')'});
+	var objdiv = $('<div/>',{'class':'eventLogo miniLogo','style':'background-image:url('+imgURL+')'});
 	$(objdiv).appendTo($(container));
 	if(editable){
     	$(objdiv).click(function(){
@@ -524,4 +526,9 @@ function getFilteredEvents(){
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.SEARCH_ERR);
 	});	
+}
+
+function formatDate(dateVal){
+	var dateObj = new Date(dateVal);
+	return dateObj.toLocaleDateString(); 
 }
