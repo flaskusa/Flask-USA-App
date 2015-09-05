@@ -251,6 +251,7 @@ function fnFillRegionList(countryId,defStateId) {
 
 $(document).ready(function() {
 		fnFillCountryList();
+		
 		$("#countryId").change(function() {
 			
 			fnFillRegionList($(this).val(),0);
@@ -272,7 +273,13 @@ $(document).ready(function() {
 		
 		if(parseInt($("#hdnUserId").val()) > 0)	{
 			fnShowForm(parseInt($("#hdnUserId").val()));
+			console.log("hdnUserId");
+			console.log($("#hdnUserId").val());
+			if(parseInt($("#hdnUserId").val()) == 20158){
+				$(".update").hide();
+			}
 		}	
+
 		 $(".cssCancel").click(function(){
 			  var url = "/web/guest/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
 			  $(location).attr('href',url);
@@ -298,7 +305,7 @@ $(document).ready(function() {
    </div>
    
      <div class="">
-   <div class="form-group">
+   <div class="form-group update">
      <label class="control-label" for="screenName">Screen Name:</label>
      <div class="controls">
        <input name="screenName" id="screenName" class="form-control" type="text">
@@ -327,14 +334,14 @@ $(document).ready(function() {
    </div> 
    
   <div class="">
-   <div class="form-group">
+   <div class="form-group update">
      <label class="control-label" for="streetName">Street:</label>
      <div class="controls">
        <input name="streetName" id="streetName" class="form-control" type="text">
      </div>
    </div>
    
-   <div class="form-group">
+   <div class="form-group update">
      <label class="control-label" for="aptNo">Apartment#:</label>
      <div class="controls">
        <input name="aptNo" id="aptNo" class="form-control" type="text">
@@ -348,21 +355,21 @@ $(document).ready(function() {
      </div>
    </div>
    
-    <div class="form-group">
+    <div class="form-group update">
      <label class="control-label" for="city">City:</label>
      <div class="controls">
        <input name="city" id="city" class="form-control" type="text">
      </div>
    </div>  
    
-    <div class="form-group">
+    <div class="form-group update">
      <label class="control-label" for="stateId">State:</label>
      <div class="controls">
        <select id="stateId" name="stateId" class="form-control-select"></select>
      </div>
    </div>  
      
-   <div class="form-group">
+   <div class="form-group update">
      <label class="control-label" for="countryId">Country:</label>
      <div class="controls">
        <select id="countryId" name="countryId" class="form-control-select" ></select>
@@ -393,7 +400,7 @@ $(document).ready(function() {
    </div>    
   </div>
 </div>
-<div class="form-group">
+<div class="form-group update">
     
  <div class="row-fluid">
  <h4><span>Preferences</span></h4>

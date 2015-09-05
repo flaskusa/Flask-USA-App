@@ -154,5 +154,7 @@ function responseHandler(msg){
 	console.log(msg);
 	return false;
 }
+
+
 // ************************************ APIS FOR FLASK
 // **************************************
