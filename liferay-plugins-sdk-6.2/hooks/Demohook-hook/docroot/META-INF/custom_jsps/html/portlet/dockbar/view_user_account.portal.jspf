@@ -96,7 +96,7 @@
 				String friends = themeDisplay.getURLPortal() + "/web/flask/friends";
 				String inviteFriends = themeDisplay.getURLPortal() + "/web/flask/invite-friends";
 
-				String notifications = themeDisplay.getURLPortal() + "/web/flask/notifications";
+				String notifications = themeDisplay.getURLPortal() + "/web/flask/friends";
 				%>
 				<c:if test="<%= bShowFlaskAdminMenu %>">
 					<aui:nav-item href="<%= userEvents %>" iconCssClass="icon-user" label="My Events" title="My Events"/>
