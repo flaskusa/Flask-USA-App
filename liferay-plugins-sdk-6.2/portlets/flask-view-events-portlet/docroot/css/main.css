@@ -718,3 +718,8 @@ input.btn.btn-info.cssback {
 .MainSlider .owl-controls .owl-pagination {
     margin-top: 50px !important;
 }
+
+.miniLogo{
+	height: 34px !important;
+	width: 34px !important;
+}
