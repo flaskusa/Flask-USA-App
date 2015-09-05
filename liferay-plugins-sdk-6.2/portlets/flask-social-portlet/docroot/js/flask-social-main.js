@@ -382,3 +382,14 @@ function fnBuildRequestMenu(obj,htmlObject){
 		return $(dropdown);
 	}
 }
+
+function GetParameterValues(param) {  
+    var url = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');  
+    for (var i = 0; i < url.length; i++) {  
+        var urlparam = url[i].split('=');  
+        if (urlparam[0] == param) {
+            var urlparamFinal = urlparam[1].split('#');
+            return urlparamFinal[0];  
+        }  
+    }  
+}

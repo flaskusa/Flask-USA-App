@@ -14,6 +14,11 @@
 
 <aui:script use="array-extras">
 	$(document).ready(function(){
+		var k=GetParameterValues('notifications');
+		if(k==1){
+			$("#notifications").click();
+			initNotifications();
+		}
 		$("#prev").hide();
 		initSearch();
 		initFriendList(_startPos,_endPos);
