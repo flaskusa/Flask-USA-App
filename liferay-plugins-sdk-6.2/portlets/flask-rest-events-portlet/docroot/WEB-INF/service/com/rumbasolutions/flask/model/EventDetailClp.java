@@ -101,6 +101,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		attributes.put("website", getWebsite());
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
+		attributes.put("showDescription", getShowDescription());
 
 		return attributes;
 	}
@@ -262,6 +263,12 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 
 		if (hoursOfOperation != null) {
 			setHoursOfOperation(hoursOfOperation);
+		}
+
+		Boolean showDescription = (Boolean)attributes.get("showDescription");
+
+		if (showDescription != null) {
+			setShowDescription(showDescription);
 		}
 	}
 
@@ -876,6 +883,35 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		}
 	}
 
+	@Override
+	public boolean getShowDescription() {
+		return _showDescription;
+	}
+
+	@Override
+	public boolean isShowDescription() {
+		return _showDescription;
+	}
+
+	@Override
+	public void setShowDescription(boolean showDescription) {
+		_showDescription = showDescription;
+
+		if (_eventDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _eventDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setShowDescription",
+						boolean.class);
+
+				method.invoke(_eventDetailRemoteModel, showDescription);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getEventDetailRemoteModel() {
 		return _eventDetailRemoteModel;
 	}
@@ -971,6 +1007,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		clone.setWebsite(getWebsite());
 		clone.setCost(getCost());
 		clone.setHoursOfOperation(getHoursOfOperation());
+		clone.setShowDescription(getShowDescription());
 
 		return clone;
 	}
@@ -1023,7 +1060,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("{eventDetailId=");
 		sb.append(getEventDetailId());
@@ -1077,6 +1114,8 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 		sb.append(getCost());
 		sb.append(", hoursOfOperation=");
 		sb.append(getHoursOfOperation());
+		sb.append(", showDescription=");
+		sb.append(getShowDescription());
 		sb.append("}");
 
 		return sb.toString();
@@ -1084,7 +1123,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(82);
+		StringBundler sb = new StringBundler(85);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.EventDetail");
@@ -1194,6 +1233,10 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 			"<column><column-name>hoursOfOperation</column-name><column-value><![CDATA[");
 		sb.append(getHoursOfOperation());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>showDescription</column-name><column-value><![CDATA[");
+		sb.append(getShowDescription());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1227,6 +1270,7 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 	private String _website;
 	private double _cost;
 	private String _hoursOfOperation;
+	private boolean _showDescription;
 	private BaseModel<?> _eventDetailRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

@@ -95,7 +95,7 @@ public class EventServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String",
+				"java.lang.Double", "java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -106,7 +106,7 @@ public class EventServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "long", "long", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String",
+				"java.lang.Double", "java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -294,7 +294,8 @@ public class EventServiceClpInvoker {
 				(java.lang.String)arguments[14],
 				(java.lang.Double)arguments[15],
 				(java.lang.String)arguments[16],
-				(com.liferay.portal.service.ServiceContext)arguments[17]);
+				((Boolean)arguments[17]).booleanValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[18]);
 		}
 
 		if (_methodName95.equals(name) &&
@@ -313,7 +314,8 @@ public class EventServiceClpInvoker {
 				(java.lang.String)arguments[14],
 				(java.lang.Double)arguments[15],
 				(java.lang.String)arguments[16],
-				(com.liferay.portal.service.ServiceContext)arguments[17]);
+				((Boolean)arguments[17]).booleanValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[18]);
 		}
 
 		if (_methodName96.equals(name) &&

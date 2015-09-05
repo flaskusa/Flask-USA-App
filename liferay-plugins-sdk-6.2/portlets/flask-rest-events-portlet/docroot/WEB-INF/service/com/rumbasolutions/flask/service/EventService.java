@@ -115,6 +115,7 @@ public interface EventService extends BaseService, InvokableService {
 		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
+		boolean showDescription,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.EventDetail updateEventDetail(
@@ -125,6 +126,7 @@ public interface EventService extends BaseService, InvokableService {
 		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
+		boolean showDescription,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)

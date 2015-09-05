@@ -256,7 +256,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, String longitude, 
 		String phone, String website, Double cost, 
-		String hoursOfOperation,
+		String hoursOfOperation, boolean showDescription,
 		ServiceContext  serviceContext){
 		EventDetail eventDetail=null;
 		try{
@@ -278,6 +278,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setWebsite(website);
 			eventDetail.setCost(cost);
 			eventDetail.setHoursOfOperation(hoursOfOperation);
+			eventDetail.setShowDescription(showDescription);
 			
 			Date now = new Date();
 			eventDetail.setCompanyId(serviceContext.getCompanyId());
@@ -297,7 +298,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	public EventDetail updateEventDetail(long eventDetailId , long infoTypeId, long infoTypeCategoryId, 
 		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, String longitude, String phone, 
-		String website, Double cost, String hoursOfOperation,
+		String website, Double cost, String hoursOfOperation, boolean showDescription,
 		ServiceContext  serviceContext){
 		EventDetail eventDetail=null;
 		try{
@@ -318,6 +319,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setWebsite(website);
 			eventDetail.setCost(cost);
 			eventDetail.setHoursOfOperation(hoursOfOperation);
+			eventDetail.setShowDescription(showDescription);
 			
 			Date now = new Date();
 		    eventDetail.setUserId(serviceContext.getGuestOrUserId());

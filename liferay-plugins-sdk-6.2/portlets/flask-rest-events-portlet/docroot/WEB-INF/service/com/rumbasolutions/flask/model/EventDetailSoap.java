@@ -57,6 +57,7 @@ public class EventDetailSoap implements Serializable {
 		soapModel.setWebsite(model.getWebsite());
 		soapModel.setCost(model.getCost());
 		soapModel.setHoursOfOperation(model.getHoursOfOperation());
+		soapModel.setShowDescription(model.getShowDescription());
 
 		return soapModel;
 	}
@@ -317,6 +318,18 @@ public class EventDetailSoap implements Serializable {
 		_hoursOfOperation = hoursOfOperation;
 	}
 
+	public boolean getShowDescription() {
+		return _showDescription;
+	}
+
+	public boolean isShowDescription() {
+		return _showDescription;
+	}
+
+	public void setShowDescription(boolean showDescription) {
+		_showDescription = showDescription;
+	}
+
 	private long _eventDetailId;
 	private long _companyId;
 	private long _userId;
@@ -343,4 +356,5 @@ public class EventDetailSoap implements Serializable {
 	private String _website;
 	private double _cost;
 	private String _hoursOfOperation;
+	private boolean _showDescription;
 }

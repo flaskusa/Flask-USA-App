@@ -1933,6 +1933,7 @@ public class EventDetailPersistenceImpl extends BasePersistenceImpl<EventDetail>
 		eventDetailImpl.setWebsite(eventDetail.getWebsite());
 		eventDetailImpl.setCost(eventDetail.getCost());
 		eventDetailImpl.setHoursOfOperation(eventDetail.getHoursOfOperation());
+		eventDetailImpl.setShowDescription(eventDetail.isShowDescription());
 
 		return eventDetailImpl;
 	}

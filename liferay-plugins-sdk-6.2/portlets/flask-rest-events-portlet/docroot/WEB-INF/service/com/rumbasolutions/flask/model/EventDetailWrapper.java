@@ -76,6 +76,7 @@ public class EventDetailWrapper implements EventDetail,
 		attributes.put("website", getWebsite());
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
+		attributes.put("showDescription", getShowDescription());
 
 		return attributes;
 	}
@@ -237,6 +238,12 @@ public class EventDetailWrapper implements EventDetail,
 
 		if (hoursOfOperation != null) {
 			setHoursOfOperation(hoursOfOperation);
+		}
+
+		Boolean showDescription = (Boolean)attributes.get("showDescription");
+
+		if (showDescription != null) {
+			setShowDescription(showDescription);
 		}
 	}
 
@@ -800,6 +807,36 @@ public class EventDetailWrapper implements EventDetail,
 	@Override
 	public void setHoursOfOperation(java.lang.String hoursOfOperation) {
 		_eventDetail.setHoursOfOperation(hoursOfOperation);
+	}
+
+	/**
+	* Returns the show description of this event detail.
+	*
+	* @return the show description of this event detail
+	*/
+	@Override
+	public boolean getShowDescription() {
+		return _eventDetail.getShowDescription();
+	}
+
+	/**
+	* Returns <code>true</code> if this event detail is show description.
+	*
+	* @return <code>true</code> if this event detail is show description; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isShowDescription() {
+		return _eventDetail.isShowDescription();
+	}
+
+	/**
+	* Sets whether this event detail is show description.
+	*
+	* @param showDescription the show description of this event detail
+	*/
+	@Override
+	public void setShowDescription(boolean showDescription) {
+		_eventDetail.setShowDescription(showDescription);
 	}
 
 	@Override

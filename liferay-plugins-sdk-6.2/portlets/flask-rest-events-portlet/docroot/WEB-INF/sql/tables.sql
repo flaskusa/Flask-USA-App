@@ -43,7 +43,8 @@ create table flaskevents_EventDetail (
 	phone VARCHAR(20) null,
 	website VARCHAR(255) null,
 	cost DOUBLE,
-	hoursOfOperation VARCHAR(255) null
+	hoursOfOperation VARCHAR(255) null,
+	showDescription BOOLEAN
 );
 
 create table flaskevents_EventDetailImage (

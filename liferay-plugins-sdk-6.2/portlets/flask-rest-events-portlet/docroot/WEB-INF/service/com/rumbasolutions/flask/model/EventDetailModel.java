@@ -454,6 +454,27 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	 */
 	public void setHoursOfOperation(String hoursOfOperation);
 
+	/**
+	 * Returns the show description of this event detail.
+	 *
+	 * @return the show description of this event detail
+	 */
+	public boolean getShowDescription();
+
+	/**
+	 * Returns <code>true</code> if this event detail is show description.
+	 *
+	 * @return <code>true</code> if this event detail is show description; <code>false</code> otherwise
+	 */
+	public boolean isShowDescription();
+
+	/**
+	 * Sets whether this event detail is show description.
+	 *
+	 * @param showDescription the show description of this event detail
+	 */
+	public void setShowDescription(boolean showDescription);
+
 	@Override
 	public boolean isNew();
 

@@ -123,6 +123,7 @@
         <column name="cost" type="double" />
         <column name="hoursOfOperation" type="String" />
 		<!-- Finder methods -->
+        <column name="showDescription" type="boolean"></column>
         <finder name="EventId" return-type="Collection">
 			<finder-column name="eventId" />
 		</finder>

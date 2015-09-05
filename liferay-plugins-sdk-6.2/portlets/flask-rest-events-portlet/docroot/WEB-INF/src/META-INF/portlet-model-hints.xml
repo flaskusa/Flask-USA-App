@@ -93,6 +93,7 @@
 		<field name="hoursOfOperation" type="String">
 			<hint-collection name="FLASK-DESC" />
 		</field>
+		<field name="showDescription" type="boolean" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.EventDetailImage">
 		<field name="eventDetailImageId" type="long" />

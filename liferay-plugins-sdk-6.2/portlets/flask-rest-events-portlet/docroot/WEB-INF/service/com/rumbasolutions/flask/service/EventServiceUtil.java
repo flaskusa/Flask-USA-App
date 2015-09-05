@@ -130,12 +130,13 @@ public class EventServiceUtil {
 		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
+		boolean showDescription,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addEventDetail(eventId, infoTypeId, infoTypeCategoryId,
 			infoTitle, infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
 			countryId, latitude, longitude, phone, website, cost,
-			hoursOfOperation, serviceContext);
+			hoursOfOperation, showDescription, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetail updateEventDetail(
@@ -146,12 +147,13 @@ public class EventServiceUtil {
 		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
+		boolean showDescription,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateEventDetail(eventDetailId, infoTypeId,
 			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
 			zipCode, city, stateId, countryId, latitude, longitude, phone,
-			website, cost, hoursOfOperation, serviceContext);
+			website, cost, hoursOfOperation, showDescription, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetail getEventDetail(

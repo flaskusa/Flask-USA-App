@@ -64,6 +64,7 @@
 		<property name="website" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="hoursOfOperation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="showDescription" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.EventDetailImageImpl" table="flaskevents_EventDetailImage">
 		<cache usage="read-write" />

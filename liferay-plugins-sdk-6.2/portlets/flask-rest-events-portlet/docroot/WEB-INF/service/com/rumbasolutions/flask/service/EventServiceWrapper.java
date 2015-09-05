@@ -129,11 +129,12 @@ public class EventServiceWrapper implements EventService,
 		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
+		boolean showDescription,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.addEventDetail(eventId, infoTypeId,
 			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
 			zipCode, city, stateId, countryId, latitude, longitude, phone,
-			website, cost, hoursOfOperation, serviceContext);
+			website, cost, hoursOfOperation, showDescription, serviceContext);
 	}
 
 	@Override
@@ -145,11 +146,12 @@ public class EventServiceWrapper implements EventService,
 		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
+		boolean showDescription,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _eventService.updateEventDetail(eventDetailId, infoTypeId,
 			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
 			zipCode, city, stateId, countryId, latitude, longitude, phone,
-			website, cost, hoursOfOperation, serviceContext);
+			website, cost, hoursOfOperation, showDescription, serviceContext);
 	}
 
 	@Override
