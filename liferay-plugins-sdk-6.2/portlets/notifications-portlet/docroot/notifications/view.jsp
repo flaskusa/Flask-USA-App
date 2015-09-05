@@ -164,7 +164,7 @@ boolean actionable = ParamUtil.getBoolean(request, "actionable");
 		   var buttonAccept = $('<button/>',{'class':'btn btn-primary','type':'button'})
 		   buttonAccept.html('Confirm');
 		   buttonAccept.click(function(){
-		    acceptFriendRequest(UserId, htmlObject);
+		    //acceptFriendRequest(UserId, htmlObject);
 		   });
 		   var buttonReject = $('<button/>',{'class':'btn btn-primary','type':'button','style':'margin-left: 10px;', 'onclick':'ignoreFriendRequest('+UserId+','+htmlObject+');'})
 		   buttonReject.html('Ignore');

@@ -45,13 +45,10 @@
 			<ul class="dropdown-menu pull-right user-notifications-list">
 				<div class="non-actionable">
 					<div class="user-notifications-header">
-
-						<liferay-portlet:renderURL plid="<%= notificationsPlid %>" portletName="<%= PortletKeys.NOTIFICATIONS %>" var="viewAllNonActionableNotifications" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
-							<portlet:param name="mvcPath" value="/notifications/view.jsp" />
-							<portlet:param name="actionable" value="<%= Boolean.FALSE.toString() %>" />
-						</liferay-portlet:renderURL>
-
-						<span><a href="<%= viewAllNonActionableNotifications %>"><liferay-ui:message key="notifications" /> (<span class="count"></span>)</a></span>
+						<%
+							String manageFriendUrl = themeDisplay.getURLPortal() + "/web/flask/friends?notifications=1";
+						%>
+						<span><a href="<%= manageFriendUrl %>"><liferay-ui:message key="notifications" /> (<span class="count"></span>)</a></span>
 
 						<span class="mark-all-as-read"><a class="hide" href="javascript:;"><liferay-ui:message key="mark-as-read" /></a></span>
 					</div>
@@ -61,12 +58,12 @@
 
 				<div class="actionable">
 					<div class="clearfix user-notifications-header">
-						<liferay-portlet:renderURL plid="<%= notificationsPlid %>" portletName="<%= PortletKeys.NOTIFICATIONS %>" var="viewAllActionableNotifications" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
-							<portlet:param name="mvcPath" value="/notifications/view.jsp" />
-							<portlet:param name="actionable" value="<%= Boolean.TRUE.toString() %>" />
+						<liferay-portlet:renderURL plid="<%= notificationsPlid %>" var="viewAllActionableNotifications" windowState="<%= LiferayWindowState.MAXIMIZED.toString() %>">
+							<portlet:param name="mvcPath" value="<%= manageFriendUrl %>" />
+
 						</liferay-portlet:renderURL>
 
-						<span class="title"><a href="<%= viewAllActionableNotifications %>"><liferay-ui:message key="requests" /> (<%= unreadUserNotificationsCount %>)</a></span>
+						<span class="title"><a href="<%= manageFriendUrl %>"><liferay-ui:message key="requests" /> (<%= unreadUserNotificationsCount %>)</a></span>
 					</div>
 
 					<div class="user-notifications"></div>
