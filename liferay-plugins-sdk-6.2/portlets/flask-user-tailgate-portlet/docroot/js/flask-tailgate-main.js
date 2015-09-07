@@ -16,7 +16,7 @@ function addClickHandlers(){
 			$("#tailgateDataTable").hide();
 			$("#formContainer").show();
 			loadEvents('eventId');
-			initializeMap(tailgateId);
+			initializeMap(tailgateId,0,0);
 			if(parseInt($("#tailgateId").val())==0){
 				$("#mcontents").attr("data-toggle","");
 				$("#mcontents").css("cursor","not-allowed");
@@ -58,9 +58,9 @@ function addClickHandlers(){
     });
 	
 	$(".cssDelete").click(function () {
-			var eventList = GRID_PARAM.getCheckedIdList();
-			if(eventList.length > 0){
-					deleteMultipleEvents(eventList) ;	
+			var tailgateList = GRID_PARAM.getCheckedIdList();
+			if(tailgateList.length > 0){
+					deleteMultipleTailgates(tailgateList) ;	
 			}
 			 $(".cssDelete").hide();	
 			 $(".cssDelUser").show();	
@@ -107,6 +107,15 @@ function addClickHandlers(){
 		$("#musers").click(function(){
 			$("#tailgateMembersDataGridShow").show();
 		});
+}
+
+
+function deleteMultipleTailgates(tailgateList){
+	var strTailgateIdArray = tailgateList.split(",");
+	for(var iCount=0;iCount<strTailgateIdArray.length;iCount++){
+		var _tailgateId = parseInt(strTailgateIdArray[iCount]);
+		deleteTailgate(_tailgateId);
+	}
 }
 
 function loadData(){
@@ -270,7 +279,7 @@ function editTailgate(rowData) {
 		eventForm.show();
 		$("#formContainer").show();
 		loadEventAndTime('eventId',  rowData.tailgateId);
-		initializeMap(rowData.tailgateId);
+		initializeMap(rowData.tailgateId,0,0);
 }
 function loadEventAndTime(elementId,tailgateId){
 	var request = new Request();
@@ -307,6 +316,7 @@ function saveTailgate(){
 					});
 		var flaskRequest = new Request();
 		var url = "";
+		console.log(params);
 			if(params.tailgateId == 0){
 				url =_tailgateModel.SERVICE_ENDPOINTS.ADD_TAILGATE;
 			}else{
@@ -351,14 +361,11 @@ function addTailgateMembers(){
 	}
 }
 function addTailgateMember(params) {
-	console.log(params);
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_tailgateModel.SERVICE_ENDPOINTS.ADD_TAILGATE_USER,
 			params, function(data) {/* success handler */
-				console.log(data);
 				_flaskLib.showSuccessMessage('group-action-msg',_tailgateModel.MESSAGES.ADD_USER);
 			}, function(error) { /* failure handler */
-				console.log(error);
 				_flaskLib.showErrorMessage(_tailgateModel.MESSAGES.GET_ERROR);
 			});
 }
@@ -731,7 +738,6 @@ function fnPayNow(tailgateId){
 		    isPaid: true,
 		    paymentMode: 'Venmo',
 		    description: 'Test Payment Description'};
-	console.log(params);
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.PAY_FOR_TAILGATE , params, 
 		function (data){

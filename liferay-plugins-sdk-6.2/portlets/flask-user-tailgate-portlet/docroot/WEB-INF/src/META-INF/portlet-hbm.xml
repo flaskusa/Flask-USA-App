@@ -39,7 +39,6 @@
 		<property name="isActive" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="isDelete" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="amountToPay" type="com.liferay.portal.dao.orm.hibernate.LongType" />
-		<property name="showMembers" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.TailgateMarkerImpl" table="flasktailgate_TailgateMarker">
 		<cache usage="read-write" />

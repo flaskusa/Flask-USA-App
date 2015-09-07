@@ -56,7 +56,7 @@ GRID_PARAM.getCheckedIdList= function(idDataAttribute){
     var dataList=[];
     $.each(rows, function(i, rowIndex){
     	var rowData = gridObj.jqxGrid('getrowdata', rowIndex);
-    	dataList[i] = rowData.eventId;
+    	dataList[i] = rowData.tailgateId;
     });
     var temp= dataList.toString();
     return temp;
@@ -364,7 +364,6 @@ GRID_PARAM.formatDate = function (dateVal){
  */
 function createTailgateUserTable(data, grid){
 //	grid.jqxGrid("refresh");
-	console.log(data);
     var eventsColumns = [{ text: 'First Name', columntype: 'textbox',  datafield: 'firstName', width: '30%' },
     	 { text: 'Last Name', datafield: 'lastName', width: '30%'},
     	 { text: 'Email', datafield: 'emailAddress',  width: '37.5%'}];
@@ -414,7 +413,6 @@ function createTailgateMemberTable(data, grid){
 	 }
 	 
 	 var recordcellsrenderer = function(row, column, value, defaultHtml, columnSettings, rowData) {
-		 console.log(rowData);
 		  if(value == 1)
 			  return "Yes []";
 		  else

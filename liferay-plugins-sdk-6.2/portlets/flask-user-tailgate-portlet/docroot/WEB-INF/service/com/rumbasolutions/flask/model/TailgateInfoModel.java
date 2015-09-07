@@ -288,27 +288,6 @@ public interface TailgateInfoModel extends BaseModel<TailgateInfo> {
 	 */
 	public void setAmountToPay(long amountToPay);
 
-	/**
-	 * Returns the show members of this tailgate info.
-	 *
-	 * @return the show members of this tailgate info
-	 */
-	public boolean getShowMembers();
-
-	/**
-	 * Returns <code>true</code> if this tailgate info is show members.
-	 *
-	 * @return <code>true</code> if this tailgate info is show members; <code>false</code> otherwise
-	 */
-	public boolean isShowMembers();
-
-	/**
-	 * Sets whether this tailgate info is show members.
-	 *
-	 * @param showMembers the show members of this tailgate info
-	 */
-	public void setShowMembers(boolean showMembers);
-
 	@Override
 	public boolean isNew();
 

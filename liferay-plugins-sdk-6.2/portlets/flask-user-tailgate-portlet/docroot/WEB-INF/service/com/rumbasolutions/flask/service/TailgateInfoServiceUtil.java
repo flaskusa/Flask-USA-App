@@ -66,13 +66,12 @@ public class TailgateInfoServiceUtil {
 	public static com.rumbasolutions.flask.model.TailgateInfo addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, boolean showMembers,
-		long amountToPay,
+		java.util.Date startTime, java.util.Date endTime, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addTailgateInfo(tailgateName, tailgateDescription, eventId,
-			eventName, tailgateDate, startTime, endTime, showMembers,
-			amountToPay, serviceContext);
+			eventName, tailgateDate, startTime, endTime, amountToPay,
+			serviceContext);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.TailgateInfo> getAllTailgate() {
@@ -98,13 +97,12 @@ public class TailgateInfoServiceUtil {
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, boolean showMembers,
-		long amountToPay,
+		java.util.Date startTime, java.util.Date endTime, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateTailgateInfo(tailgateId, tailgateName,
 			tailgateDescription, eventId, eventName, tailgateDate, startTime,
-			endTime, showMembers, amountToPay, serviceContext);
+			endTime, amountToPay, serviceContext);
 	}
 
 	public static void deleteTailgateInfo(long tailgateId) {

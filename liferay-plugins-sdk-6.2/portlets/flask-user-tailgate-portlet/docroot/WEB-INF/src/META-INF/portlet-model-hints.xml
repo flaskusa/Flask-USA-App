@@ -28,7 +28,6 @@
 		<field name="isActive" type="int" />
 		<field name="isDelete" type="int" />
 		<field name="amountToPay" type="long" />
-		<field name="showMembers" type="boolean" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.TailgateMarker">
 		<field name="tailgatemarkerid" type="long" />

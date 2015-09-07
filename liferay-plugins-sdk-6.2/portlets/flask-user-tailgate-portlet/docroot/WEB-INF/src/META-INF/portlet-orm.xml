@@ -55,7 +55,6 @@
 			<basic name="isActive" />
 			<basic name="isDelete" />
 			<basic name="amountToPay" />
-			<basic name="showMembers" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

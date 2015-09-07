@@ -65,14 +65,13 @@ public class TailgateInfoServiceSoap {
 	public static com.rumbasolutions.flask.model.TailgateInfoSoap addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, boolean showMembers,
-		long amountToPay,
+		java.util.Date startTime, java.util.Date endTime, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.TailgateInfo returnValue = TailgateInfoServiceUtil.addTailgateInfo(tailgateName,
 					tailgateDescription, eventId, eventName, tailgateDate,
-					startTime, endTime, showMembers, amountToPay, serviceContext);
+					startTime, endTime, amountToPay, serviceContext);
 
 			return com.rumbasolutions.flask.model.TailgateInfoSoap.toSoapModel(returnValue);
 		}
@@ -146,14 +145,13 @@ public class TailgateInfoServiceSoap {
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, boolean showMembers,
-		long amountToPay,
+		java.util.Date startTime, java.util.Date endTime, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.TailgateInfo returnValue = TailgateInfoServiceUtil.updateTailgateInfo(tailgateId,
 					tailgateName, tailgateDescription, eventId, eventName,
-					tailgateDate, startTime, endTime, showMembers, amountToPay,
+					tailgateDate, startTime, endTime, amountToPay,
 					serviceContext);
 
 			return com.rumbasolutions.flask.model.TailgateInfoSoap.toSoapModel(returnValue);

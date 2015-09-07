@@ -25,8 +25,7 @@ create table flasktailgate_TailgateInfo (
 	endTime DATE null,
 	isActive INTEGER,
 	isDelete INTEGER,
-	amountToPay LONG,
-	showMembers BOOLEAN
+	amountToPay LONG
 );
 
 create table flasktailgate_TailgateMarker (

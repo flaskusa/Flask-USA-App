@@ -36,7 +36,6 @@
 
 		<!-- Order -->
         <column name="amountToPay" type="long"></column>
-        <column name="showMembers" type="boolean"></column>
 
 		<order by="asc">
 			<order-column name="tailgateId" />
