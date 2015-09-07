@@ -101,6 +101,20 @@ public interface InfoTypeCategoryModel extends BaseModel<InfoTypeCategory> {
 	 */
 	public void setDisplayTemplate(String displayTemplate);
 
+	/**
+	 * Returns the info type ID of this info type category.
+	 *
+	 * @return the info type ID of this info type category
+	 */
+	public long getInfoTypeId();
+
+	/**
+	 * Sets the info type ID of this info type category.
+	 *
+	 * @param infoTypeId the info type ID of this info type category
+	 */
+	public void setInfoTypeId(long infoTypeId);
+
 	@Override
 	public boolean isNew();
 

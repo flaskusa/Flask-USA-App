@@ -52,6 +52,7 @@ public class InfoTypeCategoryWrapper implements InfoTypeCategory,
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
 		attributes.put("displayTemplate", getDisplayTemplate());
+		attributes.put("infoTypeId", getInfoTypeId());
 
 		return attributes;
 	}
@@ -75,6 +76,12 @@ public class InfoTypeCategoryWrapper implements InfoTypeCategory,
 
 		if (displayTemplate != null) {
 			setDisplayTemplate(displayTemplate);
+		}
+
+		Long infoTypeId = (Long)attributes.get("infoTypeId");
+
+		if (infoTypeId != null) {
+			setInfoTypeId(infoTypeId);
 		}
 	}
 
@@ -156,6 +163,26 @@ public class InfoTypeCategoryWrapper implements InfoTypeCategory,
 	@Override
 	public void setDisplayTemplate(java.lang.String displayTemplate) {
 		_infoTypeCategory.setDisplayTemplate(displayTemplate);
+	}
+
+	/**
+	* Returns the info type ID of this info type category.
+	*
+	* @return the info type ID of this info type category
+	*/
+	@Override
+	public long getInfoTypeId() {
+		return _infoTypeCategory.getInfoTypeId();
+	}
+
+	/**
+	* Sets the info type ID of this info type category.
+	*
+	* @param infoTypeId the info type ID of this info type category
+	*/
+	@Override
+	public void setInfoTypeId(long infoTypeId) {
+		_infoTypeCategory.setInfoTypeId(infoTypeId);
 	}
 
 	@Override

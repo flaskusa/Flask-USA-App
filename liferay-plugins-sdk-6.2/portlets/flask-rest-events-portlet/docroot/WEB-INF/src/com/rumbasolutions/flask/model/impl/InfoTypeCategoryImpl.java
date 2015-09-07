@@ -15,7 +15,7 @@
 package com.rumbasolutions.flask.model.impl;
 
 /**
- * The extended model implementation for the InfoTypeCategory service. Represents a row in the &quot;flask_InfoTypeCategory&quot; database table, with each column mapped to a property of this class.
+ * The extended model implementation for the InfoTypeCategory service. Represents a row in the &quot;flaskevents_InfoTypeCategory&quot; database table, with each column mapped to a property of this class.
  *
  * <p>
  * Helper methods and all application logic should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rumbasolutions.flask.model.InfoTypeCategory} interface.

@@ -328,6 +328,7 @@ public class InfoTypeCategoryPersistenceImpl extends BasePersistenceImpl<InfoTyp
 		infoTypeCategoryImpl.setInfoTypeCategoryId(infoTypeCategory.getInfoTypeCategoryId());
 		infoTypeCategoryImpl.setInfoTypeCategoryName(infoTypeCategory.getInfoTypeCategoryName());
 		infoTypeCategoryImpl.setDisplayTemplate(infoTypeCategory.getDisplayTemplate());
+		infoTypeCategoryImpl.setInfoTypeId(infoTypeCategory.getInfoTypeId());
 
 		return infoTypeCategoryImpl;
 	}

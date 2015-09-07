@@ -126,6 +126,7 @@
 			<id name="infoTypeCategoryId" />
 			<basic name="infoTypeCategoryName" />
 			<basic name="displayTemplate" />
+			<basic name="infoTypeId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -207,6 +208,7 @@
 			<basic name="website" />
 			<basic name="cost" />
 			<basic name="hoursOfOperation" />
+			<basic name="showDescription" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

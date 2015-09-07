@@ -76,6 +76,7 @@ public class InfoTypeCategoryClp extends BaseModelImpl<InfoTypeCategory>
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
 		attributes.put("displayTemplate", getDisplayTemplate());
+		attributes.put("infoTypeId", getInfoTypeId());
 
 		return attributes;
 	}
@@ -99,6 +100,12 @@ public class InfoTypeCategoryClp extends BaseModelImpl<InfoTypeCategory>
 
 		if (displayTemplate != null) {
 			setDisplayTemplate(displayTemplate);
+		}
+
+		Long infoTypeId = (Long)attributes.get("infoTypeId");
+
+		if (infoTypeId != null) {
+			setInfoTypeId(infoTypeId);
 		}
 	}
 
@@ -167,6 +174,29 @@ public class InfoTypeCategoryClp extends BaseModelImpl<InfoTypeCategory>
 						String.class);
 
 				method.invoke(_infoTypeCategoryRemoteModel, displayTemplate);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getInfoTypeId() {
+		return _infoTypeId;
+	}
+
+	@Override
+	public void setInfoTypeId(long infoTypeId) {
+		_infoTypeId = infoTypeId;
+
+		if (_infoTypeCategoryRemoteModel != null) {
+			try {
+				Class<?> clazz = _infoTypeCategoryRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setInfoTypeId", long.class);
+
+				method.invoke(_infoTypeCategoryRemoteModel, infoTypeId);
 			}
 			catch (Exception e) {
 				throw new UnsupportedOperationException(e);
@@ -248,6 +278,7 @@ public class InfoTypeCategoryClp extends BaseModelImpl<InfoTypeCategory>
 		clone.setInfoTypeCategoryId(getInfoTypeCategoryId());
 		clone.setInfoTypeCategoryName(getInfoTypeCategoryName());
 		clone.setDisplayTemplate(getDisplayTemplate());
+		clone.setInfoTypeId(getInfoTypeId());
 
 		return clone;
 	}
@@ -300,7 +331,7 @@ public class InfoTypeCategoryClp extends BaseModelImpl<InfoTypeCategory>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{infoTypeCategoryId=");
 		sb.append(getInfoTypeCategoryId());
@@ -308,6 +339,8 @@ public class InfoTypeCategoryClp extends BaseModelImpl<InfoTypeCategory>
 		sb.append(getInfoTypeCategoryName());
 		sb.append(", displayTemplate=");
 		sb.append(getDisplayTemplate());
+		sb.append(", infoTypeId=");
+		sb.append(getInfoTypeId());
 		sb.append("}");
 
 		return sb.toString();
@@ -315,7 +348,7 @@ public class InfoTypeCategoryClp extends BaseModelImpl<InfoTypeCategory>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.InfoTypeCategory");
@@ -333,6 +366,10 @@ public class InfoTypeCategoryClp extends BaseModelImpl<InfoTypeCategory>
 			"<column><column-name>displayTemplate</column-name><column-value><![CDATA[");
 		sb.append(getDisplayTemplate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>infoTypeId</column-name><column-value><![CDATA[");
+		sb.append(getInfoTypeId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -342,6 +379,7 @@ public class InfoTypeCategoryClp extends BaseModelImpl<InfoTypeCategory>
 	private long _infoTypeCategoryId;
 	private String _infoTypeCategoryName;
 	private String _displayTemplate;
+	private long _infoTypeId;
 	private BaseModel<?> _infoTypeCategoryRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

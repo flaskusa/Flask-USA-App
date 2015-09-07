@@ -454,6 +454,27 @@ public interface VenueDetailModel extends BaseModel<VenueDetail> {
 	 */
 	public void setHoursOfOperation(String hoursOfOperation);
 
+	/**
+	 * Returns the show description of this venue detail.
+	 *
+	 * @return the show description of this venue detail
+	 */
+	public boolean getShowDescription();
+
+	/**
+	 * Returns <code>true</code> if this venue detail is show description.
+	 *
+	 * @return <code>true</code> if this venue detail is show description; <code>false</code> otherwise
+	 */
+	public boolean isShowDescription();
+
+	/**
+	 * Sets whether this venue detail is show description.
+	 *
+	 * @param showDescription the show description of this venue detail
+	 */
+	public void setShowDescription(boolean showDescription);
+
 	@Override
 	public boolean isNew();
 

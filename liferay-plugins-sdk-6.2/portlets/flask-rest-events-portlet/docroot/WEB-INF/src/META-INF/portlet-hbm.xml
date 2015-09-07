@@ -103,6 +103,7 @@
 		</id>
 		<property name="infoTypeCategoryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="displayTemplate" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="infoTypeId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.UserEventImpl" table="flaskevents_UserEvent">
 		<cache usage="read-write" />
@@ -166,6 +167,7 @@
 		<property name="website" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="hoursOfOperation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="showDescription" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.VenueDetailImageImpl" table="flaskevents_VenueDetailImage">
 		<cache usage="read-write" />

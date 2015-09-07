@@ -856,6 +856,7 @@ public class VenueDetailPersistenceImpl extends BasePersistenceImpl<VenueDetail>
 		venueDetailImpl.setWebsite(venueDetail.getWebsite());
 		venueDetailImpl.setCost(venueDetail.getCost());
 		venueDetailImpl.setHoursOfOperation(venueDetail.getHoursOfOperation());
+		venueDetailImpl.setShowDescription(venueDetail.isShowDescription());
 
 		return venueDetailImpl;
 	}

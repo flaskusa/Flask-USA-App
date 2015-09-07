@@ -74,7 +74,8 @@ create table flaskevents_InfoType (
 create table flaskevents_InfoTypeCategory (
 	infoTypeCategoryId LONG not null primary key,
 	infoTypeCategoryName VARCHAR(100) null,
-	displayTemplate VARCHAR(255) null
+	displayTemplate VARCHAR(255) null,
+	infoTypeId LONG
 );
 
 create table flaskevents_UserEvent (
@@ -131,7 +132,8 @@ create table flaskevents_VenueDetail (
 	phone VARCHAR(20) null,
 	website VARCHAR(255) null,
 	cost DOUBLE,
-	hoursOfOperation VARCHAR(255) null
+	hoursOfOperation VARCHAR(255) null,
+	showDescription BOOLEAN
 );
 
 create table flaskevents_VenueDetailImage (

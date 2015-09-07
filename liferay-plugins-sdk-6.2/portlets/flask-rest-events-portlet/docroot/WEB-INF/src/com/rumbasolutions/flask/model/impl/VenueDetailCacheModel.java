@@ -38,7 +38,7 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(53);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("{venueDetailId=");
 		sb.append(venueDetailId);
@@ -92,6 +92,8 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		sb.append(cost);
 		sb.append(", hoursOfOperation=");
 		sb.append(hoursOfOperation);
+		sb.append(", showDescription=");
+		sb.append(showDescription);
 		sb.append("}");
 
 		return sb.toString();
@@ -235,6 +237,8 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 			venueDetailImpl.setHoursOfOperation(hoursOfOperation);
 		}
 
+		venueDetailImpl.setShowDescription(showDescription);
+
 		venueDetailImpl.resetOriginalValues();
 
 		return venueDetailImpl;
@@ -268,6 +272,7 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		website = objectInput.readUTF();
 		cost = objectInput.readDouble();
 		hoursOfOperation = objectInput.readUTF();
+		showDescription = objectInput.readBoolean();
 	}
 
 	@Override
@@ -393,6 +398,8 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 		else {
 			objectOutput.writeUTF(hoursOfOperation);
 		}
+
+		objectOutput.writeBoolean(showDescription);
 	}
 
 	public long venueDetailId;
@@ -421,4 +428,5 @@ public class VenueDetailCacheModel implements CacheModel<VenueDetail>,
 	public String website;
 	public double cost;
 	public String hoursOfOperation;
+	public boolean showDescription;
 }

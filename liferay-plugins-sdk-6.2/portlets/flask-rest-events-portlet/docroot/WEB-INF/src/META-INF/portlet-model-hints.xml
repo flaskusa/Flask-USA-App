@@ -132,6 +132,7 @@
 		<field name="displayTemplate" type="String">
 			<hint-collection name="FLASK-DESC" />
 		</field>
+		<field name="infoTypeId" type="long" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.UserEvent">
 		<field name="userEventId" type="long" />
@@ -228,6 +229,7 @@
 		<field name="hoursOfOperation" type="String">
 			<hint-collection name="FLASK-DESC" />
 		</field>
+		<field name="showDescription" type="boolean" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.VenueDetailImage">
 		<field name="venueDetailImageId" type="long" />

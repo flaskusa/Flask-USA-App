@@ -65,9 +65,10 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "infoTypeCategoryId", Types.BIGINT },
 			{ "infoTypeCategoryName", Types.VARCHAR },
-			{ "displayTemplate", Types.VARCHAR }
+			{ "displayTemplate", Types.VARCHAR },
+			{ "infoTypeId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_InfoTypeCategory (infoTypeCategoryId LONG not null primary key,infoTypeCategoryName VARCHAR(100) null,displayTemplate VARCHAR(255) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_InfoTypeCategory (infoTypeCategoryId LONG not null primary key,infoTypeCategoryName VARCHAR(100) null,displayTemplate VARCHAR(255) null,infoTypeId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_InfoTypeCategory";
 	public static final String ORDER_BY_JPQL = " ORDER BY infoTypeCategory.infoTypeCategoryId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_InfoTypeCategory.infoTypeCategoryId ASC";
@@ -98,6 +99,7 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 		model.setInfoTypeCategoryId(soapModel.getInfoTypeCategoryId());
 		model.setInfoTypeCategoryName(soapModel.getInfoTypeCategoryName());
 		model.setDisplayTemplate(soapModel.getDisplayTemplate());
+		model.setInfoTypeId(soapModel.getInfoTypeId());
 
 		return model;
 	}
@@ -166,6 +168,7 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
 		attributes.put("displayTemplate", getDisplayTemplate());
+		attributes.put("infoTypeId", getInfoTypeId());
 
 		return attributes;
 	}
@@ -189,6 +192,12 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 
 		if (displayTemplate != null) {
 			setDisplayTemplate(displayTemplate);
+		}
+
+		Long infoTypeId = (Long)attributes.get("infoTypeId");
+
+		if (infoTypeId != null) {
+			setInfoTypeId(infoTypeId);
 		}
 	}
 
@@ -235,6 +244,17 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 		_displayTemplate = displayTemplate;
 	}
 
+	@JSON
+	@Override
+	public long getInfoTypeId() {
+		return _infoTypeId;
+	}
+
+	@Override
+	public void setInfoTypeId(long infoTypeId) {
+		_infoTypeId = infoTypeId;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -265,6 +285,7 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 		infoTypeCategoryImpl.setInfoTypeCategoryId(getInfoTypeCategoryId());
 		infoTypeCategoryImpl.setInfoTypeCategoryName(getInfoTypeCategoryName());
 		infoTypeCategoryImpl.setDisplayTemplate(getDisplayTemplate());
+		infoTypeCategoryImpl.setInfoTypeId(getInfoTypeId());
 
 		infoTypeCategoryImpl.resetOriginalValues();
 
@@ -340,12 +361,14 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 			infoTypeCategoryCacheModel.displayTemplate = null;
 		}
 
+		infoTypeCategoryCacheModel.infoTypeId = getInfoTypeId();
+
 		return infoTypeCategoryCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{infoTypeCategoryId=");
 		sb.append(getInfoTypeCategoryId());
@@ -353,6 +376,8 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 		sb.append(getInfoTypeCategoryName());
 		sb.append(", displayTemplate=");
 		sb.append(getDisplayTemplate());
+		sb.append(", infoTypeId=");
+		sb.append(getInfoTypeId());
 		sb.append("}");
 
 		return sb.toString();
@@ -360,7 +385,7 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(16);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.InfoTypeCategory");
@@ -378,6 +403,10 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 			"<column><column-name>displayTemplate</column-name><column-value><![CDATA[");
 		sb.append(getDisplayTemplate());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>infoTypeId</column-name><column-value><![CDATA[");
+		sb.append(getInfoTypeId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -391,5 +420,6 @@ public class InfoTypeCategoryModelImpl extends BaseModelImpl<InfoTypeCategory>
 	private long _infoTypeCategoryId;
 	private String _infoTypeCategoryName;
 	private String _displayTemplate;
+	private long _infoTypeId;
 	private InfoTypeCategory _escapedModel;
 }

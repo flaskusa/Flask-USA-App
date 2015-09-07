@@ -76,6 +76,7 @@ public class VenueDetailWrapper implements VenueDetail,
 		attributes.put("website", getWebsite());
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
+		attributes.put("showDescription", getShowDescription());
 
 		return attributes;
 	}
@@ -237,6 +238,12 @@ public class VenueDetailWrapper implements VenueDetail,
 
 		if (hoursOfOperation != null) {
 			setHoursOfOperation(hoursOfOperation);
+		}
+
+		Boolean showDescription = (Boolean)attributes.get("showDescription");
+
+		if (showDescription != null) {
+			setShowDescription(showDescription);
 		}
 	}
 
@@ -800,6 +807,36 @@ public class VenueDetailWrapper implements VenueDetail,
 	@Override
 	public void setHoursOfOperation(java.lang.String hoursOfOperation) {
 		_venueDetail.setHoursOfOperation(hoursOfOperation);
+	}
+
+	/**
+	* Returns the show description of this venue detail.
+	*
+	* @return the show description of this venue detail
+	*/
+	@Override
+	public boolean getShowDescription() {
+		return _venueDetail.getShowDescription();
+	}
+
+	/**
+	* Returns <code>true</code> if this venue detail is show description.
+	*
+	* @return <code>true</code> if this venue detail is show description; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isShowDescription() {
+		return _venueDetail.isShowDescription();
+	}
+
+	/**
+	* Sets whether this venue detail is show description.
+	*
+	* @param showDescription the show description of this venue detail
+	*/
+	@Override
+	public void setShowDescription(boolean showDescription) {
+		_venueDetail.setShowDescription(showDescription);
 	}
 
 	@Override

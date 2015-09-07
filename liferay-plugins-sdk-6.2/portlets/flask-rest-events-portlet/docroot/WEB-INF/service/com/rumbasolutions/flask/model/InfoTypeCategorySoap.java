@@ -33,6 +33,7 @@ public class InfoTypeCategorySoap implements Serializable {
 		soapModel.setInfoTypeCategoryId(model.getInfoTypeCategoryId());
 		soapModel.setInfoTypeCategoryName(model.getInfoTypeCategoryName());
 		soapModel.setDisplayTemplate(model.getDisplayTemplate());
+		soapModel.setInfoTypeId(model.getInfoTypeId());
 
 		return soapModel;
 	}
@@ -111,7 +112,16 @@ public class InfoTypeCategorySoap implements Serializable {
 		_displayTemplate = displayTemplate;
 	}
 
+	public long getInfoTypeId() {
+		return _infoTypeId;
+	}
+
+	public void setInfoTypeId(long infoTypeId) {
+		_infoTypeId = infoTypeId;
+	}
+
 	private long _infoTypeCategoryId;
 	private String _infoTypeCategoryName;
 	private String _displayTemplate;
+	private long _infoTypeId;
 }

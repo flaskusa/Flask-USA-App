@@ -36,7 +36,7 @@ public class InfoTypeCategoryCacheModel implements CacheModel<InfoTypeCategory>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(7);
+		StringBundler sb = new StringBundler(9);
 
 		sb.append("{infoTypeCategoryId=");
 		sb.append(infoTypeCategoryId);
@@ -44,6 +44,8 @@ public class InfoTypeCategoryCacheModel implements CacheModel<InfoTypeCategory>,
 		sb.append(infoTypeCategoryName);
 		sb.append(", displayTemplate=");
 		sb.append(displayTemplate);
+		sb.append(", infoTypeId=");
+		sb.append(infoTypeId);
 		sb.append("}");
 
 		return sb.toString();
@@ -69,6 +71,8 @@ public class InfoTypeCategoryCacheModel implements CacheModel<InfoTypeCategory>,
 			infoTypeCategoryImpl.setDisplayTemplate(displayTemplate);
 		}
 
+		infoTypeCategoryImpl.setInfoTypeId(infoTypeId);
+
 		infoTypeCategoryImpl.resetOriginalValues();
 
 		return infoTypeCategoryImpl;
@@ -79,6 +83,7 @@ public class InfoTypeCategoryCacheModel implements CacheModel<InfoTypeCategory>,
 		infoTypeCategoryId = objectInput.readLong();
 		infoTypeCategoryName = objectInput.readUTF();
 		displayTemplate = objectInput.readUTF();
+		infoTypeId = objectInput.readLong();
 	}
 
 	@Override
@@ -99,9 +104,12 @@ public class InfoTypeCategoryCacheModel implements CacheModel<InfoTypeCategory>,
 		else {
 			objectOutput.writeUTF(displayTemplate);
 		}
+
+		objectOutput.writeLong(infoTypeId);
 	}
 
 	public long infoTypeCategoryId;
 	public String infoTypeCategoryName;
 	public String displayTemplate;
+	public long infoTypeId;
 }
