@@ -3,33 +3,33 @@ var imageContainer = $("#venueImage");
 var venueForm;
 var dropZoneLogo;
 var iSelected;
-function addClickHandlers(){
+function addClickHandlers() {
 	venueForm = $("#venueForm");
 	/*	Initialize display elements*/
-	
-	$(".cssDelete").hide();	
+
+	$(".cssDelete").hide();
 	/* Click handler for add user button*/
-	
-	$(".cssAddUser").click(function(){
+
+	$(".cssAddUser").click(function() {
 			$("#venueId").val(0);
 			venueForm.trigger('reset');
 			_flaskLib.loadCountries('venueCountryId');
 			_flaskLib.loadUSARegions('venueStateId');
 			$("#venueDataTable").hide();
 			$("#formContainer").show();
-			fnBuildVenueUpload(imageContainer);	
-			if(parseInt($("#venueId").val())==0){
+			fnBuildVenueUpload(imageContainer);
+			if (parseInt($("#venueId").val())==0) {
 				$("#mcontents").attr("data-toggle","");
 				$("#mcontents").css("cursor","not-allowed");
 			}
 	});
 	/* Click handler for save button*/
-	
-	$(".clsSave").click(function(){
-		if($('#venueForm').jqxValidator('validate'))
-			var geocoder = new google.maps.Geocoder(); 
+
+	$(".clsSave").click(function() {
+		if ($('#venueForm').jqxValidator('validate'))
+			var geocoder = new google.maps.Geocoder();
 		geocoder.geocode({
-				address : $('#venueName').val() +', '+ $('#addrLine1').val(), 
+				address : $('#addrLine1').val() +' , '+ $('#venueCity').val()  +' , '+ $('#venueStateId option:selected').text() + ' , '  + $('#venueZipCode').val()  + ' , '  + $('#venueCountryId option:selected').text() ,
 				region: 'no'
 			},
 		    function(results, status) {
@@ -39,61 +39,64 @@ function addClickHandlers(){
 						results[0]['geometry']['location'].lat(),
 						results[0]['geometry']['location'].lng()
 					);
-				
+
 					$('#latitude').val(coords.lat());
 					$('#longitude').val(coords.lng());
 					saveVenue();
+		    	}else{
+		    		_flaskLib.showErrorMessage('action-msg',"Unable to get geo-coordinates for the address. Reason:" + status);
+
 		    	}
 		    });
-		
+
 	});
-	
-	
+
+
 	/* Click handler for cancel button*/
 
-	$(".clsCancel").click(function(){
+	$(".clsCancel").click(function() {
 		location.reload();
 	});
-	
+
 	$(".cssDelUser").click(function() {
 			GRID_PARAM_VENUE.toggleSelectionMode();
 			var flag1=true;
 			 if (flag1==true) {
-					 $(".cssDelete").show();	
-					 $(".cssDelUser").hide();	
+					 $(".cssDelete").show();
+					 $(".cssDelUser").hide();
 			}
-			else{
-					 $(".cssDelete").hide();	
-					 $(".cssDelUser").show();	
+			else {
+					 $(".cssDelete").hide();
+					 $(".cssDelUser").show();
 			}
-    });
-	
-	$(".cssDelete").click(function () {
+	});
+
+	$(".cssDelete").click(function() {
 			var venueList = GRID_PARAM_VENUE.getCheckedIdList();
-			if(venueList.length > 0){
-					deleteMultipleVenues(venueList) ;	
+			if (venueList.length > 0) {
+					deleteMultipleVenues(venueList) ;
 			}
-			 $(".cssDelete").hide();	
-			 $(".cssDelUser").show();	
+			 $(".cssDelete").hide();
+			 $(".cssDelUser").show();
 			 GRID_PARAM_VENUE.toggleSelectionMode();
 	    });
-	
+
 	/*	Toggle search boxes */
 	$(".cssSearchUser").click(GRID_PARAM_VENUE.toggleSearchBoxes);
-	$("#mcontents").click(function(){
-		if(parseInt($("#venueId").val())==0){
+	$("#mcontents").click(function() {
+		if (parseInt($("#venueId").val())==0) {
 			_flaskLib.showWarningMessage('action-msg-warning', _venueModel.MESSAGES.ADD_VENUE_FIRST_ERR);
 		}
 	});
 	$("#venueCountryId").change(function() {
 		  _flaskLib.loadRegions('venueStateId', $("#venueCountryId").val());
-	});		
+	});
 }
 
-function loadData(){
+function loadData() {
 	var flaskRequest = new Request();
 	params = {};
-	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE, params, 
+	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE, params,
 	function(data){/*success handler*/
 		GRID_PARAM_VENUE.updateGrid(data);
 		iSelected = false;
@@ -101,29 +104,29 @@ function loadData(){
 		_flaskLib.showErrorMessage('action-msg',_venueModel.MESSAGES.GET_ERROR);
 		console.log("Error in getting data: " + error);
 	});
-	
+
 }
 
-function contextMenuHandler(menuItemText, rowData){
+function contextMenuHandler(menuItemText, rowData) {
 	var args = event.args;
 	if (menuItemText  == "Edit") {
 		editVenue(rowData);
 		return false;
-	}else if(menuItemText == "Delete"){
+	}else if (menuItemText == "Delete") {
 		var a = window.confirm("Are you sure ?");
 		if (a) {
 				var flag = false;
 				var flaskRequest = new Request();
 				params = {};
-				flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_ALL_EVENTS, params, 
+				flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_ALL_EVENTS, params,
 				function(data){/*success handler*/
 					var obj = data.Events;
-					for(var i=0; i<obj.length; i++){
-							if(obj[i].venueId == rowData.venueId){
+					for (var i=0; i<obj.length; i++) {
+							if (obj[i].venueId == rowData.venueId) {
 								flag = true;
 							}
-						};					
-					if(!flag)
+						};
+					if (!flag)
 						{
 							deleteVenue(rowData.venueId);
 						}
@@ -134,11 +137,11 @@ function contextMenuHandler(menuItemText, rowData){
 				} , function(error){ /*failure handler*/
 					console.log(error);
 				});
-			
-			
-			
+
+
+
 		}
-		return false;			
+		return false;
 	}
 };
 
@@ -147,16 +150,16 @@ function deleteVenue(venueId) {
 		var param = {'venueId': venueId};
 		var request = new Request();
 		var flaskRequest = new Request();
-		flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUE , param, 
-						function (data){
+		flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUE , param,
+						function(data) {
 								deleteVenueFolder(venueId);
 								_flaskLib.showSuccessMessage('action-msg', _venueModel.MESSAGES.DEL_SUCCESS);
 								loadData();
 						},
-						function (data){
+						function(data) {
 								_flaskLib.showErrorMessage('action-msg', _venueModel.MESSAGES.DEL_ERR);
 						});
-	
+
 }
 
 /* Delete Multiple Venues */
@@ -164,10 +167,10 @@ function deleteMultipleVenues(venueList) {
 	var param = {'venueList': venueList};
 	var request = new Request();
 	var flaskRequest = new Request();
-	flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUES, param, 
-					function (data){
+	flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUES, param,
+					function(data) {
 							var strVenueIdArray = venueList.split(",");
-							for(var iCount=0;iCount<strVenueIdArray.length;iCount++){
+							for (var iCount=0;iCount<strVenueIdArray.length;iCount++) {
 								var _venueId = parseInt(strVenueIdArray[iCount]);
 								deleteVenueFolder(_venueId);
 							}
@@ -175,10 +178,10 @@ function deleteMultipleVenues(venueList) {
 							loadData();
 							$('#grid').jqxGrid('clearselection');
 					} ,
-					function (data){
+					function(data) {
 							_flaskLib.showErrorMessage('action-msg', _venueModel.MESSAGES.DEL_ERR);
 					});
-	
+
 }
 
 /* Edit Venue */
@@ -190,124 +193,124 @@ function editVenue(rowData) {
 		_flaskLib.loadUSARegions('venueStateId',rowData.venueStateId);
 		$("#venueDataTable").hide();
 		$("#formContainer").show();
-		$(".AddContent").click(function(){
+		$(".AddContent").click(function() {
 			$("#formContainer").hide();
 			$('#venueDetailsForm').hide();
 			$("#venueDetailsContainer").show();
-			$("#venueDetailsDataTable").show();			
+			$("#venueDetailsDataTable").show();
 			$("#infoTypeId").val($(this).attr("alt"));
 		});
 		fnBuildVenueUpload(imageContainer);
 		createDetailsTable({},_venueDetailModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
 		loadVenueDetailsData(rowData.venueId);
 		console.log(rowData);
-		fnGetVenueImages(rowData.venueId,container,true);  
+		fnGetVenueImages(rowData.venueId,container,true);
 }
 
 
 /* Save Venue */
-function saveVenue(){
+function saveVenue() {
 		params = _flaskLib.getFormData('venueForm',_venueModel.DATA_MODEL.VENUE,
-					function(formId, model, formData){
+					function(formId, model, formData) {
 							return formData;
 					});
 		var flaskRequest = new Request();
 		var url = "";
 			console.log(params);
-			if(params.venueId == 0){
+			if (params.venueId == 0) {
 				url =_venueModel.SERVICE_ENDPOINTS.ADD_VENUE;
-			}else{
+			}else {
 				url = _venueModel.SERVICE_ENDPOINTS.UPDATE_VENUE;
 			}
-		flaskRequest.sendGETRequest(url, params, 
-					function (data){
-						var IsNew = false; 
+		flaskRequest.sendGETRequest(url, params,
+					function(data) {
+						var IsNew = false;
 						$("#venueForm #venueId").val(data.venueId);
 						_flaskLib.showSuccessMessage('action-msg', _venueModel.MESSAGES.SAVE);
-						if(parseInt(params.venueId) == 0 && parseInt(data.venueId) > 0){
+						if (parseInt(params.venueId) == 0 && parseInt(data.venueId) > 0) {
 							$("#mcontents").attr("data-toggle","tab");
 							$("#mcontents").css("cursor","default");
 							IsNew = true;
 						}
-						if($(".dz-image").length>0) {					
+						if ($(".dz-image").length>0) {
 							fnSaveVenueLogo(data.venueId, IsNew);
 						}
-						else{
-							if(IsNew){
+						else {
+							if (IsNew) {
 										$('.nav-tabs > .active').next('li').find('a').trigger('click');
 										createDetailsTable({},_venueDetailModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
 										loadVenueDetailsData(data.venueId);
 									}
-							else{
+							else {
 									$('.nav-tabs > .active').next('li').find('a').trigger('click');
 									loadVenueDetailsData(data.venueId);
 								}
 						}
 					} ,
-					function (data){
+					function(data) {
 						_flaskLib.showErrorMessage('action-msg', _venueModel.MESSAGES.ERROR);
 					});
 }
 
-function initForm(){
+function initForm() {
 	repositoryId = $("#repositoryId").val();
 }
 
-function fnBuildVenueUpload(imageContainer){
-	$(imageContainer).html(""); 
-  	var strSelected = "";
-  	dropZoneLogo = "";
-    var objForm = $('<form/>',{'class':'dropzone','id':'venueLogoImage','action':$("#imgActionUrl").val()});
-    $(objForm).appendTo(imageContainer);
-    var objVenueId = $('<input/>',{'name':'_venueId','id':'_venueId','type':'hidden','value':$("#venueId").val()});
-    $(objVenueId).appendTo(objForm);
-    var objIsLogo = $('<input/>',{'name':'_isLogo','id':'_isLogo','type':'hidden','value':'Y'});
-    $(objIsLogo).appendTo(objForm);
-    dropZoneLogo = new Dropzone($(objForm).get(0),{
-    	autoProcessQueue: false
-    });
+function fnBuildVenueUpload(imageContainer) {
+	$(imageContainer).html("");
+	var strSelected = "";
+	dropZoneLogo = "";
+	var objForm = $('<form/>',{'class':'dropzone','id':'venueLogoImage','action':$("#imgActionUrl").val()});
+	$(objForm).appendTo(imageContainer);
+	var objVenueId = $('<input/>',{'name':'_venueId','id':'_venueId','type':'hidden','value':$("#venueId").val()});
+	$(objVenueId).appendTo(objForm);
+	var objIsLogo = $('<input/>',{'name':'_isLogo','id':'_isLogo','type':'hidden','value':'Y'});
+	$(objIsLogo).appendTo(objForm);
+	dropZoneLogo = new Dropzone($(objForm).get(0),{
+		autoProcessQueue: false
+	});
 }
 
-function fnSaveVenueLogo(venueId, IsNew){
+function fnSaveVenueLogo(venueId, IsNew) {
 	$("#_venueId").val(venueId);
 	dropZoneLogo.options.autoProcessQueue = true;
 	dropZoneLogo.processQueue();
-	dropZoneLogo.on("queuecomplete", function (file) {
-		
-		if(IsNew){
+	dropZoneLogo.on("queuecomplete", function(file) {
+
+		if (IsNew) {
 			$('.nav-tabs > .active').next('li').find('a').trigger('click');
 			createDetailsTable({},_venueDetailModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
 			loadVenueDetailsData(venueId);
 		}
-		else{
+		else {
 			$("#venueImage").html(""); // Clear upload component
 			$("#venueDataTable").show();
 			$("#formContainer").hide();
 			loadData();
-		}		
-	});	
+		}
+	});
 }
 
-function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel){
+function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel) {
 	params= {repositoryId:_repositoryId ,folderId: _folderId,title:_title};
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.DELETE_FILE_BY_TITLE , params, 
-		function (data){
-			if(typeof data=="object"){
-				
-			}		
+	flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.DELETE_FILE_BY_TITLE , params,
+		function(data) {
+			if (typeof data=="object") {
+
+			}
 		},
-		function (data){
-			
-		});	
+		function(data) {
+
+		});
 }
 
-$(document).ready(function(){
+$(document).ready(function() {
 	$('#venueForm').jqxValidator
-    ({
-        hintType: 'label',
-        animationDuration: 0,
-        rules: [
+	({
+		hintType: 'label',
+		animationDuration: 0,
+		rules: [
 	               { input: '#venueName', message: 'Venue name is required!', action: 'keyup, blur', rule: 'required' },
 	               //{ input: '#venueDescription', message: 'Description is required!', action: 'keyup, blur', rule: 'required' },
 	               { input: '#addrLine1', message: 'Address 1 is required!', action: 'keyup, blur', rule: 'required' },
@@ -315,56 +318,56 @@ $(document).ready(function(){
 	               { input: '#venueZipCode', message: 'Zip code is required!', action: 'keyup, blur', rule: 'required' },
 	               { input: '#venueCity', message: 'City is required!', action: 'keyup, blur', rule: 'required' },
 	               { input: '#venueMetroArea', message: 'Metro area is required!', action: 'keyup, blur', rule: 'required' }
-               ]
-    });
+			   ]
+	});
 });
 
-function fnDeleteVenueImage(venueImageId){
+function fnDeleteVenueImage(venueImageId) {
 	params= {'venueImageId': venueImageId};
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUE_IMAGE , params, 
-		function (data){
+	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_VENUE_IMAGE , params,
+		function(data) {
 			console.log(data);
 		},
-		function (data){
+		function(data) {
 			console.log(data);
-		});	
+		});
 }
 
-function fnGetVenueImages(venueId,container,editable){
+function fnGetVenueImages(venueId,container,editable) {
 	params= {'venueId': venueId};
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE_IMAGES , params, 
-		function (data){
+	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE_IMAGES , params,
+		function(data) {
 			$.each(data, function(idx, obj) {
 				fnRenderVenueImage(obj.venueImageUUId,obj.venueImageGroupId, container, obj.venueImageId, editable);
-			});			
+			});
 		},
-		function (data){
+		function(data) {
 			console.log(data);
-		});	
+		});
 }
 
-function fnRenderVenueImage(venueImageUUId,venueImageGroupId, container,venueImageId,editable){
+function fnRenderVenueImage(venueImageUUId,venueImageGroupId, container,venueImageId,editable) {
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+venueImageUUId+"&groupId="+venueImageGroupId;
 	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':venueImageUUId, 'data-venueImageId': venueImageId});
 	$(objdiv).appendTo($(container));
-	if(editable){
-		$(objdiv).click(function(){
+	if (editable) {
+		$(objdiv).click(function() {
 	    	$(this).toggleClass("activeImage");
-	    	if($(".activeImage").length>0){
-	    		if(iSelected==false){
+	    	if ($(".activeImage").length>0) {
+	    		if (iSelected==false) {
 	    			var objVenueDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
 	    			$(objVenueDel).appendTo($(container));
 	    			iSelected = true;
-	    			$(objVenueDel).click(function(){
+	    			$(objVenueDel).click(function() {
 	    				$("#spinningSquaresG").show();
-	    				$(".activeImage").each(function(){
+	    				$(".activeImage").each(function() {
 	    					_flaskLib.deleteImage($(this).attr("data-uuid"), venueImageGroupId, objVenueDel);
 	    					fnDeleteVenueImage($(this).attr("data-venueImageId"));
 	    					$(this).remove();
 	    				});
-	    				if($(".activeImage").length==0){
+	    				if ($(".activeImage").length==0) {
 	    					$("#spinningSquaresG").hide();
 	    					$(this).remove();
 	    					iSelected = false;
@@ -372,34 +375,32 @@ function fnRenderVenueImage(venueImageUUId,venueImageGroupId, container,venueIma
 	    			});
 	    		}
 	    	}
-	    	else{
+	    	else {
 	    		$(".cssDelImages").remove();
 	    		iSelected = false;
 	    	}
-	    });		
+	    });
 	}
 }
 
 
-function deleteVenueFolder(_venueId){
+function deleteVenueFolder(_venueId) {
 	var param = {'repositoryId': repositoryId,'parentFolderId':0,'name':'Venue'};
 	var flaskRequest = new Request();
-	flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.GET_FOLDER , param, 
-		function (data){
+	flaskRequest.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.GET_FOLDER , param,
+		function(data) {
 			var venueFolderName = 'Venue-'+_venueId;
 			var param1 = {'repositoryId': repositoryId,'parentFolderId':data.folderId,'name':venueFolderName};
 			var flaskRequest1 = new Request();
 			flaskRequest1.sendPOSTRequest(_venueModel.SERVICE_ENDPOINTS.DELETE_FOLDER , param1,
-					function (data){
+					function(data) {
 						console.log(data);
 					},
-					function (data){
+					function(data) {
 						console.log(data);
-					});	
+					});
 		} ,
-		function (data){
+		function(data) {
 			console.log(data);
-		});		
+		});
 }
-
-

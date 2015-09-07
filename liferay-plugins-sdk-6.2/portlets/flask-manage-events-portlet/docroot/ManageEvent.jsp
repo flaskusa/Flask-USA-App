@@ -1,4 +1,4 @@
-<%
+<%--
 /**
  * Copyright (c) 2000-present Liferay, Inc. All rights reserved.
  *
@@ -12,19 +12,22 @@
  * FOR A PARTICULAR PURPOSE. See the GNU Lesser General Public License for more
  * details.
  */
-%>
-<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
-<%@include file="init.jsp"%>
-<portlet:actionURL  var="addImagesActionURL" name="addImages"/>
+--%>
+
+<%@ page import="com.liferay.portal.kernel.util.WebKeys" %>
+<%@ include file="init.jsp" %>
+<portlet:actionURL name="addImages" var="addImagesActionURL" />
+
 <%
-  long repositoryId = themeDisplay.getLayout().getGroupId();
-  themeDisplay.getLayout().getUuid();
+long repositoryId = themeDisplay.getLayout().getGroupId();
+themeDisplay.getLayout().getUuid();
 %>
+
 <aui:script>
 var bCreated;
 Liferay.Portlet.ready(initialize);
-function initialize(portletId, portlet){
-	if(portletId == "flaskmanageevents_WAR_flaskmanageeventsportlet") {
+function initialize(portletId, portlet) {
+	if (portletId == "flaskmanageevents_WAR_flaskmanageeventsportlet") {
 		createTable({},_eventModel.DATA_MODEL.EVENT, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Event"],_eventModel.GRID_DATA_MODEL.EVENT);
 		loadData();
 		addClickHandlers();
@@ -35,12 +38,12 @@ function initialize(portletId, portlet){
 		});
 		$("#startTime").datetimepicker({
 			format: "LT"
-			//pickDate: false,  
+			//pickDate: false,
 			//pick12HourFormat: true
 		});
 		$("#endTime").datetimepicker({
 			format: "LT"
-			//pickDate: false, 
+			//pickDate: false,
 			//pick12HourFormat: true
 		});
 	}
@@ -48,14 +51,14 @@ function initialize(portletId, portlet){
 
 </aui:script>
 
-<body class='default'>
-<input type="hidden" id="repositoryId" value="<%=repositoryId%>"/>
+<body class="default">
+<input id="repositoryId" type="hidden" value="<%= repositoryId %>" />
 <div id="action-msg-warning" style="display:none"></div>
 <div id="action-msg" style="display:none"></div>
-<div id='formContainer' style="display:none">
+<div id="formContainer" style="display:none">
 	<ul class="nav nav-tabs">
 	  <li class="active"><a href="#events" data-toggle="tab">Manage Events</a></li>
-	  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Content</a></li>  
+	  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Content</a></li>
 	</ul>
 	<div class="tab-content">
 	  <div class="tab-pane active" id="events">
@@ -63,42 +66,42 @@ function initialize(portletId, portlet){
 		  <div class="form-group">
 		    <div class="controls">
 			    <label class="control-label" for="eventName">Event Name:</label>
-			    <input name="eventName" id="eventName" class="form-control" type="text" onchange="$('#description').val($(this).val());"/> <div id='Active'>Active</div>
-			    <input type="hidden" id="description" value=""/>
-			</div> 
+			    <input name="eventName" id="eventName" class="form-control" type="text" onchange="$('#description').val($(this).val());" /> <div id='Active'>Active</div>
+			    <input type="hidden" id="description" value="" />
+			</div>
 		  </div>
 		   <div class="form-group">
 			    <label class="control-label" for="eventTypeId">Event Type:</label>
 				<div class="controls">
-					<select id="eventTypeId" name="eventTypeId" class="form-control-select"></select>
+					<select class="form-control-select" id="eventTypeId" name="eventTypeId"></select>
 				</div>
 		   </div>
 		    <div class="form-group">
 		    	<label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
 		    	<div class="controls">
-           				 <input type='text' class="form-control" id='eventDate' />
-           		</div>
+		   				 <input type='text' class="form-control" id='eventDate' />
+		   		</div>
 			  	</div>
-		   </div> 
-		
+		   </div>
+
 		   <div class="form-group">
 		    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
 		    <div class="controls">
 		      <input type='text' class="form-control" id='startTime' />
 		    </div>
 		  </div>
-		
+
 			<div class="form-group">
-			<label  id="EndTime" class="control-label" for="endTime">End Time:</label>
+			<label class="control-label" for="endTime" id="EndTime">End Time:</label>
 		    	<div class="controls">
 		    		 <input type='text' class="form-control" id='endTime' />
 		    	</div>
 		  </div>
-		  <br/>
+		  <br />
 		  <div class="form-group">
 			    <label class="control-label" for="venueId">Venue:</label>
 				<div class="controls">
-					<select id="venueId" name="venueId" class="form-control-select"></select>
+					<select class="form-control-select" id="venueId" name="venueId"></select>
 				</div>
 		   </div>
 		  <div class="form-group">
@@ -106,62 +109,61 @@ function initialize(portletId, portlet){
 				<div class="controls">
 					<div id="eventImage"></div>
 				</div>
-		   </div>		   
-		  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok"/>
-		  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
-		  <input type="hidden" id="eventImageUUID" value="">	
-		  <input type="hidden" id="eventImageGroupId" value="0">	
+		   </div>
+		  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok" />
+		  <input class="btn btn-primary clsCancel" type="button" value="Cancel">
+		  <input type="hidden" id="eventImageUUID" value="">
+		  <input type="hidden" id="eventImageGroupId" value="0">
 		  <input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
 		  <input id="eventId" type="hidden" value="0">
-		</form>  
+		</form>
 	  </div>
 	  <div class="tab-pane" id="contents">
 		<div id="eventDetailsContainer">
 			<h3><span class="title-text"></span></h3>
 			<form id="eventDetailsForm" style="display:none">
-			  <input type="hidden" id="imgActionUrl" value="<%=addImagesActionURL %>">
+			  <input type="hidden" id="imgActionUrl" value="<%= addImagesActionURL %>">
 			  <input id="latitude" type="hidden" name="latitude" value="">
 			  <input id="longitude" type="hidden" name="longitude" value="">
 			  <div class="form-group">
 				    <label class="control-label" for="infoTypeId">Info Type:</label>
 					<div class="controls">
-						<select id="infoTypeId" name="infoTypeId" class="form-control-select"></select>
+						<select class="form-control-select" id="infoTypeId" name="infoTypeId"></select>
 					</div>
-			  </div>   
+			  </div>
 			  <div class="form-group">
 				    <label class="control-label" for="infoTypeCategoryId">Content Type:</label>
 					<div class="controls">
-						<select id="infoTypeCategoryId" name="infoTypeCategoryId" class="form-control-select"></select>
+						<select class="form-control-select" id="infoTypeCategoryId" name="infoTypeCategoryId"></select>
 					</div>
-			   </div>   
+			   </div>
 			   <div id="contentTypeForm">
 			   		Please select content type.
 			   </div>
 			  <input id="infoTypeId" type="hidden" value="1">
 			  <input id="eventDetailId" type="hidden" name="eventDetailId" value="0">
-			  <input class="btn btn-info cssVdSave" type="button" value="Save"/>
-			  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel" >
+			  <input class="btn btn-info cssVdSave" type="button" value="Save" />
+			  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel">
 			  <div id="eventDetailGallery"></div>
 			</form>
-			
-			<div id="eventDetailsDataTable" class="table-condensed">
-			  <input class="btn btn-info cssAddEventDetails" type="button" value="Add Event Details"/>
+
+			<div class="table-condensed" id="eventDetailsDataTable">
+			  <input class="btn btn-info cssAddEventDetails" type="button" value="Add Event Details" />
 			  <div id="gridDetails"></div>
 			</div>
-			
-			<div id='actionMenuDetails' style="display:none">
+
+			<div id="actionMenuDetails" style="display:none">
 				<ul>
-					<li>Edit</li> 					<!--fnShowForm({value}); -->
-					<li>Delete</li>					<!--fnDelete({value}); -->
+					<li>Edit</li> <!--fnShowForm({value}); -->
+					<li>Delete</li> <!--fnDelete({value}); -->
 				</ul>
 		  	</div>
-		</div>  
+		</div>
 	  </div>
 	</div>
 </div>
 
-
-<div id="eventDataTable" class="table-condensed">
+<div class="table-condensed" id="eventDataTable">
 	<div class="cssGridMenu">
 		<div class="cssAddUser"><div class="iconAddVenue"></div></div>
 		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
@@ -169,17 +171,17 @@ function initialize(portletId, portlet){
 		<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
 	</div>
 
-	<div id="GridContainer" class="device-mobile-tablet"> 
+	<div class="device-mobile-tablet" id="GridContainer">
 	    <div id="container" class="device-mobile-tablet-container">
 	        <div style="border: none;" id='grid'></div>
 	    </div>
 	</div>
 </div>
 
-<div id='actionMenu' style="display:none">
-    <ul>
-		<li>Edit</li> 					<!--fnShowForm({value}); -->
-		<li>Delete</li>					<!--fnDelete({value}); -->
+<div id="actionMenu" style="display:none">
+	<ul>
+		<li>Edit</li> <!--fnShowForm({value}); -->
+		<li>Delete</li> <!--fnDelete({value}); -->
 	</ul>
 </div>
 </body>

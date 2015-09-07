@@ -11,11 +11,11 @@ _eventModel.SERVICE_ENDPOINTS = {
 	GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types",
 	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues",
 	GET_FOLDER		 			: "/dlapp/get-folder",
-    DELETE_FOLDER		 		: "/dlapp/delete-folder"
+	DELETE_FOLDER		 		: "/dlapp/delete-folder"
 };
 
 _eventModel.DATA_MODEL= {
-	EVENT: 
+	EVENT:
 		[
 		 	 { name: 'eventId', type: 'long' },
 		 	 { name: 'eventName', type: 'string' },
@@ -39,10 +39,10 @@ _eventModel.GRID_CONTEXT_MENU = {
 }
 
 _eventModel.GRID_DATA_MODEL= {
-		EVENT: 
+		EVENT:
 			[{ text: 'Name', columntype: 'textbox',  datafield: 'eventName', width: '45%' },
-      		 {text: 'Description', datafield: 'description', width: '45%'},
-      		 { text: 'Edit',  datafield: 'eventId', width: '10%', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.EVENT }]
+	  		 {text: 'Description', datafield: 'description', width: '45%'},
+	  		 { text: 'Edit',  datafield: 'eventId', width: '10%', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.EVENT }]
 		};
 
 _eventModel.MESSAGES= {
@@ -53,14 +53,14 @@ _eventModel.MESSAGES= {
 		DEL_SUCCESS: "Event successfully deleted",
 		DEL_ERR: "Error in deleting Event",
 		ADD_EVENT_FIRST_ERR: "Please save event first"
- };
+};
 
-_eventModel.loadVenues = function(elementId,selectedId){
+_eventModel.loadVenues = function(elementId,selectedId) {
 	var request = new Request();
 	var selectList = $('#' + elementId);
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_VENUES , {}, 
-					function (data){
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_ALL_VENUES , {},
+					function(data) {
 							selectList.empty();
 							$.each(data, function(key, venue) {
 								selectList.append($("<option/>", {
@@ -70,17 +70,17 @@ _eventModel.loadVenues = function(elementId,selectedId){
 							});
 							selectList.val(selectedId);
 					} ,
-					function (data){
+					function(data) {
 						console.log("Error in getting venues: " + data );
 					});
-	
+
 }
-_eventModel.loadEventType = function(elementId,selectedId){
+_eventModel.loadEventType = function(elementId,selectedId) {
 	var request = new Request();
 	var selectList = $('#' + elementId);
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT_TYPES , {}, 
-					function (data){
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT_TYPES , {},
+					function(data) {
 							selectList.empty();
 							$.each(data, function(key, eventType) {
 								selectList.append($("<option/>", {
@@ -90,18 +90,18 @@ _eventModel.loadEventType = function(elementId,selectedId){
 							});
 							selectList.val(selectedId);
 					} ,
-					function (data){
+					function(data) {
 						console.log("Error in getting Event Type: " + data );
 					});
-	
+
 }
 
-_eventModel.loadContentType = function(elementId,selectedId){
+_eventModel.loadContentType = function(elementId,selectedId) {
 	var request = new Request();
 	var selectList = $('#' + elementId);
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_INFO_CATEGORY , {}, 
-					function (data){
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_INFO_CATEGORY , {},
+					function(data) {
 							selectList.empty();
 							selectList.append($("<option/>", {
 								value: 0,
@@ -116,8 +116,8 @@ _eventModel.loadContentType = function(elementId,selectedId){
 							selectList.val(selectedId);
 							selectList.change();
 					} ,
-					function (data){
+					function(data) {
 						console.log("Error in getting content types: " + data );
 					});
-	
+
 }

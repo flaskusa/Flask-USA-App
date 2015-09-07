@@ -4,23 +4,42 @@ var JsonObj;
 var JsonEventDetails;
 var iSelected;
 
-function addDetailsClickHandlers(){
+
+$(document).ready(function() {
+	formArea = $("#contentTypeForm"); // Parent Div
+	$("#infoTypeCategoryId").change(function() {
+		$(formArea).html("");
+		var selectedContentType = $("option:selected", this).text().toLowerCase();
+		_infoTypeRenderer.fnRenderForm(selectedContentType);
+		$('#eventDetailsForm').jqxValidator
+	    ({
+	        hintType: 'label',
+	        animationDuration: 0,
+	        rules: [
+	                	{ input: '#infoTitle', message: 'Info Title is required!', action: 'keyup, blur', rule: 'required' }
+	                	//,{ input: '#infoDesc', message: 'Info Description is required!', action: 'keyup, blur', rule: 'required' }
+	               ]
+	    });
+	});
+});
+
+function addDetailsClickHandlers() {
 	eventDetailForm = $("#eventForm");
 	/*	Initialize display elements*/
-	$(".cssVdSave").click(function(){
-		if(fnCheckDuplicateTitle($("#infoTitle").val())){
+	$(".cssVdSave").click(function() {
+		if (fnCheckDuplicateTitle($("#infoTitle").val())) {
 			_flaskLib.showWarningMessage('action-msg-warning', _eventDetailModel.MESSAGES.DETAIL_DUPLICATE);
 		}
-		if($('#eventDetailsForm').jqxValidator('validate'))
+		if ($('#eventDetailsForm').jqxValidator('validate'))
 		{
-			if($('#addrLine1').val() == undefined){
+			if ($('#addrLine1').val() == undefined) {
 				$('#latitude').val(0);
 				$('#longitude').val(0);
 				saveEventDetails();
-			}else{
-				var geocoder = new google.maps.Geocoder(); 
+			}else {
+				var geocoder = new google.maps.Geocoder();
 				geocoder.geocode({
-					address : $('#infoTitle').val()+' '+ $('#addrLine1').val(), 
+					address : $('#infoTitle').val()+' '+ $('#addrLine1').val(),
 					region: 'no'
 				},
 			    function(results, status) {
@@ -30,39 +49,42 @@ function addDetailsClickHandlers(){
 							results[0]['geometry']['location'].lat(),
 							results[0]['geometry']['location'].lng()
 						);
-					
+
 						$('#latitude').val(coords.lat());
 						$('#longitude').val(coords.lng());
 						saveEventDetails();
 			    	}
 			    });
 			}
-				
+
 		}
-	});	
-	
-	$(".cssAddEventDetails").click(function(){
+	});
+
+	$(".cssAddEventDetails").click(function() {
 		$("#eventDetailId").val(0);
-		_eventDetailModel.loadInfoType('infoTypeId',1);
-		_eventDetailModel.loadContentType('infoTypeCategoryId',1);
+		_flaskDetailCommon.loadInfoType('infoTypeId',1);
+		_flaskDetailCommon.loadContentType('infoTypeCategoryId',1);
 		$("#eventDetailsForm").show();
 		$("#eventDetailsDataTable").hide();
 		$("#eventDetailGallery").html("");
-		
-	});	
 
-	$(".cssVdCancel").click(function(){
+	});
+
+	$(".cssVdCancel").click(function() {
 		$("#eventDetailsForm").hide();
 		$("#eventDetailsDataTable").show();
 		$("#slides").html("");
 		loadEventDetailsData($('#eventForm #eventId').val());
 	});
+	$("#infoTypeId").change(function() {
+		_flaskDetailCommon.setContentType("infoTypeCategoryId",null, $("#infoTypeId").val(), _flaskDetailCommon.infoCategoryJSON);
+	});
 }
 
-function loadEventDetailsData(eventId){
+function loadEventDetailsData(eventId) {
 	var flaskRequest = new Request();
 	params = {'eventId':eventId};
-	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_EVENT_DETAILS, params, 
+	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_EVENT_DETAILS, params,
 	function(data){/*success handler*/
 		JsonEventDetails = data;
 		GRID_PARAM_DETAILS.updateGrid(data);
@@ -74,174 +96,68 @@ function loadEventDetailsData(eventId){
 	$("#action-msg-warning").hide();
 }
 
-function contextMenuHandlerDetails(menuItemText, rowData){
+function contextMenuHandlerDetails(menuItemText, rowData) {
 	var args = event.args;
 	if (menuItemText  == "Edit") {
 		editEventDetail(rowData);
 		return false;
-	}else if(menuItemText == "Delete"){
+	}else if (menuItemText == "Delete") {
 		var a = window.confirm("Are you sure ?");
 		if (a) {
 			deleteEventDetail(rowData.eventDetailId,rowData.eventId);
 		}
-		return false;			
+		return false;
 	}
 };
 //
 
-$(".infoTypeCat").click(function(){
+$(".infoTypeCat").click(function() {
 	var InfoTypeCd = Number($(this).val());
 	$("#infoTypeId").val(InfoTypeCd);
 });
 
-function initDetailsForm(){
+function initDetailsForm() {
 	$("#eventDetailsContainer").hide();
 }
 
 /* Dynamic content type generation logic [Start]*/
-function fnRenderContentType(InfoTypeID){
+function fnRenderContentType(InfoTypeID) {
 	$("#infoTypeId").val(InfoTypeID);
 	$("#eventDetailsContainer").show();
 	$("#formContainer").hide();
 }
 
-$(document).ready(function(){
-    formArea = $("#contentTypeForm"); // Parent Div 
-    $("#infoTypeCategoryId").change(function(){
-        $(formArea).html("");
-        var selectedContentType = $("option:selected", this).text().toUpperCase().replace(/ /g,'');
-        fnRenderForm(selectedContentType);
-		$('#eventDetailsForm').jqxValidator
-	    ({
-	        hintType: 'label',
-	        animationDuration: 0,
-	        rules: [
-	                	{ input: '#infoTitle', message: 'Info Title is required!', action: 'keyup, blur', rule: 'required' }
-	                	//,{ input: '#infoDesc', message: 'Info Description is required!', action: 'keyup, blur', rule: 'required' }
-	               ]
-	    });        
-    });
-});
 
-function fnRenderForm(contentType){
-	var Obj = eval("_eventDetailModel.FORM_DATA_MODEL."+contentType);
-    fnBuildHtml(Obj);
-    if($("#eventDetailId").val()>0){
-    	//fnShowSlider();
-    }
-}
-
-function fnBuildHtml(Obj){
-    var items = Obj.filter(function(item) {
-        switch(item.type) {
-            case "text":
-                return fnBuildInput(item.attr);
-                break;
-            case "select":
-                return fnBuildSelect(item.attr);
-                break;
-            case "boolean":
-                return fnBuildBoolean(item.attr);
-                break;
-            case "upload":
-                return fnBuildUpload(item.attr);
-                break;
-            default:
-                console.log("Nothing selected");
-        }        
-    });      
-}
-
-function fnBuildInput(Obj){
-    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo($(formArea));
-    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].id}).appendTo(objFormGroup);
-    $(objControlLable).html(Obj[0].caption);
-    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
-    $('<input/>', {
-        'type': 'Text',
-        'id':Obj[0].id,
-        'value':Obj[0].value,
-        'placeholder':Obj[0].placeholder,   
-        'maxlength':Obj[0].maxlength
-    }).appendTo(objControls);
-}
-
-function fnBuildBoolean(Obj){
-    var strSelected = "";
-    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo($(formArea));
-    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].id}).appendTo(objFormGroup);
-    $(objControlLable).html(Obj[0].caption);
-    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
-    for(var iCount=0;iCount<Obj[0].items.length;iCount++){
-        if(Obj[0].items[0].value==Obj[0].value)
-            strSelected = "selected"    
-        else
-            strSelected = ""                                            
-            
-         $('<input/>', {
-            'type': 'Radio',
-            'id':Obj[0].id,
-            'name':Obj[0].name,
-            'value':Obj[0].value,
-            'Selected':strSelected
-        }).appendTo(objControls);
-        var objItemCaptionLable = $('<span/>',{'class':'control-label'}).appendTo(objControls);
-        $(objItemCaptionLable).html(Obj[0].items[iCount]);
-    }
-}
-
-function fnBuildUpload(Obj){
-	  	var strSelected = "";
-	  	dropZone = "";
-	    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo($(formArea));
-	    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].caption}).appendTo(objFormGroup);
-	    $(objControlLable).html(Obj[0].caption);
-	    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
-	    var objForm = $('<form/>',{'class':'dropzone','id':'eventImages','action':Obj[0].action}).appendTo(objFormGroup);
-	    $(objForm).appendTo(objControls);
-	    //return false;
-	    var objEventDetailId = $('<input/>',{'name':'_eventDetailId','id':'_eventDetailId','type':'hidden','value':'0'});
-	    $(objEventDetailId).appendTo(objForm);
-	    var objEventId = $('<input/>',{'name':'_eventId','id':'_eventId','type':'hidden','value':$("#eventId").val()});
-	    $(objEventId).appendTo(objForm);
-	    var objInfoTypeId = $('<input/>',{'name':'_infoTypeId','id':'_infoTypeId','type':'hidden','value':$("#infoTypeId").val()});
-	    $(objInfoTypeId).appendTo(objForm);
-	    var objInfoTypeCategoryId = $('<input/>',{'name':'_infoTypeCategoryId','id':'_infoTypeCategoryId','type':'hidden','value':$("#infoTypeCategoryId").val()});
-	    $(objInfoTypeCategoryId).appendTo(objForm);
-	    var objIsLogo = $('<input/>',{'name':'_isLogo','id':'_isLogo','type':'hidden','value':'N'});
-	    $(objIsLogo).appendTo(objForm);
-	    dropZone = new Dropzone($(objForm).get(0),{
-	    	autoProcessQueue: false
-	    });	
-}
-/* Dynamic content type generation logic [End]*/
-function saveEventDetails(){
+function saveEventDetails() {
 	params = _flaskLib.getFormData('eventDetailsForm',_eventDetailModel.DATA_MODEL.EVENTDETAILS,
-			function(formId, model, formData){
+			function(formId, model, formData) {
 				$.each(model, function(i, item) {
 					var ele = $('#'+ formId + ' #'+item.name);
 					var val = $.trim(ele.val());
-					if(item.type == 'long' && val ==''){
+					if (item.type == 'long' && val =='') {
 						val = Number(val)
+					} else if (item.type == 'boolean' && val =='') {
+						val = 1;
 					}
-					formData[item.name] = val;	
+
+					formData[item.name] = val;
 				});
 				formData.eventId=$('#eventForm #eventId').val();
 				return formData;
 			});
 	var flaskRequest = new Request();
 	var url = ""
-		if(params.eventDetailId == 0){
+		if (params.eventDetailId == 0) {
 			url = _eventDetailModel.SERVICE_ENDPOINTS.ADD_EVENT_DETAILS;
-		}else{
+		}else {
 			url =_eventDetailModel.SERVICE_ENDPOINTS.UPDATE_EVENT_DETAILS;
 		}
-	flaskRequest.sendGETRequest(url, params, 
-				function (data){
-					if($('.dz-image').length > 0) {					
+	flaskRequest.sendGETRequest(url, params,
+				function(data) {
+					if ($('.dz-image').length > 0) {
 						fnSaveImages(data.eventDetailId,data.eventId);
 					}
-					else{
+					else {
 						$('#eventDetailsForm').hide();
 						$('#eventDetailsDataTable').show();
 			    		$("#eventDetailId").val(0);
@@ -249,9 +165,9 @@ function saveEventDetails(){
 			    		loadEventDetailsData(data.eventId);
 			    		_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);
 					}
-						
+
 				} ,
-				function (data){
+				function(data) {
 					_flaskLib.showErrorMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_ERROR);
 				});
 	$("#slides").html("");
@@ -262,12 +178,12 @@ function deleteEventDetail(eventDetailId,eventId) {
 		var param = {'eventDetailId': eventDetailId};
 		var request = new Request();
 		var flaskRequest = new Request();
-		flaskRequest.sendPOSTRequest(_eventDetailModel.SERVICE_ENDPOINTS.DELETE_EVENT_DETAIL , param, 
-			function (data){
+		flaskRequest.sendPOSTRequest(_eventDetailModel.SERVICE_ENDPOINTS.DELETE_EVENT_DETAIL , param,
+			function(data) {
 					_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_DEL_SUCCESS);
 					loadEventDetailsData(eventId);
 			} ,
-			function (data){
+			function(data) {
 					_flaskLib.showErrorMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_DEL_ERR);
 			});
 }
@@ -277,12 +193,12 @@ function deleteMultipleEventDetail(eventList) {
 	var param = {'eventIds': eventList};
 	var request = new Request();
 	var flaskRequest = new Request();
-	flaskRequest.sendPOSTRequest(_eventDetailModel.SERVICE_ENDPOINTS.DELETE_ALL_EVENT_DETAILS, param, 
-		function (data){
+	flaskRequest.sendPOSTRequest(_eventDetailModel.SERVICE_ENDPOINTS.DELETE_ALL_EVENT_DETAILS, param,
+		function(data) {
 				_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_DEL_SUCCESS);
 				//loadEventDetailsData(eventId);
 		} ,
-		function (data){
+		function(data) {
 				_flaskLib.showErrorMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_DEL_ERR);
 		});
 }
@@ -296,14 +212,13 @@ function editEventDetail(rowData) {
 		$('#eventDetailId').val(rowData.eventDetailId);
 		$('#_eventDetailId').val(rowData.eventDetailId);
 		$('#eventDetailsForm').show();
-		
 		$('#eventDetailsDataTable').hide();
-		_eventDetailModel.loadInfoType('infoTypeId',rowData.infoTypeId);
-		_eventDetailModel.loadContentType('infoTypeCategoryId',rowData.infoTypeCategoryId);
-		setTimeout(function(){
+		_flaskDetailCommon.loadInfoType('infoTypeId',rowData.infoTypeId);
+		_flaskDetailCommon.loadContentType("infoTypeCategoryId",rowData.infoTypeCategoryId, rowData.infoTypeId);
+		setTimeout(function() {
 			_flaskLib.loadDataToForm("eventDetailsForm",_eventDetailModel.DATA_MODEL.EVENTDETAILS, rowData, function(){});
-		}, 500);		
-    	fnGetEventDetailImages(rowData.eventDetailId,container, true);
+		}, 500);
+		fnGetEventDetailImages(rowData.eventDetailId,container, true);
 }
 
 function formatUnixToTime(tdate){var date = new Date(tdate);
@@ -313,35 +228,35 @@ function formatUnixToTime(tdate){var date = new Date(tdate);
 	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
 
-function fnSaveImages(eventDetailId,eventId){
+function fnSaveImages(eventDetailId,eventId) {
 	$("#_eventDetailId").val(eventDetailId);
 	dropZone.options.autoProcessQueue = true;
 	dropZone.processQueue();
-	dropZone.on("queuecomplete", function (file) {
-    	wait(function(){
+	dropZone.on("queuecomplete", function(file) {
+		wait(function() {
 			$('#eventDetailsForm').hide();
 			$('#eventDetailsDataTable').show();
-    		$("#eventDetailId").val(0);
-    		$("#infoTypeCategoryId").val(0);
-    		loadEventDetailsData(eventId);		
-    		_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);    		
-    	},1)					
-    });	
+			$("#eventDetailId").val(0);
+			$("#infoTypeCategoryId").val(0);
+			loadEventDetailsData(eventId);
+			_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);
+		},1)
+	});
 }
 
 var wait = function(callback, seconds) {
 	return window.setTimeout(callback, seconds * 1000);
 }
 
-$(document).ready(function(){
-	$("#mcontents").click(function(){
+$(document).ready(function() {
+	$("#mcontents").click(function() {
 		addDetailsClickHandlers();
 		initDetailsForm();
 		loadEventDetailsData($('#eventForm #eventId').val());
 		var click = new Date();
 		var lastClick = new Date();
 		var lastRow = -1;
-		$("#gridDetails").bind('rowclick', function (event) {
+		$("#gridDetails").bind('rowclick', function(event) {
 		    click = new Date();
 		    if (click - lastClick < 300) {
 		        if (lastRow == event.args.rowindex) {
@@ -357,71 +272,71 @@ $(document).ready(function(){
 	});
 });
 
-function fnCheckDuplicateTitle(_infoTitle){
-	if(typeof JsonEventDetails=="object"){
+function fnCheckDuplicateTitle(_infoTitle) {
+	if (typeof JsonEventDetails=="object") {
 		var Obj = JsonEventDetails;
 		var iCount = 0;
 	    var items = Obj.filter(function(item) {
-	    	if(item.infoTitle==_infoTitle){
+	    	if (item.infoTitle==_infoTitle) {
 	    		iCount++;
 	    	}
 	    });
-	    if(iCount>0)
+	    if (iCount>0)
 	    	return true;
 	    else
 	    	return false;
 	}
-	else{
+	else {
 		return false;
 	}
 }
 
-function fnDeleteEventDetailImage(eventDetailImageId){
+function fnDeleteEventDetailImage(eventDetailImageId) {
 	params= {'eventDetailImageId': eventDetailImageId};
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.DELETE_EVENTDETAIL_IMAGE , params, 
-		function (data){
+	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.DELETE_EVENTDETAIL_IMAGE , params,
+		function(data) {
 			console.log(data);
 		},
-		function (data){
+		function(data) {
 			console.log(data);
-		});	
+		});
 }
 
-function fnGetEventDetailImages(eventDetailId,container, editable){
+function fnGetEventDetailImages(eventDetailId,container, editable) {
 	params= {'eventDetailId': eventDetailId};
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL_IMAGES , params, 
-		function (data){
+	flaskRequest.sendGETRequest(_eventDetailModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL_IMAGES , params,
+		function(data) {
 			$.each(data, function(idx, obj) {
 				fnRenderImage(obj.imageUUID, obj.imageGroupId, container, obj.eventDetailImageId, editable);
-			});			
+			});
 		},
-		function (data){
+		function(data) {
 			console.log(data);
-		});	
+		});
 }
 
-function fnRenderImage(imageUUID, imageGroupId, container, eventDetailImageId, editable){
+function fnRenderImage(imageUUID, imageGroupId, container, eventDetailImageId, editable) {
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
 	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-eventDetailImageId': eventDetailImageId});
 	$(objdiv).appendTo($(container));
-	if(editable){
-    	$(objdiv).click(function(){
+	if (editable) {
+		$(objdiv).click(function() {
 	    	$(this).toggleClass("activeImage");
-	    	if($(".activeImage").length>0){
-	    		if(iSelected==false){
+	    	if ($(".activeImage").length>0) {
+	    		if (iSelected==false) {
 	    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
 	    			$(objDel).appendTo($(container));
 	    			iSelected = true;
-	    			$(objDel).click(function(){
+	    			$(objDel).click(function() {
 	    				$("#spinningSquaresG").show();
-	    				$(".activeImage").each(function(){
+	    				$(".activeImage").each(function() {
 	    					_flaskLib.deleteImage($(this).attr("data-uuid"), imageGroupId, objDel);
 	    					fnDeleteEventDetailImage($(this).attr("data-eventDetailImageId"));
 	    					$(this).remove();
 	    				});
-	    				if($(".activeImage").length==0){
+	    				if ($(".activeImage").length==0) {
 	    					$("#spinningSquaresG").hide();
 	    					$(this).remove();
 	    					iSelected = false;
@@ -429,10 +344,10 @@ function fnRenderImage(imageUUID, imageGroupId, container, eventDetailImageId, e
 	    			});
 	    		}
 	    	}
-	    	else{
+	    	else {
 	    		$(".cssDelImages").remove();
 	    		iSelected = false;
 	    	}
-	    });	
-    }
+	    });
+	}
 }
