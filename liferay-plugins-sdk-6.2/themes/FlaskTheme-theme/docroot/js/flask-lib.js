@@ -2,6 +2,8 @@ var _flaskLib = {};
 
 _flaskLib.UTILITY = {
 		IMAGES_PATH			: "/c/document_library/get_file",
+		DEFAULT_PROFILE_PIC	: "/document_library/DefaultProfilePic",
+		DEFAULT_NO_IMAGE	: "/document_library/NoImageFound",
 		GRID_GROUP_EXPAND   : true
 }
 
@@ -10,6 +12,10 @@ _flaskLib.SERVICE_ENDPOINTS = {
 				GET_COUNTRIES 				: "/flask-rest-users-portlet.flaskadmin/get-countries",
 				GET_REGION 					: "/flask-rest-users-portlet.flaskadmin/get-region",
 				GET_USA_REGION 				: "/flask-rest-users-portlet.flaskadmin/get-usa-regions",
+				DELETE_FILES				: "/dlapp/delete-file-entry",
+				GET_FILE_ENTRY_ID   		: "/dlapp/get-file-entry-by-uuid-and-group-id",
+				GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types"
+
 }
 
 _flaskLib.getFormData = function(formId, model, customGetData){
@@ -21,6 +27,10 @@ _flaskLib.getFormData = function(formId, model, customGetData){
 						var val = $.trim(ele.val());
 						if(column.type == 'long' && val !=''){
 							val = Number(val)
+						}
+						if(column.type == 'booelan'){
+							val = ele.checked;
+							
 						}
 						formData[column.name] = val;
 					}
@@ -43,10 +53,13 @@ _flaskLib.loadDataToForm = function(formId, model, data,  customSetData){
 				if( ele.length == 1 && typeof ele[0].tagName != undefined){
 					if(ele[0].tagName.toLowerCase() =='input'){
 						var tempVal =eval("data." + column.name);
-						console.log(column.name);
-						console.log(tempVal);
 						tempVal = tempVal == undefined ? "" : tempVal;
-						ele.val(tempVal)
+						if(column.datatype=="boolean"){
+							tempVal = tempVal =="" ? false:tempVal;
+							ele.checked = tempVal;
+						}else{
+							ele.val(tempVal)
+						}
 					}
 				}
 		});
@@ -182,5 +195,52 @@ _flaskLib.loadCountries = function(elementId,selectedId){
 			function (data){
 				console.log("Error in getting countries: " + data );
 			});
-
 }
+
+_flaskLib.loadEventType = function(elementId,selectedId){
+	var request = new Request();
+	var selectList = $('#' + elementId);
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_EVENT_TYPES , {}, 
+					function (data){
+							selectList.empty();
+							$.each(data, function(key, eventType) {
+								selectList.append($("<option/>", {
+							        value: eventType.eventTypeId,
+							        text: eventType.eventTypeName
+							    }));
+							});
+							selectList.val(selectedId);
+					} ,
+					function (data){
+						console.log("Error in getting Event Type: " + data );
+					});
+	
+}
+
+_flaskLib.deleteImage = function(uuid, groupId, objDel){
+	console.log(uuid);
+			var params = {'uuid': uuid, 'groupId': groupId};
+			var flaskRequest = new Request();
+			flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_FILE_ENTRY_ID , params, 
+					function (data){
+							console.log(data);
+							params2= {'fileEntryId': data.fileEntryId};
+							var flaskRequest2 = new Request();
+							flaskRequest2.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.DELETE_FILES , params2, 
+								function (data){
+									if(typeof data=="object"){
+										console.log("Deleted Image successfully");    		
+									}		
+								},
+								function (data){
+									$("#spinningSquaresG").hide();
+								});	
+							console.log("Image Deleted successfully");
+					} ,
+					function (data){
+						console.log("Error in deleting image");
+					});
+	
+}
+
