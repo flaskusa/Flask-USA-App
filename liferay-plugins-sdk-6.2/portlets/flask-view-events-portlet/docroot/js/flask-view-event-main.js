@@ -480,7 +480,7 @@ function initMenuList(){
 				var EventDetailJSON = $.parseJSON(y.EventDetail);
 				if(EventDetailJSON.infoTypeCategoryName == b){
 					var divSlideObj = $("<div/>",{"class":"photo"});
-					var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+EventDetailJSON.infoTypeCategoryName.toUpperCase()); //_eventModel.
+					var objFields = _eventModel.getObjectFields(EventDetailJSON.infoTypeCategoryName.toLowerCase());
 					var objtbl = $("<table/>",{'cellpadding':'5px','width':screenWidth + 'px'});
 					$.each(objFields, function(idx, obj){
 						$.each(obj,function(key,value){
