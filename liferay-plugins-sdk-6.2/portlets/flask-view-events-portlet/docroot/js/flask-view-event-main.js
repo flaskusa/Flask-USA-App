@@ -181,8 +181,8 @@ function fnGetEventImages(eventId,venueId){
 
 function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objEventDetails = jQuery.parseJSON(eventDetails);
-	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toUpperCase()
-	var objFields = eval("_eventModel.DETAIL_DATA_MODEL."+infoTypeCategoryName);
+	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase()
+	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
 	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
 			var objtbl = $("<table/>",{'cellpadding':'5px'});

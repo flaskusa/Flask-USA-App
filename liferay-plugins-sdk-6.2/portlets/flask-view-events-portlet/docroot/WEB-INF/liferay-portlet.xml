@@ -22,8 +22,6 @@
     <footer-portlet-javascript>/js/jqxtabs.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/owl.carousel.js</footer-portlet-javascript>
-    <footer-portlet-javascript>/js/jspdf.min.js</footer-portlet-javascript> 
-    <footer-portlet-javascript>/js/FileSaver.js</footer-portlet-javascript>
     <!-- <footer-portlet-javascript>/js/png.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/zlib.js</footer-portlet-javascript>
     <footer-portlet-javascript>/js/png_support.js</footer-portlet-javascript> -->

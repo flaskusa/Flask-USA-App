@@ -99,10 +99,10 @@
 	<input class="btn btn-info cssback" type="button" value="Back"/>
 </div>	
 
-<div id="three" style="display:none; width:100%;">
+<div id="three" style="display:none; width:100%; height:100%">
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places" type="text/javascript"></script>
 	<div id="gmap_canvas" style="height:60%"></div>
-	<div id='jqxWidget' style="height:40%"></div>
+	<div id='jqxWidget'></div>
 </div>
 
 <input id="repositoryId" type="hidden" value="<%=repositoryId%>">

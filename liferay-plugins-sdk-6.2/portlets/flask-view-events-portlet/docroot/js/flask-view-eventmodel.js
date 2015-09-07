@@ -54,6 +54,34 @@ _eventModel.MESSAGES= {
 		
  };
 
+_eventModel.getObjectFields = function(infoTypeCategory){
+	var renderer;
+	switch(infoTypeCategory) {
+		case "tradition":
+			renderer = _eventModel.DETAIL_DATA_MODEL.TRADITION;
+			break;
+		case "parking":
+			renderer = _eventModel.DETAIL_DATA_MODEL.PARKING;
+			break;
+		case "bar & restaurants":
+		case "nightlife":
+		case "safety":
+			renderer = _eventModel.DETAIL_DATA_MODEL.FOOD;
+			break;
+
+		case "liquor store":
+			renderer = _eventModel.DETAIL_DATA_MODEL.LIQUOR;
+			break;
+		case "supplies":
+		case "getting home":
+		case "flask us":
+		default:
+			renderer =_eventModel.DETAIL_DATA_MODEL.GENERAL;
+			break;
+	}
+	return renderer;
+}
+
 _eventModel.DETAIL_DATA_MODEL = {
 		GENERAL:[{
                 "infoTitle":"Title",
@@ -85,5 +113,10 @@ _eventModel.DETAIL_DATA_MODEL = {
             "phone":"Phone",
             "website":"Website",
             "infoDesc":"website",
-            }]
+            }],
+         LIQUOR:[{//TRAFFIC
+                "infoTitle":"Name",
+                "infoDesc":"Address",
+                "phone":"Phone"
+         }],
 }
