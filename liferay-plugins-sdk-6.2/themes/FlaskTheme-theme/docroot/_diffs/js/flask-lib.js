@@ -28,6 +28,10 @@ _flaskLib.getFormData = function(formId, model, customGetData){
 						if(column.type == 'long' && val !=''){
 							val = Number(val)
 						}
+						if(column.type == 'booelan'){
+							val = ele.checked;
+							
+						}
 						formData[column.name] = val;
 					}
 			});
@@ -49,10 +53,13 @@ _flaskLib.loadDataToForm = function(formId, model, data,  customSetData){
 				if( ele.length == 1 && typeof ele[0].tagName != undefined){
 					if(ele[0].tagName.toLowerCase() =='input'){
 						var tempVal =eval("data." + column.name);
-						console.log(column.name);
-						console.log(tempVal);
 						tempVal = tempVal == undefined ? "" : tempVal;
-						ele.val(tempVal)
+						if(column.datatype=="boolean"){
+							tempVal = tempVal =="" ? false:tempVal;
+							ele.checked = tempVal;
+						}else{
+							ele.val(tempVal)
+						}
 					}
 				}
 		});
