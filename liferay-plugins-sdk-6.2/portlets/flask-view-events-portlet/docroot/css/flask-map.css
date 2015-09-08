@@ -4,9 +4,57 @@
     position: relative;
 }
 
-@media (min-width: 0px) and (max-width: 640px){
+@media (min-width: 0px) and (max-width: 480px){
 	#gmap_canvas {
 	    height: 250px !important;
 	    position: relative;
 	}
+	
+	.jqx-tabs{
+		height: 170px !important;
+	}
+	
+	.photo {
+		height: 150px !important;
+	    margin: 0px;
+	}
+	
+	.SliderCaption {
+	    height: 160px !important;
+	}
+	
+	.weather, .front-page-description{
+		font-size: 9px !important;
+		height: 150px !important;
+	}
 }
+
+
+@media (min-width: 481px) and (max-width: 568px){
+	#gmap_canvas {
+	    height: 281px !important;
+	    position: relative;
+	}
+}
+
+@media (min-width: 481px) and (max-width: 568px){
+	#gmap_canvas {
+	    height: 315px !important;
+	    position: relative;
+	}
+}
+
+@media (min-width: 569px) and (max-width: 736px){
+	#gmap_canvas {
+	    height: 410px !important;
+	    position: relative;
+	}
+}
+
+@media (min-width: 736px) and (max-width: 3000px){
+	#gmap_canvas {
+	    height: 525px !important;
+	    position: relative;
+	}
+}
+
