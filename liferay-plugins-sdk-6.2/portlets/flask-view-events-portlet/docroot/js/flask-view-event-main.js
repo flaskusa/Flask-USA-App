@@ -273,7 +273,7 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 		 		$('#three').show();
 				marker_infoType = infoType;
 				// map initialization
-				initializeMap();
+				_flaskMap.initializeMap();
 		 		initMenuList(infoType);	 		
 		 		window.location.hash = '#Details';
 		 		$("#spinningSquaresG").hide();

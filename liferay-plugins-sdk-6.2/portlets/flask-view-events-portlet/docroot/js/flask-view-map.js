@@ -1,86 +1,88 @@
-var geocoder;
-var map;
-var markers = Array();
-var infos = Array();
-var cur_location;
-function initializeMap() {
+var _flaskMap = {};
+
+_flaskMap.geocoder;
+_flaskMap.map;
+_flaskMap.markers = Array();
+_flaskMap.infos = Array();
+_flaskMap.cur_location;
+_flaskMap.initializeMap = function() {
 	try{
-	    geocoder = new google.maps.Geocoder();
+	    _flaskMap.geocoder = new google.maps.Geocoder();
 	    var myLatlng = new google.maps.LatLng(latitude,longitude);
 	    var myOptions = {
 	        zoom: 14,
 	        center: myLatlng,
 	        mapTypeId: google.maps.MapTypeId.ROADMAP
 	    };
-	    map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-	    findPlaces();
+	    _flaskMap.map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+	    _flaskMap.findPlaces();
 	}catch(ex){
 		Console.log("Error in loading google map");
 		_flaskLib.showErrorMessage('action-msg',ex.message);
 	}
 
 }
-function clearOverlays() {
-    if (markers) {
-        for (i in markers) {
-            markers[i].setMap(null);
+_flaskMap.clearOverlays = function() {
+    if (_flaskMap.markers) {
+        for (i in _flaskMap.markers) {
+            _flaskMap.markers[i].setMap(null);
         }
-        markers = [];
-        infos = [];
+        _flaskMap.markers = [];
+        _flaskMap.infos= [];
     }
 }
-function clearInfos() {
-    if (infos) {
-        for (i in infos) {
-            if (infos[i].getMap()) {
-                infos[i].close();
+_flaskMap.clearInfos = function() {
+    if (_flaskMap.infos) {
+        for (i in _flaskMap.infos) {
+            if (_flaskMap.infos[i].getMap()) {
+            	_flaskMap.infos[i].close();
             }
         }
     }
 }
-function findPlaces() {
-    var radius = 500;
+_flaskMap.findPlaces = function () {
+    var radius = 2000;
     var lat = latitude;
     var lng = longitude;
-    cur_location = new google.maps.LatLng(lat, lng);
+    _flaskMap.cur_location = new google.maps.LatLng(lat, lng);
     var request = {
-        location: cur_location,
+        location: _flaskMap.cur_location,
         radius: radius,
         types: ['food', 'bar', 'store']
     };
-    service = new google.maps.places.PlacesService(map);
-    service.search(request, createMarkers);
+    service = new google.maps.places.PlacesService(_flaskMap.map);
+    service.search(request, _flaskMap.createMarkers);
     
 }
-function createMarkers(results, status) {
+_flaskMap.createMarkers = function (results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-    	clearOverlays();
+    	_flaskMap.clearOverlays();
     	venue_mark = new google.maps.Marker({
-	        position: cur_location,
-	        map: map,
+	        position: _flaskMap.cur_location,
+	        map: _flaskMap.map,
 	        animation:  google.maps.Animation.DROP,
 	        icon: '/flask-view-events-portlet/img/flag-marker.png',
 	    });
-    	markers.push(venue_mark);
+    	_flaskMap.markers.push(venue_mark);
 
     	var infowindow = new google.maps.InfoWindow();
     	google.maps.event.addListener(venue_mark, 'click', (function(venue_mark) {
         	return function() {
-                clearInfos();
+        		_flaskMap.clearInfos();
                 var content= '<div style="display: inline-flex;"><font style="color:#000; "><b>' + venueName + 
                 '</b><br /><br />' + venueAddr + '</font></div>';
                 infowindow.setContent(content);
-                infowindow.open(map,venue_mark);
+                infowindow.open(_flaskMap.map,venue_mark);
         	}
         })(venue_mark));
-        infos.push(infowindow);
+        _flaskMap.infos.push(infowindow);
         for (var i = 0; i < results.length; i++) {
         	var mark;
-            if(createMarker(results[i])){
+            if(_flaskMap.createMarker(results[i])){
             	console.log(results[i].geometry.location);
             	mark = new google.maps.Marker({
 			        position: results[i].geometry.location,
-			        map: map,
+			        map: _flaskMap.map,
 			        animation:  google.maps.Animation.DROP,
 			        title: results[i].name,
 			        icon: '/flask-view-events-portlet/img/flask-marker.png'
@@ -89,28 +91,28 @@ function createMarkers(results, status) {
             else{
 				mark = new google.maps.Marker({
 			        position: results[i].geometry.location,
-			        map: map,
+			        map: _flaskMap.map,
 			        title: results[i].name,
 			    });
             }
-            markers.push(mark);
+            _flaskMap.markers.push(mark);
             var infowindow = new google.maps.InfoWindow();
             google.maps.event.addListener(mark, 'click', (function(mark, i) {
             	return function() {
-	                clearInfos();
+            		_flaskMap.clearInfos();
 	                var content= '<div style="display: inline-flex;"><img src="' + results[i].icon + '" style="width:20%;"/><font style="color:#000; "><b>' + results[i].name + 
 	                '</b><br /><br />Vicinity: ' + results[i].vicinity + '</font></div>';
 	                infowindow.setContent(content);
-	                infowindow.open(map,mark);
+	                infowindow.open(_flaskMap.map, mark);
             	}
             })(mark, i));
-            infos.push(infowindow);        
+            _flaskMap.infos.push(infowindow);        
         }
     } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
-        alert('Sorry, nothing is found');
+//        alert('Sorry, nothing is found');
     }
 }
-function createMarker(obj) {
+_flaskMap.createMarker = function (obj) {
 	var isSubscribed = false;
 	var coords = new google.maps.LatLng(
 			obj['geometry']['location'].lat(),
