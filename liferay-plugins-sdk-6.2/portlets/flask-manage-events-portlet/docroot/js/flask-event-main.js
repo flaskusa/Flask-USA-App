@@ -189,7 +189,7 @@ function editEvent(rowData) {
 			$("#eventDetailsDataTable").show();
 			$("#infoTypeId").val($(this).attr("alt"));
 		})
-		fnRenderLogo(rowData.eventImageUUID, rowData.eventImageGroupId, $("#eventImage"),false)
+		fnRenderLogo(rowData.eventImageUUID, rowData.eventImageGroupId, $("#eventImage"),true);
 		createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
 		loadEventDetailsData(rowData.eventId);
 		validate();
@@ -231,7 +231,7 @@ function saveEvent() {
 							$("#mcontents").css("cursor","default");
 							IsNew = true;
 						}
-						if ($(".dz-image").length>0) {
+						if ($("#eventLogoImage").length>0) {
 							fnSaveEventLogo(data.eventId,IsNew);
 						}
 						else {

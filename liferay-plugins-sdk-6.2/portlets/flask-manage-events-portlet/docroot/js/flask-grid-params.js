@@ -232,37 +232,42 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 
 
 function fnRenderLogo(imageUUID, imageGroupId,container ,editable) {
-	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID});
-	$(objdiv).appendTo($(container));
-	if (editable) {
-		$(objdiv).click(function() {
-	    	$(this).toggleClass("activeImage");
-	    	if ($(".activeImage").length>0) {
-	    		if (iSelected==false) {
-	    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
-	    			$(objDel).appendTo($(container));
-	    			iSelected = true;
-	    			$(objDel).click(function() {
-	    				$("#spinningSquaresG").show();
-	    				$(".activeImage").each(function() {
-	    					_flaskLib.deleteImage($(this).attr("data-uuid"), imageGroupId, objDel);
-	    					$(this).remove();
-	    				});
-	    				if ($(".activeImage").length==0) {
-	    					$("#spinningSquaresG").hide();
-	    					$(this).remove();
-	    					iSelected = false;
-	    				}
-	    			});
-	    		}
-	    	}
-	    	else {
-	    		$(".cssDelImages").remove();
-	    		iSelected = false;
-	    	}
-	    });
-
+	if(imageUUID!=""){
+		var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
+		var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID});
+		$(objdiv).appendTo($(container));
+		if (editable) {
+			$(objdiv).click(function() {
+		    	$(this).toggleClass("activeImage");
+		    	if ($(".activeImage").length>0) {
+		    		if (iSelected==false) {
+		    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+		    			$(objDel).appendTo($(container));
+		    			iSelected = true;
+		    			$(objDel).click(function() {
+		    				$("#spinningSquaresG").show();
+		    				$(".activeImage").each(function() {
+		    					_flaskLib.deleteImage($(this).attr("data-uuid"), imageGroupId, objDel);
+		    					fnBuildEventUpload(imageContainer);
+		    					$(this).remove();
+		    				});
+		    				if ($(".activeImage").length==0) {
+		    					$("#spinningSquaresG").hide();
+		    					$(this).remove();
+		    					iSelected = false;
+		    				}
+		    			});
+		    		}
+		    	}
+		    	else {
+		    		$(".cssDelImages").remove();
+		    		iSelected = false;
+		    	}
+		    });
+		}
+	}
+	else{
+		fnBuildEventUpload(imageContainer);
 	}
 }
 
