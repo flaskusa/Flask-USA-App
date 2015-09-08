@@ -137,7 +137,7 @@ function fnGetEventImages(eventId,venueId){
 	getVenueData(venueId);
 	var flaskRequest = new Request();
 	params= {'eventId': eventId};
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENTDETAIL_WITH_IMAGES , params, 
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT_VENUE_DETAIL_WITH_IMAGES , params, 
 		function(data){
 			var arrPreEvent = [];
 			var arrDurEvent = [];
@@ -186,39 +186,47 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
 	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
-			var objtbl = $("<table/>",{'cellpadding':'5px'});
-			$.each(objFields, function(idx, obj){
-				var objtrHead = $("<tr/>");
-				$.each(obj,function(key,value){
-					var objtr = $("<tr/>");
-					var valueTd = $("<td/>",{'align':'left','width':'100%'});				
-					var evalue = eval("objEventDetails."+key);
-					var caption = value;
-					$(valueTd).html(evalue);
-					$(valueTd).appendTo($(objtr));
-					$(objtr).appendTo($(objtbl));
+			console.log(objEventDetails.showDescription);
+			if(objEventDetails.showDescription){
+				var imgURL = "";
+				var objMainTable = $("<table/>",{'class':'eventDetailBoxWithImages'});
+				var objMainTr = $("<tr/>");
+				var imageTd = $("<td/>",{'align':'left','valign':'top'});
+				var textDataTd = $("<td/>",{'align':'left','valign':'top'});
+				var objContent = $("<div/>",{'width':'100%'});
+				
+				var objtbl = $("<table/>",{'cellpadding':'5px'});
+				$.each(objFields, function(idx, obj){
+					var objtrHead = $("<tr/>");
+					$.each(obj,function(key,value){
+						var objtr = $("<tr/>");
+						var valueTd = $("<td/>",{'align':'left','width':'100%'});				
+						var evalue = eval("objEventDetails."+key);
+						var caption = value;
+						$(valueTd).html(evalue);
+						$(valueTd).appendTo($(objtr));
+						$(objtr).appendTo($(objtbl));
+					});
 				});
-			});
-			
-			var imgURL = "";
-			var objMainTable = $("<table/>",{'class':'eventDetailBoxWithImages'});
-			var objMainTr = $("<tr/>");
-			var imageTd = $("<td/>",{'align':'left','valign':'top'});
-			var textDataTd = $("<td/>",{'align':'left','valign':'top'});
-			var objContent = $("<div/>",{'width':'100%'});
-
-			objImage = jQuery.parseJSON(objImg.EventDetailImage);
-			imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
-			$(objContent).attr("style","background:url('"+imgURL+"');");
-			$(objContent).addClass("slideImage");
-			$(objContent).appendTo(imageTd);
-			
-			$(imageTd).appendTo($(objMainTr));
-			$(objtbl).appendTo($(textDataTd));
-			$(textDataTd).appendTo($(objMainTr));
-			$(objMainTr).appendTo($(objMainTable));
-
-			objArray.push($(objMainTable));
+				$(objtbl).appendTo($(textDataTd));
+				objImage = jQuery.parseJSON(objImg.EventDetailImage);
+				imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
+				$(objContent).attr("style","background:url('"+imgURL+"');");
+				$(objContent).addClass("slideImage");
+				$(objContent).appendTo(imageTd);
+				
+				$(imageTd).appendTo($(objMainTr));
+				$(textDataTd).appendTo($(objMainTr));
+				
+				$(objMainTr).appendTo($(objMainTable));
+				objArray.push($(objMainTable));
+			}
+			else{
+				objImage = jQuery.parseJSON(objImg.EventDetailImage);
+				imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
+				var imgObj = $("<img/>",{'src':imgURL,'height':'100%','width':'100%'});
+				objArray.push(imgObj);
+			}
 		});
 	}
 	else{
