@@ -157,20 +157,21 @@ function fnGetEventImages(eventId,venueId){
 					}
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
-				case  1: case 2:
-			    	arrPreEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPreEvent)
-			        break;
-			    case 3:
-			    	arrDurEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrDurEvent)
-			        break;
-			    case 4:
-			    	arrPosEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPosEvent)
-			        break;
+					case  _eventModel.INFO_TYPE.PreEvent: 
+				    	arrPreEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPreEvent)
+				        break;
+				    case _eventModel.INFO_TYPE.DuringEvent:
+				    	arrDurEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrDurEvent)
+				        break;
+				    case _eventModel.INFO_TYPE.PostEvent:
+				    	arrPosEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPosEvent)
+				    	break;
 				}				
-			});				
-			fnSlider(2,arrPreEvent,eventId,venueId);
-			fnSlider(3,arrDurEvent,eventId,venueId);
-			fnSlider(4,arrPosEvent,eventId,venueId);
+			});	
+			
+			fnSlider(_eventModel.INFO_TYPE.PreEvent, arrPreEvent,eventId,venueId);
+			fnSlider(_eventModel.INFO_TYPE.DuringEvent, arrDurEvent,eventId,venueId);
+			fnSlider(_eventModel.INFO_TYPE.PostEvent, arrPosEvent,eventId,venueId);
 			fnStopProgress();
 		},
 		function (data){
@@ -273,7 +274,7 @@ function fnSlider(infoType,arrImage,eventId,venueId){
 				marker_infoType = infoType;
 				// map initialization
 				initializeMap();
-		 		initMenuList();	 		
+		 		initMenuList(infoType);	 		
 		 		window.location.hash = '#Details';
 		 		$("#spinningSquaresG").hide();
 			});
@@ -445,7 +446,7 @@ function getVenueData(venueId){
 	});
 }
 
-function initMenuList(){
+function initMenuList(infoType){
 	var arr = [], len;
 	var menuContainer = $("#jqxWidget");
 	menuContainer.html("");
@@ -461,7 +462,7 @@ function initMenuList(){
 		var ulObj = $("<ul/>");
 		for(var iCount=0;iCount<len;iCount++){
 			var eachEventDetailJSON = $.parseJSON(eventDetailJSON[iCount].EventDetail);
-			if($.inArray(eachEventDetailJSON.infoTypeCategoryName, menuArray) == -1){
+			if(eachEventDetailJSON.infoTypeId == infoType && $.inArray(eachEventDetailJSON.infoTypeCategoryName, menuArray) == -1){
 				menuArray.push(eachEventDetailJSON.infoTypeCategoryName); 	//Push distinct menu here
 				var liObj = $("<li/>");
 				$(liObj).html(eachEventDetailJSON.infoTypeCategoryName);

@@ -24,6 +24,11 @@ _eventModel.setDetroitAsGeoLocation = function(){
 	_eventModel.currentGeoLocation.longitude = _eventModel.detroitGeoLocation.longitude;
 	
 }
+_eventModel.INFO_TYPE = {
+		PreEvent : 1,
+		DuringEvent : 2,
+		PostEvent: 3
+}
 _eventModel.DATA_MODEL= {
 		EVENT: 
 			[

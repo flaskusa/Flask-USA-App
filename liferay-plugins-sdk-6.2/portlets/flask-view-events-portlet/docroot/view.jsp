@@ -76,7 +76,7 @@
 		<div class="row-fluid fullwidth">
 		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div>
 		  <div id="col2" class="span10 col2">
-				<div id="wowslider-container2" class="Carousel"></div>
+				<div id="wowslider-container1" class="Carousel"></div>
 		  </div>
 		</div>
 	</div>
@@ -84,7 +84,7 @@
 		<div class="row-fluid fullwidth">
 		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/at.png);"></div>
 		  <div id="col2" class="span10 col2">
-				<div id="wowslider-container3" class="Carousel"></div>
+				<div id="wowslider-container2" class="Carousel"></div>
 		  </div>
 		</div>
 	</div>
@@ -92,7 +92,7 @@
 		<div class="row-fluid fullwidth">
 		  <div class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Post.png);"></div>
 		  <div class="span10 col2">
-				<div id="wowslider-container4" class="Carousel"></div>
+				<div id="wowslider-container3" class="Carousel"></div>
 		  </div>
 		</div>
 	</div>
