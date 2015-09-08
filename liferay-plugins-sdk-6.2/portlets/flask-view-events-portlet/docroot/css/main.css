@@ -478,6 +478,11 @@ input.btn.btn-info.cssback {
 	.owl-pagination {
  	   margin-top: -35px !important;
 	}
+	
+	.photo{
+	    height: 190px !important;
+	    margin: 5px;
+	}
 }		
 
 @media (min-width: 641px) and (max-width: 3000px){
@@ -627,6 +632,10 @@ input.btn.btn-info.cssback {
 	  right: -45px;
 	  top: 115px;
 	}	
+	
+	.photo{
+		height: 300px !important;
+	}
 }	
 
 .jqx-tabs-headerWrapper {
