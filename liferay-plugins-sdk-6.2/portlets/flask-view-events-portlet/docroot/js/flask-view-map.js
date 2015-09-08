@@ -16,12 +16,14 @@ _flaskMap.initializeMap = function() {
 	    };
 	    _flaskMap.map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
 	    _flaskMap.findPlaces();
+	    //_flaskMap.findPlaces1();
 	}catch(ex){
-		Console.log("Error in loading google map");
+		console.log("Error in loading google map");
 		_flaskLib.showErrorMessage('action-msg',ex.message);
 	}
 
 }
+
 _flaskMap.clearOverlays = function() {
     if (_flaskMap.markers) {
         for (i in _flaskMap.markers) {
@@ -48,11 +50,24 @@ _flaskMap.findPlaces = function () {
     var request = {
         location: _flaskMap.cur_location,
         radius: radius,
-        types: ['food', 'bar', 'store']
+        types: ['bar', 'restaurant', 'liquor_store', 'night_club']
     };
     service = new google.maps.places.PlacesService(_flaskMap.map);
     service.search(request, _flaskMap.createMarkers);
-    
+}
+
+_flaskMap.findPlaces1 = function () {
+    var radius = 2000;
+    var lat = latitude;
+    var lng = longitude;
+    _flaskMap.cur_location = new google.maps.LatLng(lat, lng);
+    var request = {
+        location: _flaskMap.cur_location,
+        radius: radius,
+        types: ['parking']
+    };
+    service = new google.maps.places.PlacesService(_flaskMap.map);
+    service.search(request, _flaskMap.createMarkers);
 }
 _flaskMap.createMarkers = function (results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
@@ -79,13 +94,26 @@ _flaskMap.createMarkers = function (results, status) {
         for (var i = 0; i < results.length; i++) {
         	var mark;
             if(_flaskMap.createMarker(results[i])){
-            	console.log(results[i].geometry.location);
+            	for(var j=0; j<results[i].types.length; j++){
+            		if(results[i].types[j]=="bar"){
+            			icon_url = '/flask-view-events-portlet/img/icon_bar.png';
+            		}
+            		if(results[i].types[j]=="parking"){
+            			icon_url = '/flask-view-events-portlet/img/icon_parking.png';
+            		}
+            		if(results[i].types[j]=="liquor_store"){
+            			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
+            		}
+            		if(results[i].types[j]=="night_club"){
+            			icon_url = '/flask-view-events-portlet/img/flask-marker.png';
+            		}
+            	}
             	mark = new google.maps.Marker({
 			        position: results[i].geometry.location,
 			        map: _flaskMap.map,
 			        animation:  google.maps.Animation.DROP,
 			        title: results[i].name,
-			        icon: '/flask-view-events-portlet/img/flask-marker.png'
+			        icon: icon_url
 			    });
             }
             else{
