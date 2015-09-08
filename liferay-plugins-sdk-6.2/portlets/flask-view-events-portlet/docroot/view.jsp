@@ -18,6 +18,7 @@
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@	page import="com.liferay.portal.model.Address" %>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
+
 <%
   com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
   long repositoryId = themeDisplay.getLayout().getGroupId();
@@ -35,6 +36,7 @@
 <aui:script use="array-extras">
 	$(document).ready(function(){
 		initEventList();
+		_flaskMap.initializeMap();
 	  	//$("#owl-example").owlCarousel();
 	});
 </aui:script>
