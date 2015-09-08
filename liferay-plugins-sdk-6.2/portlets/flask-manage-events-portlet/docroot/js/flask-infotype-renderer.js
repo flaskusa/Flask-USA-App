@@ -378,7 +378,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"id":"website",
 			"value":"",
 			"placeholder":"",
-			"maxlength":"30",
+			"maxlength":"255",
 			"Class":""
 			}]
 		},
@@ -488,7 +488,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 					"id":"website",
 					"value":"",
 					"placeholder":"",
-					"maxlength":"30",
+					"maxlength":"255",
 					"Class":""
 					}]
 				},
