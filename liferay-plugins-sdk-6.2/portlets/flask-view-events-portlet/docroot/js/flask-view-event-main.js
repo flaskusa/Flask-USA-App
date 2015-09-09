@@ -457,8 +457,12 @@ function initMenuList(objDetails){
 			height: '100%',
 			scrollPosition: 'both'
 		});	
+		$("li").click(function(){
+			_flaskMap.findPlaces($(this).find('.jqx-tabs-titleContentWrapper').html().toLowerCase());
+		});
 	}
 	else{
+		_flaskMap.findPlaces("");
 		$(menuContainer).html("No data found");
 		$(menuContainer).addClass("jqxNoDataFound");
 		//_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
