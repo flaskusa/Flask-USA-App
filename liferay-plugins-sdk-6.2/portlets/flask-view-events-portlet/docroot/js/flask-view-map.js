@@ -8,7 +8,7 @@ _flaskMap.placeType;
 _flaskMap.markers = Array();
 _flaskMap.infos = Array();
 _flaskMap.cur_location;
-_flaskMap.initializeMap = function(places) {
+_flaskMap.initializeMap = function() {
 	try{
 		console.log("lat: "+_flaskMap.latitude);
 		console.log("lng: "+_flaskMap.longitude);
@@ -20,7 +20,7 @@ _flaskMap.initializeMap = function(places) {
 	        mapTypeId: google.maps.MapTypeId.ROADMAP
 	    };
 	    _flaskMap.map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-	    _flaskMap.findPlaces(places);
+	    //_flaskMap.findPlaces(places);
 	    //_flaskMap.findPlaces1();
 	}catch(ex){
 		console.log("Error in loading google map");
