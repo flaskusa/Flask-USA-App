@@ -24,7 +24,7 @@ function formatUnixToTime(tdate)
 function renderEventList(tdata) {
 	 var divRow = $('#placeholder');
 	 $(divRow).html("");
-	 if(tdata.Events.length == 0){
+	 if(tdata.Events == null || tdata.Events.length == 0){
 		$("<span class='control-label-nocolor'>There are no events</span>").appendTo($("#placeholder"));
 		return;
 	 }
@@ -145,10 +145,10 @@ function fnGetEventImages(eventId,venueId){
 			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
 		    $(objWeatherDiv).html($("#weather-background"));
 		    arrPreEvent.push(objWeatherDiv);	
-			objEventDetails = data.EventDetails;
+			objEventDetails = data.Details;
 			eventDetailJSON = $.extend(true, {}, objEventDetails);
 			$.each(objEventDetails, function(idx, obj) {
-				objEventDetail = jQuery.parseJSON(obj.EventDetail);
+				objEventDetail = jQuery.parseJSON(obj.Detail);
 				if(objEventDetail.latitude != "")
 					{
 						lat_marker.push([objEventDetail.latitude, objEventDetail.infoTypeId]);
@@ -158,13 +158,13 @@ function fnGetEventImages(eventId,venueId){
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
 					case  _eventModel.INFO_TYPE.PreEvent: 
-				    	arrPreEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPreEvent)
+				    	arrPreEvent = fnFillImageArray(obj.DetailImages,obj.Detail,arrPreEvent)
 				        break;
 				    case _eventModel.INFO_TYPE.DuringEvent:
-				    	arrDurEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrDurEvent)
+				    	arrDurEvent = fnFillImageArray(obj.DetailImages,obj.Detail,arrDurEvent)
 				        break;
 				    case _eventModel.INFO_TYPE.PostEvent:
-				    	arrPosEvent = fnFillImageArray(obj.EventDetailImages,obj.EventDetail,arrPosEvent)
+				    	arrPosEvent = fnFillImageArray(obj.DetailImages,obj.Detail,arrPosEvent)
 				    	break;
 				}				
 			});	
@@ -209,7 +209,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 					});
 				});
 				$(objtbl).appendTo($(textDataTd));
-				objImage = jQuery.parseJSON(objImg.EventDetailImage);
+				objImage = jQuery.parseJSON(objImg.DetailImage);
 				imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
 				$(objContent).attr("style","background:url('"+imgURL+"');");
 				$(objContent).addClass("slideImage");
@@ -222,7 +222,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 				objArray.push($(objMainTable));
 			}
 			else{
-				objImage = jQuery.parseJSON(objImg.EventDetailImage);
+				objImage = jQuery.parseJSON(objImg.DetailImage);
 				imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
 				var imgObj = $("<img/>",{'src':imgURL,'height':'100%','width':'100%'});
 				objArray.push(imgObj);
@@ -469,7 +469,7 @@ function initMenuList(infoType){
 		var detailsJSONArray = [];
 		var ulObj = $("<ul/>");
 		for(var iCount=0;iCount<len;iCount++){
-			var eachEventDetailJSON = $.parseJSON(eventDetailJSON[iCount].EventDetail);
+			var eachEventDetailJSON = $.parseJSON(eventDetailJSON[iCount].Detail);
 			if(eachEventDetailJSON.infoTypeId == infoType && $.inArray(eachEventDetailJSON.infoTypeCategoryName, menuArray) == -1){
 				menuArray.push(eachEventDetailJSON.infoTypeCategoryName); 	//Push distinct menu here
 				var liObj = $("<li/>");
@@ -486,7 +486,7 @@ function initMenuList(infoType){
 			var divSlider = $("<div/>",{"class":"MainSlider"});
 			$(divSlider).owlCarousel();
 			$.each(eventDetailJSON,function(x,y){
-				var EventDetailJSON = $.parseJSON(y.EventDetail);
+				var EventDetailJSON = $.parseJSON(y.Detail);
 				if(EventDetailJSON.infoTypeCategoryName == b){
 					var divSlideObj = $("<div/>",{"class":"photo"});
 					var objFields = _eventModel.getObjectFields(EventDetailJSON.infoTypeCategoryName.toLowerCase());
