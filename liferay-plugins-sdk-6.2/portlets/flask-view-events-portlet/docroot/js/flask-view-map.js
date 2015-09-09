@@ -2,20 +2,25 @@ var _flaskMap = {};
 
 _flaskMap.geocoder;
 _flaskMap.map;
+_flaskMap.latitude;
+_flaskMap.longitude;
+_flaskMap.placeType;
 _flaskMap.markers = Array();
 _flaskMap.infos = Array();
 _flaskMap.cur_location;
-_flaskMap.initializeMap = function() {
+_flaskMap.initializeMap = function(places) {
 	try{
+		console.log("lat: "+_flaskMap.latitude);
+		console.log("lng: "+_flaskMap.longitude);
 	    _flaskMap.geocoder = new google.maps.Geocoder();
-	    var myLatlng = new google.maps.LatLng(latitude,longitude);
+	    var myLatlng = new google.maps.LatLng(_flaskMap.latitude,_flaskMap.longitude);
 	    var myOptions = {
 	        zoom: 14,
 	        center: myLatlng,
 	        mapTypeId: google.maps.MapTypeId.ROADMAP
 	    };
 	    _flaskMap.map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-	    _flaskMap.findPlaces();
+	    _flaskMap.findPlaces(places);
 	    //_flaskMap.findPlaces1();
 	}catch(ex){
 		console.log("Error in loading google map");
@@ -25,13 +30,13 @@ _flaskMap.initializeMap = function() {
 }
 
 _flaskMap.clearOverlays = function() {
-    if (_flaskMap.markers) {
+
         for (i in _flaskMap.markers) {
             _flaskMap.markers[i].setMap(null);
         }
         _flaskMap.markers = [];
         _flaskMap.infos= [];
-    }
+
 }
 _flaskMap.clearInfos = function() {
     if (_flaskMap.infos) {
@@ -42,33 +47,20 @@ _flaskMap.clearInfos = function() {
         }
     }
 }
-_flaskMap.findPlaces = function () {
+_flaskMap.findPlaces = function (places) {
     var radius = 2000;
-    var lat = latitude;
-    var lng = longitude;
+    var lat = _flaskMap.latitude;
+    var lng = _flaskMap.longitude;
     _flaskMap.cur_location = new google.maps.LatLng(lat, lng);
     var request = {
         location: _flaskMap.cur_location,
         radius: radius,
-        types: ['bar', 'restaurant', 'liquor_store', 'night_club']
+        types: [places]
     };
     service = new google.maps.places.PlacesService(_flaskMap.map);
     service.search(request, _flaskMap.createMarkers);
 }
 
-_flaskMap.findPlaces1 = function () {
-    var radius = 2000;
-    var lat = latitude;
-    var lng = longitude;
-    _flaskMap.cur_location = new google.maps.LatLng(lat, lng);
-    var request = {
-        location: _flaskMap.cur_location,
-        radius: radius,
-        types: ['parking']
-    };
-    service = new google.maps.places.PlacesService(_flaskMap.map);
-    service.search(request, _flaskMap.createMarkers);
-}
 _flaskMap.createMarkers = function (results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
     	_flaskMap.clearOverlays();
