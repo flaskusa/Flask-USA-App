@@ -369,20 +369,20 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			Event event  = getEvent(eventId, serviceContext);
 			eventJsonObj.put("Event", JSONFactoryUtil.looseSerialize(event));
 			JSONArray eventDetailArr =  JSONFactoryUtil.createJSONArray();
-			eventJsonObj.put("EventDetails", eventDetailArr);
+			eventJsonObj.put("Details", eventDetailArr);
 			eventDetails = EventDetailUtil.findByEventId(eventId);
 			eventDetails = FlaskUtil.setNamesForEventDetail(eventDetails);
 			
 			for (EventDetail eventDetail : eventDetails) {
 				JSONObject eventDetailJsonObj =  JSONFactoryUtil.createJSONObject();
-				eventDetailJsonObj.put("EventDetail", JSONFactoryUtil.looseSerialize(eventDetail));
+				eventDetailJsonObj.put("Detail", JSONFactoryUtil.looseSerialize(eventDetail));
 				eventDetailArr.put(eventDetailJsonObj);
 				detailImgList = getEventDetailImages(eventDetail.getEventDetailId(), serviceContext);
 				JSONArray eventDetailImageArr =  JSONFactoryUtil.createJSONArray();
-				eventDetailJsonObj.put("EventDetailImages", eventDetailImageArr);
+				eventDetailJsonObj.put("DetailImages", eventDetailImageArr);
 				for (EventDetailImage detailImage : detailImgList) {
 					JSONObject eventDetailImageObj =  JSONFactoryUtil.createJSONObject();
-					eventDetailImageObj.put("EventDetailImage", JSONFactoryUtil.looseSerialize(detailImage));
+					eventDetailImageObj.put("DetailImage", JSONFactoryUtil.looseSerialize(detailImage));
 					eventDetailImageArr.put(eventDetailImageObj);
 				}
 			}
@@ -402,17 +402,14 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			event = JSONFactoryUtil.createJSONObject(eventObj.getString("Event"));
 		} catch (JSONException e) {
 			LOGGER.error("Exception in getEventVenueDetailsWithImages. Exception: " +  e.getMessage());
-
 		}
-		
 		long venueId = event.getLong("venueId");
-
 		JSONObject venueJsonObj = VenueLocalServiceUtil.getVenueDetailsWithImages(venueId);
-		
-		eventObj.put("Venue", venueJsonObj);
-		
+		eventObj = FlaskUtil.mergeEventVenueJSON(eventObj, venueJsonObj);
 		return eventObj;
 	}
+	
+	
 
 	
 

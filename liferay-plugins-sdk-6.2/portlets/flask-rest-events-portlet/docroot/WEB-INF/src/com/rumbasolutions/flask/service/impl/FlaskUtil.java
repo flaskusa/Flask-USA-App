@@ -369,5 +369,25 @@ public class FlaskUtil {
 		return latitudeLongitudeMap;
 	}
 
+	public static JSONObject mergeEventVenueJSON(JSONObject eventObj, JSONObject venueObj){
+		
+		if(eventObj == null || venueObj == null){
+			return null;
+		}
+		eventObj.put("Venue", venueObj.getString("Venue"));
+		JSONArray eventArr = eventObj.getJSONArray("Details");
+		if(eventArr == null){
+			eventArr = JSONFactoryUtil.createJSONArray();
+		}
+		JSONArray  venueArr = venueObj.getJSONArray("Details");
+		if(venueArr != null){
+			for(int i=0; i < venueArr.length(); i++ ){
+				eventArr.put(venueArr.getJSONObject(i));
+			}
+		}
+		eventObj.put("Details", eventArr);
+		
+		return eventObj;
+	}
 	
 }

@@ -61,31 +61,31 @@ public class VenueLocalServiceImpl extends VenueLocalServiceBaseImpl {
 		try{
 			Venue venue = getVenue(venueId);
 			venue = FlaskUtil.setVenueStringValues(venue);
-			venueJsonObj.put("VenueInfo", JSONFactoryUtil.looseSerialize(venue));
+			venueJsonObj.put("Venue", JSONFactoryUtil.looseSerialize(venue));
 			venueImgList = VenueImageUtil.findByvenueId(venueId);
 			//Add venue image information
 			JSONArray venueImageArr =  JSONFactoryUtil.createJSONArray();
-			venueJsonObj.put("VenueImages", venueImageArr);
+			venueJsonObj.put("Images", venueImageArr);
 			for (VenueImage venueImage : venueImgList) {
 				JSONObject venueImageObj =  JSONFactoryUtil.createJSONObject();
-				venueImageObj.put("VenueImage", JSONFactoryUtil.looseSerialize(venueImage));
+				venueImageObj.put("Image", JSONFactoryUtil.looseSerialize(venueImage));
 				venueImageArr.put(venueImageObj);
 			}
 			//Add venue detail information
 			JSONArray venueDetailArr =  JSONFactoryUtil.createJSONArray();
-			venueJsonObj.put("VenueDetails", venueDetailArr);
+			venueJsonObj.put("Details", venueDetailArr);
 			venueDetails = VenueDetailUtil.findByVenueId(venueId);
 			for (VenueDetail venueDetail : venueDetails) {
 				JSONObject venueDetailJsonObj =  JSONFactoryUtil.createJSONObject();
 				venueDetail = FlaskUtil.setNamesForVenueDetail(venueDetail);
-				venueDetailJsonObj.put("VenueDetail", JSONFactoryUtil.looseSerialize(venueDetail));
+				venueDetailJsonObj.put("Detail", JSONFactoryUtil.looseSerialize(venueDetail));
 				venueDetailArr.put(venueDetailJsonObj);
 				detailImgList = VenueDetailImageUtil.findByVenueDetailId(venueDetail.getVenueDetailId());
 				JSONArray venueDetailImageArr =  JSONFactoryUtil.createJSONArray();
-				venueDetailJsonObj.put("VenueDetailImages", venueDetailImageArr);
+				venueDetailJsonObj.put("DetailImages", venueDetailImageArr);
 				for (VenueDetailImage detailImage : detailImgList) {
 					JSONObject venueDetailImageObj =  JSONFactoryUtil.createJSONObject();
-					venueDetailImageObj.put("VenueDetailImage", JSONFactoryUtil.looseSerialize(detailImage));
+					venueDetailImageObj.put("DetailImage", JSONFactoryUtil.looseSerialize(detailImage));
 					venueDetailImageArr.put(venueDetailImageObj);
 				}
 			}			
