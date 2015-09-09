@@ -142,6 +142,9 @@ function fnGetEventImages(eventId,venueId){
 			var arrPreEvent = [];
 			var arrDurEvent = [];
 			var arrPosEvent = [];
+			var arrPreEventDetails = [];
+			var arrDurEventDetails = [];
+			var arrPosEventDetails = [];
 			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
 		    $(objWeatherDiv).html($("#weather-background"));
 		    arrPreEvent.push(objWeatherDiv);	
@@ -159,19 +162,22 @@ function fnGetEventImages(eventId,venueId){
 				switch(parseInt(objEventDetail.infoTypeId)) {
 					case  _eventModel.INFO_TYPE.PreEvent: 
 				    	arrPreEvent = fnFillImageArray(obj.DetailImages,obj.Detail,arrPreEvent)
+				    	arrPreEventDetails.push(obj);
 				        break;
 				    case _eventModel.INFO_TYPE.DuringEvent:
 				    	arrDurEvent = fnFillImageArray(obj.DetailImages,obj.Detail,arrDurEvent)
+				    	arrDurEventDetails.push(obj);
 				        break;
 				    case _eventModel.INFO_TYPE.PostEvent:
 				    	arrPosEvent = fnFillImageArray(obj.DetailImages,obj.Detail,arrPosEvent)
+				    	arrPosEventDetails.push(obj);
 				    	break;
 				}				
 			});	
 			
-			fnSlider(_eventModel.INFO_TYPE.PreEvent, arrPreEvent,eventId,venueId);
-			fnSlider(_eventModel.INFO_TYPE.DuringEvent, arrDurEvent,eventId,venueId);
-			fnSlider(_eventModel.INFO_TYPE.PostEvent, arrPosEvent,eventId,venueId);
+			fnSlider(_eventModel.INFO_TYPE.PreEvent, arrPreEvent,eventId,venueId,arrPreEventDetails);
+			fnSlider(_eventModel.INFO_TYPE.DuringEvent, arrDurEvent,eventId,venueId,arrDurEventDetails);
+			fnSlider(_eventModel.INFO_TYPE.PostEvent, arrPosEvent,eventId,venueId,arrPosEventDetails);
 			fnStopProgress();
 		},
 		function (data){
@@ -186,7 +192,6 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
 	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
-			console.log(objEventDetails.showDescription);
 			if(objEventDetails.showDescription){
 				var imgURL = "";
 				var objMainTable = $("<table/>",{'class':'eventDetailBoxWithImages'});
@@ -256,52 +261,9 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	return objArray;
 }
 
-function fnSlider(infoType,arrImage,eventId,venueId){
+function fnSlider(infoType,arrImage,eventId,venueId,objDetails){
 	var Slider = "#wowslider-container"+infoType;
-	$(Slider).html("");
-	$(Slider).attr("class","Carousel");
-	$(Slider).attr('data-eventId',eventId);
-	$(Slider).attr('data-venueId',venueId);
-	$(Slider).owlCarousel({
-		items:3,
-		navigation:true,
-		navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
-		pagination:true
-	});
-	
-	if(arrImage.length>0){
-		$.each(arrImage, function( index, value ) {
-			var objDiv = $("<div/>",{'class':'photo'});
-			var objImg = value;
-			$(objImg).appendTo(objDiv);
-			$(objImg).click(function(event){
-		    	$("#spinningSquaresG").show();
-		 		$('#one').hide();		 
-		 		$('#two').hide();
-		 		$('#three').show();
-				marker_infoType = infoType;
-				// map initialization
-				_flaskMap.initializeMap();
-		 		initMenuList(infoType);	 		
-		 		window.location.hash = '#Details';
-		 		$("#spinningSquaresG").hide();
-			});
-			$(Slider).data('owlCarousel').addItem(objDiv);
-		});
-	}
-	else{
-		fnBlankSlide(Slider);
-	}
-	
-	/*$(Slider).owlCarousel({
-		items:3,
-		navigation:true,
-		navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
-		pagination:true
-	});*/
-	var click = new Date();
-	var lastClick = new Date();
-	var lastRow = -1;
+	fnCreateSlider(Slider,eventId,venueId,arrImage,infoType,objDetails);
 }
 
 function fnBlankSlide(Slider){
@@ -454,12 +416,12 @@ function getVenueData(venueId){
 	});
 }
 
-function initMenuList(infoType){
+function initMenuList(objDetails){
 	var arr = [], len;
 	var menuContainer = $("#jqxWidget");
 	menuContainer.html("");
 	var divTabs = $("<div/>",{'style':'width:100%;height:100%'});
-	for(key in eventDetailJSON) {
+	for(key in objDetails) {
 		arr.push(key); // get JSON array length
 	}
 	len = arr.length;
@@ -469,8 +431,8 @@ function initMenuList(infoType){
 		var detailsJSONArray = [];
 		var ulObj = $("<ul/>");
 		for(var iCount=0;iCount<len;iCount++){
-			var eachEventDetailJSON = $.parseJSON(eventDetailJSON[iCount].Detail);
-			if(eachEventDetailJSON.infoTypeId == infoType && $.inArray(eachEventDetailJSON.infoTypeCategoryName, menuArray) == -1){
+			var eachEventDetailJSON = $.parseJSON(objDetails[iCount].Detail);
+			if($.inArray(eachEventDetailJSON.infoTypeCategoryName, menuArray) == -1){
 				menuArray.push(eachEventDetailJSON.infoTypeCategoryName); 	//Push distinct menu here
 				var liObj = $("<li/>");
 				$(liObj).html(eachEventDetailJSON.infoTypeCategoryName);
@@ -478,35 +440,14 @@ function initMenuList(infoType){
 			}
 		}
 		$(ulObj).appendTo(divTabs);
-		var screenWidth = $(document).width();		
+		var screenWidth = $(document).width();
 		$.each(menuArray,function(a,b){
 			console.log(a);
 			console.log(b);
-			var divObj = $("<div/>",{"class":b + " Carousel"});
-			var divSlider = $("<div/>",{"class":"MainSlider"});
-			$(divSlider).owlCarousel();
-			$.each(eventDetailJSON,function(x,y){
-				var EventDetailJSON = $.parseJSON(y.Detail);
-				if(EventDetailJSON.infoTypeCategoryName == b){
-					var divSlideObj = $("<div/>",{"class":"photo"});
-					var objFields = _eventModel.getObjectFields(EventDetailJSON.infoTypeCategoryName.toLowerCase());
-					var objtbl = $("<table/>",{'cellpadding':'5px','width':screenWidth + 'px'});
-					$.each(objFields, function(idx, obj){
-						$.each(obj,function(key,value){
-							var objtr = $("<tr/>");
-							var valueTd = $("<td/>",{'align':'left','width':'100%'});				
-							var evalue = eval("EventDetailJSON."+key);
-							var caption = value;
-							$(valueTd).html(evalue);
-							$(valueTd).appendTo($(objtr));
-							$(objtr).appendTo($(objtbl));
-						});
-						$(objtbl).appendTo($(divSlideObj));							
-						$(divSlider).data('owlCarousel').addItem(divSlideObj);
-					});	
-					$(divSlider).appendTo($(divObj));														
-				}
-			});
+			var divObj = $("<div/>",{"class":b});
+			var objArray = [];
+			fnFillImageArray(objDetails[a].DetailImages,objDetails[a].Detail,objArray);
+			fnCreateSlider1(divObj,objArray);				
 			$(divObj).appendTo(divTabs);
 			$(divTabs).appendTo(menuContainer);					
 		});
@@ -540,4 +481,65 @@ function getFilteredEvents(){
 function formatDate(dateVal){
 	var dateObj = new Date(dateVal);
 	return dateObj.toLocaleDateString(); 
+}
+
+
+function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails){
+	$(containerID).html("");
+	$(containerID).attr("class","Carousel");
+	$(containerID).attr('data-eventId',eventId);
+	$(containerID).attr('data-venueId',venueId);
+	$(containerID).owlCarousel({
+		items:3,
+		navigation:true,
+		navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
+		pagination:true
+	});
+	
+	if(arrImage.length>0){
+		$.each(arrImage, function( index, value ) {
+			var objDiv = $("<div/>",{'class':'photo'});
+			var objImg = value;
+			$(objImg).appendTo(objDiv);
+			$(objImg).click(function(event){
+		    	$("#spinningSquaresG").show();
+		 		$('#one').hide();		 
+		 		$('#two').hide();
+		 		$('#three').show();
+				marker_infoType = infoType;
+				// map initialization
+				_flaskMap.initializeMap();
+		 		initMenuList(objDetails);	 		
+		 		window.location.hash = '#Details';
+		 		$("#spinningSquaresG").hide();
+			});
+			$(containerID).data('owlCarousel').addItem(objDiv);
+		});
+	}
+	else{
+		fnBlankSlide(containerID);
+	}	
+}
+
+function fnCreateSlider1(containerID,arrImage){
+	$(containerID).html("");
+	$(containerID).attr("class","Carousel");
+	$(containerID).owlCarousel({
+		items:3,
+		navigation:true,
+		navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
+		pagination:true
+	});
+	
+	if(arrImage.length>0){
+		$.each(arrImage, function( index, value ) {
+			var objDiv = $("<div/>",{'class':'photo'});
+			var objImg = value;
+			$(objImg).appendTo(objDiv);
+			$(containerID).data('owlCarousel').addItem(objDiv);
+		});
+	}
+	else{
+		fnBlankSlide(containerID);
+	}	
 }
