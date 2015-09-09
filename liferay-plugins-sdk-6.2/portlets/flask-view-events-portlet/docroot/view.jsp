@@ -36,7 +36,6 @@
 <aui:script use="array-extras">
 	$(document).ready(function(){
 		initEventList();
-		_flaskMap.initializeMap();
 	  	//$("#owl-example").owlCarousel();
 	});
 </aui:script>
