@@ -1,6 +1,4 @@
 var sample;
-var latitude;
-var longitude;
 var condition;
 
 function showForecastSmall(list)
@@ -45,7 +43,7 @@ function showForecastSmall(list)
 		html=html+ '<div style="float: left; text-align: center; color: #fff;" >';
 		html=html+ '<div class="small_val" title="time">'+time+'</div>\
 		<img style="max-width: 85%; height: 30px !important;" alt="'+text+'" src="/flask-view-events-portlet/css/images/'+icon+'.png"/>\
-		<div class="small_val tc" title="Temp">'+temp+'C</div><div class="small_val tf" title="Temp">'+tempf+'F</div>\
+		<div class="small_val tc" title="Temp">'+tempf+'F</div><div class="small_val tf" title="Temp">'+tempf+'F</div>\
 		</div>';	
 	}
 	$("#forecast_small").html(html);
@@ -114,11 +112,11 @@ WeatherInfo = {
     },
 
     getWeatherData: function(searchQuery) {
-    	w.searchQuery = 'http://api.openweathermap.org/data/2.5/weather?lat='+ latitude +'&lon='+ longitude +'';
+    	w.searchQuery = 'http://api.openweathermap.org/data/2.5/weather?lat='+ _flaskMap.latitude +'&lon='+ _flaskMap.longitude +'';
         $.getJSON(w.searchQuery, function(data) {
             WeatherInfo.setWeatherData(data);
         });
-        w.searchQuery1 = 'http://api.openweathermap.org/data/2.5/forecast?lat='+ latitude +'&lon='+ longitude +'&cnt=15';
+        w.searchQuery1 = 'http://api.openweathermap.org/data/2.5/forecast?lat='+ _flaskMap.latitude +'&lon='+ _flaskMap.longitude +'&cnt=15';
         $.getJSON(w.searchQuery1, function(data) {
         	showForecastSmall(data.list);
         });
@@ -178,14 +176,14 @@ WeatherInfo = {
     changeTempUnit: function(unit) {
         var newTemp = w.tempNumber - 273.15;
         if (unit === 'celsius') {
-        	$('.tc').show();
-        	$('.tf').hide();
-            w.celsius.addClass('checked');
-            w.fahrenheit.removeClass('checked');
-            w.temperature.addClass('celsius-degree');
-            w.temperature.removeClass('fahrenheit-degree');
-            w.temperature.html(Math.round(newTemp));
-            WeatherInfo.changeSpeedUnit('km');
+        	$('.tc').hide();
+        	$('.tf').show();
+            w.temperature.html(Math.round(9/5 * newTemp + 32));
+            w.celsius.removeClass('checked');
+            w.fahrenheit.addClass('checked');
+            w.temperature.removeClass('celsius-degree');
+            w.temperature.addClass('fahrenheit-degree');
+            WeatherInfo.changeSpeedUnit('m');
         } else if (unit === 'fahrenheit') {
         	$('.tc').hide();
         	$('.tf').show();
@@ -230,8 +228,8 @@ WeatherInfo = {
 
 function callWeather(lat, lng) {
 	try{
-		latitude = lat;
-		longitude = lng;
+		_flaskMap.latitude = lat;
+		_flaskMap.longitude = lng;
 	    WeatherInfo.init();
 	}catch(ex){
 		 _flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.WEATHER_ERROR + " Exception: " + ex.message);
