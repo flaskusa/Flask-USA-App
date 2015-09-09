@@ -98,15 +98,13 @@
 
 				String notifications = themeDisplay.getURLPortal() + "/web/flask/friends";
 				%>
-				<c:if test="<%= bShowFlaskAdminMenu %>">
 					<aui:nav-item href="<%= userEvents %>" iconCssClass="icon-user" label="My Events" title="My Events"/>
 					<aui:nav-item href="<%= userTailgates %>" iconCssClass="icon-user" label="My Tailgate" title="My Tailgate"/>
 					<aui:nav-item href="<%= userGroups %>" iconCssClass="icon-user" label="My Groups" title="My Groups"/>
 					<aui:nav-item href="<%= friends %>" iconCssClass="icon-user" label="My Friends" title="My Friends"/>
 					<aui:nav-item href="<%= inviteFriends %>" iconCssClass="icon-user" label="Invite Friends" title="Invite Friends"/>
 					<aui:nav-item href="<%= notifications %>" iconCssClass="icon-user" label="Notification" title="Notification"/>
-				</c:if>
-				<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-user" label="my-account" title="my-account"  />
+					<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-user" label="my-account" title="my-account"  />
 			</c:if>
 
 			<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
