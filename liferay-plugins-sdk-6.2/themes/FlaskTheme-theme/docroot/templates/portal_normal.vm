@@ -28,18 +28,19 @@ var wait = function(callback, seconds) {
 }
 
 $( document ).ready(function() {
-	 if($(".splash").is(":visible"))
-	 {
-	 	$("#wrapper").css({"opacity":"0"});
-	 }
-
-	 $(".splash-arrow").click(function()
-	 {
-	 	fnSplashSlideUp();
-	 });
- 	//$(".drag-handle").hide();
- 	
- 	wait(function(){fnSplashSlideUp();},2)
+	if(getCookie("ShowSplash")!="false"){
+		 if($(".splash").is(":visible"))
+		 {
+		 	$("#wrapper").css({"opacity":"0"});
+		 }
+	 	wait(function(){fnSplashSlideUp();},2)
+	}
+	else{
+		$(".splash").remove();
+		if(Liferay.ThemeDisplay.isSignedIn()){
+			setCookie("ShowSplash","true");
+		}
+	}
 });
 
 $(window).scroll(function() {
@@ -49,10 +50,21 @@ $(window).scroll(function() {
 
 function fnSplashSlideUp(){
 	$(".splash").slideUp("800", function() {
-       $("#wrapper").delay(100).animate({"opacity":"1.0"},800);
-    });
+   		$("#wrapper").delay(100).animate({"opacity":"1.0"},800);
+	});
+	setCookie("ShowSplash","false"); 
 }
 
+function setCookie(key, value) {
+    var expires = new Date();
+    expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+    document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+}
+
+function getCookie(key) {
+    var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    return keyValue ? keyValue[2] : null;
+}
 </script>
 </head>
 
