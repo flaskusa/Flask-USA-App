@@ -26,7 +26,7 @@ function addDetailsClickHandlers() {
 	$(".cssVdCancel").click(function() {
 		$("#venueDetailsForm").hide();
 		$("#venueDetailsDataTable").show();
-		loadVenueDetailsData($('#venueForm #venueId').val(),$("#infoTypeId").val());
+		loadVenueDetailsData($('#venueForm #venueId').val());
 		$("#slides").html("");
 	});
 	
@@ -58,7 +58,7 @@ function contextMenuHandlerDetails(menuItemText, rowData) {
 	}else if (menuItemText == "Delete") {
 		var a = window.confirm("Are you sure ?");
 		if (a) {
-			deleteVenueDetail(rowData.venueDetailId, rowData.venueId, rowData.infoTypeId);
+			deleteVenueDetail(rowData.venueDetailId, $('#venueForm #venueId').val(), rowData.infoTypeId);
 		}
 		return false;
 	}
@@ -121,8 +121,8 @@ $(document).ready(function() {
 	formArea = $("#contentTypeForm"); // Parent Div
 	$("#infoTypeCategoryId").change(function() {
 		$(formArea).html("");
-		var selectedContentType = $("option:selected", this).text().toUpperCase().replace(/ /g,'');
-		_infoTypeRenderer.fnRenderForm(selectedContentType);
+		var selectedContentType = $("option:selected", this).text().toLowerCase().replace(/ /g,'');
+		_infoTypeRenderer.fnRenderForm(selectedContentType,"venue");
 		$('#venueDetailsForm').jqxValidator
 		({
 			hintType: 'label',
@@ -171,7 +171,7 @@ function saveVenueDetails() {
 			    		$("#venueDetailId").val(0);
 			    		$("#infoTypeCategoryId").val(0);
 			    		//$("#infoTypeCategoryId").change();
-			    		loadVenueDetailsData(data.venueId,data.infoTypeId);
+			    		loadVenueDetailsData(data.venueId);
 					}
 				} ,
 				function(data) {
@@ -188,7 +188,7 @@ function deleteVenueDetail(venueDetailId, venueId, infoTypeId) {
 		flaskRequest.sendPOSTRequest(_venueDetailModel.SERVICE_ENDPOINTS.DELETE_VENUE_DETAIL , param,
 			function(data) {
 					_flaskLib.showSuccessMessage('action-msg', _venueDetailModel.MESSAGES.DETAIL_DEL_SUCCESS);
-					loadVenueDetailsData(venueId,infoTypeId);
+					loadVenueDetailsData(venueId);
 			} ,
 			function(data) {
 					_flaskLib.showErrorMessage('action-msg', _venueDetailModel.MESSAGES.DETAIL_DEL_ERR);
@@ -246,7 +246,7 @@ function fnSaveImages(venueDetailId, infoTypeId) {
 			$("#venueDetailId").val(0);
 			$("#infoTypeCategoryId").val(0);
 			//$("#infoTypeCategoryId").change();
-			loadVenueDetailsData($('#venueForm #venueId').val(),infoTypeId);
+			loadVenueDetailsData($('#venueForm #venueId').val());
 		},1)
 	});
 }

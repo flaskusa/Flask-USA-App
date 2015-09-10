@@ -10,7 +10,7 @@ $(document).ready(function() {
 	$("#infoTypeCategoryId").change(function() {
 		$(formArea).html("");
 		var selectedContentType = $("option:selected", this).text().toLowerCase();
-		_infoTypeRenderer.fnRenderForm(selectedContentType);
+		_infoTypeRenderer.fnRenderForm(selectedContentType,"event");
 		$('#eventDetailsForm').jqxValidator
 	    ({
 	        hintType: 'label',
@@ -154,7 +154,7 @@ function saveEventDetails() {
 		}
 	flaskRequest.sendGETRequest(url, params,
 				function(data) {
-					if ($("#eventLogoImage").length > 0) {
+					if ($("#eventImages").length > 0) {
 						fnSaveImages(data.eventDetailId,data.eventId);
 					}
 					else {

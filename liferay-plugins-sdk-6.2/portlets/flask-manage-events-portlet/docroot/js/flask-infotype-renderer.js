@@ -31,16 +31,16 @@ _infoTypeRenderer.getRenderer =  function(type) {
 
 
 
-_infoTypeRenderer.fnRenderForm = function(contentType) {
+_infoTypeRenderer.fnRenderForm = function(contentType,Type) {
 	var obj  = _infoTypeRenderer.getRenderer(contentType);
-	_infoTypeRenderer.fnBuildHtml(obj);
+	_infoTypeRenderer.fnBuildHtml(obj,Type);
 	if ($("#eventDetailId").val()>0) {
 
 	}
 
 }
 
-_infoTypeRenderer.fnBuildHtml = function (Obj) {
+_infoTypeRenderer.fnBuildHtml = function (Obj,Type) {
 	var items = Obj.filter(function(item) {
 		switch(item.type) {
 			case "text":
@@ -56,7 +56,7 @@ _infoTypeRenderer.fnBuildHtml = function (Obj) {
 				return _infoTypeRenderer.fnBuildChecked(item.attr);
 				break;
 			case "upload":
-				return _infoTypeRenderer.fnBuildUpload(item.attr);
+				return _infoTypeRenderer.fnBuildUpload(item.attr,Type);
 				break;
 			default:
 				console.log("Nothing selected");
@@ -118,29 +118,48 @@ _infoTypeRenderer.fnBuildChecked = function (Obj) {
 	var objItemCaptionLable = $('<span/>',{'class':'control-label'}).appendTo(objControls);
 }
 
-_infoTypeRenderer.fnBuildUpload = function (Obj) {
-	  	var strSelected = "";
-	  	dropZone = "";
-	    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo($(formArea));
-	    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].caption}).appendTo(objFormGroup);
-	    $(objControlLable).html(Obj[0].caption);
-	    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
-	    var objForm = $('<form/>',{'class':'dropzone','id':'eventImages','action':Obj[0].action}).appendTo(objFormGroup);
-	    $(objForm).appendTo(objControls);
-	    //return false;
-	    var objEventDetailId = $('<input/>',{'name':'_eventDetailId','id':'_eventDetailId','type':'hidden','value':'0'});
-	    $(objEventDetailId).appendTo(objForm);
-	    var objEventId = $('<input/>',{'name':'_eventId','id':'_eventId','type':'hidden','value':$("#eventId").val()});
-	    $(objEventId).appendTo(objForm);
-	    var objInfoTypeId = $('<input/>',{'name':'_infoTypeId','id':'_infoTypeId','type':'hidden','value':$("#infoTypeId").val()});
-	    $(objInfoTypeId).appendTo(objForm);
-	    var objInfoTypeCategoryId = $('<input/>',{'name':'_infoTypeCategoryId','id':'_infoTypeCategoryId','type':'hidden','value':$("#infoTypeCategoryId").val()});
-	    $(objInfoTypeCategoryId).appendTo(objForm);
-	    var objIsLogo = $('<input/>',{'name':'_isLogo','id':'_isLogo','type':'hidden','value':'N'});
-	    $(objIsLogo).appendTo(objForm);
-	    dropZone = new Dropzone($(objForm).get(0),{
-	    	autoProcessQueue: false
-	    });
+_infoTypeRenderer.fnBuildUpload = function (Obj,Type) {
+  	var strSelected = "";
+  	dropZone = "";
+    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo($(formArea));
+    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].caption}).appendTo(objFormGroup);
+    $(objControlLable).html(Obj[0].caption);
+    var objControls = $('<div/>',{'class':'controls'}).appendTo(objFormGroup);
+	switch(Type) {
+	    case "event":
+		    var objForm = $('<form/>',{'class':'dropzone','id':'eventImages','action':Obj[0].action}).appendTo(objFormGroup);
+		    $(objForm).appendTo(objControls);
+		    var objEventDetailId = $('<input/>',{'name':'_eventDetailId','id':'_eventDetailId','type':'hidden','value':'0'});
+		    $(objEventDetailId).appendTo(objForm);
+		    var objEventId = $('<input/>',{'name':'_eventId','id':'_eventId','type':'hidden','value':$("#eventId").val()});
+		    $(objEventId).appendTo(objForm);	        
+	        break;
+	    case "venue":
+		    var objForm = $('<form/>',{'class':'dropzone','id':'venueImages','action':Obj[0].action}).appendTo(objFormGroup);
+		    $(objForm).appendTo(objControls);
+		    var objvenueDetailId = $('<input/>',{'name':'_venueDetailId','id':'_venueDetailId','type':'hidden','value':'0'});
+		    $(objvenueDetailId).appendTo(objForm);
+		    var objVenueId = $('<input/>',{'name':'_venueId','id':'_venueId','type':'hidden','value':$("#venueId").val()});
+		    $(objVenueId).appendTo(objForm);
+	        break;
+	    default:
+		    var objForm = $('<form/>',{'class':'dropzone','id':'eventImages','action':Obj[0].action}).appendTo(objFormGroup);
+		    $(objForm).appendTo(objControls);
+		    var objEventDetailId = $('<input/>',{'name':'_eventDetailId','id':'_eventDetailId','type':'hidden','value':'0'});
+		    $(objEventDetailId).appendTo(objForm);
+		    var objEventId = $('<input/>',{'name':'_eventId','id':'_eventId','type':'hidden','value':$("#eventId").val()});
+		    $(objEventId).appendTo(objForm);	        
+	        break;
+	}		
+    var objInfoTypeId = $('<input/>',{'name':'_infoTypeId','id':'_infoTypeId','type':'hidden','value':$("#infoTypeId").val()});
+    $(objInfoTypeId).appendTo(objForm);
+    var objInfoTypeCategoryId = $('<input/>',{'name':'_infoTypeCategoryId','id':'_infoTypeCategoryId','type':'hidden','value':$("#infoTypeCategoryId").val()});
+    $(objInfoTypeCategoryId).appendTo(objForm);
+    var objIsLogo = $('<input/>',{'name':'_isLogo','id':'_isLogo','type':'hidden','value':'N'});
+    $(objIsLogo).appendTo(objForm);
+    dropZone = new Dropzone($(objForm).get(0),{
+    	autoProcessQueue: false
+    });
 }
 /* Dynamic content type generation logic [End]*/
 _infoTypeRenderer.INFO_RENDERER = {
