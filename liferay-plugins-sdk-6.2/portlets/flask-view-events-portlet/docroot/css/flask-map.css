@@ -4,9 +4,9 @@
     position: relative;
 }
 
-@media (min-width: 0px) and (max-width: 480px){
+@media (min-width: 0px) and (max-width: 320px){
 	#gmap_canvas {
-	    height: 250px !important;
+	    height: 281px !important;
 	    position: relative;
 	}
 	
@@ -29,22 +29,14 @@
 	}
 }
 
-
-@media (min-width: 481px) and (max-width: 568px){
-	#gmap_canvas {
-	    height: 281px !important;
-	    position: relative;
-	}
-}
-
-@media (min-width: 481px) and (max-width: 568px){
+@media (min-width: 321px) and (max-width: 375px){
 	#gmap_canvas {
 	    height: 315px !important;
 	    position: relative;
 	}
 }
 
-@media (min-width: 569px) and (max-width: 736px){
+@media (min-width: 376px) and (max-width: 414px){
 	#gmap_canvas {
 	    height: 410px !important;
 	    position: relative;
