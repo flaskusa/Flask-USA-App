@@ -134,7 +134,6 @@ function fnShowEventLogo(imageUUID, imageGroupId,container ,editable){
 }
 
 function fnGetEventImages(eventId,venueId){
-	getVenueData(venueId);
 	var flaskRequest = new Request();
 	params= {'eventId': eventId};
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT_VENUE_DETAIL_WITH_IMAGES , params, 
@@ -145,9 +144,12 @@ function fnGetEventImages(eventId,venueId){
 			var arrPreEventDetails = [];
 			var arrDurEventDetails = [];
 			var arrPosEventDetails = [];
+			var objVenue = jQuery.parseJSON(data.Venue);
+			getVenueData(objVenue);
 			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
 		    $(objWeatherDiv).html($("#weather-background"));
 		    arrPreEvent.push(objWeatherDiv);	
+		    console.log(data);
 			objEventDetails = data.Details;
 			eventDetailJSON = $.extend(true, {}, objEventDetails);
 			$.each(objEventDetails, function(idx, obj) {
@@ -367,7 +369,8 @@ function initEventList(){
 		startdate = "";
 		enddate = "";
 	}
-	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
+	//var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
+	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: 'd', latitude: '0', longitude: '0'};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){
@@ -403,17 +406,10 @@ function removeUserEvent(eventId){
 }
 
 
-function getVenueData(venueId){
-	var flaskRequest = new Request();
-	params = {venueId:venueId};
-	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_VENUE, params, 
-	function(data){
+function getVenueData(data){
 		venueName = data.venueName;
 		venueAddr = data.addrLine1;
 		callWeather(data.latitude, data.longitude);
-	} , function(error){
-		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
-	});
 }
 
 function initMenuList(objDetails){
