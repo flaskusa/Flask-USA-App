@@ -52,6 +52,7 @@ function renderEventList(tdata) {
 		    $(objTd2).appendTo(objTr);
 		    $(objTable).appendTo($(divRow));
 		    var objTd3 = $('<td/>',{'width':'34px'});
+		    console.log(flaskEvent);
 		    if(flaskEvent.userEvent == 1){
 		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent miniLogo','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
 		    }else{
@@ -358,6 +359,7 @@ function fnStopProgress(){
 function setMyEvent(_eventId,_userEvent){
 	var eventId = parseInt(_eventId);
 	var myEvent = parseInt(_userEvent);
+	console.log(myEvent);
 	if(myEvent == 0 ){
 		addUserEvent(eventId);
 	}else{
@@ -369,7 +371,8 @@ function initEventList(){
 		startdate = "";
 		enddate = "";
 	}
-	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
+	//var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
+	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: 'd', latitude: '0', longitude: '0'};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){
@@ -452,9 +455,10 @@ function initMenuList(objDetails){
 			height: '100%',
 			scrollPosition: 'both'
 		});	
-		_flaskMap.findPlaces(menuArray[0].toLowerCase());
+		callMarkers(menuArray[0].toLowerCase());
 		$("li").click(function(){
-			_flaskMap.findPlaces($(this).find('.jqx-tabs-titleContentWrapper').html().toLowerCase());
+			var place = $(this).find('.jqx-tabs-titleContentWrapper').html().toLowerCase();
+			callMarkers(place);
 		});
 	}
 	else{
@@ -465,6 +469,18 @@ function initMenuList(objDetails){
 	}
 }
 
+function callMarkers(place){
+	_flaskMap.clearOverlays();
+	console.log(place);
+	if(place == 'bar &amp; restaurants'){
+		_flaskMap.findPlaces('bar');
+		_flaskMap.findPlaces('restaurant');
+	}
+	else{
+		_flaskMap.findPlaces(place);
+	}
+	
+}
 
 function getFilteredEvents(){
 	var filterString = $("#txtSearch").val();

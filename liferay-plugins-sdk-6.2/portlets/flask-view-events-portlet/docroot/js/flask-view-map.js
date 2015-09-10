@@ -63,7 +63,6 @@ _flaskMap.findPlaces = function (places) {
 
 _flaskMap.createMarkers = function (results, status) {
     if (status == google.maps.places.PlacesServiceStatus.OK) {
-    	_flaskMap.clearOverlays();
     	venue_mark = new google.maps.Marker({
 	        position: _flaskMap.cur_location,
 	        map: _flaskMap.map,
