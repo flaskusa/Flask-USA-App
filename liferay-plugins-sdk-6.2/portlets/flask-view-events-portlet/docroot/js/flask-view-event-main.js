@@ -457,6 +457,7 @@ function initMenuList(objDetails){
 			height: '100%',
 			scrollPosition: 'both'
 		});	
+		_flaskMap.findPlaces(menuArray[0].toLowerCase());
 		$("li").click(function(){
 			_flaskMap.findPlaces($(this).find('.jqx-tabs-titleContentWrapper').html().toLowerCase());
 		});
