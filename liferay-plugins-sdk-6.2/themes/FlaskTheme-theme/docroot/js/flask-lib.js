@@ -219,28 +219,36 @@ _flaskLib.loadEventType = function(elementId,selectedId){
 }
 
 _flaskLib.deleteImage = function(uuid, groupId, objDel){
-	console.log(uuid);
-			var params = {'uuid': uuid, 'groupId': groupId};
-			var flaskRequest = new Request();
-			flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_FILE_ENTRY_ID , params, 
-					function (data){
-							console.log(data);
-							params2= {'fileEntryId': data.fileEntryId};
-							var flaskRequest2 = new Request();
-							flaskRequest2.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.DELETE_FILES , params2, 
-								function (data){
-									if(typeof data=="object"){
-										console.log("Deleted Image successfully");    		
-									}		
-								},
-								function (data){
-									$("#spinningSquaresG").hide();
-								});	
-							console.log("Image Deleted successfully");
-					} ,
-					function (data){
-						console.log("Error in deleting image");
-					});
-	
+	var params = {'uuid': uuid, 'groupId': groupId};
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_FILE_ENTRY_ID , params, 
+			function (data){
+					console.log(data);
+					params2= {'fileEntryId': data.fileEntryId};
+					var flaskRequest2 = new Request();
+					flaskRequest2.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.DELETE_FILES , params2, 
+						function (data){
+							if(typeof data=="object"){
+								console.log("Deleted Image successfully");    		
+							}		
+						},
+						function (data){
+							$("#spinningSquaresG").hide();
+						});	
+					console.log("Image Deleted successfully");
+			} ,
+			function (data){
+				console.log("Error in deleting image");
+			});
 }
 
+_flaskLib.setCookie = function(key, value) {
+    var expires = new Date();
+    expires.setTime(expires.getTime() + (1 * 24 * 60 * 60 * 1000));
+    document.cookie = key + '=' + value + ';expires=' + expires.toUTCString();
+}
+
+_flaskLib.getCookie = function(key) {
+    var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
+    return keyValue ? keyValue[2] : null;
+}
