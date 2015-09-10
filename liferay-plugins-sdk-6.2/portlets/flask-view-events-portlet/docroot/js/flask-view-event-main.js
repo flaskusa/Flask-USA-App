@@ -369,8 +369,7 @@ function initEventList(){
 		startdate = "";
 		enddate = "";
 	}
-	//var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
-	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: 'd', latitude: '0', longitude: '0'};
+	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){
