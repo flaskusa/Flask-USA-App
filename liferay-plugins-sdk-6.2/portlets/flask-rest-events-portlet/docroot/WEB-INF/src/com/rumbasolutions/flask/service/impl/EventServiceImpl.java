@@ -105,7 +105,9 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 				geoRange = FlaskUtil.getLatitudeAndLongitudeRange(dLat, dLong, FlaskUtil.DEFAULT_RANGE);
 			}
 			events =  EventFinderUtil.getSimpleFilteredEvents(eventTypeIds, startDate, endDate, searchString, geoRange);
-		
+			if(serviceContext.isSignedIn()){
+				myEventList = getUserEventIds(serviceContext);
+			}
 			JSONArray eventArr=  FlaskUtil.setStringNamesForEvents(events, myEventList);
 			eventListJsonObj.put("Events", eventArr);
 		}
@@ -136,7 +138,9 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 					} catch (Exception e) {
 					}
 				}
-				
+				if(serviceContext.isSignedIn()){
+					myEventList = getUserEventIds(serviceContext);
+				}
 				JSONArray eventArr=  FlaskUtil.setStringNamesForEvents(events, myEventList);
 				eventListJsonObj.put("Events", eventArr);
 			}
@@ -544,7 +548,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	public void removeUserEvent(long eventId, ServiceContext  serviceContext){
 		try{
 			// check if already exist
-			UserEvent userEvent = UserEventUtil.removeByuserEvent(serviceContext.getUserId(), eventId);
+			UserEventUtil.removeByuserEvent(serviceContext.getUserId(), eventId);
 			
 		}catch(Exception ex){
 			LOGGER.error("Exception in removeUserEvent: " + ex.getMessage());
