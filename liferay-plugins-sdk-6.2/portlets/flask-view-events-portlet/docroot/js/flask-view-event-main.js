@@ -371,8 +371,7 @@ function initEventList(){
 		startdate = "";
 		enddate = "";
 	}
-	//var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
-	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: 'd', latitude: '0', longitude: '0'};
+	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){
@@ -471,10 +470,21 @@ function initMenuList(objDetails){
 
 function callMarkers(place){
 	_flaskMap.clearOverlays();
-	console.log(place);
 	if(place == 'bar &amp; restaurants'){
 		_flaskMap.findPlaces('bar');
 		_flaskMap.findPlaces('restaurant');
+	}
+	if(place == 'nightlife'){
+		_flaskMap.findPlaces('bar');
+		_flaskMap.findPlaces('restaurant');
+		_flaskMap.findPlaces('night_club');
+	}
+	if(place == 'liquor store'){
+		_flaskMap.findPlaces('liquor_store');
+	}
+	if(place == 'safety'){
+		_flaskMap.findPlaces('police');
+		_flaskMap.findPlaces('hospital');
 	}
 	else{
 		_flaskMap.findPlaces(place);
