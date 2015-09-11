@@ -367,11 +367,16 @@ function setMyEvent(_eventId,_userEvent){
 	}
 }
 function initEventList(){
+	var _latitude = _eventModel.currentGeoLocation.latitude;
+	var _longitude = _eventModel.currentGeoLocation.latitude;
+
 	if(showAllEvents){
 		startdate = "";
 		enddate = "";
+		_latitude = "";
+		_longitude = "";
 	}
-	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: '', latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
+	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: 'C', latitude:_latitude, longitude: _longitude};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){

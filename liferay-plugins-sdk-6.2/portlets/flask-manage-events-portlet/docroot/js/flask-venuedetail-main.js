@@ -121,7 +121,7 @@ $(document).ready(function() {
 	formArea = $("#contentTypeForm"); // Parent Div
 	$("#infoTypeCategoryId").change(function() {
 		$(formArea).html("");
-		var selectedContentType = $("option:selected", this).text().toLowerCase().replace(/ /g,'');
+		var selectedContentType = $("option:selected", this).text().toLowerCase();
 		_infoTypeRenderer.fnRenderForm(selectedContentType,"venue");
 		$('#venueDetailsForm').jqxValidator
 		({

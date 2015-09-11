@@ -23,8 +23,8 @@ _eventModel.currentGeoLocation = {latitude: "" ,longitude: "" };
 _eventModel.setDetroitAsGeoLocation = function(){
 	_eventModel.currentGeoLocation.latitude= _eventModel.detroitGeoLocation.latitude;
 	_eventModel.currentGeoLocation.longitude = _eventModel.detroitGeoLocation.longitude;
-	
 }
+
 _eventModel.INFO_TYPE = {
 		PreEvent : 1,
 		DuringEvent : 2,

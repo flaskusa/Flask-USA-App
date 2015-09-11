@@ -10,6 +10,8 @@ _infoTypeRenderer.getRenderer =  function(type) {
 			renderer = _infoTypeRenderer.INFO_RENDERER.PARKING;
 			break;
 		case "bar & restaurants":
+			renderer = _infoTypeRenderer.INFO_RENDERER.BAR_AND_RESTO;
+			break;
 		case "nightlife":
 			renderer = _infoTypeRenderer.INFO_RENDERER.FOOD;
 			break;
@@ -412,6 +414,70 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"Class":""
 			}]
 		}],
+	BAR_AND_RESTO:[{//FOOD
+		"type":"text",
+		"attr":[{
+			"caption":"Name",
+			"id":"infoTitle",
+			"value":"",
+			"placeholder":"Enter Name here",
+			"maxlength":"30",
+			"Class":""
+			}]
+		},
+		{
+		"type":"text",
+		"attr":[{
+			"caption":"Address",
+			"id":"addrLine1",
+			"value":"",
+			"placeholder":"",
+			"maxlength":"255",
+			"Class":""
+			}]
+		},
+		{
+		"type":"text",
+		"attr":[{
+			"caption":"Phone",
+			"id":"phone",
+			"value":"",
+			"placeholder":"",
+			"maxlength":"10",
+			"Class":""
+			}]
+		},
+		{
+		"type":"text",
+		"attr":[{
+			"caption":"Website",
+			"id":"website",
+			"value":"",
+			"placeholder":"",
+			"maxlength":"255",
+			"Class":""
+			}]
+		},
+		{
+		"type":"checkbox",
+		"attr":[{
+			"id":"showDescription",
+			"name":"showDescription",
+			"caption":"Show Desciptions",
+			"value":"1",
+			"checked":"checked"
+			}]
+		},
+		{
+		"type":"upload",
+		"attr":[{
+			"caption":"Upload Pictures",
+			"action":$("#imgActionUrl").val(),
+			"id":"eventId",
+			"value":$("#eventId").val(),
+			"Class":""
+			}]
+		}],		
 	LIQUOR:[{//LIQUOR
 			"type":"text",
 			"attr":[{
