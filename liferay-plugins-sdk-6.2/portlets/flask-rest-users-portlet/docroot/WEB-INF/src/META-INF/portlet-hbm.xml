@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.rumbasolutions.flask.model.FlaskAdmin" />
+	<import class="com.rumbasolutions.flask.model.FlaskRole" />
+	<class name="com.rumbasolutions.flask.model.impl.FlaskAdminImpl" table="flaskusers_FlaskAdmin">
+		<cache usage="read-write" />
+		<id name="userId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="roleId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="roleName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="firstName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="middleName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="lastName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="screenName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="DOB" type="org.hibernate.type.TimestampType" />
+		<property name="isMale" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="streetName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="aptNo" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="areaCode" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="city" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="stateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="stateName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="countryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="countryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mobileNumber" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="portraitURL" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userInterests" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.FlaskRoleImpl" table="flaskusers_FlaskRole">
+		<cache usage="read-write" />
+		<id name="roleId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="roleName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="roleDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+</hibernate-mapping>

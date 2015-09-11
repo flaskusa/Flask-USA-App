@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
+<service-builder package-path="com.rumbasolutions.flask">
+	<author>Ashutosh Rai</author>
+	<namespace>flaskusers</namespace>
+
+	<entity name="FlaskAdmin" remote-service="true">
+	
+			<!-- PK fields -->
+
+		<column name="userId" type="long" primary="true" />
+		
+			<!-- Other fields -->
+			
+		<column name="roleId" type="long" />
+		<column name="roleName" type="String" />
+		<column name="firstName" type="String" />
+		<column name="middleName" type="String" />
+		<column name="lastName" type="String" />
+		<column name="screenName" type="String" />
+		<column name="email" type="String" />
+		<column name="DOB" type="Date" />
+		<column name="isMale" type="Boolean" />	
+		<column name="streetName" type="String" />
+		<column name="aptNo" type="String" />
+		<column name="areaCode" type="String" />
+		<column name="city" type="String" />
+		<column name="stateId" type="long" />
+		<column name="stateName" type="String" />
+		<column name="countryId" type="long" />
+		<column name="countryName" type="String" />
+		<column name="mobileNumber" type="String" />
+		<column name="portraitURL" type="String" />
+		<column name="userInterests" type="String" />	
+	</entity>
+	
+
+	<entity name="FlaskRole" remote-service="true">
+			<column name="roleId" type="long" primary="true"  />
+			<column name="roleName" type="String" />
+			<column name="roleDesc" type="String" />
+	</entity>	
+</service-builder>
