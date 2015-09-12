@@ -35,6 +35,7 @@ function addDetailsClickHandlers() {
 			if ($('#addrLine1').val() == undefined) {
 				$('#latitude').val(0);
 				$('#longitude').val(0);
+				saveEventDetails();
 			}else {
 				var geocoder = new google.maps.Geocoder();
 				geocoder.geocode({
@@ -51,10 +52,11 @@ function addDetailsClickHandlers() {
 
 						$('#latitude').val(coords.lat());
 						$('#longitude').val(coords.lng());
+						saveEventDetails();
 			    	}
 			    });
 			}
-			saveEventDetails();
+			
 		}
 	});
 
