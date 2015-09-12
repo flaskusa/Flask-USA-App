@@ -6,6 +6,10 @@
 <script type="text/javascript">
 
 
+	// ************************************ APIS FOR FLASK
+	// **************************************
+
+
 </script>
 <form id="adminForm">
   <div class="">
