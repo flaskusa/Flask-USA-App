@@ -36,11 +36,13 @@ public class TailgateInfoFinderImpl extends BasePersistenceImpl<TailgateInfo> im
 			queryObj.addScalar("tailgateDescription", Type.STRING);
 			queryObj.addScalar("eventId", Type.LONG);
 			queryObj.addScalar("eventName", Type.STRING);
-			queryObj.addScalar("tailgateDate", Type.STRING);
-			queryObj.addScalar("startTime", Type.STRING);
-			queryObj.addScalar("endTime", Type.STRING);
+			queryObj.addScalar("tailgateDate", Type.DATE);
+			queryObj.addScalar("startTime", Type.TIME);
+			queryObj.addScalar("endTime", Type.TIME);
 			queryObj.addScalar("isActive", Type.INTEGER);
 			queryObj.addScalar("isDelete", Type.INTEGER);
+			queryObj.addScalar("venmoAccountId", Type.STRING);
+			queryObj.addScalar("amountToPay", Type.DOUBLE);
 			queryObj.addScalar("isAdmin", Type.INTEGER);
 			QueryPos qPosition = QueryPos.getInstance(queryObj);
 			qPosition.add(userId);
@@ -65,6 +67,7 @@ public class TailgateInfoFinderImpl extends BasePersistenceImpl<TailgateInfo> im
 		try{
 		for (Object ob : list) {
 			serilizeString = JSONFactoryUtil.serialize(ob);
+			
 			groupJsonArray = JSONFactoryUtil.createJSONArray(serilizeString);
 			groupMap = new HashMap<String, String>();
 			groupMap.put("tailgateId", groupJsonArray.getString(0));
@@ -72,12 +75,14 @@ public class TailgateInfoFinderImpl extends BasePersistenceImpl<TailgateInfo> im
 			groupMap.put("tailgateDescription", groupJsonArray.getString(2));
 			groupMap.put("eventId", groupJsonArray.getString(3));
 			groupMap.put("eventName", groupJsonArray.getString(4));
-			groupMap.put("tailgateDate", groupJsonArray.getString(5));
-			groupMap.put("startTime", groupJsonArray.getString(6));
-			groupMap.put("endTime", groupJsonArray.getString(7));
+			groupMap.put("tailgateDate",groupJsonArray.getJSONObject(5).getString("time"));
+			groupMap.put("startTime", groupJsonArray.getJSONObject(6).getString("time"));
+			groupMap.put("endTime", groupJsonArray.getJSONObject(7).getString("time"));
 			groupMap.put("isActive", groupJsonArray.getString(8));
 			groupMap.put("isDelete", groupJsonArray.getString(9));
-			groupMap.put("isAdmin", groupJsonArray.getString(10));
+			groupMap.put("venmoAccountId", groupJsonArray.getString(10));
+			groupMap.put("amountToPay", groupJsonArray.getString(11));
+			groupMap.put("isAdmin", groupJsonArray.getString(12));
 			mapList.add(groupMap);
 		}
 		}catch(JSONException e){

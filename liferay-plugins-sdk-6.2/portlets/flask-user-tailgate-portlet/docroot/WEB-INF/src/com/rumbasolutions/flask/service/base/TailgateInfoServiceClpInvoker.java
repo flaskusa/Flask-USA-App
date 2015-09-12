@@ -19,7 +19,7 @@ import com.rumbasolutions.flask.service.TailgateInfoServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @generated
  */
 public class TailgateInfoServiceClpInvoker {
@@ -37,7 +37,7 @@ public class TailgateInfoServiceClpInvoker {
 		_methodParameterTypes48 = new String[] {
 				"java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "long",
+				"java.util.Date", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -62,7 +62,7 @@ public class TailgateInfoServiceClpInvoker {
 		_methodParameterTypes53 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "long",
+				"java.util.Date", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -92,8 +92,9 @@ public class TailgateInfoServiceClpInvoker {
 				((Long)arguments[2]).longValue(),
 				(java.lang.String)arguments[3], (java.util.Date)arguments[4],
 				(java.util.Date)arguments[5], (java.util.Date)arguments[6],
-				((Long)arguments[7]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[8]);
+				(java.lang.String)arguments[7],
+				((Long)arguments[8]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 
 		if (_methodName49.equals(name) &&
@@ -123,8 +124,9 @@ public class TailgateInfoServiceClpInvoker {
 				((Long)arguments[3]).longValue(),
 				(java.lang.String)arguments[4], (java.util.Date)arguments[5],
 				(java.util.Date)arguments[6], (java.util.Date)arguments[7],
-				((Long)arguments[8]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[9]);
+				(java.lang.String)arguments[8],
+				((Long)arguments[9]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[10]);
 		}
 
 		if (_methodName54.equals(name) &&

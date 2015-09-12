@@ -29,7 +29,7 @@ import com.liferay.portal.service.InvokableService;
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateMarkerServiceUtil
  * @see com.rumbasolutions.flask.service.base.TailgateMarkerServiceBaseImpl
  * @see com.rumbasolutions.flask.service.impl.TailgateMarkerServiceImpl

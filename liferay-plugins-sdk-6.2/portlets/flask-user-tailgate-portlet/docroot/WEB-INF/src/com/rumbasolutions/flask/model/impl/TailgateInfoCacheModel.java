@@ -30,7 +30,7 @@ import java.util.Date;
 /**
  * The cache model class for representing TailgateInfo in entity cache.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateInfo
  * @generated
  */
@@ -38,7 +38,7 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(31);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{tailgateId=");
 		sb.append(tailgateId);
@@ -68,6 +68,8 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 		sb.append(isActive);
 		sb.append(", isDelete=");
 		sb.append(isDelete);
+		sb.append(", venmoAccountId=");
+		sb.append(venmoAccountId);
 		sb.append(", amountToPay=");
 		sb.append(amountToPay);
 		sb.append("}");
@@ -143,6 +145,14 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 
 		tailgateInfoImpl.setIsActive(isActive);
 		tailgateInfoImpl.setIsDelete(isDelete);
+
+		if (venmoAccountId == null) {
+			tailgateInfoImpl.setVenmoAccountId(StringPool.BLANK);
+		}
+		else {
+			tailgateInfoImpl.setVenmoAccountId(venmoAccountId);
+		}
+
 		tailgateInfoImpl.setAmountToPay(amountToPay);
 
 		tailgateInfoImpl.resetOriginalValues();
@@ -166,7 +176,8 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 		endTime = objectInput.readLong();
 		isActive = objectInput.readInt();
 		isDelete = objectInput.readInt();
-		amountToPay = objectInput.readLong();
+		venmoAccountId = objectInput.readUTF();
+		amountToPay = objectInput.readDouble();
 	}
 
 	@Override
@@ -206,7 +217,15 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 		objectOutput.writeLong(endTime);
 		objectOutput.writeInt(isActive);
 		objectOutput.writeInt(isDelete);
-		objectOutput.writeLong(amountToPay);
+
+		if (venmoAccountId == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(venmoAccountId);
+		}
+
+		objectOutput.writeDouble(amountToPay);
 	}
 
 	public long tailgateId;
@@ -223,5 +242,6 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 	public long endTime;
 	public int isActive;
 	public int isDelete;
-	public long amountToPay;
+	public String venmoAccountId;
+	public double amountToPay;
 }

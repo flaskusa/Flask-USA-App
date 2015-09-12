@@ -120,19 +120,22 @@ function deleteMultipleTailgates(tailgateList){
 
 function loadData(){
 	var flaskRequest = new Request();
-	if(isAdmin == 1)
-		url = _tailgateModel.SERVICE_ENDPOINTS.GET_ALL_MY_TAILGATE;
-	else
-		url = _tailgateModel.SERVICE_ENDPOINTS.GET_TAILGATES_BY_USERID;
+	url = _tailgateModel.SERVICE_ENDPOINTS.GET_ALL_MY_TAILGATE;
 	params = {userId:_tailgateModel.userId};
 	flaskRequest.sendGETRequest(url, params, 
 	function(data){/*success handler*/
 		var tailgates = eval(data);
 		$.each(tailgates, function(index, tailgate) {
-			if(tailgate.isAdmin == "1")
-				tailgate["tailgateRole"] = "Admin";
-			else
-				tailgate["tailgateRole"] = "Member";
+		
+			var date = new Date(parseInt(tailgate.tailgateDate));
+			tailgate.tailgateDate = ( date.getMonth() + 1 ) +"-"+date.getDate()+"-"+date.getFullYear();
+			
+			var sTime = new Date(parseInt(tailgate.startTime));
+			tailgate.startTime = formatUnixToTime(sTime);
+			
+			var eTime = new Date(parseInt(tailgate.endTime));
+			tailgate.endTime  = formatUnixToTime(eTime);
+
 		});
 		GRID_PARAM.updateGrid(tailgates);
 	} , function(error){ /*failure handler*/
@@ -328,15 +331,6 @@ function saveTailgate(){
 						$("#tailgateDataTable").show();
 						$("#formContainer").hide();
 						saveTailgateMarker(data.tailgateId);
-						if(!isForUpdate){
-							var userparams = {};
-							userparams.tailgateId = data.tailgateId;
-							userparams.userId = _tailgateModel.userId;
-							userparams.userName = _tailgateModel.userName;
-							userparams.isAdmin = 1;
-							userparams.groupId = 0;
-							addTailgateMember(userparams)
-						}
 						_flaskLib.showSuccessMessage('action-msg', _tailgateModel.MESSAGES.SAVE);
 						loadData();
 					} ,
@@ -348,16 +342,16 @@ function addTailgateMembers(){
 	var selectedUserList = GRID_PARAM.getCheckedUsersList();
 	for ( var i = 0 ; i < selectedUserList.length; i ++) {
 		var user = selectedUserList[i];
-		var userrparams = {};
-		userrparams.groupId = 0;
-		userrparams.userId = user.userId;
-		userrparams.userName = user.firstName+" "+user.lastName;
-		userrparams.emailAddress = user.emailAddress;
-		userrparams.isAdmin = 0;
-		userrparams.tailgateId = tailgateId;
-		userrparams.isPaid = 0;
-		userrparams.paymentMode = "None"; 
-		addTailgateMember(userrparams);
+		var userparams = {};
+		userparams.groupId = 0;
+		userparams.userId = user.userId;
+		userparams.userName = user.firstName+" "+user.lastName;
+		userparams.emailAddress = user.emailAddress;
+		userparams.isAdmin = 0;
+		userparams.tailgateId = tailgateId;
+		userparams.isPaid = 0;
+		userparams.paymentMode = "None"; 
+		addTailgateMember(userparams);
 	}
 }
 function addTailgateMember(params) {

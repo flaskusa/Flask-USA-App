@@ -29,7 +29,7 @@ import com.liferay.portal.service.InvokableService;
  * service are expected to have security checks based on the propagated JAAS
  * credentials because this service can be accessed remotely.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateInfoServiceUtil
  * @see com.rumbasolutions.flask.service.base.TailgateInfoServiceBaseImpl
  * @see com.rumbasolutions.flask.service.impl.TailgateInfoServiceImpl
@@ -68,7 +68,8 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 	public com.rumbasolutions.flask.model.TailgateInfo addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, long amountToPay,
+		java.util.Date startTime, java.util.Date endTime,
+		java.lang.String venmoAccountId, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -90,7 +91,8 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, long amountToPay,
+		java.util.Date startTime, java.util.Date endTime,
+		java.lang.String venmoAccountId, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteTailgateInfo(long tailgateId);

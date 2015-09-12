@@ -25,7 +25,8 @@ create table flasktailgate_TailgateInfo (
 	endTime DATE null,
 	isActive INTEGER,
 	isDelete INTEGER,
-	amountToPay LONG
+	venmoAccountId VARCHAR(75) null,
+	amountToPay DOUBLE
 );
 
 create table flasktailgate_TailgateMarker (

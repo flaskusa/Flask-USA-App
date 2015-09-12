@@ -26,7 +26,7 @@ import java.util.Map;
  * This class is a wrapper for {@link TailgateInfo}.
  * </p>
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateInfo
  * @generated
  */
@@ -64,6 +64,7 @@ public class TailgateInfoWrapper implements TailgateInfo,
 		attributes.put("endTime", getEndTime());
 		attributes.put("isActive", getIsActive());
 		attributes.put("isDelete", getIsDelete());
+		attributes.put("venmoAccountId", getVenmoAccountId());
 		attributes.put("amountToPay", getAmountToPay());
 
 		return attributes;
@@ -156,7 +157,13 @@ public class TailgateInfoWrapper implements TailgateInfo,
 			setIsDelete(isDelete);
 		}
 
-		Long amountToPay = (Long)attributes.get("amountToPay");
+		String venmoAccountId = (String)attributes.get("venmoAccountId");
+
+		if (venmoAccountId != null) {
+			setVenmoAccountId(venmoAccountId);
+		}
+
+		Double amountToPay = (Double)attributes.get("amountToPay");
 
 		if (amountToPay != null) {
 			setAmountToPay(amountToPay);
@@ -486,12 +493,32 @@ public class TailgateInfoWrapper implements TailgateInfo,
 	}
 
 	/**
+	* Returns the venmo account ID of this tailgate info.
+	*
+	* @return the venmo account ID of this tailgate info
+	*/
+	@Override
+	public java.lang.String getVenmoAccountId() {
+		return _tailgateInfo.getVenmoAccountId();
+	}
+
+	/**
+	* Sets the venmo account ID of this tailgate info.
+	*
+	* @param venmoAccountId the venmo account ID of this tailgate info
+	*/
+	@Override
+	public void setVenmoAccountId(java.lang.String venmoAccountId) {
+		_tailgateInfo.setVenmoAccountId(venmoAccountId);
+	}
+
+	/**
 	* Returns the amount to pay of this tailgate info.
 	*
 	* @return the amount to pay of this tailgate info
 	*/
 	@Override
-	public long getAmountToPay() {
+	public double getAmountToPay() {
 		return _tailgateInfo.getAmountToPay();
 	}
 
@@ -501,7 +528,7 @@ public class TailgateInfoWrapper implements TailgateInfo,
 	* @param amountToPay the amount to pay of this tailgate info
 	*/
 	@Override
-	public void setAmountToPay(long amountToPay) {
+	public void setAmountToPay(double amountToPay) {
 		_tailgateInfo.setAmountToPay(amountToPay);
 	}
 

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 <service-builder package-path="com.rumbasolutions.flask">
-	<author>rajeshj</author>
 	<namespace>flasktailgate</namespace>
-
 	<entity name="TailgateInfo" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -33,9 +31,10 @@
 		<column name="endTime" type="Date" />
 		<column name="isActive" type="int" />
 		<column name="isDelete" type="int" />
+		<column name="venmoAccountId" type="String" />
+        <column name="amountToPay" type="double"></column>
 
 		<!-- Order -->
-        <column name="amountToPay" type="long"></column>
 
 		<order by="asc">
 			<order-column name="tailgateId" />

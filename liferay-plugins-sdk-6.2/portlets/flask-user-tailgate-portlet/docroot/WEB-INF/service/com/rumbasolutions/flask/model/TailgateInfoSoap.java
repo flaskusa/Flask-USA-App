@@ -23,7 +23,7 @@ import java.util.List;
 /**
  * This class is used by SOAP remote services, specifically {@link com.rumbasolutions.flask.service.http.TailgateInfoServiceSoap}.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see com.rumbasolutions.flask.service.http.TailgateInfoServiceSoap
  * @generated
  */
@@ -45,6 +45,7 @@ public class TailgateInfoSoap implements Serializable {
 		soapModel.setEndTime(model.getEndTime());
 		soapModel.setIsActive(model.getIsActive());
 		soapModel.setIsDelete(model.getIsDelete());
+		soapModel.setVenmoAccountId(model.getVenmoAccountId());
 		soapModel.setAmountToPay(model.getAmountToPay());
 
 		return soapModel;
@@ -210,11 +211,19 @@ public class TailgateInfoSoap implements Serializable {
 		_isDelete = isDelete;
 	}
 
-	public long getAmountToPay() {
+	public String getVenmoAccountId() {
+		return _venmoAccountId;
+	}
+
+	public void setVenmoAccountId(String venmoAccountId) {
+		_venmoAccountId = venmoAccountId;
+	}
+
+	public double getAmountToPay() {
 		return _amountToPay;
 	}
 
-	public void setAmountToPay(long amountToPay) {
+	public void setAmountToPay(double amountToPay) {
 		_amountToPay = amountToPay;
 	}
 
@@ -232,5 +241,6 @@ public class TailgateInfoSoap implements Serializable {
 	private Date _endTime;
 	private int _isActive;
 	private int _isDelete;
-	private long _amountToPay;
+	private String _venmoAccountId;
+	private double _amountToPay;
 }

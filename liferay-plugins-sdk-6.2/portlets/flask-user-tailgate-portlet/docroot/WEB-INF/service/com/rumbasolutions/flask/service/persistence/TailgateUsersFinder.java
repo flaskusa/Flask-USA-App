@@ -15,7 +15,7 @@
 package com.rumbasolutions.flask.service.persistence;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  */
 public interface TailgateUsersFinder {
 	public java.util.List<com.rumbasolutions.flask.model.TailgateUsers> getTailgateUsersByTailgateId(

@@ -8,6 +8,7 @@ var rowMenuColumnText;
 var rowDetailDivArr;
 var _dataModel;
 var _contextMenuHandler;
+var isAdmin = 0;
 GRID_PARAM.source = function(model, data){
 	return {
 			localdata: data,
@@ -103,8 +104,8 @@ GRID_PARAM.onRowClick =function (venue)
 	var visibleIndex = args.visibleindex;
 	// right click.
 	var rowData = gridObj.jqxGrid('getrowdata', boundIndex);
+	isAdmin = rowData.isAdmin; 
 	
-
 	if (args.column.text == rowMenuColumnText) {
 		GRID_PARAM.prepareContextMenu();
 		var heightCTXMenu = isAdmin == 0 ? 35 : 110;
@@ -135,7 +136,7 @@ GRID_PARAM.onRowClick =function (venue)
 	}
 }
 GRID_PARAM.prepareContextMenu = function(){
-//	$("#grpCtxtMenu").remove();
+//	$("#tailgateActionMenu").remove();
 	var ulEle = "<div id='grpCtxtMenu'><ul>";
 	if(isAdmin == 1){
 		ulEle = ulEle + "<li>Edit</li>";
@@ -227,7 +228,9 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		var amountToPay = "<tr><td class='filledWidth'><b>Fees:</b></td><td>$"+datarecord.amountToPay + "</td></tr>";
 		var ButtonToPay = "<tr><td class='filledWidth' colspan='2'><a href='#' class='btnPay' onclick='fnPayNow("+datarecord.tailgateId+")'>Pay Now</a></td></tr>";
 		$(table3).append(amountToPay);
-		$(table3).append(ButtonToPay);
+		if(datarecord.isAdmin != "1"){
+			$(table3).append(ButtonToPay);
+		}
 		$(rightButtoncolumn).append(table3);		
 		var container = $('<div/>');
 		fnGetEventDetailImages(datarecord.tailgateId,imagesDiv, false);		
@@ -419,13 +422,14 @@ function createTailgateMemberTable(data, grid){
 			  return "No";
 	 }
 	 //recordcellsrenderer
+	 var eventsColumns;
 	 if(isAdmin == 1){
-	 var eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '33.33%' },
+		 eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '33.33%' },
 	                      { text: 'Email', datafield: 'emailAddress', width: '33.33%'},
 	                      { text: 'Is Paid?', datafield: 'isPaid', width: '33.33%', cellsrenderer: datecellsrenderer}];
 	 //,{ text: 'Payment Mode', datafield: 'paymentMode', width: '16.66%'}
 	 }else{
-		 var eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '50%' },
+		 eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '50%' },
 		                      { text: 'Email', datafield: 'emailAddress', width: '50%'}];
 	 }
 	 var source = {

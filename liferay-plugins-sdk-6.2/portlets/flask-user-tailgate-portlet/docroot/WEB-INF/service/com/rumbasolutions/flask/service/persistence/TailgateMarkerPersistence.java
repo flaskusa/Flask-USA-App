@@ -25,7 +25,7 @@ import com.rumbasolutions.flask.model.TailgateMarker;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateMarkerPersistenceImpl
  * @see TailgateMarkerUtil
  * @generated

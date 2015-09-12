@@ -25,7 +25,7 @@ import java.util.Map;
  * This class is a wrapper for {@link TailgateMarker}.
  * </p>
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateMarker
  * @generated
  */

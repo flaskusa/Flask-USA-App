@@ -55,7 +55,7 @@ import java.rmi.RemoteException;
  * The SOAP utility is only generated for remote services.
  * </p>
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateImagesServiceHttp
  * @see com.rumbasolutions.flask.model.TailgateImagesSoap
  * @see com.rumbasolutions.flask.service.TailgateImagesServiceUtil

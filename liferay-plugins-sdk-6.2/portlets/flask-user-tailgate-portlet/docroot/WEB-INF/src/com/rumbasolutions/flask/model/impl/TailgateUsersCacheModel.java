@@ -28,7 +28,7 @@ import java.io.ObjectOutput;
 /**
  * The cache model class for representing TailgateUsers in entity cache.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateUsers
  * @generated
  */

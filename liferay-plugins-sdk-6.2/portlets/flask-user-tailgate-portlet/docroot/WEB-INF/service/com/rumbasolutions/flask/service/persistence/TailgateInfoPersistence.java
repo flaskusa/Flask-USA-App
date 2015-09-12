@@ -25,7 +25,7 @@ import com.rumbasolutions.flask.model.TailgateInfo;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateInfoPersistenceImpl
  * @see TailgateInfoUtil
  * @generated

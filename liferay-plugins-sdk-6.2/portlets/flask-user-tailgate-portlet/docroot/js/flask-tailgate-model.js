@@ -42,7 +42,8 @@ _tailgateModel.DATA_MODEL= {
 		 	 { name: 'isActive', type: 'int'},
 			 { name: 'isDelete', type: 'int'},
 			 { name: 'isAdmin', type: 'int'},
-			 { name: 'amountToPay', type: 'long'}
+			 { name: 'venmoAccountId', type: 'String'},
+			 { name: 'amountToPay', type: 'long'},
 		]
 	};
 

@@ -26,7 +26,7 @@ import com.liferay.portal.service.InvokableService;
  * checks based on the propagated JAAS credentials because this service can be
  * accessed remotely.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateInfoService
  * @see com.rumbasolutions.flask.service.base.TailgateInfoServiceBaseImpl
  * @see com.rumbasolutions.flask.service.impl.TailgateInfoServiceImpl
@@ -66,12 +66,13 @@ public class TailgateInfoServiceUtil {
 	public static com.rumbasolutions.flask.model.TailgateInfo addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, long amountToPay,
+		java.util.Date startTime, java.util.Date endTime,
+		java.lang.String venmoAccountId, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addTailgateInfo(tailgateName, tailgateDescription, eventId,
-			eventName, tailgateDate, startTime, endTime, amountToPay,
-			serviceContext);
+			eventName, tailgateDate, startTime, endTime, venmoAccountId,
+			amountToPay, serviceContext);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.TailgateInfo> getAllTailgate() {
@@ -97,12 +98,13 @@ public class TailgateInfoServiceUtil {
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, long amountToPay,
+		java.util.Date startTime, java.util.Date endTime,
+		java.lang.String venmoAccountId, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateTailgateInfo(tailgateId, tailgateName,
 			tailgateDescription, eventId, eventName, tailgateDate, startTime,
-			endTime, amountToPay, serviceContext);
+			endTime, venmoAccountId, amountToPay, serviceContext);
 	}
 
 	public static void deleteTailgateInfo(long tailgateId) {

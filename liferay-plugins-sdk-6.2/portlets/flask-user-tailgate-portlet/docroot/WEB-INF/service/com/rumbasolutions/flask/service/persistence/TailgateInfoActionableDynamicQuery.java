@@ -21,7 +21,7 @@ import com.rumbasolutions.flask.model.TailgateInfo;
 import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @generated
  */
 public abstract class TailgateInfoActionableDynamicQuery

@@ -21,7 +21,7 @@ import com.rumbasolutions.flask.model.TailgateImages;
 import com.rumbasolutions.flask.service.TailgateImagesLocalServiceUtil;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @generated
  */
 public abstract class TailgateImagesActionableDynamicQuery

@@ -17,7 +17,7 @@ package com.rumbasolutions.flask.service;
 import com.liferay.portal.service.InvokableLocalService;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @generated
  */
 public class TailgateImagesLocalServiceClp implements TailgateImagesLocalService {

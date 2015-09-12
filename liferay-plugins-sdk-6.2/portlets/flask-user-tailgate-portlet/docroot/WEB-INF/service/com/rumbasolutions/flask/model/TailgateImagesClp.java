@@ -34,7 +34,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  */
 public class TailgateImagesClp extends BaseModelImpl<TailgateImages>
 	implements TailgateImages {

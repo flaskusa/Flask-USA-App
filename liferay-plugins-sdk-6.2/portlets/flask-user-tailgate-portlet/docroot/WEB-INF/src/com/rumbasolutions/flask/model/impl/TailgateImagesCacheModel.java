@@ -30,7 +30,7 @@ import java.util.Date;
 /**
  * The cache model class for representing TailgateImages in entity cache.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateImages
  * @generated
  */

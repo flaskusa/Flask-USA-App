@@ -28,7 +28,7 @@ import com.rumbasolutions.flask.service.TailgateUsersLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersServiceUtil;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  */
 public class ClpMessageListener extends BaseMessageListener {
 	public static String getServletContextName() {

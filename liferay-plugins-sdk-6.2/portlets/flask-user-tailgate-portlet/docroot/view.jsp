@@ -8,21 +8,12 @@
 <%
 long userId = user.getUserId();
 String userName = user.getFullName();
-  long repositoryId = themeDisplay.getLayout().getGroupId();
-  long isAdmin = 0;
-  themeDisplay.getLayout().getUuid();
-  long rol[] = themeDisplay.getUser().getRoleIds();
-  for(long role: rol){
-	  if(role==20161){
-		  isAdmin = 1;
-	  }
-  }
+ long repositoryId = themeDisplay.getLayout().getGroupId();
 %>
 
 <aui:script>
 var bCreated;
 Liferay.Portlet.ready(initialize);
-var isAdmin = $("#isAdmin").val();
 function initialize(portletId, portlet){
 	if(portletId == "flaskusertailgate_WAR_flaskusertailgateportlet") {
 		_tailgateModel.userId = "<%=userId%>";
@@ -47,7 +38,6 @@ function initialize(portletId, portlet){
 
 <body class='default'>
 <input type="hidden" id="repositoryId" value="<%=repositoryId%>"/>
-<input type="hidden" id="isAdmin" value="<%=isAdmin%>"/>
 <div id="action-msg-warning" style="display:none"></div>
 <div id="action-msg" style="display:none"></div>
 
@@ -120,6 +110,13 @@ function initialize(portletId, portlet){
 				<label class="control-label" for="endTime">End Time:</label>
 			    	<div class="controls">
 			    		 <input type='text' class="form-control" id='endTime' />
+			    	</div>
+			  </div>
+			  
+			  <div class="form-group">
+				<label class="control-label" for="venmoAccountId">Venmo Account:</label>
+			    	<div class="controls">
+			    		 <input type='text' class="form-control" id='venmoAccountId' />
 			    	</div>
 			  </div>
 

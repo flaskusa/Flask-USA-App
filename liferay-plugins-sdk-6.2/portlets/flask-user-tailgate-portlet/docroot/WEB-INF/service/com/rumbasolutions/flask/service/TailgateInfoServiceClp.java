@@ -17,7 +17,7 @@ package com.rumbasolutions.flask.service;
 import com.liferay.portal.service.InvokableService;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @generated
  */
 public class TailgateInfoServiceClp implements TailgateInfoService {
@@ -37,7 +37,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		_methodParameterTypes3 = new String[] {
 				"java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "long",
+				"java.util.Date", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -62,7 +62,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		_methodParameterTypes8 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "java.util.Date",
-				"java.util.Date", "long",
+				"java.util.Date", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -125,7 +125,8 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 	public com.rumbasolutions.flask.model.TailgateInfo addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, long amountToPay,
+		java.util.Date startTime, java.util.Date endTime,
+		java.lang.String venmoAccountId, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -146,6 +147,8 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 					ClpSerializer.translateInput(startTime),
 						
 					ClpSerializer.translateInput(endTime),
+						
+					ClpSerializer.translateInput(venmoAccountId),
 						
 					amountToPay,
 						
@@ -267,7 +270,8 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, long amountToPay,
+		java.util.Date startTime, java.util.Date endTime,
+		java.lang.String venmoAccountId, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -290,6 +294,8 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 					ClpSerializer.translateInput(startTime),
 						
 					ClpSerializer.translateInput(endTime),
+						
+					ClpSerializer.translateInput(venmoAccountId),
 						
 					amountToPay,
 						

@@ -22,7 +22,7 @@ import java.util.List;
 /**
  * This class is used by SOAP remote services, specifically {@link com.rumbasolutions.flask.service.http.TailgateUsersServiceSoap}.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see com.rumbasolutions.flask.service.http.TailgateUsersServiceSoap
  * @generated
  */

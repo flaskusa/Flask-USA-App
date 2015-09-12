@@ -19,7 +19,7 @@ import com.rumbasolutions.flask.service.TailgateMarkerServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @generated
  */
 public class TailgateMarkerServiceClpInvoker {

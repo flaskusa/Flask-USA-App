@@ -54,7 +54,7 @@ import java.util.List;
  * Caching information and settings can be found in <code>portal.properties</code>
  * </p>
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateInfoPersistence
  * @see TailgateInfoUtil
  * @generated
@@ -333,6 +333,7 @@ public class TailgateInfoPersistenceImpl extends BasePersistenceImpl<TailgateInf
 		tailgateInfoImpl.setEndTime(tailgateInfo.getEndTime());
 		tailgateInfoImpl.setIsActive(tailgateInfo.getIsActive());
 		tailgateInfoImpl.setIsDelete(tailgateInfo.getIsDelete());
+		tailgateInfoImpl.setVenmoAccountId(tailgateInfo.getVenmoAccountId());
 		tailgateInfoImpl.setAmountToPay(tailgateInfo.getAmountToPay());
 
 		return tailgateInfoImpl;

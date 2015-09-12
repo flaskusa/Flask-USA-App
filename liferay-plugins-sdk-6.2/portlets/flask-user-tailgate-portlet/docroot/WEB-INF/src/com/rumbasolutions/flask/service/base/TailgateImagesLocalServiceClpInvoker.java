@@ -19,7 +19,7 @@ import com.rumbasolutions.flask.service.TailgateImagesLocalServiceUtil;
 import java.util.Arrays;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @generated
  */
 public class TailgateImagesLocalServiceClpInvoker {

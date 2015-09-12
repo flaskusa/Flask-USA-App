@@ -21,7 +21,7 @@ import com.rumbasolutions.flask.model.TailgateMarker;
 import com.rumbasolutions.flask.service.TailgateMarkerLocalServiceUtil;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @generated
  */
 public abstract class TailgateMarkerActionableDynamicQuery

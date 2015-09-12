@@ -15,7 +15,7 @@
 package com.rumbasolutions.flask.service.persistence;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  */
 public interface TailgateMarkerFinder {
 	public com.rumbasolutions.flask.model.TailgateMarker getTailgateMarker(

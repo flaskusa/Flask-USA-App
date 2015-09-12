@@ -19,7 +19,7 @@ import com.liferay.portal.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link TailgateInfoService}.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateInfoService
  * @generated
  */
@@ -60,11 +60,12 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 	public com.rumbasolutions.flask.model.TailgateInfo addTailgateInfo(
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, long amountToPay,
+		java.util.Date startTime, java.util.Date endTime,
+		java.lang.String venmoAccountId, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _tailgateInfoService.addTailgateInfo(tailgateName,
 			tailgateDescription, eventId, eventName, tailgateDate, startTime,
-			endTime, amountToPay, serviceContext);
+			endTime, venmoAccountId, amountToPay, serviceContext);
 	}
 
 	@Override
@@ -95,11 +96,13 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
-		java.util.Date startTime, java.util.Date endTime, long amountToPay,
+		java.util.Date startTime, java.util.Date endTime,
+		java.lang.String venmoAccountId, long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _tailgateInfoService.updateTailgateInfo(tailgateId,
 			tailgateName, tailgateDescription, eventId, eventName,
-			tailgateDate, startTime, endTime, amountToPay, serviceContext);
+			tailgateDate, startTime, endTime, venmoAccountId, amountToPay,
+			serviceContext);
 	}
 
 	@Override

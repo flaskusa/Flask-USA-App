@@ -19,7 +19,7 @@ import com.liferay.portal.model.PersistedModel;
 /**
  * The extended model interface for the TailgateMarker service. Represents a row in the &quot;flasktailgate_TailgateMarker&quot; database table, with each column mapped to a property of this class.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateMarkerModel
  * @see com.rumbasolutions.flask.model.impl.TailgateMarkerImpl
  * @see com.rumbasolutions.flask.model.impl.TailgateMarkerModelImpl

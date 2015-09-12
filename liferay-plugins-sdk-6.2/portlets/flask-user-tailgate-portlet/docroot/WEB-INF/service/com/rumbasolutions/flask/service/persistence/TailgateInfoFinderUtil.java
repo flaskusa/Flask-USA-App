@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  */
 public class TailgateInfoFinderUtil {
 	public static java.util.List getAllMyTailgate(long userId) {

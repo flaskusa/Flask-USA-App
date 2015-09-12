@@ -3,7 +3,7 @@
 	<sql id="getAllTailgate">
 		<![CDATA[
 			SELECT fti.tailgateId,fti.tailgateName,fti.tailgateDescription,fti.eventId,fti.eventName,
-			fti.tailgateDate,fti.startTime,fti.endTime, fti.isActive, fti.isDelete, ftu.isAdmin 
+			fti.tailgateDate,fti.startTime,fti.endTime, fti.isActive, fti.isDelete, fti.venmoAccountId, fti.amountToPay, ftu.isAdmin 
 			FROM flasktailgate_tailgateinfo fti INNER JOIN flasktailgate_tailgateusers ftu ON fti.tailgateid = ftu.tailgateid 
 			WHERE fti.isActive=1 AND fti.isDelete=0;
 		]]>
@@ -11,7 +11,7 @@
 	<sql id="getMyAllTailgate">
 		<![CDATA[
 			SELECT fti.tailgateId,fti.tailgateName,fti.tailgateDescription,fti.eventId,fti.eventName,
-			fti.tailgateDate,fti.startTime,fti.endTime, fti.isActive, fti.isDelete, ftu.isAdmin
+			fti.tailgateDate,fti.startTime,fti.endTime, fti.isActive, fti.isDelete, fti.venmoAccountId, fti.amountToPay, ftu.isAdmin
 			FROM flasktailgate_tailgateinfo fti INNER JOIN flasktailgate_tailgateusers ftu ON fti.tailgateid = ftu.tailgateid 
 			WHERE ftu.userId=? AND fti.isActive=1 AND fti.isDelete=0;
 		]]>

@@ -54,6 +54,7 @@
 			</basic>
 			<basic name="isActive" />
 			<basic name="isDelete" />
+			<basic name="venmoAccountId" />
 			<basic name="amountToPay" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />

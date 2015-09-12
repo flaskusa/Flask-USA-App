@@ -26,7 +26,7 @@ import com.liferay.portal.service.InvokableLocalService;
  * based on the propagated JAAS credentials because this service can only be
  * accessed from within the same VM.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateUsersLocalService
  * @see com.rumbasolutions.flask.service.base.TailgateUsersLocalServiceBaseImpl
  * @see com.rumbasolutions.flask.service.impl.TailgateUsersLocalServiceImpl

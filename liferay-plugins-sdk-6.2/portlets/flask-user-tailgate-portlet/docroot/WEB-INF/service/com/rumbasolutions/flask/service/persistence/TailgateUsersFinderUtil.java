@@ -18,7 +18,7 @@ import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.util.ReferenceRegistry;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  */
 public class TailgateUsersFinderUtil {
 	public static java.util.List<com.rumbasolutions.flask.model.TailgateUsers> getTailgateUsersByTailgateId(

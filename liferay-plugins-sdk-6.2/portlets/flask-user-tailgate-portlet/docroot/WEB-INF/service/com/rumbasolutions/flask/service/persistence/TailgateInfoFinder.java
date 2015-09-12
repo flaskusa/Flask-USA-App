@@ -15,7 +15,7 @@
 package com.rumbasolutions.flask.service.persistence;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  */
 public interface TailgateInfoFinder {
 	public java.util.List getAllMyTailgate(long userId);

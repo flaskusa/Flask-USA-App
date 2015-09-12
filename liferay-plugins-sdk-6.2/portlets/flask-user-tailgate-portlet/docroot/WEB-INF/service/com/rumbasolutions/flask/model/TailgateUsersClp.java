@@ -33,7 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  */
 public class TailgateUsersClp extends BaseModelImpl<TailgateUsers>
 	implements TailgateUsers {

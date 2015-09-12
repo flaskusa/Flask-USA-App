@@ -30,7 +30,7 @@ import com.liferay.portal.service.PersistedModelLocalService;
  * credentials because this service can only be accessed from within the same
  * VM.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateUsersLocalServiceUtil
  * @see com.rumbasolutions.flask.service.base.TailgateUsersLocalServiceBaseImpl
  * @see com.rumbasolutions.flask.service.impl.TailgateUsersLocalServiceImpl

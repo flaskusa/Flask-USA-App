@@ -32,7 +32,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  */
 public class TailgateMarkerClp extends BaseModelImpl<TailgateMarker>
 	implements TailgateMarker {

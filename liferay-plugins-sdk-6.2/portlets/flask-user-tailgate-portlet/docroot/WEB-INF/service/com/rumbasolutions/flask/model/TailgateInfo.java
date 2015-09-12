@@ -19,7 +19,7 @@ import com.liferay.portal.model.PersistedModel;
 /**
  * The extended model interface for the TailgateInfo service. Represents a row in the &quot;flasktailgate_TailgateInfo&quot; database table, with each column mapped to a property of this class.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateInfoModel
  * @see com.rumbasolutions.flask.model.impl.TailgateInfoImpl
  * @see com.rumbasolutions.flask.model.impl.TailgateInfoModelImpl

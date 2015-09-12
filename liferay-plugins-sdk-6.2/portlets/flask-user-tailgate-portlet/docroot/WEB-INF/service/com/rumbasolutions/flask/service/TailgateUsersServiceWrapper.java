@@ -19,7 +19,7 @@ import com.liferay.portal.service.ServiceWrapper;
 /**
  * Provides a wrapper for {@link TailgateUsersService}.
  *
- * @author rajeshj
+ * @author Brian Wing Shun Chan
  * @see TailgateUsersService
  * @generated
  */
