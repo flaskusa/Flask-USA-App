@@ -31,7 +31,6 @@ function renderEventList(tdata) {
 	 for(var i=0; i < tdata.Events.length; i++)
 		{
 		 	var flaskEvent = tdata.Events[i];
-		 	console.log(flaskEvent);
 		    var st = formatUnixToTime(flaskEvent.startTime);
 		    var eventDate = formatDate(flaskEvent.eventDate)
 		    var objTable = $('<table/>',{'class':'tblRow'});
@@ -52,7 +51,6 @@ function renderEventList(tdata) {
 		    $(objTd2).appendTo(objTr);
 		    $(objTable).appendTo($(divRow));
 		    var objTd3 = $('<td/>',{'width':'34px'});
-		    console.log(flaskEvent);
 		    if(flaskEvent.userEvent == 1){
 		    	var div_heart = $('<div/>',{'class':'heart-shape-userevent miniLogo','data-eventId':flaskEvent.eventId,'data-userEvent':flaskEvent.userEvent});
 		    }else{
@@ -150,7 +148,6 @@ function fnGetEventImages(eventId,venueId){
 			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
 		    $(objWeatherDiv).html($("#weather-background"));
 		    arrPreEvent.push(objWeatherDiv);	
-		    console.log(data);
 			objEventDetails = data.Details;
 			eventDetailJSON = $.extend(true, {}, objEventDetails);
 			$.each(objEventDetails, function(idx, obj) {
@@ -210,7 +207,19 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 						var valueTd = $("<td/>",{'align':'left','width':'100%'});				
 						var evalue = eval("objEventDetails."+key);
 						var caption = value;
-						$(valueTd).html(evalue);
+						if(caption=="Phone"){
+							var objAnchor = $("<a/>",{'href':'tel:'+evalue});
+							objAnchor.html(evalue);
+							$(valueTd).append(objAnchor);
+						}
+						else if(caption=="Website"){
+							var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
+							objAnchor.html(evalue);
+							$(valueTd).append(objAnchor);							
+						}
+						else{
+							$(valueTd).html(evalue);	
+						}
 						$(valueTd).appendTo($(objtr));
 						$(objtr).appendTo($(objtbl));
 					});

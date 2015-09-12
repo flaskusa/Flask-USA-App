@@ -117,8 +117,7 @@ _eventModel.DETAIL_DATA_MODEL = {
             "infoDesc":"Type of Establishment",
             "addrLine1":"Address",
             "phone":"Phone",
-            "website":"Website",
-            "infoDesc":"website",
+            "website":"Website"
             }],
          LIQUOR:[{//TRAFFIC
                 "infoTitle":"Name",
