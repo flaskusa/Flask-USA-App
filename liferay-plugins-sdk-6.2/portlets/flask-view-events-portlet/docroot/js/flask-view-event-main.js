@@ -176,8 +176,7 @@ function fnGetEventImages(eventId,venueId){
 				    	arrPosEventDetails.push(obj);
 				    	break;
 				}				
-			});	
-			
+			});
 			fnSlider(_eventModel.INFO_TYPE.PreEvent, arrPreEvent,eventId,venueId,arrPreEventDetails);
 			fnSlider(_eventModel.INFO_TYPE.DuringEvent, arrDurEvent,eventId,venueId,arrDurEventDetails);
 			fnSlider(_eventModel.INFO_TYPE.PostEvent, arrPosEvent,eventId,venueId,arrPosEventDetails);
@@ -444,11 +443,23 @@ function initMenuList(objDetails){
 		$(ulObj).appendTo(divTabs);
 		var screenWidth = $(document).width();
 		$.each(menuArray,function(a,b){
-			console.log(a);
-			console.log(b);
 			var divObj = $("<div/>",{"class":b});
 			var objArray = [];
-			fnFillImageArray(objDetails[a].DetailImages,objDetails[a].Detail,objArray);
+			$.each(objDetails, function(idx, obj) {
+				objEventDetail = jQuery.parseJSON(obj.Detail);
+				if(objEventDetail.latitude != "")
+				{
+					lat_marker.push([objEventDetail.latitude, objEventDetail.infoTypeId]);
+					lng_marker.push(objEventDetail.longitude);
+					addr_name.push(objEventDetail.infoTitle);
+				}
+				console.log(b==objEventDetail.infoTypeCategoryName);
+				console.log(b);
+				console.log(objEventDetail.infoTypeCategoryName);
+				if(b==objEventDetail.infoTypeCategoryName){
+					fnFillImageArray(obj.DetailImages,obj.Detail,objArray);					
+				}
+			});			
 			fnCreateSlider1(divObj,objArray);				
 			$(divObj).appendTo(divTabs);
 			$(divTabs).appendTo(menuContainer);					
