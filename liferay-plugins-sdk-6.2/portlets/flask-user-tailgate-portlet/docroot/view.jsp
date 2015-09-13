@@ -42,7 +42,6 @@ function initialize(portletId, portlet){
 <div id="action-msg" style="display:none"></div>
 
 
-
 <div id="tailgateDataTable" class="table-condensed">
 	<div class="cssGridMenu">
 		<div class="cssAddUser"><div class="iconAddUser"></div></div>

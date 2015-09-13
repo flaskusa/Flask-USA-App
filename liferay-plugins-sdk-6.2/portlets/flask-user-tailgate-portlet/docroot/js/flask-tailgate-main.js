@@ -725,19 +725,8 @@ function fnDeleteImage(obj){
 		});		
 }
 
-function fnPayNow(tailgateId){
-	var currentUserId = Liferay.ThemeDisplay.getUserId(); 
-	var params= {userId: currentUserId,
-		    tailgateId: tailgateId,
-		    isPaid: true,
-		    paymentMode: 'Venmo',
-		    description: 'Test Payment Description'};
-	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.PAY_FOR_TAILGATE , params, 
-		function (data){
-			console.log(data);
-		},
-		function (error){
-			console.log(error);
-		});	
+function fnPayNow(tailgateId, tailgateName, tailgateAccount, amountToPay){
+	var paymentUrl ="https://venmo.com/?txn=pay&amount=" + amountToPay + "&note= for tailgate " + tailgateName + 
+	"&recipients=" + tailgateAccount ;
+	window.open(paymentUrl,'_blank');
 }	  

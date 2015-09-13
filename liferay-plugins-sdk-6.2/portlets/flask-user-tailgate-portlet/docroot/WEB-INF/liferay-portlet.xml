@@ -14,7 +14,6 @@
 		<header-portlet-css>/css/basic.css</header-portlet-css>
 		<header-portlet-css>/css/bootstrap.css</header-portlet-css>
 		<header-portlet-css>/css/bootstrap-datetimepicker.min.css</header-portlet-css>
-		<footer-portlet-javascript>/js/jquery-2.1.4.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
@@ -31,7 +30,6 @@
 		<footer-portlet-javascript>/js/flask-tailgate-main.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-google-map.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-tailgate-marker-model.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdropdownlist.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.filter.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.pager.js</footer-portlet-javascript>
@@ -44,7 +42,7 @@
 		<footer-portlet-javascript>/js/bootstrap.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/bootstrap-datetimepicker.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxvalidator.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxtooltip.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxtooltip.js</footer-portlet-javascript>		
 		<css-class-wrapper>flask-user-tailgate-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>

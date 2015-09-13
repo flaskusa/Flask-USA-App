@@ -226,7 +226,10 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 
 		var table3= $("<table/>")
 		var amountToPay = "<tr><td class='filledWidth'><b>Fees:</b></td><td>$"+datarecord.amountToPay + "</td></tr>";
-		var ButtonToPay = "<tr><td class='filledWidth' colspan='2'><a href='#' class='btnPay' onclick='fnPayNow("+datarecord.tailgateId+")'>Pay Now</a></td></tr>";
+		var ButtonToPay = "<tr><td class='filledWidth' colspan='2'><a href='#' class='btnPay' "
+			+ "onclick=\"fnPayNow('"+ datarecord.tailgateId +"', '" + datarecord.tailgateName +"', '" +
+			 datarecord.venmoAccountId +"', '" + datarecord.amountToPay + "')\">Pay Now</a></td></tr>";
+		
 		$(table3).append(amountToPay);
 		if(datarecord.isAdmin != "1"){
 			$(table3).append(ButtonToPay);
