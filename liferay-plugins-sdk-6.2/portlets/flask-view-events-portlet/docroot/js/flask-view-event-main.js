@@ -289,8 +289,9 @@ function fnBlankSlide(Slider){
 $(document).ready(function(){
 	//fnLoadList();
 	$(".cssback").click(function(){
-		$('#one').show();
-		$('#two').hide();
+		window.history.back();
+		//$('#one').show();
+		//$('#two').hide();
 	});
 	//Search options
 	jQuery.expr[':'].case_insensitive_contains = function(a, i, m) {

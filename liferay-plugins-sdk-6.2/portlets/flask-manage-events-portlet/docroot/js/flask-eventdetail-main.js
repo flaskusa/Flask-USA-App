@@ -30,33 +30,35 @@ function addDetailsClickHandlers() {
 		if (fnCheckDuplicateTitle($("#infoTitle").val())) {
 			_flaskLib.showWarningMessage('action-msg-warning', _eventDetailModel.MESSAGES.DETAIL_DUPLICATE);
 		}
-		if ($('#eventDetailsForm').jqxValidator('validate'))
-		{
-			if ($('#addrLine1').val() == undefined) {
-				$('#latitude').val(0);
-				$('#longitude').val(0);
-				saveEventDetails();
-			}else {
-				var geocoder = new google.maps.Geocoder();
-				geocoder.geocode({
-					address : $('#infoTitle').val()+' '+ $('#addrLine1').val(),
-					region: 'no'
-				},
-			    function(results, status) {
-			    	if (status.toLowerCase() == 'ok') {
-						// Get center
-						var coords = new google.maps.LatLng(
-							results[0]['geometry']['location'].lat(),
-							results[0]['geometry']['location'].lng()
-						);
+		else{
+			if ($('#eventDetailsForm').jqxValidator('validate'))
+			{
+				if ($('#addrLine1').val() == undefined) {
+					$('#latitude').val(0);
+					$('#longitude').val(0);
+					saveEventDetails();
+				}else {
+					var geocoder = new google.maps.Geocoder();
+					geocoder.geocode({
+						address : $('#infoTitle').val()+' '+ $('#addrLine1').val(),
+						region: 'no'
+					},
+				    function(results, status) {
+				    	if (status.toLowerCase() == 'ok') {
+							// Get center
+							var coords = new google.maps.LatLng(
+								results[0]['geometry']['location'].lat(),
+								results[0]['geometry']['location'].lng()
+							);
 
-						$('#latitude').val(coords.lat());
-						$('#longitude').val(coords.lng());
-						saveEventDetails();
-			    	}
-			    });
-			}
-			
+							$('#latitude').val(coords.lat());
+							$('#longitude').val(coords.lng());
+							saveEventDetails();
+				    	}
+				    });
+				}
+				
+			}			
 		}
 	});
 

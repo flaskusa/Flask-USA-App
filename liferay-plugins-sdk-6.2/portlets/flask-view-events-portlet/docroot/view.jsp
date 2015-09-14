@@ -104,6 +104,7 @@
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places" type="text/javascript"></script>
 	<div id="gmap_canvas" style="height:60%"></div>
 	<div id='jqxWidget'></div>
+	<input class="btn btn-info cssback" type="button" value="Back"/>
 </div>
 
 <input id="repositoryId" type="hidden" value="<%=repositoryId%>">
