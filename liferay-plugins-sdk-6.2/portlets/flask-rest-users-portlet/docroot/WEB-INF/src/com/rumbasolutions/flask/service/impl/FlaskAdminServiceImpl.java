@@ -537,6 +537,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			}else{
 				addMobile(mobileNumber, user, serviceContext);
 			}	
+			addUserInterest(userInterests, user);
 			return user;
 	}	
 	
