@@ -69,6 +69,7 @@ _eventDetailModel.MESSAGES= {
 		DETAIL_DEL_ERR: "Error in deleting event details",
 		DETAIL_DUPLICATE: "Event detail with same title already exist",
 		DETAIL_NO_IMAGES_INFO: "No images found",
-		DETAIL_IMAGE_DELETE: "Deleted successfully"
+		DETAIL_IMAGE_DELETE: "Deleted successfully",
+		CHECK_INTERNET_CONNECTION: "Internet is not connected, Please check your internet connection"
 };
 

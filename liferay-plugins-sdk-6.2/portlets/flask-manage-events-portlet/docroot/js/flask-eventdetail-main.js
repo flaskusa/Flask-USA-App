@@ -27,6 +27,7 @@ function addDetailsClickHandlers() {
 	eventDetailForm = $("#eventForm");
 	/*	Initialize display elements*/
 	$(".cssVdSave").click(function() {
+		$(this).attr("disabled","disabled");
 		if (fnCheckDuplicateTitle($("#infoTitle").val())) {
 			_flaskLib.showWarningMessage('action-msg-warning', _eventDetailModel.MESSAGES.DETAIL_DUPLICATE);
 		}
@@ -38,24 +39,29 @@ function addDetailsClickHandlers() {
 					$('#longitude').val(0);
 					saveEventDetails();
 				}else {
-					var geocoder = new google.maps.Geocoder();
-					geocoder.geocode({
-						address : $('#infoTitle').val()+' '+ $('#addrLine1').val(),
-						region: 'no'
-					},
-				    function(results, status) {
-				    	if (status.toLowerCase() == 'ok') {
-							// Get center
-							var coords = new google.maps.LatLng(
-								results[0]['geometry']['location'].lat(),
-								results[0]['geometry']['location'].lng()
-							);
+					try{
+						var geocoder = new google.maps.Geocoder();
+						geocoder.geocode({
+							address : $('#infoTitle').val()+' '+ $('#addrLine1').val(),
+							region: 'no'
+						},
+					    function(results, status) {
+					    	if (status.toLowerCase() == 'ok') {
+								// Get center
+								var coords = new google.maps.LatLng(
+									results[0]['geometry']['location'].lat(),
+									results[0]['geometry']['location'].lng()
+								);
 
-							$('#latitude').val(coords.lat());
-							$('#longitude').val(coords.lng());
-							saveEventDetails();
-				    	}
-				    });
+								$('#latitude').val(coords.lat());
+								$('#longitude').val(coords.lng());
+								saveEventDetails();
+					    	}
+					    });						
+					}
+					catch(ex){
+						_flaskLib.showErrorMessage('action-msg', _eventDetailModel.MESSAGES.CHECK_INTERNET_CONNECTION);
+					}
 				}
 				
 			}			
@@ -166,6 +172,7 @@ function saveEventDetails() {
 			    		$("#infoTypeCategoryId").val(0);
 			    		loadEventDetailsData(data.eventId);
 			    		_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);
+			    		$(".cssVdSave").removeAttr("disabled");
 					}
 
 				} ,
@@ -242,6 +249,7 @@ function fnSaveImages(eventDetailId,eventId) {
 			$("#infoTypeCategoryId").val(0);
 			loadEventDetailsData(eventId);
 			_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);
+			$(".cssVdSave").removeAttr("disabled");
 		},1)
 	});
 }
@@ -279,7 +287,7 @@ function fnCheckDuplicateTitle(_infoTitle) {
 		var Obj = JsonEventDetails;
 		var iCount = 0;
 	    var items = Obj.filter(function(item) {
-	    	if (item.infoTitle==_infoTitle) {
+	    	if (item.infoTitle==_infoTitle && item.eventDetailId!=parseInt($('#eventDetailId').val())) {
 	    		iCount++;
 	    	}
 	    });

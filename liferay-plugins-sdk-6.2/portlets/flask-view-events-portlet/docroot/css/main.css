@@ -740,3 +740,8 @@ input.btn.btn-info.cssback {
     color: #F6931C;
     text-shadow: 0px 2px 5px rgb(0, 0, 0);
 }
+
+.aui .btn-info:hover, .aui .btn-info:focus, .aui .btn-info:active, .aui .btn-info.active, .aui .btn-info.disabled, .aui .btn-info[disabled] {
+    color: white;
+    background-color: #ABABAB;
+}
