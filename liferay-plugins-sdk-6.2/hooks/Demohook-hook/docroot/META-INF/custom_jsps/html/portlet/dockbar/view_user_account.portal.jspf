@@ -89,7 +89,7 @@
 			<c:if test="<%= userSetupComplete %>">
 
 				<%
-				String myAccountURL = themeDisplay.getURLPortal() +"/web/guest/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Fcreate_account";
+				String myAccountURL = themeDisplay.getURLPortal() +"/web/flask/my-account";
 				String userEvents = themeDisplay.getURLPortal() + "/web/flask/my-events";
 				String userGroups = themeDisplay.getURLPortal() + "/web/flask/my-groups";
 				String userTailgates = themeDisplay.getURLPortal() + "/web/flask/usertailgates";
