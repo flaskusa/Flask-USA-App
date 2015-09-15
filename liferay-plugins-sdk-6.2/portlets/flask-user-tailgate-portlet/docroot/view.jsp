@@ -18,7 +18,7 @@ function initialize(portletId, portlet){
 	if(portletId == "flaskusertailgate_WAR_flaskusertailgateportlet") {
 		_tailgateModel.userId = "<%=userId%>";
 		_tailgateModel.userName ="<%=userName%>";
-		createTable({},_tailgateModel.DATA_MODEL.TAILGATE, $('#grid'), "tailgateActionMenu", "Edit", contextMenuHandler, ["Tailgate", "Images"]);
+		createTable({},_tailgateModel.DATA_MODEL.TAILGATE, $('#grid'), "tailgateActionMenu", "Edit", contextMenuHandler, ["Tailgate","Location","Images"]);
 		loadData();
 		addClickHandlers();
 		initForm();
