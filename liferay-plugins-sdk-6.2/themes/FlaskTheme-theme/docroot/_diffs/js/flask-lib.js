@@ -141,16 +141,28 @@ _flaskLib.loadUSARegions = function(elementId, selectedId){
 }
 
 _flaskLib.showErrorMessage =   function (elementId, msg){
-	var ele = $('#'+ elementId);
+	if(typeof elementId=="object")
+		var ele = $(elementId);
+	else
+		var ele = $('#'+ elementId);
+
 	ele.text(msg);
 	ele.removeClass().addClass('alert alert-error');
 	ele.show();
+	$('html').click(function() {
+		$("#action-msg").delay(500).fadeOut(500);
+	});	
 }
 _flaskLib.showSuccessMessage = function (elementId, msg){
-	var ele = $('#'+ elementId);
+	if(typeof elementId=="object")
+		var ele = $(elementId);
+	else
+		var ele = $('#'+ elementId);
+
 	ele.text(msg);
 	ele.removeClass().addClass('alert alert-success');
 	ele.show();
+	$(ele).delay(3000).fadeOut(1000);	
 }
 _flaskLib.showWarningMessage = function (elementId, msg){
 	if(typeof elementId=="object")
@@ -160,6 +172,7 @@ _flaskLib.showWarningMessage = function (elementId, msg){
 	ele.text(msg);
 	ele.removeClass().addClass('alert alert-warning');
 	ele.show();
+	$(ele).delay(3000).fadeOut(1000);
 }
 _flaskLib.showInformationMessage = function (elementId, msg){
 	if(typeof elementId=="object")
@@ -169,6 +182,7 @@ _flaskLib.showInformationMessage = function (elementId, msg){
 	ele.text(msg);
 	ele.removeClass().addClass('alert alert-info');
 	ele.show();
+	$(ele).delay(5000).fadeOut(1000);
 }
 
 _flaskLib.hideMessage = function (elementId){
