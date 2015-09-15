@@ -49,4 +49,6 @@ _userModel.MESSAGES= {
 		ERROR: "There was an error in saving Admin",
 		DEL_SUCCESS: "Admin successfully deleted",
 		DEL_ERR: "Error in deleting Admin",
+		USER_SAVE: "User successfully saved",
+		USER_ERROR: "There was an error in saving User",
  };

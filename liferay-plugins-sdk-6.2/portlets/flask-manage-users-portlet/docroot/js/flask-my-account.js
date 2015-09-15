@@ -188,11 +188,11 @@ function saveAccount(){
 	console.log(params.userId);
 	flaskRequest.sendGETRequest(_userModel.SERVICE_ENDPOINTS.UPDATE_USERS, params, 
 				function (data){
-					_flaskLib.showSuccessMessage('action-msg', _userModel.MESSAGES.SAVE);
+					_flaskLib.showSuccessMessage('action-msg', _userModel.MESSAGES.USER_SAVE);
 					fnUpdateProfilePic(data.userId);
 				} ,
 				function (data){
-					_flaskLib.showErrorMessage('action-msg', _userModel.MESSAGES.ERROR);
+					_flaskLib.showErrorMessage('action-msg', _userModel.MESSAGES.USER_ERROR);
 				});
 
 }
