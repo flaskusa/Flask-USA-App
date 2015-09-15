@@ -178,16 +178,24 @@ function formatUnixToTime(tdate)
 }
 
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord){
+	console.log(datarecord);
 	var tabsdiv = null; 
     tabsdiv = $($(parentElement).children()[0]);
     if (tabsdiv != null) {
     	
 		var venueDiv = tabsdiv.find('.tailgate');
 		var imagesDiv = tabsdiv.find('.images');
+		var locationDiv = tabsdiv.find('.location');
 		
 		var container1 = $('<div class="row-fluid"></div>');
-		
 		var container2 = $('<div class="row-fluid"></div>');
+		var containerLocation = $('<div class="row-fluid"></div>');
+		var locationMapId = "google_map"+index;
+		var locationColumn = $('<div class="span12" style="height: 140px;"></div>');
+		locationColumn.attr("id",locationMapId);
+		containerLocation.append(locationColumn);
+		locationDiv.append(containerLocation);
+		
 		venueDiv.append(container1);
 		
 		var leftcolumn = $('<div class="span5"></div>');
@@ -243,6 +251,8 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 			width : '98%',
 			height : 180
 		});
+		
+		loadMap(42.48114, -83.49441, locationMapId);
     }
 	}
 

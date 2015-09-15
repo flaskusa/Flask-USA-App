@@ -15,7 +15,7 @@ function initializeMap(tgId, latitude, longitude) {
 			function(data){/*success handler*/
 				latitude = data.latitude;
 				longitude = data.longitude;
-				loadMap(latitude, longitude);
+				loadMap(latitude, longitude,"google_map");
 				isMarkerCreated = true;
 			} , function(error){ /*failure handler*/
 				_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
@@ -27,15 +27,15 @@ function initializeMap(tgId, latitude, longitude) {
 				latitude = 42.48114;
 			if(!longitude)
 				longitude = -83.49441;
-			loadMap(latitude, longitude);
+			loadMap(latitude, longitude,"google_map");
 	}
 
 	
 }
 
-function loadMap(latitude, longitude){
+function loadMap(latitude, longitude, elementId){
 	 var mapCenter = new google.maps.LatLng(latitude, longitude); //Google map Coordinates
- 	//Google map option
+	//Google map option
      var googleMapOptions = 
      { 
          center: mapCenter, // map center
@@ -45,7 +45,7 @@ function loadMap(latitude, longitude){
          scaleControl: true, // enable scale control
          mapTypeId: google.maps.MapTypeId.ROADMAP // google map type
      };
-     map = new google.maps.Map(document.getElementById("google_map"), googleMapOptions);
+     map = new google.maps.Map(document.getElementById(elementId), googleMapOptions);
      map.setOptions({disableDoubleClickZoom: true });
      addMapEventListener(map);
 }
