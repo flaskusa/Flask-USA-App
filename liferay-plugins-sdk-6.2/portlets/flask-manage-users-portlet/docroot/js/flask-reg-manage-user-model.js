@@ -8,6 +8,7 @@ _userModel.SERVICE_ENDPOINTS = {
 	ADD_USERS 					: "/flask-rest-users-portlet.flaskadmin/add-flask-user",
 	UPDATE_USERS				: "/flask-rest-users-portlet.flaskadmin/update-logged-in-user",
 	DELETE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/delete-flask-admins",
+	GET_LOGGED_IN_USER 			: "/flask-rest-users-portlet.flaskadmin/get-user-by-id",
 
 	TERMS_AND_CONDITION         : "http://www.rumbasolutions.com", 
 	SERVICE_TIMEOUT 			: 30000	
