@@ -39,6 +39,23 @@ function initialize(portletId, portlet){
 	    console.log("Cal Done");    
 		$(".jqx-checkbox").css("margin-top","6.5px");
 	}
+	if(portletId == "myaccount_WAR_flaskmanageusersportlet")
+	{
+		$('#DOB').datetimepicker({
+			format: "MM-DD-YYYY",
+			//pickTime: false
+		});
+		$("#adminForm").show();
+		$("#adminDataTable").hide();
+		$(".clsCancel").hide();
+		loadForm();
+		addClickHandlers();
+		document.getElementById('roleId').disabled=true;
+		//$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
+		$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
+	    console.log("Cal Done");    
+		$(".jqx-checkbox").css("margin-top","6.5px");
+	}
 }
 
 </script>
@@ -81,6 +98,13 @@ function initialize(portletId, portlet){
 </div>
 
 <form id="adminForm">
+<ul class="nav nav-tabs">
+	  <li class="active"><a href="#tab1" data-toggle="tab">Contact</a></li>
+	  <li><a href="#tab2" data-toggle="tab" id="tab21">Address</a></li>
+	  <li><a href="#tab3" data-toggle="tab" id="tab31">Interests</a></li>
+</ul>
+<div class="tab-content">
+<div class="tab-pane active" id="tab1">
   <div class="">
   	<div id="ProfilePic" style="background-image:url('http://localhost:8080/documents/20181/0/21491')"></div>  
    <div class="form-group">
@@ -124,13 +148,37 @@ function initialize(portletId, portlet){
        <input name="password2" id="password2" class="form-control" type="password">
      </div>
    </div> 
-   <div class="form-group">
+   <div class="form-group ">
      <label class="control-label" for="roleId">Role:</label>
      <div class="controls">
        <select id="roleId" name="roleId" class="form-control"></select>
      </div>
    </div>  
+   <div class="form-group">
+      <label class="control-label" for="gender">Gender:</label>
+      <div class="controls">
+	     <input name="gender" class="gender" type="radio" value="Male" checked>Male
+	     <input name="gender" class="gender" type="radio" value="Female">Female
+      </div>
+  </div>
    
+   <div class="form-group">
+	  <label class="control-label" for="DOB">Date of Birth:</label>
+		  <div class="controls">
+		   	<input id="DOB" class="form-control" type="text">
+		  </div>
+   </div>  
+   
+   <div class="form-group">
+     <label class="control-label" for="mobileNumber">Mobile:</label>
+	     <div class="controls">
+	       <input name="mobileNumber" id="mobileNumber" class="form-control" type="text">
+	     </div>
+   </div>
+   </div>
+   </div>
+</div>
+<div class="tab-pane" id="tab2">
   <div class="">
    <div class="form-group">
      <label class="control-label" for="streetName">Street:</label>
@@ -174,29 +222,8 @@ function initialize(portletId, portlet){
      </div>
    </div>  
   </div>
-   <div class="form-group">
-      <label class="control-label" for="gender">Gender:</label>
-      <div class="controls">
-        <input name="gender" class="gender" type="radio" value="Male" checked>Male
-     <input name="gender" class="gender" type="radio" value="Female">Female
-      </div>
-  </div>
-   
-   <div class="form-group">
-  <label class="control-label" for="DOB">Date of Birth:</label>
-  <div class="controls">
-   <div id="DOB"></div>
-  </div>
-   </div>  
-  </div>
-   
-   <div class="form-group">
-     <label class="control-label" for="mobileNumber">Mobile:</label>
-     <div class="controls">
-       <input name="mobileNumber" id="mobileNumber" class="form-control" type="text">
-     </div>
-   </div>    
-  </div>
+</div>
+<div class="tab-pane" id="tab3">
 <div class="form-group">
     
  <div class="row-fluid">
@@ -253,7 +280,8 @@ function initialize(portletId, portlet){
  </div>
  </div>
 </div>
- 
+ </div>
+ </div>
   <input class="btn btn-info clsSave" type="button" value="Save"/>
   <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
   <input id="userId" type="hidden" value="0">
