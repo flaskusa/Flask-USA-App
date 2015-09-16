@@ -271,9 +271,8 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
  *  This method creates grid
  */
 function createEventsTable(data, grid, eventsIndex){
-    var eventsColumns = [{ text: 'Event Name', columntype: 'textbox',  datafield: 'eventName', width: '30%' },
-    	 { text: 'Event Description', datafield: 'description', width: '40%'},
-    	 { text: 'Event Date', datafield: 'eventDate',  width: '20%'}];
+    var eventsColumns = [{ text: 'Event Name', columntype: 'textbox',  datafield: 'eventName' },
+    	 { text: 'Event Date', datafield: 'eventDate',  width: '30%'}];
     var source = {
 			 localdata:data,
 			 datatype:'array',
