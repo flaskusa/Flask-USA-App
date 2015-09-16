@@ -1,13 +1,13 @@
 var _adCustomerModel = {};
 
 _adCustomerModel.SERVICE_ENDPOINTS = {
-	API_PREFIX					:"/api/jsonws",
-	GET_ALL_CUSTOMER 			: "/flask-advertisement-portlet.adcustomer/get-all-customer",
-	GET_CUSTOMER 				: "/flask-advertisement-portlet.adcustomer/get-customer",
-	ADD_CUSTOMER 				: "/flask-advertisement-portlet.adcustomer/add-customer",
-	UPDATE_CUSTOMER				: "/flask-advertisement-portlet.adcustomer/update-customer",
-	DELETE_CUSTOMER				: "/flask-advertisement-portlet.adcustomer/delete-customer",
-	DELETE_CUSTOMERS			: "/flask-advertisement-portlet.adcustomer/delete-customers",
+	API_PREFIX		:"/api/jsonws",
+	GET_ALL_CUSTOMER:"/flask-advertisement-portlet.adcustomer/get-all-customer",
+	GET_CUSTOMER 	:"/flask-advertisement-portlet.adcustomer/get-customer",
+	ADD_CUSTOMER 	:"/flask-advertisement-portlet.adcustomer/add-customer",
+	UPDATE_CUSTOMER	:"/flask-advertisement-portlet.adcustomer/update-customer",
+	DELETE_CUSTOMER	:"/flask-advertisement-portlet.adcustomer/delete-customer",
+	DELETE_CUSTOMERS:"/flask-advertisement-portlet.adcustomer/delete-customers"
 };
 
 _adCustomerModel.DATA_MODEL= {

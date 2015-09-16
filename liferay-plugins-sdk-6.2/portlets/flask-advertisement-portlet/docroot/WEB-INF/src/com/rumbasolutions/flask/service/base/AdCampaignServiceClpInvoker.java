@@ -44,7 +44,7 @@ public class AdCampaignServiceClpInvoker {
 
 		_methodParameterTypes47 = new String[] {
 				"java.lang.String", "long", "boolean", "boolean", "boolean",
-				"boolean", "long", "java.lang.String",
+				"boolean", "long", "long", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -138,8 +138,9 @@ public class AdCampaignServiceClpInvoker {
 				((Boolean)arguments[4]).booleanValue(),
 				((Boolean)arguments[5]).booleanValue(),
 				((Long)arguments[6]).longValue(),
-				(java.lang.String)arguments[7],
-				(com.liferay.portal.service.ServiceContext)arguments[8]);
+				((Long)arguments[7]).longValue(),
+				(java.lang.String)arguments[8],
+				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 
 		if (_methodName49.equals(name) &&

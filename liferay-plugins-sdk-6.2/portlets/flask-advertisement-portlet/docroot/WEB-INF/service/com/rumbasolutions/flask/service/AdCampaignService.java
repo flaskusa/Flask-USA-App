@@ -75,7 +75,7 @@ public interface AdCampaignService extends BaseService, InvokableService {
 	public com.rumbasolutions.flask.model.AdCampaign addCampaign(
 		java.lang.String campaignName, long customerId, boolean displayGeneral,
 		boolean displayPreEvent, boolean displayDuringEvent,
-		boolean displayPostEvent, long frequencyPerHour,
+		boolean displayPostEvent, long frequencyPerHour, long eventTypeId,
 		java.lang.String events,
 		com.liferay.portal.service.ServiceContext serviceContext);
 

@@ -2,6 +2,7 @@ var adCampaignForm;
 var campaignId = 0;
 var dropZoneImages;
 var infoTypeJson;
+var allEvents = [];
 
 function adCampaignClickHandlers() {
 	adCampaignForm = $("#addCampaignForm");
@@ -12,9 +13,10 @@ function adCampaignClickHandlers() {
 	/* Click handler for add user button */
 
 	$("#addCampaign").click(function() {
+		adCampaignForm.reset();
 		$("#adCampaignDataTable").hide();
 		prepareCustomerDropDownList('customerId');
-		prepareEventTypeDropdown('eventTypeId',0);
+		prepareEventTypeDropdown('eventTypeId', 1);
 		loadEventData("1");
 		setCampaignFormVisible(true);
 		campaignId = 0;
@@ -72,6 +74,23 @@ function setCampaignFormVisible(visible){
 	}
 	
 	
+}
+function loadEvents(){
+	var flaskRequest = new Request();
+	var params = {};
+	flaskRequest.sendGETRequest(_adCampaignModel.SERVICE_ENDPOINTS.GET_EVENT, params, 
+	function(data){/*success handler*/
+		allEvents = eval(data);
+		var date;
+		$.each(allEvents.Events, function(index, event){
+			var eventDate = event.eventDate;
+			date = new Date(eventDate);
+			event.eventDate = date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear();
+		});
+	} , function(error){ /*failure handler*/
+		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
+		console.log("Error in getting data: " + error);
+	});
 }
 
 function loadCampaignData() {
@@ -158,14 +177,28 @@ function editCampaign(rowData) {
 	_flaskLib.loadDataToForm("adCampaignForm",
 			_adCampaignModel.DATA_MODEL.CAMPAIGN, rowData, function(formId,
 					model, data) {
-
 			});
 	$("#adCampaignDataTable").hide();
-	prepareCustomerDropDownList('customerId', rowData.customerId);
 	prepareEventTypeDropdown('eventTypeId',rowData.eventTypeId);
-	//prepareInfoTypesCheckBox(rowData.displayAtId);
+	prepareCustomerDropDownList('customerId', rowData.customerId);
 	fnGetCampaignImages(rowData.campaignId,$("#campaignDetailGallery"), true);
-	//filterData(rowData.eventTypeId, rowData.eventsId);
+	var param = {campaignId : rowData.campaignId};
+		var flaskRequest = new Request();
+		flaskRequest.sendGETRequest(
+				_adCampaignModel.SERVICE_ENDPOINTS.GET_CAMPAIGN_EVENTS, param,
+				function(data) {
+					var eventsId = "";
+					for(var i = 0; i < data.length; i++){
+						var campEvent = data[i];
+						eventsId += campEvent.eventId;
+						if(i < data.length - 1)
+							eventsId += ",";
+					}
+					filterData(rowData.eventTypeId,eventsId);
+				}, function(data) {
+					_flaskLib.showErrorMessage('campaign-action-msg',
+							_adCampaignModel.MESSAGES.DEL_ERR);
+				});
 	setCampaignFormVisible(true);
 }
 
@@ -174,11 +207,9 @@ function saveCampaign() {
 			_adCampaignModel.DATA_MODEL.CAMPAIGN, function(formId, model,
 					formData) {
 				var displayAt = [];
-				formData["Events"] = GRID_PARAM_CAMPAIGN.getCheckedEventIdList('eventId');
+				formData["events"] = GRID_PARAM_CAMPAIGN.getCheckedEventIdList('eventId');
 				formData["customerId"] = $('#customerId').val();
-				formData["customerName"] = $('#customerId :selected').text();
-				formData["frequencyPerHour"] = $('#frequencyPerHour').val();
-				formData["campaignName"] = $('#campaignName').val();
+				formData["customerName"] = null;
 				$("input[name^='display']").each(function(i) {
 					if($(this).attr("checked")=='checked'){
 						formData[$(this).attr("name")] = true;
@@ -191,10 +222,11 @@ function saveCampaign() {
 			});
 	var flaskRequest = new Request();
 	var url = ""
-	params.campaignId = campaignId;
-	if (params.campaignId == 0) {
+	params.adDisplayTime = null;
+	if (campaignId == 0) {
 		url = _adCampaignModel.SERVICE_ENDPOINTS.ADD_CAMPAIGN;
 	} else {
+		params.campaignId = campaignId;
 		url = _adCampaignModel.SERVICE_ENDPOINTS.UPDATE_CAMPAIGN;
 	}
 
@@ -228,11 +260,11 @@ function filterData(evenType, eventsId) {
 	if (eventsId)
 		var selectedEventsArray = eventsId.split(",");
 	var eventsIndex = [];
-	var events = _flaskLib.events;
+	var events = allEvents.Events;
 	for (var i = 0; i < events.length; i++) {
 		if (events[i].eventTypeId == evenType) {
 			// Add Venue Name here
-			events[i].venueName = _flaskLib.venues[events[i].venueId].venueName;
+//			events[i].venueName = _flaskLib.venues[events[i].venueId].venueName;
 			filterdData.push(events[i]);
 			if (eventsId
 					&& selectedEventsArray

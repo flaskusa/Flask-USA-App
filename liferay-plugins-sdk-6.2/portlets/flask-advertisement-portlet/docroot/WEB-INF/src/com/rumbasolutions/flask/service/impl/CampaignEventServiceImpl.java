@@ -14,6 +14,19 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.ServiceContext;
+import com.rumbasolutions.flask.model.CampaignEvent;
+import com.rumbasolutions.flask.model.impl.CampaignEventImpl;
+import com.rumbasolutions.flask.service.CampaignEventLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.CampaignEventServiceBaseImpl;
 
 /**
@@ -36,4 +49,21 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.rumbasolutions.flask.service.CampaignEventServiceUtil} to access the campaign event remote service.
 	 */
+	
+	private static Log LOGGER = LogFactoryUtil.getLog(CampaignEventServiceImpl.class);
+	
+	@Override
+	public List<CampaignEvent> getCampaignEvents(long campaignId, ServiceContext serviceContext){
+		List<CampaignEvent> campaignEventList = new ArrayList<CampaignEvent>();
+		try {
+			DynamicQuery campaignEventQuery = DynamicQueryFactoryUtil.forClass(CampaignEventImpl.class);
+			campaignEventQuery.add(PropertyFactoryUtil.forName("campaignId").eq(new Long(campaignId)));
+			campaignEventList = CampaignEventLocalServiceUtil.dynamicQuery(campaignEventQuery);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			LOGGER.error("Error in get Event Cache :" + e.getMessage());
+			e.printStackTrace();
+		}
+		return campaignEventList;
+	}
 }

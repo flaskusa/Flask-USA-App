@@ -14,6 +14,13 @@
 
 package com.rumbasolutions.flask.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.rumbasolutions.flask.service.CampaignEventServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.rumbasolutions.flask.service.CampaignEventServiceUtil} service utility. The
@@ -55,4 +62,23 @@ package com.rumbasolutions.flask.service.http;
  * @generated
  */
 public class CampaignEventServiceSoap {
+	public static com.rumbasolutions.flask.model.CampaignEventSoap[] getCampaignEvents(
+		long campaignId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.CampaignEvent> returnValue =
+				CampaignEventServiceUtil.getCampaignEvents(campaignId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.CampaignEventSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(CampaignEventServiceSoap.class);
 }

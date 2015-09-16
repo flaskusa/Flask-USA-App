@@ -31,6 +31,12 @@ public class CampaignEventServiceClpInvoker {
 		_methodName39 = "setBeanIdentifier";
 
 		_methodParameterTypes39 = new String[] { "java.lang.String" };
+
+		_methodName44 = "getCampaignEvents";
+
+		_methodParameterTypes44 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -47,6 +53,12 @@ public class CampaignEventServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName44.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
+			return CampaignEventServiceUtil.getCampaignEvents(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -54,4 +66,6 @@ public class CampaignEventServiceClpInvoker {
 	private String[] _methodParameterTypes38;
 	private String _methodName39;
 	private String[] _methodParameterTypes39;
+	private String _methodName44;
+	private String[] _methodParameterTypes44;
 }

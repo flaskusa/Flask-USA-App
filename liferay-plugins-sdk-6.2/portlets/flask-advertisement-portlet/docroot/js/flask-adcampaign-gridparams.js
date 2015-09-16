@@ -100,7 +100,7 @@ GRID_PARAM_CAMPAIGN.onRowClick =function (event)
 		editrow = event.args.rowindex;
 		var rowsheight = grid.jqxGrid('rowsheight');
 		var top = $(this).offset().top + (2 + editrow) * rowsheight;
-		var left = ($(this).offset().left + parseInt($('#CampaignGridContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
+		var left = ($(this).offset().left + parseInt($('#manageCampaignContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
 		$('#' +rowMenuDivId).jqxMenu('open', left, top + 5 + scrollTop);
 	} else {
 		// original event.
@@ -161,20 +161,16 @@ GRID_PARAM_CAMPAIGN.initrowdetails = function(index, parentElement, gridElement,
 			+ datarecord.campaignName + "</td></tr>";
 	    var customer_Name = "<tr><td class='filledWidth'><b>Customer Name:</b></td><td> "
 			+ datarecord.customerName + "</td></tr>";
-	    var event_Type = "<tr><td class='filledWidth'><b>Event Type:</b></td><td> "
-			+ datarecord.eventTypeName + "</td></tr>";
-		var events = "<tr><td class='filledWidth'> <b>Events:</b></td><td>"
-				+ datarecord.events + "</td></tr>";
+	  
 		var display_At = "<tr><td class='filledWidth'><b>Display At:</b></td><td>"
 				+ datarecord.adDisplayTime + "</td></tr>";
 		var frequency = "<tr><td class='filledWidth1'><b>Frequency:</b></td><td> "
-				+ datarecord.frequencyPerHour + "</td></tr>";
+				+ datarecord.frequencyPerHour + " impressions per hour </td></tr>";
 			
 		$(leftcolumn).append("<table>");
 		
 		$(leftcolumn).append(campaign_Name);
 		$(leftcolumn).append(customer_Name);
-		$(leftcolumn).append(event_Type);
 		$(leftcolumn).append(display_At);
 		$(leftcolumn).append(frequency);
 		$(leftcolumn).append("</table>");
@@ -198,7 +194,6 @@ GRID_PARAM_CAMPAIGN.initrowdetails = function(index, parentElement, gridElement,
  *  This method creates grid
  */
 function createCampaignTable(data, model, grid, menuDivId, actionColText,contextMenuHandler, detailDivArr){
-	
 		if(typeof gridId == undefined){
 			throw 'a valid grid div object must be provided';
 		}
@@ -227,12 +222,11 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
 	}
     
     var campaignColumns = [{ text: 'Campaign Name', columntype: 'textbox',  
-    		datafield: 'campaignName', width: '20%' },
+    		datafield: 'campaignName'},
     	 { text: 'Customer Name', datafield: 'customerName', width: '20%'},
-    	 { text: 'Event Type', datafield: 'eventTypeName', width: '20%'},    	 
-    	 { text: 'Display Times', datafield: 'adDisplayTime', width: '20%'},
+    	 { text: 'Display Times', datafield: 'adDisplayTime', width: '30%'},
     	 { text: 'Frequency per hour', datafield: 'frequencyPerHour', width: '10%'},
-    	 { text: 'Edit',  datafield: 'campaignId', width: '10%', cellsalign: 'center', cellsrenderer: actionRenderer}];
+    	 { text: 'Edit',  datafield: 'campaignId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
     	
     
     

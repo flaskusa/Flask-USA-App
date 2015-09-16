@@ -10,7 +10,8 @@ _adCampaignModel.SERVICE_ENDPOINTS = {
 	GET_INFO_TYPES 			: "/flask-rest-events-portlet.infotype/get-info-types",
 	GET_EVENT 	   			: "/flask-rest-events-portlet.event/get-all-events",
 	GET_CAMPAIGN_IMAGES   	: "/flask-advertisement-portlet.adcampaign/get-campaign-images",
-	DELETE_CAMPAIGN_IMAGE	: "/flask-advertisement-portlet.adcampaign/delete-campaign-image"
+	DELETE_CAMPAIGN_IMAGE	: "/flask-advertisement-portlet.adcampaign/delete-campaign-image",
+	GET_CAMPAIGN_EVENTS		: "/flask-advertisement-portlet.campaignevent/get-campaign-events"
 };
 
 _adCampaignModel.DATA_MODEL = {
@@ -35,7 +36,7 @@ _adCampaignModel.DATA_MODEL = {
 		},
 		{
 			name : 'eventTypeId',
-			type : 'string',
+			type : 'long',
 			fieldName : 'Event Type ID'
 		},
 		{
@@ -69,15 +70,17 @@ _adCampaignModel.DATA_MODEL = {
 			fieldName : 'displayPostEvent'
 		},
 		{
-			name : 'adDisplayTime',
-			type : 'boolean',
-			fieldName : 'Display Time'
-		},
-		{
 			name : 'frequencyPerHour',
 			type : 'long',
 			fieldName : 'Frequency'
+		},
+		{
+			name : 'adDisplayTime',   /* display only*/
+			type : 'string',
+			fieldName : 'adDisplayTime'
 		}
+		
+		
 		]
 	};
 

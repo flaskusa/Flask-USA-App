@@ -63,6 +63,12 @@ public class CampaignEventServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static java.util.List<com.rumbasolutions.flask.model.CampaignEvent> getCampaignEvents(
+		long campaignId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getCampaignEvents(campaignId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

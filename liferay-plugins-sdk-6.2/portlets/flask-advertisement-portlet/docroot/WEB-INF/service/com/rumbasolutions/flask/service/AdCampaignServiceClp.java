@@ -44,7 +44,7 @@ public class AdCampaignServiceClp implements AdCampaignService {
 
 		_methodParameterTypes5 = new String[] {
 				"java.lang.String", "long", "boolean", "boolean", "boolean",
-				"boolean", "long", "java.lang.String",
+				"boolean", "long", "long", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -206,7 +206,7 @@ public class AdCampaignServiceClp implements AdCampaignService {
 	public com.rumbasolutions.flask.model.AdCampaign addCampaign(
 		java.lang.String campaignName, long customerId, boolean displayGeneral,
 		boolean displayPreEvent, boolean displayDuringEvent,
-		boolean displayPostEvent, long frequencyPerHour,
+		boolean displayPostEvent, long frequencyPerHour, long eventTypeId,
 		java.lang.String events,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
@@ -228,6 +228,8 @@ public class AdCampaignServiceClp implements AdCampaignService {
 					displayPostEvent,
 						
 					frequencyPerHour,
+						
+					eventTypeId,
 						
 					ClpSerializer.translateInput(events),
 						

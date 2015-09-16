@@ -16,6 +16,7 @@ package com.rumbasolutions.flask.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -36,6 +37,7 @@ import com.rumbasolutions.flask.service.AdCustomerServiceUtil;
 import com.rumbasolutions.flask.service.CampaignEventLocalServiceUtil;
 import com.rumbasolutions.flask.service.CampaignImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.AdCampaignServiceBaseImpl;
+import com.rumbasolutions.flask.service.persistence.AdCampaignFinderUtil;
 import com.rumbasolutions.flask.service.persistence.AdCampaignUtil;
 import com.rumbasolutions.flask.service.persistence.CampaignImageUtil;
 
@@ -65,33 +67,36 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 	 * Never reference this interface directly. Always use {@link flask.manage.advertisement.service.AdCampaignServiceUtil} to access the ad campaign remote service.
 	 */
 	private static Log LOGGER = LogFactoryUtil.getLog(AdCampaignServiceImpl.class);
-	
 	@Override
 	public JSONArray getAllCampaign() {
 		JSONArray campaignJsonArray = JSONFactoryUtil.createJSONArray();
-		List<AdCampaign> campaignList = new ArrayList<AdCampaign>();
+		List campaignList = new ArrayList();
+		JSONArray tempArray = null;
+		String serilizeString = null;
 		try{
-			campaignList = AdCampaignUtil.findAll();
-			for (int i=0; i<campaignList.size(); i++) {
-				AdCampaign campaign = campaignList.get(i);
-				String customerName = AdCustomerServiceUtil.getCustomer(campaign.getCustomerId()).getCustomerName();
-				JSONObject obj = JSONFactoryUtil.createJSONObject();
-				obj.put("campaignId", campaign.getCampaignId());
-				obj.put("campaignName", campaign.getCampaignName());
-				obj.put("customerId", campaign.getCustomerId());
-				obj.put("customerName", customerName);
-				obj.put("eventTypeId", campaign.getEventTypeId());
-				//obj.put("eventTypeName", campaign.getE);
-				//obj.put("adDisplayTime", campaignFieldArr.getString(6));
-				obj.put("frequencyPerHour", campaign.getFrequencyPerHour());
-				campaignJsonArray.put(obj);
+			campaignList = AdCampaignFinderUtil.getAdCampaginList();
+			for (Object obj : campaignList) {
+				serilizeString = JSONFactoryUtil.serialize(obj);
+				tempArray = JSONFactoryUtil.createJSONArray(serilizeString);
+				
+				JSONObject campJSONObj = JSONFactoryUtil.createJSONObject();
+				campJSONObj.put("campaignId", tempArray.getString(0));
+				campJSONObj.put("campaignName", tempArray.getString(1));
+				campJSONObj.put("customerId", tempArray.getString(2));
+				campJSONObj.put("customerName", tempArray.getString(3));
+				campJSONObj.put("displayGeneral", tempArray.getString(4));
+				campJSONObj.put("displayPreEvent", tempArray.getString(5));
+				campJSONObj.put("displayDuringEvent", tempArray.getString(6));
+				campJSONObj.put("displayPostEvent", tempArray.getString(7));
+				campJSONObj.put("eventTypeId", tempArray.getString(8));
+				campJSONObj.put("frequencyPerHour", tempArray.getString(9));
+				campJSONObj.put("adDisplayTime", tempArray.getString(10));
+				campaignJsonArray.put(campJSONObj);
 			}
-			
-		} catch(SystemException e) {
+		} catch(Exception e) {
 			LOGGER.error("Exception in getAdCampains :" + e.getMessage());
 			e.printStackTrace();
 		}
-		
 		return campaignJsonArray;
 	}
 	/*
@@ -104,10 +109,8 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 		
 		try{
 		for (Object ob : list) {
-			
 			serilizeString = JSONFactoryUtil.serialize(ob);
 			campaignFieldArr = JSONFactoryUtil.createJSONArray(serilizeString);
-			
 			JSONObject obj = JSONFactoryUtil.createJSONObject();
 			obj.put("campaignId", campaignFieldArr.getString(0));
 			obj.put("campaignName", campaignFieldArr.getString(1));
@@ -141,7 +144,7 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 	@Override
 	public AdCampaign addCampaign(String campaignName, long customerId,
 			  boolean displayGeneral, boolean displayPreEvent, boolean displayDuringEvent,
-			  boolean displayPostEvent, long frequencyPerHour, String events, ServiceContext serviceContext) {
+			  boolean displayPostEvent, long frequencyPerHour, long eventTypeId, String events, ServiceContext serviceContext) {
 		AdCampaign adCampaign = null;
 		try {
 			adCampaign = AdCampaignLocalServiceUtil
@@ -154,6 +157,7 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 			adCampaign.setDisplayDuringEvent(displayDuringEvent);
 			adCampaign.setDisplayPostEvent(displayPostEvent);
 			adCampaign.setFrequencyPerHour(frequencyPerHour);
+			adCampaign.setEventTypeId(eventTypeId);
 			adCampaign.setCreatedDate(date);
 			adCampaign.setModifiedDate(date);
 			adCampaign.setUserId(serviceContext.getUserId());

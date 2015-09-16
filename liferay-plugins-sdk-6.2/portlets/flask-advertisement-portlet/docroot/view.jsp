@@ -18,7 +18,8 @@
 			if(portletId == "flaskadvertisement_WAR_flaskadvertisementportlet") {
 				createCampaignTable({},_adCampaignModel.DATA_MODEL.CAMPAIGN, $('#campaignGrid'), "campaignActionMenu", "Edit", campaignContextMenuHandler, ["Campaign", "Images"]);
 				loadCampaignData();
-				adCampaignClickHandlers();	
+				adCampaignClickHandlers();
+				loadEvents();
 				$("#mcontents").click(function(){
 					createCustomerTable({},_adCustomerModel.DATA_MODEL.CUSTOMER, $('#customerGrid'), "customerActionMenu", "Edit", customerContextMenuHandler, ["Customer"]);
 					adCustomerClickHandlers();

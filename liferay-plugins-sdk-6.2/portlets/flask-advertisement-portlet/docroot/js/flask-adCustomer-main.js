@@ -9,8 +9,8 @@ function adCustomerClickHandlers(){
 	/* Click handler for add user button*/
 	
 	$("#addCustomer").click(function(){
-
-		$("#customerId").val(0);
+		customerId = 0;
+//		$("#customerId").val(0);
 		adCustomerForm.trigger('reset')
 		$("#customersDataTable").hide();
 		adCustomerForm.show();
@@ -143,7 +143,6 @@ function deleteMultipleCustomers(customerList) {
 }
 
 function editCustomer(rowData) {
-
 	adCustomerForm.trigger('reset')
 	_flaskLib.loadDataToForm("addCustomerForm",  _adCustomerModel.DATA_MODEL.CUSTOMER, rowData, function(){
 		
@@ -165,6 +164,7 @@ function saveAdCustomer(){
 		params.customerId = customerId;
 		if(params.customerId == "0"){
 			url = _adCustomerModel.SERVICE_ENDPOINTS.ADD_CUSTOMER;
+			delete params["customerId"];
 		}else{
 			url =_adCustomerModel.SERVICE_ENDPOINTS.UPDATE_CUSTOMER;
 		}

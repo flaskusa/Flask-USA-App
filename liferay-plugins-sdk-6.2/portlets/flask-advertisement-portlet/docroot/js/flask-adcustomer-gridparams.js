@@ -80,7 +80,7 @@ GRID_PARAM_CUSTOMER.onRowClick =function (event)
 		editrow = event.args.rowindex;
 		var rowsheight = grid.jqxGrid('rowsheight');
 		var top = $(this).offset().top + (2 + editrow) * rowsheight;
-		var left = ($(this).offset().left + parseInt($('#CustomerGridContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
+		var left = ($(this).offset().left + parseInt($('#manageCustomerContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
 		$('#' +rowMenuDivId).jqxMenu('open', left, top + 5 + scrollTop);
 	} else {
 		// original event.

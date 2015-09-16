@@ -92,7 +92,7 @@ public class AdCampaignServiceSoap {
 	public static com.rumbasolutions.flask.model.AdCampaignSoap addCampaign(
 		java.lang.String campaignName, long customerId, boolean displayGeneral,
 		boolean displayPreEvent, boolean displayDuringEvent,
-		boolean displayPostEvent, long frequencyPerHour,
+		boolean displayPostEvent, long frequencyPerHour, long eventTypeId,
 		java.lang.String events,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -100,7 +100,7 @@ public class AdCampaignServiceSoap {
 			com.rumbasolutions.flask.model.AdCampaign returnValue = AdCampaignServiceUtil.addCampaign(campaignName,
 					customerId, displayGeneral, displayPreEvent,
 					displayDuringEvent, displayPostEvent, frequencyPerHour,
-					events, serviceContext);
+					eventTypeId, events, serviceContext);
 
 			return com.rumbasolutions.flask.model.AdCampaignSoap.toSoapModel(returnValue);
 		}
