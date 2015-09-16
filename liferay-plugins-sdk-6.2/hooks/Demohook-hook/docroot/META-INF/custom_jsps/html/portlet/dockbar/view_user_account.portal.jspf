@@ -95,15 +95,12 @@
 				String userTailgates = themeDisplay.getURLPortal() + "/web/flask/usertailgates";
 				String friends = themeDisplay.getURLPortal() + "/web/flask/friends";
 				String inviteFriends = themeDisplay.getURLPortal() + "/web/flask/invite-friends";
-
-				String notifications = themeDisplay.getURLPortal() + "/web/flask/friends";
 				%>
 					<aui:nav-item href="<%= userEvents %>" iconCssClass="icon-user" label="My Events" title="My Events"/>
 					<aui:nav-item href="<%= userTailgates %>" iconCssClass="icon-user" label="My Tailgate" title="My Tailgate"/>
 					<aui:nav-item href="<%= userGroups %>" iconCssClass="icon-user" label="My Groups" title="My Groups"/>
 					<aui:nav-item href="<%= friends %>" iconCssClass="icon-user" label="My Friends" title="My Friends"/>
 					<aui:nav-item href="<%= inviteFriends %>" iconCssClass="icon-user" label="Invite Friends" title="Invite Friends"/>
-					<aui:nav-item href="<%= notifications %>" iconCssClass="icon-user" label="Notification" title="Notification"/>
 					<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-user" label="my-account" title="my-account"  />
 			</c:if>
 
