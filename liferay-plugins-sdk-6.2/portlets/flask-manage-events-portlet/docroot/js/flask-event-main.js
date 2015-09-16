@@ -176,7 +176,6 @@ function editEvent(rowData) {
 		   var mm = date.getMonth()+1;
 		   if ( mm < 10 ) mm = '0' + mm;
 		   var yy = date.getFullYear();
-		   console.log(mm+'-'+dd+'-'+yy);
 		$('#eventDate').val(mm+'-'+dd+'-'+yy);
 		var sTime = new Date(parseInt(rowData.startTime));
 		$('#startTime').val(formatUnixToTime(sTime));
