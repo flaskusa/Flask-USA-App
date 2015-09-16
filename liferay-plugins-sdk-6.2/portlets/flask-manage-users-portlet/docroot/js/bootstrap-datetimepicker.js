@@ -2362,7 +2362,7 @@
         showClose: false,
         widgetPositioning: {
             horizontal: 'auto',
-            vertical: 'auto'
+            vertical: 'bottom'
         },
         widgetParent: null,
         ignoreReadonly: false,
