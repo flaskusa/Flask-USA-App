@@ -206,3 +206,7 @@ ul.flipster-nav
   background-image: linear-gradient(to bottom, #fc9f14, #f0b51f);
   text-decoration: none;
 }
+
+.gm-style img {
+    max-width: none !important;
+}
