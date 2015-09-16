@@ -13,7 +13,6 @@ function adCampaignClickHandlers() {
 	/* Click handler for add user button */
 
 	$("#addCampaign").click(function() {
-		adCampaignForm.reset();
 		$("#adCampaignDataTable").hide();
 		prepareCustomerDropDownList('customerId');
 		prepareEventTypeDropdown('eventTypeId', 1);
