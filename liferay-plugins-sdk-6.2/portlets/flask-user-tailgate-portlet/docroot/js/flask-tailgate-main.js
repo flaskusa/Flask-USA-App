@@ -281,6 +281,7 @@ function editTailgate(rowData) {
 		prepareTailgateMembersGridShow(rowData.tailgateId);
 		eventForm.show();
 		$("#formContainer").show();
+		GRID_PARAM.locationMapId = "google_map";
 		loadEventAndTime('eventId',  rowData.tailgateId);
 		initializeMap(rowData.tailgateId,0,0);
 }

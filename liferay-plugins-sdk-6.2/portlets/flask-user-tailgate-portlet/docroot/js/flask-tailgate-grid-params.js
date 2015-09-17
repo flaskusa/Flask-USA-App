@@ -190,9 +190,10 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		var container1 = $('<div class="row-fluid"></div>');
 		var container2 = $('<div class="row-fluid"></div>');
 		var containerLocation = $('<div class="row-fluid"></div>');
-		var locationMapId = "google_map"+index;
+		GRID_PARAM.locationMapId = "google_map"+index;
 		var locationColumn = $('<div class="span12" style="height: 140px;"></div>');
-		locationColumn.attr("id",locationMapId);
+		locationColumn.attr("id",GRID_PARAM.locationMapId);
+
 		containerLocation.append(locationColumn);
 		locationDiv.append(containerLocation);
 		
@@ -252,7 +253,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 			height : 180
 		});
 		
-		loadMap(42.48114, -83.49441, locationMapId);
+		setTimeout(function(){ initializeMap(datarecord.tailgateId,0,0) }, 1000);
     }
 	}
 
