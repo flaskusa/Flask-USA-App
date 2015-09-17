@@ -207,6 +207,6 @@ ul.flipster-nav
   text-decoration: none;
 }
 
-.gm-style img {
-    max-width: none !important;
+.gm-style img{
+    max-width: none;
 }
