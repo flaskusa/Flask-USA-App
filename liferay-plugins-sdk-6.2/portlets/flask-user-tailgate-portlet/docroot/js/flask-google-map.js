@@ -15,7 +15,9 @@ function initializeMap(tgId, latitude, longitude) {
 			function(data){/*success handler*/
 				latitude = data.latitude;
 				longitude = data.longitude;
-				loadMap(latitude, longitude,"google_map");
+				if(GRID_PARAM.locationMapId == undefined)
+					GRID_PARAM.locationMapId == "google_map";
+				loadMap(latitude, longitude,GRID_PARAM.locationMapId);
 				isMarkerCreated = true;
 			} , function(error){ /*failure handler*/
 				_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
@@ -23,11 +25,13 @@ function initializeMap(tgId, latitude, longitude) {
 	}
 	else{
 			tailgateId = 0;
-			if(!latitude)
+			if(latitude==0)
 				latitude = 42.48114;
-			if(!longitude)
+			if(longitude==0)
 				longitude = -83.49441;
-			loadMap(latitude, longitude,"google_map");
+			if(GRID_PARAM.locationMapId == undefined)
+				GRID_PARAM.locationMapId == "google_map";
+			loadMap(latitude, longitude,GRID_PARAM.locationMapId);
 	}
 
 	
