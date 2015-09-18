@@ -21,7 +21,11 @@ function addClickHandlers(){
 	/* Click handler for save button*/
 	
 	$(".clsSave").click(function(){
-		saveAdmin();
+		if(portletId == "myaccount_WAR_flaskmanageusersportlet"){
+			saveAccount();
+		}else{
+			saveAdmin();
+		}
 	});
 
 
@@ -264,7 +268,6 @@ function fnSetCheckBoxSelected(strCheckList) {
 		$(".userInterests").jqxTree('checkItem', $(tempObj)[0], true);
 	}
 }
-
 
 function saveAdmin(){
 	params = _flaskLib.getFormData('adminForm',_adminModel.DATA_MODEL.ADMIN,
