@@ -69,4 +69,8 @@ public interface CampaignEventService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.CampaignEvent> getCampaignEvents(
 		long campaignId,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.CampaignEvent> getEventCampaigns(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext);
 }

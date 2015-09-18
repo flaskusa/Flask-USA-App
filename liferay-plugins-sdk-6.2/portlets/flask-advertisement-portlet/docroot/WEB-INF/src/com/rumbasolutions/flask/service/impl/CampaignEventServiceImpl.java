@@ -61,7 +61,22 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 			campaignEventList = CampaignEventLocalServiceUtil.dynamicQuery(campaignEventQuery);
 		} catch (SystemException e) {
 			// TODO Auto-generated catch block
-			LOGGER.error("Error in get Event Cache :" + e.getMessage());
+			LOGGER.error("Error in get Campaign's Events :" + e.getMessage());
+			e.printStackTrace();
+		}
+		return campaignEventList;
+	}
+	
+	@Override
+	public List<CampaignEvent> getEventCampaigns(long eventId, ServiceContext serviceContext){
+		List<CampaignEvent> campaignEventList = new ArrayList<CampaignEvent>();
+		try {
+			DynamicQuery campaignEventQuery = DynamicQueryFactoryUtil.forClass(CampaignEventImpl.class);
+			campaignEventQuery.add(PropertyFactoryUtil.forName("eventId").eq(new Long(eventId)));
+			campaignEventList = CampaignEventLocalServiceUtil.dynamicQuery(campaignEventQuery);
+		} catch (SystemException e) {
+			// TODO Auto-generated catch block
+			LOGGER.error("Error in get Event's Campaigns :" + e.getMessage());
 			e.printStackTrace();
 		}
 		return campaignEventList;

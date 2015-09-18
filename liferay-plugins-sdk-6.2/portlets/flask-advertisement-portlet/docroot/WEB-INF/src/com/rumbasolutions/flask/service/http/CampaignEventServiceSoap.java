@@ -80,5 +80,22 @@ public class CampaignEventServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.CampaignEventSoap[] getEventCampaigns(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.CampaignEvent> returnValue =
+				CampaignEventServiceUtil.getEventCampaigns(eventId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.CampaignEventSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CampaignEventServiceSoap.class);
 }

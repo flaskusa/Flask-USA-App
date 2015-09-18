@@ -66,6 +66,12 @@ public class CampaignEventServiceWrapper implements CampaignEventService,
 			serviceContext);
 	}
 
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.CampaignEvent> getEventCampaigns(
+		long eventId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return _campaignEventService.getEventCampaigns(eventId, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
