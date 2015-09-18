@@ -266,7 +266,7 @@ var wait = function(callback, seconds) {
 }
 
 $(document).ready(function() {
-	$("#mcontents").click(function() {
+	//$("#mcontents").click(function() {
 		addDetailsClickHandlers();
 		initDetailsForm();
 		loadEventDetailsData($('#eventForm #eventId').val());
@@ -286,7 +286,7 @@ $(document).ready(function() {
 		    lastRow = event.args.rowindex;
 		});
 		$("#eventDetailsContainer").show();
-	});
+	//});
 });
 
 function fnCheckDuplicateTitle(_infoTitle) {
