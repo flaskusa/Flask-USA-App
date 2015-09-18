@@ -145,9 +145,6 @@ function fnGetEventImages(eventId,venueId){
 			var arrPosEventDetails = [];
 			var objVenue = jQuery.parseJSON(data.Venue);
 			getVenueData(objVenue);
-			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
-		    $(objWeatherDiv).html($("#weather-background"));
-		    arrPreEvent.push(objWeatherDiv);	
 			objEventDetails = data.Details;
 			eventDetailJSON = $.extend(true, {}, objEventDetails);
 			$.each(objEventDetails, function(idx, obj) {
@@ -174,6 +171,10 @@ function fnGetEventImages(eventId,venueId){
 				    	break;
 				}				
 			});
+			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
+		    $(objWeatherDiv).html($("#weather-background"));
+		    arrPreEvent.splice(1,0,objWeatherDiv);
+		    
 			fnSlider(_eventModel.INFO_TYPE.PreEvent, arrPreEvent,eventId,venueId,arrPreEventDetails);
 			fnSlider(_eventModel.INFO_TYPE.DuringEvent, arrDurEvent,eventId,venueId,arrDurEventDetails);
 			fnSlider(_eventModel.INFO_TYPE.PostEvent, arrPosEvent,eventId,venueId,arrPosEventDetails);
@@ -251,7 +252,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 			var objtbl = $("<table/>",{'cellpadding':'5px'});
 			var objtrHead = $("<tr/>");
 			var objth = $("<th/>",{'colspan':'2'});
-			$(objth).html(infoTypeCategoryName);
+			$(objth).html(infoTypeCategoryName.toUpperCase());
 			$(objth).appendTo($(objtbl));
 			$.each(obj,function(key,value){
 				var objtr = $("<tr/>");
@@ -575,7 +576,7 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 
 function fnCreateSlider1(containerID,arrImage){
 	$(containerID).html("");
-	$(containerID).attr("class","Carousel");
+	$(containerID).attr("class","Carousel col2");
 	$(containerID).owlCarousel({
 		items:3,
 		navigation:true,
