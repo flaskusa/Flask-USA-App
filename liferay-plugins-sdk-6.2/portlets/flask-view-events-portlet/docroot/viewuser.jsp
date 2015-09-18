@@ -16,12 +16,20 @@
 
 <%@ taglib uri="http://java.sun.com/portlet_2_0" prefix="portlet" %>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%@	page import="com.liferay.portal.model.Address" %>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
 
 <%
   com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
   long repositoryId = themeDisplay.getLayout().getGroupId();
   themeDisplay.getLayout().getUuid();
+  String userZipCode =  "";
+  if(themeDisplay.isSignedIn() && themeDisplay.getRealUser().getAddresses().size() > 0){
+	  Address addr =themeDisplay.getRealUser().getAddresses().get(0); 
+	  if(addr != null){
+		  userZipCode = addr.getZip();
+	  }
+  }
 %>
 <portlet:defineObjects />
 
@@ -34,7 +42,13 @@
 		);
 	});
 </aui:script>
+
 <body>
+<input  type="hidden"  id="userZipCode" value ="<%= userZipCode %>" >
+
+<div id="action-msg" style="display:none">
+</div>
+
 <div id="viewEvents">
 <div class="table-responsive">          
 <div id="one">
@@ -53,6 +67,7 @@
       	</tr>
     </tbody>
   </table>
+  <img id="eventImg" alt="" src="" style="display: none;">
     <div id="container1">
 		<div class="container-fluid fill" id="placeholder">
 		</div>
@@ -65,7 +80,7 @@
 		<div class="row-fluid fullwidth">
 		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div>
 		  <div id="col2" class="span10 col2">
-				<div id="wowslider-container2" class="Carousel"></div>
+				<div id="wowslider-container1" class="Carousel"></div>
 		  </div>
 		</div>
 	</div>
@@ -73,7 +88,7 @@
 		<div class="row-fluid fullwidth">
 		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/at.png);"></div>
 		  <div id="col2" class="span10 col2">
-				<div id="wowslider-container3" class="Carousel"></div>
+				<div id="wowslider-container2" class="Carousel"></div>
 		  </div>
 		</div>
 	</div>
@@ -81,17 +96,18 @@
 		<div class="row-fluid fullwidth">
 		  <div class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Post.png);"></div>
 		  <div class="span10 col2">
-				<div id="wowslider-container4" class="Carousel"></div>
+				<div id="wowslider-container3" class="Carousel"></div>
 		  </div>
 		</div>
 	</div>
 	<input class="btn btn-info cssback" type="button" value="Back"/>
 </div>	
 
-<div id="three" style="display:none; width:100%;">
+<div id="three" style="display:none; width:100%; height:100%">
 	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places" type="text/javascript"></script>
-	<div id="gmap_canvas"></div>
+	<div id="gmap_canvas" style="height:60%"></div>
 	<div id='jqxWidget'></div>
+	<input class="btn btn-info cssback" type="button" value="Back"/>
 </div>
 
 <input id="repositoryId" type="hidden" value="<%=repositoryId%>">
@@ -129,3 +145,4 @@
 </div>
 </div>
 </body>
+
