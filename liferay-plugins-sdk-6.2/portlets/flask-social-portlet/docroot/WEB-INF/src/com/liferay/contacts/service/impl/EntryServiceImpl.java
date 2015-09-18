@@ -145,7 +145,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		long userId = getUserId();
 		int cnt = entryLocalService.searchUsersAndContactsCount(companyId, userId, keywords);
 		List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
-			companyId, userId, keywords, 0, cnt);
+			companyId, userId, keywords, 0, 500);
 		for (BaseModel<?> contact : contacts) {
 			JSONObject jsonObject = null;
 			if(SocialRelationLocalServiceUtil.hasRelation(serviceContext.getUserId(), ((User) contact).getContact().getUserId(), SocialRelationConstants.TYPE_BI_CONNECTION)){
@@ -173,9 +173,9 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 				if(socialRequest.getUserId() == receiverUserId){
 					socialRequestId = socialRequest.getRequestId();
 					sRequest = SocialRequestLocalServiceUtil.getSocialRequest(socialRequestId);
-					
 					sendNotificationEvent(sRequest);
-					SocialRequestLocalServiceUtil.updateRequest(socialRequestId, 1, themeDisplay);
+					//SocialRequestLocalServiceUtil.updateRequest(socialRequestId, 1, themeDisplay);
+					SocialRequestLocalServiceUtil.deleteRequest(socialRequestId);
 				}
 			}
 			
