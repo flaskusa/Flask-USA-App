@@ -64,6 +64,7 @@ function renderEventList(tdata) {
 		 		$('#one').hide();
 		 		$("#weather-background").show();
 		 		fnGetEventImages($(this).attr("data-id"),$(this).attr("data-venueId"));
+		 		_flaskAd.ShowAdByEventId($(this).attr("data-id"));
 		 		window.location.hash = '#Gallery';
 		 	});
 		 	if(Liferay.ThemeDisplay.isSignedIn()){
