@@ -307,6 +307,8 @@ input.btn.btn-info.cssback {
 	  -o-text-overflow: ellipsis;
 	  text-overflow: ellipsis;
 	  margin: 5px !important;
+	  background-image: url("../img/Flask_Default_Image.jpg");
+      background-size: cover;
 	}
 
 	.eventDetailBox table {
@@ -340,11 +342,6 @@ input.btn.btn-info.cssback {
 		margin-right: auto;
 		max-width: initial;
 	}
-	
-	.col2{
-		background-image:url("../img/Flask_Default_Image.jpg");
-		background-size: cover;
-	}	
 	
 @media (min-width: 374px) and (max-width: 640px){
 	.slick-slide{
