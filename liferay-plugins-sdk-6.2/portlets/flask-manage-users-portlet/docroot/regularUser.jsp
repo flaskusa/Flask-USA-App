@@ -50,7 +50,8 @@ function initialize(portletId, portlet){
 		$(".clsCancel").hide();
 		loadForm();
 		addClickHandlers();
-		document.getElementById('roleId').disabled=true;
+		$(".hideOnMyAcc").hide();
+		//document.getElementById('roleId').disabled=true;
 		//$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
 		$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
 	    console.log("Cal Done");    
@@ -106,7 +107,7 @@ function initialize(portletId, portlet){
 <div class="tab-content">
 <div class="tab-pane active" id="tab1">
   <div class="">
-  	<div id="ProfilePic" style="background-image:url('http://localhost:8080/documents/20181/0/21491')"></div>  
+  	<div id="ProfilePic" style="background-image:url('http://localhost:8080/documents/20181/0/21491')"></div> <br> 
    <div class="form-group">
      <label class="control-label" for="firstName">First Name:</label>
      <div class="controls">
@@ -148,7 +149,7 @@ function initialize(portletId, portlet){
        <input name="password2" id="password2" class="form-control" type="password">
      </div>
    </div> 
-   <div class="form-group ">
+   <div class="form-group hideOnMyAcc">
      <label class="control-label" for="roleId">Role:</label>
      <div class="controls">
        <select id="roleId" name="roleId" class="form-control"></select>
@@ -195,7 +196,7 @@ function initialize(portletId, portlet){
    </div>  
    
     <div class="form-group">
-     <label class="control-label" for="areaCode">Area Code:</label>
+     <label class="control-label" for="areaCode">Zip Code:</label>
      <div class="controls">
        <input name="areaCode" id="areaCode" class="form-control" type="text">
      </div>
