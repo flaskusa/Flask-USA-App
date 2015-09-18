@@ -296,24 +296,24 @@ input.btn.btn-info.cssback {
 	  -webkit-box-sizing: content-box;
 	  -moz-box-sizing: content-box;
 	  box-sizing: content-box;
-	  padding: 10px;
+	  padding: 5px 5px 5px 14px;
 	  overflow: hidden;
 	  border: none;
 	  font: normal 14px/1 "Coda", Helvetica, sans-serif;
-	  color: #FFFFFF;
 	  text-align: center;
 	  -o-text-overflow: ellipsis;
 	  text-overflow: ellipsis;  
 	  text-align: center;
 	  -o-text-overflow: ellipsis;
 	  text-overflow: ellipsis;
-	  background: rgba(140,140,140,0.4) !important;
-	  -webkit-box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
-	  box-shadow: 1px 1px 1px 0 rgba(0,0,0,0.3) ;
-	  text-shadow: 1px 1px 1px rgba(0,0,0,0.2) ;
 	  margin: 5px !important;
 	}
 
+	.eventDetailBox table {
+		width: 100% !important;
+		color: #000;
+	}
+	
 	.eventDetailBoxWithImages {
 	  -webkit-box-sizing: content-box;
 	  -moz-box-sizing: content-box;
@@ -326,10 +326,6 @@ input.btn.btn-info.cssback {
 	}
 
 	.Carousel{
-		background-image: -webkit-linear-gradient(-45deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
-		background-image: -moz-linear-gradient(135deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
-		background-image: linear-gradient(135deg, rgba(255,255,255,1) 0, rgba(241,241,241,1) 50%, rgba(225,225,225,1) 51%, rgba(246,246,246,1) 100%);
-		background-position: 50% 50%;
 		-webkit-background-origin: padding-box;
 		background-origin: padding-box;
 		-webkit-background-clip: border-box;
@@ -337,23 +333,26 @@ input.btn.btn-info.cssback {
 		-webkit-background-size: auto auto;
 		background-size: auto auto;
 	}
-		
+	
 	.fullwidth {
 		width: 100%;
 		margin-left: auto;
 		margin-right: auto;
 		max-width: initial;
 	}
-
-@media (min-width: 374px) and (max-width: 640px){
 	
+	.col2{
+		background-image:url("../img/Flask_Default_Image.jpg");
+		background-size: cover;
+	}	
+	
+@media (min-width: 374px) and (max-width: 640px){
 	.slick-slide{
 		width: 330px !important;
 	}
 }
 
 @media (min-width: 376px) and (max-width: 640px){
-	
 	.slick-slide{
 		width: 364px !important;
 	}
@@ -564,6 +563,7 @@ input.btn.btn-info.cssback {
 	  height: 100% !important; 
 	  width:90% !important;
 	  padding-left:0px !important;
+	  background-size:inherit; 	
 	}
 	
 	.eventDetailBoxWithImages{
@@ -636,6 +636,8 @@ input.btn.btn-info.cssback {
 	.photo{
 		height: 250px !important;
 	}
+	
+
 }	
 
 .jqx-tabs-headerWrapper {
