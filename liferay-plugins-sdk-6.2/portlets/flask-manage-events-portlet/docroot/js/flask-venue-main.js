@@ -1,4 +1,3 @@
-var repositoryId;// = $("#repositoryId").val();
 var imageContainer = $("#venueImage");
 var venueForm;
 var dropZoneLogo;
@@ -306,6 +305,8 @@ function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel) {
 }
 
 $(document).ready(function() {
+	if($('#venueForm').length == 0)
+		return;
 	$('#venueForm').jqxValidator
 	({
 		hintType: 'label',

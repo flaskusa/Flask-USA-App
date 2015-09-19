@@ -18,18 +18,19 @@
 			<short-title>Flask Manage Events</short-title>
 			<keywords>Flask Manage Events</keywords>
 		</portlet-info>
+		
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>
 		<security-role-ref>
-			<role-name>guest</role-name>
+			<role-name>flask-admin</role-name>
 		</security-role-ref>
+		
 		<security-role-ref>
-			<role-name>power-user</role-name>
+			<role-name>flask-content-manager</role-name>
 		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
+		
+		
 	</portlet>
 	<portlet>
 		<portlet-name>flask-manage-venue</portlet-name>
@@ -52,13 +53,11 @@
 			<role-name>administrator</role-name>
 		</security-role-ref>
 		<security-role-ref>
-			<role-name>guest</role-name>
+			<role-name>flask-admin</role-name>
 		</security-role-ref>
+		
 		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
+			<role-name>flask-content-manager</role-name>
 		</security-role-ref>
 	</portlet>
 </portlet-app>

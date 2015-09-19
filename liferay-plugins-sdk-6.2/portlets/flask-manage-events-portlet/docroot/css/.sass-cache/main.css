@@ -25,12 +25,12 @@ div#startTime, div#endTime {
 
 /*
 div#eventDate
-{	
-  width: 320px !important; 
-  height: 21px !important;
-  padding-bottom: 10px;
-  padding-left: 15px;
-  padding-top: 8px;
+{
+width: 320px !important;
+height: 21px !important;
+padding-bottom: 10px;
+padding-left: 15px;
+padding-top: 8px;
 }
 */
 @media (max-width: 767px) {
