@@ -73,6 +73,9 @@ function renderEventList(tdata) {
 			 	});
 		 	}else{
 		 		$(div_heart).attr("title", "You need to be signed in to save events.");
+			 	$(div_heart).click(function(){
+			 		alert("You need to be signed in to save events");
+			 	});
 		 	}
 	    }
 	 	$(divRow).appendTo($("#placeholder"));
