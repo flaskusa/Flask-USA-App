@@ -1,8 +1,7 @@
 var _flaskAd = {};
 
 _flaskAd.UTILITY = {
-		AUTOPLAY		: 3000,
-		GROUP_ID		:Liferay.ThemeDisplay.getSiteGroupId()
+		AUTOPLAY		: 3000
 }
 
 _flaskAd.ShowAdByEventId = function(eventId){
@@ -43,7 +42,7 @@ _flaskAd.GetAdImages = function(Obj){
 				var objCampaignImages = data.campaignImages
 				for(var iCount=0;iCount<objCampaignImages.length;iCount++){
 					var objCampaignImage = $.parseJSON(objCampaignImages[iCount].campaignImage);
-					var imageURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + objCampaignImage.imageUUID + "&groupId="+_flaskAd.UTILITY.GROUP_ID;
+					var imageURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + objCampaignImage.imageUUID + "&groupId="+objCampaignImage.imageGroupId;
 					var adSlide = $('<div/>',{'class':'adSlide','style':'background-image:url('+imageURL+');background-size: inherit;min-height: 95px;'});					
 					adContainer.data('owlCarousel').addItem(adSlide);
 					$("body").append(adContainer);
