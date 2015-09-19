@@ -7,6 +7,7 @@
 	<script src="$javascript_folder/jquery-2.1.4.js" type="text/javascript" ></script>
 	<script src="$javascript_folder/flask_ajax.js" type="text/javascript" ></script>
 	<script src="$javascript_folder/flask-lib.js" type="text/javascript" ></script>
+	<script src="$javascript_folder/strftime.js" type="text/javascript" ></script>
 	<title>$the_title - $company_name</title>
 	
 	<meta content="initial-scale=1.0, width=device-width" name="viewport" />

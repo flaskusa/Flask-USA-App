@@ -269,3 +269,14 @@ _flaskLib.getCookie = function(key) {
     var keyValue = document.cookie.match('(^|;) ?' + key + '=([^;]*)(;|$)');
     return keyValue ? keyValue[2] : null;
 }
+
+_flaskLib.formatTimeInMillis = function(time) {
+	return strftime('%I:%M %p', new Date(parseInt(time)));
+}
+
+_flaskLib.formatDateInMillis = function(date) {
+	return strftime('%D', new Date(parseInt(date)));
+}
+
+
+
