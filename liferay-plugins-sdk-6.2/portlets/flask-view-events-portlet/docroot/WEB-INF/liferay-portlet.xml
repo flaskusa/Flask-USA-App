@@ -12,7 +12,6 @@
 	  <header-portlet-css>/css/owl.carousel.css</header-portlet-css>
 	  <header-portlet-css>/css/owl.theme.css</header-portlet-css>
 	  	<footer-portlet-javascript>/js/bootstrap.min.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/flask-advertisement.js</footer-portlet-javascript>  
 	    <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/flask-view-map.js</footer-portlet-javascript>
@@ -37,7 +36,6 @@
 	  <header-portlet-css>/css/owl.carousel.css</header-portlet-css>
 	  <header-portlet-css>/css/owl.theme.css</header-portlet-css>
 	  	<footer-portlet-javascript>/js/bootstrap.min.js</footer-portlet-javascript>
-	  	<footer-portlet-javascript>/js/flask-advertisement.js</footer-portlet-javascript>  
 	    <footer-portlet-javascript>/js/flask-view-event-main.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/flask-view-eventmodel.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/flask-view-map.js</footer-portlet-javascript>
