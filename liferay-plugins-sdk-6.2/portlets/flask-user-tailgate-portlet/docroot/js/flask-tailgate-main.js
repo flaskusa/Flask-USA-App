@@ -126,15 +126,9 @@ function loadData(){
 	function(data){/*success handler*/
 		var tailgates = eval(data);
 		$.each(tailgates, function(index, tailgate) {
-		
-			var date = new Date(parseInt(tailgate.tailgateDate));
-			tailgate.tailgateDate = ( date.getMonth() + 1 ) +"-"+date.getDate()+"-"+date.getFullYear();
-			
-			var sTime = new Date(parseInt(tailgate.startTime));
-			tailgate.startTime = formatUnixToTime(sTime);
-			
-			var eTime = new Date(parseInt(tailgate.endTime));
-			tailgate.endTime  = formatUnixToTime(eTime);
+			tailgate.tailgateDate = _flaskLib.formatDateInMillis(tailgate.tailgateDate);
+			tailgate.startTime = _flaskLib.formatTimeInMillis(tailgate.startTime);
+			tailgate.endTime  = _flaskLib.formatTimeInMillis(tailgate.endTime);
 
 		});
 		GRID_PARAM.updateGrid(tailgates);

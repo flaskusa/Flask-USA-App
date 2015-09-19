@@ -129,20 +129,8 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 			tailgateInfoImpl.setTailgateDate(new Date(tailgateDate));
 		}
 
-		if (startTime == Long.MIN_VALUE) {
-			tailgateInfoImpl.setStartTime(null);
-		}
-		else {
-			tailgateInfoImpl.setStartTime(new Date(startTime));
-		}
-
-		if (endTime == Long.MIN_VALUE) {
-			tailgateInfoImpl.setEndTime(null);
-		}
-		else {
-			tailgateInfoImpl.setEndTime(new Date(endTime));
-		}
-
+		tailgateInfoImpl.setStartTime(startTime);
+		tailgateInfoImpl.setEndTime(endTime);
 		tailgateInfoImpl.setIsActive(isActive);
 		tailgateInfoImpl.setIsDelete(isDelete);
 

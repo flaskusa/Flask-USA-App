@@ -166,17 +166,6 @@ GRID_PARAM.rowDetailTemplate = function(tabs, height)
 	 return { rowdetails: rowDetailTemplate, rowdetailsheight: height };
 }
 
-
-function formatUnixToTime(tdate)
-{
-	var date = new Date(tdate);
-	var hours = date.getHours();
-	var minutes = "0" + date.getMinutes();
-	var ampm = hours >= 12 ? 'PM' : 'AM';
-	hours = hours % 12;
-	return hours + ':' + minutes.substr(-2) + ' ' + ampm;
-}
-
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord){
 	console.log(datarecord);
 	var tabsdiv = null; 
@@ -202,9 +191,6 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		var leftcolumn = $('<div class="span5"></div>');
 		var rightcolumn = $('<div class="span5"></div>');
 		var rightButtoncolumn = $('<div class="span2" style="padding:20px"></div>');
-		var d = new Date(datarecord.tailgateDate);
-		var d1 = formatUnixToTime(datarecord.startTime);
-		var d2 = formatUnixToTime(datarecord.endTime);
 		container1.append(leftcolumn);
 		container1.append(rightcolumn);
 		container1.append(rightButtoncolumn);
@@ -216,11 +202,11 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 	    var eventName = "<tr><td class='filledWidth'><b>Event Name :</b></td><td> "
 			+ datarecord.eventName + "</td></tr>";
 	    var eventDate = "<tr><td class='filledWidth'><b>Tailgate Date :</b></td><td> "
-			+ GRID_PARAM.formatDate(d) + "</td></tr>";
+			+ datarecord.tailgateDate + "</td></tr>";
 		var startTime = "<tr><td class='filledWidth'> <b>Start Time:</b></td><td>"
-			+ d1 + "</td></tr>";
+			+ datarecord.startTime + "</td></tr>";
 		var endTime = "<tr><td class='filledWidth'><b>End Time:</b></td><td>"
-			+ d2 + "</td></tr>";
+			+ datarecord.endTime + "</td></tr>";
 		var table1= $("<table/>")
 		$(table1).append(tailgate_Name);
 		$(table1).append(tailgate_Description);
@@ -291,19 +277,11 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 		 var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
 			return '<i class="icon-wrench" style="margin:3px;"></i>';
 		}
-		
-		var cellsrenderer = function(row, column, value, defaultHtml, columnSettings, rowData) {
-			return formatUnixToTime(value);
-		}		
-		
-		var datecellsrenderer = function(row, column, value, defaultHtml, columnSettings, rowData) {
-			return GRID_PARAM.formatDate(value);
-		}
-		
-		var groupColumns = [{ text: 'Tailgate', columntype: 'textbox',  datafield: 'tailgateName'},
-		{ text: 'Event Name', datafield: 'eventName', width: '20%'},
-		{ text: 'Date', datafield: 'tailgateDate', width: '20%',cellsrenderer:datecellsrenderer},
-		{ text: 'Start Time', datafield: 'startTime', width: '15%',cellsrenderer:cellsrenderer},
+
+		var groupColumns = [{ text: 'Tailgate', columntype: 'textbox', cellsalign: 'center',  datafield: 'tailgateName'},
+		{ text: 'Event Name', datafield: 'eventName', cellsalign: 'center', width: '20%'},
+		{ text: 'Date', datafield: 'tailgateDate', width: '20%',cellsalign: 'center'},
+		{ text: 'Start Time', datafield: 'startTime', cellsalign: 'center', width: '15%'},
 		{ text: 'Edit',  datafield: 'tailgateId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
 		
 		grid.on('cellclick', GRID_PARAM.onRowClick);
@@ -373,8 +351,7 @@ function fnRenderLogo(imageUUID, imageGroupId,container ,editable){
 }
 
 GRID_PARAM.formatDate = function (dateVal){
-	var dateObj = new Date(dateVal);
-	return dateObj.toLocaleDateString(); 
+	return _flaskLib.formatDateInMillis(dateVal);
 }
 /*
  *  Create User Table
@@ -523,7 +500,3 @@ function createTailgateGroupTable(data, grid){
             });
     
 	}
-GRID_PARAM.formatDate = function (dateVal){
-	var dateObj = new Date(dateVal);
-	return dateObj.toLocaleDateString(); 
-}

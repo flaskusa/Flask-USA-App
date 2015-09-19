@@ -133,13 +133,13 @@ public class TailgateInfoWrapper implements TailgateInfo,
 			setTailgateDate(tailgateDate);
 		}
 
-		Date startTime = (Date)attributes.get("startTime");
+		Long startTime = (Long)attributes.get("startTime");
 
 		if (startTime != null) {
 			setStartTime(startTime);
 		}
 
-		Date endTime = (Date)attributes.get("endTime");
+		Long endTime = (Long)attributes.get("endTime");
 
 		if (endTime != null) {
 			setEndTime(endTime);
@@ -418,7 +418,7 @@ public class TailgateInfoWrapper implements TailgateInfo,
 	* @return the start time of this tailgate info
 	*/
 	@Override
-	public java.util.Date getStartTime() {
+	public long getStartTime() {
 		return _tailgateInfo.getStartTime();
 	}
 
@@ -428,7 +428,7 @@ public class TailgateInfoWrapper implements TailgateInfo,
 	* @param startTime the start time of this tailgate info
 	*/
 	@Override
-	public void setStartTime(java.util.Date startTime) {
+	public void setStartTime(long startTime) {
 		_tailgateInfo.setStartTime(startTime);
 	}
 
@@ -438,7 +438,7 @@ public class TailgateInfoWrapper implements TailgateInfo,
 	* @return the end time of this tailgate info
 	*/
 	@Override
-	public java.util.Date getEndTime() {
+	public long getEndTime() {
 		return _tailgateInfo.getEndTime();
 	}
 
@@ -448,7 +448,7 @@ public class TailgateInfoWrapper implements TailgateInfo,
 	* @param endTime the end time of this tailgate info
 	*/
 	@Override
-	public void setEndTime(java.util.Date endTime) {
+	public void setEndTime(long endTime) {
 		_tailgateInfo.setEndTime(endTime);
 	}
 

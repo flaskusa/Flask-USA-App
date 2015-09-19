@@ -223,28 +223,28 @@ public interface TailgateInfoModel extends BaseModel<TailgateInfo> {
 	 *
 	 * @return the start time of this tailgate info
 	 */
-	public Date getStartTime();
+	public long getStartTime();
 
 	/**
 	 * Sets the start time of this tailgate info.
 	 *
 	 * @param startTime the start time of this tailgate info
 	 */
-	public void setStartTime(Date startTime);
+	public void setStartTime(long startTime);
 
 	/**
 	 * Returns the end time of this tailgate info.
 	 *
 	 * @return the end time of this tailgate info
 	 */
-	public Date getEndTime();
+	public long getEndTime();
 
 	/**
 	 * Sets the end time of this tailgate info.
 	 *
 	 * @param endTime the end time of this tailgate info
 	 */
-	public void setEndTime(Date endTime);
+	public void setEndTime(long endTime);
 
 	/**
 	 * Returns the is active of this tailgate info.

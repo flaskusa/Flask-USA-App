@@ -23,8 +23,8 @@
 		<field name="eventId" type="long" />
 		<field name="eventName" type="String" />
 		<field name="tailgateDate" type="Date" />
-		<field name="startTime" type="Date" />
-		<field name="endTime" type="Date" />
+		<field name="startTime" type="long" />
+		<field name="endTime" type="long" />
 		<field name="isActive" type="int" />
 		<field name="isDelete" type="int" />
 		<field name="venmoAccountId" type="String" />

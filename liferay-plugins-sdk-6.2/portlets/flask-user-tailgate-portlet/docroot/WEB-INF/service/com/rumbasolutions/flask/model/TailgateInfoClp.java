@@ -158,13 +158,13 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 			setTailgateDate(tailgateDate);
 		}
 
-		Date startTime = (Date)attributes.get("startTime");
+		Long startTime = (Long)attributes.get("startTime");
 
 		if (startTime != null) {
 			setStartTime(startTime);
 		}
 
-		Date endTime = (Date)attributes.get("endTime");
+		Long endTime = (Long)attributes.get("endTime");
 
 		if (endTime != null) {
 			setEndTime(endTime);
@@ -437,19 +437,19 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 	}
 
 	@Override
-	public Date getStartTime() {
+	public long getStartTime() {
 		return _startTime;
 	}
 
 	@Override
-	public void setStartTime(Date startTime) {
+	public void setStartTime(long startTime) {
 		_startTime = startTime;
 
 		if (_tailgateInfoRemoteModel != null) {
 			try {
 				Class<?> clazz = _tailgateInfoRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setStartTime", Date.class);
+				Method method = clazz.getMethod("setStartTime", long.class);
 
 				method.invoke(_tailgateInfoRemoteModel, startTime);
 			}
@@ -460,19 +460,19 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 	}
 
 	@Override
-	public Date getEndTime() {
+	public long getEndTime() {
 		return _endTime;
 	}
 
 	@Override
-	public void setEndTime(Date endTime) {
+	public void setEndTime(long endTime) {
 		_endTime = endTime;
 
 		if (_tailgateInfoRemoteModel != null) {
 			try {
 				Class<?> clazz = _tailgateInfoRemoteModel.getClass();
 
-				Method method = clazz.getMethod("setEndTime", Date.class);
+				Method method = clazz.getMethod("setEndTime", long.class);
 
 				method.invoke(_tailgateInfoRemoteModel, endTime);
 			}
@@ -846,8 +846,8 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 	private long _eventId;
 	private String _eventName;
 	private Date _tailgateDate;
-	private Date _startTime;
-	private Date _endTime;
+	private long _startTime;
+	private long _endTime;
 	private int _isActive;
 	private int _isDelete;
 	private String _venmoAccountId;

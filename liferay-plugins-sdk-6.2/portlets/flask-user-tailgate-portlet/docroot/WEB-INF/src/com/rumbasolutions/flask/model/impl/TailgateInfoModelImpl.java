@@ -76,14 +76,14 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 			{ "eventId", Types.BIGINT },
 			{ "eventName", Types.VARCHAR },
 			{ "tailgateDate", Types.TIMESTAMP },
-			{ "startTime", Types.TIMESTAMP },
-			{ "endTime", Types.TIMESTAMP },
+			{ "startTime", Types.BIGINT },
+			{ "endTime", Types.BIGINT },
 			{ "isActive", Types.INTEGER },
 			{ "isDelete", Types.INTEGER },
 			{ "venmoAccountId", Types.VARCHAR },
 			{ "amountToPay", Types.DOUBLE }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(75) null,tailgateDescription VARCHAR(75) null,eventId LONG,eventName VARCHAR(75) null,tailgateDate DATE null,startTime DATE null,endTime DATE null,isActive INTEGER,isDelete INTEGER,venmoAccountId VARCHAR(75) null,amountToPay DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(75) null,tailgateDescription VARCHAR(75) null,eventId LONG,eventName VARCHAR(75) null,tailgateDate DATE null,startTime LONG,endTime LONG,isActive INTEGER,isDelete INTEGER,venmoAccountId VARCHAR(75) null,amountToPay DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table flasktailgate_TailgateInfo";
 	public static final String ORDER_BY_JPQL = " ORDER BY tailgateInfo.tailgateId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flasktailgate_TailgateInfo.tailgateId ASC";
@@ -274,13 +274,13 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 			setTailgateDate(tailgateDate);
 		}
 
-		Date startTime = (Date)attributes.get("startTime");
+		Long startTime = (Long)attributes.get("startTime");
 
 		if (startTime != null) {
 			setStartTime(startTime);
 		}
 
-		Date endTime = (Date)attributes.get("endTime");
+		Long endTime = (Long)attributes.get("endTime");
 
 		if (endTime != null) {
 			setEndTime(endTime);
@@ -448,23 +448,23 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 
 	@JSON
 	@Override
-	public Date getStartTime() {
+	public long getStartTime() {
 		return _startTime;
 	}
 
 	@Override
-	public void setStartTime(Date startTime) {
+	public void setStartTime(long startTime) {
 		_startTime = startTime;
 	}
 
 	@JSON
 	@Override
-	public Date getEndTime() {
+	public long getEndTime() {
 		return _endTime;
 	}
 
 	@Override
-	public void setEndTime(Date endTime) {
+	public void setEndTime(long endTime) {
 		_endTime = endTime;
 	}
 
@@ -682,23 +682,9 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 			tailgateInfoCacheModel.tailgateDate = Long.MIN_VALUE;
 		}
 
-		Date startTime = getStartTime();
+		tailgateInfoCacheModel.startTime = getStartTime();
 
-		if (startTime != null) {
-			tailgateInfoCacheModel.startTime = startTime.getTime();
-		}
-		else {
-			tailgateInfoCacheModel.startTime = Long.MIN_VALUE;
-		}
-
-		Date endTime = getEndTime();
-
-		if (endTime != null) {
-			tailgateInfoCacheModel.endTime = endTime.getTime();
-		}
-		else {
-			tailgateInfoCacheModel.endTime = Long.MIN_VALUE;
-		}
+		tailgateInfoCacheModel.endTime = getEndTime();
 
 		tailgateInfoCacheModel.isActive = getIsActive();
 
@@ -851,8 +837,8 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 	private long _eventId;
 	private String _eventName;
 	private Date _tailgateDate;
-	private Date _startTime;
-	private Date _endTime;
+	private long _startTime;
+	private long _endTime;
 	private int _isActive;
 	private int _isDelete;
 	private String _venmoAccountId;

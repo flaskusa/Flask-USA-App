@@ -15,8 +15,9 @@ function initializeMap(tgId, latitude, longitude) {
 			function(data){/*success handler*/
 				latitude = data.latitude;
 				longitude = data.longitude;
-				if(GRID_PARAM.locationMapId == undefined)
-					GRID_PARAM.locationMapId == "google_map";
+				if(GRID_PARAM.locationMapId == undefined){
+					GRID_PARAM.locationMapId = "google_map";
+				}
 				loadMap(latitude, longitude,GRID_PARAM.locationMapId);
 				isMarkerCreated = true;
 			} , function(error){ /*failure handler*/
@@ -29,8 +30,9 @@ function initializeMap(tgId, latitude, longitude) {
 				latitude = 42.48114;
 			if(longitude==0)
 				longitude = -83.49441;
-			if(GRID_PARAM.locationMapId == undefined)
-				GRID_PARAM.locationMapId == "google_map";
+			if(GRID_PARAM.locationMapId == undefined){
+				GRID_PARAM.locationMapId = "google_map";
+			}
 			loadMap(latitude, longitude,GRID_PARAM.locationMapId);
 	}
 

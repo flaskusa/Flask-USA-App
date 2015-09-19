@@ -37,8 +37,8 @@ public class TailgateInfoFinderImpl extends BasePersistenceImpl<TailgateInfo> im
 			queryObj.addScalar("eventId", Type.LONG);
 			queryObj.addScalar("eventName", Type.STRING);
 			queryObj.addScalar("tailgateDate", Type.DATE);
-			queryObj.addScalar("startTime", Type.TIME);
-			queryObj.addScalar("endTime", Type.TIME);
+			queryObj.addScalar("startTime", Type.LONG);
+			queryObj.addScalar("endTime", Type.LONG);
 			queryObj.addScalar("isActive", Type.INTEGER);
 			queryObj.addScalar("isDelete", Type.INTEGER);
 			queryObj.addScalar("venmoAccountId", Type.STRING);
@@ -76,8 +76,8 @@ public class TailgateInfoFinderImpl extends BasePersistenceImpl<TailgateInfo> im
 			groupMap.put("eventId", groupJsonArray.getString(3));
 			groupMap.put("eventName", groupJsonArray.getString(4));
 			groupMap.put("tailgateDate",groupJsonArray.getJSONObject(5).getString("time"));
-			groupMap.put("startTime", groupJsonArray.getJSONObject(6).getString("time"));
-			groupMap.put("endTime", groupJsonArray.getJSONObject(7).getString("time"));
+			groupMap.put("startTime", groupJsonArray.getString(6));
+			groupMap.put("endTime", groupJsonArray.getString(7));
 			groupMap.put("isActive", groupJsonArray.getString(8));
 			groupMap.put("isDelete", groupJsonArray.getString(9));
 			groupMap.put("venmoAccountId", groupJsonArray.getString(10));

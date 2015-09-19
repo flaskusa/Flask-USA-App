@@ -27,8 +27,8 @@
 		<column name="eventId" type="long" />
 		<column name="eventName" type="String" />
 		<column name="tailgateDate" type="Date" />
-		<column name="startTime" type="Date" />
-		<column name="endTime" type="Date" />
+		<column name="startTime" type="long" />
+		<column name="endTime" type="long" />
 		<column name="isActive" type="int" />
 		<column name="isDelete" type="int" />
 		<column name="venmoAccountId" type="String" />

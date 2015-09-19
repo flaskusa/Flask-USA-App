@@ -34,8 +34,8 @@
 		<property name="eventId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="eventName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="tailgateDate" type="org.hibernate.type.TimestampType" />
-		<property name="startTime" type="org.hibernate.type.TimestampType" />
-		<property name="endTime" type="org.hibernate.type.TimestampType" />
+		<property name="startTime" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="endTime" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="isActive" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="isDelete" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 		<property name="venmoAccountId" type="com.liferay.portal.dao.orm.hibernate.StringType" />

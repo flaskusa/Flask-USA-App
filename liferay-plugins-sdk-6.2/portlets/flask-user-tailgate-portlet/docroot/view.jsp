@@ -63,8 +63,8 @@ function initialize(portletId, portlet){
 <div id='formContainer' style="display:none">
 	<ul class="nav nav-tabs">
 	  <li class="active"><a href="#tailgates" data-toggle="tab">Manage Tailgate</a></li>
-	  <li><a href="#contents" data-toggle="tab" id="mcontents">Gallery</a></li>  
-	  <li><a href="#users" data-toggle="tab" id="musers">Members</a></li>  
+	  <li><a href="#contents" data-toggle="tab" id="mcontents">Upload Pictures</a></li>  
+	  <li><a href="#users" data-toggle="tab" id="musers">Attendees</a></li>  
 	</ul>
 	
 	<div class="tab-content">
@@ -81,7 +81,7 @@ function initialize(portletId, portlet){
 			  </div>
 			  <div class="form-group">
 			    <div class="controls">
-				    <label class="control-label" for="tailgateDescription">Tailgate Description:</label>
+				    <label class="control-label" for="tailgateDescription">Description:</label>
 				    <input name="<portlet:namespace />tailgateDescription" id="tailgateDescription" class="form-control" type="text" onchange="$('#description').val($(this).val());"/> 
 				</div> 
 			  </div>

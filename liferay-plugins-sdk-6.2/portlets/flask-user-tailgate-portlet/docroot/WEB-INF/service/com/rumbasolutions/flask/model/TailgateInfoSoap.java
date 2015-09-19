@@ -179,19 +179,19 @@ public class TailgateInfoSoap implements Serializable {
 		_tailgateDate = tailgateDate;
 	}
 
-	public Date getStartTime() {
+	public long getStartTime() {
 		return _startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(long startTime) {
 		_startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public long getEndTime() {
 		return _endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(long endTime) {
 		_endTime = endTime;
 	}
 
@@ -237,8 +237,8 @@ public class TailgateInfoSoap implements Serializable {
 	private long _eventId;
 	private String _eventName;
 	private Date _tailgateDate;
-	private Date _startTime;
-	private Date _endTime;
+	private long _startTime;
+	private long _endTime;
 	private int _isActive;
 	private int _isDelete;
 	private String _venmoAccountId;
