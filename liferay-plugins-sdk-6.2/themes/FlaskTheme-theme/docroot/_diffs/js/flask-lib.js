@@ -17,8 +17,7 @@ _flaskLib.SERVICE_ENDPOINTS = {
 		GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types",
 		GET_EVENT_CAMPAIGNS			: "/flask-advertisement-portlet.campaignevent/get-event-campaigns",
 		GET_CAMPAIGN_EVENTS			: "/flask-advertisement-portlet.campaignevent/get-campaign-events",
-		GET_CAMPAIGN_EVENTS			: "/flask-advertisement-portlet.campaignevent/get-campaign-events",
-		GET_CAMPAIGN_IMAGES			: "/flask-advertisement-portlet.adcampaign/get-campaign-with-images"
+		GET_CAMPAIGN_IMAGES			: "/flask-advertisement-portlet.adcampaign/get-campaign-images"
 			
 }
 
