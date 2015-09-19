@@ -9,8 +9,9 @@ _socialModel.SERVICE_ENDPOINTS = {
     BLOCKPERSON					:"/flask-social-portlet.entry/block-user",
     UNBLOCKPERSON				:"/flask-social-portlet.entry/unblock-user",
     GET_REQUESTS				:"/flask-social-portlet.entry/get-requests-to-confirm",
-    GET_USER_DETAILS			:"/user/get-user-by-id",
-    ACCEPT_REQUEST				:"/flask-social-portlet.entry/add-social-relation"
+    GET_USER_DETAILS			:"/flask-rest-users-portlet.flaskadmin/get-user-by-id",
+    ACCEPT_REQUEST				:"/flask-social-portlet.entry/add-social-relation",
+    DELETE_REQUEST				:"/flask-social-portlet.entry/delete-request"
 };
 
 _socialModel.MESSAGES = {

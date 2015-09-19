@@ -80,6 +80,13 @@ public class EntryServiceUtil {
 		return getService().getRequestsToConfirm(serviceContext);
 	}
 
+	public static com.liferay.portlet.social.model.SocialRequest deleteRequest(
+		long receiverUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception {
+		return getService().deleteRequest(receiverUserId, serviceContext);
+	}
+
 	public static com.liferay.portal.kernel.json.JSONArray getRequestingUsers(
 		long companyId, java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -118,6 +125,11 @@ public class EntryServiceUtil {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService().searchMyFriends(companyId, keywords, serviceContext);
+	}
+
+	public static com.liferay.portal.model.User getUserById(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getUserById(userId, serviceContext);
 	}
 
 	public static void addSocialRelation(long receiverUserId,

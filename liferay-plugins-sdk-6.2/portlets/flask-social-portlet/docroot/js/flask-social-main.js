@@ -174,19 +174,20 @@ function acceptFriendRequest(UserId,obj){
 		$(obj).hide();
 		getRequestCount();
 		initFriendList(_startPos,_endPos);
-		
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEND_REQ_ERR);
 	});		
 }
 
 function ignoreFriendRequest(UserId,obj){
+	console.log("m in ignore");
 	var flaskRequest = new Request();
 	var params = {receiverUserId: UserId};
-	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.ACCEPT_REQUEST, params, 
+	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.DELETE_REQUEST, params, 
 	function(data){
-		initFriendList(_startPos,_endPos);
 		$(obj).hide();
+		getRequestCount();
+		initFriendList(_startPos,_endPos);
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEND_REQ_ERR);
 	});		
@@ -255,7 +256,7 @@ function getRequestCount(){
 	Liferay.Service(
 			  '/flask-social-portlet.entry/get-requests-count',
 			  function(obj) {
-				  var divCnt = $('<div style="display: -webkit-inline-box;">'+obj+'</div>');
+				  var divCnt = $('<div style="display: initial;">'+obj+'</div>');
 				  $(divCnt).appendTo($(cnt));
 			  }
 			);
@@ -317,7 +318,6 @@ function getRequestList(){
 }
 
 function renderRequestList(obj){
-	console.log(obj);
 	var divRow = "#MyFriendRequests";
 	$(divRow).html("");
 	$.each(obj,function(index,node){
@@ -374,8 +374,11 @@ function fnBuildRequestMenu(obj,htmlObject){
 			buttonAccept.click(function(){
 				acceptFriendRequest(UserId,htmlObject);
 			});
-			var buttonReject = $('<button/>',{'class':'btn btn-primary','type':'button','style':'margin-left: 10px !important;','onclick':'ignoreFriendRequest('+UserId+','+htmlObject+');'})
+			var buttonReject = $('<button/>',{'class':'btn btn-primary','type':'button','style':'margin-left: 10px !important;'})
 			buttonReject.html('Ignore');
+			buttonReject.click(function(){
+				ignoreFriendRequest(UserId,htmlObject);
+			});
 		}
 		$(buttonAccept).appendTo($(dropdown));
 		$(buttonReject).appendTo($(dropdown));

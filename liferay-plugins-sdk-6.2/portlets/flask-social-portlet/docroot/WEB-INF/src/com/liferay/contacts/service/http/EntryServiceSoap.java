@@ -95,6 +95,23 @@ public class EntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.social.model.SocialRequest deleteRequest(
+		long receiverUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.social.model.SocialRequest returnValue = EntryServiceUtil.deleteRequest(receiverUserId,
+					serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String getRequestingUsers(long companyId,
 		java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -164,6 +181,22 @@ public class EntryServiceSoap {
 					keywords, serviceContext);
 
 			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.User getUserById(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.User returnValue = EntryServiceUtil.getUserById(userId,
+					serviceContext);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -40,6 +40,7 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserNotificationDeliveryConstants;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.social.NoSuchRelationException;
@@ -87,6 +88,22 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		  List<SocialRequest> requests = SocialRequestLocalServiceUtil.getReceiverUserRequests(serviceContext.getUserId(), SocialRequestConstants.STATUS_PENDING, 0, requestCount);
 		  
 		  return requests;
+	}
+	
+	public SocialRequest deleteRequest(long receiverUserId, ServiceContext serviceContext)throws Exception {
+			SocialRequest sRequest = null;
+			int cnt = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(serviceContext.getUserId());
+			List<SocialRequest> request = SocialRequestLocalServiceUtil.getReceiverUserRequests(serviceContext.getUserId(), 3, 0, cnt);
+			for(SocialRequest socialRequest: request ){
+				if(socialRequest.getUserId() == receiverUserId){
+					socialRequestId = socialRequest.getRequestId();
+					sRequest = SocialRequestLocalServiceUtil.getSocialRequest(socialRequestId);
+					sendNotificationEvent(sRequest);
+					//SocialRequestLocalServiceUtil.updateRequest(socialRequestId, 1, themeDisplay);
+					SocialRequestLocalServiceUtil.deleteRequest(socialRequestId);
+				}
+			}
+			return sRequest;
 	}
 	
 	public JSONArray getRequestingUsers(long companyId, String keywords, ServiceContext serviceContext)
@@ -141,27 +158,32 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 	public JSONArray searchMyFriends(long companyId, String keywords, ServiceContext serviceContext)
 			throws PortalException, SystemException{
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
+		JSONObject jsonObject = null;
 		long userId = getUserId();
-		int cnt = entryLocalService.searchUsersAndContactsCount(companyId, userId, keywords);
-		List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
-			companyId, userId, keywords, 0, 500);
-		for (BaseModel<?> contact : contacts) {
-			JSONObject jsonObject = null;
-			if(SocialRelationLocalServiceUtil.hasRelation(serviceContext.getUserId(), ((User) contact).getContact().getUserId(), SocialRelationConstants.TYPE_BI_CONNECTION)){
-				if (contact instanceof User) {
-					jsonObject = ContactsUtil.getUserJSONObject(
-						userId, (User)contact);
-				}
-				else {
-					jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
-				}
+		int cnt = SocialRelationLocalServiceUtil.getRelationsCount(userId, SocialRelationConstants.TYPE_BI_CONNECTION);
+		List<SocialRelation> relation = SocialRelationLocalServiceUtil.getRelations(userId, SocialRelationConstants.TYPE_BI_CONNECTION, 0, cnt);
+		for(SocialRelation relObj: relation){
+			User user2 = getUserById(relObj.getUserId2(), serviceContext);
+			jsonObject = ContactsUtil.getUserJSONObject(
+					userId, user2);
 				jsonArray.put(jsonObject);
-			}
 		}
 		return jsonArray;
 	}
 	
+	@Override
+	public  User getUserById(long userId, ServiceContext serviceContext)
+	{
+		User user=null;
+		try{
+			user = UserLocalServiceUtil.getUser(userId);
+		}catch(PortalException  ex){
+			ex.printStackTrace();
+		}catch(SystemException ex){
+			ex.printStackTrace();
+		}
+		return user;
+	}
 	
 	public void addSocialRelation(long receiverUserId, ServiceContext serviceContext)
 		throws Exception {
@@ -178,9 +200,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 					SocialRequestLocalServiceUtil.deleteRequest(socialRequestId);
 				}
 			}
-			
 			SocialRelationLocalServiceUtil.addRelation(serviceContext.getUserId(), receiverUserId, SocialRelationConstants.TYPE_BI_CONNECTION);
-			
 	}
 
 	public void requestSocialRelation(long receiverUserId, ServiceContext serviceContext)throws Exception {

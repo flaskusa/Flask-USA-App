@@ -78,6 +78,11 @@ public interface EntryService extends BaseService, InvokableService {
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
 
+	public com.liferay.portlet.social.model.SocialRequest deleteRequest(
+		long receiverUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONArray getRequestingUsers(
 		long companyId, java.lang.String keywords,
@@ -108,6 +113,10 @@ public interface EntryService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.model.User getUserById(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void addSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)

@@ -261,3 +261,7 @@ ul.dropdown-menu li {
     border-top-left-radius: 3px;
     border-top-right-radius: 3px;
 }
+
+div#RequestCount {
+    display: initial !important;
+}
