@@ -61,6 +61,10 @@ public class AdCampaignWrapper implements AdCampaign, ModelWrapper<AdCampaign> {
 		attributes.put("displayPostEvent", getDisplayPostEvent());
 		attributes.put("frequencyPerHour", getFrequencyPerHour());
 		attributes.put("eventTypeId", getEventTypeId());
+		attributes.put("imageTitle", getImageTitle());
+		attributes.put("imageDesc", getImageDesc());
+		attributes.put("imageUUID", getImageUUID());
+		attributes.put("imageGroupId", getImageGroupId());
 
 		return attributes;
 	}
@@ -138,6 +142,30 @@ public class AdCampaignWrapper implements AdCampaign, ModelWrapper<AdCampaign> {
 
 		if (eventTypeId != null) {
 			setEventTypeId(eventTypeId);
+		}
+
+		String imageTitle = (String)attributes.get("imageTitle");
+
+		if (imageTitle != null) {
+			setImageTitle(imageTitle);
+		}
+
+		String imageDesc = (String)attributes.get("imageDesc");
+
+		if (imageDesc != null) {
+			setImageDesc(imageDesc);
+		}
+
+		String imageUUID = (String)attributes.get("imageUUID");
+
+		if (imageUUID != null) {
+			setImageUUID(imageUUID);
+		}
+
+		Long imageGroupId = (Long)attributes.get("imageGroupId");
+
+		if (imageGroupId != null) {
+			setImageGroupId(imageGroupId);
 		}
 	}
 
@@ -461,6 +489,86 @@ public class AdCampaignWrapper implements AdCampaign, ModelWrapper<AdCampaign> {
 	@Override
 	public void setEventTypeId(long eventTypeId) {
 		_adCampaign.setEventTypeId(eventTypeId);
+	}
+
+	/**
+	* Returns the image title of this ad campaign.
+	*
+	* @return the image title of this ad campaign
+	*/
+	@Override
+	public java.lang.String getImageTitle() {
+		return _adCampaign.getImageTitle();
+	}
+
+	/**
+	* Sets the image title of this ad campaign.
+	*
+	* @param imageTitle the image title of this ad campaign
+	*/
+	@Override
+	public void setImageTitle(java.lang.String imageTitle) {
+		_adCampaign.setImageTitle(imageTitle);
+	}
+
+	/**
+	* Returns the image desc of this ad campaign.
+	*
+	* @return the image desc of this ad campaign
+	*/
+	@Override
+	public java.lang.String getImageDesc() {
+		return _adCampaign.getImageDesc();
+	}
+
+	/**
+	* Sets the image desc of this ad campaign.
+	*
+	* @param imageDesc the image desc of this ad campaign
+	*/
+	@Override
+	public void setImageDesc(java.lang.String imageDesc) {
+		_adCampaign.setImageDesc(imageDesc);
+	}
+
+	/**
+	* Returns the image u u i d of this ad campaign.
+	*
+	* @return the image u u i d of this ad campaign
+	*/
+	@Override
+	public java.lang.String getImageUUID() {
+		return _adCampaign.getImageUUID();
+	}
+
+	/**
+	* Sets the image u u i d of this ad campaign.
+	*
+	* @param imageUUID the image u u i d of this ad campaign
+	*/
+	@Override
+	public void setImageUUID(java.lang.String imageUUID) {
+		_adCampaign.setImageUUID(imageUUID);
+	}
+
+	/**
+	* Returns the image group ID of this ad campaign.
+	*
+	* @return the image group ID of this ad campaign
+	*/
+	@Override
+	public long getImageGroupId() {
+		return _adCampaign.getImageGroupId();
+	}
+
+	/**
+	* Sets the image group ID of this ad campaign.
+	*
+	* @param imageGroupId the image group ID of this ad campaign
+	*/
+	@Override
+	public void setImageGroupId(long imageGroupId) {
+		_adCampaign.setImageGroupId(imageGroupId);
 	}
 
 	@Override

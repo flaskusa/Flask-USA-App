@@ -21,6 +21,8 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.rumbasolutions.flask.model.AdCampaign;
+import com.rumbasolutions.flask.service.AdCampaignLocalServiceUtil;
 import com.rumbasolutions.flask.service.AdCampaignServiceUtil;
 
 public class ManageCampaignPortletAction extends MVCPortlet {
@@ -40,10 +42,15 @@ public class ManageCampaignPortletAction extends MVCPortlet {
 	private static Log LOGGER = LogFactoryUtil.getLog(ManageCampaignPortletAction.class);
 	
 	private final String CAMPAIGN_ID_QSTR = "_campaignId";
+	private final String CAMPAIGN_ID_FS_QSTR = "_campaignFullScreenId";
+	
+	private  boolean bIsFullScreen = false;
+	
 	private long _campaignId = 0;
 	
 	private ServiceContext _serviceContext;
-	Folder __campaignFolder=null;
+	Folder _campaignFolder = null;
+	Folder _campaignFullScreen = null;
 	
 	public void addImages(ActionRequest actionRequest, ActionResponse actionResponse)throws IOException, PortletException {
 		
@@ -82,8 +89,19 @@ public class ManageCampaignPortletAction extends MVCPortlet {
 					// saves the file on disk
 					item.write(storeFile);
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
-					FileEntry fileEntry = FlaskDocLibUtil.addFileEntry(__campaignFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
-					AdCampaignServiceUtil.addCampaignImage(_campaignId,fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
+					FileEntry fileEntry;
+					if(!bIsFullScreen){
+						fileEntry = FlaskDocLibUtil.addFileEntry(_campaignFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
+						AdCampaignServiceUtil.addCampaignImage(_campaignId,fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
+					}else{
+						fileEntry = FlaskDocLibUtil.addFileEntry(_campaignFullScreen, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
+						AdCampaign adCampaign = AdCampaignServiceUtil.getCampaign(_campaignId);
+						adCampaign.setImageTitle(fileTitle);
+						adCampaign.setImageDesc(fileDesc);
+						adCampaign.setImageGroupId(fileEntry.getGroupId());
+						adCampaign.setImageUUID(fileEntry.getUuid());
+						AdCampaignLocalServiceUtil.updateAdCampaign(adCampaign);
+					}					
 				}else{
 					
 				}
@@ -103,7 +121,9 @@ public class ManageCampaignPortletAction extends MVCPortlet {
 			uploadDir.mkdir();
 		}
 		try {
-			__campaignFolder = FlaskDocLibUtil.createCampaignFolder(_campaignId, _serviceContext);
+			_campaignFolder = FlaskDocLibUtil.createCampaignFolder(_campaignId, _serviceContext);
+			_campaignFullScreen =	FlaskDocLibUtil.createCampaignFullScreenImageFolder(_campaignId, _serviceContext);
+			
 		}
 		catch (Exception e) {
 			LOGGER.error("Error in creating venue folder in Document Media Library", e);
@@ -126,13 +146,20 @@ public class ManageCampaignPortletAction extends MVCPortlet {
 	}
 	
 	private long getCampaignId(List<FileItem> formItems){
-		long eventId = 0;
+		long campaingId = 0;
 		for (FileItem item : formItems){
 			if(item.getFieldName().contentEquals(CAMPAIGN_ID_QSTR)){
-				eventId = Long.parseLong(item.getString());
+				campaingId = Long.parseLong(item.getString());
 				break;
 			}
+			if(item.getFieldName().contentEquals(CAMPAIGN_ID_FS_QSTR)){
+				campaingId = Long.parseLong(item.getString());
+				bIsFullScreen = true;
+				break;
+			}
+			
+			
 		}
-		return eventId;
+		return campaingId;
 	}
 }

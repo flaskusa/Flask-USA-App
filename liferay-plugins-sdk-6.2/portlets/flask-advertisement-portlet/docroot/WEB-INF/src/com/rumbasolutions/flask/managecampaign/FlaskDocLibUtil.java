@@ -9,6 +9,8 @@ import java.nio.file.Paths;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.Validator;
@@ -32,7 +34,11 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 public class FlaskDocLibUtil {
+	
+	private static Log LOGGER = LogFactoryUtil.getLog(FlaskDocLibUtil.class);
+
 	public static final String _adRootFolder = "Campaign";
+	public static final String _fullScreenFolder = "FullScreenImage";
 	
 	public static String APP_NAME = "guest";
 	public static Role _guestRole =null;
@@ -71,11 +77,21 @@ public class FlaskDocLibUtil {
 		return folder;
 	}
 	
-	public static Folder createCampaignFolder(long eventId,ServiceContext serviceContext) throws PortalException, SystemException{
+	public static Folder createCampaignFolder(long campaignId,ServiceContext serviceContext) throws PortalException, SystemException{
 		Folder folder = createCampaignRootFolder(serviceContext);
-		String eventFolderName = folder.getName()+"-"+eventId;
-		Folder eventFolder = getOrCreateFolder(eventFolderName, folder.getFolderId(), folder.getRepositoryId(), folder.getUserId(), serviceContext);
-		return eventFolder;
+		String campaignFolderName = folder.getName()+"-"+campaignId;
+		Folder campaignFolder = getOrCreateFolder(campaignFolderName, folder.getFolderId(), folder.getRepositoryId(), folder.getUserId(), serviceContext);
+		return campaignFolder;
+	}
+	public static Folder createCampaignFullScreenImageFolder(long campaignId,ServiceContext serviceContext) throws PortalException, SystemException{
+		Folder folder = createCampaignRootFolder(serviceContext);
+		String campaignFolderName = folder.getName()+"-"+campaignId;
+		Folder campaignFolder = getOrCreateFolder(campaignFolderName, folder.getFolderId(), folder.getRepositoryId(), folder.getUserId(), serviceContext);
+		
+		Folder fullScreen = getOrCreateFolder(_fullScreenFolder, campaignFolder.getFolderId(), campaignFolder.getRepositoryId(), campaignFolder.getUserId(), serviceContext);
+		
+		
+		return fullScreen;
 	}
 	
 	public static Folder getCampaignRootFolder(ServiceContext serviceContext) throws PortalException, SystemException{
@@ -134,7 +150,7 @@ public class FlaskDocLibUtil {
 				setGuestViewPermission(fileEntry);
 				
 			}catch(Exception ex){
-			
+				LOGGER.equals("Exception in addFileEntry: "  + ex.getMessage());
 			}
 		return fileEntry;
 	}

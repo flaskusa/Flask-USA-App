@@ -25,6 +25,10 @@
 			<basic name="displayPostEvent" />
 			<basic name="frequencyPerHour" />
 			<basic name="eventTypeId" />
+			<basic name="imageTitle" />
+			<basic name="imageDesc" />
+			<basic name="imageUUID" />
+			<basic name="imageGroupId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

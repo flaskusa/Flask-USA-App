@@ -38,7 +38,7 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{campaignId=");
 		sb.append(campaignId);
@@ -64,6 +64,14 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		sb.append(frequencyPerHour);
 		sb.append(", eventTypeId=");
 		sb.append(eventTypeId);
+		sb.append(", imageTitle=");
+		sb.append(imageTitle);
+		sb.append(", imageDesc=");
+		sb.append(imageDesc);
+		sb.append(", imageUUID=");
+		sb.append(imageUUID);
+		sb.append(", imageGroupId=");
+		sb.append(imageGroupId);
 		sb.append("}");
 
 		return sb.toString();
@@ -105,6 +113,29 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		adCampaignImpl.setFrequencyPerHour(frequencyPerHour);
 		adCampaignImpl.setEventTypeId(eventTypeId);
 
+		if (imageTitle == null) {
+			adCampaignImpl.setImageTitle(StringPool.BLANK);
+		}
+		else {
+			adCampaignImpl.setImageTitle(imageTitle);
+		}
+
+		if (imageDesc == null) {
+			adCampaignImpl.setImageDesc(StringPool.BLANK);
+		}
+		else {
+			adCampaignImpl.setImageDesc(imageDesc);
+		}
+
+		if (imageUUID == null) {
+			adCampaignImpl.setImageUUID(StringPool.BLANK);
+		}
+		else {
+			adCampaignImpl.setImageUUID(imageUUID);
+		}
+
+		adCampaignImpl.setImageGroupId(imageGroupId);
+
 		adCampaignImpl.resetOriginalValues();
 
 		return adCampaignImpl;
@@ -124,6 +155,10 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		displayPostEvent = objectInput.readBoolean();
 		frequencyPerHour = objectInput.readLong();
 		eventTypeId = objectInput.readLong();
+		imageTitle = objectInput.readUTF();
+		imageDesc = objectInput.readUTF();
+		imageUUID = objectInput.readUTF();
+		imageGroupId = objectInput.readLong();
 	}
 
 	@Override
@@ -148,6 +183,29 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		objectOutput.writeBoolean(displayPostEvent);
 		objectOutput.writeLong(frequencyPerHour);
 		objectOutput.writeLong(eventTypeId);
+
+		if (imageTitle == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(imageTitle);
+		}
+
+		if (imageDesc == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(imageDesc);
+		}
+
+		if (imageUUID == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(imageUUID);
+		}
+
+		objectOutput.writeLong(imageGroupId);
 	}
 
 	public long campaignId;
@@ -162,4 +220,8 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 	public boolean displayPostEvent;
 	public long frequencyPerHour;
 	public long eventTypeId;
+	public String imageTitle;
+	public String imageDesc;
+	public String imageUUID;
+	public long imageGroupId;
 }

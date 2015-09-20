@@ -1,6 +1,7 @@
 var adCampaignForm;
 var campaignId = 0;
 var dropZoneImages;
+var dropZoneFullScreenImage;
 var infoTypeJson;
 var allEvents = [];
 
@@ -65,10 +66,13 @@ function adCampaignClickHandlers() {
 function setCampaignFormVisible(visible){
 	if(visible == true){
 		$("#adCampaignFormContainer").show();
-		fnBuildCampaignUpload($("#FileUploadComponent"))
+		fnBuildCampaignUpload($("#campainImagesUpload"))
+		buildFullScreenImageUpload($("#campainFullScreenImagesUpload"));
 		adCampaignForm.show();
 	}else{
 		$("#adCampaignFormContainer").hide();
+		$("#campaignDetailGallery").empty();
+		
 		adCampaignForm.hide;
 	}
 	
@@ -112,8 +116,10 @@ function loadEventData(eventTypeId){
 	flaskRequest.sendGETRequest(_adCampaignModel.SERVICE_ENDPOINTS.GET_EVENT, params, 
 	function(data){/*success handler*/
 		var events = eval(data);
+		$.each(events.Events, function(index, event) {
+			event.eventDate = _flaskLib.formatDateInMillis(event.eventDate);
+		});
 		createEventsTable(events.Events, $("#campaignEvents"));
-			
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
 		console.log("Error in getting data: " + error);
@@ -230,17 +236,26 @@ function saveCampaign() {
 	}
 
 	flaskRequest.sendPOSTRequest(url, params, function(data) {
+		
 		_flaskLib.showSuccessMessage('campaign-action-msg',
 				_adCampaignModel.MESSAGES.SAVE);
-		if($(".dz-image").length>0) {					
+		
+		if($(".dz-image").length > 0) {					
 			$("#_campaignId").val(data.campaignId);
+			$("#_campaignFullScreenId").val(data.campaignId);
 			dropZoneImages.options.autoProcessQueue = true;
 			dropZoneImages.processQueue();
 			dropZoneImages.on("queuecomplete", function (file) {
+				dropZoneFullScreenImage.options.autoProcessQueue = true;
+				dropZoneFullScreenImage.processQueue();
+			});			
+			dropZoneFullScreenImage.on("queuecomplete", function (file) {
+				
 				loadCampaignData();
 				$("#adCampaignDataTable").show();
 				setCampaignFormVisible(false);
-			});			
+			});
+			
 		}
 		else{
 			loadCampaignData();
@@ -314,7 +329,7 @@ function getInfoTypes(){
 function fnBuildCampaignUpload(imageContainer){
 	$(imageContainer).html(""); 
   	var strSelected = "";
-  	dropZoneImages = "";
+  	dropZoneImages = null;
     var objForm = $('<form/>',{'class':'dropzone','id':'campaignImages','action':$("#imgActionUrl").val()});
     $(objForm).appendTo(imageContainer);
     var objCampaignId = $('<input/>',{'name':'_campaignId','id':'_campaignId','type':'hidden','value':$("#campaignId").val()});
@@ -326,6 +341,24 @@ function fnBuildCampaignUpload(imageContainer){
     	addRemoveLinks : true
     });
 }
+
+function buildFullScreenImageUpload(imageContainer){
+	$(imageContainer).html(""); 
+  	var strSelected = "";
+  	dropZoneFullScreenImage = null;
+    var objForm = $('<form/>',{'class':'dropzone','id':'campaignFullScreenImage','action':$("#imgActionUrl").val()});
+    $(objForm).appendTo(imageContainer);
+    var objCampaignId = $('<input/>',{'name':'_campaignFullScreenId','id':'_campaignFullScreenId','type':'hidden','value':$("#campaignId").val()});
+    $(objCampaignId).appendTo(objForm);
+    
+    dropZoneFullScreenImage = new Dropzone($(objForm).get(0),{
+    	autoProcessQueue: false,
+    	uploadMultiple: false,
+    	addRemoveLinks : true
+    });
+}
+
+
 
 function fnGetCampaignImages(campaignId,container,editable){
 	params= {'campaignId': campaignId};

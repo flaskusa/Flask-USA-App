@@ -43,6 +43,10 @@ public class AdCampaignSoap implements Serializable {
 		soapModel.setDisplayPostEvent(model.getDisplayPostEvent());
 		soapModel.setFrequencyPerHour(model.getFrequencyPerHour());
 		soapModel.setEventTypeId(model.getEventTypeId());
+		soapModel.setImageTitle(model.getImageTitle());
+		soapModel.setImageDesc(model.getImageDesc());
+		soapModel.setImageUUID(model.getImageUUID());
+		soapModel.setImageGroupId(model.getImageGroupId());
 
 		return soapModel;
 	}
@@ -207,6 +211,38 @@ public class AdCampaignSoap implements Serializable {
 		_eventTypeId = eventTypeId;
 	}
 
+	public String getImageTitle() {
+		return _imageTitle;
+	}
+
+	public void setImageTitle(String imageTitle) {
+		_imageTitle = imageTitle;
+	}
+
+	public String getImageDesc() {
+		return _imageDesc;
+	}
+
+	public void setImageDesc(String imageDesc) {
+		_imageDesc = imageDesc;
+	}
+
+	public String getImageUUID() {
+		return _imageUUID;
+	}
+
+	public void setImageUUID(String imageUUID) {
+		_imageUUID = imageUUID;
+	}
+
+	public long getImageGroupId() {
+		return _imageGroupId;
+	}
+
+	public void setImageGroupId(long imageGroupId) {
+		_imageGroupId = imageGroupId;
+	}
+
 	private long _campaignId;
 	private long _userId;
 	private Date _createdDate;
@@ -219,4 +255,8 @@ public class AdCampaignSoap implements Serializable {
 	private boolean _displayPostEvent;
 	private long _frequencyPerHour;
 	private long _eventTypeId;
+	private String _imageTitle;
+	private String _imageDesc;
+	private String _imageUUID;
+	private long _imageGroupId;
 }

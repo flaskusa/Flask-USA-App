@@ -60,6 +60,11 @@
 		<column name="displayPostEvent" type="boolean" />
 		<column name="frequencyPerHour" type="long" />
 		<column name="eventTypeId" type="long" />
+				<!-- Other fields -->		
+		<column name="imageTitle" type="String" />
+        <column name="imageDesc" type="String" />
+        <column name="imageUUID" type="String" />
+        <column name="imageGroupId" type="long" />
 		<order by="asc">
 			<order-column name="campaignName" />
 		</order>
@@ -85,6 +90,7 @@
         <column name="imageDesc" type="String" />
         <column name="imageUUID" type="String" />
         <column name="imageGroupId" type="long" />
+        
         <column name="campaignId" type="long"></column>
         
 		<finder name="imageUUID" return-type="Campaign_Images">
@@ -117,6 +123,7 @@
 		<finder name="eventId" return-type="Collection">
 			<finder-column name="eventId" />
 		</finder>
+		
 	</entity>
 	
 </service-builder>

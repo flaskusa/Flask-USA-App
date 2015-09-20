@@ -39,6 +39,7 @@ import com.rumbasolutions.flask.service.CampaignImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.AdCampaignServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.AdCampaignFinderUtil;
 import com.rumbasolutions.flask.service.persistence.AdCampaignUtil;
+import com.rumbasolutions.flask.service.persistence.CampaignEventUtil;
 import com.rumbasolutions.flask.service.persistence.CampaignImageUtil;
 
 /**
@@ -225,6 +226,9 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 	public void deleteCampaign(long campaignId) {
 		try {
 			AdCampaignLocalServiceUtil.deleteAdCampaign(campaignId);
+			CampaignEventUtil.removeBycampaignId(campaignId);
+			CampaignImageUtil.removeBycampaignId(campaignId);
+			
 		} catch (PortalException e) {
 			LOGGER.error("Exception in Delete Campaign : " + e.getMessage());
 			e.printStackTrace();
@@ -236,15 +240,14 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 
 	@Override
 	public void deleteCampaigns(String campaignList) {
-
 		String[] campaignArray = campaignList.split(",");
 		for (String campaignId : campaignArray) {
 			try {
-				AdCampaignLocalServiceUtil.deleteAdCampaign(Long.parseLong(campaignId));
-			} catch (PortalException e) {
-				LOGGER.error("Error in deleting Campaign:" + campaignId);
-			} catch (SystemException e) {
-				LOGGER.error("Error in deleting Campaign:" + campaignId);
+				if(!campaignId.isEmpty() ){
+					deleteCampaign(Long.parseLong(campaignId));
+				}
+			} catch (Exception e) {
+				LOGGER.error("Error in deleting Campaign:" + campaignId + " Exception:" + e.getMessage());
 			}
 		}
 	}

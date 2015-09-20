@@ -272,6 +272,65 @@ public interface AdCampaignModel extends BaseModel<AdCampaign> {
 	 */
 	public void setEventTypeId(long eventTypeId);
 
+	/**
+	 * Returns the image title of this ad campaign.
+	 *
+	 * @return the image title of this ad campaign
+	 */
+	@AutoEscape
+	public String getImageTitle();
+
+	/**
+	 * Sets the image title of this ad campaign.
+	 *
+	 * @param imageTitle the image title of this ad campaign
+	 */
+	public void setImageTitle(String imageTitle);
+
+	/**
+	 * Returns the image desc of this ad campaign.
+	 *
+	 * @return the image desc of this ad campaign
+	 */
+	@AutoEscape
+	public String getImageDesc();
+
+	/**
+	 * Sets the image desc of this ad campaign.
+	 *
+	 * @param imageDesc the image desc of this ad campaign
+	 */
+	public void setImageDesc(String imageDesc);
+
+	/**
+	 * Returns the image u u i d of this ad campaign.
+	 *
+	 * @return the image u u i d of this ad campaign
+	 */
+	@AutoEscape
+	public String getImageUUID();
+
+	/**
+	 * Sets the image u u i d of this ad campaign.
+	 *
+	 * @param imageUUID the image u u i d of this ad campaign
+	 */
+	public void setImageUUID(String imageUUID);
+
+	/**
+	 * Returns the image group ID of this ad campaign.
+	 *
+	 * @return the image group ID of this ad campaign
+	 */
+	public long getImageGroupId();
+
+	/**
+	 * Sets the image group ID of this ad campaign.
+	 *
+	 * @param imageGroupId the image group ID of this ad campaign
+	 */
+	public void setImageGroupId(long imageGroupId);
+
 	@Override
 	public boolean isNew();
 

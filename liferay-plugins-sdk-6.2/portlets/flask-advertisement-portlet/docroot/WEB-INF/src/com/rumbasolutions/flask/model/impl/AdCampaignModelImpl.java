@@ -77,9 +77,13 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 			{ "displayDuringEvent", Types.BOOLEAN },
 			{ "displayPostEvent", Types.BOOLEAN },
 			{ "frequencyPerHour", Types.BIGINT },
-			{ "eventTypeId", Types.BIGINT }
+			{ "eventTypeId", Types.BIGINT },
+			{ "imageTitle", Types.VARCHAR },
+			{ "imageDesc", Types.VARCHAR },
+			{ "imageUUID", Types.VARCHAR },
+			{ "imageGroupId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskads_AdCampaign (campaignId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,campaignName VARCHAR(75) null,customerId LONG,displayGeneral BOOLEAN,displayPreEvent BOOLEAN,displayDuringEvent BOOLEAN,displayPostEvent BOOLEAN,frequencyPerHour LONG,eventTypeId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskads_AdCampaign (campaignId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,campaignName VARCHAR(75) null,customerId LONG,displayGeneral BOOLEAN,displayPreEvent BOOLEAN,displayDuringEvent BOOLEAN,displayPostEvent BOOLEAN,frequencyPerHour LONG,eventTypeId LONG,imageTitle VARCHAR(75) null,imageDesc VARCHAR(75) null,imageUUID VARCHAR(75) null,imageGroupId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskads_AdCampaign";
 	public static final String ORDER_BY_JPQL = " ORDER BY adCampaign.campaignName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskads_AdCampaign.campaignName ASC";
@@ -123,6 +127,10 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		model.setDisplayPostEvent(soapModel.getDisplayPostEvent());
 		model.setFrequencyPerHour(soapModel.getFrequencyPerHour());
 		model.setEventTypeId(soapModel.getEventTypeId());
+		model.setImageTitle(soapModel.getImageTitle());
+		model.setImageDesc(soapModel.getImageDesc());
+		model.setImageUUID(soapModel.getImageUUID());
+		model.setImageGroupId(soapModel.getImageGroupId());
 
 		return model;
 	}
@@ -199,6 +207,10 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		attributes.put("displayPostEvent", getDisplayPostEvent());
 		attributes.put("frequencyPerHour", getFrequencyPerHour());
 		attributes.put("eventTypeId", getEventTypeId());
+		attributes.put("imageTitle", getImageTitle());
+		attributes.put("imageDesc", getImageDesc());
+		attributes.put("imageUUID", getImageUUID());
+		attributes.put("imageGroupId", getImageGroupId());
 
 		return attributes;
 	}
@@ -276,6 +288,30 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 
 		if (eventTypeId != null) {
 			setEventTypeId(eventTypeId);
+		}
+
+		String imageTitle = (String)attributes.get("imageTitle");
+
+		if (imageTitle != null) {
+			setImageTitle(imageTitle);
+		}
+
+		String imageDesc = (String)attributes.get("imageDesc");
+
+		if (imageDesc != null) {
+			setImageDesc(imageDesc);
+		}
+
+		String imageUUID = (String)attributes.get("imageUUID");
+
+		if (imageUUID != null) {
+			setImageUUID(imageUUID);
+		}
+
+		Long imageGroupId = (Long)attributes.get("imageGroupId");
+
+		if (imageGroupId != null) {
+			setImageGroupId(imageGroupId);
 		}
 	}
 
@@ -460,6 +496,65 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		_eventTypeId = eventTypeId;
 	}
 
+	@JSON
+	@Override
+	public String getImageTitle() {
+		if (_imageTitle == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _imageTitle;
+		}
+	}
+
+	@Override
+	public void setImageTitle(String imageTitle) {
+		_imageTitle = imageTitle;
+	}
+
+	@JSON
+	@Override
+	public String getImageDesc() {
+		if (_imageDesc == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _imageDesc;
+		}
+	}
+
+	@Override
+	public void setImageDesc(String imageDesc) {
+		_imageDesc = imageDesc;
+	}
+
+	@JSON
+	@Override
+	public String getImageUUID() {
+		if (_imageUUID == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _imageUUID;
+		}
+	}
+
+	@Override
+	public void setImageUUID(String imageUUID) {
+		_imageUUID = imageUUID;
+	}
+
+	@JSON
+	@Override
+	public long getImageGroupId() {
+		return _imageGroupId;
+	}
+
+	@Override
+	public void setImageGroupId(long imageGroupId) {
+		_imageGroupId = imageGroupId;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -503,6 +598,10 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		adCampaignImpl.setDisplayPostEvent(getDisplayPostEvent());
 		adCampaignImpl.setFrequencyPerHour(getFrequencyPerHour());
 		adCampaignImpl.setEventTypeId(getEventTypeId());
+		adCampaignImpl.setImageTitle(getImageTitle());
+		adCampaignImpl.setImageDesc(getImageDesc());
+		adCampaignImpl.setImageUUID(getImageUUID());
+		adCampaignImpl.setImageGroupId(getImageGroupId());
 
 		adCampaignImpl.resetOriginalValues();
 
@@ -608,12 +707,38 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 
 		adCampaignCacheModel.eventTypeId = getEventTypeId();
 
+		adCampaignCacheModel.imageTitle = getImageTitle();
+
+		String imageTitle = adCampaignCacheModel.imageTitle;
+
+		if ((imageTitle != null) && (imageTitle.length() == 0)) {
+			adCampaignCacheModel.imageTitle = null;
+		}
+
+		adCampaignCacheModel.imageDesc = getImageDesc();
+
+		String imageDesc = adCampaignCacheModel.imageDesc;
+
+		if ((imageDesc != null) && (imageDesc.length() == 0)) {
+			adCampaignCacheModel.imageDesc = null;
+		}
+
+		adCampaignCacheModel.imageUUID = getImageUUID();
+
+		String imageUUID = adCampaignCacheModel.imageUUID;
+
+		if ((imageUUID != null) && (imageUUID.length() == 0)) {
+			adCampaignCacheModel.imageUUID = null;
+		}
+
+		adCampaignCacheModel.imageGroupId = getImageGroupId();
+
 		return adCampaignCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{campaignId=");
 		sb.append(getCampaignId());
@@ -639,6 +764,14 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		sb.append(getFrequencyPerHour());
 		sb.append(", eventTypeId=");
 		sb.append(getEventTypeId());
+		sb.append(", imageTitle=");
+		sb.append(getImageTitle());
+		sb.append(", imageDesc=");
+		sb.append(getImageDesc());
+		sb.append(", imageUUID=");
+		sb.append(getImageUUID());
+		sb.append(", imageGroupId=");
+		sb.append(getImageGroupId());
 		sb.append("}");
 
 		return sb.toString();
@@ -646,7 +779,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.AdCampaign");
@@ -700,6 +833,22 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 			"<column><column-name>eventTypeId</column-name><column-value><![CDATA[");
 		sb.append(getEventTypeId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageTitle</column-name><column-value><![CDATA[");
+		sb.append(getImageTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageDesc</column-name><column-value><![CDATA[");
+		sb.append(getImageDesc());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageUUID</column-name><column-value><![CDATA[");
+		sb.append(getImageUUID());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageGroupId</column-name><column-value><![CDATA[");
+		sb.append(getImageGroupId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -725,6 +874,10 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 	private boolean _displayPostEvent;
 	private long _frequencyPerHour;
 	private long _eventTypeId;
+	private String _imageTitle;
+	private String _imageDesc;
+	private String _imageUUID;
+	private long _imageGroupId;
 	private long _columnBitmask;
 	private AdCampaign _escapedModel;
 }

@@ -10,7 +10,11 @@ create table flaskads_AdCampaign (
 	displayDuringEvent BOOLEAN,
 	displayPostEvent BOOLEAN,
 	frequencyPerHour LONG,
-	eventTypeId LONG
+	eventTypeId LONG,
+	imageTitle VARCHAR(75) null,
+	imageDesc VARCHAR(75) null,
+	imageUUID VARCHAR(75) null,
+	imageGroupId LONG
 );
 
 create table flaskads_AdCustomer (

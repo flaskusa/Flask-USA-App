@@ -87,6 +87,10 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		attributes.put("displayPostEvent", getDisplayPostEvent());
 		attributes.put("frequencyPerHour", getFrequencyPerHour());
 		attributes.put("eventTypeId", getEventTypeId());
+		attributes.put("imageTitle", getImageTitle());
+		attributes.put("imageDesc", getImageDesc());
+		attributes.put("imageUUID", getImageUUID());
+		attributes.put("imageGroupId", getImageGroupId());
 
 		return attributes;
 	}
@@ -164,6 +168,30 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 
 		if (eventTypeId != null) {
 			setEventTypeId(eventTypeId);
+		}
+
+		String imageTitle = (String)attributes.get("imageTitle");
+
+		if (imageTitle != null) {
+			setImageTitle(imageTitle);
+		}
+
+		String imageDesc = (String)attributes.get("imageDesc");
+
+		if (imageDesc != null) {
+			setImageDesc(imageDesc);
+		}
+
+		String imageUUID = (String)attributes.get("imageUUID");
+
+		if (imageUUID != null) {
+			setImageUUID(imageUUID);
+		}
+
+		Long imageGroupId = (Long)attributes.get("imageGroupId");
+
+		if (imageGroupId != null) {
+			setImageGroupId(imageGroupId);
 		}
 	}
 
@@ -478,6 +506,98 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		}
 	}
 
+	@Override
+	public String getImageTitle() {
+		return _imageTitle;
+	}
+
+	@Override
+	public void setImageTitle(String imageTitle) {
+		_imageTitle = imageTitle;
+
+		if (_adCampaignRemoteModel != null) {
+			try {
+				Class<?> clazz = _adCampaignRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setImageTitle", String.class);
+
+				method.invoke(_adCampaignRemoteModel, imageTitle);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getImageDesc() {
+		return _imageDesc;
+	}
+
+	@Override
+	public void setImageDesc(String imageDesc) {
+		_imageDesc = imageDesc;
+
+		if (_adCampaignRemoteModel != null) {
+			try {
+				Class<?> clazz = _adCampaignRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setImageDesc", String.class);
+
+				method.invoke(_adCampaignRemoteModel, imageDesc);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public String getImageUUID() {
+		return _imageUUID;
+	}
+
+	@Override
+	public void setImageUUID(String imageUUID) {
+		_imageUUID = imageUUID;
+
+		if (_adCampaignRemoteModel != null) {
+			try {
+				Class<?> clazz = _adCampaignRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setImageUUID", String.class);
+
+				method.invoke(_adCampaignRemoteModel, imageUUID);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
+	public long getImageGroupId() {
+		return _imageGroupId;
+	}
+
+	@Override
+	public void setImageGroupId(long imageGroupId) {
+		_imageGroupId = imageGroupId;
+
+		if (_adCampaignRemoteModel != null) {
+			try {
+				Class<?> clazz = _adCampaignRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setImageGroupId", long.class);
+
+				method.invoke(_adCampaignRemoteModel, imageGroupId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getAdCampaignRemoteModel() {
 		return _adCampaignRemoteModel;
 	}
@@ -559,6 +679,10 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		clone.setDisplayPostEvent(getDisplayPostEvent());
 		clone.setFrequencyPerHour(getFrequencyPerHour());
 		clone.setEventTypeId(getEventTypeId());
+		clone.setImageTitle(getImageTitle());
+		clone.setImageDesc(getImageDesc());
+		clone.setImageUUID(getImageUUID());
+		clone.setImageGroupId(getImageGroupId());
 
 		return clone;
 	}
@@ -609,7 +733,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(33);
 
 		sb.append("{campaignId=");
 		sb.append(getCampaignId());
@@ -635,6 +759,14 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		sb.append(getFrequencyPerHour());
 		sb.append(", eventTypeId=");
 		sb.append(getEventTypeId());
+		sb.append(", imageTitle=");
+		sb.append(getImageTitle());
+		sb.append(", imageDesc=");
+		sb.append(getImageDesc());
+		sb.append(", imageUUID=");
+		sb.append(getImageUUID());
+		sb.append(", imageGroupId=");
+		sb.append(getImageGroupId());
 		sb.append("}");
 
 		return sb.toString();
@@ -642,7 +774,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(40);
+		StringBundler sb = new StringBundler(52);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.AdCampaign");
@@ -696,6 +828,22 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 			"<column><column-name>eventTypeId</column-name><column-value><![CDATA[");
 		sb.append(getEventTypeId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageTitle</column-name><column-value><![CDATA[");
+		sb.append(getImageTitle());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageDesc</column-name><column-value><![CDATA[");
+		sb.append(getImageDesc());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageUUID</column-name><column-value><![CDATA[");
+		sb.append(getImageUUID());
+		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>imageGroupId</column-name><column-value><![CDATA[");
+		sb.append(getImageGroupId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -715,6 +863,10 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 	private boolean _displayPostEvent;
 	private long _frequencyPerHour;
 	private long _eventTypeId;
+	private String _imageTitle;
+	private String _imageDesc;
+	private String _imageUUID;
+	private long _imageGroupId;
 	private BaseModel<?> _adCampaignRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }
