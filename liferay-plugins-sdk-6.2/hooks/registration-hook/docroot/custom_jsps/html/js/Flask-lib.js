@@ -221,6 +221,7 @@ var SERVICE_ENDPOINTS = {
 										}
 										console.log('end insave');			
 								});
+	window.location = "http://146.148.83.30/web/flask/events?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
 	}
 
 
@@ -231,18 +232,18 @@ var SERVICE_ENDPOINTS = {
 						firstName : $("#firstName").val(),
 						middleName : $("#middleName").val(),
 						lastName : $("#lastName").val(),
-						isMale : true,
-						screenName : $("#screenName").val(),
 						email : $("#email").val(),
+						screenName : $("#screenName").val(),
+						password1 : $("#password1").val(),
+						password2 : $("#password2").val(),
 						DOB : $("#DOB").val(),
+						isMale : true,
 						streetName : $("#streetName").val(),
 						aptNo : $("#aptNo").val(),
 						areaCode : $("#areaCode").val(),
 						city : $("#city").val(),
 						stateId : $("#stateId").val(),
 						countryId : $("#countryId").val(),
-						password1 : $("#password1").val(),
-						password2 : $("#password2").val(),
 						mobileNumber : $("#mobileNumber").val(),
 						userInterests : fnGetCheckBoxSelected()
 					};
@@ -478,8 +479,11 @@ var SERVICE_ENDPOINTS = {
 			{
 				fnFillRegionList(0,0);
 			}
-
-			$("#DOB").jqxDateTimeInput({ width: '257px', height: '35px', formatString: "MM-dd-yyyy" });
+			$('#DOB').datetimepicker({
+				format: "MM-DD-YYYY",
+				//pickTime: false
+			});
+			//$("#DOB").jqxDateTimeInput({ width: '257px', height: '35px', formatString: "MM-dd-yyyy" });
 			$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
 		    console.log("Cal Done");    
 			$(".jqx-checkbox").css("margin-top","6.5px");
