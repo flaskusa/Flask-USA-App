@@ -113,10 +113,23 @@ div#placeholder
 
 @media(max-width:320px)
 {
+	#reportrange {
+	    background: #fff;
+	    cursor: pointer;
+   		padding: 10px 2px 0px 4px;
+   	    border: 1px solid #ccc;
+	    font-size: 14px !important;
+	}	    
 	div#placeholder 
 	{
 		height: 400px;
 	}
+	
+	.owl-theme .owl-controls .owl-page span {
+	    width: 9px !important;
+	    height: 9px !important;
+	    margin: 2px 2px !important;
+	}	
 }
 
 @media(min-width:414px)
@@ -125,6 +138,12 @@ div#placeholder
 	{
 		height: 550px;
 	}
+	
+	.owl-theme .owl-controls .owl-page span {
+	    width: 10px !important;
+	    height: 10px !important;
+	    margin: 0px 4px !important;
+	}	
 }
 div#fixedfooter2 
 {
@@ -296,7 +315,8 @@ input.btn.btn-info.cssback {
 	  -webkit-box-sizing: content-box;
 	  -moz-box-sizing: content-box;
 	  box-sizing: content-box;
-	  padding: 5px 5px 5px 14px;
+	  /*padding: 5px 5px 5px 14px;*/
+	  padding: 15px 0px 0px 25px !important;
 	  overflow: hidden;
 	  border: none;
 	  font: normal 14px/1 "Coda", Helvetica, sans-serif;
@@ -306,7 +326,6 @@ input.btn.btn-info.cssback {
 	  text-align: center;
 	  -o-text-overflow: ellipsis;
 	  text-overflow: ellipsis;
-	  margin: 5px !important;
 	  background-image: url("../img/Flask_Default_Image.jpg");
       background-size: cover;
 	}
@@ -404,7 +423,7 @@ input.btn.btn-info.cssback {
 	}
 	
 	.eventDetailBoxWithImages{
-		width: 93% !important;
+		/*width: 93% !important;*/
 		margin-left:0px;
 		margin-right:0px;
 	    font: normal 12px/1 "Coda", Helvetica, sans-serif;
@@ -429,8 +448,8 @@ input.btn.btn-info.cssback {
 	}		
 	
 	.eventDetailBox{
-		width:93% !important;
-		height: 170px !important;
+		/*width:93% !important;*/
+		height: 188px !important;
 		font-size:12px;
 		min-width: 300px !important;
 	}
@@ -491,8 +510,8 @@ input.btn.btn-info.cssback {
 	}
 	
 	.photo{
-	    height: 190px !important;
-	    margin: 5px;
+	    height: 198px !important;
+	    margin: 1px;
 	}
 }		
 
