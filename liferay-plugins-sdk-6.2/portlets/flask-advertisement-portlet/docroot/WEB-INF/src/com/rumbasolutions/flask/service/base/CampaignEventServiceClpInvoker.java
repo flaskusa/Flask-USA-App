@@ -43,6 +43,12 @@ public class CampaignEventServiceClpInvoker {
 		_methodParameterTypes45 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName46 = "getEventCampaignImages";
+
+		_methodParameterTypes46 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -71,6 +77,12 @@ public class CampaignEventServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
+		if (_methodName46.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes46, parameterTypes)) {
+			return CampaignEventServiceUtil.getEventCampaignImages((java.lang.String)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -82,4 +94,6 @@ public class CampaignEventServiceClpInvoker {
 	private String[] _methodParameterTypes44;
 	private String _methodName45;
 	private String[] _methodParameterTypes45;
+	private String _methodName46;
+	private String[] _methodParameterTypes46;
 }

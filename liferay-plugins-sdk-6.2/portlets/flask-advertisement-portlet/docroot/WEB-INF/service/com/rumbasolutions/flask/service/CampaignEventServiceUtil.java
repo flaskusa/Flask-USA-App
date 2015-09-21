@@ -74,6 +74,12 @@ public class CampaignEventServiceUtil {
 		return getService().getEventCampaigns(eventId, serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject getEventCampaignImages(
+		java.lang.String eventIdList,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getEventCampaignImages(eventIdList, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

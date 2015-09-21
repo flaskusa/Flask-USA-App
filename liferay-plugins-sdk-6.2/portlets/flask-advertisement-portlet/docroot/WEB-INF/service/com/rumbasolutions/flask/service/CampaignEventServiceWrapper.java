@@ -72,6 +72,14 @@ public class CampaignEventServiceWrapper implements CampaignEventService,
 		return _campaignEventService.getEventCampaigns(eventId, serviceContext);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getEventCampaignImages(
+		java.lang.String eventIdList,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _campaignEventService.getEventCampaignImages(eventIdList,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

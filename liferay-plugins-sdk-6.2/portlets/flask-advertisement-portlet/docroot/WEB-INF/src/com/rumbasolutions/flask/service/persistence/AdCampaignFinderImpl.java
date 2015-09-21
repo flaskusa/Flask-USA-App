@@ -66,35 +66,60 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 		}
 		return campaignList;
 	}
-	private List createCustomModelCampaignList(List list){
-		String serilizeString = null;
-		JSONArray groupJsonArray = null;
-		Map<String, String> groupMap = null;
-		List<Map<String, String>> mapList = new ArrayList<Map<String, String>>();
-		try{
-		for (Object ob : list) {
-			serilizeString = JSONFactoryUtil.serialize(ob);
-			groupJsonArray = JSONFactoryUtil.createJSONArray(serilizeString);
-			groupMap = new HashMap<String, String>();
-			groupMap.put("campaignId", groupJsonArray.getString(0));
-			groupMap.put("campaignName", groupJsonArray.getString(1));
-			groupMap.put("customerId", groupJsonArray.getString(2));
-			groupMap.put("customerName", groupJsonArray.getString(3));
-			groupMap.put("displayGeneral", groupJsonArray.getString(4));
-			groupMap.put("displayPreEvent", groupJsonArray.getString(5));
-			groupMap.put("displayDuringEvent", groupJsonArray.getString(6));
-			groupMap.put("displayPostEvent", groupJsonArray.getString(7));
-			groupMap.put("eventTypeId", groupJsonArray.getString(8));
-			groupMap.put("frequencyPerHour", groupJsonArray.getString(9));
-			groupMap.put("adDisplayTime", groupJsonArray.getString(10));
-			
-			mapList.add(groupMap);
-		}
-		}catch(JSONException e){
-			LOGGER.error("Exception in createCustomModelList for My Tailgate "
-					+ e.getMessage());
-		}
-		return mapList;
-	}
 	
+	@Override
+	public List getCampaignsForEvents(String eventList){
+		Session session = null;
+		List campaignList = null;
+		eventList = eventList.trim();
+		if(eventList.isEmpty())  return null;
+		
+		try{
+			session = openSession();
+			StringBuilder sb = new StringBuilder();
+			String sqlSelect = "select  fac.campaignId, fac.campaignName, fe.eventName, fac.imageTitle 'fullScreenTitle',"
+								+ " fac.imageDesc 'fullScreenDesc', fac.imageGroupId 'fullScreenGroupId', "
+								+ " fac.imageUUID 'fullScreenUUID', fac.frequencyPerHour, fci.imageTitle, "
+								+ " fci.imageDesc, fci.imageGroupId, fci.imageUUID ";
+			
+			String sqlFrom = " from flaskads_campaignevent  fce "
+					+ " inner join  flaskads_adcampaign fac on  fce.campaignId = fac.campaignId "
+					+ " inner join flaskevents_event fe on fe.eventId = fce.eventId "
+					+ " inner join flaskads_campaignimage fci on fci.campaignId = fac.campaignId";
+			String sqlWhere = " where fce.eventId in ( " + eventList + ")" ;
+			
+			sb.append(sqlSelect);
+			sb.append(sqlFrom);
+			
+			if(!eventList.isEmpty()){
+				sb.append(sqlWhere);
+			}
+
+			sb.append(" LIMIT 1000 ");
+			SQLQuery queryObj = session.createSQLQuery(sb.toString());
+			queryObj.addScalar("campaignId", Type.LONG);
+			queryObj.addScalar("campaignName", Type.STRING);
+			queryObj.addScalar("eventName", Type.STRING);
+			queryObj.addScalar("fullScreenTitle", Type.STRING);
+			queryObj.addScalar("fullScreenDesc", Type.STRING);
+			queryObj.addScalar("fullScreenGroupId", Type.LONG);
+			queryObj.addScalar("fullScreenUUID", Type.STRING);
+			queryObj.addScalar("frequencyPerHour", Type.LONG);
+			queryObj.addScalar("imageTitle", Type.STRING);
+			queryObj.addScalar("imageDesc", Type.STRING);
+			queryObj.addScalar("imageGroupId", Type.LONG);
+			queryObj.addScalar("imageUUID", Type.STRING);
+
+			queryObj.setCacheable(true);
+			QueryPos qPosition = QueryPos.getInstance(queryObj);
+
+			campaignList = queryObj.list();
+		}catch(Exception e)
+		{
+			LOGGER.error("Exception in getAdCampaginList : "+ e.getMessage());
+		}finally{
+			closeSession(session);
+		}
+		return campaignList;
+	}	
 }

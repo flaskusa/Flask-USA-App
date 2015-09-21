@@ -43,6 +43,12 @@ public class CampaignEventServiceClp implements CampaignEventService {
 		_methodParameterTypes4 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName5 = "getEventCampaignImages";
+
+		_methodParameterTypes5 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -154,6 +160,36 @@ public class CampaignEventServiceClp implements CampaignEventService {
 		return (java.util.List<com.rumbasolutions.flask.model.CampaignEvent>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject getEventCampaignImages(
+		java.lang.String eventIdList,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5,
+					new Object[] {
+						ClpSerializer.translateInput(eventIdList),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -163,4 +199,6 @@ public class CampaignEventServiceClp implements CampaignEventService {
 	private String[] _methodParameterTypes3;
 	private String _methodName4;
 	private String[] _methodParameterTypes4;
+	private String _methodName5;
+	private String[] _methodParameterTypes5;
 }

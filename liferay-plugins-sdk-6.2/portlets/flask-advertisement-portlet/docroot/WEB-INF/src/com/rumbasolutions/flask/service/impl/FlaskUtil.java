@@ -12,6 +12,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -59,6 +60,20 @@ public class FlaskUtil {
 
 	private static void setStringNamesForCampaign(AdCampaign adCampaign) {
 		
+	}
+	
+	public static String sanitizeIdList(String idList){
+		StringBuilder sb  = new StringBuilder();
+		if(Validator.isNotNull(idList)){
+			String[] idArr = idList.split(", ");
+			for(String id : idArr){
+				Integer val = Integer.valueOf(id.trim());
+				sb.append(val.intValue());
+				sb.append(", ");
+			}
+			sb.delete(sb.length() - 2, sb.length());
+		}	
+		return sb.toString();
 	}
 	
 	

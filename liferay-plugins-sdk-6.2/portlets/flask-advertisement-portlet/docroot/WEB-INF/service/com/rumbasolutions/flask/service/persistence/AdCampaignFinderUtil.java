@@ -25,6 +25,11 @@ public class AdCampaignFinderUtil {
 		return getFinder().getAdCampaginList();
 	}
 
+	public static java.util.List getCampaignsForEvents(
+		java.lang.String eventList) {
+		return getFinder().getCampaignsForEvents(eventList);
+	}
+
 	public static AdCampaignFinder getFinder() {
 		if (_finder == null) {
 			_finder = (AdCampaignFinder)PortletBeanLocatorUtil.locate(com.rumbasolutions.flask.service.ClpSerializer.getServletContextName(),
