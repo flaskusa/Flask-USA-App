@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.AdCampaign;
 import com.rumbasolutions.flask.model.CampaignEvent;
@@ -331,6 +332,7 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 		}
 	}
 
+	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public JSONObject getCampaignWithImages(long campaignId, ServiceContext serviceContext){
 		List<CampaignImage> campaignImageList = null;
