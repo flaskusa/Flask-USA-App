@@ -65,7 +65,7 @@ public class FlaskUtil {
 	public static String sanitizeIdList(String idList){
 		StringBuilder sb  = new StringBuilder();
 		if(Validator.isNotNull(idList)){
-			String[] idArr = idList.split(", ");
+			String[] idArr = idList.split(",");
 			for(String id : idArr){
 				Integer val = Integer.valueOf(id.trim());
 				sb.append(val.intValue());
