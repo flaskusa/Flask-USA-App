@@ -221,7 +221,9 @@ var SERVICE_ENDPOINTS = {
 										}
 										console.log('end insave');			
 								});
-	window.location = "http://146.148.83.30/web/flask/events?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
+	//window.location = "http://146.148.83.30/web/flask/events?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
+		  var url = "/web/flask/events?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
+		  $(location).attr('href',url);
 	}
 
 
@@ -496,7 +498,7 @@ var SERVICE_ENDPOINTS = {
 				//pickTime: false
 			});
 			 $(".cssCancel").click(function(){
-				  var url = "/web/guest/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
+				  var url = "/web/flask/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
 				  $(location).attr('href',url);
 				 });
 	});
