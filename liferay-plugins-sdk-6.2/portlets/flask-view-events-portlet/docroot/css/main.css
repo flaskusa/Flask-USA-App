@@ -762,6 +762,7 @@ input.btn.btn-info.cssback {
 .miniLogo{
 	height: 34px !important;
 	width: 34px !important;
+	background-size: contain !important;
 }
 .owl-theme .owl-controls .owl-buttons .owl-next {
     color: #F6931C;
