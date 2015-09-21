@@ -479,10 +479,6 @@ var SERVICE_ENDPOINTS = {
 			{
 				fnFillRegionList(0,0);
 			}
-			$('#DOB').datetimepicker({
-				format: "MM-DD-YYYY",
-				//pickTime: false
-			});
 			//$("#DOB").jqxDateTimeInput({ width: '257px', height: '35px', formatString: "MM-dd-yyyy" });
 			$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
 		    console.log("Cal Done");    
@@ -495,7 +491,10 @@ var SERVICE_ENDPOINTS = {
 			}else{
 				fnShowForm(Liferay.ThemeDisplay.getUserId());
 			}	
-
+			$('#DOB').datetimepicker({
+				format: "MM-DD-YYYY",
+				//pickTime: false
+			});
 			 $(".cssCancel").click(function(){
 				  var url = "/web/guest/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
 				  $(location).attr('href',url);
