@@ -42,7 +42,7 @@ function renderEventList(tdata) {
 		    fnShowEventLogo(flaskEvent.eventImageUUID, flaskEvent.eventImageGroupId, objTd1,false);		    
 		    var eventName_lbl = $('<div/>',{'class':'control-label-color'});
 		    $(eventName_lbl).html(flaskEvent.eventName);
-		    var objTd2 = $('<td/>',{'data-id':flaskEvent.eventId,'data-venueId':flaskEvent.venueId});
+		    var objTd2 = $('<td/>',{'data-id':flaskEvent.eventId,'data-venueId':flaskEvent.venueId,'class':'eventList'});
 		    
 		    var venue_lbl = $('<div/>',{'class':'control-label-nocolor'});
 		    $(venue_lbl).html(eventDate +' '+ st + ' at ' + flaskEvent.venueName);
@@ -64,7 +64,7 @@ function renderEventList(tdata) {
 		 		$('#one').hide();
 		 		$("#weather-background").show();
 		 		fnGetEventImages($(this).attr("data-id"),$(this).attr("data-venueId"));
-		 		_flaskAd.ShowAdByEventId($(this).attr("data-id"));
+		 		showEventAds($(this).attr("data-id"));
 		 		window.location.hash = '#Gallery';
 		 	});
 		 	if(Liferay.ThemeDisplay.isSignedIn()){
@@ -317,6 +317,7 @@ $(document).ready(function(){
 			$('#one').show();
 			$('#two').hide();
 			$('#three').hide();
+			showAds();
 			break;
 	    case "#Gallery":
 			$('#one').hide();
@@ -373,7 +374,6 @@ function fnStopProgress(){
 function setMyEvent(_eventId,_userEvent){
 	var eventId = parseInt(_eventId);
 	var myEvent = parseInt(_userEvent);
-	console.log(myEvent);
 	if(myEvent == 0 ){
 		addUserEvent(eventId);
 	}else{
@@ -390,11 +390,12 @@ function initEventList(){
 		_latitude = "";
 		_longitude = "";
 	}
-	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: 'C', latitude:_latitude, longitude: _longitude};
+	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: 'a', latitude:_latitude, longitude: _longitude};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){
 			renderEventList(data);
+			showAds();
 		} ,
 		function (data){
 			console.log("Error ins getting event list" + data );
@@ -468,9 +469,6 @@ function initMenuList(objDetails){
 					lng_marker.push(objEventDetail.longitude);
 					addr_name.push(objEventDetail.infoTitle);
 				}
-				console.log(b==objEventDetail.infoTypeCategoryName);
-				console.log(b);
-				console.log(objEventDetail.infoTypeCategoryName);
 				if(b==objEventDetail.infoTypeCategoryName){
 					fnFillImageArray(obj.DetailImages,obj.Detail,objArray);					
 				}
@@ -599,4 +597,18 @@ function fnCreateSlider1(containerID,arrImage){
 	else{
 		fnBlankSlide(containerID);
 	}	
+}
+
+function showAds(){
+	var eventList = "0";
+	$(".eventList").each(function(){
+		eventList = $(this).attr('data-id') + "," + eventList
+	});
+	_flaskAd.HideAds();
+	_flaskAd.ShowAdByEventIds(eventList);
+}
+
+function showEventAds(eventId){
+	_flaskAd.HideAds();
+	_flaskAd.ShowAdByEventId(eventId);
 }
