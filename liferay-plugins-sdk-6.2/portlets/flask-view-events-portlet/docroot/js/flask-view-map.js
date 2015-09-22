@@ -20,6 +20,13 @@ _flaskMap.initializeMap = function() {
 	        mapTypeId: google.maps.MapTypeId.ROADMAP
 	    };
 	    _flaskMap.map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+	    var centerControlDiv = document.createElement('div');
+	    var centerControl = new CenterControl(centerControlDiv, _flaskMap.map);
+
+	    centerControlDiv.index = 1;
+	    _flaskMap.map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+	    
+	   
 	    //_flaskMap.findPlaces(places);
 	    //_flaskMap.findPlaces1();
 	}catch(ex){
@@ -28,6 +35,72 @@ _flaskMap.initializeMap = function() {
 	}
 
 }
+
+
+function CenterControl(controlDiv, map) {
+
+	  // Set CSS for the control border.
+	  var controlUI = document.createElement('div');
+	  controlUI.style.backgroundColor = '#fff';
+	  controlUI.style.border = '2px solid #fff';
+	  controlUI.style.borderRadius = '3px';
+	  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+	  controlUI.style.cursor = 'pointer';
+	  controlUI.style.marginBottom = '22px';
+	  controlUI.style.textAlign = 'center';
+	  controlUI.title = 'Select checkbox';
+	  controlDiv.appendChild(controlUI);
+
+	  // Set CSS for the control interior.
+	  var controlText = document.createElement('div');
+	  controlText.style.color = 'rgb(25,25,25)';
+	  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+	  controlText.style.fontSize = '16px';
+	  controlText.style.lineHeight = '38px';
+	  controlText.style.paddingLeft = '5px';
+	  controlText.style.paddingRight = '5px';
+	  controlText.innerHTML = "<input type='checkbox' id='ch1' checked> Flask  </input><input type='checkbox' id='ch2'> Google</input>";
+	  controlUI.appendChild(controlText);
+	  controlUI.addEventListener('click', function() {
+		  $("#ch1").change(function() {
+				console.log("change");
+				var i;
+		        if(this.checked) {
+			        for (i = 0; i < _flaskMap.markers.length; i++) {
+			          if (_flaskMap.markers[i].get("class") == "flask_icons") {
+			        	  _flaskMap.markers[i].setVisible(true);
+			          }
+			        }
+		        }else{
+		        	for (i = 0; i < _flaskMap.markers.length; i++) {
+		  	          if (_flaskMap.markers[i].get("class") == "flask_icons") {
+		  	        	  _flaskMap.markers[i].setVisible(false);
+		  	          }
+		  	        }
+		        }
+		    });
+			
+			$("#ch2").change(function() {
+				var i;
+		        if(this.checked) {
+			        for (i = 0; i < _flaskMap.markers.length; i++) {
+			          if (_flaskMap.markers[i].get("class") == "google_icons") {
+			        	  _flaskMap.markers[i].setVisible(true);
+			          }
+			        }
+		        }else{
+		        	for (i = 0; i < _flaskMap.markers.length; i++) {
+		  	          if (_flaskMap.markers[i].get("class") == "google_icons") {
+		  	        	  _flaskMap.markers[i].setVisible(false);
+		  	          }
+		  	        }
+		        }
+		    });
+	  });
+	  controlUI.click();
+	  // Setup the click event listeners: simply set the map to Chicago.
+	}
+
 
 _flaskMap.clearOverlays = function() {
 
@@ -62,6 +135,8 @@ _flaskMap.findPlaces = function (places) {
 }
 
 _flaskMap.createMarkers = function (results, status) {
+	$('#ch1').prop('checked', true);
+	$('#ch2').prop('checked', false);
     if (status == google.maps.places.PlacesServiceStatus.OK) {
     	venue_mark = new google.maps.Marker({
 	        position: _flaskMap.cur_location,
@@ -70,7 +145,6 @@ _flaskMap.createMarkers = function (results, status) {
 	        icon: '/flask-view-events-portlet/img/flag-marker.png',
 	    });
     	_flaskMap.markers.push(venue_mark);
-
     	var infowindow = new google.maps.InfoWindow();
     	google.maps.event.addListener(venue_mark, 'click', (function(venue_mark) {
         	return function() {
@@ -104,7 +178,9 @@ _flaskMap.createMarkers = function (results, status) {
 			        map: _flaskMap.map,
 			        animation:  google.maps.Animation.DROP,
 			        title: results[i].name,
-			        icon: icon_url
+			        icon: icon_url,
+			        visible: true,
+			        class: 'flask_icons'
 			    });
             }
             else{
@@ -112,6 +188,8 @@ _flaskMap.createMarkers = function (results, status) {
 			        position: results[i].geometry.location,
 			        map: _flaskMap.map,
 			        title: results[i].name,
+			        visible: false,
+			        class: 'google_icons'
 			    });
             }
             _flaskMap.markers.push(mark);
@@ -125,7 +203,8 @@ _flaskMap.createMarkers = function (results, status) {
 	                infowindow.open(_flaskMap.map, mark);
             	}
             })(mark, i));
-            _flaskMap.infos.push(infowindow);        
+            _flaskMap.infos.push(infowindow);   
+            console.log(_flaskMap.markers);
         }
     } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
 //        alert('Sorry, nothing is found');
