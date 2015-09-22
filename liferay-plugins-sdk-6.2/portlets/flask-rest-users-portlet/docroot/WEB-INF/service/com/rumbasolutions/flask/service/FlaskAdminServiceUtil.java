@@ -225,6 +225,31 @@ public class FlaskAdminServiceUtil {
 		return getService().getUSARegions(serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.repository.model.FileEntry addMyFileEntry(
+		long repositoryId, long folderId, java.lang.String sourceFileName,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog, byte[] bytes,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService()
+				   .addMyFileEntry(repositoryId, folderId, sourceFileName,
+			mimeType, title, description, changeLog, bytes, serviceContext);
+	}
+
+	public static com.liferay.portal.kernel.repository.model.FileEntry getMyFileEntry(
+		long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMyFileEntry(fileEntryId);
+	}
+
+	public static void deleteMyFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		getService().deleteMyFileEntry(fileEntryId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

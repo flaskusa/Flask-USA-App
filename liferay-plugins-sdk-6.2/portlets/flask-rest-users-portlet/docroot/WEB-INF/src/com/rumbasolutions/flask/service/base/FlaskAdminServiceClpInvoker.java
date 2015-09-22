@@ -147,6 +147,22 @@ public class FlaskAdminServiceClpInvoker {
 		_methodParameterTypes47 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName48 = "addMyFileEntry";
+
+		_methodParameterTypes48 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"byte[][]", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName49 = "getMyFileEntry";
+
+		_methodParameterTypes49 = new String[] { "long" };
+
+		_methodName50 = "deleteMyFileEntry";
+
+		_methodParameterTypes50 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -311,6 +327,28 @@ public class FlaskAdminServiceClpInvoker {
 			return FlaskAdminServiceUtil.getUSARegions((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
+		if (_methodName48.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+			return FlaskAdminServiceUtil.addMyFileEntry(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
+				(java.lang.String)arguments[4], (java.lang.String)arguments[5],
+				(java.lang.String)arguments[6], (byte[])arguments[7],
+				(com.liferay.portal.service.ServiceContext)arguments[8]);
+		}
+
+		if (_methodName49.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
+			return FlaskAdminServiceUtil.getMyFileEntry(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+			FlaskAdminServiceUtil.deleteMyFileEntry(((Long)arguments[0]).longValue());
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -348,4 +386,10 @@ public class FlaskAdminServiceClpInvoker {
 	private String[] _methodParameterTypes46;
 	private String _methodName47;
 	private String[] _methodParameterTypes47;
+	private String _methodName48;
+	private String[] _methodParameterTypes48;
+	private String _methodName49;
+	private String[] _methodParameterTypes49;
+	private String _methodName50;
+	private String[] _methodParameterTypes50;
 }

@@ -147,6 +147,22 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		_methodParameterTypes17 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName18 = "addMyFileEntry";
+
+		_methodParameterTypes18 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"byte[][]", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName19 = "getMyFileEntry";
+
+		_methodParameterTypes19 = new String[] { "long" };
+
+		_methodName20 = "deleteMyFileEntry";
+
+		_methodParameterTypes20 = new String[] { "long" };
 	}
 
 	@Override
@@ -909,6 +925,125 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		return (java.util.List<com.liferay.portal.model.Region>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry addMyFileEntry(
+		long repositoryId, long folderId, java.lang.String sourceFileName,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog, byte[] bytes,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName18,
+					_methodParameterTypes18,
+					new Object[] {
+						repositoryId,
+						
+					folderId,
+						
+					ClpSerializer.translateInput(sourceFileName),
+						
+					ClpSerializer.translateInput(mimeType),
+						
+					ClpSerializer.translateInput(title),
+						
+					ClpSerializer.translateInput(description),
+						
+					ClpSerializer.translateInput(changeLog),
+						
+					ClpSerializer.translateInput(bytes),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.repository.model.FileEntry)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry getMyFileEntry(
+		long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName19,
+					_methodParameterTypes19, new Object[] { fileEntryId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.repository.model.FileEntry)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void deleteMyFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		try {
+			_invokableService.invokeMethod(_methodName20,
+				_methodParameterTypes20, new Object[] { fileEntryId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -944,4 +1079,10 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	private String[] _methodParameterTypes16;
 	private String _methodName17;
 	private String[] _methodParameterTypes17;
+	private String _methodName18;
+	private String[] _methodParameterTypes18;
+	private String _methodName19;
+	private String[] _methodParameterTypes19;
+	private String _methodName20;
+	private String[] _methodParameterTypes20;
 }

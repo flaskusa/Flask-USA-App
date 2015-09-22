@@ -359,5 +359,51 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.kernel.repository.model.FileEntrySoap addMyFileEntry(
+		long repositoryId, long folderId, java.lang.String sourceFileName,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog, byte[] bytes,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = FlaskAdminServiceUtil.addMyFileEntry(repositoryId,
+					folderId, sourceFileName, mimeType, title, description,
+					changeLog, bytes, serviceContext);
+
+			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.kernel.repository.model.FileEntrySoap getMyFileEntry(
+		long fileEntryId) throws RemoteException {
+		try {
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = FlaskAdminServiceUtil.getMyFileEntry(fileEntryId);
+
+			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteMyFileEntry(long fileEntryId)
+		throws RemoteException {
+		try {
+			FlaskAdminServiceUtil.deleteMyFileEntry(fileEntryId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskAdminServiceSoap.class);
 }

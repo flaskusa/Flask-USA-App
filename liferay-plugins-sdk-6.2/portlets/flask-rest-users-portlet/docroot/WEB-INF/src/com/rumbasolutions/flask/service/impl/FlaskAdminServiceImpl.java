@@ -14,6 +14,7 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -25,6 +26,8 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Country;
@@ -43,6 +46,7 @@ import com.liferay.portal.service.persistence.CountryUtil;
 import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.service.persistence.RegionUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.rumbasolutions.flask.model.FlaskAdmin;
 import com.rumbasolutions.flask.model.FlaskRole;
@@ -77,6 +81,8 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
  */
 	private static Log LOGGER = LogFactoryUtil.getLog(FlaskAdminServiceImpl.class);
 
+	public static Role _guestRole =null;
+	
 	@Override
 	public List<FlaskAdmin> getFlaskAdmins(ServiceContext  serviceContext){
 		List<FlaskAdmin> adminList=null;
@@ -654,6 +660,62 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	{ 
 		Country country = CountryUtil.fetchByName("united-states");
 		return RegionUtil.findByCountryId(country.getCountryId());
+	}
+	
+	@Override
+	@AccessControlled(guestAccessEnabled =true)
+	public FileEntry addMyFileEntry(long repositoryId , long folderId,
+										 String sourceFileName, String mimeType, String title,  
+										 String description, String changeLog, byte[] bytes, ServiceContext serviceContext) 
+														 throws PortalException, SystemException{
+		System.out.println("i m in add");
+		FileEntry fileEntry=null;	
+		try{	
+				fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), repositoryId, folderId, sourceFileName, mimeType, title, description, changeLog, bytes, serviceContext);
+				System.out.println(fileEntry);
+				//FlaskModelUtil.setMyGuestViewPermission(fileEntry);
+				User user = UserLocalServiceUtil.getUser(serviceContext.getUserId());
+				/*user.setUuid(user.getUuid());
+				user.setCompanyId(user.getCompanyId());
+				user.setCreateDate(user.getCreateDate());
+				user.setModifiedDate(user.getModifiedDate());
+				user.setD*/
+				user.setPortraitId(fileEntry.getFileEntryId());
+				System.out.println(user);
+				UserLocalServiceUtil.updateUser(user);
+				
+			}catch(Exception ex){
+			
+			}
+		return fileEntry;
+	}
+	
+	@Override
+	@AccessControlled(guestAccessEnabled =true)
+	public FileEntry getMyFileEntry(long fileEntryId)throws PortalException, SystemException{
+		FileEntry fileEntry=null;	
+		try{	
+				fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
+				
+				FlaskModelUtil.setMyGuestViewPermission(fileEntry);
+				
+			}catch(Exception ex){
+			
+			}
+		return fileEntry;
+	}
+	
+	@Override
+	@AccessControlled(guestAccessEnabled =true)
+	public void deleteMyFileEntry(long fileEntryId)throws PortalException, SystemException{
+		FileEntry fileEntry=null;	
+		try{	
+				DLAppLocalServiceUtil.deleteFileEntry(fileEntryId);
+				FlaskModelUtil.setMyGuestViewPermission(fileEntry);
+				
+			}catch(Exception ex){
+			
+			}
 	}
 	
 }

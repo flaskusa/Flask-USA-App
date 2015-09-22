@@ -230,6 +230,34 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		return _flaskAdminService.getUSARegions(serviceContext);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry addMyFileEntry(
+		long repositoryId, long folderId, java.lang.String sourceFileName,
+		java.lang.String mimeType, java.lang.String title,
+		java.lang.String description, java.lang.String changeLog, byte[] bytes,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _flaskAdminService.addMyFileEntry(repositoryId, folderId,
+			sourceFileName, mimeType, title, description, changeLog, bytes,
+			serviceContext);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry getMyFileEntry(
+		long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _flaskAdminService.getMyFileEntry(fileEntryId);
+	}
+
+	@Override
+	public void deleteMyFileEntry(long fileEntryId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_flaskAdminService.deleteMyFileEntry(fileEntryId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

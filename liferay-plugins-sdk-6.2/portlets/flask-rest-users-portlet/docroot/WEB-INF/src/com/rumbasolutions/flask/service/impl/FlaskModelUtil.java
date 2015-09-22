@@ -1,5 +1,10 @@
 package com.rumbasolutions.flask.service.impl;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -7,9 +12,14 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Country;
@@ -17,16 +27,28 @@ import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.model.ResourceAction;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.ac.AccessControlled;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextThreadLocal;
 import com.liferay.portal.service.persistence.ListTypeUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueUtil;
 import com.rumbasolutions.flask.model.FlaskAdmin;
@@ -44,7 +66,7 @@ public class FlaskModelUtil {
 	public static final int MAX_USER_LIMIT=  1000;
 	public static final String[] COUNTRY_LIST=  {"united-states","canada"};
 	
-	
+	public static Role _guestRole =null;
 	public static final String USA_COUNTRY_NAME= "United States";
 	public static final String MOBILE_PHONE_TYPE= "mobile";
 	public static final String PERSONAL_ADDR_TYPE = "personal";
@@ -316,5 +338,107 @@ public class FlaskModelUtil {
 		return null;
 	}
 	
+/****************************************upload logic************************/
 	
+	
+
+	public static void setMyGuestViewPermission( FileEntry fileEntry) throws PortalException, SystemException{
+		ResourcePermission resourcePermission = null;
+		Role guestRole = getMyGuestRole();
+		try
+		   {
+			
+		    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(fileEntry.getCompanyId(),
+		    					DLFileEntry.class.getName(),
+		    					ResourceConstants.SCOPE_INDIVIDUAL, 
+		    					String.valueOf(fileEntry.getPrimaryKey()),
+		    					guestRole.getRoleId());
+		        
+		    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+		  
+		    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
+		    {
+		      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+		      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
+		    }
+		   }catch(Exception ex){
+			      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
+			      resourcePermission.setCompanyId(fileEntry.getCompanyId());
+			      resourcePermission.setName(DLFileEntry.class.getName());
+			      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+			      resourcePermission.setPrimKey(String.valueOf(fileEntry.getPrimaryKey()));
+			      resourcePermission.setRoleId(guestRole.getRoleId());
+			    
+			      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+			      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+			      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+			   
+		   }
+	}
+	
+	public static Role getMyGuestRole(){
+		try {
+			if(_guestRole == null){
+				_guestRole =RoleServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), RoleConstants.GUEST);
+			}
+		}
+		catch (PortalException e) {
+			e.printStackTrace();
+		}
+		catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return _guestRole;
+	}
+	
+	public static void setGuestViewFolderPermission( Folder dlFolder) throws PortalException, SystemException{
+		ResourcePermission resourcePermission = null;
+		Role guestRole = getMyGuestRole();
+		try
+		   {
+
+		    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(dlFolder.getCompanyId(),
+		    					DLFolder.class.getName(),
+		    					ResourceConstants.SCOPE_INDIVIDUAL, 
+		    					String.valueOf(dlFolder.getPrimaryKey()),
+		    					guestRole.getRoleId());
+		        
+		    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFolder.class.getName(), ActionKeys.VIEW);
+		  
+		    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
+		    {
+		      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+		      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
+		    }
+		   }catch(Exception ex){
+			      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
+			      resourcePermission.setCompanyId(dlFolder.getCompanyId());
+			      resourcePermission.setName(DLFolder.class.getName());
+			      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+			      resourcePermission.setPrimKey(String.valueOf(dlFolder.getPrimaryKey()));
+			      resourcePermission.setRoleId(guestRole.getRoleId());
+			    
+			      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFolder.class.getName(), ActionKeys.VIEW);
+			      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+			      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+			   
+		   }
+	}
+	/**
+	 * 
+	 * @param fullFileName
+	 * @return
+	 */
+	
+	public static String getMimeType(String fullFileName){
+		Path source = Paths.get(fullFileName);
+		String mimeType="";
+		try {
+			mimeType = Files.probeContentType(source);
+		}
+		catch (IOException e) {
+			e.printStackTrace();
+		}
+		return mimeType;
+	}
 }
