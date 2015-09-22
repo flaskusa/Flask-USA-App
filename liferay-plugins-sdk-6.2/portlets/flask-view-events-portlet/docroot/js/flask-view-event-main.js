@@ -1,4 +1,4 @@
-var showAllEvents = true;
+var showAllEvents = true; // Make showAllEvents = false while releasing on server 
 var alllist = [];
 var map;
 var lat_marker = [];
@@ -337,18 +337,19 @@ $(document).ready(function(){
 	$(function() {
 	    function cb(start, end, label) {
 	        $('#reportrange span').html(label);
-	        startdate = start;
-	        enddate = end;
+	        startdate = start.toDate();
+	        enddate = end.toDate();
 	        getEventsForLocation();
 	    }
 	    
-	    cb(moment(),moment().add(7, 'days'),'Next 7 days');
+	    cb(moment(),moment().add(14, 'days'),'Next 14 days');
 
 	    $('#reportrange').daterangepicker({
 	    	"autoApply": true,
 	        ranges: {
 	           'Today': [moment(), moment()],
 	           'Next 7 days': [moment(),moment().add(7, 'days')],
+	           'Next 14 days': [moment(),moment().add(14, 'days')],
 	           'Next 30 days': [moment(), moment().add(30, 'days')],
 	           'Next 60 days': [moment(),moment().add(60, 'days')]
 	        },
@@ -357,7 +358,7 @@ $(document).ready(function(){
 	    }, cb);
 	    
 	    $('#reportrange').data('daterangepicker').setStartDate(moment());
-	    $('#reportrange').data('daterangepicker').setEndDate(moment().add(7, 'days'));		    	
+	    $('#reportrange').data('daterangepicker').setEndDate(moment().add(14, 'days'));		    	
 	});	
  	
  	$("#txtSearch").change(function(){
@@ -382,15 +383,15 @@ function setMyEvent(_eventId,_userEvent){
 }
 function initEventList(){
 	var _latitude = _eventModel.currentGeoLocation.latitude;
-	var _longitude = _eventModel.currentGeoLocation.latitude;
+	var _longitude = _eventModel.currentGeoLocation.longitude;
 
 	if(showAllEvents){
-		startdate = "";
-		enddate = "";
 		_latitude = "";
 		_longitude = "";
+		startdate = "";
+		enddate = "";
 	}
-	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: 'a', latitude:_latitude, longitude: _longitude};
+	var params = {eventTypeIds: '',startDate: startdate,endDate: enddate,searchString: 'a', latitude:_latitude, longitude: _longitude};//Make searchString: '' while releasing on server
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){
