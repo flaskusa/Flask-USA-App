@@ -57,25 +57,12 @@ for (Role role : roles){
 		
 		$("#_145_navAccountControlsNavbarBtn").click(function(){
 			 $('ul#_145_navAccountControls').toggle();
-			
 		});
 		
 	 	$("#_145_navSiteNavigationNavbarBtn").click(function(){
-	 		
-	  		var $elem = $("#slideoutmenupanel");           
-	  	    var docwidth =  0;
-	  	    var inileft = docwidth - $elem.outerWidth()-15;
-	  		$elem.animate({
-	  	        left: (parseInt($elem.css("left"), 10) >= docwidth ?  inileft-15 : docwidth)
-	  	      } ,200
-		        ,function(){
-		  	    	if($('#slideoutmenupanel').offset().left >=0){
-		  	    		$("body").addClass("hideoverflow");	  	    			  	    		
-		  	  		}else{
-		  	  			$("body").removeClass("hideoverflow");
-		  	  		}
-				}
-	  	      );	  	      
+	 		window.history.back();
+	 		event.stopPropagation();	 		
+	 		return false;
 	  	});
 	 	
 	  	$('html').click(function() {
@@ -94,10 +81,6 @@ for (Role role : roles){
 	  	$('#slideoutmenupanel').click(function(event){
 	  	     event.stopPropagation();
 	  	});
-		$('#_145_navSiteNavigationNavbarBtn').click(function(event){
-	 	     event.stopPropagation();
-	 	});	 
-		
 		$(".portlet-topper").remove();
   });	  	
   
@@ -200,46 +183,7 @@ for (Role role : roles){
 	%>
 
 	<c:if test="<%= !(group.isControlPanel() && controlPanelCategory.startsWith(PortletCategoryKeys.CURRENT_SITE)) %>">
-		<aui:nav collapsible="<%= true %>" cssClass="nav-navigation" icon="reorder" id="navSiteNavigation">
-			<c:if test="<%= group.isControlPanel() && !controlPanelCategory.equals(PortletCategoryKeys.MY) && !controlPanelCategory.startsWith(PortletCategoryKeys.CURRENT_SITE) %>">
-
-				<%
-				String[] categories = PortletCategoryKeys.ALL;
-
-				for (String curCategory : categories) {
-					String urlControlPanelCategory = HttpUtil.setParameter(themeDisplay.getURLControlPanel(), "controlPanelCategory", curCategory);
-
-					String cssClass = StringPool.BLANK;
-					String iconCssClass = StringPool.BLANK;
-
-					if (curCategory.equals(PortletCategoryKeys.APPS)) {
-						cssClass = "control-panel-apps";
-						iconCssClass = "icon-th";
-					}
-					else if (curCategory.equals(PortletCategoryKeys.CONFIGURATION)) {
-						cssClass = "control-panel-configuration";
-						iconCssClass = "icon-cog";
-					}
-					else if (curCategory.equals(PortletCategoryKeys.SITES)) {
-						cssClass = "control-panel-sites";
-						iconCssClass = "icon-globe";
-					}
-					else if (curCategory.equals(PortletCategoryKeys.USERS)) {
-						cssClass = "control-panel-users";
-						iconCssClass = "icon-user";
-					}
-				%>
-
-					<c:if test="<%= _hasPortlets(curCategory, themeDisplay) %>">
-						<aui:nav-item anchorId='<%= "controlPanelNav" + curCategory + "Link" %>' cssClass="<%= cssClass %>" href="<%= urlControlPanelCategory %>" iconCssClass="<%= iconCssClass %>" label='<%= "category." + curCategory %>' selected="<%= controlPanelCategory.equals(curCategory) %>" />
-					</c:if>
-
-				<%
-				}
-				%>
-
-			</c:if>
-		</aui:nav>
+		<aui:nav collapsible="<%= true %>" cssClass="nav-navigation" icon="chevron-left" id="navSiteNavigation"></aui:nav>
 	</c:if>
 
 	<%
