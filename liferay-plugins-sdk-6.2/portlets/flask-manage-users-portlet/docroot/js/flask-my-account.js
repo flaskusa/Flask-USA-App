@@ -1,6 +1,7 @@
 var RepositoryID;
 var FolderId;
 var adminForm;
+var portraitURL = 0;
 function addClickHandlers(){
 	adminForm = $("#adminForm");
 	/*	Initialize display elements*/
@@ -66,56 +67,10 @@ function loadForm(){
 		$('#ProfilePic').click(function(){
 		    fileInput.click();
 		}).show();
-			
 		fileInput.change(function(){
-		    var input = document.getElementById('fileinput');
-		    var file;
-			var reader = new FileReader();
-			var markup, result, n, aByte;
-			var data = new Object;
-		    var j = 0, k = input.files.length;
-		    for (var i = 0; i < k; i++) {
-		        var reader = new FileReader();
-		        reader.onloadend = function (evt) {
-		       	 markup=[];
-		            if (evt.target.readyState == FileReader.DONE) {
-		           	 for (n = 0; n < evt.target.result.length; ++n) {
-				            aByte = evt.target.result.charCodeAt(n);
-				            markup.push(aByte);
-				        }			    	
-				    	console.log(markup);
-				    	if(markup.length > 0){   
-				    		/*Service call [Start]*/
-				        	Liferay.Service(
-				       			  '/dlapp/add-file-entry',
-				       			  {
-				       			    repositoryId: RepositoryID,
-				       			    folderId: FolderId,
-				       			    sourceFileName: input.files[j].name,
-				       			    mimeType: input.files[j].type,
-				       			    title: input.files[j].name,
-				       			    description: input.files[j].name,
-				       			    changeLog: '1',
-			       			    	bytes: markup
-				       			  },
-				       			  function(obj) {
-				       				  console.log(obj);
-				       			    if(typeof obj =='object')
-				       			 		$("#fileEntryId").val(obj.fileEntryId);
-				       			    	renderPhoto(obj.fileEntryId); //call back function
-				       			  	}
-				       			); 
-				        	/*Service call [End]*/			    		
-				        }
-				     console.log(j);
-	                 j++;
-	                 if (j == k){
-	                     console.log('All files read');
-	                 }
-	             }};
-	         reader.readAsBinaryString(input.files[i]);
-	     	}			
-		})		
+			fnDeleteFileEntry(portraitURL);
+			fileUpload();
+		});
 		/*Upload File Code End*/
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage(_userModel.MESSAGES.GET_ERROR);
@@ -125,7 +80,6 @@ function loadForm(){
 }
 
 function editUser(rowData) {
-	console.log(rowData);
 	_flaskLib.loadDataToForm("adminForm",  _userModel.DATA_MODEL.ADMIN, rowData, function(){	
 	});
 	//$("#adminDataTable").hide();
@@ -138,12 +92,12 @@ function editUser(rowData) {
 	   var mm = date.getMonth()+1;
 	   if ( mm < 10 ) mm = '0' + mm;
 	   var yy = date.getFullYear();
-	   console.log("date"+mm+'-'+dd+'-'+yy);
 	$('#DOB').val(mm+'-'+dd+'-'+yy);
 	loadFlaskRoles('roleId', rowData.roleId);
-	fnUpdateProfilePic(rowData.userId);
+	portraitURL = rowData.portraitURL;
+	renderPhoto(rowData.portraitURL);
 	fnSetCheckBoxSelected(rowData.userInterests);
-	renderPhotoEditMode(rowData.userId);
+	//renderPhotoEditMode(rowData.userId);
 }
 
 function fnGetCheckBoxSelected() {
@@ -163,7 +117,6 @@ function fnGetCheckBoxSelected() {
 
 function fnSetCheckBoxSelected(strCheckList) {
 	var tempArray = new Array();
-	console.log(strCheckList);
 	tempArray = strCheckList.split("#");
 	var i;
 	for (i = 0; i < tempArray.length; i++) {
@@ -173,7 +126,6 @@ function fnSetCheckBoxSelected(strCheckList) {
 }
 
 function saveAccount(){
-	console.log("m in acc");
 	params = _flaskLib.getFormData('adminForm',_userModel.DATA_MODEL.ADMIN,
 			function(formId, model, formData){
 					if($(".gender").val()=="Male"){formData.isMale=true;}
@@ -182,14 +134,10 @@ function saveAccount(){
 					return formData;
 			});
 	var flaskRequest = new Request();
-	//console.log(params);
-	//console.log(params.isMale);
-	//console.log(params.userInterests);
-	console.log(params.userId);
 	flaskRequest.sendGETRequest(_userModel.SERVICE_ENDPOINTS.UPDATE_USERS, params, 
 				function (data){
 					_flaskLib.showSuccessMessage('action-msg', _userModel.MESSAGES.USER_SAVE);
-					fnUpdateProfilePic(data.userId);
+					$("#fileEntryId").val(data.portraitId);
 				} ,
 				function (data){
 					_flaskLib.showErrorMessage('action-msg', _userModel.MESSAGES.USER_ERROR);
@@ -197,58 +145,75 @@ function saveAccount(){
 
 }
 
+function fileUpload(){
+
+    var input = document.getElementById('fileinput');
+    var file;
+	var reader = new FileReader();
+	var markup, result, n, aByte;
+	var data = new Object;
+    var j = 0, k = input.files.length;
+    for (var i = 0; i < k; i++) {
+        var reader = new FileReader();
+        reader.onloadend = function (evt) {
+       	 markup=[];
+            if (evt.target.readyState == FileReader.DONE) {
+           	 for (n = 0; n < evt.target.result.length; ++n) {
+		            aByte = evt.target.result.charCodeAt(n);
+		            markup.push(aByte);
+		        }			    	
+		    	if(markup.length > 0){   
+		    		/*Service call [Start]*/
+		        	Liferay.Service(
+		       			  '/flask-rest-users-portlet.flaskadmin/add-my-file-entry',
+		       			  {
+		       			    repositoryId: $("#repositoryId").val(),
+		       			    folderId: 0,
+		       			    sourceFileName: input.files[j].name,
+		       			    mimeType: input.files[j].type,
+		       			    title: input.files[j].name,
+		       			    description: input.files[j].name,
+		       			    changeLog: '1',
+	       			    	bytes: markup
+		       			  },
+		       			  function(obj) {
+		       			    if(typeof obj =='object')
+		       			 		$("#fileEntryId").val(obj.fileEntryId);
+		       			    	renderPhoto(obj.fileEntryId); //call back function
+		       			  	}
+		       			); 
+		        	/*Service call [End]*/			    		
+		        }
+             j++;
+             if (j == k){
+                 console.log('All files read');
+             }
+         }};
+     reader.readAsBinaryString(input.files[i]);
+ 	}
+}
 
 /* Need to change below code as per standard  */
-function fnUpdateProfilePic(uid){
-	 Liferay.Service(
-	    '/dlapp/get-file-entry',
-	    {
-	      fileEntryId: $("#fileEntryId").val()
-	    },
-	    function(objFile) {
-		   Liferay.Service(
-		       '/dlapp/update-file-entry',
-		       {
-		         fileEntryId: objFile.fileEntryId,
-		         sourceFileName:uid,
-		         mimeType:objFile.mimeType,
-		         title: uid,
-		         description:uid,
-		         changeLog: objFile.createDate,
-		         majorVersion: false,
-		         bytes: null
-		       },
-		       function(obj) {
-		         console.log(obj);
-		         console.log(objFile);
-		       }
-		    );       
-	    }
-	 ); 
-	}
 
-	function fnDeleteFileEntry(uid){
-	 Liferay.Service(
-	     '/dlapp/delete-file-entry',
-	     {
-	       fileEntryId: uid
-	     },
-	     function(obj) {
-	       console.log(obj);
-	     }
-	   );
+	function fnDeleteFileEntry(portraitURL){
+		Liferay.Service(
+     			  '/flask-rest-users-portlet.flaskadmin/delete-my-file-entry',
+     			  {
+     				fileEntryId: portraitURL
+     			  },
+     			  function(obj) {
+     			  	}
+     			); 
 	}
 
 	function renderPhoto(FileId){
-	 Liferay.Service('/dlapp/get-file-entry',
+	 Liferay.Service('/flask-rest-users-portlet.flaskadmin/get-my-file-entry',
 	     {
 	       fileEntryId: FileId
 	     },
 	     function(obj) {
-	      console.log(obj);
 	      var url = "/documents/"+RepositoryID+"/0/"+obj.title;
-	      $("#ProfilePic").css("background-image","url('"+url+"')")
-	      console.log(obj);
+	      $("#ProfilePic").css("background-image","url('"+url+"')");
 	     }
 	 );
 	}
@@ -304,10 +269,8 @@ function fnUpdateProfilePic(uid){
 	}
 	
 	function setFlaskRoles(uId, selectedId){
-		console.log(uId);
 		var param ={userId: uId, roleId: selectedId };
 		var flaskRequest = new Request();
-		console.log(param.userId);
 		flaskRequest.sendGETRequest(_userModel.SERVICE_ENDPOINTS.SET_ROLES, param, 
 					function (data){
 						console.log(data);
