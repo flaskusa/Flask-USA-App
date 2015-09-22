@@ -123,5 +123,14 @@ _eventModel.DETAIL_DATA_MODEL = {
                 "infoTitle":"Name",
                 "infoDesc":"Address",
                 "phone":"Phone"
-         }],
+         }]
+}
+
+_eventModel.BACKGROUNDIMAGE = {
+		GENERAL:'',
+		TRADITION:'',
+        PARKING:'',
+        TRAFFIC:'',
+        FOOD:'',
+        LIQUOR:''
 }
