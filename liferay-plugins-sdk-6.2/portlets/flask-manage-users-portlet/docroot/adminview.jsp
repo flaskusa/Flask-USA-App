@@ -146,7 +146,7 @@ function initialize(portletId, portlet){
    </div>  
    
     <div class="form-group">
-     <label class="control-label" for="areaCode">Area Code:</label>
+     <label class="control-label" for="areaCode">Zip Code:</label>
      <div class="controls">
        <input name="areaCode" id="areaCode" class="form-control" type="text">
      </div>
