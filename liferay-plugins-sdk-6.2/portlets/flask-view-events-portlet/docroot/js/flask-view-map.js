@@ -17,18 +17,19 @@ _flaskMap.initializeMap = function() {
 	    var myOptions = {
 	        zoom: 14,
 	        center: myLatlng,
-	        mapTypeId: google.maps.MapTypeId.ROADMAP
+	        mapTypeId: google.maps.MapTypeId.ROADMAP,
+	        mapTypeControl:false
 	    };
 	    _flaskMap.map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
 	    var centerControlDiv = document.createElement('div');
 	    centerControlDiv.style.display= '-webkit-inline-box';
+	    centerControlDiv.style.top = 15;
+	    centerControlDiv.style.left = 15;
 	    var centerControl = new CenterControl(centerControlDiv, _flaskMap.map);
 	    var centerControl1 = new CenterControl1(centerControlDiv, _flaskMap.map);
 
 	    centerControlDiv.index = 1;
 	    _flaskMap.map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
-	    
-	   
 	    //_flaskMap.findPlaces(places);
 	    //_flaskMap.findPlaces1();
 	}catch(ex){
@@ -56,25 +57,23 @@ function CenterControl(controlDiv, map) {
 	  // Set CSS for the control interior.
 	  var controlText = document.createElement('div');
 	  controlText.style.color = 'rgb(25,25,25)';
-	  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
 	  controlText.style.fontSize = '16px';
-	  controlText.style.lineHeight = '38px';
-	  controlText.style.paddingLeft = '5px';
-	  controlText.style.paddingRight = '5px';
-	  controlText.innerHTML = "<div class='heart-shape heart-shape-userevent' id='ch1'></div><div>Flask</div>";
+	  controlText.style.height = '32px';
+	  controlText.style.padding = '5px';
+	  controlText.innerHTML = "<div class='miniFlaskButton miniFlaskButton-checked' id='ch1'></div>";
 	  controlUI.appendChild(controlText);
 	  controlUI.click();
 	  controlUI.addEventListener('click', function() {
 			  var i;
-			  if($("#ch1").hasClass('heart-shape-userevent')){
-				  $("#ch1").removeClass('heart-shape-userevent');
+			  if($("#ch1").hasClass('miniFlaskButton-checked')){
+				  $("#ch1").removeClass('miniFlaskButton-checked');
 				  for (i = 0; i < _flaskMap.markers.length; i++) {
 		  	          if (_flaskMap.markers[i].get("class") == "flask_icons") {
 		  	        	  _flaskMap.markers[i].setVisible(false);
 		  	          }
 		  	        }
 			  }else{
-				  $("#ch1").addClass('heart-shape-userevent');
+				  $("#ch1").addClass('miniFlaskButton-checked');
 				  for (i = 0; i < _flaskMap.markers.length; i++) {
 			          if (_flaskMap.markers[i].get("class") == "flask_icons") {
 			        	  _flaskMap.markers[i].setVisible(true);
@@ -104,23 +103,23 @@ function CenterControl1(controlDiv, map){
 	  controlText.style.color = 'rgb(25,25,25)';
 	  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
 	  controlText.style.fontSize = '16px';
-	  controlText.style.lineHeight = '38px';
-	  controlText.style.paddingLeft = '5px';
+	  controlText.style.height = '32px';
+	  controlText.style.padding = '5px';
 	  controlText.style.paddingRight = '5px';
-	  controlText.innerHTML = "<div class='heart-shape' id='ch2'></div><div>Google</div>";
+	  controlText.innerHTML = "<div class='miniGoogleButton' id='ch2'></div>";
 	  controlUI.appendChild(controlText);
 	  controlUI.click();
 	  controlUI.addEventListener('click', function() {
 			  var i;
-			  if($("#ch2").hasClass('heart-shape-userevent')){
-				  $("#ch2").removeClass('heart-shape-userevent');
+			  if($("#ch2").hasClass('miniGoogleButton-checked')){
+				  $("#ch2").removeClass('miniGoogleButton-checked');
 				  for (i = 0; i < _flaskMap.markers.length; i++) {
 		  	          if (_flaskMap.markers[i].get("class") == "google_icons") {
 		  	        	  _flaskMap.markers[i].setVisible(false);
 		  	          }
 		  	        }
 			  }else{
-				  $("#ch2").addClass('heart-shape-userevent');
+				  $("#ch2").addClass('miniGoogleButton-checked');
 				  for (i = 0; i < _flaskMap.markers.length; i++) {
 			          if (_flaskMap.markers[i].get("class") == "google_icons") {
 			        	  _flaskMap.markers[i].setVisible(true);
@@ -165,11 +164,11 @@ _flaskMap.findPlaces = function (places) {
 }
 
 _flaskMap.createMarkers = function (results, status) {
-	if(!$("#ch1").hasClass('heart-shape-userevent')){
-		$("#ch1").addClass('heart-shape-userevent');
+	if(!$("#ch1").hasClass('miniFlaskButton-checked')){
+		$("#ch1").addClass('miniFlaskButton-checked');
 	}
-	if($("#ch2").hasClass('heart-shape-userevent')){
-		  $("#ch2").removeClass('heart-shape-userevent');
+	if($("#ch2").hasClass('miniGoogleButton-checked')){
+		  $("#ch2").removeClass('miniGoogleButton-checked');
 	}
     if (status == google.maps.places.PlacesServiceStatus.OK) {
     	venue_mark = new google.maps.Marker({

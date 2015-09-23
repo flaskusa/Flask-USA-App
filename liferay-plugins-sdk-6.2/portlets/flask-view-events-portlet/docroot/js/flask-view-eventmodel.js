@@ -130,13 +130,16 @@ _eventModel.getBackgroundImage = function(infoTypeCategory){
 	var renderer;
 	switch(infoTypeCategory) {
 		case "tradition":
-			renderer = 'Flask_Tradition.jpg';
+			renderer = 'flask_tradition_small.jpg';
 			break;
 		case "parking":
-			renderer = 'Flask_Parking.jpg';
+			renderer = 'flask_parking_small.jpg';
 			break;
 		case "bar & restaurants":
-			renderer = 'Flask_Bars.jpg'
+			renderer = 'flask_bars_small.jpg';
+			break;
+		case "traffic":
+			renderer = 'flask_traffic_small.jpg';
 			break;
 		/*case "nightlife":
 		case "safety":
@@ -146,11 +149,11 @@ _eventModel.getBackgroundImage = function(infoTypeCategory){
 			renderer = _eventModel.DETAIL_DATA_MODEL.LIQUOR;
 			break;*/
 		case "supplies":
-			renderer = 'Flask_Supplies.jpg';
+			renderer = 'flask_supplies_small.jpg';
 			break;			
 		case "getting home":
 		case "flask us":
-			renderer = 'Flask_FlaskUs.jpg'
+			renderer = 'Flask_flaskus_small.jpg'
 			break;				
 		default:
 			renderer = 'Flask_Default_Image.jpg';

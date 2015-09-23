@@ -658,8 +658,6 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 				objContent.css('background-image','url("'+slideBackgroundImage+'")');
 				objContent.css('background-repeat','no-repeat');
 				objContent.css('background-size','100%');
-				objContent.css('background-position-y','-33px');
-				objContent.css('background-position-x','0px');
 				var divCount = $('<div/>',{'class':'counterBox'});
 				var h1 = $('<h3/>',{'class':'counter'});
 				h1.html(KeyVal[1]);
