@@ -287,7 +287,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"type":"text",
 			"attr":[{
 				"caption":"Address",
-				"id":"addrLine1",
+				"id":"addrLine11",
 				"value":"",
 				"placeholder":"Enter Address here",
 				"maxlength":"255",
@@ -374,7 +374,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 		"type":"text",
 		"attr":[{
 			"caption":"Address",
-			"id":"addrLine1",
+			"id":"addrLine11",
 			"value":"",
 			"placeholder":"",
 			"maxlength":"255",
@@ -429,7 +429,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 		"type":"text",
 		"attr":[{
 			"caption":"Address",
-			"id":"addrLine1",
+			"id":"addrLine11",
 			"value":"",
 			"placeholder":"",
 			"maxlength":"255",
@@ -493,7 +493,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"type":"text",
 			"attr":[{
 				"caption":"Address",
-				"id":"addrLine1",
+				"id":"addrLine11",
 				"value":"",
 				"placeholder":"",
 				"maxlength":"255",
@@ -548,7 +548,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 				"type":"text",
 				"attr":[{
 					"caption":"Address",
-					"id":"addrLine1",
+					"id":"addrLine11",
 					"value":"",
 					"placeholder":"",
 					"maxlength":"255",
