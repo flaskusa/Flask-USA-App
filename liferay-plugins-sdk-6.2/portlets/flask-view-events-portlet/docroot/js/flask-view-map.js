@@ -251,7 +251,7 @@ _flaskMap.createMarker = function (obj) {
 		);
 	for(var i=0; i<lat_marker.length; i++)
 		{
-			if((parseFloat(lat_marker[i][0]).toFixed(2) == parseFloat(coords.lat()).toFixed(2))&&(parseFloat(lng_marker[i]).toFixed(2) == parseFloat(coords.lng()).toFixed(2))&&(obj.name==addr_name[i]))
+			if((parseFloat(lat_marker[i][0]).toFixed(2) == parseFloat(coords.lat()).toFixed(2))&&(parseFloat(lng_marker[i]).toFixed(2) == parseFloat(coords.lng()).toFixed(2))&&(obj.vicinity.slice(0,10)==addr_name[i].slice(0,10)))
 			{
 				if(lat_marker[i][1] == marker_infoType || lat_marker[i][1] == 1)
 					isSubscribed = true;
