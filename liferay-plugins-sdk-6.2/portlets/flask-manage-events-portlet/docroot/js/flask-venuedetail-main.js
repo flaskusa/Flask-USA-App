@@ -13,7 +13,7 @@ function addDetailsClickHandlers() {
 			  }else{
 				  if ($('#venueDetailsForm').jqxValidator('validate'))
 					{
-						if ($('#addrLine1').val() == undefined) {
+						if ($('#addrLine11').val() == undefined) {
 							$('#lat').val(0);
 							$('#lng').val(0);
 							saveVenueDetails();

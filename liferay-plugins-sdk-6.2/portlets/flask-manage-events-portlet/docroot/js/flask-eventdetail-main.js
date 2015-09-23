@@ -34,7 +34,7 @@ function addDetailsClickHandlers() {
 		else{
 			if ($('#eventDetailsForm').jqxValidator('validate'))
 			{
-				if ($('#addrLine1').val() == undefined) {
+				if ($('#addrLine11').val() == undefined) {
 					$('#latitude').val(0);
 					$('#longitude').val(0);
 					saveEventDetails();
@@ -42,7 +42,7 @@ function addDetailsClickHandlers() {
 					try{
 						var geocoder = new google.maps.Geocoder();
 						geocoder.geocode({
-							address : $('#infoTitle').val()+' '+ $('#addrLine1').val(),
+							address : $('#infoTitle').val()+' '+ $('#addrLine11').val(),
 							region: 'no'
 						},
 					    function(results, status) {
@@ -158,6 +158,7 @@ function saveEventDetails() {
 					formData[item.name] = val;
 				});
 				formData.eventId=$('#eventForm #eventId').val();
+				formData.addrLine1=$('#addrLine11').val();
 				return formData;
 			});
 	var flaskRequest = new Request();
@@ -233,6 +234,7 @@ function editEventDetail(rowData) {
 		_flaskDetailCommon.loadContentType("infoTypeCategoryId",rowData.infoTypeCategoryId, rowData.infoTypeId);
 		setTimeout(function() {
 			_flaskLib.loadDataToForm("eventDetailsForm",_eventDetailModel.DATA_MODEL.EVENTDETAILS, rowData, function(){});
+			$('#addrLine11').val(rowData.addrLine1);
 		}, 500);
 		fnGetEventDetailImages(rowData.eventDetailId,container, true);
 }
