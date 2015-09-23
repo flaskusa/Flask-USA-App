@@ -238,7 +238,6 @@ _flaskMap.createMarkers = function (results, status) {
             	}
             })(mark, i));
             _flaskMap.infos.push(infowindow);   
-            console.log(_flaskMap.markers);
         }
     } else if (status == google.maps.places.PlacesServiceStatus.ZERO_RESULTS) {
 //        alert('Sorry, nothing is found');
