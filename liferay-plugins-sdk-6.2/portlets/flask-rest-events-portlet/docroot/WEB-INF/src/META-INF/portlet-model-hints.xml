@@ -35,8 +35,8 @@
 			<hint-collection name="FLASK-DESC" />
 		</field>
 		<field name="eventDate" type="Date" />
-		<field name="startTime" type="Date" />
-		<field name="endTime" type="Date" />
+		<field name="startTime" type="long" />
+		<field name="endTime" type="long" />
 		<field name="eventTypeId" type="long" />
 		<field name="eventTypeName" type="String" />
 		<field name="eventImageUUID" type="String">

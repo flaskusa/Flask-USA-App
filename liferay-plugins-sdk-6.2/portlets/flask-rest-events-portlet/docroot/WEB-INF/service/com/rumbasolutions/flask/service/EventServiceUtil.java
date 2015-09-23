@@ -90,9 +90,9 @@ public class EventServiceUtil {
 
 	public static com.rumbasolutions.flask.model.Event addEvent(
 		java.lang.String eventName, java.lang.String description,
-		java.lang.String eventDate, java.util.Date startTime,
-		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID, long eventImageGroupId,
+		java.util.Date eventDate, long startTime, long endTime,
+		long eventTypeId, long venueId, java.lang.String eventImageUUID,
+		long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addEvent(eventName, description, eventDate, startTime,
@@ -102,9 +102,9 @@ public class EventServiceUtil {
 
 	public static com.rumbasolutions.flask.model.Event updateEvent(
 		long eventId, java.lang.String eventName, java.lang.String description,
-		java.lang.String eventDate, java.util.Date startTime,
-		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID, long eventImageGroupId,
+		java.util.Date eventDate, long startTime, long endTime,
+		long eventTypeId, long venueId, java.lang.String eventImageUUID,
+		long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateEvent(eventId, eventName, description, eventDate,

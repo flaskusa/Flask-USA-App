@@ -119,20 +119,8 @@ public class EventCacheModel implements CacheModel<Event>, Externalizable {
 			eventImpl.setEventDate(new Date(eventDate));
 		}
 
-		if (startTime == Long.MIN_VALUE) {
-			eventImpl.setStartTime(null);
-		}
-		else {
-			eventImpl.setStartTime(new Date(startTime));
-		}
-
-		if (endTime == Long.MIN_VALUE) {
-			eventImpl.setEndTime(null);
-		}
-		else {
-			eventImpl.setEndTime(new Date(endTime));
-		}
-
+		eventImpl.setStartTime(startTime);
+		eventImpl.setEndTime(endTime);
 		eventImpl.setEventTypeId(eventTypeId);
 
 		if (eventTypeName == null) {

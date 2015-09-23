@@ -61,8 +61,8 @@
         <column name="eventName" type="String" />
         <column name="description" type="String" />
         <column name="eventDate" type="Date" />
-        <column name="startTime" type="Date" />
-        <column name="endTime" type="Date" />
+        <column name="startTime" type="long" />
+        <column name="endTime" type="long" />
         <column name="eventTypeId" type="long" />
         <column name="eventTypeName" type="String" />
         

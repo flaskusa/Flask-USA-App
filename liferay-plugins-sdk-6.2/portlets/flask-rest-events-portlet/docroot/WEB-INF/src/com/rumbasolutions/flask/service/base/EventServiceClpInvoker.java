@@ -61,18 +61,16 @@ public class EventServiceClpInvoker {
 		_methodName90 = "addEvent";
 
 		_methodParameterTypes90 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.util.Date", "java.util.Date", "long", "long",
-				"java.lang.String", "long",
+				"java.lang.String", "java.lang.String", "java.util.Date", "long",
+				"long", "long", "long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName91 = "updateEvent";
 
 		_methodParameterTypes91 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.util.Date", "java.util.Date", "long",
-				"long", "java.lang.String", "long",
+				"long", "java.lang.String", "java.lang.String", "java.util.Date",
+				"long", "long", "long", "long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -241,8 +239,9 @@ public class EventServiceClpInvoker {
 		if (_methodName90.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes90, parameterTypes)) {
 			return EventServiceUtil.addEvent((java.lang.String)arguments[0],
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.util.Date)arguments[3], (java.util.Date)arguments[4],
+				(java.lang.String)arguments[1], (java.util.Date)arguments[2],
+				((Long)arguments[3]).longValue(),
+				((Long)arguments[4]).longValue(),
 				((Long)arguments[5]).longValue(),
 				((Long)arguments[6]).longValue(),
 				(java.lang.String)arguments[7],
@@ -254,8 +253,9 @@ public class EventServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes91, parameterTypes)) {
 			return EventServiceUtil.updateEvent(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3], (java.util.Date)arguments[4],
-				(java.util.Date)arguments[5], ((Long)arguments[6]).longValue(),
+				(java.util.Date)arguments[3], ((Long)arguments[4]).longValue(),
+				((Long)arguments[5]).longValue(),
+				((Long)arguments[6]).longValue(),
 				((Long)arguments[7]).longValue(),
 				(java.lang.String)arguments[8],
 				((Long)arguments[9]).longValue(),

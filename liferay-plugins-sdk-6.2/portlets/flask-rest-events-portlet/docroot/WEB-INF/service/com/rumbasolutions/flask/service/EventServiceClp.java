@@ -61,18 +61,16 @@ public class EventServiceClp implements EventService {
 		_methodName7 = "addEvent";
 
 		_methodParameterTypes7 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.util.Date", "java.util.Date", "long", "long",
-				"java.lang.String", "long",
+				"java.lang.String", "java.lang.String", "java.util.Date", "long",
+				"long", "long", "long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName8 = "updateEvent";
 
 		_methodParameterTypes8 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.util.Date", "java.util.Date", "long",
-				"long", "java.lang.String", "long",
+				"long", "java.lang.String", "java.lang.String", "java.util.Date",
+				"long", "long", "long", "long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -373,9 +371,9 @@ public class EventServiceClp implements EventService {
 	@Override
 	public com.rumbasolutions.flask.model.Event addEvent(
 		java.lang.String eventName, java.lang.String description,
-		java.lang.String eventDate, java.util.Date startTime,
-		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID, long eventImageGroupId,
+		java.util.Date eventDate, long startTime, long endTime,
+		long eventTypeId, long venueId, java.lang.String eventImageUUID,
+		long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -389,9 +387,9 @@ public class EventServiceClp implements EventService {
 						
 					ClpSerializer.translateInput(eventDate),
 						
-					ClpSerializer.translateInput(startTime),
+					startTime,
 						
-					ClpSerializer.translateInput(endTime),
+					endTime,
 						
 					eventTypeId,
 						
@@ -422,9 +420,9 @@ public class EventServiceClp implements EventService {
 	@Override
 	public com.rumbasolutions.flask.model.Event updateEvent(long eventId,
 		java.lang.String eventName, java.lang.String description,
-		java.lang.String eventDate, java.util.Date startTime,
-		java.util.Date endTime, long eventTypeId, long venueId,
-		java.lang.String eventImageUUID, long eventImageGroupId,
+		java.util.Date eventDate, long startTime, long endTime,
+		long eventTypeId, long venueId, java.lang.String eventImageUUID,
+		long eventImageGroupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -440,9 +438,9 @@ public class EventServiceClp implements EventService {
 						
 					ClpSerializer.translateInput(eventDate),
 						
-					ClpSerializer.translateInput(startTime),
+					startTime,
 						
-					ClpSerializer.translateInput(endTime),
+					endTime,
 						
 					eventTypeId,
 						

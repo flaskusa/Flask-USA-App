@@ -74,8 +74,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			{ "eventName", Types.VARCHAR },
 			{ "description", Types.VARCHAR },
 			{ "eventDate", Types.TIMESTAMP },
-			{ "startTime", Types.TIMESTAMP },
-			{ "endTime", Types.TIMESTAMP },
+			{ "startTime", Types.BIGINT },
+			{ "endTime", Types.BIGINT },
 			{ "eventTypeId", Types.BIGINT },
 			{ "eventTypeName", Types.VARCHAR },
 			{ "eventImageUUID", Types.VARCHAR },
@@ -83,7 +83,7 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			{ "venueId", Types.BIGINT },
 			{ "venueName", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_Event (eventId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventName VARCHAR(100) null,description VARCHAR(255) null,eventDate DATE null,startTime DATE null,endTime DATE null,eventTypeId LONG,eventTypeName VARCHAR(75) null,eventImageUUID VARCHAR(50) null,eventImageGroupId LONG,venueId LONG,venueName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_Event (eventId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventName VARCHAR(100) null,description VARCHAR(255) null,eventDate DATE null,startTime LONG,endTime LONG,eventTypeId LONG,eventTypeName VARCHAR(75) null,eventImageUUID VARCHAR(50) null,eventImageGroupId LONG,venueId LONG,venueName VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_Event";
 	public static final String ORDER_BY_JPQL = " ORDER BY event.eventDate DESC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_Event.eventDate DESC";
@@ -265,13 +265,13 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			setEventDate(eventDate);
 		}
 
-		Date startTime = (Date)attributes.get("startTime");
+		Long startTime = (Long)attributes.get("startTime");
 
 		if (startTime != null) {
 			setStartTime(startTime);
 		}
 
-		Date endTime = (Date)attributes.get("endTime");
+		Long endTime = (Long)attributes.get("endTime");
 
 		if (endTime != null) {
 			setEndTime(endTime);
@@ -434,23 +434,23 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 
 	@JSON
 	@Override
-	public Date getStartTime() {
+	public long getStartTime() {
 		return _startTime;
 	}
 
 	@Override
-	public void setStartTime(Date startTime) {
+	public void setStartTime(long startTime) {
 		_startTime = startTime;
 	}
 
 	@JSON
 	@Override
-	public Date getEndTime() {
+	public long getEndTime() {
 		return _endTime;
 	}
 
 	@Override
-	public void setEndTime(Date endTime) {
+	public void setEndTime(long endTime) {
 		_endTime = endTime;
 	}
 
@@ -708,23 +708,9 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 			eventCacheModel.eventDate = Long.MIN_VALUE;
 		}
 
-		Date startTime = getStartTime();
+		eventCacheModel.startTime = getStartTime();
 
-		if (startTime != null) {
-			eventCacheModel.startTime = startTime.getTime();
-		}
-		else {
-			eventCacheModel.startTime = Long.MIN_VALUE;
-		}
-
-		Date endTime = getEndTime();
-
-		if (endTime != null) {
-			eventCacheModel.endTime = endTime.getTime();
-		}
-		else {
-			eventCacheModel.endTime = Long.MIN_VALUE;
-		}
+		eventCacheModel.endTime = getEndTime();
 
 		eventCacheModel.eventTypeId = getEventTypeId();
 
@@ -890,8 +876,8 @@ public class EventModelImpl extends BaseModelImpl<Event> implements EventModel {
 	private String _description;
 	private Date _eventDate;
 	private Date _originalEventDate;
-	private Date _startTime;
-	private Date _endTime;
+	private long _startTime;
+	private long _endTime;
 	private long _eventTypeId;
 	private String _eventTypeName;
 	private String _eventImageUUID;

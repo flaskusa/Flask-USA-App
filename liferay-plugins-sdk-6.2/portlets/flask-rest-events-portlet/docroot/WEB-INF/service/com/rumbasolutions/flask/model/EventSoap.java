@@ -163,19 +163,19 @@ public class EventSoap implements Serializable {
 		_eventDate = eventDate;
 	}
 
-	public Date getStartTime() {
+	public long getStartTime() {
 		return _startTime;
 	}
 
-	public void setStartTime(Date startTime) {
+	public void setStartTime(long startTime) {
 		_startTime = startTime;
 	}
 
-	public Date getEndTime() {
+	public long getEndTime() {
 		return _endTime;
 	}
 
-	public void setEndTime(Date endTime) {
+	public void setEndTime(long endTime) {
 		_endTime = endTime;
 	}
 
@@ -235,8 +235,8 @@ public class EventSoap implements Serializable {
 	private String _eventName;
 	private String _description;
 	private Date _eventDate;
-	private Date _startTime;
-	private Date _endTime;
+	private long _startTime;
+	private long _endTime;
 	private long _eventTypeId;
 	private String _eventTypeName;
 	private String _eventImageUUID;

@@ -23,12 +23,8 @@
 			<basic name="eventDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
-			<basic name="startTime">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
-			<basic name="endTime">
-				<temporal>TIMESTAMP</temporal>
-			</basic>
+			<basic name="startTime" />
+			<basic name="endTime" />
 			<basic name="eventTypeId" />
 			<basic name="eventTypeName" />
 			<basic name="eventImageUUID" />

@@ -119,13 +119,13 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 			setEventDate(eventDate);
 		}
 
-		Date startTime = (Date)attributes.get("startTime");
+		Long startTime = (Long)attributes.get("startTime");
 
 		if (startTime != null) {
 			setStartTime(startTime);
 		}
 
-		Date endTime = (Date)attributes.get("endTime");
+		Long endTime = (Long)attributes.get("endTime");
 
 		if (endTime != null) {
 			setEndTime(endTime);
@@ -376,7 +376,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	* @return the start time of this event
 	*/
 	@Override
-	public java.util.Date getStartTime() {
+	public long getStartTime() {
 		return _event.getStartTime();
 	}
 
@@ -386,7 +386,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	* @param startTime the start time of this event
 	*/
 	@Override
-	public void setStartTime(java.util.Date startTime) {
+	public void setStartTime(long startTime) {
 		_event.setStartTime(startTime);
 	}
 
@@ -396,7 +396,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	* @return the end time of this event
 	*/
 	@Override
-	public java.util.Date getEndTime() {
+	public long getEndTime() {
 		return _event.getEndTime();
 	}
 
@@ -406,7 +406,7 @@ public class EventWrapper implements Event, ModelWrapper<Event> {
 	* @param endTime the end time of this event
 	*/
 	@Override
-	public void setEndTime(java.util.Date endTime) {
+	public void setEndTime(long endTime) {
 		_event.setEndTime(endTime);
 	}
 

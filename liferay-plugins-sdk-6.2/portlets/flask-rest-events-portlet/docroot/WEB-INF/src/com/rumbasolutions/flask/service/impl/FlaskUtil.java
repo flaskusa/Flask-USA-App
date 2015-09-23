@@ -85,6 +85,23 @@ public class FlaskUtil {
 		return cal;
 	}
 	
+	public static Date parseDateString(String dateVal){
+		Calendar cal = Calendar.getInstance();
+		Date dt =null;
+		String validFormat = "MM-dd-yyyy";
+		SimpleDateFormat sf  =new SimpleDateFormat(validFormat, Locale.US);
+		try {
+			dt= sf.parse(dateVal);
+			LOGGER.debug(dt);
+			LOGGER.debug(sf.format(dt));
+		}catch (Exception e) {
+			
+		}
+			
+		return dt;
+	}
+	
+	
 	public static Calendar parseTime(String timeVal){
 		Calendar cal = Calendar.getInstance();
 		Date dt =null;
@@ -386,8 +403,57 @@ public class FlaskUtil {
 			}
 		}
 		eventObj.put("Details", eventArr);
+		//eventObj = groupJSONByInfoTye(eventObj);
 		
 		return eventObj;
 	}
 	
+	public static JSONObject groupJSONByInfoTye(JSONObject eventObj){
+		if(eventObj == null ){
+			return null;
+		}
+		try {
+			JSONObject preEventDetails = JSONFactoryUtil.createJSONObject();
+			JSONObject duringEventDetails = JSONFactoryUtil.createJSONObject();
+			JSONObject postEventDetails = JSONFactoryUtil.createJSONObject();
+			
+			JSONArray detailArr = eventObj.getJSONArray("Details");
+			if(detailArr != null){
+				for(int i=0; i < detailArr.length(); i++ ){
+					JSONObject detailObj = detailArr.getJSONObject(i);
+					String infoTypeName = JSONFactoryUtil.createJSONObject(detailObj.getString("Detail")).getString("infoTypeName");
+					String infoTypeCategoryName  = JSONFactoryUtil.createJSONObject(detailObj.getString("Detail")).getString("infoTypeCategoryName");
+					if(infoTypeName.contentEquals("Pre-Event")){
+						FlaskUtil.setInfoCategoryObj(preEventDetails , infoTypeCategoryName,  detailObj);
+					}else if(infoTypeName.contentEquals("During-Event")){
+						FlaskUtil.setInfoCategoryObj(duringEventDetails , infoTypeCategoryName,  detailObj);
+					}else if(infoTypeName.contentEquals("Post-Event")){
+						FlaskUtil.setInfoCategoryObj(postEventDetails , infoTypeCategoryName,  detailObj);
+					}	
+				}
+			}
+			JSONObject detailObj = JSONFactoryUtil.createJSONObject();
+
+			detailObj.put("Pre-Event", preEventDetails);
+			detailObj.put("During-Event", duringEventDetails);
+			detailObj.put("During-Event",postEventDetails);
+			eventObj.put("Details", detailObj);
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return eventObj;
+	}
+	
+	private static void setInfoCategoryObj(JSONObject infoTypeObj, String infoTypeCategoryName, JSONObject detailObj){
+		
+		JSONArray detailArr = infoTypeObj.getJSONArray(infoTypeCategoryName);
+		if(detailArr == null){
+			detailArr = JSONFactoryUtil.createJSONArray();
+		}
+		detailArr.put(detailObj);
+		infoTypeObj.put(infoTypeCategoryName, detailArr);
+
+	}
 }

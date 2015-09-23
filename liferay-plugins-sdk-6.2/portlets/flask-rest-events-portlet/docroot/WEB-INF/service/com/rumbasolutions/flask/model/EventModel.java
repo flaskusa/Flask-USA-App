@@ -194,28 +194,28 @@ public interface EventModel extends BaseModel<Event> {
 	 *
 	 * @return the start time of this event
 	 */
-	public Date getStartTime();
+	public long getStartTime();
 
 	/**
 	 * Sets the start time of this event.
 	 *
 	 * @param startTime the start time of this event
 	 */
-	public void setStartTime(Date startTime);
+	public void setStartTime(long startTime);
 
 	/**
 	 * Returns the end time of this event.
 	 *
 	 * @return the end time of this event
 	 */
-	public Date getEndTime();
+	public long getEndTime();
 
 	/**
 	 * Sets the end time of this event.
 	 *
 	 * @param endTime the end time of this event
 	 */
-	public void setEndTime(Date endTime);
+	public void setEndTime(long endTime);
 
 	/**
 	 * Returns the event type ID of this event.

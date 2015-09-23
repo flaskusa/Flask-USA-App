@@ -169,7 +169,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	
 	@Override
 	public Event addEvent(String eventName, String description, 
-						String eventDate, Date startTime, Date endTime,
+						Date eventDate, long startTime, long endTime,
 						long eventTypeId, long venueId, String eventImageUUID, long eventImageGroupId,
 								ServiceContext  serviceContext){
 		Event event=null;
@@ -178,7 +178,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			event = EventLocalServiceUtil.createEvent(CounterLocalServiceUtil.increment());
 			event.setEventName(eventName);
 			event.setDescription(description);
-			event.setEventDate(FlaskUtil.parseDate(eventDate).getTime());
+			event.setEventDate(eventDate);
 			event.setStartTime(startTime);
 			event.setEndTime(endTime);
 			event.setEventTypeId(eventTypeId);
@@ -203,7 +203,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	
 	@Override
 	public Event updateEvent(long eventId, String eventName, String description, 
-						String eventDate, Date startTime, Date endTime,
+						Date eventDate, long startTime, long endTime,
 						long eventTypeId, long venueId, String eventImageUUID, long eventImageGroupId,
 								ServiceContext  serviceContext){
 		Event event=null;
@@ -211,7 +211,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			event = EventLocalServiceUtil.getEvent(eventId);
 			event.setEventName(eventName);
 			event.setDescription(description);
-			event.setEventDate(FlaskUtil.parseDate(eventDate).getTime());
+			event.setEventDate(eventDate);
 			event.setStartTime(startTime);
 			event.setEndTime(endTime);
 			
