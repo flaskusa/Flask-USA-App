@@ -10,9 +10,50 @@ function addDetailsClickHandlers() {
 	$(".cssVdSave").click(function() {
 		 if (fnCheckDuplicateTitle($("#infoTitle").val())) {
 			   _flaskLib.showWarningMessage('action-msg-warning', _venueDetailModel.MESSAGES.DETAIL_DUPLICATE);
-			  }
-		if ($('#venueDetailsForm').jqxValidator('validate'))
-		saveVenueDetails();
+			  }else{
+				  if ($('#venueDetailsForm').jqxValidator('validate'))
+					{
+						if ($('#addrLine1').val() == undefined) {
+							$('#lat').val(0);
+							$('#lng').val(0);
+							saveVenueDetails();
+						}else {
+							
+							try{
+								var geocoder = new google.maps.Geocoder();
+								geocoder.geocode({
+									address : $('#infoTitle').val()+' '+ $('#addrLine11').val(),
+									region: 'no'
+								},
+							    function(results, status) {
+									try{
+										if (status.toLowerCase() == 'ok') {
+											// Get center
+											var coords = new google.maps.LatLng(
+												results[0]['geometry']['location'].lat(),
+												results[0]['geometry']['location'].lng()
+											);
+
+											console.log(coords.lat());
+											$('#lat').val(coords.lat());
+											$('#lng').val(coords.lng());
+										}
+									}
+									catch(ex){
+										console.log(ex);
+									}
+									finally{
+										saveVenueDetails();								
+									}
+							    });						
+							}
+							catch(ex){
+								_flaskLib.showErrorMessage('action-msg', _eventDetailModel.MESSAGES.CHECK_INTERNET_CONNECTION);
+							}
+						}
+						
+					}			
+				}
 	});
 
 	$(".cssAddVenueDetails").click(function() {
@@ -148,10 +189,15 @@ function saveVenueDetails() {
 						val = 1;
 					}
 					formData[item.name] = val;
+					console.log(item.name+'-'+formData[item.name]);
 				});
 				formData.venueId=$('#venueForm #venueId').val();
+				formData.addrLine1=$('#addrLine11').val();
+				formData.latitude=$('#lat').val();
+				formData.longitude=$('#lng').val();
 				return formData;
 			});
+	
 	var flaskRequest = new Request();
 	var url = ""
 		if (params.venueDetailId == 0) {
