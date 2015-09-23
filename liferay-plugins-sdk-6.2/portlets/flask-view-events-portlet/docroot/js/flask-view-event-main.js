@@ -148,9 +148,37 @@ function fnGetEventImages(eventId,venueId){
 			var arrDurEventDetails = [];
 			var arrPosEventDetails = [];
 			var objVenue = jQuery.parseJSON(data.Venue);
+			var distinctInfoTypeCategory1 = [];
+			var distinctInfoTypeCategoryCount1 = [];
+			var distinctInfoTypeCategory2 = [];
+			var distinctInfoTypeCategoryCount2 = [];
+			var distinctInfoTypeCategory3 = [];
+			var distinctInfoTypeCategoryCount3 = [];
+			var temp1 = [];
+			var temp2 = [];
+			var temp3 = [];
+			
 			getVenueData(objVenue);
 			objEventDetails = data.Details;
 			eventDetailJSON = $.extend(true, {}, objEventDetails);
+			for(iCount=0;iCount<objEventDetails.length;iCount++){
+				var objEventDetailTemp = $.parseJSON(objEventDetails[iCount].Detail);
+				switch(parseInt(objEventDetailTemp.infoTypeId)) {
+				case  _eventModel.INFO_TYPE.PreEvent: 
+			    	_eventModel.GET_EVENT_DETAIL_TYPE_COUNT(objEventDetailTemp,distinctInfoTypeCategory1);
+			        break;
+			    case _eventModel.INFO_TYPE.DuringEvent:
+			    	_eventModel.GET_EVENT_DETAIL_TYPE_COUNT(objEventDetailTemp,distinctInfoTypeCategory2);
+			        break;
+			    case _eventModel.INFO_TYPE.PostEvent:
+			    	_eventModel.GET_EVENT_DETAIL_TYPE_COUNT(objEventDetailTemp,distinctInfoTypeCategory3);
+			    	break;
+				}		
+			}
+			console.log(distinctInfoTypeCategory1);
+			console.log(distinctInfoTypeCategory2);
+			console.log(distinctInfoTypeCategory3);
+			
 			$.each(objEventDetails, function(idx, obj) {
 				objEventDetail = jQuery.parseJSON(obj.Detail);
 				if(objEventDetail.latitude != "")
@@ -162,19 +190,20 @@ function fnGetEventImages(eventId,venueId){
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
 					case  _eventModel.INFO_TYPE.PreEvent: 
-				    	arrPreEvent = fnFillImageArray(obj.DetailImages,obj.Detail,arrPreEvent)
+				    	arrPreEvent = fnFillSlides(obj.DetailImages,obj.Detail,arrPreEvent,distinctInfoTypeCategory1,temp1)
 				    	arrPreEventDetails.push(obj);
 				        break;
 				    case _eventModel.INFO_TYPE.DuringEvent:
-				    	arrDurEvent = fnFillImageArray(obj.DetailImages,obj.Detail,arrDurEvent)
+				    	arrDurEvent = fnFillSlides(obj.DetailImages,obj.Detail,arrDurEvent,distinctInfoTypeCategory2,temp2)
 				    	arrDurEventDetails.push(obj);
 				        break;
 				    case _eventModel.INFO_TYPE.PostEvent:
-				    	arrPosEvent = fnFillImageArray(obj.DetailImages,obj.Detail,arrPosEvent)
+				    	arrPosEvent = fnFillSlides(obj.DetailImages,obj.Detail,arrPosEvent,distinctInfoTypeCategory3,temp3)
 				    	arrPosEventDetails.push(obj);
 				    	break;
 				}				
 			});
+
 			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
 		    $(objWeatherDiv).html($("#weather-background"));
 		    arrPreEvent.splice(1,0,objWeatherDiv);
@@ -612,4 +641,31 @@ function showAds(){
 function showEventAds(eventId){
 	_flaskAd.HideAds();
 	_flaskAd.ShowAdByEventId(eventId);
+}
+
+
+function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCategory,temp){
+	var objEventDetails = jQuery.parseJSON(eventDetails);
+	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase();
+	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
+	var slideBackgroundImage = '/flask-view-events-portlet/img/'+_eventModel.getBackgroundImage(infoTypeCategoryName);
+	$.each(distinctInfoTypeCategory,function(index,KeyVal){
+		var elementPosition = $.inArray(KeyVal[0], temp);
+		if(infoTypeCategoryName.toUpperCase()==KeyVal[0].toUpperCase() && elementPosition == -1){
+			temp.push(KeyVal[0]);
+			$.each(objFields, function(idx, obj){
+				var objContent = $("<div/>",{'class':'eventDetailBox'});
+				objContent.css('background-image','url("'+slideBackgroundImage+'")');
+				objContent.css('background-repeat','no-repeat');
+				objContent.css('background-size','100%');
+				var divCount = $('<div/>',{'class':'counterBox'});
+				var h1 = $('<h3/>',{'class':'counter'});
+				h1.html(KeyVal[1]);
+				h1.appendTo(divCount);
+				divCount.appendTo(objContent);
+				objArray.push(objContent);			
+			});				
+		}
+	})		
+	return objArray;
 }

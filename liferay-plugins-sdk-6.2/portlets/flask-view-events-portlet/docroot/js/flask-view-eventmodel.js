@@ -126,11 +126,54 @@ _eventModel.DETAIL_DATA_MODEL = {
          }]
 }
 
+_eventModel.getBackgroundImage = function(infoTypeCategory){
+	var renderer;
+	switch(infoTypeCategory) {
+		case "tradition":
+			renderer = 'Flask_Tradition.jpg';
+			break;
+		case "parking":
+			renderer = 'Flask_Parking.jpg';
+			break;
+		case "bar & restaurants":
+			renderer = 'Flask_Bars.jpg'
+			break;
+		/*case "nightlife":
+		case "safety":
+			renderer = _eventModel.DETAIL_DATA_MODEL.FOOD;
+			break;
+		case "liquor store":
+			renderer = _eventModel.DETAIL_DATA_MODEL.LIQUOR;
+			break;*/
+		case "supplies":
+			renderer = 'Flask_Supplies.jpg';
+			break;			
+		case "getting home":
+		case "flask us":
+			renderer = 'Flask_FlaskUs.jpg'
+			break;				
+		default:
+			renderer = 'Flask_Default_Image.jpg';
+			break;
+	}
+	return renderer;
+}
+
 _eventModel.BACKGROUNDIMAGE = {
-		GENERAL:'',
-		TRADITION:'',
-        PARKING:'',
-        TRAFFIC:'',
-        FOOD:'',
-        LIQUOR:''
+	BARS:'Flask_Bars.jpg',
+	DEFAULT:'Flask_Default_Image.jpg',
+    FLASKUS:'Flask_FlaskUs.jpg',
+    SUPPLIES:'Flask_Supplies.jpg',
+    TRADITION:'Flask_Tradition.jpg',
+    TRAFFIC:'Flask_Traffic.jpg'
+}
+
+_eventModel.GET_EVENT_DETAIL_TYPE_COUNT = function(objJSON,distinctInfoTypeCategory){
+	var elementPosition = $.inArray(objJSON.infoTypeCategoryName, distinctInfoTypeCategory[0]);
+	if(elementPosition == -1){
+		distinctInfoTypeCategory.push([objJSON.infoTypeCategoryName,1]);
+	}
+	else{
+		distinctInfoTypeCategory[elementPosition][1] = distinctInfoTypeCategory[elementPosition][1] + 1; 
+	}
 }
