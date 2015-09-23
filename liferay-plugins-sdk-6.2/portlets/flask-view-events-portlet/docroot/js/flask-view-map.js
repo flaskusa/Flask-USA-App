@@ -21,7 +21,9 @@ _flaskMap.initializeMap = function() {
 	    };
 	    _flaskMap.map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
 	    var centerControlDiv = document.createElement('div');
+	    centerControlDiv.style.display= '-webkit-inline-box';
 	    var centerControl = new CenterControl(centerControlDiv, _flaskMap.map);
+	    var centerControl1 = new CenterControl1(centerControlDiv, _flaskMap.map);
 
 	    centerControlDiv.index = 1;
 	    _flaskMap.map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
@@ -48,7 +50,7 @@ function CenterControl(controlDiv, map) {
 	  controlUI.style.cursor = 'pointer';
 	  controlUI.style.marginBottom = '22px';
 	  controlUI.style.textAlign = 'center';
-	  controlUI.title = 'Select checkbox';
+	  controlUI.title = 'Select Type';
 	  controlDiv.appendChild(controlUI);
 
 	  // Set CSS for the control interior.
@@ -59,48 +61,76 @@ function CenterControl(controlDiv, map) {
 	  controlText.style.lineHeight = '38px';
 	  controlText.style.paddingLeft = '5px';
 	  controlText.style.paddingRight = '5px';
-	  controlText.innerHTML = "<input type='checkbox' id='ch1' checked> Flask  </input><input type='checkbox' id='ch2'> Google</input>";
+	  controlText.innerHTML = "<div class='heart-shape heart-shape-userevent' id='ch1'></div><div>Flask</div>";
 	  controlUI.appendChild(controlText);
+	  controlUI.click();
 	  controlUI.addEventListener('click', function() {
-		  $("#ch1").change(function() {
-				console.log("change");
-				var i;
-		        if(this.checked) {
-			        for (i = 0; i < _flaskMap.markers.length; i++) {
-			          if (_flaskMap.markers[i].get("class") == "flask_icons") {
-			        	  _flaskMap.markers[i].setVisible(true);
-			          }
-			        }
-		        }else{
-		        	for (i = 0; i < _flaskMap.markers.length; i++) {
+			  var i;
+			  if($("#ch1").hasClass('heart-shape-userevent')){
+				  $("#ch1").removeClass('heart-shape-userevent');
+				  for (i = 0; i < _flaskMap.markers.length; i++) {
 		  	          if (_flaskMap.markers[i].get("class") == "flask_icons") {
 		  	        	  _flaskMap.markers[i].setVisible(false);
 		  	          }
 		  	        }
-		        }
-		    });
-			
-			$("#ch2").change(function() {
-				var i;
-		        if(this.checked) {
-			        for (i = 0; i < _flaskMap.markers.length; i++) {
-			          if (_flaskMap.markers[i].get("class") == "google_icons") {
+			  }else{
+				  $("#ch1").addClass('heart-shape-userevent');
+				  for (i = 0; i < _flaskMap.markers.length; i++) {
+			          if (_flaskMap.markers[i].get("class") == "flask_icons") {
 			        	  _flaskMap.markers[i].setVisible(true);
 			          }
 			        }
-		        }else{
-		        	for (i = 0; i < _flaskMap.markers.length; i++) {
+			  }
+	  });
+	  
+	  
+	}
+
+function CenterControl1(controlDiv, map){
+	// Set CSS for the control border.
+	  var controlUI = document.createElement('div');
+	  controlUI.style.backgroundColor = '#fff';
+	  controlUI.style.border = '2px solid #fff';
+	  controlUI.style.borderRadius = '3px';
+	  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+	  controlUI.style.cursor = 'pointer';
+	  controlUI.style.marginBottom = '22px';
+	  controlUI.style.textAlign = 'center';
+	  controlUI.title = 'Select Type';
+	  controlDiv.appendChild(controlUI);
+
+	  // Set CSS for the control interior.
+	  var controlText = document.createElement('div');
+	  controlText.style.color = 'rgb(25,25,25)';
+	  controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+	  controlText.style.fontSize = '16px';
+	  controlText.style.lineHeight = '38px';
+	  controlText.style.paddingLeft = '5px';
+	  controlText.style.paddingRight = '5px';
+	  controlText.innerHTML = "<div class='heart-shape' id='ch2'></div><div>Google</div>";
+	  controlUI.appendChild(controlText);
+	  controlUI.click();
+	  controlUI.addEventListener('click', function() {
+			  var i;
+			  if($("#ch2").hasClass('heart-shape-userevent')){
+				  $("#ch2").removeClass('heart-shape-userevent');
+				  for (i = 0; i < _flaskMap.markers.length; i++) {
 		  	          if (_flaskMap.markers[i].get("class") == "google_icons") {
 		  	        	  _flaskMap.markers[i].setVisible(false);
 		  	          }
 		  	        }
-		        }
-		    });
+			  }else{
+				  $("#ch2").addClass('heart-shape-userevent');
+				  for (i = 0; i < _flaskMap.markers.length; i++) {
+			          if (_flaskMap.markers[i].get("class") == "google_icons") {
+			        	  _flaskMap.markers[i].setVisible(true);
+			          }
+			        }
+			  }
 	  });
-	  controlUI.click();
-	  // Setup the click event listeners: simply set the map to Chicago.
-	}
-
+	  
+	  
+}
 
 _flaskMap.clearOverlays = function() {
 
@@ -135,8 +165,12 @@ _flaskMap.findPlaces = function (places) {
 }
 
 _flaskMap.createMarkers = function (results, status) {
-	$('#ch1').prop('checked', true);
-	$('#ch2').prop('checked', false);
+	if(!$("#ch1").hasClass('heart-shape-userevent')){
+		$("#ch1").addClass('heart-shape-userevent');
+	}
+	if($("#ch2").hasClass('heart-shape-userevent')){
+		  $("#ch2").removeClass('heart-shape-userevent');
+	}
     if (status == google.maps.places.PlacesServiceStatus.OK) {
     	venue_mark = new google.maps.Marker({
 	        position: _flaskMap.cur_location,
