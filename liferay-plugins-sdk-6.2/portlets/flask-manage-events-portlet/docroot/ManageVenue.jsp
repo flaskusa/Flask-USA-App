@@ -137,6 +137,8 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 				<h3><span class="title-text"></span></h3>
 				<form id="venueDetailsForm" style="display:none">
 				  <input type="hidden" id="imgActionUrl" value="<%= addImagesActionURL %>">
+				  <input id="lat" type="hidden" name="lat" value="">
+			      <input id="lng" type="hidden" name="lng" value="">
 				  <div class="form-group">
 					    <label class="control-label" for="infoTypeId">Info Type:</label>
 						<div class="controls">
