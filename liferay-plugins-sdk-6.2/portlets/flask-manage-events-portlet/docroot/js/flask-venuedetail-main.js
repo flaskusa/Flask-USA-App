@@ -269,6 +269,7 @@ function editVenueDetail(rowData) {
 		_flaskDetailCommon.loadContentType("infoTypeCategoryId",rowData.infoTypeCategoryId, rowData.infoTypeId);
 		setTimeout(function() {
 			_flaskLib.loadDataToForm("venueDetailsForm",  _venueDetailModel.DATA_MODEL.VENUEDETAILS, rowData, function(){});
+			$('#addrLine11').val(rowData.addrLine1);
 		}, 500);
 		//fnShowSlider($('#venueForm #venueId').val(),container,rowData.venueDetailId,rowData.infoTypeId,rowData.infoTypeCategoryId);
 		fnGetVenueDetailImages(rowData.venueDetailId,container,true);
