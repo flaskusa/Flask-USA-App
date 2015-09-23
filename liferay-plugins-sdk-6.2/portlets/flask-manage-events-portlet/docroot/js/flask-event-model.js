@@ -21,8 +21,8 @@ _eventModel.DATA_MODEL= {
 		 	 { name: 'eventName', type: 'string' },
 		 	 { name: 'description', type: 'string' },
 		 	 { name: 'eventDate', type: 'string' },
-		 	 { name: 'startTime', type: 'string' },
-		 	 { name: 'endTime', type: 'string' },
+		 	 { name: 'startTime', type: 'long' },
+		 	 { name: 'endTime', type: 'long' },
 		 	 { name: 'eventTypeId', type: 'long' },
 		 	 { name: 'eventTypeName', type: 'string' },
 		 	 { name: 'venueId', type:'long' },
@@ -41,9 +41,10 @@ _eventModel.GRID_CONTEXT_MENU = {
 
 _eventModel.GRID_DATA_MODEL= {
 		EVENT:
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'eventName', width: '45%' },
-	  		 {text: 'Description', datafield: 'description', width: '45%'},
-	  		 { text: 'Edit',  datafield: 'eventId', width: '10%', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.EVENT }]
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'eventName' },
+	  		 {text: 'Description', datafield: 'description', width: '25%'},
+	  		{text: 'Date', datafield: 'eventDate', width: '25%'},
+	  		 { text: 'Edit',  datafield: 'eventId', width: '34px', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.EVENT }]
 		};
 
 _eventModel.MESSAGES= {

@@ -74,6 +74,12 @@ function loadData() {
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT, params,
 	function(data){/*success handler*/
 		var events = eval(data);
+		$.each(events.Events, function(index, event) {
+			event.eventDate = _flaskLib.formatDateInMillis(event.eventDate);
+			event.startTime = _flaskLib.formatTimeInMillis(event.startTime);
+			event.endTime  = _flaskLib.formatTimeInMillis(event.endTime);
+		});
+
 		GRID_PARAM.updateGrid(events.Events);
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
@@ -154,15 +160,6 @@ function deleteMultipleEvents(eventList) {
 
 /* Edit Event */
 function editEvent(rowData) {
-	function formatUnixToTime(tdate)
-	{
-		var date = new Date(tdate);
-		var hours = date.getHours();
-		var minutes = "0" + date.getMinutes();
-		var ampm = hours >= 12 ? 'PM' : 'AM';
-		hours = hours % 12;
-		return hours + ':' + minutes.substr(-2) + ' ' + ampm;
-	}
 		edit = true;
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("eventForm",  _eventModel.DATA_MODEL.EVENT, rowData, function(){});
@@ -170,17 +167,8 @@ function editEvent(rowData) {
 		$("#formContainer").show();
 		_eventModel.loadVenues('venueId',  rowData.venueId);
 		_eventModel.loadEventType('eventTypeId',  rowData.eventTypeId);
-		var date = new Date(parseInt(rowData.eventDate));
-		 var dd = date.getDate()
-		   if ( dd < 10 ) dd = '0' + dd;
-		   var mm = date.getMonth()+1;
-		   if ( mm < 10 ) mm = '0' + mm;
-		   var yy = date.getFullYear();
-		$('#eventDate').val(mm+'-'+dd+'-'+yy);
-		var sTime = new Date(parseInt(rowData.startTime));
-		$('#startTime').val(formatUnixToTime(sTime));
-		var eTime = new Date(parseInt(rowData.endTime));
-		$('#endTime').val(formatUnixToTime(eTime));
+
+		
 		$(".AddContent").click(function() {
 			$("#formContainer").hide();
 			$('#eventDetailsForm').hide();
@@ -200,8 +188,9 @@ function saveEvent() {
 		var st=$("#startTime").val();
 	    var et=$("#endTime").val();
 	    var d= $("#eventDate").val();
-	    var sTime=Date.parse(d+" "+st);
-	    var eTime=Date.parse(d+" "+et);
+	    var sTime=Date.parse('1970-01-01 ' + st);
+	    var eTime=Date.parse('1970-01-01 ' + et);
+	    var eventDate = Date.parse(d);
 		params = _flaskLib.getFormData('eventForm',_eventModel.DATA_MODEL.EVENT,
 					function(formId, model, formData) {
 							formData.venueId=$('#eventForm #venueId').val();
@@ -210,9 +199,9 @@ function saveEvent() {
 							formData.eventTypeName = $('#eventTypeName').children(':selected').text();
 		                    formData.startTime= sTime;
 		                    formData.endTime= eTime;
+		                    formData.eventDate = eventDate;
 							return formData;
 					});
-		console.log(params);
 		var flaskRequest = new Request();
 		var url = "";
 			if (params.eventId == 0) {
@@ -321,7 +310,22 @@ function validate() {
 		animationDuration: 0,
 		rules: [
 		               { input: '#eventName', message: 'Event name is required!', action: 'keyup, blur', rule: 'required' },
-		               { input: '#eventDate', message: 'Date must be current date or greater', action: 'keyup, blur', rule:'required'},
+		               { input: '#eventDate', message: 'Date must be between today and two years in future', action: 'keyup, blur', rule: function(input, commit) {
+		            	   if (edit) {
+		            		   return true;
+		            	   }else {
+	            		   		   var inputDate = Date.parse($('#eventDate').val()); 		
+			            		   var currentDate = new Date();
+			            		   currentDate.setHours(0,0,0,0);//remove time part
+			            		   var twoYear = currentDate.setFullYear(currentDate.getFullYear() +2);
+			            		   if( inputDate < currentDate || inputDate > twoYear){
+			            			   return false;
+			            		   }
+			            		   return true;
+							}
+		            	   }
+
+		               },
 		               {input: '#endTime', message: 'End time always greater than start time!', action: 'keyup, focus', rule: 'required'}
 			   ]
 	});

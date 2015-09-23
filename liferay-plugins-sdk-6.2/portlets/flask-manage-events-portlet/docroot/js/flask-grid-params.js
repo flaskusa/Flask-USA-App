@@ -127,11 +127,8 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		  var container1 = $('<div class="row-fluid"></div>');
 		  var leftcolumn = $('<div class="span3 GridLogo"></div>');
 		  var rightcolumn = $('<div class="span9"></div>');
-		  var d = new Date(datarecord.eventDate);
-		  var d1 = formatUnixToTime(datarecord.startTime);
-		  var d2 = formatUnixToTime(datarecord.endTime);
-			container1.append(leftcolumn);
-			container1.append(rightcolumn);
+		  container1.append(leftcolumn);
+		  container1.append(rightcolumn);
 
 			$(rightcolumn).append("<table>");
 			var imgLogoURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+datarecord.eventImageUUID+"&groupId="+datarecord.eventImageGroupId;
@@ -141,11 +138,11 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 			var venueId = "<tr><td class='filledWidth1'><b>Venue:</b></td><td> "
 					+ datarecord.venueName + "</td></tr>";
 			var EventDate = "<tr><td class='filledWidth1'><b>Event Date:</b></td><td> "
-				+ GRID_PARAM.formatDate(d) + "</td></tr>";
+				+ datarecord.eventDate + "</td></tr>";
 			var StartTime = "<tr><td class='filledWidth1'><b>Start Time:</b></td><td> "
-				+ d1 + "</td></tr>";
+				+ datarecord.startTime + "</td></tr>";
 			var EndTime = "<tr><td class='filledWidth1'><b>End Time:</b></td><td> "
-				+ d2 + "</td></tr>";
+				+ datarecord.endTime + "</td></tr>";
 
 			$(rightcolumn).append(venueId);
 			$(rightcolumn).append(EventDate);
@@ -269,10 +266,4 @@ function fnRenderLogo(imageUUID, imageGroupId,container ,editable) {
 	else{
 		fnBuildEventUpload(imageContainer);
 	}
-}
-
-
-GRID_PARAM.formatDate = function(dateVal) {
-	var dateObj = new Date(dateVal);
-	return dateObj.toLocaleDateString();
 }
