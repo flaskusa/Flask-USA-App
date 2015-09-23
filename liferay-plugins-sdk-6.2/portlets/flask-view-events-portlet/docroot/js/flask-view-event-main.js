@@ -657,7 +657,7 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 				var objContent = $("<div/>",{'class':'eventDetailBox'});
 				objContent.css('background-image','url("'+slideBackgroundImage+'")');
 				objContent.css('background-repeat','no-repeat');
-				objContent.css('background-size','100%');
+				objContent.css('background-size','100% 100%');
 				var divCount = $('<div/>',{'class':'counterBox'});
 				var h1 = $('<h3/>',{'class':'counter'});
 				h1.html(KeyVal[1]);
