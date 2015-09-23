@@ -160,13 +160,13 @@ public class VenueServiceWrapper implements VenueService,
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.addVenueDetail(venueId, infoTypeId,
 			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
-			zipCode, city, stateId, countryId, lattitude, longitude, phone,
+			zipCode, city, stateId, countryId, latitude, longitude, phone,
 			website, cost, hoursOfOperation, serviceContext);
 	}
 
@@ -176,13 +176,13 @@ public class VenueServiceWrapper implements VenueService,
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.updateVenueDetail(venueDetailId, infoTypeId,
 			infoTypeCategoryId, infoTitle, infoDesc, addrLine1, addrLine2,
-			zipCode, city, stateId, countryId, lattitude, longitude, phone,
+			zipCode, city, stateId, countryId, latitude, longitude, phone,
 			website, cost, hoursOfOperation, serviceContext);
 	}
 

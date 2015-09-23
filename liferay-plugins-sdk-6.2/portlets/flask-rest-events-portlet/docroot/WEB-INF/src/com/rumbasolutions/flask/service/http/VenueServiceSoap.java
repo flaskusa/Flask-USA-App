@@ -266,7 +266,7 @@ public class VenueServiceSoap {
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -275,7 +275,7 @@ public class VenueServiceSoap {
 			com.rumbasolutions.flask.model.VenueDetail returnValue = VenueServiceUtil.addVenueDetail(venueId,
 					infoTypeId, infoTypeCategoryId, infoTitle, infoDesc,
 					addrLine1, addrLine2, zipCode, city, stateId, countryId,
-					lattitude, longitude, phone, website, cost,
+					latitude, longitude, phone, website, cost,
 					hoursOfOperation, serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueDetailSoap.toSoapModel(returnValue);
@@ -292,7 +292,7 @@ public class VenueServiceSoap {
 		java.lang.String infoTitle, java.lang.String infoDesc,
 		java.lang.String addrLine1, java.lang.String addrLine2,
 		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String lattitude, java.lang.String longitude,
+		long countryId, java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String website,
 		java.lang.Double cost, java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -301,7 +301,7 @@ public class VenueServiceSoap {
 			com.rumbasolutions.flask.model.VenueDetail returnValue = VenueServiceUtil.updateVenueDetail(venueDetailId,
 					infoTypeId, infoTypeCategoryId, infoTitle, infoDesc,
 					addrLine1, addrLine2, zipCode, city, stateId, countryId,
-					lattitude, longitude, phone, website, cost,
+					latitude, longitude, phone, website, cost,
 					hoursOfOperation, serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueDetailSoap.toSoapModel(returnValue);

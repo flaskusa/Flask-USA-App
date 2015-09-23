@@ -287,7 +287,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	@Override
 	public VenueDetail addVenueDetail(long venueId , long infoTypeId, long infoTypeCategoryId, 
 		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
-		String city, long stateId, long countryId, String lattitude, 
+		String city, long stateId, long countryId, String latitude, 
 		String longitude, String phone, String website, 
 		Double cost, String hoursOfOperation,
 		ServiceContext  serviceContext){
@@ -307,7 +307,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setCity(city);
 			venueDetail.setStateId(stateId);
 			venueDetail.setCountryId(countryId);
-			venueDetail.setLatitude(lattitude);
+			venueDetail.setLatitude(latitude);
 			venueDetail.setLongitude(longitude);
 			venueDetail.setPhone(phone);
 			venueDetail.setWebsite(website);
@@ -332,7 +332,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	public VenueDetail updateVenueDetail(long venueDetailId , long infoTypeId, long infoTypeCategoryId, 
 		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, 
-		String lattitude, String longitude, String phone, String website, Double cost, String hoursOfOperation,
+		String latitude, String longitude, String phone, String website, Double cost, String hoursOfOperation,
 		ServiceContext  serviceContext){
 		VenueDetail venueDetail=null;
 		try{
@@ -347,7 +347,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setCity(city);
 			venueDetail.setStateId(stateId);
 			venueDetail.setCountryId(countryId);
-			venueDetail.setLatitude(lattitude);
+			venueDetail.setLatitude(latitude);
 			venueDetail.setLongitude(longitude);
 			venueDetail.setPhone(phone);
 			venueDetail.setWebsite(website);
