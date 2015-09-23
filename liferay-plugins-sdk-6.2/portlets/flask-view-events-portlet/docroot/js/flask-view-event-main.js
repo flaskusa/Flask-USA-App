@@ -185,7 +185,7 @@ function fnGetEventImages(eventId,venueId){
 					{
 						lat_marker.push([objEventDetail.latitude, objEventDetail.infoTypeId]);
 						lng_marker.push(objEventDetail.longitude);
-						addr_name.push(objEventDetail.infoTitle);
+						addr_name.push(objEventDetail.addrLine1);
 					}
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
