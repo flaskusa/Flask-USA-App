@@ -38,7 +38,7 @@
 
 @media (min-width: 376px) and (max-width: 414px){
 	#gmap_canvas {
-	    height: 410px !important;
+	    height: 360px!important;
 	    position: relative;
 	}
 }
@@ -52,4 +52,33 @@
 
 .gm-style img {
     max-width: none !important;
+}
+
+.miniFlaskButton{
+	position: relative;
+	background-image: url("../img/FlaskBW.png");
+  	display: block;
+	height:30px;
+	width:30px;
+	float: right;
+  	background-size: cover;
+  	background-repeat: no-repeat;
+  	background-position: center center;
+}
+
+.miniFlaskButton-checked{
+	background-image: url("../img/FlaskRed.png");
+}
+
+
+.miniGoogleButton{
+	position: relative;
+	background-image: url("../img/google-g-icon.png");
+	display: block;
+	height:30px;
+	width:30px;	
+	float: right;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center; 	
 }

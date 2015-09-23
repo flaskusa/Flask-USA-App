@@ -110,86 +110,6 @@ div#placeholder
 	  height: 800px;
 	  overflow: none;
 }
-
-@media(max-width:320px)
-{
-	#reportrange {
-	    background: #fff;
-	    cursor: pointer;
-   		padding: 10px 2px 0px 4px;
-   	    border: 1px solid #ccc;
-	    font-size: 14px !important;
-	}	    
-	div#placeholder 
-	{
-		height: 400px;
-	}
-	
-	.owl-theme .owl-controls .owl-page span {
-	    width: 9px !important;
-	    height: 9px !important;
-	    margin: 2px 2px !important;
-	}	
-}
-
-@media(min-width:414px)
-{
-	div#placeholder 
-	{
-		height: 550px;
-	}
-	
-	.owl-theme .owl-controls .owl-page span {
-	    width: 10px !important;
-	    height: 10px !important;
-	    margin: 0px 4px !important;
-	}	
-}
-div#fixedfooter2 
-{
-     position: fixed;
-     bottom: 0px;
-     left: 0px;
-     background-color: white;
-     color: #ff9900;
-     font: normal 16px/1 "Coda", Helvetica, sans-serif;
-     font-size: 14px;
-     width: 100%;
-     letter-spacing: 10px;
-     height: 5%;
- }
-
-@media (max-width:667px) 
-{
-	div#fixedfooter 
-	{
-	   height: 12%;
-	}
-	     
-    div#fixedfooter2 
-    {
-      font-size: 14px;
-	  height: 5%;
-	  letter-spacing: initial;
-	  /* margin-top: 10px; */
-	  padding-top: 10px;
-    }
-	         
-	div#content {
-	  margin-top: 47px !important;
-	  margin-left: -30.5px !important;
-	  padding: 0 0 0 0;
-	  margin-right: -28px !important;
-	}
-	
-	div#wrapper {
-	  padding: 0 0.5em 0!important;
-	  position: relative;
-	}
-	div#section {
-				  width: auto;
-				}
-	     }
         
 div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
   visibility: collapse !important;
@@ -362,31 +282,6 @@ input.btn.btn-info.cssback {
 		max-width: initial;
 	}
 	
-@media (min-width: 374px) and (max-width: 640px){
-	.slick-slide{
-		width: 330px !important;
-	}
-	
-	div#myModal {
-	    margin-top: 50px;
-	    margin-left: 15px;
-	    margin-right: 15px;
-	}	
-}
-
-@media (min-width: 376px) and (max-width: 640px){
-	.slick-slide{
-		width: 364px !important;
-	}
-	
-	div#myModal {
-	    margin-top: 50px;
-	    margin-left: 15px;
-	    margin-right: 15px;
-	}	
-}
-
-
 @media (min-width: 0px) and (max-width: 1280px){
 	div#myModal {
 	    margin-top: 50px;
@@ -807,10 +702,108 @@ input.btn.btn-info.cssback {
 	  border: 1px solid #eee;
 	  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
 	  float: right;
-	  margin: 15px;
+	  margin-right: 15px;
 }
 
 h3.counter {
     line-height: 14px;
     color:#F8931D;
+}
+
+
+@media(max-width:320px)
+{
+	#reportrange {
+	    background: #fff;
+	    cursor: pointer;
+   		padding: 10px 2px 0px 4px !important;
+   	    border: 1px solid #ccc;
+	    font-size: 14px !important;
+	}	    
+	div#placeholder 
+	{
+		height: 400px;
+	}
+	
+	.owl-theme .owl-controls .owl-page span {
+	    width: 9px !important;
+	    height: 9px !important;
+	    margin: 2px 2px !important;
+	}	
+	
+	.counterBox{
+		  width: 20px;
+		  height: 20px;
+		  margin-right: 50px;
+	}	
+	h3.counter {
+	    line-height: 3px;
+	    color: #F8931D;
+	    font-size: 15px;
+	}
+	
+	.eventDetailBox {
+	    height: 150px!important;
+	    font-size: 12px;
+	    min-width: 255px!important;
+	}
+}
+
+@media(min-width:414px)
+{
+	div#placeholder 
+	{
+		height: 550px;
+	}
+	
+	.owl-theme .owl-controls .owl-page span {
+	    width: 10px !important;
+	    height: 10px !important;
+	    margin: 0px 4px !important;
+	}	
+}
+div#fixedfooter2 
+{
+     position: fixed;
+     bottom: 0px;
+     left: 0px;
+     background-color: white;
+     color: #ff9900;
+     font: normal 16px/1 "Coda", Helvetica, sans-serif;
+     font-size: 14px;
+     width: 100%;
+     letter-spacing: 10px;
+     height: 5%;
+ }
+
+@media (max-width:667px) 
+{
+	div#fixedfooter 
+	{
+	   height: 12%;
+	}
+	     
+    div#fixedfooter2 
+    {
+      font-size: 14px;
+	  height: 5%;
+	  letter-spacing: initial;
+	  /* margin-top: 10px; */
+	  padding-top: 10px;
+    }
+	         
+	div#content {
+	  margin-top: 47px !important;
+	  margin-left: -30.5px !important;
+	  padding: 0 0 0 0;
+	  margin-right: -28px !important;
+	}
+	
+	div#wrapper {
+	  padding: 0 0.5em 0!important;
+	  position: relative;
+	}
+	div#section {
+			  width: auto;
+	}
 }
