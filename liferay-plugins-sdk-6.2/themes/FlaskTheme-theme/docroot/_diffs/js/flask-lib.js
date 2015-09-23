@@ -275,7 +275,7 @@ _flaskLib.formatTimeInMillis = function(time) {
 }
 
 _flaskLib.formatDateInMillis = function(date) {
-	return strftime('%D', new Date(parseInt(date)));
+	return strftime('%m/%d/%Y', new Date(parseInt(date)));
 }
 
 
