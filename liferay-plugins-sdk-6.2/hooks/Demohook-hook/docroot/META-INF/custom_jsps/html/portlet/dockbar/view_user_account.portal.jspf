@@ -13,7 +13,14 @@
  * details.
  */
 --%>
+<style>
+<!--
+span.nav-item-label {
+    padding-left: 3px;
+}
 
+-->
+</style>
 <liferay-util:buffer var="userName">
 	<c:if test="<%= themeDisplay.isImpersonated() %>">
 		<b class="alert-icon icon-warning-sign"></b>
@@ -36,11 +43,11 @@
 				String manageAds = themeDisplay.getURLPortal() + "/web/flask/manageads";
 				%>
 				<c:if test="<%= bShowFlaskAdminMenu %>">
-					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-user" label="Manage Admin" title="Manage Flask Admin"  />
-					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-user" label="Manage Users" title="Manage Flask Users"  />
-					<aui:nav-item href="<%= manageEventUrl %>" iconCssClass="icon-user" label="Manage Events" title="Manage Events"  />
-					<aui:nav-item href="<%= manageVenueUrl %>" iconCssClass="icon-user" label="Manage Venue" title="Manage Venue"  />
-					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-user" label="Manage Ads" title="Manage Advertisements"/>
+					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-gears" label="Manage Admin" title="Manage Flask Admin"  />
+					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-user" label="&nbsp;Manage Users" title="Manage Flask Users"  />
+					<aui:nav-item href="<%= manageEventUrl %>" iconCssClass="icon-star-empty" label="Manage Events" title="Manage Events"  />
+					<aui:nav-item href="<%= manageVenueUrl %>" iconCssClass="icon-map-marker" label="&nbsp;Manage Venue" title="Manage Venue"  />
+					<aui:nav-item href="<%= manageAds %>" iconCssClass="icon-money" label="Manage Ads" title="Manage Advertisements"/>
 				</c:if>
 
 		</aui:nav-item>
@@ -96,12 +103,12 @@
 				String friends = themeDisplay.getURLPortal() + "/web/flask/friends";
 				String inviteFriends = themeDisplay.getURLPortal() + "/web/flask/invite-friends";
 				%>
-					<aui:nav-item href="<%= userEvents %>" iconCssClass="icon-user" label="My Events" title="My Events"/>
-					<aui:nav-item href="<%= userTailgates %>" iconCssClass="icon-user" label="My Tailgate" title="My Tailgate"/>
-					<aui:nav-item href="<%= userGroups %>" iconCssClass="icon-user" label="My Groups" title="My Groups"/>
+					<aui:nav-item href="<%= userEvents %>" iconCssClass="icon-star" label="My Events" title="My Events"/>
+					<aui:nav-item href="<%= userTailgates %>" iconCssClass="icon-glass" label="My Tailgate" title="My Tailgate"/>
+					<aui:nav-item href="<%= userGroups %>" iconCssClass="icon-group" label="My Groups" title="My Groups"/>
 					<aui:nav-item href="<%= friends %>" iconCssClass="icon-user" label="My Friends" title="My Friends"/>
-					<aui:nav-item href="<%= inviteFriends %>" iconCssClass="icon-user" label="Invite Friends" title="Invite Friends"/>
-					<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-user" label="my-account" title="my-account"  />
+					<aui:nav-item href="<%= inviteFriends %>" iconCssClass="icon-external-link-sign" label="Invite Friends" title="Invite Friends"/>
+					<aui:nav-item href="<%= myAccountURL %>" iconCssClass="icon-gear" label="my-account" title="my-account"  />
 			</c:if>
 
 			<c:if test="<%= themeDisplay.isShowSignOutIcon() %>">
