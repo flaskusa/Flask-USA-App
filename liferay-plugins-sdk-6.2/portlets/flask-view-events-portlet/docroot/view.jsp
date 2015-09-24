@@ -79,11 +79,11 @@
  			<td class='SliderCell'><div id="wowslider-container1" class="Carousel"></div></td>
 		</tr>
  		<tr class='SliderRow'>
- 			<td class="SliderCaption"><div class='CaptionImageDiv' style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div></td>
+ 			<td class="SliderCaption"><div class='CaptionImageDiv' style="background-image: url(<%=request.getContextPath()%>/img/at.png);"></div></td>
  			<td class='SliderCell'><div id="wowslider-container2" class="Carousel"></div></td>
 		</tr>
  		<tr class='SliderRow'>
- 			<td class="SliderCaption"><div class='CaptionImageDiv' style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div></td>
+ 			<td class="SliderCaption"><div class='CaptionImageDiv' style="background-image: url(<%=request.getContextPath()%>/img/Post.png);"></div></td>
  			<td class='SliderCell'><div id="wowslider-container3" class="Carousel"></div></td>
 		</tr>
  	</table>
