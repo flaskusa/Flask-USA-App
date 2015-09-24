@@ -873,11 +873,3 @@ span.nav-item-label {
     background-repeat: repeat-x !important;
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#FF0EBDF1',endColorstr='#FF0CAAD9',GradientType=0) !important;
 }
-
-.aui a {
-    color: #FB9834 !important;
-}
-
-.aui a:hover, .aui a:focus {
-    color: #FB9834;
-}
