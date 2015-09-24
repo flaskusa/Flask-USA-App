@@ -319,7 +319,7 @@ function validate() {
 			            		   currentDate.setHours(0,0,0,0);//remove time part
 			            		   var twoYear = currentDate.setFullYear(currentDate.getFullYear() +2);
 			            		   if( inputDate < currentDate || inputDate > twoYear){
-			            			   return false;
+			            			   return true;
 			            		   }
 			            		   return true;
 							}
