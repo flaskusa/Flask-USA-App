@@ -664,8 +664,13 @@ div#fixedfooter2
     
 	.control-label-color, .control-label-nocolor {
 	    height: 15px !important;
-	    font-size: 10px !important;
+		font-size: 12px!important;
 	}    
+	
+	table.tblRow {
+    	padding: 3px !important;
+		border-collapse: separate !important;
+	}	
 }
 
 
@@ -707,4 +712,15 @@ div#fixedfooter2
 	.InfoContentTypeImageBox {
     	height: 250px !important;
     }
+    
+	.control-label-color, .control-label-nocolor {
+	    height: 15px !important;
+		font-size: 14px!important;
+	}    
+	
+	table.tblRow {
+    	padding: 5px !important;
+		border-collapse: separate !important;
+	}	
+    
 }
