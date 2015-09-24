@@ -135,10 +135,6 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
 	}
 }
 /* For Slider Resize issue Ends*/
-input.btn.btn-info.cssback {
-  max-width: 100% !important;
-}
-
 .eventLogo {
   display: block;
   width: 62px;
@@ -231,338 +227,33 @@ input.btn.btn-info.cssback {
 		height: 25px !important;
 	}
 
-	.eventDetailBox {
-	  -webkit-box-sizing: content-box;
-	  -moz-box-sizing: content-box;
-	  box-sizing: content-box;
-	  /*padding: 5px 5px 5px 14px;*/
-	  padding: 15px 0px 0px 25px !important;
-	  overflow: hidden;
-	  border: none;
-	  font: normal 14px/1 "Coda", Helvetica, sans-serif;
-	  text-align: center;
-	  -o-text-overflow: ellipsis;
-	  text-overflow: ellipsis;  
-	  text-align: center;
-	  -o-text-overflow: ellipsis;
-	  text-overflow: ellipsis;
-	  background-image: url("../img/Flask_Default_Image.jpg");
-      background-size: cover;
-	}
+.eventDetailBox {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  overflow: hidden;
+  border: none;
+  text-align: center;
+  min-height: 198px;
+}
 
-	.eventDetailBox table {
-		width: 100% !important;
-		color: #000;
-	}
-	
-	.eventDetailBoxWithImages {
-	  -webkit-box-sizing: content-box;
-	  -moz-box-sizing: content-box;
-	  box-sizing: content-box;
-	  /*padding: 5px;*/
-	  overflow: hidden;
-	  border: none;
-      font: normal 14px/1 "Coda", Helvetica, sans-serif;
-       /* color: #ff9900; */
-	}
+.eventDetailBoxWithImages {
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box;
+  /*padding: 5px;*/
+  overflow: hidden;
+  border: none;
+     font: normal 14px/1 "Coda", Helvetica, sans-serif;
+      /* color: #ff9900; */
+}
 
-	.Carousel{
-		-webkit-background-origin: padding-box;
-		background-origin: padding-box;
-		-webkit-background-clip: border-box;
-		background-clip: border-box;
-		-webkit-background-size: auto auto;
-		background-size: auto auto;
-	}
-	
-	.fullwidth {
-		width: 100%;
-		margin-left: auto;
-		margin-right: auto;
-		max-width: initial;
-	}
-	
-@media (min-width: 0px) and (max-width: 1280px){
-	div#myModal {
-	    margin-top: 50px;
-	    margin-left: 15px;
-	    margin-right: 15px;
-	}
-		
-	.slick-dots li button:before {
-    	/* font-family: 'slick'; */
-    	font-size: 30px !important;
-    }	
-	.slick-dots {
-		margin: auto !important;
-		bottom: 20px !important;
-	}	
-	
-	.slick-slide{
-		width: 364px;
-	}
-	
-	.slideImage{
-		width: 200px;
-		height: 150px;
-	    background-repeat: no-repeat;
-	    background-size: cover !important;		
-	}
-	
-	.col2{
-		  max-width:100% !important;
-		  max-height:180px !important;
-		  height: 100% !important; 
-		  width:90% !important;
-		  padding-left:0px !important;
-	}
-	
-	.eventDetailBoxWithImages{
-		/*width: 93% !important;*/
-		margin-left:0px;
-		margin-right:0px;
-	    font: normal 12px/1 "Coda", Helvetica, sans-serif;
-	    /* color: #ff9900; */
-	    height: 200px !important;
-	}
-	
-	.Carousel{
-		width: 100% !important;
-		margin-left:0px;
-		margin-right:0px;
-	}	
-	
-	.SliderCaption {
-		max-width: 30px !important;
-		max-height: 200px !important;
-		background-size: contain;
-		background-position: center;
-		height: 200px !important;
-		width: 25px !important;
-		border-bottom: 1px solid white;
-	}		
-	
-	.eventDetailBox{
-		/*width:93% !important;*/
-		height: 188px !important;
-		font-size:12px;
-		min-width: 300px !important;
-	}
-	
-	.slider .slide {height: 100%!important;}
-	.slick-slide {
-		padding:5px !important; 
-	}		
-	
-	.aui [class*="span"], .aui .uneditable-input[class*="span"], .aui .row-fluid [class*="span"]{
-		float: left !important;
-	}	
-	
-	.slick-prev {
-		display:none !important;
-	}
-	
-	.slick-next {
-		display:none !important;
-	}
-	
-	.control-label-color {
-    	font-size: 13px !important;
-    	/* height: 25px; */
-    	color: #FB9A33;
-    	margin-left: 6px;
-	}	
-
-	.control-label-nocolor {
-    	font-size: 12px !important;
-    	height: 25px;
-    	margin-left: 6px;
-	}
-	
-	.eventLogo {
-    	width: 50px !important;
-    	height: 50px !important;
-    }	
-
-	.owl-theme .owl-controls .owl-buttons div {
-	    position: absolute;
-    	margin: 9px !important;
-    	padding: 10px 5px !important;;
-	}
-	
-	.owl-theme .owl-controls .owl-buttons .owl-prev{
-	  left: 0px !important;
-	  top: 70px !important; 
-	}
-	 
-	.owl-theme .owl-controls .owl-buttons .owl-next{
-	  right: 0px !important;
-	  top: 70px !important;
-	}		
-	
-	.owl-pagination {
- 	   margin-top: -35px !important;
-	}
-	
-	.photo{
-	    height: 198px !important;
-	    margin: 1px;
-	}
-}		
-
-@media (min-width: 1281px) and (max-width: 3000px){
-	.slick-dots li button:before {
-    	/* font-family: 'slick'; */
-    	font-size: 30px !important;
-    }	
-	.slick-dots {
-		margin: auto !important;
-		bottom: 20px !important;
-	}	
-		
-	div#location {
-	    padding-top: 40px !important;
-	}
-	div.weather-container {
-	    padding-bottom: 40px !important;
-	}
-	
-	.SliderCaption
-	{
-	  max-width:36px !important;
-	  max-height:300px !important;
-	  background-size: contain;
-	  height: 250px; 
-	  width: 36px !important;
-	  border: 1px solid black;	
-	  background-position: center;
-	}
-		
-	.slick-prev {
-		margin-left: 40px;
-	}
-	
-	.slick-next {
-		margin-right: 40px;
-	}
-	
-	.slider {margin: 0;}
-	.slider .slide {width: 500px; height: 100%;}
-	.slick-slide {
-		padding:15px !important; 
-	}
-	
-	.photo{
-		width:500px !important;
-	} 
-		
-	.slick-dots {
-    	bottom: 9px !important;
-	}	
-	
-	.slick-dots li button {
-        font-size: 2em !important;
-    }	
-	.slick-dots li button:before {
-	    font-size: 2em !important;
-	}    
-	 .slick-prev, .slick-next {
-	    width:60px;
-	    height:34px;
-	    background-color:#999 !important;
-	    padding:10px;
-	}
-	.slick-prev:before, .slick-next:before {
-	    content:"";
-	}	
-	
-	.slideImage{
-	    width: 300px;
-	    height: 270px;
-    	background-repeat: no-repeat !important;	
-		background-size: contain !important;    
-	}
-	
-	.col2{
-	  max-width:100% !important;
-	  max-height:275px !important;
-	  height: 100% !important; 
-	  width:90% !important;
-	  padding-left:0px !important;
-	  background-size:inherit; 	
-	}
-	
-	.eventDetailBoxWithImages{
-		width:100% !important;
-		margin-left:0px;
-		margin-right:0px;
-	}
-	
-	.Carousel{
-		width:100% !important;
-		max-height: 274px !important;
-	}	
-	
-	.slick-slide {
-		padding: 5px !important;
-	}		
-	
-	.SliderCaption {
-		max-width: 36px !important;
-		max-height: 275px !important;
-		background-size: contain;
-		height: 274px !important;
-		width: 35px;
-		border: 1px solid black;
-		background-repeat: no-repeat;
-	    background-position: center;
-	    background-color: #231F20;		
-	}		
-	
-	.eventDetailBox{
-		width:96% !important;
-		height:250px !important;
-		font-size:12px;
-	}
-	
-	.slider .slide {width: 100% !important; height: 100%!important;}
-	.slick-slide {
-		padding:5px !important; 
-	}		
-	
-	.aui [class*="span"], .aui .uneditable-input[class*="span"], .aui .row-fluid [class*="span"]{
-		float: left !important;
-		border-color: white !important;
-	}		
-	
-	.SliderCaption{
-	    min-height: 350px !important;
-	}
-	
-	.owl-theme .owl-controls .owl-buttons div {
-	    position: absolute;
-    	margin: 9px !important;
-    	padding: 13px 8px !important;;
-	}
-	
-	.owl-theme .owl-controls .owl-buttons div {
-	  position: absolute;
-	}
-	 
-	.owl-theme .owl-controls .owl-buttons .owl-prev{
-	  left: -45px;
-	  top: 115px; 
-	}
-	 
-	.owl-theme .owl-controls .owl-buttons .owl-next{
-	  right: -45px;
-	  top: 115px;
-	}	
-	
-	.photo{
-		height: 265px!important;
-	}
-}	
+.fullwidth {
+	width: 100%;
+	margin-left: auto;
+	margin-right: auto;
+	max-width: initial;
+}
 
 .jqx-tabs-headerWrapper {
 	background-image: -webkit-linear-gradient(-90deg, rgba(100,100,100,1) 0, rgba(0,0,0,1) 100%) !important;
@@ -703,6 +394,7 @@ input.btn.btn-info.cssback {
 	  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
 	  float: right;
 	  margin-right: 15px;
+	  margin-top: 15px;
 }
 
 h3.counter {
@@ -793,10 +485,9 @@ div#fixedfooter2
     }
 	         
 	div#content {
-	  margin-top: 47px !important;
-	  margin-left: -30.5px !important;
-	  padding: 0 0 0 0;
-	  margin-right: -28px !important;
+	  margin-left: -27px !important;
+	  margin-right: -27px !important;
+	  padding: 0px;
 	}
 	
 	div#wrapper {
@@ -806,4 +497,214 @@ div#fixedfooter2
 	div#section {
 			  width: auto;
 	}
+}
+
+.SliderTable{
+	width:100% !important;
+}
+
+.SliderCell{
+	vertical-align: top;	
+    max-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;	
+	width: 99%;
+}
+
+.SliderCaption{
+	vertical-align: top;
+	min-width: 25px;
+}
+
+.SliderRow{
+	min-height:173px;
+	height:100% !important;
+	max-height: 250px;
+}
+
+.CaptionImageDiv{
+    background-size: 100% 100%;
+    min-height: 198px;	
+}
+
+.owl-theme .owl-controls .owl-buttons div {
+    position: absolute;
+   	margin: 9px !important;
+   	padding: 10px 5px !important;;
+}
+
+.owl-theme .owl-controls .owl-buttons .owl-prev{
+  left: 0px !important;
+  top: 70px !important; 
+}
+ 
+.owl-theme .owl-controls .owl-buttons .owl-next{
+  right: 0px !important;
+  top: 70px !important;
+}
+
+.owl-theme .owl-controls {
+    margin-top: -24px !important;
+}
+
+.owl-theme .owl-controls .owl-page {
+    zoom: 0.8 !important;
+}
+
+.owl-theme .owl-controls .owl-page.active span, .owl-theme .owl-controls.clickable .owl-page:hover span {
+    filter: Alpha(Opacity=90) !important;
+    opacity: 0.9 !important;
+}
+
+.InfoContentTypeDetailBox {
+	height: 188px !important;
+	font-size:12px;
+	min-width: 300px !important;	
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	padding: 15px 0px 0px 25px !important;
+	overflow: hidden;
+	border: none;
+	font: normal 14px/1 "Coda", Helvetica, sans-serif;
+	text-align: center;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;  
+	text-align: center;
+	-o-text-overflow: ellipsis;
+	text-overflow: ellipsis;
+	background-image: url("../img/Flask_Default_Image.jpg");
+	background-size: cover;
+}
+
+.InfoContentTypeDetailBox table {
+	width: 100% !important;
+	color: #000;
+}
+
+.InfoContentTypeImageBox {
+	height: 188px !important;
+	min-width: 300px !important;	
+	-webkit-box-sizing: content-box;
+	-moz-box-sizing: content-box;
+	box-sizing: content-box;
+	overflow: hidden;
+	border: none;
+}
+
+.slideImage{
+	width: 200px;
+	height: 150px;
+    background-repeat: no-repeat;
+    background-size: cover !important;		
+}
+
+.daytime {
+    background-size: 100% 100% !important;
+}
+
+@media screen and (min-width: 320px) {
+	.CaptionImageDiv {
+	    background-size: 100% 100%;
+	    min-height: 184px;
+	}
+	.eventDetailBox {
+	    min-height: 184px;
+	}	
+	
+	.weather, .front-page-description {
+    	font-size: 9px !important;
+    	height: 185px !important;
+	}
+	
+	.daytime {
+	    background-size: 100% 100%;
+	}
+	
+	.temperature:after {
+    	font-size: 14px !important;
+    }
+    
+    .small_val {
+    	font-size: 9px !important;
+	}
+    
+	.control-label-color, .control-label-nocolor {
+	    height: 15px !important;
+	    font-size: 10px !important;
+	}    
+}
+
+@media screen and (min-width: 414px) {
+	.CaptionImageDiv {
+	    background-size: 100% 100%;
+	    min-height: 210px;
+	}
+	.eventDetailBox {
+	    min-height: 210px;
+	}	
+	
+	.weather, .front-page-description {
+    	font-size: 9px !important;
+    	height: 210px !important;
+	}
+	
+	.daytime {
+	    background-size: 100% 100%;
+	}
+	
+	.temperature:after {
+    	font-size: 14px !important;
+    }
+    
+    .small_val {
+    	font-size: 9px !important;
+	}
+    
+	.control-label-color, .control-label-nocolor {
+	    height: 15px !important;
+	    font-size: 10px !important;
+	}    
+}
+
+
+@media screen and (min-width: 1216px) {
+	body{
+		background-color: aqua;
+	}
+	.CaptionImageDiv {
+	    background-size: 100% 100%;
+		min-height: 250px !important;
+	}
+	.eventDetailBox {
+	    min-height: 250px !important;
+	}	
+	
+	.weather, .front-page-description {
+    	font-size: 9px !important;
+    	height: 250px !important;
+	}
+	
+	.daytime {
+	    background-size: 100% 100%;
+	}
+	
+	.temperature:after {
+    	font-size: 14px !important;
+    }
+    
+    .small_val {
+    	font-size: 9px !important;
+	}
+    
+	.control-label-color, .control-label-nocolor {
+	    height: 15px !important;
+	    font-size: 14px !important;
+	    padding: 4px;
+	}
+	
+	.InfoContentTypeImageBox {
+    	height: 250px !important;
+    }
 }

@@ -73,30 +73,20 @@
  </div>
     
  <div id="two" style="display:none; width:100%;">
-	<div class="container-fluid">
-		<div class="row-fluid fullwidth">
-		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div>
-		  <div id="col2" class="span10 col2">
-				<div id="wowslider-container1" class="Carousel"></div>
-		  </div>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<div class="row-fluid fullwidth">
-		  <div id="col1" class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/at.png);"></div>
-		  <div id="col2" class="span10 col2">
-				<div id="wowslider-container2" class="Carousel"></div>
-		  </div>
-		</div>
-	</div>
-	<div class="container-fluid">
-		<div class="row-fluid fullwidth">
-		  <div class="span2 SliderCaption" style="background-image: url(<%=request.getContextPath()%>/img/Post.png);"></div>
-		  <div class="span10 col2">
-				<div id="wowslider-container3" class="Carousel"></div>
-		  </div>
-		</div>
-	</div>
+ 	<table class='SliderTable' width='100%'>
+ 		<tr class='SliderRow'>
+ 			<td class="SliderCaption"><div class='CaptionImageDiv' style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div></td>
+ 			<td class='SliderCell'><div id="wowslider-container1" class="Carousel"></div></td>
+		</tr>
+ 		<tr class='SliderRow'>
+ 			<td class="SliderCaption"><div class='CaptionImageDiv' style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div></td>
+ 			<td class='SliderCell'><div id="wowslider-container2" class="Carousel"></div></td>
+		</tr>
+ 		<tr class='SliderRow'>
+ 			<td class="SliderCaption"><div class='CaptionImageDiv' style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div></td>
+ 			<td class='SliderCell'><div id="wowslider-container3" class="Carousel"></div></td>
+		</tr>
+ 	</table>
 	<input class="btn btn-info cssback" type="button" value="Back"/>
 </div>	
 

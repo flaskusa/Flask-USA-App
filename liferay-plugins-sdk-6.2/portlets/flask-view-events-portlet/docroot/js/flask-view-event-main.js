@@ -206,7 +206,9 @@ function fnGetEventImages(eventId,venueId){
 
 			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
 		    $(objWeatherDiv).html($("#weather-background"));
-		    arrPreEvent.splice(1,0,objWeatherDiv);
+		    var objContent = $("<div/>",{'class':'InfoContentTypeImageBox'});
+		    objContent.append(objWeatherDiv);
+		    arrPreEvent.splice(1,0,objContent);
 		    
 			fnSlider(_eventModel.INFO_TYPE.PreEvent, arrPreEvent,eventId,venueId,arrPreEventDetails);
 			fnSlider(_eventModel.INFO_TYPE.DuringEvent, arrDurEvent,eventId,venueId,arrDurEventDetails);
@@ -281,7 +283,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	}
 	else{
 		$.each(objFields, function(idx, obj){
-			var objContent = $("<div/>",{'class':'eventDetailBox'});
+			var objContent = $("<div/>",{'class':'InfoContentTypeDetailBox'});
 			var objtbl = $("<table/>",{'cellpadding':'5px'});
 			var objtrHead = $("<tr/>");
 			var objth = $("<th/>",{'colspan':'2'});
@@ -313,11 +315,9 @@ function fnSlider(infoType,arrImage,eventId,venueId,objDetails){
 
 function fnBlankSlide(Slider){
   	var temp_html = '<font color="white"><h4>NO DATA FOUND</h4></font>';
-	var objBlankSlide1 = $("<div/>",{'class':'photo'});
-	var objBlankSlide = $("<div/>",{'class':'eventDetailBox', 'style':'padding-top: 25% !important;'});
-	$(objBlankSlide).appendTo(objBlankSlide1);
+	var objBlankSlide = $("<div/>",{'class':'InfoContentTypeDetailBox'});
 	$(objBlankSlide).html(temp_html);
-	$(objBlankSlide1).appendTo(Slider);
+	$(objBlankSlide).appendTo(Slider);
 }
 
 $(document).ready(function(){
@@ -578,14 +578,21 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 		items:3,
 		navigation:true,
 		navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
-		pagination:true
+		pagination:true,
+	    items : 5,
+	    itemsCustom : false,
+	    itemsDesktop : [1199,4],
+	    itemsDesktopSmall : [980,3],
+	    itemsTablet: [768,2],
+	    itemsTabletSmall: false,
+	    itemsMobile : [479,1],
+	    singleItem : false,
+	    itemsScaleUp : false,		
 	});
 	
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
-			var objDiv = $("<div/>",{'class':'photo'});
 			var objImg = value;
-			$(objImg).appendTo(objDiv);
 			$(objImg).click(function(event){
 		    	$("#spinningSquaresG").show();
 		 		$('#one').hide();		 
@@ -598,7 +605,7 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 		 		window.location.hash = '#Details';
 		 		$("#spinningSquaresG").hide();
 			});
-			$(containerID).data('owlCarousel').addItem(objDiv);
+			$(containerID).data('owlCarousel').addItem(objImg);
 		});
 	}
 	else{
@@ -613,12 +620,21 @@ function fnCreateSlider1(containerID,arrImage){
 		items:3,
 		navigation:true,
 		navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
-		pagination:true
+		pagination:true,
+	    items : 5,
+	    itemsCustom : false,
+	    itemsDesktop : [1199,4],
+	    itemsDesktopSmall : [980,3],
+	    itemsTablet: [768,2],
+	    itemsTabletSmall: false,
+	    itemsMobile : [479,1],
+	    singleItem : false,
+	    itemsScaleUp : false,		
 	});
 	
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
-			var objDiv = $("<div/>",{'class':'photo'});
+			var objDiv = $("<div/>",{'class':'InfoContentTypeImageBox'});
 			var objImg = value;
 			$(objImg).appendTo(objDiv);
 			$(containerID).data('owlCarousel').addItem(objDiv);
