@@ -351,7 +351,8 @@ div#adminDataTable {
 		width: 100%;
 	}
 	.portlet-content {
-		padding: 5px 3px 10px;
+		/*padding: 5px 3px 10px;*/
+		padding: 0px 0px 0px;
 	}
 }
 
@@ -856,4 +857,3 @@ span.nav-item-label {
 	padding: 10px;
 }
 /* Login Screen Ends*/
-
