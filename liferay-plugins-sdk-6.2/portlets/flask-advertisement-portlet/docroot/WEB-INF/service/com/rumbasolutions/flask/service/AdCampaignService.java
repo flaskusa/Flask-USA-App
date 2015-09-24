@@ -115,6 +115,7 @@ public interface AdCampaignService extends BaseService, InvokableService {
 	public void deleteCampaignImage(long campaignImageId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONObject getCampaignWithImages(
 		long campaignId,

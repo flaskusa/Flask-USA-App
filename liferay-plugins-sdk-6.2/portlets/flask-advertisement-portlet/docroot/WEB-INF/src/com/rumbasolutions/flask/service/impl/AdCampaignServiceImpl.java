@@ -93,6 +93,11 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 				campJSONObj.put("eventTypeId", tempArray.getString(8));
 				campJSONObj.put("frequencyPerHour", tempArray.getString(9));
 				campJSONObj.put("adDisplayTime", tempArray.getString(10));
+				campJSONObj.put("imageTitle", tempArray.getString(11));
+				campJSONObj.put("imageDesc", tempArray.getString(12));
+				campJSONObj.put("imageUUID", tempArray.getString(13));
+				campJSONObj.put("imageGroupId", tempArray.getString(14));
+				
 				campaignJsonArray.put(campJSONObj);
 			}
 		} catch(Exception e) {

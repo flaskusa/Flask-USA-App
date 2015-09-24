@@ -33,7 +33,8 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 						" displayDuringEvent, displayPostEvent, eventTypeId, frequencyPerHour, " +
 						"CONCAT_WS(', ', IF(displayGeneral=1, 'General',null) , IF(displayPreEvent=1, 'Pre-Event',null) ," + 
 						"IF(displayDuringEvent = 1, 'During-Event',null) , IF(displayPostEvent = 1, 'Post-Event', null)) " +
-						" as 'adDisplayTime'";
+						" as 'adDisplayTime', flaskads_adcampaign.imageTitle, flaskads_adcampaign.imageDesc, "
+						+ "flaskads_adcampaign.imageUUID, flaskads_adcampaign.imageGroupId";
 			String sqlFrom = "  from flaskads_adcampaign inner join flaskads_adcustomer " + 
 							" on flaskads_adcustomer.customerId = flaskads_adcampaign.customerId ";
 			
@@ -53,6 +54,12 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 			queryObj.addScalar("eventTypeId", Type.LONG);
 			queryObj.addScalar("frequencyPerHour", Type.LONG);
 			queryObj.addScalar("adDisplayTime", Type.STRING);
+			
+			queryObj.addScalar("imageTitle", Type.STRING);
+			queryObj.addScalar("imageDesc", Type.STRING);
+			queryObj.addScalar("imageUUID", Type.STRING);
+			queryObj.addScalar("imageGroupId", Type.LONG);
+
 
 			queryObj.setCacheable(true);
 			QueryPos qPosition = QueryPos.getInstance(queryObj);
