@@ -189,7 +189,9 @@ _flaskMap.createMarkers = function (results, status) {
                 infowindow.open(_flaskMap.map,venue_mark);
         	}
         })(venue_mark));
+    	console.log("venueMark called");
         _flaskMap.infos.push(infowindow);
+        _flaskMap.myMarkers();
         for (var i = 0; i < results.length; i++) {
         	var mark;
         	var icon_url;
@@ -222,10 +224,10 @@ _flaskMap.createMarkers = function (results, status) {
 //        alert('Sorry, nothing is found');
     }
 }
-_flaskMap.createMarker = function (obj) {
+
+_flaskMap.myMarkers = function(){
 	$.each(eventDetailJSON, function(i, obj) {
 		var obj=$.parseJSON(eventDetailJSON[i].Detail);
-		console.log("place:"+_flaskMap.placeType);
 		if(_flaskMap.placeType == 'bar &amp; restaurants'){
 			_flaskMap.placeType = "Bar & Restaurants";
 		}
@@ -242,7 +244,8 @@ _flaskMap.createMarker = function (obj) {
 		if(obj.latitude!= "" && _flaskMap.placeType == obj.infoTypeCategoryName){
 			var mark;
 			//var icon_url = '';
-			
+			if(obj.infoTitle == 'Pickles Pub');
+				console.log("name: "+obj.infoTitle);
 			var myLatlng = new google.maps.LatLng(obj.latitude, obj.longitude);
 			
 				if(obj.infoTypeCategoryName=="Bar & Restaurants"){
@@ -254,8 +257,7 @@ _flaskMap.createMarker = function (obj) {
 	    		if(obj.infoTypeCategoryName=="night_club"){
 	    			icon_url = '/flask-view-events-portlet/img/flask-marker.png';
 	    		}
-	    		
-			
+
 				mark = new google.maps.Marker({
 			        position: myLatlng,
 			        map: _flaskMap.map,
@@ -270,19 +272,18 @@ _flaskMap.createMarker = function (obj) {
 		            google.maps.event.addListener(mark, 'click', (function(mark, i) {
 		            	return function() {
 		            		_flaskMap.clearInfos();
-			                var content= '<div style="display: inline-flex;"><font style="color:#000; "><b>' + obj.infoTitle + 
+			                var content= '<div style="display: inline-flex;"><img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:12%; height:12%;"/><font style="color:#000; "><b>' + obj.infoTitle + 
 			                '</b><br /><br />' + obj.addrLine1 + '</font></div>';
 			                infowindow.setContent(content);
 			                infowindow.open(_flaskMap.map, mark);
 		            	}
 		            })(mark, i));
-		            _flaskMap.infos.push(infowindow);
-
-
-			
+		            _flaskMap.infos.push(infowindow);	
 		}
 	});
-	
+}
+
+_flaskMap.createMarker = function (obj) {
 	var isSubscribed = false;
 	var coords = new google.maps.LatLng(
 			obj['geometry']['location'].lat(),
