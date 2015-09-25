@@ -78,10 +78,17 @@ _adCampaignModel.DATA_MODEL = {
 			name : 'adDisplayTime',   /* display only*/
 			type : 'string',
 			fieldName : 'adDisplayTime'
-		}
-		
-		
-		]
+		},
+		{
+			name : 'imageUUID',   /* display only*/
+			type : 'string',
+			fieldName : 'imageUUID'
+		},
+		{
+			name : 'imageGroupId',   /* display only*/
+			type : 'string',
+			fieldName : 'imageGroupId'
+		}]
 	};
 
 _adCampaignModel.MESSAGES = {

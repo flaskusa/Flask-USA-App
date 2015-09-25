@@ -4,6 +4,7 @@ var dropZoneImages;
 var dropZoneFullScreenImage;
 var infoTypeJson;
 var allEvents = [];
+var iSelected=false;
 
 function adCampaignClickHandlers() {
 	adCampaignForm = $("#addCampaignForm");
@@ -30,7 +31,6 @@ function adCampaignClickHandlers() {
 			});
 
 	/* Click handler for cancel button */
-
 	$("#cancelCampaign").click(function() {
 		$("#adCampaignDataTable").show();
 		setCampaignFormVisible(false);
@@ -72,12 +72,10 @@ function setCampaignFormVisible(visible){
 	}else{
 		$("#adCampaignFormContainer").hide();
 		$("#campaignDetailGallery").empty();
-		
-		adCampaignForm.hide;
+		adCampaignForm.hide();
 	}
-	
-	
 }
+
 function loadEvents(){
 	var flaskRequest = new Request();
 	var params = {};
@@ -179,6 +177,9 @@ function deleteMultipleCampaigns(CampaignList) {
 }
 
 function editCampaign(rowData) {
+	$("#campaignFullScreenGallery").html('');
+	fnAdFullScreenImage(rowData.imageUUID, rowData.imageGroupId, $("#campaignFullScreenGallery"), true);
+	
 	_flaskLib.loadDataToForm("adCampaignForm",
 			_adCampaignModel.DATA_MODEL.CAMPAIGN, rowData, function(formId,
 					model, data) {
@@ -203,7 +204,7 @@ function editCampaign(rowData) {
 				}, function(data) {
 					_flaskLib.showErrorMessage('campaign-action-msg',
 							_adCampaignModel.MESSAGES.DEL_ERR);
-				});
+	});
 	setCampaignFormVisible(true);
 }
 
@@ -240,7 +241,7 @@ function saveCampaign() {
 		_flaskLib.showSuccessMessage('campaign-action-msg',
 				_adCampaignModel.MESSAGES.SAVE);
 		
-		if($(".dz-image").length > 0) {					
+		if($('#campainImagesUpload').find('.dz-image').length > 0) {					
 			$("#_campaignId").val(data.campaignId);
 			$("#_campaignFullScreenId").val(data.campaignId);
 			dropZoneImages.options.autoProcessQueue = true;
@@ -250,17 +251,26 @@ function saveCampaign() {
 				dropZoneFullScreenImage.processQueue();
 			});			
 			dropZoneFullScreenImage.on("queuecomplete", function (file) {
-				
 				loadCampaignData();
 				$("#adCampaignDataTable").show();
 				setCampaignFormVisible(false);
 			});
-			
 		}
 		else{
-			loadCampaignData();
-			$("#adCampaignDataTable").show();
-			setCampaignFormVisible(false);
+			if($('#campainFullScreenImagesUpload').find('.dz-image').length>0){
+				dropZoneFullScreenImage.options.autoProcessQueue = true;
+				dropZoneFullScreenImage.processQueue();
+				dropZoneFullScreenImage.on("queuecomplete", function (file) {
+					loadCampaignData();
+					$("#adCampaignDataTable").show();
+					setCampaignFormVisible(false);
+				});
+			}
+			else{
+				loadCampaignData();
+				$("#adCampaignDataTable").show();
+				setCampaignFormVisible(false);
+			}
 		}			
 	}, function(data) {
 		_flaskLib.showErrorMessage('campaign-action-msg',
@@ -354,7 +364,8 @@ function buildFullScreenImageUpload(imageContainer){
     dropZoneFullScreenImage = new Dropzone($(objForm).get(0),{
     	autoProcessQueue: false,
     	uploadMultiple: false,
-    	addRemoveLinks : true
+    	addRemoveLinks : true,
+		maxFiles: 1
     });
 }
 
@@ -409,6 +420,50 @@ function fnRenderImage(imageUUID, imageGroupId, container, eventDetailImageId, e
     }
 }
 
+function fnAdFullScreenImage(imageUUID, imageGroupId, container, editable){
+	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
+	var chkImageExist = $.post(imgURL);
+	if(chkImageExist.status==404){
+		console.log('image not found');
+		$('#campainFullScreenImagesUpload').hide();
+		return false;
+	}
+	else{
+		var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID});
+		$(objdiv).appendTo($(container));
+		if(editable){
+	    	$(objdiv).click(function(){
+		    	$(this).toggleClass("activeImage");
+		    	if($(".activeImage").length>0){
+		    		if(iSelected==false){
+		    			var objDel = $('<input/>',{'class':'btn btn-info cssDelImages','type':'button','value':'Delete selected'});
+		    			$(objDel).appendTo($(container));
+		    			iSelected = true;
+		    			$(objDel).click(function(){
+		    				$("#spinningSquaresG").show();
+		    				$(".activeImage").each(function(){
+		    					_flaskLib.deleteImage($(this).attr("data-uuid"), imageGroupId, objDel);
+		    					$('#campainFullScreenImagesUpload').show();
+		    					$("#_campaignFullScreenId").val($("#campaignId").val());
+		    					$(this).remove();
+		    				});
+		    				if($(".activeImage").length==0){
+		    					$("#spinningSquaresG").hide();
+		    					$(this).remove();
+		    					iSelected = false;
+		    				}
+		    			});
+		    		}
+		    	}
+		    	else{
+		    		$(".cssDelImages").remove();
+		    		iSelected = false;
+		    	}
+		    });	
+	    }
+	}
+}
+
 function fnDeleteCampaignImage(campaignImageId){
 	params= {'campaignImageId': campaignImageId};
 	var flaskRequest = new Request();
@@ -419,4 +474,23 @@ function fnDeleteCampaignImage(campaignImageId){
 		function (data){
 			console.log(data);
 		});	
+}
+
+function updateCampaignImage() {
+	params = _flaskLib.getFormData('adCampaignForm',_adCampaignModel.DATA_MODEL.CAMPAIGN, function(formId, model,formData) {
+				formData["imageUUID"] = null;
+				return formData;
+			});
+	var flaskRequest = new Request();
+	var url = ""
+	params.adDisplayTime = null;
+	params.campaignId = campaignId;
+	url = _adCampaignModel.SERVICE_ENDPOINTS.UPDATE_CAMPAIGN;
+
+	flaskRequest.sendPOSTRequest(url, params, function(data) {		
+		console.log(data);
+	}, function(data) {
+		console.log(data);
+	});
+
 }
