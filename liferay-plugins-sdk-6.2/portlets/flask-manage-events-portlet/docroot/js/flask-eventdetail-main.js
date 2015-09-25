@@ -158,7 +158,10 @@ function saveEventDetails() {
 					formData[item.name] = val;
 				});
 				formData.eventId=$('#eventForm #eventId').val();
-				formData.addrLine1=$('#addrLine11').val();
+				if($('#addrLine11').val() == undefined)
+					formData.addrLine1="";
+				else
+					formData.addrLine1=$('#addrLine11').val();
 				return formData;
 			});
 	var flaskRequest = new Request();
