@@ -125,3 +125,7 @@ overflow: inherit !important;
 .icon-wrench {
 zoom: 1.8 !important;
 }
+
+.aui .btn-info:hover, .aui .btn-info:focus, .aui .btn-info:active, .aui .btn-info.active, .aui .btn-info.disabled, .aui .btn-info[disabled] {
+    background-color: #5A5A5A !important;
+}
