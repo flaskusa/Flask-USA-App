@@ -110,15 +110,15 @@
 							</div>
 					</div>
 					<div class="form-group">
-							<label class="control-label" for="eventIds">Campaign Images</label>
+							<label class="control-label" for="campainImagesUpload">Campaign Images</label>
 							<div id="campainImagesUpload"></div>
 					</div>
 					
 					<div class="form-group">
 							<label class="control-label" for="eventIds">Campaign Full Screen Image</label>
 							<div id="campainFullScreenImagesUpload"></div>
+							<div id="campaignFullScreenGallery"></div>
 					</div>					
-										
 					
 					<input class="btn btn-info clsSave" id="saveCampaign" type="button" value="Save"/>
 					<input class="btn btn-primary clsCancel" id="cancelCampaign" type="button" value="Cancel" >
