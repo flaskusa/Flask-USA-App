@@ -51,7 +51,6 @@ function initialize(portletId, portlet){
 		});
 		$("#adminForm").show();
 		$("#adminDataTable").hide();
-		$(".clsCancel").hide();
 		loadForm();
 		addClickHandlers();
 		$(".hideOnMyAcc").hide();
