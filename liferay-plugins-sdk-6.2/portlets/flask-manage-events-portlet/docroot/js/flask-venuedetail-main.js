@@ -192,7 +192,10 @@ function saveVenueDetails() {
 					console.log(item.name+'-'+formData[item.name]);
 				});
 				formData.venueId=$('#venueForm #venueId').val();
-				formData.addrLine1=$('#addrLine11').val();
+				if($('#addrLine11').val() == undefined)
+					formData.addrLine1="";
+				else
+					formData.addrLine1=$('#addrLine11').val();
 				formData.latitude=$('#lat').val();
 				formData.longitude=$('#lng').val();
 				return formData;
