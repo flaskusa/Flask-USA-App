@@ -124,6 +124,6 @@ span.nav-item-label {
 		anchorData.put("redirect", String.valueOf(PortalUtil.isLoginRedirectRequired(request)));
 		%>
 		<aui:nav-item anchorData="<%= anchorData %>" cssClass="sign-in" href="<%= themeDisplay.getURLSignIn() %>" iconCssClass="icon-user" label="sign-in" />
-		<aui:nav-item anchorData="<%= anchorData %>" cssClass="create-account" href="/web/flask/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Fcreate_account" iconCssClass="icon-plus-sign" label="create-account" />
+		<aui:nav-item anchorData="<%= anchorData %>" cssClass="create-account" href="/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Fcreate_account" iconCssClass="icon-plus-sign" label="create-account" />
 	</c:otherwise>
 </c:choose>
