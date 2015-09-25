@@ -34,7 +34,11 @@ function initialize(portletId, portlet){
 		createTable({},_userModel.DATA_MODEL.ADMIN, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Admin", "Images"]);
 		loadData();
 		addClickHandlers();
-		$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
+		$('#DOB').datetimepicker({
+			format: "MM-DD-YYYY",
+			//pickTime: false
+		});
+		//$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
 		$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
 	    console.log("Cal Done");    
 		$(".jqx-checkbox").css("margin-top","6.5px");
