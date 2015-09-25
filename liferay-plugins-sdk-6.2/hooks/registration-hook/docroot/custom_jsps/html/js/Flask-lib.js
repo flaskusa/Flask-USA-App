@@ -377,7 +377,6 @@ var SERVICE_ENDPOINTS = {
 			        rules: [
 			               { input: '#firstName', message: 'First name is required!', action: 'keyup, blur', rule: 'required' },
 			               { input: '#lastName', message: 'Last name is required!', action: 'keyup, blur', rule: 'required' },
-			               { input: '#mobileNumber', message: 'Mobile number is required!', action: 'keyup, blur', rule: 'required' },
 			               { input: '#areaCode', message: 'Zip code is required!', action: 'keyup, blur', rule: 'required' },
 			               { input: '#password1', message: 'Password is required!', action: 'keyup, blur', rule: 'required' },
 			               { input: '#password2', message: 'Password is required!', action: 'keyup, blur', rule: 'required' },
