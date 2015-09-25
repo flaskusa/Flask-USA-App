@@ -13,6 +13,10 @@ function addClickHandlers(){
 		saveAccount();
 	});
 
+	$(".clsCancel").click(function(){
+		window.location.assign("/web/flask/events");
+	});
+	
 	$("#countryId").change(function() {
 		_flaskLib.loadRegions('stateId', $("#countryId").val());
     });		
