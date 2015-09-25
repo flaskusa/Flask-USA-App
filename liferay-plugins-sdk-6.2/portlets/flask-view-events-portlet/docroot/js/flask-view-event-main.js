@@ -225,6 +225,8 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objEventDetails = jQuery.parseJSON(eventDetails);
 	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase()
 	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
+	console.log(infoTypeCategoryName);
+	console.log(objFields);
 	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
 			if(objEventDetails.showDescription){
@@ -295,9 +297,22 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 				var valueObj = $("<td/>",{'align':'left','width':'70%'});				
 				var evalue = eval("objEventDetails."+key);
 				var caption = value;
+				if(caption=="Phone"){
+					var objAnchor = $("<a/>",{'href':'tel:'+evalue});
+					objAnchor.html(evalue);
+					$(valueObj).append(objAnchor);
+				}
+				else if(caption=="Website"){
+					var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
+					objAnchor.html(evalue);
+					$(valueObj).append(objAnchor);							
+				}
+				else{
+					$(valueObj).html(evalue);	
+				}				
 				$(captionObj).html(caption);
 				$(captionObj).appendTo($(objtr));
-				$(valueObj).html(evalue);
+				//$(valueObj).html(evalue);
 				$(valueObj).appendTo($(objtr));
 				$(objtr).appendTo($(objtbl));
 				$(objtbl).appendTo($(objContent));
