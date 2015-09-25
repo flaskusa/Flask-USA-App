@@ -70,17 +70,26 @@ _eventModel.getObjectFields = function(infoTypeCategory){
 			renderer = _eventModel.DETAIL_DATA_MODEL.PARKING;
 			break;
 		case "bar & restaurants":
+			renderer = _eventModel.DETAIL_DATA_MODEL.BAR;
+			break;
 		case "nightlife":
+			renderer = _eventModel.DETAIL_DATA_MODEL.NIGHTLIFE;
+			break;
 		case "safety":
 			renderer = _eventModel.DETAIL_DATA_MODEL.FOOD;
 			break;
-
 		case "liquor store":
 			renderer = _eventModel.DETAIL_DATA_MODEL.LIQUOR;
 			break;
 		case "supplies":
+			renderer = _eventModel.DETAIL_DATA_MODEL.GENERAL;
+			break;
 		case "getting home":
+			renderer = _eventModel.DETAIL_DATA_MODEL.GENERAL;
+			break;
 		case "flask us":
+			renderer = _eventModel.DETAIL_DATA_MODEL.GENERAL;
+			break;
 		default:
 			renderer =_eventModel.DETAIL_DATA_MODEL.GENERAL;
 			break;
@@ -123,7 +132,21 @@ _eventModel.DETAIL_DATA_MODEL = {
                 "infoTitle":"Name",
                 "infoDesc":"Address",
                 "phone":"Phone"
-         }]
+         }],
+         BAR:[{//TRAFFIC
+             "infoTitle":"Name",
+             "infoDesc":"Type of Establishment",
+             "addrLine1":"Address",
+             "phone":"Phone",
+             "website":"Website"
+         }],
+         NIGHTLIFE:[{//TRAFFIC
+             "infoTitle":"Name",
+             "infoDesc":"Type of Establishment",
+             "addrLine1":"Address",
+             "phone":"Phone",
+             "website":"Website"
+         }]          
 }
 
 _eventModel.getBackgroundImage = function(infoTypeCategory){
