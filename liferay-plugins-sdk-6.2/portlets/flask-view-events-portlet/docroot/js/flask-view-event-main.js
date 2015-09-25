@@ -175,9 +175,6 @@ function fnGetEventImages(eventId,venueId){
 			    	break;
 				}		
 			}
-			console.log(distinctInfoTypeCategory1);
-			console.log(distinctInfoTypeCategory2);
-			console.log(distinctInfoTypeCategory3);
 			
 			$.each(objEventDetails, function(idx, obj) {
 				objEventDetail = jQuery.parseJSON(obj.Detail);
@@ -443,7 +440,7 @@ function initEventList(){
 			showAds();
 		} ,
 		function (data){
-			console.log("Error ins getting event list" + data );
+			console.log("Error in getting event list" + data );
 	});
 }
 
@@ -455,7 +452,7 @@ function addUserEvent(eventId){
 						initEventList();
 					} ,
 					function (data){
-						console.log("Error ins saving user event" + data );
+						console.log("Error in saving user event" + data );
 					});
 }
 
@@ -604,7 +601,6 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 	    singleItem : false,
 	    itemsScaleUp : false,		
 	});
-	
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
 			var objImg = value;
@@ -616,7 +612,8 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 				marker_infoType = infoType;
 				// map initialization
 				_flaskMap.initializeMap();
-		 		initMenuList(objDetails);	 		
+		 		initMenuList(objDetails);
+		 		getSelectedTab($(this).attr('data-infoTypeCategory'));
 		 		window.location.hash = '#Details';
 		 		$("#spinningSquaresG").hide();
 			});
@@ -685,7 +682,7 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 		if(infoTypeCategoryName.toUpperCase()==KeyVal[0].toUpperCase() && elementPosition == -1){
 			temp.push(KeyVal[0]);
 			$.each(objFields, function(idx, obj){
-				var objContent = $("<div/>",{'class':'eventDetailBox'});
+				var objContent = $("<div/>",{'class':'eventDetailBox','data-infoTypeCategory':objEventDetails.infoTypeCategoryName});
 				objContent.css('background-image','url("'+slideBackgroundImage+'")');
 				objContent.css('background-repeat','no-repeat');
 				objContent.css('background-size','100% 100%');
@@ -699,4 +696,15 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 		}
 	})		
 	return objArray;
+}
+
+function getSelectedTab(str){
+	var iCount = 0;
+	$('.jqx-tabs-titleContentWrapper').each(function(){
+		if($(this).html().replace(/&amp;/g, '&')==str){
+			$('.jqx-tabs').jqxTabs('select', iCount);
+			return false;
+		}
+		iCount = iCount + 1; 
+	});
 }
