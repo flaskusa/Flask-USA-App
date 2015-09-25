@@ -173,7 +173,7 @@ function saveEventDetails() {
 		}
 	flaskRequest.sendGETRequest(url, params,
 				function(data) {
-					if ($("#eventImages").length > 0) {
+					if ($('#eventImages').find('.dz-image').length > 0) {
 						fnSaveImages(data.eventDetailId,data.eventId);
 					}
 					else {

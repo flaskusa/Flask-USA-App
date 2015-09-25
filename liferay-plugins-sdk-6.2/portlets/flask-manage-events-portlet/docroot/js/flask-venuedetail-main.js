@@ -211,7 +211,7 @@ function saveVenueDetails() {
 	flaskRequest.sendGETRequest(url, params,
 				function(data) {
 					_flaskLib.showSuccessMessage('action-msg', _venueDetailModel.MESSAGES.DETAIL_SAVE);
-					if ($('.dz-image').length > 0) {
+					if ($('#eventImages').find('.dz-image').length > 0) {
 						fnSaveImages(data.venueDetailId, data.infoType);
 					}
 					else {
