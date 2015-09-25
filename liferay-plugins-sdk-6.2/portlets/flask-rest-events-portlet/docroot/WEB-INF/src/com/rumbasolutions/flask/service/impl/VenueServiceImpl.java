@@ -20,8 +20,6 @@ import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.SystemException;
-import com.liferay.portal.kernel.json.JSONArray;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -31,6 +29,8 @@ import com.rumbasolutions.flask.model.Venue;
 import com.rumbasolutions.flask.model.VenueDetail;
 import com.rumbasolutions.flask.model.VenueDetailImage;
 import com.rumbasolutions.flask.model.VenueImage;
+import com.rumbasolutions.flask.service.InfoTypeCategoryServiceUtil;
+import com.rumbasolutions.flask.service.InfoTypeServiceUtil;
 import com.rumbasolutions.flask.service.VenueDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueImageLocalServiceUtil;
@@ -297,8 +297,9 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail= VenueDetailLocalServiceUtil.createVenueDetail(CounterLocalServiceUtil.increment());
 			venueDetail.setVenueId(venueId);
 			venueDetail.setInfoTypeId(infoTypeId);
+			venueDetail.setInfoTypeName(InfoTypeServiceUtil.getInfoType(infoTypeId, serviceContext).getInfoTypeName());
 			venueDetail.setInfoTypeCategoryId(infoTypeCategoryId);
-			
+			venueDetail.setInfoTypeCategoryName(InfoTypeCategoryServiceUtil.getInfoTypeCategory(infoTypeCategoryId, serviceContext).getInfoTypeCategoryName());
 			venueDetail.setInfoTitle(infoTitle);
 			venueDetail.setInfoDesc(infoDesc);
 			venueDetail.setAddrLine1(addrLine1);
@@ -338,7 +339,9 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		try{
 			venueDetail= VenueDetailLocalServiceUtil.getVenueDetail(venueDetailId);
 			venueDetail.setInfoTypeId(infoTypeId);
+			venueDetail.setInfoTypeName(InfoTypeServiceUtil.getInfoType(infoTypeId, serviceContext).getInfoTypeName());
 			venueDetail.setInfoTypeCategoryId(infoTypeCategoryId);
+			venueDetail.setInfoTypeCategoryName(InfoTypeCategoryServiceUtil.getInfoTypeCategory(infoTypeCategoryId, serviceContext).getInfoTypeCategoryName());
 			venueDetail.setInfoTitle(infoTitle);
 			venueDetail.setInfoDesc(infoDesc);
 			venueDetail.setAddrLine1(addrLine1);

@@ -36,6 +36,8 @@ import com.rumbasolutions.flask.model.UserEvent;
 import com.rumbasolutions.flask.service.EventDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventLocalServiceUtil;
+import com.rumbasolutions.flask.service.InfoTypeCategoryServiceUtil;
+import com.rumbasolutions.flask.service.InfoTypeServiceUtil;
 import com.rumbasolutions.flask.service.UserEventLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.EventServiceBaseImpl;
@@ -267,7 +269,9 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail= EventDetailLocalServiceUtil.createEventDetail(CounterLocalServiceUtil.increment());
 			eventDetail.setEventId(eventId);
 			eventDetail.setInfoTypeId(infoTypeId);
+			eventDetail.setInfoTypeName(InfoTypeServiceUtil.getInfoType(infoTypeId, serviceContext).getInfoTypeName());
 			eventDetail.setInfoTypeCategoryId(infoTypeCategoryId);
+			eventDetail.setInfoTypeCategoryName(InfoTypeCategoryServiceUtil.getInfoTypeCategory(infoTypeCategoryId, serviceContext).getInfoTypeCategoryName());
 			eventDetail.setInfoTitle(infoTitle);
 			eventDetail.setInfoDesc(infoDesc);
 			eventDetail.setAddrLine1(addrLine1);
@@ -308,7 +312,9 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		try{
 			eventDetail= EventDetailLocalServiceUtil.getEventDetail(eventDetailId);
 			eventDetail.setInfoTypeId(infoTypeId);
+			eventDetail.setInfoTypeName(InfoTypeServiceUtil.getInfoType(infoTypeId, serviceContext).getInfoTypeName());
 			eventDetail.setInfoTypeCategoryId(infoTypeCategoryId);
+			eventDetail.setInfoTypeCategoryName(InfoTypeCategoryServiceUtil.getInfoTypeCategory(infoTypeCategoryId, serviceContext).getInfoTypeCategoryName());
 			eventDetail.setInfoTitle(infoTitle);
 			eventDetail.setInfoDesc(infoDesc);
 			eventDetail.setAddrLine1(addrLine1);
