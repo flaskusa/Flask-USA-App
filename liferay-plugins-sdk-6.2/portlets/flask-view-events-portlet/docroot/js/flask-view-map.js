@@ -22,14 +22,14 @@ _flaskMap.initializeMap = function() {
 	    };
 	    _flaskMap.map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
 	    var centerControlDiv = document.createElement('div');
-	    centerControlDiv.style.display= '-webkit-inline-box';
+	    centerControlDiv.style.marginRight= '5px';
 	    centerControlDiv.style.top = 15;
 	    centerControlDiv.style.left = 15;
 	    var centerControl = new CenterControl(centerControlDiv, _flaskMap.map);
 	    var centerControl1 = new CenterControl1(centerControlDiv, _flaskMap.map);
 
 	    centerControlDiv.index = 1;
-	    _flaskMap.map.controls[google.maps.ControlPosition.TOP_LEFT].push(centerControlDiv);
+	    _flaskMap.map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(centerControlDiv);
 	    //_flaskMap.findPlaces(places);
 	    //_flaskMap.findPlaces1();
 	}catch(ex){
@@ -49,7 +49,7 @@ function CenterControl(controlDiv, map) {
 	  controlUI.style.borderRadius = '3px';
 	  controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
 	  controlUI.style.cursor = 'pointer';
-	  controlUI.style.marginBottom = '22px';
+	  controlUI.style.marginBottom = '5px';
 	  controlUI.style.textAlign = 'center';
 	  controlUI.title = 'Select Type';
 	  controlDiv.appendChild(controlUI);
