@@ -219,7 +219,7 @@ function saveEvent() {
 							$("#mcontents").css("cursor","default");
 							IsNew = true;
 						}
-						if ($("#eventLogoImage").length>0) {
+						if ($('#eventLogoImage').find('.dz-image').length>0) {
 							fnSaveEventLogo(data.eventId,IsNew);
 						}
 						else {
