@@ -225,13 +225,14 @@ _flaskMap.createMarkers = function (results, status) {
 }
 
 _flaskMap.myMarkers = function(){
-	$.each(eventDetailJSON, function(i, obj) {
+	$.each(eventDetailJSON, function(i, ob) {
 		var obj=$.parseJSON(eventDetailJSON[i].Detail);
+		var icon_url = "";
 		if(_flaskMap.placeType == 'bar &amp; restaurants'){
-			_flaskMap.placeType = "Bar & Restaurants";
+			_flaskMap.placeType = "bar & restaurants";
 		}
 		if(_flaskMap.placeType == 'parking'){
-			_flaskMap.placeType = "Parking";
+			_flaskMap.placeType = "parking";
 		}
 		if(_flaskMap.placeType == 'nightlife'){
 			_flaskMap.placeType = "nightlife";
@@ -239,14 +240,14 @@ _flaskMap.myMarkers = function(){
 		if(_flaskMap.placeType == 'liquor store'){
 			_flaskMap.placeType = "liquor_store";
 		}
-		
+		console.log(obj.infoTypeCategoryName.toLowerCase()+": "+obj.latitude+" : "+obj.longitude);
 		if(obj.latitude!= "" && _flaskMap.placeType == obj.infoTypeCategoryName.toLowerCase()){
 			var mark;
 			var myLatlng = new google.maps.LatLng(obj.latitude, obj.longitude);
-				if(_flaskMap.placeType=="Bar & Restaurants"){
+				if(_flaskMap.placeType=="bar & restaurants"){
 	    			icon_url = '/flask-view-events-portlet/img/icon_bar.png';
 	    		}
-	    		if(_flaskMap.placeType=="Parking"){
+	    		if(_flaskMap.placeType=="parking"){
 	    			icon_url = '/flask-view-events-portlet/img/icon_parking.png';
 	    		}
 	    		if(_flaskMap.placeType=="nightlife"){
