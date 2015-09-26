@@ -1,4 +1,4 @@
-var showAllEvents = true; // Make showAllEvents = false while releasing on server 
+var showAllEvents = false; // Make showAllEvents = false while releasing on server 
 var alllist = [];
 var map;
 var lat_marker = [];
