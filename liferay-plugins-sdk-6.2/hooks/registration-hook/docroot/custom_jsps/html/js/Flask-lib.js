@@ -497,7 +497,7 @@ var SERVICE_ENDPOINTS = {
 				//pickTime: false
 			});
 			 $(".cssCancel").click(function(){
-				  var url = "/web/flask/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
+				  var url = "/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
 				  $(location).attr('href',url);
 				 });
 	});
