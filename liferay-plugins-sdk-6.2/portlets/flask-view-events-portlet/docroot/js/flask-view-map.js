@@ -189,7 +189,6 @@ _flaskMap.createMarkers = function (results, status) {
                 infowindow.open(_flaskMap.map,venue_mark);
         	}
         })(venue_mark));
-    	console.log("venueMark called");
         _flaskMap.infos.push(infowindow);
         _flaskMap.myMarkers();
         for (var i = 0; i < results.length; i++) {
@@ -235,27 +234,26 @@ _flaskMap.myMarkers = function(){
 			_flaskMap.placeType = "Parking";
 		}
 		if(_flaskMap.placeType == 'nightlife'){
-			_flaskMap.placeType = "Bar & Restaurants";
+			_flaskMap.placeType = "nightlife";
 		}
 		if(_flaskMap.placeType == 'liquor store'){
 			_flaskMap.placeType = "liquor_store";
 		}
 		
-		if(obj.latitude!= "" && _flaskMap.placeType == obj.infoTypeCategoryName){
+		if(obj.latitude!= "" && _flaskMap.placeType == obj.infoTypeCategoryName.toLowerCase()){
 			var mark;
-			//var icon_url = '';
-			if(obj.infoTitle == 'Pickles Pub');
-				console.log("name: "+obj.infoTitle);
 			var myLatlng = new google.maps.LatLng(obj.latitude, obj.longitude);
-			
-				if(obj.infoTypeCategoryName=="Bar & Restaurants"){
+				if(_flaskMap.placeType=="Bar & Restaurants"){
 	    			icon_url = '/flask-view-events-portlet/img/icon_bar.png';
 	    		}
-	    		if(obj.infoTypeCategoryName=="Parking"){
+	    		if(_flaskMap.placeType=="Parking"){
 	    			icon_url = '/flask-view-events-portlet/img/icon_parking.png';
 	    		}
-	    		if(obj.infoTypeCategoryName=="night_club"){
-	    			icon_url = '/flask-view-events-portlet/img/flask-marker.png';
+	    		if(_flaskMap.placeType=="nightlife"){
+	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
+	    		}
+	    		if(_flaskMap.placeType=="liquor_store"){
+	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
 	    		}
 
 				mark = new google.maps.Marker({
