@@ -33,6 +33,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.rumbasolutions.flask.model.Event;
 //import com.rumbasolutions.flask.service.impl.EventServiceImpl;
 import com.rumbasolutions.flask.service.EventServiceUtil;
+import com.rumbasolutions.flask.service.persistence.EventUtil;
 
 public class FlaskDocLibUtil {
 	public static final String _eventRootFolder = "Event";
@@ -285,17 +286,10 @@ public class FlaskDocLibUtil {
 		try {
 			 Event eventInfo = EventServiceUtil.getEvent(_eventId, _serviceContext);
 			 System.out.println("eventInfo: "+eventInfo);
-			EventServiceUtil.updateEvent(_eventId, 
-					eventInfo.getEventName(),
-					eventInfo.getDescription(),	
-					eventInfo.getEventDate().toString(), 
-					eventInfo.getStartTime(),
-					eventInfo.getEndTime(), 
-					eventInfo.getEventTypeId(), 
-					eventInfo.getVenueId(), 
-					eventImageUUID, 
-					groupId,
-					_serviceContext);
+			 eventInfo.setEventImageGroupId(groupId);
+			 eventInfo.setEventImageUUID(eventImageUUID);
+			 
+			 EventUtil.update(eventInfo);
 			
 			return eventImageUUID; 
 		}
