@@ -703,6 +703,7 @@ function getSelectedTab(str){
 	$('.jqx-tabs-titleContentWrapper').each(function(){
 		if($(this).html().replace(/&amp;/g, '&')==str){
 			$('.jqx-tabs').jqxTabs('select', iCount);
+			callMarkers($(this).html().toLowerCase());
 			return false;
 		}
 		iCount = iCount + 1; 
