@@ -722,5 +722,16 @@ div#fixedfooter2
     	padding: 5px !important;
 		border-collapse: separate !important;
 	}	
-    
+}
+
+.jqx-tabs-arrow-left {
+	margin-left: 10px !important;
+}
+
+.jqx-tabs-arrow-right {
+	margin-left: 10px !important;
+}
+
+.jqx-tabs-arrow-background.jqx-widget-header {
+    width: 36px !important;
 }
