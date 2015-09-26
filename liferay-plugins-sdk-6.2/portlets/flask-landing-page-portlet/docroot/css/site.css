@@ -156,7 +156,7 @@ section {
 }
 
 a.links {
-    color: #747A7D;
+    color: #747A7D !important;
     line-height: 20px;
     text-decoration: none !important;
 }
