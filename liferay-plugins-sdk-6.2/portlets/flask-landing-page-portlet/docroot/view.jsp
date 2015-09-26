@@ -15,7 +15,7 @@ $(".navbar-inner").hide();
             <nav class="navbar">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">
+                        <a class="navbar-brand" href="/web/flask/flaskus">
                             <img class="img-responsive" src="/flask-landing-page-portlet/Images/flasklogo.png" style="height: 37px;width: 150px; margin-top: -18px" />
                         </a>
                          <a href="/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin">
@@ -45,7 +45,7 @@ $(".navbar-inner").hide();
                             </p>
                             <br /><br />
                             <p>
-                            <a href="/web/flask/events">
+                            <a href="/flask-landing-page-portlet/features.jsp">
                                 <button class="btn btn-primary">Whats In Your Flask?</button>
                             </a>
                             </p>
@@ -56,6 +56,7 @@ $(".navbar-inner").hide();
                 <div class="row">
 	                <div class="col-sm-2" style="padding-left: 35px;">
 			            <h4>Learn More</h4>
+			              <a href="/web/flask/flaskus" class="links">Home</a><br>
 			              <a href="/flask-landing-page-portlet/features.jsp" class="links">Features</a><br>
 			              <a href="#" class="links">Security</a><br>
 		            </div>

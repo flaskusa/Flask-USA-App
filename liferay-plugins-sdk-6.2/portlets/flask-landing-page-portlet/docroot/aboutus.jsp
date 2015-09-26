@@ -73,7 +73,7 @@
                                     <span class="icon-bar"></span>
                                     <span class="icon-bar"></span>
                                 </button>
-                                <a class="navbar-brand" href="#">
+                                <a class="navbar-brand" href="/web/flask/flaskus">
                                     <img class="img-responsive" src="Images/flasklogo.png" style="height: 37px;width: 150px; margin-top: -18px" />
                                 </a>
                             </div>
@@ -114,6 +114,7 @@
 		                <div class="row">
 			                <div class="col-sm-2" style="padding-left: 35px;">
 					            <h4>Learn More</h4>
+					              <a href="/web/flask/flaskus" class="links">Home</a><br>
 					              <a href="/flask-landing-page-portlet/features.jsp" class="links">Features</a><br>
 					              <a href="#" class="links">Security</a><br>
 				            </div>
