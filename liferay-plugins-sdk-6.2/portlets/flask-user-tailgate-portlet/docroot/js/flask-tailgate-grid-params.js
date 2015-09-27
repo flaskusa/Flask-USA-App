@@ -226,9 +226,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 			 datarecord.venmoAccountId +"', '" + datarecord.amountToPay + "')\">Pay Now</a></td></tr>";
 		
 		$(table3).append(amountToPay);
-		if(datarecord.isAdmin != "1"){
-			$(table3).append(ButtonToPay);
-		}
+		$(table3).append(ButtonToPay);
 		$(rightButtoncolumn).append(table3);		
 		var container = $('<div/>');
 		fnGetEventDetailImages(datarecord.tailgateId,imagesDiv, false);		
