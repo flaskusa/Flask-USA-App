@@ -76,7 +76,7 @@ public class TailgateImagesModelImpl extends BaseModelImpl<TailgateImages>
 			{ "createdDate", Types.TIMESTAMP },
 			{ "modifiedDate", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateImages (tailgateImageId LONG not null primary key,tailgateId LONG,userId LONG,imageTitle VARCHAR(75) null,imageDesc VARCHAR(75) null,imageUUID VARCHAR(75) null,imageGroupId LONG,createdDate DATE null,modifiedDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateImages (tailgateImageId LONG not null primary key,tailgateId LONG,userId LONG,imageTitle VARCHAR(100) null,imageDesc VARCHAR(255) null,imageUUID VARCHAR(75) null,imageGroupId LONG,createdDate DATE null,modifiedDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table flasktailgate_TailgateImages";
 	public static final String ORDER_BY_JPQL = " ORDER BY tailgateImages.tailgateImageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flasktailgate_TailgateImages.tailgateImageId ASC";

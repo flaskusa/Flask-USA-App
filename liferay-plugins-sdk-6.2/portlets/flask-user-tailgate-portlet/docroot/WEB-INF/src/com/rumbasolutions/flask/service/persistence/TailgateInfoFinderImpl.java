@@ -50,6 +50,7 @@ public class TailgateInfoFinderImpl extends BasePersistenceImpl<TailgateInfo> im
 		}catch(Exception e)
 		{
 			LOGGER.error("Exception in get All My Tailgate : "+ e.getMessage());
+			e.printStackTrace();
 		}finally{
 			closeSession(session);
 		}

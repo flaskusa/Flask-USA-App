@@ -1,12 +1,37 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<hint-collection name="FLASK-TEXTFIELD">
+		<hint name="max-length">100</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-DESC">
+		<hint name="max-length">255</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-IMAGE-PATH">
+		<hint name="max-length">30</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-IMAGE-UUID">
+		<hint name="max-length">50</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-ZIPCODE">
+		<hint name="max-length">20</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-SPATIAL">
+		<hint name="max-length">20</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-PHONE">
+		<hint name="max-length">20</hint>
+	</hint-collection>
 	<model name="com.rumbasolutions.flask.model.TailgateImages">
 		<field name="tailgateImageId" type="long" />
 		<field name="tailgateId" type="long" />
 		<field name="userId" type="long" />
-		<field name="imageTitle" type="String" />
-		<field name="imageDesc" type="String" />
+		<field name="imageTitle" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="imageDesc" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 		<field name="imageUUID" type="String" />
 		<field name="imageGroupId" type="long" />
 		<field name="createdDate" type="Date" />
@@ -18,10 +43,16 @@
 		<field name="userId" type="long" />
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="tailgateName" type="String" />
-		<field name="tailgateDescription" type="String" />
+		<field name="tailgateName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="tailgateDescription" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 		<field name="eventId" type="long" />
-		<field name="eventName" type="String" />
+		<field name="eventName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 		<field name="tailgateDate" type="Date" />
 		<field name="startTime" type="long" />
 		<field name="endTime" type="long" />

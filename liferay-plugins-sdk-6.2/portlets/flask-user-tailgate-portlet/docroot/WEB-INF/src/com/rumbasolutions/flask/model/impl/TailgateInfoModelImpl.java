@@ -83,7 +83,7 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 			{ "venmoAccountId", Types.VARCHAR },
 			{ "amountToPay", Types.DOUBLE }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(75) null,tailgateDescription VARCHAR(75) null,eventId LONG,eventName VARCHAR(75) null,tailgateDate DATE null,startTime LONG,endTime LONG,isActive INTEGER,isDelete INTEGER,venmoAccountId VARCHAR(75) null,amountToPay DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(100) null,tailgateDescription VARCHAR(255) null,eventId LONG,eventName VARCHAR(100) null,tailgateDate DATE null,startTime LONG,endTime LONG,isActive INTEGER,isDelete INTEGER,venmoAccountId VARCHAR(75) null,amountToPay DOUBLE)";
 	public static final String TABLE_SQL_DROP = "drop table flasktailgate_TailgateInfo";
 	public static final String ORDER_BY_JPQL = " ORDER BY tailgateInfo.tailgateId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flasktailgate_TailgateInfo.tailgateId ASC";
