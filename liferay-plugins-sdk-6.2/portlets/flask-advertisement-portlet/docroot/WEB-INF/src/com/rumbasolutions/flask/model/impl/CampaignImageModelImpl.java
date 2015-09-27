@@ -76,7 +76,7 @@ public class CampaignImageModelImpl extends BaseModelImpl<CampaignImage>
 			{ "imageGroupId", Types.BIGINT },
 			{ "campaignId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskads_CampaignImage (campaignImageId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,imageTitle VARCHAR(75) null,imageDesc VARCHAR(75) null,imageUUID VARCHAR(75) null,imageGroupId LONG,campaignId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskads_CampaignImage (campaignImageId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,imageTitle VARCHAR(100) null,imageDesc VARCHAR(255) null,imageUUID VARCHAR(75) null,imageGroupId LONG,campaignId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskads_CampaignImage";
 	public static final String ORDER_BY_JPQL = " ORDER BY campaignImage.campaignImageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskads_CampaignImage.campaignImageId ASC";

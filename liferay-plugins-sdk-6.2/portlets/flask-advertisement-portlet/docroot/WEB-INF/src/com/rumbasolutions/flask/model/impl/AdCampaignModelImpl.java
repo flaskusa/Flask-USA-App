@@ -83,7 +83,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 			{ "imageUUID", Types.VARCHAR },
 			{ "imageGroupId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskads_AdCampaign (campaignId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,campaignName VARCHAR(75) null,customerId LONG,displayGeneral BOOLEAN,displayPreEvent BOOLEAN,displayDuringEvent BOOLEAN,displayPostEvent BOOLEAN,frequencyPerHour LONG,eventTypeId LONG,imageTitle VARCHAR(75) null,imageDesc VARCHAR(75) null,imageUUID VARCHAR(75) null,imageGroupId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskads_AdCampaign (campaignId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,campaignName VARCHAR(100) null,customerId LONG,displayGeneral BOOLEAN,displayPreEvent BOOLEAN,displayDuringEvent BOOLEAN,displayPostEvent BOOLEAN,frequencyPerHour LONG,eventTypeId LONG,imageTitle VARCHAR(100) null,imageDesc VARCHAR(255) null,imageUUID VARCHAR(75) null,imageGroupId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flaskads_AdCampaign";
 	public static final String ORDER_BY_JPQL = " ORDER BY adCampaign.campaignName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskads_AdCampaign.campaignName ASC";

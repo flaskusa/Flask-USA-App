@@ -1,12 +1,35 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<hint-collection name="FLASK-TEXTFIELD">
+		<hint name="max-length">100</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-DESC">
+		<hint name="max-length">255</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-IMAGE-PATH">
+		<hint name="max-length">30</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-IMAGE-UUID">
+		<hint name="max-length">50</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-ZIPCODE">
+		<hint name="max-length">20</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-SPATIAL">
+		<hint name="max-length">20</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-PHONE">
+		<hint name="max-length">20</hint>
+	</hint-collection>
 	<model name="com.rumbasolutions.flask.model.AdCampaign">
 		<field name="campaignId" type="long" />
 		<field name="userId" type="long" />
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="campaignName" type="String" />
+		<field name="campaignName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 		<field name="customerId" type="long" />
 		<field name="displayGeneral" type="boolean" />
 		<field name="displayPreEvent" type="boolean" />
@@ -14,8 +37,12 @@
 		<field name="displayPostEvent" type="boolean" />
 		<field name="frequencyPerHour" type="long" />
 		<field name="eventTypeId" type="long" />
-		<field name="imageTitle" type="String" />
-		<field name="imageDesc" type="String" />
+		<field name="imageTitle" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="imageDesc" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 		<field name="imageUUID" type="String" />
 		<field name="imageGroupId" type="long" />
 	</model>
@@ -24,18 +51,32 @@
 		<field name="userId" type="long" />
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="customerName" type="String" />
-		<field name="businessType" type="String" />
-		<field name="addrLine1" type="String" />
-		<field name="addrLine2" type="String" />
+		<field name="customerName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="businessType" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="addrLine1" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="addrLine2" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 		<field name="city" type="String" />
 		<field name="zipCode" type="String" />
 		<field name="stateId" type="long" />
 		<field name="countryId" type="long" />
-		<field name="email" type="String" />
-		<field name="websiteURL" type="String" />
+		<field name="email" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
+		<field name="websiteURL" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 		<field name="businessPhoneNumber" type="String" />
-		<field name="contactPersonName" type="String" />
+		<field name="contactPersonName" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 		<field name="contactPersonNumber" type="String" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.CampaignEvent">
@@ -51,8 +92,12 @@
 		<field name="userId" type="long" />
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="imageTitle" type="String" />
-		<field name="imageDesc" type="String" />
+		<field name="imageTitle" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="imageDesc" type="String">
+			<hint name="max-length">255</hint>
+		</field>
 		<field name="imageUUID" type="String" />
 		<field name="imageGroupId" type="long" />
 		<field name="campaignId" type="long" />
