@@ -378,8 +378,14 @@ $(document).ready(function(){
 	$(function() {
 	    function cb(start, end, label) {
 	        $('#reportrange span').html(label);
-	        startdate = start.toDate();
-	        enddate = end.toDate();
+	        console.log(start);
+	        console.log(end);
+	        var tStartDate = start.month()+'-'+start.date()+'-'+start.year()
+	        var tEndDate = end.month()+'-'+end.date()+'-'+end.year()
+	        console.log(tStartDate);
+	        console.log(tEndDate);
+	        startdate = tStartDate;//start.toDate();
+	        enddate = tEndDate;//end.toDate();
 	        getEventsForLocation();
 	    }
 	    
@@ -567,6 +573,7 @@ function getFilteredEvents(){
 	var filterString = $("#txtSearch").val();
 	var flaskRequest = new Request();
 	params = {eventTypeIds: '', startDate: startdate, endDate: enddate,searchString: filterString, latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
+	console.log(params);
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS, params, 
 	function(data){
 		renderEventList(data);

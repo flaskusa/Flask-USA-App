@@ -282,6 +282,7 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
 
 .daterangepicker .ranges li.active, .daterangepicker .ranges li:hover {
     background: #F49434 !important;
+    border:1px solid #F49434 !important;
     border: none;
 	color: #fff !important;
 }
