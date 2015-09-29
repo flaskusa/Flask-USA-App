@@ -51,8 +51,8 @@
                             </p>
                             <br /><br />
                             <p>
-                            <a href="/flask-landing-page-portlet/features.jsp">
-                                <button class="btn btn-primary">Whats In Your Flask?</button>
+                            <a href="#">
+                                <button class="btn btn-primary" id="whatIsInFlask">Whats In Your Flask?</button>
                             </a>
                             </p>
                         </div>
@@ -179,9 +179,23 @@
 								</div>
 							  </div>
 							   <div class="form-group">
+							   	<div class="controls">
 								    <label class="control-label" for="eventTypeId">Email:</label>
 									<input name="email" id="email" class="form-control" type="text" />
+								</div>
 							   </div>
+							   <div class="form-group">
+							    <div class="controls">
+								    <label class="control-label" for="mobile">Mobile:</label>
+								    <input name="mobile" id="mobile" class="form-control" type="text" />
+								</div>
+							  </div>
+							  <div class="form-group">
+								    <label class="control-label" for="comment">Comment:</label>
+								    <textarea rows="5" name="comment" id="comment" class="form-control"></textarea>
+							  </div>
+							  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok" />
+		 					  <input class="btn btn-primary clsCancel" type="reset" value="Cancel">
 							  </form>
 	                    </div>
                   </div>
@@ -189,16 +203,16 @@
                 <div class="row">
 		                <div class="col-sm-2" style="padding-left: 35px;">
 				            <h4>Learn More</h4>
-				              <a href="#" class="links" id="home">Home</a><br>
-				              <a href="#" class="links" id="features">Features</a><br>
+				              <a href="/web/flask/flaskus" class="links" id="home">Home</a><br>
+				              <a href="/flask-landing-page-portlet/features.jsp" class="links" id="features">Features</a><br>
 			            </div>
 			            <div class="col-sm-2" style="padding-left: 35px;">
 				            <h4>Company</h4>
-				              <a href="#" class="links" id="aboutus">About Us</a><br>
+				              <a href="/flask-landing-page-portlet/aboutus.jsp" class="links" id="aboutus">About Us</a><br>
 			            </div>
 			            <div class="col-sm-2" style="padding-left: 35px;">
 				            <h4>Community</h4>
-				              <a href="#" class="links" id="contactus">Contact Us</a><br>
+				              <a href="/flask-landing-page-portlet/contactus.jsp" class="links" id="contactus">Contact Us</a><br>
 			            </div>
 		           </div><br>
             </div><br /><br /><br />  
