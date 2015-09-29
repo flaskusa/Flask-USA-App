@@ -114,13 +114,13 @@ function initialize(portletId, portlet){
    <div class="form-group">
      <label class="control-label" for="firstName">First Name:</label>
      <div class="controls">
-       <input name="firstName" id="firstName" class="form-control" type="text">
+       <input name="firstName" id="firstName" class="form-control" maxlength="100" type="text">
      </div>
    </div>
    <div class="form-group">
      <label class="control-label" for="lastName">Last Name:</label>
      <div class="controls">
-       <input name="lastName" id="lastName" class="form-control" type="text">
+       <input name="lastName" id="lastName" class="form-control" maxlength="100" type="text">
      </div>
    </div>
    
@@ -128,14 +128,14 @@ function initialize(portletId, portlet){
    <div class="form-group">
      <label class="control-label" for="screenName">Screen Name:</label>
      <div class="controls">
-       <input name="screenName" id="screenName" class="form-control" type="text">
+       <input name="screenName" id="screenName" class="form-control" maxlength="100" type="text">
      </div>
    </div>
  
    <div class="form-group">
      <label class="control-label" for="email">E-mail:</label>
      <div class="controls">
-       <input name="email" id="email" class="form-control" type="text">
+       <input name="email" id="email" class="form-control" maxlength="100" type="text">
      </div>
    </div>
  
@@ -176,7 +176,7 @@ function initialize(portletId, portlet){
    <div class="form-group">
      <label class="control-label" for="mobileNumber">Mobile:</label>
 	     <div class="controls">
-	       <input name="mobileNumber" id="mobileNumber" class="form-control" type="text">
+	       <input name="mobileNumber" id="mobileNumber" class="form-control" maxlength="10" type="text">
 	     </div>
    </div>
    </div>
@@ -187,7 +187,7 @@ function initialize(portletId, portlet){
    <div class="form-group">
      <label class="control-label" for="streetName">Street:</label>
      <div class="controls">
-       <input name="streetName" id="streetName" class="form-control" type="text">
+       <input name="streetName" id="streetName" class="form-control" maxlength="100" type="text">
      </div>
    </div>
    
@@ -201,14 +201,14 @@ function initialize(portletId, portlet){
     <div class="form-group">
      <label class="control-label" for="areaCode">Zip Code:</label>
      <div class="controls">
-       <input name="areaCode" id="areaCode" class="form-control" type="text">
+       <input name="areaCode" id="areaCode" class="form-control" maxlength="20" type="text">
      </div>
    </div>
    
     <div class="form-group">
      <label class="control-label" for="city">City:</label>
      <div class="controls">
-       <input name="city" id="city" class="form-control" type="text">
+       <input name="city" id="city" class="form-control" maxlength="100" type="text">
      </div>
    </div>  
    
