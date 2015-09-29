@@ -1,26 +1,68 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<hint-collection name="FLASK-TEXTFIELD">
+		<hint name="max-length">100</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-DESC">
+		<hint name="max-length">255</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-MESSAGE">
+	<hint name="max-length">2000</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-IMAGE-PATH">
+		<hint name="max-length">30</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-IMAGE-UUID">
+		<hint name="max-length">50</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-ZIPCODE">
+		<hint name="max-length">20</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-SPATIAL">
+		<hint name="max-length">20</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-PHONE">
+		<hint name="max-length">20</hint>
+	</hint-collection>
 	<model name="com.rumbasolutions.flask.model.FlaskAdmin">
 		<field name="userId" type="long" />
 		<field name="roleId" type="long" />
 		<field name="roleName" type="String" />
-		<field name="firstName" type="String" />
-		<field name="middleName" type="String" />
-		<field name="lastName" type="String" />
-		<field name="screenName" type="String" />
-		<field name="email" type="String" />
+		<field name="firstName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="middleName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="lastName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="screenName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="email" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 		<field name="DOB" type="Date" />
 		<field name="isMale" type="Boolean" />
-		<field name="streetName" type="String" />
+		<field name="streetName" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 		<field name="aptNo" type="String" />
-		<field name="areaCode" type="String" />
-		<field name="city" type="String" />
+		<field name="areaCode" type="String">
+			<hint-collection name="FLASK-ZIPCODE" />
+		</field>
+		<field name="city" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 		<field name="stateId" type="long" />
 		<field name="stateName" type="String" />
 		<field name="countryId" type="long" />
 		<field name="countryName" type="String" />
-		<field name="mobileNumber" type="String" />
+		<field name="mobileNumber" type="String">
+			<hint-collection name="FLASK-PHONE" />
+		</field>
 		<field name="portraitURL" type="String" />
 		<field name="userInterests" type="String" />
 	</model>
