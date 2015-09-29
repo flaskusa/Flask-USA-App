@@ -66,6 +66,14 @@ public class InvitationInfoServiceWrapper implements InvitationInfoService,
 			invitedDate, serviceContext);
 	}
 
+	@Override
+	public void replyToFeedback(java.lang.String name, java.lang.String email,
+		java.lang.String mobile, java.lang.String comment,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_invitationInfoService.replyToFeedback(name, email, mobile, comment,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

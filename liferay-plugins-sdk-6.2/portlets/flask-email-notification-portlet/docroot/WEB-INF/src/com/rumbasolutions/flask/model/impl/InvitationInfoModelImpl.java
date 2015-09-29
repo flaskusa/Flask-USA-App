@@ -69,7 +69,7 @@ public class InvitationInfoModelImpl extends BaseModelImpl<InvitationInfo>
 			{ "description", Types.VARCHAR },
 			{ "invitedDate", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskinvitation_InvitationInfo (inviationId LONG not null primary key,name VARCHAR(75) null,email VARCHAR(75) null,description VARCHAR(75) null,invitedDate VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskinvitation_InvitationInfo (inviationId LONG not null primary key,name VARCHAR(100) null,email VARCHAR(255) null,description VARCHAR(2000) null,invitedDate VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskinvitation_InvitationInfo";
 	public static final String ORDER_BY_JPQL = " ORDER BY invitationInfo.inviationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskinvitation_InvitationInfo.inviationId ASC";

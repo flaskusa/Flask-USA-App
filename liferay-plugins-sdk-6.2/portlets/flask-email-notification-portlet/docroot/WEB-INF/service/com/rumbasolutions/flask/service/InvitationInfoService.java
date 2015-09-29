@@ -67,4 +67,8 @@ public interface InvitationInfoService extends BaseService, InvokableService {
 	public void sendInivitation(java.lang.String email, java.lang.String name,
 		java.lang.String description, java.lang.String invitedDate,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void replyToFeedback(java.lang.String name, java.lang.String email,
+		java.lang.String mobile, java.lang.String comment,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

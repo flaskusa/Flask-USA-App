@@ -38,6 +38,13 @@ public class InvitationInfoServiceClp implements InvitationInfoService {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName4 = "replyToFeedback";
+
+		_methodParameterTypes4 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -122,6 +129,38 @@ public class InvitationInfoServiceClp implements InvitationInfoService {
 		}
 	}
 
+	@Override
+	public void replyToFeedback(java.lang.String name, java.lang.String email,
+		java.lang.String mobile, java.lang.String comment,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableService.invokeMethod(_methodName4,
+				_methodParameterTypes4,
+				new Object[] {
+					ClpSerializer.translateInput(name),
+					
+				ClpSerializer.translateInput(email),
+					
+				ClpSerializer.translateInput(mobile),
+					
+				ClpSerializer.translateInput(comment),
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -129,4 +168,6 @@ public class InvitationInfoServiceClp implements InvitationInfoService {
 	private String[] _methodParameterTypes1;
 	private String _methodName3;
 	private String[] _methodParameterTypes3;
+	private String _methodName4;
+	private String[] _methodParameterTypes4;
 }

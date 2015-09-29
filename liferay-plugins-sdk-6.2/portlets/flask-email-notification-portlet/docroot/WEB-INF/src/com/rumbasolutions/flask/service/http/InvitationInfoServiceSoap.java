@@ -78,5 +78,21 @@ public class InvitationInfoServiceSoap {
 		}
 	}
 
+	public static void replyToFeedback(java.lang.String name,
+		java.lang.String email, java.lang.String mobile,
+		java.lang.String comment,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			InvitationInfoServiceUtil.replyToFeedback(name, email, mobile,
+				comment, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(InvitationInfoServiceSoap.class);
 }

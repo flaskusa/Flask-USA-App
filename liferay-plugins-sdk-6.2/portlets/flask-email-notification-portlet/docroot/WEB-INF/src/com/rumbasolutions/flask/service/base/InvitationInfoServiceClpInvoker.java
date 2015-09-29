@@ -38,6 +38,13 @@ public class InvitationInfoServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName25 = "replyToFeedback";
+
+		_methodParameterTypes25 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -64,6 +71,16 @@ public class InvitationInfoServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName25.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes25, parameterTypes)) {
+			InvitationInfoServiceUtil.replyToFeedback((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3],
+				(com.liferay.portal.service.ServiceContext)arguments[4]);
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -73,4 +90,6 @@ public class InvitationInfoServiceClpInvoker {
 	private String[] _methodParameterTypes19;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
 }

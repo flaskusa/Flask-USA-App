@@ -65,4 +65,20 @@ public class InvitationInfoServiceImpl extends InvitationInfoServiceBaseImpl {
 		}
 		
 	}
+	
+	@Override
+	public void replyToFeedback(String name, String email, String mobile, String comment, ServiceContext serviceContext){
+		InvitationInfo invitationInfo = null;
+		try {
+			//Send Email Invitation
+			EmailInvitationUtil.emailReply(name, email, mobile, comment, serviceContext);
+			EmailInvitationUtil.emailToFlask(name, email, mobile, comment, serviceContext);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			LOGGER.error("Error in saving Invitation : "+ e.getMessage());
+		}
+		
+	}
+
 }
