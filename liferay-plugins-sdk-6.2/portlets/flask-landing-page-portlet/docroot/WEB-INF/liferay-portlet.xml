@@ -9,6 +9,7 @@
 		<header-portlet-css>/css/font-awesome.css</header-portlet-css>
 		<header-portlet-css>/css/font-awesome.min.css</header-portlet-css>
 		<header-portlet-css>/css/site.css</header-portlet-css>
+		<footer-portlet-javascript>/js/main.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/wow.js</footer-portlet-javascript>
 		
 		<css-class-wrapper>flask-landing-page-portlet</css-class-wrapper>
