@@ -59,42 +59,42 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 			  <div class="form-group">
 			    <label class="control-label" for="venuName">Name:</label>
 			    <div class="controls">
-			      <input name="venueName" id="venueName" class="form-control" type="text">
+			      <input name="venueName" id="venueName" class="form-control" maxlength="100" type="text">
 			    </div>
 			  </div>
 	
 			  <div class="form-group">
 			    <label class="control-label" for="venueDescription">Description:</label>
 			    <div class="controls">
-			      <input name="venueDescription" id="venueDescription" class="form-control" type="text">
+			      <input name="venueDescription" id="venueDescription" class="form-control" maxlength="255" type="text">
 			    </div>
 			  </div>
 	
 			  <div class="form-group">
 			    <label class="control-label" for="addrLine1">Address:</label>
 			    <div class="controls">
-			      <input name="addrLine1" id="addrLine1" class="form-control" type="text">
+			      <input name="addrLine1" id="addrLine1" class="form-control" maxlength="100" type="text">
 			    </div>
 			  </div>
 	
 			   <div class="form-group">
 			    <label class="control-label" for="addrLine2">Address:</label>
 			    <div class="controls">
-			      <input name="addrLine2" id="addrLine2" class="form-control" type="text">
+			      <input name="addrLine2" id="addrLine2" class="form-control" maxlength="100" type="text">
 			    </div>
 			  </div>
 	
 			   <div class="form-group">
 			    <label class="control-label" for="venueZipCode">Zip Code:</label>
 			    <div class="controls">
-			      <input name="venueZipCode" id="venueZipCode" class="form-control" type="text">
+			      <input name="venueZipCode" id="venueZipCode" class="form-control" maxlength="20" type="text">
 			    </div>
 			  </div>
 	
 			   <div class="form-group">
 			    <label class="control-label" for="venueCity">City:</label>
 			    <div class="controls">
-			      <input name="venueCity" id="venueCity" class="form-control" type="text">
+			      <input name="venueCity" id="venueCity" class="form-control" maxlength="20" type="text">
 			    </div>
 			  </div>
 	
@@ -128,8 +128,8 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 			  <input class="btn btn-primary clsCancel" type="button" value="Cancel">
 			  <div id="venueGallery"></div>
 			  <input id="venueId" type="hidden" value="0">
-			  <input id="latitude" type="hidden" value="0">
-			  <input id="longitude" type="hidden" value="0">
+			  <input id="latitude" type="hidden" maxlength="20" value="0">
+			  <input id="longitude" type="hidden" maxlength="20" value="0">
 			</form>
 		  </div>
 		  <div class="tab-pane" id="contents">
@@ -137,8 +137,8 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 				<h3><span class="title-text"></span></h3>
 				<form id="venueDetailsForm" style="display:none">
 				  <input type="hidden" id="imgActionUrl" value="<%= addImagesActionURL %>">
-				  <input id="lat" type="hidden" name="lat" value="">
-			      <input id="lng" type="hidden" name="lng" value="">
+				  <input id="lat" type="hidden" name="lat" maxlength="20" value="">
+			      <input id="lng" type="hidden" name="lng" maxlength="20" value="">
 				  <div class="form-group">
 					    <label class="control-label" for="infoTypeId">Info Type:</label>
 						<div class="controls">

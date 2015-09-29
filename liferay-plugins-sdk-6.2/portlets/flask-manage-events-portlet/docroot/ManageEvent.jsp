@@ -66,7 +66,7 @@ function initialize(portletId, portlet) {
 		  <div class="form-group">
 		    <div class="controls">
 			    <label class="control-label" for="eventName">Event Name:</label>
-			    <input name="eventName" id="eventName" class="form-control" type="text" onchange="$('#description').val($(this).val());" /> <div id='Active'>Active</div>
+			    <input name="eventName" id="eventName" class="form-control" type="text" maxlength="100" onchange="$('#description').val($(this).val());" /> <div id='Active'>Active</div>
 			    <input type="hidden" id="description" value="" />
 			</div>
 		  </div>
