@@ -7,6 +7,7 @@
     <link href="css/font-awesome.css" rel="stylesheet" />
     <link href="css/font-awesome.min.css" rel="stylesheet" />
 <link rel="shortcut icon" type="image/png" href="/FlaskTheme-theme/images/favicon.ico"/>
+<script type="text/javascript" src="js/main.js" > </script>
 </head>
 <style>
 .container {
@@ -77,8 +78,11 @@
                             </a>
                         </div>
                         <a href="/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin">
-                            	<button class="btn btn-flask" style="margin-left: 62%;">Sign In <i class="fa fa-lock" ></i></button>
-                        </a>
+                        	 <button class="btn btn-flask logIn" style="margin-left: 62%;">Sign In <i class="fa fa-lock" ></i></button>
+                         </a>
+                         <a href="/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin">
+                        	 <button class="btn btn-flask myFlask" style="margin-left: 62%;">My Flask </button>
+                         </a>
                     </div><!--/.container-fluid -->
                 </nav>
             </div>
