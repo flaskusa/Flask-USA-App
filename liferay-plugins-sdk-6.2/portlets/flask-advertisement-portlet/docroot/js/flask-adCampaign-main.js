@@ -237,27 +237,32 @@ function saveCampaign() {
 	}
 
 	flaskRequest.sendPOSTRequest(url, params, function(data) {
-		
-		_flaskLib.showSuccessMessage('campaign-action-msg',
-				_adCampaignModel.MESSAGES.SAVE);
-		
+		$("#_campaignId").val(data.campaignId);
+		$("#_campaignFullScreenId").val(data.campaignId);
 		if($('#campainImagesUpload').find('.dz-image').length > 0) {					
-			$("#_campaignId").val(data.campaignId);
-			$("#_campaignFullScreenId").val(data.campaignId);
 			dropZoneImages.options.autoProcessQueue = true;
 			dropZoneImages.processQueue();
 			dropZoneImages.on("queuecomplete", function (file) {
 				dropZoneFullScreenImage.options.autoProcessQueue = true;
 				dropZoneFullScreenImage.processQueue();
 			});			
-			dropZoneFullScreenImage.on("queuecomplete", function (file) {
+			if($('#campainFullScreenImagesUpload').find('.dz-image').length>0){
+				console.log($("#_campaignFullScreenId").val());
+				dropZoneFullScreenImage.on("queuecomplete", function (file) {
+					loadCampaignData();
+					$("#adCampaignDataTable").show();
+					setCampaignFormVisible(false);
+				});
+			}
+			else{
 				loadCampaignData();
 				$("#adCampaignDataTable").show();
 				setCampaignFormVisible(false);
-			});
+			}
 		}
 		else{
 			if($('#campainFullScreenImagesUpload').find('.dz-image').length>0){
+				console.log($("#_campaignFullScreenId").val());
 				dropZoneFullScreenImage.options.autoProcessQueue = true;
 				dropZoneFullScreenImage.processQueue();
 				dropZoneFullScreenImage.on("queuecomplete", function (file) {
@@ -271,10 +276,10 @@ function saveCampaign() {
 				$("#adCampaignDataTable").show();
 				setCampaignFormVisible(false);
 			}
-		}			
+		}		
+		_flaskLib.showSuccessMessage('campaign-action-msg',_adCampaignModel.MESSAGES.SAVE);
 	}, function(data) {
-		_flaskLib.showErrorMessage('campaign-action-msg',
-				_adCampaignModel.MESSAGES.ERROR);
+		_flaskLib.showErrorMessage('campaign-action-msg',_adCampaignModel.MESSAGES.ERROR);
 	});
 
 }
