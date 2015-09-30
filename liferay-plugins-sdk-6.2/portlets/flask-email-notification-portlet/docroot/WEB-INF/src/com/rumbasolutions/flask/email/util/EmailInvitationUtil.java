@@ -44,11 +44,11 @@ public class EmailInvitationUtil {
 	
 	public static void emailReply(String name, String toMail, String mobile, String comment, ServiceContext serviceContext){
 		try {
-			InternetAddress fromAddress = new InternetAddress("kiran@softaid.co.in"); // from address
+			InternetAddress fromAddress = new InternetAddress("info@flaskus.com"); // from address
 	        InternetAddress toAddress = new InternetAddress(toMail);  // to address
 
 	        String body = ContentUtil.get("/template/replyEmailTemplate.tmpl", true);  // email body , here we are getting email structure creating the content folder in the src and create the file with the extension as tmpl.
-	        String subject = "Inviation"; // email subject
+	        String subject = "Thank You"; // email subject
 	                
 	                body = StringUtil.replace(body, new String []{"[$NAME$]","[$DESC$]"}, new String []{name,comment}); // replacing the body with our content.
 
@@ -72,10 +72,10 @@ public class EmailInvitationUtil {
 	public static void emailToFlask(String name, String fromEmail, String mobile, String comment, ServiceContext serviceContext){
 		try {
 			InternetAddress fromAddress = new InternetAddress(fromEmail); // from address
-	        InternetAddress toAddress = new InternetAddress("kiran@softaid.co.in");  // to address
+	        InternetAddress toAddress = new InternetAddress("info@flaskus.com");  // to address
 
 	        String body = ContentUtil.get("/template/replyFlaskEmailTemplate.tmpl", true);  // email body , here we are getting email structure creating the content folder in the src and create the file with the extension as tmpl.
-	        String subject = "Inviation"; // email subject
+	        String subject = "Comment"; // email subject
 	                
 	                body = StringUtil.replace(body, new String []{"[$NAME$]","[$EMAIL$]","[$MOBILE$]","[$COMMENT$]"}, new String []{name,fromEmail,mobile,comment}); // replacing the body with our content.
 

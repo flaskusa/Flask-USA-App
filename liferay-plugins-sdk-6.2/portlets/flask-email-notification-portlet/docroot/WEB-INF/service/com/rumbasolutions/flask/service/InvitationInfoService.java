@@ -68,6 +68,7 @@ public interface InvitationInfoService extends BaseService, InvokableService {
 		java.lang.String description, java.lang.String invitedDate,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	public void replyToFeedback(java.lang.String name, java.lang.String email,
 		java.lang.String mobile, java.lang.String comment,
 		com.liferay.portal.service.ServiceContext serviceContext);

@@ -17,6 +17,7 @@ package com.rumbasolutions.flask.service.impl;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
 import com.rumbasolutions.flask.model.InvitationInfo;
@@ -66,6 +67,7 @@ public class InvitationInfoServiceImpl extends InvitationInfoServiceBaseImpl {
 		
 	}
 	
+	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public void replyToFeedback(String name, String email, String mobile, String comment, ServiceContext serviceContext){
 		InvitationInfo invitationInfo = null;
