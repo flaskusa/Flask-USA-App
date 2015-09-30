@@ -378,14 +378,15 @@ $(document).ready(function(){
 	$(function() {
 	    function cb(start, end, label) {
 	        $('#reportrange span').html(label);
+	        /*console.log('test');
 	        console.log(start);
 	        console.log(end);
 	        var tStartDate = start.month()+'-'+start.date()+'-'+start.year()
 	        var tEndDate = end.month()+'-'+end.date()+'-'+end.year()
 	        console.log(tStartDate);
-	        console.log(tEndDate);
-	        startdate = tStartDate;//start.toDate();
-	        enddate = tEndDate;//end.toDate();
+	        console.log(tEndDate);*/
+	        startdate = start.toDate();//moment(start.toDate()).format('MM/DD/YYYY');
+	        enddate = end.toDate();
 	        getEventsForLocation();
 	    }
 	    
@@ -571,12 +572,16 @@ function callMarkers(place){
 
 function getFilteredEvents(){
 	var filterString = $("#txtSearch").val();
+	if(filterString==''){
+		filterString='a';
+	}
 	var flaskRequest = new Request();
 	params = {eventTypeIds: '', startDate: startdate, endDate: enddate,searchString: filterString, latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
 	console.log(params);
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS, params, 
 	function(data){
 		renderEventList(data);
+		showAds();
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.SEARCH_ERR);
 	});	
@@ -671,6 +676,10 @@ function showAds(){
 	});
 	_flaskAd.HideAds();
 	_flaskAd.ShowAdByEventIds(eventList);
+	//below part will go to theme
+	$('.md-closeBtn').click(function(){
+		$('#modal-advertisement').removeClass('md-show');
+	});	
 }
 
 function showEventAds(eventId){
