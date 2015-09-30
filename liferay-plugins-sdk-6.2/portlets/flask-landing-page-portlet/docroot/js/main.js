@@ -47,6 +47,7 @@ $(document).ready(function(){
 	
 	$("#Ok").click(function(){
 		contact($("#name").val(),$("#email").val(),$("#mobile").val(),$("#comment").val());
+		window.location.reload();
 	});
 	
 });
