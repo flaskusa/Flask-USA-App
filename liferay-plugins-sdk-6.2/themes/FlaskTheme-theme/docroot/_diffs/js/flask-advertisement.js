@@ -48,6 +48,7 @@ _flaskAd.GetAdImages = function(Obj){
 		var campaignId = Obj[iCount];
 		var flaskRequest = new Request();
 		var param = {campaignId: campaignId};
+		console.log(param);
 		flaskRequest.sendGETRequest(_flaskLib.SERVICE_ENDPOINTS.GET_CAMPAIGN_WITH_IMAGES , param, 
 			function (data){
 				var adCampaign = $.parseJSON(data.AdCampaign);
@@ -72,7 +73,6 @@ _flaskAd.GetAdImages = function(Obj){
 						$('#myModalLabel').html(campaignTitle);						
 						imgContainer.html("");
 						imgContainer.append(objImage);
-						$('#myModal').modal('show');
 					});
 					$("body").append(adContainer);
 				}
@@ -84,6 +84,7 @@ _flaskAd.GetAdImages = function(Obj){
 }
 
 _flaskAd.GetAdImagesForMultipleEvents = function(Obj){
+	$('#fixedfooter').remove();
 	var adContainer = $("<div/>");
 	adContainer.attr('id','fixedfooter');
 	adContainer.owlCarousel({
@@ -113,7 +114,7 @@ _flaskAd.GetAdImagesForMultipleEvents = function(Obj){
 			$('#myModalLabel').html(campaignTitle);						
 			imgContainer.html("");
 			imgContainer.append(objImage);
-			$('#myModal').modal('show');
+			$('.md-trigger').click();
 		});
 		$("body").append(adContainer);
 	}
