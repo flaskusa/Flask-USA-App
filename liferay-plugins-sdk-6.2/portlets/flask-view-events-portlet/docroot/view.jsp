@@ -132,17 +132,16 @@
 </div>
 </div>
 
-<!-- Modal -->
-<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-      </div>
-      <div class="modal-body imageContainer"></div>
-    </div>
-  </div>
+<div class="md-modal md-effect-14" id="modal-advertisement">
+	<div class="md-content">
+		<h3 id="myModalLabel">Modal Dialog</h3>
+		<span class='md-closeBtn'>x</span>
+		<div>
+			<div class="imageContainer"></div>
+		</div>
+	</div>
 </div>
+<div class="md-overlay"></div>
+<button class="md-trigger" data-modal="modal-advertisement" style="display:none">3D Rotate Bottom</button>
 </body>
 
