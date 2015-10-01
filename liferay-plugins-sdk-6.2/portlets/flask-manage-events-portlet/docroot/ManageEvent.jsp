@@ -21,6 +21,11 @@
 <%
 long repositoryId = themeDisplay.getLayout().getGroupId();
 themeDisplay.getLayout().getUuid();
+
+boolean isAuthorised = renderRequest.isUserInRole("administrator") 
+					|| renderRequest.isUserInRole("flask-admin") 
+					|| renderRequest.isUserInRole("flask-content-manager");
+
 %>
 
 <aui:script>
@@ -52,137 +57,147 @@ function initialize(portletId, portlet) {
 </aui:script>
 
 <body class="default">
-<input id="repositoryId" type="hidden" value="<%= repositoryId %>" />
-<div id="action-msg-warning" style="display:none"></div>
-<div id="action-msg" style="display:none"></div>
-<div id="formContainer" style="display:none">
-	<ul class="nav nav-tabs">
-	  <li class="active"><a href="#events" data-toggle="tab">Manage Events</a></li>
-	  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Content</a></li>
-	</ul>
-	<div class="tab-content">
-	  <div class="tab-pane active" id="events">
-		<form id="eventForm">
-		  <div class="form-group">
-		    <div class="controls">
-			    <label class="control-label" for="eventName">Event Name:</label>
-			    <input name="eventName" id="eventName" class="form-control" type="text" maxlength="100" onchange="$('#description').val($(this).val());" /> <div id='Active'>Active</div>
-			    <input type="hidden" id="description" value="" />
+
+
+<c:if test="<%= !isAuthorised %>">
+			<div id="action-msg1" class="alert alert-error">
+				You are not authorize to view this page.
 			</div>
-		  </div>
-		   <div class="form-group">
-			    <label class="control-label" for="eventTypeId">Event Type:</label>
-				<div class="controls">
-					<select class="form-control-select" id="eventTypeId" name="eventTypeId"></select>
-				</div>
-		   </div>
-		    <div class="form-group">
-		    	<label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
-		    	<div class="controls">
-		   				 <input type='text' class="form-control" id='eventDate' />
-		   		</div>
-			  	</div>
-		   </div>
+</c:if>
+<c:if test="<%= isAuthorised %>">
 
-		   <div class="form-group">
-		    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
-		    <div class="controls">
-		      <input type='text' class="form-control" id='startTime' />
-		    </div>
-		  </div>
-
-			<div class="form-group">
-			<label class="control-label" for="endTime" id="EndTime">End Time:</label>
-		    	<div class="controls">
-		    		 <input type='text' class="form-control" id='endTime' />
-		    	</div>
-		  </div>
-		  <br />
-		  <div class="form-group">
-			    <label class="control-label" for="venueId">Venue:</label>
-				<div class="controls">
-					<select class="form-control-select" id="venueId" name="venueId"></select>
-				</div>
-		   </div>
-		  <div class="form-group">
-			    <label class="control-label" for="eventImage">Event Image:</label>
-				<div class="controls">
-					<div id="eventImage"></div>
-				</div>
-		   </div>
-		  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok" />
-		  <input class="btn btn-primary clsCancel" type="button" value="Cancel">
-		  <input type="hidden" id="eventImageUUID" value="">
-		  <input type="hidden" id="eventImageGroupId" value="0">
-		  <input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
-		  <input id="eventId" type="hidden" value="0">
-		</form>
-	  </div>
-	  <div class="tab-pane" id="contents">
-		<div id="eventDetailsContainer">
-			<h3><span class="title-text"></span></h3>
-			<form id="eventDetailsForm" style="display:none">
-			  <input type="hidden" id="imgActionUrl" value="<%= addImagesActionURL %>">
-			  <input id="latitude" type="hidden" name="latitude" value="">
-			  <input id="longitude" type="hidden" name="longitude" value="">
-			  <div class="form-group">
-				    <label class="control-label" for="infoTypeId">Info Type:</label>
-					<div class="controls">
-						<select class="form-control-select" id="infoTypeId" name="infoTypeId"></select>
+		<input id="repositoryId" type="hidden" value="<%= repositoryId %>" />
+		<div id="action-msg-warning" style="display:none"></div>
+		<div id="action-msg" style="display:none"></div>
+		<div id="formContainer" style="display:none">
+			<ul class="nav nav-tabs">
+			  <li class="active"><a href="#events" data-toggle="tab">Manage Events</a></li>
+			  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Content</a></li>
+			</ul>
+			<div class="tab-content">
+			  <div class="tab-pane active" id="events">
+				<form id="eventForm">
+				  <div class="form-group">
+				    <div class="controls">
+					    <label class="control-label" for="eventName">Event Name:</label>
+					    <input name="eventName" id="eventName" class="form-control" type="text" maxlength="100" onchange="$('#description').val($(this).val());" /> <div id='Active'>Active</div>
+					    <input type="hidden" id="description" value="" />
 					</div>
+				  </div>
+				   <div class="form-group">
+					    <label class="control-label" for="eventTypeId">Event Type:</label>
+						<div class="controls">
+							<select class="form-control-select" id="eventTypeId" name="eventTypeId"></select>
+						</div>
+				   </div>
+				    <div class="form-group">
+				    	<label id="EventDate" class="control-label" for="eventDate">Event date:</label><div class="controls">
+				    	<div class="controls">
+				   				 <input type='text' class="form-control" id='eventDate' />
+				   		</div>
+					  	</div>
+				   </div>
+		
+				   <div class="form-group">
+				    <label id="StartTime" class="control-label" for="startTime">Start Time:</label>
+				    <div class="controls">
+				      <input type='text' class="form-control" id='startTime' />
+				    </div>
+				  </div>
+		
+					<div class="form-group">
+					<label class="control-label" for="endTime" id="EndTime">End Time:</label>
+				    	<div class="controls">
+				    		 <input type='text' class="form-control" id='endTime' />
+				    	</div>
+				  </div>
+				  <br />
+				  <div class="form-group">
+					    <label class="control-label" for="venueId">Venue:</label>
+						<div class="controls">
+							<select class="form-control-select" id="venueId" name="venueId"></select>
+						</div>
+				   </div>
+				  <div class="form-group">
+					    <label class="control-label" for="eventImage">Event Image:</label>
+						<div class="controls">
+							<div id="eventImage"></div>
+						</div>
+				   </div>
+				  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok" />
+				  <input class="btn btn-primary clsCancel" type="button" value="Cancel">
+				  <input type="hidden" id="eventImageUUID" value="">
+				  <input type="hidden" id="eventImageGroupId" value="0">
+				  <input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
+				  <input id="eventId" type="hidden" value="0">
+				</form>
 			  </div>
-			  <div class="form-group">
-				    <label class="control-label" for="infoTypeCategoryId">Content Type:</label>
-					<div class="controls">
-						<select class="form-control-select" id="infoTypeCategoryId" name="infoTypeCategoryId"></select>
+			  <div class="tab-pane" id="contents">
+				<div id="eventDetailsContainer">
+					<h3><span class="title-text"></span></h3>
+					<form id="eventDetailsForm" style="display:none">
+					  <input type="hidden" id="imgActionUrl" value="<%= addImagesActionURL %>">
+					  <input id="latitude" type="hidden" name="latitude" value="">
+					  <input id="longitude" type="hidden" name="longitude" value="">
+					  <div class="form-group">
+						    <label class="control-label" for="infoTypeId">Info Type:</label>
+							<div class="controls">
+								<select class="form-control-select" id="infoTypeId" name="infoTypeId"></select>
+							</div>
+					  </div>
+					  <div class="form-group">
+						    <label class="control-label" for="infoTypeCategoryId">Content Type:</label>
+							<div class="controls">
+								<select class="form-control-select" id="infoTypeCategoryId" name="infoTypeCategoryId"></select>
+							</div>
+					   </div>
+					   <div id="contentTypeForm">
+					   		Please select content type.
+					   </div>
+					  <input id="infoTypeId" type="hidden" value="1">
+					  <input id="eventDetailId" type="hidden" name="eventDetailId" value="0">
+					  <input class="btn btn-info cssVdSave" type="button" value="Save" />
+					  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel">
+					  <div id="eventDetailGallery"></div>
+					</form>
+		
+					<div class="table-condensed" id="eventDetailsDataTable">
+					  <input class="btn btn-info cssAddEventDetails" type="button" value="Add Event Details" />
+					  <div id="gridDetails"></div>
 					</div>
-			   </div>
-			   <div id="contentTypeForm">
-			   		Please select content type.
-			   </div>
-			  <input id="infoTypeId" type="hidden" value="1">
-			  <input id="eventDetailId" type="hidden" name="eventDetailId" value="0">
-			  <input class="btn btn-info cssVdSave" type="button" value="Save" />
-			  <input class="btn btn-primary cssVdCancel" type="button" value="Cancel">
-			  <div id="eventDetailGallery"></div>
-			</form>
-
-			<div class="table-condensed" id="eventDetailsDataTable">
-			  <input class="btn btn-info cssAddEventDetails" type="button" value="Add Event Details" />
-			  <div id="gridDetails"></div>
+		
+					<div id="actionMenuDetails" style="display:none">
+						<ul>
+							<li>Edit</li> <!--fnShowForm({value}); -->
+							<li>Delete</li> <!--fnDelete({value}); -->
+						</ul>
+				  	</div>
+				</div>
+			  </div>
 			</div>
-
-			<div id="actionMenuDetails" style="display:none">
-				<ul>
-					<li>Edit</li> <!--fnShowForm({value}); -->
-					<li>Delete</li> <!--fnDelete({value}); -->
-				</ul>
-		  	</div>
 		</div>
-	  </div>
-	</div>
-</div>
-
-<div class="table-condensed" id="eventDataTable">
-	<div class="cssGridMenu">
-		<div class="cssAddUser"><div class="iconAddVenue"></div></div>
-		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
-		<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
-		<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
-	</div>
-
-	<div class="device-mobile-tablet" id="GridContainer">
-	    <div id="container" class="device-mobile-tablet-container">
-	        <div style="border: none;" id='grid'></div>
-	    </div>
-	</div>
-</div>
-
-<div id="actionMenu" style="display:none">
-	<ul>
-		<li>Edit</li> <!--fnShowForm({value}); -->
-		<li>Delete</li> <!--fnDelete({value}); -->
-	</ul>
-</div>
+		
+		<div class="table-condensed" id="eventDataTable">
+			<div class="cssGridMenu">
+				<div class="cssAddUser"><div class="iconAddVenue"></div></div>
+				<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
+				<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
+				<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
+			</div>
+		
+			<div class="device-mobile-tablet" id="GridContainer">
+			    <div id="container" class="device-mobile-tablet-container">
+			        <div style="border: none;" id='grid'></div>
+			    </div>
+			</div>
+		</div>
+		
+		<div id="actionMenu" style="display:none">
+			<ul>
+				<li>Edit</li> <!--fnShowForm({value}); -->
+				<li>Delete</li> <!--fnDelete({value}); -->
+			</ul>
+		</div>
+	</c:if>
 </body>
 </html>
