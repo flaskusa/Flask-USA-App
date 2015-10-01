@@ -83,17 +83,15 @@
 				<div class="container-fluid fill">
 					<div class="container">
 					  <div class="panel-group">
-					    <div class="panel panel-default">
+					    <div class="panel panel-default" style="padding-bottom: 8px;">
 					      <div class="panel-heading">Friend Requests (<span id="RequestCount"></span>)</div>
 					      <div class="panel-body" id="MyFriendRequests">No friend request found</div>
 					    </div>
-					    <div class="panel panel-default">
+					    <div class="panel panel-default" style="padding-bottom: 8px;">
 					      <div class="panel-heading">Messages (0)</div>
-					      <div class="panel-body">No messages found</div>
 					    </div>
-					    <div class="panel panel-default">
+					    <div class="panel panel-default" style="padding-bottom: 8px;">
 					      <div class="panel-heading">Other Notifications (0)</div>
-					      <div class="panel-body">Nothing found</div>
 					    </div>
 					  </div>
 					</div>					  
