@@ -282,11 +282,11 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 			return '<i class="icon-wrench" style="margin:3px;"></i>';
 		}
 
-		var groupColumns = [{ text: 'Tailgate', columntype: 'textbox', cellsalign: 'center',  datafield: 'tailgateName'},
-		{ text: 'Event Name', datafield: 'eventName', cellsalign: 'center', width: '20%'},
-		{ text: 'Date', datafield: 'tailgateDate', width: '20%',cellsalign: 'center'},
-		{ text: 'Start Time', datafield: 'startTime', cellsalign: 'center', width: '15%'},
-		{ text: 'Edit',  datafield: 'tailgateId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
+		var groupColumns = [{ text: 'Tailgate', columntype: 'textbox', cellsalign: 'left',  datafield: 'tailgateName'},
+		{ text: 'Event Name', datafield: 'eventName', cellsalign: 'left', width: '25%'},
+		{ text: 'Date', datafield: 'tailgateDate', width: '20%',cellsalign: 'left'},
+		{ text: 'Start Time', datafield: 'startTime', cellsalign: 'left', width: '20%'},
+		{ text: 'Edit',  datafield: 'tailgateId', width: '34px', cellsalign: 'left', cellsrenderer: actionRenderer}];
 		
 		grid.on('cellclick', GRID_PARAM.onRowClick);
 		//set menu item click
