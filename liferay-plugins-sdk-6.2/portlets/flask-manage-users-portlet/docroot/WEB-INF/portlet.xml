@@ -22,14 +22,9 @@
 			<role-name>administrator</role-name>
 		</security-role-ref>
 		<security-role-ref>
-			<role-name>guest</role-name>
+			<role-name>flask-admin</role-name>
 		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
+
 	</portlet>
 	<portlet>
 		<portlet-name>regular-user</portlet-name>
@@ -52,13 +47,7 @@
 			<role-name>administrator</role-name>
 		</security-role-ref>
 		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
+			<role-name>flask-admin</role-name>
 		</security-role-ref>
 	</portlet>
 	<portlet>
@@ -80,12 +69,6 @@
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
 			<role-name>user</role-name>

@@ -4,5 +4,7 @@
 <display>
 	<category name="Flask">
 		<portlet id="FlaskAdmin" />
+		<portlet id="regular-user" />
+		<portlet id="my-account" />
 	</category>
 </display>
