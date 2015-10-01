@@ -37,13 +37,14 @@ span.nav-item-label {
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
 		<aui:nav-item anchorCssClass="user-avatar-link" cssClass='<%= themeDisplay.isImpersonated() ? "user-avatar impersonating-user" : "user-avatar" %>' dropdown="<%= true %>" label="Manage Flask">
 				<%
+				String manageAdminUrl = themeDisplay.getURLPortal() + "/web/flask/madmins";
 				String manageUserUrl = themeDisplay.getURLPortal() + "/web/flask/musers";
 				String manageEventUrl = themeDisplay.getURLPortal() + "/web/flask/mevents";
 				String manageVenueUrl = themeDisplay.getURLPortal() + "/web/flask/mvenues";
 				String manageAds = themeDisplay.getURLPortal() + "/web/flask/manageads";
 				%>
 				<c:if test="<%= bShowFlaskAdminMenu %>">
-					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-gears" label="Manage Admin" title="Manage Flask Admin"  />
+					<aui:nav-item href="<%= manageAdminUrl %>" iconCssClass="icon-gears" label="Manage Admin" title="Manage Flask Admin"  />
 					<aui:nav-item href="<%= manageUserUrl %>" iconCssClass="icon-user" label="&nbsp;Manage Users" title="Manage Flask Users"  />
 					<aui:nav-item href="<%= manageEventUrl %>" iconCssClass="icon-star-empty" label="Manage Events" title="Manage Events"  />
 					<aui:nav-item href="<%= manageVenueUrl %>" iconCssClass="icon-map-marker" label="&nbsp;Manage Venue" title="Manage Venue"  />
