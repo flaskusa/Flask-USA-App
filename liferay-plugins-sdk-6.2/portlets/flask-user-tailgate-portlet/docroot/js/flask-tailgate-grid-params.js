@@ -180,7 +180,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		var container2 = $('<div class="row-fluid"></div>');
 		var containerLocation = $('<div class="row-fluid"></div>');
 		GRID_PARAM.locationMapId = "google_map"+index;
-		var locationColumn = $('<div class="span12" style="height: 140px;"></div>');
+		var locationColumn = $('<div class="span12" style="height: 300px;"></div>');
 		locationColumn.attr("id",GRID_PARAM.locationMapId);
 
 		containerLocation.append(locationColumn);
@@ -234,7 +234,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		
 		$(tabsdiv).jqxTabs({
 			width : '98%',
-			height : 180
+			height : 290
 		});
 		
 		$("li").click(function(){
@@ -312,7 +312,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
                 pagermode : 'default',
                 rowdetails: true,
                 showrowdetailscolumn:false,
-                rowdetailstemplate: GRID_PARAM.rowDetailTemplate(rowDetailDivArr , 200),
+                rowdetailstemplate: GRID_PARAM.rowDetailTemplate(rowDetailDivArr , 300),
                 initrowdetails: GRID_PARAM.initrowdetails,
                 columns: groupColumns
             });
