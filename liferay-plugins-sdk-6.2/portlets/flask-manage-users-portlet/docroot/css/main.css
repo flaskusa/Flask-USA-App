@@ -107,3 +107,10 @@ div#jqxwindow
 #file {
     display:none;
 }
+
+div#jqxwindow {
+    -moz-box-shadow: 1px 0px 26px 3px rgba(0,0,0,0.42);
+    box-shadow: 1px 0px 26px 3px rgba(0,0,0,0.42);
+    border: 1px !important;
+    border-radius: 4px;
+}
