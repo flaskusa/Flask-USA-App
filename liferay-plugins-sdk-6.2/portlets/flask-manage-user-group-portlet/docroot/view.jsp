@@ -26,7 +26,7 @@
 										"groupActionMenu",
 										"Edit",
 										myGroupContextMenuHandler,
-										[ "Group" ],
+										[ "Group","Members"],
 										"myGroupGridContainer");
 								loadGroupData(userId);
 								groupClickHandlers();
@@ -104,7 +104,7 @@
 				name="<portlet:namespace />userName" id="userName"
 				value="<%=userName%>" />
 			<div class="modal-footer">
-			<button type="button" class="btn btn-primary pull-left clsBack">Back</button>
+			<!-- <button type="button" class="btn btn-primary pull-left clsBack">Back</button> -->
 				<button type="button" class="btn btn-primary clsSaveGroup">Create</button>
 				<button type="reset" class="btn btn-primary clsCancelGroup" >Cancel</button>
 			</div>
@@ -131,7 +131,7 @@
 			</div>
 			<div class="modal-footer">
 				<button type="button" class="btn btn-primary pull-left clsBack">Back</button>
-				<button type="button" class="btn btn-primary clsAddUserGroup">Add Participants</button>
+				<button type="button" class="btn btn-primary clsAddUserGroup">Add Friend</button>
 				<button type="reset" class="btn btn-primary clsCancelGroup">Cancel</button>
 			</div>
 		</form>

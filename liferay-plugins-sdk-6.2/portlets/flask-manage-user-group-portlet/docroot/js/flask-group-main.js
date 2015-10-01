@@ -132,7 +132,7 @@ function loadParticipantsGroupData(logginUserId) {
 }
 
 function myGroupContextMenuHandler(menuItemText, rowData) {
-	if (menuItemText == "Add Member") {
+	if (menuItemText == "Add Friend") {
 		groupId = rowData.groupId;
 		showAddGroupUsersForm(rowData);
 	} else if (menuItemText == "Add Owner") {
@@ -317,6 +317,7 @@ function prepareUserGrid(){
 }
 
 function showAddGroupOwnerForm(rowData) {
+	console.log(rowData);
 	fetchGroupDetail(groupId);
 	prepareUserOwnerGrid();
 //	$("#tabs").hide();
@@ -379,4 +380,40 @@ function addGroupOwner(params){
 				_flaskLib.showErrorMessage(_groupModel.MESSAGES.GET_ERROR);
 				console.log("Error in getting Group Detaill: " + error);
 			});
+}
+
+function prepareMemberTable(container){
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_groupModel.SERVICE_ENDPOINTS.GET_ALL_USERS, {}, function(data) {
+		console.log(data);
+		var memberTable = $('<table/>',{'width':'100%','class': 'aui'});
+		var memberTr = $('<tr/>');
+		var memberTh1 = $('<th/>');
+		var memberTh2 = $('<th/>');
+		var memberTh3 = $('<th/>');
+		memberTable.append(memberTr);
+		memberTr.append(memberTh1);
+		memberTr.append(memberTh2);
+		memberTr.append(memberTh3);
+		memberTh1.html('First Name');
+		memberTh2.html('Last Name');
+		memberTh3.html('Email');
+		for(var iCount=0;iCount<data.length;iCount++){
+			var trNew = $('<tr/>');
+			var tdFirstName = $('<td/>');
+			var tdLastName = $('<td/>');
+			var tdEmail = $('<td/>');
+			tdFirstName.html(data[iCount].firstName);
+			tdLastName.html(data[iCount].lastName);
+			tdEmail.html(data[iCount].email);
+			trNew.append(tdFirstName);
+			trNew.append(tdLastName);
+			trNew.append(tdEmail);
+			memberTable.append(trNew);
+		}
+		$(container).append(memberTable);
+	}, function(error) {
+		_flaskLib.showErrorMessage(_groupModel.MESSAGES.GET_ERROR);
+		console.log("Error in deleting Group User : " + error);
+	});
 }

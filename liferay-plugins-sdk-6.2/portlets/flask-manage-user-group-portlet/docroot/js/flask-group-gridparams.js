@@ -128,7 +128,7 @@ GRID_PARAM_GROUP.prepareContextMenu = function(){
 //	$("#grpCtxtMenu").remove();
 	var ulEle = "<div id='grpCtxtMenu'><ul>";
 	if(isAdmin == 1){
-		ulEle = ulEle + "<li>Add Member</li>";
+		ulEle = ulEle + "<li>Add Friend</li>";
 		ulEle = ulEle + "<li>Add Owner</li>";
 		ulEle = ulEle + "<li>Delete Group</li>";
 	}else{
@@ -166,6 +166,8 @@ GRID_PARAM_GROUP.initrowdetails = function(index, parentElement, gridElement, da
     	var rowData = gridObj.jqxGrid('getrowdata', rowindex);
     	
 		var groupInfoDiv = tabsdiv.find('.group');
+		var memberInfoDiv = tabsdiv.find('.members');
+		prepareMemberTable(memberInfoDiv);
 //		var imagesDiv = tabsdiv.find('.images');
 		
 		var container1 = $('<div class="row-fluid" id="GroupDetailsId"></div>');
@@ -189,8 +191,7 @@ GRID_PARAM_GROUP.initrowdetails = function(index, parentElement, gridElement, da
 			+ datarecord.createdBy + "</td></tr>";
 		var createdDate = "<tr><td class='filledWidth'> <b>Created Date:</b></td><td>"
 				+ datarecord.createdDate + "</td></tr>";
-		var groupMembers = "<tr><td class='filledWidth'> <b>Group Members:</b></td>" +
-							"<td><a href='#' onclick='showAddGroupOwnerForm("+ datarecord +")'>Show group members</a></td></tr>";
+		//var groupMembers = "<tr><td class='filledWidth'> <b>Group Members:</b></td>" +"<td><a href='#' onclick='showAddGroupOwnerForm("+ datarecord +")'>Show group members</a></td></tr>";
 		
 		
 		
@@ -204,7 +205,7 @@ GRID_PARAM_GROUP.initrowdetails = function(index, parentElement, gridElement, da
 		$(rightcolumn).append("<table class='table'>");
 		$(rightcolumn).append(createdBy);
 		$(rightcolumn).append(createdDate);
-		$(rightcolumn).append(groupMembers);
+		//$(rightcolumn).append(groupMembers);
 		$(rightcolumn).append("</table>");
 		$(tabsdiv).jqxTabs({
 			width : '90%',
@@ -243,13 +244,13 @@ function createMyGroupTable(data, model, grid, menuDivId, actionColText,contextM
 		gridContainerId = containerId;
 		
     var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
-						return '<i class="icon-wrench" style="margin:3px;"></i>';
+						return '<i class="icon-wrench" style="margin:3px;cursor:pointer"></i>';
 	}
     
-    var groupColumns = [{ text: 'Group Name', columntype: 'textbox',  datafield: 'groupName', width: '30%' },
-    	 { text: 'Group Description', datafield: 'groupDescription', width: '50%'},
-    	 { text: 'Role', datafield: 'isGroupAdmin', width: '10%'},
-    	 { text: 'Edit',  datafield: 'groupId', width: '10%', cellsalign: 'center', cellsrenderer: actionRenderer}];
+    var groupColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'groupName', width: '30%' },
+    	 { text: 'Description', datafield: 'groupDescription'},
+    	 { text: 'Role', datafield: 'isGroupAdmin', width: '20%'},
+    	 { text: 'Edit',  datafield: 'groupId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
     
     grid.on('cellclick', GRID_PARAM_GROUP.onRowClick);
     //set menu item click
@@ -271,7 +272,7 @@ function createMyGroupTable(data, model, grid, menuDivId, actionColText,contextM
 				rowsheight : 34,
                 theme:	'custom',
              // Pageing config
-                pageable : true,
+                pageable : false,
                 pagermode : 'default',
                 rowdetails: true,
                 showrowdetailscolumn:false,
@@ -287,10 +288,9 @@ function createMyGroupTable(data, model, grid, menuDivId, actionColText,contextM
  */
 function createUserTable(data, grid){
 //	grid.jqxGrid("refresh");
-    var eventsColumns = [{ text: 'First Name', columntype: 'textbox',  datafield: 'firstName', width: '20%' },
-    	 { text: 'Last Name', datafield: 'lastName', width: '20%'},
-    	 { text: 'Screen Name', datafield: 'screenName',  width: '20%'},
-    	 { text: 'Email', datafield: 'emailAddress',  width: '37.5%'}];
+    var eventsColumns = [{ text: 'First Name', columntype: 'textbox',  datafield: 'firstName', width: '30%' },
+    	 { text: 'Last Name', datafield: 'lastName', width: '30%'},
+    	 { text: 'Email', datafield: 'emailAddress',  width: '40%'}];
     var source = {
 			 localdata:data,
 			 datatype:'array',
@@ -314,14 +314,11 @@ function createUserTable(data, grid){
 				columnsmenuwidth : 40,
 				rowsheight : 34,
                 theme:	'custom',
-             // Pageing config
                 pageable : true,
                 pagermode : 'default',
                 rowdetails: true,
                 selectionmode: 'checkbox',
                 showrowdetailscolumn:false,
-//                rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
-//                initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
                 columns: eventsColumns
             });
     
