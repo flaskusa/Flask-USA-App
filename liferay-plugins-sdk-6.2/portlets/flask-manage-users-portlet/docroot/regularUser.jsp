@@ -40,14 +40,14 @@
 			createTable({},_userModel.DATA_MODEL.ADMIN, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Admin", "Images"]);
 			loadData();
 			addClickHandlers();
-			$('#DOB').datetimepicker({
-				format: "MM-DD-YYYY",
-				//pickTime: false
-			});
 			//$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
 			$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
 		    console.log("Cal Done");    
 			$(".jqx-checkbox").css("margin-top","6.5px");
+			$('#DOB').datetimepicker({
+				format: "MM-DD-YYYY",
+				//pickTime: false
+			});
 		}
 		if(portletId == "myaccount_WAR_flaskmanageusersportlet")
 		{
@@ -63,7 +63,6 @@
 			//document.getElementById('roleId').disabled=true;
 			//$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
 			$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
-		    console.log("Cal Done");    
 			$(".jqx-checkbox").css("margin-top","6.5px");
 		}
 	}
@@ -315,8 +314,8 @@
 				     </div>
 	                Set the role?<br />
 	                <div>
-	                <div id="y"><input type="button" value="Yes" id="button_input"></div>
-	               <div id="n"><input type="button" value="No" id="button_no" /></div></div>
+	                <div id="y"><input type="button" value="Yes" class="btn-primary" style="width: 98%" id="button_input"></div>
+	               <div id="n"><input type="button" value="No" class="btn-primary" id="button_no" /></div></div>
 	            </div>
 	        </div>
 	<%--End of jqx popup window for change role --%>
