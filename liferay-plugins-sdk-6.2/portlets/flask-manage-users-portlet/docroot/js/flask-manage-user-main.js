@@ -70,7 +70,7 @@ function addClickHandlers(){
 
 $(document).ready(function () {
 	  // initialize validator.
-    $("#jqxwindow").jqxWindow({ height: 168, width: 370, theme: 'custom', isModal: true, autoOpen: false });
+    $("#jqxwindow").jqxWindow({ height: 175, width: 370, theme: 'custom', isModal: true, autoOpen: false });
     $("#popup").click(function () {
         $("#jqxwindow").jqxWindow('open');
     });
