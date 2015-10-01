@@ -72,6 +72,9 @@ perspective effects (not including the modals and the overlay).
     position: relative;
 	border-radius: 3px;
 	margin: 0 auto;
+	-webkit-box-shadow: 3px 4px 21px 0px rgba(0,0,0,1);
+	-moz-box-shadow: 3px 4px 21px 0px rgba(0,0,0,1);
+	box-shadow: 3px 4px 21px 0px rgba(0,0,0,1);	
 }
 
 .md-content h3 {
@@ -86,7 +89,7 @@ perspective effects (not including the modals and the overlay).
 }
 
 .md-content > div {
-	padding: 5px 15px 15px;
+	/*padding: 5px 15px 15px;*/
 	margin: 0;
 }
 
