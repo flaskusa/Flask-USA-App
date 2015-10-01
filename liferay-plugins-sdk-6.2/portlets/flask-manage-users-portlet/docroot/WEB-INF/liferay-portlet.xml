@@ -37,7 +37,12 @@
 		<icon>/icon.png</icon>
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<header-portlet-css>/css/jqx.base.css</header-portlet-css>
-		<footer-portlet-javascript>/js/flask-ajax.js</footer-portlet-javascript>
+		<header-portlet-css>/css/bootstrap.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datetimepicker.min.css</header-portlet-css>
+		<footer-portlet-javascript>/js/flask-ajax.js</footer-portlet-javascript>		
+		<footer-portlet-javascript>/js/moment-with-locales.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-datetimepicker.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-reg-gridparams.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-reg-manage-user-main.js</footer-portlet-javascript>
