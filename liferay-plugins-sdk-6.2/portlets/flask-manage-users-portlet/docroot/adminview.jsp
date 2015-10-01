@@ -283,8 +283,8 @@ function initialize(portletId, portlet){
 				     </div>
 	                Set the role?<br />
 	                <div>
-	                <div id="y"><input type="button" value="Yes" id="button_input"></div>
-	               <div id="n"><input type="button" value="No" id="button_no" /></div></div>
+	                <div id="y"><input type="button" value="Yes" class="btn-primary" style="width: 98%" id="button_input"></div>
+	               <div id="n"><input type="button" value="No" class="btn-primary" id="button_no" /></div></div>
 	            </div>
 	        </div>
 	<%--End of jqx popup window for change role --%>
