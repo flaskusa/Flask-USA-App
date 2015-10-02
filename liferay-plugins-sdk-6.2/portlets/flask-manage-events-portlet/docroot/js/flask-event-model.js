@@ -41,8 +41,8 @@ _eventModel.GRID_CONTEXT_MENU = {
 
 _eventModel.GRID_DATA_MODEL= {
 		EVENT:
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'eventName' },
-	  		 {text: 'Description', datafield: 'description', width: '25%'},
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'eventName', width: '25%'},
+	  		 {text: 'Description', datafield: 'description'},
 	  		{text: 'Date', datafield: 'eventDate', width: '25%'},
 	  		 { text: 'Edit',  datafield: 'eventId', width: '34px', cellsalign: 'center', cellsrenderer: _eventModel.GRID_CONTEXT_MENU.EVENT }]
 		};

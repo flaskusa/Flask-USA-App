@@ -152,7 +152,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 			eventDiv.append(container1);
 
 			$(tabsdiv).jqxTabs({
-				width : '90%',
+				width : '100%',
 				height : 180
 			});
 	    }
@@ -216,12 +216,13 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 				theme:	'custom',
 				autoheight: true,
 				pageable : true,
-				pagermode : 'default',
+				pagermode : 'simple',
 				rowdetails: true,
 				showrowdetailscolumn:false,
 				rowdetailstemplate: GRID_PARAM.rowDetailTemplate(rowDetailDivArr , 200),
 				initrowdetails: GRID_PARAM.initrowdetails,
-				columns: Columns
+				columns: Columns,
+				pagesize: 20
 			});
 
 	}

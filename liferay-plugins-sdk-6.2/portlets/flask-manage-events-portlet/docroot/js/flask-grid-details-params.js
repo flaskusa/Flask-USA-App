@@ -118,7 +118,7 @@ GRID_PARAM_DETAILS.initrowdetails = function(index, parentElement, gridElement, 
 	    	fnGetEventDetailImages(datarecord.eventDetailId,container, false);
 	  	  	$(container).appendTo($(eventDiv));
 		$(tabsdiv).jqxTabs({
-			width : '98%',
+			width : '100%',
 			height : 180
 		});
 	}
@@ -180,7 +180,7 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 				theme:	'custom',
 				autoheight: true,
 				pageable : true,
-				pagermode : 'default',
+				pagermode : 'simple',
 				rowdetails: true,
 				groupable: true,
 				showgroupsheader: false,
@@ -192,6 +192,7 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 				columns: Columns,
 				groups: ['infoTypeId'],
 				groupsexpandedbydefault:true,
-				sortable:false
+				sortable:false,
+				pagesize: 20
 			});
 }

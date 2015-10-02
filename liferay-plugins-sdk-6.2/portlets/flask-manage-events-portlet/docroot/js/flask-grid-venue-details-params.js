@@ -182,7 +182,7 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 				theme:	'custom',
 				autoheight: true,
 				pageable : true,
-				pagermode : 'default',
+				pagermode : 'simple',
 				rowdetails: true,
 				groupable: true,
 				showgroupmenuitems: false,
@@ -193,7 +193,8 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 				initrowdetails: GRID_PARAM_DETAILS.initrowdetails,
 				columns: Columns,
 				groups: ['infoTypeId'],
-				groupsexpandedbydefault:true
+				groupsexpandedbydefault:true,
+				pagesize: 20
 			});
 
 	}

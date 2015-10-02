@@ -129,3 +129,20 @@ zoom: 1.8 !important;
 .aui .btn-info:hover, .aui .btn-info:focus, .aui .btn-info:active, .aui .btn-info.active, .aui .btn-info.disabled, .aui .btn-info[disabled] {
     background-color: #5A5A5A !important;
 }
+
+.jqx-enableselect.jqx-widget-content.jqx-widget-content-custom {
+    width: 100% !important;
+	margin-left: 0px !important;
+	z-index: 1 !important;
+}
+
+.jqx-tabs.jqx-widget.jqx-widget-content.jqx-rc-all {
+    width: 100% !important;
+}
+
+.iconAddVenue{
+	margin: 8px !important;
+    color: #FFF !important;	
+    background-image:none !important;
+	font-size: 18px !important;
+}

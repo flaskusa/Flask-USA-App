@@ -40,7 +40,6 @@ _venueModel.DATA_MODEL= {
 		]
 	};
 
-
 _venueModel.MESSAGES= {
 		GET_ERROR: "There was an error in getting data",
 		ADD: "Venue successfully added",

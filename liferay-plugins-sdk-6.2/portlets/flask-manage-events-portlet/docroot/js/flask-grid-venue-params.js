@@ -177,7 +177,7 @@ GRID_PARAM_VENUE.initrowdetails = function(index, parentElement, gridElement, da
 	  	$(container).appendTo($(imagesDiv));
 
 		$(tabsdiv).jqxTabs({
-			width : '90%',
+			width : '100%',
 			height : 180
 		});
 	}
@@ -215,11 +215,11 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 						return '<i class="icon-wrench" style="margin:3px;"></i>'
 	}
 
-	var vanueColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'venueName', width: '30%' },
-						{text: 'Description', datafield: 'venueDescription', width: '30%'},
+	var vanueColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'venueName', width: '20%' },
+						{text: 'Description', datafield: 'venueDescription'},
 						{ text: 'City', datafield: 'venueCity',  width: '20%'},
 						{ text: 'Metro Area', datafield: 'venueMetroArea', width: '15%'},
-						{ text: 'Edit',  datafield: 'venueId', width: '5%', cellsalign: 'center', cellsrenderer: actionRenderer}];
+						{ text: 'Edit',  datafield: 'venueId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
 
 
 
@@ -250,14 +250,14 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 				rowsheight : 34,
 				theme:	'custom',
 				autoheight: true,
-			 // Pageing config
 				pageable : true,
-				pagermode : 'default',
+				pagermode : 'simple',
 				rowdetails: true,
 				showrowdetailscolumn:false,
 				rowdetailstemplate: GRID_PARAM_VENUE.rowDetailTemplate(rowDetailDivArr , 200),
 				initrowdetails: GRID_PARAM_VENUE.initrowdetails,
-				columns: vanueColumns
+				columns: vanueColumns,
+				pagesize: 20
 			});
 
 	}

@@ -179,7 +179,7 @@ function initialize(portletId, portlet) {
 		
 		<div class="table-condensed" id="eventDataTable">
 			<div class="cssGridMenu">
-				<div class="cssAddUser"><div class="iconAddVenue"></div></div>
+				<div class="cssAddUser"><div class="iconAddVenue"><i class="icon-star-empty"></i></div></div>
 				<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
 				<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
 				<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>

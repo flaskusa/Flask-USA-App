@@ -54,10 +54,10 @@ _eventDetailModel.GRID_CONTEXT_MENU = {
 
 _eventDetailModel.GRID_DATA_MODEL= {
 		EVENTDETAILS:
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '35%' },
-	  		 {text: 'Description', datafield: 'infoDesc', width: '35%'},
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '35%'},
+	  		 {text: 'Description', datafield: 'infoDesc'},
 	  		 {text: 'Content Type', datafield: 'infoTypeCategoryName', width: '20%'},
-	  		 { text: 'Edit',  datafield: 'eventDetailId', width: '10%', cellsalign: 'center', cellsrenderer: _eventDetailModel.GRID_CONTEXT_MENU.EVENTDETAILS }]
+	  		 { text: 'Edit',  datafield: 'eventDetailId', width: '34px', cellsalign: 'center', cellsrenderer: _eventDetailModel.GRID_CONTEXT_MENU.EVENTDETAILS }]
 		};
 
 _eventDetailModel.MESSAGES= {
