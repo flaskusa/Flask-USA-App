@@ -168,7 +168,7 @@ var getSelectedtailgateDate = function(contentToIterate,eventId,element){
 				function (venue){
 				var lat = venue.latitude;
 				var lng = venue.longitude;
-				initializeMap(tailgateId,lat, lng);
+				initializeMap(0,lat, lng);
 			},function(error){
 					
 				});
@@ -277,7 +277,7 @@ function editTailgate(rowData) {
 		$("#formContainer").show();
 		GRID_PARAM.locationMapId = "google_map";
 		loadEventAndTime('eventId',  rowData.tailgateId);
-		initializeMap(rowData.tailgateId,0,0);
+		initializeMap(rowData,0,0);
 }
 function loadEventAndTime(elementId,tailgateId){
 	var request = new Request();

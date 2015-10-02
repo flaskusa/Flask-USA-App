@@ -240,7 +240,8 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		$("li").click(function(){
 			var tabSelected = $(this).find('.jqx-tabs-titleContentWrapper').html().toLowerCase();
 			if(tabSelected=='location'){
-				initializeMap(datarecord.tailgateId,0,0);
+				console.log(tabSelected);
+				initializeMap(datarecord,0,0);
 			}
 		});
 		//setTimeout(function(){ initializeMap(datarecord.tailgateId,0,0) }, 1500);

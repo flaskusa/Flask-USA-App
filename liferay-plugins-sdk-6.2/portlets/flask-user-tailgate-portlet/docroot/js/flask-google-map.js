@@ -6,20 +6,49 @@ var map;
 var tailgateMarker = {};
 var isNewMarker = true;
 var isMarkerCreated = false;
-function initializeMap(tgId, latitude, longitude) {
-	tailgateId = tgId;
+function initializeMap(tg, latitude, longitude) {
+	if(tg==0){
+		tailgateId= 0;
+	}else{
+		var tgId= tg.tailgateId;
+		tailgateId = tgId;
+	}
 	if(tgId>0){
 		 var flaskRequest = new Request();
 			params = {tailgateId:tgId};
 			flaskRequest.sendGETRequest(_tailgateMarkerModel.SERVICE_ENDPOINTS.GET_TAILGATE_MARKER, params, 
-			function(data){/*success handler*/
-				latitude = data.latitude;
-				longitude = data.longitude;
-				if(GRID_PARAM.locationMapId == undefined){
-					GRID_PARAM.locationMapId = "google_map";
+			function(data){
+				/*success handler*/
+				if(data.latitude==undefined){
+					var flaskRequest = new Request();
+					flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.GET_ALL_EVENTS , {}, 
+							function (data){
+								events = data.Events;
+								$.each(events,function(key,event){
+									if((event.eventId+"") == tg.eventId){
+										flaskRequest.sendGETRequest(_tailgateModel.SERVICE_ENDPOINTS.GET_VENUE , {venueId:event.venueId}, 
+											function (venue){
+											var lat = venue.latitude;
+											var lng = venue.longitude;
+											loadMap(lat, lng,GRID_PARAM.locationMapId);
+										},function(error){
+												
+											});
+									}
+								});
+							} ,
+							function (data){
+					});
+				}else{
+					latitude = data.latitude;
+					longitude = data.longitude;
+					if(GRID_PARAM.locationMapId == undefined){
+						GRID_PARAM.locationMapId = "google_map";
+					}
+					loadMap(latitude, longitude,GRID_PARAM.locationMapId);
+					isMarkerCreated = true;
 				}
-				loadMap(latitude, longitude,GRID_PARAM.locationMapId);
-				isMarkerCreated = true;
+				
 			} , function(error){ /*failure handler*/
 				_flaskLib.showErrorMessage('action-msg',_tailgateModel.MESSAGES.GET_ERROR);
 			});
