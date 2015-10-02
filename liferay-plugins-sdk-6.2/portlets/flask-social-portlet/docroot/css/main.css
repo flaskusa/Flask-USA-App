@@ -220,9 +220,13 @@ ul.dropdown-menu li {
 .footerButtons
 {
     position: absolute;
-    bottom: -81px;
+    /*bottom: -81px;*/
     margin-left: 19px;
     width: 100%;
+}
+
+.aui .tab-content {
+    overflow: visible !important;
 }
 
 .MyDDStyle{
