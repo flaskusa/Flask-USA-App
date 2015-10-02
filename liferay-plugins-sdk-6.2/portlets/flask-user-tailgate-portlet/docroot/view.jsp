@@ -1,8 +1,7 @@
 <%@page import="org.apache.jasper.tagplugins.jstl.core.ForEach"%>
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@include file="init.jsp"%>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOsZgER635konTZQ_MP2Ss8ZjPrmlRMyI&callback=initializeMap">
-    </script>
+<script src="http://maps.googleapis.com/maps/api/js"></script>
 
 <portlet:actionURL  var="addImagesActionURL" name="addImages"/>
 <%
