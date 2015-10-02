@@ -61,7 +61,7 @@ function renderContactList(tdata,IsFriendList) {
 		    
 		    $(userName_lbl).appendTo($(objTd2));
 		    $(objTd2).appendTo(objTr);
-		    var objTd3 = $('<td/>',{'rowspan':'2','align':'right','valign':'top'});
+		    var objTd3 = $('<td/>',{'rowspan':'2','align':'right','valign':'top', 'width':'126px'});
 		    console.log(flaskUser);
 	    	var div_heart = fnBuildMenu(flaskUser);
 	    	
@@ -98,7 +98,7 @@ function fnBuildMenu(obj){
 			var button = $('<button/>',{'class':'btn btn-primary dropdown-toggle','type':'button','data-toggle':'dropdown'})
 			button.html('Friend&nbsp;<span class="caret"></span>');
 			var li1 = $('<li/>');
-			$(li1).html('<a href="#" onclick="fnBlock('+UserId+','+button+');">Block</a>');
+			$(li1).html('<a href="#" onclick="fnBlock('+UserId+',this);">Block</a>');
 			var li2 = $('<li/>');
 			$(li2).html('<a href="#" onclick="fnUnFriend('+UserId+',this);">Unfriend</a>');
 			var li3 = $('<li/>');
@@ -198,14 +198,13 @@ function fnUnFriend(UserId,obj){
 	var params = {receiverUserId: UserId};
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.UNFRIEND, params, 
 	function(data){
-		initContactList(_startPos,_endPos);
-		$(obj).click(function(){
-			sendFriendRequest(UserId,obj);
-		})		
-		$(obj).html('Add Friend');
+		
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.UNFRIEND_ERR);
 	});		
+	initContactList(_startPos,_endPos);
+	var hide_div = $(obj).closest(".tblRow");
+	$(hide_div).fadeOut( "slow" );	
 }
 
 
@@ -214,14 +213,12 @@ function fnBlock(UserId,obj){
 	var params = {blockUserId: UserId};
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.BLOCKPERSON, params, 
 	function(data){
-		initContactList(_startPos,_endPos);
-		$(obj).click(function(){
-			sendFriendRequest(UserId,obj);
-		})		
-		$(obj).html('Unblock');
+		
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.UNFRIEND_ERR);
 	});
+	var hide_div = $(obj).closest(".tblRow");
+	$(hide_div).fadeOut( "slow" );	
 }
 
 function fnUnBlock(UserId,obj){
