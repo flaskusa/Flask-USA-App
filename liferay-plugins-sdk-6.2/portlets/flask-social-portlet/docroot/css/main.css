@@ -221,8 +221,13 @@ ul.dropdown-menu li {
 {
     position: absolute;
     /*bottom: -81px;*/
-    margin-left: 19px;
+    margin-left: 5%;
     width: 100%;
+}
+
+.aui .pager li > a, .aui .pager li > span{
+	border-radius: 6px !important;
+    width: 32% !important;
 }
 
 .aui .tab-content {
