@@ -419,6 +419,10 @@ $(document).ready(function() {
 		});
 		$("#venueDetailsContainer").show();
 	});
+	
+	$('.md-closeBtn').click(function(){
+		$('#modal-advertisement').removeClass('md-show');
+	});	
 });
 
 function fnCheckDuplicateTitle(_infoTitle) {
@@ -469,9 +473,9 @@ function fnGetVenueDetailImages(venueDetailId,container,editable) {
 
 function fnRenderImage(imageUUID, imageGroupId, container, venueDetailImageId, editable) {
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID+"&groupId="+imageGroupId;
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-venueDetailImageId': venueDetailImageId});
-	$(objdiv).appendTo($(container));
 	if (editable) {
+		var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-venueDetailImageId': venueDetailImageId,'data-imageURL':imgURL});
+		$(objdiv).appendTo($(container));
 		$(objdiv).click(function() {
 	    	$(this).toggleClass("activeImage");
 	    	if ($(".activeImage").length>0) {
@@ -500,4 +504,30 @@ function fnRenderImage(imageUUID, imageGroupId, container, venueDetailImageId, e
 	    	}
 	    });
 	}
+	else{
+		var objdiv = $('<div/>',{'class':'GridSlides','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-venueDetailImageId': venueDetailImageId,'data-imageURL':imgURL});
+		$(container).owlCarousel({
+			items:3,
+			navigation:true,
+			navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
+			pagination:true,
+		    items : 5,
+		    itemsCustom : false,
+		    itemsDesktop : [1199,4],
+		    itemsDesktopSmall : [980,3],
+		    itemsTablet: [768,2],
+		    itemsTabletSmall: false,
+		    itemsMobile : [479,1],
+		    singleItem : false,
+		    itemsScaleUp : false,		
+		});			
+		$(container).data('owlCarousel').addItem(objdiv);
+		$(objdiv).click(function() {
+			var imgContainer = $('.imageContainer');
+			imgContainer.html('');
+			var objImage = $('<img/>',{'src':$(this).attr('data-imageURL')});
+			imgContainer.append(objImage);
+	    	$('.md-trigger').click();
+		});		
+    }
 }

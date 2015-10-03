@@ -2,6 +2,7 @@ var imageContainer = $("#eventImage");
 var eventForm;
 var dropZoneLogo;
 var edit = false;
+
 function addClickHandlers() {
 	eventForm = $("#eventForm");
 	/*	Initialize display elements*/

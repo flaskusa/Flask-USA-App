@@ -138,11 +138,54 @@ zoom: 1.8 !important;
 
 .jqx-tabs.jqx-widget.jqx-widget-content.jqx-rc-all {
     width: 100% !important;
+    margin: 0px !important;
 }
 
-.iconAddVenue{
+.iconAddEvent{
+    height: 32px;
+    width: 32px;
 	margin: 8px !important;
     color: #FFF !important;	
-    background-image:none !important;
 	font-size: 18px !important;
+}
+
+.filledWidth .filledWidth1{
+	vertical-align: top;
+	text-align: left;
+}
+
+.GridSlides{
+	background-size: cover;
+    width: 100% !important;
+    height: 160px !important;
+}
+
+
+.owl-theme .owl-controls .owl-buttons div {
+    position: absolute;
+   	margin: 9px !important;
+   	padding: 10px 5px !important;;
+}
+
+.owl-theme .owl-controls .owl-buttons .owl-prev{
+  left: 0px !important;
+  top: 70px !important; 
+}
+ 
+.owl-theme .owl-controls .owl-buttons .owl-next{
+  right: 0px !important;
+  top: 70px !important;
+}
+
+.owl-theme .owl-controls {
+    margin-top: -24px !important;
+}
+
+.owl-theme .owl-controls .owl-page {
+    zoom: 0.8 !important;
+}
+
+.owl-theme .owl-controls .owl-page.active span, .owl-theme .owl-controls.clickable .owl-page:hover span {
+    filter: Alpha(Opacity=90) !important;
+    opacity: 0.9 !important;
 }

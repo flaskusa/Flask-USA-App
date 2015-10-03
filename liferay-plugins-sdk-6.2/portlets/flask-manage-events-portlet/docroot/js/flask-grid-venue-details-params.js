@@ -120,10 +120,10 @@ GRID_PARAM_DETAILS.initrowdetails = function(index, parentElement, gridElement, 
 	    	var container = $('<div/>');
 	    	fnGetVenueDetailImages(datarecord.venueDetailId,container,false);
 	  	  	$(container).appendTo($(venueDiv));
-		$(tabsdiv).jqxTabs({
-			width : '98%',
-			height : 180
-		});
+			$(tabsdiv).jqxTabs({
+				width : '100%',
+				height : 200
+			});
 	}
 }
 

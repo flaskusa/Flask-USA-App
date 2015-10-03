@@ -119,7 +119,7 @@ GRID_PARAM_DETAILS.initrowdetails = function(index, parentElement, gridElement, 
 	  	  	$(container).appendTo($(eventDiv));
 		$(tabsdiv).jqxTabs({
 			width : '100%',
-			height : 180
+			height : 200
 		});
 	}
 }

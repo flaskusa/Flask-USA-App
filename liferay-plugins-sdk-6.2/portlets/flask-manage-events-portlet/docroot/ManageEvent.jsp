@@ -179,7 +179,7 @@ function initialize(portletId, portlet) {
 		
 		<div class="table-condensed" id="eventDataTable">
 			<div class="cssGridMenu">
-				<div class="cssAddUser"><div class="iconAddVenue"><i class="icon-star-empty"></i></div></div>
+				<div class="cssAddUser"><div class="iconAddEvent"><i class="icon-star-empty"></i></div></div>
 				<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
 				<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
 				<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
@@ -199,5 +199,16 @@ function initialize(portletId, portlet) {
 			</ul>
 		</div>
 	</c:if>
+	<div class="md-modal md-effect-14" id="modal-advertisement">
+		<div class="md-content">
+			<h3 id="myModalLabel">Flask Gallery</h3>
+			<span class='md-closeBtn'>x</span>
+			<div>
+				<div class="imageContainer"></div>
+			</div>
+		</div>
+	</div>
+	<div class="md-overlay"></div>
+	<button class="md-trigger" data-modal="modal-advertisement" style="display:none">3D Rotate Bottom</button>	
 </body>
 </html>

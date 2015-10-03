@@ -132,8 +132,8 @@ GRID_PARAM_VENUE.initrowdetails = function(index, parentElement, gridElement, da
 
 		var venue_Name = "<tr><td class='filledWidth'> <b>Name:</b></td><td> "
 			+ datarecord.venueName + "</td></tr>";
-	    var venue_Description = "<tr><td class='filledWidth'><b>Description:</b></td><td> "
-			+ datarecord.venueDescription + "</td></tr>";
+	    var venue_Description = "<tr><td class='filledWidth' valign='top'><b>Description:</b></td><td><textarea style='border:none;width:240px;height:100px;background-color:white;margin:0px;' wrap='hard' readonly='true'>"
+			+ datarecord.venueDescription + "</textarea></td></tr>";
 	    var addrLine_1 = "<tr><td class='filledWidth'><b>Address #1:</b></td><td> "
 			+ datarecord.addrLine1 + "</td></tr>";
 		var addrLine_2 = "<tr><td class='filledWidth'> <b>Address #2:</b></td><td>"
@@ -178,7 +178,7 @@ GRID_PARAM_VENUE.initrowdetails = function(index, parentElement, gridElement, da
 
 		$(tabsdiv).jqxTabs({
 			width : '100%',
-			height : 180
+			height : 374
 		});
 	}
 }

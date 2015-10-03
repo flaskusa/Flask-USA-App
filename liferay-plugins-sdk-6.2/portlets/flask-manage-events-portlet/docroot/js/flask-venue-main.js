@@ -351,9 +351,9 @@ function fnGetVenueImages(venueId,container,editable) {
 
 function fnRenderVenueImage(venueImageUUId,venueImageGroupId, container,venueImageId,editable) {
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+venueImageUUId+"&groupId="+venueImageGroupId;
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':venueImageUUId, 'data-venueImageId': venueImageId});
-	$(objdiv).appendTo($(container));
 	if (editable) {
+		var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':venueImageUUId, 'data-venueImageId': venueImageId,'data-imageURL':imgURL});
+		$(objdiv).appendTo($(container));
 		$(objdiv).click(function() {
 	    	$(this).toggleClass("activeImage");
 	    	if ($(".activeImage").length>0) {
@@ -382,6 +382,32 @@ function fnRenderVenueImage(venueImageUUId,venueImageGroupId, container,venueIma
 	    	}
 	    });
 	}
+	else{
+		var objdiv = $('<div/>',{'class':'GridSlides','style':'background-image:url('+imgURL+')','data-uuid':venueImageUUId, 'data-venueImageId': venueImageId,'data-imageURL':imgURL});
+		$(container).owlCarousel({
+			items:3,
+			navigation:true,
+			navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
+			pagination:true,
+		    items : 5,
+		    itemsCustom : false,
+		    itemsDesktop : [1199,4],
+		    itemsDesktopSmall : [980,3],
+		    itemsTablet: [768,2],
+		    itemsTabletSmall: false,
+		    itemsMobile : [479,1],
+		    singleItem : false,
+		    itemsScaleUp : false,		
+		});
+		$(container).data('owlCarousel').addItem(objdiv);
+		$(objdiv).click(function() {
+			var imgContainer = $('.imageContainer');
+			imgContainer.html('');
+			var objImage = $('<img/>',{'src':$(this).attr('data-imageURL')});
+			imgContainer.append(objImage);
+	    	$('.md-trigger').click();
+		});		
+    }	
 }
 
 
