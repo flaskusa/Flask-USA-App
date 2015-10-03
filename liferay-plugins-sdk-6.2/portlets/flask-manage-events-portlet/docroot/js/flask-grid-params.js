@@ -153,7 +153,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 
 			$(tabsdiv).jqxTabs({
 				width : '100%',
-				height : 180
+				height : 300
 			});
 	    }
 	}

@@ -189,3 +189,31 @@ zoom: 1.8 !important;
     filter: Alpha(Opacity=90) !important;
     opacity: 0.9 !important;
 }
+
+.owl-theme .owl-controls .owl-buttons .owl-next {
+    right: 0px !important;
+    top: 70px !important;
+}
+.owl-theme .owl-controls .owl-buttons .owl-next {
+    color: #F6931C;
+    text-shadow: 2px 0px 5px black;
+}
+.owl-theme .owl-controls .owl-buttons div {
+    color: #FFF;
+    display: inline-block;
+    zoom: 1;
+    margin: 5px;
+    padding: 3px 10px;
+    font-size: 12px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    background: #656565;
+    filter: Alpha(Opacity=50);
+    opacity: 0.9;
+}
+.owl-theme .owl-controls .owl-buttons div {
+    position: absolute;
+    margin: 9px !important;
+    padding: 10px 5px !important;
+}

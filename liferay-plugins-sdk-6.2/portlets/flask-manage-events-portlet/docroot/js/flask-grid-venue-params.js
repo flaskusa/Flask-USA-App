@@ -178,7 +178,7 @@ GRID_PARAM_VENUE.initrowdetails = function(index, parentElement, gridElement, da
 
 		$(tabsdiv).jqxTabs({
 			width : '100%',
-			height : 374
+			height : 300
 		});
 	}
 }
