@@ -43,7 +43,7 @@ function initialize(portletId, portlet){
 
 <div id="tailgateDataTable" class="table-condensed">
 	<div class="cssGridMenu">
-		<div class="cssAddUser"><div class="iconAddUser"></div></div>
+		<div class="cssAddUser"><div class="iconAddTailgate"><i class="icon-glass"></i></div></div>
 		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
 		<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
 		<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
@@ -244,5 +244,17 @@ function initialize(portletId, portlet){
 					<button type="reset" class="btn btn-primary clsCancelGroup">Cancel</button>
 				</div>
 			</form>
+			
+	<div class="md-modal md-effect-14" id="modal-advertisement">
+		<div class="md-content">
+			<h3 id="myModalLabel">Flask Gallery</h3>
+			<span class='md-closeBtn'>x</span>
+			<div>
+				<div class="imageContainer"></div>
+			</div>
+		</div>
+	</div>
+	<div class="md-overlay"></div>
+	<button class="md-trigger" data-modal="modal-advertisement" style="display:none">&nbsp;</button>			
 </body>
 </html>
