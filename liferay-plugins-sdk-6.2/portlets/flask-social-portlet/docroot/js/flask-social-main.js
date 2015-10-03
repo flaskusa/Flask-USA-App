@@ -5,6 +5,7 @@ function initContactList(startPos,endPos){
 		$("#prev").show();
 	var companyId = $("#CompanyId").val();
 	var searchString = $(".search-query").val();
+	_startPos = startPos;
 	var params = {companyId: companyId,keywords: searchString,start: startPos,end: endPos};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_ALL_CONTACTS , params, 
@@ -14,6 +15,8 @@ function initContactList(startPos,endPos){
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
 	});
+	$("html, body").animate({ scrollTop: $(document).height()+$(window).height()+$('#Users_placeholder').height() }, "slow");
+	return false;
 }
 
 function initFriendList(startPos,endPos){
@@ -21,15 +24,22 @@ function initFriendList(startPos,endPos){
 		$("#prev").show();
 	var companyId = $("#CompanyId").val();
 	var searchString = $(".search-query").val();
-	var params = {companyId: companyId,keywords: searchString,start: startPos,end: endPos};
+	var params = {companyId: companyId,keywords: searchString,start: startPos,end: endPos+1};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_MY_FRIENDS , params, 
 		function (data){
+			if(data.length<=(endPos-startPos)){
+				$(".more").hide();
+			}else{
+				data.slice(startPos, endPos+1);
+			}
 			renderContactList(data,true);
 		} ,
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
 	});
+	$("html, body").animate({ scrollTop: $(document).height()+$(window).height()+$('#Friend_placeholder').height() }, "slow");
+	return false;
 }
 
 function renderContactList(tdata,IsFriendList) {
@@ -38,8 +48,7 @@ function renderContactList(tdata,IsFriendList) {
 		divRow = $('#Friend_placeholder');	
 	else
 		divRow = $('#Users_placeholder');
-	
-	 $(divRow).html("");
+
 	 //console.log(tdata.length);
 	 if(tdata.length == 0){
 		$("<span class='control-label-nocolor'>There are no users available</span>").appendTo($(divRow));
@@ -76,8 +85,9 @@ function renderContactList(tdata,IsFriendList) {
 		    $(venue_lbl).appendTo($(objtd2_1));
 		    $(objtd2_1).appendTo($(objTr2));
 		    $(objTr2).appendTo($(objTable));
-		    $(objTable).appendTo($(divRow));		    
+		    $(objTable).appendTo($(divRow)).show('slow');
 	    }
+	 return false;
 }
 
 function fnShowEventLogo(imageUUID, container ,editable){
@@ -140,6 +150,12 @@ function fnShowNextRecords(){
 	_startPos = _startPos + 10;
 	_endPos = _endPos + 10;
 	initContactList(_startPos,_endPos);
+}
+
+function fnShowNextFriends(){
+	_startPos = _startPos + 10;
+	_endPos = _endPos + 10;
+	initFriendList(_startPos,_endPos);
 }
 
 function fnShowPrevRecords(){
@@ -263,7 +279,7 @@ function fnSendMessage(userId){
 	YUI().use('aui-modal',function(Y) {
 		var modal = new Y.Modal(
 		  {
-			bodyContent: '<aui:input type="textarea" name="message"/>',
+			bodyContent: '<textarea rows="5" cols="60" id="msg" name="message" style="width: 200px;"></textarea>',
 			centered: true,
 			destroyOnHide: false,
 			headerContent: '<h3>Send message</h3>',
