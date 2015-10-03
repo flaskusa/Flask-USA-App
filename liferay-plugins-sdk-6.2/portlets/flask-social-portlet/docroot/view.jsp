@@ -25,9 +25,11 @@
 		$("#frnds").click(function(){
 			$("#prev").hide();
 			initSearch();
+			$('#Friend_placeholder').html("");
 			initFriendList(_startPos,_endPos);	
 		});
 		$("#mcontents").click(function(){
+			$('#Users_placeholder').html("");
 			initContactList(_startPos,_endPos);			
 		});
 		$("#notifications").click(function(){
@@ -35,7 +37,6 @@
 		});
 	});
 </aui:script>
-
 <body>
 	<input type="hidden" id="CompanyId" value="<%=themeDisplay.getCompanyId()%>">
 	<div id="action-msg" style="display:none"></div>
@@ -62,8 +63,7 @@
 			</div>
 			<div class="footerButtons">
 				<ul class="pager">
-				    <li class="previous"><a href="#" onclick="fnShowPrevRecords();">Previous</a></li>
-				    <li class="next"><a href="#" onclick="fnShowNextRecords();">Next</a></li>
+				     <li class="previous more"><a href="#" onclick="fnShowNextFriends();">More..</a></li>
 				</ul>
 			</div>
 		  </div>
@@ -73,8 +73,7 @@
 			</div>
 			<div class="footerButtons">
 				<ul class="pager">
-				    <li class="previous"><a href="#" onclick="fnShowPrevRecords();">Previous</a></li>
-				    <li class="next"><a href="#" onclick="fnShowNextRecords();">Next</a></li>
+				    <li class="previous"><a href="#" onclick="fnShowNextRecords();">More..</a></li>
 				</ul>
 			</div>
 		  </div>
@@ -100,7 +99,6 @@
 		  </div>
 		</div>
 	</div>
-	
 	<div class="yui3-skin-sam">
     	<div id="modal"></div>
 	</div>	
