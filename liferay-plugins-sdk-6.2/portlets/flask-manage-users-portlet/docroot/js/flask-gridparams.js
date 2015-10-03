@@ -255,16 +255,15 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 	}, {
 		text : 'Email',
 		dataField : 'email'
-		,width : '25%'
 	}, {
 		text : 'Role',
-		dataField : 'roleName'
-		,width : '20%'
+		dataField : 'roleName',
+		width : '20%'
 	}, {
 		text : 'Edit',
 		dataField : 'userId',
 		cellsalign : 'center',
-		width:'15%',
+		width:'34px',
 		cellsrenderer : actionRenderer
 	} ];
     	
