@@ -443,6 +443,10 @@ $(document).ready(function(){
 		            }
                ]
     });
+	
+	$('.md-closeBtn').click(function(){
+		$('#modal-advertisement').removeClass('md-show');
+	});	
 });
 
 // Tailgate Add Member/Group methods start here
@@ -627,9 +631,9 @@ function fnGetEventDetailImages(tailgateId,container, editable){
 
 function fnRenderImage(imageUUID, imageGroupId, container, tailgateImageId, editable,imageTitle,imageDescription){
 	var imgURL ="/c/document_library/get_file?uuid="+imageUUID+"&groupId="+imageGroupId;
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-tailgateImageId': tailgateImageId});
-	objdiv.appendTo(container);
 	if(editable){
+		var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-tailgateImageId': tailgateImageId,'data-imageURL':imgURL});
+		objdiv.appendTo(container);
 		var objdivDropDown = $('<div/>',{'class':'dropdown'});
 		var objAnchor = $('<a/>',{'class':'dropdown-toggle editIcon','data-toggle':'dropdown','href':'#'});
 		objAnchor.html('<i class="icon-pencil"></i>');
@@ -677,6 +681,32 @@ function fnRenderImage(imageUUID, imageGroupId, container, tailgateImageId, edit
 	    	}
 	    });	
     }
+	else{
+		var objdiv = $('<div/>',{'class':'GridSlides','style':'background-image:url('+imgURL+')','data-uuid':imageUUID, 'data-venueDetailImageId': tailgateImageId,'data-imageURL':imgURL});
+		$(container).owlCarousel({
+			items:3,
+			navigation:true,
+			navigationText:["<i class='icon-chevron-left icon-white'></i>","<i class='icon-chevron-right icon-white'></i>"],
+			pagination:true,
+		    items : 5,
+		    itemsCustom : false,
+		    itemsDesktop : [1199,4],
+		    itemsDesktopSmall : [980,3],
+		    itemsTablet: [768,2],
+		    itemsTabletSmall: false,
+		    itemsMobile : [479,1],
+		    singleItem : false,
+		    itemsScaleUp : false,		
+		});			
+		$(container).data('owlCarousel').addItem(objdiv);
+		$(objdiv).click(function() {
+			var imgContainer = $('.imageContainer');
+			imgContainer.html('');
+			var objImage = $('<img/>',{'src':$(this).attr('data-imageURL')});
+			imgContainer.append(objImage);
+	    	$('.md-trigger').click();
+		});				
+	}
 }
 
 function fnFillImageModal(obj){

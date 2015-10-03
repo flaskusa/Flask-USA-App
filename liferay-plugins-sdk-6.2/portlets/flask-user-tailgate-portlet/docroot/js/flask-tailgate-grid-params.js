@@ -233,7 +233,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
   	  	$(container).appendTo($(imagesDiv));
 		
 		$(tabsdiv).jqxTabs({
-			width : '98%',
+			width : '100%',
 			height : 290
 		});
 		
