@@ -58,10 +58,17 @@ function renderContactList(tdata,IsFriendList) {
 		{
 		 	var flaskUser = tdata[i];
 		    var objTable = $('<table/>',{'class':'tblRow'});
+		   
+		   
 		    var objTr = $('<tr/>');
 		    $(objTr).appendTo($(objTable));
+		    var objTdc = $('<td/>',{'width':'25px','rowspan':'2', 'class':'chk'});
+		    var objChkbx = $('<input/>', {'type':'checkbox', 'class':'selected', 'value':flaskUser.userId});
+		    $(objChkbx).appendTo($(objTdc));
+		    $(objTdc).appendTo($(objTr));
 		    var objTd1 = $('<td/>',{'width':'70px','rowspan':'2'});
 		    $(objTd1).appendTo($(objTr));
+		    
 		    
 		    fnShowEventLogo(flaskUser.uuid, objTd1,false);		    
 		    var userName_lbl = $('<label/>',{'class':'control-label-color'});
@@ -87,6 +94,7 @@ function renderContactList(tdata,IsFriendList) {
 		    $(objTr2).appendTo($(objTable));
 		    $(objTable).appendTo($(divRow)).show('slow');
 	    }
+	 $(".chk").hide();
 	 return false;
 }
 
@@ -276,45 +284,17 @@ function getRequestCount(){
 }
 
 function fnSendMessage(userId){
-	YUI().use('aui-modal',function(Y) {
-		var modal = new Y.Modal(
-		  {
-			bodyContent: '<textarea rows="5" cols="60" id="msg" name="message" style="width: 200px;"></textarea>',
-			centered: true,
-			destroyOnHide: false,
-			headerContent: '<h3>Send message</h3>',
-			modal: true,
-			render: '#modal',
-			resizable: {
-			  handles: 'b, r'
-			},
-			visible: true,
-			width: 300
-		  }
-		).render();
+	//$("#jqxwindow").hide();
+	$("#jqxwindow").jqxWindow({ height: 175, width: 370, theme: 'custom', isModal: true, autoOpen: false });
+        $("#jqxwindow").jqxWindow('open');
+	
+}
 
-		modal.addToolbar(
-		  [
-			{
-			  label: 'Cancel',
-			  on: {
-				click: function() {
-				  modal.hide();
-				}
-			  }
-			},
-			{
-			  label: 'Okay',
-			  on: {
-				click: function() {
-				  alert('Just an example, there will be no printing here.');
-				}
-			  }
-			}
-		  ]
-		);
-        modal.show();
-	});	
+function fnSendMessage(userIdList){
+	//$("#jqxwindow").hide();
+	$("#jqxwindow").jqxWindow({ height: 175, width: 370, theme: 'custom', isModal: true, autoOpen: false });
+        $("#jqxwindow").jqxWindow('open');
+	
 }
 
 function getRequestList(){
