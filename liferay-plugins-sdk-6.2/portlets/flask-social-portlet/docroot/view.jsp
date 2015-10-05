@@ -14,6 +14,7 @@
 
 <aui:script use="array-extras">
 	$(document).ready(function(){
+		var selectedUsers = [];
 		var k=GetParameterValues('notifications');
 		if(k==1){
 			$("#notifications").click();
@@ -35,6 +36,26 @@
 		$("#notifications").click(function(){
 			initNotifications();			
 		});
+		$("#jqxwindow").hide();
+		$("#button_no").click(function () {
+	        $("#jqxwindow").jqxWindow('close');
+	    });
+		$(".cssSendMsg").hide();
+		$(".cssMultUser").show();
+		$(".cssMultUser").click(function(){
+			$(this).hide();
+			$(".cssSendMsg").show();
+			$(".chk").show();
+		});
+		$(".cssSendMsg").click(function(){
+			$(this).hide();
+			$(".cssMultUser").show();
+			$(".chk").hide();
+			$(".selected").each(function(){
+				selectedUsers.push($(this).val());
+			});
+			fnSendMessage(selectedUsers);
+		});
 	});
 </aui:script>
 <body>
@@ -48,6 +69,12 @@
 		</ul>
     	<table class="searchtable">
     		<tr>
+    			<td align="left">
+    				<div class="cssDelUser cssMultUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>		
+    			</td>
+    			<td align="left">
+    				<div class="cssDelUser cssSendMsg"><div class="iconDelUser"><i class="icon-share-alt"></i></div></div>		
+    			</td>
     			<td align="right">
     				<input type="text" class="search-query" placeholder="Search">		
     			</td>
@@ -99,8 +126,17 @@
 		  </div>
 		</div>
 	</div>
-	<div class="yui3-skin-sam">
-    	<div id="modal"></div>
+	<div id='jqxwindow'>
+	            <div>
+	               Send Message
+	            </div>
+	            <div>
+	                <textarea rows="8" cols="60" id="msg" name="message" style="width: 340px; height: 70px;"></textarea>
+	                <div style="text-align: -webkit-center;">
+		                <div id="y"><input type="button" value="Send" class="btn-primary" style="width: 98%" id="button_input"></div>
+		                <div id="n"><input type="button" value="Cancel" class="btn-primary" id="button_no" /></div>
+	               </div>
+	            </div>
 	</div>	
 </body>
 
