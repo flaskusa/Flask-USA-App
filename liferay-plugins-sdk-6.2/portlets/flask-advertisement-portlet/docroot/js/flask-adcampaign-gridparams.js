@@ -175,17 +175,9 @@ GRID_PARAM_CAMPAIGN.initrowdetails = function(index, parentElement, gridElement,
 		$(leftcolumn).append(frequency);
 		$(leftcolumn).append("</table>");
 		
-	/*	$(rightcolumn).append("<table>");
-		$(rightcolumn).append(events);
-		
-		$(rightcolumn).append("</table>");	
-	*/	
-//		imagesDiv.append(container2);
-		
-		
 		$(tabsdiv).jqxTabs({
-			width : '90%',
-			height : 180
+			width : '100%',
+			height : 350
 		});
     }
 }
@@ -257,14 +249,15 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
 				rowsheight : 34,
                 theme:	'custom',
                 pageable : true,
-                pagermode : 'default',
+                pagermode : 'simple',
                 rowdetails: true,
                 showrowdetailscolumn:false,
+                autoheight: true,
                 rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
                 initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
-                columns: campaignColumns
+                columns: campaignColumns,
+                pagesize: 20
             });
-    
 	}
 
 /*
@@ -289,7 +282,7 @@ function createEventsTable(data, grid, eventsIndex){
     grid.jqxGrid(
             {
                 width: '80%',
-                height:'200px',
+                height:'350px',
                 source: dataAdapter,
                 columnsheight : 40,
 				columnsmenuwidth : 40,

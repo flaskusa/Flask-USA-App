@@ -256,7 +256,16 @@
 	  </div>
 	</div>
 </div>
-
-		
+<div class="md-modal md-effect-14" id="modal-advertisement">
+	<div class="md-content">
+		<h3 id="myModalLabel">Flask Gallery</h3>
+		<span class='md-closeBtn'>x</span>
+		<div>
+			<div class="imageContainer"></div>
+		</div>
+	</div>
+</div>
+<div class="md-overlay"></div>
+<button class="md-trigger" data-modal="modal-advertisement" style="display:none">3D</button>		
 </body>
 </html>
