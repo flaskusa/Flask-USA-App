@@ -24,7 +24,6 @@ label#StartTime,label#EndTime
 	  margin-top: 10px;
 }
 
-
 div#startTime,div#endTime
 {	
   width: 320px !important; 
@@ -128,4 +127,78 @@ ul.flipster-nav
 
 displayAtChk{
 	display:block;
+}
+
+.jqx-enableselect.jqx-widget-content.jqx-widget-content-custom {
+    width: 100% !important;
+	margin-left: 0px !important;
+	z-index: 1 !important;
+}
+
+.jqx-tabs.jqx-widget.jqx-widget-content.jqx-rc-all {
+    width: 100% !important;
+    margin: 0px !important;
+}
+
+.GridSlides{
+    background-size: cover;
+    width: 99% !important;
+    height: 160px !important;
+    margin: 2px !important;
+}
+.owl-theme .owl-controls .owl-buttons div {
+    position: absolute;
+   	margin: 9px !important;
+   	padding: 10px 5px !important;;
+}
+
+.owl-theme .owl-controls .owl-buttons .owl-prev{
+  left: 0px !important;
+  top: 70px !important; 
+}
+ 
+.owl-theme .owl-controls .owl-buttons .owl-next{
+  right: 0px !important;
+  top: 70px !important;
+}
+
+.owl-theme .owl-controls {
+    margin-top: -24px !important;
+}
+
+.owl-theme .owl-controls .owl-page {
+    zoom: 0.8 !important;
+}
+
+.owl-theme .owl-controls .owl-page.active span, .owl-theme .owl-controls.clickable .owl-page:hover span {
+    filter: Alpha(Opacity=90) !important;
+    opacity: 0.9 !important;
+}
+
+.owl-theme .owl-controls .owl-buttons .owl-next {
+    right: 0px !important;
+    top: 70px !important;
+}
+.owl-theme .owl-controls .owl-buttons .owl-next {
+    color: #F6931C;
+    text-shadow: 2px 0px 5px black;
+}
+.owl-theme .owl-controls .owl-buttons div {
+    color: #FFF;
+    display: inline-block;
+    zoom: 1;
+    margin: 5px;
+    padding: 3px 10px;
+    font-size: 12px;
+    -webkit-border-radius: 30px;
+    -moz-border-radius: 30px;
+    border-radius: 30px;
+    background: #656565;
+    filter: Alpha(Opacity=50);
+    opacity: 0.9;
+}
+.owl-theme .owl-controls .owl-buttons div {
+    position: absolute;
+    margin: 9px !important;
+    padding: 10px 5px !important;
 }
