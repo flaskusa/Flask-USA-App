@@ -51,7 +51,7 @@
         <column name="recipients" type="String"></column>
         <column name="message" type="String"></column>
         <column name="sendEmail" type="boolean"></column>
-        
+        <column name="dateTime" type="Date"></column>
     </entity>
     <entity name="FlaskRecipients" local-service="true">
         <column name="recipientId" type="long" primary="true"></column>

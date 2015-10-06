@@ -38,6 +38,7 @@ import java.io.Serializable;
 import java.sql.Types;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -71,9 +72,10 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 			{ "senderName", Types.VARCHAR },
 			{ "recipients", Types.VARCHAR },
 			{ "message", Types.VARCHAR },
-			{ "sendEmail", Types.BOOLEAN }
+			{ "sendEmail", Types.BOOLEAN },
+			{ "dateTime", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskMessages (messageId LONG not null primary key,senderEmail VARCHAR(75) null,senderUserId LONG,senderName VARCHAR(75) null,recipients VARCHAR(75) null,message VARCHAR(75) null,sendEmail BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskMessages (messageId LONG not null primary key,senderEmail VARCHAR(75) null,senderUserId LONG,senderName VARCHAR(75) null,recipients VARCHAR(75) null,message VARCHAR(75) null,sendEmail BOOLEAN,dateTime DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table Contacts_FlaskMessages";
 	public static final String ORDER_BY_JPQL = " ORDER BY flaskMessages.messageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Contacts_FlaskMessages.messageId ASC";
@@ -108,6 +110,7 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 		model.setRecipients(soapModel.getRecipients());
 		model.setMessage(soapModel.getMessage());
 		model.setSendEmail(soapModel.getSendEmail());
+		model.setDateTime(soapModel.getDateTime());
 
 		return model;
 	}
@@ -179,6 +182,7 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 		attributes.put("recipients", getRecipients());
 		attributes.put("message", getMessage());
 		attributes.put("sendEmail", getSendEmail());
+		attributes.put("dateTime", getDateTime());
 
 		return attributes;
 	}
@@ -225,6 +229,12 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 
 		if (sendEmail != null) {
 			setSendEmail(sendEmail);
+		}
+
+		Date dateTime = (Date)attributes.get("dateTime");
+
+		if (dateTime != null) {
+			setDateTime(dateTime);
 		}
 	}
 
@@ -341,6 +351,17 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 		_sendEmail = sendEmail;
 	}
 
+	@JSON
+	@Override
+	public Date getDateTime() {
+		return _dateTime;
+	}
+
+	@Override
+	public void setDateTime(Date dateTime) {
+		_dateTime = dateTime;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(0,
@@ -375,6 +396,7 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 		flaskMessagesImpl.setRecipients(getRecipients());
 		flaskMessagesImpl.setMessage(getMessage());
 		flaskMessagesImpl.setSendEmail(getSendEmail());
+		flaskMessagesImpl.setDateTime(getDateTime());
 
 		flaskMessagesImpl.resetOriginalValues();
 
@@ -469,12 +491,21 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 
 		flaskMessagesCacheModel.sendEmail = getSendEmail();
 
+		Date dateTime = getDateTime();
+
+		if (dateTime != null) {
+			flaskMessagesCacheModel.dateTime = dateTime.getTime();
+		}
+		else {
+			flaskMessagesCacheModel.dateTime = Long.MIN_VALUE;
+		}
+
 		return flaskMessagesCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{messageId=");
 		sb.append(getMessageId());
@@ -490,6 +521,8 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 		sb.append(getMessage());
 		sb.append(", sendEmail=");
 		sb.append(getSendEmail());
+		sb.append(", dateTime=");
+		sb.append(getDateTime());
 		sb.append("}");
 
 		return sb.toString();
@@ -497,7 +530,7 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.contacts.model.FlaskMessages");
@@ -531,6 +564,10 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 			"<column><column-name>sendEmail</column-name><column-value><![CDATA[");
 		sb.append(getSendEmail());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dateTime</column-name><column-value><![CDATA[");
+		sb.append(getDateTime());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -549,5 +586,6 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 	private String _recipients;
 	private String _message;
 	private boolean _sendEmail;
+	private Date _dateTime;
 	private FlaskMessages _escapedModel;
 }

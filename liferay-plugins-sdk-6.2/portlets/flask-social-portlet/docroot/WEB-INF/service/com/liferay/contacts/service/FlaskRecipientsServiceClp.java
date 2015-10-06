@@ -35,6 +35,10 @@ public class FlaskRecipientsServiceClp implements FlaskRecipientsService {
 		_methodName3 = "addFlaskRecipient";
 
 		_methodParameterTypes3 = new String[] { "long", "long", "boolean" };
+
+		_methodName4 = "setRead";
+
+		_methodParameterTypes4 = new String[] { "long" };
 	}
 
 	@Override
@@ -112,6 +116,29 @@ public class FlaskRecipientsServiceClp implements FlaskRecipientsService {
 		return (com.liferay.contacts.model.FlaskRecipients)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public boolean setRead(long messageId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4, new Object[] { messageId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -119,4 +146,6 @@ public class FlaskRecipientsServiceClp implements FlaskRecipientsService {
 	private String[] _methodParameterTypes1;
 	private String _methodName3;
 	private String[] _methodParameterTypes3;
+	private String _methodName4;
+	private String[] _methodParameterTypes4;
 }

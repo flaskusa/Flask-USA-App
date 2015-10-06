@@ -66,4 +66,6 @@ public interface FlaskRecipientsService extends BaseService, InvokableService {
 
 	public com.liferay.contacts.model.FlaskRecipients addFlaskRecipient(
 		long userId, long messageId, boolean read);
+
+	public boolean setRead(long messageId);
 }

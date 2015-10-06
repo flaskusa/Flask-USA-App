@@ -14,9 +14,13 @@
 
 package com.liferay.contacts.service.impl;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.liferay.contacts.model.FlaskRecipients;
 import com.liferay.contacts.service.FlaskRecipientsLocalServiceUtil;
 import com.liferay.contacts.service.base.FlaskRecipientsServiceBaseImpl;
+import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserServiceUtil;
@@ -55,4 +59,22 @@ public class FlaskRecipientsServiceImpl extends FlaskRecipientsServiceBaseImpl {
 		}
 		return flaskRecipients;
 	}
+	
+	@Override
+	 public boolean setRead(long messageId){
+	  List<FlaskRecipients> flaskRecipients = new ArrayList<FlaskRecipients>();
+	  boolean ret = false;
+	  try {
+	   flaskRecipients = FlaskRecipientsUtil.findBymessageId(messageId);
+	   for(FlaskRecipients recp: flaskRecipients){
+	    recp.setRead(true);
+	    FlaskRecipientsLocalServiceUtil.updateFlaskRecipients(recp);
+	    ret = true;
+	   }
+	  } catch (Exception e) {
+	   // TODO: handle exception
+	   e.printStackTrace();
+	  }
+	  return ret;
+	 }
 }

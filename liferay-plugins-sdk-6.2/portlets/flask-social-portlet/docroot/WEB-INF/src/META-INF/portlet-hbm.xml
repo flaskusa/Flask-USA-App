@@ -31,6 +31,7 @@
 		<property name="recipients" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="message" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="sendEmail" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="dateTime" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.contacts.model.impl.FlaskRecipientsImpl" table="Contacts_FlaskRecipients">
 		<cache usage="read-write" />

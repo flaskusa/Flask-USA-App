@@ -64,13 +64,12 @@ public class FlaskMessagesServiceUtil {
 	}
 
 	public static com.liferay.contacts.model.FlaskMessages sendFlaskMessage(
-		java.lang.String senderEmail, java.lang.String senderName,
 		java.lang.String recipients, java.lang.String message,
 		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
-				   .sendFlaskMessage(senderEmail, senderName, recipients,
-			message, sendEmail, serviceContext);
+				   .sendFlaskMessage(recipients, message, sendEmail,
+			serviceContext);
 	}
 
 	public static java.util.List<com.liferay.contacts.model.FlaskMessages> getAllMyFlaskMessages(

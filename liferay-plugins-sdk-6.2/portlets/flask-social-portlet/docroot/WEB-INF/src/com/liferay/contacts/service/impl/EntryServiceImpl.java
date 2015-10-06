@@ -156,19 +156,31 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 	
 	
 	public JSONArray searchMyFriends(long companyId, String keywords, ServiceContext serviceContext)
-			throws PortalException, SystemException{
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-		JSONObject jsonObject = null;
-		long userId = getUserId();
-		int cnt = SocialRelationLocalServiceUtil.getRelationsCount(userId, SocialRelationConstants.TYPE_BI_CONNECTION);
-		List<SocialRelation> relation = SocialRelationLocalServiceUtil.getRelations(userId, SocialRelationConstants.TYPE_BI_CONNECTION, 0, cnt);
-		for(SocialRelation relObj: relation){
-			User user2 = getUserById(relObj.getUserId2(), serviceContext);
-			jsonObject = ContactsUtil.getUserJSONObject(
-					userId, user2);
-				jsonArray.put(jsonObject);
-		}
-		return jsonArray;
+	   throws PortalException, SystemException{
+	  JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+	  long userId = getUserId();
+	  int cnt = entryLocalService.searchUsersAndContactsCount(companyId, userId, keywords);
+	  List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
+	   companyId, userId, keywords, 0, cnt);
+	  int cnt1 = SocialRelationLocalServiceUtil.getRelationsCount(userId, SocialRelationConstants.TYPE_BI_CONNECTION);
+	  List<SocialRelation> relation = SocialRelationLocalServiceUtil.getRelations(userId, SocialRelationConstants.TYPE_BI_CONNECTION, 0, cnt1);
+	  for (BaseModel<?> contact : contacts) {
+	   JSONObject jsonObject = null;
+	   
+	   for(SocialRelation relObj: relation){
+	    if(relObj.getUserId2() == ((User) contact).getContact().getUserId()){
+	     if (contact instanceof User) {
+	      jsonObject = ContactsUtil.getUserJSONObject(
+	       userId, (User)contact);
+	     }
+	     else {
+	      jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
+	     }
+	     jsonArray.put(jsonObject);
+	    }
+	   }
+	  }
+	  return jsonArray;
 	}
 	
 	@Override

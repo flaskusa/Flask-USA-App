@@ -64,6 +64,11 @@ public class FlaskRecipientsServiceWrapper implements FlaskRecipientsService,
 		return _flaskRecipientsService.addFlaskRecipient(userId, messageId, read);
 	}
 
+	@Override
+	public boolean setRead(long messageId) {
+		return _flaskRecipientsService.setRead(messageId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

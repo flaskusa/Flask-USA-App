@@ -35,6 +35,10 @@ public class FlaskRecipientsServiceClpInvoker {
 		_methodName38 = "addFlaskRecipient";
 
 		_methodParameterTypes38 = new String[] { "long", "long", "boolean" };
+
+		_methodName39 = "setRead";
+
+		_methodParameterTypes39 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -58,6 +62,11 @@ public class FlaskRecipientsServiceClpInvoker {
 				((Boolean)arguments[2]).booleanValue());
 		}
 
+		if (_methodName39.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
+			return FlaskRecipientsServiceUtil.setRead(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -67,4 +76,6 @@ public class FlaskRecipientsServiceClpInvoker {
 	private String[] _methodParameterTypes33;
 	private String _methodName38;
 	private String[] _methodParameterTypes38;
+	private String _methodName39;
+	private String[] _methodParameterTypes39;
 }

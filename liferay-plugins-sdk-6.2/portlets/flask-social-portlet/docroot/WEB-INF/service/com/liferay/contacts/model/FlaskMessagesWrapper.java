@@ -17,6 +17,7 @@ package com.liferay.contacts.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,6 +57,7 @@ public class FlaskMessagesWrapper implements FlaskMessages,
 		attributes.put("recipients", getRecipients());
 		attributes.put("message", getMessage());
 		attributes.put("sendEmail", getSendEmail());
+		attributes.put("dateTime", getDateTime());
 
 		return attributes;
 	}
@@ -102,6 +104,12 @@ public class FlaskMessagesWrapper implements FlaskMessages,
 
 		if (sendEmail != null) {
 			setSendEmail(sendEmail);
+		}
+
+		Date dateTime = (Date)attributes.get("dateTime");
+
+		if (dateTime != null) {
+			setDateTime(dateTime);
 		}
 	}
 
@@ -295,6 +303,26 @@ public class FlaskMessagesWrapper implements FlaskMessages,
 	@Override
 	public void setSendEmail(boolean sendEmail) {
 		_flaskMessages.setSendEmail(sendEmail);
+	}
+
+	/**
+	* Returns the date time of this flask messages.
+	*
+	* @return the date time of this flask messages
+	*/
+	@Override
+	public java.util.Date getDateTime() {
+		return _flaskMessages.getDateTime();
+	}
+
+	/**
+	* Sets the date time of this flask messages.
+	*
+	* @param dateTime the date time of this flask messages
+	*/
+	@Override
+	public void setDateTime(java.util.Date dateTime) {
+		_flaskMessages.setDateTime(dateTime);
 	}
 
 	@Override

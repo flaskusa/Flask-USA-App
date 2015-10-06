@@ -28,6 +28,7 @@
 		<field name="recipients" type="String" />
 		<field name="message" type="String" />
 		<field name="sendEmail" type="boolean" />
+		<field name="dateTime" type="Date" />
 	</model>
 	<model name="com.liferay.contacts.model.FlaskRecipients">
 		<field name="recipientId" type="long" />

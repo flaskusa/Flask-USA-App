@@ -330,6 +330,7 @@ public class FlaskMessagesPersistenceImpl extends BasePersistenceImpl<FlaskMessa
 		flaskMessagesImpl.setRecipients(flaskMessages.getRecipients());
 		flaskMessagesImpl.setMessage(flaskMessages.getMessage());
 		flaskMessagesImpl.setSendEmail(flaskMessages.isSendEmail());
+		flaskMessagesImpl.setDateTime(flaskMessages.getDateTime());
 
 		return flaskMessagesImpl;
 	}

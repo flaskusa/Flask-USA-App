@@ -29,6 +29,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,6 +82,7 @@ public class FlaskMessagesClp extends BaseModelImpl<FlaskMessages>
 		attributes.put("recipients", getRecipients());
 		attributes.put("message", getMessage());
 		attributes.put("sendEmail", getSendEmail());
+		attributes.put("dateTime", getDateTime());
 
 		return attributes;
 	}
@@ -127,6 +129,12 @@ public class FlaskMessagesClp extends BaseModelImpl<FlaskMessages>
 
 		if (sendEmail != null) {
 			setSendEmail(sendEmail);
+		}
+
+		Date dateTime = (Date)attributes.get("dateTime");
+
+		if (dateTime != null) {
+			setDateTime(dateTime);
 		}
 	}
 
@@ -307,6 +315,29 @@ public class FlaskMessagesClp extends BaseModelImpl<FlaskMessages>
 		}
 	}
 
+	@Override
+	public Date getDateTime() {
+		return _dateTime;
+	}
+
+	@Override
+	public void setDateTime(Date dateTime) {
+		_dateTime = dateTime;
+
+		if (_flaskMessagesRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskMessagesRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setDateTime", Date.class);
+
+				method.invoke(_flaskMessagesRemoteModel, dateTime);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getFlaskMessagesRemoteModel() {
 		return _flaskMessagesRemoteModel;
 	}
@@ -384,6 +415,7 @@ public class FlaskMessagesClp extends BaseModelImpl<FlaskMessages>
 		clone.setRecipients(getRecipients());
 		clone.setMessage(getMessage());
 		clone.setSendEmail(getSendEmail());
+		clone.setDateTime(getDateTime());
 
 		return clone;
 	}
@@ -436,7 +468,7 @@ public class FlaskMessagesClp extends BaseModelImpl<FlaskMessages>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{messageId=");
 		sb.append(getMessageId());
@@ -452,6 +484,8 @@ public class FlaskMessagesClp extends BaseModelImpl<FlaskMessages>
 		sb.append(getMessage());
 		sb.append(", sendEmail=");
 		sb.append(getSendEmail());
+		sb.append(", dateTime=");
+		sb.append(getDateTime());
 		sb.append("}");
 
 		return sb.toString();
@@ -459,7 +493,7 @@ public class FlaskMessagesClp extends BaseModelImpl<FlaskMessages>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.contacts.model.FlaskMessages");
@@ -493,6 +527,10 @@ public class FlaskMessagesClp extends BaseModelImpl<FlaskMessages>
 			"<column><column-name>sendEmail</column-name><column-value><![CDATA[");
 		sb.append(getSendEmail());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>dateTime</column-name><column-value><![CDATA[");
+		sb.append(getDateTime());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -507,6 +545,7 @@ public class FlaskMessagesClp extends BaseModelImpl<FlaskMessages>
 	private String _recipients;
 	private String _message;
 	private boolean _sendEmail;
+	private Date _dateTime;
 	private BaseModel<?> _flaskMessagesRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.contacts.service.ClpSerializer.class;
 }

@@ -35,8 +35,7 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 		_methodName3 = "sendFlaskMessage";
 
 		_methodParameterTypes3 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -105,7 +104,6 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 
 	@Override
 	public com.liferay.contacts.model.FlaskMessages sendFlaskMessage(
-		java.lang.String senderEmail, java.lang.String senderName,
 		java.lang.String recipients, java.lang.String message,
 		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext) {
@@ -115,11 +113,7 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 			returnObj = _invokableService.invokeMethod(_methodName3,
 					_methodParameterTypes3,
 					new Object[] {
-						ClpSerializer.translateInput(senderEmail),
-						
-					ClpSerializer.translateInput(senderName),
-						
-					ClpSerializer.translateInput(recipients),
+						ClpSerializer.translateInput(recipients),
 						
 					ClpSerializer.translateInput(message),
 						

@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing FlaskMessages in entity cache.
  *
@@ -36,7 +38,7 @@ public class FlaskMessagesCacheModel implements CacheModel<FlaskMessages>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{messageId=");
 		sb.append(messageId);
@@ -52,6 +54,8 @@ public class FlaskMessagesCacheModel implements CacheModel<FlaskMessages>,
 		sb.append(message);
 		sb.append(", sendEmail=");
 		sb.append(sendEmail);
+		sb.append(", dateTime=");
+		sb.append(dateTime);
 		sb.append("}");
 
 		return sb.toString();
@@ -95,6 +99,13 @@ public class FlaskMessagesCacheModel implements CacheModel<FlaskMessages>,
 
 		flaskMessagesImpl.setSendEmail(sendEmail);
 
+		if (dateTime == Long.MIN_VALUE) {
+			flaskMessagesImpl.setDateTime(null);
+		}
+		else {
+			flaskMessagesImpl.setDateTime(new Date(dateTime));
+		}
+
 		flaskMessagesImpl.resetOriginalValues();
 
 		return flaskMessagesImpl;
@@ -109,6 +120,7 @@ public class FlaskMessagesCacheModel implements CacheModel<FlaskMessages>,
 		recipients = objectInput.readUTF();
 		message = objectInput.readUTF();
 		sendEmail = objectInput.readBoolean();
+		dateTime = objectInput.readLong();
 	}
 
 	@Override
@@ -147,6 +159,7 @@ public class FlaskMessagesCacheModel implements CacheModel<FlaskMessages>,
 		}
 
 		objectOutput.writeBoolean(sendEmail);
+		objectOutput.writeLong(dateTime);
 	}
 
 	public long messageId;
@@ -156,4 +169,5 @@ public class FlaskMessagesCacheModel implements CacheModel<FlaskMessages>,
 	public String recipients;
 	public String message;
 	public boolean sendEmail;
+	public long dateTime;
 }

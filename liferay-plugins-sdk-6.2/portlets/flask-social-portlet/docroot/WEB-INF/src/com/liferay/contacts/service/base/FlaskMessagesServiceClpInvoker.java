@@ -35,8 +35,7 @@ public class FlaskMessagesServiceClpInvoker {
 		_methodName38 = "sendFlaskMessage";
 
 		_methodParameterTypes38 = new String[] {
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -70,10 +69,9 @@ public class FlaskMessagesServiceClpInvoker {
 		if (_methodName38.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
 			return FlaskMessagesServiceUtil.sendFlaskMessage((java.lang.String)arguments[0],
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3],
-				((Boolean)arguments[4]).booleanValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[5]);
+				(java.lang.String)arguments[1],
+				((Boolean)arguments[2]).booleanValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
 		}
 
 		if (_methodName39.equals(name) &&

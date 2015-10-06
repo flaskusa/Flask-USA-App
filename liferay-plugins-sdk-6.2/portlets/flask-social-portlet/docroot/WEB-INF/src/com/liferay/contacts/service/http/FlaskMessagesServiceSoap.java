@@ -63,14 +63,13 @@ import java.rmi.RemoteException;
  */
 public class FlaskMessagesServiceSoap {
 	public static com.liferay.contacts.model.FlaskMessagesSoap sendFlaskMessage(
-		java.lang.String senderEmail, java.lang.String senderName,
 		java.lang.String recipients, java.lang.String message,
 		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.contacts.model.FlaskMessages returnValue = FlaskMessagesServiceUtil.sendFlaskMessage(senderEmail,
-					senderName, recipients, message, sendEmail, serviceContext);
+			com.liferay.contacts.model.FlaskMessages returnValue = FlaskMessagesServiceUtil.sendFlaskMessage(recipients,
+					message, sendEmail, serviceContext);
 
 			return com.liferay.contacts.model.FlaskMessagesSoap.toSoapModel(returnValue);
 		}

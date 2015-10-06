@@ -77,5 +77,18 @@ public class FlaskRecipientsServiceSoap {
 		}
 	}
 
+	public static boolean setRead(long messageId) throws RemoteException {
+		try {
+			boolean returnValue = FlaskRecipientsServiceUtil.setRead(messageId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskRecipientsServiceSoap.class);
 }

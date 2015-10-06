@@ -16,14 +16,16 @@
 		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="urn:http.service.contacts.liferay.com" xmlns:tns2="http://model.contacts.liferay.com" name="getAllMyFlaskMessages" qname="operNS:getAllMyFlaskMessages" returnQName="getAllMyFlaskMessagesReturn" returnType="rtns:ArrayOf_tns13_FlaskMessagesSoap" returnItemType="tns2:FlaskMessagesSoap" soapAction="">
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="urn:http.service.contacts.liferay.com" xmlns:tns2="http://model.contacts.liferay.com" name="getMyUnreadFlaskMessages" qname="operNS:getMyUnreadFlaskMessages" returnQName="getMyUnreadFlaskMessagesReturn" returnType="rtns:ArrayOf_tns13_FlaskMessagesSoap" returnItemType="tns2:FlaskMessagesSoap" soapAction="">
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://model.contacts.liferay.com" name="sendFlaskMessage" qname="operNS:sendFlaskMessage" returnQName="sendFlaskMessageReturn" returnType="rtns:FlaskMessagesSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="senderEmail" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="recipients" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="message" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sendEmail" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getAllMyFlaskMessages sendFlaskMessage" />
+		<parameter name="allowedMethods" value="getAllMyFlaskMessages getMyUnreadFlaskMessages sendFlaskMessage" />
 		<parameter name="className" value="com.liferay.contacts.service.http.FlaskMessagesServiceSoap" />
 		<parameter name="schemaUnqualified" value="http://model.contacts.liferay.com,http://model.portal.liferay.com,http://service.portal.liferay.com,http://theme.portal.liferay.com,http://util.kernel.portal.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.contacts.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />

@@ -38,6 +38,9 @@
 			<basic name="recipients" />
 			<basic name="message" />
 			<basic name="sendEmail" />
+			<basic name="dateTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

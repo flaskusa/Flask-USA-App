@@ -18,7 +18,8 @@ create table Contacts_FlaskMessages (
 	senderName VARCHAR(75) null,
 	recipients VARCHAR(75) null,
 	message VARCHAR(75) null,
-	sendEmail BOOLEAN
+	sendEmail BOOLEAN,
+	dateTime DATE null
 );
 
 create table Contacts_FlaskRecipients (

@@ -15,6 +15,7 @@
 package com.liferay.contacts.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.liferay.contacts.model.FlaskMessages;
@@ -24,7 +25,9 @@ import com.liferay.contacts.service.FlaskRecipientsServiceUtil;
 import com.liferay.contacts.service.base.FlaskMessagesServiceBaseImpl;
 import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserServiceUtil;
 import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
 
 /**
@@ -44,29 +47,33 @@ import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
 public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	
 	@Override
-	public FlaskMessages sendFlaskMessage(String senderEmail, String senderName, String recipients, String message, boolean sendEmail, ServiceContext serviceContext){
-		FlaskMessages flaskMessage = null;
-		try {
-			flaskMessage = FlaskMessagesLocalServiceUtil.createFlaskMessages(CounterLocalServiceUtil.increment());
-			flaskMessage.setSenderEmail(senderEmail);
-			flaskMessage.setSenderName(senderName);
-			flaskMessage.setRecipients(recipients);
-			flaskMessage.setSenderUserId(serviceContext.getUserId());
-			flaskMessage.setMessage(message);
-			flaskMessage.setSendEmail(sendEmail);
-			flaskMessage = FlaskMessagesLocalServiceUtil.addFlaskMessages(flaskMessage);
-			String[] rec = recipients.split(",");
-			for (String userId : rec){
-				userId = userId.replace(",","").trim();
-				FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false);
-				if(sendEmail)
-					EmailInvitationUtil.emailMessage(senderName, senderEmail, recp.getEmail(), message, serviceContext);
-			}
-		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
-		}
-		return flaskMessage;
+	 public FlaskMessages sendFlaskMessage(String recipients, String message, boolean sendEmail, ServiceContext serviceContext){
+	  FlaskMessages flaskMessage = null;
+	  try {
+	   User user = UserServiceUtil.getUserById(serviceContext.getUserId());
+	   flaskMessage = FlaskMessagesLocalServiceUtil.createFlaskMessages(CounterLocalServiceUtil.increment());
+	   flaskMessage.setSenderEmail(user.getEmailAddress());
+	   flaskMessage.setSenderName(user.getFullName());
+	   flaskMessage.setRecipients(recipients);
+	   flaskMessage.setSenderUserId(user.getUserId());
+	   flaskMessage.setMessage(message);
+	   flaskMessage.setSendEmail(sendEmail);
+	   Date date = new Date();
+	   flaskMessage.setDateTime(serviceContext.getCreateDate(date));
+	   flaskMessage = FlaskMessagesLocalServiceUtil.addFlaskMessages(flaskMessage);
+	   String[] rec = recipients.split(",");
+	   for (String userId : rec){
+		   if(Long.parseLong(userId) > 0){
+			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false);
+			    if(sendEmail)
+				     EmailInvitationUtil.emailMessage(user.getFullName(), user.getEmailAddress(), recp.getEmail(), message, serviceContext);
+		   }
+	   }
+	  } catch (Exception e) {
+	   // TODO: handle exception
+	   e.printStackTrace();
+	  }
+	  return flaskMessage;
 	}
 	
 	@Override

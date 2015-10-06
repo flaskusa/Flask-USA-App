@@ -68,6 +68,10 @@ public class FlaskRecipientsServiceUtil {
 		return getService().addFlaskRecipient(userId, messageId, read);
 	}
 
+	public static boolean setRead(long messageId) {
+		return getService().setRead(messageId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

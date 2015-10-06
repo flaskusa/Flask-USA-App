@@ -24,6 +24,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 /**
  * The base model interface for the FlaskMessages service. Represents a row in the &quot;Contacts_FlaskMessages&quot; database table, with each column mapped to a property of this class.
  *
@@ -181,6 +183,20 @@ public interface FlaskMessagesModel extends BaseModel<FlaskMessages> {
 	 * @param sendEmail the send email of this flask messages
 	 */
 	public void setSendEmail(boolean sendEmail);
+
+	/**
+	 * Returns the date time of this flask messages.
+	 *
+	 * @return the date time of this flask messages
+	 */
+	public Date getDateTime();
+
+	/**
+	 * Sets the date time of this flask messages.
+	 *
+	 * @param dateTime the date time of this flask messages
+	 */
+	public void setDateTime(Date dateTime);
 
 	@Override
 	public boolean isNew();

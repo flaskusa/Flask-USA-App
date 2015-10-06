@@ -60,12 +60,11 @@ public class FlaskMessagesServiceWrapper implements FlaskMessagesService,
 
 	@Override
 	public com.liferay.contacts.model.FlaskMessages sendFlaskMessage(
-		java.lang.String senderEmail, java.lang.String senderName,
 		java.lang.String recipients, java.lang.String message,
 		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return _flaskMessagesService.sendFlaskMessage(senderEmail, senderName,
-			recipients, message, sendEmail, serviceContext);
+		return _flaskMessagesService.sendFlaskMessage(recipients, message,
+			sendEmail, serviceContext);
 	}
 
 	@Override
