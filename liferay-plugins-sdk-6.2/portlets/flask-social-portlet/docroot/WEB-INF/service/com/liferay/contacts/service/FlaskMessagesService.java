@@ -65,15 +65,18 @@ public interface FlaskMessagesService extends BaseService, InvokableService {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	public com.liferay.contacts.model.FlaskMessages sendFlaskMessage(
 		java.lang.String recipients, java.lang.String message,
 		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.contacts.model.FlaskMessages> getAllMyFlaskMessages(
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.contacts.model.FlaskMessages> getMyUnreadFlaskMessages(
 		com.liferay.portal.service.ServiceContext serviceContext);

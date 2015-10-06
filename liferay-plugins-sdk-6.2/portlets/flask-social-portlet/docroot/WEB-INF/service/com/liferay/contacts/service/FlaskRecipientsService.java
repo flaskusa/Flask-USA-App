@@ -64,8 +64,10 @@ public interface FlaskRecipientsService extends BaseService, InvokableService {
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	public com.liferay.contacts.model.FlaskRecipients addFlaskRecipient(
 		long userId, long messageId, boolean read);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	public boolean setRead(long messageId);
 }
