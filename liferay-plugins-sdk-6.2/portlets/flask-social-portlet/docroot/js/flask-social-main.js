@@ -1,10 +1,13 @@
-var _startPos = 0;
+var _startPosFriends = 0; 
+var _endPosFriends = 99;
+
+var _startPos = 0; 
 var _endPos = 9;
 function initContactList(startPos,endPos){
 	if(startPos>0)
 		$("#prev").show();
 	var companyId = $("#CompanyId").val();
-	var searchString = $(".search-query").val();
+	var searchString = $("#searchContact").val();
 	_startPos = startPos;
 	var params = {companyId: companyId,keywords: searchString,start: startPos,end: endPos};
 	var flaskRequest = new Request();
@@ -20,11 +23,11 @@ function initContactList(startPos,endPos){
 }
 
 function initFriendList(startPos,endPos){
-	if(startPos>0)
-		$("#prev").show();
+	/*if(startPos>0)
+		$("#prev").show();*/
 	var companyId = $("#CompanyId").val();
-	var searchString = $(".search-query").val();
-	var params = {companyId: companyId,keywords: searchString,start: startPos,end: endPos+1};
+	var searchString =  $("#searchFriend").val();
+	var params = {companyId: companyId,keywords: searchString};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_MY_FRIENDS , params, 
 		function (data){
@@ -38,7 +41,7 @@ function initFriendList(startPos,endPos){
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
 	});
-	$("html, body").animate({ scrollTop: $(document).height()+$(window).height()+$('#Friend_placeholder').height() }, "slow");
+	//$("html, body").animate({ scrollTop: $(document).height()+$(window).height()+$('#Friend_placeholder').height() }, "slow");
 	return false;
 }
 
@@ -58,17 +61,14 @@ function renderContactList(tdata,IsFriendList) {
 		{
 		 	var flaskUser = tdata[i];
 		    var objTable = $('<table/>',{'class':'tblRow'});
-		   
-		   
 		    var objTr = $('<tr/>');
 		    $(objTr).appendTo($(objTable));
 		    var objTdc = $('<td/>',{'width':'25px','rowspan':'2', 'class':'chk'});
 		    var objChkbx = $('<input/>', {'type':'checkbox', 'class':'selected', 'value':flaskUser.userId});
 		    $(objChkbx).appendTo($(objTdc));
 		    $(objTdc).appendTo($(objTr));
-		    var objTd1 = $('<td/>',{'width':'70px','rowspan':'2'});
+		    var objTd1 = $('<td/>',{'width':'50px','rowspan':'2'});
 		    $(objTd1).appendTo($(objTr));
-		    
 		    
 		    fnShowEventLogo(flaskUser.uuid, objTd1,false);		    
 		    var userName_lbl = $('<label/>',{'class':'control-label-color'});
@@ -77,15 +77,14 @@ function renderContactList(tdata,IsFriendList) {
 		    
 		    $(userName_lbl).appendTo($(objTd2));
 		    $(objTd2).appendTo(objTr);
-		    var objTd3 = $('<td/>',{'rowspan':'2','align':'right','valign':'top', 'width':'126px'});
-		    console.log(flaskUser);
+		    var objTd3 = $('<td/>',{'width':'126px'});
 	    	var div_heart = fnBuildMenu(flaskUser);
 	    	
 		    $(div_heart).appendTo($(objTd3));
 		    $(objTd3).appendTo(objTr);
 
 		    var objTr2 = $('<tr/>');
-		    var objtd2_1 = $('<td/>');
+		    var objtd2_1 = $('<td/>',{'colspan':'2'});
 		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
 		    $(objtd2_1).appendTo(objTr2);
 		    $(venue_lbl).html(flaskUser.emailAddress);
@@ -161,9 +160,9 @@ function fnShowNextRecords(){
 }
 
 function fnShowNextFriends(){
-	_startPos = _startPos + 10;
-	_endPos = _endPos + 10;
-	initFriendList(_startPos,_endPos);
+	_startPosFriends = _startPosFriends + 100;
+	_endPosFriends = _endPosFriends + 100;
+	initFriendList(_startPosFriends,_endPosFriends);
 }
 
 function fnShowPrevRecords(){
@@ -197,7 +196,7 @@ function acceptFriendRequest(UserId,obj){
 	function(data){
 		$(obj).hide();
 		getRequestCount();
-		initFriendList(_startPos,_endPos);
+		initFriendList(_startPosFriends,_endPosFriends);
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEND_REQ_ERR);
 	});		
@@ -211,7 +210,7 @@ function ignoreFriendRequest(UserId,obj){
 	function(data){
 		$(obj).hide();
 		getRequestCount();
-		initFriendList(_startPos,_endPos);
+		initFriendList(_startPosFriends,_endPosFriends);
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEND_REQ_ERR);
 	});		
@@ -261,13 +260,20 @@ function fnUnBlock(UserId,obj){
 }
 
 function initSearch(){
-	$("#btnSubmit").click(function(){
+	$("#btnSearchContact").click(function(){
+		$('#Users_placeholder').html('');
 		initContactList(_startPos,_endPos);		
+	});
+	
+	$("#btnSearchFriend").click(function(){
+		$('#Friend_placeholder').html('');
+		initFriendList(_startPosFriends,_endPosFriends);		
 	});
 }
 
 function initNotifications(){
 	getRequestCount();
+	getUnreadMessages();
 	getRequestList();
 }
 
@@ -284,17 +290,14 @@ function getRequestCount(){
 }
 
 function fnSendMessage(userId){
-	//$("#jqxwindow").hide();
-	$("#jqxwindow").jqxWindow({ height: 175, width: 370, theme: 'custom', isModal: true, autoOpen: false });
-        $("#jqxwindow").jqxWindow('open');
-	
-}
-
-function fnSendMessage(userIdList){
-	//$("#jqxwindow").hide();
-	$("#jqxwindow").jqxWindow({ height: 175, width: 370, theme: 'custom', isModal: true, autoOpen: false });
-        $("#jqxwindow").jqxWindow('open');
-	
+	$('.md-trigger').click();
+	$('.md-send').click(function(){
+		$('#spinningSquaresG').show();
+		var selectedFriend = userId;
+		var message = $('#iMsg').val();
+		var isSendEmail = $('#sendEmailToSinglePerson').is(':checked');
+		sendMessage(selectedFriend, message, isSendEmail);
+	});
 }
 
 function getRequestList(){
@@ -332,7 +335,7 @@ function renderRequestList(obj){
 		    
 		    $(userName_lbl).appendTo($(objTd2));
 		    $(objTd2).appendTo(objTr);
-		    var objTd3 = $('<td/>',{'rowspan':'2','align':'right','valign':'top'});
+		    var objTd3 = $('<td/>',{'align':'right','valign':'top'});
 		    console.log(flaskUser);
 	    	var div_heart = fnBuildRequestMenu(flaskUser,objTable);
 	    	
@@ -340,7 +343,7 @@ function renderRequestList(obj){
 		    $(objTd3).appendTo(objTr);
 
 		    var objTr2 = $('<tr/>');
-		    var objtd2_1 = $('<td/>');
+		    var objtd2_1 = $('<td/>',{'colspan':'2'});
 		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
 		    $(objtd2_1).appendTo(objTr2);
 		    $(venue_lbl).html(flaskUser.emailAddress);
@@ -388,4 +391,133 @@ function GetParameterValues(param) {
             return urlparamFinal[0];  
         }  
     }  
+}
+
+
+$(document).ready(function(){
+	  var selectedUsers = [];
+	  var k=GetParameterValues('notifications');
+	  if(k==1){
+		  $("#notifications").click();
+		  initNotifications();
+	  }
+	  $("#prev").hide();
+	  initSearch();
+	  
+	  $("#frnds").click(function(){
+		  $("#prev").hide();
+		  $('#Friend_placeholder').html("");
+		  initFriendList(_startPosFriends,_endPosFriends); 
+	  });
+	  
+	  $("#mcontents").click(function(){
+		  $("#prev").hide();
+		  $('#Users_placeholder').html("");
+		  initContactList(_startPos,_endPos);   
+	  });
+	  
+	  $("#notifications").click(function(){
+		  initNotifications();   
+	  });
+	  
+	  $("#jqxwindow").hide();
+	  $("#button_no").click(function () {
+	         $("#jqxwindow").jqxWindow('close');
+	     });
+	  $(".cssSendMsg").hide();
+	  $(".cssMultUser").show();
+	  $("#msgDiv").hide();
+	  
+	  $(".cssMultUser").click(function(){
+		   $(this).hide();
+		   $("#msgDiv").show();
+		   $(".chk").show();
+	  });
+	  $("#cancel_all").click(function () {
+		   $("#msgDiv").hide();
+		   $(".chk").hide();
+		   $(".cssMultUser").show();
+		   $(".selected").attr("checked", false);
+	  });
+	  
+	$('#send_all').click(function(){
+		$('#spinningSquaresG').show();
+		var selectedFriends = 0;
+		var message = $('#msg').val();
+		var isSendEmail = $('#sendEmail').is(':checked');
+		$('.selected').each(function(){
+			selectedFriends = selectedFriends + "," + $(this).val(); 
+		});
+		sendMessage(selectedFriends, message, isSendEmail);
+	});  
+	
+	initFriendList(0,99);
+	$('.md-closeBtn').click(function(){
+		$('#modal-advertisement').removeClass('md-show');
+	});	
+});
+
+function sendMessage(recipients, message, sendEmail){
+	 var params ={recipients: recipients, message: message, sendEmail: sendEmail };
+	 var flaskRequest = new Request();
+	 flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.SEND_MESSAGE, params, 
+	    function (data){
+		   $("#msgDiv").hide();
+		   $(".chk").hide();
+		   $(".cssMultUser").show();
+		   $(".selected").attr("checked", false);
+	      	_flaskLib.showSuccessMessage('action-msg','Message sent');
+	     } ,
+	     function (data){
+	    	 console.log("Error in sending message: " + data );
+	      	_flaskLib.showErrorMessage('action-msg',"Error in sending message");
+	     });
+	 $('#spinningSquaresG').hide();
+	 $('#modal-advertisement').removeClass('md-show');
+}
+
+function getUnreadMessages(){
+ var flaskRequest = new Request();
+ flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_UNREAD_MESSAGES,
+    function (data){
+      	console.log(data);
+      	renderMessageList(data);
+     } ,
+     function (data){
+    	 console.log("Error in getting Messages: " + data );
+     });
+}
+
+function renderMessageList(obj){
+	$('#MessageCount').html(obj.length);
+	var divRow = "#MyMessages";
+	$(divRow).html("");
+	$.each(obj,function(index,node){
+	    var objTable = $('<table/>',{'class':'tblRow'});
+
+	    var objTr = $('<tr/>');
+	    $(objTr).appendTo($(objTable));
+	    var userName_lbl = $('<label/>',{'class':'control-label-color','style':'margin-left:0px !important'});
+	    $(userName_lbl).html(node.senderName);
+	    var objTd2 = $('<td/>',{'data-id':node.messageId,'colspan':2});
+	    $(userName_lbl).appendTo($(objTd2));
+	    $(objTd2).appendTo(objTr);
+	    
+	    var objTd3 = $('<td/>',{'align':'left','valign':'top'});
+    	var objTr1 = $('<tr/>');
+	    $(objTr1).appendTo($(objTable));
+	    var msg_lbl = $('<label/>');
+	    $(msg_lbl).html(node.message);
+	    $(msg_lbl).appendTo($(objTd3));
+	    $(objTd3).appendTo(objTr1);
+	    
+	    var objTr2 = $('<tr/>');
+	    $(objTr2).appendTo($(objTable));
+	    var objTd4 = $('<td/>',{'align':'left','valign':'top','style':'font-size:11px;'});
+	    var messageDate = new Date(node.dateTime);
+	    objTd4.html(messageDate.toGMTString())
+	    $(objTd4).appendTo(objTr2);
+	    
+	    $(objTable).appendTo($(divRow));
+	});
 }
