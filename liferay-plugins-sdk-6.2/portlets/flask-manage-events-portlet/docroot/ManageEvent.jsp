@@ -209,6 +209,6 @@ function initialize(portletId, portlet) {
 		</div>
 	</div>
 	<div class="md-overlay"></div>
-	<button class="md-trigger" data-modal="modal-advertisement" style="display:none">3D Rotate Bottom</button>	
+	<button class="md-trigger" data-modal="modal-advertisement" style="display:none">3D</button>	
 </body>
 </html>
