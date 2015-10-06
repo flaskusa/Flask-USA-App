@@ -72,17 +72,22 @@ div#fixedfooter {
 
 .control-label-color {
   font-size: 15px !important;
-  height: 25px;
+  height: 15px;
   color: #FB9A33;
-  margin-left: 6px; }
+  margin-left: 4px;
+  margin-bottom: 0px !important;  
+}
 
 .control-label-nocolor {
   font-size: 14px;
-  height: 25px;
-  margin-left: 6px; }
+  height: 18px;
+  margin-left: 4px;
+  margin-bottom: 0px !important; 
+}
 
 div#one {
-  padding: 0px 15px 0px 15px; }
+  padding: 0px 15px 0px 15px; 
+}
 
 div#placeholder {
 	height: 100% !important;
@@ -132,9 +137,9 @@ div#verticalScrollBarlistbox, #horizontalScrollBarlistbox {
 
 /* For Slider Resize issue Starts*/
 .tblRow {
-  width: 50%;
-  padding-top: 10px;
-  padding-bottom: 10px; }
+  width: 412px !important;
+  margin: 6px;
+}
 
 @media (max-width: 640px) {
   .tblRow {
@@ -145,21 +150,18 @@ input.btn.btn-info.cssback {
 
 .eventLogo {
   display: block;
-  width: 50px;
-  height: 50px;
-  /*margin: 1em 0em auto;*/
+  width: 40px;
+  height: 40px;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-  -webkit-border-radius: 0.5em;
-  -moz-border-radius: 0.5em;
-  border-radius: 0.5em;
   border: 1px solid #eee;
-  box-shadow: 0 3px 3px rgba(0, 0, 0, 0.5);
-  float: left; }
+  float: left; 
+}
 
 .fill {
-  min-height: 100%; }
+  min-height: 100%; 
+}
 
 .filler::after {
   background-color: inherit;
@@ -169,7 +171,8 @@ input.btn.btn-info.cssback {
   position: absolute;
   top: 0;
   width: inherit;
-  z-index: -1; }
+  z-index: -1; 
+}
 
 .fill {
   min-height: 100%;
@@ -214,15 +217,14 @@ ul.dropdown-menu li {
 
 .searchtable{
 	padding: 5px;
-	width: 100%;
+	width: 360px;
 }
 
 .footerButtons
 {
     position: absolute;
-    /*bottom: -81px;*/
     margin-left: 5%;
-    width: 100%;
+	width: 50%;
 }
 
 .aui .pager li > a, .aui .pager li > span{
@@ -249,9 +251,10 @@ ul.dropdown-menu li {
     padding: 3px !important;
     margin-bottom: 10px !important;
     text-shadow: none !important;
+	width: 95% !important;    
 }
 
-#btnSubmit{
+.btnSubmit{
 	width: 42px !important;
 	line-height: 36px !important;
 }
@@ -278,8 +281,8 @@ div#RequestCount {
 div#jqxwindow 
 {
   outline: none;
-  width: 370px;
-  height: 175px;
+  width: 45% !important;
+  height: 30% !important;
   min-height: 50px;
   max-height: 600px;
   min-width: 100px;
@@ -309,8 +312,8 @@ div#jqxwindow
 	div#jqxwindow 
 	{
 		  outline: none;
-		  width: 258px !important;
-		  height: 175px;
+		  width: 45% !important;
+  		  height: 30% !important;
 		  min-height: 50px;
 		  max-height: 600px;
 		  min-width: 100px;
@@ -327,6 +330,10 @@ div#jqxwindow
 	float:left;
 	width:50%;
 	}
+	
+	.tblRow {
+    	width: 100% !important;
+	}
 }
 
 #file {
@@ -338,4 +345,12 @@ div#jqxwindow {
     box-shadow: 1px 0px 26px 3px rgba(0,0,0,0.42);
     border: 1px !important;
     border-radius: 4px;
+}
+
+#msgDiv{
+	margin: 5px;
+    width: 100%;
+    margin-bottom: 21px;
+    max-width: 800px;
+    min-width: 300px;
 }
