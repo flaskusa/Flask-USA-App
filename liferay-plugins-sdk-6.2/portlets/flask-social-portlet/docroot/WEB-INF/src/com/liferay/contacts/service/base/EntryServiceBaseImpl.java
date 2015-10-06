@@ -18,6 +18,8 @@ import com.liferay.contacts.model.Entry;
 import com.liferay.contacts.service.EntryService;
 import com.liferay.contacts.service.persistence.EntryFinder;
 import com.liferay.contacts.service.persistence.EntryPersistence;
+import com.liferay.contacts.service.persistence.FlaskMessagesPersistence;
+import com.liferay.contacts.service.persistence.FlaskRecipientsPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -121,6 +123,120 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setEntryFinder(EntryFinder entryFinder) {
 		this.entryFinder = entryFinder;
+	}
+
+	/**
+	 * Returns the flask messages local service.
+	 *
+	 * @return the flask messages local service
+	 */
+	public com.liferay.contacts.service.FlaskMessagesLocalService getFlaskMessagesLocalService() {
+		return flaskMessagesLocalService;
+	}
+
+	/**
+	 * Sets the flask messages local service.
+	 *
+	 * @param flaskMessagesLocalService the flask messages local service
+	 */
+	public void setFlaskMessagesLocalService(
+		com.liferay.contacts.service.FlaskMessagesLocalService flaskMessagesLocalService) {
+		this.flaskMessagesLocalService = flaskMessagesLocalService;
+	}
+
+	/**
+	 * Returns the flask messages remote service.
+	 *
+	 * @return the flask messages remote service
+	 */
+	public com.liferay.contacts.service.FlaskMessagesService getFlaskMessagesService() {
+		return flaskMessagesService;
+	}
+
+	/**
+	 * Sets the flask messages remote service.
+	 *
+	 * @param flaskMessagesService the flask messages remote service
+	 */
+	public void setFlaskMessagesService(
+		com.liferay.contacts.service.FlaskMessagesService flaskMessagesService) {
+		this.flaskMessagesService = flaskMessagesService;
+	}
+
+	/**
+	 * Returns the flask messages persistence.
+	 *
+	 * @return the flask messages persistence
+	 */
+	public FlaskMessagesPersistence getFlaskMessagesPersistence() {
+		return flaskMessagesPersistence;
+	}
+
+	/**
+	 * Sets the flask messages persistence.
+	 *
+	 * @param flaskMessagesPersistence the flask messages persistence
+	 */
+	public void setFlaskMessagesPersistence(
+		FlaskMessagesPersistence flaskMessagesPersistence) {
+		this.flaskMessagesPersistence = flaskMessagesPersistence;
+	}
+
+	/**
+	 * Returns the flask recipients local service.
+	 *
+	 * @return the flask recipients local service
+	 */
+	public com.liferay.contacts.service.FlaskRecipientsLocalService getFlaskRecipientsLocalService() {
+		return flaskRecipientsLocalService;
+	}
+
+	/**
+	 * Sets the flask recipients local service.
+	 *
+	 * @param flaskRecipientsLocalService the flask recipients local service
+	 */
+	public void setFlaskRecipientsLocalService(
+		com.liferay.contacts.service.FlaskRecipientsLocalService flaskRecipientsLocalService) {
+		this.flaskRecipientsLocalService = flaskRecipientsLocalService;
+	}
+
+	/**
+	 * Returns the flask recipients remote service.
+	 *
+	 * @return the flask recipients remote service
+	 */
+	public com.liferay.contacts.service.FlaskRecipientsService getFlaskRecipientsService() {
+		return flaskRecipientsService;
+	}
+
+	/**
+	 * Sets the flask recipients remote service.
+	 *
+	 * @param flaskRecipientsService the flask recipients remote service
+	 */
+	public void setFlaskRecipientsService(
+		com.liferay.contacts.service.FlaskRecipientsService flaskRecipientsService) {
+		this.flaskRecipientsService = flaskRecipientsService;
+	}
+
+	/**
+	 * Returns the flask recipients persistence.
+	 *
+	 * @return the flask recipients persistence
+	 */
+	public FlaskRecipientsPersistence getFlaskRecipientsPersistence() {
+		return flaskRecipientsPersistence;
+	}
+
+	/**
+	 * Sets the flask recipients persistence.
+	 *
+	 * @param flaskRecipientsPersistence the flask recipients persistence
+	 */
+	public void setFlaskRecipientsPersistence(
+		FlaskRecipientsPersistence flaskRecipientsPersistence) {
+		this.flaskRecipientsPersistence = flaskRecipientsPersistence;
 	}
 
 	/**
@@ -302,6 +418,18 @@ public abstract class EntryServiceBaseImpl extends BaseServiceImpl
 	protected EntryPersistence entryPersistence;
 	@BeanReference(type = EntryFinder.class)
 	protected EntryFinder entryFinder;
+	@BeanReference(type = com.liferay.contacts.service.FlaskMessagesLocalService.class)
+	protected com.liferay.contacts.service.FlaskMessagesLocalService flaskMessagesLocalService;
+	@BeanReference(type = com.liferay.contacts.service.FlaskMessagesService.class)
+	protected com.liferay.contacts.service.FlaskMessagesService flaskMessagesService;
+	@BeanReference(type = FlaskMessagesPersistence.class)
+	protected FlaskMessagesPersistence flaskMessagesPersistence;
+	@BeanReference(type = com.liferay.contacts.service.FlaskRecipientsLocalService.class)
+	protected com.liferay.contacts.service.FlaskRecipientsLocalService flaskRecipientsLocalService;
+	@BeanReference(type = com.liferay.contacts.service.FlaskRecipientsService.class)
+	protected com.liferay.contacts.service.FlaskRecipientsService flaskRecipientsService;
+	@BeanReference(type = FlaskRecipientsPersistence.class)
+	protected FlaskRecipientsPersistence flaskRecipientsPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

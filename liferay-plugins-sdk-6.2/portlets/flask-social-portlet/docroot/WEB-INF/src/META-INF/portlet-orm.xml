@@ -29,8 +29,46 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.contacts.model.impl.FlaskMessagesModelImpl">
+		<attributes>
+			<id name="messageId" />
+			<basic name="senderEmail" />
+			<basic name="senderUserId" />
+			<basic name="senderName" />
+			<basic name="recipients" />
+			<basic name="message" />
+			<basic name="sendEmail" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="senderUserUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.contacts.model.impl.FlaskRecipientsModelImpl">
+		<attributes>
+			<id name="recipientId" />
+			<basic name="userId" />
+			<basic name="email" />
+			<basic name="messageId" />
+			<basic name="read">
+				<column name="READ_" />
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.liferay.contacts.model.impl.EntryImpl" name="Entry">
 		<table name="Contacts_Entry" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.contacts.model.impl.FlaskMessagesImpl" name="FlaskMessages">
+		<table name="Contacts_FlaskMessages" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.contacts.model.impl.FlaskRecipientsImpl" name="FlaskRecipients">
+		<table name="Contacts_FlaskRecipients" />
 		<attributes />
 	</entity>
 </entity-mappings>

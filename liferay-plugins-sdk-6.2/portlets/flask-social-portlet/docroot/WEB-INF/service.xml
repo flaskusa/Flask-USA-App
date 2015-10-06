@@ -43,6 +43,33 @@
 			<finder-column name="emailAddress" />
 		</finder>
 	</entity>
+	<entity name="FlaskMessages" local-service="true">
+        <column name="messageId" type="long" primary="true"></column>
+        <column name="senderEmail" type="String"></column>
+        <column name="senderUserId" type="long"></column>
+        <column name="senderName" type="String"></column>
+        <column name="recipients" type="String"></column>
+        <column name="message" type="String"></column>
+        <column name="sendEmail" type="boolean"></column>
+        
+    </entity>
+    <entity name="FlaskRecipients" local-service="true">
+        <column name="recipientId" type="long" primary="true"></column>
+        <column name="userId" type="long"></column>
+        <column name="email" type="String"></column>
+        <column name="messageId" type="long"></column>
+        <column name="read" type="boolean"></column>
+        <finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="messageId" return-type="Collection">
+			<finder-column name="messageId" />
+		</finder>
+		<finder name="readFlag" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="read" />
+		</finder>
+    </entity>
 	<exceptions>
 		<exception>DuplicateEntryEmailAddress</exception>
 		<exception>EntryEmailAddress</exception>

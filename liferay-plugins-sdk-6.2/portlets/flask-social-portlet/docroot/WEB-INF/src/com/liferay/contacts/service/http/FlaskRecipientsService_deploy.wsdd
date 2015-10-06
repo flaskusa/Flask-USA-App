@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_Contacts_FlaskRecipientsService" provider="java:RPC" style="rpc" use="encoded">
+		<typeMapping xmlns:ns="http://model.contacts.liferay.com" qname="ns:FlaskRecipientsSoap" type="java:com.liferay.contacts.model.FlaskRecipientsSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://model.contacts.liferay.com" name="addFlaskRecipient" qname="operNS:addFlaskRecipient" returnQName="addFlaskRecipientReturn" returnType="rtns:FlaskRecipientsSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="read" type="tns:boolean"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="addFlaskRecipient" />
+		<parameter name="className" value="com.liferay.contacts.service.http.FlaskRecipientsServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.contacts.liferay.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="FlaskRecipientsServiceSoap" />
+		<parameter name="wsdlServiceElement" value="FlaskRecipientsServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_Contacts_FlaskRecipientsService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.contacts.liferay.com" />
+	</service>
+</deployment>

@@ -5,4 +5,10 @@
 	<bean id="com.liferay.contacts.service.EntryService" class="com.liferay.contacts.service.impl.EntryServiceImpl" />
 	<bean id="com.liferay.contacts.service.persistence.EntryPersistence" class="com.liferay.contacts.service.persistence.EntryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.contacts.service.persistence.EntryFinder" class="com.liferay.contacts.service.persistence.EntryFinderImpl" parent="basePersistence" />
+	<bean id="com.liferay.contacts.service.FlaskMessagesLocalService" class="com.liferay.contacts.service.impl.FlaskMessagesLocalServiceImpl" />
+	<bean id="com.liferay.contacts.service.FlaskMessagesService" class="com.liferay.contacts.service.impl.FlaskMessagesServiceImpl" />
+	<bean id="com.liferay.contacts.service.persistence.FlaskMessagesPersistence" class="com.liferay.contacts.service.persistence.FlaskMessagesPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.contacts.service.FlaskRecipientsLocalService" class="com.liferay.contacts.service.impl.FlaskRecipientsLocalServiceImpl" />
+	<bean id="com.liferay.contacts.service.FlaskRecipientsService" class="com.liferay.contacts.service.impl.FlaskRecipientsServiceImpl" />
+	<bean id="com.liferay.contacts.service.persistence.FlaskRecipientsPersistence" class="com.liferay.contacts.service.persistence.FlaskRecipientsPersistenceImpl" parent="basePersistence" />
 </beans>

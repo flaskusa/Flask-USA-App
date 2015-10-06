@@ -17,6 +17,10 @@ package com.liferay.contacts.service.messaging;
 import com.liferay.contacts.service.ClpSerializer;
 import com.liferay.contacts.service.EntryLocalServiceUtil;
 import com.liferay.contacts.service.EntryServiceUtil;
+import com.liferay.contacts.service.FlaskMessagesLocalServiceUtil;
+import com.liferay.contacts.service.FlaskMessagesServiceUtil;
+import com.liferay.contacts.service.FlaskRecipientsLocalServiceUtil;
+import com.liferay.contacts.service.FlaskRecipientsServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -39,6 +43,12 @@ public class ClpMessageListener extends BaseMessageListener {
 			EntryLocalServiceUtil.clearService();
 
 			EntryServiceUtil.clearService();
+			FlaskMessagesLocalServiceUtil.clearService();
+
+			FlaskMessagesServiceUtil.clearService();
+			FlaskRecipientsLocalServiceUtil.clearService();
+
+			FlaskRecipientsServiceUtil.clearService();
 		}
 	}
 }

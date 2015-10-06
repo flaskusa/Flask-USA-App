@@ -15,6 +15,8 @@
 package com.liferay.contacts.service;
 
 import com.liferay.contacts.model.EntryClp;
+import com.liferay.contacts.model.FlaskMessagesClp;
+import com.liferay.contacts.model.FlaskRecipientsClp;
 
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -106,6 +108,14 @@ public class ClpSerializer {
 			return translateInputEntry(oldModel);
 		}
 
+		if (oldModelClassName.equals(FlaskMessagesClp.class.getName())) {
+			return translateInputFlaskMessages(oldModel);
+		}
+
+		if (oldModelClassName.equals(FlaskRecipientsClp.class.getName())) {
+			return translateInputFlaskRecipients(oldModel);
+		}
+
 		return oldModel;
 	}
 
@@ -125,6 +135,26 @@ public class ClpSerializer {
 		EntryClp oldClpModel = (EntryClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getEntryRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputFlaskMessages(BaseModel<?> oldModel) {
+		FlaskMessagesClp oldClpModel = (FlaskMessagesClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getFlaskMessagesRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputFlaskRecipients(BaseModel<?> oldModel) {
+		FlaskRecipientsClp oldClpModel = (FlaskRecipientsClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getFlaskRecipientsRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -151,6 +181,80 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.liferay.contacts.model.impl.EntryImpl")) {
 			return translateOutputEntry(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.liferay.contacts.model.impl.FlaskMessagesImpl")) {
+			return translateOutputFlaskMessages(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.liferay.contacts.model.impl.FlaskRecipientsImpl")) {
+			return translateOutputFlaskRecipients(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -287,6 +391,16 @@ public class ClpSerializer {
 			return new com.liferay.contacts.NoSuchEntryException();
 		}
 
+		if (className.equals(
+					"com.liferay.contacts.NoSuchFlaskMessagesException")) {
+			return new com.liferay.contacts.NoSuchFlaskMessagesException();
+		}
+
+		if (className.equals(
+					"com.liferay.contacts.NoSuchFlaskRecipientsException")) {
+			return new com.liferay.contacts.NoSuchFlaskRecipientsException();
+		}
+
 		return throwable;
 	}
 
@@ -296,6 +410,26 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setEntryRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputFlaskMessages(BaseModel<?> oldModel) {
+		FlaskMessagesClp newModel = new FlaskMessagesClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setFlaskMessagesRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputFlaskRecipients(BaseModel<?> oldModel) {
+		FlaskRecipientsClp newModel = new FlaskRecipientsClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setFlaskRecipientsRemoteModel(oldModel);
 
 		return newModel;
 	}

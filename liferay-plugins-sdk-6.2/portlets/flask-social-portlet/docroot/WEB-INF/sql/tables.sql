@@ -10,3 +10,21 @@ create table Contacts_Entry (
 	emailAddress VARCHAR(75) null,
 	comments STRING null
 );
+
+create table Contacts_FlaskMessages (
+	messageId LONG not null primary key,
+	senderEmail VARCHAR(75) null,
+	senderUserId LONG,
+	senderName VARCHAR(75) null,
+	recipients VARCHAR(75) null,
+	message VARCHAR(75) null,
+	sendEmail BOOLEAN
+);
+
+create table Contacts_FlaskRecipients (
+	recipientId LONG not null primary key,
+	userId LONG,
+	email VARCHAR(75) null,
+	messageId LONG,
+	read_ BOOLEAN
+);

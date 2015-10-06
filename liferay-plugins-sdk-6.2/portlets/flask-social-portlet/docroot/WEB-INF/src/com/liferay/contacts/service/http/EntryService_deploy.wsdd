@@ -21,12 +21,27 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="blockUserId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deleteRequest" qname="operNS:deleteRequest" returnQName="deleteRequestReturn" returnType="rtns:anyType" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="receiverUserId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" name="deleteSocialRelation" qname="operNS:deleteSocialRelation" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="receiverUserId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getRequestingUsers" qname="operNS:getRequestingUsers" returnQName="getRequestingUsersReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="keywords" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getRequestsCount" qname="operNS:getRequestsCount" returnQName="getRequestsCountReturn" returnType="rtns:int" soapAction="">
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="urn:http.service.contacts.liferay.com" xmlns:tns2="http://model.social.portlet.liferay.com" name="getRequestsToConfirm" qname="operNS:getRequestsToConfirm" returnQName="getRequestsToConfirmReturn" returnType="rtns:ArrayOf_tns13_SocialRequestSoap" returnItemType="tns2:SocialRequestSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="receiverUserId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getUserById" qname="operNS:getUserById" returnQName="getUserByIdReturn" returnType="rtns:anyType" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getUsersAndContactsCount" qname="operNS:getUsersAndContactsCount" returnQName="getUsersAndContactsCountReturn" returnType="rtns:int" soapAction="">
@@ -54,7 +69,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="unblockUserId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="addSocialRelation blockUser deleteSocialRelation getRequestsToConfirm getUsersAndContactsCount requestSocialRelation searchMyFriends searchUsersAndContacts unblockUser" />
+		<parameter name="allowedMethods" value="addSocialRelation blockUser deleteRequest deleteSocialRelation getRequestingUsers getRequestsCount getRequestsToConfirm getUserById getUsersAndContactsCount requestSocialRelation searchMyFriends searchUsersAndContacts unblockUser" />
 		<parameter name="className" value="com.liferay.contacts.service.http.EntryServiceSoap" />
 		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,http://model.social.portlet.liferay.com,http://service.portal.liferay.com,http://theme.portal.liferay.com,http://util.kernel.portal.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.contacts.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />
