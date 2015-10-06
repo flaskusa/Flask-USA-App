@@ -183,8 +183,8 @@ GRID_PARAM_CUSTOMER.initrowdetails = function(index, parentElement, gridElement,
 		
 		
 		$(tabsdiv).jqxTabs({
-			width : '90%',
-			height : 180
+			width : '100%',
+			height : 350
 		});
     }
 }
@@ -257,12 +257,14 @@ function createCustomerTable(data, model, grid, menuDivId, actionColText,context
                 theme:	'custom',
              // Pageing config
                 pageable : true,
-                pagermode : 'default',
+                pagermode : 'simple',
                 rowdetails: true,
                 showrowdetailscolumn:false,
                 rowdetailstemplate: GRID_PARAM_CUSTOMER.rowDetailTemplate(rowDetailDivArr , 200),
                 initrowdetails: GRID_PARAM_CUSTOMER.initrowdetails,
-                columns: adCustomerColumns
+                columns: adCustomerColumns,
+                pagesize: 20,
+                autoheight: true
             });
     
 	}
