@@ -354,3 +354,11 @@ div#jqxwindow {
     max-width: 800px;
     min-width: 300px;
 }
+
+.unRdMsg{
+	font-weight: bold !important;
+}
+
+.rdMsg{
+	font-weight: normal;
+}
