@@ -592,6 +592,7 @@ div#fixedfooter2
 	box-sizing: content-box;
 	overflow: hidden;
 	border: none;
+	margin: 1px;
 }
 
 .slideImage{
