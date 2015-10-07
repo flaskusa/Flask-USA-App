@@ -26,14 +26,8 @@ import com.liferay.contacts.service.base.FlaskMessagesServiceBaseImpl;
 import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.ac.AccessControlled;
-import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
-import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.UserServiceUtil;
 import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
 
 /**
@@ -51,12 +45,8 @@ import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
  * @see com.liferay.contacts.service.FlaskMessagesServiceUtil
  */
 public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
-	
-	
 
-	
 	@Override
-	@AccessControlled(guestAccessEnabled =true)
 	 public FlaskMessages sendFlaskMessage(String recipients, String message, boolean sendEmail, ServiceContext serviceContext){
 		
 	  FlaskMessages flaskMessage = null;
@@ -89,7 +79,6 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	}
 	
 	@Override
-	@AccessControlled(guestAccessEnabled =true)
 	public List<FlaskMessages> getAllMyFlaskMessages(ServiceContext serviceContext){
 		List<FlaskMessages> flaskMessages = new ArrayList<FlaskMessages>();
 		List<FlaskRecipients> flaskRecipients = null;
@@ -106,7 +95,6 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	}
 	
 	@Override
-	@AccessControlled(guestAccessEnabled =true)
 	public List<FlaskMessages> getMyUnreadFlaskMessages(ServiceContext serviceContext){
 		List<FlaskMessages> flaskMessages = new ArrayList<FlaskMessages>();
 		List<FlaskRecipients> flaskRecipients = new ArrayList<FlaskRecipients>();

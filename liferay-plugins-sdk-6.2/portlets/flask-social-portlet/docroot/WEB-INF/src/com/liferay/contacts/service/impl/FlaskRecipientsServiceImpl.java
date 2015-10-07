@@ -23,9 +23,7 @@ import com.liferay.contacts.service.base.FlaskRecipientsServiceBaseImpl;
 import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.UserServiceUtil;
 
 /**
  * The implementation of the flask recipients remote service.
@@ -45,7 +43,6 @@ public class FlaskRecipientsServiceImpl extends FlaskRecipientsServiceBaseImpl {
 	
 	
 	@Override
-	@AccessControlled(guestAccessEnabled =true)
 	public FlaskRecipients addFlaskRecipient(long userId, long messageId, boolean read){
 		FlaskRecipients flaskRecipients = null;
 		try {
@@ -64,7 +61,6 @@ public class FlaskRecipientsServiceImpl extends FlaskRecipientsServiceBaseImpl {
 	}
 	
 	@Override
-	@AccessControlled(guestAccessEnabled =true)
 	 public boolean setRead(long messageId){
 	  List<FlaskRecipients> flaskRecipients = new ArrayList<FlaskRecipients>();
 	  boolean ret = false;
