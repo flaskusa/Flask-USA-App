@@ -271,7 +271,8 @@ function initSearch(){
 
 function initNotifications(){
 	getRequestCount();
-	getUnreadMessages();
+	//getUnreadMessages();
+	getMyAllMessages();
 	getRequestList();
 }
 
@@ -474,16 +475,38 @@ function sendMessage(recipients, message, sendEmail){
 	 $('#modal-advertisement').removeClass('md-show');
 }
 
-function getUnreadMessages(){
+function getMyAllMessages(){
+	 var flaskRequest = new Request();
+	 flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_My_ALL_MESSAGES,
+	    function (data){
+	      	renderMessageList(data);
+	     } ,
+	     function (data){
+	    	 console.log("Error in getting Messages: " + data );
+	 });
+}
+
+
+function getUnreadMessages(msg_lbl){
  var flaskRequest = new Request();
  flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_UNREAD_MESSAGES,
     function (data){
-      	console.log(data);
-      	renderMessageList(data);
+      	$(msg_lbl).addClass("unRdMsg");
      } ,
      function (data){
     	 console.log("Error in getting Messages: " + data );
      });
+}
+
+function setRead(messageId){
+	var flaskRequest = new Request();
+	var params = {messageId:messageId};
+	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.SET_READ, params, 
+	function(data){
+		console.log(data);
+	} , function(error){
+		_flaskLib.showErrorMessage('action-msg',"Cannot set as read");
+	});		
 }
 
 function renderMessageList(obj){
@@ -523,13 +546,20 @@ function renderMessageList(obj){
 	    $(objTr2).appendTo($(objTableText));
 	    var objTd2 = $('<td/>',{'align':'left','valign':'top','colspan':2});
 	    var msg_lbl = $('<label/>');
+	    if(!(node.read)){
+	    	$(msg_lbl).addClass("unRdMsg");
+	    }
 	    $(msg_lbl).html(node.message);
 	    $(msg_lbl).appendTo($(objTd2));
 	    $(objTd2).appendTo(objTr2);
-	    
-	    
+	    getUnreadMessages(msg_lbl);
 	    $(objTableText).appendTo($(objTdContent));
 	    $(objTable).appendTo($(divRow));
+	    $(objTable).click(function(){
+	    	var rwMsgId = $(objTd1).attr("data-id");
+	    	setRead(rwMsgId);
+	    	$(msg_lbl).removeClass("unRdMsg");
+	    });
 	});
 }
 

@@ -12,8 +12,10 @@ _socialModel.SERVICE_ENDPOINTS = {
     GET_USER_DETAILS			:"/flask-social-portlet.entry/get-user-by-id",
     ACCEPT_REQUEST				:"/flask-social-portlet.entry/add-social-relation",
     DELETE_REQUEST				:"/flask-social-portlet.entry/delete-request",
-    SEND_MESSAGE    :"/flask-social-portlet.flaskmessages/send-flask-message",
-    GET_UNREAD_MESSAGES   :"/flask-social-portlet.flaskmessages/get-my-unread-flask-messages"
+    SEND_MESSAGE    			:"/flask-social-portlet.flaskmessages/send-flask-message",
+    GET_UNREAD_MESSAGES   		:"/flask-social-portlet.flaskmessages/get-my-unread-flask-messages",
+    GET_My_ALL_MESSAGES   		:"/flask-social-portlet.flaskmessages/get-all-my-flask-messages",
+    SET_READ					:"/flask-social-portlet.flaskrecipients/set-read"
 };
 
 _socialModel.MESSAGES = {
