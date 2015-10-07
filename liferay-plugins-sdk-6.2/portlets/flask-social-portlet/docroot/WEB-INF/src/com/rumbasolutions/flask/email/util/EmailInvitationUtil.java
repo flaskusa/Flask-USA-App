@@ -17,7 +17,7 @@ public class EmailInvitationUtil {
 	public static void emailMessage(String name, String fromEmail, String toEmail, String message, ServiceContext serviceContext){
 		try {
 			InternetAddress fromAddress = new InternetAddress(fromEmail); // from address
-	        InternetAddress toAddress = new InternetAddress("sutarkiran@gmail.com");  // to address
+	        InternetAddress toAddress = new InternetAddress(toEmail);  // to address
 
 	        String body = ContentUtil.get("/template/messageEmailTemplate.tmpl", true);  // email body , here we are getting email structure creating the content folder in the src and create the file with the extension as tmpl.
 	        String subject = "Flask Message from "+name; // email subject
@@ -30,8 +30,8 @@ public class EmailInvitationUtil {
 	                mailMessage.setSubject(subject);
 	                mailMessage.setBody(body);
 	                mailMessage.setHTMLFormat(true);
-	                
 	                MailServiceUtil.sendEmail(mailMessage); // Sending message
+	                System.out.println("msg sent");
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

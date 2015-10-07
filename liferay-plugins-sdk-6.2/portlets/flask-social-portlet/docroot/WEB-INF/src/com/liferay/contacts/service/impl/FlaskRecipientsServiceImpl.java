@@ -24,6 +24,7 @@ import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ac.AccessControlled;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 
 /**
@@ -48,7 +49,7 @@ public class FlaskRecipientsServiceImpl extends FlaskRecipientsServiceBaseImpl {
 	public FlaskRecipients addFlaskRecipient(long userId, long messageId, boolean read){
 		FlaskRecipients flaskRecipients = null;
 		try {
-			User user = UserServiceUtil.getUserById(userId);
+			User user = UserLocalServiceUtil.getUserById(userId);
 			flaskRecipients = FlaskRecipientsLocalServiceUtil.createFlaskRecipients(CounterLocalServiceUtil.increment());
 			flaskRecipients.setUserId(userId);
 			flaskRecipients.setEmail(user.getEmailAddress());

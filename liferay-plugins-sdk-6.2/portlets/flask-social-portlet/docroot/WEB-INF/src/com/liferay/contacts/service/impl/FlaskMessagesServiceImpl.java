@@ -27,7 +27,12 @@ import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ac.AccessControlled;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerFactoryUtil;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
 
@@ -47,12 +52,17 @@ import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
  */
 public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	
+	
+
+	
 	@Override
 	@AccessControlled(guestAccessEnabled =true)
 	 public FlaskMessages sendFlaskMessage(String recipients, String message, boolean sendEmail, ServiceContext serviceContext){
+		
 	  FlaskMessages flaskMessage = null;
 	  try {
-	   User user = UserServiceUtil.getUserById(serviceContext.getUserId());
+		  
+	   User user = UserLocalServiceUtil.getUserById(serviceContext.getUserId());
 	   flaskMessage = FlaskMessagesLocalServiceUtil.createFlaskMessages(CounterLocalServiceUtil.increment());
 	   flaskMessage.setSenderEmail(user.getEmailAddress());
 	   flaskMessage.setSenderName(user.getFullName());
@@ -67,8 +77,8 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	   for (String userId : rec){
 		   if(Long.parseLong(userId) > 0){
 			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false);
-			    if(sendEmail)
-				     EmailInvitationUtil.emailMessage(user.getFullName(), user.getEmailAddress(), recp.getEmail(), message, serviceContext);
+			   if(sendEmail)
+			        EmailInvitationUtil.emailMessage(user.getFullName(), user.getEmailAddress(), recp.getEmail(), message, serviceContext);
 		   }
 	   }
 	  } catch (Exception e) {
