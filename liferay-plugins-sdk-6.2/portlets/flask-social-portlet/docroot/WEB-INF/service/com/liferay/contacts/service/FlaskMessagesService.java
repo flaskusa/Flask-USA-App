@@ -71,7 +71,7 @@ public interface FlaskMessagesService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.liferay.contacts.model.FlaskMessages> getAllMyFlaskMessages(
+	public com.liferay.portal.kernel.json.JSONArray getAllMyFlaskMessages(
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

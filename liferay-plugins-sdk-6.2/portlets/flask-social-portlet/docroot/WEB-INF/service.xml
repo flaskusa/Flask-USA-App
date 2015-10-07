@@ -69,6 +69,10 @@
 			<finder-column name="userId" />
 			<finder-column name="read" />
 		</finder>
+		<finder name="readOrNot" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="messageId" />
+		</finder>
     </entity>
 	<exceptions>
 		<exception>DuplicateEntryEmailAddress</exception>

@@ -68,7 +68,7 @@ public class FlaskMessagesServiceWrapper implements FlaskMessagesService,
 	}
 
 	@Override
-	public java.util.List<com.liferay.contacts.model.FlaskMessages> getAllMyFlaskMessages(
+	public com.liferay.portal.kernel.json.JSONArray getAllMyFlaskMessages(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _flaskMessagesService.getAllMyFlaskMessages(serviceContext);
 	}

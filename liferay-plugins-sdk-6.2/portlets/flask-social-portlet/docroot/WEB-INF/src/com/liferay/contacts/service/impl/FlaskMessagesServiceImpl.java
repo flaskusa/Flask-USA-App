@@ -25,6 +25,9 @@ import com.liferay.contacts.service.FlaskRecipientsServiceUtil;
 import com.liferay.contacts.service.base.FlaskMessagesServiceBaseImpl;
 import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -79,19 +82,33 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	}
 	
 	@Override
-	public List<FlaskMessages> getAllMyFlaskMessages(ServiceContext serviceContext){
+	public JSONArray getAllMyFlaskMessages(ServiceContext serviceContext){
 		List<FlaskMessages> flaskMessages = new ArrayList<FlaskMessages>();
 		List<FlaskRecipients> flaskRecipients = null;
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		try {
 			flaskRecipients = FlaskRecipientsUtil.findByUserId(serviceContext.getUserId());
 			for(FlaskRecipients recp: flaskRecipients){
-				flaskMessages.add(FlaskMessagesLocalServiceUtil.getFlaskMessages(recp.getMessageId()));
+				JSONObject jsonObj =  JSONFactoryUtil.createJSONObject();
+				FlaskMessages msg = FlaskMessagesLocalServiceUtil.getFlaskMessages(recp.getMessageId());
+				jsonObj.put("dateTime", msg.getDateTime());
+				jsonObj.put("message", msg.getMessage());
+				jsonObj.put("messageId", msg.getMessageId());
+				jsonObj.put("recipients", msg.getRecipients());
+				jsonObj.put("sendEmail", msg.getSendEmail());
+				jsonObj.put("senderEmail", msg.getSenderEmail());
+				jsonObj.put("senderName", msg.getSenderName());
+				jsonObj.put("senderUserId", msg.getSenderUserId());
+				jsonObj.put("read", recp.isRead());
+				jsonObj.put("portraitId", UserLocalServiceUtil.getUserById(msg.getSenderUserId()).getPortraitId());
+				//flaskMessages.add(FlaskMessagesLocalServiceUtil.getFlaskMessages(recp.getMessageId()));
+				jsonArray.put(jsonObj);
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
-		return flaskMessages;
+		return jsonArray;
 	}
 	
 	@Override
@@ -102,6 +119,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 			flaskRecipients = FlaskRecipientsUtil.findByreadFlag(serviceContext.getUserId(), false);
 			for(FlaskRecipients recp: flaskRecipients){
 				flaskMessages.add(FlaskMessagesLocalServiceUtil.getFlaskMessages(recp.getMessageId()));
+				//flaskMessages.get(0).getSenderUserId();
 			}
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -109,4 +127,5 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		}
 		return flaskMessages;
 	}
+	
 }

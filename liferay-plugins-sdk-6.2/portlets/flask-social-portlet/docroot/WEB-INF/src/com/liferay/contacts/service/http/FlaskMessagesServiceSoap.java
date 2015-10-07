@@ -80,14 +80,13 @@ public class FlaskMessagesServiceSoap {
 		}
 	}
 
-	public static com.liferay.contacts.model.FlaskMessagesSoap[] getAllMyFlaskMessages(
+	public static java.lang.String getAllMyFlaskMessages(
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.contacts.model.FlaskMessages> returnValue =
-				FlaskMessagesServiceUtil.getAllMyFlaskMessages(serviceContext);
+			com.liferay.portal.kernel.json.JSONArray returnValue = FlaskMessagesServiceUtil.getAllMyFlaskMessages(serviceContext);
 
-			return com.liferay.contacts.model.FlaskMessagesSoap.toSoapModels(returnValue);
+			return returnValue.toString();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

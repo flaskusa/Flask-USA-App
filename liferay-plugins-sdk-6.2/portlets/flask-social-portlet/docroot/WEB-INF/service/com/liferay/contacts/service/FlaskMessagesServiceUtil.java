@@ -72,7 +72,7 @@ public class FlaskMessagesServiceUtil {
 			serviceContext);
 	}
 
-	public static java.util.List<com.liferay.contacts.model.FlaskMessages> getAllMyFlaskMessages(
+	public static com.liferay.portal.kernel.json.JSONArray getAllMyFlaskMessages(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService().getAllMyFlaskMessages(serviceContext);
 	}

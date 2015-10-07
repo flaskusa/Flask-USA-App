@@ -138,7 +138,7 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	}
 
 	@Override
-	public java.util.List<com.liferay.contacts.model.FlaskMessages> getAllMyFlaskMessages(
+	public com.liferay.portal.kernel.json.JSONArray getAllMyFlaskMessages(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -159,7 +159,7 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 			}
 		}
 
-		return (java.util.List<com.liferay.contacts.model.FlaskMessages>)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.portal.kernel.json.JSONArray)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
