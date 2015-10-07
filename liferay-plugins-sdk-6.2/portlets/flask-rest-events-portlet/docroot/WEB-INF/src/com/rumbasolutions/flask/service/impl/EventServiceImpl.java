@@ -20,6 +20,8 @@ import java.util.List;
 import java.util.Map;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
@@ -27,8 +29,13 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.rumbasolutions.flask.model.Event;
 import com.rumbasolutions.flask.model.EventDetail;
 import com.rumbasolutions.flask.model.EventDetailImage;
@@ -574,6 +581,55 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			LOGGER.error("Exception in getUserEventIds: " + ex.getMessage());
 		}
 		return userEvents;
+	}
+	
+	@Override
+	public List<Long> setGuestViewPermission(ServiceContext  serviceContext){
+		List<Long> userEvents = new ArrayList<Long>();
+		try{
+			List<Event> eventList = EventUtil.findAll();
+			DLFileEntry fileEntry;
+			for (Event event: eventList){
+				long groupId = event.getEventImageGroupId();
+				String uuId = event.getEventImageUUID();
+				try{
+					fileEntry = DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(uuId, groupId);
+				}catch(Exception ex){
+					LOGGER.error("Exception in calling getFileEntryByUuidAndGroupId: " + ex.getMessage());
+					continue;
+				}
+				FlaskUtil.setGuestViewPermission( fileEntry);
+				DLFolder dlFolder =fileEntry.getFolder(); 
+				setFolderPermissionRecursive(dlFolder);
+				
+				
+				
+			}		
+		}catch(Exception ex){
+			LOGGER.error("Exception in getUserEventIds: " + ex.getMessage());
+		}
+		return userEvents;
+	}
+	
+	private void setFolderPermissionRecursive(DLFolder dlFolder) {
+		if(dlFolder == null){
+			return;
+		}
+		try {
+			FlaskUtil.setGuestViewFolderPermission(dlFolder);
+		} catch (Exception ex) {
+			LOGGER.error("Exception in setFolderPermissionRecursive:setGuestViewFolderPermission " + ex.getMessage());
+		} 
+		
+		try {
+			DLFolder parentFolder = dlFolder.getParentFolder();
+			setFolderPermissionRecursive(parentFolder);
+		} catch (Exception ex) {
+			LOGGER.error("Exception in setFolderPermissionRecursive:getParentFolder " + ex.getMessage());
+			return;
+		} 
+		
+		
 	}
 	
 	

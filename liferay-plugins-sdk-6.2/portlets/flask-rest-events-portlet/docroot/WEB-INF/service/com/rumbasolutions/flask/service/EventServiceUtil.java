@@ -239,6 +239,11 @@ public class EventServiceUtil {
 		return getService().getUserEventIds(serviceContext);
 	}
 
+	public static java.util.List<java.lang.Long> setGuestViewPermission(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().setGuestViewPermission(serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

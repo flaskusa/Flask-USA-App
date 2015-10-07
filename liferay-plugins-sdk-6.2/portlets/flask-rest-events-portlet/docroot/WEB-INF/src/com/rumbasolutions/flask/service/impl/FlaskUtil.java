@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -17,14 +18,28 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.model.ResourceAction;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.ResourcePermission;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
+import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.CountryUtil;
 import com.liferay.portal.service.persistence.RegionUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.rumbasolutions.flask.model.Event;
 import com.rumbasolutions.flask.model.EventDetail;
 import com.rumbasolutions.flask.model.EventType;
@@ -52,7 +67,7 @@ public class FlaskUtil {
 	public static int DEFAULT_RANGE = 100; //miles
 	public static Double DEFAULT_LATITUDE = 42.3400; //miles
 	public static Double DEFAULT_LONGITUDE = 83.0456; //miles
-
+	public static Role _guestRole;
 
 
 	public static long repositoryId = 0;
@@ -456,4 +471,87 @@ public class FlaskUtil {
 		infoTypeObj.put(infoTypeCategoryName, detailArr);
 
 	}
+	
+	public static void setGuestViewPermission( DLFileEntry fileEntry) throws PortalException, SystemException{
+		ResourcePermission resourcePermission = null;
+		Role guestRole = getGuestRole();
+		try
+		   {
+			
+		    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(fileEntry.getCompanyId(),
+		    					DLFileEntry.class.getName(),
+		    					ResourceConstants.SCOPE_INDIVIDUAL, 
+		    					String.valueOf(fileEntry.getPrimaryKey()),
+		    					guestRole.getRoleId());
+		        
+		    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+		  
+		    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
+		    {
+		      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+		      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
+		    }
+		   }catch(Exception ex){
+			      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
+			      resourcePermission.setCompanyId(fileEntry.getCompanyId());
+			      resourcePermission.setName(DLFileEntry.class.getName());
+			      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+			      resourcePermission.setPrimKey(String.valueOf(fileEntry.getPrimaryKey()));
+			      resourcePermission.setRoleId(guestRole.getRoleId());
+			    
+			      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+			      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+			      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+			   
+		   }
+	}
+	public static void setGuestViewFolderPermission( DLFolder dlFolder) throws PortalException, SystemException{
+		ResourcePermission resourcePermission = null;
+		Role guestRole = getGuestRole();
+		try
+		   {
+
+		    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(dlFolder.getCompanyId(),
+		    					DLFolder.class.getName(),
+		    					ResourceConstants.SCOPE_INDIVIDUAL, 
+		    					String.valueOf(dlFolder.getPrimaryKey()),
+		    					guestRole.getRoleId());
+		        
+		    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFolder.class.getName(), ActionKeys.VIEW);
+		  
+		    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
+		    {
+		      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+		      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
+		    }
+		   }catch(Exception ex){
+			      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
+			      resourcePermission.setCompanyId(dlFolder.getCompanyId());
+			      resourcePermission.setName(DLFolder.class.getName());
+			      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+			      resourcePermission.setPrimKey(String.valueOf(dlFolder.getPrimaryKey()));
+			      resourcePermission.setRoleId(guestRole.getRoleId());
+			    
+			      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFolder.class.getName(), ActionKeys.VIEW);
+			      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+			      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+			   
+		   }
+	}
+
+	public static Role getGuestRole(){
+		try {
+			if(_guestRole == null){
+				_guestRole =RoleServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), RoleConstants.GUEST);
+			}
+		}
+		catch (PortalException e) {
+			e.printStackTrace();
+		}
+		catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return _guestRole;
+	}
+
 }

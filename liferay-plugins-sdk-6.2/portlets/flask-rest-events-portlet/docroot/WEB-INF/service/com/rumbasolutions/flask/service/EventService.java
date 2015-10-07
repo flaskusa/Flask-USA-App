@@ -190,4 +190,7 @@ public interface EventService extends BaseService, InvokableService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<java.lang.Long> getUserEventIds(
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public java.util.List<java.lang.Long> setGuestViewPermission(
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

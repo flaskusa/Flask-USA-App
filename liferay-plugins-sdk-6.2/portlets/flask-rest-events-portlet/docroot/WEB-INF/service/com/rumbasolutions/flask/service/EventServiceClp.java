@@ -195,6 +195,12 @@ public class EventServiceClp implements EventService {
 		_methodParameterTypes26 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName27 = "setGuestViewPermission";
+
+		_methodParameterTypes27 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -1065,6 +1071,31 @@ public class EventServiceClp implements EventService {
 		return (java.util.List<java.lang.Long>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public java.util.List<java.lang.Long> setGuestViewPermission(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName27,
+					_methodParameterTypes27,
+					new Object[] { ClpSerializer.translateInput(serviceContext) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<java.lang.Long>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1118,4 +1149,6 @@ public class EventServiceClp implements EventService {
 	private String[] _methodParameterTypes25;
 	private String _methodName26;
 	private String[] _methodParameterTypes26;
+	private String _methodName27;
+	private String[] _methodParameterTypes27;
 }

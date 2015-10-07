@@ -7,6 +7,9 @@
 	<hint-collection name="FLASK-DESC">
 		<hint name="max-length">255</hint>
 	</hint-collection>
+	<hint-collection name="FLASK-LONG-DESC">
+		<hint name="max-length">10000</hint>
+	</hint-collection>
 	<hint-collection name="FLASK-IMAGE-PATH">
 		<hint name="max-length">30</hint>
 	</hint-collection>
@@ -59,7 +62,7 @@
 		<field name="infoTypeCategoryName" type="String" />
 		<field name="infoTitle" type="String" />
 		<field name="infoDesc" type="String">
-			<hint-collection name="FLASK-DESC" />
+			<hint-collection name="FLASK-LONG-DESC" />
 		</field>
 		<field name="addrLine1" type="String">
 			<hint-collection name="FLASK-TEXTFIELD" />
@@ -191,7 +194,7 @@
 			<hint-collection name="FLASK-TEXTFIELD" />
 		</field>
 		<field name="infoDesc" type="String">
-			<hint-collection name="FLASK-DESC" />
+			<hint-collection name="FLASK-LONG-DESC" />
 		</field>
 		<field name="addrLine1" type="String">
 			<hint-collection name="FLASK-TEXTFIELD" />

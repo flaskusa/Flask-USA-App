@@ -468,5 +468,20 @@ public class EventServiceSoap {
 		}
 	}
 
+	public static java.lang.Long[] setGuestViewPermission(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<java.lang.Long> returnValue = EventServiceUtil.setGuestViewPermission(serviceContext);
+
+			return returnValue.toArray(new java.lang.Long[returnValue.size()]);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(EventServiceSoap.class);
 }

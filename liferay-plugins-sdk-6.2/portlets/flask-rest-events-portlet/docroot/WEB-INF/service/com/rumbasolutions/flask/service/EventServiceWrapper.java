@@ -249,6 +249,12 @@ public class EventServiceWrapper implements EventService,
 		return _eventService.getUserEventIds(serviceContext);
 	}
 
+	@Override
+	public java.util.List<java.lang.Long> setGuestViewPermission(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventService.setGuestViewPermission(serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
