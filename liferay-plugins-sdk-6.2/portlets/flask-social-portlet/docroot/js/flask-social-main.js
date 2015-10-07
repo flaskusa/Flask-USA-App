@@ -55,6 +55,7 @@ function renderContactList(tdata,IsFriendList) {
 	 //console.log(tdata.length);
 	 if(tdata.length == 0){
 		$("<span class='control-label-nocolor'>There are no users available</span>").appendTo($(divRow));
+		$("#prev").hide();
 		return;
 	 }
 	 for(var i=0; i < tdata.length; i++)
@@ -69,8 +70,9 @@ function renderContactList(tdata,IsFriendList) {
 		    $(objTdc).appendTo($(objTr));
 		    var objTd1 = $('<td/>',{'width':'50px','rowspan':'2'});
 		    $(objTd1).appendTo($(objTr));
+		    console.log(flaskUser);
+		    fnShowEventLogo(flaskUser.portraitId, objTd1);
 		    
-		    fnShowEventLogo(flaskUser.uuid, objTd1,false);		    
 		    var userName_lbl = $('<label/>',{'class':'control-label-color'});
 		    $(userName_lbl).html(flaskUser.fullName);
 		    var objTd2 = $('<td/>',{'data-id':flaskUser.userId,'data-uuid':flaskUser.uuid});
@@ -97,10 +99,9 @@ function renderContactList(tdata,IsFriendList) {
 	 return false;
 }
 
-function fnShowEventLogo(imageUUID, container ,editable){
-	//var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+imageUUID;
-	var imgURL = "/webdav/flask/document_library/DefaultProfilePic";
-	var objdiv = $('<div/>',{'class':'eventLogo','style':'background-image:url('+imgURL+')'});
+function fnShowEventLogo(potraitID, container){
+	var objdiv = $('<div/>',{'class':'eventLogo'});
+	renderPhoto(potraitID,objdiv);
 	$(objdiv).appendTo($(container));
 }
 
@@ -327,8 +328,9 @@ function renderRequestList(obj){
 		    $(objTr).appendTo($(objTable));
 		    var objTd1 = $('<td/>',{'width':'70px','rowspan':'2'});
 		    $(objTd1).appendTo($(objTr));
+		    console.log(flaskUser);
+		    fnShowEventLogo(flaskUser.portraitId, objTd1);
 		    
-		    fnShowEventLogo(flaskUser.uuid, objTd1,false);		    
 		    var userName_lbl = $('<label/>',{'class':'control-label-color'});
 		    $(userName_lbl).html(flaskUser.firstName + " " + flaskUser.lastName);
 		    var objTd2 = $('<td/>',{'data-id':flaskUser.userId,'data-uuid':flaskUser.uuid});
@@ -491,33 +493,66 @@ function getUnreadMessages(){
 function renderMessageList(obj){
 	$('#MessageCount').html(obj.length);
 	var divRow = "#MyMessages";
+	
 	$(divRow).html("");
 	$.each(obj,function(index,node){
 	    var objTable = $('<table/>',{'class':'tblRow'});
-
+	    var objTrMain = $('<tr/>');
+	    var objTdPhoto = $('<td/>',{'style':'width:45px'});
+	    var objTdContent = $('<td/>');
+	    $(objTrMain).appendTo($(objTable));
+	    $(objTdPhoto).appendTo($(objTrMain));
+	    $(objTdContent).appendTo($(objTrMain));
+		var objdiv = $('<div/>',{'class':'eventLogo'});
+		//console.log(node.portraitId);
+		renderPhoto(node.portraitId,objdiv);
+		$(objdiv).appendTo($(objTdPhoto));
+	    
+	    var objTableText = $('<table/>',{'class':'tblContent','style':'width:100%'});
+	    $(objTableText).appendTo($(objTdContent));
 	    var objTr = $('<tr/>');
-	    $(objTr).appendTo($(objTable));
+	    $(objTr).appendTo($(objTableText));
 	    var userName_lbl = $('<label/>',{'class':'control-label-color','style':'margin-left:0px !important'});
 	    $(userName_lbl).html(node.senderName);
-	    var objTd2 = $('<td/>',{'data-id':node.messageId,'colspan':2});
-	    $(userName_lbl).appendTo($(objTd2));
-	    $(objTd2).appendTo(objTr);
+	    var objTd1 = $('<td/>',{'data-id':node.messageId});
+	    $(userName_lbl).appendTo($(objTd1));
+	    $(objTd1).appendTo(objTr);
 	    
-	    var objTd3 = $('<td/>',{'align':'left','valign':'top'});
-    	var objTr1 = $('<tr/>');
-	    $(objTr1).appendTo($(objTable));
-	    var msg_lbl = $('<label/>');
-	    $(msg_lbl).html(node.message);
-	    $(msg_lbl).appendTo($(objTd3));
-	    $(objTd3).appendTo(objTr1);
+	    var objTd3 = $('<td/>',{'align':'left','valign':'bottom','style':'font-size:12px;width: 100px;'});
+	    var messageDate = moment(node.dateTime).toNow(true);
+	    objTd3.html(messageDate+' ago')
+	    $(objTd3).appendTo(objTr);
 	    
 	    var objTr2 = $('<tr/>');
-	    $(objTr2).appendTo($(objTable));
-	    var objTd4 = $('<td/>',{'align':'left','valign':'top','style':'font-size:11px;'});
-	    var messageDate = new Date(node.dateTime);
-	    objTd4.html(messageDate.toGMTString())
-	    $(objTd4).appendTo(objTr2);
+	    $(objTr2).appendTo($(objTableText));
+	    var objTd2 = $('<td/>',{'align':'left','valign':'top','colspan':2});
+	    var msg_lbl = $('<label/>');
+	    $(msg_lbl).html(node.message);
+	    $(msg_lbl).appendTo($(objTd2));
+	    $(objTd2).appendTo(objTr2);
 	    
+	    
+	    $(objTableText).appendTo($(objTdContent));
 	    $(objTable).appendTo($(divRow));
 	});
+}
+
+function renderPhoto(FileId,objProfilePic){
+	var imgURL = "/webdav/flask/document_library/DefaultProfilePic";
+	if(FileId>0){
+		 var params = {fileEntryId: FileId};
+		 var flaskRequest = new Request();
+		 flaskRequest.sendGETRequest('/flask-rest-users-portlet.flaskadmin/get-my-file-entry',params,
+		    function (data){
+		    	 imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+data.uuid+"&groupId="+data.groupId;
+		    	 $(objProfilePic).css("background-image","url('"+imgURL+"')");
+		     } ,
+		     function (data){
+		    	 $(objProfilePic).css("background-image","url('"+imgURL+"')");
+		 });		
+	}
+	else{
+		$(objProfilePic).css("background-image","url('"+imgURL+"')");
+	}
+		
 }
