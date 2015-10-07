@@ -73,9 +73,11 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 				}
 				jsonObject = ContactsUtil.getUserJSONObject(
 					userId, (User)contact);
+				jsonObject.put("portraitId", ((User) contact).getPortraitId());
 			}
 			else {
 				jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
+				jsonObject.put("portraitId", ((User) contact).getPortraitId());
 			}
 			jsonArray.put(jsonObject);
 		}
@@ -122,9 +124,11 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 					if (contact instanceof User) {
 						jsonObject = ContactsUtil.getUserJSONObject(
 							userId, (User)contact);
+						jsonObject.put("portraitId", ((User) contact).getPortraitId());
 					}
 					else {
 						jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
+						jsonObject.put("portraitId", ((User) contact).getPortraitId());
 					}
 					jsonArray.put(jsonObject);
 				}
@@ -168,9 +172,11 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 								if (contact instanceof User) {
 									jsonObject = ContactsUtil.getUserJSONObject(
 										userId, (User)contact);
+									jsonObject.put("portraitId", ((User) contact).getPortraitId());
 								}
 								else {
 									jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
+									jsonObject.put("portraitId", ((User) contact).getPortraitId());
 								}
 								jsonArray.put(jsonObject);
 							}
@@ -179,6 +185,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 					  User user2 = getUserById(relObj.getUserId2(), serviceContext);
 					   jsonObject = ContactsUtil.getUserJSONObject(
 					     userId, user2);
+					   jsonObject.put("portraitId", getUserById(relObj.getUserId2(), serviceContext).getPortraitId());
 					    jsonArray.put(jsonObject);
 				  }
 			  }
