@@ -19,7 +19,6 @@ function initContactList(startPos,endPos){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
 	});
 	$("html, body").animate({ scrollTop: $(document).height()+$(window).height()+$('#Users_placeholder').height() }, "slow");
-	return false;
 }
 
 function initFriendList(startPos,endPos){
@@ -41,8 +40,6 @@ function initFriendList(startPos,endPos){
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
 	});
-	//$("html, body").animate({ scrollTop: $(document).height()+$(window).height()+$('#Friend_placeholder').height() }, "slow");
-	return false;
 }
 
 function renderContactList(tdata,IsFriendList) {
@@ -79,7 +76,7 @@ function renderContactList(tdata,IsFriendList) {
 		    
 		    $(userName_lbl).appendTo($(objTd2));
 		    $(objTd2).appendTo(objTr);
-		    var objTd3 = $('<td/>',{'width':'126px'});
+		    var objTd3 = $('<td/>',{'width':'140px'});
 	    	var div_heart = fnBuildMenu(flaskUser);
 	    	
 		    $(div_heart).appendTo($(objTd3));
@@ -453,7 +450,6 @@ $(document).ready(function(){
 		sendMessage(selectedFriends, message, isSendEmail);
 	});  
 	
-	initFriendList(0,99);
 	$('.md-closeBtn').click(function(){
 		$('#modal-advertisement').removeClass('md-show');
 	});	
@@ -556,3 +552,9 @@ function renderPhoto(FileId,objProfilePic){
 	}
 		
 }
+
+Liferay.Portlet.ready(function(portletId, node) {
+	if(portletId=='flasksocial_WAR_flasksocialportlet'){
+		initFriendList(0,99);		
+	}
+});
