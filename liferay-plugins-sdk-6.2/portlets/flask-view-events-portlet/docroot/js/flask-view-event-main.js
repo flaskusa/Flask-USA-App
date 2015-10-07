@@ -164,15 +164,15 @@ function fnGetEventImages(eventId,venueId){
 			for(iCount=0;iCount<objEventDetails.length;iCount++){
 				var objEventDetailTemp = $.parseJSON(objEventDetails[iCount].Detail);
 				switch(parseInt(objEventDetailTemp.infoTypeId)) {
-				case  _eventModel.INFO_TYPE.PreEvent: 
-			    	_eventModel.GET_EVENT_DETAIL_TYPE_COUNT(objEventDetailTemp,distinctInfoTypeCategory1);
-			        break;
-			    case _eventModel.INFO_TYPE.DuringEvent:
-			    	_eventModel.GET_EVENT_DETAIL_TYPE_COUNT(objEventDetailTemp,distinctInfoTypeCategory2);
-			        break;
-			    case _eventModel.INFO_TYPE.PostEvent:
-			    	_eventModel.GET_EVENT_DETAIL_TYPE_COUNT(objEventDetailTemp,distinctInfoTypeCategory3);
-			    	break;
+						case  _eventModel.INFO_TYPE.PreEvent: 
+					    	_eventModel.GET_EVENT_DETAIL_TYPE_COUNT(objEventDetailTemp,distinctInfoTypeCategory1);
+					        break;
+					    case _eventModel.INFO_TYPE.DuringEvent:
+					    	_eventModel.GET_EVENT_DETAIL_TYPE_COUNT(objEventDetailTemp,distinctInfoTypeCategory2);
+					        break;
+					    case _eventModel.INFO_TYPE.PostEvent:
+					    	_eventModel.GET_EVENT_DETAIL_TYPE_COUNT(objEventDetailTemp,distinctInfoTypeCategory3);
+					    	break;
 				}		
 			}
 			
@@ -616,19 +616,25 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
 			var objImg = value;
-			$(objImg).click(function(event){
-		    	$("#spinningSquaresG").show();
-		 		$('#one').hide();		 
-		 		$('#two').hide();
-		 		$('#three').show();
-				marker_infoType = infoType;
-				// map initialization
-				_flaskMap.initializeMap();
-		 		initMenuList(objDetails);
-		 		getSelectedTab($(this).attr('data-infoTypeCategory'));
-		 		window.location.hash = '#Details';
-		 		$("#spinningSquaresG").hide();
-			});
+			// disable click on weather
+			
+			if( objImg.find('#weather-background').length > 0){
+				;
+			}else{
+				$(objImg).click(function(event){
+			    	$("#spinningSquaresG").show();
+			 		$('#one').hide();		 
+			 		$('#two').hide();
+			 		$('#three').show();
+					marker_infoType = infoType;
+					// map initialization
+					_flaskMap.initializeMap();
+			 		initMenuList(objDetails);
+			 		getSelectedTab($(this).attr('data-infoTypeCategory'));
+			 		window.location.hash = '#Details';
+			 		$("#spinningSquaresG").hide();
+				});				
+			}
 			$(containerID).data('owlCarousel').addItem(objImg);
 		});
 	}
