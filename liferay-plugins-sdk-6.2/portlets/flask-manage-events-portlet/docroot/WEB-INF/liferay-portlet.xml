@@ -51,6 +51,8 @@
 	    <footer-portlet-javascript>/js/modernizr.custom.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/classie.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/modalEffects.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxeditor.js</footer-portlet-javascript>
+		
 		<css-class-wrapper>flask-manage-events-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -94,6 +96,7 @@
 	    <footer-portlet-javascript>/js/modernizr.custom.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/classie.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/modalEffects.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxeditor.js</footer-portlet-javascript>
 		<css-class-wrapper>flask-manage-venue-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>

@@ -82,6 +82,7 @@ function addDetailsClickHandlers() {
 		$("#eventDetailsForm").show();
 		$("#eventDetailsDataTable").hide();
 		$("#eventDetailGallery").html("");
+		$(".cssVdSave").removeAttr("disabled");
 
 	});
 
@@ -90,6 +91,7 @@ function addDetailsClickHandlers() {
 		$("#eventDetailsDataTable").show();
 		$("#slides").html("");
 		loadEventDetailsData($('#eventForm #eventId').val());
+		$(".cssVdSave").removeAttr("disabled");
 	});
 	$("#infoTypeId").change(function() {
 		_flaskDetailCommon.setContentType("infoTypeCategoryId",null, $("#infoTypeId").val(), _flaskDetailCommon.infoCategoryJSON);
@@ -157,6 +159,7 @@ function saveEventDetails() {
 
 					formData[item.name] = val;
 				});
+				formData.infoDesc = $("#jqxEditor").val(); 
 				formData.eventId=$('#eventForm #eventId').val();
 				if($('#addrLine11').val() == undefined)
 					formData.addrLine1="";
@@ -177,6 +180,7 @@ function saveEventDetails() {
 						fnSaveImages(data.eventDetailId,data.eventId);
 					}
 					else {
+						$('#jqxEditor').jqxEditor('destroy'); 
 						$('#eventDetailsForm').hide();
 						$('#eventDetailsDataTable').show();
 			    		$("#eventDetailId").val(0);
@@ -225,6 +229,7 @@ function deleteMultipleEventDetail(eventList) {
 
 /* Edit Event */
 function editEventDetail(rowData) {
+		$(".cssVdSave").removeAttr("disabled");
 		var container = $('#eventDetailGallery');
 		container.html("");
 		var repositoryId = $("#repositoryId").val();
@@ -238,6 +243,7 @@ function editEventDetail(rowData) {
 		setTimeout(function() {
 			_flaskLib.loadDataToForm("eventDetailsForm",_eventDetailModel.DATA_MODEL.EVENTDETAILS, rowData, function(){});
 			$('#addrLine11').val(rowData.addrLine1);
+			$('#jqxEditor').val(rowData.infoDesc);
 		}, 500);
 		fnGetEventDetailImages(rowData.eventDetailId,container, true);
 }

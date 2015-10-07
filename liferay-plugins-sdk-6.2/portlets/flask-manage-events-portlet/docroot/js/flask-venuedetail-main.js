@@ -62,6 +62,7 @@ function addDetailsClickHandlers() {
 		_flaskDetailCommon.loadContentType('infoTypeCategoryId',1);
 		$("#venueDetailsForm").show();
 		$("#venueDetailsDataTable").hide();
+		$(".cssVdSave").removeAttr("disabled");
 	});
 
 	$(".cssVdCancel").click(function() {
@@ -69,6 +70,7 @@ function addDetailsClickHandlers() {
 		$("#venueDetailsDataTable").show();
 		loadVenueDetailsData($('#venueForm #venueId').val());
 		$("#slides").html("");
+		$(".cssVdSave").removeAttr("disabled");
 	});
 	
 	$("#infoTypeId").change(function() {
@@ -191,11 +193,14 @@ function saveVenueDetails() {
 					formData[item.name] = val;
 					console.log(item.name+'-'+formData[item.name]);
 				});
+				formData.infoDesc = $("#jqxEditor").val(); 
 				formData.venueId=$('#venueForm #venueId').val();
-				if($('#addrLine11').val() == undefined)
+				if($('#addrLine11').val() == undefined){
 					formData.addrLine1="";
-				else
+				}
+				else{
 					formData.addrLine1=$('#addrLine11').val();
+				};
 				formData.latitude=$('#lat').val();
 				formData.longitude=$('#lng').val();
 				return formData;
@@ -215,6 +220,7 @@ function saveVenueDetails() {
 						fnSaveImages(data.venueDetailId, data.infoType);
 					}
 					else {
+						$('#jqxEditor').jqxEditor('destroy'); 
 						$('#venueDetailsForm').hide();
 			    		$('#venueDetailsDataTable').show();
 			    		$("#venueDetailId").val(0);
@@ -260,6 +266,7 @@ function deleteMultipleVenueDetail(venueList) {
 
 /* Edit Venue */
 function editVenueDetail(rowData) {
+		$(".cssVdSave").removeAttr("disabled");
 		var container = $('#venueDetailGallery');
 		container.html("");
 		var repositoryId = $("#repositoryId").val();
@@ -273,6 +280,7 @@ function editVenueDetail(rowData) {
 		setTimeout(function() {
 			_flaskLib.loadDataToForm("venueDetailsForm",  _venueDetailModel.DATA_MODEL.VENUEDETAILS, rowData, function(){});
 			$('#addrLine11').val(rowData.addrLine1);
+			$('#jqxEditor').val(rowData.infoDesc);
 		}, 500);
 		//fnShowSlider($('#venueForm #venueId').val(),container,rowData.venueDetailId,rowData.infoTypeId,rowData.infoTypeCategoryId);
 		fnGetVenueDetailImages(rowData.venueDetailId,container,true);

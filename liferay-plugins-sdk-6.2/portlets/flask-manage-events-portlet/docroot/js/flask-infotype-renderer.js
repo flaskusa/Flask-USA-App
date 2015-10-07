@@ -57,6 +57,10 @@ _infoTypeRenderer.fnBuildHtml = function (Obj,Type) {
 			case "checkbox":
 				return _infoTypeRenderer.fnBuildChecked(item.attr);
 				break;
+			case "editor":
+				return _infoTypeRenderer.fnBuildEditor(item.attr);
+				break;
+
 			case "upload":
 				return _infoTypeRenderer.fnBuildUpload(item.attr,Type);
 				break;
@@ -163,6 +167,26 @@ _infoTypeRenderer.fnBuildUpload = function (Obj,Type) {
     	autoProcessQueue: false
     });
 }
+
+_infoTypeRenderer.fnBuildEditor =  function(Obj){
+	
+  	var strSelected = "";
+  	var editor = "";
+    var objFormGroup = $('<div/>',{'class':'form-group'}).appendTo($(formArea));
+    var objControlLable = $('<label/>',{'class':'control-label','for':Obj[0].caption}).appendTo(objFormGroup);
+    $(objControlLable).html(Obj[0].caption);
+    var objControls = $('<div id="jqxEditor"/>',{'class':'controls'}).appendTo(objFormGroup);
+    objControls.jqxEditor({
+        height: "300px",
+        width: '90%',
+        theme:	'custom',
+        tools: "bold italic underline | format font size | left center right | outdent indent | ul ol "
+        
+    });
+	
+	
+}
+
 /* Dynamic content type generation logic [End]*/
 _infoTypeRenderer.INFO_RENDERER = {
 		GENERAL:[{//GENERAL
@@ -177,17 +201,6 @@ _infoTypeRenderer.INFO_RENDERER = {
 				}]
 			},
 			{
-			"type":"text",
-			"attr":[{
-				"caption":"Local Knowledge",
-				"id":"infoDesc",
-				"value":"",
-				"placeholder":"Enter description here",
-				"maxlength":"255",
-				"Class":""
-				}]
-			},
-			{
 				"type":"checkbox",
 				"attr":[{
 					"id":"showDescription",
@@ -195,6 +208,17 @@ _infoTypeRenderer.INFO_RENDERER = {
 					"caption":"Show Desciptions",
 					"value":"1",
 					"checked":"checked"
+					}]
+			},
+			{
+				"type":"editor",
+				"attr":[{
+					"caption":"Local Knowledge",
+					"id":"infoDesc",
+					"value":"",
+					"placeholder":"Enter local knowledge",
+					"maxlength":"255",
+					"Class":""
 					}]
 			},
 			{
@@ -219,26 +243,15 @@ _infoTypeRenderer.INFO_RENDERER = {
 				}]
 			},
 			{
-			"type":"text",
-			"attr":[{
-				"caption":"Description",
-				"id":"infoDesc",
-				"value":"",
-				"placeholder":"Enter description here",
-				"maxlength":"255",
-				"Class":""
-				}]
-			},
-			{
-			"type":"text",
-			"attr":[{
-				"caption":"Comment",
-				"id":"Comment",
-				"value":"",
-				"placeholder":"Enter Comment here",
-				"maxlength":"255",
-				"Class":""
-				}]
+				"type":"editor",
+				"attr":[{
+					"caption":"Local Knowledge",
+					"id":"infoDesc",
+					"value":"",
+					"placeholder":"Enter local knowledge",
+					"maxlength":"255",
+					"Class":""
+					}]
 			},
 			{
 			"type":"upload",
@@ -295,17 +308,6 @@ _infoTypeRenderer.INFO_RENDERER = {
 				}]
 			},
 			{
-				"type":"text",
-				"attr":[{
-					"caption":"Local Knowledge",
-					"id":"infoDesc",
-					"value":"",
-					"placeholder":"Enter local knowledge",
-					"maxlength":"255",
-					"Class":""
-					}]
-			},
-			{
 			"type":"text",
 			"attr":[{
 				"caption":"Cost",
@@ -325,6 +327,17 @@ _infoTypeRenderer.INFO_RENDERER = {
 				"value":"Yes",
 				"items":["Yes","No"]
 				}]
+			},
+			{
+				"type":"editor",
+				"attr":[{
+					"caption":"Local Knowledge",
+					"id":"infoDesc",
+					"value":"",
+					"placeholder":"Enter local knowledge",
+					"maxlength":"255",
+					"Class":""
+					}]
 			}],
 	TRAFFIC:[{//TRAFFIC
 			"type":"text",
@@ -338,16 +351,17 @@ _infoTypeRenderer.INFO_RENDERER = {
 				}]
 			},
 			{
-			"type":"text",
-			"attr":[{
-				"caption":"Description",
-				"id":"infoDesc",
-				"value":"",
-				"placeholder":"Enter description here",
-				"maxlength":"255",
-				"Class":""
-				}]
-			}],
+				"type":"editor",
+				"attr":[{
+					"caption":"Local Knowledge",
+					"id":"infoDesc",
+					"value":"",
+					"placeholder":"Enter local knowledge",
+					"maxlength":"255",
+					"Class":""
+					}]
+			}
+			],
 	FOOD:[{//FOOD
 		"type":"text",
 		"attr":[{
@@ -356,17 +370,6 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value":"",
 			"placeholder":"Enter Name here",
 			"maxlength":"20",
-			"Class":""
-			}]
-		},
-		{
-		"type":"text",
-		"attr":[{
-			"caption":"Type of Establishment",
-			"id":"infoDesc",
-			"value":"",
-			"placeholder":"",
-			"maxlength":"50",
 			"Class":""
 			}]
 		},
@@ -404,15 +407,15 @@ _infoTypeRenderer.INFO_RENDERER = {
 			}]
 		},
 		{
-		"type":"text",
-		"attr":[{
-			"caption":"Local Knowledge",
-			"id":"infoDesc",
-			"value":"",
-			"placeholder":"",
-			"maxlength":"255",
-			"Class":""
-			}]
+			"type":"editor",
+			"attr":[{
+				"caption":"Local Knowledge",
+				"id":"infoDesc",
+				"value":"",
+				"placeholder":"Enter local knowledge",
+				"maxlength":"255",
+				"Class":""
+				}]
 		}],
 	BAR_AND_RESTO:[{//FOOD
 		"type":"text",
@@ -477,6 +480,17 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value":$("#eventId").val(),
 			"Class":""
 			}]
+		},
+		{
+			"type":"editor",
+			"attr":[{
+				"caption":"Local Knowledge",
+				"id":"infoDesc",
+				"value":"",
+				"placeholder":"Enter local knowledge",
+				"maxlength":"255",
+				"Class":""
+				}]
 		}],		
 	LIQUOR:[{//LIQUOR
 			"type":"text",
@@ -512,15 +526,15 @@ _infoTypeRenderer.INFO_RENDERER = {
 				}]
 			},
 			{
-			"type":"text",
-			"attr":[{
-				"caption":"Local Knowledge",
-				"id":"infoDesc",
-				"value":"",
-				"placeholder":"",
-				"maxlength":"255",
-				"Class":""
-				}]
+				"type":"editor",
+				"attr":[{
+					"caption":"Local Knowledge",
+					"id":"infoDesc",
+					"value":"",
+					"placeholder":"Enter local knowledge",
+					"maxlength":"255",
+					"Class":""
+					}]
 			}],
 	SAFETY:[{
 				"type":"text",
@@ -530,17 +544,6 @@ _infoTypeRenderer.INFO_RENDERER = {
 					"value":"",
 					"placeholder":"Enter Name here",
 					"maxlength":"20",
-					"Class":""
-					}]
-				},
-				{
-				"type":"text",
-				"attr":[{
-					"caption":"Type of Establishment",
-					"id":"infoDesc",
-					"value":"",
-					"placeholder":"",
-					"maxlength":"50",
 					"Class":""
 					}]
 				},
@@ -578,14 +581,14 @@ _infoTypeRenderer.INFO_RENDERER = {
 					}]
 				},
 				{
-				"type":"text",
-				"attr":[{
-					"caption":"Local Knowledge",
-					"id":"infoDesc",
-					"value":"",
-					"placeholder":"",
-					"maxlength":"255",
-					"Class":""
-					}]
+					"type":"editor",
+					"attr":[{
+						"caption":"Local Knowledge",
+						"id":"infoDesc",
+						"value":"",
+						"placeholder":"Enter local knowledge",
+						"maxlength":"255",
+						"Class":""
+						}]
 				}]
 }

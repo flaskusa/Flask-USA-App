@@ -77,6 +77,7 @@ GRID_PARAM_DETAILS.onRowClick =function(event)
 		var top = $(this).offset().top + (2 + editrow) * rowsheight;
 		var left = ($(this).offset().left + parseInt($('.jqx-grid').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
 		$('#' +rowMenuDivId).jqxMenu('open', left, top + 5 + scrollTop);
+		return false;
 	} else {
 		// original event.
 		var ev = args.originalEvent;
