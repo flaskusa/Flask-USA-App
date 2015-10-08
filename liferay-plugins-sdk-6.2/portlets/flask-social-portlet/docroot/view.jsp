@@ -90,6 +90,8 @@
 				      <div class="panel-body" id="MyFriendRequests">No friend request found</div>
 				    </div>
 				    <div class="panel panel-default" style="padding-bottom: 8px;">
+				    <a href="#" class="reply-btn" id="refresh" style="float: right; padding-bottom: 2px; padding-top: 2px;">
+				    <i class="icon-refresh" style="color: black; text-decoration: none; vertical-align: -webkit-baseline-middle;"></i></a>
 				      <div class="panel-heading" id="msgsTopDiv">Messages (<span id="MessageCount">0</span>)</div>
 				      <div class="panel-body" id="MyMessages">No Messages found</div>
 				    </div>
