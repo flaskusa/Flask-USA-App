@@ -362,3 +362,20 @@ div#jqxwindow {
 .rdMsg{
 	font-weight: normal;
 }
+
+.reply-btn {
+    min-height: 25px;
+    min-width: 35px;
+    text-align: center;
+    padding: 0;
+    margin: 2px;
+    color: #333;
+    background-color: #fff;
+    border-color: #ccc !important;
+    border-radius: 6px;
+    border: 1px solid;
+}
+
+.reply-btn:hover {
+    background-color: #ccc !important;
+}
