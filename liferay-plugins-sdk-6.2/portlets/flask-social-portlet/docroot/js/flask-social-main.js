@@ -290,6 +290,7 @@ function getRequestCount(){
 
 function fnSendMessage(userId){
 	$('.md-trigger').click();
+	$("#iMsg").val("");
 	$('.md-send').click(function(){
 		$('#spinningSquaresG').show();
 		var selectedFriend = userId;
@@ -454,6 +455,13 @@ $(document).ready(function(){
 	$('.md-closeBtn').click(function(){
 		$('#modal-advertisement').removeClass('md-show');
 	});	
+	
+	$("#frndsTopDiv").click(function(){
+		$("#MyFriendRequests").toggle("slow");
+	});
+	$("#msgsTopDiv").click(function(){
+		$("#MyMessages").toggle("slow");
+	});
 });
 
 function sendMessage(recipients, message, sendEmail){
@@ -487,7 +495,7 @@ function getMyAllMessages(){
 }
 
 
-function getUnreadMessages(msg_lbl){
+/*function getUnreadMessages(msg_lbl){
  var flaskRequest = new Request();
  flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_UNREAD_MESSAGES,
     function (data){
@@ -496,23 +504,20 @@ function getUnreadMessages(msg_lbl){
      function (data){
     	 console.log("Error in getting Messages: " + data );
      });
-}
+}*/
 
 function setRead(messageId){
 	var flaskRequest = new Request();
 	var params = {messageId:messageId};
 	flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.SET_READ, params, 
-	function(data){
-		console.log(data);
-	} , function(error){
-		_flaskLib.showErrorMessage('action-msg',"Cannot set as read");
-	});		
+	function(data){},
+	function(data){});		
 }
 
 function renderMessageList(obj){
 	$('#MessageCount').html(obj.length);
 	var divRow = "#MyMessages";
-	
+	var maxLength = 30;
 	$(divRow).html("");
 	$.each(obj,function(index,node){
 	    var objTable = $('<table/>',{'class':'tblRow'});
@@ -537,28 +542,51 @@ function renderMessageList(obj){
 	    $(userName_lbl).appendTo($(objTd1));
 	    $(objTd1).appendTo(objTr);
 	    
-	    var objTd3 = $('<td/>',{'align':'left','valign':'bottom','style':'font-size:12px;width: 100px;'});
+	    var objTd3 = $('<td/>',{'align':'left','valign':'top','style':'font-size:12px;width: 100px;'});
 	    var messageDate = moment(node.dateTime).toNow(true);
 	    objTd3.html(messageDate+' ago')
 	    $(objTd3).appendTo(objTr);
 	    
 	    var objTr2 = $('<tr/>');
 	    $(objTr2).appendTo($(objTableText));
-	    var objTd2 = $('<td/>',{'align':'left','valign':'top','colspan':2});
-	    var msg_lbl = $('<label/>');
-	    if(!(node.read)){
-	    	$(msg_lbl).addClass("unRdMsg");
+	    var objTd2 = $('<td/>',{'align':'left','valign':'top'});
+	    var msg_lbl = $('<label/>', {'class':'unRdMsg'});
+	    if(node.message.length>maxLength){
+	    	$(msg_lbl).html(node.message.slice(0, maxLength)+"...");
+	    }else{
+	    	$(msg_lbl).html(node.message);
 	    }
-	    $(msg_lbl).html(node.message);
 	    $(msg_lbl).appendTo($(objTd2));
 	    $(objTd2).appendTo(objTr2);
-	    getUnreadMessages(msg_lbl);
+	    var objTd4 = $('<td/>',{'class':'rplyBtn','align':'left','valign':'inherit', 'style':'text-align: -webkit-center; display: none;'});
+	    var rplyBtn = $('<button/>', {'class':'reply-btn', 'style':'display: inline-block;'});
+	    var iCon = $('<i/>', {'class':'icon-reply'});
+	    $(iCon).appendTo($(rplyBtn));
+	    $(rplyBtn).appendTo($(objTd4));
+	    $(objTd4).appendTo(objTr2);
 	    $(objTableText).appendTo($(objTdContent));
 	    $(objTable).appendTo($(divRow));
-	    $(objTable).click(function(){
-	    	var rwMsgId = $(objTd1).attr("data-id");
-	    	setRead(rwMsgId);
+	    if(node.read){
 	    	$(msg_lbl).removeClass("unRdMsg");
+	    }
+	    $(objTable).click(function(){
+	    	if(!node.read){
+	    		var rwMsgId = $(objTd1).attr("data-id");
+		    	setRead(rwMsgId);
+		    	$(msg_lbl).removeClass("unRdMsg");
+	    	}
+	    	if($(msg_lbl).html().length<=(maxLength+3)){
+	    		$(msg_lbl).html("");
+	    		$(msg_lbl).html(node.message);
+	    	}else{
+	    		$(msg_lbl).html("");
+	    		$(msg_lbl).html(node.message.slice(0, maxLength)+"...");
+	    	}
+	    	$('.rplyBtn').hide();
+	    	$(objTd4).toggle("slow");
+	    });
+	    $(objTd4).click(function(){
+	    	fnSendMessage(node.senderUserId);
 	    });
 	});
 }
