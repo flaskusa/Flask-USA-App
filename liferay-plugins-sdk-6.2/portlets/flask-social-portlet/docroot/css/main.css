@@ -257,6 +257,32 @@ ul.dropdown-menu li {
 .btnSubmit{
 	width: 42px !important;
 	line-height: 36px !important;
+	align-items: flex-start;
+    cursor: default;
+    padding: 2px 6px 3px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    background-color: buttonface;
+    box-sizing: border-box;
+    margin: 0em;
+    font: 13.3333px Arial;
+    text-rendering: auto;
+    color: initial;
+    letter-spacing: normal;
+    word-spacing: normal;
+    text-transform: none;
+    text-indent: 0px;
+    text-shadow: none;
+    display: inline-block;
+    text-align: start;
+    -webkit-writing-mode: horizontal-tb;
+    border: 1px solid;
+    -webkit-appearance: button;
+    text-align: center;
+    text-decoration: none !important;
 }
 
 .panel-default>.panel-heading {
