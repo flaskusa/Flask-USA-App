@@ -1,6 +1,27 @@
 <?xml version="1.0"?>
 
 <model-hints>
+	<hint-collection name="FLASK-TEXTFIELD">
+		<hint name="max-length">100</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-DESC">
+		<hint name="max-length">255</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-IMAGE-PATH">
+		<hint name="max-length">30</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-IMAGE-UUID">
+		<hint name="max-length">50</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-ZIPCODE">
+		<hint name="max-length">20</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-SPATIAL">
+		<hint name="max-length">20</hint>
+	</hint-collection>
+	<hint-collection name="FLASK-PHONE">
+		<hint name="max-length">20</hint>
+	</hint-collection>
 	<model name="com.liferay.contacts.model.Entry">
 		<field name="entryId" type="long" />
 		<field name="groupId" type="long" />
@@ -26,7 +47,9 @@
 		<field name="senderUserId" type="long" />
 		<field name="senderName" type="String" />
 		<field name="recipients" type="String" />
-		<field name="message" type="String" />
+		<field name="message" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 		<field name="sendEmail" type="boolean" />
 		<field name="dateTime" type="Date" />
 	</model>

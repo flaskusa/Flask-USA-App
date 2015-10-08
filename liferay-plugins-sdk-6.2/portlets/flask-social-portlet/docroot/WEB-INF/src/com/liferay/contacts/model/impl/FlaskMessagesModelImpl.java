@@ -75,7 +75,7 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 			{ "sendEmail", Types.BOOLEAN },
 			{ "dateTime", Types.TIMESTAMP }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskMessages (messageId LONG not null primary key,senderEmail VARCHAR(75) null,senderUserId LONG,senderName VARCHAR(75) null,recipients VARCHAR(75) null,message VARCHAR(75) null,sendEmail BOOLEAN,dateTime DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskMessages (messageId LONG not null primary key,senderEmail VARCHAR(75) null,senderUserId LONG,senderName VARCHAR(75) null,recipients VARCHAR(75) null,message STRING null,sendEmail BOOLEAN,dateTime DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table Contacts_FlaskMessages";
 	public static final String ORDER_BY_JPQL = " ORDER BY flaskMessages.messageId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Contacts_FlaskMessages.messageId ASC";
