@@ -110,7 +110,7 @@
 			<span class='md-closeBtn'>x</span>
 			<table width="75%" cellpadding='10px' cellspacing='10px'>
 				<tr>
-					<td colspan="2"><textarea rows="8" cols="60" id="iMsg" name="message" style="width: 100%;height: 70px;"></textarea></td>
+					<td colspan="2"><textarea rows="8" cols="60" id="iMsg" maxlength="10000" name="message" style="width: 100%;height: 70px;"></textarea></td>
 				</tr>
 				<tr>
 					<td align='left'><input type="checkbox" id="sendEmailToSinglePerson" checked />&nbsp;Send Email</td>
