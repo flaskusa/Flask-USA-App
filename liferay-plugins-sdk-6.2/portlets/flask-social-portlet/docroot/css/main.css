@@ -405,3 +405,7 @@ div#jqxwindow {
 .reply-btn:hover {
     background-color: #ccc !important;
 }
+
+.vTop{
+	vertical-align: top !important;
+}
