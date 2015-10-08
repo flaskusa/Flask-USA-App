@@ -44,14 +44,18 @@ function initFriendList(startPos,endPos){
 
 function renderContactList(tdata,IsFriendList) {
 	var divRow;
-	if(IsFriendList)
-		divRow = $('#Friend_placeholder');	
-	else
+	if(IsFriendList){
+		divRow = $('#Friend_placeholder');
+		var strMsg = "You do not have any friends yet. Please search and add friends";
+	}else{
 		divRow = $('#Users_placeholder');
+		var strMsg = "There are no users available";
+	}
+		
 
 	 //console.log(tdata.length);
 	 if(tdata.length == 0){
-		$("<span class='control-label-nocolor'>There are no users available</span>").appendTo($(divRow));
+		$("<span class='control-label-nocolor'>"+strMsg+"</span>").appendTo($(divRow));
 		$("#prev").hide();
 		return;
 	 }
@@ -395,7 +399,6 @@ function GetParameterValues(param) {
     }  
 }
 
-
 $(document).ready(function(){
 	  var selectedUsers = [];
 	  var k=GetParameterValues('notifications');
@@ -405,21 +408,47 @@ $(document).ready(function(){
 	  }
 	  $("#prev").hide();
 	  initSearch();
-	  
+	  window.location.hash = '#Friends';
+	  $(window).hashchange( function(){
+			var hash = location.hash;
+			switch(hash) {
+		    case "#Friends":
+		    	$("#frnds").click();
+		    	 $("#prev").hide();
+				  $('#Friend_placeholder').html("");
+				  initFriendList(_startPosFriends,_endPosFriends); 
+				break;
+		    case "#SearchNewFriends":
+		    	$("#mcontents").click();
+		    	$("#prev").hide();
+				  $('#Users_placeholder').html("");
+				  initContactList(_startPos,_endPos);   
+		        break;
+		    case "#Notifications":
+		    	$("#notifications").click();
+		    	initNotifications();   
+		        break;	        
+		    default:
+		    	//alert("This is default");
+			}		
+		})
 	  $("#frnds").click(function(){
-		  $("#prev").hide();
-		  $('#Friend_placeholder').html("");
-		  initFriendList(_startPosFriends,_endPosFriends); 
+		 // $("#prev").hide();
+		 // $('#Friend_placeholder').html("");
+		 // initFriendList(_startPosFriends,_endPosFriends); 
+		  window.location.hash = '#Friends';
 	  });
 	  
 	  $("#mcontents").click(function(){
-		  $("#prev").hide();
-		  $('#Users_placeholder').html("");
-		  initContactList(_startPos,_endPos);   
+		 // $("#prev").hide();
+		 // $('#Users_placeholder').html("");
+		 // initContactList(_startPos,_endPos);   
+		  window.location.hash = '#SearchNewFriends';
 	  });
 	  
 	  $("#notifications").click(function(){
-		  initNotifications();   
+		 // initNotifications();   
+		  window.location.hash = '#Notifications';
 	  });
 	  
 	  $("#jqxwindow").hide();
@@ -462,6 +491,9 @@ $(document).ready(function(){
 	});
 	$("#msgsTopDiv").click(function(){
 		$("#MyMessages").toggle("slow");
+	});
+	$("#refresh").click(function(){
+		getMyAllMessages();
 	});
 });
 
