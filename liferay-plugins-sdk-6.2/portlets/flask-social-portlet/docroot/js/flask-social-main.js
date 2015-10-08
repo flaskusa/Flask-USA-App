@@ -400,6 +400,7 @@ function GetParameterValues(param) {
 }
 
 $(document).ready(function(){
+	  //window.location.hash = '#Friends';
 	  var selectedUsers = [];
 	  var k=GetParameterValues('notifications');
 	  if(k==1){
@@ -408,7 +409,6 @@ $(document).ready(function(){
 	  }
 	  $("#prev").hide();
 	  initSearch();
-	  window.location.hash = '#Friends';
 	  $(window).hashchange( function(){
 			var hash = location.hash;
 			switch(hash) {
