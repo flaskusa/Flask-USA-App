@@ -30,8 +30,8 @@
 			    				<input type="text" class="search-query" id='searchFriend' placeholder="Search">		
 			    			</td>
 			    			<td valign="top" align="left" style='width:100px;'>
-			    				<button class="btnSubmit" id="btnSearchFriend"><i class="icon-search"></i></button>
-			    				<button class="cssMultUser btnSubmit"><i class="icon-list"></i></button>
+			    				<a href="#" class="btnSubmit" id="btnSearchFriend"><i class="icon-search" style="color: black;"></i></a>
+			    				<a href="#" class="cssMultUser btnSubmit"><i class="icon-list" style="color: black;"></i></a>
 			    			</td>
 			    		</tr>
 			    	</table>		
@@ -68,7 +68,7 @@
 			    				<input type="text" class="search-query"  id='searchContact' placeholder="Search">		
 			    			</td>
 			    			<td valign="top" align="left" style='width:100px;'>
-			    				<button class="btnSubmit" id="btnSearchContact"><i class="icon-search"></i></button>
+			    				<a href="#" class="btnSubmit" id="btnSearchContact"><i class="icon-search" style="color: black;"></i></a>
 			    			</td>
 			    		</tr>
 			    	</table>		
@@ -112,7 +112,7 @@
 				</tr>
 				<tr>
 					<td align='left'><input type="checkbox" id="sendEmailToSinglePerson" checked />&nbsp;Send Email</td>
-					<td align='right'><button class="md-send">Send</button></td>
+					<td align='right'><button id="md-send">Send</button></td>
 				</tr>				
 			</table>
 		</div>
