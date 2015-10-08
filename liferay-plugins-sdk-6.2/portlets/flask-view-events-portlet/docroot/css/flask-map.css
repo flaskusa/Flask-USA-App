@@ -1,15 +1,10 @@
 #gmap_canvas {
-    height: 380px !important;
+    height: 80vh !important;
     width:100% !important;
     position: relative;
 }
 
 @media (min-width: 0px) and (max-width: 320px){
-	#gmap_canvas {
-	    height: 281px !important;
-	    position: relative;
-	}
-	
 	.jqx-tabs{
 		height: 170px !important;
 	}
@@ -26,27 +21,6 @@
 	.weather, .front-page-description{
 		font-size: 9px !important;
 		height: 150px !important;
-	}
-}
-
-@media (min-width: 321px) and (max-width: 375px){
-	#gmap_canvas {
-	    height: 315px !important;
-	    position: relative;
-	}
-}
-
-@media (min-width: 376px) and (max-width: 414px){
-	#gmap_canvas {
-	    height: 360px!important;
-	    position: relative;
-	}
-}
-
-@media (min-width: 736px) and (max-width: 3000px){
-	#gmap_canvas {
-	    height: 525px !important;
-	    position: relative;
 	}
 }
 

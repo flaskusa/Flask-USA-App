@@ -737,3 +737,7 @@ div#fixedfooter2
 .jqx-tabs-arrow-background.jqx-widget-header {
     width: 36px !important;
 }
+
+.jqx-tabs.jqx-widget.jqx-widget-content.jqx-rc-all {
+    height: 90vh !important;
+}
