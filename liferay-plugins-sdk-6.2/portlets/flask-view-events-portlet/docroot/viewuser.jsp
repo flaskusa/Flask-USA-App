@@ -18,7 +18,7 @@
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@	page import="com.liferay.portal.model.Address" %>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
-
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places" type="text/javascript"></script>
 <%
   com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
   long repositoryId = themeDisplay.getLayout().getGroupId();
@@ -75,7 +75,7 @@
   </div>
  </div>
     
-<div id="two" style="display:none; width:100%;">
+ <div id="two" style="display:none; width:100%;">
  	<table class='SliderTable' width='100%'>
  		<tr class='SliderRow'>
  			<td class="SliderCaption"><div class='CaptionImageDiv' style="background-image: url(<%=request.getContextPath()%>/img/Pre.png);"></div></td>
@@ -90,14 +90,10 @@
  			<td class='SliderCell'><div id="wowslider-container3" class="Carousel"></div></td>
 		</tr>
  	</table>
-	<input class="btn btn-info cssback" type="button" value="Back"/>
 </div>	
 
 <div id="three" style="display:none; width:100%; height:100%">
-	<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&libraries=places" type="text/javascript"></script>
-	<div id="gmap_canvas" style="height:60%"></div>
 	<div id='jqxWidget'></div>
-	<input class="btn btn-info cssback" type="button" value="Back"/>
 </div>
 
 <input id="repositoryId" type="hidden" value="<%=repositoryId%>">
@@ -106,9 +102,6 @@
 <div class="hide">
 <div id="weather-background" class="default-weather">
 <div class="page-wrap">
-<div id="geo-error-message" class="geo-error-message hide">
-  <button id='close-error' class='fa fa-times close-error'></button>
-  Uh oh! It looks like we can't find your location.</div>
 <div id="front-page-description" class="front-page-description middle">
 </div>
 <div id="weather" class="weather middle hide">
@@ -145,6 +138,6 @@
 	</div>
 </div>
 <div class="md-overlay"></div>
-<button class="md-trigger" data-modal="modal-advertisement" style="display:none">3D Rotate Bottom</button>
+<button class="md-trigger" data-modal="modal-advertisement" style="display:none"></button>
 </body>
 
