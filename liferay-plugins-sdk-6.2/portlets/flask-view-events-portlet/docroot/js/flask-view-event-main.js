@@ -333,13 +333,6 @@ function fnBlankSlide(Slider){
 }
 
 $(document).ready(function(){
-	//fnLoadList();
-	$(".cssback").click(function(){
-		window.history.back();
-		//$('#one').show();
-		//$('#two').hide();
-	});
-	//Search options
 	jQuery.expr[':'].case_insensitive_contains = function(a, i, m) {
 		return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
 	};	
@@ -378,14 +371,7 @@ $(document).ready(function(){
 	$(function() {
 	    function cb(start, end, label) {
 	        $('#reportrange span').html(label);
-	        /*console.log('test');
-	        console.log(start);
-	        console.log(end);
-	        var tStartDate = start.month()+'-'+start.date()+'-'+start.year()
-	        var tEndDate = end.month()+'-'+end.date()+'-'+end.year()
-	        console.log(tStartDate);
-	        console.log(tEndDate);*/
-	        startdate = start.toDate();//moment(start.toDate()).format('MM/DD/YYYY');
+	        startdate = start.toDate();
 	        enddate = end.toDate();
 	        getEventsForLocation();
 	    }
@@ -492,7 +478,6 @@ function initMenuList(objDetails){
 	}
 	len = arr.length;
 	if(len>0){
-		//var menuContainer = $("#jqxWidget"); //tab main div
 		var menuArray = [];
 		var detailsJSONArray = [];
 		var ulObj = $("<ul/>");
@@ -521,29 +506,33 @@ function initMenuList(objDetails){
 				if(b==objEventDetail.infoTypeCategoryName){
 					fnFillImageArray(obj.DetailImages,obj.Detail,objArray);					
 				}
-			});			
-			fnCreateSlider1(divObj,objArray);				
+			});	
 			$(divObj).appendTo(divTabs);
 			$(divTabs).appendTo(menuContainer);					
 		});
 		
 		$(divTabs).jqxTabs({ 
-			width: '100%',
+			width: '99%',
 			height: '100%',
 			scrollPosition: 'both'
 		});	
-		callMarkers(menuArray[0].toLowerCase());
-		$("li").click(function(){
-			var place = $(this).find('.jqx-tabs-titleContentWrapper').html().toLowerCase();
-			callMarkers(place);
-		});
+		//callMarkers(menuArray[0].toLowerCase());
 	}
 	else{
 		_flaskMap.findPlaces("");
 		$(menuContainer).html("No data found");
 		$(menuContainer).addClass("jqxNoDataFound");
-		//_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.GET_ERROR);
 	}
+	
+	$(divTabs).on('tabclick', function (event){ 
+		var clickedItem = event.args.item;
+		var text = $(this).jqxTabs('getTitleAt', clickedItem);
+		$('#gmap_canvas').remove();
+		$(this).jqxTabs('setContentAt', clickedItem,'<div id="gmap_canvas" style="height:100%;"></div>');
+		_flaskMap.initializeMap();
+		callMarkers(text.toLowerCase());
+		_flaskMap.initializeMap()
+	});
 }
 
 function callMarkers(place){
@@ -567,7 +556,6 @@ function callMarkers(place){
 	else{
 		_flaskMap.findPlaces(place);
 	}
-	
 }
 
 function getFilteredEvents(){
@@ -616,10 +604,8 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
 			var objImg = value;
-			// disable click on weather
-			
 			if( objImg.find('#weather-background').length > 0){
-				;
+				//"";
 			}else{
 				$(objImg).click(function(event){
 			    	$("#spinningSquaresG").show();
@@ -628,8 +614,7 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 			 		$('#three').show();
 					marker_infoType = infoType;
 					// map initialization
-					_flaskMap.initializeMap();
-			 		initMenuList(objDetails);
+					initMenuList(objDetails);
 			 		getSelectedTab($(this).attr('data-infoTypeCategory'));
 			 		window.location.hash = '#Details';
 			 		$("#spinningSquaresG").hide();
@@ -644,7 +629,7 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 }
 
 function fnCreateSlider1(containerID,arrImage){
-	$(containerID).html("");
+	/*$(containerID).html("");
 	$(containerID).attr("class","Carousel col2");
 	$(containerID).owlCarousel({
 		items:3,
@@ -672,7 +657,7 @@ function fnCreateSlider1(containerID,arrImage){
 	}
 	else{
 		fnBlankSlide(containerID);
-	}	
+	}*/	
 }
 
 function showAds(){
@@ -725,6 +710,9 @@ function getSelectedTab(str){
 	$('.jqx-tabs-titleContentWrapper').each(function(){
 		if($(this).html().replace(/&amp;/g, '&')==str){
 			$('.jqx-tabs').jqxTabs('select', iCount);
+			$('#gmap_canvas').remove();
+			$(this).jqxTabs('setContentAt', iCount,'<div id="gmap_canvas" style="height:100%;"></div>');
+			_flaskMap.initializeMap();
 			callMarkers($(this).html().toLowerCase());
 			return false;
 		}

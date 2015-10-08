@@ -10,17 +10,24 @@ _flaskMap.infos = Array();
 _flaskMap.cur_location;
 _flaskMap.initializeMap = function() {
 	try{
-		console.log("lat: "+_flaskMap.latitude);
-		console.log("lng: "+_flaskMap.longitude);
 	    _flaskMap.geocoder = new google.maps.Geocoder();
 	    var myLatlng = new google.maps.LatLng(_flaskMap.latitude,_flaskMap.longitude);
 	    var myOptions = {
-	        zoom: 14,
+	        zoom: 15,
 	        center: myLatlng,
 	        mapTypeId: google.maps.MapTypeId.ROADMAP,
 	        mapTypeControl:false
 	    };
-	    _flaskMap.map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+	    var mapDiv = document.getElementById('gmap_canvas');
+	    if(document.getElementById('gmap_canvas')==null){
+	    	var mapDiv = document.createElement('div');
+	    	mapDiv.id = 'gmap_canvas';
+	    	$('.jqx-tabs-content-element:visible').attr('id','temp');
+	    	var containerDiv = document.getElementById('temp');
+	    	containerDiv.appendChild(mapDiv); 
+	    }
+	    _flaskMap.map = new google.maps.Map(mapDiv, myOptions);
+	    google.maps.event.trigger(_flaskMap.map, 'resize');
 	    var centerControlDiv = document.createElement('div');
 	    centerControlDiv.style.marginRight= '5px';
 	    centerControlDiv.style.top = 15;
@@ -30,8 +37,6 @@ _flaskMap.initializeMap = function() {
 
 	    centerControlDiv.index = 1;
 	    _flaskMap.map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(centerControlDiv);
-	    //_flaskMap.findPlaces(places);
-	    //_flaskMap.findPlaces1();
 	}catch(ex){
 		console.log("Error in loading google map");
 		_flaskLib.showErrorMessage('action-msg',ex.message);
@@ -183,7 +188,7 @@ _flaskMap.createMarkers = function (results, status) {
     	google.maps.event.addListener(venue_mark, 'click', (function(venue_mark) {
         	return function() {
         		_flaskMap.clearInfos();
-                var content= '<div style="display: inline-flex;"><font style="color:#000; "><b>' + venueName + 
+                var content= '<div style="display: inline-flex;height:100px;"><font style="color:#000; "><b>' + venueName + 
                 '</b><br /><br />' + venueAddr + '</font></div>';
                 infowindow.setContent(content);
                 infowindow.open(_flaskMap.map,venue_mark);
@@ -211,7 +216,7 @@ _flaskMap.createMarkers = function (results, status) {
             google.maps.event.addListener(mark, 'click', (function(mark, i) {
             	return function() {
             		_flaskMap.clearInfos();
-	                var content= '<div style="display: inline-flex;"><img src="' + results[i].icon + '" style="width:20%;"/><font style="color:#000; "><b>' + results[i].name + 
+	                var content= '<div style="display: inline-flex;height:100px;"><img src="' + results[i].icon + '" style="width:34px; height:34px;"/><font style="color:#000; "><b>' + results[i].name + 
 	                '</b><br /><br />Vicinity: ' + results[i].vicinity + '</font></div>';
 	                infowindow.setContent(content);
 	                infowindow.open(_flaskMap.map, mark);
