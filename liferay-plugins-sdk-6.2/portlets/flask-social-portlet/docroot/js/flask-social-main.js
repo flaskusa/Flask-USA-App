@@ -289,9 +289,10 @@ function getRequestCount(){
 }
 
 function fnSendMessage(userId){
-	$('.md-trigger').click();
 	$("#iMsg").val("");
-	$('.md-send').click(function(){
+	$('.md-trigger').click();
+	$('#md-send').click(function(){
+		$('#md-send').unbind()
 		$('#spinningSquaresG').show();
 		var selectedFriend = userId;
 		var message = $('#iMsg').val();
