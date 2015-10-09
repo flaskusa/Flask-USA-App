@@ -121,6 +121,7 @@ function fnBuildMenu(obj){
 			var li2 = $('<li/>');
 			$(li2).html('<a href="#" onclick="fnUnFriend('+UserId+',this);">Unfriend</a>');
 			var li3 = $('<li/>');
+			var rplyStr = "";
 			$(li3).html('<a href="#" onclick="fnSendMessage('+UserId+');">Send Message</a>');
 			$(li1).appendTo($(ul));
 			$(li2).appendTo($(ul));
@@ -292,14 +293,16 @@ function getRequestCount(){
 			);
 }
 
-function fnSendMessage(userId){
+function fnSendMessage(userId, preMsg){
+	if(preMsg==undefined)
+		preMsg="";
 	$("#iMsg").val("");
 	$('.md-trigger').click();
 	$('#md-send').click(function(){
 		$('#md-send').unbind()
 		$('#spinningSquaresG').show();
 		var selectedFriend = userId;
-		var message = $('#iMsg').val();
+		var message = $('#iMsg').val() + preMsg;
 		var isSendEmail = $('#sendEmailToSinglePerson').is(':checked');
 		sendMessage(selectedFriend, message, isSendEmail);
 	});
@@ -611,15 +614,20 @@ function renderMessageList(obj){
 	    	if($(msg_lbl).html().length<=(maxLength+3)){
 	    		$(msg_lbl).html("");
 	    		$(msg_lbl).html(node.message);
+	    		$(objTdPhoto).addClass("vTop");
+		    	$(objTd4).addClass("vTop");
 	    	}else{
 	    		$(msg_lbl).html("");
 	    		$(msg_lbl).html(node.message.slice(0, maxLength)+"...");
+	    		$(objTdPhoto).removeClass("vTop");
+		    	$(objTd4).removeClass("vTop");
 	    	}
 	    	$('.rplyBtn').hide();
 	    	$(objTd4).toggle("slow");
 	    });
 	    $(objTd4).click(function(){
-	    	fnSendMessage(node.senderUserId);
+	    	var preMsg = "<br>-------Reply to:-------<br>"+node.message;
+	    	fnSendMessage(node.senderUserId, preMsg);
 	    });
 	});
 }
