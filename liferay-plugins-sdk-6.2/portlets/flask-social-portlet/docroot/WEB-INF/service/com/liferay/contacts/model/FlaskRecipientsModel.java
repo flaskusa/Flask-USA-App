@@ -24,6 +24,8 @@ import com.liferay.portlet.expando.model.ExpandoBridge;
 
 import java.io.Serializable;
 
+import java.util.Date;
+
 /**
  * The base model interface for the FlaskRecipients service. Represents a row in the &quot;Contacts_FlaskRecipients&quot; database table, with each column mapped to a property of this class.
  *
@@ -150,6 +152,20 @@ public interface FlaskRecipientsModel extends BaseModel<FlaskRecipients> {
 	 * @param read the read of this flask recipients
 	 */
 	public void setRead(boolean read);
+
+	/**
+	 * Returns the received date time of this flask recipients.
+	 *
+	 * @return the received date time of this flask recipients
+	 */
+	public Date getReceivedDateTime();
+
+	/**
+	 * Sets the received date time of this flask recipients.
+	 *
+	 * @param receivedDateTime the received date time of this flask recipients
+	 */
+	public void setReceivedDateTime(Date receivedDateTime);
 
 	@Override
 	public boolean isNew();

@@ -17,6 +17,7 @@ package com.liferay.contacts.model;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelWrapper;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -54,6 +55,7 @@ public class FlaskRecipientsWrapper implements FlaskRecipients,
 		attributes.put("email", getEmail());
 		attributes.put("messageId", getMessageId());
 		attributes.put("read", getRead());
+		attributes.put("receivedDateTime", getReceivedDateTime());
 
 		return attributes;
 	}
@@ -88,6 +90,12 @@ public class FlaskRecipientsWrapper implements FlaskRecipients,
 
 		if (read != null) {
 			setRead(read);
+		}
+
+		Date receivedDateTime = (Date)attributes.get("receivedDateTime");
+
+		if (receivedDateTime != null) {
+			setReceivedDateTime(receivedDateTime);
 		}
 	}
 
@@ -241,6 +249,26 @@ public class FlaskRecipientsWrapper implements FlaskRecipients,
 	@Override
 	public void setRead(boolean read) {
 		_flaskRecipients.setRead(read);
+	}
+
+	/**
+	* Returns the received date time of this flask recipients.
+	*
+	* @return the received date time of this flask recipients
+	*/
+	@Override
+	public java.util.Date getReceivedDateTime() {
+		return _flaskRecipients.getReceivedDateTime();
+	}
+
+	/**
+	* Sets the received date time of this flask recipients.
+	*
+	* @param receivedDateTime the received date time of this flask recipients
+	*/
+	@Override
+	public void setReceivedDateTime(java.util.Date receivedDateTime) {
+		_flaskRecipients.setReceivedDateTime(receivedDateTime);
 	}
 
 	@Override

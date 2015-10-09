@@ -19,6 +19,7 @@ import com.liferay.contacts.service.FlaskRecipientsLocalServiceUtil;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
@@ -29,6 +30,7 @@ import java.io.Serializable;
 
 import java.lang.reflect.Method;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -79,6 +81,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		attributes.put("email", getEmail());
 		attributes.put("messageId", getMessageId());
 		attributes.put("read", getRead());
+		attributes.put("receivedDateTime", getReceivedDateTime());
 
 		return attributes;
 	}
@@ -113,6 +116,12 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 
 		if (read != null) {
 			setRead(read);
+		}
+
+		Date receivedDateTime = (Date)attributes.get("receivedDateTime");
+
+		if (receivedDateTime != null) {
+			setReceivedDateTime(receivedDateTime);
 		}
 	}
 
@@ -246,6 +255,30 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		}
 	}
 
+	@Override
+	public Date getReceivedDateTime() {
+		return _receivedDateTime;
+	}
+
+	@Override
+	public void setReceivedDateTime(Date receivedDateTime) {
+		_receivedDateTime = receivedDateTime;
+
+		if (_flaskRecipientsRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskRecipientsRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setReceivedDateTime",
+						Date.class);
+
+				method.invoke(_flaskRecipientsRemoteModel, receivedDateTime);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getFlaskRecipientsRemoteModel() {
 		return _flaskRecipientsRemoteModel;
 	}
@@ -322,23 +355,25 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		clone.setEmail(getEmail());
 		clone.setMessageId(getMessageId());
 		clone.setRead(getRead());
+		clone.setReceivedDateTime(getReceivedDateTime());
 
 		return clone;
 	}
 
 	@Override
 	public int compareTo(FlaskRecipients flaskRecipients) {
-		long primaryKey = flaskRecipients.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = DateUtil.compareTo(getReceivedDateTime(),
+				flaskRecipients.getReceivedDateTime());
+
+		value = value * -1;
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override
@@ -374,7 +409,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{recipientId=");
 		sb.append(getRecipientId());
@@ -386,6 +421,8 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		sb.append(getMessageId());
 		sb.append(", read=");
 		sb.append(getRead());
+		sb.append(", receivedDateTime=");
+		sb.append(getReceivedDateTime());
 		sb.append("}");
 
 		return sb.toString();
@@ -393,7 +430,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(19);
+		StringBundler sb = new StringBundler(22);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.contacts.model.FlaskRecipients");
@@ -419,6 +456,10 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 			"<column><column-name>read</column-name><column-value><![CDATA[");
 		sb.append(getRead());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>receivedDateTime</column-name><column-value><![CDATA[");
+		sb.append(getReceivedDateTime());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -431,6 +472,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 	private String _email;
 	private long _messageId;
 	private boolean _read;
+	private Date _receivedDateTime;
 	private BaseModel<?> _flaskRecipientsRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.contacts.service.ClpSerializer.class;
 }

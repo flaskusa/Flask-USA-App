@@ -102,7 +102,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 			FlaskRecipientsImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUserId",
 			new String[] { Long.class.getName() },
-			FlaskRecipientsModelImpl.USERID_COLUMN_BITMASK);
+			FlaskRecipientsModelImpl.USERID_COLUMN_BITMASK |
+			FlaskRecipientsModelImpl.RECEIVEDDATETIME_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(FlaskRecipientsModelImpl.ENTITY_CACHE_ENABLED,
 			FlaskRecipientsModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUserId",
@@ -595,7 +596,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 			FlaskRecipientsImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findBymessageId",
 			new String[] { Long.class.getName() },
-			FlaskRecipientsModelImpl.MESSAGEID_COLUMN_BITMASK);
+			FlaskRecipientsModelImpl.MESSAGEID_COLUMN_BITMASK |
+			FlaskRecipientsModelImpl.RECEIVEDDATETIME_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_MESSAGEID = new FinderPath(FlaskRecipientsModelImpl.ENTITY_CACHE_ENABLED,
 			FlaskRecipientsModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countBymessageId",
@@ -1089,7 +1091,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByreadFlag",
 			new String[] { Long.class.getName(), Boolean.class.getName() },
 			FlaskRecipientsModelImpl.USERID_COLUMN_BITMASK |
-			FlaskRecipientsModelImpl.READ_COLUMN_BITMASK);
+			FlaskRecipientsModelImpl.READ_COLUMN_BITMASK |
+			FlaskRecipientsModelImpl.RECEIVEDDATETIME_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_READFLAG = new FinderPath(FlaskRecipientsModelImpl.ENTITY_CACHE_ENABLED,
 			FlaskRecipientsModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByreadFlag",
@@ -1621,7 +1624,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByreadOrNot",
 			new String[] { Long.class.getName(), Long.class.getName() },
 			FlaskRecipientsModelImpl.USERID_COLUMN_BITMASK |
-			FlaskRecipientsModelImpl.MESSAGEID_COLUMN_BITMASK);
+			FlaskRecipientsModelImpl.MESSAGEID_COLUMN_BITMASK |
+			FlaskRecipientsModelImpl.RECEIVEDDATETIME_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_READORNOT = new FinderPath(FlaskRecipientsModelImpl.ENTITY_CACHE_ENABLED,
 			FlaskRecipientsModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByreadOrNot",
@@ -2466,6 +2470,7 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 		flaskRecipientsImpl.setEmail(flaskRecipients.getEmail());
 		flaskRecipientsImpl.setMessageId(flaskRecipients.getMessageId());
 		flaskRecipientsImpl.setRead(flaskRecipients.isRead());
+		flaskRecipientsImpl.setReceivedDateTime(flaskRecipients.getReceivedDateTime());
 
 		return flaskRecipientsImpl;
 	}

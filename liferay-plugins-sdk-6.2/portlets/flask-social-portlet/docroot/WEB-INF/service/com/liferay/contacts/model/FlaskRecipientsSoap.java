@@ -17,6 +17,7 @@ package com.liferay.contacts.model;
 import java.io.Serializable;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +36,7 @@ public class FlaskRecipientsSoap implements Serializable {
 		soapModel.setEmail(model.getEmail());
 		soapModel.setMessageId(model.getMessageId());
 		soapModel.setRead(model.getRead());
+		soapModel.setReceivedDateTime(model.getReceivedDateTime());
 
 		return soapModel;
 	}
@@ -133,9 +135,18 @@ public class FlaskRecipientsSoap implements Serializable {
 		_read = read;
 	}
 
+	public Date getReceivedDateTime() {
+		return _receivedDateTime;
+	}
+
+	public void setReceivedDateTime(Date receivedDateTime) {
+		_receivedDateTime = receivedDateTime;
+	}
+
 	private long _recipientId;
 	private long _userId;
 	private String _email;
 	private long _messageId;
 	private boolean _read;
+	private Date _receivedDateTime;
 }

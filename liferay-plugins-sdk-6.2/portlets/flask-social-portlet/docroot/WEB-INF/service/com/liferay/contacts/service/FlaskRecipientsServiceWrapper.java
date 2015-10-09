@@ -60,8 +60,10 @@ public class FlaskRecipientsServiceWrapper implements FlaskRecipientsService,
 
 	@Override
 	public com.liferay.contacts.model.FlaskRecipients addFlaskRecipient(
-		long userId, long messageId, boolean read) {
-		return _flaskRecipientsService.addFlaskRecipient(userId, messageId, read);
+		long userId, long messageId, boolean read,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskRecipientsService.addFlaskRecipient(userId, messageId,
+			read, serviceContext);
 	}
 
 	@Override

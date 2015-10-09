@@ -27,5 +27,6 @@ create table Contacts_FlaskRecipients (
 	userId LONG,
 	email VARCHAR(75) null,
 	messageId LONG,
-	read_ BOOLEAN
+	read_ BOOLEAN,
+	receivedDateTime DATE null
 );

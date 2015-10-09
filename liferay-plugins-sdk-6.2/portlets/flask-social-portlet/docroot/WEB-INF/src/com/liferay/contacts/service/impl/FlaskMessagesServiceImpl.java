@@ -69,7 +69,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	   String[] rec = recipients.split(",");
 	   for (String userId : rec){
 		   if(Long.parseLong(userId) > 0){
-			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false);
+			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false, serviceContext);
 			   if(sendEmail)
 			        EmailInvitationUtil.emailMessage(user.getFullName(), user.getEmailAddress(), recp.getEmail(), message, serviceContext);
 		   }

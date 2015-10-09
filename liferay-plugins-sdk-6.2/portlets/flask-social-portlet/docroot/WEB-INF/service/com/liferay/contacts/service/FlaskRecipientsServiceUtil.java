@@ -64,8 +64,10 @@ public class FlaskRecipientsServiceUtil {
 	}
 
 	public static com.liferay.contacts.model.FlaskRecipients addFlaskRecipient(
-		long userId, long messageId, boolean read) {
-		return getService().addFlaskRecipient(userId, messageId, read);
+		long userId, long messageId, boolean read,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .addFlaskRecipient(userId, messageId, read, serviceContext);
 	}
 
 	public static boolean setRead(long messageId) {

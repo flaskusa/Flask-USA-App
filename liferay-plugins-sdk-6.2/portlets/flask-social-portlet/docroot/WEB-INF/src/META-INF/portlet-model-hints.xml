@@ -59,5 +59,6 @@
 		<field name="email" type="String" />
 		<field name="messageId" type="long" />
 		<field name="read" type="boolean" />
+		<field name="receivedDateTime" type="Date" />
 	</model>
 </model-hints>

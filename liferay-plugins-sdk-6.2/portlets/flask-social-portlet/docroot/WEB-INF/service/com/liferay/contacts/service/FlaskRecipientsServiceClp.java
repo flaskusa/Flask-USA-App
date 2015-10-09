@@ -34,7 +34,10 @@ public class FlaskRecipientsServiceClp implements FlaskRecipientsService {
 
 		_methodName3 = "addFlaskRecipient";
 
-		_methodParameterTypes3 = new String[] { "long", "long", "boolean" };
+		_methodParameterTypes3 = new String[] {
+				"long", "long", "boolean",
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName4 = "setRead";
 
@@ -93,13 +96,22 @@ public class FlaskRecipientsServiceClp implements FlaskRecipientsService {
 
 	@Override
 	public com.liferay.contacts.model.FlaskRecipients addFlaskRecipient(
-		long userId, long messageId, boolean read) {
+		long userId, long messageId, boolean read,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName3,
 					_methodParameterTypes3,
-					new Object[] { userId, messageId, read });
+					new Object[] {
+						userId,
+						
+					messageId,
+						
+					read,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

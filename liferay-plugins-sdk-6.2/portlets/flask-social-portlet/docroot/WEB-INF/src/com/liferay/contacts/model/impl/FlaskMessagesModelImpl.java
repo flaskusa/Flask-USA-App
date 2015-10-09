@@ -21,6 +21,7 @@ import com.liferay.contacts.model.FlaskMessagesSoap;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSON;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -77,8 +78,8 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 		};
 	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskMessages (messageId LONG not null primary key,senderEmail VARCHAR(75) null,senderUserId LONG,senderName VARCHAR(75) null,recipients VARCHAR(75) null,message STRING null,sendEmail BOOLEAN,dateTime DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table Contacts_FlaskMessages";
-	public static final String ORDER_BY_JPQL = " ORDER BY flaskMessages.messageId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY Contacts_FlaskMessages.messageId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY flaskMessages.dateTime ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY Contacts_FlaskMessages.dateTime ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -405,17 +406,15 @@ public class FlaskMessagesModelImpl extends BaseModelImpl<FlaskMessages>
 
 	@Override
 	public int compareTo(FlaskMessages flaskMessages) {
-		long primaryKey = flaskMessages.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		value = DateUtil.compareTo(getDateTime(), flaskMessages.getDateTime());
+
+		if (value != 0) {
+			return value;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
-		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	}
 
 	@Override

@@ -34,7 +34,10 @@ public class FlaskRecipientsServiceClpInvoker {
 
 		_methodName38 = "addFlaskRecipient";
 
-		_methodParameterTypes38 = new String[] { "long", "long", "boolean" };
+		_methodParameterTypes38 = new String[] {
+				"long", "long", "boolean",
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName39 = "setRead";
 
@@ -59,7 +62,8 @@ public class FlaskRecipientsServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
 			return FlaskRecipientsServiceUtil.addFlaskRecipient(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
-				((Boolean)arguments[2]).booleanValue());
+				((Boolean)arguments[2]).booleanValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
 		}
 
 		if (_methodName39.equals(name) &&

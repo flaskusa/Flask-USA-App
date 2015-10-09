@@ -15,6 +15,7 @@
 package com.liferay.contacts.service.impl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.liferay.contacts.model.FlaskRecipients;
@@ -23,6 +24,7 @@ import com.liferay.contacts.service.base.FlaskRecipientsServiceBaseImpl;
 import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 /**
@@ -35,7 +37,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see com.liferay.contacts.service.base.FlaskRecipientsServiceBaseImpl
  * @see com.liferay.contacts.service.FlaskRecipientsServiceUtil
  */
@@ -43,7 +45,7 @@ public class FlaskRecipientsServiceImpl extends FlaskRecipientsServiceBaseImpl {
 	
 	
 	@Override
-	public FlaskRecipients addFlaskRecipient(long userId, long messageId, boolean read){
+	public FlaskRecipients addFlaskRecipient(long userId, long messageId, boolean read, ServiceContext serviceContext){
 		FlaskRecipients flaskRecipients = null;
 		try {
 			User user = UserLocalServiceUtil.getUserById(userId);
@@ -52,6 +54,8 @@ public class FlaskRecipientsServiceImpl extends FlaskRecipientsServiceBaseImpl {
 			flaskRecipients.setEmail(user.getEmailAddress());
 			flaskRecipients.setMessageId(messageId);
 			flaskRecipients.setRead(read);
+			Date date = new Date();
+			flaskRecipients.setReceivedDateTime(serviceContext.getCreateDate(date));
 			flaskRecipients = FlaskRecipientsLocalServiceUtil.addFlaskRecipients(flaskRecipients);
 		} catch (Exception e) {
 			// TODO: handle exception

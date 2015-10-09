@@ -25,6 +25,8 @@ import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
 
+import java.util.Date;
+
 /**
  * The cache model class for representing FlaskRecipients in entity cache.
  *
@@ -36,7 +38,7 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(11);
+		StringBundler sb = new StringBundler(13);
 
 		sb.append("{recipientId=");
 		sb.append(recipientId);
@@ -48,6 +50,8 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 		sb.append(messageId);
 		sb.append(", read=");
 		sb.append(read);
+		sb.append(", receivedDateTime=");
+		sb.append(receivedDateTime);
 		sb.append("}");
 
 		return sb.toString();
@@ -70,6 +74,13 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 		flaskRecipientsImpl.setMessageId(messageId);
 		flaskRecipientsImpl.setRead(read);
 
+		if (receivedDateTime == Long.MIN_VALUE) {
+			flaskRecipientsImpl.setReceivedDateTime(null);
+		}
+		else {
+			flaskRecipientsImpl.setReceivedDateTime(new Date(receivedDateTime));
+		}
+
 		flaskRecipientsImpl.resetOriginalValues();
 
 		return flaskRecipientsImpl;
@@ -82,6 +93,7 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 		email = objectInput.readUTF();
 		messageId = objectInput.readLong();
 		read = objectInput.readBoolean();
+		receivedDateTime = objectInput.readLong();
 	}
 
 	@Override
@@ -99,6 +111,7 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 
 		objectOutput.writeLong(messageId);
 		objectOutput.writeBoolean(read);
+		objectOutput.writeLong(receivedDateTime);
 	}
 
 	public long recipientId;
@@ -106,4 +119,5 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 	public String email;
 	public long messageId;
 	public boolean read;
+	public long receivedDateTime;
 }

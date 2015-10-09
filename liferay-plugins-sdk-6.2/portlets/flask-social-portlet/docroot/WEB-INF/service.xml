@@ -52,6 +52,9 @@
         <column name="message" type="String"></column>
         <column name="sendEmail" type="boolean"></column>
         <column name="dateTime" type="Date"></column>
+        <order by="asc">
+            <order-column name="dateTime" />
+        </order>
     </entity>
     <entity name="FlaskRecipients" local-service="true">
         <column name="recipientId" type="long" primary="true"></column>
@@ -59,6 +62,10 @@
         <column name="email" type="String"></column>
         <column name="messageId" type="long"></column>
         <column name="read" type="boolean"></column>
+        <column name="receivedDateTime" type="Date"></column>
+        <order by="desc">
+            <order-column name="receivedDateTime" />
+        </order>
         <finder name="UserId" return-type="Collection">
 			<finder-column name="userId" />
 		</finder>
