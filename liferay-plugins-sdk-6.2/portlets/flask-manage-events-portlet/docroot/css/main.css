@@ -217,3 +217,7 @@ zoom: 1.8 !important;
     margin: 9px !important;
     padding: 10px 5px !important;
 }
+
+.jqx-widget-header {
+    background: #373535 !important;
+}
