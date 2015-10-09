@@ -7,6 +7,7 @@ _flaskMap.longitude;
 _flaskMap.placeType;
 _flaskMap.markers = Array();
 _flaskMap.infos = Array();
+_flaskMap.allowedContent = Array();
 _flaskMap.cur_location;
 _flaskMap.initializeMap = function() {
 	try{
@@ -188,7 +189,7 @@ _flaskMap.createMarkers = function (results, status) {
     	google.maps.event.addListener(venue_mark, 'click', (function(venue_mark) {
         	return function() {
         		_flaskMap.clearInfos();
-                var content= '<div style="display: inline-flex;height:100px;"><font style="color:#000; "><b>' + venueName + 
+                var content= '<div style="display: inline-flex;height:100px;"><font style="color:#000;"><b>' + venueName + 
                 '</b><br /><br />' + venueAddr + '</font></div>';
                 infowindow.setContent(content);
                 infowindow.open(_flaskMap.map,venue_mark);
@@ -216,7 +217,7 @@ _flaskMap.createMarkers = function (results, status) {
             google.maps.event.addListener(mark, 'click', (function(mark, i) {
             	return function() {
             		_flaskMap.clearInfos();
-	                var content= '<div style="display: inline-flex;height:100px;"><img src="' + results[i].icon + '" style="width:34px; height:34px;"/><font style="color:#000; "><b>' + results[i].name + 
+	                var content= '<div style="display: inline-flex;height:100px;"><img src="' + results[i].icon + '" style="width:34px; height:34px;"/>&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:#000; "><b>' + results[i].name + 
 	                '</b><br /><br />Vicinity: ' + results[i].vicinity + '</font></div>';
 	                infowindow.setContent(content);
 	                infowindow.open(_flaskMap.map, mark);
@@ -276,8 +277,7 @@ _flaskMap.myMarkers = function(){
 		            google.maps.event.addListener(mark, 'click', (function(mark, i) {
 		            	return function() {
 		            		_flaskMap.clearInfos();
-			                var content= '<div style="display: inline-flex;"><img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:12%; height:12%;"/><font style="color:#000; "><b>' + obj.infoTitle + 
-			                '</b><br /><br />' + obj.addrLine1 + '</font></div>';
+			                var content= '<div style="display: inline-flex;height:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:30px;height:30px;"/><font style="color:#000;"><b>'+obj.infoTitle+'</b><br/><br/>'+obj.addrLine1+'</font></div>';
 			                infowindow.setContent(content);
 			                infowindow.open(_flaskMap.map, mark);
 		            	}

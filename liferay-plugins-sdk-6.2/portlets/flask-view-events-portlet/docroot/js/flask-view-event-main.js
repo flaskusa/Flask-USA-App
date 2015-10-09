@@ -178,12 +178,11 @@ function fnGetEventImages(eventId,venueId){
 			
 			$.each(objEventDetails, function(idx, obj) {
 				objEventDetail = jQuery.parseJSON(obj.Detail);
-				if(objEventDetail.latitude != "")
-					{
+				if(objEventDetail.latitude != ""){
 						lat_marker.push([objEventDetail.latitude, objEventDetail.infoTypeId]);
 						lng_marker.push(objEventDetail.longitude);
 						addr_name.push(objEventDetail.addrLine1);
-					}
+				}
 				var imgURL = "";
 				switch(parseInt(objEventDetail.infoTypeId)) {
 					case  _eventModel.INFO_TYPE.PreEvent: 
@@ -222,8 +221,6 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objEventDetails = jQuery.parseJSON(eventDetails);
 	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase()
 	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
-	console.log(infoTypeCategoryName);
-	console.log(objFields);
 	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
 			if(objEventDetails.showDescription){
@@ -309,7 +306,6 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 				}				
 				$(captionObj).html(caption);
 				$(captionObj).appendTo($(objtr));
-				//$(valueObj).html(evalue);
 				$(valueObj).appendTo($(objtr));
 				$(objtr).appendTo($(objtbl));
 				$(objtbl).appendTo($(objContent));
@@ -376,16 +372,16 @@ $(document).ready(function(){
 	        getEventsForLocation();
 	    }
 	    
-	    cb(moment(),moment().add(14, 'days'),'Next 14 days');
+	    cb(moment().startOf('day'),moment().add(14, 'days'),'Next 14 days');
 
 	    $('#reportrange').daterangepicker({
 	    	"autoApply": true,
 	        ranges: {
-	           'Today': [moment(), moment()],
-	           'Next 7 days': [moment(),moment().add(7, 'days')],
-	           'Next 14 days': [moment(),moment().add(14, 'days')],
-	           'Next 30 days': [moment(), moment().add(30, 'days')],
-	           'Next 60 days': [moment(),moment().add(60, 'days')]
+	           'Today': [moment().startOf('day'), moment()],
+	           'Next 7 days': [moment().startOf('day'),moment().startOf('day').add(7, 'days')],
+	           'Next 14 days': [moment().startOf('day'),moment().startOf('day').add(14, 'days')],
+	           'Next 30 days': [moment().startOf('day'), moment().startOf('day').add(30, 'days')],
+	           'Next 60 days': [moment().startOf('day'),moment().startOf('day').add(60, 'days')]
 	        },
 	        "applyClass": "btn btn-info btn-calendar",
 	        "cancelClass": "btn btn-info btn-calendar"
@@ -494,19 +490,28 @@ function initMenuList(objDetails){
 		var screenWidth = $(document).width();
 		$.each(menuArray,function(a,b){
 			var divObj = $("<div/>",{"class":b});
+			var isMap = false;
 			var objArray = [];
 			$.each(objDetails, function(idx, obj) {
 				objEventDetail = jQuery.parseJSON(obj.Detail);
-				if(objEventDetail.latitude != "")
-				{
-					lat_marker.push([objEventDetail.latitude, objEventDetail.infoTypeId]);
-					lng_marker.push(objEventDetail.longitude);
-					addr_name.push(objEventDetail.addrLine1);
-				}
-				if(b==objEventDetail.infoTypeCategoryName){
-					fnFillImageArray(obj.DetailImages,obj.Detail,objArray);					
-				}
-			});	
+				if(objEventDetail.infoTypeCategoryName==b){
+					if(objEventDetail.latitude != "0")
+					{
+						isMap = true;
+						lat_marker.push([objEventDetail.latitude, objEventDetail.infoTypeId]);
+						lng_marker.push(objEventDetail.longitude);
+						addr_name.push(objEventDetail.addrLine1);
+					}
+					if(b==objEventDetail.infoTypeCategoryName){
+						fnFillImageArray(obj.DetailImages,obj.Detail,objArray);					
+					}
+				}			});
+			if(!isMap){
+				fnCreateSlider1(divObj,objArray);				
+			}
+			else{
+				_flaskMap.allowedContent.push(b);
+			}
 			$(divObj).appendTo(divTabs);
 			$(divTabs).appendTo(menuContainer);					
 		});
@@ -524,14 +529,15 @@ function initMenuList(objDetails){
 		$(menuContainer).addClass("jqxNoDataFound");
 	}
 	
-	$(divTabs).on('tabclick', function (event){ 
+	$(divTabs).on('tabclick', function (event){
 		var clickedItem = event.args.item;
 		var text = $(this).jqxTabs('getTitleAt', clickedItem);
-		$('#gmap_canvas').remove();
-		$(this).jqxTabs('setContentAt', clickedItem,'<div id="gmap_canvas" style="height:100%;"></div>');
-		_flaskMap.initializeMap();
-		callMarkers(text.toLowerCase());
-		_flaskMap.initializeMap()
+		if($.inArray(text, _flaskMap.allowedContent)>-1){
+			$('#gmap_canvas').remove();
+			$(this).jqxTabs('setContentAt', clickedItem,'<div id="gmap_canvas" style="height:100%;"></div>');
+			_flaskMap.initializeMap();
+			callMarkers(text.toLowerCase());
+		}
 	});
 }
 
@@ -565,7 +571,6 @@ function getFilteredEvents(){
 	}
 	var flaskRequest = new Request();
 	params = {eventTypeIds: '', startDate: startdate, endDate: enddate,searchString: filterString, latitude: _eventModel.currentGeoLocation.latitude, longitude: _eventModel.currentGeoLocation.longitude};
-	console.log(params);
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS, params, 
 	function(data){
 		renderEventList(data);
@@ -629,7 +634,7 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 }
 
 function fnCreateSlider1(containerID,arrImage){
-	/*$(containerID).html("");
+	$(containerID).html("");
 	$(containerID).attr("class","Carousel col2");
 	$(containerID).owlCarousel({
 		items:3,
@@ -657,7 +662,7 @@ function fnCreateSlider1(containerID,arrImage){
 	}
 	else{
 		fnBlankSlide(containerID);
-	}*/	
+	}	
 }
 
 function showAds(){
