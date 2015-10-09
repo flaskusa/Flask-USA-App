@@ -108,14 +108,14 @@
 		<div class="md-content">
 			<h3 id="myModalLabel">Send Message</h3>
 			<span class='md-closeBtn'>x</span>
-			<table width="75%" cellpadding='10px' cellspacing='10px'>
+			<table width="75%" cellpadding="10px">
 				<tr>
-					<td colspan="2"><textarea rows="8" cols="60" id="iMsg" maxlength="10000" name="message" style="width: 100%;height: 70px;"></textarea></td>
+					<td colspan="2"><textarea rows="8" cols="60" id="iMsg" maxlength="10000" name="message" style="width:100%; height: 70px;" required></textarea></td>
 				</tr>
 				<tr>
 					<td align='left'><input type="checkbox" id="sendEmailToSinglePerson" checked />&nbsp;Send Email</td>
-					<td align='right'><button id="md-send">Send</button></td>
-				</tr>				
+					<td align='right'><button class="sendButton" style="width: 90px; font-size: initial; background: #F5F5F5;" id="md-send">Send</button></td>
+				</tr>			
 			</table>
 		</div>
 	</div>
