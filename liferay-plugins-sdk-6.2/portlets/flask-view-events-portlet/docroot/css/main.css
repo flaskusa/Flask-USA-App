@@ -741,6 +741,10 @@ div#fixedfooter2
     height: 90vh !important;
 }
 
-.fitToHeight{
+#jqxWidget .InfoContentTypeDetailBox{
 	height: 78vh !important;	
+}
+
+#jqxWidget .InfoContentTypeImageBox{
+	height: 78vh !important;
 }
