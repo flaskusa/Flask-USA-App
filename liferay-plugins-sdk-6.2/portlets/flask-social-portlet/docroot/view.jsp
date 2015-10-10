@@ -45,8 +45,8 @@
 					       <textarea rows="8" cols="60" id="msg" name="message" style="width: 48%;; height: 70px;"></textarea>
 					       <br><input type="checkbox" id="sendEmail" checked />&nbsp;Send Email<br>
 					       <div>
-					        <div style="display: -webkit-inline-box;"><input type="button" value="Send" class="btn-primary" style="width: 98%" id="send_all"></div>
-					        <div style="display: -webkit-inline-box;"><input type="button" value="Cancel" class="btn-primary" id="cancel_all" /></div>
+					        <div style="display: inline;"><input type="button" value="Send" class="btn-primary" style="width: 98%" id="send_all"></div>
+					        <div style="display: inline;"><input type="button" value="Cancel" class="btn-primary" id="cancel_all" /></div>
 					      </div>
 					   </div>
 					</div>				
@@ -108,13 +108,13 @@
 		<div class="md-content">
 			<h3 id="myModalLabel">Send Message</h3>
 			<span class='md-closeBtn'>x</span>
-			<table width="75%" cellpadding="10px">
+			<table width="97%" cellpadding="10px" id="formTab">
 				<tr>
-					<td colspan="2"><textarea rows="8" cols="60" id="iMsg" maxlength="10000" name="message" style="width:100%; height: 70px;" required></textarea></td>
+					<td colspan="2"><textarea rows="8" cols="60" id="iMsg" maxlength="10000" name="message"></textarea></td>
 				</tr>
 				<tr>
 					<td align='left'><input type="checkbox" id="sendEmailToSinglePerson" checked />&nbsp;Send Email</td>
-					<td align='right'><button class="sendButton" style="width: 90px; font-size: initial; background: #F5F5F5;" id="md-send">Send</button></td>
+					<td align='right' style="float: right;"><button class="sendButton" style="width: 90px; font-size: initial; background: #F5F5F5;" id="md-send">Send</button></td>
 				</tr>			
 			</table>
 		</div>
