@@ -15,7 +15,8 @@ _socialModel.SERVICE_ENDPOINTS = {
     SEND_MESSAGE    			:"/flask-social-portlet.flaskmessages/send-flask-message",
     GET_UNREAD_MESSAGES   		:"/flask-social-portlet.flaskmessages/get-my-unread-flask-messages",
     GET_My_ALL_MESSAGES   		:"/flask-social-portlet.flaskmessages/get-all-my-flask-messages",
-    SET_READ					:"/flask-social-portlet.flaskrecipients/set-read"
+    SET_READ					:"/flask-social-portlet.flaskrecipients/set-read",
+    DELETE_MESSAGE				:"/flask-social-portlet.flaskmessages/delete-message"
 };
 
 _socialModel.MESSAGES = {

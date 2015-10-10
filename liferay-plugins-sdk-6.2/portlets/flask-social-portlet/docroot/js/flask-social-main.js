@@ -299,12 +299,18 @@ function fnSendMessage(userId, preMsg){
 	$("#iMsg").val("");
 	$('.md-trigger').click();
 	$('#md-send').click(function(){
-		$('#md-send').unbind()
-		$('#spinningSquaresG').show();
-		var selectedFriend = userId;
-		var message = $('#iMsg').val() + preMsg;
-		var isSendEmail = $('#sendEmailToSinglePerson').is(':checked');
-		sendMessage(selectedFriend, message, isSendEmail);
+		if ($('#formTab').jqxValidator('validate')){
+		if($("#iMsg").val()!=""){
+			
+				$('#md-send').unbind();
+				$('#spinningSquaresG').show();
+				var selectedFriend = userId;
+				var message = $('#iMsg').val() + preMsg;
+				var isSendEmail = $('#sendEmailToSinglePerson').is(':checked');
+				sendMessage(selectedFriend, message, isSendEmail);
+
+		}
+		}
 	});
 }
 
@@ -464,6 +470,7 @@ $(document).ready(function(){
 	  
 	  $(".cssMultUser").click(function(){
 		   $(this).hide();
+		   $("#msg").val("");
 		   $("#msgDiv").show();
 		   $(".chk").show();
 	  });
@@ -475,14 +482,16 @@ $(document).ready(function(){
 	  });
 	  
 	$('#send_all').click(function(){
-		$('#spinningSquaresG').show();
-		var selectedFriends = 0;
-		var message = $('#msg').val();
-		var isSendEmail = $('#sendEmail').is(':checked');
-		$('.selected').each(function(){
-			selectedFriends = selectedFriends + "," + $(this).val(); 
-		});
-		sendMessage(selectedFriends, message, isSendEmail);
+		if ($('#msgDiv').jqxValidator('validate')){
+			$('#spinningSquaresG').show();
+			var selectedFriends = 0;
+			var message = $('#msg').val();
+			var isSendEmail = $('#sendEmail').is(':checked');
+			$(".selected:checked").each(function(){
+				selectedFriends = selectedFriends + "," + $(this).val(); 
+			});
+			sendMessage(selectedFriends, message, isSendEmail);
+		}
 	});  
 	
 	$('.md-closeBtn').click(function(){
@@ -498,6 +507,20 @@ $(document).ready(function(){
 	$("#refresh").click(function(){
 		getMyAllMessages();
 	});
+	$('#formTab').jqxValidator({
+		hintType: 'label',
+		animationDuration: 0,
+        rules: [
+                { input: '#iMsg', message: 'Message should not be blank.', action: 'keyup, blur', rule: 'required' }
+               ]
+    });
+	$('#msgDiv').jqxValidator({
+		hintType: 'label',
+		animationDuration: 0,
+        rules: [
+                { input: '#msg', message: 'Message should not be blank.', action: 'keyup, blur', rule: 'required' }
+               ]
+    });
 });
 
 function sendMessage(recipients, message, sendEmail){
@@ -594,11 +617,15 @@ function renderMessageList(obj){
 	    }
 	    $(msg_lbl).appendTo($(objTd2));
 	    $(objTd2).appendTo(objTr2);
-	    var objTd4 = $('<td/>',{'class':'rplyBtn','align':'left','valign':'inherit', 'style':'text-align: -webkit-center; display: none;'});
-	    var rplyBtn = $('<button/>', {'class':'reply-btn', 'style':'display: inline-block;'});
+	    var objTd4 = $('<td/>',{'class':'rplyBtn','align':'left','valign':'inherit', 'style':'text-align: -webkit-center; display: none; float: left;'});
+	    var rplyBtn = $('<button/>', {'class':'reply-btn', 'style':'display: inline-block; margin-right: 2px;'});
 	    var iCon = $('<i/>', {'class':'icon-reply'});
 	    $(iCon).appendTo($(rplyBtn));
 	    $(rplyBtn).appendTo($(objTd4));
+	    var deleteBtn = $('<button/>', {'class':'reply-btn', 'style':'display: inline-block;'});
+	    var iConDel = $('<i/>', {'class':'icon-trash'});
+	    $(iConDel).appendTo($(deleteBtn));
+	    $(deleteBtn).appendTo($(objTd4));
 	    $(objTd4).appendTo(objTr2);
 	    $(objTableText).appendTo($(objTdContent));
 	    $(objTable).appendTo($(divRow));
@@ -625,11 +652,26 @@ function renderMessageList(obj){
 	    	$('.rplyBtn').hide();
 	    	$(objTd4).toggle("slow");
 	    });
-	    $(objTd4).click(function(){
+	    $(rplyBtn).click(function(){
 	    	var preMsg = "<br>-------Reply to:-------<br>"+node.message;
 	    	fnSendMessage(node.senderUserId, preMsg);
 	    });
+	    $(deleteBtn).click(function(){
+	    	deleteMessage(node.messageId, objTable);
+	    });
 	});
+}
+
+function deleteMessage(messageId, objTable){
+	var flaskRequest = new Request();
+	var param = {messageId: messageId}
+	 flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.DELETE_MESSAGE, param,
+	    function (data){
+		 	$(objTable).hide('slow');
+	     } ,
+	     function (data){
+	    	 console.log("Error in getting Messages: " + data );
+	 });
 }
 
 function renderPhoto(FileId,objProfilePic){
