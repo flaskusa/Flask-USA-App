@@ -536,6 +536,14 @@ div#fixedfooter2
   top: 70px !important;
 }
 
+#jqxWidget .owl-theme .owl-controls .owl-buttons .owl-next {
+    top: 39vh !important;
+}
+
+#jqxWidget .owl-theme .owl-controls .owl-buttons .owl-prev {
+    top: 39vh !important;
+}
+
 .owl-theme .owl-controls {
     margin-top: -24px !important;
 }
@@ -731,4 +739,8 @@ div#fixedfooter2
 
 .jqx-tabs.jqx-widget.jqx-widget-content.jqx-rc-all {
     height: 90vh !important;
+}
+
+.fitToHeight{
+	height: 78vh !important;	
 }
