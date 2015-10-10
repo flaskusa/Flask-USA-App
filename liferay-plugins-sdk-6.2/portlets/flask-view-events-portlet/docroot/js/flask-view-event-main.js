@@ -654,7 +654,7 @@ function fnCreateSlider1(containerID,arrImage){
 	
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
-			var objDiv = $("<div/>",{'class':'InfoContentTypeImageBox fixToHeight'});
+			var objDiv = $("<div/>",{'class':'InfoContentTypeImageBox'});
 			var objImg = value;
 			$(objImg).appendTo(objDiv);
 			$(containerID).data('owlCarousel').addItem(objDiv);
