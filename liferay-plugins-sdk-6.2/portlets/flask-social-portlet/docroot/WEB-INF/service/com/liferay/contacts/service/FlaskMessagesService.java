@@ -77,4 +77,7 @@ public interface FlaskMessagesService extends BaseService, InvokableService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.contacts.model.FlaskMessages> getMyUnreadFlaskMessages(
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteMessage(long messageId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

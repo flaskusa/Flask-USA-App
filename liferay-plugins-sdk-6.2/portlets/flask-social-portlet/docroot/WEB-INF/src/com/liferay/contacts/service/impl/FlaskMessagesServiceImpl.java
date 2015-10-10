@@ -21,6 +21,7 @@ import java.util.List;
 import com.liferay.contacts.model.FlaskMessages;
 import com.liferay.contacts.model.FlaskRecipients;
 import com.liferay.contacts.service.FlaskMessagesLocalServiceUtil;
+import com.liferay.contacts.service.FlaskRecipientsLocalServiceUtil;
 import com.liferay.contacts.service.FlaskRecipientsServiceUtil;
 import com.liferay.contacts.service.base.FlaskMessagesServiceBaseImpl;
 import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
@@ -126,6 +127,25 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 			e.printStackTrace();
 		}
 		return flaskMessages;
+	}
+	
+	@Override
+	public void deleteMessage(long messageId, ServiceContext serviceContext){
+		List<FlaskMessages> flaskMessages = new ArrayList<FlaskMessages>();
+		List<FlaskRecipients> recipients = new ArrayList<FlaskRecipients>();
+		try {
+			FlaskMessages msg = FlaskMessagesLocalServiceUtil.getFlaskMessages(messageId);
+			recipients =  FlaskRecipientsUtil.findByreadOrNot(serviceContext.getUserId(), messageId);
+			//FlaskMessagesLocalServiceUtil.deleteFlaskMessages(msg);
+			FlaskRecipientsLocalServiceUtil.deleteFlaskRecipients(recipients.get(0));
+			int recCount = FlaskRecipientsUtil.countBymessageId(messageId);
+			if(recCount <= 0){
+				FlaskMessagesLocalServiceUtil.deleteFlaskMessages(msg);
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 	
 }

@@ -50,6 +50,12 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 		_methodParameterTypes5 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName6 = "deleteMessage";
+
+		_methodParameterTypes6 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -187,6 +193,31 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 		return (java.util.List<com.liferay.contacts.model.FlaskMessages>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public void deleteMessage(long messageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableService.invokeMethod(_methodName6,
+				_methodParameterTypes6,
+				new Object[] {
+					messageId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -198,4 +229,6 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	private String[] _methodParameterTypes4;
 	private String _methodName5;
 	private String[] _methodParameterTypes5;
+	private String _methodName6;
+	private String[] _methodParameterTypes6;
 }

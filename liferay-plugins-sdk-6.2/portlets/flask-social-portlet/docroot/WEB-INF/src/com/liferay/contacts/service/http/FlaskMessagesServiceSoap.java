@@ -111,5 +111,18 @@ public class FlaskMessagesServiceSoap {
 		}
 	}
 
+	public static void deleteMessage(long messageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			FlaskMessagesServiceUtil.deleteMessage(messageId, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskMessagesServiceSoap.class);
 }

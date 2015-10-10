@@ -50,6 +50,12 @@ public class FlaskMessagesServiceClpInvoker {
 		_methodParameterTypes40 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName41 = "deleteMessage";
+
+		_methodParameterTypes41 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -84,6 +90,14 @@ public class FlaskMessagesServiceClpInvoker {
 			return FlaskMessagesServiceUtil.getMyUnreadFlaskMessages((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
+		if (_methodName41.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
+			FlaskMessagesServiceUtil.deleteMessage(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -97,4 +111,6 @@ public class FlaskMessagesServiceClpInvoker {
 	private String[] _methodParameterTypes39;
 	private String _methodName40;
 	private String[] _methodParameterTypes40;
+	private String _methodName41;
+	private String[] _methodParameterTypes41;
 }
