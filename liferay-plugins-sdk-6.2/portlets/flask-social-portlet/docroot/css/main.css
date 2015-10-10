@@ -411,7 +411,7 @@ div#jqxwindow {
 }
 
 .sendButton{
-	 min-height: 25px;
+	min-height: 25px;
     min-width: 35px;
     text-align: center;
     padding: 0;
@@ -421,4 +421,10 @@ div#jqxwindow {
     border-color: #ccc !important;
     border-radius: 6px;
     border: 1px solid;
+}
+
+#iMsg{
+	width:100% !important;
+	height: 70px;
+	max-width: none !important;
 }
