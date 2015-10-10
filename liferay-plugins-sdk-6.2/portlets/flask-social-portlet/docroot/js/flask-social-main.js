@@ -608,7 +608,7 @@ function renderMessageList(obj){
 	    
 	    var objTr2 = $('<tr/>');
 	    $(objTr2).appendTo($(objTableText));
-	    var objTd2 = $('<td/>',{'align':'left','valign':'top'});
+	    var objTd2 = $('<td/>',{'align':'left','valign':'top', 'style':'word-break: break-all;'});
 	    var msg_lbl = $('<label/>', {'class':'unRdMsg'});
 	    if(node.message.length>maxLength){
 	    	$(msg_lbl).html(node.message.slice(0, maxLength)+"...");
