@@ -654,7 +654,7 @@ function fnCreateSlider1(containerID,arrImage){
 	
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
-			var objDiv = $("<div/>",{'class':'InfoContentTypeImageBox'});
+			var objDiv = $("<div/>",{'class':'InfoContentTypeImageBox fixToHeight'});
 			var objImg = value;
 			$(objImg).appendTo(objDiv);
 			$(containerID).data('owlCarousel').addItem(objDiv);
@@ -703,10 +703,15 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 				h1.html(KeyVal[1]);
 				h1.appendTo(divCount);
 				divCount.appendTo(objContent);
-				objArray.push(objContent);			
-			});				
+				if(infoTypeCategoryName.toUpperCase()=='PARKING'){
+					objArray.unshift(objContent);
+				}
+				else{
+					objArray.push(objContent);
+				}
+			});
 		}
-	})		
+	});		
 	return objArray;
 }
 

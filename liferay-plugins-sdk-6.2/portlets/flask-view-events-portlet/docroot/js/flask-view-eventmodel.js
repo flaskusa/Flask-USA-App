@@ -196,11 +196,22 @@ _eventModel.BACKGROUNDIMAGE = {
 }
 
 _eventModel.GET_EVENT_DETAIL_TYPE_COUNT = function(objJSON,distinctInfoTypeCategory){
-	var elementPosition = $.inArray(objJSON.infoTypeCategoryName, distinctInfoTypeCategory[0]);
-	if(elementPosition == -1){
+	var elementPosition;// = $.inArray(objJSON.infoTypeCategoryName, distinctInfoTypeCategory[0]);
+	
+	for(var iCount=0;iCount<distinctInfoTypeCategory.length;iCount++){
+		if(distinctInfoTypeCategory[iCount][0]==objJSON.infoTypeCategoryName){
+			elementPosition = iCount;
+			break;
+		}
+	}
+	
+	if(elementPosition == undefined){
 		distinctInfoTypeCategory.push([objJSON.infoTypeCategoryName,1]);
 	}
 	else{
 		distinctInfoTypeCategory[elementPosition][1] = distinctInfoTypeCategory[elementPosition][1] + 1; 
 	}
+	/*if(objJSON.infoTypeCategoryName=='Parking'){
+		console.log(distinctInfoTypeCategory);
+	}*/
 }
