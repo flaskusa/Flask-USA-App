@@ -95,7 +95,8 @@ function editUser(rowData) {
 	   var mm = date.getMonth()+1;
 	   if ( mm < 10 ) mm = '0' + mm;
 	   var yy = date.getFullYear();
-	$('#DOB').val(mm+'-'+dd+'-'+yy);
+	//$('#DOB').val(mm+'-'+dd+'-'+yy);
+	$('#DOB').combodate('setValue', mm+'-'+dd+'-'+yy);
 	loadFlaskRoles('roleId', rowData.roleId);
 	portraitURL = rowData.portraitURL;
 	renderPhoto(rowData.portraitURL);

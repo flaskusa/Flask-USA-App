@@ -237,6 +237,13 @@ function editAdmin(rowData) {
 	adminForm.show();
 	_flaskLib.loadCountries('countryId', rowData.countryId);
 	_flaskLib.loadUSARegions('stateId', rowData.stateId);
+	var date = new Date(rowData.DOB);
+	 var dd = date.getDate()
+	   if ( dd < 10 ) dd = '0' + dd;
+	   var mm = date.getMonth()+1;
+	   if ( mm < 10 ) mm = '0' + mm;
+	   var yy = date.getFullYear();
+	$('#DOB').val(mm+'-'+dd+'-'+yy);
 	loadFlaskRoles('roleId', rowData.roleId);
 	fnUpdateProfilePic(rowData.userId);
 	fnSetCheckBoxSelected(rowData.userInterests);
