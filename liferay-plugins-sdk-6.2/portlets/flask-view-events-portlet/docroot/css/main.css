@@ -741,10 +741,20 @@ div#fixedfooter2
     height: 90vh !important;
 }
 
-#jqxWidget .InfoContentTypeDetailBox{
-	height: 78vh !important;	
+.control-label caption {
+    font-size: large;
 }
 
-#jqxWidget .InfoContentTypeImageBox{
+.DetailedSlides{
 	height: 78vh !important;
+	padding: 10px !important;
+}
+
+.DetailedSlides .form-group {
+    padding: 20px !important;
+}
+
+.DetailedSlides .form-group .control-label {
+    font-size: 20px !important;
+    padding: 5px;
 }
