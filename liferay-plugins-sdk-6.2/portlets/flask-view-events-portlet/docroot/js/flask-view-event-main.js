@@ -202,7 +202,7 @@ function fnGetEventImages(eventId,venueId){
 
 			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
 		    $(objWeatherDiv).html($("#weather-background"));
-		    var objContent = $("<div/>",{'class':'InfoContentTypeImageBox'});
+		    var objContent = $("<div/>",{'class':'eventDetailBox'});
 		    objContent.append(objWeatherDiv);
 		    arrPreEvent.splice(1,0,objContent);
 		    
@@ -225,49 +225,50 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 		$.each(eventDetailImages, function(idx, objImg) {
 			if(objEventDetails.showDescription){
 				var imgURL = "";
-				var objMainTable = $("<table/>",{'class':'eventDetailBoxWithImages'});
-				var objMainTr = $("<tr/>");
-				var imageTd = $("<td/>",{'align':'left','valign':'top'});
-				var textDataTd = $("<td/>",{'align':'left','valign':'top'});
 				var objContent = $("<div/>",{'width':'100%'});
-				
-				var objtbl = $("<table/>",{'cellpadding':'5px'});
 				$.each(objFields, function(idx, obj){
-					var objtrHead = $("<tr/>");
+					//infoTypeCategoryName.toUpperCase() - > title
+					var objContent = $("<div/>",{'class':'DetailedSlides'});
 					$.each(obj,function(key,value){
-						var objtr = $("<tr/>");
-						var valueTd = $("<td/>",{'align':'left','width':'100%'});				
 						var evalue = eval("objEventDetails."+key);
 						var caption = value;
-						if(caption=="Phone"){
-							var objAnchor = $("<a/>",{'href':'tel:'+evalue});
-							objAnchor.html(evalue);
-							$(valueTd).append(objAnchor);
-						}
-						else if(caption=="Website"){
-							var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
-							objAnchor.html(evalue);
-							$(valueTd).append(objAnchor);							
-						}
-						else{
-							$(valueTd).html(evalue);	
-						}
-						$(valueTd).appendTo($(objtr));
-						$(objtr).appendTo($(objtbl));
+						var captionObj = $('<div/>',{'width':'100%','font-size':'18px'}).html(caption);
+						var divFormGroup = $('<div/>',{'class':'form-group'});
+						var lblControlLabel = $('<label/>',{'class':'control-label','for':caption});
+						lblControlLabel.append(captionObj);
+						var divControls = $('<div/>',{'class':'controls','id':caption});
+						switch(caption) {
+							case  "Phone": 
+								var objAnchor = $("<a/>",{'href':'tel:'+evalue});
+								objAnchor.html(evalue);
+								divControls.append(objAnchor);
+						        break;
+						    case "Website":
+								var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
+								objAnchor.html(evalue);
+								divControls.append(objAnchor);							
+						        break;
+						    case "Title":
+						    	captionObj.html(evalue);
+						    	divControls.html('');
+								var objImage = jQuery.parseJSON(objImg.DetailImage);
+								if(objImage.imageUUID!=""){
+									imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
+									var imgDiv = $('<img/>',{'src':imgURL,'height':'100%','width':'100%'});
+									divControls.append(imgDiv);
+									divControls.css('height','24vh !important');
+								}
+						    	break;
+						    default:
+						    	divControls.html(evalue);				    	
+						    	break;
+						}		
+						divFormGroup.append(lblControlLabel);
+						divFormGroup.append(divControls);
+						divFormGroup.appendTo($(objContent));
 					});
+					objArray.push(objContent);			
 				});
-				$(objtbl).appendTo($(textDataTd));
-				objImage = jQuery.parseJSON(objImg.DetailImage);
-				imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
-				$(objContent).attr("style","background:url('"+imgURL+"');");
-				$(objContent).addClass("slideImage");
-				$(objContent).appendTo(imageTd);
-				
-				$(imageTd).appendTo($(objMainTr));
-				$(textDataTd).appendTo($(objMainTr));
-				
-				$(objMainTr).appendTo($(objMainTable));
-				objArray.push($(objMainTable));
 			}
 			else{
 				objImage = jQuery.parseJSON(objImg.DetailImage);
@@ -279,36 +280,38 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	}
 	else{
 		$.each(objFields, function(idx, obj){
-			var objContent = $("<div/>",{'class':'InfoContentTypeDetailBox'});
-			var objtbl = $("<table/>",{'cellpadding':'5px'});
-			var objtrHead = $("<tr/>");
-			var objth = $("<th/>",{'colspan':'2'});
-			$(objth).html(infoTypeCategoryName.toUpperCase());
-			$(objth).appendTo($(objtbl));
+			//infoTypeCategoryName.toUpperCase() - > title
+			var objContent = $("<div/>",{'class':'DetailedSlides'});
 			$.each(obj,function(key,value){
-				var objtr = $("<tr/>");
-				var captionObj = $("<td/>",{'align':'left','width':'30%'});
-				var valueObj = $("<td/>",{'align':'left','width':'70%'});				
 				var evalue = eval("objEventDetails."+key);
 				var caption = value;
-				if(caption=="Phone"){
-					var objAnchor = $("<a/>",{'href':'tel:'+evalue});
-					objAnchor.html(evalue);
-					$(valueObj).append(objAnchor);
-				}
-				else if(caption=="Website"){
-					var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
-					objAnchor.html(evalue);
-					$(valueObj).append(objAnchor);							
-				}
-				else{
-					$(valueObj).html(evalue);	
-				}				
-				$(captionObj).html(caption);
-				$(captionObj).appendTo($(objtr));
-				$(valueObj).appendTo($(objtr));
-				$(objtr).appendTo($(objtbl));
-				$(objtbl).appendTo($(objContent));
+				var captionObj = $('<div/>',{'width':'100%','font-size':'18px'}).html(caption);
+				var divFormGroup = $('<div/>',{'class':'form-group'});
+				var lblControlLabel = $('<label/>',{'class':'control-label','for':caption});
+				lblControlLabel.append(captionObj);
+				var divControls = $('<div/>',{'class':'controls','id':caption});
+				switch(caption) {
+					case  "Phone": 
+						var objAnchor = $("<a/>",{'href':'tel:'+evalue});
+						objAnchor.html(evalue);
+						divControls.append(objAnchor);
+				        break;
+				    case "Website":
+						var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
+						objAnchor.html(evalue);
+						divControls.append(objAnchor);							
+				        break;
+				    case "Title":
+				    	captionObj.html(evalue);
+				    	divControls.html('');
+				    	break;
+				    default:
+				    	divControls.html(evalue);				    	
+				    	break;
+				}		
+				divFormGroup.append(lblControlLabel);
+				divFormGroup.append(divControls);
+				divFormGroup.appendTo($(objContent));
 			});
 			objArray.push(objContent);			
 		});
@@ -535,8 +538,10 @@ function initMenuList(objDetails){
 		if($.inArray(text, _flaskMap.allowedContent)>-1){
 			$('#gmap_canvas').remove();
 			$(this).jqxTabs('setContentAt', clickedItem,'<div id="gmap_canvas" style="height:100%;"></div>');
-			_flaskMap.initializeMap();
-			callMarkers(text.toLowerCase());
+			setTimeout(function(){
+				_flaskMap.initializeMap();
+				callMarkers(text.toLowerCase());
+			},300);
 		}
 	});
 }
@@ -654,7 +659,7 @@ function fnCreateSlider1(containerID,arrImage){
 	
 	if(arrImage.length>0){
 		$.each(arrImage, function( index, value ) {
-			var objDiv = $("<div/>",{'class':'InfoContentTypeImageBox'});
+			var objDiv = $("<div/>");
 			var objImg = value;
 			$(objImg).appendTo(objDiv);
 			$(containerID).data('owlCarousel').addItem(objDiv);
@@ -718,7 +723,7 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 function getSelectedTab(str){
 	var iCount = 0;
 	$('.jqx-tabs-titleContentWrapper').each(function(){
-		if($(this).html().replace(/&amp;/g, '&')==str){
+		if($(this).html().replace(/&amp;/g, '&')==str && $.inArray($(this).html(), _flaskMap.allowedContent)>-1){
 			$('.jqx-tabs').jqxTabs('select', iCount);
 			$('#gmap_canvas').remove();
 			$(this).jqxTabs('setContentAt', iCount,'<div id="gmap_canvas" style="height:100%;"></div>');
