@@ -38,7 +38,11 @@ function initialize(portletId, portlet){
 		createTable({},_adminModel.DATA_MODEL.ADMIN, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Admin", "Images"]);
 		loadData();
 		addClickHandlers();
-		$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
+		//$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
+		$('#DOB').datetimepicker({
+				format: "MM-DD-YYYY",
+				//pickTime: false
+			});
 		$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
 	    console.log("Cal Done");    
 		$(".jqx-checkbox").css("margin-top","6.5px");
@@ -197,7 +201,7 @@ function initialize(portletId, portlet){
 	   <div class="form-group">
 	  <label class="control-label" for="DOB">Date of Birth:</label>
 	  <div class="controls">
-	   <div id="DOB"></div>
+	   <input id="DOB" class="form-control" type="text">
 	  </div>
 	   </div>  
 	  </div>

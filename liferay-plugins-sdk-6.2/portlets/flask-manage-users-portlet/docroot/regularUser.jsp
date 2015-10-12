@@ -51,9 +51,11 @@
 		}
 		if(portletId == "myaccount_WAR_flaskmanageusersportlet")
 		{
-			$('#DOB').datetimepicker({
-				format: "MM-DD-YYYY",
-				//pickTime: false
+			$('#DOB').combodate({
+				firstItem: 'name',
+			    minYear: 1960,
+			    maxYear: 2016,
+			    smartDays: true
 			});
 			$("#adminForm").show();
 			$("#adminDataTable").hide();
@@ -180,7 +182,7 @@
 	   <div class="form-group">
 		  <label class="control-label" for="DOB">Date of Birth:</label>
 			  <div class="controls">
-			   	<input id="DOB" class="form-control" type="text">
+			   	<input id="DOB" class="form-control" type="text" value="" data-format="MM-DD-YYYY" data-template="MMM D YYYY">
 			  </div>
 	   </div>  
 	   
