@@ -8,28 +8,41 @@
 		<header-portlet-css>/css/main.css</header-portlet-css>
 		<header-portlet-css>/css/jqx.base.css</header-portlet-css>
 		<header-portlet-css>/css/jqx.orange.css</header-portlet-css>
-		<footer-portlet-javascript>/js/jquery-2.1.4.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxgrid.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxmenu.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxscrollbar.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxgrid.selection.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxdropdownbutton.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxcheckbox.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxtabs.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxfileupload.js</footer-portlet-javascript>
+		<header-portlet-css>/css/bootstrap.css</header-portlet-css>
+		<header-portlet-css>/css/bootstrap-datetimepicker.min.css</header-portlet-css>
 		<footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/flask-ajax.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/flask-ajax.js</footer-portlet-javascript>		
+		<footer-portlet-javascript>/js/moment-with-locales.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap-datetimepicker.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/bootstrap.min.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-gridparams.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-manage-user-model.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-manage-user-main.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxcalendar.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxtree.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxcheckbox.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxdatetimeinput.js</footer-portlet-javascript>		
+		<footer-portlet-javascript>/js/jqxdropdownbutton.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdropdownlist.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxgrid.filter.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxexpander.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxfileupload.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxgrid.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.pager.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxgrid.filter.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxgrid.selection.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqx-all.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxmenu.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxpanel.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxscrollbar.js</footer-portlet-javascript>		
+		<footer-portlet-javascript>/js/jqxtabs.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxtooltip.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/combodate.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxwindow.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxvalidator.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
 		<css-class-wrapper>FlaskAdmin-portlet</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -47,21 +60,20 @@
 		<footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-reg-manage-user-main.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-reg-manage-user-model.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jquery-2.1.4.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqx-all.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxcalendar.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxtree.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxcheckbox.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdatetimeinput.js</footer-portlet-javascript>		
 		<footer-portlet-javascript>/js/jqxdropdownbutton.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdropdownlist.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxexpander.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxfileupload.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxgrid.filter.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.pager.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxgrid.filter.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.selection.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxmenu.js</footer-portlet-javascript>
@@ -69,7 +81,8 @@
 		<footer-portlet-javascript>/js/jqxscrollbar.js</footer-portlet-javascript>		
 		<footer-portlet-javascript>/js/jqxtabs.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxtooltip.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxtree.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/combodate.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxwindow.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxvalidator.js</footer-portlet-javascript>
 		<css-class-wrapper>regular-user-portlet</css-class-wrapper>
 	</portlet>
@@ -88,20 +101,20 @@
 		<footer-portlet-javascript>/js/flask-lib.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-my-account.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-reg-manage-user-model.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqx-all.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxbuttons.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxcalendar.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxtree.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxcheckbox.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxcore.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdata.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdatetimeinput.js</footer-portlet-javascript>		
 		<footer-portlet-javascript>/js/jqxdropdownbutton.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdropdownlist.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxexpander.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxfileupload.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxgrid.filter.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.pager.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxgrid.filter.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.selection.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxlistbox.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxmenu.js</footer-portlet-javascript>
@@ -109,7 +122,8 @@
 		<footer-portlet-javascript>/js/jqxscrollbar.js</footer-portlet-javascript>		
 		<footer-portlet-javascript>/js/jqxtabs.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxtooltip.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/jqxtree.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/combodate.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/jqxwindow.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxvalidator.js</footer-portlet-javascript>
 		<css-class-wrapper>my-account-portlet</css-class-wrapper>
 	</portlet>
