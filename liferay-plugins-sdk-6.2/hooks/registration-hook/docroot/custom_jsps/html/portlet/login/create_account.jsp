@@ -1,11 +1,13 @@
 
 <%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
 <%@ include file="/html/portlet/login/init.jsp" %>
-<script type="text/javascript" src="/html/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/html/js/moment-with-locales.js"></script>
-<script type="text/javascript" src="/html/js/bootstrap-datetimepicker.js"></script>
-<script type="text/javascript" src="/html/js/Flask-lib.js"></script>
-<script type="text/javascript" src="/html/js/jqx-all.js"></script>
+<script type="text/javascript" src="/html/js/jqxcore.js"></script>
+<script type="text/javascript" src="/html/js/flask-registration-main.js"></script>
+<script type="text/javascript" src="/html/js/combodate.js"></script>
+<script type="text/javascript" src="/html/js/jqxvalidator.js"></script>
+<script type="text/javascript" src="/html/js/jqxtree.js"></script>
+<script type="text/javascript" src="/html/js/jqxcheckbox.js"></script>
 
 <script type="text/javascript">
 
@@ -119,7 +121,7 @@
    <div class="form-group">
   <label class="control-label" for="DOB">Date of Birth:</label>
   <div class="controls">
-   <input name="DOB" id="DOB" class="form-control" type="text">
+   <input name="DOB" id="DOB" type="hidden" class="form-control" value="" data-format="MM-DD-YYYY" data-template="MMM D YYYY">
   </div>
    </div>  
   </div>
