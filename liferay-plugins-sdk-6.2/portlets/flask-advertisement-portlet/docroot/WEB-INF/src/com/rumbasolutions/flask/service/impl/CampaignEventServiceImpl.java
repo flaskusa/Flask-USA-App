@@ -15,6 +15,8 @@
 package com.rumbasolutions.flask.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
@@ -57,6 +59,8 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 	 */
 	
 	private static Log LOGGER = LogFactoryUtil.getLog(CampaignEventServiceImpl.class);
+	private static int  IMAGE_DURATION = 4; // 4 seconds 
+	private static int MAX_IMAGES_PER_HOUR =  60*60/IMAGE_DURATION;  /* 4 second each image mean 15 per minute*/
 	
 	@Override
 	public List<CampaignEvent> getCampaignEvents(long campaignId, ServiceContext serviceContext){
@@ -92,38 +96,143 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 	@Override
 	public JSONObject getEventCampaignImages(String eventIdList, ServiceContext serviceContext){
 		JSONObject imageJson = JSONFactoryUtil.createJSONObject();
-		JSONArray campaignJsonArray = JSONFactoryUtil.createJSONArray();
+		JSONArray uniqueImageArray = JSONFactoryUtil.createJSONArray();
+		JSONArray imageUUIDForDisplay= JSONFactoryUtil.createJSONArray();
+		
 		List campaignList = new ArrayList();
 		JSONArray tempArray = null;
 		String serilizeString = null;
+		HashMap<Integer, Integer> campaignFrequencyMap = new HashMap<Integer, Integer>();
+		
+		HashMap<Integer, JSONArray> campaignImageMap = new HashMap<Integer, JSONArray>();
+		HashMap<Integer, Integer> campaignLastUsedImage = new HashMap<Integer, Integer>();
+
+		
+		HashMap<Integer, JSONObject> imageMap = new HashMap<Integer, JSONObject>();
+		
 		try{
 			eventIdList = FlaskUtil.sanitizeIdList(eventIdList);
-			campaignList = AdCampaignFinderUtil.getCampaignsForEvents(eventIdList);
+			campaignList = AdCampaignFinderUtil.getCampaignDetailsForEvents(eventIdList);
 			for (Object obj : campaignList) {
 				serilizeString = JSONFactoryUtil.serialize(obj);
 				tempArray = JSONFactoryUtil.createJSONArray(serilizeString);
 				
-				JSONObject campJSONObj = JSONFactoryUtil.createJSONObject();
-				campJSONObj.put("campaignId", tempArray.getLong(0));
-				campJSONObj.put("campaignName", tempArray.getString(1));
-				campJSONObj.put("eventName", tempArray.getString(2));
-				campJSONObj.put("fullScreenTitle", tempArray.getString(3));
-				campJSONObj.put("fullScreenDesc", tempArray.getString(4));
-				campJSONObj.put("fullScreenGroupId", tempArray.getLong(5));
-				campJSONObj.put("fullScreenUUID", tempArray.getString(6));
-				campJSONObj.put("frequencyPerHour", tempArray.getLong(7));
+				Integer campaignId = tempArray.getInt(0);
+				Integer frequencyPerHour = tempArray.getInt(6);
 				
-				campJSONObj.put("imageTitle", tempArray.getString(8));
-				campJSONObj.put("imageDesc", tempArray.getString(9));
-				campJSONObj.put("imageGroupId", tempArray.getLong(10));
-				campJSONObj.put("imageUUID", tempArray.getString(11));
-				campaignJsonArray.put(campJSONObj);
+				JSONArray arr = campaignImageMap.get(campaignId);
+				JSONObject imgJson = getImageJson(tempArray);
+				uniqueImageArray.put(imgJson);
+				if(arr == null){
+					arr = JSONFactoryUtil.createJSONArray();
+					arr.put(imgJson);
+				}else{
+					arr.put(imgJson);
+				}
+				campaignImageMap.put(campaignId, arr);
+					
+				campaignFrequencyMap.put(campaignId, frequencyPerHour);
+				
 			}
+			campaignFrequencyMap = setCampaignWeight(campaignFrequencyMap);			
+			LinkedHashMap<Integer, Integer> sortedByFrequencyMap = (LinkedHashMap<Integer, Integer>) FlaskUtil.sortByValue(campaignFrequencyMap);
+			boolean processedAll = false;
+			int maxLoopIndex = 0;
+			String imageUUID ="";
+			JSONObject img;
+			int keysWithZeroValue = 0;
+			while (processedAll == false){
+				for(Integer key: sortedByFrequencyMap.keySet()){
+					maxLoopIndex++;
+					Integer weightedFrequency = sortedByFrequencyMap.get(key);
+					if(weightedFrequency == 0){   //It has used all of the weighted frequency
+						
+						if(maxLoopIndex >= MAX_IMAGES_PER_HOUR ){ //all processed
+							processedAll = true;
+							break;
+						}
+						continue;						
+					}else{
+						weightedFrequency  -= 1;
+					}
+					sortedByFrequencyMap.put(key, weightedFrequency);
+					
+					JSONArray imgArrayForCampaign = campaignImageMap.get(key);
+					int imageIndex = 0;
+					int maxIndex = imgArrayForCampaign.length() - 1;
+					if(imgArrayForCampaign.length() > 1){
+						Integer lastUsedIndex = campaignLastUsedImage.get(key);
+						if(lastUsedIndex == null){
+							campaignLastUsedImage.put(key, 0);
+						}					
+						if( lastUsedIndex < maxIndex){  //Use next image if available else used first image
+							imageIndex = lastUsedIndex + 1;
+						}
+					}
+					img = imgArrayForCampaign.getJSONObject(imageIndex);
+					imageUUID = img.getString("imageUUID");
+					imageUUIDForDisplay.put(imageUUID);
+					
+				}
+
+			}
+
 		} catch(Exception e) {
-			LOGGER.error("Exception in getAdCampains :" + e.getMessage());
+			LOGGER.error("Exception in getEventCampaignImages :" + e.getMessage());
 			e.printStackTrace();
 		}
-		imageJson.put("Images", campaignJsonArray);
+		imageJson.put("Images", uniqueImageArray);
+		imageJson.put("DisplayOrder", imageUUIDForDisplay);
 		return imageJson;
+	}
+
+	private HashMap<Integer, Integer> setCampaignWeight(HashMap<Integer, Integer> campaignMap){
+		HashMap<Integer, Integer> weightedMap = new HashMap<Integer, Integer>(campaignMap.size());
+		int total = getSumOfFrequency(campaignMap);
+		float weight = 1;
+		if(total !=0){
+			weight = (float)MAX_IMAGES_PER_HOUR/ total;
+		}
+		for(Integer key: campaignMap.keySet()){
+			Integer frequencyPerHour = campaignMap.get(key);
+			frequencyPerHour = (int) (frequencyPerHour * weight);
+			weightedMap.put(key, frequencyPerHour);
+		}
+		return weightedMap;
+	}
+
+	private int getSumOfFrequency(HashMap<Integer, Integer> campaignMap) {
+		int total = 0;
+		for (int impr: campaignMap.values()){
+			total +=  impr;
+		}
+		return total;
+	}
+	
+	private JSONObject getImageJson(JSONArray tempArray) {
+		JSONObject campJSONObj = JSONFactoryUtil.createJSONObject();
+		campJSONObj.put("campaignId", tempArray.getLong(0));
+		campJSONObj.put("campaignName", tempArray.getString(1));
+		campJSONObj.put("fullScreenTitle", tempArray.getString(2));
+		campJSONObj.put("fullScreenDesc", tempArray.getString(3));
+		campJSONObj.put("fullScreenGroupId", tempArray.getLong(4));
+		campJSONObj.put("fullScreenUUID", tempArray.getString(5));
+		campJSONObj.put("frequencyPerHour", tempArray.getLong(6));
+		
+		campJSONObj.put("imageTitle", tempArray.getString(7));
+		campJSONObj.put("imageDesc", tempArray.getString(8));
+		campJSONObj.put("imageGroupId", tempArray.getLong(9));
+		campJSONObj.put("imageUUID", tempArray.getString(10));
+		
+		campJSONObj.put("customerName", tempArray.getString(11));
+		campJSONObj.put("addrLine1", tempArray.getString(12));
+		campJSONObj.put("addrLine2", tempArray.getString(13));
+		campJSONObj.put("city", tempArray.getString(14));
+		campJSONObj.put("State", tempArray.getString(15));
+		campJSONObj.put("zipCode", tempArray.getString(16));
+		campJSONObj.put("email", tempArray.getString(17));
+		campJSONObj.put("url", tempArray.getString(18));
+		campJSONObj.put("phone", tempArray.getString(19));
+		return campJSONObj;
 	}
 }

@@ -75,7 +75,7 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 	}
 	
 	@Override
-	public List getCampaignsForEvents(String eventList){
+	public List getCampaignDetailsForEvents(String eventList){
 		Session session = null;
 		List campaignList = null;
 		eventList = eventList.trim();
@@ -84,7 +84,10 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 		try{
 			session = openSession();
 			StringBuilder sb = new StringBuilder();
-			String sqlSelect = "select  fac.campaignId, fac.campaignName, fe.eventName, fac.imageTitle 'fullScreenTitle',"
+			String sqlSelect = "select distinct fac.campaignId, fac.campaignName, customerName, addrLine1,"
+								+ " addrLine2, city, region.regionCode 'State', zipCode, "
+								+ " email, websiteURL 'url', businessPhoneNumber 'phone', "					
+								+ " fac.imageTitle 'fullScreenTitle',"
 								+ " fac.imageDesc 'fullScreenDesc', fac.imageGroupId 'fullScreenGroupId', "
 								+ " fac.imageUUID 'fullScreenUUID', fac.frequencyPerHour, fci.imageTitle, "
 								+ " fci.imageDesc, fci.imageGroupId, fci.imageUUID ";
@@ -92,7 +95,10 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 			String sqlFrom = " from flaskads_campaignevent  fce "
 					+ " inner join  flaskads_adcampaign fac on  fce.campaignId = fac.campaignId "
 					+ " inner join flaskevents_event fe on fe.eventId = fce.eventId "
-					+ " inner join flaskads_campaignimage fci on fci.campaignId = fac.campaignId";
+					+ " inner join flaskads_campaignimage fci on fci.campaignId = fac.campaignId"
+					+ "	inner join flaskads_adcustomer on flaskads_adcustomer.customerId = fac.customerId"
+					+ " inner join region on region.regionId = flaskads_adcustomer.stateId"; 
+			
 			String sqlWhere = " where fce.eventId in ( " + eventList + ")" ;
 			
 			sb.append(sqlSelect);
@@ -106,7 +112,6 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 			SQLQuery queryObj = session.createSQLQuery(sb.toString());
 			queryObj.addScalar("campaignId", Type.LONG);
 			queryObj.addScalar("campaignName", Type.STRING);
-			queryObj.addScalar("eventName", Type.STRING);
 			queryObj.addScalar("fullScreenTitle", Type.STRING);
 			queryObj.addScalar("fullScreenDesc", Type.STRING);
 			queryObj.addScalar("fullScreenGroupId", Type.LONG);
@@ -116,6 +121,16 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 			queryObj.addScalar("imageDesc", Type.STRING);
 			queryObj.addScalar("imageGroupId", Type.LONG);
 			queryObj.addScalar("imageUUID", Type.STRING);
+			queryObj.addScalar("customerName", Type.STRING);
+			queryObj.addScalar("addrLine1", Type.STRING);
+			queryObj.addScalar("addrLine2", Type.STRING);
+			queryObj.addScalar("city", Type.STRING);
+			queryObj.addScalar("State", Type.STRING);
+			queryObj.addScalar("zipCode", Type.STRING);
+			queryObj.addScalar("email", Type.STRING);
+			queryObj.addScalar("url", Type.STRING);
+			queryObj.addScalar("phone", Type.STRING);			
+
 
 			queryObj.setCacheable(true);
 			QueryPos qPosition = QueryPos.getInstance(queryObj);
