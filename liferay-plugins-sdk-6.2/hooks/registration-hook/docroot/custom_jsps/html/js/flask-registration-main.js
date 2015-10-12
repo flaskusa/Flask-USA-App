@@ -471,7 +471,6 @@ var SERVICE_ENDPOINTS = {
 	$(document).ready(function() {
 			fnFillCountryList();
 			$("#countryId").change(function() {
-				
 				fnFillRegionList($(this).val(),0);
 				return false;
 			});
@@ -481,8 +480,7 @@ var SERVICE_ENDPOINTS = {
 				fnFillRegionList(0,0);
 			}
 			//$("#DOB").jqxDateTimeInput({ width: '257px', height: '35px', formatString: "MM-dd-yyyy" });
-			$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
-		    console.log("Cal Done");    
+			$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	  
 			$(".jqx-checkbox").css("margin-top","6.5px");
 			$.wait(function(){
 				$(".icon-folder-open").hide();
@@ -492,10 +490,13 @@ var SERVICE_ENDPOINTS = {
 			}else{
 				fnShowForm(Liferay.ThemeDisplay.getUserId());
 			}	
-			$('#DOB').datetimepicker({
-				format: "MM-DD-YYYY",
-				//pickTime: false
+			$('#DOB').combodate({
+				firstItem: 'name',
+			    minYear: 1960,
+			    maxYear: 2016,
+			    smartDays: true
 			});
+			
 			 $(".cssCancel").click(function(){
 				  var url = "/home?p_p_id=58&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&saveLastPath=false&_58_struts_action=%2Flogin%2Flogin";
 				  $(location).attr('href',url);
