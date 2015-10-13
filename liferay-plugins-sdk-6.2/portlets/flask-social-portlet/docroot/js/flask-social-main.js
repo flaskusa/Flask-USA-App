@@ -375,7 +375,7 @@ function renderRequestList(obj){
 function fnBuildRequestMenu(obj,htmlObject){
 	var IsBlocked = obj.block;
 	var UserId = obj.userId;
-	var dropdown = $('<div/>',{'class':'dropdown'});
+	var dropdown = $('<div/>',{'class':'dropdown requests', 'style':'display: flex; width: 180px; padding-right: 10px;'});
 	if(!IsBlocked){
 		var IsFriend = obj.connected;
 		var ul = $('<ul/>',{'class':'dropdown-menu MyDDStyle'});
