@@ -131,6 +131,7 @@
 		<span class='md-closeBtn'>x</span>
 		<div>
 			<div class="imageContainer"></div>
+			<div class="footerInfo"></div>
 		</div>
 	</div>
 </div>

@@ -68,9 +68,10 @@ perspective effects (not including the modals and the overlay).
 /* Content styles */
 .md-content {
     color: rgb(255, 128, 0);
-    background: #333333;
+    background: #e6e6e6;
     position: relative;
 	border-radius: 3px;
+	padding: 10px;
 	margin: 0 auto;
 	-webkit-box-shadow: 3px 4px 21px 0px rgba(0,0,0,1);
 	-moz-box-shadow: 3px 4px 21px 0px rgba(0,0,0,1);
@@ -84,7 +85,7 @@ perspective effects (not including the modals and the overlay).
 	font-size: 18px;
 	font-weight: 300;
 	opacity: 0.8;
-	background: rgba(0,0,0,0.1);
+	background: rgba(0, 0, 0, 0.71);
 	border-radius: 3px 3px 0 0;
 }
 
@@ -745,4 +746,37 @@ perspective effects (not including the modals and the overlay).
     right: 0px;
     top: 0px;
 	cursor: pointer;
+}
+
+.footerInfo {
+    margin-top: 1px;
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.71);
+}
+.adPhone, .adWebSite, .adAddress {
+    padding: 5px;
+}
+
+.widget-pane-section-info-website {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAALfSURBVFjD7Zk7axVBFMdXFC1sNAr6ASQI5r4+gAg2diKIQbCwEyzsRBJQXPdRaSUasLBXMCiIhYJskSKFtxDBIljeUnyEm0IR/Ps/m/U6DrP37mM2mssMDLPJzs6Z35wzc86Z6wHwtnP1HIADcAAOwAE0ClC0HPOxuxPjVDfCfdakG2ON7TCtm8+JvJM+0rfouI0DcDKHOcGlXoT1XgwUquwr38i3/wzgyBXs6YQIOJGNwhPXqnwrY8hYWwogK8dVXK06cYNGVvO0YR2gFaDFlRvUWPX3nQjXuR8+af8fyNiNAmT2Pqi52o9krKOLOMDnJzqErglrAGKndc2GE/zZC3BCnSA1cVs3J3VPWAOQzVZj1X9wom/bIU4brHwH3z9U+4ssqwCZ6WyUXO1LhZ3IOexk/6fq6fTblKwApOd8eXMpDsAy6+MgtfRF+X7JCoB4zVJOqiJAth+uqc5OZNcGENdfxe7bEc6WBUi1EOPbaC9Qdm0AiV8KbNKPbPtpjfCGk7jn+djlVSiU92KkRcq2AZAoZvE4m+zf5hLhgWepUMaiMm5SH4CRpDLgxTkfbR3CKkCIM8qCrdnQwHBk1yFOihAdwiZAO8BxZdyhVQDVi0rcYjKnsScT4x+zM/tTRIZdAMWEOgHmVWEmcyoAsTJBA+dtm1CinDYLusAKEP2xGqAMu5tYPUYjvDYJLQnRn3CMJlaPUdWRccDvXR/7ciFifK0D0FrAfgn8rDoyPZSgXd7MVf+mM6sMwETnlvVQQg/mJODiwDM56l8p4rXl2OXzXbYXJBJVEpx168GcKZym4GfGFYxxp3TQF+GlhB1snzcWTpsSGnH5hmR/hu8+VIBIGk1o8lJK035oX8XeXojL7Puu6g1FIynlmKR+2XQlktl52RyiuaR+3LUK//7M9sZcjENVAbbkWmXSxVbqJ2K8SvcLnd5/ebE1FVeLU3G5u22u190vNA7AATgABzDVAL8AhKRQnqm6xZYAAAAASUVORK5CYII=);
+}
+
+.widget-pane-section-info-phone {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAHuSURBVFjD7di9SgNBEAfwsbATBC1sJYUIMd5sY5PGR0ipdqZIbSc2ctzNaGcTLHwKK30CwcpWAzam0kYbP0CI/C3M6eU0boQk7MoubL+/m4+dPQJAPm8KgAAIgAAIgACwbRZsseLJKFDcLHhlwSGNYA0T8PjT4XsgMeadBRjBsxWQoOpuBBR3VkCKmssp1LICFA2XASdWgODI5RQ6sAGM4spZQKSoDwBAOcaMk4BKjNIAgM6SYs5JABGREdz8ChDsOptCXUDzlwJWp29iIqJIsNKn/+/RiNZQAd0oXOYPHwn2aYRr6IBv3Uiw7hWAGpg0inYOcFvaxrQ/ACKKUmwWotD0CkCECVac5TrQG6dY9QhAVElQMYqXHOI+irHgDYCIaDnBWqGlXi/uYNYbABERp5BCPZwPilhSzNlmp5EDuvVwXIyELZ2MYNcoOtkUy4IjVjQ4RY0TVLPn6RgAROUYU0ZwUXjcPPQr7G9R6z+eHI4FkCGKkWDBmxE08/eEEaSDHD772zE2wGc6/fR1BbecYOMvh8/2mAE93enlr4d1BpDdE/nLzjtAllLdsaPtKeBrAIwU9eIo7g8gPwgKVoygaX2efrTiJ+cAPXUSoxQp6qw4YMEpC1qsuDOCZxY8smAr/F4PgAAIgAAIgH8PeAeuGqF0m/ryIAAAAABJRU5ErkJggg==);
+}
+
+.widget-pane-section-info-address {
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAAKISURBVFjD7ZkxSxxREMcvIQQDkiZFUggmIJKgnHffIGAnkjR+iZSCoHYbdreyEOxsUlrZXRe008LSQkGNYJImYKGCiI1O/n+9hcPc5c16b/aduMLDZd/szPzemzc7O1cRkcpDHpUSoAQoAR4JgOtvJJLn1a8yXktkoZbKRj2RH/h/ztG83uAcZSjr0lcYAJzph4NzGMf1VEQ1KItn+GxQgGosn3I53gaEOooHiOQpw+Hejt8Z1EWdhQHA6JIv51vGUiEAWK0ZA+eznZgxBcChG0I2uTQDgG7aMAPACjWsnG/ZhYYJALLFuxwr+bsWS1KPZYqD17ynfZ62vAOMpTKrXMFv7fI773FOo4O2vAMgZ68rnN9EOnzW8a2HOcoo3g/r/gFSOXACxDLhKhEoo1iIfQuAC5fh9/PyygVAGUUYXViE0JkzdiMZdgFQRhFCZ94BkEX2nIZj+eICoIwii+35B0hkRRG7Jx8SGezkPOcoo9Cz4j+EFCvX3P5fcODzP4cX9zD/U6UDtrwDII+/gRNXOUplgjRu3t64zvEmvqItm1Iile/mpQRsmNVCY7FMWgPQhmE5LU8QDruGq79DG6bfA5a7kK1+EV9kawYAa4V9Uo5GUs2VkRSZhzoL7UrA6LJHgOXC2ypDkbzEgT7qGgA6qCtIXwil8Udkjususs41dQTtzGH7F7sIncXgrcWBaXkBZ7bvAbD9NpK+4ABZuwUOneZw/jRrn/QEQNYn1ZwHynTqhwYFaB7qRPHdnGh0BQFo1kqr/0mZq1mt06MAt4ca2WWrTcbZ4pxWTzCAm1IjldeI9cOWuD/kvTw6ggK0NIL/cLgyTk8CZEXf3SItGED5M2sJUAL05vgL56PYlOn4/UwAAAAASUVORK5CYII=);
+}
+
+.widget-pane-section-info-icon {
+    display: inline-block;
+    height: 24px;
+    width: 24px;
+	margin-right: 10px;
+    background-repeat: no-repeat;
+    background-size: 24px 24px;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
 }
