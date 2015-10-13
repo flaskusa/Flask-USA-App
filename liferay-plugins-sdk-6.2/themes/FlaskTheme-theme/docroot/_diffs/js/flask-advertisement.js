@@ -1,7 +1,7 @@
 var _flaskAd = {};
 
 _flaskAd.UTILITY = {
-		AUTOPLAY		: 3000
+		AUTOPLAY	: 4000
 }
 
 _flaskAd.ShowAdByEventId = function(eventId){
@@ -56,11 +56,13 @@ _flaskAd.GetAdImages = function(Obj){
 				var imageFullScreenUUId = adCampaign.imageUUID;
 				var imageFullScreenTitle = adCampaign.campaignName;
 				var campaignImages = data.campaignImages;
-				for(var iCount=0;iCount<campaignImages.length;iCount++){
+				for(var iCount = 0 ; iCount < campaignImages.length ; iCount++){
 					campaignImage = $.parseJSON(campaignImages[iCount].campaignImage);
+					
 					var imageURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + campaignImage.imageUUID + "&groupId="+campaignImage.imageGroupId;
 					var imageFullScreenURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + imageFullScreenUUId + "&groupId="+imageFullScreenGrpId;
-					var adSlide = $('<div/>',{'class':'adSlide','data-fullImageURL':imageFullScreenURL,'data-title':imageFullScreenTitle});
+					var adSlide = $('<div/>',{'class':'adSlide','data-fullImageURL':imageFullScreenURL,'data-title':imageFullScreenTitle, 
+						'data-website': campaignImage.url, 'data-phone': campaignImage.phone, 'data-address': campaignImage.addrLine1});
 					var adSlideImage = $('<img/>',{'src':imageURL});
 					adSlide.append(adSlideImage);
 					adContainer.data('owlCarousel').addItem(adSlide);
@@ -73,6 +75,36 @@ _flaskAd.GetAdImages = function(Obj){
 						$('#myModalLabel').html(campaignTitle);						
 						imgContainer.html("");
 						imgContainer.append(objImage);
+
+						if($(this).attr('data-phone')!=""){
+							var objPhone= $('<div/>',{'class':'adPhone'});
+							var objPhoneLink = $("<a/>",{'href':'tel:'+$(this).attr('data-phone')});
+							objPhoneLink.html($(this).attr('data-phone'));
+							objPhone.html('<span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-phone"></span>');
+							objPhone.append(objPhoneLink);
+						}
+						
+						if($(this).attr('data-website')!=""){
+							var objWebSite= $('<div/>',{'class':'adWebSite'});
+							var objWebSiteLink = $("<a/>",{'href':'http://'+$(this).attr('data-website'),'target':'_blank'});
+							objWebSiteLink.html($(this).attr('data-website'))
+							objWebSite.html('<span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-website"></span>');
+							objWebSite.append(objWebSiteLink);
+						}
+						
+						if($(this).attr('data-address')!=""){
+							var objAddress= $('<div/>',{'class':'adAddress'});
+							objAddress.html('<span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-address"></span>'+$(this).attr('data-address'));
+						}
+
+						
+						var infoContainer = $('.footerInfo');
+						infoContainer.html('');
+						infoContainer.append(objPhone);
+						infoContainer.append(objWebSite);
+						infoContainer.append(objAddress);
+						
+						$('.md-trigger').click();
 					});
 					$("body").append(adContainer);
 				}
@@ -97,11 +129,19 @@ _flaskAd.GetAdImagesForMultipleEvents = function(Obj){
 
 	var imageUUIDArray = [];
 	var objImage = Obj.Images;
-	for(var iCount=0;iCount<objImage.length;iCount++){
-		objImage[iCount].imageGroupId
-		var imageURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + objImage[iCount].imageUUID + "&groupId="+objImage[iCount].imageGroupId;
-		var imageFullScreenURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + objImage[iCount].fullScreenUUID + "&groupId="+objImage[iCount].fullScreenGroupId;
-		var adSlide = $('<div/>',{'class':'adSlide','data-fullImageURL':imageFullScreenURL,'data-title':objImage[iCount].campaignName});
+	var dispOrder = Obj.DisplayOrder;
+	
+	for(var iCount=0; iCount < 10 ; iCount++){
+		var imageUUID = dispOrder[iCount];
+		
+		var imageObj = _flaskAd.getImageInfoFromUUID(imageUUID, Obj);
+		
+		var address = imageObj.addrLine1 + ", " + imageObj.city + ", " + imageObj.zipCode + ", State"  ;
+			
+		var imageURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + imageObj.imageUUID + "&groupId="+imageObj.imageGroupId;
+		var imageFullScreenURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + imageObj.fullScreenUUID + "&groupId="+imageObj.fullScreenGroupId;
+		var adSlide = $('<div/>',{'class':'adSlide','data-fullImageURL':imageFullScreenURL,'data-title':imageObj.campaignName,
+			'data-website': imageObj.url, 'data-phone': imageObj.phone, 'data-address': address } );
 		var adSlideImage = $('<img/>',{'src':imageURL});
 		adSlide.append(adSlideImage);
 		adContainer.data('owlCarousel').addItem(adSlide);
@@ -111,9 +151,42 @@ _flaskAd.GetAdImagesForMultipleEvents = function(Obj){
 			var objImage = $('<img/>',{'src':fullImageURL});
 			var imgContainer = $('.imageContainer');
 			$('#myModalLabel').html("");
-			$('#myModalLabel').html(campaignTitle);						
+			$('#myModalLabel').html(campaignTitle);
+			
+			$('#modal-advertisement #website').html($(this).attr('data-website'));
+			
+			$('#modal-advertisement #phone').html($(this).attr('data-phone'));
+			$('#modal-advertisement #address').html($(this).attr('data-address'));
 			imgContainer.html("");
 			imgContainer.append(objImage);
+			
+			if($(this).attr('data-phone')!=""){
+				var objPhone= $('<div/>',{'class':'adPhone'});
+				var objPhoneLink = $("<a/>",{'href':'tel:'+$(this).attr('data-phone')});
+				objPhoneLink.html($(this).attr('data-phone'));
+				objPhone.html('<span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-phone"></span>');
+				objPhone.append(objPhoneLink);
+			}
+			
+			if($(this).attr('data-website')!=""){
+				var objWebSite= $('<div/>',{'class':'adWebSite'});
+				var objWebSiteLink = $("<a/>",{'href':'http://'+$(this).attr('data-website'),'target':'_blank'});
+				objWebSiteLink.html($(this).attr('data-website'))
+				objWebSite.html('<span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-website"></span>');
+				objWebSite.append(objWebSiteLink);
+			}
+			
+			if($(this).attr('data-address')!=""){
+				var objAddress= $('<div/>',{'class':'adAddress'});
+				objAddress.html('<span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-address"></span>'+$(this).attr('data-address'));
+			}
+
+			var infoContainer = $('.footerInfo');
+			infoContainer.html('');
+			infoContainer.append(objPhone);
+			infoContainer.append(objWebSite);
+			infoContainer.append(objAddress);
+			
 			$('.md-trigger').click();
 		});
 		$("body").append(adContainer);
@@ -122,4 +195,15 @@ _flaskAd.GetAdImagesForMultipleEvents = function(Obj){
 
 _flaskAd.HideAds = function(){
 	$('#fixedfooter').hide();
+}
+
+_flaskAd.getImageInfoFromUUID = function(imageUUID, jsonObj){
+	var campaignImages = jsonObj.Images;
+	for(var iCount = 0 ; iCount < campaignImages.length ; iCount++){
+		var image =campaignImages[iCount]; 
+		if(image.imageUUID == imageUUID){
+			return image;
+		}
+	}
+	
 }
