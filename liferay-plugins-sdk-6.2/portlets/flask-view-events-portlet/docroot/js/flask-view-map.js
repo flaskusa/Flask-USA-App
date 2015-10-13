@@ -7,7 +7,7 @@ _flaskMap.longitude;
 _flaskMap.placeType;
 _flaskMap.markers = Array();
 _flaskMap.infos = Array();
-_flaskMap.allowedContent = Array();
+_flaskMap.allowedContent = ["Getting home","Traffic","Supplies","Tradition","Flask Us","Venue Map"];
 _flaskMap.cur_location;
 _flaskMap.initializeMap = function() {
 	try{
