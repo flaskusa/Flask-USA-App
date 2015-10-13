@@ -508,12 +508,10 @@ function initMenuList(objDetails){
 					if(b==objEventDetail.infoTypeCategoryName){
 						fnFillImageArray(obj.DetailImages,obj.Detail,objArray);					
 					}
-				}			});
-			if(!isMap){
-				fnCreateSlider1(divObj,objArray);				
-			}
-			else{
-				_flaskMap.allowedContent.push(b);
+				}			
+			});
+			if($.inArray(b,_flaskMap.allowedContent)>-1){
+				fnCreateSlider1(divObj,objArray);
 			}
 			$(divObj).appendTo(divTabs);
 			$(divTabs).appendTo(menuContainer);					
@@ -524,6 +522,8 @@ function initMenuList(objDetails){
 			height: '100%',
 			scrollPosition: 'both'
 		});	
+	 	$('.jqx-tabs-arrow-left').addClass('icon-arrow-left');
+	 	$('.jqx-tabs-arrow-right').addClass('icon-arrow-right');
 		//callMarkers(menuArray[0].toLowerCase());
 	}
 	else{
@@ -535,7 +535,7 @@ function initMenuList(objDetails){
 	$(divTabs).on('tabclick', function (event){
 		var clickedItem = event.args.item;
 		var text = $(this).jqxTabs('getTitleAt', clickedItem);
-		if($.inArray(text, _flaskMap.allowedContent)>-1){
+		if($.inArray(text, _flaskMap.allowedContent)==-1){
 			$('#gmap_canvas').remove();
 			$(this).jqxTabs('setContentAt', clickedItem,'<div id="gmap_canvas" style="height:100%;"></div>');
 			setTimeout(function(){
@@ -723,13 +723,19 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 function getSelectedTab(str){
 	var iCount = 0;
 	$('.jqx-tabs-titleContentWrapper').each(function(){
-		if($(this).html().replace(/&amp;/g, '&')==str && $.inArray($(this).html(), _flaskMap.allowedContent)>-1){
+		if($(this).html().replace(/&amp;/g, '&')==str && $.inArray($(this).html().replace(/&amp;/g, '&'), _flaskMap.allowedContent)==-1){
 			$('.jqx-tabs').jqxTabs('select', iCount);
 			$('#gmap_canvas').remove();
 			$(this).jqxTabs('setContentAt', iCount,'<div id="gmap_canvas" style="height:100%;"></div>');
 			_flaskMap.initializeMap();
 			callMarkers($(this).html().toLowerCase());
 			return false;
+		}
+		else{
+			if($(this).html().replace(/&amp;/g, '&')==str){
+				$('.jqx-tabs').jqxTabs('select', iCount);
+				return false;
+			}
 		}
 		iCount = iCount + 1; 
 	});
