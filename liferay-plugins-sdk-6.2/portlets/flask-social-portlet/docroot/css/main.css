@@ -428,3 +428,10 @@ div#jqxwindow {
 	height: 70px;
 	max-width: none !important;
 }
+
+@media screen and (max-width: 320px)
+{
+	.requests{
+		display: initial !important;
+	}
+}
