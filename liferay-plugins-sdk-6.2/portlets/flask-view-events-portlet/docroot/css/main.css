@@ -357,16 +357,7 @@ div#verticalScrollBarlistbox,#horizontalScrollBarlistbox {
 }
 
 .jqx-tabs-arrow-background.jqx-widget-header {
-    background-image: -webkit-linear-gradient(-90deg, #646464 0, black 100%) !important;
-    background-image: -moz-linear-gradient(180deg, #646464 0, black 100%) !important;
-    background-image: linear-gradient(180deg, #646464 0%, #000000 100%) !important;
-    background-position: 50% 50% !important;
-    -webkit-background-origin: padding-box !important;
-    background-origin: padding-box !important;
-    -webkit-background-clip: border-box !important;
-    background-clip: border-box !important;
-    -webkit-background-size: auto auto !important;
-    background-size: auto auto !important;
+	background-color: #393737;
 }
 
 .counterBox{
@@ -757,4 +748,8 @@ div#fixedfooter2
 .DetailedSlides .form-group .control-label {
     font-size: 20px !important;
     padding: 5px;
+}
+
+.jqx-tabs-arrow-background.jqx-widget-header span {
+    color: white;
 }
