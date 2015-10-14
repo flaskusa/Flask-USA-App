@@ -81,8 +81,8 @@ _flaskAd.GetAdImagesForMultipleEvents = function(Obj){
 			
 			if($(this).attr('data-address')!=""){
 				var objAddress= $('<div/>',{'class':'adAddress'});
-				var findUs = '&nbsp;&nbsp;<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+$(this).attr('data-address')+'">Find Us</a>';
-				objAddress.html('<span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-address"></span>'+$(this).attr('data-address')+findUs);
+				var findUsOnMap = _flaskMap.createMapLink($(this).attr('data-address'));
+				objAddress.html('<span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-address"></span>'+findUsOnMap);
 			}
 
 			var infoContainer = $('.footerInfo');
@@ -110,3 +110,22 @@ _flaskAd.getImageInfoFromUUID = function(imageUUID, jsonObj){
 		}
 	}
 }
+
+_flaskAd.isMobile = {
+	    Android: function() {
+	        return navigator.userAgent.match(/Android/i);
+	    },
+	    BlackBerry: function() {
+	        return navigator.userAgent.match(/BlackBerry/i);
+	    },
+	    iOS: function() {
+	        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+	    },
+	    Opera: function() {
+	        return navigator.userAgent.match(/Opera Mini/i);
+	    },
+	    Windows: function() {
+	        return navigator.userAgent.match(/IEMobile/i);
+	    }
+	};
+	//if(isMobile.any())
