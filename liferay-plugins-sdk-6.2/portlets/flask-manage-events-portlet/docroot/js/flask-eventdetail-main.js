@@ -76,6 +76,7 @@ function addDetailsClickHandlers() {
 	});
 
 	$(".cssAddEventDetails").click(function() {
+		window.location.hash = '#EventDetail';
 		$("#eventDetailId").val(0);
 		_flaskDetailCommon.loadInfoType('infoTypeId',1);
 		_flaskDetailCommon.loadContentType('infoTypeCategoryId',1);
@@ -87,6 +88,7 @@ function addDetailsClickHandlers() {
 	});
 
 	$(".cssVdCancel").click(function() {
+		window.location.hash = '#ManageEventContent';
 		$("#eventDetailsForm").hide();
 		$("#eventDetailsDataTable").show();
 		$("#slides").html("");
@@ -95,6 +97,28 @@ function addDetailsClickHandlers() {
 	});
 	$("#infoTypeId").change(function() {
 		_flaskDetailCommon.setContentType("infoTypeCategoryId",null, $("#infoTypeId").val(), _flaskDetailCommon.infoCategoryJSON);
+	});
+	$(window).hashchange( function(){
+		var hash = location.hash;
+		switch(hash) {
+	    case "#EventDetail":
+		    	$("#eventDetailId").val(0);
+				_flaskDetailCommon.loadInfoType('infoTypeId',1);
+				_flaskDetailCommon.loadContentType('infoTypeCategoryId',1);
+				$("#eventDetailsForm").show();
+				$("#eventDetailsDataTable").hide();
+				$("#eventDetailGallery").html("");
+				$(".cssVdSave").removeAttr("disabled");
+	        break;
+	    case "#ManageEventContent":
+		    	$("#eventDetailsForm").hide();
+				$("#eventDetailsDataTable").show();
+				$("#slides").html("");
+				loadEventDetailsData($('#eventForm #eventId').val());
+				$(".cssVdSave").removeAttr("disabled");
+	    default:
+	    	//alert("This is default");
+		}		
 	});
 }
 

@@ -4,6 +4,28 @@ var dropZoneLogo;
 var edit = false;
 
 function addClickHandlers() {
+	$("#mevent").click(function(){
+		window.location.hash = '#ManageEvent';
+	});
+	$("#mcontents").click(function(){
+		window.location.hash = '#ManageEventContent';
+	});
+	$(window).hashchange( function(){
+		var hash = location.hash;
+		switch(hash) {
+	    case "#mevents":
+	    	window.location.reload();
+			break;
+	    case "#ManageEvent":
+	    	$("#mevent").click();
+	        break;
+	    case "#ManageEventContent":
+	    	$("#mcontents").click();
+	        break;	        
+	    default:
+	    	//alert("This is default");
+		}		
+	});
 	eventForm = $("#eventForm");
 	/*	Initialize display elements*/
 
@@ -11,6 +33,7 @@ function addClickHandlers() {
 	/* Click handler for add user button*/
 
 	$(".cssAddUser").click(function() {
+		window.location.hash = '#ManageEvent';
 			$("#eventId").val(0);
 			eventForm.trigger('reset')
 			$("#eventDataTable").hide();
@@ -161,6 +184,7 @@ function deleteMultipleEvents(eventList) {
 
 /* Edit Event */
 function editEvent(rowData) {
+	window.location.hash = '#ManageEvent';
 		edit = true;
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("eventForm",  _eventModel.DATA_MODEL.EVENT, rowData, function(){});
@@ -300,6 +324,7 @@ function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel) {
 }
 
 $(document).ready(function() {
+	window.location.hash = '#mevents';
 	_repositoryId = $("#repositoryId").val();
 	validate();
 });

@@ -3,6 +3,12 @@ var venueForm;
 var dropZoneLogo;
 var iSelected;
 function addClickHandlers() {
+	$("#mvenues").click(function(){
+		window.location.hash = '#ManageVenue';
+	});
+	$("#mvcontents").click(function(){
+		window.location.hash = '#ManageVenueContent';
+	});
 	venueForm = $("#venueForm");
 	/*	Initialize display elements*/
 
@@ -10,6 +16,7 @@ function addClickHandlers() {
 	/* Click handler for add user button*/
 
 	$(".cssAddUser").click(function() {
+		window.location.hash = '#ManageVenue';
 			$("#venueId").val(0);
 			venueForm.trigger('reset');
 			_flaskLib.loadCountries('venueCountryId');
@@ -18,8 +25,8 @@ function addClickHandlers() {
 			$("#formContainer").show();
 			fnBuildVenueUpload(imageContainer);
 			if (parseInt($("#venueId").val())==0) {
-				$("#mcontents").attr("data-toggle","");
-				$("#mcontents").css("cursor","not-allowed");
+				$("#mvcontents").attr("data-toggle","");
+				$("#mvcontents").css("cursor","not-allowed");
 			}
 	});
 	/* Click handler for save button*/
@@ -82,13 +89,29 @@ function addClickHandlers() {
 
 	/*	Toggle search boxes */
 	$(".cssSearchUser").click(GRID_PARAM_VENUE.toggleSearchBoxes);
-	$("#mcontents").click(function() {
+	$("#mvcontents").click(function() {
 		if (parseInt($("#venueId").val())==0) {
 			_flaskLib.showWarningMessage('action-msg-warning', _venueModel.MESSAGES.ADD_VENUE_FIRST_ERR);
 		}
 	});
 	$("#venueCountryId").change(function() {
 		  _flaskLib.loadRegions('venueStateId', $("#venueCountryId").val());
+	});
+	$(window).hashchange( function(){
+		var hash = location.hash;
+		switch(hash) {
+	    case "#venue":
+	    	window.location.reload();
+			break;
+	    case "#ManageVenue":
+	    	$("#mvenues").click();
+	        break;
+	    case "#ManageVenueContent":
+	    	$("#mvcontents").click();
+	        break;	        
+	    default:
+	    	//alert("This is default");
+		}		
 	});
 }
 
@@ -185,6 +208,7 @@ function deleteMultipleVenues(venueList) {
 
 /* Edit Venue */
 function editVenue(rowData) {
+	window.location.hash = '#ManageVenue';
 		var container = $('#venueGallery');
 		container.html("");
 		_flaskLib.loadDataToForm("venueForm",  _venueModel.DATA_MODEL.VENUE, rowData, function(){});
@@ -227,8 +251,8 @@ function saveVenue() {
 						$("#venueForm #venueId").val(data.venueId);
 						_flaskLib.showSuccessMessage('action-msg', _venueModel.MESSAGES.SAVE);
 						if (parseInt(params.venueId) == 0 && parseInt(data.venueId) > 0) {
-							$("#mcontents").attr("data-toggle","tab");
-							$("#mcontents").css("cursor","default");
+							$("#mvcontents").attr("data-toggle","tab");
+							$("#mvcontents").css("cursor","default");
 							IsNew = true;
 						}
 						if ($(".dz-image").length>0) {
@@ -305,6 +329,7 @@ function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel) {
 }
 
 $(document).ready(function() {
+	window.location.hash = '#venue';
 	if($('#venueForm').length == 0)
 		return;
 	$('#venueForm').jqxValidator
