@@ -80,6 +80,12 @@ public class FlaskMessagesServiceWrapper implements FlaskMessagesService,
 	}
 
 	@Override
+	public int getMyFlaskMessagesCount(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskMessagesService.getMyFlaskMessagesCount(serviceContext);
+	}
+
+	@Override
 	public void deleteMessage(long messageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_flaskMessagesService.deleteMessage(messageId, serviceContext);

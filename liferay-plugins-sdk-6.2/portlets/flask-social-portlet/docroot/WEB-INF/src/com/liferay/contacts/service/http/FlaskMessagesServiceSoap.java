@@ -111,6 +111,21 @@ public class FlaskMessagesServiceSoap {
 		}
 	}
 
+	public static int getMyFlaskMessagesCount(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			int returnValue = FlaskMessagesServiceUtil.getMyFlaskMessagesCount(serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteMessage(long messageId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {

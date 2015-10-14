@@ -84,7 +84,6 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	
 	@Override
 	public JSONArray getAllMyFlaskMessages(ServiceContext serviceContext){
-		List<FlaskMessages> flaskMessages = new ArrayList<FlaskMessages>();
 		List<FlaskRecipients> flaskRecipients = null;
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		try {
@@ -130,8 +129,23 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	}
 	
 	@Override
+	public int getMyFlaskMessagesCount(ServiceContext serviceContext){
+		List<FlaskRecipients> flaskRecipients = new ArrayList<FlaskRecipients>();
+		int count = 0;
+		try {
+			flaskRecipients = FlaskRecipientsUtil.findByUserId(serviceContext.getUserId());
+			for(FlaskRecipients recp: flaskRecipients){
+				count++;
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return count;
+	}
+	
+	@Override
 	public void deleteMessage(long messageId, ServiceContext serviceContext){
-		List<FlaskMessages> flaskMessages = new ArrayList<FlaskMessages>();
 		List<FlaskRecipients> recipients = new ArrayList<FlaskRecipients>();
 		try {
 			FlaskMessages msg = FlaskMessagesLocalServiceUtil.getFlaskMessages(messageId);

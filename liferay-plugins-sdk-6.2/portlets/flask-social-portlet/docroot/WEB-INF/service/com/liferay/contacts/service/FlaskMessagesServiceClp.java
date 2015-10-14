@@ -51,9 +51,15 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName6 = "deleteMessage";
+		_methodName6 = "getMyFlaskMessagesCount";
 
 		_methodParameterTypes6 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName7 = "deleteMessage";
+
+		_methodParameterTypes7 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -194,11 +200,36 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	}
 
 	@Override
+	public int getMyFlaskMessagesCount(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6,
+					new Object[] { ClpSerializer.translateInput(serviceContext) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
 	public void deleteMessage(long messageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName6,
-				_methodParameterTypes6,
+			_invokableService.invokeMethod(_methodName7,
+				_methodParameterTypes7,
 				new Object[] {
 					messageId,
 					
@@ -231,4 +262,6 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	private String[] _methodParameterTypes5;
 	private String _methodName6;
 	private String[] _methodParameterTypes6;
+	private String _methodName7;
+	private String[] _methodParameterTypes7;
 }

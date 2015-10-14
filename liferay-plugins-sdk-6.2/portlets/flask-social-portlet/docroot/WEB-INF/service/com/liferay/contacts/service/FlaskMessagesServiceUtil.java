@@ -82,6 +82,11 @@ public class FlaskMessagesServiceUtil {
 		return getService().getMyUnreadFlaskMessages(serviceContext);
 	}
 
+	public static int getMyFlaskMessagesCount(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getMyFlaskMessagesCount(serviceContext);
+	}
+
 	public static void deleteMessage(long messageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService().deleteMessage(messageId, serviceContext);

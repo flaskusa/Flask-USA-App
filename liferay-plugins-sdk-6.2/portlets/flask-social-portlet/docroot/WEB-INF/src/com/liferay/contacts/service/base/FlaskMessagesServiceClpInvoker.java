@@ -51,9 +51,15 @@ public class FlaskMessagesServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName41 = "deleteMessage";
+		_methodName41 = "getMyFlaskMessagesCount";
 
 		_methodParameterTypes41 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName42 = "deleteMessage";
+
+		_methodParameterTypes42 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -92,6 +98,11 @@ public class FlaskMessagesServiceClpInvoker {
 
 		if (_methodName41.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
+			return FlaskMessagesServiceUtil.getMyFlaskMessagesCount((com.liferay.portal.service.ServiceContext)arguments[0]);
+		}
+
+		if (_methodName42.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
 			FlaskMessagesServiceUtil.deleteMessage(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
@@ -113,4 +124,6 @@ public class FlaskMessagesServiceClpInvoker {
 	private String[] _methodParameterTypes40;
 	private String _methodName41;
 	private String[] _methodParameterTypes41;
+	private String _methodName42;
+	private String[] _methodParameterTypes42;
 }
