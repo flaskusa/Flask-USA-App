@@ -250,21 +250,19 @@ function createCustomerTable(data, model, grid, menuDivId, actionColText,context
             {
                 width: '100%',
                 source: dataAdapter,
-                height:'70%',
                 columnsheight : 40,
 				columnsmenuwidth : 40,
 				rowsheight : 34,
                 theme:	'custom',
-             // Pageing config
                 pageable : true,
                 pagermode : 'simple',
                 rowdetails: true,
                 showrowdetailscolumn:false,
+                autoheight: true,
                 rowdetailstemplate: GRID_PARAM_CUSTOMER.rowDetailTemplate(rowDetailDivArr , 200),
                 initrowdetails: GRID_PARAM_CUSTOMER.initrowdetails,
                 columns: adCustomerColumns,
-                pagesize: 20,
-                autoheight: true
+                pagesize: 20
             });
     
 	}

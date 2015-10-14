@@ -60,7 +60,8 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 	
 	private static Log LOGGER = LogFactoryUtil.getLog(CampaignEventServiceImpl.class);
 	private static int  IMAGE_DURATION = 4; // 4 seconds 
-	private static int MAX_IMAGES_PER_HOUR =  60*60/IMAGE_DURATION;  /* 4 second each image mean 15 per minute*/
+	//private static int MAX_IMAGES_PER_HOUR =  60*60/IMAGE_DURATION;  /* 4 second each image mean 15 per minute*/
+	private static int MAX_IMAGES_PER_HOUR =  10;
 	
 	@Override
 	public List<CampaignEvent> getCampaignEvents(long campaignId, ServiceContext serviceContext){
@@ -112,6 +113,9 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 		
 		try{
 			eventIdList = FlaskUtil.sanitizeIdList(eventIdList);
+			if(eventIdList.isEmpty()) {
+				return imageJson;
+			}
 			campaignList = AdCampaignFinderUtil.getCampaignDetailsForEvents(eventIdList);
 			for (Object obj : campaignList) {
 				serilizeString = JSONFactoryUtil.serialize(obj);
