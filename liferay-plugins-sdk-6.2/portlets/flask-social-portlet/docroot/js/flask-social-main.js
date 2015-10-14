@@ -1,5 +1,6 @@
 var _startPosFriends = 0; 
 var _endPosFriends = 99;
+var _msgCount=0;
 
 var _startPos = 0; 
 var _endPos = 9;
@@ -275,10 +276,26 @@ function initSearch(){
 }
 
 function initNotifications(){
+	refreshMessages();
 	getRequestCount();
 	//getUnreadMessages();
 	getMyAllMessages();
 	getRequestList();
+}
+
+function refreshMessages(){
+	setInterval(function(){
+			var flaskRequest = new Request();
+			flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_MESSAGES_COUNT, 
+			function(data){
+				if(data!=_msgCount){
+					getMyAllMessages();
+					_msgCount=data;
+				}
+			} , function(error){
+				_flaskLib.showErrorMessage('action-msg','Error in getting messages count');
+			});	
+	    },500);
 }
 
 function getRequestCount(){
@@ -301,7 +318,6 @@ function fnSendMessage(userId, preMsg){
 	$('#md-send').click(function(){
 		if ($('#formTab').jqxValidator('validate')){
 		if($("#iMsg").val()!=""){
-			
 				$('#md-send').unbind();
 				$('#spinningSquaresG').show();
 				var selectedFriend = userId;
@@ -385,7 +401,6 @@ function fnBuildRequestMenu(obj,htmlObject){
 			buttonAccept.click(function(){
 				acceptFriendRequest(UserId,htmlObject);
 			});
-			var buttonReject = $('<button/>',{'class':'btn btn-primary','type':'button','style':'margin-left: 10px !important;'})
 			buttonReject.html('Ignore');
 			buttonReject.click(function(){
 				ignoreFriendRequest(UserId,htmlObject);
@@ -574,6 +589,7 @@ function setRead(messageId){
 }
 
 function renderMessageList(obj){
+	
 	$('#MessageCount').html(obj.length);
 	var divRow = "#MyMessages";
 	var maxLength = 30;
@@ -668,6 +684,7 @@ function deleteMessage(messageId, objTable){
 	 flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.DELETE_MESSAGE, param,
 	    function (data){
 		 	$(objTable).hide('slow');
+		 	getMyAllMessages();
 	     } ,
 	     function (data){
 	    	 console.log("Error in getting Messages: " + data );
