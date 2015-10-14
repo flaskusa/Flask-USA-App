@@ -49,8 +49,8 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 	</div>
 	<div id="formContainer" style="display:none">
 		<ul class="nav nav-tabs">
-		  <li class="active"><a href="#venues" data-toggle="tab">Manage Venue</a></li>
-		  <li><a href="#contents" data-toggle="tab" id="mcontents">Manage Content</a></li>
+		  <li class="active"><a href="#venues" id="mvenues" data-toggle="tab">Manage Venue</a></li>
+		  <li><a href="#contents" data-toggle="tab" id="mvcontents">Manage Content</a></li>
 		</ul>
 		<div class="tab-content">
 		  <div class="tab-pane active" id="venues">
