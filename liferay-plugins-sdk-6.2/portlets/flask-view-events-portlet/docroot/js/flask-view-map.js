@@ -8,6 +8,7 @@ _flaskMap.placeType;
 _flaskMap.markers = Array();
 _flaskMap.infos = Array();
 _flaskMap.allowedContent = ["Getting home","Traffic","Supplies","Tradition","Flask Us","Venue Map"];
+
 _flaskMap.cur_location;
 _flaskMap.initializeMap = function() {
 	try{
@@ -189,9 +190,9 @@ _flaskMap.createMarkers = function (results, status) {
     	google.maps.event.addListener(venue_mark, 'click', (function(venue_mark) {
         	return function() {
         		_flaskMap.clearInfos();
-        		var findUs = '&nbsp;&nbsp;<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+venueAddr+'">Find Us</a>';
+        		var findUsOnMap = _flaskMap.createMapLink(venueAddr);
                 var content= '<div style="display: inline-flex;height:100px;"><font style="color:#000;"><b>' + venueName + 
-                '</b><br /><br />' + venueAddr + '</font>'+findUs+'</div>';
+                '</b><br /><br />' + findUsOnMap + '</font></div>';
                 infowindow.setContent(content);
                 infowindow.open(_flaskMap.map,venue_mark);
         	}
@@ -218,9 +219,9 @@ _flaskMap.createMarkers = function (results, status) {
             google.maps.event.addListener(mark, 'click', (function(mark, i) {
             	return function() {
             		_flaskMap.clearInfos();
-            		var findUs = '&nbsp;&nbsp;<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+results[i].vicinity+'">Find Us</a>';
+            		var findUsOnMap = _flaskMap.createMapLink(results[i].vicinity);
 	                var content= '<div style="display: inline-flex;height:100px;"><img src="' + results[i].icon + '" style="width:34px; height:34px;"/>&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:#000; "><b>' + results[i].name + 
-	                '</b><br /><br />Vicinity: ' + results[i].vicinity + '</font>'+findUs+'</div>';
+	                '</b><br /><br />'+findUsOnMap+'</font></div>';
 	                infowindow.setContent(content);
 	                infowindow.open(_flaskMap.map, mark);
             	}
@@ -274,13 +275,40 @@ _flaskMap.myMarkers = function(){
 			        visible: true,
 			        class: 'flask_icons'
 			    });
+				console.log(obj);
 				 _flaskMap.markers.push(mark);
 				 var infowindow = new google.maps.InfoWindow();
 		            google.maps.event.addListener(mark, 'click', (function(mark, i) {
 		            	return function() {
 		            		_flaskMap.clearInfos();
-		            		var findUs = '&nbsp;&nbsp;<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+obj.addrLine1+'">Find Us</a>';
-			                var content= '<div style="display: inline-flex;height:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:30px;height:30px;"/><font style="color:#000;"><b>'+obj.infoTitle+'</b><br/><br/>'+obj.addrLine1+'</font>'+findUs+'</div>';
+		            		
+		            		var findUsOnMap = _flaskMap.createMapLink(obj.addrLine1);
+		            		var content= '<div style="display: inline-flex;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:30px;height:30px;"/><font style="color:#000;">&nbsp;&nbsp;<b>'+obj.infoTitle+'</b><br/></div>';
+		        			if(obj.phone!=""){
+		        				var objPhone= $('<div/>');
+		        				objPhone.html('<div class="adPhone"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-phone"></span><a href="tel:'+obj.phone+'">'+obj.phone+'</a></div>');
+		        				content = content + objPhone.html();
+		        			}
+		        			
+		        			if(obj.website!=""){
+		        				var objWebSite = $('<div/>');
+		        				objWebSite.html('<div class="adWebSite"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-website"></span><a href="'+obj.website+'" target="_blank">'+obj.website+'</a></div>');
+		        				content = content + objWebSite.html();
+		        			}
+		        			
+		        			if(obj.addrLine1!=""){
+		        				var objAddress= $('<div/>');
+		        				var findUsOnMap = _flaskMap.createMapLink(obj.addrLine1);
+		        				objAddress.html('<div class="adAddress"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-address"></span>'+findUsOnMap+'</div>');
+		        				content = content + objAddress.html();
+		        			}		            		
+		        			
+		        			if(obj.infoDesc!=""){
+		        				var objInfoDesc= $('<div/>');
+		        				objInfoDesc.html('<div class="adDescription"><span aria-label="Address" role="img" class="widget-pane-section-info-icon"></span>Flask us:<br/>'+obj.infoDesc+'</div>');
+		        				content = content + objInfoDesc.html();
+		        			}		            		
+
 			                infowindow.setContent(content);
 			                infowindow.open(_flaskMap.map, mark);
 		            	}
@@ -307,4 +335,24 @@ _flaskMap.createMarker = function (obj) {
 			}
 		}
 	return isSubscribed;
+}
+
+_flaskMap.createMapLink = function(address1){
+	var findUs = '';
+	if(_flaskAd.isMobile.Android()){
+		findUs = '<a href="geo:'+address1+'" class="addressLink">'+address1+'</a>'
+	}
+	else if(_flaskAd.isMobile.BlackBerry()){
+		findUs = '<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
+	}
+	else if(_flaskAd.isMobile.iOS()){
+		findUs = '<a href="http://maps.apple.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
+	}
+	else if(_flaskAd.isMobile.Windows()){
+		findUs = '<a href="maps:'+address1+'">'+address1+'</a>'
+	}
+	else{
+		findUs = '<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
+	}
+	return findUs;
 }

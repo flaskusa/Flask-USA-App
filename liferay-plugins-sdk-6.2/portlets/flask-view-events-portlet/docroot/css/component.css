@@ -755,6 +755,11 @@ perspective effects (not including the modals and the overlay).
     padding: 5px;
 }
 
+.adAddress>a {
+    color: #ff8000 !important;
+    text-decoration: underline !important;
+}
+
 .adPhone span, .adWebSite span, .adAddress span{
     vertical-align: middle !important;
 }
