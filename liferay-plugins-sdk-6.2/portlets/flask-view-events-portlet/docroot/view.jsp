@@ -127,8 +127,7 @@
 
 <div class="md-modal md-effect-14" id="modal-advertisement">
 	<div class="md-content">
-		<h3 id="myModalLabel">Modal Dialog</h3>
-		<span class='md-closeBtn'>x</span>
+		<h3 id="myModalLabel"><span id='adTitle'>Modal Dialog</span><span class='md-closeBtn icon-remove'></span></h3>
 		<div>
 			<div class="imageContainer"></div>
 			<div class="footerInfo"></div>

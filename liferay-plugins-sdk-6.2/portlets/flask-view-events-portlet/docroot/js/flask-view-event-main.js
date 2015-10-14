@@ -64,7 +64,7 @@ function renderEventList(tdata) {
 		 		$('#one').hide();
 		 		$("#weather-background").show();
 		 		fnGetEventImages($(this).attr("data-id"),$(this).attr("data-venueId"));
-		 		showEventAds($(this).attr("data-id"));
+		 		showAds($(this).attr('data-id'));
 		 		window.location.hash = '#Gallery';
 		 	});
 		 	if(Liferay.ThemeDisplay.isSignedIn()){
@@ -350,7 +350,7 @@ $(document).ready(function(){
 			$('#one').show();
 			$('#two').hide();
 			$('#three').hide();
-			showAds();
+			showAds(0);
 			break;
 	    case "#Gallery":
 			$('#one').hide();
@@ -429,7 +429,7 @@ function initEventList(){
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS , params, 
 		function (data){
 			renderEventList(data);
-			showAds();
+			showAds(0);
 		} ,
 		function (data){
 			console.log("Error in getting event list" + data );
@@ -579,7 +579,7 @@ function getFilteredEvents(){
 	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_FILTERED_EVENTS, params, 
 	function(data){
 		renderEventList(data);
-		showAds();
+		showAds(0);
 	} , function(error){
 		_flaskLib.showErrorMessage('action-msg',_eventModel.MESSAGES.SEARCH_ERR);
 	});	
@@ -670,11 +670,17 @@ function fnCreateSlider1(containerID,arrImage){
 	}	
 }
 
-function showAds(){
+function showAds(eventId){
 	var eventList = "0";
-	$(".eventList").each(function(){
-		eventList = $(this).attr('data-id') + "," + eventList
-	});
+	if(eventId == 0){
+		$(".eventList").each(function(){
+			eventList = $(this).attr('data-id') + "," + eventList
+		});
+	}
+	else{
+		eventList = eventId
+	}
+	
 	_flaskAd.HideAds();
 	_flaskAd.ShowAdByEventIds(eventList);
 	//below part will go to theme
@@ -682,12 +688,6 @@ function showAds(){
 		$('#modal-advertisement').removeClass('md-show');
 	});	
 }
-
-function showEventAds(eventId){
-	_flaskAd.HideAds();
-	_flaskAd.ShowAdByEventId(eventId);
-}
-
 
 function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCategory,temp){
 	var objEventDetails = jQuery.parseJSON(eventDetails);

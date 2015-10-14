@@ -189,8 +189,9 @@ _flaskMap.createMarkers = function (results, status) {
     	google.maps.event.addListener(venue_mark, 'click', (function(venue_mark) {
         	return function() {
         		_flaskMap.clearInfos();
+        		var findUs = '&nbsp;&nbsp;<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+venueAddr+'">Find Us</a>';
                 var content= '<div style="display: inline-flex;height:100px;"><font style="color:#000;"><b>' + venueName + 
-                '</b><br /><br />' + venueAddr + '</font></div>';
+                '</b><br /><br />' + venueAddr + '</font>'+findUs+'</div>';
                 infowindow.setContent(content);
                 infowindow.open(_flaskMap.map,venue_mark);
         	}
@@ -217,8 +218,9 @@ _flaskMap.createMarkers = function (results, status) {
             google.maps.event.addListener(mark, 'click', (function(mark, i) {
             	return function() {
             		_flaskMap.clearInfos();
+            		var findUs = '&nbsp;&nbsp;<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+results[i].vicinity+'">Find Us</a>';
 	                var content= '<div style="display: inline-flex;height:100px;"><img src="' + results[i].icon + '" style="width:34px; height:34px;"/>&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:#000; "><b>' + results[i].name + 
-	                '</b><br /><br />Vicinity: ' + results[i].vicinity + '</font></div>';
+	                '</b><br /><br />Vicinity: ' + results[i].vicinity + '</font>'+findUs+'</div>';
 	                infowindow.setContent(content);
 	                infowindow.open(_flaskMap.map, mark);
             	}
@@ -277,7 +279,8 @@ _flaskMap.myMarkers = function(){
 		            google.maps.event.addListener(mark, 'click', (function(mark, i) {
 		            	return function() {
 		            		_flaskMap.clearInfos();
-			                var content= '<div style="display: inline-flex;height:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:30px;height:30px;"/><font style="color:#000;"><b>'+obj.infoTitle+'</b><br/><br/>'+obj.addrLine1+'</font></div>';
+		            		var findUs = '&nbsp;&nbsp;<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+obj.addrLine1+'">Find Us</a>';
+			                var content= '<div style="display: inline-flex;height:100px;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:30px;height:30px;"/><font style="color:#000;"><b>'+obj.infoTitle+'</b><br/><br/>'+obj.addrLine1+'</font>'+findUs+'</div>';
 			                infowindow.setContent(content);
 			                infowindow.open(_flaskMap.map, mark);
 		            	}

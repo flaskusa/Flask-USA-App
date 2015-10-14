@@ -27,7 +27,6 @@
 	    <footer-portlet-javascript>/js/modernizr.custom.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/classie.js</footer-portlet-javascript>
 	    <footer-portlet-javascript>/js/modalEffects.js</footer-portlet-javascript>
-	    <!--<footer-portlet-javascript>/js/flask-export-pdf.js</footer-portlet-javascript>-->
 	    <css-class-wrapper>flask-view-events-portlet</css-class-wrapper>
 	 </portlet>
 	 <portlet>

@@ -737,15 +737,13 @@ perspective effects (not including the modals and the overlay).
 .md-closeBtn {
     float: right;
     font-family: cursive;
-    font-size: 30px;
+    font-size: 21px;
     color: #FFF;
-    margin-right: 15px;
     margin-top: 6px;
     display: grid;
-    position: fixed;
     right: 0px;
     top: 0px;
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .footerInfo {
@@ -755,6 +753,10 @@ perspective effects (not including the modals and the overlay).
 }
 .adPhone, .adWebSite, .adAddress {
     padding: 5px;
+}
+
+.adPhone span, .adWebSite span, .adAddress span{
+    vertical-align: middle !important;
 }
 
 .widget-pane-section-info-website {
