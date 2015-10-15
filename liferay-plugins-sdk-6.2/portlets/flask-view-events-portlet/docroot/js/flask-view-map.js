@@ -283,7 +283,7 @@ _flaskMap.myMarkers = function(){
 		            		_flaskMap.clearInfos();
 		            		
 		            		var findUsOnMap = _flaskMap.createMapLink(obj.addrLine1);
-		            		var content= '<div style="display: inline-flex;">&nbsp;&nbsp;&nbsp;&nbsp;<img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:30px;height:30px;"/><font style="color:#000;">&nbsp;&nbsp;<b>'+obj.infoTitle+'</b><br/></div>';
+		            		var content= '<div style="display: inline-flex;"><img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:30px;height:30px;"/><font style="color:#000;">&nbsp;&nbsp;<b>'+obj.infoTitle+'</b><br/></div>';
 		        			if(obj.phone!=""){
 		        				var objPhone= $('<div/>');
 		        				objPhone.html('<div class="adPhone"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-phone"></span><a href="tel:'+obj.phone+'">'+obj.phone+'</a></div>');
@@ -305,7 +305,7 @@ _flaskMap.myMarkers = function(){
 		        			
 		        			if(obj.infoDesc!=""){
 		        				var objInfoDesc= $('<div/>');
-		        				objInfoDesc.html('<div class="adDescription"><span aria-label="Address" role="img" class="widget-pane-section-info-icon"></span>Flask us:<br/>'+obj.infoDesc+'</div>');
+		        				objInfoDesc.html('<div class="adDescription"><b>Flask us:</b><br/>'+obj.infoDesc+'</div>');
 		        				content = content + objInfoDesc.html();
 		        			}		            		
 

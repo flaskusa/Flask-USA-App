@@ -231,41 +231,46 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 					var objContent = $("<div/>",{'class':'DetailedSlides'});
 					$.each(obj,function(key,value){
 						var evalue = eval("objEventDetails."+key);
-						var caption = value;
-						var captionObj = $('<div/>',{'width':'100%','font-size':'18px'}).html(caption);
-						var divFormGroup = $('<div/>',{'class':'form-group'});
-						var lblControlLabel = $('<label/>',{'class':'control-label','for':caption});
-						lblControlLabel.append(captionObj);
-						var divControls = $('<div/>',{'class':'controls','id':caption});
-						switch(caption) {
-							case  "Phone": 
-								var objAnchor = $("<a/>",{'href':'tel:'+evalue});
-								objAnchor.html(evalue);
-								divControls.append(objAnchor);
-						        break;
-						    case "Website":
-								var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
-								objAnchor.html(evalue);
-								divControls.append(objAnchor);							
-						        break;
-						    case "Title":
-						    	captionObj.html(evalue);
-						    	divControls.html('');
-								var objImage = jQuery.parseJSON(objImg.DetailImage);
-								if(objImage.imageUUID!=""){
-									imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
-									var imgDiv = $('<img/>',{'src':imgURL,'height':'100%','width':'100%'});
-									divControls.append(imgDiv);
-									divControls.css('height','24vh !important');
-								}
-						    	break;
-						    default:
-						    	divControls.html(evalue);				    	
-						    	break;
-						}		
-						divFormGroup.append(lblControlLabel);
-						divFormGroup.append(divControls);
-						divFormGroup.appendTo($(objContent));
+						if(evalue!=''){
+							var caption = value;
+							var captionObj = $('<div/>',{'width':'100%','font-size':'18px'}).html(caption);
+							var divFormGroup = $('<div/>',{'class':'form-group'});
+							var lblControlLabel = $('<label/>',{'class':'control-label','for':caption});
+							lblControlLabel.append(captionObj);
+							var divControls = $('<div/>',{'class':'controls','id':caption});
+							switch(caption) {
+								case  "Phone": 
+									var objAnchor = $("<a/>",{'href':'tel:'+evalue});
+									objAnchor.html(evalue);
+									divControls.append(objAnchor);
+							        break;
+							    case "Website":
+									var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
+									objAnchor.html(evalue);
+									divControls.append(objAnchor);							
+							        break;
+							    case "Title":
+							    	captionObj.html(evalue);
+							    	divControls.html('');
+									var objImage = jQuery.parseJSON(objImg.DetailImage);
+									if(objImage.imageUUID!=""){
+										imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+objImage.imageUUID+"&groupId="+objImage.imageGroupId;
+										var imgDiv = $('<img/>',{'src':imgURL,'height':'100%','width':'100%'});
+										divControls.append(imgDiv);
+										divControls.css('height','24vh !important');
+									}
+							    	break;
+							    case "Description":
+							    	captionObj.html('<b>Flask Us</b>');
+							    	break;
+							    default:
+							    	divControls.html(evalue);				    	
+							    	break;
+							}		
+							divFormGroup.append(lblControlLabel);
+							divFormGroup.append(divControls);
+							divFormGroup.appendTo($(objContent));							
+						}
 					});
 					objArray.push(objContent);			
 				});
@@ -305,6 +310,10 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 				    	captionObj.html(evalue);
 				    	divControls.html('');
 				    	break;
+				    case "Description":
+				    	captionObj.html('<b>Flask Us</b>');
+				    	divControls.html(evalue);	
+				    	break;				    	
 				    default:
 				    	divControls.html(evalue);				    	
 				    	break;

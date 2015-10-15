@@ -764,6 +764,15 @@ perspective effects (not including the modals and the overlay).
     vertical-align: middle !important;
 }
 
+.adDescription {
+    margin-left: 38px;
+}
+
+span.description {
+    display: inline-block;
+    width: 85%;
+}
+
 .widget-pane-section-info-website {
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAAIGNIUk0AAHolAACAgwAA+f8AAIDpAAB1MAAA6mAAADqYAAAXb5JfxUYAAALfSURBVFjD7Zk7axVBFMdXFC1sNAr6ASQI5r4+gAg2diKIQbCwEyzsRBJQXPdRaSUasLBXMCiIhYJskSKFtxDBIljeUnyEm0IR/Ps/m/U6DrP37mM2mssMDLPJzs6Z35wzc86Z6wHwtnP1HIADcAAOwAE0ClC0HPOxuxPjVDfCfdakG2ON7TCtm8+JvJM+0rfouI0DcDKHOcGlXoT1XgwUquwr38i3/wzgyBXs6YQIOJGNwhPXqnwrY8hYWwogK8dVXK06cYNGVvO0YR2gFaDFlRvUWPX3nQjXuR8+af8fyNiNAmT2Pqi52o9krKOLOMDnJzqErglrAGKndc2GE/zZC3BCnSA1cVs3J3VPWAOQzVZj1X9wom/bIU4brHwH3z9U+4ssqwCZ6WyUXO1LhZ3IOexk/6fq6fTblKwApOd8eXMpDsAy6+MgtfRF+X7JCoB4zVJOqiJAth+uqc5OZNcGENdfxe7bEc6WBUi1EOPbaC9Qdm0AiV8KbNKPbPtpjfCGk7jn+djlVSiU92KkRcq2AZAoZvE4m+zf5hLhgWepUMaiMm5SH4CRpDLgxTkfbR3CKkCIM8qCrdnQwHBk1yFOihAdwiZAO8BxZdyhVQDVi0rcYjKnsScT4x+zM/tTRIZdAMWEOgHmVWEmcyoAsTJBA+dtm1CinDYLusAKEP2xGqAMu5tYPUYjvDYJLQnRn3CMJlaPUdWRccDvXR/7ciFifK0D0FrAfgn8rDoyPZSgXd7MVf+mM6sMwETnlvVQQg/mJODiwDM56l8p4rXl2OXzXbYXJBJVEpx168GcKZym4GfGFYxxp3TQF+GlhB1snzcWTpsSGnH5hmR/hu8+VIBIGk1o8lJK035oX8XeXojL7Puu6g1FIynlmKR+2XQlktl52RyiuaR+3LUK//7M9sZcjENVAbbkWmXSxVbqJ2K8SvcLnd5/ebE1FVeLU3G5u22u190vNA7AATgABzDVAL8AhKRQnqm6xZYAAAAASUVORK5CYII=);
 }
