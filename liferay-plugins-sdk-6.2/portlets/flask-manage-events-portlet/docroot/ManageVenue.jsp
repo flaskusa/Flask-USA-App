@@ -26,18 +26,11 @@ themeDisplay.getLayout().getUuid();
 boolean isAuthorised = renderRequest.isUserInRole("administrator") || 
 						renderRequest.isUserInRole("flask-admin") 
 						|| renderRequest.isUserInRole("flask-content-manager");
-boolean isSignedin = themeDisplay.isSignedIn();
 %>
 
 
 <body class="default">
 
-<c:if test="<%= !isSignedin %>">
-			<div id="action-msg1" class="alert alert-error">
-				You are not signed-in to view this page.
-			</div>
-</c:if>
-<c:if test="<%= isSignedin %>">
 <c:if test="<%= !isAuthorised %>">
 			<div id="action-msg1" class="alert alert-error">
 				You are not authorize to view this page.
@@ -216,7 +209,6 @@ function initialize(portletId, portlet) {
 	}
 }
 </script>
-</c:if>
 </c:if> <!-- check if authorized -->  
 <div class="md-modal md-effect-14" id="modal-advertisement">
 	<div class="md-content">
