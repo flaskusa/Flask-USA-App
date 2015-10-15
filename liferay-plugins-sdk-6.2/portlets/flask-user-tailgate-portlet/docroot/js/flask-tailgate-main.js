@@ -5,11 +5,59 @@ var tailgateId;
 var events = [];
 var iSelected = false;
 function addClickHandlers(){
+	
+	$(window).hashchange( function(){
+		var hash = location.hash;
+		switch(hash) {
+	    case "#UserTailgate":
+	    	$("#tailgateDataTable").show();
+			$("#formContainer").hide();
+			eventForm.hide();
+			$("#addTailgateMembersForm").hide();
+			$("#addTailgateGroupForm").hide();
+			break;
+	    case "#ManageTailgate":
+	    	$("#mtailgate").click();
+	        break;
+	    case "#ManageTailgateContent":
+	    	$("#mcontents").click();
+	        break;	   
+	    case "#ManageTailgateUser":
+	    	$("#musers").click();
+	        break;
+	    case "#AddTailgateGroups":
+		    	fetchTailgateGroupDetail(rowData.tailgateId);
+		    	prepareTailgateGroupGrid();
+		    	$("#tailgateDataTable").hide();
+		    	$("#addTailgateGroupForm").show();
+	        break;
+	    case "#AddTailgateMembers":
+	    	fetchTailgateMemberDetail(rowData.tailgateId);
+	    	prepareTailgateMemberGrid();
+	    	$("#tailgateDataTable").hide();
+	    	$("#addTailgateMembersForm").show();
+	    	$("#tailgateMemberDataGrid").show();
+        break;
+	    default:
+	    	//alert("This is default");
+		}		
+	});
+	
+	$("#mtailgate").click(function(){
+		window.location.hash = '#ManageTailgate';
+	});
+	$("#mcontents").click(function(){
+		window.location.hash = '#ManageTailgateContent';
+	});
+	$("#musers").click(function(){
+		window.location.hash = '#ManageTailgateUser';
+	});
 	eventForm = $("#tailgateForm");
 	$(".cssDelete").hide();	
 	/* Click handler for add user button*/
 	
 	$(".cssAddUser").click(function(){
+		window.location.hash = '#ManageTailgate';
 			$("#tailgateId").val(0);
 			tailgateId = 0;
 			eventForm.trigger('reset')
@@ -36,6 +84,7 @@ function addClickHandlers(){
 	/* Click handler for cancel button*/
 
 	$(".clsCancel").click(function(){
+		window.location.hash = '#UserTailgate';
 		$("#tailgateDataTable").show();
 		$("#formContainer").hide();
 	});
@@ -268,6 +317,7 @@ function deleteMultipleTailgatess(tailgateList) {
 
 /* Edit Event */
 function editTailgate(rowData) {
+	window.location.hash = '#ManageTailgate';
 	_flaskLib.hideMessage('action-msg');
 		var repositoryId = $("#repositoryId").val();
 		_flaskLib.loadDataToForm("tailgateForm",  _tailgateModel.DATA_MODEL.TAILGATE, rowData, function(){});
@@ -414,6 +464,7 @@ function fnDeleteFileByTitle(_repositoryId,_folderId,_title,_objDel){
 }
 
 $(document).ready(function(){
+	window.location.hash = '#UserTailgate';
 	$('#tailgateForm').jqxValidator
     ({
         hintType: 'label',
@@ -478,15 +529,7 @@ function fetchTailgateGroupDetail(tailgateId) {
 			});
 }
 function showAddTailgateMembersForm(rowData) {
-	fetchTailgateMemberDetail(rowData.tailgateId);
-	prepareTailgateMemberGrid();
-//	$("#tabs").hide();
-	$("#tailgateDataTable").hide();
-	$("#addTailgateMembersForm").show();
-	$("#tailgateMemberDataGrid").show();
-}
-
-function showAddTailgateMembersForm(rowData) {
+	window.location.hash = '#AddTailgateMembers';
 	fetchTailgateMemberDetail(rowData.tailgateId);
 	prepareTailgateMemberGrid();
 //	$("#tabs").hide();
@@ -521,6 +564,7 @@ function prepareTailgateMembersGridShow(tailgateId){
 }
 
 function showAddTailgateGroupForm(rowData) {
+	window.location.hash = '#AddTailgateGroups';
 	fetchTailgateGroupDetail(rowData.tailgateId);
 	prepareTailgateGroupGrid();
 	$("#tailgateDataTable").hide();
