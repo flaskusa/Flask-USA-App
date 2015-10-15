@@ -347,6 +347,7 @@ var SERVICE_ENDPOINTS = {
 	}
 
 	$(document).ready(function () {
+		$("#heading").hide();
 			    $('.cssSave').on('click', function () {
 			    	if($('#adminForm').jqxValidator('validate'))
 			    	{
