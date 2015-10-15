@@ -3,13 +3,22 @@
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
 <%@page import="com.liferay.portlet.social.service.SocialRequestLocalServiceUtil"%>
 <%@page import="com.liferay.portlet.social.model.SocialRequestConstants"%>
+
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
   com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
+  boolean isSignedin = themeDisplay.isSignedIn();
   long repositoryId = themeDisplay.getLayout().getGroupId();
   themeDisplay.getLayout().getUuid();
   int unreadActionableUserNotificationsCount = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(themeDisplay.getUserId(), 3);
+  
 %>
-
+<c:if test="<%= !isSignedin %>">
+			<div id="action-msg1" class="alert alert-error">
+				You are not signed-in to view this page.
+			</div>
+</c:if>
+<c:if test="<%= isSignedin %>">
 <portlet:defineObjects />
 <body>
 	<input type="hidden" id="CompanyId" value="<%=themeDisplay.getCompanyId()%>">
@@ -119,6 +128,7 @@
 			</table>
 		</div>
 	</div>
+</c:if>
 	<div class="md-overlay"></div>
 	<button class="md-trigger" data-modal="modal-advertisement" style="display:none">3D</button>
 </body>
