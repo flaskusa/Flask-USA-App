@@ -222,11 +222,11 @@ function createCustomerTable(data, model, grid, menuDivId, actionColText,context
 	}
     
     var adCustomerColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'customerName', width: '30%' },
-    	 { text: 'Business', datafield: 'businessType', width: '15%'},
-    	 { text: 'City', datafield: 'city', width: '15%'},
-    	 { text: 'Phone Number', datafield: 'businessPhoneNumber', width: '15%'},
-    	 { text: 'Email', datafield: 'email', width: '15%'},
-    	 { text: 'Edit',  datafield: 'customerId', width: '10%', cellsalign: 'center', cellsrenderer: actionRenderer}];
+    	 { text: 'Business', datafield: 'businessType'},
+    	 { text: 'City', datafield: 'city'},
+    	 { text: 'Phone Number', datafield: 'businessPhoneNumber', width: '10%'},
+    	 { text: 'Email', datafield: 'email', width: '10%'},
+    	 { text: 'Edit',  datafield: 'customerId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
     
     grid.on('cellclick', GRID_PARAM_CUSTOMER.onRowClick);
     //set menu item click
