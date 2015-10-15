@@ -25,6 +25,7 @@
   boolean isAuthorised = renderRequest.isUserInRole("administrator") 
 			|| renderRequest.isUserInRole("flask-admin"); 
 
+  boolean isSignedin = themeDisplay.isSignedIn();
   
 %>
 <script type="text/javascript">
@@ -51,13 +52,17 @@ function initialize(portletId, portlet){
 
 </script>
 <body>
-
+<c:if test="<%= !isSignedin %>">
+			<div id="action-msg1" class="alert alert-error">
+				You are not signed-in to view this page.
+			</div>
+</c:if>
+<c:if test="<%= isSignedin %>">
 <c:if test="<%= !isAuthorised %>">
 			<div id="action-msg1" class="alert alert-error">
 				You are not authorize to view this page.
 			</div>
 </c:if>
-
 <c:if test="<%= isAuthorised %>">
 
 	<input type="hidden" id="repositoryId" value="<%=repositoryId%>"> 
@@ -299,5 +304,6 @@ function initialize(portletId, portlet){
 		<div class="ball"></div>
 		<div class="ball1"></div>
 	</div>
+</c:if>
 </c:if>
 </body>
