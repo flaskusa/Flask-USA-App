@@ -24,8 +24,6 @@
   String portletId = themeDisplay.getPortletDisplay().getId();
   boolean isAuthorised = renderRequest.isUserInRole("administrator") 
 			|| renderRequest.isUserInRole("flask-admin"); 
-
-  boolean isSignedin = themeDisplay.isSignedIn();
   
 %>
 <script type="text/javascript">
@@ -52,12 +50,6 @@ function initialize(portletId, portlet){
 
 </script>
 <body>
-<c:if test="<%= !isSignedin %>">
-			<div id="action-msg1" class="alert alert-error">
-				You are not signed-in to view this page.
-			</div>
-</c:if>
-<c:if test="<%= isSignedin %>">
 <c:if test="<%= !isAuthorised %>">
 			<div id="action-msg1" class="alert alert-error">
 				You are not authorize to view this page.
@@ -274,7 +266,6 @@ function initialize(portletId, portlet){
 	 </div>
 	 </div>
 	</div>
-	 
 	  <input class="btn btn-info clsSave" type="button" value="Save"/>
 	  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
 	  <input id="userId" type="hidden" value="0">
@@ -304,6 +295,5 @@ function initialize(portletId, portlet){
 		<div class="ball"></div>
 		<div class="ball1"></div>
 	</div>
-</c:if>
 </c:if>
 </body>
