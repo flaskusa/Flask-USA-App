@@ -2,14 +2,19 @@
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@include file="init.jsp"%>
 <script src="http://maps.googleapis.com/maps/api/js"></script>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <portlet:actionURL  var="addImagesActionURL" name="addImages"/>
 <%
 long userId = user.getUserId();
 String userName = user.getFullName();
  long repositoryId = themeDisplay.getLayout().getGroupId();
+ boolean isSignedin = themeDisplay.isSignedIn();
 %>
-
+<c:if test="<%= !isSignedin %>">
+			<div id="action-msg1" class="alert alert-error">
+				You are not signed-in to view this page.
+			</div>
+</c:if>
 <aui:script>
 var bCreated;
 Liferay.Portlet.ready(initialize);
@@ -34,8 +39,8 @@ function initialize(portletId, portlet){
 	}
 }
 </aui:script>
-
 <body class='default'>
+<c:if test="<%= isSignedin %>">
 <input type="hidden" id="repositoryId" value="<%=repositoryId%>"/>
 <div id="action-msg-warning" style="display:none"></div>
 <div id="action-msg" style="display:none"></div>
@@ -256,5 +261,6 @@ function initialize(portletId, portlet){
 	</div>
 	<div class="md-overlay"></div>
 	<button class="md-trigger" data-modal="modal-advertisement" style="display:none">&nbsp;</button>			
+</c:if>
 </body>
 </html>
