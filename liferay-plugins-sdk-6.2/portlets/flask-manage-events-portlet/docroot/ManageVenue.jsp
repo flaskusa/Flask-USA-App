@@ -26,14 +26,18 @@ themeDisplay.getLayout().getUuid();
 boolean isAuthorised = renderRequest.isUserInRole("administrator") || 
 						renderRequest.isUserInRole("flask-admin") 
 						|| renderRequest.isUserInRole("flask-content-manager");
-
-
+boolean isSignedin = themeDisplay.isSignedIn();
 %>
 
 
 <body class="default">
 
-
+<c:if test="<%= !isSignedin %>">
+			<div id="action-msg1" class="alert alert-error">
+				You are not signed-in to view this page.
+			</div>
+</c:if>
+<c:if test="<%= isSignedin %>">
 <c:if test="<%= !isAuthorised %>">
 			<div id="action-msg1" class="alert alert-error">
 				You are not authorize to view this page.
@@ -200,7 +204,6 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 	</div>
 
 <script type="text/javascript">
-
 var bCreated;
 Liferay.Portlet.ready(initialize);
 
@@ -212,9 +215,8 @@ function initialize(portletId, portlet) {
 		initForm();
 	}
 }
-
 </script>
-
+</c:if>
 </c:if> <!-- check if authorized -->  
 <div class="md-modal md-effect-14" id="modal-advertisement">
 	<div class="md-content">
@@ -228,6 +230,5 @@ function initialize(portletId, portlet) {
 <div class="md-overlay"></div>
 <button class="md-trigger" data-modal="modal-advertisement" style="display:none">3D Rotate Bottom</button>
 </body>
-
 
 </html>
