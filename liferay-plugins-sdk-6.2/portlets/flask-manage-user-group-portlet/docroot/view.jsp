@@ -1,11 +1,13 @@
 <%@page import="com.liferay.portal.model.User"%>
 <%@page import="com.liferay.portal.theme.ThemeDisplay"%>
 <%@ include file="jsp/init.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%
 	long userId = user.getUserId();
     String userName = user.getFullName();
     long scopGroupId = scopeGroupId;
     long themeUserId = themeDisplay.getUserId();
+    boolean isSignedin = themeDisplay.isSignedIn();
 %>
 <script type="text/javascript">
 	Liferay.Portlet.ready(initialize);
@@ -16,7 +18,6 @@
         	var userId = "<%=userId%>";
 								setTimeout(function() {
 									$("#loader").hide();
-
 								}, 200);
 
 								createMyGroupTable(
@@ -36,6 +37,12 @@
 	}
 	// modal popup
 </script>
+<c:if test="<%= !isSignedin %>">
+			<div id="action-msg1" class="alert alert-error">
+				You are not signed-in to view this page.
+			</div>
+</c:if>
+<c:if test="<%= isSignedin %>">
 <div id="loader" class="se-pre-con"></div>
 <!-- <div style="border: none; display: none;" id="tabs" class="container">
 	<ul style="margin-left: 30px;">
@@ -160,4 +167,6 @@
 				<button type="button" class="btn btn-primary clsAddOwnerGroup">Add Owner</button>
 				<button type="reset" class="btn btn-primary clsCancelGroup">Cancel</button>
 			</div>
+			
 		</form>
+</c:if>
