@@ -213,8 +213,7 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
 						return '<i class="icon-wrench" style="margin:3px;"></i>'
 	}
     
-    var campaignColumns = [{ text: 'Campaign Name', columntype: 'textbox',  
-    		datafield: 'campaignName'},
+    var campaignColumns = [{ text: 'Campaign Name', columntype: 'textbox',  datafield: 'campaignName'},
     	 { text: 'Customer Name', datafield: 'customerName', width: '20%'},
     	 { text: 'Display Times', datafield: 'adDisplayTime', width: '30%'},
     	 { text: 'Frequency per hour', datafield: 'frequencyPerHour', width: '10%'},
