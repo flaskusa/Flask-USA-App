@@ -1,3 +1,12 @@
+<%@ include file="jsp/init.jsp"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
+<%@page import="com.liferay.portal.kernel.util.WebKeys"%>
+<%
+boolean isAuthorised = renderRequest.isUserInRole("administrator") || 
+renderRequest.isUserInRole("flask-admin") 
+|| renderRequest.isUserInRole("flask-content-manager");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,7 +19,13 @@
 <meta name="description" content="">
 <meta name="author" content="">
 </head>
+<c:if test="<%= !isAuthorised %>">
+   <div id="action-msg1" class="alert alert-error">
+    You are not authorize to view this page.
+   </div>
+</c:if>
 <body>
+<c:if test="<%= isAuthorised %>">
 	<script type="text/javascript">
 		Liferay.Portlet.ready(initialize);
 		function initialize(portletId, portlet){
@@ -256,16 +271,18 @@
 	  </div>
 	</div>
 </div>
+
 <div class="md-modal md-effect-14" id="modal-advertisement">
 	<div class="md-content">
-		<h3 id="myModalLabel">Flask Gallery</h3>
-		<span class='md-closeBtn'>x</span>
+		<h3 id="myModalLabel"><span id='adTitle'>Modal Dialog</span><span class='md-closeBtn icon-remove'></span></h3>
 		<div>
 			<div class="imageContainer"></div>
+			<div class="footerInfo"></div>
 		</div>
 	</div>
 </div>
 <div class="md-overlay"></div>
-<button class="md-trigger" data-modal="modal-advertisement" style="display:none">3D</button>		
+<button class="md-trigger" data-modal="modal-advertisement" style="display:none"></button>
+</c:if>
 </body>
 </html>
