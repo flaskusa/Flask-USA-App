@@ -144,23 +144,8 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 			int maxLoopIndex = 0;
 			String imageUUID ="";
 			JSONObject img;
-			int keysWithZeroValue = 0;
-			while (processedAll == false){
-				for(Integer key: sortedByFrequencyMap.keySet()){
-					maxLoopIndex++;
-					Integer weightedFrequency = sortedByFrequencyMap.get(key);
-					if(weightedFrequency == 0){   //It has used all of the weighted frequency
-						
-						if(maxLoopIndex >= MAX_IMAGES_PER_HOUR ){ //all processed
-							processedAll = true;
-							break;
-						}
-						continue;						
-					}else{
-						weightedFrequency  -= 1;
-					}
-					sortedByFrequencyMap.put(key, weightedFrequency);
-					
+			int keysWithZeroValue = 0;			
+				for(Integer key: sortedByFrequencyMap.keySet()){										
 					JSONArray imgArrayForCampaign = campaignImageMap.get(key);
 					int imageIndex = 0;
 					int maxIndex = imgArrayForCampaign.length() - 1;
@@ -175,11 +160,8 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 					}
 					img = imgArrayForCampaign.getJSONObject(imageIndex);
 					imageUUID = img.getString("imageUUID");
-					imageUUIDForDisplay.put(imageUUID);
-					
+					imageUUIDForDisplay.put(imageUUID);					
 				}
-
-			}
 
 		} catch(Exception e) {
 			LOGGER.error("Exception in getEventCampaignImages :" + e.getMessage());
