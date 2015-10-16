@@ -104,40 +104,43 @@ renderRequest.isUserInRole("flask-admin")
 					<div class="form-group">
 						<label class="control-label" for="frequencyPerHour">Frequency per hour:</label>
 						<div class="controls">
-							<input name="frequencyPerHour" id="frequencyPerHour" class="form-control"
-											type="text">
+							<input name="frequencyPerHour" id="frequencyPerHour" class="form-control" type="text">
 						</div>
 					</div>
 					
 					<div class="form-group">
-							<label class="control-label" for="eventTypeId">Event
-										Type:</label>
-							<div class="controls">
-								<select name="eventTypeId" id="eventTypeId" class="form-control"
-										onchange="filterData(this.value)">
-								</select>
-							</div>
+						<label class="control-label" for="eventTypeId">Event Type:</label>
+						<div class="controls">
+							<select name="eventTypeId" id="eventTypeId" class="form-control"
+									onchange="filterData(this.value)">
+							</select>
+						</div>
 					</div>
 					<div class="form-group">
-							<label class="control-label" for="eventIds">Events</label>
-							<div id="campaignJqxwidget">
-										<div id="campaignEvents"></div>
-							</div>
+						<label class="control-label" for="eventIds">Events</label>
+						<div id="campaignJqxwidget">
+									<div id="campaignEvents"></div>
+						</div>
 					</div>
 					<div class="form-group">
-							<label class="control-label" for="campainImagesUpload">Campaign Images</label>
-							<div id="campainImagesUpload"></div>
+						<label class="control-label" for="campainImagesUpload">Campaign Images</label>
+						<div id="campainImagesUpload"></div>
 					</div>
-					
 					<div class="form-group">
-							<label class="control-label" for="eventIds">Campaign Full Screen Image</label>
-							<div id="campainFullScreenImagesUpload"></div>
-							<div id="campaignFullScreenGallery"></div>
+						<label class="control-label" for="campainImagesUpload">Uploaded Images</label>
+						<div id="campaignDetailGallery" style="display: inline-flex;"></div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="eventIds">Campaign Full Screen Image</label>
+						<div id="campainFullScreenImagesUpload"></div>
+					</div>
+					<div class="form-group">
+						<label class="control-label" for="campaignFullScreenGallery">Uploaded Full Screen Images</label>
+						<div id="campaignFullScreenGallery" style="display: inline-flex;"></div>
 					</div>					
 					
 					<input class="btn btn-info clsSave" id="saveCampaign" type="button" value="Save"/>
 					<input class="btn btn-primary clsCancel" id="cancelCampaign" type="button" value="Cancel" >
-					<div id="campaignDetailGallery"></div>
 				</form>
 			</div>
 			<div id='campaignActionMenu' style="display:none">
