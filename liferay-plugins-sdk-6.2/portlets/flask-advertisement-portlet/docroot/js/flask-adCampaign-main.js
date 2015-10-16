@@ -7,15 +7,15 @@ var allEvents = [];
 var iSelected=false;
 
 function adCampaignClickHandlers() {
-	adCampaignForm = $("#addCampaignForm");
+	adCampaignForm = $("#adCampaignForm");
 	/* Initialize display elements */
 
 	$("#delCampaignTrash").hide();
-
 	/* Click handler for add user button */
 
 	$("#addCampaign").click(function() {
 		$("#adCampaignDataTable").hide();
+		adCampaignForm.trigger('reset');
 		prepareCustomerDropDownList('customerId');
 		prepareEventTypeDropdown('eventTypeId', 1);
 		loadEventData("1");
@@ -24,11 +24,11 @@ function adCampaignClickHandlers() {
 	});
 
 	/* Click handler for save button */
-
-	$("#saveCampaign").click(
-			function() {
-					saveCampaign();
-			});
+	$("#saveCampaign").click(function(){
+		if ($('#adCampaignForm').jqxValidator('validate')){
+			saveCampaign();			
+		}
+	});
 
 	/* Click handler for cancel button */
 	$("#cancelCampaign").click(function() {
@@ -528,3 +528,17 @@ function updateCampaignImage() {
 	});
 
 }
+
+$(document).ready(function() {
+	if($('#adCampaignForm').length == 0)
+		return;
+	$('#adCampaignForm').jqxValidator({
+		hintType: 'label',
+		animationDuration: 0,
+		rules: [
+	               { input: '#campaignName', message: 'Campaign name is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#frequencyPerHour', message: 'Frequency per hour is required!', action: 'keyup, blur', rule: 'required' },
+			   ]
+	});
+	$('#frequencyPerHour').val(30);
+});
