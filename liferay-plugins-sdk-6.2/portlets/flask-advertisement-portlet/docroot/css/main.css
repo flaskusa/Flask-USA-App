@@ -202,3 +202,7 @@ displayAtChk{
     margin: 9px !important;
     padding: 10px 5px !important;
 }
+
+.cssDelImages {
+    height: 30px !important;
+}
