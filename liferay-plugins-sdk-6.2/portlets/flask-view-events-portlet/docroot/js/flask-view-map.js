@@ -9,6 +9,27 @@ _flaskMap.markers = Array();
 _flaskMap.infos = Array();
 _flaskMap.allowedContent = ["Getting home","Traffic","Supplies","Tradition","Flask Us","Venue Map"];
 
+var isMobile = {
+    Android: function() {
+        return navigator.userAgent.match(/Android/i);
+    },
+    BlackBerry: function() {
+        return navigator.userAgent.match(/BlackBerry/i);
+    },
+    iOS: function() {
+        return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+    },
+    Opera: function() {
+        return navigator.userAgent.match(/Opera Mini/i);
+    },
+    Windows: function() {
+        return navigator.userAgent.match(/IEMobile/i);
+    },
+    any: function() {
+        return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+    }
+};
+
 _flaskMap.cur_location;
 _flaskMap.initializeMap = function() {
 	try{
@@ -339,16 +360,16 @@ _flaskMap.createMarker = function (obj) {
 
 _flaskMap.createMapLink = function(address1){
 	var findUs = '';
-	if(_flaskAd.isMobile.Android()){
+	if(isMobile.Android()=="Android"){
 		findUs = '<a href="geo:'+address1+'" class="addressLink">'+address1+'</a>'
 	}
-	else if(_flaskAd.isMobile.BlackBerry()){
+	else if(isMobile.BlackBerry()=="BlackBerry"){
 		findUs = '<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
 	}
-	else if(_flaskAd.isMobile.iOS()){
+	else if(isMobile.iOS()=="iPhone" || isMobile.iOS()=="iPad" || isMobile.iOS()=="iPod"){
 		findUs = '<a href="http://maps.apple.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
 	}
-	else if(_flaskAd.isMobile.Windows()){
+	else if(isMobile.Windows()=="IEMobile"){
 		findUs = '<a href="maps:'+address1+'">'+address1+'</a>'
 	}
 	else{
