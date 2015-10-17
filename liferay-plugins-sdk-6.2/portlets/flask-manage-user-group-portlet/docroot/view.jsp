@@ -83,39 +83,6 @@
  		<div id='groupActionMenu' style='display:none;'>
  		</div>
 		<div id="myGroup-valid-msg" style="display: none"></div>
-		<form id="myGroupForm" style="display: none">
-			<div class="form-group">
-				<div class="pull-left">
-				<h3>Add Group</h3>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-			<div class="form-group">
-				<label class="control-label" for="groupName">Group Name:</label>
-				<div class="controls">
-					<input name="<portlet:namespace />groupName" id="groupName"
-						class="form-control" type="text">
-				</div>
-			</div>
-
-			<div class="form-group">
-				<label class="control-label" for="groupDescription">Group
-					Description:</label>
-				<div class="controls">
-					<textarea rows="5" style="height:185px;" name="<portlet:namespace />groupDescription"
-						id="groupDescription" class="form-control"></textarea>
-				</div>
-			</div>
-			<input type="hidden" name="<portlet:namespace />userId" id="userId"
-				value="<%=userId%>" /> <input type="hidden"
-				name="<portlet:namespace />userName" id="userName"
-				value="<%=userName%>" />
-			<div class="modal-footer">
-			<!-- <button type="button" class="btn btn-primary pull-left clsBack">Back</button> -->
-				<button type="button" class="btn btn-primary clsSaveGroup">Create</button>
-				<button type="reset" class="btn btn-primary clsCancelGroup" >Cancel</button>
-			</div>
-		</form>
 
 		<div id="addGroupUser-valid-msg" style="display: none"></div>
 		<form id="addGroupUserForm" style="display: none;">
@@ -169,4 +136,109 @@
 			</div>
 			
 		</form>
+		<div id='formContainer'>
+		<ul class="nav nav-tabs">
+		  <li class="active"><a href="#GroupForm" data-toggle="tab" id="grpForm">Group Details</a></li>
+		  <li><a href="#Friends" data-toggle="tab" id="frnds">My Friends</a></li>  
+		</ul>
+		<div class="tab-content">
+		
+		<div class="tab-pane active" id="GroupForm">
+		<form id="myGroupForm">
+		<input type="hidden" id="CompanyId" value="<%=themeDisplay.getCompanyId()%>">
+			<div class="form-group">
+				<div class="pull-left">
+				<h3>Add Group</h3>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+			<div class="form-group">
+				<label class="control-label" for="groupName">Group Name:</label>
+				<div class="controls">
+					<input name="<portlet:namespace />groupName" id="groupName"
+						class="form-control" type="text">
+				</div>
+			</div>
+
+			<div class="form-group">
+				<label class="control-label" for="groupDescription">Group
+					Description:</label>
+				<div class="controls">
+					<textarea rows="5" style="height:185px;" name="<portlet:namespace />groupDescription"
+						id="groupDescription" class="form-control"></textarea>
+				</div>
+			</div>
+			<input type="hidden" name="<portlet:namespace />userId" id="userId"
+				value="<%=userId%>" /> <input type="hidden"
+				name="<portlet:namespace />userName" id="userName"
+				value="<%=userName%>" />
+			<div class="modal-footer">
+			<!-- <button type="button" class="btn btn-primary pull-left clsBack">Back</button> -->
+				<button type="button" class="btn btn-primary clsSaveGroup">Create</button>
+				<button type="reset" class="btn btn-primary clsCancelGroup" >Cancel</button>
+			</div>
+		</form>
+		<div class="form-group">
+				<div class="pull-left">
+				<h3>Group Members</h3>
+				</div>
+		</div><br>
+		<div class="table-responsive" style="display: inline-block;">
+				<div class="container-fluid fill" id="Group_placeholder"></div>
+			</div>
+			<div class="footerButtons">
+				<ul class="pager">
+				     <li class="previous more"><a href="#" onclick="fnShowNextFriends();">More..</a></li>
+				</ul>
+			</div>
+		</div>
+		
+		
+		  <div class="tab-pane" id="Friends">
+			<div class="table-responsive">
+				<div class="container-fluid fill" id="Menu_placeholder">
+			    	<table class="searchtable">
+			    		<tr>
+			    			<td align="right">
+			    				<input type="text" class="search-query" id='searchFriend' placeholder="Search">		
+			    			</td>
+			    			<td valign="top" align="left" style='width:100px;'>
+			    				<a href="#" class="btnSubmit" id="btnSearchFriend"><i class="icon-search" style="color: black;"></i></a>
+			    				<a href="#" class="cssMultUser btnSubmit"><i class="icon-list" style="color: black;"></i></a>
+			    			</td>
+			    		</tr>
+			    	</table>		
+				</div>  
+				<div class="container-fluid fill" id="Friend_placeholder"></div>
+			</div>
+			<div class="footerButtons">
+				<ul class="pager">
+				     <li class="previous more"><a href="#" onclick="fnShowNextFriends();">More..</a></li>
+				</ul>
+			</div>
+		  </div>
+		  <div class="tab-pane" id="SearchNewFriends">
+			<div class="table-responsive">
+				<div class="container-fluid fill" id="Menu_placeholder">
+			    	<table class="searchtable">
+			    		<tr>
+			    			<td align="right">
+			    				<input type="text" class="search-query"  id='searchContact' placeholder="Search">		
+			    			</td>
+			    			<td valign="top" align="left" style='width:100px;'>
+			    				<a href="#" class="btnSubmit" id="btnSearchContact"><i class="icon-search" style="color: black;"></i></a>
+			    			</td>
+			    		</tr>
+			    	</table>		
+				</div>			
+				<div class="container-fluid fill" id="Users_placeholder"></div>
+			</div>
+			<div class="footerButtons">
+				<ul class="pager">
+				    <li class="previous"><a href="#" onclick="fnShowNextRecords();">More..</a></li>
+				</ul>
+			</div>
+		  </div>
+		</div>
+	</div>
 </c:if>
