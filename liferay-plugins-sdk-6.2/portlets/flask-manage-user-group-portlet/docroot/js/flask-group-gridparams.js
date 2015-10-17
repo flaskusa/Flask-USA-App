@@ -128,6 +128,7 @@ GRID_PARAM_GROUP.prepareContextMenu = function(){
 //	$("#grpCtxtMenu").remove();
 	var ulEle = "<div id='grpCtxtMenu'><ul>";
 	if(isAdmin == 1){
+		ulEle = ulEle + "<li>Edit Group</li>";
 		ulEle = ulEle + "<li>Add Friend</li>";
 		ulEle = ulEle + "<li>Add Owner</li>";
 		ulEle = ulEle + "<li>Delete Group</li>";
@@ -142,7 +143,7 @@ GRID_PARAM_GROUP.prepareContextMenu = function(){
 
 GRID_PARAM_GROUP.rowDetailTemplate = function(tabs, height)  
 {
-	var rowDetailTemplate = "<div style='margin: 2px;'> <ul style='margin-left: 30px;'> "
+	var rowDetailTemplate = "<div style='margin: 2px;'> <ul style='margin-left: 30px;'> ";
 		if($.isArray(tabs)){
 			$.each(tabs, function(index, tab){
 				rowDetailTemplate = rowDetailTemplate + "<li>" + tab + "</li>";
