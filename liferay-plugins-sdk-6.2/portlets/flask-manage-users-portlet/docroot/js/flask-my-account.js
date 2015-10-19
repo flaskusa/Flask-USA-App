@@ -10,7 +10,8 @@ function addClickHandlers(){
 	/* Click handler for save button*/
 	
 	$(".clsSave").click(function(){
-		saveAccount();
+		if ($('#adminForm').jqxValidator('validate'))
+			saveAccount();
 	});
 
 	$(".clsCancel").click(function(){
