@@ -20,7 +20,7 @@
 
 <%
 long repositoryId = themeDisplay.getLayout().getGroupId();
-themeDisplay.getLayout().getUuid();
+
 
 boolean isAuthorised = renderRequest.isUserInRole("administrator") 
 					|| renderRequest.isUserInRole("flask-admin") 

@@ -180,7 +180,7 @@ _infoTypeRenderer.fnBuildEditor =  function(Obj){
         height: "300px",
         width: '90%',
         theme:	'custom',
-        tools: "bold italic underline | format font size | left center right | outdent indent | ul ol "
+        tools: "bold italic underline | format size | left center right | outdent indent | ul ol "
         
     });
 	
