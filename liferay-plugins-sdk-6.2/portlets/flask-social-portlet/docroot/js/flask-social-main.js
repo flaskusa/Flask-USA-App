@@ -396,11 +396,12 @@ function fnBuildRequestMenu(obj,htmlObject){
 		var IsFriend = obj.connected;
 		var ul = $('<ul/>',{'class':'dropdown-menu MyDDStyle'});
 		if(!IsFriend){
-			var buttonAccept = $('<button/>',{'class':'btn btn-primary','type':'button'})
+			var buttonAccept = $('<button/>',{'class':'btn btn-primary','type':'button', 'style':'margin-right: 5px !important;'});
 			buttonAccept.html('Confirm');
 			buttonAccept.click(function(){
 				acceptFriendRequest(UserId,htmlObject);
 			});
+			var buttonReject = $('<button/>',{'class':'btn btn-primary','type':'button'})
 			buttonReject.html('Ignore');
 			buttonReject.click(function(){
 				ignoreFriendRequest(UserId,htmlObject);
