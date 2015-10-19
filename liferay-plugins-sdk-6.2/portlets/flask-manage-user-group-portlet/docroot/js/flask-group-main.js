@@ -414,6 +414,7 @@ function createList(flaskUser, divRow){
 	    $(objTr).appendTo($(objTable));
 	    var objTdc = $('<td/>',{'width':'25px','rowspan':'2', 'class':'chk'});
 	    var objChkbx = $('<input/>', {'type':'checkbox', 'class':'selected', 'value':flaskUser.userId});
+	    
 	    $(objChkbx).appendTo($(objTdc));
 	    $(objTdc).appendTo($(objTr));
 	    var objTd1 = $('<td/>',{'width':'50px','rowspan':'2'});
@@ -442,6 +443,18 @@ function createList(flaskUser, divRow){
 	    $(objtd2_1).appendTo($(objTr2));
 	    $(objTr2).appendTo($(objTable));
 	    $(objTable).appendTo($(divRow)).show('slow');
+	    var userrparams = {};
+	    objChkbx.click(function(){
+	        if($(this).is(':checked')){
+	        	$(this).attr('checked', 'checked');
+	        	userrparams.groupId = groupId;
+	    		userrparams.userId = flaskUser.userId;
+	    		addGroupOwner(userrparams);
+	    		
+	        } else {
+	        	$(this).attr('checked', '');
+	        }
+	    });
 }
 
 function fnShowEventLogo(potraitID, container){
@@ -470,7 +483,7 @@ function renderPhoto(FileId,objProfilePic){
 		
 }
 
-function fnBuildMenu(obj){
+function fnBuildMenu(obj, objChkbx){
 	var IsBlocked = obj.block;
 	var UserId = obj.userId;
 	var dropdown = $('<div/>',{'class':'dropdown'});
@@ -488,6 +501,9 @@ function fnBuildMenu(obj){
 					    	if(dt[i].userId == UserId){
 					    		button.html('');
 					    		button.html('Remove');
+					    		console.log(dt[i].isAdmin);
+					    		if(dt[i].isAdmin==1)
+					    			button.closest('.tblRow').find('.selected').attr('checked', 'checked');
 					    	}
 						}
 					}, function(error) {
