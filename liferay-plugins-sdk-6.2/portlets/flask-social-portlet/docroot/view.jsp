@@ -104,7 +104,7 @@
 				      <div class="panel-heading" id="msgsTopDiv">Messages (<span id="MessageCount">0</span>)</div>
 				      <div class="panel-body" id="MyMessages">No Messages found</div>
 				    </div>
-				    <div class="panel panel-default" style="padding-bottom: 8px;">
+				    <div class="panel panel-default" style="padding-bottom: 8px; display: none;">
 				      <div class="panel-heading" id="otherTopDiv">Other Notifications (0)</div>
 				    </div>
 				  </div>
