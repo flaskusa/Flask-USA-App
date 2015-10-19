@@ -360,6 +360,9 @@ function saveTailgate(){
 							formData.startTime= sTime;
 							formData.endTime= eTime;		
 		                    formData.tailgateDate = sTime;
+		                    if(formData.amountToPay =='' || formData.amountToPay == null){
+		                    	formData.amountToPay=0.0;
+		                    }
 							return formData;
 					});
 		var flaskRequest = new Request();
@@ -470,7 +473,7 @@ $(document).ready(function(){
         hintType: 'label',
         animationDuration: 0,
         rules: [
-	               { input: '#tailgateName', message: 'Tailgate name is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#tailgateName', message: 'Tailgate name is required!', action: 'keyup, blur', rule: 'required' },	               
 	               {
 		                input: '#endTime', message: 'End time always greater than start time!', action: 'keyup, focus', rule: function (input, commit) {
 		                	var st=$("#startTime").val();

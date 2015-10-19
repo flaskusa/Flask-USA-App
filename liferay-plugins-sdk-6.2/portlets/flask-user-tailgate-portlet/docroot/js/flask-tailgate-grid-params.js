@@ -284,9 +284,8 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 		}
 
 		var groupColumns = [{ text: 'Tailgate', columntype: 'textbox', cellsalign: 'left',  datafield: 'tailgateName'},
-		{ text: 'Event Name', datafield: 'eventName', cellsalign: 'left', width: '25%'},
-		{ text: 'Date', datafield: 'tailgateDate', width: '20%',cellsalign: 'left'},
-		{ text: 'Start Time', datafield: 'startTime', cellsalign: 'left', width: '20%'},
+		{ text: 'Event Name', datafield: 'eventName', cellsalign: 'left', width: '30%'},
+		{ text: 'Date', datafield: 'tailgateDate', width: '25%',cellsalign: 'left'},
 		{ text: 'Edit',  datafield: 'tailgateId', width: '34px', cellsalign: 'left', cellsrenderer: actionRenderer}];
 		
 		grid.on('cellclick', GRID_PARAM.onRowClick);
@@ -302,7 +301,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
     grid.jqxGrid(
             {
                 width: '100%',
-                height : '350px',
+                height : '500px',
                 source: dataAdapter,
                 columnsheight : 40,
 				columnsmenuwidth : 40,
@@ -310,7 +309,8 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
                 theme:	'custom',
                 autoheight: true,
                 pageable : true,
-                pagermode : 'default',
+                pagermode : 'simple',
+				pagesize: 20,
                 rowdetails: true,
                 showrowdetailscolumn:false,
                 rowdetailstemplate: GRID_PARAM.rowDetailTemplate(rowDetailDivArr , 300),
@@ -421,8 +421,8 @@ function createTailgateMemberTable(data, grid){
 	 var eventsColumns;
 	 if(isAdmin == 1){
 		 eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '33.33%' },
-	                      { text: 'Email', datafield: 'emailAddress', width: '33.33%'},
-	                      { text: 'Is Paid?', datafield: 'isPaid', width: '33.33%', cellsrenderer: datecellsrenderer}];
+	                      { text: 'Email', datafield: 'emailAddress'}
+	                      ];
 	 //,{ text: 'Payment Mode', datafield: 'paymentMode', width: '16.66%'}
 	 }else{
 		 eventsColumns = [{ text: 'User Name', columntype: 'textbox',  datafield: 'userName', width: '50%' },

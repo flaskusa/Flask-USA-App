@@ -115,7 +115,7 @@ function addMapEventListener(map){
     	isNewMarker = true;
         var EditForm = '<p><div class="marker-edit">'+
         '<label for="pName"><span>Place Name : </span><input type="text" name="pName" id="pName" class="save-name" placeholder="Enter Title" maxlength="40" /></label>'+
-        '<label for="pDesc"><span>Description : </span><textarea name="pDesc" id="pDesc" class="save-desc" placeholder="Enter Address" maxlength="150" style="height:60px; width:240px;"></textarea></label>'+
+        '<label for="pDesc"><span>Description : </span><textarea name="pDesc" id="pDesc" class="save-desc" placeholder="Location of tailgate" maxlength="150" style="height:60px; width:240px;"></textarea></label>'+
         '</div></p><button name="save-marker" id="save-marker" class="save-marker">Add</button>';
         //call create_marker() function
         create_marker(event.latLng, 'Tailgate Marker', EditForm, true, true, true, "/flask-user-tailgate-portlet/img/new-red-pin.png");
@@ -193,6 +193,8 @@ function create_marker(MapPos, MapTitle, MapDesc,  InfoOpenDefault, DragAble, Re
     {
       infowindow.open(map,marker);
     }
+    _flaskLib.clearDoubleClickSelection();
+
 }
 
 //############### Remove Marker Function ##############
