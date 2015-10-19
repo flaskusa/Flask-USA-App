@@ -94,14 +94,14 @@ GRID_PARAM_CAMPAIGN.onRowClick =function (event)
 	
 	
 
-	if (args.column.text == rowMenuColumnText) {
+	if (args.column.text == GRID_PARAM_CAMPAIGN.rowMenuColumnText) {
 		var scrollTop = $(window).scrollTop();
 		var scrollLeft = $(window).scrollLeft();
 		editrow = event.args.rowindex;
 		var rowsheight = grid.jqxGrid('rowsheight');
 		var top = $(this).offset().top + (2 + editrow) * rowsheight;
-		var left = ($(this).offset().left + parseInt($('#manageCampaignContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
-		$('#' +rowMenuDivId).jqxMenu('open', left, top + 5 + scrollTop);
+		var left = ($(this).offset().left + parseInt($('#manageCampaignContainer').css('width'), 10)) - parseInt($('#' + GRID_PARAM_CAMPAIGN.rowMenuDivId).css('width'), 10) - 25;
+		$('#' +GRID_PARAM_CAMPAIGN.rowMenuDivId).jqxMenu('open', left, top + 5 + scrollTop);
 	} else {
 		// original event.
 		var ev = args.originalEvent;
@@ -186,13 +186,13 @@ GRID_PARAM_CAMPAIGN.initrowdetails = function(index, parentElement, gridElement,
  *  This method creates grid
  */
 function createCampaignTable(data, model, grid, menuDivId, actionColText,contextMenuHandler, detailDivArr){
-		if(typeof gridId == undefined){
+		if(typeof grid == undefined){
 			throw 'a valid grid div object must be provided';
 		}
-		if(typeof rowMenuColumnText == undefined){
+		if(typeof actionColText == undefined){
 			throw 'a columnheader needs to be provided to be used for click action';
 		}
-		if(typeof rowMenuDivId == undefined){
+		if(typeof menuDivId == undefined){
 			throw 'a valid menu div needs to be provided to be used for click action';
 		}
 		if (typeof detailDivArr == undefined){
@@ -204,10 +204,10 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
 		}
 		
 		GRID_PARAM_CAMPAIGN._dataModel = model;
-		rowMenuDivId = menuDivId;
-		rowMenuColumnText =actionColText;
+		GRID_PARAM_CAMPAIGN.rowMenuDivId = menuDivId;
+		GRID_PARAM_CAMPAIGN.rowMenuColumnText =actionColText;
 		GRID_PARAM_CAMPAIGN.gridObj = grid;
-		rowDetailDivArr = detailDivArr
+		GRID_PARAM_CAMPAIGN.rowDetailDivArr = detailDivArr
 		
     var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
 						return '<i class="icon-wrench" style="margin:3px;"></i>'
@@ -224,7 +224,7 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
     grid.on('cellclick', GRID_PARAM_CAMPAIGN.onRowClick);
     //set menu item click
     GRID_PARAM_CAMPAIGN._campaignContextMenuHandler = contextMenuHandler
-	$('#' + rowMenuDivId).on('itemclick',GRID_PARAM_CAMPAIGN.onContextMenuItemClick);
+	$('#' + GRID_PARAM_CAMPAIGN.rowMenuDivId).on('itemclick',GRID_PARAM_CAMPAIGN.onContextMenuItemClick);
 	
 	// create context menu
 	var contextMenu = $("#" + menuDivId).jqxMenu({
@@ -252,7 +252,7 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
                 rowdetails: true,
                 showrowdetailscolumn:false,
                 autoheight: true,
-                rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(rowDetailDivArr , 200),
+                rowdetailstemplate: GRID_PARAM_CAMPAIGN.rowDetailTemplate(GRID_PARAM_CAMPAIGN.rowDetailDivArr , 200),
                 initrowdetails: GRID_PARAM_CAMPAIGN.initrowdetails,
                 columns: campaignColumns,
                 pagesize: 20

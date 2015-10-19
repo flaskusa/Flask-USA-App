@@ -4,8 +4,8 @@
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%
 boolean isAuthorised = renderRequest.isUserInRole("administrator") || 
-renderRequest.isUserInRole("flask-admin") 
-|| renderRequest.isUserInRole("flask-content-manager");
+						renderRequest.isUserInRole("flask-admin") || 
+						renderRequest.isUserInRole("flask-content-manager");
 %>
 <!DOCTYPE html>
 <html>
@@ -35,11 +35,14 @@ renderRequest.isUserInRole("flask-admin")
 				loadCampaignData();
 				adCampaignClickHandlers();
 				loadEvents();
-				$("#mcontents").click(function(){
+				
+				  /// wait 3 seconds
+			    setTimeout(function() {
 					createCustomerTable({},_adCustomerModel.DATA_MODEL.CUSTOMER, $('#customerGrid'), "customerActionMenu", "Edit", customerContextMenuHandler, ["Customer"]);
 					adCustomerClickHandlers();
 					loadCustomerData();
-				});
+			    }, 3000);
+				  
 			}
 		}       
    </script>
@@ -127,7 +130,7 @@ renderRequest.isUserInRole("flask-admin")
 						<div id="campainImagesUpload"></div>
 					</div>
 					<div class="form-group">
-						<label class="control-label" for="campainImagesUpload">Uploaded Images</label>
+						<label class="control-label" for="campainImagesUpload">Uploaded Campaign Images</label>
 						<div id="campaignDetailGallery" style="display: inline-flex;"></div>
 					</div>
 					<div class="form-group">
@@ -135,7 +138,7 @@ renderRequest.isUserInRole("flask-admin")
 						<div id="campainFullScreenImagesUpload"></div>
 					</div>
 					<div class="form-group">
-						<label class="control-label" for="campaignFullScreenGallery">Uploaded Full Screen Images</label>
+						<label class="control-label" for="campaignFullScreenGallery">Uploaded Full Screen Image</label>
 						<div id="campaignFullScreenGallery" style="display: inline-flex;"></div>
 					</div>					
 					
@@ -164,7 +167,7 @@ renderRequest.isUserInRole("flask-admin")
 				  
 				  </div>
 			</div>
-			<div id="addCustomerFormContainer" style="display:none;  height:500px; overflow-y: auto;">			  
+			<div id="addCustomerFormContainer" style="display:none;  height:100%; overflow-y: auto;">			  
 				<form id="addCustomerForm">
 						   <div class="form-group">
 						     <label class="control-label" for=customerName>Customer Name:</label>
