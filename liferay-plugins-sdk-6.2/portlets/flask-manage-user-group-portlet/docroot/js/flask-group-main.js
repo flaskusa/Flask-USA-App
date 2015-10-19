@@ -599,7 +599,7 @@ function addGroupOwner(params){
 	flaskRequest.sendPOSTRequest(_groupModel.SERVICE_ENDPOINTS.ADD_GROUP_OWNER,
 			params, function(data) {/* success handler */
 		_flaskLib.showSuccessMessage('group-action-msg',
-				_groupModel.MESSAGES.ADD_GRP_USER);
+				"Group owner added successfully.");
 			}, function(error) { /* failure handler */
 				_flaskLib.showErrorMessage(_groupModel.MESSAGES.GET_ERROR);
 				console.log("Error in getting Group Detaill: " + error);
