@@ -75,7 +75,7 @@
 </div>
 
 <div class="control-group">
-	<label class="control-label" for="tailgateName">Description </label>
+	<label class="control-label" for="tailgateName">Personal Message </label>
 		<div class="controls">
 			<textarea
 					style='width: 450px; height: 70px; background-color: white; margin: 0px;'

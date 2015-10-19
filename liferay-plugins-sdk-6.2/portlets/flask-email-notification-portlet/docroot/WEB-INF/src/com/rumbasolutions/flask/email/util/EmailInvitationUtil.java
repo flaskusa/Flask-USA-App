@@ -13,11 +13,13 @@ import com.liferay.util.ContentUtil;
 
 public class EmailInvitationUtil {
 	private static Log LOGGER = LogFactoryUtil.getLog(EmailInvitationUtil.class);
+	private static String DEFAULT_EMAIL = "info@flaskus.com";
+	private static String DEFAULT_SUBJECT = "FlaskUS Invitation";
 	
 	public static void sendEmailInvitation(String name, String toMail, String description, ServiceContext serviceContext){
 		try {
 			String fromEmail = UserLocalServiceUtil.getUser(serviceContext.getUserId()).getEmailAddress();
-			InternetAddress fromAddress = new InternetAddress(fromEmail); // from address
+			InternetAddress fromAddress = new InternetAddress(DEFAULT_EMAIL); // from address
 	        InternetAddress toAddress = new InternetAddress(toMail);  // to address
 
 	        String body = ContentUtil.get("/template/emailTemplate.tmpl", true);  // email body , here we are getting email structure creating the content folder in the src and create the file with the extension as tmpl.
@@ -28,7 +30,7 @@ public class EmailInvitationUtil {
 	                MailMessage mailMessage = new MailMessage();
 	                mailMessage.setTo(toAddress);
 	                mailMessage.setFrom(fromAddress);
-	                mailMessage.setSubject(subject);
+	                mailMessage.setSubject(DEFAULT_SUBJECT);
 	                mailMessage.setBody(body);
 	                mailMessage.setHTMLFormat(true);
 	                
