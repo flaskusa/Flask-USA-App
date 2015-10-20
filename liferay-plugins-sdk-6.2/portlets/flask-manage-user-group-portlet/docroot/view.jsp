@@ -5,6 +5,7 @@
 <%
 	long userId = user.getUserId();
     String userName = user.getFullName();
+    String emailAddress = user.getEmailAddress();
     long scopGroupId = scopeGroupId;
     long themeUserId = themeDisplay.getUserId();
     boolean isSignedin = themeDisplay.isSignedIn();
@@ -16,6 +17,7 @@
 			//_flaskLib.init();
         $(document).ready(function () {
         	var userId = "<%=userId%>";
+        	var emailAddress = "<%=emailAddress%>";
 								setTimeout(function() {
 									$("#loader").hide();
 								}, 200);
@@ -172,6 +174,8 @@
 				value="<%=userId%>" /> <input type="hidden"
 				name="<portlet:namespace />userName" id="userName"
 				value="<%=userName%>" />
+			<input type="hidden" name="<portlet:namespace />emailAddress" id="emailAddress"
+				value="<%=emailAddress%>" />
 			<div class="modal-footer">
 			<!-- <button type="button" class="btn btn-primary pull-left clsBack">Back</button> -->
 				<button type="button" class="btn btn-primary clsSaveGroup">Create</button>
