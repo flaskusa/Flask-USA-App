@@ -132,14 +132,8 @@ div#fixedfooter2 {
     /* margin-top: 10px; */
     padding-top: 10px; }
 
-  div#content {
-    margin-top: 47px !important;
-    margin-left: -30.5px !important;
-    padding: 0 0 0 0;
-    margin-right: -28px !important; }
-
   div#wrapper {
-    padding: 0 0.5em 0 !important;
+    /*padding: 0 0.5em 0 !important;*/
     position: relative; }
 
   div#section {
@@ -449,4 +443,7 @@ div#jqxwindow {
 	.requests{
 		display: initial !important;
 	}
+}
+.icon-wrench {
+zoom: 1.8 !important;
 }
