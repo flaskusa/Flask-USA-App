@@ -42,7 +42,7 @@ function addDetailsClickHandlers() {
 					try{
 						var geocoder = new google.maps.Geocoder();
 						geocoder.geocode({
-							address : $('#infoTitle').val()+' '+ $('#addrLine11').val(),
+							address : $('#addrLine11').val(),
 							region: 'no'
 						},
 					    function(results, status) {
