@@ -33,6 +33,7 @@ _groupModel.DATA_MODEL= {
 			 { name: 'isActive', type: 'int', fieldName : 'Is Group Activated' },
 			 { name: 'isDelete', type: 'int', fieldName : 'Is Group Deleted' },
 			 { name: 'isAdmin', type: 'int', fieldName : 'Is User Admin' },
+			 { name: 'emailAddress', type: 'string', fieldName : 'Email Address' },
 			 { name: 'isGroupAdmin', type: 'int', fieldName : 'Is User Admin' },
 			 { name: 'userId', type: 'int', fieldName : 'User Id' },
 			 { name: 'userName', type: 'string', fieldName : 'User Name' }

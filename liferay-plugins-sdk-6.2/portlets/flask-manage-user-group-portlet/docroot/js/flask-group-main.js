@@ -15,6 +15,7 @@ function groupClickHandlers() {
 			myGroupForm.hide();
 			$("#addGroupUserForm").hide();
 			$("#addGroupOwnerForm").hide();
+			loadGroupData(loggedInUserId);
 			break;
 	    case "#EditGroup":
 	    	$("#grpForm").click();
@@ -32,10 +33,13 @@ function groupClickHandlers() {
 	/* Click handler for add user button */
 
 	$(".cssAddUser").click(function() {
+		window.location.hash = '#EditGroup';
+		$("#formContainer").show();
+		$("#myGroupDataTable").hide();
+		myGroupForm.show();
 		myGroupForm.trigger('reset')
 //		$("#tabs").hide();
 		$("#myGroupDataTable").hide();
-		myGroupForm.show();
 		groupId = "0";
 	});
 
@@ -43,12 +47,12 @@ function groupClickHandlers() {
 
 	$(".clsSaveGroup").click(
 			function() {
-				if (_flaskLib.validateFormData("myGroupForm",'myGroup-valid-msg', _groupModel.DATA_MODEL.GROUP)) {
+				//if (_flaskLib.validateFormData("myGroupForm",'myGroup-valid-msg', _groupModel.DATA_MODEL.GROUP)) {
 					saveGroup();
 //					$("#tabs").show();
-					$("#myGroupDataTable").show();
-					myGroupForm.hide();
-				}
+					//$("#myGroupDataTable").show();
+					//myGroupForm.hide();
+				//}
 			});
 	
 	$(".clsAddUserGroup").click(
@@ -91,6 +95,7 @@ function groupClickHandlers() {
 		myGroupForm.hide();
 		$("#addGroupUserForm").hide();
 		$("#addGroupOwnerForm").hide();
+		loadGroupData(loggedInUserId);
 	});	
 
 	$(".cssDelUser").click(function() {
@@ -234,6 +239,18 @@ function editGroup(rowData) {
 			rowData, function() {
 				
 			});
+	Liferay.Service(
+			  '/flask-rest-users-portlet.flaskadmin/get-user-by-id',
+			  {
+			    userId: params.userId
+			  },
+			  function(obj) {
+				  $("#emailAddress").val(obj.email);
+			  }
+			);
+	$("#userId").val(Liferay.ThemeDisplay.getUserId());
+	$("#userName").val(rowData.createdBy);
+	//$("#emailAddress").val()
 	console.log(rowData);
 	$("#groupDescription").val(rowData.groupDescription);
 	$("#myGroupDataTable").hide();
@@ -251,6 +268,8 @@ function saveGroup() {
 	var flaskRequest = new Request();
 	var url = ""
 	var tempParam = {};
+	if(params.emailAddress == "")
+		params.emailAddress = emailAddress.val();
 	tempParam.groupName = params.groupName;
 	tempParam.groupDescription = params.groupDescription;
 	tempParam.isDelete = 0;
@@ -270,11 +289,12 @@ function saveGroup() {
 				_groupModel.MESSAGES.SAVE_GROUP);
 		var userrparams = {};
 		userrparams.groupId = data.groupId;
+		groupId = userrparams.groupId;
 		userrparams.userId = params.userId;
 		userrparams.userName = params.userName;
 		userrparams.emailAddress = params.emailAddress;
 		userrparams.isAdmin = 1;
-		addGroupUser(userrparams)
+		addGroupUser(userrparams, userrparams.isAdmin);
 	}, function(data) {
 		_flaskLib.showErrorMessage('group-action-msg',
 				_groupModel.MESSAGES.ERR_GROUP);
@@ -312,6 +332,10 @@ function addGroupUsers(){
 }
 function addGroupUser(userData, isAdmin) {
 	var flaskRequest = new Request();
+	if(userData.fullName== undefined)
+		userData.fullName = userData.userName;
+	if(groupId==0)
+		groupId = userData.groupId;
 	params = {groupId: groupId, emailAddress: userData.emailAddress, userId: userData.userId, userName: userData.fullName, isAdmin: isAdmin}
 	flaskRequest.sendPOSTRequest(_groupModel.SERVICE_ENDPOINTS.ADD_GROUP_USER,
 			params, function(data) {/* success handler */
