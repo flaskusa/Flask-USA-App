@@ -2,9 +2,31 @@ var myGroupForm;
 var groupId = "0";
 var loggedInUserId = "0";
 function groupClickHandlers() {
+	window.location.hash = '#UserGroups';
 	myGroupForm = $("#myGroupForm");
 	/* Initialize display elements */
 
+	$(window).hashchange( function(){
+		var hash = location.hash;
+		switch(hash) {
+	    case "#UserGroups":
+	    	$("#myGroupDataTable").show();
+			$("#formContainer").hide();
+			myGroupForm.hide();
+			$("#addGroupUserForm").hide();
+			$("#addGroupOwnerForm").hide();
+			break;
+	    case "#EditGroup":
+	    	$("#grpForm").click();
+	        break;
+	    case "#MyFriendsToAdd":
+	    	$("#frnds").click();
+	        break;	        
+	    default:
+	    	//alert("This is default");
+		}		
+	})
+	
 	$(".cssDelete").hide();
 
 	/* Click handler for add user button */
@@ -62,6 +84,7 @@ function groupClickHandlers() {
 	});
 	
 	$(".clsCancelGroup").click(function() {
+		window.location.hash = '#UserGroups';
 //		$("#tabs").show();
 		$("#myGroupDataTable").show();
 		$("#formContainer").hide();
@@ -94,9 +117,13 @@ function groupClickHandlers() {
 
 	$("#grpForm").click(function(){
 		$("myGroupForm").show();
-		showOnlyGroupUsers();
+		if(window.location.hash != '#EditGroup'){
+			window.location.hash = '#EditGroup';
+			showOnlyGroupUsers();
+		}
 	});
 	$("#frnds").click(function(){
+		window.location.hash = '#MyFriendsToAdd';
 		showAddGroupUsersForm();
 	});
 	/* Toggle search boxes */
@@ -145,6 +172,7 @@ function loadParticipantsGroupData(logginUserId) {
 function myGroupContextMenuHandler(menuItemText, rowData) {
 	groupId = rowData.groupId;
 	if (menuItemText == "Edit Group") {
+		window.location.hash = '#EditGroup';
 		editGroup(rowData);
 		showOnlyGroupUsers();
 	} else if (menuItemText == "Add Friend") {
@@ -453,6 +481,9 @@ function createList(flaskUser, divRow){
 	    		
 	        } else {
 	        	$(this).attr('checked', '');
+	        	userrparams.groupId = groupId;
+	    		userrparams.userId = flaskUser.userId;
+	        	removeGroupOwner(userrparams);
 	        }
 	    });
 }
@@ -470,7 +501,7 @@ function renderPhoto(FileId,objProfilePic){
 		 var flaskRequest = new Request();
 		 flaskRequest.sendGETRequest('/flask-rest-users-portlet.flaskadmin/get-my-file-entry',params,
 		    function (data){
-		    	 imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid="+data.uuid+"&groupId="+data.groupId;
+		    	 imgURL = "/c/document_library/get_file?uuid="+data.uuid+"&groupId="+data.groupId;
 		    	 $(objProfilePic).css("background-image","url('"+imgURL+"')");
 		     } ,
 		     function (data){
@@ -591,7 +622,7 @@ function addGroupOwners(){
 		userrparams.userName = user.firstName;
 		userrparams.emailAddress = user.emailAddress;
 		userrparams.isAdmin = 1;
-		addGroupOwner(userrparams)
+		addGroupOwner(userrparams);
 	}
 }
 function addGroupOwner(params){
@@ -600,6 +631,18 @@ function addGroupOwner(params){
 			params, function(data) {/* success handler */
 		_flaskLib.showSuccessMessage('group-action-msg',
 				"Group owner added successfully.");
+			}, function(error) { /* failure handler */
+				_flaskLib.showErrorMessage(_groupModel.MESSAGES.GET_ERROR);
+				console.log("Error in getting Group Detaill: " + error);
+			});
+}
+
+function removeGroupOwner(params){
+	var flaskRequest = new Request();
+	flaskRequest.sendPOSTRequest(_groupModel.SERVICE_ENDPOINTS.REMOVE_GROUP_OWNER,
+			params, function(data) {/* success handler */
+		_flaskLib.showSuccessMessage('group-action-msg',
+				"Group owner removed successfully.");
 			}, function(error) { /* failure handler */
 				_flaskLib.showErrorMessage(_groupModel.MESSAGES.GET_ERROR);
 				console.log("Error in getting Group Detaill: " + error);

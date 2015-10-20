@@ -13,6 +13,7 @@ _groupModel.SERVICE_ENDPOINTS = {
 	DELETE_GROUPS				: "/flask-manage-user-group-portlet.flaskgroup/delete-groups",
 	ADD_GROUP_USER				: "/flask-manage-user-group-portlet.flaskgroupusers/add-group-user",
 	ADD_GROUP_OWNER				: "/flask-manage-user-group-portlet.flaskgroupusers/add-group-owner",
+	REMOVE_GROUP_OWNER			: "/flask-manage-user-group-portlet.flaskgroupusers/remove-group-owner",
 	DELETE_GROUP_USER			: "/flask-manage-user-group-portlet.flaskgroupusers/delete-group-user",
 	DELETE_GROUP_USERS			: "/flask-manage-user-group-portlet.flaskgroupusers/delete-group-users",
 	GET_ALL_GROUP_USERS			: "/flask-manage-user-group-portlet.flaskgroupusers/get-all-group-users",
