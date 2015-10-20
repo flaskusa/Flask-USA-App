@@ -275,6 +275,7 @@ function saveGroup() {
 	tempParam.isDelete = 0;
 	tempParam.isActive = 1;
 	tempParam.createdBy = params.userName;
+	tempParam.groupId=groupId;
 	var date = new Date();
 	tempParam.createdDate = date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear();
 	params.groupId = groupId;
