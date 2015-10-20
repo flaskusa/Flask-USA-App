@@ -88,6 +88,10 @@ public class FlaskGroupUsersServiceUtil {
 		getService().addGroupOwner(groupId, userId);
 	}
 
+	public static void removeGroupOwner(long groupId, long userId) {
+		getService().removeGroupOwner(groupId, userId);
+	}
+
 	public static void deleteGroupUser(long groupId, long userId) {
 		getService().deleteGroupUser(groupId, userId);
 	}

@@ -121,6 +121,18 @@ public class FlaskGroupUsersServiceSoap {
 		}
 	}
 
+	public static void removeGroupOwner(long groupId, long userId)
+		throws RemoteException {
+		try {
+			FlaskGroupUsersServiceUtil.removeGroupOwner(groupId, userId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteGroupUser(long groupId, long userId)
 		throws RemoteException {
 		try {

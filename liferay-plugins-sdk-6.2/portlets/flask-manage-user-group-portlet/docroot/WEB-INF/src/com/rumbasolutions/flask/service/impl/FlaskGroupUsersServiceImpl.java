@@ -27,8 +27,10 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.rumbasolutions.flask.model.FlaskGroupUsers;
 import com.rumbasolutions.flask.model.impl.FlaskGroupUsersImpl;
 import com.rumbasolutions.flask.service.FlaskGroupUsersLocalServiceUtil;
+import com.rumbasolutions.flask.service.FlaskGroupUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.FlaskGroupUsersServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupUsersFinderUtil;
+import com.rumbasolutions.flask.service.persistence.FlaskGroupUsersUtil;
 
 /**
  * The implementation of the flask group users remote service.
@@ -118,6 +120,19 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 		int res = FlaskGroupUsersFinderUtil.addGroupOwner(groupId, userId);
 	}
 	
+	@Override
+	public void removeGroupOwner(long groupId, long userId){
+		FlaskGroupUsers flaskGroupUser = null;
+		try {
+			flaskGroupUser = FlaskGroupUsersUtil.findByUserIdGroupId(userId, groupId);
+			flaskGroupUser.setIsAdmin(0);
+			FlaskGroupUsersLocalServiceUtil.updateFlaskGroupUsers(flaskGroupUser);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		
+	}
 	
 	@Override
 	public void deleteGroupUser(long groupId, long userId) {

@@ -578,6 +578,246 @@ public class FlaskGroupUsersPersistenceImpl extends BasePersistenceImpl<FlaskGro
 	}
 
 	private static final String _FINDER_COLUMN_USERGROUPS_GROUPID_2 = "flaskGroupUsers.groupId = ?";
+	public static final FinderPath FINDER_PATH_FETCH_BY_USERIDGROUPID = new FinderPath(FlaskGroupUsersModelImpl.ENTITY_CACHE_ENABLED,
+			FlaskGroupUsersModelImpl.FINDER_CACHE_ENABLED,
+			FlaskGroupUsersImpl.class, FINDER_CLASS_NAME_ENTITY,
+			"fetchByUserIdGroupId",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			FlaskGroupUsersModelImpl.USERID_COLUMN_BITMASK |
+			FlaskGroupUsersModelImpl.GROUPID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERIDGROUPID = new FinderPath(FlaskGroupUsersModelImpl.ENTITY_CACHE_ENABLED,
+			FlaskGroupUsersModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUserIdGroupId",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns the flask group users where userId = &#63; and groupId = &#63; or throws a {@link com.rumbasolutions.flask.NoSuchFlaskGroupUsersException} if it could not be found.
+	 *
+	 * @param userId the user ID
+	 * @param groupId the group ID
+	 * @return the matching flask group users
+	 * @throws com.rumbasolutions.flask.NoSuchFlaskGroupUsersException if a matching flask group users could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public FlaskGroupUsers findByUserIdGroupId(long userId, long groupId)
+		throws NoSuchFlaskGroupUsersException, SystemException {
+		FlaskGroupUsers flaskGroupUsers = fetchByUserIdGroupId(userId, groupId);
+
+		if (flaskGroupUsers == null) {
+			StringBundler msg = new StringBundler(6);
+
+			msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+			msg.append("userId=");
+			msg.append(userId);
+
+			msg.append(", groupId=");
+			msg.append(groupId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFlaskGroupUsersException(msg.toString());
+		}
+
+		return flaskGroupUsers;
+	}
+
+	/**
+	 * Returns the flask group users where userId = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @param groupId the group ID
+	 * @return the matching flask group users, or <code>null</code> if a matching flask group users could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public FlaskGroupUsers fetchByUserIdGroupId(long userId, long groupId)
+		throws SystemException {
+		return fetchByUserIdGroupId(userId, groupId, true);
+	}
+
+	/**
+	 * Returns the flask group users where userId = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	 *
+	 * @param userId the user ID
+	 * @param groupId the group ID
+	 * @param retrieveFromCache whether to use the finder cache
+	 * @return the matching flask group users, or <code>null</code> if a matching flask group users could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public FlaskGroupUsers fetchByUserIdGroupId(long userId, long groupId,
+		boolean retrieveFromCache) throws SystemException {
+		Object[] finderArgs = new Object[] { userId, groupId };
+
+		Object result = null;
+
+		if (retrieveFromCache) {
+			result = FinderCacheUtil.getResult(FINDER_PATH_FETCH_BY_USERIDGROUPID,
+					finderArgs, this);
+		}
+
+		if (result instanceof FlaskGroupUsers) {
+			FlaskGroupUsers flaskGroupUsers = (FlaskGroupUsers)result;
+
+			if ((userId != flaskGroupUsers.getUserId()) ||
+					(groupId != flaskGroupUsers.getGroupId())) {
+				result = null;
+			}
+		}
+
+		if (result == null) {
+			StringBundler query = new StringBundler(4);
+
+			query.append(_SQL_SELECT_FLASKGROUPUSERS_WHERE);
+
+			query.append(_FINDER_COLUMN_USERIDGROUPID_USERID_2);
+
+			query.append(_FINDER_COLUMN_USERIDGROUPID_GROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(groupId);
+
+				List<FlaskGroupUsers> list = q.list();
+
+				if (list.isEmpty()) {
+					FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERIDGROUPID,
+						finderArgs, list);
+				}
+				else {
+					if ((list.size() > 1) && _log.isWarnEnabled()) {
+						_log.warn(
+							"FlaskGroupUsersPersistenceImpl.fetchByUserIdGroupId(long, long, boolean) with parameters (" +
+							StringUtil.merge(finderArgs) +
+							") yields a result set with more than 1 result. This violates the logical unique restriction. There is no order guarantee on which result is returned by this finder.");
+					}
+
+					FlaskGroupUsers flaskGroupUsers = list.get(0);
+
+					result = flaskGroupUsers;
+
+					cacheResult(flaskGroupUsers);
+
+					if ((flaskGroupUsers.getUserId() != userId) ||
+							(flaskGroupUsers.getGroupId() != groupId)) {
+						FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERIDGROUPID,
+							finderArgs, flaskGroupUsers);
+					}
+				}
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERIDGROUPID,
+					finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		if (result instanceof List<?>) {
+			return null;
+		}
+		else {
+			return (FlaskGroupUsers)result;
+		}
+	}
+
+	/**
+	 * Removes the flask group users where userId = &#63; and groupId = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @param groupId the group ID
+	 * @return the flask group users that was removed
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public FlaskGroupUsers removeByUserIdGroupId(long userId, long groupId)
+		throws NoSuchFlaskGroupUsersException, SystemException {
+		FlaskGroupUsers flaskGroupUsers = findByUserIdGroupId(userId, groupId);
+
+		return remove(flaskGroupUsers);
+	}
+
+	/**
+	 * Returns the number of flask group userses where userId = &#63; and groupId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param groupId the group ID
+	 * @return the number of matching flask group userses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByUserIdGroupId(long userId, long groupId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERIDGROUPID;
+
+		Object[] finderArgs = new Object[] { userId, groupId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_FLASKGROUPUSERS_WHERE);
+
+			query.append(_FINDER_COLUMN_USERIDGROUPID_USERID_2);
+
+			query.append(_FINDER_COLUMN_USERIDGROUPID_GROUPID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(groupId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_USERIDGROUPID_USERID_2 = "flaskGroupUsers.userId = ? AND ";
+	private static final String _FINDER_COLUMN_USERIDGROUPID_GROUPID_2 = "flaskGroupUsers.groupId = ?";
 
 	public FlaskGroupUsersPersistenceImpl() {
 		setModelClass(FlaskGroupUsers.class);
@@ -593,6 +833,11 @@ public class FlaskGroupUsersPersistenceImpl extends BasePersistenceImpl<FlaskGro
 		EntityCacheUtil.putResult(FlaskGroupUsersModelImpl.ENTITY_CACHE_ENABLED,
 			FlaskGroupUsersImpl.class, flaskGroupUsers.getPrimaryKey(),
 			flaskGroupUsers);
+
+		FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERIDGROUPID,
+			new Object[] {
+				flaskGroupUsers.getUserId(), flaskGroupUsers.getGroupId()
+			}, flaskGroupUsers);
 
 		flaskGroupUsers.resetOriginalValues();
 	}
@@ -651,6 +896,8 @@ public class FlaskGroupUsersPersistenceImpl extends BasePersistenceImpl<FlaskGro
 
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITH_PAGINATION);
 		FinderCacheUtil.clearCache(FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION);
+
+		clearUniqueFindersCache(flaskGroupUsers);
 	}
 
 	@Override
@@ -661,6 +908,61 @@ public class FlaskGroupUsersPersistenceImpl extends BasePersistenceImpl<FlaskGro
 		for (FlaskGroupUsers flaskGroupUsers : flaskGroupUserses) {
 			EntityCacheUtil.removeResult(FlaskGroupUsersModelImpl.ENTITY_CACHE_ENABLED,
 				FlaskGroupUsersImpl.class, flaskGroupUsers.getPrimaryKey());
+
+			clearUniqueFindersCache(flaskGroupUsers);
+		}
+	}
+
+	protected void cacheUniqueFindersCache(FlaskGroupUsers flaskGroupUsers) {
+		if (flaskGroupUsers.isNew()) {
+			Object[] args = new Object[] {
+					flaskGroupUsers.getUserId(), flaskGroupUsers.getGroupId()
+				};
+
+			FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERIDGROUPID, args,
+				Long.valueOf(1));
+			FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERIDGROUPID, args,
+				flaskGroupUsers);
+		}
+		else {
+			FlaskGroupUsersModelImpl flaskGroupUsersModelImpl = (FlaskGroupUsersModelImpl)flaskGroupUsers;
+
+			if ((flaskGroupUsersModelImpl.getColumnBitmask() &
+					FINDER_PATH_FETCH_BY_USERIDGROUPID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						flaskGroupUsers.getUserId(),
+						flaskGroupUsers.getGroupId()
+					};
+
+				FinderCacheUtil.putResult(FINDER_PATH_COUNT_BY_USERIDGROUPID,
+					args, Long.valueOf(1));
+				FinderCacheUtil.putResult(FINDER_PATH_FETCH_BY_USERIDGROUPID,
+					args, flaskGroupUsers);
+			}
+		}
+	}
+
+	protected void clearUniqueFindersCache(FlaskGroupUsers flaskGroupUsers) {
+		FlaskGroupUsersModelImpl flaskGroupUsersModelImpl = (FlaskGroupUsersModelImpl)flaskGroupUsers;
+
+		Object[] args = new Object[] {
+				flaskGroupUsers.getUserId(), flaskGroupUsers.getGroupId()
+			};
+
+		FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERIDGROUPID, args);
+		FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERIDGROUPID, args);
+
+		if ((flaskGroupUsersModelImpl.getColumnBitmask() &
+				FINDER_PATH_FETCH_BY_USERIDGROUPID.getColumnBitmask()) != 0) {
+			args = new Object[] {
+					flaskGroupUsersModelImpl.getOriginalUserId(),
+					flaskGroupUsersModelImpl.getOriginalGroupId()
+				};
+
+			FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERIDGROUPID,
+				args);
+			FinderCacheUtil.removeResult(FINDER_PATH_FETCH_BY_USERIDGROUPID,
+				args);
 		}
 	}
 
@@ -829,6 +1131,9 @@ public class FlaskGroupUsersPersistenceImpl extends BasePersistenceImpl<FlaskGro
 		EntityCacheUtil.putResult(FlaskGroupUsersModelImpl.ENTITY_CACHE_ENABLED,
 			FlaskGroupUsersImpl.class, flaskGroupUsers.getPrimaryKey(),
 			flaskGroupUsers);
+
+		clearUniqueFindersCache(flaskGroupUsers);
+		cacheUniqueFindersCache(flaskGroupUsers);
 
 		return flaskGroupUsers;
 	}

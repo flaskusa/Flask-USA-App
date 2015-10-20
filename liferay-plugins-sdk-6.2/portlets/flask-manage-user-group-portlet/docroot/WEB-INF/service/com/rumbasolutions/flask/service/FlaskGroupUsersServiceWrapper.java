@@ -86,6 +86,11 @@ public class FlaskGroupUsersServiceWrapper implements FlaskGroupUsersService,
 	}
 
 	@Override
+	public void removeGroupOwner(long groupId, long userId) {
+		_flaskGroupUsersService.removeGroupOwner(groupId, userId);
+	}
+
+	@Override
 	public void deleteGroupUser(long groupId, long userId) {
 		_flaskGroupUsersService.deleteGroupUser(groupId, userId);
 	}

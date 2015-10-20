@@ -53,13 +53,17 @@ public class FlaskGroupUsersServiceClpInvoker {
 
 		_methodParameterTypes37 = new String[] { "long", "long" };
 
-		_methodName38 = "deleteGroupUser";
+		_methodName38 = "removeGroupOwner";
 
 		_methodParameterTypes38 = new String[] { "long", "long" };
 
-		_methodName39 = "deleteGroupUsers";
+		_methodName39 = "deleteGroupUser";
 
-		_methodParameterTypes39 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes39 = new String[] { "long", "long" };
+
+		_methodName40 = "deleteGroupUsers";
+
+		_methodParameterTypes40 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -108,7 +112,7 @@ public class FlaskGroupUsersServiceClpInvoker {
 
 		if (_methodName38.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
-			FlaskGroupUsersServiceUtil.deleteGroupUser(((Long)arguments[0]).longValue(),
+			FlaskGroupUsersServiceUtil.removeGroupOwner(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 
 			return null;
@@ -116,6 +120,14 @@ public class FlaskGroupUsersServiceClpInvoker {
 
 		if (_methodName39.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
+			FlaskGroupUsersServiceUtil.deleteGroupUser(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+
+			return null;
+		}
+
+		if (_methodName40.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
 			FlaskGroupUsersServiceUtil.deleteGroupUsers(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 
@@ -141,4 +153,6 @@ public class FlaskGroupUsersServiceClpInvoker {
 	private String[] _methodParameterTypes38;
 	private String _methodName39;
 	private String[] _methodParameterTypes39;
+	private String _methodName40;
+	private String[] _methodParameterTypes40;
 }

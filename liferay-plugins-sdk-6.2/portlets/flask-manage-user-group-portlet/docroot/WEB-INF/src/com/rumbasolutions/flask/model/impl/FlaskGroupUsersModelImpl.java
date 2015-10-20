@@ -89,7 +89,8 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 				"value.object.column.bitmask.enabled.com.rumbasolutions.flask.model.FlaskGroupUsers"),
 			true);
 	public static long GROUPID_COLUMN_BITMASK = 1L;
-	public static long GROUPUSERID_COLUMN_BITMASK = 2L;
+	public static long USERID_COLUMN_BITMASK = 2L;
+	public static long GROUPUSERID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -276,6 +277,14 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -287,6 +296,10 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -425,6 +438,10 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 
 		flaskGroupUsersModelImpl._setOriginalGroupId = false;
 
+		flaskGroupUsersModelImpl._originalUserId = flaskGroupUsersModelImpl._userId;
+
+		flaskGroupUsersModelImpl._setOriginalUserId = false;
+
 		flaskGroupUsersModelImpl._columnBitmask = 0;
 	}
 
@@ -529,6 +546,8 @@ public class FlaskGroupUsersModelImpl extends BaseModelImpl<FlaskGroupUsers>
 	private boolean _setOriginalGroupId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private String _userName;
 	private int _isAdmin;
 	private String _emailAddress;

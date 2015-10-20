@@ -37,5 +37,9 @@
 		<finder name="UserGroups" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
+		<finder name="UserIdGroupId" return-type="FlaskGroupUsers">
+			<finder-column name="userId" />
+			<finder-column name="groupId" />
+		</finder>
 	</entity>
 </service-builder>

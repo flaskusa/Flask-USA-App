@@ -53,13 +53,17 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 
 		_methodParameterTypes6 = new String[] { "long", "long" };
 
-		_methodName7 = "deleteGroupUser";
+		_methodName7 = "removeGroupOwner";
 
 		_methodParameterTypes7 = new String[] { "long", "long" };
 
-		_methodName8 = "deleteGroupUsers";
+		_methodName8 = "deleteGroupUser";
 
-		_methodParameterTypes8 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes8 = new String[] { "long", "long" };
+
+		_methodName9 = "deleteGroupUsers";
+
+		_methodParameterTypes9 = new String[] { "long", "java.lang.String" };
 	}
 
 	@Override
@@ -230,7 +234,7 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 	}
 
 	@Override
-	public void deleteGroupUser(long groupId, long userId) {
+	public void removeGroupOwner(long groupId, long userId) {
 		try {
 			_invokableService.invokeMethod(_methodName7,
 				_methodParameterTypes7, new Object[] { groupId, userId });
@@ -249,10 +253,29 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 	}
 
 	@Override
-	public void deleteGroupUsers(long groupId, java.lang.String userIds) {
+	public void deleteGroupUser(long groupId, long userId) {
 		try {
 			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
+				_methodParameterTypes8, new Object[] { groupId, userId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void deleteGroupUsers(long groupId, java.lang.String userIds) {
+		try {
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9,
 				new Object[] { groupId, ClpSerializer.translateInput(userIds) });
 		}
 		catch (Throwable t) {
@@ -285,4 +308,6 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
 }

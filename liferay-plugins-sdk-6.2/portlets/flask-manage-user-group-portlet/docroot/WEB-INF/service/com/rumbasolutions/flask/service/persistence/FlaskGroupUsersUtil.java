@@ -275,6 +275,80 @@ public class FlaskGroupUsersUtil {
 	}
 
 	/**
+	* Returns the flask group users where userId = &#63; and groupId = &#63; or throws a {@link com.rumbasolutions.flask.NoSuchFlaskGroupUsersException} if it could not be found.
+	*
+	* @param userId the user ID
+	* @param groupId the group ID
+	* @return the matching flask group users
+	* @throws com.rumbasolutions.flask.NoSuchFlaskGroupUsersException if a matching flask group users could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.FlaskGroupUsers findByUserIdGroupId(
+		long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchFlaskGroupUsersException {
+		return getPersistence().findByUserIdGroupId(userId, groupId);
+	}
+
+	/**
+	* Returns the flask group users where userId = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found. Uses the finder cache.
+	*
+	* @param userId the user ID
+	* @param groupId the group ID
+	* @return the matching flask group users, or <code>null</code> if a matching flask group users could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.FlaskGroupUsers fetchByUserIdGroupId(
+		long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByUserIdGroupId(userId, groupId);
+	}
+
+	/**
+	* Returns the flask group users where userId = &#63; and groupId = &#63; or returns <code>null</code> if it could not be found, optionally using the finder cache.
+	*
+	* @param userId the user ID
+	* @param groupId the group ID
+	* @param retrieveFromCache whether to use the finder cache
+	* @return the matching flask group users, or <code>null</code> if a matching flask group users could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.FlaskGroupUsers fetchByUserIdGroupId(
+		long userId, long groupId, boolean retrieveFromCache)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByUserIdGroupId(userId, groupId, retrieveFromCache);
+	}
+
+	/**
+	* Removes the flask group users where userId = &#63; and groupId = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @param groupId the group ID
+	* @return the flask group users that was removed
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.FlaskGroupUsers removeByUserIdGroupId(
+		long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchFlaskGroupUsersException {
+		return getPersistence().removeByUserIdGroupId(userId, groupId);
+	}
+
+	/**
+	* Returns the number of flask group userses where userId = &#63; and groupId = &#63;.
+	*
+	* @param userId the user ID
+	* @param groupId the group ID
+	* @return the number of matching flask group userses
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByUserIdGroupId(long userId, long groupId)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByUserIdGroupId(userId, groupId);
+	}
+
+	/**
 	* Caches the flask group users in the entity cache if it is enabled.
 	*
 	* @param flaskGroupUsers the flask group users
