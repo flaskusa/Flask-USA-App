@@ -50,14 +50,13 @@ function renderContactList(tdata,IsFriendList) {
 		var strMsg = "You do not have any friends yet. Please search and add friends";
 	}else{
 		divRow = $('#Users_placeholder');
+		$(".previous").show();
 		var strMsg = "There are no users available";
 	}
-		
-
 	 //console.log(tdata.length);
 	 if(tdata.length == 0){
-		$("<span class='control-label-nocolor'>"+strMsg+"</span>").appendTo($(divRow));
-		$("#prev").hide();
+		$("<span id='notFound' class='control-label-nocolor'>"+strMsg+"</span>").appendTo($(divRow));
+		$(".previous").hide();
 		return;
 	 }
 	 for(var i=0; i < tdata.length; i++)
@@ -266,6 +265,8 @@ function fnUnBlock(UserId,obj){
 function initSearch(){
 	$("#btnSearchContact").click(function(){
 		$('#Users_placeholder').html('');
+		_startPos = 0;
+		_endPos = 9;
 		initContactList(_startPos,_endPos);		
 	});
 	
@@ -447,6 +448,8 @@ $(document).ready(function(){
 		    	$("#mcontents").click();
 		    	$("#prev").hide();
 				  $('#Users_placeholder').html("");
+				  _startPos = 0;
+				  _endPos = 9;
 				  initContactList(_startPos,_endPos);   
 		        break;
 		    case "#Notifications":
