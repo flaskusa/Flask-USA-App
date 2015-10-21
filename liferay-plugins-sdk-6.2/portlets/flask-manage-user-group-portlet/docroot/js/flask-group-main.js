@@ -180,11 +180,11 @@ function myGroupContextMenuHandler(menuItemText, rowData) {
 		window.location.hash = '#EditGroup';
 		editGroup(rowData);
 		showOnlyGroupUsers();
-	} else if (menuItemText == "Add Friend") {
+	} /*else if (menuItemText == "Add Friend") {
 		//groupId = rowData.groupId;
 		showAddGroupUsersForm();
 		//showOnlyGroupUsers();
-	} else if (menuItemText == "Delete Group") {
+	}*/ else if (menuItemText == "Delete Group") {
 		var a = window.confirm("Are you sure ?");
 		if (a) {
 			deleteGroup(rowData.groupId);

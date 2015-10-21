@@ -95,7 +95,7 @@ GRID_PARAM_GROUP.onRowClick =function (event)
 	if (args.column.text == rowMenuColumnText) {
 //		$('#' + rowMenuDivId[isAdmin]).on('itemclick',GRID_PARAM_GROUP.onContextMenuItemClick);
 		GRID_PARAM_GROUP.prepareContextMenu();
-		var heightCTXMenu = isAdmin == 0 ? 35 : 87;
+		var heightCTXMenu = isAdmin == 0 ? 35 : 57;
 		// create context menu
 		var contextMenu = $("#" + rowMenuDivId).jqxMenu({
 			width : 160,
@@ -129,8 +129,6 @@ GRID_PARAM_GROUP.prepareContextMenu = function(){
 	var ulEle = "<div id='grpCtxtMenu'><ul>";
 	if(isAdmin == 1){
 		ulEle = ulEle + "<li>Edit Group</li>";
-		ulEle = ulEle + "<li>Add Friend</li>";
-		ulEle = ulEle + "<li>Add Owner</li>";
 		ulEle = ulEle + "<li>Delete Group</li>";
 	}else{
 		ulEle = ulEle + "<li>Leave Group</li>";
