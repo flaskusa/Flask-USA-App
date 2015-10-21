@@ -256,6 +256,7 @@ function editGroup(rowData) {
 	$("#myGroupDataTable").hide();
 	$("#myGroupModal").modal('show');
 	myGroupForm.show();
+	$(".clsSaveGroup").html('save');
 	// _flaskLib.loadUSARegions('venueStateId', rowData.venueStateId);
 
 }
@@ -288,6 +289,7 @@ function saveGroup() {
 	flaskRequest.sendPOSTRequest(url, tempParam, function(data) {
 		_flaskLib.showSuccessMessage('group-action-msg',
 				_groupModel.MESSAGES.SAVE_GROUP);
+	if (params.groupId == "0") {
 		var userrparams = {};
 		userrparams.groupId = data.groupId;
 		groupId = userrparams.groupId;
@@ -296,6 +298,7 @@ function saveGroup() {
 		userrparams.emailAddress = params.emailAddress;
 		userrparams.isAdmin = 1;
 		addGroupUser(userrparams, userrparams.isAdmin);
+	}
 	}, function(data) {
 		_flaskLib.showErrorMessage('group-action-msg',
 				_groupModel.MESSAGES.ERR_GROUP);
