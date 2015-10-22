@@ -221,11 +221,9 @@ function createCustomerTable(data, model, grid, menuDivId, actionColText,context
 						return '<i class="icon-wrench" style="margin:3px;"></i>'
 	}
     
-    var adCustomerColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'customerName', width: '30%' },
-    	 { text: 'Business', datafield: 'businessType'},
+    var adCustomerColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'customerName', width: '35%' },
     	 { text: 'City', datafield: 'city'},
-    	 { text: 'Phone Number', datafield: 'businessPhoneNumber', width: '10%'},
-    	 { text: 'Email', datafield: 'email', width: '10%'},
+    	 { text: 'Phone', datafield: 'businessPhoneNumber', width: '25%'},
     	 { text: 'Edit',  datafield: 'customerId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
     
     grid.on('cellclick', GRID_PARAM_CUSTOMER.onRowClick);
@@ -259,7 +257,7 @@ function createCustomerTable(data, model, grid, menuDivId, actionColText,context
                 rowdetails: true,
                 showrowdetailscolumn:false,
                 autoheight: true,
-                rowdetailstemplate: GRID_PARAM_CUSTOMER.rowDetailTemplate(rowDetailDivArr , 200),
+                rowdetailstemplate: GRID_PARAM_CUSTOMER.rowDetailTemplate(rowDetailDivArr , 300),
                 initrowdetails: GRID_PARAM_CUSTOMER.initrowdetails,
                 columns: adCustomerColumns,
                 pagesize: 20
