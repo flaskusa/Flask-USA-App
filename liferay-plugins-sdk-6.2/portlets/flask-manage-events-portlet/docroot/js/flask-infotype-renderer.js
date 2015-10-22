@@ -196,7 +196,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 				"id":"infoTitle",
 				"value":"",
 				"placeholder":"Enter title here",
-				"maxlength":"20",
+				"maxlength":"70",
 				"Class":""
 				}]
 			},
@@ -238,7 +238,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 				"id":"infoTitle",
 				"value":"",
 				"placeholder":"Enter title here",
-				"maxlength":"20",
+				"maxlength":"70",
 				"Class":""
 				}]
 			},
@@ -270,7 +270,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"id":"infoTitle",
 			"value":"",
 			"placeholder":"Enter Name here",
-			"maxlength":"20",
+			"maxlength":"70",
 			"Class":""
 			}]
 		},
@@ -292,7 +292,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 				"id":"infoTitle",
 				"value":"",
 				"placeholder":"Enter Name here",
-				"maxlength":"20",
+				"maxlength":"70",
 				"Class":""
 				}]
 			},
@@ -346,7 +346,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 				"id":"infoTitle",
 				"value":"",
 				"placeholder":"Enter Name here",
-				"maxlength":"20",
+				"maxlength":"70",
 				"Class":""
 				}]
 			},
@@ -369,7 +369,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"id":"infoTitle",
 			"value":"",
 			"placeholder":"Enter Name here",
-			"maxlength":"20",
+			"maxlength":"70",
 			"Class":""
 			}]
 		},
@@ -424,7 +424,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"id":"infoTitle",
 			"value":"",
 			"placeholder":"Enter Name here",
-			"maxlength":"20",
+			"maxlength":"70",
 			"Class":""
 			}]
 		},
@@ -499,7 +499,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 				"id":"infoTitle",
 				"value":"",
 				"placeholder":"Enter Name here",
-				"maxlength":"20",
+				"maxlength":"70",
 				"Class":""
 				}]
 			},
@@ -543,7 +543,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 					"id":"infoTitle",
 					"value":"",
 					"placeholder":"Enter Name here",
-					"maxlength":"20",
+					"maxlength":"70",
 					"Class":""
 					}]
 				},
