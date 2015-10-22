@@ -313,7 +313,7 @@ _flaskMap.myMarkers = function(){
 		        			
 		        			if(obj.website!=""){
 		        				var objWebSite = $('<div/>');
-		        				objWebSite.html('<div class="adWebSite"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-website"></span><a href="'+obj.website+'" target="_blank">'+obj.website+'</a></div>');
+		        				objWebSite.html('<div class="adWebSite"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-website"></span><a href="'+_flaskLib.fixURL(obj.website)+'" target="_blank">'+obj.website+'</a></div>');
 		        				content = content + objWebSite.html();
 		        			}
 		        			
