@@ -73,7 +73,7 @@ _flaskAd.GetAdImagesForMultipleEvents = function(Obj){
 			
 			if($(this).attr('data-website')!=""){
 				var objWebSite= $('<div/>',{'class':'adWebSite'});
-				var objWebSiteLink = $("<a/>",{'href':'http://'+$(this).attr('data-website'),'target':'_blank'});
+				var objWebSiteLink = $("<a/>",{'href': _flaskLib.fixURL($(this).attr('data-website')),'target':'_blank'});
 				objWebSiteLink.html($(this).attr('data-website'))
 				objWebSite.html('<span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-website"></span>');
 				objWebSite.append(objWebSiteLink);

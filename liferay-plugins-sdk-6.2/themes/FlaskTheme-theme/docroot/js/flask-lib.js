@@ -275,7 +275,15 @@ _flaskLib.formatTimeInMillis = function(time) {
 }
 
 _flaskLib.formatDateInMillis = function(date) {
-	return strftime('%D', new Date(parseInt(date)));
+	return strftime('%m/%d/%Y', new Date(parseInt(date)));
+}
+
+_flaskLib.fixURL = function(url) {	
+	if(url.indexOf("http://") > -1 || "https://" > -1){
+		return url;
+	}else{
+		return "http://" + url;
+	}
 }
 
 
