@@ -250,6 +250,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 									divControls.append(objAnchor);							
 							        break;
 							    case "Title":
+							    case "Name":
 							    	captionObj.html(evalue);
 							    	divControls.html('');
 									var objImage = jQuery.parseJSON(objImg.DetailImage);
@@ -285,44 +286,46 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	}
 	else{
 		$.each(objFields, function(idx, obj){
-			//infoTypeCategoryName.toUpperCase() - > title
 			var objContent = $("<div/>",{'class':'DetailedSlides'});
 			$.each(obj,function(key,value){
 				var evalue = eval("objEventDetails."+key);
-				var caption = value;
-				var captionObj = $('<div/>',{'width':'100%','font-size':'18px'}).html(caption);
-				var divFormGroup = $('<div/>',{'class':'form-group'});
-				var lblControlLabel = $('<label/>',{'class':'control-label','for':caption});
-				lblControlLabel.append(captionObj);
-				var divControls = $('<div/>',{'class':'controls','id':caption});
-				switch(caption) {
-					case  "Phone": 
-						var objAnchor = $("<a/>",{'href':'tel:'+evalue});
-						objAnchor.html(evalue);
-						divControls.append(objAnchor);
-				        break;
-				    case "Website":
-						var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
-						objAnchor.html(evalue);
-						divControls.append(objAnchor);							
-				        break;
-				    case "Title":
-				    	captionObj.html(evalue);
-				    	divControls.html('');
-				    	break;
-				    case "Description":
-				    	captionObj.html('<b>Flask Us</b>');
-				    	divControls.html(evalue);	
-				    	break;				    	
-				    default:
-				    	divControls.html(evalue);				    	
-				    	break;
-				}		
-				divFormGroup.append(lblControlLabel);
-				divFormGroup.append(divControls);
-				divFormGroup.appendTo($(objContent));
+				if(evalue!='' || evalue!=undefined){				
+					var caption = value;
+					var captionObj = $('<div/>',{'width':'100%','font-size':'18px'}).html(caption);
+					var divFormGroup = $('<div/>',{'class':'form-group'});
+					var lblControlLabel = $('<label/>',{'class':'control-label','for':caption});
+					lblControlLabel.append(captionObj);
+					var divControls = $('<div/>',{'class':'controls','id':caption});
+					switch(caption) {
+						case  "Phone": 
+							var objAnchor = $("<a/>",{'href':'tel:'+evalue});
+							objAnchor.html(evalue);
+							divControls.append(objAnchor);
+					        break;
+					    case "Website":
+							var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
+							objAnchor.html(evalue);
+							divControls.append(objAnchor);							
+					        break;
+					    case "Title":
+					    case "Name":
+					    	captionObj.html(evalue);
+					    	divControls.html('');
+					    	break;
+					    case "Description":
+					    	captionObj.html('<b>Flask Us</b>');
+					    	divControls.html(evalue);	
+					    	break;				    	
+					    default:
+					    	divControls.html(evalue);				    	
+					    	break;
+					}		
+					divFormGroup.append(lblControlLabel);
+					divFormGroup.append(divControls);
+					divFormGroup.appendTo($(objContent));
+				}
 			});
-			objArray.push(objContent);			
+			objArray.push(objContent);		
 		});
 	}
 	return objArray;
