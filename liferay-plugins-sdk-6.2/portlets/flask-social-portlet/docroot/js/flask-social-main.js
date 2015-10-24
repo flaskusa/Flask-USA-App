@@ -1,7 +1,6 @@
 var _startPosFriends = 0; 
 var _endPosFriends = 99;
 var _msgCount=0;
-
 var _startPos = 0; 
 var _endPos = 9;
 function initContactList(startPos,endPos){
@@ -19,12 +18,11 @@ function initContactList(startPos,endPos){
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
 	});
+	$("#btnSearchContact").removeClass('disabled');
 	$("html, body").animate({ scrollTop: $(document).height()+$(window).height()+$('#Users_placeholder').height() }, "slow");
 }
 
 function initFriendList(startPos,endPos){
-	/*if(startPos>0)
-		$("#prev").show();*/
 	var companyId = $("#CompanyId").val();
 	var searchString =  $("#searchFriend").val();
 	var params = {companyId: companyId,keywords: searchString};
@@ -41,6 +39,7 @@ function initFriendList(startPos,endPos){
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
 	});
+	$("#btnSearchFriend").removeClass('disabled');
 }
 
 function renderContactList(tdata,IsFriendList) {
@@ -53,7 +52,6 @@ function renderContactList(tdata,IsFriendList) {
 		$(".previous").show();
 		var strMsg = "There are no users available";
 	}
-	 //console.log(tdata.length);
 	 if(tdata.length == 0){
 		$("<span id='notFound' class='control-label-nocolor'>"+strMsg+"</span>").appendTo($(divRow));
 		$(".previous").hide();
@@ -73,19 +71,15 @@ function renderContactList(tdata,IsFriendList) {
 		    $(objTd1).appendTo($(objTr));
 		    console.log(flaskUser);
 		    fnShowEventLogo(flaskUser.portraitId, objTd1);
-		    
 		    var userName_lbl = $('<label/>',{'class':'control-label-color'});
 		    $(userName_lbl).html(flaskUser.fullName);
 		    var objTd2 = $('<td/>',{'data-id':flaskUser.userId,'data-uuid':flaskUser.uuid});
-		    
 		    $(userName_lbl).appendTo($(objTd2));
 		    $(objTd2).appendTo(objTr);
 		    var objTd3 = $('<td/>',{'width':'140px'});
 	    	var div_heart = fnBuildMenu(flaskUser);
-	    	
 		    $(div_heart).appendTo($(objTd3));
 		    $(objTd3).appendTo(objTr);
-
 		    var objTr2 = $('<tr/>');
 		    var objtd2_1 = $('<td/>',{'colspan':'2'});
 		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
@@ -174,7 +168,6 @@ function fnShowPrevRecords(){
 	initContactList(_startPos,_endPos);
 }
 
-
 function getUserVCard(data){
 	alert("Show user details here");
 }
@@ -233,7 +226,6 @@ function fnUnFriend(UserId,obj){
 	$(hide_div).fadeOut( "slow" );	
 }
 
-
 function fnBlock(UserId,obj){
 	var flaskRequest = new Request();
 	var params = {blockUserId: UserId};
@@ -264,6 +256,7 @@ function fnUnBlock(UserId,obj){
 
 function initSearch(){
 	$("#btnSearchContact").click(function(){
+		$(this).addClass('disabled');
 		$('#Users_placeholder').html('');
 		_startPos = 0;
 		_endPos = 9;
@@ -271,15 +264,15 @@ function initSearch(){
 	});
 	
 	$("#btnSearchFriend").click(function(){
+		$(this).addClass('disabled');
 		$('#Friend_placeholder').html('');
-		initFriendList(_startPosFriends,_endPosFriends);		
+		initFriendList(_startPosFriends,_endPosFriends);	
 	});
 }
 
 function initNotifications(){
 	refreshMessages();
 	getRequestCount();
-	//getUnreadMessages();
 	getMyAllMessages();
 	getRequestList();
 }
@@ -325,7 +318,6 @@ function fnSendMessage(userId, preMsg){
 				var message = $('#iMsg').val() + preMsg;
 				var isSendEmail = $('#sendEmailToSinglePerson').is(':checked');
 				sendMessage(selectedFriend, message, isSendEmail);
-
 		}
 		}
 	});
@@ -360,20 +352,16 @@ function renderRequestList(obj){
 		    $(objTd1).appendTo($(objTr));
 		    console.log(flaskUser);
 		    fnShowEventLogo(flaskUser.portraitId, objTd1);
-		    
 		    var userName_lbl = $('<label/>',{'class':'control-label-color'});
 		    $(userName_lbl).html(flaskUser.firstName + " " + flaskUser.lastName);
 		    var objTd2 = $('<td/>',{'data-id':flaskUser.userId,'data-uuid':flaskUser.uuid});
-		    
 		    $(userName_lbl).appendTo($(objTd2));
 		    $(objTd2).appendTo(objTr);
 		    var objTd3 = $('<td/>',{'align':'right','valign':'top'});
 		    console.log(flaskUser);
 	    	var div_heart = fnBuildRequestMenu(flaskUser,objTable);
-	    	
 		    $(div_heart).appendTo($(objTd3));
 		    $(objTd3).appendTo(objTr);
-
 		    var objTr2 = $('<tr/>');
 		    var objtd2_1 = $('<td/>',{'colspan':'2'});
 		    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'});
@@ -426,7 +414,6 @@ function GetParameterValues(param) {
 }
 
 $(document).ready(function(){
-	  //window.location.hash = '#Friends';
 	  var selectedUsers = [];
 	  var k=GetParameterValues('notifications');
 	  if(k==1){
@@ -461,21 +448,14 @@ $(document).ready(function(){
 			}		
 		})
 	  $("#frnds").click(function(){
-		 // $("#prev").hide();
-		 // $('#Friend_placeholder').html("");
-		 // initFriendList(_startPosFriends,_endPosFriends); 
 		  window.location.hash = '#Friends';
 	  });
 	  
-	  $("#mcontents").click(function(){
-		 // $("#prev").hide();
-		 // $('#Users_placeholder').html("");
-		 // initContactList(_startPos,_endPos);   
+	  $("#mcontents").click(function(){ 
 		  window.location.hash = '#SearchNewFriends';
 	  });
 	  
-	  $("#notifications").click(function(){
-		 // initNotifications();   
+	  $("#notifications").click(function(){  
 		  window.location.hash = '#Notifications';
 	  });
 	  
@@ -486,7 +466,6 @@ $(document).ready(function(){
 	  $(".cssSendMsg").hide();
 	  $(".cssMultUser").show();
 	  $("#msgDiv").hide();
-	  
 	  $(".cssMultUser").click(function(){
 		   $(this).hide();
 		   $("#msg").val("");
@@ -572,18 +551,6 @@ function getMyAllMessages(){
 	 });
 }
 
-
-/*function getUnreadMessages(msg_lbl){
- var flaskRequest = new Request();
- flaskRequest.sendGETRequest(_socialModel.SERVICE_ENDPOINTS.GET_UNREAD_MESSAGES,
-    function (data){
-      	$(msg_lbl).addClass("unRdMsg");
-     } ,
-     function (data){
-    	 console.log("Error in getting Messages: " + data );
-     });
-}*/
-
 function setRead(messageId){
 	var flaskRequest = new Request();
 	var params = {messageId:messageId};
@@ -607,10 +574,8 @@ function renderMessageList(obj){
 	    $(objTdPhoto).appendTo($(objTrMain));
 	    $(objTdContent).appendTo($(objTrMain));
 		var objdiv = $('<div/>',{'class':'eventLogo'});
-		//console.log(node.portraitId);
 		renderPhoto(node.portraitId,objdiv);
 		$(objdiv).appendTo($(objTdPhoto));
-	    
 	    var objTableText = $('<table/>',{'class':'tblContent','style':'width:100%'});
 	    $(objTableText).appendTo($(objTdContent));
 	    var objTr = $('<tr/>');
@@ -620,12 +585,10 @@ function renderMessageList(obj){
 	    var objTd1 = $('<td/>',{'data-id':node.messageId});
 	    $(userName_lbl).appendTo($(objTd1));
 	    $(objTd1).appendTo(objTr);
-	    
 	    var objTd3 = $('<td/>',{'align':'left','valign':'top','style':'font-size:12px;width: 100px;'});
 	    var messageDate = moment(node.dateTime).toNow(true);
 	    objTd3.html(messageDate+' ago')
 	    $(objTd3).appendTo(objTr);
-	    
 	    var objTr2 = $('<tr/>');
 	    $(objTr2).appendTo($(objTableText));
 	    var objTd2 = $('<td/>',{'align':'left','valign':'top', 'style':'word-break: break-all;'});
