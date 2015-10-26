@@ -34,6 +34,7 @@ function groupClickHandlers() {
 
 	$(".cssAddUser").click(function() {
 		window.location.hash = '#EditGroup';
+		$(".clsSaveGroup").html('Create');
 		$("#formContainer").show();
 		$("#myGroupDataTable").hide();
 		myGroupForm.show();
@@ -47,12 +48,12 @@ function groupClickHandlers() {
 
 	$(".clsSaveGroup").click(
 			function() {
-				//if (_flaskLib.validateFormData("myGroupForm",'myGroup-valid-msg', _groupModel.DATA_MODEL.GROUP)) {
+				if ($('#myGroupForm').jqxValidator('validate'))
 					saveGroup();
 //					$("#tabs").show();
 					//$("#myGroupDataTable").show();
 					//myGroupForm.hide();
-				//}
+
 			});
 	
 	$(".clsAddUserGroup").click(
@@ -135,6 +136,16 @@ function groupClickHandlers() {
 	$("#cssSearchGroup").click(GRID_PARAM_GROUP.toggleSearchBoxes);
 	$("#cssSearchUser").click(GRID_PARAM_GROUP.toggleUserSearchBoxes);
 	$("#cssSearchOwner").click(GRID_PARAM_GROUP.toggleUserSearchBoxes);
+	
+	$('#myGroupForm').jqxValidator
+	({
+		hintType: 'label',
+		animationDuration: 0,
+		rules: [
+		               { input: '#groupName', message: 'Group name is required!', action: 'keyup, blur', rule: 'required' },
+		               { input: '#groupDescription', message: 'Group description is required!', action: 'keyup, blur', rule: 'required' }
+			   ]
+	});
 }
 function loadGroupData(logginUserId) {
 	loggedInUserId = logginUserId;
@@ -193,6 +204,7 @@ function myGroupContextMenuHandler(menuItemText, rowData) {
 		var a = window.confirm("Are you sure to Leave ?");
 		if (a) {
 			leaveGroupUser(rowData.groupId, loggedInUserId);
+			loadGroupData(loggedInUserId);
 		}
 	}
 };
@@ -256,7 +268,7 @@ function editGroup(rowData) {
 	$("#myGroupDataTable").hide();
 	$("#myGroupModal").modal('show');
 	myGroupForm.show();
-	$(".clsSaveGroup").html('save');
+	$(".clsSaveGroup").html('Save');
 	// _flaskLib.loadUSARegions('venueStateId', rowData.venueStateId);
 
 }
@@ -505,7 +517,7 @@ function createList(flaskUser, divRow){
 	        	$(this).attr('checked', 'checked');
 	        	userrparams.groupId = groupId;
 	    		userrparams.userId = flaskUser.userId;
-	    		addGroupOwner(userrparams);
+	    		addGroupOwner(userrparams, this);
 	    		
 	        } else {
 	        	$(this).attr('checked', '');
@@ -653,15 +665,18 @@ function addGroupOwners(){
 		addGroupOwner(userrparams);
 	}
 }
-function addGroupOwner(params){
+function addGroupOwner(params, objChkbx){
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_groupModel.SERVICE_ENDPOINTS.ADD_GROUP_OWNER,
-			params, function(data) {/* success handler */
-		_flaskLib.showSuccessMessage('group-action-msg',
-				"Group owner added successfully.");
-			}, function(error) { /* failure handler */
-				_flaskLib.showErrorMessage(_groupModel.MESSAGES.GET_ERROR);
-				console.log("Error in getting Group Detaill: " + error);
+			params, function(data) {
+			}, function(data) {
+				if(data>0){
+					_flaskLib.showSuccessMessage('group-action-msg',"Group owner added successfully.");
+				}
+				else{
+					_flaskLib.showErrorMessage('group-action-msg',"User is not member of group");
+					$(objChkbx).removeAttr('checked');
+				}
 			});
 }
 
@@ -677,38 +692,54 @@ function removeGroupOwner(params){
 			});
 }
 
-function prepareMemberTable(container){
+function prepareMemberTable(container, grpId){
 	var flaskRequest = new Request();
-	flaskRequest.sendGETRequest(_groupModel.SERVICE_ENDPOINTS.GET_ALL_USERS, {}, function(data) {
-		console.log(data);
-		var memberTable = $('<table/>',{'width':'100%','class': 'aui'});
-		var memberTr = $('<tr/>');
-		var memberTh1 = $('<th/>');
-		var memberTh2 = $('<th/>');
-		var memberTh3 = $('<th/>');
-		memberTable.append(memberTr);
-		memberTr.append(memberTh1);
-		memberTr.append(memberTh2);
-		memberTr.append(memberTh3);
-		memberTh1.html('First Name');
-		memberTh2.html('Last Name');
-		memberTh3.html('Email');
-		for(var iCount=0;iCount<data.length;iCount++){
-			var trNew = $('<tr/>');
-			var tdFirstName = $('<td/>');
-			var tdLastName = $('<td/>');
-			var tdEmail = $('<td/>');
-			tdFirstName.html(data[iCount].firstName);
-			tdLastName.html(data[iCount].lastName);
-			tdEmail.html(data[iCount].email);
-			trNew.append(tdFirstName);
-			trNew.append(tdLastName);
-			trNew.append(tdEmail);
-			memberTable.append(trNew);
-		}
-		$(container).append(memberTable);
-	}, function(error) {
-		_flaskLib.showErrorMessage(_groupModel.MESSAGES.GET_ERROR);
-		console.log("Error in deleting Group User : " + error);
+	var companyId = $("#CompanyId").val();
+	var searchString =  $("#searchFriend").val();
+	var params = {companyId: companyId,keywords: searchString};
+	var flaskRequest = new Request();
+		flaskRequest.sendGETRequest(_groupModel.SERVICE_ENDPOINTS.GET_ALL_GROUP_USERS, {groupId: grpId}, 
+				function(obj){
+							var memberTable = $('<table/>',{'width':'100%','class': 'aui'});
+							var memberTr = $('<tr/>');
+							var memberTh1 = $('<th/>');
+							var memberTh2 = $('<th/>');
+							var memberTh3 = $('<th/>');
+							memberTable.append(memberTr);
+							memberTr.append(memberTh1);
+							memberTr.append(memberTh2);
+							memberTr.append(memberTh3);
+							memberTh1.html('');
+							memberTh2.html('Name');
+							memberTh3.html('Email');
+								for(var j=0; j<obj.length; j++){
+									var trNew = $('<tr/>');
+									var tdFirstName = $('<td/>',{'width':'50px'});
+									var tdLastName = $('<td/>');
+									var tdEmail = $('<td/>');
+									callUser(obj[j].userId, tdFirstName);
+									tdLastName.html(obj[j].userName);
+									console.log(j);
+									tdEmail.html(obj[j].emailAddress);
+									trNew.append(tdFirstName);
+									trNew.append(tdLastName);
+									trNew.append(tdEmail);
+									memberTable.append(trNew);
+								}
+							$(container).append(memberTable);
+	}, function(error){
+		console.log(error);
 	});
+			
+}
+
+function callUser(userId, tdFirstName){
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(_groupModel.SERVICE_ENDPOINTS.GET_USER_BY_ID, {userId: userId}, 
+			function(data){
+			var flaskUser = data;
+		    fnShowEventLogo(flaskUser.portraitId, tdFirstName);
+		},function(err){
+			console.log(err);
+		});
 }

@@ -19,7 +19,8 @@ _groupModel.SERVICE_ENDPOINTS = {
 	GET_ALL_GROUP_USERS			: "/flask-manage-user-group-portlet.flaskgroupusers/get-all-group-users",
 	UPDATE_GROUP_USER			: "/flask-manage-user-group-portlet.flaskgroupusers/update-group-user",
 	GET_ALL_USERS				: "/flask-rest-users-portlet.flaskadmin/get-flask-admins",
-	GET_MY_FRIENDS				: "/flask-social-portlet.entry/search-my-friends"
+	GET_MY_FRIENDS				: "/flask-social-portlet.entry/search-my-friends",
+	GET_USER_BY_ID				: "/flask-social-portlet.entry/get-user-by-id"
 };
 
 _groupModel.DATA_MODEL= {

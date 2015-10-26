@@ -166,7 +166,7 @@ GRID_PARAM_GROUP.initrowdetails = function(index, parentElement, gridElement, da
     	
 		var groupInfoDiv = tabsdiv.find('.group');
 		var memberInfoDiv = tabsdiv.find('.members');
-		prepareMemberTable(memberInfoDiv);
+		prepareMemberTable(memberInfoDiv, datarecord.groupId);
 //		var imagesDiv = tabsdiv.find('.images');
 		
 		var container1 = $('<div class="row-fluid" id="GroupDetailsId"></div>');
