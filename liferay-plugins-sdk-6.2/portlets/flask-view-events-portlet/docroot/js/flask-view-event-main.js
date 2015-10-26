@@ -231,7 +231,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 					var objContent = $("<div/>",{'class':'DetailedSlides'});
 					$.each(obj,function(key,value){
 						var evalue = eval("objEventDetails."+key);
-						if(evalue!=''){
+						if(evalue!='' || evalue!=undefined){
 							var caption = value;
 							var captionObj = $('<div/>',{'width':'100%','font-size':'18px'}).html(caption);
 							var divFormGroup = $('<div/>',{'class':'form-group'});
