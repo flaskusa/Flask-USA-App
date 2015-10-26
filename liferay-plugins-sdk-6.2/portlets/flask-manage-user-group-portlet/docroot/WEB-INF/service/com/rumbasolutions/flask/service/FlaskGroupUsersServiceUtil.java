@@ -84,8 +84,8 @@ public class FlaskGroupUsersServiceUtil {
 			emailAddress, isAdmin);
 	}
 
-	public static void addGroupOwner(long groupId, long userId) {
-		getService().addGroupOwner(groupId, userId);
+	public static int addGroupOwner(long groupId, long userId) {
+		return getService().addGroupOwner(groupId, userId);
 	}
 
 	public static void removeGroupOwner(long groupId, long userId) {

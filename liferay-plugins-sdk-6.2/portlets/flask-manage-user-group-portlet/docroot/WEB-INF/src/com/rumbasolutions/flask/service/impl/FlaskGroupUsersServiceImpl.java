@@ -115,9 +115,17 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 	}
 	
 	@Override
-	public void addGroupOwner(long groupId, long userId) {
+	public int addGroupOwner(long groupId, long userId) {
 		FlaskGroupUsers groupUser = null;
-		int res = FlaskGroupUsersFinderUtil.addGroupOwner(groupId, userId);
+		int cnt = 0;
+		try{
+			cnt = FlaskGroupUsersUtil.countByUserIdGroupId(userId, groupId);
+			if(cnt>0)
+				FlaskGroupUsersFinderUtil.addGroupOwner(groupId, userId);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return cnt;
 	}
 	
 	@Override
@@ -133,6 +141,7 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 		}
 		
 	}
+	
 	
 	@Override
 	public void deleteGroupUser(long groupId, long userId) {

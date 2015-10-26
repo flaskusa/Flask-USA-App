@@ -77,7 +77,7 @@ public interface FlaskGroupUsersService extends BaseService, InvokableService {
 		long groupUserId, long groupId, long userId, java.lang.String userName,
 		java.lang.String emailAddress, int isAdmin);
 
-	public void addGroupOwner(long groupId, long userId);
+	public int addGroupOwner(long groupId, long userId);
 
 	public void removeGroupOwner(long groupId, long userId);
 

@@ -81,8 +81,8 @@ public class FlaskGroupUsersServiceWrapper implements FlaskGroupUsersService,
 	}
 
 	@Override
-	public void addGroupOwner(long groupId, long userId) {
-		_flaskGroupUsersService.addGroupOwner(groupId, userId);
+	public int addGroupOwner(long groupId, long userId) {
+		return _flaskGroupUsersService.addGroupOwner(groupId, userId);
 	}
 
 	@Override

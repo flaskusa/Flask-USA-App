@@ -215,10 +215,12 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 	}
 
 	@Override
-	public void addGroupOwner(long groupId, long userId) {
+	public int addGroupOwner(long groupId, long userId) {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName6,
-				_methodParameterTypes6, new Object[] { groupId, userId });
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6, new Object[] { groupId, userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -231,6 +233,8 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 					" is not a valid exception");
 			}
 		}
+
+		return ((Integer)returnObj).intValue();
 	}
 
 	@Override

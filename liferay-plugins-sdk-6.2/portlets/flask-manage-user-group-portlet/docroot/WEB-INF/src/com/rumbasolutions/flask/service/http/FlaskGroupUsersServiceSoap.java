@@ -109,10 +109,13 @@ public class FlaskGroupUsersServiceSoap {
 		}
 	}
 
-	public static void addGroupOwner(long groupId, long userId)
+	public static int addGroupOwner(long groupId, long userId)
 		throws RemoteException {
 		try {
-			FlaskGroupUsersServiceUtil.addGroupOwner(groupId, userId);
+			int returnValue = FlaskGroupUsersServiceUtil.addGroupOwner(groupId,
+					userId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

@@ -104,10 +104,8 @@ public class FlaskGroupUsersServiceClpInvoker {
 
 		if (_methodName37.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
-			FlaskGroupUsersServiceUtil.addGroupOwner(((Long)arguments[0]).longValue(),
+			return FlaskGroupUsersServiceUtil.addGroupOwner(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
-
-			return null;
 		}
 
 		if (_methodName38.equals(name) &&
