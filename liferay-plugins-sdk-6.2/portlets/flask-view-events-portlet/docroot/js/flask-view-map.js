@@ -320,7 +320,7 @@ _flaskMap.myMarkers = function(){
 		        			if(obj.addrLine1!=""){
 		        				var objAddress= $('<div/>');
 		        				var findUsOnMap = _flaskMap.createMapLink(obj.addrLine1);
-		        				objAddress.html('<div class="adAddress"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-address"></span>'+findUsOnMap+'</div>');
+		        				objAddress.html('<div class="adAddress"><table width="100%"><tr><td width="38px" valign="top"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-address"></span></td><td>'+findUsOnMap+'</td><tr/></table></div>');
 		        				content = content + objAddress.html();
 		        			}		            		
 		        			
