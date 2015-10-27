@@ -182,21 +182,22 @@
 				<button type="reset" class="btn btn-primary clsCancelGroup" >Cancel</button>
 			</div>
 		</form>
-		<div class="form-group">
+		<div id="group-member-list" style="display:none">
+			<div class="form-group">
 				<div class="pull-left">
-				<h3>Group Members</h3>
+					<h3>Group Members</h3>
 				</div>
-		</div><br>
-		<div class="table-responsive" style="display: inline-block;">
-				<div class="container-fluid fill" id="Group_placeholder"></div>
-			</div>
-			<div class="footerButtons">
-				<ul class="pager">
-				     <li class="previous more"><a href="#" onclick="fnShowNextFriends();">More..</a></li>
-				</ul>
+			</div><br>
+			<div class="table-responsive" style="display: inline-block;">
+					<div class="container-fluid fill" id="Group_placeholder"></div>
+				</div>
+				<div class="footerButtons">
+					<ul class="pager">
+					     <li class="previous more"><a href="#" onclick="fnShowNextFriends();">More..</a></li>
+					</ul>
+				</div>
 			</div>
 		</div>
-		
 		
 		  <div class="tab-pane" id="Friends">
 			<div class="table-responsive">
@@ -208,7 +209,6 @@
 			    			</td>
 			    			<td valign="top" align="left" style='width:100px;'>
 			    				<a href="#" class="btnSubmit" id="btnSearchFriend"><i class="icon-search" style="color: black;"></i></a>
-			    				<a href="#" class="cssMultUser btnSubmit"><i class="icon-list" style="color: black;"></i></a>
 			    			</td>
 			    		</tr>
 			    	</table>		
