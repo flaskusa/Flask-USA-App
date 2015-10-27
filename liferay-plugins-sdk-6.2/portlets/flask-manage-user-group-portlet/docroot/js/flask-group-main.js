@@ -33,15 +33,18 @@ function groupClickHandlers() {
 	/* Click handler for add user button */
 
 	$(".cssAddUser").click(function() {
-		window.location.hash = '#EditGroup';
-		$(".clsSaveGroup").html('Create');
-		$("#formContainer").show();
-		$("#myGroupDataTable").hide();
-		myGroupForm.show();
-		myGroupForm.trigger('reset')
-//		$("#tabs").hide();
-		$("#myGroupDataTable").hide();
-		groupId = "0";
+		  window.location.hash = '#EditGroup';
+		  $(".clsSaveGroup").html('Create');
+		  $("#formContainer").show();
+		  $("#myGroupDataTable").hide();
+		  document.getElementById("myGroupForm").reset();
+		  $('#myGroupForm').jqxValidator('hide');
+		  $("#group-member-list").hide();
+		  myGroupForm.show();
+		  myGroupForm.trigger('reset')
+		//  $("#tabs").hide();
+		  $("#myGroupDataTable").hide();
+		  groupId = "0";
 	});
 
 	/* Click handler for save button */
@@ -146,6 +149,11 @@ function groupClickHandlers() {
 		               { input: '#groupDescription', message: 'Group description is required!', action: 'keyup, blur', rule: 'required' }
 			   ]
 	});
+	
+	$("#btnSearchFriend").click(function(){
+		  $(this).addClass('disabled');
+		  showAddGroupUsersForm();
+	});	
 }
 function loadGroupData(logginUserId) {
 	loggedInUserId = logginUserId;
@@ -449,17 +457,11 @@ function renderContactList(tdata) {
 function renderGroupMembersList(tdata) {
 	var divRow = $('#Group_placeholder');
 	$(divRow).html("");
-	var strMsg = "You do not have any friends yet. Please search and add friends";
-
-	 if(tdata.length == 0){
-		$("<span class='control-label-nocolor'>"+strMsg+"</span>").appendTo($(divRow));
-		$("#prev").hide();
-		return;
-	 }
-	 	var flaskRequest = new Request();
-		flaskRequest.sendGETRequest(
-			_groupModel.SERVICE_ENDPOINTS.GET_ALL_GROUP_USERS, {groupId: groupId}, 
-			function(dt) {
+ 	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(
+		_groupModel.SERVICE_ENDPOINTS.GET_ALL_GROUP_USERS, {groupId: groupId}, 
+		function(dt) {
+			if(dt.length>1){
 				for(var i=0; i < tdata.length; i++)
 				{
 					var flaskUser = tdata[i];
@@ -469,9 +471,14 @@ function renderGroupMembersList(tdata) {
 				    	}
 					}
 				}
-			}, function(error) {
-				console.log("Error in get all group members : " + error);
-		});
+				$('#group-member-list').show();
+			}
+			else{
+				$('#group-member-list').hide();
+			}
+		}, function(error) {
+			console.log("Error in get all group members : " + error);
+	});
 	 $(".chk").show();
 	 return false;
 }
@@ -480,12 +487,7 @@ function createList(flaskUser, divRow){
 	var objTable = $('<table/>',{'class':'tblRow'});
 	    var objTr = $('<tr/>');
 	    $(objTr).appendTo($(objTable));
-	    var objTdc = $('<td/>',{'width':'25px','rowspan':'2', 'class':'chk'});
-	    var objChkbx = $('<input/>', {'type':'checkbox', 'class':'selected', 'value':flaskUser.userId});
-	    
-	    $(objChkbx).appendTo($(objTdc));
-	    $(objTdc).appendTo($(objTr));
-	    var objTd1 = $('<td/>',{'width':'50px','rowspan':'2'});
+	    var objTd1 = $('<td/>',{'width':'50px'});
 	    $(objTd1).appendTo($(objTr));
 	    console.log(flaskUser);
 	    fnShowEventLogo(flaskUser.portraitId, objTd1);
@@ -495,21 +497,22 @@ function createList(flaskUser, divRow){
 	    var objTd2 = $('<td/>',{'data-id':flaskUser.userId,'data-uuid':flaskUser.uuid});
 	    
 	    $(userName_lbl).appendTo($(objTd2));
+	    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'}); 
+	    $(venue_lbl).html(flaskUser.emailAddress);
+	    $(venue_lbl).appendTo($(objTd2));
+	    
 	    $(objTd2).appendTo(objTr);
 	    var objTd3 = $('<td/>',{'width':'140px'});
- 	var div_heart = fnBuildMenu(flaskUser);
+	    var div_heart = fnBuildMenu(flaskUser);
  	
 	    $(div_heart).appendTo($(objTd3));
+	    var objChkbx = $('<input/>', {'type':'checkbox','class':'selected', 'value':flaskUser.userId,'style':'display:none','id':flaskUser.userId});
+	    var objlbl = $('<label/>',{'for':flaskUser.userId,'class':'selectedLabel'}) 
+	    objlbl.html('Is admin?');
+	    $(objChkbx).appendTo($(objTd3));
+	    $(objlbl).appendTo($(objTd3));
 	    $(objTd3).appendTo(objTr);
 
-	    var objTr2 = $('<tr/>');
-	    var objtd2_1 = $('<td/>',{'colspan':'2'});
-	    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'}); 
-	    $(objtd2_1).appendTo(objTr2);
-	    $(venue_lbl).html(flaskUser.emailAddress);
-	    $(venue_lbl).appendTo($(objtd2_1));
-	    $(objtd2_1).appendTo($(objTr2));
-	    $(objTr2).appendTo($(objTable));
 	    $(objTable).appendTo($(divRow)).show('slow');
 	    var userrparams = {};
 	    objChkbx.click(function(){
@@ -526,6 +529,7 @@ function createList(flaskUser, divRow){
 	        	removeGroupOwner(userrparams);
 	        }
 	    });
+	    $("#btnSearchFriend").removeClass('disabled');
 }
 
 function fnShowEventLogo(potraitID, container){
@@ -554,7 +558,7 @@ function renderPhoto(FileId,objProfilePic){
 		
 }
 
-function fnBuildMenu(obj, objChkbx){
+function fnBuildMenu(obj){
 	var IsBlocked = obj.block;
 	var UserId = obj.userId;
 	var dropdown = $('<div/>',{'class':'dropdown'});
@@ -564,6 +568,7 @@ function fnBuildMenu(obj, objChkbx){
 		if(IsFriend){
 			var button = $('<button/>',{'class':'btn btn-primary dropdown-toggle','type':'button'});
 			button.html('Add');
+			button.closest('.tblRow').find('.selected').closest('.selectedLabel').hide();
 			var flaskRequest = new Request();
 			flaskRequest.sendGETRequest(
 					_groupModel.SERVICE_ENDPOINTS.GET_ALL_GROUP_USERS, {groupId: groupId}, 
@@ -572,9 +577,11 @@ function fnBuildMenu(obj, objChkbx){
 					    	if(dt[i].userId == UserId){
 					    		button.html('');
 					    		button.html('Remove');
-					    		console.log(dt[i].isAdmin);
-					    		if(dt[i].isAdmin==1)
+					    		button.closest('.tblRow').find('.selected').closest('.selectedLabel').show();
+					    		button.closest('.tblRow').find('.selected').removeAttr('disabled');
+					    		if(dt[i].isAdmin==1){
 					    			button.closest('.tblRow').find('.selected').attr('checked', 'checked');
+					    		}
 					    	}
 						}
 					}, function(error) {
@@ -586,11 +593,16 @@ function fnBuildMenu(obj, objChkbx){
 				$(this).html('');
 				$(this).html('Remove');
 				addGroupUser(obj, 0);
+				$(this).closest('.tblRow').find('.selected').closest('.selectedLabel').show();
 			}
 			else{
+				if($(this).parents('div#group-member-list').length>0){
+					$(this).closest('.tblRow').remove();
+				}
 				$(this).html('');
 				$(this).html('Add');
 				leaveGroupUser(groupId, UserId);
+				$(this).closest('.tblRow').find('.selected').closest('.selectedLabel').hide();
 			}
 		});
 		$(button).appendTo($(dropdown));
