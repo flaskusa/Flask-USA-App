@@ -177,14 +177,14 @@ GRID_PARAM_GROUP.initrowdetails = function(index, parentElement, gridElement, da
 		
 		
 		var leftcolumn = $('<div class="span5"></div>');
-		var rightcolumn = $('<div class="span5"></div>');
+		var rightcolumn = $('<div class="span5" style="margin-bottom: 10px;"></div>');
 		
 		container1.append(leftcolumn);
 		container1.append(rightcolumn);
 	
 		var group_Name = "<tr><td class='filledWidth'> <b>Group Name:</b></td><td> "
 			+ datarecord.groupName + "</td></tr>";
-	    var group_description = "<tr><td class='filledWidth'><b>Group Desc:</b></td><td><textarea style='border:none;width:240px;height:70px;background-color:white;margin:0px;' wrap='hard' readonly='true'>"
+	    var group_description = "<tr><td class='filledWidth'><b>Group Desc:</b></td><td><textarea style='border:none;width:230px;height:70px;background-color:white;margin:0px;' wrap='hard' readonly='true'>"
 			+ datarecord.groupDescription + "</textarea></td></tr>";
 	    var createdBy = "<tr><td class='filledWidth'><b>Created By:</b></td><td> "
 			+ datarecord.createdBy + "</td></tr>";
@@ -243,7 +243,7 @@ function createMyGroupTable(data, model, grid, menuDivId, actionColText,contextM
 		gridContainerId = containerId;
 		
     var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
-						return '<i class="icon-wrench" style="margin:3px;cursor:pointer"></i>';
+		return '<i class="icon-wrench" style="margin:3px;cursor:pointer"></i>';
 	}
     
     var groupColumns = [{ text: 'Name', columntype: 'textbox',  datafield: 'groupName', width: '30%' },
@@ -264,7 +264,7 @@ function createMyGroupTable(data, model, grid, menuDivId, actionColText,contextM
     grid.jqxGrid(
             {
                 width: '100%',
-                height : '350px',
+                height : '750px',
                 source: dataAdapter,
                 columnsheight : 40,
 				columnsmenuwidth : 40,
