@@ -610,14 +610,13 @@ function fnBuildMenu(obj){
 		}
 		button.click(function(){
 			if($(this).html() == 'Add'){
-				$(this).html('');
-				$(this).html('Remove');
+				$(this).closest('.tblRow').hide('slow', function(){ $(this).closest('.tblRow').remove(); });
 				addGroupUser(obj, 0);
 				$(this).closest('.tblRow').find('.selected').closest('.selectedLabel').show();
 			}
 			else{
 				if($(this).parents('div#group-member-list').length>0){
-					$(this).closest('.tblRow').remove();
+					$(this).closest('.tblRow').hide('slow', function(){ $(this).closest('.tblRow').remove(); });
 				}
 				$(this).html('');
 				$(this).html('Add');
