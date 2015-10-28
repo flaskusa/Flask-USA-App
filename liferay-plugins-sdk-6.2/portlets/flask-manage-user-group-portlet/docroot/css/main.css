@@ -221,12 +221,12 @@ ul.dropdown-menu li {
 
 .table-responsive {
     margin: auto;
-    width: 93%;
+    /*width: 93%;*/
 }
 
 .searchtable{
 	padding: 5px;
-	width: 360px;
+	width: 372px;
 }
 
 .footerButtons
@@ -440,10 +440,45 @@ div#jqxwindow {
 
 @media screen and (max-width: 320px)
 {
-	.requests{
-		display: initial !important;
+		.infoUser{
+			width: 90% !important;
+		}
+		.requests{
+			display: initial !important;
+		}
+}
+@media screen and (max-width: 375px)
+{
+		.infoUser{
+			width: 90% !important;
+		}
+		.email {
+		    font-size: 12px !important;
+		}
+}
+@media screen and (min-width: 320px)
+{
+		.searchtable{
+			width: 285px;
+		}
+}
+@media screen and (min-width: 375px)
+{
+		.searchtable{
+			width: 340px;
+		}
+}
+@media screen and (min-width: 414px){
+	.searchtable{
+			width: 334px;
 	}
 }
+@media screen and (min-width: 420px){
+	.searchtable{
+			width: 372px;
+	}
+}
+
 .icon-wrench {
 	zoom: 1.8 !important;
 }
@@ -509,4 +544,12 @@ input.selected:checked ~ label:before
 input.selected:checked ~ label:after
 {
 	margin-left: 2.1em;
+}
+
+.chkbx{
+	width: 95px !important;
+}
+
+.pull-left{
+	width: 100%;
 }
