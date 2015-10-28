@@ -1,6 +1,7 @@
 var myGroupForm;
 var groupId = "0";
 var loggedInUserId = "0";
+var placeHolderVar;
 function groupClickHandlers() {
 	window.location.hash = '#UserGroups';
 	myGroupForm = $("#myGroupForm");
@@ -426,17 +427,18 @@ function getMyFriends(grpMember){
 				data.slice(startPos, endPos+1);
 			}
 			if(grpMember)
-				renderGroupMembersList(data);
+				renderGroupMembersList(data, grpMember);
 			else
-				renderContactList(data);
+				renderContactList(data, grpMember);
 		} ,
 		function (data){
 			_flaskLib.showErrorMessage('action-msg',_socialModel.MESSAGES.SEARCH_ERR);
 	});
 }
 
-function renderContactList(tdata) {
+function renderContactList(tdata, grpMember) {
 	var divRow = $('#Friend_placeholder');
+	placeHolderVar = 'Friend_placeholder';
 	$(divRow).html("");
 	var strMsg = "You do not have any friends yet. Please search and add friends";
 
@@ -454,8 +456,9 @@ function renderContactList(tdata) {
 	 return false;
 }
 
-function renderGroupMembersList(tdata) {
+function renderGroupMembersList(tdata, grpMember) {
 	var divRow = $('#Group_placeholder');
+	placeHolderVar = 'Group_placeholder';
 	$(divRow).html("");
  	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(
@@ -494,41 +497,53 @@ function createList(flaskUser, divRow){
 	    
 	    var userName_lbl = $('<label/>',{'class':'control-label-color'});
 	    $(userName_lbl).html(flaskUser.fullName);
-	    var objTd2 = $('<td/>',{'data-id':flaskUser.userId,'data-uuid':flaskUser.uuid});
+	    var objTd2 = $('<td/>',{'data-id':flaskUser.userId,'data-uuid':flaskUser.uuid, 'class':'infoUser'});
 	    
 	    $(userName_lbl).appendTo($(objTd2));
-	    var venue_lbl = $('<label/>',{'class':'control-label-nocolor'}); 
+	    var venue_lbl = $('<label/>',{'class':'control-label-nocolor email'}); 
 	    $(venue_lbl).html(flaskUser.emailAddress);
 	    $(venue_lbl).appendTo($(objTd2));
 	    
 	    $(objTd2).appendTo(objTr);
 	    var objTd3 = $('<td/>',{'width':'140px'});
-	    var div_heart = fnBuildMenu(flaskUser);
+	    var div_heart = fnBuildMenu(flaskUser, objTd3);
  	
 	    $(div_heart).appendTo($(objTd3));
 	    var objChkbx = $('<input/>', {'type':'checkbox','class':'selected', 'value':flaskUser.userId,'style':'display:none','id':flaskUser.userId});
-	    var objlbl = $('<label/>',{'for':flaskUser.userId,'class':'selectedLabel'}) 
-	    objlbl.html('Is admin?');
+	    var chkbx;
+	    if(placeHolderVar == 'Group_placeholder'){
+	    	chkbx = $('<div/>',{'class':'chkbx', 'style': 'margin-top: 4px;' });
+	    	chkbx.jqxSwitchButton({ height: 20, width: 123, checked: false, thumbSize:'0%', onLabel:'Admin', offLabel:'User' });
+		    $(chkbx).appendTo($(objTd3));
+		    chkbx.bind('change', function (event) {
+		    	if($(this).jqxSwitchButton('checked')){
+		    		$(this).css('border-color', 'green');
+		    		$(this).find('.jqx-switchbutton-label').css('color', 'green');
+			    }
+		    	else{
+		    		$(this).css('border-color', '');
+		    		$(this).find('.jqx-switchbutton-label').css('color', '');
+		    	}
+		    }); 
+		    chkbx.click(function (event) {
+		    	if($(this).jqxSwitchButton('checked')){
+		    		userrparams.groupId = groupId;
+		    		userrparams.userId = flaskUser.userId;
+		        	removeGroupOwner(userrparams);
+			    }
+		    	else{
+		    		userrparams.groupId = groupId;
+		    		userrparams.userId = flaskUser.userId;
+		    		addGroupOwner(userrparams, this);
+		    	}
+		    });
+		}
 	    $(objChkbx).appendTo($(objTd3));
-	    $(objlbl).appendTo($(objTd3));
 	    $(objTd3).appendTo(objTr);
 
 	    $(objTable).appendTo($(divRow)).show('slow');
 	    var userrparams = {};
-	    objChkbx.click(function(){
-	        if($(this).is(':checked')){
-	        	$(this).attr('checked', 'checked');
-	        	userrparams.groupId = groupId;
-	    		userrparams.userId = flaskUser.userId;
-	    		addGroupOwner(userrparams, this);
-	    		
-	        } else {
-	        	$(this).attr('checked', '');
-	        	userrparams.groupId = groupId;
-	    		userrparams.userId = flaskUser.userId;
-	        	removeGroupOwner(userrparams);
-	        }
-	    });
+	   
 	    $("#btnSearchFriend").removeClass('disabled');
 }
 
@@ -566,7 +581,7 @@ function fnBuildMenu(obj){
 		var IsFriend = obj.connected;
 		var ul = $('<ul/>',{'class':'dropdown-menu MyDDStyle'});
 		if(IsFriend){
-			var button = $('<button/>',{'class':'btn btn-primary dropdown-toggle','type':'button'});
+			var button = $('<button/>',{'class':'btn btn-primary dropdown-toggle','type':'button', 'style': 'width: 95px !important;'});
 			button.html('Add');
 			button.closest('.tblRow').find('.selected').closest('.selectedLabel').hide();
 			var flaskRequest = new Request();
@@ -575,12 +590,17 @@ function fnBuildMenu(obj){
 					function(dt) {
 						for(var i = 0; i<dt.length; i++){
 					    	if(dt[i].userId == UserId){
-					    		button.html('');
-					    		button.html('Remove');
-					    		button.closest('.tblRow').find('.selected').closest('.selectedLabel').show();
-					    		button.closest('.tblRow').find('.selected').removeAttr('disabled');
-					    		if(dt[i].isAdmin==1){
-					    			button.closest('.tblRow').find('.selected').attr('checked', 'checked');
+					    		if(placeHolderVar == 'Group_placeholder'){
+					    			button.html('');
+						    		button.html('Remove');
+						    		button.closest('.tblRow').find('.selected').closest('.selectedLabel').show();
+						    		button.closest('.tblRow').find('.selected').removeAttr('disabled');
+						    		if(dt[i].isAdmin==1){
+						    			button.closest('.tblRow').find('.chkbx').jqxSwitchButton({checked: true});
+						    			button.closest('.tblRow').find('.selected').attr('checked', 'checked');
+						    		}
+					    		}else{
+					    			button.closest('.tblRow').remove();
 					    		}
 					    	}
 						}
@@ -677,17 +697,17 @@ function addGroupOwners(){
 		addGroupOwner(userrparams);
 	}
 }
-function addGroupOwner(params, objChkbx){
+function addGroupOwner(params, chkbx){
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_groupModel.SERVICE_ENDPOINTS.ADD_GROUP_OWNER,
 			params, function(data) {
 			}, function(data) {
 				if(data>0){
-					_flaskLib.showSuccessMessage('group-action-msg',"Group owner added successfully.");
+					_flaskLib.showSuccessMessage('group-action-msg',"Group admin added successfully.");
 				}
 				else{
 					_flaskLib.showErrorMessage('group-action-msg',"User is not member of group");
-					$(objChkbx).removeAttr('checked');
+					$(chkbx).jqxSwitchButton({ checked:false });
 				}
 			});
 }
@@ -697,7 +717,7 @@ function removeGroupOwner(params){
 	flaskRequest.sendPOSTRequest(_groupModel.SERVICE_ENDPOINTS.REMOVE_GROUP_OWNER,
 			params, function(data) {/* success handler */
 		_flaskLib.showSuccessMessage('group-action-msg',
-				"Group owner removed successfully.");
+				"Group admin removed successfully.");
 			}, function(error) { /* failure handler */
 				_flaskLib.showErrorMessage(_groupModel.MESSAGES.GET_ERROR);
 				console.log("Error in getting Group Detaill: " + error);
