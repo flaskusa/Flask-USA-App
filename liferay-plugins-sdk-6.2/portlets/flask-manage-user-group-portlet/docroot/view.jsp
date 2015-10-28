@@ -141,7 +141,7 @@
 		<div id='formContainer'>
 		<ul class="nav nav-tabs">
 		  <li class="active"><a href="#GroupForm" data-toggle="tab" id="grpForm">Group Details</a></li>
-		  <li><a href="#Friends" data-toggle="tab" id="frnds">My Friends</a></li>  
+		  <li><a href="#Friends" data-toggle="tab" id="frnds">Add Members</a></li>  
 		</ul>
 		<div class="tab-content">
 		
@@ -166,7 +166,7 @@
 				<label class="control-label" for="groupDescription">Group
 					Description:</label>
 				<div class="controls">
-					<textarea rows="5" style="height:185px;" name="<portlet:namespace />groupDescription"
+					<textarea rows="5" style="height:50px;" name="<portlet:namespace />groupDescription"
 						id="groupDescription" class="form-control"></textarea>
 				</div>
 			</div>
@@ -176,9 +176,9 @@
 				value="<%=userName%>" />
 			<input type="hidden" name="<portlet:namespace />emailAddress" id="emailAddress"
 				value="<%=emailAddress%>" />
-			<div class="modal-footer">
+			<div class="modal-footer" style="display: flex;">
 			<!-- <button type="button" class="btn btn-primary pull-left clsBack">Back</button> -->
-				<button type="button" class="btn btn-primary clsSaveGroup">Create</button>
+				<button type="button" class="btn btn-primary clsSaveGroup" style="margin-right: 3px !important;">Create</button>
 				<button type="reset" class="btn btn-primary clsCancelGroup" >Cancel</button>
 			</div>
 		</form>
@@ -207,7 +207,7 @@
 			    			<td align="right">
 			    				<input type="text" class="search-query" id='searchFriend' placeholder="Search">		
 			    			</td>
-			    			<td valign="top" align="left" style='width:100px;'>
+			    			<td valign="top" align="left" style='width:1px;'>
 			    				<a href="#" class="btnSubmit" id="btnSearchFriend"><i class="icon-search" style="color: black;"></i></a>
 			    			</td>
 			    		</tr>
