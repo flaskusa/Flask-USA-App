@@ -461,23 +461,51 @@ div#jqxwindow {
 		.searchtable{
 			width: 285px;
 		}
+		.elps{
+			width: 140px;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis !important;
+		}
 }
 @media screen and (min-width: 375px)
 {
 		.searchtable{
 			width: 340px;
 		}
+		.elps{
+			width: 170px;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis !important;
+		}
 }
 @media screen and (min-width: 414px){
 	.searchtable{
 			width: 334px;
 	}
+	.elps{
+			width: 170px;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis !important;
+		}
 }
 @media screen and (min-width: 420px){
 	.searchtable{
 			width: 372px;
 	}
+	.elps{
+			width: 200px;
+		    overflow: hidden;
+		    white-space: nowrap;
+		    text-overflow: ellipsis !important;
+		}
 }
+
+
+
+
 
 .icon-wrench {
 	zoom: 1.8 !important;
