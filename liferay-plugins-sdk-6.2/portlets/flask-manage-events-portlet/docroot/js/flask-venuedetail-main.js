@@ -59,24 +59,21 @@ function addDetailsClickHandlers() {
 	$(".cssAddVenueDetails").click(function(){
 		if(window.location.hash != "#VenueDetail"){
 			window.location.hash = "#VenueDetail";
-			$("#venueDetailId").val(0);
-			_flaskDetailCommon.loadInfoType('infoTypeId',1);
-			_flaskDetailCommon.loadContentType('infoTypeCategoryId',1);
-			$("#venueDetailsForm").show();
-			$("#venueDetailsDataTable").hide();
-			$(".cssVdSave").removeAttr("disabled");
 		}
+		$("#venueDetailId").val(0);
+		_flaskDetailCommon.loadInfoType('infoTypeId',1);
+		_flaskDetailCommon.loadContentType('infoTypeCategoryId',1);
 	});
 
 	$(".cssVdCancel").click(function() {
 		if(window.location.hash != "#ManageVenueContent"){
 			window.location.hash = "#ManageVenueContent";
-			$("#venueDetailsForm").hide();
-			$("#venueDetailsDataTable").show();
-			loadVenueDetailsData($('#venueForm #venueId').val());
-			$("#slides").html("");
-			$(".cssVdSave").removeAttr("disabled");
 		}
+		$("#venueDetailsForm").hide();
+		$("#venueDetailsDataTable").show();
+		loadVenueDetailsData($('#venueForm #venueId').val());
+		$("#slides").html("");
+		$(".cssVdSave").removeAttr("disabled");
 	});
 	
 	$("#infoTypeId").change(function() {
@@ -172,7 +169,9 @@ $(document).ready(function() {
 		var hash = location.hash;
 		switch(hash) {
 	    case "#VenueDetail":
-	    	$(".cssAddVenueDetails").click();
+	    	$("#venueDetailsForm").show();
+			$("#venueDetailsDataTable").hide();
+			$(".cssVdSave").removeAttr("disabled");
 	        break;
 	    case "#ManageVenueContent":
 	    	$(".cssVdCancel").click();
@@ -286,15 +285,13 @@ function deleteMultipleVenueDetail(venueList) {
 
 /* Edit Venue */
 function editVenueDetail(rowData) {
-		$(".cssVdSave").removeAttr("disabled");
+	window.location.hash = "#VenueDetail";
 		var container = $('#venueDetailGallery');
 		container.html("");
 		var repositoryId = $("#repositoryId").val();
 		$('#venueDetailsForm #venueId').val($('#venueForm #venueId').val());
 		$('#venueDetailId').val(rowData.venueDetailId);
 		$('#_venueDetailId').val(rowData.venueDetailId);
-		$('#venueDetailsForm').show();
-		$('#venueDetailsDataTable').hide();
 		_flaskDetailCommon.loadInfoType('infoTypeId',rowData.infoTypeId);
 		_flaskDetailCommon.loadContentType("infoTypeCategoryId",rowData.infoTypeCategoryId, rowData.infoTypeId);
 		setTimeout(function() {
