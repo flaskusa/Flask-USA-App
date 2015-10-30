@@ -270,7 +270,7 @@ _flaskMap.myMarkers = function(){
 		if(_flaskMap.placeType == 'liquor store'){
 			_flaskMap.placeType = "liquor_store";
 		}
-		console.log(obj.infoTypeCategoryName.toLowerCase()+": "+obj.latitude+" : "+obj.longitude);
+
 		if(obj.latitude!= "" && _flaskMap.placeType == obj.infoTypeCategoryName.toLowerCase()){
 			var mark;
 			var myLatlng = new google.maps.LatLng(obj.latitude, obj.longitude);
@@ -296,7 +296,6 @@ _flaskMap.myMarkers = function(){
 			        visible: true,
 			        class: 'flask_icons'
 			    });
-				console.log(obj);
 				 _flaskMap.markers.push(mark);
 				 var infowindow = new google.maps.InfoWindow();
 		            google.maps.event.addListener(mark, 'click', (function(mark, i) {
