@@ -199,12 +199,13 @@ function fnGetEventImages(eventId,venueId){
 				    	break;
 				}				
 			});
-
-			var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
+			
+			//Weather slide commented as per (COB 10/30).
+			/*var objWeatherDiv = $("<div/>",{'class':'WeatherSlide'});
 		    $(objWeatherDiv).html($("#weather-background"));
 		    var objContent = $("<div/>",{'class':'eventDetailBox'});
 		    objContent.append(objWeatherDiv);
-		    arrPreEvent.splice(1,0,objContent);
+		    arrPreEvent.splice(1,0,objContent);*/
 		    
 			fnSlider(_eventModel.INFO_TYPE.PreEvent, arrPreEvent,eventId,venueId,arrPreEventDetails);
 			fnSlider(_eventModel.INFO_TYPE.DuringEvent, arrDurEvent,eventId,venueId,arrDurEventDetails);
@@ -231,7 +232,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 					var objContent = $("<div/>",{'class':'DetailedSlides'});
 					$.each(obj,function(key,value){
 						var evalue = eval("objEventDetails."+key);
-						if(evalue!='' || evalue!=undefined){
+						if(evalue!='' && evalue!=undefined){
 							var caption = value;
 							var captionObj = $('<div/>',{'width':'100%','font-size':'18px'}).html(caption);
 							var divFormGroup = $('<div/>',{'class':'form-group'});
@@ -289,7 +290,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 			var objContent = $("<div/>",{'class':'DetailedSlides'});
 			$.each(obj,function(key,value){
 				var evalue = eval("objEventDetails."+key);
-				if(evalue!='' || evalue!=undefined){				
+				if(evalue!='' && evalue!=undefined){				
 					var caption = value;
 					var captionObj = $('<div/>',{'width':'100%','font-size':'18px'}).html(caption);
 					var divFormGroup = $('<div/>',{'class':'form-group'});
