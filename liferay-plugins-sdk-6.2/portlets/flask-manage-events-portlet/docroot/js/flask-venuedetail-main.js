@@ -8,6 +8,7 @@ function addDetailsClickHandlers() {
 	venueDetailForm = $("#venueDetailsForm");
 	/*	Initialize display elements*/
 	$(".cssVdSave").click(function() {
+		window.location.hash = "#ManageVenueContent";
 		 if (fnCheckDuplicateTitle($("#infoTitle").val())) {
 			   _flaskLib.showWarningMessage('action-msg-warning', _venueDetailModel.MESSAGES.DETAIL_DUPLICATE);
 			  }else{
