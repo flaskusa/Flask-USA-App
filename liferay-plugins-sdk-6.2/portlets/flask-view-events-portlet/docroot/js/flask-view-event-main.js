@@ -263,7 +263,13 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 									}
 							    	break;
 							    case "Description":
-							    	captionObj.html('<b>Flask Us</b>');
+							    	if($(evalue).text()!="" || evalue!=""){
+								    	captionObj.html('<b>Flask Us</b>');
+								    	divControls.html(evalue);	
+							    	}
+							    	else{
+							    		captionObj.html('');
+							    	}
 							    	break;
 							    default:
 							    	divControls.html(evalue);				    	
@@ -314,8 +320,13 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 					    	divControls.html('');
 					    	break;
 					    case "Description":
-					    	captionObj.html('<b>Flask Us</b>');
-					    	divControls.html(evalue);	
+					    	if($(evalue).text()!="" || evalue!=""){
+						    	captionObj.html('<b>Flask Us</b>');
+						    	divControls.html(evalue);	
+					    	}
+					    	else{
+					    		captionObj.html('');
+					    	}
 					    	break;				    	
 					    default:
 					    	divControls.html(evalue);				    	
