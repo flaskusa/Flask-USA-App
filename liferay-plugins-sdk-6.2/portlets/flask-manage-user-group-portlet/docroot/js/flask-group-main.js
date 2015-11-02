@@ -135,8 +135,10 @@ function groupClickHandlers() {
 		}
 	});
 	$("#frnds").click(function(){
-		window.location.hash = '#MyFriendsToAdd';
-		showAddGroupUsersForm();
+		if(groupId>0){
+			window.location.hash = '#MyFriendsToAdd';
+			showAddGroupUsersForm();
+		}
 	});
 	/* Toggle search boxes */
 	$("#cssSearchGroup").click(GRID_PARAM_GROUP.toggleSearchBoxes);
