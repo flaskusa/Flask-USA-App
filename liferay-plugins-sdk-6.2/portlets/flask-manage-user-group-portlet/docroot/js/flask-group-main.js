@@ -46,6 +46,8 @@ function groupClickHandlers() {
 		//  $("#tabs").hide();
 		  $("#myGroupDataTable").hide();
 		  groupId = "0";
+		  $("#frnds").attr("data-toggle","");
+		  $("#frnds").css("cursor","not-allowed");
 	});
 
 	/* Click handler for save button */
@@ -239,6 +241,7 @@ function deleteMultipleGroups(groupList) {
 	var param = {
 		groupList : groupList
 	};
+	
 	var request = new Request();
 	var flaskRequest = new Request();
 	flaskRequest.sendPOSTRequest(_groupModel.SERVICE_ENDPOINTS.DELETE_GROUPS,
@@ -246,6 +249,7 @@ function deleteMultipleGroups(groupList) {
 				_flaskLib.showSuccessMessage('group-action-msg',
 						_groupModel.MESSAGES.DEL_SUCCESS_GROUP);
 				loadGroupData(loggedInUserId);
+				gridObj.jqxGrid('clearselection');
 			}, function(data) {
 				_flaskLib.showErrorMessage('group-action-msg',
 						_groupModel.MESSAGES.DEL_ERR_GROUP);
@@ -299,9 +303,10 @@ function saveGroup() {
 	tempParam.createdBy = params.userName;
 	tempParam.groupId=groupId;
 	var date = new Date();
-	tempParam.createdDate = date.getMonth()+"/"+date.getDate()+"/"+date.getFullYear();
+	var month = date.getMonth();
+	month = (month+1);
+	tempParam.createdDate = month+"/"+date.getDate()+"/"+date.getFullYear();
 	params.groupId = groupId;
-
 	if (params.groupId == "0") {
 		url = _groupModel.SERVICE_ENDPOINTS.ADD_GROUP;
 	} else {
@@ -310,6 +315,8 @@ function saveGroup() {
 	flaskRequest.sendPOSTRequest(url, tempParam, function(data) {
 		_flaskLib.showSuccessMessage('group-action-msg',
 				_groupModel.MESSAGES.SAVE_GROUP);
+		$("#frnds").attr("data-toggle","tab");
+		$("#frnds").css("cursor","default");
 	if (params.groupId == "0") {
 		var userrparams = {};
 		userrparams.groupId = data.groupId;

@@ -35,6 +35,7 @@ GRID_PARAM_GROUP.toggleSearchBoxes = function(){
             filterrowheight: 34
 		});
 		$(".jqx-grid-cell-filter-row-custom:last").hide();
+		$(".jqx-grid-cell-filter-row-custom:nth-last-child(2)").hide();
 }
 GRID_PARAM_GROUP.toggleUserSearchBoxes = function(){
 	userGridObj.jqxGrid({
@@ -43,6 +44,7 @@ GRID_PARAM_GROUP.toggleUserSearchBoxes = function(){
             filterrowheight: 34
 		});
 		$(".jqx-grid-cell-filter-row-custom:last").hide();
+		$(".jqx-grid-cell-filter-row-custom:nth-last-child(2)").hide();
 }
 
 GRID_PARAM_GROUP.getCheckedIdList= function(idDataAttribute){
