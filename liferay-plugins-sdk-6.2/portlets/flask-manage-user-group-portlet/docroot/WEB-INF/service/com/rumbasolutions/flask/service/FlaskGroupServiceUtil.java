@@ -90,10 +90,10 @@ public class FlaskGroupServiceUtil {
 	public static com.rumbasolutions.flask.model.FlaskGroup addGroup(
 		java.lang.String groupName, java.lang.String groupDescription,
 		java.lang.String createdBy, java.lang.String createdDate, int isActive,
-		int isDelete) {
+		int isDelete, com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addGroup(groupName, groupDescription, createdBy,
-			createdDate, isActive, isDelete);
+			createdDate, isActive, isDelete, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.FlaskGroup updateGroup(
@@ -109,8 +109,9 @@ public class FlaskGroupServiceUtil {
 		getService().deleteGroup(groupId);
 	}
 
-	public static void deleteGroups(java.lang.String groupList) {
-		getService().deleteGroups(groupList);
+	public static void deleteGroups(java.lang.String groupList,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteGroups(groupList, serviceContext);
 	}
 
 	public static void deactivateGroup(long groupId,

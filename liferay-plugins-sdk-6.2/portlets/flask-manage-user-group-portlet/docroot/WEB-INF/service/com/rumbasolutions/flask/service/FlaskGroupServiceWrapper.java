@@ -88,9 +88,9 @@ public class FlaskGroupServiceWrapper implements FlaskGroupService,
 	public com.rumbasolutions.flask.model.FlaskGroup addGroup(
 		java.lang.String groupName, java.lang.String groupDescription,
 		java.lang.String createdBy, java.lang.String createdDate, int isActive,
-		int isDelete) {
+		int isDelete, com.liferay.portal.service.ServiceContext serviceContext) {
 		return _flaskGroupService.addGroup(groupName, groupDescription,
-			createdBy, createdDate, isActive, isDelete);
+			createdBy, createdDate, isActive, isDelete, serviceContext);
 	}
 
 	@Override
@@ -108,8 +108,9 @@ public class FlaskGroupServiceWrapper implements FlaskGroupService,
 	}
 
 	@Override
-	public void deleteGroups(java.lang.String groupList) {
-		_flaskGroupService.deleteGroups(groupList);
+	public void deleteGroups(java.lang.String groupList,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_flaskGroupService.deleteGroups(groupList, serviceContext);
 	}
 
 	@Override

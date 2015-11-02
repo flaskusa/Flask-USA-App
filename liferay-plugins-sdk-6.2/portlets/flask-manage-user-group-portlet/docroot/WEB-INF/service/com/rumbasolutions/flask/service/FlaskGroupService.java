@@ -86,7 +86,7 @@ public interface FlaskGroupService extends BaseService, InvokableService {
 	public com.rumbasolutions.flask.model.FlaskGroup addGroup(
 		java.lang.String groupName, java.lang.String groupDescription,
 		java.lang.String createdBy, java.lang.String createdDate, int isActive,
-		int isDelete);
+		int isDelete, com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.FlaskGroup updateGroup(long groupId,
 		java.lang.String groupName, java.lang.String groupDescription,
@@ -95,7 +95,8 @@ public interface FlaskGroupService extends BaseService, InvokableService {
 
 	public void deleteGroup(long groupId);
 
-	public void deleteGroups(java.lang.String groupList);
+	public void deleteGroups(java.lang.String groupList,
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deactivateGroup(long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext);

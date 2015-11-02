@@ -15,6 +15,8 @@
 package com.rumbasolutions.flask.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
@@ -24,9 +26,11 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.FlaskGroup;
+import com.rumbasolutions.flask.model.FlaskGroupUsers;
 import com.rumbasolutions.flask.service.FlaskGroupLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.FlaskGroupServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupFinderUtil;
+import com.rumbasolutions.flask.service.persistence.FlaskGroupUsersUtil;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupUtil;
 
 /**
@@ -102,13 +106,14 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 
 	@Override
 	public FlaskGroup addGroup(String groupName, String groupDescription,
-			String createdBy, String createdDate, int isActive, int isDelete) {
+			String createdBy, String createdDate, int isActive, int isDelete, ServiceContext serviceContext) {
 		FlaskGroup group = null;
 		try {
 			group = FlaskGroupLocalServiceUtil.createFlaskGroup(CounterLocalServiceUtil.increment());
 			group.setGroupName(groupName);
 			group.setGroupDescription(groupDescription);
 			group.setCreatedBy(createdBy);
+			Date now = new Date();
 			group.setCreatedDate(createdDate);
 			group.setIsActive(isActive);
 			group.setIsDelete(isDelete);
@@ -150,12 +155,31 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 
 	@Override
 	public void deleteGroup(long groupId) {
-		int res = FlaskGroupFinderUtil.deleteGroup(groupId);
+		try {
+			FlaskGroupLocalServiceUtil.deleteFlaskGroup(groupId);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 
 	@Override
-	public void deleteGroups(String groupList) {
-		int res = FlaskGroupFinderUtil.deleteGroups(groupList);
+	public void deleteGroups(String groupList, ServiceContext serviceContext) {
+		try {
+				FlaskGroupUsers user = null;
+				List<String> grpId = Arrays.asList(groupList.split(","));
+				for(String strGroupId: grpId){
+					long groupId = Long.parseLong(strGroupId);
+					user = FlaskGroupUsersUtil.fetchByUserIdGroupId(serviceContext.getUserId(), groupId);
+					if(user.getIsAdmin()==1){
+						FlaskGroupLocalServiceUtil.deleteFlaskGroup(groupId);
+					}
+				}
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
 	}
 	
 	@Override

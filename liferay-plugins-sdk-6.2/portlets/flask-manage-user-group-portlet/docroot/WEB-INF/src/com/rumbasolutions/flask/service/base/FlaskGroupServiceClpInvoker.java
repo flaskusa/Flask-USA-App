@@ -56,7 +56,8 @@ public class FlaskGroupServiceClpInvoker {
 
 		_methodParameterTypes39 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "int"
+				"java.lang.String", "int", "int",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName40 = "updateGroup";
@@ -72,7 +73,9 @@ public class FlaskGroupServiceClpInvoker {
 
 		_methodName42 = "deleteGroups";
 
-		_methodParameterTypes42 = new String[] { "java.lang.String" };
+		_methodParameterTypes42 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName43 = "deactivateGroup";
 
@@ -126,7 +129,8 @@ public class FlaskGroupServiceClpInvoker {
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
 				((Integer)arguments[4]).intValue(),
-				((Integer)arguments[5]).intValue());
+				((Integer)arguments[5]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
 		if (_methodName40.equals(name) &&
@@ -147,7 +151,8 @@ public class FlaskGroupServiceClpInvoker {
 
 		if (_methodName42.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
-			FlaskGroupServiceUtil.deleteGroups((java.lang.String)arguments[0]);
+			FlaskGroupServiceUtil.deleteGroups((java.lang.String)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}

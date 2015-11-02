@@ -56,7 +56,8 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 
 		_methodParameterTypes8 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "int", "int"
+				"java.lang.String", "int", "int",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName9 = "updateGroup";
@@ -72,7 +73,9 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 
 		_methodName11 = "deleteGroups";
 
-		_methodParameterTypes11 = new String[] { "java.lang.String" };
+		_methodParameterTypes11 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName12 = "deactivateGroup";
 
@@ -253,7 +256,7 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	public com.rumbasolutions.flask.model.FlaskGroup addGroup(
 		java.lang.String groupName, java.lang.String groupDescription,
 		java.lang.String createdBy, java.lang.String createdDate, int isActive,
-		int isDelete) {
+		int isDelete, com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
@@ -270,7 +273,9 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 						
 					isActive,
 						
-					isDelete
+					isDelete,
+						
+					ClpSerializer.translateInput(serviceContext)
 					});
 		}
 		catch (Throwable t) {
@@ -349,11 +354,16 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	}
 
 	@Override
-	public void deleteGroups(java.lang.String groupList) {
+	public void deleteGroups(java.lang.String groupList,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
 			_invokableService.invokeMethod(_methodName11,
 				_methodParameterTypes11,
-				new Object[] { ClpSerializer.translateInput(groupList) });
+				new Object[] {
+					ClpSerializer.translateInput(groupList),
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

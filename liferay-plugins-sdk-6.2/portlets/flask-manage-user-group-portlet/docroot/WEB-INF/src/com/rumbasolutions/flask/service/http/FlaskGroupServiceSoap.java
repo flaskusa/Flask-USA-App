@@ -139,10 +139,12 @@ public class FlaskGroupServiceSoap {
 	public static com.rumbasolutions.flask.model.FlaskGroupSoap addGroup(
 		java.lang.String groupName, java.lang.String groupDescription,
 		java.lang.String createdBy, java.lang.String createdDate, int isActive,
-		int isDelete) throws RemoteException {
+		int isDelete, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.FlaskGroup returnValue = FlaskGroupServiceUtil.addGroup(groupName,
-					groupDescription, createdBy, createdDate, isActive, isDelete);
+					groupDescription, createdBy, createdDate, isActive,
+					isDelete, serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskGroupSoap.toSoapModel(returnValue);
 		}
@@ -183,10 +185,11 @@ public class FlaskGroupServiceSoap {
 		}
 	}
 
-	public static void deleteGroups(java.lang.String groupList)
+	public static void deleteGroups(java.lang.String groupList,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			FlaskGroupServiceUtil.deleteGroups(groupList);
+			FlaskGroupServiceUtil.deleteGroups(groupList, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
