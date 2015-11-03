@@ -263,12 +263,15 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 									}
 							    	break;
 							    case "Description":
-							    	if($(evalue).text()!="" || evalue!=""){
-								    	captionObj.html('<b>Flask Us</b>');
-								    	divControls.html(evalue);	
+							    	var objTempDiv = $('<div/>');
+							    	objTempDiv.html(evalue);
+							    	var tempDesc = $.trim(objTempDiv.text());
+							    	if(tempDesc=="" || (tempDesc.charCodeAt(0)==8203 && tempDesc.length==1)){
+							    		captionObj.html('');
 							    	}
 							    	else{
-							    		captionObj.html('');
+								    	captionObj.html('<b>Flask Us</b>');
+								    	divControls.html(evalue);	
 							    	}
 							    	break;
 							    default:
@@ -320,12 +323,15 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 					    	divControls.html('');
 					    	break;
 					    case "Description":
-					    	if($(evalue).text()!="" || evalue!=""){
-						    	captionObj.html('<b>Flask Us</b>');
-						    	divControls.html(evalue);	
+					    	var objTempDiv = $('<div/>');
+					    	objTempDiv.html(evalue);
+					    	var tempDesc = $.trim(objTempDiv.text());
+					    	if(tempDesc=="" || (tempDesc.charCodeAt(0)==8203 && tempDesc.length==1)){
+					    		captionObj.html('');
 					    	}
 					    	else{
-					    		captionObj.html('');
+						    	captionObj.html('<b>Flask Us</b>');
+						    	divControls.html(evalue);	
 					    	}
 					    	break;				    	
 					    default:
