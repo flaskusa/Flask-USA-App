@@ -59,26 +59,37 @@ GRID_PARAM.onContextMenuItemClick =function(venue)
 	var rowData = gridObj.jqxGrid('getrowdata', rowindex);
 	_contextMenuHandler(menuItemtext, rowData);
 }
-GRID_PARAM.onRowClick =function(venue)
+GRID_PARAM.onRowClick =function(event)
 {
 	var grid = gridObj;
-	var args = venue.args;
-	// row's bound index.
+	var args = event.args;
+	var top = $(this).offset().top;
 	var boundIndex = args.rowindex;
+	var rowsheight = grid.jqxGrid('rowsheight');
+	for(var iCount=0;iCount<=boundIndex;iCount++){
+		if(event.owner.details[iCount]!=null){
+			if(!event.owner.details[iCount].rowdetailshidden && boundIndex!=iCount){
+				top = top + rowsheight + event.owner.details[iCount].rowdetailsheight;				
+			}		
+			else
+				top = top + rowsheight;
+		}
+		else
+			top = top + rowsheight;
+	}
+	// row's bound index.
+	
+	
 	// row's visible index.
 	var visibleIndex = args.visibleindex;
 	// right click.
-
-
-
 	if (args.column.text == rowMenuColumnText) {
 		var scrollTop = $(window).scrollTop();
 		var scrollLeft = $(window).scrollLeft();
-		editrow = venue.args.rowindex;
-		var rowsheight = grid.jqxGrid('rowsheight');
-		var top = $(this).offset().top + (2 + editrow) * rowsheight;
+		editrow = event.args.rowindex;
+		//top = top + $(this).offset().top; // + (2 + editrow) * rowsheight
 		var left = ($(this).offset().left + parseInt($('#GridContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
-		$('#' +rowMenuDivId).jqxMenu('open', left, top + 5 + scrollTop);
+		$('#' +rowMenuDivId).jqxMenu('open', left, top + 30);
 	} else {
 		// original event.
 		var ev = args.originalEvent;
