@@ -6,6 +6,7 @@ _flaskMap.latitude;
 _flaskMap.longitude;
 _flaskMap.placeType;
 _flaskMap.markers = Array();
+_flaskMap.searchMarkers = Array();
 _flaskMap.infos = Array();
 _flaskMap.allowedContent = ["Getting home","Traffic","Supplies","Tradition","Flask Us","Venue Map"];
 
@@ -60,6 +61,58 @@ _flaskMap.initializeMap = function() {
 
 	    centerControlDiv.index = 1;
 	    _flaskMap.map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(centerControlDiv);
+	    
+	    // Create the search box and link it to the UI element.
+	    var searchControl = document.createElement('input');
+	    searchControl.className = "SearchControl";
+	    var searchBox = new google.maps.places.SearchBox(searchControl);
+	    _flaskMap.map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchControl);
+	    
+	    _flaskMap.map.addListener('bounds_changed', function() {
+	        searchBox.setBounds(_flaskMap.map.getBounds());
+	    });
+	    
+	    searchBox.addListener('places_changed', function() {
+	        var places = searchBox.getPlaces();
+
+	        if (places.length == 0) {
+	          return;
+	        }
+
+	        // For each place, get the icon, name and location.
+	        var bounds = new google.maps.LatLngBounds();
+	        places.forEach(function(place) {
+	          var icon = {
+	            url: place.icon,
+	            size: new google.maps.Size(71, 71),
+	            origin: new google.maps.Point(0, 0),
+	            anchor: new google.maps.Point(17, 34),
+	            scaledSize: new google.maps.Size(25, 25)
+	          };
+
+	          // Create a marker for each place.
+	          for (i in _flaskMap.searchMarkers) {
+	              _flaskMap.searchMarkers[i].setMap(null);
+	          }	          
+	          _flaskMap.searchMarkers = [];
+	          _flaskMap.searchMarkers.push(new google.maps.Marker({
+	            map: _flaskMap.map,
+	            icon: '/flask-view-events-portlet/img/google-map-marker.png',
+	            title: place.name,
+	            position: place.geometry.location
+	          }));
+
+	          if (place.geometry.viewport) {
+	            // Only geocodes have viewport.
+	            bounds.union(place.geometry.viewport);
+	          } else {
+	            bounds.extend(place.geometry.location);
+	          }
+	        });
+	        _flaskMap.map.fitBounds(bounds);
+	      });
+	      // [END region_getplaces]	    
+	    
 	}catch(ex){
 		console.log("Error in loading google map");
 		_flaskLib.showErrorMessage('action-msg',ex.message);
@@ -160,7 +213,6 @@ function CenterControl1(controlDiv, map){
 }
 
 _flaskMap.clearOverlays = function() {
-
         for (i in _flaskMap.markers) {
             _flaskMap.markers[i].setMap(null);
         }
@@ -204,7 +256,7 @@ _flaskMap.createMarkers = function (results, status) {
 	        position: _flaskMap.cur_location,
 	        map: _flaskMap.map,
 	        animation:  google.maps.Animation.DROP,
-	        icon: '/flask-view-events-portlet/img/flag-marker.png',
+	        icon: '/flask-view-events-portlet/img/flag-marker.png'
 	    });
     	_flaskMap.markers.push(venue_mark);
     	var infowindow = new google.maps.InfoWindow();

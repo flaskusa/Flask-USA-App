@@ -642,26 +642,35 @@ function fnCreateSlider(containerID,eventId,venueId,arrImage,infoType,objDetails
 	    itemsScaleUp : false,		
 	});
 	if(arrImage.length>0){
+		var flaskUsSlide;
 		$.each(arrImage, function( index, value ) {
 			var objImg = value;
-			if( objImg.find('#weather-background').length > 0){
+			/*if( objImg.find('#weather-background').length > 0){
 				//"";
-			}else{
-				$(objImg).click(function(event){
-			    	$("#spinningSquaresG").show();
-			 		$('#one').hide();		 
-			 		$('#two').hide();
-			 		$('#three').show();
-					marker_infoType = infoType;
-					// map initialization
-					initMenuList(objDetails);
-			 		getSelectedTab($(this).attr('data-infoTypeCategory'));
-			 		window.location.hash = '#Details';
-			 		$("#spinningSquaresG").hide();
-				});				
+			}else{*/
+			$(objImg).click(function(event){
+		    	$("#spinningSquaresG").show();
+		 		$('#one').hide();		 
+		 		$('#two').hide();
+		 		$('#three').show();
+				marker_infoType = infoType;
+				// map initialization
+				initMenuList(objDetails);
+		 		getSelectedTab($(this).attr('data-infoTypeCategory'));
+		 		window.location.hash = '#Details';
+		 		$("#spinningSquaresG").hide();
+			});				
+			//}
+			if(objImg.hasClass('flaskus')){
+				flaskUsSlide = objImg;
 			}
-			$(containerID).data('owlCarousel').addItem(objImg);
+			else{
+				$(containerID).data('owlCarousel').addItem(objImg);				
+			}
 		});
+		if(typeof(flaskUsSlide)=="object"){
+			$(containerID).data('owlCarousel').addItem(flaskUsSlide);
+		}
 	}
 	else{
 		fnBlankSlide(containerID);
@@ -728,16 +737,16 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 		var elementPosition = $.inArray(KeyVal[0], temp);
 		if(infoTypeCategoryName.toUpperCase()==KeyVal[0].toUpperCase() && elementPosition == -1){
 			temp.push(KeyVal[0]);
+			var flaskUs;
 			$.each(objFields, function(idx, obj){
 				var objContent = $("<div/>",{'class':'eventDetailBox','data-infoTypeCategory':objEventDetails.infoTypeCategoryName});
 				objContent.css('background-image','url("'+slideBackgroundImage+'")');
 				objContent.css('background-repeat','no-repeat');
 				objContent.css('background-size','100% 100%');
-				var divCount = $('<div/>',{'class':'counterBox'});
-				var h1 = $('<h3/>',{'class':'counter'});
-				h1.html(KeyVal[1]);
-				h1.appendTo(divCount);
-				divCount.appendTo(objContent);
+				if(infoTypeCategoryName.toUpperCase()=='FLASK US'){
+					objContent.addClass('flaskus');
+				}
+				
 				if(infoTypeCategoryName.toUpperCase()=='PARKING'){
 					objArray.unshift(objContent);
 				}
