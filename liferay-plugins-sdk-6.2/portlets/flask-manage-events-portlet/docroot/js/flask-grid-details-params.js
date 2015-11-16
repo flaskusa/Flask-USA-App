@@ -192,7 +192,7 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 				initrowdetails: GRID_PARAM_DETAILS.initrowdetails,
 				columns: Columns,
 				groups: ['infoTypeId'],
-				groupsexpandedbydefault:true,
+				groupsexpandedbydefault:false,
 				sortable:false,
 				pagesize: 20
 			});
