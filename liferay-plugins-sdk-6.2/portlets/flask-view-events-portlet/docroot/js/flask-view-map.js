@@ -8,7 +8,7 @@ _flaskMap.placeType;
 _flaskMap.markers = Array();
 _flaskMap.searchMarkers = Array();
 _flaskMap.infos = Array();
-_flaskMap.allowedContent = ["Getting home","Traffic","Supplies","Tradition","Flask Us","Venue Map"];
+_flaskMap.allowedContent = ["Getting home","Traffic","Supplies","Tradition","Flask Us","Venue Map","Venue Info"];
 
 var isMobile = {
     Android: function() {
@@ -330,7 +330,7 @@ _flaskMap.myMarkers = function(){
 	    			icon_url = '/flask-view-events-portlet/img/icon_bar.png';
 	    		}
 	    		if(_flaskMap.placeType=="parking"){
-	    			icon_url = '/flask-view-events-portlet/img/icon_parking.png';
+	    			icon_url = '/flask-view-events-portlet/img/flask_map_icon_11.png';//icon_parking.png';
 	    		}
 	    		if(_flaskMap.placeType=="nightlife"){
 	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
