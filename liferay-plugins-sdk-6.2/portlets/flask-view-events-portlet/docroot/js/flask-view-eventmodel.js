@@ -14,7 +14,8 @@ _eventModel.SERVICE_ENDPOINTS = {
     GET_VENUE     				:"/flask-rest-events-portlet.venue/get-venue",
     GET_FILTERED_EVENTS			:"/flask-rest-events-portlet.event/get-simple-filtered-events",
     GET_ALL_CAMPAIGN			:"/flask-advertisement-portlet.adcampaign/get-all-campaign",
-    GET_EVENT_VENUE_DETAIL_WITH_IMAGES :"/flask-rest-events-portlet.event/get-event-venue-details-with-images"    	
+    GET_EVENT_VENUE_DETAIL_WITH_IMAGES :"/flask-rest-events-portlet.event/get-event-venue-details-with-images",
+    SEND_MAIL					:"/flask-email-notification-portlet.invitationinfo/ask-us"	
 };
 
 _eventModel.detroitGeoLocation = {latitude: 42.3400 ,longitude: 83.0456 };

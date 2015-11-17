@@ -4,6 +4,7 @@ var map;
 var lat_marker = [];
 var lng_marker = [];
 var addr_name = [];
+var placeTitle = [];
 var eventDetailJSON = {};
 var marker_infoType;
 var venueName;
@@ -148,6 +149,7 @@ function fnGetEventImages(eventId,venueId){
 			var arrDurEventDetails = [];
 			var arrPosEventDetails = [];
 			var objVenue = jQuery.parseJSON(data.Venue);
+			console.log(objVenue);
 			var distinctInfoTypeCategory1 = [];
 			var distinctInfoTypeCategoryCount1 = [];
 			var distinctInfoTypeCategory2 = [];
@@ -220,7 +222,7 @@ function fnGetEventImages(eventId,venueId){
 
 function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objEventDetails = jQuery.parseJSON(eventDetails);
-	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase()
+	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase();
 	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
 	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
@@ -272,6 +274,13 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 							    	else{
 								    	captionObj.html('<b>Flask Us</b>');
 								    	divControls.html(evalue);	
+										if(infoTypeCategoryName=='flask us'){
+											var br = $('<br/>');
+											var askUsLink = $('<a/>',{'href':'#','onclick':'showModal();','style':'float:right'});
+											askUsLink.html('Ask Us');
+											divControls.append(br);
+											divControls.append(askUsLink);
+										}
 							    	}
 							    	break;
 							    default:
@@ -332,6 +341,13 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 					    	else{
 						    	captionObj.html('<b>Flask Us</b>');
 						    	divControls.html(evalue);	
+								if(infoTypeCategoryName=='flask us'){
+									var br = $('<br/>');
+									var askUsLink = $('<a/>',{'href':'#','onclick':'showModal();','style':'float:right'});
+									askUsLink.html('Ask Us');
+									divControls.append(br);
+									divControls.append(askUsLink);
+								}				    	
 					    	}
 					    	break;				    	
 					    default:
@@ -533,6 +549,7 @@ function initMenuList(objDetails){
 						isMap = true;
 						lat_marker.push([objEventDetail.latitude, objEventDetail.infoTypeId]);
 						lng_marker.push(objEventDetail.longitude);
+						placeTitle.push(objEventDetail.infoTitle);
 						addr_name.push(objEventDetail.addrLine1);
 					}
 					if(b==objEventDetail.infoTypeCategoryName){
@@ -540,6 +557,7 @@ function initMenuList(objDetails){
 					}
 				}			
 			});
+			
 			if($.inArray(b,_flaskMap.allowedContent)>-1){
 				fnCreateSlider1(divObj,objArray);
 			}
@@ -778,4 +796,104 @@ function getSelectedTab(str){
 		}
 		iCount = iCount + 1; 
 	});
+}
+
+function showModal(){
+	$('#adTitle').html("Ask Us");
+	$('.imageContainer').html('');
+	$('#modal-advertisement').addClass('md-effect-4');
+	var emailId = '';
+	if(!Liferay.ThemeDisplay.isSignedIn()){
+		var txtEmailId = CreateFormGroup('Email','txtEmail','text',254);
+		txtEmailId.appendTo($('.imageContainer'));
+	}
+	
+	var txtSubject = CreateFormGroup('Title','txtSubject','text',254);
+	txtSubject.appendTo($('.imageContainer'));
+	
+	var txtDescription = CreateFormGroup('Description','txtDescription','textarea',1000);
+	txtDescription.appendTo($('.imageContainer'));
+
+	var errDiv = $('<div/>',{'id':'action-msg-warning','style':'display:none'});
+	errDiv.appendTo($('.imageContainer'));
+	
+	var btnSend = $('<button/>',{'class':'md-send','style':'display:inline-block'});
+	btnSend.html('Ok');
+	btnSend.click(function(){
+		var strEmailId = '';
+		var flaskRequest   = new Request();
+		var strSubject     = $('#txtSubject').val();
+		var strDescription = $('#txtDescription').val();
+		if(!Liferay.ThemeDisplay.isSignedIn())
+			var strEmailId = $('#txtEmail').val();
+		
+		if(ValidateAskUsForm()){
+			var params = {fromMail: strEmailId,subject:strSubject, description: strDescription};
+			flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.SEND_MAIL, params, 
+			function(data){
+				console.log(data);
+			} , function(error){
+				console.log(error);
+			});			
+		}
+	});
+	
+	var btnCancel = $('<button/>',{'class':'md-cancel','style':'display:inline-block'});
+	btnCancel.html('Cancel');
+	btnCancel.click(function(){
+		$('#adTitle').html('');
+		$('.imageContainer').html('');
+		$('.footerInfo').html('');	
+		$('#modal-advertisement').removeClass('md-show');	
+	});
+	
+	$('.footerInfo').html('');
+	$('.footerInfo').append(btnSend);
+	$('.footerInfo').append(btnCancel);
+	$('.md-trigger').click();
+	$('#modal-advertisement').removeClass('md-effect-4');
+}
+
+
+function CreateFormGroup(inputFieldLabel,inputFieldId,inputFieldType,maxLength){
+	if(inputFieldType=='textarea')
+		var txtField = $('<textarea/>',{'style':'width: 288px; margin: 0px 0px 10px; height: 120px;','id':inputFieldId});
+	else
+		var txtField = $('<input/>',{'type':inputFieldType,'maxlength':maxLength,'id':inputFieldId});
+	
+	var divControls = $('<div/>',{'class':'controls'});
+	divControls.append(txtField);
+	var lblControlLabel = $('<label/>',{'class':'control-label','for':inputFieldId});
+	lblControlLabel.html(inputFieldLabel);
+	var divFormGroup = $('<div/>',{'class':'form-group'});
+	divFormGroup.append(lblControlLabel);
+	divFormGroup.append(divControls);
+	return divFormGroup;
+}
+
+function ValidateAskUsForm(){
+	var errContainer = $('#action-msg-warning');
+	var errMsg = '';
+	errContainer.html('');
+	if(!Liferay.ThemeDisplay.isSignedIn()){
+		var strEmailId = $('#txtEmail').val();
+		if($.trim(strEmailId)==''){
+			errMsg = errMsg + '<br/>Please enter your email id';
+		}
+	}
+	
+	var strSubject     = $('#txtSubject').val();
+	if($.trim(strSubject)==''){
+		errMsg = errMsg + '<br/>Please enter title';
+	}
+	var strDescription = $('#txtDescription').val();
+	if($.trim(strDescription)==''){
+		errMsg = errMsg + '<br/>Please enter description';
+	}
+	if(errMsg!=''){
+		_flaskLib.showWarningMessage('action-msg-warning', errMsg);
+		return false;
+	}
+	else
+		return true;
 }
