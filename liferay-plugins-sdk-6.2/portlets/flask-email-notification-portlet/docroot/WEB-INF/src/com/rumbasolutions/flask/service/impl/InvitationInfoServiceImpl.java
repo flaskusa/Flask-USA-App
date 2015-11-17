@@ -19,6 +19,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
 import com.rumbasolutions.flask.model.InvitationInfo;
 import com.rumbasolutions.flask.service.InvitationInfoLocalServiceUtil;
@@ -59,6 +60,24 @@ public class InvitationInfoServiceImpl extends InvitationInfoServiceBaseImpl {
 			invitationInfo = InvitationInfoLocalServiceUtil.addInvitationInfo(invitationInfo);
 			//Send Email Invitation
 			EmailInvitationUtil.sendEmailInvitation(name, email, description, serviceContext);
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+			LOGGER.error("Error in saving Invitation : "+ e.getMessage());
+		}
+		
+	}
+	
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public void askUs(String fromMail, String subject, String description, ServiceContext serviceContext){
+		InvitationInfo invitationInfo = null;
+		try {
+			//Send Email
+			if(serviceContext.isSignedIn()){
+				fromMail = UserLocalServiceUtil.getUser(serviceContext.getUserId()).getEmailAddress();
+			}
+			EmailInvitationUtil.emailAskUs(fromMail, subject, description, serviceContext);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

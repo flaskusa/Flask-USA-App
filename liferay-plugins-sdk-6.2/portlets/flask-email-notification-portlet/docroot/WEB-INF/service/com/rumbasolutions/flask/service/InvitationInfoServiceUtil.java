@@ -72,6 +72,12 @@ public class InvitationInfoServiceUtil {
 			serviceContext);
 	}
 
+	public static void askUs(java.lang.String fromMail,
+		java.lang.String subject, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().askUs(fromMail, subject, description, serviceContext);
+	}
+
 	public static void replyToFeedback(java.lang.String name,
 		java.lang.String email, java.lang.String mobile,
 		java.lang.String comment,

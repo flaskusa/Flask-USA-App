@@ -67,6 +67,14 @@ public class InvitationInfoServiceWrapper implements InvitationInfoService,
 	}
 
 	@Override
+	public void askUs(java.lang.String fromMail, java.lang.String subject,
+		java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_invitationInfoService.askUs(fromMail, subject, description,
+			serviceContext);
+	}
+
+	@Override
 	public void replyToFeedback(java.lang.String name, java.lang.String email,
 		java.lang.String mobile, java.lang.String comment,
 		com.liferay.portal.service.ServiceContext serviceContext) {

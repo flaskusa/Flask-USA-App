@@ -78,6 +78,21 @@ public class InvitationInfoServiceSoap {
 		}
 	}
 
+	public static void askUs(java.lang.String fromMail,
+		java.lang.String subject, java.lang.String description,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			InvitationInfoServiceUtil.askUs(fromMail, subject, description,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void replyToFeedback(java.lang.String name,
 		java.lang.String email, java.lang.String mobile,
 		java.lang.String comment,

@@ -97,5 +97,29 @@ public class EmailInvitationUtil {
 		}
 		
 	}
+	
+	public static void emailAskUs(String fromMail, String subject, String description, ServiceContext serviceContext){
+		try {
+			InternetAddress fromAddress = new InternetAddress(fromMail);
+	        InternetAddress toAddress = new InternetAddress("info@flaskus.com");  // to address
+
+	        String body = ContentUtil.get("/template/emailAskUsTemplate.tmpl", true);  // email body , here we are getting email structure creating the content folder in the src and create the file with the extension as tmpl.
+	                
+	                body = StringUtil.replace(body, new String []{"[$FROM$]","[$DESC$]"}, new String []{fromMail,description}); // replacing the body with our content.
+	                MailMessage mailMessage = new MailMessage();
+	                mailMessage.setTo(toAddress);
+	                mailMessage.setFrom(fromAddress);
+	                mailMessage.setSubject(subject);
+	                mailMessage.setBody(body);
+	                mailMessage.setHTMLFormat(true);
+	                MailServiceUtil.sendEmail(mailMessage); // Sending message
+
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			LOGGER.error(" Error in sending Email Invitation : " + e.getMessage());
+			e.printStackTrace();
+		}
+		
+	}
 
 }

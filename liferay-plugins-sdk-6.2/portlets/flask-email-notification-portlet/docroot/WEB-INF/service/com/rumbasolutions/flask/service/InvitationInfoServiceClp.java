@@ -39,9 +39,16 @@ public class InvitationInfoServiceClp implements InvitationInfoService {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "replyToFeedback";
+		_methodName4 = "askUs";
 
 		_methodParameterTypes4 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName5 = "replyToFeedback";
+
+		_methodParameterTypes5 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
@@ -130,12 +137,42 @@ public class InvitationInfoServiceClp implements InvitationInfoService {
 	}
 
 	@Override
-	public void replyToFeedback(java.lang.String name, java.lang.String email,
-		java.lang.String mobile, java.lang.String comment,
+	public void askUs(java.lang.String fromMail, java.lang.String subject,
+		java.lang.String description,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
 			_invokableService.invokeMethod(_methodName4,
 				_methodParameterTypes4,
+				new Object[] {
+					ClpSerializer.translateInput(fromMail),
+					
+				ClpSerializer.translateInput(subject),
+					
+				ClpSerializer.translateInput(description),
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public void replyToFeedback(java.lang.String name, java.lang.String email,
+		java.lang.String mobile, java.lang.String comment,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableService.invokeMethod(_methodName5,
+				_methodParameterTypes5,
 				new Object[] {
 					ClpSerializer.translateInput(name),
 					
@@ -170,4 +207,6 @@ public class InvitationInfoServiceClp implements InvitationInfoService {
 	private String[] _methodParameterTypes3;
 	private String _methodName4;
 	private String[] _methodParameterTypes4;
+	private String _methodName5;
+	private String[] _methodParameterTypes5;
 }
