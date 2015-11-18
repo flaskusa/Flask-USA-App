@@ -105,7 +105,7 @@ public class EmailInvitationUtil {
 
 	        String body = ContentUtil.get("/template/emailAskUsTemplate.tmpl", true);  // email body , here we are getting email structure creating the content folder in the src and create the file with the extension as tmpl.
 	                
-	                body = StringUtil.replace(body, new String []{"[$FROM$]","[$DESC$]"}, new String []{fromMail,description}); // replacing the body with our content.
+	                body = StringUtil.replace(body, new String []{"[$SUBJECT$]","[$DESC$]"}, new String []{subject,description}); // replacing the body with our content.
 	                MailMessage mailMessage = new MailMessage();
 	                mailMessage.setTo(toAddress);
 	                mailMessage.setFrom(fromAddress);
