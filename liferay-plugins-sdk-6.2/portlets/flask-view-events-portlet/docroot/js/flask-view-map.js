@@ -314,6 +314,9 @@ _flaskMap.myMarkers = function(){
 		            google.maps.event.addListener(mark, 'click', (function(mark, i) {
 		            	return function() {
 		            		_flaskMap.clearInfos();
+		            		for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
+		        				_flaskMap.flaskMarkers[i].setAnimation(null);
+		        			}
 		            		var findUsOnMap = _flaskMap.createMapLink(obj.addrLine1);
 		            		var content= '<div style="display: inline-flex;"><img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:30px;height:30px;"/><font style="color:#000;">&nbsp;&nbsp;<b>'+obj.infoTitle+'</b><br/></div>';
 		        			if(obj.phone!=""){
@@ -348,20 +351,39 @@ _flaskMap.myMarkers = function(){
 		            _flaskMap.infos.push(infowindow);	
 		}
 	});
+	
+	$(_flaskMap.searchControl).keyup(function() {
+		if($("#tags").val()==""){
+			for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
+				_flaskMap.flaskMarkers[i].setAnimation(null);
+			}
+		}
+	});
 	$(_flaskMap.searchControl).autocomplete({
      	source: _flaskMap.markerTitles,
      	select: function( event, ui ) {
      		for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
      			if(ui.item.value==_flaskMap.markerTitles[i]){
      				_flaskMap.flaskMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+     				setTimeout(function(){
+     					for(var j=0; j<_flaskMap.flaskMarkers.length; j++){
+     						_flaskMap.flaskMarkers[j].setAnimation(null);
+     					}
+     				}, 30000);
+     					
      			}else{
      				_flaskMap.flaskMarkers[i].setAnimation(null);
      			}
      		}
-     	}
+     	},
+     	search: function( event, ui ) {
+     		if(ui.item==null){
+     			for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
+    				_flaskMap.flaskMarkers[i].setAnimation(null);
+    			}
+     		}
+     	},
 	});
-	$(_flaskMap.searchControl).on( "autocompletechange", function( event, ui ) {} );
-
 }
 
 _flaskMap.createMarker = function (obj) {
