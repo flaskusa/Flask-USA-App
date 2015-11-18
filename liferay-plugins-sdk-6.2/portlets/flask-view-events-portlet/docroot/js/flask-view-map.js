@@ -5,7 +5,10 @@ _flaskMap.map;
 _flaskMap.latitude;
 _flaskMap.longitude;
 _flaskMap.placeType;
+_flaskMap.searchControl;
+_flaskMap.markerTitles = Array();
 _flaskMap.markers = Array();
+_flaskMap.flaskMarkers = Array();
 _flaskMap.searchMarkers = Array();
 _flaskMap.infos = Array();
 _flaskMap.allowedContent = ["Getting home","Traffic","Supplies","Tradition","Flask Us","Venue Map","Venue Info"];
@@ -33,91 +36,46 @@ var isMobile = {
 
 _flaskMap.cur_location;
 _flaskMap.initializeMap = function() {
-	try{
-	    _flaskMap.geocoder = new google.maps.Geocoder();
-	    var myLatlng = new google.maps.LatLng(_flaskMap.latitude,_flaskMap.longitude);
-	    var myOptions = {
-	        zoom: 15,
-	        center: myLatlng,
-	        mapTypeId: google.maps.MapTypeId.ROADMAP,
-	        mapTypeControl:false
-	    };
-	    var mapDiv = document.getElementById('gmap_canvas');
-	    if(document.getElementById('gmap_canvas')==null){
-	    	var mapDiv = document.createElement('div');
-	    	mapDiv.id = 'gmap_canvas';
-	    	$('.jqx-tabs-content-element:visible').attr('id','temp');
-	    	var containerDiv = document.getElementById('temp');
-	    	containerDiv.appendChild(mapDiv); 
-	    }
-	    _flaskMap.map = new google.maps.Map(mapDiv, myOptions);
-	    google.maps.event.trigger(_flaskMap.map, 'resize');
-	    var centerControlDiv = document.createElement('div');
-	    centerControlDiv.style.marginRight= '5px';
-	    centerControlDiv.style.top = 15;
-	    centerControlDiv.style.left = 15;
-	    var centerControl = new CenterControl(centerControlDiv, _flaskMap.map);
-	    var centerControl1 = new CenterControl1(centerControlDiv, _flaskMap.map);
+	 try{
+	     _flaskMap.geocoder = new google.maps.Geocoder();
+	     var myLatlng = new google.maps.LatLng(_flaskMap.latitude,_flaskMap.longitude);
+	     var myOptions = {
+	         zoom: 15,
+	         center: myLatlng,
+	         mapTypeId: google.maps.MapTypeId.ROADMAP,
+	         mapTypeControl:false
+	     };
+	     var mapDiv = document.getElementById('gmap_canvas');
+	     if(document.getElementById('gmap_canvas')==null){
+	      var mapDiv = document.createElement('div');
+	      mapDiv.id = 'gmap_canvas';
+	      $('.jqx-tabs-content-element:visible').attr('id','temp');
+	      var containerDiv = document.getElementById('temp');
+	      containerDiv.appendChild(mapDiv); 
+	     }
+	     _flaskMap.map = new google.maps.Map(mapDiv, myOptions);
+	     google.maps.event.trigger(_flaskMap.map, 'resize');
+	     var centerControlDiv = document.createElement('div');
+	     centerControlDiv.style.marginRight= '5px';
+	     centerControlDiv.style.top = 15;
+	     centerControlDiv.style.left = 15;
+	     var centerControl = new CenterControl(centerControlDiv, _flaskMap.map);
+	     var centerControl1 = new CenterControl1(centerControlDiv, _flaskMap.map);
 
-	    centerControlDiv.index = 1;
-	    _flaskMap.map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(centerControlDiv);
-	    
-	    // Create the search box and link it to the UI element.
-	    var searchControl = document.createElement('input');
-	    searchControl.className = "SearchControl";
-	    var searchBox = new google.maps.places.SearchBox(searchControl);
-	    _flaskMap.map.controls[google.maps.ControlPosition.TOP_LEFT].push(searchControl);
-	    
-	    _flaskMap.map.addListener('bounds_changed', function() {
-	        searchBox.setBounds(_flaskMap.map.getBounds());
-	    });
-	    
-	    searchBox.addListener('places_changed', function() {
-	        var places = searchBox.getPlaces();
-
-	        if (places.length == 0) {
-	          return;
-	        }
-
-	        // For each place, get the icon, name and location.
-	        var bounds = new google.maps.LatLngBounds();
-	        places.forEach(function(place) {
-	          var icon = {
-	            url: place.icon,
-	            size: new google.maps.Size(71, 71),
-	            origin: new google.maps.Point(0, 0),
-	            anchor: new google.maps.Point(17, 34),
-	            scaledSize: new google.maps.Size(25, 25)
-	          };
-
-	          // Create a marker for each place.
-	          for (i in _flaskMap.searchMarkers) {
-	              _flaskMap.searchMarkers[i].setMap(null);
-	          }	          
-	          _flaskMap.searchMarkers = [];
-	          _flaskMap.searchMarkers.push(new google.maps.Marker({
-	            map: _flaskMap.map,
-	            icon: '/flask-view-events-portlet/img/google-map-marker.png',
-	            title: place.name,
-	            position: place.geometry.location
-	          }));
-
-	          if (place.geometry.viewport) {
-	            // Only geocodes have viewport.
-	            bounds.union(place.geometry.viewport);
-	          } else {
-	            bounds.extend(place.geometry.location);
-	          }
-	        });
-	        _flaskMap.map.fitBounds(bounds);
-	      });
-	      // [END region_getplaces]	    
-	    
-	}catch(ex){
-		console.log("Error in loading google map");
-		_flaskLib.showErrorMessage('action-msg',ex.message);
-	}
-
+	     centerControlDiv.index = 1;
+	     _flaskMap.map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(centerControlDiv);
+	     
+	     // Create the search box and link it to the UI element.
+	     _flaskMap.searchControl = document.createElement('input');
+	     _flaskMap.searchControl.id = 'tags';
+	     _flaskMap.searchControl.className = "SearchControl";
+	     
+	     _flaskMap.map.controls[google.maps.ControlPosition.TOP_LEFT].push(_flaskMap.searchControl);
+	     
+	 }catch(ex){
+		 console.log("Error in loading google map");
+		 _flaskLib.showErrorMessage('action-msg',ex.message);
+	 }
 }
 
 
@@ -348,12 +306,14 @@ _flaskMap.myMarkers = function(){
 			        visible: true,
 			        class: 'flask_icons'
 			    });
-				 _flaskMap.markers.push(mark);
+				_flaskMap.markerTitles.push(mark.title+", "+obj.addrLine1);
+				_flaskMap.flaskMarkers.push(mark);
+				_flaskMap.markers.push(mark);
+				 
 				 var infowindow = new google.maps.InfoWindow();
 		            google.maps.event.addListener(mark, 'click', (function(mark, i) {
 		            	return function() {
 		            		_flaskMap.clearInfos();
-		            		
 		            		var findUsOnMap = _flaskMap.createMapLink(obj.addrLine1);
 		            		var content= '<div style="display: inline-flex;"><img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:30px;height:30px;"/><font style="color:#000;">&nbsp;&nbsp;<b>'+obj.infoTitle+'</b><br/></div>';
 		        			if(obj.phone!=""){
@@ -388,6 +348,20 @@ _flaskMap.myMarkers = function(){
 		            _flaskMap.infos.push(infowindow);	
 		}
 	});
+	$(_flaskMap.searchControl).autocomplete({
+     	source: _flaskMap.markerTitles,
+     	select: function( event, ui ) {
+     		for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
+     			if(ui.item.value==_flaskMap.markerTitles[i]){
+     				_flaskMap.flaskMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+     			}else{
+     				_flaskMap.flaskMarkers[i].setAnimation(null);
+     			}
+     		}
+     	}
+	});
+	$(_flaskMap.searchControl).on( "autocompletechange", function( event, ui ) {} );
+
 }
 
 _flaskMap.createMarker = function (obj) {
