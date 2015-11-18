@@ -803,40 +803,55 @@ function showModal(){
 	$('.imageContainer').html('');
 	$('#modal-advertisement').addClass('md-effect-4');
 	var emailId = '';
-	if(!Liferay.ThemeDisplay.isSignedIn()){
-		var txtEmailId = CreateFormGroup('Email','txtEmail','text',254);
-		txtEmailId.appendTo($('.imageContainer'));
-	}
-	
-	var txtSubject = CreateFormGroup('Title','txtSubject','text',254);
-	txtSubject.appendTo($('.imageContainer'));
-	
-	var txtDescription = CreateFormGroup('Description','txtDescription','textarea',1000);
-	txtDescription.appendTo($('.imageContainer'));
+	$('.footerInfo').html('');
 
-	var errDiv = $('<div/>',{'id':'action-msg-warning','style':'display:none'});
-	errDiv.appendTo($('.imageContainer'));
+	if(Liferay.ThemeDisplay.isSignedIn()){
+		/*var txtEmailId = CreateFormGroup('Email','txtEmail','text',254);
+		txtEmailId.appendTo($('.imageContainer'));*/
 	
-	var btnSend = $('<button/>',{'class':'md-send','style':'display:inline-block'});
-	btnSend.html('Ok');
-	btnSend.click(function(){
-		var strEmailId = '';
-		var flaskRequest   = new Request();
-		var strSubject     = $('#txtSubject').val();
-		var strDescription = $('#txtDescription').val();
-		if(!Liferay.ThemeDisplay.isSignedIn())
-			var strEmailId = $('#txtEmail').val();
+		var txtSubject = CreateFormGroup('Title','txtSubject','text',254);
+		txtSubject.appendTo($('.imageContainer'));
 		
-		if(ValidateAskUsForm()){
-			var params = {fromMail: strEmailId,subject:strSubject, description: strDescription};
-			flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.SEND_MAIL, params, 
-			function(data){
-				console.log(data);
-			} , function(error){
-				console.log(error);
-			});			
-		}
-	});
+		var txtDescription = CreateFormGroup('Description','txtDescription','textarea',1000);
+		txtDescription.appendTo($('.imageContainer'));
+		
+		var btnSend = $('<button/>',{'class':'md-send','style':'display:inline-block'});
+		btnSend.html('Ok');
+		btnSend.click(function(){
+			var strEmailId = '';
+			var flaskRequest   = new Request();
+			var strSubject     = $('#txtSubject').val();
+			var strDescription = $('#txtDescription').val();
+			if(!Liferay.ThemeDisplay.isSignedIn())
+				var strEmailId = $('#txtEmail').val();
+			
+			if(ValidateAskUsForm()){
+				var params = {fromMail: strEmailId,subject:strSubject, description: strDescription};
+				flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.SEND_MAIL, params, 
+				function(data){
+					console.log(data);
+					var errContainer = $('<div/>',{'style':'margin: 20px;'});
+					var errDiv = $('<div/>',{'class':'alert alert-success fade in'});
+					errContainer.append(errDiv);
+					errDiv.html('<strong>Email Sent!</strong>');
+					errContainer.appendTo($('.imageContainer'));
+					$('#modal-advertisement').removeClass('md-show').delay(2000);
+				} , function(error){
+					console.log(error);
+				});			
+			}
+		});
+		$('.footerInfo').append(btnSend);
+		var errDiv = $('<div/>',{'id':'action-msg-warning','style':'display:none'});
+		errDiv.appendTo($('.imageContainer'));
+	}
+	else{
+		var errContainer = $('<div/>',{'style':'margin: 20px;'});
+		var errDiv = $('<div/>',{'class':'alert alert-warning fade in'});
+		errContainer.append(errDiv);
+		errDiv.html('<strong>Note!</strong>  Please login or signup to continue.');
+		errContainer.appendTo($('.imageContainer'));
+	}
 	
 	var btnCancel = $('<button/>',{'class':'md-cancel','style':'display:inline-block'});
 	btnCancel.html('Cancel');
@@ -847,8 +862,6 @@ function showModal(){
 		$('#modal-advertisement').removeClass('md-show');	
 	});
 	
-	$('.footerInfo').html('');
-	$('.footerInfo').append(btnSend);
 	$('.footerInfo').append(btnCancel);
 	$('.md-trigger').click();
 	$('#modal-advertisement').removeClass('md-effect-4');
