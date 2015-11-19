@@ -525,15 +525,29 @@ function initMenuList(objDetails){
 	if(len>0){
 		var menuArray = [];
 		var detailsJSONArray = [];
+		var strFlaskUs = 'Flask Us';
 		var ulObj = $("<ul/>");
+		var addFlaskUsTab = false;
 		for(var iCount=0;iCount<len;iCount++){
 			var eachEventDetailJSON = $.parseJSON(objDetails[iCount].Detail);
-			if($.inArray(eachEventDetailJSON.infoTypeCategoryName, menuArray) == -1){
+			if($.inArray(eachEventDetailJSON.infoTypeCategoryName, menuArray) == -1 && eachEventDetailJSON.infoTypeCategoryName!=strFlaskUs){
 				menuArray.push(eachEventDetailJSON.infoTypeCategoryName); 	//Push distinct menu here
 				var liObj = $("<li/>");
 				$(liObj).html(eachEventDetailJSON.infoTypeCategoryName);
 				$(liObj).appendTo($(ulObj));
 			}
+			else{
+				if($.inArray(eachEventDetailJSON.infoTypeCategoryName, menuArray) == -1 && eachEventDetailJSON.infoTypeCategoryName==strFlaskUs){
+					addFlaskUsTab = true;
+				}
+			}
+		}
+		if(addFlaskUsTab){
+			menuArray.push(strFlaskUs); 	//Push distinct menu here
+			var liObjFlaskUs = $("<li/>");
+			$(liObjFlaskUs).html(strFlaskUs);
+			$(liObjFlaskUs).appendTo($(ulObj));
+			addFlaskUsTab = false;
 		}
 		$(ulObj).appendTo(divTabs);
 		var screenWidth = $(document).width();
@@ -804,18 +818,18 @@ function showModal(){
 	$('#modal-advertisement').addClass('md-effect-4');
 	var emailId = '';
 	$('.footerInfo').html('');
-
+	$('.footerInfo').css('background','none');
+	$('.footerInfo').css('text-align','right');
 	if(Liferay.ThemeDisplay.isSignedIn()){
 		/*var txtEmailId = CreateFormGroup('Email','txtEmail','text',254);
 		txtEmailId.appendTo($('.imageContainer'));*/
-	
 		var txtSubject = CreateFormGroup('Title','txtSubject','text',254);
 		txtSubject.appendTo($('.imageContainer'));
 		
 		var txtDescription = CreateFormGroup('Description','txtDescription','textarea',1000);
 		txtDescription.appendTo($('.imageContainer'));
 		
-		var btnSend = $('<button/>',{'class':'md-send','style':'display:inline-block'});
+		var btnSend = $('<button/>',{'class':'md-send btn btn-primary','style':'display:inline-block;margin-left:3px !important;'});
 		btnSend.html('Ok');
 		btnSend.click(function(){
 			var strEmailId = '';
@@ -849,16 +863,18 @@ function showModal(){
 		var errContainer = $('<div/>',{'style':'margin: 20px;'});
 		var errDiv = $('<div/>',{'class':'alert alert-warning fade in'});
 		errContainer.append(errDiv);
-		errDiv.html('<strong>Note!</strong>  Please login or signup to continue.');
+		errDiv.html('<strong>Note!</strong> You must be logged in to use this feature.');
 		errContainer.appendTo($('.imageContainer'));
 	}
 	
-	var btnCancel = $('<button/>',{'class':'md-cancel','style':'display:inline-block'});
+	var btnCancel = $('<button/>',{'class':'md-cancel btn btn-primary','style':'display:inline-block;margin-left:3px !important;'});
 	btnCancel.html('Cancel');
 	btnCancel.click(function(){
 		$('#adTitle').html('');
 		$('.imageContainer').html('');
 		$('.footerInfo').html('');	
+		$('.footerInfo').css('background','rgba(0, 0, 0, 0.71)');
+		$('.footerInfo').css('text-align','left');
 		$('#modal-advertisement').removeClass('md-show');	
 	});
 	
@@ -888,25 +904,29 @@ function ValidateAskUsForm(){
 	var errContainer = $('#action-msg-warning');
 	var errMsg = '';
 	errContainer.html('');
-	if(!Liferay.ThemeDisplay.isSignedIn()){
-		var strEmailId = $('#txtEmail').val();
+	if(Liferay.ThemeDisplay.isSignedIn()){
+		/*var strEmailId = $('#txtEmail').val();
 		if($.trim(strEmailId)==''){
 			errMsg = errMsg + '<br/>Please enter your email id';
+		}*/
+		var strSubject     = $('#txtSubject').val();
+		if($.trim(strSubject)==''){
+			errMsg = errMsg + '<br/>Please enter title';
+		}
+		var strDescription = $('#txtDescription').val();
+		if($.trim(strDescription)==''){
+			errMsg = errMsg + '<br/>Please enter description';
+		}
+		if(errMsg!=''){
+			_flaskLib.showWarningMessage('action-msg-warning', errMsg);
+			return false;
+		}
+		else{
+			return true;			
 		}
 	}
-	
-	var strSubject     = $('#txtSubject').val();
-	if($.trim(strSubject)==''){
-		errMsg = errMsg + '<br/>Please enter title';
-	}
-	var strDescription = $('#txtDescription').val();
-	if($.trim(strDescription)==''){
-		errMsg = errMsg + '<br/>Please enter description';
-	}
-	if(errMsg!=''){
-		_flaskLib.showWarningMessage('action-msg-warning', errMsg);
+	else{
 		return false;
 	}
-	else
-		return true;
+		
 }
