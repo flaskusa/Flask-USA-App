@@ -316,9 +316,6 @@ _flaskMap.myMarkers = function(){
 		            google.maps.event.addListener(mark, 'click', (function(mark, i) {
 		            	return function() {
 		            		_flaskMap.clearInfos();
-		            		for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
-		        				_flaskMap.flaskMarkers[i].setAnimation(null);
-		        			}
 		            		var findUsOnMap = _flaskMap.createMapLink(obj.addrLine1);
 		            		var content= '<div style="display: inline-flex;"><img src="/flask-view-events-portlet/img/FlaskRed.png" style="width:30px;height:30px;"/><font style="color:#000;">&nbsp;&nbsp;<b>'+obj.infoTitle+'</b><br/></div>';
 		        			if(obj.phone!=""){
@@ -353,15 +350,24 @@ _flaskMap.myMarkers = function(){
 		            _flaskMap.infos.push(infowindow);	
 		}
 	});
-	var curMarker;
-	var cityCircle=null;
+	var curMarker=null;
 	$(_flaskMap.searchControl).keyup(function() {
 		if($("#tags").val()==""){
-			if(cityCircle!=null){
-				cityCircle.setMap(null);
-			}
 			for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
-				_flaskMap.flaskMarkers[i].setAnimation(null);
+				if(_flaskMap.flaskMarkers[i].icon=="/flask-view-events-portlet/img/bar_selected.png"){
+ 					_flaskMap.flaskMarkers[i].setIcon("/flask-view-events-portlet/img/icon_bar.png");
+ 					_flaskMap.flaskMarkers[i].setAnimation(google.maps.Animation.DROP);
+	    		}
+	    		if(_flaskMap.flaskMarkers[i].icon=="/flask-view-events-portlet/img/parking_selected.png"){
+	    			_flaskMap.flaskMarkers[i].setIcon("/flask-view-events-portlet/img/flask_map_icon_11.png");
+	    			_flaskMap.flaskMarkers[i].setAnimation(google.maps.Animation.DROP);
+	    		}
+	    		if(_flaskMap.placeType=="nightlife"){
+	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
+	    		}
+	    		if(_flaskMap.placeType=="liquor_store"){
+	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
+	    		}
 			}
 		}
 	});
@@ -370,29 +376,27 @@ _flaskMap.myMarkers = function(){
      	select: function( event, ui ) {
      		for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
      			if(ui.item.value==_flaskMap.markerTitles[i]){
-     				_flaskMap.flaskMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
      				curMarker = _flaskMap.flaskMarkers[i];
+     				if(_flaskMap.placeType=="bar & restaurants"){
+     					_flaskMap.flaskMarkers[i].icon = "/flask-view-events-portlet/img/bar_selected.png";
+         				_flaskMap.flaskMarkers[i].setAnimation(google.maps.Animation.DROP);
+    	    		}
+    	    		if(_flaskMap.placeType=="parking"){
+    	    			_flaskMap.flaskMarkers[i].icon = "/flask-view-events-portlet/img/parking_selected.png";
+         				_flaskMap.flaskMarkers[i].setAnimation(google.maps.Animation.DROP);
+    	    		}
+    	    		if(_flaskMap.placeType=="nightlife"){
+    	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
+    	    		}
+    	    		if(_flaskMap.placeType=="liquor_store"){
+    	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
+    	    		}
      				console.log(curMarker);
-     				if(cityCircle!=null){
-     					cityCircle.setMap(null);
-     				}
-     				cityCircle = new google.maps.Circle({
-   				      strokeColor: '#FF0000',
-   				      strokeOpacity: 0.8,
-   				      strokeWeight: 0.5,
-   				      fillColor: '#FF0000',
-   				      fillOpacity: 0.3,
-   				      map: _flaskMap.map,
-   				      center: curMarker.position,
-   				      radius: 60
-   				    });
-     				
-     				
-     				setTimeout(function(){
+     				/*setTimeout(function(){
      					for(var j=0; j<_flaskMap.flaskMarkers.length; j++){
      						_flaskMap.flaskMarkers[j].setAnimation(null);
      					}
-     				}, 3000000);
+     				}, 3000000);*/
      					
      			}else{
      				_flaskMap.flaskMarkers[i].setAnimation(null);
@@ -402,10 +406,20 @@ _flaskMap.myMarkers = function(){
      	search: function( event, ui ) {
      		if(ui.item==null){
      			for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
-    				_flaskMap.flaskMarkers[i].setAnimation(null);
-    				if(cityCircle!=null){
-    					cityCircle.setMap(null);
-    				}
+     				if(_flaskMap.flaskMarkers[i].icon=="/flask-view-events-portlet/img/bar_selected.png"){
+     					_flaskMap.flaskMarkers[i].setIcon("/flask-view-events-portlet/img/icon_bar.png");
+     					_flaskMap.flaskMarkers[i].setAnimation(google.maps.Animation.DROP);
+    	    		}
+    	    		if(_flaskMap.flaskMarkers[i].icon=="/flask-view-events-portlet/img/parking_selected.png"){
+    	    			_flaskMap.flaskMarkers[i].setIcon("/flask-view-events-portlet/img/flask_map_icon_11.png");
+    	    			_flaskMap.flaskMarkers[i].setAnimation(google.maps.Animation.DROP);
+    	    		}
+    	    		if(_flaskMap.placeType=="nightlife"){
+    	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
+    	    		}
+    	    		if(_flaskMap.placeType=="liquor_store"){
+    	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
+    	    		}
     			}
      		}
      	},
