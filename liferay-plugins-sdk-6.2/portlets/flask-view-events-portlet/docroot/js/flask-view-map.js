@@ -265,6 +265,8 @@ _flaskMap.createMarkers = function (results, status) {
 }
 
 _flaskMap.myMarkers = function(){
+	_flaskMap.flaskMarkers = [];
+	_flaskMap.markerTitles = [];
 	$.each(eventDetailJSON, function(i, ob) {
 		var obj=$.parseJSON(eventDetailJSON[i].Detail);
 		var icon_url = "";
@@ -351,9 +353,13 @@ _flaskMap.myMarkers = function(){
 		            _flaskMap.infos.push(infowindow);	
 		}
 	});
-	
+	var curMarker;
+	var cityCircle=null;
 	$(_flaskMap.searchControl).keyup(function() {
 		if($("#tags").val()==""){
+			if(cityCircle!=null){
+				cityCircle.setMap(null);
+			}
 			for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
 				_flaskMap.flaskMarkers[i].setAnimation(null);
 			}
@@ -365,11 +371,28 @@ _flaskMap.myMarkers = function(){
      		for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
      			if(ui.item.value==_flaskMap.markerTitles[i]){
      				_flaskMap.flaskMarkers[i].setAnimation(google.maps.Animation.BOUNCE);
+     				curMarker = _flaskMap.flaskMarkers[i];
+     				console.log(curMarker);
+     				if(cityCircle!=null){
+     					cityCircle.setMap(null);
+     				}
+     				cityCircle = new google.maps.Circle({
+   				      strokeColor: '#FF0000',
+   				      strokeOpacity: 0.8,
+   				      strokeWeight: 0.5,
+   				      fillColor: '#FF0000',
+   				      fillOpacity: 0.3,
+   				      map: _flaskMap.map,
+   				      center: curMarker.position,
+   				      radius: 60
+   				    });
+     				
+     				
      				setTimeout(function(){
      					for(var j=0; j<_flaskMap.flaskMarkers.length; j++){
      						_flaskMap.flaskMarkers[j].setAnimation(null);
      					}
-     				}, 30000);
+     				}, 3000000);
      					
      			}else{
      				_flaskMap.flaskMarkers[i].setAnimation(null);
@@ -380,6 +403,9 @@ _flaskMap.myMarkers = function(){
      		if(ui.item==null){
      			for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
     				_flaskMap.flaskMarkers[i].setAnimation(null);
+    				if(cityCircle!=null){
+    					cityCircle.setMap(null);
+    				}
     			}
      		}
      	},
