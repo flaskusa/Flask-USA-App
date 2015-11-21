@@ -753,3 +753,35 @@ div#fixedfooter2
 .jqx-tabs-arrow-background.jqx-widget-header span {
     color: white;
 }
+
+.searchClear{
+	border: 1px solid transparent;
+    background-color: transparent;
+    vertical-align: middle;
+    outline: 0;
+    cursor: pointer;
+    position: relative;
+    /*content: &quot;X&quot;;*/
+    display: block;
+    width: 24px;
+    height: 24px;
+    /* position: absolute; */
+    background-color: #F89734;
+    z-index:1;
+    top: -28px;
+    left: 294px;
+    bottom: 0;
+    margin: auto;
+    padding: 2px;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    font-weight: normal;
+    font-size: 16px;
+    box-shadow: 0 0 2px #E50F0F;
+    cursor: pointer;
+}
+
+.inputDivCls{
+	display: inline-block;
+}
