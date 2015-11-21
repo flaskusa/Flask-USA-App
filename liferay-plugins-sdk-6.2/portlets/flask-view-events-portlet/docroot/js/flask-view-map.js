@@ -280,7 +280,7 @@ _flaskMap.myMarkers = function(){
 	_flaskMap.markerCalled = true;
 	_flaskMap.flaskMarkers = [];
 	_flaskMap.markerTitles = [];
-	 $(".searchClear").html('X');
+	 $(".searchClear").addClass('icon-remove');
      $(".searchClear").click(function(){
     	 $("#tags").val("");
     	 $("#tags").keyup();
