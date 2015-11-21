@@ -784,3 +784,7 @@ div#fixedfooter2
 .inputDivCls{
 	display: inline-block;
 }
+
+.icon-remove{
+	padding-top: 1px !important;
+}
