@@ -610,6 +610,7 @@ function initMenuList(objDetails){
 
 function callMarkers(place){
 	_flaskMap.clearOverlays();
+	_flaskMap.markerCalled = false;
 	if(place == 'bar &amp; restaurants'){
 		_flaskMap.findPlaces('bar');
 		_flaskMap.findPlaces('restaurant');

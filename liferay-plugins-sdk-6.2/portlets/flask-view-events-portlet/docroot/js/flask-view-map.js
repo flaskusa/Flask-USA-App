@@ -6,6 +6,7 @@ _flaskMap.latitude;
 _flaskMap.longitude;
 _flaskMap.placeType;
 _flaskMap.searchControl;
+_flaskMap.markerCalled = false;
 _flaskMap.markerTitles = Array();
 _flaskMap.markers = Array();
 _flaskMap.flaskMarkers = Array();
@@ -66,11 +67,19 @@ _flaskMap.initializeMap = function() {
 	     _flaskMap.map.controls[google.maps.ControlPosition.RIGHT_CENTER].push(centerControlDiv);
 	     
 	     // Create the search box and link it to the UI element.
+	     var inputDiv = document.createElement('div');
+	     inputDiv.className = "inputDivCls";
 	     _flaskMap.searchControl = document.createElement('input');
 	     _flaskMap.searchControl.id = 'tags';
 	     _flaskMap.searchControl.className = "SearchControl";
+	     var inputButton = document.createElement('button');
+	     inputButton.className = 'searchClear';
+	     inputButton.id = 'searchClear';
+	     inputButton.style.display = 'none';
+	     inputDiv.appendChild( _flaskMap.searchControl);
+	     inputDiv.appendChild(inputButton);
 	     
-	     _flaskMap.map.controls[google.maps.ControlPosition.TOP_LEFT].push(_flaskMap.searchControl);
+	     _flaskMap.map.controls[google.maps.ControlPosition.TOP_LEFT].push(inputDiv);
 	     
 	 }catch(ex){
 		 console.log("Error in loading google map");
@@ -216,7 +225,6 @@ _flaskMap.createMarkers = function (results, status) {
 	        animation:  google.maps.Animation.DROP,
 	        icon: '/flask-view-events-portlet/img/flag-marker.png'
 	    });
-    	_flaskMap.markers.push(venue_mark);
     	var infowindow = new google.maps.InfoWindow();
     	google.maps.event.addListener(venue_mark, 'click', (function(venue_mark) {
         	return function() {
@@ -228,8 +236,12 @@ _flaskMap.createMarkers = function (results, status) {
                 infowindow.open(_flaskMap.map,venue_mark);
         	}
         })(venue_mark));
-        _flaskMap.infos.push(infowindow);
-        _flaskMap.myMarkers();
+    	if(!_flaskMap.markerCalled){
+    		_flaskMap.markers.push(venue_mark);
+    		_flaskMap.infos.push(infowindow);
+            _flaskMap.myMarkers();
+    	}
+        
         for (var i = 0; i < results.length; i++) {
         	var mark;
         	var icon_url;
@@ -265,8 +277,15 @@ _flaskMap.createMarkers = function (results, status) {
 }
 
 _flaskMap.myMarkers = function(){
+	_flaskMap.markerCalled = true;
 	_flaskMap.flaskMarkers = [];
 	_flaskMap.markerTitles = [];
+	 $(".searchClear").html('X');
+     $(".searchClear").click(function(){
+    	 $("#tags").val("");
+    	 $("#tags").keyup();
+    	 document.getElementById('searchClear').style.display = 'none';
+     });
 	$.each(eventDetailJSON, function(i, ob) {
 		var obj=$.parseJSON(eventDetailJSON[i].Detail);
 		var icon_url = "";
@@ -353,6 +372,7 @@ _flaskMap.myMarkers = function(){
 	var curMarker=null;
 	$(_flaskMap.searchControl).keyup(function() {
 		if($("#tags").val()==""){
+			document.getElementById('searchClear').style.display = 'none';
 			for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
 				if(_flaskMap.flaskMarkers[i].icon=="/flask-view-events-portlet/img/bar_selected.png"){
  					_flaskMap.flaskMarkers[i].setIcon("/flask-view-events-portlet/img/icon_bar.png");
@@ -369,13 +389,17 @@ _flaskMap.myMarkers = function(){
 	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
 	    		}
 			}
+		}else{
+			document.getElementById('searchClear').style.display = 'block';
 		}
 	});
 	$(_flaskMap.searchControl).autocomplete({
      	source: _flaskMap.markerTitles,
      	select: function( event, ui ) {
+     		document.getElementById('searchClear').style.display = 'block';
      		for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
      			if(ui.item.value==_flaskMap.markerTitles[i]){
+     				console.log(_flaskMap.flaskMarkers[i]);
      				curMarker = _flaskMap.flaskMarkers[i];
      				if(_flaskMap.placeType=="bar & restaurants"){
      					_flaskMap.flaskMarkers[i].icon = "/flask-view-events-portlet/img/bar_selected.png";
@@ -404,6 +428,7 @@ _flaskMap.myMarkers = function(){
      		}
      	},
      	search: function( event, ui ) {
+     		document.getElementById('searchClear').style.display = 'block';
      		if(ui.item==null){
      			for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
      				if(_flaskMap.flaskMarkers[i].icon=="/flask-view-events-portlet/img/bar_selected.png"){
