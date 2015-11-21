@@ -177,6 +177,12 @@ _eventModel.getBackgroundImage = function(infoTypeCategory){
 		case "liquor store":
 			renderer = 'flask_restaurantBar_post.jpg';
 			break;
+		case "venue info":
+			renderer = 'venue_info.jpg'
+			break;				
+		case "venue map":
+			renderer = 'Venue_map.jpg'
+			break;				
 		case "flask us":
 			renderer = 'Flask_FlaskUs.jpg'
 			break;				
