@@ -763,13 +763,13 @@ div#fixedfooter2
     position: relative;
     /*content: &quot;X&quot;;*/
     display: block;
-    width: 24px;
-    height: 24px;
+    width: 22px;
+    height: 22px;
     /* position: absolute; */
     background-color: #F89734;
     z-index:1;
     top: -28px;
-    left: 294px;
+    left: 297px;
     bottom: 0;
     margin: auto;
     padding: 2px;
