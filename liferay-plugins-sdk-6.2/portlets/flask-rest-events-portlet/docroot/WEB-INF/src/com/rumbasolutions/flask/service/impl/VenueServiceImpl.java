@@ -601,11 +601,8 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 							srcDetailImg.getImageTitle(),
 							srcDetailImg.getImageDesc(),
 							file, tempFile.getMimeType(), serviceContext);
-					addVenueDetailImage(destVenueDetail.getVenueDetailId(), 
-							fileEntry.getTitle(),
-							fileEntry.getDescription(), 
-							fileEntry.getUuid(), 
-							fileEntry.getGroupId(), serviceContext);
+					if(fileEntry!=null)
+						addVenueDetailImage(destVenueDetail.getVenueDetailId(),fileEntry.getTitle(),fileEntry.getDescription(),fileEntry.getUuid(),fileEntry.getGroupId(), serviceContext);
 				}
 			}
 			
