@@ -14,6 +14,7 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -23,8 +24,13 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.rumbasolutions.flask.manageevent.FlaskDocLibUtil;
 import com.rumbasolutions.flask.model.Venue;
 import com.rumbasolutions.flask.model.VenueDetail;
 import com.rumbasolutions.flask.model.VenueDetailImage;
@@ -35,6 +41,7 @@ import com.rumbasolutions.flask.service.VenueDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueLocalServiceUtil;
+import com.rumbasolutions.flask.service.VenueServiceUtil;
 import com.rumbasolutions.flask.service.base.VenueServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.VenueDetailImageUtil;
 import com.rumbasolutions.flask.service.persistence.VenueDetailUtil;
@@ -524,6 +531,89 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		return VenueLocalServiceUtil.getVenueDetailsWithImages(venueId);
 	}
 	
+	@AccessControlled(guestAccessEnabled = true)
+	@Override
+	public JSONObject copyVenueDetailsWithImages(long sourceVenueId, long destinationVenueId, long infoTypeCategoryId, ServiceContext serviceContext){
+		List<VenueDetail> sourceVenueDetails = null;
+		List<VenueDetail> destinationVenueDetails = null;
+		JSONObject destinationObject = null;
+		try {
+			destinationVenueDetails = VenueDetailUtil.findByVenueId(destinationVenueId);
+			sourceVenueDetails = VenueDetailUtil.findByVenueId(sourceVenueId);
+			if(destinationVenueDetails.isEmpty()){
+				for(VenueDetail srcDetail: sourceVenueDetails){
+					VenueDetail tempDetail = srcDetail;
+					if(tempDetail.getInfoTypeCategoryId()==infoTypeCategoryId){
+						tempDetail.setVenueId(destinationVenueId);
+						tempDetail.setVenueDetailId(CounterLocalServiceUtil.increment());
+						VenueDetail destVenueDetail = VenueDetailLocalServiceUtil.addVenueDetail(tempDetail);
+						addFileEntry(destinationVenueId, srcDetail.getVenueDetailId(), destVenueDetail, serviceContext);
+					}
+				}
+			}else{
+				for(VenueDetail srcDetail: sourceVenueDetails){
+					long srcDetailId = srcDetail.getVenueDetailId();
+					VenueDetail tempDetail = srcDetail;
+					if(tempDetail.getInfoTypeCategoryId()==infoTypeCategoryId){
+						boolean updated = false;
+						for(VenueDetail destDetail: destinationVenueDetails){
+							if(tempDetail.getInfoTitle().equals(destDetail.getInfoTitle()) && tempDetail.getInfoTypeCategoryId()==destDetail.getInfoTypeCategoryId()){
+								tempDetail.setVenueId(destinationVenueId);
+								tempDetail.setVenueDetailId(destDetail.getVenueDetailId());
+								VenueDetail destVenueDetail = VenueDetailLocalServiceUtil.updateVenueDetail(tempDetail);
+								addFileEntry(destinationVenueId, srcDetailId, destVenueDetail, serviceContext);
+								updated = true;
+							}
+						}
+						if(!updated){
+							tempDetail.setVenueId(destinationVenueId);
+							tempDetail.setVenueDetailId(CounterLocalServiceUtil.increment());
+							VenueDetail destVenueDetail = VenueDetailLocalServiceUtil.addVenueDetail(tempDetail);
+							addFileEntry(destinationVenueId, srcDetailId, destVenueDetail, serviceContext);
+						}
+					}
+				}	
+			}
+		} catch (Exception e) {
+			LOGGER.error(e);
+		}finally{
+			destinationObject = VenueServiceUtil.getVenueDetailsWithImages(destinationVenueId, serviceContext);
+		}
+		return destinationObject;
+	}
+	
+	public void addFileEntry(long destinationVenueId, long srcVenueDetailId, VenueDetail destVenueDetail, ServiceContext serviceContext){
+		FileEntry fileEntry = null;
+		try {
+			Folder venueDetailFolder = null;
+			try {
+				venueDetailFolder = FlaskDocLibUtil.createVenueContentTypeFolder(destinationVenueId, destVenueDetail.getVenueDetailId(), serviceContext);
+			} catch (Exception e) {
+				LOGGER.error(e);
+			}finally{
+				venueDetailFolder = FlaskDocLibUtil.createVenueContentTypeFolder(destinationVenueId, destVenueDetail.getVenueDetailId(), serviceContext);
+				List<VenueDetailImage> srcDetailImages = VenueDetailImageUtil.findByVenueDetailId(srcVenueDetailId);
+				for(VenueDetailImage srcDetailImg: srcDetailImages){
+					FileEntry tempFile = DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(srcDetailImg.getImageUUID(), srcDetailImg.getImageGroupId());
+					File file = DLFileEntryLocalServiceUtil.getFile(serviceContext.getUserId(), tempFile.getFileEntryId(), tempFile.getVersion(), false);
+					fileEntry = FlaskDocLibUtil.addFileEntry(venueDetailFolder,
+							srcDetailImg.getImageTitle(),
+							srcDetailImg.getImageTitle(),
+							srcDetailImg.getImageDesc(),
+							file, tempFile.getMimeType(), serviceContext);
+					addVenueDetailImage(destVenueDetail.getVenueDetailId(), 
+							fileEntry.getTitle(),
+							fileEntry.getDescription(), 
+							fileEntry.getUuid(), 
+							fileEntry.getGroupId(), serviceContext);
+				}
+			}
+			
+		} catch (Exception e) {
+			LOGGER.error(e);
+		}
+	}
+	
 	private void deleteVenueCascade(long venueId, ServiceContext serviceContext){
 		try {
 			List<VenueDetail> venueDetails = VenueDetailUtil.findByVenueId(venueId);
@@ -547,8 +637,4 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			LOGGER.error(e);
 		}
 	}
-	
-	
-	
-	
 }

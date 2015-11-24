@@ -204,6 +204,20 @@ public class VenueServiceClpInvoker {
 		_methodParameterTypes110 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName111 = "copyVenueDetailsWithImages";
+
+		_methodParameterTypes111 = new String[] {
+				"long", "long", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName112 = "addFileEntry";
+
+		_methodParameterTypes112 = new String[] {
+				"long", "long", "com.rumbasolutions.flask.model.VenueDetail",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -440,6 +454,24 @@ public class VenueServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
+		if (_methodName111.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
+			return VenueServiceUtil.copyVenueDetailsWithImages(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
+		}
+
+		if (_methodName112.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
+			VenueServiceUtil.addFileEntry(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(com.rumbasolutions.flask.model.VenueDetail)arguments[2],
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
+
+			return null;
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -497,4 +529,8 @@ public class VenueServiceClpInvoker {
 	private String[] _methodParameterTypes109;
 	private String _methodName110;
 	private String[] _methodParameterTypes110;
+	private String _methodName111;
+	private String[] _methodParameterTypes111;
+	private String _methodName112;
+	private String[] _methodParameterTypes112;
 }

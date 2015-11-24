@@ -204,6 +204,20 @@ public class VenueServiceClp implements VenueService {
 		_methodParameterTypes27 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName28 = "copyVenueDetailsWithImages";
+
+		_methodParameterTypes28 = new String[] {
+				"long", "long", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName29 = "addFileEntry";
+
+		_methodParameterTypes29 = new String[] {
+				"long", "long", "com.rumbasolutions.flask.model.VenueDetail",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -1108,6 +1122,70 @@ public class VenueServiceClp implements VenueService {
 		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject copyVenueDetailsWithImages(
+		long sourceVenueId, long destinationVenueId, long infoTypeCategoryId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName28,
+					_methodParameterTypes28,
+					new Object[] {
+						sourceVenueId,
+						
+					destinationVenueId,
+						
+					infoTypeCategoryId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.json.JSONObject)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void addFileEntry(long destinationVenueId, long srcVenueDetailId,
+		com.rumbasolutions.flask.model.VenueDetail destVenueDetail,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		try {
+			_invokableService.invokeMethod(_methodName29,
+				_methodParameterTypes29,
+				new Object[] {
+					destinationVenueId,
+					
+				srcVenueDetailId,
+					
+				ClpSerializer.translateInput(destVenueDetail),
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1163,4 +1241,8 @@ public class VenueServiceClp implements VenueService {
 	private String[] _methodParameterTypes26;
 	private String _methodName27;
 	private String[] _methodParameterTypes27;
+	private String _methodName28;
+	private String[] _methodParameterTypes28;
+	private String _methodName29;
+	private String[] _methodParameterTypes29;
 }

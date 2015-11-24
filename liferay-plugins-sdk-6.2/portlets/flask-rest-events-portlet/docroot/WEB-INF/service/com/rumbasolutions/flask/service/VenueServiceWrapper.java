@@ -264,6 +264,22 @@ public class VenueServiceWrapper implements VenueService,
 		return _venueService.getVenueDetailsWithImages(venueId, serviceContext);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.json.JSONObject copyVenueDetailsWithImages(
+		long sourceVenueId, long destinationVenueId, long infoTypeCategoryId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.copyVenueDetailsWithImages(sourceVenueId,
+			destinationVenueId, infoTypeCategoryId, serviceContext);
+	}
+
+	@Override
+	public void addFileEntry(long destinationVenueId, long srcVenueDetailId,
+		com.rumbasolutions.flask.model.VenueDetail destVenueDetail,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_venueService.addFileEntry(destinationVenueId, srcVenueDetailId,
+			destVenueDetail, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

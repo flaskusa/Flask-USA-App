@@ -199,4 +199,13 @@ public interface VenueService extends BaseService, InvokableService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONObject getVenueDetailsWithImages(
 		long venueId, com.liferay.portal.service.ServiceContext serviceContext);
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	public com.liferay.portal.kernel.json.JSONObject copyVenueDetailsWithImages(
+		long sourceVenueId, long destinationVenueId, long infoTypeCategoryId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void addFileEntry(long destinationVenueId, long srcVenueDetailId,
+		com.rumbasolutions.flask.model.VenueDetail destVenueDetail,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

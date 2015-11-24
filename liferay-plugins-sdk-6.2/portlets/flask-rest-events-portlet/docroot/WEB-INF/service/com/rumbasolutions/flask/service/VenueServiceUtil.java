@@ -253,6 +253,23 @@ public class VenueServiceUtil {
 		return getService().getVenueDetailsWithImages(venueId, serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject copyVenueDetailsWithImages(
+		long sourceVenueId, long destinationVenueId, long infoTypeCategoryId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .copyVenueDetailsWithImages(sourceVenueId,
+			destinationVenueId, infoTypeCategoryId, serviceContext);
+	}
+
+	public static void addFileEntry(long destinationVenueId,
+		long srcVenueDetailId,
+		com.rumbasolutions.flask.model.VenueDetail destVenueDetail,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService()
+			.addFileEntry(destinationVenueId, srcVenueDetailId,
+			destVenueDetail, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

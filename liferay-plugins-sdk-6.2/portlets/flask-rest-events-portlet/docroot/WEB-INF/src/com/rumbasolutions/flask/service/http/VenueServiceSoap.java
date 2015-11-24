@@ -489,5 +489,39 @@ public class VenueServiceSoap {
 		}
 	}
 
+	public static java.lang.String copyVenueDetailsWithImages(
+		long sourceVenueId, long destinationVenueId, long infoTypeCategoryId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = VenueServiceUtil.copyVenueDetailsWithImages(sourceVenueId,
+					destinationVenueId, infoTypeCategoryId, serviceContext);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void addFileEntry(long destinationVenueId,
+		long srcVenueDetailId,
+		com.rumbasolutions.flask.model.VenueDetailSoap destVenueDetail,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.addFileEntry(destinationVenueId, srcVenueDetailId,
+				com.rumbasolutions.flask.model.impl.VenueDetailModelImpl.toModel(
+					destVenueDetail), serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(VenueServiceSoap.class);
 }
