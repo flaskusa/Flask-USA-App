@@ -739,7 +739,7 @@ perspective effects (not including the modals and the overlay).
     font-size: 30px;
     color: #FFF;
     margin-right: 15px;
-    margin-top: 6px;
+	margin-top: 16px !important;
     display: grid;
     position: fixed;
     right: 0px;
@@ -749,4 +749,16 @@ perspective effects (not including the modals and the overlay).
 
 .imageContainer {
     text-align: center !important;
+}
+
+.VenueDetailContainer {
+    background-color: #D8D8D8;
+    padding: 12px;
+}
+
+@media screen and (max-width:767px)
+{
+	.cssImportVenueDetails{
+		margin-top:-10px;
+	}
 }

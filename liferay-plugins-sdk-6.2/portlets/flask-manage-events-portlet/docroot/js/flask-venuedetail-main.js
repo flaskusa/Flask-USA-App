@@ -80,6 +80,13 @@ function addDetailsClickHandlers() {
 	$("#infoTypeId").change(function() {
 		_flaskDetailCommon.setContentType("infoTypeCategoryId",null, $("#infoTypeId").val(), _flaskDetailCommon.infoCategoryJSON);
 	});
+	
+	$(".cssShowVenueList").click(function(){
+		if(window.location.hash != "#ImportVenueDetail"){
+			window.location.hash = "#ImportVenueDetail";
+		}
+		loadVenueData();
+	});
 }
 
 function loadVenueDetailsData(venueId) {
@@ -447,6 +454,7 @@ $(document).ready(function() {
 	
 	$('.md-closeBtn').click(function(){
 		$('#modal-advertisement').removeClass('md-show');
+		$('#modal-venueImport').removeClass('md-show');
 	});	
 });
 
@@ -555,4 +563,47 @@ function fnRenderImage(imageUUID, imageGroupId, container, venueDetailImageId, e
 	    	$('.md-trigger').click();
 		});		
     }
+}
+
+function loadVenueData() {
+	var flaskRequest = new Request();
+	params = {};
+	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE, params,
+	function(data){/*success handler*/
+		fnFillVenueList(data);
+	} , function(error){ /*failure handler*/
+		_flaskLib.showErrorMessage('action-msg',_venueModel.MESSAGES.GET_ERROR);
+	});
+}
+
+
+function fnFillVenueList(data){
+	$('#VenueList').html('');
+	$.each(data, function (i, item) {
+		if($('#venueId').val()!=item.venueId){
+		    $('#VenueList').append($('<option>', { 
+		        value: item.venueId,
+		        text : item.venueName 
+		    }));
+		}
+	});
+	$(".VenueContainer").append($('#VenueList'));
+	_flaskDetailCommon.loadContentType('_infoTypeCategoryId',1);
+	$('.md-trigger1').click();
+	
+	$(".cssImportVenueDetails").click(function(){
+		var flaskRequest = new Request();
+		var sourceVenueId = $('#VenueList').val();
+		var destinationVenueId = $('#venueId').val();
+		var infoTypeCategoryId = $('#_infoTypeCategoryId').val();
+		params = {'sourceVenueId':sourceVenueId,'destinationVenueId':destinationVenueId,'infoTypeCategoryId':infoTypeCategoryId};
+		flaskRequest.sendGETRequest(_venueDetailModel.SERVICE_ENDPOINTS.COPY_VENUEDETAILS_WITH_IMAGE, params,
+		function(data){/*success handler*/
+			loadVenueDetailsData($('#venueId').val());
+			$("#modal-venueImport").removeClass('md-show');
+			_flaskLib.showSuccessMessage('action-msg', _venueDetailModel.MESSAGES.COPY_VENUEDETAIL_SUCCESS);
+		} , function(error){ /*failure handler*/
+			_flaskLib.showErrorMessage('action-msg',_venueModel.MESSAGES.GET_ERROR);
+		});
+	});
 }

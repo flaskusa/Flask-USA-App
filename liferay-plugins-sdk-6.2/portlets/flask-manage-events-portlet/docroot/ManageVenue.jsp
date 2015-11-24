@@ -160,6 +160,7 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 	
 				<div class="table-condensed" id="venueDetailsDataTable">
 				  <input class="btn btn-info cssAddVenueDetails" type="button" value="Add Venue Details" />
+				  <input class="btn btn-info cssShowVenueList" type="button" value="Import Venue Details" title="You can import existing venue details"/>
 				  <div id="gridDetails"></div>
 				</div>
 	
@@ -213,14 +214,43 @@ function initialize(portletId, portlet) {
 <div class="md-modal md-effect-14" id="modal-advertisement">
 	<div class="md-content">
 		<h3 id="myModalLabel">Flask Gallery</h3>
-		<span class='md-closeBtn'>x</span>
+		<span class='md-closeBtn icon-remove-sign'></span>
 		<div>
 			<div class="imageContainer"></div>
 		</div>
 	</div>
 </div>
 <div class="md-overlay"></div>
-<button class="md-trigger" data-modal="modal-advertisement" style="display:none">3D Rotate Bottom</button>
+<button class="md-trigger" data-modal="modal-advertisement" style="display:none"></button>
+
+<div class="md-modal md-effect-14" id="modal-venueImport">
+	<div class="md-content" style='margin: 10px;padding: 10px;'>
+		<h3>Import Venue Details</h3>
+		<span class='md-closeBtn icon-remove-sign' id='md-closeImportVenue'></span>
+		<div class="VenueDetailContainer">
+		  <div class="form-group">
+			    <label class="control-label" for="infoTypeCategoryId">Select Venue:</label>
+				<div class="controls">
+					<select class="form-control-select" id="VenueList" name="VenueList">
+						<option value="0">-Select venue-</option>
+					</select>
+				</div>
+		   </div>
+		  <div class="form-group">
+			    <label class="control-label" for="_infoTypeCategoryId">Content Type:</label>
+				<div class="controls">
+					<select class="form-control-select" id="_infoTypeCategoryId" name="_infoTypeCategoryId"></select>
+				</div>
+		   </div>
+		  <div class="form-group">
+				<input class="btn btn-info cssImportVenueDetails" type="button" value="Import" />
+		   </div>
+		</div>
+	</div>
+</div>
+<div class="md-overlay"></div>
+<button class="md-trigger1" data-modal="modal-venueImport" style="display:none"></button>
+
 </body>
 
 </html>

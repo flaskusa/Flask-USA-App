@@ -16,7 +16,8 @@ _venueDetailModel.SERVICE_ENDPOINTS = {
 	DELETE_FILE_BY_TITLE		: "/dlapp/delete-file-entry-by-title",
 	GET_VENUEDETAIL_IMAGES		: "/flask-rest-events-portlet.venue/get-venue-detail-images",
 	GET_IMAGE_BY_UUID_GROUPID	: "/dlapp/get-file-entry-by-uuid-and-group-id",
-	DELETE_VENUEDETAIL_IMAGE	: "/flask-rest-events-portlet.venue/delete-venue-detail-image"
+	DELETE_VENUEDETAIL_IMAGE	: "/flask-rest-events-portlet.venue/delete-venue-detail-image",
+	COPY_VENUEDETAILS_WITH_IMAGE: "/flask-rest-events-portlet.venue/copy-venue-details-with-images"
 };
 
 _venueDetailModel.InfoType = ["General", "Pre-Event","During Event","Post-Event"];
@@ -69,5 +70,6 @@ _venueDetailModel.MESSAGES= {
 		DETAIL_DEL_SUCCESS: "Venue details successfully deleted",
 		DETAIL_DEL_ERR: "Error in deleting venue details",
 		DETAIL_DUPLICATE: "Venue detail with same title already exist",
-		DETAIL_NO_IMAGES_INFO: "No images found"
+		DETAIL_NO_IMAGES_INFO: "No images found",
+		COPY_VENUEDETAIL_SUCCESS: "Venue details imported successfully"
 };
