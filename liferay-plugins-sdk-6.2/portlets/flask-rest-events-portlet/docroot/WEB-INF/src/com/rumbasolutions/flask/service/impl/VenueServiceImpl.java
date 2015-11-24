@@ -542,12 +542,13 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			sourceVenueDetails = VenueDetailUtil.findByVenueId(sourceVenueId);
 			if(destinationVenueDetails.isEmpty()){
 				for(VenueDetail srcDetail: sourceVenueDetails){
+					long srcDetailId = srcDetail.getVenueDetailId();
 					VenueDetail tempDetail = srcDetail;
 					if(tempDetail.getInfoTypeCategoryId()==infoTypeCategoryId){
 						tempDetail.setVenueId(destinationVenueId);
 						tempDetail.setVenueDetailId(CounterLocalServiceUtil.increment());
 						VenueDetail destVenueDetail = VenueDetailLocalServiceUtil.addVenueDetail(tempDetail);
-						addFileEntry(destinationVenueId, srcDetail.getVenueDetailId(), destVenueDetail, serviceContext);
+						addFileEntry(destinationVenueId, srcDetailId, destVenueDetail, serviceContext);
 					}
 				}
 			}else{
@@ -590,8 +591,8 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 				venueDetailFolder = FlaskDocLibUtil.createVenueContentTypeFolder(destinationVenueId, destVenueDetail.getVenueDetailId(), serviceContext);
 			} catch (Exception e) {
 				LOGGER.error(e);
-			}finally{
 				venueDetailFolder = FlaskDocLibUtil.createVenueContentTypeFolder(destinationVenueId, destVenueDetail.getVenueDetailId(), serviceContext);
+			}finally{
 				List<VenueDetailImage> srcDetailImages = VenueDetailImageUtil.findByVenueDetailId(srcVenueDetailId);
 				for(VenueDetailImage srcDetailImg: srcDetailImages){
 					FileEntry tempFile = DLAppLocalServiceUtil.getFileEntryByUuidAndGroupId(srcDetailImg.getImageUUID(), srcDetailImg.getImageGroupId());
