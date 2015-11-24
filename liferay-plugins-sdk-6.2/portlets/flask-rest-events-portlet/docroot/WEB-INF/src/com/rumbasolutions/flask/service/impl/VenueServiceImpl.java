@@ -590,7 +590,6 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			try {
 				venueDetailFolder = FlaskDocLibUtil.createVenueContentTypeFolder(destinationVenueId, destVenueDetail.getVenueDetailId(), serviceContext);
 			} catch (Exception e) {
-				LOGGER.error(e);
 				venueDetailFolder = FlaskDocLibUtil.createVenueContentTypeFolder(destinationVenueId, destVenueDetail.getVenueDetailId(), serviceContext);
 			}finally{
 				List<VenueDetailImage> srcDetailImages = VenueDetailImageUtil.findByVenueDetailId(srcVenueDetailId);
