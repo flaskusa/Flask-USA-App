@@ -588,7 +588,12 @@ function fnFillVenueList(data){
 		}
 	});
 	$(".VenueContainer").append($('#VenueList'));
+	_flaskDetailCommon.loadInfoType('_infoTypeId',1);
+	$("#_infoTypeId option[value='0']").remove();
 	_flaskDetailCommon.loadContentType('_infoTypeCategoryId',1);
+	$("#_infoTypeId").change(function() {
+		_flaskDetailCommon.setContentType("_infoTypeCategoryId",null, $("#_infoTypeId").val(), _flaskDetailCommon.infoCategoryJSON);
+	});
 	$('.md-trigger1').click();
 	
 	$(".cssImportVenueDetails").click(function(){

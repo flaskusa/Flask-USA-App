@@ -235,8 +235,14 @@ function initialize(portletId, portlet) {
 						<option value="0">-Select venue-</option>
 					</select>
 				</div>
-		   </div>
+		  </div>
 		  <div class="form-group">
+			    <label class="control-label" for="_infoTypeId">Info Type:</label>
+				<div class="controls">
+					<select class="form-control-select" id="_infoTypeId" name="_infoTypeId"></select>
+				</div>
+		  </div>
+		  <div class="form-group contentType">
 			    <label class="control-label" for="_infoTypeCategoryId">Content Type:</label>
 				<div class="controls">
 					<select class="form-control-select" id="_infoTypeCategoryId" name="_infoTypeCategoryId"></select>
