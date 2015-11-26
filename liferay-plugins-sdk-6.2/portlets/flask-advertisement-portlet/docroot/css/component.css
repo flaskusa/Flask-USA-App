@@ -739,7 +739,7 @@ perspective effects (not including the modals and the overlay).
     font-size: 30px;
     color: #FFF;
     margin-right: 15px;
-    margin-top: 6px;
+	margin-top: 16px !important;
     display: grid;
     position: fixed;
     right: 0px;

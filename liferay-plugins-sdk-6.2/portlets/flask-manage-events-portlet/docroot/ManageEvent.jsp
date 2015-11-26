@@ -200,7 +200,7 @@ function initialize(portletId, portlet) {
 	<div class="md-modal md-effect-14" id="modal-advertisement">
 		<div class="md-content">
 			<h3 id="myModalLabel">Flask Gallery</h3>
-			<span class='md-closeBtn'>x</span>
+			<span class='md-closeBtn icon-remove-sign'></span>
 			<div>
 				<div class="imageContainer"></div>
 			</div>

@@ -149,7 +149,6 @@ function fnGetEventImages(eventId,venueId){
 			var arrDurEventDetails = [];
 			var arrPosEventDetails = [];
 			var objVenue = jQuery.parseJSON(data.Venue);
-			console.log(objVenue);
 			var distinctInfoTypeCategory1 = [];
 			var distinctInfoTypeCategoryCount1 = [];
 			var distinctInfoTypeCategory2 = [];

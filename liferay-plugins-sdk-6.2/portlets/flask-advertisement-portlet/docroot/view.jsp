@@ -280,7 +280,7 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 
 <div class="md-modal md-effect-14" id="modal-advertisement">
 	<div class="md-content">
-		<h3 id="myModalLabel"><span id='adTitle'>Modal Dialog</span><span class='md-closeBtn icon-remove'></span></h3>
+		<h3 id="myModalLabel"><span id='adTitle'>Modal Dialog</span><span class='md-closeBtn icon-remove-sign'></span></h3>
 		<div>
 			<div class="imageContainer"></div>
 			<div class="footerInfo"></div>
