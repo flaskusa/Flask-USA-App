@@ -48,7 +48,7 @@ function initialize(portletId, portlet){
 
 <div id="tailgateDataTable" class="table-condensed">
 	<div class="cssGridMenu">
-		<div class="cssAddUser"><div class="iconAddTailgate"><i class="icon-glass"></i></div></div>
+		<div class="cssAddUser"><div class="iconAddTailgate"><i class="icon-plus"></i></div></div>
 		<div class="cssSearchUser"><div class="iconSearchUser"><i class="icon-search"></i></div></div>
 		<div class="cssDelUser"><div class="iconDelUser"><i class="icon-list"></i></div></div>
 		<div class="cssDelete"><div class="iconDelete"><i class="icon-trash"></i></div></div>
