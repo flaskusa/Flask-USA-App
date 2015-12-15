@@ -79,13 +79,11 @@ public class FlaskAdminServiceSoap {
 	}
 
 	public static com.rumbasolutions.flask.model.FlaskAdminSoap[] getFlaskRegularUsers(
-		java.lang.String search, java.lang.String searchColumn,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> returnValue =
-				FlaskAdminServiceUtil.getFlaskRegularUsers(search,
-					searchColumn, serviceContext);
+				FlaskAdminServiceUtil.getFlaskRegularUsers(serviceContext);
 
 			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModels(returnValue);
 		}
@@ -269,6 +267,33 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.FlaskAdminSoap updateFlaskUser(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.FlaskAdmin returnValue = FlaskAdminServiceUtil.updateFlaskUser(userId,
+					firstName, middleName, lastName, email, screenName,
+					password1, password2, DOB, isMale, streetName, aptNo,
+					areaCode, city, stateId, countryId, mobileNumber,
+					userInterests, serviceContext);
+
+			return com.rumbasolutions.flask.model.FlaskAdminSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.FlaskAdminSoap updateLoggedInUser(
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
@@ -360,15 +385,16 @@ public class FlaskAdminServiceSoap {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntrySoap addMyFileEntry(
-		long repositoryId, long folderId, java.lang.String sourceFileName,
-		java.lang.String mimeType, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog, byte[] bytes,
+		long userId, long repositoryId, long folderId,
+		java.lang.String sourceFileName, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String changeLog, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portal.kernel.repository.model.FileEntry returnValue = FlaskAdminServiceUtil.addMyFileEntry(repositoryId,
-					folderId, sourceFileName, mimeType, title, description,
-					changeLog, bytes, serviceContext);
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = FlaskAdminServiceUtil.addMyFileEntry(userId,
+					repositoryId, folderId, sourceFileName, mimeType, title,
+					description, changeLog, bytes, serviceContext);
 
 			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModel(returnValue);
 		}
@@ -380,9 +406,9 @@ public class FlaskAdminServiceSoap {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntrySoap getMyFileEntry(
-		long fileEntryId) throws RemoteException {
+		long userId) throws RemoteException {
 		try {
-			com.liferay.portal.kernel.repository.model.FileEntry returnValue = FlaskAdminServiceUtil.getMyFileEntry(fileEntryId);
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = FlaskAdminServiceUtil.getMyFileEntry(userId);
 
 			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModel(returnValue);
 		}
@@ -393,10 +419,23 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
-	public static void deleteMyFileEntry(long fileEntryId)
+	public static void deleteMyFileEntry(long userId) throws RemoteException {
+		try {
+			FlaskAdminServiceUtil.deleteMyFileEntry(userId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void updateUserForFileEntry(long userId, long fileEntryId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			FlaskAdminServiceUtil.deleteMyFileEntry(fileEntryId);
+			FlaskAdminServiceUtil.updateUserForFileEntry(userId, fileEntryId,
+				serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

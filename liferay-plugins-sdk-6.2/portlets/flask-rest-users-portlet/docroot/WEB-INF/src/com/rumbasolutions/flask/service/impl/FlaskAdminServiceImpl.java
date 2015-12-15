@@ -84,7 +84,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	public static Role _guestRole =null;
 	
 	@Override
-	public List<FlaskAdmin> getFlaskAdmins(ServiceContext  serviceContext){
+	public List<FlaskAdmin> getFlaskAdmins(ServiceContext serviceContext){
 		List<FlaskAdmin> adminList=null;
 		try{
 			String search="";
@@ -99,11 +99,12 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	}
 	
 	@Override
-	public List<FlaskAdmin> getFlaskRegularUsers(String search, String searchColumn, ServiceContext  serviceContext){
+	public List<FlaskAdmin> getFlaskRegularUsers(ServiceContext  serviceContext){
 		List<FlaskAdmin> userList=new ArrayList<FlaskAdmin>();
 		try{
-
-			userList = getFlaskUsers(FlaskModelUtil.FLASK_USER, search, searchColumn, false, serviceContext);
+			String search="";
+			String searchColumn="";
+			userList = getFlaskUsers(FlaskModelUtil.FLASK_USER, search, searchColumn, true, serviceContext);
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
@@ -578,6 +579,27 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		return adminUser;
 	}
 	
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public	FlaskAdmin updateFlaskUser(long userId, String firstName, String middleName, String lastName, 
+					String email, String screenName,String password1, String password2,  
+					String DOB, boolean isMale,
+					String streetName, String aptNo,
+					String areaCode, String city,
+					long stateId, long countryId,
+					String mobileNumber, String userInterests, 
+					ServiceContext serviceContext) throws SystemException, PortalException
+	{
+		FlaskAdmin adminUser=null;
+		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_USER.getRoleName());
+		User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, screenName, email,
+				password1, password2, DOB, isMale, streetName, aptNo, areaCode, city, stateId, countryId, mobileNumber, userInterests, serviceContext);
+		if(user != null) {
+			adminUser = FlaskModelUtil.getFlaskUser(user, true, serviceContext);
+		}
+		return adminUser;
+	}
+	
 	@Override
 	public  FlaskAdmin updateLoggedInUser(String firstName, String middleName, String lastName, 
 			String email, String screenName,String password1, String password2,  
@@ -664,58 +686,64 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	
 	@Override
 	@AccessControlled(guestAccessEnabled =true)
-	public FileEntry addMyFileEntry(long repositoryId , long folderId,
+	public FileEntry addMyFileEntry(long userId, long repositoryId , long folderId,
 										 String sourceFileName, String mimeType, String title,  
 										 String description, String changeLog, byte[] bytes, ServiceContext serviceContext) 
 														 throws PortalException, SystemException{
-		System.out.println("i m in add");
 		FileEntry fileEntry=null;	
 		try{	
-				fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), repositoryId, folderId, sourceFileName, mimeType, title, description, changeLog, bytes, serviceContext);
-				System.out.println(fileEntry);
-				//FlaskModelUtil.setMyGuestViewPermission(fileEntry);
-				User user = UserLocalServiceUtil.getUser(serviceContext.getUserId());
-				/*user.setUuid(user.getUuid());
-				user.setCompanyId(user.getCompanyId());
-				user.setCreateDate(user.getCreateDate());
-				user.setModifiedDate(user.getModifiedDate());
-				user.setD*/
-				user.setPortraitId(fileEntry.getFileEntryId());
-				System.out.println(user);
+			long count = CounterLocalServiceUtil.increment();
+			String tempTitle = count+"_"+title;
+				fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), repositoryId, folderId, tempTitle, mimeType, tempTitle, tempTitle, changeLog, bytes, serviceContext);
+				if(userId>0){
+					User user = UserLocalServiceUtil.getUser(userId);
+					user.setPortraitId(fileEntry.getFileEntryId());
+					UserLocalServiceUtil.updateUser(user);
+				}
+			}catch(Exception e){
+				LOGGER.error("Exception in addMyFileEntry: " +e.getMessage());
+			}
+		return fileEntry;
+	}
+	
+	@Override
+	@AccessControlled(guestAccessEnabled =true)
+	public FileEntry getMyFileEntry(long userId)throws PortalException, SystemException{
+		FileEntry fileEntry=null;	
+		try{	User user = UserLocalServiceUtil.getUser(userId);
+				fileEntry = DLAppLocalServiceUtil.getFileEntry(user.getPortraitId());
+				FlaskModelUtil.setMyGuestViewPermission(fileEntry);
+				
+			}catch(Exception ex){
+				
+			}
+		return fileEntry;
+	}
+	
+	@Override
+	@AccessControlled(guestAccessEnabled =true)
+	public void deleteMyFileEntry(long userId)throws PortalException, SystemException{
+		FileEntry fileEntry=null;	
+		try{	
+				long portraitId = UserLocalServiceUtil.getUser(userId).getPortraitId();
+				DLAppLocalServiceUtil.deleteFileEntry(portraitId);
+				FlaskModelUtil.setMyGuestViewPermission(fileEntry);
+		}catch(Exception ex){
+			
+		}
+	}
+	
+	@Override
+	@AccessControlled(guestAccessEnabled =true)
+	public void updateUserForFileEntry(long userId, long fileEntryId,ServiceContext serviceContext)throws PortalException, SystemException{
+		try{	
+				User user = UserLocalServiceUtil.getUser(userId);
+				user.setPortraitId(fileEntryId);
 				UserLocalServiceUtil.updateUser(user);
-				
-			}catch(Exception ex){
-			
-			}
-		return fileEntry;
+		}catch(Exception e){
+			LOGGER.error("Exception in updateUserForFileEntry: " +e.getMessage());
+		}
 	}
 	
-	@Override
-	@AccessControlled(guestAccessEnabled =true)
-	public FileEntry getMyFileEntry(long fileEntryId)throws PortalException, SystemException{
-		FileEntry fileEntry=null;	
-		try{	
-				fileEntry = DLAppLocalServiceUtil.getFileEntry(fileEntryId);
-				
-				FlaskModelUtil.setMyGuestViewPermission(fileEntry);
-				
-			}catch(Exception ex){
-			
-			}
-		return fileEntry;
-	}
-	
-	@Override
-	@AccessControlled(guestAccessEnabled =true)
-	public void deleteMyFileEntry(long fileEntryId)throws PortalException, SystemException{
-		FileEntry fileEntry=null;	
-		try{	
-				DLAppLocalServiceUtil.deleteFileEntry(fileEntryId);
-				FlaskModelUtil.setMyGuestViewPermission(fileEntry);
-				
-			}catch(Exception ex){
-			
-			}
-	}
 	
 }

@@ -64,10 +64,8 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 
 	@Override
 	public java.util.List<com.rumbasolutions.flask.model.FlaskAdmin> getFlaskRegularUsers(
-		java.lang.String search, java.lang.String searchColumn,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return _flaskAdminService.getFlaskRegularUsers(search, searchColumn,
-			serviceContext);
+		return _flaskAdminService.getFlaskRegularUsers(serviceContext);
 	}
 
 	@Override
@@ -179,6 +177,25 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 	}
 
 	@Override
+	public com.rumbasolutions.flask.model.FlaskAdmin updateFlaskUser(
+		long userId, java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String email,
+		java.lang.String screenName, java.lang.String password1,
+		java.lang.String password2, java.lang.String DOB, boolean isMale,
+		java.lang.String streetName, java.lang.String aptNo,
+		java.lang.String areaCode, java.lang.String city, long stateId,
+		long countryId, java.lang.String mobileNumber,
+		java.lang.String userInterests,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _flaskAdminService.updateFlaskUser(userId, firstName,
+			middleName, lastName, email, screenName, password1, password2, DOB,
+			isMale, streetName, aptNo, areaCode, city, stateId, countryId,
+			mobileNumber, userInterests, serviceContext);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.FlaskAdmin updateLoggedInUser(
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String email,
@@ -232,30 +249,40 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 
 	@Override
 	public com.liferay.portal.kernel.repository.model.FileEntry addMyFileEntry(
-		long repositoryId, long folderId, java.lang.String sourceFileName,
-		java.lang.String mimeType, java.lang.String title,
-		java.lang.String description, java.lang.String changeLog, byte[] bytes,
+		long userId, long repositoryId, long folderId,
+		java.lang.String sourceFileName, java.lang.String mimeType,
+		java.lang.String title, java.lang.String description,
+		java.lang.String changeLog, byte[] bytes,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _flaskAdminService.addMyFileEntry(repositoryId, folderId,
-			sourceFileName, mimeType, title, description, changeLog, bytes,
-			serviceContext);
+		return _flaskAdminService.addMyFileEntry(userId, repositoryId,
+			folderId, sourceFileName, mimeType, title, description, changeLog,
+			bytes, serviceContext);
 	}
 
 	@Override
 	public com.liferay.portal.kernel.repository.model.FileEntry getMyFileEntry(
-		long fileEntryId)
+		long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		return _flaskAdminService.getMyFileEntry(fileEntryId);
+		return _flaskAdminService.getMyFileEntry(userId);
 	}
 
 	@Override
-	public void deleteMyFileEntry(long fileEntryId)
+	public void deleteMyFileEntry(long userId)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
-		_flaskAdminService.deleteMyFileEntry(fileEntryId);
+		_flaskAdminService.deleteMyFileEntry(userId);
+	}
+
+	@Override
+	public void updateUserForFileEntry(long userId, long fileEntryId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		_flaskAdminService.updateUserForFileEntry(userId, fileEntryId,
+			serviceContext);
 	}
 
 	/**

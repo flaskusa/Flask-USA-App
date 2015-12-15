@@ -8,7 +8,7 @@
 		<hint name="max-length">255</hint>
 	</hint-collection>
 	<hint-collection name="FLASK-MESSAGE">
-	<hint name="max-length">2000</hint>
+		<hint name="max-length">2000</hint>
 	</hint-collection>
 	<hint-collection name="FLASK-IMAGE-PATH">
 		<hint name="max-length">30</hint>
