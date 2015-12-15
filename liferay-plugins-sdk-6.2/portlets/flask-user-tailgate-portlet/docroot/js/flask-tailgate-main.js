@@ -63,6 +63,7 @@ function addClickHandlers(){
 			eventForm.trigger('reset')
 			$("#tailgateDataTable").hide();
 			$("#formContainer").show();
+			eventForm.show();
 			loadEvents('eventId');
 			initializeMap(tailgateId,0,0);
 			if(parseInt($("#tailgateId").val())==0){
@@ -87,6 +88,7 @@ function addClickHandlers(){
 		window.location.hash = '#UserTailgate';
 		$("#tailgateDataTable").show();
 		$("#formContainer").hide();
+		loadData();
 	});
 	$(".clsCancelGroup").click(function(){
 		$("#tailgateGroupDataGrid").jqxGrid('clearselection');
