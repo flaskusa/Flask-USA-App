@@ -38,13 +38,15 @@ function initialize(portletId, portlet){
 		loadData();
 		addClickHandlers();
 		//$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
-		$('#DOB').datetimepicker({
-				format: "MM-DD-YYYY",
-				//pickTime: false
-			});
 		$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
 	    console.log("Cal Done");    
 		$(".jqx-checkbox").css("margin-top","6.5px");
+		$('#DOB').combodate({
+			firstItem: 'name',
+		    minYear: 1960,
+		    maxYear: 2016,
+		    smartDays: true
+		});
 	}
 }
 
@@ -94,6 +96,7 @@ function initialize(portletId, portlet){
 	</div>
 	
 	<form id="adminForm">
+	<input id="userId" type="hidden" value="0">
 	  <div class="">
 	  	<div id="ProfilePic" style="background-image:url('http://localhost:8080/documents/20181/0/21491')"></div>  
 	   <div class="form-group">
@@ -198,7 +201,7 @@ function initialize(portletId, portlet){
 	   <div class="form-group">
 	  <label class="control-label" for="DOB">Date of Birth:</label>
 	  <div class="controls">
-	   <input id="DOB" class="form-control" type="text">
+	   <input id="DOB" class="form-control" type="text" value="" data-format="MM-DD-YYYY" data-template="MMM D YYYY">
 	  </div>
 	   </div>  
 	  </div>
@@ -268,7 +271,6 @@ function initialize(portletId, portlet){
 	</div>
 	  <input class="btn btn-info clsSave" type="button" value="Save"/>
 	  <input class="btn btn-primary clsCancel" type="button" value="Cancel" >
-	  <input id="userId" type="hidden" value="0">
 	  <input id="fileEntryId" type="hidden" value="0">
 	  <input name="middleName" id="middleName" type="hidden">
 	 <%-- jqx popup window for change role --%>

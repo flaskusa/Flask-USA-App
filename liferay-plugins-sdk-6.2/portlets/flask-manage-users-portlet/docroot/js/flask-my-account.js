@@ -2,7 +2,7 @@ var RepositoryID;
 var FolderId;
 var adminForm;
 var portraitURL = 0;
-function addClickHandlers(){
+function addMyAccClickHandlers(){
 	adminForm = $("#adminForm");
 	/*	Initialize display elements*/
 	
@@ -72,8 +72,7 @@ function loadForm(){
 		    fileInput.click();
 		}).show();
 		fileInput.change(function(){
-			fnDeleteFileEntry(portraitURL);
-			fileUpload();
+			myAccFileUpload();
 		});
 		/*Upload File Code End*/
 	} , function(error){ /*failure handler*/
@@ -100,9 +99,8 @@ function editUser(rowData) {
 	$('#DOB').combodate('setValue', mm+'-'+dd+'-'+yy);
 	loadFlaskRoles('roleId', rowData.roleId);
 	portraitURL = rowData.portraitURL;
-	renderPhoto(rowData.portraitURL);
+	renderPhoto(rowData.userId);
 	fnSetCheckBoxSelected(rowData.userInterests);
-	//renderPhotoEditMode(rowData.userId);
 }
 
 function fnGetCheckBoxSelected() {
@@ -150,8 +148,7 @@ function saveAccount(){
 
 }
 
-function fileUpload(){
-
+function myAccFileUpload(){
     var input = document.getElementById('fileinput');
     var file;
 	var reader = new FileReader();
@@ -168,26 +165,41 @@ function fileUpload(){
 		            markup.push(aByte);
 		        }			    	
 		    	if(markup.length > 0){   
-		    		/*Service call [Start]*/
-		        	Liferay.Service(
-		       			  '/flask-rest-users-portlet.flaskadmin/add-my-file-entry',
-		       			  {
-		       			    repositoryId: $("#repositoryId").val(),
-		       			    folderId: 0,
-		       			    sourceFileName: input.files[j].name,
-		       			    mimeType: input.files[j].type,
-		       			    title: input.files[j].name,
-		       			    description: input.files[j].name,
-		       			    changeLog: '1',
-	       			    	bytes: markup
-		       			  },
-		       			  function(obj) {
-		       			    if(typeof obj =='object')
-		       			 		$("#fileEntryId").val(obj.fileEntryId);
-		       			    	renderPhoto(obj.fileEntryId); //call back function
-		       			  	}
-		       			); 
-		        	/*Service call [End]*/			    		
+		    		var userId = $("#userId").val();
+		    		Liferay.Service(
+		    			     '/flask-rest-users-portlet.flaskadmin/delete-my-file-entry',
+		    			     {
+		    			    	 userId: parseInt(userId)
+		    			     },
+		    			     function(obj) {
+		    			       console.log(obj);
+		    			       Liferay.Service(
+		    			    		'/flask-rest-users-portlet.flaskadmin/add-my-file-entry',
+		   		       			  {
+		   		        			userId : userId,
+		   		       			    repositoryId: $("#repositoryId").val(),
+		   		       			    folderId: 0,
+		   		       			    sourceFileName: input.files[0].name,
+		   		       			    mimeType: input.files[0].type,
+		   		       			    title: userId+"_"+input.files[0].name,
+		   		       			    description: userId+"_"+input.files[0].name,
+		   		       			    changeLog: '1',
+		   	       			    	bytes: markup
+		   		       			  },
+		   		       			  function(obj) {
+		   			       				$("#ProfilePic").css("background-image","url('')");
+		   			       				console.log("obj: ");
+		   			       				console.log(obj);
+		   			       			 	$("#fileEntryId").val(obj.fileEntryId);
+		   				       			setTimeout(function(){
+		   				       				renderPhoto(userId); //call back function
+		   				       			}, 1500);
+		   			       			    //
+		   		       			  	}
+		   		       			); 
+		    			     }
+		    			   );
+	    				    		
 		        }
              j++;
              if (j == k){
@@ -200,32 +212,20 @@ function fileUpload(){
 
 /* Need to change below code as per standard  */
 
-	function fnDeleteFileEntry(portraitURL){
-		Liferay.Service(
-     			  '/flask-rest-users-portlet.flaskadmin/delete-my-file-entry',
-     			  {
-     				fileEntryId: portraitURL
-     			  },
-     			  function(obj) {
-     			  	}
-     			); 
-	}
-
-	function renderPhoto(FileId){
-	 Liferay.Service('/flask-rest-users-portlet.flaskadmin/get-my-file-entry',
-	     {
-	       fileEntryId: FileId
-	     },
-	     function(obj) {
-	      var url = "/documents/"+RepositoryID+"/0/"+obj.title;
-	      $("#ProfilePic").css("background-image","url('"+url+"')");
-	     }
-	 );
-	}
-	function renderPhotoEditMode(FileId){
-	   var url = "/documents/"+RepositoryID+"/0/"+FileId;
-	   $("#ProfilePic").css("background-image","url('"+url+"')")
-	}
+	function renderPhoto(userId){
+		 Liferay.Service('/flask-rest-users-portlet.flaskadmin/get-my-file-entry',
+		     {
+		       userId: userId
+		     },
+		     function(obj) {
+		      console.log(obj);
+		      var url = "/documents/"+RepositoryID+"/0/"+obj.title;
+		      $("#ProfilePic").css("background-image","url('')");
+		      $("#ProfilePic").css("background-image","url('"+url+"')");
+		      console.log(obj);
+		     }
+		 );
+		}
 	
 	function loadFlaskRoles(elementId, selectedId){
 			var param = {};

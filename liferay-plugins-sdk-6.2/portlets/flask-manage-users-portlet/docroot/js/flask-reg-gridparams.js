@@ -109,6 +109,19 @@ GRID_PARAM.formatDate = function (dateVal){
 	var dateObj = new Date(dateVal);
 	return dateObj.toLocaleDateString(); 
 }
+
+GRID_PARAM.getProfilePic = function(userId, image){
+	Liferay.Service('/flask-rest-users-portlet.flaskadmin/get-my-file-entry',
+		     {
+		       userId: userId
+		     },
+		     function(obj) {
+		    	 var img = $('<img style="max-height: 96px;" src="/documents/'+RepositoryID+'/0/' + obj.title + '"/>');
+		 		image.append(img);
+		     }
+		 );
+}
+
 GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datarecord) {
 	console.log("I am in initrowdetails"+datarecord.firstName);
 	var tabsdiv = null;
@@ -130,8 +143,7 @@ GRID_PARAM.initrowdetails = function(index, parentElement, gridElement, datareco
 		var photo = $("<div class='jqx-rc-all' style='margin: 10px;'><b>Photo:</b></div>");
 		var image = $("<div style='margin-top: 10px;'></div>");
 		var imgurl = '' + datarecord.firstName.toLowerCase() + '.png';
-		var img = $('<img style="max-height: 96px;" src="/documents/'+RepositoryID+'/0/' + datarecord.userId + '"/>');
-		image.append(img);
+		GRID_PARAM.getProfilePic(datarecord.userId, image);
 		image.appendTo(photo);
 		photocolumn.append(photo);
 	

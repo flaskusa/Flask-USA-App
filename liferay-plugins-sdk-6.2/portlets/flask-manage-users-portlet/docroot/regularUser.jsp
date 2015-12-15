@@ -39,15 +39,16 @@
 		{
 			$("#adminForm").hide();
 			createTable({},_userModel.DATA_MODEL.ADMIN, $('#grid'), "actionMenu", "Edit", contextMenuHandler, ["Admin", "Images"]);
-			loadData();
-			addClickHandlers();
+			loadRegUserData();
+			addRegUserClickHandlers();
 			//$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });
-			$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	
-		    console.log("Cal Done");    
+			$('.userInterests').jqxTree({ height: 'auto', hasThreeStates: true, checkboxes: true});	  
 			$(".jqx-checkbox").css("margin-top","6.5px");
-			$('#DOB').datetimepicker({
-				format: "MM-DD-YYYY",
-				//pickTime: false
+			$('#DOB').combodate({
+				firstItem: 'name',
+			    minYear: 1960,
+			    maxYear: 2016,
+			    smartDays: true
 			});
 		}
 		if(portletId == "myaccount_WAR_flaskmanageusersportlet")
@@ -61,7 +62,7 @@
 			$("#adminForm").show();
 			$("#adminDataTable").hide();
 			loadForm();
-			addClickHandlers();
+			addMyAccClickHandlers();
 			$(".hideOnMyAcc").hide();
 			//document.getElementById('roleId').disabled=true;
 			//$("#DOB").jqxDateTimeInput({ width: '250px', height: '25px', formatString: "MM-dd-yyyy" });

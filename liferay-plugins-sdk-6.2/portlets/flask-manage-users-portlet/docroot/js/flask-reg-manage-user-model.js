@@ -6,7 +6,7 @@ _userModel.SERVICE_ENDPOINTS = {
 	GET_ROLES 					: "/flask-rest-users-portlet.flaskrole/get-flask-roles",
 	SET_ROLES					: "/flask-rest-users-portlet.flaskrole/set-flask-role",
 	ADD_USERS 					: "/flask-rest-users-portlet.flaskadmin/add-flask-user",
-	UPDATE_USERS				: "/flask-rest-users-portlet.flaskadmin/update-logged-in-user",
+	UPDATE_USERS				: "/flask-rest-users-portlet.flaskadmin/update-flask-user",
 	DELETE_ADMIN				: "/flask-rest-users-portlet.flaskadmin/delete-flask-admins",
 	GET_LOGGED_IN_USER 			: "/flask-rest-users-portlet.flaskadmin/get-user-by-id",
 
@@ -45,9 +45,9 @@ _userModel.DATA_MODEL= {
 _userModel.MESSAGES= {
 		GET_ERROR: "There was an error in getting data",
 		ADD: "Admin successfully added",
-		SAVE: "Admin successfully saved",
+		SAVE: "User successfully saved",
 		ERROR: "There was an error in saving Admin",
-		DEL_SUCCESS: "Admin successfully deleted",
+		DEL_SUCCESS: "User successfully deleted",
 		DEL_ERR: "Error in deleting Admin",
 		USER_SAVE: "User successfully saved",
 		USER_ERROR: "There was an error in saving User",

@@ -1,7 +1,7 @@
 var RepositoryID;
 var FolderId;
 var adminForm;
-function addClickHandlers(){
+function addRegUserClickHandlers(){
 	adminForm = $("#adminForm");
 	/*	Initialize display elements*/
 	
@@ -10,7 +10,8 @@ function addClickHandlers(){
 	/* Click handler for add user button*/
 	
 	$(".cssAddUser").click(function(){
-		adminForm.trigger('reset')
+		adminForm.trigger('reset');
+		$("#ProfilePic").css("background-image","url()");
 		$("#adminDataTable").hide();
 		adminForm.show();
 		_flaskLib.loadCountries('countryId');
@@ -21,7 +22,8 @@ function addClickHandlers(){
 	/* Click handler for save button*/
 	
 	$(".clsSave").click(function(){
-		saveAdmin();
+		if ($('#adminForm').jqxValidator('validate'))
+			saveRegularUser();
 	});
 
 
@@ -72,7 +74,7 @@ $(document).ready(function () {
     fillFlaskRoles('roleId1');
 });
 
-function loadData(){
+function loadRegUserData(){
 	
 	 $('#adminForm').jqxValidator
 	    ({
@@ -100,7 +102,7 @@ function loadData(){
 	    });
 	
 	var flaskRequest = new Request();
-	params = { search: '',  searchColumn: ''  };
+	params = {};
 	flaskRequest.sendGETRequest(_userModel.SERVICE_ENDPOINTS.GET_USERS, params, 
 	function(data){/*success handler*/
 		GRID_PARAM.updateGrid(data);
@@ -113,54 +115,8 @@ function loadData(){
 		    fileInput.click();
 		}).show();
 			
-		fileInput.change(function(){
-		    var input = document.getElementById('fileinput');
-		    var file;
-			var reader = new FileReader();
-			var markup, result, n, aByte;
-			var data = new Object;
-		    var j = 0, k = input.files.length;
-		    for (var i = 0; i < k; i++) {
-		        var reader = new FileReader();
-		        reader.onloadend = function (evt) {
-		       	 markup=[];
-		            if (evt.target.readyState == FileReader.DONE) {
-		           	 for (n = 0; n < evt.target.result.length; ++n) {
-				            aByte = evt.target.result.charCodeAt(n);
-				            markup.push(aByte);
-				        }			    	
-				    	console.log(markup);
-				    	if(markup.length > 0){   
-				    		/*Service call [Start]*/
-				        	Liferay.Service(
-				       			  '/dlapp/add-file-entry',
-				       			  {
-				       			    repositoryId: RepositoryID,
-				       			    folderId: FolderId,
-				       			    sourceFileName: input.files[j].name,
-				       			    mimeType: input.files[j].type,
-				       			    title: input.files[j].name,
-				       			    description: input.files[j].name,
-				       			    changeLog: '1',
-			       			    	bytes: markup
-				       			  },
-				       			  function(obj) {
-				       				  console.log(obj);
-				       			    if(typeof obj =='object')
-				       			 		$("#fileEntryId").val(obj.fileEntryId);
-				       			    	renderPhoto(obj.fileEntryId); //call back function
-				       			  	}
-				       			); 
-				        	/*Service call [End]*/			    		
-				        }
-				     console.log(j);
-	                 j++;
-	                 if (j == k){
-	                     console.log('All files read');
-	                 }
-	             }};
-	         reader.readAsBinaryString(input.files[i]);
-	     	}			
+		fileInput.change(function(){		
+			userFileUpload();
 		})		
 		/*Upload File Code End*/
 	} , function(error){ /*failure handler*/
@@ -168,6 +124,71 @@ function loadData(){
 		console.log("Error in getting data: " + error);
 	});
 	
+}
+
+function userFileUpload(){
+    var input = document.getElementById('fileinput');
+    var file;
+	var reader = new FileReader();
+	var markup, result, n, aByte;
+	var data = new Object;
+    var j = 0, k = input.files.length;
+    for (var i = 0; i < k; i++) {
+        var reader = new FileReader();
+        reader.onloadend = function (evt) {
+       	 markup=[];
+            if (evt.target.readyState == FileReader.DONE) {
+           	 for (n = 0; n < evt.target.result.length; ++n) {
+		            aByte = evt.target.result.charCodeAt(n);
+		            markup.push(aByte);
+		        }			    	
+		    	if(markup.length > 0){   
+		    		var userId = $("#userId").val();
+		    		Liferay.Service(
+		    			     '/flask-rest-users-portlet.flaskadmin/delete-my-file-entry',
+		    			     {
+		    			    	 userId: parseInt(userId)
+		    			     },
+		    			     function(obj) {
+		    			       console.log(obj);
+		    			       Liferay.Service(
+		    			    		'/flask-rest-users-portlet.flaskadmin/add-my-file-entry',
+		   		       			  {
+		   		        			userId : userId,
+		   		       			    repositoryId: $("#repositoryId").val(),
+		   		       			    folderId: 0,
+		   		       			    sourceFileName: input.files[0].name,
+		   		       			    mimeType: input.files[0].type,
+		   		       			    title: userId+"_"+input.files[0].name,
+		   		       			    description: userId+"_"+input.files[0].name,
+		   		       			    changeLog: '1',
+		   	       			    	bytes: markup
+		   		       			  },
+		   		       			  function(obj) {
+		   			       				$("#ProfilePic").css("background-image","url('')");
+		   			       				console.log("obj: ");
+		   			       				console.log(obj);
+		   			       			 	$("#fileEntryId").val(obj.fileEntryId);
+		   				       			setTimeout(function(){
+		   				       				if(userId=='0')
+		   				       					renderPhotoEditMode(userId+"_"+input.files[0].name);
+		   				       				else
+		   				       					renderPhoto(userId); //call back function
+		   				       			}, 1500);
+		   			       			    //
+		   		       			  	}
+		   		       			); 
+		    			     }
+		    			   );
+	    				    		
+		        }
+             j++;
+             if (j == k){
+                 console.log('All files read');
+             }
+         }};
+     reader.readAsBinaryString(input.files[i]);
+ 	}
 }
 
 function contextMenuHandler(menuItemText, rowData){
@@ -184,22 +205,13 @@ function contextMenuHandler(menuItemText, rowData){
 	}else if(menuItemText == "Change Role"){
 		fillFlaskRoles('roleId1', rowData.roleId);
 		pop_window(rowData.userId,rowData.roleId);
-		console.log(rowData.userId);
-		
 		return false;
 	}
 };
 
 function pop_window(uid,rid) {
-	console.log(rid);
-	console.log(roleId1);
-	
-	//alert(rid);
-   
     $("#button_input").click(function () {
     	setFlaskRoles(uid,$('#roleId1').val());
-    	//alert($('#userId').val());
-    	//alert($('#roleId1').val());
         $("#jqxwindow").jqxWindow('close');
     });
     $("#button_no").click(function () {
@@ -214,7 +226,7 @@ function deleteAdmin(adminId) {
 	flaskRequest.sendPOSTRequest(_userModel.SERVICE_ENDPOINTS.DELETE_ADMIN, param, 
 					function (data){
 							_flaskLib.showSuccessMessage('action-msg', _userModel.MESSAGES.DEL_SUCCESS);
-							loadData();
+							loadRegUserData();
 					} ,
 					function (data){
 							_flaskLib.showErrorMessage('action-msg', _userModel.MESSAGES.DEL_ERR);
@@ -243,11 +255,10 @@ function editAdmin(rowData) {
 	   var mm = date.getMonth()+1;
 	   if ( mm < 10 ) mm = '0' + mm;
 	   var yy = date.getFullYear();
-	$('#DOB').val(mm+'-'+dd+'-'+yy);
+	$('#DOB').combodate('setValue', mm+'-'+dd+'-'+yy);
 	loadFlaskRoles('roleId', rowData.roleId);
-	fnUpdateProfilePic(rowData.userId);
 	fnSetCheckBoxSelected(rowData.userInterests);
-	renderPhotoEditMode(rowData.userId);
+	renderPhoto(rowData.userId);
 }
 
 function fnGetCheckBoxSelected() {
@@ -261,13 +272,11 @@ function fnGetCheckBoxSelected() {
 			};
 		});
 	});
-	console.log(ItemArray.join("#"));
 	return ItemArray.join("#");
 }
 
 function fnSetCheckBoxSelected(strCheckList) {
 	var tempArray = new Array();
-	console.log(strCheckList);
 	tempArray = strCheckList.split("#");
 	var i;
 	for (i = 0; i < tempArray.length; i++) {
@@ -276,8 +285,7 @@ function fnSetCheckBoxSelected(strCheckList) {
 	}
 }
 
-
-function saveAdmin(){
+function saveRegularUser(){
 	params = _flaskLib.getFormData('adminForm',_userModel.DATA_MODEL.ADMIN,
 				function(formId, model, formData){
 						if($(".gender").val()=="Male"){formData.isMale=true;}
@@ -292,15 +300,14 @@ function saveAdmin(){
 		}else{
 			url =_userModel.SERVICE_ENDPOINTS.UPDATE_USERS;
 		}
-	//console.log(params);
-	//console.log(params.isMale);
-	//console.log(params.userInterests);
-	console.log(params.userId);
 	flaskRequest.sendGETRequest(url, params, 
 				function (data){
+					if(url == _userModel.SERVICE_ENDPOINTS.ADD_USERS)
+						fnUpdateProfilePic(data.userId);
 					_flaskLib.showSuccessMessage('action-msg', _userModel.MESSAGES.SAVE);
-					fnUpdateProfilePic(data.userId);
-					loadData();
+					loadRegUserData();
+					$("#adminForm").hide();
+					$("#adminDataTable").show();
 				} ,
 				function (data){
 					_flaskLib.showErrorMessage('action-msg', _userModel.MESSAGES.ERROR);
@@ -311,37 +318,22 @@ function saveAdmin(){
 /* Need to change below code as per standard  */
 function fnUpdateProfilePic(uid){
 	 Liferay.Service(
-	    '/dlapp/get-file-entry',
+	    '/flask-rest-users-portlet.flaskadmin/update-user-for-file-entry',
 	    {
+	      userId: uid,
 	      fileEntryId: $("#fileEntryId").val()
 	    },
 	    function(objFile) {
-		   Liferay.Service(
-		       '/dlapp/update-file-entry',
-		       {
-		         fileEntryId: objFile.fileEntryId,
-		         sourceFileName:uid,
-		         mimeType:objFile.mimeType,
-		         title: uid,
-		         description:uid,
-		         changeLog: objFile.createDate,
-		         majorVersion: false,
-		         bytes: null
-		       },
-		       function(obj) {
-		         console.log(obj);
-		         console.log(objFile);
-		       }
-		    );       
+		          
 	    }
 	 ); 
 	}
 
-	function fnDeleteFileEntry(uid){
+	function fnDeleteAdminFileEntry(userId){
 	 Liferay.Service(
-	     '/dlapp/delete-file-entry',
+	     '/flask-rest-users-portlet.flaskadmin/delete-my-file-entry',
 	     {
-	       fileEntryId: uid
+	    	 userId: userId
 	     },
 	     function(obj) {
 	       console.log(obj);
@@ -349,22 +341,23 @@ function fnUpdateProfilePic(uid){
 	   );
 	}
 
-	function renderPhoto(FileId){
-	 Liferay.Service('/dlapp/get-file-entry',
+	function renderPhoto(userId){
+	 Liferay.Service('/flask-rest-users-portlet.flaskadmin/get-my-file-entry',
 	     {
-	       fileEntryId: FileId
+	       userId: userId
 	     },
 	     function(obj) {
 	      console.log(obj);
 	      var url = "/documents/"+RepositoryID+"/0/"+obj.title;
-	      $("#ProfilePic").css("background-image","url('"+url+"')")
+	      $("#ProfilePic").css("background-image","url('')");
+	      $("#ProfilePic").css("background-image","url('"+url+"')");
 	      console.log(obj);
 	     }
 	 );
 	}
 	function renderPhotoEditMode(FileId){
 	   var url = "/documents/"+RepositoryID+"/0/"+FileId;
-	   $("#ProfilePic").css("background-image","url('"+url+"')")
+	   $("#ProfilePic").css("background-image","url('"+url+"')");
 	}
 	
 	function loadFlaskRoles(elementId, selectedId){

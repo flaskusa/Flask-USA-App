@@ -1,17 +1,19 @@
 var RepositoryID;
 var FolderId;
 var adminForm;
+var fileInput;
 var portraitURL = 0;
 function addClickHandlers(){
 	adminForm = $("#adminForm");
 	/*	Initialize display elements*/
-	
 	$(".cssDelete").hide();	
 	
 	/* Click handler for add user button*/
-	
 	$(".cssAddUser").click(function(){
 		adminForm.trigger('reset')
+		$("#userId").val("0");
+		$(".userInterests").jqxTree('uncheckAll');
+		$("#ProfilePic").css("background-image","url()");
 		$("#adminDataTable").hide();
 		adminForm.show();
 		_flaskLib.loadCountries('countryId');
@@ -20,21 +22,16 @@ function addClickHandlers(){
 	});
 
 	/* Click handler for save button*/
-	
 	$(".clsSave").click(function(){
-		if(portletId == "myaccount_WAR_flaskmanageusersportlet"){
-			saveAccount();
-		}else{
+		if ($('#adminForm').jqxValidator('validate'))
 			saveAdmin();
-		}
 	});
 
-
 	/* Click handler for cancel button*/
-
 	$(".clsCancel").click(function(){
 		$("#adminDataTable").show();
 		adminForm.hide();
+		loadData();
 	});
 	
 	$(".cssDelUser").click(function() {
@@ -113,15 +110,14 @@ function loadData(){
 		RepositoryID = $("#repositoryId").val();
 		FolderId = 0;
 		var wrapper = $('<div/>').css({height:0,width:0,'overflow':'hidden'});
-		var fileInput = $('#fileinput').wrap(wrapper);	
+		fileInput = $('#fileinput').wrap(wrapper);	
 		$('#ProfilePic').click(function(){
 		    fileInput.click();
 		}).show();
 		fileInput.change(function(){
-			fnDeleteFileEntry(portraitURL);
-			fileUpload();
+			//fnDeleteFileEntry(portraitURL);
+			adminFileUpload();
 		});
-		
 		/*Upload File Code End*/
 	} , function(error){ /*failure handler*/
 		_flaskLib.showErrorMessage(_adminModel.MESSAGES.GET_ERROR);
@@ -130,8 +126,7 @@ function loadData(){
 	
 }
 
-function fileUpload(){
-
+function adminFileUpload(){
     var input = document.getElementById('fileinput');
     var file;
 	var reader = new FileReader();
@@ -148,26 +143,44 @@ function fileUpload(){
 		            markup.push(aByte);
 		        }			    	
 		    	if(markup.length > 0){   
-		    		/*Service call [Start]*/
-		        	Liferay.Service(
-		       			  '/flask-rest-users-portlet.flaskadmin/add-my-file-entry',
-		       			  {
-		       			    repositoryId: $("#repositoryId").val(),
-		       			    folderId: 0,
-		       			    sourceFileName: input.files[j].name,
-		       			    mimeType: input.files[j].type,
-		       			    title: input.files[j].name,
-		       			    description: input.files[j].name,
-		       			    changeLog: '1',
-	       			    	bytes: markup
-		       			  },
-		       			  function(obj) {
-		       			    if(typeof obj =='object')
-		       			 		$("#fileEntryId").val(obj.fileEntryId);
-		       			    	renderPhoto(obj.fileEntryId); //call back function
-		       			  	}
-		       			); 
-		        	/*Service call [End]*/			    		
+		    		var userId = $("#userId").val();
+		    		Liferay.Service(
+		    			     '/flask-rest-users-portlet.flaskadmin/delete-my-file-entry',
+		    			     {
+		    			    	 userId: parseInt(userId)
+		    			     },
+		    			     function(obj) {
+		    			       console.log(obj);
+		    			       Liferay.Service(
+		    			    		'/flask-rest-users-portlet.flaskadmin/add-my-file-entry',
+		   		       			  {
+		   		        			userId : userId,
+		   		       			    repositoryId: $("#repositoryId").val(),
+		   		       			    folderId: 0,
+		   		       			    sourceFileName: input.files[0].name,
+		   		       			    mimeType: input.files[0].type,
+		   		       			    title: userId+"_"+input.files[0].name,
+		   		       			    description: userId+"_"+input.files[0].name,
+		   		       			    changeLog: '1',
+		   	       			    	bytes: markup
+		   		       			  },
+		   		       			  function(obj) {
+		   			       				$("#ProfilePic").css("background-image","url('')");
+		   			       				console.log("obj: ");
+		   			       				console.log(obj);
+		   			       			 	$("#fileEntryId").val(obj.fileEntryId);
+		   				       			setTimeout(function(){
+		   				       				if(userId=='0')
+		   				       					renderPhotoEditMode(userId+"_"+input.files[0].name);
+		   				       				else
+		   				       					renderPhoto(userId); //call back function
+		   				       			}, 1500);
+		   			       			    //
+		   		       			  	}
+		   		       			); 
+		    			     }
+		    			   );
+	    				    		
 		        }
              j++;
              if (j == k){
@@ -202,8 +215,6 @@ function pop_window(uid,rid) {
 	console.log(roleId1);
     $("#button_input").click(function () {
     	setFlaskRoles(uid,$('#roleId1').val());
-    	//alert($('#userId').val());
-    	//alert($('#roleId1').val());
         $("#jqxwindow").jqxWindow('close');
     });
     $("#button_no").click(function () {
@@ -247,12 +258,11 @@ function editAdmin(rowData) {
 	   var mm = date.getMonth()+1;
 	   if ( mm < 10 ) mm = '0' + mm;
 	   var yy = date.getFullYear();
-	$('#DOB').val(mm+'-'+dd+'-'+yy);
+	$('#DOB').combodate('setValue', mm+'-'+dd+'-'+yy);
 	loadFlaskRoles('roleId', rowData.roleId);
 	portraitURL = rowData.portraitURL;
-	renderPhoto(rowData.portraitURL);
 	fnSetCheckBoxSelected(rowData.userInterests);
-	renderPhotoEditMode(rowData.userId);
+	renderPhoto(rowData.userId);
 }
 
 function fnGetCheckBoxSelected() {
@@ -296,92 +306,64 @@ function saveAdmin(){
 		}else{
 			url =_adminModel.SERVICE_ENDPOINTS.UPDATE_ADMIN;
 		}
-	//console.log(params);
-	//console.log(params.isMale);
-	//console.log(params.userInterests);
 	console.log(params.userId);
 	flaskRequest.sendGETRequest(url, params, 
 				function (data){
+					if(url==_adminModel.SERVICE_ENDPOINTS.ADD_ADMIN)
+						fnUpdateProfilePic(data.userId);
 					_flaskLib.showSuccessMessage('action-msg', _adminModel.MESSAGES.SAVE);
 					loadData();
+					$("#adminDataTable").show();
+					$("#adminForm").hide();
 				} ,
 				function (data){
 					_flaskLib.showErrorMessage('action-msg', _adminModel.MESSAGES.ERROR);
 				});
-
 }
 
 /* Need to change below code as per standard  */
 function fnUpdateProfilePic(uid){
-	console.log("i m in upload");
 	 Liferay.Service(
-	    '/flask-rest-users-portlet.flaskadmin/get-my-file-entry',
+	    '/flask-rest-users-portlet.flaskadmin/update-user-for-file-entry',
 	    {
+	      userId: uid,
 	      fileEntryId: $("#fileEntryId").val()
 	    },
 	    function(objFile) {
-	    	if(objFile.fileEntryId==0){
-	    		fileUpload();
-	    	}
-	    	else{
-	    		Liferay.Service(
-		       			  '/flask-rest-users-portlet.flaskadmin/delete-my-file-entry',
-		       			  {
-		       				fileEntryId: $("#fileEntryId").val()
-		       			  },
-		       			  function(obj) {
-		       			  	}
-		       			); 
-	    		Liferay.Service(
-		       			  '/flask-rest-users-portlet.flaskadmin/add-my-file-entry',
-		       			  {
-		       			    repositoryId: $("#repositoryId").val(),
-		       			    folderId: 0,
-		       			    sourceFileName: input.files[j].name,
-		       			    mimeType: input.files[j].type,
-		       			    title: input.files[j].name,
-		       			    description: input.files[j].name,
-		       			    changeLog: '1',
-	       			    	bytes: markup
-		       			  },
-		       			  function(obj) {
-		       				  console.log(obj);
-		       			    if(typeof obj =='object')
-		       			 		$("#fileEntryId").val(obj.fileEntryId);
-		       			    	renderPhoto(obj.fileEntryId); //call back function
-		       			  	}
-		       			); 
-	    	}
-       
+		          
 	    }
 	 ); 
 	}
 
-function fnDeleteFileEntry(portraitURL){
-	Liferay.Service(
- 			  '/flask-rest-users-portlet.flaskadmin/delete-my-file-entry',
- 			  {
- 				fileEntryId: portraitURL
- 			  },
- 			  function(obj) {
- 			  	}
- 			); 
-}
-
-function renderPhoto(FileId){
-	 Liferay.Service('/flask-rest-users-portlet.flaskadmin/get-my-file-entry',
+	function fnDeleteAdminFileEntry(userId){
+	 Liferay.Service(
+	     '/flask-rest-users-portlet.flaskadmin/delete-my-file-entry',
 	     {
-	       fileEntryId: FileId
+	    	 userId: userId
 	     },
 	     function(obj) {
+	       console.log(obj);
+	     }
+	   );
+	}
+
+	function renderPhoto(userId){
+	 Liferay.Service('/flask-rest-users-portlet.flaskadmin/get-my-file-entry',
+	     {
+	       userId: userId
+	     },
+	     function(obj) {
+	      console.log(obj);
 	      var url = "/documents/"+RepositoryID+"/0/"+obj.title;
+	      $("#ProfilePic").css("background-image","url('')");
 	      $("#ProfilePic").css("background-image","url('"+url+"')");
+	      console.log(obj);
 	     }
 	 );
 	}
 	function renderPhotoEditMode(FileId){
 	   var url = "/documents/"+RepositoryID+"/0/"+FileId;
-	   $("#ProfilePic").css("background-image","url('"+url+"')")
+	   $("#ProfilePic").css("background-image","url('"+url+"')");
 	}
 	
 	function loadFlaskRoles(elementId, selectedId){
