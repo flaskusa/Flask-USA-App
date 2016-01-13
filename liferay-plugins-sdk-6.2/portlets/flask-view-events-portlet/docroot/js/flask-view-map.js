@@ -259,14 +259,38 @@ _flaskMap.createMarkers = function (results, status) {
             }
             _flaskMap.markers.push(mark);
             var infowindow = new google.maps.InfoWindow();
+            google.maps.event.addListener(_flaskMap.map, 'click', function(map) {
+        		_flaskMap.clearInfos();
+        	});
             google.maps.event.addListener(mark, 'click', (function(mark, i) {
             	return function() {
             		_flaskMap.clearInfos();
-            		var findUsOnMap = _flaskMap.createMapLink(results[i].vicinity);
-	                var content= '<div style="display: inline-flex;height:100px;"><img src="' + results[i].icon + '" style="width:34px; height:34px;"/>&nbsp;&nbsp;&nbsp;&nbsp;<font style="color:#000; "><b>' + results[i].name + 
-	                '</b><br /><br />'+findUsOnMap+'</font></div>';
-	                infowindow.setContent(content);
-	                infowindow.open(_flaskMap.map, mark);
+            		service.getDetails({
+            		    placeId: results[i].place_id
+            		  }, function(place, status) {
+            		    if (status === google.maps.places.PlacesServiceStatus.OK) {
+            		    	var content= '<div style="display: inline-flex;"><img src="' + results[i].icon + '" style="width:30px;height:30px;"/><font style="color:#000;">&nbsp;&nbsp;<b>'+results[i].name+'</b><br/></div>';
+            		    	if(place.formatted_address!=""){
+		        				var objAddress= $('<div/>');
+		        				var findUsOnMap = _flaskMap.createMapLink(place.formatted_address);
+		        				objAddress.html('<div class="adAddress"><table width="100%"><tr><td width="38px" valign="top"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-address"></span></td><td>'+findUsOnMap+'</td><tr/></table></div>');
+		        				content = content + objAddress.html();
+		        			}
+            		    	if(place.international_phone_number!=""){
+		        				var objPhone= $('<div/>');
+		        				objPhone.html('<div class="adPhone"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-phone"></span><a href="tel:'+place.international_phone_number+'">'+place.international_phone_number+'</a></div>');
+		        				content = content + objPhone.html();
+		        			}
+            		    	if(place.website!=""){
+		        				var objWebSite = $('<div/>');
+		        				objWebSite.html('<div class="adWebSite"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-website"></span><a href="'+_flaskLib.fixURL(place.website)+'" target="_blank">'+place.website+'</a></div>');
+		        				content = content + objWebSite.html();
+		        			}
+            		      infowindow.setContent(content);
+      	                  infowindow.open(_flaskMap.map, mark);
+            		    }
+            		  });	                
+	                
             	}
             })(mark, i));
             _flaskMap.infos.push(infowindow);   
