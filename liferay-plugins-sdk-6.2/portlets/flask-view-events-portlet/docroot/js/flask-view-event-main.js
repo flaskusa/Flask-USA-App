@@ -911,11 +911,11 @@ function ValidateAskUsForm(){
 		}*/
 		var strSubject     = $('#txtSubject').val();
 		if($.trim(strSubject)==''){
-			errMsg = errMsg + '<br/>Please enter title';
+			errMsg = errMsg + '<br>Please enter title';
 		}
 		var strDescription = $('#txtDescription').val();
 		if($.trim(strDescription)==''){
-			errMsg = errMsg + '<br/>Please enter description';
+			errMsg = errMsg + '<br>Please enter description';
 		}
 		if(errMsg!=''){
 			_flaskLib.showWarningMessage('action-msg-warning', errMsg);
