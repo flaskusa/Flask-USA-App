@@ -198,17 +198,19 @@ _flaskMap.clearInfos = function() {
 }
 _flaskMap.findPlaces = function (places) {
 	_flaskMap.placeType = places;
-    var radius = 2000;
-    var lat = _flaskMap.latitude;
-    var lng = _flaskMap.longitude;
-    _flaskMap.cur_location = new google.maps.LatLng(lat, lng);
-    var request = {
-        location: _flaskMap.cur_location,
-        radius: radius,
-        types: [places]
-    };
-    service = new google.maps.places.PlacesService(_flaskMap.map);
-    service.search(request, _flaskMap.createMarkers);
+	if(places!='bar &amp; restaurants'){
+	    var radius = 2000;
+	    var lat = _flaskMap.latitude;
+	    var lng = _flaskMap.longitude;
+	    _flaskMap.cur_location = new google.maps.LatLng(lat, lng);
+	    var request = {
+	        location: _flaskMap.cur_location,
+	        radius: radius,
+	        types: [places]
+	    };
+	    service = new google.maps.places.PlacesService(_flaskMap.map);
+	    service.search(request, _flaskMap.createMarkers);
+	}
 }
 
 _flaskMap.createMarkers = function (results, status) {
@@ -270,18 +272,18 @@ _flaskMap.createMarkers = function (results, status) {
             		  }, function(place, status) {
             		    if (status === google.maps.places.PlacesServiceStatus.OK) {
             		    	var content= '<div style="display: inline-flex;"><img src="' + results[i].icon + '" style="width:30px;height:30px;"/><font style="color:#000;">&nbsp;&nbsp;<b>'+results[i].name+'</b><br/></div>';
-            		    	if(place.formatted_address!=""){
+            		    	if(place.formatted_address!="" && place.formatted_address!=undefined){
 		        				var objAddress= $('<div/>');
 		        				var findUsOnMap = _flaskMap.createMapLink(place.formatted_address);
 		        				objAddress.html('<div class="adAddress"><table width="100%"><tr><td width="38px" valign="top"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-address"></span></td><td>'+findUsOnMap+'</td><tr/></table></div>');
 		        				content = content + objAddress.html();
 		        			}
-            		    	if(place.international_phone_number!=""){
+            		    	if(place.international_phone_number!="" && place.international_phone_number!=undefined){
 		        				var objPhone= $('<div/>');
 		        				objPhone.html('<div class="adPhone"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-phone"></span><a href="tel:'+place.international_phone_number+'">'+place.international_phone_number+'</a></div>');
 		        				content = content + objPhone.html();
 		        			}
-            		    	if(place.website!=""){
+            		    	if(place.website!="" && place.website!=undefined){
 		        				var objWebSite = $('<div/>');
 		        				objWebSite.html('<div class="adWebSite"><span aria-label="Address" role="img" class="widget-pane-section-info-icon widget-pane-section-info-website"></span><a href="'+_flaskLib.fixURL(place.website)+'" target="_blank">'+place.website+'</a></div>');
 		        				content = content + objWebSite.html();
@@ -423,7 +425,6 @@ _flaskMap.myMarkers = function(){
      		document.getElementById('searchClear').style.display = 'block';
      		for(var i=0; i<_flaskMap.flaskMarkers.length; i++){
      			if(ui.item.value==_flaskMap.markerTitles[i]){
-     				console.log(_flaskMap.flaskMarkers[i]);
      				curMarker = _flaskMap.flaskMarkers[i];
      				if(_flaskMap.placeType=="bar & restaurants"){
      					_flaskMap.flaskMarkers[i].icon = "/flask-view-events-portlet/img/bar_selected.png";
@@ -439,7 +440,6 @@ _flaskMap.myMarkers = function(){
     	    		if(_flaskMap.placeType=="liquor_store"){
     	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
     	    		}
-     				console.log(curMarker);
      				/*setTimeout(function(){
      					for(var j=0; j<_flaskMap.flaskMarkers.length; j++){
      						_flaskMap.flaskMarkers[j].setAnimation(null);
