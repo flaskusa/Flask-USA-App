@@ -33,12 +33,14 @@
 %>
 <portlet:defineObjects />
 
-<aui:script use="array-extras">
-	$(document).ready(function(){
-		initEventList();
-	  	//$("#owl-example").owlCarousel();
-	});
-</aui:script>
+<script type="text/javascript">
+	Liferay.Portlet.ready(initialize);
+	function initialize(portletId, portlet){
+		if(portletId == "flaskviewevents_WAR_flaskvieweventsportlet") {
+			initEventList();
+		}
+	}       	
+</script>
 
 <body>
 <input  type="hidden"  id="userZipCode" value ="<%= userZipCode %>" >

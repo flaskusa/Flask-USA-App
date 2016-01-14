@@ -33,16 +33,18 @@
 %>
 <portlet:defineObjects />
 
-<aui:script use="array-extras">
-	$(document).ready(function(){
+<script type="text/javascript">
+Liferay.Portlet.ready(initialize);
+function initialize(portletId, portlet){
+	if(portletId == "flaskviewevents_WAR_flaskvieweventsportlet") {
 		Liferay.Service(_eventModel.SERVICE_ENDPOINTS.GET_USER_EVENT,
 		  function(obj) {
 			renderEventList(obj);
 		  }
 		);
-	});
-</aui:script>
-
+	}
+}       	
+</script>
 <body>
 <input  type="hidden"  id="userZipCode" value ="<%= userZipCode %>" >
 
