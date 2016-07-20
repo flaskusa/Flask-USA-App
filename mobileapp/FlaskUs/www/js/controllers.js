@@ -52,5 +52,13 @@ angular.module('starter.controllers', [])
   ];
 })
 
+.controller('EventsCtrl', function ($scope,$http) {
+    $scope.AllEvents = [];
+    $http.get('http://localhost:8080/api/jsonws/flask-rest-events-portlet.event/get-all-events').success(function (result) {
+        console.log(result.Events);
+        $scope.AllEvents = result.Events;
+    });
+})
+
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });
