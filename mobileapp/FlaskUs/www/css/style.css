@@ -1,1 +1,28 @@
 /* Empty. Add your own CSS if you like */
+/*start css for splash overlay*/
+#custom-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: white;
+}
+
+#custom-overlay img {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: auto;
+  -webkit-animation: rotating-function 5.25s linear infinite;
+    -moz-animation: rotating-function 5.25s linear infinite;
+     -ms-animation: rotating-function 5.25s linear infinite;
+      -o-animation: rotating-function 5.25s linear infinite;
+         animation: rotating-function 5.25s linear infinite;
+}
+/*end css for splash overlay*/
+/* Empty. Add your own CSS if you like */
