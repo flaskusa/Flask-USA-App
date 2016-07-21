@@ -9,7 +9,14 @@ angular.module('flaskApp.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-
+  
+  //controller for splash screen
+  $scope.$on('$ionicView.afterEnter', function () {
+        setTimeout(function () {
+            document.getElementById("custom-overlay").style.display = "none";
+        }, 2000);
+  });
+  
   // Form data for the login modal
   $scope.loginData = {};
 
