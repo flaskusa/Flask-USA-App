@@ -1,4 +1,5 @@
-angular.module('starter.controllers', [])
+
+angular.module('flaskApp.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
 
@@ -51,14 +52,5 @@ angular.module('starter.controllers', [])
     { title: 'Cowbell', id: 6 }
   ];
 })
-
-.controller('EventsCtrl', function ($scope,$http) {
-    $scope.AllEvents = [];
-    $http.get('http://localhost:8080/api/jsonws/flask-rest-events-portlet.event/get-all-events').success(function (result) {
-        console.log(result.Events);
-        $scope.AllEvents = result.Events;
-    });
-})
-
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });
