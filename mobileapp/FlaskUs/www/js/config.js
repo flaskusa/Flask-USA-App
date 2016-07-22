@@ -19,6 +19,15 @@
                 }
             }
         })
+        .state('app.events', {
+            url: '/events',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/events.html',
+                    controller: 'EventsCtrl'
+                }
+            }
+        })
 
         .state('app.browse', {
             url: '/browse',
