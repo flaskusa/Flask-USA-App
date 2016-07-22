@@ -1,4 +1,3 @@
-
 angular.module('flaskApp.controllers', [])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout) {
@@ -9,14 +8,13 @@ angular.module('flaskApp.controllers', [])
   // listen for the $ionicView.enter event:
   //$scope.$on('$ionicView.enter', function(e) {
   //});
-  
-  //controller for splash screen
-  $scope.$on('$ionicView.afterEnter', function () {
+
+    //controller for splash screen
+    $scope.$on('$ionicView.afterEnter', function () {
         setTimeout(function () {
             document.getElementById("custom-overlay").style.display = "none";
-        }, 2000);
-  });
-  
+        }, 1000);
+    })
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -59,5 +57,6 @@ angular.module('flaskApp.controllers', [])
     { title: 'Cowbell', id: 6 }
   ];
 })
+
 .controller('PlaylistCtrl', function($scope, $stateParams) {
 });

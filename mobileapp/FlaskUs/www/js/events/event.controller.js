@@ -1,7 +1,10 @@
 ﻿(function() {
     'use strict';
-    angular.module('flaskApp', [$scope, EventsService])
+    angular.module('flaskApp')
         .controller('EventsCtrl', allEvents);
+
+    controller.$inject = ['$scope', 'EventsService'];
+
 
     /* @ngInject */
     function allEvents($scope, EventsService) {

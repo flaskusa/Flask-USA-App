@@ -8,7 +8,6 @@
     service.$inject = ['$http'];
 
     function service($http) {
-        
         var baseURL = "http://localhost:8080/api/jsonws/";
         var allEventsURL = "flask-rest-events-portlet.event/get-all-events";
 

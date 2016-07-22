@@ -1,9 +1,9 @@
-﻿(function() {
-    'use strict';
-    var flaskApp = angular.module('flaskApp');
+﻿(function () {
+    var flaskAppConfig = angular.module('flaskApp');
 
-    flaskApp.config(function($stateProvider, $urlRouterProvider) {
+    flaskAppConfig.config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
+
           .state('app', {
               url: '/app',
               abstract: true,
@@ -28,16 +28,26 @@
                 }
             }
         })
-        .state('app.events', {
-            url: '/events',
+          .state('app.playlists', {
+              url: '/playlists',
+              views: {
+                  'menuContent': {
+                      templateUrl: 'templates/playlists.html',
+                      controller: 'PlaylistsCtrl'
+                  }
+              }
+          })
+
+        .state('app.single', {
+            url: '/playlists/:playlistId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/events.html',
-                    controller: 'EventsCtrl'
+                    templateUrl: 'templates/playlist.html',
+                    controller: 'PlaylistCtrl'
                 }
             }
         });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/playlists');
-   })
+    });
 })();
