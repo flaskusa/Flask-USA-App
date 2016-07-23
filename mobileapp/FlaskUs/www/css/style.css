@@ -26,3 +26,29 @@
 }
 /*end css for splash overlay*/
 /* Empty. Add your own CSS if you like */
+.imgHolder {
+    position: relative;
+}
+.post_content{
+       background: none repeat scroll 0 0 black;
+    opacity: 0.8;
+    top: 51px;
+    left: 4px;
+    position: absolute;
+    width: 150px;
+    height: 38px;
+}
+
+p{color: white !important;
+   }
+
+.full-image{height:120px !important;
+            width:100vw !important;
+}
+
+.my-card .item.item-image{
+  width: 100vw;
+}
+
+
+
