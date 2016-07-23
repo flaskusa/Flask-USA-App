@@ -47,15 +47,36 @@
               }
           })
 
-        .state('app.single', {
-            url: '/playlists/:playlistId',
+        //.state('app', {
+        //    url: '/playlists/:playlistId',
+        //    views: {
+        //        'menuContent': {
+        //            templateUrl: 'templates/playlist.html',
+        //            controller: 'PlaylistCtrl'
+        //        }
+        //    }
+        //})
+
+        // Supplies
+        .state('app.supplies', {
+            url: '/supplies',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/playlist.html',
-                    controller: 'PlaylistCtrl'
+                    templateUrl: 'templates/supplies.html',
+                    controller: 'SuppliesCtrl'
                 }
             }
-        });
+        })
+
+        .state('app.suppliesList', {
+            url: '/suppliesList',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/suppliesList.html',
+                    controller: 'SuppliesListCtrl'
+                }
+            }
+        })
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/playlists');
     });
