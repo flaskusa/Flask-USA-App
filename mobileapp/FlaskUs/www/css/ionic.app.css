@@ -3009,7 +3009,8 @@ time, mark, audio, video {
   border: 0;
   vertical-align: baseline;
   font: inherit;
-  font-size: 100%; }
+  font-size: 100%;
+  font-family: coda }
 
 ol, ul {
   list-style: none; }
@@ -4274,7 +4275,8 @@ a.subdued {
     font-size: 17px; }
   .bar-dark .button.button-icon {
     border-color: transparent;
-    background: none; }
+    background: none;
+	color: darkorange; }
 
 .bar-header {
   top: 0;
@@ -5974,8 +5976,11 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   white-space: nowrap; }
 
 a.item {
-  color: inherit;
-  text-decoration: none; }
+    color: darkorange;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: larger;
+   }
   a.item:hover, a.item:focus {
     text-decoration: none; }
 
@@ -5999,7 +6004,8 @@ button.item.item-complex {
   z-index: 2;
   padding: 16px 49px 16px 16px;
   border: none;
-  background-color: #fff; }
+  /**background-color: #fff;**/
+  font-size: larger; }
 
 a.item-content {
   display: block;
