@@ -25,6 +25,44 @@
          animation: rotating-function 5.25s linear infinite;
 }
 /*end css for splash overlay*/
+
+span.badge.badge-assertive {
+    margin-right: 20px;
+}
+/* Empty. Add your own CSS if you like */
+.badge.badge-assertive {
+    background-color: #0f0f0f;
+    color: #fff;
+}
+.badge {
+    border-radius: 6px;
+}
+a.item.item-full.item-icon-left.icon.ion-plus-circled {
+    margin-left: -37px;
+}
+ion-item.item {
+    color: darkorange;
+}
+.my-side-menu{
+ background: #000;
+}
+.my-list-item{
+ background: #000 !important;
+ border:white !important;
+}
+
+.ion-plus-circled:before
+{
+    color: #000;
+    font-size: x-large;
+}
+
+label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
+	color: darkorange;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: larger;
+}
 /* Empty. Add your own CSS if you like */
 .imgHolder {
     position: relative;
@@ -49,6 +87,3 @@ p{color: white !important;
 .my-card .item.item-image{
   width: 100vw;
 }
-
-
-
