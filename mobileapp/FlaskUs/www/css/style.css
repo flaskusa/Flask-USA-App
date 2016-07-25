@@ -19,10 +19,10 @@
   width: 50%;
   height: auto;
   -webkit-animation: rotating-function 5.25s linear infinite;
-    -moz-animation: rotating-function 5.25s linear infinite;
-     -ms-animation: rotating-function 5.25s linear infinite;
-      -o-animation: rotating-function 5.25s linear infinite;
-         animation: rotating-function 5.25s linear infinite;
+  -moz-animation: rotating-function 5.25s linear infinite;
+  -ms-animation: rotating-function 5.25s linear infinite;
+  -o-animation: rotating-function 5.25s linear infinite;
+  animation: rotating-function 5.25s linear infinite;
 }
 /*end css for splash overlay*/
 
@@ -37,9 +37,7 @@ span.badge.badge-assertive {
 .badge {
     border-radius: 6px;
 }
-a.item.item-full.item-icon-left.icon.ion-plus-circled {
-    margin-left: -37px;
-}
+
 ion-item.item {
     color: darkorange;
 }
@@ -66,6 +64,7 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
 /* Empty. Add your own CSS if you like */
 .imgHolder {
     position: relative;
+
 }
 .post_content{
        background: none repeat scroll 0 0 black;
@@ -80,10 +79,14 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
 p{color: white !important;
    }
 
-.full-image{height:120px !important;
+.full-image{height:46vw !important;
             width:100vw !important;
 }
 
-.my-card .item.item-image{
+.my-card.item.item-image{
   width: 100vw;
+
 }
+
+
+
