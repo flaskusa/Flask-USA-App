@@ -60,23 +60,6 @@
         this.data = data;
     };
 
-    this.findOne = function (listid) {
-        // find the game that matches that id
-        var list = $.grep(this.getData(), function (element, index) {
-            return (element.listid == listid);
-        });
-        if (list.length === 0) {
-            return {};
-        }
-        // even if list contains multiple items, just return first one
-        return list[0];
-    };
-
-    this.findAll = function () {
-        return this.getData();
-    };
-
-
     // add a new data item that does not exist already
     // must compute a new unique id and backfill in
     this.addOne = function (dataItem) {
@@ -90,9 +73,9 @@
     // return an id to insert a new data item at
     this.newId = function () {
         // find all current ids
-        var currentIds = $.map(this.getData(), function (dataItem) { return dataItem.listid; });
-        // since id is numeric, and we will treat like an autoincrement field, find max
-        var maxId = Math.max.apply(Math, currentIds);
+        var arr = this.data;
+        var maxId = arr.length;
+        console.log(maxId);
         // increment by one
         return maxId + 1;
     };
