@@ -10,10 +10,8 @@
         /* jshint validthis: true */
         // putting our server data on scope to display
         $scope.dataModel = ServerDataModel;
-        
-        var currListName = $stateParams.listName
-
-        $ionicNavBarDelegate.title(currListName);
+        console.log("length of list item :" + ServerDataModel.data2.length);
+        $scope.currListName = $stateParams.listName;
 
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
@@ -22,7 +20,6 @@
         });
 
         $scope.saveList2 = function (list) {
-            console.log(list);
             HttpService.save2(list);
             $scope.modal.hide();
         };
