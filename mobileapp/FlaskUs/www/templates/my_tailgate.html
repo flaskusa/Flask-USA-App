@@ -1,5 +1,33 @@
-﻿<ion-view view-title="Playlist">
+﻿<ion-view view-title="TAILGATE">
     <ion-content>
-        <h1>MY TAILGATE</h1>
+        <a class="item item-full item-icon-left icon ion-plus-circled" ng-click="modal.show()">
+            ADD NEW TAILGATE
+        </a>
+
+        <div class="list">
+            <a class="item item-icon-right" href="#/app/add_tailgate" ng-repeat="data in dataModel.data">
+                {{ data.listName }}
+                <i class="icon ion-chevron-right"></i>
+            </a>
+        </div>
+        <script id="templates/modal.html" type="text/ng-template">
+            <ion-modal-view>
+                <ion-header-bar class="bar bar-header bar-positive">
+                    <h1 class="title">Add New Tailgate</h1>
+                    <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
+                </ion-header-bar>
+                <ion-content class="padding">
+                    <form name="listForm" role="form">
+                        <div class="form-group">
+                            <label for="listName">Tailgate Name:</label>
+                            <input type="text" class="form-control" ng-model="list.listName" name="listName" id="listName" />
+                        </div>
+                        <div class="form-group">
+                            <button type="button" class="button button-full button-positive" ng-click="saveList(list)">Add New Tailgate</button>
+                        </div>
+                    </form>
+                </ion-content>
+            </ion-modal-view>
+        </script>
     </ion-content>
 </ion-view>
