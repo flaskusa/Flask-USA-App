@@ -1,12 +1,10 @@
 ﻿<ion-view view-title="SUPPLIES">
   <ion-content>
-	<a class="item item-full item-icon-left icon ion-plus-circled" ng-click="modal.show()"> ADD NEW LIST
-    </a>
-
+	<a class="item item-full item-icon-left icon ion-plus-circled" ng-click="modal.show()"> ADD NEW LIST</a>
     <div class="list">
-	  <a class="item item-icon-right" href="#/app/suppliesList" ng-repeat="data in dataModel.data">
+	  <a class="item item-icon-right" href="#/app/suppliesList/{{data.listName}}" ng-repeat="data in dataModel.data">
 	    {{ data.listName }}
-	    <span class="badge badge-assertive">0 / 16</span>
+	    <span class="badge badge-assertive">{{counter}} / {{List2count}}</span>
 	    <i class="icon ion-chevron-right"></i>
 	  </a>
 	</div>
@@ -19,8 +17,10 @@
         <ion-content class="padding">
           <form name="listForm" role="form">
             <div class="form-group">
-                <label for="listName">List Name:</label>
-                <input type="text" class="form-control" ng-model="list.listName" name="listName" id="listName"/>
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">List Name </span>
+                    <input class="capitalize" type="text" placeholder="List Name" ng-model="list.listName" name="listName" id="listName">
+                </label>
             </div>
             <div class="form-group">
                 <button type="button" class="button button-full button-positive" ng-click="saveList(list)">Add New List</button>   
