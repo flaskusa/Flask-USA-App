@@ -5,36 +5,27 @@
 (function () {
     'use strict';
     angular.module('flaskApp')
-        .run(run);
+        .run(runList,'runList');
 
-    run.$inject = ['$httpBackend', 'ServerDataModel'];
+    runList.$inject = ['$httpBackend', 'ServerDataModel'];
 
     /* @ngInject */
-    function run($httpBackend, ServerDataModel) {
+    function runList($httpBackend, ServerDataModel) {
         $httpBackend.whenGET('/suppliesList').respond(function (method, url, data) {
-            var games = ServerDataModel.findAll();
-            return [200, games, {}];
-        });
-
-        $httpBackend.whenGET(/\/suppliesList\/\d+/).respond(function (method, url, data) {
-            // parse the matching URL to pull out the id (/suppliesList/:id)
-            var listid = url.split('/')[2];
-
-            var game = ServerDataModel.findOne(listid);
-
-            return [200, game, {}];
+            var lists = ServerDataModel.findAll();
+            return [200, lists, {}];
         });
 
         // this is the creation of a new resource
         $httpBackend.whenPOST('/suppliesList').respond(function (method, url, data) {
             var params = angular.fromJson(data);
 
-            var game = ServerDataModel.addOne(params);
+            var list = ServerDataModel.addOne(params);
 
             // get the id of the new resource to populate the Location field
-            var listid = game.listid;
+            var listid = list.listid;
 
-            return [201, game, { Location: '/suppliesList/' + listid }];
+            return [201, list, { Location: '/suppliesList/' + listid }];
         });
 
         $httpBackend.whenGET(/templates\//).passThrough();
