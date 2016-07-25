@@ -73,9 +73,3 @@ angular.module('flaskApp.controllers', [])
 
 .controller('my_friendsCtrl', function ($scope) {
 })
-
-.controller('SuppliesListCtrl', function ($scope, $stateParams, HttpService, ServerDataModel, $ionicModal) {
-    $scope.dataModel = ServerDataModel.data2;
-    // putting our server data on scope to display it for learning purposes
-    $scope.dataModel = ServerDataModel;
-})
