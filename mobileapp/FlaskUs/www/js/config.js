@@ -88,18 +88,43 @@
             }
         })
 
-        .state('app.user_navigation_menu.my_events', {
+        .state('app.my_events', {
             url: '/my_events',
-            //abstract: true,
-            templateUrl: 'templates/my_events.html',
-            controller: 'my_eventsCtrl'
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/my_events.html',
+                    controller: 'my_eventsCtrl'
+                }
+            }
+        })
+        .state('app.my_tailgate', {
+            url: '/my_tailgate',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/my_tailgate.html',
+                    controller: 'my_tailgateCtrl'
+                }
+            }
         })
 
-        .state('app.user_navigation_menu.my_tailgate', {
-            url: '/my_tailgate',
-            //abstract: true,
-            templateUrl: 'templates/my_tailgate.html',
-            controller: 'my_tailgateCtrl'
+        .state('app.add_tailgate', {
+            url: '/add_tailgate',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/add_tailgate.html',
+                    controller: 'add_tailgateCtrl'
+                }
+            }
+        })
+
+        .state('app.my_friends', {
+            url: '/my_friends',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/my_friends.html',
+                    controller: 'my_friendsCtrl'
+                }
+            }
         })
 
         // if none of the above states are matched, use this as the fallback
