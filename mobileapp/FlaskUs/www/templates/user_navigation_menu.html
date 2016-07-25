@@ -1,5 +1,5 @@
 ﻿<ion-view view-title="FLASK">
-    <ion-header-bar class="bar-positive" align-title="center">
+    <ion-header-bar class="bar-light" align-title="center">
         <ion-nav-buttons side="left">
             <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
         </ion-nav-buttons>
@@ -7,7 +7,7 @@
     <ion-content>
                 <ion-nav-view name="menuContent">
                     <div class="list card">
-                        <div class="my_card item item-image">
+                        <div class="my_card item item-image img_item">
                             <ion-item href="#/app/my_events">
                                 <img class="full-image" src="img/event.jpg">
                                 <div class="caption post_content">
@@ -15,7 +15,7 @@
                                 </div>
                             </ion-item>
                         </div>
-                        <div class="my_card item item-image">
+                        <div class="my_card item item-image img_item">
                             <ion-item href="#/app/my_tailgate" class="imgholder">
                                 <img class="full-image" src="img/tailgate.jpg">
                                 <div class="caption post_content">
@@ -23,7 +23,7 @@
                                 </div>
                             </ion-item>
                         </div>
-                        <div class="my_card item item-image">
+                        <div class="my_card item item-image img_item">
                             <ion-item href="#/app/my_friends">
                                 <img class="full-image" src="img/friends.jpg">
                                 <div class="caption post_content">
@@ -34,7 +34,7 @@
                     </div>
                 </ion-nav-view>
     </ion-content>
-    <div class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive" style="position:absolute !important;">
+    <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
         <a class="tab-item">
             <i class="icon ion-android-lock"></i>
             SIGN OUT
@@ -43,5 +43,5 @@
             <i class="icon ion-gear-a"></i>
             ACCOUNT SETTINGS
         </a>
-    </div>
+    </ion-footer-bar>
 </ion-view>
