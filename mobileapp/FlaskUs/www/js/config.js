@@ -19,6 +19,7 @@
                 }
             }
         })
+
         .state('app.events', {
             url: '/events',
             views: {
@@ -37,15 +38,16 @@
                 }
             }
         })
-          .state('app.playlists', {
-              url: '/playlists',
-              views: {
-                  'menuContent': {
-                      templateUrl: 'templates/playlists.html',
-                      controller: 'PlaylistsCtrl'
-                  }
-              }
-          })
+
+        .state('app.playlists', {
+            url: '/playlists',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/playlists.html',
+                    controller: 'PlaylistsCtrl'
+                }
+            }
+        })
 
         //.state('app', {
         //    url: '/playlists/:playlistId',
@@ -69,7 +71,7 @@
         })
 
         .state('app.suppliesList', {
-            url: '/suppliesList',
+            url: '/suppliesList/:listName',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/suppliesList.html',
@@ -82,8 +84,7 @@
             url: '/user_navigation_menu',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/user_navigation_menu.html',
-                    controller: 'user_navigation_menuCtrl'
+                    templateUrl: 'templates/user_navigation_menu.html'
                 }
             }
         })
