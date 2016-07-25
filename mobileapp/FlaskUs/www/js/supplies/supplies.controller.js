@@ -1,15 +1,25 @@
 ﻿(function () {
     'use strict';
     angular.module('flaskApp')
-        .controller('SuppliesCtrl', SuppliesCtrl);
+    .controller('SuppliesCtrl', SuppliesCtrl);
 
     SuppliesCtrl.$inject = ['$scope', 'HttpService', 'ServerDataModel', '$ionicModal'];
 
     /* @ngInject */
     function SuppliesCtrl($scope, HttpService, ServerDataModel, $ionicModal) {
-        /* jshint validthis: true */
         // putting our server data on scope to display it for learning purposes
         $scope.dataModel = ServerDataModel;
+        console.log("length of list item :"+ServerDataModel.data2.length);
+
+        $scope.data = ServerDataModel.data2;
+        $scope.counter = 0;
+        angular.forEach($scope.data, function (value, key) {
+            console.log(key);
+            if (value.checked == true)
+                $scope.counter++;
+        });
+
+        $scope.List2count = ServerDataModel.data2.length;
 
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
@@ -18,7 +28,6 @@
         });
 
         $scope.saveList = function (list) {
-            console.log(list);
             HttpService.save(list);
             $scope.modal.hide();
         };
