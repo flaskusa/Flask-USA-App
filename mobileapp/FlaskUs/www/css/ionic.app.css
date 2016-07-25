@@ -1,4 +1,4 @@
-@charset "UTF-8";
+﻿@charset "UTF-8";
 /*
 To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
@@ -3523,7 +3523,7 @@ ion-infinite-scroll {
   top: 137px; }
 
 .has-footer {
-  bottom: 44px; }
+  /*bottom: 44px;*/ }
 
 .has-subfooter {
   bottom: 88px; }
@@ -6010,7 +6010,10 @@ button.item.item-complex {
 a.item-content {
   display: block;
   color: inherit;
-  text-decoration: none; }
+  text-decoration: none;   
+}
+
+.img_item a{padding: 0px 0px 0px 0px !important;}
 
 .item-text-wrap .item,
 .item-text-wrap .item-content,
@@ -6650,7 +6653,7 @@ button.item.item-button-right {
 .card,
 .list-inset {
   overflow: hidden;
-  margin: 20px 10px;
+  
   border-radius: 2px;
   background-color: #fff; }
 
