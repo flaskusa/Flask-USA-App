@@ -1,10 +1,10 @@
-﻿<ion-view cache-view="false" back-button="true">
+﻿<ion-view cache-view="false" back-button="true" view-title={{currListName}}>
     <ion-content>
         <a class="item item-full item-icon-left icon ion-plus-circled" ng-click="modal.show()">
             ADD NEW ITEM
         </a>
         <div class="list flask_text">
-            <ion-checkbox class="item item-icon-left item-checkbox-right" ng-repeat="data in dataModel.data2" ng-model="data.checked">
+            <ion-checkbox class="item item-icon-left item-checkbox-right" ng-repeat="data in dataModel.data2" ng-model="data.checked" ng-click="getListcount()">
                 {{ data.itemName }}
             </ion-checkbox>
         </div>
