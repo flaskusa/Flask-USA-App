@@ -77,6 +77,31 @@
                 }
             }
         })
+
+        .state('app.user_navigation_menu', {
+            url: '/user_navigation_menu',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/user_navigation_menu.html',
+                    controller: 'user_navigation_menuCtrl'
+                }
+            }
+        })
+
+        .state('app.user_navigation_menu.my_events', {
+            url: '/my_events',
+            //abstract: true,
+            templateUrl: 'templates/my_events.html',
+            controller: 'my_eventsCtrl'
+        })
+
+        .state('app.user_navigation_menu.my_tailgate', {
+            url: '/my_tailgate',
+            //abstract: true,
+            templateUrl: 'templates/my_tailgate.html',
+            controller: 'my_tailgateCtrl'
+        })
+
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/playlists');
     });
