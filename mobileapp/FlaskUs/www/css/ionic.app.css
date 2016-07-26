@@ -1,4 +1,4 @@
-﻿@charset "UTF-8";
+@charset "UTF-8";
 /*
 To customize the look and feel of Ionic, you can override the variables
 in ionic's _variables.scss file.
@@ -777,7 +777,8 @@ $dark:                            #444 !default;
   text-rendering: auto;
   line-height: 1;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; }
+  -moz-osx-font-smoothing: grayscale;
+  color: #F89734; }
 
 .ion-alert:before {
   content: ""; }
@@ -3009,8 +3010,7 @@ time, mark, audio, video {
   border: 0;
   vertical-align: baseline;
   font: inherit;
-  font-size: 100%;
-  font-family: coda }
+  font-size: 100%; }
 
 ol, ul {
   list-style: none; }
@@ -3490,7 +3490,7 @@ ion-infinite-scroll {
 
 .overflow-scroll {
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   top: 0;
@@ -3523,7 +3523,7 @@ ion-infinite-scroll {
   top: 137px; }
 
 .has-footer {
-  /*bottom: 44px;*/ }
+  bottom: 44px; }
 
 .has-subfooter {
   bottom: 88px; }
@@ -4275,8 +4275,7 @@ a.subdued {
     font-size: 17px; }
   .bar-dark .button.button-icon {
     border-color: transparent;
-    background: none;
-	color: darkorange; }
+    background: none; }
 
 .bar-header {
   top: 0;
@@ -5976,11 +5975,8 @@ ion-tabs.tabs-striped.tabs-color-active-dark .tab-item.tab-item-active, ion-tabs
   white-space: nowrap; }
 
 a.item {
-    color: darkorange;
-    text-decoration: none;
-    font-weight: 700;
-    font-size: larger;
-   }
+  color: inherit;
+  text-decoration: none; }
   a.item:hover, a.item:focus {
     text-decoration: none; }
 
@@ -6004,16 +6000,12 @@ button.item.item-complex {
   z-index: 2;
   padding: 16px 49px 16px 16px;
   border: none;
-  /**background-color: #fff;**/
-  font-size: larger; }
+  background-color: #fff; }
 
 a.item-content {
   display: block;
   color: inherit;
-  text-decoration: none;   
-}
-
-.img_item a{padding: 0px 0px 0px 0px !important;}
+  text-decoration: none; }
 
 .item-text-wrap .item,
 .item-text-wrap .item-content,
@@ -6653,7 +6645,7 @@ button.item.item-button-right {
 .card,
 .list-inset {
   overflow: hidden;
-  
+  margin: 20px 10px;
   border-radius: 2px;
   background-color: #fff; }
 
@@ -8589,7 +8581,7 @@ progress {
   position: relative;
   display: inline-block;
   margin: 0;
-  padding: 0 12px;
+  padding: 5px 20px;
   min-width: 52px;
   min-height: 47px;
   border-width: 1px;
@@ -8600,14 +8592,24 @@ progress {
   text-overflow: ellipsis;
   font-size: 16px;
   line-height: 42px;
-  cursor: pointer; }
+  cursor: pointer;
+  font: normal 16px/1 "Coda",Helvetica,sans-serif;
+  background: #231f20;
+  color: #fff;
+  text-shadow: none;
+  background-image: -ms-linear-gradient(top, #656262 0, #231f20 100%);
+  background-image: -moz-linear-gradient(top, #656262 0, #231f20 100%);
+  background-image: -o-linear-gradient(top, #656262 0, #231f20 100%);
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #656262), color-stop(1, #231f20));
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  background-image: linear-gradient(to bottom, #656262 0, #231f20 100%) .button; }
   .button:hover {
     color: #444;
     text-decoration: none; }
   .button.active, .button.activated {
     border-color: #a2a2a2;
     background-color: #e5e5e5; }
-  .button:after {
+  .button :after {
     position: absolute;
     top: -6px;
     right: -6px;
@@ -9823,3 +9825,30 @@ a.button {
   opacity: 0;
   -webkit-transition-duration: 0s;
   transition-duration: 0s; }
+
+.fill-height-or-more {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column; }
+  .fill-height-or-more > div {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; }
+
+.some-area > div {
+  padding: 1rem; }
+  .some-area > div:nth-child(1) {
+    background: #88cc66; }
+  .some-area > div:nth-child(2) {
+    background: #79b5d2; }
+  .some-area > div:nth-child(3) {
+    background: #8cbfd9; }
+  .some-area > div:nth-child(4) {
+    background: #9fcadf; }
+  .some-area > div:nth-child(5) {
+    background: #b3d5e6; }
+  .some-area > div h1, .some-area > div h2 {
+    margin: 0 0 0.2rem 0; }
+  .some-area > div p {
+    margin: 0; }
