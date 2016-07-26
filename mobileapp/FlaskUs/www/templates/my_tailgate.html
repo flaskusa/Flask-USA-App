@@ -1,19 +1,20 @@
-﻿<ion-view view-title="TAILGATE">
+﻿<ion-view view-title="MY TAILGATE">
     <ion-content>
         <a class="item item-full item-icon-left icon ion-plus-circled" ng-click="modal.show()">
-            ADD NEW TAILGATE
+            CREATE NEW TAILGATE
         </a>
-
         <div class="list">
-            <a class="item item-icon-right" href="#/app/add_tailgate" ng-repeat="data in dataModel.data">
-                {{ data.listName }}
+            <a class="item item-thumbnail-left item-icon-right" href="#" ng-repeat="data in allTailgate">
+                <img src="img/event.jpg">
+                <h2>{{ data.eventName }}</h2>
+                <p>{{data.tailgateDescription}}</p>
                 <i class="icon ion-chevron-right"></i>
             </a>
         </div>
         <script id="templates/modal.html" type="text/ng-template">
             <ion-modal-view>
                 <ion-header-bar class="bar bar-header bar-positive">
-                    <h1 class="title">Add New Tailgate</h1>
+                    <h1 class="title">CREATE NEW TAILGATE</h1>
                     <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
                 </ion-header-bar>
                 <ion-content class="padding">
