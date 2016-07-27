@@ -20,7 +20,6 @@
   height: auto;
   -webkit-animation: rotating-function 5.25s linear infinite;
   -moz-animation: rotating-function 5.25s linear infinite;
-  -ms-animation: rotating-function 5.25s linear infinite;
   -o-animation: rotating-function 5.25s linear infinite;
   animation: rotating-function 5.25s linear infinite;
 }
@@ -62,31 +61,139 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
     font-size: larger;
 }
 /* Empty. Add your own CSS if you like */
-.imgHolder {
-    position: relative;
 
-}
-.post_content{
-       background: none repeat scroll 0 0 black;
-    opacity: 0.8;
-    top: 51px;
-    left: 4px;
-    position: absolute;
-    width: 150px;
-    height: 38px;
+
+/*Login page*/
+
+.scroll{height:100%;}
+
+.form_div{height:100%;
+          width:100%;
 }
 
-p{color: white !important;
-   }
-
-.full-image{height:46vw !important;
-            width:100vw !important;
+@media only screen and (min-width: 30.063em){
+    .loginpane {
+    margin: 0 auto;
+   
+    }
 }
 
-.my-card.item.item-image{
-  width: 100vw;
+.loginpane_header {
+    background: rgba(225,225,225,0.95);
+    padding: 1em 0;
+    text-align: center;
+    height:20%;
+    margin-top: -1%;
+    width:100%;
+}
 
+@media only screen and (max-height:105%;)and
+             (max-width:30%;){.cq-dd-image{ 
+             
+             width:30%;
+			}
+}
+
+img.cq-dd-image{height:100%;}
+
+.loginpane_body {
+	
+      background:rgba(225,225,225,0.7);
+      height:100%;
+      width:100%;
+}
+
+.div_list{padding-left:6%;}
+
+input.input_box{width:90%;
+           border:solid 1px #F2F1F0;
+           border-radius:5px;
+           
+}
+
+.portlet-login .form fieldset {
+    border-width: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.aui body {
+    background-color: #fff;
+    font: normal 14px/1 "Coda",Helvetica,sans-serif;
+}
+
+button.button.button-block.button-positive.sign_in_button{width:90%;}
+
+.aui label {
+    font-size: 14px;
+}
+
+.required {
+    font-size: 12px;
+    color: chocolate;
 }
 
 
 
+.portlet-login .form .button-holder, .portlet-login .form .form-column {
+    margin-bottom: 10px;
+}
+
+.aui .checkbox {
+    min-height: 20px;
+    padding-left: 20px;
+}
+
+button.button.button-block.button-positive.taglib-text{
+				color:white;
+				width:40%;
+}
+
+.navigation{	 padding-top:10%;
+				 text-align: center;
+                  height:22%;
+                  text-align: center;
+                  width:100%;
+}
+
+/*.loginpane_footer{background: rgba(225,225,225,0.95);
+				 text-align: center;
+                  height:22%;
+                  text-align: center;
+                  width:100%;
+}*/
+
+
+
+/*For wizard */
+.slider {
+  height: 100%;
+}
+.slider-slide {
+  color: #000;
+  background-color: #fff;
+  font-family: coda; 
+  font-weight: 300;
+}
+
+#logo {
+  margin: 30px 0px;
+}
+
+#list {
+  width: 170px;
+  margin: 30px auto;
+  font-size: 20px;
+}
+#list ol {
+  margin-top: 30px;
+}
+#list ol li {
+  text-align: left;
+  list-style: decimal;
+  margin: 10px 0px;
+}
+
+.button.ng-hide{
+  display:none;
+}
