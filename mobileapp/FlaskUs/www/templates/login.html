@@ -1,25 +1,45 @@
 <ion-modal-view>
-  <ion-header-bar>
-    <h1 class="title">Login</h1>
-    <div class="buttons">
-      <button class="button button-clear" ng-click="closeLogin()">Close</button>
-    </div>
-  </ion-header-bar>
-  <ion-content>
-    <form ng-submit="doLogin()">
-      <div class="list">
-        <label class="item item-input">
-          <span class="input-label">Username</span>
-          <input type="text" ng-model="loginData.username">
-        </label>
-        <label class="item item-input">
-          <span class="input-label">Password</span>
-          <input type="password" ng-model="loginData.password">
-        </label>
-        <label class="item">
-          <button class="button button-block button-positive" type="submit">Log in</button>
-        </label>
-      </div>
-    </form>
-  </ion-content>
+    <ion-content>
+        <div class="loginpane form_div">
+            <div class="loginpane_header">
+                <img title="logo_2" alt="logo_2" class="cq-dd-image" style="zoom:0.3" src="img/flasklogo2.png">
+            </div>
+            <div class="loginpane_body">
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Username or Email</span>
+                        <input type="text" placeholder="Username or Email">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Password</span>
+                        <input type="password" placeholder="Password">
+                    </label>
+                </div>
+                <div class="padding" align="center">
+                    <button nav-clear class="button button-block button-positive sign_in_button" ng-click="LogIn(user)">
+                        Sign-In
+                    </button>
+                </div>
+                <div class="navigation">
+                    <ul class="taglib-icon-list unstyled">
+                        <li class="" role="presentation">
+                            <a class=" taglib-icon" role="menuitem">
+
+                                <span class="taglib-text"><i class="ion-android-person-add"></i>Sign Up</span>
+                            </a>
+                        </li>
+                        <li class="" role="presentation">
+                            <a class=" taglib-icon" role="menuitem">
+
+                                <span class="taglib-text"><i class="ion-help-circled"></i>Forgot Password</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="loginpane_footer">
+
+            </div>
+        </div>
+    </ion-content>
 </ion-modal-view>
