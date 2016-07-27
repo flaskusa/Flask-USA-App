@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('my_tailgateCtrl', my_tailgateCtrl);
 
-    my_tailgateCtrl.$inject = ['$scope', 'TailgateService'];
+    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate'];
 
     /* @ngInject */
-    function my_tailgateCtrl($scope, TailgateService) {
+    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate) {
         var self = this;
         $scope.myTailgate = [];
 
