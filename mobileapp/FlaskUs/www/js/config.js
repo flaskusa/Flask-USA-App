@@ -93,8 +93,7 @@
             url: '/my_events',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_events.html',
-                    controller: 'my_eventsCtrl'
+                    templateUrl: 'templates/my_events.html'
                 }
             }
         })
@@ -107,28 +106,28 @@
                 }
             }
         })
-
-        .state('app.add_tailgate', {
-            url: '/add_tailgate',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/add_tailgate.html',
-                    controller: 'add_tailgateCtrl'
-                }
-            }
-        })
-
         .state('app.my_friends', {
             url: '/my_friends',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_friends.html',
-                    controller: 'my_friendsCtrl'
+                    templateUrl: 'templates/my_friends.html'
+                }
+            }
+        })
+
+        .state('app.addMyTailgate', {
+            url: '/addMyTailgate',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/addMyTailgate.html',
+                    controller: 'addMyTailgateCtrl'
                 }
             }
         })
 
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/playlists');
-    });
+        $urlRouterProvider.otherwise('/app/events');
+    })
+
+
 })();
