@@ -307,6 +307,8 @@ p {
 label.item.item-input.item-md-label{border:none;background:none;padding-left:0;}
 
 .full-content{background: url(../img/login.jpg) center; background-size: cover;}
+
+span.taglib-text{color:white;}
 /*Login 1 End*/
 
 /*Registration Page*/
