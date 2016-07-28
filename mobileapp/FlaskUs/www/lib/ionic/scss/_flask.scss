@@ -25,19 +25,16 @@
   > div {
     padding: 1rem;
     &:nth-child(1) {
-      background: hsla(100, 50%, 60%, 1);
+      background-image:url("../img/events.jpg");
+      background-size:100%;
     }
     &:nth-child(2) {
-      background: hsla(200, 50%, 65%, 1);
+      background-image:url("../img/tailgate.jpg");
+      background-size:100%;
     }
     &:nth-child(3) {
-      background: hsla(200, 50%, 70%, 1);
-    }
-    &:nth-child(4) {
-      background: hsla(200, 50%, 75%, 1);
-    }
-    &:nth-child(5) {
-      background: hsla(200, 50%, 80%, 1);
+      background-image:url("../img/friends.jpg");
+      background-size:100%;
     }
     h1, h2 {
       margin: 0 0 0.2rem 0;
@@ -46,4 +43,11 @@
       margin: 0;
     }
   }
+}
+
+.post-content{background-color: rgba(0, 0, 0, 0.63);
+    height: 3%;
+    width: 30%;
+    color:white;
+    margin-left:-15px;
 }
