@@ -39,6 +39,15 @@
             }
         })
 
+            .state('app.login', {
+                url: '/login',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/login.html'
+                }
+            }
+        })
+
         .state('app.playlists', {
             url: '/playlists',
             views: {
@@ -121,6 +130,16 @@
                 'menuContent': {
                     templateUrl: 'templates/addMyTailgate.html',
                     controller: 'addMyTailgateCtrl'
+                }
+            }
+        })
+
+        .state('app.user_registration', {
+            url: '/user_registration',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/user_registration.html'
+                    
                 }
             }
         })
