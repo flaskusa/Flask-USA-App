@@ -1,0 +1,59 @@
+﻿<ion-view view-title="USER REGISTRATION">
+    <ion-content>
+        <div class="loginpane form_div">
+            <div class="loginpane_header">
+                <img title="logo_2" alt="logo_2" class="cq-dd-image" style="zoom:0.3">
+            </div>
+            <div class="loginpane_body">
+                <div class="list">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">First Name</span>
+                        <input type="text" placeholder="First Name">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Last Name</span>
+                        <input type="text" placeholder="Last Name">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Email</span>
+                        <input type="text" placeholder="Email">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Password</span>
+                        <input type="password" placeholder="Password">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Confirm Password</span>
+                        <input type="password" placeholder="Confirm Password">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Zip Code</span>
+                        <input type="number" placeholder="Zip Code">
+                    </label>
+                    <label class="item item-input">
+                         <span class="input-label">Gender</span>
+                        <pre><ion-radio ng-model="choice" ng-value="'Male'">Male</ion-radio></pre>
+                        <pre><ion-radio ng-model="choice" ng-value="'Female'">Female</ion-radio></pre>
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Date of Birth</span>
+                        <input type="date" placeholder="Date of Birth">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Mobile</span>
+                        <input type="number" placeholder="Mobile">
+                    </label>
+                </div>
+                <div class="padding" align="center">
+                    <button nav-clear class="button button-block button-positive sign_in_button" ng-click="LogIn(user)">
+                        Save
+                    </button>
+                    <button nav-clear class="button button-block button-positive sign_in_button" ng-click="LogIn(user)">
+                        Cancel
+                    </button>
+
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>
