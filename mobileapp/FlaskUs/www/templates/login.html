@@ -1,8 +1,15 @@
-<ion-modal-view>
+<ion-view view-title="Login" align-title="left">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
     <ion-content>
         <div class="loginpane form_div">
             <div class="loginpane_header">
-                <img title="logo_2" alt="logo_2" class="cq-dd-image" style="zoom:0.3" src="img/flasklogo2.png">
+                <img title="logo_2" alt="logo_2" class="cq-dd-image" style="zoom:0.3">
             </div>
             <div class="loginpane_body">
                 <div class="list">
@@ -23,14 +30,12 @@
                 <div class="navigation">
                     <ul class="taglib-icon-list unstyled">
                         <li class="" role="presentation">
-                            <a class=" taglib-icon" role="menuitem">
-
+                            <a href="#/app/user_registration" class=" taglib-icon" role="menuitem">
                                 <span class="taglib-text"><i class="ion-android-person-add"></i>Sign Up</span>
                             </a>
                         </li>
                         <li class="" role="presentation">
-                            <a class=" taglib-icon" role="menuitem">
-
+                            <a href="#/app/user_registration" class=" taglib-icon" role="menuitem">
                                 <span class="taglib-text"><i class="ion-help-circled"></i>Forgot Password</span>
                             </a>
                         </li>
@@ -42,4 +47,4 @@
             </div>
         </div>
     </ion-content>
-</ion-modal-view>
+</ion-view>
