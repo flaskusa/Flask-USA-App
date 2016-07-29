@@ -73,3 +73,21 @@ angular.module('flaskApp.controllers', [])
 
 .controller('my_friendsCtrl', function ($scope) {
 })
+
+.controller('loginCtrl', function($scope, $state) {
+})
+
+.controller('user_registrationCtrl', ['$scope',function ($scope) {
+
+    // function to submit the form after all validation has occurred			
+
+    $scope.master = {};
+    
+    $scope.LogIn = function (user) {
+        console.log(user);
+        $scope.master = angular.copy(user);
+    };
+
+}])
+
+
