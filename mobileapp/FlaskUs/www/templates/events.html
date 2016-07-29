@@ -1,17 +1,15 @@
 ﻿<ion-view view-title="Flask">
   <ion-content>
       <div>
-          <h3 style="text-align:center; padding-top: 20px; margin-bottom: 20px;"><span style="border-top: 4px solid #F89734; font-weight: 800;">EVENTS NEAR YOU</span></h3>
+          <h3 class="eventHeading"><span class="overlineStyle">EVENTS NEAR YOU</span></h3>
       </div>
       <div class="list">
-          <a class="item item-thumbnail-left item-icon-right" href="#" ng-repeat="data in allEvent" style=" text-align: center;
-    padding-top: 8px; padding-left: 70px; padding-right: 23px;    min-height: 39px !important;    max-height: 72px;
-    border-color: black;">
+          <a class="item item-thumbnail-left item-icon-right eventList" href="#" ng-repeat="data in allEvent">
               <img src="img/events.jpg" class="listImages">
-                  <h2 style="font-weight: bold; text-transform: uppercase; font-size: 14px;">{{data.eventName}}</h2>
-                    <p style="text-transform: uppercase; font-size: 13px; margin-top: -4px;">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
-                  <p style="text-transform: uppercase; font-size: 13px; margin-top: -6px;">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
-              <i class="icon ion-chevron-right" style="right: 4px;"></i>
+                  <h2 class="eventNameCol">{{data.eventName}}</h2>
+                    <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
+                  <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
+              <i class="icon ion-chevron-right arrowIcon"></i>
           </a>
       </div>
   </ion-content>
