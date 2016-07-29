@@ -149,7 +149,7 @@ button.button.button-block.button-positive.taglib-text{
 				width:40%;
 }
 
-.navigation{	 padding-top:10%;
+.navigation{	 
 				 text-align: center;
                   height:22%;
                   text-align: center;
@@ -308,7 +308,7 @@ label.item.item-input.item-md-label{border:none;background:none;padding-left:0;}
 
 .full-content{background: url(../img/login.jpg) center; background-size: cover;}
 
-span.taglib-text{color:white;}
+span.taglib-text.span_color{color:white;}
 /*Login 1 End*/
 
 /*Registration Page*/
@@ -321,3 +321,7 @@ ion-content{background:rgba(225,225,225,0.2);}
     width: 30%;}
 
 .item.item-input{background:rgba(225,225,225,0);}
+
+span.error_msg{color:red;}
+
+.ion:before{padding-right:10px;}
