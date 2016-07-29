@@ -1,13 +1,13 @@
 ﻿(function() {
     'use strict';
     angular.module('flaskApp')
-        .controller('EventsCtrl', allEvents);
+        .controller('EventsCtrl', EventsCtrl);
 
-    controller.$inject = ['$scope', 'EventsService'];
+    EventsCtrl.$inject = ['$scope', 'EventsService'];
 
 
     /* @ngInject */
-    function allEvents($scope, EventsService) {
+    function EventsCtrl($scope, EventsService) {
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
@@ -16,7 +16,7 @@
 
         function getAllEvents() {
             EventsService.getAllEvents().then(function (respData) {
-                $scope.allEvent = respData.data;
+                $scope.allEvent = respData.data.Events;
             });
         }
     }
