@@ -43,7 +43,8 @@
                 url: '/login',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/login.html'
+                    templateUrl: 'templates/login.html',
+                    controller: 'loginCtrl'
                 }
             }
         })
@@ -124,22 +125,13 @@
             }
         })
 
-        .state('app.addMyTailgate', {
-            url: '/addMyTailgate',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/addMyTailgate.html',
-                    controller: 'addMyTailgateCtrl'
-                }
-            }
-        })
 
         .state('app.user_registration', {
             url: '/user_registration',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/user_registration.html'
-                    
+                    templateUrl: 'templates/user_registration.html',
+                    controller: 'user_registrationCtrl'
                 }
             }
         })
