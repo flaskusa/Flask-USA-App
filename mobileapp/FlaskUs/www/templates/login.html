@@ -1,4 +1,4 @@
-<ion-view view-title="Login" align-title="left">
+<ion-view view-title="Login" align-title="left" hide-nav-bar="true">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button>
         </ion-nav-back-button>
@@ -15,28 +15,31 @@
                 <div class="list">
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Username or Email</span>
-                        <input type="text" placeholder="Username or Email">
+                        <input type="text" placeholder="Username or Email" ng-model="user.email">
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Password</span>
-                        <input type="password" placeholder="Password">
+                        <input type="password" placeholder="Password" ng-model="user.password">
                     </label>
                 </div>
                 <div class="padding" align="center">
                     <button nav-clear class="button button-block button-positive sign_in_button" ng-click="LogIn(user)">
-                        Sign-In
+                        Login
+                    </button>
+                    <button nav-clear class="button button-block button-positive sign_in_button" ng-click="LogIn(user)" href="#/app/events">
+                        Cancel
                     </button>
                 </div>
                 <div class="navigation">
                     <ul class="taglib-icon-list unstyled">
                         <li class="" role="presentation">
                             <a href="#/app/user_registration" class=" taglib-icon" role="menuitem">
-                                <span class="taglib-text"><i class="ion-android-person-add"></i>Sign Up</span>
+                                <span class="taglib-text"><i class="ion ion-android-person-add"></i>Create User</span>
                             </a>
                         </li>
                         <li class="" role="presentation">
                             <a href="#/app/user_registration" class=" taglib-icon" role="menuitem">
-                                <span class="taglib-text"><i class="ion-help-circled"></i>Forgot Password</span>
+                                <span class="taglib-text"><i class="ion ion-help-circled"></i>Forgot Password</span>
                             </a>
                         </li>
                     </ul>
