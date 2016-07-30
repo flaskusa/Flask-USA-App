@@ -4,7 +4,7 @@
           <h3 class="eventHeading"><span class="overlineStyle">EVENTS NEAR YOU</span></h3>
       </div>
       <div class="list">
-          <a class="item item-thumbnail-left item-icon-right eventList" href="#" ng-repeat="data in allEvent">
+          <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/prePostGame/{{data.eventName}}" ng-repeat="data in allEvent">
               <img src="img/events.jpg" class="listImages">
                   <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
