@@ -9,10 +9,11 @@
             CREATE NEW TAILGATE
         </a>
         <div class="list">
-            <a class="item item-thumbnail-left item-icon-right" href="#" ng-repeat="data in allTailgate">
-                <img src="img/events.jpg">
-                <h2>{{ data.eventName }}</h2>
-                <p>{{data.tailgateDescription}}</p>
+            <a class="item item-thumbnail-left item-icon-right eventList" href="#" ng-repeat="data in allTailgate">
+                <img src="img/events.jpg" class="listImages">
+                <h2 class="eventNameCol">{{ data.tailgateName }}</h2>
+                <p class="dateCol">{{data.tailgateDate | date:'EEEE,MMMM dd,yyyy'}}</p>
+                <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
                 <i class="icon ion-chevron-right"></i>
             </a>
         </div>
