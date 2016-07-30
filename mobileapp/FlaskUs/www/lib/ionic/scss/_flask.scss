@@ -47,9 +47,251 @@
   }
 }
 
-.post-content{background-color: rgba(0, 0, 0, 0.63);
+.post-content {
+  background-color: rgba(0, 0, 0, 0.63);
+  height: 3%;
+  width: 33%;
+  color: white;
+  margin-left: -15px; }
+
+//added style.css
+
+/* Empty. Add your own CSS if you like */
+/*start css for splash overlay*/
+#custom-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: white;
+}
+
+#custom-overlay img {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: auto;
+  -webkit-animation: rotating-function 5.25s linear infinite;
+  -moz-animation: rotating-function 5.25s linear infinite;
+  -o-animation: rotating-function 5.25s linear infinite;
+  animation: rotating-function 5.25s linear infinite;
+}
+/*end css for splash overlay*/
+
+span.badge.badge-assertive {
+    margin-right: 20px;
+}
+/* Empty. Add your own CSS if you like */
+.badge.badge-assertive {
+    background-color: #0f0f0f;
+    color: #fff;
+}
+.badge {
+    border-radius: 6px;
+}
+
+ion-item.item {
+    color: darkorange;
+}
+.my-side-menu{
+ background: #000;
+}
+.my-list-item{
+ background: #000 !important;
+ border:white !important;
+}
+
+.ion-plus-circled:before
+{
+    color: #000;
+    font-size: x-large;
+}
+
+label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
+	color: darkorange;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: larger;
+}
+/* Empty. Add your own CSS if you like */
+
+
+/*Login page*/
+
+
+.form_div{height:100%;
+          width:100%;
+}
+
+.loginpane{height:100%;}
+
+@media only screen and (min-width: 30.063em){
+    .loginpane {
+    margin: 0 auto;
+    }
+}
+
+.loginpane_header {
+    background: rgba(225,225,225,0.95);
+    padding: 1em 0;
+    text-align: center;
+    height:20%;
+    margin-top: -1%;
+    width:100%;
+}
+
+.loginpane_header img{content:url(../img/flasklogo2.png);}
+
+img.cq-dd-image{height:100%;}
+
+.loginpane_body {
+      width:100%;
+}
+
+.div_list{padding-left:6%;}
+
+input.input_box{width:90%;
+           border:solid 1px #F2F1F0;
+           border-radius:5px;
+           
+}
+
+.portlet-login .form fieldset {
+    border-width: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.aui body {
+    background-color: #fff;
+    font: normal 14px/1 "Coda",Helvetica,sans-serif;
+}
+
+button.button.button-block.button-positive.sign_in_button{width:90%;}
+a.button.button-block.button-positive.sign_in_button{width:90%;padding-top: 4%;}
+
+.aui label {
+    font-size: 14px;
+}
+
+.required {
+    font-size: 12px;
+    color: chocolate;
+}
+
+
+
+.portlet-login .form .button-holder, .portlet-login .form .form-column {
+    margin-bottom: 10px;
+}
+
+.aui .checkbox {
+    min-height: 20px;
+    padding-left: 20px;
+}
+
+button.button.button-block.button-positive.taglib-text{
+				color:white;
+				width:40%;
+}
+
+.navigation{	 
+				 text-align: center;
+                  height:22%;
+                  text-align: center;
+                  width:100%;
+}
+
+/*.loginpane_footer{background: rgba(225,225,225,0.95);
+				 text-align: center;
+                  height:22%;
+                  text-align: center;
+                  width:100%;
+}*/
+
+/*For wizard */
+.slider {
+  height: 100%;
+}
+.slider-slide {
+  color: #000;
+  background-color: #fff;
+  font-family: coda; 
+  font-weight: 300;
+}
+
+#logo {
+  margin: 30px 0px;
+}
+
+#list {
+  width: 170px;
+  margin: 30px auto;
+  font-size: 20px;
+}
+#list ol {
+  margin-top: 30px;
+}
+#list ol li {
+  text-align: left;
+  list-style: decimal;
+  margin: 10px 0px;
+}
+
+.button.ng-hide{
+  display:none;
+}
+
+.menu.menu-left * {
+    font-weight: bold;
+}
+
+/*Registration Page*/
+.registerpane_body{height:100%;background:rgba(225,225,225,0.7);}
+
+ion-content{background:rgba(225,225,225,0.2);}
+
+.post-content a{background-color: rgba(0, 0, 0, 0.63);
     height: 3%;
-    width: 30%;
-    color:white;
-    margin-left:-15px;
+    width: 30%;}
+
+.item.item-input{background:rgba(225,225,225,0);}
+
+span.error_msg{color:red;}
+
+.ion:before{padding-right:10px;}
+/*css form date column input list*/
+.dateCol{
+    text-transform: uppercase; 
+    font-size: 13px;
+     margin-top: -4px;
+}
+.timeVenuCol{
+    text-transform: uppercase; 
+    font-size: 13px; 
+    margin-top: -6px;
+}
+.arrowIcon{
+    right: 4px !important;
+}
+.eventNameCol{
+    font-weight: bold !important; 
+    text-transform: uppercase; 
+    font-size: 14px !important;
+}
+.eventList{
+    text-align: center;
+    padding-top: 8px; padding-left: 70px; padding-right: 23px;    min-height: 39px !important;    max-height: 72px;
+    border-color: black;
+}
+.eventHeading{
+    text-align:center; padding-top: 20px; margin-bottom: 20px;
+}
+.overlineStyle{
+border-top: 4px solid #F89734; font-weight: 800;
 }
