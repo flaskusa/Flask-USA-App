@@ -33,6 +33,16 @@
                 }
             }
         })
+        //pre post game page
+        .state('app.prePostGame', {
+            url: '/prePostGame/:eventName/:eventId/:venueId',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/prePostGame.html',
+                    controller: 'prePostGameCtrl'
+                }
+            }
+        })
 
         .state('app.browse', {
             url: '/browse',
