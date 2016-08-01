@@ -1,9 +1,13 @@
 ﻿(function () {
     var flaskAppConfig = angular.module('flaskApp');
 
-    flaskAppConfig.config(function ($stateProvider, $urlRouterProvider) {
-        $stateProvider
+    flaskAppConfig.constant("REST_API", {
+        "url": "http://146.148.83.30/api/jsonws/",
+        "companyId":20154
+    })
 
+    flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
+        $stateProvider
           .state('app', {
               url: '/app',
               abstract: true,
@@ -41,13 +45,13 @@
 
             .state('app.login', {
                 url: '/login',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/login.html',
-                    controller: 'loginCtrl'
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/login.html',
+                        controller: 'LoginCtrl'
+                    }
                 }
-            }
-        })
+            })
 
         .state('app.playlists', {
             url: '/playlists',
@@ -58,16 +62,6 @@
                 }
             }
         })
-
-        //.state('app', {
-        //    url: '/playlists/:playlistId',
-        //    views: {
-        //        'menuContent': {
-        //            templateUrl: 'templates/playlist.html',
-        //            controller: 'PlaylistCtrl'
-        //        }
-        //    }
-        //})
 
         // Supplies
         .state('app.supplies', {
@@ -138,6 +132,8 @@
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/events');
+        
+
     })
 
 

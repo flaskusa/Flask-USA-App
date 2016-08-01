@@ -1,5 +1,5 @@
 (function () {
-    var app = angular.module('flaskApp');
+    var app = angular.module('flaskApp'); 
     app.run(function ($ionicPlatform) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
