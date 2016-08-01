@@ -1,17 +1,21 @@
-﻿<ion-view view-title="Flask">
-  <search-bar ng-model="search" class="button button-icon button-clear ion-search"></search-bar>
-  <ion-content>
-      <div>
-          <h3 class="eventHeading"><span class="overlineStyle">EVENTS NEAR YOU</span></h3>
-      </div>
-      <div class="list">
-          <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/prePostGame/{{data.eventName}}" ng-repeat="data in allEvent">
-              <img src="img/events.jpg" class="listImages">
-                  <h2 class="eventNameCol">{{data.eventName}}</h2>
-                    <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
-                  <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
-              <i class="icon ion-chevron-right arrowIcon"></i>
-          </a>
-      </div>
-  </ion-content>
+﻿<ion-view>
+    <ion-nav-title>
+        <a href="#/app/events.html"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
+    </ion-nav-title>
+    <search-bar ng-model="search"></search-bar>
+    <search-bar ng-model="search" class="button button-icon button-clear ion-search"></search-bar>
+    <ion-content>
+        <div>
+            <h3 class="eventHeading"><span class="overlineStyle">EVENTS NEAR YOU</span></h3>
+        </div>
+        <div class="list">
+            <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/prePostGame/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent">
+                <img src="c/document_library/get_file?uuid={{data.eventImageUUID}}&groupId=20181" class="listImages">
+                <h2 class="eventNameCol">{{data.eventName}}</h2>
+                <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
+                <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
+                <i class="icon ion-chevron-right arrowIcon"></i>
+            </a>
+        </div>
+    </ion-content>
 </ion-view>
