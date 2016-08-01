@@ -275,10 +275,6 @@ button.button.button-block.button-positive.taglib-text{
   display:none;
 }
 
-.menu.menu-left * {
-    font-weight: bold;
-}
-
 /*Registration Page*/
 .registerpane_body{height:100%;background:rgba(225,225,225,0.7);}
 
@@ -384,3 +380,23 @@ ion-footer-bar.tabs.tabs-icon-left.bar.bar-dark.bar-footer.bar-assertive{backgro
 i.icon.ion-star{padding-left:4%;}
 
 button.button.button-icon.button-clear.ion-search{display:none;}
+
+.my-side-menu ul.list a {
+    background-color: black;
+    color: #fff;
+}
+
+.my-side-menu .item h3 {
+    margin: 22px 0px 0px 0px;
+    font-size: 10px;
+}
+
+.my-side-menu .item h2 {
+    margin: 0 0 37px 0;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.my-side-menu ion-content {
+    background: black;
+}
