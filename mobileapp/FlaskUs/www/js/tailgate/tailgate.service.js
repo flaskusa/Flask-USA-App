@@ -4,12 +4,12 @@
         .module('flaskApp')
         .service('TailgateService', TailgateService);
 
-    TailgateService.$inject = ['$http'];
+    TailgateService.$inject = ['$http','REST_API'];
 
-    function TailgateService($http) {
-        var baseURL = "http://test@liferay.com:test@146.148.83.30/api/jsonws";
-        var allTailgateURL = "/flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
-        var myTailgatesURL = "/flask-user-tailgate-portlet.tailgateinfo/get-all-my-tailgate";
+    function TailgateService($http, REST_API) {
+        var baseURL = REST_API.url;
+        var allTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
+        var myTailgatesURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-my-tailgate";
 
         this.getAllTailgate = getAllTailgate
 
