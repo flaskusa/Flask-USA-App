@@ -4,10 +4,10 @@
         .module('flaskApp')
         .service('UserService', UserService);
 
-    UserService.$inject = ['$http','$state'];
+    UserService.$inject = ['$http','$state','REST_API'];
 
-    function UserService($http, $state) {
-        var baseURL = "http://146.148.83.30/api/jsonws";
+    function UserService($http, $state,REST_API) {
+        var baseURL = REST_API.url;
         var addUserURL = "/flask-rest-users-portlet.flaskadmin/sign-up";
         
         this.saveUser = saveUser
