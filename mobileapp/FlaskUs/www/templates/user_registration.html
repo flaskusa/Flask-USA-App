@@ -1,6 +1,6 @@
 ﻿<ion-view view-title="USER REGISTRATION">
     <ion-content>
-        <form name="form" ng-submit="submitForm()" class="loginpane form_div" novalidate>
+        <form name="register_user_form" class="loginpane form_div" novalidate>
             <div class="loginpane_body">
                 <div class="list">
                     <div class="item item-input item-floating-label">
@@ -48,12 +48,12 @@
                     </div>
                     <div class="item item-input item-floating-label">
                         <span class="input-label">Date of Birth</span>
-                        <input type="date" placeholder="Date of Birth">
+                        <input type="date" placeholder="Date of Birth" name="DOB" ng-model="user.DOB">
                     </div>
                     <div class="item item-input">
                          <span class="input-label">Gender</span>
-                        <pre><ion-radio ng-model="choice" ng-value="'Male'">Male</ion-radio></pre>
-                        <pre><ion-radio ng-model="choice" ng-value="'Female'">Female</ion-radio></pre>
+                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"male"' name="rdoResult">Male</ion-radio></pre>
+                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"female"' name="rdoResult">Female</ion-radio></pre>
                     </div>
                     <div class="item item-input item-floating-label">
                         <span class="input-label">Area Code</span>
@@ -64,7 +64,7 @@
                     </div>
                     <div class="item item-input item-floating-label">
                         <span class="input-label">Mobile</span>
-                        <input type="text" placeholder="Mobile">
+                        <input type="text" placeholder="Mobile" name="mobileNumber" ng-model="user.mobileNumber">
                     </div>
                 </div>
                 <div class="padding" align="center">
