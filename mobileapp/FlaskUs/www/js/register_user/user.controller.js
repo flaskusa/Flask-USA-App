@@ -17,7 +17,7 @@
             else { gender = false;}
             console.log(gender);
             UserService.saveUser(user, gender);
-            $scope.register_user_form.$setPrestine();
+            document.register_user_form.reset();
         }
     }
 })();
