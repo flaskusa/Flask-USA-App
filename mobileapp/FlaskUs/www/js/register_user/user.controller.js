@@ -4,17 +4,20 @@
         .controller('user_registrationCtrl', user_registrationCtrl);
 
     user_registrationCtrl.$inject = ['$scope', 'UserService'];
-
+    
     /* @ngInject */
     function user_registrationCtrl($scope, UserService) {
+        var gender = true;
         $scope.saveUser = function (user) {
             console.log(user);
-            if (user.gender_male == "male") {
-                var male = true;
-                $scope.isMale = male;
+            if (user.isMale == 'male') {
+                gender = true;
+                //$scope.isMale = male;
             }
-            console.log(male);
-          UserService.saveUser(user);
+            else { gender = false;}
+            console.log(gender);
+            UserService.saveUser(user, gender);
+            $scope.register_user_form.$setPrestine();
         }
     }
 })();
