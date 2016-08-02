@@ -3,13 +3,43 @@
         <a href="#/app/events.html"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
     </ion-nav-title>
     <ion-content>
-        <div>
-            <h5 class="eventHeading2"><span class="overlineStyle">{{currEventName}}</span></h5>
-        </div>
-        <div>
-            <ion-slide-boxes>
-
-            </ion-slide-boxes>
-        </div>
+        <section class="slide-area all_same_height">
+            <div>
+                <h5 class="eventHeading2" style="text-transform:uppercase;"><span class="overlineStyle">{{currEventName}}</span></h5>
+            </div>
+            <div>
+                <div>
+                    <img src="../img/viewEvent/Pre.png" class="eventSidePanel" />
+                    <ion-slide-box style="margin-left: 30px;">
+                        <ion-slide ng-repeat="game in Pre_Game">
+                            <div style="margin:auto;display:block;height: 155px;">test</div>
+                        </ion-slide>
+                    </ion-slide-box>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img src="../img/viewEvent/Post.png" class="eventSidePanel" />
+                    <ion-slide-box style="margin-left: 30px;">
+                        <ion-slide ng-repeat="game in Pre_Game">
+                            <div style="margin:auto;display:block;height: 155px;">test</div>
+                        </ion-slide>
+                    </ion-slide-box>
+                </div>
+            </div>
+            <div>
+                <div>
+                    <img src="../img/viewEvent/Post.png" class="eventSidePanel" />
+                    <ion-slide-box style="margin-left: 30px;">
+                        <ion-slide ng-repeat="game in Pre_Game">
+                            <div style="margin:auto;display:block;height: 155px;">test</div>
+                        </ion-slide>
+                    </ion-slide-box>
+                </div>
+            </div>
+            <div>
+                <img src="../img/ad.png" style="height: 80px;" />
+            </div>
+        </section>
     </ion-content>
 </ion-view>
