@@ -1,45 +1,47 @@
-﻿<ion-view>
+﻿<ion-view cache-view="false">
     <ion-nav-title>
         <a href="#/app/events.html"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
     </ion-nav-title>
-    <ion-content>
-        <section class="slide-area all_same_height">
+    <ion-content class="has-footer">
+
+        <section class="some-area1 fill-height-or-more1">
             <div>
-                <h5 class="eventHeading2" style="text-transform:uppercase;"><span class="overlineStyle">{{currEventName}}</span></h5>
+                <div class="eventHeading2" style="text-transform:uppercase;"><span class="overlineStyle">{{currEventName}}</span></div>
             </div>
             <div>
-                <span style="margin-bottom: -45px;">
-                    <img src="../img/Pre.png" class="eventSidePanel" />
-                    <ion-slide-box style="margin-left: 30px;">
-                        <ion-slide ng-repeat="pre in Pre_Game">
-                            <div style="margin:auto;display:block;height: 155px;">{{pre}}</div>
+                <span style="height:43vw;" >
+                    <img src="../img/Pre.png" class="eventSidePanel" style="height: 155px;" />
+                    <ion-slide-box style="">
+                        <ion-slide ng-repeat="pre in Pre_Game" style="width:100%;">
+                            <a href="#/app/eventInfoTypesTabs"><img ng-src="../img/viewEvent/flask_{{pre}}.jpg" style="width: 100%;display:block;height: 155px;" /></a>
                         </ion-slide>
                     </ion-slide-box>
                 </span>
             </div>
             <div>
-                <span style="margin-bottom: -45px;">
-                    <img src="../img/at.png" class="eventSidePanel" />
-                    <ion-slide-box style="margin-left: 30px;">
-                        <ion-slide ng-repeat="during in During_Game">
-                            <div style="margin:auto;display:block;height: 155px;">{{during}}</div>
+                <span style="height:43vw;" >
+                    <img src="../img/Pre.png" class="eventSidePanel" style="height: 155px;" />
+                    <ion-slide-box style="">
+                        <ion-slide ng-repeat="during in During_Game" style="width:100%;">
+                            <a href="#/app/eventInfoTypesTabs"><img ng-src="../img/viewEvent/flask_{{during}}.jpg" style="width: 100%;display:block;height: 155px;" /></a>
                         </ion-slide>
                     </ion-slide-box>
                 </span>
             </div>
             <div>
-                <span style="margin-bottom: -45px;">
-                    <img src="../img/Post.png" class="eventSidePanel" />
-                    <ion-slide-box style="margin-left: 30px;">
-                        <ion-slide ng-repeat="post in Post_Game">
-                            <div style="margin:auto;display:block;height: 155px;">{{post}}</div>
+                <span style="height:43vw;" >
+                    <img src="../img/Pre.png" class="eventSidePanel" style="height: 155px;" />
+                    <ion-slide-box style="">
+                        <ion-slide ng-repeat="post in Post_Game" style="width:100%;">
+                            <a href="#/app/eventInfoTypesTabs"><img ng-src="../img/viewEvent/flask_{{post}}.jpg" style="width: 100%;display:block;height: 155px;" /></a>
                         </ion-slide>
                     </ion-slide-box>
                 </span>
-            </div>
-            <div>
-                <img src="../img/ad.png" style="height: 80px;" />
             </div>
         </section>
     </ion-content>
+    <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
+        <img src="../img/ad.png" class="footer-img" />
+    </ion-footer-bar>
+
 </ion-view>
