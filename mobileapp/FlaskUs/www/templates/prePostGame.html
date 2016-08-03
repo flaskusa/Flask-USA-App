@@ -1,4 +1,4 @@
-﻿<ion-view >
+﻿<ion-view>
     <ion-nav-title>
         <a href="#/app/events.html"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
     </ion-nav-title>
@@ -8,34 +8,34 @@
                 <h5 class="eventHeading2" style="text-transform:uppercase;"><span class="overlineStyle">{{currEventName}}</span></h5>
             </div>
             <div>
-                <div>
-                    <img src="../img/viewEvent/Pre.png" class="eventSidePanel" />
+                <span style="margin-bottom: -45px;">
+                    <img src="../img/Pre.png" class="eventSidePanel" />
                     <ion-slide-box style="margin-left: 30px;">
-                        <ion-slide ng-repeat="game in Pre_Game">
-                            <div style="margin:auto;display:block;height: 155px;">test</div>
+                        <ion-slide ng-repeat="pre in Pre_Game">
+                            <div style="margin:auto;display:block;height: 155px;">{{pre}}</div>
                         </ion-slide>
                     </ion-slide-box>
-                </div>
+                </span>
             </div>
             <div>
-                <div>
-                    <img src="../img/viewEvent/Post.png" class="eventSidePanel" />
+                <span style="margin-bottom: -45px;">
+                    <img src="../img/at.png" class="eventSidePanel" />
                     <ion-slide-box style="margin-left: 30px;">
-                        <ion-slide ng-repeat="game in Pre_Game">
-                            <div style="margin:auto;display:block;height: 155px;">test</div>
+                        <ion-slide ng-repeat="during in During_Game">
+                            <div style="margin:auto;display:block;height: 155px;">{{during}}</div>
                         </ion-slide>
                     </ion-slide-box>
-                </div>
+                </span>
             </div>
             <div>
-                <div>
-                    <img src="../img/viewEvent/Post.png" class="eventSidePanel" />
+                <span style="margin-bottom: -45px;">
+                    <img src="../img/Post.png" class="eventSidePanel" />
                     <ion-slide-box style="margin-left: 30px;">
-                        <ion-slide ng-repeat="game in Pre_Game">
-                            <div style="margin:auto;display:block;height: 155px;">test</div>
+                        <ion-slide ng-repeat="post in Post_Game">
+                            <div style="margin:auto;display:block;height: 155px;">{{post}}</div>
                         </ion-slide>
                     </ion-slide-box>
-                </div>
+                </span>
             </div>
             <div>
                 <img src="../img/ad.png" style="height: 80px;" />
