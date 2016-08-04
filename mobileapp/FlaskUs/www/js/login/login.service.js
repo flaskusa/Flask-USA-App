@@ -13,14 +13,17 @@
         var getUserByEmailId = "user/get-user-by-email-address";
 
         this.authenticateUser = function (scope) {
-            var authdata = Base64.encode(scope.email + ':' + scope.password);
+            var authdata = Base64.encode(scope.Email + ':' + scope.password);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
-            return $http.get(baseURL + getUserByEmailId, { params: { 'companyId': REST_API.companyId, 'emailAddress': scope.email } })
+            return $http.get(baseURL + getUserByEmailId, { params: { 'companyId': REST_API.companyId, 'emailAddress': scope.Email } })
                 .then(function success(response) {
-                    $cookieStore.put('current.user', response);
-                    $state.go("app.events");
-                }, function failure(response) {
+                    $cookieStore.put('CurrentUser', response);
                     console.log(response);
+                    $state.go("app.events");
+                    return response;
+                }, function failure(response) {
+                    console.log("failed");
+                    $state.go("app.login");
                 });
         }
     }
