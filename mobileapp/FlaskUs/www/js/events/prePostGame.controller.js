@@ -16,13 +16,11 @@
         $scope.Pre_Game = [];
         $scope.Post_Game = [];
         $scope.During_Game = [];
-        console.log($stateParams);
         $scope.currEventName = $stateParams.eventName;
         $scope.currEventId = $stateParams.eventId;
         var currEventId = $scope.currEventId;
-        console.log(currEventId);
         getAllVenuImages();
-
+        $ionicSlideBoxDelegate.update();
         function getAllVenuImages() {
             EventsService.getVenueImages(currEventId).then(function (respData) {
                 $scope.currEventData = respData.data.Event;
@@ -48,10 +46,52 @@
                             if ($scope.During_Game.indexOf($scope.Details[i].infoTypeCategoryName) == -1) {
                                 $scope.During_Game.push($scope.Details[i].infoTypeCategoryName)
                         }
-                    }
-                    
+                    }                    
                 }
+                console.log($scope.Pre_Game);
+                console.log($scope.Post_Game);
+                console.log($scope.During_Game);
             });
+
+            $scope.getIncludeFile = function (imgName) {
+                switch (imgName) {
+                    case "Tradition":
+                        return 'Flask_Tradition.jpg';
+                        break;
+                    case "Parking":
+                        return 'Flask_Parking.jpg';
+                        break;
+                    case "Bar & Restaurants":
+                        return 'Flask_Bars.jpg';
+                        break;
+                    case "Traffic":
+                        return 'Flask_Traffic.jpg';
+                        break;
+                    case "Supplies":
+                        return 'Flask_Supplies.jpg';
+                        break;
+                    case "Getting Home":
+                        return 'flask_GettingHome.jpg';
+                        break;
+                    case "Nightlife":
+                        return 'flask_nightlife.jpg';
+                        break;
+                    case "Liquor store":
+                        return 'flask_restaurantBar_post.jpg';
+                        break;
+                    case "Venue info":
+                        return 'venue_info.jpg'
+                        break;
+                    case "Venue map":
+                        return 'Venue_map.jpg'
+                        break;
+                    case "Flask us":
+                        return 'Flask_FlaskUs.jpg'
+                        break;
+                    default:
+                        return 'Flask_Default_Image.jpg';
+                }
+            }
         }
     }
 })(); 
