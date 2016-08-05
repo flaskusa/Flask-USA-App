@@ -140,6 +140,15 @@
             }
         })
 
+        .state('app.forgot_password', {
+            url: '/forgot_password',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/forgot_password.html'
+                }
+            }
+        })
+
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/events');
         
