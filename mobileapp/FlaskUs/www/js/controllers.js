@@ -1,13 +1,6 @@
 angular.module('flaskApp.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout) {
-
-    // With the new view caching in Ionic, Controllers are only called
-    // when they are recreated or on app start, instead of every page change.
-    // To listen for when this page is active (for example, to refresh data),
-    // listen for the $ionicView.enter event:
-    //$scope.$on('$ionicView.enter', function(e) {
-    //});
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cookies, LoginService) {
 
     //controller for splash screen
     $scope.$on('$ionicView.afterEnter', function () {
@@ -15,51 +8,12 @@ angular.module('flaskApp.controllers', [])
             document.getElementById("custom-overlay").style.display = "none";
         }, 1000);
     })
-    // Form data for the login modal
-    $scope.loginData = {};
 
-    // Create the login modal that we will use later
-    //$ionicModal.fromTemplateUrl('templates/login.html', {
-    //  scope: $scope
-    //}).then(function(modal) {
-    //  $scope.modal = modal;
-    //});
-
-    // Triggered in the login modal to close it
-    //$scope.closeLogin = function() {
-    //  $scope.modal.hide();
-    //};
-
-    //// Open the login modal
-    //$scope.login = function() {
-    //  $scope.modal.show();
-    //};
-
-    //// Perform the login action when the user submits the login form
-    //$scope.doLogin = function() {
-    //  console.log('Doing login', $scope.loginData);
-
-    //  // Simulate a login delay. Remove this and replace with your login
-    //  // code if using a login system
-    //  $timeout(function() {
-    //    $scope.closeLogin();
-    //  }, 1000);
-    //};
-})
-
-.controller('PlaylistsCtrl', function($scope) {
-    $scope.playlists = [
-      { title: 'Reggae', id: 1 },
-      { title: 'Chill', id: 2 },
-      { title: 'Dubstep', id: 3 },
-      { title: 'Indie', id: 4 },
-      { title: 'Rap', id: 5 },
-      { title: 'Cowbell', id: 6 }
-    ];
-})
-
-.controller('PlaylistCtrl', function ($scope, $stateParams) {
-
+    var UserCookie = $cookies.get('CurrentUser');
+    if (UserCookie == undefined) {
+        $scope.userName = "Guest";
+        $scope.userEmailId = "Guest";  
+    }
 })
 
 .controller('user_navigation_menuCtrl', function ($scope) {
@@ -74,7 +28,12 @@ angular.module('flaskApp.controllers', [])
 .controller('my_friendsCtrl', function ($scope) {
 })
 
-.controller('loginCtrl', function($scope, $state) {
+.controller('friend_detailsCtrl', function ($scope) {
+})
+
+.controller('loginCtrl', function ($scope, $state) {
+})
+.controller('ticketsCtrl', function ($scope, $state) {
 })
 
     .directive('searchBar', [function () {
@@ -85,33 +44,38 @@ angular.module('flaskApp.controllers', [])
             require: ['^ionNavBar', '?ngModel'],
             restrict: 'E',
             replace: true,
-            template: '<ion-nav-buttons side="right">'+
-                            '<div class="searchBar">'+
-                                '<div class="searchTxt" ng-show="ngModel.show">'+
-                                    '<div class="bgdiv"></div>'+
-                                    '<div class="bgtxt">'+
-                                        '<input type="text" placeholder="Enter your search item..." ng-model="ngModel.txt">'+
-                                    '</div>'+
-                                '</div>'+
-                                '<i class="icon placeholder-icon" ng-click="ngModel.txt=\'\';ngModel.show=!ngModel.show"></i>'+
-                            '</div>'+
+            template: '<ion-nav-buttons side="right">' +
+                            '<div class="searchBar">' +
+                                '<div class="searchTxt" ng-show="ngModel.show">' +
+                                    '<div class="bgdiv"></div>' +
+                                    '<div class="bgtxt">' +
+                                        '<input type="text" placeholder="Enter your search item..." ng-model="ngModel.txt">' +
+                                    '</div>' +
+                                '</div>' +
+                                '<i class="icon placeholder-icon" ng-click="ngModel.txt=\'\';ngModel.show=!ngModel.show"></i>' +
+                            '</div>' +
                         '</ion-nav-buttons>',
-		
+
             compile: function (element, attrs) {
-                var icon=attrs.icon
+                var icon = attrs.icon
                         || (ionic.Platform.isAndroid() && 'ion-android-search')
-                        || (ionic.Platform.isIOS()     && 'ion-ios7-search')
+                        || (ionic.Platform.isIOS() && 'ion-ios7-search')
                         || 'ion-search';
                 angular.element(element[0].querySelector('.icon')).addClass(icon);
-			
-                return function($scope, $element, $attrs, ctrls) {
+
+                return function ($scope, $element, $attrs, ctrls) {
                     var navBarCtrl = ctrls[0];
                     $scope.navElement = $attrs.side === 'right' ? navBarCtrl.rightButtonsElement : navBarCtrl.leftButtonsElement;
-				
+
                 };
             }
         }
     }]);
+
+
+
+
+
 
 
 
