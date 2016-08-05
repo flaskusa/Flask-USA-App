@@ -14,7 +14,6 @@
 
 package com.rumbasolutions.flask.service.impl;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -27,7 +26,6 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Country;
@@ -745,5 +743,43 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		}
 	}
 	
+	/*
+	 * This method is accessible by guest users and used to check whether user exist with given email address or not
+	 * 
+	 * 
+	 */
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public int getUserForEmail(String emailAddress, ServiceContext serviceContext){ 
+		int userExist = 0;
+		try {
+			User user = UserLocalServiceUtil.getUserByEmailAddress(PortalUtil.getDefaultCompanyId(), emailAddress);
+			if(!user.getEmailAddress().isEmpty()){
+				userExist = 1;
+			}
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+		return userExist;
+	}
 	
+	/*
+	 * This method is accessible by guest users and used to check whether user exist with given screenName or not
+	 * 
+	 * 
+	 */
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public int getUserForScreenName(String screenName, ServiceContext serviceContext){ 
+		int userExist = 0;
+		try {
+			User user = UserLocalServiceUtil.getUserByScreenName(PortalUtil.getDefaultCompanyId(), screenName);
+			if(!user.getScreenName().isEmpty()){
+				userExist = 1;
+			}
+		} catch (Exception e) {
+			LOGGER.error(e.getMessage());
+		}
+		return userExist;
+	}
 }

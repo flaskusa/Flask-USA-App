@@ -180,6 +180,18 @@ public class FlaskAdminServiceClpInvoker {
 		_methodParameterTypes52 = new String[] {
 				"long", "long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName53 = "getUserForEmail";
+
+		_methodParameterTypes53 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName54 = "getUserForScreenName";
+
+		_methodParameterTypes54 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -393,6 +405,18 @@ public class FlaskAdminServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName53.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+			return FlaskAdminServiceUtil.getUserForEmail((java.lang.String)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName54.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+			return FlaskAdminServiceUtil.getUserForScreenName((java.lang.String)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -440,4 +464,8 @@ public class FlaskAdminServiceClpInvoker {
 	private String[] _methodParameterTypes51;
 	private String _methodName52;
 	private String[] _methodParameterTypes52;
+	private String _methodName53;
+	private String[] _methodParameterTypes53;
+	private String _methodName54;
+	private String[] _methodParameterTypes54;
 }

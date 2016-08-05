@@ -285,6 +285,19 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 			serviceContext);
 	}
 
+	@Override
+	public int getUserForEmail(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskAdminService.getUserForEmail(emailAddress, serviceContext);
+	}
+
+	@Override
+	public int getUserForScreenName(java.lang.String screenName,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskAdminService.getUserForScreenName(screenName,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

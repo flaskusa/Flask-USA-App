@@ -444,5 +444,37 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	public static int getUserForEmail(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			int returnValue = FlaskAdminServiceUtil.getUserForEmail(emailAddress,
+					serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getUserForScreenName(java.lang.String screenName,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			int returnValue = FlaskAdminServiceUtil.getUserForScreenName(screenName,
+					serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskAdminServiceSoap.class);
 }

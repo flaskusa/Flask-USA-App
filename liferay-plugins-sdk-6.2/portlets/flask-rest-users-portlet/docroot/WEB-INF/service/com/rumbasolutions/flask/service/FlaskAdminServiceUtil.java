@@ -276,6 +276,16 @@ public class FlaskAdminServiceUtil {
 		getService().updateUserForFileEntry(userId, fileEntryId, serviceContext);
 	}
 
+	public static int getUserForEmail(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getUserForEmail(emailAddress, serviceContext);
+	}
+
+	public static int getUserForScreenName(java.lang.String screenName,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getUserForScreenName(screenName, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
