@@ -52,7 +52,9 @@
   height: 3%;
   width: 33%;
   color: white;
-  margin-left: -15px; }
+  margin-left: -15px;
+  text-decoration:none;
+}
 
 i.icon.ion-star{padding-left:2%;}
 //added style.css
@@ -244,6 +246,10 @@ button.button.button-block.button-positive.taglib-text{
   font-weight: 300;
 }
 
+img.slide-image{    position: relative;
+    height: 100%;
+    width: 100vw;}
+
 #logo {
   margin: 30px 0px;
 }
@@ -271,9 +277,7 @@ button.button.button-block.button-positive.taglib-text{
 
 ion-content{background:rgba(225,225,225,0.2);}
 
-.post-content a{background-color: rgba(0, 0, 0, 0.63);
-    height: 3%;
-    width: 30%;}
+
 
 .item.item-input{background:rgba(225,225,225,0);}
 
@@ -387,7 +391,8 @@ button.button.button-icon.button-clear.ion-search{display:none;}
 
 .my-side-menu .item h3 {
     margin: 22px 0px 0px 0px;
-    font-size: 10px;
+    font-size: 12px;
+    margin-top:-28px;
 }
 
 .my-side-menu .item h2 {
@@ -398,6 +403,17 @@ button.button.button-icon.button-clear.ion-search{display:none;}
 
 .my-side-menu ion-content {
     background: black;
+}
+
+img.list-thumbnail.listImages {
+    position: absolute;
+    left: 5px;
+    max-width: 55px;
+    max-height: 55px;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 10px;
+    margin-top: 5px;
 }
 
 .fill-height-or-more1 {
@@ -429,7 +445,7 @@ button.button.button-icon.button-clear.ion-search{display:none;}
 }
 
  .eventSidePanel{
-    height: 155px;
+    height: 100%;
     width: 20px;
     margin-top: auto;
     margin-bottom: auto;
@@ -502,7 +518,7 @@ a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:blac
                  height: 109%;}
 
 .slider {
-  height: 100%;
+  height: 155px;
 }
 .slider-slide {
   color: #000;
@@ -513,5 +529,5 @@ a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:blac
 
 /*login popup*/
 
-.login_error{color:red;font-size:11px;}
+.login_error{color:red;font-size:18px;font-weight:bold;background:rgba(225,225,225,0.7);}
 /*login popup end*/
