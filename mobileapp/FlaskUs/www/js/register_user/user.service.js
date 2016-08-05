@@ -9,7 +9,7 @@
     function UserService($http, $state,REST_API) {
         var baseURL = REST_API.url;
         var addUserURL = "/flask-rest-users-portlet.flaskadmin/sign-up";
-        var getUserByEmailId = "user/get-user-by-email-address";
+        var getUserByEmailId = "/flask-rest-users-portlet.flaskadmin/get-user-for-email";
         
         this.saveUser = saveUser
         function saveUser(user, gender) {
@@ -19,7 +19,7 @@
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.Email,
-                screenName: user.screenName,
+                screenName: user.Email,
                 password1: user.password1,
                 password2: user.password2,
                 DOB: user.DOB,
@@ -40,7 +40,7 @@
         }
 
         this.getUserbyEmail = function (email) {
-            return $http.get(baseURL + getUserByEmailId, { params: { 'companyId': REST_API.companyId, 'emailAddress': email.Email } })
+            return $http.get(baseURL + getUserByEmailId, { params: { 'emailAddress': email.Email } })
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
