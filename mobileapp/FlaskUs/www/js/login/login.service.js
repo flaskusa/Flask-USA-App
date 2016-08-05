@@ -4,29 +4,40 @@
     angular
         .module('flaskApp')
         .service('LoginService', LoginService);
-    
-    LoginService.$inject = ['$http', 'REST_API', '$state', '$cookieStore'];
 
-    function LoginService($http, REST_API, $state, $cookieStore) {
+    LoginService.$inject = ['$http', 'REST_API', '$state', '$cookies', '$rootScope'];
+
+    function LoginService($http, REST_API, $state, $cookies, $rootScope) {
         var baseURL = REST_API.url;
-        
+
         var getUserByEmailId = "user/get-user-by-email-address";
+        var getUserProfilePic = "dlapp/get-file-entry";
 
         this.authenticateUser = function (scope) {
             var authdata = Base64.encode(scope.Email + ':' + scope.password);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
             return $http.get(baseURL + getUserByEmailId, { params: { 'companyId': REST_API.companyId, 'emailAddress': scope.Email } })
                 .then(function success(response) {
-                    $cookieStore.put('CurrentUser', response);
-                    console.log(response);
-                    $state.go("app.events");
+                    $cookies.put('CurrentUser', response);
+                    $rootScope.userName = response.data.firstName + response.data.lastName;
+                    $rootScope.userEmailId = response.data.emailAddress;
+                   
                     return response;
                 }, function failure(response) {
                     console.log("failed");
-                    $state.go("app.login");
                 });
         }
+
+        this.getUserProfilePicture = function () {
+            var userPic = $cookies.get('CurrentUser');
+            return $http.get(baseURL + getUserProfilePic, { params: { 'fileEntryId': userPic.data.portraitId } })
+            .then(function success(resp) {
+                $cookies.put('CurrentUserPic', resp);
+                return resp;
+            });
+        }
     }
+
 
     // Base64 encoding service used by AuthenticationService
     var Base64 = {

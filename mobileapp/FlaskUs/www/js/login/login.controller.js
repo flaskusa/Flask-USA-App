@@ -18,7 +18,7 @@
                 if (respData.data.message == "Authenticated access required") {
                     console.log("Authentication failed");
                     $state.go("app.login");
-                    var myPopup = $ionicPopup.show({    
+                    var myPopup = $ionicPopup.show({
                         title: '<p class="login_error">Incorrect Username or Password</p>'
                     });
 
