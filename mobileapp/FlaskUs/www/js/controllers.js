@@ -11,8 +11,7 @@ angular.module('flaskApp.controllers', [])
 
     var UserCookie = $cookies.get('CurrentUser');
     if (UserCookie == undefined) {
-        $scope.userName = "Guest";
-        $scope.userEmailId = "Guest";  
+        console.log("blank");
     }
 })
 
