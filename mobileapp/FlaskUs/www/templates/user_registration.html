@@ -1,6 +1,5 @@
 ﻿<ion-view view-title="USER REGISTRATION">
     <ion-content>
-        <ion-scroll zooming="true" direction="y" style="height: 600px;">
             <form name="register_user_form" class="loginpane form_div" novalidate style="height: 3000px;">
                 <div class="loginpane_body">
                     <div class="list">
@@ -20,17 +19,10 @@
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Email</span>
-                            <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required><br />
+                            <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required ng-blur="checkUserByEmailId(user);"><br />
                             <div ng-show="form.$submitted || form.uEmail.$touched">
                                 <span ng-show="register_user_form.Email.$error.required" class="error_msg">Tell us your email.</span>
                                 <span ng-show="register_user_form.Email.$error.email" class="error_msg">This is not a valid email.</span>
-                            </div>
-                        </div>
-                        <div class="item item-input item-floating-label">
-                            <span class="input-label">Screen Name</span>
-                            <input type="text" placeholder="Screen Name" name="screenName" class="form-control" ng-model="user.screenName" required ng-blur="">
-                            <div ng-show="register_user_form.$submitted || register_user_form.screenName.$touched">
-                                <span ng-show="register_user_form.screenName.$error.required" class="error_msg">Tell us your screen name.</span>
                             </div>
                         </div>
                         <div class="item item-input item-floating-label">
@@ -78,8 +70,5 @@
                     </div>
                 </div>
             </form>
-            <ion-infinite-scroll on-infinite="loadMoreData()"
-                                 distance="1%">
-            </ion-infinite-scroll>
 </ion-content>
 </ion-view>

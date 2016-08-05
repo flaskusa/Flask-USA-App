@@ -10,7 +10,7 @@
         </div>
         <div class="list">
             <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/prePostGame/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent">
-                <img ng-src="http://146.148.83.30/c/document_library/get_file?uuid={{data.eventImageUUID}}&groupId=20181" class="listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
+                <img ng-src="http://146.148.83.30/c/document_library/get_file?uuid={{data.eventImageUUID}}&groupId=20181" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                 <h2 class="eventNameCol">{{data.eventName}}</h2>
                 <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
                 <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>

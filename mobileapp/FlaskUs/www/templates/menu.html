@@ -14,19 +14,14 @@
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
 
-  <ion-side-menu side="left" class="my-side-menu">
-      <div class="item item-avatar">
-          <img src="//ionicframework.com/img/docs/spengler.jpg">
-          <h2>Giri Pawar</h2>
-          <p>giri.pawar@rumbasolutions.com</p>
-      </div>
+  <ion-side-menu side="left" class="my-side-menu">   
     <ion-content>
-        <ul class="list">
-            <div class="item item-avatar">
-                <img src="//ionicframework.com/img/docs/spengler.jpg">
-                <h3>giri.pawar@rumbasolutions.com</h3>
-                <h2>Giriraj Pawar</h2>
-            </div>
+        <div class="item item-avatar">
+            <img ng-src="http://146.148.83.30/documents/{{userProfilePic}}" onError="this.src = 'http://146.148.83.30/webdav/flask/document_library/DefaultProfilePic';">
+            <h2>{{userName}}</h2>
+            <h3>{{userEmailId}}</h3>
+        </div>
+        <ul class="list">  
             <a href="#/app/login" class="item icon-left ion-home" menu-close>Login</a>
             <a href="#/app/events" class="item icon ion-person-stalker" menu-close>Events</a>
             <a href="#/app/supplies" class="item icon ion-star" menu-close>Supplies</a>
