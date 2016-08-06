@@ -238,6 +238,7 @@ function saveEvent() {
 					function(data) {
 						var IsNew = false;
 						$("#eventForm #eventId").val(data.eventId);
+						$("#eventForm #eventName").val(data.eventName);
 						_flaskLib.showSuccessMessage('action-msg', _eventModel.MESSAGES.SAVE);
 						if (parseInt(params.eventId) == 0 && parseInt(data.eventId) > 0) {
 							$("#mcontents").attr("data-toggle","tab");
@@ -245,7 +246,7 @@ function saveEvent() {
 							IsNew = true;
 						}
 						if ($('#eventLogoImage').find('.dz-image').length>0) {
-							fnSaveEventLogo(data.eventId,IsNew);
+							fnSaveEventLogo(data.eventId,data.eventName,IsNew);
 						}
 						else {
 							if (IsNew) {
@@ -282,6 +283,8 @@ function fnBuildEventUpload(imageContainer) {
 	$(objEventId).appendTo(objForm);
 	var objIsLogo = $('<input/>',{'name':'_isLogo','id':'_isLogo','type':'hidden','value':'Y'});
 	$(objIsLogo).appendTo(objForm);
+	var objEventName = $('<input/>',{'name':'_eventName','id':'_eventName','type':'hidden','value':$("#eventName").val()});
+	$(objEventName).appendTo(objForm);
 
 	dropZoneLogo = new Dropzone($(objForm).get(0),{
 		autoProcessQueue: false,
@@ -290,8 +293,9 @@ function fnBuildEventUpload(imageContainer) {
 	});
 }
 
-function fnSaveEventLogo(eventId,IsNew) {
+function fnSaveEventLogo(eventId,eventName,IsNew) {
 	$("#_eventId").val(eventId);
+	$("#_eventName").val(eventName);
 	dropZoneLogo.options.autoProcessQueue = true;
 	dropZoneLogo.processQueue();
 	dropZoneLogo.on("queuecomplete", function(file) {

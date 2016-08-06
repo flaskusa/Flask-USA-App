@@ -40,9 +40,11 @@ public class ManageEventPortletAction extends MVCPortlet {
 	private static Log LOGGER = LogFactoryUtil.getLog(ManageEventPortletAction.class);
 	
 	private final String EVENT_ID_QSTR = "_eventId";
+	private final String EVENT_NAME_QSTR = "_eventName";
 	private final String EVENT_DETAIL_ID_QSTR= "_eventDetailId";
 	private final String EVENT_ISLOGO_QSTR= "_isLogo";
 	private long _eventId = 0;
+	private String _eventName = "";
 	
 	private long _eventDetailId = 0;
 	private String _isLogo = "N";
@@ -69,11 +71,12 @@ public class ManageEventPortletAction extends MVCPortlet {
 		String uploadPath = getPortletContext().getRealPath("")
 			+ File.separator + UPLOAD_DIRECTORY;
 		
-		
 		try {
 			// parses the request's content to extract file data
 			List<FileItem> formItems = upload.parseRequest(actionRequest);
+			
 			_eventId = getEventId(formItems);
+			_eventName = getEventName(formItems);
 			_eventDetailId = getEventDetailId(formItems);
 			_isLogo = getIsLogo(formItems);
 			createUploadFolder(uploadPath);
@@ -85,9 +88,9 @@ public class ManageEventPortletAction extends MVCPortlet {
 					String fileDesc = fileName; // Change is later for description 
 					boolean IsLogo =  _isLogo.equals("Y");
 					if(IsLogo){
-						fileName = "EventLogo_" + new File(item.getName()).getName();
-						fileTitle = fileName;
-						fileDesc = fileName; 
+						fileName = new File(item.getName()).getName();
+						fileTitle = _eventName + "_" + _eventId;
+						fileDesc = fileTitle; 
 					}
 					String filePath = uploadPath + File.separator + fileName;
 					File storeFile = new File(filePath);
@@ -178,6 +181,19 @@ public class ManageEventPortletAction extends MVCPortlet {
 			}
 		}
 		return eventId;
+	}
+	
+	private String getEventName(List<FileItem> formItems){
+		String eventName = "";
+		for (FileItem item : formItems){
+			System.out.println("item.getFieldName(): "+item.getFieldName());
+			if(item.getFieldName().contentEquals(EVENT_NAME_QSTR)){
+				eventName = item.getString();
+				System.out.println("eventName: "+eventName);
+				break;
+			}
+		}
+		return eventName;
 	}
 
 	private long getEventDetailId(List<FileItem> formItems){
