@@ -17,33 +17,15 @@
 
         this.getAllEvents = getAllEvents;
         this.getVenueImages = getVenueImages;
-        function getAllEvents() {
+        function getAllEvents(eventIds,sDate,eDate,sString,lat,long) {
             return $http.get(baseURL + allEventsURL, {
                 params: {
-                    eventTypeIds: '',
-                    startDate: '',
-                    endDate: '',
-                    searchString: 'a',
-                    latitude: '',
-                    longitude: ''
-                }
-            })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    //add errror handling 
-                });
-        }
-        this.getfilteredEvents = getfilteredEvents;
-        function getfilteredEvents(data1,data2) {
-            return $http.get(baseURL + allEventsURL, {
-                params: {
-                    eventTypeIds: '',
-                    startDate: '',
-                    endDate: '',
-                    searchString: '',
-                    latitude: data1,
-                    longitude: data2
+                    eventTypeIds: eventIds,
+                    startDate: sDate,
+                    endDate: eDate,
+                    searchString: sString,
+                    latitude: lat,
+                    longitude: long
                 }
             })
                 .then(function success(response) {
