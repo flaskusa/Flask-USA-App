@@ -201,6 +201,12 @@ public class EventServiceClpInvoker {
 		_methodParameterTypes110 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName112 = "getEventLogos";
+
+		_methodParameterTypes112 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -428,6 +434,11 @@ public class EventServiceClpInvoker {
 			return EventServiceUtil.setGuestViewPermission((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
+		if (_methodName112.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
+			return EventServiceUtil.getEventLogos((com.liferay.portal.service.ServiceContext)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -485,4 +496,6 @@ public class EventServiceClpInvoker {
 	private String[] _methodParameterTypes109;
 	private String _methodName110;
 	private String[] _methodParameterTypes110;
+	private String _methodName112;
+	private String[] _methodParameterTypes112;
 }

@@ -193,4 +193,8 @@ public interface EventService extends BaseService, InvokableService {
 
 	public java.util.List<java.lang.Long> setGuestViewPermission(
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getEventLogos(
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

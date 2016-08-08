@@ -255,6 +255,12 @@ public class EventServiceWrapper implements EventService,
 		return _eventService.setGuestViewPermission(serviceContext);
 	}
 
+	@Override
+	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getEventLogos(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventService.getEventLogos(serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

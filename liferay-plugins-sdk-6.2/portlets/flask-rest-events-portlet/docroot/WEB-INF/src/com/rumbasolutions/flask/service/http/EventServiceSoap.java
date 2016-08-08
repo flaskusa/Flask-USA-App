@@ -483,5 +483,21 @@ public class EventServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.kernel.repository.model.FileEntrySoap[] getEventLogos(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> returnValue =
+				EventServiceUtil.getEventLogos(serviceContext);
+
+			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(EventServiceSoap.class);
 }

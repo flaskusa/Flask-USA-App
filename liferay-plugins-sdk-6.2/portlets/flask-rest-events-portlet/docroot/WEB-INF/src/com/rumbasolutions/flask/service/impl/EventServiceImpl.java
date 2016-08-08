@@ -29,11 +29,18 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.security.ac.AccessControlled;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.rumbasolutions.flask.model.Event;
@@ -127,9 +134,6 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		return eventListJsonObj;
 	}
 	
-	
-	
-	
 	@Override
 	public JSONObject getUserSelectedEvents(ServiceContext  serviceContext){
 		JSONObject eventListJsonObj =  JSONFactoryUtil.createJSONObject();
@@ -173,8 +177,6 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		
 		return event;
 	}
-	
-
 	
 	@Override
 	public Event addEvent(String eventName, String description, 
@@ -601,9 +603,6 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 				FlaskUtil.setGuestViewPermission( fileEntry);
 				DLFolder dlFolder =fileEntry.getFolder(); 
 				setFolderPermissionRecursive(dlFolder);
-				
-				
-				
 			}		
 		}catch(Exception ex){
 			LOGGER.error("Exception in getUserEventIds: " + ex.getMessage());
@@ -628,9 +627,20 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			LOGGER.error("Exception in setFolderPermissionRecursive:getParentFolder " + ex.getMessage());
 			return;
 		} 
-		
-		
 	}
-	
-	
+
+	@Override
+	public List<FileEntry> getEventLogos(ServiceContext serviceContext){
+		List<FileEntry> eventLogos = null;
+		try {
+			long companyId = PortalUtil.getDefaultCompanyId();
+			Group group = GroupLocalServiceUtil.getGroup(companyId, "guest");
+			Folder folder = DLAppLocalServiceUtil.getFolder(group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Event");
+			Folder eventLogosFolder = DLAppLocalServiceUtil.getFolder(folder.getRepositoryId(), folder.getFolderId(), "Logos");
+			eventLogos = DLAppServiceUtil.getFileEntries(eventLogosFolder.getRepositoryId(), eventLogosFolder.getFolderId());
+		} catch (Exception e) {
+			LOGGER.error("Exception in getEventLogos " + e.getMessage());
+		}
+		return eventLogos;
+	}
 }

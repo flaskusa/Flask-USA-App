@@ -244,6 +244,11 @@ public class EventServiceUtil {
 		return getService().setGuestViewPermission(serviceContext);
 	}
 
+	public static java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getEventLogos(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getEventLogos(serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}
