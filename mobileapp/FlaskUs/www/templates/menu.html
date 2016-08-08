@@ -21,8 +21,15 @@
             <h2>{{userName}}</h2>
             <h3>{{userEmailId}}</h3>
         </div>
-        <ul class="list">  
-            <a href="#/app/login" class="item icon-left ion-home" menu-close>Login</a>
+        
+        <ul class="list"> 
+            
+            <div ng-show="!show_login">
+                <a href="#/app/login" class="item icon-left ion-unlocked" menu-close>Login</a>
+            </div> 
+            <div ng-show="show_login">
+                <a href="#/app/login" class="item icon-left ion-locked" menu-close ng-click="doLogout();">Logout</a>
+            </div>
             <a href="#/app/events" class="item icon ion-person-stalker" menu-close>Events</a>
             <a href="#/app/supplies" class="item icon ion-star" menu-close>Supplies</a>
             <a href="#/app/user_navigation_menu" class="item icon ion-star" menu-close>User Menu</a>
