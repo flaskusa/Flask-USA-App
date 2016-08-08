@@ -14,9 +14,9 @@
             }
             else { gender = false; }
             console.log(gender);
-            //$scope.srcname = user.Email;
+            $scope.srcname = user.mobileNumber + user.firstName + user.lastName;
             console.log($scope.srcname);
-            UserService.saveUser(user, gender).then(function (respData) {
+            UserService.saveUser(user, gender, $scope.srcname).then(function (respData) {
                 console.log(respData.data.exception);
                 // $scope.user = respData.data;
                 if (respData.data.exception == "com.liferay.portal.DuplicateUserEmailAddressException" || respData.data.exception == "com.liferay.portal.DuplicateUserScreenNameException") {
@@ -25,7 +25,7 @@
                     
                 }
             });
-            //document.register_user_form.reset();
+            document.register_user_form.reset();
         }
 
         $scope.checkUserByEmailId = function (user) {
