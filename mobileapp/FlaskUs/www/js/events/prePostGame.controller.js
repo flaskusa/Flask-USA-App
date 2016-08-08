@@ -3,10 +3,10 @@
     angular.module('flaskApp')
             .controller('prePostGameCtrl', prePostGameCtrl);
 
-    prePostGameCtrl.$inject = ['$scope', '$stateParams', 'EventsService', '$ionicSlideBoxDelegate'];
+    prePostGameCtrl.$inject = ['$scope', '$stateParams', 'EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate'];
 
     /* @ngInject */
-    function prePostGameCtrl($scope, $stateParams, EventsService, $ionicSlideBoxDelegate) {
+    function prePostGameCtrl($scope, $stateParams, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
         /* jshint validthis: true */
         var self = this;
         $scope.eventInfo = [];
@@ -23,8 +23,6 @@
         $ionicSlideBoxDelegate.update();
         function getAllVenuImages() {
             EventsService.getVenueImages(currEventId).then(function (respData) {
-                $scope.currEventData = respData.data.Event;
-                $scope.currVenueData = respData.data.Venue;
                 var len = respData.data.Details.length - 1;
                 for (var i = 0; i <= len; i++) {                    
                     $scope.Details.push(angular.fromJson(respData.data.Details[i].Detail))
@@ -38,19 +36,21 @@
                             $scope.Pre_Game.push($scope.Details[i].infoTypeCategoryName)
                         }
                     }else
-                        if ($scope.Details[i].infoTypeName == "Post-Event") {
-                            if ($scope.Post_Game.indexOf($scope.Details[i].infoTypeCategoryName) == -1) {
-                                $scope.Post_Game.push($scope.Details[i].infoTypeCategoryName)
-                        }
-                    } else {
+                        if ($scope.Details[i].infoTypeName == "During-Event") {
                             if ($scope.During_Game.indexOf($scope.Details[i].infoTypeCategoryName) == -1) {
                                 $scope.During_Game.push($scope.Details[i].infoTypeCategoryName)
+                        }
+                    } else {
+                            if ($scope.Post_Game.indexOf($scope.Details[i].infoTypeCategoryName) == -1) {
+                                $scope.Post_Game.push($scope.Details[i].infoTypeCategoryName)
                         }
                     }                    
                 }
                 console.log($scope.Pre_Game);
                 console.log($scope.Post_Game);
                 console.log($scope.During_Game);
+                $ionicSlideBoxDelegate.update();
+                $ionicScrollDelegate.resize()
             });
 
             $scope.getIncludeFile = function (imgName) {
@@ -74,7 +74,7 @@
                         return 'flask_GettingHome.jpg';
                         break;
                     case "Nightlife":
-                        return 'flask_nightlife.jpg';
+                        return 'Flask_Nightlife.jpg';
                         break;
                     case "Liquor store":
                         return 'flask_restaurantBar_post.jpg';
@@ -85,7 +85,7 @@
                     case "Venue map":
                         return 'Venue_map.jpg'
                         break;
-                    case "Flask us":
+                    case "Flask Us":
                         return 'Flask_FlaskUs.jpg'
                         break;
                     default:
