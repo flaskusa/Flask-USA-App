@@ -531,3 +531,17 @@ a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:blac
 
 .login_error{color:red;font-size:18px;font-weight:bold;background:rgba(225,225,225,0.7);}
 /*login popup end*/
+
+input.searchboxArea {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+select.searchboxArea {
+    width: 100%;
+    padding-right: 5px;
+    padding-left: 5px;
+}
+div.searchrow {
+    padding: 0px;
+}
