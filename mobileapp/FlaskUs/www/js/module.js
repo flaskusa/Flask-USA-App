@@ -1,4 +1,4 @@
 ﻿(function () {
     'use strict';
-    angular.module('flaskApp', ['ionic', 'flaskApp.controllers', 'ngCookies']);
+    angular.module('flaskApp', ['ionic', 'flaskApp.controllers', 'ngCookies','ngCordova']);
 })();
