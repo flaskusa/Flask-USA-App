@@ -20,7 +20,7 @@
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Email</span>
                             <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required ng-blur="checkUserByEmailId(user);"><br />
-                            <div ng-show="form.$submitted || form.uEmail.$touched">
+                            <div ng-show="register_user_form.$submitted || register_user_form.Email.$touched">
                                 <span ng-show="register_user_form.Email.$error.required" class="error_msg">Tell us your email.</span>
                                 <span ng-show="register_user_form.Email.$error.email" class="error_msg">This is not a valid email.</span>
                             </div>
