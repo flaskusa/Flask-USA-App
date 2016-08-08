@@ -10,7 +10,7 @@
             <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <div class="bar bar-subheader" ng-show="searchBox.showBox">
+    <div class="bar bar-subheader BgCol" ng-show="searchBox.showBox">
         <div class="row searchrow">
             <div class="col col-33 col-center searchrow">
                 <input type="text" placeholder="Enter ZipCode." class="searchboxArea" id="zipCode" name="zipCode" ng-model="eventList.zipcode" ng-blur="getAllfilteredEvents(eventList.zipcode)" />
@@ -44,6 +44,6 @@
             </div>
 </ion-content>
     <ion-footer-bar class="bar bar-dark bar-footer">
-        <img src="../img/ad.png" class="footer-img" />
+        <img src="img/ad.png" class="footer-img" />
     </ion-footer-bar>
 </ion-view>
