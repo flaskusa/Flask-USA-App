@@ -248,7 +248,7 @@ button.button.button-block.button-positive.taglib-text{
 
 img.slide-image{    position: relative;
     height: 100%;
-    width: 100vw;}
+    }
 
 #logo {
   margin: 30px 0px;
@@ -324,7 +324,7 @@ border-top: 4px solid #F89734; font-weight: 800;
 }
 .eventHeading2 {
     text-align: center;
-    padding-top: 12px;
+    padding-top: 0px;
     margin-bottom: 5px;
 }
 
@@ -446,8 +446,8 @@ img.list-thumbnail.listImages {
 
  .eventSidePanel{
     height: 100%;
-    width: 20px;
-    margin-top: auto;
+    width: 25px;
+    margin-top: inherit;
     margin-bottom: auto;
     float: left;
   }
@@ -518,7 +518,7 @@ a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:blac
                  height: 109%;}
 
 .slider {
-  height: 155px;
+
 }
 .slider-slide {
   color: #000;
