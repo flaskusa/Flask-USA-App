@@ -12,16 +12,17 @@
 
         var getUserByEmailId = "user/get-user-by-email-address";
         var getUserProfilePic = "dlapp/get-file-entry";
-
         this.authenticateUser = function (scope) {
             var authdata = Base64.encode(scope.Email + ':' + scope.password);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
             return $http.get(baseURL + getUserByEmailId, { params: { 'companyId': REST_API.companyId, 'emailAddress': scope.Email } })
                 .then(function success(response) {
                     $cookies.put('CurrentUser', response);
+                    var usercookie = $cookies.get('CurrentUser');
+                    console.log(usercookie);
                     $rootScope.userName = response.data.firstName + response.data.lastName;
                     $rootScope.userEmailId = response.data.emailAddress;
-                   
+                    $rootScope.show_login = "logout";
                     return response;
                 }, function failure(response) {
                     console.log("failed");
