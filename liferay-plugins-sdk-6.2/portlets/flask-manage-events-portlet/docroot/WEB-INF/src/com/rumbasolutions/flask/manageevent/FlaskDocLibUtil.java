@@ -86,7 +86,7 @@ public class FlaskDocLibUtil {
 	
 	public static Folder createEventFolder(long eventId,ServiceContext serviceContext) throws PortalException, SystemException{
 		Folder folder = createEventRootFolder(serviceContext);
-		String eventFolderName = folder.getName()+"-Logos";
+		String eventFolderName = "Logos";
 		Folder eventFolder = getOrCreateFolder(eventFolderName, folder.getFolderId(), folder.getRepositoryId(), folder.getUserId(), serviceContext);
 		return eventFolder;
 	}
