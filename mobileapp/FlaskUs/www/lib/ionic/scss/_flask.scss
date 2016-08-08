@@ -532,16 +532,28 @@ a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:blac
 .login_error{color:red;font-size:18px;font-weight:bold;background:rgba(225,225,225,0.7);}
 /*login popup end*/
 
+/*css for search box*/
 input.searchboxArea {
     width: 100%;
     padding-right: 10px;
     padding-left: 10px;
+    background-color: black;
+    color: #f7941e;
 }
 select.searchboxArea {
     width: 100%;
     padding-right: 5px;
     padding-left: 5px;
+    background-color: black;
+    border-color: black;
+    color: white;
 }
 div.searchrow {
     padding: 0px;
 }
+
+.BgCol{
+    background-color: black;
+    border-color: #f7941e;
+}
+/*css for search box*/
