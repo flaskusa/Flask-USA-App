@@ -1,0 +1,46 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+    <link href="css/ionic.app.css" rel="stylesheet">
+    <!--
+    <link href="lib/ionic/css/ionic.css" rel="stylesheet">    -->
+    <link href="css/style.css" rel="stylesheet">
+    <link async href="http://fonts.googleapis.com/css?family=Coda" rel="stylesheet" type="text/css"/>
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="css/ionic.app.css" rel="stylesheet">
+    -->
+    <script src="js/platformOverrides.js"></script>
+    <!-- ionic/angularjs js -->
+    <script src="lib/ionic/release/js/ionic.bundle.min.js"></script>
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+    <!-- your app's js -->
+   <script src="js/boot.js"></script>
+    <script src="js/module.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/login/login.service.js"></script>
+    <script src="js/login/login.controller.js"></script>
+    <script src="js/events/event.service.js"></script>
+    <script src="js/events/event.controller.js"></script>
+    <script src="js/events/prePostGame.controller.js"></script>
+    <script src="js/supplies/supplies.controller.js"></script>
+    <script src="js/supplies/supplies.service.js"></script>
+    <script src="js/supplies/suppliesList.controller.js"></script>
+    <script src="js/tailgate/tailgate.controller.js"></script>
+    <script src="js/tailgate/tailgate.service.js"></script>
+    <script src="js/tailgate/addMyTailgate.controller.js"></script>
+    <script src="js/register_user/user.controller.js"></script>
+    <script src="js/register_user/user.service.js"></script>
+  </head>
+
+  <body class="platform-android platform-cordova platform-webview">
+	<!--Splash screen image-->
+	<div id="custom-overlay"><img src="img/flasklogo.png"></div> 
+    <ion-nav-view></ion-nav-view>
+  </body>
+</html>

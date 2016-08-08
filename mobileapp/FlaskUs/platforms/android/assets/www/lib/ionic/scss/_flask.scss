@@ -1,0 +1,533 @@
+﻿.fill-height-or-more {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  > div {
+    // these are flex items
+    
+    // flex: 1; same as:
+    // flex-grow: 1;
+    // flex-shrink: 1;
+    // flex-basis: auto;
+    // flex: 1 1 auto;
+    flex: 1;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    > div {
+      // also flex items 
+    }
+  }
+}
+
+
+
+.some-area {
+  > div {
+    padding: 1rem;
+    &:nth-child(1) {
+      background-image:url("../img/events.jpg");
+      background-size:100%;
+    }
+    &:nth-child(2) {
+      background-image:url("../img/tailgate.jpg");
+      background-size:100%;
+    }
+    &:nth-child(3) {
+      background-image:url("../img/friends.jpg");
+      background-size:100%;
+    }
+    h1, h2 {
+      margin: 0 0 0.2rem 0;
+    }
+    p {
+      margin: 0;
+    }
+  }
+}
+
+.post-content {
+  background-color: rgba(0, 0, 0, 0.63);
+  height: 3%;
+  width: 33%;
+  color: white;
+  margin-left: -15px;
+  text-decoration:none;
+}
+
+i.icon.ion-star{padding-left:2%;}
+//added style.css
+
+/* Empty. Add your own CSS if you like */
+/*start css for splash overlay*/
+#custom-overlay {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;  
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background-color: white;
+}
+
+#custom-overlay img {
+  display: block;
+  margin: 0 auto;
+  width: 50%;
+  height: auto;
+  -webkit-animation: rotating-function 5.25s linear infinite;
+  -moz-animation: rotating-function 5.25s linear infinite;
+  -o-animation: rotating-function 5.25s linear infinite;
+  animation: rotating-function 5.25s linear infinite;
+}
+/*end css for splash overlay*/
+
+span.badge.badge-assertive {
+    margin-right: 20px;
+}
+/* Empty. Add your own CSS if you like */
+.badge.badge-assertive {
+    background-color: #0f0f0f;
+    color: #fff;
+}
+.badge {
+    border-radius: 6px;
+}
+
+ion-item.item {
+    color: darkorange;
+}
+.my-side-menu{
+ background: #000;
+}
+.my-list-item{
+ background: #000 !important;
+ border:white !important;
+}
+
+.ion-plus-circled:before
+{
+    color: #000;
+    font-size: x-large;
+}
+
+label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
+	color: darkorange;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: larger;
+}
+/* Empty. Add your own CSS if you like */
+
+
+/*Login page*/
+
+
+.form_div{height:100%;
+          width:100%;
+}
+
+.loginpane{height:100%;}
+
+@media only screen and (min-width: 30.063em){
+    .loginpane {
+    margin: 0 auto;
+    }
+}
+
+.loginpane_header {
+    background: rgba(225,225,225,0.95);
+    padding: 1em 0;
+    text-align: center;
+    height:20%;
+    margin-top: -1%;
+    width:100%;
+}
+
+.loginpane_header img{content:url(../img/flasklogo2.png);}
+
+img.cq-dd-image{height:100%;}
+
+.loginpane_body {
+      width:100%;
+}
+
+.div_list{padding-left:6%;}
+
+input.input_box{width:90%;
+           border:solid 1px #F2F1F0;
+           border-radius:5px;
+           
+}
+
+.portlet-login .form fieldset {
+    border-width: 0;
+    margin-bottom: 0;
+    padding: 0;
+}
+
+.aui body {
+    background-color: #fff;
+    font: normal 14px/1 "Coda",Helvetica,sans-serif;
+}
+
+button.button.button-block.button-positive.sign_in_button{width:90%;color:darkorange;}
+a.button.button-block.button-positive.sign_in_button{width:90%;padding-top:15px;text-align:center;color:darkorange;}
+
+.aui label {
+    font-size: 14px;
+}
+
+.required {
+    font-size: 12px;
+    color: chocolate;
+}
+
+.portlet-login .form .button-holder, .portlet-login .form .form-column {
+    margin-bottom: 10px;
+}
+
+.aui .checkbox {
+    min-height: 20px;
+    padding-left: 20px;
+}
+
+button.button.button-block.button-positive.taglib-text{
+				color:white;
+				width:40%;
+}
+
+.navigation{	 
+				 text-align: center;
+                  height:22%;
+                  text-align: center;
+                  width:100%;
+}
+
+/*CSS for checkboxes start*/
+
+.checkbox input:after, .checkbox-icon:after {
+    -webkit-transition: opacity 0.05s ease-in-out;
+    transition: opacity 0.05s ease-in-out;
+    -webkit-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    position: absolute;
+    top: 33%;
+    left: 25%;
+    display: table;
+    width: 14px;
+    height: 6px;
+    border: 1px solid orange;
+    border-top: 0;
+    border-right: 0;
+    content: ' ';
+    opacity: 0;
+}
+
+.checkbox input:checked:before, .checkbox input:checked + .checkbox-icon:before {
+    background: black;
+    border-color: black;
+}
+
+/*CSS for checkboxes end*/
+
+/*For wizard */
+.slider {
+  height: 100%;
+}
+.slider-slide {
+  color: #000;
+  background-color: #fff;
+  font-family: coda; 
+  font-weight: 300;
+}
+
+img.slide-image{    position: relative;
+    height: 100%;
+    width: 100vw;}
+
+#logo {
+  margin: 30px 0px;
+}
+
+#list {
+  width: 170px;
+  margin: 30px auto;
+  font-size: 20px;
+}
+#list ol {
+  margin-top: 30px;
+}
+#list ol li {
+  text-align: left;
+  list-style: decimal;
+  margin: 10px 0px;
+}
+
+.button.ng-hide{
+  display:none;
+}
+
+/*Registration Page*/
+.registerpane_body{height:100%;background:rgba(225,225,225,0.7);}
+
+ion-content{background:rgba(225,225,225,0.2);}
+
+
+
+.item.item-input{background:rgba(225,225,225,0);}
+
+span.error_msg{color:red;}
+
+.ion:before{padding-right:10px;}
+/*css form date column input list*/
+.dateCol{
+    text-transform: uppercase;
+    font-size: 11px !important;
+    margin-top: -4px;
+}
+.timeVenuCol{
+    text-transform: uppercase;
+    font-size: 11px !important;
+    margin-top: -6px;
+}
+.arrowIcon{
+    right: -4px !important;
+    font-size: 20px !important;
+}
+.eventNameCol{
+    font-weight: bold !important;
+    text-transform: uppercase;
+    font-size: 11px !important;
+}
+.eventList{
+    text-align: center;
+    padding-top: 8px;
+    padding-left: 54px;
+    padding-right: 23px;
+    min-height: 39px !important;
+    max-height: 57px !important;
+    border-color: black;
+}
+.eventHeading{
+    text-align:center; 
+    padding-top: 20px; 
+    margin-bottom: 10px;
+    font-size: 18px !important;
+}
+.overlineStyle{
+border-top: 4px solid #F89734; font-weight: 800;
+}
+.eventHeading2 {
+    text-align: center;
+    padding-top: 12px;
+    margin-bottom: 5px;
+}
+
+/*Header Image*/
+.header-img{margin-bottom: -10px;
+            height:35px;
+}
+
+ion-header-bar.bar-dark.bar.bar-header{background-color:black !important;}
+
+.searchBar {
+	color: #fff;
+	margin: 0 !important;
+	padding: 0;
+}
+.searchBar .icon {
+	font-size: 27px;
+	line-height: 1.2;
+	padding-right: 6px;
+	padding-left: 6px;
+}
+.searchBar .searchTxt {
+	border-bottom: 1px solid #fff;
+	left: 55px;
+	width: calc(100% - 100px);
+	position: fixed;
+	height: calc(100% - 10px);
+}
+.searchBar.numicons2 .searchTxt {
+	width: calc(100% - 135px);
+}
+.searchBar .searchTxt > .bgdiv {
+	background-color: #aaa;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	opacity: 0.3;
+}
+.searchBar .searchTxt > .bgtxt {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.searchBar .searchTxt input {
+	background-color: black;
+	color: white;
+	padding-left: 5px;
+	padding-right:5px;
+    width: 100%;
+}
+
+ion-footer-bar.tabs.tabs-icon-left.bar.bar-dark.bar-footer.bar-assertive{background-color:black;}
+
+i.icon.ion-star{padding-left:4%;}
+
+button.button.button-icon.button-clear.ion-search{display:none;}
+
+.my-side-menu ul.list a {
+    background-color: black;
+    color: #fff;
+}
+
+.my-side-menu .item h3 {
+    margin: 22px 0px 0px 0px;
+    font-size: 12px;
+    margin-top:-28px;
+}
+
+.my-side-menu .item h2 {
+    margin: 0 0 37px 0;
+    font-size: 16px;
+    font-weight: normal;
+}
+
+.my-side-menu ion-content {
+    background: black;
+}
+
+img.list-thumbnail.listImages {
+    position: absolute;
+    left: 5px;
+    max-width: 55px;
+    max-height: 55px;
+    width: 100%;
+    height: 100%;
+    padding-bottom: 10px;
+    margin-top: 5px;
+}
+
+.fill-height-or-more1 {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  > div {
+    // these are flex items
+    
+    // flex: 1; same as:
+    // flex-grow: 1;
+    // flex-shrink: 1;
+    // flex-basis: auto;
+    // flex: 1 1 auto;
+    flex: 1;    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    > div {
+      // also flex items 
+    }
+  }
+}
+
+.some-area1 {
+  > div {
+    /*padding: 1rem;*/
+  }
+}
+
+ .eventSidePanel{
+    height: 100%;
+    width: 20px;
+    margin-top: auto;
+    margin-bottom: auto;
+    float: left;
+  }
+
+ .dateCol{
+    text-transform: uppercase; 
+    font-size: 13px;
+     margin-top: -4px;
+}
+.timeVenuCol{
+    text-transform: uppercase; 
+    font-size: 13px; 
+    margin-top: -6px;
+}
+.arrowIcon{
+    right: 4px !important;
+}
+
+.eventList{
+    text-align: center;
+    padding-top: 8px; padding-left: 70px; padding-right: 23px;    min-height: 39px !important;    max-height: 72px;
+    border-color: black;
+}
+.eventHeading{
+    text-align:center; padding-top: 20px; margin-bottom: 20px;
+}
+.overlineStyle{
+border-top: 4px solid #F89734; font-weight: 800;
+}
+
+ /*friend details page start*/
+ p.friend{font-weight: bold;
+    text-align: center;
+    font-size: 20px;
+    color: darkorange;}
+
+.list.card.friend-info{box-shadow:none;background-color:transparent;} 
+
+.item.item-body.item_friend_details{background-color:transparent;}
+.loginpane_footer {
+    background-image: url("../img/ad.png");
+    width: 100%;
+}
+
+ img.footer-img{  width: 104%;
+                 height: 109%;}
+
+ .friend-image{width:80%;height:80%;padding-left: 20%;}
+ /*friend details page end*/
+
+ /*tickets start*/
+ h3.eventHeading{font-weight:800;}
+
+ h2.tickets{font-weight: 800;
+    font-size: 27px;
+    text-align: center;
+    margin-top:-3%;
+}
+
+.item-tickets{text-align: center;
+    font-size: 13px;
+    color: darkorange !important;}
+
+a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:black;}
+ /*tickets end*/
+
+ img.footer-img{  width: 104%;
+                 height: 109%;}
+
+.slider {
+  height: 155px;
+}
+.slider-slide {
+  color: #000;
+  background-color: #fff;
+  text-align: center;
+  font-weight: 300;
+}
+
+/*login popup*/
+
+.login_error{color:red;font-size:18px;font-weight:bold;background:rgba(225,225,225,0.7);}
+/*login popup end*/

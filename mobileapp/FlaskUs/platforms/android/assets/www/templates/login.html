@@ -1,0 +1,71 @@
+<ion-view view-title="Login" align-title="left" hide-nav-bar="true">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="loginpane form_div">
+            <div class="loginpane_header">
+                <img title="logo_2" alt="logo_2" class="cq-dd-image" style="zoom:0.3">
+            </div>
+            <form name="login_form" class="loginpane form_div" novalidate style="height: 3000px;">
+                <div class="loginpane_body">
+                    <div class="list">
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Email</span>
+                            <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required=""><br />
+                            <div ng-show="login_form.$submitted || login_form.Email.$touched">
+                                <span ng-show="login_form.Email.$error.required" class="error_msg">Tell us your email.</span>
+                                <span ng-show="login_form.Email.$error.email" class="error_msg">This is not a valid email.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Password</span>
+                            <input type="password" placeholder="Password" class="form-control" ng-model="user.password" name="password" required="">
+                            <div ng-show="login_form.$submitted || login_form.password.$touched">
+                                <span ng-show="login_form.password.$error.required" class="error_msg">Please enter password.</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="padding" align="center">
+                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="doLogin(user)">
+                            Login
+                        </button>
+                    </div>
+                </div>
+
+                <div class="navigation">
+                    <ul class="taglib-icon-list unstyled">
+                        <li class="" role="presentation">
+                            <a href="#/app/user_registration" class=" taglib-icon" role="menuitem">
+                                <span class="taglib-text"><i class="ion ion-android-person-add"></i>Create User</span>
+                            </a>
+                        </li>
+                        <li class="" role="presentation">
+                            <a href="#/app/forgot_password" class=" taglib-icon" role="menuitem">
+                                <span class="taglib-text"><i class="ion ion-help-circled"></i>Forgot Password</span>
+                            </a>
+                        </li>
+                        <li class="" role="presentation">
+                            <a href="#/app/events" class=" taglib-icon" role="menuitem">
+                                <span class="taglib-text"><i class="ion ion-edit"></i>Create Account Later</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+        <div class="loginpane_footer">
+        </div>
+        <script id="templates/login_modal.html" type="text/ng-template">
+            <ion-modal-view>
+                <ion-content class="padding">
+                    <h4 style="color:red">Incorrect Username or Password!!</h4>
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>

@@ -1,0 +1,47 @@
+﻿<ion-view cache-view="false">
+    <ion-nav-title>
+        <a href="#/app/events.html"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
+    </ion-nav-title>
+    <ion-content class="has-footer">
+
+        <section class="some-area1 fill-height-or-more1">
+            <div>
+                <div class="eventHeading2" style="text-transform:uppercase;"><span class="overlineStyle">{{currEventName}}</span></div>
+            </div>
+            <div>
+                <span style="height:43vw;" >
+                    <img src="../img/Pre.png" class="eventSidePanel" style="height: 155px;" />
+                    <ion-slide-box style="">
+                        <ion-slide ng-repeat="pre in Pre_Game" style="width:100%;">
+                            <a href="#/app/eventInfoTypesTabs"><img ng-src="../img/viewEvent/flask_{{pre}}.jpg" style="width: 100%;display:block;height: 155px;" /></a>
+                        </ion-slide>
+                    </ion-slide-box>
+                </span>
+            </div>
+            <div>
+                <span style="height:43vw;" >
+                    <img src="../img/Pre.png" class="eventSidePanel" style="height: 155px;" />
+                    <ion-slide-box style="">
+                        <ion-slide ng-repeat="during in During_Game" style="width:100%;">
+                            <a href="#/app/eventInfoTypesTabs"><img ng-src="../img/viewEvent/flask_{{during}}.jpg" style="width: 100%;display:block;height: 155px;" /></a>
+                        </ion-slide>
+                    </ion-slide-box>
+                </span>
+            </div>
+            <div>
+                <span style="height:43vw;" >
+                    <img src="../img/Pre.png" class="eventSidePanel" style="height: 155px;" />
+                    <ion-slide-box style="">
+                        <ion-slide ng-repeat="post in Post_Game" style="width:100%;">
+                            <a href="#/app/eventInfoTypesTabs"><img ng-src="../img/viewEvent/flask_{{post}}.jpg" style="width: 100%;display:block;height: 155px;" /></a>
+                        </ion-slide>
+                    </ion-slide-box>
+                </span>
+            </div>
+        </section>
+    </ion-content>
+    <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
+        <img src="../img/ad.png" class="footer-img" />
+    </ion-footer-bar>
+
+</ion-view>

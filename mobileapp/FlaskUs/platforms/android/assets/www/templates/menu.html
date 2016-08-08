@@ -1,0 +1,32 @@
+<ion-side-menus enable-menu-with-back-views="true">
+  <ion-side-menu-content>
+    <ion-nav-bar class="bar-dark" align-title="center">
+
+      <ion-nav-buttons side="left">
+        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        </button>          
+      </ion-nav-buttons>
+      <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-search">
+        </button>          
+      </ion-nav-buttons>         
+    </ion-nav-bar>
+    <ion-nav-view name="menuContent"></ion-nav-view>
+  </ion-side-menu-content>
+
+  <ion-side-menu side="left" class="my-side-menu">   
+    <ion-content>
+        <div class="item item-avatar profile">
+            <img ng-src="http://146.148.83.30/documents/20181/0/title.jpg" onError="this.src = 'img/default-profilepic.png';">
+            <h2>{{userName}}</h2>
+            <h3>{{userEmailId}}</h3>
+        </div>
+        <ul class="list">  
+            <a href="#/app/login" class="item icon-left ion-home" menu-close>Login</a>
+            <a href="#/app/events" class="item icon ion-person-stalker" menu-close>Events</a>
+            <a href="#/app/supplies" class="item icon ion-star" menu-close>Supplies</a>
+            <a href="#/app/user_navigation_menu" class="item icon ion-star" menu-close>User Menu</a>
+        </ul>
+    </ion-content>
+  </ion-side-menu>
+</ion-side-menus>

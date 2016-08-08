@@ -1,0 +1,21 @@
+﻿<ion-view view-title="MY TAILGATE">
+    <ion-nav-bar class="bar-dark" align-title="center" >
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
+        <a class="item item-full item-icon-left icon ion-plus-circled" href="#/app/addMyTailgate">
+            CREATE NEW TAILGATE
+        </a>
+        <div class="list">
+            <a class="item item-thumbnail-left item-icon-right eventList" href="#" ng-repeat="data in allTailgate">
+                <img src="img/events.jpg" class="listImages">
+                <h2 class="eventNameCol">{{ data.tailgateName }}</h2>
+                <p class="dateCol">{{data.tailgateDate | date:'EEEE,MMMM dd,yyyy'}}</p>
+                <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
+                <i class="icon ion-chevron-right"></i>
+            </a>
+        </div>
+    </ion-content>
+</ion-view>
