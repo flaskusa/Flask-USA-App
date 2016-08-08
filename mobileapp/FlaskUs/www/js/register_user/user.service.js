@@ -12,14 +12,14 @@
         var getUserByEmailId = "/flask-rest-users-portlet.flaskadmin/get-user-for-email";
         
         this.saveUser = saveUser
-        function saveUser(user, gender) {
+        function saveUser(user, gender, srcname) {
             
             console.log(user);
             var params= {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.Email,
-                screenName: user.Email,
+                screenName: srcname,
                 password1: user.password1,
                 password2: user.password2,
                 DOB: user.DOB,
