@@ -18,11 +18,33 @@
         $scope.latitude = '';
         $scope.longitude = '';
 
-        getAllEvents($scope.eventTypeIds, $scope.startDate , $scope.endDate ,$scope.searchString ,$scope.latitude ,$scope.longitude);
+        //getAllEvents();
+
+        var options = { timeout: 10000, enableHighAccuracy: true };
+
+        $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
+            var lat = position.coords.latitude;
+            var lng = position.coords.longitude;
+            console.log(lat, lng);
+            var searchstr = '';
+            EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, searchstr, lat, lng).then(function (respData) {
+                $scope.allEvent = respData.data.Events;
+                if (respData.data.Events.length == 0) {
+                    showAlert();
+                }
+            });
+        }, function (error) {
+            console.log("Could not get location");
+            var DetroitZipCode = 48226;
+            $scope.getAllfilteredEvents(DetroitZipCode);
+        });
 
         function getAllEvents() {
-            EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate , $scope.endDate ,$scope.searchString ,$scope.latitude ,$scope.longitude).then(function (respData) {
+            EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString,$scope.latitude,$scope.longitude).then(function (respData) {
                 $scope.allEvent = respData.data.Events;
+                if (respData.data.Events.length == 0) {
+                    showAlert();
+                }
             });
         }
         
@@ -40,9 +62,9 @@
                         }
                     });
                   }, function (err) {                      
-                  });   
-            
+                  });             
         }
+
         $scope.onchange = function (id) {
             var startDate = new Date();
             $scope.StartDate = startDate.setDate(startDate.getDate());
@@ -55,7 +77,6 @@
                 }
             });
         }
-        $scope.done = true;
         $scope.searchBox = { showBox: false };
 
         function showAlert() {
@@ -66,7 +87,18 @@
 
             alertPopup.then(function (res) {
                 // Custom functionality....
-                getAllEvents();
+              // getAllEvents();
+            });
+        };
+        function showGpsAlert() {
+            var alertPopup = $ionicPopup.alert({
+                title: 'Alert',
+                template: 'Please Enable Gps or enter your Zip Code in Search Bar'
+            });
+
+            alertPopup.then(function (res) {
+                // Custom functionality....
+               // getAllEvents();
             });
         };
     }
