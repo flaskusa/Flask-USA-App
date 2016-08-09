@@ -98,7 +98,8 @@
             url: '/user_navigation_menu',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/user_navigation_menu.html'
+                    templateUrl: 'templates/user_navigation_menu.html',
+                    controller: 'user_navigation_menuCtrl'
                 }
             }
         })
