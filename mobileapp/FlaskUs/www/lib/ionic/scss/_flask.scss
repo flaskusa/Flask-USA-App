@@ -393,13 +393,19 @@ button.button.button-icon.button-clear.ion-search{display:none;}
     margin: 22px 0px 0px 0px;
     font-size: 12px;
     margin-top:-28px;
+    color:orange;
+
 }
 
 .my-side-menu .item h2 {
     margin: 0 0 37px 0;
-    font-size: 16px;
+    font-size: 17px;
     font-weight: normal;
+    color:white;
+    height:21px;
 }
+
+.item.item-avatar.profile{background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);}
 
 .my-side-menu ion-content {
     background: black;
@@ -531,6 +537,7 @@ a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:blac
 
 .login_error{color:red;font-size:18px;font-weight:bold;background:rgba(225,225,225,0.7);}
 /*login popup end*/
+
 
 /*css for search box*/
 input.searchboxArea {
