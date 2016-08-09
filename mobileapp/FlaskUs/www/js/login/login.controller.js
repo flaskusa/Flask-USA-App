@@ -5,50 +5,57 @@
 
     LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope'];
     
-
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope) {
-        
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope) {        
         /* jshint validthis: true */
         var self = this;
-        $scope.doLogin = function ($scope) {
-            LoginService.authenticateUser($scope).then(function (respData) {
+        $scope.Email = '';
+        $scope.password = '';
+        var showme = true;
+        $scope.doLogin = function (user) {
+            if (user.Email == '' || user.password == '') {
+                showme = false;
+            } else {
+                LoginSet(user);
+            }
+        }
+       function LoginSet (user) {
+            LoginService.authenticateUser(user).then(function (respData) {
                 console.log(respData);
                 // $scope.user = respData.data;
                 if (respData.data.message == "Authenticated access required") {
                     console.log("Authentication failed");
-                    
-                    var myPopup = $ionicPopup.show({
-                        title: '<p class="login_error">Incorrect Username or Password</p>',  
-                    });
-
+                    showAlert();
                     $timeout(function () {
-                        myPopup.close();
-                        
+                        showAlert.close();
                     }, 3000);
                     document.login_form.reset();
                 }
-
                 else if (respData.data.emailAddress == "") {
-                    var myPopup = $ionicPopup.show({
-                        title: '<p class="login_error">Username or Password is empty</p>',
-                    });
+                    showAlert();
 
                     $timeout(function () {
-                        myPopup.close();
-                        
-                    }, 3000);
-                   
+                        showAlert.close();
+                    }, 2000);
                 }
-
                 else {
-                    $state.go("app.events");
-                    $scope.Email = "";
-                    $scope.password = "";
                     document.login_form.reset();
+                    $state.go("app.events");
                 }
             });
-        }
+       }
+
+       function showAlert() {
+           var alertPopup = $ionicPopup.alert({
+               title: 'Alert',
+               template: 'Authentication failed ! Please Check Username and password'
+           });
+
+           alertPopup.then(function (res) {
+               // Custom functionality....
+               // getAllEvents();
+           });
+       };
     };
 })();
 
