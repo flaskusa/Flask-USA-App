@@ -19,9 +19,6 @@ angular.module('flaskApp.controllers', [])
 
 })
 
-.controller('user_navigation_menuCtrl', function ($scope) {
-})
-
 .controller('my_eventsCtrl', function ($scope) {
 })
 
