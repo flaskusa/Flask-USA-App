@@ -7,7 +7,7 @@
 
     LoginService.$inject = ['$http', 'REST_API', '$state', '$cookies', '$rootScope'];
 
-    function LoginService($http, REST_API, $state, $cookies, $rootScope) {
+    function LoginService($http, REST_API, $state, $cookieStore, $rootScope) {
         var baseURL = REST_API.url;
 
         var getUserByEmailId = "user/get-user-by-email-address";
@@ -17,12 +17,12 @@
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
             return $http.get(baseURL + getUserByEmailId, { params: { 'companyId': REST_API.companyId, 'emailAddress': scope.Email } })
                 .then(function success(response) {
-                    $cookies.put('CurrentUser', response);
-                    var usercookie = $cookies.get('CurrentUser');
+                    $cookieStore.put('CurrentUser', response);
+                    var usercookie = $cookieStore.get('CurrentUser');
                     console.log(usercookie);
                     $rootScope.userName = response.data.firstName + response.data.lastName;
                     $rootScope.userEmailId = response.data.emailAddress;
-                    $rootScope.show_login = "logout";
+                    $rootScope.show_login = true;
                     return response;
                 }, function failure(response) {
                     console.log("failed");
@@ -30,10 +30,10 @@
         }
 
         this.getUserProfilePicture = function () {
-            var userPic = $cookies.get('CurrentUser');
+            var userPic = $cookieStore.get('CurrentUser');
             return $http.get(baseURL + getUserProfilePic, { params: { 'fileEntryId': userPic.data.portraitId } })
             .then(function success(resp) {
-                $cookies.put('CurrentUserPic', resp);
+                $cookieStore.put('CurrentUserPic', resp);
                 return resp;
             });
         }
