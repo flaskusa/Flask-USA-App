@@ -17,12 +17,6 @@
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
             return $http.get(baseURL + getUserByEmailId, { params: { 'companyId': REST_API.companyId, 'emailAddress': scope.Email } })
                 .then(function success(response) {
-                    $cookieStore.put('CurrentUser', response);
-                    var usercookie = $cookieStore.get('CurrentUser');
-                    console.log(usercookie);
-                    $rootScope.userName = response.data.firstName + response.data.lastName;
-                    $rootScope.userEmailId = response.data.emailAddress;
-                    $rootScope.show_login = true;
                     return response;
                 }, function failure(response) {
                     console.log("failed");
