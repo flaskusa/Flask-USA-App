@@ -4,7 +4,7 @@
         .module('flaskApp')
         .service('TailgateService', TailgateService);
 
-    TailgateService.$inject = ['$http','REST_API'];
+    TailgateService.$inject = ['$http', 'REST_API'];
 
     function TailgateService($http, REST_API) {
         var baseURL = REST_API.url;
@@ -23,10 +23,10 @@
         }
 
         this.getMyTailgates = getMyTailgates
-
-        function getMyTailgates() {
+        function getMyTailgates(uId) {
+           
             return $http.get(baseURL + myTailgatesURL, {
-                params: { 'userId': '20198' }
+                params: { 'userId': uId }
                 }
             )
             .then(function success(response) {
