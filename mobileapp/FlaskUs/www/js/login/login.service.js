@@ -5,7 +5,7 @@
         .module('flaskApp')
         .service('LoginService', LoginService);
 
-    LoginService.$inject = ['$http', 'REST_API', '$state', '$cookies', '$rootScope'];
+    LoginService.$inject = ['$http', 'REST_API', '$state', '$cookieStore', '$rootScope'];
 
     function LoginService($http, REST_API, $state, $cookieStore, $rootScope) {
         var baseURL = REST_API.url;
