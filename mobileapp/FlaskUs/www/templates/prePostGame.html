@@ -15,7 +15,13 @@
             <div>
                 <span>
                     <img src="img/Pre.png" class="eventSidePanel" style="" />
-                    <ion-slide-box show-pager='false'>
+                    <div class="left">
+                        <button class="button button-icon icon ion-chevron-left" ng-click="slidePrevious1('slide1')"></button>
+                    </div>
+                    <div class="right">
+                        <button class="button button-icon icon ion-chevron-right" ng-click="slideNext1('slide1')"></button>
+                    </div>
+                    <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
                         <ion-slide ng-repeat="pre in Pre_Game" style="width:100%;">
                             <a href="#/app/eventInfoTypesTabs"><img ng-src="img/resources/{{getIncludeFile(pre)}}" style="width: 100%;display:block;height: 171px;" /></a>
                         </ion-slide>
@@ -25,7 +31,13 @@
             <div>
                 <span>
                     <img src="img/at.png" class="eventSidePanel" style="" />
-                    <ion-slide-box show-pager='false'>
+                    <div class="left">
+                        <button class="button button-icon icon ion-chevron-left" ng-click="slidePrevious1('slide2')"></button>
+                    </div>
+                    <div class="right">
+                        <button class="button button-icon icon ion-chevron-right" ng-click="slideNext1('slide2')"></button>
+                    </div>
+                    <ion-slide-box delegate-handle="slide2" show-pager='false' does-continue="true">
                         <ion-slide ng-repeat="post in Post_Game" style="width:100%;">
                             <a href="#/app/eventInfoTypesTabs"><img ng-src="img/resources/{{getIncludeFile(post)}}" style="width: 100%;display:block;height: 171px;" /></a>
                         </ion-slide>
@@ -35,7 +47,13 @@
             <div>
                 <span>
                     <img src="img/Post.png" class="eventSidePanel" style="" />
-                    <ion-slide-box show-pager='false'>
+                    <div class="left">
+                        <button class="button button-icon icon ion-chevron-left" ng-click="slidePrevious1('slide3')"></button>
+                    </div>
+                    <div class="right">
+                        <button class="button button-icon icon ion-chevron-right" ng-click="slideNext1('slide3')"></button>
+                    </div>
+                    <ion-slide-box delegate-handle="slide3" show-pager='false' does-continue="true">
                         <ion-slide ng-repeat="during in During_Game" style="width:100%;">
                             <a href="#/app/eventInfoTypesTabs"><img ng-src="img/resources/{{getIncludeFile(during)}}" style="width: 100%;display:block;height: 171px;" /></a>
                         </ion-slide>
