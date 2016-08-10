@@ -1,6 +1,6 @@
 angular.module('flaskApp.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cookieStore, LoginService, $rootScope) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cookies, LoginService, $rootScope) {
 
     //controller for splash screen
     $scope.$on('$ionicView.afterEnter', function () {
@@ -10,11 +10,7 @@ angular.module('flaskApp.controllers', [])
     })
 
     $scope.doLogout = function () {
-        $rootScope.userName = '';
-        $rootScope.userEmailId = '';
-        $rootScope.show_login = false;
-        $cookieStore.remove('CurrentUser');
-
+        window.location.reload();
     }
 
 })
