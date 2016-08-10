@@ -46,12 +46,17 @@
                         }
                     }                    
                 }
-                console.log($scope.Pre_Game);
-                console.log($scope.Post_Game);
-                console.log($scope.During_Game);
                 $ionicSlideBoxDelegate.update();
                 $ionicScrollDelegate.resize()
             });
+
+            $scope.slidePrevious1 = function (slide) {
+                $ionicSlideBoxDelegate.$getByHandle(slide).previous();
+            }
+
+            $scope.slideNext1 = function (slide) {
+                $ionicSlideBoxDelegate.$getByHandle(slide).next();
+            }
 
             $scope.getIncludeFile = function (imgName) {
                 switch (imgName) {
