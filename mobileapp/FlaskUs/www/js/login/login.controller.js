@@ -13,13 +13,6 @@
         $scope.password = '';
         var showme = true;
         $scope.doLogin = function (user) {
-            if (user.Email == '' || user.password == '') {
-                showme = false;
-            } else {
-                LoginSet(user);
-            }
-        }
-       function LoginSet (user) {
             LoginService.authenticateUser(user).then(function (respData) {
                 console.log(respData);
                 // $scope.user = respData.data;
