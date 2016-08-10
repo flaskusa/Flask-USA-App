@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookieStore'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookieStore) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
@@ -24,8 +24,8 @@
                 else if (respData.data.emailAddress == "") {
                 }
                 else {
-                    $cookies.put('CurrentUser', respData);
-                    var usercookie = $cookies.get('CurrentUser');
+                    $cookieStore.put('CurrentUser', respData);
+                    var usercookie = $cookieStore.get('CurrentUser');
                     console.log(usercookie);
                     $rootScope.userName = respData.data.firstName + respData.data.lastName;
                     $rootScope.userEmailId = respData.data.emailAddress;
