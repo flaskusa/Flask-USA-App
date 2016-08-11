@@ -1,8 +1,9 @@
 ﻿<ion-view view-title="MY EVENTS">
     <search-bar ng-model="search" class="button button-icon button-clear ion-search"></search-bar>
     <ion-content>
-        <a class="item item-full item-icon-left icon ion-plus-circled" href="#/app/addMyEvent">
-            ADD EVENT
+        <a class="item item-full item-icon-left " href="#/app/addMyEvent">
+            <div style="float:left;"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" class="FlaskionIcons"></div>
+            <p class="addText">ADD EVENT</p>
         </a>
         <div class="list">
             <a class="item item-thumbnail-left item-icon-right eventList" href="#" ng-repeat="data in myEvent">

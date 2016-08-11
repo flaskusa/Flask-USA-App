@@ -1,6 +1,9 @@
 ﻿<ion-view view-title="SUPPLIES">
   <ion-content>
-	<a class="item item-full item-icon-left icon ion-plus-circled" ng-click="modal.show()"> ADD NEW LIST</a>
+      <a class="item item-full item-icon-left " ng-click="modal.show()">
+          <div style="float:left;"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" class="FlaskionIcons"></div>
+          <p class="addText">CREATE NEW TAILGATE</p>
+      </a>
     <div class="list">
 	  <a class="item item-icon-right" href="#/app/suppliesList/{{data.listName}}" ng-repeat="data in dataModel.data">
 	    {{ data.listName }}

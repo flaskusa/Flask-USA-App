@@ -1,7 +1,8 @@
 ﻿<ion-view cache-view="false" back-button="true" view-title={{currListName}}>
     <ion-content>
-        <a class="item item-full item-icon-left icon ion-plus-circled" ng-click="modal.show()">
-            ADD NEW ITEM
+        <a class="item item-full item-icon-left " href="#/app/addMyEvent">
+            <div style="float:left;"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" class="FlaskionIcons"></div>
+            <p class="addText">ADD NEW ITEM</p>
         </a>
         <div class="list flask_text">
             <ion-checkbox class="item item-icon-left item-checkbox-right" ng-repeat="data in dataModel.data2" ng-model="data.checked" ng-click="getListcount()">
