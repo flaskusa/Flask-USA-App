@@ -27,15 +27,15 @@
   > div {
     padding: 1rem;
     &:nth-child(1) {
-      background-image:url("../img/events.jpg");
+      background-image:url("../img/FLASK IMAGES/MY_EVENTS.jpg");
       background-size:100%;
     }
     &:nth-child(2) {
-      background-image:url("../img/tailgate.jpg");
+      background-image:url("../img/FLASK IMAGES/MY_TAILGATE.jpg");
       background-size:100%;
     }
     &:nth-child(3) {
-      background-image:url("../img/friends.jpg");
+      background-image:url("../img/FLASK IMAGES/MY_FRIENDS.jpg");
       background-size:100%;
     }
     h1, h2 {
@@ -610,4 +610,7 @@ div.searchrow {
   right: 0;
 }
 
-/**/
+.button.button-positive.button-clear{    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: Orange;}
