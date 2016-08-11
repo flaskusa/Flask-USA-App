@@ -15,11 +15,14 @@ angular.module('flaskApp.controllers', [])
 
 })
 
-.controller('my_eventsCtrl', function ($scope) {
-})
+
 
 .controller('my_tailgateCtrl', function ($scope) {
 })
+
+.controller('account_settingsCtrl', function ($scope) {
+})
+
 
 .controller('my_friendsCtrl', function ($scope) {
 })

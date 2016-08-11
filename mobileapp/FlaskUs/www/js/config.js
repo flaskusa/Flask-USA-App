@@ -108,7 +108,8 @@
             url: '/my_events',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_events.html'
+                    templateUrl: 'templates/my_events.html',
+                    controller: 'my_eventsCtrl'
                 }
             }
         })
@@ -130,7 +131,6 @@
             }
         })
 
-
         .state('app.user_registration', {
             url: '/user_registration',
             views: {
@@ -149,6 +149,35 @@
                 }
             }
         })
+
+        .state('app.account_settings', {
+            url: '/account_settings',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/account_settings.html'
+                }
+            }
+        })
+
+       .state('app.addMyTailgate', {
+            url: '/addMyTailgate',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/addMyTailgate.html',
+                    controller: 'addMyTailgateCtrl'
+                }
+            }
+       })
+
+    .state('app.addMyEvent', {
+        url: '/addMyEvent',
+        views: {
+            'menuContent': {
+                templateUrl: 'templates/addMyEvent.html',
+                controller: 'addMyEventCtrl'
+            }
+        }
+    })
 
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/events');
