@@ -614,3 +614,20 @@ div.searchrow {
     background: none;
     box-shadow: none;
     color: Orange;}
+
+/*Css for all flask icons and add text feilds and error text*/
+.ErrorColor{
+    color: red;
+    text-align: center;
+}
+.FlaskionIcons{
+    width: 21px;
+    height: 24px;
+}
+p.addText{
+    padding-left: 10px;
+    color: #f89734;
+    font-weight: 700;
+    font-size: larger;
+}
+/*End of Css for all flask icons and add text feilds and error text*/
