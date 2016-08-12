@@ -1,4 +1,4 @@
-﻿<ion-view view-title="SUPPLIES">
+﻿<ion-view cache-view="false" view-title="SUPPLIES">
   <ion-content>
       <a class="item item-full item-icon-left " ng-click="modal.show()">
           <div style="float:left;"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" class="FlaskionIcons"></div>
@@ -8,7 +8,7 @@
 	  <a class="item item-icon-right" href="#/app/suppliesList/{{data.listName}}" ng-repeat="data in dataModel.data">
 	    {{ data.listName }}
 	    <span class="badge badge-assertive">{{counter}} / {{List2count}}</span>
-	    <i class="icon ion-chevron-right"></i>
+        <span class="badge span_icon"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg" style="width:21px;height:20px;padding-left:10%;"></span>
 	  </a>
 	</div>
 	<script id="templates/modal.html" type="text/ng-template">

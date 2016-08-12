@@ -1,4 +1,4 @@
-<ion-view view-title="Login" align-title="left" hide-nav-bar="true">
+<ion-view cache-view="false" view-title="Login" align-title="left" hide-nav-bar="true">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button>
         </ion-nav-back-button>
@@ -10,6 +10,11 @@
         <div class="loginpane form_div">
             <div class="loginpane_header">
                 <img title="logo_2" alt="logo_2" class="cq-dd-image" style="zoom:0.3">
+            </div>
+            <div class="card" ng-show="Error">
+                <div class="item item-text-wrap ErrorColor">
+                    Authentication failed ! Please Check Username and password
+                </div>
             </div>
             <form name="login_form" class="loginpane form_div" novalidate style="height: 3000px;" ng-submit="login_form.$valid && doLogin(user)">
                 <div class="loginpane_body">

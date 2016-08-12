@@ -1,17 +1,36 @@
-﻿<ion-view view-title="MY EVENTS">
-    <search-bar ng-model="search" class="button button-icon button-clear ion-search"></search-bar>
-    <ion-content>
+﻿<ion-view cache-view="false" view-title="MY EVENTS">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
+    </ion-nav-buttons>    
+    <div class="bar bar-subheader BgCol" ng-show="searchBox.showBox">
+        <div class="row searchrow">
+            <div class="col col-100 col-center searchrow">
+                <input type="text" placeholder="Search event." class="searchboxArea" ng-model="eventList.searchString" />
+            </div>
+        </div>
+    </div>
+    <ion-content ng-click="searchBox.showBox = false">
         <a class="item item-full item-icon-left " href="#/app/addMyEvent">
             <div style="float:left;"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" class="FlaskionIcons"></div>
             <p class="addText">ADD EVENT</p>
         </a>
+        <div class="card" ng-show="myEventError">
+            <div class="item item-text-wrap ">
+                There are no events 
+            </div>
+        </div>
+        <div class="card" ng-show="myNoEventError">
+            <div class="item item-text-wrap ">
+                No events added yet.
+            </div>
+        </div>
         <div class="list">
-            <a class="item item-thumbnail-left item-icon-right eventList" href="#" ng-repeat="data in myEvent">
-                <img src="img/events.jpg" class="listImages">
+            <a class="item item-thumbnail-left item-icon-right eventList" href="#" ng-repeat="data in myEvent | filter: eventList.searchString">
+                <img src="img/FLASK IMAGES/MY_EVENTS.jpg" class="listImages">
                 <h2 class="eventNameCol">{{ data.eventName }}</h2>
                 <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
                 <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
-                <i class="icon ion-chevron-right"></i>
+                <span class="badge span_icon"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg" style="width:21px;height:20px;padding-left:10%;"></span>
             </a>
         </div>
     </ion-content>

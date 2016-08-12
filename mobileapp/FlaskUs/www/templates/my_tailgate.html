@@ -1,4 +1,4 @@
-﻿<ion-view view-title="MY TAILGATE">
+﻿<ion-view cache-view="false" view-title="MY TAILGATE">
     <ion-nav-bar class="bar-dark" align-title="center" >
         <ion-nav-buttons side="left">
             <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
@@ -15,7 +15,7 @@
                 <h2 class="eventNameCol">{{ data.tailgateName }}</h2>
                 <p class="dateCol">{{data.tailgateDate | date:'EEEE,MMMM dd,yyyy'}}</p>
                 <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
-                <i class="icon ion-chevron-right"></i>
+                <span class="badge span_icon"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg" style="width:21px;height:20px;padding-left:10%;"></span>
             </a>
         </div>
     </ion-content>

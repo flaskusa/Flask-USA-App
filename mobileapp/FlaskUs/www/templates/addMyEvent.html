@@ -1,4 +1,4 @@
-﻿<ion-view>
+﻿<ion-view cache-view="false">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-buttons side="left">
             <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
@@ -15,7 +15,7 @@
             <div class="col col-33 col-center searchrow">
                 <input type="text" placeholder="Enter ZipCode." class="searchboxArea" id="zipCode" name="zipCode" ng-model="eventList.zipcode" ng-blur="getAllfilteredEvents(eventList.zipcode)" />
             </div>
-            <div class="col col-33 col-center searchrow">
+            <div class="col col-100 col-center searchrow">
                 <input type="text" placeholder="Search Text." class="searchboxArea" ng-model="eventList.searchString" />
             </div>
             <div class="col col-33 col-center searchrow">
@@ -29,15 +29,20 @@
             </div>
         </div>
     </div>
-    <ion-content class="has-footer">
-        <div ng-click="searchBox.showBox = false">
+    <ion-content class="has-footer" ng-click="searchBox.showBox = false">
+        <div>
+            <div class="card" ng-show="AddedSuccess">
+                <div class="item item-text-wrap successColor">
+                    Added Successfully !!
+                </div>
+            </div>
             <div class="list">
-                <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/prePostGame/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent | filter: eventList.searchString">
+                <a class="item item-thumbnail-left eventList" href="" ng-repeat="data in myEvent | filter: eventList.searchString">
                     <img ng-src="http://146.148.83.30/c/document_library/get_file?uuid={{data.eventImageUUID}}&groupId=20181" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
                     <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}} | {{data.userEvent}}</p>
-                    <i class="item item-full item-icon-left icon ion-plus-circled"></i>
+                    <span class="badge span_icon" ng-click="addmyEvent({{data.eventId}})"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" style="width:21px;height:20px;padding-left:10%;"></span>
                 </a>
             </div>
         </div>
