@@ -17,9 +17,19 @@
         function getAllevents() {
             myEventService.getMyEvents().then(function (respData) {
                 $scope.myEvent = respData.data.Events;
-                console.log(respData.data.Events);
+                console.log(respData.data);
+                if (respData.data.message == "Authenticated access required" )
+                {
+                    $scope.myEventError = true;
+                } else
+                    if (respData.data.length.Events == undefined) {
+                    $scope.myNoEventError = true;
+                }
+                console.log(respData.data);
             });
         }
+
+        $scope.searchBox = { showBox: false };
     }
 })();
 

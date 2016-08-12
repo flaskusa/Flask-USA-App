@@ -30,7 +30,9 @@
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, searchstr, lat, lng).then(function (respData) {
                 $scope.allEvent = respData.data.Events;
                 if (respData.data.Events.length == 0) {
-                    showAlert();
+                    $scope.Event_Error = true;
+                } else {
+                    $scope.Event_Error = false;
                 }
             });
         }, function (error) {
@@ -43,27 +45,21 @@
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString,$scope.latitude,$scope.longitude).then(function (respData) {
                 $scope.allEvent = respData.data.Events;
                 if (respData.data.Events.length == 0) {
-                    showAlert();
+                    $scope.Event_Error = true;
+                } else {
+                    $scope.Event_Error = false;
                 }
             });
         }
         
         $scope.getAllfilteredEvents = function (eventList) {
-            $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + eventList)
-                .then(function (locData) {
-                    $scope.latitude = locData.data.results[0].geometry.location.lat;
-                    $scope.longitude = locData.data.results[0].geometry.location.lng;
-                    var searchString = '';
-                    console.log($scope.latitude, $scope.longitude);
-                    EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, searchString, $scope.latitude, $scope.longitude).then(function (respData) {
-                        $scope.allEvent = respData.data.Events;
-                        if (respData.data.Events.length == 0) {
-                            showAlert();
-                        }
-                    });
-                  }, function (err) {                      
-                  });             
-        }
+            if (eventList == undefined || eventList == "") {
+                getLatlongfromZip(48226);
+            } else {
+                getLatlongfromZip(eventList);
+            }
+                  
+        }      
 
         $scope.onchange = function (id) {
             var startDate = new Date();
@@ -73,34 +69,32 @@
             EventsService.getAllEvents($scope.eventTypeIds, $scope.StartDate, $scope.EndDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 $scope.allEvent = respData.data.Events;
                 if (respData.data.Events.length == 0) {
-                    showAlert();
+                    $scope.Event_Error = true;
+                } else {
+                    $scope.Event_Error = false;
                 }
             });
         }
         $scope.searchBox = { showBox: false };
 
-        function showAlert() {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Alert',
-                template: 'There are No events'
-            });
-
-            alertPopup.then(function (res) {
-                // Custom functionality....
-              // getAllEvents();
-            });
-        };
-        function showGpsAlert() {
-            var alertPopup = $ionicPopup.alert({
-                title: 'Alert',
-                template: 'Please Enable Gps or enter your Zip Code in Search Bar'
-            });
-
-            alertPopup.then(function (res) {
-                // Custom functionality....
-               // getAllEvents();
-            });
-        };
+        function getLatlongfromZip(eventList) {
+            $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + eventList)
+                .then(function (locData) {
+                    $scope.latitude = locData.data.results[0].geometry.location.lat;
+                    $scope.longitude = locData.data.results[0].geometry.location.lng;
+                    var searchString = '';
+                    console.log($scope.latitude, $scope.longitude);
+                    EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, searchString, $scope.latitude, $scope.longitude).then(function (respData) {
+                        $scope.allEvent = respData.data.Events;
+                        if (respData.data.Events.length == 0) {
+                            $scope.Event_Error = true;
+                        } else {
+                            $scope.Event_Error = false;
+                        }
+                    });
+                }, function (err) {
+                });
+        }
     }
 })();
 

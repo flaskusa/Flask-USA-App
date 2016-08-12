@@ -19,7 +19,8 @@
                 console.log(respData);
                 // $scope.user = respData.data;
                 if (respData.data.message == "Authenticated access required") {
-                    showAlert();
+                    $scope.Error = true;
+                    $timeout(function () { $scope.Error = false; }, 1000);
                 }
                 else if (respData.data.emailAddress == "") {
                 }
@@ -35,17 +36,6 @@
                 }
             });
        }
-
-       function showAlert() {
-           var alertPopup = $ionicPopup.alert({
-               title: 'Alert',
-               template: 'Authentication failed ! Please Check Username and password'
-           });
-
-           alertPopup.then(function (res) {
-                document.login_form.reset();     
-           });
-       };
     };
 })();
 
