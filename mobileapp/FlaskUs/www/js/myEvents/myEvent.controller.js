@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('my_eventsCtrl', my_eventsCtrl);
 
-    my_eventsCtrl.$inject = ['$scope', 'myEventService', '$state', '$cookies'];
+    my_eventsCtrl.$inject = ['$scope', 'myEventService', '$state', '$cookies', '$timeout'];
 
     /* @ngInject */
-    function my_eventsCtrl($scope, myEventService, $state, $cookies) {
+    function my_eventsCtrl($scope, myEventService, $state, $cookies, $timeout) {
         var self = this;
         $scope.myEvent = [];
         var userResponse = $cookies.get('CurrentUser');
@@ -22,13 +22,19 @@
                 {
                     $scope.myEventError = true;
                 } else
-                    if (respData.data.length.Events == undefined) {
+                    if (respData.data.Events == undefined) {
                     $scope.myNoEventError = true;
                 }
                 console.log(respData.data);
             });
         }
 
+        $scope.removeEvent = function(eventId ,index) {
+            myEventService.removeUserEvent(eventId).then(function (respData) {
+                $scope.myEvent.splice(index, 1);
+            });
+        }
+       
         $scope.searchBox = { showBox: false };
     }
 })();

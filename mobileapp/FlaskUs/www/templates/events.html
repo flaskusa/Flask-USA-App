@@ -45,6 +45,7 @@
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
                     <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
+                    <span class="" ng-show="data.userEvent == 1" style="top: 0px; right: 22px;"><img src="img/FLASK ICONS/FLASK_ICON_STAR.svg" style="width:15px;height:15px;padding-left:5%;"></span>
                     <span class="badge span_icon"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg" style="width:21px;height:20px;padding-left:10%;"></span>
                 </a>
             </div>

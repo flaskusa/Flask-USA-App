@@ -1,4 +1,4 @@
-﻿(function () {
+﻿  (function () {
     'use strict';
     angular.module('flaskApp')
         .controller('addMyEventCtrl', addMyEventCtrl);
@@ -17,9 +17,10 @@
             });
         }
         
-        $scope.addmyEvent = function(eventId) {
+        $scope.addmyEvent = function (eventId, index) {
             myEventService.addUserEvent(eventId).then(function (respData) {
                 //$scope.myEvent = respData.data.Events;
+                $scope.myEvent.splice(index, 1);
                 console.log(respData);
                 $scope.AddedSuccess = true;
                 $timeout(function () { $scope.AddedSuccess = false; }, 3000);

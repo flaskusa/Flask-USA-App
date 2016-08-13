@@ -37,12 +37,12 @@
                 </div>
             </div>
             <div class="list">
-                <a class="item item-thumbnail-left eventList" href="" ng-repeat="data in myEvent | filter: eventList.searchString">
+                <a class="item item-thumbnail-left eventList item-remove-animate" href="" ng-repeat="data in myEvent | filter: eventList.searchString | filter: {userEvent : 0}">
                     <img ng-src="http://146.148.83.30/c/document_library/get_file?uuid={{data.eventImageUUID}}&groupId=20181" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
-                    <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}} | {{data.userEvent}}</p>
-                    <span class="badge span_icon" ng-click="addmyEvent({{data.eventId}})"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" style="width:21px;height:20px;padding-left:10%;"></span>
+                    <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
+                    <span class="badge span_icon" ng-click="addmyEvent(data.eventId,$index)"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" style="width:21px;height:20px;padding-left:10%;"></span>
                 </a>
             </div>
         </div>

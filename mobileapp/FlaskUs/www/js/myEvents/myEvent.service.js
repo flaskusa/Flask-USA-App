@@ -11,6 +11,7 @@
         var allEventURL = "flask-rest-events-portlet.event/get-simple-filtered-events";
         var myEventsURL = "flask-rest-events-portlet.event/get-user-selected-events";
         var addUserEventURL = "flask-rest-events-portlet.event/add-user-event";
+        var removeUserEventURL = "flask-rest-events-portlet.event/remove-user-event";
 
         this.getAllEvents = getAllEvents
 
@@ -32,9 +33,7 @@
                 });
         }
 
-        this.getMyEvents = getMyEvents
-        function getMyEvents() {
-           
+        this.getMyEvents = function() {           
             return $http.get(baseURL + myEventsURL)
             .then(function success(response) {
                 console.log(response);
@@ -44,10 +43,19 @@
             });
         }
 
-        this.addUserEvent = addUserEvent
-        function addUserEvent(eId) {
+        this.addUserEvent = function(eId) {
             return $http.get(baseURL + addUserEventURL, {
                 params:{eventId:eId}
+            })
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+            });
+        }
+
+        this.removeUserEvent = function (removeEventid) {
+            return $http.get(baseURL + removeUserEventURL, {
+                params: { eventId: removeEventid }
             })
             .then(function success(response) {
                 return response;
