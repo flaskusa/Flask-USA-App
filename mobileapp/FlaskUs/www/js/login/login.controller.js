@@ -20,7 +20,7 @@
                 // $scope.user = respData.data;
                 if (respData.data.message == "Authenticated access required") {
                     $scope.Error = true;
-                    $timeout(function () { $scope.Error = false; }, 1000);
+                    $timeout(function () { $scope.Error = false; }, 3000);
                 }
                 else if (respData.data.emailAddress == "") {
                 }
