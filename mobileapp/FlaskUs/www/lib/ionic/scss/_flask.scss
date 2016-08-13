@@ -89,9 +89,6 @@ i.icon.ion-star{padding-left:2%;}
 }
 /*end css for splash overlay*/
 
-span.badge.badge-assertive {
-    margin-right: 20px;
-}
 /* Empty. Add your own CSS if you like */
 .badge.badge-assertive {
     background-color: #0f0f0f;
@@ -316,6 +313,7 @@ span.error_msg{color:red;}
     max-height: 57px !important;
     border-color: black;
 }
+
 .eventHeading{
     text-align:center; 
     padding-top: 20px; 
@@ -541,7 +539,6 @@ a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:blac
 .login_error{color:red;font-size:18px;font-weight:bold;background:rgba(225,225,225,0.7);}
 /*login popup end*/
 
-
 /*css for search box*/
 input.searchboxArea {
     width: 100%;
@@ -641,11 +638,21 @@ p.addText{
     padding: 4px;
 }
 span.span_icon {
-    margin-right: -26px;
+    margin-right: -26px ;
 }
 .successColor{
         color: green;
 }
+
+/*My event list*/
+a.item-content {
+    padding: 0px !important;
+    text-align: center;
+}
+ion-item.myList.item.item-complex.item-right-editable {
+    border-color: black;
+}
+/*end my evnet list*/
 
 /*user-navigation-menu*/
 a.tab-item.bottom_tabs{
