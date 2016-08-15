@@ -1,0 +1,74 @@
+﻿<ion-view cache-view="false" view-title="USER REGISTRATION">
+    <ion-content>
+            <form name="register_user_form" class="loginpane form_div" novalidate style="height: 3000px;">
+                <div class="loginpane_body">
+                    <div class="list">
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">First Name</span>
+                            <input type="text" placeholder="First Name" name="firstName" class="form-control" ng-model="user.firstName" required>
+                            <div ng-show="register_user_form.$submitted || register_user_form.firstName.$touched">
+                                <span ng-show="register_user_form.firstName.$error.required" class="error_msg">Tell us your name.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Last Name</span>
+                            <input type="text" placeholder="Last Name" name="lastName" class="form-control" ng-model="user.lastName" required>
+                            <div ng-show="register_user_form.$submitted || register_user_form.lastName.$touched">
+                                <span ng-show="register_user_form.lastName.$error.required" class="error_msg">Tell us your last name.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Email</span>
+                            <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required ng-blur="checkUserByEmailId(user);"><br />
+                            <div ng-show="register_user_form.$submitted || register_user_form.Email.$touched">
+                                <span ng-show="register_user_form.Email.$error.required" class="error_msg">Tell us your email.</span>
+                                <span ng-show="register_user_form.Email.$error.email" class="error_msg">This is not a valid email.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Password</span>
+                            <input type="password" placeholder="Password" class="form-control" ng-model="user.password1" name="password1" required="">
+                            <div ng-show="register_user_form.$submitted || register_user_form.password1.$touched">
+                                <span ng-show="register_user_form.password1.$error.required" class="error_msg">Please enter password.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Confirm Password</span>
+                            <input type="password" placeholder="Confirm Password" class="form-control" ng-model="user.password2" name="password2" required="">
+                            <div ng-show="register_user_form.$submitted || register_user_form.password2.$touched">
+                                <span ng-show="register_user_form.password2.$error.required" class="error_msg">Please enter confirm password.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Date of Birth</span>
+                            <input type="date" placeholder="Date of Birth" name="DOB" ng-model="user.DOB">
+                        </div>
+                        <div class="item item-input">
+                            <span class="input-label">Gender</span>
+                            <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"male"' name="rdoResult">Male</ion-radio></pre>
+                            <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"female"' name="rdoResult">Female</ion-radio></pre>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Area Code</span>
+                            <input type="text" placeholder="Area Code" class="form-control" ng-model="user.areaCode" name="areaCode" required="">
+                            <div ng-show="register_user_form.$submitted || register_user_form.areaCode.$touched">
+                                <span ng-show="register_user_form.areaCode.$error.required" class="error_msg">Please enter areacode.</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Mobile</span>
+                            <input type="text" placeholder="Mobile" name="mobileNumber" ng-model="user.mobileNumber">
+                        </div>
+                    </div>
+                    <div class="padding" align="center">
+                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="saveUser(user)">
+                            Save
+                        </button>
+                        <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </form>
+</ion-content>
+</ion-view>

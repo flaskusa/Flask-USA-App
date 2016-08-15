@@ -1,0 +1,5 @@
+{
+    "EventKit.framework": 2,
+    "EventKitUI.framework": 2,
+    "CoreLocation.framework": 2
+}
