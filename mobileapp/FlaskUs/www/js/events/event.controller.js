@@ -89,6 +89,7 @@
                     console.log($scope.latitude, $scope.longitude);
                     EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                         $scope.allEvent = respData.data.Events;
+                        $scope.searchBox = { showBox: false };
                         if (respData.data.Events.length == 0) {
                             $scope.Event_Error = true;
                         } else {
