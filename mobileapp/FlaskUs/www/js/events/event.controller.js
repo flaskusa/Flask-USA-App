@@ -26,6 +26,7 @@
             var lat = position.coords.latitude;
             var lng = position.coords.longitude;
             console.log(lat, lng);
+            ConvertToZip(position)
             var searchstr = '';
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, searchstr, lat, lng).then(function (respData) {
                 $scope.allEvent = respData.data.Events;
@@ -57,16 +58,17 @@
                 getLatlongfromZip(48226);
             } else {
                 getLatlongfromZip(eventList);
-            }
-                  
+            }                  
         }      
 
         $scope.onchange = function (id) {
             var startDate = new Date();
             $scope.StartDate = startDate.setDate(startDate.getDate());
             var endDate = new Date();
-            $scope.EndDate = endDate.setDate(endDate.getDate() - parseInt(id));
-            EventsService.getAllEvents($scope.eventTypeIds, $scope.StartDate, $scope.EndDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
+            $scope.EndDate = endDate.setDate(endDate.getDate() + parseInt(id));
+            console.log($scope.StartDate, $scope.EndDate);
+            var searchstr = '';
+            EventsService.getAllEvents($scope.eventTypeIds, $scope.StartDate, $scope.EndDate, searchstr, $scope.latitude, $scope.longitude).then(function (respData) {
                 $scope.allEvent = respData.data.Events;
                 if (respData.data.Events.length == 0) {
                     $scope.Event_Error = true;
@@ -80,6 +82,7 @@
         function getLatlongfromZip(eventList) {
             $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + eventList)
                 .then(function (locData) {
+                    console.log(locData);
                     $scope.latitude = locData.data.results[0].geometry.location.lat;
                     $scope.longitude = locData.data.results[0].geometry.location.lng;
                     var searchString = '';
@@ -94,6 +97,22 @@
                     });
                 }, function (err) {
                 });
+        }
+
+        function ConvertToZip(pos) {
+            $http.get('http://maps.googleapis.com/maps/api/geocode/json?latlng=' + pos.coords.latitude + ',' + pos.coords.longitude + '&sensor=true').then(function (res) {
+                if (res.data.results[0]) {
+                    for (var i = 0; i < res.data.results[0].address_components.length; i++) {
+                        var postalCode = res.data.results[0].address_components[i].types;
+                        if (postalCode == "postal_code") {
+                            var My_Zip = res.data.results[0].address_components[i].long_name;
+                        }
+                    }
+                }
+                $scope.eventList = {
+                    zipcode: My_Zip
+                };
+            });
         }
     }
 })();
