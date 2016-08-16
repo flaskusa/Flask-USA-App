@@ -61,7 +61,7 @@
             }                  
         }      
 
-        $scope.onchange = function (id) {
+        $scope.filterDate = function (id) {
             var startDate = new Date();
             $scope.StartDate = startDate.setDate(startDate.getDate());
             var endDate = new Date();
