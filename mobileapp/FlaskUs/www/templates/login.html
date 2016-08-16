@@ -19,18 +19,18 @@
             <form name="login_form" class="loginpane form_div" novalidate style="height: 3000px;" ng-submit="login_form.$valid && doLogin(user)">
                 <div class="loginpane_body">
                     <div class="list">
-                        <label class="item item-input item-stacked-label">
+                        <label class="item item-input item-floating-label">
                             <span class="input-label">Email</span>
-                            <input type="email"  class="form-control loginInputs" ng-model="user.Email" name="Email" required>  
+                            <input type="email" placeholder="Email" class="form-control loginInputs" ng-model="user.Email" name="Email" required>  
                             <div ng-show="login_form.$submitted || login_form.Email.$touched">
                                 <span ng-show="login_form.Email.$error.required" class="error_msg">Tell us your email.</span>
                                 <span ng-show="login_form.Email.$error.email" class="error_msg">This is not a valid email.</span>
                             </div>                     
                         </label>
                         
-                        <label class="item item-input item-stacked-label">
+                        <label class="item item-input item-floating-label">
                             <span class="input-label">Password</span>
-                            <input type="password"  class="form-control loginInputs" ng-model="user.password" name="password" required>    
+                            <input type="password" placeholder="Password" class="form-control loginInputs" ng-model="user.password" name="password" required>    
                             <div ng-show="login_form.$submitted || login_form.password.$touched">
                                 <span ng-show="login_form.password.$error.required" class="error_msg">Please enter password.</span>
                             </div>                       
