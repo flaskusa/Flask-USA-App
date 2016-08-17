@@ -10,17 +10,16 @@
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
-
+        var DEFAULT_ZIPCODE = 48226; /*Detroit Zip Code*/
         $scope.eventTypeIds = '';
         $scope.startDate = '';
         $scope.endDate = '';
         $scope.searchString = 'a';
         $scope.latitude = '';
         $scope.longitude = '';
-
         //getAllEvents();
 
-        var options = { timeout: 10000, enableHighAccuracy: true };
+        var options = { timeout: 10000, enableHighAccuracy: false };
 
         $cordovaGeolocation.getCurrentPosition(options).then(function (position) {
             var lat = position.coords.latitude;
@@ -37,9 +36,8 @@
                 }
             });
         }, function (error) {
-            console.log("Could not get location");
-            var DetroitZipCode = 48226;
-            $scope.getAllfilteredEvents(DetroitZipCode);
+            console.log("Could not get location");            
+            $scope.getAllfilteredEvents(DEFAULT_ZIPCODE);
         });
 
         function getAllEvents() {
@@ -53,22 +51,20 @@
             });
         }
         
-        $scope.getAllfilteredEvents = function (eventList) {
-            if (eventList == undefined || eventList == "") {
-                getLatlongfromZip(48226);
+        $scope.getAllfilteredEvents = function (zipcode) {
+            if (zipcode == undefined || zipcode == "") {
+                getLatlongfromZip(DEFAULT_ZIPCODE);
             } else {
-                getLatlongfromZip(eventList);
+                getLatlongfromZip(zipcode);
             }                  
         }      
 
-        $scope.filterDate = function (id) {
+        $scope.filterDate = function (days) {
             var startDate = new Date();
-            $scope.StartDate = startDate.setDate(startDate.getDate());
+            $scope.startDate = startDate.setDate(startDate.getDate());
             var endDate = new Date();
-            $scope.EndDate = endDate.setDate(endDate.getDate() + parseInt(id));
-            console.log($scope.StartDate, $scope.EndDate);
-            var searchstr = '';
-            EventsService.getAllEvents($scope.eventTypeIds, $scope.StartDate, $scope.EndDate, searchstr, $scope.latitude, $scope.longitude).then(function (respData) {
+            $scope.endDate = endDate.setDate(endDate.getDate() + parseInt(days));
+            EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 $scope.allEvent = respData.data.Events;
                 if (respData.data.Events.length == 0) {
                     $scope.Event_Error = true;
@@ -79,8 +75,8 @@
         }
         $scope.searchBox = { showBox: false };
 
-        function getLatlongfromZip(eventList) {
-            $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + eventList)
+        function getLatlongfromZip(zipcode) {
+            $http.get('http://maps.googleapis.com/maps/api/geocode/json?address=' + zipcode)
                 .then(function (locData) {
                     console.log(locData);
                     $scope.latitude = locData.data.results[0].geometry.location.lat;
