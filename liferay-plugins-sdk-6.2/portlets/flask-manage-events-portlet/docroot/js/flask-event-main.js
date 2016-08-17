@@ -279,7 +279,7 @@ function saveEvent() {
 							IsNew = true;
 						}
 						if ($('#eventLogoImage').find('.dz-image').length>0) {
-							alert("here is the validation place");
+							//alert("here is the validation place");
 							fnSaveEventLogo(data.eventId,data.eventName,IsNew);
 						}
 						else {
