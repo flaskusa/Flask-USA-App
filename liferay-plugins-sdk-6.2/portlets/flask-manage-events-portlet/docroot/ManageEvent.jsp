@@ -117,15 +117,21 @@ function initialize(portletId, portlet) {
 						</div>
 				   </div>
 				  <div class="form-group">
-					    <label class="control-label" for="eventImage">Event Image:</label>
+					    <label class="control-label" for="eventImage">Event Logo:</label>
 						<div class="controls">
 							<div id="eventImage"></div>
+							<div id="eventLogoList">
+								<input type="text" id="txtSearchLogo"></input>
+								<div id="logoList"></div>
+								<div id="noMatchMessage" class="alert alert-info" style="display:none">Sorry, no logo's are matching your search criteria.</div>
+							</div>
+							<input type="button" id="clsLogo" class="clsLogo" value="Choose existing logo"></input>							
 						</div>
 				   </div>
 				  <input id="Ok" class="btn btn-info clsSave" type="button" value="Ok" />
 				  <input class="btn btn-primary clsCancel" type="button" value="Cancel">
-				  <input type="hidden" id="eventImageUUID" value="">
-				  <input type="hidden" id="eventImageGroupId" value="0">
+				  <input type="hidden" id="eventImageUUID" name="eventImageUUID" value="">
+				  <input type="hidden" id="eventImageGroupId" name="eventImageGroupId" value="0">
 				  <input type="hidden" name="repositoryId" value="<%= repositoryId %>>">
 				  <input id="eventId" type="hidden" value="0">
 				</form>

@@ -11,6 +11,7 @@ _eventModel.SERVICE_ENDPOINTS = {
 	GET_EVENT_TYPES 			: "/flask-rest-events-portlet.eventtype/get-event-types",
 	GET_ALL_VENUES	 			: "/flask-rest-events-portlet.venue/get-all-venues",
 	GET_FOLDER		 			: "/dlapp/get-folder",
+	GET_EVENT_LOGOS		 		:"/flask-rest-events-portlet.event/get-event-logos",
 	DELETE_FOLDER		 		: "/dlapp/delete-folder"
 };
 

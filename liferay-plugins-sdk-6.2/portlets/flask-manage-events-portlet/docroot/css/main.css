@@ -221,3 +221,92 @@ zoom: 1.8 !important;
 .jqx-widget-header {
     background: #373535 !important;
 }
+
+/*
+ * Event Logos style
+ *
+ * Special styles for displaying the icons and their classes in the docs.
+ */
+
+.bs-glyphicons {
+  margin: 0 -10px 20px;
+  overflow: hidden;
+}
+.bs-glyphicons-list {
+  padding-left: 0;
+  list-style: none;
+}
+.bs-glyphicons li {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 1.4;
+  text-align: center;
+  background-color: #f9f9f9;
+  border: 1px solid #fff;
+  cursor: pointer;
+}
+
+.bs-glyphicons .glyphicon {
+  margin-top: 5px;
+  margin-bottom: 10px;
+  font-size: 24px;
+}
+.bs-glyphicons .glyphicon-class {
+  display: block;
+  text-align: center;
+  word-wrap: break-word; /* Help out IE10+ with class names */
+}
+.bs-glyphicons li:hover,.bs-glyphicons li.selected {
+  color: #fff;
+  background-color: #563d7c;
+}
+
+@media (min-width: 768px) {
+  .bs-glyphicons {
+    margin-right: 0;
+    margin-left: 0;
+  }
+  .bs-glyphicons li {
+    width: 12.5%;
+    font-size: 12px;
+  }
+
+  .clsLogo {
+		margin: 0px;
+	}
+}
+
+.clsLogo {
+	margin: 5px;
+}
+
+#eventLogoList{
+	display:none;
+}
+
+.logoTitle{
+	white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+	padding-top: 5px;
+	display: block;
+}
+
+#logoList{
+	width:50%;
+	max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;	
+}
+
+@media (max-width: 768px) {
+	#logoList{
+		width:100%;
+		max-height: 300px;
+	    overflow-y: auto;
+	    overflow-x: hidden;		
+	}
+}

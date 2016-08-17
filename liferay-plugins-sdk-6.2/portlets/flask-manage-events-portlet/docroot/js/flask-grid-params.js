@@ -264,6 +264,7 @@ function fnRenderLogo(imageUUID, imageGroupId,container ,editable) {
 		    					$("#spinningSquaresG").hide();
 		    					$(this).remove();
 		    					iSelected = false;
+		    					$(".clsLogo").show();
 		    				}
 		    			});
 		    		}

@@ -46,6 +46,20 @@ function addClickHandlers() {
 				$("#mcontents").css("cursor","not-allowed");
 			}
 	});
+	
+	if(!edit){
+		$("#clsLogo").click(function(){
+			if($("#logoList").find(".bs-glyphicons").length==0)
+				renderEventLogos();
+			
+			 $(this).val() == "Choose existing logo" ? logo_upload() : logo_choose();
+			 $("#eventImage").toggle(630,"swing");
+			 $("#eventLogoList").toggle(630,"swing");
+		});
+	}
+	else{
+		$("#clsLogo").hide();
+	}
 	/* Click handler for save button*/
 
 	$(".clsSave").click(function() {
@@ -89,6 +103,23 @@ function addClickHandlers() {
 			if (parseInt($("#eventId").val())==0) {
 				_flaskLib.showWarningMessage('action-msg-warning', _eventModel.MESSAGES.ADD_EVENT_FIRST_ERR);
 			}
+		});
+		
+		
+		jQuery.expr[':'].case_insensitive_contains = function(a, i, m) {
+			return jQuery(a).text().toUpperCase().indexOf(m[3].toUpperCase()) >= 0;
+		};	
+		
+		$("#txtSearchLogo").keyup(function(){
+			$("#logoList ul li span:case_insensitive_contains("+$(this).val()+")").closest("li").show(250, function() {});
+			$("#logoList ul li span:not(:case_insensitive_contains("+$(this).val()+"))").closest("li").hide(500, function() {});
+			if($("#logoList ul li:visible").length==0){
+				$("#noMatchMessage").show(500);
+			}
+			else{
+				$("#noMatchMessage").hide(500);
+			}
+			
 		});
 }
 
@@ -200,6 +231,7 @@ function editEvent(rowData) {
 			$("#eventDetailsContainer").show();
 			$("#eventDetailsDataTable").show();
 			$("#infoTypeId").val($(this).attr("alt"));
+			$(".clsLogo").hide();
 		})
 		fnRenderLogo(rowData.eventImageUUID, rowData.eventImageGroupId, $("#eventImage"),true);
 		createDetailsTable({},_eventDetailModel.DATA_MODEL.EVENTDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_eventDetailModel.GRID_DATA_MODEL.EVENTDETAILS);
@@ -225,6 +257,7 @@ function saveEvent() {
 		                    formData.startTime= sTime;
 		                    formData.endTime= eTime;
 		                    formData.eventDate = eventDate;
+		                    //formData.eventImageUUID 
 							return formData;
 					});
 		var flaskRequest = new Request();
@@ -246,6 +279,7 @@ function saveEvent() {
 							IsNew = true;
 						}
 						if ($('#eventLogoImage').find('.dz-image').length>0) {
+							alert("here is the validation place");
 							fnSaveEventLogo(data.eventId,data.eventName,IsNew);
 						}
 						else {
@@ -283,19 +317,24 @@ function fnBuildEventUpload(imageContainer) {
 	$(objEventId).appendTo(objForm);
 	var objIsLogo = $('<input/>',{'name':'_isLogo','id':'_isLogo','type':'hidden','value':'Y'});
 	$(objIsLogo).appendTo(objForm);
-	var objEventName = $('<input/>',{'name':'_eventName','id':'_eventName','type':'hidden','value':$("#eventName").val()});
-	$(objEventName).appendTo(objForm);
 
 	dropZoneLogo = new Dropzone($(objForm).get(0),{
 		autoProcessQueue: false,
 		maxFiles: 1,
 		addRemoveLinks : true
 	});
+	
+	dropZoneLogo.on("addedfile", function(file) {
+		  file._captionBox = Dropzone.createElement("<input id='_eventLogoCaption' type='text' name='_eventLogoCaption' class='dropzone_caption' style='width:inherit' placeholder='Caption here..'/>");
+		  file.previewElement.appendChild(file._captionBox);
+	});	
+	
 }
 
 function fnSaveEventLogo(eventId,eventName,IsNew) {
 	$("#_eventId").val(eventId);
 	$("#_eventName").val(eventName);
+	//$("#_eventName").val(eventName);
 	dropZoneLogo.options.autoProcessQueue = true;
 	dropZoneLogo.processQueue();
 	dropZoneLogo.on("queuecomplete", function(file) {
@@ -359,4 +398,48 @@ function validate() {
 		               {input: '#endTime', message: 'End time always greater than start time!', action: 'keyup, focus', rule: 'required'}
 			   ]
 	});
+}
+
+function renderEventLogos(){
+	var flaskRequest = new Request();
+	params = {};
+	flaskRequest.sendGETRequest(_eventModel.SERVICE_ENDPOINTS.GET_EVENT_LOGOS, params, 
+	function(data){
+		generateLogoIcons(data);	
+	} , function(error){
+		console.log(error);
+	});
+}
+
+function generateLogoIcons(logos){
+	var logoListDiv = $("#logoList");
+	var tempHMTL = "";
+	tempHMTL = "<div class='bs-glyphicons'><ul class='bs-glyphicons-list'>";
+	$(logos).each(function(a,b){
+		tempHMTL = tempHMTL+"<li onclick='setSelectedLogo(this);' data-uuid='"+b.uuid+"'>";
+		var img = "<img src='/documents/"+b.groupId+"/"+b.folderId+"/"+b.title+"/"+b.uuid+"' data-title='"+b.title+"'>"
+		var span = "<span class='logoTitle'>"+b.title+"</span>"
+		tempHMTL = tempHMTL+img;
+		tempHMTL = tempHMTL+span;
+		tempHMTL = tempHMTL+"</li>";
+	})
+	tempHMTL = tempHMTL+"</ul></div>";
+	logoListDiv.html(tempHMTL);
+}
+
+function logo_choose() {
+    $('#clsLogo').val("Choose existing logo");
+    // do play
+}
+
+function logo_upload() {
+    $('#clsLogo').val("Upload new logo");
+    // do pause
+}
+
+function setSelectedLogo(obj){
+	$("#eventImageUUID").val($(obj).attr("data-uuid"));
+	$("#eventImageGroupId").val(Liferay.ThemeDisplay.getScopeGroupId());
+	$(".bs-glyphicons-list li").removeClass("selected");
+	$(obj).toggleClass("selected");
 }

@@ -40,11 +40,11 @@ public class ManageEventPortletAction extends MVCPortlet {
 	private static Log LOGGER = LogFactoryUtil.getLog(ManageEventPortletAction.class);
 	
 	private final String EVENT_ID_QSTR = "_eventId";
-	private final String EVENT_NAME_QSTR = "_eventName";
+	private final String EVENT_LOGO_CAPTION = "_eventLogoCaption";
 	private final String EVENT_DETAIL_ID_QSTR= "_eventDetailId";
 	private final String EVENT_ISLOGO_QSTR= "_isLogo";
 	private long _eventId = 0;
-	private String _eventName = "";
+	private String _eventLogoCaption = "";
 	
 	private long _eventDetailId = 0;
 	private String _isLogo = "N";
@@ -76,7 +76,7 @@ public class ManageEventPortletAction extends MVCPortlet {
 			List<FileItem> formItems = upload.parseRequest(actionRequest);
 			
 			_eventId = getEventId(formItems);
-			_eventName = getEventName(formItems);
+			_eventLogoCaption = getEventLogoCaption(formItems);
 			_eventDetailId = getEventDetailId(formItems);
 			_isLogo = getIsLogo(formItems);
 			createUploadFolder(uploadPath);
@@ -89,7 +89,7 @@ public class ManageEventPortletAction extends MVCPortlet {
 					boolean IsLogo =  _isLogo.equals("Y");
 					if(IsLogo){
 						fileName = new File(item.getName()).getName();
-						fileTitle = _eventName + "_" + _eventId;
+						fileTitle = _eventLogoCaption;
 						fileDesc = fileTitle; 
 					}
 					String filePath = uploadPath + File.separator + fileName;
@@ -183,17 +183,17 @@ public class ManageEventPortletAction extends MVCPortlet {
 		return eventId;
 	}
 	
-	private String getEventName(List<FileItem> formItems){
-		String eventName = "";
+	private String getEventLogoCaption(List<FileItem> formItems){
+		String eventLogoCaption = "";
 		for (FileItem item : formItems){
 			System.out.println("item.getFieldName(): "+item.getFieldName());
-			if(item.getFieldName().contentEquals(EVENT_NAME_QSTR)){
-				eventName = item.getString();
-				System.out.println("eventName: "+eventName);
+			if(item.getFieldName().contentEquals(EVENT_LOGO_CAPTION)){
+				eventLogoCaption = item.getString();
+				System.out.println("EVENT_LOGO_CAPTION: "+eventLogoCaption);
 				break;
 			}
 		}
-		return eventName;
+		return eventLogoCaption;
 	}
 
 	private long getEventDetailId(List<FileItem> formItems){
