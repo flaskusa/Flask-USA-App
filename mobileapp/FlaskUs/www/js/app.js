@@ -14,5 +14,8 @@
                 StatusBar.styleDefault();
             }
         });
+        document.addEventListener("deviceready", function () {
+            navigator.geolocation.getCurrentPosition(onsuccess, onerror, params);
+        }, false);
     })
 })();
