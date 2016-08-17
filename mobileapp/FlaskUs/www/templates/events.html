@@ -10,33 +10,34 @@
             <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content class="has-footer">
-        <div class="BgCol" ng-show="searchBox.showBox">
-            <div class="row">
-                <div class="col col-100 col-center searchrow">
-                    <input type="text" placeholder="Search Text." class="searchboxArea" ng-model="eventList.searchString" />
-                </div>
-            </div>
-            <div class="row">
-                <div class="col col-100 col-center searchrow">
-                    <select class="searchboxArea" ng-model="eventList.dates" ng-change="filterDate(eventList.dates)">
-                        <option value="0">Today</option>
-                        <option value="7">7 Days</option>
-                        <option value="14">14 Days</option>
-                        <option value="30">30 Days</option>
-                        <option value="60" ng-selected="true">60 Days</option>
-                    </select>
-                </div>
-            </div>
-            <div class="row ">
-                <div class="col col-90 col-center searchrow">
-                    <input type="text" placeholder="Enter Zip Code." class="searchboxArea" id="zipCode" name="zipCode" ng-model="eventList.zipcode"/>
-                </div>
-                <div class="col col-center searchrow">
-                    <button class="button button-icon button-clear ion-ios-search" ng-click="getAllfilteredEvents(eventList.zipcode)"></button>
-                </div>
+    <div class="bar bar-subheader BgCol" ng-show="searchBox.showBox">
+        <div class="row">
+            <div class="col col-100 col-center searchrow">
+                <input type="text" placeholder="Search Text." class="searchboxArea" ng-model="eventList.searchString" />
             </div>
         </div>
+        <div class="row">
+            <div class="col col-100 col-center searchrow">
+                <select class="searchboxArea" ng-model="eventList.dates" ng-change="filterDate(eventList.dates)">
+                    <option value="0">Today</option>
+                    <option value="7">7 Days</option>
+                    <option value="14">14 Days</option>
+                    <option value="30">30 Days</option>
+                    <option value="60" ng-selected="true">60 Days</option>
+                </select>
+            </div>
+        </div>
+        <div class="row ">
+            <div class="col col-90 col-center searchrow">
+                <input type="text" placeholder="Enter Zip Code." class="searchboxArea" id="zipCode" name="zipCode" ng-model="eventList.zipcode" />
+            </div>
+            <div class="col col-center searchrow">
+                <button class="button button-icon button-clear ion-ios-search" ng-click="getAllfilteredEvents(eventList.zipcode)"></button>
+            </div>
+        </div>
+    </div>
+    <ion-content class="has-footer">
+
         <div ng-click="searchBox.showBox = false">
             <div>
                 <h3 class="eventHeading"><span class="overlineStyle">EVENTS NEAR YOU</span></h3>
