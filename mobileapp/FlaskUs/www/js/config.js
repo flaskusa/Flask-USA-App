@@ -2,6 +2,7 @@
     var flaskAppConfig = angular.module('flaskApp');
 
     flaskAppConfig.constant("REST_API", {
+        "hostName": "http://146.148.83.30/",
         "url": "http://146.148.83.30/api/jsonws/",
         "companyId":20154
     })

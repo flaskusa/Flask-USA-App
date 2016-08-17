@@ -1,6 +1,6 @@
 angular.module('flaskApp.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cookies, LoginService, $rootScope) {
+.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cookies, LoginService, $rootScope, REST_API) {
 
     //controller for splash screen
     $scope.$on('$ionicView.afterEnter', function () {
@@ -12,6 +12,7 @@ angular.module('flaskApp.controllers', [])
     $scope.doLogout = function () {
         window.location.reload();
     }
+    $scope.imgUrl = REST_API.hostName;
 
 })
 
