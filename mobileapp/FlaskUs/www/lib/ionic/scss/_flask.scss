@@ -562,6 +562,8 @@ div.searchrow {
 .BgCol{
     background-color: black;
     border-color: #f7941e;
+    display: block;
+    height: 105px;
 }
 /*css for search box*/
 /* Prepost game */
@@ -664,10 +666,3 @@ a.tab-item.bottom_tabs{
         padding-left: 10px;
     width: 95%;
 }
-/*Bar header for events page*/
-.bar-subheader {
-    top: 44px;
-    display: block;
-    height: 105px;
-}
-/*End of bar Header*/
