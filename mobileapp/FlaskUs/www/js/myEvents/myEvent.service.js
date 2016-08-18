@@ -4,10 +4,10 @@
         .module('flaskApp')
         .service('myEventService', myEventService);
 
-    myEventService.$inject = ['$http', 'REST_API'];
+    myEventService.$inject = ['$http', 'SERVER'];
 
-    function myEventService($http, REST_API) {
-        var baseURL = REST_API.url;
+    function myEventService($http, SERVER) {
+        var baseURL = SERVER.url;
         var allEventURL = "flask-rest-events-portlet.event/get-simple-filtered-events";
         var myEventsURL = "flask-rest-events-portlet.event/get-user-selected-events";
         var addUserEventURL = "flask-rest-events-portlet.event/add-user-event";

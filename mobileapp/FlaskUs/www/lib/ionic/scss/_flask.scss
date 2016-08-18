@@ -21,6 +21,56 @@
   }
 }
 
+.scroll{
+    height: 100% !important;
+}
+.mainRow{
+    height:33.33%;
+    padding:0px;
+}
+.sideImagePanel{
+    width:100%;height:100%;
+}
+.myEvent{
+          background-image:url("../img/FLASK IMAGES/MY_EVENTS.jpg");
+      background-size:100%;
+}
+.myTailgate{
+          background-image:url("../img/FLASK IMAGES/MY_TAILGATE.jpg");
+      background-size:100%;
+}
+.myFrnds{
+     background-image:url("../img/FLASK IMAGES/MY_FRIENDS.jpg");
+      background-size:100%;
+}
+.row.mainRow.myFrnds {
+    margin-top: -1px;
+}
+.sliderImages{
+    width: 100%;display:block;height: 100%
+}
+.sidepanel{
+    float:left;
+        float: left;
+    width: 23px;
+    height: 100%;
+}
+.row.mainRow {
+    margin-top: -1px;
+}
+@media only screen and (min-width:50px){
+    a.post-content{height: 31px;
+    background-color: rgba(0, 0, 0, 0.63);
+    color: white;
+    margin-top: 14px;
+    text-decoration:none;
+    padding-top: 6px;
+    font-size:16px;
+    font-weight:600;
+    width:140px;
+    }
+}
+
 .some-area {
   > div {
     padding: 4rem;
@@ -183,15 +233,15 @@ a.button.button-block.button-positive.sign_in_button{width:90%;padding-top:15px;
 }
 
 button.button.button-block.button-positive.taglib-text{
-				color:white;
-				width:40%;
+	color:white;
+	width:40%;
 }
 
 .navigation{	 
-				 text-align: center;
-                  height:22%;
-                  text-align: center;
-                  width:100%;
+		text-align: center;
+        height:22%;
+        text-align: center;
+        width:100%;
 }
 
 /*CSS for checkboxes start*/
@@ -390,13 +440,20 @@ button.button.button-icon.button-clear.ion-search{display:none;}
 
 img.list-thumbnail.listImages {
     position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
+
+img.list-thumbnail.listImages1 {
+    position: absolute;
     left: 5px;
     max-width: 55px;
     max-height: 55px;
     width: 100%;
     height: 100%;
-    padding-bottom: 10px;
-    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-top: -3px;
 }
 
 img.list-thumbnail.listImages1 {
@@ -462,18 +519,18 @@ img.list-thumbnail.listImages1 {
 
 .eventList{
     text-align: center;
-    padding-top: 8px;
-    padding-left: 54px;
-    padding-right: 23px;
+    padding: 8px 39px 0px 57px;
     min-height: 39px !important;
-    max-height: 57px !important;
     border-color: black;
 }
 .eventHeading{
-    text-align:center; padding-top: 20px; margin-bottom: 20px;
+    text-align:center; 
+    padding-top: 20px; 
+    margin-bottom: 20px;
 }
 .overlineStyle{
-border-top: 4px solid #F89734; font-weight: 600;
+    border-top: 4px solid #F89734;
+    font-weight: 800;
 }
 
  /*friend details page start*/
@@ -560,8 +617,6 @@ div.searchrow {
 .BgCol{
     background-color: black;
     border-color: #f7941e;
-    display: block;
-    height: 105px;
 }
 /*css for search box*/
 /* Prepost game */
@@ -636,6 +691,13 @@ p.addText{
     border-color: #ffffff;
     margin: 0px;
     padding: 4px;
+}
+span.span_icon_arrow {
+    margin-right: -37px !important;
+    width:21px;
+    height:20px;
+    padding-left:10%;
+    margin-top: 4px;
 }
 span.span_icon_arrow {
     margin-right: -37px !important;

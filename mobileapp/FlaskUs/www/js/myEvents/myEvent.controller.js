@@ -3,12 +3,12 @@
     angular.module('flaskApp')
         .controller('my_eventsCtrl', my_eventsCtrl);
 
-    my_eventsCtrl.$inject = ['$scope', 'myEventService', '$state', '$cookies', '$timeout','REST_API'];
+    my_eventsCtrl.$inject = ['$scope', 'myEventService', '$state', '$cookies', '$timeout','SERVER'];
 
     /* @ngInject */
-    function my_eventsCtrl($scope, myEventService, $state, $cookies, $timeout, REST_API) {
+    function my_eventsCtrl($scope, myEventService, $state, $cookies, $timeout, SERVER) {
         var self = this;
-        $scope.imgUrl = REST_API.hostName + "c/document_library/get_file?uuid=";
+        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.myEvent = [];
         var userResponse = $cookies.get('CurrentUser');
         //var UserId = userResponse.data.userId;

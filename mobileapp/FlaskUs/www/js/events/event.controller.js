@@ -3,14 +3,14 @@
     angular.module('flaskApp')
         .controller('EventsCtrl', EventsCtrl);
 
-    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup','REST_API'];
+    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup','SERVER'];
 
     /* @ngInject */
-    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, REST_API) {
+    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER) {
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
-        $scope.imgUrl = REST_API.hostName + "c/document_library/get_file?uuid=";
+        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         var DEFAULT_ZIPCODE = 48226; /*Detroit Zip Code*/
         $scope.eventTypeIds = '';
         $scope.startDate = '';

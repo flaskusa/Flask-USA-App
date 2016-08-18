@@ -4,10 +4,10 @@
         .module('flaskApp')
         .service('TailgateService', TailgateService);
 
-    TailgateService.$inject = ['$http', 'REST_API'];
+    TailgateService.$inject = ['$http', 'SERVER'];
 
-    function TailgateService($http, REST_API) {
-        var baseURL = REST_API.url;
+    function TailgateService($http, SERVER) {
+        var baseURL = SERVER.url;
         var allTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
         var myTailgatesURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-my-tailgate";
 
