@@ -17,6 +17,8 @@
             });
         }
         
+        $scope.searchBox = { showBox: false };
+
         $scope.addmyEvent = function (eventId, index) {
             myEventService.addUserEvent(eventId).then(function (respData) {
                 //$scope.myEvent = respData.data.Events;

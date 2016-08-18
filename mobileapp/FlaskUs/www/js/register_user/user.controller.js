@@ -3,9 +3,13 @@
     angular.module('flaskApp')
         .controller('user_registrationCtrl', user_registrationCtrl);
     user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout'];
+    
     /* @ngInject */
     function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout) {
         var gender = true;
+        var max_date = new Date();
+        $scope.MAX = max_date;
+        console.log(max_date);
         $scope.saveUser = function (user) {
             console.log(user);
             if (user.isMale == 'male') {
@@ -24,8 +28,10 @@
                     //$state.go("app.login");
                     
                 }
+                $scope.AddedSuccess = true;
+                $timeout(function () { $scope.AddedSuccess = false; }, 3000);
             });
-            document.register_user_form.reset();
+          //  document.register_user_form.reset();
         }
 
         $scope.checkUserByEmailId = function (user) {
@@ -40,10 +46,11 @@
                     $timeout(function () {
                         myPopup.close(); //close the popup after 3 seconds for some reason
                     }, 3000);
-                    document.register_user_form.reset();
+                   // document.register_user_form.reset();
                 }
             });
         }
+        document.register_user_form.reset();
     }
 })();
 
