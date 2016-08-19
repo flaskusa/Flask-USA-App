@@ -2,7 +2,7 @@
     <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
     </ion-nav-buttons>    
-    <div class="bar bar-subheader BgCol" ng-show="searchBox.showBox">
+    <div class="bar bar-subheader BgCol1" ng-show="searchBox.showBox">
         <div class="row searchrow">
             <div class="col col-100 col-center searchrow">
                 <input type="text" placeholder="Search Event..." class="searchboxArea" ng-model="eventList.searchString" />
@@ -34,7 +34,7 @@
                         <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
                     </div>
                     <div class="col">
-                        <span class="badge span_icon_arrow"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg"></span>
+                        <span class="badge span_icon" ng-click="addmyEvent(data.eventId,$index)"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg"></span>
                     </div>
                 </div>
                 <ion-option-button class="button-assertive icon ion-trash-a" ng-click="removeEvent(data.eventId,$index);"></ion-option-button>
