@@ -1,4 +1,8 @@
-﻿.fill-height-or-more {
+﻿
+
+
+
+.fill-height-or-more {
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -378,7 +382,7 @@ ion-header-bar.bar-dark.bar.bar-header{background-color:black !important;}
 	left: 55px;
 	width: calc(100% - 100px);
 	position: fixed;
-	height: calc(100% - 10px);
+	
 }
 .searchBar.numicons2 .searchTxt {
 	width: calc(100% - 135px);
@@ -596,9 +600,10 @@ input.searchboxArea {
     color: #f7941e;
     height: 35px;
     padding-bottom: 10px;
+	padding-top:10px;
 }
 select.searchboxArea {
-      width: 100%;
+    width: 100%;
     padding-right: 5px;
     padding-left: 5px;
     background-color: black;
@@ -617,6 +622,8 @@ div.searchrow {
 .BgCol{
     background-color: black;
     border-color: #f7941e;
+	display: block;
+    height: 20%;
 }
 /*css for search box*/
 /* Prepost game */
@@ -691,6 +698,9 @@ p.addText{
     border-color: #ffffff;
     margin: 0px;
     padding: 4px;
+}
+span.span_icon {
+    margin-right: -37px !important;
 }
 span.span_icon_arrow {
     margin-right: -37px !important;
