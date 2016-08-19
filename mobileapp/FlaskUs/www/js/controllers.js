@@ -1,6 +1,6 @@
 angular.module('flaskApp.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $timeout, $cookies, LoginService, $rootScope, SERVER) {
+.controller('AppCtrl', function ($scope, $ionicModal,$state, $timeout, $cookies, LoginService, $rootScope, SERVER) {
 
     //controller for splash screen
     $scope.$on('$ionicView.afterEnter', function () {
@@ -8,9 +8,13 @@ angular.module('flaskApp.controllers', [])
             document.getElementById("custom-overlay").style.display = "none";
         }, 1000);
     })
-
     $scope.doLogout = function () {
-        window.location.reload();
+        $rootScope.show_login = false;       
+        $cookies.remove('CurrentUser');
+        $rootScope.userName ='';
+        $rootScope.userEmailId ='';
+        console.log($cookies.getObject('CurrentUser'));
+        $state.go("app.events");
     }
     $scope.imgUrl = SERVER.hostName;
 
@@ -20,7 +24,6 @@ angular.module('flaskApp.controllers', [])
 
 .controller('account_settingsCtrl', function ($scope) {
 })
-
 
 .controller('my_friendsCtrl', function ($scope) {
 })

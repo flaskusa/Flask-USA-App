@@ -5,9 +5,9 @@
         .module('flaskApp')
         .service('LoginService', LoginService);
 
-    LoginService.$inject = ['$http', 'SERVER', '$state', '$cookieStore', '$rootScope'];
+    LoginService.$inject = ['$http', 'SERVER', '$state', '$cookies', '$rootScope'];
 
-    function LoginService($http, SERVER, $state, $cookieStore, $rootScope) {
+    function LoginService($http, SERVER, $state, $cookies, $rootScope) {
         var baseURL = SERVER.url;
 
         var getUserByEmailId = "user/get-user-by-email-address";
@@ -24,10 +24,10 @@
         }
 
         this.getUserProfilePicture = function () {
-            var userPic = $cookieStore.get('CurrentUser');
+            var userPic = $cookies.getObject('CurrentUser');
             return $http.get(baseURL + getUserProfilePic, { params: { 'fileEntryId': userPic.data.portraitId } })
             .then(function success(resp) {
-                $cookieStore.put('CurrentUserPic', resp);
+                $cookies.putObject('CurrentUserPic', resp);
                 return resp;
             });
         }

@@ -4,6 +4,7 @@
     flaskAppConfig.constant("SERVER", {
         "hostName": "http://146.148.83.30/",
         "url": "http://146.148.83.30/api/jsonws/",
+        "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
         "companyId":20154
     })
 

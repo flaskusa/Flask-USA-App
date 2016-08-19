@@ -15,7 +15,7 @@
             }
         });
         document.addEventListener("deviceready", function () {
-            navigator.geolocation.getCurrentPosition(onsuccess, onerror, params);
+            navigator.geolocation.getCurrentPosition( onerror);
         }, false);
     })
 })();
