@@ -21,7 +21,7 @@
         $scope.latitude = '42.34';
         $scope.longitude = '83.0456';
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
-        $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd');
+        $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
 
         var options = { timeout: 10000, enableHighAccuracy: false };
 
