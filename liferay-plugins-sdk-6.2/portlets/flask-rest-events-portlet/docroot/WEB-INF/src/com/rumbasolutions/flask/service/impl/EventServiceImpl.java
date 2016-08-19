@@ -634,7 +634,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		List<FileEntry> eventLogos = null;
 		try {
 			long companyId = PortalUtil.getDefaultCompanyId();
-			Group group = GroupLocalServiceUtil.getGroup(companyId, "guest");
+			Group group = GroupLocalServiceUtil.getGroup(companyId, "flask");
 			Folder folder = DLAppLocalServiceUtil.getFolder(group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Event");
 			Folder eventLogosFolder = DLAppLocalServiceUtil.getFolder(folder.getRepositoryId(), folder.getFolderId(), "Logos");
 			eventLogos = DLAppServiceUtil.getFileEntries(eventLogosFolder.getRepositoryId(), eventLogosFolder.getFolderId());

@@ -1,7 +1,6 @@
 package com.rumbasolutions.flask.service.impl;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -18,8 +17,6 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.repository.model.FileEntry;
-import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Group;
@@ -34,7 +31,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
-import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.persistence.CountryUtil;
 import com.liferay.portal.service.persistence.RegionUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -157,9 +153,12 @@ public class FlaskUtil {
 	}
 	public static Event setStringNamesForEvent(Event event){
 			try {
-				Venue venue = VenueUtil.fetchByPrimaryKey(event.getVenueId());
-				event.setVenueName(venue.getVenueName());
-				event.setEventTypeName(findEventTypeNameById(event.getEventTypeId()));
+				if(VenueUtil.fetchByPrimaryKey(event.getVenueId())!=null){
+					event.setVenueName(VenueUtil.fetchByPrimaryKey(event.getVenueId()).getVenueName());
+					event.setEventTypeName(findEventTypeNameById(event.getEventTypeId()));
+				}else{
+					event = null;
+				}
 			}
 			catch (SystemException e) {
 				LOGGER.error(e);
@@ -172,15 +171,17 @@ public class FlaskUtil {
 		JSONArray eventListJsonArr =  JSONFactoryUtil.createJSONArray();
 
 		for (Event event : eventList){
-			setStringNamesForEvent(event);
 			try {
-				JSONObject obj = JSONFactoryUtil.createJSONObject(JSONFactoryUtil.looseSerialize(event));
-				int userEvent = 0;
-				if(myEventList != null && myEventList.contains(event.getEventId())){
-					userEvent = 1;
+				event = setStringNamesForEvent(event);
+				if(event!=null){
+					JSONObject obj = JSONFactoryUtil.createJSONObject(JSONFactoryUtil.looseSerialize(event));
+					int userEvent = 0;
+					if(myEventList != null && myEventList.contains(event.getEventId())){
+						userEvent = 1;
+					}
+					obj.put("userEvent", userEvent);
+					eventListJsonArr.put(obj);
 				}
-				obj.put("userEvent", userEvent);
-				eventListJsonArr.put(obj);
 			} catch (JSONException e) {
 				e.printStackTrace();
 			}
