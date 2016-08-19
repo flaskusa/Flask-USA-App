@@ -13,7 +13,7 @@
     <div class="bar bar-subheader BgCol" ng-show="searchBox.showBox">
         <div class="row">
             <div class="col col-100 col-center searchrow">
-                <input type="text" placeholder="Search Text." class="searchboxArea" ng-model="eventList.searchString" />
+                <input type="text" placeholder="Search event..." class="searchboxArea" ng-model="eventList.searchString" />
             </div>
         </div>
         <div class="row">
@@ -27,12 +27,14 @@
                 </select>
             </div>
         </div>
-        <div class="row ">
-            <div class="col col-90 col-center searchrow">
-                <input type="text" placeholder="Enter Zip Code." class="searchboxArea" id="zipCode" name="zipCode" ng-model="eventList.zipcode" />
+        <div class="row">
+            <div class="col col-100 col-center searchrow">
+                <input type="text" placeholder="Zip code..." class="searchboxArea" id="zipCode" name="zipCode" ng-model="eventList.zipcode" />
             </div>
+        </div>
+        <div class="row">
             <div class="col col-center searchrow">
-                <button class="button button-icon button-clear ion-ios-search" ng-click="getAllfilteredEvents(eventList.zipcode)"></button>
+                <button class="button button-clear button_search" ng-click="getAllfilteredEvents(eventList.zipcode)">SEARCH</button>
             </div>
         </div>
     </div>
@@ -48,7 +50,7 @@
             </div>
             <div class="list">
                 <a class="item item-thumbnail-left item-icon-right eventList item-remove-animate" href="#/app/prePostGame/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent | filter: eventList.searchString">
-                    <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId=20181" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
+                    <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
                     <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
