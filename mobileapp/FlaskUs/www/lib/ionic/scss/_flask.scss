@@ -619,11 +619,12 @@ div.searchrow {
     padding: 0px;
 }
 
-.BgCol{
+@media only screen and (min-height:130px){.BgCol{
     background-color: black;
     border-color: #f7941e;
 	display: block;
-    height: 20%;
+    height: 135px;
+	}
 }
 /*css for search box*/
 /* Prepost game */
