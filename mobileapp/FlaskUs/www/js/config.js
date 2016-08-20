@@ -36,8 +36,8 @@
             }
         })
         //pre post game page
-        .state('app.prePostGame', {
-            url: '/prePostGame/:eventName/:eventId/:venueId',
+        .state('app.pre_post_game', {
+            url: '/pre_post_game/:eventName/:eventId/:venueId',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/pre_post_game.html',
