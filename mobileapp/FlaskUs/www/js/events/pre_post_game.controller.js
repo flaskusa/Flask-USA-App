@@ -3,10 +3,10 @@
     angular.module('flaskApp')
             .controller('prePostGameCtrl', prePostGameCtrl);
 
-    prePostGameCtrl.$inject = ['$scope', '$stateParams', 'EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate'];
+    prePostGameCtrl.$inject = ['$scope', '$stateParams', '$state','EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate'];
 
     /* @ngInject */
-    function prePostGameCtrl($scope, $stateParams, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+    function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
         /* jshint validthis: true */
         var self = this;
         $scope.eventInfo = [];
@@ -21,6 +21,17 @@
         var currEventId = $scope.currEventId;
         getAllVenuImages();
         $ionicSlideBoxDelegate.update();
+
+        $scope.preEvent = function(){
+            $state.go("app.eventMapView");
+        }
+        $scope.atEvent = function(){
+            $state.go("app.eventMapView");
+        }
+        $scope.postEvent = function(){
+            $state.go("app.eventMapView");
+        }
+
         function getAllVenuImages() {
             EventsService.getVenueImages(currEventId).then(function (respData) {
                 var len = respData.data.Details.length - 1;
@@ -62,37 +73,26 @@
                 switch (imgName) {
                     case "Tradition":
                         return 'Flask_Tradition.jpg';
-                        break;
                     case "Parking":
                         return 'Flask_Parking.jpg';
-                        break;
                     case "Bar & Restaurants":
                         return 'Flask_Bars.jpg';
-                        break;
                     case "Traffic":
                         return 'Flask_Traffic.jpg';
-                        break;
                     case "Supplies":
                         return 'Flask_Supplies.jpg';
-                        break;
                     case "Getting Home":
                         return 'flask_GettingHome.jpg';
-                        break;
                     case "Nightlife":
                         return 'Flask_Nightlife.jpg';
-                        break;
                     case "Liquor store":
                         return 'flask_restaurantBar_post.jpg';
-                        break;
                     case "Venue info":
                         return 'venue_info.jpg'
-                        break;
                     case "Venue map":
                         return 'Venue_map.jpg'
-                        break;
                     case "Flask Us":
                         return 'Flask_FlaskUs.jpg'
-                        break;
                     default:
                         return 'Flask_Default_Image.jpg';
                 }
