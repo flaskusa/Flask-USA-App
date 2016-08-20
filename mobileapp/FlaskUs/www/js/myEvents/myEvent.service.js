@@ -15,15 +15,15 @@
 
         this.getAllEvents = getAllEvents
 
-        function getAllEvents() {
+        function getAllEvents(eventTypeIds,startDate, endDate, searchString, latitude, longitude) {
             return $http.get(baseURL + allEventURL, {
                 params: {
-                    eventTypeIds: '',
-                    startDate: '',
-                    endDate: '',
-                    searchString: 'a',
-                    latitude: '',
-                    longitude: ''
+                    eventTypeIds: eventTypeIds,
+                    startDate: startDate,
+                    endDate: endDate,
+                    searchString: searchString,
+                    latitude: latitude,
+                    longitude: longitude
                 }
             })
                 .then(function success(response) {
