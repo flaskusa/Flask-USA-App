@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('addMyEventCtrl', addMyEventCtrl);
 
-    addMyEventCtrl.$inject = ['$scope', '$state', 'myEventService', '$timeout', 'SERVER', '$filter'];
+    addMyEventCtrl.$inject = ['$scope', '$state', 'myEventService', '$timeout', 'SERVER', '$filter', '$ionicLoading'];
 
     /* @ngInject */
-    function addMyEventCtrl($scope, $state, myEventService, $timeout, SERVER, $filter) {
+    function addMyEventCtrl($scope, $state, myEventService, $timeout, SERVER, $filter,$ionicLoading) {
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
@@ -45,7 +45,8 @@
                 //$scope.myEvent = respData.data.Events;
                 $scope.myFilteredEvent.splice(index, 1);
              //   $scope.AddedSuccess = true;
-            //    $timeout(function () { $scope.AddedSuccess = false; }, 3000);
+                //    $timeout(function () { $scope.AddedSuccess = false; }, 3000);
+                $ionicLoading.show({ template: 'Event Successfully Added!', noBackdrop: false, duration: 2000 });
             });
         }
     }

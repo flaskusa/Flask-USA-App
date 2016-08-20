@@ -166,22 +166,30 @@
         })
 
        .state('app.addMyTailgate', {
-            url: '/addMyTailgate',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/addMyTailgate.html',
-                    controller: 'addMyTailgateCtrl'
+           url: '/addMyTailgate',
+           views: {
+               'menuContent': {
+                   templateUrl: 'templates/addMyTailgate.html',
+                   controller: 'addMyTailgateCtrl'
+               }
+           }
+       }
+       )
+
+        //Http Interceptors for showing and hiding 
+        $httpProvider.interceptors.push(function ($rootScope) {
+            return {
+            request: function (config) {
+                $rootScope.$broadcast('loading:show')
+                return config
+            },
+            response: function (response) {
+                    $rootScope.$broadcast('loading:hide')
+                return response
                 }
             }
-       })
-
-   
-
+        })
         // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/events');
-        
-
+        $urlRouterProvider.otherwise('/app/events');     
     })
-
-
 })();
