@@ -52,7 +52,7 @@
                 <a class="item item-thumbnail-left item-icon-right eventList item-remove-animate" href="#/app/prePostGame/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent | filter: eventList.searchString">
                     <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
-                    <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
+                    <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
                     <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
                     <span class="icon"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg" style="width:21px;height:20px;padding-left:10%;"></span>
                 </a>

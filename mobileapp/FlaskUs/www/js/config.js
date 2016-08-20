@@ -40,37 +40,28 @@
             url: '/prePostGame/:eventName/:eventId/:venueId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/prePostGame.html',
+                    templateUrl: 'templates/pre_post_game.html',
                     controller: 'prePostGameCtrl'
                 }
             }
         })
 
-        .state('app.browse', {
-            url: '/browse',
+                //event map view
+        .state('app.eventMapView', {
+            url: '/eventMapView',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/browse.html'
+                    templateUrl: 'templates/event_map_view.html',
+                    controller: 'eventMapViewCtrl'
                 }
             }
         })
-
-            .state('app.login', {
-                url: '/login',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/login.html',
-                        controller: 'LoginCtrl'
-                    }
-                }
-            })
-
-        .state('app.playlists', {
-            url: '/playlists',
+        .state('app.login', {
+            url: '/login',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/playlists.html',
-                    controller: 'PlaylistsCtrl'
+                    templateUrl: 'templates/login.html',
+                    controller: 'LoginCtrl'
                 }
             }
         })
