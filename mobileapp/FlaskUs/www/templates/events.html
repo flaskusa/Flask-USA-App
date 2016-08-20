@@ -19,7 +19,7 @@
         <div class="row">
             <div class="col col-100 col-center searchrow">
                 <select class="searchboxArea" ng-model="eventList.dates" ng-change="filterDate(eventList.dates)">
-                    <option value="1">Today</option>
+                    <option value="0">Today</option>
                     <option value="7">7 Days</option>
                     <option value="14">14 Days</option>
                     <option value="30">30 Days</option>
@@ -45,16 +45,16 @@
             </div>
             <div class="card" ng-show="Event_Error">
                 <div class="item item-text-wrap">
-                    There are no events 
+                    There are no events. 
                 </div>
             </div>
             <div class="list">
-                <a class="item item-thumbnail-left item-icon-right eventList item-remove-animate" href="#/app/prePostGame/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent | filter: eventList.searchString">
+                <a class="item item-thumbnail-left item-icon-right eventList item-remove-animate" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent | filter: eventList.searchString">
                     <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
                     <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
-                    <span class="icon"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg" style="width:21px;height:20px;padding-left:10%;"></span>
+                    <span class="badge span_icon"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg"></span>
                 </a>
             </div>
         </div>

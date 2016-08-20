@@ -9,7 +9,7 @@
             <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <div class="bar bar-subheader BgCol" ng-show="searchBox.showBox">
+    <div class="bar bar-subheader BgCol1" ng-show="searchBox.showBox">
         <div class="row searchrow">
             <div class="col col-33 col-center searchrow">
                 <input type="text" placeholder="Search Event..." class="searchboxArea" id="zipCode" name="zipCode" ng-model="eventList.zipcode" ng-blur="getAllfilteredEvents(eventList.zipcode)" />
@@ -25,13 +25,13 @@
             </div>
             <div class="list">
                 <a class="item item-thumbnail-left eventList item-remove-animate" href="" ng-repeat="data in myFilteredEvent | filter: eventList.searchString">
-                    <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId=20181" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
+                    <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <div class="col col-70 event_content">
                         <h2 class="eventNameCol">{{data.eventName}}</h2>
                         <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
                         <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
                     </div>
-                    <span class="badge span_icon" ng-click="addmyEvent(data.eventId,$index)"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" style="width:21px;height:20px;padding-left:0%;margin-left:-18%;"></span>
+                    <span class="badge span_icon" ng-click="addmyEvent(data.eventId,$index)"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" style=""></span>
                 </a>
             </div>
         </div>

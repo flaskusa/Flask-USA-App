@@ -27,7 +27,7 @@
         <ion-list show-delete="false" can-swipe="true">            
             <ion-item class="myList item-remove-animate" href="" ng-repeat="data in myEvent | filter: eventList.searchString" >
                 <div class="row">
-                    <div class="col"><img src="{{imgUrl}}{{data.eventImageUUID}}&groupId=20181" class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" /></div>
+                    <div class="col"><img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" /></div>
                     <div class="col col-70 event_content1">
                         <h2 class="eventNameCol">{{ data.eventName }}</h2>
                         <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
