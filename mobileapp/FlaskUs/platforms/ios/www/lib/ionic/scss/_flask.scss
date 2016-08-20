@@ -21,9 +21,59 @@
   }
 }
 
+.scroll{
+    height: 100% !important;
+}
+.mainRow{
+    height:33.33%;
+    padding:0px;
+}
+.sideImagePanel{
+    width:100%;height:100%;
+}
+.myEvent{
+          background-image:url("../img/FLASK IMAGES/MY_EVENTS.jpg");
+      background-size:100%;
+}
+.myTailgate{
+          background-image:url("../img/FLASK IMAGES/MY_TAILGATE.jpg");
+      background-size:100%;
+}
+.myFrnds{
+     background-image:url("../img/FLASK IMAGES/MY_FRIENDS.jpg");
+      background-size:100%;
+}
+.row.mainRow.myFrnds {
+    margin-top: -1px;
+}
+.sliderImages{
+    width: 100%;display:block;height: 100%
+}
+.sidepanel{
+    float:left;
+        float: left;
+    width: 27px;
+    height: 100%;
+}
+.row.mainRow {
+    margin-top: -1px;
+}
+@media only screen and (min-width:50px){
+    a.post-content{height: 31px;
+    background-color: rgba(0, 0, 0, 0.63);
+    color: white;
+    margin-top: 14px;
+    text-decoration:none;
+    padding-top: 6px;
+    font-size:16px;
+    font-weight:600;
+    width:140px;
+    }
+}
+
 .some-area {
   > div {
-    padding: 1rem;
+    padding: 4rem;
     &:nth-child(1) {
       background-image:url("../img/FLASK IMAGES/MY_EVENTS.jpg");
       background-size:100%;
@@ -43,20 +93,6 @@
       margin: 0;
     }
   }
-}
-
-
-@media only screen and (min-width:50px){
-    a.post-content{height: 31px;
-    background-color: rgba(0, 0, 0, 0.63);
-    color: white;
-    margin-left: -15px;
-    text-decoration:none;
-    padding-top: 6px;
-    font-size:16px;
-    font-weight:600;
-    width:140px;
-    }
 }
 
 i.icon.ion-star{padding-left:2%;}
@@ -141,14 +177,14 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
 
 .loginpane_header {
     background: rgba(225,225,225,0.95);
-    padding: 1em 0;
+    padding-top: 3em;
+    padding-bottom: 1em;
     text-align: center;
     height:20%;
-    margin-top: -1%;
     width:100%;
 }
 
-.loginpane_header img{content:url(../img/flasklogo2.png);}
+.loginpane_header img{content:url(../img/FlaskRed.png);zoom:0.3;}
 
 img.cq-dd-image{height:100%;}
 
@@ -197,15 +233,15 @@ a.button.button-block.button-positive.sign_in_button{width:90%;padding-top:15px;
 }
 
 button.button.button-block.button-positive.taglib-text{
-				color:white;
-				width:40%;
+	color:white;
+	width:40%;
 }
 
 .navigation{	 
-				 text-align: center;
-                  height:22%;
-                  text-align: center;
-                  width:100%;
+		text-align: center;
+        height:22%;
+        text-align: center;
+        width:100%;
 }
 
 /*CSS for checkboxes start*/
@@ -304,15 +340,7 @@ span.error_msg{color:red;}
     text-transform: uppercase;
     font-size: 11px !important;
 }
-.eventList{
-    text-align: center;
-    padding-top: 8px;
-    padding-left: 54px;
-    padding-right: 23px;
-    min-height: 39px !important;
-    max-height: 57px !important;
-    border-color: black;
-}
+
 
 .eventHeading{
     text-align:center; 
@@ -320,9 +348,7 @@ span.error_msg{color:red;}
     margin-bottom: 10px;
     font-size: 18px !important;
 }
-.overlineStyle{
-border-top: 4px solid #F89734; font-weight: 800;
-}
+
 .eventHeading2 {
     text-align: center;
     padding-top: 0px;
@@ -352,7 +378,7 @@ ion-header-bar.bar-dark.bar.bar-header{background-color:black !important;}
 	left: 55px;
 	width: calc(100% - 100px);
 	position: fixed;
-	height: calc(100% - 10px);
+	
 }
 .searchBar.numicons2 .searchTxt {
 	width: calc(100% - 135px);
@@ -378,6 +404,9 @@ ion-header-bar.bar-dark.bar.bar-header{background-color:black !important;}
 	padding-right:5px;
     width: 100%;
 }
+
+
+/*End search button*/
 
 ion-footer-bar.tabs.tabs-icon-left.bar.bar-dark.bar-footer.bar-assertive{background-color:black;}
 
@@ -414,13 +443,31 @@ button.button.button-icon.button-clear.ion-search{display:none;}
 
 img.list-thumbnail.listImages {
     position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+}
+
+img.list-thumbnail.listImages1 {
+    position: absolute;
     left: 5px;
     max-width: 55px;
     max-height: 55px;
     width: 100%;
     height: 100%;
-    padding-bottom: 10px;
-    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-top: -3px;
+}
+
+img.list-thumbnail.listImages1 {
+    position: absolute;
+    left: 5px;
+    max-width: 55px;
+    max-height: 55px;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 5px;
+    margin-top: -3px;
 }
 
 .fill-height-or-more1 {
@@ -475,14 +522,18 @@ img.list-thumbnail.listImages {
 
 .eventList{
     text-align: center;
-    padding-top: 8px; padding-left: 70px; padding-right: 23px;    min-height: 39px !important;    max-height: 72px;
+    padding: 8px 39px 0px 57px;
+    min-height: 39px !important;
     border-color: black;
 }
 .eventHeading{
-    text-align:center; padding-top: 20px; margin-bottom: 20px;
+    text-align:center; 
+    padding-top: 20px; 
+    margin-bottom: 20px;
 }
 .overlineStyle{
-border-top: 4px solid #F89734; font-weight: 800;
+    border-top: 4px solid #F89734;
+    font-weight: 800;
 }
 
  /*friend details page start*/
@@ -541,27 +592,55 @@ a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:blac
 
 /*css for search box*/
 input.searchboxArea {
-    width: 100%;
+       width: 100%;
     padding-right: 10px;
     padding-left: 10px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0);
     color: #f7941e;
+    height: 35px;
+    padding-bottom: 10px;
+	padding-top:10px;
 }
 select.searchboxArea {
     width: 100%;
     padding-right: 5px;
     padding-left: 5px;
-    background-color: black;
-    border-color: black;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
     color: white;
+    height: 45px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: solid #EFF0F1 1px;
+    border-bottom: solid #EFF0F1 1px;
 }
 div.searchrow {
     padding: 0px;
 }
 
 .BgCol{
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.9);
     border-color: #f7941e;
+	display: block;
+    height:175px;
+}
+
+.BgCol1{
+    background-color: rgba(0, 0, 0, 0);
+    border-color:#464444;
+	display: block;
+}
+
+button.button.button-clear.button_search{      
+    color: darkorange;
+    border-radius: 3px;
+    font-size: 15px;
+    width: 100%;
+    text-shadow: 2px 0px 4px #847e7e;
+    font-weight: 800;
+    margin-top: 4px;
+    vertical-align: middle;
+    background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
 }
 /*css for search box*/
 /* Prepost game */
@@ -637,9 +716,12 @@ p.addText{
     margin: 0px;
     padding: 4px;
 }
-span.span_icon {
-    margin-right: -26px ;
+.span_icon img {
+    width:21px;height:20px;padding-left:0%;margin-left:175%;
 }
+
+.icon_arrow img{ width:21px;height:20px;padding-left:0%;margin-left:175%;}
+
 .successColor{
         color: green;
 }
@@ -660,7 +742,36 @@ a.tab-item.bottom_tabs{
     font-size: 11px !important;
     }
 	
-	input.loginInputs{
-        padding-left: 10px;
+input.loginInputs{
+    padding-left: 10px;
     width: 95%;
 }
+
+.col.col-70.event_content{
+    padding-left: 8%;
+    width: 93%;
+   
+}
+
+.col.col-70.event_content1{
+    padding-left: 14%;
+    width: 86%;
+}
+
+/*Prepost slider*/
+.slider_arrow {
+    transition: opacity 0.1s;
+    padding: 0 6px;
+    min-width: 4px;
+    border-radius: 21px;
+    border-color: transparent;
+    text-shadow: 2px 0px 5px black;
+    background: #656565;
+    /* background: none; */
+    opacity: 0.9;
+}
+
+.slider_arrow:before{font-size:19px !important;}
+/*End Prepost slider*/
+
+.icon.icon_events img{width:21px;height:20px;padding-left:10%;}

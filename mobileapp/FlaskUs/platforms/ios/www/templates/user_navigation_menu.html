@@ -1,29 +1,26 @@
 ﻿<ion-view cache-view="false">
     <ion-nav-title>
         <a href="#/app/events.html"><img alt="Flask" class="header-img" src="img/headerFlaskLogo.png" /></a>
-    </ion-nav-title>
-    
+    </ion-nav-title>    
     <ion-content>
-        <section class="some-area fill-height-or-more">
-            <div ng-click="myEvent()">
+            <div class="row mainRow myEvent" ng-click="myEvent()">
                 <a href="" class="post-content">
                     <i class="icon ion-star"></i>
                     MY EVENTS
                 </a>
             </div>
-            <div ng-click="myTailgate()">
+            <div class="row mainRow myTailgate" ng-click="myTailgate()">
                 <a href="" class="post-content">
                     <i class="icon ion-star"></i>
-                     MY TAILGATE
+                    MY TAILGATE
                 </a>
             </div>
-            <div ng-click="myFriend()">
+            <div class="row mainRow myFrnds" ng-click="myFriend()">
                 <a href="" class="post-content">
                     <i class="icon ion-star"></i>
-                     MY FRIENDS
+                    MY FRIENDS
                 </a>
-            </div>
-        </section>
+            </div>       
     </ion-content>
     <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
         <a class="tab-item bottom_tabs">

@@ -1,8 +1,10 @@
 ﻿(function () {
     var flaskAppConfig = angular.module('flaskApp');
 
-    flaskAppConfig.constant("REST_API", {
+    flaskAppConfig.constant("SERVER", {
+        "hostName": "http://146.148.83.30/",
         "url": "http://146.148.83.30/api/jsonws/",
+        "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
         "companyId":20154
     })
 
@@ -38,37 +40,28 @@
             url: '/prePostGame/:eventName/:eventId/:venueId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/prePostGame.html',
+                    templateUrl: 'templates/pre_post_game.html',
                     controller: 'prePostGameCtrl'
                 }
             }
         })
 
-        .state('app.browse', {
-            url: '/browse',
+                //pre post game page
+        .state('app.eventMapView', {
+            url: '/prePostGame/:eventName/:eventId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/browse.html'
+                    templateUrl: 'templates/event_map_view.html',
+                    controller: 'prePostGameCtrl'
                 }
             }
         })
-
-            .state('app.login', {
-                url: '/login',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/login.html',
-                        controller: 'LoginCtrl'
-                    }
-                }
-            })
-
-        .state('app.playlists', {
-            url: '/playlists',
+        .state('app.login', {
+            url: '/login',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/playlists.html',
-                    controller: 'PlaylistsCtrl'
+                    templateUrl: 'templates/login.html',
+                    controller: 'LoginCtrl'
                 }
             }
         })

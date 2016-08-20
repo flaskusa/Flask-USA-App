@@ -1,6 +1,11 @@
 ﻿<ion-view cache-view="false" view-title="USER REGISTRATION">
     <ion-content>
-            <form name="register_user_form" class="loginpane form_div" novalidate style="height: 3000px;">
+            <form name="register_user_form" class="loginpane form_div" novalidate>
+                <div class="card" ng-show="AddedSuccess">
+                    <div class="item item-text-wrap successColor">
+                        User Registered Successfully !!
+                    </div>
+                </div>
                 <div class="loginpane_body">
                     <div class="list">
                         <div class="item item-input item-floating-label">
@@ -19,7 +24,7 @@
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Email</span>
-                            <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required ng-blur="checkUserByEmailId(user);"><br />
+                            <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required ng-blur="checkUserByEmailId(user);">
                             <div ng-show="register_user_form.$submitted || register_user_form.Email.$touched">
                                 <span ng-show="register_user_form.Email.$error.required" class="error_msg">Tell us your email.</span>
                                 <span ng-show="register_user_form.Email.$error.email" class="error_msg">This is not a valid email.</span>
@@ -41,7 +46,7 @@
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Date of Birth</span>
-                            <input type="date" placeholder="Date of Birth" name="DOB" ng-model="user.DOB">
+                            <input type="date" name="DOB" ng-model="user.DOB" min="1960-01-01" max="2016-01-01">
                         </div>
                         <div class="item item-input">
                             <span class="input-label">Gender</span>
@@ -61,7 +66,7 @@
                         </div>
                     </div>
                     <div class="padding" align="center">
-                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="saveUser(user)">
+                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="saveUser(user);">
                             Save
                         </button>
                         <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">

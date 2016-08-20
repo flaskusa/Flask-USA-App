@@ -16,14 +16,13 @@
 
   <ion-side-menu side="left" class="my-side-menu">   
     <ion-content>
-        <div class="item item-avatar profile">
-            <img ng-src="http://146.148.83.30/documents/20181/0/title.jpg" onError="this.src = 'img/default-profilepic.png';">
+        <div class="item item-avatar profile" >
+            <img ng-src="{{imgUrl}}documents/20181/0/title.jpg" onError="this.src = 'img/default-profilepic.png';" ng-show="show_login">
             <h2>{{userName}}</h2>
             <h3>{{userEmailId}}</h3>
         </div>
         
-        <ul class="list"> 
-            
+        <ul class="list">             
             <div ng-show="!show_login">
                 <a href="#/app/login" class="item icon-left ion-unlocked" menu-close ng-click="login_form.$setPristine();">Login</a>
             </div> 
@@ -31,8 +30,10 @@
                 <a class="item icon-left ion-locked" menu-close ng-click="doLogout();">Logout</a>
             </div>
             <a href="#/app/events" class="item icon ion-person-stalker" menu-close>Events</a>
-            <a href="#/app/supplies" class="item icon ion-star" menu-close>Supplies</a>
-            <a href="#/app/user_navigation_menu" class="item icon ion-star" menu-close>User Menu</a>
+            <div ng-show="show_login">
+                <a href="#/app/supplies" class="item icon ion-star" menu-close>Supplies</a>
+                <a href="#/app/user_navigation_menu" class="item icon ion-star" menu-close>User Menu</a>     
+            </div> 
         </ul>
     </ion-content>
   </ion-side-menu>

@@ -3,13 +3,13 @@
     angular.module('flaskApp')
         .controller('my_tailgateCtrl', my_tailgateCtrl);
 
-    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate', '$cookieStore'];
+    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate', '$cookies'];
 
     /* @ngInject */
-    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookieStore) {
+    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies) {
         var self = this;
         $scope.myTailgate = [];
-        var userResponse = $cookieStore.get('CurrentUser');
+        var userResponse = $cookies.getObject('CurrentUser');
         var UserId = userResponse.data.userId;
         getAlltailgates();
 
