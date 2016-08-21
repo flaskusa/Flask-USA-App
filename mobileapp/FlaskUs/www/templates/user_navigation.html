@@ -1,0 +1,47 @@
+﻿<ion-view view-title="FLASK">
+    <ion-content>
+                <ion-nav-bar class="bar-dark" align-title="center">
+                    <ion-nav-buttons side="right">
+                        <button class="button button-icon button-clear ion-navicon" menu-toggle="right"></button>
+                    </ion-nav-buttons>
+                </ion-nav-bar>
+                <ion-nav-view name="menuContent">
+                    <div class="list card">
+                        <div class="my_card item item-image">
+                            <ion-item href="#/app/my_events">
+                                <img class="full-image" src="img/event.jpg">
+                                <div class="caption post_content">
+                                    <p> MY EVENTS</p>
+                                </div>
+                            </ion-item>
+                        </div>
+                        <div class="my_card item item-image">
+                            <ion-item href="#/app/tailgate" class="imgholder">
+                                <img class="full-image" src="img/tailgate.jpg">
+                                <div class="caption post_content">
+                                    <p> MY TAILGATE</p>
+                                </div>
+                            </ion-item>
+                        </div>
+                        <div class="my_card item item-image">
+                            <ion-item href="#/app/friends">
+                                <img class="full-image" src="img/friends.jpg">
+                                <div class="caption post_content">
+                                    <p> MY FRIENDS</p>
+                                </div>
+                            </ion-item>
+                        </div>
+                    </div>
+                </ion-nav-view>
+            <div class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive" style="position:absolute !important;">
+                <a class="tab-item">
+                    <i class="icon ion-android-lock"></i>
+                    SIGN OUT
+                </a>
+                <a class="tab-item">
+                    <i class="icon ion-gear-a"></i>
+                    ACCOUNT SETTINGS
+                </a>
+        </div>
+    </ion-content>
+</ion-view>

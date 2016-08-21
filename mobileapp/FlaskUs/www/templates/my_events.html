@@ -11,7 +11,7 @@
     </div>
     <ion-content ng-click="searchBox.showBox = false">
         <a class="item item-full item-icon-left " href="#/app/addMyEvent">
-            <div style="float:left;"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" class="FlaskionIcons"></div>
+            <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">ADD EVENT</p>
         </a>
         <div class="card" ng-show="myEventError">
@@ -34,7 +34,7 @@
                         <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
                     </div>
                     <div class="col">
-                        <span class="badge span_icon" ng-click="addmyEvent(data.eventId,$index)"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg"></span>
+                        <span class="badge span_icon" ng-click="addmyEvent(data.eventId,$index)"><img src="img/flask_icons/arrow_left.svg"></span>
                     </div>
                 </div>
                 <ion-option-button class="button-assertive icon ion-trash-a" ng-click="removeEvent(data.eventId,$index);"></ion-option-button>
