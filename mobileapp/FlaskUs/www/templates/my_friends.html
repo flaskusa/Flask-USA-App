@@ -1,16 +1,25 @@
 ﻿<ion-view cache-view="false" view-title="MY FRIENDS">
-    <search-bar ng-model="search" class="button button-icon button-clear ion-search"></search-bar>
+    
     <ion-content>
+        <!--<ion-spinner></ion-spinner>-->
         <a class="item item-full item-icon-left icon ion-plus-circled" ng-click="modal.show()">
-            INVITE FRIEND
+            INVITE FRIEND 
         </a>
-
-        <div class="list">
-            <a class="item item-icon-right" href="#/app/suppliesList" ng-repeat="data in dataModel.data">
-                {{ data.listName }}
-                <i class="icon ion-chevron-right"></i>
-            </a>
+        <div class="card" ng-if="noFriendAdded">
+            <div class="item item-text-wrap ">
+                No Friends added yet.
+            </div>
         </div>
+        <div ng-if="!noFriendAdded">
+            <ion-scroll  >
+                <div class="list"> 
+                    <a ng-repeat="data in myFriends" item="data"  class="item item-avatar" href="#/app/my_friendDetail/{{data.userId}}">
+                        <img src = "img/default-profilepic.png">
+                        <h2>{{ data.fullName | uppercase}}</h2>
+                        </ion-item>
+                    </a>
+            </div>
+         </div>
         <script id="templates/modal.html" type="text/ng-template">
             <ion-modal-view>
                 <ion-header-bar class="bar bar-header bar-positive">
