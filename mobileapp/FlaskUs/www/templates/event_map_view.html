@@ -1,20 +1,32 @@
 ﻿<ion-view cache-view="false">
-    <ion-nav-title>
-        <a href="#/app/events.html"><img alt="Flask" class="header-img" src="img/headerFlaskLogo.png" /></a>
-    </ion-nav-title>
-    <div class="bar bar-subheader" >
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+        <ion-nav-title>
+            <a href="#/app/events"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
+        </ion-nav-title>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <div class="bar bar-subheader">
         <div class="row">
             <div class="col"></div>
-            <div class="col col-90 event_name"><div class="eventHeading2" style="text-transform:uppercase;text-align:center"><span class="overlineStyle">{{currEventName}}</span></div></div>
+            <div class="col col-90 event_name">
+                <div class="eventHeading2" style="text-transform:uppercase;text-align:center">
+                    <span class="overlineStyle">{{eventName}}</span></div>
+            </div>
             <div class="col"></div>
-        </div>           
+        </div>
     </div>
     <ion-content class="has-footer has-header has-subheader">
         <div>
             Placeholder for map view
 
         </div>
-        <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
+    <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
             <img src="img/ad.png" class="footer-img" />
-        </ion-footer-bar>
+    </ion-footer-bar>
 </ion-view>

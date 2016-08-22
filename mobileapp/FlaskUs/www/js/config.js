@@ -47,8 +47,9 @@
         })
 
                 //event map view
-        .state('app.eventMapView', {
-            url: '/eventMapView',
+        .state('app.event_map_view', {
+            url: '/event_map_view',
+            params: {eventDetails: null, infoType: null, infoTypeCategory: null },
             views: {
                 'menuContent': {
                     templateUrl: 'templates/event_map_view.html',
@@ -176,6 +177,11 @@
        }
        )
 
+        /*
+        if none of the above states are matched, use this as the fallback
+            $urlRouterProvider.otherwise('/app/events');   
+        */
+
         //Http Interceptors for showing and hiding 
         $httpProvider.interceptors.push(function ($rootScope) {
             return {
@@ -189,7 +195,5 @@
                 }
             }
         })
-        // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/events');     
     })
 })();

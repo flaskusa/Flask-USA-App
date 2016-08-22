@@ -9,7 +9,7 @@
     function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
         /* jshint validthis: true */
         var self = this;
-        $scope.eventInfo = [];
+        $scope.eventDetails = {};
         $scope.Details = [];
         $scope.INFO_TYPE = [];
         $scope.INFO_TYPE_CATEGORY = [];
@@ -19,21 +19,25 @@
         $scope.currEventName = $stateParams.eventName;
         $scope.currEventId = $stateParams.eventId;
         var currEventId = $scope.currEventId;
-        getAllVenuImages();
+        var PRE_EVENT = "Pre-Event";
+        var AT_EVENT = "During-Event";
+        var POST_EVENT = "Post-Event";
+        getEventVenueDatail();
         $ionicSlideBoxDelegate.update();
 
         $scope.preEvent = function(){
-            $state.go("app.eventMapView");
+            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: 1 });
         }
         $scope.atEvent = function(){
-            $state.go("app.eventMapView");
+            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: AT_EVENT, infoTypeCategory: 1 });
         }
         $scope.postEvent = function(){
-            $state.go("app.eventMapView");
+            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: POST_EVENT, infoTypeCategory: 1 });
         }
 
-        function getAllVenuImages() {
-            EventsService.getVenueImages(currEventId).then(function (respData) {
+        function getEventVenueDatail() {
+            EventsService.getEventVenueDatail(currEventId).then(function (respData) {
+                $scope.eventDetails = respData.data; 
                 var len = respData.data.Details.length - 1;
                 for (var i = 0; i <= len; i++) {                    
                     $scope.Details.push(angular.fromJson(respData.data.Details[i].Detail))
@@ -42,12 +46,12 @@
                     }
                 }
                 for (var i = 0; i <= len; i++) {
-                    if ($scope.Details[i].infoTypeName == "Pre-Event") {
+                    if ($scope.Details[i].infoTypeName == PRE_EVENT) {
                         if ($scope.Pre_Game.indexOf($scope.Details[i].infoTypeCategoryName) == -1) {
                             $scope.Pre_Game.push($scope.Details[i].infoTypeCategoryName)
                         }
                     }else
-                        if ($scope.Details[i].infoTypeName == "During-Event") {
+                        if ($scope.Details[i].infoTypeName == AT_EVENT) {
                             if ($scope.During_Game.indexOf($scope.Details[i].infoTypeCategoryName) == -1) {
                                 $scope.During_Game.push($scope.Details[i].infoTypeCategoryName)
                         }

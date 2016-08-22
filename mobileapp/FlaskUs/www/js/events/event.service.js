@@ -50,7 +50,7 @@
                 //add errror handling 
             });
         }
-        this.getVenueImages = function (currEventId) {
+        this.getEventVenueDatail = function (currEventId) {
             return $http.get(baseURL + getEvent_Venue_Details_with_Images, {
                 params: { 'eventId': currEventId }
             }

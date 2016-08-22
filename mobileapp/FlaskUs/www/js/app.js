@@ -21,6 +21,7 @@
             $rootScope.$on('loading:hide', function () {
                 $ionicLoading.hide()
             })
+            
         });
         document.addEventListener("deviceready", function () {
 
@@ -29,10 +30,12 @@
                 if (navigator.connection.type == Connection.NONE) {
                     $ionicPopup.alert({
                         title: 'No Internet Connection',
-                        content: 'Sorry, no Internet connectivity detected. Please reconnect and try again.'
+                        content: 'There is no internet connection. Only some part of aplication will work'
                     });
                 }
             }
         }, false);
+  
+        
     })
 })();
