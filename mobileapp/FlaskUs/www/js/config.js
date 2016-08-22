@@ -133,11 +133,20 @@
             url: '/my_friends',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_friends.html'
+                    templateUrl: 'templates/my_friends.html',
+                    controller:"FriendsCtrl"
                 }
             }
         })
-
+        .state('app.my_friendDetail', {
+            url: '/my_friendDetail/:userId',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/friendDetail.html',
+                    controller:"FriendDetailCtrl"
+                }
+            }
+        })
         .state('app.user_registration', {
             url: '/user_registration',
             views: {
