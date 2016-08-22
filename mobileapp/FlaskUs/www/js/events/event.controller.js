@@ -41,7 +41,8 @@
             ConvertToZip($scope.get_geolocation_data.coords);
         }
 
-        function isLocationStored() {            
+        function isLocationStored() {
+            console.log($scope.get_geolocation_data);
             if ($scope.get_geolocation_data.code = "TIMEOUT") {
                 return false;
             } else {                
@@ -50,7 +51,11 @@
         }
 
         function isExpired(){
-            return (constant_time < current_time - storedTime);
+            if (constant_time < current_time - storedTime) {
+                return false;
+            } else {
+                return true;
+            };
         }
 
         function getEventList() {
