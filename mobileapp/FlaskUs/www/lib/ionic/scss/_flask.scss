@@ -57,15 +57,15 @@ html, body{font-family: coda;}
     width:100%;height:100%;
 }
 .myEvent{
-          background-image:url("../img/flask_images/my_events.jpg");
+          background-image:url("../img/FLASK IMAGES/MY_EVENTS.jpg");
       background-size:100%;
 }
 .myTailgate{
-          background-image:url("../img/flask_images/my_tailgate.jpg");
+          background-image:url("../img/FLASK IMAGES/MY_TAILGATE.jpg");
       background-size:100%;
 }
 .myFrnds{
-     background-image:url("../img/flask_images/my_tailgate.jpg");
+     background-image:url("../img/FLASK IMAGES/MY_FRIENDS.jpg");
       background-size:100%;
 }
 .row.mainRow.myFrnds {
@@ -538,7 +538,7 @@ img.list-thumbnail.listImages1 {
 .eventList{
     text-align: center;
     padding: 8px 39px 0px 57px;
-    min-height: 39px !important;
+    min-height: 61px !important;
     border-color: black;
 }
 .eventHeading{
@@ -641,7 +641,7 @@ div.searchrow {
 }
 
 .BgCol1{
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
     border-color:#464444;
 	display: block;
 }
@@ -737,7 +737,8 @@ p.addText{
     height:20px;
     padding-left:0px;
     padding-right:0px;
-    margin-right:10px;
+    margin-right: -28px;
+    margin-top: 3px;
 }
 
 .successColor{
@@ -769,7 +770,6 @@ input.loginInputs{
 .col.col-70.event_content{
     padding-left: 8%;
     width: 93%;
-    margin-top: -10px;
 }
 
 .col.col-70.event_content1{

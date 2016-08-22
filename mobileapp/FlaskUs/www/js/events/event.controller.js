@@ -33,7 +33,8 @@
             var searchstr = '';
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, lat, lng).then(function (respData) {
                 $scope.allEvent = respData.data.Events;
-                if (respData.data.Events.length == 0) {
+                if ($scope.allEvent.length == 0) {
+                    console.log("Empty");
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
@@ -47,7 +48,7 @@
         function getAllEvents() {
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString,$scope.latitude,$scope.longitude).then(function (respData) {
                 $scope.allEvent = respData.data.Events;
-                if (respData.data.Events.length == 0) {
+                if ($scope.allEvent.length == 0) {
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
@@ -70,7 +71,8 @@
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 $scope.allEvent = respData.data.Events;
                 $scope.searchBox = { showBox: false };
-                if (respData.data.Events.length == 0) {
+                if ($scope.allEvent.length == 0) {
+                    console.log("Empty");
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
@@ -89,7 +91,7 @@
                 EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                     $scope.allEvent = respData.data.Events;
                     $scope.searchBox = { showBox: false };
-                    if (respData.data.Events.length == 0) {
+                    if ($scope.allEvent.length == 0) {
                         $scope.Event_Error = true;
                     } else {
                         $scope.Event_Error = false;

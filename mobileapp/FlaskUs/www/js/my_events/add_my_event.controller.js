@@ -34,6 +34,13 @@
                     if ($scope.myEvent[i].userEvent == "0") {
                         $scope.myFilteredEvent.push($scope.myEvent[i]);
                     }
+                    if( $scope.myFilteredEvent.length=="0")
+                    {
+                        $scope.Add_Event_Error = true;
+                    }
+                    else {
+                        $scope.Add_Event_Error = false;
+                    }
                 }
             });
         }
