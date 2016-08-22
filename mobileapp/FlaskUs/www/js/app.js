@@ -31,9 +31,6 @@
                 function errorCallback(error) {
                     //when Error
                     $cookies.putObject('user_location_data', error);
-                },
-                {
-                    timeout: 60 * 60 * 1000
                 }
             );
             // Check for network connection
