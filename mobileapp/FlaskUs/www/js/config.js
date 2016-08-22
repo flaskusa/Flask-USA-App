@@ -82,7 +82,7 @@
             url: '/suppliesList/:listName',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/suppliesList.html',
+                    templateUrl: 'templates/supplies_list.html',
                     controller: 'SuppliesListCtrl'
                 }
             }
@@ -109,11 +109,11 @@
             }
         })
 
-         .state('app.addMyEvent', {
-             url: '/addMyEvent',
+         .state('app.add_my_event', {
+             url: '/add_my_event',
              views: {
                  'menuContent': {
-                     templateUrl: 'templates/addMyEvent.html',
+                     templateUrl: 'templates/add_my_event.html',
                      controller: 'addMyEventCtrl'
                  }
              }
@@ -175,11 +175,11 @@
             }
         })
 
-       .state('app.addMyTailgate', {
-           url: '/addMyTailgate',
+       .state('app.add_my_tailgate', {
+           url: '/add_my_tailgate',
            views: {
                'menuContent': {
-                   templateUrl: 'templates/addMyTailgate.html',
+                   templateUrl: 'templates/add_my_tailgate.html',
                    controller: 'addMyTailgateCtrl'
                }
            }
@@ -188,7 +188,7 @@
 
         /*
         if none of the above states are matched, use this as the fallback*/
-            $urlRouterProvider.otherwise('/app/events');   
+         $urlRouterProvider.otherwise('/app/events');   
         
 
         //Http Interceptors for showing and hiding 

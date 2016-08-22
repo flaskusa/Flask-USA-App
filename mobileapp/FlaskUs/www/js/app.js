@@ -1,6 +1,6 @@
 (function () {
     var app = angular.module('flaskApp'); 
-    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup) {
+    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -13,7 +13,6 @@
                 StatusBar.styleDefault();
             }
 
-
             $rootScope.$on('loading:show', function () {
                 $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' })
             })
@@ -21,10 +20,22 @@
             $rootScope.$on('loading:hide', function () {
                 $ionicLoading.hide()
             })
-            
-        });
-        document.addEventListener("deviceready", function () {
-
+            // Gelocation On ionic ready
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    //when Success
+                    $cookies.putObject('user_location_data', position);
+                    var GetMyObj = $cookies.getObject('user_location_data');
+                    console.log(GetMyObj);
+                },
+                function errorCallback(error) {
+                    //when Error
+                    $cookies.putObject('user_location_data', error);
+                },
+                {
+                    timeout: 60 * 60 * 1000
+                }
+            );
             // Check for network connection
             if (window.Connection) {
                 if (navigator.connection.type == Connection.NONE) {
@@ -35,7 +46,8 @@
                 }
             }
         }, false);
-  
-        
-    })
+    });
+
+   document.addEventListener("deviceready", function () {
+   })
 })();
