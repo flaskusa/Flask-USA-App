@@ -3,13 +3,14 @@
     angular.module('flaskApp')
         .controller('EventsCtrl', EventsCtrl);
 
-    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies'];
+    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage'];
 
     /* @ngInject */
-    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies) {
+    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage) {
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
+        $scope.allEventsq = [];
         $scope.get_geolocation_data ;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         var DEFAULT_ZIPCODE = 48226; /*Detroit Zip Code*/
@@ -23,43 +24,38 @@
         $scope.longitude = '83.0456';
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
-        var current_time = currentDate.getTime();
-        var constant_time = currentDate.getTime();
-        constant_time += 60 * 60 * 1000;
+        $scope.current_time = currentDate.getTime();
+        $scope.constant_time = currentDate.getTime();
+        $scope.constant_time += 60 * 60 * 1000;
         $scope.storedTime = '';
 
-        $scope.get_geolocation_data = $cookies.getObject('user_location_data');
-        console.log($scope.timestamp);
-
-        if (isLocationStored && isExpired) {
-            getEventList();
-        } else {
-            get_event_list_from_cookie($scope.get_geolocation_data.coords);
-            $scope.storedTime = $scope.get_geolocation_data.timestamp;
-            $scope.latitude = $scope.get_geolocation_data.coords.latitude;
-            $scope.longitude = $scope.get_geolocation_data.coords.longitude;
-            ConvertToZip($scope.get_geolocation_data.coords);
-        }
-
-        function isLocationStored() {
-            console.log($scope.get_geolocation_data);
-            if ($scope.get_geolocation_data.code = "TIMEOUT") {
+       // $scope.allEventsq = $localStorage.getObject('user_location_data');
+        // Retrieve the object from ng-storage  
+        $scope.allEventsq = $localStorage.things;
+        $scope.storedTime = $scope.allEventsq.timestamp;
+        console.log($scope.allEventsq);
+        console.log('stored time', $scope.storedTime);
+        function islocalstorageEmpty() {
+            if ($scope.allEventsq.length > 0) {
                 return false;
-            } else {                
-                return true;
             }
         }
 
-        function isExpired(){
-            if (constant_time < current_time - storedTime) {
+        function isExpired() {
+            if ($scope.constant_time < $scope.current_time - $scope.storedTime) {
                 return false;
-            } else {
-                return true;
-            };
+            }
         }
 
-        function getEventList() {
+        if (islocalstorageEmpty() && isExpired()) {
+            get_event_list();
+        } else {
+            get_from_localStorage();
+        }
+
+        function get_event_list(){
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
+                console.log(respData);
                 $scope.allEvent = respData.data.Events;
                 if ($scope.allEvent.length == 0) {
                     $scope.Event_Error = true;
@@ -69,10 +65,12 @@
             });
         }
 
-        function get_event_list_from_cookie(data) {
-            $scope.latitude = data.latitude;
-            $scope.longitude = data.longitude;
-            EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString,$scope.latitude,$scope.longitude).then(function (respData) {
+        function get_from_localStorage() {
+            $scope.latitude = $scope.allEventsq.coords.latitude;
+            $scope.longitude = $scope.allEventsq.coords.longitude;
+            ConvertToZip($scope.latitude, $scope.longitude);
+            EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
+                console.log(respData);
                 $scope.allEvent = respData.data.Events;
                 if ($scope.allEvent.length == 0) {
                     $scope.Event_Error = true;
@@ -83,35 +81,42 @@
         }
 
         $scope.searchBox = { showBox: false };
+        $scope.userList = [];
+        $scope.userList1 = [];
 
-        $scope.getDatafromsearch = function (searchList) {
+        $scope.get_data_from_search = function (searchstringList) {
             $scope.searchBox = { showBox: false };
             var setEndDate = new Date();
-            var endDate = setEndDate.setDate(setEndDate.getDate() + parseInt(searchList.days));
+            var endDate = setEndDate.setDate(setEndDate.getDate() + parseInt(searchstringList.days));
             $scope.endDate = $filter('date')(setEndDate, 'yyyy-MM-dd h:mm');
-            $scope.searchString = searchList.searchString;
+            //getLatlongfromZip(searchList.zipcode);
+            $scope.getLatlongfromZip(searchstringList.zipcode);
+            console.log($scope.locationList);
+            $scope.latitude = $scope.locationList.lat;
+            $scope.longitude = $scope.locationList.lng;
+            $scope.searchString = searchstringList.searchString;
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (resp) {
-                $scope.allEvent = resp.data.Events;                
+                $scope.allEvent = resp.data.Events;
                 if ($scope.allEvent.length == 0) {
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
                 }
             });
-        }
+        }        
 
-        function getLatlongfromZip(zipcode) {
+        $scope.getLatlongfromZip = function (zipcode) {
             var addressVar = 'address=';
-            $scope.my_data2 = EventsService.getlocation(addressVar, zipcode).then(function (respData) {
-                return respData;
+            EventsService.getlocation(addressVar, zipcode).then(function (respData) {
+                $scope.locationList = respData.data.results[0].geometry.location;
             });
-           
+           // console.log($scope.getLatlongfromZip);
         }
 
-        function ConvertToZip(pos) {
+        function ConvertToZip(latitude,longitude) {
             var latlongVar = 'latlng=';
             var sensorVar = '&sensor=true';
-            EventsService.getZiplocation(latlongVar, pos.latitude, pos.longitude, sensorVar).then(function (res){
+            EventsService.getZiplocation(latlongVar, latitude, longitude, sensorVar).then(function (res) {
                 if (res.data.results[0]) {
                     for (var i = 0; i < res.data.results[0].address_components.length; i++) {
                         var postalCode = res.data.results[0].address_components[i].types;
@@ -120,7 +125,9 @@
                         }
                     }
                 }
-                $scope.searchList = {
+                $scope.searchstringList = {
+                    searchString :'a',
+                    days : '60',
                     zipcode: My_Zip
                 };
             });
