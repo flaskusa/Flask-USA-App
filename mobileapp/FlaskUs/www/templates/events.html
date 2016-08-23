@@ -11,33 +11,35 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <div class="bar bar-subheader BgCol" ng-show="searchBox.showBox">
-        <div class="row">
-            <div class="col col-100 col-center searchrow">
-                <input type="text" placeholder="Search event..." class="searchboxArea" ng-model="eventList.searchString" />
+        <form name="search_form" novalidate ng-submit="search_form.$valid && getDatafromsearch(searchList)">
+            <div class="row">
+                <div class="col col-100 col-center searchrow">
+                    <input type="text" placeholder="Search event..." class="searchboxArea" ng-model="searchList.searchString" ng-init="a"/>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col col-100 col-center searchrow">
-                <select class="searchboxArea" ng-model="eventList.dates" ng-change="filterDate(eventList.dates)">
-                    <option value="0">Today</option>
-                    <option value="7">7 Days</option>
-                    <option value="14">14 Days</option>
-                    <option value="30">30 Days</option>
-                    <option value="60" ng-selected="true">60 Days</option>
-                </select>
+            <div class="row">
+                <div class="col col-100 col-center searchrow">
+                    <select class="searchboxArea" ng-model="searchList.days" required>
+                        <option value="0">Today</option>
+                        <option value="7">7 Days</option>
+                        <option value="14">14 Days</option>
+                        <option value="30">30 Days</option>
+                        <option value="60" ng-selected="true">60 Days</option>
+                    </select>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col col-100 col-center searchrow">
-                <input type="text" placeholder="Zip code..." class="searchboxArea" id="zipCode" name="zipCode" ng-model="eventList.zipcode" />
+            <div class="row">
+                <div class="col col-100 col-center searchrow">
+                    <input type="text" placeholder="Zip code..." class="searchboxArea" id="zipCode" name="zipCode" ng-model="searchList.zipcode" />
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col col-center searchrow">
-                <button class="button button-clear button_search" ng-click="getAllfilteredEvents(eventList.zipcode)">SEARCH</button>
+            <div class="row">
+                <div class="col col-center searchrow">
+                    <button type="submit" class="button button-clear button_search" >SEARCH</button>
+                </div>
             </div>
-        </div>
-    </div>
+            </form>
+</div>
     <ion-content class="has-footer">
         <div ng-click="searchBox.showBox = false">
             <div>
@@ -49,7 +51,7 @@
                 </div>
             </div>
             <div class="list">
-                <a class="item item-thumbnail-left item-icon-right eventList item-remove-animate" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent | filter: eventList.searchString">
+                <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent">
                     <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
