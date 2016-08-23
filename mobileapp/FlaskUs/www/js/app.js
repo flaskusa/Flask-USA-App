@@ -1,6 +1,6 @@
 (function () {
     var app = angular.module('flaskApp'); 
-    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies) {
+    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -20,17 +20,21 @@
             $rootScope.$on('loading:hide', function () {
                 $ionicLoading.hide()
             })
+            //$scope.user_location_data = [];          
+
+            //user_location_data.push({ code: "stored" });
             // Gelocation On ionic ready
             navigator.geolocation.getCurrentPosition(
                 function (position) {
                     //when Success
-                    $cookies.putObject('user_location_data', position);
-                    var GetMyObj = $cookies.getObject('user_location_data');
-                    console.log(GetMyObj);
+                    // save it
+                    $localStorage = $localStorage.$default({
+                        things: position
+                    });
                 },
                 function errorCallback(error) {
                     //when Error
-                    $cookies.putObject('user_location_data', error);
+                    //$cookies.putObject('user_location_data', error);
                 }
             );
             // Check for network connection
@@ -44,7 +48,4 @@
             }
         }, false);
     });
-
-   document.addEventListener("deviceready", function () {
-   })
 })();
