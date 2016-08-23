@@ -1,47 +1,32 @@
 ﻿<ion-view cache-view="false" view-title="Add My Tailgate">
-    <ion-header-bar align-title="center" class="bar-light">
-        <button menu-toggle="left" class="button button-icon icon ion-ios7-bookmarks-outline"></button>
-        <h1 class="title">Slide-Box Scrolling Not Working</h1>
-        <button menu-toggle="right" class="button button-icon icon ion-ios7-world-outline"></button>
-    </ion-header-bar>
     <ion-slide-box on-slide-changed="slideChanged(index)" active-slide="myActiveSlide" class="has-header">
-        <ion-slide disable-scroll="false" dynamic-height>
-            <ion-scroll>
+        <ion-slide dynamic-height>
                 <div class="list">
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Tailgate Name</span>
+                    <label class="item item-input item-floating-label">
                         <input type="text" placeholder="Tailgate Name">
                     </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Description</span>
+                    <label class="item item-input item-floating-label">
                         <input type="text" placeholder="Description">
                     </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Event</span>
+                    <label class="item item-input item-floating-label">
                         <input type="text" placeholder="Event">
                     </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Event Date</span>
+                    <label class="item item-input item-floating-label">
                         <input type="text" placeholder="Event Date">
                     </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Start Time</span>
+                    <label class="item item-input item-floating-label">
                         <input type="text" placeholder="Start Time">
                     </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">End Time</span>
+                    <label class="item item-input item-floating-label">
                         <input type="text" placeholder="End Time">
                     </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Venmo Account</span>
+                    <label class="item item-input item-floating-label">
                         <input type="text" placeholder="Venmo Account">
                     </label>
-                    <label class="item item-input item-stacked-label">
-                        <span class="input-label">Amount</span>
+                    <label class="item item-input item-floating-label">
                         <input type="text" placeholder="Amount">
                     </label>
                 </div>
-            </ion-scroll>
         </ion-slide>
         <ion-slide>
             <h3>Uploading Images</h3>
@@ -51,7 +36,7 @@
             </div>
         </ion-slide>
         <ion-slide>
-            <h3>Attendees</h3>
+            <h3></h3>
         </ion-slide>
     </ion-slide-box>
     <div class="bar bar-footer bar-dark has-footer">

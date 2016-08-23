@@ -5,13 +5,13 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content>
-        <a class="item item-full item-icon-left " href="#/app/addMyEvent">
+        <a class="item item-full item-icon-left " href="#/app/add_my_tailgate">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">CREATE NEW TAILGATE</p>
         </a>
         <div class="list">
             <a class="item item-thumbnail-left item-icon-right eventList" href="#" ng-repeat="data in allTailgate">
-                <img src="img/events.jpg" class="listImages">
+                <img src="img/events.jpg" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                 <h2 class="eventNameCol">{{ data.tailgateName }}</h2>
                 <p class="dateCol">{{data.tailgateDate | date:'EEEE,MMMM dd,yyyy'}}</p>
                 <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
