@@ -10,7 +10,7 @@
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
-        $scope.allEventsq = [];
+        $scope.localstorageData = [];
         $scope.get_geolocation_data ;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         var DEFAULT_ZIPCODE = 48226; /*Detroit Zip Code*/
@@ -28,17 +28,21 @@
         $scope.constant_time = currentDate.getTime();
         $scope.constant_time += 60 * 60 * 1000;
         $scope.storedTime = '';
-
-       // $scope.allEventsq = $localStorage.getObject('user_location_data');
+        $scope.searchstringList = {
+            searchString: 'a',
+            days: '60'
+        };
+        // $scope.localstorageData = $localStorage.getObject('user_location_data');
         // Retrieve the object from ng-storage  
-        $scope.allEventsq = $localStorage.things;
-        $scope.storedTime = $scope.allEventsq.timestamp;
-        console.log($scope.allEventsq);
+        $scope.localstorageData = $localStorage.things;
+        //
+        console.log($scope.localstorageData);
         console.log('stored time', $scope.storedTime);
         function islocalstorageEmpty() {
-            if ($scope.allEventsq.length > 0) {
+            if ($scope.localstorageData && $scope.localstorageData.length) {
                 return false;
             }
+            //
         }
 
         function isExpired() {
@@ -48,9 +52,10 @@
         }
 
         if (islocalstorageEmpty() && isExpired()) {
-            get_event_list();
-        } else {
             get_from_localStorage();
+            $scope.storedTime = $scope.localstorageData.timestamp;
+        } else {
+            get_event_list();
         }
 
         function get_event_list(){
@@ -66,8 +71,9 @@
         }
 
         function get_from_localStorage() {
-            $scope.latitude = $scope.allEventsq.coords.latitude;
-            $scope.longitude = $scope.allEventsq.coords.longitude;
+
+            $scope.latitude = $scope.localstorageData.coords.latitude;
+            $scope.longitude = $scope.localstorageData.coords.longitude;
             ConvertToZip($scope.latitude, $scope.longitude);
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 console.log(respData);
@@ -81,8 +87,6 @@
         }
 
         $scope.searchBox = { showBox: false };
-        $scope.userList = [];
-        $scope.userList1 = [];
 
         $scope.get_data_from_search = function (searchstringList) {
             $scope.searchBox = { showBox: false };
