@@ -16,7 +16,13 @@
         var getEvent_Venue_Details_with_Images = "flask-rest-events-portlet.event/get-event-venue-details-with-images";
         var googleMapURL = SERVER.googleApi;
 
-        this.getAllEvents = function(eventIds,sDate,eDate,sString,lat,long) {
+        var eventServices = {
+            getAllEvents: getAllEvents,
+            getlocation: getlocation,
+            getZiplocation: getZiplocation,
+            getEventVenueDatail: getEventVenueDatail
+        }
+        function getAllEvents (eventIds,sDate,eDate,sString,lat,long) {
             return $http.get(baseURL + allEventsURL, {
                 params: {
                     eventTypeIds: eventIds,
@@ -33,7 +39,7 @@
                     //add errror handling 
                 });
         }
-        this.getlocation = function (addressVar, zipcode) {
+        function getlocation (addressVar, zipcode) {
             return $http.get(googleMapURL + addressVar + zipcode)
             .then(function success(response) {
                 return response;
@@ -41,7 +47,7 @@
                 //add errror handling 
             });
         }
-        this.getZiplocation = function (latlongVar, lat, long, sensorVar) {            
+        function getZiplocation (latlongVar, lat, long, sensorVar) {            
             return $http.get(googleMapURL + latlongVar + lat + ',' + long + sensorVar)
             .then(function success(response) {
                 return response;
@@ -49,7 +55,7 @@
                 //add errror handling 
             });
         }
-        this.getEventVenueDatail = function (currEventId) {
+        function getEventVenueDatail (currEventId) {
             return $http.get(baseURL + getEvent_Venue_Details_with_Images, {
                 params: { 'eventId': currEventId }
             }
@@ -61,5 +67,6 @@
                 console.log("Error Message");
             });
         }
+        return eventServices;
     }
 })();
