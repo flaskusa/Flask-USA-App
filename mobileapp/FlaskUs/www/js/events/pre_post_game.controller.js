@@ -63,6 +63,16 @@
                 }
                 $ionicSlideBoxDelegate.update();
                 $ionicScrollDelegate.resize()
+
+                if ($scope.Post_Game.length ==0) {
+                    $scope.Post_Game.push("No_Event");
+                }
+                if ($scope.During_Game.length == 0) {
+                    $scope.During_Game.push("No_Event");
+                }
+                if ($scope.Pre_Game.length == 0) {
+                    $scope.Pre_Game.push("No_Event");
+                }
             });
 
             $scope.slidePrevious1 = function (slide) {

@@ -16,8 +16,7 @@
         var getEvent_Venue_Details_with_Images = "flask-rest-events-portlet.event/get-event-venue-details-with-images";
         var googleMapURL = SERVER.googleApi;
 
-        this.getAllEvents = getAllEvents;
-        function getAllEvents(eventIds,sDate,eDate,sString,lat,long) {
+        this.getAllEvents = function(eventIds,sDate,eDate,sString,lat,long) {
             return $http.get(baseURL + allEventsURL, {
                 params: {
                     eventTypeIds: eventIds,

@@ -800,3 +800,7 @@ input.loginInputs{
     stroke: #f89734;
     fill: #f89734;
 }
+/*for reducing padding for floating text boxes*/
+.item.item-input.item-floating-label {
+    padding: 0px 0 0px 16px;
+}

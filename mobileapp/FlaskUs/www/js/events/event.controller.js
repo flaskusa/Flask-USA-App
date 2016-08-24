@@ -78,7 +78,7 @@
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 console.log(respData);
                 $scope.allEvent = respData.data.Events;
-                if ($scope.allEvent.length == 0) {
+                if ($scope.allEvent && $scope.allEvent.length) {
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
@@ -87,35 +87,29 @@
         }
 
         $scope.searchBox = { showBox: false };
-
+        $scope.locationList = [];
         $scope.get_data_from_search = function (searchstringList) {
             $scope.searchBox = { showBox: false };
+            var addressVar = 'address=';
             var setEndDate = new Date();
             var endDate = setEndDate.setDate(setEndDate.getDate() + parseInt(searchstringList.days));
             $scope.endDate = $filter('date')(setEndDate, 'yyyy-MM-dd h:mm');
-            //getLatlongfromZip(searchList.zipcode);
-            $scope.getLatlongfromZip(searchstringList.zipcode);
-            console.log($scope.locationList);
-            $scope.latitude = $scope.locationList.lat;
-            $scope.longitude = $scope.locationList.lng;
             $scope.searchString = searchstringList.searchString;
-            EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (resp) {
-                $scope.allEvent = resp.data.Events;
-                if ($scope.allEvent.length == 0) {
-                    $scope.Event_Error = true;
-                } else {
-                    $scope.Event_Error = false;
-                }
+            EventsService.getlocation(addressVar, searchstringList.zipcode).then(function (respData) {
+                $scope.locationList = respData.data.results[0].geometry.location;
+                $scope.latitude = $scope.locationList.lat;
+                $scope.longitude = $scope.locationList.lng;
+                EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (resp) {
+                    $scope.allEvent = resp.data.Events;
+                    if ($scope.allEvent.length ==0) {
+                        $scope.Event_Error = true;
+                    } else {
+                        $scope.Event_Error = false;
+                    }
+                });
+
             });
         }        
-
-        $scope.getLatlongfromZip = function (zipcode) {
-            var addressVar = 'address=';
-            EventsService.getlocation(addressVar, zipcode).then(function (respData) {
-                $scope.locationList = respData.data.results[0].geometry.location;
-            });
-           // console.log($scope.getLatlongfromZip);
-        }
 
         function ConvertToZip(latitude,longitude) {
             var latlongVar = 'latlng=';
