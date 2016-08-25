@@ -4,7 +4,6 @@
         {
             listid: 1,
             listName: "GAME DAY NEEDS",
-            selectedListItem:[1,3,5],
             listItem:[{
                 listItemId: 1,
                 itemName: "TICKETS",
@@ -24,7 +23,6 @@
         {
             listid: 2,
             listName: "TAILGATE SET-UP",
-            selectedListItem:[1,3,5],
             listItem:[{
             listItemId: 1,
             itemName: "TICKETS",
@@ -49,7 +47,6 @@
         {
             listid: 3,
             listName: "TAILGATE SUPPLIES",
-            selectedListItem:[1,3,5],
             listItem:[{
                 listItemId: 1,
                 itemName: "TICKETS",
@@ -60,7 +57,6 @@
         {
             listid: 4,
             listName: "FOOD/BEVERAGES",
-            selectedListItem:[1,3,5],
             listItem:[{
                 listItemId: 1,
                 itemName: "TICKETS",
@@ -71,7 +67,6 @@
         {
             listid: 5,
             listName: "COOKING SUPPLIES",
-            selectedListItem:[1,3,5],
             listItem:[{
                 listItemId: 1,
                 itemName: "TICKETS",
@@ -100,7 +95,6 @@
         {
             listid: 6,
             listName: "CLEANING SUPPLIES",
-            selectedListItem:[1,3,5],
             listItem:[{
                 listItemId: 1,
                 itemName: "TICKETS",
@@ -122,7 +116,6 @@
         {
             listid: 8,
             listName: "JUST IN CASE",
-            selectedListItem:[1,3,5],
             listItem:[{
                 listItemId: 1,
                 itemName: "TICKETS",
