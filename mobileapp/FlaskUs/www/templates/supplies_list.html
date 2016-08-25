@@ -11,7 +11,7 @@
         </div>
         <script id="templates/modal.html" type="text/ng-template">
             <ion-modal-view>
-                <ion-header-bar class="bar bar-header bar-positive">
+                <ion-header-bar class="bar bar-header bar-positive black-header">
                     <h1 class="title">Add New Item</h1>
                     <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
                 </ion-header-bar>
@@ -22,7 +22,7 @@
                             <input class="capitalize" type="text" placeholder="Item Name" ng-model="list1.itemName" name="itemName" id="itemName">
                         </div>
                         <div class="form-group">
-                            <button type="button" class="button button-full button-positive" ng-click="saveList2(list1)">Add New Item</button>
+                            <button type="button" class="button button-full  button-positive"style="color: orange;" ng-click="saveList2(list1)">Add New Item</button>
                         </div>
                     </form>
                 </ion-content>
