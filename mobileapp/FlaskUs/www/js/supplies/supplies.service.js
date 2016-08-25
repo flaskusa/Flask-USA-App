@@ -1,61 +1,159 @@
 ﻿angular.module('flaskApp').service('ServerDataModel', function ServerDataModel() {
+    this.selectedList="";
     this.data = [
         {
             listid: 1,
-            listName: "GAME DAY NEEDS"
+            listName: "GAME DAY NEEDS",
+            selectedListItem:[1,3,5],
+            listItem:[{
+                listItemId: 1,
+                itemName: "TICKETS",
+                checked : false
+            },{
+                    listItemId: 4,
+                    itemName: "CASH/WALLET",
+                    checked: true
+                },
+                {
+                    listItemId: 5,
+                    itemName: "UMBRELLA",
+                    checked: true
+                }],
+            isSystemProvided:1
         },
         {
             listid: 2,
-            listName: "TAILGATE SET-UP"
+            listName: "TAILGATE SET-UP",
+            selectedListItem:[1,3,5],
+            listItem:[{
+            listItemId: 1,
+            itemName: "TICKETS",
+            checked : false
+            },{
+                listItemId: 2,
+                itemName: "BLANKETS",
+                checked: true
+            },
+                {
+                    listItemId: 3,
+                    itemName: "PARKING PASS",
+                    checked: false
+                },
+                {
+                    listItemId: 4,
+                    itemName: "CASH/WALLET",
+                    checked: true
+                }],
+           isSystemProvided:1
         },
         {
             listid: 3,
-            listName: "TAILGATE SUPPLIES"
+            listName: "TAILGATE SUPPLIES",
+            selectedListItem:[1,3,5],
+            listItem:[{
+                listItemId: 1,
+                itemName: "TICKETS",
+                checked : false
+            }],
+            isSystemProvided:1
         },
         {
             listid: 4,
-            listName: "FOOD/BEVERAGES"
+            listName: "FOOD/BEVERAGES",
+            selectedListItem:[1,3,5],
+            listItem:[{
+                listItemId: 1,
+                itemName: "TICKETS",
+                checked : false
+            }],
+            isSystemProvided:1
         },
         {
             listid: 5,
-            listName: "COOKING SUPPLIES"
+            listName: "COOKING SUPPLIES",
+            selectedListItem:[1,3,5],
+            listItem:[{
+                listItemId: 1,
+                itemName: "TICKETS",
+                checked : false
+            },{
+                listItemId: 2,
+                itemName: "BLANKETS",
+                checked: true
+        },  {
+                    listItemId: 3,
+                    itemName: "PARKING PASS",
+                    checked: false
+            },
+                {
+                    listItemId: 4,
+                    itemName: "CASH/WALLET",
+                    checked: true
+                },
+                {
+                    listItemId: 5,
+                    itemName: "UMBRELLA",
+                    checked: true
+                }],
+            isSystemProvided:0
         },
         {
             listid: 6,
-            listName: "CLEANING SUPPLIES"
+            listName: "CLEANING SUPPLIES",
+            selectedListItem:[1,3,5],
+            listItem:[{
+                listItemId: 1,
+                itemName: "TICKETS",
+                checked : false
+            }],
+            isSystemProvided:0
         },
         {
             listid: 7,
-            listName: "ENTERTAINMENT"
+            listName: "ENTERTAINMENT",
+            selectedListItem:[1,3,5],
+            listItem:[{
+                listItemId: 1,
+                itemName: "TICKETS",
+                checked : false
+            }],
+            isSystemProvided:1
         },
         {
             listid: 8,
-            listName: "JUST IN CASE"
+            listName: "JUST IN CASE",
+            selectedListItem:[1,3,5],
+            listItem:[{
+                listItemId: 1,
+                itemName: "TICKETS",
+                checked : false
+            }],
+            isSystemProvided:1
         }
     ];
     this.data2 = [
         {
-            listid: 1,
+            listItemId: 1,
             itemName: "TICKETS",
             checked : false
         },
         {
-            listid: 2,
+            listItemId: 2,
             itemName: "BLANKETS",
             checked: true
         },
         {
-            listid: 3,
+            listItemId: 3,
             itemName: "PARKING PASS",
             checked: false
         },
         {
-            listid: 4,
+            listItemId: 4,
             itemName: "CASH/WALLET",
             checked: true
         },
         {
-            listid: 5,
+            listItemId: 5,
             itemName: "UMBRELLA",
             checked: true
         }
@@ -137,6 +235,7 @@ angular.module('flaskApp').factory('HttpService', function ($http) {
             if (angular.isDefined(data.listid)) {               
                 return $http.post('/suppliesList/' + data.listid, data);
             } else {
+
                 return $http.post('/suppliesList', data);
             }
         },

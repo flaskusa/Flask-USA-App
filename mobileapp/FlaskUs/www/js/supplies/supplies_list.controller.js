@@ -10,6 +10,7 @@
         /* jshint validthis: true */
         // putting our server data on scope to display
         $scope.dataModel = ServerDataModel;
+        $scope.listValue=ServerDataModel.selectedList.listItem;
         console.log("length of list item :" + ServerDataModel.data2.length);
         $scope.currListName = $stateParams.listName;
 
@@ -18,10 +19,16 @@
         }).then(function (modal) {
             $scope.modal = modal;
         });
-
-        $scope.saveList2 = function (list) {
+        $scope.saveList2 = function(list) {
+            $scope.listValue.push({
+                itemName: list.itemName
+            });
+            $scope.modal.hide();
+            list.itemName="";
+        };
+        /*$scope.saveList2 = function (list) {
             HttpService.save2(list);
             $scope.modal.hide();
-        };
+        };*/
     }
 })();
