@@ -3,10 +3,10 @@
     angular.module('flaskApp')
     .controller('SuppliesCtrl', SuppliesCtrl);
 
-    SuppliesCtrl.$inject = ['$scope', 'HttpService', 'ServerDataModel', '$ionicModal'];
+    SuppliesCtrl.$inject = ['$scope', 'HttpService', 'ServerDataModel', '$ionicModal','$location'];
 
     /* @ngInject */
-    function SuppliesCtrl($scope, HttpService, ServerDataModel, $ionicModal) {
+    function SuppliesCtrl($scope, HttpService, ServerDataModel, $ionicModal,$location) {
         // putting our server data on scope to display it for learning purposes
         $scope.dataModel = ServerDataModel;
         $scope.data = ServerDataModel.data;
@@ -67,6 +67,11 @@
         }
         $scope.saveSupplies=function(){
             $scope.editList=!$scope.editList;
+        }
+
+        $scope.deleteItem=function(index){
+            $scope.deleteSuplies=true;
+            $scope.data.splice(index,1);
         }
     }
 })();
