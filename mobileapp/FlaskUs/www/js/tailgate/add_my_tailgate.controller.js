@@ -1,28 +1,37 @@
 ﻿(function () {
     'use strict';
     angular.module('flaskApp')
-        .controller('addMyTailgateCtrl', addMyTailgateCtrl);
+        .controller('add_my_tailgateCtrl', add_my_tailgateCtrl);
 
-    addMyTailgateCtrl.$inject = ['$scope', '$state', '$ionicSlideBoxDelegate'];
+    add_my_tailgateCtrl.$inject = ['$scope', '$state', 'SERVER','$stateParams', 'TailgateService'];
 
     /* @ngInject */
-    function addMyTailgateCtrl($scope, $state, $ionicSlideBoxDelegate) {
-        $scope.myActiveSlide = 0;
-
-        $scope.backToPrev = function () {
-            $state.go('app.addMyTailgate');
+    function add_my_tailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService) {
+        console.log($stateParams);
+        var tailGateId = $stateParams.tailgateId;
+        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
+        getMyTailgate();
+        function getMyTailgate() {
+            TailgateService.getTailgate(tailGateId).then(function (respData) {
+                console.log(respData);
+                $scope.myTailgate = respData.data;
+                getlocationName($scope.myTailgate.eventId);
+                getMyTailgateImages(tailGateId);
+            });
         }
-        $scope.next = function () {
-            $ionicSlideBoxDelegate.next();
-        };
-        $scope.previous = function () {
-            $ionicSlideBoxDelegate.previous();
-        };
 
-        // Called each time the slide changes
-        $scope.slideChanged = function (index) {
-            $scope.slideIndex = index;
-        };
+        function getlocationName(evntId) {
+            TailgateService.getEvent(evntId).then(function (respData) {
+                console.log(respData);
+                $scope.myeventLocation = respData.data;
+            });
+        }
+        function getMyTailgateImages(tailGateId) {
+            TailgateService.getMyTailgateImages(tailGateId).then(function (respData) {
+                console.log(respData);
+                $scope.myTailgateImages = respData.data;
+            });
+        }
     }
 })();
 

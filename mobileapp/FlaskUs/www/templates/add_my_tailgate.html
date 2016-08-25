@@ -1,60 +1,76 @@
 ﻿<ion-view cache-view="false" view-title="Add My Tailgate">
-    <ion-slide-box on-slide-changed="slideChanged(index)" active-slide="myActiveSlide" class="has-header">
-        <ion-slide dynamic-height>
-                <div class="list">
-                    <label class="item item-input item-floating-label">
-                        <input type="text" placeholder="Tailgate Name">
-                    </label>
-                    <label class="item item-input item-floating-label">
-                        <input type="text" placeholder="Description">
-                    </label>
-                    <label class="item item-input item-floating-label">
-                        <input type="text" placeholder="Event">
-                    </label>
-                    <label class="item item-input item-floating-label">
-                        <input type="text" placeholder="Event Date">
-                    </label>
-                    <label class="item item-input item-floating-label">
-                        <input type="text" placeholder="Start Time">
-                    </label>
-                    <label class="item item-input item-floating-label">
-                        <input type="text" placeholder="End Time">
-                    </label>
-                    <label class="item item-input item-floating-label">
-                        <input type="text" placeholder="Venmo Account">
-                    </label>
-                    <label class="item item-input item-floating-label">
-                        <input type="text" placeholder="Amount">
-                    </label>
-                </div>
-        </ion-slide>
-        <ion-slide>
-            <h3>Uploading Images</h3>
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+           
+        </ion-nav-buttons>
+    </ion-nav-bar>
+        <ion-content>
+            <ion-tabs class="tabs-positive">
 
-            <div id="list">
-                <h5>Viewing Images</h5>
-            </div>
-        </ion-slide>
-        <ion-slide>
-            <h3></h3>
-        </ion-slide>
-    </ion-slide-box>
-    <div class="bar bar-footer bar-dark has-footer">
-        <button class="button button-positive button-clear no-animation pull-left"
-                ng-click="backToPrev()" ng-show="!slideIndex">
-            Previous
-        </button>
-        <button class="button button-positive button-clear no-animation pull-left"
-                ng-click="previous()" ng-show="slideIndex > 0">
-            Previous
-        </button>
-        <button class="button button-positive button-clear no-animation pull-right"
-                ng-click="next()" ng-show="slideIndex != 2">
-            Next
-        </button>
-        <button class="button button-positive button-clear no-animation pull-right"
-                ng-click="" ng-show="slideIndex == 2">
-            Next
-        </button>
-    </div>
-</ion-view>
+                <ion-tab title="EVENT DETAILS">
+                    <div class="list tab1">
+                        <!-- Tab 1 content -->  
+                        <div class="divImage">
+                            <img class="myTailgatetopImg" src="../img/flask_images/Fotolia_20387372_Subscription_Monthly_M.jpg" />
+                        </div>         
+                        <div class="mytailgate_Heading">
+                            <h3 ><span class="overlineStyle">{{myTailgate.tailgateName}}</span></h3>
+                        </div>                 
+                        <div class="eventDiv">
+                            <a class="item item-icon-right eventList" href="">
+                                <h2 class="eventNameCol">{{myTailgate.eventName}}</h2>
+                                <p class="dateCol">{{myTailgate.tailgateDate | date:'EEEE, MMMM dd, yyyy'}}</p>
+                                <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
+                            </a>
+                        </div>                       
+                        <div class="tailgateInfo tailgateInfoborder">
+                            <div class="row">
+                                <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
+                                <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
+                            </div>
+                            <div class="row">
+                                <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
+                            </div>
+                            <div class="row">
+                                <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
+                            </div>                           
+                        </div>
+                        <div class="pic_gallery tailgateInfoborder">
+                            <div class="row">
+                              <div class="col"><div class="tailgateDescFont">PICTURES</div>
+                                <span >
+                                    <img ng-repeat="images in myTailgateImages" ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}" class="list-thumbnail thunb-size" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
+                                </span>
+                              </div>
+                            </div>
+                        </div>
+                        <div class="message_board">
+
+                        </div>
+                    </div>
+                </ion-tab>
+
+                <ion-tab title="VIEW LOCATION">
+                    <!-- Tab 2 content -->
+                    
+                </ion-tab>
+
+                <ion-tab title="VIEW TAILGATERS">
+                    <!-- Tab 3 content -->
+                    <h1>Tab 3</h1>
+                </ion-tab>
+
+                <ion-tab title="PAY NOW">
+                    <!-- Tab 4 content -->
+                    <h1>Tab 4</h1>
+                </ion-tab>
+
+            </ion-tabs>
+        </ion-content>
+        <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
+            <img src="../img/ad.png" class="footer-img" />
+        </ion-footer-bar>
+    </ion-view>

@@ -8,7 +8,7 @@
         "companyId":20154
     })
 
-    flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
+    flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         $stateProvider
           .state('app', {
               url: '/app',
@@ -108,7 +108,7 @@
                 }
             }
         })
-
+           
          .state('app.add_my_event', {
              url: '/add_my_event',
              views: {
@@ -118,8 +118,10 @@
                  }
              }
          })
-            /*End My_events Controller*/
 
+
+        /*End My_events Controller*/
+        // My TailGate Section
         .state('app.my_tailgate', {
             url: '/my_tailgate',
             views: {
@@ -129,6 +131,17 @@
                 }
             }
         })
+       
+        .state('app.add_my_tailgate', {
+            url: '/add_my_tailgate/:tailgateId',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/add_my_tailgate.html',
+                    controller: 'add_my_tailgateCtrl'
+                }
+            }
+        })
+         // End of My TailGate Section
         .state('app.my_friends', {
             url: '/my_friends',
             views: {
@@ -175,21 +188,11 @@
             }
         })
 
-       .state('app.add_my_tailgate', {
-           url: '/add_my_tailgate',
-           views: {
-               'menuContent': {
-                   templateUrl: 'templates/add_my_tailgate.html',
-                   controller: 'addMyTailgateCtrl'
-               }
-           }
-       }
-       )
 
         /*
         if none of the above states are matched, use this as the fallback*/
          $urlRouterProvider.otherwise('/app/events');   
-        
+         $ionicConfigProvider.tabs.position('bottom');
 
         //Http Interceptors for showing and hiding 
         $httpProvider.interceptors.push(function ($rootScope) {
