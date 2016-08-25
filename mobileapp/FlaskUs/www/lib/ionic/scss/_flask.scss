@@ -1,27 +1,102 @@
 ﻿/*Font*/
 @font-face {
-  font-family: 'Coda';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Coda'), local('Coda-Regular'), url(../lib/ionic/scss/MsyPv5UTc2VukMMM7yvUbQ.woff2) format('woff2');
-  unicode-range: U+0100-024F, U+1E00-1EFF, U+20A0-20AB, U+20AD-20CF, U+2C60-2C7F, U+A720-A7FF;
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
 }
-/* latin */
+
 @font-face {
-  font-family: 'Coda';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Coda'), local('Coda-Regular'), url(../lib/ionic/scss/_xmjOXyFZCVnKmbBxb_PUA.woff2) format('woff2');
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+	font-family: 'Avenir Next Ultra';
+	src: url('/lib/ionic/fonts/AvenirNext-UltraLight.woff2') format('woff2');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Regular_1.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-BoldItalic.woff2') format('woff2');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Italic.woff2') format('woff2');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Medium.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next Ultra';
+	src: url('/lib/ionic/fonts/AvenirNext-UltraLightItalic.woff2') format('woff2');
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next Demi';
+	src: url('/lib/ionic/fonts/AvenirNext-DemiBold.woff2') format('woff2');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Heavy.woff2') format('woff2');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-HeavyItalic.woff2') format('woff2');
+	font-weight: 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next Demi';
+	src: url('/lib/ionic/fonts/AvenirNext-DemiBoldItalic.woff2') format('woff2');
+	font-weight: 600;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Bold.woff2') format('woff2');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-MediumItalic.woff2') format('woff2');
+	font-weight: 500;
+	font-style: italic;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
-    font-family: coda;
+    font-family: 'Avenir Next';
 }
 
-html, body{font-family: coda;}
+html, body{font-family: 'Avenir Next';}
 
-.item-input input, .item-input textarea{font-family: coda;}
+.item-input input, .item-input textarea{font-family: 'Avenir Next';}
 
 .fill-height-or-more {
   min-height: 100%;
@@ -222,7 +297,7 @@ img.cq-dd-image{height:100%;}
 input.input_box{width:90%;
            border:solid 1px #F2F1F0;
            border-radius:5px;
-           font-family:Coda;
+           font-family:'Avenir Next';
 }
 
 .portlet-login .form fieldset {
@@ -233,7 +308,7 @@ input.input_box{width:90%;
 
 .aui body {
     background-color: #fff;
-    font: normal 14px/1 "Coda",Helvetica,sans-serif;
+    font: normal 14px/1 'Avenir Next',Helvetica,sans-serif;
 }
 
 button.button.button-block.button-positive.sign_in_button{width:90%;color:darkorange;}
@@ -303,7 +378,7 @@ button.button.button-block.button-positive.taglib-text{
 .slider-slide {
   color: #000;
   background-color: #fff;
-  font-family: coda; 
+  font-family: 'Avenir Next'; 
   font-weight: 300;
 }
 
@@ -548,7 +623,7 @@ img.list-thumbnail.listImages1 {
 }
 .overlineStyle{
     border-top: 4px solid #F89734;
-    font-weight: 800;
+    font-weight: bold;
 }
 
  /*friend details page start*/
@@ -572,9 +647,9 @@ img.list-thumbnail.listImages1 {
  /*friend details page end*/
 
  /*tickets start*/
- h3.eventHeading{font-weight:800;}
+ h3.eventHeading{font-weight:bold;}
 
- h2.tickets{font-weight: 800;
+ h2.tickets{font-weight: bold;
     font-size: 27px;
     text-align: center;
     margin-top:-3%;
@@ -652,7 +727,7 @@ button.button.button-clear.button_search{
     font-size: 15px;
     width: 100%;
     text-shadow: 2px 0px 4px #847e7e;
-    font-weight: 800;
+    font-weight: bold;
     margin-top: 4px;
     vertical-align: middle;
     background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
@@ -757,14 +832,14 @@ ion-item.myList.item.item-complex.item-right-editable {
 
 /*user-navigation-menu*/
 a.tab-item.bottom_tabs{
-    font-weight: 800;
+    font-weight: bold;
     font-size: 11px !important;
     }
 	
 input.loginInputs{
     padding-left: 10px;
     width: 95%;
-    font-family:coda;
+    font-family:'Avenir Next';
 }
 
 .col.col-70.event_content{
@@ -831,7 +906,7 @@ button.button.button-clear.mini-button {
     color: darkorange;
     border-radius: 3px;
     font-size: 15px;
-    font-weight: 800;
+    font-weight: bold;
     margin-top: 4px;
     vertical-align: middle;
     min-height: 27px;
@@ -891,4 +966,46 @@ button.button.button-clear.mini-button {
   float: right;
   padding-top: 5px;
   padding-right:15px;
+}
+
+/*Flask Tabs*/
+.tab-nav.tabs{
+    background-color: #000000 !important;
+}
+/*Flask tabs for mytailgate details*/
+.divImage{
+    width: 100%;
+    height: 25%;
+}
+.myTailgatetopImg{
+    width:100%;
+    height:100%;
+}
+.eventDiv{
+    text-align:center;
+}
+.mytailgate_Heading {
+    text-align: center;
+    padding-top: 14px;
+    font-size: 18px;
+}
+.tab1{
+    border: solid 1px;
+}
+#map {
+    width: 100%;
+    height: 100%;
+}
+a.tab-item {
+    font-size: 11px;
+}
+.tailgateInfoborder {
+    border-bottom: solid 1px;
+}
+.tailgateDescFont{
+    font-weight: bold;
+    color: #f89735;
+}
+.thunb-size{
+    width: 15%;
 }
