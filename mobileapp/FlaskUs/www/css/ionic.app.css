@@ -10040,6 +10040,11 @@ button.button.button-block.button-positive.sign_in_button {
   width: 90%;
   color: darkorange; }
 
+  button.button.button-block.button-positive.friend{
+    width: 51%;
+    color: darkorange;
+}
+
 a.button.button-block.button-positive.sign_in_button {
   width: 90%;
   padding-top: 15px;
@@ -11131,6 +11136,19 @@ input.searchboxArea {
   padding-bottom: 10px;
   padding-top: 10px; }
 
+  input.friendSearch {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: transparent;
+    color: black;
+    height: 35px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 1px solid #f7941e;
+    border-radius: 4px;
+}
+
 select.searchboxArea {
   width: 100%;
   padding-right: 5px;
@@ -11152,6 +11170,12 @@ div.searchrow {
   border-color: #f7941e;
   display: block;
   height: 175px; }
+
+  .srchBgCol {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-color: #f7941e;
+  display: block;
+  height: 95px; }
 
 .BgCol1 {
   background-color: transparent;
@@ -11304,3 +11328,35 @@ input.loginInputs {
 .spinner.flask-spinner {
   stroke: #f89734;
   fill: #f89734; }
+.bar.bar-header.bar-positive.black-header {
+  background: black;
+  color: darkorange;
+  border-color: darkorange
+}
+.bar.black-header .title {
+  color: darkorange;
+}
+
+.black-header .button.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: orange;
+    font-size: 17px;
+}
+
+button.button.button-clear.mini-button {
+    color: darkorange;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: 800;
+    margin-top: 4px;
+    vertical-align: middle;
+    min-height: 27px;
+    min-width: 32%;
+    font-weight: normal;
+    background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+}
+.item .badge.ext-right {
+    right: 4px;
+}
