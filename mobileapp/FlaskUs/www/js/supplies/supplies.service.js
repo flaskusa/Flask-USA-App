@@ -124,33 +124,7 @@
             isSystemProvided:1
         }
     ];
-    this.data2 = [
-        {
-            listItemId: 1,
-            itemName: "TICKETS",
-            checked : false
-        },
-        {
-            listItemId: 2,
-            itemName: "BLANKETS",
-            checked: true
-        },
-        {
-            listItemId: 3,
-            itemName: "PARKING PASS",
-            checked: false
-        },
-        {
-            listItemId: 4,
-            itemName: "CASH/WALLET",
-            checked: true
-        },
-        {
-            listItemId: 5,
-            itemName: "UMBRELLA",
-            checked: true
-        }
-    ];
+
 
     this.getData = function () {
         return this.data;
@@ -180,13 +154,7 @@
         return maxId + 1;
     };
     // for supplies list items
-    this.getData2 = function () {
-        return this.data2;
-    };
 
-    this.setData2 = function (data2) {
-        this.data2 = data2;
-    };
 
     // add a new data item that does not exist already
     // must compute a new unique id and backfill in

@@ -11,7 +11,7 @@
         // putting our server data on scope to display
         $scope.dataModel = ServerDataModel;
         $scope.listValue=ServerDataModel.selectedList.listItem;
-        console.log("length of list item :" + ServerDataModel.data2.length);
+
         $scope.currListName = $stateParams.listName;
 
         $ionicModal.fromTemplateUrl('templates/modal.html', {

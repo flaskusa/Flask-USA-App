@@ -14,8 +14,6 @@
         $scope.counterArr=[];
         $scope.userDataList=[];
         $scope.editList=false;
-
-        $scope.List2count = ServerDataModel.data2.length;
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
         }).then(function (modal) {
