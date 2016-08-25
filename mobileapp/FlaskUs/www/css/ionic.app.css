@@ -11379,10 +11379,10 @@ button.button.button-clear.mini-button {
 .deleteIcon{
   float: right;
   padding-top: 5px;
-  padding-right:25px;
+  padding-right:50px;
 }
 .editIcon{
   float: right;
   padding-top: 5px;
-  padding-right:50px;
+  padding-right:15px;
 }
