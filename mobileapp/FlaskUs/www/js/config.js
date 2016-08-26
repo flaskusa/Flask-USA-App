@@ -132,12 +132,12 @@
             }
         })
        
-        .state('app.add_my_tailgate', {
-            url: '/add_my_tailgate/:tailgateId',
+        .state('app.my_tailgateDetails', {
+            url: '/my_tailgateDetails/:tailgateId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/add_my_tailgate.html',
-                    controller: 'add_my_tailgateCtrl'
+                    templateUrl: 'templates/my_tailgateDetails.html',
+                    controller: 'mytailgateDetailsCtrl'
                 }
             }
         })

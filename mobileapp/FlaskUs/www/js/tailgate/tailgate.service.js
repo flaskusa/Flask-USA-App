@@ -13,13 +13,15 @@
         var getTailgateImagesURL = "flask-user-tailgate-portlet.tailgateimages/get-tailgate-images";
         var getTailGateURL = "flask-user-tailgate-portlet.tailgateinfo/get-tailgate";
         var geteventURL = "flask-rest-events-portlet.event/get-event";
+        var getTalgetUsersURL = "flask-user-tailgate-portlet.tailgateusers/get-tailgate-members";
 
         var tailgateServices = {
-            getEvent :getEvent,
+            getEvent: getEvent,
             getAllTailgate: getAllTailgate,
             getMyTailgates: getMyTailgates,
-            getTailgate : getTailgate,
-            getMyTailgateImages: getMyTailgateImages
+            getTailgate: getTailgate,
+            getMyTailgateImages: getMyTailgateImages,
+            getMyTailgateUsers: getMyTailgateUsers
         }
 
         function getEvent(eventId) {
@@ -43,10 +45,10 @@
                 });
         }
 
-        function getMyTailgates(uId) {           
+        function getMyTailgates(uId) {
             return $http.get(baseURL + myTailgatesURL, {
                 params: { 'userId': uId }
-                }
+            }
             )
             .then(function success(response) {
                 return response;
@@ -69,7 +71,19 @@
         function getMyTailgateImages(tailgateId) {
             return $http.get(baseURL + getTailgateImagesURL, {
                 params: { 'tailgateId': tailgateId }
-                }
+            }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+            });
+        }
+
+        function getMyTailgateUsers(tailgateId) {
+            return $http.get(baseURL + getTalgetUsersURL, {
+                params: { 'tailgateId': tailgateId }
+            }
             )
             .then(function success(response) {
                 return response;
