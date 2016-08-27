@@ -5,6 +5,76 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content>
-
+        <form name="tailgate_form" class="loginpane form_div" novalidate>
+            <div class="card" ng-show="AddedSuccess">
+                <div class="item item-text-wrap successColor">
+                    Taigate Added Successfully !!
+                </div>
+            </div>
+            <div class="loginpane_body">
+                <div class="list">
+                    <div class="item item-input item-floating-label">
+                        <span class="input-label">Tailgate Name</span>
+                        <input type="text" placeholder="Tailgate Name" name="TailgateName" class="form-control" ng-model="tailgateData.TailgateName" required>
+                        <div ng-show="tailgate_form.$submitted || tailgate_form.TailgateName.$touched">
+                            <span ng-show="tailgate_form.TailgateName.$error.required" class="error_msg">Tell us Tailgate Name.</span>
+                        </div>
+                    </div>
+                    <div class="item item-input item-floating-label">
+                        <span class="input-label">Description:</span>
+                        <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="tailgateData.Description" required>
+                        <div ng-show="tailgate_form.$submitted || tailgate_form.Description.$touched">
+                            <span ng-show="tailgate_form.Description.$error.required" class="error_msg">Tell us tailgate Description.</span>
+                        </div>
+                    </div>
+                    <div class="item item-input item-floating-label">
+                        <span class="input-label">Event:</span>
+                    </div>
+                    <div class="item item-input item-floating-label">
+                        <span class="input-label">Event date</span>
+                        <input type="date" placeholder="Event date" class="form-control" ng-model="tailgateData.Eventdate" name="Eventdate" required>
+                        <div ng-show="tailgate_form.$submitted || tailgate_form.Eventdate.$touched">
+                            <span ng-show="tailgate_form.Eventdate.$error.required" class="error_msg">Please enter Event Date.</span>
+                        </div>
+                    </div>
+                    <div class="item item-input item-floating-label">
+                        <span class="input-label">Start Time</span>
+                        <input type="time" placeholder="Start Time" class="form-control" ng-model="tailgateData.StartTime" name="StartTime" required>
+                        <div ng-show="tailgate_form.$submitted || tailgate_form.StartTime.$touched">
+                            <span ng-show="tailgate_form.StartTime.$error.required" class="error_msg">Please enter Start Time.</span>
+                        </div>
+                    </div>
+                    <div class="item item-input item-floating-label">
+                        <span class="input-label">End Time</span>
+                        <input type="time" placeholder="End Time" class="form-control" ng-model="tailgateData.EndTime" name="EndTime" required>
+                        <div ng-show="tailgate_form.$submitted || tailgate_form.EndTime.$touched">
+                            <span ng-show="tailgate_form.EndTime.$error.required" class="error_msg">Please enter End Time.</span>
+                        </div>
+                    </div>
+                    <div class="item item-input item-floating-label">
+                        <span class="input-label">Venmo Account:</span>
+                        <input type="email" placeholder="Venmo Account" class="form-control" ng-model="tailgateData.VenmoAccount" name="VenmoAccount" required="">
+                        <div ng-show="tailgate_form.$submitted || tailgate_form.VenmoAccount.$touched">
+                            <span ng-show="tailgate_form.VenmoAccount.$error.required" class="error_msg">Please enter Venmo Account.</span>
+                        </div>
+                    </div>
+                    <div class="item item-input item-floating-label">
+                        <span class="input-label">Amount</span>
+                        <input type="Number" placeholder="Amount" name="Amount" ng-model="tailgateData.Amount">
+                        <div ng-show="tailgate_form.$submitted || tailgate_form.Amount.$touched">
+                            <span ng-show="tailgate_form.Amount.$error.required" class="error_msg">Please enter Amount.</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="padding" align="center">
+                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="addmyTailgate(tailgateData);">
+                        Save
+                    </button>
+                    <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/my_tailgate">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </form>
     </ion-content>
 </ion-view>
