@@ -14,6 +14,8 @@
         var getTailGateURL = "flask-user-tailgate-portlet.tailgateinfo/get-tailgate";
         var geteventURL = "flask-rest-events-portlet.event/get-event";
         var getTalgetUsersURL = "flask-user-tailgate-portlet.tailgateusers/get-tailgate-members";
+        var addtailgateURL = "flask-user-tailgate-portlet.tailgateusers/get-tailgate-members";
+        var getVenuebyVenueIdURL = "flask-rest-events-portlet.venue/get-venue";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -21,13 +23,36 @@
             getMyTailgates: getMyTailgates,
             getTailgate: getTailgate,
             getMyTailgateImages: getMyTailgateImages,
-            getMyTailgateUsers: getMyTailgateUsers
+            getMyTailgateUsers: getMyTailgateUsers,
+            addTailgate: addTailgate
+        }
+
+        function addTailgate(tailgateName,tailgateDescription,eventId, eventName,tailgateDate,startTime,endTime,venmoAccountId,amountToPay ) {
+            return $http.get(baseURL + addtailgateURL, {
+                params: {
+                    tailgateName: tailgateName,
+                    tailgateDescription: tailgateDescription,
+                    eventId: eventId,
+                    eventName: eventName,
+                    tailgateDate: tailgateDate,
+                    startTime: startTime,
+                    endTime: endTime,
+                    venmoAccountId: venmoAccountId,
+                    amountToPay: amountToPay
+                    }
+                }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+            });
         }
 
         function getEvent(eventId) {
             return $http.get(baseURL + geteventURL, {
-                params: { 'eventId': eventId }
-            }
+                    params: { 'eventId': eventId }
+                }
             )
             .then(function success(response) {
                 return response;
