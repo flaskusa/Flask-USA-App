@@ -1,15 +1,14 @@
-﻿<ion-view cache-view="false" view-title="Add My Tailgate">
+﻿<ion-view cache-view="false" view-title="MY TAILGATE">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-buttons side="left">
             <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
         </ion-nav-buttons>
         <ion-nav-buttons side="right">
-           
+           <button class="button button-icon button-clear ion-share" menu-toggle="left"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
         <ion-content>
             <ion-tabs class="tabs-positive">
-
                 <ion-tab title="EVENT DETAILS">
                     <div class="list tab1">
                         <!-- Tab 1 content -->  
@@ -55,7 +54,7 @@
 
                 <ion-tab title="VIEW LOCATION">
                     <!-- Tab 2 content -->
-                    
+                    <div id="map" data-tap-disabled="true"></div>
                 </ion-tab>
 
                 <ion-tab title="VIEW TAILGATERS">
