@@ -141,6 +141,16 @@
                 }
             }
         })
+
+            .state('app.add_my_tailgate', {
+                url: '/add_my_tailgate',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/add_my_tailgate.html',
+                        controller: 'add_mytailgateCtrl'
+                    }
+                }
+            })
          // End of My TailGate Section
         .state('app.my_friends', {
             url: '/my_friends',
@@ -188,11 +198,25 @@
             }
         })
 
+        .state('app.tickets', {
+            url: '/tickets',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/tickets.html',
+                    controller: 'ticketsCtrl'
+                }
+            }
+        })
+
 
         /*
         if none of the above states are matched, use this as the fallback*/
          $urlRouterProvider.otherwise('/app/events');   
          $ionicConfigProvider.tabs.position('bottom');
+
+
+        // remove back button text completely
+         $ionicConfigProvider.backButton.previousTitleText(false).text(' ');
 
         //Http Interceptors for showing and hiding 
         $httpProvider.interceptors.push(function ($rootScope) {

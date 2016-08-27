@@ -16,6 +16,8 @@ angular.module('flaskApp.controllers', [])
     $scope.imgUrl = SERVER.hostName;
 })
 
+
+
 .controller('my_tailgateCtrl', function ($scope) {
 })
 
@@ -29,6 +31,13 @@ angular.module('flaskApp.controllers', [])
 })
 
 .controller('ticketsCtrl', function ($scope, $state) {
+    $scope.scorebig = function () {
+        var ref = window.open('http://scorebig.org', '_system', 'location=yes');
+    }
+
+    $scope.ticketsnow = function () {
+        var ref = window.open('http://ticketsnow.org', '_system', 'location=yes');
+    }
 });
 
 
