@@ -1,37 +1,30 @@
 ﻿(function () {
     'use strict';
     angular.module('flaskApp')
-        .controller('add_my_tailgateCtrl', add_my_tailgateCtrl);
+        .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_my_tailgateCtrl.$inject = ['$scope', '$state', 'SERVER','$stateParams', 'TailgateService'];
+    add_mytailgateCtrl.$inject = ['$scope', 'TailgateService', '$cordovaDatePicker', '$timeout'];
 
     /* @ngInject */
-    function add_my_tailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService) {
-        console.log($stateParams);
-        var tailGateId = $stateParams.tailgateId;
-        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
-        getMyTailgate();
-        function getMyTailgate() {
-            TailgateService.getTailgate(tailGateId).then(function (respData) {
-                console.log(respData);
-                $scope.myTailgate = respData.data;
-                getlocationName($scope.myTailgate.eventId);
-                getMyTailgateImages(tailGateId);
+    function add_mytailgateCtrl($scope, TailgateService, $cordovaDatePicker, $timeout) {
+        //for adding tailgate
+        $scope.addmyTailgate = function (tailgatedata) {
+            console.log(tailgatedata);
+            TailgateService.addTailgate(tailgatedata).then(function (respData) {
+                console.log(respData.data.exception);
+                //$scope.AddedSuccess = true;
+                //$timeout(function () { $scope.AddedSuccess = false; }, 3000);
             });
         }
-
-        function getlocationName(evntId) {
-            TailgateService.getEvent(evntId).then(function (respData) {
-                console.log(respData);
-                $scope.myeventLocation = respData.data;
+        $scope.getvenuefromSelect = function (tailgatedata) {
+            console.log(tailgatedata);
+            TailgateService.addTailgate(tailgatedata).then(function (respData) {
+                console.log(respData.data.exception);
+                //$scope.AddedSuccess = true;
+                //$timeout(function () { $scope.AddedSuccess = false; }, 3000);
             });
         }
-        function getMyTailgateImages(tailGateId) {
-            TailgateService.getMyTailgateImages(tailGateId).then(function (respData) {
-                console.log(respData);
-                $scope.myTailgateImages = respData.data;
-            });
-        }
+        
     }
 })();
 
