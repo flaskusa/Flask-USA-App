@@ -1,28 +1,21 @@
 ﻿<ion-view view-title="ACCOUNT SETTINGS">
-    <ion-header-bar align-title="center" class="bar-light">
-        <button menu-toggle="left" class="button button-icon icon ion-ios7-bookmarks-outline"></button>
-        <h1 class="title">Slide-Box Scrolling Not Working</h1>
-        <button menu-toggle="right" class="button button-icon icon ion-ios7-world-outline"></button>
-    </ion-header-bar>
-    <ion-slide-box on-slide-changed="slideChanged(index)" active-slide="myActiveSlide" class="has-header">
-        <ion-slide disable-scroll="false" dynamic-height>
-            <ion-scroll>
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+            <ion-content overflow-scroll="false">
                 <div class="list">
                     <label class="item item-input item-floating-label">
                         <span class="input-label">First Name</span>
-                        <input type="text" placeholder="Tailgate Name">
+                        <input type="text" placeholder="First Name">
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Last Name</span>
-                        <input type="text" placeholder="Description">
-                    </label>
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label">Sceern Name</span>
-                        <input type="text" placeholder="Event">
+                        <input type="text" placeholder="Last Name">
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Email</span>
-                        <input type="text" placeholder="Event Date">
+                        <input type="text" placeholder="Email">
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Password</span>
@@ -41,30 +34,22 @@
                         <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"male"' name="rdoResult">Male</ion-radio></pre>
                         <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"female"' name="rdoResult">Female</ion-radio></pre>
                     </label>
-                    <label class="item item-input item-stacked-label">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Area code</span>
+                        <input type="text" placeholder="Area code">
+                    </label>
+                    <label class="item item-input item-floating-label">
                         <span class="input-label">Mobile Number</span>
-                        <input type="text" placeholder="Amount">
+                        <input type="text" placeholder="Mobile Number">
                     </label>
                 </div>
-            </ion-scroll>
-        </ion-slide>
-    </ion-slide-box>
-    <div class="bar bar-footer bar-dark has-footer">
-        <button class="button button-positive button-clear no-animation pull-left"
-                ng-click="backToPrev()" ng-show="!slideIndex">
-            Previous
-        </button>
-        <button class="button button-positive button-clear no-animation pull-left"
-                ng-click="previous()" ng-show="slideIndex > 0">
-            Previous
-        </button>
-        <button class="button button-positive button-clear no-animation pull-right"
-                ng-click="next()" ng-show="slideIndex != 2">
-            Next
-        </button>
-        <button class="button button-positive button-clear no-animation pull-right"
-                ng-click="" ng-show="slideIndex == 2">
-            Next
-        </button>
-    </div>
+                <div class="padding" align="center">
+                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="saveUser(user);">
+                        Save
+                    </button>
+                    <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
+                        Cancel
+                    </a>
+                </div>
+            </ion-content>
 </ion-view>
