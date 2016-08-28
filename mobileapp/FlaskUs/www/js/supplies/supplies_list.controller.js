@@ -11,6 +11,7 @@
         // putting our server data on scope to display
         $scope.dataModel = ServerDataModel;
         $scope.listValue=ServerDataModel.selectedList.listItem;
+        $scope.addNewSuppliesItem=false;
 
         $scope.currListName = $stateParams.listName;
 
@@ -20,12 +21,16 @@
             $scope.modal = modal;
         });
         $scope.saveList2 = function(list) {
-            $scope.listValue.push({
-                itemName: list.itemName
+            $scope.listValue.unshift({
+                itemName: list
             });
-            $scope.modal.hide();
+            $scope.addNewSuppliesItem=false;
             list.itemName="";
+
         };
+        $scope.addNewListItem=function(){
+            $scope.addNewSuppliesItem=!$scope.addNewSuppliesItem
+        }
         /*$scope.saveList2 = function (list) {
             HttpService.save2(list);
             $scope.modal.hide();

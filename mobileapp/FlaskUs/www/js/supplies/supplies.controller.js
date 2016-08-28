@@ -14,18 +14,24 @@
         $scope.counterArr=[];
         $scope.userDataList=[];
         $scope.editList=false;
+        $scope.addNewSupplies=false;
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
         }).then(function (modal) {
             $scope.modal = modal;
         });
+        $scope.addNewSuppliesList=function(){
+            $scope.addNewSupplies=!$scope.addNewSupplies;
+        }
         $scope.saveList = function(list) {
-            $scope.dataModel.data.push({
-                listName: list.listName,
+            $scope.dataModel.data.unshift({
+                listName: list,
                 isSystemProvided:0,
                 listItem:[]
             });
-            $scope.modal.hide();
+            $scope.getSelectedLength($scope.dataModel.data[0],0);
+            $scope.addNewSupplies=false;
+            $scope.getUserSupplieslength();
             list.listName="";
         };
         /*$scope.saveList = function (list) {
@@ -36,14 +42,23 @@
         };*/
 
         // date field display options
+
         $scope.getSelectedLength=function(data,index){
-            $scope.counter=0;
-            angular.forEach(data.listItem, function (value, key) {
-                console.log(key);
-                if (value.checked == true)
-                    $scope.counter++;
-            });
-            $scope.counterArr[index]=$scope.counter;
+            $scope.thirdCounter=0;
+            $scope.index=-1;
+            angular.forEach($scope.dataModel.data,function (value1, key){
+                $scope.index++;
+           if(value1.isSystemProvided==0) {
+               $scope.counter = 0;
+               angular.forEach(value1.listItem, function (value2, key) {
+                   console.log(key);
+                   if (value2.checked == true)
+                       $scope.counter++;
+               });
+               $scope.counterArr[$scope.index] = $scope.counter;
+               $scope.thirdCounter++;
+           }
+           })
         }
         $scope.setListId=function(selectedList){
             ServerDataModel.selectedList=selectedList;
@@ -58,7 +73,9 @@
         $scope.copyList=function(list){
             var list=angular.copy(list);
             list.isSystemProvided=0;
-            $scope.dataModel.data.push(list);
+            $scope.dataModel.data.unshift(list);
+            $scope.getSelectedLength($scope.dataModel.data[0],0);
+            $scope.getUserSupplieslength();
         };
         $scope.editSupplies=function(){
          $scope.editList=!$scope.editList;
@@ -66,10 +83,19 @@
         $scope.saveSupplies=function(){
             $scope.editList=!$scope.editList;
         }
-
+        $scope.getUserSupplieslength=function(){
+            $scope.secondCounter=0;
+            angular.forEach($scope.data, function (value, key) {
+                if (value.isSystemProvided == 0)
+                    $scope.secondCounter++;
+            });
+        }
+        $scope.getUserSupplieslength();
         $scope.deleteItem=function(index){
             $scope.deleteSuplies=true;
             $scope.data.splice(index,1);
+            $scope.getUserSupplieslength();
+            $scope.getSelectedLength();
         }
     }
 })();

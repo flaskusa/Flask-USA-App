@@ -90,7 +90,7 @@
                     itemName: "UMBRELLA",
                     checked: true
                 }],
-            isSystemProvided:0
+            isSystemProvided:1
         },
         {
             listid: 6,
@@ -100,7 +100,7 @@
                 itemName: "TICKETS",
                 checked : false
             }],
-            isSystemProvided:0
+            isSystemProvided:1
         },
         {
             listid: 7,
