@@ -1,9 +1,25 @@
-﻿<ion-view cache-view="false" cache-view="false" back-button="true" view-title={{currListName}}>
+﻿<ion-view back-button="true" cache-view="false" cache-view="false" view-title={{currListName}}>
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        </ion-nav-bar>
     <ion-content>
-        <a class="item item-full item-icon-left " ng-click="modal.show()">
+        <a class="item item-full list-item-icon-left "ng-click="addNewListItem()">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">ADD NEW ITEM</p>
         </a>
+
+        <div class="item item-input-inset"ng-if="addNewSuppliesItem==true">
+            <label class="item-input-wrapper">
+                <input type="text" placeholder="List Name"autofocus ng-model="listItemName" required>
+            </label>
+            <button class="button button-small suppliesButton"ng-click="saveList2(listItemName)">
+               save
+            </button>
+            <button class="button button-small suppliesButton">
+               cancel
+            </button>
+        </div>
         <div class="list flask_text">
             <ion-checkbox class="item item-icon-left item-checkbox-right" ng-repeat="data in listValue" ng-model="data.checked" ng-click="getListcount()">
                 {{ data.itemName }}
