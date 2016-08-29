@@ -132,15 +132,15 @@ html, body{font-family: 'Avenir Next';}
     width:100%;height:100%;
 }
 .myEvent{
-          background-image:url("../img/flask_images/my_events.jpg");
+          background-image:url("/img/flask_images/my_events.jpg");
       background-size:100%;
 }
 .myTailgate{
-          background-image:url("../img/flask_images/my_tailgate.jpg");
+          background-image:url("/img/flask_images/my_tailgate.jpg");
       background-size:100%;
 }
 .myFrnds{
-     background-image:url("../img/flask_images/my_friends.jpg");
+     background-image:url("/img/flask_images/my_friends.jpg");
       background-size:100%;
 }
 .row.mainRow.myFrnds {
@@ -983,7 +983,7 @@ button.button.button-clear.mini-button {
 /*Flask tabs for mytailgate details*/
 .divImage{
     width: 100%;
-    height: 25%;
+    height: 28%;
 }
 .myTailgatetopImg{
     width:100%;
@@ -1059,3 +1059,17 @@ a.tab-item {
   font-weight: bolder;
 
 }
+
+/*Start tailgate details bottom tabs*/
+.tab_bottom a.tab-item{
+    border-right:solid white 1px !important;
+    color:white !important;
+}
+
+.tab_bottom a.tab-item.tab-item-active{
+    color:orange !important;
+    border-top:none !important;}
+/*End tailgate details bottom tabs*/
+
+/*Search icon*/
+.bar-dark .button.button-icon.ion-android-search:before{font-size:27px !important;}
