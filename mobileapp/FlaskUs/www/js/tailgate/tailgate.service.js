@@ -16,6 +16,9 @@
         var getTalgetUsersURL = "flask-user-tailgate-portlet.tailgateusers/get-tailgate-members";
         var addtailgateURL = "flask-user-tailgate-portlet.tailgateusers/get-tailgate-members";
         var getVenuebyVenueIdURL = "flask-rest-events-portlet.venue/get-venue";
+        var getAllEventsURL = "flask-rest-events-portlet.event/get-all-events";
+        var getmapMarkersURL = "flask-user-tailgate-portlet.tailgatemarker/get-tailgate-marker";
+        var addTialgateMarkerURL = "flask-user-tailgate-portlet.tailgatemarker/add-tailgate-marker";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -24,7 +27,10 @@
             getTailgate: getTailgate,
             getMyTailgateImages: getMyTailgateImages,
             getMyTailgateUsers: getMyTailgateUsers,
-            addTailgate: addTailgate
+            addTailgate: addTailgate,
+            getallEvents: getallEvents,
+            getMapMarkers: getMapMarkers,
+            addTailgateMarkers: addTailgateMarkers
         }
 
         function addTailgate(tailgateName,tailgateDescription,eventId, eventName,tailgateDate,startTime,endTime,venmoAccountId,amountToPay ) {
@@ -53,6 +59,28 @@
             return $http.get(baseURL + geteventURL, {
                     params: { 'eventId': eventId }
                 }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+            });
+        }
+
+        function getMapMarkers(tailgateId) {
+            return $http.get(baseURL + getmapMarkersURL, {
+                params: { 'tailgateId': tailgateId }
+            }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+            });
+        }
+
+        function getallEvents() {
+            return $http.get(baseURL + getAllEventsURL
             )
             .then(function success(response) {
                 return response;
@@ -109,6 +137,25 @@
             return $http.get(baseURL + getTalgetUsersURL, {
                 params: { 'tailgateId': tailgateId }
             }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+            });
+        }
+
+        
+        function addTailgateMarkers(param) {
+            return $http.get(baseURL + addTialgateMarkerURL, {
+                params: {
+                    'tailgateId': param.tailgateId,
+                    'latitude': param.lattitude,
+                    'longitude': param.longitude,
+                    'name': param.name,
+                    'description': param.description
+                    }
+                }
             )
             .then(function success(response) {
                 return response;

@@ -10,6 +10,7 @@
         $scope.myTailgaters = [];
         var tailGateId = $stateParams.tailgateId;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
+       // initMap();
         getMyTailgate();
         function getMyTailgate() {
             TailgateService.getTailgate(tailGateId).then(function (respData) {
@@ -18,6 +19,7 @@
                 getlocationName($scope.myTailgate.eventId);
                 getMyTailgateImages(tailGateId);
                 getTailgaters(tailGateId);
+                getTailgateMarkers(tailGateId);
             });
         }
         function getlocationName(evntId) {
@@ -36,6 +38,12 @@
             TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
                 console.log(respData);
                 $scope.myTailgaters = respData.data;
+            });
+        }
+        function getTailgateMarkers(tailGateId) {
+            TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
+                console.log(respData);
+                $scope.myTailgatermarkers = respData.data;
             });
         }
     }
