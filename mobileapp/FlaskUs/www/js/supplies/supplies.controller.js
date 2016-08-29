@@ -29,11 +29,24 @@
                 isSystemProvided:0,
                 listItem:[]
             });
-            $scope.getSelectedLength($scope.dataModel.data[0],0);
+            $scope.getSelectedLength();
             $scope.addNewSupplies=false;
             $scope.getUserSupplieslength();
-            list.listName="";
         };
+        $scope.editSupply=function(data){
+            data.edit=true;
+            setTimeout(setFocus, 1000);
+     function setFocus(){
+    document.getElementById("editBox").focus();
+        }
+    }
+        $scope.cancelAdding=function(){
+            $scope.addNewSupplies=false;
+            $scope.suppliesName="";
+        }
+        $scope.saveSupply=function(data){
+            data.edit=false;
+        }
         /*$scope.saveList = function (list) {
             HttpService.save(list);
             $scope.dataModel.data.push(list);
@@ -43,7 +56,7 @@
 
         // date field display options
 
-        $scope.getSelectedLength=function(data,index){
+        $scope.getSelectedLength=function(){
             $scope.thirdCounter=0;
             $scope.index=-1;
             angular.forEach($scope.dataModel.data,function (value1, key){
@@ -51,7 +64,6 @@
            if(value1.isSystemProvided==0) {
                $scope.counter = 0;
                angular.forEach(value1.listItem, function (value2, key) {
-                   console.log(key);
                    if (value2.checked == true)
                        $scope.counter++;
                });
@@ -60,6 +72,7 @@
            }
            })
         }
+
         $scope.setListId=function(selectedList){
             ServerDataModel.selectedList=selectedList;
 

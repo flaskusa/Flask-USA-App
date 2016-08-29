@@ -31,6 +31,10 @@
         $scope.addNewListItem=function(){
             $scope.addNewSuppliesItem=!$scope.addNewSuppliesItem
         }
+        $scope.cancelAdding=function(){
+            $scope.addNewSuppliesItem=false;
+            $scope.listItemName="";
+        }
         /*$scope.saveList2 = function (list) {
             HttpService.save2(list);
             $scope.modal.hide();
