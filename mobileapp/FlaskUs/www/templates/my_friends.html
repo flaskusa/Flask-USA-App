@@ -1,11 +1,15 @@
 ﻿<ion-view cache-view="false" view-title="MY FRIENDS">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
     <ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.show = !searchBox.show"></button>
     </ion-nav-buttons>    
      <div class="bar bar-subheader srchBgCol" ng-show="searchBox.show">
         <div class="row">
             <div class="col col-100 col-center searchrow">
-                <input type="text" placeholder="Search friend..." class="searchboxArea" ng-model="searchBox.searchText"/>
+                <input type="text" placeholder="Search friend..." class="searchboxArea" ng-model="searchBox.searchText" autofocus/>
             </div>
         </div>
         <div class="row">
@@ -19,18 +23,19 @@
           <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
           <p class="addText">INVITE FRIEND</p>
       </a>
-        <div class="card" ng-if="noFriendAdded">
+        <!--<div class="card" ng-if="myFriends.length == 0">
             <div class="item item-text-wrap ">
-                No Friends added yet.
+                You do not have any friends yet. Please search and add friends
             </div>
-        </div>
-        <div ng-if="!noFriendAdded" class="scroll">
+        </div>-->
+        <div class="scroll">
                 <div class="list"> 
                     <a ng-repeat="data in myFriends track by $index"  class="item item-avatar item-icon-right" href="#/app/my_friendDetail/{{data.userId}}">
                         <img src = "img/default-profilepic.png">
                         <h2>{{ data.fullName | uppercase}}</h2>
                         <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg" ></span>
                     </a>
+                    <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. Please search and add friends </a>
                 </div>
          </div>
         <script id="templates/modal.html" type="text/ng-template">
@@ -51,7 +56,7 @@
                 </div>
                 <ion-content class="padding has-subheader">
                             <ion-list> 
-                                <ion-item collection-repeat="data in userContactList track by $index" class="item-avatar">
+                                <ion-item ng-repeat="data in userContactList track by $index" class="item-avatar " item="data">
                                     <img src = "img/default-profilepic.png">
                                     <h2>{{ data.fullName | uppercase}}</h2>
                                     <p>{{ data.emailAddress}}</p>
@@ -59,10 +64,9 @@
                                     <button class="button button-clear mini-button badge ext-right" ng-if="data.connectionRequested" disabled>Request Sent </button>
                                     <button class="button button-clear mini-button badge ext-right" ng-if="data.block" ng-click="unBlockUser(data)">Unblock </button>
                                     <button class="button button-clear mini-button badge ext-right" ng-if="data.connected" disabled>Friend </button>
-                                    
                                 </ion-item>
                             </ion-list>
-                                <ion-item  ng-click="getMoreUserContact(searchContact.searchtext)">More</ion-item>
+                            <ion-infinite-scroll on-infinite="getMoreUserContact(searchContact.searchtext)" distance="10%"></ion-infinite-scroll>
                 </ion-content>
             </ion-modal-view>
         </script>
