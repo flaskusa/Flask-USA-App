@@ -13,16 +13,16 @@
               <input type="text" placeholder="Supplies Name"autofocus ng-model="suppliesName" required>
           </label>
           <button class="button button-small suppliesButton" ng-click="saveList(suppliesName)">
-              <i style="font-weight:bolder">save</i>
+              <i >save</i>
           </button>
-          <button class="button button-small suppliesButton" ng-disabled="customQuoteForm.$invalid">
-              <i style="font-weight:bolder">cancel</i>
+          <button class="button button-small suppliesButton" ng-disabled="customQuoteForm.$invalid"ng-click="cancelAdding()">
+              <i >cancel</i>
           </button>
       </div>
 <ion-list>
-          <ion-item style="color: #0f0f0f"  ng-repeat="data in dataModel.data"ng-if="data.isSystemProvided==0">
-              {{ data.listName }}
-
+          <ion-item style="color: #0f0f0f"  ng-repeat="data in dataModel.data"ng-if="data.isSystemProvided==0"ng-init="data.edit=false" on-double-tap="editSupply(data)">
+              <label ng-if = "data.edit == false" >{{ data.listName }} </label>
+              <input type="text"id="editBox"autofocus ng-model="data.listName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
               <a href="#/app/suppliesList/{{data.listName}}" ng-click="setListId(data)"><span  class="badge badge-assertive" ng-init="getSelectedLength()">{{counterArr[$index]}}/{{data.listItem.length}}</span>
                   <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:20px;padding-left:10%;"></span>
               </a>
