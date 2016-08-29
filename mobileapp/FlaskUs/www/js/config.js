@@ -7,7 +7,15 @@
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
         "companyId":20154
     })
-
+    flaskAppConfig.config(function ($provide) {
+    $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
+        return function (exception, cause) {
+            var $rootScope = $injector.get("$rootScope");
+            $rootScope.$broadcast("catchAll:exception",{exception:exception}); // This represents a custom method that exists within $rootScope
+            $delegate(exception, cause);
+        };
+    });
+    });
     flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         $stateProvider
           .state('app', {
