@@ -215,6 +215,16 @@
                 }
             }
         })
+        .state('app.friendsGroup', {
+            url: '/friends_group',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/friends_group.html',
+                    controller: 'FriendsGroupCtrl'
+                }
+            }
+        })
+
 
 
         /*
