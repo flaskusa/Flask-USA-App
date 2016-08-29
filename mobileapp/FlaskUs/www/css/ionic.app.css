@@ -11321,6 +11321,14 @@ p.addText {
   padding-right: 0px;
   margin-right: -28px; }
 
+span.badge.span_icon_supplies {
+  top: 14px;
+  width: 21px;
+  height: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-right: -27px !important; }
+
 .successColor {
   color: green; }
 
@@ -11348,7 +11356,7 @@ input.loginInputs {
   width: 93%; }
 
 .col.col-70.event_content1 {
-  padding-left: 14%;
+  /*padding-left: 14%;*/
   width: 86%; }
 
 /*Prepost slider*/
