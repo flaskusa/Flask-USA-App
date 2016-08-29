@@ -14,6 +14,7 @@
       $scope.noFriendAdded = false;
       $scope.searchBox = {show:false};
       $scope.searchContact = {"searchtext" :""};
+      $scope.messsage = {'messsageToSend':''};
       $scope.initialize = function() {
           $scope.getMyFriends($scope.searchContact.searchtext);
       }; 
@@ -60,6 +61,7 @@
            FriendsService.searchUserContact( $scope.searchContact.searchtext, $scope.startIndex, $scope.endIndex).then(function(response){
                 if(response != undefined && Array.isArray(response))   {
                         $scope.userContactList = response;
+                        $scope.$broadcast('scroll.infiniteScrollComplete');
               }else{
                   $flaskUtil.alert("Failed to load contact List");
               }   
@@ -74,6 +76,12 @@
               }   
            });
         };
+
+        $scope.showSendMessagePopup = function() {
+             $scope.modal.show();
+        };
+
+      
         $scope.sendFriendRequest = function(userObject) {
             FriendsService.sendFriendRequest(userObject.userId).then(function(response){
                 if(response != undefined)   {
@@ -88,6 +96,8 @@
         }).then(function (modal) {
             $scope.modal = modal;
         });
+
+      
         $scope.initialize();
     }
 

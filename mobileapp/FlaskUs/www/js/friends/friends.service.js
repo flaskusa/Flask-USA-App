@@ -66,11 +66,11 @@
                 });
         }
 
-        function sendMessage (userId,messgae,sendEmail) {
+        function sendMessage (userId,messgae) {
                 return $http.get(url+sendFlaskMessage,{params:{
                     recipients: userId,
                     message:messgae,
-                    sendEmail:sendEmail
+                    sendEmail:true
                 }})
                 .then(function success(response) {
                     return response.data;
