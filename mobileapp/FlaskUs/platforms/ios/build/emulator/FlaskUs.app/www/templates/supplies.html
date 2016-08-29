@@ -1,19 +1,44 @@
 ﻿<ion-view cache-view="false" view-title="SUPPLIES">
   <ion-content>
       <a class="item item-full item-icon-left " ng-click="modal.show()">
-          <div style="float:left;"><img src="img/FLASK ICONS/FLASK_ICON_ADD_NEW.svg" class="FlaskionIcons"></div>
+          <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons" class="FlaskionIcons"></div>
           <p class="addText">CREATE NEW TAILGATE</p>
       </a>
     <div class="list">
-	  <a class="item item-icon-right" href="#/app/suppliesList/{{data.listName}}" ng-repeat="data in dataModel.data">
+	  <a class="item item-icon-right"  ng-repeat="data in dataModel.data"ng-if="data.isSystemProvided==1">
 	    {{ data.listName }}
-	    <span class="badge badge-assertive">{{counter}} / {{List2count}}</span>
-        <span class="badge span_icon"><img src="img/FLASK ICONS/FLASK_ICON_ARROW_LEFT.svg" style="width:21px;height:20px;padding-left:10%;"></span>
-	  </a>
+          <span class="badge badge-assertive"style="cursor: pointer" ng-click="copyList(data)">copy</span>
+	   </a>
 	</div>
+
+<div class="strip">
+    <div class="stripPadding">
+    <span ng-if="editList==false"><i class="textStyle">USER LIST</i></span>
+    <span ng-if="editList==true"><i class="textStyle">SAVE LIST</i></span>
+
+    <span ng-if="editList==true"class="iconAlignment">
+    <a class=" button-icon icon ion-android-done-all"ng-click="saveSupplies()"></a>
+</span>
+        <span ng-if="editList==false"class="iconAlignment">
+    <a  class=" button-icon icon ion-settings"ng-click="editSupplies()"></a>
+</span></div>
+    </div>
+      <div class="list">
+          <div class="item item-icon-right"  ng-repeat="data in dataModel.data"ng-if="data.isSystemProvided==0">
+              {{ data.listName }}
+             <span ng-if="editList==true" ng-click="deleteItem($index)"style="cursor: pointer">
+    <i  class=" button-icon icon ion-close-circled deleteIcon"></i>
+</span>
+              <span ng-if="editList==true">
+    <i class=" button-icon icon ion-compose editIcon"></i>
+</span>
+              <a href="#/app/suppliesList/{{data.listName}}" ng-click="setListId(data)"><span  ng-if="editList==false"class="badge badge-assertive"ng-init="getSelectedLength(data,$index)">{{counterArr[$index]}}/{{data.listItem.length}}</span>
+               <span ng-if="editList==false"class="badge span_icon_supplies"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:20px;padding-left:10%;"></span>
+           </a> </div>
+      </div>
 	<script id="templates/modal.html" type="text/ng-template">
       <ion-modal-view>
-        <ion-header-bar class="bar bar-header bar-positive">
+        <ion-header-bar class="bar bar-header bar-positive black-header">
           <h1 class="title">Add New List Item</h1>
           <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
         </ion-header-bar>
@@ -26,7 +51,7 @@
                 </label>
             </div>
             <div class="form-group">
-                <button type="button" class="button button-full button-positive" ng-click="saveList(list)">Add New List</button>   
+                <button type="button" class="button button-full  button-positive "style="color:orange;" ng-click="saveList(list)">Add New List</button>
             </div>
         </form>
         </ion-content>

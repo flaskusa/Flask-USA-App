@@ -1,4 +1,104 @@
-﻿.fill-height-or-more {
+﻿/*Font*/
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next Ultra';
+	src: url('/lib/ionic/fonts/AvenirNext-UltraLight.woff2') format('woff2');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Regular_1.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-BoldItalic.woff2') format('woff2');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Italic.woff2') format('woff2');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Medium.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next Ultra';
+	src: url('/lib/ionic/fonts/AvenirNext-UltraLightItalic.woff2') format('woff2');
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next Demi';
+	src: url('/lib/ionic/fonts/AvenirNext-DemiBold.woff2') format('woff2');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Heavy.woff2') format('woff2');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-HeavyItalic.woff2') format('woff2');
+	font-weight: 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next Demi';
+	src: url('/lib/ionic/fonts/AvenirNext-DemiBoldItalic.woff2') format('woff2');
+	font-weight: 600;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Bold.woff2') format('woff2');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-MediumItalic.woff2') format('woff2');
+	font-weight: 500;
+	font-style: italic;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Avenir Next';
+}
+
+html, body{font-family: 'Avenir Next';}
+
+.item-input input, .item-input textarea{font-family: 'Avenir Next';}
+
+.fill-height-or-more {
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -21,19 +121,69 @@
   }
 }
 
+.scroll{
+    height: 100% !important;
+}
+.mainRow{
+    height:33.33%;
+    padding:0px;
+}
+.sideImagePanel{
+    width:100%;height:100%;
+}
+.myEvent{
+          background-image:url("../img/flask_images/my_events.jpg");
+      background-size:100%;
+}
+.myTailgate{
+          background-image:url("../img/flask_images/my_tailgate.jpg");
+      background-size:100%;
+}
+.myFrnds{
+     background-image:url("../img/flask_images/my_friends.jpg");
+      background-size:100%;
+}
+.row.mainRow.myFrnds {
+    margin-top: -1px;
+}
+.sliderImages{
+    width: 100%;display:block;height: 100%
+}
+.sidepanel{
+    float:left;
+        float: left;
+    width: 27px;
+    height: 100%;
+}
+.row.mainRow {
+    margin-top: -1px;
+}
+@media only screen and (min-width:50px){
+    a.post-content{height: 31px;
+    background-color: rgba(0, 0, 0, 0.63);
+    color: white;
+    margin-top: 14px;
+    text-decoration:none;
+    padding-top: 6px;
+    font-size:16px;
+    font-weight:600;
+    width:140px;
+    }
+}
+
 .some-area {
   > div {
-    padding: 1rem;
+    padding: 4rem;
     &:nth-child(1) {
-      background-image:url("../img/FLASK IMAGES/MY_EVENTS.jpg");
+      background-image:url("../img/flask_images/my_events.jpg");
       background-size:100%;
     }
     &:nth-child(2) {
-      background-image:url("../img/FLASK IMAGES/MY_TAILGATE.jpg");
+      background-image:url("../img/flask_images/my_tailgate.jpg");
       background-size:100%;
     }
     &:nth-child(3) {
-      background-image:url("../img/FLASK IMAGES/MY_FRIENDS.jpg");
+      background-image:url("../img/flask_images/my_friends.jpg");
       background-size:100%;
     }
     h1, h2 {
@@ -43,20 +193,6 @@
       margin: 0;
     }
   }
-}
-
-
-@media only screen and (min-width:50px){
-    a.post-content{height: 31px;
-    background-color: rgba(0, 0, 0, 0.63);
-    color: white;
-    margin-left: -15px;
-    text-decoration:none;
-    padding-top: 6px;
-    font-size:16px;
-    font-weight:600;
-    width:140px;
-    }
 }
 
 i.icon.ion-star{padding-left:2%;}
@@ -148,7 +284,7 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
     width:100%;
 }
 
-.loginpane_header img{content:url(../img/flasklogo2.png);}
+.loginpane_header img{content:url(../img/FlaskRed.png);zoom:0.3;}
 
 img.cq-dd-image{height:100%;}
 
@@ -161,7 +297,7 @@ img.cq-dd-image{height:100%;}
 input.input_box{width:90%;
            border:solid 1px #F2F1F0;
            border-radius:5px;
-           
+           font-family:'Avenir Next';
 }
 
 .portlet-login .form fieldset {
@@ -172,7 +308,7 @@ input.input_box{width:90%;
 
 .aui body {
     background-color: #fff;
-    font: normal 14px/1 "Coda",Helvetica,sans-serif;
+    font: normal 14px/1 'Avenir Next',Helvetica,sans-serif;
 }
 
 button.button.button-block.button-positive.sign_in_button{width:90%;color:darkorange;}
@@ -197,15 +333,15 @@ a.button.button-block.button-positive.sign_in_button{width:90%;padding-top:15px;
 }
 
 button.button.button-block.button-positive.taglib-text{
-				color:white;
-				width:40%;
+	color:white;
+	width:40%;
 }
 
 .navigation{	 
-				 text-align: center;
-                  height:22%;
-                  text-align: center;
-                  width:100%;
+		text-align: center;
+        height:22%;
+        text-align: center;
+        width:100%;
 }
 
 /*CSS for checkboxes start*/
@@ -242,7 +378,7 @@ button.button.button-block.button-positive.taglib-text{
 .slider-slide {
   color: #000;
   background-color: #fff;
-  font-family: coda; 
+  font-family: 'Avenir Next'; 
   font-weight: 300;
 }
 
@@ -304,15 +440,7 @@ span.error_msg{color:red;}
     text-transform: uppercase;
     font-size: 11px !important;
 }
-.eventList{
-    text-align: center;
-    padding-top: 8px;
-    padding-left: 54px;
-    padding-right: 23px;
-    min-height: 39px !important;
-    max-height: 57px !important;
-    border-color: black;
-}
+
 
 .eventHeading{
     text-align:center; 
@@ -320,9 +448,7 @@ span.error_msg{color:red;}
     margin-bottom: 10px;
     font-size: 18px !important;
 }
-.overlineStyle{
-border-top: 4px solid #F89734; font-weight: 800;
-}
+
 .eventHeading2 {
     text-align: center;
     padding-top: 0px;
@@ -352,7 +478,7 @@ ion-header-bar.bar-dark.bar.bar-header{background-color:black !important;}
 	left: 55px;
 	width: calc(100% - 100px);
 	position: fixed;
-	height: calc(100% - 10px);
+	
 }
 .searchBar.numicons2 .searchTxt {
 	width: calc(100% - 135px);
@@ -378,6 +504,9 @@ ion-header-bar.bar-dark.bar.bar-header{background-color:black !important;}
 	padding-right:5px;
     width: 100%;
 }
+
+
+/*End search button*/
 
 ion-footer-bar.tabs.tabs-icon-left.bar.bar-dark.bar-footer.bar-assertive{background-color:black;}
 
@@ -414,13 +543,21 @@ button.button.button-icon.button-clear.ion-search{display:none;}
 
 img.list-thumbnail.listImages {
     position: absolute;
+    width: 100%;
+    height: 100%;
+    padding: 5px;
+    max-height: 57px;
+}
+
+img.list-thumbnail.listImages1 {
+    position: absolute;
     left: 5px;
     max-width: 55px;
     max-height: 55px;
     width: 100%;
     height: 100%;
-    padding-bottom: 10px;
-    margin-top: 5px;
+    margin-bottom: 5px;
+    margin-top: -3px;
 }
 
 .fill-height-or-more1 {
@@ -475,14 +612,18 @@ img.list-thumbnail.listImages {
 
 .eventList{
     text-align: center;
-    padding-top: 8px; padding-left: 70px; padding-right: 23px;    min-height: 39px !important;    max-height: 72px;
+    padding: 8px 39px 0px 57px;
+    min-height: 61px !important;
     border-color: black;
 }
 .eventHeading{
-    text-align:center; padding-top: 20px; margin-bottom: 20px;
+    text-align:center; 
+    padding-top: 20px; 
+    margin-bottom: 20px;
 }
 .overlineStyle{
-border-top: 4px solid #F89734; font-weight: 800;
+    border-top: 4px solid #F89734;
+    font-weight: bold;
 }
 
  /*friend details page start*/
@@ -506,9 +647,9 @@ border-top: 4px solid #F89734; font-weight: 800;
  /*friend details page end*/
 
  /*tickets start*/
- h3.eventHeading{font-weight:800;}
+ h3.eventHeading{font-weight:bold;}
 
- h2.tickets{font-weight: 800;
+ h2.tickets{font-weight: bold;
     font-size: 27px;
     text-align: center;
     margin-top:-3%;
@@ -541,27 +682,55 @@ a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:blac
 
 /*css for search box*/
 input.searchboxArea {
-    width: 100%;
+       width: 100%;
     padding-right: 10px;
     padding-left: 10px;
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0);
     color: #f7941e;
+    height: 35px;
+    padding-bottom: 10px;
+	padding-top:10px;
 }
 select.searchboxArea {
     width: 100%;
     padding-right: 5px;
     padding-left: 5px;
-    background-color: black;
-    border-color: black;
+    background-color: rgba(0, 0, 0, 0);
+    border-color: rgba(0, 0, 0, 0);
     color: white;
+    height: 45px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border-top: solid #EFF0F1 1px;
+    border-bottom: solid #EFF0F1 1px;
 }
 div.searchrow {
     padding: 0px;
 }
 
 .BgCol{
-    background-color: black;
+    background-color: rgba(0, 0, 0, 0.9);
     border-color: #f7941e;
+	display: block;
+    height:175px;
+}
+
+.BgCol1{
+    background-color: rgba(0, 0, 0, 0.9);
+    border-color:#464444;
+	display: block;
+}
+
+button.button.button-clear.button_search{      
+    color: darkorange;
+    border-radius: 3px;
+    font-size: 15px;
+    width: 100%;
+    text-shadow: 2px 0px 4px #847e7e;
+    font-weight: bold;
+    margin-top: 4px;
+    vertical-align: middle;
+    background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
 }
 /*css for search box*/
 /* Prepost game */
@@ -629,6 +798,7 @@ p.addText{
     color: #f89734;
     font-weight: 700;
     font-size: larger;
+    margin-top: 2px;
 }
 /*End of Css for all flask icons and add text feilds and error text*/
 .BgCol2{
@@ -637,9 +807,24 @@ p.addText{
     margin: 0px;
     padding: 4px;
 }
-span.span_icon {
-    margin-right: -26px ;
+.span_icon img {
+    width:21px;
+    height:20px;
+    padding-left:0px;
+    padding-right:0px;
+    margin-right: -25px;
+    margin-top: 3px;
 }
+
+span.badge.span_icon_supplies{
+    top:14px;
+    width:21px;
+    height:20px;
+    padding-left:0px;
+    padding-right:0px;
+    margin-right: -27px !important;
+}
+
 .successColor{
         color: green;
 }
@@ -656,11 +841,181 @@ ion-item.myList.item.item-complex.item-right-editable {
 
 /*user-navigation-menu*/
 a.tab-item.bottom_tabs{
-    font-weight: 800;
+    font-weight: bold;
     font-size: 11px !important;
     }
 	
-	input.loginInputs{
-        padding-left: 10px;
+input.loginInputs{
+    padding-left: 10px;
     width: 95%;
+    font-family:'Avenir Next';
 }
+
+.col.col-70.event_content{
+    padding-left: 8%;
+    width: 93%;
+}
+
+.col.col-70.event_content1{
+    /*padding-left: 14%;*/
+    width: 86%;
+}
+
+/*Prepost slider*/
+.slider_arrow {
+    transition: opacity 0.1s;
+    padding: 0 6px;
+    min-width: 4px;
+    border-radius: 21px;
+    border-color: transparent;
+    text-shadow: 2px 0px 5px black;
+    background: #656565;
+    /* background: none; */
+    opacity: 0.9;
+}
+
+.slider_arrow:before{font-size:19px !important;}
+/*End Prepost slider*/
+
+.icon.icon_events img{width:21px;height:20px;padding-left:10%;}
+
+/*Flask Spinner Class*/
+.spinner.flask-spinner {
+    stroke: #f89734;
+    fill: #f89734;
+}
+/*for reducing padding for floating text boxes*/
+.item.item-input.item-floating-label {
+    padding: 0px 0 0px 16px;
+}
+
+
+
+
+
+
+.bar.bar-header.bar-positive.black-header {
+  background: black;
+  color: darkorange;
+  border-color: darkorange
+}
+.bar.black-header .title {
+  color: darkorange;
+}
+
+.black-header .button.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: orange;
+    font-size: 17px;
+}
+
+button.button.button-clear.mini-button {
+    color: darkorange;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 4px;
+    vertical-align: middle;
+    min-height: 27px;
+    min-width: 32%;
+    font-weight: normal;
+    background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+}
+.item .badge.ext-right {
+    right: 4px;
+}
+
+ input.friendSearch {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: transparent;
+    color: black;
+    height: 35px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 1px solid #f7941e;
+    border-radius: 4px;
+}
+
+  button.button.button-block.button-positive.friend{
+    width: 51%;
+    color: darkorange;
+}
+
+  .srchBgCol {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-color: #f7941e;
+  display: block;
+  height: 95px; }
+  .strip{
+  width: 100%;
+  height: 45px;
+  background: #000000
+}
+.stripPadding{
+  padding-top: 5px;
+}
+.textStyle{
+  color: #ffffff;
+  font-size: large;
+}
+.iconAlignment{
+  cursor: pointer;
+  float: right;
+}
+.deleteIcon{
+  float: right;
+  padding-top: 5px;
+  padding-right:50px;
+}
+.editIcon{
+  float: right;
+  padding-top: 5px;
+  padding-right:15px;
+}
+
+/*Flask Tabs*/
+.tab-nav.tabs{
+    background-color: #000000 !important;
+}
+/*Flask tabs for mytailgate details*/
+.divImage{
+    width: 100%;
+    height: 25%;
+}
+.myTailgatetopImg{
+    width:100%;
+    height:100%;
+}
+.eventDiv{
+    text-align:center;
+}
+.mytailgate_Heading {
+    text-align: center;
+    padding-top: 14px;
+    font-size: 18px;
+}
+.tab1{
+    border: solid 1px;
+}
+#map {
+    width: 100%;
+    height: 100%;
+}
+a.tab-item {
+    font-size: 11px;
+}
+.tailgateInfoborder {
+    border-bottom: solid 1px;
+}
+.tailgateDescFont{
+    font-weight: bold;
+    color: #f89735;
+}
+.thunb-size{
+    width: 15%;
+}
+

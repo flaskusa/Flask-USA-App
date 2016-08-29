@@ -4,22 +4,22 @@
         .module('flaskApp')
         .service('UserService', UserService);
 
-    UserService.$inject = ['$http','$state','REST_API'];
+    UserService.$inject = ['$http','$state','SERVER'];
 
-    function UserService($http, $state,REST_API) {
-        var baseURL = REST_API.url;
+    function UserService($http, $state,SERVER) {
+        var baseURL = SERVER.url;
         var addUserURL = "/flask-rest-users-portlet.flaskadmin/sign-up";
         var getUserByEmailId = "/flask-rest-users-portlet.flaskadmin/get-user-for-email";
         
         this.saveUser = saveUser
-        function saveUser(user, gender) {
+        function saveUser(user, gender, srcname) {
             
             console.log(user);
             var params= {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.Email,
-                screenName: user.Email,
+                screenName: srcname,
                 password1: user.password1,
                 password2: user.password2,
                 DOB: user.DOB,

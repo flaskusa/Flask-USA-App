@@ -1,4 +1,104 @@
-﻿.fill-height-or-more {
+﻿/*Font*/
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Regular.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next Ultra';
+	src: url('/lib/ionic/fonts/AvenirNext-UltraLight.woff2') format('woff2');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Regular_1.woff2') format('woff2');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-BoldItalic.woff2') format('woff2');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Italic.woff2') format('woff2');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Medium.woff2') format('woff2');
+	font-weight: 500;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next Ultra';
+	src: url('/lib/ionic/fonts/AvenirNext-UltraLightItalic.woff2') format('woff2');
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next Demi';
+	src: url('/lib/ionic/fonts/AvenirNext-DemiBold.woff2') format('woff2');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Heavy.woff2') format('woff2');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-HeavyItalic.woff2') format('woff2');
+	font-weight: 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next Demi';
+	src: url('/lib/ionic/fonts/AvenirNext-DemiBoldItalic.woff2') format('woff2');
+	font-weight: 600;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-Bold.woff2') format('woff2');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Avenir Next';
+	src: url('/lib/ionic/fonts/AvenirNext-MediumItalic.woff2') format('woff2');
+	font-weight: 500;
+	font-style: italic;
+}
+
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Avenir Next';
+}
+
+html, body{font-family: 'Avenir Next';}
+
+.item-input input, .item-input textarea{font-family: 'Avenir Next';}
+
+.fill-height-or-more {
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -32,15 +132,15 @@
     width:100%;height:100%;
 }
 .myEvent{
-          background-image:url("../img/FLASK IMAGES/MY_EVENTS.jpg");
+          background-image:url("../img/flask_images/my_events.jpg");
       background-size:100%;
 }
 .myTailgate{
-          background-image:url("../img/FLASK IMAGES/MY_TAILGATE.jpg");
+          background-image:url("../img/flask_images/my_tailgate.jpg");
       background-size:100%;
 }
 .myFrnds{
-     background-image:url("../img/FLASK IMAGES/MY_FRIENDS.jpg");
+     background-image:url("../img/flask_images/my_friends.jpg");
       background-size:100%;
 }
 .row.mainRow.myFrnds {
@@ -75,15 +175,15 @@
   > div {
     padding: 4rem;
     &:nth-child(1) {
-      background-image:url("../img/FLASK IMAGES/MY_EVENTS.jpg");
+      background-image:url("../img/flask_images/my_events.jpg");
       background-size:100%;
     }
     &:nth-child(2) {
-      background-image:url("../img/FLASK IMAGES/MY_TAILGATE.jpg");
+      background-image:url("../img/flask_images/my_tailgate.jpg");
       background-size:100%;
     }
     &:nth-child(3) {
-      background-image:url("../img/FLASK IMAGES/MY_FRIENDS.jpg");
+      background-image:url("../img/flask_images/my_friends.jpg");
       background-size:100%;
     }
     h1, h2 {
@@ -177,10 +277,10 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
 
 .loginpane_header {
     background: rgba(225,225,225,0.95);
-    padding-top: 3em;
-    padding-bottom: 1em;
+    padding: 1em 0;
     text-align: center;
     height:20%;
+    margin-top: -1%;
     width:100%;
 }
 
@@ -197,7 +297,7 @@ img.cq-dd-image{height:100%;}
 input.input_box{width:90%;
            border:solid 1px #F2F1F0;
            border-radius:5px;
-           
+           font-family:'Avenir Next';
 }
 
 .portlet-login .form fieldset {
@@ -208,7 +308,7 @@ input.input_box{width:90%;
 
 .aui body {
     background-color: #fff;
-    font: normal 14px/1 "Coda",Helvetica,sans-serif;
+    font: normal 14px/1 'Avenir Next',Helvetica,sans-serif;
 }
 
 button.button.button-block.button-positive.sign_in_button{width:90%;color:darkorange;}
@@ -278,7 +378,7 @@ button.button.button-block.button-positive.taglib-text{
 .slider-slide {
   color: #000;
   background-color: #fff;
-  font-family: coda; 
+  font-family: 'Avenir Next'; 
   font-weight: 300;
 }
 
@@ -446,17 +546,7 @@ img.list-thumbnail.listImages {
     width: 100%;
     height: 100%;
     padding: 5px;
-}
-
-img.list-thumbnail.listImages1 {
-    position: absolute;
-    left: 5px;
-    max-width: 55px;
-    max-height: 55px;
-    width: 100%;
-    height: 100%;
-    margin-bottom: 5px;
-    margin-top: -3px;
+    max-height: 57px;
 }
 
 img.list-thumbnail.listImages1 {
@@ -523,7 +613,7 @@ img.list-thumbnail.listImages1 {
 .eventList{
     text-align: center;
     padding: 8px 39px 0px 57px;
-    min-height: 39px !important;
+    min-height: 61px !important;
     border-color: black;
 }
 .eventHeading{
@@ -533,7 +623,7 @@ img.list-thumbnail.listImages1 {
 }
 .overlineStyle{
     border-top: 4px solid #F89734;
-    font-weight: 800;
+    font-weight: bold;
 }
 
  /*friend details page start*/
@@ -557,9 +647,9 @@ img.list-thumbnail.listImages1 {
  /*friend details page end*/
 
  /*tickets start*/
- h3.eventHeading{font-weight:800;}
+ h3.eventHeading{font-weight:bold;}
 
- h2.tickets{font-weight: 800;
+ h2.tickets{font-weight: bold;
     font-size: 27px;
     text-align: center;
     margin-top:-3%;
@@ -626,7 +716,7 @@ div.searchrow {
 }
 
 .BgCol1{
-    background-color: rgba(0, 0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.9);
     border-color:#464444;
 	display: block;
 }
@@ -637,7 +727,7 @@ button.button.button-clear.button_search{
     font-size: 15px;
     width: 100%;
     text-shadow: 2px 0px 4px #847e7e;
-    font-weight: 800;
+    font-weight: bold;
     margin-top: 4px;
     vertical-align: middle;
     background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
@@ -708,6 +798,7 @@ p.addText{
     color: #f89734;
     font-weight: 700;
     font-size: larger;
+    margin-top: 2px;
 }
 /*End of Css for all flask icons and add text feilds and error text*/
 .BgCol2{
@@ -717,10 +808,20 @@ p.addText{
     padding: 4px;
 }
 .span_icon img {
-    width:21px;height:20px;padding-left:0%;margin-left:175%;
+    width:21px;
+    height:20px;
+    padding-left:0px;
+    padding-right:0px;
+    margin-right: -28px;
 }
-
-.icon_arrow img{ width:21px;height:20px;padding-left:0%;margin-left:175%;}
+span.badge.span_icon_supplies{
+    top:14px;
+    width:21px;
+    height:20px;
+    padding-left:0px;
+    padding-right:0px;
+    margin-right: -27px !important;
+}
 
 .successColor{
         color: green;
@@ -738,23 +839,23 @@ ion-item.myList.item.item-complex.item-right-editable {
 
 /*user-navigation-menu*/
 a.tab-item.bottom_tabs{
-    font-weight: 800;
+    font-weight: bold;
     font-size: 11px !important;
     }
 	
 input.loginInputs{
     padding-left: 10px;
     width: 95%;
+    font-family:'Avenir Next';
 }
 
 .col.col-70.event_content{
     padding-left: 8%;
     width: 93%;
-   
 }
 
 .col.col-70.event_content1{
-    padding-left: 14%;
+    /*padding-left: 14%;*/
     width: 86%;
 }
 
@@ -775,3 +876,186 @@ input.loginInputs{
 /*End Prepost slider*/
 
 .icon.icon_events img{width:21px;height:20px;padding-left:10%;}
+
+/*Flask Spinner Class*/
+.spinner.flask-spinner {
+    stroke: #f89734;
+    fill: #f89734;
+}
+/*for reducing padding for floating text boxes*/
+.item.item-input.item-floating-label {
+    padding: 0px 0 0px 16px;
+}
+
+
+
+
+
+
+.bar.bar-header.bar-positive.black-header {
+  background: black;
+  color: darkorange;
+  border-color: darkorange
+}
+.bar.black-header .title {
+  color: darkorange;
+}
+
+.black-header .button.button-clear {
+    border-color: transparent;
+    background: none;
+    box-shadow: none;
+    color: orange;
+    font-size: 17px;
+}
+
+button.button.button-clear.mini-button {
+    color: darkorange;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: bold;
+    margin-top: 4px;
+    vertical-align: middle;
+    min-height: 27px;
+    min-width: 32%;
+    font-weight: normal;
+    background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+}
+.item .badge.ext-right {
+    right: 4px;
+}
+
+ input.friendSearch {
+    width: 100%;
+    padding-right: 10px;
+    padding-left: 10px;
+    background-color: transparent;
+    color: black;
+    height: 35px;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    border: 1px solid #f7941e;
+    border-radius: 4px;
+}
+
+  button.button.button-block.button-positive.friend{
+    width: 51%;
+    color: darkorange;
+}
+
+  .srchBgCol {
+  background-color: rgba(0, 0, 0, 0.9);
+  border-color: #f7941e;
+  display: block;
+  height: 95px; }
+  .strip{
+  width: 100%;
+  height: 45px;
+  background: #000000
+}
+.stripPadding{
+  padding-top:13px;
+  text-align: center;
+}
+.textStyle{
+  color: #ffffff;
+  font-size: large;
+}
+.iconAlignment{
+  cursor: pointer;
+  float: right;
+}
+.deleteIcon{
+  float: right;
+  padding-top: 5px;
+  padding-right:50px;
+}
+.editIcon{
+  float: right;
+  padding-top: 5px;
+  padding-right:15px;
+}
+
+/*Flask Tabs*/
+.tab-nav.tabs{
+    background-color: #000000 !important;
+}
+/*Flask tabs for mytailgate details*/
+.divImage{
+    width: 100%;
+    height: 25%;
+}
+.myTailgatetopImg{
+    width:100%;
+    height:100%;
+}
+.eventDiv{
+    text-align:center;
+}
+.mytailgate_Heading {
+    text-align: center;
+    padding-top: 14px;
+    font-size: 18px;
+}
+.tab1{
+    border: solid 1px;
+}
+#map {
+    width: 100%;
+    height: 100%;
+}
+a.tab-item {
+    font-size: 11px;
+}
+.tailgateInfoborder {
+    border-bottom: solid 1px;
+}
+.tailgateDescFont{
+    font-weight: bold;
+    color: #f89735;
+}
+.thunb-size{
+    width: 15%;
+}
+.button:hover {
+  text-decoration: none; }
+@media screen and (max-width: 321px) {
+  .item-icon-left{
+    padding-left: 35px;
+  }
+}
+@media screen and (min-device-width: 400px) and (max-device-width: 450px) {
+  .item-icon-left{
+    padding-left: 80px;
+  }
+}
+.divText{
+  width: 100%;
+  height:120px;
+  font-size:larger;
+  background-color:#ffffff;
+  color: #f89735;
+  padding-top: 40px;
+  padding-left:10px;
+  padding-right: 10px;
+}
+.list-item-icon-left{
+  padding-left: 75px;
+}
+@media screen and (max-width: 321px) {
+  .list-item-icon-left{
+    padding-left: 67px;
+  }
+}
+@media screen and (min-device-width: 350px) and (max-device-width: 450px) {
+  .list-item-icon-left{
+    padding-left: 105px;
+  }
+}
+.suppliesButton{
+  background:#000000;
+  width: 60px;
+  border-radius: 6px;
+  font-weight: bolder;
+
+}

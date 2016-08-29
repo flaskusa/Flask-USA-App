@@ -37,6 +37,43 @@
     <feature name="Geolocation">
         <param name="ios-package" value="CDVLocation" />
     </feature>
+    <feature name="SplashScreen">
+        <param name="ios-package" value="CDVSplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="GoogleMaps">
+        <param name="ios-package" value="GoogleMaps" />
+    </feature>
+    <feature name="External">
+        <param name="ios-package" value="External" />
+    </feature>
+    <feature name="Geocoder">
+        <param name="ios-package" value="Geocoder" />
+    </feature>
+    <feature name="Map">
+        <param name="ios-package" value="Map" />
+    </feature>
+    <feature name="Circle">
+        <param name="ios-package" value="Circle" />
+    </feature>
+    <feature name="GroundOverlay">
+        <param name="ios-package" value="GroundOverlay" />
+    </feature>
+    <feature name="KmlOverlay">
+        <param name="ios-package" value="KmlOverlay" />
+    </feature>
+    <feature name="Marker">
+        <param name="ios-package" value="Marker" />
+    </feature>
+    <feature name="Polygon">
+        <param name="ios-package" value="Polygon" />
+    </feature>
+    <feature name="Polyline">
+        <param name="ios-package" value="Polyline" />
+    </feature>
+    <feature name="TileOverlay">
+        <param name="ios-package" value="TileOverlay" />
+    </feature>
     <name>FlaskUs</name>
     <description>
     </description>
@@ -45,6 +82,7 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
     <icon height="57" src="resources/ios/icon/icon.png" width="57" />
     <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
     <icon height="40" src="resources/ios/icon/icon-40.png" width="40" />
@@ -68,10 +106,8 @@
     <splash height="2208" src="resources/ios/splash/Default-736h.png" width="1242" />
     <splash height="1242" src="resources/ios/splash/Default-Landscape-736h.png" width="2208" />
     <splash height="1536" src="resources/ios/splash/Default-Landscape@2x~ipad.png" width="2048" />
-    <splash height="2048" src="resources/ios/splash/Default-Landscape@~ipadpro.png" width="2732" />
     <splash height="768" src="resources/ios/splash/Default-Landscape~ipad.png" width="1024" />
     <splash height="2048" src="resources/ios/splash/Default-Portrait@2x~ipad.png" width="1536" />
-    <splash height="2732" src="resources/ios/splash/Default-Portrait@~ipadpro.png" width="2048" />
     <splash height="1024" src="resources/ios/splash/Default-Portrait~ipad.png" width="768" />
     <splash height="960" src="resources/ios/splash/Default@2x~iphone.png" width="640" />
     <splash height="480" src="resources/ios/splash/Default~iphone.png" width="320" />
@@ -98,5 +134,5 @@
     <preference name="InAppBrowserStorageEnabled" value="True" />
     <preference name="windows-target-version" value="10.0" />
     <preference name="SplashScreen" value="screen" />
-    <preference name="SplashScreenDelay" value="3000" />
+    <preference name="SplashScreenDelay" value="5000" />
 </widget>

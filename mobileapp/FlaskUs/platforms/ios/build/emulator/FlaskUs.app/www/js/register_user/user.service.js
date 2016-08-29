@@ -4,10 +4,10 @@
         .module('flaskApp')
         .service('UserService', UserService);
 
-    UserService.$inject = ['$http','$state','REST_API'];
+    UserService.$inject = ['$http','$state','SERVER'];
 
-    function UserService($http, $state,REST_API) {
-        var baseURL = REST_API.url;
+    function UserService($http, $state,SERVER) {
+        var baseURL = SERVER.url;
         var addUserURL = "/flask-rest-users-portlet.flaskadmin/sign-up";
         var getUserByEmailId = "/flask-rest-users-portlet.flaskadmin/get-user-for-email";
         

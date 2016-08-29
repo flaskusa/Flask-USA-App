@@ -21,6 +21,13 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
+        },
+        "cordova-plugin-googlemaps": {
+            "API_KEY_FOR_ANDROID": "AIzaSyAFMcFxB17PwbL9oHCTbzApakXVfmC5BSk",
+            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
         }
     },
     "dependent_plugins": {}

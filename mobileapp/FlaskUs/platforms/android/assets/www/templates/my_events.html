@@ -1,34 +1,48 @@
-﻿<ion-view view-title="MY EVENTS">
-    <search-bar ng-model="search" class="button button-icon button-clear ion-search"></search-bar>
-    <ion-content>
-        <a class="item item-full item-icon-left icon ion-plus-circled" ng-click="modal.show()">
-            ADD NEW EVENT
-        </a>
-
-        <div class="list">
-            <a class="item item-icon-right" href="#/app/suppliesList" ng-repeat="data in dataModel.data">
-                {{ data.listName }}
-                <i class="icon ion-chevron-right"></i>
-            </a>
+﻿<ion-view cache-view="false" view-title="MY EVENTS">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
+        </ion-nav-buttons>
+        </ion-nav-bar>
+        <div class="bar bar-subheader BgCol1" ng-show="searchBox.showBox">
+            <div class="row searchrow">
+                <div class="col col-100 col-center searchrow">
+                    <input type="text" placeholder="Search event..." class="searchboxArea" ng-model="eventList.searchString" />
+                </div>
+            </div>
         </div>
-        <script id="templates/modal.html" type="text/ng-template">
-            <ion-modal-view>
-                <ion-header-bar class="bar bar-header bar-positive">
-                    <h1 class="title">Add New Event</h1>
-                    <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
-                </ion-header-bar>
-                <ion-content class="padding">
-                    <form name="listForm" role="form">
-                        <div class="form-group">
-                            <label for="listName">Event Name:</label>
-                            <input type="text" class="form-control" ng-model="list.listName" name="listName" id="listName" />
+        <ion-content ng-click="searchBox.showBox = false">
+            <a class="item item-full item-icon-left " href="#/app/add_my_event">
+                <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+                <p class="addText">ADD EVENT</p>
+            </a>
+            <div class="card" ng-show="myEventError">
+                <div class="item item-text-wrap ">
+                    There are no events
+                </div>
+            </div>
+            <div class="card" ng-show="myNoEventError">
+                <div class="item item-text-wrap ">
+                    No events added yet.
+                </div>
+            </div>
+            <ion-list show-delete="false" can-swipe="true">
+                <ion-item class="myList item-remove-animate" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in myEvent | filter: eventList.searchString">
+                    <div class="row">
+                        <div class="col col-15"><img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" /></div>
+                        <div class="col col-70 event_content1">
+                            <h2 class="eventNameCol">{{ data.eventName }}</h2>
+                            <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
+                            <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
                         </div>
-                        <div class="form-group">
-                            <button type="button" class="button button-full button-positive" ng-click="saveList(list)">Add Event</button>
+                        <div class="col col-15">
+                            <span class="badge span_icon" ng-click="addmyEvent(data.eventId,$index)"><img src="img/flask_icons/arrow_left.svg"></span>
                         </div>
-                    </form>
-                </ion-content>
-            </ion-modal-view>
-        </script>
-    </ion-content>
+                    </div>
+                    <ion-option-button class="button-assertive icon ion-trash-a" ng-click="removeEvent(data.eventId,$index);"></ion-option-button>
+                </ion-item>
+            </ion-list>
+        </ion-content>
 </ion-view>

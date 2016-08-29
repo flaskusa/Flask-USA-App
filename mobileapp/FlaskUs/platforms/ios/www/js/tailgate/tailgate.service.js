@@ -10,8 +10,56 @@
         var baseURL = SERVER.url;
         var allTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
         var myTailgatesURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-my-tailgate";
+        var getTailgateImagesURL = "flask-user-tailgate-portlet.tailgateimages/get-tailgate-images";
+        var getTailGateURL = "flask-user-tailgate-portlet.tailgateinfo/get-tailgate";
+        var geteventURL = "flask-rest-events-portlet.event/get-event";
+        var getTalgetUsersURL = "flask-user-tailgate-portlet.tailgateusers/get-tailgate-members";
+        var addtailgateURL = "flask-user-tailgate-portlet.tailgateusers/get-tailgate-members";
+        var getVenuebyVenueIdURL = "flask-rest-events-portlet.venue/get-venue";
 
-        this.getAllTailgate = getAllTailgate
+        var tailgateServices = {
+            getEvent: getEvent,
+            getAllTailgate: getAllTailgate,
+            getMyTailgates: getMyTailgates,
+            getTailgate: getTailgate,
+            getMyTailgateImages: getMyTailgateImages,
+            getMyTailgateUsers: getMyTailgateUsers,
+            addTailgate: addTailgate
+        }
+
+        function addTailgate(tailgateName,tailgateDescription,eventId, eventName,tailgateDate,startTime,endTime,venmoAccountId,amountToPay ) {
+            return $http.get(baseURL + addtailgateURL, {
+                params: {
+                    tailgateName: tailgateName,
+                    tailgateDescription: tailgateDescription,
+                    eventId: eventId,
+                    eventName: eventName,
+                    tailgateDate: tailgateDate,
+                    startTime: startTime,
+                    endTime: endTime,
+                    venmoAccountId: venmoAccountId,
+                    amountToPay: amountToPay
+                    }
+                }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+            });
+        }
+
+        function getEvent(eventId) {
+            return $http.get(baseURL + geteventURL, {
+                    params: { 'eventId': eventId }
+                }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+            });
+        }
 
         function getAllTailgate() {
             return $http.get(baseURL + allTailgateURL)
@@ -22,19 +70,53 @@
                 });
         }
 
-        this.getMyTailgates = getMyTailgates
         function getMyTailgates(uId) {
-           
             return $http.get(baseURL + myTailgatesURL, {
                 params: { 'userId': uId }
-                }
+            }
             )
             .then(function success(response) {
-                console.log(response);
                 return response;
             }, function failure(response) {
                 //add errror handling 
             });
         }
+        function getTailgate(tailgateId) {
+            return $http.get(baseURL + getTailGateURL, {
+                params: { 'tailgateId': tailgateId }
+            }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+            });
+        }
+
+        function getMyTailgateImages(tailgateId) {
+            return $http.get(baseURL + getTailgateImagesURL, {
+                params: { 'tailgateId': tailgateId }
+            }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+            });
+        }
+
+        function getMyTailgateUsers(tailgateId) {
+            return $http.get(baseURL + getTalgetUsersURL, {
+                params: { 'tailgateId': tailgateId }
+            }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+            });
+        }
+
+        return tailgateServices;
     }
 })();

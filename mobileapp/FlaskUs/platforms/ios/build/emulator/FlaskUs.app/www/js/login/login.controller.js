@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookieStore'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookieStore) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
@@ -14,10 +14,6 @@
        
         $scope.doLogin = function (user) {
             LoginService.authenticateUser(user).then(function (respData) {
-                //document.login_form.reset();
-               
-                console.log(respData);
-                // $scope.user = respData.data;
                 if (respData.data.message == "Authenticated access required") {
                     $scope.Error = true;
                     $timeout(function () { $scope.Error = false; }, 3000);
@@ -25,8 +21,8 @@
                 else if (respData.data.emailAddress == "") {
                 }
                 else {
-                    $cookieStore.put('CurrentUser', respData);
-                    var usercookie = $cookieStore.get('CurrentUser');
+                    $cookies.putObject('CurrentUser', respData);
+                    var usercookie = $cookies.getObject('CurrentUser');
                     console.log(usercookie);
                     $rootScope.userName = respData.data.firstName + respData.data.lastName;
                     $rootScope.userEmailId = respData.data.emailAddress;

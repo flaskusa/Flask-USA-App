@@ -1,32 +1,68 @@
-﻿<ion-view view-title="MY FRIENDS">
-    <search-bar ng-model="search" class="button button-icon button-clear ion-search"></search-bar>
-    <ion-content>
-        <a class="item item-full item-icon-left icon ion-plus-circled" ng-click="modal.show()">
-            INVITE FRIEND
-        </a>
-
-        <div class="list">
-            <a class="item item-icon-right" href="#/app/suppliesList" ng-repeat="data in dataModel.data">
-                {{ data.listName }}
-                <i class="icon ion-chevron-right"></i>
-            </a>
+﻿<ion-view cache-view="false" view-title="MY FRIENDS">
+    <ion-nav-buttons side="right">
+        <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.show = !searchBox.show"></button>
+    </ion-nav-buttons>    
+     <div class="bar bar-subheader srchBgCol" ng-show="searchBox.show">
+        <div class="row">
+            <div class="col col-100 col-center searchrow">
+                <input type="text" placeholder="Search friend..." class="searchboxArea" ng-model="searchBox.searchText"/>
+            </div>
         </div>
+        <div class="row">
+            <div class="col col-center searchrow">
+                <button class="button button-clear button_search" ng-click="getAllfilteredFrieds(searchBox.searchText)">SEARCH</button>
+            </div>
+        </div>
+    </div>
+    <ion-content class="has-footer" >
+        <a class="item item-full item-icon-left " ng-click="showInviteFriendPopup()">
+          <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+          <p class="addText">INVITE FRIEND</p>
+      </a>
+        <div class="card" ng-if="noFriendAdded">
+            <div class="item item-text-wrap ">
+                No Friends added yet.
+            </div>
+        </div>
+        <div ng-if="!noFriendAdded" class="scroll">
+                <div class="list"> 
+                    <a ng-repeat="data in myFriends track by $index"  class="item item-avatar item-icon-right" href="#/app/my_friendDetail/{{data.userId}}">
+                        <img src = "img/default-profilepic.png">
+                        <h2>{{ data.fullName | uppercase}}</h2>
+                        <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg" ></span>
+                    </a>
+                </div>
+         </div>
         <script id="templates/modal.html" type="text/ng-template">
-            <ion-modal-view>
-                <ion-header-bar class="bar bar-header bar-positive">
+            <ion-modal-view >
+                <ion-header-bar class="bar bar-header bar-positive black-header">
                     <h1 class="title">Invite Friend</h1>
-                    <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
+                    <button class="button button-clear button-primary" ng-click="closeInviteFriendPopup()">X</button>
                 </ion-header-bar>
-                <ion-content class="padding">
-                    <form name="listForm" role="form">
-                        <div class="form-group">
-                            <label for="listName">Friend Name:</label>
-                            <input type="text" class="form-control" ng-model="list.listName" name="listName" id="listName" />
+                <div class="bar bar-subheader">
+                    <div class="row">
+                        <div class="col col-90 col-center searchrow">
+                            <input type="text" placeholder="Search friend..." class="friendSearch" ng-model="searchContact.searchtext"/>
                         </div>
-                        <div class="form-group">
-                            <button type="button" class="button button-full button-positive" ng-click="saveList(list)">Invite Friend</button>
+                         <div class="col col-center searchrow">
+                           <button class="button button-icon button-clear ion-ios-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
                         </div>
-                    </form>
+                    </div>
+                </div>
+                <ion-content class="padding has-subheader">
+                            <ion-list> 
+                                <ion-item collection-repeat="data in userContactList track by $index" class="item-avatar">
+                                    <img src = "img/default-profilepic.png">
+                                    <h2>{{ data.fullName | uppercase}}</h2>
+                                    <p>{{ data.emailAddress}}</p>
+                                    <button class="button button-clear mini-button badge ext-right" ng-if="!data.connectionRequested && !data.block &&  !data.connected" ng-click="sendFriendRequest(data)">Add Friend </button>
+                                    <button class="button button-clear mini-button badge ext-right" ng-if="data.connectionRequested" disabled>Request Sent </button>
+                                    <button class="button button-clear mini-button badge ext-right" ng-if="data.block" ng-click="unBlockUser(data)">Unblock </button>
+                                    <button class="button button-clear mini-button badge ext-right" ng-if="data.connected" disabled>Friend </button>
+                                    
+                                </ion-item>
+                            </ion-list>
+                                <ion-item  ng-click="getMoreUserContact(searchContact.searchtext)">More</ion-item>
                 </ion-content>
             </ion-modal-view>
         </script>

@@ -1,12 +1,14 @@
 ﻿(function () {
     var flaskAppConfig = angular.module('flaskApp');
 
-    flaskAppConfig.constant("REST_API", {
+    flaskAppConfig.constant("SERVER", {
+        "hostName": "http://146.148.83.30/",
         "url": "http://146.148.83.30/api/jsonws/",
+        "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
         "companyId":20154
     })
 
-    flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider) {
+    flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         $stateProvider
           .state('app', {
               url: '/app',
@@ -34,41 +36,33 @@
             }
         })
         //pre post game page
-        .state('app.prePostGame', {
-            url: '/prePostGame/:eventName/:eventId/:venueId',
+        .state('app.pre_post_game', {
+            url: '/pre_post_game/:eventName/:eventId/:venueId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/prePostGame.html',
+                    templateUrl: 'templates/pre_post_game.html',
                     controller: 'prePostGameCtrl'
                 }
             }
         })
 
-        .state('app.browse', {
-            url: '/browse',
+                //event map view
+        .state('app.event_map_view', {
+            url: '/event_map_view',
+            params: {eventDetails: null, infoType: null, infoTypeCategory: null },
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/browse.html'
+                    templateUrl: 'templates/event_map_view.html',
+                    controller: 'eventMapViewCtrl'
                 }
             }
         })
-
-            .state('app.login', {
-                url: '/login',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/login.html',
-                        controller: 'LoginCtrl'
-                    }
-                }
-            })
-
-        .state('app.playlists', {
-            url: '/playlists',
+        .state('app.login', {
+            url: '/login',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/playlists.html',
-                    controller: 'PlaylistsCtrl'
+                    templateUrl: 'templates/login.html',
+                    controller: 'LoginCtrl'
                 }
             }
         })
@@ -88,7 +82,7 @@
             url: '/suppliesList/:listName',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/suppliesList.html',
+                    templateUrl: 'templates/supplies_list.html',
                     controller: 'SuppliesListCtrl'
                 }
             }
@@ -114,18 +108,20 @@
                 }
             }
         })
-
-         .state('app.addMyEvent', {
-             url: '/addMyEvent',
+           
+         .state('app.add_my_event', {
+             url: '/add_my_event',
              views: {
                  'menuContent': {
-                     templateUrl: 'templates/addMyEvent.html',
+                     templateUrl: 'templates/add_my_event.html',
                      controller: 'addMyEventCtrl'
                  }
              }
          })
-            /*End My_events Controller*/
 
+
+        /*End My_events Controller*/
+        // My TailGate Section
         .state('app.my_tailgate', {
             url: '/my_tailgate',
             views: {
@@ -135,15 +131,45 @@
                 }
             }
         })
-        .state('app.my_friends', {
-            url: '/my_friends',
+       
+        .state('app.my_tailgateDetails', {
+            url: '/my_tailgateDetails/:tailgateId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_friends.html'
+                    templateUrl: 'templates/my_tailgateDetails.html',
+                    controller: 'mytailgateDetailsCtrl'
                 }
             }
         })
 
+            .state('app.add_my_tailgate', {
+                url: '/add_my_tailgate',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/add_my_tailgate.html',
+                        controller: 'add_mytailgateCtrl'
+                    }
+                }
+            })
+         // End of My TailGate Section
+        .state('app.my_friends', {
+            url: '/my_friends',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/my_friends.html',
+                    controller:"FriendsCtrl"
+                }
+            }
+        })
+        .state('app.my_friendDetail', {
+            url: '/my_friendDetail/:userId',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/friendDetail.html',
+                    controller:"FriendDetailCtrl"
+                }
+            }
+        })
         .state('app.user_registration', {
             url: '/user_registration',
             views: {
@@ -172,23 +198,38 @@
             }
         })
 
-       .state('app.addMyTailgate', {
-            url: '/addMyTailgate',
+        .state('app.tickets', {
+            url: '/tickets',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/addMyTailgate.html',
-                    controller: 'addMyTailgateCtrl'
+                    templateUrl: 'templates/tickets.html',
+                    controller: 'ticketsCtrl'
                 }
             }
-       })
+        })
 
-   
 
-        // if none of the above states are matched, use this as the fallback
-        $urlRouterProvider.otherwise('/app/events');
-        
+        /*
+        if none of the above states are matched, use this as the fallback*/
+         $urlRouterProvider.otherwise('/app/events');   
+         $ionicConfigProvider.tabs.position('bottom');
 
+
+        // remove back button text completely
+         $ionicConfigProvider.backButton.previousTitleText(false).text(' ');
+
+        //Http Interceptors for showing and hiding 
+        $httpProvider.interceptors.push(function ($rootScope) {
+            return {
+            request: function (config) {
+                $rootScope.$broadcast('loading:show')
+                return config
+            },
+            response: function (response) {
+                    $rootScope.$broadcast('loading:hide')
+                return response
+                }
+            }
+        })
     })
-
-
 })();

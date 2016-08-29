@@ -3,41 +3,99 @@
     angular.module('flaskApp')
     .controller('SuppliesCtrl', SuppliesCtrl);
 
-    SuppliesCtrl.$inject = ['$scope', 'HttpService', 'ServerDataModel', '$ionicModal'];
+    SuppliesCtrl.$inject = ['$scope', 'HttpService', 'ServerDataModel', '$ionicModal','$location'];
 
     /* @ngInject */
-    function SuppliesCtrl($scope, HttpService, ServerDataModel, $ionicModal) {
+    function SuppliesCtrl($scope, HttpService, ServerDataModel, $ionicModal,$location) {
         // putting our server data on scope to display it for learning purposes
         $scope.dataModel = ServerDataModel;
-        console.log("length of list item :"+ServerDataModel.data2.length);
-
-        $scope.data = ServerDataModel.data2;
+        $scope.data = ServerDataModel.data;
         $scope.counter = 0;
-        angular.forEach($scope.data, function (value, key) {
-            console.log(key);
-            if (value.checked == true)
-                $scope.counter++;
-        });
-
-        $scope.List2count = ServerDataModel.data2.length;
-
+        $scope.counterArr=[];
+        $scope.userDataList=[];
+        $scope.editList=false;
+        $scope.addNewSupplies=false;
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
         }).then(function (modal) {
             $scope.modal = modal;
         });
-
-        $scope.saveList = function (list) {
-            HttpService.save(list);
-            $scope.modal.hide();
+        $scope.addNewSuppliesList=function(){
+            $scope.addNewSupplies=!$scope.addNewSupplies;
+        }
+        $scope.saveList = function(list) {
+            $scope.dataModel.data.unshift({
+                listName: list,
+                isSystemProvided:0,
+                listItem:[]
+            });
+            $scope.getSelectedLength($scope.dataModel.data[0],0);
+            $scope.addNewSupplies=false;
+            $scope.getUserSupplieslength();
+            list.listName="";
         };
+        /*$scope.saveList = function (list) {
+            HttpService.save(list);
+            $scope.dataModel.data.push(list);
+            $scope.modal.hide();
+
+        };*/
 
         // date field display options
+
+        $scope.getSelectedLength=function(data,index){
+            $scope.thirdCounter=0;
+            $scope.index=-1;
+            angular.forEach($scope.dataModel.data,function (value1, key){
+                $scope.index++;
+           if(value1.isSystemProvided==0) {
+               $scope.counter = 0;
+               angular.forEach(value1.listItem, function (value2, key) {
+                   console.log(key);
+                   if (value2.checked == true)
+                       $scope.counter++;
+               });
+               $scope.counterArr[$scope.index] = $scope.counter;
+               $scope.thirdCounter++;
+           }
+           })
+        }
+        $scope.setListId=function(selectedList){
+            ServerDataModel.selectedList=selectedList;
+
+        }
         $scope.opened = {};
         $scope.open = function ($event, id) {
             $event.preventDefault();
             $event.stopPropagation();
             $scope.opened[id] = true;
         };
+        $scope.copyList=function(list){
+            var list=angular.copy(list);
+            list.isSystemProvided=0;
+            $scope.dataModel.data.unshift(list);
+            $scope.getSelectedLength($scope.dataModel.data[0],0);
+            $scope.getUserSupplieslength();
+        };
+        $scope.editSupplies=function(){
+         $scope.editList=!$scope.editList;
+        }
+        $scope.saveSupplies=function(){
+            $scope.editList=!$scope.editList;
+        }
+        $scope.getUserSupplieslength=function(){
+            $scope.secondCounter=0;
+            angular.forEach($scope.data, function (value, key) {
+                if (value.isSystemProvided == 0)
+                    $scope.secondCounter++;
+            });
+        }
+        $scope.getUserSupplieslength();
+        $scope.deleteItem=function(index){
+            $scope.deleteSuplies=true;
+            $scope.data.splice(index,1);
+            $scope.getUserSupplieslength();
+            $scope.getSelectedLength();
+        }
     }
 })();
