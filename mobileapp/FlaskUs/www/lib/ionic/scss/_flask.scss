@@ -1026,11 +1026,11 @@ a.tab-item {
 }
 .divText{
   width: 100%;
-  height:120px;
+  height:70px;
   font-size:larger;
   background-color:#ffffff;
   color: #f89735;
-  padding-top: 40px;
+  padding-top: 19px;
   padding-left:10px;
   padding-right: 10px;
 }
@@ -1118,4 +1118,22 @@ a.tab-item {
     min-width: 4px;
     background: #656565;
     opacity: 0.5;
+}
+.strip2{
+  width: 100%;
+  height: 35px;
+  background: #000000;
+  padding-top: 8px;
+}
+i.addText {
+  padding-left: 10px;
+  color: #f89734;
+  font-weight: 700;
+  margin-top: 2px; }
+
+.divAddIcon{
+  width:100%;
+  background-color: #ffffff;
+  height: 30px;padding-right: 10px;
+  padding-top:4px;
 }
