@@ -37,8 +37,10 @@
           <ion-item style="color: #0f0f0f"  ng-repeat="data in dataModel.data"ng-if="data.isSystemProvided==0"ng-init="data.edit=false" on-double-tap="editSupply(data)">
               <label ng-if = "data.edit == false" >{{ data.listName }} </label>
               <input type="text"id="editBox"autofocus ng-model="data.listName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
-              <a href="#/app/suppliesList/{{data.listName}}" ng-click="setListId(data)"><span  class="badge badge-assertive" ng-init="getSelectedLength()">{{counterArr[$index]}}/{{data.listItem.length}}</span>
-                  <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:20px;padding-left:10%;"></span>
+              <a href="#/app/suppliesList/{{data.listName}}" ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px" ng-init="getSelectedLength()">{{counterArr[$index]}}/{{data.listItem.length}}</span>
+                  <div >
+                  <span class="badge span_icon"style="top:12px"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:23px;padding-left:10%;top:20px;float: right"></span>
+                  </div>
               </a>
               <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteItem($index)"></ion-option-button>
 

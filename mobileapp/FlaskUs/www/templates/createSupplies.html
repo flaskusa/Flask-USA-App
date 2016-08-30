@@ -12,7 +12,7 @@
 
         </div>
         <div >
-            <div class="divAddIcon"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"style="float: right;"ng-click="addItem(suppliesName)">
+            <div class="divAddIcon"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"style="float: right;"ng-click="addItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
             </div>
             <div class="strip2 ">
                 <i class="addText"style=""
@@ -37,7 +37,11 @@
             <a href="#/app/supplies"class="button button-small suppliesButton" style="float: right;"ng-disabled="customQuoteForm.$invalid"ng-click="cancelAdding()">
                 <i >cancel</i>
             </a>
-                <div style="margin-right: 5px;float: right">
+                 <div style="margin-right: 5px;float: right"ng-if="suppliesName==undefined">
+                     <a   class="button button-small suppliesButton">
+                         <i >save</i>
+                     </a></div>
+                <div style="margin-right: 5px;float: right"ng-if="suppliesName">
                 <a  href="#/app/supplies" class="button button-small suppliesButton " ng-click="saveList(suppliesName)">
                     <i >save</i>
                 </a></div>

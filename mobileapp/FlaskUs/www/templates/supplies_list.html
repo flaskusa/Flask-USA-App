@@ -11,7 +11,7 @@
 
         <div class="item item-input-inset"ng-if="addNewSuppliesItem==true">
             <label class="item-input-wrapper">
-                <input type="text" placeholder="Item Name"autofocus ng-model="listItemName" required>
+                <input type="text"id="addItemBox" placeholder="Item Name"autofocus ng-model="listItemName" required>
             </label>
             <button class="button button-small suppliesButton"ng-click="saveList2(listItemName)">
                save
@@ -21,8 +21,11 @@
             </button>
         </div>
         <div class="list ">
-            <ion-checkbox class="item item-icon-left item-checkbox-right" ng-repeat="data in listValue" ng-model="data.checked" ng-click="getListcount()">
-                {{ data.itemName }}
+            <ion-checkbox class="item item-icon-left item-checkbox-right" ng-repeat="data in listValue" ng-model="data.checked" ng-init="data.edit=false" on-double-tap="editSupplyItem(data)"ng-click="getListcount(data)">
+                <label ng-if = "data.edit == false" >{{ data.itemName }}</label>
+                <input type="text"id="editItemBox"autofocus ng-model="data.itemName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupplyItem(data)"/>
+
+
             </ion-checkbox>
         </div>
         <script id="templates/modal.html" type="text/ng-template">
