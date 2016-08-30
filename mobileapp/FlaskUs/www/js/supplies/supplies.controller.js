@@ -58,12 +58,19 @@
             $scope.suppliesName="";
         }
         $scope.saveSupply=function(data){
-            data.edit=false;
+            if(data.listName!="") {
+                data.edit = false;
+            }else{
+                document.getElementById("editBox").focus();
+            }
         }
         $scope.saveSupplyItem=function(data){
-            document.getElementById("ItemEditBox").blur();
-            data.editItem=false;
-
+            if(data.itemName!="") {
+                document.getElementById("ItemEditBox").blur();
+                data.editItem = false;
+            }else{
+                document.getElementById("ItemEditBox").focus();
+            }
         }
         $scope.createdListItem={"data":
             []
@@ -73,15 +80,19 @@
         }
         var listItemEmpty={itemName: "",editItem:true,
             checked : true}
-        $scope.addItem=function(listName){
+        $scope.addItem=function(listName,data){
             if(listName==undefined || listName==""){
                 setTimeout(setFocus, 500);
-
-
+            }
+            else if(data!=undefined&&data.itemName==""){
+                setTimeout(setFocusOnItemBox, 500);
             }
            else {
                 $scope.createdListItem.data.push(angular.copy(listItemEmpty));
             }
+        }
+        function setFocusOnItemBox(){
+            document.getElementById("ItemEditBox").focus();
         }
         function setFocus(){
             document.getElementById("supplyEdit").focus();

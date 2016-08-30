@@ -21,19 +21,44 @@
             $scope.modal = modal;
         });
         $scope.saveList2 = function(list) {
-            $scope.listValue.unshift({
-                itemName: list
-            });
-            $scope.addNewSuppliesItem=false;
-            list.itemName="";
-
+            if(list!=undefined||list!=undefined) {
+                $scope.listValue.unshift({
+                    itemName: list
+                });
+                $scope.addNewSuppliesItem = false;
+            }
+            else{
+                setTimeout(setFocus, 500);
+            }
         };
+        function setFocus(){
+            document.getElementById("addItemBox").focus();
+        }
+        $scope.getListcount=function(data){
+            $scope.saveSupplyItem(data);
+            }
+        $scope.editSupplyItem=function(data){
+            data.edit=true;
+            setTimeout(setFocus, 1000);
+            function setFocus(){
+                document.getElementById("editItemBox").focus();
+            }
+        }
+        $scope.saveSupplyItem=function(data){
+            if(data.itemName!="") {
+                data.edit = false;
+            }else{
+                data.edit = true;
+            }
+        }
         $scope.addNewListItem=function(){
             $scope.addNewSuppliesItem=!$scope.addNewSuppliesItem
+            if($scope.addNewSuppliesItem==true) {
+                setTimeout(setFocus, 500);
+            }
         }
         $scope.cancelAdding=function(){
             $scope.addNewSuppliesItem=false;
-            $scope.listItemName="";
         }
         /*$scope.saveList2 = function (list) {
             HttpService.save2(list);
