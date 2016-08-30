@@ -21,13 +21,17 @@
             $scope.modal = modal;
         });
         $scope.addNewSuppliesList=function(){
-            $scope.addNewSupplies=!$scope.addNewSupplies;
+            setTimeout(setFocus, 500);
+            function setFocus(){
+                document.getElementById("supplyEdit").focus();
+            }
         }
         $scope.saveList = function(list) {
+           // $scope.listItem.unshift( $scope.createdListItem.data);
             $scope.dataModel.data.unshift({
                 listName: list,
                 isSystemProvided:0,
-                listItem:[]
+                listItem:$scope.createdListItem.data
             });
             $scope.getSelectedLength();
             $scope.addNewSupplies=false;
@@ -40,6 +44,15 @@
     document.getElementById("editBox").focus();
         }
     }
+        $scope.editSupplyItem=function(data){
+            data.editItem=true;
+            setTimeout(setFocus, 500);
+            function setFocus(){
+                document.getElementById("supplyEdit").blur();
+                document.getElementById("ItemEditBox").focus();
+            }
+        }
+
         $scope.cancelAdding=function(){
             $scope.addNewSupplies=false;
             $scope.suppliesName="";
@@ -47,6 +60,32 @@
         $scope.saveSupply=function(data){
             data.edit=false;
         }
+        $scope.saveSupplyItem=function(data){
+            document.getElementById("ItemEditBox").blur();
+            data.editItem=false;
+
+        }
+        $scope.createdListItem={"data":
+            []
+        };
+        $scope.deleteCreatedItem=function(index){
+            $scope.createdListItem.data.splice(index,1);
+        }
+        var listItemEmpty={itemName: "",editItem:true,
+            checked : true}
+        $scope.addItem=function(listName){
+            if(listName==undefined || listName==""){
+                setTimeout(setFocus, 500);
+
+
+            }
+           else {
+                $scope.createdListItem.data.push(angular.copy(listItemEmpty));
+            }
+        }
+        function setFocus(){
+            document.getElementById("supplyEdit").focus();
+        };
         /*$scope.saveList = function (list) {
             HttpService.save(list);
             $scope.dataModel.data.push(list);
