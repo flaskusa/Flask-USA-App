@@ -1,18 +1,17 @@
 ﻿<ion-view cache-view="false" view-title="ADD MY TAILGATE">
     <ion-nav-bar class="bar-dark" align-title="center">
-        <ion-nav-buttons side="left">
-            <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
-        </ion-nav-buttons>
+        <ion-nav-back-button>
+        </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content has-footer="true" overflow-scroll="false" class="has-footer has-header">
         <div class="card" style="color: red; text-align: center;" ng-show="errorMessage">
             {{errorMessage}}
         </div>
         <div class="form-left">
-            <button class="button  slider_arrow_1" ng-click="slidePrevious1()">Prev</button>
+            <button class="button  slider_arrow_tailgate" ng-click="slidePrevious1()">Prev</button>
         </div>
         <div class="form-right">
-            <button class="button  slider_arrow_1" ng-click="slideNext1()">Next</button>
+            <button class="button  slider_arrow_tailgate" ng-click="slideNext1()">Next</button>
         </div>
         <ion-slide-box show-pager="false" deletgate-handle="wizard">
             <ion-slide>
@@ -46,7 +45,7 @@
                             <input type="time" placeholder="End Time" class="form-control" ng-model="slide1.EndTime" name="EndTime" required>
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label" >Venmo Account:</span>
+                            <span class="input-label">Venmo Account:</span>
                             <input type="email" placeholder="Venmo Account" class="form-control" ng-model="slide1.VenmoAccount" name="VenmoAccount" required>
                         </div>
                         <div class="item item-input item-floating-label">
