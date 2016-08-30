@@ -11,7 +11,7 @@
 
         <div class="item item-input-inset"ng-if="addNewSuppliesItem==true">
             <label class="item-input-wrapper">
-                <input type="text" placeholder="List Name"autofocus ng-model="listItemName" required>
+                <input type="text" placeholder="Item Name"autofocus ng-model="listItemName" required>
             </label>
             <button class="button button-small suppliesButton"ng-click="saveList2(listItemName)">
                save
@@ -20,7 +20,7 @@
                cancel
             </button>
         </div>
-        <div class="list flask_text">
+        <div class="list ">
             <ion-checkbox class="item item-icon-left item-checkbox-right" ng-repeat="data in listValue" ng-model="data.checked" ng-click="getListcount()">
                 {{ data.itemName }}
             </ion-checkbox>

@@ -1,7 +1,6 @@
 ﻿<ion-view cache-view="false" view-title="SUPPLIES">
   <ion-content>
-      <a class="item item-full item-icon-left "ng-click="addNewSuppliesList()">
-
+      <a class="item item-full item-icon-left "ng-click="addNewSuppliesList()" href="#/app/createSupplies">
           <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons" class="FlaskionIcons"></div>
           <p class="addText">CREATE NEW SUPPLIES</p>
       </a>
@@ -19,6 +18,21 @@
               <i >cancel</i>
           </button>
       </div>
+      <div ng-if="addNewSupplies==true">
+          <div style="width:100%;height: 40px;background-color: #ffffff"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"style="margin-left: 71%">
+              <p class="addText"style="padding-right: 0px;float:right">Add Item</p>
+          </div>
+          <div class="row header">
+
+          <div class="col">Supply List Item</div>
+          <div class="col">Selected</div>
+
+      </div>
+      <div class="row" ng-repeat="data in ctrl.data">
+          <div class="col">{{data.itemName}}</div>
+          <div class="col">{{data.checked}}</div>
+
+      </div></div>
 <ion-list>
           <ion-item style="color: #0f0f0f"  ng-repeat="data in dataModel.data"ng-if="data.isSystemProvided==0"ng-init="data.edit=false" on-double-tap="editSupply(data)">
               <label ng-if = "data.edit == false" >{{ data.listName }} </label>
@@ -36,13 +50,7 @@
 <div class="strip">
     <div class="stripPadding">
     <span ng-if="editList==false"><i class="textStyle">COPY LIST FROM HERE</i></span>
-
-    <!--<span ng-if="editList==true"class="iconAlignment">
-    <a class=" button-icon icon ion-android-done-all"ng-click="saveSupplies()"></a>
-</span>
-      <span ng-if="editList==false"class="iconAlignment">
-    <a  class=" button-icon icon ion-settings"ng-click="editSupplies()"></a>
-</span>--></div></div>
+    </div></div>
 
     <div class="list">
         <a class="item item-icon-right"  ng-repeat="data in dataModel.data"ng-if="data.isSystemProvided==1">

@@ -1,0 +1,47 @@
+<ion-view back-button="true" cache-view="false" cache-view="false" view-title="CREATE SUPPLIES">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+
+        <div class="item item-input-inset">
+            <label class="item-input-wrapper">
+                <input type="text"id="supplyEdit" placeholder="Supplies Name"autofocus ng-model="suppliesName" required>
+            </label>
+
+        </div>
+        <div >
+            <div class="divAddIcon"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"style="float: right;"ng-click="addItem(suppliesName)">
+            </div>
+            <div class="strip2 ">
+                <i class="addText"style=""
+                      >Supply List Item</i>
+            </div></div>
+            <ion-list>
+                <ion-item  ng-repeat="data in createdListItem.data track by $index"on-double-tap="editSupplyItem(data)">
+                    <div ng-if = "data.editItem == false"class="flask_text" ><i class="addText">{{data.itemName}}</i> </div>
+
+                    <input type="text"id="ItemEditBox"autofocus ng-model="data.itemName "ng-focus="true"  ng-if="data.editItem == true"ng-init="editSupplyItem(data)" ng-blur="saveSupplyItem(data)"/>
+                    <span class="badge span_icon"style="top:3px"> <label class="checkbox"style="float: right">
+                        <input  type="checkbox"ng-model="data.checked">
+                    </label></span>
+                    <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteCreatedItem($index)"></ion-option-button>
+
+                </ion-item>
+            </ion-list>
+
+
+            <div style="padding-top: 20px">
+             <div>
+            <a href="#/app/supplies"class="button button-small suppliesButton" style="float: right;"ng-disabled="customQuoteForm.$invalid"ng-click="cancelAdding()">
+                <i >cancel</i>
+            </a>
+                <div style="margin-right: 5px;float: right">
+                <a  href="#/app/supplies" class="button button-small suppliesButton " ng-click="saveList(suppliesName)">
+                    <i >save</i>
+                </a></div>
+               </div>
+            </div>
+    </ion-content>
+</ion-view>
