@@ -85,6 +85,15 @@
                 }
             }
         })
+            .state('app.createSupplies', {
+                url: '/createSupplies',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/createSupplies.html',
+                        controller: 'SuppliesCtrl'
+                    }
+                }
+            })
 
         .state('app.suppliesList', {
             url: '/suppliesList/:listName',
