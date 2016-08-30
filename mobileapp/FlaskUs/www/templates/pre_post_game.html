@@ -18,10 +18,10 @@
             <div class="sideImagePanel">
                 <img src="img/pre.png" class="sidepanel"/>
                 <div class="left">
-                    <button class="button" ng-click="slidePrevious1('slide1')">Previous</button>
+                    <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('slide1')"></button>
                 </div>
                 <div class="right">
-                    <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide1')">Next</button>
+                    <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide1')"></button>
                 </div>
                 <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
                     <ion-slide ng-repeat="pre in Pre_Game" style="width:100%;">
