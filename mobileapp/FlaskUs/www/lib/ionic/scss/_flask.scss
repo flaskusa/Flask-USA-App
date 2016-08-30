@@ -887,11 +887,6 @@ input.loginInputs{
     padding: 0px 0 0px 16px;
 }
 
-
-
-
-
-
 .bar.bar-header.bar-positive.black-header {
   background: black;
   color: darkorange;
@@ -1073,3 +1068,54 @@ a.tab-item {
 
 /*Search icon*/
 .bar-dark .button.button-icon.ion-android-search:before{font-size:27px !important;}
+
+.form-left{
+    left: 0;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    -moz-box-direction: normal;
+    -moz-box-orient: horizontal;
+    -ms-flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -ms-flex-line-pack: stretch;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    position: absolute;
+    z-index: 100;
+    width: 44px;
+   }
+.form-right{
+    right:0px;
+    height: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    -moz-box-direction: normal;
+    -moz-box-orient: horizontal;
+    -ms-flex-direction: row;
+    -ms-flex-wrap: nowrap;
+    -moz-box-pack: center;
+    -ms-flex-pack: center;
+    -ms-flex-line-pack: stretch;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    position: absolute;
+    z-index: 100;
+    width: 44px;
+}
+
+.slider_arrow_tailgate {
+    transition: opacity 0.1s;
+    padding: 9px 20px;
+    min-width: 4px;
+    background: #656565;
+    opacity: 0.5;
+}
