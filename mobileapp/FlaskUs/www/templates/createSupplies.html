@@ -37,11 +37,11 @@
             <a href="#/app/supplies"class="button button-small suppliesButton" style="float: right;"ng-disabled="customQuoteForm.$invalid"ng-click="cancelAdding()">
                 <i >cancel</i>
             </a>
-                 <div style="margin-right: 5px;float: right"ng-if="suppliesName==undefined">
+                 <div style="margin-right: 5px;float: right"ng-if="suppliesName==undefined||createdListItem.data[createdListItem.data.length-1].itemName==''">
                      <a   class="button button-small suppliesButton">
                          <i >save</i>
                      </a></div>
-                <div style="margin-right: 5px;float: right"ng-if="suppliesName">
+                <div style="margin-right: 5px;float: right"ng-if="suppliesName&&createdListItem.data[createdListItem.data.length-1].itemName!=''">
                 <a  href="#/app/supplies" class="button button-small suppliesButton " ng-click="saveList(suppliesName)">
                     <i >save</i>
                 </a></div>

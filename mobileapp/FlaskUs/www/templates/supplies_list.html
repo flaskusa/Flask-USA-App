@@ -22,7 +22,7 @@
         </div>
         <div class="list ">
             <ion-checkbox class="item item-icon-left item-checkbox-right" ng-repeat="data in listValue" ng-model="data.checked" ng-init="data.edit=false" on-double-tap="editSupplyItem(data)"ng-click="getListcount(data)">
-                <label ng-if = "data.edit == false" >{{ data.itemName }}</label>
+                <div ng-if = "data.edit == false" >{{ data.itemName }}</div>
                 <input type="text"id="editItemBox"autofocus ng-model="data.itemName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupplyItem(data)"/>
 
 
