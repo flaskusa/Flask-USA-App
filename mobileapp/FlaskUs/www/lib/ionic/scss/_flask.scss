@@ -286,7 +286,10 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
 
 .loginpane_header img{content:url(../img/FlaskRed.png);zoom:0.3;}
 
-img.cq-dd-image{height:100%;}
+img.cq-dd-image{
+    height:100%;
+    margin-top:5px;
+}
 
 .loginpane_body {
       width:100%;
@@ -517,13 +520,24 @@ button.button.button-icon.button-clear.ion-search{display:none;}
 .my-side-menu ul.list a {
     background-color: black;
     color: #fff;
+    margin-left: 17px;
+    text-decoration: none;
+}
+
+.my-side-menu .item h2 {
+    font-size: 17px;
+    font-weight: normal;
+    color: white;
+    height: 21px;
+    margin-right: 37px;
+    margin-top: 25px;
 }
 
 .my-side-menu .item h3 {
     margin: 22px 0px 0px 0px;
-    font-size: 12px;
-    margin-top:-28px;
-    color:orange;
+    font-size: 14px;
+    margin-top: 0;
+    color: orange;
 
 }
 
@@ -535,10 +549,31 @@ button.button.button-icon.button-clear.ion-search{display:none;}
     height:21px;
 }
 
-.item.item-avatar.profile{background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);}
+.item.item-avatar.profile{
+    background-color: black;
+    height:120px;
+    border-bottom:solid #F89735 1px !important;
+}
 
 .my-side-menu ion-content {
     background: black;
+}
+
+img.menuLogo{	
+    position: absolute !important;
+    left: 20px !important;
+    bottom: -2px !important;
+    max-width: 246px !important;
+    max-height: 117px !important;
+    width: 84% !important;
+    top: 3px !important;
+    height: 100% !important;
+    border-radius:0px !important;
+    border-bottom:solid darkorange 1px;
+    }
+
+icon-left ion-home:before{
+    font-size:24px;
 }
 
 img.list-thumbnail.listImages {
@@ -621,6 +656,12 @@ img.list-thumbnail.listImages1 {
     padding-top: 20px; 
     margin-bottom: 20px;
 }
+.overMainLineStyle{
+    border-top: 4px solid #F89734;
+    font-weight: bold;
+    font-size:25px;
+}
+
 .overlineStyle{
     border-top: 4px solid #F89734;
     font-weight: bold;
@@ -1136,4 +1177,60 @@ i.addText {
   background-color: #ffffff;
   height: 30px;padding-right: 10px;
   padding-top:4px;
+}
+
+/*Tickets*/
+.ticketNameCol{
+    font-weight: bold !important;
+    text-transform: uppercase;
+    font-size: 26px !important;
+    padding-right: 24px;
+    
+}
+
+.ticketSiteCol{
+    text-transform: uppercase;
+    font-size: 14px !important;
+    margin-top: 0px;
+    padding-right: 24px;
+}
+
+.ticketList{
+    text-align: center;
+    padding: 8px 39px 0px 57px;
+    min-height: 69px !important;
+    border-color: black;
+}
+
+i.icon.ion-chevron-right.ticket-icon{margin-right:-14px;}
+
+/*my tailgate details*/
+span.ng-binding{text-transform:uppercase;font-weight:600;}
+
+.icon-left:before{
+    font-size:24px;
+}
+
+div.icon-left.activated{
+   background-color:#F89735;
+}
+
+.badge{color:white !important;}
+
+img.menuLogo{	
+    position: absolute !important;
+    left: 20px !important;
+    bottom: -2px !important;
+    max-width: 246px !important;
+    max-height: 117px !important;
+    width: 84% !important;
+    top: 3px !important;
+    height: 100% !important;
+    border-radius:0px !important;
+    }
+
+ul.list.menuContentList{padding-top:6px;}
+
+div.menuLogin{padding-top:10px;
+              padding-bottom:10px;
 }
