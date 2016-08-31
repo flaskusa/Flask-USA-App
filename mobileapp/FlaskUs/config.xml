@@ -84,4 +84,8 @@
   </platform>
   <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
   <plugin name="cordova-plugin-splashscreen" version="3.2.2" />
+  <plugin name="cordova-plugin-network-information" version="1.2.2-dev" />
+  <plugin name="cordova-plugin-inappbrowser" version="1.2.1" />
+  <plugin name="com.lampa.startapp" version="0.1.4" src="https://github.com/lampaa/com.lampa.startapp.git" />
+  <plugin name="cordova-plugin-appavailability" version="0.4.2" src="https://github.com/ohh2ahh/AppAvailability.git" />
 </widget>
