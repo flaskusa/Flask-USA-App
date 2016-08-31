@@ -1,0 +1,75 @@
+﻿<ion-view view-title="EVENT DETAILS" cache-view="false">
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-android-arrow-back" ng-click="goBack();"></button>
+        </ion-nav-buttons>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-ios-share"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="">
+        <div class="list tab1">
+            <!-- Tab 1 content -->
+            <div class="divImage">
+                <img class="myTailgatetopImg" src="img/flask_images/Fotolia_20387372_Subscription_Monthly_M.jpg" />
+            </div>
+            <div class="mytailgate_Heading">
+                <h3><span class="overlineStyle">{{myTailgate.tailgateName}}</span></h3>
+            </div>
+            <div class="eventDiv">
+                <a class="item item-icon-right eventList" href="">
+                    <h2 class="eventNameCol">{{myTailgate.eventName}}</h2>
+                    <p class="dateCol">{{myTailgate.tailgateDate | date:'EEEE, MMMM dd, yyyy'}}</p>
+                    <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
+                </a>
+            </div>
+            <div class="tailgateInfo tailgateInfoborder">
+                <div class="row">
+                    <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
+                    <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
+                </div>
+                <div class="row">
+                    <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span class="tailgate_Info">{{myTailgate.tailgateDescription}}</span></div>
+                </div>
+                <div class="row">
+                    <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
+                </div>
+            </div>
+            <div class="pic_gallery tailgateInfoborder">
+                <div class="row">
+                    <div class="col">
+                        <div class="tailgateDescFont">PICTURES</div>
+                        <span style="overflow:scroll">
+                            <a class="item photoitem" style="float:left;">
+                                <div><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+                                <p class="photobuttontext" style="font-size: 11px;">ADD <br/> PHOTO</p>
+                            </a>
+                            <a class="item" style="padding: 0px;">
+                                <ion-scroll direction="x" style="overflow: visible;">
+                                        <img ng-repeat="images in myTailgateImages" ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}" class="list-thumbnail thunb-size" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
+                                 </ion-scroll>
+                            </a>
+                        </span>
+                    </div>
+                </div>
+
+            </div>
+            <div class="message_board">
+                <div class="row">
+                    <div class="col">
+                        <div class="" style="font-weight: 700; font-size: 21px;">MESSAGE BOARD</div>
+                        <span>
+                            <div class="list list-inset" style="margin-top: 7px;">
+                                <label class="item item-input item-icon-right" style="height: 30px;border: 1px solid;" >
+                                    
+                                    <input type="text" placeholder="Type Message Here...">
+                                    <span class="badge span_icon" style="top: 2px; right: 22px;"><img src="img/flask_icons/arrow_left.svg"></span>
+                                </label>
+                            </div>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

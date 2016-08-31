@@ -9,7 +9,7 @@
             <p class="addText">CREATE NEW TAILGATE</p>
         </a>
         <div class="list">
-            <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/my_tailgateDetails/{{data.tailgateId}}" ng-repeat="data in allTailgate">
+            <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/my_tailgateDetails/my_tailgate_event_details/{{data.tailgateId}}" ng-repeat="data in allTailgate">
                 <img src="img/events.jpg" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                 <h2 class="eventNameCol">{{ data.tailgateName }}</h2>
                 <p class="dateCol">{{data.tailgateDate | date:'EEEE,MMMM dd,yyyy'}}</p>

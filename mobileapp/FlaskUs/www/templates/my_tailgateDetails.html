@@ -1,97 +1,16 @@
-﻿<ion-view cache-view="false" view-title="MY TAILGATE">
-    <ion-nav-bar class="bar-dark" align-title="center">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
-        <ion-nav-buttons side="right">
-           <button class="button button-icon button-clear ion-share" menu-toggle="left"></button>
-        </ion-nav-buttons>
-    </ion-nav-bar>
-        <ion-content>
-            <ion-tabs class="tabs-positive tab_bottom">
-                <ion-tab title="EVENT DETAILS">
-                    <div class="list tab1">
-                        <!-- Tab 1 content -->  
-                        <div class="divImage">
-                            <img class="myTailgatetopImg" src="img/flask_images/Fotolia_20387372_Subscription_Monthly_M.jpg" />
-                        </div>         
-                        <div class="mytailgate_Heading">
-                            <h3 ><span class="overlineStyle">{{myTailgate.tailgateName}}</span></h3>
-                        </div>                 
-                        <div class="eventDiv">
-                            <a class="item item-icon-right eventList" href="">
-                                <h2 class="eventNameCol">{{myTailgate.eventName}}</h2>
-                                <p class="dateCol">{{myTailgate.tailgateDate | date:'EEEE, MMMM dd, yyyy'}}</p>
-                                <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
-                            </a>
-                        </div>                       
-                        <div class="tailgateInfo tailgateInfoborder">
-                            <div class="row">
-                                <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
-                                <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span class="tailgate_Info">{{myTailgate.tailgateDescription}}</span></div>
-                            </div>
-                            <div class="row">
-                                <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
-                            </div>                           
-                        </div>
-                        <div class="pic_gallery tailgateInfoborder">
-                            <div class="row">
-                              <div class="col"><div class="tailgateDescFont">PICTURES</div>
-                                <span >
-                                    <img ng-repeat="images in myTailgateImages" ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}" class="list-thumbnail thunb-size" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
-                                </span>
-                              </div>
-                            </div>
-                        </div>
-                        <div class="message_board">
-
-                        </div>
-                    </div>
-                </ion-tab>
-
-                <ion-tab title="VIEW LOCATION">
-                    <!-- Tab 2 content -->
-                    <div id="map" data-tap-disabled="true"></div>
-                </ion-tab>
-
-                <ion-tab title="VIEW TAILGATERS">
-                    <!-- Tab 3 content -->
-                    <div class="list">
-                        <a ng-repeat="data in myTailgaters" class="item item-avatar item-icon-right">
-                            <img src="img/default-profilepic.png">
-                            <h2>{{ data.userName | uppercase}}</h2>
-                            <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
-                        </a>
-                    </div>
-                </ion-tab>
-                <ion-tab title="PAY NOW">
-                    <!-- Tab 4 content -->
-                    <div class="paynow">
-                        <div class="tailgateInfo">
-                            <div class="row">
-                                <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
-                            </div>
-                            <div class="row">
-                                <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
-                            </div>
-                            <div class="row">
-                                <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
-                            </div>
-                            <div class="row">
-                                <div class="col"><span class="tailgateDescFont">FEES :</span>{{myTailgate.amountToPay | currency}}</div>
-                            </div>
-                            <div class="row">
-                                <a href="#" class="btnPay">Pay Now</a>
-                            </div>
-                        </div>
-                    </div>
-                </ion-tab>
-
-            </ion-tabs>
-        </ion-content>
-        <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
-            <img src="../img/ad.png" class="footer-img" />
-        </ion-footer-bar>
-    </ion-view>
+﻿<ion-view view-title="MY TAILGATE">
+        <ion-tabs class="tabs-positive tab_bottom">
+            <ion-tab title="EVENT DETAILS" href="#/app/my_tailgateDetails/my_tailgate_event_details">
+                <ion-nav-view name="evnts-tab"></ion-nav-view>
+            </ion-tab>
+            <ion-tab title="LOCATION" href="#/app/my_tailgateDetails/my_tailgate_view_location">
+                <ion-nav-view name="location-tab"></ion-nav-view>
+            </ion-tab>
+            <ion-tab title="TAILGATORS" href="#/app/my_tailgateDetails/my_tailgate_view_tailgaters">
+                <ion-nav-view name="tailgaters-tab"></ion-nav-view>
+            </ion-tab>
+            <ion-tab title="PLAN NOW" href="#/app/my_tailgateDetails/my_tailgate_view_plan">
+                <ion-nav-view name="plan-tab"></ion-nav-view>
+            </ion-tab>
+        </ion-tabs>
+</ion-view>
