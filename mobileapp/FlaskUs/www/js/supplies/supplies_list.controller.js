@@ -34,22 +34,30 @@
         function setFocus(){
             document.getElementById("addItemBox").focus();
         }
-        $scope.getListcount=function(data){
-            $scope.saveSupplyItem(data);
+        $scope.getListCount=function(data){
+            data.checked=!data.checked;
+            if(data.edit==true) {
+                $scope.saveSupplyItem(data);
+            }
             }
         $scope.editSupplyItem=function(data){
             data.edit=true;
             setTimeout(setFocus, 1000);
-            function setFocus(){
-                document.getElementById("editItemBox").focus();
-            }
+
+        }
+        function setFocus(){
+            document.getElementById("editItemBox").focus();
         }
         $scope.saveSupplyItem=function(data){
             if(data.itemName!="") {
                 data.edit = false;
             }else{
                 data.edit = true;
+                setTimeout(setFocus, 500);
             }
+        }
+        $scope.deleteSupplyItem=function(index){
+            $scope.listValue.splice(index,1);
         }
         $scope.addNewListItem=function(){
             $scope.addNewSuppliesItem=!$scope.addNewSuppliesItem
