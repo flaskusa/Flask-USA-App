@@ -8,13 +8,13 @@
         "companyId":20154
     })
     flaskAppConfig.config(function ($provide) {
-    $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
-        return function (exception, cause) {
-            var $rootScope = $injector.get("$rootScope");
-            $rootScope.$broadcast("catchAll:exception",{exception:exception}); // This represents a custom method that exists within $rootScope
-            $delegate(exception, cause);
-        };
-    });
+            $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
+                return function (exception, cause) {
+                    var $rootScope = $injector.get("$rootScope");
+                    $rootScope.$broadcast("catchAll:exception",{exception:exception}); // This represents a custom method that exists within $rootScope
+                    $delegate(exception, cause);
+            };
+        });
     });
     flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
         $stateProvider
@@ -150,25 +150,66 @@
         })
        
         .state('app.my_tailgateDetails', {
-            url: '/my_tailgateDetails/:tailgateId',
+            url: '/my_tailgateDetails',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_tailgateDetails.html',
+                    templateUrl: 'templates/my_tailgateDetails.html'
+                }
+            }
+            
+        })
+
+        .state('app.add_my_tailgate', {
+            url: '/add_my_tailgate',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/add_my_tailgate.html',
+                    controller: 'add_mytailgateCtrl'
+                }
+            }
+        })
+
+
+        .state('app.my_tailgateDetails.my_tailgate_event_details', {
+            url: "/my_tailgate_event_details/:tailgateId",
+            views: {
+                'evnts-tab': {
+                    templateUrl: "templates/my_tailgate_event_details.html",
                     controller: 'mytailgateDetailsCtrl'
                 }
             }
         })
 
-            .state('app.add_my_tailgate', {
-                url: '/add_my_tailgate',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/add_my_tailgate.html',
-                        controller: 'add_mytailgateCtrl'
-                    }
+        .state('app.my_tailgateDetails.my_tailgate_view_location', {
+            url: "/my_tailgate_view_location",
+            views: {
+                'location-tab': {
+                    templateUrl: "templates/my_tailgate_view_location.html",
+                    controller: 'mytailgatelocationCtrl'
                 }
-            })
-         // End of My TailGate Section
+            }
+        })
+
+        .state('app.my_tailgateDetails.my_tailgate_view_tailgaters', {
+            url: "/my_tailgate_view_tailgaters",
+            views: {
+                'tailgaters-tab': {
+                    templateUrl: "templates/my_tailgate_view_tailgaters.html",
+                    controller: 'mytailgatorsCtrl'
+                }
+            }
+        })
+        .state('app.my_tailgateDetails.my_tailgate_view_plan', {
+            url: "/my_tailgate_view_plan",
+            views: {
+                'plan-tab': {
+                    templateUrl: "templates/my_tailgate_view_plan.html",
+                    controller: 'mytailgatePlanCtrl'
+                }
+            }
+        })
+    // End of My TailGate Section
+
         .state('app.my_friends', {
             url: '/my_friends',
             views: {
@@ -216,7 +257,7 @@
         })
 
         .state('app.tickets', {
-            url: '/tickets',
+            url: '/tickets/:venueName/:eventDate/:eventName',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/tickets.html',
