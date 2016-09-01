@@ -4,9 +4,9 @@
         .module('flaskApp')
         .service('TailgateService', TailgateService);
 
-    TailgateService.$inject = ['$http', 'SERVER'];
+    TailgateService.$inject = ['$http', 'SERVER','$q'];
 
-    function TailgateService($http, SERVER) {
+    function TailgateService($http, SERVER,$q) {
         var baseURL = SERVER.url;
         var allTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
         var myTailgatesURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-my-tailgate";
@@ -14,11 +14,12 @@
         var getTailGateURL = "flask-user-tailgate-portlet.tailgateinfo/get-tailgate";
         var geteventURL = "flask-rest-events-portlet.event/get-event";
         var getTalgetUsersURL = "flask-user-tailgate-portlet.tailgateusers/get-tailgate-members";
-        var addtailgateURL = "flask-user-tailgate-portlet.tailgateusers/get-tailgate-members";
+        var addtailgateUserURL = "flask-user-tailgate-portlet.tailgateusers/add-tailgate-user";
         var getVenuebyVenueIdURL = "flask-rest-events-portlet.venue/get-venue";
         var getAllEventsURL = "flask-rest-events-portlet.event/get-all-events";
         var getmapMarkersURL = "flask-user-tailgate-portlet.tailgatemarker/get-tailgate-marker";
         var addTialgateMarkerURL = "flask-user-tailgate-portlet.tailgatemarker/add-tailgate-marker";
+        var inviteFriendsTailgateURL = "flask-social-portlet.entry/search-my-friends";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -30,7 +31,8 @@
             addTailgate: addTailgate,
             getallEvents: getallEvents,
             getMapMarkers: getMapMarkers,
-            addTailgateMarkers: addTailgateMarkers
+            addTailgateMarkers: addTailgateMarkers,
+            getUserFrends: getUserFrends
         }
 
         function addTailgate(tailgateName,tailgateDescription,eventId, eventName,tailgateDate,startTime,endTime,venmoAccountId,amountToPay ) {
@@ -54,7 +56,20 @@
                 //add errror handling 
             });
         }
-
+        function getUserFrends() {
+            return $http.get(baseURL + inviteFriendsTailgateURL, {
+                params: {
+                    companyId: SERVER.companyId,
+                    keywords: ''
+                }
+            })
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
         function getEvent(eventId) {
             return $http.get(baseURL + geteventURL, {
                     params: { 'eventId': eventId }
@@ -63,6 +78,7 @@
             .then(function success(response) {
                 return response;
             }, function failure(response) {
+                return $q.$inject(response);
                 //add errror handling 
             });
         }
@@ -75,6 +91,7 @@
             .then(function success(response) {
                 return response;
             }, function failure(response) {
+                return $q.$inject(response);
                 //add errror handling 
             });
         }
@@ -85,17 +102,19 @@
             .then(function success(response) {
                 return response;
             }, function failure(response) {
+                return $q.$inject(response);
                 //add errror handling 
             });
         }
 
         function getAllTailgate() {
             return $http.get(baseURL + allTailgateURL)
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    //add errror handling 
-                });
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
         }
 
         function getMyTailgates(uId) {
@@ -106,6 +125,7 @@
             .then(function success(response) {
                 return response;
             }, function failure(response) {
+                return $q.$inject(response);
                 //add errror handling 
             });
         }
@@ -117,6 +137,7 @@
             .then(function success(response) {
                 return response;
             }, function failure(response) {
+                return $q.$inject(response);
                 //add errror handling 
             });
         }
@@ -129,6 +150,7 @@
             .then(function success(response) {
                 return response;
             }, function failure(response) {
+                return $q.$inject(response);
                 //add errror handling 
             });
         }
@@ -141,6 +163,7 @@
             .then(function success(response) {
                 return response;
             }, function failure(response) {
+                return $q.$inject(response);
                 //add errror handling 
             });
         }
@@ -160,6 +183,7 @@
             .then(function success(response) {
                 return response;
             }, function failure(response) {
+                return $q.$inject(response);
                 //add errror handling 
             });
         }
