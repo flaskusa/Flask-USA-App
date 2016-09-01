@@ -8,7 +8,7 @@
     /* @ngInject */
     function mytailgatePlanCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies) {
         $scope.myTailgaters = [];
-        var tailGateId = $cookies.get('tailGateId');
+        var tailGateId = $cookies.get('currtailGateId');
         getMyTailgate();
         $scope.goBack = function () {
             $state.go("app.my_tailgate");

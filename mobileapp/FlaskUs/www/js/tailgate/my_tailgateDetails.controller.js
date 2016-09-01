@@ -9,7 +9,7 @@
     function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies) {
         $scope.myTailgaters = [];
         var tailGateId = $stateParams.tailgateId;
-        $cookies.put('tailGateId', tailGateId);
+        $cookies.put('currtailGateId', tailGateId);
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         getMyTailgate();
         $scope.goBack=function() {
