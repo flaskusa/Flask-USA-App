@@ -18,7 +18,7 @@
         </div>           
     </div>
     <ion-content class="has-footer has-header has-subheader">
-        <div class="row mainRow" ng-click="preEvent()">
+        <div class="row mainRow" >
             <div class="sideImagePanel">
                 <img src="img/pre.png" class="sidepanel"/>
                 <div class="left">
@@ -29,12 +29,12 @@
                 </div>
                 <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
                     <ion-slide ng-repeat="pre in Pre_Game" style="width:100%;">
-                        <img ng-src="img/resources/{{getIncludeFile(pre)}}" class="sliderImages" />
+                        <img ng-src="img/resources/{{getIncludeFile(pre)}}" class="sliderImages"  ng-click="preEvent(pre)"/>
                     </ion-slide>
                 </ion-slide-box>
             </div>
         </div>
-        <div class="row mainRow" ng-click="atEvent()">
+        <div class="row mainRow" >
             <div class="sideImagePanel">
                 <img src="img/at.png" class="sidepanel"/>
                 <div class="left">
@@ -44,13 +44,13 @@
                     <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide2')"></button>
                 </div>
                 <ion-slide-box delegate-handle="slide2" show-pager='false' does-continue="true">
-                    <ion-slide ng-repeat="post in Post_Game" style="width:100%;">
-                        <img ng-src="img/resources/{{getIncludeFile(post)}}" class="sliderImages" /></a>
+                    <ion-slide ng-repeat="during in During_Game" style="width:100%;">
+                        <img ng-src="img/resources/{{getIncludeFile(during)}}" class="sliderImages" ng-click="atEvent(during)"/></a>
                     </ion-slide>
                 </ion-slide-box>
             </div>
         </div>
-        <div class="row mainRow" ng-click="postEvent()">
+        <div class="row mainRow">
             <div class="sideImagePanel">
                 <img src="img/post.png" class="sidepanel"/>
                 <div class="left">
@@ -60,8 +60,8 @@
                     <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide3')"></button>
                 </div>
                 <ion-slide-box delegate-handle="slide3" show-pager='false' does-continue="true">
-                    <ion-slide ng-repeat="during in During_Game" style="width:100%;">
-                        <img ng-src="img/resources/{{getIncludeFile(during)}}" class="sliderImages" />
+                    <ion-slide ng-repeat="post in Post_Game" style="width:100%;">
+                        <img ng-src="img/resources/{{getIncludeFile(post)}}" class="sliderImages"  ng-click="postEvent(post)"/>
                     </ion-slide>
                 </ion-slide-box>
             </div>
