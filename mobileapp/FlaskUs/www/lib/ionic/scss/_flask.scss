@@ -441,7 +441,8 @@ span.error_msg{color:red;}
 .eventNameCol{
     font-weight: bold !important;
     text-transform: uppercase;
-    font-size: 11px !important;
+    font-size: 14px !important;
+    margin-left: -17px !important;
 }
 
 
@@ -541,19 +542,13 @@ button.button.button-icon.button-clear.ion-search{display:none;}
 
 }
 
-.my-side-menu .item h2 {
-    margin: 0 0 37px 0;
-    font-size: 17px;
-    font-weight: normal;
-    color:white;
-    height:21px;
+.item.item-avatar.profile{
+    background-color: black !important;
+    height:120px;
+    border:none;
 }
 
-.item.item-avatar.profile{
-    background-color: black;
-    height:120px;
-    border-bottom:solid #F89735 1px !important;
-}
+img.default_img{top:43px !important;}
 
 .my-side-menu ion-content {
     background: black;
@@ -569,7 +564,6 @@ img.menuLogo{
     top: 3px !important;
     height: 100% !important;
     border-radius:0px !important;
-    border-bottom:solid darkorange 1px;
     }
 
 icon-left ion-home:before{
@@ -594,6 +588,8 @@ img.list-thumbnail.listImages1 {
     margin-bottom: 5px;
     margin-top: -3px;
 }
+
+div.menuDiv{padding-bottom:10px;}
 
 .fill-height-or-more1 {
   min-height: 100%;
@@ -636,6 +632,29 @@ img.list-thumbnail.listImages1 {
     font-size: 13px;
      margin-top: -4px;
 }
+
+ tailgateEventNameCol{
+    font-weight: bold !important;
+    text-transform: uppercase;
+    font-size: 14px !important;
+    margin-left: -17px !important;
+ }
+
+ .tailgateDateCol{ 
+     text-transform: uppercase; 
+     font-size: 13px;
+     margin-top: -4px;
+     margin-left: -19px;
+ }
+
+ .tailgateEventList{
+     text-align: center;
+    padding: 8px 39px 0px 57px;
+    min-height: 61px !important;
+    border-color: black;
+    padding-top: 16px;
+ }
+
 .timeVenuCol{
     text-transform: uppercase; 
     font-size: 13px; 
@@ -1055,6 +1074,27 @@ a.tab-item {
 }
 .button:hover {
   text-decoration: none; }
+
+/*tailgate event detaila*/
+
+.thumb-size{
+    width:47%;
+    height:101% !important;
+    border-right:solid white 2px;
+}
+
+.tailgate_thumb{
+    width:100%;
+    height:101px !important;
+   }
+
+.photoitem{
+    background-color:lightgray;
+    text-align:center;
+    font-weight:bold;
+    margin-top:0px;
+}
+
 @media screen and (max-width: 321px) {
   .item-icon-left{
     padding-left: 35px;
@@ -1207,12 +1247,8 @@ i.icon.ion-chevron-right.ticket-icon{margin-right:-14px;}
 /*my tailgate details*/
 span.ng-binding{text-transform:uppercase;font-weight:600;}
 
-.icon-left:before{
+.icon:before{
     font-size:24px;
-}
-
-div.icon-left.activated{
-   background-color:#F89735;
 }
 
 .badge{color:white !important;}
@@ -1231,6 +1267,14 @@ img.menuLogo{
 
 ul.list.menuContentList{padding-top:6px;}
 
-div.menuLogin{padding-top:10px;
-              padding-bottom:10px;
+a.item.icon{    
+    border: none;
+    text-transform: uppercase;
+    font-weight: 600;
+    margin-left: 4px !important;
 }
+
+a.item.icon.activated{background-color:darkorange;}
+
+a.item.icon.activated:before{color:white;}
+
