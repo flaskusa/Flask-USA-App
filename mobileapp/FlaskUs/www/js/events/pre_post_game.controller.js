@@ -38,14 +38,14 @@
 		$scope.passParams=function(){
 				$state.go("app.tickets", { venueName: $scope.currVenueName, eventDate: $scope.currEventDate });
 		}
-        $scope.preEvent = function(){
-            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: 1 });
+        $scope.preEvent = function(pre){
+            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: pre });
         }
-        $scope.atEvent = function(){
-            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: AT_EVENT, infoTypeCategory: 1 });
+        $scope.atEvent = function(during){
+            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: AT_EVENT, infoTypeCategory: during });
         }
-        $scope.postEvent = function(){
-            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: POST_EVENT, infoTypeCategory: 1 });
+        $scope.postEvent = function(post){
+            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: POST_EVENT, infoTypeCategory: post });
         }
 
         function getEventVenueDatail() {

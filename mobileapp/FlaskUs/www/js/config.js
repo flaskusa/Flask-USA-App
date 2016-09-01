@@ -16,7 +16,7 @@
             };
         });
     });
-    flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider,uiGmapGoogleMapApiProvider) {
         $stateProvider
           .state('app', {
               url: '/app',
@@ -299,5 +299,10 @@
                 }
             }
         })
+
+         uiGmapGoogleMapApiProvider.configure({
+          key: 'AIzaSyDAFZx0f0rc-vCyx-GHMqy2O9m06Dc-p8Y',
+        libraries: 'weather,geometry,visualization,places'
+    });
     })
 })();
