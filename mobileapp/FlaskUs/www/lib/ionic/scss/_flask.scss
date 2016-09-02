@@ -633,7 +633,7 @@ div.menuDiv{padding-bottom:10px;}
      margin-top: -4px;
 }
 
- tailgateEventNameCol{
+ .tailgateEventNameCol{
     font-weight: bold !important;
     text-transform: uppercase;
     font-size: 14px !important;
@@ -642,7 +642,7 @@ div.menuDiv{padding-bottom:10px;}
 
  .tailgateDateCol{ 
      text-transform: uppercase; 
-     font-size: 13px;
+     font-size: 13px !important;
      margin-top: -4px;
      margin-left: -19px;
  }
@@ -1069,9 +1069,7 @@ a.tab-item {
     font-weight: bold;
     color: #f89735;
 }
-.thunb-size{
-    width: 15%;
-}
+
 .button:hover {
   text-decoration: none; }
 
@@ -1087,6 +1085,14 @@ a.tab-item {
     width:100%;
     height:101px !important;
    }
+
+button.button.button-block.button-positive.invite_friend{
+    width: 44%;
+    color: darkorange;
+    min-height: 30%;
+    margin-left: 61%;
+    margin-top: -49px;
+}
 
 .photoitem{
     background-color:lightgray;
@@ -1247,7 +1253,7 @@ i.icon.ion-chevron-right.ticket-icon{margin-right:-14px;}
 /*my tailgate details*/
 span.ng-binding{text-transform:uppercase;font-weight:600;}
 
-.icon:before{
+.icon.menu_icon:before{
     font-size:24px;
 }
 
