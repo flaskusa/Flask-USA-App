@@ -1283,4 +1283,5 @@ a.item.icon.activated:before{color:white;}
     display: none;
 }
 
-.angular-google-map-container { height: 478px; }
+.angular-google-map-container {
+  height:92%; width:100%; position:absolute; top:0; left:0;  }

@@ -10,12 +10,13 @@
         /* jshint validthis: true */
         var self = this;
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15 };
-        $scope.options = { scrollwheel: false };
+        $scope.options = { scrollwheel: false,draggable:true };
         $scope.parkingMarkers = [];
         $scope.barMarkers = [];
         $scope.nightLifes = [];
         $scope.markerOptions = {};
         $scope.isMapMarkersSet = false;
+        $scope.pan = true;
         var PRE_EVENT = "Pre-Event";
         var AT_EVENT = "During-Event";
         var POST_EVENT = "Post-Event";

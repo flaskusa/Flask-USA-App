@@ -57,8 +57,8 @@
          </script>
         <ion-tabs class="tabs-positive">
             <ion-tab title="PARKING"  class="{{infoTypeName != 'Pre-Event' ? 'hide':''}}" ng-click="selectTab(0)">
-                <div id="map_canvas" style="height:100%;width:100%">
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options">
+                <div id="map_canvas0">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" pan="angular.isDefined(pan)">
                         <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                         <ui-gmap-markers models="parkingMarkers" coords="'self'" icon="'icon'" options="markerOptions" click="onClick">
                             <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
@@ -69,8 +69,8 @@
                 </div>
             </ion-tab>
             <ion-tab title="BARS/FOOD" ng-click="selectTab(1)">
-                <div id="map_canvas" style="height:100%;width:100%">
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options">
+                <div id="map_canvas1" >
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" pan="angular.isDefined(pan)">
                         <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                         <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="markerOptions" click="onClick">
                             <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
@@ -81,8 +81,8 @@
                 </div>
             </ion-tab>
             <ion-tab title="Nightlife" class="{{infoTypeName !=  'Post-Event' ? 'hide':''}}" ng-click="selectTab(2)">
-                <div id="map_canvas" style="height:100%;width:100%">
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options">
+                <div id="map_canvas2">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" pan="angular.isDefined(pan)">
                         <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                         <ui-gmap-markers models="nightLifes" coords="'self'" icon="'icon'" options="markerOptions" click="onClick">
                             <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
