@@ -12,15 +12,13 @@
             <div class="tailgateInfo">
                 <div class="row">
                     <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
+                    <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
                 </div>
                 <div class="row">
                     <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
                 </div>
                 <div class="row">
                     <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
-                </div>
-                <div class="row">
-                    <div class="col"><span class="tailgateDescFont">FEES :</span>{{myTailgate.amountToPay | currency}}</div>
                 </div>
                 <div class="row">
                     <a href="#" class="btnPay">Pay Now</a>
