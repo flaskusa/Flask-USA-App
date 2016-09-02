@@ -8,7 +8,7 @@
     /* @ngInject */
     function mytailgatorsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies,$ionicModal,$flaskUtil) {
         $scope.myTailgaters = [];
-
+        $scope.myFriends = [];
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
         }).then(function (modal) {
@@ -23,16 +23,35 @@
 
         function getTailgaters() {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
-                console.log(respData);
+
                 $scope.myTailgaters = respData.data;
                 getAllFriends();
             });
         }
-       // getAllFriends();
         function getAllFriends() {
             TailgateService.getUserFrends().then(function (respData) {
-                console.log(respData);
+
                 $scope.myFriends = respData;
+            })
+        }
+        $scope.addTailgateMembers = function(index) {
+
+            var currUserData = index;
+            var userparams = {};
+            userparams.groupId = 0;
+            userparams.userId = currUserData.userId;
+            userparams.userName = currUserData.firstName + " " + currUserData.lastName;
+            userparams.emailAddress = currUserData.emailAddress;
+            userparams.isAdmin = 0;
+            userparams.tailgateId = tailGateId;
+            userparams.isPaid = 0;
+            userparams.paymentMode = "None";
+
+            addTailgateMember(userparams);
+        }
+        function addTailgateMember(addUserparams) {
+            TailgateService.addcurrentUser(addUserparams).then(function (respData) {
+                console.log(respData);
             })
         }
 

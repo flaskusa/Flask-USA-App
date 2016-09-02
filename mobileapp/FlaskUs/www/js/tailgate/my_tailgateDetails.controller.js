@@ -32,7 +32,7 @@
 
         function getMyTailgate() {
             TailgateService.getTailgate(tailGateId).then(function (respData) {
-                console.log(respData);
+
                 $scope.myTailgate = respData.data;
                 getlocationName($scope.myTailgate.eventId);
                 getMyTailgateImages(tailGateId);
@@ -42,26 +42,25 @@
         }
         function getlocationName(evntId) {
             TailgateService.getEvent(evntId).then(function (respData) {
-                console.log(respData);
+
                 $scope.myeventLocation = respData.data;
             });
         }
         function getMyTailgateImages(tailGateId) {
             TailgateService.getMyTailgateImages(tailGateId).then(function (respData) {
-                console.log(respData);
+
                 $scope.myTailgateImages = respData.data;
             });
         }
         function getTailgaters(tailGateId) {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
-                console.log(respData);
+
                 $scope.myTailgaters = respData.data;
             });
         }
         function getTailgateMarkers(tailGateId) {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
-                console.log(respData);
-                $scope.myTailgatermarkers = respData.data;
+                $cookies.putObject('currtailGateMakers', respData.data);
             });
         }
     }

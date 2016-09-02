@@ -32,7 +32,8 @@
             getallEvents: getallEvents,
             getMapMarkers: getMapMarkers,
             addTailgateMarkers: addTailgateMarkers,
-            getUserFrends: getUserFrends
+            getUserFrends: getUserFrends,
+            addcurrentUser: addcurrentUser
         }
 
         function addTailgate(tailgateName,tailgateDescription,eventId, eventName,tailgateDate,startTime,endTime,venmoAccountId,amountToPay ) {
@@ -98,6 +99,18 @@
 
         function getallEvents() {
             return $http.get(baseURL + getAllEventsURL
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+        function addcurrentUser(user) {
+            return $http.get(baseURL + addtailgateUserURL, {
+                params: user
+            }
             )
             .then(function success(response) {
                 return response;
