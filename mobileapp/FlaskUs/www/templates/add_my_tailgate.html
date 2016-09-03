@@ -3,18 +3,10 @@
         <ion-nav-back-button>
         </ion-nav-back-button>
     </ion-nav-bar>
-    <ion-content has-footer="true" overflow-scroll="false" class="has-footer has-header">
-        <div class="card" style="color: red; text-align: center;" ng-show="errorMessage">
-            {{errorMessage}}
-        </div>
-        <div class="form-left">
-            <button class="button  slider_arrow_tailgate" ng-click="slidePrevious1()">Prev</button>
-        </div>
-        <div class="form-right">
-            <button class="button  slider_arrow_tailgate" ng-click="slideNext1()">Next</button>
-        </div>
-        <ion-slide-box show-pager="false" deletgate-handle="wizard">
-            <ion-slide>
+    <ion-tabs class="tabs-positive tab_bottom">
+        <ion-tab title="Manage Tailgate">
+            <!-- Tab 1 content -->
+            <ion-content overflow-scroll="false" header="true" class='has-header has-subheader'>
                 <div class="box">
                     <div class="list">
                         <div class="item item-input item-floating-label">
@@ -62,23 +54,16 @@
                         </div>
                     </div>
                 </div>
-            </ion-slide>
-            <ion-slide>
-                <div class="box">
-                    <h2>Location</h2>
-                    <div id="map_canvas" style="height:100%; width: 100%">
+            </ion-content>
+        </ion-tab>
+        <ion-tab title="Upload Pictures" disabled="pageFlow.disableOtherTabs">
+            <!-- Tab 2 content -->
+            <ion-content has-footer="true" overflow-scroll="false" class="has-footer has-header"></ion-content>
+        </ion-tab>
+        <ion-tab title="Attendees" disabled="pageFlow.disableOtherTabs">
+            <!-- Tab 3 content -->
+            <ion-nav-view name=""></ion-nav-view>
+        </ion-tab>
+    </ion-tabs>
 
-                    </div>
-                </div>
-            </ion-slide>
-            <ion-slide class="box">
-                <h2>Attendeees</h2>
-            </ion-slide>
-
-        </ion-slide-box>
-
-    </ion-content>
-    <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
-        <img src="/img/ad.png" class="footer-img" />
-    </ion-footer-bar>
 </ion-view>

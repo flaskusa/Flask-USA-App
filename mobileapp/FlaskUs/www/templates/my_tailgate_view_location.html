@@ -8,6 +8,16 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content class="">
-    <div id="map_canvas" style="width:100%;height:100%;"></div>
+        <div style="width:100%;height:100%;">
+            <ui-gmap-google-map center='map.center' zoom='map.zoom' aria-label="Google map">
+
+                <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                    <ui-gmap-window>
+                        <div>{{marker.window.title}}</div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+
+            </ui-gmap-google-map>
+        </div>
     </ion-content>
 </ion-view>
