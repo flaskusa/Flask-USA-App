@@ -31,13 +31,9 @@
             EventsService.getEventByEventId($scope.currEventId).then(function (respData) {
                 console.log(respData.data.eventDate);
                 $scope.currVenueName = respData.data.venueName;
-                $scope.currEventDate = respData.data.eventDate;
-				
+                $scope.currEventDate = respData.data.eventDate;	
             })
         }
-		$scope.passParams=function(){
-				$state.go("app.tickets", { venueName: $scope.currVenueName, eventDate: $scope.currEventDate });
-		}
         $scope.preEvent = function(pre){
             $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: pre });
         }

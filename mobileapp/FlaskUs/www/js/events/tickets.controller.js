@@ -7,62 +7,69 @@
 
     /* @ngInject */
     function ticketsCtrl($scope, $stateParams, $state, EventsService, SERVER) {
-        
-
-
         var self = this;
         $scope.Details = [];
         $scope.currVenueName = $stateParams.venueName;
         $scope.currEventDate = $stateParams.eventDate;
         //$scope.currEventName = $stateParams.eventName;
-        console.log($stateParams);
-        console.log($scope.imgUrl);
+      
         //onClickTicket(ticketSite);
 
-        $scope.onClickTicket=function(ticketSite) {
+        function checkApp(scheme,siteName) {
+            appAvailability.check(
+                        scheme, // URI Scheme
+                        function () {  // Success callback
+                            window.open(siteName, '_system', 'location=no');
+                            //if Application is available;
+                        },
+                        function () {  // Error callback
+                            window.open(siteName, '_system', 'location=no');
+                            //if Application is not available;
+                        }
+                    );
+        }
+
+        $scope.onClickTicket = function (ticketSite) {
+            $scope.siteId = ticketSite - 1;
+            $scope.ticketSiteName = [{ id: 1, site: 'stubhub' }, { id: 2, site: 'tickpick' }, { id: 3, site: 'seetgeek' }, { id: 4, site: 'scorebig' }, { id: 5, site: 'ticketsnow' }, { id: 6, site: 'ticketmaster' }];
+
+
             var scheme;
             // Don't forget to add the org.apache.cordova.device plugin!
             if (device.platform === 'iOS') {
-                scheme = ticketSite;
+                scheme = $scope.ticketSiteName[$scope.siteId].site;
             }
             else if (device.platform === 'Android') {
-                scheme = 'www.' + ticketSite + '.com';
+                scheme = 'www.' + $scope.ticketSiteName[$scope.siteId].site + '.com';
             }
-            switch (ticketSite) {
-                case "stubhub":
-                    $scope.siteName = 'http://stubhub.com/find/s/?q='+$scope.currVenueName;
-                    return $scope.siteName;
-                case "tickpick":
-                    $scope.siteName = 'http://tickpick.com/search/{{currVenueName}}';
-                    return $scope.siteName;
-                case "seetgeek":
-                    $scope.siteName = 'http://seetgeek.com/search?search={{currVenueName}}';
-                    return $scope.siteName;
-                case "scorebig":
-                    $scope.siteName = 'http://scorebig.com/{{currVenueName}}-tickets?int_src=search&Sch={{currVenueName}}';
-                    return $scope.siteName;
-                case "ticketsnow":
-                    $scope.siteName = 'http://ticketsnow.com/InventoryBrowse/-Tickets-at-{{currVenueName}}-in-Detroit-{{currEventDate}}';
-                    return $scope.siteName;
-                case "ticketmaster":
-                    $scope.siteName = 'http://ticketmaster.com/search?tm_link=tm_homeA_header_search&user_input={{currVenueName}}&q={{currVenueName}}';
-                    return $scope.siteName;
-            }
-
             
-
-
-            appAvailability.check(
-                scheme, // URI Scheme
-                function () {  // Success callback
-                    window.open($scope.siteName, '_system', 'location=no');
-                    //$scope.twitterlink = 'Application is available';
-                },
-                function () {  // Error callback
-                    window.open($scope.siteName, '_system', 'location=no');
-                    //$scope.twitterlink = 'Application is not available';
-                }
-            );
+         
+            switch (ticketSite) {
+                case $scope.ticketSiteName[0].id:
+                    $scope.siteName = 'http://stubhub.com/find/s/?q=' + $scope.currVenueName;
+                    checkApp(scheme, $scope.siteName);
+                    break;
+                case $scope.ticketSiteName[1].id:
+                    $scope.siteName = 'http://tickpick.com/search/' + $scope.currVenueName;
+                    checkApp(scheme, $scope.siteName);
+                    break;
+                case $scope.ticketSiteName[2].id:
+                    $scope.siteName = 'http://seetgeek.com/search?search=' + $scope.currVenueName;
+                    checkApp(scheme, $scope.siteName);
+                    break;
+                case $scope.ticketSiteName[3].id:
+                    $scope.siteName = 'http://scorebig.com/'+ $scope.currVenueName+'-tickets?int_src=search&Sch=' + $scope.currVenueName;
+                    checkApp(scheme, $scope.siteName);
+                    break;
+                case $scope.ticketSiteName[4].id:
+                    $scope.siteName = 'http://ticketsnow.com/InventoryBrowse/-Tickets-at-'+$scope.currVenueName+'-in-Detroit-' + $scope.currVenueName;
+                    checkApp(scheme, $scope.siteName);
+                    break;
+                case $scope.ticketSiteName[5].id:
+                    $scope.siteName = 'http://ticketmaster.com/search?tm_link=tm_homeA_header_search&user_input='+ $scope.currVenueName+'&q=' + $scope.currVenueName;
+                    checkApp(scheme, $scope.siteName);
+                    break;
+            }
         }
 
     }
