@@ -59,7 +59,7 @@
             });
         }
         function getTailgateMarkers(tailGateId) {
-            TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
+            TailgateService.getMapMarkers(tailGateId).then(function (respData) {
                 $cookies.putObject('currtailGateMakers', respData.data);
             });
         }

@@ -3,55 +3,35 @@
     angular.module('flaskApp')
         .controller('mytailgatelocationCtrl', mytailgatelocationCtrl);
 
-    mytailgatelocationCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies'];
+    mytailgatelocationCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi'];
 
     /* @ngInject */
-    function mytailgatelocationCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies) {
+    function mytailgatelocationCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi) {
         $scope.myTailgaters = [];
-        var tailGateId = $stateParams.tailgateId;
-        $cookies.put('tailGateId', tailGateId);
-        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
-        //initMap();
+        var tailGateId = $cookies.get('currtailGateId');
+        $scope.taligateMarkers = angular.fromJson($cookies.get('currtailGateMakers'));
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
-        function initMap() {
-            // Getting the map selector in DOM
-            var mapDiv = document.getElementById("map_canvas");
-            var latLng = new google.maps.LatLng(42.3314, -83.0458);
 
-            var mapOptions = {
-                center: latLng,
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-
-            $scope.map = new google.maps.Map(mapDiv, mapOptions);
-
-        }
-        function getMyTailgate() {
-            TailgateService.getTailgate(tailGateId).then(function (respData) {
-                console.log(respData);
-                $scope.myTailgate = respData.data;
-                getlocationName($scope.myTailgate.eventId);
-                getMyTailgateImages(tailGateId);
-                getTailgaters(tailGateId);
-                getTailgateMarkers(tailGateId);
-            });
-        }
-        function getlocationName(evntId) {
-            TailgateService.getEvent(evntId).then(function (respData) {
-                console.log(respData);
-                $scope.myeventLocation = respData.data;
-            });
-        }
-
-        function getTailgateMarkers(tailGateId) {
-            TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
-                console.log(respData);
-                $scope.myTailgatermarkers = respData.data;
-            });
-        }
+        var Markers = [
+          {
+              "id": "0",
+              "coords": {
+                  "latitude": $scope.taligateMarkers.latitude,
+                  "longitude": $scope.taligateMarkers.longitude
+              },
+              "window": {
+                  "title": $scope.taligateMarkers.name
+              }
+          }
+        ];
+        $scope.map = {
+            draggable:true,
+            center: { latitude: 43.4651, longitude: -80.5223},
+            zoom: 4
+        };
+        $scope.markers = Markers;
     }
 })();
 
