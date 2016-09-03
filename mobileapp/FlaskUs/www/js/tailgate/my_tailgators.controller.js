@@ -30,29 +30,22 @@
         }
         function getAllFriends() {
             TailgateService.getUserFrends().then(function (respData) {
-
                 $scope.myFriends = respData;
             })
         }
-        $scope.addTailgateMembers = function(index) {
-
-            var currUserData = index;
-            var userparams = {};
-            userparams.groupId = 0;
-            userparams.userId = currUserData.userId;
-            userparams.userName = currUserData.firstName + " " + currUserData.lastName;
-            userparams.emailAddress = currUserData.emailAddress;
-            userparams.isAdmin = 0;
-            userparams.tailgateId = tailGateId;
-            userparams.isPaid = 0;
-            userparams.paymentMode = "None";
-
-            addTailgateMember(userparams);
-        }
-        function addTailgateMember(addUserparams) {
+        $scope.addTailgateMembers = function(currUserData,index) {
+            var addUserparams = {};
+            addUserparams.groupId = 0;
+            addUserparams.userId = currUserData.userId;
+            addUserparams.userName = currUserData.firstName + " " + currUserData.lastName;
+            addUserparams.emailAddress = currUserData.emailAddress;
+            addUserparams.isAdmin = 0;
+            addUserparams.tailgateId = tailGateId;
+            addUserparams.isPaid = 0;
+            addUserparams.paymentMode = "None";
             TailgateService.addcurrentUser(addUserparams).then(function (respData) {
-                console.log(respData);
-            })
+                $scope.myFriends.splice(index, 1);
+            })           
         }
 
     }
