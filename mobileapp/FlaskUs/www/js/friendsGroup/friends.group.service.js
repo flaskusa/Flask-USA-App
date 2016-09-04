@@ -48,14 +48,14 @@
                     //add errror handling
                 });
         }
-        function createGroup(groupName,description) {
+        function createGroup(groupName,description,createdBy) {
             return $http.get(url+createGroup,{params:{"groupName":groupName,
                 "groupDescription":description,
                 "isDelete":0,
                 "isActive":1,
-                "createdBy":"Joe Bloggs",
+                "createdBy":createdBy,
                 "groupId":0,
-                "createdDate":"8/31/2016"}})
+                "createdDate":new Date()}})
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {

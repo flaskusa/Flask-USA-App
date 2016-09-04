@@ -71,7 +71,7 @@
             $scope.modal = modal;
         });
         $scope.createGroup = function (groupName, description) {
-            GroupService.createGroup(groupName, description).then(function (response) {
+            GroupService.createGroup(groupName, description,userDetail.data.firstName+' '+userDetail.data.lastName).then(function (response) {
                 $scope.groupId = response.groupId
                 GroupService.saveGroup($scope.groupId, userId).then(function (response) {
                     $scope.showInviteFriendPopup();
