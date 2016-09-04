@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsCtrl', FriendsCtrl);
 
-    FriendsCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsService','$flaskUtil'];
+    FriendsCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsService','$flaskUtil','$state'];
 
     /* @ngInject */
-    function FriendsCtrl($scope, $http, $ionicModal,FriendsService,$flaskUtil) {
+    function FriendsCtrl($scope, $http, $ionicModal,FriendsService,$flaskUtil,$state) {
       $scope.myFriends = [];
       $scope.userContactList = [];
       $scope.startIndex = 0;
@@ -15,6 +15,9 @@
       $scope.searchBox = {show:false};
       $scope.searchContact = {"searchtext" :""};
       $scope.messsage = {'messsageToSend':''};
+        $scope.goBack = function () {
+            $state.go("app.user_navigation_menu");
+        }
       $scope.initialize = function() {
           $scope.getMyFriends($scope.searchContact.searchtext);
       }; 
