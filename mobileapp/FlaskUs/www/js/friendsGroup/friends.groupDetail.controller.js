@@ -3,8 +3,8 @@
     angular.module('flaskApp')
         .controller('FriendsGroupDetailCtrl', FriendsGroupDetailCtrl);
 
-    FriendsGroupDetailCtrl.$inject = ['$scope','GroupService','$stateParams','$state','$ionicModal','$ionicHistory'];
-    function FriendsGroupDetailCtrl($scope,GroupService,$stateParams,$state,$ionicModal,$ionicHistory) {
+    FriendsGroupDetailCtrl.$inject = ['$scope','GroupService','$stateParams','$state','$ionicModal','$ionicHistory','$ionicPopup'];
+    function FriendsGroupDetailCtrl($scope,GroupService,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup) {
 
         $scope.groupTitle=$stateParams.groupName;
 
@@ -108,14 +108,22 @@
                 $scope.allMember=response;
             });
         }
-        $scope.removeMember=function(data,index){
+        $scope.removeMember= function(data,index) {
 
-            GroupService.deleteGroupUser($scope.groupId,data.userId).then(function(response){
-                $scope.allMember.splice(index,1);
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Remove from Group?',
+                template: 'Select OK to Confirm!'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    GroupService.deleteGroupUser($scope.groupId,data.userId).then(function(response){
+                        $scope.allMember.splice(index,1);
+                    });
+                } else {
+                }
             });
 
-        }
-
+        };
 
     }
 })();

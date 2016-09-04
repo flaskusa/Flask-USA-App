@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsGroupCtrl', FriendsGroupCtrl);
 
-    FriendsGroupCtrl.$inject = ['$scope','GroupService','$cookies','$state','$flaskUtil'];
+    FriendsGroupCtrl.$inject = ['$scope','GroupService','$cookies','$state','$flaskUtil','$ionicPopup'];
 
     /* @ngInject */
-    function FriendsGroupCtrl($scope,GroupService,$cookies,$state,$flaskUtil) {
+    function FriendsGroupCtrl($scope,GroupService,$cookies,$state,$flaskUtil,$ionicPopup) {
         $scope.initialize = function() {
             getAllGroups();
         };
@@ -30,16 +30,28 @@
         $scope.getGroupDetail=function(group){
             GroupService.groupId=group.groupId;
         }
-        $scope.deleteGroup=function(groupId,index){
-            GroupService.deleteGroup(groupId).then(function(response){
-                if(response.statusText=="OK"){
-                    $scope.groups.splice(index,1);
-                }
-                else{
-                    alert("failed to delete");
-                }
-            });
+        $scope.deleteGroup = function(groupId,index) {
+
+                var confirmPopup = $ionicPopup.confirm({
+                    title: 'Delete Group?',
+                    template: 'Select OK to Confirm!'
+                });
+                confirmPopup.then(function(res) {
+                    if(res) {
+                        GroupService.deleteGroup(groupId).then(function(response){
+                            if(response.statusText=="OK"){
+                                $scope.groups.splice(index,1);
+                            }
+                            else{
+                                alert("failed to delete");
+                            }
+                        });
+                    } else {
+                    }
+                });
+
         }
+
         $scope.editGroup=function(data){
             GroupService.groupDetail=data;
             GroupService.groupId=data.groupId;
