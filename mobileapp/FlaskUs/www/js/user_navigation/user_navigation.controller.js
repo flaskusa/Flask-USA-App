@@ -20,7 +20,7 @@
 
         $scope.myFriend = function ()
         {
-            $state.go("app.my_friends");
+            $state.go("app.my_friends_tab");
         }
     }
 })();
