@@ -30,18 +30,18 @@
         </a>
 
        <ion-list>
-           <ion-item ng-repeat="data in allMember track by $index"style="padding: 0px"class="row-no-padding"padding="false"ng-click="groupMemberDetail(data)">
-                <a style="padding: 0px"class="row-no-padding">
+           <ion-item ng-repeat="data in allMember track by $index"class="row-no-padding"padding="false"ng-click="groupMemberDetail(data)">
+                <a class="row-no-padding">
 
                    <div class="col col-20">
-                    <img src = "img/default-profilepic.png"style="max-width: 40px;height:40px;float: left">
+                    <img src = "img/default-profilepic.png"class="friendIcon">
                    </div>
                     <div class="col col-60">
-                  <!-- <p style="padding-left: 10px;font-size: 12px">--><h3 style="padding-left: 10px;font-size: 12px">{{ data.userName | uppercase}}</h3>
+                 <h3 style="padding-left: 10px;font-size: 12px">{{ data.userName | uppercase}}</h3>
                     <i style="margin-left: 10px;color: orange">{{data.emailAddress}}</i></div>
-                    <div style="float:right">
-                    <span class="badge"style="padding-left: 10px;float: right" ng-if="data.isAdmin==1"ng-init="data.checked=true"><i style="background-color: green;width:50px">admin</i></span>
-                    <span class="badge " ng-if="data.isAdmin==0"ng-init="data.isAdminCheckBox=false"><i style="background-color: black;width:50px">user</i></span>
+                    <div>
+                    <span class="badge" ng-if="data.isAdmin==1"ng-init="data.checked=true"><i class="adminText">admin</i></span>
+                    <span class="badge " ng-if="data.isAdmin==0"ng-init="data.isAdminCheckBox=false"><i class="userText">user</i></span>
                 </div>
                 </a>
                <ion-option-button  class="icon ion-trash-a"ng-click="removeMember(data,$index)"></ion-option-button>

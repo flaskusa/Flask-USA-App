@@ -7,23 +7,29 @@
  <!--<ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-android-more-vertical"ng-click="popover.show($event)"> </button>
     </ion-nav-buttons>-->
-    <ion-content>
+    <ion-content >
         <a class="item item-full list-item-icon-left "href="/#/app/create_group">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
-            <p class="addText">ADD GROUP</p>
+            <p class="addText">CREATE GROUP</p>
         </a>
       <ion-list >
           <ion-item ng-repeat="group in groups">
-              <a  href="#/app/group_detail/{{group.groupName}}"style="text-decoration: none"ng-click="getGroupDetail(group)"nav-clear>
-
-              <h3>{{group.groupName}}</h3>
-             <div style="color: orange;">{{group.groupDescription}}</div>
-              <div >
-                  <span class="badge span_icon"style="top:12px"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:23px;padding-left:10%;top:20px;float: right"></span>
+              <a  href="#/app/group_detail/{{group.groupName}}"style="text-decoration: none"ng-click="getGroupDetail(group)">
+              <div class="col-20">
+              <img src = "img/default-group-pic.png"class="groupIcon">
               </div>
+                  <div style="padding-left: 71px">
+              <h3>{{group.groupName}}</h3>
+              <div style="color: orange;">{{group.groupDescription}}</div>
+
+              </div>
+              <div class="col-20">
+              <span class="badge span_icon"style="top:25px"><img src="img/flask_icons/arrow_left.svg"class="arrowIconAlign" ></span>
+              </div>
+                  </div>
               </a>
-              <ion-option-button class="button-assertive icon ion-trash-a"ng-click="deleteGroup(group.groupId,$index)"></ion-option-button>
               <ion-option-button  class="icon ion-edit"ng-click="editGroup(group)"></ion-option-button>
+              <ion-option-button class="button-assertive icon ion-trash-a"ng-click="deleteGroup(group.groupId,$index)"></ion-option-button>
 
           </ion-item>
 

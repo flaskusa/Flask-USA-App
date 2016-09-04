@@ -1305,3 +1305,28 @@ a.item.icon.activated:before{color:white;}
 .item-select select {
 position:initial !important;    
 }
+.groupIcon {
+  max-width: 45px;
+  height:45px;
+  float: left
+}
+.friendIcon{
+  max-width: 40px;
+  height:40px;
+  float: left
+}
+.arrowIconAlign{
+  width:21px;
+  height:23px;
+  padding-left:10%;
+  top:20px;
+  float: right
+}
+.adminText{
+  background-color: green;
+  width:50px
+}
+.userText{
+  background-color: black;
+  width:50px
+}

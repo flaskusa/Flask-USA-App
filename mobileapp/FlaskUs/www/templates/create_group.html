@@ -1,8 +1,8 @@
 <ion-view back-button="true" cache-view="false" view-title="CREATE GROUP">
-    <ion-nav-bar class="bar-dark" align-title="center" >
-        <ion-nav-back-button>
-        </ion-nav-back-button>
-    </ion-nav-bar>
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-arrow-left-c" ng-click="goBack()"></button>
+        </ion-nav-buttons>
     <ion-content>
         <div class="item item-input item-floating-label">
             <span class="input-label"style="margin-left:-10px;" >Group Name</span>
@@ -16,7 +16,7 @@
             <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="createGroup(groupName,description)">
                 Save
             </a>
-            <a nav-clear class="button button-block button-positive sign_in_button"href="/#/app/friends_group">
+            <a nav-clear class="button button-block button-positive sign_in_button"href="/#/app/my_friends_tab/friends_group">
                 Cancel
             </a>
         </div>
@@ -43,10 +43,6 @@
                             <h2>{{ data.fullName | uppercase}}</h2>
                             <p>{{ data.emailAddress}}</p>
                             <button class="button button-clear mini-button badge ext-right" ng-click="addUserToGroup(data)">Add</button>
-                           <!-- <button class="button button-clear mini-button badge ext-right" ng-if="data.connectionRequested" disabled>Request Sent </button>
-                            <button class="button button-clear mini-button badge ext-right" ng-if="data.block" ng-click="unBlockUser(data)">Unblock </button>
-                            <button class="button button-clear mini-button badge ext-right" ng-if="data.connected" disabled>Friend </button>
-                        -->
                         </ion-item>
                         <div class="padding" align="center">
                             <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="finishAddingMember()">

@@ -51,10 +51,10 @@
     angular.module('flaskApp')
         .controller('CreateGroupCtrl', CreateGroupCtrl);
 
-    CreateGroupCtrl.$inject = ['$scope', '$ionicPopover','GroupService','$cookies','$state','$ionicModal'];
+    CreateGroupCtrl.$inject = ['$scope', '$ionicPopover','GroupService','$cookies','$state','$ionicModal','$ionicHistory'];
 
     /* @ngInject */
-    function CreateGroupCtrl($scope, $ionicPopover,GroupService,$cookies,$state,$ionicModal) {
+    function CreateGroupCtrl($scope, $ionicPopover,GroupService,$cookies,$state,$ionicModal,$ionicHistory) {
         var userDetail = $cookies.getObject('CurrentUser');
         var userId = userDetail.data.userId;
         $scope.myFriends = [];
@@ -70,6 +70,9 @@
         }).then(function (modal) {
             $scope.modal = modal;
         });
+        $scope.goBack = function(){
+            $ionicHistory.goBack();
+        }
         $scope.createGroup = function (groupName, description) {
             GroupService.createGroup(groupName, description,userDetail.data.firstName+' '+userDetail.data.lastName).then(function (response) {
                 $scope.groupId = response.groupId
