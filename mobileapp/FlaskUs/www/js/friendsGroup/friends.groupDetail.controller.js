@@ -9,11 +9,10 @@
         $scope.groupTitle=$stateParams.groupName;
 
         $scope.allMember=[];
-        $scope.test=true;
         $scope.groupId=GroupService.groupId;
         $scope.groupDetail=GroupService.groupDetail;
         $scope.editGroup=false;
-        if(!$scope.groupDetail){
+        if(!$scope.groupDetail || $scope.groupDetail=="" ){
             $scope.editGroup=false;
         }else{
             $scope.editGroup=true;

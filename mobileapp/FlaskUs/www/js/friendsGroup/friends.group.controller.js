@@ -29,6 +29,7 @@
         }
         $scope.getGroupDetail=function(group){
             GroupService.groupId=group.groupId;
+            GroupService.groupDetail="";
         }
         $scope.deleteGroup = function(groupId,index) {
 
