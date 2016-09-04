@@ -210,15 +210,25 @@
         })
     // End of My TailGate Section
 
-        .state('app.my_friends', {
-            url: '/my_friends',
+        .state('app.my_friends_tab', {
+            url: '/my_friends_tab',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_friends.html',
-                    controller:"FriendsCtrl"
+                        templateUrl: 'templates/my_friends_tab.html',
+                        controller: "FriendsCtrl"
+                    }
                 }
-            }
         })
+
+        .state('app.my_friends_tab.my_friends', {
+                url: '/my_friends',
+                views: {
+                        'myFriend_tab': {
+                            templateUrl: 'templates/my_friends.html',
+                            controller: "FriendsCtrl"
+                        }
+                    }
+            })
         .state('app.my_friendDetail', {
             url: '/my_friendDetail/:userId',
             views: {
@@ -265,17 +275,42 @@
                 }
             }
         })
-        .state('app.friendsGroup', {
+        .state('app.my_friends_tab.friendsGroup', {
             url: '/friends_group',
             views: {
-                'menuContent': {
+                'myGroup_tab': {
                     templateUrl: 'templates/friends_group.html',
                     controller: 'FriendsGroupCtrl'
                 }
             }
         })
-
-
+            .state('app.createGroup', {
+                url: '/create_group',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/create_group.html',
+                        controller: 'CreateGroupCtrl'
+                    }
+                }
+            })
+            .state('app.groupDetail', {
+                url: '/group_detail/:groupName',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/group_detail.html',
+                        controller: 'FriendsGroupDetailCtrl'
+                    }
+                }
+            })
+            .state('app.groupMemberDetail', {
+                url: '/group_member_detail',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/group_member_detail.html',
+                        controller: 'FriendsGroupMemberDetailCtrl'
+                    }
+                }
+            })
 
         /*
         if none of the above states are matched, use this as the fallback*/
