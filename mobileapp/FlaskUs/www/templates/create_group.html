@@ -1,0 +1,63 @@
+<ion-view back-button="true" cache-view="false" view-title="CREATE GROUP">
+    <ion-nav-bar class="bar-dark" align-title="center" >
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+    </ion-nav-bar>
+    <ion-content>
+        <div class="item item-input item-floating-label">
+            <span class="input-label"style="margin-left:-10px;" >Group Name</span>
+            <input type="text" placeholder="Group Name" name="GroupName" class="form-control" ng-model="groupName" required>
+        </div>
+        <div class="item item-input item-floating-label">
+            <span class="input-label" style="margin-left: -10px;">Description:</span>
+            <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="description" required>
+        </div>
+        <div class="padding" align="center">
+            <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="createGroup(groupName,description)">
+                Save
+            </a>
+            <a nav-clear class="button button-block button-positive sign_in_button"href="/#/app/friends_group">
+                Cancel
+            </a>
+        </div>
+        <script id="templates/modal.html" type="text/ng-template">
+            <ion-modal-view >
+                <ion-header-bar class="bar bar-header bar-positive black-header">
+                    <h1 class="title">ADD MEMBER</h1>
+                    <button class="button button-clear button-primary" ng-click="closeInviteFriendPopup()">X</button>
+                </ion-header-bar>
+                <div class="bar bar-subheader">
+                    <div class="row">
+                        <div class="col col-90 col-center searchrow">
+                            <input type="text" placeholder="Search friend..." class="friendSearch" ng-model="searchContact.searchtext"/>
+                        </div>
+                        <div class="col col-center searchrow">
+                            <button class="button button-icon button-clear ion-ios-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
+                        </div>
+                    </div>
+                </div>
+                <ion-content class="padding has-subheader">
+                    <ion-list>
+                        <ion-item ng-repeat="data in memberToAddInGroup track by $index" class="item-avatar " item="data">
+                            <img src = "img/default-profilepic.png">
+                            <h2>{{ data.fullName | uppercase}}</h2>
+                            <p>{{ data.emailAddress}}</p>
+                            <button class="button button-clear mini-button badge ext-right" ng-click="addUserToGroup(data)">Add</button>
+                           <!-- <button class="button button-clear mini-button badge ext-right" ng-if="data.connectionRequested" disabled>Request Sent </button>
+                            <button class="button button-clear mini-button badge ext-right" ng-if="data.block" ng-click="unBlockUser(data)">Unblock </button>
+                            <button class="button button-clear mini-button badge ext-right" ng-if="data.connected" disabled>Friend </button>
+                        -->
+                        </ion-item>
+                        <div class="padding" align="center">
+                            <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="finishAddingMember()">
+                                Finish
+                            </a></div>
+                    </ion-list>
+<!--
+                    <ion-infinite-scroll on-infinite="getMoreUserContact(searchContact.searchtext)" distance="10%"></ion-infinite-scroll>
+-->
+                </ion-content>
+            </ion-modal-view>
+        </script>
+    </ion-content>
+</ion-view>
