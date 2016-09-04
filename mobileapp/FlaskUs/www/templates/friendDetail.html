@@ -1,8 +1,9 @@
 
 <ion-view cache-view="false" view-title="MY FRIENDS">
     <ion-nav-bar class="bar-dark" align-title="center">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-arrow-left-c" ng-click="goBack();"></button>
+        </ion-nav-buttons>
     </ion-nav-bar>
   <ion-content class="text-center">
     <div><img src="{{picUrl}}{{friend.uuid}}" class="list-thumbnail"  onError="this.src = 'img/default-profilepic.png'" /></div>
