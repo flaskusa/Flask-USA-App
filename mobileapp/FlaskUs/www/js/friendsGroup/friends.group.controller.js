@@ -30,6 +30,7 @@
         $scope.getGroupDetail=function(group){
             GroupService.groupId=group.groupId;
             GroupService.groupDetail="";
+            GroupService.groupAdminDetail=group.createdBy;
         }
         $scope.deleteGroup = function(groupId,index) {
 
@@ -56,6 +57,7 @@
         $scope.editGroup=function(data){
             GroupService.groupDetail=data;
             GroupService.groupId=data.groupId;
+            GroupService.groupAdminDetail=data.createdBy;
             $state.go('app.groupDetail', {groupName: data.groupName});
 
         }

@@ -23,6 +23,7 @@
         var url = SERVER.url;
         this.groupMemberDetail={};
         this.groupDetail={};
+        this.groupAdminDetail={};
         var companyId = SERVER.companyId;
         var getAllGroups = "/flask-manage-user-group-portlet.flaskgroup/get-all-my-groups";
         var createGroup="/flask-manage-user-group-portlet.flaskgroup/add-group";
