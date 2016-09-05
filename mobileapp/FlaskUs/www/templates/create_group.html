@@ -38,7 +38,7 @@
                 </div>
                 <ion-content class="padding has-subheader">
                     <ion-list>
-                        <ion-item ng-repeat="data in memberToAddInGroup track by $index" class="item-avatar " item="data">
+                        <ion-item class="item-avatar item-remove-animate"ng-repeat="data in memberToAddInGroup | filter:searchContact.searchtext" class="item-avatar " item="data">
                             <img src = "img/default-profilepic.png">
                             <h2>{{ data.fullName | uppercase}}</h2>
                             <p>{{ data.emailAddress}}</p>

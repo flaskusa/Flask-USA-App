@@ -40,27 +40,31 @@
             GroupService.groupMemberDetail=data;
 
         }
-
+        Array.prototype.clean = function(deleteValue) {
+            for (var i = 0; i < this.length; i++) {
+                if (this[i] == deleteValue) {
+                    this.splice(i, 1);
+                    i--;
+                }
+            }
+            return this;
+        };
+        $scope.getMatchedIndex=function(){
+            angular.forEach($scope.userContactList,function(value1,key1){
+                angular.forEach($scope.allMember,function(value2,key2){
+                    if(value1.userId==value2.userId){
+                        $scope.userContactList[key1]="";
+                    }
+                });
+            });
+        }
         $scope.showInviteFriendPopup = function(){
             // $scope.searchUserContact('',$scope.startIndex, $scope.endIndex);
+            $scope.searchContact={searchtext:""};
             GroupService.getMyFriendList().then(function(resopnse){
                 $scope.userContactList=resopnse;
-                angular.forEach($scope.userContactList,function(value1,key1){
-                    angular.forEach($scope.allMember,function(value2,key2){
-                     if(value1.userId==value2.userId){
-                         $scope.userContactList[key1]="";
-                     }
-                    })
-                });
-                Array.prototype.clean = function(deleteValue) {
-                    for (var i = 0; i < this.length; i++) {
-                        if (this[i] == deleteValue) {
-                            this.splice(i, 1);
-                            i--;
-                        }
-                    }
-                    return this;
-                };
+                $scope.getMatchedIndex();
+
                 $scope.userContactList.clean("");
                 $scope.userContactList.clean(undefined);
                 $scope.memberNotAdded(null);
@@ -123,6 +127,16 @@
             });
 
         };
+        $scope.filterUserContact=function(kewword){
+            GroupService.searchGroupMember(kewword).then(function(response){
+                $scope.userContactList=response;
+                $scope.getMatchedIndex();
+                $scope.userContactList.clean("");
+                $scope.userContactList.clean(undefined);
+                $scope.memberNotAdded(null);
+
+            });
+        }
 
     }
 })();

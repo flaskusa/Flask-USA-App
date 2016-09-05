@@ -15,6 +15,7 @@
         $scope.memberToAddInGroup=[];
         $scope.groups = [];
         $scope.groups=GroupService.group;
+        $scope.searchBox={showBox:false};
         var userDetail=$cookies.getObject('CurrentUser');
         var userId=userDetail.data.userId;
         $scope.goBack = function () {

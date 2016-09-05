@@ -18,7 +18,8 @@
             addGroupOwner:addGroupOwner,
             removeGroupOwner:removeGroupOwner,
             updateGroup:updateGroup,
-            deleteGroupUser:deleteGroupUser
+            deleteGroupUser:deleteGroupUser,
+            searchGroupMember:searchGroupMember
         }
         var url = SERVER.url;
         this.groupMemberDetail={};
@@ -36,6 +37,8 @@
         var removeGroupOwnerUrl="/flask-manage-user-group-portlet.flaskgroupusers/remove-group-owner";
         var updateGroupUrl="/flask-manage-user-group-portlet.flaskgroup/update-group";
         var DeleteGroupUserUrl="/flask-manage-user-group-portlet.flaskgroupusers/delete-group-user";
+        var searchFriendUrl="/flask-social-portlet.entry/search-my-friends";
+
 
 
         function getAllGroups(userId) {
@@ -174,6 +177,16 @@
             return $http.get(url+DeleteGroupUserUrl,{
                 params:{"groupId":groupId,
                     "userId":userId}
+            }).then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling
+            });
+        }
+        function searchGroupMember(keywords){
+            return $http.get(url+searchFriendUrl,{
+                params:{"companyId":companyId,"keywords":keywords}
             }).then(function success(response) {
                 return response.data;
             }, function failure(response) {
