@@ -69,16 +69,14 @@
                 </div>
                 <ion-content class="padding has-subheader">
                     <ion-list>
-                        <ion-item ng-repeat="data in memberToAddInGroup track by $index" class="item-avatar " item="data">
+                        <ion-item ng-repeat="data in memberToAddInGroup track by $index" class="item-avatar " item="data"class="row">
                             <img src = "img/default-profilepic.png">
                             <h2>{{ data.fullName | uppercase}}</h2>
                             <p>{{ data.emailAddress}}</p>
-                            <button class="button button-clear mini-button badge ext-right" ng-click="addUserToGroup(data)">Add</button>
-                            <!-- <button class="button button-clear mini-button badge ext-right" ng-if="data.connectionRequested" disabled>Request Sent </button>
-                             <button class="button button-clear mini-button badge ext-right" ng-if="data.block" ng-click="unBlockUser(data)">Unblock </button>
-                             <button class="button button-clear mini-button badge ext-right" ng-if="data.connected" disabled>Friend </button>
-                         -->
+                          <span class="badge"style="right: 7px"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons "ng-click="addUserToGroup(data)"></span>
                         </ion-item>
+                        <a class="item" ng-if="memberToAddInGroup.length == 0"> there are no more friends to add </a>
+
                         <div class="padding" align="center">
                             <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="finishAddingMember()">
                                 Finish
