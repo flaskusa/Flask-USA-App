@@ -24,78 +24,78 @@ import java.util.Arrays;
  */
 public class TailgateUsersServiceClpInvoker {
 	public TailgateUsersServiceClpInvoker() {
-		_methodName42 = "getBeanIdentifier";
+		_methodName60 = "getBeanIdentifier";
 
-		_methodParameterTypes42 = new String[] {  };
+		_methodParameterTypes60 = new String[] {  };
 
-		_methodName43 = "setBeanIdentifier";
+		_methodName61 = "setBeanIdentifier";
 
-		_methodParameterTypes43 = new String[] { "java.lang.String" };
+		_methodParameterTypes61 = new String[] { "java.lang.String" };
 
-		_methodName48 = "getTailgateMembers";
+		_methodName66 = "getTailgateMembers";
 
-		_methodParameterTypes48 = new String[] { "long" };
+		_methodParameterTypes66 = new String[] { "long" };
 
-		_methodName49 = "getTailgateGroups";
+		_methodName67 = "getTailgateGroups";
 
-		_methodParameterTypes49 = new String[] { "long", "long" };
+		_methodParameterTypes67 = new String[] { "long", "long" };
 
-		_methodName50 = "checkTailgateUserExist";
+		_methodName68 = "checkTailgateUserExist";
 
-		_methodParameterTypes50 = new String[] { "long", "long" };
+		_methodParameterTypes68 = new String[] { "long", "long" };
 
-		_methodName51 = "addTailgateUser";
+		_methodName69 = "addTailgateUser";
 
-		_methodParameterTypes51 = new String[] {
+		_methodParameterTypes69 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String", "int",
 				"boolean", "java.lang.String", "int"
 			};
 
-		_methodName52 = "updateTailgateUser";
+		_methodName70 = "updateTailgateUser";
 
-		_methodParameterTypes52 = new String[] {
+		_methodParameterTypes70 = new String[] {
 				"long", "long", "boolean", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName53 = "deleteTailgateUser";
+		_methodName71 = "deleteTailgateUser";
 
-		_methodParameterTypes53 = new String[] { "long", "long" };
+		_methodParameterTypes71 = new String[] { "long", "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName42.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
 			return TailgateUsersServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName43.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
 			TailgateUsersServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName48.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return TailgateUsersServiceUtil.getTailgateMembers(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName49.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
 			return TailgateUsersServiceUtil.getTailgateGroups(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			return TailgateUsersServiceUtil.checkTailgateUserExist(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName51.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
 			return TailgateUsersServiceUtil.addTailgateUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
@@ -105,16 +105,16 @@ public class TailgateUsersServiceClpInvoker {
 				((Integer)arguments[7]).intValue());
 		}
 
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
 			return TailgateUsersServiceUtil.updateTailgateUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Boolean)arguments[2]).booleanValue(),
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4]);
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName71.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
 			TailgateUsersServiceUtil.deleteTailgateUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 
@@ -124,20 +124,20 @@ public class TailgateUsersServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName42;
-	private String[] _methodParameterTypes42;
-	private String _methodName43;
-	private String[] _methodParameterTypes43;
-	private String _methodName48;
-	private String[] _methodParameterTypes48;
-	private String _methodName49;
-	private String[] _methodParameterTypes49;
-	private String _methodName50;
-	private String[] _methodParameterTypes50;
-	private String _methodName51;
-	private String[] _methodParameterTypes51;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
+	private String _methodName60;
+	private String[] _methodParameterTypes60;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
+	private String _methodName69;
+	private String[] _methodParameterTypes69;
+	private String _methodName70;
+	private String[] _methodParameterTypes70;
+	private String _methodName71;
+	private String[] _methodParameterTypes71;
 }

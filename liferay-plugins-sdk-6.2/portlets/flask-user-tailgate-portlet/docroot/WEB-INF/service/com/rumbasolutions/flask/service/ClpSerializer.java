@@ -25,9 +25,12 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 
+import com.rumbasolutions.flask.model.SupplyItemClp;
+import com.rumbasolutions.flask.model.SupplyListClp;
 import com.rumbasolutions.flask.model.TailgateImagesClp;
 import com.rumbasolutions.flask.model.TailgateInfoClp;
 import com.rumbasolutions.flask.model.TailgateMarkerClp;
+import com.rumbasolutions.flask.model.TailgateSupplyItemClp;
 import com.rumbasolutions.flask.model.TailgateUsersClp;
 
 import java.io.ObjectInputStream;
@@ -105,6 +108,14 @@ public class ClpSerializer {
 
 		String oldModelClassName = oldModelClass.getName();
 
+		if (oldModelClassName.equals(SupplyItemClp.class.getName())) {
+			return translateInputSupplyItem(oldModel);
+		}
+
+		if (oldModelClassName.equals(SupplyListClp.class.getName())) {
+			return translateInputSupplyList(oldModel);
+		}
+
 		if (oldModelClassName.equals(TailgateImagesClp.class.getName())) {
 			return translateInputTailgateImages(oldModel);
 		}
@@ -115,6 +126,10 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals(TailgateMarkerClp.class.getName())) {
 			return translateInputTailgateMarker(oldModel);
+		}
+
+		if (oldModelClassName.equals(TailgateSupplyItemClp.class.getName())) {
+			return translateInputTailgateSupplyItem(oldModel);
 		}
 
 		if (oldModelClassName.equals(TailgateUsersClp.class.getName())) {
@@ -134,6 +149,26 @@ public class ClpSerializer {
 		}
 
 		return newList;
+	}
+
+	public static Object translateInputSupplyItem(BaseModel<?> oldModel) {
+		SupplyItemClp oldClpModel = (SupplyItemClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getSupplyItemRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputSupplyList(BaseModel<?> oldModel) {
+		SupplyListClp oldClpModel = (SupplyListClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getSupplyListRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
 	}
 
 	public static Object translateInputTailgateImages(BaseModel<?> oldModel) {
@@ -166,6 +201,16 @@ public class ClpSerializer {
 		return newModel;
 	}
 
+	public static Object translateInputTailgateSupplyItem(BaseModel<?> oldModel) {
+		TailgateSupplyItemClp oldClpModel = (TailgateSupplyItemClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getTailgateSupplyItemRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
 	public static Object translateInputTailgateUsers(BaseModel<?> oldModel) {
 		TailgateUsersClp oldClpModel = (TailgateUsersClp)oldModel;
 
@@ -192,6 +237,80 @@ public class ClpSerializer {
 		Class<?> oldModelClass = oldModel.getClass();
 
 		String oldModelClassName = oldModelClass.getName();
+
+		if (oldModelClassName.equals(
+					"com.rumbasolutions.flask.model.impl.SupplyItemImpl")) {
+			return translateOutputSupplyItem(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.rumbasolutions.flask.model.impl.SupplyListImpl")) {
+			return translateOutputSupplyList(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
 
 		if (oldModelClassName.equals(
 					"com.rumbasolutions.flask.model.impl.TailgateImagesImpl")) {
@@ -270,6 +389,43 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.rumbasolutions.flask.model.impl.TailgateMarkerImpl")) {
 			return translateOutputTailgateMarker(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.rumbasolutions.flask.model.impl.TailgateSupplyItemImpl")) {
+			return translateOutputTailgateSupplyItem(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -422,6 +578,16 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"com.rumbasolutions.flask.NoSuchSupplyItemException")) {
+			return new com.rumbasolutions.flask.NoSuchSupplyItemException();
+		}
+
+		if (className.equals(
+					"com.rumbasolutions.flask.NoSuchSupplyListException")) {
+			return new com.rumbasolutions.flask.NoSuchSupplyListException();
+		}
+
+		if (className.equals(
 					"com.rumbasolutions.flask.NoSuchTailgateImagesException")) {
 			return new com.rumbasolutions.flask.NoSuchTailgateImagesException();
 		}
@@ -437,11 +603,36 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"com.rumbasolutions.flask.NoSuchTailgateSupplyItemException")) {
+			return new com.rumbasolutions.flask.NoSuchTailgateSupplyItemException();
+		}
+
+		if (className.equals(
 					"com.rumbasolutions.flask.NoSuchTailgateUsersException")) {
 			return new com.rumbasolutions.flask.NoSuchTailgateUsersException();
 		}
 
 		return throwable;
+	}
+
+	public static Object translateOutputSupplyItem(BaseModel<?> oldModel) {
+		SupplyItemClp newModel = new SupplyItemClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setSupplyItemRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputSupplyList(BaseModel<?> oldModel) {
+		SupplyListClp newModel = new SupplyListClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setSupplyListRemoteModel(oldModel);
+
+		return newModel;
 	}
 
 	public static Object translateOutputTailgateImages(BaseModel<?> oldModel) {
@@ -470,6 +661,17 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setTailgateMarkerRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputTailgateSupplyItem(
+		BaseModel<?> oldModel) {
+		TailgateSupplyItemClp newModel = new TailgateSupplyItemClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setTailgateSupplyItemRemoteModel(oldModel);
 
 		return newModel;
 	}

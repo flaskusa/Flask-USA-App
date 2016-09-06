@@ -1,6 +1,12 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.rumbasolutions.flask.service.SupplyItemLocalService" class="com.rumbasolutions.flask.service.impl.SupplyItemLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.SupplyItemService" class="com.rumbasolutions.flask.service.impl.SupplyItemServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.SupplyItemPersistence" class="com.rumbasolutions.flask.service.persistence.SupplyItemPersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.SupplyListLocalService" class="com.rumbasolutions.flask.service.impl.SupplyListLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.SupplyListService" class="com.rumbasolutions.flask.service.impl.SupplyListServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.SupplyListPersistence" class="com.rumbasolutions.flask.service.persistence.SupplyListPersistenceImpl" parent="basePersistence" />
 	<bean id="com.rumbasolutions.flask.service.TailgateImagesLocalService" class="com.rumbasolutions.flask.service.impl.TailgateImagesLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.TailgateImagesService" class="com.rumbasolutions.flask.service.impl.TailgateImagesServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.TailgateImagesPersistence" class="com.rumbasolutions.flask.service.persistence.TailgateImagesPersistenceImpl" parent="basePersistence" />
@@ -12,6 +18,9 @@
 	<bean id="com.rumbasolutions.flask.service.TailgateMarkerService" class="com.rumbasolutions.flask.service.impl.TailgateMarkerServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.TailgateMarkerPersistence" class="com.rumbasolutions.flask.service.persistence.TailgateMarkerPersistenceImpl" parent="basePersistence" />
 	<bean id="com.rumbasolutions.flask.service.persistence.TailgateMarkerFinder" class="com.rumbasolutions.flask.service.persistence.TailgateMarkerFinderImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.TailgateSupplyItemLocalService" class="com.rumbasolutions.flask.service.impl.TailgateSupplyItemLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.TailgateSupplyItemService" class="com.rumbasolutions.flask.service.impl.TailgateSupplyItemServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.TailgateSupplyItemPersistence" class="com.rumbasolutions.flask.service.persistence.TailgateSupplyItemPersistenceImpl" parent="basePersistence" />
 	<bean id="com.rumbasolutions.flask.service.TailgateUsersLocalService" class="com.rumbasolutions.flask.service.impl.TailgateUsersLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.TailgateUsersService" class="com.rumbasolutions.flask.service.impl.TailgateUsersServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.TailgateUsersPersistence" class="com.rumbasolutions.flask.service.persistence.TailgateUsersPersistenceImpl" parent="basePersistence" />

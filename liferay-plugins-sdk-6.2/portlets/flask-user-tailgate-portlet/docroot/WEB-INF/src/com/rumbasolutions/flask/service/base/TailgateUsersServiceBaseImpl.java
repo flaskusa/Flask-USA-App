@@ -24,11 +24,14 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.rumbasolutions.flask.model.TailgateUsers;
 import com.rumbasolutions.flask.service.TailgateUsersService;
+import com.rumbasolutions.flask.service.persistence.SupplyItemPersistence;
+import com.rumbasolutions.flask.service.persistence.SupplyListPersistence;
 import com.rumbasolutions.flask.service.persistence.TailgateImagesPersistence;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoFinder;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoPersistence;
 import com.rumbasolutions.flask.service.persistence.TailgateMarkerFinder;
 import com.rumbasolutions.flask.service.persistence.TailgateMarkerPersistence;
+import com.rumbasolutions.flask.service.persistence.TailgateSupplyItemPersistence;
 import com.rumbasolutions.flask.service.persistence.TailgateUsersFinder;
 import com.rumbasolutions.flask.service.persistence.TailgateUsersPersistence;
 
@@ -53,6 +56,120 @@ public abstract class TailgateUsersServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * Never modify or reference this class directly. Always use {@link com.rumbasolutions.flask.service.TailgateUsersServiceUtil} to access the tailgate users remote service.
 	 */
+
+	/**
+	 * Returns the supply item local service.
+	 *
+	 * @return the supply item local service
+	 */
+	public com.rumbasolutions.flask.service.SupplyItemLocalService getSupplyItemLocalService() {
+		return supplyItemLocalService;
+	}
+
+	/**
+	 * Sets the supply item local service.
+	 *
+	 * @param supplyItemLocalService the supply item local service
+	 */
+	public void setSupplyItemLocalService(
+		com.rumbasolutions.flask.service.SupplyItemLocalService supplyItemLocalService) {
+		this.supplyItemLocalService = supplyItemLocalService;
+	}
+
+	/**
+	 * Returns the supply item remote service.
+	 *
+	 * @return the supply item remote service
+	 */
+	public com.rumbasolutions.flask.service.SupplyItemService getSupplyItemService() {
+		return supplyItemService;
+	}
+
+	/**
+	 * Sets the supply item remote service.
+	 *
+	 * @param supplyItemService the supply item remote service
+	 */
+	public void setSupplyItemService(
+		com.rumbasolutions.flask.service.SupplyItemService supplyItemService) {
+		this.supplyItemService = supplyItemService;
+	}
+
+	/**
+	 * Returns the supply item persistence.
+	 *
+	 * @return the supply item persistence
+	 */
+	public SupplyItemPersistence getSupplyItemPersistence() {
+		return supplyItemPersistence;
+	}
+
+	/**
+	 * Sets the supply item persistence.
+	 *
+	 * @param supplyItemPersistence the supply item persistence
+	 */
+	public void setSupplyItemPersistence(
+		SupplyItemPersistence supplyItemPersistence) {
+		this.supplyItemPersistence = supplyItemPersistence;
+	}
+
+	/**
+	 * Returns the supply list local service.
+	 *
+	 * @return the supply list local service
+	 */
+	public com.rumbasolutions.flask.service.SupplyListLocalService getSupplyListLocalService() {
+		return supplyListLocalService;
+	}
+
+	/**
+	 * Sets the supply list local service.
+	 *
+	 * @param supplyListLocalService the supply list local service
+	 */
+	public void setSupplyListLocalService(
+		com.rumbasolutions.flask.service.SupplyListLocalService supplyListLocalService) {
+		this.supplyListLocalService = supplyListLocalService;
+	}
+
+	/**
+	 * Returns the supply list remote service.
+	 *
+	 * @return the supply list remote service
+	 */
+	public com.rumbasolutions.flask.service.SupplyListService getSupplyListService() {
+		return supplyListService;
+	}
+
+	/**
+	 * Sets the supply list remote service.
+	 *
+	 * @param supplyListService the supply list remote service
+	 */
+	public void setSupplyListService(
+		com.rumbasolutions.flask.service.SupplyListService supplyListService) {
+		this.supplyListService = supplyListService;
+	}
+
+	/**
+	 * Returns the supply list persistence.
+	 *
+	 * @return the supply list persistence
+	 */
+	public SupplyListPersistence getSupplyListPersistence() {
+		return supplyListPersistence;
+	}
+
+	/**
+	 * Sets the supply list persistence.
+	 *
+	 * @param supplyListPersistence the supply list persistence
+	 */
+	public void setSupplyListPersistence(
+		SupplyListPersistence supplyListPersistence) {
+		this.supplyListPersistence = supplyListPersistence;
+	}
 
 	/**
 	 * Returns the tailgate images local service.
@@ -260,6 +377,63 @@ public abstract class TailgateUsersServiceBaseImpl extends BaseServiceImpl
 	public void setTailgateMarkerFinder(
 		TailgateMarkerFinder tailgateMarkerFinder) {
 		this.tailgateMarkerFinder = tailgateMarkerFinder;
+	}
+
+	/**
+	 * Returns the tailgate supply item local service.
+	 *
+	 * @return the tailgate supply item local service
+	 */
+	public com.rumbasolutions.flask.service.TailgateSupplyItemLocalService getTailgateSupplyItemLocalService() {
+		return tailgateSupplyItemLocalService;
+	}
+
+	/**
+	 * Sets the tailgate supply item local service.
+	 *
+	 * @param tailgateSupplyItemLocalService the tailgate supply item local service
+	 */
+	public void setTailgateSupplyItemLocalService(
+		com.rumbasolutions.flask.service.TailgateSupplyItemLocalService tailgateSupplyItemLocalService) {
+		this.tailgateSupplyItemLocalService = tailgateSupplyItemLocalService;
+	}
+
+	/**
+	 * Returns the tailgate supply item remote service.
+	 *
+	 * @return the tailgate supply item remote service
+	 */
+	public com.rumbasolutions.flask.service.TailgateSupplyItemService getTailgateSupplyItemService() {
+		return tailgateSupplyItemService;
+	}
+
+	/**
+	 * Sets the tailgate supply item remote service.
+	 *
+	 * @param tailgateSupplyItemService the tailgate supply item remote service
+	 */
+	public void setTailgateSupplyItemService(
+		com.rumbasolutions.flask.service.TailgateSupplyItemService tailgateSupplyItemService) {
+		this.tailgateSupplyItemService = tailgateSupplyItemService;
+	}
+
+	/**
+	 * Returns the tailgate supply item persistence.
+	 *
+	 * @return the tailgate supply item persistence
+	 */
+	public TailgateSupplyItemPersistence getTailgateSupplyItemPersistence() {
+		return tailgateSupplyItemPersistence;
+	}
+
+	/**
+	 * Sets the tailgate supply item persistence.
+	 *
+	 * @param tailgateSupplyItemPersistence the tailgate supply item persistence
+	 */
+	public void setTailgateSupplyItemPersistence(
+		TailgateSupplyItemPersistence tailgateSupplyItemPersistence) {
+		this.tailgateSupplyItemPersistence = tailgateSupplyItemPersistence;
 	}
 
 	/**
@@ -508,6 +682,18 @@ public abstract class TailgateUsersServiceBaseImpl extends BaseServiceImpl
 		}
 	}
 
+	@BeanReference(type = com.rumbasolutions.flask.service.SupplyItemLocalService.class)
+	protected com.rumbasolutions.flask.service.SupplyItemLocalService supplyItemLocalService;
+	@BeanReference(type = com.rumbasolutions.flask.service.SupplyItemService.class)
+	protected com.rumbasolutions.flask.service.SupplyItemService supplyItemService;
+	@BeanReference(type = SupplyItemPersistence.class)
+	protected SupplyItemPersistence supplyItemPersistence;
+	@BeanReference(type = com.rumbasolutions.flask.service.SupplyListLocalService.class)
+	protected com.rumbasolutions.flask.service.SupplyListLocalService supplyListLocalService;
+	@BeanReference(type = com.rumbasolutions.flask.service.SupplyListService.class)
+	protected com.rumbasolutions.flask.service.SupplyListService supplyListService;
+	@BeanReference(type = SupplyListPersistence.class)
+	protected SupplyListPersistence supplyListPersistence;
 	@BeanReference(type = com.rumbasolutions.flask.service.TailgateImagesLocalService.class)
 	protected com.rumbasolutions.flask.service.TailgateImagesLocalService tailgateImagesLocalService;
 	@BeanReference(type = com.rumbasolutions.flask.service.TailgateImagesService.class)
@@ -530,6 +716,12 @@ public abstract class TailgateUsersServiceBaseImpl extends BaseServiceImpl
 	protected TailgateMarkerPersistence tailgateMarkerPersistence;
 	@BeanReference(type = TailgateMarkerFinder.class)
 	protected TailgateMarkerFinder tailgateMarkerFinder;
+	@BeanReference(type = com.rumbasolutions.flask.service.TailgateSupplyItemLocalService.class)
+	protected com.rumbasolutions.flask.service.TailgateSupplyItemLocalService tailgateSupplyItemLocalService;
+	@BeanReference(type = com.rumbasolutions.flask.service.TailgateSupplyItemService.class)
+	protected com.rumbasolutions.flask.service.TailgateSupplyItemService tailgateSupplyItemService;
+	@BeanReference(type = TailgateSupplyItemPersistence.class)
+	protected TailgateSupplyItemPersistence tailgateSupplyItemPersistence;
 	@BeanReference(type = com.rumbasolutions.flask.service.TailgateUsersLocalService.class)
 	protected com.rumbasolutions.flask.service.TailgateUsersLocalService tailgateUsersLocalService;
 	@BeanReference(type = com.rumbasolutions.flask.service.TailgateUsersService.class)

@@ -92,5 +92,85 @@
         	<finder-column name="imageUUID" />
         </finder>
     </entity>
-	
+    <entity name="SupplyList" local-service="true">
+        <column name="supplyListId" type="long" primary="true"></column>
+        <column name="supplyListName" type="String"></column>
+        <column name="isSytem" type="Boolean"></column>
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date"></column>
+        <column name="modifiedDate" type="Date"></column>
+    </entity>
+
+    <entity name="SupplyItem" local-service="true">
+        <column name="supplyItemId" type="long" primary="true"></column>
+        <column name="supplyItemName" type="String"></column>
+        <!-- Foreign Key -->
+        <column name="supplyListId" type="long"></column>
+        
+
+        <column name="createdDate" type="Date"></column>
+        <column name="modifiedDate" type="Date"></column>
+        
+        <finder name="supplyListId" return-type="Collection">
+        	<finder-column name="supplyListId" />
+        </finder> 
+    </entity>
+    
+   <entity name="TailgateSupplyItem" local-service="true">
+        <column name="tailgateSupplyItemId" type="long" primary="true"></column>
+        <column name="supplyListItemName" type="String"></column>
+		
+		<!-- Foreign Key -->
+        <column name="tailgateId" type="long"></column>
+        <column name="itemAssignedUserId" type="long"></column>
+
+		<!-- Audit fields -->
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date"></column>
+        <column name="modifiedDate" type="Date"></column>
+        
+        <finder name="tailgateId" return-type="Collection">
+        	<finder-column name="tailgateId" />
+        </finder>    
+   </entity>
+   
+   <entity name="TailgateSupplyItem" local-service="true">
+        <column name="tailgateSupplyItemId" type="long" primary="true"></column>
+        <column name="supplyListItemName" type="String"></column>
+		
+		<!-- Foreign Key -->
+        <column name="tailgateId" type="long"></column>
+        <column name="itemAssignedUserId" type="long"></column>
+
+		<!-- Audit fields -->
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date"></column>
+        <column name="modifiedDate" type="Date"></column>
+        
+        <finder name="tailgateId" return-type="Collection">
+        	<finder-column name="tailgateId" />
+        </finder>    
+   </entity>
+   
+      <entity name="TailgateMessageBoard" local-service="true">
+        <column name="tailgateMessageId" type="long" primary="true"></column>
+        <column name="messageText" type="String"></column>
+
+		<!-- Foreign Key -->
+        <column name="tailgateId" type="long"></column>
+
+		<!-- Audit fields -->
+        <column name="companyId" type="long" />
+        <column name="userId" type="long" />
+        <column name="createdDate" type="Date"></column>
+        <column name="modifiedDate" type="Date"></column>
+        
+        <finder name="tailgateId" return-type="Collection">
+        	<finder-column name="tailgateId" />
+        </finder>    
+   </entity>
+ 	
 </service-builder>

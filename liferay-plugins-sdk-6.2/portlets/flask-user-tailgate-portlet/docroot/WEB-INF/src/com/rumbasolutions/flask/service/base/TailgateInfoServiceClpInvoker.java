@@ -24,69 +24,69 @@ import java.util.Arrays;
  */
 public class TailgateInfoServiceClpInvoker {
 	public TailgateInfoServiceClpInvoker() {
-		_methodName42 = "getBeanIdentifier";
+		_methodName60 = "getBeanIdentifier";
 
-		_methodParameterTypes42 = new String[] {  };
+		_methodParameterTypes60 = new String[] {  };
 
-		_methodName43 = "setBeanIdentifier";
+		_methodName61 = "setBeanIdentifier";
 
-		_methodParameterTypes43 = new String[] { "java.lang.String" };
+		_methodParameterTypes61 = new String[] { "java.lang.String" };
 
-		_methodName48 = "addTailgateInfo";
+		_methodName66 = "addTailgateInfo";
 
-		_methodParameterTypes48 = new String[] {
+		_methodParameterTypes66 = new String[] {
 				"java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "long", "long",
 				"java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName49 = "getAllTailgate";
+		_methodName67 = "getAllTailgate";
 
-		_methodParameterTypes49 = new String[] {  };
+		_methodParameterTypes67 = new String[] {  };
 
-		_methodName50 = "getAllMyTailgate";
+		_methodName68 = "getAllMyTailgate";
 
-		_methodParameterTypes50 = new String[] { "long" };
+		_methodParameterTypes68 = new String[] { "long" };
 
-		_methodName51 = "getAllTailgeteByUserId";
+		_methodName69 = "getAllTailgeteByUserId";
 
-		_methodParameterTypes51 = new String[] { "long" };
+		_methodParameterTypes69 = new String[] { "long" };
 
-		_methodName52 = "getTailgate";
+		_methodName70 = "getTailgate";
 
-		_methodParameterTypes52 = new String[] { "int" };
+		_methodParameterTypes70 = new String[] { "int" };
 
-		_methodName53 = "updateTailgateInfo";
+		_methodName71 = "updateTailgateInfo";
 
-		_methodParameterTypes53 = new String[] {
+		_methodParameterTypes71 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "long", "long",
 				"java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName54 = "deleteTailgateInfo";
+		_methodName72 = "deleteTailgateInfo";
 
-		_methodParameterTypes54 = new String[] { "long" };
+		_methodParameterTypes72 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName42.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
 			return TailgateInfoServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName43.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
 			TailgateInfoServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName48.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes48, parameterTypes)) {
+		if (_methodName66.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes66, parameterTypes)) {
 			return TailgateInfoServiceUtil.addTailgateInfo((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1],
 				((Long)arguments[2]).longValue(),
@@ -98,28 +98,28 @@ public class TailgateInfoServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 
-		if (_methodName49.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes49, parameterTypes)) {
+		if (_methodName67.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes67, parameterTypes)) {
 			return TailgateInfoServiceUtil.getAllTailgate();
 		}
 
-		if (_methodName50.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
+		if (_methodName68.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes68, parameterTypes)) {
 			return TailgateInfoServiceUtil.getAllMyTailgate(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName51.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
+		if (_methodName69.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
 			return TailgateInfoServiceUtil.getAllTailgeteByUserId(((Long)arguments[0]).longValue());
 		}
 
-		if (_methodName52.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes52, parameterTypes)) {
+		if (_methodName70.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
 			return TailgateInfoServiceUtil.getTailgate(((Integer)arguments[0]).intValue());
 		}
 
-		if (_methodName53.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes53, parameterTypes)) {
+		if (_methodName71.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
 			return TailgateInfoServiceUtil.updateTailgateInfo(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				((Long)arguments[3]).longValue(),
@@ -131,8 +131,8 @@ public class TailgateInfoServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[10]);
 		}
 
-		if (_methodName54.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes54, parameterTypes)) {
+		if (_methodName72.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
 			TailgateInfoServiceUtil.deleteTailgateInfo(((Long)arguments[0]).longValue());
 
 			return null;
@@ -141,22 +141,22 @@ public class TailgateInfoServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName42;
-	private String[] _methodParameterTypes42;
-	private String _methodName43;
-	private String[] _methodParameterTypes43;
-	private String _methodName48;
-	private String[] _methodParameterTypes48;
-	private String _methodName49;
-	private String[] _methodParameterTypes49;
-	private String _methodName50;
-	private String[] _methodParameterTypes50;
-	private String _methodName51;
-	private String[] _methodParameterTypes51;
-	private String _methodName52;
-	private String[] _methodParameterTypes52;
-	private String _methodName53;
-	private String[] _methodParameterTypes53;
-	private String _methodName54;
-	private String[] _methodParameterTypes54;
+	private String _methodName60;
+	private String[] _methodParameterTypes60;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
+	private String _methodName66;
+	private String[] _methodParameterTypes66;
+	private String _methodName67;
+	private String[] _methodParameterTypes67;
+	private String _methodName68;
+	private String[] _methodParameterTypes68;
+	private String _methodName69;
+	private String[] _methodParameterTypes69;
+	private String _methodName70;
+	private String[] _methodParameterTypes70;
+	private String _methodName71;
+	private String[] _methodParameterTypes71;
+	private String _methodName72;
+	private String[] _methodParameterTypes72;
 }

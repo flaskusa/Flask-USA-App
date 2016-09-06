@@ -2,10 +2,34 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.rumbasolutions.flask.model.SupplyItem" />
+	<import class="com.rumbasolutions.flask.model.SupplyList" />
 	<import class="com.rumbasolutions.flask.model.TailgateImages" />
 	<import class="com.rumbasolutions.flask.model.TailgateInfo" />
 	<import class="com.rumbasolutions.flask.model.TailgateMarker" />
+	<import class="com.rumbasolutions.flask.model.TailgateSupplyItem" />
 	<import class="com.rumbasolutions.flask.model.TailgateUsers" />
+	<class name="com.rumbasolutions.flask.model.impl.SupplyItemImpl" table="flasktailgate_SupplyItem">
+		<cache usage="read-write" />
+		<id name="supplyItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="supplyItemName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.SupplyListImpl" table="flasktailgate_SupplyList">
+		<cache usage="read-write" />
+		<id name="supplyListId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="supplyListName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="isSytem" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+	</class>
 	<class name="com.rumbasolutions.flask.model.impl.TailgateImagesImpl" table="flasktailgate_TailgateImages">
 		<cache usage="read-write" />
 		<id name="tailgateImageId" type="long">
@@ -51,6 +75,19 @@
 		<property name="longitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.TailgateSupplyItemImpl" table="flasktailgate_TailgateSupplyItem">
+		<cache usage="read-write" />
+		<id name="tailgateSupplyItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="supplyListItemName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="tailgateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="itemAssignedUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.TailgateUsersImpl" table="flasktailgate_TailgateUsers">
 		<cache usage="read-write" />

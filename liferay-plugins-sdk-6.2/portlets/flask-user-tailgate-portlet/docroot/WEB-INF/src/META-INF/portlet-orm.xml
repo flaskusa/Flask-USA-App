@@ -7,6 +7,40 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.SupplyItemModelImpl">
+		<attributes>
+			<id name="supplyItemId" />
+			<basic name="supplyItemName" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.SupplyListModelImpl">
+		<attributes>
+			<id name="supplyListId" />
+			<basic name="supplyListName" />
+			<basic name="isSytem" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.rumbasolutions.flask.model.impl.TailgateImagesModelImpl">
 		<attributes>
 			<id name="tailgateImageId" />
@@ -71,6 +105,27 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.TailgateSupplyItemModelImpl">
+		<attributes>
+			<id name="tailgateSupplyItemId" />
+			<basic name="supplyListItemName" />
+			<basic name="tailgateId" />
+			<basic name="itemAssignedUserId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="itemAssignedUserUuid" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.rumbasolutions.flask.model.impl.TailgateUsersModelImpl">
 		<attributes>
 			<id name="tailgateUserId" />
@@ -90,6 +145,14 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<entity class="com.rumbasolutions.flask.model.impl.SupplyItemImpl" name="SupplyItem">
+		<table name="flasktailgate_SupplyItem" />
+		<attributes />
+	</entity>
+	<entity class="com.rumbasolutions.flask.model.impl.SupplyListImpl" name="SupplyList">
+		<table name="flasktailgate_SupplyList" />
+		<attributes />
+	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.TailgateImagesImpl" name="TailgateImages">
 		<table name="flasktailgate_TailgateImages" />
 		<attributes />
@@ -100,6 +163,10 @@
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.TailgateMarkerImpl" name="TailgateMarker">
 		<table name="flasktailgate_TailgateMarker" />
+		<attributes />
+	</entity>
+	<entity class="com.rumbasolutions.flask.model.impl.TailgateSupplyItemImpl" name="TailgateSupplyItem">
+		<table name="flasktailgate_TailgateSupplyItem" />
 		<attributes />
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.TailgateUsersImpl" name="TailgateUsers">
