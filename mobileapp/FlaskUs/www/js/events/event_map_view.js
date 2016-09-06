@@ -208,7 +208,7 @@
         function createGoogleBarMarker(place) {
             var marker = {};
             marker.id = place.id;
-            marker.icon = "img/map_icons/icon_parking.png";
+            marker.icon = "img/map_icons/google-map-pin.png";
             marker.latitude = place.geometry.location.lat();
             marker.longitude = place.geometry.location.lng();
             marker.show = false;
@@ -225,7 +225,7 @@
         function createGoogleNightLifeMarker (place) {
             var marker = {};
             marker.id = place.id;
-            marker.icon = "img/map_icons/icon_parking.png";
+            marker.icon = "img/map_icons/google-map-pin.png";
             marker.latitude = place.geometry.location.lat();
             marker.longitude = place.geometry.location.lng();
             marker.show = false;
@@ -242,7 +242,7 @@
         function createGoogleParkingMarker(place) {
             var marker = {};
             marker.id = place.id;
-            marker.icon = "img/map_icons/icon_parking.png";
+            marker.icon = "img/map_icons/google-map-pin.png";
             marker.latitude = place.geometry.location.lat();
             marker.longitude = place.geometry.location.lng();
             marker.show = false;
@@ -258,7 +258,7 @@
         }
 
         $scope.setMarkerFields = function (tempObject) {
-            tempObject.icon = 'img/map_icons/flask_map_icon_11.png';
+            // tempObject.icon = 'img/map_icons/flask_map_icon_11.png';
             tempObject.show = false;
             tempObject.templateUrl = 'markerInfo.tpl.html';
             tempObject.templateParameter = {
@@ -417,8 +417,10 @@
                         if ("Parking" == tempObject.infoTypeCategoryName || "Bar & Restaurants" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject);
                             if ("Parking" == tempObject.infoTypeCategoryName) {
+                                tempObject.icon = 'img/map_icons/parking.png';
                                 $scope.parkingMarkers.push(tempObject);
                             } else {
+                                tempObject.icon = 'img/map_icons/bar.png';
                                 $scope.barMarkers.push(tempObject);
                             }
                         } else if ("Traffic" == tempObject.infoTypeCategoryName) {
@@ -428,11 +430,13 @@
                         }
                         else if ("Nightlife" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject);
+                            tempObject.icon = 'img/map_icons/nightlife.png';
                             $scope.nightLifes.push(tempObject);
                         }
                     } else {
                         if ("Bar & Restaurants" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject)
+                            tempObject.icon = 'img/map_icons/bar.png';
                             $scope.barMarkers.push(tempObject);
                         }
                     }
