@@ -230,7 +230,7 @@
                     }
             })
         .state('app.my_friendDetail', {
-            url: '/my_friendDetail/:userId',
+            url: '/my_friendDetail:friendId',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/friendDetail.html',
@@ -277,7 +277,7 @@
             }
         })
         .state('app.my_friends_tab.friendsGroup', {
-            url: '/friends_group',
+            url: '/friends_group/:userId',
             views: {
                 'myGroup_tab': {
                     templateUrl: 'templates/friends_group.html',
@@ -285,6 +285,14 @@
                 }
             }
         })
+            .state('app.my_friends_tab.notification', {
+                url: '/notification_tab',
+                views: {
+                    'notification_tab': {
+                        templateUrl: 'templates/notification.html'
+                    }
+                }
+            })
             .state('app.createGroup', {
                 url: '/create_group',
                 views: {
@@ -303,6 +311,7 @@
                     }
                 }
             })
+
             .state('app.groupMemberDetail', {
                 url: '/group_member_detail',
                 views: {

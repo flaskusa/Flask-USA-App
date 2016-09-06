@@ -18,6 +18,9 @@
         $scope.goBack = function () {
             $state.go("app.user_navigation_menu");
         }
+        $scope.goTOGroup=function(){
+            $state.go('app.my_friendDetail',{userId:0});
+        }
       $scope.initialize = function() {
           $scope.getMyFriends($scope.searchContact.searchtext);
       }; 
@@ -35,6 +38,24 @@
           $scope.endIndex = 9;
           $scope.searchContact.searchtext =  "";
       };
+        $scope.unFriend = function(userId,index) {
+            FriendsService.unFriend(userId).then(function(res) {
+            if(res){
+                $scope.myFriends.splice(index,1)
+            }else(
+                $flaskUtil.alert("failed to unFriend")
+            )
+            });
+        };
+        $scope.blockFriend = function(userId) {
+            FriendsService.blockUser(userId).then(function(res) {
+              if(res){
+
+              }else{
+                  $flaskUtil.alert("failed to block");
+              }
+            });
+        };
       $scope.getMyFriends = function(searchText) {
           FriendsService.getMyFriends(searchText).then(function(response){
               if(response != undefined && Array.isArray(response))   {
@@ -102,6 +123,11 @@
 
       
         $scope.initialize();
+        $scope.groupMemberDetail=function(data){
+            $state.go('app.my_friendDetail',{friendId:data.userId});
+            FriendsService.data=data;
+        }
+
     }
 
 })();

@@ -19,8 +19,10 @@
             unBlockUser : unBlockUser
         }
         var url = SERVER.url;
+        this.data={};
+        this.mediatorUserId={};
         var searchMyFriend = "/flask-social-portlet.entry/search-my-friends";
-        var searchFriendById = "/flask-social-portlet.entry/get-user-by-id"
+        var searchFriendById = "/flask-social-portlet.entry/get-user-by-id";
         var searchUserContactPath = '/flask-social-portlet.entry/search-users-and-contacts';
         var sendFlaskMessage = "/flask-social-portlet.flaskmessages/send-flask-message";
         var blockUserPath = "/flask-social-portlet.entry/block-user";

@@ -7,14 +7,19 @@
 
     /* @ngInject */
     function FriendDetailCtrl($scope,$stateParams,FriendsService, $flaskUtil,SERVER,$state,$ionicModal,$ionicHistory) {
-        $scope.userId = $stateParams.userId;
+        $scope.friendId =FriendsService.data.userId;
         $scope.friend = {};
         $scope.picUrl = SERVER.url+"c/document_library/get_file?uuid=";
         $scope.initialize = function() {
-            $scope.getFriendByUserId($scope.userId);
+            $scope.getFriendByUserId( $scope.friendId);
         };
         $scope.goBack = function(){
             $ionicHistory.goBack();
+        }
+        $scope.initializeMediatorId=function(userId){
+
+        FriendsService.mediatorUserId=userId;
+            $state.go('app.my_friends_tab.friendsGroup');
         }
         $scope.getFriendByUserId = function(userId) {
             FriendsService.getFriendByUserId(userId).then(function(response) {
@@ -26,7 +31,7 @@
                 }
             });
         };
-        
+
 
         $scope.blockFriend = function() {
             FriendsService.blockUser($scope.friend.userId).then(function(res) {
