@@ -3,11 +3,74 @@
     angular.module('flaskApp')
         .controller('user_registrationCtrl', user_registrationCtrl);
     user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout'];
-    
+
     /* @ngInject */
     function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout) {
         var gender = true;
         var max_date = new Date();
+
+
+        $scope.data1 = [
+          {
+              sport: "Basketball"
+          },
+          {
+              sport: "Basebball"
+
+          },
+          {
+              sport: "Football"
+          },
+          {
+              sport: "Hockey"
+          },
+          {
+              sport: "Soccer"
+          },
+          {
+              sport: "Tennis"
+          }
+        ];
+
+        $scope.data2 = [
+            {
+                concerts: "Country"
+            },
+            {
+                concerts: "Pop"
+            },
+            {
+                concerts: "Rock"
+            },
+            {
+                concerts: "Rap"
+            },
+            {
+                concerts: "Alternative"
+            },
+            {
+                concerts: "Electronic"
+            }
+        ];
+
+        $scope.data3 = [
+
+            {
+                special_events: "Comedy"
+            }
+        ];
+
+        $scope.data4 = [
+
+           {
+               level: "Professional"
+           },
+           {
+               level: "college"
+           }
+        ];
+
+
         $scope.MAX = max_date;
         console.log(max_date);
         $scope.saveUser = function (user) {
@@ -26,12 +89,12 @@
                 if (respData.data.exception == "com.liferay.portal.DuplicateUserEmailAddressException" || respData.data.exception == "com.liferay.portal.DuplicateUserScreenNameException") {
                     console.log("User is already exist");
                     //$state.go("app.login");
-                    
+
                 }
                 $scope.AddedSuccess = true;
                 $timeout(function () { $scope.AddedSuccess = false; }, 3000);
             });
-          //  document.register_user_form.reset();
+            //  document.register_user_form.reset();
         }
 
         $scope.checkUserByEmailId = function (user) {
@@ -46,11 +109,15 @@
                     $timeout(function () {
                         myPopup.close(); //close the popup after 3 seconds for some reason
                     }, 3000);
-                   // document.register_user_form.reset();
+                    // document.register_user_form.reset();
                 }
             });
         }
-        document.register_user_form.reset();
     }
 })();
+
+
+
+
+
 
