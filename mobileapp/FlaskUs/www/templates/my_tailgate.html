@@ -8,14 +8,22 @@
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">CREATE NEW TAILGATE</p>
         </a>
-        <div class="list">
-            <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/my_tailgateDetails/my_tailgate_event_details/{{data.tailgateId}}" ng-repeat="data in allTailgate">
-                <img src="img/events.jpg" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
-                <h2 class="eventNameCol">{{ data.tailgateName }}</h2>
-                <p class="dateCol">{{data.tailgateDate | date:'EEEE,MMMM dd,yyyy'}}</p>
-                <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
-                <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:20px;padding-left:10%;"></span>
-            </a>
-        </div>
-    </ion-content>
+        <ion-list show-delete="false" can-swipe="true">
+            <ion-item class="myList item-remove-animate" href="#/app/my_tailgateDetails/my_tailgate_event_details/{{data.tailgateId}}" ng-repeat="data in allTailgate">
+                <div class="row">
+                    <div class="col col-15"><img src="img/events.jpg" class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" /></div>
+                    <div class="col col-70 event_content1">
+                        <h2 class="eventNameCol">{{ data.tailgateName }}</h2>
+                        <p class="dateCol">{{data.tailgateDate | date:'EEEE,MMMM dd,yyyy'}}</p>
+                        <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
+                    </div>
+                    <div class="col col-15">
+                        <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
+                    </div>
+                 </div>
+                 <ion-option-button class="button-assertive icon ion-edit"></ion-option-button>
+                 <ion-option-button class="button-assertive icon ion-trash-a"></ion-option-button>
+            </ion-item>
+        </ion-list>
+</ion-content>
 </ion-view>

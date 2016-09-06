@@ -3,164 +3,176 @@
         <ion-nav-back-button>
         </ion-nav-back-button>
     </ion-nav-bar>
-   <ion-tabs class="tabs-positive tab_bottom">
-     
-            <ion-tab title="Contact">
-                <ion-content class="" overflow-scroll="false">
-                    <div class="list acc_settings1">
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">First Name</span>
-                            <input type="text" placeholder="First Name" ng-model="user.firstName">
-                        </label>
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Last Name</span>
-                            <input type="text" placeholder="Last Name" ng-model="user.lastName">
-                        </label>
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label"> Screen Name:</span>
-                            <input type="text" placeholder="screen Name" ng-model="user.screenName">
-                        </label>
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Email</span>
-                            <input type="text" placeholder="Email" ng-model="user.Email">
-                        </label>
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Password</span>
-                            <input type="password" placeholder="Password" class="form-control" ng-model="user.password1" name="password1">
-                        </label>
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Confirm Password</span>
-                            <input type="password" placeholder="Confirm Password" class="form-control" ng-model="user.password2" name="password2">
-                        </label>
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Date of Birth</span>
-                            <input type="date" placeholder="Date of Birth" name="DOB" ng-model="user.DOB">
-                        </label>
-                        <label class="item item-input">
-                            <span class="input-label">Gender</span>
-                            <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"male"' name="rdoResult">Male</ion-radio></pre>
-                            <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"female"' name="rdoResult">Female</ion-radio></pre>
-                        </label>
+    <ion-tabs class="tabs-positive tab_bottom">
 
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Mobile Number</span>
-                            <input type="text" placeholder="Mobile Number" ng-model="mobileNumber">
-                        </label>
-                    </div>
-                    <div class="padding" align="center">
-                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUser(user);">
-                            Save
-                        </button>
-                        <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
-                            Cancel
-                        </a>
-                    </div>
-                    </ion-content>
-            </ion-tab>
+        <ion-tab title="Contact">
+            <ion-content class="" overflow-scroll="false">
+                <div class="list acc_settings1">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">First Name</span>
+                        <input type="text" placeholder="First Name" ng-model="user.firstName">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Last Name</span>
+                        <input type="text" placeholder="Last Name" ng-model="user.lastName">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label"> Screen Name:</span>
+                        <input type="text" placeholder="screen Name" ng-model="user.screenName">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Email</span>
+                        <input type="text" placeholder="Email" ng-model="user.Email">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Password</span>
+                        <input type="password" placeholder="Password" class="form-control" ng-model="user.password1" name="password1">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Confirm Password</span>
+                        <input type="password" placeholder="Confirm Password" class="form-control" ng-model="user.password2" name="password2">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Date of Birth</span>
+                        <input type="date" placeholder="Date of Birth" name="DOB" ng-model="user.DOB">
+                    </label>
+                    <label class="item item-input">
+                        <span class="input-label">Gender</span>
+                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"male"' name="rdoResult">Male</ion-radio></pre>
+                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"female"' name="rdoResult">Female</ion-radio></pre>
+                    </label>
 
-            <ion-tab title="Address">
-                <ion-content class="" overflow-scroll="false">
-                    <div class="list acc_settings1">
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Street:</span>
-                            <input type="text" placeholder="Street:" ng-model="user.streetName">
-                        </label>
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Apartment#:</span>
-                            <input type="text" placeholder="Apartment" ng-model="user.aptNo">
-                        </label>
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Area code</span>
-                            <input type="text" placeholder="Area code" ng-model="user.areaCode">
-                        </label>
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">City:</span>
-                            <input type="text" placeholder="City" ng-model="user.city">
-                        </label>
-                    </div>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Mobile Number</span>
+                        <input type="text" placeholder="Mobile Number" ng-model="mobileNumber">
+                    </label>
+                </div>
+                <div class="padding" align="center">
+                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUser(user);">
+                        Save
+                    </button>
+                    <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
+                        Cancel
+                    </a>
+                </div>
+            </ion-content>
+        </ion-tab>
 
-                    <div class="list">
-                        <label class="item item-input item-select">
-                            <select class="acc_setting">
-                                <option selected>--State--</option>
-                                <option>California</option>
-                                <option>Alabama</option>
-                                <option>Alaska</option>
-                            </select>
-                        </label>
+        <ion-tab title="Address">
+            <ion-content class="" overflow-scroll="false">
+                <div class="list acc_settings1">
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Street:</span>
+                        <input type="text" placeholder="Street:" ng-model="user.streetName">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Apartment#:</span>
+                        <input type="text" placeholder="Apartment" ng-model="user.aptNo">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Area code</span>
+                        <input type="text" placeholder="Area code" ng-model="user.areaCode">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">City:</span>
+                        <input type="text" placeholder="City" ng-model="user.city">
+                    </label>
+                </div>
 
-                    </div>
+                <div class="list">
+                    <label class="item item-input item-select">
+                        <select class="acc_setting">
+                            <option selected>--State--</option>
+                            <option>California</option>
+                            <option>Alabama</option>
+                            <option>Alaska</option>
+                        </select>
+                    </label>
 
-                    <div class="list">
-                        <label class="item item-input item-select">
-                            <select>
-                                <option selected>--Country--</option>
-                                <option>United States</option>
-                                <option>Canada</option>
-                            </select>
-                        </label>
-                    </div>
-                    <div class="padding" align="center">
-                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUser(user);">
-                            Save
-                        </button>
-                        <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
-                            Cancel
-                        </a>
-                    </div>
-                
-                    </ion-content>
-                    </ion-tab>
-          
-                    <ion-tab title="Interests">
-                        <ion-content class="" overflow-scroll="false">
-                            <div class="list acc_settings1">
-                                <ion-item>
-                                    <ion-label>Sports</ion-label>
-                                    <ion-select [(ngModel)]="sports" multiple="true">
-                                        <ion-option>Basketball</ion-option>
-                                        <ion-option>Basebball</ion-option>
-                                        <ion-option>Football</ion-option>
-                                        <ion-option>Hockey</ion-option>
-                                        <ion-option>Soccer</ion-option>
-                                        <ion-option>Tennis</ion-option>
-                                    </ion-select>
-                                </ion-item>
-                            </div>
+                </div>
 
-                            <div class="list acc_settings1">
-                                <ion-item>
-                                    <ion-label>Level</ion-label>
-                                    <ion-select [(ngModel)]="level" multiple="true">
-                                        <ion-option>Professional</ion-option>
-                                        <ion-option>College</ion-option>
-                                    </ion-select>
-                                </ion-item>
-                            </div>
+                <div class="list">
+                    <label class="item item-input item-select">
+                        <select>
+                            <option selected>--Country--</option>
+                            <option>United States</option>
+                            <option>Canada</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="padding" align="center">
+                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUser(user);">
+                        Save
+                    </button>
+                    <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
+                        Cancel
+                    </a>
+                </div>
 
-                            <div class="list acc_settings1">
-                                <ion-item>
-                                    <ion-label>Concerts</ion-label>
-                                    <ion-select [(ngModel)]="sports" multiple="true">
-                                        <ion-option>Country</ion-option>
-                                        
-                                    </ion-select>
-                                </ion-item>
-                            </div>
+            </ion-content>
+        </ion-tab>
+
+        <ion-tab title="Interests">
+            <ion-content class="" overflow-scroll="false">
+                <div class="list acc_settings1">PREFERENCES:</div>
 
 
+                <div class="row header">
+                    <div class="col acc_settingsCol">SPORTS</div>
+                </div>
+                <div class="row acc_settingsCol" ng-repeat="data in data1">
+                    <div class="col acc_settingsCol">{{data.sport}}</div>
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    </ion-checkbox>
+                </div>
+                <div class="padding"></div>
 
-                                <div class="padding" align="center">
-                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUser(user);">
-                                        Save
-                                    </button>
-                                    <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
-                                        Cancel
-                                    </a>
-                                </div>
-</ion-content>
-                    </ion-tab>
-               
 
-</ion-tabs>
+                <div class="row header">
+                    <div class="col acc_settingsCol">LEVEL</div>
+                </div>
+                <div class="row acc_settingsCol" ng-repeat="data in data4">
+                    <div class="col acc_settingsCol">{{data.level}}</div>
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    </ion-checkbox>
+                </div>
+                <div class="padding"></div>
+
+
+                <div class="row header">
+                    <div class="col acc_settingsCol">CONCERTS</div>
+                </div>
+                <div class="row acc_settingsCol" ng-repeat="data in data2">
+                    <div class="col acc_settingsCol">{{data.concerts}}</div>
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    </ion-checkbox>
+                </div>
+                <div class="padding"></div>
+
+
+                <div class="row header">
+                    <div class="col acc_settingsCol">SPECIAL EVENTS</div>
+                </div>
+
+                <div class="row acc_settingsCol" ng-repeat="data in data3">
+
+                    <div class="col acc_settingsCol">{{data.special_events}}</div>
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    </ion-checkbox>
+                </div>
+
+
+                <div class="padding" align="center">
+                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUser(user);">
+                        Save
+                    </button>
+                    <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
+                        Cancel
+                    </a>
+                </div>
+            </ion-content>
+        </ion-tab>
+
+
+    </ion-tabs>
 </ion-view>
