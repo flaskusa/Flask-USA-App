@@ -1,5 +1,5 @@
 ﻿<ion-view cache-view="false" view-title="MY TAILGATE">
-    <ion-nav-bar class="bar-dark" align-title="center" >
+    <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button>
         </ion-nav-back-button>
     </ion-nav-bar>
@@ -20,10 +20,9 @@
                     <div class="col col-15">
                         <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
                     </div>
-                 </div>
-                 <ion-option-button class="button-assertive icon ion-edit"></ion-option-button>
-                 <ion-option-button class="button-assertive icon ion-trash-a"></ion-option-button>
-            </ion-item>
+                </div>
+                <ion-option-button class="button-assertive icon ion-edit" ng-click="editTailgate();"></ion-option-button>
+                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveTailgate();"></ion-option-button>
         </ion-list>
-</ion-content>
+    </ion-content>
 </ion-view>
