@@ -261,7 +261,8 @@
             url: '/account_settings',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/account_settings.html'
+                    templateUrl: 'templates/account_settings.html',
+                    controller: 'user_registrationCtrl'
                 }
             }
         })
