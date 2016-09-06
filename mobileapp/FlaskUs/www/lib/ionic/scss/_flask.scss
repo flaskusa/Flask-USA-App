@@ -1314,13 +1314,13 @@ a.item.icon.activated:before{color:white;}
 position:initial !important;    
 }
 .groupIcon {
-  max-width: 45px;
-  height:45px;
+  max-width: 47px;
+  height:47px;
   float: left
 }
 .friendIcon{
-  max-width: 40px;
-  height:40px;
+  max-width: 47px;
+  height:47px;
   float: left
 }
 .arrowIconAlign{
@@ -1444,4 +1444,34 @@ position:initial !important;
     border-right: solid gray 1px;
     border-bottom: solid gray 1px;
     margin-bottom: 0px;
+}
+.nameText{
+  padding-left: 10px;
+  font-size: 14px;
+  font-weight: 600
+}
+.labelCheckBox{
+  left:25px;
+  float:right;
+}
+.itemAnchor{
+  text-decoration: none;
+  padding:0px;
+}
+.groupNamePadding{
+  padding-left: 28%;
+  padding-top: 4px;
+}
+.groupNameText{
+  padding-left: 10px;
+  font-size: 12px
+}
+.my-view {
+  .item-content {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: -4px;
+    margin-bottom: -4px;
+    height: 70px;
+  }
 }
