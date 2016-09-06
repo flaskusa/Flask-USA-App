@@ -1,4 +1,4 @@
-<ion-view view-title="Friends Group"cache-view="false" ng-init="initialize()" id="friendsgroup">
+<ion-view view-title="Friends Group"cache-view="false" ng-init="initialize()" id="friendsgroup"class="my-view">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-buttons side="left">
             <button class="button button-icon button-clear ion-arrow-left-c" ng-click="goBack()"></button>
@@ -18,50 +18,44 @@
  <!--<ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-android-more-vertical"ng-click="popover.show($event)"> </button>
     </ion-nav-buttons>-->
-    <ion-content>
-        <a class="item item-full list-item-icon-left "href="/#/app/create_group">
+    <ion-content class="my-view">
+        <a class="item item-full list-item-icon-left "href="/#/app/create_group"class="my-view"ng-if="addingInGroup==false">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">CREATE GROUP</p>
         </a>
       <ion-list >
-          <ion-item class=" item-remove-animate"ng-repeat="group in groups | filter: groupList.searchString">
-              <a  href="#/app/group_detail/{{group.groupName}}"style="text-decoration: none"ng-click="getGroupDetail(group)">
+          <ion-item class=" item-remove-animate"ng-repeat="group in groups | filter: groupList.searchString"style="padding: 0px">
+              <a  class="itemAnchor"ng-click="getGroupDetail(group)">
               <div class="col-20">
               <img src = "img/default-group-pic.png"class="groupIcon">
               </div>
-                  <div style="padding-left: 71px">
+                  <div style="padding-left: 40%">
               <h3>{{group.groupName}}</h3>
               <div style="color: darkorange;">{{group.groupDescription}}</div>
 
               </div>
-              <div class="col-20">
-              <span class="badge span_icon"style="top:25px"><img src="img/flask_icons/arrow_left.svg"class="arrowIconAlign" ></span>
+              <div class="col-20"ng-if="addingInGroup==false">
+              <span class="badge span_icon"style="top:20px"><img src="img/flask_icons/arrow_left.svg"class="arrowIconAlign" ></span>
               </div>
+                  <div class="col-20"ng-if="addingInGroup==true">
+                <span class="badge span_icon"style="top:6px"> <label class="checkbox"class="labelCheckBox">
+            <input  type="checkbox"ng-click="addFriendToGroup($index,group.groupId)">
+                </label></span>
+                  </div>
                   </div>
               </a>
-              <ion-option-button  class="icon ion-edit"ng-click="editGroup(group)"></ion-option-button>
-              <ion-option-button class="button-assertive icon ion-trash-a"ng-click="deleteGroup(group.groupId,$index)"></ion-option-button>
+              <ion-option-button  class="icon ion-edit"ng-click="editGroup(group)"ng-if="addingInGroup==false"></ion-option-button>
+              <ion-option-button class="button-assertive icon ion-trash-a"ng-click="deleteGroup(group.groupId,$index)"ng-if="addingInGroup==false"></ion-option-button>
 
           </ion-item>
 
+
       </ion-list>
-     <!-- <script id="templates/popover.html" type="text/ng-template">
-          <ion-popover-view style="height: 175px">
-              <ion-content>
-                  <div class="list"style="height: 150px">
-                      <a class="item"style="color: orange;" target="_blank"ng-click="closePopover()">
-                          Setting
-                      </a>
-                      <a class="item" style="color: orange;" target="_blank">
-                          Search
-                      </a>
-                      <a href="/#/app/create_group" class="item"style="color: orange;"ng-click="popover.hide();">
-                         Create Group
-                      </a>
-                  </div>
-              </ion-content>
-          </ion-popover-view>
-      </script>-->
+        <div ng-if="addingInGroup==true"class="padding" align="center">
+            <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="doneAdding()">
+                Done
+            </a></div>
+
 
   </ion-content>
 </ion-view>

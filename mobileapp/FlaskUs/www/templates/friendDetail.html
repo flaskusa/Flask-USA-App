@@ -6,7 +6,7 @@
         </ion-nav-buttons>
     </ion-nav-bar>
   <ion-content class="text-center">
-    <div><img src="{{picUrl}}{{friend.uuid}}" class="list-thumbnail"  onError="this.src = 'img/default-profilepic.png'" /></div>
+    <div><img src="{{picUrl}}{{friend.uuid}}" class="list-thumbnail"  onError="this.src = 'img/default-profilepic-copy.png'"style="max-width: 210px" /></div>
     <div>
         <h2 class="eventNameCol" ng-bind-template="{{ friend.firstName }} {{friend.lastName}}"></h2>
         <p class="friend">{{friend.emailAddress}}</p>
@@ -17,16 +17,12 @@
             Send Message
         </button>
     </div>
+      <a style="text-decoration: none"ng-click="initializeMediatorId(friend.userId)">
     <div  align="center">
-        <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="blockFriend()">
-          Block
+        <button type="submit" nav-clear="" class="button button-block button-positive friend">
+        Add To Group
         </button>
-    </div>
-     <div  align="center">
-        <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="unFriend()">
-          Unfriend
-        </button>
-    </div>
+    </div></a>
       <script id="templates/sendMessage.html" type="text/ng-template">
             <ion-modal-view >
                 <ion-header-bar class="bar bar-header bar-positive black-header">
@@ -34,13 +30,13 @@
                     <button class="button button-clear button-primary" ng-click="closeSendMessagePopup()">X</button>
                 </ion-header-bar>
                 <ion-content class="padding">
-                    <div ng-if="messageSentStatus">Message Sent successfully </div>
+                    <div ng-if="messageSentStatus">Message sent successfully </div>
                     <div class="list">
                         <label class="item item-input">
                         <textarea ng-model="message.messageToSend" placeholder="" id="sendMessageTextArea" rows="10" autofocus placeholder="Write message to send..">
 
                         </textarea> </label>
-                        <button class="button button-full button-positive" ng-click="sendMessage(message.messageToSend)">Send </button>
+                        <button class="button button-full button-positive" ng-click="sendMessage(message.messageToSend)"style="color: #ff8c00">Send </button>
                     </div>
                 </ion-content>
             </ion-modal-view>
