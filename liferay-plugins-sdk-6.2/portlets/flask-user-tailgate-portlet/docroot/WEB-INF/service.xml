@@ -136,25 +136,6 @@
         </finder>    
    </entity>
    
-   <entity name="TailgateSupplyItem" local-service="true">
-        <column name="tailgateSupplyItemId" type="long" primary="true"></column>
-        <column name="supplyListItemName" type="String"></column>
-		
-		<!-- Foreign Key -->
-        <column name="tailgateId" type="long"></column>
-        <column name="itemAssignedUserId" type="long"></column>
-
-		<!-- Audit fields -->
-        <column name="companyId" type="long" />
-        <column name="userId" type="long" />
-        <column name="createdDate" type="Date"></column>
-        <column name="modifiedDate" type="Date"></column>
-        
-        <finder name="tailgateId" return-type="Collection">
-        	<finder-column name="tailgateId" />
-        </finder>    
-   </entity>
-   
       <entity name="TailgateMessageBoard" local-service="true">
         <column name="tailgateMessageId" type="long" primary="true"></column>
         <column name="messageText" type="String"></column>
