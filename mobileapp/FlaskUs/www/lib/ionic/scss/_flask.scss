@@ -256,6 +256,14 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
     text-decoration: none;
     font-weight: 700;
     font-size: larger;
+    width: 107%;
+    margin-left: -11px;
+    border-color: black;
+}
+
+.checkbox input:before, .checkbox .checkbox-icon:before{
+    border-color:black !important;
+    border-width:1px !important;
 }
 /* Empty. Add your own CSS if you like */
 
@@ -1378,3 +1386,62 @@ position:initial !important;
     background-repeat: no-repeat;
     background-position: center center;
     }
+
+     /*Plan now*/
+
+    .item.item-divider.plan_now{
+    width: 109%;
+    margin-left: -17px;
+    height: 15%;
+    margin-top: 5px;
+    background-color: black;
+    color: #F89734;
+    font-size: 19px;
+    font-weight: 400 !important;
+    }
+
+    .back_button_css:before{
+        font-size:26px !important;
+        margin-left: -2px;
+    }
+
+    .acc_settings1{
+    font-weight: bold;
+    font-size: 17px;
+    color: orange; 
+  }
+    .item-select.acc_settingsCol select {
+    position:initial !important;    
+    }
+
+    .header .col.acc_settingsCol {
+    background-color:black;
+    color: white;
+    font-size: 19px;
+    margin-right:-2px;
+    }
+
+    .col.acc_settingsCol {
+      border: solid 1px grey;
+      border-bottom-style: none;
+      border-right-style: none;
+      border-bottom: solid 1px grey;
+    }
+
+    .col.acc_settingsCol:last-child {
+      border-right: solid 1px grey;
+    }
+
+    .row:last-child .col.acc_settingsCol {
+      border-bottom: solid 1px grey;
+    }
+
+    label.item.item-icon-left.item-checkbox-right.item.item-checkbox.acc_table{
+    width: 3pc;
+    margin-left: -34px;
+    border-top: solid gray 2.5px;
+    border-left: transparent;
+    border-right: solid gray 1px;
+    border-bottom: solid gray 1px;
+    margin-bottom: 0px;
+}
