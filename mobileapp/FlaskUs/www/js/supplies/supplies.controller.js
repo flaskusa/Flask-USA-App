@@ -15,11 +15,6 @@
         $scope.userDataList=[];
         $scope.editList=false;
         $scope.addNewSupplies=false;
-        $ionicModal.fromTemplateUrl('templates/modal.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-        });
         $scope.addNewSuppliesList=function(){
             setTimeout(setFocus, 500);
             function setFocus(){

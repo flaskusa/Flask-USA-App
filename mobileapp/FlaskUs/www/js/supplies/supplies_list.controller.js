@@ -14,12 +14,7 @@
         $scope.addNewSuppliesItem=false;
 
         $scope.currListName = $stateParams.listName;
-
-        $ionicModal.fromTemplateUrl('templates/modal.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-        });
+        
         $scope.saveList2 = function(list) {
             if(list!=undefined||list!=undefined) {
                 $scope.listValue.unshift({
