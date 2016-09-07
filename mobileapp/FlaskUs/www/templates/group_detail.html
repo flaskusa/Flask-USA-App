@@ -36,12 +36,12 @@
                    <div class="col col-20">
                     <img src = "img/default-profilepic-copy.png"class="friendIcon">
                    </div>
-                    <div class="col col-70"style="padding-left: 28%;padding-top: 4px">
+                    <div class="col col-70"style="padding-top: 4px">
                  <h3 style="padding-left: 10px;font-size: 12px">{{ data.userName | uppercase}}</h3>
                     <i style="margin-left: 10px;color: orange">{{data.emailAddress}}</i></div>
                     <div>
-                    <span class="badge" ng-if="data.isAdmin==1"ng-init="data.checked=true"><i class="adminText">admin</i></span>
-                    <span class="badge " ng-if="data.isAdmin==0"ng-init="data.isAdminCheckBox=false"><i class="userText">user</i></span>
+                    <span class="badge"style="right: 12px;" ng-if="data.isAdmin==1"ng-init="data.checked=true"><i class="adminText">admin</i></span>
+                    <span class="badge" style="right: 12px;" ng-if="data.isAdmin==0"ng-init="data.isAdminCheckBox=false"><i class="userText">user</i></span>
                 </div>
                 </a>
                <ion-option-button  class="icon ion-trash-a"ng-click="removeMember(data,$index)"></ion-option-button>
