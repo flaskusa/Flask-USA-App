@@ -15,6 +15,11 @@
       $scope.searchBox = {show:false};
       $scope.searchContact = {"searchtext" :""};
       $scope.messsage = {'messsageToSend':''};
+        $scope.moreDataCanBeLoaded = true;
+        $scope.myFriendTab=function(){
+            $state.go("app.my_friends_tab.my_friends");
+            FriendsService.mediatorUserId=0;
+        }
         $scope.goBack = function () {
             $state.go("app.user_navigation_menu");
         }
@@ -26,12 +31,14 @@
       }; 
 
       $scope.showInviteFriendPopup = function(){
+          $scope.moreDataCanBeLoaded = true;
           $scope.searchUserContact('',$scope.startIndex, $scope.endIndex);
           $scope.modal.show();
       };
 
       $scope.closeInviteFriendPopup = function () {
           $scope.modal.hide();
+          $scope.moreDataCanBeLoaded = true;
           $scope.resetPopup();
       };
       $scope.resetPopup = function() {
@@ -57,6 +64,7 @@
             });
         };
       $scope.getMyFriends = function(searchText) {
+          $scope.moreDataCanBeLoaded = true;
           FriendsService.getMyFriends(searchText).then(function(response){
               if(response != undefined && Array.isArray(response))   {
                 $scope.myFriends = response;
@@ -85,12 +93,18 @@
            FriendsService.searchUserContact( $scope.searchContact.searchtext, $scope.startIndex, $scope.endIndex).then(function(response){
                 if(response != undefined && Array.isArray(response))   {
                         $scope.userContactList = response;
+                        if($scope.userContactList.length < 10) {
+                            $scope.moreDataCanBeLoaded = false;
+                        }else{
+                            $scope.moreDataCanBeLoaded = true;
+                        }
                         $scope.$broadcast('scroll.infiniteScrollComplete');
               }else{
                   $flaskUtil.alert("Failed to load contact List");
               }   
            });
       };
+
         $scope.unBlockUser = function(userObject) {
             FriendsService.unBlockUser(userObject.userId).then(function(response){
                 if(response != undefined)   {

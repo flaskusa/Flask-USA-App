@@ -979,6 +979,7 @@ button.button.button-clear.mini-button {
     font-weight: bold;
     margin-top: 4px;
     vertical-align: middle;
+   margin-left: auto;
     min-height: 27px;
     min-width: 32%;
     font-weight: normal;
@@ -1475,4 +1476,7 @@ position:initial !important;
     height: 70px;
     text-align: center;
   }
+}
+.emailText{
+  color: darkorange;
 }

@@ -3,8 +3,8 @@
     angular.module('flaskApp')
         .controller('FriendsGroupDetailCtrl', FriendsGroupDetailCtrl);
 
-    FriendsGroupDetailCtrl.$inject = ['$scope','GroupService','$stateParams','$state','$ionicModal','$ionicHistory','$ionicPopup'];
-    function FriendsGroupDetailCtrl($scope,GroupService,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup) {
+    FriendsGroupDetailCtrl.$inject = ['$scope','GroupService','$stateParams','$state','$ionicModal','$ionicHistory','$ionicPopup','$flaskUtil'];
+    function FriendsGroupDetailCtrl($scope,GroupService,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup,$flaskUtil) {
 
         $scope.groupTitle=$stateParams.groupName;
 
@@ -12,6 +12,7 @@
         $scope.groupId=GroupService.groupId;
         $scope.groupDetail=GroupService.groupDetail;
         $scope.editGroup=false;
+        $scope.groupAdminDetail=GroupService.groupAdminDetail;
         if(!$scope.groupDetail || $scope.groupDetail=="" ){
             $scope.editGroup=false;
         }else{
@@ -119,9 +120,14 @@
             });
             confirmPopup.then(function(res) {
                 if(res) {
-                    GroupService.deleteGroupUser($scope.groupId,data.userId).then(function(response){
-                        $scope.allMember.splice(index,1);
-                    });
+                    if(data.userName!=$scope.groupAdminDetail) {
+                        GroupService.deleteGroupUser($scope.groupId, data.userId).then(function (response) {
+                            $scope.allMember.splice(index, 1);
+                        });
+                    }else{
+                        $flaskUtil.alert(data.userName +" can't be removed")
+                        }
+
                 } else {
                 }
             });

@@ -18,29 +18,31 @@
         }
         $scope.addFriendToGroup=function(index,groupId){
             $scope.isGroupMemberIsAvailable=false;
+            GroupService.getMyFriendList().then(function(resopnse) {
+                $scope.userContactList = resopnse;
+            });
             GroupService.getAllGroupMember(groupId).then(function(response){
                 $scope.allMember=response;
                 angular.forEach( $scope.allMember,function(value,key){
                   if(value.userId==$scope.userId){
                       $scope.isGroupMemberIsAvailable=true;
-                      $flaskUtil.alert("this is already in this group")
+                      $flaskUtil.alert("user is already in this group")
                   }
                 });
                 if($scope.isGroupMemberIsAvailable==false){
-                    GroupService.getMyFriendList().then(function(resopnse) {
-                        $scope.userContactList = resopnse;
-                    });
-                    angular.forEach($scope.userContactList,function(value,key){
-                        if(value.userId==$scope.userId){
-                            $scope.matchedUser=value;
-                            $scope.addUserToGroup();
-                        }
-                    });
                     $scope.addUserToGroup=function(){
                         GroupService.addUserToGroup(groupId, $scope.matchedUser.emailAddress, $scope.matchedUser.userId, $scope.matchedUser.fullName, 0).then(function (response) {
                             $flaskUtil.alert("user added");
                         });
                     }
+                    angular.forEach($scope.userContactList,function(value,key){
+                        if(value.userId==$scope.userId){
+                            $scope.matchedUser=value;
+                            $scope.addUserToGroup();
+                            return false;
+                        }
+                    });
+
 
 
                 }
@@ -192,7 +194,9 @@
             $scope.modal.hide();
             $state.go('app.my_friends_tab.friendsGroup');
         }
-
+        $scope.cancel=function(){
+            $state.go('app.my_friends_tab.friendsGroup');
+        }
     }
 
 })();

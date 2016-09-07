@@ -31,14 +31,14 @@
               </div>
                   <div>
               <h3>{{group.groupName}}</h3>
-              <div style="color: darkorange;">{{group.groupDescription}}</div>
+              <div class="emailText">{{group.groupDescription}}</div>
 
               </div>
               <div class="col-20"ng-if="addingInGroup==false">
               <span class="badge span_icon"style="top:20px"><img src="img/flask_icons/arrow_left.svg"class="arrowIconAlign" ></span>
               </div>
                   <div class="col-20"ng-if="addingInGroup==true">
-                <span class="badge span_icon"style="top:6px"> <label class="checkbox"class="labelCheckBox">
+                <span class="badge span_icon "style="top:7px;right:10px;"> <label class="checkbox"class="labelCheckBox">
             <input  type="checkbox"ng-click="addFriendToGroup($index,group.groupId)">
                 </label></span>
                   </div>

@@ -14,7 +14,7 @@
         $scope.addNewSuppliesItem=false;
 
         $scope.currListName = $stateParams.listName;
-        
+
         $scope.saveList2 = function(list) {
             if(list!=undefined||list!=undefined) {
                 $scope.listValue.unshift({

@@ -19,9 +19,6 @@
             <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="updateGroup(groupDetail.groupName,groupDetail.groupDescription)">
                 Save
             </a>
-        <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="doneEditing()">
-            Done
-        </a>
     </div>
     </div>
         <a class="item item-full list-item-icon-left "ng-click="showInviteFriendPopup()">
@@ -55,7 +52,7 @@
             <ion-modal-view >
                 <ion-header-bar class="bar bar-header bar-positive black-header">
                     <h1 class="title">ADD MEMBER</h1>
-                    <button class="button button-clear button-primary" ng-click="closeInviteFriendPopup()">X</button>
+                    <button class="button button-clear button-primary" ng-click="finishAddingMember()">X</button>
                 </ion-header-bar>
                 <div class="bar bar-subheader">
                     <div class="row">
@@ -70,7 +67,7 @@
                 <ion-content class="padding has-subheader">
                     <ion-list>
                         <ion-item ng-repeat="data in memberToAddInGroup track by $index" class="item-avatar " item="data"class="row">
-                            <img src = "img/default-profilepic.png">
+                            <img src = "img/default-profilepic-copy.png">
                             <h2>{{ data.fullName | uppercase}}</h2>
                             <p>{{ data.emailAddress}}</p>
                           <span class="badge"style="right: 7px"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons "ng-click="addUserToGroup(data)"></span>
