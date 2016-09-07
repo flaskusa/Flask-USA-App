@@ -48,7 +48,7 @@
                                     </td>
                                     <td><a href="geo:{{parameter.addrLine1}}" class="addressLink">{{parameter.addrLine1}}</a></td>
                                 </tr>
-                                <tr></tr>
+                                
                             </tbody>
                         </table>
                     </div>
@@ -57,12 +57,12 @@
                         <b>Flask us:</b><br>
                             {{parameter.infoDesc}}
                         </font>
-                    </div>
+                    </div> <div style="text-align:right"><button id="takemethere" > Take me there</button> </div>
                 </div>
             </div>
          </script>
         <ion-tabs class="tabs-positive tab_bottom">
-            <ion-tab title="PARKING" class="{{infoTypeName != 'Pre-Event' ? 'hide':''}}" ng-click="selectTab(0)">
+            <ion-tab title="PARKING"  ng-click="selectTab(0)" class="{{infoTypeName != 'Pre-Event' ? 'hide':''}}">
                 <div id="map_canvas" style="height:100%;width:100%">
                     <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options"  idkey="id" control="map.control">
                         <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->

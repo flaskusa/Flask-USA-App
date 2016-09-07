@@ -3,14 +3,14 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', 'mapServices'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady','$flaskUtil'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, mapServices) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady,$flaskUtil) {
         /* jshint validthis: true */
         var self = this;
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15, control: {} };
-        $scope.options = { scrollwheel: false ,disableDefaultUI:true,zoomControl:true,streetViewControl:true};
+        $scope.options = { scrollwheel: false, disableDefaultUI: true, zoomControl: true, streetViewControl: true};
         $scope.parkingMarkers = [];
         $scope.barMarkers = [];
         $scope.nightLifes = [];
@@ -48,21 +48,22 @@
         $scope.isBarGoogleMarkerShown = false;
         $scope.isNightLifeFlaskMarkerShown = true;
         $scope.isNightLifeGoogleMarkerShown = false;
-        $scope.flaskMarker;
-        $scope.googleMarker;
-        $scope.currentLoacation;
+        $scope.currentMap;
+        $scope.currentUserLocation;
 
-
-        // $scope.searchbox = {
-        //     template: 'searchbox.tpl.html',
-        //     events: {
-        //         places_changed: function (searchBox) { }
-        //     },
-        //     options: { bounds: $scope.markers, autocomplete: true }
-        // }
         $scope.onClick = function (marker, eventName, model) {
             model.show = !model.show;
+            $scope.currentShownInfoWindow = marker;
+            setTimeout(setInfoWindowEvent, 1000);
         };
+        function setInfoWindowEvent() {
+            document.getElementById("takemethere").addEventListener("click", takeMeToPlace);
+        }
+
+        $scope.isHidden = function() {
+            console.log("11111111");
+            return true;
+        }
         // initMap();
         uiGmapGoogleMapApi.then(function (maps) {
             maps.visualRefresh = true;
@@ -80,26 +81,26 @@
             $scope.nightLifeFlaskMarkerOptions.visible = true;
             $scope.nightLifeGoogleMarkerOptions.animation = maps.Animation.DROP;
             $scope.nightLifeGoogleMarkerOptions.visible = false;
-
-
         })
 
         uiGmapIsReady.promise()
             .then(function (maps) {
-                $scope.currentLoacation = $scope.map.control.getGMap();
+                $scope.currentMap = $scope.map.control.getGMap();
                 var map2 = maps[0].map;
-                //mapServices.map_control($scope.map.control);
-                getGoogleMarkers($scope.currentLoacation, $scope.infoTypeName);
+                getGoogleMarkers($scope.currentMap, $scope.infoTypeName);
+                $scope.setUserLocation();
             });
-        // uiGmapIsReady.promise(1).then(function (instances) {
-        //     instances.forEach(function (inst) {
-        //         var map = inst.map;
-        //         $scope.currentPosition = map.center;
-        //         var uuid = map.uiGmap_id;
-        //         var mapInstanceNumber = inst.instance; // Starts at 1.
-        //         //getGoogleMarkers(map);
-        //     });
-        // });
+
+        $scope.setUserLocation = function () {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    $scope.currentUserLocation = position;
+                },
+                function errorCallback(error) {
+                   $flaskUtil.alert("can't found user current location");
+                }
+            );
+        }
         function initEventData() {
             try {
                 $scope.eventDetails = $stateParams.eventDetails.Details;
@@ -157,7 +158,7 @@
             $scope.request.types = ['bar', 'restaurant'];
             $scope.service.nearbySearch($scope.request, setGoogleBarMarker);
         }
-        function setGoogleNightLifeMarker (results, status) {
+        function setGoogleNightLifeMarker(results, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (var i = 0; i < results.length; i++) {
                     var place = results[i];
@@ -180,31 +181,8 @@
                     createGoogleBarMarker(place);
                 }
             }
-
         }
-        // function getGoogleParkingMarkers(map, type) {
-        //     var service = new google.maps.places.PlacesService(map);
-        //     var pyrmont = new google.maps.LatLng(map.center.lat(), map.center.lng());
-        //     var request = {
-        //         location: pyrmont,
-        //         radius: '2000'
-        //     }
-        //     if (type === 'parking') {
-        //         request.types = ['parking'];
-        //     } else if (type === 'bars') {
-        //         request.types = ['parking', 'restaurant'];
-        //     }
-        //     service.nearbySearch(request, googleParkingCallBack);
-        // }
 
-        // function googleParkingCallBack(results) {
-        //     if (status == google.maps.places.PlacesServiceStatus.OK) {
-        //         for (var i = 0; i < results.length; i++) {
-        //             var place = results[i];
-        //             createMarker(place);
-        //         }
-        //     }
-        // }
         function createGoogleBarMarker(place) {
             var marker = {};
             marker.id = place.id;
@@ -222,7 +200,7 @@
             };
             $scope.barsGoogleMarkers.push(marker);
         }
-        function createGoogleNightLifeMarker (place) {
+        function createGoogleNightLifeMarker(place) {
             var marker = {};
             marker.id = place.id;
             marker.icon = "img/map_icons/google-map-pin.png";
@@ -269,6 +247,24 @@
                 type: "FLASK"
             };
         };
+
+        function takeMeToPlace() {
+            var slat = $scope.currentUserLocation.coords.latitude;
+            var slng = $scope.currentUserLocation.coords.longitude;
+            var dlat = $scope.currentShownInfoWindow.position.lat();
+            var dlng = $scope.currentShownInfoWindow.position.lng();
+            if(navigator.platform) {
+            if ((navigator.platform.indexOf("iPhone") != -1)
+                || (navigator.platform.indexOf("iPod") != -1)
+                || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("android") != -1))
+                window.open("maps://maps.google.com/maps?saddr=" + slat + "," + slng + "&daddr=" + dlat + "," + dlng + " ", "_system");
+            else {
+                window.open("http://maps.google.com/maps?saddr=" + slat + "," + slng + "&daddr=" + dlat + "," + dlng + " ", "_system");
+                }
+            } else {
+                flaskUtil.alert("falied to get your location");
+            }
+        }
         $scope.selectFlaskMarker = function () {
             $scope.isFlaskMarkerShown = !$scope.isFlaskMarkerShown;
             if ($scope.isFlaskMarkerShown) {
@@ -314,7 +310,7 @@
             }
         }
         $scope.selectNightLifeFlaskMarker = function () {
-             $scope.isNightLifeFlaskMarkerShown = !$scope.isNightLifeFlaskMarkerShown;
+            $scope.isNightLifeFlaskMarkerShown = !$scope.isNightLifeFlaskMarkerShown;
             if ($scope.isNightLifeFlaskMarkerShown) {
                 $scope.nightLifeFlaskMarkerOptions.visible = true;
                 angular.forEach($scope.nightLifeFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
