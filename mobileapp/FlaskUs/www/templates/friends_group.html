@@ -24,6 +24,9 @@
             <p class="addText">CREATE GROUP</p>
         </a>
       <ion-list >
+          <a class="item" ng-if="groups.length == 0 && addingInGroup==true"> there are no more Group to add </a>
+          <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> there are no Group, please create </a>
+
           <ion-item class=" item-remove-animate"ng-repeat="group in groups | filter: groupList.searchString"style="padding: 0px">
               <a  class="itemAnchor"ng-click="getGroupDetail(group)">
               <div class="col-20">

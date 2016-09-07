@@ -1491,4 +1491,45 @@ position:initial !important;
     padding-right:79px;
 
   }
+
+}
+.friendButtonStyle{
+  width: 108px;
+  right: 1px;
+  padding-left: auto;
+  padding-left: 33px;
+  /* background-color: darkcyan; */
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  border-color: ghostwhite;
+  /* background-color: white; */
+  border: 1px;
+  font-weight: 400;
+}
+.requestFriendButtonStyle{
+  width: 108px;
+  right: 1px;
+  padding-left: auto;
+  padding-left: 15px;
+  disabled:true;
+  cursor: not-allowed;
+  opacity:.5;
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  border-color: ghostwhite;
+  border: 1px;
+  font-weight: 400;
+}
+.addFriendButtonStyle{
+  padding-left:20px;
+}
+.unblockButtonStyle{
+  padding-left: 30px;
+}
+.invitationText{
+  font-size: 12px;
+  padding-top: 4px;
+  font-weight: 500;
+  color:black
+}
+.item .badge.ext-top{
+  top:21px;
 }

@@ -36,10 +36,10 @@
                     <div class="col col-20">
                         <img src = "img/default-profilepic-copy.png"class="friendIcon">
                     </div>
-                    <div class="col col-70"style="padding-top: 12px">
+                    <div class="col col-70"style="padding-top: 16px">
                         <h3 class="nameText">{{ data.fullName | uppercase}}</h3>
                        </div>
-                    <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg" ></span>
+                    <span class="badge span_icon ext-top"><img src="img/flask_icons/arrow_left.svg" ></span>
                 </a>
                 <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. Please search and add friends </a>
 
@@ -80,16 +80,17 @@
                     </div>
                 </div>
                 <ion-content class="padding has-subheader">
-                            <ion-list> 
+                            <ion-list>
                                 <ion-item ng-repeat="data in userContactList track by $index" class="item-avatar " item="data">
+
                                     <img src = "img/default-profilepic-copy.png">
-                                    <h2>{{ data.fullName | uppercase}}</h2>
+                                    <i class="invitationText">{{ data.fullName | uppercase}}</i>
                                     <p>{{ data.emailAddress}}</p>
 
-                                    <button class="button button-clear mini-button badge ext-right " ng-if="!data.connectionRequested && !data.block &&  !data.connected" ng-click="sendFriendRequest(data)"><i class="emailText">Add Friend </i></button>
-                                    <button class="button button-clear mini-button badge ext-right" ng-if="data.connectionRequested" disabled><i class="emailText">Request Sent</i> </button>
-                                    <button class="button button-clear mini-button badge ext-right" ng-if="data.block" ng-click="unBlockUser(data)"><i class="emailText">Unblock </i></button>
-                                    <button class="button button-clear mini-button badge ext-right" ng-if="data.connected" disabled><i class="emailText">Friend</i> </button>
+                                    <button class=" badge ext-right friendButtonStyle addFriendButtonStyle" ng-if="!data.connectionRequested && !data.block &&  !data.connected" ng-click="sendFriendRequest(data)"><i class="emailText">Add Friend </i></button>
+                                    <button class=" badge ext-right requestFriendButtonStyle " ng-if="data.connectionRequested"><i class="emailText">Request Sent</i> </button>
+                                    <button class="badge ext-right friendButtonStyle unblockButtonStyle" ng-if="data.block" ng-click="unBlockUser(data)"><i class="emailText">Unblock </i></button>
+                                    <button class="badge ext-right friendButtonStyle " ng-if="data.connected" disabled><i class="emailText">Friend</i> </button>
                                 </ion-item>
                             </ion-list>
                             <ion-infinite-scroll on-infinite="getMoreUserContact(searchContact.searchtext)" distance="10%" ng-if="moreDataCanBeLoaded==true"></ion-infinite-scroll>
