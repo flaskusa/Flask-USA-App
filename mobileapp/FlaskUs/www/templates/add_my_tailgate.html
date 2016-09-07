@@ -11,41 +11,59 @@
                     <div class="list">
                         <div class="item item-input item-floating-label">
                             <span class="input-label" style="margin-left: -6%;">Tailgate Name</span>
-                            <input type="text" placeholder="Tailgate Name" name="TailgateName" class="form-control" ng-model="slide1.TailgateName" required>
+                            <input type="text" placeholder="Tailgate Name" name="TailgateName" class="form-control" ng-model="addTailgateParams.tailgateName" required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label" style="margin-left: -6%;">Description:</span>
-                            <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="slide1.Description" required>
+                            <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="addTailgateParams.tailgateDescription" required>
                         </div>
                         <div class="item item-input">
-                            <select id="eventnames" name="eventnames" class="" ng-model="slide1.eventnames" style="width: 95%;padding: 10px;">
-                                <option ng:repeat="eventName in eventNames" value="{{eventName.eventId}}">
-                                    {{eventName.eventName}}
+                            <select id="eventnames" name="eventnames" class="" ng-model="addTailgateParams.eventnames" style="width: 95%;padding: 10px;">
+                                <option ng-repeat="data in eventNames" value="{{data.eventId}}">
+                                    {{data.eventName}}
                                 </option>
                             </select>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label" style="margin-left: -6%;">Event date</span>
-                            <input type="date" placeholder="Event date" class="form-control" ng-model="slide1.Eventdate" name="Eventdate" required>
+                            <input type="date" placeholder="Event date" class="form-control" ng-model="addTailgateParams.tailgateDate" name="Eventdate" required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label" style="margin-left: -6%;">Start Time</span>
-                            <input type="time" placeholder="Start Time" class="form-control" ng-model="slide1.StartTime" name="StartTime" required>
+                            <input type="time" placeholder="Start Time" class="form-control" ng-model="addTailgateParams.startTime" name="StartTime" required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label" style="margin-left: -6%;">End Time</span>
-                            <input type="time" placeholder="End Time" class="form-control" ng-model="slide1.EndTime" name="EndTime" required>
+                            <input type="time" placeholder="End Time" class="form-control" ng-model="addTailgateParams.endTime" name="EndTime" required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Venmo Account:</span>
-                            <input type="email" placeholder="Venmo Account" class="form-control" ng-model="slide1.VenmoAccount" name="VenmoAccount" required>
+                            <input type="email" placeholder="Venmo Account" class="form-control" ng-model="addTailgateParams.venmoAccountId" name="VenmoAccount" required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label" style="margin-left: -6%;">Amount</span>
-                            <input type="Number" placeholder="Amount" name="Amount" ng-model="slide1.Amount">
+                            <input type="Number" placeholder="Amount" name="Amount" ng-model="addTailgateParams.amountToPay">
+                        </div>
+                        <div class="list card">
+
+                            <div class="item">
+                                <h4>Double tap on Map to Drop a New Marker</h4>
+                                <ui-gmap-google-map center='map.center' zoom='map.zoom' aria-label="Google map">
+
+                                    <ui-gmap-marker ng-repeat="" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                                        <ui-gmap-window>
+                                        </ui-gmap-window>
+                                    </ui-gmap-marker>
+
+                                </ui-gmap-google-map>
+                            </div>
+
+                            <div class="item item-image">
+                                <div id="map_canvas"></div>
+                            </div>
                         </div>
                         <div class="padding" align="center">
-                            <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="addmyTailgate(slide1);">
+                            <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="addmyTailgate(addTailgateParams);">
                                 Save
                             </button>
                             <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/my_tailgate">
