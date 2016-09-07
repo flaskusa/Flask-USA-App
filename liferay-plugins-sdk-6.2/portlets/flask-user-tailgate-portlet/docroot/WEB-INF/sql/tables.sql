@@ -1,6 +1,7 @@
 create table flasktailgate_SupplyItem (
 	supplyItemId LONG not null primary key,
 	supplyItemName VARCHAR(75) null,
+	supplyListId LONG,
 	createdDate DATE null,
 	modifiedDate DATE null
 );
@@ -8,7 +9,7 @@ create table flasktailgate_SupplyItem (
 create table flasktailgate_SupplyList (
 	supplyListId LONG not null primary key,
 	supplyListName VARCHAR(75) null,
-	isSytem BOOLEAN,
+	isSystem BOOLEAN,
 	companyId LONG,
 	userId LONG,
 	createdDate DATE null,
@@ -53,6 +54,16 @@ create table flasktailgate_TailgateMarker (
 	longitude VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description VARCHAR(75) null
+);
+
+create table flasktailgate_TailgateMessageBoard (
+	tailgateMessageId LONG not null primary key,
+	messageText VARCHAR(75) null,
+	tailgateId LONG,
+	companyId LONG,
+	userId LONG,
+	createdDate DATE null,
+	modifiedDate DATE null
 );
 
 create table flasktailgate_TailgateSupplyItem (

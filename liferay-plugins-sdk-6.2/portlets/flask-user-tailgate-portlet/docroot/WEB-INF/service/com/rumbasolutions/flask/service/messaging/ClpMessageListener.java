@@ -28,6 +28,8 @@ import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateInfoServiceUtil;
 import com.rumbasolutions.flask.service.TailgateMarkerLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateMarkerServiceUtil;
+import com.rumbasolutions.flask.service.TailgateMessageBoardLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateMessageBoardServiceUtil;
 import com.rumbasolutions.flask.service.TailgateSupplyItemLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateSupplyItemServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersLocalServiceUtil;
@@ -63,6 +65,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			TailgateMarkerLocalServiceUtil.clearService();
 
 			TailgateMarkerServiceUtil.clearService();
+			TailgateMessageBoardLocalServiceUtil.clearService();
+
+			TailgateMessageBoardServiceUtil.clearService();
 			TailgateSupplyItemLocalServiceUtil.clearService();
 
 			TailgateSupplyItemServiceUtil.clearService();

@@ -11,6 +11,7 @@
 		<attributes>
 			<id name="supplyItemId" />
 			<basic name="supplyItemName" />
+			<basic name="supplyListId" />
 			<basic name="createdDate">
 				<temporal>TIMESTAMP</temporal>
 			</basic>
@@ -26,7 +27,7 @@
 		<attributes>
 			<id name="supplyListId" />
 			<basic name="supplyListName" />
-			<basic name="isSytem" />
+			<basic name="isSystem" />
 			<basic name="companyId" />
 			<basic name="userId" />
 			<basic name="createdDate">
@@ -105,6 +106,25 @@
 			<transient name="primaryKeyObj" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.TailgateMessageBoardModelImpl">
+		<attributes>
+			<id name="tailgateMessageId" />
+			<basic name="messageText" />
+			<basic name="tailgateId" />
+			<basic name="companyId" />
+			<basic name="userId" />
+			<basic name="createdDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="modifiedDate">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.rumbasolutions.flask.model.impl.TailgateSupplyItemModelImpl">
 		<attributes>
 			<id name="tailgateSupplyItemId" />
@@ -163,6 +183,10 @@
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.TailgateMarkerImpl" name="TailgateMarker">
 		<table name="flasktailgate_TailgateMarker" />
+		<attributes />
+	</entity>
+	<entity class="com.rumbasolutions.flask.model.impl.TailgateMessageBoardImpl" name="TailgateMessageBoard">
+		<table name="flasktailgate_TailgateMessageBoard" />
 		<attributes />
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.TailgateSupplyItemImpl" name="TailgateSupplyItem">

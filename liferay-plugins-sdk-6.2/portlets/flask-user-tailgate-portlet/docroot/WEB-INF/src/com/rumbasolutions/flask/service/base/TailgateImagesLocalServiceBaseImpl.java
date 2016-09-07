@@ -40,6 +40,7 @@ import com.rumbasolutions.flask.service.persistence.TailgateInfoFinder;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoPersistence;
 import com.rumbasolutions.flask.service.persistence.TailgateMarkerFinder;
 import com.rumbasolutions.flask.service.persistence.TailgateMarkerPersistence;
+import com.rumbasolutions.flask.service.persistence.TailgateMessageBoardPersistence;
 import com.rumbasolutions.flask.service.persistence.TailgateSupplyItemPersistence;
 import com.rumbasolutions.flask.service.persistence.TailgateUsersFinder;
 import com.rumbasolutions.flask.service.persistence.TailgateUsersPersistence;
@@ -612,6 +613,63 @@ public abstract class TailgateImagesLocalServiceBaseImpl
 	}
 
 	/**
+	 * Returns the tailgate message board local service.
+	 *
+	 * @return the tailgate message board local service
+	 */
+	public com.rumbasolutions.flask.service.TailgateMessageBoardLocalService getTailgateMessageBoardLocalService() {
+		return tailgateMessageBoardLocalService;
+	}
+
+	/**
+	 * Sets the tailgate message board local service.
+	 *
+	 * @param tailgateMessageBoardLocalService the tailgate message board local service
+	 */
+	public void setTailgateMessageBoardLocalService(
+		com.rumbasolutions.flask.service.TailgateMessageBoardLocalService tailgateMessageBoardLocalService) {
+		this.tailgateMessageBoardLocalService = tailgateMessageBoardLocalService;
+	}
+
+	/**
+	 * Returns the tailgate message board remote service.
+	 *
+	 * @return the tailgate message board remote service
+	 */
+	public com.rumbasolutions.flask.service.TailgateMessageBoardService getTailgateMessageBoardService() {
+		return tailgateMessageBoardService;
+	}
+
+	/**
+	 * Sets the tailgate message board remote service.
+	 *
+	 * @param tailgateMessageBoardService the tailgate message board remote service
+	 */
+	public void setTailgateMessageBoardService(
+		com.rumbasolutions.flask.service.TailgateMessageBoardService tailgateMessageBoardService) {
+		this.tailgateMessageBoardService = tailgateMessageBoardService;
+	}
+
+	/**
+	 * Returns the tailgate message board persistence.
+	 *
+	 * @return the tailgate message board persistence
+	 */
+	public TailgateMessageBoardPersistence getTailgateMessageBoardPersistence() {
+		return tailgateMessageBoardPersistence;
+	}
+
+	/**
+	 * Sets the tailgate message board persistence.
+	 *
+	 * @param tailgateMessageBoardPersistence the tailgate message board persistence
+	 */
+	public void setTailgateMessageBoardPersistence(
+		TailgateMessageBoardPersistence tailgateMessageBoardPersistence) {
+		this.tailgateMessageBoardPersistence = tailgateMessageBoardPersistence;
+	}
+
+	/**
 	 * Returns the tailgate supply item local service.
 	 *
 	 * @return the tailgate supply item local service
@@ -953,6 +1011,12 @@ public abstract class TailgateImagesLocalServiceBaseImpl
 	protected TailgateMarkerPersistence tailgateMarkerPersistence;
 	@BeanReference(type = TailgateMarkerFinder.class)
 	protected TailgateMarkerFinder tailgateMarkerFinder;
+	@BeanReference(type = com.rumbasolutions.flask.service.TailgateMessageBoardLocalService.class)
+	protected com.rumbasolutions.flask.service.TailgateMessageBoardLocalService tailgateMessageBoardLocalService;
+	@BeanReference(type = com.rumbasolutions.flask.service.TailgateMessageBoardService.class)
+	protected com.rumbasolutions.flask.service.TailgateMessageBoardService tailgateMessageBoardService;
+	@BeanReference(type = TailgateMessageBoardPersistence.class)
+	protected TailgateMessageBoardPersistence tailgateMessageBoardPersistence;
 	@BeanReference(type = com.rumbasolutions.flask.service.TailgateSupplyItemLocalService.class)
 	protected com.rumbasolutions.flask.service.TailgateSupplyItemLocalService tailgateSupplyItemLocalService;
 	@BeanReference(type = com.rumbasolutions.flask.service.TailgateSupplyItemService.class)

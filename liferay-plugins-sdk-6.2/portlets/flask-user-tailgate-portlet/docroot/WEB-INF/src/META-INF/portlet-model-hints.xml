@@ -25,13 +25,14 @@
 	<model name="com.rumbasolutions.flask.model.SupplyItem">
 		<field name="supplyItemId" type="long" />
 		<field name="supplyItemName" type="String" />
+		<field name="supplyListId" type="long" />
 		<field name="createdDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.SupplyList">
 		<field name="supplyListId" type="long" />
 		<field name="supplyListName" type="String" />
-		<field name="isSytem" type="Boolean" />
+		<field name="isSystem" type="boolean" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="createdDate" type="Date" />
@@ -83,6 +84,15 @@
 		<field name="longitude" type="String" />
 		<field name="name" type="String" />
 		<field name="description" type="String" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.TailgateMessageBoard">
+		<field name="tailgateMessageId" type="long" />
+		<field name="messageText" type="String" />
+		<field name="tailgateId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createdDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.TailgateSupplyItem">
 		<field name="tailgateSupplyItemId" type="long" />

@@ -7,6 +7,7 @@
 	<import class="com.rumbasolutions.flask.model.TailgateImages" />
 	<import class="com.rumbasolutions.flask.model.TailgateInfo" />
 	<import class="com.rumbasolutions.flask.model.TailgateMarker" />
+	<import class="com.rumbasolutions.flask.model.TailgateMessageBoard" />
 	<import class="com.rumbasolutions.flask.model.TailgateSupplyItem" />
 	<import class="com.rumbasolutions.flask.model.TailgateUsers" />
 	<class name="com.rumbasolutions.flask.model.impl.SupplyItemImpl" table="flasktailgate_SupplyItem">
@@ -15,6 +16,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="supplyItemName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="supplyListId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="createdDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 	</class>
@@ -24,7 +26,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="supplyListName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
-		<property name="isSytem" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="isSystem" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="createdDate" type="org.hibernate.type.TimestampType" />
@@ -75,6 +77,18 @@
 		<property name="longitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.TailgateMessageBoardImpl" table="flasktailgate_TailgateMessageBoard">
+		<cache usage="read-write" />
+		<id name="tailgateMessageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="messageText" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="tailgateId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="createdDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.TailgateSupplyItemImpl" table="flasktailgate_TailgateSupplyItem">
 		<cache usage="read-write" />

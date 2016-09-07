@@ -95,11 +95,14 @@
     <entity name="SupplyList" local-service="true">
         <column name="supplyListId" type="long" primary="true"></column>
         <column name="supplyListName" type="String"></column>
-        <column name="isSytem" type="Boolean"></column>
+        <column name="isSystem" type="boolean"></column>
         <column name="companyId" type="long" />
         <column name="userId" type="long" />
         <column name="createdDate" type="Date"></column>
         <column name="modifiedDate" type="Date"></column>
+        <finder name="userId" return-type="Collection">
+        	<finder-column name="userId" />
+        </finder>   
     </entity>
 
     <entity name="SupplyItem" local-service="true">
@@ -107,11 +110,8 @@
         <column name="supplyItemName" type="String"></column>
         <!-- Foreign Key -->
         <column name="supplyListId" type="long"></column>
-        
-
         <column name="createdDate" type="Date"></column>
         <column name="modifiedDate" type="Date"></column>
-        
         <finder name="supplyListId" return-type="Collection">
         	<finder-column name="supplyListId" />
         </finder> 
