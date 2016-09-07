@@ -5,22 +5,35 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content>
-
 <div ng-if="editGroup==true">
-        <div class="item item-input item-floating-label">
-            <span class="input-label"style="margin-left:-10px;" >Group Name</span>
-            <input type="text" placeholder="Group Name" name="GroupName" class="form-control" ng-model="groupDetail.groupName" required>
+    <form name="create_group_form" class="loginpane form_div" novalidate  ng-submit="create_group_form.$valid && updateGroup(groupDetail.groupName,groupDetail.groupDescription)">
+        <div class="loginpane_body">
+            <div class="list">
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Group Name</span>
+                    <input type="text" placeholder="Group name" class="form-control loginInputs" ng-model="groupDetail.groupName" name="GroupName" required>
+                    <div ng-show="create_group_form.$submitted || create_group_form.GroupName.$touched">
+                        <span ng-show="create_group_form.GroupName.$error.required" class="error_msg">Enter group name</span>
+                    </div>
+                </label>
+
+                <label class="item item-input item-floating-label">
+                    <span class="input-label">Description</span>
+                    <input type="text" placeholder="Description" class="form-control loginInputs" ng-model="groupDetail.groupDescription" name="Description" required>
+                    <div ng-show="create_group_form.$submitted || create_group_form.Description.$touched">
+                        <span ng-show="create_group_form.Description.$error.required" class="error_msg">Enter Description</span>
+                    </div>
+                </label>
+
+            </div>
+            <div class="padding" align="center">
+                <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
+                    Save
+                </button>
+            </div>
         </div>
-        <div class="item item-input item-floating-label">
-            <span class="input-label" style="margin-left: -10px;">Description:</span>
-            <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="groupDetail.groupDescription" required>
-        </div>
-        <div class="padding" align="center">
-            <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="updateGroup(groupDetail.groupName,groupDetail.groupDescription)">
-                Save
-            </a>
-    </div>
-    </div>
+    </form>
+</div>
         <a class="item item-full list-item-icon-left "ng-click="showInviteFriendPopup()">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">ADD MEMBER</p>

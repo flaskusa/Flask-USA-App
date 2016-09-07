@@ -16,6 +16,11 @@
       $scope.searchContact = {"searchtext" :""};
       $scope.messsage = {'messsageToSend':''};
         $scope.moreDataCanBeLoaded = true;
+        $ionicModal.fromTemplateUrl('templates/modal.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.modal = modal;
+        });
         $scope.myFriendTab=function(){
             $state.go("app.my_friends_tab.my_friends");
             FriendsService.mediatorUserId=0;
@@ -129,11 +134,7 @@
               }   
            });
         };
-      $ionicModal.fromTemplateUrl('templates/modal.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-        });
+
 
       
         $scope.initialize();
