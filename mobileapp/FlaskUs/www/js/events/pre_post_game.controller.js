@@ -31,11 +31,17 @@
             EventsService.getEventByEventId($scope.currEventId).then(function (respData) {
                 console.log(respData.data.eventDate);
                 $scope.currVenueName = respData.data.venueName;
-                $scope.currEventDate = respData.data.eventDate;	
+                $scope.currEventDate = respData.data.eventDate;
+                $scope.currEventName = $stateParams.eventName;
             })
         }
-        $scope.preEvent = function(pre){
-            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: pre });
+       $scope.preEvent = function (pre) {
+           if (pre == "Tickets") {
+               $state.go("app.tickets", { venueName: $scope.currVenueName, eventDate: $scope.currEventDate, eventName: $scope.currEventName, infoType: PRE_EVENT, infoTypeCategory: pre });
+           }
+           else {
+               $state.go("app.event_map_view", { eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: pre });
+           }
         }
         $scope.atEvent = function(during){
             $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: AT_EVENT, infoTypeCategory: during });
@@ -79,8 +85,8 @@
                 if ($scope.During_Game.length == 0) {
                     $scope.During_Game.push("No_Event");
                 }
-                if ($scope.Pre_Game.length == 0) {
-                    $scope.Pre_Game.push("No_Event");
+                if ($scope.Pre_Game.length >= 0) {
+                    $scope.Pre_Game.push("Tickets");
                 }
             });
 
@@ -111,11 +117,13 @@
                     case "Liquor store":
                         return 'flask_restaurantBar_post.jpg';
                     case "Venue info":
-                        return 'venue_info.jpg'
+                        return 'venue_info.jpg';
                     case "Venue map":
-                        return 'Venue_map.jpg'
+                        return 'Venue_map.jpg';
                     case "Flask Us":
-                        return 'Flask_FlaskUs.jpg'
+                        return 'Flask_FlaskUs.jpg';
+                    case "Tickets":
+                        return 'tickets.jpg';
                     default:
                         return 'Flask_Default_Image.jpg';
                 }
