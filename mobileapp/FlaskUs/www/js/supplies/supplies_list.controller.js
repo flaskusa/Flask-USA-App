@@ -21,15 +21,14 @@
                     itemName: list
                 });
                 $scope.addNewSuppliesItem = false;
-            }
-            else{
-                setTimeout(setFocus, 500);
+            }else{
+                setTimeout(setFocus, 50);
             }
         };
-        function setFocus(){
+        function setFocusOnAdd(){
             document.getElementById("addItemBox").focus();
         }
-        $scope.getListCount=function(data){
+        $scope.getListCount=function(data,index){
             data.checked=!data.checked;
             if(data.edit==true) {
                 $scope.saveSupplyItem(data);
@@ -37,7 +36,7 @@
             }
         $scope.editSupplyItem=function(data){
             data.edit=true;
-            setTimeout(setFocus, 1000);
+            setTimeout(setFocus, 50);
 
         }
         function setFocus(){
@@ -48,7 +47,7 @@
                 data.edit = false;
             }else{
                 data.edit = true;
-                setTimeout(setFocus, 500);
+                setTimeout(setFocus, 50);
             }
         }
         $scope.deleteSupplyItem=function(index){
@@ -57,7 +56,7 @@
         $scope.addNewListItem=function(){
             $scope.addNewSuppliesItem=!$scope.addNewSuppliesItem
             if($scope.addNewSuppliesItem==true) {
-                setTimeout(setFocus, 500);
+                setTimeout(setFocusOnAdd, 50);
             }
         }
         $scope.cancelAdding=function(){

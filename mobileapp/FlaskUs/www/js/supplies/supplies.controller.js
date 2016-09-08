@@ -16,7 +16,7 @@
         $scope.editList=false;
         $scope.addNewSupplies=false;
         $scope.addNewSuppliesList=function(){
-            setTimeout(setFocus, 500);
+            setTimeout(setFocus, 50);
             function setFocus(){
                 document.getElementById("supplyEdit").focus();
             }
@@ -34,14 +34,14 @@
         };
         $scope.editSupply=function(data){
             data.edit=true;
-            setTimeout(setFocus, 1000);
+            setTimeout(setFocus, 50);
      function setFocus(){
     document.getElementById("editBox").focus();
         }
     }
         $scope.editSupplyItem=function(data){
             data.editItem=true;
-            setTimeout(setFocus, 500);
+            setTimeout(setFocus, 50);
             function setFocus(){
                 document.getElementById("supplyEdit").blur();
                 document.getElementById("ItemEditBox").focus();
@@ -50,6 +50,7 @@
 
         $scope.cancelAdding=function(){
             $scope.addNewSupplies=false;
+            document.getElementById("ItemEditBox").blur();
             $scope.suppliesName="";
         }
         $scope.saveSupply=function(data){
@@ -77,10 +78,10 @@
             checked : true}
         $scope.addItem=function(listName,data){
             if(listName==undefined || listName==""){
-                setTimeout(setFocus, 500);
+                setTimeout(setFocus, 50);
             }
             else if(data!=undefined&&data.itemName==""){
-                setTimeout(setFocusOnItemBox, 500);
+                setTimeout(setFocusOnItemBox, 50);
             }
            else {
                 $scope.createdListItem.data.push(angular.copy(listItemEmpty));
