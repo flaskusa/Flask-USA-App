@@ -139,6 +139,11 @@ html, body{font-family: 'Avenir Next';}
           background-image:url("/img/flask_images/my_tailgate.jpg");
       background-size:100%;
 }
+
+.list.add_my_tailgate{
+    padding-top:40px !important;
+}
+
 .myFrnds{
      background-image:url("/img/flask_images/my_friends.jpg");
       background-size:100%;
@@ -436,11 +441,13 @@ span.error_msg{color:red;}
     text-transform: uppercase;
     font-size: 11px !important;
     margin-top: -4px;
+    margin-left: -17px;
 }
 .timeVenuCol{
     text-transform: uppercase;
     font-size: 11px !important;
     margin-top: -6px;
+    margin-left: -17px;
 }
 .arrowIcon{
     right: -4px !important;
@@ -720,12 +727,15 @@ div.menuDiv{padding-bottom:10px;}
  h2.tickets{font-weight: bold;
     font-size: 27px;
     text-align: center;
-    margin-top:-3%;
+    margin-top:0%;
+    padding-left:5%;
 }
 
 .item-tickets{text-align: center;
     font-size: 13px;
-    color: darkorange !important;}
+    color: darkorange !important;
+    padding-left:5%;
+}
 
 a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:black;}
  /*tickets end*/
@@ -882,6 +892,11 @@ p.addText{
     padding-right:0px;
     margin-right: -28px;
 }
+
+span.badge.span_icon{
+    right:22px !important;
+}
+
 span.badge.span_icon_supplies{
     top:14px;
     width:21px;
@@ -923,7 +938,7 @@ input.loginInputs{
 }
 
 .col.col-70.event_content1{
-    /*padding-left: 14%;*/
+    padding-left: 5%;
     width: 86%;
 }
 
@@ -979,7 +994,6 @@ button.button.button-clear.mini-button {
     font-weight: bold;
     margin-top: 4px;
     vertical-align: middle;
-   margin-left: auto;
     min-height: 27px;
     min-width: 32%;
     font-weight: normal;
@@ -1302,15 +1316,7 @@ a.item.icon.activated:before{color:white;}
 .angular-google-map-container {
   height:92%; width:100%; position:absolute; top:0; left:0;  }
 
-.acc_settings {
-    font-size: 20px !important;
-    line-height: 14px !important;
-    font-weight: 800 !important;
-    margin-top: 20px !important;
-}
-.acc_settings1{
-     padding-top: 40px !important;
-  }
+
 .item-select select {
 position:initial !important;    
 }
@@ -1406,11 +1412,27 @@ position:initial !important;
         margin-left: -2px;
     }
 
+    .acc_settings {
+    font-size: 20px !important;
+    line-height: 14px !important;
+    font-weight: 800 !important;
+    margin-top: 20px !important;
+    }
+
     .acc_settings1{
     font-weight: bold;
     font-size: 17px;
     color: orange; 
-  }
+    padding-top: 40px !important;
+    }
+
+    .acc_settings1 h5{
+    padding-top: 11px !important;
+    color: orange;
+    font-weight: bold;
+    font-size: 19px;
+    }
+
     .item-select.acc_settingsCol select {
     position:initial !important;    
     }
@@ -1477,22 +1499,7 @@ position:initial !important;
     text-align: center;
   }
 }
-.emailText{
-  color: darkorange;
-}
-.my-groupDetail-view {
-  .item-content {
-    padding-top: 12px;
-    padding-bottom: 12px;
-    margin-top: -4px;
-    margin-bottom: -4px;
-    height: 70px;
-    text-align: center;
-    padding-right:79px;
 
-  }
-
-}
 .friendButtonStyle{
   width: 108px;
   right: 1px;
@@ -1533,3 +1540,10 @@ position:initial !important;
 .item .badge.ext-top{
   top:21px;
 }
+
+.col.col-70.event_content1{
+    padding-left: 17%;
+    width: 77%;
+}
+
+a.item.item-full.item-icon-left.attendees{padding-top:58px;}
