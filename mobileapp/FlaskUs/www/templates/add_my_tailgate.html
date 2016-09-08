@@ -6,34 +6,36 @@
     <ion-tabs class="tabs-positive tab_bottom">
         <ion-tab title="Manage Tailgate">
             <!-- Tab 1 content -->
-            <ion-content overflow-scroll="false" header="true" class='has-header has-subheader'>
+            <ion-content overflow-scroll="false" header="true" class='has-header has-subheader has-tabs'>
                 <div class="box">
-                    <div class="list">
+                    <div class="list add_my_tailgate">
                         <div class="item item-input item-floating-label">
-                            <span class="input-label" style="margin-left: -6%;">Tailgate Name</span>
+                            <span class="input-label">Tailgate Name</span>
                             <input type="text" placeholder="Tailgate Name" name="TailgateName" class="form-control" ng-model="addTailgateParams.tailgateName" required>
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label" style="margin-left: -6%;">Description:</span>
+                            <span class="input-label">Description:</span>
                             <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="addTailgateParams.tailgateDescription" required>
                         </div>
-                        <div class="item item-input">
-                            <select id="eventnames" name="eventnames" class="" ng-model="addTailgateParams.eventnames" style="width: 95%;padding: 10px;">
-                                <option ng-repeat="data in eventNames" value="{{data.eventId}}">
-                                    {{data.eventName}}
-                                </option>
-                            </select>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Event Name:</span>
+                            <input type="text" list="EventNameList" ng-change="LoadSessionData()" id="envtName" placeholder="Event Name" class="form-control" ng-model="addTailgateParams.eventName" required>
+                            <datalist id="EventNameList">
+                                <select>
+                                    <option ng-repeat="data in eventDetails" data_id="{{data.eventId}}" value="{{data.eventName}}">{{data.eventName}}</option>
+                                </select>
+                            </datalist>
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label" style="margin-left: -6%;">Event date</span>
-                            <input type="date" placeholder="Event date" class="form-control" ng-model="addTailgateParams.tailgateDate" name="Eventdate" required>
+                            <span class="input-label">Event date</span>
+                            <input type="date" ng-disabled="isavail" placeholder="Event date" class="form-control" ng-model="addTailgateParams.tailgateDate" name="Eventdate" required>
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label" style="margin-left: -6%;">Start Time</span>
+                            <span class="input-label">Start Time</span>
                             <input type="time" placeholder="Start Time" class="form-control" ng-model="addTailgateParams.startTime" name="StartTime" required>
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label" style="margin-left: -6%;">End Time</span>
+                            <span class="input-label">End Time</span>
                             <input type="time" placeholder="End Time" class="form-control" ng-model="addTailgateParams.endTime" name="EndTime" required>
                         </div>
                         <div class="item item-input item-floating-label">
@@ -41,26 +43,17 @@
                             <input type="email" placeholder="Venmo Account" class="form-control" ng-model="addTailgateParams.venmoAccountId" name="VenmoAccount" required>
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label" style="margin-left: -6%;">Amount</span>
+                            <span class="input-label">Amount</span>
                             <input type="Number" placeholder="Amount" name="Amount" ng-model="addTailgateParams.amountToPay">
                         </div>
                         <div class="list card">
-
                             <div class="item">
                                 <h4>Double tap on Map to Drop a New Marker</h4>
-                                <ui-gmap-google-map center='map.center' zoom='map.zoom' aria-label="Google map">
-
-                                    <ui-gmap-marker ng-repeat="" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
-                                        <ui-gmap-window>
-                                        </ui-gmap-window>
-                                    </ui-gmap-marker>
-
-                                </ui-gmap-google-map>
                             </div>
-
-                            <div class="item item-image">
-                                <div id="map_canvas"></div>
+                            <div class="item" style="height:191px !important;">
+                                <ui-gmap-google-map center='map.center' zoom='map.zoom' aria-label="Google map" style="width:100%;height:100%;"></ui-gmap-google-map>
                             </div>
+                        </div>
                         </div>
                         <div class="padding" align="center">
                             <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="addmyTailgate(addTailgateParams);">
@@ -83,5 +76,3 @@
             <ion-nav-view name=""></ion-nav-view>
         </ion-tab>
     </ion-tabs>
-
-</ion-view>
