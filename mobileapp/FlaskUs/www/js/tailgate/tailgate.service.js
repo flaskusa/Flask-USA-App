@@ -4,11 +4,11 @@
         .module('flaskApp')
         .service('TailgateService', TailgateService);
 
-    TailgateService.$inject = ['$http', 'SERVER','$q'];
+    TailgateService.$inject = ['$http', 'SERVER', '$q'];
 
-    function TailgateService($http, SERVER,$q) {
+    function TailgateService($http, SERVER, $q) {
         var baseURL = SERVER.url;
-        var allTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
+        var allTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/add-tailgate-info";
         var myTailgatesURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-my-tailgate";
         var getTailgateImagesURL = "flask-user-tailgate-portlet.tailgateimages/get-tailgate-images";
         var getTailGateURL = "flask-user-tailgate-portlet.tailgateinfo/get-tailgate";
@@ -33,23 +33,27 @@
             getMapMarkers: getMapMarkers,
             addTailgateMarkers: addTailgateMarkers,
             getUserFrends: getUserFrends,
-            addcurrentUser: addcurrentUser
+            addcurrentUser: addcurrentUser,
+            getvenueDetails: getvenueDetails
         }
 
-        function addTailgate(tailgateName,tailgateDescription,eventId, eventName,tailgateDate,startTime,endTime,venmoAccountId,amountToPay ) {
-            return $http.get(baseURL + addtailgateURL, {
-                params: {
-                    tailgateName: tailgateName,
-                    tailgateDescription: tailgateDescription,
-                    eventId: eventId,
-                    eventName: eventName,
-                    tailgateDate: tailgateDate,
-                    startTime: startTime,
-                    endTime: endTime,
-                    venmoAccountId: venmoAccountId,
-                    amountToPay: amountToPay
-                    }
-                }
+        function getvenueDetails(venueId) {
+            return $http.get(baseURL + getVenuebyVenueIdURL, {
+                params: { 'venueId': venueId }
+            }
+            )
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+
+        function addTailgate(currTailgateparams) {
+            return $http.get(baseURL + allTailgateURL, {
+                params: currTailgateparams
+            }
             )
             .then(function success(response) {
                 return response;
@@ -73,8 +77,8 @@
         }
         function getEvent(eventId) {
             return $http.get(baseURL + geteventURL, {
-                    params: { 'eventId': eventId }
-                }
+                params: { 'eventId': eventId }
+            }
             )
             .then(function success(response) {
                 return response;
@@ -181,7 +185,7 @@
             });
         }
 
-        
+
         function addTailgateMarkers(param) {
             return $http.get(baseURL + addTialgateMarkerURL, {
                 params: {
@@ -190,8 +194,8 @@
                     'longitude': param.longitude,
                     'name': param.name,
                     'description': param.description
-                    }
                 }
+            }
             )
             .then(function success(response) {
                 return response;
