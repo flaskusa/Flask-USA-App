@@ -51,7 +51,12 @@
                                 <h4>Double tap on Map to Drop a New Marker</h4>
                             </div>
                             <div class="item" style="height:191px !important;">
-                                <ui-gmap-google-map center='map.center' zoom='map.zoom' aria-label="Google map" style="width:100%;height:100%;"></ui-gmap-google-map>
+                                <div style="width:100%;height:100%;">
+                                    <ui-gmap-google-map center='map.center' zoom='map.zoom' aria-label="Google map" draggable="true" >
+                                        <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
+                                    </ui-gmap-google-map>
+                                </div>
+                                
                             </div>
                         </div>
                         </div>
@@ -72,7 +77,50 @@
             <ion-content has-footer="true" overflow-scroll="false" class="has-footer has-header"></ion-content>
         </ion-tab>
         <ion-tab title="Attendees" disabled="pageFlow.disableOtherTabs">
-            <!-- Tab 3 content -->
-            <ion-nav-view name=""></ion-nav-view>
+            <ion-content>
+                <a class="item item-full item-icon-left attendees" ng-click="modal.show()">
+                    <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+                    <p class="addText">INVITE FRIEND</p>
+                </a>
+                <div class="list">
+                    <a ng-repeat="data in myTailgaters" class="item item-avatar item-icon-right">
+                        <img src="img/default-profilepic.png">
+                        <h2>{{ data.userName | uppercase}}</h2>
+                        <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
+                    </a>
+                </div>
+                <script id="templates/modal.html" type="text/ng-template">
+                    <ion-modal-view>
+                        <ion-header-bar class="bar bar-header bar-positive black-header">
+                            <h1 class="title">Invite Friend</h1>
+                            <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
+                        </ion-header-bar>
+                        <div class="bar bar-subheader">
+                            <div class="row">
+                                <div class="col col-90 col-center searchrow">
+                                    <input type="text" placeholder="Search friend..." class="friendSearch" ng-model="searchContact.searchtext" />
+                                </div>
+                                <div class="col col-center searchrow">
+                                    <button class="button button-icon button-clear ion-ios-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
+                                </div>
+                            </div>
+                        </div>
+                        <ion-content class=" has-subheader">
+                            <ion-list>
+                                <ion-list>
+                                    <ion-item ng-repeat="data in myFriends " class="item-avatar " item="data">
+                                        <img src="img/default-profilepic.png">
+                                        <h2>{{ data.fullName | uppercase}}</h2>
+                                        <p>{{ data.emailAddress}}</p>
+                                        <button type="submit" nav-clear class="button button-block button-positive invite_friend" ng-click="addTailgateMembers(data,$index)">
+                                            Send Invite
+                                        </button>
+                                    </ion-item>
+                                </ion-list>
+                            </ion-list>
+                        </ion-content>
+                    </ion-modal-view>
+                </script>
+            </ion-content>
         </ion-tab>
     </ion-tabs>
