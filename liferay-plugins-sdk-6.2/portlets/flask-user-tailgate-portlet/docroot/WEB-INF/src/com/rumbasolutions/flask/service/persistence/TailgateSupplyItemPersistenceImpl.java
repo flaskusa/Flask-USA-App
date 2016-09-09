@@ -580,6 +580,499 @@ public class TailgateSupplyItemPersistenceImpl extends BasePersistenceImpl<Tailg
 	}
 
 	private static final String _FINDER_COLUMN_TAILGATEID_TAILGATEID_2 = "tailgateSupplyItem.tailgateId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_USERID = new FinderPath(TailgateSupplyItemModelImpl.ENTITY_CACHE_ENABLED,
+			TailgateSupplyItemModelImpl.FINDER_CACHE_ENABLED,
+			TailgateSupplyItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByuserId",
+			new String[] {
+				Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID =
+		new FinderPath(TailgateSupplyItemModelImpl.ENTITY_CACHE_ENABLED,
+			TailgateSupplyItemModelImpl.FINDER_CACHE_ENABLED,
+			TailgateSupplyItemImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByuserId",
+			new String[] { Long.class.getName() },
+			TailgateSupplyItemModelImpl.USERID_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERID = new FinderPath(TailgateSupplyItemModelImpl.ENTITY_CACHE_ENABLED,
+			TailgateSupplyItemModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByuserId",
+			new String[] { Long.class.getName() });
+
+	/**
+	 * Returns all the tailgate supply items where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @return the matching tailgate supply items
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<TailgateSupplyItem> findByuserId(long userId)
+		throws SystemException {
+		return findByuserId(userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the tailgate supply items where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.TailgateSupplyItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of tailgate supply items
+	 * @param end the upper bound of the range of tailgate supply items (not inclusive)
+	 * @return the range of matching tailgate supply items
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<TailgateSupplyItem> findByuserId(long userId, int start, int end)
+		throws SystemException {
+		return findByuserId(userId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the tailgate supply items where userId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.TailgateSupplyItemModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param start the lower bound of the range of tailgate supply items
+	 * @param end the upper bound of the range of tailgate supply items (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching tailgate supply items
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<TailgateSupplyItem> findByuserId(long userId, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID;
+			finderArgs = new Object[] { userId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_USERID;
+			finderArgs = new Object[] { userId, start, end, orderByComparator };
+		}
+
+		List<TailgateSupplyItem> list = (List<TailgateSupplyItem>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (TailgateSupplyItem tailgateSupplyItem : list) {
+				if ((userId != tailgateSupplyItem.getUserId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_TAILGATESUPPLYITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(TailgateSupplyItemModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				if (!pagination) {
+					list = (List<TailgateSupplyItem>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<TailgateSupplyItem>(list);
+				}
+				else {
+					list = (List<TailgateSupplyItem>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first tailgate supply item in the ordered set where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching tailgate supply item
+	 * @throws com.rumbasolutions.flask.NoSuchTailgateSupplyItemException if a matching tailgate supply item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public TailgateSupplyItem findByuserId_First(long userId,
+		OrderByComparator orderByComparator)
+		throws NoSuchTailgateSupplyItemException, SystemException {
+		TailgateSupplyItem tailgateSupplyItem = fetchByuserId_First(userId,
+				orderByComparator);
+
+		if (tailgateSupplyItem != null) {
+			return tailgateSupplyItem;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("userId=");
+		msg.append(userId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchTailgateSupplyItemException(msg.toString());
+	}
+
+	/**
+	 * Returns the first tailgate supply item in the ordered set where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching tailgate supply item, or <code>null</code> if a matching tailgate supply item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public TailgateSupplyItem fetchByuserId_First(long userId,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<TailgateSupplyItem> list = findByuserId(userId, 0, 1,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last tailgate supply item in the ordered set where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching tailgate supply item
+	 * @throws com.rumbasolutions.flask.NoSuchTailgateSupplyItemException if a matching tailgate supply item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public TailgateSupplyItem findByuserId_Last(long userId,
+		OrderByComparator orderByComparator)
+		throws NoSuchTailgateSupplyItemException, SystemException {
+		TailgateSupplyItem tailgateSupplyItem = fetchByuserId_Last(userId,
+				orderByComparator);
+
+		if (tailgateSupplyItem != null) {
+			return tailgateSupplyItem;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("userId=");
+		msg.append(userId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchTailgateSupplyItemException(msg.toString());
+	}
+
+	/**
+	 * Returns the last tailgate supply item in the ordered set where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching tailgate supply item, or <code>null</code> if a matching tailgate supply item could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public TailgateSupplyItem fetchByuserId_Last(long userId,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByuserId(userId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<TailgateSupplyItem> list = findByuserId(userId, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the tailgate supply items before and after the current tailgate supply item in the ordered set where userId = &#63;.
+	 *
+	 * @param tailgateSupplyItemId the primary key of the current tailgate supply item
+	 * @param userId the user ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next tailgate supply item
+	 * @throws com.rumbasolutions.flask.NoSuchTailgateSupplyItemException if a tailgate supply item with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public TailgateSupplyItem[] findByuserId_PrevAndNext(
+		long tailgateSupplyItemId, long userId,
+		OrderByComparator orderByComparator)
+		throws NoSuchTailgateSupplyItemException, SystemException {
+		TailgateSupplyItem tailgateSupplyItem = findByPrimaryKey(tailgateSupplyItemId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			TailgateSupplyItem[] array = new TailgateSupplyItemImpl[3];
+
+			array[0] = getByuserId_PrevAndNext(session, tailgateSupplyItem,
+					userId, orderByComparator, true);
+
+			array[1] = tailgateSupplyItem;
+
+			array[2] = getByuserId_PrevAndNext(session, tailgateSupplyItem,
+					userId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected TailgateSupplyItem getByuserId_PrevAndNext(Session session,
+		TailgateSupplyItem tailgateSupplyItem, long userId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_TAILGATESUPPLYITEM_WHERE);
+
+		query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(TailgateSupplyItemModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(tailgateSupplyItem);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<TailgateSupplyItem> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the tailgate supply items where userId = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByuserId(long userId) throws SystemException {
+		for (TailgateSupplyItem tailgateSupplyItem : findByuserId(userId,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(tailgateSupplyItem);
+		}
+	}
+
+	/**
+	 * Returns the number of tailgate supply items where userId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @return the number of matching tailgate supply items
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByuserId(long userId) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERID;
+
+		Object[] finderArgs = new Object[] { userId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_TAILGATESUPPLYITEM_WHERE);
+
+			query.append(_FINDER_COLUMN_USERID_USERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_USERID_USERID_2 = "tailgateSupplyItem.userId = ?";
 
 	public TailgateSupplyItemPersistenceImpl() {
 		setModelClass(TailgateSupplyItem.class);
@@ -824,6 +1317,23 @@ public class TailgateSupplyItemPersistenceImpl extends BasePersistenceImpl<Tailg
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_TAILGATEID,
 					args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_TAILGATEID,
+					args);
+			}
+
+			if ((tailgateSupplyItemModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						tailgateSupplyItemModelImpl.getOriginalUserId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
+					args);
+
+				args = new Object[] { tailgateSupplyItemModelImpl.getUserId() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
 					args);
 			}
 		}

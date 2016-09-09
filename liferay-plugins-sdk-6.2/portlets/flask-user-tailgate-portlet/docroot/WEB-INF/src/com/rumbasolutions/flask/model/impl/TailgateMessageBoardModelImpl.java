@@ -91,7 +91,8 @@ public class TailgateMessageBoardModelImpl extends BaseModelImpl<TailgateMessage
 				"value.object.column.bitmask.enabled.com.rumbasolutions.flask.model.TailgateMessageBoard"),
 			true);
 	public static long TAILGATEID_COLUMN_BITMASK = 1L;
-	public static long TAILGATEMESSAGEID_COLUMN_BITMASK = 2L;
+	public static long USERID_COLUMN_BITMASK = 2L;
+	public static long TAILGATEMESSAGEID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -304,6 +305,14 @@ public class TailgateMessageBoardModelImpl extends BaseModelImpl<TailgateMessage
 
 	@Override
 	public void setUserId(long userId) {
+		_columnBitmask |= USERID_COLUMN_BITMASK;
+
+		if (!_setOriginalUserId) {
+			_setOriginalUserId = true;
+
+			_originalUserId = _userId;
+		}
+
 		_userId = userId;
 	}
 
@@ -315,6 +324,10 @@ public class TailgateMessageBoardModelImpl extends BaseModelImpl<TailgateMessage
 	@Override
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public long getOriginalUserId() {
+		return _originalUserId;
 	}
 
 	@JSON
@@ -432,6 +445,10 @@ public class TailgateMessageBoardModelImpl extends BaseModelImpl<TailgateMessage
 		tailgateMessageBoardModelImpl._originalTailgateId = tailgateMessageBoardModelImpl._tailgateId;
 
 		tailgateMessageBoardModelImpl._setOriginalTailgateId = false;
+
+		tailgateMessageBoardModelImpl._originalUserId = tailgateMessageBoardModelImpl._userId;
+
+		tailgateMessageBoardModelImpl._setOriginalUserId = false;
 
 		tailgateMessageBoardModelImpl._columnBitmask = 0;
 	}
@@ -554,6 +571,8 @@ public class TailgateMessageBoardModelImpl extends BaseModelImpl<TailgateMessage
 	private long _companyId;
 	private long _userId;
 	private String _userUuid;
+	private long _originalUserId;
+	private boolean _setOriginalUserId;
 	private Date _createdDate;
 	private Date _modifiedDate;
 	private long _columnBitmask;

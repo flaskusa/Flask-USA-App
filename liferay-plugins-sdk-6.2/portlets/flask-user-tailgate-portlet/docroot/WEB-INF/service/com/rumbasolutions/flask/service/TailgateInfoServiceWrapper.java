@@ -106,8 +106,9 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 	}
 
 	@Override
-	public void deleteTailgateInfo(long tailgateId) {
-		_tailgateInfoService.deleteTailgateInfo(tailgateId);
+	public void deleteTailgateInfo(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_tailgateInfoService.deleteTailgateInfo(tailgateId, serviceContext);
 	}
 
 	/**

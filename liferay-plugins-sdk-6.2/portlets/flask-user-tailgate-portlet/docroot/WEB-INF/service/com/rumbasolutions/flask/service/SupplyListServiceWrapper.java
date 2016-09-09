@@ -58,33 +58,31 @@ public class SupplyListServiceWrapper implements SupplyListService,
 
 	@Override
 	public com.rumbasolutions.flask.model.SupplyList addSupplyList(
-		java.lang.String supplyListName, boolean isSystem, long companyId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
+		java.lang.String supplyListName, boolean isSystem,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _supplyListService.addSupplyList(supplyListName, isSystem,
-			companyId, createdDate, modifiedDate, serviceContext);
+			serviceContext);
 	}
 
 	@Override
 	public com.rumbasolutions.flask.model.SupplyList updateSupplyList(
 		long supplyListId, java.lang.String supplyListName, boolean isSystem,
-		long companyId, long userId, java.util.Date createdDate,
-		java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _supplyListService.updateSupplyList(supplyListId,
-			supplyListName, isSystem, companyId, userId, createdDate,
-			modifiedDate, serviceContext);
+			supplyListName, isSystem, serviceContext);
 	}
 
 	@Override
 	public com.rumbasolutions.flask.model.SupplyList getSupplyList(
-		long supplyListId) {
-		return _supplyListService.getSupplyList(supplyListId);
+		long supplyListId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _supplyListService.getSupplyList(supplyListId, serviceContext);
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.SupplyList> getAllSupplyLists() {
-		return _supplyListService.getAllSupplyLists();
+	public java.util.List<com.rumbasolutions.flask.model.SupplyList> getAllSupplyLists(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _supplyListService.getAllSupplyLists(serviceContext);
 	}
 
 	@Override

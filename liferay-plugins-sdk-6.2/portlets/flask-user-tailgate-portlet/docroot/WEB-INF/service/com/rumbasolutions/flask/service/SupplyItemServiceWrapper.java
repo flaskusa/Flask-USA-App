@@ -59,20 +59,17 @@ public class SupplyItemServiceWrapper implements SupplyItemService,
 	@Override
 	public com.rumbasolutions.flask.model.SupplyItem addSupplyItem(
 		java.lang.String supplyItemName, long supplyListId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _supplyItemService.addSupplyItem(supplyItemName, supplyListId,
-			createdDate, modifiedDate, serviceContext);
+			serviceContext);
 	}
 
 	@Override
 	public com.rumbasolutions.flask.model.SupplyItem updateSupplyItem(
 		long supplyItemId, java.lang.String supplyItemName, long supplyListId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _supplyItemService.updateSupplyItem(supplyItemId,
-			supplyItemName, supplyListId, createdDate, modifiedDate,
-			serviceContext);
+			supplyItemName, supplyListId, serviceContext);
 	}
 
 	@Override
@@ -82,8 +79,9 @@ public class SupplyItemServiceWrapper implements SupplyItemService,
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> getAllSupplyItems() {
-		return _supplyItemService.getAllSupplyItems();
+	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> getAllSupplyItems(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _supplyItemService.getAllSupplyItems(serviceContext);
 	}
 
 	@Override

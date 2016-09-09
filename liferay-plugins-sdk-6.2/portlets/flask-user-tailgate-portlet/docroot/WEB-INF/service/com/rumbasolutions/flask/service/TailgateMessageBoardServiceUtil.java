@@ -63,6 +63,55 @@ public class TailgateMessageBoardServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.rumbasolutions.flask.model.TailgateMessageBoard addMessageBoard(
+		java.lang.String messageText, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .addMessageBoard(messageText, tailgateId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateMessageBoard updateMessageBoard(
+		long tailgateMessageId, java.lang.String messageText, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateMessageBoard(tailgateMessageId, messageText,
+			tailgateId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateMessageBoard getTailgMessageBoard(
+		long tailgateMessageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .getTailgMessageBoard(tailgateMessageId, serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.TailgateMessageBoard> getAllTailgateMessageBoards(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getAllTailgateMessageBoards(serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.TailgateMessageBoard> getMessageBoardsByTailgateId(
+		long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .getMessageBoardsByTailgateId(tailgateId, serviceContext);
+	}
+
+	public static void deleteMessageBoard(long tailgateMessageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteMessageBoard(tailgateMessageId, serviceContext);
+	}
+
+	public static void deleteMyMessageBoards(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteMyMessageBoards(serviceContext);
+	}
+
+	public static void deleteBoardsByTailgateId(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteBoardsByTailgateId(tailgateId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.BaseService;
@@ -63,4 +64,41 @@ public interface TailgateSupplyItemService extends BaseService, InvokableService
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.rumbasolutions.flask.model.TailgateSupplyItem addTailgateSupplyItem(
+		java.lang.String supplyListItemName, long tailgateId,
+		long itemAssignedUserId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.rumbasolutions.flask.model.TailgateSupplyItem updateTailgateSupplyItem(
+		long tailgateSupplyItemId, java.lang.String supplyListItemName,
+		long tailgateId, long itemAssignedUserId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.rumbasolutions.flask.model.TailgateSupplyItem getTailgateSupplyItem(
+		long tailgateSupplyItemId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> getItemsByTailgateId(
+		long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> getMyTailgateSupplyItems(
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> getAllTailgateSupplyItems(
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteTailgateSupplyItem(long tailgateSupplyItemId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteItemsByTailgateId(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteMyItems(
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

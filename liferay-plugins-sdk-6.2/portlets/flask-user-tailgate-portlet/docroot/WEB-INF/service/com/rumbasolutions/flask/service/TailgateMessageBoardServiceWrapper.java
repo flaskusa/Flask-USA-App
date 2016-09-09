@@ -59,6 +59,64 @@ public class TailgateMessageBoardServiceWrapper
 			arguments);
 	}
 
+	@Override
+	public com.rumbasolutions.flask.model.TailgateMessageBoard addMessageBoard(
+		java.lang.String messageText, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateMessageBoardService.addMessageBoard(messageText,
+			tailgateId, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.TailgateMessageBoard updateMessageBoard(
+		long tailgateMessageId, java.lang.String messageText, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateMessageBoardService.updateMessageBoard(tailgateMessageId,
+			messageText, tailgateId, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.TailgateMessageBoard getTailgMessageBoard(
+		long tailgateMessageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateMessageBoardService.getTailgMessageBoard(tailgateMessageId,
+			serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.TailgateMessageBoard> getAllTailgateMessageBoards(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateMessageBoardService.getAllTailgateMessageBoards(serviceContext);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.TailgateMessageBoard> getMessageBoardsByTailgateId(
+		long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateMessageBoardService.getMessageBoardsByTailgateId(tailgateId,
+			serviceContext);
+	}
+
+	@Override
+	public void deleteMessageBoard(long tailgateMessageId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_tailgateMessageBoardService.deleteMessageBoard(tailgateMessageId,
+			serviceContext);
+	}
+
+	@Override
+	public void deleteMyMessageBoards(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_tailgateMessageBoardService.deleteMyMessageBoards(serviceContext);
+	}
+
+	@Override
+	public void deleteBoardsByTailgateId(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_tailgateMessageBoardService.deleteBoardsByTailgateId(tailgateId,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

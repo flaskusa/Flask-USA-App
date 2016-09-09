@@ -14,6 +14,13 @@
 
 package com.rumbasolutions.flask.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.rumbasolutions.flask.service.TailgateSupplyItemServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.rumbasolutions.flask.service.TailgateSupplyItemServiceUtil} service utility. The
@@ -55,4 +62,150 @@ package com.rumbasolutions.flask.service.http;
  * @generated
  */
 public class TailgateSupplyItemServiceSoap {
+	public static com.rumbasolutions.flask.model.TailgateSupplyItemSoap addTailgateSupplyItem(
+		java.lang.String supplyListItemName, long tailgateId,
+		long itemAssignedUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.TailgateSupplyItem returnValue = TailgateSupplyItemServiceUtil.addTailgateSupplyItem(supplyListItemName,
+					tailgateId, itemAssignedUserId, serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateSupplyItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateSupplyItemSoap updateTailgateSupplyItem(
+		long tailgateSupplyItemId, java.lang.String supplyListItemName,
+		long tailgateId, long itemAssignedUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.TailgateSupplyItem returnValue = TailgateSupplyItemServiceUtil.updateTailgateSupplyItem(tailgateSupplyItemId,
+					supplyListItemName, tailgateId, itemAssignedUserId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateSupplyItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateSupplyItemSoap getTailgateSupplyItem(
+		long tailgateSupplyItemId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.TailgateSupplyItem returnValue = TailgateSupplyItemServiceUtil.getTailgateSupplyItem(tailgateSupplyItemId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateSupplyItemSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateSupplyItemSoap[] getItemsByTailgateId(
+		long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> returnValue =
+				TailgateSupplyItemServiceUtil.getItemsByTailgateId(tailgateId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateSupplyItemSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateSupplyItemSoap[] getMyTailgateSupplyItems(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> returnValue =
+				TailgateSupplyItemServiceUtil.getMyTailgateSupplyItems(serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateSupplyItemSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateSupplyItemSoap[] getAllTailgateSupplyItems(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> returnValue =
+				TailgateSupplyItemServiceUtil.getAllTailgateSupplyItems(serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateSupplyItemSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteTailgateSupplyItem(long tailgateSupplyItemId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			TailgateSupplyItemServiceUtil.deleteTailgateSupplyItem(tailgateSupplyItemId,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteItemsByTailgateId(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			TailgateSupplyItemServiceUtil.deleteItemsByTailgateId(tailgateId,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteMyItems(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			TailgateSupplyItemServiceUtil.deleteMyItems(serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(TailgateSupplyItemServiceSoap.class);
 }

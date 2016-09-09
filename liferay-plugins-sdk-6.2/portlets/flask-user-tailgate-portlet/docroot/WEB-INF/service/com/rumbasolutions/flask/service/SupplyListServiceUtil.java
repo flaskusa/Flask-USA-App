@@ -64,31 +64,29 @@ public class SupplyListServiceUtil {
 	}
 
 	public static com.rumbasolutions.flask.model.SupplyList addSupplyList(
-		java.lang.String supplyListName, boolean isSystem, long companyId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
+		java.lang.String supplyListName, boolean isSystem,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
-				   .addSupplyList(supplyListName, isSystem, companyId,
-			createdDate, modifiedDate, serviceContext);
+				   .addSupplyList(supplyListName, isSystem, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.SupplyList updateSupplyList(
 		long supplyListId, java.lang.String supplyListName, boolean isSystem,
-		long companyId, long userId, java.util.Date createdDate,
-		java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateSupplyList(supplyListId, supplyListName, isSystem,
-			companyId, userId, createdDate, modifiedDate, serviceContext);
+			serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.SupplyList getSupplyList(
-		long supplyListId) {
-		return getService().getSupplyList(supplyListId);
+		long supplyListId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getSupplyList(supplyListId, serviceContext);
 	}
 
-	public static java.util.List<com.rumbasolutions.flask.model.SupplyList> getAllSupplyLists() {
-		return getService().getAllSupplyLists();
+	public static java.util.List<com.rumbasolutions.flask.model.SupplyList> getAllSupplyLists(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getAllSupplyLists(serviceContext);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.SupplyList> getMySupplyLists(

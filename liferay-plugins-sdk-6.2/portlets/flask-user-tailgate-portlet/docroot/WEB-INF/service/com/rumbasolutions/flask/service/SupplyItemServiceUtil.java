@@ -65,20 +65,17 @@ public class SupplyItemServiceUtil {
 
 	public static com.rumbasolutions.flask.model.SupplyItem addSupplyItem(
 		java.lang.String supplyItemName, long supplyListId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
-				   .addSupplyItem(supplyItemName, supplyListId, createdDate,
-			modifiedDate, serviceContext);
+				   .addSupplyItem(supplyItemName, supplyListId, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.SupplyItem updateSupplyItem(
 		long supplyItemId, java.lang.String supplyItemName, long supplyListId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateSupplyItem(supplyItemId, supplyItemName,
-			supplyListId, createdDate, modifiedDate, serviceContext);
+			supplyListId, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.SupplyItem getSupplyItem(
@@ -86,8 +83,9 @@ public class SupplyItemServiceUtil {
 		return getService().getSupplyItem(supplyItemId);
 	}
 
-	public static java.util.List<com.rumbasolutions.flask.model.SupplyItem> getAllSupplyItems() {
-		return getService().getAllSupplyItems();
+	public static java.util.List<com.rumbasolutions.flask.model.SupplyItem> getAllSupplyItems(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getAllSupplyItems(serviceContext);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.SupplyItem> getItemsByListId(

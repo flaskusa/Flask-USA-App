@@ -107,8 +107,9 @@ public class TailgateInfoServiceUtil {
 			endTime, venmoAccountId, amountToPay, serviceContext);
 	}
 
-	public static void deleteTailgateInfo(long tailgateId) {
-		getService().deleteTailgateInfo(tailgateId);
+	public static void deleteTailgateInfo(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteTailgateInfo(tailgateId, serviceContext);
 	}
 
 	public static void clearService() {

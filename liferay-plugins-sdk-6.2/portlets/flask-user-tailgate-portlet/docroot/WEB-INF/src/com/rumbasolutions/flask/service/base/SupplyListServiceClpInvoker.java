@@ -35,25 +35,28 @@ public class SupplyListServiceClpInvoker {
 		_methodName72 = "addSupplyList";
 
 		_methodParameterTypes72 = new String[] {
-				"java.lang.String", "boolean", "long", "java.util.Date",
-				"java.util.Date", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "boolean",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName73 = "updateSupplyList";
 
 		_methodParameterTypes73 = new String[] {
-				"long", "java.lang.String", "boolean", "long", "long",
-				"java.util.Date", "java.util.Date",
+				"long", "java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName74 = "getSupplyList";
 
-		_methodParameterTypes74 = new String[] { "long" };
+		_methodParameterTypes74 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName75 = "getAllSupplyLists";
 
-		_methodParameterTypes75 = new String[] {  };
+		_methodParameterTypes75 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName76 = "getMySupplyLists";
 
@@ -92,9 +95,7 @@ public class SupplyListServiceClpInvoker {
 				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
 			return SupplyListServiceUtil.addSupplyList((java.lang.String)arguments[0],
 				((Boolean)arguments[1]).booleanValue(),
-				((Long)arguments[2]).longValue(), (java.util.Date)arguments[3],
-				(java.util.Date)arguments[4],
-				(com.liferay.portal.service.ServiceContext)arguments[5]);
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
 		}
 
 		if (_methodName73.equals(name) &&
@@ -102,20 +103,18 @@ public class SupplyListServiceClpInvoker {
 			return SupplyListServiceUtil.updateSupplyList(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				((Boolean)arguments[2]).booleanValue(),
-				((Long)arguments[3]).longValue(),
-				((Long)arguments[4]).longValue(), (java.util.Date)arguments[5],
-				(java.util.Date)arguments[6],
-				(com.liferay.portal.service.ServiceContext)arguments[7]);
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
 		}
 
 		if (_methodName74.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
-			return SupplyListServiceUtil.getSupplyList(((Long)arguments[0]).longValue());
+			return SupplyListServiceUtil.getSupplyList(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName75.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
-			return SupplyListServiceUtil.getAllSupplyLists();
+			return SupplyListServiceUtil.getAllSupplyLists((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
 		if (_methodName76.equals(name) &&

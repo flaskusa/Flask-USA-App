@@ -51,16 +51,20 @@ public class SupplyItemServiceImpl extends SupplyItemServiceBaseImpl {
 	private static Log LOGGER = LogFactoryUtil.getLog(SupplyItemServiceImpl.class);
 	
 	@Override
-	public SupplyItem addSupplyItem(String supplyItemName, long supplyListId, Date createdDate, Date modifiedDate, ServiceContext serviceContext){
+	public SupplyItem addSupplyItem(String supplyItemName, long supplyListId, ServiceContext serviceContext){
 		SupplyItem supplyItem = null;
 		try {
-			Date now = new Date();
-			supplyItem = SupplyItemLocalServiceUtil.createSupplyItem(CounterLocalServiceUtil.increment());
-			supplyItem.setSupplyItemName(supplyItemName);
-			supplyItem.setSupplyListId(supplyListId);
-			supplyItem.setCreatedDate(serviceContext.getCreateDate(now));
-			supplyItem.setModifiedDate(serviceContext.getModifiedDate(now));
-			supplyItem = SupplyItemLocalServiceUtil.addSupplyItem(supplyItem);
+			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
+				Date now = new Date();
+				supplyItem = SupplyItemLocalServiceUtil.createSupplyItem(CounterLocalServiceUtil.increment());
+				supplyItem.setSupplyItemName(supplyItemName);
+				supplyItem.setSupplyListId(supplyListId);
+				supplyItem.setCreatedDate(serviceContext.getCreateDate(now));
+				supplyItem.setModifiedDate(serviceContext.getModifiedDate(now));
+				supplyItem = SupplyItemLocalServiceUtil.addSupplyItem(supplyItem);
+			}else{
+				throw new Exception("You do not have required permissions");
+			}
 		} catch (Exception e) {
 			LOGGER.error("Exception in Add Supply Item :" + e.getMessage());
 			e.printStackTrace();
@@ -69,7 +73,7 @@ public class SupplyItemServiceImpl extends SupplyItemServiceBaseImpl {
 	}
 	
 	@Override
-	public SupplyItem updateSupplyItem(long supplyItemId, String supplyItemName, long supplyListId, Date createdDate, Date modifiedDate, ServiceContext serviceContext){
+	public SupplyItem updateSupplyItem(long supplyItemId, String supplyItemName, long supplyListId, ServiceContext serviceContext){
 		SupplyItem supplyItem = null;
 		try {
 			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
@@ -103,12 +107,12 @@ public class SupplyItemServiceImpl extends SupplyItemServiceBaseImpl {
 	}
 	
 	@Override
-	public List<SupplyItem> getAllSupplyItems(){
+	public List<SupplyItem> getAllSupplyItems(ServiceContext serviceContext){
 		List<SupplyItem> supplyItems = null;
 		try {
 			supplyItems = SupplyItemLocalServiceUtil.getSupplyItems(0, SupplyItemLocalServiceUtil.getSupplyItemsCount());
 		} catch (Exception e) {
-			LOGGER.error("Exception in get Supply Item :" + e.getMessage());
+			LOGGER.error("Exception in get all Supply Items :" + e.getMessage());
 			e.printStackTrace();
 		}
 		return supplyItems;
@@ -146,9 +150,11 @@ public class SupplyItemServiceImpl extends SupplyItemServiceBaseImpl {
 		try {
 			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
 				List<SupplyItem> supplyItems = SupplyItemUtil.findBysupplyListId(supplyListId);
-				for(int i=0; i<supplyItems.size(); i++){
-					SupplyItemLocalServiceUtil.deleteSupplyItem(supplyItems.get(i));
+				for(SupplyItem supplyItem: supplyItems){
+					SupplyItemLocalServiceUtil.deleteSupplyItem(supplyItem);
 				}
+			}else{
+				throw new Exception("You do not have required permissions");
 			}
 		} catch (Exception e) {
 			LOGGER.error("Exception in delete Items By List ID :" + e.getMessage());

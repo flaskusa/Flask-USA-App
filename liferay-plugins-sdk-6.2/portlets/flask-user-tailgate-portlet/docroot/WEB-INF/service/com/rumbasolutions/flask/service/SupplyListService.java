@@ -66,22 +66,21 @@ public interface SupplyListService extends BaseService, InvokableService {
 		throws java.lang.Throwable;
 
 	public com.rumbasolutions.flask.model.SupplyList addSupplyList(
-		java.lang.String supplyListName, boolean isSystem, long companyId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
+		java.lang.String supplyListName, boolean isSystem,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.SupplyList updateSupplyList(
 		long supplyListId, java.lang.String supplyListName, boolean isSystem,
-		long companyId, long userId, java.util.Date createdDate,
-		java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.rumbasolutions.flask.model.SupplyList getSupplyList(
-		long supplyListId);
+		long supplyListId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.SupplyList> getAllSupplyLists();
+	public java.util.List<com.rumbasolutions.flask.model.SupplyList> getAllSupplyLists(
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rumbasolutions.flask.model.SupplyList> getMySupplyLists(

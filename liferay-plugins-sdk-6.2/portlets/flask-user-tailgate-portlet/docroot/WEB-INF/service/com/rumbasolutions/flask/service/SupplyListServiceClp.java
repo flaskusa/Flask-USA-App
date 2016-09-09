@@ -35,25 +35,28 @@ public class SupplyListServiceClp implements SupplyListService {
 		_methodName3 = "addSupplyList";
 
 		_methodParameterTypes3 = new String[] {
-				"java.lang.String", "boolean", "long", "java.util.Date",
-				"java.util.Date", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "boolean",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName4 = "updateSupplyList";
 
 		_methodParameterTypes4 = new String[] {
-				"long", "java.lang.String", "boolean", "long", "long",
-				"java.util.Date", "java.util.Date",
+				"long", "java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName5 = "getSupplyList";
 
-		_methodParameterTypes5 = new String[] { "long" };
+		_methodParameterTypes5 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName6 = "getAllSupplyLists";
 
-		_methodParameterTypes6 = new String[] {  };
+		_methodParameterTypes6 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName7 = "getMySupplyLists";
 
@@ -126,8 +129,7 @@ public class SupplyListServiceClp implements SupplyListService {
 
 	@Override
 	public com.rumbasolutions.flask.model.SupplyList addSupplyList(
-		java.lang.String supplyListName, boolean isSystem, long companyId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
+		java.lang.String supplyListName, boolean isSystem,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -138,12 +140,6 @@ public class SupplyListServiceClp implements SupplyListService {
 						ClpSerializer.translateInput(supplyListName),
 						
 					isSystem,
-						
-					companyId,
-						
-					ClpSerializer.translateInput(createdDate),
-						
-					ClpSerializer.translateInput(modifiedDate),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -166,8 +162,6 @@ public class SupplyListServiceClp implements SupplyListService {
 	@Override
 	public com.rumbasolutions.flask.model.SupplyList updateSupplyList(
 		long supplyListId, java.lang.String supplyListName, boolean isSystem,
-		long companyId, long userId, java.util.Date createdDate,
-		java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -180,14 +174,6 @@ public class SupplyListServiceClp implements SupplyListService {
 					ClpSerializer.translateInput(supplyListName),
 						
 					isSystem,
-						
-					companyId,
-						
-					userId,
-						
-					ClpSerializer.translateInput(createdDate),
-						
-					ClpSerializer.translateInput(modifiedDate),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -209,12 +195,18 @@ public class SupplyListServiceClp implements SupplyListService {
 
 	@Override
 	public com.rumbasolutions.flask.model.SupplyList getSupplyList(
-		long supplyListId) {
+		long supplyListId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5, new Object[] { supplyListId });
+					_methodParameterTypes5,
+					new Object[] {
+						supplyListId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -232,12 +224,14 @@ public class SupplyListServiceClp implements SupplyListService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.SupplyList> getAllSupplyLists() {
+	public java.util.List<com.rumbasolutions.flask.model.SupplyList> getAllSupplyLists(
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6, new Object[] {  });
+					_methodParameterTypes6,
+					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

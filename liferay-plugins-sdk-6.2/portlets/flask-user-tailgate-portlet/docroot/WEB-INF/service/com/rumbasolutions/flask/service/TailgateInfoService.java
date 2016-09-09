@@ -95,5 +95,6 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 		long amountToPay,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
-	public void deleteTailgateInfo(long tailgateId);
+	public void deleteTailgateInfo(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

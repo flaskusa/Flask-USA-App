@@ -14,6 +14,13 @@
 
 package com.rumbasolutions.flask.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import com.rumbasolutions.flask.service.TailgateMessageBoardServiceUtil;
+
+import java.rmi.RemoteException;
+
 /**
  * Provides the SOAP utility for the
  * {@link com.rumbasolutions.flask.service.TailgateMessageBoardServiceUtil} service utility. The
@@ -55,4 +62,131 @@ package com.rumbasolutions.flask.service.http;
  * @generated
  */
 public class TailgateMessageBoardServiceSoap {
+	public static com.rumbasolutions.flask.model.TailgateMessageBoardSoap addMessageBoard(
+		java.lang.String messageText, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.TailgateMessageBoard returnValue = TailgateMessageBoardServiceUtil.addMessageBoard(messageText,
+					tailgateId, serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateMessageBoardSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateMessageBoardSoap updateMessageBoard(
+		long tailgateMessageId, java.lang.String messageText, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.TailgateMessageBoard returnValue = TailgateMessageBoardServiceUtil.updateMessageBoard(tailgateMessageId,
+					messageText, tailgateId, serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateMessageBoardSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateMessageBoardSoap getTailgMessageBoard(
+		long tailgateMessageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.TailgateMessageBoard returnValue = TailgateMessageBoardServiceUtil.getTailgMessageBoard(tailgateMessageId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateMessageBoardSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateMessageBoardSoap[] getAllTailgateMessageBoards(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.TailgateMessageBoard> returnValue =
+				TailgateMessageBoardServiceUtil.getAllTailgateMessageBoards(serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateMessageBoardSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateMessageBoardSoap[] getMessageBoardsByTailgateId(
+		long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.TailgateMessageBoard> returnValue =
+				TailgateMessageBoardServiceUtil.getMessageBoardsByTailgateId(tailgateId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateMessageBoardSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteMessageBoard(long tailgateMessageId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			TailgateMessageBoardServiceUtil.deleteMessageBoard(tailgateMessageId,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteMyMessageBoards(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			TailgateMessageBoardServiceUtil.deleteMyMessageBoards(serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteBoardsByTailgateId(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			TailgateMessageBoardServiceUtil.deleteBoardsByTailgateId(tailgateId,
+				serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	private static Log _log = LogFactoryUtil.getLog(TailgateMessageBoardServiceSoap.class);
 }

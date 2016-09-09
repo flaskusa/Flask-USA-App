@@ -67,12 +67,10 @@ public interface SupplyItemService extends BaseService, InvokableService {
 
 	public com.rumbasolutions.flask.model.SupplyItem addSupplyItem(
 		java.lang.String supplyItemName, long supplyListId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.SupplyItem updateSupplyItem(
 		long supplyItemId, java.lang.String supplyItemName, long supplyListId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -80,7 +78,8 @@ public interface SupplyItemService extends BaseService, InvokableService {
 		long supplyItemId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> getAllSupplyItems();
+	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> getAllSupplyItems(
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> getItemsByListId(

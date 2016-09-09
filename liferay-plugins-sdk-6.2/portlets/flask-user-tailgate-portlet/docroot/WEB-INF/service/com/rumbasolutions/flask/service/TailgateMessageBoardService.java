@@ -18,6 +18,7 @@ import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.jsonwebservice.JSONWebService;
 import com.liferay.portal.kernel.transaction.Isolation;
+import com.liferay.portal.kernel.transaction.Propagation;
 import com.liferay.portal.kernel.transaction.Transactional;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.BaseService;
@@ -64,4 +65,35 @@ public interface TailgateMessageBoardService extends BaseService,
 	public java.lang.Object invokeMethod(java.lang.String name,
 		java.lang.String[] parameterTypes, java.lang.Object[] arguments)
 		throws java.lang.Throwable;
+
+	public com.rumbasolutions.flask.model.TailgateMessageBoard addMessageBoard(
+		java.lang.String messageText, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.rumbasolutions.flask.model.TailgateMessageBoard updateMessageBoard(
+		long tailgateMessageId, java.lang.String messageText, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.rumbasolutions.flask.model.TailgateMessageBoard getTailgMessageBoard(
+		long tailgateMessageId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.TailgateMessageBoard> getAllTailgateMessageBoards(
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.TailgateMessageBoard> getMessageBoardsByTailgateId(
+		long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteMessageBoard(long tailgateMessageId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteMyMessageBoards(
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteBoardsByTailgateId(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

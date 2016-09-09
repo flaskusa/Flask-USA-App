@@ -21,6 +21,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.util.PortalUtil;
 import com.rumbasolutions.flask.model.SupplyList;
 import com.rumbasolutions.flask.service.SupplyItemServiceUtil;
 import com.rumbasolutions.flask.service.SupplyListLocalServiceUtil;
@@ -52,18 +53,22 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 	private static Log LOGGER = LogFactoryUtil.getLog(SupplyListServiceImpl.class);
 	
 	@Override
-	public SupplyList addSupplyList(String supplyListName, boolean isSystem, long companyId, Date createdDate, Date modifiedDate, ServiceContext serviceContext){
+	public SupplyList addSupplyList(String supplyListName, boolean isSystem, ServiceContext serviceContext){
 		SupplyList supplyList = null;
 		try {
-			Date now = new Date();
-			supplyList = SupplyListLocalServiceUtil.createSupplyList(CounterLocalServiceUtil.increment());
-			supplyList.setSupplyListName(supplyListName);
-			supplyList.setIsSystem(isSystem);
-			supplyList.setCompanyId(companyId);
-			supplyList.setUserId(serviceContext.getUserId());
-			supplyList.setCreatedDate(serviceContext.getCreateDate(now));
-			supplyList.setModifiedDate(serviceContext.getModifiedDate(now));
-			supplyList = SupplyListLocalServiceUtil.addSupplyList(supplyList);
+			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
+				Date now = new Date();
+				supplyList = SupplyListLocalServiceUtil.createSupplyList(CounterLocalServiceUtil.increment());
+				supplyList.setSupplyListName(supplyListName);
+				supplyList.setIsSystem(isSystem);
+				supplyList.setCompanyId(PortalUtil.getDefaultCompanyId());
+				supplyList.setUserId(serviceContext.getUserId());
+				supplyList.setCreatedDate(serviceContext.getCreateDate(now));
+				supplyList.setModifiedDate(serviceContext.getModifiedDate(now));
+				supplyList = SupplyListLocalServiceUtil.addSupplyList(supplyList);
+			}else{
+				throw new Exception("You do not have required permissions");
+			}
 		} catch (Exception e) {
 			LOGGER.error("Exception in Add Supply List :" + e.getMessage());
 			e.printStackTrace();
@@ -72,7 +77,7 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 	}
 	
 	@Override
-	public SupplyList updateSupplyList(long supplyListId, String supplyListName, boolean isSystem, long companyId, long userId, Date createdDate, Date modifiedDate, ServiceContext serviceContext){
+	public SupplyList updateSupplyList(long supplyListId, String supplyListName, boolean isSystem, ServiceContext serviceContext){
 		SupplyList supplyList = null;
 		try {
 			supplyList = SupplyListLocalServiceUtil.getSupplyList(supplyListId);
@@ -80,8 +85,8 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 				Date now = new Date();
 				supplyList.setSupplyListName(supplyListName);
 				supplyList.setIsSystem(isSystem);
-				supplyList.setCompanyId(companyId);
-				supplyList.setUserId(userId);
+				supplyList.setCompanyId(PortalUtil.getDefaultCompanyId());
+				supplyList.setUserId(serviceContext.getUserId());
 				supplyList.setModifiedDate(serviceContext.getModifiedDate(now));
 				supplyList = SupplyListLocalServiceUtil.updateSupplyList(supplyList);
 			}else{
@@ -95,7 +100,7 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 	}
 	
 	@Override
-	public SupplyList getSupplyList(long supplyListId){
+	public SupplyList getSupplyList(long supplyListId, ServiceContext serviceContext){
 		SupplyList supplyList = null;
 		try {
 			supplyList = SupplyListLocalServiceUtil.getSupplyList(supplyListId);
@@ -107,7 +112,7 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 	}
 	
 	@Override
-	public List<SupplyList> getAllSupplyLists(){
+	public List<SupplyList> getAllSupplyLists(ServiceContext serviceContext){
 		List<SupplyList> supplyLists = null;
 		try {
 			supplyLists = SupplyListLocalServiceUtil.getSupplyLists(0, SupplyListLocalServiceUtil.getSupplyListsCount());
@@ -134,7 +139,7 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 	public void deleteSupplyList(long supplyListId, ServiceContext serviceContext){
 		try {
 			SupplyList supplyList = SupplyListLocalServiceUtil.getSupplyList(supplyListId);
-			if(serviceContext.getUserId()==supplyList.getUserId() || FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
+			if(serviceContext.getUserId()==supplyList.getUserId() && FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
 				SupplyListLocalServiceUtil.deleteSupplyList(supplyList);
 				SupplyItemServiceUtil.deleteItemsByListId(supplyListId, serviceContext);
 			}else{
@@ -150,9 +155,9 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 	public void deleteMySupplyLists(ServiceContext serviceContext){
 		try {
 			List<SupplyList> supplyLists = SupplyListUtil.findByuserId(serviceContext.getUserId());
-			for(int i=0; i<supplyLists.size(); i++){
-				SupplyListLocalServiceUtil.deleteSupplyList(supplyLists.get(i));
-				SupplyItemServiceUtil.deleteItemsByListId(supplyLists.get(i).getSupplyListId(), serviceContext);
+			for(SupplyList supplyList: supplyLists){
+				SupplyListLocalServiceUtil.deleteSupplyList(supplyList);
+				SupplyItemServiceUtil.deleteItemsByListId(supplyList.getSupplyListId(), serviceContext);
 			}
 		} catch (Exception e) {
 			LOGGER.error("Exception in delete My Supply Lists :" + e.getMessage());

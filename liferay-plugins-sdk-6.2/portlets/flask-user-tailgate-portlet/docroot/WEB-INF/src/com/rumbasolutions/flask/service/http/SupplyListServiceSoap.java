@@ -63,14 +63,12 @@ import java.rmi.RemoteException;
  */
 public class SupplyListServiceSoap {
 	public static com.rumbasolutions.flask.model.SupplyListSoap addSupplyList(
-		java.lang.String supplyListName, boolean isSystem, long companyId,
-		java.util.Date createdDate, java.util.Date modifiedDate,
+		java.lang.String supplyListName, boolean isSystem,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.SupplyList returnValue = SupplyListServiceUtil.addSupplyList(supplyListName,
-					isSystem, companyId, createdDate, modifiedDate,
-					serviceContext);
+					isSystem, serviceContext);
 
 			return com.rumbasolutions.flask.model.SupplyListSoap.toSoapModel(returnValue);
 		}
@@ -83,14 +81,11 @@ public class SupplyListServiceSoap {
 
 	public static com.rumbasolutions.flask.model.SupplyListSoap updateSupplyList(
 		long supplyListId, java.lang.String supplyListName, boolean isSystem,
-		long companyId, long userId, java.util.Date createdDate,
-		java.util.Date modifiedDate,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.SupplyList returnValue = SupplyListServiceUtil.updateSupplyList(supplyListId,
-					supplyListName, isSystem, companyId, userId, createdDate,
-					modifiedDate, serviceContext);
+					supplyListName, isSystem, serviceContext);
 
 			return com.rumbasolutions.flask.model.SupplyListSoap.toSoapModel(returnValue);
 		}
@@ -102,9 +97,12 @@ public class SupplyListServiceSoap {
 	}
 
 	public static com.rumbasolutions.flask.model.SupplyListSoap getSupplyList(
-		long supplyListId) throws RemoteException {
+		long supplyListId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			com.rumbasolutions.flask.model.SupplyList returnValue = SupplyListServiceUtil.getSupplyList(supplyListId);
+			com.rumbasolutions.flask.model.SupplyList returnValue = SupplyListServiceUtil.getSupplyList(supplyListId,
+					serviceContext);
 
 			return com.rumbasolutions.flask.model.SupplyListSoap.toSoapModel(returnValue);
 		}
@@ -115,11 +113,12 @@ public class SupplyListServiceSoap {
 		}
 	}
 
-	public static com.rumbasolutions.flask.model.SupplyListSoap[] getAllSupplyLists()
+	public static com.rumbasolutions.flask.model.SupplyListSoap[] getAllSupplyLists(
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			java.util.List<com.rumbasolutions.flask.model.SupplyList> returnValue =
-				SupplyListServiceUtil.getAllSupplyLists();
+				SupplyListServiceUtil.getAllSupplyLists(serviceContext);
 
 			return com.rumbasolutions.flask.model.SupplyListSoap.toSoapModels(returnValue);
 		}

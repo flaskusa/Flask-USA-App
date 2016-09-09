@@ -63,6 +63,63 @@ public class TailgateSupplyItemServiceUtil {
 		return getService().invokeMethod(name, parameterTypes, arguments);
 	}
 
+	public static com.rumbasolutions.flask.model.TailgateSupplyItem addTailgateSupplyItem(
+		java.lang.String supplyListItemName, long tailgateId,
+		long itemAssignedUserId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .addTailgateSupplyItem(supplyListItemName, tailgateId,
+			itemAssignedUserId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateSupplyItem updateTailgateSupplyItem(
+		long tailgateSupplyItemId, java.lang.String supplyListItemName,
+		long tailgateId, long itemAssignedUserId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateTailgateSupplyItem(tailgateSupplyItemId,
+			supplyListItemName, tailgateId, itemAssignedUserId, serviceContext);
+	}
+
+	public static com.rumbasolutions.flask.model.TailgateSupplyItem getTailgateSupplyItem(
+		long tailgateSupplyItemId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .getTailgateSupplyItem(tailgateSupplyItemId, serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> getItemsByTailgateId(
+		long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getItemsByTailgateId(tailgateId, serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> getMyTailgateSupplyItems(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getMyTailgateSupplyItems(serviceContext);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> getAllTailgateSupplyItems(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getAllTailgateSupplyItems(serviceContext);
+	}
+
+	public static void deleteTailgateSupplyItem(long tailgateSupplyItemId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService()
+			.deleteTailgateSupplyItem(tailgateSupplyItemId, serviceContext);
+	}
+
+	public static void deleteItemsByTailgateId(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteItemsByTailgateId(tailgateId, serviceContext);
+	}
+
+	public static void deleteMyItems(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteMyItems(serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

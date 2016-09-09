@@ -32,6 +32,8 @@ import com.rumbasolutions.flask.model.TailgateUsers;
 import com.rumbasolutions.flask.model.impl.TailgateInfoImpl;
 import com.rumbasolutions.flask.model.impl.TailgateUsersImpl;
 import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateMessageBoardServiceUtil;
+import com.rumbasolutions.flask.service.TailgateSupplyItemServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.TailgateInfoServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoFinderUtil;
@@ -62,6 +64,8 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.rumbasolutions.flask.service.UserTailgateServiceUtil} to access the user tailgate remote service.
 	 */
+	String adminRoles[] = {FlaskTailgateUtil.FlaskRoleEnum.FLASK_ADMIN.getRoleName(), FlaskTailgateUtil.FlaskRoleEnum.LIFERAY_ADMIN.getRoleName(),
+			FlaskTailgateUtil.FlaskRoleEnum.FLASK_CONTENT_ADMIN.getRoleName() };
 	private static Log LOGGER = LogFactoryUtil.getLog(TailgateInfoServiceImpl.class);
 	
 	public TailgateInfo addTailgateInfo(String tailgateName, String tailgateDescription,long eventId, String eventName,
@@ -195,9 +199,13 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 		return userTailgate;
 		
 		}
-	public void deleteTailgateInfo(long tailgateId){
+	public void deleteTailgateInfo(long tailgateId, ServiceContext serviceContext){
 		try{
-		TailgateInfoLocalServiceUtil.deleteTailgateInfo(tailgateId);
+			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles) && TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId()==serviceContext.getUserId()){
+				TailgateInfoLocalServiceUtil.deleteTailgateInfo(tailgateId);
+				TailgateSupplyItemServiceUtil.deleteItemsByTailgateId(tailgateId, serviceContext);
+				TailgateMessageBoardServiceUtil.deleteBoardsByTailgateId(tailgateId, serviceContext);
+			}
 		}catch(Exception ex){
 			LOGGER.error("Exception in deleteiing Tailgate: " + ex.getMessage());
 		}

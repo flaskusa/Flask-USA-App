@@ -68,7 +68,9 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 
 		_methodName9 = "deleteTailgateInfo";
 
-		_methodParameterTypes9 = new String[] { "long" };
+		_methodParameterTypes9 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -318,10 +320,16 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 	}
 
 	@Override
-	public void deleteTailgateInfo(long tailgateId) {
+	public void deleteTailgateInfo(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
 			_invokableService.invokeMethod(_methodName9,
-				_methodParameterTypes9, new Object[] { tailgateId });
+				_methodParameterTypes9,
+				new Object[] {
+					tailgateId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

@@ -133,6 +133,9 @@
         
         <finder name="tailgateId" return-type="Collection">
         	<finder-column name="tailgateId" />
+        </finder> 
+        <finder name="userId" return-type="Collection">
+        	<finder-column name="userId" />
         </finder>    
    </entity>
    
@@ -151,6 +154,9 @@
         
         <finder name="tailgateId" return-type="Collection">
         	<finder-column name="tailgateId" />
+        </finder>  
+        <finder name="userId" return-type="Collection">
+        	<finder-column name="userId" />
         </finder>    
    </entity>
  	

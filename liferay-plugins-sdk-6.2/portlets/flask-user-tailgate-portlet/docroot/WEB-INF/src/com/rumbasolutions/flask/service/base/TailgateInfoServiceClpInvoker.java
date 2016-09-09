@@ -68,7 +68,9 @@ public class TailgateInfoServiceClpInvoker {
 
 		_methodName78 = "deleteTailgateInfo";
 
-		_methodParameterTypes78 = new String[] { "long" };
+		_methodParameterTypes78 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -133,7 +135,8 @@ public class TailgateInfoServiceClpInvoker {
 
 		if (_methodName78.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
-			TailgateInfoServiceUtil.deleteTailgateInfo(((Long)arguments[0]).longValue());
+			TailgateInfoServiceUtil.deleteTailgateInfo(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
