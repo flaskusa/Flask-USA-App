@@ -1338,7 +1338,7 @@ position:initial !important;
   float: right
 }
 .adminText{
-  background-color: green;
+  background-color: #ff8c00;
   width:50px
 }
 .userText{
@@ -1547,3 +1547,59 @@ position:initial !important;
 }
 
 a.item.item-full.item-icon-left.attendees{padding-top:58px;}
+.emailText {
+  color: darkorange;
+}
+
+
+.my-groupDetail-view {
+  .item-content {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: -4px;
+    margin-bottom: -4px;
+    height: 70px;
+    text-align: center;
+    padding-right: 79px;
+  }
+}
+
+.toggle input + .track{
+  border-color: #e6e6e6;
+  background-color: white;
+}
+.toggle input:checked + .track {
+
+  background-color: #ff8c00 !important;
+  border:none;
+}
+.showTextArea {
+  width: 80%;
+  height:70px;
+  border: solid .5px;
+  resize: none;
+  transition: .5s;
+  border-color: orange;
+}
+.hideTexArea{
+  height:0px;
+  width:0px;
+  transition:.5s
+}
+.hideAll{
+  display:none;
+}
+.toastDiv{
+  z-index: 100;
+  position: absolute;
+  width: 100%;
+  color:#ff8c00;
+  font-weight: 500;
+  background-color: #ffffff;
+  top:280px;
+
+}
+.hideToastDiv{
+  opacity:0;
+  transition:2s;
+}
