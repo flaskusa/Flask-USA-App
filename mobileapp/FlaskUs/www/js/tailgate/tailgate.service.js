@@ -20,6 +20,8 @@
         var getmapMarkersURL = "flask-user-tailgate-portlet.tailgatemarker/get-tailgate-marker";
         var addTialgateMarkerURL = "flask-user-tailgate-portlet.tailgatemarker/add-tailgate-marker";
         var inviteFriendsTailgateURL = "flask-social-portlet.entry/search-my-friends";
+        var addMessageBoardURL = "flask-user-tailgate-portlet.tailgatemessageboard/add-message-board";
+        var getmessageBoardsByTailgateIdURL = "flask-user-tailgate-portlet.tailgatemessageboard/get-message-boards-by-tailgate-id";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -34,7 +36,9 @@
             addTailgateMarkers: addTailgateMarkers,
             getUserFrends: getUserFrends,
             addcurrentUser: addcurrentUser,
-            getvenueDetails: getvenueDetails
+            getvenueDetails: getvenueDetails,
+            saveMessage: saveMessage,
+            getAllMessages:getAllMessages
         }
 
         function getvenueDetails(venueId) {
@@ -197,6 +201,33 @@
                 }
             }
             )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+
+        function getAllMessages(tailgateId) {
+            return $http.get(baseURL + getmessageBoardsByTailgateIdURL, {
+                params: { 'tailgateId': tailgateId }
+            }
+            )
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    //add errror handling 
+                });
+        }
+
+        function saveMessage(msgtxt, tailgateId) {
+            return $http.get(baseURL + addMessageBoardURL, {
+                params: {
+                    'messageText': msgtxt,
+                    'tailgateId':tailgateId
+                }
+            })
             .then(function success(response) {
                 return response;
             }, function failure(response) {

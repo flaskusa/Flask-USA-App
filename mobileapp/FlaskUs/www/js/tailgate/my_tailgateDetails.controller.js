@@ -8,26 +8,14 @@
     /* @ngInject */
     function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies) {
         $scope.myTailgaters = [];
+        $scope.allMessages = [];
         var tailGateId = $stateParams.tailgateId;
         $cookies.put('currtailGateId', tailGateId);
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         getMyTailgate();
+        get_message_list(tailGateId);
         $scope.goBack=function() {
             $state.go("app.my_tailgate");
-        }
-        function initMap() {
-            // Getting the map selector in DOM
-            var mapDiv = document.getElementById("map_canvas");
-            var latLng = new google.maps.LatLng(42.3314, -83.0458);
-
-            var mapOptions = {
-                center: latLng,
-                zoom: 15,
-                mapTypeId: google.maps.MapTypeId.ROADMAP
-            };
-
-            $scope.map = new google.maps.Map(mapDiv, mapOptions);
-
         }
 
         function getMyTailgate() {
@@ -61,6 +49,23 @@
         function getTailgateMarkers(tailGateId) {
             TailgateService.getMapMarkers(tailGateId).then(function (respData) {
                 $cookies.putObject('currtailGateMakers', respData.data);
+            });
+        }
+
+        //save message Function
+        $scope.saveMessage = function (msg) {
+            console.log(msg);
+            $scope.tailgateDetailId = tailGateId;
+            console.log($scope.tailgateDetailId);
+            TailgateService.saveMessage(msg, tailGateId).then(function (respData) {
+                console.log(respData);
+            });
+        }
+
+        function get_message_list(tailGateId) {
+            TailgateService.getAllMessages(tailGateId).then(function (respData) {
+                console.log(respData.data);
+                $scope.allMessages = respData.data;
             });
         }
     }
