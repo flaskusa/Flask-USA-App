@@ -1603,3 +1603,35 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
   opacity:0;
   transition:2s;
 }
+
+/*Message board in my_tailgate_event_details*/
+.list.list-inset.msgboard{
+    border:solid 1px;
+}
+
+.messageList{    
+    text-transform:uppercase;
+    font-weight:bold;
+    font-size: 14px !important;
+    margin-left: 13px !important;
+}
+
+.msg_list{
+    display:inline;
+    float:left;
+}
+
+.msg_list span{
+    top: 2px; right: 22px;
+}
+
+.msg_input{
+    display:inline;
+    float:left;
+    width: 89%;
+}
+
+.msg_input label{
+    height: 30px;
+    border: transparent;
+}
