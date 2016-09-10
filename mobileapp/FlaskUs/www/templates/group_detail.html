@@ -34,11 +34,13 @@
         </div>
     </form>
 </div>
-        <a class="item item-full list-item-icon-left "ng-click="showInviteFriendPopup()">
+        <a class="item item-full list-item-icon-left "ng-click="showInviteFriendPopup()"ng-if="isLoginUserAdmin==true">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">ADD MEMBER</p>
         </a>
-
+        <a class="item item-full list-item-icon-left "ng-if="isLoginUserAdmin==false">
+            <p class="addText">GROUP MEMBERS</p>
+        </a>
        <ion-list>
            <ion-item ng-repeat="data in allMember track by $index"class="row-no-padding"padding="false">
                 <a class="row-no-padding"ng-click="groupMemberDetail(data)">
