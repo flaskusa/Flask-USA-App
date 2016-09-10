@@ -7,7 +7,7 @@
             <button class="button button-icon button-clear ion-share"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content class="" overflow-scroll="false">
+    <ion-content overflow-scroll="false">
         <div class="list tab1">
             <!-- Tab 1 content -->
             <div class="divImage">
@@ -59,12 +59,18 @@
                     <div class="col">
                         <div class="" style="font-weight: 700; font-size: 21px;">MESSAGE BOARD</div>
                         <span>
-                            <div class="list list-inset" style="margin-top: 7px;">
-                                <label class="item item-input item-icon-right" style="height: 30px;border: 1px solid;">
-
-                                    <input type="text" placeholder="Type Message Here...">
-                                    <span class="badge span_icon" style="top: 2px; right: 22px;"><img src="img/flask_icons/arrow_left.svg"></span>
-                                </label>
+                            <div class="list list-inset msgboard" style="margin-top: 7px;">
+                                <div class="col-col-70 msg_input">
+                                    <label class="item item-input item-icon-right" style="">
+                                        <input type="text" placeholder="Type Message Here..." ng-model="Message">
+                                    </label>
+                                </div>
+                                <div class="col-col-15 msg_list">
+                                    <span class="badge span_icon" ng-click="saveMessage(Message);"><img src="img/flask_icons/arrow_left.svg"></span>
+                                </div>
+                            </div>
+                            <div class="list">
+                                <h2 class="messageList" ng-repeat="data in allMessages">{{data.messageText}}</h2>
                             </div>
                         </span>
                     </div>
