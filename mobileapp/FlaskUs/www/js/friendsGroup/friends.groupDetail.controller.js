@@ -3,8 +3,8 @@
     angular.module('flaskApp')
         .controller('FriendsGroupDetailCtrl', FriendsGroupDetailCtrl);
 
-    FriendsGroupDetailCtrl.$inject = ['$scope','GroupService','$stateParams','$state','$ionicModal','$ionicHistory','$ionicPopup','$flaskUtil'];
-    function FriendsGroupDetailCtrl($scope,GroupService,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup,$flaskUtil) {
+    FriendsGroupDetailCtrl.$inject = ['$scope','GroupService','$stateParams','$state','$ionicModal','$ionicHistory','$ionicPopup','$flaskUtil','$cookies'];
+    function FriendsGroupDetailCtrl($scope,GroupService,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup,$flaskUtil,$cookies) {
 
         $scope.groupTitle=$stateParams.groupName;
 
@@ -13,6 +13,8 @@
         $scope.groupDetail=GroupService.groupDetail;
         $scope.editGroup=false;
         $scope.groupAdminDetail=GroupService.groupAdminDetail;
+        var userDetail=$cookies.getObject('CurrentUser');
+        var userId=userDetail.data.userId;
         if(!$scope.groupDetail || $scope.groupDetail=="" ){
             $scope.editGroup=false;
         }else{
@@ -21,9 +23,33 @@
         $scope.goBack = function(){
             $ionicHistory.goBack();
         }
-        GroupService.getAllGroupMember($scope.groupId).then(function(response){
-            $scope.allMember=response;
-        });
+        $scope.initialize=function(){
+            $scope.getMember();
+        }
+        $scope.isLoginAdmin=function(){
+            angular.forEach($scope.allMember,function(value,key){
+                if(userId==value.userId){
+                    if(value.isAdmin==1) {
+                        GroupService.isLoginUserAdmin=true;
+                        $scope.isLoginUserAdmin=true;
+                        return false;
+                    }else{
+                        GroupService.isLoginUserAdmin=false;
+                        $scope.isLoginUserAdmin=false;
+                    }
+                }
+
+            });
+        }
+        $scope.getMember=function() {
+            GroupService.getAllGroupMember($scope.groupId).then(function (response) {
+                $scope.allMember = response;
+                $scope.isLoginAdmin();
+
+
+            });
+        }
+
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
         }).then(function (modal) {
@@ -143,6 +169,7 @@
 
             });
         }
+        $scope.initialize();
 
     }
 })();

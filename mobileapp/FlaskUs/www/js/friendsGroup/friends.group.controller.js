@@ -3,57 +3,16 @@
     angular.module('flaskApp')
         .controller('FriendsGroupCtrl', FriendsGroupCtrl);
 
-    FriendsGroupCtrl.$inject = ['$scope','GroupService','$cookies','$state','$flaskUtil','$ionicPopup','$stateParams','FriendsService'];
+    FriendsGroupCtrl.$inject = ['$scope','GroupService','$cookies','$state','$flaskUtil','$ionicPopup','$stateParams','FriendsService','$timeout'];
 
     /* @ngInject */
-    function FriendsGroupCtrl($scope,GroupService,$cookies,$state,$flaskUtil,$ionicPopup,$stateParams,FriendsService) {
+    function FriendsGroupCtrl($scope,GroupService,$cookies,$state,$flaskUtil,$ionicPopup,$stateParams,FriendsService,$timeout) {
         $scope.initialize = function() {
             getAllGroups();
         };
 
         $scope.userId=FriendsService.mediatorUserId;
         $scope.addingInGroup=false;
-        if($scope.userId && $scope.userId!=0){
-            $scope.addingInGroup = true;
-        }
-        $scope.addFriendToGroup=function(index,groupId){
-            $scope.isGroupMemberIsAvailable=false;
-            GroupService.getMyFriendList().then(function(resopnse) {
-                $scope.userContactList = resopnse;
-            });
-            GroupService.getAllGroupMember(groupId).then(function(response){
-                $scope.allMember=response;
-                angular.forEach( $scope.allMember,function(value,key){
-                  if(value.userId==$scope.userId){
-                      $scope.isGroupMemberIsAvailable=true;
-                      $flaskUtil.alert("user is already in this group")
-                  }
-                });
-                if($scope.isGroupMemberIsAvailable==false){
-                    $scope.addUserToGroup=function(){
-                        GroupService.addUserToGroup(groupId, $scope.matchedUser.emailAddress, $scope.matchedUser.userId, $scope.matchedUser.fullName, 0).then(function (response) {
-                            $flaskUtil.alert("user added");
-                        });
-                    }
-                    angular.forEach($scope.userContactList,function(value,key){
-                        if(value.userId==$scope.userId){
-                            $scope.matchedUser=value;
-                            $scope.addUserToGroup();
-                            return false;
-                        }
-                    });
-
-
-
-                }
-            });
-
-            $scope.groups.splice(index,1);
-        }
-        $scope.doneAdding=function(){
-            FriendsService.mediatorUserId=0;
-            $state.go('app.my_friends_tab.my_friends');
-        };
         $scope.allMember=[];
         $scope.memberToAddInGroup=[];
         $scope.groups = [];
@@ -61,14 +20,124 @@
         $scope.searchBox={showBox:false};
         var userDetail=$cookies.getObject('CurrentUser');
         var userId=userDetail.data.userId;
+        if($scope.userId && $scope.userId!=0){
+            $scope.addingInGroup = true;
+        }
+        function isUserAvailableInGroup(groupId){
+           return GroupService.getAllGroupMember(groupId).then(function (response) {
+                $scope.allMember = response;
+                $scope.isGroupMemberIsAvailable = false;
+                angular.forEach($scope.allMember, function (value, key) {
+                    if (value.userId == $scope.userId) {
+                        $scope.isGroupMemberIsAvailable = true;
+                        return $scope.isGroupMemberIsAvailable;
+                    }
+                });
+               return $scope.isGroupMemberIsAvailable;
+            });
+
+        }
+        $scope.isLoginAdmin=function(){
+            angular.forEach($scope.allMember,function(value,key){
+                if(userId==value.userId){
+                    if(value.isAdmin==1) {
+                        $scope.isLoginUserAdmin=true;
+                        return false;
+                    }else{
+                        $scope.isLoginUserAdmin=false;
+                    }
+                }
+
+            });
+        }
+        $scope.leaveGroup=function(groupId,index){
+            GroupService.leaveGroup(groupId,userId).then(function(response){
+                if(response=={}){
+                 $scope.groups.splice(index,1)
+                }
+            })
+        }
+        $scope.addFriendToGroup=function(index,groupId,showDivByIndex){
+            $scope.isGroupMemberIsAvailable == false;
+            GroupService.getMyFriendList().then(function (resopnse) {
+                $scope.userContactList = resopnse;
+
+            GroupService.groupId=groupId;
+
+
+                   $scope.addUserToGroup = function () {
+
+                            GroupService.addUserToGroup(groupId, $scope.matchedUser.emailAddress, $scope.matchedUser.userId, $scope.matchedUser.fullName, 0).then(function (response) {
+                                $scope.groups[index].showDivByIndex=true;
+                                $timeout(function () {  $scope.groups.splice(index, 1);
+                                   },1000);
+
+                            });
+                        }
+
+                        angular.forEach($scope.userContactList, function (value, key) {
+                            if (value.userId == $scope.userId) {
+                                $scope.matchedUser = value;
+                                $scope.addUserToGroup();
+                                $scope.isGroupMemberIsAvailable == true;
+                                return false;
+
+                            }
+                        });
+            });
+        }
+        $scope.doneAdding=function(){
+            FriendsService.mediatorUserId=0;
+            $state.go('app.my_friends_tab.my_friends');
+        };
+
         $scope.goBack = function () {
             $state.go("app.user_navigation_menu");
         }
+        Array.prototype.clean = function(deleteValue) {
+            for (var i = 0; i < this.length; i++) {
+                if (this[i] == deleteValue) {
+                    this.splice(i, 1);
+                    i--;
+                }
+            }
+            return this;
+        };
         function getAllGroups() {
             GroupService.getAllGroups(userId).then(function(response){
                 if(response.message!="Authenticated access required") {
-                    $scope.groups = response;
+                    if ($scope.addingInGroup == true) {
+                        $scope.showDoneButton=false;
+                        $scope.groupsToAdd=[];
+                        $scope.groupsToAdd = response;
+                        $scope.counter=0;
+                        angular.forEach($scope.groupsToAdd, function (value,key) {
+                            isUserAvailableInGroup(value.groupId).then(function(res){
+                                $scope.counter++;
+                            if($scope.isGroupMemberIsAvailable==true){
+                                $scope.groupsToAdd[key]="";
+                            }
+                                if(res==false){
+                                $scope.isLoginAdmin();
+                                if($scope.isLoginUserAdmin==false){
+                                    $scope.groupsToAdd[key]=""
+                                }
+                            }
+                               if($scope.counter==response.length){
+                                    $scope.groupsToAdd.clean("");
+                                    $scope.groupsToAdd.clean(undefined);
+                                    $scope.groups=$scope.groupsToAdd;
+                                    $scope.showDoneButton=true;
+                                }
+                       });
+                        })
+
+                    }
+                    else{
+                        $scope.groups=response;
+                    }
                 }
+
             });
         }
         $scope.getGroupDetail=function(group) {
@@ -92,7 +161,7 @@
                                 $scope.groups.splice(index,1);
                             }
                             else{
-                                alert("failed to delete");
+                                $flaskUtil.alert("failed to delete");
                             }
                         });
                     } else {
@@ -190,6 +259,7 @@
             });
 
         }
+
         $scope.finishAddingMember=function(){
             $scope.modal.hide();
             $state.go('app.my_friends_tab.friendsGroup');

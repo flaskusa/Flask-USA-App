@@ -40,7 +40,6 @@
           $scope.searchUserContact('',$scope.startIndex, $scope.endIndex);
           $scope.modal.show();
       };
-
       $scope.closeInviteFriendPopup = function () {
           $scope.modal.hide();
           $scope.moreDataCanBeLoaded = true;

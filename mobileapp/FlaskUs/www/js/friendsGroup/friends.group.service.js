@@ -19,12 +19,14 @@
             removeGroupOwner:removeGroupOwner,
             updateGroup:updateGroup,
             deleteGroupUser:deleteGroupUser,
-            searchGroupMember:searchGroupMember
+            searchGroupMember:searchGroupMember,
+            leaveGroup:leaveGroup
         }
         var url = SERVER.url;
         this.groupMemberDetail={};
         this.groupDetail={};
         this.groupAdminDetail={};
+        this.isLoginUserAdmin={};
         var companyId = SERVER.companyId;
         var getAllGroups = "/flask-manage-user-group-portlet.flaskgroup/get-all-my-groups";
         var createGroup="/flask-manage-user-group-portlet.flaskgroup/add-group";
@@ -38,6 +40,7 @@
         var updateGroupUrl="/flask-manage-user-group-portlet.flaskgroup/update-group";
         var DeleteGroupUserUrl="/flask-manage-user-group-portlet.flaskgroupusers/delete-group-user";
         var searchFriendUrl="/flask-social-portlet.entry/search-my-friends";
+        var leaveGroupUrl="/flask-manage-user-group-portlet.flaskgroupusers/delete-group-user"
 
 
 
@@ -194,7 +197,16 @@
                 //add errror handling
             });
         }
-
+        function leaveGroup(groupId,userId){
+            return $http.get(url+leaveGroupUrl,{
+                params:{"groupId":groupId,"userId":userId}
+            }).then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling
+            });
+        }
         return services;
 
     }
