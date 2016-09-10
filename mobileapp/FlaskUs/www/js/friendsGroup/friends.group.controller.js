@@ -51,11 +51,23 @@
             });
         }
         $scope.leaveGroup=function(groupId,index){
-            GroupService.leaveGroup(groupId,userId).then(function(response){
-                if(response=={}){
-                 $scope.groups.splice(index,1)
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Leave Group?',
+                template: 'Select OK to Confirm!'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    GroupService.leaveGroup(groupId,userId).then(function(response){
+                        if(response=={}){
+                            $scope.groups.splice(index,1)
+                        }else{
+                            $flaskUtil.alert("failed to leave");
+                        }
+                    });
+                } else {
                 }
-            })
+            });
+
         }
         $scope.addFriendToGroup=function(index,groupId,showDivByIndex){
             $scope.isGroupMemberIsAvailable == false;
