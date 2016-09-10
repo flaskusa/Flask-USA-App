@@ -12,18 +12,26 @@
         <p class="friend">{{friend.emailAddress}}</p>
 
     </div>
+      <div id="toaster" ng-if="messageSentStatus==true"class="item toastDiv" ><i>Message sent successfully</i> </div>
+      <div  align="center">
+          <textarea ng-if="showTextArea.show==true"ng-model="message.messageToSend" id="textArea" class="showTextArea hideTexArea"autofocus></textarea>
+      </div>
     <div  align="center">
-        <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="showSendMessagePopup()">
-            Send Message
+
+        <button type="submit" nav-clear="" class="button button-block button-positive friend "ng-click="toggleMessageBox(message.messageToSend)">
+            Send Message<!--<i class="ion-close-circled icon-right"ng-if='showTextArea.show==true && message.messageToSend ==""'style="float:right"></i>-->
         </button>
     </div>
+
       <a style="text-decoration: none"ng-click="initializeMediatorId(friend.userId)">
     <div  align="center">
         <button type="submit" nav-clear="" class="button button-block button-positive friend">
         Add To Group
         </button>
-    </div></a>
-      <script id="templates/sendMessage.html" type="text/ng-template">
+    </div>
+
+      </a>
+      <!--<script id="templates/sendMessage.html" type="text/ng-template">
             <ion-modal-view >
                 <ion-header-bar class="bar bar-header bar-positive black-header">
                     <h1 class="title">Send Message</h1>
@@ -40,6 +48,6 @@
                     </div>
                 </ion-content>
             </ion-modal-view>
-        </script>
+        </script>-->
   </ion-content>
 </ion-view>
