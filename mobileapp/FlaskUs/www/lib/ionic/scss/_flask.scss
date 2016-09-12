@@ -1637,3 +1637,37 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 }
 
 .message_username{color:orange !important;}
+.supplyDeleteButton{
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  width: 50px;
+  height: 100%;
+  top:0px;
+  border-radius: 0px
+}
+.item .badge.extra-right-supply {
+  right: 15px;
+  top:0px;
+
+}
+.supplyDeleteIcon{
+  font-size: 24px;
+  padding-top: 9px;
+  padding-left: 9px;
+}
+.paddingRadio{
+  padding-left: 10px;
+  padding-top: 3px;
+  padding-right: 5px;
+}
+.radioButtonSize {
+  height: 17px;
+  width: 17px;
+}
+.stripAdmin {
+  padding-top: 13px;
+  height: 50px
+}
+.fontSizeStrip{
+  font-size: 18px;
+}
+
