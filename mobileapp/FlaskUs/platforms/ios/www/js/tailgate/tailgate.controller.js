@@ -12,6 +12,9 @@
         var userResponse = $cookies.getObject('CurrentUser');
         var UserId = userResponse.data.userId;
         getAlltailgates();
+        $scope.goBack = function () {
+            $state.go("app.user_navigation_menu");
+        }
 
         function getAlltailgates() {
             TailgateService.getMyTailgates(UserId).then(function (respData) {

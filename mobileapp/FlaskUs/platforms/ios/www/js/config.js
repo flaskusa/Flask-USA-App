@@ -7,8 +7,16 @@
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
         "companyId":20154
     })
-
-    flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider) {
+    flaskAppConfig.config(function ($provide) {
+            $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
+                return function (exception, cause) {
+                    var $rootScope = $injector.get("$rootScope");
+                    $rootScope.$broadcast("catchAll:exception",{exception:exception}); // This represents a custom method that exists within $rootScope
+                    $delegate(exception, cause);
+            };
+        });
+    });
+    flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider,uiGmapGoogleMapApiProvider) {
         $stateProvider
           .state('app', {
               url: '/app',
@@ -77,6 +85,15 @@
                 }
             }
         })
+            .state('app.createSupplies', {
+                url: '/createSupplies',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/createSupplies.html',
+                        controller: 'SuppliesCtrl'
+                    }
+                }
+            })
 
         .state('app.suppliesList', {
             url: '/suppliesList/:listName',
@@ -133,36 +150,87 @@
         })
        
         .state('app.my_tailgateDetails', {
-            url: '/my_tailgateDetails/:tailgateId',
+            url: '/my_tailgateDetails',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_tailgateDetails.html',
+                    templateUrl: 'templates/my_tailgateDetails.html'
+                }
+            }
+            
+        })
+
+        .state('app.add_my_tailgate', {
+            url: '/add_my_tailgate',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/add_my_tailgate.html',
+                    controller: 'add_mytailgateCtrl'
+                }
+            }
+        })
+
+
+        .state('app.my_tailgateDetails.my_tailgate_event_details', {
+            url: "/my_tailgate_event_details/:tailgateId",
+            views: {
+                'evnts-tab': {
+                    templateUrl: "templates/my_tailgate_event_details.html",
                     controller: 'mytailgateDetailsCtrl'
                 }
             }
         })
 
-            .state('app.add_my_tailgate', {
-                url: '/add_my_tailgate',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/add_my_tailgate.html',
-                        controller: 'add_mytailgateCtrl'
-                    }
-                }
-            })
-         // End of My TailGate Section
-        .state('app.my_friends', {
-            url: '/my_friends',
+        .state('app.my_tailgateDetails.my_tailgate_view_location', {
+            url: "/my_tailgate_view_location",
             views: {
-                'menuContent': {
-                    templateUrl: 'templates/my_friends.html',
-                    controller:"FriendsCtrl"
+                'location-tab': {
+                    templateUrl: "templates/my_tailgate_view_location.html",
+                    controller: 'mytailgatelocationCtrl'
                 }
             }
         })
+
+        .state('app.my_tailgateDetails.my_tailgate_view_tailgaters', {
+            url: "/my_tailgate_view_tailgaters",
+            views: {
+                'tailgaters-tab': {
+                    templateUrl: "templates/my_tailgate_view_tailgaters.html",
+                    controller: 'mytailgatorsCtrl'
+                }
+            }
+        })
+        .state('app.my_tailgateDetails.my_tailgate_view_plan', {
+            url: "/my_tailgate_view_plan",
+            views: {
+                'plan-tab': {
+                    templateUrl: "templates/my_tailgate_view_plan.html",
+                    controller: 'mytailgatePlanCtrl'
+                }
+            }
+        })
+    // End of My TailGate Section
+
+        .state('app.my_friends_tab', {
+            url: '/my_friends_tab',
+            views: {
+                'menuContent': {
+                        templateUrl: 'templates/my_friends_tab.html',
+                        controller: "FriendsCtrl"
+                    }
+                }
+        })
+
+        .state('app.my_friends_tab.my_friends', {
+                url: '/my_friends',
+                views: {
+                        'myFriend_tab': {
+                            templateUrl: 'templates/my_friends.html',
+                            controller: "FriendsCtrl"
+                        }
+                    }
+            })
         .state('app.my_friendDetail', {
-            url: '/my_friendDetail/:userId',
+            url: '/my_friendDetail:friendId',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/friendDetail.html',
@@ -193,13 +261,14 @@
             url: '/account_settings',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/account_settings.html'
+                    templateUrl: 'templates/account_settings.html',
+                    controller: 'user_registrationCtrl'
                 }
             }
         })
 
         .state('app.tickets', {
-            url: '/tickets',
+            url: '/tickets/:venueName/:eventDate/:eventName',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/tickets.html',
@@ -207,7 +276,51 @@
                 }
             }
         })
+        .state('app.my_friends_tab.friendsGroup', {
+            url: '/friends_group/:userId',
+            views: {
+                'myGroup_tab': {
+                    templateUrl: 'templates/friends_group.html',
+                    controller: 'FriendsGroupCtrl'
+                }
+            }
+        })
+            .state('app.my_friends_tab.notification', {
+                url: '/notification_tab',
+                views: {
+                    'notification_tab': {
+                        templateUrl: 'templates/notification.html'
+                    }
+                }
+            })
+            .state('app.createGroup', {
+                url: '/create_group',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/create_group.html',
+                        controller: 'CreateGroupCtrl'
+                    }
+                }
+            })
+            .state('app.groupDetail', {
+                url: '/group_detail/:groupName',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/group_detail.html',
+                        controller: 'FriendsGroupDetailCtrl'
+                    }
+                }
+            })
 
+            .state('app.groupMemberDetail', {
+                url: '/group_member_detail',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/group_member_detail.html',
+                        controller: 'FriendsGroupMemberDetailCtrl'
+                    }
+                }
+            })
 
         /*
         if none of the above states are matched, use this as the fallback*/
@@ -231,5 +344,10 @@
                 }
             }
         })
+
+         uiGmapGoogleMapApiProvider.configure({
+          key: 'AIzaSyDAFZx0f0rc-vCyx-GHMqy2O9m06Dc-p8Y',
+        libraries: 'weather,geometry,visualization,places'
+    });
     })
 })();
