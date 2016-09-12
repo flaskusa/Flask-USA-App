@@ -70,7 +70,7 @@
                                 </div>
                             </div>
                             <div class="list">
-                                <h2 class="messageList" ng-repeat="data in allMessages">{{data.messageText}}</h2>
+                                <div class="messageList" ng-repeat="data in messageUser"><p class="message_username">@{{data.username}}_User</p><p>{{data.message}}_message</p><br></div>
                             </div>
                         </span>
                     </div>
