@@ -4,23 +4,34 @@
 
     .controller('SuppliesListCtrl', SuppliesListCtrl);
 
-    SuppliesListCtrl.$inject = ['$scope', '$stateParams', 'HttpService', 'ServerDataModel', '$ionicModal', '$ionicNavBarDelegate'];
+    SuppliesListCtrl.$inject = ['$scope', '$stateParams',  'SupplyService', '$ionicModal', '$ionicNavBarDelegate'];
 
-    function SuppliesListCtrl($scope, $stateParams, HttpService, ServerDataModel, $ionicModal, $ionicNavBarDelegate) {
+    function SuppliesListCtrl($scope, $stateParams, SupplyService, $ionicModal, $ionicNavBarDelegate) {
         /* jshint validthis: true */
         // putting our server data on scope to display
-        $scope.dataModel = ServerDataModel;
-        $scope.listValue=ServerDataModel.selectedList.listItem;
+        $scope.dataModel = SupplyService;
+        $scope.listId=SupplyService.selectedList.supplyListId;
+        $scope.listItemName="";
+        $scope.edit=false
+        SupplyService.getItemByListId($scope.listId).then(function(response){
+            $scope.listValue=response;
+        });
         $scope.addNewSuppliesItem=false;
-
         $scope.currListName = $stateParams.listName;
 
-        $scope.saveList2 = function(list) {
+        $scope.saveItem = function(list) {
             if(list!=undefined||list!=undefined) {
-                $scope.listValue.unshift({
-                    itemName: list
+                SupplyService.addSupplyItem(list, $scope.listId).then(function(response){
+                    if(response.supplyListId>0){
+
+                        $scope.listValue.push({
+                            supplyItemName: response.supplyItemName,
+                            supplyItemId:response.supplyItemId
+                        });
+                        $scope.addNewSuppliesItem = false;
+                    }
                 });
-                $scope.addNewSuppliesItem = false;
+
             }else{
                 setTimeout(setFocus, 50);
             }
@@ -28,30 +39,33 @@
         function setFocusOnAdd(){
             document.getElementById("addItemBox").focus();
         }
-        $scope.getListCount=function(data,index){
-            data.checked=!data.checked;
-            if(data.edit==true) {
-                $scope.saveSupplyItem(data);
-            }
-            }
         $scope.editSupplyItem=function(data){
-            data.edit=true;
-            setTimeout(setFocus, 50);
-
+            if(data.edit==false) {
+                data.edit = true;
+                setTimeout(setFocus, 20);
+            }
         }
         function setFocus(){
             document.getElementById("editItemBox").focus();
         }
         $scope.saveSupplyItem=function(data){
-            if(data.itemName!="") {
-                data.edit = false;
+            if(data.supplyItemName!="") {
+                SupplyService.updateSupplyItem($scope.listId,data.supplyItemId,data.supplyItemName).then(function(response){
+                    data.itemName=response.supplyItemName;
+                    data.edit = false;
+                });
             }else{
                 data.edit = true;
                 setTimeout(setFocus, 50);
             }
         }
-        $scope.deleteSupplyItem=function(index){
-            $scope.listValue.splice(index,1);
+        $scope.deleteSupplyItem=function(index,id){
+            SupplyService.deleteSupplyItemById(id).then(function(response){
+                if(response){
+                    $scope.listValue.splice(index,1);
+                }
+            });
+
         }
         $scope.addNewListItem=function(){
             $scope.addNewSuppliesItem=!$scope.addNewSuppliesItem
