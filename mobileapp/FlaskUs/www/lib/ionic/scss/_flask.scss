@@ -1064,8 +1064,12 @@ button.button.button-clear.mini-button {
     height: 28%;
 }
 .myTailgatetopImg{
-    width:100%;
-    height:100%;
+   // width:100%;
+    height: 100px;
+    align-content: center;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 .eventDiv{
     text-align:center;
