@@ -9,7 +9,12 @@
     function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies) {
         $scope.myTailgaters = [];
         $scope.allMessages = [];
+        $scope.userFirstName = [];
+        $scope.messageUser = [],[];
+        var userResponse = $cookies.getObject('CurrentUser');
         var tailGateId = $stateParams.tailgateId;
+        var userId = [];
+        var userMessage = [];
         $cookies.put('currtailGateId', tailGateId);
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         getMyTailgate();
@@ -64,10 +69,26 @@
 
         function get_message_list(tailGateId) {
             TailgateService.getAllMessages(tailGateId).then(function (respData) {
-                console.log(respData.data);
+                console.log(respData.data.length);
                 $scope.allMessages = respData.data;
+                for (var i = 0; i < $scope.allMessages.length; i++) {
+                    userId = respData.data[i].userId;
+                    userMessage = respData.data[i].messageText;
+                    console.log(userId);
+                    getTailgateUser(userId,userMessage); 
+                }
             });
         }
+        
+        function getTailgateUser(userId,userMessage) {
+            TailgateService.getAllUser(userId).then(function (respData) {
+                console.log(respData.data);
+                $scope.userFirstName.push(respData.data);
+                $scope.messageUser.push({ message: userMessage, username: respData.data.firstName });
+                console.log($scope.messageUser);
+            });
+        }
+
     }
 })();
 
