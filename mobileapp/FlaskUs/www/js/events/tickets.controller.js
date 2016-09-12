@@ -37,7 +37,7 @@
             var scheme;
             // Don't forget to add the org.apache.cordova.device plugin!
             if (device.platform === 'iOS') {
-                scheme = $scope.ticketSiteName[$scope.siteId].site;
+                scheme = 'http://' + $scope.ticketSiteName[$scope.siteId].site;
             }
             else if (device.platform === 'Android') {
                 scheme = 'www.' + $scope.ticketSiteName[$scope.siteId].site + '.com';
