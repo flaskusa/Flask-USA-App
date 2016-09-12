@@ -10,6 +10,20 @@
         //for adding tailgate
         var self = this;
         $scope.CurrEvent = [];
+        $scope.Details = [];
+        $scope.eventDetails = [];
+        $scope.eventNames = [];
+        var currentDate = new Date();/*Today's Date*/
+        $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd h:mm');
+        currentDate.setDate(currentDate.getDate() - 1); /*adding days to today's date*/
+        $scope.startDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
+        $scope.eventTypeIds = '';
+        $scope.searchString = 'a';
+        $scope.latitude = '42.34';
+        $scope.longitude = '83.0456';
+        currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
+        $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
+
         $scope.addTailgateParams = {
             tailgateName: '',
             tailgateDescription: '',
@@ -57,8 +71,8 @@
                     angular.extend($scope, {
                         map: {
                             center: {
-                                latitude: 42.3349940452867,
-                                longitude: -71.0353168884369
+                                latitude: VENUEData.latitude,
+                                longitude: VENUEData.longitude
                             },
                             zoom: 11,
                             markers: [],
@@ -98,13 +112,17 @@
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
             });
         }
-
-        $scope.Details = [];
-        $scope.eventDetails = [];
-        $scope.eventNames = [];
         function getallEventnames() {
-            TailgateService.getallEvents().then(function (respData) {
-                $scope.eventDetails = respData.data.Events;
+            $scope.tailgateParams = {
+                eventTypeIds:$scope.eventTypeIds,
+                startDate:$scope.startDate,
+                endDate: $scope.endDate,
+                searchString:  $scope.searchString,
+                latitude: $scope.latitude,
+                longitude: $scope.longitude
+            }
+            TailgateService.getallFilteredEvents($scope.tailgateParams).then(function (respData) {
+                $scope.eventDetails = respData.Events;
             });
         }
         $scope.editTailgate = function (tailgatId) {
