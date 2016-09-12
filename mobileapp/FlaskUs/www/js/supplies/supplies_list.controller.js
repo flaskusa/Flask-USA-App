@@ -9,13 +9,14 @@
     function SuppliesListCtrl($scope, $stateParams, SupplyService, $ionicModal, $ionicNavBarDelegate) {
         /* jshint validthis: true */
         // putting our server data on scope to display
-        $scope.dataModel = SupplyService;
         $scope.listId=SupplyService.selectedList.supplyListId;
         $scope.listItemName="";
         $scope.edit=false
-        SupplyService.getItemByListId($scope.listId).then(function(response){
-            $scope.listValue=response;
-        });
+        $scope.initialize=function() {
+            SupplyService.getItemByListId($scope.listId).then(function (response) {
+                $scope.listValue = response;
+            });
+        }
         $scope.addNewSuppliesItem=false;
         $scope.currListName = $stateParams.listName;
 
@@ -76,9 +77,5 @@
         $scope.cancelAdding=function(){
             $scope.addNewSuppliesItem=false;
         }
-        /*$scope.saveList2 = function (list) {
-            HttpService.save2(list);
-            $scope.modal.hide();
-        };*/
     }
 })();

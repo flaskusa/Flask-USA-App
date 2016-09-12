@@ -8,8 +8,6 @@
     /* @ngInject */
     function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout ) {
 
-        $scope.counter = 0;
-        $scope.counterArr=[];
         $scope.userDataList=[];
         $scope.supplies=[];
         if(SupplyService.addAsAdmin!=undefined){
@@ -34,10 +32,11 @@
             SupplyService.addAsAdmin=false;
             $scope.addAsAdmin=false;
         }
-        SupplyService.getMySupplyList().then(function(response){
-            $scope.supplies=response;
-            $scope.getUserSupplieslength();
-        });
+        $scope.initialize=function() {
+            SupplyService.getMySupplyList().then(function (response) {
+                $scope.supplies = response;
+            });
+        }
         $scope.addNewSuppliesList=function(){
             setTimeout(setFocus, 50);
             function setFocus(){
@@ -56,9 +55,8 @@
                     }
                 });
         }
-            $scope.getSelectedLength();
+
             $scope.addNewSupplies=false;
-            $scope.getUserSupplieslength();
         };
         $scope.goTOList=function(selectedList){
             if($scope.agreedToTermsOfUse==true && $scope.deleteSuplies==false &&  $scope.editSuply==false) {
@@ -196,22 +194,6 @@
 
         // date field display options
 
-        $scope.getSelectedLength=function(){
-            $scope.thirdCounter=0;
-            $scope.index=-1;
-            angular.forEach($scope.supplies,function (value1, key){
-                $scope.index++;
-           if(value1.isSystemProvided==0) {
-               $scope.counter = 0;
-               angular.forEach(value1.listItem, function (value2, key) {
-                   if (value2.checked == true)
-                       $scope.counter++;
-               });
-               $scope.counterArr[$scope.index] = $scope.counter;
-               $scope.thirdCounter++;
-           }
-           })
-        }
 
         $scope.setListId=function(selectedList){
             SupplyService.selectedList=selectedList;
@@ -245,8 +227,7 @@
                     }else{
                         $scope.supplies.push(list);
                     }
-                    $scope.getSelectedLength($scope.supplies[0], 0);
-                    $scope.getUserSupplieslength();
+
                 }else{
                     $flaskUtil.alert("failed to copy");
                 }
@@ -260,21 +241,12 @@
         $scope.saveSupplies=function(){
             $scope.editList=!$scope.editList;
         }
-        $scope.getUserSupplieslength=function(){
-            $scope.secondCounter=0;
-            angular.forEach( $scope.supplies, function (value, key) {
-                if (value.isSystem == false)
-                    $scope.secondCounter++;
-            });
-        }
-        $scope.getUserSupplieslength();
+
         $scope.deleteItem=function(index,supplyId){
             $scope.deleteSuplies=true;
             SupplyService.deleteSupplyListById(supplyId).then(function(response){
                 if(response){
                     $scope.supplies.splice(index,1);
-                    $scope.getUserSupplieslength();
-                    $scope.getSelectedLength();
                 }
             })
 
