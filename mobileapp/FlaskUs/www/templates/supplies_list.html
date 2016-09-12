@@ -13,7 +13,7 @@
             <label class="item-input-wrapper">
                 <input type="text"id="addItemBox" placeholder="Item Name"autofocus ng-model="listItemName" required>
             </label>
-            <button class="button button-small suppliesButton"ng-click="saveList2(listItemName)">
+            <button class="button button-small suppliesButton"ng-click="saveItem(listItemName)">
                save
             </button>
             <button class="button button-small suppliesButton"ng-click="cancelAdding()">
@@ -21,15 +21,21 @@
             </button>
         </div>
 <ion-list>
-            <ion-item ng-repeat="data in listValue"ng-click="getListCount(data)">
-            <div ng-model="data.checked" ng-init="data.edit=false" on-double-tap="editSupplyItem(data)">
-                <div ng-if = "data.edit == false" ><i class="addText">{{ data.itemName }}</i></div>
-                <input type="text"id="editItemBox" autofocus ng-model="data.itemName" ng-if="data.edit == true" ng-blur="saveSupplyItem(data)"/>
-           <span class="badge span_icon"style="top:3px"ng-click="getListCount(data)"> <label class="checkbox"style="float: right">
+            <ion-item ng-repeat="data in listValue">
+            <div ng-model="data.checked" ng-init="data.edit=false">
+                <div ng-if = "data.edit == false" ><i class="addText">{{ data.supplyItemName }}</i></div>
+                <input type="text"id="editItemBox" autofocus ng-model="data.supplyItemName" ng-if="data.edit == true" ng-blur="saveSupplyItem(data)"/>
+                <div class="badge supplyDeleteButton extra-right-supply">
+                <span class="button-assertive   ion-trash-a icon supplyDeleteIcon"ng-click="deleteSupplyItem($index,data.supplyItemId)"></span>
+                    </div>
+                <div class="badge supplyDeleteButton extra-right-supply"style=";margin-right: 51px">
+                    <span class="button-assertive   ion-edit supplyDeleteIcon" ng-click="editSupplyItem(data)"></span>
+                </div>
+           <!--<span class="badge span_icon"style="top:3px"ng-click="getListCount(data)"> <label class="checkbox"style="float: right">
                <input  type="checkbox"ng-model="data.checked">
-           </label></span>
+           </label></span>-->
             </div>
-                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteSupplyItem($index)"></ion-option-button>
+                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteSupplyItem($index,data)"></ion-option-button>
             </ion-item>
 </ion-list>
     </ion-content>

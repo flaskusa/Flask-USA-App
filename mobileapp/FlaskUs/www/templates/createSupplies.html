@@ -1,10 +1,19 @@
-<ion-view back-button="true" cache-view="false" cache-view="false" view-title="CREATE SUPPLIES">
+<ion-view back-button="true" cache-view="false" view-title="CREATE SUPPLIES">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button>
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content>
-
+        <div align="inline"class="button-bar stripAdmin"ng-if="agreedToTermsOfUse==true">
+            <div class="paddingRadio">
+                <input type="radio"name="radio"id="adminRadio" ng-model="addAsAdmin" ng-value=true class="radioButtonSize"ng-click="addSupplyAsAdmin()">
+            </div>
+            <label for="adminRadio"> <i class="fontSizeStrip">Admin</i></label>
+            <div class="paddingRadio">
+                <input type="radio"id="radio"name="radio" ng-model="addAsAdmin" ng-value=false class="radioButtonSize"ng-click="addSupplyAsUser()">
+            </div>
+            <label for="radio"> <i class="fontSizeStrip">User</i></label>
+        </div>
         <div class="item item-input-inset">
             <label class="item-input-wrapper">
                 <input type="text"id="supplyEdit" placeholder="Supplies Name"autofocus ng-model="suppliesName" required>
@@ -12,7 +21,12 @@
 
         </div>
         <div >
-            <div class="divAddIcon"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"style="float: right;"ng-click="addItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
+            <div ng-if="islistCreated==false" class="divAddIcon"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"style="float: right;"ng-click="addItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
+            </div>
+
+            <div ng-if="islistCreated==true" class="divAddIcon"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"style="float: right;"ng-click="createItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
+            </div>
+
             </div>
             <div class="strip2 ">
                 <i class="addText"style=""
@@ -23,10 +37,16 @@
                     <div ng-if = "data.editItem == false"class="flask_text" ><i class="addText">{{data.itemName}}</i> </div>
 
                     <input type="text"id="ItemEditBox"autofocus ng-model="data.itemName "ng-focus="true"  ng-if="data.editItem == true"ng-init="editSupplyItem(data)" ng-blur="saveSupplyItem(data)"/>
-                    <span class="badge span_icon"style="top:3px"> <label class="checkbox"style="float: right">
+                    <div class="badge supplyDeleteButton extra-right-supply">
+                        <span class="button-assertive   ion-trash-a icon supplyDeleteIcon"ng-click="deleteCreatedItem($index,data.supplyItemId)"></span>
+                    </div>
+                    <div class="badge supplyDeleteButton extra-right-supply"style="margin-right: 51px">
+                        <span class="button-assertive   ion-edit supplyDeleteIcon"ng-click="editSupplyItem(data)"></span>
+                    </div>
+                    <!--<span class="badge span_icon"style="top:3px"> <label class="checkbox"style="float: right">
                         <input  type="checkbox"ng-model="data.checked">
-                    </label></span>
-                    <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteCreatedItem($index)"></ion-option-button>
+                    </label></span>-->
+                    <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteCreatedItem($index,data.supplyItemId)"></ion-option-button>
 
                 </ion-item>
             </ion-list>
