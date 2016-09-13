@@ -1,12 +1,12 @@
-﻿<ion-view cache-view="false" view-title="ADD MY TAILGATE">
+﻿<ion-view cache-view="false" view-title="ADD NEW TAILGATE">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button>
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-tabs class="tabs-positive tab_bottom">
-        <ion-tab title="Manage Tailgate">
+        <ion-tab title="Event Details">
             <!-- Tab 1 content -->
-            <ion-content overflow-scroll="false" header="true" class='has-header has-subheader has-tabs'>
+            <ion-content overflow-scroll="false" header="true" class='has-header has-subheader'>
                 <div class="box">
                     <div class="list add_my_tailgate">
                         <div class="item item-input item-floating-label">
@@ -28,15 +28,17 @@
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Event date</span>
-                            <input type="date" ng-disabled="isavail" placeholder="Event date" class="form-control" ng-model="addTailgateParams.tailgateDate" name="Eventdate" required>
+                            <input type="date" class="form-control" ng-model="addTailgateParams.tailgateDate" name="Eventdate" required>
                         </div>
-                        <div class="item item-input item-floating-label">
+                        <div class="item item-input item-floating-label item-icon-right">
                             <span class="input-label">Start Time</span>
-                            <input type="time" placeholder="Start Time" class="form-control" ng-model="addTailgateParams.startTime" name="StartTime" required>
+                            <input type="text" placeholder="Start Time" class="form-control" ng-model="selectedtime1" name="StartTime" required ng-click="openTimePicker1();">
+                            <i class="icon ion-ios-clock" ng-click="openTimePicker1();"></i>
                         </div>
-                        <div class="item item-input item-floating-label">
+                        <div class="item item-input item-floating-label item-icon-right">
                             <span class="input-label">End Time</span>
-                            <input type="time" placeholder="End Time" class="form-control" ng-model="addTailgateParams.endTime" name="EndTime" required>
+                            <input type="text" placeholder="End Time" class="form-control" ng-model="selectedtime2" name="EndTime" required ng-click="openTimePicker2();">
+                            <i class="icon ion-ios-clock" ng-click="openTimePicker2();"></i>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Venmo Account:</span>
@@ -46,81 +48,123 @@
                             <span class="input-label">Amount</span>
                             <input type="Number" placeholder="Amount" name="Amount" ng-model="addTailgateParams.amountToPay">
                         </div>
-                        <div class="list card">
-                            <div class="item">
-                                <h4>Double tap on Map to Drop a New Marker</h4>
-                            </div>
-                            <div class="item" style="height:191px !important;">
-                                <div style="width:100%;height:100%;">
-                                    <ui-gmap-google-map center='map.center' zoom='map.zoom' aria-label="Google map" draggable="true" >
-                                        <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id"></ui-gmap-marker>
-                                    </ui-gmap-google-map>
+                   </div>
+                    <div class="padding" align="center">
+                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="addmyTailgate(addTailgateParams);">
+                            Save
+                        </button>
+                        <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/my_tailgate">
+                            Cancel
+                        </a>
+                    </div>
+                    </div>
+            </ion-content>
+        </ion-tab>
+        <ion-tab title="Location">
+            <!-- Tab 2 content -->
+            <ion-content overflow-scroll="false" class="has-footer has-header">
+                <div  style="margin-top: 44px;">
+                    <div style="width:100%;height:100%;" class="add_my_tailgate">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' aria-label="Google map">
+                            <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                                <ui-gmap-window>
+                                    <!--<div>{{marker.window.title}}</div>-->
+                                </ui-gmap-window>
+                            </ui-gmap-marker>
+                        </ui-gmap-google-map>
+                    </div>
+                 </div>
+        </ion-content>
+        </ion-tab>
+        <ion-tab title="Attendees" disabled="pageFlow.disableOtherTabs">
+            <ion-content overflow-scroll="false"  class="has-footer has-header">
+                <div class="add_my_tailgate">
+                    <a class="item item-full item-icon-left attendees" ng-click="modal.show()">
+                        <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+                        <p class="addText">INVITE FRIEND</p>
+                    </a>
+                    <div class="list">
+                        <a ng-repeat="data in myTailgaters" class="item item-avatar item-icon-right">
+                            <img src="img/default-profilepic.png">
+                            <h2>{{ data.userName | uppercase}}</h2>
+                            <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
+                        </a>
+                    </div>
+                    <script id="templates/modal.html" type="text/ng-template">
+                        <ion-modal-view>
+                            <ion-header-bar class="bar bar-header bar-positive black-header">
+                                <h1 class="title">Invite Friend</h1>
+                                <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
+                            </ion-header-bar>
+                            <div class="bar bar-subheader">
+                                <div class="row">
+                                    <div class="col col-90 col-center searchrow">
+                                        <input type="text" placeholder="Search friend..." class="friendSearch" ng-model="searchContact.searchtext" />
+                                    </div>
+                                    <div class="col col-center searchrow">
+                                        <button class="button button-icon button-clear ion-ios-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
+                                    </div>
                                 </div>
-                                
                             </div>
+                            <ion-content class=" has-subheader">
+                                <ion-list>
+                                    <ion-list>
+                                        <ion-item ng-repeat="data in myFriends " class="item-avatar " item="data">
+                                            <img src="img/default-profilepic.png">
+                                            <h2>{{ data.fullName | uppercase}}</h2>
+                                            <p>{{ data.emailAddress}}</p>
+                                            <button type="submit" nav-clear class="button button-block button-positive invite_friend" ng-click="addTailgateMembers(data,$index)">
+                                                Send Invite
+                                            </button>
+                                        </ion-item>
+                                    </ion-list>
+                                </ion-list>
+                            </ion-content>
+                        </ion-modal-view>
+                    </script>
+                </div>
+
+            </ion-content>
+        </ion-tab>
+        <ion-tab title="Plan Now">
+            <!--FOURTH TAB-->
+            <ion-content overflow-scroll="false" >
+                <div class="paynow">
+                    <div class="tailgateInfo">
+                        <div class="row">
+                            <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
+                            <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
                         </div>
+                        <div class="row">
+                            <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
                         </div>
-                        <div class="padding" align="center">
-                            <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="addmyTailgate(addTailgateParams);">
-                                Save
-                            </button>
-                            <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/my_tailgate">
-                                Cancel
-                            </a>
+                        <div class="row">
+                            <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
                         </div>
+                        <div class="row">
+                            <a href="#" class="btnPay">Pay Now</a>
+                        </div>
+                    </div>
+                    <div class="list">
+                        <div class="item item-divider plan_now">
+                            SUPPLIES LIST
+                        </div>
+                    </div>
+                    <div class="list">
+                        <ion-checkbox class="item item-icon-left item-checkbox-right">
+                            TICKETS
+                        </ion-checkbox>
+                        <ion-checkbox class="item item-icon-left item-checkbox-right">
+                            PARKING PASS
+                        </ion-checkbox>
+                        <ion-checkbox class="item item-icon-left item-checkbox-right">
+                            CASH/WALLET
+                        </ion-checkbox>
+                        <ion-checkbox class="item item-icon-left item-checkbox-right">
+                            SWEATSHIRT/COAT
+                        </ion-checkbox>
                     </div>
                 </div>
             </ion-content>
         </ion-tab>
-        <ion-tab title="Upload Pictures" disabled="pageFlow.disableOtherTabs">
-            <!-- Tab 2 content -->
-            <ion-content has-footer="true" overflow-scroll="false" class="has-footer has-header"></ion-content>
-        </ion-tab>
-        <ion-tab title="Attendees" disabled="pageFlow.disableOtherTabs">
-            <ion-content>
-                <a class="item item-full item-icon-left attendees" ng-click="modal.show()">
-                    <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
-                    <p class="addText">INVITE FRIEND</p>
-                </a>
-                <div class="list">
-                    <a ng-repeat="data in myTailgaters" class="item item-avatar item-icon-right">
-                        <img src="img/default-profilepic.png">
-                        <h2>{{ data.userName | uppercase}}</h2>
-                        <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
-                    </a>
-                </div>
-                <script id="templates/modal.html" type="text/ng-template">
-                    <ion-modal-view>
-                        <ion-header-bar class="bar bar-header bar-positive black-header">
-                            <h1 class="title">Invite Friend</h1>
-                            <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
-                        </ion-header-bar>
-                        <div class="bar bar-subheader">
-                            <div class="row">
-                                <div class="col col-90 col-center searchrow">
-                                    <input type="text" placeholder="Search friend..." class="friendSearch" ng-model="searchContact.searchtext" />
-                                </div>
-                                <div class="col col-center searchrow">
-                                    <button class="button button-icon button-clear ion-ios-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
-                                </div>
-                            </div>
-                        </div>
-                        <ion-content class=" has-subheader">
-                            <ion-list>
-                                <ion-list>
-                                    <ion-item ng-repeat="data in myFriends " class="item-avatar " item="data">
-                                        <img src="img/default-profilepic.png">
-                                        <h2>{{ data.fullName | uppercase}}</h2>
-                                        <p>{{ data.emailAddress}}</p>
-                                        <button type="submit" nav-clear class="button button-block button-positive invite_friend" ng-click="addTailgateMembers(data,$index)">
-                                            Send Invite
-                                        </button>
-                                    </ion-item>
-                                </ion-list>
-                            </ion-list>
-                        </ion-content>
-                    </ion-modal-view>
-                </script>
-            </ion-content>
-        </ion-tab>
-    </ion-tabs>
+</ion-tabs>
