@@ -32,39 +32,33 @@
                 </table>
          </script>
         <script type="text/ng-template" id="markerInfo.tpl.html">
-            <div class='map-popup'>
-                <div style="overflow: auto;">
-                    <div>
-                        <img src="img/flasklogo2.png" style="width:30px;height:30px;" ng-if="parameter.type == 'FLASK' ">
-                        <img ng-src="{{parameter.icon}}" style="width:30px;height:30px;" ng-if="parameter.type == 'GOOGLE' ">
-                        <font style="color:#000;">&nbsp;&nbsp;<b>{{parameter.infoTitle}}</b><br></font>
-                    </div>
-                    <div class="adAddress">
-                        <table width="100%">
-                            <tbody>
-                                <tr>
-                                    <td width="38px" valign="top">
-                                        <img src="img/map_icons/icon_parking.png" style="width:30px;height:30px;" ng-if="parameter.type == 'FLASK' ">
-                                    </td>
-                                    <td><a href="geo:{{parameter.addrLine1}}" class="addressLink">{{parameter.addrLine1}}</a></td>
-                                </tr>
-                                
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="adDescription" ng-if="parameter.infoDesc.length > 1">
-                        <font style="color:#000;">
-                        <b>Flask us:</b><br>
-                            {{parameter.infoDesc}}
-                        </font>
-                    </div> <div style="text-align:right"><button id="takemethere" > Take me there</button> </div>
+            <div id="iw-container">
+                <div class="iw-title">
+                    <table>
+                        <tr>  
+                            <td style="width:94%"> <div>{{parameter.infoTitle}}</td></div>
+                            <td rowspan="2" style="vertical-align:middle">  <div class="iw-content-toggle "> <img src = "img/map_icons/circle-right _arrow.png"> </div></td>
+                        </tr>
+                        <tr>  
+                            <td style="width:80%">
+                                <div class="iw-sub-title">
+                                    {{parameter.addrLine1}}
+                                </div>
+                             </td>
+                        </tr>
+                    </table> 
                 </div>
+                <div class="iw-content" style="display:none">
+                    <div class="padding" id="iwCallNow">Call Now </div>
+                    <div class="padding" id = "iwViewWebsite"> View website</div>
+                    <div class="padding" > <a href="#" id="iwTakeMeThere" > Take me there </a></div>
+                </div> 
             </div>
          </script>
         <ion-tabs class="tabs-positive tab_bottom">
-            <ion-tab title="PARKING"  ng-click="selectTab(0)" class="{{infoTypeName != 'Pre-Event' ? 'hide':''}}">
+            <ion-tab title="PARKING" ng-click="selectTab(0)" class="{{infoTypeName != 'Pre-Event' ? 'hide':''}}">
                 <div id="map_canvas" style="height:100%;width:100%">
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options"  idkey="id" control="map.control">
+                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" idkey="id" control="map.control" events = "map.events">
                         <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                         <!--<ui-gmap-map-control template="custom.controls.tpl.html" index="-1"	position="RIGHT_CENTER" controller = "refreshMap"> </ui-gmap-map-control>-->
                         <ui-gmap-map-control position="right_center">
@@ -86,7 +80,7 @@
                             </div>
                         </ui-gmap-map-control>
                         <ui-gmap-markers models="parkingMarkers" coords="'self'" icon="'icon'" options="markerOptions" click="onClick" control="markerOptions.control">
-                            <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                            <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'" control="windowOptions.control">
                             </ui-gmap-windows>
                         </ui-gmap-markers>
                         <ui-gmap-markers models="parkingGoogleMarkers" coords="'self'" icon="'icon'" options="googleMarkerOptions" click="onClick"
@@ -155,7 +149,8 @@
                                 </div>
                             </div>
                         </ui-gmap-map-control>
-                        <ui-gmap-markers models="nightLifes" coords="'self'" icon="'icon'" options="nightLifeFlaskMarkerOptions" click="onClick" control="nightLifeFlaskMarkerOptions.control">
+                        <ui-gmap-markers models="nightLifes" coords="'self'" icon="'icon'" options="nightLifeFlaskMarkerOptions" click="onClick"
+                            control="nightLifeFlaskMarkerOptions.control">
                             <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
 
                             </ui-gmap-windows>
