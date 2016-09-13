@@ -5,8 +5,8 @@
           <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons" class="FlaskionIcons"></div>
           <p class="addText">CREATE NEW SUPPLIES</p>
       </a>
-      <div class="divText"ng-if="addNewSupplies==false&&secondCounter==0">
-          you don't have any supplies, you can create your own or you can copy.
+      <div class="divText"ng-if="supplies.length==0">
+          You don't have any supplies, you can create your own or you can copy.
       </div>
 
       <div class="row" ng-repeat="data in ctrl.data">

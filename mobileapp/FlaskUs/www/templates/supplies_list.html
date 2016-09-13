@@ -20,16 +20,19 @@
                cancel
             </button>
         </div>
+        <div class="item emailText"ng-if="listValue.length==0&&addNewSuppliesItem==false">
+            You don't have any Item, please create.
+        </div>
 <ion-list>
             <ion-item ng-repeat="data in listValue">
             <div ng-model="data.checked" ng-init="data.edit=false">
                 <div ng-if = "data.edit == false" ><i class="addText">{{ data.supplyItemName }}</i></div>
                 <input type="text"id="editItemBox" autofocus ng-model="data.supplyItemName" ng-if="data.edit == true" ng-blur="saveSupplyItem(data)"/>
                 <div class="badge supplyDeleteButton extra-right-supply">
-                <span class="button-assertive   ion-trash-a icon supplyDeleteIcon"ng-click="deleteSupplyItem($index,data.supplyItemId)"></span>
+                <span class="button-assertive   ion-trash-a icon supplyDeleteIcon" ng-class="{supplyEditIconPadding:data.edit}" ng-click="deleteSupplyItem($index,data.supplyItemId)"></span>
                     </div>
                 <div class="badge supplyDeleteButton extra-right-supply"style=";margin-right: 51px">
-                    <span class="button-assertive   ion-edit supplyDeleteIcon" ng-click="editSupplyItem(data)"></span>
+                    <span class="button-assertive   ion-edit supplyDeleteIcon" ng-class="{supplyEditIconPadding:data.edit}" ng-click="editSupplyItem(data)"></span>
                 </div>
            <!--<span class="badge span_icon"style="top:3px"ng-click="getListCount(data)"> <label class="checkbox"style="float: right">
                <input  type="checkbox"ng-model="data.checked">
