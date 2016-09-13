@@ -15,7 +15,6 @@
         }else{
             $scope.addAsAdmin=false;
         }
-
         $scope.editList=false;
         $scope.addNewSupplies=false;
         $scope.islistCreated = false;
