@@ -1720,3 +1720,21 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 .supplyEditIconPadding{
   padding-top: 16px;
 }
+
+//css for datetime picker by nav
+.ionic_datepicker_popup .popup-body .selected_date_full {
+    background-color: #433f40 !important;
+}
+.ionic_datepicker_popup .selected_date {
+    background-color: #433f40 !important;
+}
+.ionic_datepicker_popup .today {
+    border: 1px solid #433f40 !important;
+}
+.ionic_datepicker_popup .popup-body .month_select, .ionic_datepicker_popup .popup-body .year_select {
+    border-bottom: 1px solid #433f40 !important;
+}
+.ionic_timepicker_popup .heading {
+    background-color: #4b4848 !important;
+}
+//End css for datetime picker
