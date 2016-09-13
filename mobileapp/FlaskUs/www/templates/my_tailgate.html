@@ -22,8 +22,8 @@
                         <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
                     </div>
                 </div>
-                <ion-option-button class="button-assertive icon ion-edit" ng-click="editTailgate();"></ion-option-button>
-                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveTailgate();"></ion-option-button>
+                <ion-option-button class="button-assertive icon ion-edit" ng-click="editTailgate(data.tailgateId,$index);"></ion-option-button>
+                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveTailgate(data.tailgateId,$index);"></ion-option-button>
         </ion-list>
     </ion-content>
 </ion-view>
