@@ -22,6 +22,32 @@
                 console.log(respData.data);
             });
         }
+        $scope.editTailgate = function (tailgateId, index) {
+            console.log(tailgateId,index);
+            TailgateService.getTailgate(tailgateId).then(function (respData) {
+                console.log(respData.data);
+                $scope.addTailgateParams = {
+                    tailgateName: respData.data.tailgateName,
+                    tailgateDescription: respData.data.tailgateDescription,
+                    eventId: respData.data.eventId,
+                    eventName: respData.data.eventName,
+                    endTime: respData.data.endTime,
+                    startTime: respData.data.startTime,
+                    venmoAccountId: respData.data.venmoAccountId,
+                    amountToPay: respData.data.amountToPay
+                }
+                console.log($scope.addTailgateParams);
+            });
+        }
+
+        $scope.leaveTailgate = function (tailgateId, index) {
+            console.log(tailgateId, index);
+            TailgateService.deleteTailgate(tailgateId).then(function (respData) {
+                console.log(respData);
+                $scope.allTailgate.splice(index, 1);
+            });
+            
+        }
     }
 })();
 

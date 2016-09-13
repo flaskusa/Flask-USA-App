@@ -24,6 +24,10 @@
         var getmessageBoardsByTailgateIdURL = "flask-user-tailgate-portlet.tailgatemessageboard/get-message-boards-by-tailgate-id";
         var getUserByIdURL = "flask-rest-users-portlet.flaskadmin/get-user-by-id";
         var getFilteredEventsURL = "flask-rest-events-portlet.event/get-simple-filtered-events";
+        var deleteTailgateInfoURL = "flask-user-tailgate-portlet.tailgateinfo/delete-tailgate-info";
+        var deleteTailgateMarkerURL = "flask-user-tailgate-portlet.tailgatemarker/delete-tailgate-marker";
+        var deleteTailgateUserIdURL = "flask-user-tailgate-portlet.tailgateusers/delete-tailgate-user";
+
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -42,7 +46,9 @@
             saveMessage: saveMessage,
             getAllMessages: getAllMessages,
             getAllUser: getAllUser,
-            getallFilteredEvents: getallFilteredEvents
+            getallFilteredEvents: getallFilteredEvents,
+            deleteMapMarkers: deleteMapMarkers,
+            deleteTailgate: deleteTailgate
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -81,6 +87,17 @@
                 //add errror handling 
             });
         }
+        function deleteTailgate(tailgateId) {
+            return $http.get(baseURL + deleteTailgateInfoURL, {
+                params: {'tailgateId' : tailgateId}
+            }
+            )
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                //add errror handling 
+            });
+        }
         function getUserFrends() {
             return $http.get(baseURL + inviteFriendsTailgateURL, {
                 params: {
@@ -110,6 +127,18 @@
 
         function getMapMarkers(tailgateId) {
             return $http.get(baseURL + getmapMarkersURL, {
+                params: { 'tailgateId': tailgateId }
+            }
+            )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+        function deleteMapMarkers(tailgateId) {
+            return $http.get(baseURL + deleteTailgateUserIdURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )

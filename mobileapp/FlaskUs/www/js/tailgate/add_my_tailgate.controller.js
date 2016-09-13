@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies'];
+    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker'];
 
     / @ngInject /
-    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies) {
+    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker) {
         //for adding tailgate
         var self = this;
         $scope.CurrEvent = [];
@@ -61,10 +61,12 @@
             TailgateService.getEvent(eventId).then(function (respData) {
                 $scope.CurrEvent = respData.data;
                 var venueID = $scope.CurrEvent.venueId;
-                var currStartTime = new Date($filter('date')($scope.CurrEvent.startTime, "MM-dd-yyyy HH:mm"));
-                var currEndTime = new Date($filter('date')($scope.CurrEvent.endTime, "MM-dd-yyyy HH:mm"));
+                var currStartTime = $filter('date')($scope.CurrEvent.startTime, 'hh:mm a'); //new Date($filter('date')($scope.CurrEvent.startTime, 'shortTime'));
+                var currEndTime = $filter('date')($scope.CurrEvent.endTime, 'hh:mm a'); //new Date($filter('date')($scope.CurrEvent.endTime, 'shortTime'));
                 var currDate = new Date($filter('date')($scope.CurrEvent.eventDate, "MM-dd-yyyy HH:mm"));
                 $scope.addTailgateParams.startTime = currStartTime;
+                $scope.selectedtime1 = currStartTime;
+                $scope.selectedtime2 = currEndTime;
                 $scope.addTailgateParams.endTime = currEndTime;
                 $scope.addTailgateParams.tailgateDate = currDate;
                 TailgateService.getvenueDetails(venueID).then(function (VENUEData) {
@@ -102,8 +104,8 @@
         $scope.isavail = false;
         $scope.addmyTailgate = function (tailgatedata) {
             tailgatedata.tailgateDate = new Date(tailgatedata.tailgateDate).getTime()/1000;
-            tailgatedata.endTime = new Date(tailgatedata.endTime).getTime() / 1000 + tailgatedata.tailgateDate;
-            tailgatedata.startTime = new Date(tailgatedata.startTime).getTime()/1000;
+            $scope.selectedtime2 = new Date($scope.selectedtime2).getTime() / 1000 + tailgatedata.tailgateDate;
+            $scope.selectedtime1 = new Date($scope.selectedtime1).getTime() / 1000;
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
             });
         }
@@ -112,6 +114,7 @@
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
             });
         }
+        // to get all filtered event list in the select box.
         function getallEventnames() {
             $scope.tailgateParams = {
                 eventTypeIds:$scope.eventTypeIds,
@@ -125,24 +128,56 @@
                 $scope.eventDetails = respData.Events;
             });
         }
-        $scope.editTailgate = function (tailgatId) {
-            TailgateService.getTailgate(tailgatId).then(function (respData) {
-                console.log(respData.data);
-                $scope.addTailgateParams = {
-                    tailgateName: respData.data.tailgateName,
-                    tailgateDescription: respData.data.tailgateDescription,
-                    eventId: respData.data.eventId,
-                    eventName: respData.data.eventName,
-                    endTime: respData.data.endTime,
-                    startTime: respData.data.startTime,
-                    venmoAccountId: respData.data.venmoAccountId,
-                    amountToPay: respData.data.amountToPay
+        //to add date popup in form
+        $scope.selectedtime1;
+        var ipObj1 = {
+            callback: function (val) {
+                if (typeof (val) === 'undefined') {
+                    console.log('Time not selected');
+                } else {
+                    var selectedTime = new Date(val * 1000);
+                    console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), 'Hrs :', selectedTime.getUTCMinutes(), 'Min');
+                    var currentHrs = selectedTime.getUTCHours();
+                    if (currentHrs > 12) {
+                        $scope.selectedtime1 = (selectedTime.getUTCHours()) - 12 + ' :' + selectedTime.getUTCMinutes() + " PM";
+                        console.log($scope.selectedtime1 + " PM");
+                    } else
+                    {
+                        $scope.selectedtime1 = (selectedTime.getUTCHours()) + ' :' + selectedTime.getUTCMinutes() + " AM";
+                        console.log($scope.selectedtime1 + " AM");
+                    }
                 }
-            });
-        }
-
-        $scope.leaveTailgate = function () {
-
-        }
+            },
+            inputTime: (((new Date()).getHours() * 60 * 60) + ((new Date()).getMinutes() * 60)),
+            format: 12,
+            step: 5,
+            setLabel: 'Set'
+        };
+        var ipObj2 = {
+            callback: function (val) {
+                if (typeof (val) === 'undefined') {
+                    console.log('Time not selected');
+                } else {
+                    var selectedTime = new Date(val * 1000);
+                    console.log('Selected epoch is : ', val, 'and the time is ', selectedTime.getUTCHours(), 'Hrs :', selectedTime.getUTCMinutes(), 'Min');
+                    var currentHrs = selectedTime.getUTCHours();
+                    if (currentHrs > 12) {
+                        $scope.selectedtime2 = (selectedTime.getUTCHours()) - 12 + ' :' + selectedTime.getUTCMinutes() + " PM";
+                    } else {
+                        $scope.selectedtime2 = (selectedTime.getUTCHours()) + ' :' + selectedTime.getUTCMinutes() + " AM";
+                    }
+                }
+            },
+            inputTime: (((new Date()).getHours() * 60 * 60) + ((new Date()).getMinutes() * 60)),
+            format: 12,
+            step: 5,
+            setLabel: 'Set'
+        };
+        $scope.openTimePicker1 = function () {
+            ionicTimePicker.openTimePicker(ipObj1);
+        };
+        $scope.openTimePicker2 = function () {
+            ionicTimePicker.openTimePicker(ipObj2);
+        };
     }
 })();
