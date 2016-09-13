@@ -289,7 +289,8 @@
                 url: '/notification_tab',
                 views: {
                     'notification_tab': {
-                        templateUrl: 'templates/notification.html'
+                        templateUrl: 'templates/notification.html',
+                        controller:'FriendsNotificationCtrl'
                     }
                 }
             })
@@ -318,6 +319,24 @@
                     'menuContent': {
                         templateUrl: 'templates/group_member_detail.html',
                         controller: 'FriendsGroupMemberDetailCtrl'
+                    }
+                }
+            })
+            .state('app.messages', {
+                url: '/message_detail',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/friend-group-messages.html',
+                        controller: 'FriendsMessageCtrl'
+                    }
+                }
+            })
+            .state('app.notifications', {
+                url: '/notification_detail',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/friend-group-notifications.html',
+                        controller: 'FriendsNotificationCtrl'
                     }
                 }
             })

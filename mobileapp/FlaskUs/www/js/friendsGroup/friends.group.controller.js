@@ -75,11 +75,8 @@
                 $scope.userContactList = resopnse;
 
             GroupService.groupId=groupId;
-
-
-                   $scope.addUserToGroup = function () {
-
-                            GroupService.addUserToGroup(groupId, $scope.matchedUser.emailAddress, $scope.matchedUser.userId, $scope.matchedUser.fullName, 0).then(function (response) {
+                $scope.addUserToGroup = function () {
+                    GroupService.addUserToGroup(groupId, $scope.matchedUser.emailAddress, $scope.matchedUser.userId, $scope.matchedUser.fullName, 0).then(function (response) {
                                 $scope.groups[index].showDivByIndex=true;
                                 $timeout(function () {  $scope.groups.splice(index, 1);
                                    },1000);
