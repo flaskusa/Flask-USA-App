@@ -61,14 +61,14 @@
             TailgateService.getEvent(eventId).then(function (respData) {
                 $scope.CurrEvent = respData.data;
                 var venueID = $scope.CurrEvent.venueId;
-                var currStartTime = $filter('date')($scope.CurrEvent.startTime, 'hh:mm a'); //new Date($filter('date')($scope.CurrEvent.startTime, 'shortTime'));
-                var currEndTime = $filter('date')($scope.CurrEvent.endTime, 'hh:mm a'); //new Date($filter('date')($scope.CurrEvent.endTime, 'shortTime'));
-                var currDate = new Date($filter('date')($scope.CurrEvent.eventDate, "MM-dd-yyyy HH:mm"));
+                var currStartTime = $filter('date')($scope.CurrEvent.startTime, 'hh:mm a');
+                var currEndTime = $filter('date')($scope.CurrEvent.endTime, 'hh:mm a'); 
+                var currDate = $filter('date')($scope.CurrEvent.eventDate, 'MM-dd-yyyy');
                 $scope.addTailgateParams.startTime = currStartTime;
                 $scope.selectedtime1 = currStartTime;
                 $scope.selectedtime2 = currEndTime;
                 $scope.addTailgateParams.endTime = currEndTime;
-                $scope.addTailgateParams.tailgateDate = currDate;
+                $scope.tailgateDate = currDate;
                 TailgateService.getvenueDetails(venueID).then(function (VENUEData) {
                     angular.extend($scope, {
                         map: {
@@ -103,10 +103,13 @@
 
         $scope.isavail = false;
         $scope.addmyTailgate = function (tailgatedata) {
-            tailgatedata.tailgateDate = new Date(tailgatedata.tailgateDate).getTime()/1000;
-            $scope.selectedtime2 = new Date($scope.selectedtime2).getTime() / 1000 + tailgatedata.tailgateDate;
-            $scope.selectedtime1 = new Date($scope.selectedtime1).getTime() / 1000;
+            var startTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime1); // Your timezone!
+            var endTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime2);
+            tailgatedata.tailgateDate = new Date($scope.tailgateDate).getTime() / 1000;
+            tailgatedata.endTime = endTime;
+            tailgatedata.startTime = startTime;
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
+                console.log(respData);
             });
         }
 
