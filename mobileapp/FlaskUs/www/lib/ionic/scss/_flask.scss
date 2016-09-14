@@ -145,7 +145,7 @@ html, body{font-family: 'Avenir Next';}
 }
 
 .myFrnds{
-     background-image:url("../img/flask_images/MY_TAILGATE.jpg");
+     background-image:url("../img/flask_images/MY_FRIENDS.jpg");
       background-size:100%;
 }
 .row.mainRow.myFrnds {
@@ -457,7 +457,8 @@ span.error_msg{color:red;}
     font-weight: bold !important;
     text-transform: uppercase;
     font-size: 14px !important;
-    margin-left: -17px !important;
+    margin-left: -13px !important;
+    margin-right: -10px !important;
 }
 
 
@@ -1609,7 +1610,7 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
   transition:2s;
 }
 
-/*Message board in my_tailgate_event_details*/
+/* Message board in my_tailgate_event_details*/
 .list.list-inset.msgboard{
     border:solid 1px;
 }
@@ -1619,6 +1620,23 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
     font-weight:bold;
     font-size: 14px !important;
     margin-left: 13px !important;
+}
+
+.messageList p.message_username{
+    margin-top: -1%;
+}
+
+.messageList p.messageTxt{
+    margin-top:-4%;
+}
+
+.messageList div{
+    margin-top: -13%;
+    margin-left: 14%;
+}
+
+.messageList img{
+    width:11%;
 }
 
 .msg_list{
@@ -1726,15 +1744,67 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
     background-color: #433f40 !important;
 }
 .ionic_datepicker_popup .selected_date {
-    background-color: #433f40 !important;
+    background-color: orange !important;
 }
+
 .ionic_datepicker_popup .today {
-    border: 1px solid #433f40 !important;
+    border: 1px solid orange !important;
 }
 .ionic_datepicker_popup .popup-body .month_select, .ionic_datepicker_popup .popup-body .year_select {
     border-bottom: 1px solid #433f40 !important;
 }
 .ionic_timepicker_popup .heading {
     background-color: #4b4848 !important;
+    color:orange !important;
 }
+.ionic_timepicker_popup .button_set, .ionic_timepicker_popup .button_close{
+     color: orange !important;
+}
+.ionic_datepicker_popup .popup-body .month_select:after, .ionic_datepicker_popup .popup-body .year_select:after{
+    color: orange !important;
+}
+
+.ionic_datepicker_popup .popup-buttons button{color:orange !important;}
+
+.ionic_datepicker_popup .popup-body .selected_date_full{color:orange !important;}
 //End css for datetime picker
+
+
+/*Suppy list in plan_now page*/
+
+ion-item.item.supply_list{
+    color: darkorange;
+    text-transform: uppercase;
+    font-weight: bold;
+    }
+
+.badge.badge-supply{
+    background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+    color: #f89734 !important;
+    font-size: 12px;
+    border-radius:12px !important;
+}
+
+a.button.button-block.button-positive.pay_now_button {
+    width: 100%;
+    padding-top: 15px;
+    text-align: center;
+    color: darkorange;
+}
+
+.item-select.plan_now select{
+    background-color:transparent !important;
+}
+
+/*Disable button for edit in My tailgate section by Nav*/
+.disablebutton{
+    opacity: .4;
+    cursor: default !important;
+    pointer-events: none;
+}
+
+.profilepicAvatar{
+    height: 200px !important;
+    width: inherit !important; /*For avtar in profile pic */
+}
+/*End Disable button for edit in My tailgate section*/
