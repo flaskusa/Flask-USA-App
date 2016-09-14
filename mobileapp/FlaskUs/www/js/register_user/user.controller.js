@@ -2,12 +2,11 @@
     'use strict';
     angular.module('flaskApp')
         .controller('user_registrationCtrl', user_registrationCtrl);
-    user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout'];
+    user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter'];
 
     /* @ngInject */
-    function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout) {
+    function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter) {
         var gender = true;
-        var max_date = new Date();
 
 
         $scope.data1 = [
@@ -70,9 +69,6 @@
            }
         ];
 
-
-        $scope.MAX = max_date;
-        console.log(max_date);
         $scope.saveUser = function (user) {
             console.log(user);
             if (user.isMale == 'male') {
@@ -94,7 +90,7 @@
                 $scope.AddedSuccess = true;
                 $timeout(function () { $scope.AddedSuccess = false; }, 3000);
             });
-            //  document.register_user_form.reset();
+            // document.register_user_form.reset();
         }
 
         $scope.checkUserByEmailId = function (user) {
@@ -109,10 +105,37 @@
                     $timeout(function () {
                         myPopup.close(); //close the popup after 3 seconds for some reason
                     }, 3000);
-                    // document.register_user_form.reset();
+                     document.register_user_form.reset();
                 }
             });
         }
+
+        
+        $scope.openDatePickerOne = function (val) {
+            var ipObj1 = {
+                callback: function (val) {  //Mandatory
+                    console.log('Return value from the datepicker popup is : ' + val, new Date(val), 'yyyy-MM-dd h:mm');
+                    var currDate = $filter('date')(val, 'MM-dd-yyyy');
+                    console.log(currDate);
+                    $scope.user={DOB : currDate};
+                    //var date1 = new Date(val);
+                   // $scope.user.DOB = $filter('date1')(date1, 'yyyy-MM-dd');
+                },
+                disabledDates: [
+                  new Date("08-16-2016")
+                 
+                ],
+                from: new Date(1960, 1, 1),
+                to: new Date(),
+                inputDate: new Date(),
+                mondayFirst: true,
+                disableWeekdays: [],
+                closeOnSelect: false,
+                templateType: 'popup'
+            };
+            ionicDatePicker.openDatePicker(ipObj1);
+        };
+
     }
 })();
 
