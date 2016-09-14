@@ -27,6 +27,10 @@
         var deleteTailgateInfoURL = "flask-user-tailgate-portlet.tailgateinfo/delete-tailgate-info";
         var deleteTailgateMarkerURL = "flask-user-tailgate-portlet.tailgatemarker/delete-tailgate-marker";
         var deleteTailgateUserIdURL = "flask-user-tailgate-portlet.tailgateusers/delete-tailgate-user";
+        var getMySupplyListsURL = "flask-user-tailgate-portlet.supplylist/get-my-supply-lists";
+        var addSupplyListURL = "flask-user-tailgate-portlet.supplylist/add-supply-list";
+        var getitemsbylistidURL = "flask-user-tailgate-portlet.supplyitem/get-items-by-list-id";
+        var getSupplyListURL = "flask-user-tailgate-portlet.supplylist/get-supply-list";
 
 
         var tailgateServices = {
@@ -48,7 +52,10 @@
             getAllUser: getAllUser,
             getallFilteredEvents: getallFilteredEvents,
             deleteMapMarkers: deleteMapMarkers,
-            deleteTailgate: deleteTailgate
+            deleteTailgate: deleteTailgate,
+            getMySupplyLists: getMySupplyLists,
+            getSupplyList: getSupplyList,
+            getitemsbylistid: getitemsbylistid
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -286,6 +293,44 @@
                 params: { 'userId': userId }
             }
             )
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+
+        function getMySupplyLists() {
+            return $http.get(baseURL + getMySupplyListsURL)
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+
+        function getSupplyList(supplyListId) {
+            return $http.get(baseURL + getSupplyListURL, {
+                params: {
+                    'supplyListId': supplyListId
+                }
+            })
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+
+        function getitemsbylistid(supplyListId) {
+            return $http.get(baseURL + getitemsbylistidURL, {
+                params: {
+                    'supplyListId': supplyListId
+                }
+            })
             .then(function success(response) {
                 return response;
             }, function failure(response) {
