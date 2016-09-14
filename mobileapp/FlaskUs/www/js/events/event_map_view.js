@@ -12,7 +12,7 @@
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15, control: {} };
         $scope.map.events = [];
         $scope.map.events["click"] = function () {
-            angular
+            return $scope.closeOtherInfoWindows('mapClick');
         };
         $scope.options = { scrollwheel: false, disableDefaultUI: true, zoomControl: true, streetViewControl: true };
         $scope.parkingMarkers = [];
@@ -54,7 +54,6 @@
         $scope.isNightLifeFlaskMarkerShown = true;
         $scope.isNightLifeGoogleMarkerShown = false;
         $scope.currentMap;
-        $scope.currentUserLocation;
         $scope.isMobile = {
             Android: function () {
                 return ionic.Platform.isAndroid();
@@ -66,22 +65,34 @@
                 return ionic.Platform.isWindowsPhone();
             }
         };
-
         $scope.onClick = function (marker, eventName, model) {
+            $scope.closeOtherInfoWindows();
             model.show = !model.show;
             if (model.show) {
                 $scope.currentShownInfoWindow = model;
-
                 setTimeout(setInfoWindowEvent, 100);
             }
         };
+        $scope.closeOtherInfoWindows = function (mapClick) {
+            if ($scope.infoTypeName == 'Pre-Event') {
+                if ($scope.markerOptions.control.getPlurals().allVals.length > 0) {
+                    angular.forEach($scope.markerOptions.control.getPlurals().allVals, function (val, idx) {
+                        if (mapClick) {
+                            $scope.$apply(function () { val.model.show = false; });
+                        } else{
+                             val.model.show = false;
+                        }
+                    })
+                }
+            } else if ($scope.infoTypeName == 'During-Event') {
+
+            } else if ($scope.infoTypeName == 'Post-Event') {
+
+            }
+        }
         function setInfoWindowEvent() {
             var iwOuter = $('.gm-style-iw');
 
-            /* Since this div is in a position prior to .gm-div style-iw.
-             * We use jQuery and create a iwBackground variable,
-             * and took advantage of the existing reference .gm-style-iw for the previous div with .prev().
-            */
             var iwBackground = iwOuter.prev();
 
             // Removes background shadow DIV
@@ -89,46 +100,33 @@
 
             // Removes white background DIV
             iwBackground.children(':nth-child(4)').css({ 'display': 'none' });
-
-            // Moves the infowindow 115px to the right.
-            // iwOuter.parent().parent().css({ left: '115px' });
-
-            // // Moves the shadow of the arrow 76px to the left margin.
-            iwBackground.children(':nth-child(1)').attr('style', function (i, s) { return s + 'left: 76px !important;' });
-
-            // // Moves the arrow 76px to the left margin.
-            iwBackground.children(':nth-child(3)').attr('style', function (i, s) { return s + 'left: 76px !important;' });
-
-            // Changes the desired tail shadow color.
-            iwBackground.children(':nth-child(3)').find('div').children().css({ 'box-shadow': 'rgba(72, 181, 233, 0.6) 0px 1px 6px', 'z-index': '1', 'background': 'black' });
-            $(".iw-content-toggle").click(function () {
-                var toggller = $("#iw-container .iw-content")
-                toggller.toggle();
+            iwBackground.children(':nth-child(3)').find('div').children().css({ 'background': 'black' });
+             $(".iw-content-toggle").click(function () {
+                var toggller = $("#iw-container .iw-content");
                 var toggleImage = $(".iw-content-toggle").find("img");
-                if (toggller.is(":visible")) {
-                    toggleImage.attr("src", "img/map_icons/circle-down_arrow.png");
-                } else {
+                if( $("#iw-container").height() == 170) {
+                    $("#iw-container").css("height","46px");
                     toggleImage.attr("src", "img/map_icons/circle-right _arrow.png");
+                     
+                } else {
+                    $("#iw-container").css("height","170px");
+                    toggleImage.attr("src", "img/map_icons/circle-down_arrow.png");
                 }
             })
-
-            // Reference to the div that groups the close button elements.
-            // var iwCloseBtn = iwOuter.next();
-
-            // // Apply the desired effect to the close button
-            // iwCloseBtn.css({ opacity: '1', right: '38px', top: '3px', border: '7px solid #48b5e9', 'border-radius': '13px', 'box-shadow': '0 0 5px #3990B9' });
-
-            // // If the content of infowindow not exceed the set maximum height, then the gradient is removed.
-            // if ($('.iw-content').height() < 140) {
-            //     $('.iw-bottom-gradient').css({ display: 'none' });
-            // }
-
-            // // The API automatically applies 0.7 opacity to the button after the mouseout event. This function reverses this event to the desired value.
-            // iwCloseBtn.mouseout(function () {
-            //     $(this).css({ opacity: '1' });
-            // })
+        
             var href = $scope.createMapLink($scope.currentShownInfoWindow.addrLine1);
-            $("#iwTakeMeThere").attr("href",href);
+            $("#iwTakeMeThere").attr("href", href);
+            if($scope.currentShownInfoWindow.phone == '') {
+                $scope.currentShownInfoWindow.phone = "+1 (248) 227-7148";
+            }
+            href = "tel:"+$scope.currentShownInfoWindow.phone;
+            $("#iwCallNow").attr("href", href);
+            if($scope.currentShownInfoWindow.website == '') {
+                $scope.currentShownInfoWindow.website = "www.chelischilibar.com";
+            }
+            href = $scope.currentShownInfoWindow.website;
+            href = fixUrl(href);
+            $("#iwViewWebsite").attr("href", href);
             // $("#iwTakeMeThere").on("click", takeMeToPlace);
         }
 
@@ -157,26 +155,9 @@
                 $scope.currentMap = $scope.map.control.getGMap();
                 var map2 = maps[0].map;
                 getGoogleMarkers($scope.currentMap, $scope.infoTypeName);
-                $scope.setUserLocation();
-                // $scope.setDomReadyEvent();
             });
 
-        $scope.setUserLocation = function () {
-            navigator.geolocation.getCurrentPosition(
-                function (position) {
-                    $scope.currentUserLocation = position;
-                },
-                function errorCallback(error) {
-                }
-            );
-        };
-        // $scope.setDomReadyEvent = function () {
-        //     angular.forEach($scope.windowOptions.control.getGWindows(), function (infoWindow, idx) {
-        //         google.maps.event.addListener(infoWindow, 'domready', function () {
-        //             alert("test");
-        //         });
-        //     });
-        // };
+        
         function initEventData() {
             try {
                 $scope.eventDetails = $stateParams.eventDetails.Details;
@@ -325,25 +306,17 @@
             };
         };
 
-
-
-        function takeMeToPlace() { // check
-            var slat = $scope.currentUserLocation.coords.latitude;
-            var slng = $scope.currentUserLocation.coords.longitude;
-            // var dlat = $scope.currentShownInfoWindow.position.lat();
-            // var dlng = $scope.currentShownInfoWindow.position.lng();
-            if (navigator.platform) {
-                if ((navigator.platform.indexOf("iPhone") != -1)
-                    || (navigator.platform.indexOf("iPod") != -1)
-                    || (navigator.platform.indexOf("iPad") != -1) || (navigator.platform.indexOf("android") != -1))
-                    window.open("maps://maps.google.com/maps?saddr=" + slat + "," + slng + "&daddr=" + dlat + "," + dlng + " ", "_system");
-                else {
-                    window.open("http://maps.google.com/maps?saddr=" + slat + "," + slng + "&daddr=" + dlat + "," + dlng + " ", "_system");
-                }
-            } else {
-                flaskUtil.alert("falied to get your location");
-            }
+function fixUrl (url) {
+    if(url) {
+        if (url.indexOf("http://") > -1 || "https://" > -1) {
+            return url;
+        } else {
+            return "http://" + url;
         }
+    }
+}
+
+     
         $scope.selectFlaskMarker = function () {
             $scope.isFlaskMarkerShown = !$scope.isFlaskMarkerShown;
             if ($scope.isFlaskMarkerShown) {
@@ -372,7 +345,6 @@
                     value.setVisible(false);
                 });
             }
-            // mapServices.refreshMap();
         };
         $scope.selectNightLifeGoogleMarker = function () {
             $scope.isNightLifeGoogleMarkerShown = !$scope.isNightLifeGoogleMarkerShown;
@@ -458,25 +430,35 @@
         };
         function setBarInfo() {
             $timeout(function () {
-                $ionicTabsDelegate.select(1)
+                if ($scope.infoType == 'During-Event' || $scope.infoType == 'Post-Event') {
+                    $ionicTabsDelegate.select(0);
+                } else if ($scope.infoType == 'Pre-Event') {
+                    $ionicTabsDelegate.select(1);
+                }
                 $scope.setMarkers();
             }, 0)
         };
         function setTrafficInfo() {
             $timeout(function () {
-                $ionicTabsDelegate.select(3)
+                $ionicTabsDelegate.select(2)
                 $scope.setMarkers();
             }, 0)
         };
         function setFlaskUsInfo() {
             $timeout(function () {
-                $ionicTabsDelegate.select(4)
+                if ($scope.infoType == 'Pre-Event') {
+                    $ionicTabsDelegate.select(3)
+                } else if ($scope.infoType == 'During-Event') {
+                    $ionicTabsDelegate.select(1)
+                } else {
+                    $ionicTabsDelegate.select(2)
+                }
                 $scope.setMarkers();
             }, 0)
         };
         function setNightLifeInfo() {
             $timeout(function () {
-                $ionicTabsDelegate.select(2)
+                $ionicTabsDelegate.select(1)
                 $scope.setMarkers();
             }, 0)
         }
