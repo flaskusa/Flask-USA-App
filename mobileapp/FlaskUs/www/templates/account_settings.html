@@ -32,10 +32,11 @@
                         <span class="input-label">Confirm Password</span>
                         <input type="password" placeholder="Confirm Password" class="form-control" ng-model="user.password2" name="password2">
                     </label>
-                    <label class="item item-input item-floating-label">
+                    <div class="item item-input item-floating-label item-icon-right">
                         <span class="input-label">Date of Birth</span>
-                        <input type="date" placeholder="Date of Birth" name="DOB" ng-model="user.DOB">
-                    </label>
+                        <input type="text" placeholder="DOB" name="DOB" class="form-control" ng-model="user.DOB" ng-click="openDatePickerOne()">
+                        <i class="icon ion-ios-calendar-outline" ng-click="openDatePickerOne();"></i>
+                    </div>
                     <label class="item item-input">
                         <span class="input-label">Gender</span>
                         <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"male"' name="rdoResult">Male</ion-radio></pre>
