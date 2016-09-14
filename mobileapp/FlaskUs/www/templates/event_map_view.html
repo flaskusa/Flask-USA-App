@@ -48,147 +48,260 @@
                         </tr>
                     </table> 
                 </div>
-                <div class="iw-content" style="display:none">
-                    <div class="padding" id="iwCallNow">Call Now </div>
-                    <div class="padding" id = "iwViewWebsite"> View website</div>
-                    <div class="padding" > <a href="#" id="iwTakeMeThere" target="_blank"> Take me there </a></div>
-                </div> 
+                <div class="iw-content">
+                    <div class="padding">
+                        <table>
+                            <tr>
+                                <td style="width:45%;padding-right: 10px;text-align: right"> <img src="img/map_icons/call_me_now.png"> </td>
+                                <td style ="vertical-align: middle;text-align: left"> <a href="#" id="iwCallNow" target="_blank"> Call Now </a> </td>
+                            </tr>
+                            <tr>
+                                <td style="width:45%;padding-right: 10px;text-align: right"> <img src="img/map_icons/view_website.png"> </td>
+                                <td style ="vertical-align: middle;text-align: left"> <a href="#" id="iwViewWebsite" target="_blank" class=""> View Website </a> </td>
+                            </tr>
+                            <tr>
+                                <td style="width:45%;padding-right: 10px;text-align: right"><img src="img/map_icons/take_me_there.png"> </td>
+                                <td style ="vertical-align: middle;text-align: left" >  <a href="#" id="iwTakeMeThere" target="_blank"> Take me there </a> </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
          </script>
-        <ion-tabs class="tabs-positive tab_bottom">
-            <ion-tab title="PARKING" ng-click="selectTab(0)" class="{{infoTypeName != 'Pre-Event' ? 'hide':''}}">
-                <div id="map_canvas" style="height:100%;width:100%">
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" idkey="id" control="map.control" events = "map.events">
-                        <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
-                        <!--<ui-gmap-map-control template="custom.controls.tpl.html" index="-1"	position="RIGHT_CENTER" controller = "refreshMap"> </ui-gmap-map-control>-->
-                        <ui-gmap-map-control position="right_center">
-                            <div ng-controller="refreshMap">
-                                <div style="margin-right: 5px">
-                                    <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
+        <div ng-if="infoTypeName == 'Pre-Event'">
+            <ion-tabs class="tabs-positive tab_bottom">
+                <ion-tab title="PARKING" ng-click="selectTab(0)">
+                    <div id="map_canvas" style="height:100%;width:100%">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" idkey="id" control="map.control" events="map.events">
+                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
+                            <!--<ui-gmap-map-control template="custom.controls.tpl.html" index="-1"	position="RIGHT_CENTER" controller = "refreshMap"> </ui-gmap-map-control>-->
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div style="margin-right: 5px">
+                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
                                 0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
                                 255, 255);">
-                                        <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
-                                            <div class="miniFlaskButton" ng-click="selectFlaskMarker()"></div>
+                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                                <div class="miniFlaskButton" ng-click="selectFlaskMarker()"></div>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
-                                        <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
-                                            <div class="miniGoogleButton" ng-click="selectGoogleMarker()"></div>
+                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
+                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                                <div class="miniGoogleButton" ng-click="selectGoogleMarker()"></div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </ui-gmap-map-control>
-                        <ui-gmap-markers models="parkingMarkers" coords="'self'" icon="'icon'" options="markerOptions" click="onClick" control="markerOptions.control">
-                            <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'" control="windowOptions.control">
-                            </ui-gmap-windows>
-                        </ui-gmap-markers>
-                        <ui-gmap-markers models="parkingGoogleMarkers" coords="'self'" icon="'icon'" options="googleMarkerOptions" click="onClick"
-                            control="googleMarkerOptions.control">
-                            <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
-                            </ui-gmap-windows>
-                        </ui-gmap-markers>
+                            </ui-gmap-map-control>
+                            <ui-gmap-markers models="parkingMarkers" coords="'self'" icon="'icon'" options="markerOptions" click="onClick" control="markerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'" control="windowOptions.control">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <ui-gmap-markers models="parkingGoogleMarkers" coords="'self'" icon="'icon'" options="googleMarkerOptions" click="onClick"
+                                control="googleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
 
-                    </ui-gmap-google-map>
-                </div>
-            </ion-tab>
-            <ion-tab title="BARS/FOOD" ng-click="selectTab(1)">
-                <div id="map_canvas1" style="height:100%;width:100%">
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
-                        <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
-                        <ui-gmap-map-control position="right_center">
-                            <div ng-controller="refreshMap">
-                                <div style="margin-right: 5px">
-                                    <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
-                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
-                                255, 255);">
-                                        <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
-                                            <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
-                                        </div>
-                                    </div>
-                                    <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
-                                        <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
-                                            <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ui-gmap-map-control>
-                        <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
-                            <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
-
-                            </ui-gmap-windows>
-                        </ui-gmap-markers>
-                        <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick"
-                            control="barGoogleMarkerOptions.control">
-                            <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
-                            </ui-gmap-windows>
-                        </ui-gmap-markers>
-                    </ui-gmap-google-map>
-                </div>
-            </ion-tab>
-            <ion-tab title="Nightlife" class="{{infoTypeName !=  'Post-Event' ? 'hide':''}}" ng-click="selectTab(2)">
-                <div id="map_canvas2" style="height:100%;width:100%">
-                    <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
-                        <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
-                        <ui-gmap-map-control position="right_center">
-                            <div ng-controller="refreshMap">
-                                <div style="margin-right: 5px">
-                                    <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
-                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
-                                255, 255);">
-                                        <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
-                                            <div class="miniFlaskButton" ng-click="selectNightLifeFlaskMarker()"></div>
-                                        </div>
-                                    </div>
-                                    <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
-                                        <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
-                                            <div class="miniGoogleButton" ng-click="selectNightLifeGoogleMarker()"></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </ui-gmap-map-control>
-                        <ui-gmap-markers models="nightLifes" coords="'self'" icon="'icon'" options="nightLifeFlaskMarkerOptions" click="onClick"
-                            control="nightLifeFlaskMarkerOptions.control">
-                            <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
-
-                            </ui-gmap-windows>
-                        </ui-gmap-markers>
-                        <ui-gmap-markers models="nightLifesGoogleMarkers" coords="'self'" icon="'icon'" options="nightLifeGoogleMarkerOptions" click="onClick"
-                            control="nightLifeGoogleMarkerOptions.control">
-                            <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
-                            </ui-gmap-windows>
-                        </ui-gmap-markers>
-                    </ui-gmap-google-map>
-                </div>
-            </ion-tab>
-            <ion-tab title="TRAFFIC" class="{{infoTypeName != 'Pre-Event' ? 'hide':''}}" ng-click="selectTab(3)">
-                <div style="padding:10px">
-                    <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{trafficDetails.infoTitle}}</div></label>
+                        </ui-gmap-google-map>
                     </div>
-                    <div class="form-group"><label class="control-label" for="Description"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
-                        <div class="controls" id="Description">
-                            {{trafficDetails.infoDesc}}
+                </ion-tab>
+                <ion-tab title="BARS/FOOD" ng-click="selectTab(1)">
+                    <div id="map_canvas1" style="height:100%;width:100%">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
+                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div style="margin-right: 5px">
+                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
+                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
+                                255, 255);">
+                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                                <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
+                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                                <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
+                            <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick"
+                                control="barGoogleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+                </ion-tab>
+                <ion-tab title="TRAFFIC">
+                    <div style="padding:10px">
+                        <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{trafficDetails.infoTitle}}</div></label>
+                        </div>
+                        <div class="form-group"><label class="control-label" for="Description"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
+                            <div class="controls" id="Description">
+                                {{trafficDetails.infoDesc}}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </ion-tab>
-            <ion-tab title="FLASK US" nf-if="true" ng-click="selectTab(4)">
-                <div style="padding:10px">
-                    <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetails.infoTitle}}</div></label>
-                    </div>
-                    <div class="form-group"><label class="control-label" for="Description"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
-                        <div class="controls" id="Description">
-                            {{flaskUsDetails.infoDesc}}
+                </ion-tab>
+                <ion-tab title="FLASK US">
+                    <div style="padding:10px">
+                        <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetails.infoTitle}}</div></label>
+                        </div>
+                        <div class="form-group"><label class="control-label" for="Description"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
+                            <div class="controls" id="Description">
+                                {{flaskUsDetails.infoDesc}}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </ion-tab>
-        </ion-tabs>
+                </ion-tab>
+            </ion-tabs>
+        </div>
+        <div ng-if="infoTypeName == 'During-Event'">
+            <ion-tabs class="tabs-positive tab_bottom">
+                <ion-tab title="BARS/FOOD" ng-click="selectTab(1)">
+                    <div id="map_canvas1" style="height:100%;width:100%">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
+                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div style="margin-right: 5px">
+                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
+                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
+                                255, 255);">
+                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                                <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
+                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                                <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
+                            <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick"
+                                control="barGoogleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+                </ion-tab>
+                <ion-tab title="FLASK US" ng-click="selectTab(4)">
+                    <div style="padding:10px">
+                        <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetails.infoTitle}}</div></label>
+                        </div>
+                        <div class="form-group"><label class="control-label" for="Description"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
+                            <div class="controls" id="Description">
+                                {{flaskUsDetails.infoDesc}}
+                            </div>
+                        </div>
+                    </div>
+                </ion-tab>
+            </ion-tabs>
+        </div>
+        <div ng-if="infoTypeName == 'Post-Event'">
+            <ion-tabs class="tabs-positive tab_bottom">
+                <ion-tab title="BARS/FOOD" ng-click="selectTab(1)">
+                    <div id="map_canvas1" style="height:100%;width:100%">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
+                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div style="margin-right: 5px">
+                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
+                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
+                                255, 255);">
+                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                                <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
+                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                                <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
+                            <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick"
+                                control="barGoogleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+                </ion-tab>
+                <ion-tab title="Nightlife" ng-click="selectTab(2)">
+                    <div id="map_canvas2" style="height:100%;width:100%">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
+                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div style="margin-right: 5px">
+                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
+                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
+                                255, 255);">
+                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                                <div class="miniFlaskButton" ng-click="selectNightLifeFlaskMarker()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
+                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                                <div class="miniGoogleButton" ng-click="selectNightLifeGoogleMarker()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
+                            <ui-gmap-markers models="nightLifes" coords="'self'" icon="'icon'" options="nightLifeFlaskMarkerOptions" click="onClick"
+                                control="nightLifeFlaskMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                            <ui-gmap-markers models="nightLifesGoogleMarkers" coords="'self'" icon="'icon'" options="nightLifeGoogleMarkerOptions" click="onClick"
+                                control="nightLifeGoogleMarkerOptions.control">
+                                <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
+                                </ui-gmap-windows>
+                            </ui-gmap-markers>
+                        </ui-gmap-google-map>
+                    </div>
+                </ion-tab>
+                <ion-tab title="FLASK US" ng-click="selectTab(4)">
+                    <div style="padding:10px">
+                        <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetails.infoTitle}}</div></label>
+                        </div>
+                        <div class="form-group"><label class="control-label" for="Description"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
+                            <div class="controls" id="Description">
+                                {{flaskUsDetails.infoDesc}}
+                            </div>
+                        </div>
+                    </div>
+                </ion-tab>
+            </ion-tabs>
+        </div>
     </ion-content>
-
-
     <ion-footer-bar class="bar bar-dark bar-footer bar-assertive">
         <img src="img/ad.png" class="footer-img" />
     </ion-footer-bar>
