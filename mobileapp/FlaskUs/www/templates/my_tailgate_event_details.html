@@ -25,7 +25,7 @@
             </div>
             <div class="tailgateInfo tailgateInfoborder">
                 <div class="row">
-                    <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
+                    <div class="col" style="width:155px;"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
                     <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
                 </div>
                 <div class="row">
@@ -70,7 +70,10 @@
                                 </div>
                             </div>
                             <div class="list">
-                                <div class="messageList" ng-repeat="data in messageUser"><p class="message_username">@{{data.username}}_User</p><p>{{data.message}}_message</p><br></div>
+                                <div class="messageList" ng-repeat="data in messageUser">
+                                    <img class="default_img" ng-src='img/default-profilepic-copy.png' ;" style=" ">
+                                    <div><p class="message_username">@{{data.username}}_User</p><p class="messageTxt">{{data.message}}_message</p><br></div>
+                                </div>
                             </div>
                         </span>
                     </div>

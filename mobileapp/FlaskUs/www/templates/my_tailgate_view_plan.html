@@ -21,7 +21,9 @@
                     <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
                 </div>
                 <div class="row">
-                    <a href="#" class="btnPay">Pay Now</a>
+                    <a href="#" type="submit" nav-clear class="button button-block button-positive pay_now_button">
+                        Pay Now
+                    </a>
                 </div>
             </div>
             <div class="list">
@@ -29,21 +31,23 @@
                     SUPPLIES LIST
                 </div>
             </div>
-            <div class="list">
-                <ion-checkbox class="item item-icon-left item-checkbox-right">
-                    TICKETS
-                </ion-checkbox>
-                <ion-checkbox class="item item-icon-left item-checkbox-right">
-                    PARKING PASS
-                </ion-checkbox>
-                <ion-checkbox class="item item-icon-left item-checkbox-right">
-                    CASH/WALLET
-                </ion-checkbox>
-                <ion-checkbox class="item item-icon-left item-checkbox-right">
-                    SWEATSHIRT/COAT
-                </ion-checkbox>
-               
-            </div>
+            <!--<div class="list">
+                <ion-item class="item supply_list" ng-repeat="data in tailgateSupplyList">
+                    {{data.supplyListName}}
+                    <span class="badge badge-supply" style="cursor: pointer" ng-click="copyList(supplyListId)">copy</span>
+                </ion-item>
+
+            </div>-->
+
+            <label class="item item-input item-select">
+                <div class="input-label">
+                    &nbsp;
+                </div>
+                <select class="plan_now">
+                    <option ng-repeat="data in tailgateSupplyList" ng-click="getSupplyItem(data.supplyListId);">{{data.supplyListName}}</option>
+                </select>
+            </label>
+
         </div>
     </ion-content>
 </ion-view>
