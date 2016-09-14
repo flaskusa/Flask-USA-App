@@ -76,7 +76,7 @@
                  </div>
         </ion-content>
         </ion-tab>
-        <ion-tab title="Attendees" ng-if="enableTab=='false'" >
+        <ion-tab title="Attendees" ng-if="enableTab.condition" >
             <ion-content overflow-scroll="false"  class="has-header">
                 <div class="add_my_tailgate" >
                     <a class="item item-full item-icon-left attendees" ng-click="modal.show()">
@@ -93,7 +93,7 @@
                 </div>
             </ion-content>
         </ion-tab>
-        <ion-tab title="Plan Now" ng-show="enableTab">
+        <ion-tab title="Plan Now" ng-if="enableTab.condition">
             <!--FOURTH TAB-->
             <ion-content overflow-scroll="false" class="has-header" >
                 <div class="paynow" >
