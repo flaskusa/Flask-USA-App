@@ -102,7 +102,9 @@
         }
 
         $scope.isavail = false;
-        $scope.enableTab = false;
+        $scope.enableTab = {
+            condition:false
+        };
         $scope.addmyTailgate = function (tailgatedata) {
             var startTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime1); // Your timezone!
             var endTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime2);
@@ -111,8 +113,12 @@
             tailgatedata.startTime = startTime;
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
                 console.log(respData.data);
-                $cookies.put('newtailGateId', respData.data.tailGateId);
-                $scope.enableTab = true;
+                $cookies.put('newtailGateId', respData.data.tailgateId);
+                $scope.enableTab = {
+                    condition: true
+                };
+                var newtailGateId = $cookies.get('newtailGateId');
+                getTailgaters(newtailGateId);
             });
         }
 
@@ -194,12 +200,12 @@
         }).then(function (modal) {
             $scope.modal = modal;
         });
-        var newtailGateId = $cookies.get('newtailGateId');
+        
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
-        getTailgaters();
+        
 
-        function getTailgaters() {
-            TailgateService.getMyTailgateUsers(newtailGateId).then(function (respData) {
+        function getTailgaters(newtailgateId) {
+            TailgateService.getMyTailgateUsers(newtailgateId).then(function (respData) {
                 $scope.myTailgaters = respData.data;
                 getAllFriends();
             });
