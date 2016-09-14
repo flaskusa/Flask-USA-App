@@ -141,7 +141,7 @@
                         </ui-gmap-google-map>
                     </div>
                 </ion-tab>
-                <ion-tab title="TRAFFIC">
+                <ion-tab title="TRAFFIC" ng-click="selectTab(2)">
                     <div style="padding:10px">
                         <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{trafficDetails.infoTitle}}</div></label>
                         </div>
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                 </ion-tab>
-                <ion-tab title="FLASK US">
+                <ion-tab title="FLASK US" ng-click="selectTab(3)">
                     <div style="padding:10px">
                         <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetails.infoTitle}}</div></label>
                         </div>
@@ -167,7 +167,7 @@
         </div>
         <div ng-if="infoTypeName == 'During-Event'">
             <ion-tabs class="tabs-positive tab_bottom">
-                <ion-tab title="BARS/FOOD" ng-click="selectTab(1)">
+                <ion-tab title="BARS/FOOD" ng-click="selectTab(0)">
                     <div id="map_canvas1" style="height:100%;width:100%">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
@@ -202,7 +202,7 @@
                         </ui-gmap-google-map>
                     </div>
                 </ion-tab>
-                <ion-tab title="FLASK US" ng-click="selectTab(4)">
+                <ion-tab title="FLASK US" ng-click="selectTab(1)">
                     <div style="padding:10px">
                         <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetails.infoTitle}}</div></label>
                         </div>
@@ -217,7 +217,7 @@
         </div>
         <div ng-if="infoTypeName == 'Post-Event'">
             <ion-tabs class="tabs-positive tab_bottom">
-                <ion-tab title="BARS/FOOD" ng-click="selectTab(1)">
+                <ion-tab title="BARS/FOOD" ng-click="selectTab(0)">
                     <div id="map_canvas1" style="height:100%;width:100%">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
@@ -252,7 +252,7 @@
                         </ui-gmap-google-map>
                     </div>
                 </ion-tab>
-                <ion-tab title="Nightlife" ng-click="selectTab(2)">
+                <ion-tab title="Nightlife" ng-click="selectTab(1)">
                     <div id="map_canvas2" style="height:100%;width:100%">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
@@ -288,7 +288,7 @@
                         </ui-gmap-google-map>
                     </div>
                 </ion-tab>
-                <ion-tab title="FLASK US" ng-click="selectTab(4)">
+                <ion-tab title="FLASK US" ng-click="selectTab(2)">
                     <div style="padding:10px">
                         <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetails.infoTitle}}</div></label>
                         </div>
