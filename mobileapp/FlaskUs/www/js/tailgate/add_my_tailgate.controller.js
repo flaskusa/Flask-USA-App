@@ -102,6 +102,7 @@
         }
 
         $scope.isavail = false;
+        $scope.enableTab = false;
         $scope.addmyTailgate = function (tailgatedata) {
             var startTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime1); // Your timezone!
             var endTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime2);
@@ -109,7 +110,9 @@
             tailgatedata.endTime = endTime;
             tailgatedata.startTime = startTime;
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
-                console.log(respData);
+                console.log(respData.data);
+                $cookies.put('newtailGateId', respData.data.tailGateId);
+                $scope.enableTab = true;
             });
         }
 
@@ -177,10 +180,48 @@
             setLabel: 'Set'
         };
         $scope.openTimePicker1 = function () {
-            ionicTimePicker.openTimePicker(ipObj1);
+            ionicTimePicker.openTimePicker(ipObj1);//for start timepicker
         };
         $scope.openTimePicker2 = function () {
-            ionicTimePicker.openTimePicker(ipObj2);
+            ionicTimePicker.openTimePicker(ipObj2);// for end timepicker
         };
+
+        //for adding attendees in new tailgate
+                $scope.myTailgaters = [];
+        $scope.myFriends = [];
+        $ionicModal.fromTemplateUrl('templates/modal.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.modal = modal;
+        });
+        var newtailGateId = $cookies.get('newtailGateId');
+        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
+        getTailgaters();
+
+        function getTailgaters() {
+            TailgateService.getMyTailgateUsers(newtailGateId).then(function (respData) {
+                $scope.myTailgaters = respData.data;
+                getAllFriends();
+            });
+        }
+        function getAllFriends() {
+            TailgateService.getUserFrends().then(function (respData) {
+                $scope.myFriends = respData;
+            })
+        }
+        $scope.addTailgateMembers = function(currUserData,index) {
+            var addUserparams = {};
+            addUserparams.groupId = 0;
+            addUserparams.userId = currUserData.userId;
+            addUserparams.userName = currUserData.firstName + " " + currUserData.lastName;
+            addUserparams.emailAddress = currUserData.emailAddress;
+            addUserparams.isAdmin = 0;
+            addUserparams.tailgateId = newtailGateId;
+            addUserparams.isPaid = 0;
+            addUserparams.paymentMode = "None";
+            TailgateService.addcurrentUser(addUserparams).then(function (respData) {
+                $scope.myFriends.splice(index, 1);
+            })           
+        }
     }
 })();
