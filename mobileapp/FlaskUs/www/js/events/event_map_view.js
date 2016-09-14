@@ -79,8 +79,8 @@
                     angular.forEach($scope.markerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
                             $scope.$apply(function () { val.model.show = false; });
-                        } else{
-                             val.model.show = false;
+                        } else {
+                            val.model.show = false;
                         }
                     })
                 }
@@ -101,27 +101,27 @@
             // Removes white background DIV
             iwBackground.children(':nth-child(4)').css({ 'display': 'none' });
             iwBackground.children(':nth-child(3)').find('div').children().css({ 'background': 'black' });
-             $(".iw-content-toggle").click(function () {
+            $(".iw-content-toggle").click(function () {
                 var toggller = $("#iw-container .iw-content");
                 var toggleImage = $(".iw-content-toggle").find("img");
-                if( $("#iw-container").height() == 170) {
-                    $("#iw-container").css("height","46px");
+                if ($("#iw-container").height() == 170) {
+                    $("#iw-container").css("height", "46px");
                     toggleImage.attr("src", "img/map_icons/circle-right _arrow.png");
-                     
+
                 } else {
-                    $("#iw-container").css("height","170px");
+                    $("#iw-container").css("height", "170px");
                     toggleImage.attr("src", "img/map_icons/circle-down_arrow.png");
                 }
             })
-        
+
             var href = $scope.createMapLink($scope.currentShownInfoWindow.addrLine1);
             $("#iwTakeMeThere").attr("href", href);
-            if($scope.currentShownInfoWindow.phone == '') {
+            if ($scope.currentShownInfoWindow.phone == '') {
                 $scope.currentShownInfoWindow.phone = "+1 (248) 227-7148";
             }
-            href = "tel:"+$scope.currentShownInfoWindow.phone;
+            href = "tel:" + $scope.currentShownInfoWindow.phone;
             $("#iwCallNow").attr("href", href);
-            if($scope.currentShownInfoWindow.website == '') {
+            if ($scope.currentShownInfoWindow.website == '') {
                 $scope.currentShownInfoWindow.website = "www.chelischilibar.com";
             }
             href = $scope.currentShownInfoWindow.website;
@@ -157,7 +157,7 @@
                 getGoogleMarkers($scope.currentMap, $scope.infoTypeName);
             });
 
-        
+
         function initEventData() {
             try {
                 $scope.eventDetails = $stateParams.eventDetails.Details;
@@ -306,17 +306,17 @@
             };
         };
 
-function fixUrl (url) {
-    if(url) {
-        if (url.indexOf("http://") > -1 || "https://" > -1) {
-            return url;
-        } else {
-            return "http://" + url;
+        function fixUrl(url) {
+            if (url) {
+                if (url.indexOf("http://") > -1 || "https://" > -1) {
+                    return url;
+                } else {
+                    return "http://" + url;
+                }
+            }
         }
-    }
-}
 
-     
+
         $scope.selectFlaskMarker = function () {
             $scope.isFlaskMarkerShown = !$scope.isFlaskMarkerShown;
             if ($scope.isFlaskMarkerShown) {
@@ -430,9 +430,9 @@ function fixUrl (url) {
         };
         function setBarInfo() {
             $timeout(function () {
-                if ($scope.infoType == 'During-Event' || $scope.infoType == 'Post-Event') {
+                if ($scope.infoTypeName == 'During-Event' || $scope.infoTypeName == 'Post-Event') {
                     $ionicTabsDelegate.select(0);
-                } else if ($scope.infoType == 'Pre-Event') {
+                } else if ($scope.infoTypeName == 'Pre-Event') {
                     $ionicTabsDelegate.select(1);
                 }
                 $scope.setMarkers();
@@ -446,9 +446,9 @@ function fixUrl (url) {
         };
         function setFlaskUsInfo() {
             $timeout(function () {
-                if ($scope.infoType == 'Pre-Event') {
+                if ($scope.infoTypeName == 'Pre-Event') {
                     $ionicTabsDelegate.select(3)
-                } else if ($scope.infoType == 'During-Event') {
+                } else if ($scope.infoTypeName == 'During-Event') {
                     $ionicTabsDelegate.select(1)
                 } else {
                     $ionicTabsDelegate.select(2)
@@ -504,16 +504,30 @@ function fixUrl (url) {
 
         $scope.selectTab = function (index) {
             $scope.selectedIndex = index;
-            if (index == 0) { // Parking
-                setParkingInfo();
-            } else if (index == 1) { // Bars and Restaurants
-                setBarInfo();
-            } else if (index == 2) {
-                setNightLifeInfo(); //Nightlife
-            } else if (index == 3) { // Traffic
-                setTrafficInfo();
-            } else if (index == 4) { // FlaskUs
-                setFlaskUsInfo();
+            if ($scope.infoTypeName == 'Pre-Event') {
+                if (index == 0) { 
+                    setParkingInfo();
+                } else if (index == 1) { 
+                    setBarInfo();
+                } else if (index == 2) {
+                   setTrafficInfo(); 
+                } else if (index == 3) { 
+                   setFlaskUsInfo();
+                } 
+            } else if ($scope.infoTypeName == 'During-Event') {
+                 if (index == 0) {
+                    setBarInfo();
+                } else if (index == 1) { 
+                   setFlaskUsInfo();
+                } 
+            } else if ($scope.infoTypeName == 'Post-Event') {
+                  if (index == 0) { 
+                    setBarInfo();
+                } else if (index == 1) { 
+                    setNightLifeInfo();
+                } else if (index == 2) { 
+                     setFlaskUsInfo();
+                } 
             }
         }
         $scope.createMapLink = function (address1) {
