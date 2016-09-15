@@ -27,9 +27,10 @@
         var deleteTailgateInfoURL = "flask-user-tailgate-portlet.tailgateinfo/delete-tailgate-info";
         var deleteTailgateMarkerURL = "flask-user-tailgate-portlet.tailgatemarker/delete-tailgate-marker";
         var deleteTailgateUserIdURL = "flask-user-tailgate-portlet.tailgateusers/delete-tailgate-user";
+        /*Supply List Services*/
         var getMySupplyListsURL = "flask-user-tailgate-portlet.supplylist/get-my-supply-lists";
         var addSupplyListURL = "flask-user-tailgate-portlet.supplylist/add-supply-list";
-        var getitemsbylistidURL = "flask-user-tailgate-portlet.supplyitem/get-items-by-list-id";
+        var getItemsbylistidURL = "flask-user-tailgate-portlet.supplyitem/get-items-by-list-id";
         var getSupplyListURL = "flask-user-tailgate-portlet.supplylist/get-supply-list";
 
 
@@ -55,7 +56,7 @@
             deleteTailgate: deleteTailgate,
             getMySupplyLists: getMySupplyLists,
             getSupplyList: getSupplyList,
-            getitemsbylistid: getitemsbylistid
+            getItemsbylistid: getItemsbylistid
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -325,8 +326,8 @@
             });
         }
 
-        function getitemsbylistid(supplyListId) {
-            return $http.get(baseURL + getitemsbylistidURL, {
+        function getItemsbylistid(supplyListId) {
+            return $http.get(baseURL + getItemsbylistidURL, {
                 params: {
                     'supplyListId': supplyListId
                 }

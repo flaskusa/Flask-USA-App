@@ -3,51 +3,49 @@
     angular.module('flaskApp')
         .controller('mytailgatePlanCtrl', mytailgatePlanCtrl);
 
-    mytailgatePlanCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies'];
+    mytailgatePlanCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicModal'];
 
     /* @ngInject */
-    function mytailgatePlanCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies) {
+    function mytailgatePlanCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicModal) {
         $scope.myTailgaters = [];
-        $scope.tailgateSupplyList = [];
+        $scope.tailgateSupplyList = [],[];
+        $scope.tailgateSupplyItemList = [];
+        $scope.supplyListId = [];
+        //$ionicModal.fromTemplateUrl('templates/modal.html', {
+        //    scope: $scope
+        //}).then(function (modal) {
+        //    $scope.modal = modal;
+        //});
+        //$scope.cancel = function () {
+        //    $scope.modal.hide();
+        //}
         var tailGateId = $cookies.get('currtailGateId');
         getMyTailgate();
-        getSupplyList();
+        getMySupplyList();
        
-        //addTailgateSupplyList();
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
 
         function getMyTailgate() {
             TailgateService.getTailgate(tailGateId).then(function (respData) {
-                console.log(respData);
                 $scope.myTailgate = respData.data;
             });
         }
 
-        function getSupplyList() {
+       function getMySupplyList(selected1) {
             TailgateService.getMySupplyLists().then(function (respData) {
-                console.log(respData);
-                $scope.mySupplyList = respData.data;
-                console.log($scope.mySupplyList.length);
-                for (var i = 0; i < $scope.mySupplyList.length; i++) {
-                    console.log($scope.mySupplyList[i].supplyListName);
-                    $scope.tailgateSupplyList.push({ supplyListName: $scope.mySupplyList[i].supplyListName });
-
+                $scope.allSupplyList = respData.data;
+                for (var i = 0; i < $scope.allSupplyList.length; i++) {
+                    $scope.tailgateSupplyList.push({ supplyListName: $scope.allSupplyList[i].supplyListName, supplyListsId: $scope.allSupplyList[i].supplyListId });
                 }
-                
             });
         }
 
-        $scope.getSupplyItem=function(supplyListId) {
-            TailgateService.getitemsbylistid(supplyListId).then(function (respData) {
-                console.log(respData);
-                //$scope.mySupplyList = respData.data;
-                //console.log($scope.mySupplyList.length);
-                //for (var i = 0; i < $scope.mySupplyList.length; i++) {
-                //    console.log($scope.mySupplyList[i].supplyListName);
-                //    $scope.tailgateSupplyList.push({ supplyListName: $scope.mySupplyList[i].supplyListName });
-                //}
+        $scope.getSupplyItem = function (selected1) {
+            var supplyListstId = selected1.supplyListsId;
+            TailgateService.getItemsbylistid(supplyListstId).then(function (respData) {
+                $scope.supplyItemList = respData.data;
             });
         }
 
