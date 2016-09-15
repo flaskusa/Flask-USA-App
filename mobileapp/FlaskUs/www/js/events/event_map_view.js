@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$flaskUtil'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $flaskUtil) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady) {
         /* jshint validthis: true */
         var self = this;
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15, control: {} };
@@ -70,12 +70,13 @@
             model.show = !model.show;
             if (model.show) {
                 $scope.currentShownInfoWindow = model;
-                setTimeout(setInfoWindowEvent, 100);
+                $timeout(setInfoWindowEvent, 100);
             }
         };
+
         $scope.closeOtherInfoWindows = function (mapClick) {
             if ($scope.infoTypeName == 'Pre-Event') {
-                if ($scope.markerOptions.control.getPlurals().allVals.length > 0) {
+                if ( $scope.selectedIndex == 0 && $scope.markerOptions.control.getPlurals().allVals.length > 0) {
                     angular.forEach($scope.markerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
                             $scope.$apply(function () { val.model.show = false; });
@@ -84,24 +85,56 @@
                         }
                     })
                 }
-            } else if ($scope.infoTypeName == 'During-Event') {
-
+                if ($scope.selectedIndex == 1 && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
+                        if (mapClick) {
+                            $scope.$apply(function () { val.model.show = false; });
+                        } else {
+                            val.model.show = false;
+                        }
+                    })
+                }
+            } else if ($scope.selectedIndex == 0 && $scope.infoTypeName == 'During-Event') {
+                 if ($scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
+                        if (mapClick) {
+                            $scope.$apply(function () { val.model.show = false; });
+                        } else {
+                            val.model.show = false;
+                        }
+                    })
+                }
             } else if ($scope.infoTypeName == 'Post-Event') {
-
+                 if ($scope.selectedIndex == 0 && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
+                        if (mapClick) {
+                            $scope.$apply(function () { val.model.show = false; });
+                        } else {
+                            val.model.show = false;
+                        }
+                    })
+                }
+                 if ($scope.selectedIndex == 1 && $scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    angular.forEach($scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
+                        if (mapClick) {
+                            $scope.$apply(function () { val.model.show = false; });
+                        } else {
+                            val.model.show = false;
+                        }
+                    })
+                }
             }
         }
-        function setInfoWindowEvent() {
+
+        function infoWindowEvent() { 
             var iwOuter = $('.gm-style-iw');
+                var iwBackground = iwOuter.prev();
+                iwBackground.children(':nth-child(2)').css({ 'display': 'none' });
 
-            var iwBackground = iwOuter.prev();
-
-            // Removes background shadow DIV
-            iwBackground.children(':nth-child(2)').css({ 'display': 'none' });
-
-            // Removes white background DIV
-            iwBackground.children(':nth-child(4)').css({ 'display': 'none' });
-            iwBackground.children(':nth-child(3)').find('div').children().css({ 'background': 'black' });
-            $(".iw-content-toggle").click(function () {
+                // Removes white background DIV
+                iwBackground.children(':nth-child(4)').css({ 'display': 'none' });
+                iwBackground.children(':nth-child(3)').find('div').children().css({ 'background': 'black' });
+                $(".iw-content-toggle").click(function () {
                 var toggller = $("#iw-container .iw-content");
                 var toggleImage = $(".iw-content-toggle").find("img");
                 if ($("#iw-container").height() == 170) {
@@ -127,7 +160,11 @@
             href = $scope.currentShownInfoWindow.website;
             href = fixUrl(href);
             $("#iwViewWebsite").attr("href", href);
-            // $("#iwTakeMeThere").on("click", takeMeToPlace);
+        }
+        function setInfoWindowEvent() {
+            infoWindowEvent();
+            $timeout(infoWindowEvent,100);
+              
         }
 
 
@@ -163,6 +200,7 @@
                 $scope.eventDetails = $stateParams.eventDetails.Details;
                 $scope.infoTypeName = setInfoType($stateParams.infoType);
                 $scope.infoTypeCategoryName = $scope.setInfoTypeCategory($stateParams.infoTypeCategory);
+                $scope.setSelectedTabIndex($scope.infoTypeName, $scope.infoTypeCategoryName);
                 var venueObj = angular.fromJson($stateParams.eventDetails.Venue);
                 $scope.map.center.latitude = parseFloat(venueObj.latitude);
                 $scope.map.center.longitude = parseFloat(venueObj.longitude);
@@ -172,6 +210,35 @@
 
             }
         }
+
+         $scope.setSelectedTabIndex = function(infoTypeName, infoTyepeCategory) {
+             if(infoTypeName == 'Pre-Event') {
+                 if(infoTyepeCategory == 'Parking') {
+                     $scope.selectedIndex = 0;
+                 } else if(infoTyepeCategory == 'Bar & Restaurants') {
+                     $scope.selectedIndex = 1;
+                 }else if(infoTyepeCategory == 'Traffic') {
+                     $scope.selectedIndex = 2;
+                 } else{
+                       $scope.selectedIndex = 3;
+                 }
+
+             } else if(infoTypeName == 'During-Event') {
+                 if(infoTyepeCategory == 'Bar & Restaurants') {
+                     $scope.selectedIndex = 0;
+                 }  else{
+                       $scope.selectedIndex = 1;
+                 }
+             } else {
+                   if(infoTyepeCategory == 'Bar & Restaurants') {
+                     $scope.selectedIndex = 0;
+                 } else if(infoTyepeCategory == 'Nightlife') {
+                     $scope.selectedIndex = 1;
+                 } else{
+                       $scope.selectedIndex = 2;
+                 }
+             }
+         };
 
         function setInfoType(infoType) {
             switch (infoType) {
@@ -503,31 +570,32 @@
         };
 
         $scope.selectTab = function (index) {
+            $scope.closeOtherInfoWindows();
             $scope.selectedIndex = index;
             if ($scope.infoTypeName == 'Pre-Event') {
-                if (index == 0) { 
+                if (index == 0) {
                     setParkingInfo();
-                } else if (index == 1) { 
+                } else if (index == 1) {
                     setBarInfo();
                 } else if (index == 2) {
-                   setTrafficInfo(); 
-                } else if (index == 3) { 
-                   setFlaskUsInfo();
-                } 
+                    setTrafficInfo();
+                } else if (index == 3) {
+                    setFlaskUsInfo();
+                }
             } else if ($scope.infoTypeName == 'During-Event') {
-                 if (index == 0) {
+                if (index == 0) {
                     setBarInfo();
-                } else if (index == 1) { 
-                   setFlaskUsInfo();
-                } 
+                } else if (index == 1) {
+                    setFlaskUsInfo();
+                }
             } else if ($scope.infoTypeName == 'Post-Event') {
-                  if (index == 0) { 
+                if (index == 0) {
                     setBarInfo();
-                } else if (index == 1) { 
+                } else if (index == 1) {
                     setNightLifeInfo();
-                } else if (index == 2) { 
-                     setFlaskUsInfo();
-                } 
+                } else if (index == 2) {
+                    setFlaskUsInfo();
+                }
             }
         }
         $scope.createMapLink = function (address1) {
