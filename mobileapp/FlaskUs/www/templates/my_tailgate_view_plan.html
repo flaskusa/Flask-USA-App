@@ -7,7 +7,7 @@
             <button class="button button-icon button-clear ion-share"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content class="padding">
+    <ion-content class="padding" overflow-scroll="false">
         <div class="paynow">
             <div class="tailgateInfo">
                 <div class="row">
@@ -31,23 +31,56 @@
                     SUPPLIES LIST
                 </div>
             </div>
-            <!--<div class="list">
-                <ion-item class="item supply_list" ng-repeat="data in tailgateSupplyList">
-                    {{data.supplyListName}}
-                    <span class="badge badge-supply" style="cursor: pointer" ng-click="copyList(supplyListId)">copy</span>
-                </ion-item>
-
-            </div>-->
-
             <label class="item item-input item-select">
                 <div class="input-label">
                     &nbsp;
                 </div>
-                <select class="plan_now">
-                    <option ng-repeat="data in tailgateSupplyList" ng-click="getSupplyItem(data.supplyListId);">{{data.supplyListName}}</option>
-                </select>
+                <select class="plan_now" ng-model="selected1" ng-options="data.supplyListName for data in tailgateSupplyList" ng-change="getSupplyItem(selected1)"></select>
             </label>
 
+            <div class="list">
+                <div class="item item-divider plan_now">
+                    WHAT WE BRING
+                </div>
+            </div>
+
+            <div class="list">
+                <ion-checkbox class="item item-icon-left item-checkbox-right list-item" ng-repeat="data in supplyItemList">
+                    {{data.supplyItemName}}
+                </ion-checkbox>
+            </div>
+            <div class="row">
+                <a href="#" type="submit" nav-clear class="button button-block button-positive pay_now_button">
+                    Add To My Tailgate
+                </a>
+            </div>
         </div>
     </ion-content>
+    
+    <!--<script id="templates/modal.html" type="text/ng-template">
+        <ion-modal-view>
+            <ion-header-bar class="bar bar-header bar-positive black-header">
+                <h1 class="title">Add To Tailgate</h1>
+                <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
+            </ion-header-bar>
+            <div class="bar bar-subheader">
+                <p>Select Tailgate From List</p>
+            </div>
+            <ion-content class=" has-subheader">
+                <ion-list>
+                    <label class="item item-input item-select">
+                        <div class="input-label">
+                            &nbsp;
+                        </div>
+                        <select class="plan_now" ng-model="selected1" ng-options="data.supplyListName for data in tailgateSupplyList" ng-change="getSupplyItem(selected1)"></select>
+                    </label>
+                </ion-list>
+                <a href="#" type="submit" nav-clear class="button button-block button-positive pay_now_button" ng-click="cancel();">
+                    Cancel
+                </a>
+            </ion-content>
+        </ion-modal-view>
+    </script>-->
+
 </ion-view>
+
