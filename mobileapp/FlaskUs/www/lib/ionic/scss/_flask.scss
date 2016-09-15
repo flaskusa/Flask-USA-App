@@ -1162,13 +1162,15 @@ button.button.button-block.button-positive.invite_friend{
     padding-left: 105px;
   }
 }
-.suppliesButton{
-  background:#000000;
-  width: 60px;
-  border-radius: 6px;
+.suppliesButton {
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  width: 65px;
+  border-radius: 8px;
+  color:darkorange;
+  border-color:white;
   font-weight: bolder;
-
 }
+
 
 /*Start tailgate details bottom tabs*/
 .tab_bottom a.tab-item{
@@ -1821,3 +1823,48 @@ label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox{
     width: inherit !important; /*For avtar in profile pic */
 }
 /*End Disable button for edit in My tailgate section*/
+.my-friend-request-view {
+  .item-content {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    margin-top: -4px;
+    margin-bottom: -4px;
+    height: 70px;
+  }
+}
+.item .badge.extra-top-request {
+  top:25px;
+
+}
+.friendRequestButtonStyle {
+  width: 111px;
+  right: 1px;
+  padding-left: auto;
+  padding-left: 8px;
+  padding-bottom: 3px;
+
+  /* background-color: darkcyan; */
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  border-color: ghostwhite;
+  /* background-color: white; */
+  border: 1px;
+  border-radius: 8px;
+  font-weight: 400; }
+.f-nameText {
+  padding-left: 15px;
+  font-size: 14px;
+  font-weight: 600; }
+.supplySaveButtonStyle {
+  width: 65px;
+  right: 1px;
+  padding-left: auto;
+  padding-left: 25px;
+  padding-bottom: 3px;
+
+  /* background-color: darkcyan; */
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  border-color: ghostwhite;
+  /* background-color: white; */
+  border: 1px;
+  border-radius: 8px;
+  font-weight: 400; }
