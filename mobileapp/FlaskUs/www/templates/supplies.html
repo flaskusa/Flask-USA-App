@@ -15,10 +15,11 @@
 
       </div></div>
 <ion-list>
-          <ion-item style="color: #0f0f0f"  ng-repeat="data in supplies"ng-if="data.isSystem==false"ng-init="data.edit=false"ng-click="goTOList(data)">
-
+          <ion-item style="color: #0f0f0f"  ng-repeat="data in supplies"ng-if="data.isSystem==false"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)"on-swipe-left="onSwipeLeft(data)"on-drag-right="onSwipeRight(data)">
+              <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
               <label ng-if = "data.edit == false" style="font-weight: 200">{{ data.supplyListName | uppercase}} </label>
               <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
+              </div>
               <a href="#/app/suppliesList/{{data.supplyListName}}" ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px">{{data.listItem.length}}</span>
                   <div >
                   <span class="badge"style="top:12px"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:23px;padding-left:10%;top:20px;float: right"></span>
@@ -38,12 +39,13 @@
           </div></div>
 
       <ion-list>
-          <ion-item class="item "  ng-repeat="data in supplies"ng-if="data.isSystem==true"ng-init="data.edit=false" ng-click="goTOList(data)">
-
-              <span style="color: #000000;font-weight: 200" ng-if = "data.edit == false" >{{ data.supplyListName | uppercase}}</span>
+          <ion-item class="item "  ng-repeat="data in supplies"ng-if="data.isSystem==true"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)"on-swipe-left="onSwipeLeft(data)"on-swipe-right="onSwipeRight(data)">
+             <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
+              <span style="color: #000000;font-weight: 200" ng-if = "data.edit == false">{{ data.supplyListName | uppercase}}</span>
               <input type="text"id="systemEditBox"autofocus ng-model="data.supplyListName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
               <span ng-if="agreedToTermsOfUse==false" class="badge badge-assertive"style="cursor: pointer" ng-click="copyList(data)">copy</span>
-              <div ng-if="agreedToTermsOfUse==true">
+              </div>
+                 <div ng-if="agreedToTermsOfUse==true">
                   <span class="badge "style="top:12px"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:23px;top:20px;float: right"></span>
               </div>
               <ion-option-button class="button-assertive icon ion-edit"ng-if="agreedToTermsOfUse==true " ng-click="editSupply(data)"></ion-option-button>
