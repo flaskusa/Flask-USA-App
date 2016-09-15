@@ -19,7 +19,12 @@
         $scope.goBack = function(){
             $ionicHistory.goBack();
         }
-
+        $scope.onSwipeLeft=function(){
+            alert("hiii");
+        }
+        $scope.onSwipeRight=function(){
+            alert("hello");
+        }
    function getTimeDifference(){
        var todayDate=new Date();
        var differenceTravel = todayDate.getTime()-$scope.messageDate.getTime();
@@ -37,10 +42,10 @@
        else if(days<31){
            return days+" days ago"
        }else if(months<12){
-           return months+" month ago"
+           return months+" months ago"
 
        }else {
-           year+" year ago"
+           year+" years ago"
        }
    }
     $scope.deleteMessage=function(messageId,index){
@@ -53,4 +58,5 @@
     }
 
     }
+
 })();
