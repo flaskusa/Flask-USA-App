@@ -6,7 +6,7 @@
     </ion-nav-bar>
     <ion-content >
         <ion-list>
-            <ion-item ng-repeat="message in allMessages">
+            <ion-item click-for-options ng-repeat="message in allMessages">
                 <h2 class="emailText">{{message.senderName}}</h2>
                 <h4 style="float: right">{{message.diffDate}}</h4>
              <div class="col-60"><h3 ng-class="{emailText: false}">{{message.message}}</h3></div>
