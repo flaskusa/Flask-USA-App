@@ -32,7 +32,9 @@
         var addSupplyListURL = "flask-user-tailgate-portlet.supplylist/add-supply-list";
         var getItemsbylistidURL = "flask-user-tailgate-portlet.supplyitem/get-items-by-list-id";
         var getSupplyListURL = "flask-user-tailgate-portlet.supplylist/get-supply-list";
-
+        /*User group services*/
+        var getGroupListURL = "flask-manage-user-group-portlet.flaskgroup/get-all-groups";
+        var getGroupUsersURL = "flask-manage-user-group-portlet.flaskgroupusers/get-all-group-users";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -56,12 +58,40 @@
             deleteTailgate: deleteTailgate,
             getMySupplyLists: getMySupplyLists,
             getSupplyList: getSupplyList,
-            getItemsbylistid: getItemsbylistid
+            getItemsbylistid: getItemsbylistid,
+            getGroupList:getGroupList,
+            getGroupUsers: getGroupUsers
         }
 
         function getallFilteredEvents(tailgateParams) {
             return $http.get(baseURL + getFilteredEventsURL, {
                 params: tailgateParams
+            }
+            )
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+        //get all groups
+        function getGroupList() {
+            return $http.get(baseURL + getGroupListURL
+            )
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+        //get all group users by group id
+        function getGroupUsers(tailgateParams) {
+            return $http.get(baseURL + getGroupListURL, {
+                params: {
+                    'groupId': groupId
+                }
             }
             )
             .then(function success(response) {
