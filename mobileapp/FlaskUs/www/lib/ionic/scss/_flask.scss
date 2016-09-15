@@ -1801,8 +1801,12 @@ a.button.button-block.button-positive.pay_now_button {
     color: darkorange;
 }
 
-.item-select.plan_now select{
+select.plan_now{
     background-color:transparent !important;
+}
+
+label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox{
+    color:black !important;
 }
 
 /*Disable button for edit in My tailgate section by Nav*/
