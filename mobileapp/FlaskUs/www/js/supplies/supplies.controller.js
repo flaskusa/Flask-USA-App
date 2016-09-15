@@ -3,10 +3,10 @@
     angular.module('flaskApp')
     .controller('SuppliesCtrl', SuppliesCtrl);
 
-    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout'];
+    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate'];
 
     /* @ngInject */
-    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout ) {
+    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate ) {
 
         $scope.userDataList=[];
         $scope.supplies=[];
@@ -14,6 +14,15 @@
             $scope.addAsAdmin=SupplyService.addAsAdmin;
         }else{
             $scope.addAsAdmin=false;
+        }
+        $scope.onSwipeLeft=function(data,index){
+            /*data.swiped=true;
+            $ionicListDelegate.showDelete();*/
+
+        }
+        $scope.onSwipeRight=function(data){
+            /*data.swiped=false;
+          $ionicListDelegate.closeOptionButtons();*/
         }
         $scope.editList=false;
         $scope.addNewSupplies=false;
@@ -70,6 +79,7 @@
             data.edit=true;
             $scope.deleteSuplies=true;
             $scope.editSuply=true;
+            $ionicListDelegate.closeOptionButtons();
             setTimeout(setFocus, 50);
      function setFocus(){
          if(data.isSystem==false){
@@ -111,6 +121,9 @@
                     document.getElementById("systemEditBox").focus();
                 }
             }
+        }
+        $scope.setFocusSupply=function(){
+            setTimeout(setFocus,50);
         }
         $scope.saveSupplyItem=function(data){
             if(data.itemName!="" && !data.supplyItemId) {
@@ -245,10 +258,52 @@
             $scope.deleteSuplies=true;
             SupplyService.deleteSupplyListById(supplyId).then(function(response){
                 if(response){
+                    $ionicListDelegate.closeOptionButtons();
                     $scope.supplies.splice(index,1);
+
                 }
             })
 
         }
     }
+   /* angular.module('flaskApp')
+
+        .directive('clickForOptions', ['$ionicGesture', function($ionicGesture) {
+            return {
+                restrict: 'A',
+                link: function (scope, element, attrs) {
+                    $ionicGesture.on('dragleft', function(e){
+
+                        // Grab the content
+                        var content = element[0].querySelector('.item-content');
+
+                        // Grab the buttons and their width
+                        var buttons = element[0].querySelector('.item-options');
+
+                        if (!buttons) {
+                            console.log('There are no option buttons');
+                            return;
+                        }
+                        var buttonsWidth = buttons.offsetWidth;
+
+                        ionic.requestAnimationFrame(function() {
+                            content.style[ionic.CSS.TRANSITION] = 'all ease-out .25s';
+
+                            if (!buttons.classList.contains('invisible')) {
+                                console.log('close');
+                                content.style[ionic.CSS.TRANSFORM] = '';
+                                setTimeout(function() {
+                                    buttons.classList.add('invisible');
+                                }, 2500);
+                            } else {
+                                buttons.classList.remove('invisible');
+                                content.style[ionic.CSS.TRANSFORM] = 'translate3d(-' + buttonsWidth + 'px, 0, 0)';
+                            }
+                        });
+
+                    }, element);
+                }
+            };
+        }]);*/
+
 })();

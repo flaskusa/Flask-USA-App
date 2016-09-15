@@ -21,7 +21,7 @@
         $scope.currListName = $stateParams.listName;
 
         $scope.saveItem = function(list) {
-            if(list!=undefined||list!=undefined) {
+            if(list!=undefined&&list!="") {
                 SupplyService.addSupplyItem(list, $scope.listId).then(function(response){
                     if(response.supplyListId>0){
 
@@ -34,7 +34,7 @@
                 });
 
             }else{
-                setTimeout(setFocus, 50);
+                setTimeout(setFocusOnAdd, 50);
             }
         };
         function setFocusOnAdd(){
