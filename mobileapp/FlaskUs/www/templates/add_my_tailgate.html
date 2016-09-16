@@ -86,17 +86,70 @@
         </ion-tab>
         <ion-tab title="Attendees" ng-if="enableTab.condition" >
             <ion-content overflow-scroll="false"  class="has-header">
-                <div class="add_my_tailgate" >
-                    <a class="item item-full item-icon-left attendees" ng-click="modal.show()">
-                        <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
-                        <p class="addText">INVITE FRIEND</p>
-                    </a>
-                    <div class="list">
-                        <a ng-repeat="data in myTailgaters" class="item item-avatar item-icon-right">
-                            <img src="img/default-profilepic.png">
-                            <h2>{{ data.userName | uppercase}}</h2>
-                            <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
-                        </a>
+
+                <div class="container" style="margin-top: 44px;">
+                    <div class="expandcollapse-item">
+                        <div ng-click="active = !active" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
+                            <p>Invite Group</p>
+                        </div>
+                        <div class="slideDown" ng-hide="active">
+                            <div class="expand-collapse-content">
+                                <div>
+                                    <div class="list">
+                                        <ion-list>
+                                            <ion-item ng-repeat="data in allGroups" class="row-no-padding" padding="false">
+                                                <a class="row-no-padding" style="text-decoration: none">
+                                                    <!--href="#/app/my_friendDetail/{{data.userId}}"-->
+                                                    <div class="col col-20">
+                                                        <img src="img/default-group-pic.png" class="friendIcon">
+                                                    </div>
+                                                    <div class="col col-70" style="padding-top: 16px">
+                                                        <h3 class="nameText">{{ data.groupName | uppercase}}</h3>
+                                                        <p>Created By : {{data.createdBy | uppercase}}</p>
+                                                    </div>
+                                                    <span class="badge span_icon ext-top">
+                                                    <a nav-clear class="button button-block button-positive sign_in_button" ng-click="getusersofGroup(data.groupId);">
+                                                        Add Group
+                                                    </a></span>
+                                                </a>
+                                            </ion-item>
+                                        </ion-list>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="expandcollapse-item">
+                        <div ng-click="active1 = !active1" ng-class="{'expandcollapse-heading-collapsed': active1, 'expandcollapse-heading-expanded': !active1}">
+                            <p>Invite Friends</p>
+                        </div>
+                        <div class="slideDown" ng-hide="active1">
+                            <div class="expand-collapse-content">
+                                <div>
+                                    <a class="item item-icon-left attendees" ng-click="modal.show()">
+                                        <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+                                        <p class="addText">INVITE FRIEND</p>
+                                    </a>
+                                    <div class="list">
+                                        <ion-list>
+                                            <ion-item ng-repeat="data in myTailgaters" class="row-no-padding" padding="false" >
+                                                <a class="row-no-padding" style="text-decoration: none">
+                                                    <!--href="#/app/my_friendDetail/{{data.userId}}"-->
+                                                    <div class="col col-20">
+                                                        <img src="img/default-profilepic-copy.png" class="friendIcon">
+                                                    </div>
+                                                    <div class="col col-70" style="padding-top: 16px">
+                                                        <h3 class="nameText">{{ data.userName | uppercase}}</h3>
+                                                    </div>
+                                                    <span class="badge span_icon ext-top"><img src="img/flask_icons/arrow_left.svg"></span>
+                                                </a>
+                                                <a class="item" ng-if="myTailgaters.length == 0"> You do not have any friends yet. Please search and add friends </a>
+                                            </ion-item>
+                                        </ion-list>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </ion-content>
@@ -159,7 +212,7 @@
                     </div>
                 </div>
             </div>
-            <ion-content class="has-subheader">
+            <ion-content class="has-subheader" overflow-scroll="false">
                 <ion-list>
                     <ion-list>
                         <ion-item ng-repeat="data in myFriends " class="item-avatar " item="data">
