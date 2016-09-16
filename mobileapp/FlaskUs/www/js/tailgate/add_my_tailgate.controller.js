@@ -9,10 +9,15 @@
     function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker) {
         //for adding tailgate
         var self = this;
+        var newtailGateId;
+        getAllFriends();
+        getAllGroups();
+        $scope.allGroups = [];
         $scope.CurrEvent = [];
         $scope.Details = [];
         $scope.eventDetails = [];
         $scope.eventNames = [];
+        $scope.groupUserDetails = [];
         var currentDate = new Date();/*Today's Date*/
         $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd h:mm');
         currentDate.setDate(currentDate.getDate() - 1); /*adding days to today's date*/
@@ -57,6 +62,7 @@
             $scope.addTailgateParams.eventId = EventId;
             getEventDetails(EventId);
         }
+        //get event and venue details in select box
         function getEventDetails(eventId) {
             TailgateService.getEvent(eventId).then(function (respData) {
                 $scope.CurrEvent = respData.data;
@@ -102,9 +108,11 @@
         }
 
         $scope.isavail = false;
+        // to hide and show tabs
         $scope.enableTab = {
             condition:false
         };
+        //add new tailgate
         $scope.addmyTailgate = function (tailgatedata) {
             var startTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime1); // Your timezone!
             var endTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime2);
@@ -117,11 +125,11 @@
                 $scope.enableTab = {
                     condition: true
                 };
-                var newtailGateId = $cookies.get('newtailGateId');
+                newtailGateId = $cookies.get('newtailGateId');
                 getTailgaters(newtailGateId);
             });
         }
-
+        // get selected venue details
         $scope.getvenuefromSelect = function (tailgatedata) {
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
             });
@@ -193,7 +201,9 @@
         };
 
         //for adding attendees in new tailgate
-                $scope.myTailgaters = [];
+        $scope.myTailgaters = [];
+                $scope.active = true;
+        $scope.active1 = true;
         $scope.myFriends = [];
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
@@ -201,20 +211,21 @@
             $scope.modal = modal;
         });
         
-        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
-        
+        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";        
 
         function getTailgaters(newtailgateId) {
             TailgateService.getMyTailgateUsers(newtailgateId).then(function (respData) {
                 $scope.myTailgaters = respData.data;
-                getAllFriends();
+                
             });
         }
+
         function getAllFriends() {
             TailgateService.getUserFrends().then(function (respData) {
                 $scope.myFriends = respData;
             })
         }
+
         $scope.addTailgateMembers = function(currUserData,index) {
             var addUserparams = {};
             addUserparams.groupId = 0;
@@ -228,6 +239,36 @@
             TailgateService.addcurrentUser(addUserparams).then(function (respData) {
                 $scope.myFriends.splice(index, 1);
             })           
+        }
+
+        function getAllGroups() {
+            TailgateService.getGroupList().then(function (respData) {
+                $scope.allGroups = respData;
+            });
+        }
+        $scope.getUseData = [];
+        $scope.getusersofGroup=function(groupId) {
+            TailgateService.getGroupUsers(groupId).then(function (respData) { //get data of group from group id
+                console.log(respData);
+               
+                for(var i=0;i<respData.length;i++){
+                    $scope.getUseData.push(respData[i]); //to get users of particular group
+                    var adduser = {};
+                    adduser.groupId = $scope.getUseData[i].groupId;
+                    adduser.userId = $scope.getUseData[i].userId;
+                    adduser.userName = $scope.getUseData[i].userName;
+                    adduser.emailAddress = $scope.getUseData[i].emailAddress;
+                    adduser.isAdmin = $scope.getUseData[i].isAdmin;
+                    adduser.tailgateId = newtailGateId;
+                    adduser.isPaid = 0;
+                    adduser.paymentMode = "None";
+                    TailgateService.addcurrentUser(adduser).then(function (respData) {
+                        console.log(respData);
+                    });
+                }
+                console.log( $scope.getUseData)
+                $scope.groupUserDetails = respData;
+            });
         }
     }
 })();
