@@ -35,6 +35,9 @@
         /*User group services*/
         var getGroupListURL = "flask-manage-user-group-portlet.flaskgroup/get-all-groups";
         var getGroupUsersURL = "flask-manage-user-group-portlet.flaskgroupusers/get-all-group-users";
+        /*Get My Tailgate Service*/
+        //var getAllTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
+        var addTailgateSupplyItemsURL = "flask-user-tailgate-portlet.tailgatesupplyitem/add-tailgate-supply-items";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -60,9 +63,23 @@
             getSupplyList: getSupplyList,
             getItemsbylistid: getItemsbylistid,
             getGroupList:getGroupList,
-            getGroupUsers: getGroupUsers
+            getGroupUsers: getGroupUsers,
+            addTailgateSupplyItems: addTailgateSupplyItems
         }
 
+        function getallFilteredEvents(tailgateParams) {
+            return $http.get(baseURL + getFilteredEventsURL, {
+                params: tailgateParams
+            }
+            )
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+        //get all groups
         function getallFilteredEvents(tailgateParams) {
             return $http.get(baseURL + getFilteredEventsURL, {
                 params: tailgateParams
@@ -87,8 +104,8 @@
             });
         }
         //get all group users by group id
-        function getGroupUsers(tailgateParams) {
-            return $http.get(baseURL + getGroupListURL, {
+        function getGroupUsers(groupId) {
+            return $http.get(baseURL + getGroupUsersURL, {
                 params: {
                     'groupId': groupId
                 }
@@ -127,7 +144,7 @@
         }
         function deleteTailgate(tailgateId) {
             return $http.get(baseURL + deleteTailgateInfoURL, {
-                params: {'tailgateId' : tailgateId}
+                params: { 'tailgateId': tailgateId }
             }
             )
             .then(function success(response) {
@@ -308,7 +325,7 @@
             return $http.get(baseURL + addMessageBoardURL, {
                 params: {
                     'messageText': msgtxt,
-                    'tailgateId':tailgateId
+                    'tailgateId': tailgateId
                 }
             })
             .then(function success(response) {
@@ -360,6 +377,22 @@
             return $http.get(baseURL + getItemsbylistidURL, {
                 params: {
                     'supplyListId': supplyListId
+                }
+            })
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+
+        function addTailgateSupplyItems(supplyListItemNames, tailgateId, itemAssignedUserId) {
+            return $http.get(baseURL + addTailgateSupplyItemsURL, {
+                params: {
+                    'supplyListItemNames': supplyListItemNames,
+                    'tailgateId': tailgateId,
+                    'itemAssignedUserId': itemAssignedUserId
                 }
             })
             .then(function success(response) {
