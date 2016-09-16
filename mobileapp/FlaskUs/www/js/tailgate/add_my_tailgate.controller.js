@@ -49,7 +49,7 @@
         $scope.pageFlow.disableOtherTabs = false;
 
         getallEventnames();
-
+        // invoke on type search box
         $scope.LoadSessionData = function () {
             var EventId = 0;
             var shownVal = document.getElementById("envtName").value;
@@ -90,6 +90,7 @@
                                     var lat = e.latLng.lat(), lon = e.latLng.lng();
                                     var marker = {
                                         id: Date.now(),
+                                        icon: 'img/marker.png',
                                         coords: {
                                             latitude: lat,
                                             longitude: lon
