@@ -73,10 +73,10 @@
             <ion-content overflow-scroll="false" class="has-header">
                 <div  style="margin-top: 44px;">
                     <div style="width:100%;height:100%;" class="add_my_tailgate">
-                        <ui-gmap-google-map center='map.center' zoom='map.zoom' aria-label="Google map">
-                            <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" idkey="marker.id">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" aria-label="Google map">
+                            <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" icon="marker.icon" idkey="marker.id">
                                 <ui-gmap-window>
-                                    <!--<div>{{marker.window.title}}</div>-->
+                                    <div>{{marker.window.title}}</div>
                                 </ui-gmap-window>
                             </ui-gmap-marker>
                         </ui-gmap-google-map>
@@ -90,16 +90,15 @@
                 <div class="container" style="margin-top: 44px;">
                     <div class="expandcollapse-item">
                         <div ng-click="active = !active" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
-                            <p>Invite Group</p>
+                            <p>ADD GROUP</p>
                         </div>
                         <div class="slideDown" ng-hide="active">
                             <div class="expand-collapse-content">
                                 <div>
-                                    <div class="list">
+                                    <div class="list" style="height:346px;">
                                         <ion-list>
                                             <ion-item ng-repeat="data in allGroups" class="row-no-padding" padding="false">
                                                 <a class="row-no-padding" style="text-decoration: none">
-                                                    <!--href="#/app/my_friendDetail/{{data.userId}}"-->
                                                     <div class="col col-20">
                                                         <img src="img/default-group-pic.png" class="friendIcon">
                                                     </div>
@@ -108,9 +107,8 @@
                                                         <p>Created By : {{data.createdBy | uppercase}}</p>
                                                     </div>
                                                     <span class="badge span_icon ext-top">
-                                                    <a nav-clear class="button button-block button-positive sign_in_button" ng-click="getusersofGroup(data.groupId);">
-                                                        Add Group
-                                                    </a></span>
+                                                        <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons" ng-click="getusersofGroup(data.groupId)"></div>
+                                                    </span>
                                                 </a>
                                             </ion-item>
                                         </ion-list>
@@ -121,7 +119,7 @@
                     </div>
                     <div class="expandcollapse-item">
                         <div ng-click="active1 = !active1" ng-class="{'expandcollapse-heading-collapsed': active1, 'expandcollapse-heading-expanded': !active1}">
-                            <p>Invite Friends</p>
+                            <p>ADD FRIENDS</p>
                         </div>
                         <div class="slideDown" ng-hide="active1">
                             <div class="expand-collapse-content">
