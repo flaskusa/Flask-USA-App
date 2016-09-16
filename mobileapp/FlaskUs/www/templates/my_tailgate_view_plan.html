@@ -45,42 +45,27 @@
             </div>
 
             <div class="list">
-                <ion-checkbox class="item item-icon-left item-checkbox-right list-item" ng-repeat="data in supplyItemList">
+                <ion-checkbox class="item item-icon-left item-checkbox-right list-item" ng-model="selected_checkbox" ng-repeat="data in supplyItemList" ng-change="addItemsInArray(selected_checkbox);">
                     {{data.supplyItemName}}
                 </ion-checkbox>
             </div>
+                <div class="item item-divider plan_now">
+                    SELECT USER NAME
+                </div>
+            </div>
+
+        <label class="item item-input item-select">
+            <div class="input-label">
+                &nbsp;
+            </div>
+            <select class="plan_now" ng-model="user_selected" ng-options="data.fullName for data in myFriends" ng-change="getUserId(user_selected)"></select>
+        </label>
             <div class="row">
-                <a href="#" type="submit" nav-clear class="button button-block button-positive pay_now_button">
-                    Add To My Tailgate
+                <a href="#" type="submit" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems(supplyItemName, tailgateId, userId);">
+                    Assign Supply List
                 </a>
             </div>
         </div>
     </ion-content>
-    
-    <!--<script id="templates/modal.html" type="text/ng-template">
-        <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive black-header">
-                <h1 class="title">Add To Tailgate</h1>
-                <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
-            </ion-header-bar>
-            <div class="bar bar-subheader">
-                <p>Select Tailgate From List</p>
-            </div>
-            <ion-content class=" has-subheader">
-                <ion-list>
-                    <label class="item item-input item-select">
-                        <div class="input-label">
-                            &nbsp;
-                        </div>
-                        <select class="plan_now" ng-model="selected1" ng-options="data.supplyListName for data in tailgateSupplyList" ng-change="getSupplyItem(selected1)"></select>
-                    </label>
-                </ion-list>
-                <a href="#" type="submit" nav-clear class="button button-block button-positive pay_now_button" ng-click="cancel();">
-                    Cancel
-                </a>
-            </ion-content>
-        </ion-modal-view>
-    </script>-->
-
 </ion-view>
 
