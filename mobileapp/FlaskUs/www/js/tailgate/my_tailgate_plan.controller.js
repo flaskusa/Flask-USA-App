@@ -15,6 +15,7 @@
         var supplyListstId;
         var supplyItemName;
         $scope.passItems = [];
+        $scope.items = [];
 
         var tailGateId = $cookies.get('currtailGateId');
         getMyTailgate();
@@ -22,9 +23,15 @@
         getAllMyTailgates();
         getAllFriends();
 
+        var itemArray;
+
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
+
+        $scope.user = {
+            supplyItemName: ['user']
+        };
 
         function getMyTailgate() {
             TailgateService.getTailgate(tailGateId).then(function (respData) {
@@ -32,8 +39,8 @@
             });
         }
 
+        //list of supplies
         function getMySupplyList(selected1) {
-            console.log(selected1);
             TailgateService.getMySupplyLists().then(function (respData) {
                 $scope.allSupplyList = respData.data;
                 for (var i = 0; i < $scope.allSupplyList.length; i++) {
@@ -42,8 +49,8 @@
             });
         }
 
+        //getting supply items
         $scope.getSupplyItem = function (selected) {
-            console.log(selected);
             supplyListstId = selected.supplyListsId;
             TailgateService.getItemsbylistid(supplyListstId).then(function (respData) {
                 $scope.supplyItemList = respData.data;
@@ -51,16 +58,8 @@
 
         }
 
-        $scope.addItemsInArray = function (selected_checkbox) {
-            console.log(selected_checkbox);
-           
-            supplyItemName=selected_checkbox.supplyItemName;
-            TailgateService.getItemsbylistid(supplyItemName).then(function (respData) {
-                $scope.supplyItemName = respData.data;
-                if (selected_checkbox == true) {
-                    $scope.passItems.push({ supplyItemName: supplyItemName })
-                }
-            });
+        $scope.addItemsInArray = function (selected_checkbox,id,data) {
+            $scope.passItems.push(data.supplyItemName);
         }
 
         function getAllFriends() {
@@ -71,7 +70,6 @@
 
         $scope.getUserId = function (user_selected) {
             $scope.userId = user_selected.userId;
-            console.log($scope.userId);
         }
 
         function getAllMyTailgates(userId) {
@@ -80,12 +78,12 @@
             });
         }
 
-        $scope.addSupplyItems = function (supplyItemName, tailgateId, userId) {
-            var checkedValue = document.querySelector('.supplyCheckbox:checked').value;
-            console.log(checkedValue);
-            TailgateService.addTailgateSupplyItems(supplyItemName, tailgateId, userId).then(function (respData) {
-                $scope.alltailgateSupplyItem = respData.data;
-            });
+        //Adding supply items to tailgate
+        $scope.addSupplyItems = function () {
+            itemArray = $scope.passItems.toString();
+            TailgateService.addTailgateSupplyItems(itemArray, tailGateId, $scope.userId).then(function (respData) {
+               $scope.alltailgateSupplyItem = respData.data;
+            });  
         }
 
     }
