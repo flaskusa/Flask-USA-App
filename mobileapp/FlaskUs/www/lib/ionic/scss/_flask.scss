@@ -1415,6 +1415,10 @@ position:initial !important;
     font-weight: 400 !important;
     }
 
+    select.plan_now{
+        margin-top:0px !important;
+    }
+
     .back_button_css:before{
         font-size:26px !important;
         margin-left: -2px;
@@ -1547,11 +1551,6 @@ position:initial !important;
 }
 .item .badge.ext-top{
   top:21px;
-}
-
-.col.col-70.event_content1{
-    padding-left: 17%;
-    width: 77%;
 }
 
 a.item.item-full.item-icon-left.attendees{padding-top:58px;}
@@ -1911,9 +1910,16 @@ label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox{
   z-index: 100000000;
   padding: 15px 20px;
   position: relative;
-  color: white; 
-  background-color: black;
+  color: black; 
   border: 1px solid black;
+}
+
+span.show_collapsed_icon{
+    background-image:url('img/flask_icons/down.png');
+}
+
+span.show_expanded_icon{
+    background-image:url('img/flask_icons/up-arrow.png');
 }
 
 .expandcollapse-heading-expanded p{
@@ -1929,6 +1935,21 @@ label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox{
   right: 15px;
   font-size: 20px;
   line-height: 0px;
+}
+
+span.badge.span_icon_down{
+    right: 22px !important;
+    margin-top: -15px;
+    font-size: 10px;
+    width: 10px;
+}
+
+.span_icon_down img{
+    width: 43px;
+    height: 23px;
+    padding-left: -3px;
+    padding-right: 14px;
+    margin-right: -9px;
 }
 
 .expand-collapse-content {
