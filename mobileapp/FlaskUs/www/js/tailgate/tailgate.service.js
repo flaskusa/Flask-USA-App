@@ -35,6 +35,7 @@
         /*User group services*/
         var getGroupListURL = "flask-manage-user-group-portlet.flaskgroup/get-all-groups";
         var getGroupUsersURL = "flask-manage-user-group-portlet.flaskgroupusers/get-all-group-users";
+        var getGroupByUserIdURL = "flask-manage-user-group-portlet.flaskgroup/get-my-groups";
         /*Get My Tailgate Service*/
         //var getAllTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
         var addTailgateSupplyItemsURL = "flask-user-tailgate-portlet.tailgatesupplyitem/add-tailgate-supply-items";
@@ -64,7 +65,8 @@
             getItemsbylistid: getItemsbylistid,
             getGroupList:getGroupList,
             getGroupUsers: getGroupUsers,
-            addTailgateSupplyItems: addTailgateSupplyItems
+            addTailgateSupplyItems: addTailgateSupplyItems,
+            getGroupbyId: getGroupbyId
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -112,6 +114,19 @@
             }
             )
             .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+        //GET Group by userId
+        function getGroupbyId(userid) {
+            return $http.get(baseURL + getGroupByUserIdURL, {
+                params: {
+                    'userId': userid
+                }
+            }).then(function success(response) {
                 return response.data;
             }, function failure(response) {
                 return $q.$inject(response);

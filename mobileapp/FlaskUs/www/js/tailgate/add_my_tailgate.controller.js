@@ -18,6 +18,7 @@
         $scope.eventDetails = [];
         $scope.eventNames = [];
         $scope.groupUserDetails = [];
+
         var currentDate = new Date();/*Today's Date*/
         $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd h:mm');
         currentDate.setDate(currentDate.getDate() - 1); /*adding days to today's date*/
@@ -37,20 +38,16 @@
             venmoAccountId: '',
             amountToPay: ''
         }
+        //create a map on load
         $scope.map = {
             draggable: true,
             center: { latitude: 43.4651, longitude: -80.5223 },
             zoom: 4
         };
-        $scope.pageFlow = {
-            disableOtherTabs: true
-        }
-
-        $scope.pageFlow.disableOtherTabs = false;
-
         getallEventnames();
+       
         // invoke on type search box
-        $scope.LoadSessionData = function () {
+        $scope.loadeventData = function () {
             var EventId = 0;
             var shownVal = document.getElementById("envtName").value;
             var EventCol = document.querySelector("#EventNameList option[value='" + shownVal + "']");
@@ -70,6 +67,7 @@
                 var currStartTime = $filter('date')($scope.CurrEvent.startTime, 'hh:mm a');
                 var currEndTime = $filter('date')($scope.CurrEvent.endTime, 'hh:mm a'); 
                 var currDate = $filter('date')($scope.CurrEvent.eventDate, 'MM-dd-yyyy');
+
                 $scope.addTailgateParams.startTime = currStartTime;
                 $scope.selectedtime1 = currStartTime;
                 $scope.selectedtime2 = currEndTime;
@@ -90,7 +88,7 @@
                                     var lat = e.latLng.lat(), lon = e.latLng.lng();
                                     var marker = {
                                         id: Date.now(),
-                                        icon: 'img/marker.png',
+                                        
                                         coords: {
                                             latitude: lat,
                                             longitude: lon
@@ -100,15 +98,33 @@
                                     console.log($scope.map.markers);
                                     $scope.$apply();
                                 }
+                            },
+                            markersEvents: {
+                                click: function (marker, eventName, model) {
+                                    $scope.map.window.model = model;
+                                    $scope.map.window.show = true;
+                                },
+                                options: {
+                                    icon: 'img/marker.png'
+                                }
+                            },
+                            window: {
+                                marker: {},
+                                show: false,
+                                closeClick: function () {
+                                    this.show = false;
+                                }
                             }
                         }
                     });
-                });
-                $scope.isavail = true;
+                });               
             });
+
+            $scope.register = function () {
+                console.log('Clicked');
+            }
         }
 
-        $scope.isavail = false;
         // to hide and show tabs
         $scope.enableTab = {
             condition:false
@@ -117,16 +133,16 @@
         $scope.addmyTailgate = function (tailgatedata) {
             var startTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime1); // Your timezone!
             var endTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime2);
-            tailgatedata.tailgateDate = new Date($scope.tailgateDate).getTime() / 1000;
+            tailgatedata.tailgateDate = new Date($scope.tailgateDate).getTime();
             tailgatedata.endTime = endTime;
             tailgatedata.startTime = startTime;
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
                 console.log(respData.data);
-                $cookies.put('newtailGateId', respData.data.tailgateId);
+                $cookies.put('newtailgateId', respData.data.tailgateId);
                 $scope.enableTab = {
                     condition: true
                 };
-                newtailGateId = $cookies.get('newtailGateId');
+                newtailGateId = $cookies.get('newtailgateId');
                 getTailgaters(newtailGateId);
             });
         }
@@ -203,7 +219,7 @@
 
         //for adding attendees in new tailgate
         $scope.myTailgaters = [];
-                $scope.active = true;
+        $scope.active = true; // define the tab in add group and add friend section
         $scope.active1 = true;
         $scope.myFriends = [];
         $ionicModal.fromTemplateUrl('templates/modal.html', {
@@ -216,17 +232,15 @@
 
         function getTailgaters(newtailgateId) {
             TailgateService.getMyTailgateUsers(newtailgateId).then(function (respData) {
-                $scope.myTailgaters = respData.data;
-                
+                $scope.myTailgaters = respData.data;                
             });
         }
-
         function getAllFriends() {
             TailgateService.getUserFrends().then(function (respData) {
                 $scope.myFriends = respData;
             })
         }
-
+        //add single member to the tailgate
         $scope.addTailgateMembers = function(currUserData,index) {
             var addUserparams = {};
             addUserparams.groupId = 0;
@@ -237,21 +251,29 @@
             addUserparams.tailgateId = newtailGateId;
             addUserparams.isPaid = 0;
             addUserparams.paymentMode = "None";
-            TailgateService.addcurrentUser(addUserparams).then(function (respData) {
-                $scope.myFriends.splice(index, 1);
-            })           
+            $scope.myFriends.splice(index, 1);
+            addUsertoTailgate(addUserparams);
+            $scope.myTailgaters;
         }
-
-        function getAllGroups() {
-            TailgateService.getGroupList().then(function (respData) {
+        //get all groups either created by user or is a member of particular group.
+        function getAllGroups() {            
+            var userResponse = $cookies.getObject('CurrentUser');
+            var UserId = userResponse.data.userId;
+            console.log(UserId);
+            TailgateService.getGroupbyId(UserId).then(function (respData) {
                 $scope.allGroups = respData;
             });
         }
-        $scope.getUseData = [];
-        $scope.getusersofGroup=function(groupId) {
-            TailgateService.getGroupUsers(groupId).then(function (respData) { //get data of group from group id
+        //add user info to current tailgate
+        function addUsertoTailgate(userparams) {
+            TailgateService.addcurrentUser(userparams).then(function (respData) {
                 console.log(respData);
-               
+            });
+        }
+        $scope.getUseData = [];
+        //get all the members of the group
+        $scope.getusersofGroup=function(groupId) {
+            TailgateService.getGroupUsers(groupId).then(function (respData) { //get data of group from group id     
                 for(var i=0;i<respData.length;i++){
                     $scope.getUseData.push(respData[i]); //to get users of particular group
                     var adduser = {};
@@ -263,9 +285,7 @@
                     adduser.tailgateId = newtailGateId;
                     adduser.isPaid = 0;
                     adduser.paymentMode = "None";
-                    TailgateService.addcurrentUser(adduser).then(function (respData) {
-                        console.log(respData);
-                    });
+                    addUsertoTailgate(adduser);
                 }
                 console.log( $scope.getUseData)
                 $scope.groupUserDetails = respData;
