@@ -44,11 +44,11 @@
                 </div>
             </div>
 
-            <div class="list">
-                <ion-checkbox class="item item-icon-left item-checkbox-right list-item" ng-model="selected_checkbox" ng-repeat="data in supplyItemList" ng-change="addItemsInArray(selected_checkbox);">
+            <label class="list">
+                <ion-checkbox class="item item-icon-left item-checkbox-right list-item" data-id="data.supplyItemId" ng-model="selected_checkbox" ng-repeat="data in supplyItemList" ng-click="addItemsInArray(selected_checkbox,$index,data);">
                     {{data.supplyItemName}}
                 </ion-checkbox>
-            </div>
+            </label>
                 <div class="item item-divider plan_now">
                     SELECT USER NAME
                 </div>
@@ -61,7 +61,7 @@
             <select class="plan_now" ng-model="user_selected" ng-options="data.fullName for data in myFriends" ng-change="getUserId(user_selected)"></select>
         </label>
             <div class="row">
-                <a href="#" type="submit" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems(supplyItemName, tailgateId, userId);">
+                <a href="" type="submit" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems(supplyItemName, tailgateId, userId);">
                     Assign Supply List
                 </a>
             </div>
