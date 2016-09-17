@@ -91,27 +91,18 @@
                     <div class="expandcollapse-item">
                         <div ng-click="active = !active" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
                             <p>ADD GROUP</p>
+                            <span class="badge span_icon_down"><img src="img/flask_icons/circle_arrow_down.svg"></span>
                         </div>
                         <div class="slideDown" ng-hide="active">
                             <div class="expand-collapse-content">
                                 <div>
-                                    <div class="list" style="height:346px;">
-                                        <ion-list>
-                                            <ion-item ng-repeat="data in allGroups" class="row-no-padding" padding="false">
-                                                <a class="row-no-padding" style="text-decoration: none">
-                                                    <div class="col col-20">
-                                                        <img src="img/default-group-pic.png" class="friendIcon">
-                                                    </div>
-                                                    <div class="col col-70" style="padding-top: 16px">
-                                                        <h3 class="nameText">{{ data.groupName | uppercase}}</h3>
-                                                        <p>Created By : {{data.createdBy | uppercase}}</p>
-                                                    </div>
-                                                    <span class="badge span_icon ext-top">
-                                                        <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons" ng-click="getusersofGroup(data.groupId)"></div>
-                                                    </span>
-                                                </a>
-                                            </ion-item>
-                                        </ion-list>
+                                    <div class="list">
+                                        <a class="item item-thumbnail-left item-icon-right eventList" ng-repeat="data in allGroups">
+                                            <img class="list-thumbnail listImages" src = 'img/default-group-pic.png';">
+                                            <h2 class="eventNameCol">{{ data.groupName | uppercase}}</h2>
+                                            <p class="dateCol">Created By : {{data.createdBy | uppercase}}</p>
+                                            <span class="badge span_icon"><img src="img/flask_icons/add_new.svg" ng-click="getusersofGroup(data.groupId)"></span>
+                                        </a>
                                     </div>
                                 </div>
                             </div>
@@ -120,31 +111,18 @@
                     <div class="expandcollapse-item">
                         <div ng-click="active1 = !active1" ng-class="{'expandcollapse-heading-collapsed': active1, 'expandcollapse-heading-expanded': !active1}">
                             <p>ADD FRIENDS</p>
+                            <span class="badge span_icon_down" ng-class="{'show_collapsed_icon:active1', 'show_expanded_icon:!active1'}"><img src="img/flask_icons/circle_arrow_down.svg"></span>
                         </div>
                         <div class="slideDown" ng-hide="active1">
                             <div class="expand-collapse-content">
                                 <div>
-                                    <a class="item item-icon-left attendees" ng-click="modal.show()">
-                                        <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
-                                        <p class="addText">INVITE FRIEND</p>
+                                    <a class="item item-thumbnail-left item-icon-right eventList" ng-repeat="data in myFriends">
+                                        <img class="list-thumbnail listImages" src='img/default-profilepic-copy.png' ;">
+                                        <h2 class="eventNameCol">{{ data.fullName | uppercase}}</h2>
+                                        <p class="dateCol">{{ data.emailAddress}}</p>
+                                        <span class="badge span_icon"><img src="img/flask_icons/add_new.svg"></span>
                                     </a>
-                                    <div class="list">
-                                        <ion-list>
-                                            <ion-item ng-repeat="data in myTailgaters" class="row-no-padding" padding="false" >
-                                                <a class="row-no-padding" style="text-decoration: none">
-                                                    <!--href="#/app/my_friendDetail/{{data.userId}}"-->
-                                                    <div class="col col-20">
-                                                        <img src="img/default-profilepic-copy.png" class="friendIcon">
-                                                    </div>
-                                                    <div class="col col-70" style="padding-top: 16px">
-                                                        <h3 class="nameText">{{ data.userName | uppercase}}</h3>
-                                                    </div>
-                                                    <span class="badge span_icon ext-top"><img src="img/flask_icons/arrow_left.svg"></span>
-                                                </a>
-                                                <a class="item" ng-if="myTailgaters.length == 0"> You do not have any friends yet. Please search and add friends </a>
-                                            </ion-item>
-                                        </ion-list>
-                                    </div>
+                                    <a class="item" ng-if="myTailgaters.length == 0"> You do not have any friends yet. Please search and add friends </a>
                                 </div>
                             </div>
                         </div>
@@ -194,7 +172,7 @@
             </ion-content>
         </ion-tab>
 </ion-tabs>
-    <script id="templates/modal.html" type="text/ng-template">
+    <!--<script id="templates/modal.html" type="text/ng-template">
         <ion-modal-view>
             <ion-header-bar class="bar bar-header bar-positive black-header">
                 <h1 class="title">Invite Friend</h1>
@@ -225,4 +203,4 @@
                 </ion-list>
             </ion-content>
         </ion-modal-view>
-    </script>
+    </script>-->
