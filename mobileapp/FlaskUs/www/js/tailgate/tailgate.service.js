@@ -307,13 +307,7 @@
 
         function addTailgateMarkers(param) {
             return $http.get(baseURL + addTialgateMarkerURL, {
-                params: {
-                    'tailgateId': param.tailgateId,
-                    'latitude': param.lattitude,
-                    'longitude': param.longitude,
-                    'name': param.name,
-                    'description': param.description
-                }
+                params: param
             }
             )
             .then(function success(response) {

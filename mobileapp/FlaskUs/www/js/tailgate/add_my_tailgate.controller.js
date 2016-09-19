@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker'];
+    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker','$ionicPopup'];
 
     / @ngInject /
-    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker) {
+    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker,$ionicPopup) {
         //for adding tailgate
         var self = this;
         var newtailGateId;
@@ -26,7 +26,7 @@
         $scope.eventTypeIds = '';
         $scope.searchString = 'a';
         $scope.latitude = '42.34';
-        $scope.longitude = '83.0456';
+        $scope.longitude = '-83.0456';
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
 
@@ -38,11 +38,93 @@
             venmoAccountId: '',
             amountToPay: ''
         }
-        //create a map on load
-        $scope.map = {
-            draggable: true,
-            center: { latitude: 43.4651, longitude: -80.5223 },
-            zoom: 4
+        callMap($scope.latitude,$scope.longitude);
+        //calling map on load and on events change
+        function callMap( currlatitude,currlongitude){
+            angular.extend($scope, {
+                map: {
+                    center: {
+                        latitude: currlatitude,
+                        longitude: currlongitude
+                    },
+                    zoom: 19,
+                    markers: [],
+                    events: {
+                        click: function (map, eventName, originalEventArgs) {
+                            var e = originalEventArgs[0];
+                            var lat = e.latLng.lat(), lon = e.latLng.lng();
+                            var marker = {
+                                id: 1,
+                                coords: {
+                                    latitude: lat,
+                                    longitude: lon
+                                },
+                                showWindow: true
+                            };
+                            $scope.map.markers.push(marker);
+                            if($scope.map.markers.length>1){
+                                $scope.map.markers.shift();
+                            }
+                            //$scope.map.markers.pop();
+                            console.log($scope.map.markers);
+                            $scope.$apply();
+                        }
+                    }
+                }
+            });
+        }
+        $scope.windowOptions = {
+            show: true
+        };
+        function currMarker(loc){
+            var markerData = {};
+            console.log(loc,$scope.map.markers[0].coords);
+            markerData.tailgate =newtailGateId;
+            markerData.latitude=$scope.map.markers[0].coords.latitude;
+            markerData.longitude=$scope.map.markers[0].coords.longitude;
+            markerData.name=loc.name;
+            markerData.description=loc.description;
+            saveMaker(markerData);
+        }
+        function saveMaker(markerData){
+            TailgateService.addTailgateMarkers(markerData).then(function (respData) {
+            });
+        }
+        //call on marker click
+        $scope.onClick = function (data) {
+          $scope.loc = {};
+            var customTemplate =
+              '<form><div class="list">'
+              +'        <label class="item item-input item-floating-label">'
+              +'         <span class="input-label">Place Name</span>'
+             +'           <input type="text" placeholder="Place Name" ng-model="loc.name">'
+              +'        </label>'
+             +'         <label class="item item-input item-floating-label">'
+              +'      <span class="input-label">Description</span>'
+               +'        <input type="text" placeholder="Description" ng-model="loc.description">'
+               +'       </label>                 '
+                +'    </div>'
+                   +' </div>'
+                +'</form>';
+
+            $ionicPopup.show({
+              template: customTemplate,
+              title: 'Enter Location Details',
+              scope: $scope,
+              buttons: [ {
+                text: '<b>Save</b>',
+                type: 'button-positive',
+                onTap: function(e) {
+                  currMarker($scope.loc);
+                }
+              },{
+                text: '<b>Remove</b>',
+                //type: 'button-positive',
+                onTap: function(e) {
+                    $scope.map.markers.pop();
+                }
+              }]
+            });
         };
         getallEventnames();
        
@@ -74,49 +156,8 @@
                 $scope.addTailgateParams.endTime = currEndTime;
                 $scope.tailgateDate = currDate;
                 TailgateService.getvenueDetails(venueID).then(function (VENUEData) {
-                    angular.extend($scope, {
-                        map: {
-                            center: {
-                                latitude: VENUEData.latitude,
-                                longitude: VENUEData.longitude
-                            },
-                            zoom: 11,
-                            markers: [],
-                            events: {
-                                click: function (map, eventName, originalEventArgs) {
-                                    var e = originalEventArgs[0];
-                                    var lat = e.latLng.lat(), lon = e.latLng.lng();
-                                    var marker = {
-                                        id: Date.now(),
-                                        
-                                        coords: {
-                                            latitude: lat,
-                                            longitude: lon
-                                        }
-                                    };
-                                    $scope.map.markers.push(marker);
-                                    console.log($scope.map.markers);
-                                    $scope.$apply();
-                                }
-                            },
-                            markersEvents: {
-                                click: function (marker, eventName, model) {
-                                    $scope.map.window.model = model;
-                                    $scope.map.window.show = true;
-                                },
-                                options: {
-                                    icon: 'img/marker.png'
-                                }
-                            },
-                            window: {
-                                marker: {},
-                                show: false,
-                                closeClick: function () {
-                                    this.show = false;
-                                }
-                            }
-                        }
-                    });
+                    console.log(VENUEData);
+                    callMap(VENUEData.latitude,VENUEData.longitude);
                 });               
             });
 
