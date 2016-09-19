@@ -140,6 +140,10 @@ html, body{font-family: 'Avenir Next';}
       background-size:100%;
 }
 
+.edit_tailgate:before{
+    font-size:22px !important;
+}
+
 .list.add_my_tailgate{
     padding-top:40px !important;
 }
@@ -441,13 +445,13 @@ span.error_msg{color:red;}
     text-transform: uppercase;
     font-size: 11px !important;
     margin-top: -4px;
-    margin-left: -17px;
+    margin-left: 0%;
 }
 .timeVenuCol{
     text-transform: uppercase;
     font-size: 11px !important;
     margin-top: -6px;
-    margin-left: -17px;
+    margin-left: 2%;
 }
 .arrowIcon{
     right: -4px !important;
@@ -457,7 +461,7 @@ span.error_msg{color:red;}
     font-weight: bold !important;
     text-transform: uppercase;
     font-size: 14px !important;
-    margin-left: -13px !important;
+    margin-left: -3% !important;
     margin-right: -10px !important;
 }
 
@@ -643,12 +647,6 @@ div.menuDiv{padding-bottom:10px;}
     float: left;
   }
 
- .dateCol{
-    text-transform: uppercase; 
-    font-size: 13px;
-     margin-top: -4px;
-}
-
  .tailgateEventNameCol{
     font-weight: bold !important;
     text-transform: uppercase;
@@ -671,11 +669,6 @@ div.menuDiv{padding-bottom:10px;}
     padding-top: 16px;
  }
 
-.timeVenuCol{
-    text-transform: uppercase; 
-    font-size: 13px; 
-    margin-top: -6px;
-}
 .arrowIcon{
     right: 4px !important;
 }
@@ -1415,8 +1408,12 @@ position:initial !important;
     font-weight: 400 !important;
     }
 
-    select.plan_now{
-        margin-top:0px !important;
+    label.item.item-input.item-select.pan_now_list{
+        margin-top:-4% !important;
+    }
+
+    label.item.item-input.item-select.pan_now_user{
+        margin-top: 2% !important;
     }
 
     .back_button_css:before{
@@ -1795,11 +1792,10 @@ ion-item.item.supply_list{
     border-radius:12px !important;
 }
 
-a.button.button-block.button-positive.pay_now_button {
+button.button.button-block.button-positive.pay_now_button {
     width: 100%;
-    padding-top: 15px;
     text-align: center;
-    color: darkorange;
+    color: darkorange !important;
 }
 
 select.plan_now{
