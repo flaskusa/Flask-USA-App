@@ -18,7 +18,6 @@
         $scope.eventDetails = [];
         $scope.eventNames = [];
         $scope.groupUserDetails = [];
-
         var currentDate = new Date();/*Today's Date*/
         $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd h:mm');
         currentDate.setDate(currentDate.getDate() - 1); /*adding days to today's date*/
@@ -169,6 +168,29 @@
         // to hide and show tabs
         $scope.enableTab = {
             condition:false
+        };
+        checkTailgateId();
+        function checkTailgateId() {
+            var tailgateDetails = $cookies.getObject("editUserTailgate");
+            if (!tailgateDetails) {
+
+            } else {
+                editTailgateData(tailgateDetails);
+            }
+        }
+        function editTailgateData(tailgateDetails) {
+            console.log(tailgateDetails);
+            $scope.addTailgateParams = {
+                tailgateName: tailgateDetails.tailgateName,
+                tailgateDescription: tailgateDetails.tailgateDescription,
+                eventId: tailgateDetails.eventId,
+                eventName: tailgateDetails.eventName,
+                venmoAccountId: tailgateDetails.venmoAccountId,
+                amountToPay: tailgateDetails.amountToPay
+            }
+            $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'hh:mm a');
+            $scope.selectedtime1 = $filter('date')(tailgateDetails.startTime, 'hh:mm a');
+            $scope.selectedtime2 = $filter('date')(tailgateDetails.endTime, 'MM-dd-yyyy');
         };
         //add new tailgate
         $scope.addmyTailgate = function (tailgatedata) {

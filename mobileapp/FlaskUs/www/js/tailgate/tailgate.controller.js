@@ -24,20 +24,23 @@
         }
         $scope.editTailgate = function (tailgateId, index) {
             console.log(tailgateId,index);
+            var addTailgateParams = {}
             TailgateService.getTailgate(tailgateId).then(function (respData) {
-                console.log(respData.data);
-                $scope.addTailgateParams = {
-                    tailgateName: respData.data.tailgateName,
-                    tailgateDescription: respData.data.tailgateDescription,
-                    eventId: respData.data.eventId,
-                    eventName: respData.data.eventName,
-                    endTime: respData.data.endTime,
-                    startTime: respData.data.startTime,
-                    venmoAccountId: respData.data.venmoAccountId,
-                    amountToPay: respData.data.amountToPay
-                }
-                console.log($scope.addTailgateParams);
+                console.log(respData.data);                
+                addTailgateParams.tailgateName = respData.data.tailgateName;
+                addTailgateParams.tailgateDescription = respData.data.tailgateDescription;
+                addTailgateParams.eventId = respData.data.eventId;
+                addTailgateParams.eventName = respData.data.eventName;
+                addTailgateParams.endTime = respData.data.endTime;
+                addTailgateParams.startTime = respData.data.startTime;
+                addTailgateParams.venmoAccountId = respData.data.venmoAccountId;
+                addTailgateParams.amountToPay = respData.data.amountToPay;
+                addTailgateParams.tailgateDate = respData.data.tailgateDate;
+                console.log(addTailgateParams);
+                $state.go("app.add_my_tailgate", addTailgateParams);
+                $cookies.putObject("editUserTailgate", addTailgateParams);
             });
+
         }
 
         $scope.leaveTailgate = function (tailgateId, index) {

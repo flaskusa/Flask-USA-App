@@ -84,7 +84,7 @@
             </div>     
         </ion-content>
         </ion-tab>
-        <ion-tab title="Attendees" ng-show="enableTab.condition" >
+        <ion-tab title="Attendees" ng-if="enableTab.condition" >
             <ion-content overflow-scroll="false"  class="has-header">
                 <div class="container" style="margin-top: 44px;">
                     <div class="expandcollapse-item">
@@ -132,7 +132,7 @@
                 </div>
             </ion-content>
         </ion-tab>
-        <ion-tab title="Plan Now" ng-show="enableTab.condition">
+        <ion-tab title="Plan Now" ng-if="enableTab.condition">
             <!--FOURTH TAB-->
             <ion-content overflow-scroll="false" class="has-header" >
                 <div class="paynow" style="margin-top: 44px;">
