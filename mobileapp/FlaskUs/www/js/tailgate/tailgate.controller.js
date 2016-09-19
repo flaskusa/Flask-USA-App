@@ -9,6 +9,7 @@
     function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies) {
         var self = this; 
         $scope.myTailgate = [];
+        $cookies.remove("editUserTailgate");
         var userResponse = $cookies.getObject('CurrentUser');
         var UserId = userResponse.data.userId;
         getAlltailgates();
@@ -23,7 +24,6 @@
             });
         }
         $scope.editTailgate = function (tailgateId, index) {
-            $cookies.remove("editUserTailgate");
             console.log(tailgateId,index);
             var addTailgateParams = {}
             TailgateService.getTailgate(tailgateId).then(function (respData) {

@@ -99,7 +99,6 @@
         }
 
         function editTailgate(tailGateId) {
-            $cookies.remove("editUserTailgate");
             console.log(tailGateId);
             var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {

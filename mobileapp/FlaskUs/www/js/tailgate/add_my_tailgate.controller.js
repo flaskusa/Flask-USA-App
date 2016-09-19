@@ -10,7 +10,6 @@
         //for adding tailgate
         var self = this;
         var newtailGateId;
-        //$cookies.remove("editUserTailgate");
         getAllFriends();
         getAllGroups();
         $scope.allGroups = [];
