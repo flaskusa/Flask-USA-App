@@ -7,7 +7,7 @@
 
     /* @ngInject */
     function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies) {
-        var self = this;
+        var self = this; 
         $scope.myTailgate = [];
         var userResponse = $cookies.getObject('CurrentUser');
         var UserId = userResponse.data.userId;
@@ -23,6 +23,7 @@
             });
         }
         $scope.editTailgate = function (tailgateId, index) {
+            $cookies.remove("editUserTailgate");
             console.log(tailgateId,index);
             var addTailgateParams = {}
             TailgateService.getTailgate(tailgateId).then(function (respData) {
@@ -37,7 +38,7 @@
                 addTailgateParams.amountToPay = respData.data.amountToPay;
                 addTailgateParams.tailgateDate = respData.data.tailgateDate;
                 console.log(addTailgateParams);
-                $state.go("app.add_my_tailgate", addTailgateParams);
+                $state.go("app.add_my_tailgate");
                 $cookies.putObject("editUserTailgate", addTailgateParams);
             });
 

@@ -89,6 +89,37 @@
             });
         }
 
+        $scope.checkTailgateId = function () {
+            if (!tailGateId ) {
+                console.log("TAILGATE ID IS 0");
+            }
+            else {
+                editTailgate(tailGateId);
+            }
+        }
+
+        function editTailgate(tailGateId) {
+            $cookies.remove("editUserTailgate");
+            console.log(tailGateId);
+            var addTailgateParams = {}
+            TailgateService.getTailgate(tailGateId).then(function (respData) {
+                console.log(respData.data);
+                addTailgateParams.tailgateName = respData.data.tailgateName;
+                addTailgateParams.tailgateDescription = respData.data.tailgateDescription;
+                addTailgateParams.eventId = respData.data.eventId;
+                addTailgateParams.eventName = respData.data.eventName;
+                addTailgateParams.endTime = respData.data.endTime;
+                addTailgateParams.startTime = respData.data.startTime;
+                addTailgateParams.venmoAccountId = respData.data.venmoAccountId;
+                addTailgateParams.amountToPay = respData.data.amountToPay;
+                addTailgateParams.tailgateDate = respData.data.tailgateDate;
+                console.log(addTailgateParams);
+                $state.go("app.add_my_tailgate");
+                $cookies.putObject("editUserTailgate", addTailgateParams);
+            });
+
+        }
+
     }
 })();
 

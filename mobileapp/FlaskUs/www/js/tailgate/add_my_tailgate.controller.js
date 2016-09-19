@@ -10,6 +10,7 @@
         //for adding tailgate
         var self = this;
         var newtailGateId;
+        //$cookies.remove("editUserTailgate");
         getAllFriends();
         getAllGroups();
         $scope.allGroups = [];
@@ -188,9 +189,9 @@
                 venmoAccountId: tailgateDetails.venmoAccountId,
                 amountToPay: tailgateDetails.amountToPay
             }
-            $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'hh:mm a');
+            $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
             $scope.selectedtime1 = $filter('date')(tailgateDetails.startTime, 'hh:mm a');
-            $scope.selectedtime2 = $filter('date')(tailgateDetails.endTime, 'MM-dd-yyyy');
+            $scope.selectedtime2 = $filter('date')(tailgateDetails.endTime, 'hh:mm a');
         };
         //add new tailgate
         $scope.addmyTailgate = function (tailgatedata) {
