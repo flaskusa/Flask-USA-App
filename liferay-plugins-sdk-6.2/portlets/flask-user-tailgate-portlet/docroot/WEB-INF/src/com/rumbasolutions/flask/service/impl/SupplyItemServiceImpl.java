@@ -14,6 +14,7 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,6 +24,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.SupplyItem;
 import com.rumbasolutions.flask.service.SupplyItemLocalServiceUtil;
+import com.rumbasolutions.flask.service.SupplyListLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.SupplyItemServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.SupplyItemUtil;
 
@@ -54,7 +56,7 @@ public class SupplyItemServiceImpl extends SupplyItemServiceBaseImpl {
 	public SupplyItem addSupplyItem(String supplyItemName, long supplyListId, ServiceContext serviceContext){
 		SupplyItem supplyItem = null;
 		try {
-			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
+			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles) || SupplyListLocalServiceUtil.getSupplyList(supplyListId).getUserId()==serviceContext.getUserId()){
 				Date now = new Date();
 				supplyItem = SupplyItemLocalServiceUtil.createSupplyItem(CounterLocalServiceUtil.increment());
 				supplyItem.setSupplyItemName(supplyItemName);
@@ -73,10 +75,35 @@ public class SupplyItemServiceImpl extends SupplyItemServiceBaseImpl {
 	}
 	
 	@Override
+	public List<SupplyItem> addSupplyItems(String[] supplyItemNames, long supplyListId, ServiceContext serviceContext){
+		List<SupplyItem> supplyItems = new ArrayList<SupplyItem>();
+		try {
+			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles) || SupplyListLocalServiceUtil.getSupplyList(supplyListId).getUserId()==serviceContext.getUserId()){
+				Date now = new Date();
+				for(int i=0; i<supplyItemNames.length; i++){
+					SupplyItem supplyItem = SupplyItemLocalServiceUtil.createSupplyItem(CounterLocalServiceUtil.increment());
+					supplyItem.setSupplyItemName(supplyItemNames[i]);
+					supplyItem.setSupplyListId(supplyListId);
+					supplyItem.setCreatedDate(serviceContext.getCreateDate(now));
+					supplyItem.setModifiedDate(serviceContext.getModifiedDate(now));
+					supplyItem = SupplyItemLocalServiceUtil.addSupplyItem(supplyItem);
+					supplyItems.add(supplyItem);
+				}
+			}else{
+				throw new Exception("You do not have required permissions");
+			}
+		} catch (Exception e) {
+			LOGGER.error("Exception in Add Supply Items :" + e.getMessage());
+			e.printStackTrace();
+		}
+		return supplyItems;
+	}
+	
+	@Override
 	public SupplyItem updateSupplyItem(long supplyItemId, String supplyItemName, long supplyListId, ServiceContext serviceContext){
 		SupplyItem supplyItem = null;
 		try {
-			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
+			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles) || SupplyListLocalServiceUtil.getSupplyList(supplyListId).getUserId()==serviceContext.getUserId()){
 				Date now = new Date();
 				supplyItem = SupplyItemLocalServiceUtil.getSupplyItem(supplyItemId);
 				supplyItem.setSupplyItemName(supplyItemName);
@@ -133,8 +160,9 @@ public class SupplyItemServiceImpl extends SupplyItemServiceBaseImpl {
 	@Override
 	public void deleteSupplyItem(long supplyItemId, ServiceContext serviceContext){
 		try {
-			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
-				SupplyItem supplyItem = SupplyItemLocalServiceUtil.getSupplyItem(supplyItemId);
+			SupplyItem supplyItem = SupplyItemLocalServiceUtil.getSupplyItem(supplyItemId);
+			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles) || 
+					SupplyListLocalServiceUtil.getSupplyList(supplyItem.getSupplyListId()).getUserId()==serviceContext.getUserId()){
 				SupplyItemLocalServiceUtil.deleteSupplyItem(supplyItem);
 			}else{
 				throw new Exception("You do not have permission to update this Supply List");
@@ -148,7 +176,7 @@ public class SupplyItemServiceImpl extends SupplyItemServiceBaseImpl {
 	@Override
 	public void deleteItemsByListId(long supplyListId, ServiceContext serviceContext){
 		try {
-			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
+			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles) || SupplyListLocalServiceUtil.getSupplyList(supplyListId).getUserId()==serviceContext.getUserId()){
 				List<SupplyItem> supplyItems = SupplyItemUtil.findBysupplyListId(supplyListId);
 				for(SupplyItem supplyItem: supplyItems){
 					SupplyItemLocalServiceUtil.deleteSupplyItem(supplyItem);

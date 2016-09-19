@@ -18,6 +18,9 @@ import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -26,6 +29,7 @@ import com.rumbasolutions.flask.model.SupplyList;
 import com.rumbasolutions.flask.service.SupplyItemServiceUtil;
 import com.rumbasolutions.flask.service.SupplyListLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.SupplyListServiceBaseImpl;
+import com.rumbasolutions.flask.service.persistence.SupplyItemUtil;
 import com.rumbasolutions.flask.service.persistence.SupplyListUtil;
 
 /**
@@ -56,19 +60,18 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 	public SupplyList addSupplyList(String supplyListName, boolean isSystem, ServiceContext serviceContext){
 		SupplyList supplyList = null;
 		try {
-			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
 				Date now = new Date();
 				supplyList = SupplyListLocalServiceUtil.createSupplyList(CounterLocalServiceUtil.increment());
 				supplyList.setSupplyListName(supplyListName);
-				supplyList.setIsSystem(isSystem);
+				if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles))
+					supplyList.setIsSystem(isSystem);
+				else
+					supplyList.setIsSystem(false);
 				supplyList.setCompanyId(PortalUtil.getDefaultCompanyId());
 				supplyList.setUserId(serviceContext.getUserId());
 				supplyList.setCreatedDate(serviceContext.getCreateDate(now));
 				supplyList.setModifiedDate(serviceContext.getModifiedDate(now));
 				supplyList = SupplyListLocalServiceUtil.addSupplyList(supplyList);
-			}else{
-				throw new Exception("You do not have required permissions");
-			}
 		} catch (Exception e) {
 			LOGGER.error("Exception in Add Supply List :" + e.getMessage());
 			e.printStackTrace();
@@ -84,7 +87,10 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 			if(serviceContext.getUserId()==supplyList.getUserId() || FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
 				Date now = new Date();
 				supplyList.setSupplyListName(supplyListName);
-				supplyList.setIsSystem(isSystem);
+				if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles))
+					supplyList.setIsSystem(isSystem);
+				else
+					supplyList.setIsSystem(false);
 				supplyList.setCompanyId(PortalUtil.getDefaultCompanyId());
 				supplyList.setUserId(serviceContext.getUserId());
 				supplyList.setModifiedDate(serviceContext.getModifiedDate(now));
@@ -124,22 +130,37 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 	}
 	
 	@Override
-	public List<SupplyList> getMySupplyLists(ServiceContext serviceContext){
-		List<SupplyList> supplyLists = null;
+	public JSONArray getMySupplyLists(ServiceContext serviceContext){
+		List<SupplyList> mySupplyLists = null;
+		JSONArray array = JSONFactoryUtil.createJSONArray();
 		try {
-			supplyLists = SupplyListUtil.findByuserId(serviceContext.getUserId());
+			mySupplyLists = SupplyListLocalServiceUtil.getSupplyLists(0, SupplyListLocalServiceUtil.getSupplyListsCount());
+			for(SupplyList list: mySupplyLists){
+				if(list.getUserId()==serviceContext.getUserId() || list.getIsSystem()){
+					JSONObject obj = JSONFactoryUtil.createJSONObject();
+					obj.put("supplyListId", list.getSupplyListId());
+					obj.put("supplyListName", list.getSupplyListName());
+					obj.put("isSystem", list.getIsSystem());
+					obj.put("companyId", list.getCompanyId());
+					obj.put("userId", list.getUserId());
+					obj.put("createdDate", list.getCreatedDate());
+					obj.put("modifiedDate", list.getModifiedDate());
+					obj.put("itemsCount", SupplyItemUtil.findBysupplyListId(list.getSupplyListId()).size());
+					array.put(obj);
+				}
+			}
 		} catch (Exception e) {
 			LOGGER.error("Exception in get My Supply Lists :" + e.getMessage());
 			e.printStackTrace();
 		}
-		return supplyLists;
+		return array;
 	}
 	
 	@Override
 	public void deleteSupplyList(long supplyListId, ServiceContext serviceContext){
 		try {
 			SupplyList supplyList = SupplyListLocalServiceUtil.getSupplyList(supplyListId);
-			if(serviceContext.getUserId()==supplyList.getUserId() && FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
+			if(serviceContext.getUserId()==supplyList.getUserId() || FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles)){
 				SupplyListLocalServiceUtil.deleteSupplyList(supplyList);
 				SupplyItemServiceUtil.deleteItemsByListId(supplyListId, serviceContext);
 			}else{

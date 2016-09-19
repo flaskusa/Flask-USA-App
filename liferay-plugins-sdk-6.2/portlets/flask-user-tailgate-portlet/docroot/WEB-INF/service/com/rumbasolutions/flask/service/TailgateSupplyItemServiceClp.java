@@ -39,52 +39,59 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "updateTailgateSupplyItem";
+		_methodName4 = "addTailgateSupplyItems";
 
 		_methodParameterTypes4 = new String[] {
+				"java.lang.String[][]", "long", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName5 = "updateTailgateSupplyItem";
+
+		_methodParameterTypes5 = new String[] {
 				"long", "java.lang.String", "long", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName5 = "getTailgateSupplyItem";
-
-		_methodParameterTypes5 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName6 = "getItemsByTailgateId";
+		_methodName6 = "getTailgateSupplyItem";
 
 		_methodParameterTypes6 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName7 = "getMyTailgateSupplyItems";
+		_methodName7 = "getItemsByTailgateId";
 
 		_methodParameterTypes7 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName8 = "getAllTailgateSupplyItems";
+		_methodName8 = "getMyTailgateSupplyItems";
 
 		_methodParameterTypes8 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName9 = "deleteTailgateSupplyItem";
+		_methodName9 = "getAllTailgateSupplyItems";
 
 		_methodParameterTypes9 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName10 = "deleteItemsByTailgateId";
+		_methodName10 = "deleteTailgateSupplyItem";
 
 		_methodParameterTypes10 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName11 = "deleteMyItems";
+		_methodName11 = "deleteItemsByTailgateId";
 
 		_methodParameterTypes11 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName12 = "deleteMyItems";
+
+		_methodParameterTypes12 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -175,6 +182,41 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 	}
 
 	@Override
+	public java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> addTailgateSupplyItems(
+		java.lang.String[] supplyListItemNames, long tailgateId,
+		long itemAssignedUserId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4,
+					new Object[] {
+						ClpSerializer.translateInput(supplyListItemNames),
+						
+					tailgateId,
+						
+					itemAssignedUserId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.TailgateSupplyItem updateTailgateSupplyItem(
 		long tailgateSupplyItemId, java.lang.String supplyListItemName,
 		long tailgateId, long itemAssignedUserId,
@@ -182,8 +224,8 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4,
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5,
 					new Object[] {
 						tailgateSupplyItemId,
 						
@@ -218,8 +260,8 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5,
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6,
 					new Object[] {
 						tailgateSupplyItemId,
 						
@@ -248,8 +290,8 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7,
 					new Object[] {
 						tailgateId,
 						
@@ -277,8 +319,8 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7,
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
 					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -302,8 +344,8 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName8,
-					_methodParameterTypes8,
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9,
 					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -325,8 +367,8 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 	public void deleteTailgateSupplyItem(long tailgateSupplyItemId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName9,
-				_methodParameterTypes9,
+			_invokableService.invokeMethod(_methodName10,
+				_methodParameterTypes10,
 				new Object[] {
 					tailgateSupplyItemId,
 					
@@ -350,8 +392,8 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 	public void deleteItemsByTailgateId(long tailgateId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName10,
-				_methodParameterTypes10,
+			_invokableService.invokeMethod(_methodName11,
+				_methodParameterTypes11,
 				new Object[] {
 					tailgateId,
 					
@@ -375,8 +417,8 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 	public void deleteMyItems(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName11,
-				_methodParameterTypes11,
+			_invokableService.invokeMethod(_methodName12,
+				_methodParameterTypes12,
 				new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -415,4 +457,6 @@ public class TailgateSupplyItemServiceClp implements TailgateSupplyItemService {
 	private String[] _methodParameterTypes10;
 	private String _methodName11;
 	private String[] _methodParameterTypes11;
+	private String _methodName12;
+	private String[] _methodParameterTypes12;
 }

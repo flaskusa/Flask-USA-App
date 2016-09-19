@@ -80,6 +80,25 @@ public class TailgateSupplyItemServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.TailgateSupplyItemSoap[] addTailgateSupplyItems(
+		java.lang.String[] supplyListItemNames, long tailgateId,
+		long itemAssignedUserId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> returnValue =
+				TailgateSupplyItemServiceUtil.addTailgateSupplyItems(supplyListItemNames,
+					tailgateId, itemAssignedUserId, serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateSupplyItemSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.TailgateSupplyItemSoap updateTailgateSupplyItem(
 		long tailgateSupplyItemId, java.lang.String supplyListItemName,
 		long tailgateId, long itemAssignedUserId,

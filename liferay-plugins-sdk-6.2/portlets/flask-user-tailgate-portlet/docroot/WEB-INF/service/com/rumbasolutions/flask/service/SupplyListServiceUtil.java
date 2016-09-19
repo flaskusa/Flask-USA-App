@@ -89,7 +89,7 @@ public class SupplyListServiceUtil {
 		return getService().getAllSupplyLists(serviceContext);
 	}
 
-	public static java.util.List<com.rumbasolutions.flask.model.SupplyList> getMySupplyLists(
+	public static com.liferay.portal.kernel.json.JSONArray getMySupplyLists(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService().getMySupplyLists(serviceContext);
 	}

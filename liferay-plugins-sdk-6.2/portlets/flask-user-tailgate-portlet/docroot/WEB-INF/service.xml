@@ -102,7 +102,10 @@
         <column name="modifiedDate" type="Date"></column>
         <finder name="userId" return-type="Collection">
         	<finder-column name="userId" />
-        </finder>   
+        </finder>
+        <finder name="isSystem" return-type="Collection">
+        	<finder-column name="isSystem" />
+        </finder>
     </entity>
 
     <entity name="SupplyItem" local-service="true">

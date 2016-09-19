@@ -23,8 +23,10 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.rumbasolutions.flask.model.TailgateMessageBoard;
+import com.rumbasolutions.flask.model.TailgateUsers;
 import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateMessageBoardLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.TailgateMessageBoardServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.TailgateMessageBoardUtil;
 
@@ -55,7 +57,14 @@ public class TailgateMessageBoardServiceImpl
 	public TailgateMessageBoard addMessageBoard(String messageText, long tailgateId, ServiceContext serviceContext){
 		TailgateMessageBoard tailgateMessageBoard = null;
 		try {
-			if(serviceContext.getUserId() == TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId()){
+			List<TailgateUsers> tailgateUsers = TailgateUsersServiceUtil.getTailgateMembers(tailgateId);
+			boolean enableAccess = false;
+			for(TailgateUsers tUser: tailgateUsers){
+				if(tUser.getUserId()==serviceContext.getUserId()){
+					enableAccess = true;
+				}
+			}
+			if(serviceContext.getUserId() == TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId() || enableAccess){
 				Date now = new Date();
 				tailgateMessageBoard = TailgateMessageBoardLocalServiceUtil.createTailgateMessageBoard(CounterLocalServiceUtil.increment());
 				tailgateMessageBoard.setMessageText(messageText);
@@ -79,7 +88,14 @@ public class TailgateMessageBoardServiceImpl
 	public TailgateMessageBoard updateMessageBoard(long tailgateMessageId, String messageText, long tailgateId, ServiceContext serviceContext){
 		TailgateMessageBoard tailgateMessageBoard = null;
 		try {
-			if(serviceContext.getUserId() == TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId()){
+			List<TailgateUsers> tailgateUsers = TailgateUsersServiceUtil.getTailgateMembers(tailgateId);
+			boolean enableAccess = false;
+			for(TailgateUsers tUser: tailgateUsers){
+				if(tUser.getUserId()==serviceContext.getUserId()){
+					enableAccess = true;
+				}
+			}
+			if(serviceContext.getUserId() == TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId() || enableAccess){
 				Date now = new Date();
 				tailgateMessageBoard = TailgateMessageBoardLocalServiceUtil.getTailgateMessageBoard(tailgateMessageId);
 				tailgateMessageBoard.setMessageText(messageText);
@@ -137,7 +153,14 @@ public class TailgateMessageBoardServiceImpl
 	public void deleteMessageBoard(long tailgateMessageId, ServiceContext serviceContext){
 		try {
 			TailgateMessageBoard tailgateMessageBoard = TailgateMessageBoardLocalServiceUtil.getTailgateMessageBoard(tailgateMessageId);
-			if(tailgateMessageBoard.getUserId()==serviceContext.getUserId()){
+			List<TailgateUsers> tailgateUsers = TailgateUsersServiceUtil.getTailgateMembers(tailgateMessageBoard.getTailgateId());
+			boolean enableAccess = false;
+			for(TailgateUsers tUser: tailgateUsers){
+				if(tUser.getUserId()==serviceContext.getUserId()){
+					enableAccess = true;
+				}
+			}
+			if(tailgateMessageBoard.getUserId()==serviceContext.getUserId() || enableAccess){
 				TailgateMessageBoardLocalServiceUtil.deleteTailgateMessageBoard(tailgateMessageBoard);
 			}else{
 				throw new Exception("You do not have required permissions");

@@ -70,6 +70,11 @@ public interface TailgateSupplyItemService extends BaseService, InvokableService
 		long itemAssignedUserId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	public java.util.List<com.rumbasolutions.flask.model.TailgateSupplyItem> addTailgateSupplyItems(
+		java.lang.String[] supplyListItemNames, long tailgateId,
+		long itemAssignedUserId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	public com.rumbasolutions.flask.model.TailgateSupplyItem updateTailgateSupplyItem(
 		long tailgateSupplyItemId, java.lang.String supplyListItemName,
 		long tailgateId, long itemAssignedUserId,

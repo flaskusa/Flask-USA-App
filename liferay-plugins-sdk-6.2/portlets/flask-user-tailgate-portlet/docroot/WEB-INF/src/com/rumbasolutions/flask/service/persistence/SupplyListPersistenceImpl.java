@@ -568,6 +568,495 @@ public class SupplyListPersistenceImpl extends BasePersistenceImpl<SupplyList>
 	}
 
 	private static final String _FINDER_COLUMN_USERID_USERID_2 = "supplyList.userId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_ISSYSTEM = new FinderPath(SupplyListModelImpl.ENTITY_CACHE_ENABLED,
+			SupplyListModelImpl.FINDER_CACHE_ENABLED, SupplyListImpl.class,
+			FINDER_CLASS_NAME_LIST_WITH_PAGINATION, "findByisSystem",
+			new String[] {
+				Boolean.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ISSYSTEM =
+		new FinderPath(SupplyListModelImpl.ENTITY_CACHE_ENABLED,
+			SupplyListModelImpl.FINDER_CACHE_ENABLED, SupplyListImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByisSystem",
+			new String[] { Boolean.class.getName() },
+			SupplyListModelImpl.ISSYSTEM_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_ISSYSTEM = new FinderPath(SupplyListModelImpl.ENTITY_CACHE_ENABLED,
+			SupplyListModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByisSystem",
+			new String[] { Boolean.class.getName() });
+
+	/**
+	 * Returns all the supply lists where isSystem = &#63;.
+	 *
+	 * @param isSystem the is system
+	 * @return the matching supply lists
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<SupplyList> findByisSystem(boolean isSystem)
+		throws SystemException {
+		return findByisSystem(isSystem, QueryUtil.ALL_POS, QueryUtil.ALL_POS,
+			null);
+	}
+
+	/**
+	 * Returns a range of all the supply lists where isSystem = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.SupplyListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param isSystem the is system
+	 * @param start the lower bound of the range of supply lists
+	 * @param end the upper bound of the range of supply lists (not inclusive)
+	 * @return the range of matching supply lists
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<SupplyList> findByisSystem(boolean isSystem, int start, int end)
+		throws SystemException {
+		return findByisSystem(isSystem, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the supply lists where isSystem = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.SupplyListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param isSystem the is system
+	 * @param start the lower bound of the range of supply lists
+	 * @param end the upper bound of the range of supply lists (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching supply lists
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<SupplyList> findByisSystem(boolean isSystem, int start,
+		int end, OrderByComparator orderByComparator) throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ISSYSTEM;
+			finderArgs = new Object[] { isSystem };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_ISSYSTEM;
+			finderArgs = new Object[] { isSystem, start, end, orderByComparator };
+		}
+
+		List<SupplyList> list = (List<SupplyList>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (SupplyList supplyList : list) {
+				if ((isSystem != supplyList.getIsSystem())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(3 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(3);
+			}
+
+			query.append(_SQL_SELECT_SUPPLYLIST_WHERE);
+
+			query.append(_FINDER_COLUMN_ISSYSTEM_ISSYSTEM_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(SupplyListModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(isSystem);
+
+				if (!pagination) {
+					list = (List<SupplyList>)QueryUtil.list(q, getDialect(),
+							start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<SupplyList>(list);
+				}
+				else {
+					list = (List<SupplyList>)QueryUtil.list(q, getDialect(),
+							start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first supply list in the ordered set where isSystem = &#63;.
+	 *
+	 * @param isSystem the is system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching supply list
+	 * @throws com.rumbasolutions.flask.NoSuchSupplyListException if a matching supply list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SupplyList findByisSystem_First(boolean isSystem,
+		OrderByComparator orderByComparator)
+		throws NoSuchSupplyListException, SystemException {
+		SupplyList supplyList = fetchByisSystem_First(isSystem,
+				orderByComparator);
+
+		if (supplyList != null) {
+			return supplyList;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("isSystem=");
+		msg.append(isSystem);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSupplyListException(msg.toString());
+	}
+
+	/**
+	 * Returns the first supply list in the ordered set where isSystem = &#63;.
+	 *
+	 * @param isSystem the is system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching supply list, or <code>null</code> if a matching supply list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SupplyList fetchByisSystem_First(boolean isSystem,
+		OrderByComparator orderByComparator) throws SystemException {
+		List<SupplyList> list = findByisSystem(isSystem, 0, 1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last supply list in the ordered set where isSystem = &#63;.
+	 *
+	 * @param isSystem the is system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching supply list
+	 * @throws com.rumbasolutions.flask.NoSuchSupplyListException if a matching supply list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SupplyList findByisSystem_Last(boolean isSystem,
+		OrderByComparator orderByComparator)
+		throws NoSuchSupplyListException, SystemException {
+		SupplyList supplyList = fetchByisSystem_Last(isSystem, orderByComparator);
+
+		if (supplyList != null) {
+			return supplyList;
+		}
+
+		StringBundler msg = new StringBundler(4);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("isSystem=");
+		msg.append(isSystem);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchSupplyListException(msg.toString());
+	}
+
+	/**
+	 * Returns the last supply list in the ordered set where isSystem = &#63;.
+	 *
+	 * @param isSystem the is system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching supply list, or <code>null</code> if a matching supply list could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SupplyList fetchByisSystem_Last(boolean isSystem,
+		OrderByComparator orderByComparator) throws SystemException {
+		int count = countByisSystem(isSystem);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<SupplyList> list = findByisSystem(isSystem, count - 1, count,
+				orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the supply lists before and after the current supply list in the ordered set where isSystem = &#63;.
+	 *
+	 * @param supplyListId the primary key of the current supply list
+	 * @param isSystem the is system
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next supply list
+	 * @throws com.rumbasolutions.flask.NoSuchSupplyListException if a supply list with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public SupplyList[] findByisSystem_PrevAndNext(long supplyListId,
+		boolean isSystem, OrderByComparator orderByComparator)
+		throws NoSuchSupplyListException, SystemException {
+		SupplyList supplyList = findByPrimaryKey(supplyListId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			SupplyList[] array = new SupplyListImpl[3];
+
+			array[0] = getByisSystem_PrevAndNext(session, supplyList, isSystem,
+					orderByComparator, true);
+
+			array[1] = supplyList;
+
+			array[2] = getByisSystem_PrevAndNext(session, supplyList, isSystem,
+					orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected SupplyList getByisSystem_PrevAndNext(Session session,
+		SupplyList supplyList, boolean isSystem,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_SUPPLYLIST_WHERE);
+
+		query.append(_FINDER_COLUMN_ISSYSTEM_ISSYSTEM_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(SupplyListModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(isSystem);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(supplyList);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<SupplyList> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the supply lists where isSystem = &#63; from the database.
+	 *
+	 * @param isSystem the is system
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByisSystem(boolean isSystem) throws SystemException {
+		for (SupplyList supplyList : findByisSystem(isSystem,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(supplyList);
+		}
+	}
+
+	/**
+	 * Returns the number of supply lists where isSystem = &#63;.
+	 *
+	 * @param isSystem the is system
+	 * @return the number of matching supply lists
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByisSystem(boolean isSystem) throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_ISSYSTEM;
+
+		Object[] finderArgs = new Object[] { isSystem };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(2);
+
+			query.append(_SQL_COUNT_SUPPLYLIST_WHERE);
+
+			query.append(_FINDER_COLUMN_ISSYSTEM_ISSYSTEM_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(isSystem);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_ISSYSTEM_ISSYSTEM_2 = "supplyList.isSystem = ?";
 
 	public SupplyListPersistenceImpl() {
 		setModelClass(SupplyList.class);
@@ -808,6 +1297,23 @@ public class SupplyListPersistenceImpl extends BasePersistenceImpl<SupplyList>
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERID, args);
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERID,
+					args);
+			}
+
+			if ((supplyListModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ISSYSTEM.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						supplyListModelImpl.getOriginalIsSystem()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ISSYSTEM, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ISSYSTEM,
+					args);
+
+				args = new Object[] { supplyListModelImpl.getIsSystem() };
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_ISSYSTEM, args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_ISSYSTEM,
 					args);
 			}
 		}

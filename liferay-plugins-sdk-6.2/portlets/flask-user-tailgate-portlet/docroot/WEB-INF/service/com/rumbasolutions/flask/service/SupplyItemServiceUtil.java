@@ -70,6 +70,13 @@ public class SupplyItemServiceUtil {
 				   .addSupplyItem(supplyItemName, supplyListId, serviceContext);
 	}
 
+	public static java.util.List<com.rumbasolutions.flask.model.SupplyItem> addSupplyItems(
+		java.lang.String[] supplyItemNames, long supplyListId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .addSupplyItems(supplyItemNames, supplyListId, serviceContext);
+	}
+
 	public static com.rumbasolutions.flask.model.SupplyItem updateSupplyItem(
 		long supplyItemId, java.lang.String supplyItemName, long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext) {

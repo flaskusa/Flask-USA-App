@@ -14,6 +14,7 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -23,7 +24,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
 import com.rumbasolutions.flask.model.TailgateSupplyItem;
-import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateSupplyItemLocalServiceUtil;
 import com.rumbasolutions.flask.service.base.TailgateSupplyItemServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.TailgateSupplyItemUtil;
@@ -55,7 +55,7 @@ public class TailgateSupplyItemServiceImpl
 	public TailgateSupplyItem addTailgateSupplyItem(String supplyListItemName, long tailgateId, long itemAssignedUserId, ServiceContext serviceContext){
 		TailgateSupplyItem tailgateSupplyItem = null;
 		try {
-			if(serviceContext.getUserId() == TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId()){
+			if(FlaskTailgateUtil.isTailgateAdmin(tailgateId, serviceContext)){
 				Date now = new Date();
 				tailgateSupplyItem = TailgateSupplyItemLocalServiceUtil.createTailgateSupplyItem(CounterLocalServiceUtil.increment());
 				tailgateSupplyItem.setSupplyListItemName(supplyListItemName);
@@ -67,7 +67,7 @@ public class TailgateSupplyItemServiceImpl
 				tailgateSupplyItem.setModifiedDate(serviceContext.getModifiedDate(now));
 				tailgateSupplyItem = TailgateSupplyItemLocalServiceUtil.addTailgateSupplyItem(tailgateSupplyItem);
 			}else{
-				throw new Exception("You do not have permission to add Supply Item to this Tailgate");
+				throw new Exception("You do not have required permission to add Supply Item to this Tailgate");
 			}
 		} catch (Exception e) {
 			LOGGER.error("Exception in Add Tailgate Supply Item :" + e.getMessage());
@@ -77,10 +77,39 @@ public class TailgateSupplyItemServiceImpl
 	}
 	
 	@Override
+	public List<TailgateSupplyItem> addTailgateSupplyItems(String[] supplyListItemNames, long tailgateId, long itemAssignedUserId, ServiceContext serviceContext){
+		List<TailgateSupplyItem> tailgateSupplyitems = new ArrayList<TailgateSupplyItem>();
+		try {
+			if(FlaskTailgateUtil.isTailgateAdmin(tailgateId, serviceContext)){
+				Date now = new Date();
+				for(int i=0; i<supplyListItemNames.length; i++){
+					TailgateSupplyItem tailgateSupplyItem = null;
+					tailgateSupplyItem = TailgateSupplyItemLocalServiceUtil.createTailgateSupplyItem(CounterLocalServiceUtil.increment());
+					tailgateSupplyItem.setSupplyListItemName(supplyListItemNames[i]);
+					tailgateSupplyItem.setTailgateId(tailgateId);
+					tailgateSupplyItem.setItemAssignedUserId(itemAssignedUserId);
+					tailgateSupplyItem.setCompanyId(PortalUtil.getDefaultCompanyId());
+					tailgateSupplyItem.setUserId(serviceContext.getUserId());
+					tailgateSupplyItem.setCreatedDate(serviceContext.getCreateDate(now));
+					tailgateSupplyItem.setModifiedDate(serviceContext.getModifiedDate(now));
+					tailgateSupplyItem = TailgateSupplyItemLocalServiceUtil.addTailgateSupplyItem(tailgateSupplyItem);
+					tailgateSupplyitems.add(tailgateSupplyItem);
+				}
+			}else{
+				throw new Exception("You do not have required permission to add Supply Items to this Tailgate");
+			}
+		} catch (Exception e) {
+			LOGGER.error("Exception in Add Tailgate Supply Items :" + e.getMessage());
+			e.printStackTrace();
+		}
+		return tailgateSupplyitems;
+	}
+	
+	@Override
 	public TailgateSupplyItem updateTailgateSupplyItem(long tailgateSupplyItemId, String supplyListItemName, long tailgateId, long itemAssignedUserId, ServiceContext serviceContext){
 		TailgateSupplyItem tailgateSupplyItem = null;
 		try {
-			if(serviceContext.getUserId() == TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId()){
+			if(FlaskTailgateUtil.isTailgateAdmin(tailgateId, serviceContext)){
 				Date now = new Date();
 				tailgateSupplyItem = TailgateSupplyItemLocalServiceUtil.getTailgateSupplyItem(tailgateSupplyItemId);
 				tailgateSupplyItem.setSupplyListItemName(supplyListItemName);
@@ -151,7 +180,7 @@ public class TailgateSupplyItemServiceImpl
 	public void deleteTailgateSupplyItem(long tailgateSupplyItemId, ServiceContext serviceContext){
 		try {
 			TailgateSupplyItem tailgateSupplyItem = TailgateSupplyItemLocalServiceUtil.getTailgateSupplyItem(tailgateSupplyItemId);
-			if(serviceContext.getUserId() == tailgateSupplyItem.getUserId()){
+			if(FlaskTailgateUtil.isTailgateAdmin(tailgateSupplyItem.getTailgateId(), serviceContext)){
 				TailgateSupplyItemLocalServiceUtil.deleteTailgateSupplyItem(tailgateSupplyItem);
 			}
 			else{
@@ -166,7 +195,7 @@ public class TailgateSupplyItemServiceImpl
 	@Override
 	public void deleteItemsByTailgateId(long tailgateId, ServiceContext serviceContext){
 		try {
-			if(serviceContext.getUserId() == TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId()){
+			if(FlaskTailgateUtil.isTailgateAdmin(tailgateId, serviceContext)){
 				List<TailgateSupplyItem> tailgateSupplyItems = TailgateSupplyItemUtil.findBytailgateId(tailgateId);
 				for(TailgateSupplyItem item: tailgateSupplyItems){
 					TailgateSupplyItemLocalServiceUtil.deleteTailgateSupplyItem(item);
@@ -192,4 +221,5 @@ public class TailgateSupplyItemServiceImpl
 			e.printStackTrace();
 		}
 	}
+	
 }

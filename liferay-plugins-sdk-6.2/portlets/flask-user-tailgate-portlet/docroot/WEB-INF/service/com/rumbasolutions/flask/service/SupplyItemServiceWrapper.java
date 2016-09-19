@@ -65,6 +65,14 @@ public class SupplyItemServiceWrapper implements SupplyItemService,
 	}
 
 	@Override
+	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> addSupplyItems(
+		java.lang.String[] supplyItemNames, long supplyListId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _supplyItemService.addSupplyItems(supplyItemNames, supplyListId,
+			serviceContext);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.SupplyItem updateSupplyItem(
 		long supplyItemId, java.lang.String supplyItemName, long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext) {

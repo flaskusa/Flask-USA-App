@@ -17,7 +17,11 @@ package com.rumbasolutions.flask.service.impl;
 import java.util.List;
 
 import com.liferay.portal.model.Role;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.rumbasolutions.flask.model.TailgateUsers;
+import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateUsersServiceUtil;
 
 /**
  * The implementation of the tailgate users remote service.
@@ -70,5 +74,22 @@ public class FlaskTailgateUtil {
 			e.printStackTrace();
 		}
 		return admin;
+	}
+	
+	public static boolean isTailgateAdmin(long tailgateId, ServiceContext serviceContext){
+		boolean tailgateAdmin = false;
+		try {
+			if(serviceContext.getUserId() == TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId()){
+				tailgateAdmin = true;
+			}
+			for(TailgateUsers user:TailgateUsersServiceUtil.getTailgateMembers(tailgateId)){
+				if(user.getUserId()==serviceContext.getUserId()){
+					tailgateAdmin = true;
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tailgateAdmin;
 	}
 }

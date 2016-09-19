@@ -249,7 +249,7 @@ public class SupplyListServiceClp implements SupplyListService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.SupplyList> getMySupplyLists(
+	public com.liferay.portal.kernel.json.JSONArray getMySupplyLists(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -270,7 +270,7 @@ public class SupplyListServiceClp implements SupplyListService {
 			}
 		}
 
-		return (java.util.List<com.rumbasolutions.flask.model.SupplyList>)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.portal.kernel.json.JSONArray)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override

@@ -39,36 +39,43 @@ public class SupplyItemServiceClp implements SupplyItemService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName4 = "updateSupplyItem";
+		_methodName4 = "addSupplyItems";
 
 		_methodParameterTypes4 = new String[] {
+				"java.lang.String[][]", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName5 = "updateSupplyItem";
+
+		_methodParameterTypes5 = new String[] {
 				"long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName5 = "getSupplyItem";
+		_methodName6 = "getSupplyItem";
 
-		_methodParameterTypes5 = new String[] { "long" };
+		_methodParameterTypes6 = new String[] { "long" };
 
-		_methodName6 = "getAllSupplyItems";
+		_methodName7 = "getAllSupplyItems";
 
-		_methodParameterTypes6 = new String[] {
+		_methodParameterTypes7 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName7 = "getItemsByListId";
+		_methodName8 = "getItemsByListId";
 
-		_methodParameterTypes7 = new String[] { "long" };
+		_methodParameterTypes8 = new String[] { "long" };
 
-		_methodName8 = "deleteSupplyItem";
+		_methodName9 = "deleteSupplyItem";
 
-		_methodParameterTypes8 = new String[] {
+		_methodParameterTypes9 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName9 = "deleteItemsByListId";
+		_methodName10 = "deleteItemsByListId";
 
-		_methodParameterTypes9 = new String[] {
+		_methodParameterTypes10 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -156,14 +163,46 @@ public class SupplyItemServiceClp implements SupplyItemService {
 	}
 
 	@Override
-	public com.rumbasolutions.flask.model.SupplyItem updateSupplyItem(
-		long supplyItemId, java.lang.String supplyItemName, long supplyListId,
+	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> addSupplyItems(
+		java.lang.String[] supplyItemNames, long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName4,
 					_methodParameterTypes4,
+					new Object[] {
+						ClpSerializer.translateInput(supplyItemNames),
+						
+					supplyListId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.SupplyItem>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.SupplyItem updateSupplyItem(
+		long supplyItemId, java.lang.String supplyItemName, long supplyListId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5,
 					new Object[] {
 						supplyItemId,
 						
@@ -195,8 +234,8 @@ public class SupplyItemServiceClp implements SupplyItemService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5, new Object[] { supplyItemId });
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6, new Object[] { supplyItemId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -219,8 +258,8 @@ public class SupplyItemServiceClp implements SupplyItemService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7,
 					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -244,8 +283,8 @@ public class SupplyItemServiceClp implements SupplyItemService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] { supplyListId });
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] { supplyListId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -266,8 +305,8 @@ public class SupplyItemServiceClp implements SupplyItemService {
 	public void deleteSupplyItem(long supplyItemId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9,
 				new Object[] {
 					supplyItemId,
 					
@@ -291,8 +330,8 @@ public class SupplyItemServiceClp implements SupplyItemService {
 	public void deleteItemsByListId(long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName9,
-				_methodParameterTypes9,
+			_invokableService.invokeMethod(_methodName10,
+				_methodParameterTypes10,
 				new Object[] {
 					supplyListId,
 					
@@ -331,4 +370,6 @@ public class SupplyItemServiceClp implements SupplyItemService {
 	private String[] _methodParameterTypes8;
 	private String _methodName9;
 	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
 }

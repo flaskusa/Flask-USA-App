@@ -86,7 +86,7 @@ public class SupplyListServiceWrapper implements SupplyListService,
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.SupplyList> getMySupplyLists(
+	public com.liferay.portal.kernel.json.JSONArray getMySupplyLists(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _supplyListService.getMySupplyLists(serviceContext);
 	}

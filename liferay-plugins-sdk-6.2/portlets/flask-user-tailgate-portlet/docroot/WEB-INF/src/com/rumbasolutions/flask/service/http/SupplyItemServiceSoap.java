@@ -79,6 +79,24 @@ public class SupplyItemServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.SupplyItemSoap[] addSupplyItems(
+		java.lang.String[] supplyItemNames, long supplyListId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.SupplyItem> returnValue =
+				SupplyItemServiceUtil.addSupplyItems(supplyItemNames,
+					supplyListId, serviceContext);
+
+			return com.rumbasolutions.flask.model.SupplyItemSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.SupplyItemSoap updateSupplyItem(
 		long supplyItemId, java.lang.String supplyItemName, long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext)

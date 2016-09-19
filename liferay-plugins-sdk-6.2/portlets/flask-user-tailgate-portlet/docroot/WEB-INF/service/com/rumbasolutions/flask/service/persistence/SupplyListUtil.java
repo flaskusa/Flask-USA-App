@@ -271,6 +271,168 @@ public class SupplyListUtil {
 	}
 
 	/**
+	* Returns all the supply lists where isSystem = &#63;.
+	*
+	* @param isSystem the is system
+	* @return the matching supply lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.rumbasolutions.flask.model.SupplyList> findByisSystem(
+		boolean isSystem)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByisSystem(isSystem);
+	}
+
+	/**
+	* Returns a range of all the supply lists where isSystem = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.SupplyListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param isSystem the is system
+	* @param start the lower bound of the range of supply lists
+	* @param end the upper bound of the range of supply lists (not inclusive)
+	* @return the range of matching supply lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.rumbasolutions.flask.model.SupplyList> findByisSystem(
+		boolean isSystem, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findByisSystem(isSystem, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the supply lists where isSystem = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.SupplyListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param isSystem the is system
+	* @param start the lower bound of the range of supply lists
+	* @param end the upper bound of the range of supply lists (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching supply lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.rumbasolutions.flask.model.SupplyList> findByisSystem(
+		boolean isSystem, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findByisSystem(isSystem, start, end, orderByComparator);
+	}
+
+	/**
+	* Returns the first supply list in the ordered set where isSystem = &#63;.
+	*
+	* @param isSystem the is system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching supply list
+	* @throws com.rumbasolutions.flask.NoSuchSupplyListException if a matching supply list could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.SupplyList findByisSystem_First(
+		boolean isSystem,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchSupplyListException {
+		return getPersistence().findByisSystem_First(isSystem, orderByComparator);
+	}
+
+	/**
+	* Returns the first supply list in the ordered set where isSystem = &#63;.
+	*
+	* @param isSystem the is system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching supply list, or <code>null</code> if a matching supply list could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.SupplyList fetchByisSystem_First(
+		boolean isSystem,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchByisSystem_First(isSystem, orderByComparator);
+	}
+
+	/**
+	* Returns the last supply list in the ordered set where isSystem = &#63;.
+	*
+	* @param isSystem the is system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching supply list
+	* @throws com.rumbasolutions.flask.NoSuchSupplyListException if a matching supply list could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.SupplyList findByisSystem_Last(
+		boolean isSystem,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchSupplyListException {
+		return getPersistence().findByisSystem_Last(isSystem, orderByComparator);
+	}
+
+	/**
+	* Returns the last supply list in the ordered set where isSystem = &#63;.
+	*
+	* @param isSystem the is system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching supply list, or <code>null</code> if a matching supply list could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.SupplyList fetchByisSystem_Last(
+		boolean isSystem,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().fetchByisSystem_Last(isSystem, orderByComparator);
+	}
+
+	/**
+	* Returns the supply lists before and after the current supply list in the ordered set where isSystem = &#63;.
+	*
+	* @param supplyListId the primary key of the current supply list
+	* @param isSystem the is system
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next supply list
+	* @throws com.rumbasolutions.flask.NoSuchSupplyListException if a supply list with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.SupplyList[] findByisSystem_PrevAndNext(
+		long supplyListId, boolean isSystem,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchSupplyListException {
+		return getPersistence()
+				   .findByisSystem_PrevAndNext(supplyListId, isSystem,
+			orderByComparator);
+	}
+
+	/**
+	* Removes all the supply lists where isSystem = &#63; from the database.
+	*
+	* @param isSystem the is system
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeByisSystem(boolean isSystem)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeByisSystem(isSystem);
+	}
+
+	/**
+	* Returns the number of supply lists where isSystem = &#63;.
+	*
+	* @param isSystem the is system
+	* @return the number of matching supply lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countByisSystem(boolean isSystem)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countByisSystem(isSystem);
+	}
+
+	/**
 	* Caches the supply list in the entity cache if it is enabled.
 	*
 	* @param supplyList the supply list

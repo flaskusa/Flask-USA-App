@@ -83,7 +83,7 @@ public interface SupplyListService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.SupplyList> getMySupplyLists(
+	public com.liferay.portal.kernel.json.JSONArray getMySupplyLists(
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteSupplyList(long supplyListId,

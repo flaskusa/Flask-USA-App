@@ -39,36 +39,43 @@ public class SupplyItemServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName73 = "updateSupplyItem";
+		_methodName73 = "addSupplyItems";
 
 		_methodParameterTypes73 = new String[] {
+				"java.lang.String[][]", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName74 = "updateSupplyItem";
+
+		_methodParameterTypes74 = new String[] {
 				"long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName74 = "getSupplyItem";
+		_methodName75 = "getSupplyItem";
 
-		_methodParameterTypes74 = new String[] { "long" };
+		_methodParameterTypes75 = new String[] { "long" };
 
-		_methodName75 = "getAllSupplyItems";
+		_methodName76 = "getAllSupplyItems";
 
-		_methodParameterTypes75 = new String[] {
+		_methodParameterTypes76 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName76 = "getItemsByListId";
+		_methodName77 = "getItemsByListId";
 
-		_methodParameterTypes76 = new String[] { "long" };
+		_methodParameterTypes77 = new String[] { "long" };
 
-		_methodName77 = "deleteSupplyItem";
+		_methodName78 = "deleteSupplyItem";
 
-		_methodParameterTypes77 = new String[] {
+		_methodParameterTypes78 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName78 = "deleteItemsByListId";
+		_methodName79 = "deleteItemsByListId";
 
-		_methodParameterTypes78 = new String[] {
+		_methodParameterTypes79 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -96,37 +103,44 @@ public class SupplyItemServiceClpInvoker {
 
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
+			return SupplyItemServiceUtil.addSupplyItems((java.lang.String[])arguments[0],
+				((Long)arguments[1]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
+		}
+
+		if (_methodName74.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
 			return SupplyItemServiceUtil.updateSupplyItem(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1],
 				((Long)arguments[2]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[3]);
 		}
 
-		if (_methodName74.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
-			return SupplyItemServiceUtil.getSupplyItem(((Long)arguments[0]).longValue());
-		}
-
 		if (_methodName75.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
-			return SupplyItemServiceUtil.getAllSupplyItems((com.liferay.portal.service.ServiceContext)arguments[0]);
+			return SupplyItemServiceUtil.getSupplyItem(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName76.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
-			return SupplyItemServiceUtil.getItemsByListId(((Long)arguments[0]).longValue());
+			return SupplyItemServiceUtil.getAllSupplyItems((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
 		if (_methodName77.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+			return SupplyItemServiceUtil.getItemsByListId(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			SupplyItemServiceUtil.deleteSupplyItem(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName78.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
 			SupplyItemServiceUtil.deleteItemsByListId(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
@@ -154,4 +168,6 @@ public class SupplyItemServiceClpInvoker {
 	private String[] _methodParameterTypes77;
 	private String _methodName78;
 	private String[] _methodParameterTypes78;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
 }

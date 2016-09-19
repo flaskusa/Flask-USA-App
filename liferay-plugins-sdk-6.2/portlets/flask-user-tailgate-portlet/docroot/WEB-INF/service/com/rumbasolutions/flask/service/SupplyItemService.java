@@ -69,6 +69,10 @@ public interface SupplyItemService extends BaseService, InvokableService {
 		java.lang.String supplyItemName, long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> addSupplyItems(
+		java.lang.String[] supplyItemNames, long supplyListId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	public com.rumbasolutions.flask.model.SupplyItem updateSupplyItem(
 		long supplyItemId, java.lang.String supplyItemName, long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext);

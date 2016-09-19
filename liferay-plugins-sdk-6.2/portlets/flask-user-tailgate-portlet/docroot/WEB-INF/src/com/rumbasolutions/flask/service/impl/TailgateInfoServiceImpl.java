@@ -201,7 +201,7 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 		}
 	public void deleteTailgateInfo(long tailgateId, ServiceContext serviceContext){
 		try{
-			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles) && TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId()==serviceContext.getUserId()){
+			if(FlaskTailgateUtil.isUserAdmin(serviceContext.getUserId(), adminRoles) || TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId()==serviceContext.getUserId()){
 				TailgateInfoLocalServiceUtil.deleteTailgateInfo(tailgateId);
 				TailgateSupplyItemServiceUtil.deleteItemsByTailgateId(tailgateId, serviceContext);
 				TailgateMessageBoardServiceUtil.deleteBoardsByTailgateId(tailgateId, serviceContext);
