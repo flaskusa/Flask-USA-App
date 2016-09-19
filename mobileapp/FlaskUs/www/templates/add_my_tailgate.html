@@ -13,7 +13,7 @@
                             <div class="item item-image">
                                 <img src="img/default-profilepic-copy.png" class="profilepicAvatar">
                             </div>
-                            <a class="item item-icon-left" href="">
+                            <a class="item text-center" href="">
                                 Tap to add Profile picture
                             </a>
                         </div>
@@ -27,7 +27,7 @@
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Event Name:</span>
-                            <input type="text" list="EventNameList" ng-change="LoadSessionData()" id="envtName" placeholder="Event Name" class="form-control" ng-model="addTailgateParams.eventName" required>
+                            <input type="text" list="EventNameList" ng-change="loadeventData()" id="envtName" placeholder="Event Name" class="form-control" ng-model="addTailgateParams.eventName" required>
                             <datalist id="EventNameList">
                                 <select>
                                     <option ng-repeat="data in eventDetails" data_id="{{data.eventId}}" value="{{data.eventName}}">{{data.eventName}}</option>
@@ -73,25 +73,25 @@
             <ion-content overflow-scroll="false" class="has-header">
                 <div  style="margin-top: 44px;">
                     <div style="width:100%;height:100%;" class="add_my_tailgate">
-                        <ui-gmap-google-map center='map.center' zoom='map.zoom' events="map.events" aria-label="Google map">
-                            <ui-gmap-marker ng-repeat="marker in markers" coords="marker.coords" options="marker.options" events="marker.events" icon="marker.icon" idkey="marker.id">
-                                <ui-gmap-window>
-                                    <div>{{marker.window.title}}</div>
-                                </ui-gmap-window>
+                        <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+                          <ui-gmap-window show="map.window.show" coords="map.window.model" options="map.window.options" closeClick="map.window.closeClick()" templateParameter="map.window">
+                          <div>Hello</div>
+                          </ui-gmap-window>
+                            <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" click="onClick">
                             </ui-gmap-marker>
                         </ui-gmap-google-map>
-                    </div>
                  </div>
+            </div>     
         </ion-content>
         </ion-tab>
-        <ion-tab title="Attendees" ng-if="enableTab.condition" >
+        <ion-tab title="Attendees" ng-show="enableTab.condition" >
             <ion-content overflow-scroll="false"  class="has-header">
-
                 <div class="container" style="margin-top: 44px;">
                     <div class="expandcollapse-item">
                         <div ng-click="active = !active" ng-class="{'expandcollapse-heading-collapsed': active, 'expandcollapse-heading-expanded': !active}">
                             <p>ADD GROUP</p>
-                            <span class="badge span_icon_down"><img src="img/flask_icons/circle_arrow_down.svg"></span>
+                            <span ng-show="!active" class="ion-chevron-up"></span>
+                            <span ng-show="active" class="ion-chevron-down"></span>
                         </div>
                         <div class="slideDown" ng-hide="active">
                             <div class="expand-collapse-content">
@@ -103,6 +103,7 @@
                                             <p class="dateCol">Created By : {{data.createdBy | uppercase}}</p>
                                             <span class="badge span_icon"><img src="img/flask_icons/add_new.svg" ng-click="getusersofGroup(data.groupId)"></span>
                                         </a>
+                                        <a class="item" ng-if="allGroups.length == 0"> You do not have any friends yet. Please search and add friends </a>
                                     </div>
                                 </div>
                             </div>
@@ -111,7 +112,8 @@
                     <div class="expandcollapse-item">
                         <div ng-click="active1 = !active1" ng-class="{'expandcollapse-heading-collapsed': active1, 'expandcollapse-heading-expanded': !active1}">
                             <p>ADD FRIENDS</p>
-                            <span class="badge span_icon_down" ng-class="{'show_collapsed_icon:active1', 'show_expanded_icon:!active1'}"><img src="img/flask_icons/circle_arrow_down.svg"></span>
+                            <span ng-show="!active1" class="ion-chevron-up"></span>
+                            <span ng-show="active1" class="ion-chevron-down"></span>
                         </div>
                         <div class="slideDown" ng-hide="active1">
                             <div class="expand-collapse-content">
@@ -120,9 +122,9 @@
                                         <img class="list-thumbnail listImages" src='img/default-profilepic-copy.png' ;">
                                         <h2 class="eventNameCol">{{ data.fullName | uppercase}}</h2>
                                         <p class="dateCol">{{ data.emailAddress}}</p>
-                                        <span class="badge span_icon"><img src="img/flask_icons/add_new.svg"></span>
+                                        <span class="badge span_icon"><img src="img/flask_icons/add_new.svg" ng-click="addTailgateMembers(data,$index)"></span>
                                     </a>
-                                    <a class="item" ng-if="myTailgaters.length == 0"> You do not have any friends yet. Please search and add friends </a>
+                                    <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. Please search and add friends </a>
                                 </div>
                             </div>
                         </div>
@@ -130,10 +132,10 @@
                 </div>
             </ion-content>
         </ion-tab>
-        <ion-tab title="Plan Now" ng-if="enableTab.condition">
+        <ion-tab title="Plan Now" ng-show="enableTab.condition">
             <!--FOURTH TAB-->
             <ion-content overflow-scroll="false" class="has-header" >
-                <div class="paynow" >
+                <div class="paynow" style="margin-top: 44px;">
                     <div class="tailgateInfo">
                         <div class="row">
                             <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
@@ -172,35 +174,3 @@
             </ion-content>
         </ion-tab>
 </ion-tabs>
-    <!--<script id="templates/modal.html" type="text/ng-template">
-        <ion-modal-view>
-            <ion-header-bar class="bar bar-header bar-positive black-header">
-                <h1 class="title">Invite Friend</h1>
-                <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
-            </ion-header-bar>
-            <div class="bar bar-subheader">
-                <div class="row">
-                    <div class="col col-90 col-center searchrow">
-                        <input type="text" placeholder="Search friend..." class="friendSearch" ng-model="searchContact.searchtext" />
-                    </div>
-                    <div class="col col-center searchrow">
-                        <button class="button button-icon button-clear ion-ios-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
-                    </div>
-                </div>
-            </div>
-            <ion-content class="has-subheader" overflow-scroll="false">
-                <ion-list>
-                    <ion-list>
-                        <ion-item ng-repeat="data in myFriends " class="item-avatar " item="data">
-                            <img src="img/default-profilepic.png">
-                            <h2>{{ data.fullName | uppercase}}</h2>
-                            <p>{{ data.emailAddress}}</p>
-                            <button type="submit" nav-clear class="button button-block button-positive invite_friend" ng-click="addTailgateMembers(data,$index)">
-                                Send Invite
-                            </button>
-                        </ion-item>
-                    </ion-list>
-                </ion-list>
-            </ion-content>
-        </ion-modal-view>
-    </script>-->
