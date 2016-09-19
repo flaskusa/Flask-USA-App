@@ -18,7 +18,8 @@
         deleteSupplyListById:deleteSupplyListById,
         updateSupplyList:updateSupplyList,
         updateSupplyItem:updateSupplyItem,
-        deleteSupplyItemById:deleteSupplyItemById
+        deleteSupplyItemById:deleteSupplyItemById,
+        addSupplyItems:addSupplyItems
 
     }
         this.selectedList={};
@@ -33,6 +34,7 @@
         var updateSupplyUrl="/flask-user-tailgate-portlet.supplylist/update-supply-list";
         var UpdateSupplyItemUrl="/flask-user-tailgate-portlet.supplyitem/update-supply-item";
         var deleteSupplyItemUrl="/flask-user-tailgate-portlet.supplyitem/delete-supply-item";
+        var addSupplyItems="/flask-user-tailgate-portlet.supplyitem/add-supply-items";
         function getMySupplyList() {
             return $http.get(url+getAllSupplyUrl,{params:{
             }})
@@ -137,6 +139,18 @@
                     //add errror handling
                 });
         }
-return services;updateSupplyItem
+        function addSupplyItems(supplyListId,supplyItemNames) {
+            return $http.get(url+addSupplyItems,{params:{
+                supplyItemNames: [supplyItemNames],
+                supplyListId: supplyListId
+            }})
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+return services;
 }
 })();

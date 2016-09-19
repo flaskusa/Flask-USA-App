@@ -10,12 +10,18 @@
                 <div>
                     <img src = "img/default-profilepic-copy.png"class="friendIcon">
                 </div>
-                <h3 class="f-nameText emailText"style="padding-top:2px" ng-bind="request.firstName+' '+request.lastName"></h3>
-                <div style="padding-left: 58px;padding-top: 2px;">
+                <h3 class="f-nameText emailText"style="padding-top:14px" ng-bind="request.firstName+' '+request.lastName"></h3>
+                <div class="badge supplyDeleteButton extra-right-supply">
+                    <span class="button-assertive   ion-android-cancel icon supplyDeleteIcon supplyEditIconPadding" ng-click="deleteSocialRelation(request.userId,$index)"></span>
+                </div>
+                <div class="badge supplyDeleteButton extra-right-supply"style=";margin-right: 51px">
+                    <span class="button-assertive   ion-android-checkbox supplyDeleteIcon supplyEditIconPadding"ng-click="addSocialRelation(request.userId,$index)"></span>
+                </div>
+              <!--  <div style="padding-left: 58px;padding-top: 2px;">
                 <button class=" ext-right friendRequestButtonStyle extra-top-request"ng-click="addSocialRelation(request.userId,$index)"><i class="emailText">Confirm</i> </button>
 
                 <button class=" ext-right friendRequestButtonStyle extra-top-request"ng-click="deleteSocialRelation(request.userId,$index)"><i class="emailText">Delete</i> </button>
-                </div>
+                </div>-->
                     <ion-option-button  class="icon ion-no-smoking"ng-if="featureToBock==true"></ion-option-button>
             </ion-item>
             <div class="item emailText"ng-if="requestedUserDetail.length==0">You don't have any new notification</div>

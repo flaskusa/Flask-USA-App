@@ -10,6 +10,7 @@
 
         $scope.userDataList=[];
         $scope.supplies=[];
+        $scope.supplyItemNames=[];
         if(SupplyService.addAsAdmin!=undefined){
             $scope.addAsAdmin=SupplyService.addAsAdmin;
         }else{
@@ -67,7 +68,10 @@
             $scope.addNewSupplies=false;
         };
         $scope.goTOList=function(selectedList){
-            if($scope.agreedToTermsOfUse==true && $scope.deleteSuplies==false &&  $scope.editSuply==false) {
+            if($scope.agreedToTermsOfUse==true && $scope.deleteSuplies==false &&  $scope.editSuply==false && selectedList.isSystem==true) {
+                SupplyService.selectedList=selectedList;
+                $state.go('app.suppliesList', {listName: selectedList.supplyListName})
+            }else if(selectedList.isSystem==false && $scope.editSuply==false){
                 SupplyService.selectedList=selectedList;
                 $state.go('app.suppliesList', {listName: selectedList.supplyListName})
             }
@@ -100,7 +104,6 @@
 
         $scope.cancelAdding=function(){
             $scope.addNewSupplies=false;
-            document.getElementById("ItemEditBox").blur();
             $scope.suppliesName="";
         }
         $scope.saveSupply=function(data){
@@ -132,7 +135,9 @@
                     if(response.supplyListId>0){
                         data.editItem = false;
                         data.supplyItemId=response.supplyItemId;
-                        setTimeout(setFocusOnItemBox, 50);
+                        if($scope.createdListItem.data[$scope.createdListItem.data.length-1].itemName=="") {
+                            setTimeout(setFocusOnItemBox, 50);
+                        }
                     }
                     else{
                         $flaskUtil.alert("failed to save Item");
@@ -219,6 +224,7 @@
         };
         $scope.copyList=function(list){
             var list=angular.copy(list);
+            $scope.supplyItemNames=[];
             list.isSystem=false;
             SupplyService.getItemByListId(list.supplyListId).then(function(response){
                 $scope.itemValue=response;
@@ -228,14 +234,16 @@
 
                     var failed=false;
                     angular.forEach($scope.itemValue,function(value,key){
-                        SupplyService.addSupplyItem(value.itemName,response1.supplyListId).then(function(response2){
-                            if(response2.supplyListId<0){
-                                failed=true;
-                            }
-                        });
+                        $scope.supplyItemNames.push(value.supplyItemName);
+
+                    });
+                    SupplyService.addSupplyItems(response1.supplyListId,$scope.supplyItemNames).then(function(response2){
+                        if(response2.supplyListId<0 || response2.supplyListId==undefined ){
+                            failed=true;
+                        }
                     });
                     if(failed==true){
-                        $flaskUtil.alert("failed to copy")
+                        $flaskUtil.alert("failed to copy");
                     }else{
                         $scope.supplies.push(list);
                     }
@@ -266,44 +274,5 @@
 
         }
     }
-   /* angular.module('flaskApp')
-
-        .directive('clickForOptions', ['$ionicGesture', function($ionicGesture) {
-            return {
-                restrict: 'A',
-                link: function (scope, element, attrs) {
-                    $ionicGesture.on('dragleft', function(e){
-
-                        // Grab the content
-                        var content = element[0].querySelector('.item-content');
-
-                        // Grab the buttons and their width
-                        var buttons = element[0].querySelector('.item-options');
-
-                        if (!buttons) {
-                            console.log('There are no option buttons');
-                            return;
-                        }
-                        var buttonsWidth = buttons.offsetWidth;
-
-                        ionic.requestAnimationFrame(function() {
-                            content.style[ionic.CSS.TRANSITION] = 'all ease-out .25s';
-
-                            if (!buttons.classList.contains('invisible')) {
-                                console.log('close');
-                                content.style[ionic.CSS.TRANSFORM] = '';
-                                setTimeout(function() {
-                                    buttons.classList.add('invisible');
-                                }, 2500);
-                            } else {
-                                buttons.classList.remove('invisible');
-                                content.style[ionic.CSS.TRANSFORM] = 'translate3d(-' + buttonsWidth + 'px, 0, 0)';
-                            }
-                        });
-
-                    }, element);
-                }
-            };
-        }]);*/
 
 })();

@@ -14,6 +14,9 @@
             $state.go('app.notifications');
 
         }
+        $scope.goToNavigator=function(){
+            $state.go("app.user_navigation_menu");
+        }
         $scope.goToMessages = function () {
             $state.go('app.messages');
         }

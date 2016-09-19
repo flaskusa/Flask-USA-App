@@ -16,11 +16,7 @@
       $scope.searchContact = {"searchtext" :""};
       $scope.messsage = {'messsageToSend':''};
         $scope.moreDataCanBeLoaded = true;
-        $ionicModal.fromTemplateUrl('templates/modal.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-        });
+
         $scope.myFriendTab=function(){
             $state.go("app.my_friends_tab.my_friends");
             FriendsService.mediatorUserId=0;
@@ -33,6 +29,11 @@
         }
       $scope.initialize = function() {
           $scope.getMyFriends($scope.searchContact.searchtext);
+          $ionicModal.fromTemplateUrl('templates/modal.html', {
+              scope: $scope
+          }).then(function (modal) {
+              $scope.modal = modal;
+          });
       }; 
 
       $scope.showInviteFriendPopup = function(){
@@ -135,8 +136,7 @@
         };
 
 
-      
-        $scope.initialize();
+
         $scope.groupMemberDetail=function(data){
             $state.go('app.my_friendDetail',{friendId:data.userId});
             FriendsService.data=data;
