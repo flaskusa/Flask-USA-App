@@ -10,8 +10,10 @@
                 <div>
                     <img src = "img/default-profilepic-copy.png"class="friendIcon">
                 </div>
+                <div class="col-75" style="text-align: center">
                 <h3 class="f-nameText emailText"style="padding-top:14px" ng-bind="request.firstName+' '+request.lastName"></h3>
-                <div class="badge supplyDeleteButton extra-right-supply">
+                </div>
+                    <div class="badge supplyDeleteButton extra-right-supply">
                     <span class="button-assertive   ion-android-cancel icon supplyDeleteIcon supplyEditIconPadding" ng-click="deleteSocialRelation(request.userId,$index)"></span>
                 </div>
                 <div class="badge supplyDeleteButton extra-right-supply"style=";margin-right: 51px">
