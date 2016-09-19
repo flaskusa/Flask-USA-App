@@ -79,7 +79,7 @@
         function currMarker(loc){
             var markerData = {};
             console.log(loc,$scope.map.markers[0].coords);
-            markerData.tailgate =newtailGateId;
+            markerData.tailgateId =newtailGateId;
             markerData.latitude=$scope.map.markers[0].coords.latitude;
             markerData.longitude=$scope.map.markers[0].coords.longitude;
             markerData.name=loc.name;
