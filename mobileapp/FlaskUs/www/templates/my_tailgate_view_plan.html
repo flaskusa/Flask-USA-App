@@ -28,46 +28,21 @@
             </div>
             <div class="list">
                 <div class="item item-divider plan_now">
-                    SUPPLIES LIST
-                </div>
-            </div>
-            <label class="item item-input item-select pan_now_list">
-                <div class="input-label">
-                    &nbsp;
-                </div>
-                <select class="plan_now" ng-model="selected1" ng-options="data.supplyListName for data in tailgateSupplyList" ng-change="getSupplyItem(selected1)"></select>
-            </label>
-            <a class="item" ng-if="tailgateSupplyList.length == 0"> You do not any supply list... </a>
-
-            <div class="list">
-                <div class="item item-divider plan_now">
-                    WHAT WE BRING
+                    WHAT TO BRING
                 </div>
             </div>
 
             <label class="list">
-                <ion-checkbox class="item item-icon-left item-checkbox-right list-item" data-id="data.supplyItemId" ng-model="selected_checkbox" ng-repeat="data in supplyItemList" ng-click="addItemsInArray(selected_checkbox,$index,data);">
-                    {{data.supplyItemName}}
-                </ion-checkbox>
+                <ion-list class="item item-icon-left item-checkbox-right list-item" data-id="data.supplyItemId" ng-model="selected_checkbox" ng-repeat="data in allMyTailgateItems">
+                    <h2 class="items_list">{{data.supplyListItemName}}</h2>
+                    <div class="plan_now_div">
+                        <select class="plan_now_user" ng-model="user_selected" ng-options="userdata.fullName for userdata in myFriends" ng-change="addSupplyItems(data,user_selected)" placeholder="Select User">
+                            <option selected>Select Tailgator</option>
+                        </select>
+                    </div>
+                </ion-list>
             </label>
-            <a class="item" ng-if="supplyItemList.length == 0"> You do not any supply items to add... </a>
-                <div class="item item-divider plan_now">
-                    SELECT USER NAME
-                </div>
-            </div>
-
-        <label class="item item-input item-select pan_now_user">
-            <div class="input-label">
-                &nbsp;
-            </div>
-            <select class="plan_now" ng-model="user_selected" ng-options="data.fullName for data in myFriends" ng-change="getUserId(user_selected)" placeholder="Select User"></select>
-        </label>
-        <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. Please search and add friends </a>
-            <div class="row">
-                <button type="submit" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems();">
-                    Assign Supply List
-                </button>
-            </div>
+            <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. Please search and add friends </a>
     </ion-content>
 </ion-view>
 

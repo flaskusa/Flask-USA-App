@@ -84,7 +84,7 @@
             </div>     
         </ion-content>
         </ion-tab>
-        <ion-tab title="Attendees" ng-if="enableTab.condition" >
+        <ion-tab title="Attendees">
             <ion-content overflow-scroll="false"  class="has-header">
                 <div class="container" style="margin-top: 44px;">
                     <div class="expandcollapse-item">
@@ -132,7 +132,7 @@
                 </div>
             </ion-content>
         </ion-tab>
-        <ion-tab title="Plan Now" ng-if="enableTab.condition">
+        <ion-tab title="Plan Now">
             <!--FOURTH TAB-->
             <ion-content overflow-scroll="false" class="has-header" >
                 <div class="paynow" style="margin-top: 44px;">
@@ -145,30 +145,26 @@
                             <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
                         </div>
                         <div class="row">
-                            <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
-                        </div>
-                        <div class="row">
                             <a href="#" class="btnPay">Pay Now</a>
                         </div>
                     </div>
                     <div class="list">
-                        <div class="item item-divider plan_now">
-                            SUPPLIES LIST
+                        <div class="list">
+                            <div class="item item-divider plan_now">
+                                SUPPLIES LIST
+                            </div>
                         </div>
-                    </div>
-                    <div class="list">
-                        <ion-checkbox class="item item-icon-left item-checkbox-right">
-                            TICKETS
-                        </ion-checkbox>
-                        <ion-checkbox class="item item-icon-left item-checkbox-right">
-                            PARKING PASS
-                        </ion-checkbox>
-                        <ion-checkbox class="item item-icon-left item-checkbox-right">
-                            CASH/WALLET
-                        </ion-checkbox>
-                        <ion-checkbox class="item item-icon-left item-checkbox-right">
-                            SWEATSHIRT/COAT
-                        </ion-checkbox>
+                        <label class="item item-input item-select pan_now_list">
+                            <div class="input-label">
+                                &nbsp;
+                            </div>
+                            <select class="plan_now" ng-model="selected1" ng-options="data.supplyListName for data in tailgateSupplyList" ng-change="getSupplyItem(selected1)"></select>
+                        </label>
+                        <a class="item" ng-if="tailgateSupplyList.length == 0"> You do not any supply list... </a>
+                    <div class="row">
+                        <button type="submit" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems();">
+                            Add Supply List
+                        </button>
                     </div>
                 </div>
             </ion-content>
