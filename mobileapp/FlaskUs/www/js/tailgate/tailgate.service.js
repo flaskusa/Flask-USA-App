@@ -39,6 +39,9 @@
         /*Get My Tailgate Service*/
         //var getAllTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
         var addTailgateSupplyItemsURL = "flask-user-tailgate-portlet.tailgatesupplyitem/add-tailgate-supply-items";
+        /*Add Supply List*/
+        var addSupplyListURL = "flask-user-tailgate-portlet.supplylist/add-supply-list";
+        var getItemsByTailgateIdURL = "flask-user-tailgate-portlet.tailgatesupplyitem/get-items-by-tailgate-id";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -66,7 +69,8 @@
             getGroupList:getGroupList,
             getGroupUsers: getGroupUsers,
             addTailgateSupplyItems: addTailgateSupplyItems,
-            getGroupbyId: getGroupbyId
+            getGroupbyId: getGroupbyId,
+            getItemsByTailgateId: getItemsByTailgateId
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -382,6 +386,21 @@
             });
         }
 
+        //get Items By TailgateId
+        function getItemsByTailgateId(tailgateId) {
+            return $http.get(baseURL + getItemsByTailgateIdURL, {
+                params: {
+                    'tailgateId': tailgateId
+                }
+            })
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+
         function getItemsbylistid(supplyListId) {
             return $http.get(baseURL + getItemsbylistidURL, {
                 params: {
@@ -412,6 +431,7 @@
             });
         }
 
+        
         return tailgateServices;
     }
 })();

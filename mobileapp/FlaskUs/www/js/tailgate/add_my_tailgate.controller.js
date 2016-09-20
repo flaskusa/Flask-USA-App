@@ -28,7 +28,26 @@
         $scope.longitude = '-83.0456';
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
+        $scope.tailgateSupplyList = [], [];
+        var supplyListstId;
+        var supplyItemName;
+        $scope.items = [];
+        var userResponse;
+        var UserId;
+        var itemArray;
 
+        getMySupplyList();
+
+        
+
+        $scope.goBack = function () {
+            $state.go("app.my_tailgate");
+        }
+
+        $scope.user = {
+            supplyItemName: ['user']
+        };
+        
         $scope.addTailgateParams = {
             tailgateName: '',
             tailgateDescription: '',
@@ -202,6 +221,8 @@
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
                 console.log(respData.data);
                 $cookies.put('newtailgateId', respData.data.tailgateId);
+                $scope.newtailgatesId = respData.data.tailgateId;
+                console.log($scope.newtailgatesId);
                 $scope.enableTab = {
                     condition: true
                 };
@@ -320,8 +341,8 @@
         }
         //get all groups either created by user or is a member of particular group.
         function getAllGroups() {            
-            var userResponse = $cookies.getObject('CurrentUser');
-            var UserId = userResponse.data.userId;
+             userResponse = $cookies.getObject('CurrentUser');
+             UserId = userResponse.data.userId;
             console.log(UserId);
             TailgateService.getGroupbyId(UserId).then(function (respData) {
                 $scope.allGroups = respData;
@@ -330,7 +351,6 @@
         //add user info to current tailgate
         function addUsertoTailgate(userparams) {
             TailgateService.addcurrentUser(userparams).then(function (respData) {
-                console.log(respData);
             });
         }
         $scope.getUseData = [];
@@ -354,5 +374,52 @@
                 $scope.groupUserDetails = respData;
             });
         }
+
+        //list of supplies
+        function getMySupplyList(selected1) {
+            TailgateService.getMySupplyLists().then(function (respData) {
+                $scope.allSupplyList = respData.data;
+                for (var i = 0; i < $scope.allSupplyList.length; i++) {
+                    $scope.tailgateSupplyList.push({ supplyListName: $scope.allSupplyList[i].supplyListName, supplyListsId: $scope.allSupplyList[i].supplyListId });
+                }
+            });
+        }
+
+        //getting supply items
+        $scope.getSupplyItem = function (selected) {
+            supplyListstId = selected.supplyListsId;
+            TailgateService.getItemsbylistid(supplyListstId).then(function (respData) {
+                $scope.supplyItemList = respData.data;
+            });
+
+        }
+
+        //Get tailgators
+        function getAllFriends() {
+            TailgateService.getUserFrends().then(function (respData) {
+                $scope.myFriends = respData;
+            })
+        }
+
+        //Get tailgates of particular user
+        function getAllMyTailgates(userId) {
+            TailgateService.getMyTailgates(userId).then(function (respData) {
+                $scope.allMyTailgate = respData.data;
+            });
+        }
+
+        //Adding supply items to tailgate
+        $scope.addSupplyItems = function () {
+            
+            for (var i = 0; i < $scope.supplyItemList.length; i++) {
+                $scope.items.push($scope.supplyItemList[i].supplyItemName)
+            }
+            itemArray = $scope.items.toString();
+            TailgateService.addTailgateSupplyItems(itemArray, $scope.newtailgatesId, UserId).then(function (respData) {
+                $scope.alltailgateSupplyItem = respData.data;
+            });
+          
+        }
+
     }
 })();
