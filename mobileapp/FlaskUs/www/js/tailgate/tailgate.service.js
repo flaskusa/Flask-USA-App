@@ -72,8 +72,7 @@
             addTailgateSupplyItems: addTailgateSupplyItems,
             getGroupbyId: getGroupbyId,
             getItemsByTailgateId: getItemsByTailgateId,
-            updateTailgateSupplyItem: updateTailgateSupplyItem,
-            getUserById: getUserById
+            updateTailgateSupplyItem: updateTailgateSupplyItem
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -451,21 +450,6 @@
             });
         }
 
-        function getUserById(userId) {
-            return $http.get(baseURL + getUserByIdURL, {
-                params: {
-                    'userId': userId
-                }
-            })
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling 
-            });
-        }
-
-        
         return tailgateServices;
     }
 })();
