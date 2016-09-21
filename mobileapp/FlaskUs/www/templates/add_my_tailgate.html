@@ -11,9 +11,9 @@
                     <div class="list add_my_tailgate">
                         <div class="list card">
                             <div class="item item-image">
-                                <img src="img/default-profilepic-copy.png" class="profilepicAvatar">
+                                <img src="img/default-profilepic-copy.png" id="myImage" class="profilepicAvatar">
                             </div>
-                            <a class="item text-center" href="">
+                            <a class="item text-center" ng-click="show();">
                                 Tap to add Profile picture
                             </a>
                         </div>
@@ -48,23 +48,23 @@
                             <input type="text" placeholder="End Time" class="form-control" ng-model="selectedtime2" name="EndTime" required ng-click="openTimePicker2();">
                             <i class="icon ion-ios-clock" ng-click="openTimePicker2();"></i>
                         </div>
-                        <div class="item item-input item-floating-label">
+                        <!--<div class="item item-input item-floating-label">
                             <span class="input-label">Venmo Account:</span>
                             <input type="email" placeholder="Venmo Account" class="form-control" ng-model="addTailgateParams.venmoAccountId" name="VenmoAccount" required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Amount</span>
                             <input type="Number" placeholder="Amount" name="Amount" ng-model="addTailgateParams.amountToPay">
-                        </div>
+                        </div>-->
                    </div>
-                    <div class="padding" align="center">
+                    <!--<div class="padding" align="center">
                         <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="addmyTailgate(addTailgateParams);">
                             Save
                         </button>
                         <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/my_tailgate">
                             Cancel
                         </a>
-                    </div>
+                    </div>-->
                     </div>
             </ion-content>
         </ion-tab>
@@ -137,15 +137,26 @@
             <ion-content overflow-scroll="false" class="has-header" >
                 <div class="paynow" style="margin-top: 44px;">
                     <div class="tailgateInfo">
-                        <div class="row">
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Venmo Account:</span>
+                            <input type="email" placeholder="Venmo Account" class="form-control" ng-model="addTailgateParams.venmoAccountId" name="VenmoAccount" required>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Amount</span>
+                            <input type="Number" placeholder="Amount" name="Amount" ng-model="addTailgateParams.amountToPay">
+                        </div>
+                        <!--<div class="row">
                             <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
                             <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
+
                         </div>
                         <div class="row">
                             <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
-                        </div>
+                        </div>-->
                         <div class="row">
-                            <a href="#" class="btnPay">Pay Now</a>
+                            <button nav-clear class="button button-block button-positive pay_now_button" ng-click="addmyTailgate(addTailgateParams);">
+                                Pay Now
+                            </button>
                         </div>
                     </div>
                     <div class="list">
