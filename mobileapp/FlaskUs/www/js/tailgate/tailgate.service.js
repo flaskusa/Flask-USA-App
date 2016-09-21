@@ -42,6 +42,7 @@
         /*Add Supply List*/
         var addSupplyListURL = "flask-user-tailgate-portlet.supplylist/add-supply-list";
         var getItemsByTailgateIdURL = "flask-user-tailgate-portlet.tailgatesupplyitem/get-items-by-tailgate-id";
+        var updateTailgateSupplyItemURL = "flask-user-tailgate-portlet.tailgatesupplyitem/update-tailgate-supply-item";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -70,7 +71,9 @@
             getGroupUsers: getGroupUsers,
             addTailgateSupplyItems: addTailgateSupplyItems,
             getGroupbyId: getGroupbyId,
-            getItemsByTailgateId: getItemsByTailgateId
+            getItemsByTailgateId: getItemsByTailgateId,
+            updateTailgateSupplyItem: updateTailgateSupplyItem,
+            getUserById: getUserById
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -421,6 +424,37 @@
                     'supplyListItemNames': supplyListItemNames,
                     'tailgateId': tailgateId,
                     'itemAssignedUserId': itemAssignedUserId
+                }
+            })
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+
+        function updateTailgateSupplyItem(tailgateSupplyItemId,supplyListItemName, tailgateId, itemAssignedUserId) {
+            return $http.get(baseURL + updateTailgateSupplyItemURL, {
+                params: {
+                    'tailgateSupplyItemId':tailgateSupplyItemId,
+                    'supplyListItemName': supplyListItemName,
+                    'tailgateId': tailgateId,
+                    'itemAssignedUserId': itemAssignedUserId
+                }
+            })
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+
+        function getUserById(userId) {
+            return $http.get(baseURL + getUserByIdURL, {
+                params: {
+                    'userId': userId
                 }
             })
             .then(function success(response) {
