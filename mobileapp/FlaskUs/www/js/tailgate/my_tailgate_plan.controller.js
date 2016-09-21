@@ -70,6 +70,15 @@
                 $scope.alltailgateSupplyItem = respData.data;
             });
         }
+        //venmo Account pay now
+        $scope.fnPayNow = function() {
+            var tailgateId = $scope.myTailgate.tailgateId;
+            var tailgateName = $scope.myTailgate.tailgateName;
+            var tailgateAccount = $scope.myTailgate.venmoAccountId;
+            var amountToPay = $scope.myTailgate.amountToPay;
+            var paymentUrl = "https://venmo.com/?txn=pay&amount=" + amountToPay + "&note= for tailgate " + tailgateName +
+            "&recipients=" + tailgateAccount;
+            window.open(paymentUrl, '_blank');
+        }
     }
 })();
-

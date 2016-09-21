@@ -7,10 +7,11 @@
 
     /* @ngInject */
     function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies) {
+        $cookies.remove("currtailGateMakers");
         $scope.myTailgaters = [];
         $scope.allMessages = [];
         $scope.userFirstName = [];
-        $scope.messageUser = [],[];
+        $scope.messageUser = [];
         var userResponse = $cookies.getObject('CurrentUser');
         var tailGateId = $stateParams.tailgateId;
         var userId = [];
@@ -25,7 +26,6 @@
 
         function getMyTailgate() {
             TailgateService.getTailgate(tailGateId).then(function (respData) {
-
                 $scope.myTailgate = respData.data;
                 getlocationName($scope.myTailgate.eventId);
                 getMyTailgateImages(tailGateId);
@@ -35,19 +35,16 @@
         }
         function getlocationName(evntId) {
             TailgateService.getEvent(evntId).then(function (respData) {
-
                 $scope.myeventLocation = respData.data;
             });
         }
         function getMyTailgateImages(tailGateId) {
             TailgateService.getMyTailgateImages(tailGateId).then(function (respData) {
-
                 $scope.myTailgateImages = respData.data;
             });
         }
         function getTailgaters(tailGateId) {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
-
                 $scope.myTailgaters = respData.data;
             });
         }
@@ -116,7 +113,6 @@
                 $state.go("app.add_my_tailgate");
                 $cookies.putObject("editUserTailgate", addTailgateParams);
             });
-
         }
 
     }

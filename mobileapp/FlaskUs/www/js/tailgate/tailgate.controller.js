@@ -10,6 +10,8 @@
         var self = this; 
         $scope.myTailgate = [];
         $cookies.remove("editUserTailgate");
+        $cookies.remove("newtailgateId");
+        $cookies.remove("newtailgatedata");
         var userResponse = $cookies.getObject('CurrentUser');
         var UserId = userResponse.data.userId;
         getAlltailgates();

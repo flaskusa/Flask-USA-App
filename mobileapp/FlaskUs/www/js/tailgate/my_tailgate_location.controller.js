@@ -13,14 +13,20 @@
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
-
         $scope.latitude = 43.4651;
-        $scope.longitude =-80.5223;
-                if(!$scope.taligateMarkers){
-                  callMap($scope.latitude,$scope.longitude);
-                }else{
-                  callMap($scope.taligateMarkers.latitude,$scope.taligateMarkers.longitude);
-                }
+        $scope.longitude = -80.5223;
+
+        if ($scope.taligateMarkers==undefined || $scope.taligateMarkers) {
+            $scope.map {
+                    center: {
+                        latitude: $scope.latitude,
+                        longitude: $scope.longitude
+                    },
+                    zoom: 19
+                } // when no markers are present
+        }else{
+            callMap($scope.taligateMarkers.latitude, $scope.taligateMarkers.longitude); //taking markers from cookies
+        }
                 
                 //calling map on load and on events change
                 function callMap( currlatitude,currlongitude){
@@ -32,10 +38,9 @@
                             },
                             zoom: 19,
                             markers: [{  
-                  coords: { latitude: $scope.taligateMarkers.latitude, longitude: $scope.taligateMarkers.longitude }, 
-                          id: 4 ,
-                          window: { title: $scope.taligateMarkers.name}
-                        }]
+                                coords: { latitude: currlatitude, longitude: currlongitude },
+                                id: 0 
+                            }]
                         }
                     });
                 }

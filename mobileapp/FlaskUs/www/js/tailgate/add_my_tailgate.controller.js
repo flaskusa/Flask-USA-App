@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker','$ionicPopup'];
+    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera'];
 
     / @ngInject /
-    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker,$ionicPopup) {
+    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera) {
         //for adding tailgate
         var self = this;
         var newtailGateId;
@@ -36,9 +36,7 @@
         var UserId;
         var itemArray;
 
-        getMySupplyList();
-
-        
+        getMySupplyList();        
 
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
@@ -121,29 +119,46 @@
               +'      <span class="input-label">Description</span>'
                +'        <input type="text" placeholder="Description" ng-model="loc.description">'
                +'       </label>                 '
-                +'    </div>'
+                + '    </div>'
+                    + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="currMarker($scope.loc);">'
+                    + 'Save'
+                    + '</button>'
+                    + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="clearMArkersOnMap();">'
+                    + 'Remove'
+                    + '</button>'
                    +' </div>'
                 +'</form>';
 
-            $ionicPopup.show({
+            var locationPopup=$ionicPopup.show({
               template: customTemplate,
               title: 'Enter Location Details',
               scope: $scope,
-              buttons: [ {
-                text: '<b>Save</b>',
-                type: 'button-positive',
-                onTap: function(e) {
-                  currMarker($scope.loc);
-                }
-              },{
-                text: '<b>Remove</b>',
-                //type: 'button-positive',
-                onTap: function(e) {
-                    $scope.map.markers.pop();
-                }
+              buttons: [
+              //{
+              //  text: '<b>Save</b>',
+              //  type: 'button-positive',
+              //  onTap: function(e) {
+                  
+             //   }
+            //  },{
+            //    text: '<b>Remove</b>',
+            //    //type: 'button-positive',
+            //    onTap: function(e) {
+                    
+           //     }
+           //   },
+              {
+                  text: '<b>Cancel</b>',
+                  //type: 'button-positive',
+                  onTap: function (e) {
+                      locationPopup.close();
+                  }
               }]
             });
         };
+        $scope.clearMArkersOnMap = function () {
+            $scope.map.markers.pop();
+        }
         getallEventnames();
        
         // invoke on type search box
@@ -211,6 +226,70 @@
             $scope.selectedtime1 = $filter('date')(tailgateDetails.startTime, 'hh:mm a');
             $scope.selectedtime2 = $filter('date')(tailgateDetails.endTime, 'hh:mm a');
         };
+        //show actin sheet on picture click
+        $scope.show = function () {
+            // Show the action sheet
+            $scope.loc = {};
+            var customTemplate =
+              '<div class="list">'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="camera();">'
+                + 'Camera'
+                + '</button>'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="gallery();">'
+                + 'Gallery'
+                + '</button>'
+                + '</div>'
+            + '</div>';
+            var cameraPopup =$ionicPopup.show({
+                template: customTemplate,
+                title: 'Choose the Profile Picture from:-',
+                scope: $scope,
+                buttons: [{
+                    text: '<b>Cancel</b>',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        cameraPopup.close();
+                    }
+                }]
+            });
+        };
+        //camera plugin
+        $scope.camera = function () {
+            var options = {
+                quality: 50,
+                destinationType: Camera.DestinationType.DATA_URL,
+                sourceType: Camera.PictureSourceType.CAMERA,
+                allowEdit: true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 100,
+                targetHeight: 100,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false,
+                correctOrientation: true
+            };
+
+            $cordovaCamera.getPicture(options).then(function (imageData) {
+                var image = document.getElementById('myImage');
+                image.src = "data:image/jpeg;base64," + imageData;
+            }, function (err) {
+                // error
+            });
+        }
+        // for accessing gallery on mobile
+        $scope.gallery = function () {
+            var options = {
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.CAMERA,
+            };
+
+            $cordovaCamera.getPicture(options).then(function(imageURI) {
+                var image = document.getElementById('myImage');
+                image.src = imageURI;
+            }, function(err) {
+                // error
+            });
+
+        }
         //add new tailgate
         $scope.addmyTailgate = function (tailgatedata) {
             var startTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime1); // Your timezone!
@@ -221,6 +300,7 @@
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
                 console.log(respData.data);
                 $cookies.put('newtailgateId', respData.data.tailgateId);
+                $cookies.putObject('newtailgatedata', respData.data);
                 $scope.newtailgatesId = respData.data.tailgateId;
                 console.log($scope.newtailgatesId);
                 $scope.enableTab = {
@@ -229,6 +309,7 @@
                 newtailGateId = $cookies.get('newtailgateId');
                 getTailgaters(newtailGateId);
             });
+            fnPayNow();
         }
         // get selected venue details
         $scope.getvenuefromSelect = function (tailgatedata) {
@@ -419,6 +500,17 @@
                 $scope.alltailgateSupplyItem = respData.data;
             });
           
+        }
+        //venmo Account pay now
+        function fnPayNow () {
+            var tailgateId = newtailGateId;
+            $scope.newdata = $cookies.getObject("newtailgatedata");
+            var tailgateName = $scope.newdata.tailgateName;
+            var tailgateAccount = $scope.newdata.venmoAccountId;
+            var amountToPay = $scope.newdata.amountToPay;
+            var paymentUrl = "https://venmo.com/?txn=pay&amount=" + amountToPay + "&note= for tailgate " + tailgateName +
+            "&recipients=" + tailgateAccount;
+            window.open(paymentUrl, '_blank');
         }
 
     }
