@@ -1097,6 +1097,7 @@ a.tab-item {
 .tailgateDescFont{
     font-weight: bold;
     color: #f89735;
+    padding-right: 4px;
 }
 
 .button:hover {
@@ -1128,6 +1129,12 @@ button.button.button-block.button-positive.invite_friend{
     text-align:center;
     font-weight:bold;
     margin-top:0px;
+}
+
+h2.tailgater_name{
+    text-align: center;
+    margin-top: 4%;
+    font-weight: bold;
 }
 
 @media screen and (max-width: 321px) {
@@ -2013,8 +2020,8 @@ animation:*/
 
 /*css for star icon*/
 div.star_div_icon{
-    margin-top: -22%;
-    margin-left: 107%;
+    margin-top: -56px;
+    margin-left: 104%;
 }
 
 
