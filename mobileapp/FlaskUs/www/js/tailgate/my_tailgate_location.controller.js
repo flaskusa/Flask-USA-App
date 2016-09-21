@@ -17,7 +17,7 @@
         $scope.longitude = -80.5223;
 
         if ($scope.taligateMarkers==undefined || $scope.taligateMarkers) {
-            $scope.map {
+            $scope.map ={
                     center: {
                         latitude: $scope.latitude,
                         longitude: $scope.longitude
