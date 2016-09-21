@@ -36,11 +36,16 @@
                 <ion-list class="item item-icon-left item-checkbox-right list-item" data-id="data.supplyItemId" ng-model="selected_checkbox" ng-repeat="data in allMyTailgateItems">
                     <h2 class="items_list">{{data.supplyListItemName}}</h2>
                     <div class="plan_now_div">
-                        <select class="plan_now_user" ng-model="user_selected" ng-options="userdata.fullName for userdata in myFriends" ng-change="addSupplyItems(data,user_selected)" placeholder="Select User">
+                        <select class="plan_now_user" ng-model="user_selected" ng-options="userdata.fullName for userdata in myFriends" ng-change="updateSupplyItems(data,user_selected)" placeholder="Select User">
                             <option selected>Select Tailgator</option>
                         </select>
                     </div>
                 </ion-list>
+                <div>
+                    <h2 ng-repeat="data in userInfo">
+                        {{data.fname}}{{data.lname}}
+                    </h2>
+                </div>
             </label>
             <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. Please search and add friends </a>
     </ion-content>
