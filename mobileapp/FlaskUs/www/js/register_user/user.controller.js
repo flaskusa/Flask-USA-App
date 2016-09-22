@@ -2,12 +2,17 @@
     'use strict';
     angular.module('flaskApp')
         .controller('user_registrationCtrl', user_registrationCtrl);
-    user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter'];
+    user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies'];
 
     /* @ngInject */
-    function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter) {
+    function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies) {
         var gender = true;
 
+        var usercookie = $cookies.getObject('CurrentUser');
+        console.log(usercookie.data.userId);
+        var userid = usercookie.data.userId;
+
+        getUser();
 
         $scope.data1 = [
           {
@@ -110,7 +115,34 @@
             });
         }
 
-        
+        function getUser(userId) {
+            UserService.getUserById(userid).then(function (respData) {
+                $scope.userInfo = respData;
+                console.log($scope.userInfo);
+                $scope.user = {
+                    firstName: $scope.userInfo.firstName,
+                    lastName: $scope.userInfo.lastName,
+                    screenName: $scope.userInfo.screenName,
+                    Email: $scope.userInfo.email,
+                    password1: "",
+                    password2: "",
+                    DOB: $filter('date')($scope.userInfo.DOB, 'MM-dd-yyyy'),
+                    isMale: gender,
+                    areaCode: $scope.userInfo.areaCode,
+                    mobileNumber: $scope.userInfo.mobileNumber,
+                    streetName: $scope.userInfo.streetName,
+                    aptNo: $scope.userInfo.aptNo,
+                    city: $scope.userInfo.city
+                }
+            });
+        }
+
+        $scope.updateUserInfo = function(){
+            UserService.updateUser().then(function (respData) {
+                $scope.userInfo = respData.data;
+            });
+        }
+      
         $scope.openDatePickerOne = function (val) {
             var ipObj1 = {
                 callback: function (val) {  //Mandatory
