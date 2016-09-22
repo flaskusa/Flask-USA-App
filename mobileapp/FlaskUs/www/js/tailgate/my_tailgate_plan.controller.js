@@ -8,20 +8,17 @@
     /* @ngInject */
     function mytailgatePlanCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicModal) {
         $scope.myTailgaters = [];
-        $scope.tailgateSupplyList = [], [];
-        $scope.tailgateSupplyItemList = [];
-        $scope.supplyListId = [];
-        $scope.allMyTailgates = [];
-        var supplyListstId;
         var supplyItemName;
-        $scope.passItems = [];
-        $scope.items = [];
-        $scope.userInfo = [],[];
+        $scope.itemUser = [], [];
+        $scope.tailgateItems = [];
+        $scope.myTailgateMember = [];
 
         var tailGateId = $cookies.get('currtailGateId');
         getMyTailgate();
         getAllMyTailgates();
         getAllFriends();
+        getTailgaters();
+        displayUserName();
         getItems();
 
         var itemArray;
@@ -34,14 +31,17 @@
             supplyItemName: ['user']
         };
 
+        function getTailgaters() {
+            TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
+                $scope.myTailgaters = respData.data;
+                getAllFriends();
+            });
+        }
+
         function getMyTailgate() {
             TailgateService.getTailgate(tailGateId).then(function (respData) {
                 $scope.myTailgate = respData.data;
             });
-        }
-
-        $scope.addItemsInArray = function (selected_checkbox,id,data) {
-            $scope.passItems.push(data.supplyItemName);
         }
 
         function getAllFriends() {
@@ -70,6 +70,26 @@
                 $scope.alltailgateSupplyItem = respData.data;
             });
         }
+
+        function displayUserName() {
+            TailgateService.getItemsByTailgateId(tailGateId).then(function (respData) {
+                $scope.tailgateItems = respData.data;
+            });
+
+            TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
+                $scope.myTailgateMember = respData.data;
+                for (var j = 0; j < $scope.tailgateItems.length;j++){
+                    for (var i = 0; i < $scope.myTailgateMember.length; i++) {
+                        if ($scope.myTailgateMember[i].userId == $scope.tailgateItems[j].itemAssignedUserId) {
+                            $scope.itemUser.push({ itemName: $scope.tailgateItems[j].supplyListItemName, user: $scope.myTailgateMember[i].userName });
+                        }
+                    }   
+                }
+            });
+            
+            console.log($scope.itemUser);
+        }
+
         //venmo Account pay now
         $scope.fnPayNow = function() {
             var tailgateId = $scope.myTailgate.tailgateId;

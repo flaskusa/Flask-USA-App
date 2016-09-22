@@ -35,6 +35,7 @@
         var userResponse;
         var UserId;
         var itemArray;
+        $scope.supplyItemList = [];
 
         getMySupplyList();        
 
