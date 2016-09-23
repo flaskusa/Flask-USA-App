@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady','$ionicSlideBoxDelegate'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady,$ionicSlideBoxDelegate) {
         /* jshint validthis: true */
         var self = this;
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15, control: {} };
@@ -532,6 +532,7 @@
         $scope.setMarkers = function () {
             if (!$scope.isMapMarkersSet) {
                 var tempObject = {};
+                $scope.flaskUsDetails=[];
                 angular.forEach($scope.eventDetails, function (value, index) {
                     tempObject = {};
                     value = angular.fromJson(value);
@@ -550,7 +551,7 @@
                         } else if ("Traffic" == tempObject.infoTypeCategoryName) {
                             $scope.trafficDetails = tempObject;
                         } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
-                            $scope.flaskUsDetails = tempObject;
+                            $scope.flaskUsDetails.push(tempObject);
                         }
                         else if ("Nightlife" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject);
@@ -568,6 +569,13 @@
                 $scope.isMapMarkersSet = true;
             }
         };
+        $scope.slidePrevious1 = function (slide) {
+            $ionicSlideBoxDelegate.$getByHandle(slide).previous();
+        }
+
+        $scope.slideNext1 = function (slide) {
+            $ionicSlideBoxDelegate.$getByHandle(slide).next();
+        }
 
         $scope.selectTab = function (index) {
             $scope.closeOtherInfoWindows();
@@ -625,6 +633,8 @@
                 };
             });
     });
+
+
 
     /* =========== This is the service which uses the $scope.map.control functions ============== */
 

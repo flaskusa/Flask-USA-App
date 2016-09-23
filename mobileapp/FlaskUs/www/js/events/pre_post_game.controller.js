@@ -3,10 +3,10 @@
     angular.module('flaskApp')
             .controller('prePostGameCtrl', prePostGameCtrl);
 
-    prePostGameCtrl.$inject = ['$scope', '$stateParams', '$state','EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate'];
+    prePostGameCtrl.$inject = ['$scope', '$stateParams', '$state','EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate','$cookies'];
 
     /* @ngInject */
-    function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate) {
+    function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate,$cookies) {
         /* jshint validthis: true */
         var self = this;
         $scope.eventDetails = {};
@@ -23,6 +23,10 @@
         var PRE_EVENT = "Pre-Event";
         var AT_EVENT = "During-Event";
         var POST_EVENT = "Post-Event";
+        var userDetail=$cookies.getObject('CurrentUser');
+        if(userDetail!=undefined) {
+            var agreedToTermsOfUse = userDetail.data.agreedToTermsOfUse;
+        }
         
         getEventVenueDatail();
         getCurrentEvent();
@@ -39,12 +43,21 @@
            if (pre == "Tickets") {
                $state.go("app.tickets", { venueName: $scope.currVenueName, eventDate: $scope.currEventDate, eventName: $scope.currEventName, infoType: PRE_EVENT, infoTypeCategory: pre });
            }
+           else if(pre=="Game Day Needs"){
+               $state.go("app.suppliesList",{listName:"Game Day Needs",supplyListId:84429});
+           }
            else {
                $state.go("app.event_map_view", { eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: pre });
            }
         }
         $scope.atEvent = function(during){
-            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: AT_EVENT, infoTypeCategory: during });
+            if(during=="Add Content"){
+                $state.go("app.manage_event_content", {eventDetails: $scope.eventDetails, infoType: AT_EVENT, infoTypeCategory: during,currEventName:$scope.currEventName ,currEventId:$scope.currEventId});
+            }
+            else{
+             $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: AT_EVENT, infoTypeCategory: during });
+
+            }
         }
         $scope.postEvent = function(post){
             $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: POST_EVENT, infoTypeCategory: post });
@@ -82,11 +95,14 @@
                 if ($scope.Post_Game.length ==0) {
                     $scope.Post_Game.push("No_Event");
                 }
-                if ($scope.During_Game.length == 0) {
-                    $scope.During_Game.push("No_Event");
+                if ($scope.During_Game.length >= 0) {
+                    if(userDetail!=undefined && agreedToTermsOfUse==true) {
+                        $scope.During_Game.push("Add Content");
+                    }
                 }
                 if ($scope.Pre_Game.length >= 0) {
                     $scope.Pre_Game.push("Tickets");
+                    $scope.Pre_Game.push("Game Day Needs");
                 }
             });
 
@@ -124,6 +140,10 @@
                         return 'Flask_FlaskUs.jpg';
                     case "Tickets":
                         return 'tickets.jpg';
+                    case "Game Day Needs":
+                        return 'Game_Day_Needs.jpg';
+                    case "Add Content":
+                        return 'Add_Event_Content.jpg'
                     default:
                         return 'Flask_Default_Image.jpg';
                 }
