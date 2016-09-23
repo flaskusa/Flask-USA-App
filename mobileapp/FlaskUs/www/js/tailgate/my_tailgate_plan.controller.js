@@ -98,7 +98,7 @@
             var amountToPay = $scope.myTailgate.amountToPay;
             var paymentUrl = "https://venmo.com/?txn=pay&amount=" + amountToPay + "&note= for tailgate " + tailgateName +
             "&recipients=" + tailgateAccount;
-            window.open(paymentUrl, '_blank');
+            window.open(paymentUrl, '_system', 'location=yes'); // for inapp browser or system app
         }
     }
 })();
