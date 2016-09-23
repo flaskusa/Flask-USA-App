@@ -1,6 +1,6 @@
 ﻿(function () {
     var flaskAppConfig = angular.module('flaskApp');
-
+    var getMessageUrlSubString="/flask-social-portlet.flaskmessages";
     flaskAppConfig.constant("SERVER", {
         "hostName": "http://146.148.83.30/",
         "url": "http://146.148.83.30/api/jsonws/",
@@ -96,7 +96,7 @@
             })
 
         .state('app.suppliesList', {
-            url: '/suppliesList/:listName',
+            url: '/suppliesList/:listName/:supplyListId',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/supplies_list.html',
@@ -340,6 +340,16 @@
                     }
                 }
             })
+        .state('app.manage_event_content', {
+            url: '/manage-event-content',
+            params: {eventDetails: null, infoType: null, infoTypeCategory: null,currEventName:null,currEventId:null },
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/manage-event-content.html',
+                    controller: 'ManageEventCtrl'
+                }
+            }
+        })
 
         /*
         if none of the above states are matched, use this as the fallback*/
@@ -354,7 +364,9 @@
         $httpProvider.interceptors.push(function ($rootScope) {
             return {
             request: function (config) {
-                $rootScope.$broadcast('loading:show')
+                if(!config.url.includes(getMessageUrlSubString)) {
+                    $rootScope.$broadcast('loading:show');
+                }
                 return config
             },
             response: function (response) {

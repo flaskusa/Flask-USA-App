@@ -4,14 +4,28 @@
 
     .controller('SuppliesListCtrl', SuppliesListCtrl);
 
-    SuppliesListCtrl.$inject = ['$scope', '$stateParams',  'SupplyService', '$ionicModal', '$ionicNavBarDelegate'];
+    SuppliesListCtrl.$inject = ['$scope', '$stateParams',  'SupplyService', '$ionicModal', '$ionicNavBarDelegate','$cookies'];
 
-    function SuppliesListCtrl($scope, $stateParams, SupplyService, $ionicModal, $ionicNavBarDelegate) {
+    function SuppliesListCtrl($scope, $stateParams, SupplyService, $ionicModal, $ionicNavBarDelegate,$cookies) {
         /* jshint validthis: true */
         // putting our server data on scope to display
-        $scope.listId=SupplyService.selectedList.supplyListId;
+
+        if($stateParams.supplyListId=="") {
+            $scope.listId = SupplyService.selectedList.supplyListId;
+            $scope.showCheckBox=false;
+            $scope.showCheck=true;
+        }else{
+            $scope.listId=$stateParams.supplyListId;
+            var userDetail=$cookies.getObject('CurrentUser');
+            if(userDetail==undefined){
+                $scope.showCheck=false;
+            }else{
+                $scope.showCheck=true;
+            }
+            $scope.showCheckBox=true;
+        }
         $scope.listItemName="";
-        $scope.edit=false
+        $scope.edit=false;
         $scope.initialize=function() {
             SupplyService.getItemByListId($scope.listId).then(function (response) {
                 $scope.listValue = response;
