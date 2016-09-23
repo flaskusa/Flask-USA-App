@@ -25,12 +25,12 @@
         }
         $scope.initialize=function() {
             FriendsNotificationService.getNotificationCount().then(function (response1) {
-                FriendsNotificationService.getMessageCount().then(function (response2) {
-                    $scope.messageCount = response2;
-                    $scope.notificationCount = response1;
-                })
 
-            })
+                    $scope.notificationCount = response1;
+                });
+            FriendsNotificationService.getMessageCount().then(function (response2) {
+                $scope.messageCount = response2;
+            });
 
         }
        $scope.getRequestToConfirm=function(){
