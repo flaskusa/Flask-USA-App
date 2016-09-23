@@ -1,0 +1,80 @@
+<ion-view cache-view="false" class="my-view">
+
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-back-button>
+        </ion-nav-back-button>
+        <ion-nav-title>
+            <a href="#/app/events"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
+        </ion-nav-title>
+        <ion-nav-buttons side="right">
+            <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+
+    <div class="bar bar-subheader">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col col-90 event_name">
+                <div class="eventHeading2" style="text-transform:uppercase;text-align:center">
+                    <span class="overlineStyle">{{eventName}}</span></div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
+
+    <ion-content header="true"style="background-color: white;padding-top:45px">
+        <a class="item item-full list-item-icon-left "class="my-view"ng-click="addNewContent()"ng-if="editContent==false">
+            <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+            <p class="addText">ADD CONTENT</p>
+        </a>
+    <ion-list>
+        <ion-item ng-repeat="data in flaskUsDetails track by $index"class="row-no-padding"padding="false"ng-click="groupMemberDetail(data)"ng-if="editContent==false">
+            <a class="row-no-padding" style="text-decoration: none">
+                <!--href="#/app/my_friendDetail/{{data.userId}}"-->
+                <h3 class="emailText">{{ data.infoTitle}}</h3>
+                <div class="col col-70">
+                    <h3 >{{ data.infoDesc}}</h3>
+                </div>
+            </a>
+
+
+            <ion-option-button  class="icon ion-edit"ng-click="editContents(data,$index)"></ion-option-button>
+            <ion-option-button class="icon ion-trash-a" ng-click="deleteEventDetail(data.eventDetailId,$index)"></ion-option-button>
+
+        </ion-item>
+        <a class="item" ng-if="flaskUsDetails.length == 0"> You do not have added any information yet.</a>
+    </ion-list>
+
+
+            <div class="box" ng-if="editContent==true">
+
+                    <div class="item item-input item-floating-label">
+                        <span class="input-label">Title</span>
+                        <input type="text" placeholder="Title" name="TailgateName" class="form-control" ng-model="content.infoTitle" required>
+                    </div>
+                    <div class="item item-input item-floating-label" >
+                        <span class="input-label">Description:</span>
+                        <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="content.infoDesc" required>
+                    </div>
+                </div>
+            <div class="list"ng-if="editContent==true">
+                <div class="list card">
+                    <div class="item item-image"style="height:120px;width: 100%">
+
+                    </div>
+                    <a class="item text-center" href="">
+                        Tap to add  picture
+                    </a>
+                </div>
+                <div class="padding" align="center">
+                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="addContent(content);">
+                        Save
+                    </button>
+                    <a nav-clear class="button button-block button-positive sign_in_button" ng-click="cancelEdit()">
+                        Cancel
+                    </a>
+                </div>
+            </div>
+        </ion-content>
+
+    </ion-view>

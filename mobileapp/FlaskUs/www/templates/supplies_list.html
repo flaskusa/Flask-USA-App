@@ -4,7 +4,7 @@
         </ion-nav-back-button>
         </ion-nav-bar>
     <ion-content>
-        <a class="item item-full list-item-icon-left "ng-click="addNewListItem()">
+        <a class="item item-full list-item-icon-left "ng-click="addNewListItem()"ng-if="showCheck==true">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">ADD NEW ITEM</p>
         </a>
@@ -28,15 +28,17 @@
             <div ng-model="data.checked" ng-init="data.edit=false">
                 <div ng-if = "data.edit == false" ><i class="addText">{{ data.supplyItemName }}</i></div>
                 <input type="text"id="editItemBox" autofocus ng-model="data.supplyItemName" ng-if="data.edit == true" ng-blur="saveSupplyItem(data)"/>
-                <div class="badge supplyDeleteButton extra-right-supply">
+
+                <div class="badge supplyDeleteButton extra-right-supply" ng-if="showCheckBox==false">
                 <span class="button-assertive   ion-trash-a icon supplyDeleteIcon" ng-class="{supplyEditIconPadding:data.edit}" ng-click="deleteSupplyItem($index,data.supplyItemId)"></span>
                     </div>
-                <div class="badge supplyDeleteButton extra-right-supply"style=";margin-right: 51px">
+                <div class="badge supplyDeleteButton extra-right-supply"style=";margin-right: 51px"ng-if="showCheckBox==false">
                     <span class="button-assertive   ion-edit supplyDeleteIcon" ng-class="{supplyEditIconPadding:data.edit}" ng-click="editSupplyItem(data)"></span>
                 </div>
-           <!--<span class="badge span_icon"style="top:3px"ng-click="getListCount(data)"> <label class="checkbox"style="float: right">
+                <div ng-if="showCheckBox==true && showCheck==true">
+           <span class="badge span_icon"style="top:3px"ng-click="getListCount(data)"> <label class="checkbox"style="float: right">
                <input  type="checkbox"ng-model="data.checked">
-           </label></span>-->
+           </label></span></div>
             </div>
             </ion-item>
 </ion-list>

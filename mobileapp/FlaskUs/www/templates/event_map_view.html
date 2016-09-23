@@ -1,4 +1,4 @@
-﻿<ion-view cache-view="false">
+﻿<ion-view cache-view="false" class="map-view">
 
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button>
@@ -145,8 +145,8 @@
                     <div style="padding:10px"  ng-if="selectedIndex == 2">
                         <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{trafficDetails.infoTitle}}</div></label>
                         </div>
-                        <div class="form-group"><label class="control-label" for="Description"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
-                            <div class="controls" id="Description">
+                        <div class="form-group"><label class="control-label" for="Descriptions"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
+                            <div class="controls" id="Descriptions">
                                 {{trafficDetails.infoDesc}}
                             </div>
                         </div>
@@ -203,15 +203,45 @@
                     </div>
                 </ion-tab>
                 <ion-tab title="FLASK US" ng-click="selectTab(1)">
-                    <div style="padding:10px"  ng-if="selectedIndex == 1">
-                        <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetails.infoTitle}}</div></label>
-                        </div>
-                        <div class="form-group"><label class="control-label" for="Description"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
-                            <div class="controls" id="Description">
-                                {{flaskUsDetails.infoDesc}}
+                    <div >
+                        <div class="row mainRow" >
+                            <div class="sideImagePanel">
+                                <div class="left">
+                                    <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('slide1')"></button>
+                                </div>
+                                <div class="right">
+                                    <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide1')"></button>
+                                </div>
+                                <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
+                                    <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:63px ">
+                                        <div class="form-group"><label class="control-label" for="Descriptionss"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
+
+                                            <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetail.infoTitle}}</div></label>
+                                            </div>
+
+                                                <div class="controls col-70" id="Descriptionss"style="width: 77%;padding-left:87px">
+                                                    {{flaskUsDetail.infoDesc}}
+                                                </div>
+                                            </div>
+
+                                    </ion-slide>
+                                </ion-slide-box>
                             </div>
                         </div>
+
                     </div>
+                   <!-- <div style="padding:10px"  ng-if="selectedIndex == 1" ng-repeat="flaskUsDetail in flaskUsDetails">
+                        {{flaskUsDetail.infoDesc}}
+                        {{flaskUsDetail.infoTitle}}
+
+                        <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetail.infoTitle}}</div></label>
+                        </div>
+                        <div class="form-group"><label class="control-label" for="Descriptions"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
+                            <div class="controls" id="Descriptions">
+                                {{flaskUsDetail.infoDesc}}
+                            </div>
+                        </div>
+                    </div>-->
                 </ion-tab>
             </ion-tabs>
         </div>
