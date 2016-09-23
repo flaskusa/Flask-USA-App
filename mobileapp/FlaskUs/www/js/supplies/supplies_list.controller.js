@@ -14,7 +14,9 @@
             $scope.listId = SupplyService.selectedList.supplyListId;
             $scope.showCheckBox=false;
             $scope.showCheck=true;
+            $scope.showAddButton=true;
         }else{
+            $scope.showAddButton=false;
             $scope.listId=$stateParams.supplyListId;
             var userDetail=$cookies.getObject('CurrentUser');
             if(userDetail==undefined){
