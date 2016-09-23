@@ -57,14 +57,14 @@
                             <input type="Number" placeholder="Amount" name="Amount" ng-model="addTailgateParams.amountToPay">
                         </div>-->
                    </div>
-                    <!--<div class="padding" align="center">
+                    <div class="padding" align="center">
                         <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="addmyTailgate(addTailgateParams);">
                             Save
                         </button>
                         <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/my_tailgate">
                             Cancel
                         </a>
-                    </div>-->
+                    </div>
                     </div>
             </ion-content>
         </ion-tab>
@@ -139,11 +139,11 @@
                     <div class="tailgateInfo">
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Venmo Account:</span>
-                            <input type="email" placeholder="Venmo Account" class="form-control" ng-model="addTailgateParams.venmoAccountId" name="VenmoAccount" required>
+                            <input type="email" placeholder="Venmo Account" class="form-control" ng-model="newUpdate.venmoAccountId" name="VenmoAccount" required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Amount</span>
-                            <input type="Number" placeholder="Amount" name="Amount" ng-model="addTailgateParams.amountToPay">
+                            <input type="Number" placeholder="Amount" name="Amount" ng-model="newUpdate.amountToPay">
                         </div>
                         <!--<div class="row">
                             <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
@@ -154,7 +154,7 @@
                             <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
                         </div>-->
                         <div class="row">
-                            <button nav-clear class="button button-block button-positive pay_now_button" ng-click="addmyTailgate(addTailgateParams);">
+                            <button nav-clear class="button button-block button-positive pay_now_button" ng-click="updatetailgate(newUpdate);">
                                 Pay Now
                             </button>
                         </div>

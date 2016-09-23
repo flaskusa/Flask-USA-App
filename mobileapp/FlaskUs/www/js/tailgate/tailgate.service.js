@@ -39,6 +39,7 @@
         /*Get My Tailgate Service*/
         //var getAllTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
         var addTailgateSupplyItemsURL = "flask-user-tailgate-portlet.tailgatesupplyitem/add-tailgate-supply-items";
+        var updateTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/update-tailgate-info";
         /*Add Supply List*/
         var addSupplyListURL = "flask-user-tailgate-portlet.supplylist/add-supply-list";
         var getItemsByTailgateIdURL = "flask-user-tailgate-portlet.tailgatesupplyitem/get-items-by-tailgate-id";
@@ -72,11 +73,25 @@
             addTailgateSupplyItems: addTailgateSupplyItems,
             getGroupbyId: getGroupbyId,
             getItemsByTailgateId: getItemsByTailgateId,
-            updateTailgateSupplyItem: updateTailgateSupplyItem
+            updateTailgateSupplyItem: updateTailgateSupplyItem,
+            updateTailgateInfo: updateTailgateInfo
         }
 
         function getallFilteredEvents(tailgateParams) {
             return $http.get(baseURL + getFilteredEventsURL, {
+                params: tailgateParams
+            }
+            )
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling 
+            });
+        }
+        //update tailgate 
+        function updateTailgateInfo(tailgateParams) {
+            return $http.get(baseURL + updateTailgateURL, {
                 params: tailgateParams
             }
             )

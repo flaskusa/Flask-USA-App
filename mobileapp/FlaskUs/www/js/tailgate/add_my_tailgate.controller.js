@@ -213,7 +213,9 @@
                 editTailgateData(tailgateDetails);
             }
         }
+        //edit tailgate data
         function editTailgateData(tailgateDetails) {
+            $cookies.remove('newtailgatedata');
             console.log(tailgateDetails);
             $scope.addTailgateParams = {
                 tailgateName: tailgateDetails.tailgateName,
@@ -226,6 +228,21 @@
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
             $scope.selectedtime1 = $filter('date')(tailgateDetails.startTime, 'hh:mm a');
             $scope.selectedtime2 = $filter('date')(tailgateDetails.endTime, 'hh:mm a');
+
+            $scope.editData = {
+                tailgateId: tailgateDetails.tailgateId,
+                tailgateName: tailgateDetails.tailgateName,
+                tailgateDescription: tailgateDetails.tailgateDescription,
+                eventId: tailgateDetails.eventId,
+                eventName: tailgateDetails.eventName,
+                venmoAccountId: tailgateDetails.venmoAccountId,
+                amountToPay: tailgateDetails.amountToPay,
+                tailgateDate:tailgateDetails.tailgateDate,
+                startTime:tailgateDetails.startTime,
+                endTime:tailgateDetails.endTime
+            }
+            console.log($scope.editData);
+            $cookies.putObject('newtailgatedata', $scope.editData);
         };
         //show actin sheet on picture click
         $scope.show = function () {
@@ -298,6 +315,8 @@
             tailgatedata.tailgateDate = new Date($scope.tailgateDate).getTime();
             tailgatedata.endTime = endTime;
             tailgatedata.startTime = startTime;
+            tailgatedata.venmoAccountId = "";
+            tailgatedata.amountToPay = 0;
             TailgateService.addTailgate(tailgatedata).then(function (respData) {
                 console.log(respData.data);
                 $cookies.put('newtailgateId', respData.data.tailgateId);
@@ -310,7 +329,16 @@
                 newtailGateId = $cookies.get('newtailgateId');
                 getTailgaters(newtailGateId);
             });
-            fnPayNow();
+        }
+        //update tailgate
+        $scope.updatetailgate = function (newUpdate) {
+            var updateData = $cookies.getObject("newtailgatedata");
+            updateData.venmoAccountId = newUpdate.venmoAccountId;
+            updateData.amountToPay = newUpdate.amountToPay;
+            console.log(updateData);
+            TailgateService.updateTailgateInfo(updateData).then(function (respdata) {
+                console.log(respdata);
+            });
         }
         // get selected venue details
         $scope.getvenuefromSelect = function (tailgatedata) {
@@ -511,7 +539,7 @@
             var amountToPay = $scope.newdata.amountToPay;
             var paymentUrl = "https://venmo.com/?txn=pay&amount=" + amountToPay + "&note= for tailgate " + tailgateName +
             "&recipients=" + tailgateAccount;
-            window.open(paymentUrl, '_blank');
+            window.open(paymentUrl, '_system', 'location=yes'); // for inapp browser or system app
         }
 
     }

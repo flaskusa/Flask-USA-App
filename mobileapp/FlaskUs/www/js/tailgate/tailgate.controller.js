@@ -29,7 +29,8 @@
             console.log(tailgateId,index);
             var addTailgateParams = {}
             TailgateService.getTailgate(tailgateId).then(function (respData) {
-                console.log(respData.data);                
+                console.log(respData.data);
+                addTailgateParams.tailgateId = tailgateId;
                 addTailgateParams.tailgateName = respData.data.tailgateName;
                 addTailgateParams.tailgateDescription = respData.data.tailgateDescription;
                 addTailgateParams.eventId = respData.data.eventId;
