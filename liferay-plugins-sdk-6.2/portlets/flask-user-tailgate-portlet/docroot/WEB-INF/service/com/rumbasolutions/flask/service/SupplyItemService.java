@@ -85,6 +85,7 @@ public interface SupplyItemService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> getAllSupplyItems(
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> getItemsByListId(
 		long supplyListId);

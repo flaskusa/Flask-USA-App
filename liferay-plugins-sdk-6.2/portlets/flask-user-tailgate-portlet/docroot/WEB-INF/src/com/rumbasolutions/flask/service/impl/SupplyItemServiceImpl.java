@@ -21,6 +21,7 @@ import java.util.List;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.SupplyItem;
 import com.rumbasolutions.flask.service.SupplyItemLocalServiceUtil;
@@ -145,6 +146,7 @@ public class SupplyItemServiceImpl extends SupplyItemServiceBaseImpl {
 		return supplyItems;
 	}
 
+	@AccessControlled(guestAccessEnabled=true)
 	@Override
 	public List<SupplyItem> getItemsByListId(long supplyListId){
 		List<SupplyItem> supplyItems = null;
