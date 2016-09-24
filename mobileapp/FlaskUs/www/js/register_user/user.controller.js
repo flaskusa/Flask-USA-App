@@ -2,18 +2,14 @@
     'use strict';
     angular.module('flaskApp')
         .controller('user_registrationCtrl', user_registrationCtrl);
-    user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies'];
+    user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading'];
 
     /* @ngInject */
-    function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies) {
+    function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading) {
         var gender = true;
 
         var usercookie = $cookies.getObject('CurrentUser');
-        console.log(usercookie.data.userId);
-        var userid = usercookie.data.userId;
-
-        getUser();
-
+		
         $scope.data1 = [
           {
               sport: "Basketball"
@@ -92,10 +88,11 @@
                     //$state.go("app.login");
 
                 }
-                $scope.AddedSuccess = true;
-                $timeout(function () { $scope.AddedSuccess = false; }, 3000);
+                else{
+                    $ionicLoading.show({ template: 'User Registered Successfully!', noBackdrop: false, duration: 2000 });
+                }
             });
-            // document.register_user_form.reset();
+             document.register_user_form.reset();
         }
 
         $scope.checkUserByEmailId = function (user) {
@@ -115,34 +112,6 @@
             });
         }
 
-        function getUser(userId) {
-            UserService.getUserById(userid).then(function (respData) {
-                $scope.userInfo = respData;
-                console.log($scope.userInfo);
-                $scope.user = {
-                    firstName: $scope.userInfo.firstName,
-                    lastName: $scope.userInfo.lastName,
-                    screenName: $scope.userInfo.screenName,
-                    Email: $scope.userInfo.email,
-                    password1: "",
-                    password2: "",
-                    DOB: $filter('date')($scope.userInfo.DOB, 'MM-dd-yyyy'),
-                    isMale: gender,
-                    areaCode: $scope.userInfo.areaCode,
-                    mobileNumber: $scope.userInfo.mobileNumber,
-                    streetName: $scope.userInfo.streetName,
-                    aptNo: $scope.userInfo.aptNo,
-                    city: $scope.userInfo.city
-                }
-            });
-        }
-
-        $scope.updateUserInfo = function(){
-            UserService.updateUser().then(function (respData) {
-                $scope.userInfo = respData.data;
-            });
-        }
-      
         $scope.openDatePickerOne = function (val) {
             var ipObj1 = {
                 callback: function (val) {  //Mandatory

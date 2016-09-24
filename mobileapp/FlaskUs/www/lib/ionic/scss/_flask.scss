@@ -309,7 +309,7 @@ img.cq-dd-image{
 }
 
 .loginpane_body {
-      width:100%;
+      margin-top:17%;
 }
 
 .div_list{padding-left:6%;}
@@ -362,6 +362,7 @@ button.button.button-block.button-positive.taglib-text{
         height:22%;
         text-align: center;
         width:100%;
+        margin-bottom:5% !important;
 }
 span.taglib-text{
     font-size:16px !important;
@@ -461,6 +462,11 @@ span.error_msg{color:red;}
     margin-top: -6px;
     margin-left: 2%;
 }
+
+.cityVenuCol{
+    font-weight:100 !important;
+}
+
 .arrowIcon{
     right: -4px !important;
     font-size: 20px !important;
@@ -572,7 +578,7 @@ button.button.button-icon.button-clear.ion-search{display:none;}
 
 .item.item-avatar.profile{
     background-color: black !important;
-    height:120px;
+    height:132px;
     border:none;
 }
 
@@ -589,7 +595,7 @@ img.menuLogo{
     max-width: 246px !important;
     max-height: 117px !important;
     width: 84% !important;
-    top: 3px !important;
+    top: 27px !important;
     height: 100% !important;
     border-radius:0px !important;
     }
@@ -703,6 +709,14 @@ div.menuDiv{padding-bottom:10px;}
     font-weight: bold;
 }
 
+span.ion-chevron-down{
+    top:16px !important;
+}
+
+span.ion-chevron-right{
+    top:16px !important;
+}
+
  /*friend details page start*/
  p.friend{font-weight: bold;
     text-align: center;
@@ -730,16 +744,18 @@ div.menuDiv{padding-bottom:10px;}
     font-size: 27px;
     text-align: center;
     margin-top:0%;
-    padding-left:5%;
+    padding-left:8%;
 }
 
 .item-tickets{text-align: center;
     font-size: 13px;
     color: darkorange !important;
-    padding-left:5%;
+    padding-left:8%;
 }
 
-a.item.item-avtar.item-icon-right.item-ticket{border-width:2px;border-color:black;}
+a.item.item-avtar.item-icon-right.item-ticket{
+    border-color:black;
+}
  /*tickets end*/
 
  img.footer-img{  width: 104%;
@@ -792,7 +808,7 @@ div.searchrow {
     background-color: rgba(0, 0, 0, 0.9);
     border-color: #f7941e;
 	display: block;
-    height:175px;
+    height:140px;
 }
 
 .BgCol1{
@@ -805,10 +821,10 @@ button.button.button-clear.button_search{
     color: darkorange;
     border-radius: 3px;
     font-size: 15px;
-    width: 100%;
-    text-shadow: 2px 0px 4px #847e7e;
+    width: 90%;
     font-weight: bold;
-    margin-top: 4px;
+    margin-top: 5px;
+    margin-left:5%;
     vertical-align: middle;
     background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
 }
@@ -1298,18 +1314,6 @@ span.ng-binding{text-transform:uppercase;font-weight:600;}
 }
 
 .badge{color:white !important;}
-
-img.menuLogo{	
-    position: absolute !important;
-    left: 20px !important;
-    bottom: -2px !important;
-    max-width: 246px !important;
-    max-height: 117px !important;
-    width: 84% !important;
-    top: 3px !important;
-    height: 100% !important;
-    border-radius:0px !important;
-    }
 
 ul.list.menuContentList{padding-top:6px;}
 

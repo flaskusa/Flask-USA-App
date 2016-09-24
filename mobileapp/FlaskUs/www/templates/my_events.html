@@ -3,13 +3,18 @@
         <ion-nav-back-button>
         </ion-nav-back-button>
         <ion-nav-buttons side="right">
-            <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
+            <button class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
         </ion-nav-buttons>
         </ion-nav-bar>
-        <div class="bar bar-subheader BgCol1" ng-show="searchBox.showBox">
+        <div class="bar bar-subheader srchBgCol" ng-show="searchBox.showBox">
             <div class="row searchrow">
                 <div class="col col-100 col-center searchrow">
                     <input type="text" placeholder="Search event..." class="searchboxArea" ng-model="eventList.searchString" />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col col-center searchrow">
+                    <button class="button button-clear button_search" ng-click="getAllfilteredFrieds(searchBox.searchText)">SEARCH</button>
                 </div>
             </div>
         </div>

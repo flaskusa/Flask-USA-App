@@ -28,10 +28,15 @@
         $scope.constant_time = currentDate.getTime();
         $scope.constant_time += 60 * 60 * 1000;
         $scope.storedTime = '';
+        $scope.vId = [];
+        $scope.city = [];
+        $scope.venuesId = [];
         $scope.searchstringList = {
             searchString: 'a',
             days: '60'
         };
+
+
         // $scope.localstorageData = $localStorage.getObject('user_location_data');
         // Retrieve the object from ng-storage  
         $scope.localstorageData = $localStorage.things;
@@ -62,16 +67,36 @@
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 console.log(respData);
                 $scope.allEvent = respData.data.Events;
+                for (var i = 0; i < $scope.allEvent.length; i++) {
+                    $scope.vId.push($scope.allEvent[i].venueId);
+                }
                 if ($scope.allEvent.length == 0) {
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
                 }
+                getVenueName();
+            });
+        }
+
+        //Get venue name for event details
+        function getVenueName() {
+            EventsService.getAllVenues().then(function (respData) {
+                console.log(respData);
+                $scope.allVenues = respData;
+                for (var i = 0; i < $scope.allVenues.length; i++) {
+                    $scope.venuesId.push($scope.allVenues[i].venueId);
+                }
+                for (var j = 0; j < $scope.vId.length; j++) {
+                    if ($scope.venuesId[j] == $scope.vId[j]) {
+                            $scope.city.push({cityName:$scope.allVenues[j].venueCity});
+                    }
+                }
+
             });
         }
 
         function get_from_localStorage() {
-
             $scope.latitude = $scope.localstorageData.coords.latitude;
             $scope.longitude = $scope.localstorageData.coords.longitude;
             ConvertToZip($scope.latitude, $scope.longitude);

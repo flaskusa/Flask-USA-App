@@ -16,48 +16,47 @@
                     User name or password did not match. 
                 </div>
             </div>
-            <form name="login_form" class="loginpane form_div" novalidate  ng-submit="login_form.$valid && doLogin(user)">
-                <div class="loginpane_body">
-                    <div class="list">
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Email</span>
-                            <input type="email" placeholder="Email" class="form-control loginInputs" ng-model="user.Email" name="Email" required>  
-                            <div ng-show="login_form.$submitted || login_form.Email.$touched">
-                                <span ng-show="login_form.Email.$error.required" class="error_msg">Enter your user name</span>
-                                <span ng-show="login_form.Email.$error.email" class="error_msg">This is not a valid email</span>
-                            </div>                     
-                        </label>
-                        
-                        <label class="item item-input item-floating-label">
-                            <span class="input-label">Password</span>
-                            <input type="password" placeholder="Password" class="form-control loginInputs" ng-model="user.password" name="password" required>    
-                            <div ng-show="login_form.$submitted || login_form.password.$touched">
-                                <span ng-show="login_form.password.$error.required" class="error_msg">Please enter your password</span>
-                            </div>                       
-                        </label>
-                       
-                    </div>
+            <form name="login_form" class="loginpane form_div" novalidate  ng-submit="login_form.$valid && doLogin(user)" style="">
+                <div class="list card loginpane_body">
+
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Email</span>
+                        <input type="email" placeholder="Email" class="form-control loginInputs" ng-model="user.Email" name="Email" required>
+                        <div ng-show="login_form.$submitted || login_form.Email.$touched">
+                            <span ng-show="login_form.Email.$error.required" class="error_msg">Enter your user name</span>
+                            <span ng-show="login_form.Email.$error.email" class="error_msg">This is not a valid email</span>
+                        </div>
+                    </label>
+
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Password</span>
+                        <input type="password" placeholder="Password" class="form-control loginInputs" ng-model="user.password" name="password" required>
+                        <div ng-show="login_form.$submitted || login_form.password.$touched">
+                            <span ng-show="login_form.password.$error.required" class="error_msg">Please enter your password</span>
+                        </div>
+                    </label>
+
+
                     <div class="padding" align="center">
                         <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
                             Login
                         </button>
                     </div>
-                </div>
 
-
-                <div class="navigation">
-                    <ul class="taglib-icon-list unstyled">
-                        <li class="" role="presentation">
-                            <a href="#/app/forgot_password" class=" taglib-icon" role="menuitem" ng-click="login_form.$setPristine();">
-                                <span class="taglib-text"><i class="ion ion-help-circled"></i>Forgot password</span>
-                            </a>
-                        </li>
-                        <li class="" role="presentation">
-                            <a href="#/app/events" class=" taglib-icon" role="menuitem" ng-click="login_form.$setPristine();">
-                                <span class="taglib-text"><i class="ion ion-edit"></i>Create account Later</span>
-                            </a>
-                        </li>
-                    </ul>
+                    <div class="navigation">
+                        <ul class="taglib-icon-list unstyled">
+                            <li class="" role="presentation">
+                                <a href="#/app/forgot_password" class=" taglib-icon" role="menuitem" ng-click="login_form.$setPristine();">
+                                    <span class="taglib-text"><i class="ion ion-help-circled"></i>Forgot password</span>
+                                </a>
+                            </li>
+                            <li class="" role="presentation">
+                                <a href="#/app/events" class=" taglib-icon" role="menuitem" ng-click="login_form.$setPristine();">
+                                    <span class="taglib-text"><i class="ion ion-edit"></i>Create account Later</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
             </form>
         </div>

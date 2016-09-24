@@ -121,15 +121,15 @@
                     case "Parking":
                         return 'Flask_Parking.jpg';
                     case "Bar & Restaurants":
-                        return 'Flask_Bars.jpg';
+                        return 'PRE_BAR_RESTAURANTS.jpg';
                     case "Traffic":
-                        return 'Flask_Traffic.jpg';
+                        return 'PRE_TRAFFIC.jpg';
                     case "Supplies":
                         return 'Flask_Supplies.jpg';
                     case "Getting Home":
                         return 'flask_GettingHome.jpg';
                     case "Nightlife":
-                        return 'Flask_Nightlife.jpg';
+                        return 'POST_NIGHTLIFE.jpg';
                     case "Liquor store":
                         return 'flask_restaurantBar_post.jpg';
                     case "Venue info":

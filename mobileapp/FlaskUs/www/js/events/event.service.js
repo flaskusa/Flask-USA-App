@@ -17,7 +17,9 @@
         var getEventByIdURL = "flask-rest-events-portlet.event/get-event";
         var addContentDuringGameUrl="/flask-rest-events-portlet.event/add-event-detail";
         var updateEventDuringGame="/flask-rest-events-portlet.event/update-event-detail";
-        var deleteEventDetailUrl="/flask-rest-events-portlet.event/delete-event-detail"
+        var deleteEventDetailUrl = "/flask-rest-events-portlet.event/delete-event-detail";
+        var getAllVenuesURL = "flask-rest-events-portlet.venue/get-all-venues";
+        var getVenuesByIdURL = "flask-rest-events-portlet.venue/get-venue";
         var googleMapURL = SERVER.googleApi;
 
         var eventServices = {
@@ -28,7 +30,8 @@
             getEventByEventId: getEventByEventId,
             addContentDuringEvent:addContentDuringEvent,
             updateEventDetailDuringEvent:updateEventDetailDuringEvent,
-            deleteEventDetailById:deleteEventDetailById
+            deleteEventDetailById: deleteEventDetailById,
+            getAllVenues: getAllVenues
         }
         function getAllEvents(eventIds, sDate, eDate, sString, lat, long) {
             return $http.get(baseURL + allEventsURL, {
@@ -133,6 +136,28 @@
 
         }
 
+        // Get All venues for event details
+        function getAllVenues() {
+            return $http.get(baseURL + getAllVenuesURL)
+                .then(function success(resp) {
+                    return resp.data;
+                },
+                function failure(resp) {
+                    console.log("Error Message");
+                });
+        }
+        // Get venue by id for event details
+        function getVenueByid(vid) {
+            return $http.get(baseURL + getVenuesByIdURL, {
+                params: { "venueId ": venueId }
+                })
+                .then(function success(resp) {
+                    return resp.data;
+                },
+                function failure(resp) {
+                    console.log("Error Message");
+                });
+        }
         return eventServices;
     }
 })();

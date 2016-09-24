@@ -339,6 +339,7 @@
             TailgateService.updateTailgateInfo(updateData).then(function (respdata) {
                 console.log(respdata);
             });
+            fnPayNow();
         }
         // get selected venue details
         $scope.getvenuefromSelect = function (tailgatedata) {

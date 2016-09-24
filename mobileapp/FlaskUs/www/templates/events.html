@@ -28,11 +28,11 @@
                     </select>
                 </div>
             </div>
-            <div class="row">
+            <!--<div class="row">
                 <div class="col col-100 col-center searchrow">
                     <input type="text" placeholder="Zip code..." class="searchboxArea" id="zipCode" name="zipCode" ng-model="searchstringList.zipcode" />
                 </div>
-            </div>
+            </div>-->
             <div class="row">
                 <div class="col col-center searchrow">
                     <button type="submit" class="button button-clear button_search" >SEARCH</button>
@@ -40,7 +40,7 @@
             </div>
             </form>
     </div>
-    <ion-content class="has-footer" ng-click="searchBox.showBox = false">
+    <ion-content class="has-footer" ng-click="searchBox.showBox = false" overflow-scroll="false">
         <div>
             <div>
                 <h3 class="eventHeading"><span class="overlineStyle">EVENTS NEAR YOU</span></h3>
@@ -55,7 +55,7 @@
                     <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
-                    <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
+                    <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}} | <span class="cityVenuCol" ng-repeat="vdata in city">{{vdata.cityName}}</span></p>
                     <span class="badge span_icon"><img src="img/flask_icons/arrow_left.svg"></span>
                     <div class="ion-star star_div_icon" ng-if="data.userEvent=='1'"></div>
                 </a>
