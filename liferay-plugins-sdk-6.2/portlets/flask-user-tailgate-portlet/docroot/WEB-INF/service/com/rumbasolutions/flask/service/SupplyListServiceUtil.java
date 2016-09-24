@@ -94,6 +94,10 @@ public class SupplyListServiceUtil {
 		return getService().getMySupplyLists(serviceContext);
 	}
 
+	public static java.util.List<com.rumbasolutions.flask.model.SupplyItem> getGameDayNeeds() {
+		return getService().getGameDayNeeds();
+	}
+
 	public static void deleteSupplyList(long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService().deleteSupplyList(supplyListId, serviceContext);

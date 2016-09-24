@@ -433,6 +433,173 @@ public class SupplyListUtil {
 	}
 
 	/**
+	* Returns all the supply lists where supplyListName = &#63;.
+	*
+	* @param supplyListName the supply list name
+	* @return the matching supply lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.rumbasolutions.flask.model.SupplyList> findBysupplyListName(
+		java.lang.String supplyListName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findBysupplyListName(supplyListName);
+	}
+
+	/**
+	* Returns a range of all the supply lists where supplyListName = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.SupplyListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param supplyListName the supply list name
+	* @param start the lower bound of the range of supply lists
+	* @param end the upper bound of the range of supply lists (not inclusive)
+	* @return the range of matching supply lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.rumbasolutions.flask.model.SupplyList> findBysupplyListName(
+		java.lang.String supplyListName, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().findBysupplyListName(supplyListName, start, end);
+	}
+
+	/**
+	* Returns an ordered range of all the supply lists where supplyListName = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.rumbasolutions.flask.model.impl.SupplyListModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param supplyListName the supply list name
+	* @param start the lower bound of the range of supply lists
+	* @param end the upper bound of the range of supply lists (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching supply lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public static java.util.List<com.rumbasolutions.flask.model.SupplyList> findBysupplyListName(
+		java.lang.String supplyListName, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .findBysupplyListName(supplyListName, start, end,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the first supply list in the ordered set where supplyListName = &#63;.
+	*
+	* @param supplyListName the supply list name
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching supply list
+	* @throws com.rumbasolutions.flask.NoSuchSupplyListException if a matching supply list could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.SupplyList findBysupplyListName_First(
+		java.lang.String supplyListName,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchSupplyListException {
+		return getPersistence()
+				   .findBysupplyListName_First(supplyListName, orderByComparator);
+	}
+
+	/**
+	* Returns the first supply list in the ordered set where supplyListName = &#63;.
+	*
+	* @param supplyListName the supply list name
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching supply list, or <code>null</code> if a matching supply list could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.SupplyList fetchBysupplyListName_First(
+		java.lang.String supplyListName,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchBysupplyListName_First(supplyListName,
+			orderByComparator);
+	}
+
+	/**
+	* Returns the last supply list in the ordered set where supplyListName = &#63;.
+	*
+	* @param supplyListName the supply list name
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching supply list
+	* @throws com.rumbasolutions.flask.NoSuchSupplyListException if a matching supply list could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.SupplyList findBysupplyListName_Last(
+		java.lang.String supplyListName,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchSupplyListException {
+		return getPersistence()
+				   .findBysupplyListName_Last(supplyListName, orderByComparator);
+	}
+
+	/**
+	* Returns the last supply list in the ordered set where supplyListName = &#63;.
+	*
+	* @param supplyListName the supply list name
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching supply list, or <code>null</code> if a matching supply list could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.SupplyList fetchBysupplyListName_Last(
+		java.lang.String supplyListName,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence()
+				   .fetchBysupplyListName_Last(supplyListName, orderByComparator);
+	}
+
+	/**
+	* Returns the supply lists before and after the current supply list in the ordered set where supplyListName = &#63;.
+	*
+	* @param supplyListId the primary key of the current supply list
+	* @param supplyListName the supply list name
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next supply list
+	* @throws com.rumbasolutions.flask.NoSuchSupplyListException if a supply list with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public static com.rumbasolutions.flask.model.SupplyList[] findBysupplyListName_PrevAndNext(
+		long supplyListId, java.lang.String supplyListName,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException,
+			com.rumbasolutions.flask.NoSuchSupplyListException {
+		return getPersistence()
+				   .findBysupplyListName_PrevAndNext(supplyListId,
+			supplyListName, orderByComparator);
+	}
+
+	/**
+	* Removes all the supply lists where supplyListName = &#63; from the database.
+	*
+	* @param supplyListName the supply list name
+	* @throws SystemException if a system exception occurred
+	*/
+	public static void removeBysupplyListName(java.lang.String supplyListName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		getPersistence().removeBysupplyListName(supplyListName);
+	}
+
+	/**
+	* Returns the number of supply lists where supplyListName = &#63;.
+	*
+	* @param supplyListName the supply list name
+	* @return the number of matching supply lists
+	* @throws SystemException if a system exception occurred
+	*/
+	public static int countBysupplyListName(java.lang.String supplyListName)
+		throws com.liferay.portal.kernel.exception.SystemException {
+		return getPersistence().countBysupplyListName(supplyListName);
+	}
+
+	/**
 	* Caches the supply list in the entity cache if it is enabled.
 	*
 	* @param supplyList the supply list

@@ -91,8 +91,9 @@ public class SupplyListModelImpl extends BaseModelImpl<SupplyList>
 				"value.object.column.bitmask.enabled.com.rumbasolutions.flask.model.SupplyList"),
 			true);
 	public static long ISSYSTEM_COLUMN_BITMASK = 1L;
-	public static long USERID_COLUMN_BITMASK = 2L;
-	public static long SUPPLYLISTID_COLUMN_BITMASK = 4L;
+	public static long SUPPLYLISTNAME_COLUMN_BITMASK = 2L;
+	public static long USERID_COLUMN_BITMASK = 4L;
+	public static long SUPPLYLISTID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -258,7 +259,17 @@ public class SupplyListModelImpl extends BaseModelImpl<SupplyList>
 
 	@Override
 	public void setSupplyListName(String supplyListName) {
+		_columnBitmask |= SUPPLYLISTNAME_COLUMN_BITMASK;
+
+		if (_originalSupplyListName == null) {
+			_originalSupplyListName = _supplyListName;
+		}
+
 		_supplyListName = supplyListName;
+	}
+
+	public String getOriginalSupplyListName() {
+		return GetterUtil.getString(_originalSupplyListName);
 	}
 
 	@JSON
@@ -445,6 +456,8 @@ public class SupplyListModelImpl extends BaseModelImpl<SupplyList>
 	public void resetOriginalValues() {
 		SupplyListModelImpl supplyListModelImpl = this;
 
+		supplyListModelImpl._originalSupplyListName = supplyListModelImpl._supplyListName;
+
 		supplyListModelImpl._originalIsSystem = supplyListModelImpl._isSystem;
 
 		supplyListModelImpl._setOriginalIsSystem = false;
@@ -568,6 +581,7 @@ public class SupplyListModelImpl extends BaseModelImpl<SupplyList>
 		};
 	private long _supplyListId;
 	private String _supplyListName;
+	private String _originalSupplyListName;
 	private boolean _isSystem;
 	private boolean _originalIsSystem;
 	private boolean _setOriginalIsSystem;

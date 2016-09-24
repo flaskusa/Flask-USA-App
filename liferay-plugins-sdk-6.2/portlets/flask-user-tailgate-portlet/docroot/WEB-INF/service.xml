@@ -106,6 +106,9 @@
         <finder name="isSystem" return-type="Collection">
         	<finder-column name="isSystem" />
         </finder>
+        <finder name="supplyListName" return-type="Collection">
+        	<finder-column name="supplyListName" />
+        </finder>
     </entity>
 
     <entity name="SupplyItem" local-service="true">

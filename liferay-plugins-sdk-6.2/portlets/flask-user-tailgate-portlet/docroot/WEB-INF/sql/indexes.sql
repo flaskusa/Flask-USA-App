@@ -1,6 +1,7 @@
 create index IX_8E6C3AF5 on flasktailgate_SupplyItem (supplyListId);
 
 create index IX_CFA84111 on flasktailgate_SupplyList (isSystem);
+create index IX_47DB30 on flasktailgate_SupplyList (supplyListName);
 create index IX_7AC2FD9E on flasktailgate_SupplyList (userId);
 
 create index IX_6F6902DC on flasktailgate_TailgateImages (imageUUID);

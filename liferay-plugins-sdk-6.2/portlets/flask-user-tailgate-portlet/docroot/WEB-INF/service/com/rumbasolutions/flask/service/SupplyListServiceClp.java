@@ -64,15 +64,19 @@ public class SupplyListServiceClp implements SupplyListService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName8 = "deleteSupplyList";
+		_methodName8 = "getGameDayNeeds";
 
-		_methodParameterTypes8 = new String[] {
+		_methodParameterTypes8 = new String[] {  };
+
+		_methodName9 = "deleteSupplyList";
+
+		_methodParameterTypes9 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName9 = "deleteMySupplyLists";
+		_methodName10 = "deleteMySupplyLists";
 
-		_methodParameterTypes9 = new String[] {
+		_methodParameterTypes10 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -274,11 +278,34 @@ public class SupplyListServiceClp implements SupplyListService {
 	}
 
 	@Override
+	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> getGameDayNeeds() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.SupplyItem>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public void deleteSupplyList(long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9,
 				new Object[] {
 					supplyListId,
 					
@@ -302,8 +329,8 @@ public class SupplyListServiceClp implements SupplyListService {
 	public void deleteMySupplyLists(
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName9,
-				_methodParameterTypes9,
+			_invokableService.invokeMethod(_methodName10,
+				_methodParameterTypes10,
 				new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -338,4 +365,6 @@ public class SupplyListServiceClp implements SupplyListService {
 	private String[] _methodParameterTypes8;
 	private String _methodName9;
 	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
 }

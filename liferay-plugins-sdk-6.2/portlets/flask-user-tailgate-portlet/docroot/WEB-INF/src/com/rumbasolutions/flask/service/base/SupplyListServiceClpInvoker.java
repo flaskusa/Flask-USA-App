@@ -64,15 +64,19 @@ public class SupplyListServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName77 = "deleteSupplyList";
+		_methodName77 = "getGameDayNeeds";
 
-		_methodParameterTypes77 = new String[] {
+		_methodParameterTypes77 = new String[] {  };
+
+		_methodName78 = "deleteSupplyList";
+
+		_methodParameterTypes78 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName78 = "deleteMySupplyLists";
+		_methodName79 = "deleteMySupplyLists";
 
-		_methodParameterTypes78 = new String[] {
+		_methodParameterTypes79 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -124,14 +128,19 @@ public class SupplyListServiceClpInvoker {
 
 		if (_methodName77.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+			return SupplyListServiceUtil.getGameDayNeeds();
+		}
+
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			SupplyListServiceUtil.deleteSupplyList(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName78.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
 			SupplyListServiceUtil.deleteMySupplyLists((com.liferay.portal.service.ServiceContext)arguments[0]);
 
 			return null;
@@ -158,4 +167,6 @@ public class SupplyListServiceClpInvoker {
 	private String[] _methodParameterTypes77;
 	private String _methodName78;
 	private String[] _methodParameterTypes78;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
 }

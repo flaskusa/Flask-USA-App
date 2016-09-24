@@ -144,6 +144,21 @@ public class SupplyListServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.SupplyItemSoap[] getGameDayNeeds()
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.SupplyItem> returnValue =
+				SupplyListServiceUtil.getGameDayNeeds();
+
+			return com.rumbasolutions.flask.model.SupplyItemSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteSupplyList(long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {

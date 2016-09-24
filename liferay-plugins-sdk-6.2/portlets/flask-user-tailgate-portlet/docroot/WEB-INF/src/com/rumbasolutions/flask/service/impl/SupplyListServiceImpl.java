@@ -23,8 +23,10 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
+import com.rumbasolutions.flask.model.SupplyItem;
 import com.rumbasolutions.flask.model.SupplyList;
 import com.rumbasolutions.flask.service.SupplyItemServiceUtil;
 import com.rumbasolutions.flask.service.SupplyListLocalServiceUtil;
@@ -154,6 +156,20 @@ public class SupplyListServiceImpl extends SupplyListServiceBaseImpl {
 			e.printStackTrace();
 		}
 		return array;
+	}
+	
+	@AccessControlled(guestAccessEnabled=true)
+	@Override
+	public List<SupplyItem> getGameDayNeeds(){
+		 List<SupplyItem> items = null;
+		try {
+			List<SupplyList> gamedayNeedsList = SupplyListUtil.findBysupplyListName("Game Day Needs");
+			items = SupplyItemServiceUtil.getItemsByListId(gamedayNeedsList.get(0).getSupplyListId());
+		} catch (Exception e) {
+			LOGGER.error("Exception in get Game Day Needs :" + e.getMessage());
+			e.printStackTrace();
+		}
+		return items;
 	}
 	
 	@Override

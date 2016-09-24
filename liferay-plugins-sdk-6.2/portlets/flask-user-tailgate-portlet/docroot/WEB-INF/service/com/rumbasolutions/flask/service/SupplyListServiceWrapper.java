@@ -92,6 +92,11 @@ public class SupplyListServiceWrapper implements SupplyListService,
 	}
 
 	@Override
+	public java.util.List<com.rumbasolutions.flask.model.SupplyItem> getGameDayNeeds() {
+		return _supplyListService.getGameDayNeeds();
+	}
+
+	@Override
 	public void deleteSupplyList(long supplyListId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_supplyListService.deleteSupplyList(supplyListId, serviceContext);
