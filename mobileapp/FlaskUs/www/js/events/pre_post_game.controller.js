@@ -117,39 +117,39 @@
             $scope.getIncludeFile = function (imgName) {
                 switch (imgName.toLowerCase()) {
                     case "tradition":
-                        return 'Flask_Tradition.jpg';
+                        return 'Flask_Tradition';
                     case "parking":
-                        return 'PRE_PARKING.jpg';
+                        return 'PRE_PARKING';
                     case "bar & restaurants":
-                        return 'PRE_BAR_RESTAURANTS.jpg';
+                        return 'PRE_BAR_RESTAURANTS';
                     case "traffic":
-                        return 'PRE_TRAFFIC.jpg';
+                        return 'PRE_TRAFFIC';
                     case "supplies":
-                        return 'Flask_Supplies.jpg';
+                        return 'Flask_Supplies';
                     case "getting home":
-                        return 'flask_GettingHome.jpg';
+                        return 'flask_GettingHome';
                     case "nightlife":
-                        return 'POST_NIGHTLIFE.jpg';
+                        return 'POST_NIGHTLIFE';
                     case "liquor store":
-                        return 'flask_restaurantBar_post.jpg';
+                        return 'flask_restaurantBar_post';
                     case "venue info":
-                        return 'venue_info.jpg';
+                        return 'venue_info';
                     case "venue map":
-                        return 'Venue_map.jpg';
+                        return 'Venue_map';
                     case "flask Us":
-                        return 'Flask_FlaskUs.jpg';
+                        return 'Flask_FlaskUs';
                     case "tickets":
-                        return 'tickets.jpg';
+                        return 'tickets';
                     case "game day needs":
-                        return 'PRE_SUPPLIES.jpg';
+                        return 'PRE_SUPPLIES';
                     case "Add Content":
-                        return 'Add_Event_Content.jpg'
+                        return 'Add_Event_Content'
                     case "Hotels":
-                        return 'POST_HOTEL.jpg'
+                        return 'POST_HOTEL'
                     case "Getting home":
-                        return 'POST_GETTINGHOME.jpg'
+                        return 'POST_GETTINGHOME'
                     default:
-                        return 'Flask_Default_Image.jpg';
+                        return 'Flask_Default_Image';
                 }
             }
         }
