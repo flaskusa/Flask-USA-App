@@ -13,3 +13,4 @@ insert into flaskevents_eventtype values(12,'concerts-rap', 'Rap');
 insert into flaskevents_eventtype values(13,'concerts-alternative', 'Alternative');
 insert into flaskevents_eventtype values(14,'concerts-electronic', 'Electronic');
 insert into flaskevents_eventtype values(15,'special-events-comedy', 'Comedy');
+insert into flaskevents_eventtype values(16,'nascar', 'Nascar');
