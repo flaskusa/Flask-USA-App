@@ -115,35 +115,39 @@
             }
 
             $scope.getIncludeFile = function (imgName) {
-                switch (imgName) {
-                    case "Tradition":
+                switch (imgName.toLowerCase()) {
+                    case "tradition":
                         return 'Flask_Tradition.jpg';
-                    case "Parking":
+                    case "parking":
                         return 'PRE_PARKING.jpg';
-                    case "Bar & Restaurants":
+                    case "bar & restaurants":
                         return 'PRE_BAR_RESTAURANTS.jpg';
-                    case "Traffic":
+                    case "traffic":
                         return 'PRE_TRAFFIC.jpg';
-                    case "Supplies":
+                    case "supplies":
                         return 'Flask_Supplies.jpg';
-                    case "Getting Home":
+                    case "getting home":
                         return 'flask_GettingHome.jpg';
-                    case "Nightlife":
+                    case "nightlife":
                         return 'POST_NIGHTLIFE.jpg';
-                    case "Liquor store":
+                    case "liquor store":
                         return 'flask_restaurantBar_post.jpg';
-                    case "Venue info":
+                    case "venue info":
                         return 'venue_info.jpg';
-                    case "Venue map":
+                    case "venue map":
                         return 'Venue_map.jpg';
-                    case "Flask Us":
+                    case "flask Us":
                         return 'Flask_FlaskUs.jpg';
-                    case "Tickets":
+                    case "tickets":
                         return 'tickets.jpg';
-                    case "Game Day Needs":
+                    case "game day needs":
                         return 'PRE_SUPPLIES.jpg';
                     case "Add Content":
                         return 'Add_Event_Content.jpg'
+                    case "Hotels":
+                        return 'POST_HOTEL.jpg'
+                    case "Getting home":
+                        return 'POST_GETTINGHOME.jpg'
                     default:
                         return 'Flask_Default_Image.jpg';
                 }
