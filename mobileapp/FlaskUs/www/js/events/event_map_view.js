@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady','$ionicSlideBoxDelegate'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady,$ionicSlideBoxDelegate) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate) {
         /* jshint validthis: true */
         var self = this;
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15, control: {} };
@@ -76,7 +76,7 @@
 
         $scope.closeOtherInfoWindows = function (mapClick) {
             if ($scope.infoTypeName == 'Pre-Event') {
-                if ( $scope.selectedIndex == 0 && $scope.markerOptions.control.getPlurals().allVals.length > 0) {
+                if ($scope.selectedIndex == 0 && $scope.markerOptions.control.getPlurals().allVals.length > 0) {
                     angular.forEach($scope.markerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
                             $scope.$apply(function () { val.model.show = false; });
@@ -95,7 +95,7 @@
                     })
                 }
             } else if ($scope.selectedIndex == 0 && $scope.infoTypeName == 'During-Event') {
-                 if ($scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                if ($scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                     angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
                             $scope.$apply(function () { val.model.show = false; });
@@ -105,7 +105,7 @@
                     })
                 }
             } else if ($scope.infoTypeName == 'Post-Event') {
-                 if ($scope.selectedIndex == 0 && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                if ($scope.selectedIndex == 0 && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                     angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
                             $scope.$apply(function () { val.model.show = false; });
@@ -114,7 +114,7 @@
                         }
                     })
                 }
-                 if ($scope.selectedIndex == 1 && $scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                if ($scope.selectedIndex == 1 && $scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                     angular.forEach($scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
                             $scope.$apply(function () { val.model.show = false; });
@@ -126,45 +126,51 @@
             }
         }
 
-        function infoWindowEvent() { 
+        function infoWindowEvent() {
             var iwOuter = $('.gm-style-iw');
-                var iwBackground = iwOuter.prev();
-                iwBackground.children(':nth-child(2)').css({ 'display': 'none' });
+            var iwBackground = iwOuter.prev();
+            iwBackground.children(':nth-child(2)').css({ 'display': 'none' });
 
-                // Removes white background DIV
-                iwBackground.children(':nth-child(4)').css({ 'display': 'none' });
-                iwBackground.children(':nth-child(3)').find('div').children().css({ 'background': 'black' });
-                $(".iw-content-toggle").click(function () {
-                var toggller = $("#iw-container .iw-content");
-                var toggleImage = $(".iw-content-toggle").find("img");
-                if ($("#iw-container").height() == 170) {
-                    $("#iw-container").css("height", "46px");
-                    toggleImage.attr("src", "img/map_icons/circle-right _arrow.png");
+            // Removes white background DIV
+            iwBackground.children(':nth-child(4)').css({ 'display': 'none' });
+            iwBackground.children(':nth-child(3)').find('div').children().css({ 'background': 'black' });
 
-                } else {
-                    $("#iw-container").css("height", "170px");
-                    toggleImage.attr("src", "img/map_icons/circle-down_arrow.png");
-                }
-            })
 
             var href = $scope.createMapLink($scope.currentShownInfoWindow.addrLine1);
             $("#iwTakeMeThere").attr("href", href);
             if ($scope.currentShownInfoWindow.phone == '') {
-                $scope.currentShownInfoWindow.phone = "+1 (248) 227-7148";
+                $("#iwCallNow").removeAttr("href");
+                $("#iwCallNow").removeAttr("target");
+                $("#iwCallNow").attr("onclick", "alert('Phone Not Available')");
+            } else {
+                href = "tel:" + $scope.currentShownInfoWindow.phone;
+                $("#iwCallNow").attr("href", href);
             }
-            href = "tel:" + $scope.currentShownInfoWindow.phone;
-            $("#iwCallNow").attr("href", href);
+
             if ($scope.currentShownInfoWindow.website == '') {
-                $scope.currentShownInfoWindow.website = "www.chelischilibar.com";
+                $("#iwViewWebsite").removeAttr("href");
+                $("#iwViewWebsite").removeAttr("target");
+                $("#iwViewWebsite").attr("onclick", "alert('website Not Available')");
+            } else {
+                href = $scope.currentShownInfoWindow.website;
+                href = fixUrl(href);
+                $("#iwViewWebsite").attr("href", href);
             }
-            href = $scope.currentShownInfoWindow.website;
-            href = fixUrl(href);
-            $("#iwViewWebsite").attr("href", href);
         }
         function setInfoWindowEvent() {
             infoWindowEvent();
-            $timeout(infoWindowEvent,100);
-              
+            $(".iw-content-toggle").click(function () {
+                var toggller = $("#iw-container .iw-content");
+                toggller.toggle();
+                var toggleImage = $(".iw-content-toggle").find("img");
+                if (!toggller.is(":visible")) {
+                    toggleImage.attr("src", "img/map_icons/circle-right _arrow.png");
+                } else {
+                    toggleImage.attr("src", "img/map_icons/circle-down_arrow.png");
+                }
+            })
+            $timeout(infoWindowEvent, 100);
+
         }
 
 
@@ -211,34 +217,34 @@
             }
         }
 
-         $scope.setSelectedTabIndex = function(infoTypeName, infoTyepeCategory) {
-             if(infoTypeName == 'Pre-Event') {
-                 if(infoTyepeCategory == 'Parking') {
-                     $scope.selectedIndex = 0;
-                 } else if(infoTyepeCategory == 'Bar & Restaurants') {
-                     $scope.selectedIndex = 1;
-                 }else if(infoTyepeCategory == 'Traffic') {
-                     $scope.selectedIndex = 2;
-                 } else{
-                       $scope.selectedIndex = 3;
-                 }
+        $scope.setSelectedTabIndex = function (infoTypeName, infoTyepeCategory) {
+            if (infoTypeName == 'Pre-Event') {
+                if (infoTyepeCategory == 'Parking') {
+                    $scope.selectedIndex = 0;
+                } else if (infoTyepeCategory == 'Bar & Restaurants') {
+                    $scope.selectedIndex = 1;
+                } else if (infoTyepeCategory == 'Traffic') {
+                    $scope.selectedIndex = 2;
+                } else {
+                    $scope.selectedIndex = 3;
+                }
 
-             } else if(infoTypeName == 'During-Event') {
-                 if(infoTyepeCategory == 'Bar & Restaurants') {
-                     $scope.selectedIndex = 0;
-                 }  else{
-                       $scope.selectedIndex = 1;
-                 }
-             } else {
-                   if(infoTyepeCategory == 'Bar & Restaurants') {
-                     $scope.selectedIndex = 0;
-                 } else if(infoTyepeCategory == 'Nightlife') {
-                     $scope.selectedIndex = 1;
-                 } else{
-                       $scope.selectedIndex = 2;
-                 }
-             }
-         };
+            } else if (infoTypeName == 'During-Event') {
+                if (infoTyepeCategory == 'Bar & Restaurants') {
+                    $scope.selectedIndex = 0;
+                } else {
+                    $scope.selectedIndex = 1;
+                }
+            } else {
+                if (infoTyepeCategory == 'Bar & Restaurants') {
+                    $scope.selectedIndex = 0;
+                } else if (infoTyepeCategory == 'Nightlife') {
+                    $scope.selectedIndex = 1;
+                } else {
+                    $scope.selectedIndex = 2;
+                }
+            }
+        };
 
         function setInfoType(infoType) {
             switch (infoType) {
@@ -532,7 +538,7 @@
         $scope.setMarkers = function () {
             if (!$scope.isMapMarkersSet) {
                 var tempObject = {};
-                $scope.flaskUsDetails=[];
+                $scope.flaskUsDetails = [];
                 angular.forEach($scope.eventDetails, function (value, index) {
                     tempObject = {};
                     value = angular.fromJson(value);
