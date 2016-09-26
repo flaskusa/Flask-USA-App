@@ -92,8 +92,10 @@
                 $ionicSlideBoxDelegate.update();
                 $ionicScrollDelegate.resize()
 
-                if ($scope.Post_Game.length ==0) {
-                    $scope.Post_Game.push("No_Event");
+                if ($scope.Post_Game.length >=0) {
+                    if(userDetail!=undefined && agreedToTermsOfUse==true) {
+                        $scope.Post_Game.push("Add Content");
+                    }
                 }
                 if ($scope.During_Game.length >= 0) {
                     if(userDetail!=undefined && agreedToTermsOfUse==true) {
@@ -103,6 +105,9 @@
                 if ($scope.Pre_Game.length >= 0) {
                     $scope.Pre_Game.push("Tickets");
                     $scope.Pre_Game.push("Game Day Needs");
+                    if(userDetail!=undefined && agreedToTermsOfUse==true) {
+                        $scope.Pre_Game.push("Add Content");
+                    }
                 }
             });
 
@@ -136,17 +141,17 @@
                         return 'venue_info';
                     case "venue map":
                         return 'Venue_map';
-                    case "flask Us":
+                    case "flask us":
                         return 'Flask_FlaskUs';
                     case "tickets":
                         return 'tickets';
                     case "game day needs":
                         return 'PRE_SUPPLIES';
-                    case "Add Content":
+                    case "add content":
                         return 'Add_Event_Content'
-                    case "Hotels":
+                    case "hotels":
                         return 'POST_HOTEL'
-                    case "Getting home":
+                    case "getting home":
                         return 'POST_GETTINGHOME'
                     default:
                         return 'Flask_Default_Image';
