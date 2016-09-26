@@ -213,13 +213,15 @@
                                     <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide1')"></button>
                                 </div>
                                 <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
-                                    <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:63px ">
-                                        <div class="form-group"><label class="control-label" for="Descriptionss"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
+                                    <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
+                                        <div class="form-group"><label class="control-label" for="Descriptionss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask Us</b></div></label>
 
-                                            <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetail.infoTitle}}</div></label>
+                                            <div class="form-group"style="padding-top:20px"><label class="control-label" for="Descriptionss"><div  style="width: 90%;padding-left:85px;text-align: start"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>
                                             </div>
 
-                                                <div class="controls col-70" id="Descriptionss"style="width: 77%;padding-left:87px">
+
+                                                <div class="col-70" id="Descriptionss"style="width: 90%;padding-left:85px;text-align: start">
+                                                    <div class="ion-star "style="float:left;margin-left: -24px"></div>
                                                     {{flaskUsDetail.infoDesc}}
                                                 </div>
                                             </div>
