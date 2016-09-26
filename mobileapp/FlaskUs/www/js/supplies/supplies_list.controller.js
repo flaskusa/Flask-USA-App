@@ -4,9 +4,9 @@
 
     .controller('SuppliesListCtrl', SuppliesListCtrl);
 
-    SuppliesListCtrl.$inject = ['$scope', '$stateParams',  'SupplyService', '$ionicModal', '$ionicNavBarDelegate','$cookies'];
+    SuppliesListCtrl.$inject = ['$scope', '$stateParams',  'SupplyService', '$ionicModal', '$ionicNavBarDelegate','$cookies','$ionicListDelegate'];
 
-    function SuppliesListCtrl($scope, $stateParams, SupplyService, $ionicModal, $ionicNavBarDelegate,$cookies) {
+    function SuppliesListCtrl($scope, $stateParams, SupplyService, $ionicModal, $ionicNavBarDelegate,$cookies,$ionicListDelegate) {
         /* jshint validthis: true */
         // putting our server data on scope to display
 
@@ -59,6 +59,7 @@
         $scope.editSupplyItem=function(data){
             if(data.edit==false) {
                 data.edit = true;
+                $ionicListDelegate.closeOptionButtons();
                 setTimeout(setFocus, 20);
             }
         }

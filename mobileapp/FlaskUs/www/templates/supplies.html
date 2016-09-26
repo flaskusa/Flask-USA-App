@@ -13,8 +13,8 @@
 <ion-list>
           <ion-item style="color: #0f0f0f"  ng-repeat="data in supplies"ng-if="data.isSystem==false"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)">
               <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
-              <label ng-if = "data.edit == false" style="font-weight: 200">{{ data.supplyListName | uppercase}} </label>
-              <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
+              <label ng-if = "data.edit == false" style="font-weight: 200"><i class="addText">{{ data.supplyListName | uppercase}}</i> </label>
+              <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"style="text-transform:uppercase"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
               </div>
               <a  ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px">{{data.listItem.length}}</span>
                   <div >
@@ -37,7 +37,7 @@
       <ion-list>
           <ion-item class="item "  ng-repeat="data in supplies"ng-if="data.isSystem==true"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)"on-swipe-left="onSwipeLeft(data)"on-swipe-right="onSwipeRight(data)">
              <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
-              <span style="color: #000000;font-weight: 200" ng-if = "data.edit == false">{{ data.supplyListName | uppercase}}</span>
+              <span class="emailText" style="color: #000000;font-weight: 200" ng-if = "data.edit == false"><i class="addText">{{ data.supplyListName | uppercase}}</i></span>
               <input type="text"id="systemEditBox"autofocus ng-model="data.supplyListName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
               <span ng-if="agreedToTermsOfUse==false" class="badge badge-assertive"style="cursor: pointer" ng-click="copyList(data)">copy</span>
               </div>
