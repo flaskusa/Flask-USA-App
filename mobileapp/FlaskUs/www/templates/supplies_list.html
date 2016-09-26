@@ -1,4 +1,4 @@
-﻿<ion-view back-button="true" cache-view="false" cache-view="false" view-title={{currListName}} ng-init="initialize()" class="mySupplyView">
+﻿<ion-view back-button="true" cache-view="false" cache-view="false" view-title={{currListName.toUpperCase()}} ng-init="initialize()" class="mySupplyView">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button>
         </ion-nav-back-button>
@@ -6,12 +6,12 @@
     <ion-content>
         <a class="item item-full list-item-icon-left "ng-click="addNewListItem()"ng-if=" showAddButton==true">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
-            <p class="addText">ADD NEW ITEM</p>
+            <p class="addText">CREATE NEW ITEM</p>
         </a>
 
         <div class="item item-input-inset"ng-if="addNewSuppliesItem==true">
             <label class="item-input-wrapper"style="background-color: white;">
-                <input type="text"id="addItemBox" placeholder="Item Name"autofocus ng-model="listItemName" style="text-transform:uppercase">
+                <input type="text"id="addItemBox" ng-class="{Upper_Case:listItemName!='' && listItemName!=undefined}" placeholder="Item Name"autofocus ng-model="listItemName">
             </label>
             <button class="button button-small suppliesButton"ng-click="saveItem(listItemName)">
                save
@@ -27,7 +27,7 @@
             <ion-item ng-repeat="data in listValue">
             <div ng-model="data.checked" ng-init="data.edit=false">
                 <div ng-if = "data.edit == false" ><i class="addText">{{ data.supplyItemName | uppercase}}</i></div>
-                <input type="text"id="editItemBox" autofocus ng-model="data.supplyItemName" ng-if="data.edit == true"style="text-transform:uppercase" ng-blur="saveSupplyItem(data)"/>
+                <input type="text"id="editItemBox" autofocus ng-model="data.supplyItemName" ng-if="data.edit == true"ng-class="{Upper_Case:data.supplyItemName!='' && data.supplyItemName!=undefined}" ng-blur="saveSupplyItem(data)"/>
 
                <!-- <div class="badge supplyDeleteButton extra-right-supply" ng-if="showCheckBox==false">
                 <span class="button-assertive   ion-trash-a icon supplyDeleteIcon" ng-class="{supplyEditIconPadding:data.edit}" ng-click="deleteSupplyItem($index,data.supplyItemId)"></span>

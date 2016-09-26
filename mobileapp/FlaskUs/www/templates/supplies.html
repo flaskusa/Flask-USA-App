@@ -14,7 +14,7 @@
           <ion-item style="color: #0f0f0f"  ng-repeat="data in supplies"ng-if="data.isSystem==false"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)">
               <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
               <label ng-if = "data.edit == false" style="font-weight: 200"><i class="addText">{{ data.supplyListName | uppercase}}</i> </label>
-              <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"style="text-transform:uppercase"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
+              <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
               </div>
               <a  ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px">{{data.listItem.length}}</span>
                   <div >
@@ -31,7 +31,7 @@
     </div></div>
       <div class="strip"ng-if="agreedToTermsOfUse==true">
           <div class="stripPadding">
-              <span ng-if="editList==false"><i class="textStyle">LIST FOR ALL USER</i></span>
+              <span ng-if="editList==false"><i class="textStyle">FLASK US SUPPLY LIST</i></span>
           </div></div>
 
       <ion-list>
