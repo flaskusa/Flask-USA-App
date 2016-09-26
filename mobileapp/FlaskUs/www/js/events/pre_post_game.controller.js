@@ -119,7 +119,7 @@
                     case "Tradition":
                         return 'Flask_Tradition.jpg';
                     case "Parking":
-                        return 'Flask_Parking.jpg';
+                        return 'PRE_PARKING.jpg';
                     case "Bar & Restaurants":
                         return 'PRE_BAR_RESTAURANTS.jpg';
                     case "Traffic":
@@ -141,7 +141,7 @@
                     case "Tickets":
                         return 'tickets.jpg';
                     case "Game Day Needs":
-                        return 'Game_Day_Needs.jpg';
+                        return 'PRE_SUPPLIES.jpg';
                     case "Add Content":
                         return 'Add_Event_Content.jpg'
                     default:
