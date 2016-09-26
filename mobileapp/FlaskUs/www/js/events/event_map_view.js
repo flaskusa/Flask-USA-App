@@ -159,17 +159,19 @@
         }
         function setInfoWindowEvent() {
             infoWindowEvent();
-            $(".iw-content-toggle").click(function () {
-                var toggller = $("#iw-container .iw-content");
-                toggller.toggle();
-                var toggleImage = $(".iw-content-toggle").find("img");
-                if (!toggller.is(":visible")) {
-                    toggleImage.attr("src", "img/map_icons/circle-right _arrow.png");
-                } else {
-                    toggleImage.attr("src", "img/map_icons/circle-down_arrow.png");
-                }
-            })
-            $timeout(infoWindowEvent, 100);
+            $timeout(function () {
+                $(".iw-content-toggle").click(function () {
+                    var toggller = $("#iw-container .iw-content");
+                    toggller.toggle();
+                    var toggleImage = $(".iw-content-toggle").find("img");
+                    if (!toggller.is(":visible")) {
+                        toggleImage.attr("src", "img/map_icons/circle-right _arrow.png");
+                    } else {
+                        toggleImage.attr("src", "img/map_icons/circle-down_arrow.png");
+                    }
+                })
+                infoWindowEvent();
+            }, 100);
 
         }
 
