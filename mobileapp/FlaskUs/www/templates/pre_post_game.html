@@ -22,12 +22,16 @@
                 </div>
                 <div class="right">
                     <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide1')"></button>
+                    
                 </div>
                 <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
                     <ion-slide ng-repeat="pre in Pre_Game" style="width:100%;">
-                        <img ng-src="img/resources/{{getIncludeFile(pre)}}" class="sliderImages"  ng-click="preEvent(pre)"/>
+                        <img ng-src="img/resources/{{getIncludeFile(pre)}}.jpg" class="sliderImages"  ng-click="preEvent(pre)"/>
+                        <img ng-src="img/flask_icons/{{getIncludeFile(pre)}}.svg" class="slider_svg_img" ng-click="preEvent(pre)" />
                     </ion-slide>
+                    
                 </ion-slide-box>
+                
             </div>
         </div>
         <div class="row mainRow" >
@@ -41,7 +45,8 @@
                 </div>
                 <ion-slide-box delegate-handle="slide2" show-pager='false' does-continue="true">
                     <ion-slide ng-repeat="during in During_Game" style="width:100%;">
-                        <img ng-src="img/resources/{{getIncludeFile(during)}}" class="sliderImages" ng-click="atEvent(during)"/></a>
+                        <img ng-src="img/resources/{{getIncludeFile(during)}}.jpg" class="sliderImages" ng-click="atEvent(during)"/>
+                        <img ng-src="img/flask_icons/{{getIncludeFile(during)}}.svg" class="slider_svg_img" ng-click="atEvent(during)" />
                     </ion-slide>
                 </ion-slide-box>
             </div>
@@ -57,7 +62,8 @@
                 </div>
                 <ion-slide-box delegate-handle="slide3" show-pager='false' does-continue="true">
                     <ion-slide ng-repeat="post in Post_Game" style="width:100%;">
-                        <img ng-src="img/resources/{{getIncludeFile(post)}}" class="sliderImages"  ng-click="postEvent(post)"/>
+                        <img ng-src="img/resources/{{getIncludeFile(post)}}.jpg" class="sliderImages"  ng-click="postEvent(post)"/>
+                        <img ng-src="img/flask_icons/{{getIncludeFile(post)}}.svg" class="slider_svg_img" ng-click="postEvent(post)" />
                     </ion-slide>
                 </ion-slide-box>
             </div>
