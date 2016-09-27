@@ -38,7 +38,7 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{tailgateId=");
 		sb.append(tailgateId);
@@ -72,6 +72,8 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 		sb.append(venmoAccountId);
 		sb.append(", amountToPay=");
 		sb.append(amountToPay);
+		sb.append(", logoId=");
+		sb.append(logoId);
 		sb.append("}");
 
 		return sb.toString();
@@ -142,6 +144,7 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 		}
 
 		tailgateInfoImpl.setAmountToPay(amountToPay);
+		tailgateInfoImpl.setLogoId(logoId);
 
 		tailgateInfoImpl.resetOriginalValues();
 
@@ -166,6 +169,7 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 		isDelete = objectInput.readInt();
 		venmoAccountId = objectInput.readUTF();
 		amountToPay = objectInput.readDouble();
+		logoId = objectInput.readLong();
 	}
 
 	@Override
@@ -214,6 +218,7 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 		}
 
 		objectOutput.writeDouble(amountToPay);
+		objectOutput.writeLong(logoId);
 	}
 
 	public long tailgateId;
@@ -232,4 +237,5 @@ public class TailgateInfoCacheModel implements CacheModel<TailgateInfo>,
 	public int isDelete;
 	public String venmoAccountId;
 	public double amountToPay;
+	public long logoId;
 }

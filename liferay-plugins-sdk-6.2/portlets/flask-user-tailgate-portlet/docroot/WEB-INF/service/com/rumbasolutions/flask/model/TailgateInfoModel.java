@@ -303,6 +303,20 @@ public interface TailgateInfoModel extends BaseModel<TailgateInfo> {
 	 */
 	public void setAmountToPay(double amountToPay);
 
+	/**
+	 * Returns the logo ID of this tailgate info.
+	 *
+	 * @return the logo ID of this tailgate info
+	 */
+	public long getLogoId();
+
+	/**
+	 * Sets the logo ID of this tailgate info.
+	 *
+	 * @param logoId the logo ID of this tailgate info
+	 */
+	public void setLogoId(long logoId);
+
 	@Override
 	public boolean isNew();
 

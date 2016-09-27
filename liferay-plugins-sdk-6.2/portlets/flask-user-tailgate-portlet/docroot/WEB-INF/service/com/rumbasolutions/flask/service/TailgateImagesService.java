@@ -89,4 +89,12 @@ public interface TailgateImagesService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.TailgateImages> getTailgateImages(
 		long tailgateId,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.liferay.portal.kernel.repository.model.FileEntry uploadTailgateImage(
+		java.io.File file, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.liferay.portal.kernel.repository.model.FileEntry uploadTailgateLogo(
+		java.io.File file, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

@@ -33,6 +33,7 @@ import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 
 public class FlaskDocLibUtil {
 	public static final String _tailgateRootFolder = "TailGate";
+	public static final String _tailgateLogosFolder = "TailgateLogos";
 		
 	public static String APP_NAME = "guest";
 	public static Role _guestRole =null;

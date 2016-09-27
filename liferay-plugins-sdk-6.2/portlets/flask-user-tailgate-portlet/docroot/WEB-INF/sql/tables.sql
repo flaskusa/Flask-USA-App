@@ -44,7 +44,8 @@ create table flasktailgate_TailgateInfo (
 	isActive INTEGER,
 	isDelete INTEGER,
 	venmoAccountId VARCHAR(75) null,
-	amountToPay DOUBLE
+	amountToPay DOUBLE,
+	logoId LONG
 );
 
 create table flasktailgate_TailgateMarker (

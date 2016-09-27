@@ -106,6 +106,22 @@ public class TailgateImagesServiceWrapper implements TailgateImagesService,
 			serviceContext);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry uploadTailgateImage(
+		java.io.File file, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateImagesService.uploadTailgateImage(file, tailgateId,
+			serviceContext);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry uploadTailgateLogo(
+		java.io.File file, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateImagesService.uploadTailgateLogo(file, tailgateId,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

@@ -81,9 +81,10 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 			{ "isActive", Types.INTEGER },
 			{ "isDelete", Types.INTEGER },
 			{ "venmoAccountId", Types.VARCHAR },
-			{ "amountToPay", Types.DOUBLE }
+			{ "amountToPay", Types.DOUBLE },
+			{ "logoId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(100) null,tailgateDescription VARCHAR(255) null,eventId LONG,eventName VARCHAR(100) null,tailgateDate DATE null,startTime LONG,endTime LONG,isActive INTEGER,isDelete INTEGER,venmoAccountId VARCHAR(75) null,amountToPay DOUBLE)";
+	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(100) null,tailgateDescription VARCHAR(255) null,eventId LONG,eventName VARCHAR(100) null,tailgateDate DATE null,startTime LONG,endTime LONG,isActive INTEGER,isDelete INTEGER,venmoAccountId VARCHAR(75) null,amountToPay DOUBLE,logoId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flasktailgate_TailgateInfo";
 	public static final String ORDER_BY_JPQL = " ORDER BY tailgateInfo.tailgateId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flasktailgate_TailgateInfo.tailgateId ASC";
@@ -127,6 +128,7 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		model.setIsDelete(soapModel.getIsDelete());
 		model.setVenmoAccountId(soapModel.getVenmoAccountId());
 		model.setAmountToPay(soapModel.getAmountToPay());
+		model.setLogoId(soapModel.getLogoId());
 
 		return model;
 	}
@@ -207,6 +209,7 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		attributes.put("isDelete", getIsDelete());
 		attributes.put("venmoAccountId", getVenmoAccountId());
 		attributes.put("amountToPay", getAmountToPay());
+		attributes.put("logoId", getLogoId());
 
 		return attributes;
 	}
@@ -308,6 +311,12 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 
 		if (amountToPay != null) {
 			setAmountToPay(amountToPay);
+		}
+
+		Long logoId = (Long)attributes.get("logoId");
+
+		if (logoId != null) {
+			setLogoId(logoId);
 		}
 	}
 
@@ -517,6 +526,17 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		_amountToPay = amountToPay;
 	}
 
+	@JSON
+	@Override
+	public long getLogoId() {
+		return _logoId;
+	}
+
+	@Override
+	public void setLogoId(long logoId) {
+		_logoId = logoId;
+	}
+
 	@Override
 	public ExpandoBridge getExpandoBridge() {
 		return ExpandoBridgeFactoryUtil.getExpandoBridge(getCompanyId(),
@@ -560,6 +580,7 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		tailgateInfoImpl.setIsDelete(getIsDelete());
 		tailgateInfoImpl.setVenmoAccountId(getVenmoAccountId());
 		tailgateInfoImpl.setAmountToPay(getAmountToPay());
+		tailgateInfoImpl.setLogoId(getLogoId());
 
 		tailgateInfoImpl.resetOriginalValues();
 
@@ -700,12 +721,14 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 
 		tailgateInfoCacheModel.amountToPay = getAmountToPay();
 
+		tailgateInfoCacheModel.logoId = getLogoId();
+
 		return tailgateInfoCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{tailgateId=");
 		sb.append(getTailgateId());
@@ -739,6 +762,8 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		sb.append(getVenmoAccountId());
 		sb.append(", amountToPay=");
 		sb.append(getAmountToPay());
+		sb.append(", logoId=");
+		sb.append(getLogoId());
 		sb.append("}");
 
 		return sb.toString();
@@ -746,7 +771,7 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.TailgateInfo");
@@ -816,6 +841,10 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 			"<column><column-name>amountToPay</column-name><column-value><![CDATA[");
 		sb.append(getAmountToPay());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>logoId</column-name><column-value><![CDATA[");
+		sb.append(getLogoId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -843,5 +872,6 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 	private int _isDelete;
 	private String _venmoAccountId;
 	private double _amountToPay;
+	private long _logoId;
 	private TailgateInfo _escapedModel;
 }

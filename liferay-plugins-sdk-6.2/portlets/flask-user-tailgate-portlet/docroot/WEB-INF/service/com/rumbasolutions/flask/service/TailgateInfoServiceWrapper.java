@@ -61,11 +61,31 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay,
+		long amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _tailgateInfoService.addTailgateInfo(tailgateName,
 			tailgateDescription, eventId, eventName, tailgateDate, startTime,
-			endTime, venmoAccountId, amountToPay, serviceContext);
+			endTime, venmoAccountId, amountToPay, logoId, serviceContext);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry getTailgateLogo(
+		long tailgateId) {
+		return _tailgateInfoService.getTailgateLogo(tailgateId);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry updateTailgateLogo(
+		long tailgateId, long logoId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateInfoService.updateTailgateLogo(tailgateId, logoId,
+			serviceContext);
+	}
+
+	@Override
+	public void deleteTailgateLogo(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_tailgateInfoService.deleteTailgateLogo(tailgateId, serviceContext);
 	}
 
 	@Override
@@ -97,12 +117,12 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay,
+		long amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _tailgateInfoService.updateTailgateInfo(tailgateId,
 			tailgateName, tailgateDescription, eventId, eventName,
 			tailgateDate, startTime, endTime, venmoAccountId, amountToPay,
-			serviceContext);
+			logoId, serviceContext);
 	}
 
 	@Override

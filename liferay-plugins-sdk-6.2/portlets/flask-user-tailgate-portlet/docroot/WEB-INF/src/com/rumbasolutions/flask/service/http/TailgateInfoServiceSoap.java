@@ -66,16 +66,61 @@ public class TailgateInfoServiceSoap {
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay,
+		long amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.TailgateInfo returnValue = TailgateInfoServiceUtil.addTailgateInfo(tailgateName,
 					tailgateDescription, eventId, eventName, tailgateDate,
-					startTime, endTime, venmoAccountId, amountToPay,
+					startTime, endTime, venmoAccountId, amountToPay, logoId,
 					serviceContext);
 
 			return com.rumbasolutions.flask.model.TailgateInfoSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.kernel.repository.model.FileEntrySoap getTailgateLogo(
+		long tailgateId) throws RemoteException {
+		try {
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = TailgateInfoServiceUtil.getTailgateLogo(tailgateId);
+
+			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.kernel.repository.model.FileEntrySoap updateTailgateLogo(
+		long tailgateId, long logoId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = TailgateInfoServiceUtil.updateTailgateLogo(tailgateId,
+					logoId, serviceContext);
+
+			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteTailgateLogo(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			TailgateInfoServiceUtil.deleteTailgateLogo(tailgateId,
+				serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -148,14 +193,14 @@ public class TailgateInfoServiceSoap {
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay,
+		long amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.TailgateInfo returnValue = TailgateInfoServiceUtil.updateTailgateInfo(tailgateId,
 					tailgateName, tailgateDescription, eventId, eventName,
 					tailgateDate, startTime, endTime, venmoAccountId,
-					amountToPay, serviceContext);
+					amountToPay, logoId, serviceContext);
 
 			return com.rumbasolutions.flask.model.TailgateInfoSoap.toSoapModel(returnValue);
 		}

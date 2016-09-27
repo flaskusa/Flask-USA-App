@@ -70,6 +70,20 @@ public class TailgateImagesServiceClp implements TailgateImagesService {
 		_methodParameterTypes8 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName9 = "uploadTailgateImage";
+
+		_methodParameterTypes9 = new String[] {
+				"java.io.File", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName10 = "uploadTailgateLogo";
+
+		_methodParameterTypes10 = new String[] {
+				"java.io.File", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -302,6 +316,70 @@ public class TailgateImagesServiceClp implements TailgateImagesService {
 		return (java.util.List<com.rumbasolutions.flask.model.TailgateImages>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry uploadTailgateImage(
+		java.io.File file, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9,
+					new Object[] {
+						ClpSerializer.translateInput(file),
+						
+					tailgateId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.repository.model.FileEntry)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry uploadTailgateLogo(
+		java.io.File file, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10,
+					new Object[] {
+						ClpSerializer.translateInput(file),
+						
+					tailgateId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.repository.model.FileEntry)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -319,4 +397,8 @@ public class TailgateImagesServiceClp implements TailgateImagesService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
 }

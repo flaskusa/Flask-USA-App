@@ -106,6 +106,18 @@ public class TailgateImagesServiceUtil {
 		return getService().getTailgateImages(tailgateId, serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.repository.model.FileEntry uploadTailgateImage(
+		java.io.File file, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().uploadTailgateImage(file, tailgateId, serviceContext);
+	}
+
+	public static com.liferay.portal.kernel.repository.model.FileEntry uploadTailgateLogo(
+		java.io.File file, long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().uploadTailgateLogo(file, tailgateId, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

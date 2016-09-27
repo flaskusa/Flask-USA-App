@@ -70,6 +70,20 @@ public class TailgateImagesServiceClpInvoker {
 		_methodParameterTypes77 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName78 = "uploadTailgateImage";
+
+		_methodParameterTypes78 = new String[] {
+				"java.io.File", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName79 = "uploadTailgateLogo";
+
+		_methodParameterTypes79 = new String[] {
+				"java.io.File", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -132,6 +146,20 @@ public class TailgateImagesServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+			return TailgateImagesServiceUtil.uploadTailgateImage((java.io.File)arguments[0],
+				((Long)arguments[1]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
+		}
+
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+			return TailgateImagesServiceUtil.uploadTailgateLogo((java.io.File)arguments[0],
+				((Long)arguments[1]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -151,4 +179,8 @@ public class TailgateImagesServiceClpInvoker {
 	private String[] _methodParameterTypes76;
 	private String _methodName77;
 	private String[] _methodParameterTypes77;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
 }

@@ -67,12 +67,29 @@ public class TailgateInfoServiceUtil {
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay,
+		long amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addTailgateInfo(tailgateName, tailgateDescription, eventId,
 			eventName, tailgateDate, startTime, endTime, venmoAccountId,
-			amountToPay, serviceContext);
+			amountToPay, logoId, serviceContext);
+	}
+
+	public static com.liferay.portal.kernel.repository.model.FileEntry getTailgateLogo(
+		long tailgateId) {
+		return getService().getTailgateLogo(tailgateId);
+	}
+
+	public static com.liferay.portal.kernel.repository.model.FileEntry updateTailgateLogo(
+		long tailgateId, long logoId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .updateTailgateLogo(tailgateId, logoId, serviceContext);
+	}
+
+	public static void deleteTailgateLogo(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteTailgateLogo(tailgateId, serviceContext);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.TailgateInfo> getAllTailgate() {
@@ -99,12 +116,12 @@ public class TailgateInfoServiceUtil {
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay,
+		long amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateTailgateInfo(tailgateId, tailgateName,
 			tailgateDescription, eventId, eventName, tailgateDate, startTime,
-			endTime, venmoAccountId, amountToPay, serviceContext);
+			endTime, venmoAccountId, amountToPay, logoId, serviceContext);
 	}
 
 	public static void deleteTailgateInfo(long tailgateId,

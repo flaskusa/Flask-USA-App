@@ -335,6 +335,7 @@ public class TailgateInfoPersistenceImpl extends BasePersistenceImpl<TailgateInf
 		tailgateInfoImpl.setIsDelete(tailgateInfo.getIsDelete());
 		tailgateInfoImpl.setVenmoAccountId(tailgateInfo.getVenmoAccountId());
 		tailgateInfoImpl.setAmountToPay(tailgateInfo.getAmountToPay());
+		tailgateInfoImpl.setLogoId(tailgateInfo.getLogoId());
 
 		return tailgateInfoImpl;
 	}

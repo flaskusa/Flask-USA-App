@@ -66,6 +66,7 @@ public class TailgateInfoWrapper implements TailgateInfo,
 		attributes.put("isDelete", getIsDelete());
 		attributes.put("venmoAccountId", getVenmoAccountId());
 		attributes.put("amountToPay", getAmountToPay());
+		attributes.put("logoId", getLogoId());
 
 		return attributes;
 	}
@@ -167,6 +168,12 @@ public class TailgateInfoWrapper implements TailgateInfo,
 
 		if (amountToPay != null) {
 			setAmountToPay(amountToPay);
+		}
+
+		Long logoId = (Long)attributes.get("logoId");
+
+		if (logoId != null) {
+			setLogoId(logoId);
 		}
 	}
 
@@ -530,6 +537,26 @@ public class TailgateInfoWrapper implements TailgateInfo,
 	@Override
 	public void setAmountToPay(double amountToPay) {
 		_tailgateInfo.setAmountToPay(amountToPay);
+	}
+
+	/**
+	* Returns the logo ID of this tailgate info.
+	*
+	* @return the logo ID of this tailgate info
+	*/
+	@Override
+	public long getLogoId() {
+		return _tailgateInfo.getLogoId();
+	}
+
+	/**
+	* Sets the logo ID of this tailgate info.
+	*
+	* @param logoId the logo ID of this tailgate info
+	*/
+	@Override
+	public void setLogoId(long logoId) {
+		_tailgateInfo.setLogoId(logoId);
 	}
 
 	@Override

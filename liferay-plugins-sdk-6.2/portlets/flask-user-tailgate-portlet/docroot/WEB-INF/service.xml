@@ -35,6 +35,7 @@
         <column name="amountToPay" type="double"></column>
 
 		<!-- Order -->
+        <column name="logoId" type="long"></column>
 
 		<order by="asc">
 			<order-column name="tailgateId" />

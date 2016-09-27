@@ -87,6 +87,7 @@
 			<basic name="isDelete" />
 			<basic name="venmoAccountId" />
 			<basic name="amountToPay" />
+			<basic name="logoId" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

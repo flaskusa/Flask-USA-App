@@ -47,6 +47,7 @@ public class TailgateInfoSoap implements Serializable {
 		soapModel.setIsDelete(model.getIsDelete());
 		soapModel.setVenmoAccountId(model.getVenmoAccountId());
 		soapModel.setAmountToPay(model.getAmountToPay());
+		soapModel.setLogoId(model.getLogoId());
 
 		return soapModel;
 	}
@@ -227,6 +228,14 @@ public class TailgateInfoSoap implements Serializable {
 		_amountToPay = amountToPay;
 	}
 
+	public long getLogoId() {
+		return _logoId;
+	}
+
+	public void setLogoId(long logoId) {
+		_logoId = logoId;
+	}
+
 	private long _tailgateId;
 	private long _companyId;
 	private long _userId;
@@ -243,4 +252,5 @@ public class TailgateInfoSoap implements Serializable {
 	private int _isDelete;
 	private String _venmoAccountId;
 	private double _amountToPay;
+	private long _logoId;
 }

@@ -76,6 +76,7 @@
 		<field name="isDelete" type="int" />
 		<field name="venmoAccountId" type="String" />
 		<field name="amountToPay" type="double" />
+		<field name="logoId" type="long" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.TailgateMarker">
 		<field name="tailgatemarkerid" type="long" />
