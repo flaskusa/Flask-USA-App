@@ -192,6 +192,12 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		_methodParameterTypes24 = new String[] {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName25 = "uploadUserProfile";
+
+		_methodParameterTypes25 = new String[] {
+				"java.io.File", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -1245,6 +1251,36 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		return ((Integer)returnObj).intValue();
 	}
 
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry uploadUserProfile(
+		java.io.File file,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName25,
+					_methodParameterTypes25,
+					new Object[] {
+						ClpSerializer.translateInput(file),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.repository.model.FileEntry)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1294,4 +1330,6 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	private String[] _methodParameterTypes23;
 	private String _methodName24;
 	private String[] _methodParameterTypes24;
+	private String _methodName25;
+	private String[] _methodParameterTypes25;
 }

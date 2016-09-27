@@ -23,6 +23,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Country;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.ListTypeConstants;
 import com.liferay.portal.model.Phone;
@@ -37,6 +38,7 @@ import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
@@ -48,6 +50,7 @@ import com.liferay.portal.service.persistence.ListTypeUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueUtil;
@@ -94,6 +97,35 @@ public class FlaskModelUtil {
 		}
 		
 	}
+	
+	public static long repositoryId = 0;
+	public static long getFlaskRepositoryId() throws PortalException, SystemException{
+		if(repositoryId==0){
+			long companyId = PortalUtil.getDefaultCompanyId();
+			Group group = GroupLocalServiceUtil.getGroup(companyId, "guest");
+			repositoryId = group.getGroupId();
+		}
+		return repositoryId;	
+	}
+	
+	public static Folder getOrCreateFolder(String eventFolderName, long parentFolderId, long repositoryId, long userId, ServiceContext serviceContext) throws PortalException, SystemException{
+		Folder folder= null;
+		if(parentFolderId == 0){
+			  parentFolderId = DLFolderConstants.DEFAULT_PARENT_FOLDER_ID;
+		  }
+		  try {
+			  folder = DLAppLocalServiceUtil.getFolder(
+		            repositoryId, parentFolderId, eventFolderName);
+		  } catch (Exception e) {
+			  folder = DLAppLocalServiceUtil.addFolder(userId,
+		            repositoryId, parentFolderId, eventFolderName,
+		            eventFolderName, serviceContext);
+			  setGuestViewFolderPermission(folder);
+		    }
+		return folder;
+	}
+
+	
 	/**
 	 * Get flask user specific information from liferay User 
 	 * getFlaskAdmin

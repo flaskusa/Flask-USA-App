@@ -192,6 +192,12 @@ public class FlaskAdminServiceClpInvoker {
 		_methodParameterTypes54 = new String[] {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName55 = "uploadUserProfile";
+
+		_methodParameterTypes55 = new String[] {
+				"java.io.File", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -417,6 +423,12 @@ public class FlaskAdminServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
+		if (_methodName55.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes55, parameterTypes)) {
+			return FlaskAdminServiceUtil.uploadUserProfile((java.io.File)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -468,4 +480,6 @@ public class FlaskAdminServiceClpInvoker {
 	private String[] _methodParameterTypes53;
 	private String _methodName54;
 	private String[] _methodParameterTypes54;
+	private String _methodName55;
+	private String[] _methodParameterTypes55;
 }

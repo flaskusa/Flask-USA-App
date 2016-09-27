@@ -286,6 +286,12 @@ public class FlaskAdminServiceUtil {
 		return getService().getUserForScreenName(screenName, serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.repository.model.FileEntry uploadUserProfile(
+		java.io.File file,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().uploadUserProfile(file, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

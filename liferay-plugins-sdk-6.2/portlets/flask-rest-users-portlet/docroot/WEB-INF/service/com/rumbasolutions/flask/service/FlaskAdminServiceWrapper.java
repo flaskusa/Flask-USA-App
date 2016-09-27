@@ -298,6 +298,13 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 			serviceContext);
 	}
 
+	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry uploadUserProfile(
+		java.io.File file,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskAdminService.uploadUserProfile(file, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

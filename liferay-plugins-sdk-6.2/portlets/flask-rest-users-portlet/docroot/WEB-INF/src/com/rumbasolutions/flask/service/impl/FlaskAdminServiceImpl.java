@@ -14,6 +14,10 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -26,6 +30,7 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
+import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Country;
@@ -44,10 +49,12 @@ import com.liferay.portal.service.persistence.CountryUtil;
 import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.service.persistence.RegionUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.rumbasolutions.flask.model.FlaskAdmin;
 import com.rumbasolutions.flask.model.FlaskRole;
+import com.rumbasolutions.flask.service.FlaskAdminServiceUtil;
 import com.rumbasolutions.flask.service.base.FlaskAdminServiceBaseImpl;
 
 /**
@@ -78,7 +85,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
  * @see com.rumbasolutions.flask.service.FlaskAdminService#getFlaskAdmins()
  */
 	private static Log LOGGER = LogFactoryUtil.getLog(FlaskAdminServiceImpl.class);
-
+	public static final String _userProfilesFolder = "UserProfiles";
 	public static Role _guestRole =null;
 	
 	@Override
@@ -781,5 +788,28 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			LOGGER.error(e.getMessage());
 		}
 		return userExist;
+	}
+	
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public FileEntry uploadUserProfile(File file, ServiceContext serviceContext){
+		FileEntry fileEntry = null;
+		try {
+			Path source = Paths.get(file.getName());
+			String mimeType = Files.probeContentType(source);
+			long repositoryId = FlaskModelUtil.getFlaskRepositoryId();
+			long userId = serviceContext.getUserId();
+			String name = userId +"_"+ file.getName();
+			Folder folder = FlaskModelUtil.getOrCreateFolder(_userProfilesFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
+			fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), folder.getRepositoryId(), folder.getFolderId(), name, mimeType, name, name, "", file, serviceContext);
+			long portraitId = UserLocalServiceUtil.getUser(userId).getPortraitId();
+			FlaskAdminServiceUtil.updateUserForFileEntry(userId, fileEntry.getFileEntryId(), serviceContext);
+			if(portraitId>0)
+				DLAppLocalServiceUtil.deleteFileEntry(portraitId);
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return fileEntry;
 	}
 }

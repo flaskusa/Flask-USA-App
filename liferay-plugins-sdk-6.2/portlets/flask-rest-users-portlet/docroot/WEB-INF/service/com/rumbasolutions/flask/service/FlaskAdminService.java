@@ -243,4 +243,9 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public int getUserForScreenName(java.lang.String screenName,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	public com.liferay.portal.kernel.repository.model.FileEntry uploadUserProfile(
+		java.io.File file,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }
