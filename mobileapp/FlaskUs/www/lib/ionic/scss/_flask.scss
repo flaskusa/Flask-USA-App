@@ -158,12 +158,22 @@ html, body{font-family: 'Avenir Next';}
 .sliderImages{
     width: 100%;display:block;height: 100%
 }
+
+.slider_svg_img{
+    margin-top: -10%;
+    height: 27%;
+    margin-left: -11%;
+    margin-right: -40%;
+    width: 71%;
+}
+
 .sidepanel{
     float:left;
-        float: left;
+    float: left;
     width: 27px;
     height: 100%;
 }
+
 .row.mainRow {
     margin-top: -1px;
 }
@@ -356,6 +366,13 @@ button.button.button-block.button-positive.taglib-text{
 	color:white;
 	width:40%;
 }
+
+@media only screen and (min-width: 167px){
+    .add_tailgate_profile {
+         margin-left: 26%;
+    }
+}
+
 
 .navigation{	 
 		text-align: center;
@@ -1763,6 +1780,12 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
   top: 20px !important;
    }
 
+   #iw-container {
+     overflow: hidden;
+     height : 46px;
+    transition: height 2s;
+
+   }
 .my-message-view {
   .item-content {
     padding-right: 6px;
@@ -2026,27 +2049,25 @@ animation:*/
 /*css for star icon*/
 div.star_div_icon{
     margin-top: -56px;
-    margin-left: 104%;
+    margin-left: 103%;
+}
+
+i.choose_picture{
+    margin-bottom: 10px;
+    font-size: 19px;
+    margin-left: 10px;
 }
 
 
 /*CSS FOR EXPANDING AND CLOSING TABS WITH ANIMATION*/
-
-.iw-content-icon {
-  width:45%;padding-right: 10px;text-align: right;
-}
-.iw-content-text {
-  vertical-align: middle;text-align: left;
-}
-.Upper_Case{
-  text-transform:uppercase
-}
-
 .manageContentButtons {
   background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
   width: 50px;
   float:right;
   height: 40px;
   top: 0px;
-  border-radius: 0px; }
+  border-radius: 0px;
+}
+
+
 
