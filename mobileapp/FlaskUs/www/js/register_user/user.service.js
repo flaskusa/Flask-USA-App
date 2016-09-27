@@ -11,14 +11,18 @@
         var addUserURL = "/flask-rest-users-portlet.flaskadmin/sign-up";
         var getUserByEmailId = "/flask-rest-users-portlet.flaskadmin/get-user-for-email";
         var updateUserURL = "flask-rest-users-portlet.flaskadmin/update-flask-user";
-        var getUserByIdURL="flask-rest-users-portlet.flaskadmin/get-user-by-id";
+        var getUserByIdURL = "flask-rest-users-portlet.flaskadmin/get-user-by-id";
+        var getCountriesURL = "flask-rest-users-portlet.flaskadmin/get-countries";
+        var getRegionURL = "flask-rest-users-portlet.flaskadmin/get-region";
         
 
         var userServices = {
             saveUser: saveUser,
             getUserbyEmail: getUserbyEmail,
             getUserById: getUserById,
-            updateUser: updateUser
+            updateUser: updateUser,
+            getCountries: getCountries,
+            getRegion: getRegion
         }
 
         function saveUser(user, gender, srcname) {
@@ -70,20 +74,29 @@
                });
         }
 
-        function updateUser(user, gender, srcname) {
+        function updateUser(userId,user,sId,cId) {
             var params = {
+                userId:userId,
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.Email,
-                screenName: srcname,
+                screenName: user.srcname,
                 password1: user.password1,
                 password2: user.password2,
                 DOB: user.DOB,
-                isMale: gender,
+                isMale: '0',
+                streetName: user.streetName,
+                aptNo:user.aptNo,
                 areaCode: user.areaCode,
-                mobileNumber: user.mobileNumber
+                city: user.city,
+                stateId: sId,
+                countryId: cId,
+                mobileNumber: user.mobileNumber,
+                userInterests:"658HHQ2fl34YyxEkOn6dIa7rez9hASadSDR09h0dn44ZULT+kQS+z0qMwIrsnFq6"
+
             };
-            return $http.get(baseURL + addUserURL, {
+
+            return $http.get(baseURL + updateUserURL, {
                 params
             }
             )
@@ -93,6 +106,28 @@
                 //add errror handling 
                 console.log("failed");
             });
+        }
+
+        function getCountries() {
+            return $http.get(baseURL + getCountriesURL)
+               .then(function success(response) {
+                   return response;
+               }, function failure(response) {
+                   console.log("failed");
+               });
+        }
+
+        function getRegion(countryId) {
+            return $http.get(baseURL + getRegionURL, {
+                params: {
+                    'countryId': countryId
+                }
+            })
+               .then(function success(response) {
+                   return response;
+               }, function failure(response) {
+                   console.log("failed");
+               });
         }
 
         return userServices;
