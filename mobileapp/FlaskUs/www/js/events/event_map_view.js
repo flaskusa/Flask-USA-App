@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser) {
         /* jshint validthis: true */
         var self = this;
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15, control: {} };
@@ -73,7 +73,10 @@
                 $timeout(setInfoWindowEvent, 100);
             }
         };
+        document.addEventListener("deviceready", onDeviceReady, false);
+        function onDeviceReady() {
 
+        }
         $scope.closeOtherInfoWindows = function (mapClick) {
             if ($scope.infoTypeName == 'Pre-Event') {
                 if ($scope.selectedIndex == 0 && $scope.markerOptions.control.getPlurals().allVals.length > 0) {
@@ -137,14 +140,18 @@
 
 
             var href = $scope.createMapLink($scope.currentShownInfoWindow.addrLine1);
-            $("#iwTakeMeThere").attr("href", href);
+            $("#iwTakeMeThere").on("click", function () {
+                openUrl(href, "_system");
+            });
             if ($scope.currentShownInfoWindow.phone == '') {
                 $("#iwCallNow").removeAttr("href");
                 $("#iwCallNow").removeAttr("target");
                 $("#iwCallNow").attr("onclick", "alert('Phone Not Available')");
             } else {
                 href = "tel:" + $scope.currentShownInfoWindow.phone;
-                $("#iwCallNow").attr("href", href);
+                $("#iwCallNow").on("click", function () {
+                    openUrl(href, "_system");
+                });
             }
 
             if ($scope.currentShownInfoWindow.website == '') {
@@ -154,8 +161,20 @@
             } else {
                 href = $scope.currentShownInfoWindow.website;
                 href = fixUrl(href);
-                $("#iwViewWebsite").attr("href", href);
+                $("#iwViewWebsite").on("click", function () {
+                    openUrl(href, "_system");
+                });
             }
+        }
+
+        function openUrl(url, target) {
+            $cordovaInAppBrowser.open(url, target, { location: 'no' }).
+                then(function (event) {
+                    // success
+                })
+                .catch(function (event) {
+                    // error
+                });
         }
         function setInfoWindowEvent() {
             infoWindowEvent();
@@ -617,7 +636,7 @@
         $scope.createMapLink = function (address1) {
             var findUs = '';
             if ($scope.isMobile.Android()) {
-                findUs = 'geo:' + address1
+                findUs = 'http://maps.google.com/?saddr=Current%20Location&daddr=' + address1;
             }
             else if ($scope.isMobile.iOS()) {
                 findUs = 'http://maps.apple.com/?saddr=Current%20Location&daddr=' + address1;
