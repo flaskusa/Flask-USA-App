@@ -286,7 +286,7 @@
                 </ion-tab>
                 <ion-tab title="Nightlife" ng-click="selectTab(1)" events="map.events">
                     <div id="nightLifeTab" style="height:100%;width:100%"  ng-if="selectedIndex == 1">
-                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
+                        <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">
                                 <div ng-controller="refreshMap">
