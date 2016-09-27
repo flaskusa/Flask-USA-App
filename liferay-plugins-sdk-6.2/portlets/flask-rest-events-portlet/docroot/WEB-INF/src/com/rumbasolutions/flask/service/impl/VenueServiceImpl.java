@@ -605,7 +605,6 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 						addVenueDetailImage(destVenueDetail.getVenueDetailId(),fileEntry.getTitle(),fileEntry.getDescription(),fileEntry.getUuid(),fileEntry.getGroupId(), serviceContext);
 				}
 			}
-			
 		} catch (Exception e) {
 			LOGGER.error(e);
 		}

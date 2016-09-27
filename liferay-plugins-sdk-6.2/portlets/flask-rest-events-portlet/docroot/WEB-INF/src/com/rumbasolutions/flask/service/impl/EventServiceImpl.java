@@ -20,8 +20,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONException;
@@ -42,7 +40,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.rumbasolutions.flask.model.Event;
 import com.rumbasolutions.flask.model.EventDetail;
 import com.rumbasolutions.flask.model.EventDetailImage;
@@ -81,7 +78,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.rumbasolutions.flask.service.EventServiceUtil} to access the event remote service.
 	 */
-	
+	public static final String _eventRootFolder = "Event";
 	private static Log LOGGER = LogFactoryUtil.getLog(EventServiceImpl.class);
 	
 	@AccessControlled(guestAccessEnabled =true)
@@ -634,7 +631,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		List<FileEntry> eventLogos = null;
 		try {
 			long companyId = PortalUtil.getDefaultCompanyId();
-			Group group = GroupLocalServiceUtil.getGroup(companyId, "flask");
+			Group group = GroupLocalServiceUtil.getGroup(companyId, "guest");
 			Folder folder = DLAppLocalServiceUtil.getFolder(group.getGroupId(), DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, "Event");
 			Folder eventLogosFolder = DLAppLocalServiceUtil.getFolder(folder.getRepositoryId(), folder.getFolderId(), "Logos");
 			eventLogos = DLAppServiceUtil.getFileEntries(eventLogosFolder.getRepositoryId(), eventLogosFolder.getFolderId());
