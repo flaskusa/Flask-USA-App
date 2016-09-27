@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate','$cordovaInAppBrowser'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate,$cordovaInAppBrowser) {
         /* jshint validthis: true */
         var self = this;
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15, control: {} };
@@ -140,42 +140,39 @@
 
 
             var href = $scope.createMapLink($scope.currentShownInfoWindow.addrLine1);
-            $("#iwTakeMeThere").on("click", function () {
-                openUrl(href, "_system");
-            });
+
+            $("#iwTakeMeThere").on("click", function(){
+               openUrl(href,"_system");
+             });
             if ($scope.currentShownInfoWindow.phone == '') {
-                $("#iwCallNow").removeAttr("href");
-                $("#iwCallNow").removeAttr("target");
-                $("#iwCallNow").attr("onclick", "alert('Phone Not Available')");
+                $("#iwCallNow").text("Not Available");
             } else {
                 href = "tel:" + $scope.currentShownInfoWindow.phone;
-                $("#iwCallNow").on("click", function () {
-                    openUrl(href, "_system");
-                });
+               $("#iwCallNow").on("click", function(){
+                   openUrl(href,"_system");
+               });
             }
 
             if ($scope.currentShownInfoWindow.website == '') {
-                $("#iwViewWebsite").removeAttr("href");
-                $("#iwViewWebsite").removeAttr("target");
-                $("#iwViewWebsite").attr("onclick", "alert('website Not Available')");
+                $("#iwViewWebsite").text('Not Available');
             } else {
                 href = $scope.currentShownInfoWindow.website;
                 href = fixUrl(href);
-                $("#iwViewWebsite").on("click", function () {
-                    openUrl(href, "_system");
-                });
+                $("#iwViewWebsite").on("click", function(){
+                   openUrl(href,"_system");
+                 });
             }
         }
 
-        function openUrl(url, target) {
-            $cordovaInAppBrowser.open(url, target, { location: 'no' }).
-                then(function (event) {
-                    // success
-                })
-                .catch(function (event) {
-                    // error
-                });
-        }
+       function openUrl(url,target){
+           $cordovaInAppBrowser.open (url,target,{location:'no'}).
+           then(function(event) {
+                   // success
+           })
+            .catch(function(event) {
+               // error
+            });
+       }
         function setInfoWindowEvent() {
             infoWindowEvent();
             $timeout(function () {
@@ -679,4 +676,4 @@
         };
 
     });
-})(); 
+})();
