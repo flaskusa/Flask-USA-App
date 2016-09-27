@@ -140,7 +140,7 @@
                     case "venue info":
                         return 'venue_info';
                     case "venue map":
-                        return 'Venue_map';
+                        return 'VENUE_MAP';
                     case "flask us":
                         return 'Flask_FlaskUs';
                     case "tickets":
