@@ -104,7 +104,7 @@
                 </div>
                 <div class="row acc_settingsCol" ng-repeat="data in data1">
                     <div class="col acc_settingsCol">{{data.sport}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_sport" ng-click="addSportInArray(select_sport,$index,data);">
                     </ion-checkbox>
                 </div>
                 <div class="padding"></div>
@@ -115,7 +115,7 @@
                 </div>
                 <div class="row acc_settingsCol" ng-repeat="data in data4">
                     <div class="col acc_settingsCol">{{data.level}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_level" ng-click="addlevelInArray(select_level,$index,data);">
                     </ion-checkbox>
                 </div>
                 <div class="padding"></div>
@@ -126,7 +126,7 @@
                 </div>
                 <div class="row acc_settingsCol" ng-repeat="data in data2">
                     <div class="col acc_settingsCol">{{data.concerts}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_concerts" ng-click="addConcertsInArray(select_concerts,$index,data);">
                     </ion-checkbox>
                 </div>
                 <div class="padding"></div>
@@ -139,7 +139,7 @@
                 <div class="row acc_settingsCol" ng-repeat="data in data3">
 
                     <div class="col acc_settingsCol">{{data.special_events}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_events" ng-click="addEventsInArray(select_events,$index,data);">
                     </ion-checkbox>
                 </div>
 
