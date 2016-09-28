@@ -3,10 +3,10 @@
     angular.module('flaskApp')
             .controller('prePostGameCtrl', prePostGameCtrl);
 
-    prePostGameCtrl.$inject = ['$scope', '$stateParams', '$state','EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate','$cookies'];
+    prePostGameCtrl.$inject = ['$scope', '$stateParams', '$state','EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate','$cookies','$timeout'];
 
     /* @ngInject */
-    function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate,$cookies) {
+    function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate,$cookies,$timeout) {
         /* jshint validthis: true */
         var self = this;
         $scope.eventDetails = {};
@@ -20,6 +20,7 @@
         $scope.currEventName = $stateParams.eventName;
         $scope.currEventId = $stateParams.eventId;
         var currEventId = $scope.currEventId;
+        $scope.showAddv=false;
         var PRE_EVENT = "Pre-Event";
         var AT_EVENT = "During-Event";
         var POST_EVENT = "Post-Event";
@@ -46,6 +47,9 @@
            else if(pre=="Game Day Needs"){
                $state.go("app.suppliesList",{listName:"Game Day Needs",supplyListId:84429});
            }
+           else if(pre=="Add Content"){
+               $state.go("app.manage_event_content", {eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: pre,currEventName:$scope.currEventName ,currEventId:$scope.currEventId});
+           }
            else {
                $state.go("app.event_map_view", { eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: pre });
            }
@@ -60,14 +64,23 @@
             }
         }
         $scope.postEvent = function(post){
-            $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: POST_EVENT, infoTypeCategory: post });
-        }
+            if(post=="Add Content"){
+                $state.go("app.manage_event_content", {eventDetails: $scope.eventDetails, infoType: POST_EVENT, infoTypeCategory: post,currEventName:$scope.currEventName ,currEventId:$scope.currEventId});
+            }
+            else{
+                $state.go("app.event_map_view", {eventDetails: $scope.eventDetails, infoType: POST_EVENT, infoTypeCategory: post });
+            }
+
+
+            }
+
+
 
         function getEventVenueDatail() {
             EventsService.getEventVenueDatail(currEventId).then(function (respData) {
-                $scope.eventDetails = respData.data; 
+                $scope.eventDetails = respData.data;
                 var len = respData.data.Details.length - 1;
-                for (var i = 0; i <= len; i++) {                    
+                for (var i = 0; i <= len; i++) {
                     $scope.Details.push(angular.fromJson(respData.data.Details[i].Detail))
                     if ($scope.INFO_TYPE.indexOf($scope.Details[i].infoTypeName) == -1) {
                         $scope.INFO_TYPE.push($scope.Details[i].infoTypeName)
@@ -87,10 +100,14 @@
                             if ($scope.Post_Game.indexOf($scope.Details[i].infoTypeCategoryName) == -1) {
                                 $scope.Post_Game.push($scope.Details[i].infoTypeCategoryName)
                         }
-                    }                    
+                    }
                 }
-                $ionicSlideBoxDelegate.update();
-                $ionicScrollDelegate.resize()
+               $ionicSlideBoxDelegate.update();
+               $ionicScrollDelegate.resize();
+                $timeout(function(){
+                 $scope.showAddv=true;
+                },10);
+
 
                 if ($scope.Post_Game.length >=0) {
                     if(userDetail!=undefined && agreedToTermsOfUse==true) {

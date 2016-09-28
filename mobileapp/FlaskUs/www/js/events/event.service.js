@@ -11,7 +11,7 @@
         var baseURL = SERVER.url;
         var allEventsURL = "flask-rest-events-portlet.event/get-simple-filtered-events";
         var addEventURL = "flask-rest-events-portlet.event/add-event";
-        var addEventdetailsURL = "flask-rest-events-portlet.event/add-event-detail";
+        var addEventDetailsURL = "flask-rest-events-portlet.event/add-event-detail";
         var getFilteredEvents = "flask-rest-events-portlet.event/get-simple-filtered-events";
         var getEvent_Venue_Details_with_Images = "flask-rest-events-portlet.event/get-event-venue-details-with-images";
         var getEventByIdURL = "flask-rest-events-portlet.event/get-event";
@@ -91,10 +91,10 @@
             });
 
         }
-        function addContentDuringEvent(infoTitle,infoDesc,eventId) {
+        function addContentDuringEvent(infoTitle,infoDesc,eventId,infoTypeCategoryId,infoTypeId) {
             return $http.get(baseURL + addContentDuringGameUrl, {
-                params: {"eventDetailId":"0","infoTypeCategoryId":"103","infoTitle":infoTitle,"latitude":"0",
-                    "longitude":"0","showDescription":"1","eventId":eventId,"infoTypeId":"2","infoTypeName":"",
+                params: {"eventDetailId":"0","infoTypeCategoryId":infoTypeCategoryId,"infoTitle":infoTitle,"latitude":"0",
+                    "longitude":"0","showDescription":"1","eventId":eventId,"infoTypeId":infoTypeId,"infoTypeName":"",
                     "infoTypeCategoryName":"","infoDesc":infoDesc,
                     "addrLine1":"","addrLine2":"","zipCode":"","city":"","stateId":0,"countryId":0,"phone":"","website":"","cost":0,
                     "hoursOfOperation":""}
@@ -107,10 +107,10 @@
                 });
 
         }
-        function updateEventDetailDuringEvent(infoTitle,infoDesc,eventId,eventDetailId) {
+        function updateEventDetailDuringEvent(infoTitle,infoDesc,eventId,eventDetailId,infoTypeCategoryId,infoTypeId) {
             return $http.get(baseURL + updateEventDuringGame, {
-                params: {"eventDetailId":eventDetailId,"infoTypeCategoryId":"103","infoTitle":infoTitle,"latitude":"0",
-                    "longitude":"0","showDescription":"1","eventId":eventId,"infoTypeId":"2","infoTypeName":"",
+                params: {"eventDetailId":eventDetailId,"infoTypeCategoryId":infoTypeCategoryId,"infoTitle":infoTitle,"latitude":"0",
+                    "longitude":"0","showDescription":"1","eventId":eventId,"infoTypeId":infoTypeId,"infoTypeName":"",
                     "infoTypeCategoryName":"","infoDesc":infoDesc,
                     "addrLine1":"","addrLine2":"","zipCode":"","city":"","stateId":0,"countryId":0,"phone":"","website":"","cost":0,
                     "hoursOfOperation":""}

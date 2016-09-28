@@ -54,6 +54,24 @@
         $scope.isNightLifeFlaskMarkerShown = true;
         $scope.isNightLifeGoogleMarkerShown = false;
         $scope.currentMap;
+        $scope.toggleQueDiv=true;
+        $scope.toggleMsgDiv=function() {
+            $scope.hideDiv = false;
+            if($scope.toggleQueDiv==false){
+                $scope.toggleQueDiv = !$scope.toggleQueDiv;
+                if ($scope.toggleQueDiv == true) {
+                    $timeout(function () {
+                        $scope.hideDiv = true;
+                    }, 500);
+                }
+            }else {
+                $timeout(function () {
+                    $scope.toggleQueDiv = !$scope.toggleQueDiv;
+                }, 30);
+            }
+
+
+        }
         $scope.isMobile = {
             Android: function () {
                 return ionic.Platform.isAndroid();
