@@ -127,26 +127,26 @@
             });
         }
 
-        $scope.addEventsInArray=function(select_events,$index,data){
+        $scope.addEventsInArray=function($index,data){
             console.log(data.special_events);
             $scope.interest.push(data.special_events);
             getInterests();
         }
 
-        $scope.addConcertsInArray = function (select_concerts, $index, data) {
+        $scope.addConcertsInArray = function ($index, data) {
             console.log(data.concerts);
             $scope.interest.push(data.concerts);
             console.log($scope.interest);
             getInterests();
         }
 
-        $scope.addlevelInArray = function (select_level, $index, data) {
+        $scope.addlevelInArray = function ($index, data) {
             $scope.interest.push(data.level);
             console.log($scope.interest);
             getInterests();
         }
 
-        $scope.addSportInArray = function (select_sport, $index, data) {
+        $scope.addSportInArray = function ($index, data) {
             $scope.interest.push(data.sport);
             console.log($scope.interest);
             getInterests();
@@ -163,9 +163,15 @@
                 gender = true;
             }
             else { gender = false; }
-            UserService.updateUser(user, $scope.userid,gender, $scope.cId, $scope.sId,interestArray).then(function (respData) {
+            UserService.updateUser(user, $scope.userid, gender, $scope.cId, $scope.sId, interestArray).then(function (respData) {
+                
                 $scope.userInfo = respData.data;
-                $ionicLoading.show({ template: 'User Updated Successfully!', noBackdrop: false, duration: 2000 });
+                if ($scope.userInfo.message == "No JSON web service action associated with path /flaskadmin/update-flask-user and method GET for //flask-rest-users-portlet") {
+                    $ionicLoading.show({ template: 'Please Fill All The Fields', noBackdrop: false, duration: 2000 });
+                }
+                else {
+                    $ionicLoading.show({ template: 'User Updated Successfully!', noBackdrop: false, duration: 2000 });
+                }
             });
         }
 
