@@ -35,6 +35,7 @@ import com.rumbasolutions.flask.service.TailgateImagesLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateImagesServiceUtil;
 import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateInfoServiceUtil;
+import com.rumbasolutions.flask.service.TailgateUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.TailgateImagesServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.TailgateImagesUtil;
 
@@ -163,7 +164,7 @@ public class TailgateImagesServiceImpl extends TailgateImagesServiceBaseImpl {
 	public FileEntry uploadTailgateImage(File file, long tailgateId, ServiceContext serviceContext){
 		FileEntry fileEntry = null;
 		try {
-			if(FlaskTailgateUtil.isTailgateAdmin(tailgateId, serviceContext)){
+			if(TailgateUsersServiceUtil.checkTailgateUserExist(tailgateId, serviceContext.getUserId())){
 				Path source = Paths.get(file.getName());
 				String mimeType = Files.probeContentType(source);
 				long repositoryId = FlaskDocLibUtil.getFlaskRepositoryId();
