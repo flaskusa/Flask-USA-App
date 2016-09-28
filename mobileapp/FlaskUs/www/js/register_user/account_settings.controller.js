@@ -1,11 +1,11 @@
 ﻿(function () {
     'use strict';
     angular.module('flaskApp')
-        .controller('user_registrationCtrl', user_registrationCtrl);
-    user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading'];
+        .controller('account_settingsCtrl', account_settingsCtrl);
+    account_settingsCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading'];
 
     /* @ngInject */
-    function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading) {
+    function account_settingsCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading) {
         var gender = true;
         $scope.country = [];
         $scope.state = [];
@@ -14,6 +14,7 @@
         $scope.cId = [];
         $scope.sId = [];
 
+        console.log("Account");
         getUser();
         getCountry();
 
@@ -96,6 +97,7 @@
         }
 
         function getUser(userId) {
+            console.log("Account Settings");
             var usercookie = $cookies.getObject('CurrentUser');
             $scope.userid = usercookie.data.userId;
             UserService.getUserById($scope.userid).then(function (respData) {
