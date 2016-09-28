@@ -13,10 +13,16 @@
         var stateArray;
         $scope.cId = [];
         $scope.sId = [];
+        $scope.sport = [];
+        $scope.level = [];
+        $scope.concert = [];
+        $scope.interest = [];
+        var interestArray;
 
         console.log("Account");
         getUser();
         getCountry();
+        
 
 
         $scope.data1 = [
@@ -121,13 +127,43 @@
             });
         }
 
+        $scope.addEventsInArray=function(select_events,$index,data){
+            console.log(data.special_events);
+            $scope.interest.push(data.special_events);
+            getInterests();
+        }
+
+        $scope.addConcertsInArray = function (select_concerts, $index, data) {
+            console.log(data.concerts);
+            $scope.interest.push(data.concerts);
+            console.log($scope.interest);
+            getInterests();
+        }
+
+        $scope.addlevelInArray = function (select_level, $index, data) {
+            $scope.interest.push(data.level);
+            console.log($scope.interest);
+            getInterests();
+        }
+
+        $scope.addSportInArray = function (select_sport, $index, data) {
+            $scope.interest.push(data.sport);
+            console.log($scope.interest);
+            getInterests();
+        }
+
+        function getInterests() {
+            console.log($scope.interest);
+            interestArray = $scope.interest.toString();
+            console.log(interestArray);
+        }
+
         $scope.updateUserInfo = function (user, userId) {
             if (user.isMale == 'male') {
                 gender = true;
-                //$scope.isMale = male;
             }
             else { gender = false; }
-            UserService.updateUser(user, $scope.userid,gender, $scope.cId, $scope.sId).then(function (respData) {
+            UserService.updateUser(user, $scope.userid,gender, $scope.cId, $scope.sId,interestArray).then(function (respData) {
                 $scope.userInfo = respData.data;
                 $ionicLoading.show({ template: 'User Updated Successfully!', noBackdrop: false, duration: 2000 });
             });

@@ -14,7 +14,7 @@
         var getUserByIdURL = "flask-rest-users-portlet.flaskadmin/get-user-by-id";
         var getCountriesURL = "flask-rest-users-portlet.flaskadmin/get-countries";
         var getRegionURL = "flask-rest-users-portlet.flaskadmin/get-region";
-
+        var uploadUserProfileURL = "flask-rest-users-portlet.flaskadmin/upload-user-profile";
 
         var userServices = {
             saveUser: saveUser,
@@ -22,7 +22,8 @@
             getUserById: getUserById,
             updateUser: updateUser,
             getCountries: getCountries,
-            getRegion: getRegion
+            getRegion: getRegion,
+            uploadProfile: uploadProfile
         }
 
         function saveUser(user, gender, srcname) {
@@ -74,7 +75,7 @@
                });
         }
 
-        function updateUser(user,userId,gender, sId, cId) {
+        function updateUser(user, userId, gender, sId, cId, interestArray) {
             var params = {
                 userId: userId,
                 firstName: user.firstName,
@@ -93,7 +94,7 @@
                 stateId: sId,
                 countryId: cId,
                 mobileNumber: user.mobileNumber,
-                userInterests: "658HHQ2fl34YyxEkOn6dIa7rez9hASadSDR09h0dn44ZULT+kQS+z0qMwIrsnFq6"
+                userInterests: interestArray
             };
 
             return $http.get(baseURL + updateUserURL, {
@@ -123,6 +124,15 @@
                     'countryId': countryId
                 }
             })
+               .then(function success(response) {
+                   return response;
+               }, function failure(response) {
+                   console.log("failed");
+               });
+        }
+
+        function uploadProfile() {
+            return $http.get(baseURL + uploadUserProfileURL)
                .then(function success(response) {
                    return response;
                }, function failure(response) {
