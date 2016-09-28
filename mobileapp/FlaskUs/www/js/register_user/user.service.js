@@ -4,9 +4,9 @@
         .module('flaskApp')
         .service('UserService', UserService);
 
-    UserService.$inject = ['$http','$state','SERVER'];
+    UserService.$inject = ['$http', '$state', 'SERVER'];
 
-    function UserService($http, $state,SERVER) {
+    function UserService($http, $state, SERVER) {
         var baseURL = SERVER.url;
         var addUserURL = "/flask-rest-users-portlet.flaskadmin/sign-up";
         var getUserByEmailId = "/flask-rest-users-portlet.flaskadmin/get-user-for-email";
@@ -14,7 +14,7 @@
         var getUserByIdURL = "flask-rest-users-portlet.flaskadmin/get-user-by-id";
         var getCountriesURL = "flask-rest-users-portlet.flaskadmin/get-countries";
         var getRegionURL = "flask-rest-users-portlet.flaskadmin/get-region";
-        
+
 
         var userServices = {
             saveUser: saveUser,
@@ -26,9 +26,9 @@
         }
 
         function saveUser(user, gender, srcname) {
-            
+
             console.log(user);
-            var params= {
+            var params = {
                 firstName: user.firstName,
                 lastName: user.lastName,
                 email: user.Email,
@@ -44,12 +44,12 @@
                 params
             }
             )
-            .then(function success(response) {               
-                    return response;
-                },  function failure(response) {
-                    //add errror handling 
-                    console.log("failed");
-                });
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                //add errror handling 
+                console.log("failed");
+            });
         }
 
         function getUserbyEmail(email) {
@@ -74,26 +74,26 @@
                });
         }
 
-        function updateUser(userId,user,sId,cId) {
+        function updateUser(user,userId,gender, sId, cId) {
             var params = {
-                userId:userId,
+                userId: userId,
                 firstName: user.firstName,
+                middleName: user.middleName,
                 lastName: user.lastName,
                 email: user.Email,
-                screenName: user.srcname,
+                screenName: user.screenName,
                 password1: user.password1,
                 password2: user.password2,
                 DOB: user.DOB,
-                isMale: '0',
+                isMale: gender,
                 streetName: user.streetName,
-                aptNo:user.aptNo,
+                aptNo: user.aptNo,
                 areaCode: user.areaCode,
                 city: user.city,
                 stateId: sId,
                 countryId: cId,
                 mobileNumber: user.mobileNumber,
-                userInterests:"658HHQ2fl34YyxEkOn6dIa7rez9hASadSDR09h0dn44ZULT+kQS+z0qMwIrsnFq6"
-
+                userInterests: "658HHQ2fl34YyxEkOn6dIa7rez9hASadSDR09h0dn44ZULT+kQS+z0qMwIrsnFq6"
             };
 
             return $http.get(baseURL + updateUserURL, {

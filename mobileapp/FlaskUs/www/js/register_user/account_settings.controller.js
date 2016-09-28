@@ -7,6 +7,16 @@
     /* @ngInject */
     function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading) {
         var gender = true;
+        $scope.country = [];
+        $scope.state = [];
+        var countryArray;
+        var stateArray;
+        $scope.cId = [];
+        $scope.sId = [];
+
+        getUser();
+        getCountry();
+
 
         $scope.data1 = [
           {
@@ -68,40 +78,56 @@
            }
         ];
 
-        $scope.saveUser = function (user) {
+        function getCountry() {
+            UserService.getCountries().then(function (respData) {
+                $scope.country = respData.data;
+            });
+        }
+
+        $scope.getState = function (data, country_Name) {
+            $scope.cId = country_Name.countryId;
+            UserService.getRegion($scope.cId).then(function (respData) {
+                $scope.state = respData.data;
+            });
+        }
+
+        $scope.getStateId = function (data, state_Name) {
+            $scope.sId = state_Name.regionId;
+        }
+
+        function getUser(userId) {
+            var usercookie = $cookies.getObject('CurrentUser');
+            $scope.userid = usercookie.data.userId;
+            UserService.getUserById($scope.userid).then(function (respData) {
+                $scope.userInfo = respData;
+                $scope.user = {
+                    firstName: $scope.userInfo.firstName,
+                    middleName: $scope.userInfo.middleName,
+                    lastName: $scope.userInfo.lastName,
+                    screenName: $scope.userInfo.screenName,
+                    Email: $scope.userInfo.email,
+                    password1: "",
+                    password2: "",
+                    DOB: $filter('date')($scope.userInfo.DOB, 'MM-dd-yyyy'),
+                    isMale: gender,
+                    areaCode: $scope.userInfo.areaCode,
+                    mobileNumber: $scope.userInfo.mobileNumber,
+                    streetName: $scope.userInfo.streetName,
+                    aptNo: $scope.userInfo.aptNo,
+                    city: $scope.userInfo.city
+                }
+            });
+        }
+
+        $scope.updateUserInfo = function (user, userId) {
             if (user.isMale == 'male') {
                 gender = true;
                 //$scope.isMale = male;
             }
             else { gender = false; }
-            console.log(gender);
-            $scope.srcname = user.mobileNumber + user.firstName + user.lastName;
-            UserService.saveUser(user, gender, $scope.srcname).then(function (respData) {
-                // $scope.user = respData.data;
-                if (respData.data.exception == "com.liferay.portal.DuplicateUserEmailAddressException" || respData.data.exception == "com.liferay.portal.DuplicateUserScreenNameException") {
-                    console.log("User is already exist");
-                    //$state.go("app.login");
-
-                }
-                else {
-                    $ionicLoading.show({ template: 'User Registered Successfully!', noBackdrop: false, duration: 2000 });
-                }
-            });
-            // document.register_user_form.reset();
-        }
-
-        $scope.checkUserByEmailId = function (user) {
-            UserService.getUserbyEmail(user).then(function (respData) {
-                if (respData.data == 1) {
-                    var myPopup = $ionicPopup.show({
-                        title: '<p class="login_error">Email Address is already exist.</p>'
-                    });
-
-                    $timeout(function () {
-                        myPopup.close(); //close the popup after 3 seconds for some reason
-                    }, 3000);
-                    document.register_user_form.reset();
-                }
+            UserService.updateUser(user, $scope.userid,gender, $scope.cId, $scope.sId).then(function (respData) {
+                $scope.userInfo = respData.data;
+                $ionicLoading.show({ template: 'User Updated Successfully!', noBackdrop: false, duration: 2000 });
             });
         }
 
