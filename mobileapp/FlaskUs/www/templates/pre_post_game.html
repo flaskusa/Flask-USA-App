@@ -70,7 +70,11 @@
             </div>
         </div>   
    </ion-content>
-        <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
+        <ion-footer-bar class="bar bar-dark bar-footer bar-assertive"ng-if="showAddv==false">
             <img src="img/ad.png" class="footer-img" />
         </ion-footer-bar>
+    <ion-footer-bar class="bar bar-dark bar-footer bar-assertive"ng-if="showAddv==true">
+        <div ng-include="'templates/advertisement.html'"class="footer-img"></div>
+
+    </ion-footer-bar>
 </ion-view>

@@ -21,7 +21,7 @@
             <div class="col"></div>
         </div>
     </div>
-    <ion-content class="has-footer has-header has-subheader">
+    <ion-content class="has-footer has-header has-subheader"scroll="false">
         <script type="text/ng-template" id="searchbox.tpl.html" autocomplete="false" class="">
             <input type="text" style="margin: 10px;width: 248px;" placeholder=""/>
         </script>
@@ -36,7 +36,7 @@
                 <div class="iw-title">
                     <table>
                         <tr>  
-                            <td style="width:94%"> <div>{{parameter.infoTitle}}</td></div>
+                            <td style="width:94%"> <div>{{parameter.infoTitle}}</div></td>
                             <td rowspan="2" style="vertical-align:middle">  <div class="iw-content-toggle "> <img src = "img/map_icons/circle-right _arrow.png"> </div></td>
                         </tr>
                         <tr>  
@@ -154,13 +154,61 @@
                 </ion-tab>
                 <ion-tab title="FLASK US" ng-click="selectTab(3)">
                     <div style="padding:10px"  ng-if="selectedIndex == 3">
-                        <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetails.infoTitle}}</div></label>
-                        </div>
-                        <div class="form-group"><label class="control-label" for="Description"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
-                            <div class="controls" id="Description">
-                                {{flaskUsDetails.infoDesc}}
+                        <ion-content scroll="true"style="background: white">
+                            <div >
+                                <div class="row" >
+                                    <div>
+                                        <div class="left"style="left:0px;top:121px">
+                                            <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('slide1')"></button>
+                                        </div>
+                                        <div class="right"style="top:121px">
+                                            <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide1')"></button>
+                                        </div>
+                                        <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
+                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
+                                                <div class="form-group"><label class="control-label" for="Descriptionss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask Us</b></div></label>
+                                                    <div>
+                                                        <img class="full-image" src="/img/resources/traffic.jpg"style="height: 100px;width:252px">
+                                                    </div>
+
+                                                    <div class="form-group"style="padding-top:20px"><label class="control-label" for="Descriptions"><div  style="width: 90%;padding-left:85px;text-align: start"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>
+                                                    </div>
+                                                    <div class="col-70" id="Descriptions"style="width: 90%;padding-left:85px;text-align: start">
+                                                        <div class="ion-star "style="float:left;margin-left: -24px"></div>
+                                                        {{flaskUsDetail.infoDesc}}
+                                                    </div>
+                                                </div>
+                                                <div class="eventHeading2" style="text-align:center;padding-top:30px"ng-click="toggleMsgDiv()">
+                                                    <span class="overlineStyle" style="font-size:18px">FLASK US YOUR QUESTIONS</span>
+                                                </div>
+                                                <div class="flaskUsQuestionDiv" ng-class="{hideFlaskUsQuestionDiv:toggleQueDiv}"ng-if="hideDiv==false">
+                                                    <div  align="center">
+                                                        <span class="que-input-label"><b style="font-size:12px;float:left">NAME*</b></span>
+
+
+                                                        <input type="text"class="QuestionInput"style="border: solid .3px;height: 25px;border-radius: 8px">
+                                                        <span class="que-input-label"><b style="font-size:12px;float:left">EMAIL*</b></span>
+
+                                                        <input type="text"class="QuestionInput"style="border: solid .3px;height: 25px;border-radius: 8px">
+                                                        <span class="que-input-label"><b style="font-size:12px;float:left">QUESTION*</b></span>
+
+                                                        <textarea class="QuestionInput"style="border: solid .3px;height: 55px;border-radius: 8px"></textarea>
+                                                    </div>
+                                                    <div  align="center">
+                                                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" style="width: 250px" >
+                                                            Send
+                                                        </button>
+                                                    </div>
+                                                </div>
+
+
+                                            </ion-slide>
+                                        </ion-slide-box>
+                                    </div>
+                                </div>
+
                             </div>
-                        </div>
+                        </ion-content>
                     </div>
                 </ion-tab>
             </ion-tabs>
@@ -202,49 +250,63 @@
                         </ui-gmap-google-map>
                     </div>
                 </ion-tab>
-                <ion-tab title="FLASK US" ng-click="selectTab(1)">
-                    <div >
-                        <div class="row mainRow" >
-                            <div class="sideImagePanel">
-                                <div class="left"style="left:0px">
-                                    <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('slide1')"></button>
-                                </div>
-                                <div class="right">
-                                    <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide1')"></button>
-                                </div>
-                                <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
-                                    <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
-                                        <div class="form-group"><label class="control-label" for="Descriptionss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask Us</b></div></label>
+                <ion-tab title="FLASK US" ng-click="selectTab(1)"overflow-scroll="false"class="tabs-positive tab_bottom tabs-icon-left">
+                    <ion-content scroll="true"style="background: white">
+                        <div >
+                            <div class="row" >
+                                <div>
+                                    <div class="left"style="left:0px;top:121px">
+                                        <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('slide1')"></button>
+                                    </div>
+                                    <div class="right"style="top:121px">
+                                        <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide1')"></button>
+                                    </div>
+                                    <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
+                                        <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
+                                            <div class="form-group"><label class="control-label" for="Descriptionss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask Us</b></div></label>
+                                                <div>
+                                                    <img class="full-image" src="/img/resources/traffic.jpg"style="height: 100px;width:252px">
+                                                </div>
 
-                                            <div class="form-group"style="padding-top:20px"><label class="control-label" for="Descriptionss"><div  style="width: 90%;padding-left:85px;text-align: start"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>
-                                            </div>
-
-
-                                                <div class="col-70" id="Descriptionss"style="width: 90%;padding-left:85px;text-align: start">
+                                                <div class="form-group"style="padding-top:20px"><label class="control-label" for="Descriptions"><div  style="width: 90%;padding-left:85px;text-align: start"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>
+                                                </div>
+                                                <div class="col-70" id="Descriptions"style="width: 90%;padding-left:85px;text-align: start">
                                                     <div class="ion-star "style="float:left;margin-left: -24px"></div>
                                                     {{flaskUsDetail.infoDesc}}
                                                 </div>
                                             </div>
+                                            <div class="eventHeading2" style="text-align:center;padding-top:30px"ng-click="toggleMsgDiv()">
+                                                <span class="overlineStyle" style="font-size:18px">FLASK US YOUR QUESTIONS</span>
+                                            </div>
+                                            <div class="flaskUsQuestionDiv" ng-class="{hideFlaskUsQuestionDiv:toggleQueDiv}"ng-if="hideDiv==false">
+                                                <div  align="center">
+                                                    <span class="que-input-label"><b style="font-size:12px;float:left">NAME*</b></span>
 
-                                    </ion-slide>
-                                </ion-slide-box>
+
+                                                    <input type="text"class="QuestionInput"style="border: solid .3px;height: 25px;border-radius: 8px">
+                                                    <span class="que-input-label"><b style="font-size:12px;float:left">EMAIL*</b></span>
+
+                                                    <input type="text"class="QuestionInput"style="border: solid .3px;height: 25px;border-radius: 8px">
+                                                    <span class="que-input-label"><b style="font-size:12px;float:left">QUESTION*</b></span>
+
+                                                    <textarea class="QuestionInput"style="border: solid .3px;height: 55px;border-radius: 8px"></textarea>
+                                                </div>
+                                                <div  align="center">
+                                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" style="width: 250px" ng-click="toggleMsgDiv()">
+                                                        Send
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                        </ion-slide>
+                                    </ion-slide-box>
+                                </div>
                             </div>
-                        </div>
 
-                    </div>
-                   <!-- <div style="padding:10px"  ng-if="selectedIndex == 1" ng-repeat="flaskUsDetail in flaskUsDetails">
-                        {{flaskUsDetail.infoDesc}}
-                        {{flaskUsDetail.infoTitle}}
-
-                        <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetail.infoTitle}}</div></label>
                         </div>
-                        <div class="form-group"><label class="control-label" for="Descriptions"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
-                            <div class="controls" id="Descriptions">
-                                {{flaskUsDetail.infoDesc}}
-                            </div>
-                        </div>
-                    </div>-->
-                </ion-tab>
+                    </ion-content>
+</ion-tab>
             </ion-tabs>
         </div>
         <div ng-if="infoTypeName == 'Post-Event'" class="Post-Event">
@@ -285,7 +347,8 @@
                     </div>
                 </ion-tab>
                 <ion-tab title="Nightlife" ng-click="selectTab(1)" events="map.events">
-                    <div id="nightLifeTab" style="height:100%;width:100%"  ng-if="selectedIndex == 1">
+                    <ion-content>
+                        <div id="nightLifeTab" style="height:100%;width:100%"  ng-if="selectedIndex == 1">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">
@@ -319,22 +382,72 @@
                             </ui-gmap-markers>
                         </ui-gmap-google-map>
                     </div>
+                        </ion-content>
                 </ion-tab>
                 <ion-tab title="FLASK US" ng-click="selectTab(2)">
                     <div style="padding:10px"  ng-if="selectedIndex == 2">
-                        <div class="form-group"><label class="control-label" for="Title"><div font-size="18px" style="width: 100%;">{{flaskUsDetails.infoTitle}}</div></label>
-                        </div>
-                        <div class="form-group"><label class="control-label" for="Description"><div font-size="18px" style="width: 100%;"><b>Flask Us</b></div></label>
-                            <div class="controls" id="Description">
-                                {{flaskUsDetails.infoDesc}}
+                        <ion-content scroll="true"style="background: white">
+                        <div >
+                            <div class="row" >
+                                <div>
+                                    <div class="left"style="left:0px;top:121px">
+                                        <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('slide1')"></button>
+                                    </div>
+                                    <div class="right"style="top:121px">
+                                        <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('slide1')"></button>
+                                    </div>
+                                    <ion-slide-box delegate-handle="slide1" show-pager='false' does-continue="true">
+                                        <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
+                                            <div class="form-group"><label class="control-label" for="Descriptionssss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask Us</b></div></label>
+                                                <div>
+                                                    <img class="full-image" src="/img/resources/traffic.jpg"style="height: 100px;width:252px">
+                                                </div>
+
+                                                <div class="form-group"style="padding-top:20px"><label class="control-label" for="Descriptions"><div  style="width: 90%;padding-left:85px;text-align: start"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>
+                                                </div>
+                                                <div class="col-70" id="Descriptionssss"style="width: 90%;padding-left:85px;text-align: start">
+                                                    <div class="ion-star "style="float:left;margin-left: -24px"></div>
+                                                    {{flaskUsDetail.infoDesc}}
+                                                </div>
+                                            </div>
+                                            <div class="eventHeading2" style="text-align:center;padding-top:30px"ng-click="toggleMsgDiv()">
+                                                <span class="overlineStyle" style="font-size:18px">FLASK US YOUR QUESTIONS</span>
+                                            </div>
+                                                <div class="flaskUsQuestionDiv" ng-class="{hideFlaskUsQuestionDiv:toggleQueDiv}"ng-if="hideDiv==false">
+                                                <div  align="center">
+                                                    <span class="que-input-label"><b style="font-size:12px;float:left">NAME*</b></span>
+
+
+                                                    <input type="text"class="QuestionInput"style="border: solid .3px;height: 25px;border-radius: 8px">
+                                                    <span class="que-input-label"><b style="font-size:12px;float:left">EMAIL*</b></span>
+
+                                                    <input type="text"class="QuestionInput"style="border: solid .3px;height: 25px;border-radius: 8px">
+                                                    <span class="que-input-label"><b style="font-size:12px;float:left">QUESTION*</b></span>
+
+                                                    <textarea class="QuestionInput"style="border: solid .3px;height: 55px;border-radius: 8px"></textarea>
+                                                </div>
+                                                <div  align="center">
+                                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" style="width: 250px" >
+                                                        Send
+                                                    </button>
+                                                </div>
+                                            </div>
+
+
+                                        </ion-slide>
+                                    </ion-slide-box>
+                                </div>
                             </div>
+
                         </div>
+                        </ion-content>
                     </div>
                 </ion-tab>
             </ion-tabs>
         </div>
     </ion-content>
     <ion-footer-bar class="bar bar-dark bar-footer bar-assertive">
-        <img src="img/ad.png" class="footer-img" />
+        <div ng-include="'templates/advertisement.html'"class="footer-img"></div>
+
     </ion-footer-bar>
 </ion-view>
