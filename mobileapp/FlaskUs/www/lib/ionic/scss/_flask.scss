@@ -2069,6 +2069,27 @@ i.choose_picture{
   top: 0px;
   border-radius: 0px;
 }
-
-
+.Upper_Case{
+  text-transform:uppercase
+}
+.flaskUsQuestionDiv{
+  height: 300px;
+  width: 100%;
+  transition: .5s;
+}
+.hideFlaskUsQuestionDiv{
+  height:0px;
+}
+.QuestionInput{
+  border: solid .5px;
+  width: 254px
+}
+.que-input-label{
+  display: table;
+  padding: 0px 3px 1px 0px;
+  width: 239px;
+  color: #444;
+  font-size: 16px;
+  left: 30px;
+}
 
