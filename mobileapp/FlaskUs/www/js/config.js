@@ -262,7 +262,7 @@
             views: {
                 'menuContent': {
                     templateUrl: 'templates/account_settings.html',
-                    controller: 'user_registrationCtrl'
+                    controller: 'account_settingsCtrl'
                 }
             }
         })
