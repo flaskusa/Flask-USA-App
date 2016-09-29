@@ -3,8 +3,8 @@
     angular.module('flaskApp')
         .controller('AdvertisementCtrl', AdvertisementCtrl);
 
-    AdvertisementCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', 'SERVER','$ionicPopup','$timeout'];
-    function AdvertisementCtrl($scope, $stateParams, $state, EventsService, SERVER,$ionicPopup,$timeout) {
+    AdvertisementCtrl.$inject = ['$scope', '$stateParams', '$state',  'SERVER','$ionicPopup','$timeout'];
+    function AdvertisementCtrl($scope, $stateParams, $state, SERVER,$ionicPopup,$timeout) {
 
         $scope.showPopup = function() {
             $scope.data = {};
@@ -21,10 +21,6 @@
                 $scope.myPopup.close();
             }
 
-
-            /*$timeout(function() {
-                myPopup.close(); //close the popup after 3 seconds for some reason
-            }, 5000);*/
         };
 
     }
