@@ -14,6 +14,7 @@
         var getUserProfilePic = "dlapp/get-file-entry";
         this.authenticateUser = function (scope) {
             var authdata = Base64.encode(scope.Email + ':' + scope.password);
+            $cookies.put("authData",authdata);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
             return $http.get(baseURL + getUserByEmailId, { params: { 'companyId': SERVER.companyId, 'emailAddress': scope.Email } })
                 .then(function success(response) {
