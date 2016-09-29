@@ -1,5 +1,6 @@
 ﻿(function () {
     'use strict';
+
     angular
         .module('flaskApp')
         .service('TailgateService', TailgateService);
@@ -44,6 +45,9 @@
         var addSupplyListURL = "flask-user-tailgate-portlet.supplylist/add-supply-list";
         var getItemsByTailgateIdURL = "flask-user-tailgate-portlet.tailgatesupplyitem/get-items-by-tailgate-id";
         var updateTailgateSupplyItemURL = "flask-user-tailgate-portlet.tailgatesupplyitem/update-tailgate-supply-item";
+//        var checkTailgateUserExist = '/flask-user-tailgate-portlet.tailgateusers/check-tailgate-user-exist';
+       var isTailgateAdminURL = '/flask-user-tailgate-portlet.tailgateusers/is-tailgate-admin';
+        var getTailgateLogoURL = '/flask-user-tailgate-portlet.tailgateinfo/get-tailgate-logo';
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -74,7 +78,10 @@
             getGroupbyId: getGroupbyId,
             getItemsByTailgateId: getItemsByTailgateId,
             updateTailgateSupplyItem: updateTailgateSupplyItem,
-            updateTailgateInfo: updateTailgateInfo
+            updateTailgateInfo: updateTailgateInfo,
+            getTailgateLogo : getTailgateLogo,
+            isUserTailgateAdmin:isUserTailgateAdmin
+
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -86,10 +93,10 @@
                 return response.data;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
-        //update tailgate 
+        //update tailgate
         function updateTailgateInfo(tailgateParams) {
             return $http.get(baseURL + updateTailgateURL, {
                 params: tailgateParams
@@ -99,7 +106,7 @@
                 return response.data;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
         //get all groups
@@ -112,7 +119,7 @@
                 return response.data;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
         //get all groups
@@ -123,7 +130,7 @@
                 return response.data;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
         //get all group users by group id
@@ -138,7 +145,7 @@
                 return response.data;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
         //GET Group by userId
@@ -151,7 +158,7 @@
                 return response.data;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
         function getvenueDetails(venueId) {
@@ -163,7 +170,7 @@
                 return response.data;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -175,7 +182,7 @@
             .then(function success(response) {
                 return response;
             }, function failure(response) {
-                //add errror handling 
+                //add errror handling
             });
         }
         function deleteTailgate(tailgateId) {
@@ -186,7 +193,7 @@
             .then(function success(response) {
                 return response.data;
             }, function failure(response) {
-                //add errror handling 
+                //add errror handling
             });
         }
         function getUserFrends() {
@@ -200,7 +207,7 @@
                 return response.data;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
         function getEvent(eventId) {
@@ -212,7 +219,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -225,7 +232,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
         function deleteMapMarkers(tailgateId) {
@@ -237,7 +244,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -248,7 +255,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
         function addcurrentUser(user) {
@@ -260,7 +267,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -270,7 +277,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -283,7 +290,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
         function getTailgate(tailgateId) {
@@ -295,7 +302,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -308,7 +315,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -321,7 +328,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -335,7 +342,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -347,7 +354,7 @@
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
-                    //add errror handling 
+                    //add errror handling
                 });
         }
 
@@ -362,7 +369,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -375,7 +382,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -385,7 +392,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -399,7 +406,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -414,7 +421,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -428,7 +435,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -444,7 +451,7 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
 
@@ -461,12 +468,55 @@
                 return response;
             }, function failure(response) {
                 return $q.$inject(response);
-                //add errror handling 
+                //add errror handling
             });
         }
+//        function checkTailgateUserExist(userId, tailgateId) {
+//         return $http.get(baseURL + checkTailgateUserExist, {
+//            params: {
+//                'userId':userId,
+//                'tailgateId': tailgateId,
+//            }
+//        })
+//        .then(function success(response) {
+//            return response;
+//        }, function failure(response) {
+//            return $q.$inject(response);
+//            //add errror handling
+//        });
+//        }
+       function isUserTailgateAdmin(tailgateId) {
+        return $http.get(baseURL + isTailgateAdminURL, {
+           params: {
+               'tailgateId':tailgateId
+           }
+       })
+       .then(function success(response) {
+           return response;
+       }, function failure(response) {
+           return $q.$inject(response);
+           //add errror handling
+       });
+       }
 
+
+        function getTailgateLogo(tailgateId) {
+         return $http.get(baseURL + getTailgateLogoURL, {
+                params: {
+                    'tailgateId':tailgateId
+                }
+            })
+            .then(function success(response) {
+                return response;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling
+            });
+        }
         return tailgateServices;
     }
+
+
 })();
 
 
