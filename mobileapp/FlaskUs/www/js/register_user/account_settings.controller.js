@@ -2,10 +2,10 @@
     'use strict';
     angular.module('flaskApp')
         .controller('account_settingsCtrl', account_settingsCtrl);
-    account_settingsCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading'];
+    account_settingsCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading', '$cordovaCamera', '$cordovaFileTransfer'];
 
     /* @ngInject */
-    function account_settingsCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading) {
+    function account_settingsCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading, $cordovaCamera, $cordovaFileTransfer) {
         var gender = true;
         $scope.country = [];
         $scope.state = [];
@@ -19,11 +19,14 @@
         $scope.interest = [];
         var interestArray;
 
-        console.log("Account");
+        var usercookie = $cookies.getObject('CurrentUser');
+        $scope.userid = usercookie.data.userId;
+
         getUser();
         getCountry();
         
-
+        var authdata = $cookies.get("authData");
+        console.log(authdata);
 
         $scope.data1 = [
           {
@@ -103,9 +106,6 @@
         }
 
         function getUser(userId) {
-            console.log("Account Settings");
-            var usercookie = $cookies.getObject('CurrentUser');
-            $scope.userid = usercookie.data.userId;
             UserService.getUserById($scope.userid).then(function (respData) {
                 $scope.userInfo = respData;
                 $scope.user = {
@@ -158,6 +158,96 @@
             console.log(interestArray);
         }
 
+        $scope.show = function () {
+            // Show the action sheet
+            $scope.loc = {};
+            var customTemplate =
+              '<div class="list">'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="camera();">'
+                + 'Camera'
+                + '</button>'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="gallery();">'
+                + 'Gallery'
+                + '</button>'
+                + '</div>'
+            + '</div>';
+            var cameraPopup = $ionicPopup.show({
+                template: customTemplate,
+                title: 'Choose the Profile Picture from:-',
+                scope: $scope,
+                buttons: [{
+                    text: '<b>Cancel</b>',
+                    type: 'button-positive',
+                    onTap: function (e) {
+                        cameraPopup.close();
+                    }
+                }]
+            });
+        };
+        //camera plugin
+        $scope.camera = function () {
+            var options = {
+                quality: 50,
+                destinationType: Camera.DestinationType.DATA_URL,
+                sourceType: Camera.PictureSourceType.CAMERA,
+                allowEdit: true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 100,
+                targetHeight: 100,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false,
+                correctOrientation: true
+            };
+
+            $cordovaCamera.getPicture(options).then(function (imageData) {
+                var image = document.getElementById('myImage');
+                image.src = "data:image/jpeg;base64," + imageData;
+            }, function (err) {
+                // error
+            });
+        }
+        // for accessing gallery on mobile
+        $scope.gallery = function () {
+            $scope.cameraPopup.close();
+            var options = {
+                destinationType: Camera.DestinationType.FILE_URI,
+                sourceType: Camera.PictureSourceType.CAMERA,
+            };
+
+            $cordovaCamera.getPicture(options).then(function (imageURI) {
+                $scope.uploadFileToServer(imageURI);
+            }, function (err) {
+                // error
+            });
+
+        }
+
+        $scope.uploadFileToServer = function (fileURL) {
+            var options = {};
+            options.fileKey = "file";
+            var params = {};
+            params.userid = $scope.userid;
+           
+            options.params = params;
+            var headers = {};
+            headers.Authorization = 'Basic ' + authdata;
+            options.headers = headers;
+            $cordovaFileTransfer.upload(encodeURI(SERVER.url + '/flask-rest-users-portlet.flaskadmin/upload-user-profile'), fileURL, options)
+                  .then(function (r) {
+                      $scope.downloadProgress = 0;
+                      console.log("Code = " + r.responseCode);
+                      console.log("Response = " + r.response);
+                      console.log("Sent = " + r.bytesSent);
+                  }, function (error) {
+                      alert("An error has occurred: Code = " + error.code);
+                      console.log("upload error source " + error.source);
+                      console.log("upload error target " + error.target);
+                  }, function (progress) {
+                      $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+
+                  });
+        }
+
         $scope.updateUserInfo = function (user, userId) {
             if (user.isMale == 'male') {
                 gender = true;
@@ -197,7 +287,6 @@
             };
             ionicDatePicker.openDatePicker(ipObj1);
         };
-
     }
 })();
 
