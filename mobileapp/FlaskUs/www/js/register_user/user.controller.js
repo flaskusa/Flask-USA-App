@@ -8,66 +8,6 @@
     function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading) {
         var gender = true;
 
-        $scope.data1 = [
-          {
-              sport: "Basketball"
-          },
-          {
-              sport: "Basebball"
-
-          },
-          {
-              sport: "Football"
-          },
-          {
-              sport: "Hockey"
-          },
-          {
-              sport: "Soccer"
-          },
-          {
-              sport: "Tennis"
-          }
-        ];
-
-        $scope.data2 = [
-            {
-                concerts: "Country"
-            },
-            {
-                concerts: "Pop"
-            },
-            {
-                concerts: "Rock"
-            },
-            {
-                concerts: "Rap"
-            },
-            {
-                concerts: "Alternative"
-            },
-            {
-                concerts: "Electronic"
-            }
-        ];
-
-        $scope.data3 = [
-
-            {
-                special_events: "Comedy"
-            }
-        ];
-
-        $scope.data4 = [
-
-           {
-               level: "Professional"
-           },
-           {
-               level: "college"
-           }
-        ];
-
         $scope.saveUser = function (user) {
             if (user.isMale == 'male') {
                 gender = true;
@@ -82,6 +22,9 @@
                     console.log("User is already exist");
                     //$state.go("app.login");
 
+                }
+                else if (respData.data.message == "No JSON web service action associated with path /flaskadmin/sign-up and method GET for //flask-rest-users-portlet") {
+                    $ionicLoading.show({ template: 'Please Fill All The Fields', noBackdrop: false, duration: 2000 });
                 }
                 else {
                     $ionicLoading.show({ template: 'User Registered Successfully!', noBackdrop: false, duration: 2000 });
