@@ -1,12 +1,15 @@
+
+<div ng-controller="AdvertisementCtrl">
 <ion-slide-box  auto-play="true" slide-interval="3000"does-continue="true">
-    <ion-slide>
+    <ion-slide ng-click="showPopup()">
+        <img src="img/ad.png" class="footer-img " />
+    </ion-slide>
+    <ion-slide ng-click="showPopup()">
         <img src="img/ad.png" class="footer-img" />
     </ion-slide>
-    <ion-slide>
-        <img src="img/ad.png" class="footer-img" />
-    </ion-slide>
-    <ion-slide>
+    <ion-slide ng-click="showPopup()">
         <img src="img/ad.png" class="footer-img" />
     </ion-slide>
 </ion-slide-box>
 
+</div>
