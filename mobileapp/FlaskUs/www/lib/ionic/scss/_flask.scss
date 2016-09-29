@@ -2092,4 +2092,39 @@ i.choose_picture{
   font-size: 16px;
   left: 30px;
 }
+.custom-popup.popup-container .popup {
+  background-color: #666666;
+  width: 90%;
+}
 
+/*.custom-popup.popup-container .popup .popup-title{
+  color: #ff8c00;
+}*/
+
+.custom-class .popup-head {
+  display: none;
+}
+.custom-class .popup-body{
+  height:220px;
+}
+.popupTitleText {
+  color: #ff8c00;
+  font-size: 16px;
+  font-weight: 600
+}
+.popupCrossIcon{
+  float:right;
+  color:#ff8c00;
+  font-weight: 600;
+  font-size: 18px;
+}
+.popupIcon{
+  font-size: 18px;
+  font-weight: 500;
+
+}
+.popupText{
+  font-size: 14px;
+  font-weight: 500;
+
+}
