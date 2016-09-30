@@ -98,6 +98,11 @@ html, body{font-family: 'Avenir Next';}
 
 .item-input input, .item-input textarea{font-family: 'Avenir Next';}
 
+div.ng-binding{    
+    font-family: 'Avenir Next';
+    font-weight: 600;
+}
+
 .fill-height-or-more {
   min-height: 100%;
   display: flex;
@@ -160,8 +165,8 @@ html, body{font-family: 'Avenir Next';}
 }
 
 .slider_svg_img{
-    margin-top: -10%;
-    height: 27%;
+    margin-top: -25%;
+    height: 37%;
     margin-left: -11%;
     margin-right: -40%;
     width: 71%;
@@ -489,12 +494,21 @@ span.error_msg{color:red;}
     font-size: 20px !important;
 }
 .eventNameCol{
+        font-weight: bold !important;
+    text-transform: uppercase;
+    font-size: 14px !important;
+    margin-left: 1% !important;
+    margin-right: -10px !important;
+    width: 100%;
+}
+
+.eventNameCol1{
     font-weight: bold !important;
     text-transform: uppercase;
     font-size: 14px !important;
-    margin-left: -1% !important;
+    margin-left: 6% !important;
     margin-right: -10px !important;
-    width: 103%;
+    width: 94%;
 }
 
 
@@ -626,8 +640,7 @@ img.list-thumbnail.listImages {
     position: absolute;
     width: 100%;
     height: 100%;
-    padding: 5px;
-    max-height: 57px;
+    max-height: 60px;
 }
 
 img.list-thumbnail.listImages1 {
@@ -1122,6 +1135,7 @@ button.button.button-clear.mini-button {
     width: 100%;
     height: 100%;
 }
+
 a.tab-item {
     font-size: 11px;
 }
@@ -1151,11 +1165,17 @@ a.tab-item {
    }
 
 button.button.button-block.button-positive.invite_friend{
-    width: 44%;
+    width: 34%;
     color: darkorange;
     min-height: 30%;
-    margin-left: 61%;
+    margin-left: 71%;
     margin-top: -49px;
+    border-radius: 6px !important;
+    font-size:14px !important;
+}
+
+button.button.button-block.button-positive.invite_friend i{
+    margin-left:-22px;
 }
 
 .photoitem{
@@ -1583,9 +1603,11 @@ position:initial !important;
   border-color: ghostwhite;
   border: 1px;
   font-weight: 400;
+  border-radius:6px !important;
 }
 .addFriendButtonStyle{
   padding-left:20px;
+  border-radius:6px !important;
 }
 .unblockButtonStyle{
   padding-left: 30px;
@@ -1843,9 +1865,9 @@ ion-item.item.supply_list{
 }
 
 button.button.button-block.button-positive.pay_now_button {
-    width: 100%;
-    text-align: center;
-    color: darkorange !important;
+    width: 90%;
+    color: darkorange;
+    margin-left: 5%;
 }
 
 select.plan_now{
@@ -2048,9 +2070,11 @@ animation:*/
 }
 
 /*css for star icon*/
+@media only screen and (max-width:600px){
 div.star_div_icon{
-    margin-top: -56px;
-    margin-left: 103%;
+      margin-top: -60px;
+      margin-right: -126%;
+    }
 }
 
 i.choose_picture{
@@ -2128,3 +2152,4 @@ i.choose_picture{
   font-weight: 500;
 
 }
+

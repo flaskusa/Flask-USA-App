@@ -1,7 +1,7 @@
 <ion-view back-button="true" cache-view="false" view-title="CREATE GROUP">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-buttons side="left">
-            <button class="button button-icon button-clear ion-arrow-left-c" ng-click="goBack()"></button>
+            <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="goBack()"></button>
         </ion-nav-buttons>
     <ion-content>
         <form name="create_group_form" class="loginpane form_div" novalidate  ng-submit="create_group_form.$valid && createGroup(groupName.name,groupName.description)">

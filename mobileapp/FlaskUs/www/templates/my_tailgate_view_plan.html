@@ -31,7 +31,7 @@
                     WHAT TO BRING
                 </div>
             </div>
-
+            <a class="item" ng-if="allMyTailgateItems.length == 0"> You do not any supply items... </a>
             <label class="list">
                 <ion-list class="item item-icon-left item-checkbox-right list-item" data-id="data.supplyItemId" ng-model="selected_checkbox" ng-repeat="data in allMyTailgateItems">
                     <h2 class="items_list">{{data.supplyListItemName}}</h2>

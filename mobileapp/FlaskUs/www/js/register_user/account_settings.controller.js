@@ -24,9 +24,6 @@
 
         getUser();
         getCountry();
-        
-        var authdata = $cookies.get("authData");
-        console.log(authdata);
 
         $scope.data1 = [
           {
@@ -171,7 +168,7 @@
                 + '</button>'
                 + '</div>'
             + '</div>';
-            var cameraPopup = $ionicPopup.show({
+            $scope.cameraPopup = $ionicPopup.show({
                 template: customTemplate,
                 title: 'Choose the Profile Picture from:-',
                 scope: $scope,
@@ -179,7 +176,7 @@
                     text: '<b>Cancel</b>',
                     type: 'button-positive',
                     onTap: function (e) {
-                        cameraPopup.close();
+                        $scope.cameraPopup.close();
                     }
                 }]
             });
@@ -188,7 +185,7 @@
         $scope.camera = function () {
             var options = {
                 quality: 50,
-                destinationType: Camera.DestinationType.DATA_URL,
+                destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
@@ -211,10 +208,12 @@
             $scope.cameraPopup.close();
             var options = {
                 destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: Camera.PictureSourceType.CAMERA,
+                sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
+                //var image = document.getElementById('myImage');
+                //image.src = imageURI;
                 $scope.uploadFileToServer(imageURI);
             }, function (err) {
                 // error
@@ -226,12 +225,8 @@
             var options = {};
             options.fileKey = "file";
             var params = {};
-            params.userid = $scope.userid;
-           
+            params.userid = $scope.userid;           
             options.params = params;
-            var headers = {};
-            headers.Authorization = 'Basic ' + authdata;
-            options.headers = headers;
             $cordovaFileTransfer.upload(encodeURI(SERVER.url + '/flask-rest-users-portlet.flaskadmin/upload-user-profile'), fileURL, options)
                   .then(function (r) {
                       $scope.downloadProgress = 0;
