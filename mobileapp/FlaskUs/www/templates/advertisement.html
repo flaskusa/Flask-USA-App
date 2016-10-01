@@ -1,15 +1,7 @@
-
 <div ng-controller="AdvertisementCtrl">
-<ion-slide-box  auto-play="true" slide-interval="3000"does-continue="true">
-    <ion-slide ng-click="showPopup()">
-        <img src="img/ad.png" class="footer-img " />
-    </ion-slide>
-    <ion-slide ng-click="showPopup()">
-        <img src="img/ad.png" class="footer-img" />
-    </ion-slide>
-    <ion-slide ng-click="showPopup()">
-        <img src="img/ad.png" class="footer-img" />
+<ion-slide-box delegate-handle="image-viewer" auto-play="true" slide-interval="5000" does-continue="true"style="width: 104%">
+    <ion-slide  ng-repeat="imageURL in ImageUrls" ng-click="showPopup($index)"style="width: 100%">
+        <img src={{imageURL}} class="footer-img "style="height: 60px;width: 100%" />
     </ion-slide>
 </ion-slide-box>
-
 </div>

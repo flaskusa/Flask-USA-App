@@ -1,4 +1,4 @@
-﻿<ion-view cache-view="false">
+﻿<ion-view cache-view="false" class="customFooter">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button>
         </ion-nav-back-button>
@@ -70,10 +70,7 @@
             </div>
         </div>   
    </ion-content>
-        <ion-footer-bar class="bar bar-dark bar-footer bar-assertive"ng-if="showAddv==false">
-            <img src="img/ad.png" class="footer-img" />
-        </ion-footer-bar>
-    <ion-footer-bar class="bar bar-dark bar-footer bar-assertive"ng-if="showAddv==true">
+    <ion-footer-bar class=" bar bar-dark bar-footer bar-assertive customBarPadding">
         <div ng-include="'templates/advertisement.html'"class="footer-img"></div>
 
     </ion-footer-bar>
