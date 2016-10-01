@@ -28,8 +28,8 @@
 
         };
 
-        $scope.initialize=function() {
-            AdvertisementService.getAllAdvertisementDetail().then(function (response) {
+        $scope.initialize=function(allEventId) {
+            AdvertisementService.getAllAdvertisementDetail(allEventId).then(function (response) {
                 if (response.Images != undefined) {
                     $scope.ImageUrls = [];
                     $scope.imageDetail = response.Images;
@@ -49,14 +49,14 @@
             $scope.myTimeOut=$timeout(function(){
 
                 if(allEventId!=undefined){
-                    $scope.initialize();
+                    $scope.initialize(allEventId);
 
                 }
                 $scope.getAdvertisement();
                 if(allEventId!=undefined) {
                     $timeout.cancel($scope.myTimeOut);
                 }
-            }, 20);
+            }, 200);
         }
         $scope.getAdvertisement();
 
@@ -101,9 +101,10 @@
             }
             return findUs;
         }
-
+        $ionicScrollDelegate.resize();
         $timeout(function () {
             $ionicSlideBoxDelegate.$getByHandle('image-viewer').update();
+            $ionicScrollDelegate.resize();
         }, 5000);
 
 

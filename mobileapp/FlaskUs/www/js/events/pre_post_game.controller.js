@@ -105,9 +105,6 @@
                 $ionicSlideBoxDelegate.$getByHandle('slide2').update();
                 $ionicSlideBoxDelegate.$getByHandle('slide3').update();
                $ionicScrollDelegate.resize();
-                $timeout(function(){
-                 $scope.showAddv=true;
-                },10);
 
 
                 if ($scope.Post_Game.length >=0) {

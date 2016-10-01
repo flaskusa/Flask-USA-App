@@ -7,6 +7,6 @@
    <img src={{fullImageUrl}}  style="width: 100%;"/>
     </div>
    <br> <div ng-if="phoneNumber"><i class="icon ion-ios-telephone popupIcon"></i><a href="tel:{{phoneNumber}}"class="popupText"style="color: #00aaff">{{phoneNumber}}</a></div>
-   <div ng-if="website"><i class="icon ion-android-globe popupIcon"></i><a href='http://'+{{website}} target="_blank"class="popupText"style="color: #00aaff">{{website}}</a></div>
+   <div ng-if="website"><i class="icon ion-android-globe popupIcon"></i><a href="http://{{website}}" target="_blank"class="popupText"style="color: #00aaff">{{website}}</a></div>
    <div ng-if="address"><i class="icon ion-ios-location popupIcon"></i><i style="color: #ff8c00" class="popupText"ng-click="openUrlForAdv()">{{address}}</i></div>
 </div>

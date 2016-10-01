@@ -8,14 +8,13 @@
 
     function AdvertisementService($http, SERVER,$cookies,$timeout) {
         var baseURL = SERVER.url;
-            var allEventId = $cookies.get('AllEventId');
 
         var getAdvertisementDetailUrl="/flask-advertisement-portlet.campaignevent/get-event-campaign-images";
         var advertisementServices = {
             getAllAdvertisementDetail: getAllAdvertisementDetail
 
         }
-        function getAllAdvertisementDetail(){
+        function getAllAdvertisementDetail(allEventId){
             return $http.get(baseURL + getAdvertisementDetailUrl, {
                 params: {eventIdList:allEventId}
             })
