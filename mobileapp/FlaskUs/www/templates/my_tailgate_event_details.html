@@ -29,7 +29,8 @@
                     <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
                 </div>
                 <div class="row">
-                    <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span class="tailgate_Info">{{myTailgate.tailgateDescription}}</span></div>
+                    <div class="col">
+                        <div class="tailgateDescFont">EVENT DETAILS</div><span class="tailgate_Info">{{myTailgate.tailgateDescription}}</span></div>
                 </div>
                 <div class="row">
                     <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
@@ -40,7 +41,7 @@
                     <div class="col">
                         <div class="tailgateDescFont">PICTURES</div>
                         <span style="overflow:scroll">
-                            <a class="item photoitem" style="float:left;">
+                            <a class="item photoitem" style="float:left;" data-ng-click="showPictureChooser()">
                                 <div><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
                                 <p class="photobuttontext" style="font-size: 11px;">ADD <br /> PHOTO</p>
                             </a>
@@ -67,12 +68,12 @@
                                 </div>
                                 <div class="col-col-15 msg_list">
                                     <span class="badge span_icon" ng-click="saveMessage(Message);"><img src="img/flask_icons/arrow_left.svg"></span>
-                                </div>
-                            </div>
-                            <div class="list">
-                                <div class="messageList" ng-repeat="data in messageUser">
-                                    <img class="default_img" ng-src='img/default-profilepic-copy.png' ;" style=" ">
-                                    <div><p class="message_username">@{{data.username}}_User</p><p class="messageTxt">{{data.message}}_message</p><br></div>
+                    </div>
+                </div>
+                <div class="list">
+                    <div class="messageList" ng-repeat="data in messageUser">
+                        <img class="default_img" ng-src='img/default-profilepic-copy.png' ; " style=" ">
+                                    <div><p class="message_username ">@{{data.username}}_User</p><p class="messageTxt ">{{data.message}}_message</p><br></div>
                                 </div>
                             </div>
                         </span>
