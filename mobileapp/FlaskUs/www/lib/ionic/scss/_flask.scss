@@ -2120,11 +2120,6 @@ i.choose_picture{
   background-color: #666666;
   width: 90%;
 }
-
-/*.custom-popup.popup-container .popup .popup-title{
-  color: #ff8c00;
-}*/
-
 .custom-class .popup-head {
   display: none;
 }
@@ -2152,4 +2147,11 @@ i.choose_picture{
   font-weight: 500;
 
 }
+.customBarPadding {
+  padding: 0px;
+  height: 55px;
+}
+
+.customFooter .has-footer {
+  bottom: 55px; }
 
