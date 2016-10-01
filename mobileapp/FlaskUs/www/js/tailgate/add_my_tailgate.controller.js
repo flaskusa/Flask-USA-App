@@ -49,8 +49,13 @@
         }
         $scope.initialize = function () {
             var tailgateId = $cookies.get("currtailGateId");
-            $scope.getTailGateLogo(tailgateId);
-            $scope.isUserTailgateAdmin(tailgateId);
+            if (tailgateId != undefined && tailgateId > 0) {
+                $scope.getTailGateLogo(tailgateId);
+                $scope.isUserTailgateAdmin(tailgateId);
+            } else {
+                $scope.isTailgateAdmin = true;
+            }
+
         }
 
         $scope.user = {
@@ -361,18 +366,27 @@
             tailgatedata.startTime = startTime;
             tailgatedata.venmoAccountId = "";
             tailgatedata.amountToPay = 0;
-            TailgateService.addTailgate(tailgatedata).then(function (respData) {
-                console.log(respData.data);
-                $cookies.put('newtailgateId', respData.data.tailgateId);
-                $cookies.putObject('newtailgatedata', respData.data);
-                $scope.newtailgatesId = respData.data.tailgateId;
-                console.log($scope.newtailgatesId);
-                $scope.enableTab = {
-                    condition: true
-                };
-                newtailGateId = $cookies.get('newtailgateId');
-                getTailgaters(newtailGateId);
-            });
+            tailgatedata.logoId = 0;
+            tailgatedata.eventId = angular.isString(tailgatedata.eventId) ? parseInt(tailgatedata.eventId) : tailgatedata.eventId;
+            if (tailgatedata.tailgateId && tailgatedata.tailgateId > 0) {
+                TailgateService.updateTailgateInfo(tailgatedata).then(function (respdata) {
+                    console.log(respdata);
+                });
+            }
+            else {
+                TailgateService.addTailgate(tailgatedata).then(function (respData) {
+                    console.log(respData.data);
+                    $cookies.put('newtailgateId', respData.data.tailgateId);
+                    $cookies.putObject('newtailgatedata', respData.data);
+                    $scope.newtailgatesId = respData.data.tailgateId;
+                    console.log($scope.newtailgatesId);
+                    $scope.enableTab = {
+                        condition: true
+                    };
+                    newtailGateId = $cookies.get('newtailgateId');
+                    getTailgaters(newtailGateId);
+                });
+            }
         }
         //update tailgate
         $scope.updatetailgate = function (newUpdate) {
@@ -592,6 +606,7 @@
         };
 
         $scope.isUserTailgateAdmin = function (tailgateId) {
+
             TailgateService.isUserTailgateAdmin(tailgateId).then(function (respData) {
                 $scope.isTailgateAdmin = respData.data;
                 console.log("Admin User " + $scope.isTailgateAdmin);

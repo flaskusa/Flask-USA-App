@@ -45,8 +45,8 @@
         var addSupplyListURL = "flask-user-tailgate-portlet.supplylist/add-supply-list";
         var getItemsByTailgateIdURL = "flask-user-tailgate-portlet.tailgatesupplyitem/get-items-by-tailgate-id";
         var updateTailgateSupplyItemURL = "flask-user-tailgate-portlet.tailgatesupplyitem/update-tailgate-supply-item";
-//        var checkTailgateUserExist = '/flask-user-tailgate-portlet.tailgateusers/check-tailgate-user-exist';
-       var isTailgateAdminURL = '/flask-user-tailgate-portlet.tailgateusers/is-tailgate-admin';
+        //        var checkTailgateUserExist = '/flask-user-tailgate-portlet.tailgateusers/check-tailgate-user-exist';
+        var isTailgateAdminURL = '/flask-user-tailgate-portlet.tailgateusers/is-tailgate-admin';
         var getTailgateLogoURL = '/flask-user-tailgate-portlet.tailgateinfo/get-tailgate-logo';
 
         var tailgateServices = {
@@ -72,15 +72,15 @@
             getMySupplyLists: getMySupplyLists,
             getSupplyList: getSupplyList,
             getItemsbylistid: getItemsbylistid,
-            getGroupList:getGroupList,
+            getGroupList: getGroupList,
             getGroupUsers: getGroupUsers,
             addTailgateSupplyItems: addTailgateSupplyItems,
             getGroupbyId: getGroupbyId,
             getItemsByTailgateId: getItemsByTailgateId,
             updateTailgateSupplyItem: updateTailgateSupplyItem,
             updateTailgateInfo: updateTailgateInfo,
-            getTailgateLogo : getTailgateLogo,
-            isUserTailgateAdmin:isUserTailgateAdmin
+            getTailgateLogo: getTailgateLogo,
+            isUserTailgateAdmin: isUserTailgateAdmin
 
         }
 
@@ -89,12 +89,12 @@
                 params: tailgateParams
             }
             )
-            .then(function success(response) {
-                return response.data;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
         //update tailgate
         function updateTailgateInfo(tailgateParams) {
@@ -102,12 +102,12 @@
                 params: tailgateParams
             }
             )
-            .then(function success(response) {
-                return response.data;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
         //get all groups
         function getallFilteredEvents(tailgateParams) {
@@ -115,23 +115,23 @@
                 params: tailgateParams
             }
             )
-            .then(function success(response) {
-                return response.data;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
         //get all groups
         function getGroupList() {
             return $http.get(baseURL + getGroupListURL
             )
-            .then(function success(response) {
-                return response.data;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
         //get all group users by group id
         function getGroupUsers(groupId) {
@@ -141,12 +141,12 @@
                 }
             }
             )
-            .then(function success(response) {
-                return response.data;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
         //GET Group by userId
         function getGroupbyId(userid) {
@@ -166,35 +166,32 @@
                 params: { 'venueId': venueId }
             }
             )
-            .then(function success(response) {
-                return response.data;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function addTailgate(currTailgateparams) {
-            return $http.get(baseURL + allTailgateURL, {
-                params: currTailgateparams
-            }
-            )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                //add errror handling
-            });
+            return $http.get(baseURL + allTailgateURL, { params: currTailgateparams })
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    //add errror handling
+                });
         }
         function deleteTailgate(tailgateId) {
             return $http.get(baseURL + deleteTailgateInfoURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )
-            .then(function success(response) {
-                return response.data;
-            }, function failure(response) {
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    //add errror handling
+                });
         }
         function getUserFrends() {
             return $http.get(baseURL + inviteFriendsTailgateURL, {
@@ -203,24 +200,24 @@
                     keywords: ''
                 }
             })
-            .then(function success(response) {
-                return response.data;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
         function getEvent(eventId) {
             return $http.get(baseURL + geteventURL, {
                 params: { 'eventId': eventId }
             }
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getMapMarkers(tailgateId) {
@@ -228,57 +225,57 @@
                 params: { 'tailgateId': tailgateId }
             }
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
         function deleteMapMarkers(tailgateId) {
             return $http.get(baseURL + deleteTailgateUserIdURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getallEvents() {
             return $http.get(baseURL + getAllEventsURL
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
         function addcurrentUser(user) {
             return $http.get(baseURL + addtailgateUserURL, {
                 params: user
             }
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getAllTailgate() {
             return $http.get(baseURL + allTailgateURL)
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getMyTailgates(uId) {
@@ -286,24 +283,24 @@
                 params: { 'userId': uId }
             }
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
         function getTailgate(tailgateId) {
             return $http.get(baseURL + getTailGateURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getMyTailgateImages(tailgateId) {
@@ -311,12 +308,12 @@
                 params: { 'tailgateId': tailgateId }
             }
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getMyTailgateUsers(tailgateId) {
@@ -324,12 +321,12 @@
                 params: { 'tailgateId': tailgateId }
             }
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
 
@@ -338,12 +335,12 @@
                 params: param
             }
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getAllMessages(tailgateId) {
@@ -365,12 +362,12 @@
                     'tailgateId': tailgateId
                 }
             })
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getAllUser(userId) {
@@ -378,22 +375,22 @@
                 params: { 'userId': userId }
             }
             )
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getMySupplyLists() {
             return $http.get(baseURL + getMySupplyListsURL)
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getSupplyList(supplyListId) {
@@ -402,12 +399,12 @@
                     'supplyListId': supplyListId
                 }
             })
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         //get Items By TailgateId
@@ -417,12 +414,12 @@
                     'tailgateId': tailgateId
                 }
             })
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function getItemsbylistid(supplyListId) {
@@ -431,12 +428,12 @@
                     'supplyListId': supplyListId
                 }
             })
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         function addTailgateSupplyItems(supplyListItemNames, tailgateId, itemAssignedUserId) {
@@ -447,75 +444,74 @@
                     'itemAssignedUserId': itemAssignedUserId
                 }
             })
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
-        function updateTailgateSupplyItem(tailgateSupplyItemId,supplyListItemName, tailgateId, itemAssignedUserId) {
+        function updateTailgateSupplyItem(tailgateSupplyItemId, supplyListItemName, tailgateId, itemAssignedUserId) {
             return $http.get(baseURL + updateTailgateSupplyItemURL, {
                 params: {
-                    'tailgateSupplyItemId':tailgateSupplyItemId,
+                    'tailgateSupplyItemId': tailgateSupplyItemId,
                     'supplyListItemName': supplyListItemName,
                     'tailgateId': tailgateId,
                     'itemAssignedUserId': itemAssignedUserId
                 }
             })
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
-//        function checkTailgateUserExist(userId, tailgateId) {
-//         return $http.get(baseURL + checkTailgateUserExist, {
-//            params: {
-//                'userId':userId,
-//                'tailgateId': tailgateId,
-//            }
-//        })
-//        .then(function success(response) {
-//            return response;
-//        }, function failure(response) {
-//            return $q.$inject(response);
-//            //add errror handling
-//        });
-//        }
-       function isUserTailgateAdmin(tailgateId) {
-        return $http.get(baseURL + isTailgateAdminURL, {
-           params: {
-               'tailgateId':tailgateId
-           }
-       })
-       .then(function success(response) {
-           return response;
-       }, function failure(response) {
-           return $q.$inject(response);
-           //add errror handling
-       });
-       }
+        //        function checkTailgateUserExist(userId, tailgateId) {
+        //         return $http.get(baseURL + checkTailgateUserExist, {
+        //            params: {
+        //                'userId':userId,
+        //                'tailgateId': tailgateId,
+        //            }
+        //        })
+        //        .then(function success(response) {
+        //            return response;
+        //        }, function failure(response) {
+        //            return $q.$inject(response);
+        //            //add errror handling
+        //        });
+        //        }
+        function isUserTailgateAdmin(tailgateId) {
+            return $http.get(baseURL + isTailgateAdminURL, {
+                params: {
+                    'tailgateId': tailgateId
+                }
+            })
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
 
 
         function getTailgateLogo(tailgateId) {
-         return $http.get(baseURL + getTailgateLogoURL, {
+            return $http.get(baseURL + getTailgateLogoURL, {
                 params: {
-                    'tailgateId':tailgateId
+                    'tailgateId': tailgateId
                 }
             })
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
         return tailgateServices;
     }
-
 
 })();
 
