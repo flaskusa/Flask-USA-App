@@ -11,10 +11,8 @@
                     <div class="list add_my_tailgate">
                         <div class="list card">
                             <div class="item item-image">
-                                <img ng-src="img/default-profilepic-copy.png" id="myImage" class="profilepicAvatar" ng-if="tailgateLogoUrl == ''" />
-                                <img ng-src="{{tailgateLogoUrl}}" id="myImage" ng-if="!tailgateLogoUrl == ''" class="profilepicAvatar" alt="Image not found"
-                                />
-                                <progress value="{{downloadProgress}}" max="100" ng-if="downloadProgress > 0"> </progress>
+                                <img ng-src="img/default-profilepic-copy.png" id="myImage" class="profilepicAvatar" ng-if="tailgateLogoId == 0"" />
+                                <img ng-src="{{tailgateLogoUrl}}" id="myImage" ng-if="tailgateLogoId > 0" class="profilepicAvatar" alt="Image not found" />                                
                             </div>
                             <a class="item text-center disabled" ng-click="show();" ng-if="isTailgateAdmin">
                                 Tap to add Profile picture

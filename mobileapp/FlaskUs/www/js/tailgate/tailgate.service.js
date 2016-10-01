@@ -48,6 +48,7 @@
         //        var checkTailgateUserExist = '/flask-user-tailgate-portlet.tailgateusers/check-tailgate-user-exist';
         var isTailgateAdminURL = '/flask-user-tailgate-portlet.tailgateusers/is-tailgate-admin';
         var getTailgateLogoURL = '/flask-user-tailgate-portlet.tailgateinfo/get-tailgate-logo';
+        var removeTailgateLogoURL = '/flask-user-tailgate-portlet.tailgateinfo/delete-tailgate-logo';
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -80,7 +81,8 @@
             updateTailgateSupplyItem: updateTailgateSupplyItem,
             updateTailgateInfo: updateTailgateInfo,
             getTailgateLogo: getTailgateLogo,
-            isUserTailgateAdmin: isUserTailgateAdmin
+            isUserTailgateAdmin: isUserTailgateAdmin,
+            removeTailgateLogo:removeTailgateLogo
 
         }
 
@@ -499,6 +501,19 @@
 
         function getTailgateLogo(tailgateId) {
             return $http.get(baseURL + getTailgateLogoURL, {
+                params: {
+                    'tailgateId': tailgateId
+                }
+            })
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+        function removeTailgateLogo(tailgateId) {
+            return $http.get(baseURL + removeTailgateLogoURL, {
                 params: {
                     'tailgateId': tailgateId
                 }

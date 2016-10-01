@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer'];
+    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService'];
 
     / @ngInject /
-    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer) {
+    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService) {
         //for adding tailgate
         var self = this;
         var newtailGateId;
@@ -41,6 +41,9 @@
         $scope.tailgateLogoUrl = "";
         $scope.tailgateLogoInfo = {};
         $scope.isTailgateAdmin = false;
+        $scope.selectedImageURIToUpload = "";
+        $scope.isImageSelectedToUpload = false;
+        $scope.tailgateLogoId = 0;
 
         getMySupplyList();
 
@@ -49,7 +52,7 @@
         }
         $scope.initialize = function () {
             var tailgateId = $cookies.get("currtailGateId");
-            if (tailgateId != undefined && tailgateId > 0) {
+            if (tailgateId != undefined && tailgateId > 0 && $scope.tailgateLogoId > 0) {
                 $scope.getTailGateLogo(tailgateId);
                 $scope.isUserTailgateAdmin(tailgateId);
             } else {
@@ -139,7 +142,7 @@
                 + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="currMarker($scope.loc);">'
                 + 'Save'
                 + '</button>'
-                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="clearMArkersOnMap();">'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="clearMArkersOnMap();" >'
                 + 'Remove'
                 + '</button>'
                 + ' </div>'
@@ -243,7 +246,7 @@
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
             $scope.selectedtime1 = $filter('date')(tailgateDetails.startTime, 'hh:mm a');
             $scope.selectedtime2 = $filter('date')(tailgateDetails.endTime, 'hh:mm a');
-
+            $scope.tailgateLogoId = tailgateDetails.logoId;
             $scope.editData = {
                 tailgateId: tailgateDetails.tailgateId,
                 tailgateName: tailgateDetails.tailgateName,
@@ -254,9 +257,9 @@
                 amountToPay: tailgateDetails.amountToPay,
                 tailgateDate: tailgateDetails.tailgateDate,
                 startTime: tailgateDetails.startTime,
-                endTime: tailgateDetails.endTime
+                endTime: tailgateDetails.endTime,
+                logoId:tailgateDetails.logoId
             }
-            console.log($scope.editData);
             $cookies.putObject('newtailgatedata', $scope.editData);
         };
         //show actin sheet on picture click
@@ -271,21 +274,37 @@
                 + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="gallery();">'
                 + 'Gallery'
                 + '</button>'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="removePicture();" ng-if="isTailgateAdmin && tailgateLogoId > 0">'
+                + 'Remove Picture'
+                + '</button>'
                 + '</div>'
                 + '</div>';
             $scope.cameraPopup = $ionicPopup.show({
                 template: customTemplate,
-                title: 'Choose the Profile Picture from:-',
-                scope: $scope,
-                buttons: [{
-                    text: '<b>Cancel</b>',
-                    type: 'button-positive',
-                    onTap: function (e) {
-                        $scope.cameraPopup.close();
-                    }
-                }]
+                title: 'Choose Picture',
+                scope: $scope
             });
+            IonicClosePopupService.register($scope.cameraPopup);
         };
+
+        $scope.removePicture = function () {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Remove tailgete logo ?',
+            });
+
+            confirmPopup.then(function (res) {
+                if (res) {
+                    TailgateService.removeTailgateLogo().then(function(res){
+                        $scope.cameraPopup.close();
+                    },function(err){
+
+                    })
+                } else {
+                     $scope.cameraPopup.close();
+                }
+            });
+            IonicClosePopupService.register(confirmPopup);
+        }
         //camera plugin
         $scope.camera = function () {
             var options = {
@@ -301,9 +320,8 @@
                 correctOrientation: true
             };
 
-            $cordovaCamera.getPicture(options).then(function (imageData) {
-                var image = document.getElementById('myImage');
-                image.src = "data:image/jpeg;base64," + imageData;
+            $cordovaCamera.getPicture(options).then(function (imageURI) {
+                $scope.setSelectedImageURIToUpload(imageURI);
             }, function (err) {
                 // error
             });
@@ -315,19 +333,26 @@
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
             };
-
             $cordovaCamera.getPicture(options).then(function (imageURI) {
-                //var image = document.getElementById('myImage');
-                //image.src = imageURI;
-                $scope.uploadFileToServer(imageURI);
+                $scope.setSelectedImageURIToUpload(imageURI);
             }, function (err) {
                 // error
             });
 
         }
+        $scope.setSelectedImageURIToUpload = function (imageURI) {
+            var image = document.getElementById('myImage');
+            image.src = imageURI;
+            $scope.isImageSelectedToUpload = true;
+            $scope.selectedImageURIToUpload = imageURI;
+        };
+        $scope.reSetSelectedImageURIToUpload = function () {
+            $scope.isImageSelectedToUpload = false;
+            $scope.selectedImageURIToUpload = '';
+        }
 
-        $scope.uploadFileToServer = function (fileURL) {
-            var tailgateId = $cookies.get("currtailGateId");
+        $scope.uploadFileToServer = function (fileURL, tailgateId) {
+            $rootScope.$broadcast('loading:show');
             var options = {};
             options.fileKey = "file";
             var params = {};
@@ -339,6 +364,8 @@
             options.headers = headers;
             $cordovaFileTransfer.upload(encodeURI(SERVER.url + '/flask-user-tailgate-portlet.tailgateimages/upload-tailgate-logo'), fileURL, options)
                 .then(function (r) {
+                    $rootScope.$broadcast('loading:hide')
+                    $scope.reSetSelectedImageURIToUpload();
                     $scope.downloadProgress = 0;
                     var data = $.parseJSON(r.response);
                     var repositoryId = data.repositoryId;
@@ -346,6 +373,8 @@
                     var title = data.title;
                     $scope.setLogoImageUrl(repositoryId, folderId, title);
                 }, function (error) {
+                    $scope.reSetSelectedImageURIToUpload();
+                    $rootScope.$broadcast('loading:hide')
                     alert("An error has occurred: Code = " + error.code);
                     console.log("upload error source " + error.source);
                     console.log("upload error target " + error.target);
@@ -370,16 +399,19 @@
             tailgatedata.eventId = angular.isString(tailgatedata.eventId) ? parseInt(tailgatedata.eventId) : tailgatedata.eventId;
             if (tailgatedata.tailgateId && tailgatedata.tailgateId > 0) {
                 TailgateService.updateTailgateInfo(tailgatedata).then(function (respdata) {
-                    console.log(respdata);
+                    if ($scope.isImageSelectedToUpload) {
+                        $scope.uploadFileToServer($scope.selectedImageURIToUpload, tailgatedata.tailgateId);
+                    }
                 });
             }
             else {
                 TailgateService.addTailgate(tailgatedata).then(function (respData) {
-                    console.log(respData.data);
+                    if ($scope.isImageSelectedToUpload) {
+                        $scope.uploadFileToServer($scope.selectedImageURIToUpload, respData.data.tailgateId);
+                    }
                     $cookies.put('newtailgateId', respData.data.tailgateId);
                     $cookies.putObject('newtailgatedata', respData.data);
                     $scope.newtailgatesId = respData.data.tailgateId;
-                    console.log($scope.newtailgatesId);
                     $scope.enableTab = {
                         condition: true
                     };
@@ -606,7 +638,6 @@
         };
 
         $scope.isUserTailgateAdmin = function (tailgateId) {
-
             TailgateService.isUserTailgateAdmin(tailgateId).then(function (respData) {
                 $scope.isTailgateAdmin = respData.data;
                 console.log("Admin User " + $scope.isTailgateAdmin);
