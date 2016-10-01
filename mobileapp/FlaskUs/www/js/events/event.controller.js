@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('EventsCtrl', EventsCtrl);
 
-    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage'];
+    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage','$ionicSlideBoxDelegate'];
 
     /* @ngInject */
-    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage) {
+    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage,$ionicSlideBoxDelegate) {
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
@@ -35,6 +35,7 @@
             searchString: 'a',
             days: '60'
         };
+        $scope.allEventId=[];
 
 
         // $scope.localstorageData = $localStorage.getObject('user_location_data');
@@ -69,7 +70,9 @@
                 $scope.allEvent = respData.data.Events;
                 for (var i = 0; i < $scope.allEvent.length; i++) {
                     $scope.vId.push($scope.allEvent[i].venueId);
+                    $scope.allEventId.push($scope.allEvent[i].eventId)
                 }
+                $cookies.put("AllEventId",$scope.allEventId);
                 if ($scope.allEvent.length == 0) {
                     $scope.Event_Error = true;
                 } else {

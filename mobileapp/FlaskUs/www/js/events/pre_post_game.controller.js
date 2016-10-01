@@ -31,7 +31,6 @@
         
         getEventVenueDatail();
         getCurrentEvent();
-        $ionicSlideBoxDelegate.update();
        function getCurrentEvent() {
             EventsService.getEventByEventId($scope.currEventId).then(function (respData) {
                 console.log(respData.data.eventDate);
@@ -102,7 +101,9 @@
                         }
                     }
                 }
-               $ionicSlideBoxDelegate.update();
+                $ionicSlideBoxDelegate.$getByHandle('slide1').update();
+                $ionicSlideBoxDelegate.$getByHandle('slide2').update();
+                $ionicSlideBoxDelegate.$getByHandle('slide3').update();
                $ionicScrollDelegate.resize();
                 $timeout(function(){
                  $scope.showAddv=true;
