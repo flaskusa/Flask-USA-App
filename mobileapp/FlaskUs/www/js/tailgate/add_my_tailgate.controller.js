@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService'];
+    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope'];
 
     / @ngInject /
-    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService) {
+    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope) {
         //for adding tailgate
         var self = this;
         var newtailGateId;
@@ -44,6 +44,7 @@
         $scope.selectedImageURIToUpload = "";
         $scope.isImageSelectedToUpload = false;
         $scope.tailgateLogoId = 0;
+        $scope.defaultImageUrl = "img/default-profilepic-copy.png";
 
         getMySupplyList();
 
@@ -71,7 +72,8 @@
             eventId: '',
             eventName: '',
             venmoAccountId: '',
-            amountToPay: ''
+            amountToPay: '',
+            tailgateId: ''
         }
         callMap($scope.latitude, $scope.longitude);
         //calling map on load and on events change
@@ -241,7 +243,8 @@
                 eventId: tailgateDetails.eventId,
                 eventName: tailgateDetails.eventName,
                 venmoAccountId: tailgateDetails.venmoAccountId,
-                amountToPay: tailgateDetails.amountToPay
+                amountToPay: tailgateDetails.amountToPay,
+                tailgateId: tailgateDetails.tailgateId
             }
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
             $scope.selectedtime1 = $filter('date')(tailgateDetails.startTime, 'hh:mm a');
@@ -258,7 +261,7 @@
                 tailgateDate: tailgateDetails.tailgateDate,
                 startTime: tailgateDetails.startTime,
                 endTime: tailgateDetails.endTime,
-                logoId:tailgateDetails.logoId
+                logoId: tailgateDetails.logoId
             }
             $cookies.putObject('newtailgatedata', $scope.editData);
         };
@@ -289,60 +292,94 @@
 
         $scope.removePicture = function () {
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Remove tailgete logo ?',
+                title: 'Remove tailgate logo ?',
             });
 
             confirmPopup.then(function (res) {
                 if (res) {
-                    TailgateService.removeTailgateLogo().then(function(res){
-                        $scope.cameraPopup.close();
-                    },function(err){
-
+                    $scope.cameraPopup.close();
+                    TailgateService.removeTailgateLogo().then(function (res) {
+                        $scope.tailgateLogoId = 0;
+                    }, function (err) {
+                        // show alert can not delete logo
                     })
                 } else {
-                     $scope.cameraPopup.close();
+                    $scope.cameraPopup.close();
                 }
             });
             IonicClosePopupService.register(confirmPopup);
         }
         //camera plugin
         $scope.camera = function () {
+            $scope.cameraPopup.close();
+            $scope.checkPermission();
+        }
+        $scope.openCamera = function () {
             var options = {
                 quality: 50,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 100,
-                targetHeight: 100,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false,
-                correctOrientation: true
+                correctOrientation: true,
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.setSelectedImageURIToUpload(imageURI);
             }, function (err) {
-                // error
+                alert("error")
             });
-        }
+        };
+        $scope.checkPermission = function () {
+            var hasPermission = false;
+            var permissions = cordova.plugins.permissions;
+            permissions.hasPermission(permissions.READ_EXTERNAL_STORAGE, checkPermissionCallback, null);
+            function checkPermissionCallback(status) {
+                if (!status.hasPermission) {
+                    var errorCallback = function () {
+                        console.warn('READ_EXTERNAL_STORAGE permission is not turned on');
+                    }
+
+                    permissions.requestPermission(
+                        permissions.READ_EXTERNAL_STORAGE,
+                        function (status) {
+                            if (!status.hasPermission) {
+                                errorCallback();
+                            } else {
+                                $scope.openCamera();
+                                hasPermission = status.hasPermission;
+                            }
+                        },
+                        errorCallback);
+                } else {
+                    hasPermission = status.hasPermission;
+                    $scope.openCamera();
+                }
+            }
+            return hasPermission;
+        };
         // for accessing gallery on mobile
         $scope.gallery = function () {
             $scope.cameraPopup.close();
             var options = {
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                allowEdit: true,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: true,
+                correctOrientation: false
             };
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.setSelectedImageURIToUpload(imageURI);
             }, function (err) {
-                // error
+
             });
 
         }
         $scope.setSelectedImageURIToUpload = function (imageURI) {
-            var image = document.getElementById('myImage');
-            image.src = imageURI;
+            $scope.defaultImageUrl = imageURI;
             $scope.isImageSelectedToUpload = true;
             $scope.selectedImageURIToUpload = imageURI;
         };
@@ -379,7 +416,7 @@
                     console.log("upload error source " + error.source);
                     console.log("upload error target " + error.target);
                 }, function (progress) {
-                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                    //                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
                 });
         }
 
@@ -388,6 +425,9 @@
         }
         //add new tailgate
         $scope.addmyTailgate = function (tailgatedata) {
+            if (tailgatedata.eventName.trim() == '' || !tailgatedata.eventId > 0) {
+                return;
+            }
             var startTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime1); // Your timezone!
             var endTime = Date.parse($scope.tailgateDate + " " + $scope.selectedtime2);
             tailgatedata.tailgateDate = new Date($scope.tailgateDate).getTime();
