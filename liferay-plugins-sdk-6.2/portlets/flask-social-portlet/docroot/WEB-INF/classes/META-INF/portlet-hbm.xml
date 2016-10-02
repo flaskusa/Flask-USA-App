@@ -3,6 +3,8 @@
 
 <hibernate-mapping default-lazy="false" auto-import="false">
 	<import class="com.liferay.contacts.model.Entry" />
+	<import class="com.liferay.contacts.model.FlaskMessages" />
+	<import class="com.liferay.contacts.model.FlaskRecipients" />
 	<class name="com.liferay.contacts.model.impl.EntryImpl" table="Contacts_Entry">
 		<cache usage="read-write" />
 		<id name="entryId" type="long">
@@ -17,5 +19,29 @@
 		<property name="fullName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="emailAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.contacts.model.impl.FlaskMessagesImpl" table="Contacts_FlaskMessages">
+		<cache usage="read-write" />
+		<id name="messageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="senderEmail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="senderUserId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="senderName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="recipients" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="message" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="sendEmail" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="dateTime" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.liferay.contacts.model.impl.FlaskRecipientsImpl" table="Contacts_FlaskRecipients">
+		<cache usage="read-write" />
+		<id name="recipientId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="email" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="messageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="read" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="read_" />
+		<property name="receivedDateTime" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>

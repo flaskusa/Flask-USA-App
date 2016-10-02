@@ -33,7 +33,7 @@ public class EventFinderImpl extends BasePersistenceImpl<Event> implements Event
 						+ " eventImageUUID, eventImageGroupId,"
 						+ " ev.companyId,  ev.userId, ev.createdDate, ev.modifiedDate, " 
 				        + " v.venueId, v.venueName, venueMetroArea, venueCity "
-						+ " FROM flaskevents_event ev INNER JOIN flaskevents_venue v "
+						+ " FROM flaskevents_Event ev INNER JOIN flaskevents_Venue v "
 				        + " ON ev.venueId =  v.venueId ");
 			
 			List<String> criteria = new ArrayList<String>();

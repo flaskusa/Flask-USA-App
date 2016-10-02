@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<globalConfiguration>
+		<parameter name="adminPassword" value="admin" />
+		<parameter name="attachments.implementation" value="org.apache.axis.attachments.AttachmentsImpl" />
+		<parameter name="sendXsiTypes" value="true" />
+		<parameter name="sendMultiRefs" value="true" />
+		<parameter name="sendXMLDeclaration" value="true" />
+		<parameter name="axis.sendMinimizedElements" value="true" />
+		<requestFlow>
+			<handler type="java:org.apache.axis.handlers.JWSHandler">
+				<parameter name="scope" value="session" />
+			</handler>
+			<handler type="java:org.apache.axis.handlers.JWSHandler">
+				<parameter name="scope" value="request" />
+				<parameter name="extension" value=".jwr" />
+			</handler>
+		</requestFlow>
+	</globalConfiguration>
+	<handler name="LocalResponder" type="java:org.apache.axis.transport.local.LocalResponder" />
+	<handler name="URLMapper" type="java:org.apache.axis.handlers.http.URLMapper" />
+	<handler name="Authenticate" type="java:org.apache.axis.handlers.SimpleAuthenticationHandler" />
+	<transport name="http">
+		<requestFlow>
+			<handler type="URLMapper" />
+			<handler type="java:org.apache.axis.handlers.http.HTTPAuthHandler" />
+		</requestFlow>
+	</transport>
+	<transport name="local">
+		<responseFlow>
+			<handler type="LocalResponder" />
+		</responseFlow>
+	</transport>
+	<service name="Plugin_flasktailgate_TailgateInfoService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.flask.rumbasolutions.com" xmlns:cmp-ns="http://model.flask.rumbasolutions.com" qname="ns:ArrayOf_tns2_TailgateInfoSoap" type="java:com.rumbasolutions.flask.model.TailgateInfoSoap[]" innerType="cmp-ns:TailgateInfoSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.flask.rumbasolutions.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.flask.rumbasolutions.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<arrayMapping xmlns:ns="urn:http.service.flask.rumbasolutions.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.flask.rumbasolutions.com" qname="ns:TailgateInfoSoap" type="java:com.rumbasolutions.flask.model.TailgateInfoSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletPreferencesIds" type="java:com.liferay.portal.model.PortletPreferencesIds" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://service.portal.liferay.com" qname="ns:ServiceContext" type="java:com.liferay.portal.service.ServiceContext" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://theme.portal.liferay.com" qname="ns:PortletDisplay" type="java:com.liferay.portal.theme.PortletDisplay" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://theme.portal.liferay.com" qname="ns:ThemeDisplay" type="java:com.liferay.portal.theme.ThemeDisplay" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://util.kernel.portal.liferay.com" qname="ns:StringBundler" type="java:com.liferay.portal.kernel.util.StringBundler" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://xml.apache.org/xml-soap" qname="ns:mapItem" type="java:org.apache.xml.xml_soap.MapItem" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="http://model.flask.rumbasolutions.com" name="addTailgateInfo" qname="operNS:addTailgateInfo" returnQName="addTailgateInfoReturn" returnType="rtns:TailgateInfoSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateDescription" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateDate" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startTime" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endTime" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" name="deleteTailgateInfo" qname="operNS:deleteTailgateInfo" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="urn:http.service.flask.rumbasolutions.com" xmlns:tns2="http://model.flask.rumbasolutions.com" name="getAllMyTailgate" qname="operNS:getAllMyTailgate" returnQName="getAllMyTailgateReturn" returnType="rtns:ArrayOf_tns2_TailgateInfoSoap" returnItemType="tns2:TailgateInfoSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="urn:http.service.flask.rumbasolutions.com" xmlns:tns2="http://model.flask.rumbasolutions.com" name="getAllTailgate" qname="operNS:getAllTailgate" returnQName="getAllTailgateReturn" returnType="rtns:ArrayOf_tns2_TailgateInfoSoap" returnItemType="tns2:TailgateInfoSoap" soapAction=""> </operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="http://model.flask.rumbasolutions.com" name="getTailgate" qname="operNS:getTailgate" returnQName="getTailgateReturn" returnType="rtns:TailgateInfoSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:int"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="http://model.flask.rumbasolutions.com" name="updateTailgateInfo" qname="operNS:updateTailgateInfo" returnQName="updateTailgateInfoReturn" returnType="rtns:TailgateInfoSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateDescription" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="eventName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateDate" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startTime" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endTime" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="addTailgateInfo deleteTailgateInfo getAllMyTailgate getAllTailgate getTailgate updateTailgateInfo" />
+		<parameter name="className" value="com.rumbasolutions.flask.service.http.TailgateInfoServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.flask.rumbasolutions.com,http://model.portal.liferay.com,http://service.portal.liferay.com,http://theme.portal.liferay.com,http://util.kernel.portal.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.flask.rumbasolutions.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="TailgateInfoServiceSoap" />
+		<parameter name="wsdlServiceElement" value="TailgateInfoServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_flasktailgate_TailgateInfoService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.flask.rumbasolutions.com" />
+	</service>
+	<service name="Plugin_flasktailgate_TailgateMarkerService" provider="java:RPC" style="rpc" use="encoded">
+		<typeMapping xmlns:ns="http://model.flask.rumbasolutions.com" qname="ns:TailgateMarkerSoap" type="java:com.rumbasolutions.flask.model.TailgateMarkerSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="http://model.flask.rumbasolutions.com" name="addTailgateMarker" qname="operNS:addTailgateMarker" returnQName="addTailgateMarkerReturn" returnType="rtns:TailgateMarkerSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="latitude" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="longitude" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" name="deleteTailgateMarker" qname="operNS:deleteTailgateMarker" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="http://model.flask.rumbasolutions.com" name="getTailgateMarker" qname="operNS:getTailgateMarker" returnQName="getTailgateMarkerReturn" returnType="rtns:TailgateMarkerSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="addTailgateMarker deleteTailgateMarker getTailgateMarker" />
+		<parameter name="className" value="com.rumbasolutions.flask.service.http.TailgateMarkerServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.flask.rumbasolutions.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="TailgateMarkerServiceSoap" />
+		<parameter name="wsdlServiceElement" value="TailgateMarkerServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_flasktailgate_TailgateMarkerService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.flask.rumbasolutions.com" />
+	</service>
+	<service name="Plugin_flasktailgate_TailgateUsersService" provider="java:RPC" style="rpc" use="encoded">
+		<arrayMapping xmlns:ns="urn:http.service.flask.rumbasolutions.com" xmlns:cmp-ns="http://model.flask.rumbasolutions.com" qname="ns:ArrayOf_tns2_TailgateUsersSoap" type="java:com.rumbasolutions.flask.model.TailgateUsersSoap[]" innerType="cmp-ns:TailgateUsersSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.flask.rumbasolutions.com" qname="ns:TailgateUsersSoap" type="java:com.rumbasolutions.flask.model.TailgateUsersSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="http://model.flask.rumbasolutions.com" name="addTailgateUser" qname="operNS:addTailgateUser" returnQName="addTailgateUserReturn" returnType="rtns:TailgateUsersSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="isAdmin" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:int"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="checkTailgateUserExist" qname="operNS:checkTailgateUserExist" returnQName="checkTailgateUserExistReturn" returnType="rtns:boolean" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" name="deleteTailgateUser" qname="operNS:deleteTailgateUser" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="urn:http.service.flask.rumbasolutions.com" xmlns:tns2="http://model.flask.rumbasolutions.com" name="getTailgateGroups" qname="operNS:getTailgateGroups" returnQName="getTailgateGroupsReturn" returnType="rtns:ArrayOf_tns2_TailgateUsersSoap" returnItemType="tns2:TailgateUsersSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="urn:http.service.flask.rumbasolutions.com" xmlns:tns2="http://model.flask.rumbasolutions.com" name="getTailgateMembers" qname="operNS:getTailgateMembers" returnQName="getTailgateMembersReturn" returnType="rtns:ArrayOf_tns2_TailgateUsersSoap" returnItemType="tns2:TailgateUsersSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="http://model.flask.rumbasolutions.com" name="updateTailgateUser" qname="operNS:updateTailgateUser" returnQName="updateTailgateUserReturn" returnType="rtns:TailgateUsersSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateUserId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="userName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="isAdmin" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:int"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="addTailgateUser checkTailgateUserExist deleteTailgateUser getTailgateGroups getTailgateMembers updateTailgateUser" />
+		<parameter name="className" value="com.rumbasolutions.flask.service.http.TailgateUsersServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.flask.rumbasolutions.com,urn:http.service.flask.rumbasolutions.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="TailgateUsersServiceSoap" />
+		<parameter name="wsdlServiceElement" value="TailgateUsersServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_flasktailgate_TailgateUsersService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.flask.rumbasolutions.com" />
+	</service>
+</deployment>

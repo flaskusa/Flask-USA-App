@@ -17,7 +17,7 @@ create table Contacts_FlaskMessages (
 	senderUserId LONG,
 	senderName VARCHAR(75) null,
 	recipients VARCHAR(75) null,
-	message STRING null,
+	message VARCHAR(75) null,
 	sendEmail BOOLEAN,
 	dateTime DATE null
 );

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Plugin_flasktailgate_TailgateMarkerService" provider="java:RPC" style="rpc" use="encoded">
+		<typeMapping xmlns:ns="http://model.flask.rumbasolutions.com" qname="ns:TailgateMarkerSoap" type="java:com.rumbasolutions.flask.model.TailgateMarkerSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="http://model.flask.rumbasolutions.com" name="addTailgateMarker" qname="operNS:addTailgateMarker" returnQName="addTailgateMarkerReturn" returnType="rtns:TailgateMarkerSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="latitude" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="longitude" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" name="deleteTailgateMarker" qname="operNS:deleteTailgateMarker" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.flask.rumbasolutions.com" xmlns:rtns="http://model.flask.rumbasolutions.com" name="getTailgateMarker" qname="operNS:getTailgateMarker" returnQName="getTailgateMarkerReturn" returnType="rtns:TailgateMarkerSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tailgateId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="addTailgateMarker deleteTailgateMarker getTailgateMarker" />
+		<parameter name="className" value="com.rumbasolutions.flask.service.http.TailgateMarkerServiceSoap" />
+		<parameter name="schemaUnqualified" value="http://model.flask.rumbasolutions.com" />
+		<parameter name="typeMappingVersion" value="1.2" />
+		<parameter name="wsdlPortType" value="TailgateMarkerServiceSoap" />
+		<parameter name="wsdlServiceElement" value="TailgateMarkerServiceSoapService" />
+		<parameter name="wsdlServicePort" value="Plugin_flasktailgate_TailgateMarkerService" />
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.flask.rumbasolutions.com" />
+	</service>
+</deployment>

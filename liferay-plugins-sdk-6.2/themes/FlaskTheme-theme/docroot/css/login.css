@@ -1,0 +1,195 @@
+.sign-in-form input[type="text"]{
+	width:280px;
+	padding-left:20px;
+}
+
+.sign-in-form input[type="password"]{
+	width:280px;
+	padding-left:20px;
+}
+
+.sign-in-form input[type="submit"]{
+	width:300px;
+	margin: auto;	
+}
+
+.sign-in-form label.control-label {
+  text-align: left;
+}
+
+.sign-in-form  .cq-dd-image{
+	zoom:0.5;
+}
+
+.login-content {
+  display: table-cell;
+  vertical-align: middle;
+}
+.loginForm {
+  position: relative;
+}
+.bg-image-holder {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin:0;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: top center;
+}
+/* ================================
+  Login Panel
+================================ */
+.loginpane {
+  background: #fff;
+  text-align: center;
+  width: 100%;
+  
+}
+.loginpane_header {
+  border-bottom: 1px solid #e8e8e8;
+  padding: 1.5em 0;
+}
+.form-header {
+  margin-top: 0;
+}
+.loginpane_body {
+  padding: 15px 15px;
+}
+.loginpane_footer {
+  background: #e8e8e8;
+  font-size: 0.875em;
+  padding: 1em 0;
+}
+.forgot {
+  font-size: 0.813em;
+  margin: 0;
+}
+/* ================================
+  Form Elements
+================================ */
+/* placeholder text */
+::-webkit-input-placeholder {
+  color: #999;
+  -webkit-font-smoothing: antialiased;
+}
+:-moz-placeholder {
+  /* Firefox 18- */
+  color: #999;
+}
+::-moz-placeholder {
+  /* Firefox 19+ */
+  color: #999;
+}
+:-ms-input-placeholder {
+  color: #999;
+}
+.form-control {
+  margin: 0 auto;
+  max-width: 320px;
+  position: relative;
+}
+
+.loginpane {
+  background: transparent;
+}
+
+.loginpane_header {
+  background: #ffffff;
+  /* fallback */
+  background: rgba(255, 255, 255, 0.95);
+  padding: 1em 0;
+}
+.loginpane_body {
+  background: #ffffff;
+  /* fallback */
+  background: rgba(255, 255, 255, 0.9);
+}
+.loginpane_footer {
+  background: #e1e1e1;
+  /* fallback */
+  background: rgba(225, 225, 225, 0.95);
+}
+/* ==========================================================================
+   Media Queries
+   ========================================================================== */
+@media only screen and (max-width: 30em) {
+  /* 480 */
+  .login-content {
+    vertical-align: top;
+  }
+  
+  .loginpane {
+    margin: 0 auto;
+    width: 100%;
+  }
+  
+  .sign-in-form .aui .btn {
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+	  /* display: block; */
+	  margin-top: 0px;
+	  width: 100%;
+	}
+  
+   .login-wrap {
+    padding-top: 0;
+    vertical-align: middle;
+  }
+  .sign-in-form input[type="text"]{
+	width:90%;
+	padding-left:20px;
+}
+
+.sign-in-form input[type="password"]{
+	width:90%;
+	padding-left:20px;
+}
+
+.sign-in-form input[type="submit"]{
+	width:100%;
+	text-align:center;
+	margin: auto;	
+}
+  
+}
+@media only screen and (min-width: 30.063em) {
+  /* 481px */
+  .loginpane {
+    margin: 0 auto;
+    width: 380px;
+  }
+  
+   .login-wrap {
+    padding-top: 0;
+    vertical-align: middle;
+  }
+}
+/* position centered vertically if viewport is taller than the login pane */
+@media only screen and (min-width: 30.063em) and (min-height: 660px) {
+  .login-wrap {
+    padding-top: 0;
+    vertical-align: middle;
+  }
+}
+
+.sign-in-form .button-holder{
+	margin: 0px;
+}
+
+@media (max-width: 767px) and (max-width: 979px)
+{
+	.sign-in-form .aui .btn 
+	{
+	  -webkit-box-sizing: border-box;
+	  -moz-box-sizing: border-box;
+	  box-sizing: border-box;
+	  /* display: block; */
+	  margin-top: 5px;
+	  text-align:center;
+	  width: 310px;
+	}
+}

@@ -28,15 +28,15 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 		try{
 			session = openSession();
 			StringBuilder sb = new StringBuilder();
-			String sqlSelect = "  select campaignId, campaignName,  flaskads_adcustomer.customerId, " +
-						" flaskads_adcustomer.customerName, displayGeneral, displayPreEvent, " +
+			String sqlSelect = "  select campaignId, campaignName,  flaskads_AdCustomer.customerId, " +
+						" flaskads_AdCustomer.customerName, displayGeneral, displayPreEvent, " +
 						" displayDuringEvent, displayPostEvent, eventTypeId, frequencyPerHour, " +
 						"CONCAT_WS(', ', IF(displayGeneral=1, 'General',null) , IF(displayPreEvent=1, 'Pre-Event',null) ," + 
 						"IF(displayDuringEvent = 1, 'During-Event',null) , IF(displayPostEvent = 1, 'Post-Event', null)) " +
-						" as 'adDisplayTime', flaskads_adcampaign.imageTitle, flaskads_adcampaign.imageDesc, "
-						+ "flaskads_adcampaign.imageUUID, flaskads_adcampaign.imageGroupId";
-			String sqlFrom = "  from flaskads_adcampaign inner join flaskads_adcustomer " + 
-							" on flaskads_adcustomer.customerId = flaskads_adcampaign.customerId ";
+						" as 'adDisplayTime', flaskads_AdCampaign.imageTitle, flaskads_AdCampaign.imageDesc, "
+						+ "flaskads_AdCampaign.imageUUID, flaskads_AdCampaign.imageGroupId";
+			String sqlFrom = "  from flaskads_AdCampaign inner join flaskads_AdCustomer " + 
+							" on flaskads_AdCustomer.customerId = flaskads_AdCampaign.customerId ";
 			
 			sb.append(sqlSelect);
 			sb.append(sqlFrom);
@@ -92,12 +92,12 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 								+ " fac.imageUUID 'fullScreenUUID', fac.frequencyPerHour, fci.imageTitle, "
 								+ " fci.imageDesc, fci.imageGroupId, fci.imageUUID ";
 			
-			String sqlFrom = " from flaskads_campaignevent  fce "
-					+ " inner join  flaskads_adcampaign fac on  fce.campaignId = fac.campaignId "
-					+ " inner join flaskevents_event fe on fe.eventId = fce.eventId "
-					+ " inner join flaskads_campaignimage fci on fci.campaignId = fac.campaignId"
-					+ "	inner join flaskads_adcustomer on flaskads_adcustomer.customerId = fac.customerId"
-					+ " inner join region on region.regionId = flaskads_adcustomer.stateId"; 
+			String sqlFrom = " from flaskads_CampaignEvent  fce "
+					+ " inner join  flaskads_AdCampaign fac on  fce.campaignId = fac.campaignId "
+					+ " inner join flaskevents_Event fe on fe.eventId = fce.eventId "
+					+ " inner join flaskads_CampaignImage fci on fci.campaignId = fac.campaignId"
+					+ "	inner join flaskads_AdCustomer on flaskads_AdCustomer.customerId = fac.customerId"
+					+ " inner join region on region.regionId = flaskads_AdCustomer.stateId"; 
 			
 			String sqlWhere = " where fce.eventId in ( " + eventList + ")" ;
 			

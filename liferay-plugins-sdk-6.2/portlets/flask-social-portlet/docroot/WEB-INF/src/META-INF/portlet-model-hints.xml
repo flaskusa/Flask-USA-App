@@ -47,9 +47,7 @@
 		<field name="senderUserId" type="long" />
 		<field name="senderName" type="String" />
 		<field name="recipients" type="String" />
-		<field name="message" type="String">
-			<hint-collection name="TEXTAREA" />
-		</field>
+		<field name="message" type="String" />
 		<field name="sendEmail" type="boolean" />
 		<field name="dateTime" type="Date" />
 	</model>
