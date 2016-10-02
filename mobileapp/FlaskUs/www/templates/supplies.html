@@ -1,29 +1,49 @@
 ﻿<ion-view cache-view="false" view-title="SUPPLIES"ng-init="initialize()">
   <ion-content>
 
-      <a class="item item-full item-icon-left "ng-click="addNewSuppliesList()" href="#/app/createSupplies">
+      <a class="item item-full item-icon-left "ng-click="addNewSuppliesList()" href="#/app/createSupplies"ng-if="MyGameDayList==false">
           <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons" class="FlaskionIcons"></div>
           <p class="addText">CREATE NEW SUPPLIES</p>
       </a>
-      <div class="divText"ng-if="supplies.length==0">
+      <div class="divText"ng-if="supplies.length==0 && MyGameDayList==false">
           You don't have any supplies, you can create your own or you can copy.
+      </div>
+      <div class="divText"ng-if="MyGameDaysSupply.length==0 && MyGameDayList==true && hideCheckBox==false">
+          You don't have any game day supplies, you have to select from flask us supply.
+      </div>
+      <div class="divText"ng-if="MyGameDaysSupply.length==0 && MyGameDayList==true && hideCheckBox==true">
+          You have to login to get these supplies.
       </div>
 
 
 <ion-list>
-          <ion-item style="color: #0f0f0f"  ng-repeat="data in supplies"ng-if="data.isSystem==false"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)">
+
+          <ion-item style="color: #0f0f0f"  ng-repeat="data in supplies"ng-if="data.isSystem==false && MyGameDayList==false"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)">
               <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
               <label ng-if = "data.edit == false" style="font-weight: 200"><i class="addText">{{ data.supplyListName | uppercase}}</i> </label>
-              <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
+              <input type="text"id="editBox2"autofocus ng-model="data.supplyListName "ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
               </div>
               <a  ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px">{{data.listItem.length}}</span>
-                  <div >
+                  <div ng-if="MyGameDayList==false">
                   <span class="badge"style="top:12px"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:23px;padding-left:10%;top:20px;float: right"></span>
                   </div>
               </a>
               <ion-option-button class="button-assertive icon ion-edit" ng-click="editSupply(data)"></ion-option-button>
               <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteItem($index,data.supplyListId)"></ion-option-button>
                    </ion-item>
+    <ion-item style="color: #0f0f0f"  ng-repeat="data in MyGameDaysSupply"ng-if="data.isSystem==false  && MyGameDayList==true"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)">
+        <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
+            <label ng-if = "data.edit == false" style="font-weight: 200"><i class="addText">{{ data.supplyListName | uppercase}}</i> </label>
+            <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
+        </div>
+        <a  ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px">{{data.listItem.length}}</span>
+            <div ng-if="MyGameDayList==false">
+                <span class="badge"style="top:12px"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:23px;padding-left:10%;top:20px;float: right"></span>
+            </div>
+        </a>
+        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteGameDayItem($index,data.supplyListId)"></ion-option-button>
+    </ion-item>
+
       </ion-list>
 <div class="strip"ng-if="agreedToTermsOfUse==false">
     <div class="stripPadding">
@@ -36,16 +56,24 @@
 
       <ion-list>
           <ion-item class="item "  ng-repeat="data in supplies"ng-if="data.isSystem==true"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)"on-swipe-left="onSwipeLeft(data)"on-swipe-right="onSwipeRight(data)">
-             <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
+
               <span class="emailText" style="color: #000000;font-weight: 200" ng-if = "data.edit == false"><i class="addText">{{ data.supplyListName | uppercase}}</i></span>
               <input type="text"id="systemEditBox"autofocus ng-model="data.supplyListName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
+             <div ng-if="MyGameDayList==false">
               <span ng-if="agreedToTermsOfUse==false" class="badge badge-assertive"style="cursor: pointer" ng-click="copyList(data)">copy</span>
-              </div>
-                 <div ng-if="agreedToTermsOfUse==true">
+
+                 <div ng-if="agreedToTermsOfUse==true ">
                   <span class="badge "style="top:12px"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:23px;top:20px;float: right"></span>
               </div>
+                 </div>
+              <div ng-if="MyGameDayList==true && hideCheckBox==false">
+           <span class="badge span_icon"style="top:3px"ng-click="selectGameDaySupply(data,data.checked)"> <label class="checkbox"style="float: right">
+               <input  type="checkbox"ng-model="data.checked">
+           </label></span></div>
+              <div ng-if="MyGameDayList==false">
               <ion-option-button class="button-assertive icon ion-edit"ng-if="agreedToTermsOfUse==true " ng-click="editSupply(data)"></ion-option-button>
               <ion-option-button class="button-assertive icon ion-trash-a"ng-if="agreedToTermsOfUse==true" ng-click="deleteItem($index,data.supplyListId)"></ion-option-button>
+                  </div>
 
           </ion-item>
           </ion-list>
