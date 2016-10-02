@@ -3,14 +3,20 @@
     angular.module('flaskApp')
     .controller('SuppliesCtrl', SuppliesCtrl);
 
-    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate'];
+    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate','$stateParams'];
 
     /* @ngInject */
-    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate ) {
+    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate,$stateParams ) {
 
         $scope.userDataList=[];
         $scope.supplies=[];
         $scope.supplyItemNames=[];
+        $scope.MyGameDaysSupply=[];
+        if($stateParams.myListName==""){
+         $scope.MyGameDayList=false;
+        }else{
+            $scope.MyGameDayList=true;
+        }
         if(SupplyService.addAsAdmin!=undefined){
             $scope.addAsAdmin=SupplyService.addAsAdmin;
         }else{
@@ -31,12 +37,19 @@
         $scope.deleteSuplies=false;
         $scope.editSuply=false;
         var userDetail=$cookies.getObject('CurrentUser');
-        var userId=userDetail.data.userId;
-        $scope.agreedToTermsOfUse=userDetail.data.agreedToTermsOfUse;
+        if(userDetail!=undefined) {
+            var userId = userDetail.data.userId;
+            $scope.hideCheckBox=false;
+            $scope.agreedToTermsOfUse = userDetail.data.agreedToTermsOfUse;
+        }else{
+            $scope.hideCheckBox=true
+            $scope.agreedToTermsOfUse=false;
+        }
         $scope.addSupplyAsAdmin=function(){
             SupplyService.addAsAdmin=true;
             $scope.addAsAdmin=true;
         }
+
         $scope.addSupplyAsUser=function(){
             SupplyService.addAsAdmin=false;
             $scope.addAsAdmin=false;
@@ -45,6 +58,41 @@
             SupplyService.getMySupplyList().then(function (response) {
                 $scope.supplies = response;
             });
+        }
+        $scope.copyForMyGameDaySupply=function(list){
+            var list=angular.copy(list);
+            list.isSystem=false;
+            $scope.MyGameDaysSupply.push(list);
+        }
+        $scope.deleteGameDayItem=function(index,id){
+            angular.forEach($scope.supplies,function(value,key){
+                if(value.isSystem==true) {
+                    if (id == value.supplyListId) {
+                        value.checked = false;
+                        angular.forEach($scope.MyGameDaysSupply, function (value1, key1) {
+                            if (id == value1.supplyListId) {
+                                $scope.MyGameDaysSupply.splice(key1, 1);
+                            }
+                        });
+                        return false;
+                    }
+                }
+            });
+        }
+        $scope.removeSelectedSupply=function(list){
+            angular.forEach($scope.MyGameDaysSupply,function(value,key){
+                if(list.supplyListId==value.supplyListId){
+                    $scope.MyGameDaysSupply.splice(key,1);
+                    return false;
+                }
+            });
+        }
+        $scope.selectGameDaySupply=function(list,checked){
+         if(checked==true){
+             $scope.copyForMyGameDaySupply(list);
+         }else{
+             $scope.removeSelectedSupply(list);
+         }
         }
         $scope.addNewSuppliesList=function(){
             setTimeout(setFocus, 50);
@@ -68,15 +116,18 @@
             $scope.addNewSupplies=false;
         };
         $scope.goTOList=function(selectedList){
-            if($scope.agreedToTermsOfUse==true && $scope.deleteSuplies==false &&  $scope.editSuply==false && selectedList.isSystem==true) {
-                SupplyService.selectedList=selectedList;
-                $state.go('app.suppliesList', {listName: selectedList.supplyListName})
-            }else if(selectedList.isSystem==false && $scope.editSuply==false){
-                SupplyService.selectedList=selectedList;
-                $state.go('app.suppliesList', {listName: selectedList.supplyListName})
+            if($scope.MyGameDayList==false) {
+                if ($scope.agreedToTermsOfUse == true && $scope.deleteSuplies == false && $scope.editSuply == false && selectedList.isSystem == true) {
+                    SupplyService.selectedList = selectedList;
+                    $state.go('app.suppliesList', {listName: selectedList.supplyListName})
+                } else if (selectedList.isSystem == false && $scope.editSuply == false) {
+                    SupplyService.selectedList = selectedList;
+                    $state.go('app.suppliesList', {listName: selectedList.supplyListName})
+                }
+                $timeout(function () {
+                    $scope.deleteSuplies = false;
+                }, 1000);
             }
-            $timeout(function () {  $scope.deleteSuplies=false;
-            },1000);
 
         }
         $scope.editSupply=function(data){
@@ -254,6 +305,7 @@
             });
 
         };
+
         $scope.editSupplies=function(){
 
          $scope.editList=!$scope.editList;

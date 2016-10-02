@@ -77,7 +77,7 @@
 
         // Supplies
         .state('app.supplies', {
-            url: '/supplies',
+            url: '/supplies/:myListName',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/supplies.html',
