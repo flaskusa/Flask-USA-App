@@ -21,7 +21,7 @@
           <ion-item style="color: #0f0f0f"  ng-repeat="data in supplies"ng-if="data.isSystem==false && MyGameDayList==false"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)">
               <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
               <label ng-if = "data.edit == false" style="font-weight: 200"><i class="addText">{{ data.supplyListName | uppercase}}</i> </label>
-              <input type="text"id="editBox2"autofocus ng-model="data.supplyListName "ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
+              <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
               </div>
               <a  ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px">{{data.listItem.length}}</span>
                   <div ng-if="MyGameDayList==false">
@@ -31,12 +31,9 @@
               <ion-option-button class="button-assertive icon ion-edit" ng-click="editSupply(data)"></ion-option-button>
               <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteItem($index,data.supplyListId)"></ion-option-button>
                    </ion-item>
-    <ion-item style="color: #0f0f0f"  ng-repeat="data in MyGameDaysSupply"ng-if="data.isSystem==false  && MyGameDayList==true"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)">
-        <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
-            <label ng-if = "data.edit == false" style="font-weight: 200"><i class="addText">{{ data.supplyListName | uppercase}}</i> </label>
-            <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
-        </div>
-        <a  ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px">{{data.listItem.length}}</span>
+    <ion-item class=" item-remove-animate" style="color: #0f0f0f"  ng-repeat="data in MyGameDaysSupply"ng-if="data.isSystem==false  && MyGameDayList==true" ng-click="goTOList(data)">
+            <label  style="font-weight: 200"><i class="addText">{{ data.supplyListName | uppercase}}</i> </label>
+        <a  ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px"></span>
             <div ng-if="MyGameDayList==false">
                 <span class="badge"style="top:12px"><img src="img/flask_icons/arrow_left.svg" style="width:21px;height:23px;padding-left:10%;top:20px;float: right"></span>
             </div>
@@ -49,11 +46,11 @@
     <div class="stripPadding">
     <span ng-if="editList==false"><i class="textStyle">FLASK US SUPPLY LIST</i></span>
     </div></div>
-      <div class="strip"ng-if="agreedToTermsOfUse==true">
+      <div class="strip"ng-if="agreedToTermsOfUse==true" ng-click="toggleItem()">
           <div class="stripPadding">
               <span ng-if="editList==false"><i class="textStyle">FLASK US SUPPLY LIST</i></span>
           </div></div>
-
+<div class="supplyAnimation" ng-class="{hideSupplyItem:hideItem}">
       <ion-list>
           <ion-item class="item "  ng-repeat="data in supplies"ng-if="data.isSystem==true"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)"on-swipe-left="onSwipeLeft(data)"on-swipe-right="onSwipeRight(data)">
 
@@ -77,6 +74,6 @@
 
           </ion-item>
           </ion-list>
-
+</div>
   </ion-content>
 </ion-view>
