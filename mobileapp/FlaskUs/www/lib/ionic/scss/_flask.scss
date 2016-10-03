@@ -2155,3 +2155,12 @@ i.choose_picture{
 .customFooter .has-footer {
   bottom: 55px; }
 
+.supplyAnimation{
+  height: 100%;
+  overflow: hidden;
+  transition: 1s;
+}
+.hideSupplyItem{
+  height: 0px;
+}
+
