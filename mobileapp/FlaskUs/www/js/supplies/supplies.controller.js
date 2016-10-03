@@ -12,6 +12,7 @@
         $scope.supplies=[];
         $scope.supplyItemNames=[];
         $scope.MyGameDaysSupply=[];
+        $scope.hideItem=false;
         if($stateParams.myListName==""){
          $scope.MyGameDayList=false;
         }else{
@@ -30,6 +31,11 @@
         $scope.onSwipeRight=function(data){
             /*data.swiped=false;
           $ionicListDelegate.closeOptionButtons();*/
+        }
+        $scope.toggleItem=function(){
+
+            $scope.hideItem=!$scope.hideItem;
+
         }
         $scope.editList=false;
         $scope.addNewSupplies=false;

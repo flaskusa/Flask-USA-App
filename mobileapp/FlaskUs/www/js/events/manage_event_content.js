@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('ManageEventCtrl', ManageEventCtrl);
 
-    ManageEventCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', 'SERVER'];
+    ManageEventCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', 'SERVER','$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope'];
 
     /* @ngInject */
-    function ManageEventCtrl($scope, $stateParams, $state, EventsService, SERVER) {
+    function ManageEventCtrl($scope, $stateParams, $state, EventsService, SERVER,$ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService, $rootScope) {
         $scope.eventDetails = $stateParams.eventDetails.Details;
         $scope.eventName=$stateParams.currEventName;
         $scope.currEventId=$stateParams.currEventId;
@@ -22,6 +22,29 @@
         $scope.content={infoTitle:"",infoDesc:""};
 
         $scope.infoTypeCategoryId=103;
+        $scope.show = function () {
+            // Show the action sheet
+            $scope.loc = {};
+            var customTemplate =
+                '<div class="list">'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="camera();">'
+                + 'Camera'
+                + '</button>'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="gallery();">'
+                + 'Gallery'
+                + '</button>'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="removePicture();" ng-if="isTailgateAdmin && tailgateLogoId > 0">'
+                + 'Remove Picture'
+                + '</button>'
+                + '</div>'
+                + '</div>';
+            $scope.cameraPopup = $ionicPopup.show({
+                template: customTemplate,
+                title: 'Choose Picture',
+                scope: $scope
+            });
+            IonicClosePopupService.register($scope.cameraPopup);
+        };
 
         $scope.addContent=function(content,index) {
             if (content.eventDetailId <= 0 || content.eventDetailId == undefined) {
