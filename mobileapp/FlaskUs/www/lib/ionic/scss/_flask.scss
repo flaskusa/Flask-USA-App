@@ -90,6 +90,13 @@
 	font-style: italic;
 }
 
+@font-face {
+	font-family: 'AGENCYR';
+	src: url('/lib/ionic/fonts/AGENCYR.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Avenir Next';
 }
@@ -101,6 +108,10 @@ html, body{font-family: 'Avenir Next';}
 div.ng-binding{    
     font-family: 'Avenir Next';
     font-weight: 600;
+}
+
+.tabs a span{font-family: 'AGENCYR';
+             font-size: 14px;
 }
 
 .fill-height-or-more {
@@ -2070,12 +2081,11 @@ animation:*/
 }
 
 /*css for star icon*/
-@media only screen and (max-width:600px){
-div.star_div_icon{
-      margin-top: -60px;
-      margin-right: -126%;
+
+img.star_icon_svg{
+      width:67px;
     }
-}
+
 
 i.choose_picture{
     margin-bottom: 10px;
