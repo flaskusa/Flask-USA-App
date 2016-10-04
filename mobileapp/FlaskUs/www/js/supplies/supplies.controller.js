@@ -13,6 +13,7 @@
         $scope.supplyItemNames=[];
         $scope.MyGameDaysSupply=[];
         $scope.hideItem=false;
+        $scope.hideMyItem=false;
         if($stateParams.myListName==""){
          $scope.MyGameDayList=false;
         }else{
@@ -32,9 +33,21 @@
             /*data.swiped=false;
           $ionicListDelegate.closeOptionButtons();*/
         }
-        $scope.toggleItem=function(){
 
-            $scope.hideItem=!$scope.hideItem;
+
+
+        $scope.toggleItem=function(){
+            if($scope.MyGameDayList==true) {
+                $scope.hideItem = !$scope.hideItem;
+                $("#FlaskUsListdiv").slideToggle("slow", function () {
+                });
+            }
+        }
+        $scope.toggleMyItem=function(){
+            if($scope.MyGameDayList==true){
+            $scope.hideMyItem=!$scope.hideMyItem;
+            $( "#myListdiv" ).slideToggle( "slow", function() {});
+                }
 
         }
         $scope.editList=false;
@@ -66,32 +79,29 @@
             });
         }
         $scope.copyForMyGameDaySupply=function(list){
-            var list=angular.copy(list);
-            list.isSystem=false;
-            $scope.MyGameDaysSupply.push(list);
-        }
-        $scope.deleteGameDayItem=function(index,id){
+            $scope.MyGameDaysSupply=[];
             angular.forEach($scope.supplies,function(value,key){
-                if(value.isSystem==true) {
-                    if (id == value.supplyListId) {
-                        value.checked = false;
-                        angular.forEach($scope.MyGameDaysSupply, function (value1, key1) {
-                            if (id == value1.supplyListId) {
-                                $scope.MyGameDaysSupply.splice(key1, 1);
-                            }
-                        });
-                        return false;
-                    }
+                if(value.supplyListId==list.supplyListId){
+                    value.checked=true;
+
+                }else{
+                    value.checked=false;
                 }
             });
+            SupplyService.getItemByListId(list.supplyListId).then(function (response) {
+                $scope.MyGameDaysSupply=response;
+                if($scope.hideMyItem==false) {
+                    $scope.toggleMyItem();
+                }
+                if($scope.hideItem==false) {
+                    $scope.toggleItem();
+                }
+            });
+
         }
         $scope.removeSelectedSupply=function(list){
-            angular.forEach($scope.MyGameDaysSupply,function(value,key){
-                if(list.supplyListId==value.supplyListId){
-                    $scope.MyGameDaysSupply.splice(key,1);
-                    return false;
-                }
-            });
+                    $scope.MyGameDaysSupply=[];
+
         }
         $scope.selectGameDaySupply=function(list,checked){
          if(checked==true){
@@ -112,7 +122,6 @@
             if ($scope.islistCreated != true) {
                 SupplyService.addSupplies(list,$scope.addAsAdmin).then(function(response){
                     if(response.userId>0) {
-
                     }else{
                         $flaskUtil.alert("failed to save");
                     }

@@ -40,7 +40,7 @@
                     })
 
                 } else {
-                    $flaskUtil.alert("failed to load")
+                    $flaskUtil.alert("failed to load");
                 }
             });
         }
@@ -88,7 +88,7 @@
         $scope.createMapLink = function (address1) {
             var findUs = '';
             if ($scope.isMobile.Android()) {
-                findUs = 'https://www.google.com/maps/q?' + address1;
+                findUs = 'http://maps.google.com/?q=' + address1;
             }
             else if ($scope.isMobile.iOS()) {
                 findUs = 'http://maps.apple.com/?q=' + address1;
@@ -97,7 +97,7 @@
                 findUs = 'maps:' + address1;
             }
             else {
-                findUs = 'http://maps.google.com/?q=' + address1;
+                findUs = 'https://www.google.com/maps/q?' + address1;
             }
             return findUs;
         }
