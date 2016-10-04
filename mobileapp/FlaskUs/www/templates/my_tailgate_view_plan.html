@@ -36,25 +36,13 @@
                 <ion-list class="item item-icon-left item-checkbox-right list-item" data-id="data.supplyItemId" ng-model="selected_checkbox" ng-repeat="data in allMyTailgateItems">
                     <h2 class="items_list">{{data.supplyListItemName}}</h2>
                     <div class="plan_now_div">
-                        <select class="plan_now_user" ng-model="user_selected" ng-options="userdata.userName for userdata in myTailgaters" ng-change="updateSupplyItems(data,user_selected)" placeholder="Select User">
-                            <option selected>Select Tailgator</option>
+                        <select class="plan_now_user" ng-model="selected_user" ng-change="updateSupplyItems(data,selected_user)">
+                            <option ng-repeat="userdata in myTailgaters" value={{selected_user}}>{{userdata.userName}}</option>
                         </select>
                     </div>
                 </ion-list>
             </label>
             <a class="item" ng-if="myFriends.length == 0"> You do not have any tailgater yet. Please search and add tailgaters </a>
-            <div class="list">
-                <div class="item item-divider plan_now">
-                    SUPPLY ITEMS ASSIGNED TO
-                </div>
-            </div>
-          
-            <label class="list">
-                <ion-list class="item list-item" ng-repeat="data in itemUser">
-                    <h2 class="items_list">{{data.itemName}}</h2>
-                    <h2 class="items_user_list">{{data.user}}</h2>
-                </ion-list>
-            </label>
     </ion-content>
 </ion-view>
 
