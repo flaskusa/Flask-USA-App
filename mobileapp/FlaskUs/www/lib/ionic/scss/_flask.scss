@@ -1088,7 +1088,7 @@ button.button.button-clear.mini-button {
   height: 95px; }
   .strip{
   width: 100%;
-  height: 45px;
+  height: 44px;
   background: #000000
 }
 .stripPadding{
@@ -2173,5 +2173,11 @@ i.choose_picture{
 }
 .hideSupplyItem{
   height: 0px;
+}
+.paddingTOpSupply{
+  margin-top: 3px;
+}
+.marginLeftSupplyText{
+  margin-left: 40px;
 }
 
