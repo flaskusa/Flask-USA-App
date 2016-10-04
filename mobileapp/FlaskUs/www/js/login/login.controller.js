@@ -28,7 +28,7 @@
                     $rootScope.userEmailId = respData.data.emailAddress;
                     $rootScope.show_login = true;
                     document.login_form.reset();
-                    $state.go("app.events");
+                    $state.go("app.user_navigation_menu");
                 }
             });
        }
