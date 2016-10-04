@@ -954,7 +954,7 @@ p.addText{
 }
 
 span.badge.span_icon{
-    right:22px !important;
+    right:14px !important;
 }
 
 span.badge.span_icon_supplies{
@@ -2083,7 +2083,8 @@ animation:*/
 /*css for star icon*/
 
 img.star_icon_svg{
-      width:67px;
+    width: 56px;
+    margin-right: -24px;
     }
 
 
