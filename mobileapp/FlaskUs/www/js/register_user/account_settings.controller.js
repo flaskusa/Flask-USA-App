@@ -2,10 +2,10 @@
     'use strict';
     angular.module('flaskApp')
         .controller('account_settingsCtrl', account_settingsCtrl);
-    account_settingsCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading', '$cordovaCamera', '$cordovaFileTransfer'];
+    account_settingsCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService'];
 
     /* @ngInject */
-    function account_settingsCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading, $cordovaCamera, $cordovaFileTransfer) {
+    function account_settingsCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService) {
         var gender = true;
         $scope.country = [];
         $scope.state = [];
@@ -18,6 +18,7 @@
         $scope.concert = [];
         $scope.interest = [];
         var interestArray;
+        $scope.isProfileSelectedToUpload = false;
 
         var usercookie = $cookies.getObject('CurrentUser');
         $scope.userid = usercookie.data.userId;
@@ -170,56 +171,111 @@
             + '</div>';
             $scope.cameraPopup = $ionicPopup.show({
                 template: customTemplate,
-                title: 'Choose the Profile Picture from:-',
-                scope: $scope,
-                buttons: [{
-                    text: '<b>Cancel</b>',
-                    type: 'button-positive',
-                    onTap: function (e) {
-                        $scope.cameraPopup.close();
-                    }
-                }]
+                title: 'Choose Picture',
+                scope: $scope
             });
+            IonicClosePopupService.register($scope.cameraPopup);
         };
+
+        $scope.removePicture = function () {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Remove tailgate logo ?',
+            });
+
+            confirmPopup.then(function (res) {
+                if (res) {
+                    $scope.cameraPopup.close();
+                    TailgateService.removeTailgateLogo().then(function (res) {
+                        $scope.tailgateLogoId = 0;
+                    }, function (err) {
+                        // show alert can not delete logo
+                    })
+                } else {
+                    $scope.cameraPopup.close();
+                }
+            });
+            IonicClosePopupService.register(confirmPopup);
+        }
         //camera plugin
         $scope.camera = function () {
+            $scope.cameraPopup.close();
+            $scope.checkPermission();
+        }
+        $scope.openCamera = function () {
             var options = {
                 quality: 50,
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 100,
-                targetHeight: 100,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false,
-                correctOrientation: true
+                correctOrientation: true,
             };
 
-            $cordovaCamera.getPicture(options).then(function (imageData) {
-                var image = document.getElementById('myImage');
-                image.src = "data:image/jpeg;base64," + imageData;
+            $cordovaCamera.getPicture(options).then(function (imageURI) {
+                $scope.setSelectedProfileURIToUpload(imageURI);
             }, function (err) {
-                // error
+                alert("error")
             });
-        }
+        };
+        $scope.checkPermission = function () {
+            var hasPermission = false;
+            var permissions = cordova.plugins.permissions;
+            permissions.hasPermission(permissions.READ_EXTERNAL_STORAGE, checkPermissionCallback, null);
+            function checkPermissionCallback(status) {
+                if (!status.hasPermission) {
+                    var errorCallback = function () {
+                        console.warn('READ_EXTERNAL_STORAGE permission is not turned on');
+                    }
+
+                    permissions.requestPermission(
+                        permissions.READ_EXTERNAL_STORAGE,
+                        function (status) {
+                            if (!status.hasPermission) {
+                                errorCallback();
+                            } else {
+                                $scope.openCamera();
+                                hasPermission = status.hasPermission;
+                            }
+                        },
+                        errorCallback);
+                } else {
+                    hasPermission = status.hasPermission;
+                    $scope.openCamera();
+                }
+            }
+            return hasPermission;
+        };
         // for accessing gallery on mobile
         $scope.gallery = function () {
             $scope.cameraPopup.close();
             var options = {
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                allowEdit: true,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: true,
+                correctOrientation: false
             };
-
             $cordovaCamera.getPicture(options).then(function (imageURI) {
-                //var image = document.getElementById('myImage');
-                //image.src = imageURI;
-                $scope.uploadFileToServer(imageURI);
+                $scope.setSelectedProfileURIToUpload(imageURI);
             }, function (err) {
-                // error
+
             });
 
         }
+        $scope.setSelectedProfileURIToUpload = function (imageURI) {
+            $scope.defaultProfileUrl = imageURI;
+            $scope.isProfileSelectedToUpload = true;
+            $scope.selectedProfileURIToUpload = imageURI;
+        };
+        $scope.reSetSelectedProfileURIToUpload = function () {
+            $scope.isProfileSelectedToUpload = false;
+            $scope.selectedProfileURIToUpload = '';
+        }
+
+        
 
         $scope.uploadFileToServer = function (fileURL) {
             var options = {};
@@ -229,18 +285,27 @@
             options.params = params;
             $cordovaFileTransfer.upload(encodeURI(SERVER.url + '/flask-rest-users-portlet.flaskadmin/upload-user-profile'), fileURL, options)
                   .then(function (r) {
+                      $rootScope.$broadcast('loading:hide')
+                      $scope.reSetSelectedProfileURIToUpload();
                       $scope.downloadProgress = 0;
-                      console.log("Code = " + r.responseCode);
-                      console.log("Response = " + r.response);
-                      console.log("Sent = " + r.bytesSent);
+                      var data = $.parseJSON(r.response);
+                      var repositoryId = data.repositoryId;
+                      var folderId = data.folderId;
+                      var title = data.title;
+                      $scope.setLogoImageUrl(repositoryId, folderId, title);
                   }, function (error) {
+                      $scope.reSetSelectedProfileURIToUpload();
+                      $rootScope.$broadcast('loading:hide')
                       alert("An error has occurred: Code = " + error.code);
                       console.log("upload error source " + error.source);
                       console.log("upload error target " + error.target);
                   }, function (progress) {
-                      $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                      
 
                   });
+        }
+        $scope.setLogoImageUrl = function (repositoryId, folderId, title) {
+            $scope.tailgateLogoUrl = SERVER.hostName + "documents/" + repositoryId + "/" + folderId + "/" + title;
         }
 
         $scope.updateUserInfo = function (user, userId) {
