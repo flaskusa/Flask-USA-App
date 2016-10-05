@@ -77,6 +77,22 @@ public class TailgateUsersServiceSoap {
 		}
 	}
 
+	public static boolean isTailgateAdmin(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			boolean returnValue = TailgateUsersServiceUtil.isTailgateAdmin(tailgateId,
+					serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.TailgateUsersSoap[] getTailgateGroups(
 		long tailgateId, long groupId) throws RemoteException {
 		try {

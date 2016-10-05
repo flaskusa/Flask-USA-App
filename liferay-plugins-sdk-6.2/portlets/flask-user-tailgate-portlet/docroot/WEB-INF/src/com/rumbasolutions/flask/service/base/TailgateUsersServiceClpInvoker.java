@@ -36,31 +36,37 @@ public class TailgateUsersServiceClpInvoker {
 
 		_methodParameterTypes72 = new String[] { "long" };
 
-		_methodName73 = "getTailgateGroups";
+		_methodName73 = "isTailgateAdmin";
 
-		_methodParameterTypes73 = new String[] { "long", "long" };
+		_methodParameterTypes73 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
-		_methodName74 = "checkTailgateUserExist";
+		_methodName74 = "getTailgateGroups";
 
 		_methodParameterTypes74 = new String[] { "long", "long" };
 
-		_methodName75 = "addTailgateUser";
+		_methodName75 = "checkTailgateUserExist";
 
-		_methodParameterTypes75 = new String[] {
+		_methodParameterTypes75 = new String[] { "long", "long" };
+
+		_methodName76 = "addTailgateUser";
+
+		_methodParameterTypes76 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String", "int",
 				"boolean", "java.lang.String", "int"
 			};
 
-		_methodName76 = "updateTailgateUser";
+		_methodName77 = "updateTailgateUser";
 
-		_methodParameterTypes76 = new String[] {
+		_methodParameterTypes77 = new String[] {
 				"long", "long", "boolean", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName77 = "deleteTailgateUser";
+		_methodName78 = "deleteTailgateUser";
 
-		_methodParameterTypes77 = new String[] { "long", "long" };
+		_methodParameterTypes78 = new String[] { "long", "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -84,18 +90,24 @@ public class TailgateUsersServiceClpInvoker {
 
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
-			return TailgateUsersServiceUtil.getTailgateGroups(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
+			return TailgateUsersServiceUtil.isTailgateAdmin(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName74.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
-			return TailgateUsersServiceUtil.checkTailgateUserExist(((Long)arguments[0]).longValue(),
+			return TailgateUsersServiceUtil.getTailgateGroups(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
 		if (_methodName75.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
+			return TailgateUsersServiceUtil.checkTailgateUserExist(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+		}
+
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
 			return TailgateUsersServiceUtil.addTailgateUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
@@ -105,16 +117,16 @@ public class TailgateUsersServiceClpInvoker {
 				((Integer)arguments[7]).intValue());
 		}
 
-		if (_methodName76.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+		if (_methodName77.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
 			return TailgateUsersServiceUtil.updateTailgateUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Boolean)arguments[2]).booleanValue(),
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4]);
 		}
 
-		if (_methodName77.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			TailgateUsersServiceUtil.deleteTailgateUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 
@@ -140,4 +152,6 @@ public class TailgateUsersServiceClpInvoker {
 	private String[] _methodParameterTypes76;
 	private String _methodName77;
 	private String[] _methodParameterTypes77;
+	private String _methodName78;
+	private String[] _methodParameterTypes78;
 }

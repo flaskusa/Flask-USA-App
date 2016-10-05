@@ -23,9 +23,12 @@ import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.TailgateUsers;
 import com.rumbasolutions.flask.model.impl.TailgateUsersImpl;
+import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.TailgateUsersServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.TailgateUsersFinderUtil;
 
@@ -66,6 +69,25 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 		}
 		return tailgateMembers;
 	}
+	
+	@Override
+	public boolean isTailgateAdmin(long tailgateId, ServiceContext serviceContext){
+		boolean tailgateAdmin = false;
+		try {
+			if(serviceContext.getUserId() == TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId()){
+				tailgateAdmin = true;
+			}
+			for(TailgateUsers user:TailgateUsersServiceUtil.getTailgateMembers(tailgateId)){
+				if(user.getUserId()== serviceContext.getUserId() && user.getIsAdmin()==1){
+					tailgateAdmin = true;
+				}
+			}
+		} catch (Exception e) {
+			LOGGER.error("Exception in is Tailgate Admin :" + e.getMessage());
+		}
+		return tailgateAdmin;
+	}
+	
 	@Override
 	public List<TailgateUsers> getTailgateGroups(long tailgateId, long groupId){
 		List<TailgateUsers> tailgateGroups = null;

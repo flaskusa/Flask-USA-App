@@ -83,7 +83,7 @@ public class FlaskTailgateUtil {
 				tailgateAdmin = true;
 			}
 			for(TailgateUsers user:TailgateUsersServiceUtil.getTailgateMembers(tailgateId)){
-				if(user.getUserId()==serviceContext.getUserId()){
+				if(user.getUserId()== serviceContext.getUserId() && user.getIsAdmin()==1){
 					tailgateAdmin = true;
 				}
 			}

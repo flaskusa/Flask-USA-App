@@ -174,6 +174,7 @@ public class TailgateImagesServiceImpl extends TailgateImagesServiceBaseImpl {
 				String eventFolderName = folder.getName()+"-"+tailgateId;
 				Folder tailgateFolder = FlaskDocLibUtil.getOrCreateFolder(eventFolderName, folder.getFolderId(), folder.getRepositoryId(), folder.getUserId(), serviceContext);
 				fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), tailgateFolder.getRepositoryId(), tailgateFolder.getFolderId(), name, mimeType, name, name, "", file, serviceContext);
+				FlaskDocLibUtil.setGuestViewPermission(fileEntry);
 				TailgateImagesServiceUtil.addTailgateImage(tailgateId, name, name, fileEntry.getUuid(), fileEntry.getGroupId(), serviceContext);
 			}
 		} catch (Exception e) {
@@ -203,6 +204,7 @@ public class TailgateImagesServiceImpl extends TailgateImagesServiceBaseImpl {
 					Folder folder = FlaskDocLibUtil.getOrCreateFolder(FlaskDocLibUtil._tailgateRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
 					Folder logoFolder = FlaskDocLibUtil.getOrCreateFolder(FlaskDocLibUtil._tailgateLogosFolder, folder.getFolderId(), folder.getRepositoryId(), folder.getUserId(), serviceContext);
 					fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), logoFolder.getRepositoryId(), logoFolder.getFolderId(), name, mimeType, name, name, "", file, serviceContext);
+					FlaskDocLibUtil.setGuestViewPermission(fileEntry);
 					if(tailgateId>0){
 						TailgateInfoServiceUtil.updateTailgateLogo(tailgateId, fileEntry.getFileEntryId(), serviceContext);
 					}
