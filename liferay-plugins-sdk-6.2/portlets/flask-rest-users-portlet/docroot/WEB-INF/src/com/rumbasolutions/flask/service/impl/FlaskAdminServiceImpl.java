@@ -802,6 +802,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			String name = userId +"_"+ file.getName();
 			Folder folder = FlaskModelUtil.getOrCreateFolder(_userProfilesFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
 			fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), folder.getRepositoryId(), folder.getFolderId(), name, mimeType, name, name, "", file, serviceContext);
+			FlaskModelUtil.setGuestViewPermission(fileEntry);
 			long portraitId = UserLocalServiceUtil.getUser(userId).getPortraitId();
 			FlaskAdminServiceUtil.updateUserForFileEntry(userId, fileEntry.getFileEntryId(), serviceContext);
 			if(portraitId>0)

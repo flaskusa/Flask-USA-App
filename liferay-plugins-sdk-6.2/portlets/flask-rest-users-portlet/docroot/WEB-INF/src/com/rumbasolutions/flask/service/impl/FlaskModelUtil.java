@@ -456,6 +456,55 @@ public class FlaskModelUtil {
 			   
 		   }
 	}
+	
+	public static Role getGuestRole(){
+		try {
+			if(_guestRole == null){
+				_guestRole =RoleServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), RoleConstants.GUEST);
+			}
+		}
+		catch (PortalException e) {
+			e.printStackTrace();
+		}
+		catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return _guestRole;
+	}
+	
+	public static void setGuestViewPermission( FileEntry fileEntry) throws PortalException, SystemException{
+		ResourcePermission resourcePermission = null;
+		Role guestRole = getGuestRole();
+		try
+		   {
+			
+		    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(fileEntry.getCompanyId(),
+		    					DLFileEntry.class.getName(),
+		    					ResourceConstants.SCOPE_INDIVIDUAL, 
+		    					String.valueOf(fileEntry.getPrimaryKey()),
+		    					guestRole.getRoleId());
+		        
+		    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+		  
+		    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
+		    {
+		      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+		      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
+		    }
+		   }catch(Exception ex){
+			      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
+			      resourcePermission.setCompanyId(fileEntry.getCompanyId());
+			      resourcePermission.setName(DLFileEntry.class.getName());
+			      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+			      resourcePermission.setPrimKey(String.valueOf(fileEntry.getPrimaryKey()));
+			      resourcePermission.setRoleId(guestRole.getRoleId());
+			    
+			      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+			      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+			      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+			   
+		   }
+	}
 	/**
 	 * 
 	 * @param fullFileName
