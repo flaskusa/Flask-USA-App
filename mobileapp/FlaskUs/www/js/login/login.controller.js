@@ -3,14 +3,26 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
         $scope.password = '';
+        
+        $scope.checkTouch = function () {
+            $cordovaTouchID.checkSupport().then(function () {
+                $cordovaTouchID.authenticate("You must authenticate").then(function () {
+                    alert("The authentication was successful");
+                }, function (error) {
+                    console.log(JSON.stringify(error));
+                });
+            }, function (error) {
+                console.log(JSON.stringify(error));
+            });
+        }
        
         $scope.doLogin = function (user) {
             LoginService.authenticateUser(user).then(function (respData) {
@@ -23,7 +35,6 @@
                 else {
                     $cookies.putObject('CurrentUser', respData);
                     var usercookie = $cookies.getObject('CurrentUser');
-                    console.log(usercookie);
                     $rootScope.userName = respData.data.firstName + respData.data.lastName;
                     $rootScope.userEmailId = respData.data.emailAddress;
                     $rootScope.show_login = true;
@@ -31,7 +42,19 @@
                     $state.go("app.user_navigation_menu");
                 }
             });
-       }
+        }
+
+        $scope.remembered = function (isChecked, user) { 
+            if (isChecked) {
+                if(!user.Email=="" && !user.password==""){
+                    $cookies.putObject('RememberUser', user);
+                    var rcookie = $cookies.getObject('RememberUser');
+                }
+                else {
+                    $ionicLoading.show({ template: 'Email and password should not be empty!', noBackdrop: false, duration: 2000 });
+                }
+            }
+        }
     };
 })();
 
