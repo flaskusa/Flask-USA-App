@@ -28,31 +28,41 @@
                         </div>
                     </label>
 
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label">Password</span>
-                        <input type="password" placeholder="Password" class="form-control loginInputs" ng-model="user.password" name="password" required>
-                        <div ng-show="login_form.$submitted || login_form.password.$touched">
-                            <span ng-show="login_form.password.$error.required" class="error_msg">Please enter your password</span>
+                    <div class="row">
+                        <div class="col">
+                            <label class="item item-input item-floating-label">
+
+                                <span class="input-label">Password</span><input type="password" placeholder="Password" class="form-control loginInputs" ng-model="user.password" name="password" required>
+                                <div ng-show="login_form.$submitted || login_form.password.$touched">
+                                    <span ng-show="login_form.password.$error.required" class="error_msg">Please enter your password</span>
+                                </div>
+                            </label>
                         </div>
-                    </label>
-
-
-                    <div class="padding" align="center">
-                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
-                            Login
-                        </button>
+                            <div class="col">
+                                <ion-checkbox ng-model="isChecked" ng-click="checkTouch()" style="width:50% !important;">Enable Touch</ion-checkbox>
+                            </div>                         
                     </div>
 
+                    
+                    <div class="padding" align="center">
+                        <div>
+                            
+                            <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
+                                Login
+                            </button>
+                        </div>
+                        <ion-checkbox ng-model="isChecked" class="remember" ng-click="remembered(isChecked,user)">Remember Me</ion-checkbox>
+                    </div>
                     <div class="navigation">
                         <ul class="taglib-icon-list unstyled">
                             <li class="" role="presentation">
                                 <a href="#/app/forgot_password" class=" taglib-icon" role="menuitem" ng-click="login_form.$setPristine();">
-                                    <span class="taglib-text"><i class="ion ion-help-circled"></i>Forgot password</span>
+                                    <span class="taglib-text"><i class="ion ion-help-circled"></i>Forgot Password</span>
                                 </a>
                             </li>
                             <li class="" role="presentation">
                                 <a href="#/app/events" class=" taglib-icon" role="menuitem" ng-click="login_form.$setPristine();">
-                                    <span class="taglib-text"><i class="ion ion-edit"></i>Create account Later</span>
+                                    <span class="taglib-text"><i class="ion ion-edit"></i>Create Account Later</span>
                                 </a>
                             </li>
                         </ul>
