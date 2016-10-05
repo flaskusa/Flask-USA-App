@@ -35,9 +35,6 @@
         function getTailgaters() {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
                 $scope.myTailgaters = respData.data;
-                console.log("tailgaters");
-                console.log($scope.myTailgaters);
-
                 getAllFriends();
             });
         }
@@ -69,13 +66,12 @@
         //Adding supply items to tailgate
         $scope.updateSupplyItems = function (data, user_selected) {
             console.log(user_selected);
-            $scope.userId = data.itemAssignedUserId;
+            $scope.userId = user_selected;
             TailgateService.updateTailgateSupplyItem(data.tailgateSupplyItemId, data.supplyListItemName, tailGateId, $scope.userId).then(function (respData) {
                 $scope.alltailgateSupplyItem = respData.data;
                 console.log($scope.alltailgateSupplyItem);
                 
             });
-            $scope.selected_user = $scope.userId;
         }
 
         function displayUserName() {
