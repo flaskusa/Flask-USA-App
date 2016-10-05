@@ -56,8 +56,9 @@
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
                     <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}} | <span class="cityVenuCol" ng-repeat="vdata in city">{{vdata.cityName}}</span></p>
-                    <span class="badge span_icon" ng-if="!data.userEvent=='1'"><img src="img/flask_icons/arrow_left.svg"></span>
-                    <span class="badge span_icon" ng-if="data.userEvent=='1'"><img class="star_icon_svg" src="img/flask_icons/ARROW_STAR.svg"></span>
+                    <span class="badge span_icon" ng-if="!data.userEvent=='1' && show_login"><img src="img/flask_icons/arrow_left.svg"></span>
+                    <span class="badge span_icon" ng-if="data.userEvent=='1' && show_login"><img class="star_icon_svg" src="img/flask_icons/ARROW_STAR.svg"></span>
+                    <span class="badge span_icon" ng-if="!show_login"><img src="img/flask_icons/arrow_left.svg"></span> 
                     <!--<div star_div_icon" ng-if="data.userEvent=='1'"><></div>-->
                 </a>
             </div>
