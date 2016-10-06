@@ -101,10 +101,9 @@
             }
             return findUs;
         }
-        $ionicScrollDelegate.resize();
         $timeout(function () {
-            $ionicSlideBoxDelegate.$getByHandle('image-viewer').update();
-            $ionicScrollDelegate.resize();
+            $ionicSlideBoxDelegate.$getByHandle('advertisement-viewer').update();
+            $ionicScrollDelegate.$getByHandle('advertisement-viewer').resize();
         }, 5000);
 
 

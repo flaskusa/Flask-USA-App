@@ -101,10 +101,14 @@
                         }
                     }
                 }
-                $ionicSlideBoxDelegate.$getByHandle('slide1').update();
-                $ionicSlideBoxDelegate.$getByHandle('slide2').update();
-                $ionicSlideBoxDelegate.$getByHandle('slide3').update();
-               $ionicScrollDelegate.resize();
+                $timeout(function(){
+                    $ionicSlideBoxDelegate.$getByHandle('slide1').update();
+                    $ionicSlideBoxDelegate.$getByHandle('slide2').update();
+                    $ionicSlideBoxDelegate.$getByHandle('slide3').update();
+                    $scope.showAddv=true;
+                },100);
+                $ionicScrollDelegate.resize();
+
 
 
                 if ($scope.Post_Game.length >=0) {
