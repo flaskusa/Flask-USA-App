@@ -3,14 +3,15 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
         $scope.password = '';
+        $scope.testServe=false;
         
         $scope.checkTouch = function (enableChecked) {
             if (enableChecked) {
@@ -57,6 +58,13 @@
                 }
             }
         }
+        $scope.switchServer = function(url,testServe) {
+            $scope.testServe=!$scope.testServe;
+            // $rootScope.$broadcast('switchServer',{ url: url });
+            /*SERVER.hostName = url;
+            SERVER.url = url+"api/jsonws/";*/
+        }
+
     };
 })();
 
