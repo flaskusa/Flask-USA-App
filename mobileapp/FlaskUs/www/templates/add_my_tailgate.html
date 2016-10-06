@@ -1,7 +1,8 @@
 ﻿<ion-view cache-view="false" view-title="ADD NEW TAILGATE">
     <ion-nav-bar class="bar-dark" align-title="center">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="goBack();"></button>
+        </ion-nav-buttons>
     </ion-nav-bar>
     <ion-tabs class="tabs-positive tab_bottom">
         <ion-tab title="Event Details">
@@ -9,11 +10,11 @@
             <ion-content overflow-scroll="false" header="true" class='has-header has-subheader'>
                 <div class="box">
                     <div class="list add_my_tailgate">
-                        <div class="list card">
+                        <div class="list tailgatelogoContainer">
                             <div class="item item-image">
-                                <img ng-src="{{defaultImageUrl}}" id="myImage" class="profilepicAvatar" ng-if="tailgateLogoId == 0" " />
+                                <img ng-src="{{defaultImageUrl}}" id="myImage" class="tailgateLogoImg" ng-if="tailgateLogoId == 0" " />
                                 <img ng-src="{{tailgateLogoUrl}} " id="myImage " ng-if="tailgateLogoId>0"
-                                class="profilepicAvatar" alt="Image not found" />
+                                     class="tailgateLogoImg" alt="Image not found" />
                             </div>
                             <a class="item text-center disabled" ng-click="show();" ng-if="isTailgateAdmin">
                                 Tap to add Picture
@@ -22,17 +23,17 @@
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Tailgate Name</span>
                             <input type="text" placeholder="Tailgate Name" name="TailgateName" class="form-control" ng-model="addTailgateParams.tailgateName"
-                                required>
+                                   required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Description:</span>
                             <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="addTailgateParams.tailgateDescription"
-                                required>
+                                   required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Event Name:</span>
                             <input type="text" list="EventNameList" ng-change="loadeventData()" id="envtName" placeholder="Event Name" class="form-control"
-                                ng-model="addTailgateParams.eventName" required>
+                                   ng-model="addTailgateParams.eventName" required>
                             <datalist id="EventNameList">
                                 <select>
                                     <option ng-repeat="data in eventDetails" data_id="{{data.eventId}}" value="{{data.eventName}}">{{data.eventName}}</option>
@@ -42,7 +43,7 @@
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Event Date</span>
                             <input type="text" class="form-control" placeholder="Event Date" ng-model="tailgateDate" name="Eventdate" disabled="disabled"
-                                required>
+                                   required>
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
                             <span class="input-label">Start Time</span>
@@ -81,7 +82,7 @@
                     <div style="width:100%;height:100%;" class="add_my_tailgate">
                         <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
                             <ui-gmap-window show="map.window.show" coords="map.window.model" options="map.window.options" closeClick="map.window.closeClick()"
-                                templateParameter="map.window">
+                                            templateParameter="map.window">
                                 <div>Hello</div>
                             </ui-gmap-window>
                             <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" click="onClick">
@@ -139,15 +140,15 @@
                 </div>
             </ion-content>
         </ion-tab>
-        <ion-tab title="Plan Now">
+        <ion-tab title="Plan Now" ng-click="selectTab(3)">
             <!--FOURTH TAB-->
-            <ion-content overflow-scroll="false" class="has-header">
+            <ion-content overflow-scroll="false" class="has-footer">
                 <div class="paynow" style="margin-top: 44px;">
                     <div class="tailgateInfo">
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Venmo Account:</span>
-                            <input type="email" placeholder="Venmo Account" class="form-control" ng-model="newUpdate.venmoAccountId" name="VenmoAccount"
-                                required>
+                            <input type="text" placeholder="Venmo Account" class="form-control" ng-model="newUpdate.venmoAccountId" name="VenmoAccount"
+                                   required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Amount</span>
@@ -163,25 +164,30 @@
                         </div>-->
                         <div class="row">
                             <button nav-clear class="button button-block button-positive pay_now_button" ng-click="updatetailgate(newUpdate);">
-                                Pay Now
+                                Save
                             </button>
                         </div>
                     </div>
                 </div>
+                <div class="strip paddingTOpSupply" ng-click="toggleSupplyItem()">
+                    <div class="stripPadding">
+                        <span><i class="textStyle marginLeftSupplyText"> Item Assignment</i></span>
+                        <i class="icon ion-chevron-right" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==true"></i>
+                        <i class="icon ion-chevron-down" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==false"></i>
+                    </div>
+                </div>
+                <div class="list" id = "supplyItemDiv">
+                    <label class="item item-input item-select" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
+                        <div class="input-label" style="width:60%">
+                            <i class="addText"> {{ item.supplyItemName | uppercase}} </i>
 
-                <ion-list>
-
-
-                    <ion-item style="color: #0f0f0f" ng-repeat="item in selectedSupplyListItems">
-                        <label style="font-weight: 200"><i class="addText">{{ item.supplyItemName | uppercase}}</i> </label>
-                        <a><span  class="badge badge-assertive"style="margin-right: 25px"></span></a>
-                        <select class="plan_now_user" ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId">
-                            <option value="-1" >select attendee</option>
+                        </div>
+                        <select ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" style="background:inherit">
+                            <option value="-1" >Select attendee</option>
                             <option ng-repeat="attendee in myTailgaters" value="{{attendee.userId}}">{{attendee.userName}}</option>
                         </select>
-                    </ion-item>
-                </ion-list>
-
+                    </label>
+                </div>
 
                 <div class="strip paddingTOpSupply" ng-click="toggleItem()">
                     <div class="stripPadding">
@@ -201,18 +207,17 @@
                                    </label>
                                </span>
                             </div>
-
-
                         </ion-item>
                     </ion-list>
                 </div>
-                <div class="row">
-                    <button type="submit" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems();">
-                        Add Supply List
-                    </button>
-                </div>
+
 
             </ion-content>
+            <ion-footer-bar style="height:77px">
+                <button type="submit" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems();">
+                    Add Supply List
+                </button>
+            </ion-footer-bar>
         </ion-tab>
     </ion-tabs>
 </ion-view>

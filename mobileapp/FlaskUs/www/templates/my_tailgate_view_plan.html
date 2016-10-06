@@ -15,7 +15,8 @@
                     <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
                 </div>
                 <div class="row">
-                    <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
+                    <div class="col">
+                        <div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
                 </div>
                 <div class="row">
                     <div class="col"><span class="tailgateDescFont">EVENT LOCATION</span><span>{{myeventLocation.mytailgate}}</span></div>
@@ -26,23 +27,23 @@
                     </button>
                 </div>
             </div>
-            <div class="list">
-                <div class="item item-divider plan_now">
-                    WHAT TO BRING
-                </div>
+        </div>
+        <div class="list">
+            <div class="item item-divider plan_now">
+                WHAT TO BRING
             </div>
-            <a class="item" ng-if="allMyTailgateItems.length == 0"> You do not any supply items... </a>
-            <label class="list">
-                <ion-list class="item item-icon-left item-checkbox-right list-item" data-id="data.supplyItemId" ng-model="selected_checkbox" ng-repeat="data in allMyTailgateItems">
-                    <h2 class="items_list">{{data.supplyListItemName}}</h2>
-                    <div class="plan_now_div">
-                        <select class="plan_now_user" ng-model="userdata.userId" ng-change="updateSupplyItems(data,userdata.userId)">
-                            <option ng-repeat="userdata in myTailgaters" value={{userdata.userId}} ng-selected="{{data.itemAssignedUserId}}=={{userdata.userId}}">{{userdata.userName}}</option>
-                        </select>
+        </div>
+        <a class="item" ng-if="allMyTailgateItems.length == 0"> You do not any supply items... </a>
+        <ion-list>
+            <ion-item ng-repeat="tailgateItem in allMyTailgateItems track by $index">
+                <div class="col-100">
+                    <i style="color: black;font-weight: 500;">{{tailgateItem.itemAssignedUserName}}</i>
+                    <div style="float:right"> <i class="addText">{{tailgateItem.supplyListItemName | uppercase}}</i>
                     </div>
-                </ion-list>
-            </label>
-            <a class="item" ng-if="myFriends.length == 0"> You do not have any tailgater yet. Please search and add tailgaters </a>
+                </div>
+
+            </ion-item>
+        </ion-list>
+        <a class="item" ng-if="myTailgaters.length == 0"> You do not have any tailgater yet. Please search and add tailgaters </a>
     </ion-content>
 </ion-view>
-

@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$sce'];
+    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicTabsDelegate'];
 
     / @ngInject /
-    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $sce) {
+    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicTabsDelegate) {
         //for adding tailgate
         var self = this;
         var newtailGateId;
@@ -45,15 +45,17 @@
         $scope.selectedImageURIToUpload = "";
         $scope.isImageSelectedToUpload = false;
         $scope.tailgateLogoId = 0;
-        $scope.defaultImageUrl = "img/default-profilepic-copy.png";
+        $scope.defaultImageUrl = "img/flask_images/Fotolia_20387372_Subscription_Monthly_M.jpg";
         $scope.hideItem = false;
+        $scope.hideSupplyItem = false;
         $scope.selectedSupplyListItems = [];
         $scope.allMyTailgateItems = [];
+        $scope.newUpdate = {'amountToPay':'','venmoAccountId':''};
 
         getMySupplyList();
 
         $scope.goBack = function () {
-            $state.go("app.my_tailgate");
+            $state.go("app.my_tailgateDetails.my_tailgate_event_details", { 'tailgateId': tailgateId });
         }
         var tailgateId = $cookies.get("currtailGateId");
         $scope.initialize = function () {
@@ -64,13 +66,18 @@
             } else {
                 $scope.isTailgateAdmin = true;
             }
-            if (tailgateId != undefined && tailgateId > 0) {
-                getItems();
-            }
+            // if (tailgateId != undefined && tailgateId > 0) {
+            //     getItems();
+            // }
             getTailgaters();
 
         }
-
+        $scope.selectTab = function (index) {
+            $ionicTabsDelegate.select(index);
+            if (tailgateId != undefined && tailgateId > 0) {
+                getItems();
+            }
+        }
         $scope.user = {
             supplyItemName: ['user']
         };
@@ -255,6 +262,7 @@
                 amountToPay: tailgateDetails.amountToPay,
                 tailgateId: tailgateDetails.tailgateId
             }
+            $scope.newUpdate = {'amountToPay':tailgateDetails.amountToPay,'venmoAccountId':tailgateDetails.venmoAccountId};
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
             $scope.selectedtime1 = $filter('date')(tailgateDetails.startTime, 'hh:mm a');
             $scope.selectedtime2 = $filter('date')(tailgateDetails.endTime, 'hh:mm a');
@@ -449,6 +457,7 @@
             tailgatedata.eventId = angular.isString(tailgatedata.eventId) ? parseInt(tailgatedata.eventId) : tailgatedata.eventId;
             if (tailgatedata.tailgateId && tailgatedata.tailgateId > 0) {
                 TailgateService.updateTailgateInfo(tailgatedata).then(function (respdata) {
+                    $cookies.putObject('newtailgatedata', respData.data);
                     if ($scope.isImageSelectedToUpload) {
                         $scope.uploadFileToServer($scope.selectedImageURIToUpload, tailgatedata.tailgateId);
                     }
@@ -480,7 +489,7 @@
             TailgateService.updateTailgateInfo(updateData).then(function (respdata) {
                 console.log(respdata);
             });
-            fnPayNow();
+            //fnPayNow();
         }
         // get selected venue details
         $scope.getvenuefromSelect = function (tailgatedata) {
@@ -708,10 +717,26 @@
             });
         };
         $scope.toggleItem = function () {
+            var supplyItem = $("#supplyItemDiv");
             $scope.hideItem = !$scope.hideItem;
             $("#FlaskUsListdiv").slideToggle("slow", function () {
             });
+            if ($scope.hideItem && supplyItem.is(":visible") === false) {
+                $scope.hideSupplyItem = !$scope.hideSupplyItem;
+                supplyItem.slideToggle("slow", function () {
+                });
+            }
         }
+        $scope.toggleSupplyItem = function () {
+            $scope.hideSupplyItem = !$scope.hideSupplyItem;
+            $("#supplyItemDiv").slideToggle("slow", function () {
+            });
+            // if ($scope.hideSupplyItem == true) {
+            //     $scope.hideItem = !$scope.hideItem;
+            //     $("#FlaskUsListItemdiv #addTailgate").slideToggle("slow", function () {
+            //     });
+            // }
+        };
         $scope.copyForMyGameDaySupply = function (supplyObject) {
             $scope.MyGameDaysSupply = [];
             angular.forEach($scope.allSupplyList, function (value, key) {
@@ -757,6 +782,7 @@
             });
         }
         $scope.setSelectedSupplyItemArray = function (data) {
+            $scope.selectedSupplyListItems = [];
             var tempItem = {};
             angular.forEach(data, function (object, idx) {
                 tempItem = {};
@@ -768,7 +794,6 @@
                 $scope.selectedSupplyListItems.push(tempItem)
             })
         };
-
         $scope.initialize();
 
     }
