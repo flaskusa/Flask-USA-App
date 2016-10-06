@@ -2175,3 +2175,61 @@ i.choose_picture{
   height: 0px;
 }
 
+.add_profile_div{
+    width: 135px;
+    height: 131px;
+    border-radius: 79px;
+    margin-left: 30%;
+}
+
+.add_profile_img{
+    width: 135px !important;
+    height: 131px !important;
+}
+
+/*CSS for remember me and Enable touch on login page*/
+.remember div i.checkbox-icon{
+    margin-left: -54%;
+    width: 23px !important;
+    height: 23px !important;
+    top: 3px;
+}
+
+.remember span{
+    margin-left: -5px;
+    color: #F28604 !important;
+}
+
+label.remember.item.item-checkbox.ng-empty.ng-valid{
+    margin-left: -22%;
+    border-top:none;
+}
+
+label.remember.item.item-checkbox.ng-valid.ng-not-empty{
+    margin-left: -22%;
+}
+
+label.remember1.item.item-checkbox.ng-empty.ng-valid{
+    margin-left: -22%;
+    border-top:none;
+}
+
+label.remember1.item.item-checkbox.ng-valid.ng-not-empty{
+    margin-left: -22%;
+}
+
+.remember1 div i.checkbox-icon{
+    margin-left: -101% !important;
+    width: 23px !important;
+    height: 23px !important;
+    top: 3px;
+}
+
+.remember1 span{
+    margin-left: -15px !important;
+    color: #F28604 !important;
+}
+
+.remember1 .item-content.disable-pointer-events{
+    margin-left:-54% !important;
+}
