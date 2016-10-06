@@ -37,10 +37,7 @@
                                     <span ng-show="login_form.password.$error.required" class="error_msg">Please enter your password</span>
                                 </div>
                             </label>
-                        </div>
-                            <div class="col">
-                                <ion-checkbox ng-model="isChecked" ng-click="checkTouch()" style="width:50% !important;">Enable Touch</ion-checkbox>
-                            </div>                         
+                        </div>                       
                     </div>
 
                     
@@ -51,7 +48,10 @@
                                 Login
                             </button>
                         </div>
-                        <ion-checkbox ng-model="isChecked" class="remember" ng-click="remembered(isChecked,user)">Remember Me</ion-checkbox>
+                        <div class="row">
+                            <div class="col"><ion-checkbox ng-model="isChecked" class="remember" ng-click="remembered(isChecked,user)">Remember Me</ion-checkbox></div>
+                            <div class="col"><ion-checkbox ng-model="isChecked" class="remember1" ng-click="checkTouch()">Enable Touch</ion-checkbox></div>
+                        </div>
                     </div>
                     <div class="navigation">
                         <ul class="taglib-icon-list unstyled">
