@@ -2233,3 +2233,10 @@ label.remember1.item.item-checkbox.ng-valid.ng-not-empty{
 .remember1 .item-content.disable-pointer-events{
     margin-left:-54% !important;
 }
+.button.button-positive.active, .button.button-positive.activated {
+  border-color: #a2a2a2;
+
+  background-image: -webkit-linear-gradient(top, #a2a2a2 0, black  100%);
+
+
+}
