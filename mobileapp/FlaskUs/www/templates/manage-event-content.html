@@ -27,83 +27,83 @@
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">ADD CONTENT</p>
         </a>
-    <ion-list>
-       <!-- <ion-item ng-repeat="data in flaskUsDetails track by $index"class="row-no-padding"padding="false"ng-click="groupMemberDetail(data)"ng-if="editContent==false">-->
-         <div ng-repeat="data in flaskUsDetails track by $index"ng-if="editContent==false">
-        <div class="list card">
+        <ion-list>
+            <!-- <ion-item ng-repeat="data in flaskUsDetails track by $index"class="row-no-padding"padding="false"ng-click="groupMemberDetail(data)"ng-if="editContent==false">-->
+            <div ng-repeat="data in flaskUsDetails track by $index"ng-if="editContent==false">
+                <div class="list card">
 
-                <div class="">
-                    <div class="badge manageContentButtons extra-right-supply">
-                        <div class="button-assertive   ion-trash-a icon supplyDeleteIcon"style="padding-top: 5px" ng-class="{supplyEditIconPadding:data.edit}"ng-click="deleteEventDetail(data.eventDetailId,$index)"></div>
+                    <div class="">
+                        <div class="badge manageContentButtons extra-right-supply">
+                            <div class="button-assertive   ion-trash-a icon supplyDeleteIcon"style="padding-top: 5px" ng-class="{supplyEditIconPadding:data.edit}"ng-click="deleteEventDetail(data.eventDetailId,$index)"></div>
+                        </div>
+                        <div class="badge manageContentButtons extra-right-supply"style=";margin-right: 1px">
+                            <div class="button-assertive   ion-edit supplyDeleteIcon" style="padding-top: 5px"ng-class="{supplyEditIconPadding:data.edit}" ng-click="editContents(data,$index)"></div>
+                        </div>
+                        <b style="font-size:16px">{{ data.infoTitle}}</b>
+                        <p>{{ data.infoDesc}}</p>
                     </div>
-                    <div class="badge manageContentButtons extra-right-supply"style=";margin-right: 1px">
-                        <div class="button-assertive   ion-edit supplyDeleteIcon" style="padding-top: 5px"ng-class="{supplyEditIconPadding:data.edit}" ng-click="editContents(data,$index)"></div>
-                    </div>
-                    <b style="font-size:16px">{{ data.infoTitle}}</b>
-                    <p>{{ data.infoDesc}}</p>
-                </div>
 
-                <div class="item item-body">
-                    <img class="full-image" src="/img/resources/traffic.jpg"style="height: 225px">
+                    <div class="item item-body">
+                        <img class="full-image" src="/img/resources/traffic.jpg"style="height: 225px">
                     </div>
-           <!-- <a class="row-no-padding" style="text-decoration: none">
-                &lt;!&ndash;href="#/app/my_friendDetail/{{data.userId}}"&ndash;&gt;
-                <h3 class="emailText">{{ data.infoTitle}}</h3>
-                <div class="col col-70">
-                    <h3 >{{ data.infoDesc}}</h3>
+                    <!-- <a class="row-no-padding" style="text-decoration: none">
+                         &lt;!&ndash;href="#/app/my_friendDetail/{{data.userId}}"&ndash;&gt;
+                         <h3 class="emailText">{{ data.infoTitle}}</h3>
+                         <div class="col col-70">
+                             <h3 >{{ data.infoDesc}}</h3>
+                         </div>
+                     </a>-->
                 </div>
-            </a>-->
             </div>
-             </div>
 
 
-          <!--  <ion-option-button  class="icon ion-edit"ng-click="editContents(data,$index)"></ion-option-button>
-            <ion-option-button class="icon ion-trash-a" ng-click="deleteEventDetail(data.eventDetailId,$index)"></ion-option-button>
--->
+            <!--  <ion-option-button  class="icon ion-edit"ng-click="editContents(data,$index)"></ion-option-button>
+              <ion-option-button class="icon ion-trash-a" ng-click="deleteEventDetail(data.eventDetailId,$index)"></ion-option-button>
+  -->
 
-        <a class="item" ng-if="flaskUsDetails.length == 0"> You do not have added any information yet.</a>
-    </ion-list>
+            <a class="item" ng-if="flaskUsDetails.length == 0"> You do not have added any information yet.</a>
+        </ion-list>
 
         <form name="create_content_form" class="loginpane form_div" novalidate  ng-submit="create_content_form.$valid && addContent(content)">
-        <div  ng-if="editContent==true">
+            <div  ng-if="editContent==true">
 
 
-                    <div class="item item-input item-floating-label"style="border-top: none;">
-                        <span class="input-label">Title</span>
-                        <input type="text" placeholder="Title" name="TailgateName" class="form-control" ng-model="content.infoTitle" required>
-                        <div ng-show="create_content_form.$submitted || create_content_form.TailgateName.$touched">
-                            <span ng-show="create_content_form.TailgateName.$error.required" class="error_msg">Enter title name</span>
-                        </div>
-                    </div>
-                    <div class="item item-input item-floating-label">
-                        <span class="input-label">Description:</span>
-                        <input type="text" placeholder="Description" name="Description" class="form-control" ng-model="content.infoDesc" required>
-                        <div ng-show="create_content_form.$submitted || create_content_form.Description.$touched">
-                            <span ng-show="create_content_form.Description.$error.required" class="error_msg">Enter description</span>
-                        </div>
+                <div class="item item-input item-floating-label"style="border-top: none;">
+                    <span class="input-label">Title</span>
+                    <input type="text" placeholder="Title" name="TailgateName" class="form-control" ng-model="content.infoTitle" required>
+                    <div ng-show="create_content_form.$submitted || create_content_form.TailgateName.$touched">
+                        <span ng-show="create_content_form.TailgateName.$error.required" class="error_msg">Enter title name</span>
                     </div>
                 </div>
+                <div class="item item-input item-floating-label">
+                    <span class="input-label">Description:</span>
+                    <input type="text" placeholder="Description" name="Description" class="form-control" ng-model="content.infoDesc" required>
+                    <div ng-show="create_content_form.$submitted || create_content_form.Description.$touched">
+                        <span ng-show="create_content_form.Description.$error.required" class="error_msg">Enter description</span>
+                    </div>
+                </div>
+            </div>
 
             <div class="list"ng-if="editContent==true">
                 <div class="list card">
                     <div class="item item-image"style="height:120px;width: 100%">
-
-                    </div>
-                    <a class="item text-center" href="">
-                        Tap to add  picture
-                    </a>
+                        <img src="{{defaultImageUrl}}" /></div>
                 </div>
-                <div class="padding" align="center">
-                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" >
-                        Save
-                    </button>
-                    <a nav-clear class="button button-block button-positive sign_in_button" ng-click="cancelEdit()">
-                        Cancel
-                    </a>
-                </div>
+                <a class="item text-center" href=""ng-click="show()">
+                    Tap to add  picture
+                </a>
             </div>
-            </form>
+            <div class="padding" align="center">
+                <button type="submit" nav-clear class="button button-block button-positive sign_in_button" >
+                    Save
+                </button>
+                <a nav-clear class="button button-block button-positive sign_in_button" ng-click="cancelEdit()">
+                    Cancel
+                </a>
+            </div>
+            </div>
+        </form>
 
-        </ion-content>
+    </ion-content>
 
-    </ion-view>
+</ion-view>
