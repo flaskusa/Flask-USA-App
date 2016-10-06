@@ -27,20 +27,13 @@
                             <span ng-show="login_form.Email.$error.email" class="error_msg">This is not a valid email</span>
                         </div>
                     </label>
-
-                    <div class="row">
-                        <div class="col">
-                            <label class="item item-input item-floating-label">
-
-                                <span class="input-label">Password</span><input type="password" placeholder="Password" class="form-control loginInputs" ng-model="user.password" name="password" required>
-                                <div ng-show="login_form.$submitted || login_form.password.$touched">
-                                    <span ng-show="login_form.password.$error.required" class="error_msg">Please enter your password</span>
-                                </div>
-                            </label>
-                        </div>                       
-                    </div>
-
-                    
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Password</span>
+                        <input type="password" placeholder="Password" class="form-control loginInputs" ng-model="user.password" name="password" required>
+                        <div ng-show="login_form.$submitted || login_form.password.$touched">
+                             <span ng-show="login_form.password.$error.required" class="error_msg">Please enter your password</span>
+                        </div>
+                    </label>
                     <div class="padding" align="center">
                         <div>
                             
