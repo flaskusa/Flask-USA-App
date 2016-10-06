@@ -3,10 +3,10 @@
     angular.module('flaskApp')
             .controller('ticketsCtrl', ticketsCtrl);
 
-    ticketsCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', 'SERVER'];
+    ticketsCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService'];
 
     /* @ngInject */
-    function ticketsCtrl($scope, $stateParams, $state, EventsService, SERVER) {
+    function ticketsCtrl($scope, $stateParams, $state, EventsService) {
         var self = this;
         $scope.Details = [];
         $scope.currVenueName = $stateParams.venueName;

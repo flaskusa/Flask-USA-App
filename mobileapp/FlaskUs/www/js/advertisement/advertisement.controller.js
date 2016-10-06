@@ -6,8 +6,8 @@
     AdvertisementCtrl.$inject = ['$scope', '$stateParams', '$state', 'SERVER', '$ionicPopup', '$timeout', 'AdvertisementService', '$flaskUtil', '$ionicSlideBoxDelegate','$cordovaInAppBrowser','$ionicScrollDelegate','$cookies'];
     function AdvertisementCtrl($scope, $stateParams, $state, SERVER, $ionicPopup, $timeout, AdvertisementService, $flaskUtil, $ionicSlideBoxDelegate,$cordovaInAppBrowser,$ionicScrollDelegate,$cookies) {
         $scope.imageDetail = [];
-        var baseURL = SERVER.hostName;
-        var baseImagePath = baseURL+"c/document_library/get_file";
+        // var baseURL = SERVER.hostName;
+        var baseImagePath = SERVER.hostName+"c/document_library/get_file";
         $scope.ImageUrls = [];
         $scope.showPopup = function (index) {
             $scope.fullImageUrl = baseImagePath + "?uuid=" + $scope.imageDetail[index].fullScreenUUID + "&groupId=" + $scope.imageDetail[index].fullScreenGroupId;

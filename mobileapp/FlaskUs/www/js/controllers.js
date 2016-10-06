@@ -12,6 +12,11 @@ angular.module('flaskApp.controllers', [])
         $rootScope.userEmailId ='';
         console.log($cookies.getObject('CurrentUser'));
         $state.go("app.events");
+        $timeout(function(){
+            SERVER.url = "http://www.flaskus.com/";
+            SERVER.hostName = "http://www.flaskus.com/api/jsonws/";
+        },2000) 
+        
     }
     $scope.imgUrl = SERVER.hostName;
 })

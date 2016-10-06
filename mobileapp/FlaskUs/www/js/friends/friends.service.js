@@ -18,7 +18,6 @@
             sendFriendRequest : sendFriendRequest,
             unBlockUser : unBlockUser
         }
-        var url = SERVER.url;
         this.data={};
         this.mediatorUserId={};
         var searchMyFriend = "/flask-social-portlet.entry/search-my-friends";
@@ -31,7 +30,7 @@
         var unBlockUserPath = "/flask-social-portlet.entry/unblock-user";
         var companyId = SERVER.companyId;
          function getMyFriends(searchText) {
-                    return $http.get(url+searchMyFriend,{params:{
+                    return $http.get(SERVER.url+searchMyFriend,{params:{
                         companyId: companyId,
                         keywords: searchText
                     }})
@@ -43,7 +42,7 @@
                     });
         }
         function searchUserContact(keyword, start, end) {
-                    return $http.get(url+searchUserContactPath,{params:{
+                    return $http.get(SERVER.url+searchUserContactPath,{params:{
                         companyId: companyId,
                         keywords: keyword,
                         start:start,
@@ -57,7 +56,7 @@
                     });
         }
         function getFriendByUserId(userId) {
-                return $http.get(url+searchFriendById,{params:{
+                return $http.get(SERVER.url+searchFriendById,{params:{
                     userId: userId
                 }})
                 .then(function success(response) {
@@ -69,7 +68,7 @@
         }
 
         function sendMessage (userId,messgae) {
-                return $http.get(url+sendFlaskMessage,{params:{
+                return $http.get(SERVER.url+sendFlaskMessage,{params:{
                     recipients: userId,
                     message:messgae,
                     sendEmail:true
@@ -82,7 +81,7 @@
                 });
         }
         function blockUser(blockUserId) {
-                return $http.get(url+blockUserPath,{params:{
+                return $http.get(SERVER.url+blockUserPath,{params:{
                     blockUserId: blockUserId
                 }})
                 .then(function success(response) {
@@ -93,7 +92,7 @@
                 });
         }
         function unFriend(receiverUserId) {
-                return $http.get(url+unFriendPath,{params:{
+                return $http.get(SERVER.url+unFriendPath,{params:{
                     receiverUserId: receiverUserId
                 }})
                 .then(function success(response) {
@@ -105,7 +104,7 @@
         }
 
         function sendFriendRequest (receiverUserId) {
-                return $http.get(url+addFriendsPath,{params:{
+                return $http.get(SERVER.url+addFriendsPath,{params:{
                     receiverUserId: receiverUserId
                 }})
                 .then(function success(response) {
@@ -116,7 +115,7 @@
                 });
         }
         function unBlockUser (unblockUserId) {
-                return $http.get(url+unBlockUserPath,{params:{
+                return $http.get(SERVER.url+unBlockUserPath,{params:{
                     unblockUserId: unblockUserId
                 }})
                 .then(function success(response) {

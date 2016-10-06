@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgatePlanCtrl', mytailgatePlanCtrl);
 
-    mytailgatePlanCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicModal'];
+    mytailgatePlanCtrl.$inject = ['$scope', '$state', '$stateParams', 'TailgateService', '$cookies', '$ionicModal'];
 
     /* @ngInject */
-    function mytailgatePlanCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicModal) {
+    function mytailgatePlanCtrl($scope, $state, $stateParams, TailgateService, $cookies, $ionicModal) {
         $scope.myTailgaters;
         var supplyItemName;
         $scope.tailgateItems = [];

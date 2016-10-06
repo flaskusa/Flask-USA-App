@@ -22,16 +22,15 @@
             searchGroupMember:searchGroupMember,
             leaveGroup:leaveGroup
         }
-        var url = SERVER.url;
         this.groupMemberDetail={};
         this.groupDetail={};
         this.groupAdminDetail={};
         this.isLoginUserAdmin={};
         var companyId = SERVER.companyId;
-        var getAllGroups = "/flask-manage-user-group-portlet.flaskgroup/get-all-my-groups";
-        var createGroup="/flask-manage-user-group-portlet.flaskgroup/add-group";
-        var saveGroup="flask-manage-user-group-portlet.flaskgroupusers/add-group-user";
-        var getAllGroupMember="/flask-manage-user-group-portlet.flaskgroupusers/get-all-group-users";
+        var getAllGroupsURL = "/flask-manage-user-group-portlet.flaskgroup/get-all-my-groups";
+        var createGroupURL="/flask-manage-user-group-portlet.flaskgroup/add-group";
+        var saveGroupURL="flask-manage-user-group-portlet.flaskgroupusers/add-group-user";
+        var getAllGroupMemberURL="/flask-manage-user-group-portlet.flaskgroupusers/get-all-group-users";
         var deleteGroupUrl="/flask-manage-user-group-portlet.flaskgroup/delete-group";
         var searchMyFriendList="/flask-social-portlet.entry/search-my-friends";
         var addGroupMember="/flask-manage-user-group-portlet.flaskgroupusers/add-group-user";
@@ -45,7 +44,7 @@
 
 
         function getAllGroups(userId) {
-            return $http.get(url+getAllGroups,{params:{
+            return $http.get(SERVER.url+getAllGroupsURL,{params:{
             "userId":userId
             }})
                 .then(function success(response) {
@@ -56,7 +55,7 @@
                 });
         }
         function createGroup(groupName,description,createdBy) {
-            return $http.get(url+createGroup,{params:{"groupName":groupName,
+            return $http.get(SERVER.url+createGroupURL,{params:{"groupName":groupName,
                 "groupDescription":description,
                 "isDelete":0,
                 "isActive":1,
@@ -71,7 +70,7 @@
                 });
         }
         function saveGroup(groupId,userId) {
-            return $http.get(url+saveGroup,{params:{"groupId":groupId,
+            return $http.get(SERVER.url+saveGroupURL,{params:{"groupId":groupId,
                 "emailAddress":"test@liferay.com",
                 "userId":userId,
                 "userName":"Joe Bloggs",
@@ -84,7 +83,7 @@
                 });
         }
         function getAllGroupMember(groupId){
-            return $http.get(url+getAllGroupMember,{params:{"groupId":groupId}})
+            return $http.get(SERVER.url+getAllGroupMemberURL,{params:{"groupId":groupId}})
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
@@ -93,7 +92,7 @@
                 });
         }
         function deleteGroup(groupId){
-            return $http.get(url+deleteGroupUrl,{params:{"groupId":groupId}})
+            return $http.get(SERVER.url+deleteGroupUrl,{params:{"groupId":groupId}})
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
@@ -103,7 +102,7 @@
 
         }
         function getMyFriendList(){
-            return $http.get(url+searchMyFriendList,{params:{"companyId":companyId,"keywords":""}})
+            return $http.get(SERVER.url+searchMyFriendList,{params:{"companyId":companyId,"keywords":""}})
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
@@ -114,7 +113,7 @@
         }
 
         function addUserToGroup(groupId,emailAddress,userId,userName,isAdmin){
-            return $http.get(url+addGroupMember,{
+            return $http.get(SERVER.url+addGroupMember,{
                 params:{
                     "groupId":parseInt(groupId),
                     "emailAddress":emailAddress,
@@ -131,7 +130,7 @@
 
         }
         function addGroupOwner(groupId,userId){
-            return $http.get(url+addGroupOwnerUrl,{
+            return $http.get(SERVER.url+addGroupOwnerUrl,{
                 params:{
                     "groupId":groupId,
                     "userId":userId
@@ -145,7 +144,7 @@
 
         }
         function removeGroupOwner(groupId,userId){
-            return $http.get(url+removeGroupOwnerUrl,{
+            return $http.get(SERVER.url+removeGroupOwnerUrl,{
                 params:{
                     "groupId":groupId,
                     "userId":userId
@@ -159,7 +158,7 @@
 
         }
         function updateGroup(groupName,groupDescription,isDelete,isActive,createdBy,groupId,createdDate){
-            return $http.get(url+updateGroupUrl,{params:{
+            return $http.get(SERVER.url+updateGroupUrl,{params:{
                 "groupName":groupName,
                 "groupDescription":groupDescription,
                 "isDelete":isDelete,
@@ -177,7 +176,7 @@
 
         }
         function deleteGroupUser(groupId,userId){
-            return $http.get(url+DeleteGroupUserUrl,{
+            return $http.get(SERVER.url+DeleteGroupUserUrl,{
                 params:{"groupId":groupId,
                     "userId":userId}
             }).then(function success(response) {
@@ -188,7 +187,7 @@
             });
         }
         function searchGroupMember(keywords){
-            return $http.get(url+searchFriendUrl,{
+            return $http.get(SERVER.url+searchFriendUrl,{
                 params:{"companyId":companyId,"keywords":keywords}
             }).then(function success(response) {
                 return response.data;
@@ -198,7 +197,7 @@
             });
         }
         function leaveGroup(groupId,userId){
-            return $http.get(url+leaveGroupUrl,{
+            return $http.get(SERVER.url+leaveGroupUrl,{
                 params:{"groupId":groupId,"userId":userId}
             }).then(function success(response) {
                 return response.data;

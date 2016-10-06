@@ -1,9 +1,9 @@
 ﻿(function () {
     var flaskAppConfig = angular.module('flaskApp');
     var getMessageUrlSubString="/flask-social-portlet.flaskmessages";
-    flaskAppConfig.constant("SERVER", {
-        "hostName": "http://146.148.83.30/",
-        "url": "http://146.148.83.30/api/jsonws/",
+    flaskAppConfig.value("SERVER", {
+        "hostName": "http://www.flaskus.com/",
+        "url": "http://www.flaskus.com/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
         "companyId":20154
     })

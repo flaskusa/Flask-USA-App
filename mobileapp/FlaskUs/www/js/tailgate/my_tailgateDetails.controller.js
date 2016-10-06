@@ -18,7 +18,6 @@
         var userMessage = [];
         $scope.uploadTailgateImagesUrl = SERVER.url + '/flask-user-tailgate-portlet.tailgateimages/upload-tailgate-image';
         $cookies.put('currtailGateId', tailGateId);
-        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         getMyTailgate();
         get_message_list(tailGateId);
         $scope.goBack = function () {

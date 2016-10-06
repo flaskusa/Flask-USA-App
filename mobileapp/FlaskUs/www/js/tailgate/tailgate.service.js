@@ -8,7 +8,6 @@
     TailgateService.$inject = ['$http', 'SERVER', '$q'];
 
     function TailgateService($http, SERVER, $q) {
-        var baseURL = SERVER.url;
         var allTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/add-tailgate-info";
         var myTailgatesURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-my-tailgate";
         var getTailgateImagesURL = "flask-user-tailgate-portlet.tailgateimages/get-tailgate-images";
@@ -46,9 +45,9 @@
         var getItemsByTailgateIdURL = "flask-user-tailgate-portlet.tailgatesupplyitem/get-items-by-tailgate-id";
         var updateTailgateSupplyItemURL = "flask-user-tailgate-portlet.tailgatesupplyitem/update-tailgate-supply-item";
         //        var checkTailgateUserExist = '/flask-user-tailgate-portlet.tailgateusers/check-tailgate-user-exist';
-        var isTailgateAdminURL = '/flask-user-tailgate-portlet.tailgateusers/is-tailgate-admin';
-        var getTailgateLogoURL = '/flask-user-tailgate-portlet.tailgateinfo/get-tailgate-logo';
-        var removeTailgateLogoURL = '/flask-user-tailgate-portlet.tailgateinfo/delete-tailgate-logo';
+        var isTailgateAdminURL = 'flask-user-tailgate-portlet.tailgateusers/is-tailgate-admin';
+        var getTailgateLogoURL = 'flask-user-tailgate-portlet.tailgateinfo/get-tailgate-logo';
+        var removeTailgateLogoURL = 'flask-user-tailgate-portlet.tailgateinfo/delete-tailgate-logo';
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -87,7 +86,7 @@
         }
 
         function getallFilteredEvents(tailgateParams) {
-            return $http.get(baseURL + getFilteredEventsURL, {
+            return $http.get(SERVER.url + getFilteredEventsURL, {
                 params: tailgateParams
             }
             )
@@ -100,7 +99,7 @@
         }
         //update tailgate
         function updateTailgateInfo(tailgateParams) {
-            return $http.get(baseURL + updateTailgateURL, {
+            return $http.get(SERVER.url + updateTailgateURL, {
                 params: tailgateParams
             }
             )
@@ -113,7 +112,7 @@
         }
         //get all groups
         function getallFilteredEvents(tailgateParams) {
-            return $http.get(baseURL + getFilteredEventsURL, {
+            return $http.get(SERVER.url + getFilteredEventsURL, {
                 params: tailgateParams
             }
             )
@@ -126,7 +125,7 @@
         }
         //get all groups
         function getGroupList() {
-            return $http.get(baseURL + getGroupListURL
+            return $http.get(SERVER.url + getGroupListURL
             )
                 .then(function success(response) {
                     return response.data;
@@ -137,7 +136,7 @@
         }
         //get all group users by group id
         function getGroupUsers(groupId) {
-            return $http.get(baseURL + getGroupUsersURL, {
+            return $http.get(SERVER.url + getGroupUsersURL, {
                 params: {
                     'groupId': groupId
                 }
@@ -152,7 +151,7 @@
         }
         //GET Group by userId
         function getGroupbyId(userid) {
-            return $http.get(baseURL + getGroupByUserIdURL, {
+            return $http.get(SERVER.url + getGroupByUserIdURL, {
                 params: {
                     'userId': userid
                 }
@@ -164,7 +163,7 @@
             });
         }
         function getvenueDetails(venueId) {
-            return $http.get(baseURL + getVenuebyVenueIdURL, {
+            return $http.get(SERVER.url + getVenuebyVenueIdURL, {
                 params: { 'venueId': venueId }
             }
             )
@@ -177,7 +176,7 @@
         }
 
         function addTailgate(currTailgateparams) {
-            return $http.get(baseURL + allTailgateURL, { params: currTailgateparams })
+            return $http.get(SERVER.url + allTailgateURL, { params: currTailgateparams })
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
@@ -185,7 +184,7 @@
                 });
         }
         function deleteTailgate(tailgateId) {
-            return $http.get(baseURL + deleteTailgateInfoURL, {
+            return $http.get(SERVER.url + deleteTailgateInfoURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )
@@ -196,7 +195,7 @@
                 });
         }
         function getUserFrends() {
-            return $http.get(baseURL + inviteFriendsTailgateURL, {
+            return $http.get(SERVER.url + inviteFriendsTailgateURL, {
                 params: {
                     companyId: SERVER.companyId,
                     keywords: ''
@@ -210,7 +209,7 @@
                 });
         }
         function getEvent(eventId) {
-            return $http.get(baseURL + geteventURL, {
+            return $http.get(SERVER.url + geteventURL, {
                 params: { 'eventId': eventId }
             }
             )
@@ -223,7 +222,7 @@
         }
 
         function getMapMarkers(tailgateId) {
-            return $http.get(baseURL + getmapMarkersURL, {
+            return $http.get(SERVER.url + getmapMarkersURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )
@@ -235,7 +234,7 @@
                 });
         }
         function deleteMapMarkers(tailgateId) {
-            return $http.get(baseURL + deleteTailgateUserIdURL, {
+            return $http.get(SERVER.url + deleteTailgateUserIdURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )
@@ -248,7 +247,7 @@
         }
 
         function getallEvents() {
-            return $http.get(baseURL + getAllEventsURL
+            return $http.get(SERVER.url + getAllEventsURL
             )
                 .then(function success(response) {
                     return response;
@@ -258,7 +257,7 @@
                 });
         }
         function addcurrentUser(user) {
-            return $http.get(baseURL + addtailgateUserURL, {
+            return $http.get(SERVER.url + addtailgateUserURL, {
                 params: user
             }
             )
@@ -271,7 +270,7 @@
         }
 
         function getAllTailgate() {
-            return $http.get(baseURL + allTailgateURL)
+            return $http.get(SERVER.url + allTailgateURL)
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
@@ -281,7 +280,7 @@
         }
 
         function getMyTailgates(uId) {
-            return $http.get(baseURL + myTailgatesURL, {
+            return $http.get(SERVER.url + myTailgatesURL, {
                 params: { 'userId': uId }
             }
             )
@@ -293,7 +292,7 @@
                 });
         }
         function getTailgate(tailgateId) {
-            return $http.get(baseURL + getTailGateURL, {
+            return $http.get(SERVER.url + getTailGateURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )
@@ -306,7 +305,7 @@
         }
 
         function getMyTailgateImages(tailgateId) {
-            return $http.get(baseURL + getTailgateImagesURL, {
+            return $http.get(SERVER.url + getTailgateImagesURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )
@@ -319,7 +318,7 @@
         }
 
         function getMyTailgateUsers(tailgateId) {
-            return $http.get(baseURL + getTalgetUsersURL, {
+            return $http.get(SERVER.url + getTalgetUsersURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )
@@ -333,7 +332,7 @@
 
 
         function addTailgateMarkers(param) {
-            return $http.get(baseURL + addTialgateMarkerURL, {
+            return $http.get(SERVER.url + addTialgateMarkerURL, {
                 params: param
             }
             )
@@ -346,7 +345,7 @@
         }
 
         function getAllMessages(tailgateId) {
-            return $http.get(baseURL + getmessageBoardsByTailgateIdURL, {
+            return $http.get(SERVER.url + getmessageBoardsByTailgateIdURL, {
                 params: { 'tailgateId': tailgateId }
             }
             )
@@ -358,7 +357,7 @@
         }
 
         function saveMessage(msgtxt, tailgateId) {
-            return $http.get(baseURL + addMessageBoardURL, {
+            return $http.get(SERVER.url + addMessageBoardURL, {
                 params: {
                     'messageText': msgtxt,
                     'tailgateId': tailgateId
@@ -373,7 +372,7 @@
         }
 
         function getAllUser(userId) {
-            return $http.get(baseURL + getUserByIdURL, {
+            return $http.get(SERVER.url + getUserByIdURL, {
                 params: { 'userId': userId }
             }
             )
@@ -386,7 +385,7 @@
         }
 
         function getMySupplyLists() {
-            return $http.get(baseURL + getMySupplyListsURL)
+            return $http.get(SERVER.url + getMySupplyListsURL)
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
@@ -396,7 +395,7 @@
         }
 
         function getSupplyList(supplyListId) {
-            return $http.get(baseURL + getSupplyListURL, {
+            return $http.get(SERVER.url + getSupplyListURL, {
                 params: {
                     'supplyListId': supplyListId
                 }
@@ -411,7 +410,7 @@
 
         //get Items By TailgateId
         function getItemsByTailgateId(tailgateId) {
-            return $http.get(baseURL + getItemsByTailgateIdURL, {
+            return $http.get(SERVER.url + getItemsByTailgateIdURL, {
                 params: {
                     'tailgateId': tailgateId
                 }
@@ -425,7 +424,7 @@
         }
 
         function getItemsbylistid(supplyListId) {
-            return $http.get(baseURL + getItemsbylistidURL, {
+            return $http.get(SERVER.url + getItemsbylistidURL, {
                 params: {
                     'supplyListId': supplyListId
                 }
@@ -439,7 +438,7 @@
         }
 
         function addTailgateSupplyItems(supplyListItemNames, tailgateId, itemAssignedUserId) {
-            return $http.get(baseURL + addTailgateSupplyItemsURL, {
+            return $http.get(SERVER.url + addTailgateSupplyItemsURL, {
                 params: {
                     'supplyListItemNames': supplyListItemNames,
                     'tailgateId': tailgateId,
@@ -455,7 +454,7 @@
         }
 
         function updateTailgateSupplyItem(tailgateSupplyItemId, supplyListItemName, tailgateId, itemAssignedUserId) {
-            return $http.get(baseURL + updateTailgateSupplyItemURL, {
+            return $http.get(SERVER.url + updateTailgateSupplyItemURL, {
                 params: {
                     'tailgateSupplyItemId': tailgateSupplyItemId,
                     'supplyListItemName': supplyListItemName,
@@ -471,7 +470,7 @@
                 });
         }
         //        function checkTailgateUserExist(userId, tailgateId) {
-        //         return $http.get(baseURL + checkTailgateUserExist, {
+        //         return $http.get(SERVER.url + checkTailgateUserExist, {
         //            params: {
         //                'userId':userId,
         //                'tailgateId': tailgateId,
@@ -485,7 +484,7 @@
         //        });
         //        }
         function isUserTailgateAdmin(tailgateId) {
-            return $http.get(baseURL + isTailgateAdminURL, {
+            return $http.get(SERVER.url + isTailgateAdminURL, {
                 params: {
                     'tailgateId': tailgateId
                 }
@@ -500,7 +499,7 @@
 
 
         function getTailgateLogo(tailgateId) {
-            return $http.get(baseURL + getTailgateLogoURL, {
+            return $http.get(SERVER.url + getTailgateLogoURL, {
                 params: {
                     'tailgateId': tailgateId
                 }
@@ -513,7 +512,7 @@
                 });
         }
         function removeTailgateLogo(tailgateId) {
-            return $http.get(baseURL + removeTailgateLogoURL, {
+            return $http.get(SERVER.url + removeTailgateLogoURL, {
                 params: {
                     'tailgateId': tailgateId
                 }

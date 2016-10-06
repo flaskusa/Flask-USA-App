@@ -7,7 +7,6 @@
     myEventService.$inject = ['$http', 'SERVER'];
 
     function myEventService($http, SERVER) {
-        var baseURL = SERVER.url;
         var allEventURL = "flask-rest-events-portlet.event/get-simple-filtered-events";
         var myEventsURL = "flask-rest-events-portlet.event/get-user-selected-events";
         var addUserEventURL = "flask-rest-events-portlet.event/add-user-event";
@@ -16,7 +15,7 @@
         this.getAllEvents = getAllEvents
 
         function getAllEvents(eventTypeIds,startDate, endDate, searchString, latitude, longitude) {
-            return $http.get(baseURL + allEventURL, {
+            return $http.get(SERVER.url + allEventURL, {
                 params: {
                     eventTypeIds: eventTypeIds,
                     startDate: startDate,
@@ -34,7 +33,7 @@
         }
 
         this.getMyEvents = function() {           
-            return $http.get(baseURL + myEventsURL)
+            return $http.get(SERVER.url + myEventsURL)
             .then(function success(response) {
                 console.log(response);
                 return response;
@@ -44,7 +43,7 @@
         }
 
         this.addUserEvent = function(eId) {
-            return $http.get(baseURL + addUserEventURL, {
+            return $http.get(SERVER.url + addUserEventURL, {
                 params:{eventId:eId}
             })
             .then(function success(response) {
@@ -54,7 +53,7 @@
         }
 
         this.removeUserEvent = function (removeEventid) {
-            return $http.get(baseURL + removeUserEventURL, {
+            return $http.get(SERVER.url + removeUserEventURL, {
                 params: { eventId: removeEventid }
             })
             .then(function success(response) {

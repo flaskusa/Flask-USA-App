@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgatelocationCtrl', mytailgatelocationCtrl);
 
-    mytailgatelocationCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi'];
+    mytailgatelocationCtrl.$inject = ['$scope', '$state', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi'];
 
     /* @ngInject */
-    function mytailgatelocationCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi) {
+    function mytailgatelocationCtrl($scope, $state, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi) {
         $scope.myTailgaters = [];
         var tailGateId = $cookies.get('currtailGateId');
         $scope.taligateMarkers = angular.fromJson($cookies.get('currtailGateMakers'));

@@ -8,7 +8,6 @@
     EventsService.$inject = ['$http', 'SERVER'];
 
     function EventsService($http, SERVER) {
-        var baseURL = SERVER.url;
         var allEventsURL = "flask-rest-events-portlet.event/get-simple-filtered-events";
         var addEventURL = "flask-rest-events-portlet.event/add-event";
         var addEventDetailsURL = "flask-rest-events-portlet.event/add-event-detail";
@@ -34,7 +33,7 @@
             getAllVenues: getAllVenues
         }
         function getAllEvents(eventIds, sDate, eDate, sString, lat, long) {
-            return $http.get(baseURL + allEventsURL, {
+            return $http.get(SERVER.url + allEventsURL, {
                 params: {
                     eventTypeIds: eventIds,
                     startDate: sDate,
@@ -67,7 +66,7 @@
             });
         }
         function getEventVenueDatail(currEventId) {
-            return $http.get(baseURL + getEvent_Venue_Details_with_Images, {
+            return $http.get(SERVER.url + getEvent_Venue_Details_with_Images, {
                 params: { 'eventId': currEventId }
             }
             )
@@ -80,7 +79,7 @@
         }
 
         function getEventByEventId(eventId) {
-            return $http.get(baseURL + getEventByIdURL, {
+            return $http.get(SERVER.url + getEventByIdURL, {
                 params: { 'eventId': eventId }
             })
             .then(function success(resp) {
@@ -92,7 +91,7 @@
 
         }
         function addContentDuringEvent(infoTitle,infoDesc,eventId,infoTypeCategoryId,infoTypeId) {
-            return $http.get(baseURL + addContentDuringGameUrl, {
+            return $http.get(SERVER.url + addContentDuringGameUrl, {
                 params: {"eventDetailId":"0","infoTypeCategoryId":infoTypeCategoryId,"infoTitle":infoTitle,"latitude":"0",
                     "longitude":"0","showDescription":"1","eventId":eventId,"infoTypeId":infoTypeId,"infoTypeName":"",
                     "infoTypeCategoryName":"","infoDesc":infoDesc,
@@ -108,7 +107,7 @@
 
         }
         function updateEventDetailDuringEvent(infoTitle,infoDesc,eventId,eventDetailId,infoTypeCategoryId,infoTypeId) {
-            return $http.get(baseURL + updateEventDuringGame, {
+            return $http.get(SERVER.url + updateEventDuringGame, {
                 params: {"eventDetailId":eventDetailId,"infoTypeCategoryId":infoTypeCategoryId,"infoTitle":infoTitle,"latitude":"0",
                     "longitude":"0","showDescription":"1","eventId":eventId,"infoTypeId":infoTypeId,"infoTypeName":"",
                     "infoTypeCategoryName":"","infoDesc":infoDesc,
@@ -124,7 +123,7 @@
 
         }
         function deleteEventDetailById(eventDetailId) {
-            return $http.get(baseURL + deleteEventDetailUrl, {
+            return $http.get(SERVER.url + deleteEventDetailUrl, {
                 params: {"eventDetailId":eventDetailId}
             })
                 .then(function success(resp) {
@@ -138,7 +137,7 @@
 
         // Get All venues for event details
         function getAllVenues() {
-            return $http.get(baseURL + getAllVenuesURL)
+            return $http.get(SERVER.url + getAllVenuesURL)
                 .then(function success(resp) {
                     return resp.data;
                 },
@@ -148,7 +147,7 @@
         }
         // Get venue by id for event details
         function getVenueByid(vid) {
-            return $http.get(baseURL + getVenuesByIdURL, {
+            return $http.get(SERVER.url + getVenuesByIdURL, {
                 params: { "venueId ": venueId }
                 })
                 .then(function success(resp) {

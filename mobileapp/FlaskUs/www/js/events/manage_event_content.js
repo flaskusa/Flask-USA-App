@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('ManageEventCtrl', ManageEventCtrl);
 
-    ManageEventCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', 'SERVER','$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope'];
+    ManageEventCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope'];
 
     /* @ngInject */
-    function ManageEventCtrl($scope, $stateParams, $state, EventsService, SERVER,$ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService,$rootScope) {
+    function ManageEventCtrl($scope, $stateParams, $state, EventsService, $ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService,$rootScope) {
         $scope.eventDetails = $stateParams.eventDetails.Details;
         $scope.eventName=$stateParams.currEventName;
         $scope.currEventId=$stateParams.currEventId;

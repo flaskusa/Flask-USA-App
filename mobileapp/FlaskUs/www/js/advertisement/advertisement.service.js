@@ -7,15 +7,15 @@
     AdvertisementService.$inject = ['$http', 'SERVER','$cookies','$timeout'];
 
     function AdvertisementService($http, SERVER,$cookies,$timeout) {
-        var baseURL = SERVER.url;
+        // var baseURL = SERVER.url;
 
-        var getAdvertisementDetailUrl="/flask-advertisement-portlet.campaignevent/get-event-campaign-images";
+        var getAdvertisementDetailUrl="flask-advertisement-portlet.campaignevent/get-event-campaign-images";
         var advertisementServices = {
             getAllAdvertisementDetail: getAllAdvertisementDetail
 
         }
         function getAllAdvertisementDetail(allEventId){
-            return $http.get(baseURL + getAdvertisementDetailUrl, {
+            return $http.get(SERVER.url + getAdvertisementDetailUrl, {
                 params: {eventIdList:allEventId}
             })
                 .then(function success(resp) {

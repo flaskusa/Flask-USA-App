@@ -24,19 +24,17 @@
     }
         this.selectedList={};
         this.addAsAdmin={};
-        var url = SERVER.url;
         var getAllSupplyUrl="/flask-user-tailgate-portlet.supplylist/get-my-supply-lists"
         var getMySupplyUrl="/flask-user-tailgate-portlet.supplylist/get-my-supply-lists"
         var addSuppliesUrl="/flask-user-tailgate-portlet.supplylist/add-supply-list"
         var addSupplyItemUrl="/flask-user-tailgate-portlet.supplyitem/add-supply-item"
-        var getItemByListId="/flask-user-tailgate-portlet.supplyitem/get-items-by-list-id"
+        var getItemByListIdURL="/flask-user-tailgate-portlet.supplyitem/get-items-by-list-id"
         var deleteSupplyListUrl="/flask-user-tailgate-portlet.supplylist/delete-supply-list"
         var updateSupplyUrl="/flask-user-tailgate-portlet.supplylist/update-supply-list";
         var UpdateSupplyItemUrl="/flask-user-tailgate-portlet.supplyitem/update-supply-item";
         var deleteSupplyItemUrl="/flask-user-tailgate-portlet.supplyitem/delete-supply-item";
-        var addSupplyItems="/flask-user-tailgate-portlet.supplyitem/add-supply-items";
         function getMySupplyList() {
-            return $http.get(url+getAllSupplyUrl,{params:{
+            return $http.get(SERVER.url+getAllSupplyUrl,{params:{
             }})
                 .then(function success(response) {
                     return response.data;
@@ -46,7 +44,7 @@
                 });
         }
         function getAllSupplyList() {
-            return $http.get(url+getMySupplyUrl,{params:{
+            return $http.get(SERVER.url+getMySupplyUrl,{params:{
             }})
                 .then(function success(response) {
                     return response.data;
@@ -56,7 +54,7 @@
                 });
         }
         function addSupplies(supplyListName,isSystem) {
-            return $http.get(url+addSuppliesUrl,{params:{
+            return $http.get(SERVER.url+addSuppliesUrl,{params:{
                 supplyListName: supplyListName,
                     isSystem: isSystem
 
@@ -69,7 +67,7 @@
                 });
         }
         function addSupplyItem(supplyItemName,supplyListId) {
-            return $http.get(url+addSupplyItemUrl,{params:{
+            return $http.get(SERVER.url+addSupplyItemUrl,{params:{
                 supplyItemName: supplyItemName,
                 supplyListId: supplyListId
             }})
@@ -81,7 +79,7 @@
                 });
         }
         function getItemByListId(supplyListId) {
-            return $http.get(url+getItemByListId,{params:{
+            return $http.get(SERVER.url+getItemByListIdURL,{params:{
                 supplyListId: supplyListId
             }})
                 .then(function success(response) {
@@ -92,7 +90,7 @@
                 });
         }
         function deleteSupplyListById(supplyListId) {
-            return $http.get(url+deleteSupplyListUrl,{params:{
+            return $http.get(SERVER.url+deleteSupplyListUrl,{params:{
                 supplyListId: supplyListId
             }})
                 .then(function success(response) {
@@ -103,7 +101,7 @@
                 });
         }
         function updateSupplyList(supplyListId,supplyListName,isSystem) {
-            return $http.get(url+updateSupplyUrl,{params:{
+            return $http.get(SERVER.url+updateSupplyUrl,{params:{
                 supplyListId: supplyListId,
                 supplyListName: supplyListName,
                 isSystem: isSystem
@@ -116,7 +114,7 @@
                 });
         }
         function updateSupplyItem(supplyListId,supplyItemId,supplyItemName) {
-            return $http.get(url+UpdateSupplyItemUrl,{params:{
+            return $http.get(SERVER.url+UpdateSupplyItemUrl,{params:{
                 supplyItemId: supplyItemId,
                 supplyItemName: supplyItemName,
                 supplyListId: supplyListId
@@ -129,7 +127,7 @@
                 });
         }
         function deleteSupplyItemById(supplyItemId) {
-            return $http.get(url+deleteSupplyItemUrl,{params:{
+            return $http.get(SERVER.url+deleteSupplyItemUrl,{params:{
                 supplyItemId: supplyItemId
             }})
                 .then(function success(response) {
@@ -140,7 +138,7 @@
                 });
         }
         function addSupplyItems(supplyListId,supplyItemNames) {
-            return $http.get(url+addSupplyItems,{params:{
+            return $http.get(SERVER.url+addSupplyItems,{params:{
                 supplyItemNames: [supplyItemNames],
                 supplyListId: supplyListId
             }})

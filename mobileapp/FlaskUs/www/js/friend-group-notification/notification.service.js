@@ -18,7 +18,6 @@
             deleteRequest:deleteRequest,
             setReadMessage:setReadMessage
         }
-        var url = SERVER.url;
         var getMyNotificationCountUrl="/flask-social-portlet.entry/get-requests-count"
         var getMessageCountUrl="/flask-social-portlet.flaskmessages/get-my-flask-messages-count"
         var getMyAllMessageUrl="/flask-social-portlet.flaskmessages/get-all-my-flask-messages";
@@ -30,7 +29,7 @@
         var setMessageReadUrl="/flask-social-portlet.flaskrecipients/set-read";
         var companyId = SERVER.companyId;
         function getNotificationCount(){
-            return $http.get(url+getMyNotificationCountUrl)
+            return $http.get(SERVER.url+getMyNotificationCountUrl)
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
@@ -39,7 +38,7 @@
                 });
         }
         function getMessageCount(){
-            return $http.get(url+getMessageCountUrl)
+            return $http.get(SERVER.url+getMessageCountUrl)
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
@@ -48,7 +47,7 @@
                 });
         }
         function getMyAllMessages(){
-            return $http.get(url+getMyAllMessageUrl)
+            return $http.get(SERVER.url+getMyAllMessageUrl)
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
@@ -57,7 +56,7 @@
                 });
         }
         function deleteMessageById(messageId){
-            return $http.get(url+deleteMessageUrl,{params:{
+            return $http.get(SERVER.url+deleteMessageUrl,{params:{
                 messageId: messageId
             }})
                 .then(function success(response) {
@@ -68,7 +67,7 @@
                 });
         }
         function getRequestToConfirm(){
-            return $http.get(url+getRequestUrl,{params:{
+            return $http.get(SERVER.url+getRequestUrl,{params:{
             }})
                 .then(function success(response) {
                     return response.data;
@@ -78,7 +77,7 @@
                 });
         }
         function getUserById(userId){
-            return $http.get(url+getUserByIdUrl,{params:{
+            return $http.get(SERVER.url+getUserByIdUrl,{params:{
                 userId: userId }})
                 .then(function success(response) {
                     return response.data;
@@ -88,7 +87,7 @@
                 });
         }
         function addSocialRelation(receiverUserId){
-            return $http.get(url+addSocialRelationUrl,{params:
+            return $http.get(SERVER.url+addSocialRelationUrl,{params:
             {receiverUserId:receiverUserId}})
                 .then(function success(response) {
                     return response.data;
@@ -98,7 +97,7 @@
                 });
         }
         function deleteRequest(receiverUserId){
-            return $http.get(url+deleteSocialRelationUrl,{params:
+            return $http.get(SERVER.url+deleteSocialRelationUrl,{params:
             {receiverUserId:receiverUserId}})
                 .then(function success(response) {
                     return response.data;
@@ -108,7 +107,7 @@
                 });
         }
         function setReadMessage(messageId){
-            return $http.get(url+setMessageReadUrl,{params:
+            return $http.get(SERVER.url+setMessageReadUrl,{params:
         {messageId:messageId}})
                 .then(function success(response) {
                     return response.data;
@@ -118,6 +117,6 @@
                 });
         };
 
-        return services;deleteMessageById
+        return services;
     }
 })();

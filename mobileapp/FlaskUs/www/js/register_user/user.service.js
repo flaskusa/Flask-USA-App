@@ -7,7 +7,6 @@
     UserService.$inject = ['$http', '$state', 'SERVER'];
 
     function UserService($http, $state, SERVER) {
-        var baseURL = SERVER.url;
         var addUserURL = "/flask-rest-users-portlet.flaskadmin/sign-up";
         var getUserByEmailId = "/flask-rest-users-portlet.flaskadmin/get-user-for-email";
         var updateUserURL = "flask-rest-users-portlet.flaskadmin/update-flask-user";
@@ -41,7 +40,7 @@
                 areaCode: user.areaCode,
                 mobileNumber: user.mobileNumber
             };
-            return $http.get(baseURL + addUserURL, {
+            return $http.get(SERVER.url + addUserURL, {
                 params
             }
             )
@@ -54,7 +53,7 @@
         }
 
         function getUserbyEmail(email) {
-            return $http.get(baseURL + getUserByEmailId, { params: { 'emailAddress': email.Email } })
+            return $http.get(SERVER.url + getUserByEmailId, { params: { 'emailAddress': email.Email } })
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
@@ -63,7 +62,7 @@
         }
 
         function getUserById(userId) {
-            return $http.get(baseURL + getUserByIdURL, {
+            return $http.get(SERVER.url + getUserByIdURL, {
                 params: {
                     'userId': userId
                 }
@@ -97,7 +96,7 @@
                 userInterests: interestArray
             };
 
-            return $http.get(baseURL + updateUserURL, {
+            return $http.get(SERVER.url + updateUserURL, {
                 params
             }
             )
@@ -110,7 +109,7 @@
         }
 
         function getCountries() {
-            return $http.get(baseURL + getCountriesURL)
+            return $http.get(SERVER.url + getCountriesURL)
                .then(function success(response) {
                    return response;
                }, function failure(response) {
@@ -119,7 +118,7 @@
         }
 
         function getRegion(countryId) {
-            return $http.get(baseURL + getRegionURL, {
+            return $http.get(SERVER.url + getRegionURL, {
                 params: {
                     'countryId': countryId
                 }
@@ -132,7 +131,7 @@
         }
 
         function uploadProfile() {
-            return $http.get(baseURL + uploadUserProfileURL)
+            return $http.get(SERVER.url + uploadUserProfileURL)
                .then(function success(response) {
                    return response;
                }, function failure(response) {

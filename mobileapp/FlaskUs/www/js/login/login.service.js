@@ -5,10 +5,10 @@
         .module('flaskApp')
         .service('LoginService', LoginService);
 
-    LoginService.$inject = ['$http', 'SERVER', '$state', '$cookies', '$rootScope'];
+    LoginService.$inject = ['$http', 'SERVER', '$state', '$cookies'];
 
-    function LoginService($http, SERVER, $state, $cookies, $rootScope) {
-        var baseURL = SERVER.url;
+    function LoginService($http, SERVER, $state, $cookies) {
+//        var baseURL = SERVER.url;
 
         var getUserByEmailId = "user/get-user-by-email-address";
         var getUserProfilePic = "dlapp/get-file-entry";
@@ -16,7 +16,7 @@
             var authdata = Base64.encode(scope.Email + ':' + scope.password);
             $cookies.put("authData",authdata);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
-            return $http.get(baseURL + getUserByEmailId, { params: { 'companyId': SERVER.companyId, 'emailAddress': scope.Email } })
+            return $http.get(SERVER.url + getUserByEmailId, { params: { 'companyId': SERVER.companyId, 'emailAddress': scope.Email } })
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
@@ -26,7 +26,7 @@
 
         this.getUserProfilePicture = function () {
             var userPic = $cookies.getObject('CurrentUser');
-            return $http.get(baseURL + getUserProfilePic, { params: { 'fileEntryId': userPic.data.portraitId } })
+            return $http.get(SERVER.url + getUserProfilePic, { params: { 'fileEntryId': userPic.data.portraitId } })
             .then(function success(resp) {
                 $cookies.putObject('CurrentUserPic', resp);
                 return resp;
