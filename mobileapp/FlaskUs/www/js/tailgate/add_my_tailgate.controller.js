@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope'];
+    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$sce'];
 
     / @ngInject /
-    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope) {
+    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $sce) {
         //for adding tailgate
         var self = this;
         var newtailGateId;
@@ -28,7 +28,8 @@
         $scope.longitude = '-83.0456';
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
-        $scope.tailgateSupplyList = [], [];
+        $scope.tailgateSupplyList = [];
+        $scope.supplyList = { 'selectedSupplyList': '' };
         var supplyListstId;
         var supplyItemName;
         $scope.items = [];
@@ -45,20 +46,28 @@
         $scope.isImageSelectedToUpload = false;
         $scope.tailgateLogoId = 0;
         $scope.defaultImageUrl = "img/default-profilepic-copy.png";
+        $scope.hideItem = false;
+        $scope.selectedSupplyListItems = [];
+        $scope.allMyTailgateItems = [];
 
         getMySupplyList();
 
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
+        var tailgateId = $cookies.get("currtailGateId");
         $scope.initialize = function () {
-            var tailgateId = $cookies.get("currtailGateId");
             if (tailgateId != undefined && tailgateId > 0 && $scope.tailgateLogoId > 0) {
                 $scope.getTailGateLogo(tailgateId);
+
                 $scope.isUserTailgateAdmin(tailgateId);
             } else {
                 $scope.isTailgateAdmin = true;
             }
+            if (tailgateId != undefined && tailgateId > 0) {
+                getItems();
+            }
+            getTailgaters();
 
         }
 
@@ -422,6 +431,7 @@
 
         $scope.setLogoImageUrl = function (repositoryId, folderId, title) {
             $scope.tailgateLogoUrl = SERVER.hostName + "documents/" + repositoryId + "/" + folderId + "/" + title;
+            $scope.tailgateLogoUrl = encodeURI($scope.tailgateLogoUrl);
         }
         //add new tailgate
         $scope.addmyTailgate = function (tailgatedata) {
@@ -452,6 +462,7 @@
                     $cookies.put('newtailgateId', respData.data.tailgateId);
                     $cookies.putObject('newtailgatedata', respData.data);
                     $scope.newtailgatesId = respData.data.tailgateId;
+                    $cookies.put("")
                     $scope.enableTab = {
                         condition: true
                     };
@@ -546,11 +557,11 @@
         $scope.active = true; // define the tab in add group and add friend section
         $scope.active1 = true;
         $scope.myFriends = [];
-        $ionicModal.fromTemplateUrl('templates/modal.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-        });
+        // $ionicModal.fromTemplateUrl('templates/modal.html', {
+        //     scope: $scope
+        // }).then(function (modal) {
+        //     $scope.modal = modal;
+        // });
 
         function getTailgaters(newtailgateId) {
             TailgateService.getMyTailgateUsers(newtailgateId).then(function (respData) {
@@ -648,16 +659,29 @@
 
         //Adding supply items to tailgate
         $scope.addSupplyItems = function () {
-
-            for (var i = 0; i < $scope.supplyItemList.length; i++) {
-                $scope.items.push($scope.supplyItemList[i].supplyItemName)
-            }
+            angular.forEach($scope.selectedSupplyListItems, function (val, idx) {
+                $scope.items.push(val.supplyItemName)
+            })
             itemArray = $scope.items.toString();
-            TailgateService.addTailgateSupplyItems(itemArray, $scope.newtailgatesId, UserId).then(function (respData) {
+            var tailgateId = $cookies.get("currtailGateId");
+            TailgateService.addTailgateSupplyItems(itemArray, tailgateId, UserId).then(function (respData) {
                 $scope.alltailgateSupplyItem = respData.data;
+                $scope.associateUserWithSupplyItem();
             });
 
         }
+
+
+        $scope.associateUserWithSupplyItem = function () {
+            angular.forEach($scope.selectedSupplyListItems, function (val, idx) {
+                if (val.itemAssignedUserId > 0) {
+                    $scope.updateSupplyItems(val);
+                }
+
+            })
+        }
+
+
         //venmo Account pay now
         function fnPayNow() {
             var tailgateId = newtailGateId;
@@ -683,6 +707,68 @@
                 console.log("Admin User " + $scope.isTailgateAdmin);
             });
         };
+        $scope.toggleItem = function () {
+            $scope.hideItem = !$scope.hideItem;
+            $("#FlaskUsListdiv").slideToggle("slow", function () {
+            });
+        }
+        $scope.copyForMyGameDaySupply = function (supplyObject) {
+            $scope.MyGameDaysSupply = [];
+            angular.forEach($scope.allSupplyList, function (value, key) {
+                if (value.supplyListId == supplyObject.supplyListId) {
+                    value.checked = true;
+
+                } else {
+                    value.checked = false;
+                }
+            });
+            TailgateService.getItemsbylistid(supplyObject.supplyListId).then(function (response) {
+                $scope.selectedSupplyListItems = response.data;
+                if ($scope.hideItem == false) {
+                    $scope.toggleItem();
+                }
+            });
+
+        }
+        $scope.removeSelectedSupply = function (list) {
+            $scope.selectedSupplyListItems = [];
+        }
+        $scope.selectGameDaySupply = function (list, checked) {
+            if (checked == true) {
+                $scope.copyForMyGameDaySupply(list);
+            } else {
+                $scope.removeSelectedSupply(list);
+            }
+        }
+        function getTailgaters() {
+            var tailgateId = $cookies.get("currtailGateId");
+            TailgateService.getMyTailgateUsers(tailgateId).then(function (respData) {
+                $scope.myTailgaters = respData.data;
+            });
+        }
+        $scope.updateSupplyItems = function (data) {
+            TailgateService.updateTailgateSupplyItem(data.supplyItemId, data.supplyItemName, tailgateId, data.itemAssignedUserId).then(function (respData) {
+            });
+        }
+        function getItems() {
+            TailgateService.getItemsByTailgateId(tailgateId).then(function (respData) {
+                $scope.setSelectedSupplyItemArray(respData.data);
+                $scope.toggleItem();
+            });
+        }
+        $scope.setSelectedSupplyItemArray = function (data) {
+            var tempItem = {};
+            angular.forEach(data, function (object, idx) {
+                tempItem = {};
+                tempItem.createdDate = object.createdDate;
+                tempItem.modifiedDate = object.modifiedDate;
+                tempItem.supplyItemId = object.tailgateSupplyItemId;
+                tempItem.supplyItemName = object.supplyListItemName;
+                tempItem.itemAssignedUserId = object.itemAssignedUserId + "";
+                $scope.selectedSupplyListItems.push(tempItem)
+            })
+        };
+
         $scope.initialize();
 
     }

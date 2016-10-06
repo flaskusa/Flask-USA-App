@@ -11,11 +11,12 @@
                     <div class="list add_my_tailgate">
                         <div class="list card">
                             <div class="item item-image">
-                                <img ng-src="img/default-profilepic-copy.png" id="myImage" class="profilepicAvatar" ng-if="tailgateLogoId == 0"" />
-                                <img ng-src="{{tailgateLogoUrl}}" id="myImage" ng-if="tailgateLogoId > 0" class="profilepicAvatar" alt="Image not found" />                                
+                                <img ng-src="{{defaultImageUrl}}" id="myImage" class="profilepicAvatar" ng-if="tailgateLogoId == 0" " />
+                                <img ng-src="{{tailgateLogoUrl}} " id="myImage " ng-if="tailgateLogoId>0"
+                                class="profilepicAvatar" alt="Image not found" />
                             </div>
                             <a class="item text-center disabled" ng-click="show();" ng-if="isTailgateAdmin">
-                                Tap to add Profile picture
+                                Tap to add Picture
                             </a>
                         </div>
                         <div class="item item-input item-floating-label">
@@ -167,25 +168,50 @@
                         </div>
                     </div>
                 </div>
-                <div class="list">
-                    <div class="list">
-                        <div class="item item-divider plan_now">
-                            SUPPLIES LIST
-                        </div>
-                    </div>
-                    <label class="item item-input item-select pan_now_list">
-                        <div class="input-label">
-                            &nbsp;
-                        </div>
-                        <select class="plan_now" ng-model="selected1" ng-options="data.supplyListName for data in tailgateSupplyList" ng-change="getSupplyItem(selected1)"></select>
-                    </label>
-                    <a class="item" ng-if="tailgateSupplyList.length == 0"> You do not any supply list... </a>
-                    <div class="row">
-                        <button type="submit" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems();">
-                            Add Supply List
-                        </button>
+
+                <ion-list>
+
+
+                    <ion-item style="color: #0f0f0f" ng-repeat="item in selectedSupplyListItems">
+                        <label style="font-weight: 200"><i class="addText">{{ item.supplyItemName | uppercase}}</i> </label>
+                        <a><span  class="badge badge-assertive"style="margin-right: 25px"></span></a>
+                        <select class="plan_now_user" ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId">
+                            <option value="-1" >select attendee</option>
+                            <option ng-repeat="attendee in myTailgaters" value="{{attendee.userId}}">{{attendee.userName}}</option>
+                        </select>
+                    </ion-item>
+                </ion-list>
+
+
+                <div class="strip paddingTOpSupply" ng-click="toggleItem()">
+                    <div class="stripPadding">
+                        <span><i class="textStyle marginLeftSupplyText"> SUPPLY LIST</i></span>
+                        <i class="icon ion-chevron-right" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideItem==true"></i>
+                        <i class="icon ion-chevron-down" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideItem==false"></i>
                     </div>
                 </div>
+                <div id="FlaskUsListdiv">
+                    <ion-list>
+                        <ion-item class="item" ng-repeat="data in allSupplyList">
+                            <span class="emailText" style="color: #000000;font-weight: 200"><i class="addText">{{ data.supplyListName | uppercase}}</i></span>
+                            <div>
+                                <span class="badge span_icon" style="top:3px" ng-click="selectGameDaySupply(data,data.checked)">
+                                   <label class="checkbox"style="float: right">
+                                       <input  type="checkbox"ng-model="data.checked">
+                                   </label>
+                               </span>
+                            </div>
+
+
+                        </ion-item>
+                    </ion-list>
+                </div>
+                <div class="row">
+                    <button type="submit" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems();">
+                        Add Supply List
+                    </button>
+                </div>
+
             </ion-content>
         </ion-tab>
     </ion-tabs>
