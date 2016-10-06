@@ -12,16 +12,18 @@
         $scope.Email = '';
         $scope.password = '';
         
-        $scope.checkTouch = function () {
-            $cordovaTouchID.checkSupport().then(function () {
-                $cordovaTouchID.authenticate("You must authenticate").then(function () {
-                    alert("The authentication was successful");
+        $scope.checkTouch = function (enableChecked) {
+            if (enableChecked) {
+                $cordovaTouchID.checkSupport().then(function () {
+                    $cordovaTouchID.authenticate("You must authenticate").then(function () {
+                        alert("The authentication was successful");
+                    }, function (error) {
+                        console.log(JSON.stringify(error));
+                    });
                 }, function (error) {
-                    console.log(JSON.stringify(error));
-                });
-            }, function (error) {
                 console.log(JSON.stringify(error));
-            });
+             });
+           }
         }
        
         $scope.doLogin = function (user) {
