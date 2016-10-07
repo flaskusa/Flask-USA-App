@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('ManageEventCtrl', ManageEventCtrl);
 
-    ManageEventCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope'];
+    ManageEventCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', 'SERVER','$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope','$cookies'];
 
     /* @ngInject */
-    function ManageEventCtrl($scope, $stateParams, $state, EventsService, $ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService,$rootScope) {
+    function ManageEventCtrl($scope, $stateParams, $state, EventsService, SERVER,$ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService,$rootScope,$cookies) {
         $scope.eventDetails = $stateParams.eventDetails.Details;
         $scope.eventName=$stateParams.currEventName;
         $scope.currEventId=$stateParams.currEventId;
@@ -20,6 +20,7 @@
         $scope.flaskUsDetails3=[];
         $scope.editContent=false;
         $scope.content={infoTitle:"",infoDesc:""};
+        var baseImagePath = SERVER.hostName+"c/document_library/get_file";
 
         $scope.infoTypeCategoryId=103;
         $scope.show = function () {
@@ -121,12 +122,51 @@
             $scope.isImageSelectedToUpload = false;
             $scope.selectedImageURIToUpload = '';
         }
+        $scope.uploadFileToServer = function (fileURL, eventId,eventDetailId) {
+            $rootScope.$broadcast('loading:show');
+            var options = {};
+            options.fileKey = "file";
+            var params = {};
+            params.eventId = eventId;
+            params.eventDetailId=eventDetailId;
+            var authdata = $cookies.get("authData");
+            options.params = params;
+            var headers = {};
+            headers.Authorization = 'Basic ' + authdata;
+            options.headers = headers;
+            $cordovaFileTransfer.upload(encodeURI(SERVER.url + '/flask-rest-events-portlet.event/upload-detail-image'), fileURL, options)
+                .then(function (r) {
+                    $rootScope.$broadcast('loading:hide')
+                    $scope.reSetSelectedImageURIToUpload();
+                    $scope.downloadProgress = 0;
+                    var data = $.parseJSON(r.response);
+                    var eventDetailId = data.eventDetailId;
+                    var imageUUID = data.imageUUID;
+                    var imageGroupId = data.imageGroupId;
+                    $scope.setEventDetailImageUrl(eventDetailId, imageUUID, imageGroupId);
+                }, function (error) {
+                    $scope.reSetSelectedImageURIToUpload();
+                    $rootScope.$broadcast('loading:hide')
+                    alert("An error has occurred: Code = " + error.code);
+                    console.log("upload error source " + error.source);
+                    console.log("upload error target " + error.target);
+                }, function (progress) {
+                    //                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
+                });
+        }
+        $scope.setEventDetailUrl = function (eventDetailId, imageUUID, imageGroupId) {
+            $scope.eventDetailImageURL = baseImagePath + "?uuid=" + imageUUID + "&groupId=" + imageGroupId;
+
+
+            $scope.EventDetailImageUrl = encodeURI($scope.tailgateLogoUrl);
+        }
 
         $scope.addContent=function(content,index) {
             if (content.eventDetailId <= 0 || content.eventDetailId == undefined) {
                 EventsService.addContentDuringEvent(content.infoTitle, content.infoDesc, $scope.currEventId,$scope.infoTypeCategoryId,$scope.infoTypeId).then(function (response) {
                     if(response.data.eventDetailId) {
                         $scope.flaskUsDetails.push(response.data);
+                        $scope.uploadFileToServer($scope.selectedImageURIToUpload,response.data.eventId,response.data.eventDetailId);
                         $scope.editContent = false;
                     }else{
 
