@@ -167,8 +167,8 @@
                                         <ion-slide-box delegate-handle="Flask-Detail" show-pager='false' does-continue="true">
                                             <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
                                                 <div class="form-group"><label class="control-label" for="Descriptionss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask Us</b></div></label>
-                                                    <div>
-                                                        <img class="full-image" src="/img/resources/traffic.jpg"style="height: 100px;width:252px">
+                                                    <div ng-if="flaskUsDetail.imageUrl">
+                                                        <img class="full-image" src={{flaskUsDetail.imageUrl}} style="height: 100px;width:252px">
                                                     </div>
 
                                                     <div class="form-group"style="padding-top:20px"><label class="control-label" for="Descriptions"><div  style="width: 90%;padding-left:85px;text-align: start"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>
@@ -266,8 +266,8 @@
                                     <ion-slide-box delegate-handle="Flask-Detail" show-pager='false' does-continue="true">
                                         <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
                                             <div class="form-group"><label class="control-label" for="Descriptionss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask Us</b></div></label>
-                                                <div>
-                                                    <img class="full-image" src="/img/resources/traffic.jpg"style="height: 100px;width:252px">
+                                                <div ng-if="flaskUsDetail.imageUrl">
+                                                    <img class="full-image" src={{flaskUsDetail.imageUrl}} style="height: 100px;width:252px">
                                                 </div>
 
                                                 <div class="form-group"style="padding-top:20px"><label class="control-label" for="Descriptions"><div  style="width: 90%;padding-left:85px;text-align: start"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>
@@ -401,8 +401,8 @@
                                     <ion-slide-box delegate-handle="Flask-Detail" show-pager='false' does-continue="true">
                                         <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
                                             <div class="form-group"><label class="control-label" for="Descriptionssss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask Us</b></div></label>
-                                                <div>
-                                                    <img class="full-image" src="/img/resources/traffic.jpg"style="height: 100px;width:252px">
+                                                <div ng-if="flaskUsDetail.imageUrl">
+                                                    <img class="full-image" src={{flaskUsDetail.imageUrl}} style="height: 100px;width:252px">
                                                 </div>
 
                                                 <div class="form-group"style="padding-top:20px"><label class="control-label" for="Descriptions"><div  style="width: 90%;padding-left:85px;text-align: start;font-weight: 300"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>

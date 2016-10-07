@@ -43,8 +43,8 @@
                         <p>{{ data.infoDesc}}</p>
                     </div>
 
-                    <div class="item item-body">
-                        <img class="full-image" src={{eventDetailImageURL}} style="height: 225px">
+                    <div class="item item-body" ng-if="data.imageUrl">
+                        <img class="full-image" src={{data.imageUrl}} style="height: 225px">
                     </div>
                     <!-- <a class="row-no-padding" style="text-decoration: none">
                          &lt;!&ndash;href="#/app/my_friendDetail/{{data.userId}}"&ndash;&gt;
@@ -92,7 +92,7 @@
                 <a class="item text-center" href=""ng-click="show()">
                     Tap to add  picture
                 </a>
-            </div>
+
             <div class="padding" align="center">
                 <button type="submit" nav-clear class="button button-block button-positive sign_in_button" >
                     Save
@@ -100,6 +100,7 @@
                 <a nav-clear class="button button-block button-positive sign_in_button" ng-click="cancelEdit()">
                     Cancel
                 </a>
+            </div>
             </div>
             </div>
         </form>
