@@ -9,14 +9,14 @@
     function mytailgatelocationCtrl($scope, $state, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi) {
         $scope.myTailgaters = [];
         var tailGateId = $cookies.get('currtailGateId');
-        $scope.taligateMarkers = angular.fromJson($cookies.get('currtailGateMakers'));
+        $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
         $scope.latitude = 43.4651;
         $scope.longitude = -80.5223;
 
-        if ($scope.taligateMarkers==undefined || $scope.taligateMarkers) {
+        if ($scope.taligateMarkers==undefined || $scope.taligateMarkers.latitude == undefined) {
             $scope.map ={
                     center: {
                         latitude: $scope.latitude,
@@ -38,7 +38,7 @@
                             },
                             zoom: 19,
                             markers: [{  
-                                coords: { latitude: currlatitude, longitude: currlongitude },
+                                coords: { 'latitude': currlatitude, 'longitude': currlongitude},
                                 id: 0 
                             }]
                         }

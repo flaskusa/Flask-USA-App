@@ -24,8 +24,17 @@
         $scope.startDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
         $scope.eventTypeIds = '';
         $scope.searchString = 'a';
-        $scope.latitude = '42.34';
-        $scope.longitude = '-83.0456';
+        $scope.showSavedMarker = false;
+
+        $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
+        if ($scope.taligateMarkers==undefined || $scope.taligateMarkers.latitude == undefined) {
+            $scope.latitude = '42.34';
+            $scope.longitude = '-83.0456';
+        } else{
+            $scope.latitude = $scope.taligateMarkers.latitude;
+            $scope.longitude = $scope.taligateMarkers.longitude
+             $scope.showSavedMarker = true;
+        }
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
         $scope.tailgateSupplyList = [];
@@ -55,7 +64,7 @@
         getMySupplyList();
 
         $scope.goBack = function () {
-            $state.go("app.my_tailgateDetails.my_tailgate_event_details", { 'tailgateId': tailgateId });
+            $state.go("app.my_tailgate");
         }
         var tailgateId = $cookies.get("currtailGateId");
         $scope.initialize = function () {
@@ -125,14 +134,15 @@
                     }
                 }
             });
+
         }
         $scope.windowOptions = {
             show: true
         };
-        function currMarker(loc) {
+        $scope.currMarker = function(loc) {
             var markerData = {};
             console.log(loc, $scope.map.markers[0].coords);
-            markerData.tailgateId = newtailGateId;
+            markerData.tailgateId = tailgateId;
             markerData.latitude = $scope.map.markers[0].coords.latitude;
             markerData.longitude = $scope.map.markers[0].coords.longitude;
             markerData.name = loc.name;
@@ -145,7 +155,7 @@
         }
         //call on marker click
         $scope.onClick = function (data) {
-            $scope.loc = {};
+            $scope.loc = {'name':'','description':''};
             var customTemplate =
                 '<form><div class="list">'
                 + '        <label class="item item-input item-floating-label">'
@@ -157,7 +167,7 @@
                 + '        <input type="text" placeholder="Description" ng-model="loc.description">'
                 + '       </label>                 '
                 + '    </div>'
-                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="currMarker($scope.loc);">'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="currMarker(loc);">'
                 + 'Save'
                 + '</button>'
                 + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="clearMArkersOnMap();" >'
@@ -166,7 +176,7 @@
                 + ' </div>'
                 + '</form>';
 
-            var locationPopup = $ionicPopup.show({
+            $scope.locationPopup = $ionicPopup.show({
                 template: customTemplate,
                 title: 'Enter Location Details',
                 scope: $scope,
@@ -188,13 +198,14 @@
                         text: '<b>Cancel</b>',
                         //type: 'button-positive',
                         onTap: function (e) {
-                            locationPopup.close();
+                            $scope.locationPopup.close();
                         }
                     }]
             });
         };
         $scope.clearMArkersOnMap = function () {
             $scope.map.markers.pop();
+            $scope.locationPopup.close();
         }
         getallEventnames();
 
@@ -457,6 +468,7 @@
             tailgatedata.eventId = angular.isString(tailgatedata.eventId) ? parseInt(tailgatedata.eventId) : tailgatedata.eventId;
             if (tailgatedata.tailgateId && tailgatedata.tailgateId > 0) {
                 TailgateService.updateTailgateInfo(tailgatedata).then(function (respdata) {
+
                     $cookies.putObject('newtailgatedata', respData.data);
                     if ($scope.isImageSelectedToUpload) {
                         $scope.uploadFileToServer($scope.selectedImageURIToUpload, tailgatedata.tailgateId);
@@ -468,15 +480,14 @@
                     if ($scope.isImageSelectedToUpload) {
                         $scope.uploadFileToServer($scope.selectedImageURIToUpload, respData.data.tailgateId);
                     }
-                    $cookies.put('newtailgateId', respData.data.tailgateId);
+                    tailgateId = respData.data.tailgateId;
+//                    $cookies.put('newtailgateId', respData.data.tailgateId);
                     $cookies.putObject('newtailgatedata', respData.data);
-                    $scope.newtailgatesId = respData.data.tailgateId;
-                    $cookies.put("")
                     $scope.enableTab = {
                         condition: true
                     };
-                    newtailGateId = $cookies.get('newtailgateId');
-                    getTailgaters(newtailGateId);
+//                    newtailGateId = $cookies.get('newtailgateId');
+                    getTailgaters(tailgateId);
                 });
             }
         }
@@ -566,11 +577,7 @@
         $scope.active = true; // define the tab in add group and add friend section
         $scope.active1 = true;
         $scope.myFriends = [];
-        // $ionicModal.fromTemplateUrl('templates/modal.html', {
-        //     scope: $scope
-        // }).then(function (modal) {
-        //     $scope.modal = modal;
-        // });
+
 
         function getTailgaters(newtailgateId) {
             TailgateService.getMyTailgateUsers(newtailgateId).then(function (respData) {
