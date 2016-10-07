@@ -103,8 +103,7 @@
         }
         $timeout(function () {
             $ionicSlideBoxDelegate.$getByHandle('advertisement-viewer').update();
-            $ionicScrollDelegate.$getByHandle('advertisement-viewer').resize();
-        }, 5000);
+                    }, 5000);
 
 
 

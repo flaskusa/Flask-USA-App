@@ -3,12 +3,13 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate','$cordovaInAppBrowser'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate','$cordovaInAppBrowser','SERVER'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate,$cordovaInAppBrowser) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate,$cordovaInAppBrowser,SERVER) {
         /* jshint validthis: true */
         var self = this;
+        var baseImagePath = SERVER.hostName+"c/document_library/get_file";
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15, control: {} };
         $scope.map.events = [];
         $scope.map.events["click"] = function () {
@@ -574,9 +575,12 @@
         $scope.setMarkers = function () {
             if (!$scope.isMapMarkersSet) {
                 var tempObject = {};
+                var ImgObj=[];
                 $scope.flaskUsDetails = [];
                 angular.forEach($scope.eventDetails, function (value, index) {
                     tempObject = {};
+                    ImgObj=[]
+                    ImgObj = angular.fromJson(value.DetailImages);
                     value = angular.fromJson(value);
                     tempObject = angular.fromJson(value.Detail);
                     tempObject.id = index;
@@ -593,6 +597,9 @@
                         } else if ("Traffic" == tempObject.infoTypeCategoryName) {
                             $scope.trafficDetails = tempObject;
                         } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
+                            if(ImgObj.length!=0){
+                                tempObject.imageUrl=baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                            }
                             $scope.flaskUsDetails.push(tempObject);
                         }
                         else if ("Nightlife" == tempObject.infoTypeCategoryName) {

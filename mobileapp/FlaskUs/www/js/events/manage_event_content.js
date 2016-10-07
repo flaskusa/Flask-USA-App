@@ -7,7 +7,8 @@
 
     /* @ngInject */
     function ManageEventCtrl($scope, $stateParams, $state, EventsService, SERVER,$ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService,$rootScope,$cookies) {
-        $scope.eventDetails = $stateParams.eventDetails.Details;
+        $scope.eventDetails = [];
+        var test=$stateParams.eventDetails
         $scope.eventName=$stateParams.currEventName;
         $scope.currEventId=$stateParams.currEventId;
         $scope.EventTypeInfo=$stateParams.infoType;
@@ -59,7 +60,7 @@
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false,
-                correctOrientation: true,
+                correctOrientation: true
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
@@ -203,29 +204,45 @@
             });
 
         }
+        EventsService.getAllEventDetailWithImage($scope.currEventId).then(function(response){
+            $scope.eventDetails=response.Details;
+            $scope.getFlaskUsDetail();
+        });
 
         $scope.getFlaskUsDetail = function () {
             var tempObject = {};
+            var ImgObj=[]
             $scope.flaskUsDetails1=[];
             $scope.flaskUsDetails2=[];
             $scope.flaskUsDetails3=[];
             angular.forEach($scope.eventDetails, function (value, index) {
                 tempObject = {};
-                value = angular.fromJson(value);
+                ImgObj=[]
+                ImgObj = angular.fromJson(value.DetailImages);
                 tempObject = angular.fromJson(value.Detail);
                 tempObject.id = index;
                 if ($scope.duringEventInfo == tempObject.infoTypeName) {
                     if ("Flask Us" == tempObject.infoTypeCategoryName) {
+                        if(ImgObj.length!=0){
+                            tempObject.imageUrl=baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                        }
                         $scope.flaskUsDetails1.push(tempObject);
+
                     }
                 }
                 else if($scope.preEventInfo==tempObject.infoTypeName){
                     if ("Flask Us" == tempObject.infoTypeCategoryName) {
+                        if(ImgObj.DetailImages.length!=0){
+                            tempObject.imageUrl=baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                        }
                         $scope.flaskUsDetails2.push(tempObject);
                     }
                 }
                 else if($scope.postEventInfo==tempObject.infoTypeName){
                     if ("Flask Us" == tempObject.infoTypeCategoryName) {
+                        if(ImgObj.DetailImages.length!=0){
+                            tempObject.imageUrl=baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                        }
                         $scope.flaskUsDetails3.push(tempObject);
                     }
                 }
@@ -251,7 +268,7 @@
 
         }
 
-        $scope.getFlaskUsDetail();
+
 
     }
 })();

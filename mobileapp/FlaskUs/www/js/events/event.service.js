@@ -19,6 +19,7 @@
         var deleteEventDetailUrl = "/flask-rest-events-portlet.event/delete-event-detail";
         var getAllVenuesURL = "flask-rest-events-portlet.venue/get-all-venues";
         var getVenuesByIdURL = "flask-rest-events-portlet.venue/get-venue";
+        var getAllEventDetailWithImageUrl="/flask-rest-events-portlet.event/get-event-details-with-images";
         var googleMapURL = SERVER.googleApi;
 
         var eventServices = {
@@ -30,6 +31,7 @@
             addContentDuringEvent:addContentDuringEvent,
             updateEventDetailDuringEvent:updateEventDetailDuringEvent,
             deleteEventDetailById: deleteEventDetailById,
+            getAllEventDetailWithImage:getAllEventDetailWithImage,
             getAllVenues: getAllVenues
         }
         function getAllEvents(eventIds, sDate, eDate, sString, lat, long) {
@@ -138,6 +140,17 @@
         // Get All venues for event details
         function getAllVenues() {
             return $http.get(SERVER.url + getAllVenuesURL)
+                .then(function success(resp) {
+                    return resp.data;
+                },
+                function failure(resp) {
+                    console.log("Error Message");
+                });
+        }
+        //get all event detail with image
+        function getAllEventDetailWithImage(eventId) {
+            return $http.get(SERVER.url + getAllEventDetailWithImageUrl,{
+                params: {eventId:eventId}})
                 .then(function success(resp) {
                     return resp.data;
                 },
