@@ -207,6 +207,13 @@ public class EventServiceClp implements EventService {
 		_methodParameterTypes28 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName29 = "uploadDetailImage";
+
+		_methodParameterTypes29 = new String[] {
+				"java.io.File", "long", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -1127,6 +1134,40 @@ public class EventServiceClp implements EventService {
 		return (java.util.List<com.liferay.portal.kernel.repository.model.FileEntry>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public com.rumbasolutions.flask.model.EventDetailImage uploadDetailImage(
+		java.io.File file, long eventId, long eventDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName29,
+					_methodParameterTypes29,
+					new Object[] {
+						ClpSerializer.translateInput(file),
+						
+					eventId,
+						
+					eventDetailId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.EventDetailImage)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1184,4 +1225,6 @@ public class EventServiceClp implements EventService {
 	private String[] _methodParameterTypes27;
 	private String _methodName28;
 	private String[] _methodParameterTypes28;
+	private String _methodName29;
+	private String[] _methodParameterTypes29;
 }

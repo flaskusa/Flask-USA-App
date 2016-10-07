@@ -249,6 +249,14 @@ public class EventServiceUtil {
 		return getService().getEventLogos(serviceContext);
 	}
 
+	public static com.rumbasolutions.flask.model.EventDetailImage uploadDetailImage(
+		java.io.File file, long eventId, long eventDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .uploadDetailImage(file, eventId, eventDetailId,
+			serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

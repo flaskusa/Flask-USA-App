@@ -207,6 +207,13 @@ public class EventServiceClpInvoker {
 		_methodParameterTypes112 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName113 = "uploadDetailImage";
+
+		_methodParameterTypes113 = new String[] {
+				"java.io.File", "long", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -439,6 +446,14 @@ public class EventServiceClpInvoker {
 			return EventServiceUtil.getEventLogos((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
+		if (_methodName113.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes113, parameterTypes)) {
+			return EventServiceUtil.uploadDetailImage((java.io.File)arguments[0],
+				((Long)arguments[1]).longValue(),
+				((Long)arguments[2]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[3]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -498,4 +513,6 @@ public class EventServiceClpInvoker {
 	private String[] _methodParameterTypes110;
 	private String _methodName112;
 	private String[] _methodParameterTypes112;
+	private String _methodName113;
+	private String[] _methodParameterTypes113;
 }

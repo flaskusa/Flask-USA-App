@@ -14,6 +14,10 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -47,6 +51,7 @@ import com.rumbasolutions.flask.model.UserEvent;
 import com.rumbasolutions.flask.service.EventDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventLocalServiceUtil;
+import com.rumbasolutions.flask.service.EventServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeCategoryServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeServiceUtil;
 import com.rumbasolutions.flask.service.UserEventLocalServiceUtil;
@@ -597,7 +602,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 					LOGGER.error("Exception in calling getFileEntryByUuidAndGroupId: " + ex.getMessage());
 					continue;
 				}
-				FlaskUtil.setGuestViewPermission( fileEntry);
+				FlaskUtil.setGuestViewPermission(fileEntry);
 				DLFolder dlFolder =fileEntry.getFolder(); 
 				setFolderPermissionRecursive(dlFolder);
 			}		
@@ -639,5 +644,26 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			LOGGER.error("Exception in getEventLogos " + e.getMessage());
 		}
 		return eventLogos;
+	}
+	
+	@Override
+	public EventDetailImage uploadDetailImage(File file, long eventId, long eventDetailId,  ServiceContext serviceContext){
+		EventDetailImage detailImage = null;
+		try {
+			Path source = Paths.get(file.getName());
+			String mimeType = Files.probeContentType(source);
+			long repositoryId = FlaskUtil.getFlaskRepositoryId();
+			long userId = serviceContext.getUserId();
+			String name = eventDetailId +"_"+ file.getName();
+			Folder folder = FlaskUtil.getOrCreateFolder(_eventRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
+			String eventFolderName = folder.getName()+"-"+eventId;
+			Folder eventFolder = FlaskUtil.getOrCreateFolder(eventFolderName, folder.getFolderId(), folder.getRepositoryId(), userId, serviceContext);
+			FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), eventFolder.getRepositoryId(), eventFolder.getFolderId(), name, mimeType, name, name, "", file, serviceContext);
+			FlaskUtil.setGuestViewPermission(fileEntry);
+			detailImage = EventServiceUtil.addEventDetailImage(eventDetailId, name, name, fileEntry.getUuid(), fileEntry.getGroupId(), serviceContext);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return detailImage;
 	}
 }

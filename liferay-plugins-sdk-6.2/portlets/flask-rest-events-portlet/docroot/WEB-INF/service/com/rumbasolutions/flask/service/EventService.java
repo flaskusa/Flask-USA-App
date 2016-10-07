@@ -197,4 +197,8 @@ public interface EventService extends BaseService, InvokableService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portal.kernel.repository.model.FileEntry> getEventLogos(
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public com.rumbasolutions.flask.model.EventDetailImage uploadDetailImage(
+		java.io.File file, long eventId, long eventDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

@@ -261,6 +261,14 @@ public class EventServiceWrapper implements EventService,
 		return _eventService.getEventLogos(serviceContext);
 	}
 
+	@Override
+	public com.rumbasolutions.flask.model.EventDetailImage uploadDetailImage(
+		java.io.File file, long eventId, long eventDetailId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _eventService.uploadDetailImage(file, eventId, eventDetailId,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */
