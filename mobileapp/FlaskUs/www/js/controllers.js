@@ -13,8 +13,8 @@ angular.module('flaskApp.controllers', [])
         console.log($cookies.getObject('CurrentUser'));
         $state.go("app.events");
         $timeout(function(){
-            SERVER.url = "http://www.flaskus.com/";
-            SERVER.hostName = "http://www.flaskus.com/api/jsonws/";
+            SERVER.url = "http://www.flaskus.com/api/jsonws/";
+            SERVER.hostName = "http://www.flaskus.com/";
         },2000) 
         
     }
