@@ -5,7 +5,7 @@
         "hostName": "http://www.flaskus.com/",
         "url": "http://www.flaskus.com/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
-        "companyId":20154
+        "companyId":20155
     })
     flaskAppConfig.config(function ($provide) {
             $provide.decorator("$exceptionHandler", function ($delegate, $injector) {

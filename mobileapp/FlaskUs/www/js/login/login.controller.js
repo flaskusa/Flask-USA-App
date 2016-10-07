@@ -59,10 +59,16 @@
                 }
             }
         }
-        $scope.switchServer = function(url,testServe) {
+        $scope.switchServer = function(url) {
             $scope.testServe=!$scope.testServe;
             SERVER.hostName = url;
             SERVER.url = url+"api/jsonws/";
+            if($scope.testServe == true) {
+                 SERVER.companyId = 20154;
+            } else {
+                SERVER.companyId = 20155;
+            }
+            
         }
     };
 })();

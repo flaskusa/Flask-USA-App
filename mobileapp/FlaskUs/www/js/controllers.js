@@ -15,6 +15,7 @@ angular.module('flaskApp.controllers', [])
         $timeout(function(){
             SERVER.url = "http://www.flaskus.com/api/jsonws/";
             SERVER.hostName = "http://www.flaskus.com/";
+            SERVER.companyId = 20155;
         },2000) 
         
     }
