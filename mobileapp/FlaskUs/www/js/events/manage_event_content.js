@@ -143,7 +143,7 @@
                     var eventDetailId = data.eventDetailId;
                     var imageUUID = data.imageUUID;
                     var imageGroupId = data.imageGroupId;
-                    $scope.setEventDetailImageUrl(eventDetailId, imageUUID, imageGroupId);
+                    $scope.setEventDetailUrl(eventDetailId, imageUUID, imageGroupId);
                 }, function (error) {
                     $scope.reSetSelectedImageURIToUpload();
                     $rootScope.$broadcast('loading:hide')
