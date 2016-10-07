@@ -85,7 +85,7 @@
                                             templateParameter="map.window">
                                 <div>Hello</div>
                             </ui-gmap-window>
-                            <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" click="onClick">
+                            <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" click="onClick(m)">
                             </ui-gmap-marker>
                         </ui-gmap-google-map>
                     </div>

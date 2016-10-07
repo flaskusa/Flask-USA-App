@@ -27,13 +27,13 @@
         $scope.showSavedMarker = false;
 
         $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
-        if ($scope.taligateMarkers==undefined || $scope.taligateMarkers.latitude == undefined) {
+        if ($scope.taligateMarkers == undefined || $scope.taligateMarkers.latitude == undefined) {
             $scope.latitude = '42.34';
             $scope.longitude = '-83.0456';
-        } else{
+        } else {
             $scope.latitude = $scope.taligateMarkers.latitude;
             $scope.longitude = $scope.taligateMarkers.longitude
-             $scope.showSavedMarker = true;
+            $scope.showSavedMarker = true;
         }
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
@@ -59,7 +59,7 @@
         $scope.hideSupplyItem = false;
         $scope.selectedSupplyListItems = [];
         $scope.allMyTailgateItems = [];
-        $scope.newUpdate = {'amountToPay':'','venmoAccountId':''};
+        $scope.newUpdate = { 'amountToPay': '', 'venmoAccountId': '' };
 
         getMySupplyList();
 
@@ -134,12 +134,26 @@
                     }
                 }
             });
+            if ($scope.showSavedMarker) {
+                var marker = {
+                    id: 2,
+                    coords: {
+                        latitude: currlatitude,
+                        longitude: currlongitude
+                    },
+                    showWindow: true,
+                    name: $scope.taligateMarkers.name,
+                    description: $scope.taligateMarkers.description
+                }
+
+                $scope.map.markers.push(marker);
+            }
 
         }
         $scope.windowOptions = {
             show: true
         };
-        $scope.currMarker = function(loc) {
+        $scope.currMarker = function (loc) {
             var markerData = {};
             console.log(loc, $scope.map.markers[0].coords);
             markerData.tailgateId = tailgateId;
@@ -154,8 +168,8 @@
             });
         }
         //call on marker click
-        $scope.onClick = function (data) {
-            $scope.loc = {'name':'','description':''};
+        $scope.onClick = function (marker, eventName, model) {
+            $scope.loc = { 'name': marker.name, 'description': marker.description };
             var customTemplate =
                 '<form><div class="list">'
                 + '        <label class="item item-input item-floating-label">'
@@ -180,27 +194,12 @@
                 template: customTemplate,
                 title: 'Enter Location Details',
                 scope: $scope,
-                buttons: [
-                    //{
-                    //  text: '<b>Save</b>',
-                    //  type: 'button-positive',
-                    //  onTap: function(e) {
-
-                    //   }
-                    //  },{
-                    //    text: '<b>Remove</b>',
-                    //    //type: 'button-positive',
-                    //    onTap: function(e) {
-
-                    //     }
-                    //   },
-                    {
-                        text: '<b>Cancel</b>',
-                        //type: 'button-positive',
-                        onTap: function (e) {
-                            $scope.locationPopup.close();
-                        }
-                    }]
+                buttons: [{
+                    text: '<b>Cancel</b>',
+                    onTap: function (e) {
+                        $scope.locationPopup.close();
+                    }
+                }]
             });
         };
         $scope.clearMArkersOnMap = function () {
@@ -273,7 +272,7 @@
                 amountToPay: tailgateDetails.amountToPay,
                 tailgateId: tailgateDetails.tailgateId
             }
-            $scope.newUpdate = {'amountToPay':tailgateDetails.amountToPay,'venmoAccountId':tailgateDetails.venmoAccountId};
+            $scope.newUpdate = { 'amountToPay': tailgateDetails.amountToPay, 'venmoAccountId': tailgateDetails.venmoAccountId };
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
             $scope.selectedtime1 = $filter('date')(tailgateDetails.startTime, 'hh:mm a');
             $scope.selectedtime2 = $filter('date')(tailgateDetails.endTime, 'hh:mm a');
@@ -481,12 +480,12 @@
                         $scope.uploadFileToServer($scope.selectedImageURIToUpload, respData.data.tailgateId);
                     }
                     tailgateId = respData.data.tailgateId;
-//                    $cookies.put('newtailgateId', respData.data.tailgateId);
+                    //                    $cookies.put('newtailgateId', respData.data.tailgateId);
                     $cookies.putObject('newtailgatedata', respData.data);
                     $scope.enableTab = {
                         condition: true
                     };
-//                    newtailGateId = $cookies.get('newtailgateId');
+                    //                    newtailGateId = $cookies.get('newtailgateId');
                     getTailgaters(tailgateId);
                 });
             }
@@ -729,13 +728,13 @@
             $("#FlaskUsListdiv").slideToggle("slow", function () {
                 $ionicScrollDelegate.resize();
                 if ($scope.hideItem && supplyItem.is(":visible") === false) {
-                $scope.hideSupplyItem = !$scope.hideSupplyItem;
-                supplyItem.slideToggle("slow", function () {
-                     $ionicScrollDelegate.resize();
-                });
-            }
+                    $scope.hideSupplyItem = !$scope.hideSupplyItem;
+                    supplyItem.slideToggle("slow", function () {
+                        $ionicScrollDelegate.resize();
+                    });
+                }
             });
-            
+
         }
         $scope.toggleSupplyItem = function () {
             $scope.hideSupplyItem = !$scope.hideSupplyItem;
