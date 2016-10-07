@@ -1712,12 +1712,19 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 }
 
 .messageList div{
-    margin-top: -13%;
+    margin-top: -21%;
     margin-left: 14%;
 }
 
 .messageList img{
     width:11%;
+}
+
+.messageList p.profile_name{
+    margin-top: -1%;
+    font-size: 9px;
+    margin-left: -11px;
+    color:#F28604;
 }
 
 .msg_list{
