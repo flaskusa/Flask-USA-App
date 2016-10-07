@@ -720,16 +720,20 @@
             var supplyItem = $("#supplyItemDiv");
             $scope.hideItem = !$scope.hideItem;
             $("#FlaskUsListdiv").slideToggle("slow", function () {
-            });
-            if ($scope.hideItem && supplyItem.is(":visible") === false) {
+                $ionicScrollDelegate.resize();
+                if ($scope.hideItem && supplyItem.is(":visible") === false) {
                 $scope.hideSupplyItem = !$scope.hideSupplyItem;
                 supplyItem.slideToggle("slow", function () {
+                     $ionicScrollDelegate.resize();
                 });
             }
+            });
+            
         }
         $scope.toggleSupplyItem = function () {
             $scope.hideSupplyItem = !$scope.hideSupplyItem;
             $("#supplyItemDiv").slideToggle("slow", function () {
+                $ionicScrollDelegate.resize();
             });
             // if ($scope.hideSupplyItem == true) {
             //     $scope.hideItem = !$scope.hideItem;
