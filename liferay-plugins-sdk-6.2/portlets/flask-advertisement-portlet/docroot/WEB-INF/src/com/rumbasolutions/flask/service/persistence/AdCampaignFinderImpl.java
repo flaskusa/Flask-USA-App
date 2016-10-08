@@ -85,7 +85,7 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 			session = openSession();
 			StringBuilder sb = new StringBuilder();
 			String sqlSelect = "select distinct fac.campaignId, fac.campaignName, customerName, addrLine1,"
-								+ " addrLine2, city, region.regionCode 'State', zipCode, "
+								+ " addrLine2, city, Region.regionCode 'State', zipCode, "
 								+ " email, websiteURL 'url', businessPhoneNumber 'phone', "					
 								+ " fac.imageTitle 'fullScreenTitle',"
 								+ " fac.imageDesc 'fullScreenDesc', fac.imageGroupId 'fullScreenGroupId', "
@@ -97,7 +97,7 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 					+ " inner join flaskevents_Event fe on fe.eventId = fce.eventId "
 					+ " inner join flaskads_CampaignImage fci on fci.campaignId = fac.campaignId"
 					+ "	inner join flaskads_AdCustomer on flaskads_AdCustomer.customerId = fac.customerId"
-					+ " inner join region on region.regionId = flaskads_AdCustomer.stateId"; 
+					+ " inner join Region on Region.regionId = flaskads_AdCustomer.stateId"; 
 			
 			String sqlWhere = " where fce.eventId in ( " + eventList + ")" ;
 			
