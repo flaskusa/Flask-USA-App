@@ -1,5 +1,5 @@
-<div ng-controller="AdvertisementCtrl">
-<ion-slide-box delegate-handle="advertisement-viewer" auto-play="true" slide-interval="7000" does-continue="true"style="width: 104%">
+<div ng-controller="AdvertisementCtrl"cache-view="false" style="max-width:100vw">
+<ion-slide-box delegate-handle="advertisement-viewer"show-pager='false' auto-play="true" slide-interval="7000" does-continue="true">
     <ion-slide  ng-repeat="imageURL in ImageUrls" style="width: 100%">
         <img src={{imageURL}} class="footer-img "style="height: 60px;width: 100%" ng-click="showPopup($index)"/>
     </ion-slide>
