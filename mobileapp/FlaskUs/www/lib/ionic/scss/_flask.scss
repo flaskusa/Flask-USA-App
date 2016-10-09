@@ -2153,7 +2153,7 @@ i.choose_picture{
   float:right;
   color:#ff8c00;
   font-weight: 600;
-  font-size: 18px;
+  font-size: 20px;
 }
 .popupIcon{
   font-size: 18px;
@@ -2264,4 +2264,10 @@ label.remember1.item.item-checkbox.ng-valid.ng-not-empty{
     padding-bottom: 1px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
     height:inherit;
+}
+.marginLeftSupplyText{
+  margin-left:40px;
+}
+.paddingTOpSupply{
+  margin-top: 1px;
 }
