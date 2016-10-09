@@ -3,8 +3,8 @@
     angular.module('flaskApp')
         .controller('AdvertisementCtrl', AdvertisementCtrl);
 
-    AdvertisementCtrl.$inject = ['$scope', '$stateParams', '$state', 'SERVER', '$ionicPopup', '$timeout', 'AdvertisementService', '$flaskUtil', '$ionicSlideBoxDelegate','$cordovaInAppBrowser','$ionicScrollDelegate','$cookies'];
-    function AdvertisementCtrl($scope, $stateParams, $state, SERVER, $ionicPopup, $timeout, AdvertisementService, $flaskUtil, $ionicSlideBoxDelegate,$cordovaInAppBrowser,$ionicScrollDelegate,$cookies) {
+    AdvertisementCtrl.$inject = ['$scope', '$stateParams', '$state', 'SERVER', '$ionicPopup', '$timeout', 'AdvertisementService', '$flaskUtil', '$ionicSlideBoxDelegate','$cordovaInAppBrowser','$ionicScrollDelegate','$cookies','IonicClosePopupService'];
+    function AdvertisementCtrl($scope, $stateParams, $state, SERVER, $ionicPopup, $timeout, AdvertisementService, $flaskUtil, $ionicSlideBoxDelegate,$cordovaInAppBrowser,$ionicScrollDelegate,$cookies,IonicClosePopupService) {
         $scope.imageDetail = [];
         // var baseURL = SERVER.hostName;
         var baseImagePath = SERVER.hostName+"c/document_library/get_file";
@@ -22,11 +22,14 @@
                 templateUrl: 'templates/advertisementPopup.html',
                 scope: $scope
             });
+            IonicClosePopupService.register($scope.myPopup);
+
             $scope.popupClose = function () {
                 $scope.myPopup.close();
             }
 
         };
+
 
         $scope.initialize=function(allEventId) {
             AdvertisementService.getAllAdvertisementDetail(allEventId).then(function (response) {
@@ -37,19 +40,45 @@
                         var imageURL = baseImagePath + "?uuid=" + vlaue.imageUUID + "&groupId=" + vlaue.imageGroupId;
                         $scope.ImageUrls.push(imageURL);
 
+
                     })
+                    showAdv();
 
                 } else {
                     $flaskUtil.alert("failed to load");
                 }
             });
         }
+       /* $scope.checkForCookiesChanges=function(allEventId){
+            var copyAllEventId=angular.copy(allEventId);
+            $scope.myTimeOut2=$timeout(function(){
+                $scope.counter++
+                var allEventIds = $cookies.get('AllEventId');
+                if(allEventIds!=angular.copy(copyAllEventId) && copyAllEventId!==undefined){
+                    $scope.changeDetected=true;
+                    $scope.initialize(allEventIds);
+                }
+
+                $scope.checkForCookiesChanges(copyAllEventId);
+                if($scope.counter==4){
+                    if($scope.changeDetected!=true) {
+                        $scope.initialize(allEventId);
+                    }
+                    $timeout.cancel($scope.myTimeOut2);
+                }else if($scope.changeDetected==true){
+                    $timeout.cancel($scope.myTimeOut2);
+
+                }
+            },200);
+
+        }*/
         $scope.getAdvertisement=function() {
             var allEventId=$cookies.get('AllEventId');
             $scope.myTimeOut=$timeout(function(){
 
                 if(allEventId!=undefined){
                     $scope.initialize(allEventId);
+
 
                 }
                 $scope.getAdvertisement();
@@ -88,22 +117,28 @@
         $scope.createMapLink = function (address1) {
             var findUs = '';
             if ($scope.isMobile.Android()) {
-                findUs = 'http://maps.google.com/?q=' + address1;
+                findUs = 'http://maps.google.com/?saddr=Current%20Location&daddr=' + address1;
             }
             else if ($scope.isMobile.iOS()) {
-                findUs = 'http://maps.apple.com/?q=' + address1;
+                findUs = 'http://maps.apple.com/?saddr=Current%20Location&daddr=' + address1;
             }
             else if ($scope.isMobile.Windows()) {
                 findUs = 'maps:' + address1;
             }
             else {
-                findUs = 'https://www.google.com/maps/q?' + address1;
+                findUs = 'http://maps.google.com/?saddr=Current%20Location&daddr=' + address1;
             }
             return findUs;
         }
-        $timeout(function () {
-            $ionicSlideBoxDelegate.$getByHandle('advertisement-viewer').update();
-                    }, 5000);
+
+
+        $scope.$on ('$ionicView.beforeEnter',
+        ionic.trigger('resize', {target: window}));
+        function showAdv() {
+            $timeout(function () {
+                $ionicSlideBoxDelegate.$getByHandle('advertisement-viewer').update();
+            }, 4000);
+        }
 
 
 

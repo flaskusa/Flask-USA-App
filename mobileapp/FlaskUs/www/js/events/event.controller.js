@@ -12,6 +12,7 @@
         $scope.allEvents = [];
         $scope.localstorageData = [];
         $scope.get_geolocation_data ;
+        $scope.showAddv=false;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         var DEFAULT_ZIPCODE = 48226; /*Detroit Zip Code*/
         var currentDate = new Date();/*Today's Date*/
@@ -73,6 +74,7 @@
                     $scope.allEventId.push($scope.allEvent[i].eventId)
                 }
                 $cookies.put("AllEventId",$scope.allEventId);
+                $scope.showAddv=true;
                 if ($scope.allEvent.length == 0) {
                     $scope.Event_Error = true;
                 } else {

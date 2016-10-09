@@ -167,8 +167,10 @@
                 EventsService.addContentDuringEvent(content.infoTitle, content.infoDesc, $scope.currEventId,$scope.infoTypeCategoryId,$scope.infoTypeId).then(function (response) {
                     if(response.data.eventDetailId) {
                         $scope.flaskUsDetails.push(response.data);
-                        $scope.uploadFileToServer($scope.selectedImageURIToUpload,response.data.eventId,response.data.eventDetailId);
-                        $scope.editContent = false;
+                        if($scope.selectedImageURIToUpload!=undefined && $scope.selectedImageURIToUpload!='') {
+                            $scope.uploadFileToServer($scope.selectedImageURIToUpload, response.data.eventId, response.data.eventDetailId);
+                        }
+                            $scope.editContent = false;
                     }else{
 
                     }
@@ -204,11 +206,12 @@
             });
 
         }
-        EventsService.getAllEventDetailWithImage($scope.currEventId).then(function(response){
-            $scope.eventDetails=response.Details;
-            $scope.getFlaskUsDetail();
-        });
-
+        $scope.initialize=function() {
+            EventsService.getAllEventDetailWithImage($scope.currEventId).then(function (response) {
+                $scope.eventDetails = response.Details;
+                $scope.getFlaskUsDetail();
+            });
+        }
         $scope.getFlaskUsDetail = function () {
             var tempObject = {};
             var ImgObj=[]
@@ -267,6 +270,7 @@
 
 
         }
+        $scope.initialize();
 
 
 

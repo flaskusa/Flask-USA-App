@@ -615,6 +615,7 @@
                         }
                     }
                 })
+                $ionicSlideBoxDelegate.update();
                 $scope.isMapMarkersSet = true;
             }
         };
