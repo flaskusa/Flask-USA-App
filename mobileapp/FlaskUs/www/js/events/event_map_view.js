@@ -44,7 +44,7 @@
         var POST_EVENT = "Post-Event";
         $scope.infoTypeName = "";
         $scope.infoTypeCategoryName = "";
-        $scope.trafficDetails = {};
+        $scope.trafficDetails = [];
         $scope.flaskUsDetails = {};
         $scope.mapObject = {};
         $scope.selectedIndex = -1;
@@ -595,7 +595,7 @@
                                 $scope.barMarkers.push(tempObject);
                             }
                         } else if ("Traffic" == tempObject.infoTypeCategoryName) {
-                            $scope.trafficDetails = tempObject;
+                            $scope.trafficDetails.push(tempObject);
                         } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
                             if(ImgObj.length!=0){
                                 tempObject.imageUrl=baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;

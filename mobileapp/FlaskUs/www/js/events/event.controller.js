@@ -67,7 +67,8 @@
             get_event_list();
         }
 
-        function get_event_list(){
+        function get_event_list() {
+            getVenueName();
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 console.log(respData);
                 $scope.allEvent = respData.data.Events;
@@ -82,7 +83,7 @@
                 } else {
                     $scope.Event_Error = false;
                 }
-                getVenueName();
+                
             });
         }
 
@@ -102,10 +103,12 @@
 
             });
         }
-
               //Get venue name for event details
         $scope.getVenueNameForVenueId  = function (venueId) {
-            var venueCity = "Test"
+            var venueCity = ""
+            if ($scope.allVenues == undefined) {
+                return "";
+            }
             for (var i = 0; i < $scope.allVenues.length; i++) {
                 if( $scope.allVenues[i].venueId == venueId){
                     venueCity = $scope.allVenues[i].venueCity;
