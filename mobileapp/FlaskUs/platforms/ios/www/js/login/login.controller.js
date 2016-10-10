@@ -3,14 +3,30 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
         $scope.password = '';
+        $scope.testServe=false;
+        // SERVER.url = "http://www.flaskus.com/";
+        // SERVER.hostName = "http://www.flaskus.com/api/jsonws/";
+        $scope.checkTouch = function (enableChecked) {
+            if (enableChecked) {
+                $cordovaTouchID.checkSupport().then(function () {
+                    $cordovaTouchID.authenticate("You must authenticate").then(function () {
+                        alert("The authentication was successful");
+                    }, function (error) {
+                        console.log(JSON.stringify(error));
+                    });
+                }, function (error) {
+                console.log(JSON.stringify(error));
+             });
+           }
+        }
        
         $scope.doLogin = function (user) {
             LoginService.authenticateUser(user).then(function (respData) {
@@ -23,15 +39,37 @@
                 else {
                     $cookies.putObject('CurrentUser', respData);
                     var usercookie = $cookies.getObject('CurrentUser');
-                    console.log(usercookie);
                     $rootScope.userName = respData.data.firstName + respData.data.lastName;
                     $rootScope.userEmailId = respData.data.emailAddress;
                     $rootScope.show_login = true;
                     document.login_form.reset();
-                    $state.go("app.events");
+                    $state.go("app.user_navigation_menu");
                 }
             });
-       }
+        }
+
+        $scope.remembered = function (isChecked, user) { 
+            if (isChecked) {
+                if(!user.Email=="" && !user.password==""){
+                    $cookies.putObject('RememberUser', user);
+                    var rcookie = $cookies.getObject('RememberUser');
+                }
+                else {
+                    $ionicLoading.show({ template: 'Email and password should not be empty!', noBackdrop: false, duration: 2000 });
+                }
+            }
+        }
+        $scope.switchServer = function(url) {
+            $scope.testServe=!$scope.testServe;
+            SERVER.hostName = url;
+            SERVER.url = url+"api/jsonws/";
+            if($scope.testServe == true) {
+                 SERVER.companyId = 20154;
+            } else {
+                SERVER.companyId = 20155;
+            }
+            
+        }
     };
 })();
 

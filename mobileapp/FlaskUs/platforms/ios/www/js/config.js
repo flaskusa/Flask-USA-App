@@ -1,11 +1,11 @@
 ﻿(function () {
     var flaskAppConfig = angular.module('flaskApp');
-
-    flaskAppConfig.constant("SERVER", {
-        "hostName": "http://146.148.83.30/",
-        "url": "http://146.148.83.30/api/jsonws/",
+    var getMessageUrlSubString="/flask-social-portlet.flaskmessages";
+    flaskAppConfig.value("SERVER", {
+        "hostName": "http://www.flaskus.com/",
+        "url": "http://www.flaskus.com/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
-        "companyId":20154
+        "companyId":20155
     })
     flaskAppConfig.config(function ($provide) {
             $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
@@ -77,7 +77,7 @@
 
         // Supplies
         .state('app.supplies', {
-            url: '/supplies',
+            url: '/supplies/:myListName',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/supplies.html',
@@ -96,7 +96,7 @@
             })
 
         .state('app.suppliesList', {
-            url: '/suppliesList/:listName',
+            url: '/suppliesList/:listName/:supplyListId',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/supplies_list.html',
@@ -262,7 +262,7 @@
             views: {
                 'menuContent': {
                     templateUrl: 'templates/account_settings.html',
-                    controller: 'user_registrationCtrl'
+                    controller: 'account_settingsCtrl'
                 }
             }
         })
@@ -289,7 +289,8 @@
                 url: '/notification_tab',
                 views: {
                     'notification_tab': {
-                        templateUrl: 'templates/notification.html'
+                        templateUrl: 'templates/notification.html',
+                        controller:'FriendsNotificationCtrl'
                     }
                 }
             })
@@ -321,6 +322,34 @@
                     }
                 }
             })
+            .state('app.messages', {
+                url: '/message_detail',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/friend-group-messages.html',
+                        controller: 'FriendsMessageCtrl'
+                    }
+                }
+            })
+            .state('app.notifications', {
+                url: '/notification_detail',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/friend-group-notifications.html',
+                        controller: 'FriendsNotificationCtrl'
+                    }
+                }
+            })
+        .state('app.manage_event_content', {
+            url: '/manage-event-content',
+            params: {eventDetails: null, infoType: null, infoTypeCategory: null,currEventName:null,currEventId:null },
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/manage-event-content.html',
+                    controller: 'ManageEventCtrl'
+                }
+            }
+        })
 
         /*
         if none of the above states are matched, use this as the fallback*/
@@ -335,7 +364,9 @@
         $httpProvider.interceptors.push(function ($rootScope) {
             return {
             request: function (config) {
-                $rootScope.$broadcast('loading:show')
+                if(!config.url.includes(getMessageUrlSubString)) {
+                    $rootScope.$broadcast('loading:show');
+                }
                 return config
             },
             response: function (response) {

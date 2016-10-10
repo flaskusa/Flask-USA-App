@@ -39,6 +39,12 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "org.apache.cordova.camera": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
         }
     },
     "dependent_plugins": {
@@ -51,9 +57,6 @@
         "cordova-plugin-compat": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         },
@@ -61,9 +64,6 @@
             "PACKAGE_NAME": "com.flaskus.tailgate"
         },
         "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
-        "org.apache.cordova.camera": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         }
     }

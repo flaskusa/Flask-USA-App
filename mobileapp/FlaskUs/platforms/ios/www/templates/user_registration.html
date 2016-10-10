@@ -1,17 +1,16 @@
 ﻿<ion-view cache-view="false" view-title="USER REGISTRATION" back-button="true">
-    <ion-nav-bar class="bar-dark" align-title="center">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
-    </ion-nav-bar>
     <ion-content overflow-scroll="false">
             <form name="register_user_form" class="loginpane form_div" novalidate>
-                <div class="card" ng-show="AddedSuccess">
-                    <div class="item item-text-wrap successColor">
-                        User Registered Successfully !!
-                    </div>
-                </div>
-                <div class="loginpane_body">
+                <div>
                     <div class="list">
+                        <div class="list card">
+                            <div class="item item-image">
+                                <img src="img/default-profilepic-copy.png" class="profilepicAvatar">
+                            </div>
+                            <a class="item text-center" href="">
+                                Tap to add Profile picture
+                            </a>
+                        </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">First Name</span>
                             <input type="text" placeholder="First Name" name="firstName" class="form-control" ng-model="user.firstName" required>
@@ -48,9 +47,10 @@
                                 <span ng-show="register_user_form.password2.$error.required" class="error_msg">Please enter confirm password.</span>
                             </div>
                         </div>
-                        <div class="item item-input item-floating-label">
+                        <div class="item item-input item-floating-label item-icon-right">
                             <span class="input-label">Date of Birth</span>
-                            <input type="date" name="DOB" ng-model="user.DOB" min="1960-01-01" max="2016-01-01">
+                            <input type="text" placeholder="DOB" name="DOB" class="form-control" ng-model="user.DOB" ng-click="openDatePickerOne()">
+                            <i class="icon ion-ios-calendar-outline" ng-click="openDatePickerOne();"></i>
                         </div>
                         <div class="item item-input">
                             <span class="input-label">Gender</span>

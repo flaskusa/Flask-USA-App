@@ -55,7 +55,7 @@
                     <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
-                    <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}} | <span class="cityVenuCol" ng-repeat="vdata in city">{{vdata.cityName}}</span></p>
+                    <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}} | <span class="cityVenuCol" >{{ getVenueNameForVenueId(data.venueId) }}</span></p>
                     <span class="badge span_icon" ng-if="!data.userEvent=='1' && show_login"><img src="img/flask_icons/arrow_left.svg"></span>
                     <span class="badge span_icon" ng-if="data.userEvent=='1' && show_login"><img class="star_icon_svg" src="img/flask_icons/ARROW_STAR.svg"></span>
                     <span class="badge span_icon" ng-if="!show_login"><img src="img/flask_icons/arrow_left.svg"></span> 

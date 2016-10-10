@@ -4,13 +4,21 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-tabs class="tabs-positive tab_bottom">
-
         <ion-tab title="Contact">
             <ion-content class="" overflow-scroll="false">
                 <div class="list acc_settings1">
+                    <div class="list card add_profile_div">
+                        <div class="item item-image add_profile_img_div">
+                            <img src="img/add_photo.png" class="profilepicAvatar add_profile_img" ng-click="show()">
+                        </div>
+                    </div>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">First Name</span>
                         <input type="text" placeholder="First Name" ng-model="user.firstName">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Middle Name</span>
+                        <input type="text" placeholder="Middle Name" ng-model="user.middleName">
                     </label>
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Last Name</span>
@@ -32,10 +40,11 @@
                         <span class="input-label">Confirm Password</span>
                         <input type="password" placeholder="Confirm Password" class="form-control" ng-model="user.password2" name="password2">
                     </label>
-                    <label class="item item-input item-floating-label">
+                    <div class="item item-input item-floating-label item-icon-right">
                         <span class="input-label">Date of Birth</span>
-                        <input type="date" placeholder="Date of Birth" name="DOB" ng-model="user.DOB">
-                    </label>
+                        <input type="text" placeholder="DOB" name="DOB" class="form-control" ng-model="user.DOB" ng-click="openDatePickerOne()">
+                        <i class="icon ion-ios-calendar-outline" ng-click="openDatePickerOne();"></i>
+                    </div>
                     <label class="item item-input">
                         <span class="input-label">Gender</span>
                         <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"male"' name="rdoResult">Male</ion-radio></pre>
@@ -47,14 +56,7 @@
                         <input type="text" placeholder="Mobile Number" ng-model="mobileNumber">
                     </label>
                 </div>
-                <div class="padding" align="center">
-                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUser(user);">
-                        Save
-                    </button>
-                    <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
-                        Cancel
-                    </a>
-                </div>
+               
             </ion-content>
         </ion-tab>
 
@@ -78,37 +80,22 @@
                         <input type="text" placeholder="City" ng-model="user.city">
                     </label>
                 </div>
-
+                <p>Select Country and State</p>
                 <div class="list">
                     <label class="item item-input item-select">
-                        <select class="acc_setting">
-                            <option selected>--State--</option>
-                            <option>California</option>
-                            <option>Alabama</option>
-                            <option>Alaska</option>
+                        <select ng-model="country_Name" ng-options="data.name for data in country" ng-change="getState(data,country_Name);">
+                            <option selected>--Select Country--</option>
+                        </select>
+                    </label>
+                </div>
+                <div class="list">
+                    <label class="item item-input item-select">
+                        <select ng-model="state_Name" ng-options="data.name for data in state" ng-change="getStateId(data,state_Name);">
+                            <option selected>--Select State--</option>
                         </select>
                     </label>
 
                 </div>
-
-                <div class="list">
-                    <label class="item item-input item-select">
-                        <select>
-                            <option selected>--Country--</option>
-                            <option>United States</option>
-                            <option>Canada</option>
-                        </select>
-                    </label>
-                </div>
-                <div class="padding" align="center">
-                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUser(user);">
-                        Save
-                    </button>
-                    <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
-                        Cancel
-                    </a>
-                </div>
-
             </ion-content>
         </ion-tab>
 
@@ -122,7 +109,7 @@
                 </div>
                 <div class="row acc_settingsCol" ng-repeat="data in data1">
                     <div class="col acc_settingsCol">{{data.sport}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_sport" ng-click="addSportInArray($index,data);">
                     </ion-checkbox>
                 </div>
                 <div class="padding"></div>
@@ -133,7 +120,7 @@
                 </div>
                 <div class="row acc_settingsCol" ng-repeat="data in data4">
                     <div class="col acc_settingsCol">{{data.level}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_level" ng-click="addlevelInArray($index,data);">
                     </ion-checkbox>
                 </div>
                 <div class="padding"></div>
@@ -144,7 +131,7 @@
                 </div>
                 <div class="row acc_settingsCol" ng-repeat="data in data2">
                     <div class="col acc_settingsCol">{{data.concerts}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_concerts" ng-click="addConcertsInArray($index,data);">
                     </ion-checkbox>
                 </div>
                 <div class="padding"></div>
@@ -157,13 +144,13 @@
                 <div class="row acc_settingsCol" ng-repeat="data in data3">
 
                     <div class="col acc_settingsCol">{{data.special_events}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table">
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_events" ng-click="addEventsInArray($index,data);">
                     </ion-checkbox>
                 </div>
 
 
                 <div class="padding" align="center">
-                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUser(user);">
+                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUserInfo(user);">
                         Save
                     </button>
                     <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">

@@ -42,6 +42,8 @@
         // $scope.localstorageData = $localStorage.getObject('user_location_data');
         // Retrieve the object from ng-storage  
         $scope.localstorageData = $localStorage.things;
+
+        
         //
         console.log($scope.localstorageData);
         console.log('stored time', $scope.storedTime);
@@ -99,6 +101,18 @@
                 }
 
             });
+        }
+
+              //Get venue name for event details
+        $scope.getVenueNameForVenueId  = function (venueId) {
+            var venueCity = "Test"
+            for (var i = 0; i < $scope.allVenues.length; i++) {
+                if( $scope.allVenues[i].venueId == venueId){
+                    venueCity = $scope.allVenues[i].venueCity;
+                    return venueCity;
+                }
+            }
+            return venueCity;
         }
 
         function get_from_localStorage() {

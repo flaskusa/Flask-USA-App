@@ -42,6 +42,9 @@
         },
         "cordova-plugin-android-permissions": {
             "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        },
+        "cordova-plugin-file": {
+            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
         }
     },
     "dependent_plugins": {
@@ -49,9 +52,6 @@
             "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
         },
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
-        },
-        "cordova-plugin-file": {
             "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
         }
     }

@@ -9907,6 +9907,12 @@ a.button {
   font-weight: 500;
   font-style: italic; }
 
+@font-face {
+  font-family: 'AGENCYR';
+  src: url("/lib/ionic/fonts/AGENCYR.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: 'Avenir Next'; }
 
@@ -9915,6 +9921,14 @@ html, body {
 
 .item-input input, .item-input textarea {
   font-family: 'Avenir Next'; }
+
+div.ng-binding {
+  font-family: 'Avenir Next';
+  font-weight: 600; }
+
+.tabs a span {
+  font-family: 'AGENCYR';
+  font-size: 14px; }
 
 .fill-height-or-more {
   min-height: 100%;
@@ -9945,11 +9959,14 @@ html, body {
   background-image: url("../img/flask_images/MY_TAILGATE.jpg");
   background-size: 100%; }
 
+.edit_tailgate:before {
+  font-size: 22px !important; }
+
 .list.add_my_tailgate {
   padding-top: 40px !important; }
 
 .myFrnds {
-  background-image: url("../img/flask_images/MY_TAILGATE.jpg");
+  background-image: url("../img/flask_images/MY_FRIENDS.jpg");
   background-size: 100%; }
 
 .row.mainRow.myFrnds {
@@ -9959,6 +9976,13 @@ html, body {
   width: 100%;
   display: block;
   height: 100%; }
+
+.slider_svg_img {
+  margin-top: -25%;
+  height: 37%;
+  margin-left: -11%;
+  margin-right: -40%;
+  width: 71%; }
 
 .sidepanel {
   float: left;
@@ -10078,7 +10102,7 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox {
   padding: 1em 0;
   text-align: center;
   height: 20%;
-  margin-top: -1%;
+  margin-top: 30px;
   width: 100%; }
 
 .loginpane_header img {
@@ -10090,7 +10114,7 @@ img.cq-dd-image {
   margin-top: 5px; }
 
 .loginpane_body {
-  width: 100%; }
+  margin-top: 17%; }
 
 .div_list {
   padding-left: 6%; }
@@ -10138,11 +10162,23 @@ button.button.button-block.button-positive.taglib-text {
   color: white;
   width: 40%; }
 
+@media only screen and (min-width: 167px) {
+  .add_tailgate_profile {
+    margin-left: 26%; } }
+
 .navigation {
   text-align: center;
   height: 22%;
   text-align: center;
-  width: 100%; }
+  width: 100%;
+  margin-bottom: 5% !important; }
+
+span.taglib-text {
+  font-size: 16px !important;
+  color: #F28604 !important; }
+
+a.taglib-icon {
+  text-decoration: none; }
 
 /*CSS for checkboxes start*/
 .checkbox input:after, .checkbox-icon:after {
@@ -10955,13 +10991,21 @@ span.error_msg {
   text-transform: uppercase;
   font-size: 11px !important;
   margin-top: -4px;
-  margin-left: -17px; }
+  margin-left: 0%; }
 
 .timeVenuCol {
   text-transform: uppercase;
   font-size: 11px !important;
   margin-top: -6px;
-  margin-left: -17px; }
+  margin-left: 5px !important;
+  font-weight: normal !important; }
+
+.cityVenuCol {
+  font-weight: normal !important;
+  text-transform: uppercase;
+  font-size: 11px !important;
+  margin-top: -6px;
+  margin-left: 5px !important; }
 
 .arrowIcon {
   right: -4px !important;
@@ -10971,7 +11015,17 @@ span.error_msg {
   font-weight: bold !important;
   text-transform: uppercase;
   font-size: 14px !important;
-  margin-left: -17px !important; }
+  margin-left: 1% !important;
+  margin-right: -10px !important;
+  width: 100%; }
+
+.eventNameCol1 {
+  font-weight: bold !important;
+  text-transform: uppercase;
+  font-size: 14px !important;
+  margin-left: 6% !important;
+  margin-right: -10px !important;
+  width: 94%; }
 
 .eventHeading {
   text-align: center;
@@ -11065,7 +11119,7 @@ button.button.button-icon.button-clear.ion-search {
 
 .item.item-avatar.profile {
   background-color: black !important;
-  height: 120px;
+  height: 132px;
   border: none; }
 
 img.default_img {
@@ -11081,7 +11135,7 @@ img.menuLogo {
   max-width: 246px !important;
   max-height: 117px !important;
   width: 84% !important;
-  top: 3px !important;
+  top: 27px !important;
   height: 100% !important;
   border-radius: 0px !important; }
 
@@ -11092,8 +11146,7 @@ img.list-thumbnail.listImages {
   position: absolute;
   width: 100%;
   height: 100%;
-  padding: 5px;
-  max-height: 57px; }
+  max-height: 60px; }
 
 img.list-thumbnail.listImages1 {
   position: absolute;
@@ -11128,11 +11181,6 @@ div.menuDiv {
   margin-bottom: auto;
   float: left; }
 
-.dateCol {
-  text-transform: uppercase;
-  font-size: 13px;
-  margin-top: -4px; }
-
 .tailgateEventNameCol {
   font-weight: bold !important;
   text-transform: uppercase;
@@ -11151,11 +11199,6 @@ div.menuDiv {
   min-height: 61px !important;
   border-color: black;
   padding-top: 16px; }
-
-.timeVenuCol {
-  text-transform: uppercase;
-  font-size: 13px;
-  margin-top: -6px; }
 
 .arrowIcon {
   right: 4px !important; }
@@ -11179,6 +11222,12 @@ div.menuDiv {
 .overlineStyle {
   border-top: 4px solid #F89734;
   font-weight: bold; }
+
+span.ion-chevron-down {
+  top: 16px !important; }
+
+span.ion-chevron-right {
+  top: 16px !important; }
 
 /*friend details page start*/
 p.friend {
@@ -11217,16 +11266,15 @@ h2.tickets {
   font-size: 27px;
   text-align: center;
   margin-top: 0%;
-  padding-left: 5%; }
+  padding-left: 8%; }
 
 .item-tickets {
   text-align: center;
   font-size: 13px;
   color: darkorange !important;
-  padding-left: 5%; }
+  padding-left: 8%; }
 
 a.item.item-avtar.item-icon-right.item-ticket {
-  border-width: 2px;
   border-color: black; }
 
 /*tickets end*/
@@ -11279,7 +11327,7 @@ div.searchrow {
   background-color: rgba(0, 0, 0, 0.9);
   border-color: #f7941e;
   display: block;
-  height: 175px; }
+  height: 140px; }
 
 .BgCol1 {
   background-color: rgba(0, 0, 0, 0.9);
@@ -11290,10 +11338,10 @@ button.button.button-clear.button_search {
   color: darkorange;
   border-radius: 3px;
   font-size: 15px;
-  width: 100%;
-  text-shadow: 2px 0px 4px #847e7e;
+  width: 90%;
   font-weight: bold;
-  margin-top: 4px;
+  margin-top: 5px;
+  margin-left: 5%;
   vertical-align: middle;
   background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%); }
 
@@ -11377,7 +11425,7 @@ p.addText {
   margin-right: -28px; }
 
 span.badge.span_icon {
-  right: 22px !important; }
+  right: 14px !important; }
 
 span.badge.span_icon_supplies {
   top: 14px;
@@ -11510,7 +11558,7 @@ button.button.button-block.button-positive.friend {
 
 .textStyle {
   color: #ffffff;
-  font-size: large; }
+  font-size: 17px; }
 
 .iconAlignment {
   cursor: pointer;
@@ -11565,7 +11613,8 @@ a.tab-item {
 
 .tailgateDescFont {
   font-weight: bold;
-  color: #f89735; }
+  color: #f89735;
+  padding-right: 4px; }
 
 .button:hover {
   text-decoration: none; }
@@ -11581,17 +11630,27 @@ a.tab-item {
   height: 101px !important; }
 
 button.button.button-block.button-positive.invite_friend {
-  width: 44%;
+  width: 34%;
   color: darkorange;
   min-height: 30%;
-  margin-left: 61%;
-  margin-top: -49px; }
+  margin-left: 71%;
+  margin-top: -49px;
+  border-radius: 6px !important;
+  font-size: 14px !important; }
+
+button.button.button-block.button-positive.invite_friend i {
+  margin-left: -22px; }
 
 .photoitem {
   background-color: lightgray;
   text-align: center;
   font-weight: bold;
   margin-top: 0px; }
+
+h2.tailgater_name {
+  text-align: center;
+  margin-top: 4%;
+  font-weight: bold; }
 
 @media screen and (max-width: 321px) {
   .item-icon-left {
@@ -11623,10 +11682,14 @@ button.button.button-block.button-positive.invite_friend {
     padding-left: 105px; } }
 
 .suppliesButton {
-  background: #000000;
-  width: 60px;
-  border-radius: 6px;
-  font-weight: bolder; }
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  width: 72px;
+  height: 34px;
+  border-radius: 8px;
+  color: darkorange;
+  border-color: white;
+  font-weight: 700;
+  font-size: 13.5px; }
 
 /*Start tailgate details bottom tabs*/
 .tab_bottom a.tab-item {
@@ -11707,9 +11770,9 @@ i.addText {
 .divAddIcon {
   width: 100%;
   background-color: #ffffff;
-  height: 30px;
-  padding-right: 10px;
-  padding-top: 4px; }
+  height: 50px;
+  padding-right: 17px;
+  padding-top: 15px; }
 
 /*Tickets*/
 .ticketNameCol {
@@ -11743,17 +11806,6 @@ span.ng-binding {
 
 .badge {
   color: white !important; }
-
-img.menuLogo {
-  position: absolute !important;
-  left: 20px !important;
-  bottom: -2px !important;
-  max-width: 246px !important;
-  max-height: 117px !important;
-  width: 84% !important;
-  top: 3px !important;
-  height: 100% !important;
-  border-radius: 0px !important; }
 
 ul.list.menuContentList {
   padding-top: 6px; }
@@ -11862,11 +11914,27 @@ a.item.icon.activated:before {
   width: 109%;
   margin-left: -17px;
   height: 15%;
-  margin-top: 5px;
-  background-color: black;
+  margin-top: 20px;
   color: #F89734;
   font-size: 19px;
   font-weight: 400 !important; }
+
+select.plan_now_user {
+  margin-left: 15%;
+  width: 173px; }
+
+div.plan_now_div {
+  margin-top: -8%;
+  margin-left: 11%; }
+
+h2.items_list {
+  color: orange;
+  text-transform: uppercase; }
+
+h2.items_user_list {
+  float: right;
+  margin-top: -21px;
+  text-transform: uppercase; }
 
 .back_button_css:before {
   font-size: 26px !important;
@@ -11972,10 +12040,12 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox.acc_table {
   background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
   border-color: ghostwhite;
   border: 1px;
-  font-weight: 400; }
+  font-weight: 400;
+  border-radius: 6px !important; }
 
 .addFriendButtonStyle {
-  padding-left: 20px; }
+  padding-left: 20px;
+  border-radius: 6px !important; }
 
 .unblockButtonStyle {
   padding-left: 30px; }
@@ -11988,10 +12058,6 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox.acc_table {
 
 .item .badge.ext-top {
   top: 21px; }
-
-.col.col-70.event_content1 {
-  padding-left: 17%;
-  width: 77%; }
 
 a.item.item-full.item-icon-left.attendees {
   padding-top: 58px; }
@@ -12045,7 +12111,7 @@ a.item.item-full.item-icon-left.attendees {
   opacity: 0;
   transition: 2s; }
 
-/*Message board in my_tailgate_event_details*/
+/* Message board in my_tailgate_event_details*/
 .list.list-inset.msgboard {
   border: solid 1px; }
 
@@ -12054,6 +12120,25 @@ a.item.item-full.item-icon-left.attendees {
   font-weight: bold;
   font-size: 14px !important;
   margin-left: 13px !important; }
+
+.messageList p.message_username {
+  margin-top: -1%; }
+
+.messageList p.messageTxt {
+  margin-top: -4%; }
+
+.messageList div {
+  margin-top: -21%;
+  margin-left: 14%; }
+
+.messageList img {
+  width: 11%; }
+
+.messageList p.profile_name {
+  margin-top: -1%;
+  font-size: 9px;
+  margin-left: -11px;
+  color: #F28604; }
 
 .msg_list {
   display: inline;
@@ -12083,7 +12168,7 @@ a.item.item-full.item-icon-left.attendees {
   border-radius: 0px; }
 
 .item .badge.extra-right-supply {
-  right: 15px;
+  right: 2px;
   top: 0px; }
 
 .supplyDeleteIcon {
@@ -12106,3 +12191,422 @@ a.item.item-full.item-icon-left.attendees {
 
 .fontSizeStrip {
   font-size: 18px; }
+
+.gm-style-iw + div {
+  display: none; }
+
+#iw-container .iw-title {
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 400;
+  padding: 3px;
+  background: #000000;
+  color: white;
+  border-radius: 2px 2px 0 0;
+  /* In accordance with the rounding of the default infowindow corners. */ }
+
+#iw-container .iw-content {
+  text-align: center;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 3px;
+  background: #ffffff;
+  color: #000000; }
+
+.iw-content .padding {
+  padding: 10px; }
+
+.iw-content a {
+  text-decoration: none !important;
+  color: black; }
+
+#iw-container .iw-title .iw-sub-title {
+  font-size: 10px;
+  color: darkorange; }
+
+.gm-style-iw {
+  width: 313px !important;
+  top: 20px !important; }
+
+#iw-container {
+  overflow: hidden;
+  height: 46px;
+  transition: height 2s; }
+
+.my-message-view .item-content {
+  padding-right: 6px; }
+
+.supplyEditIconPadding {
+  padding-top: 16px; }
+
+.ionic_datepicker_popup .popup-body .selected_date_full {
+  background-color: #433f40 !important; }
+
+.ionic_datepicker_popup .selected_date {
+  background-color: orange !important; }
+
+.ionic_datepicker_popup .today {
+  border: 1px solid orange !important; }
+
+.ionic_datepicker_popup .popup-body .month_select, .ionic_datepicker_popup .popup-body .year_select {
+  border-bottom: 1px solid #433f40 !important; }
+
+.ionic_timepicker_popup .heading {
+  background-color: #4b4848 !important;
+  color: orange !important; }
+
+.ionic_timepicker_popup .button_set, .ionic_timepicker_popup .button_close {
+  color: orange !important; }
+
+.ionic_datepicker_popup .popup-body .month_select:after, .ionic_datepicker_popup .popup-body .year_select:after {
+  color: orange !important; }
+
+.ionic_datepicker_popup .popup-buttons button {
+  color: orange !important; }
+
+.ionic_datepicker_popup .popup-body .selected_date_full {
+  color: orange !important; }
+
+/*Suppy list in plan_now page*/
+ion-item.item.supply_list {
+  color: darkorange;
+  text-transform: uppercase;
+  font-weight: bold; }
+
+.badge.badge-supply {
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  color: #f89734 !important;
+  font-size: 12px;
+  border-radius: 12px !important; }
+
+button.button.button-block.button-positive.pay_now_button {
+  width: 90%;
+  color: darkorange;
+  margin-left: 5%; }
+
+select.plan_now {
+  background-color: transparent !important; }
+
+label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox {
+  color: black !important; }
+
+/*Disable button for edit in My tailgate section by Nav*/
+.disablebutton {
+  opacity: .4;
+  cursor: default !important;
+  pointer-events: none; }
+
+.profilepicAvatar {
+  height: 200px !important;
+  width: inherit !important;
+  /*For avtar in profile pic */ }
+
+/*End Disable button for edit in My tailgate section*/
+.my-friend-request-view .item-content {
+  padding-top: 8px;
+  padding-bottom: 12px;
+  margin-top: -4px;
+  margin-bottom: 0px;
+  height: 60px; }
+
+.item .badge.extra-top-request {
+  top: 25px; }
+
+.friendRequestButtonStyle {
+  width: 111px;
+  right: 1px;
+  padding-left: auto;
+  padding-left: 8px;
+  padding-bottom: 3px;
+  /* background-color: darkcyan; */
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  border-color: ghostwhite;
+  /* background-color: white; */
+  border: 1px;
+  border-radius: 8px;
+  font-weight: 400; }
+
+.f-nameText {
+  padding-left: 15px;
+  font-size: 14px;
+  font-weight: 600; }
+
+.supplySaveButtonStyle {
+  width: 65px;
+  right: 1px;
+  padding-left: auto;
+  padding-left: 25px;
+  padding-bottom: 3px;
+  /* background-color: darkcyan; */
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  border-color: ghostwhite;
+  /* background-color: white; */
+  border: 1px;
+  border-radius: 8px;
+  font-weight: 400; }
+
+.mySupplyView .button:hover {
+  color: #ff8c00; }
+
+/*CSS FOR EXPANDING AND CLOSING TABS WITH ANIMATION*/
+.container {
+  border: 1px solid;
+  border-right: 1px solid; }
+
+.expandcollapse-item {
+  overflow: hidden;
+  border-top: 1px solid; }
+
+.expandcollapse-heading-collapsed {
+  cursor: pointer;
+  padding: 15px 20px;
+  position: relative;
+  z-index: 100000000;
+  color: black;
+  background-color: white; }
+
+.expandcollapse-item:first-of-type {
+  border-top: 0px; }
+
+.expandcollapse-heading-collapsed p {
+  font-size: 16px;
+  font-weight: normal;
+  margin: 0px; }
+
+.expandcollapse-heading-expanded {
+  cursor: pointer;
+  z-index: 100000000;
+  padding: 15px 20px;
+  position: relative;
+  color: black;
+  border: 1px solid black; }
+
+span.show_collapsed_icon {
+  background-image: url("img/flask_icons/down.png"); }
+
+span.show_expanded_icon {
+  background-image: url("img/flask_icons/up-arrow.png"); }
+
+.expandcollapse-heading-expanded p {
+  font-size: 16px;
+  font-weight: bold;
+  margin: 0px; }
+
+.expandcollapse-heading-collapsed > span,
+.expandcollapse-heading-expanded > span {
+  position: absolute;
+  top: 25px;
+  right: 15px;
+  font-size: 20px;
+  line-height: 0px; }
+
+span.badge.span_icon_down {
+  right: 22px !important;
+  margin-top: -15px;
+  font-size: 10px;
+  width: 10px; }
+
+.span_icon_down img {
+  width: 43px;
+  height: 23px;
+  padding-left: -3px;
+  padding-right: 14px;
+  margin-right: -9px; }
+
+.expand-collapse-content {
+  /* padding: 20px;*/ }
+
+/*
+animation:*/
+.slideDown.ng-hide {
+  height: 0;
+  transition: height 0.35s ease;
+  overflow: hidden;
+  position: relative; }
+
+.slideDown {
+  height: 50%;
+  transition: height 0.35s ease;
+  overflow: hidden;
+  position: relative; }
+
+.slideDown.ng-hide-remove,
+.slideDown.ng-hide-add {
+  display: block !important; }
+
+.slideDown.ng-hide-add {
+  animation-name: hide;
+  -webkit-animation-name: hide;
+  animation-duration: .5s;
+  -webkit-animation-duration: .5s;
+  animation-timing-function: ease-in;
+  -webkit-animation-timing-function: ease-in; }
+
+.slideDown.ng-hide-remove {
+  animation-name: show;
+  -webkit-animation-name: show;
+  animation-duration: .5s;
+  -webkit-animation-duration: .5s;
+  animation-timing-function: ease-out;
+  -webkit-animation-timing-function: ease-out; }
+
+/*css for star icon*/
+img.star_icon_svg {
+  width: 56px;
+  margin-right: -24px; }
+
+i.choose_picture {
+  margin-bottom: 10px;
+  font-size: 19px;
+  margin-left: 10px; }
+
+/*CSS FOR EXPANDING AND CLOSING TABS WITH ANIMATION*/
+.manageContentButtons {
+  background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
+  width: 50px;
+  float: right;
+  height: 40px;
+  top: 0px;
+  border-radius: 0px; }
+
+.Upper_Case {
+  text-transform: uppercase; }
+
+.flaskUsQuestionDiv {
+  height: 300px;
+  width: 100%;
+  transition: .5s; }
+
+.hideFlaskUsQuestionDiv {
+  height: 0px; }
+
+.QuestionInput {
+  border: solid .5px;
+  width: 254px; }
+
+.que-input-label {
+  display: table;
+  padding: 0px 3px 1px 0px;
+  width: 239px;
+  color: #444;
+  font-size: 16px;
+  left: 30px; }
+
+.custom-popup.popup-container .popup {
+  background-color: #666666;
+  width: 90%; }
+
+.custom-class .popup-head {
+  display: none; }
+
+.custom-class .popup-body {
+  height: 220px; }
+
+.popupTitleText {
+  color: #ff8c00;
+  font-size: 16px;
+  font-weight: 600; }
+
+.popupCrossIcon {
+  float: right;
+  color: #ff8c00;
+  font-weight: 600;
+  font-size: 20px; }
+
+.popupIcon {
+  font-size: 18px;
+  font-weight: 500; }
+
+.popupText {
+  font-size: 14px;
+  font-weight: 500; }
+
+.customBarPadding {
+  padding: 0px;
+  height: 55px; }
+
+.customFooter .has-footer {
+  bottom: 55px; }
+
+.supplyAnimation {
+  height: 100%;
+  overflow: hidden;
+  transition: 1s; }
+
+.hideSupplyItem {
+  height: 0px; }
+
+.add_profile_div {
+  width: 135px;
+  height: 131px;
+  border-radius: 79px;
+  margin-left: 30%; }
+
+.add_profile_img {
+  width: 135px !important;
+  height: 131px !important; }
+
+/*CSS for remember me and Enable touch on login page*/
+.remember div i.checkbox-icon {
+  margin-left: -54%;
+  width: 23px !important;
+  height: 23px !important;
+  top: 3px; }
+
+.marginLeftSupplyText {
+  margin-left: 40px; }
+
+.paddingTOpSupply {
+  margin-top: 1px; }
+
+.remember span {
+  margin-left: -5px;
+  color: #F28604 !important; }
+
+label.remember.item.item-checkbox.ng-empty.ng-valid {
+  margin-left: -22%;
+  border-top: none; }
+
+label.remember.item.item-checkbox.ng-valid.ng-not-empty {
+  margin-left: -22%; }
+
+label.remember1.item.item-checkbox.ng-empty.ng-valid {
+  margin-left: -22%;
+  border-top: none; }
+
+label.remember1.item.item-checkbox.ng-valid.ng-not-empty {
+  margin-left: -22%; }
+
+.remember1 div i.checkbox-icon {
+  margin-left: -101% !important;
+  width: 23px !important;
+  height: 23px !important;
+  top: 3px; }
+
+.remember1 span {
+  margin-left: -15px !important;
+  color: #F28604 !important; }
+
+.remember1 .item-content.disable-pointer-events {
+  margin-left: -54% !important; }
+
+.button.button-positive.active, .button.button-positive.activated {
+  border-color: #a2a2a2;
+  background-image: -webkit-linear-gradient(top, #a2a2a2 0, black 100%); }
+
+.tailgateLogoImg {
+  height: 100px !important;
+  width: inherit !important; }
+
+.tailgatelogoContainer {
+  padding-top: 1px;
+  padding-bottom: 1px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  height: inherit; }
+
+.marginLeftSupplyText {
+  margin-left: 40px; }
+
+.paddingTOpSupply {
+  margin-top: 1px; }

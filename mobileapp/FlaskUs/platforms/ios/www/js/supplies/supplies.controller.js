@@ -3,31 +3,72 @@
     angular.module('flaskApp')
     .controller('SuppliesCtrl', SuppliesCtrl);
 
-    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout'];
+    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate','$stateParams'];
 
     /* @ngInject */
-    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout ) {
+    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate,$stateParams ) {
 
         $scope.userDataList=[];
         $scope.supplies=[];
+        $scope.supplyItemNames=[];
+        $scope.MyGameDaysSupply=[];
+        $scope.hideItem=false;
+        $scope.hideMyItem=false;
+        if($stateParams.myListName==""){
+         $scope.MyGameDayList=false;
+        }else{
+            $scope.MyGameDayList=true;
+        }
         if(SupplyService.addAsAdmin!=undefined){
             $scope.addAsAdmin=SupplyService.addAsAdmin;
         }else{
             $scope.addAsAdmin=false;
         }
+        $scope.onSwipeLeft=function(data,index){
+            /*data.swiped=true;
+            $ionicListDelegate.showDelete();*/
 
+        }
+        $scope.onSwipeRight=function(data){
+            /*data.swiped=false;
+          $ionicListDelegate.closeOptionButtons();*/
+        }
+
+
+
+        $scope.toggleItem=function(){
+            if($scope.MyGameDayList==true) {
+                $scope.hideItem = !$scope.hideItem;
+                $("#FlaskUsListdiv").slideToggle("slow", function () {
+                });
+            }
+        }
+        $scope.toggleMyItem=function(){
+            if($scope.MyGameDayList==true){
+            $scope.hideMyItem=!$scope.hideMyItem;
+            $( "#myListdiv" ).slideToggle( "slow", function() {});
+                }
+
+        }
         $scope.editList=false;
         $scope.addNewSupplies=false;
         $scope.islistCreated = false;
         $scope.deleteSuplies=false;
         $scope.editSuply=false;
         var userDetail=$cookies.getObject('CurrentUser');
-        var userId=userDetail.data.userId;
-        $scope.agreedToTermsOfUse=userDetail.data.agreedToTermsOfUse;
+        if(userDetail!=undefined) {
+            var userId = userDetail.data.userId;
+            $scope.hideCheckBox=false;
+            $scope.agreedToTermsOfUse = userDetail.data.agreedToTermsOfUse;
+        }else{
+            $scope.hideCheckBox=true
+            $scope.agreedToTermsOfUse=false;
+        }
         $scope.addSupplyAsAdmin=function(){
             SupplyService.addAsAdmin=true;
             $scope.addAsAdmin=true;
         }
+
         $scope.addSupplyAsUser=function(){
             SupplyService.addAsAdmin=false;
             $scope.addAsAdmin=false;
@@ -36,6 +77,38 @@
             SupplyService.getMySupplyList().then(function (response) {
                 $scope.supplies = response;
             });
+        }
+        $scope.copyForMyGameDaySupply=function(list){
+            $scope.MyGameDaysSupply=[];
+            angular.forEach($scope.supplies,function(value,key){
+                if(value.supplyListId==list.supplyListId){
+                    value.checked=true;
+
+                }else{
+                    value.checked=false;
+                }
+            });
+            SupplyService.getItemByListId(list.supplyListId).then(function (response) {
+                $scope.MyGameDaysSupply=response;
+                if($scope.hideMyItem==false) {
+                    $scope.toggleMyItem();
+                }
+                if($scope.hideItem==false) {
+                    $scope.toggleItem();
+                }
+            });
+
+        }
+        $scope.removeSelectedSupply=function(list){
+                    $scope.MyGameDaysSupply=[];
+
+        }
+        $scope.selectGameDaySupply=function(list,checked){
+         if(checked==true){
+             $scope.copyForMyGameDaySupply(list);
+         }else{
+             $scope.removeSelectedSupply(list);
+         }
         }
         $scope.addNewSuppliesList=function(){
             setTimeout(setFocus, 50);
@@ -49,7 +122,6 @@
             if ($scope.islistCreated != true) {
                 SupplyService.addSupplies(list,$scope.addAsAdmin).then(function(response){
                     if(response.userId>0) {
-
                     }else{
                         $flaskUtil.alert("failed to save");
                     }
@@ -59,18 +131,25 @@
             $scope.addNewSupplies=false;
         };
         $scope.goTOList=function(selectedList){
-            if($scope.agreedToTermsOfUse==true && $scope.deleteSuplies==false &&  $scope.editSuply==false) {
-                SupplyService.selectedList=selectedList;
-                $state.go('app.suppliesList', {listName: selectedList.supplyListName})
+            if($scope.MyGameDayList==false) {
+                if ($scope.agreedToTermsOfUse == true && $scope.deleteSuplies == false && $scope.editSuply == false && selectedList.isSystem == true) {
+                    SupplyService.selectedList = selectedList;
+                    $state.go('app.suppliesList', {listName: selectedList.supplyListName})
+                } else if (selectedList.isSystem == false && $scope.editSuply == false) {
+                    SupplyService.selectedList = selectedList;
+                    $state.go('app.suppliesList', {listName: selectedList.supplyListName})
+                }
+                $timeout(function () {
+                    $scope.deleteSuplies = false;
+                }, 1000);
             }
-            $timeout(function () {  $scope.deleteSuplies=false;
-            },1000);
 
         }
         $scope.editSupply=function(data){
             data.edit=true;
             $scope.deleteSuplies=true;
             $scope.editSuply=true;
+            $ionicListDelegate.closeOptionButtons();
             setTimeout(setFocus, 50);
      function setFocus(){
          if(data.isSystem==false){
@@ -91,7 +170,6 @@
 
         $scope.cancelAdding=function(){
             $scope.addNewSupplies=false;
-            document.getElementById("ItemEditBox").blur();
             $scope.suppliesName="";
         }
         $scope.saveSupply=function(data){
@@ -113,6 +191,9 @@
                 }
             }
         }
+        $scope.setFocusSupply=function(){
+            setTimeout(setFocus,50);
+        }
         $scope.saveSupplyItem=function(data){
             if(data.itemName!="" && !data.supplyItemId) {
                 document.getElementById("ItemEditBox").blur();
@@ -120,7 +201,9 @@
                     if(response.supplyListId>0){
                         data.editItem = false;
                         data.supplyItemId=response.supplyItemId;
-                        setTimeout(setFocusOnItemBox, 50);
+                        if($scope.createdListItem.data[$scope.createdListItem.data.length-1].itemName=="") {
+                            setTimeout(setFocusOnItemBox, 50);
+                        }
                     }
                     else{
                         $flaskUtil.alert("failed to save Item");
@@ -207,6 +290,7 @@
         };
         $scope.copyList=function(list){
             var list=angular.copy(list);
+            $scope.supplyItemNames=[];
             list.isSystem=false;
             SupplyService.getItemByListId(list.supplyListId).then(function(response){
                 $scope.itemValue=response;
@@ -216,14 +300,16 @@
 
                     var failed=false;
                     angular.forEach($scope.itemValue,function(value,key){
-                        SupplyService.addSupplyItem(value.itemName,response1.supplyListId).then(function(response2){
-                            if(response2.supplyListId<0){
-                                failed=true;
-                            }
-                        });
+                        $scope.supplyItemNames.push(value.supplyItemName);
+
+                    });
+                    SupplyService.addSupplyItems(response1.supplyListId,$scope.supplyItemNames).then(function(response2){
+                        if(response2.supplyListId<0 || response2.supplyListId==undefined ){
+                            failed=true;
+                        }
                     });
                     if(failed==true){
-                        $flaskUtil.alert("failed to copy")
+                        $flaskUtil.alert("failed to copy");
                     }else{
                         $scope.supplies.push(list);
                     }
@@ -234,6 +320,7 @@
             });
 
         };
+
         $scope.editSupplies=function(){
 
          $scope.editList=!$scope.editList;
@@ -246,10 +333,13 @@
             $scope.deleteSuplies=true;
             SupplyService.deleteSupplyListById(supplyId).then(function(response){
                 if(response){
+                    $ionicListDelegate.closeOptionButtons();
                     $scope.supplies.splice(index,1);
+
                 }
             })
 
         }
     }
+
 })();
