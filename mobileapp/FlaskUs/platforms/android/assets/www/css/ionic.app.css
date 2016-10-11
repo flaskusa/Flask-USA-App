@@ -11044,6 +11044,9 @@ span.error_msg {
   margin-bottom: 5px;
   font-weight: bold; }
 
+#traffic ul {
+  list-style: square inside url("../img/flask_icons/star.svg"); }
+
 /*Header Image*/
 .header-img {
   margin-bottom: -10px;
