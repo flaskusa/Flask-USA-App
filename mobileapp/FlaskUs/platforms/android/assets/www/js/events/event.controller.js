@@ -3,15 +3,16 @@
     angular.module('flaskApp')
         .controller('EventsCtrl', EventsCtrl);
 
-    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage'];
+    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage','$ionicSlideBoxDelegate'];
 
     /* @ngInject */
-    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage) {
+    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage,$ionicSlideBoxDelegate) {
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
         $scope.localstorageData = [];
         $scope.get_geolocation_data ;
+        $scope.showAddv=false;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         var DEFAULT_ZIPCODE = 48226; /*Detroit Zip Code*/
         var currentDate = new Date();/*Today's Date*/
@@ -28,13 +29,21 @@
         $scope.constant_time = currentDate.getTime();
         $scope.constant_time += 60 * 60 * 1000;
         $scope.storedTime = '';
+        $scope.vId = [];
+        $scope.city = [];
+        $scope.venuesId = [];
         $scope.searchstringList = {
             searchString: 'a',
             days: '60'
         };
+        $scope.allEventId=[];
+
+
         // $scope.localstorageData = $localStorage.getObject('user_location_data');
         // Retrieve the object from ng-storage  
         $scope.localstorageData = $localStorage.things;
+
+        
         //
         console.log($scope.localstorageData);
         console.log('stored time', $scope.storedTime);
@@ -58,20 +67,58 @@
             get_event_list();
         }
 
-        function get_event_list(){
+        function get_event_list() {
+            getVenueName();
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 console.log(respData);
                 $scope.allEvent = respData.data.Events;
+                for (var i = 0; i < $scope.allEvent.length; i++) {
+                    $scope.vId.push($scope.allEvent[i].venueId);
+                    $scope.allEventId.push($scope.allEvent[i].eventId)
+                }
+                $cookies.put("AllEventId",$scope.allEventId);
+                $scope.showAddv=true;
                 if ($scope.allEvent.length == 0) {
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
                 }
+                
             });
         }
 
-        function get_from_localStorage() {
+        //Get venue name for event details
+        function getVenueName() {
+            EventsService.getAllVenues().then(function (respData) {
+                console.log(respData);
+                $scope.allVenues = respData;
+                for (var i = 0; i < $scope.allVenues.length; i++) {
+                    $scope.venuesId.push($scope.allVenues[i].venueId);
+                }
+                for (var j = 0; j < $scope.vId.length; j++) {
+                    if ($scope.venuesId[j] == $scope.vId[j]) {
+                            $scope.city.push({cityName:$scope.allVenues[j].venueCity});
+                    }
+                }
 
+            });
+        }
+              //Get venue name for event details
+        $scope.getVenueNameForVenueId  = function (venueId) {
+            var venueCity = ""
+            if ($scope.allVenues == undefined) {
+                return "";
+            }
+            for (var i = 0; i < $scope.allVenues.length; i++) {
+                if( $scope.allVenues[i].venueId == venueId){
+                    venueCity = $scope.allVenues[i].venueCity;
+                    return venueCity;
+                }
+            }
+            return venueCity;
+        }
+
+        function get_from_localStorage() {
             $scope.latitude = $scope.localstorageData.coords.latitude;
             $scope.longitude = $scope.localstorageData.coords.longitude;
             ConvertToZip($scope.latitude, $scope.longitude);

@@ -68,4 +68,13 @@
     <preference name="SplashScreen" value="screen" />
     <preference name="SplashScreenDelay" value="5000" />
     <icon src="resources/android/icon/drawable-xhdpi-icon.png" />
+    <feature name="Permissions">
+        <param name="android-package" value="com.android.plugins.Permissions" />
+    </feature>
+    <feature name="Calendar">
+        <param name="android-package" value="nl.xservices.plugins.Calendar" />
+    </feature>
+    <feature name="DatePickerPlugin">
+        <param name="android-package" value="com.plugin.datepicker.DatePickerPlugin" />
+    </feature>
 </widget>

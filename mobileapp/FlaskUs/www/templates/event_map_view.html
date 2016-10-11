@@ -144,36 +144,19 @@
                 <ion-tab title="TRAFFIC" ng-click="selectTab(2)">
                     <div style="padding:10px"  ng-if="selectedIndex == 2">             
                         <ion-content scroll="true" style="background: white">
-                            <div>
-                                <div style="max-width: 100vw">
-                                    <div>
-                                        <div class="left" style="left:0px;top:121px">
-                                            <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('Traffic-Detail')"></button>
-                                        </div>
-                                        <div class="right" style="top:121px">
-                                            <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('Traffic-Detail')"></button>
-                                        </div>
-                                        <ion-slide-box delegate-handle="Traffic-Detail" show-pager='false' does-continue="true">
-                                            <ion-slide ng-repeat="trafficDetail in trafficDetails" style="width:100%;padding-top:15px ">
-                                                <div class="form-group">
-                                                    <div font-size="18px" style="width: 100%;">{{trafficDetail.infoTitle}}</div>
-                                                    <p ng-bind-html="trafficDetail.infoDesc">
-                                                      
-                                                    </p>
-                                                    </div>
-                                            </ion-slide>
-                                        </ion-slide-box>
+                                <div class="card" ng-repeat="trafficDetail in trafficDetails">
+                                    <div class="item item-divider item-text-wrap trafficHeading">
+                                      <H2>{{trafficDetail.infoTitle}}</H2>
                                     </div>
+                                    <p class="item item-text-wrap" ng-bind-html="trafficDetail.infoDesc">
+                                    </p>
                                 </div>
-
-                            </div>
                         </ion-content>
-
                     </div>
                 </ion-tab>
                 <ion-tab title="FLASK US" ng-click="selectTab(3)">
                     <div style="padding:10px"  ng-if="selectedIndex == 3">
-                        <ion-content scroll="true"style="background: white">
+                        <ion-content scroll="true" style="background: white">
                             <div >
                                 <div style="max-width: 100vw" >
                                     <div>
