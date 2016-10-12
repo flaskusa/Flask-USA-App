@@ -14,17 +14,17 @@
             </div>
             <label for="radio"> <i class="fontSizeStrip">Personal</i></label>
         </div>
-        <div class="item item-input-inset"style="padding: 0px;">
-            <label class="item-input-wrapper"style="background-color: #ffffff">
+        <div class="item item-input-inset supply_ion_item_animate">
+            <label class="item-input-wrapper create_supplies_label">
                 <input type="text"id="supplyEdit" placeholder="Supplies Name"autofocus ng-model="suppliesName"ng-class="{Upper_Case:suppliesName!='' && suppliesName!=undefined}"style="height: 47px;">
             </label>
 
         </div>
         <div>
-            <div ng-if="islistCreated==false" class="divAddIcon" style="background-color: #f4f4f4"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"style="float: right;height: 28px;width: 28px"ng-click="addItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
+            <div ng-if="islistCreated==false" class="divAddIcon add_supplies_div"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons add_supplies_img" ng-click="addItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
             </div>
 
-            <div ng-if="islistCreated==true" class="divAddIcon"style="background-color: #f4f4f4"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"style="float: right;height: 28px;width: 28px"ng-click="createItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
+            <div ng-if="islistCreated==true" class="divAddIcon add_supplies_div"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons add_supplies_img" ng-click="createItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
             </div>
 
             </div>
@@ -46,7 +46,7 @@
                     <!--<span class="badge span_icon"style="top:3px"> <label class="checkbox"style="float: right">
                         <input  type="checkbox"ng-model="data.checked">
                     </label></span>-->
-                    <ion-option-button class="button-assertive icon ion-edit" ng-click="editSupplyItem(data)"ng-click="editSupplyItem(data)" ></ion-option-button>
+                    <ion-option-button class="button-assertive icon ion-edit" ng-click="editSupplyItem(data)"></ion-option-button>
                     <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteCreatedItem($index,data.supplyItemId)"></ion-option-button>
 
                 </ion-item>

@@ -11,13 +11,13 @@
                     <img src = "img/default-profilepic-copy.png"class="friendIcon">
                 </div>
                 <div class="col-75" style="text-align: center">
-                <h3 class="f-nameText emailText"style="padding-top:14px" ng-bind="request.firstName+' '+request.lastName"></h3>
+                <h3 class="f-nameText emailText" ng-bind="request.firstName+' '+request.lastName"></h3>
                 </div>
                     <div class="badge supplyDeleteButton extra-right-supply">
-                    <span class="button-assertive   ion-android-cancel icon supplyDeleteIcon supplyEditIconPadding" ng-click="deleteSocialRelation(request.userId,$index)"></span>
+                    <span class="button-assertive ion-android-cancel icon supplyDeleteIcon supplyEditIconPadding" ng-click="deleteSocialRelation(request.userId,$index)"></span>
                 </div>
-                <div class="badge supplyDeleteButton extra-right-supply"style=";margin-right: 51px">
-                    <span class="button-assertive   ion-android-checkbox supplyDeleteIcon supplyEditIconPadding"ng-click="addSocialRelation(request.userId,$index)"></span>
+                <div class="badge supplyDeleteButton extra-right-supply friend_group_notification_div">
+                    <span class="button-assertive ion-android-checkbox supplyDeleteIcon supplyEditIconPadding"ng-click="addSocialRelation(request.userId,$index)"></span>
                 </div>
               <!--  <div style="padding-left: 58px;padding-top: 2px;">
                 <button class=" ext-right friendRequestButtonStyle extra-top-request"ng-click="addSocialRelation(request.userId,$index)"><i class="emailText">Confirm</i> </button>

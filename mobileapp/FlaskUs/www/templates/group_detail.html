@@ -34,26 +34,26 @@
         </div>
     </form>
 </div>
-        <a class="item item-full list-item-icon-left "ng-click="showInviteFriendPopup()"ng-if="isLoginUserAdmin==true">
+        <a class="item item-full list-item-icon-left" ng-click="showInviteFriendPopup()" ng-if="isLoginUserAdmin==true">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">ADD MEMBER</p>
         </a>
-        <a class="item item-full list-item-icon-left "ng-if="isLoginUserAdmin==false">
+        <a class="item item-full list-item-icon-left" ng-if="isLoginUserAdmin==false">
             <p class="addText">GROUP MEMBERS</p>
         </a>
        <ion-list>
-           <ion-item ng-repeat="data in allMember track by $index"class="row-no-padding"padding="false">
-                <a class="row-no-padding"ng-click="groupMemberDetail(data)">
+           <ion-item ng-repeat="data in allMember track by $index" class="row-no-padding" padding="false">
+                <a class="row-no-padding" ng-click="groupMemberDetail(data)">
 
                    <div class="col col-20">
-                    <img src = "img/default-profilepic-copy.png"class="friendIcon">
+                    <img src = "img/default-profilepic-copy.png" class="friendIcon">
                    </div>
-                    <div class="col col-70"style="padding-top: 4px">
-                 <h3 style="padding-left: 10px;font-size: 12px">{{ data.userName | uppercase}}</h3>
-                    <i style="margin-left: 10px;color: darkorange">{{data.emailAddress}}</i></div>
+                    <div class="col col-70 add_member_details">
+                 <h3 class="group_user_name">{{ data.userName | uppercase}}</h3>
+                    <i class="group_user_name">{{data.emailAddress}}</i></div>
                     <div>
-                    <span class="badge"style="right: 12px;" ng-if="data.isAdmin==1"ng-init="data.checked=true"><i class="adminText">admin</i></span>
-                    <span class="badge" style="right: 12px;" ng-if="data.isAdmin==0"ng-init="data.isAdminCheckBox=false"><i class="userText">user</i></span>
+                    <span class="badge group_detail_user_role" ng-if="data.isAdmin==1" ng-init="data.checked=true"><i class="adminText">admin</i></span>
+                    <span class="badge group_detail_user_role" ng-if="data.isAdmin==0" ng-init="data.isAdminCheckBox=false"><i class="userText">user</i></span>
                 </div>
                 </a>
                <ion-option-button  class="icon ion-trash-a"ng-click="removeMember(data,$index)"ng-if="isLoginUserAdmin==true && groupAdminDetail!=data.userName"></ion-option-button>
@@ -81,11 +81,11 @@
                 </div>
                 <ion-content class="padding has-subheader">
                     <ion-list>
-                        <ion-item ng-repeat="data in memberToAddInGroup track by $index" class="item-avatar " item="data"class="row">
+                        <ion-item ng-repeat="data in memberToAddInGroup track by $index" class="item-avatar" item="data">
                             <img src = "img/default-profilepic-copy.png">
                             <h2>{{ data.fullName | uppercase}}</h2>
                             <p>{{ data.emailAddress}}</p>
-                          <span class="badge"style="right: 7px"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons "ng-click="addUserToGroup(data)"></span>
+                          <span class="badge add_new_friend"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons "ng-click="addUserToGroup(data)"></span>
                         </ion-item>
                         <a class="item" ng-if="memberToAddInGroup.length == 0"> there are no more friends to add </a>
 

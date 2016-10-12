@@ -6,7 +6,7 @@
         </ion-nav-buttons>
     </ion-nav-bar>
   <ion-content class="text-center">
-    <div><img src="{{picUrl}}{{friend.uuid}}" class="list-thumbnail"  onError="this.src = 'img/default-profilepic-copy.png'"style="max-width: 210px" /></div>
+    <div><img src="{{picUrl}}{{friend.uuid}}" class="list-thumbnail friend_profilepic"  onError="this.src = 'img/default-profilepic-copy.png'" /></div>
     <div>
         <h2 class="eventNameCol" ng-bind-template="{{ friend.firstName }} {{friend.lastName}}"></h2>
         <p class="friend">{{friend.emailAddress}}</p>

@@ -4,7 +4,7 @@
         <ion-nav-back-button>
         </ion-nav-back-button>
         <ion-nav-title>
-            <a href="#/app/events"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
+            <a href="#/app/events"><img alt="Flask" class="header-img" src="img/headerFlaskLogo.png" /></a>
         </ion-nav-title>
         <ion-nav-buttons side="right">
             <button class="button button-icon button-clear ion-ios-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
@@ -22,8 +22,8 @@
         </div>
     </div>
 
-    <ion-content header="true"style="background-color: white;padding-top:45px">
-        <a class="item item-full list-item-icon-left "class="my-view"ng-click="addNewContent()"ng-if="editContent==false">
+    <ion-content header="true" class="ion_content_header">
+        <a class="item item-full list-item-icon-left my-view" ng-click="addNewContent()"ng-if="editContent==false">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">ADD CONTENT</p>
         </a>
@@ -32,19 +32,19 @@
             <div ng-repeat="data in flaskUsDetails track by $index"ng-if="editContent==false">
                 <div class="list card">
 
-                    <div class="">
+                    <div>
                         <div class="badge manageContentButtons extra-right-supply">
-                            <div class="button-assertive   ion-trash-a icon supplyDeleteIcon"style="padding-top: 5px" ng-class="{supplyEditIconPadding:data.edit}"ng-click="deleteEventDetail(data.eventDetailId,$index)"></div>
+                            <div class="button-assertive ion-trash-a icon supplyDeleteIcon" ng-class="{supplyEditIconPadding:data.edit}"ng-click="deleteEventDetail(data.eventDetailId,$index)"></div>
                         </div>
-                        <div class="badge manageContentButtons extra-right-supply"style=";margin-right: 1px">
-                            <div class="button-assertive   ion-edit supplyDeleteIcon" style="padding-top: 5px"ng-class="{supplyEditIconPadding:data.edit}" ng-click="editContents(data,$index)"></div>
+                        <div class="badge manageContentButtons extra-right-supply">
+                            <div class="button-assertive   ion-edit supplyDeleteIcon" ng-class="{supplyEditIconPadding:data.edit}" ng-click="editContents(data,$index)"></div>
                         </div>
-                        <b style="font-size:16px">{{ data.infoTitle}}</b>
+                        <b class="font_style">{{ data.infoTitle}}</b>
                         <p>{{ data.infoDesc}}</p>
                     </div>
 
                     <div class="item item-body" ng-if="data.imageUrl">
-                        <img class="full-image" src={{data.imageUrl}} style="height: 225px">
+                        <img class="manage_event_full_image" src={{data.imageUrl}}>
                     </div>
                     <!-- <a class="row-no-padding" style="text-decoration: none">
                          &lt;!&ndash;href="#/app/my_friendDetail/{{data.userId}}"&ndash;&gt;
@@ -86,7 +86,7 @@
 
             <div class="list"ng-if="editContent==true">
                 <div class="list card">
-                    <div class="item item-image"style="height:120px;width: 100%">
+                    <div class="item item-image manage_event_default_Image">
                         <img src="{{defaultImageUrl}}" /></div>
                 </div>
                 <a class="item text-center" href=""ng-click="show()">

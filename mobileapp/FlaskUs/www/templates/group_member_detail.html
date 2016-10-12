@@ -7,13 +7,13 @@
     <ion-content class="text-center">
 
 
-        <div><img src = 'img/default-profilepic-copy.png' style="max-width: 210px" /></div>
+        <div><img src = 'img/default-profilepic-copy.png' class="group_member_detail_profile" /></div>
         <div>
             <h2 class="eventNameCol" ng-bind=" friend.userName"></h2>
             <p class="friend">{{friend.emailAddress}}</p>
             <li class="item item-toggle">
-                <b ng-if="friend.isAdmin==1"style="float: left;margin-left: 14px">Admin </b>
-                <b ng-if="friend.isAdmin==0"style="float: left;margin-left: 14px">User</b>
+                <b ng-if="friend.isAdmin==1" class="user_role">Admin </b>
+                <b ng-if="friend.isAdmin==0" class="user_role">User</b>
                 <label class="toggle toggle-positive">
                     <input type="checkbox" ng-model="friend.isAdmin" ng-disabled="isLoginUserAdmin==false || disableToggleButton==true" ng-true-value=1 ng-false-value=0 ng-change="showConfirm(friend)">
                     <div class="track">
