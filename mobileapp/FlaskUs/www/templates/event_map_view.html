@@ -11,12 +11,14 @@
         </ion-nav-buttons>
     </ion-nav-bar>
 
-    <div class="bar bar-subheader">
+    <div class="bar bar-subheader " ng-class="{removeBorderTraffic:selectedIndex == 2}">
         <div class="row">
             <div class="col"></div>
             <div class="col col-90 event_name">
                 <div class="eventHeading2" style="text-transform:uppercase;text-align:center">
-                    <span class="overlineStyle">{{eventName}}</span></div>
+                    <span class="overlineStyle" ng-if="selectedIndex != 2">{{eventName}}</span>
+                <span class="overlineStyle fontSizeTrafficHeading"  ng-if="selectedIndex == 2">TIPS TO GET AROUND TRAFFIC</span></div>
+
             </div>
             <div class="col"></div>
         </div>
@@ -143,13 +145,18 @@
                 </ion-tab>
                 <ion-tab title="TRAFFIC" ng-click="selectTab(2)">
                     <div  style="padding:10px"  ng-if="selectedIndex == 2">             
-                        <ion-content scroll="true" style="background: white">
-                                <div class="card" ng-repeat="trafficDetail in trafficDetails">
-                                    <div class="item item-divider item-text-wrap trafficHeading">
-                                      <H2>{{trafficDetail.infoTitle}}</H2>
+                        <ion-content scroll="true" style="background: white;">
+                                <div  ng-repeat="trafficDetail in trafficDetails"  style="border-bottom: solid;margin-top: 20px">
+                                    <div align="center">
+                                    <div   style="width: 80%;">
+                                      <i class="trafficDetailHeading">{{trafficDetail.infoTitle}}</i>
                                     </div>
-                                    <p id="traffic" class="item item-text-wrap" ng-bind-html="trafficDetail.infoDesc">
-                                    </p>
+                                        </div>
+                                    <div class="TrafficInfoDescDiv">
+
+                                    <div id="traffic" class="" ng-bind-html="trafficDetail.infoDesc">
+                                    </div>
+                                        </div>
                                 </div>
                         </ion-content>
                     </div>
