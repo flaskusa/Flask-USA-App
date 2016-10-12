@@ -28,13 +28,12 @@
         function showEvents() {
             myEventService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 $scope.myEvent = respData.data.Events;
-                console.log(respData.data.Events);
 
-                for (var i = 0; i<=$scope.myEvent.length; i++){
-                    if ($scope.myEvent[i].userEvent == "0") {
+                for (var i = 0; i < $scope.myEvent.length; i++) {
+                    if ($scope.myEvent[i].userEvent == 1) {
                         $scope.myFilteredEvent.push($scope.myEvent[i]);
                     }
-                    if( $scope.myFilteredEvent.length=="0")
+                    if( $scope.myFilteredEvent.length == 1)
                     {
                         $scope.Add_Event_Error = true;
                     }
