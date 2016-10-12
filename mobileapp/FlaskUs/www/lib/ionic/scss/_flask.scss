@@ -2454,3 +2454,39 @@ div .manage_event_default_Image{
   z-index: 2;
   margin-left: 121px;
 }
+
+#traffic ul {
+  list-style: none;
+}
+#traffic ul {
+  background: url("../img/flask_icons/star.svg") no-repeat left top;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 27px;
+  padding-top: 1px;
+  overflow: visible;
+}
+#traffic li{
+  font-weight: 500;
+  font-size: 14px;
+}
+
+
+
+.fontSizeTrafficHeading{
+  font-size: 18px;
+}
+.removeBorderTraffic {
+  background-image:none;
+}
+.trafficDetailHeading{
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  width: 80%;
+}
+.TrafficInfoDescDiv{
+  width:80%;
+  margin-left: 30px;
+  margin-top: 5px
+}
