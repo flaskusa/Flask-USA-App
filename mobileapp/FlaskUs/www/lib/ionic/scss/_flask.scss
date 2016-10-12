@@ -1181,7 +1181,7 @@ a.tab-item {
 /*tailgate event detaila*/
 
 .thumb-size{
-    width:47%;
+    width:147px;
     height:101% !important;
     border-right:solid white 2px;
 }
@@ -2286,4 +2286,11 @@ label.remember1.item.item-checkbox.ng-valid.ng-not-empty{
 }
 .paddingTOpSupply{
   margin-top: 1px;
+}
+.crossIconTailgate{
+  position:absolute;
+  font-weight:500;
+  font-size: 26px;
+  z-index: 2;
+  margin-left: 121px;
 }
