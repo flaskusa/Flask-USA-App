@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgateDetailsCtrl', mytailgateDetailsCtrl);
 
-    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer'];
+    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer','IonicClosePopupService','$rootScope'];
 
     /* @ngInject */
-    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer) {
+    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService,$rootScope) {
         $cookies.remove("currtailGateMakers");
         $scope.myTailgaters = [];
         $scope.allMessages = [];
@@ -17,12 +17,15 @@
         var userId = [];
         var userMessage = [];
         $scope.uploadTailgateImagesUrl = SERVER.url + '/flask-user-tailgate-portlet.tailgateimages/upload-tailgate-image';
+        $scope.imgUrl = SERVER.hostName +"c/document_library/get_file?uuid=";
         $cookies.put('currtailGateId', tailGateId);
         getMyTailgate();
         get_message_list(tailGateId);
+        $scope.isTailgateAdmin = false;
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
+        
 
         function getMyTailgate() {
             TailgateService.getTailgate(tailGateId).then(function (respData) {
@@ -95,6 +98,20 @@
             }
         }
 
+
+        $scope.isUserTailgateAdmin = function (tailgateId) {
+            TailgateService.isUserTailgateAdmin(tailgateId).then(function (respData) {
+                $scope.isTailgateAdmin = respData.data;
+                console.log("Admin User " + $scope.isTailgateAdmin);
+            });
+        };
+
+        $scope.isUserTailgateAdmin();
+         $scope.removeTailgateImage = function(index, imageId) {
+            TailgateService.deleteTailgateImageByImageId(imageId).then(function(res){
+            $scope.myTailgateImages.splice(index,1);
+            })
+        }
         function editTailgate(tailGateId) {
             var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {
@@ -121,38 +138,66 @@
                 + '</div>';
             $scope.cameraPopup = $ionicPopup.show({
                 template: customTemplate,
-                title: 'Choose the Profile Picture from:-',
-                scope: $scope,
-                buttons: [{
-                    text: '<b>Cancel</b>',
-                    type: 'button-positive',
-                    onTap: function (e) {
-                        $scope.cameraPopup.close();
-                    }
-                }]
+                title: 'Choose Picture from:-',
+                scope: $scope
             });
+            IonicClosePopupService.register($scope.cameraPopup);
         };
-        $scope.camera = function () {
-            var options = {
-                quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: Camera.PictureSourceType.CAMERA,
-                allowEdit: true,
-                encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 100,
-                targetHeight: 100,
-                popoverOptions: CameraPopoverOptions,
-                saveToPhotoAlbum: false,
-                correctOrientation: true
-            };
 
-            $cordovaCamera.getPicture(options).then(function (imageData) {
-                var image = document.getElementById('myImage');
-                image.src = "data:image/jpeg;base64," + imageData;
-            }, function (err) {
-                // error
-            });
-        }
+        $scope.camera = function () {
+                    $scope.cameraPopup.close();
+                    $scope.checkPermission();
+                }
+                $scope.openCamera = function () {
+                    var options = {
+                        quality: 50,
+                        destinationType: Camera.DestinationType.FILE_URI,
+                        sourceType: Camera.PictureSourceType.CAMERA,
+                        allowEdit: true,
+                        encodingType: Camera.EncodingType.JPEG,
+                        popoverOptions: CameraPopoverOptions,
+                        saveToPhotoAlbum: false,
+                        correctOrientation: true,
+                    };
+
+                    $cordovaCamera.getPicture(options).then(function (imageURI) {
+                         $scope.uploadFileToServer(imageURI);
+                    }, function (err) {
+
+                    });
+                };
+                $scope.checkPermission = function () {
+                    var hasPermission = false;
+                    var permissions = cordova.plugins.permissions;
+                    permissions.hasPermission(permissions.READ_EXTERNAL_STORAGE, checkPermissionCallback, null);
+                    function checkPermissionCallback(status) {
+                        if (!status.hasPermission) {
+                            var errorCallback = function () {
+                                console.warn('READ_EXTERNAL_STORAGE permission is not turned on');
+                            }
+
+                            permissions.requestPermission(
+                                permissions.READ_EXTERNAL_STORAGE,
+                                function (status) {
+                                    if (!status.hasPermission) {
+                                        errorCallback();
+                                    } else {
+                                        $scope.openCamera();
+                                        hasPermission = status.hasPermission;
+                                    }
+                                },
+                                errorCallback);
+                        } else {
+                            hasPermission = status.hasPermission;
+                            $scope.openCamera();
+                        }
+                    }
+                    return hasPermission;
+                };
+
+
+
+
         // for accessing gallery on mobile
         $scope.gallery = function () {
             $scope.cameraPopup.close();
@@ -172,6 +217,7 @@
         }
 
         $scope.uploadFileToServer = function (fileURL) {
+         $rootScope.$broadcast('loading:show');
             var options = {};
             options.fileKey = "file";
             var params = {};
@@ -183,19 +229,16 @@
             options.headers = headers;
             $cordovaFileTransfer.upload(encodeURI($scope.uploadTailgateImagesUrl), fileURL, options)
                 .then(function (r) {
-                    $scope.downloadProgress = 0;
                     var data = $.parseJSON(r.response);
+                     $rootScope.$broadcast('loading:hide')
+                     data = $.parseJSON(data);
+                    console.log("Image Dta is"+JSON.stringify(data));
                     $scope.myTailgateImages.push(data);
-                    //                  var repositoryId  = data.repositoryId;
-                    //                  var folderId = data.folderId;
-                    //                  var title = data.title;
-                    //                  $scope.setLogoImageUrl(repositoryId,folderId,title);
                 }, function (error) {
-                    alert("An error has occurred: Code = " + error.code);
+                 $rootScope.$broadcast('loading:hide')
                     console.log("upload error source " + error.source);
                     console.log("upload error target " + error.target);
                 }, function (progress) {
-                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
                 });
         }
 

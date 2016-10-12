@@ -115,6 +115,8 @@
             return hasPermission;
         };
         $scope.setSelectedImageURIToUpload = function (imageURI) {
+         
+            $scope.defaultImageUrl='';
             $scope.defaultImageUrl = imageURI;
             $scope.isImageSelectedToUpload = true;
             $scope.selectedImageURIToUpload = imageURI;
@@ -145,6 +147,7 @@
                     var imageUUID = data.imageUUID;
                     var imageGroupId = data.imageGroupId;
                     $scope.setEventDetailUrl(eventDetailId, imageUUID, imageGroupId);
+                    $scope.initialize();
                 }, function (error) {
                     $scope.reSetSelectedImageURIToUpload();
                     $rootScope.$broadcast('loading:hide')
@@ -170,7 +173,7 @@
                         if($scope.selectedImageURIToUpload!=undefined && $scope.selectedImageURIToUpload!='') {
                             $scope.uploadFileToServer($scope.selectedImageURIToUpload, response.data.eventId, response.data.eventDetailId);
                         }
-                            $scope.editContent = false;
+                        $scope.editContent = false;
                     }else{
 
                     }
@@ -179,9 +182,18 @@
             else if (content.eventDetailId > 0) {
                 EventsService.updateEventDetailDuringEvent(content.infoTitle, content.infoDesc, $scope.currEventId, content.eventDetailId,$scope.infoTypeCategoryId,$scope.infoTypeId).then(function (response) {
                     if (response.data.eventDetailId > 0) {
+                        EventsService.deleteEventDetailImageById(content.eventDetailImageId).then(function(response2){
+
+
+                        if($scope.selectedImageURIToUpload!=undefined && $scope.selectedImageURIToUpload!='') {
+                            $scope.uploadFileToServer($scope.selectedImageURIToUpload, response.data.eventId, response.data.eventDetailId);
+                        }
                         $scope.editContent = false;
-                    }
+
+                        });
+                        }
                 });
+
             }
 
 
@@ -195,6 +207,7 @@
         }
         $scope.editContents=function(content,index){
             $scope.content=content;
+            $scope.defaultImageUrl=content.imageUrl;
             $scope.editContent=true;
         }
         $scope.deleteEventDetail=function(eventDetailId,index){
@@ -228,6 +241,7 @@
                     if ("Flask Us" == tempObject.infoTypeCategoryName) {
                         if(ImgObj.length!=0){
                             tempObject.imageUrl=baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                            tempObject.eventDetailImageId=angular.fromJson(ImgObj[0].DetailImage).eventDetailImageId
                         }
                         $scope.flaskUsDetails1.push(tempObject);
 
@@ -237,6 +251,7 @@
                     if ("Flask Us" == tempObject.infoTypeCategoryName) {
                         if(ImgObj.DetailImages.length!=0){
                             tempObject.imageUrl=baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                            tempObject.eventDetailImageId=angular.fromJson(ImgObj[0].DetailImage).eventDetailImageId
                         }
                         $scope.flaskUsDetails2.push(tempObject);
                     }
