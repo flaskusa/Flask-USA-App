@@ -47,7 +47,10 @@
                             </a>
                             <a class="item item-list-detail" style="padding: 0px;">
                                 <ion-scroll direction="x" style="overflow: visible;" class="tailgate_thumb">
-                                    <img ng-repeat="images in myTailgateImages" ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}" class="list-thumbnail thumb-size" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
+                                    <span ng-repeat="images in myTailgateImages">
+                                    <i class="icon ion-close-circled" style="position:absolute;font-weight:500;font-size: 26px;z-index: 2;margin-left: 105px"></i>
+                                    <img  ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}" class="list-thumbnail thumb-size" alt="Image not found" onError="this.src = 'img/FlaskRed.png';"/>
+                                </span>
                                 </ion-scroll>
                             </a>
                         </span>
