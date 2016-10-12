@@ -1823,22 +1823,23 @@ div .extra-right-supply{
   border-radius: 2px 2px 0 0;
   /* In accordance with the rounding of the default infowindow corners. */ }
 
-#iw-container .iw-content {
+#iw-container #iw-content {
   text-align: center;
-  font-size: 16px;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 3px;
-  background: #ffffff;
-  color: #000000; }
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 3px;
+    background: #ffffff;
+    color: #000000;
+    position: fixed;
+    width: 311px; }
 
-.iw-content .padding {
+#iw-content .padding {
   padding: 10px; }
-  .iw-content a {
-    text-decoration: none !important;
-    color: black
-}
 
+#iw-content a {
+  text-decoration: none !important;
+  color: black; }
 
 #iw-container .iw-title .iw-sub-title {
   font-size: 10px;
@@ -1846,15 +1847,12 @@ div .extra-right-supply{
 
 .gm-style-iw {
   width: 313px !important;
-  top: 20px !important;
-   }
+  top: 20px !important; }
 
-   #iw-container {
-     overflow: hidden;
-     height : 46px;
-    transition: height 2s;
-
-   }
+#iw-container {
+  overflow: hidden;
+  height: 46px;
+  transition: height 2s; }
 .my-message-view {
   .item-content {
     padding-right: 6px;

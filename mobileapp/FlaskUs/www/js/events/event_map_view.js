@@ -3,13 +3,13 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate','$cordovaInAppBrowser','SERVER'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate,$cordovaInAppBrowser,SERVER) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER) {
         /* jshint validthis: true */
         var self = this;
-        var baseImagePath = SERVER.hostName+"c/document_library/get_file";
+        var baseImagePath = SERVER.hostName + "c/document_library/get_file";
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15, control: {} };
         $scope.map.events = [];
         $scope.map.events["click"] = function () {
@@ -55,17 +55,17 @@
         $scope.isNightLifeFlaskMarkerShown = true;
         $scope.isNightLifeGoogleMarkerShown = false;
         $scope.currentMap;
-        $scope.toggleQueDiv=true;
-        $scope.toggleMsgDiv=function() {
+        $scope.toggleQueDiv = true;
+        $scope.toggleMsgDiv = function () {
             $scope.hideDiv = false;
-            if($scope.toggleQueDiv==false){
+            if ($scope.toggleQueDiv == false) {
                 $scope.toggleQueDiv = !$scope.toggleQueDiv;
                 if ($scope.toggleQueDiv == true) {
                     $timeout(function () {
                         $scope.hideDiv = true;
                     }, 500);
                 }
-            }else {
+            } else {
                 $timeout(function () {
                     $scope.toggleQueDiv = !$scope.toggleQueDiv;
                 }, 30);
@@ -160,16 +160,16 @@
 
             var href = $scope.createMapLink($scope.currentShownInfoWindow.addrLine1);
 
-            $("#iwTakeMeThere").on("click", function(){
-               openUrl(href,"_system");
-             });
+            $("#iwTakeMeThere").on("click", function () {
+                openUrl(href, "_system");
+            });
             if ($scope.currentShownInfoWindow.phone == '') {
                 $("#iwCallNow").text("Not Available");
             } else {
                 href = "tel:" + $scope.currentShownInfoWindow.phone;
-               $("#iwCallNow").on("click", function(){
-                   openUrl(href,"_system");
-               });
+                $("#iwCallNow").on("click", function () {
+                    openUrl(href, "_system");
+                });
             }
 
             if ($scope.currentShownInfoWindow.website == '') {
@@ -177,33 +177,37 @@
             } else {
                 href = $scope.currentShownInfoWindow.website;
                 href = fixUrl(href);
-                $("#iwViewWebsite").on("click", function(){
-                   openUrl(href,"_system");
-                 });
+                $("#iwViewWebsite").on("click", function () {
+                    openUrl(href, "_system");
+                });
             }
         }
 
-       function openUrl(url,target){
-           $cordovaInAppBrowser.open (url,target,{location:'no'}).
-           then(function(event) {
-                   // success
-           })
-            .catch(function(event) {
-               // error
-            });
-       }
+        function openUrl(url, target) {
+            $cordovaInAppBrowser.open(url, target, { location: 'no' }).
+                then(function (event) {
+                    // success
+                })
+                .catch(function (event) {
+                    // error
+                });
+        }
         function setInfoWindowEvent() {
             infoWindowEvent();
             $timeout(function () {
                 $(".iw-content-toggle").click(function () {
-                    var toggller = $("#iw-container .iw-content");
-                    toggller.toggle();
+                    var toggller = $("#iw-container #iw-content");
                     var toggleImage = $(".iw-content-toggle").find("img");
-                    if (!toggller.is(":visible")) {
+                    if (toggller.is(":visible")) {
                         toggleImage.attr("src", "img/map_icons/circle-right _arrow.png");
                     } else {
                         toggleImage.attr("src", "img/map_icons/circle-down_arrow.png");
                     }
+                   toggller.slideToggle("slow", function () {
+                       
+                    });
+
+                    // toggller.toggle();
                 })
                 infoWindowEvent();
             }, 100);
@@ -575,11 +579,11 @@
         $scope.setMarkers = function () {
             if (!$scope.isMapMarkersSet) {
                 var tempObject = {};
-                var ImgObj=[];
+                var ImgObj = [];
                 $scope.flaskUsDetails = [];
                 angular.forEach($scope.eventDetails, function (value, index) {
                     tempObject = {};
-                    ImgObj=[]
+                    ImgObj = []
                     ImgObj = angular.fromJson(value.DetailImages);
                     value = angular.fromJson(value);
                     tempObject = angular.fromJson(value.Detail);
@@ -597,8 +601,8 @@
                         } else if ("Traffic" == tempObject.infoTypeCategoryName) {
                             $scope.trafficDetails.push(tempObject);
                         } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
-                            if(ImgObj.length!=0){
-                                tempObject.imageUrl=baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                            if (ImgObj.length != 0) {
+                                tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                             }
                             $scope.flaskUsDetails.push(tempObject);
                         }
