@@ -138,43 +138,123 @@
                 $ionicSlideBoxDelegate.$getByHandle(slide).next();
             }
 
-            $scope.getIncludeFile = function (imgName) {
+            $scope.getBackgroundImage = function (imgName, infotype) {
+                var defaultExt = ".jpg";
+                var fileName
                 switch (imgName.toLowerCase()) {
                     case "tradition":
-                        return 'Flask_Tradition';
+                        fileName = 'Flask_Tradition';
+                        break;
                     case "parking":
-                        return 'PRE_PARKING';
+                        fileName = 'PRE_PARKING';
+                        break;
                     case "bar & restaurants":
-                        return 'PRE_BAR_RESTAURANTS';
+                        fileName = 'PRE_BAR_RESTAURANTS';
+                        break;
                     case "traffic":
-                        return 'PRE_TRAFFIC';
+                        fileName = 'PRE_TRAFFIC';
+                        break;
                     case "supplies":
-                        return 'Flask_Supplies';
+                        fileName = 'Flask_Supplies';
+                        break;
                     case "getting home":
-                        return 'flask_GettingHome';
+                        fileName = 'flask_GettingHome';
+                        break;
                     case "nightlife":
-                        return 'POST_NIGHTLIFE';
+                        fileName = 'POST_NIGHTLIFE';
+                        break;
                     case "liquor store":
-                        return 'flask_restaurantBar_post';
+                        fileName = 'flask_restaurantBar_post';
+                        break;
                     case "venue info":
-                        return 'venue_info';
+                        fileName = 'venue_info';
+                        break;
                     case "venue map":
-                        return 'VENUE_MAP';
+                        fileName = 'VENUE_MAP';
+                        break;
                     case "flask us":
-                        return 'Flask_FlaskUs';
+                        fileName = 'Flask_FlaskUs' + "_" + infotype;
+                        break;
                     case "tickets":
-                        return 'tickets';
+                        fileName = 'tickets';
+                        break;
                     case "game day needs":
-                        return 'PRE_SUPPLIES';
+                        fileName = 'PRE_SUPPLIES';
+                        break;
                     case "add content":
-                        return 'Add_Event_Content'
+                        fileName = 'Add_Event_Content'
+                        break;
                     case "hotels":
-                        return 'POST_HOTEL'
+                        fileName = 'POST_HOTEL'
+                        break;
                     case "getting home":
-                        return 'POST_GETTINGHOME'
+                        fileName = 'POST_GETTINGHOME'
+                        break;
                     default:
-                        return 'Flask_Default_Image';
+                        fileName = 'Flask_Default_Image';
                 }
+                fileName = fileName + defaultExt;
+                return fileName;
+            }
+
+            $scope.getImageLabel = function (imgName, infotype) {
+
+                var defaultExt = ".svg";
+                var fileName
+                switch (imgName.toLowerCase()) {
+                    case "tradition":
+                        fileName = 'Flask_Tradition';
+                        break;
+                    case "parking":
+                        fileName = 'PRE_PARKING';
+                        break;
+                    case "bar & restaurants":
+                        fileName = 'PRE_BAR_RESTAURANTS';
+                        break;
+                    case "traffic":
+                        fileName = 'PRE_TRAFFIC';
+                        break;
+                    case "supplies":
+                        fileName = 'Flask_Supplies';
+                        break;
+                    case "getting home":
+                        fileName = 'flask_GettingHome';
+                        break;
+                    case "nightlife":
+                        fileName = 'POST_NIGHTLIFE';
+                        break;
+                    case "liquor store":
+                        fileName = 'flask_restaurantBar_post';
+                        break;
+                    case "venue info":
+                        fileName = 'venue_info';
+                        break;
+                    case "venue map":
+                        fileName = 'VENUE_MAP';
+                        break;
+                    case "flask us":
+                        fileName = 'Flask_FlaskUs' + "_" + infotype;
+                        break;
+                    case "tickets":
+                        fileName = 'tickets';
+                        break;
+                    case "game day needs":
+                        fileName = 'PRE_SUPPLIES';
+                        break;
+                    case "add content":
+                        fileName = 'Add_Event_Content'
+                        break;
+                    case "hotels":
+                        fileName = 'POST_HOTEL'
+                        break;
+                    case "getting home":
+                        fileName = 'POST_GETTINGHOME'
+                        break;
+                    default:
+                        fileName =  'Flask_Default_Image';
+                }
+                fileName = fileName + defaultExt;
+                return fileName;
             }
         }
     }
