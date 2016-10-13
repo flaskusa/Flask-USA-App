@@ -1659,9 +1659,11 @@ position:initial !important;
 a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 .emailText {
   color: darkorange;
-  padding-top:14px;
 }
 
+.friend_group_name{
+    padding-top:4px !important;
+}
 
 .my-groupDetail-view {
   .item-content {
@@ -1718,6 +1720,12 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 /* Message board in my_tailgate_event_details*/
 .list.list-inset.msgboard{
     border:solid 1px;
+    margin-top: 7px;
+}
+
+.msgboard_div{
+    font-weight: 700;
+    font-size: 21px;
 }
 
 .messageList{    
@@ -1772,6 +1780,11 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 }
 
 .message_username{color:orange !important;}
+
+.image_list{
+    padding: 0px;
+}
+
 .supplyDeleteButton{
   background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
   width: 50px;
