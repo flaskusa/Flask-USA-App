@@ -38,7 +38,7 @@
                 <ion-content class=" has-subheader">
                     <ion-list>
                         <ion-list>
-                            <ion-item ng-repeat="data in myFriends " class="item-avatar " item="data">
+                            <ion-item ng-repeat="data in myFriends| filter:searchContact.searchtext " class="item-avatar " item="data">
                                 <img src="img/default-profilepic-copy.png">
                                 <h2>{{ data.fullName | uppercase}}</h2>
                                 <p>{{ data.emailAddress}}</p>

@@ -102,11 +102,10 @@
         $scope.isUserTailgateAdmin = function (tailgateId) {
             TailgateService.isUserTailgateAdmin(tailgateId).then(function (respData) {
                 $scope.isTailgateAdmin = respData.data;
-                console.log("Admin User " + $scope.isTailgateAdmin);
             });
         };
 
-        $scope.isUserTailgateAdmin();
+        $scope.isUserTailgateAdmin(tailGateId);
          $scope.removeTailgateImage = function(index, imageId) {
             TailgateService.deleteTailgateImageByImageId(imageId).then(function(res){
             $scope.myTailgateImages.splice(index,1);

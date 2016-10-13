@@ -45,14 +45,14 @@
                                    required>
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
-                            <span class="input-label">Start Time</span>
-                            <input type="text" placeholder="Start Time" class="form-control" ng-model="addTailgateParams.startTime" name="addTailgateParams.startTime"  required>
-                            <i class="icon ion-ios-clock" ng-click="openTimePicker1();"></i>
+                            <span class="input-label">Start Time </span> 
+                            <input type="time" placeholder="HH:mm:ss" class="form-control"   name="startTime" ng-model="addTailgateParams.startTime" required>
+                            <!--<i class="icon ion-ios-clock" ng-click="openTimePicker1();"></i>-->
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
                             <span class="input-label">End Time</span>
-                            <input type="text" placeholder="End Time" class="form-control" ng-model="addTailgateParams.endTime" name="EndTime"  required>
-                            <i class="icon ion-ios-clock" ng-click="openTimePicker2();"></i>
+                            <input type="time" placeholder="HH:mm:ss" class="form-control" name="endTime" ng-model="addTailgateParams.endTime" required>
+                            <!--<i class="icon ion-ios-clock" ng-click="openTimePicker2();"></i>-->
                         </div>
                         <!--<div class="item item-input item-floating-label">
                             <span class="input-label">Venmo Account:</span>
@@ -110,7 +110,7 @@
                                             <p class="dateCol">Created By : {{data.createdBy | uppercase}}</p>
                                             <span class="badge span_icon"><img src="img/flask_icons/add_new.svg" ng-click="getusersofGroup(data.groupId)"></span>
                                         </a>
-                                        <a class="item" ng-if="allGroups.length == 0"> You do not have any friends yet. Please search and add friends </a>
+                                        <a class="item" ng-if="allGroups.length == 0"> You do not have any group yet. Please search and add group </a>
                                     </div>
                                 </div>
                             </div>
@@ -168,25 +168,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="strip paddingTOpSupply" ng-click="toggleSupplyItem()">
-                    <div class="stripPadding">
-                        <span><i class="textStyle marginLeftSupplyText"> ITEM ASSIGNMENT</i></span>
-                        <i class="icon ion-chevron-right" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==true"></i>
-                        <i class="icon ion-chevron-down" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==false"></i>
-                    </div>
-                </div>
-                <div class="list" id = "supplyItemDiv">
-                    <label class="item item-input item-select" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
-                        <div class="input-label" style="width:60%">
-                            <i class="addText"> {{ item.supplyItemName | uppercase}} </i>
-
-                        </div>
-                        <select ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" style="background:inherit">
-                            <option value="-1" >Select attendee</option>
-                            <option ng-repeat="attendee in myTailgaters" value="{{attendee.userId}}">{{attendee.userName}}</option>
-                        </select>
-                    </label>
-                </div>
+                
 
                 <div class="strip paddingTOpSupply" ng-click="toggleItem()">
                     <div class="stripPadding">
@@ -209,6 +191,26 @@
                         </ion-item>
                     </ion-list>
                 </div>
+                <div class="strip paddingTOpSupply" ng-click="toggleSupplyItem()">
+                    <div class="stripPadding">
+                        <span><i class="textStyle marginLeftSupplyText"> ITEM ASSIGNMENT</i></span>
+                        <i class="icon ion-chevron-right" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==true"></i>
+                        <i class="icon ion-chevron-down" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==false"></i>
+                    </div>
+                </div>
+                <div class="list" id = "supplyItemDiv">
+                    <label class="item item-input item-select" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
+                        <div class="input-label" style="width:60%">
+                            <i class="addText"> {{ item.supplyItemName | uppercase}} </i>
+
+                        </div>
+                        <select ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" style="background:inherit">
+                            <option value="-1" >Select attendee</option>
+                            <option ng-repeat="attendee in myTailgaters" value="{{attendee.userId}}">{{attendee.userName}}</option>
+                        </select>
+                    </label>
+                </div>
+
                 <div class="list" style="margin-bottom:40px;">
                     <button type="button" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems();">
                         Add Supply List

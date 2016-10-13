@@ -61,6 +61,22 @@
         $scope.allMyTailgateItems = [];
         $scope.newUpdate = { 'amountToPay': '', 'venmoAccountId': '' };
 
+        $scope.isMobile = {
+            Android: function () {
+                return ionic.Platform.isAndroid();
+            },
+            iOS: function () {
+                return ionic.Platform.isIOS();
+            },
+            Windows: function () {
+                return ionic.Platform.isWindowsPhone();
+            }
+        };
+
+        // var modelstartTime = new Date();
+        //  modelstartTime =$filter('date')(new Date(), 'hh:mm a');
+
+
         getMySupplyList();
 
         $scope.goBack = function () {
@@ -68,6 +84,25 @@
         }
         var tailgateId = $cookies.get("currtailGateId");
         $scope.initialize = function () {
+            var x = new Date();
+            var hour = x.getHours();
+            var minute = x.getMinutes();
+            var seconds = x.getSeconds();
+            var year = x.getYear() + 1900;
+            var month = x.getMonth();
+            var day = x.getDate();
+
+            $scope.addTailgateParams = {
+                tailgateName: '',
+                tailgateDescription: '',
+                eventId: '',
+                eventName: '',
+                venmoAccountId: '',
+                amountToPay: '',
+                tailgateId: '',
+                startTime: new Date(year,month,day,hour,minute,0),
+                endTime: new Date(year,month,day,hour,minute,0)
+            }
             checkTailgateId();
             if (tailgateId != undefined && tailgateId > 0 && $scope.tailgateLogoId > 0) {
                 $scope.getTailGateLogo(tailgateId);
@@ -79,7 +114,7 @@
             // if (tailgateId != undefined && tailgateId > 0) {
             //     getItems();
             // }
-            getTailgaters();
+            getTailgaters(tailgateId);
 
         }
         $scope.selectTab = function (index) {
@@ -92,15 +127,7 @@
             supplyItemName: ['user']
         };
 
-        $scope.addTailgateParams = {
-            tailgateName: '',
-            tailgateDescription: '',
-            eventId: '',
-            eventName: '',
-            venmoAccountId: '',
-            amountToPay: '',
-            tailgateId: ''
-        }
+
         callMap($scope.latitude, $scope.longitude);
         //calling map on load and on events change
         function callMap(currlatitude, currlongitude) {
@@ -165,21 +192,21 @@
             saveMaker(markerData);
         }
         function saveMaker(markerData) {
-             $scope.locationPopup.close();
-            if($scope.taligateMarkers.tailgatemarkerid && $scope.taligateMarkers.tailgatemarkerid > 0) {
-                TailgateService.deleteTailgateMarker(tailgateId).then(function(response){
+            $scope.locationPopup.close();
+            if ($scope.taligateMarkers != undefined && $scope.taligateMarkers.tailgatemarkerid > 0) {
+                TailgateService.deleteTailgateMarker(tailgateId).then(function (response) {
                     saveTailgateMarker(markerData);
                 })
             } else {
                 saveTailgateMarker(markerData);
             }
-           
+
         }
         function saveTailgateMarker(markerData) {
-             TailgateService.addTailgateMarkers(markerData).then(function (respData) {
+            TailgateService.addTailgateMarkers(markerData).then(function (respData) {
                 $scope.taligateMarkers = respData.data;
-                 $scope.map.markers[0].name = markerData.name;
-                 $scope.map.markers[0].description = markerData.description;
+                $scope.map.markers[0].name = markerData.name;
+                $scope.map.markers[0].description = markerData.description;
             });
         }
         //call on marker click
@@ -211,12 +238,12 @@
                 scope: $scope
             });
             IonicClosePopupService.register($scope.locationPopup);
-                
-            
+
+
         };
         $scope.clearMArkersOnMap = function (addMarker) {
-            TailgateService.deleteTailgateMarker(tailgateId).then(function(res){
-                 $scope.map.markers.pop();
+            TailgateService.deleteTailgateMarker(tailgateId).then(function (res) {
+                $scope.map.markers.pop();
                 $scope.locationPopup.close();
             });
         }
@@ -240,13 +267,13 @@
             TailgateService.getEvent(eventId).then(function (respData) {
                 $scope.CurrEvent = respData.data;
                 var venueID = $scope.CurrEvent.venueId;
-                var currStartTime = $filter('date')($scope.CurrEvent.startTime, 'hh:mm a');
-                var currEndTime = $filter('date')($scope.CurrEvent.endTime, 'hh:mm a');
+                var currStartTime = getTailgateTime($scope.CurrEvent.startTime);
+                var currEndTime = getTailgateTime($scope.CurrEvent.endTime);
                 var currDate = $filter('date')($scope.CurrEvent.eventDate, 'MM-dd-yyyy');
 
                 $scope.addTailgateParams.startTime = currStartTime;
-                $scope.selectedtime1 = currStartTime;
-                $scope.selectedtime2 = currEndTime;
+                // $scope.selectedtime1 = currStartTime;
+                // $scope.selectedtime2 = currEndTime;
                 $scope.addTailgateParams.endTime = currEndTime;
                 $scope.tailgateDate = currDate;
                 TailgateService.getvenueDetails(venueID).then(function (VENUEData) {
@@ -262,7 +289,7 @@
         $scope.enableTab = {
             condition: false
         };
-        
+
         function checkTailgateId() {
             var tailgateDetails = $cookies.getObject("editUserTailgate");
             if (!tailgateDetails) {
@@ -276,8 +303,9 @@
             $cookies.remove('newtailgatedata');
             $scope.newUpdate = { 'amountToPay': tailgateDetails.amountToPay, 'venmoAccountId': tailgateDetails.venmoAccountId };
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
-            $scope.selectedtime1 = $filter('date')(tailgateDetails.startTime, 'hh:mm a');
-            $scope.selectedtime2 = $filter('date')(tailgateDetails.endTime, 'hh:mm a');
+
+            $scope.selectedtime1 = getTailgateTime(tailgateDetails.startTime);
+            $scope.selectedtime2 = getTailgateTime(tailgateDetails.endTime); 
             $scope.tailgateLogoId = tailgateDetails.logoId;
             $scope.addTailgateParams = {
                 tailgateName: tailgateDetails.tailgateName,
@@ -287,8 +315,8 @@
                 venmoAccountId: tailgateDetails.venmoAccountId,
                 amountToPay: tailgateDetails.amountToPay,
                 tailgateId: tailgateDetails.tailgateId,
-                startTime  :$scope.selectedtime1,
-                endTime :   $scope.selectedtime2,
+                startTime: $scope.selectedtime1,
+                endTime: $scope.selectedtime2,
                 logoId: tailgateDetails.logoId
             }
             $scope.editData = {
@@ -353,7 +381,11 @@
         //camera plugin
         $scope.camera = function () {
             $scope.cameraPopup.close();
-            $scope.checkPermission();
+            if ($scope.isMobile.Android()) {
+                $scope.checkPermission();
+            } else if ($scope.isMobile.iOS()) {
+                $scope.openCamera();
+            }
         }
         $scope.openCamera = function () {
             var options = {
@@ -461,7 +493,7 @@
         }
 
         $scope.setLogoImageUrl = function (repositoryId, folderId, title) {
-            console.log("paramteres"+repositoryId +" " + " "  + folderId + title)
+            console.log("paramteres" + repositoryId + " " + " " + folderId + title)
             $scope.tailgateLogoUrl = SERVER.hostName + "documents/" + repositoryId + "/" + folderId + "/" + title;
             // $scope.tailgateLogoUrl = encodeURI($scope.tailgateLogoUrl);
         }
@@ -471,8 +503,8 @@
             if (tailgatedata.eventName.trim() == '' || !tailgatedata.eventId > 0) {
                 return;
             }
-            var startTime = Date.parse($scope.tailgateDate + " " + tailgatedata.startTime); // Your timezone!
-            var endTime = Date.parse($scope.tailgateDate + " " + tailgatedata.endTime);
+            var startTime = Date.parse(tailgatedata.startTime); // Your timezone!
+            var endTime = Date.parse(tailgatedata.endTime);
             tailgatedata.tailgateDate = new Date($scope.tailgateDate).getTime();
             tailgatedata.endTime = endTime;
             tailgatedata.startTime = startTime;
@@ -509,7 +541,7 @@
         $scope.updatetailgate = function (newUpdate) {
             var updateData = $cookies.getObject("newtailgatedata");
             updateData.venmoAccountId = newUpdate.venmoAccountId;
-            updateData.amountToPay = parseInt(newUpdate.amountToPay);
+            updateData.amountToPay = parseFloat(newUpdate.amountToPay);
             console.log(updateData);
             TailgateService.updateTailgateInfo(updateData).then(function (respdata) {
                 console.log(respdata);
@@ -537,56 +569,56 @@
         }
         //to add date popup in form
         $scope.selectedtime1;
-        
-        
+
+
         $scope.openTimePicker1 = function () {
             var startTime = Date.parse($scope.tailgateDate + " " + $scope.addTailgateParams.startTime); // Your timezone!
             var ipObj1 = {
-          
-            callback: function (val) {
-                if (typeof (val) === 'undefined') {
-                } else {
 
-                    var selectedTime = new Date(val * 1000);
-                    var currentHrs = selectedTime.getUTCHours();
-                    var currMinute = selectedTime.getUTCMinutes();
-                     currMinute = currMinute == 0 ? '00' : selectedTime.getUTCMinutes();
-                    if (currentHrs > 12) {
-                        $scope.addTailgateParams.startTime = currentHrs - 12 + ':' + currMinute + " PM";
+                callback: function (val) {
+                    if (typeof (val) === 'undefined') {
                     } else {
-                        $scope.addTailgateParams.startTime = currentHrs + ':' + currMinute + " AM";
+
+                        var selectedTime = new Date(val * 1000);
+                        var currentHrs = selectedTime.getUTCHours();
+                        var currMinute = selectedTime.getUTCMinutes();
+                        currMinute = currMinute == 0 ? '00' : selectedTime.getUTCMinutes();
+                        if (currentHrs > 12) {
+                            $scope.addTailgateParams.startTime = currentHrs - 12 + ':' + currMinute + " PM";
+                        } else {
+                            $scope.addTailgateParams.startTime = currentHrs + ':' + currMinute + " AM";
+                        }
                     }
-                }
-            },
-            inputTime: (((new Date(startTime)).getHours() * 60 * 60) + ((new Date(startTime)).getMinutes() * 60)),
-            format: 12,
-            step: 5,
-            setLabel: 'Set'
-        };
+                },
+                inputTime: (((new Date(startTime)).getHours() * 60 * 60) + ((new Date(startTime)).getMinutes() * 60)),
+                format: 12,
+                step: 5,
+                setLabel: 'Set'
+            };
             ionicTimePicker.openTimePicker(ipObj1);//for start timepicker
         };
         $scope.openTimePicker2 = function () {
-             var endTime = Date.parse($scope.tailgateDate + " " + $scope.addTailgateParams.endTime); // Your timezone!
+            var endTime = Date.parse($scope.tailgateDate + " " + $scope.addTailgateParams.endTime); // Your timezone!
             var ipObj2 = {
-            callback: function (val) {
-                if (typeof (val) === 'undefined') {
-                } else {
-                    var selectedTime = new Date(val * 1000);
-                    var currentHrs = selectedTime.getUTCHours();
-                    var currMinute = selectedTime.getUTCMinutes();
-                    currMinute = currMinute == 0 ? '00' : selectedTime.getUTCMinutes();
-                    if (currentHrs > 12) {
-                        $scope.addTailgateParams.endime = currentHrs - 12 + ':' + currMinute + " PM";
+                callback: function (val) {
+                    if (typeof (val) === 'undefined') {
                     } else {
-                        $scope.addTailgateParams.endime = currentHrs + ':' + currMinute + " AM";
+                        var selectedTime = new Date(val * 1000);
+                        var currentHrs = selectedTime.getUTCHours();
+                        var currMinute = selectedTime.getUTCMinutes();
+                        currMinute = currMinute == 0 ? '00' : selectedTime.getUTCMinutes();
+                        if (currentHrs > 12) {
+                            $scope.addTailgateParams.endime = currentHrs - 12 + ':' + currMinute + " PM";
+                        } else {
+                            $scope.addTailgateParams.endime = currentHrs + ':' + currMinute + " AM";
+                        }
                     }
-                }
-            },
-            inputTime: (((new Date(endTime)).getHours() * 60 * 60) + ((new Date(endTime)).getMinutes() * 60)),
-            format: 12,
-            step: 5,
-            setLabel: 'Set'
-        };
+                },
+                inputTime: (((new Date(endTime)).getHours() * 60 * 60) + ((new Date(endTime)).getMinutes() * 60)),
+                format: 12,
+                step: 5,
+                setLabel: 'Set'
+            };
             ionicTimePicker.openTimePicker(ipObj2);// for end timepicker
         };
 
@@ -615,12 +647,12 @@
             addUserparams.userName = currUserData.firstName + " " + currUserData.lastName;
             addUserparams.emailAddress = currUserData.emailAddress;
             addUserparams.isAdmin = 0;
-            addUserparams.tailgateId = newtailGateId;
+            addUserparams.tailgateId = tailgateId;
             addUserparams.isPaid = 0;
             addUserparams.paymentMode = "None";
             $scope.myFriends.splice(index, 1);
             addUsertoTailgate(addUserparams);
-            $scope.myTailgaters;
+            getTailgaters(tailgateId);
         }
         //get all groups either created by user or is a member of particular group.
         function getAllGroups() {
@@ -693,8 +725,17 @@
 
         //Adding supply items to tailgate
         $scope.addSupplyItems = function () {
+            $scope.items = [];
             angular.forEach($scope.selectedSupplyListItems, function (val, idx) {
-                $scope.items.push(val.supplyItemName)
+                
+                var tempItemName;
+                if(val.itemAssignedUserId > 0) {
+                    tempItemName = val.supplyItemName;
+                    if(tempItemName.indexOf("/") > -1){
+                    tempItemName = encodeURIComponent(tempItemName);
+                    }
+                     $scope.items.push(tempItemName);
+                }
             })
             itemArray = $scope.items.toString();
             var tailgateId = $cookies.get("currtailGateId");
@@ -801,6 +842,9 @@
             });
         }
         $scope.updateSupplyItems = function (data) {
+            if(data.supplyItemName.indexOf("/") > -1) {
+                data.supplyItemName = encodeURIComponent(data.supplyItemName);
+            }
             TailgateService.updateTailgateSupplyItem(data.supplyItemId, data.supplyItemName, tailgateId, data.itemAssignedUserId).then(function (respData) {
             });
         }
@@ -818,11 +862,21 @@
                 tempItem.createdDate = object.createdDate;
                 tempItem.modifiedDate = object.modifiedDate;
                 tempItem.supplyItemId = object.tailgateSupplyItemId;
-                tempItem.supplyItemName = object.supplyListItemName;
+                tempItem.supplyItemName = decodeURIComponent(object.supplyListItemName);
                 tempItem.itemAssignedUserId = object.itemAssignedUserId + "";
                 $scope.selectedSupplyListItems.push(tempItem)
             })
         };
+        function getTailgateTime(date) {
+             var x = new Date(date);
+            var hour = x.getHours();
+            var minute = x.getMinutes();
+            var seconds = x.getSeconds();
+            var year = x.getYear() + 1900;
+            var month = x.getMonth();
+            var day = x.getDate();
+            return new Date(year,month,day,hour,month,0);
+        }
         $scope.initialize();
 
     }

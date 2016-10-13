@@ -60,6 +60,7 @@
         function setMyTailGateItems(){
             angular.forEach($scope.allMyTailgateItems,function(val,index){
             val.itemAssignedUserId = val.itemAssignedUserId+"";
+            val.supplyListItemName = decodeURIComponent(val.supplyListItemName);
             val.itemAssignedUserName = getUserNameById(val.itemAssignedUserId);
             })
         }
