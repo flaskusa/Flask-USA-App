@@ -4,6 +4,52 @@
     angular
         .module('flaskApp')
         .service('TailgateService', TailgateService);
+    angular
+        .module('flaskApp').directive('validNumber', function () {
+            return {
+                require: '?ngModel',
+                link: function (scope, element, attrs, ngModelCtrl) {
+                    if (!ngModelCtrl) {
+                        return;
+                    }
+
+                    ngModelCtrl.$parsers.push(function (val) {
+                        if (angular.isUndefined(val)) {
+                            var val = '';
+                        }
+
+                        var clean = val.replace(/[^-0-9\.]/g, '');
+                        var negativeCheck = clean.split('-');
+                        var decimalCheck = clean.split('.');
+                        if (!angular.isUndefined(negativeCheck[1])) {
+                            negativeCheck[1] = negativeCheck[1].slice(0, negativeCheck[1].length);
+                            clean = negativeCheck[0] + '-' + negativeCheck[1];
+                            if (negativeCheck[0].length > 0) {
+                                clean = negativeCheck[0];
+                            }
+
+                        }
+
+                        if (!angular.isUndefined(decimalCheck[1])) {
+                            decimalCheck[1] = decimalCheck[1].slice(0, 2);
+                            clean = decimalCheck[0] + '.' + decimalCheck[1];
+                        }
+
+                        if (val !== clean) {
+                            ngModelCtrl.$setViewValue(clean);
+                            ngModelCtrl.$render();
+                        }
+                        return clean;
+                    });
+
+                    element.bind('keypress', function (event) {
+                        if (event.keyCode === 32) {
+                            event.preventDefault();
+                        }
+                    });
+                }
+            };
+        });
 
     TailgateService.$inject = ['$http', 'SERVER', '$q'];
 
@@ -82,8 +128,9 @@
             updateTailgateInfo: updateTailgateInfo,
             getTailgateLogo: getTailgateLogo,
             isUserTailgateAdmin: isUserTailgateAdmin,
-            removeTailgateLogo:removeTailgateLogo,
-            deleteTailgateImageByImageId : deleteTailgateImageByImageId
+            removeTailgateLogo: removeTailgateLogo,
+            deleteTailgateImageByImageId: deleteTailgateImageByImageId,
+            deleteTailgateMarker: deleteTailgateMarker
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -100,8 +147,20 @@
         }
 
         function deleteTailgateImageByImageId(imageId) {
-             return $http.get(SERVER.url + deleteTailgateImageURL, {
-                params: {'tailgateImageId':imageId}
+            return $http.get(SERVER.url + deleteTailgateImageURL, {
+                params: { 'tailgateImageId': imageId }
+            }
+            )
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+        function deleteTailgateMarker(tailgateId) {
+            return $http.get(SERVER.url + deleteTailgateMarkerURL, {
+                params: { 'tailgateId': tailgateId }
             }
             )
                 .then(function success(response) {

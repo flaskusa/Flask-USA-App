@@ -12,9 +12,8 @@
                     <div class="list add_my_tailgate">
                         <div class="list tailgatelogoContainer">
                             <div class="item item-image">
-                                <img ng-src="{{defaultImageUrl}}" id="myImage" class="tailgateLogoImg" ng-if="tailgateLogoId == 0" " />
-                                <img ng-src="{{tailgateLogoUrl}} " id="myImage " ng-if="tailgateLogoId>0"
-                                     class="tailgateLogoImg" alt="Image not found" />
+                                <img ng-src="{{defaultImageUrl}}" id="myImage" class="tailgateLogoImg" ng-if="tailgateLogoId == 0"/>
+                                <img ng-src="{{tailgateLogoUrl}} " id="myImage " ng-if="tailgateLogoId>0"   class="tailgateLogoImg" alt="Image not found" />
                             </div>
                             <a class="item text-center disabled" ng-click="show();" ng-if="isTailgateAdmin">
                                 Tap to add Picture
@@ -33,7 +32,7 @@
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Event Name:</span>
                             <input type="text" list="EventNameList" ng-change="loadeventData()" id="envtName" placeholder="Event Name" class="form-control"
-                                   ng-model="addTailgateParams.eventName" required>
+                                   ng-model="addTailgateParams.eventName" required ng-model-options="{ debounce: 500 }">
                             <datalist id="EventNameList">
                                 <select>
                                     <option ng-repeat="data in eventDetails" data_id="{{data.eventId}}" value="{{data.eventName}}">{{data.eventName}}</option>
@@ -47,12 +46,12 @@
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
                             <span class="input-label">Start Time</span>
-                            <input type="text" placeholder="Start Time" class="form-control" ng-model="selectedtime1" name="StartTime" required ng-click="openTimePicker1();">
+                            <input type="text" placeholder="Start Time" class="form-control" ng-model="addTailgateParams.startTime" name="addTailgateParams.startTime"  required>
                             <i class="icon ion-ios-clock" ng-click="openTimePicker1();"></i>
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
                             <span class="input-label">End Time</span>
-                            <input type="text" placeholder="End Time" class="form-control" ng-model="selectedtime2" name="EndTime" required ng-click="openTimePicker2();">
+                            <input type="text" placeholder="End Time" class="form-control" ng-model="addTailgateParams.endTime" name="EndTime"  required>
                             <i class="icon ion-ios-clock" ng-click="openTimePicker2();"></i>
                         </div>
                         <!--<div class="item item-input item-floating-label">
@@ -152,7 +151,7 @@
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Amount</span>
-                            <input type="Number" placeholder="Amount" name="Amount" ng-model="newUpdate.amountToPay">
+                            <input type="text" placeholder="Amount" name="Amount" ng-model="newUpdate.amountToPay"  valid-number>
                         </div>
                         <!--<div class="row">
                             <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
