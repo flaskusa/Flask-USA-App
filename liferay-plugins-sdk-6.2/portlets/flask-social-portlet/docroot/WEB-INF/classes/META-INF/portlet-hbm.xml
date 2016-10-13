@@ -6,7 +6,6 @@
 	<import class="com.liferay.contacts.model.FlaskMessages" />
 	<import class="com.liferay.contacts.model.FlaskRecipients" />
 	<class name="com.liferay.contacts.model.impl.EntryImpl" table="Contacts_Entry">
-		<cache usage="read-write" />
 		<id name="entryId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -21,7 +20,6 @@
 		<property name="comments" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.contacts.model.impl.FlaskMessagesImpl" table="Contacts_FlaskMessages">
-		<cache usage="read-write" />
 		<id name="messageId" type="long">
 			<generator class="assigned" />
 		</id>
@@ -34,7 +32,6 @@
 		<property name="dateTime" type="org.hibernate.type.TimestampType" />
 	</class>
 	<class name="com.liferay.contacts.model.impl.FlaskRecipientsImpl" table="Contacts_FlaskRecipients">
-		<cache usage="read-write" />
 		<id name="recipientId" type="long">
 			<generator class="assigned" />
 		</id>

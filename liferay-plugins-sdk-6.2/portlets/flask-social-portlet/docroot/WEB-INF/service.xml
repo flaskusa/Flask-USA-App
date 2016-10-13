@@ -3,7 +3,7 @@
 
 <service-builder package-path="com.liferay.contacts">
 	<namespace>Contacts</namespace>
-	<entity name="Entry" local-service="true" remote-service="true">
+	<entity name="Entry" local-service="true" remote-service="true" cache-enabled="false">
 
 		<!-- PK fields -->
 
@@ -43,7 +43,7 @@
 			<finder-column name="emailAddress" />
 		</finder>
 	</entity>
-	<entity name="FlaskMessages" local-service="true">
+	<entity name="FlaskMessages" local-service="true" cache-enabled="false">
         <column name="messageId" type="long" primary="true"></column>
         <column name="senderEmail" type="String"></column>
         <column name="senderUserId" type="long"></column>
@@ -56,7 +56,7 @@
             <order-column name="dateTime" />
         </order>
     </entity>
-    <entity name="FlaskRecipients" local-service="true">
+    <entity name="FlaskRecipients" local-service="true" cache-enabled="false">
         <column name="recipientId" type="long" primary="true"></column>
         <column name="userId" type="long"></column>
         <column name="email" type="String"></column>
