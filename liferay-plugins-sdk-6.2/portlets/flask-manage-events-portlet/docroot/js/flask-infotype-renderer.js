@@ -10,6 +10,7 @@ _infoTypeRenderer.getRenderer =  function(type) {
 			renderer = _infoTypeRenderer.INFO_RENDERER.PARKING;
 			break;
 		case "bar & restaurants":
+		case "hotels":			
 			renderer = _infoTypeRenderer.INFO_RENDERER.BAR_AND_RESTO;
 			break;
 		case "nightlife":
