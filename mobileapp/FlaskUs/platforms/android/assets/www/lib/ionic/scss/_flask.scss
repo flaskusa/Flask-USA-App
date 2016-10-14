@@ -302,7 +302,6 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
 }
 /* Empty. Add your own CSS if you like */
 
-
 /*Login page*/
 
 
@@ -323,7 +322,6 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
     padding: 1em 0;
     text-align: center;
     height:20%;
-    margin-top: 30px;
     width:100%;
 }
 
@@ -553,8 +551,9 @@ span.error_msg{color:red;}
 }
 
 /*Header Image*/
-.header-img{margin-bottom: -10px;
-            height:35px;
+.header-img{
+    margin-bottom: -11px;
+    height:35px;
 }
 
 ion-header-bar.bar-dark.bar.bar-header{background-color:black !important;}
@@ -789,8 +788,9 @@ span.ion-chevron-right{
     width: 100%;
 }
 
- img.footer-img{  width: 104%;
-                 height: 109%;}
+ img.footer-img{  
+     height: 60px;width: 100%
+ }
 
  .friend-image{width:80%;height:80%;padding-left: 20%;}
  /*friend details page end*/
@@ -815,13 +815,6 @@ a.item.item-avtar.item-icon-right.item-ticket{
     border-color:black;
 }
  /*tickets end*/
-
- img.footer-img{  width: 104%;
-                 height: 109%;}
-
-.slider {
-
-}
 .slider-slide {
   color: #000;
   background-color: #fff;
@@ -1175,13 +1168,17 @@ a.tab-item {
     padding-right: 4px;
 }
 
+.tailgate_slider{
+    padding: 0px;
+}
+
 .button:hover {
   text-decoration: none; }
 
 /*tailgate event detaila*/
 
 .thumb-size{
-    width:47%;
+    width:147%;
     height:101% !important;
     border-right:solid white 2px;
 }
@@ -1189,6 +1186,7 @@ a.tab-item {
 .tailgate_thumb{
     width:100%;
     height:101px !important;
+    overflow: visible !important;
    }
 
 button.button.button-block.button-positive.invite_friend{
@@ -1210,6 +1208,15 @@ button.button.button-block.button-positive.invite_friend i{
     text-align:center;
     font-weight:bold;
     margin-top:0px;
+    float:left;
+}
+
+.photobuttontext{
+    font-size: 11px;
+}
+
+.tailgate_slider{
+    padding: 0px;
 }
 
 h2.tailgater_name{
@@ -1654,6 +1661,9 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
   color: darkorange;
 }
 
+.friend_group_name{
+    padding-top:4px !important;
+}
 
 .my-groupDetail-view {
   .item-content {
@@ -1710,6 +1720,12 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 /* Message board in my_tailgate_event_details*/
 .list.list-inset.msgboard{
     border:solid 1px;
+    margin-top: 7px;
+}
+
+.msgboard_div{
+    font-weight: 700;
+    font-size: 21px;
 }
 
 .messageList{    
@@ -1764,6 +1780,11 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 }
 
 .message_username{color:orange !important;}
+
+.image_list{
+    padding: 0px;
+}
+
 .supplyDeleteButton{
   background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
   width: 50px;
@@ -1774,8 +1795,12 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 .item .badge.extra-right-supply {
   right: 2px;
   top:0px;
-
 }
+
+div .extra-right-supply{
+    margin-right: 1px;
+}
+
 .supplyDeleteIcon{
   font-size: 24px;
   padding-top: 9px;
@@ -1811,22 +1836,23 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
   border-radius: 2px 2px 0 0;
   /* In accordance with the rounding of the default infowindow corners. */ }
 
-#iw-container .iw-content {
+#iw-container #iw-content {
   text-align: center;
-  font-size: 16px;
-  text-transform: uppercase;
-  font-weight: bold;
-  padding: 3px;
-  background: #ffffff;
-  color: #000000; }
+    font-size: 16px;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 3px;
+    background: #ffffff;
+    color: #000000;
+    position: fixed;
+    width: 311px; }
 
-.iw-content .padding {
+#iw-content .padding {
   padding: 10px; }
-  .iw-content a {
-    text-decoration: none !important;
-    color: black
-}
 
+#iw-content a {
+  text-decoration: none !important;
+  color: black; }
 
 #iw-container .iw-title .iw-sub-title {
   font-size: 10px;
@@ -1834,15 +1860,12 @@ a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 
 .gm-style-iw {
   width: 313px !important;
-  top: 20px !important;
-   }
+  top: 20px !important; }
 
-   #iw-container {
-     overflow: hidden;
-     height : 46px;
-    transition: height 2s;
-
-   }
+#iw-container {
+  overflow: hidden;
+  height: 46px;
+  transition: height 2s; }
 .my-message-view {
   .item-content {
     padding-right: 6px;
@@ -2286,4 +2309,218 @@ label.remember1.item.item-checkbox.ng-valid.ng-not-empty{
 }
 .paddingTOpSupply{
   margin-top: 1px;
+}
+
+/*Supplies*/
+.supplies_icon{
+    float: right;
+    padding-right: 10px;
+    font-size: 26px;
+    margin-top: -5px
+}
+
+.supplies_left_icon{
+    width:21px;
+    height:23px;
+    padding-left:10%;
+    top:20px;
+    float: right
+}
+
+.badge_supplies{
+    top:12px !important;
+}
+
+.supply_list_name{
+    color: #000000;
+    font-weight: 200
+}
+
+.badge.span_icon label{
+    float: right;
+}
+
+.suppliesList_ion_item{
+    color: #0f0f0f;
+}
+
+/*group detail*/
+.group_detail_user_role{
+    right: 12px !important;
+}
+
+.add_member_details{
+    padding-top: 4px !important;
+}
+
+/*friends group*/
+.ion_item_animate{
+    padding: 0px;
+}
+
+div .user_added{
+    padding-top: 10px !important;
+}
+
+.add_in_group{
+    top:7px;
+    right:10px;
+}
+
+/*group member detail*/
+.user_role{
+    float: left;
+    margin-left: 14px
+}
+.group_member_detail_profile{
+    max-width: 210px;
+}
+
+/*Create group*/
+.create_group_badge{
+    right: 7px;
+}
+
+.group_user_name{
+    padding-left: 10px;
+}
+
+.add_new_friend{
+    right: 7px !important;
+}
+
+i.group_user_name.ng-binding{
+    color:darkorange;
+}
+
+/*Friend_detail*/
+.friend_profilepic{
+    max-width: 210px !important;
+}
+
+.friend_group_notification_div{
+    margin-right: 51px !important;
+}
+
+/*Manage_event_content*/
+.ion_content_header{
+    background-color: white;
+    padding-top:45px;
+}
+
+.manage_event_full_image{
+    height: 225px;
+}
+
+b .font_style{
+    font-size:16px;
+}
+
+div .manage_event_default_Image{
+    height:120px;
+    width: 100%;
+}
+
+/*Notification*/
+.badge_count{
+    margin-right: 35px;
+}
+
+/*My tailgate view location*/
+.google_map_div{
+    width:100%;
+    height:100%;
+}
+
+/*create supplies*/
+.supply_ion_item_animate{
+    padding:0px !important;
+}
+
+.create_supplies_label{
+    background-color: #ffffff !important;
+}
+
+.add_supplies_div{
+    background-color: #f4f4f4 !important;
+}
+
+.add_supplies_img{
+    float: right;
+    height: 28px;
+    width: 28px;
+}
+
+/*advertisement Popup*/
+.info_popup{
+    color: #00aaff !important;
+}
+
+.info_popup_address{
+    color: #ff8c00 !important;
+}
+
+.crossIconTailgate{
+  position:absolute;
+  font-weight:500;
+  font-size: 26px;
+  z-index: 2;
+  margin-left: 121px;
+}
+
+#traffic ul {
+  list-style: none;
+}
+#traffic ul {
+  background: url("../img/flask_icons/star.svg") no-repeat left top;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 27px;
+  padding-top: 1px;
+  overflow: visible;
+}
+#traffic li{
+  font-weight: 500;
+  font-size: 14px;
+}
+
+
+
+.fontSizeTrafficHeading{
+  font-size: 18px;
+}
+.removeBorderTraffic {
+  background-image:none;
+}
+.trafficDetailHeading{
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  width: 80%;
+}
+.TrafficInfoDescDiv{
+  width:80%;
+  margin-left: 30px;
+  margin-top: 5px
+}
+.iw-content-text{
+  vertical-align: middle;
+}
+
+/*Venue Map*/
+.image_map_div{
+    height:90% !important;
+}
+
+.venue_info_div{
+    width: 55%;
+    height: 32%;
+    margin-top: 16%;
+    margin-left: 22%;
+}
+
+.supplyItemText{
+    color: darkorange;
+    font-size: 13px;
+    font-weight: bold;
 }

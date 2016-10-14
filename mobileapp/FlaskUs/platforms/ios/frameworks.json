@@ -1,19 +1,9 @@
 {
-    "EventKit.framework": 2,
-    "EventKitUI.framework": 2,
+    "ImageIO.framework": 1,
     "CoreLocation.framework": 2,
-    "Accelerate.framework": 2,
-    "AVFoundation.framework": 2,
-    "CoreBluetooth.framework": 2,
-    "CoreData.framework": 2,
-    "CoreText.framework": 2,
-    "GLKit.framework": 2,
-    "ImageIO.framework": 2,
-    "libc++.dylib": 2,
-    "libicucore.dylib": 2,
-    "libz.dylib": 2,
-    "OpenGLES.framework": 2,
-    "QuartzCore.framework": 2,
-    "SystemConfiguration.framework": 2,
-    "Security.framework": 2
+    "AVFoundation.framework": 1,
+    "SystemConfiguration.framework": 1,
+    "CoreTelephony.framework": 1,
+    "LocalAuthentication.framework": 1,
+    "Security.framework": 1
 }

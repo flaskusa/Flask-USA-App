@@ -10102,7 +10102,6 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox {
   padding: 1em 0;
   text-align: center;
   height: 20%;
-  margin-top: 30px;
   width: 100%; }
 
 .loginpane_header img {
@@ -11038,9 +11037,18 @@ span.error_msg {
   padding-top: 0px;
   margin-bottom: 5px; }
 
+.trafficHeading {
+  text-align: center;
+  padding-top: 0px;
+  margin-bottom: 5px;
+  font-weight: bold; }
+
+#traffic ul {
+  list-style: url("../img/flask_icons/star.svg"); }
+
 /*Header Image*/
 .header-img {
-  margin-bottom: -10px;
+  margin-bottom: -11px;
   height: 35px; }
 
 ion-header-bar.bar-dark.bar.bar-header {
@@ -11248,8 +11256,8 @@ p.friend {
   width: 100%; }
 
 img.footer-img {
-  width: 104%;
-  height: 109%; }
+  height: 60px;
+  width: 100%; }
 
 .friend-image {
   width: 80%;
@@ -11278,10 +11286,6 @@ a.item.item-avtar.item-icon-right.item-ticket {
   border-color: black; }
 
 /*tickets end*/
-img.footer-img {
-  width: 104%;
-  height: 109%; }
-
 .slider-slide {
   color: #000;
   background-color: #fff;
@@ -11616,18 +11620,22 @@ a.tab-item {
   color: #f89735;
   padding-right: 4px; }
 
+.tailgate_slider {
+  padding: 0px; }
+
 .button:hover {
   text-decoration: none; }
 
 /*tailgate event detaila*/
 .thumb-size {
-  width: 47%;
+  width: 147%;
   height: 101% !important;
   border-right: solid white 2px; }
 
 .tailgate_thumb {
   width: 100%;
-  height: 101px !important; }
+  height: 101px !important;
+  overflow: visible !important; }
 
 button.button.button-block.button-positive.invite_friend {
   width: 34%;
@@ -11645,7 +11653,14 @@ button.button.button-block.button-positive.invite_friend i {
   background-color: lightgray;
   text-align: center;
   font-weight: bold;
-  margin-top: 0px; }
+  margin-top: 0px;
+  float: left; }
+
+.photobuttontext {
+  font-size: 11px; }
+
+.tailgate_slider {
+  padding: 0px; }
 
 h2.tailgater_name {
   text-align: center;
@@ -12063,7 +12078,8 @@ a.item.item-full.item-icon-left.attendees {
   padding-top: 58px; }
 
 .emailText {
-  color: darkorange; }
+  color: darkorange;
+  padding-top: 14px; }
 
 .my-groupDetail-view .item-content {
   padding-top: 12px;
@@ -12171,6 +12187,9 @@ a.item.item-full.item-icon-left.attendees {
   right: 2px;
   top: 0px; }
 
+div .extra-right-supply {
+  margin-right: 1px; }
+
 .supplyDeleteIcon {
   font-size: 24px;
   padding-top: 9px;
@@ -12205,19 +12224,21 @@ a.item.item-full.item-icon-left.attendees {
   border-radius: 2px 2px 0 0;
   /* In accordance with the rounding of the default infowindow corners. */ }
 
-#iw-container .iw-content {
+#iw-container #iw-content {
   text-align: center;
   font-size: 16px;
   text-transform: uppercase;
   font-weight: bold;
   padding: 3px;
   background: #ffffff;
-  color: #000000; }
+  color: #000000;
+  position: fixed;
+  width: 311px; }
 
-.iw-content .padding {
+#iw-content .padding {
   padding: 10px; }
 
-.iw-content a {
+#iw-content a {
   text-decoration: none !important;
   color: black; }
 
@@ -12610,3 +12631,129 @@ label.remember1.item.item-checkbox.ng-valid.ng-not-empty {
 
 .paddingTOpSupply {
   margin-top: 1px; }
+
+/*Supplies*/
+.supplies_icon {
+  float: right;
+  padding-right: 10px;
+  font-size: 26px;
+  margin-top: -5px; }
+
+.supplies_left_icon {
+  width: 21px;
+  height: 23px;
+  padding-left: 10%;
+  top: 20px;
+  float: right; }
+
+.badge_supplies {
+  top: 12px !important; }
+
+.supply_list_name {
+  color: #000000;
+  font-weight: 200; }
+
+.badge.span_icon label {
+  float: right; }
+
+.suppliesList_ion_item {
+  color: #0f0f0f; }
+
+/*group detail*/
+.group_detail_user_role {
+  right: 12px !important; }
+
+.add_member_details {
+  padding-top: 4px !important; }
+
+/*friends group*/
+.ion_item_animate {
+  padding: 0px; }
+
+div .user_added {
+  padding-top: 10px !important; }
+
+.add_in_group {
+  top: 7px;
+  right: 10px; }
+
+/*group member detail*/
+.user_role {
+  float: left;
+  margin-left: 14px; }
+
+.group_member_detail_profile {
+  max-width: 210px; }
+
+/*Create group*/
+.create_group_badge {
+  right: 7px; }
+
+.group_user_name {
+  padding-left: 10px; }
+
+.add_new_friend {
+  right: 7px !important; }
+
+i.group_user_name.ng-binding {
+  color: darkorange; }
+
+/*Friend_detail*/
+.friend_profilepic {
+  max-width: 210px !important; }
+
+.friend_group_notification_div {
+  margin-right: 51px !important; }
+
+/*Manage_event_content*/
+.ion_content_header {
+  background-color: white;
+  padding-top: 45px; }
+
+.manage_event_full_image {
+  height: 225px; }
+
+b .font_style {
+  font-size: 16px; }
+
+div .manage_event_default_Image {
+  height: 120px;
+  width: 100%; }
+
+/*Notification*/
+.badge_count {
+  margin-right: 35px; }
+
+/*My tailgate view location*/
+.google_map_div {
+  width: 100%;
+  height: 100%; }
+
+/*create supplies*/
+.supply_ion_item_animate {
+  padding: 0px !important; }
+
+.create_supplies_label {
+  background-color: #ffffff !important; }
+
+.add_supplies_div {
+  background-color: #f4f4f4 !important; }
+
+.add_supplies_img {
+  float: right;
+  height: 28px;
+  width: 28px; }
+
+/*advertisement Popup*/
+.info_popup {
+  color: #00aaff !important; }
+
+.info_popup_address {
+  color: #ff8c00 !important; }
+
+.crossIconTailgate {
+  position: absolute;
+  font-weight: 500;
+  font-size: 26px;
+  z-index: 2;
+  margin-left: 121px; }

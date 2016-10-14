@@ -16,14 +16,6 @@
     <string>com.flaskus.tailgate</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
-    <key>CFBundleLocalizations</key>
-    <array>
-      <string>en</string>
-      <string>de</string>
-      <string>nl</string>
-      <string>fr</string>
-      <string>it</string>
-    </array>
     <key>CFBundleName</key>
     <string>${PRODUCT_NAME}</string>
     <key>CFBundlePackageType</key>
@@ -32,23 +24,8 @@
     <string>0.0.1</string>
     <key>CFBundleSignature</key>
     <string>????</string>
-    <key>CFBundleURLTypes</key>
-    <array>
-      <dict>
-        <key>CFBundleTypeRole</key>
-        <string>Editor</string>
-        <key>CFBundleURLName</key>
-        <string>com.ionicframework.ionicsidemenu</string>
-        <key>CFBundleURLSchemes</key>
-        <array>
-          <string>com.ionicframework.ionicsidemenu</string>
-        </array>
-      </dict>
-    </array>
     <key>CFBundleVersion</key>
     <string>0.0.1</string>
-    <key>Google Maps API Key</key>
-    <string>AIzaSyAeP38rMEwIeSFu24Inz9PsXZtOUVFzEn8</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>NSAppTransportSecurity</key>
@@ -56,21 +33,30 @@
       <key>NSAllowsArbitraryLoads</key>
       <true/>
     </dict>
-    <key>NSCalendarsUsageDescription</key>
-    <string/>
     <key>NSCameraUsageDescription</key>
     <string/>
-    <key>NSLocationAlwaysUsageDescription</key>
-    <string>Trace your location on the map</string>
     <key>NSLocationWhenInUseUsageDescription</key>
+    <string/>
+    <key>NSMainNibFile</key>
     <string/>
     <key>NSMainNibFile~ipad</key>
     <string/>
     <key>NSPhotoLibraryUsageDescription</key>
-    <string>$PHOTO_LIBRARY_USAGE_DESCRIPTION</string>
+    <string/>
     <key>UIRequiresFullScreen</key>
     <true/>
-    <key>UIStatusBarStyle</key>
-    <string>UIStatusBarStyleLightContent</string>
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+      <string>UIInterfaceOrientationPortrait</string>
+      <string>UIInterfaceOrientationLandscapeLeft</string>
+      <string>UIInterfaceOrientationPortraitUpsideDown</string>
+      <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
   </dict>
 </plist>

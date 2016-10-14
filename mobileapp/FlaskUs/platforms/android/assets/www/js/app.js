@@ -1,13 +1,13 @@
 (function () {
     var app = angular.module('flaskApp'); 
-    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage) {
+    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage,$state) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
-            if (cordova.platformId === 'ios' && window.cordova && window.cordova.plugins.Keyboard) {
-                cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
-                cordova.plugins.Keyboard.disableScroll(true);
-            }
+            //  if (cordova.platformId === 'ios' && window.cordova && window.cordova.plugins.Keyboard) {
+            //      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
+            //      cordova.plugins.Keyboard.disableScroll(true);
+            //  }
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
@@ -20,6 +20,12 @@
             $rootScope.$on('loading:hide', function () {
                 $ionicLoading.hide()
             })
+             $rootScope.$on('catchAll:exception', function (event, data) { 
+                 $ionicLoading.hide()
+                 // if exception occurs the  redirect ro events page
+                $state.go("app.events");
+            })
+           
             //$scope.user_location_data = [];          
 
             //user_location_data.push({ code: "stored" });

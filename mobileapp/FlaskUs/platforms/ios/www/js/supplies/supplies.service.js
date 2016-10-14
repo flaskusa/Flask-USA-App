@@ -33,6 +33,7 @@
         var updateSupplyUrl="/flask-user-tailgate-portlet.supplylist/update-supply-list";
         var UpdateSupplyItemUrl="/flask-user-tailgate-portlet.supplyitem/update-supply-item";
         var deleteSupplyItemUrl="/flask-user-tailgate-portlet.supplyitem/delete-supply-item";
+        var addSuppliesItemsUrl="/flask-user-tailgate-portlet.supplyitem/add-supply-items"
         function getMySupplyList() {
             return $http.get(SERVER.url+getAllSupplyUrl,{params:{
             }})
@@ -138,7 +139,7 @@
                 });
         }
         function addSupplyItems(supplyListId,supplyItemNames) {
-            return $http.get(SERVER.url+addSupplyItems,{params:{
+            return $http.get(SERVER.url+addSuppliesItemsUrl,{params:{
                 supplyItemNames: [supplyItemNames],
                 supplyListId: supplyListId
             }})
