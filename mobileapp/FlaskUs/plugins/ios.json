@@ -7,52 +7,48 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
-        },
-        "ionic-plugin-keyboard": {
-            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
-        },
-        "cordova-plugin-googlemaps": {
-            "API_KEY_FOR_IOS": "AIzaSyAeP38rMEwIeSFu24Inz9PsXZtOUVFzEn8",
-            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
-        },
         "cordova-plugin-camera": {
             "CAMERA_USAGE_DESCRIPTION": " ",
             "PHOTOLIBRARY_USAGE_DESCRIPTION": " ",
-            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+            "PACKAGE_NAME": "com.flaskus.tailgate"
         },
-        "cordova-plugin-file-transfer": {
-            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        "cordova-plugin-whitelist": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
         },
-        "cordova-plugin-image-picker": {
-            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
         },
-        "cordova-plugin-android-permissions": {
-            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
         },
-        "cordova-plugin-file": {
-            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+        "cordova-plugin-datepicker": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-appavailability": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-touchid": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
         }
     },
     "dependent_plugins": {
-        "com.googlemaps.ios": {
-            "PACKAGE_NAME": "com.ionicframework.ionicsidemenu"
-        },
         "cordova-plugin-compat": {
-            "PACKAGE_NAME": "$(PRODUCT_BUNDLE_IDENTIFIER)"
+            "PACKAGE_NAME": "com.flaskus.tailgate"
         }
     }
 }
