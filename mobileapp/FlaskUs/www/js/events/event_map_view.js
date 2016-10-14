@@ -625,6 +625,10 @@
                     setVenueMapInfo();
                     fileName = 'ad.png';
                     break;
+                case 'Venue Info':
+                    setVenueDetailInfo();
+                    fileName = 'ad.png';
+                    break;
             }
         };
         function setHotelInfo() {
@@ -636,6 +640,12 @@
         function setVenueMapInfo() {
             $timeout(function () {
                 $ionicTabsDelegate.select(1);
+                $scope.setMarkers();
+            }, 0)
+        };
+        function setVenueDetailInfo() {
+            $timeout(function () {
+                $ionicTabsDelegate.select(2);
                 $scope.setMarkers();
             }, 0)
         };
@@ -666,7 +676,7 @@
                 if ($scope.infoTypeName == 'Pre-Event') {
                     $ionicTabsDelegate.select(3)
                 } else if ($scope.infoTypeName == 'During-Event') {
-                        $ionicTabsDelegate.select(2)
+                        $ionicTabsDelegate.select(3)
                 } else{
                         $ionicTabsDelegate.select(3)
                     }
@@ -759,6 +769,8 @@
                 } else if (index == 1) {
                     setVenueMapInfo();
                 } else if (index == 2) {
+                    setVenueDetailInfo();
+                } else if (index == 3) {
                     setFlaskUsInfo();
                 }
             } else if ($scope.infoTypeName == 'Post-Event') {
