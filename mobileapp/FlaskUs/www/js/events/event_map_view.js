@@ -725,7 +725,7 @@
                         }
                          else if ("Hotels" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject);
-                            tempObject.icon = 'img/map_icons/nightlife.png';
+                            tempObject.icon = 'img/map_icons/hotel.png';
                             $scope.hotelMarkers.push(tempObject);
                         }
                     } else {
