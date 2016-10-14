@@ -3,9 +3,7 @@
         <ion-nav-buttons side="left">
             <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="goBack();"></button>
         </ion-nav-buttons>
-        <ion-nav-buttons side="right">
-            <button class="button button-icon button-clear ion-share"></button>
-        </ion-nav-buttons>
+        
     </ion-nav-bar>
     <ion-content class="padding" overflow-scroll="false">
         <div class="paynow">
@@ -38,7 +36,7 @@
             <ion-item ng-repeat="tailgateItem in allMyTailgateItems track by $index">
                 <div class="col-100">
                     <i style="color: black;font-weight: 500;">{{tailgateItem.itemAssignedUserName}}</i>
-                    <div style="float:right"> <i class="addText">{{tailgateItem.supplyListItemName | uppercase}}</i>
+                    <div style="float:right"> <i class="supplyItemText">{{tailgateItem.supplyListItemName | uppercase}}</i>
                     </div>
                 </div>
 

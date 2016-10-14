@@ -91,7 +91,6 @@
 
         $scope.checkTailgateId = function () {
             if (!tailGateId) {
-                console.log("TAILGATE ID IS 0");
             }
             else {
                 editTailgate(tailGateId);
@@ -230,7 +229,7 @@
                 .then(function (r) {
                     var data = $.parseJSON(r.response);
                      $rootScope.$broadcast('loading:hide')
-                     data = $.parseJSON(data);
+                    //  data = $.parseJSON(data);
                     console.log("Image Dta is"+JSON.stringify(data));
                     $scope.myTailgateImages.push(data);
                 }, function (error) {
