@@ -137,8 +137,7 @@
                     })
                 }
             }else if ($scope.infoTypeName == 'Post-Event') {
-                if ($scope.barFlaskMarkerOptions.control.getPlurals != undefined) {
-                    if ($scope.selectedIndex == 0 && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    if ($scope.selectedIndex == 0 && $scope.barFlaskMarkerOptions.control && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                         angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                             if (mapClick) {
                                 $scope.$apply(function () { val.model.show = false; });
@@ -147,7 +146,7 @@
                             }
                         })
                     }
-                    if ($scope.selectedIndex == 1 && $scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    if ($scope.selectedIndex == 1 && $scope.nightLifeFlaskMarkerOptions.control && $scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                         angular.forEach($scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                             if (mapClick) {
                                 $scope.$apply(function () { val.model.show = false; });
@@ -156,7 +155,7 @@
                             }
                         })
                     }
-                    if ($scope.selectedIndex == 2 && $scope.hotelFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    if ($scope.selectedIndex == 2 && $scope.hotelFlaskMarkerOptions.control && $scope.hotelFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                         angular.forEach($scope.hotelFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                             if (mapClick) {
                                 $scope.$apply(function () { val.model.show = false; });
@@ -165,7 +164,6 @@
                             }
                         })
                     }
-                }
             }
         }
 
@@ -308,7 +306,7 @@
                     $scope.selectedIndex = 0;
                 } else if (infoTyepeCategory == 'Nightlife') {
                     $scope.selectedIndex = 1;
-                } else if (infoTyepeCategory == 'Hotel') {
+                } else if (infoTyepeCategory == 'Hotels') {
                     $scope.selectedIndex = 2;
                 } else {
                     $scope.selectedIndex = 3;
@@ -620,7 +618,7 @@
                 case 'Nightlife':
                     setNightLifeInfo();
                     return infoTypeCategory;
-                case 'Hotel':
+                case 'Hotels':
                     setHotelInfo();
                     return infoTypeCategory;
                 case 'Venue Map':
@@ -725,17 +723,18 @@
                             tempObject.icon = 'img/map_icons/nightlife.png';
                             $scope.nightLifes.push(tempObject);
                         }
+                         else if ("Hotels" == tempObject.infoTypeCategoryName) {
+                            $scope.setMarkerFields(tempObject);
+                            tempObject.icon = 'img/map_icons/nightlife.png';
+                            $scope.hotelMarkers.push(tempObject);
+                        }
                     } else {
                         if ("Bar & Restaurants" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject)
                             tempObject.icon = 'img/map_icons/bar.png';
                             $scope.barMarkers.push(tempObject);
                         }
-                        else if ("Hotel" == tempObject.infoTypeCategoryName) {
-                            $scope.setMarkerFields(tempObject);
-                            tempObject.icon = 'img/map_icons/nightlife.png';
-                            $scope.hotelMarkers.push(tempObject);
-                        }
+                       
                     }
                 })
                 $ionicSlideBoxDelegate.update();
@@ -751,6 +750,7 @@
         }
 
         $scope.selectTab = function (index) {
+            $scope.isMapMarkersSet = false;
             $scope.closeOtherInfoWindows();
             $scope.selectedIndex = index;
             if ($scope.infoTypeName == 'Pre-Event') {
