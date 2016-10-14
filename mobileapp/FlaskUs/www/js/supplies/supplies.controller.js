@@ -14,6 +14,17 @@
         $scope.MyGameDaysSupply=[];
         $scope.hideItem=false;
         $scope.curreentEventId=$stateParams.currEventId;
+        var userDetail=$cookies.getObject('CurrentUser');
+        if(userDetail!=undefined) {
+            $scope.userId = userDetail.data.userId;
+            $scope.hideCheckBox=false;
+            $scope.agreedToTermsOfUse = userDetail.data.agreedToTermsOfUse;
+        }else{
+            $scope.userId=0;
+            $scope.hideCheckBox=true
+            $scope.agreedToTermsOfUse=false;
+        }
+        $scope.currentEventSuppplyKey=$scope.curreentEventId+$scope.userId;
 
 
 
@@ -40,11 +51,11 @@
            })
         }
         $scope.selectGameDaySupplyItem=function(data){
-            $localStorage[$scope.curreentEventId].checkedItemsId.push(data.supplyItemId)
+            $localStorage[$scope.currentEventSuppplyKey].checkedItemsId.push(data.supplyItemId)
         }
         $scope.showSelectedSupplyListItem=function(){
-            if($localStorage[$scope.curreentEventId].checkedItemsId.length>0){
-                angular.forEach($localStorage[$scope.curreentEventId].checkedItemsId,function(value,key){
+            if($localStorage[$scope.currentEventSuppplyKey].checkedItemsId.length>0){
+                angular.forEach($localStorage[$scope.currentEventSuppplyKey].checkedItemsId,function(value,key){
                    angular.forEach($scope.MyGameDaysSupply,function(value2,key2){
                        if(value==value2.supplyItemId){
                            value2.checked=true;
@@ -54,10 +65,10 @@
             }
         }
 
-        if(!$localStorage[$scope.curreentEventId]) {
-            $localStorage[$scope.curreentEventId] = {checkedList: "", checkedItemsId:[]};
+        if(!$localStorage[$scope.currentEventSuppplyKey]) {
+            $localStorage[$scope.currentEventSuppplyKey] = {checkedList: "", checkedItemsId:[]};
         }else if($scope.MyGameDayList==true){
-            $scope.selectedGameDaySupplyId=$localStorage[$scope.curreentEventId].checkedList
+            $scope.selectedGameDaySupplyId=$localStorage[$scope.currentEventSuppplyKey].checkedList
 
         }
 
@@ -93,15 +104,7 @@
         $scope.islistCreated = false;
         $scope.deleteSuplies=false;
         $scope.editSuply=false;
-        var userDetail=$cookies.getObject('CurrentUser');
-        if(userDetail!=undefined) {
-            var userId = userDetail.data.userId;
-            $scope.hideCheckBox=false;
-            $scope.agreedToTermsOfUse = userDetail.data.agreedToTermsOfUse;
-        }else{
-            $scope.hideCheckBox=true
-            $scope.agreedToTermsOfUse=false;
-        }
+
         $scope.addSupplyAsAdmin=function(){
             SupplyService.addAsAdmin=true;
             $scope.addAsAdmin=true;
@@ -142,14 +145,14 @@
             angular.forEach($scope.supplies,function(value,key){
                 if(value.supplyListId==list.supplyListId){
                     value.checked=true;
-                    $localStorage[$scope.curreentEventId].checkedList=value.supplyListId;
+                    $localStorage[$scope.currentEventSuppplyKey].checkedList=value.supplyListId;
 
 
                 }else{
                     value.checked=false;
                 }
             });
-            $localStorage[$scope.curreentEventId].checkedItemsId=[];
+            $localStorage[$scope.currentEventSuppplyKey].checkedItemsId=[];
             $scope.getSupplyItemBySupplyId(list.supplyListId);
 
 
@@ -157,7 +160,7 @@
         }
         $scope.removeSelectedSupply=function(list){
                     $scope.MyGameDaysSupply=[];
-            $localStorage[$scope.curreentEventId] = {checkedList: "", checkedItemsId:[]};
+            $localStorage[$scope.currentEventSuppplyKey] = {checkedList: "", checkedItemsId:[]};
 
         }
         $scope.selectGameDaySupply=function(list,checked){
