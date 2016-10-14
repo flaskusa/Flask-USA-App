@@ -119,6 +119,14 @@ module.exports = [
         "clobbers": [
             "touchid"
         ]
+    },
+    {
+        "id": "cordova-plugin-android-permissions.Permissions",
+        "file": "plugins/cordova-plugin-android-permissions/www/permissions.js",
+        "pluginId": "cordova-plugin-android-permissions",
+        "clobbers": [
+            "cordova.plugins.permissions"
+        ]
     }
 ];
 module.exports.metadata = 
@@ -136,7 +144,8 @@ module.exports.metadata =
     "cordova-plugin-network-information": "1.3.0",
     "cordova-plugin-inappbrowser": "1.5.0",
     "cordova-plugin-appavailability": "0.4.2",
-    "cordova-plugin-touchid": "0.4.0"
+    "cordova-plugin-touchid": "0.4.0",
+    "cordova-plugin-android-permissions": "0.10.0"
 };
 // BOTTOM OF METADATA
 });
