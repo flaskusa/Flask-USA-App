@@ -44,7 +44,7 @@
                $state.go("app.tickets", { venueName: $scope.currVenueName, eventDate: $scope.currEventDate, eventName: $scope.currEventName, infoType: PRE_EVENT, infoTypeCategory: pre });
            }
            else if(pre=="Game Day Needs"){
-               $state.go("app.supplies",{myListName:"My Supply"});
+               $state.go("app.supplies",{myListName:"My Supply", currEventId:$scope.currEventId});
            }
            else if(pre=="Add Content"){
                $state.go("app.manage_event_content", {eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: pre,currEventName:$scope.currEventName ,currEventId:$scope.currEventId});

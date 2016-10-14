@@ -3,16 +3,22 @@
     angular.module('flaskApp')
     .controller('SuppliesCtrl', SuppliesCtrl);
 
-    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate','$stateParams'];
+    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate','$stateParams','$localStorage'];
 
     /* @ngInject */
-    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate,$stateParams ) {
+    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate,$stateParams,$localStorage ) {
 
         $scope.userDataList=[];
         $scope.supplies=[];
         $scope.supplyItemNames=[];
         $scope.MyGameDaysSupply=[];
         $scope.hideItem=false;
+        $scope.curreentEventId=$stateParams.currEventId;
+
+
+
+
+
         $scope.hideMyItem=false;
         if($stateParams.myListName==""){
          $scope.MyGameDayList=false;
@@ -24,6 +30,38 @@
         }else{
             $scope.addAsAdmin=false;
         }
+        $scope.showSelectedGameDaySupply=function(selectedSupplyId){
+           angular.forEach($scope.supplies,function(value,key){
+               if(value.supplyListId==selectedSupplyId){
+                   value.checked=true;
+
+               }
+
+           })
+        }
+        $scope.selectGameDaySupplyItem=function(data){
+            $localStorage[$scope.curreentEventId].checkedItemsId.push(data.supplyItemId)
+        }
+        $scope.showSelectedSupplyListItem=function(){
+            if($localStorage[$scope.curreentEventId].checkedItemsId.length>0){
+                angular.forEach($localStorage[$scope.curreentEventId].checkedItemsId,function(value,key){
+                   angular.forEach($scope.MyGameDaysSupply,function(value2,key2){
+                       if(value==value2.supplyItemId){
+                           value2.checked=true;
+                       }
+                   })
+                });
+            }
+        }
+
+        if(!$localStorage[$scope.curreentEventId]) {
+            $localStorage[$scope.curreentEventId] = {checkedList: "", checkedItemsId:[]};
+        }else if($scope.MyGameDayList==true){
+            $scope.selectedGameDaySupplyId=$localStorage[$scope.curreentEventId].checkedList
+
+        }
+
+
         $scope.onSwipeLeft=function(data,index){
             /*data.swiped=true;
             $ionicListDelegate.showDelete();*/
@@ -73,34 +111,53 @@
             SupplyService.addAsAdmin=false;
             $scope.addAsAdmin=false;
         }
+        $scope.getSupplyItemBySupplyId=function(supplyId) {
+            SupplyService.getItemByListId(supplyId).then(function (response) {
+                $scope.MyGameDaysSupply = response;
+                $scope.showSelectedSupplyListItem();
+
+                if ($scope.hideMyItem == false) {
+                    $scope.toggleMyItem();
+                }
+                if ($scope.hideItem == false) {
+                    $scope.toggleItem();
+                }
+            });
+        }
         $scope.initialize=function() {
             SupplyService.getMySupplyList().then(function (response) {
                 $scope.supplies = response;
+                if($scope.MyGameDayList==true && $scope.selectedGameDaySupplyId!="" &&  $scope.hideCheckBox==false &&  $scope.selectedGameDaySupplyId!=undefined){
+                    $scope.showSelectedGameDaySupply($scope.selectedGameDaySupplyId);
+                    $scope.getSupplyItemBySupplyId($scope.selectedGameDaySupplyId);
+                    $scope.toggleMyItem();
+                    $scope.toggleItem();
+
+                }
             });
         }
+
         $scope.copyForMyGameDaySupply=function(list){
             $scope.MyGameDaysSupply=[];
             angular.forEach($scope.supplies,function(value,key){
                 if(value.supplyListId==list.supplyListId){
                     value.checked=true;
+                    $localStorage[$scope.curreentEventId].checkedList=value.supplyListId;
+
 
                 }else{
                     value.checked=false;
                 }
             });
-            SupplyService.getItemByListId(list.supplyListId).then(function (response) {
-                $scope.MyGameDaysSupply=response;
-                if($scope.hideMyItem==false) {
-                    $scope.toggleMyItem();
-                }
-                if($scope.hideItem==false) {
-                    $scope.toggleItem();
-                }
-            });
+            $localStorage[$scope.curreentEventId].checkedItemsId=[];
+            $scope.getSupplyItemBySupplyId(list.supplyListId);
+
+
 
         }
         $scope.removeSelectedSupply=function(list){
                     $scope.MyGameDaysSupply=[];
+            $localStorage[$scope.curreentEventId] = {checkedList: "", checkedItemsId:[]};
 
         }
         $scope.selectGameDaySupply=function(list,checked){

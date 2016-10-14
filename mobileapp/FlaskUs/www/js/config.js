@@ -77,7 +77,7 @@
 
         // Supplies
         .state('app.supplies', {
-            url: '/supplies/:myListName',
+            url: '/supplies/:myListName/:currEventId',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/supplies.html',
