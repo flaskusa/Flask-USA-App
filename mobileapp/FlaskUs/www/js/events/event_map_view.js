@@ -623,12 +623,10 @@
                     return infoTypeCategory;
                 case 'Venue Map':
                     setVenueMapInfo();
-                    fileName = 'ad.png';
-                    break;
+                    return infoTypeCategory;
                 case 'Venue Info':
                     setVenueDetailInfo();
-                    fileName = 'ad.png';
-                    break;
+                    return infoTypeCategory;
             }
         };
         function setHotelInfo() {
