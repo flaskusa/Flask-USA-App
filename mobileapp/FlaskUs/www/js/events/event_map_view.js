@@ -308,8 +308,10 @@
                     $scope.selectedIndex = 0;
                 } else if (infoTyepeCategory == 'Nightlife') {
                     $scope.selectedIndex = 1;
-                } else {
+                } else if (infoTyepeCategory == 'Hotel') {
                     $scope.selectedIndex = 2;
+                } else {
+                    $scope.selectedIndex = 3;
                 }
             }
         };
@@ -732,7 +734,7 @@
                         else if ("Hotel" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject);
                             tempObject.icon = 'img/map_icons/nightlife.png';
-                            $scope.nightLifes.push(tempObject);
+                            $scope.hotelMarkers.push(tempObject);
                         }
                     }
                 })
