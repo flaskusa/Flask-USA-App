@@ -8,12 +8,12 @@
         <ion-tab title="Event Details">
             <!-- Tab 1 content -->
             <ion-content overflow-scroll="false" header="true" class='has-header has-subheader'>
-                <div class="box">
+                <form class="" novalidate name="tailgateForm">
                     <div class="list add_my_tailgate">
                         <div class="list tailgatelogoContainer">
                             <div class="item item-image">
-                                <img ng-src="{{defaultImageUrl}}" id="myImage" class="tailgateLogoImg" ng-if="tailgateLogoId == 0"/>
-                                <img ng-src="{{tailgateLogoUrl}} " id="myImage " ng-if="tailgateLogoId>0"   class="tailgateLogoImg" alt="Image not found" />
+                                <img ng-src="{{defaultImageUrl}}" id="myImage" class="tailgateLogoImg" ng-if="tailgateLogoId == 0" />
+                                <img ng-src="{{tailgateLogoUrl}} " id="myImage " ng-if="tailgateLogoId>0" class="tailgateLogoImg" alt="Image not found" />
                             </div>
                             <a class="item text-center disabled" ng-click="show();" ng-if="isTailgateAdmin">
                                 Tap to add Picture
@@ -22,17 +22,20 @@
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Tailgate Name</span>
                             <input type="text" placeholder="Tailgate Name" name="TailgateName" class="form-control" ng-model="addTailgateParams.tailgateName"
-                                   required>
+                                required>
+                            <div ng-show="tailgateForm.$submitted || tailgateForm.TailgateName.$touched">
+                                <span ng-show="tailgateForm.TailgateName.$error.required" class="error_msg">Please enter tailgateName</span>
+                            </div>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Description:</span>
                             <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="addTailgateParams.tailgateDescription"
-                                   required>
+                                required>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Event Name:</span>
                             <input type="text" list="EventNameList" ng-change="loadeventData()" id="envtName" placeholder="Event Name" class="form-control"
-                                   ng-model="addTailgateParams.eventName" required ng-model-options="{ debounce: 500 }">
+                                ng-model="addTailgateParams.eventName" required ng-model-options="{ debounce: 500 }">
                             <datalist id="EventNameList">
                                 <select>
                                     <option ng-repeat="data in eventDetails" data_id="{{data.eventId}}" value="{{data.eventName}}">{{data.eventName}}</option>
@@ -42,36 +45,32 @@
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Event Date</span>
                             <input type="text" class="form-control" placeholder="Event Date" ng-model="tailgateDate" name="Eventdate" disabled="disabled"
-                                   required>
+                                required>
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
-                            <span class="input-label">Start Time </span> 
-                            <input type="time" placeholder="HH:mm:ss" class="form-control"   name="startTime" ng-model="addTailgateParams.startTime" required>
-                            <!--<i class="icon ion-ios-clock" ng-click="openTimePicker1();"></i>-->
+                            <span class="input-label">Start Time </span>
+                            <input type="time" placeholder="HH:mm a" class="form-control" name="startTime" ng-model="addTailgateParams.startTime" required>
+                            
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
                             <span class="input-label">End Time</span>
-                            <input type="time" placeholder="HH:mm:ss" class="form-control" name="endTime" ng-model="addTailgateParams.endTime" required>
-                            <!--<i class="icon ion-ios-clock" ng-click="openTimePicker2();"></i>-->
+                            <input type="time" placeholder="HH:mm a" class="form-control" name="endtime" ng-model="addTailgateParams.endTime" min="{{addTailgateParams.startTime}}"
+                                required>
+                            <div ng-show="tailgateForm.$submitted || tailgateForm.endtime.$touched">
+                                <span ng-show="tailgateForm.endtime.$error.min" class="error_msg">Please enter valid end time</span>
+                            </div>
                         </div>
-                        <!--<div class="item item-input item-floating-label">
-                            <span class="input-label">Venmo Account:</span>
-                            <input type="email" placeholder="Venmo Account" class="form-control" ng-model="addTailgateParams.venmoAccountId" name="VenmoAccount" required>
-                        </div>
-                        <div class="item item-input item-floating-label">
-                            <span class="input-label">Amount</span>
-                            <input type="Number" placeholder="Amount" name="Amount" ng-model="addTailgateParams.amountToPay">
-                        </div>-->
+
                     </div>
                     <div class="padding" align="center">
-                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="addmyTailgate(addTailgateParams);">
+                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="tailgateForm.$valid && addmyTailgate(addTailgateParams);">
                             Save
                         </button>
                         <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/my_tailgate">
                             Cancel
                         </a>
                     </div>
-                </div>
+                </form>
             </ion-content>
         </ion-tab>
         <ion-tab title="Location">
@@ -81,7 +80,7 @@
                     <div style="width:100%;height:100%;" class="add_my_tailgate">
                         <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
                             <ui-gmap-window show="map.window.show" coords="map.window.model" options="map.window.options" closeClick="map.window.closeClick()"
-                                            templateParameter="map.window">
+                                templateParameter="map.window">
                                 <div>Hello</div>
                             </ui-gmap-window>
                             <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id" click="onClick(m)">
@@ -142,16 +141,22 @@
         <ion-tab title="Plan Now" ng-click="selectTab(3)">
             <!--FOURTH TAB-->
             <ion-content overflow-scroll="false" class="has-header">
-                <div class="paynow" style="margin-top: 44px;">
+                <form class="paynow" style="margin-top: 44px;" name="venmo" novalidate>
                     <div class="tailgateInfo">
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Venmo Account:</span>
                             <input type="text" placeholder="Venmo Account" class="form-control" ng-model="newUpdate.venmoAccountId" name="VenmoAccount"
-                                   required>
+                                required>
+                            <div ng-show="venmo.$submitted || venmo.VenmoAccount.$touched">
+                                <span ng-show="venmo.VenmoAccount.$error.required" class="error_msg">Enter your venmo account</span>
+                            </div>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Amount</span>
-                            <input type="text" placeholder="Amount" name="Amount" ng-model="newUpdate.amountToPay"  valid-number>
+                            <input type="text" placeholder="Amount" name="Amount" ng-model="newUpdate.amountToPay" valid-number>
+                            <div ng-show="venmo.$submitted || venmo.Amount.$touched">
+                                <span ng-show="venmo.Amount.$error.required" class="error_msg">Enter Amount</span>
+                            </div>
                         </div>
                         <!--<div class="row">
                             <div class="col"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
@@ -162,13 +167,13 @@
                             <div class="col"><div class="tailgateDescFont">EVENT DETAILS</div><span>{{myTailgate.tailgateDescription}}</span></div>
                         </div>-->
                         <div class="row">
-                            <button nav-clear class="button button-block button-positive pay_now_button" ng-click="updatetailgate(newUpdate);">
+                            <button nav-clear class="button button-block button-positive pay_now_button" ng-click="venmo.$valid && updatetailgate(newUpdate);">
                                 Save
                             </button>
                         </div>
                     </div>
-                </div>
-                
+                </form>
+
 
                 <div class="strip paddingTOpSupply" ng-click="toggleItem()">
                     <div class="stripPadding">
@@ -180,7 +185,7 @@
                 <div id="FlaskUsListdiv">
                     <ion-list>
                         <ion-item class="item" ng-repeat="data in allSupplyList">
-                            <span class="emailText" style="color: #000000;font-weight: 200"><i class="addText">{{ data.supplyListName | uppercase}}</i></span>
+                            <span class="emailText" style="color: #000000;font-weight: 200"><i class="supplyItemText">{{ data.supplyListName | uppercase}}</i></span>
                             <div>
                                 <span class="badge span_icon" style="top:3px" ng-click="selectGameDaySupply(data,data.checked)">
                                    <label class="checkbox"style="float: right">
@@ -198,10 +203,10 @@
                         <i class="icon ion-chevron-down" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==false"></i>
                     </div>
                 </div>
-                <div class="list" id = "supplyItemDiv">
+                <div class="list" id="supplyItemDiv">
                     <label class="item item-input item-select" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
                         <div class="input-label" style="width:60%">
-                            <i class="addText"> {{ item.supplyItemName | uppercase}} </i>
+                            <i class="supplyItemText"> {{ item.supplyItemName | uppercase}} </i>
 
                         </div>
                         <select ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" style="background:inherit">
@@ -215,7 +220,7 @@
                     <button type="button" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems();">
                         Add Supply List
                     </button>
-                </div>      
+                </div>
             </ion-content>
         </ion-tab>
     </ion-tabs>

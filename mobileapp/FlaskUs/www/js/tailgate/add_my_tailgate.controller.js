@@ -272,17 +272,12 @@
                 var currDate = $filter('date')($scope.CurrEvent.eventDate, 'MM-dd-yyyy');
 
                 $scope.addTailgateParams.startTime = currStartTime;
-                // $scope.selectedtime1 = currStartTime;
-                // $scope.selectedtime2 = currEndTime;
                 $scope.addTailgateParams.endTime = currEndTime;
                 $scope.tailgateDate = currDate;
                 TailgateService.getvenueDetails(venueID).then(function (VENUEData) {
                     callMap(VENUEData.latitude, VENUEData.longitude);
                 });
             });
-
-            $scope.register = function () {
-            }
         }
 
         // to hide and show tabs
@@ -303,9 +298,12 @@
             $cookies.remove('newtailgatedata');
             $scope.newUpdate = { 'amountToPay': tailgateDetails.amountToPay, 'venmoAccountId': tailgateDetails.venmoAccountId };
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
-
-            $scope.selectedtime1 = getTailgateTime(tailgateDetails.startTime);
-            $scope.selectedtime2 = getTailgateTime(tailgateDetails.endTime); 
+            var startTimeInword = $filter('date')(tailgateDetails.startTime,"hh:mm a")
+            var startTimeInMilis = Date.parse($scope.tailgateDate + " " + startTimeInword)
+            var endTimeInword  = $filter('date')(tailgateDetails.endTime,"hh:mm a")
+        var endTimeInMilis =    Date.parse($scope.tailgateDate + " " + endTimeInword)
+            $scope.selectedtime1 = getTailgateTime(new Date(startTimeInMilis));
+            $scope.selectedtime2 = getTailgateTime(new Date(endTimeInMilis)); 
             $scope.tailgateLogoId = tailgateDetails.logoId;
             $scope.addTailgateParams = {
                 tailgateName: tailgateDetails.tailgateName,
@@ -875,7 +873,7 @@
             var year = x.getYear() + 1900;
             var month = x.getMonth();
             var day = x.getDate();
-            return new Date(year,month,day,hour,month,0);
+            return new Date(year,month,day,hour,minute,0);
         }
         $scope.initialize();
 

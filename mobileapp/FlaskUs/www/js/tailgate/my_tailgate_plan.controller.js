@@ -14,15 +14,8 @@
         $scope.tailgateSupplyItems = [];
 
         var tailGateId = $cookies.get('currtailGateId');
-        getMyTailgate();
-        getAllMyTailgates();
-//        getAllFriends();
-        getTailgaters();
-//        displayUserName();
-
+        
         $scope.userId = "";
-//        var itemArray;
-
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
@@ -80,8 +73,6 @@
             console.log(user_selected);
             $scope.userId = user_selected;
             TailgateService.updateTailgateSupplyItem(data.tailgateSupplyItemId, data.supplyListItemName, tailGateId, $scope.userId).then(function (respData) {
-//                $scope.alltailgateSupplyItem = respData.data;
-//                console.log($scope.alltailgateSupplyItem);
 
             });
         };
@@ -96,5 +87,9 @@
             "&recipients=" + tailgateAccount;
             window.open(paymentUrl, '_system', 'location=yes'); // for inapp browser or system app
         };
+
+        getMyTailgate();
+        getAllMyTailgates();
+        getTailgaters();
     }
 })();

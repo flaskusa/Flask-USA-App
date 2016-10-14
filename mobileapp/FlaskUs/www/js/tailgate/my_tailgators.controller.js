@@ -19,7 +19,7 @@
         }
         var tailGateId = $cookies.get('currtailGateId');
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
-        getTailgaters();
+        
 
         function getTailgaters() {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
@@ -46,7 +46,9 @@
             TailgateService.addcurrentUser(addUserparams).then(function (respData) {
                 $scope.myFriends.splice(index, 1);
             })           
-        }
+        };
+
+        getTailgaters();
 
     }
 })();

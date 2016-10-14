@@ -19,7 +19,7 @@
         $scope.uploadTailgateImagesUrl = SERVER.url + '/flask-user-tailgate-portlet.tailgateimages/upload-tailgate-image';
         $scope.imgUrl = SERVER.hostName +"c/document_library/get_file?uuid=";
         $cookies.put('currtailGateId', tailGateId);
-        getMyTailgate();
+      
         get_message_list(tailGateId);
         $scope.isTailgateAdmin = false;
         $scope.goBack = function () {
@@ -247,6 +247,7 @@
         $scope.isTailgateMember = function () {
             return true;
         }
+          getMyTailgate();
     }
 })();
 
