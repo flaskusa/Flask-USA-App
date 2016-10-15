@@ -2572,3 +2572,22 @@ div .manage_event_default_Image{
     font-size: 13px;
     font-weight: bold;
 }
+#venueInfo ul {
+  list-style: none; }
+
+#venueInfo li {
+  background: url("../img/flask_icons/star.svg") no-repeat left top;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-top: 1px;
+  overflow: visible; }
+
+#venueInfo li {
+  font-weight: 500;
+  font-size: 14px; }
+
+#venueInfo a{
+  font-weight: 500;
+  font-size: 14px;
+}
