@@ -107,7 +107,7 @@
                                             <img class="list-thumbnail listImages" src = 'img/default-group-pic.png';">
                                             <h2 class="eventNameCol">{{ data.groupName | uppercase}}</h2>
                                             <p class="dateCol">Created By : {{data.createdBy | uppercase}}</p>
-                                            <span class="badge span_icon"><img src="img/flask_icons/add_new.svg" ng-click="getusersofGroup(data.groupId, $index)"></span>
+                                            <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="getusersofGroup(data.groupId, $index)"></span>
                                         </a>
                                         <a class="item" ng-if="allGroups.length == 0"> You do not have any group yet. Please search and add group </a>
                                     </div>
@@ -126,9 +126,9 @@
                                 <div>
                                     <a class="item item-thumbnail-left item-icon-right eventList" ng-repeat="data in myFriends">
                                         <img class="list-thumbnail listImages" src='img/default-profilepic-copy.png' ;">
-                                        <h2 class="eventNameCol">{{ data.fullName | uppercase}}</h2>
-                                        <p class="dateCol">{{ data.emailAddress}}</p>
-                                        <span class="badge span_icon"><img src="img/flask_icons/add_new.svg" ng-click="addTailgateMembers(data,$index)"></span>
+                                        <h2 class="eventNameCol_tailgate">{{ data.fullName | uppercase}}</h2>
+                                        <p class="dateCol_tailgate">{{ data.emailAddress}}</p>
+                                        <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="addTailgateMembers(data,$index)"></span>
                                     </a>
                                     <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. Please search and add friends </a>
                                 </div>
