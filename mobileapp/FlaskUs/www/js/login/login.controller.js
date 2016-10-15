@@ -3,14 +3,16 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER','$localStorage'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER,$localStorage) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
         $scope.password = '';
+        $scope.user={Email:"",password:""}
+        $scope.remembered=false;
      
         $scope.checkTouch = function (enableChecked) {
             if (enableChecked) {
@@ -35,6 +37,9 @@
                 else if (respData.data.emailAddress == "") {
                 }
                 else {
+                    if($scope.remembered==true){
+                        $localStorage['RememberUser']=user;
+                    }
                     $cookies.putObject('CurrentUser', respData);
                     var usercookie = $cookies.getObject('CurrentUser');
                     $rootScope.userName = respData.data.firstName + respData.data.lastName;
@@ -45,16 +50,25 @@
                 }
             });
         }
+        if($localStorage['RememberUser'] &&  $localStorage['RememberUser'].Email &&  $localStorage['RememberUser'].password){
+            $scope.user=$localStorage['RememberUser'];
+            $scope.isChecked=true;
+        }else{
+            $scope.isChecked=false;
+        }
 
         $scope.remembered = function (isChecked, user) { 
             if (isChecked) {
-                if(!user.Email=="" && !user.password==""){
-                    $cookies.putObject('RememberUser', user);
-                    var rcookie = $cookies.getObject('RememberUser');
+                if(user && !user.Email=="" && !user.password==""){
+
+                    $scope.remembered=true;
                 }
                 else {
+                    $scope.remembered=false;
                     $ionicLoading.show({ template: 'Email and password should not be empty!', noBackdrop: false, duration: 2000 });
                 }
+            }else{
+                $localStorage['RememberUser']="";
             }
         }
     

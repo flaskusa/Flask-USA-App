@@ -1,6 +1,6 @@
 (function () {
     var app = angular.module('flaskApp'); 
-    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage,$state) {
+    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage,$state,LoginService) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -12,7 +12,26 @@
                 // org.apache.cordova.statusbar required
                 StatusBar.styleDefault();
             }
-
+            if($localStorage['RememberUser'] &&  $localStorage['RememberUser'].Email &&  $localStorage['RememberUser'].password){
+                var user = $localStorage['RememberUser'];
+                LoginService.authenticateUser(user).then(function (respData) {
+                    if (respData.data.message == "Authenticated access required") {
+                        $scope.Error = true;
+                        $timeout(function () { $scope.Error = false; }, 3000);
+                    }
+                    else if (respData.data.emailAddress == "") {
+                    }
+                    else {
+                        $cookies.putObject('CurrentUser', respData);
+                        var usercookie = $cookies.getObject('CurrentUser');
+                        $rootScope.userName = respData.data.firstName + respData.data.lastName;
+                        $rootScope.userEmailId = respData.data.emailAddress;
+                        $rootScope.show_login = true;
+                        document.login_form.reset();
+                        $state.go("app.user_navigation_menu");
+                    }
+                });
+            }
             $rootScope.$on('loading:show', function () {
                 $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' })
             })
