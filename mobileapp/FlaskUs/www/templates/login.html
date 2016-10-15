@@ -16,16 +16,7 @@
                     User name or password did not match. 
                 </div>
             </div>
-            <li class="item item-toggle">
-                <b style="float: left;margin-left: 14px" ng-if="!testServe">FlaskUs Server</b>
-                <b style="float: left;margin-left: 14px" ng-if="testServe">Test server</b>
-                <label class="toggle toggle-positive" ng-init="serverUrl = (serverUrl == undefined) ? 'http://www.flaskus.com/' : serverUrl">
-                    <input type="checkbox" ng-model="serverUrl" ng-true-value="'http://www.flaskus.com/'" ng-false-value="'http://146.148.83.30/'" ng-change="switchServer(serverUrl)">
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
-            </li>
+            
             <form name="login_form" class="loginpane form_div" novalidate  ng-submit="login_form.$valid && doLogin(user)" style="">
                 <div class="list card loginpane_body">
 

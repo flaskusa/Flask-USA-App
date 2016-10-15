@@ -7,6 +7,12 @@
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
         "companyId":20155
     })
+    // flaskAppConfig.value("SERVER", {
+    //     "hostName": "http://146.148.83.30/",
+    //     "url": "http://146.148.83.30/api/jsonws/",
+    //     "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
+    //     "companyId":20154
+    // })
     flaskAppConfig.config(function ($provide) {
             $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
                 return function (exception, cause) {

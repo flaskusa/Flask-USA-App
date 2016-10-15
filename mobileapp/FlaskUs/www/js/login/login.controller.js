@@ -11,9 +11,7 @@
         var self = this;
         $scope.Email = '';
         $scope.password = '';
-        $scope.testServe=false;
-        // SERVER.url = "http://www.flaskus.com/";
-        // SERVER.hostName = "http://www.flaskus.com/api/jsonws/";
+     
         $scope.checkTouch = function (enableChecked) {
             if (enableChecked) {
                 $cordovaTouchID.checkSupport().then(function () {
@@ -59,17 +57,7 @@
                 }
             }
         }
-        $scope.switchServer = function(url) {
-            $scope.testServe=!$scope.testServe;
-            SERVER.hostName = url;
-            SERVER.url = url+"api/jsonws/";
-            if($scope.testServe == true) {
-                 SERVER.companyId = 20154;
-            } else {
-                SERVER.companyId = 20155;
-            }
-            
-        }
+    
     };
 })();
 
