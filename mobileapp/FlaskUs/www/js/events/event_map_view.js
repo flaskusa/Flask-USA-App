@@ -111,7 +111,7 @@
         }
         $scope.closeOtherInfoWindows = function (mapClick) {
             if ($scope.infoTypeName == 'Pre-Event') {
-                if ($scope.selectedIndex == 0 && $scope.markerOptions.control.getPlurals().allVals.length > 0) {
+                if ($scope.selectedIndex == 0 && $scope.markerOptions.control &&  $scope.markerOptions.control.getPlurals &&  $scope.markerOptions.control.getPlurals().allVals.length > 0) {
                     angular.forEach($scope.markerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
                             $scope.$apply(function () { val.model.show = false; });
@@ -120,7 +120,7 @@
                         }
                     })
                 }
-                if ($scope.selectedIndex == 1 && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                if ($scope.selectedIndex == 1 && $scope.barFlaskMarkerOptions.control && $scope.barFlaskMarkerOptions.control.getPlurals && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                     angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
                             $scope.$apply(function () { val.model.show = false; });
@@ -130,7 +130,7 @@
                     })
                 }
             } else if ($scope.selectedIndex == 0 && $scope.infoTypeName == 'During-Event') {
-                if ($scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                if ($scope.barFlaskMarkerOptions.control && $scope.barFlaskMarkerOptions.control.getPlurals && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                     angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
                             $scope.$apply(function () { val.model.show = false; });
@@ -140,7 +140,7 @@
                     })
                 }
             }else if ($scope.infoTypeName == 'Post-Event') {
-                    if ($scope.selectedIndex == 0 && $scope.barFlaskMarkerOptions.control && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    if ($scope.selectedIndex == 0 && $scope.barFlaskMarkerOptions.control && $scope.barFlaskMarkerOptions.control.getPlurals && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                         angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                             if (mapClick) {
                                 $scope.$apply(function () { val.model.show = false; });
@@ -149,7 +149,7 @@
                             }
                         })
                     }
-                    if ($scope.selectedIndex == 1 && $scope.nightLifeFlaskMarkerOptions.control && $scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    if ($scope.selectedIndex == 1 && $scope.nightLifeFlaskMarkerOptions.control && $scope.nightLifeFlaskMarkerOptions.control.getPlurals && $scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                         angular.forEach($scope.nightLifeFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                             if (mapClick) {
                                 $scope.$apply(function () { val.model.show = false; });
@@ -158,7 +158,7 @@
                             }
                         })
                     }
-                    if ($scope.selectedIndex == 2 && $scope.hotelFlaskMarkerOptions.control && $scope.hotelFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    if ($scope.selectedIndex == 2 && $scope.hotelFlaskMarkerOptions.control && $scope.hotelFlaskMarkerOptions.control.getPlurals && $scope.hotelFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                         angular.forEach($scope.hotelFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                             if (mapClick) {
                                 $scope.$apply(function () { val.model.show = false; });
@@ -180,27 +180,28 @@
             iwBackground.children(':nth-child(3)').find('div').children().css({ 'background': 'black' });
 
 
-            var href = $scope.createMapLink($scope.currentShownInfoWindow.addrLine1);
+            var takeMeThere = $scope.createMapLink($scope.currentShownInfoWindow.addrLine1);
 
             $("#iwTakeMeThere").on("click", function () {
-                openUrl(href, "_system");
+                openUrl(takeMeThere, "_system");
             });
+            var telephoneToCall;
             if ($scope.currentShownInfoWindow.phone == '') {
                 $("#iwCallNow").text("Not Available");
             } else {
-                href = "tel:" + $scope.currentShownInfoWindow.phone;
+                telephoneToCall = "tel:" + $scope.currentShownInfoWindow.phone;
                 $("#iwCallNow").on("click", function () {
-                    openUrl(href, "_system");
+                    openUrl(telephoneToCall, "_system");
                 });
             }
-
+            var websiteUrl;
             if ($scope.currentShownInfoWindow.website == '') {
                 $("#iwViewWebsite").text('Not Available');
             } else {
-                href = $scope.currentShownInfoWindow.website;
-                href = fixUrl(href);
+                websiteUrl = $scope.currentShownInfoWindow.website;
+                websiteUrl = fixUrl(websiteUrl);
                 $("#iwViewWebsite").on("click", function () {
-                    openUrl(href, "_system");
+                    openUrl(websiteUrl, "_system");
                 });
             }
         }
@@ -470,15 +471,35 @@
         $scope.setMarkerFields = function (tempObject) {
             // tempObject.icon = 'img/map_icons/flask_map_icon_11.png';
             tempObject.show = false;
-            tempObject.templateUrl = 'markerInfo.tpl.html';
-            tempObject.templateParameter = {
+            tempObject.isIconVisibleOnClick = "true";
+            var templateName;
+            if(tempObject.infoTypeCategoryName == "Parking") {
+                templateName = "markerParkingInfo.tpl.html";
+                tempObject.templateParameter = {
+                id: tempObject.id,
+                infoTitle: tempObject.infoTitle,
+                cost: "$"+tempObject.cost,
+                addrLine1: tempObject.addrLine1,
+                infoDesc1 :"15 min walk to stadium",
+                subTitle: "$"+tempObject.cost + " | " + "15 min walk to stadium",
+                infoDesc: tempObject.infoDesc,
+                phone: tempObject.phone,
+                type: "FLASK"
+            };
+            } else{
+                templateName = "markerBarInfo.tpl.html";
+                tempObject.templateParameter = {
                 id: tempObject.id,
                 infoTitle: tempObject.infoTitle,
                 addrLine1: tempObject.addrLine1,
                 infoDesc: tempObject.infoDesc,
                 phone: tempObject.phone,
                 type: "FLASK"
-            };
+            }
+        }
+            tempObject.templateUrl = templateName;
+            
+            
         };
 
         function fixUrl(url) {
@@ -782,7 +803,7 @@
         }
 
         $scope.selectTab = function (index) {
-            $scope.isMapMarkersSet = false;
+            //$scope.isMapMarkersSet = false;
             $scope.closeOtherInfoWindows();
             $scope.selectedIndex = index;
             if ($scope.infoTypeName == 'Pre-Event') {
@@ -791,7 +812,6 @@
                 } else if (index == 1) {
                     setBarInfo();
                 } else if (index == 2) {
-
                     setTrafficInfo();
                 } else if (index == 3) {
                     setFlaskUsInfo();
