@@ -1,5 +1,11 @@
 ﻿<ion-view cache-view="false" view-title="SUPPLIES"ng-init="initialize()">
-  <ion-content>
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button ng-if="MyGameDayList==true" class="button button-icon button-clear ion-chevron-left back_button_css" ng-click="goBack();"></button>
+            <button ng-if="MyGameDayList==false" class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content>
 
       <a class="item item-full item-icon-left "ng-click="addNewSuppliesList()" href="#/app/createSupplies"ng-if="MyGameDayList==false">
           <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons" class="FlaskionIcons"></div>

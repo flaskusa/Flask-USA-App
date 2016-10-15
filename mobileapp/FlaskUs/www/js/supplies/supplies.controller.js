@@ -3,10 +3,10 @@
     angular.module('flaskApp')
     .controller('SuppliesCtrl', SuppliesCtrl);
 
-    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate','$stateParams','$localStorage'];
+    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate','$stateParams','$localStorage','$ionicHistory'];
 
     /* @ngInject */
-    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate,$stateParams,$localStorage ) {
+    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate,$stateParams,$localStorage,$ionicHistory ) {
 
         $scope.userDataList=[];
         $scope.supplies=[];
@@ -14,6 +14,9 @@
         $scope.MyGameDaysSupply=[];
         $scope.hideItem=false;
         $scope.curreentEventId=$stateParams.currEventId;
+        $scope.goBack = function(){
+            $ionicHistory.goBack();
+        }
         var userDetail=$cookies.getObject('CurrentUser');
         if(userDetail!=undefined) {
             $scope.userId = userDetail.data.userId;
