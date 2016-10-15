@@ -27,7 +27,6 @@
                         $rootScope.userName = respData.data.firstName + respData.data.lastName;
                         $rootScope.userEmailId = respData.data.emailAddress;
                         $rootScope.show_login = true;
-                        document.login_form.reset();
                         $state.go("app.user_navigation_menu");
                     }
                 });

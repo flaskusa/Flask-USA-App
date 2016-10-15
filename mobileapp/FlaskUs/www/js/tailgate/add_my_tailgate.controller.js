@@ -519,10 +519,14 @@
             else {
                 tailgatedata.logoId = 0;
                 TailgateService.addTailgate(tailgatedata).then(function (respData) {
+                    $scope.tailgateCreateStatus=true;
+                    $timeout(function () { $scope.tailgateCreateStatus = false; }, 2000);
+
                     if ($scope.isImageSelectedToUpload) {
                         $scope.uploadFileToServer($scope.selectedImageURIToUpload, respData.data.tailgateId);
                     }
                     tailgateId = respData.data.tailgateId;
+
                     $scope.addTailgateParams.tailgateId = respData.data.tailgateId;
                     //                    $cookies.put('newtailgateId', respData.data.tailgateId);
                     $cookies.putObject('newtailgatedata', respData.data);
