@@ -669,13 +669,13 @@
         };
         function setVenueMapInfo() {
             $timeout(function () {
-                $ionicTabsDelegate.select(1);
+                $ionicTabsDelegate.select(0);
                 $scope.setMarkers();
             }, 0)
         };
         function setVenueDetailInfo() {
             $timeout(function () {
-                $ionicTabsDelegate.select(2);
+                $ionicTabsDelegate.select(1);
                 $scope.setMarkers();
             }, 0)
         };
@@ -687,9 +687,11 @@
         };
         function setBarInfo() {
             $timeout(function () {
-                if ($scope.infoTypeName == 'During-Event' || $scope.infoTypeName == 'Post-Event') {
+                if ($scope.infoTypeName == 'During-Event') {
+                    $ionicTabsDelegate.select(2);
+                } else if ($scope.infoTypeName == 'Post-Event') {
                     $ionicTabsDelegate.select(0);
-                } else if ($scope.infoTypeName == 'Pre-Event') {
+                }else if ($scope.infoTypeName == 'Pre-Event') {
                     $ionicTabsDelegate.select(1);
                 }
                 $scope.setMarkers();
@@ -818,11 +820,11 @@
                 }
             } else if ($scope.infoTypeName == 'During-Event') {
                 if (index == 0) {
-                    setBarInfo();
+                     setVenueMapInfo();
                 } else if (index == 1) {
-                    setVenueMapInfo();
+                   setVenueDetailInfo();
                 } else if (index == 2) {
-                    setVenueDetailInfo();
+                     setBarInfo();
                 } else if (index == 3) {
                     setFlaskUsInfo();
                 }

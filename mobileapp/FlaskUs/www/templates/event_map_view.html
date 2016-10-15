@@ -270,8 +270,44 @@
         </div>
         <div ng-if="infoTypeName == 'During-Event'" class="During-Event">
             <ion-tabs class="tabs-positive tab_bottom">
-                <ion-tab title="BARS/FOOD" ng-click="selectTab(0)">
-                    <div id="barTab" style="height:100%;width:100%" ng-if="selectedIndex == 0">
+                
+
+                <ion-tab title="VENUE MAP" ng-click="selectTab(0)">
+                        <img id="image" class="image_map_div"  ng-src="{{venueMapImageUrl}}" />
+                </ion-tab>
+
+                <ion-tab title="VENUE INFO" ng-click="selectTab(1)">
+
+
+
+                    <ion-content scroll="true" style="background: white;">
+                       <!-- <div class="row">
+                            <div class="col"></div>
+                            <div class="col col-90 event_name">
+                                <div class="eventHeading2" style="text-transform:uppercase;text-align:center">
+                                    <span class="overlineStyle fontSizeTrafficHeading">FORD FILED</span>
+                                </div>
+
+                            </div>
+                            <div class="col"></div>
+                        </div>-->
+
+                        <div ng-repeat="venueInfoDetail in venueInfoDetail" style="margin-top: 20px">
+                            <div align="center">
+                                <div style="width: 80%;">
+                                    <i class="trafficDetailHeading">{{venueInfoDetail.infoTitle}}</i>
+                                </div>
+                            </div>
+                            <div class="TrafficInfoDescDiv">
+
+                                <div id="venueInfo" class="" ng-bind-html="venueInfoDetail.infoDesc">
+                                </div>
+                            </div>
+                        </div>
+                    </ion-content>
+                </ion-tab>
+                <ion-tab title="BARS/FOOD" ng-click="selectTab(2)">
+                    <div id="barTab" style="height:100%;width:100%" ng-if="selectedIndex == 2">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">
@@ -305,42 +341,6 @@
                         </ui-gmap-google-map>
                     </div>
                 </ion-tab>
-
-                <ion-tab title="VENUE MAP" ng-click="selectTab(1)">
-                        <img id="image" class="image_map_div"  ng-src="{{venueMapImageUrl}}" />
-                </ion-tab>
-
-                <ion-tab title="VENUE INFO" ng-click="selectTab(2)">
-
-
-
-                    <ion-content scroll="true" style="background: white;">
-                       <!-- <div class="row">
-                            <div class="col"></div>
-                            <div class="col col-90 event_name">
-                                <div class="eventHeading2" style="text-transform:uppercase;text-align:center">
-                                    <span class="overlineStyle fontSizeTrafficHeading">FORD FILED</span>
-                                </div>
-
-                            </div>
-                            <div class="col"></div>
-                        </div>-->
-
-                        <div ng-repeat="venueInfoDetail in venueInfoDetail" style="margin-top: 20px">
-                            <div align="center">
-                                <div style="width: 80%;">
-                                    <i class="trafficDetailHeading">{{venueInfoDetail.infoTitle}}</i>
-                                </div>
-                            </div>
-                            <div class="TrafficInfoDescDiv">
-
-                                <div id="venueInfo" class="" ng-bind-html="venueInfoDetail.infoDesc">
-                                </div>
-                            </div>
-                        </div>
-                    </ion-content>
-                </ion-tab>
-
                 <ion-tab title="FLASK US" ng-click="selectTab(3)">
                     <div style="padding:10px" ng-if="selectedIndex == 3">
                         <ion-content scroll="true" style="background: white">
