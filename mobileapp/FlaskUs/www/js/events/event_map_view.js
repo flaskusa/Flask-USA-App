@@ -751,6 +751,7 @@
                             if (ImgObj.length != 0) {
                                 tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                             }
+                            $scope.venueMapImageUrl=tempObject.imageUrl;
                             $scope.venueMapDetail.push(tempObject);
                         }
                         else if ("Venue Info" == tempObject.infoTypeCategoryName) {
