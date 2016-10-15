@@ -12,7 +12,7 @@
         <p class="friend">{{friend.emailAddress}}</p>
 
     </div>
-      <div id="toaster" ng-if="messageSentStatus==true"class="item toastDiv" ><i>Message sent successfully</i> </div>
+      <div id="toaster" ng-if="messageSentStatus==true"class="item toastDiv" style="text-align: center" ><i>Message sent successfully</i> </div>
       <div  align="center">
           <textarea ng-if="showTextArea.show==true"ng-model="message.messageToSend" id="textArea" class="showTextArea hideTexArea"autofocus></textarea>
       </div>

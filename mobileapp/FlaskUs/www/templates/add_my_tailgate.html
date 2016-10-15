@@ -33,6 +33,7 @@
                             <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="addTailgateParams.tailgateDescription"
                                 required>
                         </div>
+                        <div id="toaster" ng-if="tailgateCreateStatus==true"class="item toastDiv" style="text-align: center" ><i>Tailgate Added successfully</i> </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Event Name:</span>
                             <input type="text" list="EventNameList" ng-change="loadeventData()" id="envtName" placeholder="Event Name" class="form-control"
