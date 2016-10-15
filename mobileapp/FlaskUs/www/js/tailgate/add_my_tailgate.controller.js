@@ -721,11 +721,11 @@
         }
 
         //Get tailgates of particular user
-        function getAllMyTailgates(userId) {
-            TailgateService.getMyTailgates(userId).then(function (respData) {
-                $scope.allMyTailgate = respData.data;
-            });
-        }
+        // function getAllMyTailgates(userId) {
+        //     TailgateService.getMyTailgates(userId).then(function (respData) {
+        //         $scope.allMyTailgate = respData.data;
+        //     });
+        // }
 
         //Adding supply items to tailgate
         $scope.addSupplyItems = function () {

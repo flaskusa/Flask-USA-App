@@ -38,11 +38,11 @@
         }
 
 
-        function getAllMyTailgates(userId) {
-            TailgateService.getMyTailgates(userId).then(function (respData) {
-                $scope.allMyTailgate = respData.data;
-            });
-        }
+        // function getAllMyTailgates(userId) {
+        //     TailgateService.getMyTailgates(userId).then(function (respData) {
+        //         $scope.allMyTailgate = respData.data;
+        //     });
+        // }
 
         function getItems() {
             TailgateService.getItemsByTailgateId(tailGateId).then(function (respData) {
@@ -89,7 +89,7 @@
         };
 
         getMyTailgate();
-        getAllMyTailgates();
+        // getAllMyTailgates();
         getTailgaters();
     }
 })();
