@@ -1826,6 +1826,26 @@ div .extra-right-supply{
 .gm-style-iw + div {
   display: none; }
 
+.map_marker_info{
+    max-width: none;
+    height: 35px;
+    margin-left: 11px;
+}
+
+.iw_options{
+    font-size: 21px;
+    font-weight: bold;
+    margin-left: 11px;
+    float:left;
+}
+
+.marker_info_title{
+    font-size: 21px;
+    margin-top: 5px;
+    margin-left: 14px;
+
+}
+
 #iw-container .iw-title {
   font-size: 16px;
   text-transform: uppercase;
@@ -1834,6 +1854,8 @@ div .extra-right-supply{
   background: #000000;
   color: white;
   border-radius: 2px 2px 0 0;
+  height:55px;
+  margin-bottom:-9px;
   /* In accordance with the rounding of the default infowindow corners. */ }
 
 #iw-container #iw-content {
@@ -1856,7 +1878,9 @@ div .extra-right-supply{
 
 #iw-container .iw-title .iw-sub-title {
   font-size: 10px;
-  color: darkorange; }
+  color: darkorange;
+  margin-left:14px;
+}
 
 .gm-style-iw {
   width: 313px !important;
@@ -2483,8 +2507,6 @@ div .manage_event_default_Image{
   font-weight: 500;
   font-size: 14px;
 }
-
-
 
 .fontSizeTrafficHeading{
   font-size: 18px;
