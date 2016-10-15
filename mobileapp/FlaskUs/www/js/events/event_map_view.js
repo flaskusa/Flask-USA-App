@@ -28,6 +28,9 @@
         $scope.barsGoogleMarkers = [];
         $scope.hotelGoogleMarkers = [];
         $scope.nightLifesGoogleMarkers = [];
+        $scope.venueMapDetail=[];
+        $scope.venueInfoDetail=[];
+        $scope.gettingHomeDetail=[];
 
         $scope.googleMarkerOptions = {};
         $scope.googleMarkerOptions.control = {};
@@ -308,8 +311,12 @@
                     $scope.selectedIndex = 1;
                 } else if (infoTyepeCategory == 'Hotels') {
                     $scope.selectedIndex = 2;
-                } else {
+                } else if (infoTyepeCategory == 'Getting home') {
                     $scope.selectedIndex = 3;
+                }
+
+                else {
+                    $scope.selectedIndex = 4;
                 }
             }
         };
@@ -627,6 +634,10 @@
                 case 'Venue Info':
                     setVenueDetailInfo();
                     return infoTypeCategory;
+                case 'Getting home':
+                    setGettingHomeInfo();
+                    return infoTypeCategory;
+
             }
         };
         function setHotelInfo() {
@@ -676,7 +687,7 @@
                 } else if ($scope.infoTypeName == 'During-Event') {
                         $ionicTabsDelegate.select(3)
                 } else{
-                        $ionicTabsDelegate.select(3)
+                        $ionicTabsDelegate.select(4);
                     }
                 $scope.setMarkers();
             }, 0)
@@ -686,6 +697,14 @@
                 $ionicTabsDelegate.select(1)
                 $scope.setMarkers();
             }, 0)
+        }
+        function setGettingHomeInfo(){
+            $timeout(function () {
+                $ionicTabsDelegate.select(3);
+                $scope.setMarkers();
+            }, 0)
+
+
         }
         
         $scope.setMarkers = function () {
@@ -728,6 +747,18 @@
                             tempObject.icon = 'img/map_icons/hotel.png';
                             $scope.hotelMarkers.push(tempObject);
                         }
+                        else if ("Venue Map" == tempObject.infoTypeCategoryName) {
+                            if (ImgObj.length != 0) {
+                                tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                            }
+                            $scope.venueMapDetail.push(tempObject);
+                        }
+                        else if ("Venue Info" == tempObject.infoTypeCategoryName) {
+                            $scope.venueInfoDetail.push(tempObject);
+                        }
+                        else if ("Getting home" == tempObject.infoTypeCategoryName) {
+                            $scope.gettingHomeDetail.push(tempObject);
+                        }
                     } else {
                         if ("Bar & Restaurants" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject)
@@ -759,6 +790,7 @@
                 } else if (index == 1) {
                     setBarInfo();
                 } else if (index == 2) {
+
                     setTrafficInfo();
                 } else if (index == 3) {
                     setFlaskUsInfo();
@@ -778,10 +810,12 @@
                     setBarInfo();
                 } else if (index == 1) {
                     setNightLifeInfo();
-                } else if (index == 3) {
+                } else if (index == 4) {
                     setFlaskUsInfo();
                 } else if (index == 2) {
                     setHotelInfo();
+                }else if(index==3){
+                    setGettingHomeInfo();
                 }
             }
         }
