@@ -1880,8 +1880,8 @@ div .extra-right-supply{
   background: #000000;
   color: white;
   border-radius: 2px 2px 0 0;
-  height:55px;
-  margin-bottom:-9px;
+  /*height: 55px;
+  margin-bottom: -9px;*/
   /* In accordance with the rounding of the default infowindow corners. */ }
 
 #iw-container #iw-content {
@@ -1902,11 +1902,11 @@ div .extra-right-supply{
   text-decoration: none !important;
   color: black; }
 
-#iw-container .iw-title .iw-sub-title {
+#iw-container .iw-sub-title {
   font-size: 10px;
   color: darkorange;
-  margin-left:14px;
-}
+  /*margin-left: 14px;*/
+   }
 
 .gm-style-iw {
   width: 313px !important;
