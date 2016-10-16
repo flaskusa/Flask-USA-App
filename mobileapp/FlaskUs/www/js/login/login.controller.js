@@ -11,8 +11,8 @@
         var self = this;
         $scope.Email = '';
         $scope.password = '';
-        $scope.user={Email:"",password:""}
-        $scope.remembered=false;
+        $scope.user={Email:"",password:"",isChecked:false}
+        $scope.rememberUser=false;
      
         $scope.checkTouch = function (enableChecked) {
             if (enableChecked) {
@@ -37,7 +37,7 @@
                 else if (respData.data.emailAddress == "") {
                 }
                 else {
-                    if($scope.remembered==true){
+                    if($scope.rememberUser==true){
                         $localStorage['RememberUser']=user;
                     }
                     $cookies.putObject('CurrentUser', respData);
@@ -52,22 +52,23 @@
         }
         if($localStorage['RememberUser'] &&  $localStorage['RememberUser'].Email &&  $localStorage['RememberUser'].password){
             $scope.user=$localStorage['RememberUser'];
-            $scope.isChecked=true;
         }else{
-            $scope.isChecked=false;
+            $scope.user.isChecked=false;
         }
 
-        $scope.remembered = function (isChecked, user) { 
-            if (isChecked) {
+        $scope.remembered = function (user) {
+            if (user.isChecked) {
                 if(user && !user.Email=="" && !user.password==""){
 
-                    $scope.remembered=true;
+                    $scope.rememberUser=true;
                 }
                 else {
-                    $scope.remembered=false;
+                    $scope.rememberUser=false;
+                    $scope.user.isChecked=false;
                     $ionicLoading.show({ template: 'Email and password should not be empty!', noBackdrop: false, duration: 2000 });
                 }
             }else{
+                $scope.rememberUser=false;
                 $localStorage['RememberUser']="";
             }
         }
