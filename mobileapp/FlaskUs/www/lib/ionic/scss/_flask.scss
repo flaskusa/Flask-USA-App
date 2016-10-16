@@ -2558,6 +2558,8 @@ div .manage_event_default_Image{
 /*Venue Map*/
 .image_map_div{
     height:90% !important;
+  overflow-x: scroll;
+  overflow-y: scroll;
 }
 
 .venue_info_div{
