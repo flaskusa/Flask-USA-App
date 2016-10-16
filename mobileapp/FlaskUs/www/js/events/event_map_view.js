@@ -48,6 +48,7 @@
         $scope.hotelGoogleMarkerOptions.control = {};
         $scope.hotelFlaskMarkerOptions = {}
         $scope.hotelFlaskMarkerOptions.control = {};
+        $scope.zoomMapImage=false;
 
         $scope.isMapMarkersSet = false;
         var PRE_EVENT = "Pre-Event";
@@ -85,6 +86,9 @@
             }
 
 
+        }
+        $scope.toggleZoomImage=function(){
+            $scope.zoomMapImage=!$scope.zoomMapImage
         }
         $scope.isMobile = {
             Android: function () {
@@ -729,6 +733,15 @@
 
 
         }
+        $scope.tempPhoneNumberParser=function(desc){
+            var number=0;
+            if(desc.length>15){
+              number= desc.substring(1, 15);
+
+            }
+            return number;
+
+        }
         
         $scope.setMarkers = function () {
             if (!$scope.isMapMarkersSet) {
@@ -781,7 +794,12 @@
                             $scope.venueInfoDetail.push(tempObject);
                         }
                         else if ("Getting home" == tempObject.infoTypeCategoryName) {
+                            var number=$scope.tempPhoneNumberParser(tempObject.infoDesc);
+                            if(number!=0) {
+                                tempObject.phoneNumber = number;
+                            }
                             $scope.gettingHomeDetail.push(tempObject);
+
                         }
                     } else {
                         if ("Bar & Restaurants" == tempObject.infoTypeCategoryName) {

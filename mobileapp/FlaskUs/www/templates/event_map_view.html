@@ -273,7 +273,10 @@
                 
 
                 <ion-tab title="VENUE MAP" ng-click="selectTab(0)">
-                        <img id="image" class="image_map_div"  ng-src="{{venueMapImageUrl}}" />
+
+                    <div class="image_map_div ">
+                        <img id="image" class="venueMapImage" ng-class="{ zoomedvenueMapImage: zoomMapImage==true}" on-double-tap="toggleZoomImage()" ng-src="{{venueMapImageUrl}}" />
+                    </div>
                 </ion-tab>
 
                 <ion-tab title="VENUE INFO" ng-click="selectTab(1)">
@@ -520,9 +523,14 @@
                     <div style="padding:10px" ng-if="selectedIndex == 3">
                             <ion-content overflow-scroll="false"style="margin-top: 1px">
                                 <div class="list" >
-                                    <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail">
-                                        <h2 class="tickets" style="font-size: 22px">{{gettingHomeDetail.infoTitle}}</h2>
-                                        <p class="item-tickets" ng-bind-html="gettingHomeDetail.infoDesc"></p>
+                                    <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail" ng-if="gettingHomeDetail.phoneNumber==undefined">
+                                        <h2 class="tickets" style="text-transform:uppercase;font-size: 24px">{{gettingHomeDetail.infoTitle}}</h2>
+                                        <p class="item-tickets" >{{gettingHomeDetail.phoneNumber}}</p>
+
+                                    </a>
+                                    <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail"  href="tel:{{gettingHomeDetail.phoneNumber}}" ng-if="gettingHomeDetail.phoneNumber">
+                                        <h2 class="tickets" style="text-transform:uppercase;font-size: 24px">{{gettingHomeDetail.infoTitle}}</h2>
+                                        <p class="item-tickets" >{{gettingHomeDetail.phoneNumber}}</p>
 
                                     </a>
                                     </div>
