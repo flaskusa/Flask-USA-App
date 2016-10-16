@@ -1298,7 +1298,7 @@ h2.tailgater_name{
 /*Start tailgate details bottom tabs*/
 .tab_bottom a.tab-item{
     border-right:solid white 1px !important;
-   /*border-left: solid white 1px !important;*/
+  border-left:solid white 1px !important;
     color:white !important;
 }
 
@@ -2604,6 +2604,16 @@ div .manage_event_default_Image{
 .alignLeft {
   text-align:left;padding: 0px 5px;
 }
-.ml0 {
-  margin-left: 0px !important;
+
+.venueMapImage {
+  height: 100vw;
+  width: 100vw;
+  -webkit-transition: all .6s ease;
+  -moz-transition: all .6s ease;
+  -ms-transition: all .6s ease;
+  transition: all .6s ease;
+}
+.zoomedvenueMapImage {
+  width: 200vw;
+  height: 200vw;
 }
