@@ -140,6 +140,7 @@ div.ng-binding{
 .scroll{
     height: 100% !important;
 }
+
 .mainRow{
     height:33.33%;
     padding:0px;
@@ -355,8 +356,21 @@ input.input_box{width:90%;
     font: normal 14px/1 'Avenir Next',Helvetica,sans-serif;
 }
 
-button.button.button-block.button-positive.sign_in_button{width:90%;color:darkorange;}
-a.button.button-block.button-positive.sign_in_button{width:90%;padding-top:15px;text-align:center;color:darkorange;}
+button.button.button-block.button-positive.sign_in_button{
+    width:90%;
+    color:darkorange;
+}
+a.button.button-block.button-positive.sign_in_button{
+    width:90%;
+    padding-top:15px;
+    text-align:center;
+    color:darkorange;
+}
+
+.button{
+    background-image:none;
+    background:black !important;
+}
 
 .aui label {
     font-size: 14px;
@@ -1297,8 +1311,7 @@ h2.tailgater_name{
 
 /*Start tailgate details bottom tabs*/
 .tab_bottom a.tab-item{
-    border-right:solid white 1px !important;
-  border-left:solid white 1px !important;
+    border-right:solid white 2px !important;
     color:white !important;
 }
 
@@ -1900,7 +1913,11 @@ div .extra-right-supply{
 
 #iw-content a {
   text-decoration: none !important;
-  color: black; }
+  color: black;
+  margin-left:7px !important;
+}
+
+.iw-content-div{margin-left:-7px !important;}
 
 #iw-container .iw-sub-title {
   font-size: 10px;
@@ -2587,7 +2604,10 @@ div .manage_event_default_Image{
 
 #venueInfo li {
   font-weight: 500;
-  font-size: 14px; }
+  font-size: 14px;
+  float:left !important;
+  padding-bottom: 10px !important;
+}
 
 #venueInfo a{
   font-weight: 500;
@@ -2618,4 +2638,10 @@ div .manage_event_default_Image{
 .zoomedvenueMapImage {
   width: 200vw;
   height: 200vw;
+}
+
+/*map svg images*/
+.map_info_img{
+    width:36px !important;
+    height:32px !important;
 }
