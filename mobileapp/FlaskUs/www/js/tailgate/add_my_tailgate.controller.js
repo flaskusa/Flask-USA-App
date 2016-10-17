@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicTabsDelegate'];
+    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicTabsDelegate','$ionicLoading'];
 
     / @ngInject /
-    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicTabsDelegate) {
+    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicTabsDelegate,$ionicLoading) {
         //for adding tailgate
         var tailgateId = $cookies.get("currtailGateId");
         var self = this;
@@ -276,11 +276,6 @@
             });
         }
 
-        // to hide and show tabs
-        $scope.enableTab = {
-            condition: false
-        };
-
         function checkTailgateId() {
             var tailgateDetails = $cookies.getObject("editUserTailgate");
             if (!tailgateDetails) {
@@ -454,7 +449,7 @@
             $scope.selectedImageURIToUpload = '';
         }
 
-        $scope.uploadFileToServer = function (fileURL, tailgateId) {
+        $scope.uploadFileToServer = function (fileURL, tailgateId, message) {
             $rootScope.$broadcast('loading:show');
             var options = {};
             options.fileKey = "file";
@@ -474,6 +469,7 @@
                     var repositoryId = data.repositoryId;
                     var folderId = data.folderId;
                     var title = data.title;
+                    showToastMessage(message);
                     $scope.setLogoImageUrl(repositoryId, folderId, title);
                 }, function (error) {
                     $scope.reSetSelectedImageURIToUpload();
@@ -512,31 +508,31 @@
                 TailgateService.updateTailgateInfo(tailgatedata).then(function (respdata) {
                     $cookies.putObject('newtailgatedata', respdata);
                     if ($scope.isImageSelectedToUpload) {
-                        $scope.uploadFileToServer($scope.selectedImageURIToUpload, tailgatedata.tailgateId);
+                        $scope.uploadFileToServer($scope.selectedImageURIToUpload, tailgatedata.tailgateId, 'Tailgate updated successfully');
+                    }else{
+                         showToastMessage('Tailgate updated successfully');
                     }
                 });
             }
             else {
                 tailgatedata.logoId = 0;
                 TailgateService.addTailgate(tailgatedata).then(function (respData) {
-                    $scope.tailgateCreateStatus=true;
-                    $timeout(function () { $scope.tailgateCreateStatus = false; }, 2000);
-
                     if ($scope.isImageSelectedToUpload) {
-                        $scope.uploadFileToServer($scope.selectedImageURIToUpload, respData.data.tailgateId);
+                        $scope.uploadFileToServer($scope.selectedImageURIToUpload, respData.data.tailgateId,'Tailgate created successfully');
+                    } else {
+                         showToastMessage('Tailgate created. Tap next tab to add location');
                     }
                     tailgateId = respData.data.tailgateId;
 
                     $scope.addTailgateParams.tailgateId = respData.data.tailgateId;
                     //                    $cookies.put('newtailgateId', respData.data.tailgateId);
                     $cookies.putObject('newtailgatedata', respData.data);
-                    $scope.enableTab = {
-                        condition: true
-                    };
-                    //                    newtailGateId = $cookies.get('newtailgateId');
-                    getTailgaters(tailgateId);
                 });
             }
+        }
+
+        function showToastMessage(message) {
+             $ionicLoading.show({ template: message, noBackdrop: true, duration: 3000 });
         }
 
         function validateTailgate (data) {
@@ -549,7 +545,7 @@
             updateData.amountToPay = parseFloat(newUpdate.amountToPay);
             console.log(updateData);
             TailgateService.updateTailgateInfo(updateData).then(function (respdata) {
-                console.log(respdata);
+               showToastMessage('Payment details saved');
             });
             //fnPayNow();
         }
