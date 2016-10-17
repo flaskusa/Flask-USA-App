@@ -226,9 +226,9 @@
                     var toggller = $("#iw-container #iw-content");
                     var toggleImage = $(".iw-content-toggle").find("img");
                     if (toggller.is(":visible")) {
-                        toggleImage.attr("src", "img/map_icons/circle-right _arrow.png");
+                        toggleImage.attr("src", "img/map_icons/circle_arrow_left.svg");
                     } else {
-                        toggleImage.attr("src", "img/map_icons/circle-down_arrow.png");
+                        toggleImage.attr("src", "img/map_icons/circle_arrow_down.svg");
                     }
                    toggller.slideToggle("slow", function () {
                        
@@ -759,10 +759,10 @@
                         if ("Parking" == tempObject.infoTypeCategoryName || "Bar & Restaurants" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject);
                             if ("Parking" == tempObject.infoTypeCategoryName) {
-                                tempObject.icon = 'img/map_icons/parking.png';
+                                tempObject.icon = 'img/map_icons/parking.svg';
                                 $scope.parkingMarkers.push(tempObject);
                             } else {
-                                tempObject.icon = 'img/map_icons/bar.png';
+                                tempObject.icon = 'img/map_icons/bar.svg';
                                 $scope.barMarkers.push(tempObject);
                             }
                         } else if ("Traffic" == tempObject.infoTypeCategoryName) {
@@ -775,12 +775,12 @@
                         }
                         else if ("Nightlife" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject);
-                            tempObject.icon = 'img/map_icons/nightlife.png';
+                            tempObject.icon = 'img/map_icons/nightlife.svg';
                             $scope.nightLifes.push(tempObject);
                         }
                          else if ("Hotels" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject);
-                            tempObject.icon = 'img/map_icons/hotel.png';
+                            tempObject.icon = 'img/map_icons/hotel.svg';
                             $scope.hotelMarkers.push(tempObject);
                         }
                         else if ("Venue Map" == tempObject.infoTypeCategoryName) {
@@ -804,7 +804,7 @@
                     } else {
                         if ("Bar & Restaurants" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject)
-                            tempObject.icon = 'img/map_icons/bar.png';
+                            tempObject.icon = 'img/map_icons/bar.svg';
                             $scope.barMarkers.push(tempObject);
                         }
                        
