@@ -10143,6 +10143,10 @@ a.button.button-block.button-positive.sign_in_button {
   text-align: center;
   color: darkorange; }
 
+.button {
+  background-image: none;
+  background: black !important; }
+
 .aui label {
   font-size: 14px; }
 
@@ -11428,6 +11432,29 @@ p.addText {
   padding-right: 0px;
   margin-right: -28px; }
 
+.span_icon_tailgate img {
+  width: 21px;
+  height: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-right: -28px; }
+
+.eventNameCol_tailgate {
+  font-weight: bold !important;
+  text-transform: uppercase;
+  font-size: 14px !important;
+  margin-left: 1% !important;
+  margin-right: -10px !important;
+  width: 100%;
+  margin-top: 7px !important; }
+
+.dateCol_tailgate {
+  text-transform: uppercase;
+  font-size: 11px !important;
+  margin-top: -4px;
+  margin-left: 0%;
+  color: darkorange !important; }
+
 span.badge.span_icon {
   right: 14px !important; }
 
@@ -11709,7 +11736,7 @@ h2.tailgater_name {
 /*Start tailgate details bottom tabs*/
 .tab_bottom a.tab-item {
   border-right: solid white 1px !important;
-  border-left: solid white 1px !important;
+  border-right: solid white 1px !important;
   color: white !important; }
 
 .tab_bottom a.tab-item.tab-item-active {
@@ -12078,8 +12105,10 @@ a.item.item-full.item-icon-left.attendees {
   padding-top: 58px; }
 
 .emailText {
-  color: darkorange;
-  padding-top: 14px; }
+  color: darkorange; }
+
+.friend_group_name {
+  padding-top: 4px !important; }
 
 .my-groupDetail-view .item-content {
   padding-top: 12px;
@@ -12129,7 +12158,12 @@ a.item.item-full.item-icon-left.attendees {
 
 /* Message board in my_tailgate_event_details*/
 .list.list-inset.msgboard {
-  border: solid 1px; }
+  border: solid 1px;
+  margin-top: 7px; }
+
+.msgboard_div {
+  font-weight: 700;
+  font-size: 21px; }
 
 .messageList {
   text-transform: uppercase;
@@ -12176,6 +12210,9 @@ a.item.item-full.item-icon-left.attendees {
 .message_username {
   color: orange !important; }
 
+.image_list {
+  padding: 0px; }
+
 .supplyDeleteButton {
   background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
   width: 50px;
@@ -12214,6 +12251,22 @@ div .extra-right-supply {
 .gm-style-iw + div {
   display: none; }
 
+.map_marker_info {
+  max-width: none;
+  height: 35px;
+  margin-left: 11px; }
+
+.iw_options {
+  font-size: 21px;
+  font-weight: bold;
+  margin-left: 11px;
+  float: left; }
+
+.marker_info_title {
+  font-size: 21px;
+  margin-top: 5px;
+  margin-left: 14px; }
+
 #iw-container .iw-title {
   font-size: 16px;
   text-transform: uppercase;
@@ -12222,6 +12275,8 @@ div .extra-right-supply {
   background: #000000;
   color: white;
   border-radius: 2px 2px 0 0;
+  /*height: 55px;
+  margin-bottom: -9px;*/
   /* In accordance with the rounding of the default infowindow corners. */ }
 
 #iw-container #iw-content {
@@ -12240,11 +12295,17 @@ div .extra-right-supply {
 
 #iw-content a {
   text-decoration: none !important;
-  color: black; }
+  color: black;
+  margin-left: 7px !important; }
 
-#iw-container .iw-title .iw-sub-title {
+.iw-content-div {
+  margin-left: -11px !important;
+  margin-top: 10px; }
+
+#iw-container .iw-sub-title {
   font-size: 10px;
-  color: darkorange; }
+  color: darkorange;
+  /*margin-left: 14px;*/ }
 
 .gm-style-iw {
   width: 313px !important;
@@ -12757,3 +12818,124 @@ div .manage_event_default_Image {
   font-size: 26px;
   z-index: 2;
   margin-left: 121px; }
+
+#traffic ul {
+  list-style: none; }
+
+#traffic ul {
+  background: url("../img/flask_icons/star.svg") no-repeat left top;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 27px;
+  padding-top: 1px;
+  overflow: visible; }
+
+#traffic li {
+  font-weight: 500;
+  font-size: 14px; }
+
+.fontSizeTrafficHeading {
+  font-size: 18px; }
+
+.removeBorderTraffic {
+  background-image: none; }
+
+.trafficDetailHeading {
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  width: 80%; }
+
+.TrafficInfoDescDiv {
+  width: 80%;
+  margin-left: 30px;
+  margin-top: 5px; }
+
+.iw-content-text {
+  vertical-align: middle; }
+
+/*Venue Map*/
+.image_map_div {
+  height: 90% !important;
+  overflow-x: scroll;
+  overflow-y: scroll; }
+
+.venue_info_div {
+  width: 55%;
+  height: 32%;
+  margin-top: 16%;
+  margin-left: 22%; }
+
+.supplyItemText {
+  color: darkorange;
+  font-size: 13px;
+  font-weight: bold; }
+
+#venueInfo ul {
+  list-style: none; }
+
+#venueInfo li {
+  background: url("../img/flask_icons/star.svg") no-repeat left top;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-top: 1px;
+  overflow: visible; }
+
+#venueInfo li {
+  font-weight: 500;
+  font-size: 14px;
+  float: left !important;
+  padding-bottom: 10px !important; }
+
+#venueInfo a {
+  font-weight: 500;
+  font-size: 14px; }
+
+.biggerFont {
+  font-size: 24px;
+  padding-top: 6px; }
+
+.smallerFont {
+  font-size: 13px; }
+
+.alignRight {
+  text-align: right;
+  width: 37%; }
+
+.alignLeft {
+  text-align: left;
+  padding: 0px 5px; }
+
+.venueMapImage {
+  height: 100vw;
+  width: 100vw;
+  -webkit-transition: all .6s ease;
+  -moz-transition: all .6s ease;
+  -ms-transition: all .6s ease;
+  transition: all .6s ease; }
+
+.zoomedvenueMapImage {
+  width: 200vw;
+  height: 200vw; }
+
+/*map svg images*/
+.map_info_img {
+  width: 36px !important;
+  height: 32px !important;
+  margin-top: -4px; }
+
+.ml0 {
+  margin-left: 0px !important; }
+
+.parent_div {
+  display: flex;
+  margin-right: -140px; }
+
+.text_div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  min-width: 60px;
+  width: 60%; }

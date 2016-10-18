@@ -41,6 +41,7 @@
                 addTailgateParams.amountToPay = respData.data.amountToPay;
                 addTailgateParams.tailgateDate = respData.data.tailgateDate;
                 console.log(addTailgateParams);
+                $cookies.put('currtailGateId', tailgateId);
                 $state.go("app.add_my_tailgate");
                 $cookies.putObject("editUserTailgate", addTailgateParams);
             });
