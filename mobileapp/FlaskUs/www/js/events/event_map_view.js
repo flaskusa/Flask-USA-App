@@ -242,6 +242,7 @@
         }
 
 
+
         // initMap();
         uiGmapGoogleMapApi.then(function (maps) {
             maps.visualRefresh = true;
@@ -742,6 +743,10 @@
             return number;
 
         }
+        $scope.callNow=function(phonenumber){
+           var telephoneToCall = "tel:" + phonenumber;
+                openUrl(telephoneToCall, "_system");
+        };
         
         $scope.setMarkers = function () {
             if (!$scope.isMapMarkersSet) {

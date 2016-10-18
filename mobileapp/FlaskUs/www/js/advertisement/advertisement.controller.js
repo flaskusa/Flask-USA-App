@@ -101,6 +101,20 @@
                     // error
                 });
         }
+        $scope.openWebsite=function(websiteUrl){
+           var websiteUrl = fixUrl(websiteUrl);
+                openUrl(websiteUrl, "_system");
+
+        }
+        function fixUrl(url) {
+            if (url) {
+                if (url.indexOf("http://") > -1 || "https://" > -1) {
+                    return url;
+                } else {
+                    return "http://" + url;
+                }
+            }
+        }
 
         $scope.isMobile = {
             Android: function () {
@@ -112,6 +126,10 @@
             Windows: function () {
                 return ionic.Platform.isWindowsPhone();
             }
+        };
+        $scope.callNow=function(phonenumber){
+            var telephoneToCall = "tel:" + phonenumber;
+            openUrl(telephoneToCall, "_system");
         };
 
         $scope.createMapLink = function (address1) {

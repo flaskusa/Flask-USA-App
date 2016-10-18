@@ -536,7 +536,7 @@
                                         <p class="item-tickets" >{{gettingHomeDetail.phoneNumber}}</p>
 
                                     </a>
-                                    <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail"  href="tel:{{gettingHomeDetail.phoneNumber}}" ng-if="gettingHomeDetail.phoneNumber">
+                                    <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail" ng-if="gettingHomeDetail.phoneNumber" ng-click="callNow(gettingHomeDetail.phoneNumber)">
                                         <h2 class="tickets" style="text-transform:uppercase;font-size: 24px">{{gettingHomeDetail.infoTitle}}</h2>
                                         <p class="item-tickets" >{{gettingHomeDetail.phoneNumber}}</p>
 

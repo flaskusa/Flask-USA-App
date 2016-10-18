@@ -6,7 +6,7 @@
     <div style="width: 100%;height: 80px;overflow: hidden">
    <img src={{fullImageUrl}}  style="width: 100%;"/>
     </div>
-   <br> <div ng-if="phoneNumber"><i class="icon ion-ios-telephone popupIcon"></i><a href="tel:{{phoneNumber}}"class="popupText info_popup">{{phoneNumber}}</a></div>
-   <div ng-if="website"><i class="icon ion-android-globe popupIcon"></i><a href="http://{{website}}" target="_system"class="popupText info_popup">{{website}}</a></div>
+   <br> <div ng-if="phoneNumber"><i class="icon ion-ios-telephone popupIcon"></i><a class="popupText info_popup" ng-click="callNow(phoneNumber)">{{phoneNumber}}</a></div>
+   <div ng-if="website"><i class="icon ion-android-globe popupIcon"></i><a class="popupText info_popup" ng-click="openWebsite(website)">{{website}}</a></div>
    <div ng-if="address"><i class="icon ion-ios-location popupIcon"></i><i class="popupText info_popup_address"ng-click="openUrlForAdv()">{{address}}</i></div>
 </div>
