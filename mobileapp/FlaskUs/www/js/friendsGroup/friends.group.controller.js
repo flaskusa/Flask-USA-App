@@ -216,7 +216,7 @@
         $scope.createGroup = function (groupName, description) {
             GroupService.createGroup(groupName, description,userDetail.data.firstName+' '+userDetail.data.lastName).then(function (response) {
                 $scope.groupId = response.groupId
-                GroupService.saveGroup($scope.groupId, userId).then(function (response) {
+                GroupService.saveGroup($scope.groupId, userId,userDetail.data.firstName+' '+userDetail.data.lastName,userDetail.data.emailAddress).then(function (response) {
                     $scope.showInviteFriendPopup();
 
 

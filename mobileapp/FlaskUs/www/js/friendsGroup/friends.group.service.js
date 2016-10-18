@@ -69,11 +69,11 @@
                     //add errror handling
                 });
         }
-        function saveGroup(groupId,userId) {
+        function saveGroup(groupId,userId,userName,emailAddress) {
             return $http.get(SERVER.url+saveGroupURL,{params:{"groupId":groupId,
-                "emailAddress":"test@liferay.com",
+                "emailAddress":emailAddress,
                 "userId":userId,
-                "userName":"Joe Bloggs",
+                "userName":userName,
                 "isAdmin":1}})
                 .then(function success(response) {
                     return response.data;
