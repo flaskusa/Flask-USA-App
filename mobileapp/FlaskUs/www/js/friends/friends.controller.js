@@ -92,13 +92,13 @@
 
       $scope.getMoreUserContact = function(searchText)  {
           $scope.endIndex +=10;
-          $scope.searchUserContact(searchText, $scope.startIndex, $scope.endIndex); 
+          $scope.searchUserContact(searchText, $scope.startIndex, $scope.endIndex);
       }
       $scope.searchUserContact = function(searchText, startIndex, endIndex) {
            FriendsService.searchUserContact( $scope.searchContact.searchtext, $scope.startIndex, $scope.endIndex).then(function(response){
                 if(response != undefined && Array.isArray(response))   {
                         $scope.userContactList = response;
-                        if($scope.userContactList.length < 10) {
+                        if($scope.userContactList.length < $scope.endIndex-1) {
                             $scope.moreDataCanBeLoaded = false;
                         }else{
                             $scope.moreDataCanBeLoaded = true;
