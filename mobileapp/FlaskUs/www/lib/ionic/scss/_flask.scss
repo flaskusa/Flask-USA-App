@@ -1918,7 +1918,10 @@ div .extra-right-supply{
   margin-left:7px !important;
 }
 
-.iw-content-div{margin-left:-7px !important;}
+.iw-content-div{
+    margin-left:-11px !important;
+    margin-top: 10px;
+}
 
 #iw-container .iw-sub-title {
   font-size: 10px;
@@ -2643,8 +2646,24 @@ div .manage_event_default_Image{
 
 /*map svg images*/
 .map_info_img{
-    width:36px !important;
-    height:32px !important;
+    width: 36px !important;
+    height: 32px !important;
+    margin-top: -4px;
 }
+
 .ml0 {
   margin-left: 0px !important;}
+
+.parent_div{
+    display: flex;
+    margin-right: -140px;
+}
+
+.text_div{
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    min-width:60px;
+    width:60%;
+}
