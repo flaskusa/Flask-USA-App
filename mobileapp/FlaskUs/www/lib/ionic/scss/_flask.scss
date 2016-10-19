@@ -1322,7 +1322,7 @@ h2.tailgater_name{
 /*End tailgate details bottom tabs*/
 
 /*Search icon*/
-.bar-dark .button.button-icon.ion-android-search:before{font-size:27px !important;}
+.button.button-icon.ion-android-search:before{font-size:27px !important;}
 
 .form-left{
     left: 0;
@@ -1602,6 +1602,7 @@ position:initial !important;
       border-bottom-style: none;
       border-right-style: none;
       border-bottom: solid 1px grey;
+      font-weight:normal !important;
     }
 
     .col.acc_settingsCol:last-child {
@@ -2046,9 +2047,11 @@ label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox{
   border-radius: 8px;
   font-weight: 400; }
 .f-nameText {
-  padding-left: 15px;
-  font-size: 14px;
-  font-weight: 600; }
+      padding-left: 15px;
+    font-size: 15px !important;
+    font-weight: 600;
+    margin-top: 16px !important;
+    text-transform: uppercase; }
 .supplySaveButtonStyle {
   width: 65px;
   right: 1px;
