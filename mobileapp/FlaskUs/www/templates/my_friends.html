@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <ion-content class="has-footer" >
+    <ion-content class="has-footer" overflow-scroll="false">
         <a class="item item-full list-item-icon-left "ng-click="showInviteFriendPopup()">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">INVITE FRIEND</p>
@@ -75,11 +75,11 @@
                             <input type="text" placeholder="Search friend..." class="friendSearch" ng-model="searchContact.searchtext"/>
                         </div>
                          <div class="col col-center searchrow">
-                           <button class="button button-icon button-clear ion-ios-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
+                           <button class="button button-icon button-clear ion-android-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
                         </div>
                     </div>
                 </div>
-                <ion-content class="padding has-subheader">
+                <ion-content class="padding has-subheader" overflow-scroll="false">
                             <ion-list>
                                 <ion-item ng-repeat="data in userContactList track by $index" class="item-avatar " item="data">
 

@@ -4,7 +4,7 @@
             <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="goBack();"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content>
+    <ion-content overflow-scroll="false">
 <div ng-if="editGroup==true">
     <form name="create_group_form" class="loginpane form_div" novalidate  ng-submit="create_group_form.$valid && updateGroup(groupDetail.groupName,groupDetail.groupDescription)">
         <div class="loginpane_body">
