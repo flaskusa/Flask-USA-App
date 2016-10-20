@@ -91,9 +91,10 @@ public class EventServiceClp implements EventService {
 		_methodParameterTypes11 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.Double",
+				"java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -102,9 +103,10 @@ public class EventServiceClp implements EventService {
 		_methodParameterTypes12 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.Double",
+				"java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -540,13 +542,14 @@ public class EventServiceClp implements EventService {
 	@Override
 	public com.rumbasolutions.flask.model.EventDetail addEventDetail(
 		long eventId, long infoTypeId, long infoTypeCategoryId,
-		java.lang.String infoTitle, java.lang.String infoDesc,
-		java.lang.String addrLine1, java.lang.String addrLine2,
-		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String latitude, java.lang.String longitude,
-		java.lang.String phone, java.lang.String website,
-		java.lang.Double cost, java.lang.String hoursOfOperation,
-		boolean showDescription,
+		java.lang.String infoTitle, java.lang.String infoShortDesc,
+		java.lang.String infoDesc, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String zipCode,
+		java.lang.String city, long stateId, long countryId,
+		java.lang.String latitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String mobileAppName,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation, boolean showDescription,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -561,6 +564,8 @@ public class EventServiceClp implements EventService {
 					infoTypeCategoryId,
 						
 					ClpSerializer.translateInput(infoTitle),
+						
+					ClpSerializer.translateInput(infoShortDesc),
 						
 					ClpSerializer.translateInput(infoDesc),
 						
@@ -581,6 +586,8 @@ public class EventServiceClp implements EventService {
 					ClpSerializer.translateInput(longitude),
 						
 					ClpSerializer.translateInput(phone),
+						
+					ClpSerializer.translateInput(mobileAppName),
 						
 					ClpSerializer.translateInput(website),
 						
@@ -611,13 +618,14 @@ public class EventServiceClp implements EventService {
 	@Override
 	public com.rumbasolutions.flask.model.EventDetail updateEventDetail(
 		long eventDetailId, long infoTypeId, long infoTypeCategoryId,
-		java.lang.String infoTitle, java.lang.String infoDesc,
-		java.lang.String addrLine1, java.lang.String addrLine2,
-		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String latitude, java.lang.String longitude,
-		java.lang.String phone, java.lang.String website,
-		java.lang.Double cost, java.lang.String hoursOfOperation,
-		boolean showDescription,
+		java.lang.String infoTitle, java.lang.String infoShortDesc,
+		java.lang.String infoDesc, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String zipCode,
+		java.lang.String city, long stateId, long countryId,
+		java.lang.String latitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String mobileAppName,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation, boolean showDescription,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -632,6 +640,8 @@ public class EventServiceClp implements EventService {
 					infoTypeCategoryId,
 						
 					ClpSerializer.translateInput(infoTitle),
+						
+					ClpSerializer.translateInput(infoShortDesc),
 						
 					ClpSerializer.translateInput(infoDesc),
 						
@@ -652,6 +662,8 @@ public class EventServiceClp implements EventService {
 					ClpSerializer.translateInput(longitude),
 						
 					ClpSerializer.translateInput(phone),
+						
+					ClpSerializer.translateInput(mobileAppName),
 						
 					ClpSerializer.translateInput(website),
 						

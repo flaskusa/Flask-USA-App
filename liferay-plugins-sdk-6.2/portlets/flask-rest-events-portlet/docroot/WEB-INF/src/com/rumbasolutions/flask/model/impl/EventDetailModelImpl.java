@@ -77,6 +77,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			{ "infoTypeCategoryId", Types.BIGINT },
 			{ "infoTypeCategoryName", Types.VARCHAR },
 			{ "infoTitle", Types.VARCHAR },
+			{ "infoShortDesc", Types.VARCHAR },
 			{ "infoDesc", Types.VARCHAR },
 			{ "addrLine1", Types.VARCHAR },
 			{ "addrLine2", Types.VARCHAR },
@@ -89,12 +90,13 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			{ "latitude", Types.VARCHAR },
 			{ "longitude", Types.VARCHAR },
 			{ "phone", Types.VARCHAR },
+			{ "mobileAppName", Types.VARCHAR },
 			{ "website", Types.VARCHAR },
 			{ "cost", Types.DOUBLE },
 			{ "hoursOfOperation", Types.VARCHAR },
 			{ "showDescription", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName VARCHAR(75) null,infoTitle VARCHAR(75) null,infoDesc TEXT null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(75) null,countryId LONG,countryName VARCHAR(75) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null,showDescription BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName VARCHAR(75) null,infoTitle VARCHAR(100) null,infoShortDesc VARCHAR(100) null,infoDesc TEXT null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(75) null,countryId LONG,countryName VARCHAR(75) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,mobileAppName VARCHAR(75) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null,showDescription BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_EventDetail";
 	public static final String ORDER_BY_JPQL = " ORDER BY eventDetail.eventDetailId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_EventDetail.eventDetailId ASC";
@@ -139,6 +141,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		model.setInfoTypeCategoryId(soapModel.getInfoTypeCategoryId());
 		model.setInfoTypeCategoryName(soapModel.getInfoTypeCategoryName());
 		model.setInfoTitle(soapModel.getInfoTitle());
+		model.setInfoShortDesc(soapModel.getInfoShortDesc());
 		model.setInfoDesc(soapModel.getInfoDesc());
 		model.setAddrLine1(soapModel.getAddrLine1());
 		model.setAddrLine2(soapModel.getAddrLine2());
@@ -151,6 +154,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		model.setLatitude(soapModel.getLatitude());
 		model.setLongitude(soapModel.getLongitude());
 		model.setPhone(soapModel.getPhone());
+		model.setMobileAppName(soapModel.getMobileAppName());
 		model.setWebsite(soapModel.getWebsite());
 		model.setCost(soapModel.getCost());
 		model.setHoursOfOperation(soapModel.getHoursOfOperation());
@@ -230,6 +234,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
 		attributes.put("infoTitle", getInfoTitle());
+		attributes.put("infoShortDesc", getInfoShortDesc());
 		attributes.put("infoDesc", getInfoDesc());
 		attributes.put("addrLine1", getAddrLine1());
 		attributes.put("addrLine2", getAddrLine2());
@@ -242,6 +247,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		attributes.put("latitude", getLatitude());
 		attributes.put("longitude", getLongitude());
 		attributes.put("phone", getPhone());
+		attributes.put("mobileAppName", getMobileAppName());
 		attributes.put("website", getWebsite());
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
@@ -319,6 +325,12 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			setInfoTitle(infoTitle);
 		}
 
+		String infoShortDesc = (String)attributes.get("infoShortDesc");
+
+		if (infoShortDesc != null) {
+			setInfoShortDesc(infoShortDesc);
+		}
+
 		String infoDesc = (String)attributes.get("infoDesc");
 
 		if (infoDesc != null) {
@@ -389,6 +401,12 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 		if (phone != null) {
 			setPhone(phone);
+		}
+
+		String mobileAppName = (String)attributes.get("mobileAppName");
+
+		if (mobileAppName != null) {
+			setMobileAppName(mobileAppName);
 		}
 
 		String website = (String)attributes.get("website");
@@ -600,6 +618,22 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@JSON
 	@Override
+	public String getInfoShortDesc() {
+		if (_infoShortDesc == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _infoShortDesc;
+		}
+	}
+
+	@Override
+	public void setInfoShortDesc(String infoShortDesc) {
+		_infoShortDesc = infoShortDesc;
+	}
+
+	@JSON
+	@Override
 	public String getInfoDesc() {
 		if (_infoDesc == null) {
 			return StringPool.BLANK;
@@ -782,6 +816,22 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@JSON
 	@Override
+	public String getMobileAppName() {
+		if (_mobileAppName == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _mobileAppName;
+		}
+	}
+
+	@Override
+	public void setMobileAppName(String mobileAppName) {
+		_mobileAppName = mobileAppName;
+	}
+
+	@JSON
+	@Override
 	public String getWebsite() {
 		if (_website == null) {
 			return StringPool.BLANK;
@@ -881,6 +931,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		eventDetailImpl.setInfoTypeCategoryId(getInfoTypeCategoryId());
 		eventDetailImpl.setInfoTypeCategoryName(getInfoTypeCategoryName());
 		eventDetailImpl.setInfoTitle(getInfoTitle());
+		eventDetailImpl.setInfoShortDesc(getInfoShortDesc());
 		eventDetailImpl.setInfoDesc(getInfoDesc());
 		eventDetailImpl.setAddrLine1(getAddrLine1());
 		eventDetailImpl.setAddrLine2(getAddrLine2());
@@ -893,6 +944,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		eventDetailImpl.setLatitude(getLatitude());
 		eventDetailImpl.setLongitude(getLongitude());
 		eventDetailImpl.setPhone(getPhone());
+		eventDetailImpl.setMobileAppName(getMobileAppName());
 		eventDetailImpl.setWebsite(getWebsite());
 		eventDetailImpl.setCost(getCost());
 		eventDetailImpl.setHoursOfOperation(getHoursOfOperation());
@@ -1023,6 +1075,14 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			eventDetailCacheModel.infoTitle = null;
 		}
 
+		eventDetailCacheModel.infoShortDesc = getInfoShortDesc();
+
+		String infoShortDesc = eventDetailCacheModel.infoShortDesc;
+
+		if ((infoShortDesc != null) && (infoShortDesc.length() == 0)) {
+			eventDetailCacheModel.infoShortDesc = null;
+		}
+
 		eventDetailCacheModel.infoDesc = getInfoDesc();
 
 		String infoDesc = eventDetailCacheModel.infoDesc;
@@ -1107,6 +1167,14 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 			eventDetailCacheModel.phone = null;
 		}
 
+		eventDetailCacheModel.mobileAppName = getMobileAppName();
+
+		String mobileAppName = eventDetailCacheModel.mobileAppName;
+
+		if ((mobileAppName != null) && (mobileAppName.length() == 0)) {
+			eventDetailCacheModel.mobileAppName = null;
+		}
+
 		eventDetailCacheModel.website = getWebsite();
 
 		String website = eventDetailCacheModel.website;
@@ -1132,7 +1200,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(59);
 
 		sb.append("{eventDetailId=");
 		sb.append(getEventDetailId());
@@ -1156,6 +1224,8 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTypeCategoryName());
 		sb.append(", infoTitle=");
 		sb.append(getInfoTitle());
+		sb.append(", infoShortDesc=");
+		sb.append(getInfoShortDesc());
 		sb.append(", infoDesc=");
 		sb.append(getInfoDesc());
 		sb.append(", addrLine1=");
@@ -1180,6 +1250,8 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getLongitude());
 		sb.append(", phone=");
 		sb.append(getPhone());
+		sb.append(", mobileAppName=");
+		sb.append(getMobileAppName());
 		sb.append(", website=");
 		sb.append(getWebsite());
 		sb.append(", cost=");
@@ -1195,7 +1267,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(85);
+		StringBundler sb = new StringBundler(91);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.EventDetail");
@@ -1246,6 +1318,10 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getInfoTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>infoShortDesc</column-name><column-value><![CDATA[");
+		sb.append(getInfoShortDesc());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>infoDesc</column-name><column-value><![CDATA[");
 		sb.append(getInfoDesc());
 		sb.append("]]></column-value></column>");
@@ -1294,6 +1370,10 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		sb.append(getPhone());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>mobileAppName</column-name><column-value><![CDATA[");
+		sb.append(getMobileAppName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>website</column-name><column-value><![CDATA[");
 		sb.append(getWebsite());
 		sb.append("]]></column-value></column>");
@@ -1337,6 +1417,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 	private boolean _setOriginalInfoTypeCategoryId;
 	private String _infoTypeCategoryName;
 	private String _infoTitle;
+	private String _infoShortDesc;
 	private String _infoDesc;
 	private String _addrLine1;
 	private String _addrLine2;
@@ -1349,6 +1430,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 	private String _latitude;
 	private String _longitude;
 	private String _phone;
+	private String _mobileAppName;
 	private String _website;
 	private double _cost;
 	private String _hoursOfOperation;

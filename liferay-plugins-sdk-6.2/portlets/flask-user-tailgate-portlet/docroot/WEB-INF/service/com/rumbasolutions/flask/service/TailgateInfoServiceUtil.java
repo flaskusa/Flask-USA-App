@@ -67,7 +67,7 @@ public class TailgateInfoServiceUtil {
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay, long logoId,
+		double amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addTailgateInfo(tailgateName, tailgateDescription, eventId,
@@ -116,7 +116,7 @@ public class TailgateInfoServiceUtil {
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay, long logoId,
+		double amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateTailgateInfo(tailgateId, tailgateName,

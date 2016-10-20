@@ -65,6 +65,12 @@ public class TailgateUsersServiceWrapper implements TailgateUsersService,
 	}
 
 	@Override
+	public boolean isTailgateAdmin(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateUsersService.isTailgateAdmin(tailgateId, serviceContext);
+	}
+
+	@Override
 	public java.util.List<com.rumbasolutions.flask.model.TailgateUsers> getTailgateGroups(
 		long tailgateId, long groupId) {
 		return _tailgateUsersService.getTailgateGroups(tailgateId, groupId);

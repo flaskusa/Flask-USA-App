@@ -60,7 +60,12 @@
 		<field name="infoTypeName" type="String" />
 		<field name="infoTypeCategoryId" type="long" />
 		<field name="infoTypeCategoryName" type="String" />
-		<field name="infoTitle" type="String" />
+		<field name="infoTitle" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="infoShortDesc" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 		<field name="infoDesc" type="String">
 			<hint-collection name="FLASK-LONG-DESC" />
 		</field>
@@ -89,6 +94,7 @@
 		<field name="phone" type="String">
 			<hint-collection name="FLASK-PHONE" />
 		</field>
+		<field name="mobileAppName" type="String" />
 		<field name="website" type="String">
 			<hint-collection name="FLASK-DESC" />
 		</field>
@@ -193,6 +199,9 @@
 		<field name="infoTitle" type="String">
 			<hint-collection name="FLASK-TEXTFIELD" />
 		</field>
+		<field name="infoShortDesc" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
 		<field name="infoDesc" type="String">
 			<hint-collection name="FLASK-LONG-DESC" />
 		</field>
@@ -225,6 +234,7 @@
 		<field name="phone" type="String">
 			<hint-collection name="FLASK-PHONE" />
 		</field>
+		<field name="mobileAppName" type="String" />
 		<field name="website" type="String">
 			<hint-collection name="FLASK-DESC" />
 		</field>

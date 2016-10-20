@@ -49,6 +49,7 @@
 		<property name="infoTypeCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="infoTypeCategoryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="infoShortDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="addrLine1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="addrLine2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -61,6 +62,7 @@
 		<property name="latitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="longitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="phone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mobileAppName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="website" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="hoursOfOperation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -152,6 +154,7 @@
 		<property name="infoTypeCategoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="infoTypeCategoryName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="infoShortDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="infoDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="addrLine1" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="addrLine2" type="com.liferay.portal.dao.orm.hibernate.StringType" />
@@ -164,6 +167,7 @@
 		<property name="latitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="longitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="phone" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mobileAppName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="website" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="cost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="hoursOfOperation" type="com.liferay.portal.dao.orm.hibernate.StringType" />

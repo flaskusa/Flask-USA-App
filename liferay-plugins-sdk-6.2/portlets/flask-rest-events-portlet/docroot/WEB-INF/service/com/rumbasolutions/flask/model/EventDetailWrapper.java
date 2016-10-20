@@ -61,6 +61,7 @@ public class EventDetailWrapper implements EventDetail,
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
 		attributes.put("infoTitle", getInfoTitle());
+		attributes.put("infoShortDesc", getInfoShortDesc());
 		attributes.put("infoDesc", getInfoDesc());
 		attributes.put("addrLine1", getAddrLine1());
 		attributes.put("addrLine2", getAddrLine2());
@@ -73,6 +74,7 @@ public class EventDetailWrapper implements EventDetail,
 		attributes.put("latitude", getLatitude());
 		attributes.put("longitude", getLongitude());
 		attributes.put("phone", getPhone());
+		attributes.put("mobileAppName", getMobileAppName());
 		attributes.put("website", getWebsite());
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
@@ -150,6 +152,12 @@ public class EventDetailWrapper implements EventDetail,
 			setInfoTitle(infoTitle);
 		}
 
+		String infoShortDesc = (String)attributes.get("infoShortDesc");
+
+		if (infoShortDesc != null) {
+			setInfoShortDesc(infoShortDesc);
+		}
+
 		String infoDesc = (String)attributes.get("infoDesc");
 
 		if (infoDesc != null) {
@@ -220,6 +228,12 @@ public class EventDetailWrapper implements EventDetail,
 
 		if (phone != null) {
 			setPhone(phone);
+		}
+
+		String mobileAppName = (String)attributes.get("mobileAppName");
+
+		if (mobileAppName != null) {
+			setMobileAppName(mobileAppName);
 		}
 
 		String website = (String)attributes.get("website");
@@ -510,6 +524,26 @@ public class EventDetailWrapper implements EventDetail,
 	}
 
 	/**
+	* Returns the info short desc of this event detail.
+	*
+	* @return the info short desc of this event detail
+	*/
+	@Override
+	public java.lang.String getInfoShortDesc() {
+		return _eventDetail.getInfoShortDesc();
+	}
+
+	/**
+	* Sets the info short desc of this event detail.
+	*
+	* @param infoShortDesc the info short desc of this event detail
+	*/
+	@Override
+	public void setInfoShortDesc(java.lang.String infoShortDesc) {
+		_eventDetail.setInfoShortDesc(infoShortDesc);
+	}
+
+	/**
 	* Returns the info desc of this event detail.
 	*
 	* @return the info desc of this event detail
@@ -747,6 +781,26 @@ public class EventDetailWrapper implements EventDetail,
 	@Override
 	public void setPhone(java.lang.String phone) {
 		_eventDetail.setPhone(phone);
+	}
+
+	/**
+	* Returns the mobile app name of this event detail.
+	*
+	* @return the mobile app name of this event detail
+	*/
+	@Override
+	public java.lang.String getMobileAppName() {
+		return _eventDetail.getMobileAppName();
+	}
+
+	/**
+	* Sets the mobile app name of this event detail.
+	*
+	* @param mobileAppName the mobile app name of this event detail
+	*/
+	@Override
+	public void setMobileAppName(java.lang.String mobileAppName) {
+		_eventDetail.setMobileAppName(mobileAppName);
 	}
 
 	/**

@@ -29,6 +29,7 @@ _eventDetailModel.DATA_MODEL= {
 	             { name: 'infoTypeCategoryId', type: 'long' },
 	             { name: 'infoTypeCategoryName', type: 'string' },
 				 { name: 'infoTitle', type: 'string' },
+				 { name: 'infoShortDesc', type: 'string' },
 				 { name: 'infoDesc', type: 'string' },
 				 { name: 'addrLine1', type: 'string'},
 				 { name: 'addrLine2', type: 'string'},
@@ -39,6 +40,7 @@ _eventDetailModel.DATA_MODEL= {
 				 { name: 'latitude', type: 'string'},
 				 { name: 'longitude', type: 'string'},
 				 { name: 'phone', type: 'string'},
+				 { name: 'mobileAppName', type: 'string'},
 				 { name: 'website', type: 'string'},
 				 { name: 'cost', type: 'long' },
 				 { name: 'hoursOfOperation', type:'string'},
@@ -54,9 +56,10 @@ _eventDetailModel.GRID_CONTEXT_MENU = {
 
 _eventDetailModel.GRID_DATA_MODEL= {
 		EVENTDETAILS:
-			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '35%'},
+			[{ text: 'Name', columntype: 'textbox',  datafield: 'infoTitle', width: '20%'},
+			 { text: 'Name', columntype: 'textbox',  datafield: 'infoShortDesc', width: '20%'},
 	  		 {text: 'Content Type', datafield: 'infoTypeCategoryName'},
-	  		 { text: 'Edit',  datafield: 'eventDetailId', width: '34px', cellsalign: 'center', cellsrenderer: _eventDetailModel.GRID_CONTEXT_MENU.EVENTDETAILS }]
+	  		 { text: 'Edit',  datafield: 'eventDetailId', width: '60px', cellsalign: 'center', cellsrenderer: _eventDetailModel.GRID_CONTEXT_MENU.EVENTDETAILS }]
 		};
 
 _eventDetailModel.MESSAGES= {

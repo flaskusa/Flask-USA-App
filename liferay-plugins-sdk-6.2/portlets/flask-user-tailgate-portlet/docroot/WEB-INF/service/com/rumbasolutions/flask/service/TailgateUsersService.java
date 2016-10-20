@@ -70,6 +70,10 @@ public interface TailgateUsersService extends BaseService, InvokableService {
 		long tailgateId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isTailgateAdmin(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rumbasolutions.flask.model.TailgateUsers> getTailgateGroups(
 		long tailgateId, long groupId);
 

@@ -293,9 +293,9 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	
 	@Override
 	public VenueDetail addVenueDetail(long venueId , long infoTypeId, long infoTypeCategoryId, 
-		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
+		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, 
-		String longitude, String phone, String website, 
+		String longitude, String phone, String mobileAppName, String website, 
 		Double cost, String hoursOfOperation,
 		ServiceContext  serviceContext){
 		VenueDetail venueDetail=null;
@@ -308,6 +308,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setInfoTypeCategoryId(infoTypeCategoryId);
 			venueDetail.setInfoTypeCategoryName(InfoTypeCategoryServiceUtil.getInfoTypeCategory(infoTypeCategoryId, serviceContext).getInfoTypeCategoryName());
 			venueDetail.setInfoTitle(infoTitle);
+			venueDetail.setInfoShortDesc(infoShortDesc);
 			venueDetail.setInfoDesc(infoDesc);
 			venueDetail.setAddrLine1(addrLine1);
 			venueDetail.setAddrLine2(addrLine2);
@@ -318,6 +319,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setLatitude(latitude);
 			venueDetail.setLongitude(longitude);
 			venueDetail.setPhone(phone);
+			venueDetail.setMobileAppName(mobileAppName);
 			venueDetail.setWebsite(website);
 			venueDetail.setCost(cost);
 			venueDetail.setHoursOfOperation(hoursOfOperation);
@@ -338,9 +340,10 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	
 	@Override
 	public VenueDetail updateVenueDetail(long venueDetailId , long infoTypeId, long infoTypeCategoryId, 
-		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
+		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, 
-		String latitude, String longitude, String phone, String website, Double cost, String hoursOfOperation,
+		String latitude, String longitude, String phone, 
+		String mobileAppName, String website, Double cost, String hoursOfOperation,
 		ServiceContext  serviceContext){
 		VenueDetail venueDetail=null;
 		try{
@@ -350,6 +353,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setInfoTypeCategoryId(infoTypeCategoryId);
 			venueDetail.setInfoTypeCategoryName(InfoTypeCategoryServiceUtil.getInfoTypeCategory(infoTypeCategoryId, serviceContext).getInfoTypeCategoryName());
 			venueDetail.setInfoTitle(infoTitle);
+			venueDetail.setInfoShortDesc(infoShortDesc);
 			venueDetail.setInfoDesc(infoDesc);
 			venueDetail.setAddrLine1(addrLine1);
 			venueDetail.setAddrLine2(addrLine2);
@@ -360,6 +364,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setLatitude(latitude);
 			venueDetail.setLongitude(longitude);
 			venueDetail.setPhone(phone);
+			venueDetail.setMobileAppName(mobileAppName);
 			venueDetail.setWebsite(website);
 			venueDetail.setCost(cost);
 			venueDetail.setHoursOfOperation(hoursOfOperation);

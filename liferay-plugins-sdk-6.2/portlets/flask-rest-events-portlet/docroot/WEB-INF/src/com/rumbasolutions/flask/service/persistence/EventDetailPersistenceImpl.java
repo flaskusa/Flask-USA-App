@@ -1918,6 +1918,7 @@ public class EventDetailPersistenceImpl extends BasePersistenceImpl<EventDetail>
 		eventDetailImpl.setInfoTypeCategoryId(eventDetail.getInfoTypeCategoryId());
 		eventDetailImpl.setInfoTypeCategoryName(eventDetail.getInfoTypeCategoryName());
 		eventDetailImpl.setInfoTitle(eventDetail.getInfoTitle());
+		eventDetailImpl.setInfoShortDesc(eventDetail.getInfoShortDesc());
 		eventDetailImpl.setInfoDesc(eventDetail.getInfoDesc());
 		eventDetailImpl.setAddrLine1(eventDetail.getAddrLine1());
 		eventDetailImpl.setAddrLine2(eventDetail.getAddrLine2());
@@ -1930,6 +1931,7 @@ public class EventDetailPersistenceImpl extends BasePersistenceImpl<EventDetail>
 		eventDetailImpl.setLatitude(eventDetail.getLatitude());
 		eventDetailImpl.setLongitude(eventDetail.getLongitude());
 		eventDetailImpl.setPhone(eventDetail.getPhone());
+		eventDetailImpl.setMobileAppName(eventDetail.getMobileAppName());
 		eventDetailImpl.setWebsite(eventDetail.getWebsite());
 		eventDetailImpl.setCost(eventDetail.getCost());
 		eventDetailImpl.setHoursOfOperation(eventDetail.getHoursOfOperation());

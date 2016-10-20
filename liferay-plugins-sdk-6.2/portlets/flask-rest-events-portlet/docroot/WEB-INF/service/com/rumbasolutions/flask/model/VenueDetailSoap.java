@@ -42,6 +42,7 @@ public class VenueDetailSoap implements Serializable {
 		soapModel.setInfoTypeCategoryId(model.getInfoTypeCategoryId());
 		soapModel.setInfoTypeCategoryName(model.getInfoTypeCategoryName());
 		soapModel.setInfoTitle(model.getInfoTitle());
+		soapModel.setInfoShortDesc(model.getInfoShortDesc());
 		soapModel.setInfoDesc(model.getInfoDesc());
 		soapModel.setAddrLine1(model.getAddrLine1());
 		soapModel.setAddrLine2(model.getAddrLine2());
@@ -54,6 +55,7 @@ public class VenueDetailSoap implements Serializable {
 		soapModel.setLatitude(model.getLatitude());
 		soapModel.setLongitude(model.getLongitude());
 		soapModel.setPhone(model.getPhone());
+		soapModel.setMobileAppName(model.getMobileAppName());
 		soapModel.setWebsite(model.getWebsite());
 		soapModel.setCost(model.getCost());
 		soapModel.setHoursOfOperation(model.getHoursOfOperation());
@@ -198,6 +200,14 @@ public class VenueDetailSoap implements Serializable {
 		_infoTitle = infoTitle;
 	}
 
+	public String getInfoShortDesc() {
+		return _infoShortDesc;
+	}
+
+	public void setInfoShortDesc(String infoShortDesc) {
+		_infoShortDesc = infoShortDesc;
+	}
+
 	public String getInfoDesc() {
 		return _infoDesc;
 	}
@@ -294,6 +304,14 @@ public class VenueDetailSoap implements Serializable {
 		_phone = phone;
 	}
 
+	public String getMobileAppName() {
+		return _mobileAppName;
+	}
+
+	public void setMobileAppName(String mobileAppName) {
+		_mobileAppName = mobileAppName;
+	}
+
 	public String getWebsite() {
 		return _website;
 	}
@@ -341,6 +359,7 @@ public class VenueDetailSoap implements Serializable {
 	private long _infoTypeCategoryId;
 	private String _infoTypeCategoryName;
 	private String _infoTitle;
+	private String _infoShortDesc;
 	private String _infoDesc;
 	private String _addrLine1;
 	private String _addrLine2;
@@ -353,6 +372,7 @@ public class VenueDetailSoap implements Serializable {
 	private String _latitude;
 	private String _longitude;
 	private String _phone;
+	private String _mobileAppName;
 	private String _website;
 	private double _cost;
 	private String _hoursOfOperation;

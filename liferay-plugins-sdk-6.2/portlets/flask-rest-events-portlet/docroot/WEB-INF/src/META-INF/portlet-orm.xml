@@ -54,6 +54,7 @@
 			<basic name="infoTypeCategoryId" />
 			<basic name="infoTypeCategoryName" />
 			<basic name="infoTitle" />
+			<basic name="infoShortDesc" />
 			<basic name="infoDesc" />
 			<basic name="addrLine1" />
 			<basic name="addrLine2" />
@@ -66,6 +67,7 @@
 			<basic name="latitude" />
 			<basic name="longitude" />
 			<basic name="phone" />
+			<basic name="mobileAppName" />
 			<basic name="website" />
 			<basic name="cost" />
 			<basic name="hoursOfOperation" />
@@ -189,6 +191,7 @@
 			<basic name="infoTypeCategoryId" />
 			<basic name="infoTypeCategoryName" />
 			<basic name="infoTitle" />
+			<basic name="infoShortDesc" />
 			<basic name="infoDesc" />
 			<basic name="addrLine1" />
 			<basic name="addrLine2" />
@@ -201,6 +204,7 @@
 			<basic name="latitude" />
 			<basic name="longitude" />
 			<basic name="phone" />
+			<basic name="mobileAppName" />
 			<basic name="website" />
 			<basic name="cost" />
 			<basic name="hoursOfOperation" />

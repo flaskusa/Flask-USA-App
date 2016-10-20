@@ -91,9 +91,10 @@ public class EventServiceClpInvoker {
 		_methodParameterTypes94 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.Double",
+				"java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -102,9 +103,10 @@ public class EventServiceClpInvoker {
 		_methodParameterTypes95 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String", "boolean",
+				"java.lang.String", "java.lang.String", "java.lang.Double",
+				"java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -305,16 +307,18 @@ public class EventServiceClpInvoker {
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
 				(java.lang.String)arguments[7], (java.lang.String)arguments[8],
-				((Long)arguments[9]).longValue(),
+				(java.lang.String)arguments[9],
 				((Long)arguments[10]).longValue(),
-				(java.lang.String)arguments[11],
+				((Long)arguments[11]).longValue(),
 				(java.lang.String)arguments[12],
 				(java.lang.String)arguments[13],
 				(java.lang.String)arguments[14],
-				(java.lang.Double)arguments[15],
+				(java.lang.String)arguments[15],
 				(java.lang.String)arguments[16],
-				((Boolean)arguments[17]).booleanValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[18]);
+				(java.lang.Double)arguments[17],
+				(java.lang.String)arguments[18],
+				((Boolean)arguments[19]).booleanValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[20]);
 		}
 
 		if (_methodName95.equals(name) &&
@@ -325,16 +329,18 @@ public class EventServiceClpInvoker {
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
 				(java.lang.String)arguments[7], (java.lang.String)arguments[8],
-				((Long)arguments[9]).longValue(),
+				(java.lang.String)arguments[9],
 				((Long)arguments[10]).longValue(),
-				(java.lang.String)arguments[11],
+				((Long)arguments[11]).longValue(),
 				(java.lang.String)arguments[12],
 				(java.lang.String)arguments[13],
 				(java.lang.String)arguments[14],
-				(java.lang.Double)arguments[15],
+				(java.lang.String)arguments[15],
 				(java.lang.String)arguments[16],
-				((Boolean)arguments[17]).booleanValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[18]);
+				(java.lang.Double)arguments[17],
+				(java.lang.String)arguments[18],
+				((Boolean)arguments[19]).booleanValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[20]);
 		}
 
 		if (_methodName96.equals(name) &&

@@ -68,6 +68,11 @@ public class TailgateUsersServiceUtil {
 		return getService().getTailgateMembers(tailgateId);
 	}
 
+	public static boolean isTailgateAdmin(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().isTailgateAdmin(tailgateId, serviceContext);
+	}
+
 	public static java.util.List<com.rumbasolutions.flask.model.TailgateUsers> getTailgateGroups(
 		long tailgateId, long groupId) {
 		return getService().getTailgateGroups(tailgateId, groupId);

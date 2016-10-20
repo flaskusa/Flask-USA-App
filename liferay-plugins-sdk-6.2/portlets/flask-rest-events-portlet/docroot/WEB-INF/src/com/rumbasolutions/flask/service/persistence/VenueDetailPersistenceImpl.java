@@ -841,6 +841,7 @@ public class VenueDetailPersistenceImpl extends BasePersistenceImpl<VenueDetail>
 		venueDetailImpl.setInfoTypeCategoryId(venueDetail.getInfoTypeCategoryId());
 		venueDetailImpl.setInfoTypeCategoryName(venueDetail.getInfoTypeCategoryName());
 		venueDetailImpl.setInfoTitle(venueDetail.getInfoTitle());
+		venueDetailImpl.setInfoShortDesc(venueDetail.getInfoShortDesc());
 		venueDetailImpl.setInfoDesc(venueDetail.getInfoDesc());
 		venueDetailImpl.setAddrLine1(venueDetail.getAddrLine1());
 		venueDetailImpl.setAddrLine2(venueDetail.getAddrLine2());
@@ -853,6 +854,7 @@ public class VenueDetailPersistenceImpl extends BasePersistenceImpl<VenueDetail>
 		venueDetailImpl.setLatitude(venueDetail.getLatitude());
 		venueDetailImpl.setLongitude(venueDetail.getLongitude());
 		venueDetailImpl.setPhone(venueDetail.getPhone());
+		venueDetailImpl.setMobileAppName(venueDetail.getMobileAppName());
 		venueDetailImpl.setWebsite(venueDetail.getWebsite());
 		venueDetailImpl.setCost(venueDetail.getCost());
 		venueDetailImpl.setHoursOfOperation(venueDetail.getHoursOfOperation());

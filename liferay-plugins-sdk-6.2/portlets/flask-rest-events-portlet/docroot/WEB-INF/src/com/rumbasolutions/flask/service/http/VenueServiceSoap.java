@@ -263,20 +263,22 @@ public class VenueServiceSoap {
 
 	public static com.rumbasolutions.flask.model.VenueDetailSoap addVenueDetail(
 		long venueId, long infoTypeId, long infoTypeCategoryId,
-		java.lang.String infoTitle, java.lang.String infoDesc,
-		java.lang.String addrLine1, java.lang.String addrLine2,
-		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String latitude, java.lang.String longitude,
-		java.lang.String phone, java.lang.String website,
-		java.lang.Double cost, java.lang.String hoursOfOperation,
+		java.lang.String infoTitle, java.lang.String infoShortDesc,
+		java.lang.String infoDesc, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String zipCode,
+		java.lang.String city, long stateId, long countryId,
+		java.lang.String latitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String mobileAppName,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.VenueDetail returnValue = VenueServiceUtil.addVenueDetail(venueId,
-					infoTypeId, infoTypeCategoryId, infoTitle, infoDesc,
-					addrLine1, addrLine2, zipCode, city, stateId, countryId,
-					latitude, longitude, phone, website, cost,
-					hoursOfOperation, serviceContext);
+					infoTypeId, infoTypeCategoryId, infoTitle, infoShortDesc,
+					infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
+					countryId, latitude, longitude, phone, mobileAppName,
+					website, cost, hoursOfOperation, serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueDetailSoap.toSoapModel(returnValue);
 		}
@@ -289,20 +291,22 @@ public class VenueServiceSoap {
 
 	public static com.rumbasolutions.flask.model.VenueDetailSoap updateVenueDetail(
 		long venueDetailId, long infoTypeId, long infoTypeCategoryId,
-		java.lang.String infoTitle, java.lang.String infoDesc,
-		java.lang.String addrLine1, java.lang.String addrLine2,
-		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String latitude, java.lang.String longitude,
-		java.lang.String phone, java.lang.String website,
-		java.lang.Double cost, java.lang.String hoursOfOperation,
+		java.lang.String infoTitle, java.lang.String infoShortDesc,
+		java.lang.String infoDesc, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String zipCode,
+		java.lang.String city, long stateId, long countryId,
+		java.lang.String latitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String mobileAppName,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.VenueDetail returnValue = VenueServiceUtil.updateVenueDetail(venueDetailId,
-					infoTypeId, infoTypeCategoryId, infoTitle, infoDesc,
-					addrLine1, addrLine2, zipCode, city, stateId, countryId,
-					latitude, longitude, phone, website, cost,
-					hoursOfOperation, serviceContext);
+					infoTypeId, infoTypeCategoryId, infoTitle, infoShortDesc,
+					infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
+					countryId, latitude, longitude, phone, mobileAppName,
+					website, cost, hoursOfOperation, serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueDetailSoap.toSoapModel(returnValue);
 		}

@@ -118,10 +118,10 @@ public class VenueServiceClpInvoker {
 		_methodParameterTypes98 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String", "java.lang.Double",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName99 = "updateVenueDetail";
@@ -129,10 +129,10 @@ public class VenueServiceClpInvoker {
 		_methodParameterTypes99 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String", "java.lang.Double",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName100 = "getVenueDetail";
@@ -343,15 +343,17 @@ public class VenueServiceClpInvoker {
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
 				(java.lang.String)arguments[7], (java.lang.String)arguments[8],
-				((Long)arguments[9]).longValue(),
+				(java.lang.String)arguments[9],
 				((Long)arguments[10]).longValue(),
-				(java.lang.String)arguments[11],
+				((Long)arguments[11]).longValue(),
 				(java.lang.String)arguments[12],
 				(java.lang.String)arguments[13],
 				(java.lang.String)arguments[14],
-				(java.lang.Double)arguments[15],
+				(java.lang.String)arguments[15],
 				(java.lang.String)arguments[16],
-				(com.liferay.portal.service.ServiceContext)arguments[17]);
+				(java.lang.Double)arguments[17],
+				(java.lang.String)arguments[18],
+				(com.liferay.portal.service.ServiceContext)arguments[19]);
 		}
 
 		if (_methodName99.equals(name) &&
@@ -362,15 +364,17 @@ public class VenueServiceClpInvoker {
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
 				(java.lang.String)arguments[7], (java.lang.String)arguments[8],
-				((Long)arguments[9]).longValue(),
+				(java.lang.String)arguments[9],
 				((Long)arguments[10]).longValue(),
-				(java.lang.String)arguments[11],
+				((Long)arguments[11]).longValue(),
 				(java.lang.String)arguments[12],
 				(java.lang.String)arguments[13],
 				(java.lang.String)arguments[14],
-				(java.lang.Double)arguments[15],
+				(java.lang.String)arguments[15],
 				(java.lang.String)arguments[16],
-				(com.liferay.portal.service.ServiceContext)arguments[17]);
+				(java.lang.Double)arguments[17],
+				(java.lang.String)arguments[18],
+				(com.liferay.portal.service.ServiceContext)arguments[19]);
 		}
 
 		if (_methodName100.equals(name) &&

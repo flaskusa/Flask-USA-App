@@ -26,12 +26,13 @@ _venueDetailModel.DATA_MODEL= {
 		VENUEDETAILS:
 			[
 	             { name: 'venueDetailId', type: 'long' },
-	             { name: 'venuetId', type: 'long' },
+	             { name: 'venueId', type: 'long' },
 	             { name: 'infoTypeId', type: 'long' },
 	             { name: 'infoTypeName', type: 'string' },
 	             { name: 'infoTypeCategoryId', type: 'long' },
 	             { name: 'infoTypeCategoryName', type: 'string' },
 				 { name: 'infoTitle', type: 'string' },
+				 { name: 'infoShortDesc', type: 'string' },
 				 { name: 'infoDesc', type: 'string' },
 				 { name: 'addrLine1', type: 'string'},
 				 { name: 'addrLine2', type: 'string'},
@@ -42,6 +43,7 @@ _venueDetailModel.DATA_MODEL= {
 				 { name: 'latitude', type: 'string'},
 				 { name: 'longitude', type: 'string'},
 				 { name: 'phone', type: 'string'},
+				 { name: 'mobileAppName', type: 'string'},				 
 				 { name: 'website', type: 'string'},
 				 { name: 'cost', type: 'long' },
 				 { name: 'hoursOfOperation', type:'string'}

@@ -131,22 +131,26 @@ public interface VenueService extends BaseService, InvokableService {
 
 	public com.rumbasolutions.flask.model.VenueDetail addVenueDetail(
 		long venueId, long infoTypeId, long infoTypeCategoryId,
-		java.lang.String infoTitle, java.lang.String infoDesc,
-		java.lang.String addrLine1, java.lang.String addrLine2,
-		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String latitude, java.lang.String longitude,
-		java.lang.String phone, java.lang.String website,
-		java.lang.Double cost, java.lang.String hoursOfOperation,
+		java.lang.String infoTitle, java.lang.String infoShortDesc,
+		java.lang.String infoDesc, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String zipCode,
+		java.lang.String city, long stateId, long countryId,
+		java.lang.String latitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String mobileAppName,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.VenueDetail updateVenueDetail(
 		long venueDetailId, long infoTypeId, long infoTypeCategoryId,
-		java.lang.String infoTitle, java.lang.String infoDesc,
-		java.lang.String addrLine1, java.lang.String addrLine2,
-		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String latitude, java.lang.String longitude,
-		java.lang.String phone, java.lang.String website,
-		java.lang.Double cost, java.lang.String hoursOfOperation,
+		java.lang.String infoTitle, java.lang.String infoShortDesc,
+		java.lang.String infoDesc, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String zipCode,
+		java.lang.String city, long stateId, long countryId,
+		java.lang.String latitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String mobileAppName,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)

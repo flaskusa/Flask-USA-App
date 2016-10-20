@@ -103,6 +103,7 @@
         <column name="infoTypeCategoryId" type="long" />
         <column name="infoTypeCategoryName" type="String" />
         <column name="infoTitle" type="String" />
+        <column name="infoShortDesc" type="String" />
         <column name="infoDesc" type="String" />
         <column name="addrLine1" type="String" />
         <column name="addrLine2" type="String" />
@@ -115,6 +116,7 @@
         <column name="latitude" type="String" />
         <column name="longitude" type="String" />
         <column name="phone" type="String" />
+        <column name="mobileAppName" type="String" />
         <column name="website" type="String" />
         <column name="cost" type="double" />
         <column name="hoursOfOperation" type="String" />
@@ -279,6 +281,7 @@
         <column name="infoTypeCategoryId" type="long" />
         <column name="infoTypeCategoryName" type="String" />
         <column name="infoTitle" type="String" />
+        <column name="infoShortDesc" type="String" />
         <column name="infoDesc" type="String" />
         <column name="addrLine1" type="String" />
         <column name="addrLine2" type="String" />
@@ -292,6 +295,8 @@
         <column name="latitude" type="String" />
         <column name="longitude" type="String" />
         <column name="phone" type="String" />
+        <column name="mobileAppName" type="String" />
+        
         <column name="website" type="String" />
         <column name="cost" type="double" />
         <column name="hoursOfOperation" type="String" />

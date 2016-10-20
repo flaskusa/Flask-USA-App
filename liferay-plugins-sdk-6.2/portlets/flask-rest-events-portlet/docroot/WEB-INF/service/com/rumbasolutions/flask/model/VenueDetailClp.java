@@ -86,6 +86,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
 		attributes.put("infoTitle", getInfoTitle());
+		attributes.put("infoShortDesc", getInfoShortDesc());
 		attributes.put("infoDesc", getInfoDesc());
 		attributes.put("addrLine1", getAddrLine1());
 		attributes.put("addrLine2", getAddrLine2());
@@ -98,6 +99,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		attributes.put("latitude", getLatitude());
 		attributes.put("longitude", getLongitude());
 		attributes.put("phone", getPhone());
+		attributes.put("mobileAppName", getMobileAppName());
 		attributes.put("website", getWebsite());
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
@@ -175,6 +177,12 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 			setInfoTitle(infoTitle);
 		}
 
+		String infoShortDesc = (String)attributes.get("infoShortDesc");
+
+		if (infoShortDesc != null) {
+			setInfoShortDesc(infoShortDesc);
+		}
+
 		String infoDesc = (String)attributes.get("infoDesc");
 
 		if (infoDesc != null) {
@@ -245,6 +253,12 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 		if (phone != null) {
 			setPhone(phone);
+		}
+
+		String mobileAppName = (String)attributes.get("mobileAppName");
+
+		if (mobileAppName != null) {
+			setMobileAppName(mobileAppName);
 		}
 
 		String website = (String)attributes.get("website");
@@ -538,6 +552,29 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
+	public String getInfoShortDesc() {
+		return _infoShortDesc;
+	}
+
+	@Override
+	public void setInfoShortDesc(String infoShortDesc) {
+		_infoShortDesc = infoShortDesc;
+
+		if (_venueDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _venueDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setInfoShortDesc", String.class);
+
+				method.invoke(_venueDetailRemoteModel, infoShortDesc);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getInfoDesc() {
 		return _infoDesc;
 	}
@@ -814,6 +851,29 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	}
 
 	@Override
+	public String getMobileAppName() {
+		return _mobileAppName;
+	}
+
+	@Override
+	public void setMobileAppName(String mobileAppName) {
+		_mobileAppName = mobileAppName;
+
+		if (_venueDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _venueDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setMobileAppName", String.class);
+
+				method.invoke(_venueDetailRemoteModel, mobileAppName);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
+	@Override
 	public String getWebsite() {
 		return _website;
 	}
@@ -992,6 +1052,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		clone.setInfoTypeCategoryId(getInfoTypeCategoryId());
 		clone.setInfoTypeCategoryName(getInfoTypeCategoryName());
 		clone.setInfoTitle(getInfoTitle());
+		clone.setInfoShortDesc(getInfoShortDesc());
 		clone.setInfoDesc(getInfoDesc());
 		clone.setAddrLine1(getAddrLine1());
 		clone.setAddrLine2(getAddrLine2());
@@ -1004,6 +1065,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		clone.setLatitude(getLatitude());
 		clone.setLongitude(getLongitude());
 		clone.setPhone(getPhone());
+		clone.setMobileAppName(getMobileAppName());
 		clone.setWebsite(getWebsite());
 		clone.setCost(getCost());
 		clone.setHoursOfOperation(getHoursOfOperation());
@@ -1060,7 +1122,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(59);
 
 		sb.append("{venueDetailId=");
 		sb.append(getVenueDetailId());
@@ -1084,6 +1146,8 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		sb.append(getInfoTypeCategoryName());
 		sb.append(", infoTitle=");
 		sb.append(getInfoTitle());
+		sb.append(", infoShortDesc=");
+		sb.append(getInfoShortDesc());
 		sb.append(", infoDesc=");
 		sb.append(getInfoDesc());
 		sb.append(", addrLine1=");
@@ -1108,6 +1172,8 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		sb.append(getLongitude());
 		sb.append(", phone=");
 		sb.append(getPhone());
+		sb.append(", mobileAppName=");
+		sb.append(getMobileAppName());
 		sb.append(", website=");
 		sb.append(getWebsite());
 		sb.append(", cost=");
@@ -1123,7 +1189,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(85);
+		StringBundler sb = new StringBundler(91);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.VenueDetail");
@@ -1174,6 +1240,10 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		sb.append(getInfoTitle());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>infoShortDesc</column-name><column-value><![CDATA[");
+		sb.append(getInfoShortDesc());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>infoDesc</column-name><column-value><![CDATA[");
 		sb.append(getInfoDesc());
 		sb.append("]]></column-value></column>");
@@ -1222,6 +1292,10 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		sb.append(getPhone());
 		sb.append("]]></column-value></column>");
 		sb.append(
+			"<column><column-name>mobileAppName</column-name><column-value><![CDATA[");
+		sb.append(getMobileAppName());
+		sb.append("]]></column-value></column>");
+		sb.append(
 			"<column><column-name>website</column-name><column-value><![CDATA[");
 		sb.append(getWebsite());
 		sb.append("]]></column-value></column>");
@@ -1255,6 +1329,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	private long _infoTypeCategoryId;
 	private String _infoTypeCategoryName;
 	private String _infoTitle;
+	private String _infoShortDesc;
 	private String _infoDesc;
 	private String _addrLine1;
 	private String _addrLine2;
@@ -1267,6 +1342,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	private String _latitude;
 	private String _longitude;
 	private String _phone;
+	private String _mobileAppName;
 	private String _website;
 	private double _cost;
 	private String _hoursOfOperation;

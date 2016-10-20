@@ -270,9 +270,9 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	
 	@Override
 	public EventDetail addEventDetail(long eventId , long infoTypeId, long infoTypeCategoryId, 
-		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
+		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, String longitude, 
-		String phone, String website, Double cost, 
+		String phone, String mobileAppName, String website, Double cost, 
 		String hoursOfOperation, boolean showDescription,
 		ServiceContext  serviceContext){
 		EventDetail eventDetail=null;
@@ -284,6 +284,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setInfoTypeCategoryId(infoTypeCategoryId);
 			eventDetail.setInfoTypeCategoryName(InfoTypeCategoryServiceUtil.getInfoTypeCategory(infoTypeCategoryId, serviceContext).getInfoTypeCategoryName());
 			eventDetail.setInfoTitle(infoTitle);
+			eventDetail.setInfoShortDesc(infoShortDesc);
 			eventDetail.setInfoDesc(infoDesc);
 			eventDetail.setAddrLine1(addrLine1);
 			eventDetail.setAddrLine2(addrLine2);
@@ -294,6 +295,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setLatitude(latitude);
 			eventDetail.setLongitude(longitude);
 			eventDetail.setPhone(phone);
+			eventDetail.setMobileAppName(mobileAppName);
 			eventDetail.setWebsite(website);
 			eventDetail.setCost(cost);
 			eventDetail.setHoursOfOperation(hoursOfOperation);
@@ -315,9 +317,9 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	
 	@Override
 	public EventDetail updateEventDetail(long eventDetailId , long infoTypeId, long infoTypeCategoryId, 
-		String infoTitle, String infoDesc, String addrLine1, String addrLine2, String zipCode,
+		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, String longitude, String phone, 
-		String website, Double cost, String hoursOfOperation, boolean showDescription,
+		String mobileAppName, String website, Double cost, String hoursOfOperation, boolean showDescription,
 		ServiceContext  serviceContext){
 		EventDetail eventDetail=null;
 		try{
@@ -327,6 +329,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setInfoTypeCategoryId(infoTypeCategoryId);
 			eventDetail.setInfoTypeCategoryName(InfoTypeCategoryServiceUtil.getInfoTypeCategory(infoTypeCategoryId, serviceContext).getInfoTypeCategoryName());
 			eventDetail.setInfoTitle(infoTitle);
+			eventDetail.setInfoShortDesc(infoShortDesc);
 			eventDetail.setInfoDesc(infoDesc);
 			eventDetail.setAddrLine1(addrLine1);
 			eventDetail.setAddrLine2(addrLine2);
@@ -337,6 +340,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setLatitude(latitude);
 			eventDetail.setLongitude(longitude);
 			eventDetail.setPhone(phone);
+			eventDetail.setMobileAppName(mobileAppName);
 			eventDetail.setWebsite(website);
 			eventDetail.setCost(cost);
 			eventDetail.setHoursOfOperation(hoursOfOperation);

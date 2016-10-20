@@ -69,7 +69,7 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay, long logoId,
+		double amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
@@ -104,7 +104,7 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay, long logoId,
+		double amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteTailgateInfo(long tailgateId,

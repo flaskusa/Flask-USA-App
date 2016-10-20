@@ -61,6 +61,7 @@ public class VenueDetailWrapper implements VenueDetail,
 		attributes.put("infoTypeCategoryId", getInfoTypeCategoryId());
 		attributes.put("infoTypeCategoryName", getInfoTypeCategoryName());
 		attributes.put("infoTitle", getInfoTitle());
+		attributes.put("infoShortDesc", getInfoShortDesc());
 		attributes.put("infoDesc", getInfoDesc());
 		attributes.put("addrLine1", getAddrLine1());
 		attributes.put("addrLine2", getAddrLine2());
@@ -73,6 +74,7 @@ public class VenueDetailWrapper implements VenueDetail,
 		attributes.put("latitude", getLatitude());
 		attributes.put("longitude", getLongitude());
 		attributes.put("phone", getPhone());
+		attributes.put("mobileAppName", getMobileAppName());
 		attributes.put("website", getWebsite());
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
@@ -150,6 +152,12 @@ public class VenueDetailWrapper implements VenueDetail,
 			setInfoTitle(infoTitle);
 		}
 
+		String infoShortDesc = (String)attributes.get("infoShortDesc");
+
+		if (infoShortDesc != null) {
+			setInfoShortDesc(infoShortDesc);
+		}
+
 		String infoDesc = (String)attributes.get("infoDesc");
 
 		if (infoDesc != null) {
@@ -220,6 +228,12 @@ public class VenueDetailWrapper implements VenueDetail,
 
 		if (phone != null) {
 			setPhone(phone);
+		}
+
+		String mobileAppName = (String)attributes.get("mobileAppName");
+
+		if (mobileAppName != null) {
+			setMobileAppName(mobileAppName);
 		}
 
 		String website = (String)attributes.get("website");
@@ -510,6 +524,26 @@ public class VenueDetailWrapper implements VenueDetail,
 	}
 
 	/**
+	* Returns the info short desc of this venue detail.
+	*
+	* @return the info short desc of this venue detail
+	*/
+	@Override
+	public java.lang.String getInfoShortDesc() {
+		return _venueDetail.getInfoShortDesc();
+	}
+
+	/**
+	* Sets the info short desc of this venue detail.
+	*
+	* @param infoShortDesc the info short desc of this venue detail
+	*/
+	@Override
+	public void setInfoShortDesc(java.lang.String infoShortDesc) {
+		_venueDetail.setInfoShortDesc(infoShortDesc);
+	}
+
+	/**
 	* Returns the info desc of this venue detail.
 	*
 	* @return the info desc of this venue detail
@@ -747,6 +781,26 @@ public class VenueDetailWrapper implements VenueDetail,
 	@Override
 	public void setPhone(java.lang.String phone) {
 		_venueDetail.setPhone(phone);
+	}
+
+	/**
+	* Returns the mobile app name of this venue detail.
+	*
+	* @return the mobile app name of this venue detail
+	*/
+	@Override
+	public java.lang.String getMobileAppName() {
+		return _venueDetail.getMobileAppName();
+	}
+
+	/**
+	* Sets the mobile app name of this venue detail.
+	*
+	* @param mobileAppName the mobile app name of this venue detail
+	*/
+	@Override
+	public void setMobileAppName(java.lang.String mobileAppName) {
+		_venueDetail.setMobileAppName(mobileAppName);
 	}
 
 	/**

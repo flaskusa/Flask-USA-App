@@ -118,10 +118,10 @@ public class VenueServiceClp implements VenueService {
 		_methodParameterTypes15 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String", "java.lang.Double",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName16 = "updateVenueDetail";
@@ -129,10 +129,10 @@ public class VenueServiceClp implements VenueService {
 		_methodParameterTypes16 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long", "long", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.Double", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String", "java.lang.Double",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName17 = "getVenueDetail";
@@ -660,12 +660,14 @@ public class VenueServiceClp implements VenueService {
 	@Override
 	public com.rumbasolutions.flask.model.VenueDetail addVenueDetail(
 		long venueId, long infoTypeId, long infoTypeCategoryId,
-		java.lang.String infoTitle, java.lang.String infoDesc,
-		java.lang.String addrLine1, java.lang.String addrLine2,
-		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String latitude, java.lang.String longitude,
-		java.lang.String phone, java.lang.String website,
-		java.lang.Double cost, java.lang.String hoursOfOperation,
+		java.lang.String infoTitle, java.lang.String infoShortDesc,
+		java.lang.String infoDesc, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String zipCode,
+		java.lang.String city, long stateId, long countryId,
+		java.lang.String latitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String mobileAppName,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -680,6 +682,8 @@ public class VenueServiceClp implements VenueService {
 					infoTypeCategoryId,
 						
 					ClpSerializer.translateInput(infoTitle),
+						
+					ClpSerializer.translateInput(infoShortDesc),
 						
 					ClpSerializer.translateInput(infoDesc),
 						
@@ -700,6 +704,8 @@ public class VenueServiceClp implements VenueService {
 					ClpSerializer.translateInput(longitude),
 						
 					ClpSerializer.translateInput(phone),
+						
+					ClpSerializer.translateInput(mobileAppName),
 						
 					ClpSerializer.translateInput(website),
 						
@@ -728,12 +734,14 @@ public class VenueServiceClp implements VenueService {
 	@Override
 	public com.rumbasolutions.flask.model.VenueDetail updateVenueDetail(
 		long venueDetailId, long infoTypeId, long infoTypeCategoryId,
-		java.lang.String infoTitle, java.lang.String infoDesc,
-		java.lang.String addrLine1, java.lang.String addrLine2,
-		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String latitude, java.lang.String longitude,
-		java.lang.String phone, java.lang.String website,
-		java.lang.Double cost, java.lang.String hoursOfOperation,
+		java.lang.String infoTitle, java.lang.String infoShortDesc,
+		java.lang.String infoDesc, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String zipCode,
+		java.lang.String city, long stateId, long countryId,
+		java.lang.String latitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String mobileAppName,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -748,6 +756,8 @@ public class VenueServiceClp implements VenueService {
 					infoTypeCategoryId,
 						
 					ClpSerializer.translateInput(infoTitle),
+						
+					ClpSerializer.translateInput(infoShortDesc),
 						
 					ClpSerializer.translateInput(infoDesc),
 						
@@ -768,6 +778,8 @@ public class VenueServiceClp implements VenueService {
 					ClpSerializer.translateInput(longitude),
 						
 					ClpSerializer.translateInput(phone),
+						
+					ClpSerializer.translateInput(mobileAppName),
 						
 					ClpSerializer.translateInput(website),
 						

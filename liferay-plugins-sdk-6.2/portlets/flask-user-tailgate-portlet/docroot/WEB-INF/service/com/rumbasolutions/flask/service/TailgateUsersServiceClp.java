@@ -36,31 +36,37 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 
 		_methodParameterTypes3 = new String[] { "long" };
 
-		_methodName4 = "getTailgateGroups";
+		_methodName4 = "isTailgateAdmin";
 
-		_methodParameterTypes4 = new String[] { "long", "long" };
+		_methodParameterTypes4 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
-		_methodName5 = "checkTailgateUserExist";
+		_methodName5 = "getTailgateGroups";
 
 		_methodParameterTypes5 = new String[] { "long", "long" };
 
-		_methodName6 = "addTailgateUser";
+		_methodName6 = "checkTailgateUserExist";
 
-		_methodParameterTypes6 = new String[] {
+		_methodParameterTypes6 = new String[] { "long", "long" };
+
+		_methodName7 = "addTailgateUser";
+
+		_methodParameterTypes7 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String", "int",
 				"boolean", "java.lang.String", "int"
 			};
 
-		_methodName7 = "updateTailgateUser";
+		_methodName8 = "updateTailgateUser";
 
-		_methodParameterTypes7 = new String[] {
+		_methodParameterTypes8 = new String[] {
 				"long", "long", "boolean", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName8 = "deleteTailgateUser";
+		_methodName9 = "deleteTailgateUser";
 
-		_methodParameterTypes8 = new String[] { "long", "long" };
+		_methodParameterTypes9 = new String[] { "long", "long" };
 	}
 
 	@Override
@@ -138,13 +144,42 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 	}
 
 	@Override
+	public boolean isTailgateAdmin(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName4,
+					_methodParameterTypes4,
+					new Object[] {
+						tailgateId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
+	@Override
 	public java.util.List<com.rumbasolutions.flask.model.TailgateUsers> getTailgateGroups(
 		long tailgateId, long groupId) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4, new Object[] { tailgateId, groupId });
+			returnObj = _invokableService.invokeMethod(_methodName5,
+					_methodParameterTypes5, new Object[] { tailgateId, groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -166,8 +201,8 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName5,
-					_methodParameterTypes5, new Object[] { tailgateId, userId });
+			returnObj = _invokableService.invokeMethod(_methodName6,
+					_methodParameterTypes6, new Object[] { tailgateId, userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -192,8 +227,8 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName6,
-					_methodParameterTypes6,
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7,
 					new Object[] {
 						tailgateId,
 						
@@ -234,8 +269,8 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7,
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
 					new Object[] {
 						userId,
 						
@@ -266,8 +301,8 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 	@Override
 	public void deleteTailgateUser(long tailgateId, long userId) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8, new Object[] { tailgateId, userId });
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9, new Object[] { tailgateId, userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -299,4 +334,6 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
 }

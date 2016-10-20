@@ -199,21 +199,23 @@ public class EventServiceSoap {
 
 	public static com.rumbasolutions.flask.model.EventDetailSoap addEventDetail(
 		long eventId, long infoTypeId, long infoTypeCategoryId,
-		java.lang.String infoTitle, java.lang.String infoDesc,
-		java.lang.String addrLine1, java.lang.String addrLine2,
-		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String latitude, java.lang.String longitude,
-		java.lang.String phone, java.lang.String website,
-		java.lang.Double cost, java.lang.String hoursOfOperation,
-		boolean showDescription,
+		java.lang.String infoTitle, java.lang.String infoShortDesc,
+		java.lang.String infoDesc, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String zipCode,
+		java.lang.String city, long stateId, long countryId,
+		java.lang.String latitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String mobileAppName,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation, boolean showDescription,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.EventDetail returnValue = EventServiceUtil.addEventDetail(eventId,
-					infoTypeId, infoTypeCategoryId, infoTitle, infoDesc,
-					addrLine1, addrLine2, zipCode, city, stateId, countryId,
-					latitude, longitude, phone, website, cost,
-					hoursOfOperation, showDescription, serviceContext);
+					infoTypeId, infoTypeCategoryId, infoTitle, infoShortDesc,
+					infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
+					countryId, latitude, longitude, phone, mobileAppName,
+					website, cost, hoursOfOperation, showDescription,
+					serviceContext);
 
 			return com.rumbasolutions.flask.model.EventDetailSoap.toSoapModel(returnValue);
 		}
@@ -226,21 +228,23 @@ public class EventServiceSoap {
 
 	public static com.rumbasolutions.flask.model.EventDetailSoap updateEventDetail(
 		long eventDetailId, long infoTypeId, long infoTypeCategoryId,
-		java.lang.String infoTitle, java.lang.String infoDesc,
-		java.lang.String addrLine1, java.lang.String addrLine2,
-		java.lang.String zipCode, java.lang.String city, long stateId,
-		long countryId, java.lang.String latitude, java.lang.String longitude,
-		java.lang.String phone, java.lang.String website,
-		java.lang.Double cost, java.lang.String hoursOfOperation,
-		boolean showDescription,
+		java.lang.String infoTitle, java.lang.String infoShortDesc,
+		java.lang.String infoDesc, java.lang.String addrLine1,
+		java.lang.String addrLine2, java.lang.String zipCode,
+		java.lang.String city, long stateId, long countryId,
+		java.lang.String latitude, java.lang.String longitude,
+		java.lang.String phone, java.lang.String mobileAppName,
+		java.lang.String website, java.lang.Double cost,
+		java.lang.String hoursOfOperation, boolean showDescription,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.EventDetail returnValue = EventServiceUtil.updateEventDetail(eventDetailId,
-					infoTypeId, infoTypeCategoryId, infoTitle, infoDesc,
-					addrLine1, addrLine2, zipCode, city, stateId, countryId,
-					latitude, longitude, phone, website, cost,
-					hoursOfOperation, showDescription, serviceContext);
+					infoTypeId, infoTypeCategoryId, infoTitle, infoShortDesc,
+					infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
+					countryId, latitude, longitude, phone, mobileAppName,
+					website, cost, hoursOfOperation, showDescription,
+					serviceContext);
 
 			return com.rumbasolutions.flask.model.EventDetailSoap.toSoapModel(returnValue);
 		}

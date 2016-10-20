@@ -38,7 +38,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(55);
+		StringBundler sb = new StringBundler(59);
 
 		sb.append("{eventDetailId=");
 		sb.append(eventDetailId);
@@ -62,6 +62,8 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		sb.append(infoTypeCategoryName);
 		sb.append(", infoTitle=");
 		sb.append(infoTitle);
+		sb.append(", infoShortDesc=");
+		sb.append(infoShortDesc);
 		sb.append(", infoDesc=");
 		sb.append(infoDesc);
 		sb.append(", addrLine1=");
@@ -86,6 +88,8 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		sb.append(longitude);
 		sb.append(", phone=");
 		sb.append(phone);
+		sb.append(", mobileAppName=");
+		sb.append(mobileAppName);
 		sb.append(", website=");
 		sb.append(website);
 		sb.append(", cost=");
@@ -145,6 +149,13 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		}
 		else {
 			eventDetailImpl.setInfoTitle(infoTitle);
+		}
+
+		if (infoShortDesc == null) {
+			eventDetailImpl.setInfoShortDesc(StringPool.BLANK);
+		}
+		else {
+			eventDetailImpl.setInfoShortDesc(infoShortDesc);
 		}
 
 		if (infoDesc == null) {
@@ -221,6 +232,13 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 			eventDetailImpl.setPhone(phone);
 		}
 
+		if (mobileAppName == null) {
+			eventDetailImpl.setMobileAppName(StringPool.BLANK);
+		}
+		else {
+			eventDetailImpl.setMobileAppName(mobileAppName);
+		}
+
 		if (website == null) {
 			eventDetailImpl.setWebsite(StringPool.BLANK);
 		}
@@ -257,6 +275,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		infoTypeCategoryId = objectInput.readLong();
 		infoTypeCategoryName = objectInput.readUTF();
 		infoTitle = objectInput.readUTF();
+		infoShortDesc = objectInput.readUTF();
 		infoDesc = objectInput.readUTF();
 		addrLine1 = objectInput.readUTF();
 		addrLine2 = objectInput.readUTF();
@@ -269,6 +288,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		latitude = objectInput.readUTF();
 		longitude = objectInput.readUTF();
 		phone = objectInput.readUTF();
+		mobileAppName = objectInput.readUTF();
 		website = objectInput.readUTF();
 		cost = objectInput.readDouble();
 		hoursOfOperation = objectInput.readUTF();
@@ -307,6 +327,13 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		}
 		else {
 			objectOutput.writeUTF(infoTitle);
+		}
+
+		if (infoShortDesc == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(infoShortDesc);
 		}
 
 		if (infoDesc == null) {
@@ -383,6 +410,13 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 			objectOutput.writeUTF(phone);
 		}
 
+		if (mobileAppName == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(mobileAppName);
+		}
+
 		if (website == null) {
 			objectOutput.writeUTF(StringPool.BLANK);
 		}
@@ -413,6 +447,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	public long infoTypeCategoryId;
 	public String infoTypeCategoryName;
 	public String infoTitle;
+	public String infoShortDesc;
 	public String infoDesc;
 	public String addrLine1;
 	public String addrLine2;
@@ -425,6 +460,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	public String latitude;
 	public String longitude;
 	public String phone;
+	public String mobileAppName;
 	public String website;
 	public double cost;
 	public String hoursOfOperation;

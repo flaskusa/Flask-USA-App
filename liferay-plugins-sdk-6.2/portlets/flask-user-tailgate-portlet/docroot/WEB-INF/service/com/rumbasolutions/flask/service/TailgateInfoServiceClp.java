@@ -37,7 +37,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		_methodParameterTypes3 = new String[] {
 				"java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "long", "long",
-				"java.lang.String", "long", "long",
+				"java.lang.String", "double", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -78,7 +78,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		_methodParameterTypes11 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "long", "long",
-				"java.lang.String", "long", "long",
+				"java.lang.String", "double", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -144,7 +144,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		java.lang.String tailgateName, java.lang.String tailgateDescription,
 		long eventId, java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay, long logoId,
+		double amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -372,7 +372,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		java.lang.String tailgateDescription, long eventId,
 		java.lang.String eventName, java.util.Date tailgateDate,
 		long startTime, long endTime, java.lang.String venmoAccountId,
-		long amountToPay, long logoId,
+		double amountToPay, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 

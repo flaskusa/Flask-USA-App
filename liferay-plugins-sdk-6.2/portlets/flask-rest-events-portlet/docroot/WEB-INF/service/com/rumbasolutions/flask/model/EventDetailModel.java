@@ -233,6 +233,21 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	public void setInfoTitle(String infoTitle);
 
 	/**
+	 * Returns the info short desc of this event detail.
+	 *
+	 * @return the info short desc of this event detail
+	 */
+	@AutoEscape
+	public String getInfoShortDesc();
+
+	/**
+	 * Sets the info short desc of this event detail.
+	 *
+	 * @param infoShortDesc the info short desc of this event detail
+	 */
+	public void setInfoShortDesc(String infoShortDesc);
+
+	/**
 	 * Returns the info desc of this event detail.
 	 *
 	 * @return the info desc of this event detail
@@ -409,6 +424,21 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	 * @param phone the phone of this event detail
 	 */
 	public void setPhone(String phone);
+
+	/**
+	 * Returns the mobile app name of this event detail.
+	 *
+	 * @return the mobile app name of this event detail
+	 */
+	@AutoEscape
+	public String getMobileAppName();
+
+	/**
+	 * Sets the mobile app name of this event detail.
+	 *
+	 * @param mobileAppName the mobile app name of this event detail
+	 */
+	public void setMobileAppName(String mobileAppName);
 
 	/**
 	 * Returns the website of this event detail.

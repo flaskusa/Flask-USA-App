@@ -233,6 +233,21 @@ public interface VenueDetailModel extends BaseModel<VenueDetail> {
 	public void setInfoTitle(String infoTitle);
 
 	/**
+	 * Returns the info short desc of this venue detail.
+	 *
+	 * @return the info short desc of this venue detail
+	 */
+	@AutoEscape
+	public String getInfoShortDesc();
+
+	/**
+	 * Sets the info short desc of this venue detail.
+	 *
+	 * @param infoShortDesc the info short desc of this venue detail
+	 */
+	public void setInfoShortDesc(String infoShortDesc);
+
+	/**
 	 * Returns the info desc of this venue detail.
 	 *
 	 * @return the info desc of this venue detail
@@ -409,6 +424,21 @@ public interface VenueDetailModel extends BaseModel<VenueDetail> {
 	 * @param phone the phone of this venue detail
 	 */
 	public void setPhone(String phone);
+
+	/**
+	 * Returns the mobile app name of this venue detail.
+	 *
+	 * @return the mobile app name of this venue detail
+	 */
+	@AutoEscape
+	public String getMobileAppName();
+
+	/**
+	 * Sets the mobile app name of this venue detail.
+	 *
+	 * @param mobileAppName the mobile app name of this venue detail
+	 */
+	public void setMobileAppName(String mobileAppName);
 
 	/**
 	 * Returns the website of this venue detail.
