@@ -26,7 +26,7 @@
         var POST_EVENT = "Post-Event";
         var userDetail=$cookies.getObject('CurrentUser');
         if(userDetail!=undefined) {
-            var agreedToTermsOfUse = userDetail.data.agreedToTermsOfUse;
+            var agreedToTermsOfUse = true;
         }
         
         getEventVenueDatail();

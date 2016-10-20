@@ -21,7 +21,7 @@
         if(userDetail!=undefined) {
             $scope.userId = userDetail.data.userId;
             $scope.hideCheckBox=false;
-            $scope.agreedToTermsOfUse = userDetail.data.agreedToTermsOfUse;
+            $scope.agreedToTermsOfUse = true;
         }else{
             $scope.userId=0;
             $scope.hideCheckBox=true
