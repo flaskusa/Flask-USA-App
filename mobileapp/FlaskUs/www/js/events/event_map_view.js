@@ -734,15 +734,6 @@
 
 
         }
-        $scope.tempPhoneNumberParser=function(desc){
-            var number=0;
-            if(desc.length>15){
-              number= desc.substring(1, 15);
-
-            }
-            return number;
-
-        }
         $scope.callNow=function(phonenumber){
            var telephoneToCall = "tel:" + phonenumber;
                 openUrl(telephoneToCall, "_system");
@@ -799,9 +790,8 @@
                             $scope.venueInfoDetail.push(tempObject);
                         }
                         else if ("Getting home" == tempObject.infoTypeCategoryName) {
-                            var number=$scope.tempPhoneNumberParser(tempObject.infoDesc);
-                            if(number!=0) {
-                                tempObject.phoneNumber = number;
+                            if(tempObject.infoDesc.length>=10 && !tempObject.infoDesc.includes("<")) {
+                                tempObject.phoneNumber = tempObject.infoDesc;
                             }
                             $scope.gettingHomeDetail.push(tempObject);
 
