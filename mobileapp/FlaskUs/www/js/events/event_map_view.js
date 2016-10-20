@@ -133,7 +133,7 @@
                         }
                     })
                 }
-            } else if ($scope.selectedIndex == 0 && $scope.infoTypeName == 'During-Event') {
+            } else if ($scope.selectedIndex == 2 && $scope.infoTypeName == 'During-Event') {
                 if ($scope.barFlaskMarkerOptions.control && $scope.barFlaskMarkerOptions.control.getPlurals && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                     angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
