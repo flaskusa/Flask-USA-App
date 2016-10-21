@@ -122,7 +122,6 @@
                     }
                 }
                 if ($scope.Pre_Game.length >= 0) {
-                    $scope.Pre_Game.push("Tickets");
                     $scope.Pre_Game.push("Game Day Needs");
                     if(userDetail!=undefined && agreedToTermsOfUse==true) {
                         $scope.Pre_Game.push("Add Content");

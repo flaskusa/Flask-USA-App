@@ -738,6 +738,32 @@
            var telephoneToCall = "tel:" + phonenumber;
                 openUrl(telephoneToCall, "_system");
         };
+        $scope.openApp=function(){
+
+
+                var scheme;
+
+                // Don't forget to add the org.apache.cordova.device plugin!
+                if(device.platform === 'iOS') {
+                    scheme = 'twitter://';
+                }
+                else if(device.platform === 'Android') {
+                    scheme = 'com.twitter.android';
+                }
+
+                appAvailability.check(
+                    scheme, // URI Scheme
+                    function() {  // Success callback
+                        window.open('twitter://user?screen_name=gajotres', '_system', 'location=no');
+                        console.log('Twitter is available');
+                    },
+                    function() {  // Error callback
+                        window.open('https://twitter.com/gajotres', '_system', 'location=no');
+                        console.log('Twitter is not available');
+                    }
+                );
+
+        }
         
         $scope.setMarkers = function () {
             if (!$scope.isMapMarkersSet) {
