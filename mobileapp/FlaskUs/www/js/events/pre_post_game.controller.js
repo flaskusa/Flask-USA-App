@@ -36,12 +36,13 @@
                 console.log(respData.data.eventDate);
                 $scope.currVenueName = respData.data.venueName;
                 $scope.currEventDate = respData.data.eventDate;
+                $scope.currVenueId = respData.data.venueId;
                 $scope.currEventName = $stateParams.eventName;
             })
         }
        $scope.preEvent = function (pre) {
            if (pre == "Tickets") {
-               $state.go("app.tickets", { venueName: $scope.currVenueName, eventDate: $scope.currEventDate, eventName: $scope.currEventName, infoType: PRE_EVENT, infoTypeCategory: pre });
+               $state.go("app.tickets", { venueName: $scope.currVenueName, eventDate: $scope.currEventDate, eventName: $scope.currEventName, infoType: PRE_EVENT, infoTypeCategory: pre, venueId: $scope.currVenueId });
            }
            else if(pre=="Game Day Needs"){
                $state.go("app.supplies",{myListName:"My Supply", currEventId:$scope.currEventId});
