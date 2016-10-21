@@ -738,30 +738,50 @@
            var telephoneToCall = "tel:" + phonenumber;
                 openUrl(telephoneToCall, "_system");
         };
-        $scope.openApp=function(){
+        $scope.openApp=function(AppName){
 
 
                 var scheme;
 
-                // Don't forget to add the org.apache.cordova.device plugin!
-                if(device.platform === 'iOS') {
-                    scheme = 'twitter://';
+            if(AppName.toLowerCase()=="uber") {
+                if (device.platform === 'iOS') {
+                    scheme = 'uber://';
                 }
-                else if(device.platform === 'Android') {
-                    scheme = 'com.twitter.android';
+                else if (device.platform === 'Android') {
+                    scheme = 'com.ubercab';
                 }
 
                 appAvailability.check(
-                    scheme, // URI Scheme
-                    function() {  // Success callback
-                        window.open('twitter://user?screen_name=gajotres', '_system', 'location=no');
-                        console.log('Twitter is available');
+                    scheme,
+                    function () {
+                        window.open('uber://', '_system', 'location=no');
+                        console.log('uber is available');
                     },
-                    function() {  // Error callback
-                        window.open('https://twitter.com/gajotres', '_system', 'location=no');
-                        console.log('Twitter is not available');
+                    function () {
+                        window.open('https://m.uber.com/ul/?action=setPickup', '_system', 'location=no');
+                        console.log('uber is not available');
                     }
                 );
+            }else if(AppName.toLowerCase()=="lyft"){
+                if (device.platform === 'iOS') {
+                    scheme = 'lyft://';
+                }
+                else if (device.platform === 'Android') {
+                    scheme = 'me.lyft.android';
+                }
+
+                appAvailability.check(
+                    scheme,
+                    function () {
+                        window.open('lyft://', '_system', 'location=no');
+                        console.log('uber is available');
+                    },
+                    function () {
+                        window.open('https://www.lyft.com/', '_system', 'location=no');
+                        console.log('uber is not available');
+                    }
+                );
+            }
 
         }
         
@@ -816,8 +836,8 @@
                             $scope.venueInfoDetail.push(tempObject);
                         }
                         else if ("Getting home" == tempObject.infoTypeCategoryName) {
-                            if(tempObject.infoDesc.length>=10 && !tempObject.infoDesc.includes("<")) {
-                                tempObject.phoneNumber = tempObject.infoDesc;
+                            if(tempObject.phone.length>=10 ) {
+                                tempObject.phoneNumber = tempObject.phone;
                             }
                             $scope.gettingHomeDetail.push(tempObject);
 
