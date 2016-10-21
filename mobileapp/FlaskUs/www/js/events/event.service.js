@@ -19,7 +19,9 @@
         var deleteEventDetailUrl = "/flask-rest-events-portlet.event/delete-event-detail";
         var getAllVenuesURL = "flask-rest-events-portlet.venue/get-all-venues";
         var getVenuesByIdURL = "flask-rest-events-portlet.venue/get-venue";
-        var getAllEventDetailWithImageUrl="/flask-rest-events-portlet.event/get-event-details-with-images";
+        var getAllEventDetailWithImageUrl = "/flask-rest-events-portlet.event/get-event-details-with-images";
+        var getVenueDetailsURL = "/flask-rest-events-portlet.venue/get-venue-details";
+        var getVenueDetailURL = "/flask-rest-events-portlet.venue/get-venue-detail"; 
         var googleMapURL = SERVER.googleApi;
 
         var eventServices = {
@@ -32,7 +34,9 @@
             updateEventDetailDuringEvent:updateEventDetailDuringEvent,
             deleteEventDetailById: deleteEventDetailById,
             getAllEventDetailWithImage:getAllEventDetailWithImage,
-            getAllVenues: getAllVenues
+            getAllVenues: getAllVenues,
+            getVenueDetails:getVenueDetails,
+            getVenueDetail: getVenueDetail
         }
         function getAllEvents(eventIds, sDate, eDate, sString, lat, long) {
             return $http.get(SERVER.url + allEventsURL, {
@@ -170,6 +174,31 @@
                     console.log("Error Message");
                 });
         }
+
+        function getVenueDetails(venueId) {
+            return $http.get(SERVER.url + getVenueDetailsURL, {
+                params: { "venueId": venueId }
+            })
+                .then(function success(resp) {
+                    return resp.data;
+                },
+                function failure(resp) {
+                    console.log("Error Message");
+                });
+        }
+
+        function getVenueDetail(venueDetailId) {
+            return $http.get(SERVER.url + getVenueDetailURL, {
+                params: { "venueDetailId ": venueDetailId }
+            })
+                .then(function success(resp) {
+                    return resp.data;
+                },
+                function failure(resp) {
+                    console.log("Error Message");
+                });
+        }
+
         return eventServices;
     }
 })();
