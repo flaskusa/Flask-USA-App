@@ -1,18 +1,17 @@
 ﻿(function () {
     var flaskAppConfig = angular.module('flaskApp');
     var getMessageUrlSubString="/flask-social-portlet.flaskmessages";
+    /*flaskAppConfig.value("SERVER", {
+        "hostName": "http://www.flaskus.com/",
+        "url": "http://www.flaskus.com/api/jsonws/",
+        "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
+        "companyId":20155
+    })*/
     flaskAppConfig.value("SERVER", {
         "hostName": "http://52.44.202.166/",
         "url": "http://52.44.202.166/api/jsonws/",
-        "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
-        "companyId":20155
+        "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?"
     })
-    // flaskAppConfig.value("SERVER", {
-    //     "hostName": "http://146.148.83.30/",
-    //     "url": "http://146.148.83.30/api/jsonws/",
-    //     "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
-    //     "companyId":20154
-    // })
     flaskAppConfig.config(function ($provide) {
             $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
                 return function (exception, cause) {
