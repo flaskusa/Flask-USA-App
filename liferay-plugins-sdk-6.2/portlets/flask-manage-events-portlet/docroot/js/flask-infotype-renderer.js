@@ -686,7 +686,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 		"type" : "text",
 		"attr" : [ {
 			"caption" : "Mobile App Name",
-			"id" : "website",
+			"id" : "mobileAppName",
 			"value" : "",
 			"placeholder" : "App name to open on click (optional)",
 			"maxlength" : "255",
