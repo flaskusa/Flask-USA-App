@@ -476,5 +476,32 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	public static long getCompanyId() throws RemoteException {
+		try {
+			long returnValue = FlaskAdminServiceUtil.getCompanyId();
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean isUserContentAdmin(long userId)
+		throws RemoteException {
+		try {
+			boolean returnValue = FlaskAdminServiceUtil.isUserContentAdmin(userId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskAdminServiceSoap.class);
 }

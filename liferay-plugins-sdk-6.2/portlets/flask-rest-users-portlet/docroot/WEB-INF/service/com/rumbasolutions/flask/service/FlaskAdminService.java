@@ -248,4 +248,12 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 	public com.liferay.portal.kernel.repository.model.FileEntry uploadUserProfile(
 		java.io.File file,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public long getCompanyId();
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public boolean isUserContentAdmin(long userId);
 }

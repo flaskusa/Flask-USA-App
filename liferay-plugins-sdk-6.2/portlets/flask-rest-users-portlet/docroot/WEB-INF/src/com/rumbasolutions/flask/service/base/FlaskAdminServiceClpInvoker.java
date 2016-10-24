@@ -198,6 +198,14 @@ public class FlaskAdminServiceClpInvoker {
 		_methodParameterTypes55 = new String[] {
 				"java.io.File", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName56 = "getCompanyId";
+
+		_methodParameterTypes56 = new String[] {  };
+
+		_methodName57 = "isUserContentAdmin";
+
+		_methodParameterTypes57 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -429,6 +437,16 @@ public class FlaskAdminServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
+			return FlaskAdminServiceUtil.getCompanyId();
+		}
+
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
+			return FlaskAdminServiceUtil.isUserContentAdmin(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -482,4 +500,8 @@ public class FlaskAdminServiceClpInvoker {
 	private String[] _methodParameterTypes54;
 	private String _methodName55;
 	private String[] _methodParameterTypes55;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
+	private String _methodName57;
+	private String[] _methodParameterTypes57;
 }

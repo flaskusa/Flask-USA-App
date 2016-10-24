@@ -305,6 +305,16 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		return _flaskAdminService.uploadUserProfile(file, serviceContext);
 	}
 
+	@Override
+	public long getCompanyId() {
+		return _flaskAdminService.getCompanyId();
+	}
+
+	@Override
+	public boolean isUserContentAdmin(long userId) {
+		return _flaskAdminService.isUserContentAdmin(userId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

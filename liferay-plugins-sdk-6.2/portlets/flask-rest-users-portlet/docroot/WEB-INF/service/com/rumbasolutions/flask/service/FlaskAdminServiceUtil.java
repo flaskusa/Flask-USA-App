@@ -292,6 +292,14 @@ public class FlaskAdminServiceUtil {
 		return getService().uploadUserProfile(file, serviceContext);
 	}
 
+	public static long getCompanyId() {
+		return getService().getCompanyId();
+	}
+
+	public static boolean isUserContentAdmin(long userId) {
+		return getService().isUserContentAdmin(userId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

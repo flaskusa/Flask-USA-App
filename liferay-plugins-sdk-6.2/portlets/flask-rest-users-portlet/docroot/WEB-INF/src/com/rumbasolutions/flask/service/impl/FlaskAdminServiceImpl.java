@@ -39,6 +39,7 @@ import com.liferay.portal.model.Region;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ac.AccessControlled;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -812,5 +813,33 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			e.printStackTrace();
 		}
 		return fileEntry;
+	}
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public long getCompanyId() {
+		long companyId = 0;
+		try{
+			companyId = CompanyThreadLocal.getCompanyId();
+		}catch(Exception ex) {
+			LOGGER.error(ex.getMessage());
+		}
+		return companyId;
+		
+	}
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public boolean isUserContentAdmin(long userId) {
+		boolean isContentAdmin = false;
+		try{
+			User user = UserLocalServiceUtil.getUser(userId);
+			FlaskRole role = FlaskModelUtil.getFlaskRoleByName(FlaskModelUtil.FLASK_CONTENT_ADMIN);
+			if( FlaskModelUtil.isRoleInList(user, role)){
+				isContentAdmin = true;
+			}
+		}catch(Exception ex) {
+			LOGGER.error(ex.getMessage());
+		}
+		return isContentAdmin;
+		
 	}
 }

@@ -199,7 +199,7 @@ public class FlaskModelUtil {
 		return getFlaskRoleByName(FLASK_USER);
 	}
 
-	private static boolean isRoleInList(User user,FlaskRole role) throws SystemException{
+	public static boolean isRoleInList(User user,FlaskRole role) throws SystemException{
 		for(long roleId : user.getRoleIds()){
 			if (role.getRoleId() == roleId){
 				return true;
