@@ -311,6 +311,14 @@ h4{
     font-size: 15px;
     background: #e2dfdf;
 }
+.official_website{
+	color:#000 !important;
+	font-weight:normal !important;
+}
+.official_website:hover{
+	color:darkorange !important;
+	font-weight:normal !important;
+}
 .sidr.right {
     left: auto;
     right: -260px;
@@ -594,25 +602,8 @@ h4{
 .fp-controlArrow.fp-next:hover { opacity: 1 }
 
 /*buttons*/
-
-.appstore {
-    background: url(../images/appstore.png);
-    height: 21px;
-    width: 17px;
-    margin-top: 2px;
-    float: left;
-}
-.appstore-button:hover .appstore { background: url(../images/appstore2.png) }
-.playstore {
-    background: url(../images/playstore.png);
-    height: 20px;
-    width: 17px;
-    margin-top: 2px;
-    float: left;
-}
-.playstore-button:hover .playstore { background: url(../images/playstore2.png) }
 .simple-button {
-    font-size: 16px;
+    font-size: 24px;
     font-weight: 700;
     border-radius: 4px;
     color: #ffffff;
@@ -625,14 +616,14 @@ h4{
     -webkit-transition: 0.3s;
     -o-transition: 0.3s;
     transition: 0.3s;
-    background: #fff;
+    background: #000;
 }
 .download_img{
     margin-top: -21px;
 }
 .simple-button:hover {
     color: #333;
-    background: #fff;
+    background: #FFA500;
 }
 
 /*tooltip*/
@@ -989,6 +980,8 @@ background: #FFA500;}
 }
 #sidr ul .icons {
     color: #FFA500;
+	font-size: 20px;
+    font-weight: bold;
 }
 span .icon.appstore{
 	font-size:20px;
