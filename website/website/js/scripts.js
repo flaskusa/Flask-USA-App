@@ -14,7 +14,7 @@
         'slidesNavPosition': 'bottom',
         'easingcss3': 'ease',
         'navigation': true,
-        'anchors': ['Home', 'Features', 'About', 'Clients', 'Screenshots', 'Download', 'Contact'],
+        'anchors': ['Home', 'Features', 'About', 'Screenshots', 'Download', 'Contact'],
         'navigationPosition': 'left'
     });
     $('.screenshots-content, .clients-content').css('height', $(window).height());
