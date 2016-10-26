@@ -1,9 +1,11 @@
   $(document).ready(function() {
     (function() {
+		$(".logo").hide();
         [].slice.call(document.querySelectorAll('.tabs')).forEach(function(el) {
             new CBPFWTabs(el);
         });
     })();
+	
     $('#main-nav').sidr();
     $('#fullpage').fullpage({
         'verticalCentered': true,
@@ -14,7 +16,7 @@
         'slidesNavPosition': 'bottom',
         'easingcss3': 'ease',
         'navigation': true,
-        'anchors': ['Home', 'Features', 'About', 'Screenshots', 'Download', 'Contact'],
+        'anchors': ['Home', 'Features', 'About', 'Screenshots', 'Download', 'Contact', 'Map'],
         'navigationPosition': 'left'
     });
     $('.screenshots-content, .clients-content').css('height', $(window).height());
@@ -48,6 +50,9 @@ return false;
 
 
   });
-  jQuery(window).load(function() {
-    jQuery('#preloader').fadeOut();
-  });
+  
+  setTimeout(function(){  
+    $('#preloader').fadeOut();
+    $('.preloader_img').delay(150).fadeOut('slow');
+	$(".logo").show();
+}, 2000);
