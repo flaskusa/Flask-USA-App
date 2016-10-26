@@ -296,8 +296,8 @@ public class FlaskAdminServiceUtil {
 		return getService().getCompanyId();
 	}
 
-	public static boolean isUserContentAdmin(long userId) {
-		return getService().isUserContentAdmin(userId);
+	public static boolean isAddContentAccess(long userId) {
+		return getService().isAddContentAccess(userId);
 	}
 
 	public static void clearService() {

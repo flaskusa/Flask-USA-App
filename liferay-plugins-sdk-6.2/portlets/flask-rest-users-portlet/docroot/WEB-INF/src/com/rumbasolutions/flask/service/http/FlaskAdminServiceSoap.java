@@ -489,10 +489,10 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
-	public static boolean isUserContentAdmin(long userId)
+	public static boolean isAddContentAccess(long userId)
 		throws RemoteException {
 		try {
-			boolean returnValue = FlaskAdminServiceUtil.isUserContentAdmin(userId);
+			boolean returnValue = FlaskAdminServiceUtil.isAddContentAccess(userId);
 
 			return returnValue;
 		}

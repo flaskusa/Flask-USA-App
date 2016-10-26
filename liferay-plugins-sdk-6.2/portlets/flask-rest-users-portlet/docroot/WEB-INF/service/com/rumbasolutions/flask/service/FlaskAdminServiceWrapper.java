@@ -311,8 +311,8 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 	}
 
 	@Override
-	public boolean isUserContentAdmin(long userId) {
-		return _flaskAdminService.isUserContentAdmin(userId);
+	public boolean isAddContentAccess(long userId) {
+		return _flaskAdminService.isAddContentAccess(userId);
 	}
 
 	/**

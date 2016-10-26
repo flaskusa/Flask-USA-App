@@ -203,7 +203,7 @@ public class FlaskAdminServiceClpInvoker {
 
 		_methodParameterTypes56 = new String[] {  };
 
-		_methodName57 = "isUserContentAdmin";
+		_methodName57 = "isAddContentAccess";
 
 		_methodParameterTypes57 = new String[] { "long" };
 	}
@@ -444,7 +444,7 @@ public class FlaskAdminServiceClpInvoker {
 
 		if (_methodName57.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
-			return FlaskAdminServiceUtil.isUserContentAdmin(((Long)arguments[0]).longValue());
+			return FlaskAdminServiceUtil.isAddContentAccess(((Long)arguments[0]).longValue());
 		}
 
 		throw new UnsupportedOperationException();

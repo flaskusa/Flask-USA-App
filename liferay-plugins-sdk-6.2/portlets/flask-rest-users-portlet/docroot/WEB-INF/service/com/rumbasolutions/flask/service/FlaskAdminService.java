@@ -255,5 +255,5 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public boolean isUserContentAdmin(long userId);
+	public boolean isAddContentAccess(long userId);
 }

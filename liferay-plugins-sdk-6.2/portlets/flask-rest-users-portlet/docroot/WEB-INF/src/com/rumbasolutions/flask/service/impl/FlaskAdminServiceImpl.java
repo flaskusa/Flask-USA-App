@@ -828,12 +828,13 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	}
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
-	public boolean isUserContentAdmin(long userId) {
+	public boolean isAddContentAccess(long userId) {
 		boolean isContentAdmin = false;
 		try{
 			User user = UserLocalServiceUtil.getUser(userId);
-			FlaskRole role = FlaskModelUtil.getFlaskRoleByName(FlaskModelUtil.FLASK_CONTENT_ADMIN);
-			if( FlaskModelUtil.isRoleInList(user, role)){
+			FlaskRole contentRole = FlaskModelUtil.getFlaskRoleByName(FlaskModelUtil.FLASK_CONTENT_ADMIN);
+			FlaskRole adminRole = FlaskModelUtil.getFlaskRoleByName(FlaskModelUtil.FLASK_ADMIN);
+			if( FlaskModelUtil.isRoleInList(user, contentRole) || FlaskModelUtil.isRoleInList(user, adminRole)){
 				isContentAdmin = true;
 			}
 		}catch(Exception ex) {

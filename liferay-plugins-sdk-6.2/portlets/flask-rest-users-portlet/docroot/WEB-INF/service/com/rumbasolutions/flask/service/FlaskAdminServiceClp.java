@@ -203,7 +203,7 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 
 		_methodParameterTypes26 = new String[] {  };
 
-		_methodName27 = "isUserContentAdmin";
+		_methodName27 = "isAddContentAccess";
 
 		_methodParameterTypes27 = new String[] { "long" };
 	}
@@ -1313,7 +1313,7 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	}
 
 	@Override
-	public boolean isUserContentAdmin(long userId) {
+	public boolean isAddContentAccess(long userId) {
 		Object returnObj = null;
 
 		try {
