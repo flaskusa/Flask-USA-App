@@ -5,7 +5,7 @@
             <button ng-if="MyGameDayList==false" class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content>
+    <ion-content overflow-scroll="false">
 
       <a class="item item-full item-icon-left "ng-click="addNewSuppliesList()" href="#/app/createSupplies"ng-if="MyGameDayList==false">
           <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons" class="FlaskionIcons"></div>
