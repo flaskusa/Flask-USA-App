@@ -23,6 +23,10 @@
         if($scope.userId && $scope.userId!=0){
             $scope.addingInGroup = true;
         }
+        $scope.goToCreate=function(){
+            $state.go('app.createGroup');
+        }
+
         function isUserAvailableInGroup(groupId){
            return GroupService.getAllGroupMember(groupId).then(function (response) {
                 $scope.allMember = response;
