@@ -40,6 +40,7 @@
                 addTailgateParams.venmoAccountId = respData.data.venmoAccountId;
                 addTailgateParams.amountToPay = respData.data.amountToPay;
                 addTailgateParams.tailgateDate = respData.data.tailgateDate;
+                addTailgateParams.logoId = respData.data.logoId;
                 console.log(addTailgateParams);
                 $cookies.put('currtailGateId', tailgateId);
                 $state.go("app.add_my_tailgate");
