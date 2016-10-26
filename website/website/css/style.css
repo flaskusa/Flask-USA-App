@@ -659,6 +659,7 @@ h4{
     z-index: 9999;
     width: 335px;
     left: 6%;
+	top:10px; 
     color: #fffaf0;
     background: transparent;
     opacity: 0;
@@ -674,6 +675,27 @@ h4{
     transition-delay: 0s;
 }
 .tooltip-content span { display: block }
+.tooltip-content1 {
+    position: absolute;
+    z-index: 9999;
+    width: 335px;
+    left: 171%;
+	top:10px;
+    color: #fffaf0;
+    background: transparent;
+    opacity: 0;
+    margin: 0 0 20px -167px;
+    cursor: default;
+    -webkit-font-smoothing: antialiased;
+    -webkit-transition: opacity 0.3s 0.3s;
+    transition: opacity 0.3s 0.3s;
+}
+.tooltip:hover .tooltip-content1 {
+    opacity: 1;
+    -webkit-transition-delay: 0s;
+    transition-delay: 0s;
+}
+.tooltip-content1 span { display: block }
 .tooltip-text {
     overflow: hidden;
     -webkit-transform: scale3d(0,1,1);
@@ -764,7 +786,7 @@ SECTIONS
 	font-family:'Agency';
 	font-size:20px;
 }
-.features li { margin-bottom: 10px }
+.features li { margin-bottom: 20px }
 
 /*Clients feedbacks*/
 
@@ -904,7 +926,7 @@ h1, h2{
 
 #contact-form {
     float: left;
-    margin-top: 30px;
+    margin-top: 44px;
     width: 100%;
 }
 #contact-form input::-webkit-input-placeholder { color: #fff }
@@ -1022,4 +1044,10 @@ span .icon.appstore{
 
 #stickynav #nav li a.nav-active {
   color: #000;
+}
+.enquiry-form{
+	color: darkorange;
+    font-size: 28px;
+    margin-top: 70px !important;
+    margin-bottom: -13px;
 }
