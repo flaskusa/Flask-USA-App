@@ -21,7 +21,7 @@
         if(userDetail!=undefined) {
             $scope.userId = userDetail.data.userId;
             $scope.hideCheckBox=false;
-            $scope.agreedToTermsOfUse = true;
+            $scope.agreedToTermsOfUse =userDetail.data.isContentAdmin;
         }else{
             $scope.userId=0;
             $scope.hideCheckBox=true

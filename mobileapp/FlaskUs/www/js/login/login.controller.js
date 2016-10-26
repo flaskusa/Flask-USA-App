@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER','$localStorage'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER','$localStorage','$http'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER,$localStorage) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER,$localStorage,$http) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
@@ -40,13 +40,23 @@
                     if($scope.rememberUser==true){
                         $localStorage['RememberUser']=user;
                     }
-                    $cookies.putObject('CurrentUser', respData);
-                    var usercookie = $cookies.getObject('CurrentUser');
-                    $rootScope.userName = respData.data.firstName + respData.data.lastName;
-                    $rootScope.userEmailId = respData.data.emailAddress;
-                    $rootScope.show_login = true;
-                    document.login_form.reset();
-                    $state.go("app.user_navigation_menu");
+                    $http.get(SERVER.url+'/flask-rest-users-portlet.flaskadmin/is-add-content-access', { params:{ 'userId': respData.data.userId}}
+                    )
+                        .then(function success(response2) {
+                            respData.data.isContentAdmin= response2.data;
+                            $cookies.putObject('CurrentUser', respData);
+                            var usercookie = $cookies.getObject('CurrentUser');
+                            $rootScope.userName = respData.data.firstName + respData.data.lastName;
+                            $rootScope.userEmailId = respData.data.emailAddress;
+                            $rootScope.show_login = true;
+                            document.login_form.reset();
+                            $state.go("app.user_navigation_menu");
+
+                        }, function failure(response) {
+                            return $q.$inject(response);
+                            //add errror handling
+                        });
+
                 }
             });
         }

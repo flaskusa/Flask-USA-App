@@ -34,12 +34,22 @@
                         else if (respData.data.emailAddress == "") {
                         }
                         else {
-                            $cookies.putObject('CurrentUser', respData);
-                            var usercookie = $cookies.getObject('CurrentUser');
-                            $rootScope.userName = respData.data.firstName + respData.data.lastName;
-                            $rootScope.userEmailId = respData.data.emailAddress;
-                            $rootScope.show_login = true;
-                            $state.go("app.user_navigation_menu");
+                            $http.get(SERVER.url+'/flask-rest-users-portlet.flaskadmin/is-add-content-access', { params:{ 'userId': respData.data.userId}}
+                            )
+                                .then(function success(response2) {
+                                    respData.data.isContentAdmin= response2.data;
+                                    $cookies.putObject('CurrentUser', respData);
+                                    var usercookie = $cookies.getObject('CurrentUser');
+                                    $rootScope.userName = respData.data.firstName + respData.data.lastName;
+                                    $rootScope.userEmailId = respData.data.emailAddress;
+                                    $rootScope.show_login = true;
+                                    $state.go("app.user_navigation_menu");
+
+                                }, function failure(response) {
+                                    return $q.$inject(response);
+                                    //add errror handling
+                                });
+
                         }
                     });
                 }
