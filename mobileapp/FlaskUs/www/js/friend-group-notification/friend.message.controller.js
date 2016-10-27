@@ -13,7 +13,7 @@
             $scope.myTimeOut= $timeout(function () {
                 FriendsNotificationService.getMessageCount().then(function (response2) {
                     $scope.messageCount = response2;
-                    if ($scope.copyCount) {
+                    if ($scope.copyCount!=undefined && $scope.messageCount!=undefined) {
                         if ($scope.copyCount != $scope.messageCount) {
                             FriendsNotificationService.getMyAllMessages().then(function (response) {
                                 $scope.allMessages = response;
@@ -28,7 +28,7 @@
                 $scope.$on('$locationChangeStart', function() {
                     $timeout.cancel($scope.myTimeOut);
                 });
-            }, 5000);
+            }, 2000);
         }
         $scope.getTimeWithInterval=function(){
             $scope.messageTimeOut=$timeout(function(){
@@ -94,9 +94,9 @@
 
     })
     }
-        $timeout(function(){
+       /* $timeout(function(){
             $scope.getTimeWithInterval();
-        },10000);
+        },10000);*/
     }
 
 
