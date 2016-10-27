@@ -1019,7 +1019,6 @@ span .icon.appstore{
 }
 #stickynav {
   display: block;
-  height: 35px;
   width: 100%;
   z-index: 9999;
 }
