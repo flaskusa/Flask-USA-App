@@ -194,15 +194,15 @@ h4{
 }
 #preloader img {
     position: absolute;
-    left: 35%;
+    left: 38%;
     margin-left: -90px;
 }
 
 /*Map*/
 #map{
 	height: 400px;
-    width: 40%;
-    margin-left: 3%;
+    width: 36%;
+    margin-left: 9%;
 }
 .map_content{
 	border: 0;
