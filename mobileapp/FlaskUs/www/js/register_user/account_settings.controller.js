@@ -2,10 +2,10 @@
     'use strict';
     angular.module('flaskApp')
         .controller('account_settingsCtrl', account_settingsCtrl);
-    account_settingsCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService'];
+    account_settingsCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService','SERVER','$rootScope'];
 
     /* @ngInject */
-    function account_settingsCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService) {
+    function account_settingsCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService,SERVER,$rootScope) {
         var gender = true;
         $scope.country = [];
         $scope.state = [];
@@ -17,7 +17,10 @@
         $scope.level = [];
         $scope.concert = [];
         $scope.interest = [];
+        $scope.fileEntryId = 0;
         var interestArray;
+         $scope.userProfileUrl = "";
+         $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.isProfileSelectedToUpload = false;
 
         var usercookie = $cookies.getObject('CurrentUser');
@@ -26,6 +29,18 @@
         getUser();
         getCountry();
 
+        $scope.getUserProfile = function(userId) {
+            UserService.getUserProfile(userId).then(function(res) {
+                if(res.data.fileEntryId != undefined) {
+                    $scope.fileEntryId =  res.data.fileEntryId;
+                    $scope.userProfileUrl = $scope.profileUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                }
+            },function(err) {
+
+            })
+        }
+
+        $scope.getUserProfile($scope.userid);
         $scope.data1 = [
           {
               sport: "Basketball"
@@ -167,6 +182,9 @@
                 + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="gallery();">'
                 + 'Gallery'
                 + '</button>'
+                + "<button nav-clear class='button button-block button-positive pay_now_button' ng-click='removePicture();' ng-if= 'fileEntryId > 0'>"
+                + 'Remove Picture'
+                + '</button>'
                 + '</div>'
             + '</div>';
             $scope.cameraPopup = $ionicPopup.show({
@@ -179,14 +197,14 @@
 
         $scope.removePicture = function () {
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Remove tailgate logo ?',
+                title: 'Remove profile picture ?',
             });
 
             confirmPopup.then(function (res) {
                 if (res) {
                     $scope.cameraPopup.close();
-                    TailgateService.removeTailgateLogo().then(function (res) {
-                        $scope.tailgateLogoId = 0;
+                    UserService.removeProfilePicture($scope.userid).then(function (res) {
+                        $scope.fileEntryId = 0;
                     }, function (err) {
                         // show alert can not delete logo
                     })
@@ -214,7 +232,7 @@
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
-                $scope.setSelectedProfileURIToUpload(imageURI);
+                $scope.uploadFileToServer(imageURI);
             }, function (err) {
                 alert("error")
             });
@@ -259,53 +277,46 @@
                 correctOrientation: false
             };
             $cordovaCamera.getPicture(options).then(function (imageURI) {
-                $scope.setSelectedProfileURIToUpload(imageURI);
+                $scope.uploadFileToServer(imageURI);
             }, function (err) {
 
             });
 
         }
-        $scope.setSelectedProfileURIToUpload = function (imageURI) {
-            $scope.defaultProfileUrl = imageURI;
-            $scope.isProfileSelectedToUpload = true;
-            $scope.selectedProfileURIToUpload = imageURI;
-        };
-        $scope.reSetSelectedProfileURIToUpload = function () {
-            $scope.isProfileSelectedToUpload = false;
-            $scope.selectedProfileURIToUpload = '';
-        }
+        // $scope.setSelectedProfileURIToUpload = function (imageURI) {
+        //     $scope.defaultProfileUrl = imageURI;
+        //     $scope.isProfileSelectedToUpload = true;
+        //     $scope.selectedProfileURIToUpload = imageURI;
+        // };
+        // $scope.reSetSelectedProfileURIToUpload = function () {
+        //     $scope.isProfileSelectedToUpload = false;
+        //     $scope.selectedProfileURIToUpload = '';
+        // }
 
         
 
         $scope.uploadFileToServer = function (fileURL) {
             var options = {};
             options.fileKey = "file";
-            var params = {};
-            params.userid = $scope.userid;           
-            options.params = params;
+            var authdata = $cookies.get("authData");
+            var headers = {};
+            headers.Authorization = 'Basic ' + authdata;
+            options.headers = headers;
             $cordovaFileTransfer.upload(encodeURI(SERVER.url + '/flask-rest-users-portlet.flaskadmin/upload-user-profile'), fileURL, options)
                   .then(function (r) {
                       $rootScope.$broadcast('loading:hide')
-                      $scope.reSetSelectedProfileURIToUpload();
-                      $scope.downloadProgress = 0;
                       var data = $.parseJSON(r.response);
-                      var repositoryId = data.repositoryId;
-                      var folderId = data.folderId;
-                      var title = data.title;
-                      $scope.setLogoImageUrl(repositoryId, folderId, title);
+                      $scope.fileEntryId =  data.fileEntryId;
+                      $scope.setProfilePicture(data.groupId, data.uuid);
                   }, function (error) {
-                      $scope.reSetSelectedProfileURIToUpload();
                       $rootScope.$broadcast('loading:hide')
-                      alert("An error has occurred: Code = " + error.code);
-                      console.log("upload error source " + error.source);
-                      console.log("upload error target " + error.target);
+                      alert("An error has occurred");
                   }, function (progress) {
-                      
-
                   });
         }
-        $scope.setLogoImageUrl = function (repositoryId, folderId, title) {
-            $scope.tailgateLogoUrl = SERVER.hostName + "documents/" + repositoryId + "/" + folderId + "/" + title;
+        
+        $scope.setProfilePicture = function (groupId, uuid) {
+            $scope.userProfileUrl = $scope.profileUrl + uuid + "&groupId="+groupId;
         }
 
         $scope.updateUserInfo = function (user, userId) {

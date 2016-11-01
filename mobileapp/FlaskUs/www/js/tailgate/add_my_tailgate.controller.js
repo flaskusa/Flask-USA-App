@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicTabsDelegate','$ionicLoading'];
+    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicTabsDelegate', '$ionicLoading'];
 
     / @ngInject /
-    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicTabsDelegate,$ionicLoading) {
+    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicTabsDelegate, $ionicLoading) {
         //for adding tailgate
         var tailgateId = $cookies.get("currtailGateId");
         var self = this;
@@ -27,10 +27,10 @@
         $scope.searchString = 'a';
         $scope.showSavedMarker = false;
         $scope.taligateMarkers = "";
-        if(tailgateId > 0) {
+        if (tailgateId > 0) {
             $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
         }
-       
+
         if ($scope.taligateMarkers == undefined || $scope.taligateMarkers.tailgatemarkerid == undefined) {
             $scope.latitude = '42.34';
             $scope.longitude = '-83.0456';
@@ -82,7 +82,7 @@
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
-        
+
         $scope.initialize = function () {
             var x = new Date();
             var hour = x.getHours();
@@ -99,13 +99,14 @@
                 venmoAccountId: '',
                 amountToPay: '',
                 tailgateId: '',
-                startTime: new Date(year,month,day,hour,minute,0),
-                endTime: new Date(year,month,day,hour,minute,0)
+                startTime: new Date(year, month, day, hour, minute, 0),
+                endTime: new Date(year, month, day, hour, minute, 0)
             }
             checkTailgateId();
             if (tailgateId != undefined && tailgateId > 0) {
-                  getTailgaters(tailgateId);
-                if($scope.tailgateLogoId > 0) {
+                $scope.isUserTailgateAdmin(tailgateId);
+                getTailgaters(tailgateId);
+                if ($scope.tailgateLogoId > 0) {
                     $scope.getTailGateLogo(tailgateId);
                 }
             } else {
@@ -289,12 +290,12 @@
             $cookies.remove('newtailgatedata');
             $scope.newUpdate = { 'amountToPay': tailgateDetails.amountToPay, 'venmoAccountId': tailgateDetails.venmoAccountId };
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
-            var startTimeInword = $filter('date')(tailgateDetails.startTime,"hh:mm a")
+            var startTimeInword = $filter('date')(tailgateDetails.startTime, "hh:mm a")
             var startTimeInMilis = Date.parse($scope.tailgateDate + " " + startTimeInword)
-            var endTimeInword  = $filter('date')(tailgateDetails.endTime,"hh:mm a")
-        var endTimeInMilis =    Date.parse($scope.tailgateDate + " " + endTimeInword)
+            var endTimeInword = $filter('date')(tailgateDetails.endTime, "hh:mm a")
+            var endTimeInMilis = Date.parse($scope.tailgateDate + " " + endTimeInword)
             $scope.selectedtime1 = getTailgateTime(new Date(startTimeInMilis));
-            $scope.selectedtime2 = getTailgateTime(new Date(endTimeInMilis)); 
+            $scope.selectedtime2 = getTailgateTime(new Date(endTimeInMilis));
             $scope.tailgateLogoId = tailgateDetails.logoId;
             $scope.addTailgateParams = {
                 tailgateName: tailgateDetails.tailgateName,
@@ -389,6 +390,10 @@
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
+                $("#myImage").attr("src","");
+                $("#myImage").attr("src", imageURI);
+                $location.hash('bottom');
+                $anchorScroll();
                 $scope.setSelectedImageURIToUpload(imageURI);
             }, function (err) {
                 alert("error")
@@ -433,6 +438,10 @@
                 correctOrientation: false
             };
             $cordovaCamera.getPicture(options).then(function (imageURI) {
+                $("#myImage").attr("src","");
+                $("#myImage").attr("src", imageURI);
+                $location.hash('bottom');
+                $anchorScroll();
                 $scope.setSelectedImageURIToUpload(imageURI);
             }, function (err) {
 
@@ -449,14 +458,19 @@
             $scope.selectedImageURIToUpload = '';
         }
 
+        $scope.isUserTailgateAdmin = function (tailgateId) {
+            TailgateService.isUserTailgateAdmin(tailgateId).then(function (respData) {
+                $scope.isTailgateAdmin = respData.data;
+            });
+        };
         $scope.uploadFileToServer = function (fileURL, tailgateId, message) {
             $rootScope.$broadcast('loading:show');
             var options = {};
             options.fileKey = "file";
             var params = {};
             params.tailgateId = tailgateId;
-            var authdata = $cookies.get("authData");
             options.params = params;
+            var authdata = $cookies.get("authData");
             var headers = {};
             headers.Authorization = 'Basic ' + authdata;
             options.headers = headers;
@@ -466,11 +480,14 @@
                     $scope.reSetSelectedImageURIToUpload();
                     $scope.downloadProgress = 0;
                     var data = $.parseJSON(r.response);
-                    var repositoryId = data.repositoryId;
-                    var folderId = data.folderId;
-                    var title = data.title;
+                    var uuid = data.uuid;
+                    var groupId = data.groupId;
+                    $scope.tailgateLogoId = 1;
+                    // var title = data.title;
                     showToastMessage(message);
-                    $scope.setLogoImageUrl(repositoryId, folderId, title);
+                   
+                    $scope.setLogoImageUrl(groupId, uuid);
+
                 }, function (error) {
                     $scope.reSetSelectedImageURIToUpload();
                     $rootScope.$broadcast('loading:hide')
@@ -482,14 +499,12 @@
                 });
         }
 
-        $scope.setLogoImageUrl = function (repositoryId, folderId, title) {
-            console.log("paramteres" + repositoryId + " " + " " + folderId + title)
-            $scope.tailgateLogoUrl = SERVER.hostName + "documents/" + repositoryId + "/" + folderId + "/" + title;
-            // $scope.tailgateLogoUrl = encodeURI($scope.tailgateLogoUrl);
+        $scope.setLogoImageUrl = function (groupId, uuid) {
+            $scope.tailgateLogoUrl = SERVER.hostName + "c/document_library/get_file?uuid=" + uuid + "&groupId=" + groupId;
         }
         //add new tailgate
         $scope.addmyTailgate = function (tailgatedata) {
-            if(!validateTailgate(tailgatedata)){
+            if (!validateTailgate(tailgatedata)) {
                 console.log("Invalid date");
             }
             tailgatedata = angular.copy(tailgatedata);
@@ -509,8 +524,8 @@
                     $cookies.putObject('newtailgatedata', respdata);
                     if ($scope.isImageSelectedToUpload) {
                         $scope.uploadFileToServer($scope.selectedImageURIToUpload, tailgatedata.tailgateId, 'Tailgate updated successfully');
-                    }else{
-                         showToastMessage('Tailgate updated successfully');
+                    } else {
+                        showToastMessage('Tailgate updated successfully');
                     }
                 });
             }
@@ -518,13 +533,15 @@
                 tailgatedata.logoId = 0;
                 TailgateService.addTailgate(tailgatedata).then(function (respData) {
                     if ($scope.isImageSelectedToUpload) {
-                        $scope.uploadFileToServer($scope.selectedImageURIToUpload, respData.data.tailgateId,'Tailgate created successfully');
+                        $scope.uploadFileToServer($scope.selectedImageURIToUpload, respData.data.tailgateId, 'Tailgate created successfully');
                     } else {
-                         showToastMessage('Tailgate created. Tap next tab to add location');
+                        showToastMessage('Tailgate created. Tap next tab to add location');
                     }
                     tailgateId = respData.data.tailgateId;
 
                     $scope.addTailgateParams.tailgateId = respData.data.tailgateId;
+                    $scope.addTailgateParams.logoId = respData.data.logoId;
+
                     //                    $cookies.put('newtailgateId', respData.data.tailgateId);
                     $cookies.putObject('newtailgatedata', respData.data);
                 });
@@ -532,10 +549,10 @@
         }
 
         function showToastMessage(message) {
-             $ionicLoading.show({ template: message, noBackdrop: true, duration: 3000 });
+            $ionicLoading.show({ template: message, noBackdrop: true, duration: 3000 });
         }
 
-        function validateTailgate (data) {
+        function validateTailgate(data) {
             return true;
         }
         //update tailgate
@@ -545,7 +562,7 @@
             updateData.amountToPay = parseFloat(newUpdate.amountToPay);
             console.log(updateData);
             TailgateService.updateTailgateInfo(updateData).then(function (respdata) {
-               showToastMessage('Payment details saved');
+                showToastMessage('Payment details saved');
             });
             //fnPayNow();
         }
@@ -651,8 +668,8 @@
             addUserparams.tailgateId = tailgateId;
             addUserparams.isPaid = 0;
             addUserparams.paymentMode = "None";
-            addUsertoTailgate(addUserparams,index);
-            
+            addUsertoTailgate(addUserparams, index);
+
         }
         //get all groups either created by user or is a member of particular group.
         function getAllGroups() {
@@ -663,9 +680,9 @@
             });
         }
         //add user info to current tailgate
-        function addUsertoTailgate(userparams,index) {
+        function addUsertoTailgate(userparams, index) {
             TailgateService.addcurrentUser(userparams).then(function (respData) {
-                if(index != undefined) {
+                if (index != undefined) {
                     $scope.myFriends.splice(index, 1);
                 }
                 getTailgaters(tailgateId);
@@ -673,7 +690,7 @@
         }
         $scope.getUseData = [];
         //get all the members of the group
-        $scope.getusersofGroup = function (groupId,index) {
+        $scope.getusersofGroup = function (groupId, index) {
             TailgateService.getGroupUsers(groupId).then(function (respData) { //get data of group from group id
                 for (var i = 0; i < respData.length; i++) {
                     $scope.getUseData.push(respData[i]); //to get users of particular group
@@ -688,7 +705,7 @@
                     adduser.paymentMode = "None";
                     addUsertoTailgate(adduser);
                 }
-                $scope.allGroups.splice(index,1);
+                $scope.allGroups.splice(index, 1);
                 console.log($scope.getUseData)
                 $scope.groupUserDetails = respData;
             });
@@ -731,14 +748,14 @@
         $scope.addSupplyItems = function () {
             $scope.items = [];
             angular.forEach($scope.selectedSupplyListItems, function (val, idx) {
-                
+
                 var tempItemName;
-                if(val.itemAssignedUserId > 0) {
+                if (val.itemAssignedUserId > 0) {
                     tempItemName = val.supplyItemName;
-                    if(tempItemName.indexOf("/") > -1){
-                    tempItemName = encodeURIComponent(tempItemName);
+                    if (tempItemName.indexOf("/") > -1) {
+                        tempItemName = encodeURIComponent(tempItemName);
                     }
-                     $scope.items.push(tempItemName);
+                    $scope.items.push(tempItemName);
                 }
             })
             itemArray = $scope.items.toString();
@@ -752,18 +769,18 @@
 
 
         $scope.associateUserWithSupplyItem = function () {
-            angular.forEach($scope.alltailgateSupplyItem,function(value,index) {
+            angular.forEach($scope.alltailgateSupplyItem, function (value, index) {
                 value.itemAssignedUserId = getAssigenUserId(decodeURIComponent(value.supplyListItemName));
                 $scope.updateSupplyItems(value);
             })
 
 
-           
+
         };
 
         function getAssigenUserId(supplyItemName) {
             var userId;
-             angular.forEach($scope.selectedSupplyListItems, function (value, idx) {
+            angular.forEach($scope.selectedSupplyListItems, function (value, idx) {
                 if (value.itemAssignedUserId > 0 && supplyItemName == value.supplyItemName) {
                     userId = value.itemAssignedUserId;
                     return;
@@ -787,11 +804,11 @@
         $scope.getTailGateLogo = function (tailgateId) {
             TailgateService.getTailgateLogo(tailgateId).then(function (respData) {
                 $scope.tailgateLogoInfo = respData.data;
-                $scope.setLogoImageUrl($scope.tailgateLogoInfo.repositoryId, $scope.tailgateLogoInfo.folderId, $scope.tailgateLogoInfo.title);
+                $scope.setLogoImageUrl($scope.tailgateLogoInfo.groupId, $scope.tailgateLogoInfo.uuid);
             });
         };
 
-      
+
         $scope.toggleItem = function () {
             var supplyItem = $("#supplyItemDiv");
             $scope.hideItem = !$scope.hideItem;
@@ -873,14 +890,14 @@
             })
         };
         function getTailgateTime(date) {
-             var x = new Date(date);
+            var x = new Date(date);
             var hour = x.getHours();
             var minute = x.getMinutes();
             var seconds = x.getSeconds();
             var year = x.getYear() + 1900;
             var month = x.getMonth();
             var day = x.getDate();
-            return new Date(year,month,day,hour,minute,0);
+            return new Date(year, month, day, hour, minute, 0);
         }
         $scope.initialize();
 

@@ -229,9 +229,14 @@
                 .then(function (r) {
                     var data = $.parseJSON(r.response);
                      $rootScope.$broadcast('loading:hide')
-                    //  data = $.parseJSON(data);
-                    console.log("Image Dta is"+JSON.stringify(data));
-                    $scope.myTailgateImages.push(data);
+                   var tempData = {};
+                   tempData.imageGroupId = data.groupId;
+                   tempData.imageTitle = data.title;
+                   tempData.tailgateId = tailGateId;
+                   tempData.tailgateImageId = data.fileEntryId;
+                   tempData.userId = data.userId;
+                   tempData.imageUUID = data.uuid;
+                    $scope.myTailgateImages.push(tempData);
                 }, function (error) {
                  $rootScope.$broadcast('loading:hide')
                     console.log("upload error source " + error.source);

@@ -11,14 +11,12 @@
                 <form class="" novalidate name="tailgateForm">
                     
                     <div class="list add_my_tailgate">
-                        <div class="list tailgatelogoContainer">
-                            <div class="item item-image">
-                                <img ng-src="{{defaultImageUrl}}" id="myImage" class="tailgateLogoImg" ng-if="tailgateLogoId == 0" />
-                                <img ng-src="{{tailgateLogoUrl}} " id="myImage " ng-if="tailgateLogoId>0" class="tailgateLogoImg" alt="Image not found" />
+                        <div style="padding:10px">
+                            <div class="item-image">
+                                <img ng-src="{{defaultImageUrl}}" id="myImage" class="tailgateLogoImg" ng-if="tailgateLogoId == 0"  ng-click="show();"/>
+                                <img ng-src="{{tailgateLogoUrl}} " id="myImage " ng-if="tailgateLogoId>0" class="tailgateLogoImg" alt="Image not found" ng-click="show();" />
                             </div>
-                            <a class="item text-center disabled" ng-click="show();" >
-                                Tap to add Picture
-                            </a>
+                          
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Tailgate Name</span>

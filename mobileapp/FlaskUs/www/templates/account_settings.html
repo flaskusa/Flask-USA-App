@@ -9,7 +9,8 @@
                 <div class="list acc_settings1">
                     <div class="list card add_profile_div">
                         <div class="item item-image add_profile_img_div">
-                            <img src="img/add_photo.png" class="profilepicAvatar add_profile_img" ng-click="show()">
+                            <img src = "img/add_photo.png" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId ==  0">
+                            <img ng-src="{{userProfileUrl}}" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId > 0">
                         </div>
                     </div>
                     <label class="item item-input item-floating-label">

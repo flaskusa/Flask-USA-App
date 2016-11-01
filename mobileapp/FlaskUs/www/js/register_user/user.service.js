@@ -14,6 +14,8 @@
         var getCountriesURL = "flask-rest-users-portlet.flaskadmin/get-countries";
         var getRegionURL = "flask-rest-users-portlet.flaskadmin/get-region";
         var uploadUserProfileURL = "flask-rest-users-portlet.flaskadmin/upload-user-profile";
+        var getUserProfileUrl = "/flask-rest-users-portlet.flaskadmin/get-my-file-entry";
+        var removeProfilePictureUrl = "/flask-rest-users-portlet.flaskadmin/delete-my-file-entry";
 
         var userServices = {
             saveUser: saveUser,
@@ -22,7 +24,9 @@
             updateUser: updateUser,
             getCountries: getCountries,
             getRegion: getRegion,
-            uploadProfile: uploadProfile
+            uploadProfile: uploadProfile,
+            getUserProfile : getUserProfile,
+            removeProfilePicture :removeProfilePicture 
         }
 
         function saveUser(user, gender, srcname) {
@@ -50,6 +54,23 @@
                 //add errror handling 
                 console.log("failed");
             });
+        }
+
+        function getUserProfile(userId) {
+            return $http.get(SERVER.url + getUserProfileUrl, { params: { 'userId': userId } })
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    console.log("failed");
+                });
+        }
+        function removeProfilePicture (userId) {
+             return $http.get(SERVER.url + removeProfilePictureUrl, { params: { 'userId': userId } })
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    console.log("failed");
+                });
         }
 
         function getUserbyEmail(email) {
