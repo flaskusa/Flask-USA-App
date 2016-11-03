@@ -348,7 +348,7 @@
                 + '</div>';
             $scope.cameraPopup = $ionicPopup.show({
                 template: customTemplate,
-                title: 'Choose Picture',
+                 cssClass : 'no-popup-header',
                 scope: $scope
             });
             IonicClosePopupService.register($scope.cameraPopup);

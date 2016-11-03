@@ -17,10 +17,21 @@
         $scope.level = [];
         $scope.concert = [];
         $scope.interest = [];
-        $scope.fileEntryId = 0;
         var interestArray;
          $scope.userProfileUrl = "";
          $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
+        $scope.isMobile = {
+            Android: function () {
+                return ionic.Platform.isAndroid();
+            },
+            iOS: function () {
+                return ionic.Platform.isIOS();
+            },
+            Windows: function () {
+                return ionic.Platform.isWindowsPhone();
+            }
+        };
+
         $scope.isProfileSelectedToUpload = false;
 
         var usercookie = $cookies.getObject('CurrentUser');
@@ -34,6 +45,8 @@
                 if(res.data.fileEntryId != undefined) {
                     $scope.fileEntryId =  res.data.fileEntryId;
                     $scope.userProfileUrl = $scope.profileUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                }else {
+                     $scope.fileEntryId = 0;
                 }
             },function(err) {
 
@@ -189,7 +202,7 @@
             + '</div>';
             $scope.cameraPopup = $ionicPopup.show({
                 template: customTemplate,
-                title: 'Choose Picture',
+                cssClass : 'no-popup-header',
                 scope: $scope
             });
             IonicClosePopupService.register($scope.cameraPopup);
@@ -214,10 +227,14 @@
             });
             IonicClosePopupService.register(confirmPopup);
         }
-        //camera plugin
+
         $scope.camera = function () {
             $scope.cameraPopup.close();
-            $scope.checkPermission();
+            if ($scope.isMobile.Android()) {
+                $scope.checkPermission();
+            } else if ($scope.isMobile.iOS()) {
+                $scope.openCamera();
+            }
         }
         $scope.openCamera = function () {
             var options = {
@@ -273,7 +290,7 @@
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                 allowEdit: true,
                 popoverOptions: CameraPopoverOptions,
-                saveToPhotoAlbum: true,
+                saveToPhotoAlbum: false,
                 correctOrientation: false
             };
             $cordovaCamera.getPicture(options).then(function (imageURI) {
@@ -283,17 +300,6 @@
             });
 
         }
-        // $scope.setSelectedProfileURIToUpload = function (imageURI) {
-        //     $scope.defaultProfileUrl = imageURI;
-        //     $scope.isProfileSelectedToUpload = true;
-        //     $scope.selectedProfileURIToUpload = imageURI;
-        // };
-        // $scope.reSetSelectedProfileURIToUpload = function () {
-        //     $scope.isProfileSelectedToUpload = false;
-        //     $scope.selectedProfileURIToUpload = '';
-        // }
-
-        
 
         $scope.uploadFileToServer = function (fileURL) {
              $rootScope.$broadcast('loading:show');

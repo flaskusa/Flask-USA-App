@@ -27,6 +27,17 @@
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
+        $scope.isMobile = {
+            Android: function () {
+                return ionic.Platform.isAndroid();
+            },
+            iOS: function () {
+                return ionic.Platform.isIOS();
+            },
+            Windows: function () {
+                return ionic.Platform.isWindowsPhone();
+            }
+        };
 
 
         function getMyTailgate() {
@@ -149,16 +160,21 @@
                 + '</div>';
             $scope.cameraPopup = $ionicPopup.show({
                 template: customTemplate,
-                title: 'Choose Picture from:-',
+                 cssClass : 'no-popup-header',
                 scope: $scope
             });
             IonicClosePopupService.register($scope.cameraPopup);
         };
 
-        $scope.camera = function () {
+         $scope.camera = function () {
             $scope.cameraPopup.close();
-            $scope.checkPermission();
+            if ($scope.isMobile.Android()) {
+                $scope.checkPermission();
+            } else if ($scope.isMobile.iOS()) {
+                $scope.openCamera();
+            }
         }
+
         $scope.openCamera = function () {
             var options = {
                 quality: 50,
@@ -208,9 +224,13 @@
 
         $scope.gallery = function () {
             $scope.cameraPopup.close();
-            var options = {
+           var options = {
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
+                allowEdit: true,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false,
+                correctOrientation: false
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
