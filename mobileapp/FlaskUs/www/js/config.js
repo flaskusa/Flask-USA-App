@@ -4,11 +4,11 @@
     /*flaskAppConfig.value("SERVER", {
         "hostName": "http://www.flaskus.com/",
         "url": "http://www.flaskus.com/api/jsonws/",
-        "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
-        "companyId":20155
+        "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?"
+       
     })*/
     flaskAppConfig.value("SERVER", {
-        "hostName": "http://52.44.202.166/",
+        "hostName": "http://52.44.202.166/", 
         "url": "http://52.44.202.166/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?"
     })

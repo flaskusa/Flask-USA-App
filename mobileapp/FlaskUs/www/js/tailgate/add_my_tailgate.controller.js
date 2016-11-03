@@ -28,7 +28,7 @@
         $scope.showSavedMarker = false;
         $scope.taligateMarkers = "";
         if (tailgateId > 0) {
-            $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
+            getTailgateMarkers(tailgateId);
         }
 
         if ($scope.taligateMarkers == undefined || $scope.taligateMarkers.tailgatemarkerid == undefined) {
@@ -81,6 +81,12 @@
 
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
+        }
+
+        function getTailgateMarkers(tailGateId) {
+            TailgateService.getMapMarkers(tailGateId).then(function (respData) {
+               $scope.taligateMarkers =  respData.data;
+            });
         }
 
         $scope.initialize = function () {
@@ -306,8 +312,7 @@
                 amountToPay: tailgateDetails.amountToPay,
                 tailgateId: tailgateDetails.tailgateId,
                 startTime: $scope.selectedtime1,
-                endTime: $scope.selectedtime2,
-                logoId: tailgateDetails.logoId
+                endTime: $scope.selectedtime2
             }
             $scope.editData = {
                 tailgateId: tailgateDetails.tailgateId,
@@ -319,8 +324,8 @@
                 amountToPay: tailgateDetails.amountToPay,
                 tailgateDate: tailgateDetails.tailgateDate,
                 startTime: tailgateDetails.startTime,
-                endTime: tailgateDetails.endTime,
-                logoId: tailgateDetails.logoId
+                endTime: tailgateDetails.endTime
+
             }
             $cookies.putObject('newtailgatedata', $scope.editData);
         };
@@ -390,13 +395,13 @@
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
-                $("#myImage").attr("src","");
-                $("#myImage").attr("src", imageURI);
-                $location.hash('bottom');
-                $anchorScroll();
-                $scope.setSelectedImageURIToUpload(imageURI);
+                if (tailgateId && tailgateId > 0) {
+                    $scope.uploadFileToServer(imageURI, tailgateId, "Image Uploaded");
+                } else {
+                    $("#myImage").attr("src", imageURI);
+                    $scope.setSelectedImageURIToUpload(imageURI);
+                }
             }, function (err) {
-                alert("error")
             });
         };
         $scope.checkPermission = function () {
@@ -438,11 +443,12 @@
                 correctOrientation: false
             };
             $cordovaCamera.getPicture(options).then(function (imageURI) {
-                $("#myImage").attr("src","");
-                $("#myImage").attr("src", imageURI);
-                $location.hash('bottom');
-                $anchorScroll();
-                $scope.setSelectedImageURIToUpload(imageURI);
+                if (tailgateId && tailgateId > 0) {
+                    $scope.uploadFileToServer(imageURI, tailgateId, "Image Uploaded");
+                } else {
+                    $("#myImage").attr("src", imageURI);
+                    $scope.setSelectedImageURIToUpload(imageURI);
+                }
             }, function (err) {
 
             });
@@ -478,16 +484,13 @@
                 .then(function (r) {
                     $rootScope.$broadcast('loading:hide')
                     $scope.reSetSelectedImageURIToUpload();
-                    $scope.downloadProgress = 0;
                     var data = $.parseJSON(r.response);
                     var uuid = data.uuid;
                     var groupId = data.groupId;
                     $scope.tailgateLogoId = 1;
                     // var title = data.title;
-                    showToastMessage(message);
-                   
                     $scope.setLogoImageUrl(groupId, uuid);
-
+                    showToastMessage(message);
                 }, function (error) {
                     $scope.reSetSelectedImageURIToUpload();
                     $rootScope.$broadcast('loading:hide')
@@ -522,11 +525,7 @@
             if (tailgatedata.tailgateId && tailgatedata.tailgateId > 0) {
                 TailgateService.updateTailgateInfo(tailgatedata).then(function (respdata) {
                     $cookies.putObject('newtailgatedata', respdata);
-                    if ($scope.isImageSelectedToUpload) {
-                        $scope.uploadFileToServer($scope.selectedImageURIToUpload, tailgatedata.tailgateId, 'Tailgate updated successfully');
-                    } else {
-                        showToastMessage('Tailgate updated successfully');
-                    }
+                    showToastMessage('Tailgate updated successfully');
                 });
             }
             else {
@@ -538,18 +537,17 @@
                         showToastMessage('Tailgate created. Tap next tab to add location');
                     }
                     tailgateId = respData.data.tailgateId;
-
                     $scope.addTailgateParams.tailgateId = respData.data.tailgateId;
                     $scope.addTailgateParams.logoId = respData.data.logoId;
-
-                    //                    $cookies.put('newtailgateId', respData.data.tailgateId);
                     $cookies.putObject('newtailgatedata', respData.data);
                 });
             }
         }
 
         function showToastMessage(message) {
-            $ionicLoading.show({ template: message, noBackdrop: true, duration: 3000 });
+            if (message.length > 0) {
+                $ionicLoading.show({ template: message, noBackdrop: true, duration: 2000 });
+            }
         }
 
         function validateTailgate(data) {
@@ -585,60 +583,6 @@
                 $scope.eventDetails = respData.Events;
             });
         }
-        //to add date popup in form
-        $scope.selectedtime1;
-
-
-        $scope.openTimePicker1 = function () {
-            var startTime = Date.parse($scope.tailgateDate + " " + $scope.addTailgateParams.startTime); // Your timezone!
-            var ipObj1 = {
-
-                callback: function (val) {
-                    if (typeof (val) === 'undefined') {
-                    } else {
-
-                        var selectedTime = new Date(val * 1000);
-                        var currentHrs = selectedTime.getUTCHours();
-                        var currMinute = selectedTime.getUTCMinutes();
-                        currMinute = currMinute == 0 ? '00' : selectedTime.getUTCMinutes();
-                        if (currentHrs > 12) {
-                            $scope.addTailgateParams.startTime = currentHrs - 12 + ':' + currMinute + " PM";
-                        } else {
-                            $scope.addTailgateParams.startTime = currentHrs + ':' + currMinute + " AM";
-                        }
-                    }
-                },
-                inputTime: (((new Date(startTime)).getHours() * 60 * 60) + ((new Date(startTime)).getMinutes() * 60)),
-                format: 12,
-                step: 5,
-                setLabel: 'Set'
-            };
-            ionicTimePicker.openTimePicker(ipObj1);//for start timepicker
-        };
-        $scope.openTimePicker2 = function () {
-            var endTime = Date.parse($scope.tailgateDate + " " + $scope.addTailgateParams.endTime); // Your timezone!
-            var ipObj2 = {
-                callback: function (val) {
-                    if (typeof (val) === 'undefined') {
-                    } else {
-                        var selectedTime = new Date(val * 1000);
-                        var currentHrs = selectedTime.getUTCHours();
-                        var currMinute = selectedTime.getUTCMinutes();
-                        currMinute = currMinute == 0 ? '00' : selectedTime.getUTCMinutes();
-                        if (currentHrs > 12) {
-                            $scope.addTailgateParams.endime = currentHrs - 12 + ':' + currMinute + " PM";
-                        } else {
-                            $scope.addTailgateParams.endime = currentHrs + ':' + currMinute + " AM";
-                        }
-                    }
-                },
-                inputTime: (((new Date(endTime)).getHours() * 60 * 60) + ((new Date(endTime)).getMinutes() * 60)),
-                format: 12,
-                step: 5,
-                setLabel: 'Set'
-            };
-            ionicTimePicker.openTimePicker(ipObj2);// for end timepicker
-        };
 
         //for adding attendees in new tailgate
         $scope.myTailgaters = [];

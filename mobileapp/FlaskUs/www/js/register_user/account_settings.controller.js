@@ -308,6 +308,7 @@
                       var data = $.parseJSON(r.response);
                       $scope.fileEntryId =  data.fileEntryId;
                       $scope.setProfilePicture(data.groupId, data.uuid);
+                      showToastMessage("Profile Picture updated");
                   }, function (error) {
                       $rootScope.$broadcast('loading:hide')
                       alert("An error has occurred");
@@ -358,6 +359,11 @@
             };
             ionicDatePicker.openDatePicker(ipObj1);
         };
+        function showToastMessage(message) {
+            if (message.length > 0) {
+                $ionicLoading.show({ template: message, noBackdrop: true, duration: 2000 });
+            }
+        }
     }
 })();
 

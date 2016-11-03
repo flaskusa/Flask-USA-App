@@ -4,14 +4,17 @@
             <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="goBack();"></button>
         </ion-nav-buttons>
         <ion-nav-buttons side="right">
-            <button class="button button-icon button-clear ion-edit edit_tailgate" ng-click="checkTailgateId();"  ng-show="isTailgateAdmin"></button>
+            <button class="button button-icon button-clear ion-edit edit_tailgate" ng-click="checkTailgateId();" ng-show="isTailgateAdmin"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content overflow-scroll="false">
         <div class="list tab1">
             <!-- Tab 1 content -->
             <div class="divImage">
-                <img class="myTailgatetopImg" src="img/flask_images/Fotolia_20387372_Subscription_Monthly_M.jpg" />
+
+                <img class="myTailgatetopImg" src="img/flask_images/Fotolia_20387372_Subscription_Monthly_M.jpg" ng-if="tailgateLogoId == 0"
+                />
+                <img ng-src="{{tailgateLogoUrl}} " class="myTailgatetopImg" alt="Image not found" ng-if="tailgateLogoId>0" />
             </div>
             <div class="mytailgate_Heading">
                 <h3><span class="overlineStyle">{{myTailgate.tailgateName}}</span></h3>
@@ -49,10 +52,11 @@
                                 <ion-scroll direction="x" class="tailgate_thumb">
                                     <span ng-repeat="images in myTailgateImages">
                                     <span data-ng-click="removeTailgateImage($index,images.tailgateImageId)" ng-if = "isTailgateAdmin"><i  class="icon ion-close-circled crossIconTailgate"></i></span>
-                                    <img  ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}" class="list-thumbnail thumb-size" alt="Image not found" onError="this.src = 'img/FlaskRed.png';"/>
-                                </span>
-                                </ion-scroll>
-                            </a>
+                        <img ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}"  class="list-thumbnail thumb-picturs-size " alt="Image not found"
+                            onError="this.src = 'img/FlaskRed.png';" />
+                        </span>
+                        </ion-scroll>
+                        </a>
                         </span>
                     </div>
                 </div>
@@ -75,14 +79,17 @@
                 </div>
                 <div class="list">
                     <div class="messageList" ng-repeat="data in messageUser">
-                        <img class="default_img" ng-src='img/default-profilepic-copy.png'><p class="profile_name">@{{data.username}}_User</p>
-                                    <div><p class="message_username ">@{{data.username}}_User</p><p class="messageTxt ">{{data.message}}_message</p><br></div>
-                                </div>
-                            </div>
-                        </span>
+                        <img class="default_img" ng-src='img/default-profilepic-copy.png'>
+                        <p class="profile_name">@{{data.username}}_User</p>
+                        <div>
+                            <p class="message_username ">@{{data.username}}_User</p>
+                            <p class="messageTxt ">{{data.message}}_message</p><br></div>
                     </div>
                 </div>
+                </span>
             </div>
+        </div>
+        </div>
         </div>
     </ion-content>
 </ion-view>

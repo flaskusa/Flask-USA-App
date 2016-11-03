@@ -26,7 +26,6 @@
             });
         }
         $scope.editTailgate = function (tailgateId, index) {
-            console.log(tailgateId, index);
             var addTailgateParams = {}
             TailgateService.getTailgate(tailgateId).then(function (respData) {
                 console.log(respData.data);
