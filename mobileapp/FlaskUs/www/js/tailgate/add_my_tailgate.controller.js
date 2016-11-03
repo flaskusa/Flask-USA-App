@@ -31,14 +31,7 @@
             getTailgateMarkers(tailgateId);
         }
 
-        if ($scope.taligateMarkers == undefined || $scope.taligateMarkers.tailgatemarkerid == undefined) {
-            $scope.latitude = '42.34';
-            $scope.longitude = '-83.0456';
-        } else {
-            $scope.latitude = $scope.taligateMarkers.latitude;
-            $scope.longitude = $scope.taligateMarkers.longitude
-            $scope.showSavedMarker = true;
-        }
+
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
         $scope.tailgateSupplyList = [];
@@ -85,7 +78,16 @@
 
         function getTailgateMarkers(tailGateId) {
             TailgateService.getMapMarkers(tailGateId).then(function (respData) {
-               $scope.taligateMarkers =  respData.data;
+                $scope.taligateMarkers = respData.data;
+                if ($scope.taligateMarkers == undefined || $scope.taligateMarkers.tailgatemarkerid == undefined) {
+                    $scope.latitude = '42.34';
+                    $scope.longitude = '-83.0456';
+                } else {
+                    $scope.latitude = $scope.taligateMarkers.latitude;
+                    $scope.longitude = $scope.taligateMarkers.longitude
+                    $scope.showSavedMarker = true;
+                }
+                callMap($scope.latitude, $scope.longitude);
             });
         }
 
@@ -131,7 +133,7 @@
         };
 
 
-        callMap($scope.latitude, $scope.longitude);
+
         //calling map on load and on events change
         function callMap(currlatitude, currlongitude) {
             angular.extend($scope, {
@@ -348,7 +350,7 @@
                 + '</div>';
             $scope.cameraPopup = $ionicPopup.show({
                 template: customTemplate,
-                 cssClass : 'no-popup-header',
+                cssClass: 'no-popup-header',
                 scope: $scope
             });
             IonicClosePopupService.register($scope.cameraPopup);
@@ -439,7 +441,7 @@
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
                 allowEdit: true,
                 popoverOptions: CameraPopoverOptions,
-                saveToPhotoAlbum: true,
+                saveToPhotoAlbum: false,
                 correctOrientation: false
             };
             $cordovaCamera.getPicture(options).then(function (imageURI) {
