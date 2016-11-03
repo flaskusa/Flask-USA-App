@@ -1172,14 +1172,16 @@ button.button.button-clear.mini-button {
     width: 100%;
     height: 28%;
 }
-.myTailgatetopImg{
-   // width:100%;
-    height: 100px;
-    align-content: center;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
+.myTailgatetopImg {
+  height: 100px;
+  display: block;
+  margin-left: 0px;
+  margin-right: 0px; 
+  width: 100%;
+  margin-top:-1px; 
+
+  }
+
 .eventDiv{
     text-align:center;
 }
@@ -1894,10 +1896,9 @@ div .extra-right-supply{
   padding: 3px;
   background: #000000;
   color: white;
+	width: 260px;
   border-radius: 2px 2px 0 0;
-  /*height: 55px;
-  margin-bottom: -9px;*/
-  /* In accordance with the rounding of the default infowindow corners. */ }
+   }
 
 #iw-container #iw-content {
   text-align: center;
@@ -1908,7 +1909,7 @@ div .extra-right-supply{
     background: #ffffff;
     color: #000000;
     position: fixed;
-    width: 311px; }
+    width: 260px; }
 
 #iw-content .padding {
   padding: 10px; }
@@ -1924,11 +1925,16 @@ div .extra-right-supply{
     margin-top: 10px;
 }
 
-#iw-container .iw-sub-title {
-  font-size: 10px;
-  color: darkorange;
-  /*margin-left: 14px;*/
+   #iw-container .iw-sub-title { 
+	 font-size: 10px;
+	  color: darkorange;
+	  white-space: nowrap;
+	  overflow: hidden;
+	  text-overflow: ellipsis;
+	  min-width: 0;
+	  max-width: 212px;
    }
+
 
 .gm-style-iw {
   width: 313px !important;
@@ -2539,7 +2545,6 @@ div .manage_event_default_Image{
   font-weight:500;
   font-size: 26px;
   z-index: 2;
-  margin-left: 121px;
 }
 
 #traffic ul {
@@ -2628,7 +2633,7 @@ div .manage_event_default_Image{
   font-size: 13px
 }
 .alignRight {
-  text-align:right;width:37%;
+  text-align:right;
 }
 .alignLeft {
   text-align:left;padding: 0px 5px;
@@ -2662,11 +2667,39 @@ div .manage_event_default_Image{
     margin-right: -140px;
 }
 
-.text_div{
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-width: 0;
-    min-width:60px;
-    width:60%;
-}
+.text_div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 260px;
+  width: 60%; } 
+
+    .placedetail_div{
+       
+    width: 100%;
+    font-size: 10px; /*change By pradeep*/
+     line-height:  15px;
+  }
+
+.list-thumbnail.listImages {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  max-height: 60px; }
+
+.list-thumbnail.listImages1 {
+  position: absolute;
+  left: 5px;
+  max-width: 55px;
+  max-height: 55px;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 5px;
+  margin-top: -3px; }
+  .thumb-picturs-size {
+  width: 48%;
+  height: 101% !important;
+  border-right: solid white 2px;
+  
+   }
