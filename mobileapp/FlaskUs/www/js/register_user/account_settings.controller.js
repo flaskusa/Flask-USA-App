@@ -296,6 +296,7 @@
         
 
         $scope.uploadFileToServer = function (fileURL) {
+             $rootScope.$broadcast('loading:show');
             var options = {};
             options.fileKey = "file";
             var authdata = $cookies.get("authData");
