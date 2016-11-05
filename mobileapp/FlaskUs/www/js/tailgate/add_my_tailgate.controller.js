@@ -27,10 +27,9 @@
         $scope.searchString = 'a';
         $scope.showSavedMarker = false;
         $scope.taligateMarkers = "";
-        if (tailgateId > 0) {
-            getTailgateMarkers(tailgateId);
-        }
-
+        $scope.latitude = '42.34';
+        $scope.longitude = '-83.0456';
+        
 
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
@@ -69,7 +68,7 @@
                 return ionic.Platform.isWindowsPhone();
             }
         };
-
+getTailgateMarkers(tailgateId);
         getMySupplyList();
 
         $scope.goBack = function () {
@@ -77,18 +76,25 @@
         }
 
         function getTailgateMarkers(tailGateId) {
-            TailgateService.getMapMarkers(tailGateId).then(function (respData) {
-                $scope.taligateMarkers = respData.data;
-                if ($scope.taligateMarkers == undefined || $scope.taligateMarkers.tailgatemarkerid == undefined) {
-                    $scope.latitude = '42.34';
-                    $scope.longitude = '-83.0456';
-                } else {
-                    $scope.latitude = $scope.taligateMarkers.latitude;
-                    $scope.longitude = $scope.taligateMarkers.longitude
-                    $scope.showSavedMarker = true;
-                }
+            if(tailGateId != undefined && tailGateId > 0) {
+                TailgateService.getMapMarkers(tailGateId).then(function (respData) {
+                    $scope.taligateMarkers = respData.data;
+                    if ($scope.taligateMarkers != undefined && $scope.taligateMarkers.tailgatemarkerid != undefined) {
+                        $scope.latitude = $scope.taligateMarkers.latitude;
+                        $scope.longitude = $scope.taligateMarkers.longitude
+                        $scope.showSavedMarker = true;
+                    } else {
+                        $scope.latitude = '42.34';
+                        $scope.longitude = '-83.0456';
+                    }
+                    getallEventnames();
+                    callMap($scope.latitude, $scope.longitude);
+                });
+            }else {
+                getallEventnames();
                 callMap($scope.latitude, $scope.longitude);
-            });
+            }
+           
         }
 
         $scope.initialize = function () {
@@ -193,7 +199,7 @@
             markerData.latitude = $scope.map.markers[0].coords.latitude;
             markerData.longitude = $scope.map.markers[0].coords.longitude;
             markerData.name = loc.name;
-            markerData.description = loc.description;
+            markerData.description = loc.description == undefined ? '' : loc.description;
             saveMaker(markerData);
         }
         function saveMaker(markerData) {
@@ -218,17 +224,18 @@
         $scope.onClick = function (marker, eventName, model) {
             $scope.loc = { 'name': marker.name, 'description': marker.description };
             var customTemplate =
-                '<form><div class="list">'
+                '<form novalidate name="markerPOpup"><div class="list">'
                 + '        <label class="item item-input item-floating-label">'
                 + '         <span class="input-label">Place Name</span>'
-                + '           <input type="text" placeholder="Place Name" ng-model="loc.name">'
+                + '           <input type="text" placeholder="Place Name" ng-model="loc.name" required="true" name="locationName">'
+                +'<div ng-show="(markerPOpup.$submitted || markerPOpup.locationName.$touched) && markerPOpup.locationName.$error.required"  style="color:red">Enter location.</div>'
                 + '        </label>'
                 + '         <label class="item item-input item-floating-label">'
                 + '      <span class="input-label">Description</span>'
                 + '        <input type="text" placeholder="Description" ng-model="loc.description">'
                 + '       </label>                 '
                 + '    </div>'
-                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="currMarker(loc);">'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="markerPOpup.$valid && currMarker(loc);">'
                 + 'Save'
                 + '</button>'
                 + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="clearMArkersOnMap();" >'
@@ -252,7 +259,7 @@
                 $scope.locationPopup.close();
             });
         }
-        getallEventnames();
+      
 
         // invoke on type search box
         $scope.loadeventData = function () {
@@ -264,8 +271,10 @@
             } else {
                 EventId = EventCol.getAttribute("data_Id");
             }
-            $scope.addTailgateParams.eventId = EventId;
-            getEventDetails(EventId);
+            if(EventId > 0) {
+                $scope.addTailgateParams.eventId = EventId;
+                getEventDetails(EventId);
+            }
         }
         //get event and venue details in select box
         function getEventDetails(eventId) {
@@ -314,7 +323,8 @@
                 amountToPay: tailgateDetails.amountToPay,
                 tailgateId: tailgateDetails.tailgateId,
                 startTime: $scope.selectedtime1,
-                endTime: $scope.selectedtime2
+                endTime: $scope.selectedtime2,
+                logoId : tailgateDetails.logoId
             }
             $scope.editData = {
                 tailgateId: tailgateDetails.tailgateId,
@@ -488,6 +498,7 @@
                     $scope.reSetSelectedImageURIToUpload();
                     var data = $.parseJSON(r.response);
                     var uuid = data.uuid;
+                    $scope.addTailgateParams.logoId  = data.fileEntryId;
                     var groupId = data.groupId;
                     $scope.tailgateLogoId = 1;
                     // var title = data.title;

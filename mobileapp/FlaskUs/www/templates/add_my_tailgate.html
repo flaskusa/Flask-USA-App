@@ -35,7 +35,7 @@
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Event Name:</span>
                             <input type="text" list="EventNameList" ng-change="loadeventData()" id="envtName" placeholder="Event Name" class="form-control"
-                                ng-model="addTailgateParams.eventName" required ng-model-options="{ debounce: 500 }">
+                                ng-model="addTailgateParams.eventName" required ng-model-options="{ debounce: 500 }" autocomplete="false">
                             <datalist id="EventNameList">
                                 <select>
                                     <option ng-repeat="data in eventDetails" data_id="{{data.eventId}}" value="{{data.eventName}}">{{data.eventName}}</option>

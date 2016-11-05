@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('my_tailgateCtrl', my_tailgateCtrl);
 
-    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate', '$cookies'];
+    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate', '$cookies','SERVER'];
 
     /* @ngInject */
-    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies) {
+    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies,SERVER) {
         var self = this;
         $scope.myTailgate = [];
         $cookies.remove("editUserTailgate");
@@ -14,6 +14,8 @@
         $cookies.remove("newtailgatedata");
         var userResponse = $cookies.getObject('CurrentUser');
         var UserId = userResponse.data.userId;
+        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
+         $scope.allTailgate = [];
         getAlltailgates();
         $scope.goBack = function () {
             $state.go("app.user_navigation_menu");
@@ -21,10 +23,31 @@
 
         function getAlltailgates() {
             TailgateService.getMyTailgates(UserId).then(function (respData) {
-                $scope.allTailgate = respData.data;
-                console.log(respData.data);
+                var myTailgates = respData.data;
+                setLogoUrl(myTailgates);
             });
         }
+        function setLogoUrl(myTailgates) {
+            angular.forEach(myTailgates, function(object, index) {
+                if(object.logoId > 0) {
+                    $scope.getTailGateLogo(object);
+                }else {
+                    $scope.allTailgate.push(object);
+                }
+            })
+        }
+      
+        $scope.getTailGateLogo = function (tailgateObj) {
+            var url  = angular.copy($scope.imgUrl);
+            TailgateService.getTailgateLogo(tailgateObj.tailgateId).then(function (respData) {
+                var groupId = respData.data.groupId;
+                if (groupId != undefined && groupId > 0) {
+                   url  = url+ respData.data.uuid + "&groupId="+groupId;
+                   tailgateObj.logoUrl = url;
+                    $scope.allTailgate.push(tailgateObj);
+                } 
+            });
+        };
         $scope.editTailgate = function (tailgateId, index) {
             var addTailgateParams = {}
             TailgateService.getTailgate(tailgateId).then(function (respData) {
