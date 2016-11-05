@@ -44,6 +44,7 @@ public class TailgateInfoFinderImpl extends BasePersistenceImpl<TailgateInfo> im
 			queryObj.addScalar("venmoAccountId", Type.STRING);
 			queryObj.addScalar("amountToPay", Type.DOUBLE);
 			queryObj.addScalar("isAdmin", Type.INTEGER);
+			queryObj.addScalar("logoId", Type.LONG);
 			QueryPos qPosition = QueryPos.getInstance(queryObj);
 			qPosition.add(userId);
 			groupList = createCustomModelGroupList(queryObj.list());
@@ -84,6 +85,7 @@ public class TailgateInfoFinderImpl extends BasePersistenceImpl<TailgateInfo> im
 			groupMap.put("venmoAccountId", groupJsonArray.getString(10));
 			groupMap.put("amountToPay", groupJsonArray.getString(11));
 			groupMap.put("isAdmin", groupJsonArray.getString(12));
+			groupMap.put("logoId", groupJsonArray.getString(13));
 			mapList.add(groupMap);
 		}
 		}catch(JSONException e){
