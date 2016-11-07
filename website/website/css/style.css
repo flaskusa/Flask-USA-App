@@ -1002,8 +1002,8 @@ background: #FFA500;}
 }
 
 #submit:hover {
-    background: #fff;
-    color: #111;
+    background: #000;
+    color: #fff;
 }
 
 #sidr ul a:hover .icons {
