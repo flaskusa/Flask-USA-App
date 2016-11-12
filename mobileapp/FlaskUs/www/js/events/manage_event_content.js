@@ -115,7 +115,7 @@
             return hasPermission;
         };
         $scope.setSelectedImageURIToUpload = function (imageURI) {
-         
+
             $scope.defaultImageUrl='';
             $scope.defaultImageUrl = imageURI;
             $scope.isImageSelectedToUpload = true;
@@ -130,15 +130,16 @@
             var options = {};
             options.fileKey = "file";
             var params = {};
-            params.eventId = eventId;
             params.eventDetailId=eventDetailId;
-            var authdata = $cookies.get("authData");
+            params.eventId = eventId;
             options.params = params;
+            var authdata = $cookies.get("authData");
             var headers = {};
             headers.Authorization = 'Basic ' + authdata;
             options.headers = headers;
             $cordovaFileTransfer.upload(encodeURI(SERVER.url + '/flask-rest-events-portlet.event/upload-detail-image'), fileURL, options)
                 .then(function (r) {
+                    alert("uploaded")
                     $rootScope.$broadcast('loading:hide')
                     $scope.reSetSelectedImageURIToUpload();
                     $scope.downloadProgress = 0;
@@ -146,7 +147,7 @@
                     var eventDetailId = data.eventDetailId;
                     var imageUUID = data.imageUUID;
                     var imageGroupId = data.imageGroupId;
-                    $scope.setEventDetailUrl(eventDetailId, imageUUID, imageGroupId);
+                    /*$scope.setEventDetailUrl(eventDetailId, imageUUID, imageGroupId);*/
                     $scope.initialize();
                 }, function (error) {
                     $scope.reSetSelectedImageURIToUpload();
@@ -158,13 +159,13 @@
                     //                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
                 });
         }
-        $scope.setEventDetailUrl = function (eventDetailId, imageUUID, imageGroupId) {
-            $scope.eventDetailImageURL = baseImagePath + "?uuid=" + imageUUID + "&groupId=" + imageGroupId;
+        /*  $scope.setEventDetailUrl = function (eventDetailId, imageUUID, imageGroupId) {
+         $scope.eventDetailImageURL = baseImagePath + "?uuid=" + imageUUID + "&groupId=" + imageGroupId;
 
 
-            $scope.EventDetailImageUrl = encodeURI($scope.tailgateLogoUrl);
-        }
-
+         $scope.EventDetailImageUrl = encodeURI($scope.tailgateLogoUrl);
+         }
+         */
         $scope.addContent=function(content,index) {
             if (content.eventDetailId <= 0 || content.eventDetailId == undefined) {
                 EventsService.addContentDuringEvent(content.infoTitle, content.infoDesc, $scope.currEventId,$scope.infoTypeCategoryId,$scope.infoTypeId).then(function (response) {
@@ -185,13 +186,13 @@
                         EventsService.deleteEventDetailImageById(content.eventDetailImageId).then(function(response2){
 
 
-                        if($scope.selectedImageURIToUpload!=undefined && $scope.selectedImageURIToUpload!='') {
-                            $scope.uploadFileToServer($scope.selectedImageURIToUpload, response.data.eventId, response.data.eventDetailId);
-                        }
-                        $scope.editContent = false;
+                            if($scope.selectedImageURIToUpload!=undefined && $scope.selectedImageURIToUpload!='') {
+                                $scope.uploadFileToServer($scope.selectedImageURIToUpload, response.data.eventId, response.data.eventDetailId);
+                            }
+                            $scope.editContent = false;
 
                         });
-                        }
+                    }
                 });
 
             }
@@ -249,7 +250,7 @@
                 }
                 else if($scope.preEventInfo==tempObject.infoTypeName){
                     if ("Flask Us" == tempObject.infoTypeCategoryName) {
-                        if(ImgObj.DetailImages.length!=0){
+                        if(ImgObj.length!=0){
                             tempObject.imageUrl=baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                             tempObject.eventDetailImageId=angular.fromJson(ImgObj[0].DetailImage).eventDetailImageId
                         }
@@ -258,7 +259,7 @@
                 }
                 else if($scope.postEventInfo==tempObject.infoTypeName){
                     if ("Flask Us" == tempObject.infoTypeCategoryName) {
-                        if(ImgObj.DetailImages.length!=0){
+                        if(ImgObj.length!=0){
                             tempObject.imageUrl=baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                         }
                         $scope.flaskUsDetails3.push(tempObject);
@@ -269,17 +270,17 @@
 
             if($scope.EventTypeInfo==$scope.duringEventInfo){
                 $scope.flaskUsDetails=$scope.flaskUsDetails1;
-                $scope.infoTypeCategoryId=103;
+                $scope.infoTypeCategoryId=104;
                 $scope.infoTypeId=2;
             }
             else if($scope.EventTypeInfo==$scope.preEventInfo){
                 $scope.flaskUsDetails=$scope.flaskUsDetails2;
-                $scope.infoTypeCategoryId=8;
+                $scope.infoTypeCategoryId=9;
                 $scope.infoTypeId=1;
             }
             else if($scope.EventTypeInfo==$scope.postEventInfo){
                 $scope.flaskUsDetails=$scope.flaskUsDetails3;
-                $scope.infoTypeCategoryId=204;
+                $scope.infoTypeCategoryId=205;
                 $scope.infoTypeId=3;
             }
 

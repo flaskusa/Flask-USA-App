@@ -21,7 +21,7 @@
         var getVenuesByIdURL = "flask-rest-events-portlet.venue/get-venue";
         var getAllEventDetailWithImageUrl = "/flask-rest-events-portlet.event/get-event-details-with-images";
         var getVenueDetailsURL = "/flask-rest-events-portlet.venue/get-venue-details";
-        var getVenueDetailURL = "/flask-rest-events-portlet.venue/get-venue-detail"; 
+        var getVenueDetailURL = "/flask-rest-events-portlet.venue/get-venue-detail";
         var googleMapURL = SERVER.googleApi;
 
         var eventServices = {
@@ -57,52 +57,70 @@
         }
         function getlocation(addressVar, zipcode) {
             return $http.get(googleMapURL + addressVar + zipcode)
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                //add errror handling 
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    //add errror handling
+                });
         }
         function getZiplocation(latlongVar, lat, long, sensorVar) {
             return $http.get(googleMapURL + latlongVar + lat + ',' + long + sensorVar)
-            .then(function success(response) {
-                return response;
-            }, function failure(response) {
-                //add errror handling 
-            });
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    //add errror handling
+                });
         }
         function getEventVenueDatail(currEventId) {
             return $http.get(SERVER.url + getEvent_Venue_Details_with_Images, {
-                params: { 'eventId': currEventId }
-            }
+                    params: { 'eventId': currEventId }
+                }
             )
-            .then(function success(resp) {
-                return resp;
-            },
-            function failure(resp) {
-                console.log("Error Message");
-            });
+                .then(function success(resp) {
+                    return resp;
+                },
+                function failure(resp) {
+                    console.log("Error Message");
+                });
         }
 
         function getEventByEventId(eventId) {
             return $http.get(SERVER.url + getEventByIdURL, {
                 params: { 'eventId': eventId }
             })
-            .then(function success(resp) {
-                return resp;
-            },
-            function failure(resp) {
-                console.log("Error Message");
-            });
+                .then(function success(resp) {
+                    return resp;
+                },
+                function failure(resp) {
+                    console.log("Error Message");
+                });
 
         }
         function addContentDuringEvent(infoTitle,infoDesc,eventId,infoTypeCategoryId,infoTypeId) {
             return $http.get(SERVER.url + addContentDuringGameUrl, {
-                params: {"eventDetailId":"0","infoTypeCategoryId":infoTypeCategoryId,"infoTitle":infoTitle,"latitude":"0",
-                    "longitude":"0","showDescription":"1","eventId":eventId,"infoTypeId":infoTypeId,"infoTypeName":"",
-                    "infoTypeCategoryName":"","infoDesc":infoDesc,
-                    "addrLine1":"","addrLine2":"","zipCode":"","city":"","stateId":0,"countryId":0,"phone":"","website":"","cost":0,
-                    "hoursOfOperation":""}
+                params: {
+                    "eventId": eventId,
+                    "infoTypeId":infoTypeId ,
+                    "infoTypeCategoryId": infoTypeCategoryId,
+                    infoTitle: infoTitle,
+                    "infoShortDesc": '',
+                    "infoDesc": infoDesc,
+                    "addrLine1": '',
+                    "addrLine2": '',
+                    "zipCode": '',
+                    "city": '',
+                    "stateId":0 ,
+                    "countryId": 0,
+                    "latitude": '',
+                    "longitude": '',
+                    "phone": '',
+                    "mobileAppName": '',
+                    "website": '',
+                    "cost": 0,
+                    "hoursOfOperation": '',
+                    "showDescription": true
+
+                }
             })
                 .then(function success(resp) {
                     return resp;
@@ -166,7 +184,7 @@
         function getVenueByid(vid) {
             return $http.get(SERVER.url + getVenuesByIdURL, {
                 params: { "venueId ": venueId }
-                })
+            })
                 .then(function success(resp) {
                     return resp.data;
                 },
