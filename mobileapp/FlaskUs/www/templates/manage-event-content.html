@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <ion-content header="true" class="ion_content_header">
+    <ion-content header="true" class="ion_content_header" overflow-scroll="false">
         <a class="item item-full list-item-icon-left my-view" ng-click="addNewContent()"ng-if="editContent==false">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">ADD CONTENT</p>
@@ -61,7 +61,7 @@
               <ion-option-button class="icon ion-trash-a" ng-click="deleteEventDetail(data.eventDetailId,$index)"></ion-option-button>
   -->
 
-            <a class="item" ng-if="flaskUsDetails.length == 0"> You do not have added any information yet.</a>
+            <a class="item" ng-if="flaskUsDetails.length == 0 && editContent==false"> You do not have added any information yet.</a>
         </ion-list>
 
         <form name="create_content_form" class="loginpane form_div" novalidate  ng-submit="create_content_form.$valid && addContent(content)">
@@ -72,7 +72,7 @@
                     <span class="input-label">Title</span>
                     <input type="text" placeholder="Title" name="TailgateName" class="form-control" ng-model="content.infoTitle" required>
                     <div ng-show="create_content_form.$submitted || create_content_form.TailgateName.$touched">
-                        <span ng-show="create_content_form.TailgateName.$error.required" class="error_msg">Enter title name</span>
+                        <span ng-show="create_content_form.TailgateName.$error.required" class="error_msg">Enter title</span>
                     </div>
                 </div>
                 <div class="item item-input item-floating-label">

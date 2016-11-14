@@ -25,8 +25,8 @@
             <p class="addText">CREATE GROUP</p>
         </a>
       <ion-list >
-          <a class="item" ng-if="groups.length == 0 && addingInGroup==true"> there are no more Group to add </a>
-          <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> there are no Group, please create </a>
+          <a class="item" ng-if="groups.length == 0 && addingInGroup==true"> There are no more group to add </a>
+          <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> There are no group, please create </a>
 
           <ion-item class=" item-remove-animate"ng-repeat="group in groups | filter: groupList.searchString"style="padding: 0px"ng-init="group.showDivByIndex=false">
               <div ng-if="group.showDivByIndex==true"style="padding-top: 10px">
@@ -43,7 +43,7 @@
 
               </div>
               <div class="col-20"ng-if="addingInGroup==false">
-              <span class="badge span_icon"style="top:20px"><img src="img/flask_icons/arrow_left.svg"class="arrowIconAlign" ></span>
+              <span class="badge span_icon span_icon_extraright"style="top:20px"><img src="img/flask_icons/arrow_left.svg"class="arrowIconAlign" ></span>
               </div>
                   <div class="col-20"ng-if="addingInGroup==true">
                 <span class="badge span_icon "style="top:7px;right:10px;"> <label class="checkbox"class="labelCheckBox">
