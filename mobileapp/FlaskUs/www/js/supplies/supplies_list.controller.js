@@ -4,9 +4,9 @@
 
     .controller('SuppliesListCtrl', SuppliesListCtrl);
 
-    SuppliesListCtrl.$inject = ['$scope', '$stateParams',  'SupplyService', '$ionicModal', '$ionicNavBarDelegate','$cookies','$ionicListDelegate'];
+    SuppliesListCtrl.$inject = ['$scope', '$stateParams',  'SupplyService', '$ionicModal', '$ionicNavBarDelegate','$cookies','$ionicListDelegate','$ionicLoading','$ionicPopup'];
 
-    function SuppliesListCtrl($scope, $stateParams, SupplyService, $ionicModal, $ionicNavBarDelegate,$cookies,$ionicListDelegate) {
+    function SuppliesListCtrl($scope, $stateParams, SupplyService, $ionicModal, $ionicNavBarDelegate,$cookies,$ionicListDelegate,$ionicLoading,$ionicPopup) {
         /* jshint validthis: true */
         // putting our server data on scope to display
 
@@ -50,6 +50,7 @@
                 });
 
             }else{
+                $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
                 setTimeout(setFocusOnAdd, 50);
             }
         };
@@ -64,6 +65,7 @@
             }
         }
         function setFocus(){
+
             document.getElementById("editItemBox").focus();
         }
         $scope.saveSupplyItem=function(data){
@@ -74,15 +76,27 @@
                 });
             }else{
                 data.edit = true;
+                $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
                 setTimeout(setFocus, 50);
             }
         }
         $scope.deleteSupplyItem=function(index,id){
-            SupplyService.deleteSupplyItemById(id).then(function(response){
-                if(response){
-                    $scope.listValue.splice(index,1);
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Item?',
+                template: 'Select OK to Confirm!'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    SupplyService.deleteSupplyItemById(id).then(function(response){
+                        if(response){
+                            $scope.listValue.splice(index,1);
+                        }
+                    });
+
+                } else {
                 }
             });
+
 
         }
         $scope.addNewListItem=function(){

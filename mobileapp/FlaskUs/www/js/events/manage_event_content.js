@@ -211,12 +211,23 @@
             $scope.editContent=true;
         }
         $scope.deleteEventDetail=function(eventDetailId,index){
-            EventsService.deleteEventDetailById(eventDetailId).then(function(response){
-                if(response.data){
-                    $scope.flaskUsDetails.splice(index,1);
-                }
-
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Detail?',
+                template: 'Select OK to Confirm!'
             });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    EventsService.deleteEventDetailById(eventDetailId).then(function(response){
+                        if(response.data){
+                            $scope.flaskUsDetails.splice(index,1);
+                        }
+
+                    });
+
+                } else {
+                }
+            });
+
 
         }
         $scope.initialize=function() {

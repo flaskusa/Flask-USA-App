@@ -3,10 +3,10 @@
     angular.module('flaskApp')
     .controller('SuppliesCtrl', SuppliesCtrl);
 
-    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate','$stateParams','$localStorage','$ionicHistory'];
+    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate','$stateParams','$localStorage','$ionicHistory','$ionicLoading','$ionicPopup'];
 
     /* @ngInject */
-    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate,$stateParams,$localStorage,$ionicHistory ) {
+    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate,$stateParams,$localStorage,$ionicHistory,$ionicLoading,$ionicPopup ) {
 
         $scope.userDataList=[];
         $scope.supplies=[];
@@ -15,6 +15,7 @@
         $scope.hideItem=false;
         $scope.curreentEventId=$stateParams.currEventId;
         $scope.goBack = function(){
+            $scope.backToList=true;
             $ionicHistory.goBack();
         }
         var userDetail=$cookies.getObject('CurrentUser');
@@ -26,6 +27,7 @@
             $scope.userId=0;
             $scope.hideCheckBox=true
             $scope.agreedToTermsOfUse=false;
+            $scope.backToList=false;
         }
         $scope.currentEventSuppplyKey=$scope.curreentEventId+$scope.userId;
 
@@ -236,7 +238,7 @@
             $scope.suppliesName="";
         }
         $scope.saveSupply=function(data){
-            if(data.listName!="") {
+            if(data.supplyListName!="") {
                 $scope.deleteSuplies=false;
                 $scope.editSuply=false;
                 SupplyService.updateSupplyList(data.supplyListId,data.supplyListName,data.isSystem).then(function(response){
@@ -248,8 +250,10 @@
                 });
             }else{
                 if(data.isSystem==false) {
+                    $ionicLoading.show({ template: 'List name should not be empty', noBackdrop: false, duration: 1000 });
                     document.getElementById("editBox").focus();
                 }else{
+                    $ionicLoading.show({ template: 'List name should not be empty', noBackdrop: false, duration: 1000 });
                     document.getElementById("systemEditBox").focus();
                 }
             }
@@ -280,7 +284,11 @@
                     data.editItem = false;
                 })
             }
-            else{
+            else if($scope.backToList==true){
+
+            }
+            else {
+                $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
                 document.getElementById("ItemEditBox").focus();
             }
         }
@@ -288,16 +296,29 @@
             []
         };
         $scope.deleteCreatedItem=function(index,id){
-            SupplyService.deleteSupplyItemById(id).then(function(response){
-                if(response){
-                    $scope.createdListItem.data.splice(index,1);
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Item?',
+                template: 'Select OK to Confirm!'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    SupplyService.deleteSupplyItemById(id).then(function(response){
+                        if(response){
+                            $scope.createdListItem.data.splice(index,1);
+                        }
+                    });
+
+                } else {
                 }
             });
+
 
         }
         var listItemEmpty={itemName: "",editItem:true}
         $scope.addItem=function(listName,data){
             if (listName == undefined || listName == "") {
+                $ionicLoading.show({ template: 'List name should not be empty', noBackdrop: false, duration: 1000 });
+
                 setTimeout(setFocus, 50);
             }else {
                 SupplyService.addSupplies(listName, $scope.addAsAdmin).then(function (response) {
@@ -393,14 +414,25 @@
         }
 
         $scope.deleteItem=function(index,supplyId){
-            $scope.deleteSuplies=true;
-            SupplyService.deleteSupplyListById(supplyId).then(function(response){
-                if(response){
-                    $ionicListDelegate.closeOptionButtons();
-                    $scope.supplies.splice(index,1);
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Supply?',
+                template: 'Select OK to Confirm!'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    $scope.deleteSuplies=true;
+                    SupplyService.deleteSupplyListById(supplyId).then(function(response){
+                        if(response){
+                            $ionicListDelegate.closeOptionButtons();
+                            $scope.supplies.splice(index,1);
 
+                        }
+                    })
+
+                } else {
                 }
-            })
+            });
+
 
         }
     }

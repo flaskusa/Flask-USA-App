@@ -11,8 +11,8 @@
         var self = this;
         $scope.Email = '';
         $scope.password = '';
-        $scope.user={Email:"",password:"",isChecked:false}
-        $scope.rememberUser=false;
+        $scope.user={Email:"",password:"",isChecked:true}
+        $scope.rememberUser=true;
      
         $scope.checkTouch = function (enableChecked) {
             if (enableChecked) {
@@ -62,8 +62,6 @@
         }
         if($localStorage['RememberUser'] &&  $localStorage['RememberUser'].Email &&  $localStorage['RememberUser'].password){
             $scope.user=$localStorage['RememberUser'];
-        }else{
-            $scope.user.isChecked=false;
         }
 
         $scope.remembered = function (user) {
