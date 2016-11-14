@@ -139,7 +139,6 @@
             options.headers = headers;
             $cordovaFileTransfer.upload(encodeURI(SERVER.url + '/flask-rest-events-portlet.event/upload-detail-image'), fileURL, options)
                 .then(function (r) {
-                    alert("uploaded")
                     $rootScope.$broadcast('loading:hide')
                     $scope.reSetSelectedImageURIToUpload();
                     $scope.downloadProgress = 0;

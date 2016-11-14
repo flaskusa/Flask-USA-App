@@ -22,6 +22,7 @@
         var getAllEventDetailWithImageUrl = "/flask-rest-events-portlet.event/get-event-details-with-images";
         var getVenueDetailsURL = "/flask-rest-events-portlet.venue/get-venue-details";
         var getVenueDetailURL = "/flask-rest-events-portlet.venue/get-venue-detail";
+        var deleteEventDetailImage="/flask-rest-events-portlet.event/delete-event-detail-image"
         var googleMapURL = SERVER.googleApi;
 
         var eventServices = {
@@ -36,7 +37,8 @@
             getAllEventDetailWithImage:getAllEventDetailWithImage,
             getAllVenues: getAllVenues,
             getVenueDetails:getVenueDetails,
-            getVenueDetail: getVenueDetail
+            getVenueDetail: getVenueDetail,
+            deleteEventDetailImageById:deleteEventDetailImageById
         }
         function getAllEvents(eventIds, sDate, eDate, sString, lat, long) {
             return $http.get(SERVER.url + allEventsURL, {
@@ -132,11 +134,26 @@
         }
         function updateEventDetailDuringEvent(infoTitle,infoDesc,eventId,eventDetailId,infoTypeCategoryId,infoTypeId) {
             return $http.get(SERVER.url + updateEventDuringGame, {
-                params: {"eventDetailId":eventDetailId,"infoTypeCategoryId":infoTypeCategoryId,"infoTitle":infoTitle,"latitude":"0",
-                    "longitude":"0","showDescription":"1","eventId":eventId,"infoTypeId":infoTypeId,"infoTypeName":"",
-                    "infoTypeCategoryName":"","infoDesc":infoDesc,
-                    "addrLine1":"","addrLine2":"","zipCode":"","city":"","stateId":0,"countryId":0,"phone":"","website":"","cost":0,
-                    "hoursOfOperation":""}
+                params: {eventDetailId: eventDetailId,
+                    infoTypeId: infoTypeId,
+                    infoTypeCategoryId: infoTypeCategoryId,
+                    infoTitle: infoTitle,
+                    infoShortDesc: '',
+                    infoDesc: infoDesc,
+                    addrLine1: '',
+                    addrLine2: '',
+                    zipCode: '',
+                    city: '',
+                    stateId: 0,
+                    countryId: 0,
+                    latitude: '',
+                    longitude: '',
+                    phone: '',
+                    mobileAppName: '',
+                    website: '',
+                    cost: 0,
+                    hoursOfOperation: '',
+                    showDescription: true}
             })
                 .then(function success(resp) {
                     return resp;
@@ -149,6 +166,18 @@
         function deleteEventDetailById(eventDetailId) {
             return $http.get(SERVER.url + deleteEventDetailUrl, {
                 params: {"eventDetailId":eventDetailId}
+            })
+                .then(function success(resp) {
+                    return resp;
+                },
+                function failure(resp) {
+                    console.log("Error Message");
+                });
+
+        }
+        function deleteEventDetailImageById(eventDetailImageId) {
+            return $http.get(SERVER.url + deleteEventDetailImage, {
+                params: {"eventDetailImageId":eventDetailImageId}
             })
                 .then(function success(resp) {
                     return resp;
