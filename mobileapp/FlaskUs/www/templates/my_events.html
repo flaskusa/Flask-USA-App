@@ -39,8 +39,8 @@
                         <div class="col col-15"><img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" /></div>
                         <div class="col col-70 event_content1">
                             <h2 class="eventNameCol1">{{ data.eventName }}</h2>
-                            <p class="dateCol">{{data.eventDate | date:'EEEE,MMMM dd,yyyy'}}</p>
-                            <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} </p>
+                            <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
+                            <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}} | <span class="cityVenuCol ml0">{{getVenueNameForVenueId(data.venueId)}}</span></p>
                         </div>
                         <div class="col col-15">
                             <span class="badge span_icon span_icon_extraright " ng-click="addmyEvent(data.eventId,$index)"><img src="img/flask_icons/arrow_left.svg"></span>

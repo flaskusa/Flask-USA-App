@@ -90,8 +90,8 @@
         //Get venue name for event details
         function getVenueName() {
             EventsService.getAllVenues().then(function (respData) {
-                console.log(respData);
                 $scope.allVenues = respData;
+                $cookies.putObject("eventVenues",$scope.allVenues);
                 for (var i = 0; i < $scope.allVenues.length; i++) {
                     $scope.venuesId.push($scope.allVenues[i].venueId);
                 }

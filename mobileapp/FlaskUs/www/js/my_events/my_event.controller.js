@@ -18,7 +18,6 @@
         function getAllevents() {
             myEventService.getMyEvents().then(function (respData) {
                 $scope.myEvent = respData.data.Events;
-                console.log(respData.data);
                 if (respData.data.message == "Authenticated access required" )
                 {
                     $scope.myEventError = true;
@@ -26,7 +25,7 @@
                     if (respData.data.Events == undefined) {
                     $scope.myNoEventError = true;
                 }
-                console.log(respData.data);
+                
             });
         }
 
@@ -35,6 +34,22 @@
                 $scope.myEvent.splice(index, 1);
             });
         }
+
+        $scope.getVenueNameForVenueId  = function (venueId) {
+            var venueCity = ""
+            var venues = $cookies.getObject("eventVenues");
+            if (venues == undefined) {
+                return "";
+            }
+            for (var i = 0; i < venues.length; i++) {
+                if( venues[i].venueId == venueId){
+                    venueCity = venues[i].venueCity;
+                    return venueCity;
+                }
+            }
+            return venueCity;
+        }
+
        
         $scope.searchBox = { showBox: false };
     }
