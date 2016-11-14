@@ -86,7 +86,8 @@ public class FlaskModelUtil {
 	public enum FlaskRoleEnum{
 		FLASK_ADMIN   ("Flask Admin"),
 		FLASK_CONTENT_ADMIN ("Flask Content Manager"),
-		FLASK_USER  ("User");
+		FLASK_USER  ("User"),
+		LIFERAY_ADMIN ("Administrator");
 		
 		private final String roleName;
 		FlaskRoleEnum(String roleName){

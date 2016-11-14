@@ -834,7 +834,8 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			User user = UserLocalServiceUtil.getUser(userId);
 			FlaskRole contentRole = FlaskModelUtil.getFlaskRoleByName(FlaskModelUtil.FLASK_CONTENT_ADMIN);
 			FlaskRole adminRole = FlaskModelUtil.getFlaskRoleByName(FlaskModelUtil.FLASK_ADMIN);
-			if( FlaskModelUtil.isRoleInList(user, contentRole) || FlaskModelUtil.isRoleInList(user, adminRole)){
+			FlaskRole administrator =  FlaskModelUtil.getFlaskRoleByName(FlaskModelUtil.LIFERAY_ADMIN);
+			if( FlaskModelUtil.isRoleInList(user, contentRole) || FlaskModelUtil.isRoleInList(user, adminRole) ||  FlaskModelUtil.isRoleInList(user, administrator)){
 				isContentAdmin = true;
 			}
 		}catch(Exception ex) {
