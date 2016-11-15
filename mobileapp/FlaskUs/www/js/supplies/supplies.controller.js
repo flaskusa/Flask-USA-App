@@ -211,18 +211,15 @@
 
         }
         $scope.editSupply=function(data){
+
+            angular.forEach($scope.supplies,function(key,value){
+               key.edit=false;
+            })
             data.edit=true;
             $scope.deleteSuplies=true;
             $scope.editSuply=true;
             $ionicListDelegate.closeOptionButtons();
-            setTimeout(setFocus, 50);
-     function setFocus(){
-         if(data.isSystem==false){
-    document.getElementById("editBox").focus();
-        }else{
-             document.getElementById("systemEditBox").focus();
-         }
-     }
+
     }
         $scope.editSupplyItem=function(data){
             data.editItem=true;

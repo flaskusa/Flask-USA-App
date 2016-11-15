@@ -42,8 +42,10 @@
           <ion-item class="suppliesList_ion_item" ng-repeat="data in supplies"ng-if="data.isSystem==false"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)">
               <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
                   <label ng-if = "data.edit == false" class="supply_list_name"><i class="addText">{{ data.supplyListName | uppercase}}</i> </label>
-                  <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
-              </div>
+                  <div class="inpuBorderEdit" ng-if="data.edit == true">
+                  <input type="text"id="editBox"  ng-model="data.supplyListName " style="width: 100%" ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-blur="saveSupply(data)"/>
+                  </div>
+                  </div>
               <a  ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px">{{data.listItem.length}}</span>
                   <div ng-if="MyGameDayList==false">
                   <span class="badge badge_supplies"><img src="img/flask_icons/arrow_left.svg" class="supplies_left_icon"></span>
@@ -76,8 +78,10 @@
           <ion-list>
               <ion-item class="item"  ng-repeat="data in supplies"ng-if="data.isSystem==true"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)"on-swipe-left="onSwipeLeft(data)"on-swipe-right="onSwipeRight(data)">
                   <span class="emailText supply_list_name" ng-if = "data.edit == false"><i class="addText">{{ data.supplyListName | uppercase}}</i></span>
-                  <input type="text"id="systemEditBox"autofocus ng-model="data.supplyListName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
-                 <div ng-if="MyGameDayList==false">
+                  <div class="inpuBorderEdit" ng-if="data.edit == true">
+                  <input type="text"id="systemEditBox" ng-model="data.supplyListName " style="width: 100%" ng-focus="true" ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}"  ng-blur="saveSupply(data)"/>
+                 </div>
+                      <div ng-if="MyGameDayList==false">
                   <span ng-if="agreedToTermsOfUse==false" class="badge badge-assertive"style="cursor: pointer" ng-click="copyList(data)">copy</span>
 
                      <div ng-if="agreedToTermsOfUse==true ">

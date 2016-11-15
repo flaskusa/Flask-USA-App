@@ -11,7 +11,9 @@
 
         <div class="item item-input-inset"ng-if="addNewSuppliesItem==true">
             <label class="item-input-wrapper"style="background-color: white;">
-                <input type="text"id="addItemBox" ng-class="{Upper_Case:listItemName!='' && listItemName!=undefined}" placeholder="Item Name"autofocus ng-model="listItemName">
+                <div class="inpuBorderEdit" style="width: 80%">
+                <input type="text"id="addItemBox" style="width:100%" ng-class="{Upper_Case:listItemName!='' && listItemName!=undefined}" placeholder="Item Name" ng-model="listItemName">
+                </div>
             </label>
             <button class="button button-small suppliesButton"ng-click="saveItem(listItemName)">
                save
@@ -27,8 +29,9 @@
             <ion-item ng-repeat="data in listValue">
             <div ng-model="data.checked" ng-init="data.edit=false">
                 <div ng-if = "data.edit == false" ><i class="addText">{{ data.supplyItemName | uppercase}}</i></div>
-                <input type="text"id="editItemBox" autofocus ng-model="data.supplyItemName" ng-if="data.edit == true"ng-class="{Upper_Case:data.supplyItemName!='' && data.supplyItemName!=undefined}" ng-blur="saveSupplyItem(data)"/>
-
+                <div class="inpuBorderEdit" ng-if="data.edit == true">
+                <input type="text"id="editItemBox"  ng-model="data.supplyItemName" style="width: 100%" ng-class="{Upper_Case:data.supplyItemName!='' && data.supplyItemName!=undefined}" ng-blur="saveSupplyItem(data)"/>
+                    </div>
                <!-- <div class="badge supplyDeleteButton extra-right-supply" ng-if="showCheckBox==false">
                 <span class="button-assertive   ion-trash-a icon supplyDeleteIcon" ng-class="{supplyEditIconPadding:data.edit}" ng-click="deleteSupplyItem($index,data.supplyItemId)"></span>
                     </div>
