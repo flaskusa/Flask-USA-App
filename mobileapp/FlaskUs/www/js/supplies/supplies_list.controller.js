@@ -78,7 +78,6 @@
             }else{
                 data.edit = true;
                 $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
-                setTimeout(setFocus, 50);
             }
         }
         $scope.deleteSupplyItem=function(index,id){

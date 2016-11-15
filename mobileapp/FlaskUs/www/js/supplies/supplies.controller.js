@@ -266,7 +266,7 @@
                         data.editItem = false;
                         data.supplyItemId=response.supplyItemId;
                         if($scope.createdListItem.data[$scope.createdListItem.data.length-1].itemName=="") {
-                            setTimeout(setFocusOnItemBox, 50);
+
                         }
                     }
                     else{
