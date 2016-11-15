@@ -305,10 +305,15 @@
                 }
 
             } else if (infoTypeName == 'During-Event') {
-                if (infoTyepeCategory == 'Bar & Restaurants') {
+                if (infoTyepeCategory == 'Venue Map') {
                     $scope.selectedIndex = 0;
-                } else {
+                }
+                if (infoTyepeCategory == 'Venue Info') {
                     $scope.selectedIndex = 1;
+                }if (infoTyepeCategory == 'Bar & Restaurants') {
+                    $scope.selectedIndex = 2;
+                }else {
+                    $scope.selectedIndex = 3;
                 }
             } else {
                 if (infoTyepeCategory == 'Bar & Restaurants') {
