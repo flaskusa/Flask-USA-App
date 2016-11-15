@@ -31,7 +31,7 @@
         }
         $scope.currentEventSuppplyKey=$scope.curreentEventId+$scope.userId;
 
-
+        $scope.emptySupplyMessage=false;
 
 
 
@@ -135,6 +135,9 @@
         $scope.initialize=function() {
             SupplyService.getMySupplyList().then(function (response) {
                 $scope.supplies = response;
+                $scope.emptySupplyMessage=true;
+                showEmptySupplyMessage();
+
                 if($scope.MyGameDayList==true && $scope.selectedGameDaySupplyId!="" &&  $scope.hideCheckBox==false &&  $scope.selectedGameDaySupplyId!=undefined){
                     $scope.showSelectedGameDaySupply($scope.selectedGameDaySupplyId);
                     $scope.getSupplyItemBySupplyId($scope.selectedGameDaySupplyId);
@@ -143,6 +146,19 @@
 
                 }
             });
+        }
+        function showEmptySupplyMessage(){
+            angular.forEach($scope.supplies,function(value,key){
+                var counter=0;
+                if(value.isSystem==false){
+                    counter++;
+                }
+                if(counter==0){
+                    $scope.emptySupplyMessage=true;
+                }else{
+                    $scope.emptySupplyMessage=false;
+                }
+            })
         }
 
         $scope.copyForMyGameDaySupply=function(list){
@@ -175,14 +191,8 @@
              $scope.removeSelectedSupply(list);
          }
         }
-        $scope.addNewSuppliesList=function(){
-            setTimeout(setFocus, 50);
-            function setFocus(){
-                document.getElementById("supplyEdit").focus();
-            }
-        }
+
         $scope.saveList = function(list) {
-            // $scope.listItem.unshift( $scope.createdListItem.data);
 
             if ($scope.islistCreated != true) {
                 SupplyService.addSupplies(list,$scope.addAsAdmin).then(function(response){
@@ -223,11 +233,6 @@
     }
         $scope.editSupplyItem=function(data){
             data.editItem=true;
-            setTimeout(setFocus, 50);
-            function setFocus(){
-                document.getElementById("supplyEdit").blur();
-                document.getElementById("ItemEditBox").focus();
-            }
         }
 
         $scope.cancelAdding=function(){
@@ -248,10 +253,10 @@
             }else{
                 if(data.isSystem==false) {
                     $ionicLoading.show({ template: 'List name should not be empty', noBackdrop: false, duration: 1000 });
-                    document.getElementById("editBox").focus();
+
                 }else{
                     $ionicLoading.show({ template: 'List name should not be empty', noBackdrop: false, duration: 1000 });
-                    document.getElementById("systemEditBox").focus();
+
                 }
             }
         }
@@ -286,7 +291,7 @@
             }
             else {
                 $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
-                document.getElementById("ItemEditBox").focus();
+
             }
         }
         $scope.createdListItem={"data":
@@ -316,7 +321,6 @@
             if (listName == undefined || listName == "") {
                 $ionicLoading.show({ template: 'List name should not be empty', noBackdrop: false, duration: 1000 });
 
-                setTimeout(setFocus, 50);
             }else {
                 SupplyService.addSupplies(listName, $scope.addAsAdmin).then(function (response) {
                     if (response.supplyListId > 0) {
@@ -332,10 +336,12 @@
             }
         $scope.createItem = function (listName,data) {
                 if (listName == undefined || listName == "") {
-                    setTimeout(setFocus, 50);
+                    $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
+
                 }
                 else if (data != undefined && data.itemName == "") {
-                    setTimeout(setFocusOnItemBox, 50);
+                    $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
+
                 }
                 else {
                     $scope.createdListItem.data.push(angular.copy(listItemEmpty));
@@ -343,9 +349,7 @@
                 }
         }
 
-        function setFocusOnItemBox(){
-            document.getElementById("ItemEditBox").focus();
-        }
+
         function setFocus(){
             document.getElementById("supplyEdit").focus();
         };
@@ -420,8 +424,10 @@
                     $scope.deleteSuplies=true;
                     SupplyService.deleteSupplyListById(supplyId).then(function(response){
                         if(response){
+
                             $ionicListDelegate.closeOptionButtons();
                             $scope.supplies.splice(index,1);
+                            showEmptySupplyMessage();
 
                         }
                     })

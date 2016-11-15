@@ -28,6 +28,7 @@
         }
         $scope.listItemName="";
         $scope.edit=false;
+        $scope.serverResponse=false;
         $scope.initialize=function() {
             SupplyService.getItemByListId($scope.listId).then(function (response) {
                 $scope.listValue = response;
@@ -51,7 +52,6 @@
 
             }else{
                 $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
-                setTimeout(setFocusOnAdd, 50);
             }
         };
         function setFocusOnAdd(){
@@ -102,7 +102,7 @@
         $scope.addNewListItem=function(){
             $scope.addNewSuppliesItem=!$scope.addNewSuppliesItem
             if($scope.addNewSuppliesItem==true) {
-                setTimeout(setFocusOnAdd, 50);
+
             }
         }
         $scope.cancelAdding=function(){
