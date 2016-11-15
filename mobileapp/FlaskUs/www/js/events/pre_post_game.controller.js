@@ -26,7 +26,7 @@
         var POST_EVENT = "Post-Event";
         var userDetail = $cookies.getObject('CurrentUser');
         if (userDetail != undefined) {
-            var agreedToTermsOfUse = true;
+            var agreedToTermsOfUse = userDetail.data.isContentAdmin;
         }
         if (angular.isUndefined($localStorage["CachedEvents"])) {
             $localStorage["CachedEvents"] =  {};
