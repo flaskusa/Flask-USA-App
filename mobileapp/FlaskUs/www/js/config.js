@@ -12,7 +12,7 @@
         "hostName": "http://52.44.202.166/", 
         "url": "http://52.44.202.166/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
-        "cacheExpireTime":600000
+        "cacheExpireTime":1000
     })
     flaskAppConfig.config(function ($provide) {
             $provide.decorator("$exceptionHandler", function ($delegate, $injector) {

@@ -531,16 +531,12 @@
                     <div style="padding:10px" ng-if="selectedIndex == 3">
                             <ion-content overflow-scroll="false"style="margin-top: 1px">
                                 <div class="list" >
-                                    <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail" ng-if="gettingHomeDetail.phoneNumber==undefined" ng-click="openApp(gettingHomeDetail.infoTitle)">
+                                    <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail" ng-if="gettingHomeDetail.phoneNumber==undefined" ng-click="openApp(gettingHomeDetail)">
                                         <h2 class="tickets" style="text-transform:uppercase;font-size: 24px">{{gettingHomeDetail.infoTitle}}</h2>
-                                        <p class="item-tickets" >{{gettingHomeDetail.phoneNumber}}</p>
+                                        <p class="item-tickets" >{{gettingHomeDetail.phone}}</p>
 
                                     </a>
-                                    <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail" ng-if="gettingHomeDetail.phoneNumber" ng-click="callNow(gettingHomeDetail.phoneNumber)">
-                                        <h2 class="tickets" style="text-transform:uppercase;font-size: 24px">{{gettingHomeDetail.infoTitle}}</h2>
-                                        <p class="item-tickets" >{{gettingHomeDetail.phoneNumber}}</p>
 
-                                    </a>
                                     </div>
                         </ion-content>
                     </div>

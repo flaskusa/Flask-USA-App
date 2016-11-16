@@ -743,12 +743,15 @@
            var telephoneToCall = "tel:" + phonenumber;
                 openUrl(telephoneToCall, "_system");
         };
-        $scope.openApp=function(AppName){
-
+        $scope.openApp=function(AppName) {
+            if (AppName.mobileAppName==""){
+                var telephoneToCall = "tel:" + AppName.phone;
+            openUrl(telephoneToCall, "_system");
+        }
 
                 var scheme;
 
-            if(AppName.toLowerCase()=="uber") {
+            if(AppName.mobileAppName.toLowerCase()=="uber") {
                 if (device.platform === 'iOS') {
                     scheme = 'uber://';
                 }
@@ -763,11 +766,16 @@
                         console.log('uber is available');
                     },
                     function () {
-                        window.open('https://m.uber.com/ul/?action=setPickup', '_system', 'location=no');
-                        console.log('uber is not available');
+                        if (AppName.phone!="") {
+                            var telephoneToCall = "tel:" + AppName.phone;
+                            openUrl(telephoneToCall, "_system");
+                        } else {
+                            window.open('https://m.uber.com/ul/?action=setPickup', '_system', 'location=no');
+                            console.log('uber is not available');
+                        }
                     }
                 );
-            }else if(AppName.toLowerCase()=="lyft"){
+            }else if(AppName.mobileAppName.toLowerCase()=="lyft"){
                 if (device.platform === 'iOS') {
                     scheme = 'lyft://';
                 }
@@ -782,8 +790,13 @@
                         console.log('uber is available');
                     },
                     function () {
-                        window.open('https://www.lyft.com/', '_system', 'location=no');
-                        console.log('uber is not available');
+                        if (AppName.phone != "") {
+                            var telephoneToCall = "tel:" + AppName.phone;
+                            openUrl(telephoneToCall, "_system");
+                        } else {
+                            window.open('https://www.lyft.com/', '_system', 'location=no');
+                            console.log('uber is not available');
+                        }
                     }
                 );
             }
@@ -841,9 +854,6 @@
                             $scope.venueInfoDetail.push(tempObject);
                         }
                         else if ("Getting home" == tempObject.infoTypeCategoryName) {
-                            if(tempObject.phone.length>=10 ) {
-                                tempObject.phoneNumber = tempObject.phone;
-                            }
                             $scope.gettingHomeDetail.push(tempObject);
 
                         }
