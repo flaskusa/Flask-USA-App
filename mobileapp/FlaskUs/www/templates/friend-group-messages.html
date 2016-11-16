@@ -5,7 +5,7 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content overflow-scroll="false">
-        <div ng-if="allMessages.length==0">There are no more Message</div>
+        <div ng-if="allMessages.length==0" class="item">There are no more message.</div>
         <ion-list>
             <ion-item click-for-options ng-repeat="message in allMessages">
                 <h2 class="emailText">{{message.senderName}}</h2>

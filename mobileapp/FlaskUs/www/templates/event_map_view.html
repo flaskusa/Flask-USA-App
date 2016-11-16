@@ -24,7 +24,7 @@
             <div class="col"></div>
         </div>
     </div>
-    <ion-content class="has-footer has-header has-subheader" overflow-scroll="false">
+    <ion-content class="has-footer has-header has-subheader" scroll="false">
         <script type="text/ng-template" id="searchbox.tpl.html" autocomplete="false" class="">
             <input type="text" style="margin: 10px;width: 248px;" placeholder="" />
         </script>
@@ -281,10 +281,13 @@
                 
 
                 <ion-tab title="VENUE MAP" ng-click="selectTab(0)">
-
-                    <div class="image_map_div ">
+                 <ion-content overflow-scroll="false" scroll="false">
+                    <div class="image_map_div " draggable="true">
                         <img id="image" class="venueMapImage" ng-class="{ zoomedvenueMapImage: zoomMapImage==true}" on-double-tap="toggleZoomImage()" ng-src="{{venueMapImageUrl}}" />
+
+
                     </div>
+                     </ion-content>
                 </ion-tab>
 
                 <ion-tab title="VENUE INFO" ng-click="selectTab(1)">
