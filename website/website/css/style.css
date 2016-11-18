@@ -1063,4 +1063,5 @@ button.login_button{
     margin-left: 90%;
     border: none;
     margin-top: 1%;
+	cursor:pointer;
 }

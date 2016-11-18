@@ -59,15 +59,20 @@ return false;
 	$(".login_button").show();
 }, 2000);
 
-function download_app(){
-
-var app=document.getElementById('app_store');
-var play=document.getElementById('play_store');
-
-	if(app.id=="app_store"){
-		window.open("https://itunes.apple.com/us/app/flaskus/id1146208430?mt=8");
-	}
-	else{
-		window.open("https://play.google.com/store/search?q=flaskus&c=apps");
-	}
+function gotoFlask(){
+	location.href = "/web/flask/events";
 }
+$(".downloadapp").click(function(){
+	
+var agent = navigator.userAgent;
+if(agent.indexOf("iPhone") > -1) {
+	location.href = "https://itunes.apple.com/us/app/flaskus/id1146208430?mt=8";
+} else if(agent.indexOf("Android") > -1) {
+	location.href = "https://play.google.com/store/apps/details?id=com.flaskus.tailgate&hl=en";
+}
+else{
+location.href = "https://itunes.apple.com/us/app/flaskus/id1146208430?mt=8";
+}	
+		
+ 
+});
