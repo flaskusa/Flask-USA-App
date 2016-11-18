@@ -158,6 +158,7 @@ public class FlaskDocLibUtil {
 		  try {
 			  folder = DLAppLocalServiceUtil.getFolder(
 		            repositoryId, parentFolderId, eventFolderName);
+			  setGuestViewFolderPermission(folder);
 		  } catch (Exception e) {
 			  folder = DLAppLocalServiceUtil.addFolder(userId,
 		            repositoryId, parentFolderId, eventFolderName,
