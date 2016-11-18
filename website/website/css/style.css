@@ -1053,14 +1053,14 @@ span .icon.appstore{
 button.login_button{
 	    width: 100px;
     height: 38px;
-    border-radius: 15px;
+    border-radius: 3px;
     background-color: black;
     text-shadow: none;
     color: darkorange;
     font-size: 20px;
     font-family: agency;
     font-weight: 600;
-    margin-left: 90%;
+   
     border: none;
     margin-top: 1%;
 	cursor:pointer;
