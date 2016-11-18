@@ -1,6 +1,7 @@
   $(document).ready(function() {
     (function() {
 		$(".logo").hide();
+		$(".login_button").hide();
         [].slice.call(document.querySelectorAll('.tabs')).forEach(function(el) {
             new CBPFWTabs(el);
         });
@@ -55,4 +56,18 @@ return false;
     $('#preloader').fadeOut();
     $('.preloader_img').delay(150).fadeOut('slow');
 	$(".logo").show();
+	$(".login_button").show();
 }, 2000);
+
+function download_app(){
+
+var app=document.getElementById('app_store');
+var play=document.getElementById('play_store');
+
+	if(app.id=="app_store"){
+		window.open("https://itunes.apple.com/us/app/flaskus/id1146208430?mt=8");
+	}
+	else{
+		window.open("https://play.google.com/store/search?q=flaskus&c=apps");
+	}
+}
