@@ -1896,20 +1896,23 @@ div .extra-right-supply{
   padding: 3px;
   background: #000000;
   color: white;
-	width: 260px;
-  border-radius: 2px 2px 0 0;
-   }
+  border-radius: 2px 2px 0 0; 
+  max-width: 99%;
+  width: 220px;
+  }
 
 #iw-container #iw-content {
   text-align: center;
-    font-size: 16px;
-    text-transform: uppercase;
-    font-weight: bold;
-    padding: 3px;
-    background: #ffffff;
-    color: #000000;
-    position: fixed;
-    }
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: bold;
+  padding: 3px;
+  background: #ffffff;
+  color: #000000;
+  position: fixed;
+  max-width: 68%;
+  width: 220px;
+   }
 
 #iw-content .padding {
   padding: 10px; }
