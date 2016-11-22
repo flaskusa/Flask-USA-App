@@ -203,6 +203,7 @@
         }
         $scope.addNewContent=function(){
             $scope.content={infoTitle:"",infoDesc:""};
+            $scope.defaultImageUrl="";
             $scope.editContent = true;
         }
         $scope.editContents=function(content,index){
