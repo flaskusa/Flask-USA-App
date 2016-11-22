@@ -30,10 +30,10 @@
                 $scope.myEvent = respData.data.Events;
 
                 for (var i = 0; i < $scope.myEvent.length; i++) {
-                    if ($scope.myEvent[i].userEvent == 1) {
+                    if ($scope.myEvent[i].userEvent == 0) {
                         $scope.myFilteredEvent.push($scope.myEvent[i]);
                     }
-                    if( $scope.myFilteredEvent.length == 1)
+                    if( $scope.myFilteredEvent.length == 0)
                     {
                         $scope.Add_Event_Error = true;
                     }
@@ -50,9 +50,13 @@
             myEventService.addUserEvent(eventId).then(function (respData) {
                 //$scope.myEvent = respData.data.Events;
                 $scope.myFilteredEvent.splice(index, 1);
+                if( $scope.myFilteredEvent.length == 0)
+                {
+                    $scope.Add_Event_Error = true;
+                }
              //   $scope.AddedSuccess = true;
                 //    $timeout(function () { $scope.AddedSuccess = false; }, 3000);
-                $ionicLoading.show({ template: 'Event Successfully Added!', noBackdrop: false, duration: 2000 });
+                $ionicLoading.show({ template: 'Event added successfully !', noBackdrop: false, duration: 2000 });
             });
         }
     }

@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('my_tailgateCtrl', my_tailgateCtrl);
 
-    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate', '$cookies','SERVER'];
+    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate', '$cookies','SERVER','$ionicPopup'];
 
     /* @ngInject */
-    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies,SERVER) {
+    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies,SERVER,$ionicPopup) {
         var self = this;
         $scope.myTailgate = [];
         $cookies.remove("editUserTailgate");
@@ -73,10 +73,23 @@
 
         $scope.leaveTailgate = function (tailgateId, index) {
             console.log(tailgateId, index);
-            TailgateService.deleteTailgate(tailgateId).then(function (respData) {
-                console.log(respData);
-                $scope.allTailgate.splice(index, 1);
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Tailgate?'
             });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    TailgateService.deleteTailgate(tailgateId).then(function (respData) {
+                        console.log(respData);
+                        $scope.allTailgate.splice(index, 1);
+                    });
+
+                } else {
+                }
+            });
+
+
+
+
 
         }
         $scope.addMyTailgate = function () {

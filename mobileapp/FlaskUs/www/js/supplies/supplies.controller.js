@@ -384,6 +384,7 @@
                 if(response1.userId>0) {
 
                     var failed=false;
+
                     angular.forEach($scope.itemValue,function(value,key){
                         $scope.supplyItemNames.push(value.supplyItemName);
 
@@ -396,7 +397,9 @@
                     if(failed==true){
                         $flaskUtil.alert("failed to copy");
                     }else{
+
                         $scope.supplies.push(list);
+                        showEmptySupplyMessage();
                     }
 
                 }else{

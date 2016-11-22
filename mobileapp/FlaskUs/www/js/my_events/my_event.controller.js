@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('my_eventsCtrl', my_eventsCtrl);
 
-    my_eventsCtrl.$inject = ['$scope', 'myEventService', '$state', '$cookies', '$timeout','SERVER'];
+    my_eventsCtrl.$inject = ['$scope', 'myEventService', '$state', '$cookies', '$timeout','SERVER','$ionicPopup'];
 
     /* @ngInject */
-    function my_eventsCtrl($scope, myEventService, $state, $cookies, $timeout, SERVER) {
+    function my_eventsCtrl($scope, myEventService, $state, $cookies, $timeout, SERVER,$ionicPopup) {
         var self = this;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.myEvent = [];
@@ -22,7 +22,7 @@
                 {
                     $scope.myEventError = true;
                 } else
-                    if (respData.data.Events == undefined) {
+                    if ($scope.myEvent.length==0) {
                     $scope.myNoEventError = true;
                 }
                 
@@ -30,9 +30,22 @@
         }
 
         $scope.removeEvent = function(eventId ,index) {
-            myEventService.removeUserEvent(eventId).then(function (respData) {
-                $scope.myEvent.splice(index, 1);
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Event?'
             });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    myEventService.removeUserEvent(eventId).then(function (respData) {
+                        $scope.myEvent.splice(index, 1);
+                        if ($scope.myEvent.length==0) {
+                            $scope.myNoEventError = true;
+                        }
+                    });
+
+                } else {
+                }
+            });
+
         }
 
         $scope.getVenueNameForVenueId  = function (venueId) {

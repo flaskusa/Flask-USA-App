@@ -84,12 +84,15 @@
                 </div>
             </div>
 
-            <div class="list"ng-if="editContent==true">
-                <div class="list card">
+            <div class="list"ng-if="editContent==true" >
+                <div class="list card" >
                     <div class="item item-image manage_event_default_Image">
                         <img src="{{defaultImageUrl}}" /></div>
                 </div>
-                <a class="item text-center" href=""ng-click="show()">
+                <a class="item text-center" href=""ng-click="show()" ng-if="defaultImageUrl==undefined || defaultImageUrl==''">
+                    Tap to add  picture
+                </a>
+                <a class="item text-center" href=""ng-click="show()" ng-if="defaultImageUrl!=undefined && defaultImageUrl!=''">
                     Tap to add  picture
                 </a>
 

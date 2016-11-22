@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsCtrl', FriendsCtrl);
 
-    FriendsCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsService','$flaskUtil','$state'];
+    FriendsCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsService','$flaskUtil','$state','UserService','SERVER'];
 
     /* @ngInject */
-    function FriendsCtrl($scope, $http, $ionicModal,FriendsService,$flaskUtil,$state) {
+    function FriendsCtrl($scope, $http, $ionicModal,FriendsService,$flaskUtil,$state,UserService,SERVER) {
       $scope.myFriends = [];
       $scope.userContactList = [];
       $scope.startIndex = 0;
@@ -16,6 +16,7 @@
       $scope.searchContact = {"searchtext" :""};
       $scope.messsage = {'messsageToSend':''};
         $scope.moreDataCanBeLoaded = true;
+        $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
 
         $scope.myFriendTab=function(){
             $state.go("app.my_friends_tab.my_friends");
@@ -72,7 +73,14 @@
           $scope.moreDataCanBeLoaded = true;
           FriendsService.getMyFriends(searchText).then(function(response){
               if(response != undefined && Array.isArray(response))   {
-                $scope.myFriends = response;
+                  angular.forEach(response,function(value,key){
+                      if(value.portraitId>0) {
+                          $scope.getUserProfile(value);
+                      }else{
+                          $scope.myFriends.push(value);
+                      }
+                  })
+
                 $scope.searchBox.show  = false;
                 //  $scope.noFriendAdded = $scope.myFriends.length == 0;
               }else{
@@ -81,6 +89,16 @@
               }           
           });
       };
+        $scope.getUserProfile = function(UserDetail) {
+            UserService.getUserProfile(UserDetail.userId).then(function(res) {
+                if(res.data.fileEntryId != undefined) {
+                    UserDetail.friendProfilePicUrl = $scope.profileUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                    $scope.myFriends.push(UserDetail);
+                }
+            },function(err) {
+            })
+        };
+
       $scope.getAllfilteredFrieds = function(searchText) {
           $scope.getMyFriends (searchText);
       };

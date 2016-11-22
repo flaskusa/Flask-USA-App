@@ -10,6 +10,7 @@
         $scope.friendId =FriendsService.data.userId;
         $scope.friend = {};
         $scope.picUrl = SERVER.url+"c/document_library/get_file?uuid=";
+        $scope.profilepicUrl=FriendsService.data.friendProfilePicUrl;
         $scope.showTextArea={show:false};
         $scope.message={messageToSend:""};
         $scope.initialize = function() {

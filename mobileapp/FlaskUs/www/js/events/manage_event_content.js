@@ -280,17 +280,17 @@
 
             if($scope.EventTypeInfo==$scope.duringEventInfo){
                 $scope.flaskUsDetails=$scope.flaskUsDetails1;
-                $scope.infoTypeCategoryId=104;
+                $scope.infoTypeCategoryId=103;
                 $scope.infoTypeId=2;
             }
             else if($scope.EventTypeInfo==$scope.preEventInfo){
                 $scope.flaskUsDetails=$scope.flaskUsDetails2;
-                $scope.infoTypeCategoryId=9;
+                $scope.infoTypeCategoryId=8;
                 $scope.infoTypeId=1;
             }
             else if($scope.EventTypeInfo==$scope.postEventInfo){
                 $scope.flaskUsDetails=$scope.flaskUsDetails3;
-                $scope.infoTypeCategoryId=205;
+                $scope.infoTypeCategoryId=204;
                 $scope.infoTypeId=3;
             }
 
