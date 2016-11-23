@@ -531,6 +531,7 @@
                     value.setVisible(true);
                 });
             } else {
+                 $scope.closeOtherInfoWindows();
                 $scope.markerOptions.visible = false;
                 angular.forEach($scope.markerOptions.control.getGMarkers(), function (value, idx) {
                     value.setVisible(false);
@@ -603,6 +604,7 @@
                     value.setVisible(true);
                 });
             } else {
+                $scope.closeOtherInfoWindows();
                 $scope.hotelFlaskMarkerOptions.visible = false;
                 angular.forEach($scope.hotelFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
                     value.setVisible(false);
@@ -618,6 +620,7 @@
                     value.setVisible(true);
                 });
             } else {
+                $scope.closeOtherInfoWindows();
                 $scope.barFlaskMarkerOptions.visible = false;
                 angular.forEach($scope.barFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
                     value.setVisible(false);
