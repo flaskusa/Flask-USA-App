@@ -2,11 +2,12 @@
     'use strict';
     angular.module('flaskApp')
         .controller('user_registrationCtrl', user_registrationCtrl);
-    user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading'];
+    user_registrationCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading','$state','$flaskUtil'];
 
     /* @ngInject */
-    function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading) {
+    function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading,$state,$flaskUtil) {
         var gender = true;
+        $scope.user={firstName:"",lastName:"",Email:"",password1:"",password2:"",DOB:"",isMale:"",areaCode:"",mobileNumber:""}
 
         $scope.saveUser = function (user) {
             if (user.isMale == 'male') {
@@ -15,11 +16,11 @@
             }
             else { gender = false; }
             console.log(gender);
-            $scope.srcname = user.mobileNumber + user.firstName + user.lastName;
+            $scope.srcname = user.mobileNumber + user.Email;
             UserService.saveUser(user, gender, $scope.srcname).then(function (respData) {
                 // $scope.user = respData.data;
                 if (respData.data.exception == "com.liferay.portal.DuplicateUserEmailAddressException" || respData.data.exception == "com.liferay.portal.DuplicateUserScreenNameException") {
-                    console.log("User is already exist");
+                    $flaskUtil.alert("User is already exist");
                     //$state.go("app.login");
 
                 }
@@ -28,6 +29,7 @@
                 }
                 else {
                     $ionicLoading.show({ template: 'User Registered Successfully!', noBackdrop: false, duration: 2000 });
+                    $state.go("app.login");
                 }
             });
             // document.register_user_form.reset();
@@ -52,7 +54,7 @@
             var ipObj1 = {
                 callback: function (val) {  //Mandatory
                     var currDate = $filter('date')(val, 'MM-dd-yyyy');
-                    $scope.user = { DOB: currDate };
+                    $scope.user.DOB=currDate;
                     //var date1 = new Date(val);
                     // $scope.user.DOB = $filter('date1')(date1, 'yyyy-MM-dd');
                 },

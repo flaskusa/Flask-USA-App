@@ -195,10 +195,10 @@
     angular.module('flaskApp')
         .controller('CreateGroupCtrl', CreateGroupCtrl);
 
-    CreateGroupCtrl.$inject = ['$scope', '$ionicPopover','GroupService','$cookies','$state','$ionicModal','$ionicHistory'];
+    CreateGroupCtrl.$inject = ['$scope', '$ionicPopover','GroupService','$cookies','$state','$ionicModal','$ionicHistory','$localStorage'];
 
     /* @ngInject */
-    function CreateGroupCtrl($scope, $ionicPopover,GroupService,$cookies,$state,$ionicModal,$ionicHistory) {
+    function CreateGroupCtrl($scope, $ionicPopover,GroupService,$cookies,$state,$ionicModal,$ionicHistory,$localStorage) {
         var userDetail = $cookies.getObject('CurrentUser');
         var userId = userDetail.data.userId;
         $scope.myFriends = [];
@@ -255,7 +255,7 @@
             angular.forEach($scope.userContactList,function(value,key){
                 counter++
                 if(value.userId!=userId){
-                    $scope.memberToAddInGroup.push(value);
+                    memberHaveProfilePic(value);
                 }else{
                     $scope.MatchedIndex=counter;
                 }
@@ -263,6 +263,21 @@
             if($scope.MatchedIndex!=-1){
                 $scope.userContactList.splice($scope.MatchedIndex,1);
             }
+
+        }
+        function memberHaveProfilePic(memberDetail){
+            angular.forEach($localStorage["myFriendDetail"],function(value,key){
+                if(value.friendProfilePicUrl!=undefined){
+                    if(value.userId==memberDetail.userId){
+                        memberDetail.friendProfilePicUrl=value.friendProfilePicUrl
+
+                    }
+                }
+
+
+
+            });
+            $scope.memberToAddInGroup.push(memberDetail)
 
         }
         $scope.addUserToGroup=function(data){

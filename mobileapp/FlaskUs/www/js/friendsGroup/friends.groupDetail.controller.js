@@ -3,8 +3,8 @@
     angular.module('flaskApp')
         .controller('FriendsGroupDetailCtrl', FriendsGroupDetailCtrl);
 
-    FriendsGroupDetailCtrl.$inject = ['$scope','GroupService','$stateParams','$state','$ionicModal','$ionicHistory','$ionicPopup','$flaskUtil','$cookies'];
-    function FriendsGroupDetailCtrl($scope,GroupService,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup,$flaskUtil,$cookies) {
+    FriendsGroupDetailCtrl.$inject = ['$scope','GroupService','$stateParams','$state','$ionicModal','$ionicHistory','$ionicPopup','$flaskUtil','$cookies','$localStorage'];
+    function FriendsGroupDetailCtrl($scope,GroupService,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup,$flaskUtil,$cookies,$localStorage) {
 
         $scope.groupTitle=$stateParams.groupName;
 
@@ -43,12 +43,33 @@
         }
         $scope.getMember=function() {
             GroupService.getAllGroupMember($scope.groupId).then(function (response) {
-                $scope.allMember = response;
+                $scope.allMember=[]
+
+               angular.forEach(response,function(value,key){
+                   haveProfilePic(value)
+               })
                 $scope.isLoginAdmin();
+
 
 
             });
         }
+        function haveProfilePic(memberDetail){
+            angular.forEach($localStorage["myFriendDetail"],function(value,key){
+                if(value.friendProfilePicUrl!=undefined){
+                    if(value.userId==memberDetail.userId){
+                        memberDetail.friendProfilePicUrl=value.friendProfilePicUrl
+
+                    }
+                }
+
+
+
+            });
+            $scope.allMember.push(memberDetail)
+
+        }
+
 
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
@@ -115,7 +136,7 @@
             angular.forEach($scope.userContactList,function(value,key){
                 counter++
                 if(value.userId!=userId){
-                    $scope.memberToAddInGroup.push(value);
+                    memberHaveProfilePic(value)
                 }else{
                     $scope.MatchedIndex=counter;
                 }
@@ -125,6 +146,22 @@
             }
 
         }
+        function memberHaveProfilePic(memberDetail){
+            angular.forEach($localStorage["myFriendDetail"],function(value,key){
+                if(value.friendProfilePicUrl!=undefined){
+                    if(value.userId==memberDetail.userId){
+                        memberDetail.friendProfilePicUrl=value.friendProfilePicUrl
+
+                    }
+                }
+
+
+
+            });
+            $scope.memberToAddInGroup.push(memberDetail)
+
+        }
+
         $scope.addUserToGroup=function(data){
             GroupService.addUserToGroup($scope.groupId,data.emailAddress,data.userId,data.fullName,0).then(function(response){
                 var userId=response.userId;
@@ -135,7 +172,10 @@
         $scope.finishAddingMember=function(){
             $scope.modal.hide();
             GroupService.getAllGroupMember($scope.groupId).then(function(response){
-                $scope.allMember=response;
+                $scope.allMember=[]
+                angular.forEach(response,function(value,key){
+                    haveProfilePic(value)
+                })
             });
         }
         $scope.removeMember= function(data,index) {

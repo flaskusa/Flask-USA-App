@@ -45,7 +45,7 @@
                 mobileNumber: user.mobileNumber
             };
             return $http.get(SERVER.url + addUserURL, {
-                params
+                params:params
             }
             )
             .then(function success(response) {
@@ -118,7 +118,7 @@
             };
 
             return $http.get(SERVER.url + updateUserURL, {
-                params
+                params:params
             }
             )
             .then(function success(response) {

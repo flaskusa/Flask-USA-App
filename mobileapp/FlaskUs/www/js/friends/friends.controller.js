@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsCtrl', FriendsCtrl);
 
-    FriendsCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsService','$flaskUtil','$state','UserService','SERVER'];
+    FriendsCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsService','$flaskUtil','$state','UserService','SERVER','$localStorage'];
 
     /* @ngInject */
-    function FriendsCtrl($scope, $http, $ionicModal,FriendsService,$flaskUtil,$state,UserService,SERVER) {
+    function FriendsCtrl($scope, $http, $ionicModal,FriendsService,$flaskUtil,$state,UserService,SERVER,$localStorage) {
       $scope.myFriends = [];
       $scope.userContactList = [];
       $scope.startIndex = 0;
@@ -16,6 +16,9 @@
       $scope.searchContact = {"searchtext" :""};
       $scope.messsage = {'messsageToSend':''};
         $scope.moreDataCanBeLoaded = true;
+        if($localStorage["myFriendDetail"]==undefined) {
+            $localStorage["myFriendDetail"] = [];
+        }
         $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
 
         $scope.myFriendTab=function(){
@@ -78,6 +81,9 @@
                           $scope.getUserProfile(value);
                       }else{
                           $scope.myFriends.push(value);
+                          if(userExistInLocal(value)==false)  {
+                              $localStorage["myFriendDetail"].push(value)
+                          }
                       }
                   })
 
@@ -94,10 +100,23 @@
                 if(res.data.fileEntryId != undefined) {
                     UserDetail.friendProfilePicUrl = $scope.profileUrl + res.data.uuid + "&groupId=" + res.data.groupId;
                     $scope.myFriends.push(UserDetail);
+
+                    if(userExistInLocal(UserDetail)==false) {
+                        $localStorage["myFriendDetail"].push(UserDetail);
+                    }
                 }
             },function(err) {
             })
         };
+        function userExistInLocal(userDetail){
+            var exist=false;
+            angular.forEach($localStorage["myFriendDetail"],function(value,key){
+                if(value.userId==userDetail.userId){
+                    exist=true
+                }
+            })
+            return exist;
+        }
 
       $scope.getAllfilteredFrieds = function(searchText) {
           $scope.getMyFriends (searchText);
