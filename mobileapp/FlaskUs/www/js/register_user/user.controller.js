@@ -16,11 +16,12 @@
             }
             else { gender = false; }
             console.log(gender);
-            $scope.srcname = user.mobileNumber + user.Email;
+            $scope.srcname = user.mobileNumber + user.firstName + user.lastName;
             UserService.saveUser(user, gender, $scope.srcname).then(function (respData) {
                 // $scope.user = respData.data;
-                if (respData.data.exception == "com.liferay.portal.DuplicateUserEmailAddressException" || respData.data.exception == "com.liferay.portal.DuplicateUserScreenNameException") {
-                    $flaskUtil.alert("User is already exist");
+                if (respData.data.exception == "com.liferay.portal.DuplicateUserEmailAddressException" || respData.data.exception=="com.liferay.portal.UserScreenNameException") {
+                    $flaskUtil.alert("User already exist")
+
                     //$state.go("app.login");
 
                 }
@@ -29,7 +30,9 @@
                 }
                 else {
                     $ionicLoading.show({ template: 'User Registered Successfully!', noBackdrop: false, duration: 2000 });
-                    $state.go("app.login");
+                    $timeout(function () {
+                        $state.go("app.login");
+                    },2200);
                 }
             });
             // document.register_user_form.reset();
@@ -45,7 +48,7 @@
                     $timeout(function () {
                         myPopup.close(); //close the popup after 3 seconds for some reason
                     }, 3000);
-                    document.register_user_form.reset();
+
                 }
             });
         }

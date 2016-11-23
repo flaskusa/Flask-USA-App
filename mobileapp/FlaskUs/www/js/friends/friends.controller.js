@@ -97,6 +97,10 @@
           $scope.moreDataCanBeLoaded = true;
           FriendsService.getMyFriends(searchText).then(function(response){
               if(response != undefined && Array.isArray(response))   {
+                  if($localStorage["myFriendDetail"].length==response.length){
+                      $scope.myFriends=$localStorage["myFriendDetail"];
+                  }
+                  else{
                   angular.forEach(response,function(value,key){
                       if(value.portraitId>0) {
                           $scope.getUserProfile(value);
@@ -110,7 +114,7 @@
 
                 $scope.searchBox.show  = false;
                 //  $scope.noFriendAdded = $scope.myFriends.length == 0;
-              }else{
+              }}else{
                   $flaskUtil.alert("Failed to load friends List");
                   $scope.searchBox.show  = false;
               }           
