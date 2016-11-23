@@ -37,7 +37,7 @@
                             <input type="password" placeholder="Confirm Password" class="form-control" ng-model="user.password2" name="password2" required="">
                             <div ng-show="register_user_form.$submitted || register_user_form.password2.$touched">
                                 <span ng-show="register_user_form.password2.$error.required" class="error_msg">Please enter confirm password.</span>
-                                <span ng-show="user.password1!=user.password2 && !register_user_form.password2.$error.required" class="error_msg">Please enter same password.</span>
+                                <span ng-show="user.password1!=user.password2 && !register_user_form.password2.$error.required" class="error_msg">Confirm password did not match!</span>
                             </div>
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">

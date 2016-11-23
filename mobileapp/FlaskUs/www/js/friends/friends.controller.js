@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsCtrl', FriendsCtrl);
 
-    FriendsCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsService','$flaskUtil','$state','UserService','SERVER','$localStorage'];
+    FriendsCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsService','$flaskUtil','$state','UserService','SERVER','$localStorage','$ionicScrollDelegate','$ionicPopup'];
 
     /* @ngInject */
-    function FriendsCtrl($scope, $http, $ionicModal,FriendsService,$flaskUtil,$state,UserService,SERVER,$localStorage) {
+    function FriendsCtrl($scope, $http, $ionicModal,FriendsService,$flaskUtil,$state,UserService,SERVER,$localStorage,$ionicScrollDelegate,$ionicPopup) {
       $scope.myFriends = [];
       $scope.userContactList = [];
       $scope.startIndex = 0;
@@ -55,22 +55,43 @@
           $scope.searchContact.searchtext =  "";
       };
         $scope.unFriend = function(userId,index) {
-            FriendsService.unFriend(userId).then(function(res) {
-            if(res){
-                $scope.myFriends.splice(index,1)
-            }else(
-                $flaskUtil.alert("failed to unFriend")
-            )
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Unfriend ?'
             });
-        };
-        $scope.blockFriend = function(userId) {
-            FriendsService.blockUser(userId).then(function(res) {
-              if(res){
+            confirmPopup.then(function(res) {
+                if(res) {
+                    FriendsService.unFriend(userId).then(function(res) {
+                        if(res){
+                            $scope.myFriends.splice(index,1)
+                        }else(
+                            $flaskUtil.alert("failed to unFriend")
+                            )
+                    });
+                } else {
+                }
+            });
 
-              }else{
-                  $flaskUtil.alert("failed to block");
-              }
+
+
+        };
+        $scope.blockFriend = function(userId,index) {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Block friend?'
             });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    FriendsService.blockUser(userId).then(function(res) {
+                        if(res){
+                            $scope.myFriends.splice(index,1)
+
+                        }else{
+                            $flaskUtil.alert("failed to block");
+                        }
+                    });
+                } else {
+                }
+            });
+
         };
       $scope.getMyFriends = function(searchText) {
           $scope.moreDataCanBeLoaded = true;
@@ -81,7 +102,7 @@
                           $scope.getUserProfile(value);
                       }else{
                           $scope.myFriends.push(value);
-                          if(userExistInLocal(value)==false)  {
+                          if(userExistInLocal(value)==false){
                               $localStorage["myFriendDetail"].push(value)
                           }
                       }
@@ -135,7 +156,11 @@
            FriendsService.searchUserContact( $scope.searchContact.searchtext, $scope.startIndex, $scope.endIndex).then(function(response){
                 if(response != undefined && Array.isArray(response))   {
                         $scope.userContactList = response;
+                        if($scope.userContactList.length<10){
+                            $ionicScrollDelegate.scrollTop();
+                        }
                         if($scope.userContactList.length < $scope.endIndex-1) {
+
                             $scope.moreDataCanBeLoaded = false;
                         }else{
                             $scope.moreDataCanBeLoaded = true;

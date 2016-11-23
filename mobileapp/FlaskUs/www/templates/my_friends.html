@@ -46,10 +46,10 @@
                 </a>
 
                 <ion-option-button  class="icon ion-trash-a"ng-click="unFriend(data.userId,$index)"></ion-option-button>
-                <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(data.userId)"></ion-option-button>
+                <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(data.userId,$index)"></ion-option-button>
 
             </ion-item>
-            <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. Please search and add friends </a>
+            <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. </a>
 
 
         </ion-list>

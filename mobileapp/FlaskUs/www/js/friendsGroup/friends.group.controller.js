@@ -62,7 +62,7 @@
             confirmPopup.then(function(res) {
                 if(res) {
                     GroupService.leaveGroup(groupId,userId).then(function(response){
-                        if(response=={}){
+                        if(response){
                             $scope.groups.splice(index,1)
                         }else{
                             $flaskUtil.alert("failed to leave");

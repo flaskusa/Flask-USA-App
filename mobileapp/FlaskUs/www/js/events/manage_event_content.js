@@ -200,14 +200,19 @@
         }
         $scope.cancelEdit=function(){
             $scope.editContent = false;
+            $scope.defaultImageUrl="";
+            $scope.selectedImageURIToUpload=""
+
         }
         $scope.addNewContent=function(){
             $scope.content={infoTitle:"",infoDesc:""};
             $scope.defaultImageUrl="";
+            $scope.selectedImageURIToUpload=""
             $scope.editContent = true;
         }
         $scope.editContents=function(content,index){
             $scope.content=content;
+            $scope.selectedImageURIToUpload=""
             $scope.defaultImageUrl=content.imageUrl;
             $scope.editContent=true;
         }
