@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('ManageEventCtrl', ManageEventCtrl);
 
-    ManageEventCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', 'SERVER','$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope','$cookies'];
+    ManageEventCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', 'SERVER','$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope','$cookies','$ionicScrollDelegate'];
 
     /* @ngInject */
-    function ManageEventCtrl($scope, $stateParams, $state, EventsService, SERVER,$ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService,$rootScope,$cookies) {
+    function ManageEventCtrl($scope, $stateParams, $state, EventsService, SERVER,$ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService,$rootScope,$cookies,$ionicScrollDelegate) {
         $scope.eventDetails = [];
         var test=$stateParams.eventDetails
         $scope.eventName=$stateParams.currEventName;
@@ -27,6 +27,7 @@
         $scope.show = function () {
             // Show the action sheet
             $scope.selectedImageURIToUpload = '';
+            $scope.reSetSelectedImageURIToUpload();
             $scope.loc = {};
             var customTemplate =
                 '<div class="list">'
@@ -202,18 +203,24 @@
         $scope.cancelEdit=function(){
             $scope.editContent = false;
             $scope.defaultImageUrl="";
+            $ionicScrollDelegate.scrollTop();
             $scope.selectedImageURIToUpload=""
+            $scope.reSetSelectedImageURIToUpload();
 
         }
         $scope.addNewContent=function(){
             $scope.content={infoTitle:"",infoDesc:""};
             $scope.defaultImageUrl="";
-            $scope.selectedImageURIToUpload=""
+            $scope.selectedImageURIToUpload="";
+            $ionicScrollDelegate.scrollTop();
             $scope.editContent = true;
+            $scope.reSetSelectedImageURIToUpload();
         }
         $scope.editContents=function(content,index){
             $scope.content=content;
-            $scope.selectedImageURIToUpload=""
+            $scope.selectedImageURIToUpload="";
+            $ionicScrollDelegate.scrollTop();
+            $scope.reSetSelectedImageURIToUpload();
             $scope.defaultImageUrl=content.imageUrl;
             $scope.editContent=true;
         }
