@@ -26,6 +26,7 @@
         $scope.infoTypeCategoryId=103;
         $scope.show = function () {
             // Show the action sheet
+            $scope.selectedImageURIToUpload = '';
             $scope.loc = {};
             var customTemplate =
                 '<div class="list">'
