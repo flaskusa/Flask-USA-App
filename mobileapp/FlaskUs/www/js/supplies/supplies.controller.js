@@ -3,10 +3,10 @@
     angular.module('flaskApp')
     .controller('SuppliesCtrl', SuppliesCtrl);
 
-    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate','$stateParams','$localStorage','$ionicHistory','$ionicLoading','$ionicPopup'];
+    SuppliesCtrl.$inject = ['$scope', 'SupplyService', '$ionicModal','$location','$flaskUtil','$cookies','$state','$timeout','$ionicListDelegate','$stateParams','$localStorage','$ionicHistory','$ionicLoading','$ionicPopup','$ionicScrollDelegate'];
 
     /* @ngInject */
-    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate,$stateParams,$localStorage,$ionicHistory,$ionicLoading,$ionicPopup ) {
+    function SuppliesCtrl($scope,  SupplyService, $ionicModal,$location,$flaskUtil,$cookies,$state,$timeout,$ionicListDelegate,$stateParams,$localStorage,$ionicHistory,$ionicLoading,$ionicPopup,$ionicScrollDelegate ) {
 
         $scope.userDataList=[];
         $scope.supplies=[];
@@ -123,6 +123,7 @@
             SupplyService.getItemByListId(supplyId).then(function (response) {
                 $scope.MyGameDaysSupply = response;
                 $scope.showSelectedSupplyListItem();
+                $ionicScrollDelegate.scrollTop();
 
                 if ($scope.hideMyItem == false) {
                     $scope.toggleMyItem();

@@ -37,7 +37,7 @@
                 + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="gallery();">'
                 + 'Gallery'
                 + '</button>'
-                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="removePicture();" ng-if="isTailgateAdmin && tailgateLogoId > 0">'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="removePicture();" ng-if="content.eventDetailImageId>0" >'
                 + 'Remove Picture'
                 + '</button>'
                 + '</div>'
@@ -76,7 +76,7 @@
             var options = {
                 destinationType: Camera.DestinationType.FILE_URI,
                 sourceType: Camera.PictureSourceType.PHOTOLIBRARY,
-                allowEdit: true,
+                allowEdit: false,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: true,
                 correctOrientation: false
@@ -149,7 +149,9 @@
                     var imageUUID = data.imageUUID;
                     var imageGroupId = data.imageGroupId;
                     /*$scope.setEventDetailUrl(eventDetailId, imageUUID, imageGroupId);*/
+                    $scope.editContent = false;
                     $scope.initialize();
+
                 }, function (error) {
                     $scope.reSetSelectedImageURIToUpload();
                     $rootScope.$broadcast('loading:hide')
@@ -190,7 +192,9 @@
                             if($scope.selectedImageURIToUpload!=undefined && $scope.selectedImageURIToUpload!='') {
                                 $scope.uploadFileToServer($scope.selectedImageURIToUpload, response.data.eventId, response.data.eventDetailId);
                             }
-                            $scope.editContent = false;
+                            else{
+                                $scope.editContent = false;
+                            }
 
                         });
                     }
@@ -199,6 +203,15 @@
             }
 
 
+        }
+        $scope.removePicture=function(){
+            EventsService.deleteEventDetailImageById($scope.content.eventDetailImageId).then(function(response2){
+                $scope.cameraPopup.close();
+                $scope.defaultImageUrl="";
+                $scope.content.imageUrl="";
+                $scope.selectedImageURIToUpload=""
+
+            })
         }
         $scope.cancelEdit=function(){
             $scope.editContent = false;
