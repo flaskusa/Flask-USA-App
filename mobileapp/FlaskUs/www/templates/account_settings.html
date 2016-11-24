@@ -40,6 +40,9 @@
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Confirm Password</span>
                         <input type="password" placeholder="Confirm Password" class="form-control" ng-model="user.password2" name="password2">
+                         <div >
+                                <span ng-show="user.password2.trim().length > 0 && user.password1!=user.password2" class="error_msg">Confirm password did not match!</span>
+                        </div>
                     </label>
                     <div class="item item-input item-floating-label item-icon-right">
                         <span class="input-label">Date of Birth</span>
@@ -48,13 +51,13 @@
                     </div>
                     <label class="item item-input">
                         <span class="input-label">Gender</span>
-                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"male"' name="rdoResult">Male</ion-radio></pre>
-                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"female"' name="rdoResult">Female</ion-radio></pre>
+                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value = "true" >Male</ion-radio></pre>
+                        <pre><ion-radio type="radio" ng-model='user.isMale' name="rdoResult" ng-value = "false">Female</ion-radio></pre>
                     </label>
 
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Mobile Number</span>
-                        <input type="text" placeholder="Mobile Number" ng-model="mobileNumber">
+                        <input type="text" placeholder="Mobile Number" ng-model="user.mobileNumber">
                     </label>
                 </div>
                

@@ -2,22 +2,22 @@
     'use strict';
     angular.module('flaskApp')
         .controller('account_settingsCtrl', account_settingsCtrl);
-    account_settingsCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService','SERVER','$rootScope'];
+    account_settingsCtrl.$inject = ['$scope', 'UserService', '$ionicPopup', '$timeout', 'ionicDatePicker', '$filter', '$cookies', '$ionicLoading', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService','SERVER','$rootScope','$flaskUtil'];
 
     /* @ngInject */
-    function account_settingsCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService,SERVER,$rootScope) {
+    function account_settingsCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService,SERVER,$rootScope,$flaskUtil) {
         var gender = true;
         $scope.country = [];
         $scope.state = [];
         var countryArray;
         var stateArray;
-        $scope.cId = [];
-        $scope.sId = [];
+        $scope.cId = 0;
+        $scope.sId = 0;
         $scope.sport = [];
         $scope.level = [];
         $scope.concert = [];
         $scope.interest = [];
-        var interestArray;
+        var interestArray = "";
          $scope.userProfileUrl = "";
          $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.isMobile = {
@@ -328,15 +328,11 @@
         }
 
         $scope.updateUserInfo = function (user, userId) {
-            if (user.isMale == 'male') {
-                gender = true;
-            }
-            else { gender = false; }
-            UserService.updateUser(user, $scope.userid, gender, $scope.cId, $scope.sId, interestArray).then(function (respData) {
+            UserService.updateUser(user, $scope.userid, user.isMale, $scope.cId, $scope.sId, interestArray).then(function (respData) {
                 
                 $scope.userInfo = respData.data;
-                if ($scope.userInfo.message == "No JSON web service action associated with path /flaskadmin/update-flask-user and method GET for //flask-rest-users-portlet") {
-                    $ionicLoading.show({ template: 'Please Fill All The Fields', noBackdrop: false, duration: 2000 });
+                if (respData.data.userId == undefined) {
+                    $flaskUtil.alert("Failed to update.");
                 }
                 else {
                     $ionicLoading.show({ template: 'User Updated Successfully!', noBackdrop: false, duration: 2000 });
@@ -346,11 +342,9 @@
 
         $scope.openDatePickerOne = function (val) {
             var ipObj1 = {
-                callback: function (val) {  //Mandatory
+                callback: function (val) { 
                     var currDate = $filter('date')(val, 'MM-dd-yyyy');
-                    $scope.user = { DOB: currDate };
-                    //var date1 = new Date(val);
-                    // $scope.user.DOB = $filter('date1')(date1, 'yyyy-MM-dd');
+                    $scope.user.DOB = currDate;
                 },
                 disabledDates: [
                   new Date("08-16-2016")

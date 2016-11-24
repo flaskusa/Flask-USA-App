@@ -26,10 +26,7 @@
                     var user = $localStorage['RememberUser'];
                     LoginService.authenticateUser(user).then(function (respData) {
                         if (respData.data.message == "Authenticated access required") {
-                            $scope.Error = true;
-                            $timeout(function () {
-                                $scope.Error = false;
-                            }, 3000);
+                            return;
                         }
                         else if (respData.data.emailAddress == "") {
                         }
