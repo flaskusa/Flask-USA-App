@@ -263,18 +263,10 @@ getTailgateMarkers(tailgateId);
       
 
         // invoke on type search box
-        $scope.loadeventData = function () {
-            var EventId = 0;
-            var shownVal = document.getElementById("envtName").value;
-            var EventCol = document.querySelector("#EventNameList option[value='" + shownVal + "']");
-            if (EventCol == null) {
-                EventId = 0;
-            } else {
-                EventId = EventCol.getAttribute("data_Id");
-            }
-            if(EventId > 0) {
-                $scope.addTailgateParams.eventId = EventId;
-                getEventDetails(EventId);
+        $scope.loadeventData = function (eventId) {
+            if(eventId > 0) {
+                $scope.addTailgateParams.eventName=$( "#EventNameList option:selected" ).text();
+                getEventDetails(eventId);
             }
         }
         //get event and venue details in select box
@@ -315,10 +307,11 @@ getTailgateMarkers(tailgateId);
             $scope.selectedtime1 = getTailgateTime(new Date(startTimeInMilis));
             $scope.selectedtime2 = getTailgateTime(new Date(endTimeInMilis));
             $scope.tailgateLogoId = tailgateDetails.logoId;
+            $scope.addTailgateParams.eventId=tailgateDetails.eventId+"";
             $scope.addTailgateParams = {
                 tailgateName: tailgateDetails.tailgateName,
                 tailgateDescription: tailgateDetails.tailgateDescription,
-                eventId: tailgateDetails.eventId,
+                eventId: tailgateDetails.eventId + "",
                 eventName: tailgateDetails.eventName,
                 venmoAccountId: tailgateDetails.venmoAccountId,
                 amountToPay: tailgateDetails.amountToPay,
@@ -369,7 +362,7 @@ getTailgateMarkers(tailgateId);
 
         $scope.removePicture = function () {
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Remove tailgate logo ?',
+                title: 'Remove tailgate logo ?'
             });
 
             confirmPopup.then(function (res) {
@@ -521,13 +514,15 @@ getTailgateMarkers(tailgateId);
         }
         //add new tailgate
         $scope.addmyTailgate = function (tailgatedata) {
+            if (!(tailgatedata.eventId > 0)) {
+                $flaskUtil.alert("Please select event");
+                return;
+            }
             if (!validateTailgate(tailgatedata)) {
                 console.log("Invalid date");
             }
             tailgatedata = angular.copy(tailgatedata);
-            if (tailgatedata.eventName.trim() == '' || !tailgatedata.eventId > 0) {
-                return;
-            }
+
             var startTime = Date.parse(tailgatedata.startTime); // Your timezone!
             var endTime = Date.parse(tailgatedata.endTime);
             tailgatedata.tailgateDate = new Date($scope.tailgateDate).getTime();

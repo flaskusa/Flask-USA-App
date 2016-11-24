@@ -29,7 +29,7 @@
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Description:</span>
                             <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="addTailgateParams.tailgateDescription"
-                                required>
+                                >
                         </div>
                         <div id="toaster" ng-if="tailgateCreateStatus==true"class="item toastDiv" style="text-align: center" ><i>Tailgate Added successfully</i> </div>
                         <!--<div class="item item-input item-floating-label">
@@ -45,12 +45,17 @@
                         <span class="input-label" style="margin-left: 15px">Event Name</span>
                         <div class="list">
                             <label class="item item-input item-select">
-                                <select ng-model="addTailgateParams.eventName"  ng-change="loadeventData()" ng-init="addTailgateParams.eventName = (addTailgateParams.eventName == undefined || addTailgateParams.eventName=='') ? '-1' : addTailgateParams.eventName" style="max-width: 100%;direction:inherit">
+                                <select id="EventNameList" ng-model="addTailgateParams.eventId" name="TailgateEventName"  ng-change="loadeventData(addTailgateParams.eventId)" ng-init="addTailgateParams.eventId = (addTailgateParams.eventId == undefined || addTailgateParams.eventId=='') ? '-1' : addTailgateParams.eventId" style="max-width: 100%;direction:inherit">
                                     <option value="-1" style="direction: inherit" >--Select Event--</option>
-                                    <option style="direction: inherit" ng-repeat="data in eventDetails" value="{{data.eventName}}">{{data.eventName}}</option>
+                                    <option style="direction: inherit" ng-repeat="data in eventDetails" value="{{data.eventId}}">{{data.eventName}}</option>
+
                                 </select>
-                                </select>
+
                             </label>
+                            <div ng-show="tailgateForm.$submitted || tailgateForm.TailgateEventName.$touched">
+                                <span ng-show="tailgateForm.$invalid && !tailgateForm.TailgateName.$error.required" class="error_msg" style="font-size: 16px;margin-left: 15px">Please select event</span>
+                            </div>
+
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Event Date</span>

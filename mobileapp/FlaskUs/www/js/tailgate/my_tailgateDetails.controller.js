@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgateDetailsCtrl', mytailgateDetailsCtrl);
 
-    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope'];
+    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope','$ionicSlideBoxDelegate'];
 
     /* @ngInject */
-    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope) {
+    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope,$ionicSlideBoxDelegate) {
         $cookies.remove("currtailGateMakers");
         $scope.myTailgaters = [];
         $scope.allMessages = [];
@@ -38,6 +38,28 @@
                 return ionic.Platform.isWindowsPhone();
             }
         };
+        $scope.showPopup = function (index) {
+             $scope.data = {};
+            $scope.currentIndex=index;
+            $scope.myPopup = $ionicPopup.show({
+                cssClass: 'custom-class custom-popup',
+                templateUrl: 'templates/tailgateDetailImageSlider.html',
+                scope: $scope
+            });
+            IonicClosePopupService.register($scope.myPopup);
+
+            $scope.popupClose = function () {
+                $scope.myPopup.close();
+            }
+
+        };
+        $scope.slidePrevious1 = function (tailgateImageViewer) {
+            $ionicSlideBoxDelegate.$getByHandle(tailgateImageViewer).previous();
+        }
+
+        $scope.slideNext1 = function (tailgateImageViewer) {
+            $ionicSlideBoxDelegate.$getByHandle(tailgateImageViewer).next();
+        }
 
 
         function getMyTailgate() {
@@ -130,9 +152,19 @@
 
         $scope.isUserTailgateAdmin(tailGateId);
         $scope.removeTailgateImage = function (index, imageId) {
-            TailgateService.deleteTailgateImageByImageId(imageId).then(function (res) {
-                $scope.myTailgateImages.splice(index, 1);
-            })
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Image ?'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    TailgateService.deleteTailgateImageByImageId(imageId).then(function (res) {
+                        $scope.myTailgateImages.splice(index, 1);
+                    })
+
+                } else {
+                }
+            });
+
         }
         function editTailgate(tailGateId) {
             var addTailgateParams = {}

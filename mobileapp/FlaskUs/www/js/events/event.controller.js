@@ -11,7 +11,6 @@
         var self = this;
         $scope.allEvents = [];
         $scope.localstorageData = [];
-        $scope.get_geolocation_data ;
         $scope.showAddv=false;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         var DEFAULT_ZIPCODE = 48226; /*Detroit Zip Code*/
