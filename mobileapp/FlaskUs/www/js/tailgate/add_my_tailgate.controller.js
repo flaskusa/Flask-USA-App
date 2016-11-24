@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('add_mytailgateCtrl', add_mytailgateCtrl);
 
-    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicTabsDelegate', '$ionicLoading'];
+    add_mytailgateCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cordovaDatePicker', '$timeout', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$filter', '$ionicModal', '$flaskUtil', '$cookies', 'ionicDatePicker', 'ionicTimePicker', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicTabsDelegate', '$ionicLoading','$localStorage','UserService'];
 
     / @ngInject /
-    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicTabsDelegate, $ionicLoading) {
+    function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicTabsDelegate, $ionicLoading,$localStorage,UserService) {
         //for adding tailgate
         var tailgateId = $cookies.get("currtailGateId");
         $scope.copytTailgateId = tailgateId;
@@ -607,10 +607,49 @@ getTailgateMarkers(tailgateId);
             });
         }
         function getAllFriends() {
-            TailgateService.getUserFrends().then(function (respData) {
-                $scope.myFriends = respData;
+            TailgateService.getUserFrends().then(function (response) {
+                if($localStorage["myFriendDetail"].length==response.length){
+                    $scope.myFriends=$localStorage["myFriendDetail"];
+                }
+                else{
+                    angular.forEach(response,function(value,key){
+                        if(value.portraitId>0) {
+                            $scope.getUserProfile(value);
+                        }else{
+                            $scope.myFriends.push(value);
+                            if(userExistInLocal(value)==false){
+                                $localStorage["myFriendDetail"].push(value)
+                            }
+                        }
+                    })
+
+                }
+            })}
+        $scope.getUserProfile = function(UserDetail) {
+            UserService.getUserProfile(UserDetail.userId).then(function(res) {
+                    if (res.data.fileEntryId != undefined) {
+                        UserDetail.friendProfilePicUrl = $scope.imgUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                        $scope.myFriends.push(UserDetail);
+
+                        if (userExistInLocal(UserDetail) == false) {
+                            $localStorage["myFriendDetail"].push(UserDetail);
+                        }
+                    }
+
+
+            },function(err) {
             })
+        };
+        function userExistInLocal(userDetail){
+            var exist=false;
+            angular.forEach($localStorage["myFriendDetail"],function(value,key){
+                if(value.userId==userDetail.userId){
+                    exist=true
+                }
+            })
+            return exist;
         }
+
         //add single member to the tailgate
         $scope.addTailgateMembers = function (currUserData, index) {
             var addUserparams = {};
@@ -685,11 +724,11 @@ getTailgateMarkers(tailgateId);
         }
 
         //Get tailgators
-        function getAllFriends() {
+       /* function getAllFriends() {
             TailgateService.getUserFrends().then(function (respData) {
                 $scope.myFriends = respData;
             })
-        }
+        }*/
 
         //Get tailgates of particular user
         // function getAllMyTailgates(userId) {

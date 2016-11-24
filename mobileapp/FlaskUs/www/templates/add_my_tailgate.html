@@ -140,12 +140,16 @@
                             <div class="expand-collapse-content">
                                 <div>
                                     <a class="item item-thumbnail-left item-icon-right eventList" ng-repeat="data in myFriends">
-                                        <img class="list-thumbnail listImages" src='img/default-profilepic-copy.png' ;">
+                                        <img ng-if="data.friendProfilePicUrl==undefined" class="list-thumbnail listImages" src='img/default-profilepic-copy.png'>
+                                        <img ng-if="data.friendProfilePicUrl!=undefined" class="list-thumbnail listImages" src='{{data.friendProfilePicUrl}}' style="border-radius: 50%;
+    height: 56px;
+    width: 56px;">
+
                                         <h2 class="eventNameCol_tailgate">{{ data.fullName | uppercase}}</h2>
                                         <p class="dateCol_tailgate">{{ data.emailAddress}}</p>
                                         <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="addTailgateMembers(data,$index)"></span>
                                     </a>
-                                    <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. Please search and add friends </a>
+                                    <a class="item" ng-if="myFriends.length == 0"> You do not have any friends to add. </a>
                                 </div>
                             </div>
                         </div>

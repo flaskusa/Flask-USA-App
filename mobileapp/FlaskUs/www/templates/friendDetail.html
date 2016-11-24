@@ -9,7 +9,7 @@
     <div ng-if="profilepicUrl!=undefined"><img src="{{profilepicUrl}}" class="list-thumbnail friend_profilepic"  onError="this.src = 'img/default-profilepic-copy.png'" style="    border-radius: 50%;
     display: inline-block;
     width: 200px;
-    height: 200px"/></div>
+    height: 200px;margin-top: 9px"/></div>
       <div ng-if="profilepicUrl==undefined"><img src="img/default-profilepic-copy.png" class="list-thumbnail friend_profilepic"/></div>
     <div>
         <h2 class="eventNameCol" ng-bind-template="{{ friend.firstName }} {{friend.lastName}}"></h2>
