@@ -49,7 +49,7 @@
                                 <p class="photobuttontext">ADD <br /> PHOTO</p>
                             </a>
                             <a class="item item-list-detail image_list">
-                                <ion-scroll direction="x" class="tailgate_thumb" style="overflow: scroll">
+                                <ion-scroll direction="x" class="tailgate_thumb" style="overflow: scroll;overflow-x: scroll">
                                     <span ng-repeat="images in myTailgateImages">
                                     <span data-ng-click="removeTailgateImage($index,images.tailgateImageId)" ng-if = "isTailgateAdmin"><i  class="crossIconTailgate"><img src="img/flask_icons/delete.svg" style="width: 20px;height: 20px;"/></i></span>
                         <img ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}"  class="list-thumbnail thumb-picturs-size " alt="Image not found"

@@ -38,6 +38,7 @@
                 }
                 else {
                     if($scope.rememberUser==true){
+                        $localStorage['RememberUser']="";
                         $localStorage['RememberUser']=user;
                     }
                     $http.get(SERVER.url+'/flask-rest-users-portlet.flaskadmin/is-add-content-access', { params:{ 'userId': respData.data.userId}}

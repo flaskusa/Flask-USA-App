@@ -9,6 +9,7 @@
     function add_mytailgateCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cordovaDatePicker, $timeout, $ionicSlideBoxDelegate, $ionicScrollDelegate, $filter, $ionicModal, $flaskUtil, $cookies, ionicDatePicker, ionicTimePicker, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicTabsDelegate, $ionicLoading) {
         //for adding tailgate
         var tailgateId = $cookies.get("currtailGateId");
+        $scope.copytTailgateId = tailgateId;
         var self = this;
         var newtailGateId;
         getAllFriends();
@@ -550,6 +551,7 @@ getTailgateMarkers(tailgateId);
                         showToastMessage('Tailgate created. Tap next tab to add location');
                     }
                     tailgateId = respData.data.tailgateId;
+                    $scope.copytTailgateId=tailgateId;
                     $scope.addTailgateParams.tailgateId = respData.data.tailgateId;
                     $scope.addTailgateParams.logoId = respData.data.logoId;
                     $cookies.putObject('newtailgatedata', respData.data);

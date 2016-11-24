@@ -3,8 +3,8 @@
     angular.module('flaskApp')
         .controller('FriendsGroupDetailCtrl', FriendsGroupDetailCtrl);
 
-    FriendsGroupDetailCtrl.$inject = ['$scope','GroupService','$stateParams','$state','$ionicModal','$ionicHistory','$ionicPopup','$flaskUtil','$cookies','$localStorage'];
-    function FriendsGroupDetailCtrl($scope,GroupService,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup,$flaskUtil,$cookies,$localStorage) {
+    FriendsGroupDetailCtrl.$inject = ['$scope','GroupService','$stateParams','$state','$ionicModal','$ionicHistory','$ionicPopup','$flaskUtil','$cookies','$localStorage','SERVER','UserService'];
+    function FriendsGroupDetailCtrl($scope,GroupService,$stateParams,$state,$ionicModal,$ionicHistory,$ionicPopup,$flaskUtil,$cookies,$localStorage,SERVER,UserService) {
 
         $scope.groupTitle=$stateParams.groupName;
 
@@ -12,6 +12,7 @@
         $scope.groupId=GroupService.groupId;
         $scope.groupDetail=GroupService.groupDetail;
         $scope.editGroup=false;
+        $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.groupAdminDetail=GroupService.groupAdminDetail;
         var userDetail=$cookies.getObject('CurrentUser');
         var userId=userDetail.data.userId;
@@ -44,6 +45,8 @@
         $scope.getMember=function() {
             GroupService.getAllGroupMember($scope.groupId).then(function (response) {
                 $scope.allMember=[]
+                $scope.allGroupMemberDetail=[];
+                $scope.allGroupMemberDetail=response;
 
                angular.forEach(response,function(value,key){
                    haveProfilePic(value)
@@ -55,8 +58,10 @@
             });
         }
         function haveProfilePic(memberDetail){
+            var PicExist=false
             angular.forEach($localStorage["myFriendDetail"],function(value,key){
                 if(value.friendProfilePicUrl!=undefined){
+                    PicExist=true
                     if(value.userId==memberDetail.userId){
                         memberDetail.friendProfilePicUrl=value.friendProfilePicUrl
 
@@ -66,9 +71,42 @@
 
 
             });
-            $scope.allMember.push(memberDetail)
+            if(memberDetail.userId==userId || !isMemberMyFrnd(memberDetail)) {
+                $scope.getUserProfile(memberDetail)
+
+            }else{
+                $scope.allMember.push(memberDetail)
+            }
+        }
+        function isMemberMyFrnd(memberDetail){
+            var friend=false;
+
+
+                angular.forEach($localStorage["myFriendDetail"], function (value2, key) {
+                    if (memberDetail.userId == value2.userId) {
+                        friend=true;
+                        return friend;
+                    }
+                })
+
+            return friend;
 
         }
+        $scope.getUserProfile = function(memberDetail) {
+            UserService.getUserProfile(memberDetail.userId).then(function(res) {
+                if(res.data.fileEntryId != undefined) {
+                    memberDetail.friendProfilePicUrl = $scope.profileUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                    $scope.allMember.push(memberDetail);
+                    $scope.isLoginAdmin();
+
+
+                }else{
+                    $scope.allMember.push(memberDetail);
+                }
+            },function(err) {
+            })
+        };
+
 
 
         $ionicModal.fromTemplateUrl('templates/modal.html', {
