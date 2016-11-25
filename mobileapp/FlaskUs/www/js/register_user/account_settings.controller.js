@@ -11,12 +11,11 @@
         $scope.state = [];
         var countryArray;
         var stateArray;
-        $scope.cId = 0;
-        $scope.sId = 0;
         $scope.sport = [];
         $scope.level = [];
         $scope.concert = [];
         $scope.interest = [];
+        $scope.userPassword = {'oldPassword' :'','newPassword1':'','newPassword2':''};
         var interestArray = "";
          $scope.userProfileUrl = "";
          $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
@@ -117,12 +116,12 @@
         function getCountry() {
             UserService.getCountries().then(function (respData) {
                 $scope.country = respData.data;
+                
             });
         }
 
-        $scope.getState = function (data, country_Name) {
-            $scope.cId = country_Name.countryId;
-            UserService.getRegion($scope.cId).then(function (respData) {
+        $scope.getState = function (countryId) {
+            UserService.getRegion(countryId).then(function (respData) {
                 $scope.state = respData.data;
             });
         }
@@ -131,24 +130,25 @@
             $scope.sId = state_Name.regionId;
         }
 
-        function getUser(userId) {
+        function getUser() {
             UserService.getUserById($scope.userid).then(function (respData) {
-                $scope.userInfo = respData;
                 $scope.user = {
-                    firstName: $scope.userInfo.firstName,
-                    middleName: $scope.userInfo.middleName,
-                    lastName: $scope.userInfo.lastName,
-                    screenName: $scope.userInfo.screenName,
-                    Email: $scope.userInfo.email,
+                    firstName: respData.firstName,
+                    middleName: respData.middleName,
+                    lastName: respData.lastName,
+                    screenName: respData.screenName,
+                    Email: respData.email,
                     password1: "",
                     password2: "",
-                    DOB: $filter('date')($scope.userInfo.DOB, 'MM-dd-yyyy'),
-                    isMale: gender,
-                    areaCode: $scope.userInfo.areaCode,
-                    mobileNumber: $scope.userInfo.mobileNumber,
-                    streetName: $scope.userInfo.streetName,
-                    aptNo: $scope.userInfo.aptNo,
-                    city: $scope.userInfo.city
+                    DOB: $filter('date')(respData.DOB, 'MM-dd-yyyy'),
+                    isMale: respData.isMale,
+                    areaCode: respData.areaCode,
+                    mobileNumber: parseInt(respData.mobileNumber),
+                    streetName: respData.streetName,
+                    aptNo: respData.aptNo,
+                    city: respData.city,
+                    countryId : "-1",
+                    stateId : '-1'
                 }
             });
         }
@@ -328,7 +328,7 @@
         }
 
         $scope.updateUserInfo = function (user, userId) {
-            UserService.updateUser(user, $scope.userid, user.isMale, $scope.cId, $scope.sId, interestArray).then(function (respData) {
+            UserService.updateUser(user, $scope.userid, interestArray).then(function (respData) {
                 
                 $scope.userInfo = respData.data;
                 if (respData.data.userId == undefined) {
@@ -364,6 +364,20 @@
             if (message.length > 0) {
                 $ionicLoading.show({ template: message, noBackdrop: true, duration: 2000 });
             }
+        }
+        $scope.updateUserPassword = function() {
+            if($scope.userPassword.newPassword1 != $scope.userPassword.newPassword2) {
+                $flaskUtil.alert("Confirm password did not match").
+                return;
+            }
+            UserService.updatePasssword($scope.userid, $scope.userPassword).then(function (response) {
+                if(response.data.message == "updated") {
+                    $flaskUtil.alert("Password updated.")
+                } else {
+                     $flaskUtil.alert("Failed to update password.")
+                }
+               
+            });
         }
     }
 })();

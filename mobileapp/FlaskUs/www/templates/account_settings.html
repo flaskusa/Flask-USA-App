@@ -1,169 +1,200 @@
 ﻿<ion-view view-title="ACCOUNT SETTINGS">
-    <ion-nav-bar class="bar-dark" align-title="center">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
-    </ion-nav-bar>
-    <ion-tabs class="tabs-positive tab_bottom">
-        <ion-tab title="Contact">
-            <ion-content class="" overflow-scroll="false">
-                <div class="list acc_settings1">
-                    <div class="list card add_profile_div">
-                        <div class="item item-image add_profile_img_div">
-                            <img src = "img/add_photo.png" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId ==  0">
-                            <img ng-src="{{userProfileUrl}}" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId > 0">
+	<ion-nav-bar class="bar-dark" align-title="center">
+		<ion-nav-back-button>
+		</ion-nav-back-button>
+	</ion-nav-bar>
+	<ion-tabs class="tabs-positive tab_bottom">
+		<ion-tab title="Change Password">
+			<ion-content class="" overflow-scroll="false">
+				<form name="psform" novalidate>
+					<div class="list acc_settings1">
+						<label class="item item-input item-floating-label">
+                        <span class="input-label">Old password</span>
+                        <input type="password" placeholder="Old Password" class="form-control" ng-model="userPassword.oldPassword" name ="oldPassword" required>
+                        <div ng-show="psform.$submitted || psform.oldPassword.$touched">
+                            <span  ng-show="psform.oldPassword.$error.required" class="error_msg"> Required! </span> 
                         </div>
-                    </div>
-                    <label class="item item-input item-floating-label">
+                    </label>
+						<label class="item item-input item-floating-label">
+                        <span class="input-label">New password</span>
+                        <input type="password" placeholder="New Password" class="form-control" ng-model="userPassword.newPassword1" name = "newPassword1" required>
+                        <div ng-show="psform.$submitted || psform.newPassword1.$touched">
+                            <span  ng-show="psform.newPassword1.$error.required" class="error_msg"> Required! </span> 
+                        </div>
+                    </label>
+						<label class="item item-input item-floating-label">
+                        <span class="input-label">Confirm Password</span>
+                        <input type="password" placeholder="Confirm Password" class="form-control" ng-model="userPassword.newPassword2" name = "newPassword2" required>
+                        <div ng-show="psform.$submitted || psform.newPassword2.$touched">
+                            <span ng-show="psform.newPassword2.$error.required" class="error_msg"> Required! </span> 
+                            <span  ng-show="userPassword.newPassword2.trim().length > 0 && userPassword.newPassword1.trim().length  && userPassword.newPassword1!= userPassword.newPassword2" class="error_msg">
+                                    Confirm password did not match!</span>
+                        </div>
+                         
+                    </label>
+						<div class="padding" align="center">
+							<button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="psform.$valid  && updateUserPassword();">
+                                Save
+                            </button>
+							<a nav-clear class="button button-block button-positive sign_in_button" href="#/app/user_navigation_menu">
+                                Cancel
+                            </a>
+						</div>
+					</div>
+				</form>
+			</ion-content>
+		</ion-tab>
+		<ion-tab title="Contact">
+			<ion-content class="" overflow-scroll="false">
+				<div class="list acc_settings1">
+					<div class="list card add_profile_div">
+						<div class="item item-image add_profile_img_div">
+							<img src="img/add_photo.png" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId ==  0">
+							<img ng-src="{{userProfileUrl}}" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId > 0">
+						</div>
+					</div>
+					<label class="item item-input item-floating-label">
                         <span class="input-label">First Name</span>
                         <input type="text" placeholder="First Name" ng-model="user.firstName">
                     </label>
-                    <label class="item item-input item-floating-label">
+					<label class="item item-input item-floating-label">
                         <span class="input-label">Middle Name</span>
                         <input type="text" placeholder="Middle Name" ng-model="user.middleName">
                     </label>
-                    <label class="item item-input item-floating-label">
+					<label class="item item-input item-floating-label">
                         <span class="input-label">Last Name</span>
                         <input type="text" placeholder="Last Name" ng-model="user.lastName">
                     </label>
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label"> Screen Name:</span>
-                        <input type="text" placeholder="screen Name" ng-model="user.screenName">
-                    </label>
-                    <label class="item item-input item-floating-label">
+					
+					<label class="item item-input item-floating-label">
                         <span class="input-label">Email</span>
                         <input type="text" placeholder="Email" ng-model="user.Email">
                     </label>
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label">Password</span>
-                        <input type="password" placeholder="Password" class="form-control" ng-model="user.password1" name="password1">
-                    </label>
-                    <label class="item item-input item-floating-label">
-                        <span class="input-label">Confirm Password</span>
-                        <input type="password" placeholder="Confirm Password" class="form-control" ng-model="user.password2" name="password2">
-                         <div >
-                                <span ng-show="user.password2.trim().length > 0 && user.password1!=user.password2" class="error_msg">Confirm password did not match!</span>
-                        </div>
-                    </label>
-                    <div class="item item-input item-floating-label item-icon-right">
-                        <span class="input-label">Date of Birth</span>
-                        <input type="text" placeholder="DOB" name="DOB" class="form-control" ng-model="user.DOB" ng-click="openDatePickerOne()">
-                        <i class="icon ion-ios-calendar-outline" ng-click="openDatePickerOne();"></i>
-                    </div>
-                    <label class="item item-input">
+					
+					<div class="item item-input item-floating-label item-icon-right">
+						<span class="input-label">Date of Birth</span>
+						<input type="text" placeholder="DOB" name="DOB" class="form-control" ng-model="user.DOB" ng-click="openDatePickerOne()">
+						<i class="icon ion-ios-calendar-outline" ng-click="openDatePickerOne();"></i>
+					</div>
+					<label class="item item-input">
                         <span class="input-label">Gender</span>
-                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value = "true" >Male</ion-radio></pre>
+                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value = "true" name="rdoResult">Male</ion-radio></pre>
                         <pre><ion-radio type="radio" ng-model='user.isMale' name="rdoResult" ng-value = "false">Female</ion-radio></pre>
                     </label>
 
-                    <label class="item item-input item-floating-label">
+					<label class="item item-input item-floating-label">
                         <span class="input-label">Mobile Number</span>
-                        <input type="text" placeholder="Mobile Number" ng-model="user.mobileNumber">
+                        <input type="number" placeholder="Mobile Number" ng-model="user.mobileNumber">
                     </label>
-                </div>
-               
-            </ion-content>
-        </ion-tab>
+				</div>
 
-        <ion-tab title="Address">
-            <ion-content class="" overflow-scroll="false">
-                <div class="list acc_settings1">
-                    <label class="item item-input item-floating-label">
+			</ion-content>
+		</ion-tab>
+
+		<ion-tab title="Address">
+			<ion-content class="" overflow-scroll="false">
+				<div class="list acc_settings1">
+					<label class="item item-input item-floating-label">
                         <span class="input-label">Street:</span>
                         <input type="text" placeholder="Street:" ng-model="user.streetName">
                     </label>
-                    <label class="item item-input item-floating-label">
+					<label class="item item-input item-floating-label">
                         <span class="input-label">Apartment#:</span>
                         <input type="text" placeholder="Apartment" ng-model="user.aptNo">
                     </label>
-                    <label class="item item-input item-floating-label">
+					<label class="item item-input item-floating-label">
                         <span class="input-label">Area code</span>
                         <input type="text" placeholder="Area code" ng-model="user.areaCode">
                     </label>
-                    <label class="item item-input item-floating-label">
+					<label class="item item-input item-floating-label">
                         <span class="input-label">City:</span>
                         <input type="text" placeholder="City" ng-model="user.city">
                     </label>
-                </div>
-                <p>Select Country and State</p>
-                <div class="list">
-                    <label class="item item-input item-select">
-                        <select ng-model="country_Name" ng-options="data.name for data in country" ng-change="getState(data,country_Name);">
-                            <option selected>--Select Country--</option>
+				</div>
+				<p>Select Country and State</p>
+				<div class="list">
+					<label class="item item-input item-select">
+                        <select ng-model="user.countryId" ng-change="getState(user.countryId);">
+                            <option value="-1">Select country</option>
+                            <option ng-repeat=" data in country" ng-bind="data.nameCurrentValue" ng-value="data.countryId"></option>
                         </select>
                     </label>
-                </div>
-                <div class="list">
-                    <label class="item item-input item-select">
-                        <select ng-model="state_Name" ng-options="data.name for data in state" ng-change="getStateId(data,state_Name);">
-                            <option selected>--Select State--</option>
+				</div>
+				<div class="list">
+					<label class="item item-input item-select">
+                        <select ng-model="user.stateId">
+                            <option value="-1">Select State</option>
+                            <option ng-repeat="data in state" ng-bind="data.name" ng-value="data.regionId"></option>
                         </select>
                     </label>
 
-                </div>
-            </ion-content>
-        </ion-tab>
+				</div>
+			</ion-content>
+		</ion-tab>
 
-        <ion-tab title="Interests">
-            <ion-content class="" overflow-scroll="false">
-                <div class="list acc_settings1"><h5>PREFERENCES:</h5></div>
-
-
-                <div class="row header">
-                    <div class="col acc_settingsCol">SPORTS</div>
-                </div>
-                <div class="row acc_settingsCol" ng-repeat="data in data1">
-                    <div class="col acc_settingsCol">{{data.sport}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_sport" ng-click="addSportInArray($index,data);">
-                    </ion-checkbox>
-                </div>
-                <div class="padding"></div>
+		<ion-tab title="Interests">
+			<ion-content class="" overflow-scroll="false">
+				<div class="list acc_settings1">
+					<h5>PREFERENCES:</h5>
+				</div>
 
 
-                <div class="row header">
-                    <div class="col acc_settingsCol">LEVEL</div>
-                </div>
-                <div class="row acc_settingsCol" ng-repeat="data in data4">
-                    <div class="col acc_settingsCol">{{data.level}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_level" ng-click="addlevelInArray($index,data);">
-                    </ion-checkbox>
-                </div>
-                <div class="padding"></div>
+				<div class="row header">
+					<div class="col acc_settingsCol">SPORTS</div>
+				</div>
+				<div class="row acc_settingsCol" ng-repeat="data in data1">
+					<div class="col acc_settingsCol">{{data.sport}}</div>
+					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_sport" ng-click="addSportInArray($index,data);">
+					</ion-checkbox>
+				</div>
+				<div class="padding"></div>
 
 
-                <div class="row header">
-                    <div class="col acc_settingsCol">CONCERTS</div>
-                </div>
-                <div class="row acc_settingsCol" ng-repeat="data in data2">
-                    <div class="col acc_settingsCol">{{data.concerts}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_concerts" ng-click="addConcertsInArray($index,data);">
-                    </ion-checkbox>
-                </div>
-                <div class="padding"></div>
+				<div class="row header">
+					<div class="col acc_settingsCol">LEVEL</div>
+				</div>
+				<div class="row acc_settingsCol" ng-repeat="data in data4">
+					<div class="col acc_settingsCol">{{data.level}}</div>
+					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_level" ng-click="addlevelInArray($index,data);">
+					</ion-checkbox>
+				</div>
+				<div class="padding"></div>
 
 
-                <div class="row header">
-                    <div class="col acc_settingsCol">SPECIAL EVENTS</div>
-                </div>
+				<div class="row header">
+					<div class="col acc_settingsCol">CONCERTS</div>
+				</div>
+				<div class="row acc_settingsCol" ng-repeat="data in data2">
+					<div class="col acc_settingsCol">{{data.concerts}}</div>
+					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_concerts" ng-click="addConcertsInArray($index,data);">
+					</ion-checkbox>
+				</div>
+				<div class="padding"></div>
 
-                <div class="row acc_settingsCol" ng-repeat="data in data3">
 
-                    <div class="col acc_settingsCol">{{data.special_events}}</div>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_events" ng-click="addEventsInArray($index,data);">
-                    </ion-checkbox>
-                </div>
+				<div class="row header">
+					<div class="col acc_settingsCol">SPECIAL EVENTS</div>
+				</div>
+
+				<div class="row acc_settingsCol" ng-repeat="data in data3">
+
+					<div class="col acc_settingsCol">{{data.special_events}}</div>
+					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_events" ng-click="addEventsInArray($index,data);">
+					</ion-checkbox>
+				</div>
 
 
-                <div class="padding" align="center">
-                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUserInfo(user);">
+				<div class="padding" align="center">
+					<button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUserInfo(user);">
                         Save
                     </button>
-                    <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/events">
+					<a nav-clear class="button button-block button-positive sign_in_button" href="#/app/user_navigation_menu">
                         Cancel
                     </a>
-                </div>
-            </ion-content>
-        </ion-tab>
+				</div>
+			</ion-content>
+		</ion-tab>
 
 
-    </ion-tabs>
+	</ion-tabs>
 </ion-view>

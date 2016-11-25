@@ -16,6 +16,7 @@
         var uploadUserProfileURL = "flask-rest-users-portlet.flaskadmin/upload-user-profile";
         var getUserProfileUrl = "/flask-rest-users-portlet.flaskadmin/get-my-file-entry";
         var removeProfilePictureUrl = "/flask-rest-users-portlet.flaskadmin/delete-my-file-entry";
+        var updatePassswordUrl = '/flask-rest-users-portlet.flaskadmin/update-password';
 
         var userServices = {
             saveUser: saveUser,
@@ -26,7 +27,9 @@
             getRegion: getRegion,
             uploadProfile: uploadProfile,
             getUserProfile : getUserProfile,
-            removeProfilePicture :removeProfilePicture 
+            removeProfilePicture :removeProfilePicture ,
+            updatePasssword:updatePasssword
+           
         }
 
         function saveUser(user, gender, srcname) {
@@ -54,6 +57,15 @@
                 //add errror handling 
                 console.log("failed");
             });
+        }
+
+        function updatePasssword (userId, userPassword) {
+            return $http.get(SERVER.url + updatePassswordUrl, { params: { 'userId': userId,'oldPassword':userPassword.oldPassword,'password1':userPassword.newPassword1,'password2':userPassword.newPassword2 } })
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    console.log("failed");
+                });
         }
 
         function getUserProfile(userId) {
@@ -95,7 +107,7 @@
                });
         }
 
-        function updateUser(user, userId, gender, sId, cId, interestArray) {
+        function updateUser(user, userId, interestArray) {
             var params = {
                 userId: userId,
                 firstName: user.firstName,
@@ -106,13 +118,13 @@
                 password1: user.password1,
                 password2: user.password2,
                 DOB: user.DOB,
-                isMale: gender,
+                isMale: user.isMale,
                 streetName: user.streetName,
                 aptNo: user.aptNo,
                 areaCode: user.areaCode,
                 city: user.city,
-                stateId: sId,
-                countryId: cId,
+                stateId: user.stateId,
+                countryId: user.countryId,
                 mobileNumber: user.mobileNumber,
                 userInterests: interestArray
             };

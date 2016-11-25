@@ -404,7 +404,7 @@ getTailgateMarkers(tailgateId);
                 if (tailgateId && tailgateId > 0) {
                     $scope.uploadFileToServer(imageURI, tailgateId, "Image Uploaded");
                 } else {
-                    $("#myImage").attr("src", imageURI);
+                    $("#tailgateImage").attr("src", imageURI);
                     $scope.setSelectedImageURIToUpload(imageURI);
                 }
             }, function (err) {
@@ -452,7 +452,7 @@ getTailgateMarkers(tailgateId);
                 if (tailgateId && tailgateId > 0) {
                     $scope.uploadFileToServer(imageURI, tailgateId, "Image Uploaded");
                 } else {
-                    $("#myImage").attr("src", imageURI);
+                    $("#tailgateImage").attr("src", imageURI);
                     $scope.setSelectedImageURIToUpload(imageURI);
                 }
             }, function (err) {
