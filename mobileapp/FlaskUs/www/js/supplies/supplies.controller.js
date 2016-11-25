@@ -300,8 +300,8 @@
         };
         $scope.deleteCreatedItem=function(index,id){
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Item?',
-                template: 'Select OK to Confirm!'
+                title: 'Delete Item?'
+
             });
             confirmPopup.then(function(res) {
                 if(res) {
@@ -420,8 +420,7 @@
 
         $scope.deleteItem=function(index,supplyId){
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Supply?',
-                template: 'Select OK to Confirm!'
+                title: 'Delete Supply?'
             });
             confirmPopup.then(function(res) {
                 if(res) {

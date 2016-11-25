@@ -219,8 +219,8 @@
         $scope.removeMember= function(data,index) {
 
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Remove from Group?',
-                template: 'Select OK to Confirm!'
+                title: 'Remove from Group?'
+
             });
             confirmPopup.then(function(res) {
                 if(res) {

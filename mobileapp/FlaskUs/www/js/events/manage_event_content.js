@@ -239,8 +239,8 @@
         }
         $scope.deleteEventDetail=function(eventDetailId,index){
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Detail?',
-                template: 'Select OK to Confirm!'
+                title: 'Delete Detail?'
+
             });
             confirmPopup.then(function(res) {
                 if(res) {

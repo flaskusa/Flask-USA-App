@@ -82,8 +82,7 @@
         }
         $scope.deleteSupplyItem=function(index,id){
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Item?',
-                template: 'Select OK to Confirm!'
+                title: 'Delete Item?'
             });
             confirmPopup.then(function(res) {
                 if(res) {

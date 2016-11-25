@@ -56,8 +56,8 @@
         }
         $scope.leaveGroup=function(groupId,index){
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Leave Group?',
-                template: 'Select OK to Confirm!'
+                title: 'Leave Group?'
+
             });
             confirmPopup.then(function(res) {
                 if(res) {
@@ -164,8 +164,7 @@
         $scope.deleteGroup = function(groupId,index) {
 
                 var confirmPopup = $ionicPopup.confirm({
-                    title: 'Delete Group?',
-                    template: 'Select OK to Confirm!'
+                    title: 'Delete Group?'
                 });
                 confirmPopup.then(function(res) {
                     if(res) {
