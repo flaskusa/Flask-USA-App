@@ -9,13 +9,14 @@
         </div>
         <div class="list">
             <a class="item item-avtar item-icon-right item-ticket" ng-repeat="data in ticket_detail" ng-click="onClickTicket(data.url);">
-                <h2 class="tickets">{{data.site}}</h2>
-                <p class="item-tickets">{{data.url}}</p>
+                <h2 class="tickets">{{data.site | uppercase}}</h2>
+                <p class="item-tickets">{{data.url | uppercase}}</p>
                 <i class="icon ion-chevron-right ticket-icon"></i>
             </a>
         </div>
     </ion-content>
-    <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
-        <img src="/img/ad.png" class="footer-img" />
+    <ion-footer-bar class=" bar bar-dark bar-footer bar-assertive customBarPadding">
+        <div ng-include="'templates/advertisement.html'"class="footer-img"></div>
+
     </ion-footer-bar>
 </ion-view>

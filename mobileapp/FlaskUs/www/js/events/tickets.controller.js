@@ -22,8 +22,11 @@
             EventsService.getVenueDetails(currVenueId).then(function (respData) {
                 $scope.venue_detail = respData;
                 for (var i = 0; i < $scope.venue_detail.length; i++) {
-                    $scope.ticket_detail.push({ site: $scope.venue_detail[i].infoTitle, url: $scope.venue_detail[i].website })
-                }
+                    if ("Tickets" == $scope.venue_detail[i].infoTypeCategoryName) {
+
+                        $scope.ticket_detail.push({ site: $scope.venue_detail[i].infoTitle, url: $scope.venue_detail[i].website })
+                    }
+                    }
                 console.log($scope.ticket_detail);
             })
         }
