@@ -61,10 +61,6 @@
                     //var date1 = new Date(val);
                     // $scope.user.DOB = $filter('date1')(date1, 'yyyy-MM-dd');
                 },
-                disabledDates: [
-                  new Date("08-16-2016")
-
-                ],
                 from: new Date(1960, 1, 1),
                 to: new Date(),
                 inputDate: new Date(),

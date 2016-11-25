@@ -69,8 +69,8 @@
                     <!--<span class="badge span_icon"style="top:3px"> <label class="checkbox"style="float: right">
                         <input  type="checkbox"ng-model="data.checked">
                     </label></span>-->
-                    <ion-option-button class="button-assertive icon ion-edit" ng-click="editSupplyItem(data)"></ion-option-button>
-                    <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteCreatedItem($index,data.supplyItemId)"></ion-option-button>
+                    <ion-option-button class="button-assertive icon ion-edit"ng-if="data.supplyItemId>0" ng-click="editSupplyItem(data)"></ion-option-button>
+                    <ion-option-button class="button-assertive icon ion-trash-a"ng-if="data.supplyItemId>0" ng-click="deleteCreatedItem($index,data.supplyItemId)"></ion-option-button>
 
                 </ion-item>
             </ion-list>

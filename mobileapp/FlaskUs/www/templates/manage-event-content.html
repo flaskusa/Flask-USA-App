@@ -64,20 +64,20 @@
             <a class="item" ng-if="flaskUsDetails.length == 0 && editContent==false"> You do not have added any information yet.</a>
         </ion-list>
 
-        <form name="create_content_form" class="loginpane form_div" novalidate  ng-submit="create_content_form.$valid && addContent(content)">
+        <form name="create_content_form" class="loginpane form_div" novalidate  ng-submit="create_content_form.$valid && addContent(content,create_content_form)">
             <div  ng-if="editContent==true">
 
 
                 <div class="item item-input item-floating-label"style="border-top: none;">
                     <span class="input-label">Title</span>
-                    <input type="text" placeholder="Title" name="TailgateName" class="form-control" ng-model="content.infoTitle" required>
+                    <input type="text" placeholder="Title" id="TitleEditBox" name="TailgateName" class="form-control" ng-model="content.infoTitle" required>
                     <div ng-show="create_content_form.$submitted || create_content_form.TailgateName.$touched">
                         <span ng-show="create_content_form.TailgateName.$error.required" class="error_msg">Enter title</span>
                     </div>
                 </div>
                 <div class="item item-input item-floating-label">
                     <span class="input-label">Description:</span>
-                    <input type="text" placeholder="Description" name="Description" class="form-control" ng-model="content.infoDesc" required>
+                    <input type="text" placeholder="Description" id="DescEditBox" name="Description" class="form-control" ng-model="content.infoDesc" required>
                     <div ng-show="create_content_form.$submitted || create_content_form.Description.$touched">
                         <span ng-show="create_content_form.Description.$error.required" class="error_msg">Enter description</span>
                     </div>
@@ -85,9 +85,9 @@
             </div>
 
             <div class="list"ng-if="editContent==true" >
-                <div class="list card" >
+                <div class="list card" ng-click="show()">
                     <div class="item item-image manage_event_default_Image">
-                        <img src="{{defaultImageUrl}}" ng-click="show()"/></div>
+                        <img src="{{defaultImageUrl}}" /></div>
                 </div>
                 <a class="item text-center" href=""ng-click="show()" ng-if="defaultImageUrl==undefined || defaultImageUrl==''">
                     Tap to add  picture
@@ -100,7 +100,7 @@
                 <button type="submit" nav-clear class="button button-block button-positive sign_in_button" >
                     Save
                 </button>
-                <a nav-clear class="button button-block button-positive sign_in_button" ng-click="cancelEdit()">
+                <a nav-clear class="button button-block button-positive sign_in_button" ng-click="cancelEdit(create_content_form)">
                     Cancel
                 </a>
             </div>

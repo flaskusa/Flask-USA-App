@@ -93,15 +93,24 @@
         $scope.toggleItem=function(){
             if($scope.MyGameDayList==true) {
                 $scope.hideItem = !$scope.hideItem;
+
                 $("#FlaskUsListdiv").slideToggle("slow", function () {
                 });
+                $timeout(function () {
+                    $ionicScrollDelegate.resize()
+                },500);
             }
         }
         $scope.toggleMyItem=function(){
             if($scope.MyGameDayList==true){
             $scope.hideMyItem=!$scope.hideMyItem;
+
             $( "#myListdiv" ).slideToggle( "slow", function() {});
-                }
+                $timeout(function () {
+                    $ionicScrollDelegate.resize()
+                },500);
+            }
+
 
         }
         $scope.editList=false;
@@ -234,6 +243,7 @@
     }
         $scope.editSupplyItem=function(data){
             data.editItem=true;
+            $ionicListDelegate.closeOptionButtons();
         }
 
         $scope.cancelAdding=function(){
@@ -399,7 +409,7 @@
                         $flaskUtil.alert("failed to copy");
                     }else{
 
-                        $scope.supplies.push(list);
+                        $scope.supplies.push(response1);
                         showEmptySupplyMessage();
                     }
 

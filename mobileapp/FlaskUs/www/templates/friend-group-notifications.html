@@ -7,8 +7,9 @@
     <ion-content overflow-scroll="false">
         <ion-list>
             <ion-item ng-repeat="request in requestedUserDetail">
-                <div>
-                    <img src = "img/default-profilepic-copy.png"class="friendIcon">
+                <div >
+                    <img ng-if="request.requestedPersonPicUrl==undefined" src = "img/default-profilepic-copy.png"class="friendIcon" >
+                    <img ng-if="request.requestedPersonPicUrl.length>0" src = "{{request.requestedPersonPicUrl}}"class="friendIcon" style="width: 47px;height: 47px;border-radius: 50%;"/>
                 </div>
                 <div class="col-75" style="text-align: center">
                 <h3 class="f-nameText emailText" ng-bind="request.firstName+' '+request.lastName"></h3>
@@ -26,6 +27,6 @@
                 </div>-->
                     <ion-option-button  class="icon ion-no-smoking"ng-if="featureToBock==true"></ion-option-button>
             </ion-item>
-            <div class="item "ng-if="requestedUserDetail.length==0">You don't have any new notification.</div>
+            <div class="item "ng-if="requestedUserDetail.length==0 && showEmptymessage==true;">You don't have any new notification.</div>
         </ion-list>
     </ion-content>

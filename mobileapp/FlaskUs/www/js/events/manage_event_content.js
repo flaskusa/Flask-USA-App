@@ -169,10 +169,12 @@
          $scope.EventDetailImageUrl = encodeURI($scope.tailgateLogoUrl);
          }
          */
-        $scope.addContent=function(content,index) {
+        $scope.addContent=function(content,create_content_form) {
             if (content.eventDetailId <= 0 || content.eventDetailId == undefined) {
+                $ionicScrollDelegate.resize()
                 EventsService.addContentDuringEvent(content.infoTitle, content.infoDesc, $scope.currEventId,$scope.infoTypeCategoryId,$scope.infoTypeId).then(function (response) {
                     if(response.data.eventDetailId) {
+                        create_content_form.$submitted=false;
                         $scope.flaskUsDetails.push(response.data);
                         if($scope.selectedImageURIToUpload!=undefined && $scope.selectedImageURIToUpload!='') {
                             $scope.uploadFileToServer($scope.selectedImageURIToUpload, response.data.eventId, response.data.eventDetailId);
@@ -185,7 +187,9 @@
             }
             else if (content.eventDetailId > 0) {
                 EventsService.updateEventDetailDuringEvent(content.infoTitle, content.infoDesc, $scope.currEventId, content.eventDetailId,$scope.infoTypeCategoryId,$scope.infoTypeId).then(function (response) {
+                    $ionicScrollDelegate.resize()
                     if (response.data.eventDetailId > 0) {
+                        create_content_form.$submitted=false;
                         EventsService.deleteEventDetailImageById(content.eventDetailImageId).then(function(response2){
 
 
@@ -213,16 +217,21 @@
 
             })
         }
-        $scope.cancelEdit=function(){
+        $scope.cancelEdit=function(create_content_form){
+            document.getElementById("TitleEditBox").blur();
+            document.getElementById("DescEditBox").blur();
+            $ionicScrollDelegate.resize()
             $scope.editContent = false;
             $scope.defaultImageUrl="";
             $ionicScrollDelegate.scrollTop();
             $scope.selectedImageURIToUpload=""
+            create_content_form.$submitted=false;
             $scope.reSetSelectedImageURIToUpload();
 
         }
         $scope.addNewContent=function(){
             $scope.content={infoTitle:"",infoDesc:""};
+            $ionicScrollDelegate.resize()
             $scope.defaultImageUrl="";
             $scope.selectedImageURIToUpload="";
             $ionicScrollDelegate.scrollTop();
@@ -230,7 +239,7 @@
             $scope.reSetSelectedImageURIToUpload();
         }
         $scope.editContents=function(content,index){
-            $scope.content=content;
+            $scope.content=angular.copy(content);
             $scope.selectedImageURIToUpload="";
             $ionicScrollDelegate.scrollTop();
             $scope.reSetSelectedImageURIToUpload();

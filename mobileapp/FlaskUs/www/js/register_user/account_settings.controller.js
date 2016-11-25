@@ -245,13 +245,13 @@
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false,
-                correctOrientation: true,
+                correctOrientation: true
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.uploadFileToServer(imageURI);
             }, function (err) {
-                alert("error")
+
             });
         };
         $scope.checkPermission = function () {

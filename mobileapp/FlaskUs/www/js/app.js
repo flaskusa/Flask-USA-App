@@ -1,12 +1,13 @@
 (function () {
     var app = angular.module('flaskApp'); 
-    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage,$state,LoginService,$http,SERVER) {
+    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage,$state,LoginService,$http,SERVER,UserService) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             //  if (cordova.platformId === 'ios' && window.cordova && window.cordova.plugins.Keyboard) {
             //      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             //      cordova.plugins.Keyboard.disableScroll(true);
+           var profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
             //  }
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
@@ -31,6 +32,11 @@
                         else if (respData.data.emailAddress == "") {
                         }
                         else {
+                            if(respData.data.portraitId>0) {
+                               getUserProfile(respData.data.userId);
+                            }else{
+                                $rootScope.userProfileUrl='';
+                            }
                             $http.get(SERVER.url+'/flask-rest-users-portlet.flaskadmin/is-add-content-access', { params:{ 'userId': respData.data.userId}}
                             )
                                 .then(function success(response2) {
@@ -50,6 +56,18 @@
                         }
                     });
                 }
+            }
+            function getUserProfile(userId) {
+                UserService.getUserProfile(userId).then(function(res) {
+                    if(res.data.fileEntryId != undefined) {
+
+                        $rootScope.userProfileUrl = profileUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                    }else {
+                        $rootScope.userProfileUrl='';
+                    }
+                },function(err) {
+
+                })
             }
                 $rootScope.$on('loading:show', function () {
                 $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' })

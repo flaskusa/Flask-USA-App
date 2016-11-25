@@ -12,6 +12,7 @@
       $scope.startIndex = 0;
       $scope.endIndex = 9;
       $scope.noFriendAdded = false;
+      $scope.shoeEmptyMessage=false;
       $scope.searchBox = {show:false};
       $scope.searchContact = {"searchtext" :""};
       $scope.messsage = {'messsageToSend':''};
@@ -96,6 +97,7 @@
       $scope.getMyFriends = function(searchText) {
           $scope.moreDataCanBeLoaded = true;
           FriendsService.getMyFriends(searchText).then(function(response){
+              $scope.shoeEmptyMessage=true;
               if(response != undefined && Array.isArray(response))   {
                   if($localStorage["myFriendDetail"].length==response.length){
                       $scope.myFriends=$localStorage["myFriendDetail"];

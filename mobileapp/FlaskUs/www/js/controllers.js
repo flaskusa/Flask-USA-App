@@ -1,15 +1,17 @@
 angular.module('flaskApp.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $state, $timeout, $cookies, LoginService, $rootScope, SERVER, $ionicLoading) {
+.controller('AppCtrl', function ($scope, $ionicModal, $state, $timeout, $cookies, LoginService, $rootScope, SERVER, $ionicLoading,$localStorage) {
     //controller for splash screen
  /*   $scope.$on('$ionicView.afterEnter', function () {
     })
     */
+
     $scope.doLogout = function () {
         $rootScope.show_login = false;       
         $cookies.remove('CurrentUser');
         $rootScope.userName ='';
         $rootScope.userEmailId ='';
+        $rootScope.userProfileUrl='';
         console.log($cookies.getObject('CurrentUser'));
         $state.go("app.events");
         

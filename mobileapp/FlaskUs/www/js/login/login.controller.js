@@ -3,16 +3,17 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER','$localStorage','$http'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER','$localStorage','$http','UserService'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER,$localStorage,$http) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER,$localStorage,$http,UserService) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
         $scope.password = '';
         $scope.user={Email:"",password:"",isChecked:true}
         $scope.rememberUser=true;
+        $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
      
         $scope.checkTouch = function (enableChecked) {
             if (enableChecked) {
@@ -37,6 +38,12 @@
                 else if (respData.data.emailAddress == "") {
                 }
                 else {
+                    if(respData.data.portraitId>0) {
+                        $scope.getUserProfile(respData.data.userId);
+                    }else{
+                        $rootScope.userProfileUrl='';
+                    }
+
                     if($scope.rememberUser==true){
                         $localStorage['RememberUser']="";
                         $localStorage['RememberUser']=user;
@@ -63,6 +70,18 @@
         }
         if($localStorage['RememberUser'] &&  $localStorage['RememberUser'].Email &&  $localStorage['RememberUser'].password){
             $scope.user=$localStorage['RememberUser'];
+        }
+        $scope.getUserProfile = function(userId) {
+            UserService.getUserProfile(userId).then(function(res) {
+                if(res.data.fileEntryId != undefined) {
+
+                    $rootScope.userProfileUrl = $scope.profileUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                }else {
+                    $rootScope.userProfileUrl="";
+                }
+            },function(err) {
+
+            })
         }
 
         $scope.remembered = function (user) {

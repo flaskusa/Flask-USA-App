@@ -3,13 +3,15 @@
     angular.module('flaskApp')
         .controller('FriendsNotificationCtrl', FriendsNotificationCtrl);
 
-    FriendsNotificationCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsNotificationService','$flaskUtil','$state','$ionicHistory'];
+    FriendsNotificationCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsNotificationService','$flaskUtil','$state','$ionicHistory','UserService','SERVER'];
 
     /* @ngInject */
-    function FriendsNotificationCtrl($scope, $http, $ionicModal,FriendsNotificationService,$flaskUtil,$state,$ionicHistory) {
+    function FriendsNotificationCtrl($scope, $http, $ionicModal,FriendsNotificationService,$flaskUtil,$state,$ionicHistory,UserService,SERVER) {
 
         $scope.requestDetail=[];
-        $scope.requestedUserDetail=[]
+        $scope.requestedUserDetail=[];
+        $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
+        $scope.showEmptymessage=false;
         $scope.goToNotifications = function () {
             $state.go('app.notifications');
 
@@ -36,13 +38,38 @@
        $scope.getRequestToConfirm=function(){
            FriendsNotificationService.getRequestToConfirm().then(function(response1){
                $scope.requestDetail=response1;
+               $scope.showEmptymessage=true;
                angular.forEach($scope.requestDetail,function(value,key) {
                    FriendsNotificationService.getUserById(value.userId).then(function (response2) {
-                       $scope.requestedUserDetail.push(response2);
+
+
+                           if(response2.portraitId>0){
+                           $scope.getUserProfile(response2)
+                               }else{
+                               $scope.requestedUserDetail.push(response2);
+                               $scope.showEmptymessage=true;
+                           }
+
                    });
                });
            });
        };
+        $scope.getUserProfile = function(response2) {
+            UserService.getUserProfile(response2.userId).then(function(res) {
+                if(res.data.fileEntryId != undefined) {
+
+                    var userProfileUrl = $scope.profileUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                    response2.requestedPersonPicUrl=userProfileUrl;
+                    $scope.requestedUserDetail.push(response2);
+                    $scope.showEmptymessage=true;
+                }else {
+                    $scope.requestedUserDetail.push(response2);
+                }
+            },function(err) {
+
+            })
+        }
+
         $scope.addSocialRelation=function(userId,index){
             FriendsNotificationService.addSocialRelation(userId).then(function(response){
                 $scope.requestedUserDetail.splice(index,1);
