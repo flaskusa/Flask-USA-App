@@ -47,10 +47,16 @@
         },
         "cordova-plugin-android-permissions": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-file": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         }
     }

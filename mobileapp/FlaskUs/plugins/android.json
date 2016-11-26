@@ -7,48 +7,54 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-camera": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
-        "cordova-plugin-whitelist": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
-        "cordova-plugin-device": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
-        "cordova-plugin-geolocation": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
-        "cordova-plugin-datepicker": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
-        "cordova-plugin-statusbar": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
-        "cordova-plugin-console": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
-        "cordova-plugin-splashscreen": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
-        "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
-        "cordova-plugin-inappbrowser": {
+        "cordova-plugin-android-permissions": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         },
         "cordova-plugin-appavailability": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         },
+        "cordova-plugin-camera": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-datepicker": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-device": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-geolocation": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-inappbrowser": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-splashscreen": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-statusbar": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
         "cordova-plugin-touchid": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         },
-        "cordova-plugin-android-permissions": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-console": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-file": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         }
     }
