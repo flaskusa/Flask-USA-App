@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgateDetailsCtrl', mytailgateDetailsCtrl);
 
-    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope','$ionicSlideBoxDelegate'];
+    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope','$ionicSlideBoxDelegate','$localStorage','UserService'];
 
     /* @ngInject */
-    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope,$ionicSlideBoxDelegate) {
+    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope,$ionicSlideBoxDelegate,$localStorage,UserService) {
         $cookies.remove("currtailGateMakers");
         $scope.myTailgaters = [];
         $scope.allMessages = [];
@@ -19,10 +19,11 @@
         $scope.uploadTailgateImagesUrl = SERVER.url + '/flask-user-tailgate-portlet.tailgateimages/upload-tailgate-image';
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.tailgateLogoUrl = "";
+        $scope.usersMessages={message:""}
        
         $cookies.put('currtailGateId', tailGateId);
 
-        get_message_list(tailGateId);
+
         $scope.isTailgateAdmin = false;
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
@@ -94,9 +95,63 @@
         }
         function getTailgaters(tailGateId) {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
-                $scope.myTailgaters = respData.data;
+                $scope.myTailgaters=[]
+                $scope.allTailgatersLength=respData.data.length;
+
+                angular.forEach(respData.data,function(value,key){
+
+                    haveProfilePic(value)
+                })
             });
         }
+        function haveProfilePic(memberDetail){
+            var PicExist=false
+            angular.forEach($localStorage["myFriendDetail"],function(value,key){
+                if(value.friendProfilePicUrl!=undefined){
+                    PicExist=true
+                    if(value.userId==memberDetail.userId){
+                        memberDetail.friendProfilePicUrl=value.friendProfilePicUrl
+
+                    }
+                }
+
+
+
+            });
+            if(PicExist==false) {
+                $scope.getUserProfile(memberDetail)
+
+            }else{
+                $scope.myTailgaters.push(memberDetail)
+                if($scope.allTailgatersLength==$scope.myTailgaters.length){
+                    get_message_list(tailGateId)
+
+                }
+            }
+        }
+        $scope.getUserProfile = function(UserDetail) {
+            UserService.getUserProfile(UserDetail.userId).then(function(res) {
+               if(res.data.fileEntryId != undefined) {
+                    UserDetail.friendProfilePicUrl = $scope.imgUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                    $scope.myTailgaters.push(UserDetail);
+                   if($scope.allTailgatersLength==$scope.myTailgaters.length){
+                       get_message_list(tailGateId)
+
+                   }
+
+
+                }else{
+                    $scope.myTailgaters.push(UserDetail);
+                   if($scope.allTailgatersLength==$scope.myTailgaters.length){
+                       get_message_list(tailGateId)
+
+                   }
+                }
+
+
+            },function(err) {
+            })
+        };
         function getTailgateMarkers(tailGateId) {
             TailgateService.getMapMarkers(tailGateId).then(function (respData) {
                 $cookies.putObject('currtailGateMakers', respData.data);
@@ -109,7 +164,9 @@
             $scope.tailgateDetailId = tailGateId;
             console.log($scope.tailgateDetailId);
             TailgateService.saveMessage(msg, tailGateId).then(function (respData) {
-                console.log(respData);
+                $scope.messageUser=[]
+                get_message_list(tailGateId);
+                $scope.usersMessages.message="";
             });
         }
 
@@ -127,12 +184,13 @@
         }
 
         function getTailgateUser(userId, userMessage) {
-            TailgateService.getAllUser(userId).then(function (respData) {
-                console.log(respData.data);
-                $scope.userFirstName.push(respData.data);
-                $scope.messageUser.push({ message: userMessage, username: respData.data.firstName });
-                console.log($scope.messageUser);
+            angular.forEach($scope.myTailgaters,function(value,key){
+                if(value.userId==userId) {
+                    $scope.userFirstName.push(value);
+                    $scope.messageUser.push({ message: userMessage, username: value.userName,userPicUrl:value.friendProfilePicUrl});
+                }
             });
+
         }
 
         $scope.checkTailgateId = function () {
@@ -216,7 +274,7 @@
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false,
-                correctOrientation: true,
+                correctOrientation: true
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {

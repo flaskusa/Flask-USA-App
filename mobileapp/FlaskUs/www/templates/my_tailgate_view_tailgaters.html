@@ -6,7 +6,7 @@
        
     </ion-nav-bar>
     <ion-content class="has-footer">
-        <a class="item item-full item-icon-left " ng-click="modal.show()">
+        <a class="item item-full item-icon-left " ng-click="showModel()">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">INVITE FRIEND</p>
         </a>
@@ -22,7 +22,7 @@
             <ion-modal-view>
                 <ion-header-bar class="bar bar-header bar-positive black-header">
                     <h1 class="title">Invite Friend</h1>
-                    <button class="button button-clear button-primary" ng-click="modal.hide()">X</button>
+                    <button class="button button-clear button-primary" ng-click="hideModel()">X</button>
                 </ion-header-bar>
                 <div class="bar bar-subheader">
                     <div class="row">
@@ -37,7 +37,7 @@
                 <ion-content class=" has-subheader">
                     <ion-list>
                         <ion-list>
-                            <ion-item ng-repeat="data in myFriends| filter:searchContact.searchtext " class="item-avatar " item="data">
+                            <ion-item ng-repeat="data in friendsToInvite| filter:searchContact.searchtext " class="item-avatar " item="data">
                                 <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png">
                                 <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}">
 
@@ -47,6 +47,7 @@
                                     <i>Send Invite</i>
                                 </button>
                             </ion-item>
+                            <div class="item" ng-if="friendsToInvite.length==0">There are no more friends to invite</div>
                         </ion-list>
                     </ion-list>                    
                 </ion-content>

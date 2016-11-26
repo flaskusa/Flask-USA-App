@@ -119,7 +119,7 @@
                                 <div>
                                     <div class="list">
                                         <a class="item item-thumbnail-left item-icon-right eventList" ng-repeat="data in allGroups">
-                                            <img class="list-thumbnail listImages" src = 'img/default-group-pic.png';">
+                                            <img class="list-thumbnail listImages" src = 'img/default-group-pic.png'">
                                             <h2 class="eventNameCol_tailgate">{{ data.groupName | uppercase}}</h2>
                                             <p class="dateCol_tailgate">Created By : {{data.createdBy | uppercase}}</p>
                                             <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="getusersofGroup(data.groupId, $index)"></span>
@@ -139,7 +139,7 @@
                         <div class="slideDown" ng-hide="active1">
                             <div class="expand-collapse-content">
                                 <div>
-                                    <a class="item item-thumbnail-left item-icon-right eventList" ng-repeat="data in myFriends">
+                                    <a class="item item-thumbnail-left item-icon-right eventList" ng-repeat="data in friendsToInvite">
                                         <img ng-if="data.friendProfilePicUrl==undefined" class="list-thumbnail listImages" src='img/default-profilepic-copy.png'>
                                         <img ng-if="data.friendProfilePicUrl!=undefined" class="list-thumbnail listImages" src='{{data.friendProfilePicUrl}}' style="border-radius: 50%;
     height: 56px;
@@ -149,7 +149,7 @@
                                         <p class="dateCol_tailgate">{{ data.emailAddress}}</p>
                                         <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="addTailgateMembers(data,$index)"></span>
                                     </a>
-                                    <a class="item" ng-if="myFriends.length == 0"> You do not have any friends to add. </a>
+                                    <a class="item" ng-if="friendsToInvite.length == 0"> You do not have any friends to add. </a>
                                 </div>
                             </div>
                         </div>

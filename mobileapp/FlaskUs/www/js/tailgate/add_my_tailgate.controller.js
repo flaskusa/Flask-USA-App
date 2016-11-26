@@ -20,6 +20,7 @@
         $scope.eventDetails = [];
         $scope.eventNames = [];
         $scope.groupUserDetails = [];
+        $scope.friendsToInvite=[];
         var currentDate = new Date();/*Today's Date*/
         $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd h:mm');
         currentDate.setDate(currentDate.getDate() - 1); /*adding days to today's date*/
@@ -57,6 +58,7 @@
         $scope.selectedSupplyListItems = [];
         $scope.allMyTailgateItems = [];
         $scope.newUpdate = { 'amountToPay': '', 'venmoAccountId': '' };
+        $scope.haveTailgatorsDEtail=false;
 
         $scope.isMobile = {
             Android: function () {
@@ -603,13 +605,18 @@ getTailgateMarkers(tailgateId);
 
         function getTailgaters(newtailgateId) {
             TailgateService.getMyTailgateUsers(newtailgateId).then(function (respData) {
+                $scope.haveTailgatorsDEtail=true;
                 $scope.myTailgaters = respData.data;
+                $scope.filterMemberToAdd();
             });
         }
         function getAllFriends() {
             TailgateService.getUserFrends().then(function (response) {
+                $scope.friendsResponseLegth=response.length;
                 if($localStorage["myFriendDetail"].length==response.length){
                     $scope.myFriends=$localStorage["myFriendDetail"];
+                    if($scope.haveTailgatorsDEtail==true)
+                    $scope.filterMemberToAdd();
                 }
                 else{
                     angular.forEach(response,function(value,key){
@@ -617,8 +624,11 @@ getTailgateMarkers(tailgateId);
                             $scope.getUserProfile(value);
                         }else{
                             $scope.myFriends.push(value);
+                            if($scope.friendsResponseLegth== $scope.myFriends.length && $scope.haveTailgatorsDEtail==true){
+                                $scope.filterMemberToAdd();
+                            }
                             if(userExistInLocal(value)==false){
-                                $localStorage["myFriendDetail"].push(value)
+                                $localStorage["myFriendDetail"].push(value);
                             }
                         }
                     })
@@ -630,6 +640,18 @@ getTailgateMarkers(tailgateId);
                     if (res.data.fileEntryId != undefined) {
                         UserDetail.friendProfilePicUrl = $scope.imgUrl + res.data.uuid + "&groupId=" + res.data.groupId;
                         $scope.myFriends.push(UserDetail);
+                        if($scope.friendsResponseLegth== $scope.myFriends.length && $scope.haveTailgatorsDEtail==true){
+                            $scope.filterMemberToAdd();
+                        }
+
+                        if (userExistInLocal(UserDetail) == false) {
+                            $localStorage["myFriendDetail"].push(UserDetail);
+                        }
+                    }else{
+                        $scope.myFriends.push(UserDetail);
+                        if($scope.friendsResponseLegth== $scope.myFriends.length && $scope.haveTailgatorsDEtail==true){
+                            $scope.filterMemberToAdd();
+                        }
 
                         if (userExistInLocal(UserDetail) == false) {
                             $localStorage["myFriendDetail"].push(UserDetail);
@@ -646,8 +668,29 @@ getTailgateMarkers(tailgateId);
                 if(value.userId==userDetail.userId){
                     exist=true
                 }
-            })
+            });
             return exist;
+        }
+        $scope.filterMemberToAdd=function(){
+            $scope.friendsToInvite=[];
+            angular.forEach($scope.myFriends,function(value,key){
+                if(!(IsUserTailgateMember(value))){
+                    $scope.friendsToInvite.push(value)
+                }
+            });
+
+
+        }
+        function IsUserTailgateMember(value){
+            var userExist=false;
+            angular.forEach($scope.myTailgaters,function(value2,key2){
+                if(value2.userId==value.userId){
+                    userExist=true;
+                    return userExist
+                }
+            });
+            return userExist;
+
         }
 
         //add single member to the tailgate
@@ -676,7 +719,7 @@ getTailgateMarkers(tailgateId);
         function addUsertoTailgate(userparams, index) {
             TailgateService.addcurrentUser(userparams).then(function (respData) {
                 if (index != undefined) {
-                    $scope.myFriends.splice(index, 1);
+                    $scope.friendsToInvite.splice(index, 1);
                 }
                 getTailgaters(tailgateId);
             });

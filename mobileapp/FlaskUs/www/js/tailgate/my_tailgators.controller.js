@@ -9,6 +9,7 @@
     function mytailgatorsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies,$ionicModal,$flaskUtil,UserService,$localStorage) {
         $scope.myTailgaters = [];
         $scope.myFriends = [];
+        $scope.friendsToInvite=[];
         var userDetail=$cookies.getObject('CurrentUser');
         var userId=userDetail.data.userId;
         $ionicModal.fromTemplateUrl('templates/modal.html', {
@@ -129,6 +130,32 @@
             })
             return exist;
         }
+        $scope.showModel=function(){
+            angular.forEach($scope.myFriends,function(value,key){
+                if(!(IsUserTailgateMember(value))){
+                    $scope.friendsToInvite.push(value)
+                }
+            });
+
+            $scope.modal.show();
+
+        }
+        function IsUserTailgateMember(value){
+            var userExist=false;
+            angular.forEach($scope.myTailgaters,function(value2,key2){
+                if(value2.userId==value.userId){
+                    userExist=true;
+                    return userExist
+                }
+            });
+            return userExist;
+
+        }
+        $scope.hideModel=function(){
+            getTailgaters();
+            $scope.friendsToInvite=[];
+            $scope.modal.hide();
+        }
 
         $scope.addTailgateMembers = function(currUserData,index) {
             var addUserparams = {};
@@ -141,7 +168,8 @@
             addUserparams.isPaid = 0;
             addUserparams.paymentMode = "None";
             TailgateService.addcurrentUser(addUserparams).then(function (respData) {
-                $scope.myFriends.splice(index, 1);
+                $scope.friendsToInvite.splice(index, 1);
+
             })           
         };
 

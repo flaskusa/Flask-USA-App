@@ -70,19 +70,20 @@
                             <div class="list list-inset msgboard">
                                 <div class="col-col-70 msg_input">
                                     <label class="item item-input item-icon-right" style="">
-                                        <input type="text" placeholder="Type Message Here..." ng-model="Message">
+                                        <input type="text" placeholder="Type Message Here..." ng-model="usersMessages.message">
                                     </label>
                                 </div>
                                 <div class="col-col-15 msg_list">
-                                    <span class="badge span_icon" ng-click="saveMessage(Message);"><img src="img/flask_icons/arrow_left.svg"></span>
+                                    <span class="badge span_icon" ng-click="saveMessage(usersMessages.message);"><img src="img/flask_icons/arrow_left.svg"></span>
                     </div>
                 </div>
                 <div class="list">
                     <div class="messageList" ng-repeat="data in messageUser">
-                        <img class="default_img" ng-src='img/default-profilepic-copy.png'>
-                        <p class="profile_name">@{{data.username}}_User</p>
+                        <img ng-if="data.userPicUrl.length==undefined" class="default_img" ng-src='img/default-profilepic-copy.png' style="margin-top: 4px">
+                        <img ng-if="data.userPicUrl.length>0" class="default_img" ng-src='{{data.userPicUrl}}' style="width: 40px;max-width: 65px;height: 40px;border-radius: 50%;margin-top: 4px">
+                        <p class="profile_name" style="margin-top:0px">@{{data.username}}_User</p>
                         <div>
-                            <p class="message_username ">@{{data.username}}_User</p>
+                            <p class="message_username " style="margin-top:0px">@{{data.username}}_User</p>
                             <p class="messageTxt ">{{data.message}}_message</p><br></div>
                     </div>
                 </div>
