@@ -210,14 +210,16 @@
 
         $scope.removePicture = function () {
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Remove profile picture ?',
+                title: 'Remove profile picture ?'
             });
 
             confirmPopup.then(function (res) {
                 if (res) {
                     $scope.cameraPopup.close();
                     UserService.removeProfilePicture($scope.userid).then(function (res) {
+
                         $scope.fileEntryId = 0;
+                        $rootScope.userProfileUrl="";
                     }, function (err) {
                         // show alert can not delete logo
                     })
@@ -325,6 +327,7 @@
         
         $scope.setProfilePicture = function (groupId, uuid) {
             $scope.userProfileUrl = $scope.profileUrl + uuid + "&groupId="+groupId;
+            $rootScope.userProfileUrl=$scope.userProfileUrl;
         }
 
         $scope.updateUserInfo = function (user, userId) {
@@ -346,10 +349,7 @@
                     var currDate = $filter('date')(val, 'MM-dd-yyyy');
                     $scope.user.DOB = currDate;
                 },
-                disabledDates: [
-                  new Date("08-16-2016")
 
-                ],
                 from: new Date(1960, 1, 1),
                 to: new Date(),
                 inputDate: new Date(),

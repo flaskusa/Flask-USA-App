@@ -97,11 +97,14 @@
                 if(res.data.fileEntryId != undefined) {
                     memberDetail.friendProfilePicUrl = $scope.profileUrl + res.data.uuid + "&groupId=" + res.data.groupId;
                     $scope.allMember.push(memberDetail);
+                    if(memberDetail.userId==userId)
                     $scope.isLoginAdmin();
 
 
                 }else{
                     $scope.allMember.push(memberDetail);
+                    if(memberDetail.userId==userId)
+                    $scope.isLoginAdmin();
                 }
             },function(err) {
             })

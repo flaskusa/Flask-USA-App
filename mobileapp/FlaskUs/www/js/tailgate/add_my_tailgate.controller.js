@@ -693,7 +693,7 @@ getTailgateMarkers(tailgateId);
                     adduser.userName = $scope.getUseData[i].userName;
                     adduser.emailAddress = $scope.getUseData[i].emailAddress;
                     adduser.isAdmin = $scope.getUseData[i].isAdmin;
-                    adduser.tailgateId = newtailGateId;
+                    adduser.tailgateId = tailgateId;
                     adduser.isPaid = 0;
                     adduser.paymentMode = "None";
                     addUsertoTailgate(adduser);

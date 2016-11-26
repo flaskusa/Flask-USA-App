@@ -12,7 +12,7 @@
     height: 200px;margin-top: 9px"/></div>
       <div ng-if="profilepicUrl==undefined"><img src="img/default-profilepic-copy.png" class="list-thumbnail friend_profilepic"/></div>
     <div>
-        <h2 class="eventNameCol" ng-bind-template="{{ friend.firstName }} {{friend.lastName}}"></h2>
+        <h2 class="eventNameCol" ng-bind-template="{{ friend.firstName }} {{ friend.middleName }} {{friend.lastName}}"></h2>
         <p class="friend">{{friend.emailAddress}}</p>
 
     </div>

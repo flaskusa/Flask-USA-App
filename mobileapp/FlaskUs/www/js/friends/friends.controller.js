@@ -131,6 +131,12 @@
                     if(userExistInLocal(UserDetail)==false) {
                         $localStorage["myFriendDetail"].push(UserDetail);
                     }
+                }else{
+                    $scope.myFriends.push(UserDetail);
+
+                    if(userExistInLocal(UserDetail)==false) {
+                        $localStorage["myFriendDetail"].push(UserDetail);
+                    }
                 }
             },function(err) {
             })

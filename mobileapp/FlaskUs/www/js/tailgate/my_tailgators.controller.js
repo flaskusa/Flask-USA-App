@@ -102,10 +102,15 @@
                         if (userExistInLocal(UserDetail) == false) {
                             $localStorage["myFriendDetail"].push(UserDetail);
                         }
+                    }else{
+                        if (userExistInLocal(UserDetail) == false) {
+                            $localStorage["myFriendDetail"].push(UserDetail);
+                        }
                     }
                 }else{if(res.data.fileEntryId != undefined) {
                     UserDetail.friendProfilePicUrl = $scope.imgUrl + res.data.uuid + "&groupId=" + res.data.groupId;
                     $scope.myTailgaters.push(UserDetail);
+
 
                 }else{
                     $scope.myTailgaters.push(UserDetail);
