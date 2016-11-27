@@ -337,6 +337,7 @@
                 });
         }
 
+
         $scope.setLogoImageUrl = function (groupId, uuid) {
             $scope.tailgateLogoUrl = $scope.imgUrl + uuid + "&groupId=" + groupId;
         }

@@ -3,13 +3,14 @@
     angular.module('flaskApp')
         .controller('mytailgatorsCtrl', mytailgatorsCtrl);
 
-    mytailgatorsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService','$cookies','$ionicModal','$flaskUtil','UserService','$localStorage'];
+    mytailgatorsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService','$cookies','$ionicModal','$flaskUtil','UserService','$localStorage','$ionicPopup'];
 
     /* @ngInject */
-    function mytailgatorsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies,$ionicModal,$flaskUtil,UserService,$localStorage) {
+    function mytailgatorsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies,$ionicModal,$flaskUtil,UserService,$localStorage,$ionicPopup) {
         $scope.myTailgaters = [];
         $scope.myFriends = [];
         $scope.friendsToInvite=[];
+        $scope.isTailgateAdmin=false;
         var userDetail=$cookies.getObject('CurrentUser');
         var userId=userDetail.data.userId;
         $ionicModal.fromTemplateUrl('templates/modal.html', {
@@ -23,6 +24,33 @@
         var tailGateId = $cookies.get('currtailGateId');
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.imgUrl=SERVER.hostName + "c/document_library/get_file?uuid=";
+
+
+        $scope.deleteTailgateUser=function(currUserId,index){
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Member ?'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    if(currUserId!= userId) {
+                        TailgateService.deleteTailgateUser(tailGateId, currUserId).then(function (response) {
+                            $scope.myTailgaters.splice(index, 1)
+                        })
+                    }else{
+                        $flaskUtil.alert("you can be removed")
+                    }
+                } else {
+                }
+            });
+
+        }
+        $scope.isUserTailgateAdmin = function (tailgateId) {
+            TailgateService.isUserTailgateAdmin(tailgateId).then(function (respData) {
+                $scope.isTailgateAdmin = respData.data;
+            });
+        };
+
+        $scope.isUserTailgateAdmin(tailGateId);
         
 
         function getTailgaters() {

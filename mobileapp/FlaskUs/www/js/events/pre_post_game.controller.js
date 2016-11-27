@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('prePostGameCtrl', prePostGameCtrl);
 
-    prePostGameCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$cookies', '$timeout','$localStorage','SERVER'];
+    prePostGameCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$cookies', '$timeout','$localStorage','SERVER','$ionicHistory'];
 
     /* @ngInject */
-    function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $cookies, $timeout, $localStorage, SERVER) {
+    function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $cookies, $timeout, $localStorage, SERVER,$ionicHistory) {
         /* jshint validthis: true */
         var self = this;
         $scope.eventDetails = {};
@@ -21,6 +21,9 @@
         $scope.currEventId = $stateParams.eventId;
         var currEventId = $scope.currEventId;
         $scope.showAddv = false;
+        $scope.goBack = function(){
+            $ionicHistory.goBack();
+        }
         var PRE_EVENT = "Pre-Event";
         var AT_EVENT = "During-Event";
         var POST_EVENT = "Post-Event";

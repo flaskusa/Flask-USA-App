@@ -95,6 +95,7 @@
         var getTailgateLogoURL = 'flask-user-tailgate-portlet.tailgateinfo/get-tailgate-logo';
         var removeTailgateLogoURL = 'flask-user-tailgate-portlet.tailgateinfo/delete-tailgate-logo';
         var deleteTailgateImageURL = '/flask-user-tailgate-portlet.tailgateimages/delete-tailgate-image-by-tailgate-image-id';
+        var deleteTailgateUserUrl='/flask-user-tailgate-portlet.tailgateusers/delete-tailgate-user'
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -130,7 +131,8 @@
             isUserTailgateAdmin: isUserTailgateAdmin,
             removeTailgateLogo: removeTailgateLogo,
             deleteTailgateImageByImageId: deleteTailgateImageByImageId,
-            deleteTailgateMarker: deleteTailgateMarker
+            deleteTailgateMarker: deleteTailgateMarker,
+            deleteTailgateUser:deleteTailgateUser
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -162,6 +164,18 @@
             return $http.get(SERVER.url + deleteTailgateMarkerURL, {
                 params: { 'tailgateId': tailgateId }
             }
+            )
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+        function deleteTailgateUser(tailgateId,userId) {
+            return $http.get(SERVER.url + deleteTailgateUserUrl, {
+                    params: { 'tailgateId': tailgateId,'userId':userId }
+                }
             )
                 .then(function success(response) {
                     return response.data;

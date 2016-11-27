@@ -51,8 +51,23 @@
         };
         $scope.camera = function () {
             $scope.cameraPopup.close();
-            $scope.checkPermission();
+            if ($scope.isMobile.Android()) {
+                $scope.checkPermission();
+            } else if ($scope.isMobile.iOS()) {
+                $scope.openCamera();
+            }
         }
+        $scope.isMobile = {
+            Android: function () {
+                return ionic.Platform.isAndroid();
+            },
+            iOS: function () {
+                return ionic.Platform.isIOS();
+            },
+            Windows: function () {
+                return ionic.Platform.isWindowsPhone();
+            }
+        };
         $scope.openCamera = function () {
             var options = {
                 quality: 50,
@@ -128,6 +143,9 @@
             $scope.selectedImageURIToUpload = '';
         }
         $scope.uploadFileToServer = function (fileURL, eventId,eventDetailId) {
+            alert(fileURL);
+            alert(eventId);
+            alert(eventDetailId);
             $rootScope.$broadcast('loading:show');
             var options = {};
             options.fileKey = "file";
@@ -145,9 +163,13 @@
                     $scope.reSetSelectedImageURIToUpload();
                     $scope.downloadProgress = 0;
                     var data = $.parseJSON(r.response);
+                    alert(JSON.stringify(data));
                     var eventDetailId = data.eventDetailId;
                     var imageUUID = data.imageUUID;
                     var imageGroupId = data.imageGroupId;
+                    alert(eventDetailId);
+                    alert(imageUUID);
+                    alert(imageGroupId);
                     /*$scope.setEventDetailUrl(eventDetailId, imageUUID, imageGroupId);*/
                     $scope.editContent = false;
                     $scope.initialize();
@@ -190,17 +212,20 @@
                     $ionicScrollDelegate.resize()
                     if (response.data.eventDetailId > 0) {
                         create_content_form.$submitted=false;
+                        if($scope.selectedImageURIToUpload!=undefined && $scope.selectedImageURIToUpload!='') {
                         EventsService.deleteEventDetailImageById(content.eventDetailImageId).then(function(response2){
 
 
-                            if($scope.selectedImageURIToUpload!=undefined && $scope.selectedImageURIToUpload!='') {
+
                                 $scope.uploadFileToServer($scope.selectedImageURIToUpload, response.data.eventId, response.data.eventDetailId);
-                            }
+
+                        }); }
                             else{
+                            $scope.initialize();
                                 $scope.editContent = false;
                             }
 
-                        });
+
                     }
                 });
 

@@ -6,7 +6,7 @@
 	<ion-tabs class="tabs-positive tab_bottom">
 		<ion-tab title="Change Password">
 			<ion-content class="" overflow-scroll="false">
-				<form name="psform" novalidate>
+				<form name="psform" novalidate ng-submit="psform.$valid  && updateUserPassword()">
 					<div class="list acc_settings1">
 					<!--<label class="item item-input item-floating-label">
                         <span class="input-label">Old password</span>
@@ -33,7 +33,7 @@
                          
                     </label>
 						<div class="padding" align="center">
-							<button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="psform.$valid  && updateUserPassword();">
+							<button type="submit" nav-clear class="button button-block button-positive sign_in_button" >
                                 Save
                             </button>
 							<a nav-clear class="button button-block button-positive sign_in_button" href="#/app/user_navigation_menu">

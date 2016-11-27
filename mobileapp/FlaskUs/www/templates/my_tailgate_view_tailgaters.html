@@ -10,14 +10,17 @@
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">INVITE FRIEND</p>
         </a>
-        <div class="list">
-            <a ng-repeat="data in myTailgaters" class="item item-avatar item-icon-right">
+        <ion-list>
+
+            <ion-item ng-repeat="data in myTailgaters" class=" item-avatar ">
                 <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                 <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                 <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>
                 <span class="badge span_icon span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
-            </a>
-        </div>
+
+            <ion-option-button ng-if="isTailgateAdmin==true" class="button-assertive icon ion-trash-a" ng-click="deleteTailgateUser(data.userId,$index)"></ion-option-button>
+            </ion-item>
+      </ion-list>
         <script id="templates/modal.html" type="text/ng-template">
             <ion-modal-view>
                 <ion-header-bar class="bar bar-header bar-positive black-header">

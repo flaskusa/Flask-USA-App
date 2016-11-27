@@ -366,7 +366,7 @@
         }
         $scope.updateUserPassword = function() {
             if($scope.userPassword.newPassword1 != $scope.userPassword.newPassword2) {
-                $flaskUtil.alert("Confirm password did not match").
+                $flaskUtil.alert("Confirm password did not match");
                 return;
             }
             UserService.updatePasssword($scope.userid, $scope.userPassword).then(function (response) {
