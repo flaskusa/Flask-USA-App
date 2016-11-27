@@ -326,7 +326,7 @@ getTailgateMarkers(tailgateId);
                 tailgateId: tailgateDetails.tailgateId,
                 tailgateName: tailgateDetails.tailgateName,
                 tailgateDescription: tailgateDetails.tailgateDescription,
-                eventId: tailgateDetails.eventId,
+                eventId: tailgateDetails.eventId + "",
                 eventName: tailgateDetails.eventName,
                 venmoAccountId: tailgateDetails.venmoAccountId,
                 amountToPay: tailgateDetails.amountToPay,

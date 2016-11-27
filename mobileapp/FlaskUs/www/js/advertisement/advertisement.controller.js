@@ -45,7 +45,7 @@
                     showAdv();
 
                 } else {
-                    $flaskUtil.alert("failed to load");
+                   
                 }
             });
         }

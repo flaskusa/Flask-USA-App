@@ -100,35 +100,11 @@
 
                 angular.forEach(respData.data,function(value,key){
 
-                    haveProfilePic(value)
+                    $scope.getUserProfile(value)
                 })
             });
         }
-        function haveProfilePic(memberDetail){
-            var PicExist=false
-            angular.forEach($localStorage["myFriendDetail"],function(value,key){
-                if(value.friendProfilePicUrl!=undefined){
-                    PicExist=true
-                    if(value.userId==memberDetail.userId){
-                        memberDetail.friendProfilePicUrl=value.friendProfilePicUrl
 
-                    }
-                }
-
-
-
-            });
-            if(PicExist==false) {
-                $scope.getUserProfile(memberDetail)
-
-            }else{
-                $scope.myTailgaters.push(memberDetail)
-                if($scope.allTailgatersLength==$scope.myTailgaters.length){
-                    get_message_list(tailGateId)
-
-                }
-            }
-        }
         $scope.getUserProfile = function(UserDetail) {
             UserService.getUserProfile(UserDetail.userId).then(function(res) {
                if(res.data.fileEntryId != undefined) {
