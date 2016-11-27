@@ -116,18 +116,17 @@
         function getCountry() {
             UserService.getCountries().then(function (respData) {
                 $scope.country = respData.data;
-                
             });
         }
 
         $scope.getState = function (countryId) {
+            if(countryId > 0) {
             UserService.getRegion(countryId).then(function (respData) {
                 $scope.state = respData.data;
             });
-        }
-
-        $scope.getStateId = function (data, state_Name) {
-            $scope.sId = state_Name.regionId;
+            } else {
+                $scope.state = [];
+            }
         }
 
         function getUser() {
@@ -371,10 +370,10 @@
                 return;
             }
             UserService.updatePasssword($scope.userid, $scope.userPassword).then(function (response) {
-                if(response.data.message == "updated") {
+                if(response.data.message == "OK") {
                     $flaskUtil.alert("Password updated.")
-                } else {
-                     $flaskUtil.alert("Failed to update password.")
+                } else if(response.data.message == "ConfirmPasswordError"){
+                     $flaskUtil.alert("Confirm Password did not match");
                 }
                
             });
