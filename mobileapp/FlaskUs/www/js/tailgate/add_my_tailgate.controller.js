@@ -349,7 +349,7 @@ getTailgateMarkers(tailgateId);
                 + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="gallery();">'
                 + 'Gallery'
                 + '</button>'
-                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="removePicture();" ng-if="isTailgateAdmin && tailgateLogoId > 0">'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="removePicture(copytTailgateId);" ng-if="isTailgateAdmin && tailgateLogoId > 0">'
                 + 'Remove Picture'
                 + '</button>'
                 + '</div>'
@@ -362,15 +362,16 @@ getTailgateMarkers(tailgateId);
             IonicClosePopupService.register($scope.cameraPopup);
         };
 
-        $scope.removePicture = function () {
-            var confirmPopup = $ionicPopup.confirm({
+        $scope.removePicture = function (id) {
+            if(id > 0)  {
+                var confirmPopup = $ionicPopup.confirm({
                 title: 'Remove tailgate logo ?'
             });
 
             confirmPopup.then(function (res) {
                 if (res) {
                     $scope.cameraPopup.close();
-                    TailgateService.removeTailgateLogo().then(function (res) {
+                    TailgateService.removeTailgateLogo(id).then(function (res) {
                         $scope.tailgateLogoId = 0;
                     }, function (err) {
                         // show alert can not delete logo
@@ -380,6 +381,8 @@ getTailgateMarkers(tailgateId);
                 }
             });
             IonicClosePopupService.register(confirmPopup);
+            }
+            
         }
         //camera plugin
         $scope.camera = function () {
