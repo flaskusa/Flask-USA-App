@@ -25,8 +25,11 @@
 
                 <button class=" ext-right friendRequestButtonStyle extra-top-request"ng-click="deleteSocialRelation(request.userId,$index)"><i class="emailText">Delete</i> </button>
                 </div>-->
-                    <ion-option-button  class="icon ion-no-smoking"ng-if="featureToBock==true"></ion-option-button>
+                  <!--  <ion-option-button  class="icon ion-no-smoking"ng-if="featureToBock==true"></ion-option-button>-->
+
             </ion-item>
+
             <div class="item "ng-if="requestedUserDetail.length==0 && showEmptymessage==true;">You don't have any new notification.</div>
         </ion-list>
     </ion-content>
+    </ion-view>

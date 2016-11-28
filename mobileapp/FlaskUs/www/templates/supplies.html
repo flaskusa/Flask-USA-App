@@ -9,7 +9,7 @@
 
       <a class="item item-full item-icon-left "ng-click="addNewSuppliesList()" href="#/app/createSupplies"ng-if="MyGameDayList==false">
           <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons" class="FlaskionIcons"></div>
-          <p class="addText">CREATE NEW SUPPLIES</p>
+          <p class="addText">ADD NEW LIST</p>
       </a>
       <div class="divText"ng-if="MyGameDayList==false && emptySupplyMessage==true">
           You don't have any supplies, you can create your own or you can copy.
@@ -82,7 +82,7 @@
                   <input type="text"id="systemEditBox" ng-model="data.supplyListName " style="width: 100%" ng-focus="true" ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}"  ng-blur="saveSupply(data)"/>
                  </div>
                       <div ng-if="MyGameDayList==false">
-                  <span ng-if="agreedToTermsOfUse==false" class="badge badge-assertive"style="cursor: pointer" ng-click="copyList(data)">copy</span>
+                  <span ng-if="agreedToTermsOfUse==false" class="badge badge-assertive"style="cursor: pointer" ng-click="copyList(data)">Copy</span>
 
                      <div ng-if="agreedToTermsOfUse==true ">
                       <span class="badge badge_supplies"><img src="img/flask_icons/arrow_left.svg" class="supplies_left_icon"></span>

@@ -430,7 +430,7 @@
 
         $scope.deleteItem=function(index,supplyId){
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Supply?'
+                title: 'Delete List?'
             });
             confirmPopup.then(function(res) {
                 if(res) {

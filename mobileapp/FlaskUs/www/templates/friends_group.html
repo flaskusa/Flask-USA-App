@@ -1,4 +1,4 @@
-<ion-view view-title="Friends Group"cache-view="false" ng-init="initialize()" id="friendsgroup"class="my-view">
+<ion-view view-title="FRIENDS GROUP"cache-view="false" ng-init="initialize()" id="friendsgroup"class="my-view">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-buttons side="left">
             <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="doneAdding()"ng-if="addingInGroup==true"></button>
@@ -25,8 +25,8 @@
             <p class="addText">CREATE GROUP</p>
         </a>
       <ion-list >
-          <a class="item" ng-if="groups.length == 0 && addingInGroup==true"> There are no more group to add </a>
-          <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> There are no group, please create </a>
+          <a class="item" ng-if="groups.length == 0 && addingInGroup==true"> There is no group to add. </a>
+          <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> There is no group. </a>
 
           <ion-item class=" item-remove-animate"ng-repeat="group in groups | filter: groupList.searchString"style="padding: 0px"ng-init="group.showDivByIndex=false">
               <div ng-if="group.showDivByIndex==true"style="padding-top: 10px">

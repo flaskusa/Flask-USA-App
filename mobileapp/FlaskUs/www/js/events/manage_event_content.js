@@ -83,7 +83,7 @@
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.setSelectedImageURIToUpload(imageURI);
             }, function (err) {
-                alert("error")
+
             });
         };
         $scope.gallery = function () {
@@ -143,9 +143,6 @@
             $scope.selectedImageURIToUpload = '';
         }
         $scope.uploadFileToServer = function (fileURL, eventId,eventDetailId) {
-            alert(fileURL);
-            alert(eventId);
-            alert(eventDetailId);
             $rootScope.$broadcast('loading:show');
             var options = {};
             options.fileKey = "file";
@@ -163,13 +160,10 @@
                     $scope.reSetSelectedImageURIToUpload();
                     $scope.downloadProgress = 0;
                     var data = $.parseJSON(r.response);
-                    alert(JSON.stringify(data));
                     var eventDetailId = data.eventDetailId;
                     var imageUUID = data.imageUUID;
                     var imageGroupId = data.imageGroupId;
-                    alert(eventDetailId);
-                    alert(imageUUID);
-                    alert(imageGroupId);
+
                     /*$scope.setEventDetailUrl(eventDetailId, imageUUID, imageGroupId);*/
                     $scope.editContent = false;
                     $scope.initialize();

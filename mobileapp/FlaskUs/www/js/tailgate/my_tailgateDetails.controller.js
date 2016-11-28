@@ -325,7 +325,7 @@
                     tempData.imageGroupId = data.groupId;
                     tempData.imageTitle = data.title;
                     tempData.tailgateId = tailGateId;
-                    tempData.tailgateImageId = data.fileEntryId;
+                    tempData.tailgateImageId = data.tailgateImageId;
                     tempData.userId = data.userId;
                     tempData.imageUUID = data.uuid;
                     $scope.myTailgateImages.push(tempData);

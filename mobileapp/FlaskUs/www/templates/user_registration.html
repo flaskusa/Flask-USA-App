@@ -4,24 +4,24 @@
                 <div>
                     <div class="list">
                         <div class="item item-input item-floating-label">
-                            <span class="input-label">First Name</span>
-                            <input type="text" placeholder="First Name" name="firstName" class="form-control" ng-model="user.firstName" required>
+                            <span class="input-label">First name</span>
+                            <input type="text" placeholder="First name" name="firstName" class="form-control" ng-model="user.firstName" required>
                             <div ng-show="register_user_form.$submitted || register_user_form.firstName.$touched">
-                                <span ng-show="register_user_form.firstName.$error.required" class="error_msg">Tell us your name.</span>
+                                <span ng-show="register_user_form.firstName.$error.required" class="error_msg">Please enter your first name.</span>
                             </div>
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label">Last Name</span>
-                            <input type="text" placeholder="Last Name" name="lastName" class="form-control" ng-model="user.lastName" required>
+                            <span class="input-label">Last name</span>
+                            <input type="text" placeholder="Last name" name="lastName" class="form-control" ng-model="user.lastName" required>
                             <div ng-show="register_user_form.$submitted || register_user_form.lastName.$touched">
-                                <span ng-show="register_user_form.lastName.$error.required" class="error_msg">Tell us your last name.</span>
+                                <span ng-show="register_user_form.lastName.$error.required" class="error_msg">Please enter your last name.</span>
                             </div>
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Email</span>
                             <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required ng-blur="checkUserByEmailId(user);">
                             <div ng-show="register_user_form.$submitted || register_user_form.Email.$touched">
-                                <span ng-show="register_user_form.Email.$error.required" class="error_msg">Tell us your email.</span>
+                                <span ng-show="register_user_form.Email.$error.required" class="error_msg">Please enter your email.</span>
                                 <span ng-show="register_user_form.Email.$error.email" class="error_msg">This is not a valid email.</span>
                             </div>
                         </div>
@@ -33,11 +33,18 @@
                             </div>
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label">Confirm Password</span>
-                            <input type="password" placeholder="Confirm Password" class="form-control" ng-model="user.password2" name="password2" required="">
+                            <span class="input-label">Confirm password</span>
+                            <input type="password" placeholder="Confirm password" class="form-control" ng-model="user.password2" name="password2" required="">
                             <div ng-show="register_user_form.$submitted || register_user_form.password2.$touched">
                                 <span ng-show="register_user_form.password2.$error.required" class="error_msg">Please enter confirm password.</span>
                                 <span ng-show="user.password1!=user.password2 && !register_user_form.password2.$error.required" class="error_msg">Confirm password did not match!</span>
+                            </div>
+                        </div>
+                        <div class="item item-input item-floating-label">
+                            <span class="input-label">Zip code</span>
+                            <input type="text" placeholder="Zip code" class="form-control" ng-model="user.areaCode" name="areaCode" required="">
+                            <div ng-show="register_user_form.$submitted || register_user_form.areaCode.$touched">
+                                <span ng-show="register_user_form.areaCode.$error.required" class="error_msg">Please enter zip code.</span>
                             </div>
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
@@ -50,13 +57,7 @@
                             <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"male"' name="rdoResult">Male</ion-radio></pre>
                             <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"female"' name="rdoResult">Female</ion-radio></pre>
                         </div>
-                        <div class="item item-input item-floating-label">
-                            <span class="input-label">Area Code</span>
-                            <input type="text" placeholder="Area Code" class="form-control" ng-model="user.areaCode" name="areaCode" required="">
-                            <div ng-show="register_user_form.$submitted || register_user_form.areaCode.$touched">
-                                <span ng-show="register_user_form.areaCode.$error.required" class="error_msg">Please enter areacode.</span>
-                            </div>
-                        </div>
+
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Mobile</span>
                             <input type="text" placeholder="Mobile" name="mobileNumber" ng-model="user.mobileNumber">

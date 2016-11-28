@@ -19,8 +19,8 @@
                           
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label">Tailgate Name</span>
-                            <input type="text" placeholder="Tailgate Name" name="TailgateName" class="form-control" ng-model="addTailgateParams.tailgateName"
+                            <span class="input-label">Tailgate name</span>
+                            <input type="text" placeholder="Tailgate name" name="TailgateName" class="form-control" ng-model="addTailgateParams.tailgateName"
                                 required>
                             <div ng-show="tailgateForm.$submitted || tailgateForm.TailgateName.$touched">
                                 <span ng-show="tailgateForm.TailgateName.$error.required" class="error_msg">Please enter tailgate name</span>
@@ -31,7 +31,7 @@
                             <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="addTailgateParams.tailgateDescription"
                                 >
                         </div>
-                        <div id="toaster" ng-if="tailgateCreateStatus==true"class="item toastDiv" style="text-align: center" ><i>Tailgate Added successfully</i> </div>
+                        <div id="toaster" ng-if="tailgateCreateStatus==true"class="item toastDiv" style="text-align: center" ><i>Tailgate added successfully</i> </div>
                         <!--<div class="item item-input item-floating-label">
                             <span class="input-label">Event Name:</span>
                             <input type="text" list="EventNameList" ng-change="loadeventData()" id="envtName" placeholder="Event Name" class="form-control"
@@ -42,7 +42,7 @@
                                 </select>
                             </datalist>
                         </div>-->
-                        <span class="input-label" style="margin-left: 15px">Event Name</span>
+                        <span class="input-label" style="margin-left: 15px">Event name</span>
                         <div class="list">
                             <label class="item item-input item-select">
                                 <select id="EventNameList" ng-model="addTailgateParams.eventId" name="TailgateEventName"  ng-change="loadeventData(addTailgateParams.eventId)" ng-init="addTailgateParams.eventId = (addTailgateParams.eventId == undefined || addTailgateParams.eventId=='') ? '-1' : addTailgateParams.eventId" style="max-width: 100%;direction:inherit">
@@ -58,17 +58,17 @@
 
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label">Event Date</span>
-                            <input type="text" class="form-control" placeholder="Event Date" ng-model="tailgateDate" name="Eventdate" disabled="disabled"
+                            <span class="input-label">Event date</span>
+                            <input type="text" class="form-control" placeholder="Event date" ng-model="tailgateDate" name="Eventdate" disabled="disabled"
                                 required>
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
-                            <span class="input-label">Start Time </span>
+                            <span class="input-label">Start time </span>
                             <input type="time" placeholder="HH:mm:ss" class="form-control" name="startTime" ng-model="addTailgateParams.startTime" required>
                             
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
-                            <span class="input-label">End Time</span>
+                            <span class="input-label">End time</span>
                             <input type="time" placeholder="HH:mm:ss" class="form-control" name="endtime" ng-model="addTailgateParams.endTime"  required>
                             <div >
                                 <span ng-show="invalidDate" class="error_msg">Please enter valid end time</span>
@@ -119,12 +119,12 @@
                                 <div>
                                     <div class="list">
                                         <a class="item item-thumbnail-left item-icon-right eventList" ng-repeat="data in allGroups">
-                                            <img class="list-thumbnail listImages" src = 'img/default-group-pic.png'">
+                                            <img class="list-thumbnail listImages" src = 'img/default-group-pic.png'>
                                             <h2 class="eventNameCol_tailgate">{{ data.groupName | uppercase}}</h2>
                                             <p class="dateCol_tailgate">Created By : {{data.createdBy | uppercase}}</p>
                                             <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="getusersofGroup(data.groupId, $index)"></span>
                                         </a>
-                                        <a class="item" ng-if="allGroups.length == 0"> You do not have any group yet. Please search and add group </a>
+                                        <a class="item" ng-if="allGroups.length == 0"> There is no group to add </a>
                                     </div>
                                 </div>
                             </div>
@@ -149,7 +149,7 @@
                                         <p class="dateCol_tailgate">{{ data.emailAddress}}</p>
                                         <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="addTailgateMembers(data,$index)"></span>
                                     </a>
-                                    <a class="item" ng-if="friendsToInvite.length == 0"> You do not have any friends to add. </a>
+                                    <a class="item" ng-if="friendsToInvite.length == 0"> There is no friend to add. </a>
                                 </div>
                             </div>
                         </div>
@@ -163,8 +163,8 @@
                 <form class="paynow" style="margin-top: 44px;" name="venmo" novalidate>
                     <div class="tailgateInfo">
                         <div class="item item-input item-floating-label">
-                            <span class="input-label">Venmo Account:</span>
-                            <input type="text" placeholder="Venmo Account" class="form-control" ng-model="newUpdate.venmoAccountId" name="VenmoAccount"
+                            <span class="input-label">Venmo account:</span>
+                            <input type="text" placeholder="Venmo account" class="form-control" ng-model="newUpdate.venmoAccountId" name="VenmoAccount"
                                 required>
                             <div ng-show="venmo.$submitted || venmo.VenmoAccount.$touched">
                                 <span ng-show="venmo.VenmoAccount.$error.required" class="error_msg">Enter your venmo account</span>
@@ -174,7 +174,7 @@
                             <span class="input-label">Amount</span>
                             <input type="text" placeholder="Amount" name="Amount" ng-model="newUpdate.amountToPay" valid-number>
                             <div ng-show="venmo.$submitted || venmo.Amount.$touched">
-                                <span ng-show="venmo.Amount.$error.required" class="error_msg">Enter Amount</span>
+                                <span ng-show="venmo.Amount.$error.required" class="error_msg">Enter amount</span>
                             </div>
                         </div>
                         <!--<div class="row">
@@ -237,7 +237,7 @@
 
                 <div class="list" style="margin-bottom:40px;">
                     <button type="button" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems();">
-                        Add Supply List
+                        Add supply list
                     </button>
                 </div>
             </ion-content>
