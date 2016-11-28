@@ -315,6 +315,14 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 		return _flaskAdminService.isAddContentAccess(userId);
 	}
 
+	@Override
+	public java.util.Map<java.lang.String, java.lang.String> updatePassword(
+		long userId, java.lang.String oldPassword, java.lang.String password1,
+		java.lang.String password2) {
+		return _flaskAdminService.updatePassword(userId, oldPassword,
+			password1, password2);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

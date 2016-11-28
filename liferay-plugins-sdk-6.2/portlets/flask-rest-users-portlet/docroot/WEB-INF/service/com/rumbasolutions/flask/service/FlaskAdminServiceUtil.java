@@ -300,6 +300,13 @@ public class FlaskAdminServiceUtil {
 		return getService().isAddContentAccess(userId);
 	}
 
+	public static java.util.Map<java.lang.String, java.lang.String> updatePassword(
+		long userId, java.lang.String oldPassword, java.lang.String password1,
+		java.lang.String password2) {
+		return getService()
+				   .updatePassword(userId, oldPassword, password1, password2);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

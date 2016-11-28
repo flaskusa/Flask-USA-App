@@ -206,6 +206,13 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		_methodName27 = "isAddContentAccess";
 
 		_methodParameterTypes27 = new String[] { "long" };
+
+		_methodName28 = "updatePassword";
+
+		_methodParameterTypes28 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
 	}
 
 	@Override
@@ -1335,6 +1342,40 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		return ((Boolean)returnObj).booleanValue();
 	}
 
+	@Override
+	public java.util.Map<java.lang.String, java.lang.String> updatePassword(
+		long userId, java.lang.String oldPassword, java.lang.String password1,
+		java.lang.String password2) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName28,
+					_methodParameterTypes28,
+					new Object[] {
+						userId,
+						
+					ClpSerializer.translateInput(oldPassword),
+						
+					ClpSerializer.translateInput(password1),
+						
+					ClpSerializer.translateInput(password2)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.Map<java.lang.String, java.lang.String>)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1390,4 +1431,6 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	private String[] _methodParameterTypes26;
 	private String _methodName27;
 	private String[] _methodParameterTypes27;
+	private String _methodName28;
+	private String[] _methodParameterTypes28;
 }

@@ -256,4 +256,9 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public boolean isAddContentAccess(long userId);
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	public java.util.Map<java.lang.String, java.lang.String> updatePassword(
+		long userId, java.lang.String oldPassword, java.lang.String password1,
+		java.lang.String password2);
 }

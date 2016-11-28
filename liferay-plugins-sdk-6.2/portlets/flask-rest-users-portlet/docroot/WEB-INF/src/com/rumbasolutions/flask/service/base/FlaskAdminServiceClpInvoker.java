@@ -206,6 +206,13 @@ public class FlaskAdminServiceClpInvoker {
 		_methodName57 = "isAddContentAccess";
 
 		_methodParameterTypes57 = new String[] { "long" };
+
+		_methodName58 = "updatePassword";
+
+		_methodParameterTypes58 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -447,6 +454,13 @@ public class FlaskAdminServiceClpInvoker {
 			return FlaskAdminServiceUtil.isAddContentAccess(((Long)arguments[0]).longValue());
 		}
 
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
+			return FlaskAdminServiceUtil.updatePassword(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -504,4 +518,6 @@ public class FlaskAdminServiceClpInvoker {
 	private String[] _methodParameterTypes56;
 	private String _methodName57;
 	private String[] _methodParameterTypes57;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
 }

@@ -20,11 +20,14 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.ReservedUserIdException;
+import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
@@ -486,18 +489,20 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		}else{
 			roleIds[0] = roleId;
 		}
-		if(password1.isEmpty()){
-			password1 = user.getPassword();
-		}
-		if(!password1.contentEquals(password2)){
+		if(!password1.equals(password2)){
 			throw new com.liferay.portal.UserPasswordException(0);
 		}
+		if(password1.isEmpty()){
+			password1 = null;
+			password2 = null;
+		} 
 		
 		Calendar cal = FlaskModelUtil.parseDate(DOB);
+		System.out.println(user.toString());
 		user = UserLocalServiceUtil.updateUser( userId /*long userId*/,
 				user.getPassword()/*String oldPassword*/,
 				password1 /*String newPassword1*/,
-				password1/*String newPassword2*/,
+		password1/*String newPassword2*/,
                 false/*boolean passwordReset*/,
                 user.getReminderQueryQuestion() /*String reminderQueryQuestion*/,
                 user.getReminderQueryAnswer() /*String reminderQueryAnswer*/,
@@ -733,6 +738,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		try{	
 				long portraitId = UserLocalServiceUtil.getUser(userId).getPortraitId();
 				DLAppLocalServiceUtil.deleteFileEntry(portraitId);
+				FlaskAdminServiceUtil.updateUserForFileEntry(userId, 0, null);				
 				FlaskModelUtil.setMyGuestViewPermission(fileEntry);
 		}catch(Exception ex){
 			
@@ -810,7 +816,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				DLAppLocalServiceUtil.deleteFileEntry(portraitId);
 			
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e);
 		}
 		return fileEntry;
 	}
@@ -843,5 +849,27 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		}
 		return isContentAdmin;
 		
+	}
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public	Map<String, String> updatePassword(long userId, String oldPassword, String password1, String password2) {
+		 Map<String, String> statusMap = new HashMap<String, String>();
+		 statusMap.put("message", "Error");
+		try {
+			User user = UserLocalServiceUtil.getUser(userId);
+//			 if(user.getPassword() == oldPassword) {
+//				statusMap.put("message", "OldPasswordError");
+//			 }
+			 if(password1.equals(password2)) {
+				UserLocalServiceUtil.updatePassword(userId, password1, password2, false,true);
+				statusMap.put("message", "OK");
+			}else {
+				statusMap.put("message", "ConfirmPaswordError");
+			}
+		}catch(Exception exception) {
+			
+			LOGGER.error(exception);
+		}
+		return statusMap;
 	}
 }
