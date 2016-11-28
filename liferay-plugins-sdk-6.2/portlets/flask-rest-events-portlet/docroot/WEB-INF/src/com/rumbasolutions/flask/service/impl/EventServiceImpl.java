@@ -649,7 +649,6 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		}
 		return eventLogos;
 	}
-	
 	@Override
 	public EventDetailImage uploadDetailImage(File file, long eventId, long eventDetailId,  ServiceContext serviceContext){
 		EventDetailImage detailImage = null;
@@ -657,16 +656,22 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			Path source = Paths.get(file.getName());
 			String mimeType = Files.probeContentType(source);
 			long repositoryId = FlaskUtil.getFlaskRepositoryId();
+			System.out.println("repository Is is"+repositoryId);
 			long userId = serviceContext.getUserId();
+			System.out.println("USer Id"+userId);
 			String name = eventDetailId +"_"+ file.getName();
 			Folder folder = FlaskUtil.getOrCreateFolder(_eventRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
 			String eventFolderName = folder.getName()+"-"+eventId;
+			System.out.println("Event folder NAme"+eventFolderName);
 			Folder eventFolder = FlaskUtil.getOrCreateFolder(eventFolderName, folder.getFolderId(), folder.getRepositoryId(), userId, serviceContext);
+			System.out.println("event folder");
 			FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), eventFolder.getRepositoryId(), eventFolder.getFolderId(), name, mimeType, name, name, "", file, serviceContext);
+			System.out.println("FileEntry"+fileEntry.getFileEntryId());
+			
 			FlaskUtil.setGuestViewPermission(fileEntry);
 			detailImage = EventServiceUtil.addEventDetailImage(eventDetailId, name, name, fileEntry.getUuid(), fileEntry.getGroupId(), serviceContext);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e);
 		}
 		return detailImage;
 	}
