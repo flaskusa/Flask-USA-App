@@ -8,6 +8,7 @@
             //      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             //      cordova.plugins.Keyboard.disableScroll(true);
            var profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
+            $localStorage.$default({things:{}});
             //  }
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
