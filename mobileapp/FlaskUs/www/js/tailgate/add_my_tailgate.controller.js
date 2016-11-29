@@ -22,9 +22,9 @@
         $scope.groupUserDetails = [];
         $scope.friendsToInvite=[];
         var currentDate = new Date();/*Today's Date*/
-        $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd h:mm');
+        $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd');
         currentDate.setDate(currentDate.getDate() - 1); /*adding days to today's date*/
-        $scope.startDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
+        $scope.startDate = $filter('date')(currentDate, 'yyyy-MM-dd');
         $scope.eventTypeIds = '';
         $scope.searchString = 'a';
         $scope.showSavedMarker = false;
@@ -34,7 +34,7 @@
         
 
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
-        $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
+        $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd');
         $scope.tailgateSupplyList = [];
         $scope.supplyList = { 'selectedSupplyList': '' };
         var supplyListstId;
@@ -558,9 +558,7 @@ getTailgateMarkers(tailgateId);
                             showToastMessage('Tailgate created. Tap next tab to add location');
                             tailgateId = respData.data.tailgateId;
                             if(tailgateId > 0) {
-                                $("#locationTab").removeAttr("disabled");
-                                $("#attendeeTab").removeAttr("disabled");
-                                $("#plsnNowTab").removeAttr("disabled");
+                                $scope.copytTailgateId  = tailgateId
                             }
                         } else {
                             showToastMessage('Failed to create tailgate');

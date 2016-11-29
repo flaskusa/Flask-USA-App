@@ -15,8 +15,11 @@
         $scope.INFO_TYPE = [];
         $scope.INFO_TYPE_CATEGORY = [];
         $scope.Pre_Game = [];
+        $scope.Pre_Game.push("Parking")
         $scope.Post_Game = [];
+        $scope.Post_Game.push("Getting home");
         $scope.During_Game = [];
+        $scope.During_Game.push("Venue Info")
         $scope.currEventName = $stateParams.eventName;
         $scope.currEventId = $stateParams.eventId;
         var currEventId = $scope.currEventId;

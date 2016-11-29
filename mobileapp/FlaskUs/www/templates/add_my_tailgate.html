@@ -5,7 +5,7 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-tabs class="tabs-positive tab_bottom">
-        <ion-tab title="Event Details">
+        <ion-tab title="Event Details" >
             <!-- Tab 1 content -->
             <ion-content overflow-scroll="false" header="true" class='has-header has-subheader'>
                 <form class="" novalidate name="tailgateForm">
@@ -31,17 +31,7 @@
                             <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="addTailgateParams.tailgateDescription"
                                 >
                         </div>
-                        <div id="toaster" ng-if="tailgateCreateStatus==true"class="item toastDiv" style="text-align: center" ><i>Tailgate added successfully</i> </div>
-                        <!--<div class="item item-input item-floating-label">
-                            <span class="input-label">Event Name:</span>
-                            <input type="text" list="EventNameList" ng-change="loadeventData()" id="envtName" placeholder="Event Name" class="form-control"
-                                ng-model="addTailgateParams.eventName" required ng-model-options="{ debounce: 500 }" autocomplete="false">
-                            <datalist id="EventNameList">
-                                <select>
-                                    <option ng-repeat="data in eventDetails" data_id="{{data.eventId}}" value="{{data.eventName}}">{{data.eventName}}</option>
-                                </select>
-                            </datalist>
-                        </div>-->
+
                         <span class="input-label" style="margin-left: 15px">Event name</span>
                         <div class="list">
                             <label class="item item-input item-select">
@@ -53,7 +43,7 @@
 
                             </label>
                             <div ng-show="tailgateForm.$submitted || tailgateForm.TailgateEventName.$touched">
-                                <span ng-show="tailgateForm.$invalid && !tailgateForm.TailgateName.$error.required" class="error_msg" style="font-size: 16px;margin-left: 15px">Please select event</span>
+                                <span ng-show="tailgateForm.$invalid && addTailgateParams.eventId < 0" class="error_msg" style="font-size: 16px;margin-left: 15px">Please select event</span>
                             </div>
 
                         </div>
@@ -65,13 +55,15 @@
                         <div class="item item-input item-floating-label item-icon-right">
                             <span class="input-label">Start time </span>
                             <input type="time" placeholder="HH:mm:ss" class="form-control" name="startTime" ng-model="addTailgateParams.startTime" required>
-                            
+                            <div ng-show="tailgateForm.$submitted || tailgateForm.startTime.$touched">
+                                <span ng-show="tailgateForm.$invalid && tailgateForm.startTime.$error.required" class="error_msg" style="font-size: 16px;margin-left: 15px">Please select start time</span>
+                            </div>
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
                             <span class="input-label">End time</span>
                             <input type="time" placeholder="HH:mm:ss" class="form-control" name="endtime" ng-model="addTailgateParams.endTime"  required>
-                            <div >
-                                <span ng-show="invalidDate" class="error_msg">Please enter valid end time</span>
+                            <div ng-show="tailgateForm.$submitted || tailgateForm.endtime.$touched">
+                                <span ng-show="tailgateForm.$invalid && tailgateForm.endtime.$error.required" class="error_msg" style="font-size: 16px;margin-left: 15px">Please select end time</span>
                             </div>
                         </div>
 
@@ -87,7 +79,7 @@
                 </form>
             </ion-content>
         </ion-tab>
-        <ion-tab title="Location" disabled="copytTailgateId==0 || copytTailgateId==undefined" >
+        <ion-tab title="Location" disabled="copytTailgateId==0 || copytTailgateId==undefined" id="locationTab">
             <!-- Tab 2 content -->
 
             <ion-content overflow-scroll="false" class="has-header">
@@ -105,7 +97,7 @@
                 </div>
             </ion-content>
         </ion-tab>
-        <ion-tab title="Attendees" disabled="copytTailgateId==0 || copytTailgateId==undefined">
+        <ion-tab title="Attendees" disabled="copytTailgateId==0 || copytTailgateId==undefined" id="attendeeTab">
             <ion-content overflow-scroll="false" class="has-header">
                 <div class="container" style="margin-top: 44px;">
                     <div class="expandcollapse-item">
@@ -157,7 +149,7 @@
                 </div>
             </ion-content>
         </ion-tab>
-        <ion-tab title="Plan Now" ng-click="selectTab(3)" disabled="copytTailgateId==0 || copytTailgateId==undefined">
+        <ion-tab title="Plan Now" ng-click="selectTab(3)" disabled="copytTailgateId==0 || copytTailgateId==undefined" id="planNowTab">
             <!--FOURTH TAB-->
             <ion-content overflow-scroll="false" class="has-header">
                 <form class="paynow" style="margin-top: 44px;" name="venmo" novalidate>
