@@ -269,6 +269,10 @@ getTailgateMarkers(tailgateId);
             if(eventId > 0) {
                 $scope.addTailgateParams.eventName=$( "#EventNameList option:selected" ).text();
                 getEventDetails(eventId);
+            }else{
+                $scope.addTailgateParams.startTime = '';
+                $scope.addTailgateParams.endTime = '';
+                $scope.tailgateDate = '';
             }
         }
         //get event and venue details in select box
@@ -279,10 +283,11 @@ getTailgateMarkers(tailgateId);
                 var currStartTime = getTailgateTime($scope.CurrEvent.startTime);
                 var currEndTime = getTailgateTime($scope.CurrEvent.endTime);
                 var currDate = $filter('date')($scope.CurrEvent.eventDate, 'MM-dd-yyyy');
-
+               $scope.currEventDate= $scope.CurrEvent.eventDate
                 $scope.addTailgateParams.startTime = currStartTime;
                 $scope.addTailgateParams.endTime = currEndTime;
                 $scope.tailgateDate = currDate;
+
                 TailgateService.getvenueDetails(venueID).then(function (VENUEData) {
                     callMap(VENUEData.latitude, VENUEData.longitude);
                 });
@@ -402,7 +407,7 @@ getTailgateMarkers(tailgateId);
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false,
-                correctOrientation: true,
+                correctOrientation: true
             };
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
@@ -530,7 +535,8 @@ getTailgateMarkers(tailgateId);
 
             var startTime = Date.parse(tailgatedata.startTime); // Your timezone!
             var endTime = Date.parse(tailgatedata.endTime);
-            tailgatedata.tailgateDate = new Date($scope.tailgateDate).getTime();
+
+            tailgatedata.tailgateDate = $scope.currEventDate
             tailgatedata.endTime = endTime;
             tailgatedata.startTime = startTime;
             tailgatedata.venmoAccountId = "";
@@ -548,9 +554,21 @@ getTailgateMarkers(tailgateId);
                     if ($scope.isImageSelectedToUpload) {
                         $scope.uploadFileToServer($scope.selectedImageURIToUpload, respData.data.tailgateId, 'Tailgate created successfully');
                     } else {
-                        showToastMessage('Tailgate created. Tap next tab to add location');
+                        if(respData.data.tailgateId > 0 ) {
+                            showToastMessage('Tailgate created. Tap next tab to add location');
+                            tailgateId = respData.data.tailgateId;
+                            if(tailgateId > 0) {
+                                $("#locationTab").removeAttr("disabled");
+                                $("#attendeeTab").removeAttr("disabled");
+                                $("#plsnNowTab").removeAttr("disabled");
+                            }
+                        } else {
+                            showToastMessage('Failed to create tailgate');
+                        }
+
                     }
-                    tailgateId = respData.data.tailgateId;
+
+
                     $scope.copytTailgateId=tailgateId;
                     $scope.addTailgateParams.tailgateId = respData.data.tailgateId;
                     $scope.addTailgateParams.logoId = respData.data.logoId;
