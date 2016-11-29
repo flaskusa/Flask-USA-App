@@ -510,7 +510,7 @@ getTailgateMarkers(tailgateId);
                     showToastMessage(message);
                 }, function (error) {
                     $scope.reSetSelectedImageURIToUpload();
-                    $rootScope.$broadcast('loading:hide')
+                    $rootScope.$broadcast('loading:hide');
                     alert("An error has occurred: Code = " + error.code);
                     console.log("upload error source " + error.source);
                     console.log("upload error target " + error.target);
@@ -524,18 +524,9 @@ getTailgateMarkers(tailgateId);
         }
         //add new tailgate
         $scope.addmyTailgate = function (tailgatedata) {
-            if (!(tailgatedata.eventId > 0)) {
-                $flaskUtil.alert("Please select event");
-                return;
-            }
-            if (!validateTailgate(tailgatedata)) {
-                console.log("Invalid date");
-            }
             tailgatedata = angular.copy(tailgatedata);
-
             var startTime = Date.parse(tailgatedata.startTime); // Your timezone!
             var endTime = Date.parse(tailgatedata.endTime);
-
             tailgatedata.tailgateDate = $scope.currEventDate
             tailgatedata.endTime = endTime;
             tailgatedata.startTime = startTime;
@@ -551,26 +542,20 @@ getTailgateMarkers(tailgateId);
             else {
                 tailgatedata.logoId = 0;
                 TailgateService.addTailgate(tailgatedata).then(function (respData) {
-                    if ($scope.isImageSelectedToUpload) {
-                        $scope.uploadFileToServer($scope.selectedImageURIToUpload, respData.data.tailgateId, 'Tailgate created successfully');
-                    } else {
-                        if(respData.data.tailgateId > 0 ) {
-                            showToastMessage('Tailgate created. Tap next tab to add location');
-                            tailgateId = respData.data.tailgateId;
-                            if(tailgateId > 0) {
-                                $scope.copytTailgateId  = tailgateId
-                            }
-                        } else {
-                            showToastMessage('Failed to create tailgate');
+                    tailgateId = respData.data.tailgateId;
+                    if(tailgateId > 0) {
+                        $scope.copytTailgateId  = tailgateId;
+                        $scope.addTailgateParams.tailgateId = tailgateId;
+                        $scope.addTailgateParams.logoId = respData.data.logoId;
+                        $cookies.putObject('newtailgatedata', respData.data);
+                        if ($scope.isImageSelectedToUpload) {
+                            $scope.uploadFileToServer($scope.selectedImageURIToUpload, tailgateId, 'Tailgate created. Tap next tab to add location');
+                        }else {
+                             showToastMessage('Tailgate created. Tap next tab to add location');
                         }
-
+                    } else {
+                            $flaskUtil.alert('Failed to create tailgate');
                     }
-
-
-                    $scope.copytTailgateId=tailgateId;
-                    $scope.addTailgateParams.tailgateId = respData.data.tailgateId;
-                    $scope.addTailgateParams.logoId = respData.data.logoId;
-                    $cookies.putObject('newtailgatedata', respData.data);
                 });
             }
         }
