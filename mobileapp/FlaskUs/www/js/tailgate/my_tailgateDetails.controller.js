@@ -185,20 +185,33 @@
         };
 
         $scope.isUserTailgateAdmin(tailGateId);
-        $scope.removeTailgateImage = function (index, imageId) {
+        $scope.removeTailgateImage = function (index, imageId,imageUUID) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete Image ?'
             });
             confirmPopup.then(function(res) {
                 if(res) {
-                    TailgateService.deleteTailgateImageByImageId(imageId).then(function (res) {
-                        $scope.myTailgateImages.splice(index, 1);
-                    })
+                    if(imageId!=undefined) {
+                        deleteTailgateImage(imageId,index);
+                    }else{
+                        TailgateService.getMyTailgateImages(tailGateId).then(function (respData) {
+                            $scope.myTailgateImages = respData.data;
+                            if($scope.myTailgateImages[index].imageUUID==imageUUID){
+                                deleteTailgateImage($scope.myTailgateImages[index].tailgateImageId,index)
+                            }
+                        });
+                        }
+
 
                 } else {
                 }
             });
 
+        }
+        function deleteTailgateImage(imageId,index){
+            TailgateService.deleteTailgateImageByImageId(imageId).then(function (res) {
+                $scope.myTailgateImages.splice(index, 1);
+            });
         }
         function editTailgate(tailGateId) {
             var addTailgateParams = {}

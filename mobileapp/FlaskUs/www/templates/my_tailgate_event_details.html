@@ -51,7 +51,7 @@
                             <a class="item item-list-detail image_list">
                                 <ion-scroll direction="x" class="tailgate_thumb" style="overflow: scroll;overflow-x: scroll" overflow-scroll="false">
                                     <span ng-repeat="images in myTailgateImages">
-                                    <span data-ng-click="removeTailgateImage($index,images.tailgateImageId)" ng-if = "isTailgateAdmin"><i  class="crossIconTailgate"><img src="img/flask_icons/delete.svg" style="width: 20px;height: 20px;"/></i></span>
+                                    <span data-ng-click="removeTailgateImage($index,images.tailgateImageId,images.imageUUID)" ng-if = "isTailgateAdmin"><i  class="crossIconTailgate"><img src="img/flask_icons/delete.svg" style="width: 20px;height: 20px;"/></i></span>
                         <img ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}"  class="list-thumbnail thumb-picturs-size " alt="Image not found"
                             onError="this.src = 'img/FlaskRed.png';" ng-click="showPopup($index)"/>
                         </span>

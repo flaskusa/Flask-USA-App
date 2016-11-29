@@ -10,20 +10,20 @@
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
-        $scope.localstorageData = [];
+        $scope.localstorageData = {};
         $scope.showAddv=false;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         var DEFAULT_ZIPCODE = 48226; /*Detroit Zip Code*/
         var currentDate = new Date();/*Today's Date*/
-        $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd h:mm');
+        $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd ');
         currentDate.setDate(currentDate.getDate() - 1 ); /*adding days to today's date*/
-        $scope.startDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
+        $scope.startDate = $filter('date')(currentDate, 'yyyy-MM-dd');
         $scope.eventTypeIds = '';
         $scope.searchString = 'a';
         $scope.latitude = '42.34';
         $scope.longitude = '83.0456';
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
-        $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
+        $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd');
         $scope.current_time = currentDate.getTime();
         $scope.constant_time = currentDate.getTime();
         $scope.constant_time += 60 * 60 * 1000;
@@ -31,6 +31,7 @@
         $scope.vId = [];
         $scope.city = [];
         $scope.venuesId = [];
+        var location = 'geolocation';
         $scope.searchstringList = {
             searchString: 'a',
             days: '60'
@@ -39,16 +40,18 @@
 
 
         // $scope.localstorageData = $localStorage.getObject('user_location_data');
-        // Retrieve the object from ng-storage  
-        $scope.localstorageData = $localStorage.things;
-
-        
+        // Retrieve the object from ng-storage
+        if($localStorage.things) {
+            $scope.localstorageData = $localStorage.things;
+            $scope.storedTime = $scope.localstorageData.timestamp;
+        }
         //
         console.log($scope.localstorageData);
-        console.log('stored time', $scope.storedTime);
         function islocalstorageEmpty() {
             if ($scope.localstorageData && $scope.localstorageData.length) {
                 return false;
+            }else{
+
             }
             //
         }
@@ -59,9 +62,9 @@
             }
         }
 
-        if (islocalstorageEmpty() && isExpired()) {
+        if ($scope.localstorageData.latitude!=undefined && $scope.localstorageData.latitude!="" && $scope.localstorageData.longitude!="") {
             get_from_localStorage();
-            $scope.storedTime = $scope.localstorageData.timestamp;
+
         } else {
             get_event_list();
         }
@@ -118,13 +121,20 @@
         }
 
         function get_from_localStorage() {
-            $scope.latitude = $scope.localstorageData.coords.latitude;
-            $scope.longitude = $scope.localstorageData.coords.longitude;
+            getVenueName();
+            $scope.latitude = $scope.localstorageData.latitude;
+            $scope.longitude = $scope.localstorageData.longitude;
             ConvertToZip($scope.latitude, $scope.longitude);
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 console.log(respData);
                 $scope.allEvent = respData.data.Events;
-                if ($scope.allEvent && $scope.allEvent.length) {
+                for (var i = 0; i < $scope.allEvent.length; i++) {
+                    $scope.vId.push($scope.allEvent[i].venueId);
+                    $scope.allEventId.push($scope.allEvent[i].eventId)
+                }
+                $cookies.put("AllEventId",$scope.allEventId);
+                $scope.showAddv=true;
+                if ($scope.allEvent && $scope.allEvent.length==0) {
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;

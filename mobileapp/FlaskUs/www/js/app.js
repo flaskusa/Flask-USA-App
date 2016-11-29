@@ -82,21 +82,22 @@
                  // if exception occurs the  redirect ro events page
                 $state.go("app.events");
             })
-           
-            //$scope.user_location_data = [];          
 
             //user_location_data.push({ code: "stored" });
             // Gelocation On ionic ready
+            var geooobj={"latitude":"","longitude":"","timestamp":""};
             navigator.geolocation.getCurrentPosition(
                 function (position) {
                     //when Success
                     // save it
-                    $localStorage = $localStorage.$default({
-                        things: position
-                    });
+                    geooobj.latitude=position.coords.latitude;
+                    geooobj.longitude=position.coords.longitude;
+                    geooobj.timestamp=position.timestamp;
+                    $localStorage["things"]=geooobj;
                 },
                 function errorCallback(error) {
                     //when Error
+                    $localStorage["things"]=geooobj;
                     //$cookies.putObject('user_location_data', error);
                 }
             );
