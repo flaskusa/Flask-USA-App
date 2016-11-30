@@ -115,16 +115,16 @@
 				<div class="list">
 					<label class="item item-input item-select">
                         <select ng-model="user.countryId" ng-change="getState(user.countryId);">
-                            <option value="-1">Select country</option>
-                            <option ng-repeat=" data in country" ng-bind="data.nameCurrentValue" ng-value="data.countryId"></option>
+                            <option value="0">Select country</option>
+                            <option ng-repeat=" data in country" ng-bind="data.nameCurrentValue" ng-value="data.countryId" ng-selected="user.countryId == data.countryId"></option>
                         </select>
                     </label>
 				</div>
 				<div class="list">
 					<label class="item item-input item-select">
                         <select ng-model="user.stateId">
-                            <option value="-1">Select State</option>
-                            <option ng-repeat="data in state" ng-bind="data.name" ng-value="data.regionId"></option>
+                            <option value="0">Select State</option>
+                            <option ng-repeat="data in state" ng-bind="data.name" ng-value="data.regionId" ng-selected="user.stateId == data.regionId"></option>
                         </select>
                     </label>
 

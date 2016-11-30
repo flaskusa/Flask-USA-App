@@ -302,19 +302,16 @@ getTailgateMarkers(tailgateId);
                 editTailgateData(tailgateDetails);
             }
         }
+       
         //edit tailgate data
         function editTailgateData(tailgateDetails) {
             $cookies.remove('newtailgatedata');
             $scope.newUpdate = { 'amountToPay': tailgateDetails.amountToPay, 'venmoAccountId': tailgateDetails.venmoAccountId };
+            $scope.currEventDate = tailgateDetails.tailgateDate;
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
-            var startTimeInword = $filter('date')(tailgateDetails.startTime, "hh:mm a")
-            var startTimeInMilis = Date.parse($scope.tailgateDate + " " + startTimeInword)
-            var endTimeInword = $filter('date')(tailgateDetails.endTime, "hh:mm a")
-            var endTimeInMilis = Date.parse($scope.tailgateDate + " " + endTimeInword)
-            $scope.selectedtime1 = getTailgateTime(new Date(startTimeInMilis));
-            $scope.selectedtime2 = getTailgateTime(new Date(endTimeInMilis));
+            var tailgateStartTime = new Date(tailgateDetails.startTime);
+            var tailgateEndTime = new Date(tailgateDetails.endTime);
             $scope.tailgateLogoId = tailgateDetails.logoId;
-            $scope.addTailgateParams.eventId=tailgateDetails.eventId+"";
             $scope.addTailgateParams = {
                 tailgateName: tailgateDetails.tailgateName,
                 tailgateDescription: tailgateDetails.tailgateDescription,
@@ -323,23 +320,11 @@ getTailgateMarkers(tailgateId);
                 venmoAccountId: tailgateDetails.venmoAccountId,
                 amountToPay: tailgateDetails.amountToPay,
                 tailgateId: tailgateDetails.tailgateId,
-                startTime: $scope.selectedtime1,
-                endTime: $scope.selectedtime2,
+                startTime: tailgateStartTime,
+                endTime: tailgateEndTime,
                 logoId : tailgateDetails.logoId
             }
-            $scope.editData = {
-                tailgateId: tailgateDetails.tailgateId,
-                tailgateName: tailgateDetails.tailgateName,
-                tailgateDescription: tailgateDetails.tailgateDescription,
-                eventId: tailgateDetails.eventId + "",
-                eventName: tailgateDetails.eventName,
-                venmoAccountId: tailgateDetails.venmoAccountId,
-                amountToPay: tailgateDetails.amountToPay,
-                tailgateDate: tailgateDetails.tailgateDate,
-                startTime: tailgateDetails.startTime,
-                endTime: tailgateDetails.endTime
-
-            }
+            $scope.editData = angular.copy($scope.addTailgateParams);
             $cookies.putObject('newtailgatedata', $scope.editData);
         };
         //show actin sheet on picture click
@@ -518,16 +503,18 @@ getTailgateMarkers(tailgateId);
                     //                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
                 });
         }
-
+       
         $scope.setLogoImageUrl = function (groupId, uuid) {
             $scope.tailgateLogoUrl = SERVER.hostName + "c/document_library/get_file?uuid=" + uuid + "&groupId=" + groupId;
         }
+      
         //add new tailgate
         $scope.addmyTailgate = function (tailgatedata) {
+           
             tailgatedata = angular.copy(tailgatedata);
             var startTime = Date.parse(tailgatedata.startTime); // Your timezone!
             var endTime = Date.parse(tailgatedata.endTime);
-            tailgatedata.tailgateDate = $scope.currEventDate
+            tailgatedata.tailgateDate = $scope.currEventDate;
             tailgatedata.endTime = endTime;
             tailgatedata.startTime = startTime;
             tailgatedata.venmoAccountId = "";
@@ -566,9 +553,7 @@ getTailgateMarkers(tailgateId);
             }
         }
 
-        function validateTailgate(data) {
-            return true;
-        }
+       
         //update tailgate
         $scope.updatetailgate = function (newUpdate) {
             var updateData = $cookies.getObject("newtailgatedata");

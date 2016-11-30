@@ -57,19 +57,18 @@
                 addTailgateParams.tailgateDescription = respData.data.tailgateDescription;
                 addTailgateParams.eventId = respData.data.eventId;
                 addTailgateParams.eventName = respData.data.eventName;
-                addTailgateParams.endTime = respData.data.endTime;
-                addTailgateParams.startTime = respData.data.startTime;
+                addTailgateParams.endTime =respData.data.endTime;
+                addTailgateParams.startTime =  respData.data.startTime;
                 addTailgateParams.venmoAccountId = respData.data.venmoAccountId;
                 addTailgateParams.amountToPay = respData.data.amountToPay;
                 addTailgateParams.tailgateDate = respData.data.tailgateDate;
                 addTailgateParams.logoId = respData.data.logoId;
-                console.log(addTailgateParams);
                 $cookies.put('currtailGateId', tailgateId);
                 $state.go("app.add_my_tailgate");
                 $cookies.putObject("editUserTailgate", addTailgateParams);
             });
-
-        }
+        };
+       
 
         $scope.leaveTailgate = function (tailgateId, index) {
             console.log(tailgateId, index);

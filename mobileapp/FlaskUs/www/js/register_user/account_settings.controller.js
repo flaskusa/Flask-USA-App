@@ -146,8 +146,14 @@
                     streetName: respData.streetName,
                     aptNo: respData.aptNo,
                     city: respData.city,
-                    countryId : "-1",
-                    stateId : '-1'
+                    countryId : respData.countryId,
+                    stateId : respData.stateId
+                }
+                if($scope.user.countryId !=undefined && $scope.user.countryId > 0) {
+                    $scope.getState($scope.user.countryId);
+                } else {
+                    $scope.user.countryId = 0;
+                    $scope.user.stateId = 0;
                 }
             });
         }
