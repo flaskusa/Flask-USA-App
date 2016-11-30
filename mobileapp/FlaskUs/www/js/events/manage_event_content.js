@@ -37,7 +37,7 @@
                 + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="gallery();">'
                 + 'Gallery'
                 + '</button>'
-                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="removePicture();" ng-if="content.eventDetailImageId>0" >'
+                + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="removePicture();" ng-if="content.eventDetailImageId>0 && defaultImageUrl.length>0" >'
                 + 'Remove Picture'
                 + '</button>'
                     + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="resetPicture();" ng-if="content.eventDetailImageId==undefined && defaultImageUrl.length>0" >'

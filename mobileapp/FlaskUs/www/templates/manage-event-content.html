@@ -86,8 +86,10 @@
 
             <div class="list"ng-if="editContent==true" >
                 <div class="list card" ng-click="show()">
-                    <div class="item item-image manage_event_default_Image">
+                    <div class="item item-image manage_event_default_Image" >
+                        <div ng-if="defaultImageUrl.length>0">
                         <img src="{{defaultImageUrl}}" /></div>
+                        </div>
                 </div>
                 <a class="item text-center" href=""ng-click="show()" ng-if="defaultImageUrl==undefined || defaultImageUrl==''">
                     Tap to add  picture
