@@ -21,6 +21,7 @@
         $scope.eventNames = [];
         $scope.groupUserDetails = [];
         $scope.friendsToInvite=[];
+        $scope.disableDorpDown=false;
         var currentDate = new Date();/*Today's Date*/
         $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd');
         currentDate.setDate(currentDate.getDate() - 1); /*adding days to today's date*/
@@ -302,9 +303,27 @@ getTailgateMarkers(tailgateId);
                 editTailgateData(tailgateDetails);
             }
         }
+        function checkTailgateExpired(tailgateDetails){
+            var currentDate=new Date().getTime();
+            var tailgateDate=tailgateDetails.tailgateDate;
+            if(currentDate>tailgateDetails.tailgateDate){
+                return true;
+            }else{
+                return false;
+            }
+
+        }
        
         //edit tailgate data
         function editTailgateData(tailgateDetails) {
+            if(checkTailgateExpired(tailgateDetails)){
+                $scope.expiredEventDetail={"eventName":"","eventId":""}
+                $scope.expiredEventDetail.eventName=tailgateDetails.eventName;
+                $scope.expiredEventDetail.eventId=tailgateDetails.eventId;
+                $scope.disableDorpDown=true;
+
+            }
+
             $cookies.remove('newtailgatedata');
             $scope.newUpdate = { 'amountToPay': tailgateDetails.amountToPay, 'venmoAccountId': tailgateDetails.venmoAccountId };
             $scope.currEventDate = tailgateDetails.tailgateDate;
@@ -582,6 +601,18 @@ getTailgateMarkers(tailgateId);
             }
             TailgateService.getallFilteredEvents($scope.tailgateParams).then(function (respData) {
                 $scope.eventDetails = respData.Events;
+                if($scope.disableDorpDown==true){
+                    var eventExistInDropdown=false
+                    angular.forEach($scope.eventDetails,function(value,key){
+                        if(value.eventName==$scope.expiredEventDetail.eventName){
+                            eventExistInDropdown=true;
+                        }
+
+                    })
+                    if(eventExistInDropdown==false) {
+                        $scope.eventDetails.push($scope.expiredEventDetail);
+                    }
+                }
             });
         }
 
