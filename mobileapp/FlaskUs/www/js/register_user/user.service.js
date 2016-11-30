@@ -8,7 +8,7 @@
 
     function UserService($http, $state, SERVER) {
         var addUserURL = "/flask-rest-users-portlet.flaskadmin/sign-up";
-        var getUserByEmailId = "/flask-rest-users-portlet.flaskadmin/get-user-for-email";
+        var getUserByEmailIdUrl = "/flask-rest-users-portlet.flaskadmin/get-user-for-email";
         var updateUserURL = "flask-rest-users-portlet.flaskadmin/update-flask-user";
         var getUserByIdURL = "flask-rest-users-portlet.flaskadmin/get-user-by-id";
         var getCountriesURL = "flask-rest-users-portlet.flaskadmin/get-countries";
@@ -32,7 +32,7 @@
            
         }
 
-        function saveUser(user, gender, srcname) {
+        function saveUser(user, srcname) {
 
             console.log(user);
             var params = {
@@ -43,7 +43,7 @@
                 password1: user.password1,
                 password2: user.password2,
                 DOB: user.DOB,
-                isMale: gender,
+                isMale: user.isMale,
                 areaCode: user.areaCode,
                 mobileNumber: user.mobileNumber
             };
@@ -86,7 +86,7 @@
         }
 
         function getUserbyEmail(email) {
-            return $http.get(SERVER.url + getUserByEmailId, { params: { 'emailAddress': email.Email } })
+            return $http.get(SERVER.url + getUserByEmailIdUrl, { params: { 'emailAddress': email} })
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {

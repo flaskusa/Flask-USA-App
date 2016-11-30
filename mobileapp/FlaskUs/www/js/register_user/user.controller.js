@@ -6,18 +6,10 @@
 
     /* @ngInject */
     function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading,$state,$flaskUtil) {
-        var gender = true;
-        $scope.user={firstName:"",lastName:"",Email:"",password1:"",password2:"",DOB:"",isMale:"",areaCode:"",mobileNumber:""}
-
+        $scope.user={firstName:"",lastName:"",Email:"",password1:"",password2:"",DOB:"",isMale:true,areaCode:"",mobileNumber:""}
         $scope.saveUser = function (user) {
-            if (user.isMale == 'male') {
-                gender = true;
-                //$scope.isMale = male;
-            }
-            else { gender = false; }
-            console.log(gender);
-            $scope.srcname = user.mobileNumber + user.firstName + user.lastName;
-            UserService.saveUser(user, gender, $scope.srcname).then(function (respData) {
+            var srcname = user.mobileNumber + user.firstName + user.lastName;
+            UserService.saveUser(user, srcname).then(function (respData) {
                 // $scope.user = respData.data;
                 if (respData.data.exception == "com.liferay.portal.DuplicateUserEmailAddressException" || respData.data.exception=="com.liferay.portal.UserScreenNameException") {
                     $flaskUtil.alert("User already exist")
@@ -38,8 +30,8 @@
             // document.register_user_form.reset();
         }
 
-        $scope.checkUserByEmailId = function (user) {
-            UserService.getUserbyEmail(user).then(function (respData) {
+        $scope.checkUserByEmailId = function (emailId) {
+            UserService.getUserbyEmail(emailId).then(function (respData) {
                 if (respData.data == 1) {
                     var myPopup = $ionicPopup.show({
                         title: '<p class="login_error">Email Address is already exist.</p>'

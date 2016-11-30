@@ -19,7 +19,7 @@
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Email</span>
-                            <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required ng-blur="checkUserByEmailId(user);">
+                            <input type="email" placeholder="Email" class="form-control" ng-model="user.Email" name="Email" required ng-blur="!register_user_form.Email.$error.required && !register_user_form.Email.$error.email && checkUserByEmailId(user.Email);">
                             <div ng-show="register_user_form.$submitted || register_user_form.Email.$touched">
                                 <span ng-show="register_user_form.Email.$error.required" class="error_msg">Please enter your email.</span>
                                 <span ng-show="register_user_form.Email.$error.email" class="error_msg">This is not a valid email.</span>
@@ -54,8 +54,8 @@
                         </div>
                         <div class="item item-input">
                             <span class="input-label">Gender</span>
-                            <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"male"' name="rdoResult">Male</ion-radio></pre>
-                            <pre><ion-radio type="radio" ng-model='user.isMale' ng-value='"female"' name="rdoResult">Female</ion-radio></pre>
+                            <pre><ion-radio type="radio" ng-model='user.isMale' ng-value="true" name="rdoResult">Male</ion-radio></pre>
+                            <pre><ion-radio type="radio" ng-model='user.isMale' ng-value="false" name="rdoResult">Female</ion-radio></pre>
                         </div>
 
                         <div class="item item-input item-floating-label">
