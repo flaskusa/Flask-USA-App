@@ -115,7 +115,7 @@
 				<div class="list">
 					<label class="item item-input item-select">
                         <select ng-model="user.countryId" ng-change="getState(user.countryId);">
-                            <option value="0">Select country</option>
+                            <option value="0" ng-selected="user.countryId == 0">Select country</option>
                             <option ng-repeat=" data in country" ng-bind="data.nameCurrentValue" ng-value="data.countryId" ng-selected="user.countryId == data.countryId"></option>
                         </select>
                     </label>
@@ -123,7 +123,7 @@
 				<div class="list">
 					<label class="item item-input item-select">
                         <select ng-model="user.stateId">
-                            <option value="0">Select State</option>
+                            <option value="0" ng-selected="user.stateId == 0">Select State</option>
                             <option ng-repeat="data in state" ng-bind="data.name" ng-value="data.regionId" ng-selected="user.stateId == data.regionId"></option>
                         </select>
                     </label>
@@ -144,7 +144,7 @@
 				</div>
 				<div class="row acc_settingsCol" ng-repeat="data in data1">
 					<div class="col acc_settingsCol">{{data.sport}}</div>
-					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_sport" ng-click="addSportInArray($index,data);">
+					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="data.checked"  ng-click="addSportInArray($index,data);" checked="data.checked">
 					</ion-checkbox>
 				</div>
 				<div class="padding"></div>
@@ -155,7 +155,7 @@
 				</div>
 				<div class="row acc_settingsCol" ng-repeat="data in data4">
 					<div class="col acc_settingsCol">{{data.level}}</div>
-					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_level" ng-click="addlevelInArray($index,data);">
+					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="data.checked" ng-click="addlevelInArray($index,data);" checked="data.checked">
 					</ion-checkbox>
 				</div>
 				<div class="padding"></div>
@@ -166,7 +166,7 @@
 				</div>
 				<div class="row acc_settingsCol" ng-repeat="data in data2">
 					<div class="col acc_settingsCol">{{data.concerts}}</div>
-					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_concerts" ng-click="addConcertsInArray($index,data);">
+					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="data.checked" ng-click="addConcertsInArray($index,data);" checked="data.checked">
 					</ion-checkbox>
 				</div>
 				<div class="padding"></div>
@@ -179,7 +179,7 @@
 				<div class="row acc_settingsCol" ng-repeat="data in data3">
 
 					<div class="col acc_settingsCol">{{data.special_events}}</div>
-					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="select_events" ng-click="addEventsInArray($index,data);">
+					<ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="data.checked" ng-click="addEventsInArray($index,data);" checked="data.checked">
 					</ion-checkbox>
 				</div>
 

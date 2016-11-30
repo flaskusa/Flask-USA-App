@@ -55,61 +55,61 @@
         $scope.getUserProfile($scope.userid);
         $scope.data1 = [
           {
-              sport: "Basketball"
+              sport: "Basketball",checked:false
           },
           {
-              sport: "Basebball"
+              sport: "Baseball",checked:false
 
           },
           {
-              sport: "Football"
+              sport: "Football",checked:false
           },
           {
-              sport: "Hockey"
+              sport: "Hockey",checked:false
           },
           {
-              sport: "Soccer"
+              sport: "Soccer",checked:false
           },
           {
-              sport: "Tennis"
+              sport: "Tennis",checked:false
           }
         ];
 
         $scope.data2 = [
             {
-                concerts: "Country"
+                concerts: "Country",checked:false
             },
             {
-                concerts: "Pop"
+                concerts: "Pop",checked:false
             },
             {
-                concerts: "Rock"
+                concerts: "Rock",checked:false
             },
             {
-                concerts: "Rap"
+                concerts: "Rap",checked:false
             },
             {
-                concerts: "Alternative"
+                concerts: "Alternative",checked:false
             },
             {
-                concerts: "Electronic"
+                concerts: "Electronic",checked:false
             }
         ];
 
         $scope.data3 = [
 
             {
-                special_events: "Comedy"
+                special_events: "Comedy",checked:false
             }
         ];
 
         $scope.data4 = [
 
            {
-               level: "Professional"
+               level: "Professional",checked:false
            },
            {
-               level: "college"
+               level: "College",checked:false
            }
         ];
 
@@ -149,6 +149,10 @@
                     countryId : respData.countryId,
                     stateId : respData.stateId
                 }
+                if(respData.userInterests.length > 1) {
+                    $scope.interest = respData.userInterests.split(",");
+                    setInterest($scope.interest);
+                }
                 if($scope.user.countryId !=undefined && $scope.user.countryId > 0) {
                     $scope.getState($scope.user.countryId);
                 } else {
@@ -158,35 +162,94 @@
             });
         }
 
+        function setInterest(interest) {
+           angular.forEach(interest,function(object,index) {
+              if(object == "Basketball") {
+                  setData1(object);
+              } else if("Baseball" == object) {
+                   setData1(object);
+              }else if("Football" == object) {
+                    setData1(object);
+              }else if("Hockey" == object) {
+                  setData1(object);
+              }else if("Soccer" == object) {
+                   setData1(object);
+              }else if("Tennis" == object) {
+                   setData1(object);
+              }else if("Country" == object) {
+                  setData2(object);
+              }else if("Pop" == object) {
+                  setData2(object);
+              }else if("Rock" == object) {
+                  setData2(object);
+              }else if("Rap" == object) {
+                  setData2(object);
+              }else if("Alternative" == object) {
+                  setData2(object);
+              }else if("Electronic" == object) {
+                  setData2(object);
+              }else if("Comedy" == object) {
+                 setData3(object);
+              }else if("Professional" == object) {
+                  setData4(object);
+              }else if("College" == object) {
+                  setData4(object);
+              }
+           })
+        }
+
+        function setData1(object) {
+            angular.forEach($scope.data1, function(value,index) {
+                if(value.sport == object){
+                    value.checked = true;
+                }
+            })
+        }
+         function setData2(object) {
+             angular.forEach($scope.data2, function(value,index) {
+                if(value.concerts == object){
+                    value.checked = true;
+                }
+            })
+        }
+         function setData3(object) {
+             angular.forEach($scope.data3, function(value,index) {
+                if(value.special_events == object){
+                    value.checked = true;
+                }
+            })
+        }
+         function setData4(object) {
+             angular.forEach($scope.data4, function(value,index) {
+                if(value.level == object){
+                    value.checked = true;
+                }
+            })
+        }
+
+
         $scope.addEventsInArray=function($index,data){
-            console.log(data.special_events);
             $scope.interest.push(data.special_events);
             getInterests();
         }
 
         $scope.addConcertsInArray = function ($index, data) {
-            console.log(data.concerts);
             $scope.interest.push(data.concerts);
-            console.log($scope.interest);
             getInterests();
         }
 
         $scope.addlevelInArray = function ($index, data) {
             $scope.interest.push(data.level);
-            console.log($scope.interest);
             getInterests();
         }
 
         $scope.addSportInArray = function ($index, data) {
             $scope.interest.push(data.sport);
-            console.log($scope.interest);
             getInterests();
         }
 
         function getInterests() {
-            console.log($scope.interest);
             interestArray = $scope.interest.toString();
-            console.log(interestArray);
         }
 
         $scope.show = function () {
@@ -268,7 +331,6 @@
             function checkPermissionCallback(status) {
                 if (!status.hasPermission) {
                     var errorCallback = function () {
-                        console.warn('READ_EXTERNAL_STORAGE permission is not turned on');
                     }
 
                     permissions.requestPermission(
