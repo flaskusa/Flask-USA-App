@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('EventsCtrl', EventsCtrl);
 
-    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage','$ionicSlideBoxDelegate'];
+    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage','$ionicSlideBoxDelegate','$rootScope'];
 
     /* @ngInject */
-    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage,$ionicSlideBoxDelegate) {
+    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage,$ionicSlideBoxDelegate,$rootScope) {
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
@@ -37,36 +37,31 @@
             days: '60'
         };
         $scope.allEventId=[];
-
+            getAllEventDetail()
 
         // $scope.localstorageData = $localStorage.getObject('user_location_data');
         // Retrieve the object from ng-storage
-        if($localStorage.things) {
-            $scope.localstorageData = $localStorage.things;
-            $scope.storedTime = $scope.localstorageData.timestamp;
-        }
-        //
-        console.log($scope.localstorageData);
-        function islocalstorageEmpty() {
-            if ($scope.localstorageData && $scope.localstorageData.length) {
-                return false;
-            }else{
+        $rootScope.$on("LocationOptionSelected", function(){
+            //do something
+            getAllEventDetail()
 
+        });
+        function getAllEventDetail(){
+            if($localStorage.things) {
+                $scope.localstorageData = $localStorage.things;
+                $scope.storedTime = $scope.localstorageData.timestamp;
             }
             //
-        }
+            console.log($scope.localstorageData);
 
-        function isExpired() {
-            if ($scope.constant_time < $scope.current_time - $scope.storedTime) {
-                return false;
+
+
+            if ($scope.localstorageData.latitude!=undefined && $scope.localstorageData.latitude!="" && $scope.localstorageData.longitude!="") {
+                get_from_localStorage();
+
+            } else {
+                get_event_list();
             }
-        }
-
-        if ($scope.localstorageData.latitude!=undefined && $scope.localstorageData.latitude!="" && $scope.localstorageData.longitude!="") {
-            get_from_localStorage();
-
-        } else {
-            get_event_list();
         }
 
         function get_event_list() {

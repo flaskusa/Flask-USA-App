@@ -90,14 +90,17 @@
                 function (position) {
                     //when Success
                     // save it
+
                     geooobj.latitude=position.coords.latitude;
                     geooobj.longitude=position.coords.longitude;
                     geooobj.timestamp=position.timestamp;
                     $localStorage["things"]=geooobj;
+                    $rootScope.$broadcast("LocationOptionSelected");
                 },
                 function errorCallback(error) {
                     //when Error
                     $localStorage["things"]=geooobj;
+                    $rootScope.$broadcast("LocationOptionSelected");
                     //$cookies.putObject('user_location_data', error);
                 }
             );
