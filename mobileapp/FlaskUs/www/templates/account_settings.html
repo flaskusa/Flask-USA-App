@@ -114,17 +114,17 @@
 				<p>Select Country and State</p>
 				<div class="list">
 					<label class="item item-input item-select">
-                        <select ng-model="user.countryId" ng-change="getState(user.countryId);">
-                            <option value="0" ng-selected="user.countryId == 0">Select country</option>
-                            <option ng-repeat=" data in country" ng-bind="data.nameCurrentValue" ng-value="data.countryId" ng-selected="user.countryId == data.countryId"></option>
+                        <select ng-model="user.countryId" ng-change="getState(user.countryId);" style="direction: inherit">
+                            <option value="0" style="direction: inherit" ng-selected="user.countryId == 0">Select country</option>
+                            <option style="direction: inherit" ng-repeat=" data in country" ng-bind="data.nameCurrentValue" ng-value="data.countryId" ng-selected="user.countryId == data.countryId"></option>
                         </select>
                     </label>
 				</div>
 				<div class="list">
 					<label class="item item-input item-select">
-                        <select ng-model="user.stateId">
-                            <option value="0" ng-selected="user.stateId == 0">Select State</option>
-                            <option ng-repeat="data in state" ng-bind="data.name" ng-value="data.regionId" ng-selected="user.stateId == data.regionId"></option>
+                        <select ng-model="user.stateId" style="direction: inherit">
+                            <option style="direction: inherit" value="0" ng-selected="user.stateId == 0">Select State</option>
+                            <option style="direction: inherit" ng-repeat="data in state" ng-bind="data.name" ng-value="data.regionId" ng-selected="user.stateId == data.regionId"></option>
                         </select>
                     </label>
 
