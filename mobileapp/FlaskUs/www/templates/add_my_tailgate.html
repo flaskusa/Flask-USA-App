@@ -116,7 +116,7 @@
                                             <p class="dateCol_tailgate">Created By : {{data.createdBy | uppercase}}</p>
                                             <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="getusersofGroup(data.groupId, $index)"></span>
                                         </a>
-                                        <a class="item" ng-if="allGroups.length == 0"> There is no group to add </a>
+                                        <a class="item" ng-if="allGroups.length == 0"> There are no group to add </a>
                                     </div>
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
                                         <p class="dateCol_tailgate">{{ data.emailAddress}}</p>
                                         <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="addTailgateMembers(data,$index)"></span>
                                     </a>
-                                    <a class="item" ng-if="friendsToInvite.length == 0"> There is no friend to add. </a>
+                                    <a class="item" ng-if="friendsToInvite.length == 0"> There are no friends to add. </a>
                                 </div>
                             </div>
                         </div>

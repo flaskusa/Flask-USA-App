@@ -61,7 +61,7 @@
               <ion-option-button class="icon ion-trash-a" ng-click="deleteEventDetail(data.eventDetailId,$index)"></ion-option-button>
   -->
 
-            <a class="item" ng-if="flaskUsDetails.length == 0 && editContent==false">There is no content to display.</a>
+            <a class="item" ng-if="flaskUsDetails.length == 0 && editContent==false">There are no contents to display.</a>
         </ion-list>
 
         <form name="create_content_form" class="loginpane form_div" novalidate  ng-submit="create_content_form.$valid && addContent(content,create_content_form)">

@@ -40,6 +40,9 @@
                 + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="removePicture();" ng-if="content.eventDetailImageId>0" >'
                 + 'Remove Picture'
                 + '</button>'
+                    + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="resetPicture();" ng-if="content.eventDetailImageId==undefined && defaultImageUrl.length>0" >'
+                    + 'Remove Picture'
+                    + '</button>'
                 + '</div>'
                 + '</div>';
             $scope.cameraPopup = $ionicPopup.show({
@@ -227,12 +230,20 @@
 
 
         }
+        $scope.resetPicture=function(){
+
+            $scope.defaultImageUrl="";
+            $scope.content.imageUrl="";
+            $scope.selectedImageURIToUpload=""
+            $scope.cameraPopup.close();
+        }
         $scope.removePicture=function(){
             EventsService.deleteEventDetailImageById($scope.content.eventDetailImageId).then(function(response2){
-                $scope.cameraPopup.close();
+
                 $scope.defaultImageUrl="";
                 $scope.content.imageUrl="";
                 $scope.selectedImageURIToUpload=""
+                $scope.cameraPopup.close();
 
             })
         }
