@@ -284,7 +284,7 @@ getTailgateMarkers(tailgateId);
                 var currStartTime = getTailgateTime($scope.CurrEvent.startTime);
                 var currEndTime = getTailgateTime($scope.CurrEvent.endTime);
                 var currDate = $filter('date')($scope.CurrEvent.eventDate, 'MM-dd-yyyy');
-               $scope.currEventDate= $scope.CurrEvent.eventDate
+                $scope.currEventDate= $filter('date')($scope.CurrEvent.eventDate, 'yyyy-MM-dd');
                 $scope.addTailgateParams.startTime = currStartTime;
                 $scope.addTailgateParams.endTime = currEndTime;
                 $scope.tailgateDate = currDate;
@@ -326,8 +326,8 @@ getTailgateMarkers(tailgateId);
 
             $cookies.remove('newtailgatedata');
             $scope.newUpdate = { 'amountToPay': tailgateDetails.amountToPay, 'venmoAccountId': tailgateDetails.venmoAccountId };
-            $scope.currEventDate = tailgateDetails.tailgateDate;
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
+            $scope.currEventDate= $filter('date')($scope.CurrEvent.eventDate, 'yyyy-MM-dd');
             var tailgateStartTime = new Date(tailgateDetails.startTime);
             var tailgateEndTime = new Date(tailgateDetails.endTime);
             $scope.tailgateLogoId = tailgateDetails.logoId;
@@ -533,7 +533,7 @@ getTailgateMarkers(tailgateId);
             tailgatedata = angular.copy(tailgatedata);
             var startTime = Date.parse(tailgatedata.startTime); // Your timezone!
             var endTime = Date.parse(tailgatedata.endTime);
-            tailgatedata.tailgateDate = $scope.currEventDate;
+            tailgatedata.tailgateDate =Date.parse($scope.currEventDate);
             tailgatedata.endTime = endTime;
             tailgatedata.startTime = startTime;
             tailgatedata.venmoAccountId = "";
@@ -955,6 +955,7 @@ getTailgateMarkers(tailgateId);
             var day = x.getDate();
             return new Date(year, month, day, hour, minute, 0);
         }
+       
         $scope.initialize();
 
     }
