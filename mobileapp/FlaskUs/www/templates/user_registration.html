@@ -42,9 +42,12 @@
                         </div>
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Zip code</span>
-                            <input type="text" placeholder="Zip code" class="form-control" ng-model="user.areaCode" name="areaCode" required="">
+                            <input type="text" placeholder="Zip code" class="form-control" ng-model="user.areaCode" name="areaCode" required="" ng-maxlength="15" ng-minlength="3">
                             <div ng-show="register_user_form.$submitted || register_user_form.areaCode.$touched">
                                 <span ng-show="register_user_form.areaCode.$error.required" class="error_msg">Please enter zip code.</span>
+                                <span ng-show="!register_user_form.areaCode.$error.required && register_user_form.areaCode.$error.maxlength" class="error_msg">max length should be 15.</span>
+                                <span ng-show="!register_user_form.areaCode.$error.required && register_user_form.areaCode.$error.minlength" class="error_msg">min length should be 3.</span>
+
                             </div>
                         </div>
                         <div class="item item-input item-floating-label item-icon-right">
