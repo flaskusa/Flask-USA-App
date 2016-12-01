@@ -252,7 +252,8 @@
             url: '/forgot_password',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/forgot_password.html'
+                    templateUrl: 'templates/forgot_password.html',
+                    controller: 'ForgotPasswordCtrl'
                 }
             }
         })
