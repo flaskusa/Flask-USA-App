@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER','$localStorage','$http','UserService'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER','$localStorage','$http','UserService','$ionicHistory'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER,$localStorage,$http,UserService) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER,$localStorage,$http,UserService,$ionicHistory) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
@@ -28,46 +28,68 @@
              });
            }
         }
+        $scope.goBack=function(){
+            $state.go("app.events");
+        }
        
         $scope.doLogin = function (user) {
-            LoginService.authenticateUser(user).then(function (respData) {
-                if (respData.data.message == "Authenticated access required") {
-                    $scope.Error = true;
-                    $timeout(function () { $scope.Error = false; }, 3000);
-                }
-                else if (respData.data.emailAddress == "") {
-                }
-                else {
-                    if(respData.data.portraitId>0) {
-                        $scope.getUserProfile(respData.data.userId);
-                    }else{
-                        $rootScope.userProfileUrl='';
+            if(SERVER.companyId!=undefined) {
+                LoginService.authenticateUser(user).then(function (respData) {
+                    if (respData.data.message == "Authenticated access required") {
+                        $scope.Error = true;
+                        $timeout(function () {
+                            $scope.Error = false;
+                        }, 3000);
                     }
-
-                    if($scope.rememberUser==true){
-                        $localStorage['RememberUser']="";
-                        $localStorage['RememberUser']=user;
+                    else if (respData.data.emailAddress == "") {
                     }
-                    $http.get(SERVER.url+'/flask-rest-users-portlet.flaskadmin/is-add-content-access', { params:{ 'userId': respData.data.userId}}
-                    )
-                        .then(function success(response2) {
-                            respData.data.isContentAdmin= response2.data;
-                            $cookies.putObject('CurrentUser', respData);
-                            var usercookie = $cookies.getObject('CurrentUser');
-                            $rootScope.userName = respData.data.firstName + respData.data.lastName;
-                            $rootScope.userEmailId = respData.data.emailAddress;
-                            $rootScope.show_login = true;
-                            document.login_form.reset();
-                            $state.go("app.user_navigation_menu");
+                    else {
+                        if (respData.data.portraitId > 0) {
+                            $scope.getUserProfile(respData.data.userId);
+                        } else {
+                            $rootScope.userProfileUrl = '';
+                        }
 
-                        }, function failure(response) {
-                            return $q.$inject(response);
-                            //add errror handling
-                        });
+                        if ($scope.rememberUser == true) {
+                            $localStorage['RememberUser'] = "";
+                            $localStorage['RememberUser'] = user;
+                        }
+                        $http.get(SERVER.url + '/flask-rest-users-portlet.flaskadmin/is-add-content-access', { params: { 'userId': respData.data.userId}}
+                        )
+                            .then(function success(response2) {
+                                respData.data.isContentAdmin = response2.data;
+                                $cookies.putObject('CurrentUser', respData);
+                                var usercookie = $cookies.getObject('CurrentUser');
+                                $rootScope.userName = respData.data.firstName + respData.data.lastName;
+                                $rootScope.userEmailId = respData.data.emailAddress;
+                                $rootScope.show_login = true;
+                                document.login_form.reset();
+                                $state.go("app.user_navigation_menu");
 
-                }
-            });
+                            }, function failure(response) {
+                                return $q.$inject(response);
+                                //add errror handling
+                            });
+
+                    }
+                });
+            }else{
+                getCompanyId(user);
+            }
         }
+        function getCompanyId(user) {
+            $http.get(SERVER.url + '/flask-rest-users-portlet.flaskadmin/get-company-id'
+            )
+                .then(function success(response) {
+                    SERVER.companyId = response.data;
+                    $scope.doLogin(user)
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+
+
         if($localStorage['RememberUser'] &&  $localStorage['RememberUser'].Email &&  $localStorage['RememberUser'].password){
             $scope.user=$localStorage['RememberUser'];
         }
@@ -83,6 +105,7 @@
 
             })
         }
+
 
         $scope.remembered = function (user) {
             if (user.isChecked) {

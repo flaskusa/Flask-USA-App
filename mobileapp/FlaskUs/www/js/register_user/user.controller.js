@@ -8,7 +8,7 @@
     function user_registrationCtrl($scope, UserService, $ionicPopup, $timeout, ionicDatePicker, $filter, $cookies, $ionicLoading,$state,$flaskUtil) {
         $scope.user={firstName:"",lastName:"",Email:"",password1:"",password2:"",DOB:"",isMale:true,areaCode:"",mobileNumber:""}
         $scope.saveUser = function (user) {
-            var srcname = user.mobileNumber + user.firstName + user.lastName;
+            var srcname = user.mobileNumber.replace(/\s/g,'') + user.firstName.replace(/\s/g,'') + user.lastName.replace(/\s/g,'');
             UserService.saveUser(user, srcname).then(function (respData) {
                 // $scope.user = respData.data;
                 if (respData.data.exception == "com.liferay.portal.DuplicateUserEmailAddressException" || respData.data.exception=="com.liferay.portal.UserScreenNameException") {

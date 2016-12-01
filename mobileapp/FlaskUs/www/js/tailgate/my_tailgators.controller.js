@@ -37,7 +37,7 @@
                             $scope.myTailgaters.splice(index, 1)
                         })
                     }else{
-                        $flaskUtil.alert("you can be removed")
+                        $flaskUtil.alert("Tailgate admin can't be remove.")
                     }
                 } else {
                 }

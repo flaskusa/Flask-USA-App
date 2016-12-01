@@ -13,6 +13,8 @@
                     <div class="list add_my_tailgate">
                         <div style="padding:10px">
                             <div class="item-image">
+                                <span ng-click="show()"><i  class="ion-ios-camera"  style="font-size: 31px;position: fixed;"></i></span>
+
                                 <img src="img/flask_images/Fotolia_20387372_Subscription_Monthly_M.jpg" id="tailgateImage" class="tailgateLogoImg" ng-if="tailgateLogoId == 0"  ng-click="show();"/>
                                 <img ng-src="{{tailgateLogoUrl}} "  ng-if="tailgateLogoId>0" class="tailgateLogoImg"  ng-click="show();" />
                             </div>
@@ -116,7 +118,7 @@
                                             <p class="dateCol_tailgate">Created By : {{data.createdBy | uppercase}}</p>
                                             <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="getusersofGroup(data.groupId, $index)"></span>
                                         </a>
-                                        <a class="item" ng-if="allGroups.length == 0"> There are no group to add </a>
+                                        <a class="item" ng-if="allGroups.length == 0"> There are no groups to add </a>
                                     </div>
                                 </div>
                             </div>
