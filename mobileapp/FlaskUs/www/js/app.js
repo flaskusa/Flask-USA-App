@@ -7,7 +7,11 @@
             //  if (cordova.platformId === 'ios' && window.cordova && window.cordova.plugins.Keyboard) {
             //      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             //      cordova.plugins.Keyboard.disableScroll(true);
-           var profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
+            var profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
+            
+            if (window.StatusBar) {
+                StatusBar.overlaysWebView(false);
+            }
             $localStorage.$default({things:{}});
             //  }
             if (window.StatusBar) {
