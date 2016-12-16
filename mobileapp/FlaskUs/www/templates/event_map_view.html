@@ -535,9 +535,9 @@
                             <ion-content overflow-scroll="false"style="margin-top: 1px">
                                 <div class="list" >
                                     <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail" ng-if="gettingHomeDetail.phoneNumber==undefined" ng-click="openApp(gettingHomeDetail)">
-                                        <h2 class="tickets" style="text-transform:uppercase;font-size: 24px">{{gettingHomeDetail.infoTitle}}</h2>
+                                        <h2 class="tickets" style="text-transform:uppercase;font-size: 24px">{{gettingHomeDetail.infoTitle | uppercase}}</h2>
                                         <p class="item-tickets" >{{gettingHomeDetail.phone}}</p>
-
+                                        <i class="icon ion-chevron-right ticket-icon"></i>
                                     </a>
 
                                     </div>

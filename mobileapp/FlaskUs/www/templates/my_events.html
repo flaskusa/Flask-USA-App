@@ -19,8 +19,8 @@
             </div>
         </div>
         <ion-content ng-click="searchBox.showBox = false">
-            <a class="item item-full item-icon-left " href="#/app/add_my_event">
-                <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+            <a class="item item-full item-icon-left" href="#/app/add_my_event">
+                <div style="float:left;margin-left:18%;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
                 <p class="addText">ADD EVENT</p>
             </a>
             <div class="card" ng-show="myEventError">
@@ -35,8 +35,8 @@
             </div>
             <ion-list show-delete="false" can-swipe="true">
                 <ion-item class="myList item-remove-animate" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in myEvent | filter: eventList.searchString">
-                    <div class="row">
-                        <div class="col col-15"><img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" /></div>
+                    <div class="row no-padding">
+                        <div class="col col-15" style="bottom:0px !important;"><img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" /></div>
                         <div class="col col-70 event_content1">
                             <h2 class="eventNameCol1">{{ data.eventName }}</h2>
                             <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
