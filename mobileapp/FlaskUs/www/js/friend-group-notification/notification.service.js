@@ -16,7 +16,8 @@
             getUserById:getUserById,
             addSocialRelation:addSocialRelation,
             deleteRequest:deleteRequest,
-            setReadMessage:setReadMessage
+            setReadMessage:setReadMessage,
+            sendMessage:sendMessage
         }
         var getMyNotificationCountUrl="/flask-social-portlet.entry/get-requests-count"
         var getMessageCountUrl="/flask-social-portlet.flaskmessages/get-my-flask-messages-count"
@@ -26,6 +27,7 @@
         var getUserByIdUrl="/flask-social-portlet.entry/get-user-by-id";
         var addSocialRelationUrl="/flask-social-portlet.entry/add-social-relation";
         var deleteSocialRelationUrl="/flask-social-portlet.entry/delete-request";
+        var sendFlaskMessage = "/flask-social-portlet.flaskmessages/send-flask-message";
         var setMessageReadUrl="/flask-social-portlet.flaskrecipients/set-read";
         var companyId = SERVER.companyId;
         function getNotificationCount(){
@@ -116,6 +118,19 @@
                     //add errror handling
                 });
         };
+        function sendMessage (userId,messgae) {
+            return $http.get(SERVER.url+sendFlaskMessage,{params:{
+                recipients: userId,
+                message:messgae,
+                sendEmail:true
+            }})
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
 
         return services;
     }

@@ -5,15 +5,26 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content overflow-scroll="false">
-        <div ng-if="allMessages.length==0" class="item">There are no messages to display.</div>
+        <div ng-if="allMessages.length==0 && showMsg==true" class="item">There are no messages to display.</div>
         <ion-list>
-            <ion-item click-for-options ng-repeat="message in allMessages">
+            <ion-item click-for-options ng-repeat="message in allMessages track by $index" ng-click="replyMessage(message,$index,textMessage.messageToSend,'')" ng-init="message.reply=false">
+               <div>
                 <h2 class="emailText">{{message.senderName}}</h2>
                 <h4 style="float: right">{{message.diffDate}}</h4>
+
              <div class="col-60"><h3 ng-class="{emailText: false}">{{message.message}}</h3></div>
-                <ion-option-button  class="icon ion-reply"ng-click="replyMessage(message.messageId)"></ion-option-button>
+
+                   <div   ng-if="message.reply==true" style="margin-top:4px;margin-left: 0px">
+                       <textarea ng-if="showTextArea.show==true"ng-model="textMessage.messageToSend" id="textArea" class="showNotificationTextArea hidemsgTexArea"autofocus></textarea>
+                       <button ng-if="ShowReplyButton==true" style="float:right;margin-top: -30px" class="button button-small suppliesButton"ng-click="replyMessage(message,$index,textMessage.messageToSend,'close')">
+                         Reply
+                       </button>
+                   </div>
+
                 <ion-option-button  class="icon ion-trash-a"ng-click="deleteMessage(message.messageId,$index)"></ion-option-button>
+</div>
 
             </ion-item>
         </ion-list>
     </ion-content>
+    </ion-view>

@@ -3,12 +3,14 @@
     angular.module('flaskApp')
         .controller('FriendsMessageCtrl', FriendsMessageCtrl);
 
-    FriendsMessageCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsNotificationService', '$flaskUtil', '$state','$ionicHistory','$timeout'];
+    FriendsMessageCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsNotificationService', '$flaskUtil', '$state','$ionicHistory','$timeout','$ionicLoading'];
 
     /* @ngInject */
-    function FriendsMessageCtrl($scope, $http, $ionicModal, FriendsNotificationService, $flaskUtil, $state,$ionicHistory,$timeout) {
+    function FriendsMessageCtrl($scope, $http, $ionicModal, FriendsNotificationService, $flaskUtil, $state,$ionicHistory,$timeout,$ionicLoading) {
         $scope.allMessages=[];
-
+        $scope.showTextArea={show:false};
+        $scope.textMessage={messageToSend:""};
+        $scope.ShowReplyButton=true;
         $scope.getNotification=function() {
             $scope.myTimeOut= $timeout(function () {
                 FriendsNotificationService.getMessageCount().then(function (response2) {
@@ -37,6 +39,77 @@
             },10000);
 
         };
+       /* $scope.replyMessage=function(msgDetail,index) {
+            angular.forEach($scope.allMessages, function (value, key) {
+
+                value.reply = false
+            });
+
+
+            $scope.allMessages[index].reply = true;
+        }*/
+        $scope.replyMessage=function(msgDetail,index,textMessage,string) {
+            angular.forEach($scope.allMessages, function (value, key) {
+
+                value.reply = false
+            });
+
+
+            $scope.allMessages[index].reply = true;
+            $scope.showTextArea.show = true;
+            $scope.ShowReplyButton=true;
+            setTimeout(startToggleFunction, 20)
+
+            function startToggleFunction() {
+
+                $scope.messageBoxClasses = document.getElementById("textArea").classList;
+
+                if ($scope.messageBoxClasses.contains("hideAll")) {
+                    $scope.messageBoxClasses.remove("hideAll");
+                }
+                ;
+                setTimeout(removeText, 10);
+                function removeText() {
+                    if ($scope.messageBoxClasses.contains("hidemsgTexArea")) {
+                        $scope.messageBoxClasses.remove("hidemsgTexArea");
+                    }
+                    else {
+                        if (textMessage == undefined || textMessage.trim() === '' && string!="") {
+                            $scope.messageBoxClasses.add("hidemsgTexArea");
+                            setTimeout(hideArea, 400);
+                            return;
+                        }
+                        if(string!=""){
+                        FriendsNotificationService.sendMessage(msgDetail.senderUserId, textMessage).then(function (res) {
+                            if (res != undefined && res.sendEmail == true) {
+                                $scope.messageSentStatus = true;
+
+                                $scope.textMessage={messageToSend:""};
+
+                                $timeout(function () {  $scope.ShowReplyButton=false;},1000);
+                                $ionicLoading.show({ template: 'Message sent', noBackdrop: false, duration: 5000 });
+
+                                $timeout(function () {  $scope.messageBoxClasses.add("hidemsgTexArea");
+                                    setTimeout(hideArea, 400);},1200);
+
+                            } else {
+                                $flaskUtil.alert("Failed to send message");
+                            }
+
+                        });}
+
+                    }
+                }
+            }
+
+            function hideArea() {
+                $scope.messageBoxClasses.add("hideAll");
+                $timeout(function () { $scope.showTextArea.show = false; }, 10);
+            }
+        }
+        function hideMessageDiv(){
+            $scope.messageSentStatus = false;
+        }
         $scope.getMessagesTime=function() {
             angular.forEach($scope.allMessages, function (value, key) {
                 $scope.messageDate = new Date(value.dateTime);
