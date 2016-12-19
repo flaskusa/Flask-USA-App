@@ -2741,3 +2741,16 @@ span.badge.span_icon_extraright {
   border-right: solid 3.5px #d3d3d3;
   width:60%
 }
+.showNotificationTextArea {
+  width: 70%;
+  height: 70px;
+  border: solid .5px;
+  resize: none;
+  transition: .5s;
+  border-color: orange; }
+.hidemsgTexArea {
+  height: 0px;
+  width: 0px;
+  transition: .5s;
+  overflow: hidden;
+}
