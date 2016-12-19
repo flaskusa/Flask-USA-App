@@ -327,7 +327,7 @@ getTailgateMarkers(tailgateId);
             $cookies.remove('newtailgatedata');
             $scope.newUpdate = { 'amountToPay': tailgateDetails.amountToPay, 'venmoAccountId': tailgateDetails.venmoAccountId };
             $scope.tailgateDate = $filter('date')(tailgateDetails.tailgateDate, 'MM-dd-yyyy');
-            $scope.currEventDate= $filter('date')($scope.CurrEvent.eventDate, 'yyyy-MM-dd');
+            $scope.currEventDate= $filter('date')(tailgateDetails.tailgateDate, 'yyyy-MM-dd');
             var tailgateStartTime = new Date(tailgateDetails.startTime);
             var tailgateEndTime = new Date(tailgateDetails.endTime);
             $scope.tailgateLogoId = tailgateDetails.logoId;
@@ -341,9 +341,15 @@ getTailgateMarkers(tailgateId);
                 tailgateId: tailgateDetails.tailgateId,
                 startTime: tailgateStartTime,
                 endTime: tailgateEndTime,
-                logoId : tailgateDetails.logoId
+                logoId : tailgateDetails.logoId,
+                tailgateDate:tailgateDetails.tailgateDate
+
             }
             $scope.editData = angular.copy($scope.addTailgateParams);
+            $scope.editData.startTime=tailgateDetails.startTime;
+            $scope.editData.tailgateDate =tailgateDetails.tailgateDate;
+            $scope.editData.endTime=tailgateDetails.endTime
+
             $cookies.putObject('newtailgatedata', $scope.editData);
         };
         //show actin sheet on picture click
@@ -538,9 +544,12 @@ getTailgateMarkers(tailgateId);
             tailgatedata.startTime = startTime;
             tailgatedata.venmoAccountId = "";
             tailgatedata.amountToPay = 0;
+
             tailgatedata.eventId = angular.isString(tailgatedata.eventId) ? parseInt(tailgatedata.eventId) : tailgatedata.eventId;
             if (tailgatedata.tailgateId && tailgatedata.tailgateId > 0) {
+                tailgatedata.tailgateId=parseInt(tailgatedata.tailgateId)
                 TailgateService.updateTailgateInfo(tailgatedata).then(function (respdata) {
+
                     $cookies.putObject('newtailgatedata', respdata);
                     showToastMessage('Tailgate updated successfully');
                 });

@@ -1,6 +1,9 @@
 ﻿(function () {
     var flaskAppConfig = angular.module('flaskApp');
     var getMessageUrlSubString="/flask-social-portlet.flaskmessages";
+    var getmessageBoardsByTailgateIdURL = "/get-message-boards-by-tailgate-id";
+    var getUserProfileUrl = "/get-my-file-entry";
+
     flaskAppConfig.value("SERVER", {
         "hostName": "http://www.flaskus.com/",
         "url": "http://www.flaskus.com/api/jsonws/",
@@ -365,7 +368,7 @@
         $httpProvider.interceptors.push(function ($rootScope) {
             return {
             request: function (config) {
-                if(!config.url.includes(getMessageUrlSubString)) {
+                if(!config.url.includes(getMessageUrlSubString) && !config.url.includes(getmessageBoardsByTailgateIdURL) &&!config.url.includes(getUserProfileUrl)) {
                     $rootScope.$broadcast('loading:show');
                 }
                 return config
