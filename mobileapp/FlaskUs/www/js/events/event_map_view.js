@@ -10,7 +10,7 @@
         /* jshint validthis: true */
         var self = this;
         var baseImagePath = SERVER.hostName + "c/document_library/get_file";
-        $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 15, control: {} };
+        $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 14, control: {} };
         $scope.map.events = [];
         $scope.map.events["click"] = function () {
             return $scope.closeOtherInfoWindows('mapClick');
