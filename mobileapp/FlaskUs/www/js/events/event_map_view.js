@@ -116,8 +116,9 @@
                $timeout(function () {
                    $scope.searchBox.showBox = false;
                    angular.forEach($scope.parkingMarkers,function(value,key){
-                       if(value.id==searchItem.id)
-                       $scope.parkingMarkers.splice(key, 1);
+                       if(value.id==searchItem.id) {
+                           $scope.parkingMarkers.splice(key, 1);
+                       }
                    })
 
                }, 200);
@@ -130,8 +131,9 @@
                $timeout(function () {
                    $scope.searchBox.showBox = false;
                    angular.forEach($scope.barMarkers,function(value,key){
-                       if(value.id==searchItem.id)
+                       if(value.id==searchItem.id) {
                            $scope.barMarkers.splice(key, 1);
+                       }
                    })
 
                }, 200);
