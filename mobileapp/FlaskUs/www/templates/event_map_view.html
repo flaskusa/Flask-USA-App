@@ -19,7 +19,7 @@
     </div>
     <div class="dropdown" ng-hide="searchObj.searchString.length == 0 || searchBox.showBox==false">
         <ul class="dropdown-content" ng-if="preEventSearch==true && selectedIndex==0">
-            <li ng-repeat="searchItem in searchParkingMarker  = (searchParkingMarkers | filter:searchObj.searchString)" ng-click="setNewMarker(searchItem,$index)"
+            <li ng-repeat="searchItem in searchParkingMarker  = (searchParkingMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
                 style="cursor:pointer">
                 {{searchItem.infoTitle}}
             </li>
