@@ -10,6 +10,8 @@
 
         $scope.requestDetail=[];
         $scope.requestedUserDetail=[];
+        $scope.notificationCount=0;
+        $scope.messageCount=0;
         $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.showEmptymessage=false;
         $scope.goToNotifications = function () {
