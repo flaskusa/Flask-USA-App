@@ -9831,85 +9831,85 @@ a.button {
 /*Font*/
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Regular.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next Ultra';
-  src: url("/lib/ionic/fonts/AvenirNext-UltraLight.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-UltraLight.woff2") format("woff2");
   font-weight: 200;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Regular_1.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Regular_1.woff2") format("woff2");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-BoldItalic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-BoldItalic.woff2") format("woff2");
   font-weight: bold;
   font-style: italic; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Italic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Italic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Medium.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next Ultra';
-  src: url("/lib/ionic/fonts/AvenirNext-UltraLightItalic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-UltraLightItalic.woff2") format("woff2");
   font-weight: 200;
   font-style: italic; }
 
 @font-face {
   font-family: 'Avenir Next Demi';
-  src: url("/lib/ionic/fonts/AvenirNext-DemiBold.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-DemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Heavy.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Heavy.woff2") format("woff2");
   font-weight: 900;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-HeavyItalic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-HeavyItalic.woff2") format("woff2");
   font-weight: 900;
   font-style: italic; }
 
 @font-face {
   font-family: 'Avenir Next Demi';
-  src: url("/lib/ionic/fonts/AvenirNext-DemiBoldItalic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-DemiBoldItalic.woff2") format("woff2");
   font-weight: 600;
   font-style: italic; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Bold.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-MediumItalic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-MediumItalic.woff2") format("woff2");
   font-weight: 500;
   font-style: italic; }
 
 @font-face {
-  font-family: 'AGENCYR';
-  src: url("/lib/ionic/fonts/AGENCYR.woff") format("woff");
+  font-family: 'Bender';
+  src: url("../lib/ionic/fonts/Bender-Solid.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
 
@@ -9927,8 +9927,8 @@ div.ng-binding {
   font-weight: 600; }
 
 .tabs a span {
-  font-family: 'AGENCYR';
-  font-size: 14px; }
+  font-family: 'Bender';
+  font-size: 15px; }
 
 .fill-height-or-more {
   min-height: 100%;
@@ -11162,13 +11162,19 @@ img.list-thumbnail.listImages {
 
 img.list-thumbnail.listImages1 {
   position: absolute;
-  left: 5px;
+  left: 0px;
   max-width: 55px;
-  max-height: 55px;
+  max-height: 60px;
   width: 100%;
   height: 100%;
-  margin-bottom: 5px;
-  margin-top: -3px; }
+  margin-bottom: 0px !important;
+  margin-top: -5px; }
+
+div.no-padding {
+  padding: 0px !important; }
+
+div .col.col-15 {
+  bottom: 0px !important; }
 
 div.menuDiv {
   padding-bottom: 10px; }
@@ -11456,7 +11462,7 @@ p.addText {
   color: darkorange !important; }
 
 span.badge.span_icon {
-  right: 14px !important; }
+  right: 14px; }
 
 span.badge.span_icon_supplies {
   top: 14px;
@@ -11616,10 +11622,11 @@ button.button.button-block.button-positive.friend {
 
 .myTailgatetopImg {
   height: 100px;
-  align-content: center;
   display: block;
-  margin-left: auto;
-  margin-right: auto; }
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
+  margin-top: -1px; }
 
 .eventDiv {
   text-align: center; }
@@ -11745,7 +11752,7 @@ h2.tailgater_name {
 
 /*End tailgate details bottom tabs*/
 /*Search icon*/
-.bar-dark .button.button-icon.ion-android-search:before {
+.button.button-icon.ion-android-search:before {
   font-size: 27px !important; }
 
 .form-left {
@@ -11814,7 +11821,7 @@ i.addText {
   background-color: #ffffff;
   height: 50px;
   padding-right: 17px;
-  padding-top: 15px; }
+  padding-top: 9px; }
 
 /*Tickets*/
 .ticketNameCol {
@@ -12013,7 +12020,8 @@ h2.items_user_list {
   border: solid 1px grey;
   border-bottom-style: none;
   border-right-style: none;
-  border-bottom: solid 1px grey; }
+  border-bottom: solid 1px grey;
+  font-weight: normal !important; }
 
 .col.acc_settingsCol:last-child {
   border-right: solid 1px grey; }
@@ -12190,6 +12198,14 @@ a.item.item-full.item-icon-left.attendees {
   margin-left: -11px;
   color: #F28604; }
 
+.text_div_message {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 260px;
+  width: 16% !important; }
+
 .msg_list {
   display: inline;
   float: left; }
@@ -12275,9 +12291,8 @@ div .extra-right-supply {
   background: #000000;
   color: white;
   border-radius: 2px 2px 0 0;
-  /*height: 55px;
-  margin-bottom: -9px;*/
-  /* In accordance with the rounding of the default infowindow corners. */ }
+  max-width: 99%;
+  width: 220px; }
 
 #iw-container #iw-content {
   text-align: center;
@@ -12288,7 +12303,8 @@ div .extra-right-supply {
   background: #ffffff;
   color: #000000;
   position: fixed;
-  width: 311px; }
+  max-width: 68%;
+  width: 220px; }
 
 #iw-content .padding {
   padding: 10px; }
@@ -12305,7 +12321,11 @@ div .extra-right-supply {
 #iw-container .iw-sub-title {
   font-size: 10px;
   color: darkorange;
-  /*margin-left: 14px;*/ }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 160px; }
 
 .gm-style-iw {
   width: 313px !important;
@@ -12411,8 +12431,10 @@ label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox {
 
 .f-nameText {
   padding-left: 15px;
-  font-size: 14px;
-  font-weight: 600; }
+  font-size: 15px !important;
+  font-weight: 600;
+  margin-top: 16px !important;
+  text-transform: uppercase; }
 
 .supplySaveButtonStyle {
   width: 65px;
@@ -12801,9 +12823,7 @@ div .manage_event_default_Image {
   background-color: #f4f4f4 !important; }
 
 .add_supplies_img {
-  float: right;
-  height: 28px;
-  width: 28px; }
+  float: right; }
 
 /*advertisement Popup*/
 .info_popup {
@@ -12816,8 +12836,7 @@ div .manage_event_default_Image {
   position: absolute;
   font-weight: 500;
   font-size: 26px;
-  z-index: 2;
-  margin-left: 121px; }
+  z-index: 2; }
 
 #traffic ul {
   list-style: none; }
@@ -12900,8 +12919,7 @@ div .manage_event_default_Image {
   font-size: 13px; }
 
 .alignRight {
-  text-align: right;
-  width: 37%; }
+  text-align: right; }
 
 .alignLeft {
   text-align: left;
@@ -12937,5 +12955,70 @@ div .manage_event_default_Image {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  min-width: 60px;
+  max-width: 260px;
   width: 60%; }
+
+.placedetail_div {
+  width: 100%;
+  font-size: 10px;
+  /*change By pradeep*/
+  line-height: 15px; }
+
+.list-thumbnail.listImages {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  max-height: 60px; }
+
+.list-thumbnail.listImages1 {
+  position: absolute;
+  left: 5px;
+  max-width: 55px;
+  max-height: 55px;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 5px;
+  margin-top: -3px; }
+
+.thumb-picturs-size {
+  width: 48%;
+  height: 101% !important;
+  border-right: solid white 2px; }
+
+.no-popup-header .popup-head {
+  display: none; }
+
+.my-create-supply-view .item-content {
+  position: relative;
+  z-index: 2;
+  padding: 0;
+  border: none;
+  background-color: #fff; }
+
+.inpuBorder {
+  border: 2.5px solid #d3d3d3;
+  border-left: solid 3.5px #d3d3d3;
+  border-right: solid 3.5px #d3d3d3; }
+
+span.badge.span_icon_extraright {
+  right: 22px; }
+
+.inpuBorderEdit {
+  border: 2.5px solid #d3d3d3;
+  border-left: solid 3.5px #d3d3d3;
+  border-right: solid 3.5px #d3d3d3;
+  width: 60%; }
+
+.showNotificationTextArea {
+  width: 70%;
+  height: 70px;
+  border: solid .5px;
+  resize: none;
+  transition: .5s;
+  border-color: orange; }
+
+.hidemsgTexArea {
+  height: 0px;
+  width: 0px;
+  transition: .5s;
+  overflow: hidden; }
