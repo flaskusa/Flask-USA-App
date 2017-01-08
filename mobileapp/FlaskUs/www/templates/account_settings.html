@@ -140,7 +140,70 @@
                 </div>
 			</ion-content>
 		</ion-tab>
+        </ion-tab>
 
+        <ion-tab title="Interests">
+            <ion-content class="" overflow-scroll="false">
+                <div class="list acc_settings1">
+                    <h5>PREFERENCES:</h5>
+                </div>
+
+
+                <div class="row header">
+                    <div class="col acc_settingsCol">SPORTS</div>
+                </div>
+                <div class="row acc_settingsCol" ng-repeat="data in data1">
+                    <div class="col acc_settingsCol">{{data.sport}}</div>
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="data.checked"  ng-click="addSportInArray($index,data);" checked="data.checked">
+                    </ion-checkbox>
+                </div>
+                <div class="padding"></div>
+
+
+                <div class="row header">
+                    <div class="col acc_settingsCol">LEVEL</div>
+                </div>
+                <div class="row acc_settingsCol" ng-repeat="data in data4">
+                    <div class="col acc_settingsCol">{{data.level}}</div>
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="data.checked" ng-click="addlevelInArray($index,data);" checked="data.checked">
+                    </ion-checkbox>
+                </div>
+                <div class="padding"></div>
+
+
+                <div class="row header">
+                    <div class="col acc_settingsCol">CONCERTS</div>
+                </div>
+                <div class="row acc_settingsCol" ng-repeat="data in data2">
+                    <div class="col acc_settingsCol">{{data.concerts}}</div>
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="data.checked" ng-click="addConcertsInArray($index,data);" checked="data.checked">
+                    </ion-checkbox>
+                </div>
+                <div class="padding"></div>
+
+
+                <div class="row header">
+                    <div class="col acc_settingsCol">SPECIAL EVENTS</div>
+                </div>
+
+                <div class="row acc_settingsCol" ng-repeat="data in data3">
+
+                    <div class="col acc_settingsCol">{{data.special_events}}</div>
+                    <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="data.checked" ng-click="addEventsInArray($index,data);" checked="data.checked">
+                    </ion-checkbox>
+                </div>
+
+
+                <div class="padding" align="center">
+                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUserInfo(user);">
+                        Save
+                    </button>
+                    <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/user_navigation_menu">
+                        Cancel
+                    </a>
+                </div>
+            </ion-content>
+        </ion-tab>
 
 
 

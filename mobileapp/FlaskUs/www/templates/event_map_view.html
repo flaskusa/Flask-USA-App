@@ -7,11 +7,74 @@
             <a href="#/app/events"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
         </ion-nav-title>
         <ion-nav-buttons side="right">
-            <button class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
+            <button ng-if="showSearchBox.value==true" class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox ; searchObj.searchString=''"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
+    <div class="bar bar-subheader groupSearch" ng-show="searchBox.showBox">
+        <div class="row searchrow">
+            <div class="col col-100 col-center searchrow">
+                <input type="text" placeholder="Search..." class="searchboxArea" ng-model="searchObj.searchString" />
+            </div>
+        </div>
+    </div>
+    <div class="dropdown" ng-hide="searchObj.searchString.length == 0 || searchBox.showBox==false">
+        <ul class="dropdown-content" ng-if="preEventSearch==true && selectedIndex==0">
+            <li ng-repeat="searchItem in searchParkingMarker  = (searchParkingMarkers | filter:searchObj.searchString)" ng-click="setNewMarker(searchItem,$index)"
+                style="cursor:pointer">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchParkingMarker.length==0">
+                There is no record to display.
+            </li>
+        </ul>
+        <ul class="dropdown-content" ng-if="preEventSearch==true && selectedIndex==1">
+            <li ng-repeat="searchItem in searchBarMarker= (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
+                style="cursor:pointer">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchBarMarker.length==0">
+                There is no record to display.
+            </li>
+        </ul>
+        <ul class="dropdown-content" ng-if="duringEventSearch==true && selectedIndex==2">
+            <li ng-repeat="searchItem in searchBarMarker = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
+                style="cursor:pointer">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchBarMarker.length==0">
+                There is no record to display.
+            </li>
+        </ul>
+        <ul class="dropdown-content" ng-if="postEventSearch==true && selectedIndex==0">
+            <li ng-repeat="searchItem in searchBarMarke = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
+                style="cursor:pointer">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchBarMarke.length==0">
+                There is no record to display.
+            </li>
+        </ul>
+        <ul class="dropdown-content" ng-if="postEventSearch==true && selectedIndex==2">
+            <li ng-repeat="searchItem in searchHotelMarker = (searchHotelMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
+                style="cursor:pointer">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchHotelMarker.length==0">
+                There is no record to display.
+            </li>
+        </ul>
+        <ul class="dropdown-content" ng-if="postEventSearch==true && selectedIndex==1">
+            <li ng-repeat="searchItem in searchNightLifesMarker = (searchNightLifesMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
+                style="cursor:pointer">
+                {{searchItem.infoTitle}}
+            </li>
+            <li ng-if="searchNightLifesMarker.length==0">
+                There is no record to display.
+            </li>
+        </ul>
+    </div>
 
-    <div class="bar bar-subheader " ng-class="{removeBorderTraffic:selectedIndex == 3}">
+    <div class="bar bar-subheader " ng-class="{removeBorderTraffic:selectedIndex == 3}" ng-if="!searchBox.showBox">
         <div class="row">
             <div class="col"></div>
             <div class="col col-90 event_name">
