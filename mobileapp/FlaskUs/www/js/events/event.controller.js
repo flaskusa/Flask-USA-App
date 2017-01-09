@@ -150,14 +150,19 @@
                 $scope.locationList = respData.data.results[0].geometry.location;
                 $scope.latitude = $scope.locationList.lat;
                 $scope.longitude = $scope.locationList.lng;
-                EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (resp) {
-                    $scope.allEvent = resp.data.Events;
-                    if ($scope.allEvent.length ==0) {
-                        $scope.Event_Error = true;
-                    } else {
-                        $scope.Event_Error = false;
-                    }
-                });
+                if($scope.searchString==""){
+                    $scope.searchString="a";
+                }
+
+                    EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (resp) {
+                        $scope.allEvent = resp.data.Events;
+                        if ($scope.allEvent.length == 0) {
+                            $scope.Event_Error = true;
+                        } else {
+                            $scope.Event_Error = false;
+                        }
+                    });
+
 
             });
         }        
@@ -165,17 +170,18 @@
         function ConvertToZip(latitude,longitude) {
             var latlongVar = 'latlng=';
             var sensorVar = '&sensor=true';
-            EventsService.getZiplocation(latlongVar, latitude, longitude, sensorVar).then(function (res) {
+            var My_Zip=""
+                EventsService.getZiplocation(latlongVar, latitude, longitude, sensorVar).then(function (res) {
                 if (res.data.results[0]) {
                     for (var i = 0; i < res.data.results[0].address_components.length; i++) {
                         var postalCode = res.data.results[0].address_components[i].types;
                         if (postalCode == "postal_code") {
-                            var My_Zip = res.data.results[0].address_components[i].long_name;
+                            My_Zip = res.data.results[0].address_components[i].long_name;
                         }
                     }
                 }
                 $scope.searchstringList = {
-                    searchString :'a',
+                    searchString :'',
                     days : '60',
                     zipcode: My_Zip
                 };
