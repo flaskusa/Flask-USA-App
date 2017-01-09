@@ -13,48 +13,50 @@
     <div class="bar bar-subheader groupSearch" ng-show="searchBox.showBox">
         <div class="row searchrow">
             <div class="col col-100 col-center searchrow">
-                <input type="text" placeholder="Search..." class="searchboxArea" ng-model="searchObj.searchString" />
+                <input type="text" name="inputSearch" placeholder="Search..." class="searchboxArea" ng-model="searchObj.searchString" />
             </div>
         </div>
     </div>
-    <div class="dropdown" ng-hide="searchObj.searchString.length == 0 || searchBox.showBox==false">
-        <ul class="dropdown-content" ng-if="preEventSearch==true && selectedIndex==0">
+
+    <div class="dropdown" ng-if="searchObj.searchString.length != 0 && searchBox.showBox==true && showsearchDrop.value==true">
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchParkingMarker.length==0}"ng-if="preEventSearch==true && selectedIndex==0">
+
             <li ng-repeat="searchItem in searchParkingMarker  = (searchParkingMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
                 style="cursor:pointer">
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchParkingMarker.length==0">
-                There is no record to display.
+                No matches found for search "{{searchObj.searchString}}"
             </li>
         </ul>
-        <ul class="dropdown-content" ng-if="preEventSearch==true && selectedIndex==1">
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchBarMarker.length==0}" ng-if="preEventSearch==true && selectedIndex==1">
             <li ng-repeat="searchItem in searchBarMarker= (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
                 style="cursor:pointer">
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchBarMarker.length==0">
-                There is no record to display.
+                No matches found for search "{{searchObj.searchString}}"
             </li>
         </ul>
-        <ul class="dropdown-content" ng-if="duringEventSearch==true && selectedIndex==2">
-            <li ng-repeat="searchItem in searchBarMarker = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchBarMarkes.length==0}" ng-if="duringEventSearch==true && selectedIndex==2">
+            <li ng-repeat="searchItem in searchBarMarkes = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
                 style="cursor:pointer">
                 {{searchItem.infoTitle}}
             </li>
-            <li ng-if="searchBarMarker.length==0">
-                There is no record to display.
+            <li ng-if="searchBarMarkes.length==0">
+                No matches found for search "{{searchObj.searchString}}"
             </li>
         </ul>
-        <ul class="dropdown-content" ng-if="postEventSearch==true && selectedIndex==0">
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchBarMarke.length==0}" ng-if="postEventSearch==true && selectedIndex==0">
             <li ng-repeat="searchItem in searchBarMarke = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
                 style="cursor:pointer">
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchBarMarke.length==0">
-                There is no record to display.
+                No matches found for search "{{searchObj.searchString}}"
             </li>
         </ul>
-        <ul class="dropdown-content" ng-if="postEventSearch==true && selectedIndex==2">
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchHotelMarker.length==0}" ng-if="postEventSearch==true && selectedIndex==2">
             <li ng-repeat="searchItem in searchHotelMarker = (searchHotelMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
                 style="cursor:pointer">
                 {{searchItem.infoTitle}}
@@ -63,13 +65,13 @@
                 There is no record to display.
             </li>
         </ul>
-        <ul class="dropdown-content" ng-if="postEventSearch==true && selectedIndex==1">
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchNightLifesMarker.length==0}" ng-if="postEventSearch==true && selectedIndex==1">
             <li ng-repeat="searchItem in searchNightLifesMarker = (searchNightLifesMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
                 style="cursor:pointer">
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchNightLifesMarker.length==0">
-                There is no record to display.
+                No matches found for search "{{searchObj.searchString}}"
             </li>
         </ul>
     </div>

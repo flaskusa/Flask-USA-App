@@ -22,9 +22,11 @@
         $scope.duringEventSearch=false;
         $scope.preEventSearch=false;
         $scope.showSearchBox={"value":true};
+        $scope.showsearchDrop={"value":true};
         $scope.map.events["click"] = function () {
             return $scope.closeOtherInfoWindows('mapClick');
         };
+        
         $scope.options = { scrollwheel: false, disableDefaultUI: true, zoomControl: true, streetViewControl: true };
         $scope.parkingMarkers = [];
         $scope.hotelMarkers = [];
@@ -111,12 +113,21 @@
                 return ionic.Platform.isWindowsPhone();
             }
         };
+        jQuery("input[name='inputSearch']").on('keydown', function(ev) {
+            if($scope.showsearchDrop.value==false){
+                $scope.showsearchDrop.value=true;
+                $scope.closeOtherInfoWindows();
+            }
+        });
         $scope.setNewMarker=function(searchItem,index){
+            searchItem.icon="img/map_icons/large_marker.svg"
            if(searchItem.infoTypeCategoryName=="Parking") {
                $timeout(function () {
-                   $scope.searchBox.showBox = false;
+                   $scope.showsearchDrop.value=false
+                   $scope.searchObj.searchString=searchItem.infoTitle;
                    angular.forEach($scope.parkingMarkers,function(value,key){
                        if(value.id==searchItem.id) {
+
                            $scope.parkingMarkers.splice(key, 1);
                        }
                    })
@@ -129,7 +140,8 @@
                }, 500)
            }else if(searchItem.infoTypeCategoryName=="Bar & Restaurants"){
                $timeout(function () {
-                   $scope.searchBox.showBox = false;
+                   $scope.showsearchDrop.value=false;
+                   $scope.searchObj.searchString=searchItem.infoTitle;
                    angular.forEach($scope.barMarkers,function(value,key){
                        if(value.id==searchItem.id) {
                            $scope.barMarkers.splice(key, 1);
@@ -144,7 +156,8 @@
            }
            else if(searchItem.infoTypeCategoryName=="Nightlife"){
                $timeout(function () {
-                   $scope.searchBox.showBox = false;
+                   $scope.showsearchDrop.value=false;
+                   $scope.searchObj.searchString=searchItem.infoTitle;
                    angular.forEach($scope.nightLifes,function(value,key){
                        if(value.id==searchItem.id)
                            $scope.nightLifes.splice(key, 1);
@@ -159,7 +172,8 @@
 
            else if(searchItem.infoTypeCategoryName=="Hotels"){
                $timeout(function () {
-                   $scope.searchBox.showBox = false;
+                   $scope.showsearchDrop.value=false;
+                   $scope.searchObj.searchString=searchItem.infoTitle;
                    angular.forEach($scope.hotelMarkers,function(value,key){
                        if(value.id==searchItem.id)
                            $scope.hotelMarkers.splice(key, 1);
