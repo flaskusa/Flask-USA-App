@@ -1902,6 +1902,16 @@ div .extra-right-supply{
 
 }
 
+
+
+#iw-container {
+  overflow: hidden;
+  height: 46px;
+  transition: height 2s;
+  opacity: 1;
+  width:100%;
+   }
+
 #iw-container .iw-title {
   font-size: 16px;
   text-transform: uppercase;
@@ -1909,10 +1919,9 @@ div .extra-right-supply{
   padding: 3px;
   background: #000000;
   color: white;
-  border-radius: 2px 2px 0 0; 
-  max-width: 99%;
-  width: 220px;
-  }
+  border-radius: 2px 2px 0 0;
+  width: 100%;  
+  max-width: 220px; }
 
 #iw-container #iw-content {
   text-align: center;
@@ -1925,7 +1934,13 @@ div .extra-right-supply{
   position: fixed;
   max-width: 68%;
   width: 220px;
+  overflow: hidden;
    }
+.iw-fixed-title{
+  width: 100%;
+  max-width: 312px;
+}
+
 
 #iw-content .padding {
   padding: 10px; }
@@ -1941,6 +1956,9 @@ div .extra-right-supply{
     margin-top: 10px;
 }
 
+.iw-content-icon{
+  width:25px;
+}
    #iw-container .iw-sub-title { 
 	 font-size: 10px;
 	  color: darkorange;
@@ -1951,15 +1969,19 @@ div .extra-right-supply{
 	  max-width: 160px;
    }
 
-
+.iw-sub-title1 { 
+   font-size: 11px;
+   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;  
+  max-width: 160px; 
+  width: 100%;
+  }
 .gm-style-iw {
   width: 313px !important;
   top: 20px !important; }
 
-#iw-container {
-  overflow: hidden;
-  height: 46px;
-  transition: height 2s; }
+
 .my-message-view {
   .item-content {
     padding-right: 6px;
@@ -2686,8 +2708,10 @@ div .manage_event_default_Image{
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  max-width: 260px;
-  width: 60%; } 
+  max-width: 180px;
+  width: 60%;
+  font-size: 14px;
+   }
 
     .placedetail_div{
        

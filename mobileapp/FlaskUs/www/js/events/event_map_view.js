@@ -209,9 +209,27 @@
                             val.model.show = false;
                         }
                     })
+                 }
+                    if ($scope.selectedIndex == 0 && $scope.googleMarkerOptions.control &&  $scope.googleMarkerOptions.control.getPlurals &&  $scope.googleMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    angular.forEach($scope.googleMarkerOptions.control.getPlurals().allVals, function (val, idx) {
+                        if (mapClick) {
+                            $scope.$apply(function () { val.model.show = false; });
+                        } else {
+                            val.model.show = false;
+                        }
+                    })
                 }
                 if ($scope.selectedIndex == 1 && $scope.barFlaskMarkerOptions.control && $scope.barFlaskMarkerOptions.control.getPlurals && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                     angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
+                        if (mapClick) {
+                            $scope.$apply(function () { val.model.show = false; });
+                        } else {
+                            val.model.show = false;
+                        }
+                    })
+                }
+                if ($scope.selectedIndex == 1 && $scope.barGoogleMarkerOptions.control && $scope.barGoogleMarkerOptions.control.getPlurals && $scope.barGoogleMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    angular.forEach($scope.barGoogleMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                         if (mapClick) {
                             $scope.$apply(function () { val.model.show = false; });
                         } else {
@@ -229,9 +247,27 @@
                         }
                     })
                 }
+                if ($scope.selectedIndex == 1 && $scope.barGoogleMarkerOptions.control && $scope.barGoogleMarkerOptions.control.getPlurals && $scope.barGoogleMarkerOptions.control.getPlurals().allVals.length > 0) {
+                    angular.forEach($scope.barGoogleMarkerOptions.control.getPlurals().allVals, function (val, idx) {
+                        if (mapClick) {
+                            $scope.$apply(function () { val.model.show = false; });
+                        } else {
+                            val.model.show = false;
+                        }
+                    })
+                }
             }else if ($scope.infoTypeName == 'Post-Event') {
                     if ($scope.selectedIndex == 0 && $scope.barFlaskMarkerOptions.control && $scope.barFlaskMarkerOptions.control.getPlurals && $scope.barFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                         angular.forEach($scope.barFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
+                            if (mapClick) {
+                                $scope.$apply(function () { val.model.show = false; });
+                            } else {
+                                val.model.show = false;
+                            }
+                        })
+                    }
+                    if ($scope.selectedIndex == 0 && $scope.barGoogleMarkerOptions.control && $scope.barGoogleMarkerOptions.control.getPlurals && $scope.barGoogleMarkerOptions.control.getPlurals().allVals.length > 0) {
+                        angular.forEach($scope.barGoogleMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                             if (mapClick) {
                                 $scope.$apply(function () { val.model.show = false; });
                             } else {
@@ -248,8 +284,26 @@
                             }
                         })
                     }
+                    if ($scope.selectedIndex == 1 && $scope.nightLifeGoogleMarkerOptions.control && $scope.nightLifeGoogleMarkerOptions.control.getPlurals && $scope.nightLifeGoogleMarkerOptions.control.getPlurals().allVals.length > 0) {
+                        angular.forEach($scope.nightLifeGoogleMarkerOptions.control.getPlurals().allVals, function (val, idx) {
+                            if (mapClick) {
+                                $scope.$apply(function () { val.model.show = false; });
+                            } else {
+                                val.model.show = false;
+                            }
+                        })
+                    }
                     if ($scope.selectedIndex == 2 && $scope.hotelFlaskMarkerOptions.control && $scope.hotelFlaskMarkerOptions.control.getPlurals && $scope.hotelFlaskMarkerOptions.control.getPlurals().allVals.length > 0) {
                         angular.forEach($scope.hotelFlaskMarkerOptions.control.getPlurals().allVals, function (val, idx) {
+                            if (mapClick) {
+                                $scope.$apply(function () { val.model.show = false; });
+                            } else {
+                                val.model.show = false;
+                            }
+                        })
+                    }
+                    if ($scope.selectedIndex == 1 && $scope.hotelGoogleMarkerOptions.control && $scope.hotelGoogleMarkerOptions.control.getPlurals && $scope.hotelGoogleMarkerOptions.control.getPlurals().allVals.length > 0) {
+                        angular.forEach($scope.hotelGoogleMarkerOptions.control.getPlurals().allVals, function (val, idx) {
                             if (mapClick) {
                                 $scope.$apply(function () { val.model.show = false; });
                             } else {
@@ -528,8 +582,9 @@
             marker.latitude = place.geometry.location.lat();
             marker.longitude = place.geometry.location.lng();
             marker.show = false;
+             marker.addrLine1 = place.vicinity;
             marker.map = $scope.currentPosition;
-            marker.templateUrl = "markerInfo.tpl.html";
+            marker.templateUrl = "markerBarInfo.tpl.html";
             marker.templateParameter = {
                 infoTitle: place.name,
                 addrLine1: place.vicinity,
@@ -545,8 +600,9 @@
             marker.latitude = place.geometry.location.lat();
             marker.longitude = place.geometry.location.lng();
             marker.show = false;
+             marker.addrLine1 = place.vicinity;
             marker.map = $scope.currentPosition;
-            marker.templateUrl = "markerInfo.tpl.html";
+            marker.templateUrl = "markerBarInfo.tpl.html";
             marker.templateParameter = {
                 infoTitle: place.name,
                 addrLine1: place.vicinity,
@@ -563,10 +619,12 @@
             marker.longitude = place.geometry.location.lng();
             marker.show = false;
             marker.map = $scope.currentPosition;
-            marker.templateUrl = "markerInfo.tpl.html";
+            marker.templateUrl = "markerParkingInfo.tpl.html";
+            marker.addrLine1 = place.vicinity;
             marker.templateParameter = {
                 infoTitle: place.name,
-                addrLine1: place.vicinity,
+                subTitle: place.vicinity,
+                addrLine1:place.vicinity,
                 icon: place.icon,
                 type: "GOOGLE"
             };
@@ -578,9 +636,10 @@
             marker.icon = "img/map_icons/google-map-pin.png";
             marker.latitude = place.geometry.location.lat();
             marker.longitude = place.geometry.location.lng();
+             marker.addrLine1 = place.vicinity;
             marker.show = false;
             marker.map = $scope.currentPosition;
-            marker.templateUrl = "markerInfo.tpl.html";
+            marker.templateUrl = "markerBarInfo.tpl.html";
             marker.templateParameter = {
                 infoTitle: place.name,
                 addrLine1: place.vicinity,

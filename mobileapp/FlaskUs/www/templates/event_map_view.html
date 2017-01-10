@@ -99,56 +99,61 @@
                 <tr><td> <button ng-click="selectGoogleMarker()"> Google</button></td> </tr>
             </table>
         </script>
-        <script type="text/ng-template" id="markerParkingInfo.tpl.html">
-            <div id="iw-container">
-                <div class="iw-title">
-                    <table width="100%">
-                        <tr>
-                            <td style="width:94%">
-                                <div class="parent_div">
-                                    <div class="text_div">{{parameter.infoTitle}}</div>
-                                </div>
-                            </td>
-                            <td rowspan="2" style="vertical-align:middle">  <div class="iw-content-toggle map_info_img"> <img src="img/map_icons/circle_arrow_left.svg"> </div>
-                        </tr>
-                        <tr>
-                            <td style="width:80%">
-                                <div class="iw-sub-title">
-                                    {{parameter.subTitle}}
-                                </div>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-                <div id="iw-content" style="display:none">
-                    <div>
 
-                        <table width="100%">
-                            <tr>
-                                <td colspan="2">
-                                    <div class="alignLeft">
-                                        <span class="iw-sub-title" ng-bind="parameter.addrLine1" style="color:black"> </span>
-                                        <div class="biggerFont"> {{parameter.cost}}</div>
-                                        <div class="emailText smallerFont"> {{parameter.infoDesc1}}</div>
-                                        <div ng-bind-html="parameter.infoDesc" class="placedetail_div"> </div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="iw-content-icon" style="width:13%"><img src="img/map_icons/take_me_there.svg" style="margin-right:5px"> </td>
-                                <td class="iw-content-text" style="text-align:left">   <a id="iwTakeMeThere"> Take me there </a> </td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
+<script type="text/ng-template" id="markerParkingInfo.tpl.html">
+    <div id="iw-container">
+        <div class="iw-title">
+            <table class="iw-fixed-title" >
+                <tr>
+                    <td class="iw-fixed-title">
+                        <div class="parent_div">
+                            <div class="text_div">{{parameter.infoTitle}}</div>
+                        </div>
+                    </td>
+                    <td rowspan="2" style="vertical-align:middle">
+                        <div class="iw-content-toggle map_info_img">
+                            <img src="img/map_icons/circle_arrow_left.svg"> </div>
+					</td>
+                </tr>
+                <tr>
+                    <td class="iw-fixed-title">
+                        <div class="iw-sub-title">
+                            {{parameter.subTitle}}
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+
+        <div id="iw-content" style="display:none">
+            <div>
+
+                <table class="iw-fixed-title">
+                    <tr>
+                        <td colspan="2">
+                            <div class="alignLeft">
+                                <span class="iw-sub-title1" ng-bind="parameter.addrLine1"> </span>
+                                <div class="biggerFont"> {{parameter.cost}}</div>
+                                <div class="emailText smallerFont"> {{parameter.infoDesc1}}</div>
+                                <div ng-bind-html="parameter.infoDesc" class="placedetail_div"> </div>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="iw-content-icon"><img src="img/map_icons/take_me_there.svg"> </td>
+                        <td class="iw-content-text" style="text-align:left"> <a id="iwTakeMeThere"> Take me there </a> </td>
+                    </tr>
+                </table>
             </div>
-        </script>
+        </div>
+    </div>
+</script>
         <script type="text/ng-template" id="markerBarInfo.tpl.html">
             <div id="iw-container">
                 <div class="iw-title">
-                    <table width="100%">
+                    <table class="iw-fixed-title">
                         <tr>
-                            <td style="width:94%">
+                            <td class="iw-fixed-title">
                                 <div class="parent_div">
                                     <div class="text_div">{{parameter.infoTitle}}</div>
                                 </div>
@@ -156,7 +161,7 @@
                             <td rowspan="2" style="vertical-align:middle">  <div class="iw-content-toggle map_info_img"> <img src="img/map_icons/circle_arrow_left.svg"> </div>
                         </tr>
                         <tr>
-                            <td style="width:80%">
+                            <td class="iw-fixed-title">
                                 <div class="iw-sub-title">
                                     {{parameter.addrLine1}}
                                 </div>
@@ -167,7 +172,7 @@
                 <div id="iw-content" style="display:none">
                     <div class="iw-content-div">
 
-                        <table width="100%">
+                        <table class="iw-fixed-title">
                             <tr>
                                 <td class="iw-content-icon alignRight"><img src="img/map_icons/callnow.svg" class="map_info_img"> </td>
                                 <td class="iw-content-text" style="text-align:left"> <a id="iwCallNow"> Call Now </a> </td>
@@ -204,7 +209,7 @@
                                         </div>
                                         <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
                                             <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
-                                                <div class="miniGoogleButton" ng-click="selectGoogleMarker=false"></div>
+                                                <div class="miniGoogleButton" ng-click="selectGoogleMarker()"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -239,7 +244,7 @@
                                         </div>
                                         <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
                                             <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
-                                                <div class="miniGoogleButton" ng-click="selectBarGoogleMarker=false"></div>
+                                                <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -576,7 +581,7 @@
                                         </div>
                                         <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
                                             <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
-                                                <div class="miniGoogleButton" ng-click="selectHotelGoogleMarker=false"></div>
+                                                <div class="miniGoogleButton" ng-click="selectHotelGoogleMarker()"></div>
                                             </div>
                                         </div>
                                     </div>
