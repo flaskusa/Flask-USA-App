@@ -33,7 +33,7 @@
         $scope.venuesId = [];
         var location = 'geolocation';
         $scope.searchstringList = {
-            searchString: 'a',
+            searchString: '',
             days: '60'
         };
         $scope.allEventId=[];
