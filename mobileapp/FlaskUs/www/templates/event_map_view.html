@@ -10,10 +10,10 @@
             <button ng-if="showSearchBox.value==true" class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox ; searchObj.searchString=''"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <div class="bar bar-subheader groupSearch" ng-show="searchBox.showBox">
+    <div class="bar bar-subheader groupSearch" ng-if="searchBox.showBox">
         <div class="row searchrow">
             <div class="col col-100 col-center searchrow">
-                <input type="text" name="inputSearch" placeholder="Search..." class="searchboxArea" ng-model="searchObj.searchString" />
+                <input type="text" name="unitaccNumber"  id="inputFilter" placeholder="Search..." class="searchboxArea" ng-model="searchObj.searchString" ng-keydown="onSearchKeyDown()" />
             </div>
         </div>
     </div>
@@ -62,7 +62,7 @@
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchHotelMarker.length==0">
-                There is no record to display.
+                No matches found for search "{{searchObj.searchString}}"
             </li>
         </ul>
         <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchNightLifesMarker.length==0}" ng-if="postEventSearch==true && selectedIndex==1">

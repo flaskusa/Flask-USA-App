@@ -9,6 +9,7 @@
     function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $cookies, $timeout, $localStorage, SERVER,$ionicHistory) {
         /* jshint validthis: true */
         var self = this;
+        $scope.venueDataRecieved=false;
         $scope.eventDetails = {};
         $scope.event = {};
         $scope.Details = [];
@@ -115,6 +116,7 @@
         function getEventVenueDatail() {
             EventsService.getEventVenueDatail(currEventId).then(function (respData) {
                  $localStorage["CachedEvents"][currEventId].getEventVenueDatail = respData;
+                $scope.venueDataRecieved=true;
                  setEventVenueDatail(respData);
             });
         }

@@ -36,6 +36,7 @@
             searchString: '',
             days: '60'
         };
+        var searchStringList=angular.copy($scope.searchstringList);
         $scope.allEventId=[];
             getAllEventDetail()
 
@@ -180,11 +181,7 @@
                         }
                     }
                 }
-                $scope.searchstringList = {
-                    searchString :'',
-                    days : '60',
-                    zipcode: My_Zip
-                };
+                $scope.searchstringList = angular.copy(searchStringList);
             });
         }
     }

@@ -113,77 +113,113 @@
                 return ionic.Platform.isWindowsPhone();
             }
         };
-        jQuery("input[name='inputSearch']").on('keydown', function(ev) {
+        $scope.onSearchKeyDown=function(){
             if($scope.showsearchDrop.value==false){
                 $scope.showsearchDrop.value=true;
                 $scope.closeOtherInfoWindows();
             }
-        });
+        }
         $scope.setNewMarker=function(searchItem,index){
-            searchItem.icon="img/map_icons/large_marker.svg"
+
            if(searchItem.infoTypeCategoryName=="Parking") {
+                      var parking={}
                $timeout(function () {
-                   $scope.showsearchDrop.value=false
-                   $scope.searchObj.searchString=searchItem.infoTitle;
-                   angular.forEach($scope.parkingMarkers,function(value,key){
-                       if(value.id==searchItem.id) {
+                    $scope.showsearchDrop.value=false
+                    $scope.searchObj.searchString=searchItem.infoTitle;
+                    angular.forEach($scope.parkingMarkers,function(value,key){
+                        if(value.id==searchItem.id) {
+                            parking=value;
+                            $scope.parkingMarkers.splice(key,1)
 
-                           $scope.parkingMarkers.splice(key, 1);
-                       }
-                   })
+                        }
+                    })
 
-               }, 200);
+                }, 200);
 
+                $timeout(function () {
+
+                  $scope.parkingMarkers.push(searchItem);
+
+
+                }, 500);
                $timeout(function () {
-
-                   $scope.parkingMarkers.push(searchItem);
-               }, 500)
+               $scope.onClick(searchItem,"click",searchItem)
+               }, 800);
            }else if(searchItem.infoTypeCategoryName=="Bar & Restaurants"){
+               var bar={}
                $timeout(function () {
                    $scope.showsearchDrop.value=false;
                    $scope.searchObj.searchString=searchItem.infoTitle;
                    angular.forEach($scope.barMarkers,function(value,key){
                        if(value.id==searchItem.id) {
-                           $scope.barMarkers.splice(key, 1);
+                           bar=value;
+                           $scope.barMarkers.splice(key,1);
                        }
                    })
 
                }, 200);
-
                $timeout(function () {
+
                    $scope.barMarkers.push(searchItem);
-               }, 500)
+
+
+               }, 500);
+               $timeout(function () {
+                   $scope.onClick(searchItem,"click",searchItem)
+               }, 800);
+
+
            }
            else if(searchItem.infoTypeCategoryName=="Nightlife"){
+               var nightLife={}
                $timeout(function () {
                    $scope.showsearchDrop.value=false;
                    $scope.searchObj.searchString=searchItem.infoTitle;
                    angular.forEach($scope.nightLifes,function(value,key){
-                       if(value.id==searchItem.id)
+                       if(value.id==searchItem.id) {
+                           nightLife = value;
                            $scope.nightLifes.splice(key, 1);
+                       }
                    })
 
                }, 200);
-
                $timeout(function () {
+
                    $scope.nightLifes.push(searchItem);
-               }, 500)
+
+
+               }, 500);
+               $timeout(function () {
+                   $scope.onClick(searchItem,"click",searchItem)
+               }, 800);
+
            }
 
            else if(searchItem.infoTypeCategoryName=="Hotels"){
+               var hotl={}
                $timeout(function () {
                    $scope.showsearchDrop.value=false;
                    $scope.searchObj.searchString=searchItem.infoTitle;
                    angular.forEach($scope.hotelMarkers,function(value,key){
-                       if(value.id==searchItem.id)
-                           $scope.hotelMarkers.splice(key, 1);
+                       if(value.id==searchItem.id) {
+                           hotl = value;
+                           $scope.hotelMarkers.splice(key, 1)
+                       }
                    })
 
                }, 200);
-
                $timeout(function () {
+
                    $scope.hotelMarkers.push(searchItem);
-               }, 500)
+
+
+               }, 500);
+               $timeout(function () {
+                   $scope.onClick(searchItem,"click",searchItem)
+               }, 800);
+
+
+
            }
 
         }
@@ -1116,7 +1152,7 @@
                 }
             }
         }
-        $scope.createMapLink = function (address1) {
+        $scope.createMapLink = function(address1) {
             var findUs = '';
             if ($scope.isMobile.Android()) {
                 findUs = 'http://maps.google.com/?saddr=Current%20Location&daddr=' + address1;
