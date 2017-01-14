@@ -91,8 +91,8 @@
 }
 
 @font-face {
-	font-family: 'Bender';
-	src: url('../lib/ionic/fonts/Bender-Solid.woff') format('woff');
+	font-family: 'AGENCYR';
+	src: url('../lib/ionic/fonts/AGENCYR.woff') format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -103,6 +103,12 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 html, body{font-family: 'Avenir Next';}
 
+button{font-family: 'Avenir Next' !important;}
+
+button i{font-family: 'Avenir Next' !important;}
+
+.button{font-family: 'Avenir Next' !important;}
+
 .item-input input, .item-input textarea{font-family: 'Avenir Next';}
 
 div.ng-binding{    
@@ -110,7 +116,7 @@ div.ng-binding{
     font-weight: 600;
 }
 
-.tabs a span{font-family: 'Bender';
+.tabs a span{font-family: 'AGENCYR';
              font-size: 15px;
 }
 
@@ -1177,7 +1183,7 @@ button.button.button-clear.mini-button {
     height: 28%;
 }
 .myTailgatetopImg {
-  height: 100px;
+  height: 155px;
   display: block;
   margin-left: 0px;
   margin-right: 0px; 
@@ -1697,7 +1703,8 @@ position:initial !important;
   font-size: 12px;
   padding-top: 4px;
   font-weight: 500;
-  color:black
+  color:black;
+  font-family:Avenir Next !important;
 }
 .item .badge.ext-top{
   top:21px;
