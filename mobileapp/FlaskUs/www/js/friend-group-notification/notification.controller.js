@@ -11,7 +11,10 @@
         $scope.requestDetail=[];
         $scope.requestedUserDetail=[];
         $scope.notificationCount=0;
-        $scope.messageCount=0;
+        $scope.messageCount = 0;
+        $scope.mId = [];
+        $scope.allMessages = {};
+        $scope.flag = [];
         $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.showEmptymessage=false;
         $scope.goToNotifications = function () {
@@ -21,22 +24,40 @@
         $scope.goToNavigator=function(){
             $state.go("app.user_navigation_menu");
         }
-        $scope.goToMessages = function () {
-            $state.go('app.messages');
+
+        $scope.initialize = function () {
+            FriendsNotificationService.getNotificationCount().then(function (response1) {
+                $scope.notificationCount = response1;
+            });
+            FriendsNotificationService.getMyAllMessages().then(function (response) {
+                $scope.allMessages = response;
+                for (var i = 0; i < $scope.allMessages.length; i++) {
+                    if ($scope.allMessages[i].read == false) {
+                        $scope.flag.push($scope.allMessages[i].messageId);
+                    }
+                }
+                $scope.messageCount = $scope.flag.length;
+            });
         }
+
+
+        $scope.goToMessages = function () {
+            $state.go('app.messages');            
+                for (var i = 0; i < $scope.allMessages.length; i++) {
+                    $scope.mId.push($scope.allMessages[i].messageId);
+                }
+                for(var j=0;j<$scope.mId.length;j++){
+                    FriendsNotificationService.setReadMessage($scope.mId[j]).then(function (response) {
+                        $scope.readFlag = response;
+                        console.log($scope.readFlag);
+                    })
+                }       
+        }
+
         $scope.goBack = function(){
             $ionicHistory.goBack();
         }
-        $scope.initialize=function() {
-            FriendsNotificationService.getNotificationCount().then(function (response1) {
-
-                    $scope.notificationCount = response1;
-                });
-            FriendsNotificationService.getMessageCount().then(function (response2) {
-                $scope.messageCount = response2;
-            });
-
-        }
+        
        $scope.getRequestToConfirm=function(){
            FriendsNotificationService.getRequestToConfirm().then(function(response1){
                $scope.requestDetail=response1;

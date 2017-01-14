@@ -28,7 +28,8 @@
         var addSocialRelationUrl="/flask-social-portlet.entry/add-social-relation";
         var deleteSocialRelationUrl="/flask-social-portlet.entry/delete-request";
         var sendFlaskMessage = "/flask-social-portlet.flaskmessages/send-flask-message";
-        var setMessageReadUrl="/flask-social-portlet.flaskrecipients/set-read";
+        var setMessageReadUrl = "/flask-social-portlet.flaskrecipients/set-read";
+        var getUnreadMessagesURL = "/flask-social-portlet.flaskmessages/get-my-unread-flask-messages";
         var companyId = SERVER.companyId;
         function getNotificationCount(){
             return $http.get(SERVER.url+getMyNotificationCountUrl)
@@ -124,6 +125,16 @@
                 message:messgae,
                 sendEmail:true
             }})
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+
+        function getAllUnreadMessages() {
+            return $http.get(SERVER.url + getUnreadMessagesURL)
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
