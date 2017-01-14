@@ -81,10 +81,10 @@
                     <div class="messageList" ng-repeat="data in messageUser">
                         <img ng-if="data.userPicUrl.length==undefined" class="default_img" ng-src='img/default-profilepic-copy.png' style="margin-top: 4px">
                         <img ng-if="data.userPicUrl.length>0" class="default_img" ng-src='{{data.userPicUrl}}' style="width: 40px;max-width: 65px;height: 40px;border-radius: 50%;margin-top: 4px">
-                        <p class="profile_name text_div_message" style="margin-top:0px">@{{data.username}}_User</p>
+                        <p class="profile_name text_div_message" style="margin-top:-4px">@{{data.username}}</p>
                         <div>
-                            <p class="message_username " style="margin-top:0px">@{{data.username}}_User</p>
-                            <p class="messageTxt ">{{data.message}}_message</p><br></div>
+                            <p class="message_username " style="margin-top:0px">@{{data.username}}</p>
+                            <p class="messageTxt ">{{data.message}}</p><br></div>
                     </div>
                 </div>
                 </span>
