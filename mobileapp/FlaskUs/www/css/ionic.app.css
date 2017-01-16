@@ -9908,8 +9908,8 @@ a.button {
   font-style: italic; }
 
 @font-face {
-  font-family: 'Bender';
-  src: url("../lib/ionic/fonts/Bender-Solid.woff") format("woff");
+  font-family: 'AGENCYR';
+  src: url("../lib/ionic/fonts/AGENCYR.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
 
@@ -9919,6 +9919,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 html, body {
   font-family: 'Avenir Next'; }
 
+button {
+  font-family: 'Avenir Next' !important; }
+
+button i {
+  font-family: 'Avenir Next' !important; }
+
+.button {
+  font-family: 'Avenir Next' !important; }
+
 .item-input input, .item-input textarea {
   font-family: 'Avenir Next'; }
 
@@ -9927,7 +9936,7 @@ div.ng-binding {
   font-weight: 600; }
 
 .tabs a span {
-  font-family: 'Bender';
+  font-family: 'AGENCYR';
   font-size: 15px; }
 
 .fill-height-or-more {
@@ -11621,7 +11630,7 @@ button.button.button-block.button-positive.friend {
   height: 28%; }
 
 .myTailgatetopImg {
-  height: 100px;
+  height: 155px;
   display: block;
   margin-left: 0px;
   margin-right: 0px;
@@ -12104,7 +12113,8 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox.acc_table {
   font-size: 12px;
   padding-top: 4px;
   font-weight: 500;
-  color: black; }
+  color: black;
+  font-family: Avenir Next !important; }
 
 .item .badge.ext-top {
   top: 21px; }
@@ -12283,6 +12293,13 @@ div .extra-right-supply {
   margin-top: 5px;
   margin-left: 14px; }
 
+#iw-container {
+  overflow: hidden;
+  height: 46px;
+  transition: height 2s;
+  opacity: 1;
+  width: 100%; }
+
 #iw-container .iw-title {
   font-size: 16px;
   text-transform: uppercase;
@@ -12291,8 +12308,8 @@ div .extra-right-supply {
   background: #000000;
   color: white;
   border-radius: 2px 2px 0 0;
-  max-width: 99%;
-  width: 220px; }
+  width: 100%;
+  max-width: 220px; }
 
 #iw-container #iw-content {
   text-align: center;
@@ -12304,7 +12321,12 @@ div .extra-right-supply {
   color: #000000;
   position: fixed;
   max-width: 68%;
-  width: 220px; }
+  width: 220px;
+  overflow: hidden; }
+
+.iw-fixed-title {
+  width: 100%;
+  max-width: 312px; }
 
 #iw-content .padding {
   padding: 10px; }
@@ -12318,6 +12340,9 @@ div .extra-right-supply {
   margin-left: -11px !important;
   margin-top: 10px; }
 
+.iw-content-icon {
+  width: 25px; }
+
 #iw-container .iw-sub-title {
   font-size: 10px;
   color: darkorange;
@@ -12327,14 +12352,17 @@ div .extra-right-supply {
   min-width: 0;
   max-width: 160px; }
 
+.iw-sub-title1 {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+  width: 100%; }
+
 .gm-style-iw {
   width: 313px !important;
   top: 20px !important; }
-
-#iw-container {
-  overflow: hidden;
-  height: 46px;
-  transition: height 2s; }
 
 .my-message-view .item-content {
   padding-right: 6px; }
@@ -12955,8 +12983,9 @@ div .manage_event_default_Image {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  max-width: 260px;
-  width: 60%; }
+  max-width: 180px;
+  width: 60%;
+  font-size: 14px; }
 
 .placedetail_div {
   width: 100%;
@@ -13022,3 +13051,34 @@ span.badge.span_icon_extraright {
   width: 0px;
   transition: .5s;
   overflow: hidden; }
+
+.dropdown {
+  position: relative;
+  display: inline-block; }
+
+.dropdown-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  min-height: 100px;
+  height: 100%;
+  width: 100vw;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  top: 75px; }
+
+.dropdown:hover .dropdown-content {
+  display: block; }
+
+.dropdown-content li:hover {
+  background-color: lightgray; }
+
+.dropdown-content li {
+  padding-left: 10px;
+  border-color: grey;
+  border-width: 1px; }
+
+.whenNoMatchFound {
+  min-height: 35px; }

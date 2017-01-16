@@ -9,14 +9,12 @@
             //      cordova.plugins.Keyboard.disableScroll(true);
             var profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
             
-            if (window.StatusBar) {
-                StatusBar.overlaysWebView(false);
-            }
             $localStorage.$default({things:{}});
             //  }
             if (window.StatusBar) {
                 // org.apache.cordova.statusbar required
-                StatusBar.styleDefault();
+                 StatusBar.styleBlackTranslucent();
+                 StatusBar.styleLightContent();
             }
             $http.get(SERVER.url+'/flask-rest-users-portlet.flaskadmin/get-company-id'
             )
