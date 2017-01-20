@@ -367,10 +367,10 @@
             var takeMeThere = $scope.createMapLink($scope.currentShownInfoWindow.addrLine1);
 
             $("#iwTakeMeThere").on("click", function () {
-                openUrl(takeMeThere, "_system");
+                openUrl(takeMeThere,"_system");
             });
             var telephoneToCall;
-            if ($scope.currentShownInfoWindow.phone == '') {
+            if($scope.currentShownInfoWindow.phone == '') {
                 $("#iwCallNow").text("Not Available");
             } else {
                 telephoneToCall = "tel:" + $scope.currentShownInfoWindow.phone;
@@ -399,6 +399,10 @@
                     // error
                 });
         }
+        $scope.setNavigate=function(url){
+            openUrl(url, "_system");
+        }
+
         function setInfoWindowEvent() {
             infoWindowEvent();
             $timeout(function () {
@@ -1077,11 +1081,28 @@
                             $scope.venueMapDetail.push(tempObject);
                         }
                         else if ("Venue Info" == tempObject.infoTypeCategoryName) {
+
+
+
+                          $scope.temp = $("<div>");
+                            $scope.temp2 = $("<div>");
+                            $scope.temp2.html(tempObject.infoDesc);
+                            $scope.temp.html(tempObject.infoDesc);
+                            $scope.anchor = $scope.temp2.find("a");
+                           angular.forEach($scope.anchor,function(vals,index) {
+                                var temp1 = $("<div>");
+                                temp1.html(vals);
+                                var anchorValue =  temp1.find("a").attr("href");
+                                var hrefValue="'"+anchorValue+"'";
+                                $scope.temp.find("a").removeAttr("href");
+                                $scope.temp.find("a").attr("ng-click","setNavigate("+hrefValue+")");
+
+                               /* I have to take two temp  variable because of in angular.forEach it was changing the value of temp to empty, same memory location issue.
+                               I have created a directive to compile prepared  href because ng-click will not be bind by ng-bind-html*/
+
+                            })
+                            tempObject.infoDesc = $scope.temp.html();
                             $scope.venueInfoDetail.push(tempObject);
-                            var temp = $("<div>");
-                            temp.html($scope.venueInfoDetail.infoDesc);
-                            temp.find("a").attr("target", "_system");
-                            $scope.venueInfoDetail.infoDesc = temp.html();
                             }
                         else if ("Getting home" == tempObject.infoTypeCategoryName) {
                             $scope.gettingHomeDetail.push(tempObject);
@@ -1206,4 +1227,20 @@
         };
 
     });
+    angular.module('flaskApp').directive('compile', ['$compile', function ($compile) {
+                return function(scope, element, attrs) {
+                    scope.$watch(
+                        function(scope) {
+
+                            return scope.$eval(attrs.compile);
+                        },
+                        function(value) {
+
+                            element.html(value);
+
+                            $compile(element.contents())(scope);
+                        }
+                    );
+        };
+    }])
 })();
