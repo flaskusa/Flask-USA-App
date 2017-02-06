@@ -3,6 +3,9 @@
     var getMessageUrlSubString="/flask-social-portlet.flaskmessages";
     var getmessageBoardsByTailgateIdURL = "/get-message-boards-by-tailgate-id";
     var getUserProfileUrl = "/get-my-file-entry";
+    var getMyNotificationCountUrl="/get-requests-count"
+    var getMessageCountUrl="/get-my-flask-messages-count"
+    var setMessageReadUrl = "/set-read";
 
     flaskAppConfig.value("SERVER", {
         "hostName": "http://www.flaskus.com/",
@@ -353,7 +356,19 @@
                     controller: 'ManageEventCtrl'
                 }
             }
-        })
+        });
+
+
+
+        function loaderHide(url){
+            var hide=false;
+            if(url.includes(getMessageUrlSubString) || url.includes(getmessageBoardsByTailgateIdURL) || url.includes(getMyNotificationCountUrl) || url.includes(getMessageCountUrl) ||url.includes(setMessageReadUrl)){
+                     hide=true;
+            }
+            return hide;
+        }
+
+
 
         /*
         if none of the above states are matched, use this as the fallback*/
@@ -368,7 +383,7 @@
         $httpProvider.interceptors.push(function ($rootScope) {
             return {
             request: function (config) {
-                if(!config.url.includes(getMessageUrlSubString) && !config.url.includes(getmessageBoardsByTailgateIdURL) &&!config.url.includes(getUserProfileUrl)) {
+                if(!loaderHide(config.url)) {
                     $rootScope.$broadcast('loading:show');
                 }
                 return config
@@ -379,6 +394,8 @@
                 }
             }
         })
+
+
 
          uiGmapGoogleMapApiProvider.configure({
           key: 'AIzaSyDAFZx0f0rc-vCyx-GHMqy2O9m06Dc-p8Y',

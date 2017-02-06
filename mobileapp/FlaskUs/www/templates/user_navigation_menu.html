@@ -15,12 +15,29 @@
                     MY TAILGATE
                 </a>
             </div>
-            <div class="row mainRow myFrnds" ng-click="myFriend()">
-                <a href="" class="post-content">
+            <div class=" mainRow myFrnds" ng-click="myFriend()">
+               <div class="row">
+                <div   class="post-content ">
                     <i class="icon ion-star"></i>
                     MY FRIENDS
-                </a>
-            </div>       
+                </div></div>
+                <div style="width: 100vw;height: 40px" >
+
+                <div  class="post-content-Notification" ng-click="goToMessage()">
+                    <i class="icon ion-chatbox" style="font-size: 16px"> </i>
+                    <span>MESSAGE<i ng-if="totalMessageNotification>0"> ({{totalMessageNotification}})</i></span>
+                </div></div>
+
+                <div style="width: 100vw;height: 40px;margin-top: 45px" >
+
+                <div  class="post-content-Request " ng-click="goToRequest()">
+                    <i class="icon ion-person-stalker" style="font-size: 18px"> </i>
+                    FRIEND REQUEST <i ng-if="totalRequestNotification>0"> ({{totalRequestNotification}})</i>
+                </div>
+
+                </div>
+            </div>
+
     </ion-content>
     <ion-footer-bar class="tabs tabs-icon-left bar bar-dark bar-footer bar-assertive">
         <a class="tab-item bottom_tabs" href="#/app/account_settings">

@@ -17,7 +17,7 @@
         $scope.flag = [];
         $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.showEmptymessage=false;
-        $scope.goToNotifications = function () {
+        $scope.goToNotifications = function (){
             $state.go('app.notifications');
 
         }
@@ -43,7 +43,7 @@
 
         $scope.goToMessages = function () {
             $state.go('app.messages');            
-                for (var i = 0; i < $scope.allMessages.length; i++) {
+              /*  for (var i = 0; i < $scope.allMessages.length; i++) {
                     $scope.mId.push($scope.allMessages[i].messageId);
                 }
                 for(var j=0;j<$scope.mId.length;j++){
@@ -51,8 +51,9 @@
                         $scope.readFlag = response;
                         console.log($scope.readFlag);
                     })
-                }       
+                }  */
         }
+
 
         $scope.goBack = function(){
             $ionicHistory.goBack();
@@ -61,7 +62,9 @@
        $scope.getRequestToConfirm=function(){
            FriendsNotificationService.getRequestToConfirm().then(function(response1){
                $scope.requestDetail=response1;
-               $scope.showEmptymessage=true;
+               if($scope.requestDetail.length==0) {
+                   $scope.showEmptymessage = true;
+               }
                angular.forEach($scope.requestDetail,function(value,key) {
                    FriendsNotificationService.getUserById(value.userId).then(function (response2) {
 

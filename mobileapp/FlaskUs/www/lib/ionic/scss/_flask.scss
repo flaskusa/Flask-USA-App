@@ -2819,3 +2819,50 @@ span.badge.span_icon_extraright {
 .whenNoMatchFound{
   min-height: 35px;
 }
+i.icon.ion-person-stalker{
+    padding-left: 2%; }
+i.icon.ion-chatbox{
+    padding-left: 2%; }
+	
+.unreadMessageText{
+    font-weight: bold;
+}
+@media only screen and (min-width: 50px) {
+  div.post-content {
+    height: 31px;
+    background-color: rgba(0, 0, 0, 0.63);
+    color: white;
+    margin-top: 14px;
+    text-decoration: none;
+    padding-top: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 140px; } }
+ div.post-content-Notification {
+        height: 31px;
+        background-color: rgba(0, 0, 0, 0.63);
+        color: white;
+        position:absolute;
+        bottom: 45px;
+        right: 0;
+
+         float:right;
+        text-decoration: none;
+        padding-top: 6px;
+        font-size: 16px;
+        font-weight: 600;
+        width: 180px; }
+div.post-content-Request {
+    height: 31px;
+    background-color: rgba(0, 0, 0, 0.63);
+    color: white;
+    position:absolute;
+    bottom: 0 ;
+    right: 0;
+    margin-bottom:2%;
+    text-decoration: none;
+    padding-top: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 215px; }
+	

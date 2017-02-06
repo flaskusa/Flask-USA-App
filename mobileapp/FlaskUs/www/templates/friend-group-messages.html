@@ -12,10 +12,10 @@
                 <h2 class="emailText">{{message.senderName}}</h2>
                 <h4 style="float: right">{{message.diffDate}}</h4>
 
-             <div class="col-60"><h3 ng-class="{emailText: false}">{{message.message}}</h3></div>
+             <div class="col-60"><h3 ng-class="{unreadMessageText: message.read==false}">{{message.message}}</h3></div>
 
                    <div   ng-if="message.reply==true" style="margin-top:4px;margin-left: 0px">
-                       <textarea ng-if="showTextArea.show==true"ng-model="textMessage.messageToSend" id="textArea" class="showNotificationTextArea hidemsgTexArea"autofocus></textarea>
+                       <textarea ng-if="showTextArea.show==true"ng-model="textMessage.messageToSend" id="textArea" class="showNotificationTextArea hidemsgTexArea hideAll"autofocus></textarea>
                        <button ng-if="ShowReplyButton==true" style="float:right;margin-top: -30px" class="button button-small suppliesButton"ng-click="replyMessage(message,$index,textMessage.messageToSend,'close')">
                          Reply
                        </button>

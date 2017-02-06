@@ -10,6 +10,7 @@
         $scope.allMessages=[];
         $scope.showTextArea={show:false};
         $scope.textMessage={messageToSend:""};
+        $scope.totalNotification=0;
         $scope.ShowReplyButton=true;
         $scope.getNotification=function() {
             $scope.myTimeOut= $timeout(function () {
@@ -39,39 +40,54 @@
             },10000);
 
         };
-       /* $scope.replyMessage=function(msgDetail,index) {
-            angular.forEach($scope.allMessages, function (value, key) {
-
-                value.reply = false
-            });
+          $scope.clickedForReply=false;
 
 
-            $scope.allMessages[index].reply = true;
-        }*/
         $scope.replyMessage=function(msgDetail,index,textMessage,string) {
+            if( msgDetail.read==false) {
+                msgDetail.read=true;
+                FriendsNotificationService.setReadMessage(msgDetail.messageId).then(function (response) {
+
+                })
+            }
             angular.forEach($scope.allMessages, function (value, key) {
 
-                value.reply = false
+                value.reply = false;
+
             });
 
-
             $scope.allMessages[index].reply = true;
-            $scope.showTextArea.show = true;
+
+
             $scope.ShowReplyButton=true;
-            setTimeout(startToggleFunction, 20)
+            if(string!=""){
+                $scope.clickedForReply=true;
+
+                $scope.showTextArea.show = true;
+                setTimeout(startToggleFunction, 20);
+            }else{
+               /* if($scope.clickedForReply==false) {
+                    $scope.showTextArea.show = false;
+                }
+                $timeout(function(){
+                    $scope.clickedForReply=false;
+                },200)*/
+            }
+
 
             function startToggleFunction() {
-
                 $scope.messageBoxClasses = document.getElementById("textArea").classList;
 
-                if ($scope.messageBoxClasses.contains("hideAll")) {
+            if ($scope.messageBoxClasses.contains("hideAll")) {
                     $scope.messageBoxClasses.remove("hideAll");
+                    $scope.textMessage.messageToSend="";
                 }
                 ;
                 setTimeout(removeText, 10);
                 function removeText() {
                     if ($scope.messageBoxClasses.contains("hidemsgTexArea")) {
                         $scope.messageBoxClasses.remove("hidemsgTexArea");
+
                     }
                     else {
                         if (textMessage == undefined || textMessage.trim() === '' && string!="") {
