@@ -43,7 +43,7 @@
 
         $scope.goToMessages = function () {
             $state.go('app.messages');            
-              /*  for (var i = 0; i < $scope.allMessages.length; i++) {
+                for (var i = 0; i < $scope.allMessages.length; i++) {
                     $scope.mId.push($scope.allMessages[i].messageId);
                 }
                 for(var j=0;j<$scope.mId.length;j++){
@@ -51,7 +51,7 @@
                         $scope.readFlag = response;
                         console.log($scope.readFlag);
                     })
-                }  */
+                }  
         }
 
 
