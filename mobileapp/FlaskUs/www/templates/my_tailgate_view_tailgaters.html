@@ -19,6 +19,7 @@
                 <span class="badge span_icon span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
 
             <ion-option-button ng-if="isTailgateAdmin==true" class="button-assertive icon ion-trash-a" ng-click="deleteTailgateUser(data.userId,$index)"></ion-option-button>
+            <ion-option-button class="button-assertive icon ion-toggle-filled" ng-click="updateTailgateMembers(data,$index);"></ion-option-button>
             </ion-item>
       </ion-list>
         <script id="templates/modal.html" type="text/ng-template">

@@ -28,6 +28,7 @@
                 </div>
                 <ion-option-button class="button-assertive icon ion-edit" ng-class="{disablebutton: data.isAdmin=='0'}" ng-click="editTailgate(data.tailgateId,$index);"></ion-option-button>
                 <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveTailgate(data.tailgateId,$index);"></ion-option-button>
+                <ion-option-button class="button-assertive icon ion-ios-copy" ng-click="copyList(data)"></ion-option-button>
             </ion-item>
         </ion-list>
     </ion-content>
