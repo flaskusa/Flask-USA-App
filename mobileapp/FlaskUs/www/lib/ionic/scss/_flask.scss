@@ -107,6 +107,8 @@ button{font-family: 'Avenir Next' !important;}
 
 button i{font-family: 'Avenir Next' !important;}
 
+.button{font-family: 'Avenir Next' !important;}
+
 .item-input input, .item-input textarea{font-family: 'Avenir Next';}
 
 div.ng-binding{    
@@ -357,7 +359,7 @@ input.input_box{width:90%;
 
 .aui body {
     background-color: #fff;
-    font: normal 14px/1 'Avenir Next';
+    font: normal 14px/1 'Avenir Next',Helvetica,sans-serif;
 }
 
 button.button.button-block.button-positive.sign_in_button{
@@ -374,8 +376,6 @@ a.button.button-block.button-positive.sign_in_button{
 .button{
     background-image:none;
     background:black !important;
-    font:'Avenir Next' !important;
-    font-family:'Avenir Next' !important;
 }
 
 .aui label {
@@ -1183,7 +1183,7 @@ button.button.button-clear.mini-button {
     height: 28%;
 }
 .myTailgatetopImg {
-  height: 200px;
+  height: 155px;
   display: block;
   margin-left: 0px;
   margin-right: 0px; 
@@ -1928,7 +1928,7 @@ div .extra-right-supply{
   color: white;
   border-radius: 2px 2px 0 0;
   width: 100%;  
-  max-width: 284px; }
+  max-width: 258px; }
 
 #iw-container #iw-content {
   text-align: center;
@@ -1939,8 +1939,8 @@ div .extra-right-supply{
   background: #ffffff;
   color: #000000;
   position: fixed;
-  max-width: 284px;
-  width: 100%;
+  width: 100%;  
+  max-width: 258px;
   overflow: hidden;
    }
 .iw-fixed-title{
@@ -1973,7 +1973,7 @@ div .extra-right-supply{
 	  overflow: hidden;
 	  text-overflow: ellipsis;
 	  min-width: 0;
-	  max-width: 228px;
+	  max-width: 199px;
    }
 
 .iw-sub-title1 { 
@@ -2700,7 +2700,7 @@ div .manage_event_default_Image{
     width: 36px !important;
     height: 32px !important;
     margin-top: -4px;
-    margin-left:15px;
+    margin-left:17px;
 }
 
 .ml0 {
@@ -2712,13 +2712,13 @@ div .manage_event_default_Image{
 }
 
 .text_div {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    min-width: 0;
-    max-width: 262px;
-    width: 67%;
-    font-size: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 221px;
+  width: 60%;
+  font-size: 10px;
    }
 
     .placedetail_div{
@@ -2845,8 +2845,7 @@ i.icon.ion-chatbox{
         position:absolute;
         bottom: 45px;
         right: 0;
-
-         float:right;
+        float:right;
         text-decoration: none;
         padding-top: 6px;
         font-size: 16px;
