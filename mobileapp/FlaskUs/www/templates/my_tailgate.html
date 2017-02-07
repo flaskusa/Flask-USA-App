@@ -5,6 +5,7 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content overflow-scroll="false">
+        
         <a class="item item-full item-icon-left iconLeft" data-ng-click="addMyTailgate()">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">CREATE NEW TAILGATE</p>
@@ -28,8 +29,8 @@
                 </div>
                 <ion-option-button class="button-assertive icon ion-edit" ng-class="{disablebutton: data.isAdmin=='0'}" ng-click="editTailgate(data.tailgateId,$index);"></ion-option-button>
                 <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveTailgate(data.tailgateId,$index);"></ion-option-button>
-                <ion-option-button class="button-assertive icon ion-ios-copy" ng-click="copyList(data)"></ion-option-button>
+                <ion-option-button class="button-assertive icon ion-ios-copy" ng-click="cloneTailgate(data.tailgateId,$index)"></ion-option-button>
             </ion-item>
         </ion-list>
-    </ion-content>
+</ion-content>
 </ion-view>
