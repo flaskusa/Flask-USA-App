@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('my_tailgateCtrl', my_tailgateCtrl);
 
-    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate', '$cookies','SERVER','$ionicPopup'];
+    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate', '$cookies', 'SERVER', '$ionicPopup', '$ionicLoading'];
 
     /* @ngInject */
-    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies,SERVER,$ionicPopup) {
+    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies, SERVER, $ionicPopup, $ionicLoading) {
         var self = this;
         $scope.myTailgate = [];
         $cookies.remove("editUserTailgate");
@@ -15,7 +15,8 @@
         var userResponse = $cookies.getObject('CurrentUser');
         var UserId = userResponse.data.userId;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
-         $scope.allTailgate = [];
+        $scope.allTailgate = [];
+        $scope.copiedTailgates = [];
         getAlltailgates();
         $scope.goBack = function () {
             $state.go("app.user_navigation_menu");
@@ -85,15 +86,24 @@
                 } else {
                 }
             });
-
-
-
-
-
         }
         $scope.addMyTailgate = function () {
             $cookies.put("currtailGateId", "0");
             $state.go("app.add_my_tailgate");
+        }
+
+        $scope.setTailgateListId = function (selectedTailgateList) {
+            TailgateService.selectedTailgateList = selectedTailgateList;
+
+        }
+
+        $scope.cloneTailgate = function (tailgateId) {
+            TailgateService.copyTailgate(tailgateId).then(function (respData) {
+                $scope.copiedTailgates = respData.data;
+                $ionicLoading.show({ template: 'Tailgate Copied Successfully', noBackdrop: false, duration: 2000 });
+                $scope.allTailgate.push($scope.copiedTailgates);
+            });
+           
         }
     }
 })();

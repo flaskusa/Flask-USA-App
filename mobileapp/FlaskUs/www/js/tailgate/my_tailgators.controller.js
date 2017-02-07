@@ -3,14 +3,15 @@
     angular.module('flaskApp')
         .controller('mytailgatorsCtrl', mytailgatorsCtrl);
 
-    mytailgatorsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService','$cookies','$ionicModal','$flaskUtil','UserService','$localStorage','$ionicPopup'];
+    mytailgatorsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicModal', '$flaskUtil', 'UserService', '$localStorage', '$ionicPopup', '$ionicLoading'];
 
     /* @ngInject */
-    function mytailgatorsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies,$ionicModal,$flaskUtil,UserService,$localStorage,$ionicPopup) {
+    function mytailgatorsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicModal, $flaskUtil, UserService, $localStorage, $ionicPopup, $ionicLoading) {
         $scope.myTailgaters = [];
         $scope.myFriends = [];
         $scope.friendsToInvite=[];
-        $scope.isTailgateAdmin=false;
+        $scope.isTailgateAdmin = false;
+        $scope.role = 0;
         var userDetail=$cookies.getObject('CurrentUser');
         var userId=userDetail.data.userId;
         $ionicModal.fromTemplateUrl('templates/modal.html', {
@@ -201,6 +202,17 @@
             })           
         };
 
+        $scope.changeTailgaterRole = function (currUserId) {
+            if (currUserId != userId) {
+                TailgateService.addTailgateAdmin(currUserId, tailGateId).then(function (respData) {
+                    $scope.role = respData.data;
+                    console.log($scope.role)
+                });
+            }
+            else {
+                $ionicLoading.show({ template: 'You cannot change the role of Tailgate Admin!', noBackdrop: false, duration: 2000 });
+            }
+        }
         getTailgaters();
 
     }

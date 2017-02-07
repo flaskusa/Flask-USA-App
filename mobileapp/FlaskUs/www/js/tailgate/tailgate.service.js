@@ -52,7 +52,6 @@
         });
 
     TailgateService.$inject = ['$http', 'SERVER', '$q'];
-
     function TailgateService($http, SERVER, $q) {
         var allTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/add-tailgate-info";
         var myTailgatesURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-my-tailgate";
@@ -95,7 +94,9 @@
         var getTailgateLogoURL = 'flask-user-tailgate-portlet.tailgateinfo/get-tailgate-logo';
         var removeTailgateLogoURL = 'flask-user-tailgate-portlet.tailgateinfo/delete-tailgate-logo';
         var deleteTailgateImageURL = '/flask-user-tailgate-portlet.tailgateimages/delete-tailgate-image-by-tailgate-image-id';
-        var deleteTailgateUserUrl='/flask-user-tailgate-portlet.tailgateusers/delete-tailgate-user'
+        var deleteTailgateUserUrl = '/flask-user-tailgate-portlet.tailgateusers/delete-tailgate-user';
+        var copyTailgateURL = 'flask-user-tailgate-portlet.tailgateinfo/copy-tailgate';
+        var addTailgateAdminURL = 'flask-user-tailgate-portlet.tailgateusers/update-tailgate-user-role';
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -132,7 +133,9 @@
             removeTailgateLogo: removeTailgateLogo,
             deleteTailgateImageByImageId: deleteTailgateImageByImageId,
             deleteTailgateMarker: deleteTailgateMarker,
-            deleteTailgateUser:deleteTailgateUser
+            deleteTailgateUser: deleteTailgateUser,
+            copyTailgate: copyTailgate,
+            addTailgateAdmin: addTailgateAdmin
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -601,6 +604,34 @@
         function removeTailgateLogo(tailgateId) {
             return $http.get(SERVER.url + removeTailgateLogoURL, {
                 params: {
+                    'tailgateId': tailgateId
+                }
+            })
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+        function copyTailgate(tailgateId) {
+            return $http.get(SERVER.url + copyTailgateURL, {
+                params: {
+                    'tailgateId': tailgateId
+                }
+            })
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+
+        function addTailgateAdmin(userId, tailgateId) {
+            return $http.get(SERVER.url + addTailgateAdminURL, {
+                params: {
+                    'userId':userId,
                     'tailgateId': tailgateId
                 }
             })
