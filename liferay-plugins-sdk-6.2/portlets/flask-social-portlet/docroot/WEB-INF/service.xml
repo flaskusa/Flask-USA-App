@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+ <?xml version="1.0"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 
 <service-builder package-path="com.liferay.contacts">
@@ -81,10 +81,51 @@
 			<finder-column name="messageId" />
 		</finder>
     </entity>
-	<exceptions>
-		<exception>DuplicateEntryEmailAddress</exception>
-		<exception>EntryEmailAddress</exception>
-		<exception>EntryFullName</exception>
-		<exception>RequiredEntryEmailAddress</exception>
-	</exceptions>
+    <entity name="FlaskUserDeviceRegistration" local-service="true" cache-enabled="false">
+        <column name="userDeviceRegistrationId" type="long" primary="true"></column>
+        <column name="userId" type="long"></column>
+        <column name="userEmail" type="String"></column>
+        <column name="devicePlatform" type="string"></column>
+        <column name="deviceDetails" type="String"></column>
+        <column name="deviceToken" type="String"></column>
+        <column name="registrationTime" type="Date"></column>        
+        <column name="active" type="boolean"></column>
+        <column name="lastNotificationTime" type="Date"></column>
+        <column name="lastNotificationMsg" type="String"></column>
+        <finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="userEmail" return-type="Collection">
+			<finder-column name="userEmail" />
+		</finder>
+		<finder name="deviceToken" return-type="Collection">
+			<finder-column name="deviceToken" />
+		</finder>
+    </entity>
+    <entity name="DeviceAwsEndpoint" local-service="true" cache-enabled="false">
+        <column name="deviceEndPointId" type="long" primary="true"></column>        
+        <column name="awsEndpoint" type="String"></column>        
+        <column name="userDeviceRegistrationId" type="long"></column>
+		<finder name="endpointsByRegistrationId" return-type="Collection">
+			<finder-column name="userDeviceRegistrationId" />
+		</finder>
+    </entity>
+    <entity name="NotificationAuditLog" local-service="true" cache-enabled="false">
+        <column name="notificationAuditLogId" type="long" primary="true"></column>
+        <column name="senderEmail" type="String"></column>
+        <column name="receiverEmail" type="String"></column>        
+        <column name="messageReason" type="String"></column>        
+        <column name="message" type="String"></column>        
+        <column name="notificationTime" type="Date"></column>           
+        <order by="desc">
+			<order-column name="notificationTime" case-sensitive="false" />
+		</order>             
+		<finder name="notificationBySenderEmail" return-type="Collection">
+			<finder-column name="senderEmail" />
+		</finder>
+		<finder name="notificationReceiverEmail" return-type="Collection">
+			<finder-column name="receiverEmail" />
+		</finder>
+    </entity>
+    
 </service-builder>
