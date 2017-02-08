@@ -1272,7 +1272,7 @@ button.button.button-block.button-positive.invite_friend i{
 }
 
 h2.tailgater_name{
-    text-align: center;
+    margin-left:14px;
     margin-top: 4%;
     font-weight: bold;
 }
@@ -2765,8 +2765,7 @@ div .manage_event_default_Image{
   border-left: solid 3.5px #d3d3d3;
   border-right: solid 3.5px #d3d3d3;
 }
-span.badge.span_icon_extraright {
-  right: 22px; }
+
 .inpuBorderEdit{
   border: 2.5px solid #d3d3d3;
   border-left: solid 3.5px #d3d3d3;
@@ -2865,3 +2864,15 @@ div.post-content-Request {
     font-weight: 600;
     width: 215px; }
 	
+.icon.option_icon:before{
+    font-size: 36px;
+    margin-right: -3px;
+    margin-left: -13px;
+    margin-top:2px;
+}
+
+
+span.badge.span_icon_right {
+  right: -19px;
+  margin-top: -18px; 
+}
