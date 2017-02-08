@@ -16,11 +16,10 @@
                 <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                 <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                 <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>
-                <span class="badge span_icon span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
-
-            <ion-option-button ng-if="isTailgateAdmin==true" class="button-assertive icon ion-trash-a" ng-click="deleteTailgateUser(data.userId,$index)"></ion-option-button>
-            <ion-option-button ng-if="role==1" class="button-assertive icon ion-toggle-filled" ng-click="changeTailgaterRole(data.userId,$index);"></ion-option-button>
-            <ion-option-button ng-if="role==0" class="button-assertive icon ion-toggle" ng-click="changeTailgaterRole(data.userId,$index);"></ion-option-button>
+                <span class="badge span_icon span_icon_right">
+                    <a ng-if="isTailgateAdmin==true" class="item icon ion-trash-a option_icon" ng-click="deleteTailgateUser(data.userId,$index)"></a>
+                    <a class="item icon ion-toggle option_icon" ng-click="changeTailgaterRole(data.userId,$index)"></a>
+                </span>
             </ion-item>
       </ion-list>
         <script id="templates/modal.html" type="text/ng-template">
