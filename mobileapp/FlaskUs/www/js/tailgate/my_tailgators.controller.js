@@ -3,17 +3,18 @@
     angular.module('flaskApp')
         .controller('mytailgatorsCtrl', mytailgatorsCtrl);
 
-    mytailgatorsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicModal', '$flaskUtil', 'UserService', '$localStorage', '$ionicPopup', '$ionicLoading'];
+    mytailgatorsCtrl.$inject = ['$scope', '$rootScope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicModal', '$flaskUtil', 'UserService', '$localStorage', '$ionicPopup', '$ionicLoading'];
 
     /* @ngInject */
-    function mytailgatorsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicModal, $flaskUtil, UserService, $localStorage, $ionicPopup, $ionicLoading) {
+    function mytailgatorsCtrl($scope, $rootScope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicModal, $flaskUtil, UserService, $localStorage, $ionicPopup, $ionicLoading) {
         $scope.myTailgaters = [];
         $scope.myFriends = [];
-        $scope.friendsToInvite=[];
+        $scope.detail = [];
+        $scope.friendsToInvite = [];
         $scope.isTailgateAdmin = false;
-        $scope.role = 0;
-        var userDetail=$cookies.getObject('CurrentUser');
-        var userId=userDetail.data.userId;
+        $rootScope.role = '0';
+        var userDetail = $cookies.getObject('CurrentUser');
+        var userId = userDetail.data.userId;
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
         }).then(function (modal) {
@@ -24,20 +25,20 @@
         }
         var tailGateId = $cookies.get('currtailGateId');
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
-        $scope.imgUrl=SERVER.hostName + "c/document_library/get_file?uuid=";
+        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
 
 
-        $scope.deleteTailgateUser=function(currUserId,index){
+        $scope.deleteTailgateUser = function (currUserId, index) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete Member ?'
             });
-            confirmPopup.then(function(res) {
-                if(res) {
-                    if(currUserId!= userId) {
+            confirmPopup.then(function (res) {
+                if (res) {
+                    if (currUserId != userId) {
                         TailgateService.deleteTailgateUser(tailGateId, currUserId).then(function (response) {
                             $scope.myTailgaters.splice(index, 1)
                         })
-                    }else{
+                    } else {
                         $flaskUtil.alert("Tailgate admin can't be remove.")
                     }
                 } else {
@@ -52,28 +53,28 @@
         };
 
         $scope.isUserTailgateAdmin(tailGateId);
-        
+
 
         function getTailgaters() {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (response) {
-                $scope.myTailgaters=[]
+                $scope.myTailgaters = []
 
-                angular.forEach(response.data,function(value,key){
+                angular.forEach(response.data, function (value, key) {
                     haveProfilePic(value)
                 })
 
 
-                            });
+            });
 
-                getAllFriends();
+            getAllFriends();
         }
-        function haveProfilePic(memberDetail){
-            var PicExist=false
-            angular.forEach($localStorage["myFriendDetail"],function(value,key){
-                if(value.friendProfilePicUrl!=undefined){
-                    PicExist=true
-                    if(value.userId==memberDetail.userId){
-                        memberDetail.friendProfilePicUrl=value.friendProfilePicUrl
+        function haveProfilePic(memberDetail) {
+            var PicExist = false
+            angular.forEach($localStorage["myFriendDetail"], function (value, key) {
+                if (value.friendProfilePicUrl != undefined) {
+                    PicExist = true
+                    if (value.userId == memberDetail.userId) {
+                        memberDetail.friendProfilePicUrl = value.friendProfilePicUrl
 
                     }
                 }
@@ -81,20 +82,20 @@
 
 
             });
-            if(memberDetail.userId==userId || !isMemberMyFrnd(memberDetail)) {
+            if (memberDetail.userId == userId || !isMemberMyFrnd(memberDetail)) {
                 $scope.getUserProfile(memberDetail)
 
-            }else{
+            } else {
                 $scope.myTailgaters.push(memberDetail)
             }
         }
-        function isMemberMyFrnd(memberDetail){
-            var friend=false;
+        function isMemberMyFrnd(memberDetail) {
+            var friend = false;
 
 
             angular.forEach($localStorage["myFriendDetail"], function (value2, key) {
                 if (memberDetail.userId == value2.userId) {
-                    friend=true;
+                    friend = true;
                     return friend;
                 }
             })
@@ -105,26 +106,27 @@
 
         function getAllFriends() {
             TailgateService.getUserFrends().then(function (response) {
-                if($localStorage["myFriendDetail"].length==response.length){
-                    $scope.myFriends=$localStorage["myFriendDetail"];
+                if ($localStorage["myFriendDetail"].length == response.length) {
+                    $scope.myFriends = $localStorage["myFriendDetail"];
                 }
-                else{
-                    angular.forEach(response,function(value,key){
-                        if(value.portraitId>0) {
+                else {
+                    angular.forEach(response, function (value, key) {
+                        if (value.portraitId > 0) {
                             $scope.getUserProfile(value);
-                        }else{
+                        } else {
                             $scope.myFriends.push(value);
-                            if(userExistInLocal(value)==false){
+                            if (userExistInLocal(value) == false) {
                                 $localStorage["myFriendDetail"].push(value)
                             }
                         }
                     })
 
+                }
+            })
         }
-        })}
-        $scope.getUserProfile = function(UserDetail) {
-            UserService.getUserProfile(UserDetail.userId).then(function(res) {
-                if(UserDetail.portraitId!=undefined) {
+        $scope.getUserProfile = function (UserDetail) {
+            UserService.getUserProfile(UserDetail.userId).then(function (res) {
+                if (UserDetail.portraitId != undefined) {
                     if (res.data.fileEntryId != undefined) {
                         UserDetail.friendProfilePicUrl = $scope.imgUrl + res.data.uuid + "&groupId=" + res.data.groupId;
                         $scope.myFriends.push(UserDetail);
@@ -132,36 +134,37 @@
                         if (userExistInLocal(UserDetail) == false) {
                             $localStorage["myFriendDetail"].push(UserDetail);
                         }
-                    }else{
+                    } else {
                         if (userExistInLocal(UserDetail) == false) {
                             $localStorage["myFriendDetail"].push(UserDetail);
                         }
                     }
-                }else{if(res.data.fileEntryId != undefined) {
-                    UserDetail.friendProfilePicUrl = $scope.imgUrl + res.data.uuid + "&groupId=" + res.data.groupId;
-                    $scope.myTailgaters.push(UserDetail);
+                } else {
+                    if (res.data.fileEntryId != undefined) {
+                        UserDetail.friendProfilePicUrl = $scope.imgUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                        $scope.myTailgaters.push(UserDetail);
 
 
-                }else{
-                    $scope.myTailgaters.push(UserDetail);
+                    } else {
+                        $scope.myTailgaters.push(UserDetail);
+                    }
+
                 }
-
-                }
-            },function(err) {
+            }, function (err) {
             })
         };
-        function userExistInLocal(userDetail){
-            var exist=false;
-            angular.forEach($localStorage["myFriendDetail"],function(value,key){
-                if(value.userId==userDetail.userId){
-                    exist=true
+        function userExistInLocal(userDetail) {
+            var exist = false;
+            angular.forEach($localStorage["myFriendDetail"], function (value, key) {
+                if (value.userId == userDetail.userId) {
+                    exist = true
                 }
             })
             return exist;
         }
-        $scope.showModel=function(){
-            angular.forEach($scope.myFriends,function(value,key){
-                if(!(IsUserTailgateMember(value))){
+        $scope.showModel = function () {
+            angular.forEach($scope.myFriends, function (value, key) {
+                if (!(IsUserTailgateMember(value))) {
                     $scope.friendsToInvite.push(value)
                 }
             });
@@ -169,24 +172,24 @@
             $scope.modal.show();
 
         }
-        function IsUserTailgateMember(value){
-            var userExist=false;
-            angular.forEach($scope.myTailgaters,function(value2,key2){
-                if(value2.userId==value.userId){
-                    userExist=true;
+        function IsUserTailgateMember(value) {
+            var userExist = false;
+            angular.forEach($scope.myTailgaters, function (value2, key2) {
+                if (value2.userId == value.userId) {
+                    userExist = true;
                     return userExist
                 }
             });
             return userExist;
 
         }
-        $scope.hideModel=function(){
+        $scope.hideModel = function () {
             getTailgaters();
-            $scope.friendsToInvite=[];
+            $scope.friendsToInvite = [];
             $scope.modal.hide();
         }
 
-        $scope.addTailgateMembers = function(currUserData,index) {
+        $scope.addTailgateMembers = function (currUserData, index) {
             var addUserparams = {};
             addUserparams.groupId = 0;
             addUserparams.userId = currUserData.userId;
@@ -199,18 +202,19 @@
             TailgateService.addcurrentUser(addUserparams).then(function (respData) {
                 $scope.friendsToInvite.splice(index, 1);
 
-            })           
+            })
         };
 
-        $scope.changeTailgaterRole = function (currUserId) {
+        $scope.changeTailgaterRole = function (currUserId, index) {
             if (currUserId != userId) {
+                var tObj = $(".ion-toggle")[index];
+                $(tObj).toggleClass('ion-toggle-filled');
                 TailgateService.addTailgateAdmin(currUserId, tailGateId).then(function (respData) {
-                    $scope.role = respData.data;
-                    console.log($scope.role)
+                    $rootScope.role = respData.data;
                 });
             }
             else {
-                $ionicLoading.show({ template: 'You cannot change the role of Tailgate Admin!', noBackdrop: false, duration: 2000 });
+                $ionicLoading.show({ template: 'You cannot change the role of Tailgate Admin!', noBackdrop: false, duration: 3000 });
             }
         }
         getTailgaters();
