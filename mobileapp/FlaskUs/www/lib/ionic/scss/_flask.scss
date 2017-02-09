@@ -647,7 +647,7 @@ button.button.button-icon.button-clear.ion-search{display:none;}
 }
 
 .my-side-menu .item h3 {
-    margin: 22px 0px 0px 0px;
+    margin: 22px 0px 6px 0px;
     font-size: 14px;
     margin-top: 0;
     color: orange;
@@ -2868,11 +2868,56 @@ div.post-content-Request {
     font-size: 36px;
     margin-right: -3px;
     margin-left: -13px;
-    margin-top:2px;
+    margin-top:1px;
 }
 
 
 span.badge.span_icon_right {
   right: -19px;
   margin-top: -18px; 
+}
+
+.notificationCount{
+    margin-right: 4px;
+    margin-top: 7px;
+    color: #F89734;
+    text-decoration:none;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+a.menu_notification{
+    text-decoration:none;
+    color:#F89734;
+    background-color:black;
+    font-size:20px;
+    margin-bottom:6px;
+}
+
+label.item.item-icon-left.item-checkbox-right.item.item-checkbox.tailgate_admin{
+    width: 3pc;
+    margin-left: -21px;
+    border-top: transparent;
+    border-left: transparent;
+    margin-top: -18px;
+}
+
+.item-checkbox .checkbox{
+        right: 18px !important;
+}
+
+span.badgeCount{
+    position:absolute;
+    margin-top: -32px;
+    font-size: 14px;
+    border-radius: 9px;
+    width: 18px;
+    padding-left: 5px;
+    height: 17px;
+    color: #F89734;
+    background-color: white;
+}
+
+.bar .buttons-right span{
+        margin-left: 9px !important;
 }
