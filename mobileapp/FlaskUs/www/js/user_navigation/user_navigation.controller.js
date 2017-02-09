@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('user_navigation_menuCtrl', user_navigation_menuCtrl);
 
-    user_navigation_menuCtrl.$inject = ['$scope','$state','$localStorage','FriendsNotificationService','$timeout','$cookies'];
+    user_navigation_menuCtrl.$inject = ['$scope','$rootScope', '$state','$localStorage','FriendsNotificationService','$timeout','$cookies'];
 
     /* @ngInject */
-    function user_navigation_menuCtrl($scope, $state,$localStorage,FriendsNotificationService,$timeout,$cookies) {
+    function user_navigation_menuCtrl($scope, $rootScope, $state,$localStorage,FriendsNotificationService,$timeout,$cookies) {
         var self = this;
         $localStorage["myFriendDetail"] = [];
         $scope.flag=[];
@@ -14,8 +14,8 @@
         $scope.goToFriendPage=false;
         $scope.goToRequestPage=false;
 
-        $scope.totalMessageNotification=0;
-        $scope.totalRequestNotification=0;
+        $rootScope.totalMessageNotification=0;
+        $rootScope.totalRequestNotification = 0;
          $scope.isUserLogin=function() {
              $scope.myTimeOut = $timeout(function () {
                  var userDetail = $cookies.getObject('CurrentUser');
@@ -43,8 +43,8 @@
                         $scope.flag.push($scope.allMessages[i].messageId);
                     }
                 }
-                $scope.totalMessageNotification = parseInt($scope.flag.length);
-                $scope.totalRequestNotification = response1;
+                $rootScope.totalMessageNotification = parseInt($scope.flag.length);
+                $rootScope.totalRequestNotification = response1;
 
             });
             });
