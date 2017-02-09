@@ -18,7 +18,8 @@
                 <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>
                 <span class="badge span_icon span_icon_right">
                     <a ng-if="isTailgateAdmin==true" class="item icon ion-trash-a option_icon" ng-click="deleteTailgateUser(data.userId,$index)"></a>
-                    <a class="item icon ion-toggle option_icon" ng-click="changeTailgaterRole(data.userId,$index)"></a>
+                    <ion-checkbox class="item item-icon-left item-checkbox-right tailgate_admin" ng-click="changeTailgaterRole(data.userId);" ng-model="data.isAdmin" ng-checked="data.isAdmin=='1'"><span style="margin-left: -99px;font-size: 12px;color: #F89734;">Admin</span>
+                    </ion-checkbox>
                 </span>
             </ion-item>
       </ion-list>

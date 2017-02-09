@@ -26,6 +26,8 @@
                     <img ng-if="userProfileUrl.length > 1" class="default_img" ng-src="{{userProfileUrl}}" onError="this.src = 'img/default-profilepic.png';">
                     <h2>{{userName}}</h2>
                     <h3>{{userEmailId}}</h3>
+                    <a href="#/app/my_friends_tab/notification_tab" ng-if="totalMessageNotification>0" class="icon-left ion-email menu_notification" style="margin-top:10px !important;" menu-close><span style="font-size:20px;">{{totalMessageNotification}}</span></a>
+                    <a href="#/app/my_friends_tab/notification_tab" ng-if="totalRequestNotification>0" class="icon-left ion-android-notifications menu_notification" menu-close>{{totalRequestNotification}} Friend Requests</a>
                 </div>
                     
           
@@ -36,7 +38,7 @@
                 </div>
                 <a href="#/app/events" class="item icon ion-star menu_icon" menu-close>EVENT LIST</a>
                 <div ng-show="show_login">
-                    <a href="#/app/supplies//" class="item icon ion-star menu_icon" menu-close>SUPPLIES</a>
+                    <a href="#/app/supplies" class="item icon ion-star menu_icon" menu-close>SUPPLIES</a>
                 </div>
                 <div ng-show="!show_login">
                     <a href="#/app/login" class="item icon icon-left ion-unlocked menu_icon" menu-close ng-click="login_form.$setPristine();">LOGIN</a>
