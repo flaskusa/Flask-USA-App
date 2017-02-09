@@ -7,7 +7,9 @@ angular.module('flaskApp.controllers', [])
     */
 
     $scope.doLogout = function () {
-        $rootScope.show_login = false;       
+        $rootScope.show_login = false;
+        $rootScope.totalMessageNotification = 0;
+        $rootScope.totalRequestNotification = 0;
         $cookies.remove('CurrentUser');
         $rootScope.userName ='';
         $rootScope.userEmailId ='';
