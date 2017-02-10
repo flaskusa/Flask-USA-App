@@ -67,6 +67,7 @@
             });
 
             getAllFriends();
+            getTailgateUser();
         }
         function haveProfilePic(memberDetail) {
             var PicExist = false
@@ -205,16 +206,25 @@
             })
         };
 
+        function getTailgateUser(){
+            TailgateService.getTailgate(tailGateId).then(function (respData) {
+                $scope.tUserId=respData.data.userId;
+            });
+        }
         $scope.changeTailgaterRole = function (currUserId, index) {
-            if (currUserId != userId) {
-                var tObj = $(".ion-toggle")[index];
-                $(tObj).toggleClass('ion-toggle-filled');
-                TailgateService.addTailgateAdmin(currUserId, tailGateId).then(function (respData) {
-                    $rootScope.role = respData.data;
-                });
+            console.log($scope.tUserId);
+            if (currUserId != $scope.tUserId) {
+                if (userId == $scope.tUserId) {
+                    TailgateService.addTailgateAdmin(currUserId, tailGateId).then(function (respData) {
+                        $rootScope.role = respData.data;
+                    });
+                }
+                else {
+                    $ionicLoading.show({ template: 'You do not have the permission to change the role!', noBackdrop: false, duration: 3000 });
+                }
             }
             else {
-                $ionicLoading.show({ template: 'You cannot change the role of Tailgate Admin!', noBackdrop: false, duration: 3000 });
+                $ionicLoading.show({ template: 'You cannot chage the role of Tailgate Admin!', noBackdrop: false, duration: 3000 });
             }
         }
         getTailgaters();
