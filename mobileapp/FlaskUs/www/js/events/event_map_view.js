@@ -698,6 +698,13 @@
             tempObject.show = false;
             tempObject.isIconVisibleOnClick = "true";
             var templateName;
+            var shortDesc;
+            if (tempObject.infoShortDesc == null || tempObject.infoShortDesc == "") {
+                shortDesc = "15 min walk to stadium";
+            }
+            else {
+                shortDesc = tempObject.infoShortDesc;
+            }
             if (tempObject.infoTypeCategoryName == "Parking") {
                 templateName = "markerParkingInfo.tpl.html";
                 tempObject.templateParameter = {
@@ -705,8 +712,8 @@
                     infoTitle: tempObject.infoTitle,
                     cost: "$" + tempObject.cost,
                     addrLine1: tempObject.addrLine1,
-                    infoDesc1: "15 min walk to stadium",
-                    subTitle: "$" + tempObject.cost + " | " + "15 min walk to stadium",
+                    infoShortDesc: shortDesc,
+                    subTitle: "$" + tempObject.cost + " | " + shortDesc,
                     infoDesc: tempObject.infoDesc,
                     phone: tempObject.phone,
                     type: "FLASK"
