@@ -2879,7 +2879,7 @@ span.badge.span_icon_right {
 
 .notificationCount{
     margin-right: 4px;
-    margin-top: 7px;
+    margin-top: 10px;
     color: #F89734;
     text-decoration:none;
     font-size: 24px;
@@ -2892,6 +2892,12 @@ a.menu_notification{
     background-color:black;
     font-size:20px;
     margin-bottom:6px;
+    margin-top:10px !important;
+}
+
+.menu_span{
+    font-size:20px;
+    margin-right:19px;
 }
 
 label.item.item-icon-left.item-checkbox-right.item.item-checkbox.tailgate_admin{
