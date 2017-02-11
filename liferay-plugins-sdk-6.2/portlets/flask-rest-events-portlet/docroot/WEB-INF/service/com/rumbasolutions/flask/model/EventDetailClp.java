@@ -1076,17 +1076,37 @@ public class EventDetailClp extends BaseModelImpl<EventDetail>
 
 	@Override
 	public int compareTo(EventDetail eventDetail) {
-		long primaryKey = eventDetail.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		if (getInfoTypeId() < eventDetail.getInfoTypeId()) {
+			value = -1;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+		else if (getInfoTypeId() > eventDetail.getInfoTypeId()) {
+			value = 1;
 		}
 		else {
-			return 0;
+			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		if (getInfoTypeCategoryId() < eventDetail.getInfoTypeCategoryId()) {
+			value = -1;
+		}
+		else if (getInfoTypeCategoryId() > eventDetail.getInfoTypeCategoryId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	@Override

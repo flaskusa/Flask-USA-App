@@ -96,7 +96,9 @@ public class EventDetailPersistenceImpl extends BasePersistenceImpl<EventDetail>
 			EventDetailModelImpl.FINDER_CACHE_ENABLED, EventDetailImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByEventId",
 			new String[] { Long.class.getName() },
-			EventDetailModelImpl.EVENTID_COLUMN_BITMASK);
+			EventDetailModelImpl.EVENTID_COLUMN_BITMASK |
+			EventDetailModelImpl.INFOTYPEID_COLUMN_BITMASK |
+			EventDetailModelImpl.INFOTYPECATEGORYID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_EVENTID = new FinderPath(EventDetailModelImpl.ENTITY_CACHE_ENABLED,
 			EventDetailModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEventId",
@@ -585,7 +587,8 @@ public class EventDetailPersistenceImpl extends BasePersistenceImpl<EventDetail>
 			EventDetailModelImpl.FINDER_CACHE_ENABLED, EventDetailImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByEventInfoType",
 			new String[] { Long.class.getName() },
-			EventDetailModelImpl.INFOTYPEID_COLUMN_BITMASK);
+			EventDetailModelImpl.INFOTYPEID_COLUMN_BITMASK |
+			EventDetailModelImpl.INFOTYPECATEGORYID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_EVENTINFOTYPE = new FinderPath(EventDetailModelImpl.ENTITY_CACHE_ENABLED,
 			EventDetailModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByEventInfoType",

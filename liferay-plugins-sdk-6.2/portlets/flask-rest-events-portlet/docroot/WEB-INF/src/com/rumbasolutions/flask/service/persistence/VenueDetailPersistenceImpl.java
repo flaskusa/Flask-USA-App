@@ -96,7 +96,9 @@ public class VenueDetailPersistenceImpl extends BasePersistenceImpl<VenueDetail>
 			VenueDetailModelImpl.FINDER_CACHE_ENABLED, VenueDetailImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByVenueId",
 			new String[] { Long.class.getName() },
-			VenueDetailModelImpl.VENUEID_COLUMN_BITMASK);
+			VenueDetailModelImpl.VENUEID_COLUMN_BITMASK |
+			VenueDetailModelImpl.INFOTYPEID_COLUMN_BITMASK |
+			VenueDetailModelImpl.INFOTYPECATEGORYID_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_VENUEID = new FinderPath(VenueDetailModelImpl.ENTITY_CACHE_ENABLED,
 			VenueDetailModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByVenueId",

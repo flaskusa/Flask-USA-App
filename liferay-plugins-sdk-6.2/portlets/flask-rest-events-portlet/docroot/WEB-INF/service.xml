@@ -121,6 +121,13 @@
         <column name="cost" type="double" />
         <column name="hoursOfOperation" type="String" />
         <column name="showDescription" type="boolean"></column>
+        
+        <!-- Order -->
+		<order by="asc">
+			<order-column name="infoTypeId"/>
+			<order-column name="infoTypeCategoryId"/>
+		</order>
+		
         		<!-- Finder methods -->
         <finder name="EventId" return-type="Collection">
 			<finder-column name="eventId" />
@@ -301,6 +308,13 @@
         <column name="cost" type="double" />
         <column name="hoursOfOperation" type="String" />
         <column name="showDescription" type="boolean"></column>
+        
+        <!-- Order -->
+		<order by="asc">
+			<order-column name="infoTypeId"/>
+			<order-column name="infoTypeCategoryId"/>
+		</order>
+
 		<!-- Finder methods -->
         <finder name="VenueId" return-type="Collection">
 			<finder-column name="venueId" />

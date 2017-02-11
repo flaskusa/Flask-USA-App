@@ -98,8 +98,8 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		};
 	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueDetail (venueDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName VARCHAR(75) null,infoTitle VARCHAR(100) null,infoShortDesc VARCHAR(100) null,infoDesc TEXT null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(100) null,countryId LONG,countryName VARCHAR(100) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,mobileAppName VARCHAR(75) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null,showDescription BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_VenueDetail";
-	public static final String ORDER_BY_JPQL = " ORDER BY venueDetail.venueDetailId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_VenueDetail.venueDetailId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY venueDetail.infoTypeId ASC, venueDetail.infoTypeCategoryId ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_VenueDetail.infoTypeId ASC, flaskevents_VenueDetail.infoTypeCategoryId ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -113,7 +113,8 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 				"value.object.column.bitmask.enabled.com.rumbasolutions.flask.model.VenueDetail"),
 			true);
 	public static long VENUEID_COLUMN_BITMASK = 1L;
-	public static long VENUEDETAILID_COLUMN_BITMASK = 2L;
+	public static long INFOTYPEID_COLUMN_BITMASK = 2L;
+	public static long INFOTYPECATEGORYID_COLUMN_BITMASK = 4L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -528,6 +529,8 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public void setInfoTypeId(long infoTypeId) {
+		_columnBitmask = -1L;
+
 		_infoTypeId = infoTypeId;
 	}
 
@@ -555,6 +558,8 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public void setInfoTypeCategoryId(long infoTypeCategoryId) {
+		_columnBitmask = -1L;
+
 		_infoTypeCategoryId = infoTypeCategoryId;
 	}
 
@@ -931,17 +936,37 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public int compareTo(VenueDetail venueDetail) {
-		long primaryKey = venueDetail.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		if (getInfoTypeId() < venueDetail.getInfoTypeId()) {
+			value = -1;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+		else if (getInfoTypeId() > venueDetail.getInfoTypeId()) {
+			value = 1;
 		}
 		else {
-			return 0;
+			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		if (getInfoTypeCategoryId() < venueDetail.getInfoTypeCategoryId()) {
+			value = -1;
+		}
+		else if (getInfoTypeCategoryId() > venueDetail.getInfoTypeCategoryId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	@Override

@@ -400,6 +400,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		List<VenueDetail> venueDetails = null;
 		try{
 			venueDetails = VenueDetailUtil.findByVenueId(venueId);
+
 			venueDetails = FlaskUtil.setNamesForVenueDetail(venueDetails);
 			
 		}catch(Exception ex){

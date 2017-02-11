@@ -98,8 +98,8 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 		};
 	public static final String TABLE_SQL_CREATE = "create table flaskevents_EventDetail (eventDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,eventId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName VARCHAR(75) null,infoTitle VARCHAR(100) null,infoShortDesc VARCHAR(100) null,infoDesc TEXT null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(75) null,countryId LONG,countryName VARCHAR(75) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,mobileAppName VARCHAR(75) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null,showDescription BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_EventDetail";
-	public static final String ORDER_BY_JPQL = " ORDER BY eventDetail.eventDetailId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_EventDetail.eventDetailId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY eventDetail.infoTypeId ASC, eventDetail.infoTypeCategoryId ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_EventDetail.infoTypeId ASC, flaskevents_EventDetail.infoTypeCategoryId ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -115,7 +115,6 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 	public static long EVENTID_COLUMN_BITMASK = 1L;
 	public static long INFOTYPECATEGORYID_COLUMN_BITMASK = 2L;
 	public static long INFOTYPEID_COLUMN_BITMASK = 4L;
-	public static long EVENTDETAILID_COLUMN_BITMASK = 8L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -530,7 +529,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public void setInfoTypeId(long infoTypeId) {
-		_columnBitmask |= INFOTYPEID_COLUMN_BITMASK;
+		_columnBitmask = -1L;
 
 		if (!_setOriginalInfoTypeId) {
 			_setOriginalInfoTypeId = true;
@@ -569,7 +568,7 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public void setInfoTypeCategoryId(long infoTypeCategoryId) {
-		_columnBitmask |= INFOTYPECATEGORYID_COLUMN_BITMASK;
+		_columnBitmask = -1L;
 
 		if (!_setOriginalInfoTypeCategoryId) {
 			_setOriginalInfoTypeCategoryId = true;
@@ -957,17 +956,37 @@ public class EventDetailModelImpl extends BaseModelImpl<EventDetail>
 
 	@Override
 	public int compareTo(EventDetail eventDetail) {
-		long primaryKey = eventDetail.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		if (getInfoTypeId() < eventDetail.getInfoTypeId()) {
+			value = -1;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+		else if (getInfoTypeId() > eventDetail.getInfoTypeId()) {
+			value = 1;
 		}
 		else {
-			return 0;
+			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		if (getInfoTypeCategoryId() < eventDetail.getInfoTypeCategoryId()) {
+			value = -1;
+		}
+		else if (getInfoTypeCategoryId() > eventDetail.getInfoTypeCategoryId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	@Override

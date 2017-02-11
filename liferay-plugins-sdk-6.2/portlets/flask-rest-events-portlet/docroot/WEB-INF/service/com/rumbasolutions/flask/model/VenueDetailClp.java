@@ -1076,17 +1076,37 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public int compareTo(VenueDetail venueDetail) {
-		long primaryKey = venueDetail.getPrimaryKey();
+		int value = 0;
 
-		if (getPrimaryKey() < primaryKey) {
-			return -1;
+		if (getInfoTypeId() < venueDetail.getInfoTypeId()) {
+			value = -1;
 		}
-		else if (getPrimaryKey() > primaryKey) {
-			return 1;
+		else if (getInfoTypeId() > venueDetail.getInfoTypeId()) {
+			value = 1;
 		}
 		else {
-			return 0;
+			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		if (getInfoTypeCategoryId() < venueDetail.getInfoTypeCategoryId()) {
+			value = -1;
+		}
+		else if (getInfoTypeCategoryId() > venueDetail.getInfoTypeCategoryId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
 	}
 
 	@Override
