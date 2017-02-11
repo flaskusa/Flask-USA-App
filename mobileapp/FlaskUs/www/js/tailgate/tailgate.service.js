@@ -97,6 +97,7 @@
         var deleteTailgateUserUrl = '/flask-user-tailgate-portlet.tailgateusers/delete-tailgate-user';
         var copyTailgateURL = 'flask-user-tailgate-portlet.tailgateinfo/copy-tailgate';
         var addTailgateAdminURL = 'flask-user-tailgate-portlet.tailgateusers/update-tailgate-user-role';
+        var deleteTailgateSupplyItemURL = "/flask-user-tailgate-portlet.supplyitem/delete-supply-item";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -135,7 +136,8 @@
             deleteTailgateMarker: deleteTailgateMarker,
             deleteTailgateUser: deleteTailgateUser,
             copyTailgate: copyTailgate,
-            addTailgateAdmin: addTailgateAdmin
+            addTailgateAdmin: addTailgateAdmin,
+            deleteTailgateSupplyItem: deleteTailgateSupplyItem
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -633,6 +635,20 @@
                 params: {
                     'userId':userId,
                     'tailgateId': tailgateId
+                }
+            })
+                .then(function success(response) {
+                    return response;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+
+        function deleteTailgateSupplyItem(supplyItemId) {
+            return $http.get(SERVER.url + deleteTailgateSupplyItemURL, {
+                params: {
+                    'supplyItemId': supplyItemId
                 }
             })
                 .then(function success(response) {

@@ -967,5 +967,19 @@ getTailgateMarkers(tailgateId);
        
         $scope.initialize();
 
+        $scope.leaveSupplyItem = function (supplyItemId, index) {
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Supply Item?'
+            });
+            confirmPopup.then(function (res) {
+                if (res) {
+                    TailgateService.deleteTailgateSupplyItem(supplyItemId).then(function (respData) {
+                        $scope.selectedSupplyListItems.splice(index, 1);
+                    });
+
+                } else {
+                }
+            });
+        }
     }
 })();
