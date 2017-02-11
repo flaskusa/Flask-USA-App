@@ -1713,6 +1713,12 @@ position:initial !important;
 a.item.item-full.item-icon-left.attendees{padding-top:58px;}
 .emailText {
   color: darkorange;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 246px;
+  width: 100%;
 }
 
 .friend_group_name{
@@ -1982,6 +1988,7 @@ div .extra-right-supply{
   overflow: hidden;
   text-overflow: ellipsis;  
   max-width: 160px; 
+  min-width: 0;
   width: 100%;
   }
 .gm-style-iw {
@@ -2926,4 +2933,13 @@ span.badgeCount{
 
 .bar .buttons-right span{
         margin-left: 9px !important;
+}
+
+.supply_content1{
+    background: inherit;
+    border: none;
+    max-width: 48%;
+    margin-left: 179px;
+    margin-top: -12%;
+    padding-top:9px;
 }
