@@ -194,6 +194,6 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 				groups: ['infoTypeId'],
 				groupsexpandedbydefault:false,
 				sortable:false,
-				pagesize: 20
+				pagesize: 1000
 			});
 }

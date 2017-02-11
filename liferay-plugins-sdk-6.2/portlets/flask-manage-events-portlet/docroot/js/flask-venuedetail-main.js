@@ -18,7 +18,7 @@ function addDetailsClickHandlers() {
 											_venueDetailModel.MESSAGES.DETAIL_DUPLICATE);
 						} else {
 							if ($('#venueDetailsForm').jqxValidator('validate')) {
-								if ($('#addrLine11').val() == undefined) {
+								if ($('#addrLine1').val() == undefined) {
 									$('#lat').val(0);
 									$('#lng').val(0);
 									saveVenueDetails();
@@ -30,7 +30,7 @@ function addDetailsClickHandlers() {
 												.geocode(
 														{
 															address : $(
-																	'#addrLine11')
+																	'#addrLine1')
 																	.val(),
 															region : 'no'
 														},
@@ -60,7 +60,10 @@ function addDetailsClickHandlers() {
 																							.lng());
 																}
 															} catch (ex) {
-																console.log(ex);
+																_flaskLib
+																.showErrorMessage(
+																		'action-msg',
+																		_eventDetailModel.MESSAGES.GOCODING_ERROR);
 															} finally {
 																saveVenueDetails();
 															}
@@ -155,7 +158,7 @@ $(".infoTypeCat").click(
 			$("#infoTypeId").val(InfoTypeCd);
 			createDetailsTable({}, _venueDetailModel.DATA_MODEL.VENUEDETAILS,
 					$('#gridDetails'), "actionMenuDetails", "Edit",
-					contextMenuHandlerDetails, [ "Images" ],
+					contextMenuHandlerDetails, [ "Details", "Images" ],
 					_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
 			loadVenueDetailsData($('#venueForm #venueId').val());
 
@@ -267,12 +270,9 @@ function saveVenueDetails() {
 					formData.infoDesc = "";
 				}
 				formData.venueId = $('#venueForm #venueId').val();
-				if ($('#addrLine11').val() == undefined) {
+				if ($('#addrLine1').val() == undefined) {
 					formData.addrLine1 = "";
-				} else {
-					formData.addrLine1 = $('#addrLine11').val();
 				}
-				;
 				formData.latitude = $('#lat').val();
 				formData.longitude = $('#lng').val();
 				return formData;
@@ -359,7 +359,7 @@ function editVenueDetail(rowData) {
 		_flaskLib.loadDataToForm("venueDetailsForm",
 				_venueDetailModel.DATA_MODEL.VENUEDETAILS, rowData, function() {
 				});
-		$('#addrLine11').val(rowData.addrLine1);
+		$('#addrLine1').val(rowData.addrLine1);
 		$('#jqxEditor').val(rowData.infoDesc);
 	}, 500);
 	// fnShowSlider($('#venueForm
@@ -778,9 +778,9 @@ function loadVenueData() {
 	var flaskRequest = new Request();
 	params = {};
 	flaskRequest.sendGETRequest(_venueModel.SERVICE_ENDPOINTS.GET_VENUE,
-			params, function(data) {/*success handler*/
+			params, function(data) {/* success handler */
 				fnFillVenueList(data);
-			}, function(error) { /*failure handler*/
+			}, function(error) { /* failure handler */
 				_flaskLib.showErrorMessage('action-msg',
 						_venueModel.MESSAGES.GET_ERROR);
 			});
@@ -825,7 +825,7 @@ function fnFillVenueList(data) {
 								.sendGETRequest(
 										_venueDetailModel.SERVICE_ENDPOINTS.COPY_VENUEDETAILS_WITH_IMAGE,
 										params,
-										function(data) {/*success handler*/
+										function(data) {/* success handler */
 											loadVenueDetailsData($('#venueId')
 													.val());
 											$("#modal-venueImport")
@@ -835,7 +835,7 @@ function fnFillVenueList(data) {
 															'action-msg',
 															_venueDetailModel.MESSAGES.COPY_VENUEDETAIL_SUCCESS);
 										},
-										function(error) { /*failure handler*/
+										function(error) { /* failure handler */
 											_flaskLib
 													.showErrorMessage(
 															'action-msg',

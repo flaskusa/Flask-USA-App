@@ -224,7 +224,7 @@ function editVenue(rowData) {
 			$("#infoTypeId").val($(this).attr("alt"));
 		});
 		fnBuildVenueUpload(imageContainer);
-		createDetailsTable({},_venueDetailModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Images"],_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
+		createDetailsTable({},_venueDetailModel.DATA_MODEL.VENUEDETAILS, $('#gridDetails'), "actionMenuDetails", "Edit", contextMenuHandlerDetails, ["Details", "Images"],_venueDetailModel.GRID_DATA_MODEL.VENUEDETAILS);
 		loadVenueDetailsData(rowData.venueId);
 		console.log(rowData);
 		fnGetVenueImages(rowData.venueId,container,true);

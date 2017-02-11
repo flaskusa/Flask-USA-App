@@ -1,6 +1,7 @@
 var _infoTypeRenderer = {};
 
 _infoTypeRenderer.getRenderer = function(type) {
+	type = type.toLowerCase();
 	var renderer;
 	switch (type) {
 	case "tradition":
@@ -403,7 +404,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 		"type" : "text",
 		"attr" : [ {
 			"caption" : "Address",
-			"id" : "addrLine11",
+			"id" : "addrLine1",
 			"value" : "",
 			"placeholder" : "Enter Address here",
 			"maxlength" : "100",
@@ -474,7 +475,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 		"type" : "text",
 		"attr" : [ {
 			"caption" : "Address",
-			"id" : "addrLine11",
+			"id" : "addrLine1",
 			"value" : "",
 			"placeholder" : "",
 			"maxlength" : "100",
@@ -525,7 +526,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 		"type" : "text",
 		"attr" : [ {
 			"caption" : "Address",
-			"id" : "addrLine11",
+			"id" : "addrLine1",
 			"value" : "",
 			"placeholder" : "",
 			"maxlength" : "100",
@@ -594,7 +595,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 		"type" : "text",
 		"attr" : [ {
 			"caption" : "Address",
-			"id" : "addrLine11",
+			"id" : "addrLine1",
 			"value" : "",
 			"placeholder" : "",
 			"maxlength" : "100",
@@ -635,7 +636,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 		"type" : "text",
 		"attr" : [ {
 			"caption" : "Address",
-			"id" : "addrLine11",
+			"id" : "addrLine1",
 			"value" : "",
 			"placeholder" : "",
 			"maxlength" : "100",
@@ -723,15 +724,28 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "70",
 			"Class" : ""
 		} ]
-	}, {
+	}, 
+	 {
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Website",
+			"id" : "infoShortDesc",
+			"value" : "",
+			"placeholder" : "Add base URL for website",
+			"maxlength" : "255",
+			"Class" : ""
+		}]
+	},
+	  {
 		"type" : "text",
 		"attr" : [ {
 			"caption" : "Event Link",
 			"id" : "website",
 			"value" : "",
-			"placeholder" : "Add link for the website",
+			"placeholder" : "Add link for the event",
 			"maxlength" : "255",
 			"Class" : ""
-		} ]
+		} 
+		]
 	} ]
 }

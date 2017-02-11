@@ -258,7 +258,7 @@ function createTable(data, model, grid, menuDivId, actionColText,contextMenuHand
 				rowdetailstemplate: GRID_PARAM_VENUE.rowDetailTemplate(rowDetailDivArr , 200),
 				initrowdetails: GRID_PARAM_VENUE.initrowdetails,
 				columns: vanueColumns,
-				pagesize: 20
+				pagesize: 1000
 			});
 
 	}

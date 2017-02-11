@@ -72,6 +72,7 @@ _eventDetailModel.MESSAGES= {
 		DETAIL_DUPLICATE: "Event detail with same title already exist",
 		DETAIL_NO_IMAGES_INFO: "No images found",
 		DETAIL_IMAGE_DELETE: "Deleted successfully",
-		CHECK_INTERNET_CONNECTION: "Internet is not connected, Please check your internet connection"
+		CHECK_INTERNET_CONNECTION: "Internet is not connected, Please check your internet connection",
+		GOCODING_ERROR: "Error in determining co-ordinates for address. Please verify the address"
 };
 

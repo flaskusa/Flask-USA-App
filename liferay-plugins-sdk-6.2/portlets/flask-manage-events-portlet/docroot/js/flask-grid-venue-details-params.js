@@ -116,10 +116,34 @@ GRID_PARAM_DETAILS.initrowdetails = function(index, parentElement, gridElement, 
 	var tabsdiv = null;
 	tabsdiv = $($(parentElement).children()[0]);
 	    if (tabsdiv != null) {
-	    	var venueDiv = tabsdiv.find('.images');
-	    	var container = $('<div/>');
+	    	var venueImg = tabsdiv.find('.images');
+	    	var venueDetails = tabsdiv.find('.details');
+	    	var imgContainer = $('<div/>');
 	    	fnGetVenueDetailImages(datarecord.venueDetailId,container,false);
-	  	  	$(container).appendTo($(venueDiv));
+
+	    	var  renderer = _infoTypeRenderer.getRenderer(datarecord.infoTypeCategoryName);
+
+	    	var detailsContainer = $('<div/>');
+	    	var html ="<table>";
+	    	for(var index = 0; index < renderer.length; index++){
+	    		var fieldDefinition = renderer[index];
+	    		var fieldVal = eval("datarecord." + fieldDefinition.attr[0].id);
+	    		if (fieldVal == null){
+	    			fieldVal = "";
+	    		}
+	    		if (fieldVal.length > 100 ){
+	    			fieldVal = fieldVal.substring(0, 100) +  " ..."
+	    		}	    		
+	    		html = html + "<tr><td class='filledWidth'> <b>" + fieldDefinition.attr[0].caption + ":</b></td><td> "
+				+ fieldVal + "</td></tr>";
+	    	}
+	    	html = html + "</table>"
+	    	
+	    	$(detailsContainer).append(html);
+	    	
+	    	$(imgContainer).appendTo($(venueImg));
+	    	$(detailsContainer).appendTo($(venueDetails));
+	    	
 			$(tabsdiv).jqxTabs({
 				width : '100%',
 				height : 300
@@ -178,6 +202,8 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 				source: dataAdapter,
 				columnsheight : 40,
 				columnsmenuwidth : 40,
+				showfilterrow: true,
+				filterable: true,
 				rowsheight : 34,
 				theme:	'custom',
 				autoheight: true,
@@ -186,15 +212,15 @@ function createDetailsTable(data, model, grid, menuDivId, actionColText,contextM
 				rowdetails: true,
 				groupable: true,
 				showgroupmenuitems: false,
-				showgroupsheader: false,
+				showgroupsheader: true,
+				groups: ['infoTypeId'],
 				showrowdetailscolumn:false,
 				groupsrenderer: groupsrenderer,
 				rowdetailstemplate: GRID_PARAM_DETAILS.rowDetailTemplate(rowDetailDivArr , 200),
 				initrowdetails: GRID_PARAM_DETAILS.initrowdetails,
 				columns: Columns,
-				groups: ['infoTypeId'],
-				groupsexpandedbydefault:false,
-				pagesize: 20
+				groupsexpandedbydefault:true,
+				pagesize: 1000
 			});
 
 	}

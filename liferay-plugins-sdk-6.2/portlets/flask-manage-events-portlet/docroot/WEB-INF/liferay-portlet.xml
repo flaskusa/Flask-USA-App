@@ -30,10 +30,10 @@
 		<footer-portlet-javascript>/js/flask-grid-params.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-event-model.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-event-main.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/flask-infotype-renderer.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-grid-details-params.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/flask-eventdetail-model.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/flask-eventdetail-main.js</footer-portlet-javascript>
-		<footer-portlet-javascript>/js/flask-infotype-renderer.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/flask-eventdetail-main.js</footer-portlet-javascript>		
 		<footer-portlet-javascript>/js/flask-detail-common.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxdropdownlist.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxgrid.filter.js</footer-portlet-javascript>

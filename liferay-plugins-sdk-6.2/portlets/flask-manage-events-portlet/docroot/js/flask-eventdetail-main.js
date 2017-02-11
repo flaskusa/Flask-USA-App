@@ -34,7 +34,7 @@ function addDetailsClickHandlers() {
 		else{
 			if ($('#eventDetailsForm').jqxValidator('validate'))
 			{
-				if ($('#addrLine11').val() == undefined) {
+				if ($('#addrLine1').val() == undefined) {
 					$('#latitude').val(0);
 					$('#longitude').val(0);
 					saveEventDetails();
@@ -42,7 +42,7 @@ function addDetailsClickHandlers() {
 					try{
 						var geocoder = new google.maps.Geocoder();
 						geocoder.geocode({
-							address : $('#addrLine11').val(),
+							address : $('#addrLine1').val(),
 							region: 'no'
 						},
 					    function(results, status) {
@@ -183,12 +183,18 @@ function saveEventDetails() {
 
 					formData[item.name] = val;
 				});
-				formData.infoDesc = $("#jqxEditor").val(); 
+				formData.infoDesc = $("#jqxEditor").val();
+				if (formData.infoDesc == undefined) {
+					formData.infoDesc = "";
+				}
+				if ($('#addrLine1').val() == undefined) {
+					formData.addrLine1 = "";
+				}
+				formData.latitude = $('#latitude').val();
+				formData.longitude = $('#longitude').val();
+
 				formData.eventId=$('#eventForm #eventId').val();
-				if($('#addrLine11').val() == undefined)
-					formData.addrLine1="";
-				else
-					formData.addrLine1=$('#addrLine11').val();
+				
 				return formData;
 			});
 	var flaskRequest = new Request();
@@ -203,15 +209,15 @@ function saveEventDetails() {
 					if ($('#eventImages').find('.dz-image').length > 0) {
 						fnSaveImages(data.eventDetailId,data.eventId);
 					}
-					else {
-						$('#jqxEditor').jqxEditor('destroy'); 
+					else {		 
 						$('#eventDetailsForm').hide();
 						$('#eventDetailsDataTable').show();
 			    		$("#eventDetailId").val(0);
 			    		$("#infoTypeCategoryId").val(0);
 			    		loadEventDetailsData(data.eventId);
 			    		_flaskLib.showSuccessMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_SAVE);
-			    		$(".cssVdSave").removeAttr("disabled");
+			    		$(".cssVdSave").removeAttr("disabled");			    		
+			    		destroyJQEditor();
 					}
 
 				} ,
@@ -219,6 +225,14 @@ function saveEventDetails() {
 					_flaskLib.showErrorMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_ERROR);
 				});
 	$("#slides").html("");
+}
+
+function destroyJQEditor(){
+	try{
+		$('#jqxEditor').jqxEditor('destroy'); 	
+	}catch( ex){
+		
+	}
 }
 
 /* Delete Single Event */
@@ -266,7 +280,7 @@ function editEventDetail(rowData) {
 		_flaskDetailCommon.loadContentType("infoTypeCategoryId",rowData.infoTypeCategoryId, rowData.infoTypeId);
 		setTimeout(function() {
 			_flaskLib.loadDataToForm("eventDetailsForm",_eventDetailModel.DATA_MODEL.EVENTDETAILS, rowData, function(){});
-			$('#addrLine11').val(rowData.addrLine1);
+			$('#addrLine1').val(rowData.addrLine1);
 			$('#jqxEditor').val(rowData.infoDesc);
 		}, 500);
 		fnGetEventDetailImages(rowData.eventDetailId,container, true);
