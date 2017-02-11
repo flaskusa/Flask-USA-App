@@ -209,26 +209,28 @@
                         </ion-item>
                     </ion-list>
                 </div>
-                <div class="strip paddingTOpSupply" ng-click="toggleSupplyItem()">
-                    <div class="stripPadding">
-                        <span><i class="textStyle marginLeftSupplyText"> ITEM ASSIGNMENT</i></span>
-                        <i class="icon ion-chevron-right" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==true"></i>
-                        <i class="icon ion-chevron-down" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==false"></i>
+             
+                    <div class="strip paddingTOpSupply" ng-click="toggleSupplyItem()">
+                        <div class="stripPadding">
+                            <span><i class="textStyle marginLeftSupplyText"> ITEM ASSIGNMENT</i></span>
+                            <i class="icon ion-chevron-right" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==true"></i>
+                            <i class="icon ion-chevron-down" style="float: right;padding-right: 10px;font-size: 26px;margin-top: -5px" ng-if="hideSupplyItem==false"></i>
+                        </div>
                     </div>
-                </div>
-                <div class="list" id="supplyItemDiv">
-                    <label class="item item-input item-select" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
-                        <div class="input-label" style="width:60%">
+                <ion-list show-delete="false" can-swipe="true">
+                    <ion-item class="myList item-remove-animate" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
+                        <div class="col col-15" style="bottom:0px !important;">
                             <i class="supplyItemText"> {{ item.supplyItemName | uppercase}} </i>
 
                         </div>
-                        <select ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" style="background:inherit">
-                            <option value="-1" >Select attendee</option>
+                        <select class="col col-70 supply_content1" ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" style="background:inherit">
+                            <option value="-1">Select attendee</option>
                             <option ng-repeat="attendee in myTailgaters" value="{{attendee.userId}}">{{attendee.userName}}</option>
                         </select>
-                    </label>
-                </div>
+                        <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveSupplyItem(item.supplyItemId,$index);"></ion-option-button>
+                    </ion-item>
 
+                </ion-list>
                 <div class="list" style="margin-bottom:40px;">
                     <button type="button" nav-clear class="button button-block button-positive pay_now_button" data-ng-click="addSupplyItems();">
                         Add supply list
