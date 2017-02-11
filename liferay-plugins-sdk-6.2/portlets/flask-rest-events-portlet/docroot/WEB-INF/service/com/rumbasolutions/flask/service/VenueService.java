@@ -138,7 +138,7 @@ public interface VenueService extends BaseService, InvokableService {
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.VenueDetail updateVenueDetail(
@@ -150,7 +150,7 @@ public interface VenueService extends BaseService, InvokableService {
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)

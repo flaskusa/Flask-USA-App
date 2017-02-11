@@ -207,6 +207,7 @@ public class EventServiceSoap {
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
 		java.lang.String hoursOfOperation, boolean showDescription,
+		java.lang.String eventSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -215,7 +216,7 @@ public class EventServiceSoap {
 					infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
 					countryId, latitude, longitude, phone, mobileAppName,
 					website, cost, hoursOfOperation, showDescription,
-					serviceContext);
+					eventSubDetails, serviceContext);
 
 			return com.rumbasolutions.flask.model.EventDetailSoap.toSoapModel(returnValue);
 		}
@@ -236,6 +237,7 @@ public class EventServiceSoap {
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
 		java.lang.String hoursOfOperation, boolean showDescription,
+		java.lang.String eventSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -244,7 +246,7 @@ public class EventServiceSoap {
 					infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
 					countryId, latitude, longitude, phone, mobileAppName,
 					website, cost, hoursOfOperation, showDescription,
-					serviceContext);
+					eventSubDetails, serviceContext);
 
 			return com.rumbasolutions.flask.model.EventDetailSoap.toSoapModel(returnValue);
 		}

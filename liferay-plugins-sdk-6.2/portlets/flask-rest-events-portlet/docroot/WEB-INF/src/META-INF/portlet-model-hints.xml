@@ -120,6 +120,12 @@
 		</field>
 		<field name="imageGroupId" type="long" />
 	</model>
+	<model name="com.rumbasolutions.flask.model.EventSubDetail">
+		<field name="eventSubDetailId" type="long" />
+		<field name="eventDetailId" type="long" />
+		<field name="eventSubDetailTitle" type="String" />
+		<field name="eventSubDetailDesc" type="String" />
+	</model>
 	<model name="com.rumbasolutions.flask.model.EventType">
 		<field name="eventTypeId" type="long" />
 		<field name="eventTypeKey" type="String" />
@@ -276,5 +282,11 @@
 		</field>
 		<field name="venueImageGroupId" type="long" />
 		<field name="venueId" type="long" />
+	</model>
+	<model name="com.rumbasolutions.flask.model.VenueSubDetail">
+		<field name="venueSubDetailId" type="long" />
+		<field name="venueDetailId" type="long" />
+		<field name="venueSubDetailTitle" type="String" />
+		<field name="venueSubDetailDesc" type="String" />
 	</model>
 </model-hints>

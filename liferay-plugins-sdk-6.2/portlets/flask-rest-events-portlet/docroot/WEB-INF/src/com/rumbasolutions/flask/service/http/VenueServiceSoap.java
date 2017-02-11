@@ -270,7 +270,7 @@ public class VenueServiceSoap {
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -278,7 +278,8 @@ public class VenueServiceSoap {
 					infoTypeId, infoTypeCategoryId, infoTitle, infoShortDesc,
 					infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
 					countryId, latitude, longitude, phone, mobileAppName,
-					website, cost, hoursOfOperation, serviceContext);
+					website, cost, hoursOfOperation, venueSubDetails,
+					serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueDetailSoap.toSoapModel(returnValue);
 		}
@@ -298,7 +299,7 @@ public class VenueServiceSoap {
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
@@ -306,7 +307,8 @@ public class VenueServiceSoap {
 					infoTypeId, infoTypeCategoryId, infoTitle, infoShortDesc,
 					infoDesc, addrLine1, addrLine2, zipCode, city, stateId,
 					countryId, latitude, longitude, phone, mobileAppName,
-					website, cost, hoursOfOperation, serviceContext);
+					website, cost, hoursOfOperation, venueSubDetails,
+					serviceContext);
 
 			return com.rumbasolutions.flask.model.VenueDetailSoap.toSoapModel(returnValue);
 		}

@@ -343,6 +343,24 @@
 			<finder-column name="venueDetailId" />
 		</finder>
  	</entity>
+    <entity name="VenueSubDetail" local-service="true">
+        <column name="venueSubDetailId" type="long" primary="true"></column>
+        <column name="venueDetailId" type="long" primary="false"></column>
+        <column name="venueSubDetailTitle" type="String"></column>
+        <column name="venueSubDetailDesc" type="String"></column>
+        <finder name="VenueDetailId" return-type="Collection">
+        	<finder-column name="venueDetailId"></finder-column>
+        </finder>
+    </entity>
+    <entity name="EventSubDetail" local-service="true">
+        <column name="eventSubDetailId" type="long" primary="true"></column>
+        <column name="eventDetailId" type="long"></column>
+        <column name="eventSubDetailTitle" type="String"></column>
+        <column name="eventSubDetailDesc" type="String"></column>
+        <finder name="EventDetailId" return-type="Collection">
+        	<finder-column name="eventDetailId"></finder-column>
+        </finder>
+    </entity>
   
    
 </service-builder>

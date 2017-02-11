@@ -28,6 +28,7 @@ import com.liferay.portal.model.BaseModel;
 import com.rumbasolutions.flask.model.EventClp;
 import com.rumbasolutions.flask.model.EventDetailClp;
 import com.rumbasolutions.flask.model.EventDetailImageClp;
+import com.rumbasolutions.flask.model.EventSubDetailClp;
 import com.rumbasolutions.flask.model.EventTypeClp;
 import com.rumbasolutions.flask.model.InfoTypeCategoryClp;
 import com.rumbasolutions.flask.model.InfoTypeClp;
@@ -36,6 +37,7 @@ import com.rumbasolutions.flask.model.VenueClp;
 import com.rumbasolutions.flask.model.VenueDetailClp;
 import com.rumbasolutions.flask.model.VenueDetailImageClp;
 import com.rumbasolutions.flask.model.VenueImageClp;
+import com.rumbasolutions.flask.model.VenueSubDetailClp;
 
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -124,6 +126,10 @@ public class ClpSerializer {
 			return translateInputEventDetailImage(oldModel);
 		}
 
+		if (oldModelClassName.equals(EventSubDetailClp.class.getName())) {
+			return translateInputEventSubDetail(oldModel);
+		}
+
 		if (oldModelClassName.equals(EventTypeClp.class.getName())) {
 			return translateInputEventType(oldModel);
 		}
@@ -154,6 +160,10 @@ public class ClpSerializer {
 
 		if (oldModelClassName.equals(VenueImageClp.class.getName())) {
 			return translateInputVenueImage(oldModel);
+		}
+
+		if (oldModelClassName.equals(VenueSubDetailClp.class.getName())) {
+			return translateInputVenueSubDetail(oldModel);
 		}
 
 		return oldModel;
@@ -195,6 +205,16 @@ public class ClpSerializer {
 		EventDetailImageClp oldClpModel = (EventDetailImageClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getEventDetailImageRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputEventSubDetail(BaseModel<?> oldModel) {
+		EventSubDetailClp oldClpModel = (EventSubDetailClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getEventSubDetailRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -275,6 +295,16 @@ public class ClpSerializer {
 		VenueImageClp oldClpModel = (VenueImageClp)oldModel;
 
 		BaseModel<?> newModel = oldClpModel.getVenueImageRemoteModel();
+
+		newModel.setModelAttributes(oldClpModel.getModelAttributes());
+
+		return newModel;
+	}
+
+	public static Object translateInputVenueSubDetail(BaseModel<?> oldModel) {
+		VenueSubDetailClp oldClpModel = (VenueSubDetailClp)oldModel;
+
+		BaseModel<?> newModel = oldClpModel.getVenueSubDetailRemoteModel();
 
 		newModel.setModelAttributes(oldClpModel.getModelAttributes());
 
@@ -375,6 +405,43 @@ public class ClpSerializer {
 		if (oldModelClassName.equals(
 					"com.rumbasolutions.flask.model.impl.EventDetailImageImpl")) {
 			return translateOutputEventDetailImage(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
+		if (oldModelClassName.equals(
+					"com.rumbasolutions.flask.model.impl.EventSubDetailImpl")) {
+			return translateOutputEventSubDetail(oldModel);
 		}
 		else if (oldModelClassName.endsWith("Clp")) {
 			try {
@@ -705,6 +772,43 @@ public class ClpSerializer {
 			}
 		}
 
+		if (oldModelClassName.equals(
+					"com.rumbasolutions.flask.model.impl.VenueSubDetailImpl")) {
+			return translateOutputVenueSubDetail(oldModel);
+		}
+		else if (oldModelClassName.endsWith("Clp")) {
+			try {
+				ClassLoader classLoader = ClpSerializer.class.getClassLoader();
+
+				Method getClpSerializerClassMethod = oldModelClass.getMethod(
+						"getClpSerializerClass");
+
+				Class<?> oldClpSerializerClass = (Class<?>)getClpSerializerClassMethod.invoke(oldModel);
+
+				Class<?> newClpSerializerClass = classLoader.loadClass(oldClpSerializerClass.getName());
+
+				Method translateOutputMethod = newClpSerializerClass.getMethod("translateOutput",
+						BaseModel.class);
+
+				Class<?> oldModelModelClass = oldModel.getModelClass();
+
+				Method getRemoteModelMethod = oldModelClass.getMethod("get" +
+						oldModelModelClass.getSimpleName() + "RemoteModel");
+
+				Object oldRemoteModel = getRemoteModelMethod.invoke(oldModel);
+
+				BaseModel<?> newModel = (BaseModel<?>)translateOutputMethod.invoke(null,
+						oldRemoteModel);
+
+				return newModel;
+			}
+			catch (Throwable t) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Unable to translate " + oldModelClassName, t);
+				}
+			}
+		}
+
 		return oldModel;
 	}
 
@@ -800,6 +904,11 @@ public class ClpSerializer {
 		}
 
 		if (className.equals(
+					"com.rumbasolutions.flask.NoSuchEventSubDetailException")) {
+			return new com.rumbasolutions.flask.NoSuchEventSubDetailException();
+		}
+
+		if (className.equals(
 					"com.rumbasolutions.flask.NoSuchEventTypeException")) {
 			return new com.rumbasolutions.flask.NoSuchEventTypeException();
 		}
@@ -837,6 +946,11 @@ public class ClpSerializer {
 			return new com.rumbasolutions.flask.NoSuchVenueImageException();
 		}
 
+		if (className.equals(
+					"com.rumbasolutions.flask.NoSuchVenueSubDetailException")) {
+			return new com.rumbasolutions.flask.NoSuchVenueSubDetailException();
+		}
+
 		return throwable;
 	}
 
@@ -866,6 +980,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setEventDetailImageRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputEventSubDetail(BaseModel<?> oldModel) {
+		EventSubDetailClp newModel = new EventSubDetailClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setEventSubDetailRemoteModel(oldModel);
 
 		return newModel;
 	}
@@ -946,6 +1070,16 @@ public class ClpSerializer {
 		newModel.setModelAttributes(oldModel.getModelAttributes());
 
 		newModel.setVenueImageRemoteModel(oldModel);
+
+		return newModel;
+	}
+
+	public static Object translateOutputVenueSubDetail(BaseModel<?> oldModel) {
+		VenueSubDetailClp newModel = new VenueSubDetailClp();
+
+		newModel.setModelAttributes(oldModel.getModelAttributes());
+
+		newModel.setVenueSubDetailRemoteModel(oldModel);
 
 		return newModel;
 	}

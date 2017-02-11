@@ -42,10 +42,12 @@ import com.rumbasolutions.flask.service.VenueDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueServiceUtil;
+import com.rumbasolutions.flask.service.VenueSubDetailServiceUtil;
 import com.rumbasolutions.flask.service.base.VenueServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.VenueDetailImageUtil;
 import com.rumbasolutions.flask.service.persistence.VenueDetailUtil;
 import com.rumbasolutions.flask.service.persistence.VenueImageUtil;
+import com.rumbasolutions.flask.service.persistence.VenueSubDetailUtil;
 import com.rumbasolutions.flask.service.persistence.VenueUtil;
 
 /**
@@ -296,8 +298,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, 
 		String longitude, String phone, String mobileAppName, String website, 
-		Double cost, String hoursOfOperation,
-		ServiceContext  serviceContext){
+		Double cost, String hoursOfOperation, String venueSubDetails, ServiceContext  serviceContext){
 		VenueDetail venueDetail=null;
 		try{
 			
@@ -329,9 +330,8 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		    venueDetail.setUserId(serviceContext.getGuestOrUserId());
 		    venueDetail.setCreatedDate(serviceContext.getCreateDate(now));
 		    venueDetail.setModifiedDate(serviceContext.getModifiedDate(now));
-		    
 			venueDetail = VenueDetailLocalServiceUtil.addVenueDetail(venueDetail);
-			
+			VenueSubDetailServiceUtil.addVenueSubDetailsByJsonArray(venueDetail.getVenueDetailId(), venueSubDetails);
 		}catch(Exception ex){
 			LOGGER.error("Exception in addVenueDetail: " + ex.getMessage());
 		}
@@ -343,7 +343,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, 
 		String latitude, String longitude, String phone, 
-		String mobileAppName, String website, Double cost, String hoursOfOperation,
+		String mobileAppName, String website, Double cost, String hoursOfOperation, String venueSubDetails,
 		ServiceContext  serviceContext){
 		VenueDetail venueDetail=null;
 		try{
@@ -372,9 +372,13 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			Date now = new Date();
 			venueDetail.setUserId(serviceContext.getGuestOrUserId());
 		    venueDetail.setModifiedDate(serviceContext.getModifiedDate(now));
-		    
 			venueDetail = VenueDetailLocalServiceUtil.updateVenueDetail(venueDetail);
-							
+			try{
+				VenueSubDetailUtil.removeByVenueDetailId(venueDetailId);
+			}finally{
+				VenueSubDetailServiceUtil.addVenueSubDetailsByJsonArray(venueDetailId, venueSubDetails);
+			}
+			
 		}catch(Exception ex){
 			LOGGER.error("Exception in updateVenueDetail: " + ex.getMessage());
 		}
@@ -413,10 +417,10 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	public void deleteVenueDetail(long venueDetailId, ServiceContext  serviceContext){
 		try{
 			VenueDetailLocalServiceUtil.deleteVenueDetail(venueDetailId);
+			VenueSubDetailUtil.removeByVenueDetailId(venueDetailId);
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
-		
 	}
 	
 	@Override
@@ -429,7 +433,6 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
-		
 	}
 	
 	@Override

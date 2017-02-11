@@ -106,13 +106,13 @@ public class UserEventLocalServiceClpInvoker {
 				"com.rumbasolutions.flask.model.UserEvent"
 			};
 
-		_methodName96 = "getBeanIdentifier";
+		_methodName108 = "getBeanIdentifier";
 
-		_methodParameterTypes96 = new String[] {  };
+		_methodParameterTypes108 = new String[] {  };
 
-		_methodName97 = "setBeanIdentifier";
+		_methodName109 = "setBeanIdentifier";
 
-		_methodParameterTypes97 = new String[] { "java.lang.String" };
+		_methodParameterTypes109 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -204,13 +204,13 @@ public class UserEventLocalServiceClpInvoker {
 			return UserEventLocalServiceUtil.updateUserEvent((com.rumbasolutions.flask.model.UserEvent)arguments[0]);
 		}
 
-		if (_methodName96.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes96, parameterTypes)) {
+		if (_methodName108.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes108, parameterTypes)) {
 			return UserEventLocalServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName97.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes97, parameterTypes)) {
+		if (_methodName109.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes109, parameterTypes)) {
 			UserEventLocalServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -251,8 +251,8 @@ public class UserEventLocalServiceClpInvoker {
 	private String[] _methodParameterTypes14;
 	private String _methodName15;
 	private String[] _methodParameterTypes15;
-	private String _methodName96;
-	private String[] _methodParameterTypes96;
-	private String _methodName97;
-	private String[] _methodParameterTypes97;
+	private String _methodName108;
+	private String[] _methodParameterTypes108;
+	private String _methodName109;
+	private String[] _methodParameterTypes109;
 }

@@ -100,6 +100,17 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.EventSubDetailModelImpl">
+		<attributes>
+			<id name="eventSubDetailId" />
+			<basic name="eventDetailId" />
+			<basic name="eventSubDetailTitle" />
+			<basic name="eventSubDetailDesc" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.rumbasolutions.flask.model.impl.EventTypeModelImpl">
 		<attributes>
 			<id name="eventTypeId" />
@@ -258,6 +269,17 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.VenueSubDetailModelImpl">
+		<attributes>
+			<id name="venueSubDetailId" />
+			<basic name="venueDetailId" />
+			<basic name="venueSubDetailTitle" />
+			<basic name="venueSubDetailDesc" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<entity class="com.rumbasolutions.flask.model.impl.EventImpl" name="Event">
 		<table name="flaskevents_Event" />
 		<attributes />
@@ -268,6 +290,10 @@
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.EventDetailImageImpl" name="EventDetailImage">
 		<table name="flaskevents_EventDetailImage" />
+		<attributes />
+	</entity>
+	<entity class="com.rumbasolutions.flask.model.impl.EventSubDetailImpl" name="EventSubDetail">
+		<table name="flaskevents_EventSubDetail" />
 		<attributes />
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.EventTypeImpl" name="EventType">
@@ -300,6 +326,10 @@
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.VenueImageImpl" name="VenueImage">
 		<table name="flaskevents_VenueImage" />
+		<attributes />
+	</entity>
+	<entity class="com.rumbasolutions.flask.model.impl.VenueSubDetailImpl" name="VenueSubDetail">
+		<table name="flaskevents_VenueSubDetail" />
 		<attributes />
 	</entity>
 </entity-mappings>

@@ -28,6 +28,7 @@ import com.rumbasolutions.flask.service.persistence.EventDetailImagePersistence;
 import com.rumbasolutions.flask.service.persistence.EventDetailPersistence;
 import com.rumbasolutions.flask.service.persistence.EventFinder;
 import com.rumbasolutions.flask.service.persistence.EventPersistence;
+import com.rumbasolutions.flask.service.persistence.EventSubDetailPersistence;
 import com.rumbasolutions.flask.service.persistence.EventTypePersistence;
 import com.rumbasolutions.flask.service.persistence.InfoTypeCategoryPersistence;
 import com.rumbasolutions.flask.service.persistence.InfoTypePersistence;
@@ -36,6 +37,7 @@ import com.rumbasolutions.flask.service.persistence.VenueDetailImagePersistence;
 import com.rumbasolutions.flask.service.persistence.VenueDetailPersistence;
 import com.rumbasolutions.flask.service.persistence.VenueImagePersistence;
 import com.rumbasolutions.flask.service.persistence.VenuePersistence;
+import com.rumbasolutions.flask.service.persistence.VenueSubDetailPersistence;
 
 import javax.sql.DataSource;
 
@@ -245,6 +247,63 @@ public abstract class EventServiceBaseImpl extends BaseServiceImpl
 	public void setEventDetailImagePersistence(
 		EventDetailImagePersistence eventDetailImagePersistence) {
 		this.eventDetailImagePersistence = eventDetailImagePersistence;
+	}
+
+	/**
+	 * Returns the event sub detail local service.
+	 *
+	 * @return the event sub detail local service
+	 */
+	public com.rumbasolutions.flask.service.EventSubDetailLocalService getEventSubDetailLocalService() {
+		return eventSubDetailLocalService;
+	}
+
+	/**
+	 * Sets the event sub detail local service.
+	 *
+	 * @param eventSubDetailLocalService the event sub detail local service
+	 */
+	public void setEventSubDetailLocalService(
+		com.rumbasolutions.flask.service.EventSubDetailLocalService eventSubDetailLocalService) {
+		this.eventSubDetailLocalService = eventSubDetailLocalService;
+	}
+
+	/**
+	 * Returns the event sub detail remote service.
+	 *
+	 * @return the event sub detail remote service
+	 */
+	public com.rumbasolutions.flask.service.EventSubDetailService getEventSubDetailService() {
+		return eventSubDetailService;
+	}
+
+	/**
+	 * Sets the event sub detail remote service.
+	 *
+	 * @param eventSubDetailService the event sub detail remote service
+	 */
+	public void setEventSubDetailService(
+		com.rumbasolutions.flask.service.EventSubDetailService eventSubDetailService) {
+		this.eventSubDetailService = eventSubDetailService;
+	}
+
+	/**
+	 * Returns the event sub detail persistence.
+	 *
+	 * @return the event sub detail persistence
+	 */
+	public EventSubDetailPersistence getEventSubDetailPersistence() {
+		return eventSubDetailPersistence;
+	}
+
+	/**
+	 * Sets the event sub detail persistence.
+	 *
+	 * @param eventSubDetailPersistence the event sub detail persistence
+	 */
+	public void setEventSubDetailPersistence(
+		EventSubDetailPersistence eventSubDetailPersistence) {
+		this.eventSubDetailPersistence = eventSubDetailPersistence;
 	}
 
 	/**
@@ -702,6 +761,63 @@ public abstract class EventServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+	 * Returns the venue sub detail local service.
+	 *
+	 * @return the venue sub detail local service
+	 */
+	public com.rumbasolutions.flask.service.VenueSubDetailLocalService getVenueSubDetailLocalService() {
+		return venueSubDetailLocalService;
+	}
+
+	/**
+	 * Sets the venue sub detail local service.
+	 *
+	 * @param venueSubDetailLocalService the venue sub detail local service
+	 */
+	public void setVenueSubDetailLocalService(
+		com.rumbasolutions.flask.service.VenueSubDetailLocalService venueSubDetailLocalService) {
+		this.venueSubDetailLocalService = venueSubDetailLocalService;
+	}
+
+	/**
+	 * Returns the venue sub detail remote service.
+	 *
+	 * @return the venue sub detail remote service
+	 */
+	public com.rumbasolutions.flask.service.VenueSubDetailService getVenueSubDetailService() {
+		return venueSubDetailService;
+	}
+
+	/**
+	 * Sets the venue sub detail remote service.
+	 *
+	 * @param venueSubDetailService the venue sub detail remote service
+	 */
+	public void setVenueSubDetailService(
+		com.rumbasolutions.flask.service.VenueSubDetailService venueSubDetailService) {
+		this.venueSubDetailService = venueSubDetailService;
+	}
+
+	/**
+	 * Returns the venue sub detail persistence.
+	 *
+	 * @return the venue sub detail persistence
+	 */
+	public VenueSubDetailPersistence getVenueSubDetailPersistence() {
+		return venueSubDetailPersistence;
+	}
+
+	/**
+	 * Sets the venue sub detail persistence.
+	 *
+	 * @param venueSubDetailPersistence the venue sub detail persistence
+	 */
+	public void setVenueSubDetailPersistence(
+		VenueSubDetailPersistence venueSubDetailPersistence) {
+		this.venueSubDetailPersistence = venueSubDetailPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -892,6 +1008,12 @@ public abstract class EventServiceBaseImpl extends BaseServiceImpl
 	protected com.rumbasolutions.flask.service.EventDetailImageService eventDetailImageService;
 	@BeanReference(type = EventDetailImagePersistence.class)
 	protected EventDetailImagePersistence eventDetailImagePersistence;
+	@BeanReference(type = com.rumbasolutions.flask.service.EventSubDetailLocalService.class)
+	protected com.rumbasolutions.flask.service.EventSubDetailLocalService eventSubDetailLocalService;
+	@BeanReference(type = com.rumbasolutions.flask.service.EventSubDetailService.class)
+	protected com.rumbasolutions.flask.service.EventSubDetailService eventSubDetailService;
+	@BeanReference(type = EventSubDetailPersistence.class)
+	protected EventSubDetailPersistence eventSubDetailPersistence;
 	@BeanReference(type = com.rumbasolutions.flask.service.EventTypeLocalService.class)
 	protected com.rumbasolutions.flask.service.EventTypeLocalService eventTypeLocalService;
 	@BeanReference(type = com.rumbasolutions.flask.service.EventTypeService.class)
@@ -940,6 +1062,12 @@ public abstract class EventServiceBaseImpl extends BaseServiceImpl
 	protected com.rumbasolutions.flask.service.VenueImageService venueImageService;
 	@BeanReference(type = VenueImagePersistence.class)
 	protected VenueImagePersistence venueImagePersistence;
+	@BeanReference(type = com.rumbasolutions.flask.service.VenueSubDetailLocalService.class)
+	protected com.rumbasolutions.flask.service.VenueSubDetailLocalService venueSubDetailLocalService;
+	@BeanReference(type = com.rumbasolutions.flask.service.VenueSubDetailService.class)
+	protected com.rumbasolutions.flask.service.VenueSubDetailService venueSubDetailService;
+	@BeanReference(type = VenueSubDetailPersistence.class)
+	protected VenueSubDetailPersistence venueSubDetailPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

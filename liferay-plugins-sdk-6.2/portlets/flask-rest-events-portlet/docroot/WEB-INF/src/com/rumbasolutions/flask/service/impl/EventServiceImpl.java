@@ -52,6 +52,7 @@ import com.rumbasolutions.flask.service.EventDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventServiceUtil;
+import com.rumbasolutions.flask.service.EventSubDetailServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeCategoryServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeServiceUtil;
 import com.rumbasolutions.flask.service.UserEventLocalServiceUtil;
@@ -60,6 +61,7 @@ import com.rumbasolutions.flask.service.base.EventServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.EventDetailImageUtil;
 import com.rumbasolutions.flask.service.persistence.EventDetailUtil;
 import com.rumbasolutions.flask.service.persistence.EventFinderUtil;
+import com.rumbasolutions.flask.service.persistence.EventSubDetailUtil;
 import com.rumbasolutions.flask.service.persistence.EventUtil;
 import com.rumbasolutions.flask.service.persistence.UserEventUtil;
 
@@ -273,7 +275,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, String longitude, 
 		String phone, String mobileAppName, String website, Double cost, 
-		String hoursOfOperation, boolean showDescription,
+		String hoursOfOperation, boolean showDescription, String eventSubDetails,
 		ServiceContext  serviceContext){
 		EventDetail eventDetail=null;
 		try{
@@ -306,9 +308,8 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		    eventDetail.setUserId(serviceContext.getGuestOrUserId());
 		    eventDetail.setCreatedDate(serviceContext.getCreateDate(now));
 		    eventDetail.setModifiedDate(serviceContext.getModifiedDate(now));
-
-		    
 			eventDetail = EventDetailLocalServiceUtil.addEventDetail(eventDetail);
+			EventSubDetailServiceUtil.addEventSubDetailsByJsonArray(eventDetail.getEventDetailId(), eventSubDetails);
 		}catch(Exception ex){
 			LOGGER.error("Exception in addEventDetail: " + ex.getMessage());
 		}
@@ -319,7 +320,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	public EventDetail updateEventDetail(long eventDetailId , long infoTypeId, long infoTypeCategoryId, 
 		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, String longitude, String phone, 
-		String mobileAppName, String website, Double cost, String hoursOfOperation, boolean showDescription,
+		String mobileAppName, String website, Double cost, String hoursOfOperation, boolean showDescription, String eventSubDetails,
 		ServiceContext  serviceContext){
 		EventDetail eventDetail=null;
 		try{
@@ -349,9 +350,12 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			Date now = new Date();
 		    eventDetail.setUserId(serviceContext.getGuestOrUserId());
 		    eventDetail.setModifiedDate(serviceContext.getModifiedDate(now));
-
-		    
 			eventDetail = EventDetailLocalServiceUtil.updateEventDetail(eventDetail);
+			try{
+				EventSubDetailUtil.removeByEventDetailId(eventDetailId);
+			}finally{
+				EventSubDetailServiceUtil.addEventSubDetailsByJsonArray(eventDetailId, eventSubDetails);
+			}
 							
 		}catch(Exception ex){
 			LOGGER.error("Exception in updateEventDetail: " + ex.getMessage());
@@ -433,15 +437,12 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		eventObj = FlaskUtil.mergeEventVenueJSON(eventObj, venueJsonObj);
 		return eventObj;
 	}
-	
-	
-
-	
 
 	@Override
 	public void deleteEventDetail(long eventDetailId, ServiceContext  serviceContext){
 		try{
 			EventDetailLocalServiceUtil.deleteEventDetail(eventDetailId);
+			EventSubDetailUtil.removeByEventDetailId(eventDetailId);
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}

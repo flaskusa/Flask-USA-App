@@ -162,13 +162,14 @@ public class VenueServiceUtil {
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addVenueDetail(venueId, infoTypeId, infoTypeCategoryId,
 			infoTitle, infoShortDesc, infoDesc, addrLine1, addrLine2, zipCode,
 			city, stateId, countryId, latitude, longitude, phone,
-			mobileAppName, website, cost, hoursOfOperation, serviceContext);
+			mobileAppName, website, cost, hoursOfOperation, venueSubDetails,
+			serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.VenueDetail updateVenueDetail(
@@ -180,14 +181,14 @@ public class VenueServiceUtil {
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateVenueDetail(venueDetailId, infoTypeId,
 			infoTypeCategoryId, infoTitle, infoShortDesc, infoDesc, addrLine1,
 			addrLine2, zipCode, city, stateId, countryId, latitude, longitude,
 			phone, mobileAppName, website, cost, hoursOfOperation,
-			serviceContext);
+			venueSubDetails, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.VenueDetail getVenueDetail(

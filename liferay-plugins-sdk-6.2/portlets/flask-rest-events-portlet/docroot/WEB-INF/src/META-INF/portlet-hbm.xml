@@ -5,6 +5,7 @@
 	<import class="com.rumbasolutions.flask.model.Event" />
 	<import class="com.rumbasolutions.flask.model.EventDetail" />
 	<import class="com.rumbasolutions.flask.model.EventDetailImage" />
+	<import class="com.rumbasolutions.flask.model.EventSubDetail" />
 	<import class="com.rumbasolutions.flask.model.EventType" />
 	<import class="com.rumbasolutions.flask.model.InfoType" />
 	<import class="com.rumbasolutions.flask.model.InfoTypeCategory" />
@@ -13,6 +14,7 @@
 	<import class="com.rumbasolutions.flask.model.VenueDetail" />
 	<import class="com.rumbasolutions.flask.model.VenueDetailImage" />
 	<import class="com.rumbasolutions.flask.model.VenueImage" />
+	<import class="com.rumbasolutions.flask.model.VenueSubDetail" />
 	<class name="com.rumbasolutions.flask.model.impl.EventImpl" table="flaskevents_Event">
 		<cache usage="read-write" />
 		<id name="eventId" type="long">
@@ -82,6 +84,15 @@
 		<property name="imageDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="imageUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="imageGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.EventSubDetailImpl" table="flaskevents_EventSubDetail">
+		<cache usage="read-write" />
+		<id name="eventSubDetailId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="eventDetailId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="eventSubDetailTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="eventSubDetailDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.EventTypeImpl" table="flaskevents_EventType">
 		<cache usage="read-write" />
@@ -201,5 +212,14 @@
 		<property name="venueImageUUId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="venueImageGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="venueId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.VenueSubDetailImpl" table="flaskevents_VenueSubDetail">
+		<cache usage="read-write" />
+		<id name="venueSubDetailId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="venueDetailId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="venueSubDetailTitle" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="venueSubDetailDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

@@ -24,24 +24,24 @@ import java.util.Arrays;
  */
 public class EventDetailImageServiceClpInvoker {
 	public EventDetailImageServiceClpInvoker() {
-		_methodName80 = "getBeanIdentifier";
+		_methodName92 = "getBeanIdentifier";
 
-		_methodParameterTypes80 = new String[] {  };
+		_methodParameterTypes92 = new String[] {  };
 
-		_methodName81 = "setBeanIdentifier";
+		_methodName93 = "setBeanIdentifier";
 
-		_methodParameterTypes81 = new String[] { "java.lang.String" };
+		_methodParameterTypes93 = new String[] { "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName80.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+		if (_methodName92.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
 			return EventDetailImageServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName81.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+		if (_methodName93.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
 			EventDetailImageServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
@@ -50,8 +50,8 @@ public class EventDetailImageServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName80;
-	private String[] _methodParameterTypes80;
-	private String _methodName81;
-	private String[] _methodParameterTypes81;
+	private String _methodName92;
+	private String[] _methodParameterTypes92;
+	private String _methodName93;
+	private String[] _methodParameterTypes93;
 }

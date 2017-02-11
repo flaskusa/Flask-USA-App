@@ -94,7 +94,7 @@ public class EventServiceClp implements EventService {
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "boolean",
+				"java.lang.String", "boolean", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -106,7 +106,7 @@ public class EventServiceClp implements EventService {
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "boolean",
+				"java.lang.String", "boolean", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -550,6 +550,7 @@ public class EventServiceClp implements EventService {
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
 		java.lang.String hoursOfOperation, boolean showDescription,
+		java.lang.String eventSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -597,6 +598,8 @@ public class EventServiceClp implements EventService {
 						
 					showDescription,
 						
+					ClpSerializer.translateInput(eventSubDetails),
+						
 					ClpSerializer.translateInput(serviceContext)
 					});
 		}
@@ -626,6 +629,7 @@ public class EventServiceClp implements EventService {
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
 		java.lang.String hoursOfOperation, boolean showDescription,
+		java.lang.String eventSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -672,6 +676,8 @@ public class EventServiceClp implements EventService {
 					ClpSerializer.translateInput(hoursOfOperation),
 						
 					showDescription,
+						
+					ClpSerializer.translateInput(eventSubDetails),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

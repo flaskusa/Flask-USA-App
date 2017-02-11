@@ -11,6 +11,9 @@
 	<bean id="com.rumbasolutions.flask.service.EventDetailImageLocalService" class="com.rumbasolutions.flask.service.impl.EventDetailImageLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.EventDetailImageService" class="com.rumbasolutions.flask.service.impl.EventDetailImageServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.EventDetailImagePersistence" class="com.rumbasolutions.flask.service.persistence.EventDetailImagePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.EventSubDetailLocalService" class="com.rumbasolutions.flask.service.impl.EventSubDetailLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.EventSubDetailService" class="com.rumbasolutions.flask.service.impl.EventSubDetailServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.EventSubDetailPersistence" class="com.rumbasolutions.flask.service.persistence.EventSubDetailPersistenceImpl" parent="basePersistence" />
 	<bean id="com.rumbasolutions.flask.service.EventTypeLocalService" class="com.rumbasolutions.flask.service.impl.EventTypeLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.EventTypeService" class="com.rumbasolutions.flask.service.impl.EventTypeServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.EventTypePersistence" class="com.rumbasolutions.flask.service.persistence.EventTypePersistenceImpl" parent="basePersistence" />
@@ -35,4 +38,7 @@
 	<bean id="com.rumbasolutions.flask.service.VenueImageLocalService" class="com.rumbasolutions.flask.service.impl.VenueImageLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.VenueImageService" class="com.rumbasolutions.flask.service.impl.VenueImageServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.VenueImagePersistence" class="com.rumbasolutions.flask.service.persistence.VenueImagePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.VenueSubDetailLocalService" class="com.rumbasolutions.flask.service.impl.VenueSubDetailLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.VenueSubDetailService" class="com.rumbasolutions.flask.service.impl.VenueSubDetailServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.VenueSubDetailPersistence" class="com.rumbasolutions.flask.service.persistence.VenueSubDetailPersistenceImpl" parent="basePersistence" />
 </beans>

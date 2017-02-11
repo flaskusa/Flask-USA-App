@@ -62,6 +62,13 @@ create table flaskevents_EventDetailImage (
 	imageGroupId LONG
 );
 
+create table flaskevents_EventSubDetail (
+	eventSubDetailId LONG not null primary key,
+	eventDetailId LONG,
+	eventSubDetailTitle VARCHAR(75) null,
+	eventSubDetailDesc VARCHAR(75) null
+);
+
 create table flaskevents_EventType (
 	eventTypeId LONG not null primary key,
 	eventTypeKey VARCHAR(75) null,
@@ -163,4 +170,11 @@ create table flaskevents_VenueImage (
 	venueImageUUId VARCHAR(50) null,
 	venueImageGroupId LONG,
 	venueId LONG
+);
+
+create table flaskevents_VenueSubDetail (
+	venueSubDetailId LONG not null primary key,
+	venueDetailId LONG,
+	venueSubDetailTitle VARCHAR(75) null,
+	venueSubDetailDesc VARCHAR(75) null
 );

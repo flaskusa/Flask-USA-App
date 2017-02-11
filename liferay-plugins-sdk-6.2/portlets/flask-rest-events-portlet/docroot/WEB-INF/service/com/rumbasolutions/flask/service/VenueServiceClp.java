@@ -121,7 +121,8 @@ public class VenueServiceClp implements VenueService {
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName16 = "updateVenueDetail";
@@ -132,7 +133,8 @@ public class VenueServiceClp implements VenueService {
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName17 = "getVenueDetail";
@@ -667,7 +669,7 @@ public class VenueServiceClp implements VenueService {
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -713,6 +715,8 @@ public class VenueServiceClp implements VenueService {
 						
 					ClpSerializer.translateInput(hoursOfOperation),
 						
+					ClpSerializer.translateInput(venueSubDetails),
+						
 					ClpSerializer.translateInput(serviceContext)
 					});
 		}
@@ -741,7 +745,7 @@ public class VenueServiceClp implements VenueService {
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation,
+		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -786,6 +790,8 @@ public class VenueServiceClp implements VenueService {
 					ClpSerializer.translateInput(cost),
 						
 					ClpSerializer.translateInput(hoursOfOperation),
+						
+					ClpSerializer.translateInput(venueSubDetails),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

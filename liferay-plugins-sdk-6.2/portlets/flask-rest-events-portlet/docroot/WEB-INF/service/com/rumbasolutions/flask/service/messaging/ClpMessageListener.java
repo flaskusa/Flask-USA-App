@@ -24,6 +24,8 @@ import com.rumbasolutions.flask.service.EventDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventDetailServiceUtil;
 import com.rumbasolutions.flask.service.EventLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventServiceUtil;
+import com.rumbasolutions.flask.service.EventSubDetailLocalServiceUtil;
+import com.rumbasolutions.flask.service.EventSubDetailServiceUtil;
 import com.rumbasolutions.flask.service.EventTypeLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventTypeServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeCategoryLocalServiceUtil;
@@ -40,6 +42,8 @@ import com.rumbasolutions.flask.service.VenueImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueImageServiceUtil;
 import com.rumbasolutions.flask.service.VenueLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueServiceUtil;
+import com.rumbasolutions.flask.service.VenueSubDetailLocalServiceUtil;
+import com.rumbasolutions.flask.service.VenueSubDetailServiceUtil;
 
 /**
  * @author Ashutosh Rai
@@ -65,6 +69,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			EventDetailImageLocalServiceUtil.clearService();
 
 			EventDetailImageServiceUtil.clearService();
+			EventSubDetailLocalServiceUtil.clearService();
+
+			EventSubDetailServiceUtil.clearService();
 			EventTypeLocalServiceUtil.clearService();
 
 			EventTypeServiceUtil.clearService();
@@ -89,6 +96,9 @@ public class ClpMessageListener extends BaseMessageListener {
 			VenueImageLocalServiceUtil.clearService();
 
 			VenueImageServiceUtil.clearService();
+			VenueSubDetailLocalServiceUtil.clearService();
+
+			VenueSubDetailServiceUtil.clearService();
 		}
 	}
 }
