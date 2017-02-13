@@ -99,6 +99,9 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 	public com.rumbasolutions.flask.model.TailgateInfo getTailgate(
 		int tailgateId);
 
+	public com.rumbasolutions.flask.model.TailgateInfo copyTailgate(
+		int tailgateId, com.liferay.portal.service.ServiceContext serviceContext);
+
 	public com.rumbasolutions.flask.model.TailgateInfo updateTailgateInfo(
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
