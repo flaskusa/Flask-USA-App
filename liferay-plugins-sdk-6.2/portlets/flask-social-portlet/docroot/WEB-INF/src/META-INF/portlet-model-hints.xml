@@ -22,6 +22,11 @@
 	<hint-collection name="FLASK-PHONE">
 		<hint name="max-length">20</hint>
 	</hint-collection>
+	<model name="com.liferay.contacts.model.DeviceAwsEndpoint">
+		<field name="deviceEndPointId" type="long" />
+		<field name="awsEndpoint" type="String" />
+		<field name="userDeviceRegistrationId" type="long" />
+	</model>
 	<model name="com.liferay.contacts.model.Entry">
 		<field name="entryId" type="long" />
 		<field name="groupId" type="long" />
@@ -58,5 +63,25 @@
 		<field name="messageId" type="long" />
 		<field name="read" type="boolean" />
 		<field name="receivedDateTime" type="Date" />
+	</model>
+	<model name="com.liferay.contacts.model.FlaskUserDeviceRegistration">
+		<field name="userDeviceRegistrationId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userEmail" type="String" />
+		<field name="devicePlatform" type="String" />
+		<field name="deviceDetails" type="String" />
+		<field name="deviceToken" type="String" />
+		<field name="registrationTime" type="Date" />
+		<field name="active" type="boolean" />
+		<field name="lastNotificationTime" type="Date" />
+		<field name="lastNotificationMsg" type="String" />
+	</model>
+	<model name="com.liferay.contacts.model.NotificationAuditLog">
+		<field name="notificationAuditLogId" type="long" />
+		<field name="senderEmail" type="String" />
+		<field name="receiverEmail" type="String" />
+		<field name="messageReason" type="String" />
+		<field name="message" type="String" />
+		<field name="notificationTime" type="Date" />
 	</model>
 </model-hints>

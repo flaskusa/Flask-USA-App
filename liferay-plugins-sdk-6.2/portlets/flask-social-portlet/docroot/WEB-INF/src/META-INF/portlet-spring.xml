@@ -1,6 +1,9 @@
 <?xml version="1.0"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-destroy-method="destroy" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+	<bean id="com.liferay.contacts.service.DeviceAwsEndpointLocalService" class="com.liferay.contacts.service.impl.DeviceAwsEndpointLocalServiceImpl" />
+	<bean id="com.liferay.contacts.service.DeviceAwsEndpointService" class="com.liferay.contacts.service.impl.DeviceAwsEndpointServiceImpl" />
+	<bean id="com.liferay.contacts.service.persistence.DeviceAwsEndpointPersistence" class="com.liferay.contacts.service.persistence.DeviceAwsEndpointPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.contacts.service.EntryLocalService" class="com.liferay.contacts.service.impl.EntryLocalServiceImpl" />
 	<bean id="com.liferay.contacts.service.EntryService" class="com.liferay.contacts.service.impl.EntryServiceImpl" />
 	<bean id="com.liferay.contacts.service.persistence.EntryPersistence" class="com.liferay.contacts.service.persistence.EntryPersistenceImpl" parent="basePersistence" />
@@ -11,4 +14,10 @@
 	<bean id="com.liferay.contacts.service.FlaskRecipientsLocalService" class="com.liferay.contacts.service.impl.FlaskRecipientsLocalServiceImpl" />
 	<bean id="com.liferay.contacts.service.FlaskRecipientsService" class="com.liferay.contacts.service.impl.FlaskRecipientsServiceImpl" />
 	<bean id="com.liferay.contacts.service.persistence.FlaskRecipientsPersistence" class="com.liferay.contacts.service.persistence.FlaskRecipientsPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.contacts.service.FlaskUserDeviceRegistrationLocalService" class="com.liferay.contacts.service.impl.FlaskUserDeviceRegistrationLocalServiceImpl" />
+	<bean id="com.liferay.contacts.service.FlaskUserDeviceRegistrationService" class="com.liferay.contacts.service.impl.FlaskUserDeviceRegistrationServiceImpl" />
+	<bean id="com.liferay.contacts.service.persistence.FlaskUserDeviceRegistrationPersistence" class="com.liferay.contacts.service.persistence.FlaskUserDeviceRegistrationPersistenceImpl" parent="basePersistence" />
+	<bean id="com.liferay.contacts.service.NotificationAuditLogLocalService" class="com.liferay.contacts.service.impl.NotificationAuditLogLocalServiceImpl" />
+	<bean id="com.liferay.contacts.service.NotificationAuditLogService" class="com.liferay.contacts.service.impl.NotificationAuditLogServiceImpl" />
+	<bean id="com.liferay.contacts.service.persistence.NotificationAuditLogPersistence" class="com.liferay.contacts.service.persistence.NotificationAuditLogPersistenceImpl" parent="basePersistence" />
 </beans>

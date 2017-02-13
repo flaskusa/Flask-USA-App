@@ -1,4 +1,4 @@
- <?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 6.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_6_2_0.dtd">
 
 <service-builder package-path="com.liferay.contacts">
@@ -85,7 +85,7 @@
         <column name="userDeviceRegistrationId" type="long" primary="true"></column>
         <column name="userId" type="long"></column>
         <column name="userEmail" type="String"></column>
-        <column name="devicePlatform" type="string"></column>
+        <column name="devicePlatform" type="String"></column>
         <column name="deviceDetails" type="String"></column>
         <column name="deviceToken" type="String"></column>
         <column name="registrationTime" type="Date"></column>        

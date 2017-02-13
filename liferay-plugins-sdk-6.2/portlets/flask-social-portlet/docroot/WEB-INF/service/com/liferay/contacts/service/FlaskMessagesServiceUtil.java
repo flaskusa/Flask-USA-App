@@ -92,6 +92,13 @@ public class FlaskMessagesServiceUtil {
 		getService().deleteMessage(messageId, serviceContext);
 	}
 
+	public static void deleteMessagesByDateRange(java.util.Date startDate,
+		java.util.Date endDate,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService()
+			.deleteMessagesByDateRange(startDate, endDate, serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

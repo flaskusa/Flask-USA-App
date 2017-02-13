@@ -7,6 +7,16 @@
 			<access>PROPERTY</access>
 		</persistence-unit-defaults>
 	</persistence-unit-metadata>
+	<mapped-superclass class="com.liferay.contacts.model.impl.DeviceAwsEndpointModelImpl">
+		<attributes>
+			<id name="deviceEndPointId" />
+			<basic name="awsEndpoint" />
+			<basic name="userDeviceRegistrationId" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.liferay.contacts.model.impl.EntryModelImpl">
 		<attributes>
 			<id name="entryId" />
@@ -65,6 +75,49 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.liferay.contacts.model.impl.FlaskUserDeviceRegistrationModelImpl">
+		<attributes>
+			<id name="userDeviceRegistrationId" />
+			<basic name="userId" />
+			<basic name="userEmail" />
+			<basic name="devicePlatform" />
+			<basic name="deviceDetails" />
+			<basic name="deviceToken" />
+			<basic name="registrationTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="active">
+				<column name="ACTIVE_" />
+			</basic>
+			<basic name="lastNotificationTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<basic name="lastNotificationMsg" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+			<transient name="userUuid" />
+		</attributes>
+	</mapped-superclass>
+	<mapped-superclass class="com.liferay.contacts.model.impl.NotificationAuditLogModelImpl">
+		<attributes>
+			<id name="notificationAuditLogId" />
+			<basic name="senderEmail" />
+			<basic name="receiverEmail" />
+			<basic name="messageReason" />
+			<basic name="message" />
+			<basic name="notificationTime">
+				<temporal>TIMESTAMP</temporal>
+			</basic>
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
+	<entity class="com.liferay.contacts.model.impl.DeviceAwsEndpointImpl" name="DeviceAwsEndpoint">
+		<table name="Contacts_DeviceAwsEndpoint" />
+		<attributes />
+	</entity>
 	<entity class="com.liferay.contacts.model.impl.EntryImpl" name="Entry">
 		<table name="Contacts_Entry" />
 		<attributes />
@@ -75,6 +128,14 @@
 	</entity>
 	<entity class="com.liferay.contacts.model.impl.FlaskRecipientsImpl" name="FlaskRecipients">
 		<table name="Contacts_FlaskRecipients" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.contacts.model.impl.FlaskUserDeviceRegistrationImpl" name="FlaskUserDeviceRegistration">
+		<table name="Contacts_FlaskUserDeviceRegistration" />
+		<attributes />
+	</entity>
+	<entity class="com.liferay.contacts.model.impl.NotificationAuditLogImpl" name="NotificationAuditLog">
+		<table name="Contacts_NotificationAuditLog" />
 		<attributes />
 	</entity>
 </entity-mappings>

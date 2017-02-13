@@ -16,10 +16,13 @@ package com.liferay.contacts.service.base;
 
 import com.liferay.contacts.model.FlaskRecipients;
 import com.liferay.contacts.service.FlaskRecipientsService;
+import com.liferay.contacts.service.persistence.DeviceAwsEndpointPersistence;
 import com.liferay.contacts.service.persistence.EntryFinder;
 import com.liferay.contacts.service.persistence.EntryPersistence;
 import com.liferay.contacts.service.persistence.FlaskMessagesPersistence;
 import com.liferay.contacts.service.persistence.FlaskRecipientsPersistence;
+import com.liferay.contacts.service.persistence.FlaskUserDeviceRegistrationPersistence;
+import com.liferay.contacts.service.persistence.NotificationAuditLogPersistence;
 
 import com.liferay.portal.kernel.bean.BeanReference;
 import com.liferay.portal.kernel.bean.IdentifiableBean;
@@ -50,6 +53,63 @@ public abstract class FlaskRecipientsServiceBaseImpl extends BaseServiceImpl
 	 *
 	 * Never modify or reference this class directly. Always use {@link com.liferay.contacts.service.FlaskRecipientsServiceUtil} to access the flask recipients remote service.
 	 */
+
+	/**
+	 * Returns the device aws endpoint local service.
+	 *
+	 * @return the device aws endpoint local service
+	 */
+	public com.liferay.contacts.service.DeviceAwsEndpointLocalService getDeviceAwsEndpointLocalService() {
+		return deviceAwsEndpointLocalService;
+	}
+
+	/**
+	 * Sets the device aws endpoint local service.
+	 *
+	 * @param deviceAwsEndpointLocalService the device aws endpoint local service
+	 */
+	public void setDeviceAwsEndpointLocalService(
+		com.liferay.contacts.service.DeviceAwsEndpointLocalService deviceAwsEndpointLocalService) {
+		this.deviceAwsEndpointLocalService = deviceAwsEndpointLocalService;
+	}
+
+	/**
+	 * Returns the device aws endpoint remote service.
+	 *
+	 * @return the device aws endpoint remote service
+	 */
+	public com.liferay.contacts.service.DeviceAwsEndpointService getDeviceAwsEndpointService() {
+		return deviceAwsEndpointService;
+	}
+
+	/**
+	 * Sets the device aws endpoint remote service.
+	 *
+	 * @param deviceAwsEndpointService the device aws endpoint remote service
+	 */
+	public void setDeviceAwsEndpointService(
+		com.liferay.contacts.service.DeviceAwsEndpointService deviceAwsEndpointService) {
+		this.deviceAwsEndpointService = deviceAwsEndpointService;
+	}
+
+	/**
+	 * Returns the device aws endpoint persistence.
+	 *
+	 * @return the device aws endpoint persistence
+	 */
+	public DeviceAwsEndpointPersistence getDeviceAwsEndpointPersistence() {
+		return deviceAwsEndpointPersistence;
+	}
+
+	/**
+	 * Sets the device aws endpoint persistence.
+	 *
+	 * @param deviceAwsEndpointPersistence the device aws endpoint persistence
+	 */
+	public void setDeviceAwsEndpointPersistence(
+		DeviceAwsEndpointPersistence deviceAwsEndpointPersistence) {
+		this.deviceAwsEndpointPersistence = deviceAwsEndpointPersistence;
+	}
 
 	/**
 	 * Returns the entry local service.
@@ -240,6 +300,120 @@ public abstract class FlaskRecipientsServiceBaseImpl extends BaseServiceImpl
 	}
 
 	/**
+	 * Returns the flask user device registration local service.
+	 *
+	 * @return the flask user device registration local service
+	 */
+	public com.liferay.contacts.service.FlaskUserDeviceRegistrationLocalService getFlaskUserDeviceRegistrationLocalService() {
+		return flaskUserDeviceRegistrationLocalService;
+	}
+
+	/**
+	 * Sets the flask user device registration local service.
+	 *
+	 * @param flaskUserDeviceRegistrationLocalService the flask user device registration local service
+	 */
+	public void setFlaskUserDeviceRegistrationLocalService(
+		com.liferay.contacts.service.FlaskUserDeviceRegistrationLocalService flaskUserDeviceRegistrationLocalService) {
+		this.flaskUserDeviceRegistrationLocalService = flaskUserDeviceRegistrationLocalService;
+	}
+
+	/**
+	 * Returns the flask user device registration remote service.
+	 *
+	 * @return the flask user device registration remote service
+	 */
+	public com.liferay.contacts.service.FlaskUserDeviceRegistrationService getFlaskUserDeviceRegistrationService() {
+		return flaskUserDeviceRegistrationService;
+	}
+
+	/**
+	 * Sets the flask user device registration remote service.
+	 *
+	 * @param flaskUserDeviceRegistrationService the flask user device registration remote service
+	 */
+	public void setFlaskUserDeviceRegistrationService(
+		com.liferay.contacts.service.FlaskUserDeviceRegistrationService flaskUserDeviceRegistrationService) {
+		this.flaskUserDeviceRegistrationService = flaskUserDeviceRegistrationService;
+	}
+
+	/**
+	 * Returns the flask user device registration persistence.
+	 *
+	 * @return the flask user device registration persistence
+	 */
+	public FlaskUserDeviceRegistrationPersistence getFlaskUserDeviceRegistrationPersistence() {
+		return flaskUserDeviceRegistrationPersistence;
+	}
+
+	/**
+	 * Sets the flask user device registration persistence.
+	 *
+	 * @param flaskUserDeviceRegistrationPersistence the flask user device registration persistence
+	 */
+	public void setFlaskUserDeviceRegistrationPersistence(
+		FlaskUserDeviceRegistrationPersistence flaskUserDeviceRegistrationPersistence) {
+		this.flaskUserDeviceRegistrationPersistence = flaskUserDeviceRegistrationPersistence;
+	}
+
+	/**
+	 * Returns the notification audit log local service.
+	 *
+	 * @return the notification audit log local service
+	 */
+	public com.liferay.contacts.service.NotificationAuditLogLocalService getNotificationAuditLogLocalService() {
+		return notificationAuditLogLocalService;
+	}
+
+	/**
+	 * Sets the notification audit log local service.
+	 *
+	 * @param notificationAuditLogLocalService the notification audit log local service
+	 */
+	public void setNotificationAuditLogLocalService(
+		com.liferay.contacts.service.NotificationAuditLogLocalService notificationAuditLogLocalService) {
+		this.notificationAuditLogLocalService = notificationAuditLogLocalService;
+	}
+
+	/**
+	 * Returns the notification audit log remote service.
+	 *
+	 * @return the notification audit log remote service
+	 */
+	public com.liferay.contacts.service.NotificationAuditLogService getNotificationAuditLogService() {
+		return notificationAuditLogService;
+	}
+
+	/**
+	 * Sets the notification audit log remote service.
+	 *
+	 * @param notificationAuditLogService the notification audit log remote service
+	 */
+	public void setNotificationAuditLogService(
+		com.liferay.contacts.service.NotificationAuditLogService notificationAuditLogService) {
+		this.notificationAuditLogService = notificationAuditLogService;
+	}
+
+	/**
+	 * Returns the notification audit log persistence.
+	 *
+	 * @return the notification audit log persistence
+	 */
+	public NotificationAuditLogPersistence getNotificationAuditLogPersistence() {
+		return notificationAuditLogPersistence;
+	}
+
+	/**
+	 * Sets the notification audit log persistence.
+	 *
+	 * @param notificationAuditLogPersistence the notification audit log persistence
+	 */
+	public void setNotificationAuditLogPersistence(
+		NotificationAuditLogPersistence notificationAuditLogPersistence) {
+		this.notificationAuditLogPersistence = notificationAuditLogPersistence;
+	}
+
+	/**
 	 * Returns the counter local service.
 	 *
 	 * @return the counter local service
@@ -410,6 +584,12 @@ public abstract class FlaskRecipientsServiceBaseImpl extends BaseServiceImpl
 		}
 	}
 
+	@BeanReference(type = com.liferay.contacts.service.DeviceAwsEndpointLocalService.class)
+	protected com.liferay.contacts.service.DeviceAwsEndpointLocalService deviceAwsEndpointLocalService;
+	@BeanReference(type = com.liferay.contacts.service.DeviceAwsEndpointService.class)
+	protected com.liferay.contacts.service.DeviceAwsEndpointService deviceAwsEndpointService;
+	@BeanReference(type = DeviceAwsEndpointPersistence.class)
+	protected DeviceAwsEndpointPersistence deviceAwsEndpointPersistence;
 	@BeanReference(type = com.liferay.contacts.service.EntryLocalService.class)
 	protected com.liferay.contacts.service.EntryLocalService entryLocalService;
 	@BeanReference(type = com.liferay.contacts.service.EntryService.class)
@@ -430,6 +610,18 @@ public abstract class FlaskRecipientsServiceBaseImpl extends BaseServiceImpl
 	protected com.liferay.contacts.service.FlaskRecipientsService flaskRecipientsService;
 	@BeanReference(type = FlaskRecipientsPersistence.class)
 	protected FlaskRecipientsPersistence flaskRecipientsPersistence;
+	@BeanReference(type = com.liferay.contacts.service.FlaskUserDeviceRegistrationLocalService.class)
+	protected com.liferay.contacts.service.FlaskUserDeviceRegistrationLocalService flaskUserDeviceRegistrationLocalService;
+	@BeanReference(type = com.liferay.contacts.service.FlaskUserDeviceRegistrationService.class)
+	protected com.liferay.contacts.service.FlaskUserDeviceRegistrationService flaskUserDeviceRegistrationService;
+	@BeanReference(type = FlaskUserDeviceRegistrationPersistence.class)
+	protected FlaskUserDeviceRegistrationPersistence flaskUserDeviceRegistrationPersistence;
+	@BeanReference(type = com.liferay.contacts.service.NotificationAuditLogLocalService.class)
+	protected com.liferay.contacts.service.NotificationAuditLogLocalService notificationAuditLogLocalService;
+	@BeanReference(type = com.liferay.contacts.service.NotificationAuditLogService.class)
+	protected com.liferay.contacts.service.NotificationAuditLogService notificationAuditLogService;
+	@BeanReference(type = NotificationAuditLogPersistence.class)
+	protected NotificationAuditLogPersistence notificationAuditLogPersistence;
 	@BeanReference(type = com.liferay.counter.service.CounterLocalService.class)
 	protected com.liferay.counter.service.CounterLocalService counterLocalService;
 	@BeanReference(type = com.liferay.portal.service.ResourceLocalService.class)

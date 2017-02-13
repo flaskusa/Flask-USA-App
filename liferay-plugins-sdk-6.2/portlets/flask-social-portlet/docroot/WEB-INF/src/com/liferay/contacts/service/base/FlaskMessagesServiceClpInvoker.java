@@ -24,87 +24,103 @@ import java.util.Arrays;
  */
 public class FlaskMessagesServiceClpInvoker {
 	public FlaskMessagesServiceClpInvoker() {
-		_methodName32 = "getBeanIdentifier";
+		_methodName50 = "getBeanIdentifier";
 
-		_methodParameterTypes32 = new String[] {  };
+		_methodParameterTypes50 = new String[] {  };
 
-		_methodName33 = "setBeanIdentifier";
+		_methodName51 = "setBeanIdentifier";
 
-		_methodParameterTypes33 = new String[] { "java.lang.String" };
+		_methodParameterTypes51 = new String[] { "java.lang.String" };
 
-		_methodName38 = "sendFlaskMessage";
+		_methodName56 = "sendFlaskMessage";
 
-		_methodParameterTypes38 = new String[] {
+		_methodParameterTypes56 = new String[] {
 				"java.lang.String", "java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName39 = "getAllMyFlaskMessages";
+		_methodName57 = "getAllMyFlaskMessages";
 
-		_methodParameterTypes39 = new String[] {
+		_methodParameterTypes57 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName40 = "getMyUnreadFlaskMessages";
+		_methodName58 = "getMyUnreadFlaskMessages";
 
-		_methodParameterTypes40 = new String[] {
+		_methodParameterTypes58 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName41 = "getMyFlaskMessagesCount";
+		_methodName59 = "getMyFlaskMessagesCount";
 
-		_methodParameterTypes41 = new String[] {
+		_methodParameterTypes59 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName42 = "deleteMessage";
+		_methodName60 = "deleteMessage";
 
-		_methodParameterTypes42 = new String[] {
+		_methodParameterTypes60 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName61 = "deleteMessagesByDateRange";
+
+		_methodParameterTypes61 = new String[] {
+				"java.util.Date", "java.util.Date",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName32.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes32, parameterTypes)) {
+		if (_methodName50.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes50, parameterTypes)) {
 			return FlaskMessagesServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName33.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes33, parameterTypes)) {
+		if (_methodName51.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes51, parameterTypes)) {
 			FlaskMessagesServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName38.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
+		if (_methodName56.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes56, parameterTypes)) {
 			return FlaskMessagesServiceUtil.sendFlaskMessage((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1],
 				((Boolean)arguments[2]).booleanValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[3]);
 		}
 
-		if (_methodName39.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
+		if (_methodName57.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes57, parameterTypes)) {
 			return FlaskMessagesServiceUtil.getAllMyFlaskMessages((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
-		if (_methodName40.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
+		if (_methodName58.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes58, parameterTypes)) {
 			return FlaskMessagesServiceUtil.getMyUnreadFlaskMessages((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
-		if (_methodName41.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
 			return FlaskMessagesServiceUtil.getMyFlaskMessagesCount((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
-		if (_methodName42.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
 			FlaskMessagesServiceUtil.deleteMessage(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName61.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes61, parameterTypes)) {
+			FlaskMessagesServiceUtil.deleteMessagesByDateRange((java.util.Date)arguments[0],
+				(java.util.Date)arguments[1],
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
 
 			return null;
 		}
@@ -112,18 +128,20 @@ public class FlaskMessagesServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName32;
-	private String[] _methodParameterTypes32;
-	private String _methodName33;
-	private String[] _methodParameterTypes33;
-	private String _methodName38;
-	private String[] _methodParameterTypes38;
-	private String _methodName39;
-	private String[] _methodParameterTypes39;
-	private String _methodName40;
-	private String[] _methodParameterTypes40;
-	private String _methodName41;
-	private String[] _methodParameterTypes41;
-	private String _methodName42;
-	private String[] _methodParameterTypes42;
+	private String _methodName50;
+	private String[] _methodParameterTypes50;
+	private String _methodName51;
+	private String[] _methodParameterTypes51;
+	private String _methodName56;
+	private String[] _methodParameterTypes56;
+	private String _methodName57;
+	private String[] _methodParameterTypes57;
+	private String _methodName58;
+	private String[] _methodParameterTypes58;
+	private String _methodName59;
+	private String[] _methodParameterTypes59;
+	private String _methodName60;
+	private String[] _methodParameterTypes60;
+	private String _methodName61;
+	private String[] _methodParameterTypes61;
 }

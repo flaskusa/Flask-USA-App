@@ -139,5 +139,20 @@ public class FlaskMessagesServiceSoap {
 		}
 	}
 
+	public static void deleteMessagesByDateRange(java.util.Date startDate,
+		java.util.Date endDate,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			FlaskMessagesServiceUtil.deleteMessagesByDateRange(startDate,
+				endDate, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskMessagesServiceSoap.class);
 }

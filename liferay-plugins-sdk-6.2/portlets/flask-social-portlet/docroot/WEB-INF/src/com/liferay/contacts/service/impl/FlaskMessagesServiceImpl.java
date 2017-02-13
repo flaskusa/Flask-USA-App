@@ -14,6 +14,7 @@
 
 package com.liferay.contacts.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -24,6 +25,7 @@ import com.liferay.contacts.service.FlaskMessagesLocalServiceUtil;
 import com.liferay.contacts.service.FlaskRecipientsLocalServiceUtil;
 import com.liferay.contacts.service.FlaskRecipientsServiceUtil;
 import com.liferay.contacts.service.base.FlaskMessagesServiceBaseImpl;
+import com.liferay.contacts.service.persistence.FlaskMessagesUtil;
 import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.json.JSONArray;
@@ -134,7 +136,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		int count = 0;
 		try {
 			flaskRecipients = FlaskRecipientsUtil.findByUserId(serviceContext.getUserId());
-			for(FlaskRecipients recp: flaskRecipients){
+			for(@SuppressWarnings("unused") FlaskRecipients recp: flaskRecipients){
 				count++;
 			}
 		} catch (Exception e) {
@@ -162,4 +164,22 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		}
 	}
 	
+	@SuppressWarnings("deprecation")
+	@Override
+	public void deleteMessagesByDateRange(Date startDate, Date endDate, ServiceContext serviceContext){
+		try {
+			List<FlaskMessages> messages =  FlaskMessagesLocalServiceUtil.getFlaskMessageses(0, FlaskMessagesLocalServiceUtil.getFlaskMessagesesCount());
+			for(FlaskMessages msg: messages){
+				Date msgDate = new Date(msg.getDateTime().getDate());
+				Date stDate = new Date(startDate.getDate());
+				Date enDate = new Date(endDate.getDate());
+				if(stDate.compareTo(msgDate) <= 0 && enDate.compareTo(msgDate) >= 0){
+					FlaskMessagesLocalServiceUtil.deleteFlaskMessages(msg);
+				}
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+	}
 }

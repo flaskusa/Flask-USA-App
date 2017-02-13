@@ -91,6 +91,14 @@ public class FlaskMessagesServiceWrapper implements FlaskMessagesService,
 		_flaskMessagesService.deleteMessage(messageId, serviceContext);
 	}
 
+	@Override
+	public void deleteMessagesByDateRange(java.util.Date startDate,
+		java.util.Date endDate,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_flaskMessagesService.deleteMessagesByDateRange(startDate, endDate,
+			serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

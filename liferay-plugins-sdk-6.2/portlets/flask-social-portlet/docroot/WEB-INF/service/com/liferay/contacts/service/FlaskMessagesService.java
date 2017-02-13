@@ -84,4 +84,8 @@ public interface FlaskMessagesService extends BaseService, InvokableService {
 
 	public void deleteMessage(long messageId,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public void deleteMessagesByDateRange(java.util.Date startDate,
+		java.util.Date endDate,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

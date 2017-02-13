@@ -15,12 +15,18 @@
 package com.liferay.contacts.service.messaging;
 
 import com.liferay.contacts.service.ClpSerializer;
+import com.liferay.contacts.service.DeviceAwsEndpointLocalServiceUtil;
+import com.liferay.contacts.service.DeviceAwsEndpointServiceUtil;
 import com.liferay.contacts.service.EntryLocalServiceUtil;
 import com.liferay.contacts.service.EntryServiceUtil;
 import com.liferay.contacts.service.FlaskMessagesLocalServiceUtil;
 import com.liferay.contacts.service.FlaskMessagesServiceUtil;
 import com.liferay.contacts.service.FlaskRecipientsLocalServiceUtil;
 import com.liferay.contacts.service.FlaskRecipientsServiceUtil;
+import com.liferay.contacts.service.FlaskUserDeviceRegistrationLocalServiceUtil;
+import com.liferay.contacts.service.FlaskUserDeviceRegistrationServiceUtil;
+import com.liferay.contacts.service.NotificationAuditLogLocalServiceUtil;
+import com.liferay.contacts.service.NotificationAuditLogServiceUtil;
 
 import com.liferay.portal.kernel.messaging.BaseMessageListener;
 import com.liferay.portal.kernel.messaging.Message;
@@ -40,6 +46,9 @@ public class ClpMessageListener extends BaseMessageListener {
 
 		if (command.equals("undeploy") &&
 				servletContextName.equals(getServletContextName())) {
+			DeviceAwsEndpointLocalServiceUtil.clearService();
+
+			DeviceAwsEndpointServiceUtil.clearService();
 			EntryLocalServiceUtil.clearService();
 
 			EntryServiceUtil.clearService();
@@ -49,6 +58,12 @@ public class ClpMessageListener extends BaseMessageListener {
 			FlaskRecipientsLocalServiceUtil.clearService();
 
 			FlaskRecipientsServiceUtil.clearService();
+			FlaskUserDeviceRegistrationLocalServiceUtil.clearService();
+
+			FlaskUserDeviceRegistrationServiceUtil.clearService();
+			NotificationAuditLogLocalServiceUtil.clearService();
+
+			NotificationAuditLogServiceUtil.clearService();
 		}
 	}
 }

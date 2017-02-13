@@ -2,9 +2,19 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false" auto-import="false">
+	<import class="com.liferay.contacts.model.DeviceAwsEndpoint" />
 	<import class="com.liferay.contacts.model.Entry" />
 	<import class="com.liferay.contacts.model.FlaskMessages" />
 	<import class="com.liferay.contacts.model.FlaskRecipients" />
+	<import class="com.liferay.contacts.model.FlaskUserDeviceRegistration" />
+	<import class="com.liferay.contacts.model.NotificationAuditLog" />
+	<class name="com.liferay.contacts.model.impl.DeviceAwsEndpointImpl" table="Contacts_DeviceAwsEndpoint">
+		<id name="deviceEndPointId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="awsEndpoint" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userDeviceRegistrationId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
 	<class name="com.liferay.contacts.model.impl.EntryImpl" table="Contacts_Entry">
 		<id name="entryId" type="long">
 			<generator class="assigned" />
@@ -40,5 +50,29 @@
 		<property name="messageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="read" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="read_" />
 		<property name="receivedDateTime" type="org.hibernate.type.TimestampType" />
+	</class>
+	<class name="com.liferay.contacts.model.impl.FlaskUserDeviceRegistrationImpl" table="Contacts_FlaskUserDeviceRegistration">
+		<id name="userDeviceRegistrationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userEmail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="devicePlatform" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="deviceDetails" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="deviceToken" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="registrationTime" type="org.hibernate.type.TimestampType" />
+		<property name="active" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="active_" />
+		<property name="lastNotificationTime" type="org.hibernate.type.TimestampType" />
+		<property name="lastNotificationMsg" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.contacts.model.impl.NotificationAuditLogImpl" table="Contacts_NotificationAuditLog">
+		<id name="notificationAuditLogId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="senderEmail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="receiverEmail" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="messageReason" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="message" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="notificationTime" type="org.hibernate.type.TimestampType" />
 	</class>
 </hibernate-mapping>
