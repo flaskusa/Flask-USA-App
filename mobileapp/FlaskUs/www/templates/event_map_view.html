@@ -277,7 +277,19 @@
                                     <div id="traffic" class="" ng-bind-html="trafficDetail.infoDesc">
                                     </div>
                                 </div>
-                            </div>
+                                <div ng-repeat="trafficSubDetail in trafficDetails" style="border-bottom: solid;margin-top: 20px">
+                                    <div align="center">
+                                        <div style="width: 80%;">
+                                            <i class="trafficDetailHeading">{{trafficSubDetail.infoTitle}}</i>
+                                        </div>
+                                    </div>
+                                    <div class="TrafficInfoDescDiv">
+
+                                        <div id="traffic" class="" ng-bind-html="trafficSubDetail.infoDesc">
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
                         </ion-content>
                     </div>
                 </ion-tab>
