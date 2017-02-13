@@ -2072,6 +2072,12 @@ label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox{
     pointer-events: none;
 }
 
+.disableoption{
+    opacity: .4;
+    cursor: default !important;
+    pointer-events: none;
+}
+
 .profilepicAvatar{
     height: 200px !important;
     width: inherit !important; /*For avtar in profile pic */
@@ -2909,10 +2915,12 @@ a.menu_notification{
 
 label.item.item-icon-left.item-checkbox-right.item.item-checkbox.tailgate_admin{
     width: 3pc;
-    margin-left: -21px;
+    margin-left: -7px;
     border-top: transparent;
     border-left: transparent;
+    border-right: transparent;
     margin-top: -18px;
+    right: 14px !important;
 }
 
 .item-checkbox .checkbox{
