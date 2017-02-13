@@ -112,6 +112,12 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 	}
 
 	@Override
+	public com.rumbasolutions.flask.model.TailgateInfo copyTailgate(
+		int tailgateId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateInfoService.copyTailgate(tailgateId, serviceContext);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.TailgateInfo updateTailgateInfo(
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,

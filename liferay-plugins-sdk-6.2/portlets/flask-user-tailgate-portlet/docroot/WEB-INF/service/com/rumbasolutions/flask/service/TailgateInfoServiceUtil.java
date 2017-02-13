@@ -111,6 +111,11 @@ public class TailgateInfoServiceUtil {
 		return getService().getTailgate(tailgateId);
 	}
 
+	public static com.rumbasolutions.flask.model.TailgateInfo copyTailgate(
+		int tailgateId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().copyTailgate(tailgateId, serviceContext);
+	}
+
 	public static com.rumbasolutions.flask.model.TailgateInfo updateTailgateInfo(
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,

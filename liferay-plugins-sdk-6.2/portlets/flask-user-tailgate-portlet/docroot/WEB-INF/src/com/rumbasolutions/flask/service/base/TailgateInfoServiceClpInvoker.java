@@ -73,18 +73,24 @@ public class TailgateInfoServiceClpInvoker {
 
 		_methodParameterTypes79 = new String[] { "int" };
 
-		_methodName80 = "updateTailgateInfo";
+		_methodName80 = "copyTailgate";
 
 		_methodParameterTypes80 = new String[] {
+				"int", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName81 = "updateTailgateInfo";
+
+		_methodParameterTypes81 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "long",
 				"java.lang.String", "java.util.Date", "long", "long",
 				"java.lang.String", "double", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName81 = "deleteTailgateInfo";
+		_methodName82 = "deleteTailgateInfo";
 
-		_methodParameterTypes81 = new String[] {
+		_methodParameterTypes82 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -159,6 +165,12 @@ public class TailgateInfoServiceClpInvoker {
 
 		if (_methodName80.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
+			return TailgateInfoServiceUtil.copyTailgate(((Integer)arguments[0]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName81.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
 			return TailgateInfoServiceUtil.updateTailgateInfo(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				((Long)arguments[3]).longValue(),
@@ -171,8 +183,8 @@ public class TailgateInfoServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[11]);
 		}
 
-		if (_methodName81.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+		if (_methodName82.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
 			TailgateInfoServiceUtil.deleteTailgateInfo(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
@@ -206,4 +218,6 @@ public class TailgateInfoServiceClpInvoker {
 	private String[] _methodParameterTypes80;
 	private String _methodName81;
 	private String[] _methodParameterTypes81;
+	private String _methodName82;
+	private String[] _methodParameterTypes82;
 }

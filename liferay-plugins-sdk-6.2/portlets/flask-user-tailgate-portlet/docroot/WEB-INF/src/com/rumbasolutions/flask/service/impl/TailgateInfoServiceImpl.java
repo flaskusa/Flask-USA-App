@@ -31,13 +31,17 @@ import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.rumbasolutions.flask.model.TailgateInfo;
+import com.rumbasolutions.flask.model.TailgateMarker;
 import com.rumbasolutions.flask.model.TailgateUsers;
 import com.rumbasolutions.flask.model.impl.TailgateInfoImpl;
 import com.rumbasolutions.flask.model.impl.TailgateUsersImpl;
 import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateMarkerLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateMarkerServiceUtil;
 import com.rumbasolutions.flask.service.TailgateMessageBoardServiceUtil;
 import com.rumbasolutions.flask.service.TailgateSupplyItemServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.TailgateInfoServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoFinderUtil;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoUtil;
@@ -221,13 +225,84 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 		return userTailgate;
 	}
 	
+	public TailgateInfo copyTailgate(int tailgateId, ServiceContext  serviceContext){
+		TailgateInfo userTailgate = null;
+		TailgateInfo newUserTailgate = null;
+		try{
+			userTailgate = TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId);
+			newUserTailgate = TailgateInfoLocalServiceUtil.createTailgateInfo(CounterLocalServiceUtil.increment());
+			newUserTailgate.setTailgateName("Copy of "+ userTailgate.getTailgateName());
+			newUserTailgate.setTailgateDescription(userTailgate.getTailgateDescription());
+			newUserTailgate.setEventId(userTailgate.getEventId());
+			newUserTailgate.setEventName(userTailgate.getEventName());
+			newUserTailgate.setTailgateDate(userTailgate.getTailgateDate());
+			newUserTailgate.setStartTime(userTailgate.getStartTime());
+			newUserTailgate.setEndTime(userTailgate.getEndTime());
+			newUserTailgate.setIsActive(1);
+			newUserTailgate.setIsDelete(0);
+			newUserTailgate.setVenmoAccountId(userTailgate.getVenmoAccountId());
+			newUserTailgate.setAmountToPay(userTailgate.getAmountToPay());
+			Date now = new Date();
+			newUserTailgate.setCompanyId(serviceContext.getCompanyId());
+			newUserTailgate.setUserId(serviceContext.getUserId());
+			newUserTailgate.setCreatedDate(serviceContext.getCreateDate(now));
+			newUserTailgate.setModifiedDate(serviceContext.getModifiedDate(now));
+			newUserTailgate.setLogoId(userTailgate.getLogoId());
+			TailgateInfoLocalServiceUtil.addTailgateInfo(newUserTailgate);
+			
+			TailgateUsers tailgateUser = TailgateUsersLocalServiceUtil.createTailgateUsers(CounterLocalServiceUtil.increment());
+			tailgateUser.setIsAdmin(1); //TRUE
+			User user = UserLocalServiceUtil.getUser(serviceContext.getUserId());
+			tailgateUser.setTailgateId(newUserTailgate.getTailgateId());
+			tailgateUser.setUserId(user.getUserId());
+			String userName = user.getFirstName() + " " + user.getLastName();
+			tailgateUser.setUserName(userName);
+			tailgateUser.setEmailAddress(user.getEmailAddress());
+			tailgateUser.setIsPaid(false);
+			tailgateUser.setPaymentMode("None");
+			tailgateUser.setGroupId(0);
+			TailgateUsersLocalServiceUtil.addTailgateUsers(tailgateUser);
+			
+			List<TailgateUsers> allMembers = TailgateUsersServiceUtil.getTailgateMembers(tailgateId);
+			for(TailgateUsers member: allMembers){
+				if(member.getUserId()!= serviceContext.getUserId()){
+					TailgateUsers newMember = TailgateUsersLocalServiceUtil.createTailgateUsers(CounterLocalServiceUtil.increment());
+					newMember.setTailgateId(newUserTailgate.getTailgateId());
+					newMember.setUserId(member.getUserId());
+					newMember.setUserName(member.getUserName());
+					newMember.setEmailAddress(member.getEmailAddress());
+					newMember.setIsPaid(false);
+					newMember.setPaymentMode("None");
+					newMember.setGroupId(0);
+					TailgateUsersLocalServiceUtil.addTailgateUsers(newMember);
+				}
+			}
+			
+			TailgateMarker telgateMarker = TailgateMarkerServiceUtil.getTailgateMarker(tailgateId);
+			TailgateMarker newMarker = TailgateMarkerLocalServiceUtil.createTailgateMarker(CounterLocalServiceUtil.increment());
+			newMarker.setLatitude(telgateMarker.getLatitude());
+			newMarker.setLongitude(telgateMarker.getLongitude());
+			newMarker.setName(telgateMarker.getName());
+			newMarker.setDescription(telgateMarker.getDescription());
+			newMarker.setTailgateid(newUserTailgate.getTailgateId());
+			TailgateMarkerLocalServiceUtil.addTailgateMarker(newMarker);
+			
+		}catch(Exception ex){
+			LOGGER.error("Exception in copy Tailgate: " + ex.getMessage());
+		}
+		return newUserTailgate;
+	}
+	
 	public TailgateInfo updateTailgateInfo(long tailgateId, String tailgateName, String tailgateDescription,long eventId, String eventName, 
 				Date tailgateDate, long startTime, long endTime, String venmoAccountId, double amountToPay, long logoId, ServiceContext  serviceContext){
 		TailgateInfo userTailgate = null;
 		try{
 			userTailgate = TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId);
+			TailgateUsers tailgateuser = TailgateUsersLocalServiceUtil.getTailgateUsers(serviceContext.getUserId());
+			int isAdmin = tailgateuser.getIsAdmin();
+			if(isAdmin == 1)
 			//make sure user who created the tailgate is the one who can modify it.
-			if(serviceContext.getUserId() == userTailgate.getUserId()){
+			{
 				userTailgate.setTailgateName(tailgateName);
 				userTailgate.setTailgateDescription(tailgateDescription);
 				userTailgate.setEventId(eventId);

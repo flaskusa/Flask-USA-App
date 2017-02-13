@@ -188,6 +188,22 @@ public class TailgateInfoServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.TailgateInfoSoap copyTailgate(
+		int tailgateId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.TailgateInfo returnValue = TailgateInfoServiceUtil.copyTailgate(tailgateId,
+					serviceContext);
+
+			return com.rumbasolutions.flask.model.TailgateInfoSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.TailgateInfoSoap updateTailgateInfo(
 		long tailgateId, java.lang.String tailgateName,
 		java.lang.String tailgateDescription, long eventId,
