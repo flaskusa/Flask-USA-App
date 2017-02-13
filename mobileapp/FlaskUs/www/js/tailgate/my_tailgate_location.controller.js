@@ -27,6 +27,22 @@
         }else{
             callMap($scope.taligateMarkers.latitude, $scope.taligateMarkers.longitude); //taking markers from cookies
         }
+
+        $scope.checkTailgateId = function () {
+            if (!tailGateId) {
+            }
+            else {
+                editTailgate(tailGateId);
+            }
+        }
+
+        function editTailgate(tailGateId) {
+            var addTailgateParams = {}
+            TailgateService.getTailgate(tailGateId).then(function (respData) {
+                $cookies.putObject("editUserTailgate", respData.data);
+                $state.go("app.add_my_tailgate");
+            });
+        }
                 
                 //calling map on load and on events change
                 function callMap( currlatitude,currlongitude){

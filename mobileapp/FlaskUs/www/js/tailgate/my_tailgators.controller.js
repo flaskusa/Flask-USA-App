@@ -11,7 +11,9 @@
         $scope.myFriends = [];
         $scope.detail = [];
         $scope.friendsToInvite = [];
+        $scope.tailgaters = [];
         $scope.isTailgateAdmin = false;
+        $scope.tailgateOwner = false;
         $rootScope.role = '0';
         var userDetail = $cookies.getObject('CurrentUser');
         var userId = userDetail.data.userId;
@@ -24,13 +26,14 @@
             $state.go("app.my_tailgate");
         }
         var tailGateId = $cookies.get('currtailGateId');
+        var tailgateOwnerId = $cookies.get('currtailGateUserId');
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
 
 
         $scope.deleteTailgateUser = function (currUserId, index) {
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Member ?'
+                title: 'Delete Tailgater ?'
             });
             confirmPopup.then(function (res) {
                 if (res) {
@@ -55,6 +58,7 @@
         $scope.isUserTailgateAdmin(tailGateId);
 
 
+        
         function getTailgaters() {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (response) {
                 $scope.myTailgaters = []
@@ -62,13 +66,21 @@
                 angular.forEach(response.data, function (value, key) {
                     haveProfilePic(value)
                 })
-
+                
 
             });
-
             getAllFriends();
             getTailgateUser();
+            
         }
+
+        function getTailgateUser() {
+            TailgateService.getTailgate(tailGateId).then(function (respData) {
+                $scope.tUserId = respData.data.userId; 
+            });
+            
+        }
+
         function haveProfilePic(memberDetail) {
             var PicExist = false
             angular.forEach($localStorage["myFriendDetail"], function (value, key) {
@@ -79,15 +91,13 @@
 
                     }
                 }
-
-
-
+                
             });
             if (memberDetail.userId == userId || !isMemberMyFrnd(memberDetail)) {
                 $scope.getUserProfile(memberDetail)
 
             } else {
-                $scope.myTailgaters.push(memberDetail)
+                $scope.myTailgaters.push(memberDetail);
             }
         }
         function isMemberMyFrnd(memberDetail) {
@@ -206,11 +216,22 @@
             })
         };
 
-        function getTailgateUser(){
+        $scope.checkTailgateId = function () {
+            if (!tailGateId) {
+            }
+            else {
+                editTailgate(tailGateId);
+            }
+        }
+
+        function editTailgate(tailGateId) {
+            var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {
-                $scope.tUserId=respData.data.userId;
+                $cookies.putObject("editUserTailgate", respData.data);
+                $state.go("app.add_my_tailgate");
             });
         }
+
         $scope.changeTailgaterRole = function (currUserId, index) {
             console.log($scope.tUserId);
             if (currUserId != $scope.tUserId) {
@@ -224,7 +245,7 @@
                 }
             }
             else {
-                $ionicLoading.show({ template: 'You cannot chage the role of Tailgate Admin!', noBackdrop: false, duration: 3000 });
+                $ionicLoading.show({ template: 'Tailgate Admin Cannot be removed!', noBackdrop: false, duration: 3000 });
             }
         }
         getTailgaters();

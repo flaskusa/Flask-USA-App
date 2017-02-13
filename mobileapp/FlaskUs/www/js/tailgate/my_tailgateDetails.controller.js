@@ -195,7 +195,6 @@
             }
         }
 
-
         $scope.isUserTailgateAdmin = function (tailgateId) {
             TailgateService.isUserTailgateAdmin(tailgateId).then(function (respData) {
                 $scope.isTailgateAdmin = respData.data;

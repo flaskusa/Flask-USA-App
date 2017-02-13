@@ -57,6 +57,23 @@
             val.itemAssignedUserName = getUserNameById(val.itemAssignedUserId);
             })
         }
+
+        $scope.checkTailgateId = function () {
+            if (!tailGateId) {
+            }
+            else {
+                editTailgate(tailGateId);
+            }
+        }
+
+        function editTailgate(tailGateId) {
+            var addTailgateParams = {}
+            TailgateService.getTailgate(tailGateId).then(function (respData) {
+                $cookies.putObject("editUserTailgate", respData.data);
+                $state.go("app.add_my_tailgate");
+            });
+        }
+
         function getUserNameById(userId) {
             var userName = "";
             angular.forEach($scope.myTailgaters,function(val,idx){
