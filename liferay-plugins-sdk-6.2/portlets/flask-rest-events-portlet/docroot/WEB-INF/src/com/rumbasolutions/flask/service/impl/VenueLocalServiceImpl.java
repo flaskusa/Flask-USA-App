@@ -22,14 +22,18 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.rumbasolutions.flask.model.EventSubDetail;
 import com.rumbasolutions.flask.model.Venue;
 import com.rumbasolutions.flask.model.VenueDetail;
 import com.rumbasolutions.flask.model.VenueDetailImage;
 import com.rumbasolutions.flask.model.VenueImage;
+import com.rumbasolutions.flask.model.VenueSubDetail;
 import com.rumbasolutions.flask.service.base.VenueLocalServiceBaseImpl;
+import com.rumbasolutions.flask.service.persistence.EventSubDetailUtil;
 import com.rumbasolutions.flask.service.persistence.VenueDetailImageUtil;
 import com.rumbasolutions.flask.service.persistence.VenueDetailUtil;
 import com.rumbasolutions.flask.service.persistence.VenueImageUtil;
+import com.rumbasolutions.flask.service.persistence.VenueSubDetailUtil;
 
 /**
  * The implementation of the venue local service.
@@ -56,6 +60,7 @@ public class VenueLocalServiceImpl extends VenueLocalServiceBaseImpl {
 	public JSONObject getVenueDetailsWithImages(long venueId){
 		List<VenueImage> venueImgList = null;
 		List<VenueDetail> venueDetails = null;
+		List<VenueSubDetail> venueSubDetails = null;
 		List<VenueDetailImage> detailImgList = null;
 		JSONObject venueJsonObj =  JSONFactoryUtil.createJSONObject();
 		try{
@@ -83,6 +88,18 @@ public class VenueLocalServiceImpl extends VenueLocalServiceBaseImpl {
 				detailImgList = VenueDetailImageUtil.findByVenueDetailId(venueDetail.getVenueDetailId());
 				JSONArray venueDetailImageArr =  JSONFactoryUtil.createJSONArray();
 				venueDetailJsonObj.put("DetailImages", venueDetailImageArr);
+				
+				JSONArray venueSubDetailArr =  JSONFactoryUtil.createJSONArray();
+				venueDetailJsonObj.put("VenueSubDetails", venueSubDetailArr);
+				
+				venueSubDetails = VenueSubDetailUtil.findByVenueDetailId(venueDetail.getVenueDetailId());
+				
+				for (VenueSubDetail venueSubDetail : venueSubDetails) {
+					JSONObject venueSubDetailObj =  JSONFactoryUtil.createJSONObject();
+					venueSubDetailObj.put("SubDetail", JSONFactoryUtil.looseSerialize(venueSubDetail));
+					venueSubDetailArr.put(venueSubDetailObj);
+				}
+				
 				for (VenueDetailImage detailImage : detailImgList) {
 					JSONObject venueDetailImageObj =  JSONFactoryUtil.createJSONObject();
 					venueDetailImageObj.put("DetailImage", JSONFactoryUtil.looseSerialize(detailImage));

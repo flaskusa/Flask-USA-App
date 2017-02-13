@@ -47,6 +47,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.rumbasolutions.flask.model.Event;
 import com.rumbasolutions.flask.model.EventDetail;
 import com.rumbasolutions.flask.model.EventDetailImage;
+import com.rumbasolutions.flask.model.EventSubDetail;
 import com.rumbasolutions.flask.model.UserEvent;
 import com.rumbasolutions.flask.service.EventDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventDetailLocalServiceUtil;
@@ -392,6 +393,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	public JSONObject getEventDetailsWithImages(long eventId, ServiceContext  serviceContext){
 		
 		List<EventDetail> eventDetails = null;
+		List<EventSubDetail> eventSubDetails = null;
 		List<EventDetailImage> detailImgList = null;
 		JSONObject eventJsonObj =  JSONFactoryUtil.createJSONObject();
 		try{
@@ -408,7 +410,18 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 				eventDetailArr.put(eventDetailJsonObj);
 				detailImgList = getEventDetailImages(eventDetail.getEventDetailId(), serviceContext);
 				JSONArray eventDetailImageArr =  JSONFactoryUtil.createJSONArray();
-				eventDetailJsonObj.put("DetailImages", eventDetailImageArr);
+				eventDetailJsonObj.put("EventSubDetail", eventDetailImageArr);
+				JSONArray eventSubDetailArr =  JSONFactoryUtil.createJSONArray();
+				eventDetailJsonObj.put("EventSubDetails", eventSubDetailArr);
+				
+				eventSubDetails = EventSubDetailUtil.findByEventDetailId(eventDetail.getEventDetailId());
+				
+				for (EventSubDetail eventSubDetail : eventSubDetails) {
+					JSONObject eventSubDetailObj =  JSONFactoryUtil.createJSONObject();
+					eventSubDetailObj.put("SubDetail", JSONFactoryUtil.looseSerialize(eventSubDetail));
+					eventSubDetailArr.put(eventSubDetailObj);
+				}
+				
 				for (EventDetailImage detailImage : detailImgList) {
 					JSONObject eventDetailImageObj =  JSONFactoryUtil.createJSONObject();
 					eventDetailImageObj.put("DetailImage", JSONFactoryUtil.looseSerialize(detailImage));
