@@ -400,7 +400,20 @@
 
                                 </div>
                             </div>
-                        </div>
+                            <div ng-repeat="venueInfoSubDetail in venueInfoDetail" style="margin-top: 20px">
+                                    <div align="center">
+                                        <div style="width: 80%;">
+                                            <i class="trafficDetailHeading">{{venueInfoSubDetail.infoTitle}}</i>
+                                        </div>
+                                    </div>
+                                    <div class="TrafficInfoDescDiv">
+
+                                        <div id="venueInfo" class="" compile="venueInfoSubDetail.infoDesc">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                     </ion-content>
                 </ion-tab>
                 <ion-tab title="BARS/FOOD" ng-click="selectTab(2)">
