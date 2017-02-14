@@ -99,6 +99,10 @@ public class TailgateUsersServiceUtil {
 			description);
 	}
 
+	public static int updateTailgateUserRole(long userId, long tailgateId) {
+		return getService().updateTailgateUserRole(userId, tailgateId);
+	}
+
 	public static void deleteTailgateUser(long tailgateId, long userId) {
 		getService().deleteTailgateUser(tailgateId, userId);
 	}

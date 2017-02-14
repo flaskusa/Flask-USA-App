@@ -158,6 +158,21 @@ public class TailgateUsersServiceSoap {
 		}
 	}
 
+	public static int updateTailgateUserRole(long userId, long tailgateId)
+		throws RemoteException {
+		try {
+			int returnValue = TailgateUsersServiceUtil.updateTailgateUserRole(userId,
+					tailgateId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteTailgateUser(long tailgateId, long userId)
 		throws RemoteException {
 		try {

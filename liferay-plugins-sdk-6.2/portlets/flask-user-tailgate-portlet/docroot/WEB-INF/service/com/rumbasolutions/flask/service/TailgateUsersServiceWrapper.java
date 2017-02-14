@@ -99,6 +99,11 @@ public class TailgateUsersServiceWrapper implements TailgateUsersService,
 	}
 
 	@Override
+	public int updateTailgateUserRole(long userId, long tailgateId) {
+		return _tailgateUsersService.updateTailgateUserRole(userId, tailgateId);
+	}
+
+	@Override
 	public void deleteTailgateUser(long tailgateId, long userId) {
 		_tailgateUsersService.deleteTailgateUser(tailgateId, userId);
 	}

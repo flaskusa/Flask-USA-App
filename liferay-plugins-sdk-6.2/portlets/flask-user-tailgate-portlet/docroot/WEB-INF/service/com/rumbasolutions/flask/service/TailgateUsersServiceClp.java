@@ -64,9 +64,13 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 				"java.lang.String"
 			};
 
-		_methodName9 = "deleteTailgateUser";
+		_methodName9 = "updateTailgateUserRole";
 
 		_methodParameterTypes9 = new String[] { "long", "long" };
+
+		_methodName10 = "deleteTailgateUser";
+
+		_methodParameterTypes10 = new String[] { "long", "long" };
 	}
 
 	@Override
@@ -299,10 +303,33 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 	}
 
 	@Override
+	public int updateTailgateUserRole(long userId, long tailgateId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9, new Object[] { userId, tailgateId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
 	public void deleteTailgateUser(long tailgateId, long userId) {
 		try {
-			_invokableService.invokeMethod(_methodName9,
-				_methodParameterTypes9, new Object[] { tailgateId, userId });
+			_invokableService.invokeMethod(_methodName10,
+				_methodParameterTypes10, new Object[] { tailgateId, userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -336,4 +363,6 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 	private String[] _methodParameterTypes8;
 	private String _methodName9;
 	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
 }

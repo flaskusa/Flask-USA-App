@@ -88,5 +88,7 @@ public interface TailgateUsersService extends BaseService, InvokableService {
 		long userId, long tailgateId, boolean isPaid,
 		java.lang.String paymentMode, java.lang.String description);
 
+	public int updateTailgateUserRole(long userId, long tailgateId);
+
 	public void deleteTailgateUser(long tailgateId, long userId);
 }

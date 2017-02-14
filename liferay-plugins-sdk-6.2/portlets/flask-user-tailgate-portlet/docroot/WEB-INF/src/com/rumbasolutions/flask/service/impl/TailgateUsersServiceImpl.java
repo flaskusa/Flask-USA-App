@@ -176,6 +176,33 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 		return tailgateUser;
 	}
 	
+	@SuppressWarnings("unchecked")
+	@Override
+	public int updateTailgateUserRole(long userId, long tailgateId){
+		List<TailgateUsers> tailgateUsers = null;
+		TailgateUsers tailgateUser = null;
+		try{
+			DynamicQuery tailgateQuery = DynamicQueryFactoryUtil.forClass(TailgateUsersImpl.class);
+			tailgateQuery.add(PropertyFactoryUtil.forName("userId").eq(new Long(userId)));
+			tailgateQuery.add(PropertyFactoryUtil.forName("tailgateId").eq(new Long(tailgateId)));
+			tailgateUsers = TailgateUsersLocalServiceUtil.dynamicQuery(tailgateQuery);
+			for(TailgateUsers tUser: tailgateUsers){
+				if(tUser.getIsAdmin() == 0){
+					tUser.setIsAdmin(1);
+				}else{
+					tUser.setIsAdmin(0);
+				}
+				tailgateUser = TailgateUsersLocalServiceUtil.updateTailgateUsers(tUser);
+			}
+			
+			
+		}catch(Exception e){
+			LOGGER.error("Exception in Update Tailgate User Role:" + e.getMessage());
+			e.printStackTrace();
+		}
+		return tailgateUser.getIsAdmin();
+	}
+	
 	@Override
 	public void deleteTailgateUser(long tailgateId,long userId){
 		try {
