@@ -4,97 +4,57 @@
         </ion-nav-back-button>
     </ion-nav-bar>
     <ion-content overflow-scroll="false">
-        <div align="inline"class="button-bar stripAdmin"ng-if="agreedToTermsOfUse==true">
+        <div align="inline" class="button-bar stripAdmin" ng-if="agreedToTermsOfUse==true">
             <div class="paddingRadio">
-                <input type="radio"name="radio"id="adminRadio" ng-model="addAsAdmin" ng-value=true class="radioButtonSize"ng-click="addSupplyAsAdmin()">
+                <input type="radio" name="radio" id="adminRadio" ng-model="addAsAdmin" ng-value=true class="radioButtonSize" ng-click="addSupplyAsAdmin()">
             </div>
             <label for="adminRadio"> <i class="fontSizeStrip">System</i></label>
             <div class="paddingRadio">
-                <input type="radio"id="radio"name="radio" ng-model="addAsAdmin" ng-value=false class="radioButtonSize"ng-click="addSupplyAsUser()">
+                <input type="radio" id="radio" name="radio" ng-model="addAsAdmin" ng-value=false class="radioButtonSize" ng-click="addSupplyAsUser()">
             </div>
             <label for="radio"> <i class="fontSizeStrip">Personal</i></label>
         </div>
-       <!-- <div>
-            <div class="list">
-                <label class="item item-input item-floating-label">
-                    <span class="input-label">Supply Name</span>
-                    <input type="text" placeholder="Supply Name" class="form-control loginInputs" ng-model="groupName.name" name="GroupName" style="border: solid .5px">
-                </label>
-                </div></div>-->
-        <div style="padding:10px;font-weight: 500;font-size: 15px">List name</div>
-        <div class="item item-input-inset supply_ion_item_animate inpuBorder" >
+        <div class="supply_list_name">List name</div>
+        <div class="item item-input-inset supply_ion_item_animate inpuBorder">
             <label class="item-input-wrapper create_supplies_label">
-                <input type="text"id="supplyEdit" placeholder="List name" ng-model="suppliesName"ng-class="{Upper_Case:suppliesName!='' && suppliesName!=undefined}"style="height: 47px;width:100%;">
+                <input type="text" id="supplyEdit" placeholder="List name" ng-model="suppliesName" ng-class="{Upper_Case:suppliesName!='' && suppliesName!=undefined}">
             </label>
-
         </div>
-
-        <!--<div>
-            <div ng-if="islistCreated==false" class="divAddIcon add_supplies_div"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons add_supplies_img" ng-click="addItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
-            </div>
-
-            <div ng-if="islistCreated==true" class="divAddIcon add_supplies_div"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons add_supplies_img" ng-click="createItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
-            </div>
-
-            </div>-->
         <div>
-            <div ng-if="islistCreated==false" class="divAddIcon add_supplies_div"><button class="button button-small suppliesButton FlaskionIcons add_supplies_img"ng-click="addItem(suppliesName,createdListItem.data[createdListItem.data.length-1])" style="width: 85px">
-                Save list
-            </button>
+            <div ng-if="islistCreated==false" class="divAddIcon add_supplies_div">
+                <button class="button button-small suppliesButton FlaskionIcons add_supplies_img" ng-click="addItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
+                    Save list
+                </button>
             </div>
 
-            <div ng-if="islistCreated==true" class="divAddIcon add_supplies_div"><button class="button button-small suppliesButton FlaskionIcons add_supplies_img" style="width: 85px">
-                Save list
-            </button>
+            <div ng-if="islistCreated==true" class="divAddIcon add_supplies_div">
+                <button class="button button-small suppliesButton FlaskionIcons add_supplies_img">
+                    Save list
+                </button>
             </div>
-
         </div>
-            <div class="strip2 ">
-                <i class="addText">Supply list item</i>
-            </div></div>
-            <ion-list>
-                <ion-item  ng-repeat="data in createdListItem.data track by $index"on-double-tap="editSupplyItem(data)">
-                    <div ng-if = "data.editItem == false"class="flask_text" style="padding: 15px 11px 11px 16px;"><i class="addText">{{data.itemName | uppercase}}</i> </div>
-
-                    <input type="text"id="ItemEditBox" placeholder="Item name" ng-model="data.itemName "ng-focus="true"ng-class="{Upper_Case:data.itemName!='' && data.itemName!=undefined}" ng-if="data.editItem == true"ng-init="editSupplyItem(data)" ng-blur="saveSupplyItem(data)" style="border: solid 2.5px lightgray;
-    width: 100%;
-    height: 47px;"/>
-                    <!--<div class="badge supplyDeleteButton extra-right-supply">
-                        <span class="button-assertive   ion-trash-a icon supplyDeleteIcon"ng-class="{supplyEditIconPadding:data.editItem}" ng-click="deleteCreatedItem($index,data.supplyItemId)"></span>
-                    </div>
-                    <div class="badge supplyDeleteButton extra-right-supply"style="margin-right: 51px">
-                        <span class="button-assertive   ion-edit supplyDeleteIcon"ng-class="{supplyEditIconPadding:data.editItem}" ng-click="editSupplyItem(data)"></span>
-                    </div>-->
-                    <!--<span class="badge span_icon"style="top:3px"> <label class="checkbox"style="float: right">
-                        <input  type="checkbox"ng-model="data.checked">
-                    </label></span>-->
-                    <ion-option-button class="button-assertive icon ion-edit"ng-if="data.supplyItemId>0" ng-click="editSupplyItem(data)"></ion-option-button>
-                    <ion-option-button class="button-assertive icon ion-trash-a"ng-if="data.supplyItemId>0" ng-click="deleteCreatedItem($index,data.supplyItemId)"></ion-option-button>
-
-                </ion-item>
-            </ion-list>
+        <div class="strip2 ">
+            <i class="addText">Supply list item</i>
+        </div></div>
+        <ion-list>
+            <ion-item ng-repeat="data in createdListItem.data track by $index" on-double-tap="editSupplyItem(data)">
+                <div ng-if="data.editItem == false" class="flask_text"><i class="addText">{{data.itemName | uppercase}}</i> </div>
+                <input type="text" id="ItemEditBox" placeholder="Item name" ng-model="data.itemName " ng-focus="true" ng-class="{Upper_Case:data.itemName!='' && data.itemName!=undefined}" ng-if="data.editItem == true" ng-init="editSupplyItem(data)" ng-blur="saveSupplyItem(data)" />
+                <ion-option-button class="button-assertive icon ion-edit" ng-if="data.supplyItemId>0" ng-click="editSupplyItem(data)"></ion-option-button>
+                <ion-option-button class="button-assertive icon ion-trash-a" ng-if="data.supplyItemId>0" ng-click="deleteCreatedItem($index,data.supplyItemId)"></ion-option-button>
+            </ion-item>
+        </ion-list>
         <div>
-            <div ng-if="islistCreated==false" class="divAddIcon add_supplies_div" ><button class="button button-small suppliesButton FlaskionIcons add_supplies_img"ng-click="addItem(suppliesName,createdListItem.data[createdListItem.data.length-1])" style="width: 85px">
-                Add item
-            </button>
+            <div ng-if="islistCreated==false" class="divAddIcon add_supplies_div">
+                <button class="button button-small suppliesButton FlaskionIcons add_supplies_img" ng-click="addItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
+                    Add item
+                </button>
             </div>
-
-            <div ng-if="islistCreated==true" class="divAddIcon add_supplies_div" ><button class="button button-small suppliesButton FlaskionIcons add_supplies_img"ng-click="createItem(suppliesName,createdListItem.data[createdListItem.data.length-1])"style="width: 85px">
-                Add item
-            </button>
+            <div ng-if="islistCreated==true" class="divAddIcon add_supplies_div">
+                <button class="button button-small suppliesButton FlaskionIcons add_supplies_img" ng-click="createItem(suppliesName,createdListItem.data[createdListItem.data.length-1])">
+                    Add item
+                </button>
             </div>
-            </div>
-
-          <!--  <div class="padding" align="center">
-            <a  nav-clear class="button button-block button-positive sign_in_button" ng-if="suppliesName==undefined||createdListItem.data[createdListItem.data.length-1].itemName=='' || suppliesName==''" ng-click="setFocusSupply()">
-                Save
-            </a>
-            <a href="#/app/supplies//" nav-clear class="button button-block button-positive sign_in_button"ng-if="suppliesName&&createdListItem.data[createdListItem.data.length-1].itemName!=''" ng-click="saveList(suppliesName)">
-                Save
-            </a>
-            <a nav-clear class="button button-block button-positive sign_in_button"href="#/app/supplies//"ng-click="cancelAdding()">
-                Cancel
-            </a>
-        </div>-->
+        </div>
     </ion-content>
 </ion-view>

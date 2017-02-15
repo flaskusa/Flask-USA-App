@@ -8,13 +8,6 @@
 			<ion-content class="" overflow-scroll="false">
 				<form name="psform" novalidate ng-submit="psform.$valid  && updateUserPassword(psform)">
 					<div class="list acc_settings1">
-					<!--<label class="item item-input item-floating-label">
-                        <span class="input-label">Old password</span>
-                        <input type="password" placeholder="Old Password" class="form-control" ng-model="userPassword.oldPassword" name ="oldPassword" required>
-                        <div ng-show="psform.$submitted || psform.oldPassword.$touched">
-                            <span  ng-show="psform.oldPassword.$error.required" class="error_msg"> Required! </span> 
-                        </div>
-                    </label>-->
 						<label class="item item-input item-floating-label">
                         <span class="input-label">New password</span>
                         <input type="password" placeholder="New password" class="form-control" ng-model="userPassword.newPassword1" name = "newPassword1" required>
@@ -29,8 +22,7 @@
                             <span ng-show="psform.newPassword2.$error.required" class="error_msg"> Required! </span> 
                             <span  ng-show="userPassword.newPassword2.trim().length > 0 && userPassword.newPassword1.trim().length  && userPassword.newPassword1!= userPassword.newPassword2" class="error_msg">
                                     Confirm password did not match!</span>
-                        </div>
-                         
+                        </div>                        
                     </label>
 						<div class="padding" align="center">
 							<button type="submit" nav-clear class="button button-block button-positive sign_in_button" >
@@ -65,13 +57,11 @@
 					<label class="item item-input item-floating-label">
                         <span class="input-label">Last name</span>
                         <input type="text" placeholder="Last name" ng-model="user.lastName">
-                    </label>
-					
+                    </label>					
 					<label class="item item-input item-floating-label">
                         <span class="input-label">Email</span>
                         <input type="text" placeholder="Email" ng-model="user.Email">
-                    </label>
-					
+                    </label>					
 					<div class="item item-input item-floating-label item-icon-right">
 						<span class="input-label">Date of birth</span>
 						<input type="text" placeholder="DOB" name="DOB" class="form-control" ng-model="user.DOB" ng-click="openDatePickerOne()">
@@ -82,13 +72,11 @@
                         <pre><ion-radio type="radio" ng-model='user.isMale' ng-value = "true" name="rdoResult">Male</ion-radio></pre>
                         <pre><ion-radio type="radio" ng-model='user.isMale' name="rdoResult" ng-value = "false">Female</ion-radio></pre>
                     </label>
-
 					<label class="item item-input item-floating-label">
                         <span class="input-label">Mobile number</span>
                         <input type="number" placeholder="Mobile number" ng-model="user.mobileNumber">
                     </label>
 				</div>
-
 			</ion-content>
 		</ion-tab>
 
@@ -128,7 +116,6 @@
                             <option style="direction: inherit" ng-repeat="data in state" ng-bind="data.name" ng-value="data.regionId" ng-selected="user.stateId == data.regionId"></option>
                         </select>
                     </label>
-
 				</div>
                 <div class="padding" align="center">
                     <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUserInfo(user);">
@@ -140,15 +127,12 @@
                 </div>
 			</ion-content>
 		</ion-tab>
-        </ion-tab>
 
         <ion-tab title="Interests">
             <ion-content class="" overflow-scroll="false">
                 <div class="list acc_settings1">
                     <h5>PREFERENCES:</h5>
                 </div>
-
-
                 <div class="row header">
                     <div class="col acc_settingsCol">SPORTS</div>
                 </div>
@@ -158,8 +142,6 @@
                     </ion-checkbox>
                 </div>
                 <div class="padding"></div>
-
-
                 <div class="row header">
                     <div class="col acc_settingsCol">LEVEL</div>
                 </div>
@@ -169,8 +151,6 @@
                     </ion-checkbox>
                 </div>
                 <div class="padding"></div>
-
-
                 <div class="row header">
                     <div class="col acc_settingsCol">CONCERTS</div>
                 </div>
@@ -180,20 +160,15 @@
                     </ion-checkbox>
                 </div>
                 <div class="padding"></div>
-
-
                 <div class="row header">
                     <div class="col acc_settingsCol">SPECIAL EVENTS</div>
                 </div>
-
                 <div class="row acc_settingsCol" ng-repeat="data in data3">
 
                     <div class="col acc_settingsCol">{{data.special_events}}</div>
                     <ion-checkbox class="item item-icon-left item-checkbox-right acc_table" ng-model="data.checked" ng-click="addEventsInArray($index,data);" checked="data.checked">
                     </ion-checkbox>
                 </div>
-
-
                 <div class="padding" align="center">
                     <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUserInfo(user);">
                         Save
@@ -204,8 +179,5 @@
                 </div>
             </ion-content>
         </ion-tab>
-
-
-
 	</ion-tabs>
 </ion-view>

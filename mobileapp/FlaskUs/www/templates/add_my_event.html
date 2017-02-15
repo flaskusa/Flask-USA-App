@@ -3,7 +3,7 @@
         <ion-nav-back-button>
         </ion-nav-back-button>
         <ion-nav-title>
-            <a href="#/app/events"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
+            <a href="#/app/events"><img alt="Flask" class="header-img" src="img/headerFlaskLogo.png" /></a>
         </ion-nav-title>
         <ion-nav-buttons side="right">
             <button class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
@@ -37,16 +37,12 @@
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
                     <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}}</p>
-                    <span class="badge span_icon span_icon_extraright" ng-click="addmyEvent(data.eventId,$index)" style="    height: 29px;
-    width: 20px;"><img src="img/flask_icons/add_new.svg"style="    height: 29px;
-    width: 22px;"></span>
+                    <span class="badge span_icon span_plus" ng-click="addmyEvent(data.eventId,$index)"><img src="img/flask_icons/add_new.svg"></span>
                 </a>
             </div>
-
         </div>
     </ion-content>
     <ion-footer-bar class=" bar bar-dark bar-footer bar-assertive customBarPadding">
         <div ng-include="'templates/advertisement.html'"class="footer-img"></div>
-
     </ion-footer-bar>
 </ion-view>

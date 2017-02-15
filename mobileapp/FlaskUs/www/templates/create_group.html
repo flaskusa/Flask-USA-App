@@ -14,7 +14,6 @@
                             <span ng-show="create_group_form.GroupName.$error.required" class="error_msg">Enter group name</span>
                         </div>
                     </label>
-
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Description</span>
                         <input type="text" placeholder="Description" class="form-control loginInputs" ng-model="groupName.description" name="Description" required>
@@ -22,7 +21,6 @@
                             <span ng-show="create_group_form.Description.$error.required" class="error_msg">Enter description</span>
                         </div>
                     </label>
-
                 </div>
                 <div class="padding" align="center">
                     <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
@@ -61,15 +59,12 @@
                             <span class="badge"style="right: 7px"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons "ng-click="addUserToGroup(data)"></span>
                         </ion-item>
                         <a class="item" ng-if="memberToAddInGroup.length == 0"> There is no more friends to add. </a>
-
                         <div class="padding" align="center">
                             <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="finishAddingMember()">
                                 Finish
-                            </a></div>
+                            </a>
+                        </div>
                     </ion-list>
-<!--
-                    <ion-infinite-scroll on-infinite="getMoreUserContact(searchContact.searchtext)" distance="10%"></ion-infinite-scroll>
--->
                 </ion-content>
             </ion-modal-view>
         </script>
