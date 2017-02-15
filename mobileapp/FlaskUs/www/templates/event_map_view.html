@@ -4,7 +4,7 @@
         <ion-nav-back-button>
         </ion-nav-back-button>
         <ion-nav-title>
-            <a href="#/app/events"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
+            <a href="#/app/events"><img alt="Flask" class="header-img" src="img/headerFlaskLogo.png" /></a>
         </ion-nav-title>
         <ion-nav-buttons side="right">
             <button ng-if="showSearchBox.value==true" class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox ; searchObj.searchString=''"></button>
@@ -273,19 +273,17 @@
                                     </div>
                                 </div>
                                 <div class="TrafficInfoDescDiv">
-
                                     <div id="traffic" class="" ng-bind-html="trafficDetail.infoDesc">
                                     </div>
                                 </div>
                                 <div ng-repeat="trafficSubDetail in trafficDetails" style="border-bottom: solid;margin-top: 20px">
                                     <div align="center">
                                         <div style="width: 80%;">
-                                            <i class="trafficDetailHeading">{{trafficSubDetail.infoTitle}}</i>
+                                            <i class="trafficDetailHeading">{{trafficSubDetail.trafficSubDetailTitle}}</i>
                                         </div>
                                     </div>
                                     <div class="TrafficInfoDescDiv">
-
-                                        <div id="traffic" class="" ng-bind-html="trafficSubDetail.infoDesc">
+                                        <div id="traffic" class="" ng-bind-html="trafficSubDetail.trafficSubDetailDesc">
                                         </div>
                                     </div>
                                     </div>
@@ -366,28 +364,12 @@
                     <ion-content overflow-scroll="false" scroll="false">
                         <div class="image_map_div " draggable="true">
                             <img id="image" class="venueMapImage" ng-class="{ zoomedvenueMapImage: zoomMapImage==true}" on-double-tap="toggleZoomImage()" ng-src="{{venueMapImageUrl}}" />
-
-
                         </div>
                     </ion-content>
                 </ion-tab>
 
                 <ion-tab title="VENUE INFO" ng-click="selectTab(1)">
-
-
-
                     <ion-content overflow-scroll="false" style="background: white;">
-                        <!-- <div class="row">
-                             <div class="col"></div>
-                             <div class="col col-90 event_name">
-                                 <div class="eventHeading2" style="text-transform:uppercase;text-align:center">
-                                     <span class="overlineStyle fontSizeTrafficHeading">FORD FILED</span>
-                                 </div>
-
-                             </div>
-                             <div class="col"></div>
-                         </div>-->
-
                         <div ng-repeat="venueInfoDetail in venueInfoDetail" style="margin-top: 20px">
                             <div align="center">
                                 <div style="width: 80%;">
@@ -395,21 +377,17 @@
                                 </div>
                             </div>
                             <div class="TrafficInfoDescDiv">
-
                                 <div id="venueInfo" class="" compile="venueInfoDetail.infoDesc">
-
                                 </div>
                             </div>
                             <div ng-repeat="venueInfoSubDetail in venueInfoDetail" style="margin-top: 20px">
                                     <div align="center">
                                         <div style="width: 80%;">
-                                            <i class="trafficDetailHeading">{{venueInfoSubDetail.infoTitle}}</i>
+                                            <i class="trafficDetailHeading">{{venueInfoSubDetail.venueSubDetailTitle}}</i>
                                         </div>
                                     </div>
                                     <div class="TrafficInfoDescDiv">
-
-                                        <div id="venueInfo" class="" compile="venueInfoSubDetail.infoDesc">
-
+                                        <div id="venueInfo" class="" compile="venueInfoSubDetail.venueSubDetailDesc">
                                         </div>
                                     </div>
                                 </div>
@@ -440,7 +418,6 @@
                             </ui-gmap-map-control>
                             <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
-
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
                             <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick"
