@@ -42,6 +42,8 @@
         $scope.nightLifesGoogleMarkers = [];
         $scope.venueMapDetail = [];
         $scope.venueInfoDetail = [];
+        $scope.veueInfoSubDetail = [];
+        $scope.subDetail = [];
         $scope.findA = [];
         $scope.link = [];
         $scope.links = [];
@@ -1038,13 +1040,20 @@
         $scope.setMarkers = function () {
             if (!$scope.isMapMarkersSet) {
                 var tempObject = {};
+                var subDetail = {};
                 var ImgObj = [];
                 $scope.flaskUsDetails = [];
                 angular.forEach($scope.eventDetails, function (value, index) {
                     tempObject = {};
+                    subDetail = {};
                     ImgObj = []
-                    ImgObj = angular.fromJson(value.DetailImages);
+                    ImgObj = angular.fromJson(value.DetailImages);                  
                     value = angular.fromJson(value);
+                    $scope.veueInfoSubDetail = value.VenueSubDetails;
+                    for (var i = 0; i < $scope.veueInfoSubDetail.length; i++) {
+                        $scope.subDetail[i] = $scope.veueInfoSubDetail[i].SubDetail;
+                        subDetail = angular.fromJson($scope.subDetail[i]);
+                    }
                     tempObject = angular.fromJson(value.Detail);
                     tempObject.id = index;
                     if ($scope.infoTypeName == tempObject.infoTypeName) {
@@ -1062,6 +1071,7 @@
                             }
                         } else if ("Traffic" == tempObject.infoTypeCategoryName) {
                             $scope.trafficDetails.push(tempObject);
+                            $scope.trafficDetails.push(subDetail);
                         } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
                             if (ImgObj.length != 0) {
                                 tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
@@ -1088,9 +1098,6 @@
                             $scope.venueMapDetail.push(tempObject);
                         }
                         else if ("Venue Info" == tempObject.infoTypeCategoryName) {
-
-
-
                           $scope.temp = $("<div>");
                             $scope.temp2 = $("<div>");
                             $scope.temp2.html(tempObject.infoDesc);
@@ -1108,8 +1115,9 @@
                                I have created a directive to compile prepared  href because ng-click will not be bind by ng-bind-html*/
 
                             })
-                            tempObject.infoDesc = $scope.temp.html();
-                            $scope.venueInfoDetail.push(tempObject);
+                           tempObject.infoDesc = $scope.temp.html();
+                           $scope.venueInfoDetail.push(tempObject);                           
+                           $scope.venueInfoDetail.push(subDetail);
                             }
                         else if ("Getting home" == tempObject.infoTypeCategoryName) {
                             $scope.gettingHomeDetail.push(tempObject);
