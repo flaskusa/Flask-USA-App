@@ -154,6 +154,7 @@ div.ng-binding{
 .sideImagePanel{
     width:100%;height:100%;
 }
+
 .myEvent{
           background-image:url("../img/flask_images/MY_EVENTS.jpg");
       background-size:100%;
@@ -557,6 +558,7 @@ span.error_msg{color:red;}
     text-align: center;
     padding-top: 0px;
     margin-bottom: 5px;
+    text-transform:uppercase;
 }
 
 .trafficHeading {
@@ -1312,12 +1314,11 @@ h2.tailgater_name{
 }
 .suppliesButton {
   background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
-  width: 72px;
+  width: 85px;
   height: 34px;
   border-radius: 8px;
   color: darkorange;
   border-color: white;
-  font-weight: 700;
   font-size: 13.5px; }
 
 
@@ -1945,6 +1946,7 @@ div .extra-right-supply{
   background: #ffffff;
   color: #000000;
   position: fixed;
+  display:none;
   width: 100%;  
   max-width: 258px;
   overflow: hidden;
@@ -2638,6 +2640,7 @@ div .manage_event_default_Image{
 }
 .iw-content-text{
   vertical-align: middle;
+  text-align:left
 }
 
 /*Venue Map*/
@@ -2950,4 +2953,71 @@ span.badgeCount{
     margin-left: 179px;
     margin-top: -12%;
     padding-top:9px;
+}
+
+/*SVG image to add event*/
+.span_plus{
+    height: 29px; 
+    width: 20px;
+}
+
+/*icon Chevron*/
+.icon_chevron{
+    float: right;
+    padding-right:10px;
+    font-size: 26px;
+    margin-top: -5px;
+}
+
+/*tailgate supply list*/
+span .span_icon_supply{
+    top:3px;
+}
+
+/*supply list*/
+.supply_list_name{
+    padding:10px;
+    font-weight: 500;
+    font-size: 15px;
+}
+
+#supplyEdit{
+    height: 47px;
+    width:100%;
+}
+
+.flask_text{
+    padding: 15px 11px 11px 16px;
+}
+
+#ItemEditBox{
+    border:solid 2.5px lightgray;
+    width: 100%;
+    height: 47px;
+}
+
+/*parking*/
+.searchParkingMarker{
+    cursor:pointer;
+}
+
+/*venueSubDetails*/
+.subDetails{
+    font-family: 'Avenir Next';
+    font-weight: 500;
+    font-size: 14px;
+    background: url(../img/flask_icons/star.svg) no-repeat left top;
+}
+
+.subDetails span{
+    margin-left:27px;
+    font-weight: 500 !important;
+    font-size: 14px !important;
+    text-transform: none !important;
+}
+
+/*map*/
+.map_input{
+    margin: 10px;
+    width: 248px;
 }
