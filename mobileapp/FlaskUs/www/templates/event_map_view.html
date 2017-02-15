@@ -21,8 +21,7 @@
     <div class="dropdown" ng-if="searchObj.searchString.length != 0 && searchBox.showBox==true && showsearchDrop.value==true">
         <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchParkingMarker.length==0}"ng-if="preEventSearch==true && selectedIndex==0">
 
-            <li ng-repeat="searchItem in searchParkingMarker  = (searchParkingMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
-                style="cursor:pointer">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchParkingMarker  = (searchParkingMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchParkingMarker.length==0">
@@ -30,8 +29,7 @@
             </li>
         </ul>
         <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchBarMarker.length==0}" ng-if="preEventSearch==true && selectedIndex==1">
-            <li ng-repeat="searchItem in searchBarMarker= (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
-                style="cursor:pointer">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchBarMarker= (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchBarMarker.length==0">
@@ -39,8 +37,7 @@
             </li>
         </ul>
         <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchBarMarkes.length==0}" ng-if="duringEventSearch==true && selectedIndex==2">
-            <li ng-repeat="searchItem in searchBarMarkes = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
-                style="cursor:pointer">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchBarMarkes = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchBarMarkes.length==0">
@@ -48,8 +45,7 @@
             </li>
         </ul>
         <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchBarMarke.length==0}" ng-if="postEventSearch==true && selectedIndex==0">
-            <li ng-repeat="searchItem in searchBarMarke = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
-                style="cursor:pointer">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchBarMarke = (searchBarMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchBarMarke.length==0">
@@ -57,8 +53,7 @@
             </li>
         </ul>
         <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchHotelMarker.length==0}" ng-if="postEventSearch==true && selectedIndex==2">
-            <li ng-repeat="searchItem in searchHotelMarker = (searchHotelMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
-                style="cursor:pointer">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchHotelMarker = (searchHotelMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchHotelMarker.length==0">
@@ -66,8 +61,7 @@
             </li>
         </ul>
         <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchNightLifesMarker.length==0}" ng-if="postEventSearch==true && selectedIndex==1">
-            <li ng-repeat="searchItem in searchNightLifesMarker = (searchNightLifesMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)"
-                style="cursor:pointer">
+            <li class="searchParkingMarker" ng-repeat="searchItem in searchNightLifesMarker = (searchNightLifesMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
                 {{searchItem.infoTitle}}
             </li>
             <li ng-if="searchNightLifesMarker.length==0">
@@ -80,7 +74,7 @@
         <div class="row">
             <div class="col"></div>
             <div class="col col-90 event_name">
-                <div class="eventHeading2" style="text-transform:uppercase;text-align:center">
+                <div class="eventHeading2">
                     <span class="overlineStyle" ng-if="changeTitle != 3">{{eventName}}</span>
                     <span class="overlineStyle fontSizeTrafficHeading" ng-if="changeTitle ==true">TIPS TO GET AROUND TRAFFIC</span>
                 </div>
@@ -91,7 +85,7 @@
     </div>
     <ion-content class="has-footer has-header has-subheader" scroll="false">
         <script type="text/ng-template" id="searchbox.tpl.html" autocomplete="false" class="">
-            <input type="text" style="margin: 10px;width: 248px;" placeholder="" />
+            <input type="text" class="map_input" placeholder="" />
         </script>
         <script type="text/ng-template" id="custom.controls.tpl.html">
             <table>
@@ -112,7 +106,8 @@
                     </td>
                     <td rowspan="2" style="vertical-align:middle">
                         <div class="iw-content-toggle map_info_img">
-                            <img src="img/map_icons/circle_arrow_left.svg"> </div>
+                            <img src="img/map_icons/circle_arrow_left.svg">
+                        </div>
 					</td>
                 </tr>
                 <tr>
@@ -124,10 +119,8 @@
                 </tr>
             </table>
         </div>
-
-        <div id="iw-content" style="display:none">
+        <div id="iw-content">
             <div>
-
                 <table class="iw-fixed-title">
                     <tr>
                         <td colspan="2">
@@ -169,21 +162,20 @@
                         </tr>
                     </table>
                 </div>
-                <div id="iw-content" style="display:none">
+                <div id="iw-content">
                     <div class="iw-content-div">
-
                         <table class="iw-fixed-title">
                             <tr>
                                 <td class="iw-content-icon alignRight"><img src="img/map_icons/callnow.svg" class="map_info_img"> </td>
-                                <td class="iw-content-text" style="text-align:left"> <a id="iwCallNow"> Call Now </a> </td>
+                                <td class="iw-content-text"><a id="iwCallNow"> Call Now </a> </td>
                             </tr>
                             <tr>
                                 <td class="iw-content-icon alignRight"><img src="img/map_icons/website.svg" class="map_info_img"> </td>
-                                <td class="iw-content-text" style="text-align:left">   <a id="iwViewWebsite"> View Website </a> </td>
+                                <td class="iw-content-text"><a id="iwViewWebsite"> View Website </a> </td>
                             </tr>
                             <tr>
                                 <td class="iw-content-icon alignRight"><img src="img/map_icons/take_me_there.svg" class="map_info_img"> </td>
-                                <td class="iw-content-text" style="text-align:left">   <a id="iwTakeMeThere"> Take me there </a> </td>
+                                <td class="iw-content-text"><a id="iwTakeMeThere"> Take me there </a> </td>
                             </tr>
                         </table>
                     </div>
@@ -279,11 +271,11 @@
                                 <div ng-repeat="trafficSubDetail in trafficDetails" style="border-bottom: solid;margin-top: 20px">
                                     <div align="center">
                                         <div style="width: 80%;">
-                                            <i class="trafficDetailHeading">{{trafficSubDetail.trafficSubDetailTitle}}</i>
+                                            <i class="trafficDetailHeading">{{trafficSubDetail.venueSubDetailTitle}}</i>
                                         </div>
                                     </div>
                                     <div class="TrafficInfoDescDiv">
-                                        <div id="traffic" class="" ng-bind-html="trafficSubDetail.trafficSubDetailDesc">
+                                        <div id="traffic" class="subDetails"><span>{{trafficSubDetail.venueSubDetailDesc}}</span>
                                         </div>
                                     </div>
                                     </div>
@@ -387,7 +379,7 @@
                                         </div>
                                     </div>
                                     <div class="TrafficInfoDescDiv">
-                                        <div id="venueInfo" class="" compile="venueInfoSubDetail.venueSubDetailDesc">
+                                        <div id="venueInfo" class="subDetails"><span>{{venueInfoSubDetail.venueSubDetailDesc}}</span>
                                         </div>
                                     </div>
                                 </div>
