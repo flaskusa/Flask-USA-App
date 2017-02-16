@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER) {
         /* jshint validthis: true */
         var self = this;
         var baseImagePath = SERVER.hostName + "c/document_library/get_file";
@@ -763,6 +763,37 @@
             }
         };
 
+        var template = '<ion-popover-view class="popover">' +
+                            '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
+                                '<div class="list">' +
+                                '<span class="range"><img src="../img/map_icons/parking.svg"><p>$0 - $20</p></span>' +
+                                '<span class="range"><img src="../img/map_icons/parking.svg"><p>$21 - $45</p></span>' +
+                                '<span class="range"><img src="../img/map_icons/parking.svg"><p>$46 and above</p></span>' +
+                                '</div>' +
+                            '</ion-content>' +
+                       '</ion-popover-view>';
+        $scope.popover = $ionicPopover.fromTemplate(template, {
+            scope: $scope
+        });
+        $scope.openPopover1 = function ($event) {
+            $scope.popover.show($event);
+        };
+        $scope.closePopover = function () {
+            $scope.popover.hide();
+        };
+        //Cleanup the popover when we're done with it!
+        $scope.$on('$destroy', function () {
+            $scope.popover.remove();
+        });
+        // Execute action on hidden popover
+        $scope.$on('popover.hidden', function () {
+            // Execute action
+        });
+        // Execute action on remove popover
+        $scope.$on('popover.removed', function () {
+            // Execute action
+        });
+
         $scope.selectGoogleMarker = function () {
             $scope.isGoogleMarkerShown = !$scope.isGoogleMarkerShown;
             if ($scope.isGoogleMarkerShown) {
@@ -1060,7 +1091,15 @@
                         if ("Parking" == tempObject.infoTypeCategoryName || "Bar & Restaurants" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject);
                             if ("Parking" == tempObject.infoTypeCategoryName) {
-                                tempObject.icon = 'img/map_icons/parking.svg';
+                                if (tempObject.cost <= 20) {
+                                    tempObject.icon = 'img/map_icons/parking.svg';
+                                }
+                                else if (tempObject.cost >= 21 && tempObject.cost <= 45) {
+                                    tempObject.icon = 'img/map_icons/icon_bar.png';
+                                }
+                                else if (tempObject.cost >= 46) {
+                                    tempObject.icon = 'img/map_icons/icon_liquor.png';
+                                }
                                 $scope.parkingMarkers.push(tempObject);
                                 $scope.searchParkingMarkers = $scope.parkingMarkers;
                             } else {
