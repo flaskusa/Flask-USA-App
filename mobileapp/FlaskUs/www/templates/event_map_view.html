@@ -1,5 +1,4 @@
 ﻿<ion-view cache-view="false" class="customFooter">
-
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button>
         </ion-nav-back-button>
@@ -104,7 +103,7 @@
                             <div class="text_div">{{parameter.infoTitle}}</div>
                         </div>
                     </td>
-                    <td rowspan="2" style="vertical-align:middle">
+                    <td rowspan="2" class="parkingInfo">
                         <div class="iw-content-toggle map_info_img">
                             <img src="img/map_icons/circle_arrow_left.svg">
                         </div>
@@ -134,7 +133,7 @@
                     </tr>
                     <tr>
                         <td class="iw-content-icon"><img src="img/map_icons/take_me_there.svg"> </td>
-                        <td class="iw-content-text" style="text-align:left"> <a id="iwTakeMeThere"> Take me there </a> </td>
+                        <td class="iw-content-text"> <a id="iwTakeMeThere"> Take me there </a> </td>
                     </tr>
                 </table>
             </div>
@@ -151,7 +150,7 @@
                                     <div class="text_div">{{parameter.infoTitle}}</div>
                                 </div>
                             </td>
-                            <td rowspan="2" style="vertical-align:middle">  <div class="iw-content-toggle map_info_img"> <img src="img/map_icons/circle_arrow_left.svg"> </div>
+                            <td rowspan="2" class="parkingInfo">  <div class="iw-content-toggle map_info_img"> <img src="img/map_icons/circle_arrow_left.svg"> </div>
                         </tr>
                         <tr>
                             <td class="iw-fixed-title">
@@ -182,25 +181,29 @@
                 </div>
             </div>
         </script>
+
         <div ng-if="infoTypeName == 'Pre-Event'" class="Pre-Event">
             <ion-tabs class="tabs-positive tab_bottom">
                 <ion-tab title="PARKING" ng-click="selectTab(0)">
-                    <div id="parkingDiv" style="height:100%;width:100%" ng-if="selectedIndex == 0">
+                    <div id="parkingDiv" class="tab_div" ng-if="selectedIndex == 0">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" idkey="id" control="map.control" events="map.events">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <!--<ui-gmap-map-control template="custom.controls.tpl.html" index="-1"	position="RIGHT_CENTER" controller = "refreshMap"> </ui-gmap-map-control>-->
                             <ui-gmap-map-control position="right_center">
                                 <div ng-controller="refreshMap">
-                                    <div style="margin-right: 5px">
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
-                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
-                                255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectFlaskMarker()"></div>
                                             </div>
                                         </div>
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <a class="miniDollarButton" ng-click="openPopover1($event)"></a>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniGoogleButton" ng-click="selectGoogleMarker()"></div>
                                             </div>
                                         </div>
@@ -221,21 +224,19 @@
                     </div>
                 </ion-tab>
                 <ion-tab title="BARS/FOOD" ng-click="selectTab(1)">
-                    <div id="barTab" style="height:100%;width:100%" ng-if="selectedIndex == 1">
+                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 1">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">
                                 <div ng-controller="refreshMap">
-                                    <div style="margin-right: 5px">
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
-                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
-                                255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
                                             </div>
                                         </div>
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
                                             </div>
                                         </div>
@@ -256,11 +257,11 @@
                     </div>
                 </ion-tab>
                 <ion-tab title="TRAFFIC" ng-click="selectTab(2)">
-                    <div style="padding:10px" ng-if="selectedIndex == 2">
-                        <ion-content overflow-scroll="false" style="background: white;">
-                            <div ng-repeat="trafficDetail in trafficDetails" style="border-bottom: solid;margin-top: 20px">
+                    <div class="traffic_div" ng-if="selectedIndex == 2">
+                        <ion-content overflow-scroll="false" class="traffic_ion_content">
+                            <div class="traffic_details" ng-repeat="trafficDetail in trafficDetails">
                                 <div align="center">
-                                    <div style="width: 80%;">
+                                    <div class="taffic_heading_div">
                                         <i class="trafficDetailHeading">{{trafficDetail.infoTitle}}</i>
                                     </div>
                                 </div>
@@ -268,90 +269,81 @@
                                     <div id="traffic" class="" ng-bind-html="trafficDetail.infoDesc">
                                     </div>
                                 </div>
-                                <div ng-repeat="trafficSubDetail in trafficDetails" style="border-bottom: solid;margin-top: 20px">
-                                    <div align="center">
-                                        <div style="width: 80%;">
-                                            <i class="trafficDetailHeading">{{trafficSubDetail.venueSubDetailTitle}}</i>
-                                        </div>
-                                    </div>
-                                    <div class="TrafficInfoDescDiv">
-                                        <div id="traffic" class="subDetails"><span>{{trafficSubDetail.venueSubDetailDesc}}</span>
-                                        </div>
-                                    </div>
+                                
+                                </div>
+                            <div ng-repeat="trafficSubDetail in trafficDetails" class="trafficSubDetail">
+                                <div align="center">
+                                    <div class="taffic_heading_div">
+                                        <i class="trafficDetailHeading">{{trafficSubDetail.venueSubDetailTitle}}</i>
                                     </div>
                                 </div>
+                                <div class="TrafficInfoDescDiv">
+                                    <div id="traffic" class="subDetails">
+                                        <span>{{trafficSubDetail.venueSubDetailDesc}}</span>
+                                    </div>
+                                </div>
+                            </div>
                         </ion-content>
                     </div>
                 </ion-tab>
                 <ion-tab title="FLASK US" ng-click="selectTab(3)">
-                    <div style="padding:10px" ng-if="selectedIndex == 3">
-                        <ion-content overflow-scroll="false" style="background: white">
+                    <div class="traffic_div" ng-if="selectedIndex == 3">
+                        <ion-content overflow-scroll="false" class="traffic_ion_content">
                             <div>
-                                <div style="max-width: 100vw">
+                                <div class="flask_us_div">
                                     <div>
-                                        <div class="left" style="left:0px;top:121px">
+                                        <div class="left flask_us_slide_buttons">
                                             <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('Flask-Detail')"></button>
                                         </div>
-                                        <div class="right" style="top:121px">
+                                        <div class="right flask_us_slide_buttons_right">
                                             <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('Flask-Detail')"></button>
                                         </div>
                                         <ion-slide-box delegate-handle="Flask-Detail" show-pager='false'>
-                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
+                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
                                                 <div class="form-group">
-                                                    <label class="control-label" for="Descriptionss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask us</b></div></label>
+                                                    <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
                                                     <div ng-if="flaskUsDetail.imageUrl">
-                                                        <img class="full-image" src={{flaskUsDetail.imageUrl}} style="height: 100px;width:252px">
+                                                        <img class="full-image" src={{flaskUsDetail.imageUrl}}>
                                                     </div>
-
-                                                    <div class="form-group" style="padding-top:20px">
-                                                        <label class="control-label" for="Descriptions"><div style="width: 90%;padding-left:85px;text-align: start"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>
+                                                    <div class="form-group flask_us_form">
+                                                        <label class="control-label" for="Descriptions"><div class="flask_us_detail_title"><b>{{flaskUsDetail.infoTitle}}</b></div></label>
                                                     </div>
-                                                    <div class="col-70" id="Descriptions" style="width: 90%;padding-left:85px;text-align: start;font-weight: 300">
-                                                        <div class="ion-star " style="float:left;margin-left: -24px"></div>
+                                                    <div class="col-70 flask_us_detail_title" id="Descriptions">
+                                                        <div class="ion-star"></div>
                                                         {{flaskUsDetail.infoDesc}}
                                                     </div>
-
-
                                                 </div>
-                                                <div class="eventHeading2" style="text-align:center;padding-top:30px" ng-click="toggleMsgDiv()">
-                                                    <span class="overlineStyle" style="font-size:18px">FLASK US YOUR QUESTIONS</span>
+                                                <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
+                                                    <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
                                                 </div>
                                                 <div class="flaskUsQuestionDiv" ng-class="{hideFlaskUsQuestionDiv:toggleQueDiv}" ng-if="hideDiv==false">
                                                     <div align="center">
-                                                        <span class="que-input-label"><b style="font-size:12px;float:left">NAME*</b></span>
-
-
-                                                        <input type="text" class="QuestionInput" style="border: solid .3px;height: 25px;border-radius: 8px">
-                                                        <span class="que-input-label"><b style="font-size:12px;float:left">EMAIL*</b></span>
-
-                                                        <input type="text" class="QuestionInput" style="border: solid .3px;height: 25px;border-radius: 8px">
-                                                        <span class="que-input-label"><b style="font-size:12px;float:left">QUESTION*</b></span>
-
-                                                        <textarea class="QuestionInput" style="border: solid .3px;height: 55px;border-radius: 8px"></textarea>
+                                                        <span class="que-input-label"><b>NAME*</b></span>
+                                                        <input type="text" class="QuestionInput">
+                                                        <span class="que-input-label"><b>EMAIL*</b></span>
+                                                        <input type="text" class="QuestionInput">
+                                                        <span class="que-input-label"><b>QUESTION*</b></span>
+                                                        <textarea class="QuestionInput"></textarea>
                                                     </div>
                                                     <div align="center">
-                                                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" style="width: 250px" ng-click="toggleMsgDiv()">
+                                                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="toggleMsgDiv()">
                                                             Send
                                                         </button>
                                                     </div>
                                                 </div>
-
-
                                             </ion-slide>
                                         </ion-slide-box>
                                     </div>
                                 </div>
-
                             </div>
                         </ion-content>
                     </div>
                 </ion-tab>
             </ion-tabs>
         </div>
+
         <div ng-if="infoTypeName == 'During-Event'" class="During-Event">
             <ion-tabs class="tabs-positive tab_bottom">
-
-
                 <ion-tab title="VENUE MAP" ng-click="selectTab(0)">
                     <ion-content overflow-scroll="false" scroll="false">
                         <div class="image_map_div " draggable="true">
@@ -361,10 +353,10 @@
                 </ion-tab>
 
                 <ion-tab title="VENUE INFO" ng-click="selectTab(1)">
-                    <ion-content overflow-scroll="false" style="background: white;">
-                        <div ng-repeat="venueInfoDetail in venueInfoDetail" style="margin-top: 20px">
+                    <ion-content overflow-scroll="false" class="traffic_ion_content">
+                        <div ng-repeat="venueInfoDetail in venueInfoDetail" class="flask_us_form">
                             <div align="center">
-                                <div style="width: 80%;">
+                                <div class="taffic_heading_div">
                                     <i class="trafficDetailHeading">{{venueInfoDetail.infoTitle}}</i>
                                 </div>
                             </div>
@@ -372,36 +364,35 @@
                                 <div id="venueInfo" class="" compile="venueInfoDetail.infoDesc">
                                 </div>
                             </div>
-                            <div ng-repeat="venueInfoSubDetail in venueInfoDetail" style="margin-top: 20px">
-                                    <div align="center">
-                                        <div style="width: 80%;">
-                                            <i class="trafficDetailHeading">{{venueInfoSubDetail.venueSubDetailTitle}}</i>
-                                        </div>
-                                    </div>
-                                    <div class="TrafficInfoDescDiv">
-                                        <div id="venueInfo" class="subDetails"><span>{{venueInfoSubDetail.venueSubDetailDesc}}</span>
-                                        </div>
-                                    </div>
+                            
+                            </div><br />
+                        <div ng-repeat="venueInfoSubDetail in venueInfoDetail" class="venueInfoSubDetail">
+                            <div align="center">
+                                <div class="taffic_heading_div">
+                                    <i class="trafficDetailHeading">{{venueInfoSubDetail.venueSubDetailTitle}}</i>
                                 </div>
                             </div>
+                            <div class="TrafficInfoDescDiv">
+                                <div id="venueInfo" class="subDetails">
+                                    <span>{{venueInfoSubDetail.venueSubDetailDesc}}</span>
+                                </div>
+                            </div>
+                        </div>
                     </ion-content>
                 </ion-tab>
                 <ion-tab title="BARS/FOOD" ng-click="selectTab(2)">
-                    <div id="barTab" style="height:100%;width:100%" ng-if="selectedIndex == 2">
+                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 2">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
-                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">
                                 <div ng-controller="refreshMap">
-                                    <div style="margin-right: 5px">
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
-                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
-                                255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
                                             </div>
                                         </div>
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
                                             </div>
                                         </div>
@@ -412,8 +403,7 @@
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
-                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick"
-                                             control="barGoogleMarkerOptions.control">
+                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick" control="barGoogleMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
@@ -421,64 +411,54 @@
                     </div>
                 </ion-tab>
                 <ion-tab title="FLASK US" ng-click="selectTab(3)">
-                    <div style="padding:10px" ng-if="selectedIndex == 3">
-                        <ion-content overflow-scroll="false" style="background: white">
+                    <div class="traffic_div" ng-if="selectedIndex == 3">
+                        <ion-content overflow-scroll="false" class="traffic_ion_content">
                             <div>
-                                <div style="max-width: 100vw">
+                                <div class="flask_us_div">
                                     <div>
-                                        <div class="left" style="left:0px;top:121px">
+                                        <div class="left flask_us_slide_buttons">
                                             <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('Flask-Detail')"></button>
                                         </div>
-                                        <div class="right" style="top:121px">
+                                        <div class="right flask_us_slide_buttons_right">
                                             <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('Flask-Detail')"></button>
                                         </div>
                                         <ion-slide-box delegate-handle="Flask-Detail" show-pager='false'>
-                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
+                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
                                                 <div class="form-group">
-                                                    <label class="control-label" for="Descriptionss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask us</b></div></label>
+                                                    <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
                                                     <div ng-if="flaskUsDetail.imageUrl">
-                                                        <img class="full-image" src={{flaskUsDetail.imageUrl}} style="height: 100px;width:252px">
+                                                        <img class="full-image" src={{flaskUsDetail.imageUrl}}>
                                                     </div>
-
-                                                    <div class="form-group" style="padding-top:20px">
-                                                        <label class="control-label" for="Descriptions"><div style="width: 90%;padding-left:85px;text-align: start"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>
+                                                    <div class="form-group flask_us_form">
+                                                        <label class="control-label" for="Descriptions"><div class="flask_us_detail_title"><b>{{flaskUsDetail.infoTitle}}</b></div></label>
                                                     </div>
-                                                    <div class="col-70" id="Descriptions" style="width: 90%;padding-left:85px;text-align: start;font-weight: 300">
-                                                        <div class="ion-star " style="float:left;margin-left: -24px"></div>
+                                                    <div class="col-70 flask_us_detail_title" id="Descriptions">
+                                                        <div class="ion-star"></div>
                                                         {{flaskUsDetail.infoDesc}}
                                                     </div>
-
-
                                                 </div>
-                                                <div class="eventHeading2" style="text-align:center;padding-top:30px" ng-click="toggleMsgDiv()">
-                                                    <span class="overlineStyle" style="font-size:18px">FLASK US YOUR QUESTIONS</span>
+                                                <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
+                                                    <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
                                                 </div>
                                                 <div class="flaskUsQuestionDiv" ng-class="{hideFlaskUsQuestionDiv:toggleQueDiv}" ng-if="hideDiv==false">
                                                     <div align="center">
-                                                        <span class="que-input-label"><b style="font-size:12px;float:left">NAME*</b></span>
-
-
-                                                        <input type="text" class="QuestionInput" style="border: solid .3px;height: 25px;border-radius: 8px">
-                                                        <span class="que-input-label"><b style="font-size:12px;float:left">EMAIL*</b></span>
-
-                                                        <input type="text" class="QuestionInput" style="border: solid .3px;height: 25px;border-radius: 8px">
-                                                        <span class="que-input-label"><b style="font-size:12px;float:left">QUESTION*</b></span>
-
-                                                        <textarea class="QuestionInput" style="border: solid .3px;height: 55px;border-radius: 8px"></textarea>
+                                                        <span class="que-input-label"><b>NAME*</b></span>
+                                                        <input type="text" class="QuestionInput">
+                                                        <span class="que-input-label"><b>EMAIL*</b></span>
+                                                        <input type="text" class="QuestionInput">
+                                                        <span class="que-input-label"><b>QUESTION*</b></span>
+                                                        <textarea class="QuestionInput"></textarea>
                                                     </div>
                                                     <div align="center">
-                                                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" style="width: 250px" ng-click="toggleMsgDiv()">
+                                                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="toggleMsgDiv()">
                                                             Send
                                                         </button>
                                                     </div>
                                                 </div>
-
-
                                             </ion-slide>
                                         </ion-slide-box>
                                     </div>
                                 </div>
-
                             </div>
                         </ion-content>
                     </div>
@@ -488,21 +468,18 @@
         <div ng-if="infoTypeName == 'Post-Event'" class="Post-Event">
             <ion-tabs class="tabs-positive tab_bottom">
                 <ion-tab title="BARS/FOOD" ng-click="selectTab(0)">
-                    <div id="barTab" style="height:100%;width:100%" ng-if="selectedIndex == 0">
+                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 0">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
-                            <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">
                                 <div ng-controller="refreshMap">
-                                    <div style="margin-right: 5px">
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
-                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
-                                255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
                                             </div>
                                         </div>
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniGoogleButton" ng-click="selectBarGoogleMarker()"></div>
                                             </div>
                                         </div>
@@ -511,34 +488,29 @@
                             </ui-gmap-map-control>
                             <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
-
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
-                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick"
-                                             control="barGoogleMarkerOptions.control">
+                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick" control="barGoogleMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
                         </ui-gmap-google-map>
                     </div>
                 </ion-tab>
-
                 <ion-tab title="Nightlife" ng-click="selectTab(1)" events="map.events">
-                    <div id="nightLifeTab" style="height:100%;width:100%" ng-if="selectedIndex == 1">
+                    <div id="nightLifeTab" class="tab_div" ng-if="selectedIndex == 1">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">
                                 <div ng-controller="refreshMap">
-                                    <div style="margin-right: 5px">
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
-                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
-                                255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectNightLifeFlaskMarker()"></div>
                                             </div>
                                         </div>
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniGoogleButton" ng-click="selectNightLifeGoogleMarker()"></div>
                                             </div>
                                         </div>
@@ -559,23 +531,20 @@
                         </ui-gmap-google-map>
                     </div>
                 </ion-tab>
-
                 <ion-tab title="HOTELS" ng-click="selectTab(2)">
-                    <div id="hoteltab" style="height:100%;width:100%" ng-if="selectedIndex == 2">
+                    <div id="hoteltab" class="tab_div" ng-if="selectedIndex == 2">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">
                                 <div ng-controller="refreshMap">
-                                    <div style="margin-right: 5px">
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039)
-                                0px 2px 6px; cursor: pointer; margin-bottom: 5px; text-align: center; background-color: rgb(255,
-                                255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-size: 16px; height: 32px; padding: 5px;">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectHotelFlaskMarker()"></div>
                                             </div>
                                         </div>
-                                        <div title="Select Type" style="border: 2px solid rgb(255, 255, 255); border-radius: 3px; box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px; cursor: pointer; margin-bottom: 22px; text-align: center; background-color: rgb(255, 255, 255);">
-                                            <div style="color: rgb(25, 25, 25); font-family: Roboto, Arial, sans-serif; font-size: 16px; height: 32px; padding: 5px;">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniGoogleButton" ng-click="selectHotelGoogleMarker()"></div>
                                             </div>
                                         </div>
@@ -596,8 +565,8 @@
                     </div>
                 </ion-tab>
                 <ion-tab title="GETTING HOME" ng-click="selectTab(3)">
-                    <div style="padding:10px" ng-if="selectedIndex == 3">
-                        <ion-content overflow-scroll="false" style="margin-top: 1px">
+                    <div class="traffic_div" ng-if="selectedIndex == 3">
+                        <ion-content overflow-scroll="false" class="night_life_ion_content">
                             <div class="list">
                                 <a class="item item-avtar item-icon-right item-ticket" ng-repeat="gettingHomeDetail in gettingHomeDetail" ng-if="gettingHomeDetail.phoneNumber==undefined" ng-click="openApp(gettingHomeDetail)">
                                     <h2 class="tickets">{{gettingHomeDetail.infoTitle | uppercase}}</h2>
@@ -609,53 +578,47 @@
                         </ion-content>
                     </div>
                 </ion-tab>
-
                 <ion-tab title="FLASK US" ng-click="selectTab(4)">
-                    <div style="padding:10px" ng-if="selectedIndex == 4">
-                        <ion-content overflow-scroll="false" style="background: white">
+                    <div class="traffic_div" ng-if="selectedIndex == 4">
+                        <ion-content overflow-scroll="false" class="traffic_ion_content">
                             <div>
-                                <div style="max-width: 100vw">
+                                <div class="flask_us_div">
                                     <div>
-                                        <div class="left" style="left:0px;top:121px">
+                                        <div class="left flask_us_slide_buttons">
                                             <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('Flask-Detail')"></button>
                                         </div>
-                                        <div class="right" style="top:121px">
+                                        <div class="right flask_us_slide_buttons_right">
                                             <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('Flask-Detail')"></button>
                                         </div>
                                         <ion-slide-box delegate-handle="Flask-Detail" show-pager='false'>
-                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" style="width:100%;padding-top:15px ">
+                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
                                                 <div class="form-group">
-                                                    <label class="control-label" for="Descriptionssss"><div font-size="18px" style="width: 100%;"><b style="font-size:20px">Flask us</b></div></label>
+                                                    <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
                                                     <div ng-if="flaskUsDetail.imageUrl">
-                                                        <img class="full-image" src={{flaskUsDetail.imageUrl}} style="height: 100px;width:252px">
+                                                        <img class="full-image" src={{flaskUsDetail.imageUrl}}>
                                                     </div>
-
-                                                    <div class="form-group" style="padding-top:20px">
-                                                        <label class="control-label" for="Descriptions"><div style="width: 90%;padding-left:85px;text-align: start;font-weight: 300"><b style="font-size:16px">{{flaskUsDetail.infoTitle}}</b></div></label>
+                                                    <div class="form-group flask_us_form">
+                                                        <label class="control-label" for="Descriptions"><div class="flask_us_detail_title"><b>{{flaskUsDetail.infoTitle}}</b></div></label>
                                                     </div>
-                                                    <div class="col-70" id="Descriptionssss" style="width: 90%;padding-left:85px;text-align: start;font-weight: 300">
-                                                        <div class="ion-star " style="float:left;margin-left: -24px"></div>
+                                                    <div class="col-70 flask_us_detail_title" id="Descriptions">
+                                                        <div class="ion-star"></div>
                                                         {{flaskUsDetail.infoDesc}}
                                                     </div>
                                                 </div>
-                                                <div class="eventHeading2" style="text-align:center;padding-top:30px" ng-click="toggleMsgDiv()">
-                                                    <span class="overlineStyle" style="font-size:18px">FLASK US YOUR QUESTIONS</span>
+                                                <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
+                                                    <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
                                                 </div>
                                                 <div class="flaskUsQuestionDiv" ng-class="{hideFlaskUsQuestionDiv:toggleQueDiv}" ng-if="hideDiv==false">
                                                     <div align="center">
-                                                        <span class="que-input-label"><b style="font-size:12px;float:left">NAME*</b></span>
-
-
-                                                        <input type="text" class="QuestionInput" style="border: solid .3px;height: 25px;border-radius: 8px">
-                                                        <span class="que-input-label"><b style="font-size:12px;float:left">EMAIL*</b></span>
-
-                                                        <input type="text" class="QuestionInput" style="border: solid .3px;height: 25px;border-radius: 8px">
-                                                        <span class="que-input-label"><b style="font-size:12px;float:left">QUESTION*</b></span>
-
-                                                        <textarea class="QuestionInput" style="border: solid .3px;height: 55px;border-radius: 8px"></textarea>
+                                                        <span class="que-input-label"><b>NAME*</b></span>
+                                                        <input type="text" class="QuestionInput">
+                                                        <span class="que-input-label"><b>EMAIL*</b></span>
+                                                        <input type="text" class="QuestionInput">
+                                                        <span class="que-input-label"><b>QUESTION*</b></span>
+                                                        <textarea class="QuestionInput"></textarea>
                                                     </div>
                                                     <div align="center">
-                                                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" style="width: 250px" ng-click="toggleMsgDiv()">
+                                                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="toggleMsgDiv()">
                                                             Send
                                                         </button>
                                                     </div>
@@ -668,7 +631,6 @@
                         </ion-content>
                     </div>
                 </ion-tab>
-
             </ion-tabs>
         </div>
     </ion-content>
