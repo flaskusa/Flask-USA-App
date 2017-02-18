@@ -13,6 +13,7 @@
 	<import class="com.rumbasolutions.flask.model.Venue" />
 	<import class="com.rumbasolutions.flask.model.VenueDetail" />
 	<import class="com.rumbasolutions.flask.model.VenueDetailImage" />
+	<import class="com.rumbasolutions.flask.model.VenueDeviceImage" />
 	<import class="com.rumbasolutions.flask.model.VenueImage" />
 	<import class="com.rumbasolutions.flask.model.VenueSubDetail" />
 	<class name="com.rumbasolutions.flask.model.impl.EventImpl" table="flaskevents_Event">
@@ -198,6 +199,17 @@
 		<property name="imageDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="imageUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="imageGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+	</class>
+	<class name="com.rumbasolutions.flask.model.impl.VenueDeviceImageImpl" table="flaskevents_VenueDeviceImage">
+		<cache usage="read-write" />
+		<id name="venueDeviceImageId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="venueImageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="venueId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="deviceType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="venueDeviceImageUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="aspectRatio" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.VenueImageImpl" table="flaskevents_VenueImage">
 		<cache usage="read-write" />

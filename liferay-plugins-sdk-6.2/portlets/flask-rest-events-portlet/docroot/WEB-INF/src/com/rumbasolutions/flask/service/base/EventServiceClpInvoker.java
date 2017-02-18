@@ -24,195 +24,195 @@ import java.util.Arrays;
  */
 public class EventServiceClpInvoker {
 	public EventServiceClpInvoker() {
-		_methodName92 = "getBeanIdentifier";
+		_methodName98 = "getBeanIdentifier";
 
-		_methodParameterTypes92 = new String[] {  };
+		_methodParameterTypes98 = new String[] {  };
 
-		_methodName93 = "setBeanIdentifier";
+		_methodName99 = "setBeanIdentifier";
 
-		_methodParameterTypes93 = new String[] { "java.lang.String" };
+		_methodParameterTypes99 = new String[] { "java.lang.String" };
 
-		_methodName98 = "getAllEvents";
+		_methodName104 = "getAllEvents";
 
-		_methodParameterTypes98 = new String[] {
+		_methodParameterTypes104 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName99 = "getSimpleFilteredEvents";
+		_methodName105 = "getSimpleFilteredEvents";
 
-		_methodParameterTypes99 = new String[] {
+		_methodParameterTypes105 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName100 = "getUserSelectedEvents";
+		_methodName106 = "getUserSelectedEvents";
 
-		_methodParameterTypes100 = new String[] {
+		_methodParameterTypes106 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName101 = "getEvent";
+		_methodName107 = "getEvent";
 
-		_methodParameterTypes101 = new String[] {
+		_methodParameterTypes107 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName102 = "addEvent";
+		_methodName108 = "addEvent";
 
-		_methodParameterTypes102 = new String[] {
+		_methodParameterTypes108 = new String[] {
 				"java.lang.String", "java.lang.String", "java.util.Date", "long",
 				"long", "long", "long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName103 = "updateEvent";
+		_methodName109 = "updateEvent";
 
-		_methodParameterTypes103 = new String[] {
+		_methodParameterTypes109 = new String[] {
 				"long", "java.lang.String", "java.lang.String", "java.util.Date",
 				"long", "long", "long", "long", "java.lang.String", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName104 = "deleteEvent";
-
-		_methodParameterTypes104 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName105 = "deleteEvents";
-
-		_methodParameterTypes105 = new String[] {
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName106 = "addEventDetail";
-
-		_methodParameterTypes106 = new String[] {
-				"long", "long", "long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "long", "long",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "boolean", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName107 = "updateEventDetail";
-
-		_methodParameterTypes107 = new String[] {
-				"long", "long", "long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "long", "long",
-				"java.lang.String", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "boolean", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName108 = "getEventDetail";
-
-		_methodParameterTypes108 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName109 = "getEventDetails";
-
-		_methodParameterTypes109 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName110 = "getEventDetailsWithImages";
+		_methodName110 = "deleteEvent";
 
 		_methodParameterTypes110 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName111 = "getEventVenueDetailsWithImages";
+		_methodName111 = "deleteEvents";
 
 		_methodParameterTypes111 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName112 = "deleteEventDetail";
+		_methodName112 = "addEventDetail";
 
 		_methodParameterTypes112 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.Double",
+				"java.lang.String", "boolean", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName113 = "deleteAllEventDetails";
+		_methodName113 = "updateEventDetail";
 
 		_methodParameterTypes113 = new String[] {
+				"long", "long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "long", "long",
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.lang.Double",
+				"java.lang.String", "boolean", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName114 = "getEventDetail";
+
+		_methodParameterTypes114 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName114 = "addEventDetailImage";
-
-		_methodParameterTypes114 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long",
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName115 = "updateEventDetailImage";
+		_methodName115 = "getEventDetails";
 
 		_methodParameterTypes115 = new String[] {
-				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "long",
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName116 = "getEventDetailImage";
+		_methodName116 = "getEventDetailsWithImages";
 
 		_methodParameterTypes116 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName117 = "getEventDetailImages";
+		_methodName117 = "getEventVenueDetailsWithImages";
 
 		_methodParameterTypes117 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName118 = "deleteEventDetailImage";
+		_methodName118 = "deleteEventDetail";
 
 		_methodParameterTypes118 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName119 = "addUserEvent";
+		_methodName119 = "deleteAllEventDetails";
 
 		_methodParameterTypes119 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName120 = "removeUserEvent";
+		_methodName120 = "addEventDetailImage";
 
 		_methodParameterTypes120 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName121 = "updateEventDetailImage";
+
+		_methodParameterTypes121 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "long",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName122 = "getEventDetailImage";
+
+		_methodParameterTypes122 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName121 = "getUserEventIds";
+		_methodName123 = "getEventDetailImages";
 
-		_methodParameterTypes121 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
+		_methodParameterTypes123 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName122 = "setGuestViewPermission";
-
-		_methodParameterTypes122 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName124 = "getEventLogos";
+		_methodName124 = "deleteEventDetailImage";
 
 		_methodParameterTypes124 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName125 = "addUserEvent";
+
+		_methodParameterTypes125 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName126 = "removeUserEvent";
+
+		_methodParameterTypes126 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName127 = "getUserEventIds";
+
+		_methodParameterTypes127 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName125 = "uploadDetailImage";
+		_methodName128 = "setGuestViewPermission";
 
-		_methodParameterTypes125 = new String[] {
+		_methodParameterTypes128 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName130 = "getEventLogos";
+
+		_methodParameterTypes130 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName131 = "uploadDetailImage";
+
+		_methodParameterTypes131 = new String[] {
 				"java.io.File", "long", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
@@ -220,25 +220,25 @@ public class EventServiceClpInvoker {
 
 	public Object invokeMethod(String name, String[] parameterTypes,
 		Object[] arguments) throws Throwable {
-		if (_methodName92.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes92, parameterTypes)) {
+		if (_methodName98.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
 			return EventServiceUtil.getBeanIdentifier();
 		}
 
-		if (_methodName93.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes93, parameterTypes)) {
+		if (_methodName99.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
 			EventServiceUtil.setBeanIdentifier((java.lang.String)arguments[0]);
 
 			return null;
 		}
 
-		if (_methodName98.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes98, parameterTypes)) {
+		if (_methodName104.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
 			return EventServiceUtil.getAllEvents((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
-		if (_methodName99.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes99, parameterTypes)) {
+		if (_methodName105.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
 			return EventServiceUtil.getSimpleFilteredEvents((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -246,19 +246,19 @@ public class EventServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
-		if (_methodName100.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes100, parameterTypes)) {
+		if (_methodName106.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes106, parameterTypes)) {
 			return EventServiceUtil.getUserSelectedEvents((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
-		if (_methodName101.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes101, parameterTypes)) {
+		if (_methodName107.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes107, parameterTypes)) {
 			return EventServiceUtil.getEvent(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
-		if (_methodName102.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes102, parameterTypes)) {
+		if (_methodName108.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes108, parameterTypes)) {
 			return EventServiceUtil.addEvent((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.util.Date)arguments[2],
 				((Long)arguments[3]).longValue(),
@@ -270,8 +270,8 @@ public class EventServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 
-		if (_methodName103.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes103, parameterTypes)) {
+		if (_methodName109.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes109, parameterTypes)) {
 			return EventServiceUtil.updateEvent(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.util.Date)arguments[3], ((Long)arguments[4]).longValue(),
@@ -283,24 +283,24 @@ public class EventServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[10]);
 		}
 
-		if (_methodName104.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes104, parameterTypes)) {
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
 			EventServiceUtil.deleteEvent(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName105.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes105, parameterTypes)) {
+		if (_methodName111.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
 			EventServiceUtil.deleteEvents((java.lang.String)arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName106.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes106, parameterTypes)) {
+		if (_methodName112.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
 			return EventServiceUtil.addEventDetail(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -322,8 +322,8 @@ public class EventServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[21]);
 		}
 
-		if (_methodName107.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes107, parameterTypes)) {
+		if (_methodName113.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes113, parameterTypes)) {
 			return EventServiceUtil.updateEventDetail(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -345,79 +345,33 @@ public class EventServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[21]);
 		}
 
-		if (_methodName108.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes108, parameterTypes)) {
+		if (_methodName114.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes114, parameterTypes)) {
 			return EventServiceUtil.getEventDetail(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
-		if (_methodName109.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes109, parameterTypes)) {
+		if (_methodName115.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes115, parameterTypes)) {
 			return EventServiceUtil.getEventDetails(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
-		if (_methodName110.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
-			return EventServiceUtil.getEventDetailsWithImages(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
-		}
-
-		if (_methodName111.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes111, parameterTypes)) {
-			return EventServiceUtil.getEventVenueDetailsWithImages(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
-		}
-
-		if (_methodName112.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes112, parameterTypes)) {
-			EventServiceUtil.deleteEventDetail(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
-
-			return null;
-		}
-
-		if (_methodName113.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes113, parameterTypes)) {
-			EventServiceUtil.deleteAllEventDetails(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
-
-			return null;
-		}
-
-		if (_methodName114.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes114, parameterTypes)) {
-			return EventServiceUtil.addEventDetailImage(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3],
-				((Long)arguments[4]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[5]);
-		}
-
-		if (_methodName115.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes115, parameterTypes)) {
-			return EventServiceUtil.updateEventDetailImage(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
-				(java.lang.String)arguments[3],
-				((Long)arguments[4]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[5]);
-		}
-
 		if (_methodName116.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes116, parameterTypes)) {
-			return EventServiceUtil.getEventDetailImage(((Long)arguments[0]).longValue(),
+			return EventServiceUtil.getEventDetailsWithImages(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName117.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes117, parameterTypes)) {
-			return EventServiceUtil.getEventDetailImages(((Long)arguments[0]).longValue(),
+			return EventServiceUtil.getEventVenueDetailsWithImages(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName118.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes118, parameterTypes)) {
-			EventServiceUtil.deleteEventDetailImage(((Long)arguments[0]).longValue(),
+			EventServiceUtil.deleteEventDetail(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
@@ -425,7 +379,7 @@ public class EventServiceClpInvoker {
 
 		if (_methodName119.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes119, parameterTypes)) {
-			EventServiceUtil.addUserEvent(((Long)arguments[0]).longValue(),
+			EventServiceUtil.deleteAllEventDetails(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
@@ -433,29 +387,75 @@ public class EventServiceClpInvoker {
 
 		if (_methodName120.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes120, parameterTypes)) {
+			return EventServiceUtil.addEventDetailImage(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3],
+				((Long)arguments[4]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
+		}
+
+		if (_methodName121.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes121, parameterTypes)) {
+			return EventServiceUtil.updateEventDetailImage(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3],
+				((Long)arguments[4]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[5]);
+		}
+
+		if (_methodName122.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes122, parameterTypes)) {
+			return EventServiceUtil.getEventDetailImage(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName123.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes123, parameterTypes)) {
+			return EventServiceUtil.getEventDetailImages(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName124.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes124, parameterTypes)) {
+			EventServiceUtil.deleteEventDetailImage(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName125.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes125, parameterTypes)) {
+			EventServiceUtil.addUserEvent(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName126.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes126, parameterTypes)) {
 			EventServiceUtil.removeUserEvent(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName121.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes121, parameterTypes)) {
+		if (_methodName127.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes127, parameterTypes)) {
 			return EventServiceUtil.getUserEventIds((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
-		if (_methodName122.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes122, parameterTypes)) {
+		if (_methodName128.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes128, parameterTypes)) {
 			return EventServiceUtil.setGuestViewPermission((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
-		if (_methodName124.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes124, parameterTypes)) {
+		if (_methodName130.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes130, parameterTypes)) {
 			return EventServiceUtil.getEventLogos((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
-		if (_methodName125.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes125, parameterTypes)) {
+		if (_methodName131.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes131, parameterTypes)) {
 			return EventServiceUtil.uploadDetailImage((java.io.File)arguments[0],
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -465,22 +465,10 @@ public class EventServiceClpInvoker {
 		throw new UnsupportedOperationException();
 	}
 
-	private String _methodName92;
-	private String[] _methodParameterTypes92;
-	private String _methodName93;
-	private String[] _methodParameterTypes93;
 	private String _methodName98;
 	private String[] _methodParameterTypes98;
 	private String _methodName99;
 	private String[] _methodParameterTypes99;
-	private String _methodName100;
-	private String[] _methodParameterTypes100;
-	private String _methodName101;
-	private String[] _methodParameterTypes101;
-	private String _methodName102;
-	private String[] _methodParameterTypes102;
-	private String _methodName103;
-	private String[] _methodParameterTypes103;
 	private String _methodName104;
 	private String[] _methodParameterTypes104;
 	private String _methodName105;
@@ -519,8 +507,20 @@ public class EventServiceClpInvoker {
 	private String[] _methodParameterTypes121;
 	private String _methodName122;
 	private String[] _methodParameterTypes122;
+	private String _methodName123;
+	private String[] _methodParameterTypes123;
 	private String _methodName124;
 	private String[] _methodParameterTypes124;
 	private String _methodName125;
 	private String[] _methodParameterTypes125;
+	private String _methodName126;
+	private String[] _methodParameterTypes126;
+	private String _methodName127;
+	private String[] _methodParameterTypes127;
+	private String _methodName128;
+	private String[] _methodParameterTypes128;
+	private String _methodName130;
+	private String[] _methodParameterTypes130;
+	private String _methodName131;
+	private String[] _methodParameterTypes131;
 }

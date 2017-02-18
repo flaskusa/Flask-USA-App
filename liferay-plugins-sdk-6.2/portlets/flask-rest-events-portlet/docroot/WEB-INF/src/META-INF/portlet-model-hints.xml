@@ -268,6 +268,14 @@
 		</field>
 		<field name="imageGroupId" type="long" />
 	</model>
+	<model name="com.rumbasolutions.flask.model.VenueDeviceImage">
+		<field name="venueDeviceImageId" type="long" />
+		<field name="venueImageId" type="long" />
+		<field name="venueId" type="long" />
+		<field name="deviceType" type="String" />
+		<field name="venueDeviceImageUUID" type="String" />
+		<field name="aspectRatio" type="String" />
+	</model>
 	<model name="com.rumbasolutions.flask.model.VenueImage">
 		<field name="venueImageId" type="long" />
 		<field name="companyId" type="long" />

@@ -361,6 +361,30 @@
         	<finder-column name="eventDetailId"></finder-column>
         </finder>
     </entity>
-  
-   
+    <entity name="VenueDeviceImage" local-service="true">
+
+    	<!-- PK fields -->
+
+    	<!-- Group instance -->
+
+    	<!-- Audit fields -->
+        <column name="venueDeviceImageId" primary="true" type="long"></column>
+        <column name="venueImageId" type="long"></column>
+        <column name="venueId" type="long"></column>
+        <column name="deviceType" type="String"></column>
+        <column name="venueDeviceImageUUID" type="String"></column>
+        <column name="aspectRatio" type="String"></column>
+        <finder name="VenueId" return-type="Collection">
+            <finder-column name="venueId"></finder-column>
+        </finder>
+        <finder name="DeviceType" return-type="Collection">
+            <finder-column name="deviceType"></finder-column>
+        </finder>
+        <finder name="VenueDevice" return-type="Collection">
+            <finder-column name="venueId"></finder-column>
+            <finder-column name="deviceType"></finder-column>
+        </finder>
+    </entity>
+
+
 </service-builder>

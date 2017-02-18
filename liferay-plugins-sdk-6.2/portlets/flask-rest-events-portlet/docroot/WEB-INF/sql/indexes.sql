@@ -19,6 +19,13 @@ create index IX_BCB07EE7 on flaskevents_VenueDetail (venueId);
 
 create index IX_9CACF537 on flaskevents_VenueDetailImage (venueDetailId);
 
+create index IX_EECBBC33 on flaskevents_VenueDeviceImage (DeviceType);
+create index IX_85E73EB on flaskevents_VenueDeviceImage (VenueId);
+create index IX_8BCD0CAF on flaskevents_VenueDeviceImage (VenueId, DeviceType);
+create index IX_E5006813 on flaskevents_VenueDeviceImage (deviceType);
+create index IX_90EC540B on flaskevents_VenueDeviceImage (venueId);
+create index IX_152068AF on flaskevents_VenueDeviceImage (venueId, deviceType);
+
 create index IX_F121BA95 on flaskevents_VenueImage (venueId);
 
 create index IX_BD417FF0 on flaskevents_VenueSubDetail (venueDetailId);

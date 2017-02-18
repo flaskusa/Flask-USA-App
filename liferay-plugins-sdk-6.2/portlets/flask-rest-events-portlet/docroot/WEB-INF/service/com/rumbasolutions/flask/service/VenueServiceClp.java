@@ -220,6 +220,51 @@ public class VenueServiceClp implements VenueService {
 				"long", "long", "com.rumbasolutions.flask.model.VenueDetail",
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName30 = "addVenueDeviceImage";
+
+		_methodParameterTypes30 = new String[] {
+				"long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
+
+		_methodName31 = "getVenueDeviceImagesByVenueId";
+
+		_methodParameterTypes31 = new String[] { "long" };
+
+		_methodName32 = "getVenueDeviceImagesByDeviceType";
+
+		_methodParameterTypes32 = new String[] { "java.lang.String" };
+
+		_methodName33 = "getVenueDeviceImagesByVenueDevice";
+
+		_methodParameterTypes33 = new String[] { "long", "java.lang.String" };
+
+		_methodName34 = "getVenueDeviceImage";
+
+		_methodParameterTypes34 = new String[] { "long" };
+
+		_methodName35 = "getAllVenueDeviceImages";
+
+		_methodParameterTypes35 = new String[] {  };
+
+		_methodName36 = "updateVenueDeviceImage";
+
+		_methodParameterTypes36 = new String[] {
+				"long", "long", "long", "java.lang.String", "java.lang.String",
+				"java.lang.String"
+			};
+
+		_methodName37 = "deleteVenueDeviceImage";
+
+		_methodParameterTypes37 = new String[] { "long" };
+
+		_methodName38 = "uploadDeviceImage";
+
+		_methodParameterTypes38 = new String[] {
+				"java.io.File", "long", "java.lang.String", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -489,23 +534,25 @@ public class VenueServiceClp implements VenueService {
 	}
 
 	@Override
-	public void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImageUUID, long groupId,
-		com.liferay.portal.service.ServiceContext serviceContext) {
+	public com.rumbasolutions.flask.model.VenueImage addVenueImage(
+		long venueId, java.lang.String title, java.lang.String venueImageUUID,
+		long groupId, com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName9,
-				_methodParameterTypes9,
-				new Object[] {
-					venueId,
-					
-				ClpSerializer.translateInput(title),
-					
-				ClpSerializer.translateInput(venueImageUUID),
-					
-				groupId,
-					
-				ClpSerializer.translateInput(serviceContext)
-				});
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9,
+					new Object[] {
+						venueId,
+						
+					ClpSerializer.translateInput(title),
+						
+					ClpSerializer.translateInput(venueImageUUID),
+						
+					groupId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -518,6 +565,8 @@ public class VenueServiceClp implements VenueService {
 					" is not a valid exception");
 			}
 		}
+
+		return (com.rumbasolutions.flask.model.VenueImage)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -1204,6 +1253,262 @@ public class VenueServiceClp implements VenueService {
 		}
 	}
 
+	@Override
+	public com.rumbasolutions.flask.model.VenueDeviceImage addVenueDeviceImage(
+		long venueImageId, long venueId, java.lang.String deviceType,
+		java.lang.String imageDeviceImageUUID, java.lang.String aspectRatio) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName30,
+					_methodParameterTypes30,
+					new Object[] {
+						venueImageId,
+						
+					venueId,
+						
+					ClpSerializer.translateInput(deviceType),
+						
+					ClpSerializer.translateInput(imageDeviceImageUUID),
+						
+					ClpSerializer.translateInput(aspectRatio)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.VenueDeviceImage)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueId(
+		long venueId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName31,
+					_methodParameterTypes31, new Object[] { venueId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByDeviceType(
+		java.lang.String deviceType) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName32,
+					_methodParameterTypes32,
+					new Object[] { ClpSerializer.translateInput(deviceType) });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueDevice(
+		long venueId, java.lang.String deviceType) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName33,
+					_methodParameterTypes33,
+					new Object[] {
+						venueId,
+						
+					ClpSerializer.translateInput(deviceType)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDeviceImage getVenueDeviceImage(
+		long venueDeviceImageId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName34,
+					_methodParameterTypes34, new Object[] { venueDeviceImageId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.VenueDeviceImage)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getAllVenueDeviceImages() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName35,
+					_methodParameterTypes35, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDeviceImage updateVenueDeviceImage(
+		long venueImageDeviceId, long venueImageId, long venueId,
+		java.lang.String deviceType, java.lang.String imageDeviceImageUUID,
+		java.lang.String aspectRatio) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName36,
+					_methodParameterTypes36,
+					new Object[] {
+						venueImageDeviceId,
+						
+					venueImageId,
+						
+					venueId,
+						
+					ClpSerializer.translateInput(deviceType),
+						
+					ClpSerializer.translateInput(imageDeviceImageUUID),
+						
+					ClpSerializer.translateInput(aspectRatio)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.VenueDeviceImage)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public void deleteVenueDeviceImage(long venueDeviceImageId) {
+		try {
+			_invokableService.invokeMethod(_methodName37,
+				_methodParameterTypes37, new Object[] { venueDeviceImageId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueImage uploadDeviceImage(
+		java.io.File file, long venueId, java.lang.String deviceType,
+		java.lang.String aspectRatio,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName38,
+					_methodParameterTypes38,
+					new Object[] {
+						ClpSerializer.translateInput(file),
+						
+					venueId,
+						
+					ClpSerializer.translateInput(deviceType),
+						
+					ClpSerializer.translateInput(aspectRatio),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.rumbasolutions.flask.model.VenueImage)ClpSerializer.translateOutput(returnObj);
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1263,4 +1568,22 @@ public class VenueServiceClp implements VenueService {
 	private String[] _methodParameterTypes28;
 	private String _methodName29;
 	private String[] _methodParameterTypes29;
+	private String _methodName30;
+	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
+	private String _methodName32;
+	private String[] _methodParameterTypes32;
+	private String _methodName33;
+	private String[] _methodParameterTypes33;
+	private String _methodName34;
+	private String[] _methodParameterTypes34;
+	private String _methodName35;
+	private String[] _methodParameterTypes35;
+	private String _methodName36;
+	private String[] _methodParameterTypes36;
+	private String _methodName37;
+	private String[] _methodParameterTypes37;
+	private String _methodName38;
+	private String[] _methodParameterTypes38;
 }

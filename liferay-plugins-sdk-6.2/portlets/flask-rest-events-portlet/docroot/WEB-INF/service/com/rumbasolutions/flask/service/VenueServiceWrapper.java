@@ -114,11 +114,11 @@ public class VenueServiceWrapper implements VenueService,
 	}
 
 	@Override
-	public void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImageUUID, long groupId,
-		com.liferay.portal.service.ServiceContext serviceContext) {
-		_venueService.addVenueImage(venueId, title, venueImageUUID, groupId,
-			serviceContext);
+	public com.rumbasolutions.flask.model.VenueImage addVenueImage(
+		long venueId, java.lang.String title, java.lang.String venueImageUUID,
+		long groupId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.addVenueImage(venueId, title, venueImageUUID,
+			groupId, serviceContext);
 	}
 
 	@Override
@@ -284,6 +284,67 @@ public class VenueServiceWrapper implements VenueService,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_venueService.addFileEntry(destinationVenueId, srcVenueDetailId,
 			destVenueDetail, serviceContext);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDeviceImage addVenueDeviceImage(
+		long venueImageId, long venueId, java.lang.String deviceType,
+		java.lang.String imageDeviceImageUUID, java.lang.String aspectRatio) {
+		return _venueService.addVenueDeviceImage(venueImageId, venueId,
+			deviceType, imageDeviceImageUUID, aspectRatio);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueId(
+		long venueId) {
+		return _venueService.getVenueDeviceImagesByVenueId(venueId);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByDeviceType(
+		java.lang.String deviceType) {
+		return _venueService.getVenueDeviceImagesByDeviceType(deviceType);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueDevice(
+		long venueId, java.lang.String deviceType) {
+		return _venueService.getVenueDeviceImagesByVenueDevice(venueId,
+			deviceType);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDeviceImage getVenueDeviceImage(
+		long venueDeviceImageId) {
+		return _venueService.getVenueDeviceImage(venueDeviceImageId);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getAllVenueDeviceImages() {
+		return _venueService.getAllVenueDeviceImages();
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueDeviceImage updateVenueDeviceImage(
+		long venueImageDeviceId, long venueImageId, long venueId,
+		java.lang.String deviceType, java.lang.String imageDeviceImageUUID,
+		java.lang.String aspectRatio) {
+		return _venueService.updateVenueDeviceImage(venueImageDeviceId,
+			venueImageId, venueId, deviceType, imageDeviceImageUUID, aspectRatio);
+	}
+
+	@Override
+	public void deleteVenueDeviceImage(long venueDeviceImageId) {
+		_venueService.deleteVenueDeviceImage(venueDeviceImageId);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.VenueImage uploadDeviceImage(
+		java.io.File file, long venueId, java.lang.String deviceType,
+		java.lang.String aspectRatio,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.uploadDeviceImage(file, venueId, deviceType,
+			aspectRatio, serviceContext);
 	}
 
 	/**

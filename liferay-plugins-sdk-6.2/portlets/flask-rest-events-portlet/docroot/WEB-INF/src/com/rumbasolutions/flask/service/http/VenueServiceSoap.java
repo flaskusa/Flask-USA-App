@@ -172,13 +172,15 @@ public class VenueServiceSoap {
 		}
 	}
 
-	public static void addVenueImage(long venueId, java.lang.String title,
-		java.lang.String venueImageUUID, long groupId,
-		com.liferay.portal.service.ServiceContext serviceContext)
+	public static com.rumbasolutions.flask.model.VenueImageSoap addVenueImage(
+		long venueId, java.lang.String title, java.lang.String venueImageUUID,
+		long groupId, com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			VenueServiceUtil.addVenueImage(venueId, title, venueImageUUID,
-				groupId, serviceContext);
+			com.rumbasolutions.flask.model.VenueImage returnValue = VenueServiceUtil.addVenueImage(venueId,
+					title, venueImageUUID, groupId, serviceContext);
+
+			return com.rumbasolutions.flask.model.VenueImageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -521,6 +523,128 @@ public class VenueServiceSoap {
 			VenueServiceUtil.addFileEntry(destinationVenueId, srcVenueDetailId,
 				com.rumbasolutions.flask.model.impl.VenueDetailModelImpl.toModel(
 					destVenueDetail), serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDeviceImageSoap addVenueDeviceImage(
+		long venueImageId, long venueId, java.lang.String deviceType,
+		java.lang.String imageDeviceImageUUID, java.lang.String aspectRatio)
+		throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.VenueDeviceImage returnValue = VenueServiceUtil.addVenueDeviceImage(venueImageId,
+					venueId, deviceType, imageDeviceImageUUID, aspectRatio);
+
+			return com.rumbasolutions.flask.model.VenueDeviceImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDeviceImageSoap[] getVenueDeviceImagesByVenueId(
+		long venueId) throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> returnValue =
+				VenueServiceUtil.getVenueDeviceImagesByVenueId(venueId);
+
+			return com.rumbasolutions.flask.model.VenueDeviceImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDeviceImageSoap[] getVenueDeviceImagesByDeviceType(
+		java.lang.String deviceType) throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> returnValue =
+				VenueServiceUtil.getVenueDeviceImagesByDeviceType(deviceType);
+
+			return com.rumbasolutions.flask.model.VenueDeviceImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDeviceImageSoap[] getVenueDeviceImagesByVenueDevice(
+		long venueId, java.lang.String deviceType) throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> returnValue =
+				VenueServiceUtil.getVenueDeviceImagesByVenueDevice(venueId,
+					deviceType);
+
+			return com.rumbasolutions.flask.model.VenueDeviceImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDeviceImageSoap getVenueDeviceImage(
+		long venueDeviceImageId) throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.VenueDeviceImage returnValue = VenueServiceUtil.getVenueDeviceImage(venueDeviceImageId);
+
+			return com.rumbasolutions.flask.model.VenueDeviceImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDeviceImageSoap[] getAllVenueDeviceImages()
+		throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> returnValue =
+				VenueServiceUtil.getAllVenueDeviceImages();
+
+			return com.rumbasolutions.flask.model.VenueDeviceImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.VenueDeviceImageSoap updateVenueDeviceImage(
+		long venueImageDeviceId, long venueImageId, long venueId,
+		java.lang.String deviceType, java.lang.String imageDeviceImageUUID,
+		java.lang.String aspectRatio) throws RemoteException {
+		try {
+			com.rumbasolutions.flask.model.VenueDeviceImage returnValue = VenueServiceUtil.updateVenueDeviceImage(venueImageDeviceId,
+					venueImageId, venueId, deviceType, imageDeviceImageUUID,
+					aspectRatio);
+
+			return com.rumbasolutions.flask.model.VenueDeviceImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteVenueDeviceImage(long venueDeviceImageId)
+		throws RemoteException {
+		try {
+			VenueServiceUtil.deleteVenueDeviceImage(venueDeviceImageId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

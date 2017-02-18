@@ -35,6 +35,9 @@
 	<bean id="com.rumbasolutions.flask.service.VenueDetailImageLocalService" class="com.rumbasolutions.flask.service.impl.VenueDetailImageLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.VenueDetailImageService" class="com.rumbasolutions.flask.service.impl.VenueDetailImageServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.VenueDetailImagePersistence" class="com.rumbasolutions.flask.service.persistence.VenueDetailImagePersistenceImpl" parent="basePersistence" />
+	<bean id="com.rumbasolutions.flask.service.VenueDeviceImageLocalService" class="com.rumbasolutions.flask.service.impl.VenueDeviceImageLocalServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.VenueDeviceImageService" class="com.rumbasolutions.flask.service.impl.VenueDeviceImageServiceImpl" />
+	<bean id="com.rumbasolutions.flask.service.persistence.VenueDeviceImagePersistence" class="com.rumbasolutions.flask.service.persistence.VenueDeviceImagePersistenceImpl" parent="basePersistence" />
 	<bean id="com.rumbasolutions.flask.service.VenueImageLocalService" class="com.rumbasolutions.flask.service.impl.VenueImageLocalServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.VenueImageService" class="com.rumbasolutions.flask.service.impl.VenueImageServiceImpl" />
 	<bean id="com.rumbasolutions.flask.service.persistence.VenueImagePersistence" class="com.rumbasolutions.flask.service.persistence.VenueImagePersistenceImpl" parent="basePersistence" />

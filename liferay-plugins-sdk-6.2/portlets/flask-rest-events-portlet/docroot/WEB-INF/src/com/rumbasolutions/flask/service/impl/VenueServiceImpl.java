@@ -15,6 +15,9 @@
 package com.rumbasolutions.flask.service.impl;
 
 import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -28,17 +31,22 @@ import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.rumbasolutions.flask.manageevent.FlaskDocLibUtil;
+import com.rumbasolutions.flask.model.EventDetailImage;
 import com.rumbasolutions.flask.model.Venue;
 import com.rumbasolutions.flask.model.VenueDetail;
 import com.rumbasolutions.flask.model.VenueDetailImage;
+import com.rumbasolutions.flask.model.VenueDeviceImage;
 import com.rumbasolutions.flask.model.VenueImage;
+import com.rumbasolutions.flask.service.EventServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeCategoryServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeServiceUtil;
 import com.rumbasolutions.flask.service.VenueDetailImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueDetailLocalServiceUtil;
+import com.rumbasolutions.flask.service.VenueDeviceImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueImageLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueServiceUtil;
@@ -46,6 +54,7 @@ import com.rumbasolutions.flask.service.VenueSubDetailServiceUtil;
 import com.rumbasolutions.flask.service.base.VenueServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.VenueDetailImageUtil;
 import com.rumbasolutions.flask.service.persistence.VenueDetailUtil;
+import com.rumbasolutions.flask.service.persistence.VenueDeviceImageUtil;
 import com.rumbasolutions.flask.service.persistence.VenueImageUtil;
 import com.rumbasolutions.flask.service.persistence.VenueSubDetailUtil;
 import com.rumbasolutions.flask.service.persistence.VenueUtil;
@@ -70,7 +79,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	 *
 	 * Never reference this interface directly. Always use {@link com.rumbasolutions.flask.service.VenueServiceUtil} to access the venue remote service.
 	 */
-	
+	public static final String _venueRootFolder = "Venue";
 	private static Log LOGGER = LogFactoryUtil.getLog(VenueServiceImpl.class);
 	
 	@AccessControlled(guestAccessEnabled =true)
@@ -205,9 +214,10 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 
 		
 	@Override
-	public void addVenueImage(long venueId, String title, String venueImageUUID, long groupId, ServiceContext  serviceContext){
+	public VenueImage addVenueImage(long venueId, String title, String venueImageUUID, long groupId, ServiceContext  serviceContext){
+		VenueImage venueImage = null;
 		try{
-			VenueImage venueImage = VenueImageLocalServiceUtil.createVenueImage(CounterLocalServiceUtil.increment());
+			venueImage = VenueImageLocalServiceUtil.createVenueImage(CounterLocalServiceUtil.increment());
 			venueImage.setVenueId(venueId);	
 			venueImage.setTitle(title);
 			venueImage.setVenueImageUUId(venueImageUUID);
@@ -219,11 +229,12 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		    venueImage.setCreatedDate(serviceContext.getCreateDate(now));
 		    venueImage.setModifiedDate(serviceContext.getModifiedDate(now));
 		    
-			VenueImageLocalServiceUtil.addVenueImage(venueImage);
+		    venueImage = VenueImageLocalServiceUtil.addVenueImage(venueImage);
 			
 		}catch(Exception ex){
 			LOGGER.error(ex);
 		}
+		return venueImage;
 	}
 	
 	@AccessControlled(guestAccessEnabled =true)
@@ -641,5 +652,139 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		catch (Exception e) {
 			LOGGER.error(e);
 		}
+	}
+	
+	@Override
+	public VenueDeviceImage addVenueDeviceImage(long venueImageId, long venueId, String deviceType, String imageDeviceImageUUID, String aspectRatio){
+		VenueDeviceImage venueDeviceImage = null;
+		try{
+			venueDeviceImage = VenueDeviceImageLocalServiceUtil.createVenueDeviceImage(CounterLocalServiceUtil.increment());
+			venueDeviceImage.setVenueImageId(venueImageId);
+			venueDeviceImage.setVenueId(venueId);	
+			venueDeviceImage.setDeviceType(deviceType);
+			venueDeviceImage.setVenueDeviceImageUUID(imageDeviceImageUUID);
+			venueDeviceImage.setAspectRatio(aspectRatio);
+			venueDeviceImage =VenueDeviceImageLocalServiceUtil.addVenueDeviceImage(venueDeviceImage);
+			
+		}catch(Exception ex){
+			LOGGER.error("Error in addVenueDeviceImage:" +ex);
+		}
+		return venueDeviceImage;
+	}
+	
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public List<VenueDeviceImage> getVenueDeviceImagesByVenueId(long venueId){
+			
+			List<VenueDeviceImage>  venueDeviceImages = new ArrayList<VenueDeviceImage>();
+			try {
+				venueDeviceImages =  VenueDeviceImageUtil.findByVenueId(venueId);
+			}
+			catch (SystemException e) {
+				LOGGER.error("Error in getVenueDeviceImagesByVenueId:" + e );
+			}
+			return venueDeviceImages;
+	}
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public List<VenueDeviceImage> getVenueDeviceImagesByDeviceType(String deviceType){
+			
+			List<VenueDeviceImage>  venueDeviceImages = new ArrayList<VenueDeviceImage>();
+			try {
+				venueDeviceImages =  VenueDeviceImageUtil.findByDeviceType(deviceType);
+			}
+			catch (SystemException e) {
+				LOGGER.error("Error in getVenueDeviceImagesByDeviceType:" + e );
+			}
+			return venueDeviceImages;
+	}
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public List<VenueDeviceImage> getVenueDeviceImagesByVenueDevice(long venueId, String deviceType){
+			
+			List<VenueDeviceImage>  venueDeviceImages = new ArrayList<VenueDeviceImage>();
+			try {
+				venueDeviceImages =  VenueDeviceImageUtil.findByVenueDevice(venueId, deviceType);
+			}
+			catch (SystemException e) {
+				LOGGER.error("Error in getVenueDeviceImagesByVenueDevice:" + e );
+			}
+			return venueDeviceImages;
+	}
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public VenueDeviceImage getVenueDeviceImage(long venueDeviceImageId){
+				
+		VenueDeviceImage  venueDeviceImage = null;
+			try {
+				venueDeviceImage = VenueDeviceImageUtil.findByPrimaryKey(venueDeviceImageId);
+			}
+			catch (Exception e) {
+				LOGGER.error("Error in getVenueDeviceImage:" + e );
+			}
+			return venueDeviceImage;
+	}
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public List<VenueDeviceImage> getAllVenueDeviceImages(){
+				
+		List<VenueDeviceImage>  venueDeviceImages = new ArrayList<VenueDeviceImage>();
+			try {
+				venueDeviceImages = VenueDeviceImageUtil.findAll();
+			}
+			catch (Exception e) {
+				LOGGER.error("Error in getVenueDeviceImage:" + e );
+			}
+			return venueDeviceImages;
+	}
+	
+	@Override
+	public VenueDeviceImage updateVenueDeviceImage(long venueImageDeviceId, long venueImageId, long venueId, String deviceType, String imageDeviceImageUUID, String aspectRatio){
+		VenueDeviceImage venueDeviceImage = null;
+		try{
+			venueDeviceImage = VenueDeviceImageLocalServiceUtil.getVenueDeviceImage(venueImageDeviceId);
+			venueDeviceImage.setVenueImageId(venueImageId);	
+			venueDeviceImage.setVenueId(venueId);	
+			venueDeviceImage.setDeviceType(deviceType);
+			venueDeviceImage.setVenueDeviceImageUUID(imageDeviceImageUUID);
+			venueDeviceImage.setAspectRatio(aspectRatio);
+			venueDeviceImage =VenueDeviceImageLocalServiceUtil.updateVenueDeviceImage(venueDeviceImage);
+			
+		}catch(Exception ex){
+			LOGGER.error("Error in updateVenueDeviceImage:" +ex);
+		}
+		return venueDeviceImage;
+	}
+	
+	@Override
+	public void deleteVenueDeviceImage(long venueDeviceImageId){
+		try{
+			VenueDeviceImageLocalServiceUtil.deleteVenueDeviceImage(venueDeviceImageId);
+		}catch(Exception ex){
+			LOGGER.error("Error in deleteVenueDeviceImage:" +ex);
+		}
+	}
+	
+	@Override
+	@AccessControlled(guestAccessEnabled =true)
+	public VenueImage uploadDeviceImage(File file, long venueId, String deviceType, String aspectRatio, ServiceContext serviceContext){
+		VenueImage venueImage = null;
+		try {
+			Path source = Paths.get(file.getName());
+			String mimeType = Files.probeContentType(source);
+			long repositoryId = FlaskUtil.getFlaskRepositoryId();
+			long userId = serviceContext.getUserId();
+			String name = venueId +"_"+ file.getName();
+			Folder folder = FlaskUtil.getOrCreateFolder(_venueRootFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
+			String venueFolderName = folder.getName()+"-"+venueId;
+			Folder venueFolder = FlaskUtil.getOrCreateFolder(venueFolderName, folder.getFolderId(), folder.getRepositoryId(), userId, serviceContext);
+			FileEntry fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), venueFolder.getRepositoryId(), venueFolder.getFolderId(), name, mimeType, name, name, "", file, serviceContext);
+			FlaskUtil.setGuestViewPermission(fileEntry);
+			venueImage = VenueServiceUtil.addVenueImage(venueId, name, fileEntry.getUuid(), fileEntry.getGroupId(), serviceContext);
+			VenueServiceUtil.addVenueDeviceImage(venueImage.getVenueImageId(), venueId, deviceType, venueImage.getVenueImageUUId(), aspectRatio);
+		} catch (Exception e) {
+			LOGGER.error("Exception in uploadDetailImage: "+e);
+		}
+		return venueImage;
 	}
 }

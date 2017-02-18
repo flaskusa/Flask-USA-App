@@ -44,6 +44,7 @@ import com.rumbasolutions.flask.service.persistence.InfoTypePersistence;
 import com.rumbasolutions.flask.service.persistence.UserEventPersistence;
 import com.rumbasolutions.flask.service.persistence.VenueDetailImagePersistence;
 import com.rumbasolutions.flask.service.persistence.VenueDetailPersistence;
+import com.rumbasolutions.flask.service.persistence.VenueDeviceImagePersistence;
 import com.rumbasolutions.flask.service.persistence.VenueImagePersistence;
 import com.rumbasolutions.flask.service.persistence.VenuePersistence;
 import com.rumbasolutions.flask.service.persistence.VenueSubDetailPersistence;
@@ -934,6 +935,63 @@ public abstract class EventTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	}
 
 	/**
+	 * Returns the venue device image local service.
+	 *
+	 * @return the venue device image local service
+	 */
+	public com.rumbasolutions.flask.service.VenueDeviceImageLocalService getVenueDeviceImageLocalService() {
+		return venueDeviceImageLocalService;
+	}
+
+	/**
+	 * Sets the venue device image local service.
+	 *
+	 * @param venueDeviceImageLocalService the venue device image local service
+	 */
+	public void setVenueDeviceImageLocalService(
+		com.rumbasolutions.flask.service.VenueDeviceImageLocalService venueDeviceImageLocalService) {
+		this.venueDeviceImageLocalService = venueDeviceImageLocalService;
+	}
+
+	/**
+	 * Returns the venue device image remote service.
+	 *
+	 * @return the venue device image remote service
+	 */
+	public com.rumbasolutions.flask.service.VenueDeviceImageService getVenueDeviceImageService() {
+		return venueDeviceImageService;
+	}
+
+	/**
+	 * Sets the venue device image remote service.
+	 *
+	 * @param venueDeviceImageService the venue device image remote service
+	 */
+	public void setVenueDeviceImageService(
+		com.rumbasolutions.flask.service.VenueDeviceImageService venueDeviceImageService) {
+		this.venueDeviceImageService = venueDeviceImageService;
+	}
+
+	/**
+	 * Returns the venue device image persistence.
+	 *
+	 * @return the venue device image persistence
+	 */
+	public VenueDeviceImagePersistence getVenueDeviceImagePersistence() {
+		return venueDeviceImagePersistence;
+	}
+
+	/**
+	 * Sets the venue device image persistence.
+	 *
+	 * @param venueDeviceImagePersistence the venue device image persistence
+	 */
+	public void setVenueDeviceImagePersistence(
+		VenueDeviceImagePersistence venueDeviceImagePersistence) {
+		this.venueDeviceImagePersistence = venueDeviceImagePersistence;
+	}
+
+	/**
 	 * Returns the venue image local service.
 	 *
 	 * @return the venue image local service
@@ -1291,6 +1349,12 @@ public abstract class EventTypeLocalServiceBaseImpl extends BaseLocalServiceImpl
 	protected com.rumbasolutions.flask.service.VenueDetailImageService venueDetailImageService;
 	@BeanReference(type = VenueDetailImagePersistence.class)
 	protected VenueDetailImagePersistence venueDetailImagePersistence;
+	@BeanReference(type = com.rumbasolutions.flask.service.VenueDeviceImageLocalService.class)
+	protected com.rumbasolutions.flask.service.VenueDeviceImageLocalService venueDeviceImageLocalService;
+	@BeanReference(type = com.rumbasolutions.flask.service.VenueDeviceImageService.class)
+	protected com.rumbasolutions.flask.service.VenueDeviceImageService venueDeviceImageService;
+	@BeanReference(type = VenueDeviceImagePersistence.class)
+	protected VenueDeviceImagePersistence venueDeviceImagePersistence;
 	@BeanReference(type = com.rumbasolutions.flask.service.VenueImageLocalService.class)
 	protected com.rumbasolutions.flask.service.VenueImageLocalService venueImageLocalService;
 	@BeanReference(type = com.rumbasolutions.flask.service.VenueImageService.class)

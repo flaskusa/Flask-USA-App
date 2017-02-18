@@ -160,6 +160,15 @@ create table flaskevents_VenueDetailImage (
 	imageGroupId LONG
 );
 
+create table flaskevents_VenueDeviceImage (
+	venueDeviceImageId LONG not null primary key,
+	venueImageId LONG,
+	venueId LONG,
+	deviceType VARCHAR(75) null,
+	venueDeviceImageUUID VARCHAR(75) null,
+	aspectRatio VARCHAR(75) null
+);
+
 create table flaskevents_VenueImage (
 	venueImageId LONG not null primary key,
 	companyId LONG,

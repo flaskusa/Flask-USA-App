@@ -248,6 +248,19 @@
 			<transient name="userUuid" />
 		</attributes>
 	</mapped-superclass>
+	<mapped-superclass class="com.rumbasolutions.flask.model.impl.VenueDeviceImageModelImpl">
+		<attributes>
+			<id name="venueDeviceImageId" />
+			<basic name="venueImageId" />
+			<basic name="venueId" />
+			<basic name="deviceType" />
+			<basic name="venueDeviceImageUUID" />
+			<basic name="aspectRatio" />
+			<transient name="modelAttributes" />
+			<transient name="primaryKey" />
+			<transient name="primaryKeyObj" />
+		</attributes>
+	</mapped-superclass>
 	<mapped-superclass class="com.rumbasolutions.flask.model.impl.VenueImageModelImpl">
 		<attributes>
 			<id name="venueImageId" />
@@ -322,6 +335,10 @@
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.VenueDetailImageImpl" name="VenueDetailImage">
 		<table name="flaskevents_VenueDetailImage" />
+		<attributes />
+	</entity>
+	<entity class="com.rumbasolutions.flask.model.impl.VenueDeviceImageImpl" name="VenueDeviceImage">
+		<table name="flaskevents_VenueDeviceImage" />
 		<attributes />
 	</entity>
 	<entity class="com.rumbasolutions.flask.model.impl.VenueImageImpl" name="VenueImage">
