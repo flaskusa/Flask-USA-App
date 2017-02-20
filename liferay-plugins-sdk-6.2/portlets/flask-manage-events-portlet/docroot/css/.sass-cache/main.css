@@ -1,3 +1,15 @@
+.Text-Area {
+  width: 450px !important;
+  height: 60px !important;
+  background-color: white !important;
+  margin: 0px !important;
+  resize: none !important; }
+
+.sub-detail-text-box {
+  width: 23% !important;
+  margin-right: 2% !important;
+  margin-top: -20px !important; }
+
 div#jqxtabs {
   width: 100%;
   height: 250px;
@@ -33,6 +45,9 @@ padding-left: 15px;
 padding-top: 8px;
 }
 */
+@media (max-width: 1006px) {
+  .sub-detail-text-box {
+    margin-top: 0px !important; } }
 @media (max-width: 767px) {
   div#startTime, div#endTime {
     width: 96.2% !important; }

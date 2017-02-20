@@ -2,6 +2,7 @@ var imageContainer = $("#venueImage");
 var venueForm;
 var dropZoneLogo;
 var iSelected;
+
 function addClickHandlers() {
 	$("#mvenues").click(function(){
 		window.location.hash = '#ManageVenue';
@@ -11,7 +12,7 @@ function addClickHandlers() {
 	});
 	venueForm = $("#venueForm");
 	/*	Initialize display elements*/
-
+	
 	$(".cssDelete").hide();
 	/* Click handler for add user button*/
 
@@ -56,7 +57,7 @@ function addClickHandlers() {
 		    });
 
 	});
-
+	
 
 	/* Click handler for cancel button*/
 
@@ -113,6 +114,7 @@ function addClickHandlers() {
 	    	//alert("This is default");
 		}		
 	});
+	
 }
 
 function loadData() {

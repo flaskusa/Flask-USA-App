@@ -309,7 +309,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value" : "1",
 			"checked" : "checked"
 		} ]
-	}, {
+	}, /*{
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -319,7 +319,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	}, {
+	}, */{
 		"type" : "upload",
 		"attr" : [ {
 			"caption" : "Upload Pictures",
@@ -339,7 +339,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "70",
 			"Class" : ""
 		} ]
-	}, {
+	},/* {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -349,7 +349,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	}, {
+	},*/ {
 		"type" : "upload",
 		"attr" : [ {
 			"caption" : "Upload Pictures",
@@ -429,7 +429,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value" : "Yes",
 			"items" : [ "Yes", "No" ]
 		} ]
-	}, {
+	}/*, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -439,7 +439,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	} ],
+	}*/ ],
 	TRAFFIC : [ {// TRAFFIC
 		"type" : "text",
 		"attr" : [ {
@@ -450,7 +450,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "70",
 			"Class" : ""
 		} ]
-	}, {
+	}/*, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -460,7 +460,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	} ],
+	}*/ ],
 	FOOD : [ {// FOOD
 		"type" : "text",
 		"attr" : [ {
@@ -501,7 +501,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	}, {
+	}/*, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -511,7 +511,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	} ],
+	}*/ ],
 	BAR_AND_RESTO : [ {// FOOD
 		"type" : "text",
 		"attr" : [ {
@@ -570,7 +570,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value" : $("#eventId").val(),
 			"Class" : ""
 		} ]
-	}, {
+	}/*, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -580,7 +580,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	} ],
+	}*/ ],
 	LIQUOR : [ {// LIQUOR
 		"type" : "text",
 		"attr" : [ {
@@ -611,7 +611,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "10",
 			"Class" : ""
 		} ]
-	}, {
+	}/*, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -621,7 +621,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	} ],
+	}*/ ],
 	SAFETY : [ {
 		"type" : "text",
 		"attr" : [ {
@@ -662,7 +662,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	}, {
+	}/*, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -672,7 +672,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	} ],
+	}*/ ],
 	GETTING_HOME : [ {
 		"type" : "text",
 		"attr" : [ {

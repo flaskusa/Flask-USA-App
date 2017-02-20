@@ -3,9 +3,15 @@ var dropZone;
 var JsonObj;
 var JsonEventDetails;
 var iSelected;
+var noOfInvitations = 5;
 
 function addDetailsClickHandlers() {
 	venueDetailForm = $("#venueDetailsForm");
+	
+	$(".clsAdd5More").click(function(){
+		add5moreRows();
+	});
+	
 	/* Initialize display elements */
 	$(".cssVdSave")
 			.click(
@@ -113,6 +119,18 @@ function addDetailsClickHandlers() {
 		}
 		loadVenueData();
 	});
+}
+
+function add5moreRows(){
+	for(var i=noOfInvitations+1 ; i <= noOfInvitations+5;i++){
+		var invitationDiv = '<div class="control-group">';
+		invitationDiv = invitationDiv + '<div class="controls">';
+		invitationDiv = invitationDiv + '<input id="subDetailTitle'+i+'" name="subDetailTitle'+i+'" type="text" placeholder="Enter Title" class="input-medium sub-detail-text-box">';
+		invitationDiv = invitationDiv + '<textarea id="subDetailDesc'+i+'" name="subDetailDesc'+i+'" placeholder="Enter Description" class="Text-Area"></textarea>';
+		invitationDiv = invitationDiv + "</div></div>";
+		$(".divHeight").append(invitationDiv);
+	}
+	noOfInvitations +=5;
 }
 
 function loadVenueDetailsData(venueId) {
@@ -251,6 +269,7 @@ $(document).ready(
 
 /* Dynamic content type generation logic [End] */
 function saveVenueDetails() {
+	
 	params = _flaskLib.getFormData('venueDetailsForm',
 			_venueDetailModel.DATA_MODEL.VENUEDETAILS, function(formId, model,
 					formData) {
@@ -277,7 +296,29 @@ function saveVenueDetails() {
 				formData.longitude = $('#lng').val();
 				return formData;
 			});
-
+	params.venueSubDetails = [];
+	params.infoDesc = "";
+	for(var i=1; i <=noOfInvitations; i++){
+		var record ={};
+		var title ="";
+		var desc ="";
+		if($("#venueDetailsForm #subDetailTitle"+i).val() == "" || $("#venueDetailsForm #subDetailTitle"+i).val() == null){
+			title = null;
+		}else{
+			title = $.trim($("#venueDetailsForm #subDetailTitle"+i).val());
+		}
+		if($("#venueDetailsForm #subDetailDesc"+i).val() == "" || $("#venueDetailsForm #subDetailDesc"+i).val() == null){
+			desc = null;
+		}else{
+			desc = $.trim($("#venueDetailsForm #subDetailDesc"+i).val());
+		}
+		if((title == "" || title == null) && (desc == "" || desc == null)){
+		}else{
+			record["title"] = title;
+			record["desc"] = desc;
+			params.venueSubDetails.push(record);
+		}
+	}
 	var flaskRequest = new Request();
 	var url = ""
 	if (params.venueDetailId == 0) {
@@ -296,7 +337,6 @@ function saveVenueDetails() {
 			$('#venueDetailsDataTable').show();
 			$("#venueDetailId").val(0);
 			$("#infoTypeCategoryId").val(0);
-			// $("#infoTypeCategoryId").change();
 			loadVenueDetailsData(data.venueId);
 		}
 	}, function(data) {
