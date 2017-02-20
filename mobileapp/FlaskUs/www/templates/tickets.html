@@ -8,9 +8,9 @@
             <h3 class="eventHeading"><span class="overlineStyle">SELECT A SITE AND</span><br /> GET YOUR TICKETS!</h3>
         </div>
         <div class="list">
-            <a class="item item-avtar item-icon-right item-ticket" ng-repeat="data in ticket_detail" ng-click="onClickTicket(data.url);">
-                <h2 class="tickets">{{data.site | uppercase}}</h2>
-                <p class="item-tickets">{{data.url | uppercase}}</p>
+            <a class="item item-avtar item-icon-right item-ticket" ng-repeat="data in ticket_detail" ng-click="onClickTicket(data.eventUrl);">
+                <h2 class="tickets">{{data.siteName | uppercase}}</h2>
+                <p class="item-tickets">{{data.siteBaseUrl | uppercase}}</p>
                 <i class="icon ion-chevron-right ticket-icon"></i>
             </a>
         </div>
