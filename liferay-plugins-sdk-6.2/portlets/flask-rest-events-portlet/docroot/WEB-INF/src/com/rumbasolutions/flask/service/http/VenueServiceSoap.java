@@ -533,11 +533,11 @@ public class VenueServiceSoap {
 
 	public static com.rumbasolutions.flask.model.VenueDeviceImageSoap addVenueDeviceImage(
 		long venueImageId, long venueId, java.lang.String deviceType,
-		java.lang.String imageDeviceImageUUID, java.lang.String aspectRatio)
+		java.lang.String venueDeviceImageUUID, java.lang.String aspectRatio)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.VenueDeviceImage returnValue = VenueServiceUtil.addVenueDeviceImage(venueImageId,
-					venueId, deviceType, imageDeviceImageUUID, aspectRatio);
+					venueId, deviceType, venueDeviceImageUUID, aspectRatio);
 
 			return com.rumbasolutions.flask.model.VenueDeviceImageSoap.toSoapModel(returnValue);
 		}
@@ -578,14 +578,16 @@ public class VenueServiceSoap {
 		}
 	}
 
-	public static com.rumbasolutions.flask.model.VenueDeviceImageSoap[] getVenueDeviceImagesByVenueDevice(
-		long venueId, java.lang.String deviceType) throws RemoteException {
+	public static com.rumbasolutions.flask.model.VenueImageSoap[] getVenueImagesByVenueIdAndDeviceType(
+		long venueId, java.lang.String deviceType,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> returnValue =
-				VenueServiceUtil.getVenueDeviceImagesByVenueDevice(venueId,
-					deviceType);
+			java.util.List<com.rumbasolutions.flask.model.VenueImage> returnValue =
+				VenueServiceUtil.getVenueImagesByVenueIdAndDeviceType(venueId,
+					deviceType, serviceContext);
 
-			return com.rumbasolutions.flask.model.VenueDeviceImageSoap.toSoapModels(returnValue);
+			return com.rumbasolutions.flask.model.VenueImageSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -625,11 +627,11 @@ public class VenueServiceSoap {
 
 	public static com.rumbasolutions.flask.model.VenueDeviceImageSoap updateVenueDeviceImage(
 		long venueImageDeviceId, long venueImageId, long venueId,
-		java.lang.String deviceType, java.lang.String imageDeviceImageUUID,
+		java.lang.String deviceType, java.lang.String venueDeviceImageUUID,
 		java.lang.String aspectRatio) throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.VenueDeviceImage returnValue = VenueServiceUtil.updateVenueDeviceImage(venueImageDeviceId,
-					venueImageId, venueId, deviceType, imageDeviceImageUUID,
+					venueImageId, venueId, deviceType, venueDeviceImageUUID,
 					aspectRatio);
 
 			return com.rumbasolutions.flask.model.VenueDeviceImageSoap.toSoapModel(returnValue);

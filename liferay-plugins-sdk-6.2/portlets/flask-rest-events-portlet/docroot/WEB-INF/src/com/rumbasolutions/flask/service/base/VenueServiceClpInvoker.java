@@ -236,9 +236,12 @@ public class VenueServiceClpInvoker {
 
 		_methodParameterTypes135 = new String[] { "java.lang.String" };
 
-		_methodName136 = "getVenueDeviceImagesByVenueDevice";
+		_methodName136 = "getVenueImagesByVenueIdAndDeviceType";
 
-		_methodParameterTypes136 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes136 = new String[] {
+				"long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName137 = "getVenueDeviceImage";
 
@@ -543,8 +546,9 @@ public class VenueServiceClpInvoker {
 
 		if (_methodName136.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes136, parameterTypes)) {
-			return VenueServiceUtil.getVenueDeviceImagesByVenueDevice(((Long)arguments[0]).longValue(),
-				(java.lang.String)arguments[1]);
+			return VenueServiceUtil.getVenueImagesByVenueIdAndDeviceType(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1],
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
 		}
 
 		if (_methodName137.equals(name) &&

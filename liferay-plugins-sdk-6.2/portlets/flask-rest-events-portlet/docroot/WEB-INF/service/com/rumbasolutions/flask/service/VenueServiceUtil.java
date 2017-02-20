@@ -278,10 +278,10 @@ public class VenueServiceUtil {
 
 	public static com.rumbasolutions.flask.model.VenueDeviceImage addVenueDeviceImage(
 		long venueImageId, long venueId, java.lang.String deviceType,
-		java.lang.String imageDeviceImageUUID, java.lang.String aspectRatio) {
+		java.lang.String venueDeviceImageUUID, java.lang.String aspectRatio) {
 		return getService()
 				   .addVenueDeviceImage(venueImageId, venueId, deviceType,
-			imageDeviceImageUUID, aspectRatio);
+			venueDeviceImageUUID, aspectRatio);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueId(
@@ -294,10 +294,12 @@ public class VenueServiceUtil {
 		return getService().getVenueDeviceImagesByDeviceType(deviceType);
 	}
 
-	public static java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueDevice(
-		long venueId, java.lang.String deviceType) {
+	public static java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImagesByVenueIdAndDeviceType(
+		long venueId, java.lang.String deviceType,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
-				   .getVenueDeviceImagesByVenueDevice(venueId, deviceType);
+				   .getVenueImagesByVenueIdAndDeviceType(venueId, deviceType,
+			serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.VenueDeviceImage getVenueDeviceImage(
@@ -311,11 +313,11 @@ public class VenueServiceUtil {
 
 	public static com.rumbasolutions.flask.model.VenueDeviceImage updateVenueDeviceImage(
 		long venueImageDeviceId, long venueImageId, long venueId,
-		java.lang.String deviceType, java.lang.String imageDeviceImageUUID,
+		java.lang.String deviceType, java.lang.String venueDeviceImageUUID,
 		java.lang.String aspectRatio) {
 		return getService()
 				   .updateVenueDeviceImage(venueImageDeviceId, venueImageId,
-			venueId, deviceType, imageDeviceImageUUID, aspectRatio);
+			venueId, deviceType, venueDeviceImageUUID, aspectRatio);
 	}
 
 	public static void deleteVenueDeviceImage(long venueDeviceImageId) {

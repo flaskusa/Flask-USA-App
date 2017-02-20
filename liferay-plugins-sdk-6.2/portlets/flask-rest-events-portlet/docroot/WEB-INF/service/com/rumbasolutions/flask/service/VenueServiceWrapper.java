@@ -289,9 +289,9 @@ public class VenueServiceWrapper implements VenueService,
 	@Override
 	public com.rumbasolutions.flask.model.VenueDeviceImage addVenueDeviceImage(
 		long venueImageId, long venueId, java.lang.String deviceType,
-		java.lang.String imageDeviceImageUUID, java.lang.String aspectRatio) {
+		java.lang.String venueDeviceImageUUID, java.lang.String aspectRatio) {
 		return _venueService.addVenueDeviceImage(venueImageId, venueId,
-			deviceType, imageDeviceImageUUID, aspectRatio);
+			deviceType, venueDeviceImageUUID, aspectRatio);
 	}
 
 	@Override
@@ -307,10 +307,11 @@ public class VenueServiceWrapper implements VenueService,
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueDevice(
-		long venueId, java.lang.String deviceType) {
-		return _venueService.getVenueDeviceImagesByVenueDevice(venueId,
-			deviceType);
+	public java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImagesByVenueIdAndDeviceType(
+		long venueId, java.lang.String deviceType,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _venueService.getVenueImagesByVenueIdAndDeviceType(venueId,
+			deviceType, serviceContext);
 	}
 
 	@Override
@@ -327,10 +328,10 @@ public class VenueServiceWrapper implements VenueService,
 	@Override
 	public com.rumbasolutions.flask.model.VenueDeviceImage updateVenueDeviceImage(
 		long venueImageDeviceId, long venueImageId, long venueId,
-		java.lang.String deviceType, java.lang.String imageDeviceImageUUID,
+		java.lang.String deviceType, java.lang.String venueDeviceImageUUID,
 		java.lang.String aspectRatio) {
 		return _venueService.updateVenueDeviceImage(venueImageDeviceId,
-			venueImageId, venueId, deviceType, imageDeviceImageUUID, aspectRatio);
+			venueImageId, venueId, deviceType, venueDeviceImageUUID, aspectRatio);
 	}
 
 	@Override

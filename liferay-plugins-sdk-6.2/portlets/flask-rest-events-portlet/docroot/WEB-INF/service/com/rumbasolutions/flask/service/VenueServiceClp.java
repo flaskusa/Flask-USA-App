@@ -236,9 +236,12 @@ public class VenueServiceClp implements VenueService {
 
 		_methodParameterTypes32 = new String[] { "java.lang.String" };
 
-		_methodName33 = "getVenueDeviceImagesByVenueDevice";
+		_methodName33 = "getVenueImagesByVenueIdAndDeviceType";
 
-		_methodParameterTypes33 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes33 = new String[] {
+				"long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName34 = "getVenueDeviceImage";
 
@@ -1256,7 +1259,7 @@ public class VenueServiceClp implements VenueService {
 	@Override
 	public com.rumbasolutions.flask.model.VenueDeviceImage addVenueDeviceImage(
 		long venueImageId, long venueId, java.lang.String deviceType,
-		java.lang.String imageDeviceImageUUID, java.lang.String aspectRatio) {
+		java.lang.String venueDeviceImageUUID, java.lang.String aspectRatio) {
 		Object returnObj = null;
 
 		try {
@@ -1269,7 +1272,7 @@ public class VenueServiceClp implements VenueService {
 						
 					ClpSerializer.translateInput(deviceType),
 						
-					ClpSerializer.translateInput(imageDeviceImageUUID),
+					ClpSerializer.translateInput(venueDeviceImageUUID),
 						
 					ClpSerializer.translateInput(aspectRatio)
 					});
@@ -1339,8 +1342,9 @@ public class VenueServiceClp implements VenueService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueDevice(
-		long venueId, java.lang.String deviceType) {
+	public java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImagesByVenueIdAndDeviceType(
+		long venueId, java.lang.String deviceType,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
@@ -1349,7 +1353,9 @@ public class VenueServiceClp implements VenueService {
 					new Object[] {
 						venueId,
 						
-					ClpSerializer.translateInput(deviceType)
+					ClpSerializer.translateInput(deviceType),
+						
+					ClpSerializer.translateInput(serviceContext)
 					});
 		}
 		catch (Throwable t) {
@@ -1364,7 +1370,7 @@ public class VenueServiceClp implements VenueService {
 			}
 		}
 
-		return (java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.rumbasolutions.flask.model.VenueImage>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -1417,7 +1423,7 @@ public class VenueServiceClp implements VenueService {
 	@Override
 	public com.rumbasolutions.flask.model.VenueDeviceImage updateVenueDeviceImage(
 		long venueImageDeviceId, long venueImageId, long venueId,
-		java.lang.String deviceType, java.lang.String imageDeviceImageUUID,
+		java.lang.String deviceType, java.lang.String venueDeviceImageUUID,
 		java.lang.String aspectRatio) {
 		Object returnObj = null;
 
@@ -1433,7 +1439,7 @@ public class VenueServiceClp implements VenueService {
 						
 					ClpSerializer.translateInput(deviceType),
 						
-					ClpSerializer.translateInput(imageDeviceImageUUID),
+					ClpSerializer.translateInput(venueDeviceImageUUID),
 						
 					ClpSerializer.translateInput(aspectRatio)
 					});

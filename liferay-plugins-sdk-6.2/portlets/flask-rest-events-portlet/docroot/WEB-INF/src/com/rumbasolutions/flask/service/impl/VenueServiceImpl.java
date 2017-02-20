@@ -655,17 +655,16 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	}
 	
 	@Override
-	public VenueDeviceImage addVenueDeviceImage(long venueImageId, long venueId, String deviceType, String imageDeviceImageUUID, String aspectRatio){
+	public VenueDeviceImage addVenueDeviceImage(long venueImageId, long venueId, String deviceType, String venueDeviceImageUUID, String aspectRatio){
 		VenueDeviceImage venueDeviceImage = null;
 		try{
 			venueDeviceImage = VenueDeviceImageLocalServiceUtil.createVenueDeviceImage(CounterLocalServiceUtil.increment());
 			venueDeviceImage.setVenueImageId(venueImageId);
 			venueDeviceImage.setVenueId(venueId);	
 			venueDeviceImage.setDeviceType(deviceType);
-			venueDeviceImage.setVenueDeviceImageUUID(imageDeviceImageUUID);
+			venueDeviceImage.setVenueDeviceImageUUID(venueDeviceImageUUID);
 			venueDeviceImage.setAspectRatio(aspectRatio);
 			venueDeviceImage =VenueDeviceImageLocalServiceUtil.addVenueDeviceImage(venueDeviceImage);
-			
 		}catch(Exception ex){
 			LOGGER.error("Error in addVenueDeviceImage:" +ex);
 		}
@@ -675,7 +674,6 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public List<VenueDeviceImage> getVenueDeviceImagesByVenueId(long venueId){
-			
 			List<VenueDeviceImage>  venueDeviceImages = new ArrayList<VenueDeviceImage>();
 			try {
 				venueDeviceImages =  VenueDeviceImageUtil.findByVenueId(venueId);
@@ -688,7 +686,6 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public List<VenueDeviceImage> getVenueDeviceImagesByDeviceType(String deviceType){
-			
 			List<VenueDeviceImage>  venueDeviceImages = new ArrayList<VenueDeviceImage>();
 			try {
 				venueDeviceImages =  VenueDeviceImageUtil.findByDeviceType(deviceType);
@@ -700,21 +697,22 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	}
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
-	public List<VenueDeviceImage> getVenueDeviceImagesByVenueDevice(long venueId, String deviceType){
-			
-			List<VenueDeviceImage>  venueDeviceImages = new ArrayList<VenueDeviceImage>();
-			try {
-				venueDeviceImages =  VenueDeviceImageUtil.findByVenueDevice(venueId, deviceType);
+	public List<VenueImage> getVenueImagesByVenueIdAndDeviceType(long venueId, String deviceType, ServiceContext serviceContext){
+		List<VenueImage> venueImages = new ArrayList<VenueImage>();
+		try {
+			List<VenueDeviceImage>  venueDeviceImages =  VenueDeviceImageUtil.findByVenueDevice(venueId, deviceType);
+			for(VenueDeviceImage img: venueDeviceImages){
+				venueImages.add(VenueServiceUtil.getVenueImage(img.getVenueImageId(), serviceContext));
 			}
-			catch (SystemException e) {
-				LOGGER.error("Error in getVenueDeviceImagesByVenueDevice:" + e );
-			}
-			return venueDeviceImages;
+		}
+		catch (SystemException e) {
+			LOGGER.error("Error in getVenueDeviceImagesByVenueDevice:" + e.getMessage());
+		}
+		return venueImages;
 	}
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public VenueDeviceImage getVenueDeviceImage(long venueDeviceImageId){
-				
 		VenueDeviceImage  venueDeviceImage = null;
 			try {
 				venueDeviceImage = VenueDeviceImageUtil.findByPrimaryKey(venueDeviceImageId);
@@ -727,7 +725,6 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public List<VenueDeviceImage> getAllVenueDeviceImages(){
-				
 		List<VenueDeviceImage>  venueDeviceImages = new ArrayList<VenueDeviceImage>();
 			try {
 				venueDeviceImages = VenueDeviceImageUtil.findAll();
@@ -739,23 +736,21 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	}
 	
 	@Override
-	public VenueDeviceImage updateVenueDeviceImage(long venueImageDeviceId, long venueImageId, long venueId, String deviceType, String imageDeviceImageUUID, String aspectRatio){
+	public VenueDeviceImage updateVenueDeviceImage(long venueImageDeviceId, long venueImageId, long venueId, String deviceType, String venueDeviceImageUUID, String aspectRatio){
 		VenueDeviceImage venueDeviceImage = null;
 		try{
 			venueDeviceImage = VenueDeviceImageLocalServiceUtil.getVenueDeviceImage(venueImageDeviceId);
 			venueDeviceImage.setVenueImageId(venueImageId);	
 			venueDeviceImage.setVenueId(venueId);	
 			venueDeviceImage.setDeviceType(deviceType);
-			venueDeviceImage.setVenueDeviceImageUUID(imageDeviceImageUUID);
+			venueDeviceImage.setVenueDeviceImageUUID(venueDeviceImageUUID);
 			venueDeviceImage.setAspectRatio(aspectRatio);
 			venueDeviceImage =VenueDeviceImageLocalServiceUtil.updateVenueDeviceImage(venueDeviceImage);
-			
 		}catch(Exception ex){
 			LOGGER.error("Error in updateVenueDeviceImage:" +ex);
 		}
 		return venueDeviceImage;
 	}
-	
 	@Override
 	public void deleteVenueDeviceImage(long venueDeviceImageId){
 		try{
@@ -764,7 +759,6 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			LOGGER.error("Error in deleteVenueDeviceImage:" +ex);
 		}
 	}
-	
 	@Override
 	@AccessControlled(guestAccessEnabled =true)
 	public VenueImage uploadDeviceImage(File file, long venueId, String deviceType, String aspectRatio, ServiceContext serviceContext){

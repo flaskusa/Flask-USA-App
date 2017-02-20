@@ -215,7 +215,7 @@ public interface VenueService extends BaseService, InvokableService {
 
 	public com.rumbasolutions.flask.model.VenueDeviceImage addVenueDeviceImage(
 		long venueImageId, long venueId, java.lang.String deviceType,
-		java.lang.String imageDeviceImageUUID, java.lang.String aspectRatio);
+		java.lang.String venueDeviceImageUUID, java.lang.String aspectRatio);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -229,8 +229,9 @@ public interface VenueService extends BaseService, InvokableService {
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueDevice(
-		long venueId, java.lang.String deviceType);
+	public java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImagesByVenueIdAndDeviceType(
+		long venueId, java.lang.String deviceType,
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
@@ -243,7 +244,7 @@ public interface VenueService extends BaseService, InvokableService {
 
 	public com.rumbasolutions.flask.model.VenueDeviceImage updateVenueDeviceImage(
 		long venueImageDeviceId, long venueImageId, long venueId,
-		java.lang.String deviceType, java.lang.String imageDeviceImageUUID,
+		java.lang.String deviceType, java.lang.String venueDeviceImageUUID,
 		java.lang.String aspectRatio);
 
 	public void deleteVenueDeviceImage(long venueDeviceImageId);
