@@ -79,8 +79,9 @@
        
         $scope.preEvent = function (pre) {
             if (pre == "Tickets") {
-                $state.go("app.tickets", { venueName: $scope.currVenueName, eventDate: $scope.currEventDate, eventName: $scope.currEventName, infoType: PRE_EVENT, infoTypeCategory: pre, venueId: $scope.currVenueId });
+                $state.go("app.tickets", { eventDetails: $scope.eventDetails });
             }
+
             else if (pre == "Game Day Needs" || pre == "Supplies") {
                 $state.go("app.supplies", { myListName: "My Supply", currEventId: $scope.currEventId });
             }
