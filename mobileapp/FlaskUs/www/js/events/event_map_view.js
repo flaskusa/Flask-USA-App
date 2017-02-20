@@ -373,7 +373,11 @@
                 });
         }
         $scope.setNavigate = function (url) {
-            openUrl(url, "_system");
+            //openUrl(url, "_system");
+            if(url.indexOf("http")==-1){
+                url = 'http://' + url;
+            }
+            window.open(url, '_system', 'location=no');
         }
         //set info window event
         function setInfoWindowEvent() {
