@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', 'deviceDetector', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER) {
+    function eventMapViewCtrl($scope, $stateParams, deviceDetector, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER) {
         /* jshint validthis: true */
         var self = this;
         var baseImagePath = SERVER.hostName + "c/document_library/get_file";
@@ -23,10 +23,11 @@
         $scope.preEventSearch = false;
         $scope.showSearchBox = { "value": true };
         $scope.showsearchDrop = { "value": true };
+        $scope.deviceDetector = deviceDetector;
+        console.log($scope.deviceDetector);
         $scope.map.events["click"] = function () {
             return $scope.closeOtherInfoWindows('mapClick');
         };
-
         $scope.options = { scrollwheel: false, disableDefaultUI: true, zoomControl: true, streetViewControl: true };
         $scope.parkingMarkers = [];
         $scope.hotelMarkers = [];
@@ -102,9 +103,8 @@
                     $scope.toggleQueDiv = !$scope.toggleQueDiv;
                 }, 30);
             }
-
-
         }
+        //console.log($scope.deviceDetector);
         $scope.toggleZoomImage = function () {
             $scope.zoomMapImage = !$scope.zoomMapImage
         }
@@ -125,8 +125,8 @@
                 $scope.closeOtherInfoWindows();
             }
         }
+        //set markers on map
         $scope.setNewMarker = function (searchItem, index) {
-
             if (searchItem.infoTypeCategoryName == "Parking") {
                 var parking = {}
                 $timeout(function () {
@@ -136,17 +136,11 @@
                         if (value.id == searchItem.id) {
                             parking = value;
                             $scope.parkingMarkers.splice(key, 1)
-
                         }
                     })
-
                 }, 200);
-
                 $timeout(function () {
-
                     $scope.parkingMarkers.push(searchItem);
-
-
                 }, 500);
                 $timeout(function () {
                     $scope.onClick(searchItem, "click", searchItem)
@@ -162,19 +156,13 @@
                             $scope.barMarkers.splice(key, 1);
                         }
                     })
-
                 }, 200);
                 $timeout(function () {
-
                     $scope.barMarkers.push(searchItem);
-
-
                 }, 500);
                 $timeout(function () {
                     $scope.onClick(searchItem, "click", searchItem)
                 }, 800);
-
-
             }
             else if (searchItem.infoTypeCategoryName == "Nightlife") {
                 var nightLife = {}
@@ -187,20 +175,14 @@
                             $scope.nightLifes.splice(key, 1);
                         }
                     })
-
                 }, 200);
                 $timeout(function () {
-
                     $scope.nightLifes.push(searchItem);
-
-
                 }, 500);
                 $timeout(function () {
                     $scope.onClick(searchItem, "click", searchItem)
                 }, 800);
-
             }
-
             else if (searchItem.infoTypeCategoryName == "Hotels") {
                 var hotl = {}
                 $timeout(function () {
@@ -215,19 +197,12 @@
 
                 }, 200);
                 $timeout(function () {
-
                     $scope.hotelMarkers.push(searchItem);
-
-
                 }, 500);
                 $timeout(function () {
                     $scope.onClick(searchItem, "click", searchItem)
                 }, 800);
-
-
-
             }
-
         }
         $scope.onClick = function (marker, eventName, model) {
             $scope.closeOtherInfoWindows();
@@ -239,8 +214,8 @@
         };
         document.addEventListener("deviceready", onDeviceReady, false);
         function onDeviceReady() {
-
         }
+        //close other info windows while opening another
         $scope.closeOtherInfoWindows = function (mapClick) {
             if ($scope.infoTypeName == 'Pre-Event') {
                 if ($scope.selectedIndex == 0 && $scope.markerOptions.control && $scope.markerOptions.control.getPlurals && $scope.markerOptions.control.getPlurals().allVals.length > 0) {
@@ -355,24 +330,20 @@
                 }
             }
         }
-
+        //info window event
         function infoWindowEvent() {
             var iwOuter = $('.gm-style-iw');
             var iwBackground = iwOuter.prev();
             iwBackground.children(':nth-child(2)').css({ 'display': 'none' });
-
             // Removes white background DIV
             iwBackground.children(':nth-child(4)').css({ 'display': 'none' });
             iwBackground.children(':nth-child(3)').find('div').children().css({ 'background': 'black' });
-
-
             var takeMeThere = $scope.createMapLink($scope.currentShownInfoWindow.addrLine1);
-
             $("#iwTakeMeThere").on("click", function () {
-                openUrl(takeMeThere,"_system");
+                openUrl(takeMeThere, "_system");
             });
             var telephoneToCall;
-            if($scope.currentShownInfoWindow.phone == '') {
+            if ($scope.currentShownInfoWindow.phone == '') {
                 $("#iwCallNow").text("Not Available");
             } else {
                 telephoneToCall = "tel:" + $scope.currentShownInfoWindow.phone;
@@ -391,7 +362,7 @@
                 });
             }
         }
-
+        //open venue URL
         function openUrl(url, target) {
             $cordovaInAppBrowser.open(url, target, { location: 'no' }).
                 then(function (event) {
@@ -401,10 +372,10 @@
                     // error
                 });
         }
-        $scope.setNavigate=function(url){
+        $scope.setNavigate = function (url) {
             openUrl(url, "_system");
         }
-
+        //set info window event
         function setInfoWindowEvent() {
             infoWindowEvent();
             $timeout(function () {
@@ -417,18 +388,11 @@
                         toggleImage.attr("src", "img/map_icons/circle_arrow_down.svg");
                     }
                     toggller.slideToggle("slow", function () {
-
                     });
-
-                    // toggller.toggle();
                 })
                 infoWindowEvent();
             }, 100);
-
         }
-
-
-
         // initMap();
         uiGmapGoogleMapApi.then(function (maps) {
             maps.visualRefresh = true;
@@ -436,32 +400,25 @@
             $scope.markerOptions.visible = true;
             $scope.googleMarkerOptions.animation = maps.Animation.DROP;
             $scope.googleMarkerOptions.visible = false;
-
             $scope.barFlaskMarkerOptions.animation = maps.Animation.DROP;
             $scope.barFlaskMarkerOptions.visible = true;
             $scope.barGoogleMarkerOptions.animation = maps.Animation.DROP;
             $scope.barGoogleMarkerOptions.visible = false;
-
             $scope.nightLifeFlaskMarkerOptions.animation = maps.Animation.DROP;
             $scope.nightLifeFlaskMarkerOptions.visible = true;
             $scope.nightLifeGoogleMarkerOptions.animation = maps.Animation.DROP;
             $scope.nightLifeGoogleMarkerOptions.visible = false;
-
             $scope.hotelFlaskMarkerOptions.animation = maps.Animation.DROP;
             $scope.hotelFlaskMarkerOptions.visible = true;
             $scope.hotelGoogleMarkerOptions.animation = maps.Animation.DROP;
             $scope.hotelGoogleMarkerOptions.visible = false;
-
         })
-
         uiGmapIsReady.promise()
             .then(function (maps) {
                 $scope.currentMap = $scope.map.control.getGMap();
                 var map2 = maps[0].map;
                 getGoogleMarkers($scope.currentMap, $scope.infoTypeName);
             });
-
-
         function initEventData() {
             try {
                 $scope.eventDetails = $stateParams.eventDetails.Details;
@@ -477,7 +434,7 @@
 
             }
         }
-
+        //set selected tab index
         $scope.setSelectedTabIndex = function (infoTypeName, infoTyepeCategory) {
             $scope.searchBox.showBox = false;
             $scope.searchObj.searchString = "";
@@ -485,11 +442,9 @@
                 $scope.preEventSearch = true;
                 $scope.postEventSearch = false;
                 $scope.duringEventSearch = false;
-
                 if (infoTyepeCategory == 'Parking') {
                     $scope.selectedIndex = 0;
                     $scope.showSearchBox.value = true;
-
                 } else if (infoTyepeCategory == 'Bar & Restaurants') {
                     $scope.selectedIndex = 1;
                     $scope.showSearchBox.value = true;
@@ -500,7 +455,6 @@
                     $scope.selectedIndex = 3;
                     $scope.showSearchBox.value = false;
                 }
-
             } else if (infoTypeName == 'During-Event') {
                 $scope.duringEventSearch = true;
                 $scope.postEventSearch = false;
@@ -521,7 +475,6 @@
                 }
             } else {
                 $scope.postEventSearch = true;
-
                 $scope.duringEventSearch = false;
                 $scope.preEventSearch = false;
                 if (infoTyepeCategory == 'Bar & Restaurants') {
@@ -537,13 +490,12 @@
                     $scope.selectedIndex = 3;
                     $scope.showSearchBox.value = false;
                 }
-
                 else {
                     $scope.selectedIndex = 4;
                 }
             }
         };
-
+        //set Info Type by pre-event, during-event and post-event
         function setInfoType(infoType) {
             switch (infoType) {
                 case PRE_EVENT:
@@ -554,6 +506,7 @@
                     return POST_EVENT
             }
         }
+        //get google markers
         function getGoogleMarkers(map, infoTypeName) {
             $scope.service = new google.maps.places.PlacesService(map);
             $scope.pyrmont = new google.maps.LatLng(map.center.lat(), map.center.lng());
@@ -568,8 +521,8 @@
             } else if (infoTypeName === POST_EVENT) {
                 getPostEventGoogleMarkers();
             }
-
         }
+        //get google markers for post event
         function getPostEventGoogleMarkers() {
             $scope.request.types = ['bar', 'restaurant'];
             $scope.service.nearbySearch($scope.request, setGoogleBarMarker);
@@ -578,16 +531,19 @@
             $scope.request.types = ['hotel']
             $scope.service.nearbySearch($scope.request, setGoogleHotelMarker);
         }
+        //get google markers for pre event
         function getPreEventGoogleMarkers() {
             $scope.request.types = ['parking'];
             $scope.service.nearbySearch($scope.request, setGoogleParkingMarker);
             $scope.request.types = ['bar', 'restaurant'];
             $scope.service.nearbySearch($scope.request, setGoogleBarMarker);
         }
+        //get google markers for during event
         function getAtEventGoogleMarker() {
             $scope.request.types = ['bar', 'restaurant'];
             $scope.service.nearbySearch($scope.request, setGoogleBarMarker);
         }
+        //set Google Marker for nightlife
         function setGoogleNightLifeMarker(results, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (var i = 0; i < results.length; i++) {
@@ -596,6 +552,7 @@
                 }
             }
         }
+        //set Google Marker for parking
         function setGoogleParkingMarker(results, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (var i = 0; i < results.length; i++) {
@@ -604,6 +561,7 @@
                 }
             }
         }
+        //set Google Marker for bars and restaurant
         function setGoogleBarMarker(results, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (var i = 0; i < results.length; i++) {
@@ -612,6 +570,7 @@
                 }
             }
         }
+        //set Google Marker for hotel
         function setGoogleHotelMarker(results, status) {
             if (status == google.maps.places.PlacesServiceStatus.OK) {
                 for (var i = 0; i < results.length; i++) {
@@ -620,7 +579,7 @@
                 }
             }
         }
-
+        //create google marker
         function createGoogleBarMarker(place) {
             var marker = {};
             marker.id = place.id;
@@ -639,6 +598,7 @@
             };
             $scope.barsGoogleMarkers.push(marker);
         }
+        //create Google Marker for nightlife
         function createGoogleNightLifeMarker(place) {
             var marker = {};
             marker.id = place.id;
@@ -657,6 +617,7 @@
             };
             $scope.nightLifesGoogleMarkers.push(marker);
         }
+        //creat Google Marker for parking
         function createGoogleParkingMarker(place) {
             var marker = {};
             marker.id = place.id;
@@ -676,6 +637,7 @@
             };
             $scope.parkingGoogleMarkers.push(marker);
         }
+        //creat Google Marker for hotel
         function createGoogleHotelMarker(place) {
             var marker = {};
             marker.id = place.id;
@@ -694,9 +656,8 @@
             };
             $scope.hotelGoogleMarkers.push(marker);
         }
-
+        //set Marker Fields
         $scope.setMarkerFields = function (tempObject) {
-            // tempObject.icon = 'img/map_icons/flask_map_icon_11.png';
             tempObject.show = false;
             tempObject.isIconVisibleOnClick = "true";
             var templateName;
@@ -732,10 +693,7 @@
                 }
             }
             tempObject.templateUrl = templateName;
-
-
         };
-
         function fixUrl(url) {
             if (url) {
                 if (url.indexOf("http://") > -1 || "https://" > -1) {
@@ -745,8 +703,7 @@
                 }
             }
         }
-
-
+        //select Flask Marker
         $scope.selectFlaskMarker = function () {
             $scope.isFlaskMarkerShown = !$scope.isFlaskMarkerShown;
             if ($scope.isFlaskMarkerShown) {
@@ -762,38 +719,23 @@
                 });
             }
         };
-
+        //popup for parking map cost range
         var template = '<ion-popover-view class="popover">' +
-                            '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
-                                '<div class="list">' +
-                                '<span class="range"><img src="../img/map_icons/parking.svg"><p>$0 - $20</p></span>' +
-                                '<span class="range"><img src="../img/map_icons/parking.svg"><p>$21 - $45</p></span>' +
-                                '<span class="range"><img src="../img/map_icons/parking.svg"><p>$46 and above</p></span>' +
-                                '</div>' +
-                            '</ion-content>' +
-                       '</ion-popover-view>';
+                             '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
+                                 '<div class="list">' +
+                                 '<span class="range"><img src="../img/map_icons/parking.svg"><p>$0 - $20</p></span>' +
+                                 '<span class="range"><img src="../img/map_icons/parking.svg"><p>$21 - $45</p></span>' +
+                                 '<span class="range"><img src="../img/map_icons/parking.svg"><p>$46 and above</p></span>' +
+                                 '</div>' +
+                             '</ion-content>' +
+                        '</ion-popover-view>';
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope
         });
         $scope.openPopover1 = function ($event) {
             $scope.popover.show($event);
         };
-        $scope.closePopover = function () {
-            $scope.popover.hide();
-        };
-        //Cleanup the popover when we're done with it!
-        $scope.$on('$destroy', function () {
-            $scope.popover.remove();
-        });
-        // Execute action on hidden popover
-        $scope.$on('popover.hidden', function () {
-            // Execute action
-        });
-        // Execute action on remove popover
-        $scope.$on('popover.removed', function () {
-            // Execute action
-        });
-
+        //select Google Marker
         $scope.selectGoogleMarker = function () {
             $scope.isGoogleMarkerShown = !$scope.isGoogleMarkerShown;
             if ($scope.isGoogleMarkerShown) {
@@ -808,6 +750,7 @@
                 });
             }
         };
+        //select NightLife Google Marker
         $scope.selectNightLifeGoogleMarker = function () {
             $scope.isNightLifeGoogleMarkerShown = !$scope.isNightLifeGoogleMarkerShown;
             if ($scope.isNightLifeGoogleMarkerShown) {
@@ -822,6 +765,7 @@
                 });
             }
         }
+        //select NightLife Flask Marker
         $scope.selectNightLifeFlaskMarker = function () {
             $scope.isNightLifeFlaskMarkerShown = !$scope.isNightLifeFlaskMarkerShown;
             if ($scope.isNightLifeFlaskMarkerShown) {
@@ -836,7 +780,7 @@
                 });
             }
         }
-
+        //select Hotel Google Marker
         $scope.selectHotelGoogleMarker = function () {
             $scope.isHotelGoogleMarkerShown = !$scope.isHotelGoogleMarkerShown;
             if ($scope.isHotelGoogleMarkerShown) {
@@ -851,6 +795,7 @@
                 });
             }
         }
+        //select Hotel Flask Marker
         $scope.selectHotelFlaskMarker = function () {
             $scope.isHotelFlaskMarkerShown = !$scope.isHotelFlaskMarkerShown;
             if ($scope.isHotelFlaskMarkerShown) {
@@ -866,7 +811,7 @@
                 });
             }
         }
-
+        //select Bar Flask Marker
         $scope.selectBarFlaskMarker = function () {
             $scope.isBarFlaskMarkerShown = !$scope.isBarFlaskMarkerShown;
             if ($scope.isBarFlaskMarkerShown) {
@@ -882,7 +827,7 @@
                 });
             }
         };
-
+        //select Bar Google Marker
         $scope.selectBarGoogleMarker = function () {
             $scope.isBarGoogleMarkerShown = !$scope.isBarGoogleMarkerShown;
             if ($scope.isBarGoogleMarkerShown) {
@@ -897,6 +842,7 @@
                 });
             }
         };
+        //set Info Type Category
         $scope.setInfoTypeCategory = function (infoTypeCategory) {
             switch (infoTypeCategory) {
                 case "Parking":
@@ -926,9 +872,9 @@
                 case 'Getting home':
                     setGettingHomeInfo();
                     return infoTypeCategory;
-
             }
         };
+        //set Hotel Info
         function setHotelInfo() {
             $timeout(function () {
                 $ionicTabsDelegate.select(2);
@@ -936,6 +882,7 @@
                 $scope.setMarkers();
             }, 0)
         };
+        //set Venue Map Info
         function setVenueMapInfo() {
             $timeout(function () {
                 $ionicTabsDelegate.select(0);
@@ -943,6 +890,7 @@
                 $scope.setMarkers();
             }, 0)
         };
+        //set Venue Detail Info
         function setVenueDetailInfo() {
             $timeout(function () {
                 $ionicTabsDelegate.select(1);
@@ -950,6 +898,7 @@
                 $scope.setMarkers();
             }, 0)
         };
+        //set Parking Info
         function setParkingInfo() {
             $timeout(function () {
                 $ionicTabsDelegate.select(0);
@@ -957,6 +906,7 @@
                 $scope.setMarkers();
             }, 0)
         };
+        //set Bar Info
         function setBarInfo() {
             $timeout(function () {
                 if ($scope.infoTypeName == 'During-Event') {
@@ -972,12 +922,14 @@
                 $scope.setMarkers();
             }, 0)
         };
+        //set Traffic Info
         function setTrafficInfo() {
             $timeout(function () {
                 $ionicTabsDelegate.select(2)
                 $scope.setMarkers();
             }, 0)
         };
+        //set FlaskUs Info
         function setFlaskUsInfo() {
             $timeout(function () {
                 if ($scope.infoTypeName == 'Pre-Event') {
@@ -990,19 +942,19 @@
                 $scope.setMarkers();
             }, 0)
         };
+        //set NightLife Info
         function setNightLifeInfo() {
             $timeout(function () {
                 $ionicTabsDelegate.select(1)
                 $scope.setMarkers();
             }, 0)
         }
+        //set GettingHome Info
         function setGettingHomeInfo() {
             $timeout(function () {
                 $ionicTabsDelegate.select(3);
                 $scope.setMarkers();
             }, 0)
-
-
         }
         $scope.callNow = function (phonenumber) {
             var telephoneToCall = "tel:" + phonenumber;
@@ -1013,9 +965,7 @@
                 var telephoneToCall = "tel:" + AppName.phone;
                 openUrl(telephoneToCall, "_system");
             }
-
             var scheme;
-
             if (AppName.mobileAppName.toLowerCase() == "uber") {
                 if (device.platform === 'iOS') {
                     scheme = 'uber://';
@@ -1023,7 +973,6 @@
                 else if (device.platform === 'Android') {
                     scheme = 'com.ubercab';
                 }
-
                 appAvailability.check(
                     scheme,
                     function () {
@@ -1047,7 +996,6 @@
                 else if (device.platform === 'Android') {
                     scheme = 'me.lyft.android';
                 }
-
                 appAvailability.check(
                     scheme,
                     function () {
@@ -1065,9 +1013,8 @@
                     }
                 );
             }
-
         }
-
+        //set Markers
         $scope.setMarkers = function () {
             if (!$scope.isMapMarkersSet) {
                 var tempObject = {};
@@ -1078,7 +1025,7 @@
                     tempObject = {};
                     subDetail = {};
                     ImgObj = []
-                    ImgObj = angular.fromJson(value.DetailImages);                  
+                    ImgObj = angular.fromJson(value.DetailImages);
                     value = angular.fromJson(value);
                     $scope.veueInfoSubDetail = value.VenueSubDetails;
                     for (var i = 0; i < $scope.veueInfoSubDetail.length; i++) {
@@ -1106,7 +1053,6 @@
                                 tempObject.icon = 'img/map_icons/bar.svg';
                                 $scope.barMarkers.push(tempObject);
                                 $scope.searchBarMarkers = $scope.barMarkers;
-
                             }
                         } else if ("Traffic" == tempObject.infoTypeCategoryName) {
                             $scope.trafficDetails.push(tempObject);
@@ -1131,36 +1077,40 @@
                         }
                         else if ("Venue Map" == tempObject.infoTypeCategoryName) {
                             if (ImgObj.length != 0) {
-                                tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceDetector.device).then(function (respData) {
+                                    if (respData.length != 0) {
+                                        tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
+                                    }
+                                    else {
+                                        tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                    }
+                                });
                             }
                             $scope.venueMapImageUrl = tempObject.imageUrl;
                             $scope.venueMapDetail.push(tempObject);
                         }
                         else if ("Venue Info" == tempObject.infoTypeCategoryName) {
-                          $scope.temp = $("<div>");
+                            $scope.temp = $("<div>");
                             $scope.temp2 = $("<div>");
                             $scope.temp2.html(tempObject.infoDesc);
                             $scope.temp.html(tempObject.infoDesc);
                             $scope.anchor = $scope.temp2.find("a");
-                           angular.forEach($scope.anchor,function(vals,index) {
+                            angular.forEach($scope.anchor, function (vals, index) {
                                 var temp1 = $("<div>");
                                 temp1.html(vals);
-                                var anchorValue =  temp1.find("a").attr("href");
-                                var hrefValue="'"+anchorValue+"'";
+                                var anchorValue = temp1.find("a").attr("href");
+                                var hrefValue = "'" + anchorValue + "'";
                                 $scope.temp.find("a").removeAttr("href");
-                                $scope.temp.find("a").attr("ng-click","setNavigate("+hrefValue+")");
-
-                               /* I have to take two temp  variable because of in angular.forEach it was changing the value of temp to empty, same memory location issue.
-                               I have created a directive to compile prepared  href because ng-click will not be bind by ng-bind-html*/
-
+                                $scope.temp.find("a").attr("ng-click", "setNavigate(" + hrefValue + ")");
+                                /* I have to take two temp  variable because of in angular.forEach it was changing the value of temp to empty, same memory location issue.
+                                I have created a directive to compile prepared  href because ng-click will not be bind by ng-bind-html*/
                             })
-                           tempObject.infoDesc = $scope.temp.html();
-                           $scope.venueInfoDetail.push(tempObject);                           
-                           $scope.venueInfoDetail.push(subDetail);
-                            }
+                            tempObject.infoDesc = $scope.temp.html();
+                            $scope.venueInfoDetail.push(tempObject);
+                            $scope.venueInfoDetail.push(subDetail);
+                        }
                         else if ("Getting home" == tempObject.infoTypeCategoryName) {
                             $scope.gettingHomeDetail.push(tempObject);
-
                         }
                     } else {
                         if ("Bar & Restaurants" == tempObject.infoTypeCategoryName) {
@@ -1169,7 +1119,6 @@
                             $scope.barMarkers.push(tempObject);
                             $scope.searchBarMarkers = $scope.barMarkers;
                         }
-
                     }
                 })
                 $ionicSlideBoxDelegate.update();
@@ -1179,13 +1128,10 @@
         $scope.slidePrevious1 = function (slide) {
             $ionicSlideBoxDelegate.$getByHandle(slide).previous();
         }
-
         $scope.slideNext1 = function (slide) {
             $ionicSlideBoxDelegate.$getByHandle(slide).next();
         }
-
         $scope.selectTab = function (index) {
-            //$scope.isMapMarkersSet = false;
             $scope.closeOtherInfoWindows();
             $scope.searchBox.showBox = false;
             $scope.searchObj.searchString = "";
@@ -1235,6 +1181,7 @@
                 }
             }
         }
+        //create Map Link
         $scope.createMapLink = function (address1) {
             var findUs = '';
             if ($scope.isMobile.Android()) {
@@ -1263,38 +1210,27 @@
             });
     });
 
-
-
     /* =========== This is the service which uses the $scope.map.control functions ============== */
-
     angular.module('flaskApp').service('mapServices', function () {
-        /*
-        * service function that accepts the $scope.map.control object
-        */
         this.map_control = function (scope_map_control) {
             var scope_map_controls = scope_map_control;
             this.refreshMap = function () {
                 var map1 = scope_map_controls.getGMap();
                 scope_map_controls.refresh({ latitude: map1.center.lat(), longitude: map1.center.lng() });
             };
-
         };
-
     });
     angular.module('flaskApp').directive('compile', ['$compile', function ($compile) {
-                return function(scope, element, attrs) {
-                    scope.$watch(
-                        function(scope) {
-
-                            return scope.$eval(attrs.compile);
-                        },
-                        function(value) {
-
-                            element.html(value);
-
-                            $compile(element.contents())(scope);
-                        }
-                    );
+        return function (scope, element, attrs) {
+            scope.$watch(
+                function (scope) {
+                    return scope.$eval(attrs.compile);
+                },
+                function (value) {
+                    element.html(value);
+                    $compile(element.contents())(scope);
+                }
+            );
         };
     }])
 })();
