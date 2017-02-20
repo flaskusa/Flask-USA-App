@@ -5,7 +5,6 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content overflow-scroll="false">
-        <div ng-if="allMessages.length==0 && showMsg==true" class="item">There are no messages to display.</div>
         <ion-list>
             <ion-item click-for-options ng-repeat="message in allMessages track by $index" ng-click="replyMessage(message,$index,textMessage.messageToSend,'')" ng-init="message.reply=false">
                <div>
@@ -22,9 +21,11 @@
                    </div>
 
                 <ion-option-button  class="icon ion-trash-a"ng-click="deleteMessage(message.messageId,$index)"></ion-option-button>
-</div>
+                </div>
 
             </ion-item>
+        <div ng-if="allMessages.length==0 && showMsg==true" class="item">There are no messages.</div>
+
         </ion-list>
     </ion-content>
     </ion-view>
