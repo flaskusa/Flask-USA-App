@@ -99,9 +99,10 @@
 
         $scope.cloneTailgate = function (tailgateId) {
             TailgateService.copyTailgate(tailgateId).then(function (respData) {
-                $scope.copiedTailgates.push = respData.data;
+                $scope.copiedTailgates = respData.data;
                 $ionicLoading.show({ template: 'Tailgate Copied Successfully', noBackdrop: false, duration: 2000 });       
                 $scope.allTailgate.push($scope.copiedTailgates);
+                $scope.editTailgate($scope.copiedTailgates.tailgateId);
             });
            
         }
