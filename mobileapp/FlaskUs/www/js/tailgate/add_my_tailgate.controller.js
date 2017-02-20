@@ -629,6 +629,8 @@ getTailgateMarkers(tailgateId);
         $scope.myTailgaters = [];
         $scope.active = true; // define the tab in add group and add friend section
         $scope.active1 = true;
+        $scope.collapsed = true;
+        $scope.collapsedItems = true;
         $scope.myFriends = [];
 
 
@@ -873,6 +875,12 @@ getTailgateMarkers(tailgateId);
             });
         };
 
+        $scope.togglePayment = function () {
+            $scope.hidePayment = !$scope.hidePayment;
+            $("#paymentDiv").slideToggle("slow", function () {
+                $ionicScrollDelegate.resize();
+            });
+        }
 
         $scope.toggleItem = function () {
             var supplyItem = $("#supplyItemDiv");
