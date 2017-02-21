@@ -120,6 +120,10 @@ div.ng-binding{
              font-size: 15px;
 }
 
+.button{
+    color:#F89734 !important;
+}
+
 .fill-height-or-more {
   min-height: 100%;
   display: flex;
@@ -295,7 +299,7 @@ ion-item.item {
 }
 
 label.item.item-icon-left.item-checkbox-right.item.item-checkbox{
-	color: darkorange;
+	color: #F89734;
     text-decoration: none;
     font-weight: 700;
     font-size: larger;
