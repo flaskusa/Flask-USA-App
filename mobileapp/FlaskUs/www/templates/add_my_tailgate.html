@@ -186,7 +186,7 @@
                         <ion-item class="item" ng-repeat="data in allSupplyList">
                             <span class="emailText"><i class="supplyItemText">{{ data.supplyListName | uppercase}}</i></span>
                             <div>
-                                <span class="badge span_icon span_icon_supply" ng-click="selectGameDaySupply(data,data.checked)">
+                                <span class="badge span_icon span_icon_supply" style="top:3px !important" ng-click="selectGameDaySupply(data,data.checked)">
                                    <label class="checkbox"style="float: right">
                                        <input  type="checkbox"ng-model="data.checked">
                                    </label>
