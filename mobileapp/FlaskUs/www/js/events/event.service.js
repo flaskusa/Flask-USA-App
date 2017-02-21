@@ -23,7 +23,8 @@
         var getVenueDetailsURL = "/flask-rest-events-portlet.venue/get-venue-details";
         var getVenueDetailURL = "/flask-rest-events-portlet.venue/get-venue-detail";
         var getVenueDetailWithImageURL = "flask-rest-events-portlet.venue/get-venue-details-with-images";
-        var deleteEventDetailImage="/flask-rest-events-portlet.event/delete-event-detail-image"
+        var deleteEventDetailImage = "/flask-rest-events-portlet.event/delete-event-detail-image";
+        var getVenueDeviceImageURL = "/flask-rest-events-portlet.venue/get-venue-device-images-by-venue-device";
         var googleMapURL = SERVER.googleApi;
 
         var eventServices = {
@@ -40,7 +41,8 @@
             getVenueDetails:getVenueDetails,
             getVenueDetail: getVenueDetail,
             deleteEventDetailImageById: deleteEventDetailImageById,
-            getVenueDetailWithImage: getVenueDetailWithImage
+            getVenueDetailWithImage: getVenueDetailWithImage,
+            getVenueDeviceImage: getVenueDeviceImage
         }
         function getAllEvents(eventIds, sDate, eDate, sString, lat, long) {
             return $http.get(SERVER.url + allEventsURL, {
@@ -251,6 +253,21 @@
         function getVenueDetailWithImage(venueId) {
             return $http.get(SERVER.url + getVenueDetailWithImageURL, {
                 params: { "venueId ": venueId }
+            })
+                .then(function success(resp) {
+                    return resp.data;
+                },
+                function failure(resp) {
+                    console.log("Error Message");
+                });
+        }
+        //get venue image as per device
+        function getVenueDeviceImage(venueId, deviceType) {
+            return $http.get(SERVER.url + getVenueDeviceImageURL, {
+                params: {
+                    "venueId ": venueId,
+                    "deviceType": deviceType
+                }
             })
                 .then(function success(resp) {
                     return resp.data;
