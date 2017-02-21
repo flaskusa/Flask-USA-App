@@ -36,10 +36,10 @@
         <a class="item" ng-if="allMyTailgateItems.length == 0"> You do not have any supply items... </a>
         <ion-list>
             <ion-item ng-repeat="tailgateItem in allMyTailgateItems track by $index">
-                <div class="col-100">
-                    <i style="color: black;font-weight: 500;">{{tailgateItem.itemAssignedUserName}}</i>
-                    <div style="float:right"> <i class="supplyItemText">{{tailgateItem.supplyListItemName | uppercase}}</i>
+                <div class="col-100">                   
+                    <div style="float:left"> <i class="supplyItemText">{{tailgateItem.supplyListItemName | uppercase}}</i>
                     </div>
+                    <i style="color: black;font-weight: 500;float:right;">{{tailgateItem.itemAssignedUserName}}</i>
                 </div>
 
             </ion-item>
