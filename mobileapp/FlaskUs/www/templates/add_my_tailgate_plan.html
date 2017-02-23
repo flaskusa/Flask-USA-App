@@ -36,6 +36,27 @@
             </div>
         </div>
     </form>
+    <div class="strip paddingTOpSupply" ng-click="toggleItem()">
+        <div class="stripPadding">
+            <span><i class="textStyle marginLeftSupplyText"> SUPPLY LIST</i></span>
+            <i class="icon ion-chevron-right icon_chevron" ng-if="hideItem==true"></i>
+            <i class="icon ion-chevron-down icon_chevron" ng-if="hideItem==false"></i>
+        </div>
+    </div>
+    <div id="FlaskUsListdiv">
+        <ion-list>
+            <ion-item class="item" ng-repeat="data in allSupplyList">
+                <span class="emailText"><i class="supplyItemText">{{ data.supplyListName | uppercase}}</i></span>
+                <div>
+                    <span class="badge span_icon span_icon_supply" style="top:3px !important" ng-click="selectGameDaySupply(data,data.checked)">
+                        <label class="checkbox" style="float: right">
+                            <input type="checkbox" ng-model="data.checked">
+                        </label>
+                    </span>
+                </div>
+            </ion-item>
+        </ion-list>
+    </div>        
     <div class="strip paddingTOpSupply" ng-click="collapsedItems = !collapsedItems">
         <div class="stripPadding expand-collapse-content">
             <span><i class="textStyle marginLeftSupplyText"> ITEM ASSIGNMENT</i></span>
