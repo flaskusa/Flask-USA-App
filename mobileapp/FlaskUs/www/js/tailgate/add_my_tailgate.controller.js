@@ -833,6 +833,7 @@ getTailgateMarkers(tailgateId);
                 $scope.alltailgateSupplyItem = respData.data;
                 $scope.associateUserWithSupplyItem();
             });
+            showToastMessage('Supply List Added');
         }
 
 
