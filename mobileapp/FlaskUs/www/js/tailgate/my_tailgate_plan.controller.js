@@ -12,6 +12,8 @@
         $scope.tailgateItems = [];
         $scope.myTailgateMember = [];
         $scope.tailgateSupplyItems = [];
+        $scope.collapsed = true;
+        $scope.collapsedItems = true;
 
         var tailGateId = $cookies.get('currtailGateId');
         
@@ -23,6 +25,7 @@
         $scope.user = {
             supplyItemName: ['user']
         };
+
 
         function getTailgaters() {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
@@ -58,19 +61,18 @@
             })
         }
 
-        $scope.checkTailgateId = function () {
+        $scope.checkPlanNow = function () {
             if (!tailGateId) {
             }
             else {
                 editTailgate(tailGateId);
             }
         }
-
         function editTailgate(tailGateId) {
             var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {
                 $cookies.putObject("editUserTailgate", respData.data);
-                $state.go("app.my_tailgateDetails.my_tailgate_view_plan");
+                $state.go("app.add_my_tailgate_details.add_my_tailgate_plan");
             });
         }
 

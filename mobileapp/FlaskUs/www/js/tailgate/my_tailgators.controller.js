@@ -216,19 +216,18 @@
             })
         };
 
-        $scope.checkTailgateId = function () {
+        $scope.checkTailgater = function () {
             if (!tailGateId) {
             }
             else {
                 editTailgate(tailGateId);
             }
         }
-
         function editTailgate(tailGateId) {
             var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {
                 $cookies.putObject("editUserTailgate", respData.data);
-                $state.go("app.my_tailgateDetails.my_tailgate_view_tailgaters");
+                $state.go("app.add_my_tailgate_details.add_my_tailgate_tailgater");
             });
         }
 

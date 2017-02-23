@@ -30,7 +30,7 @@
         $cookies.put('currtailGateId', tailGateId);
 
 
-        $scope.isTailgateAdmin = false;
+        $rootScope.isTailgateAdmin = false;
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
@@ -197,7 +197,7 @@
 
         $scope.isUserTailgateAdmin = function (tailgateId) {
             TailgateService.isUserTailgateAdmin(tailgateId).then(function (respData) {
-                $scope.isTailgateAdmin = respData.data;
+                $rootScope.isTailgateAdmin = respData.data;
             });
         };
 
@@ -234,7 +234,7 @@
             var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {
                 $cookies.putObject("editUserTailgate", respData.data);
-                $state.go("app.add_my_tailgate");
+                $state.go("app.add_my_tailgate_details.add_my_tailgate");
             });
         }
 
