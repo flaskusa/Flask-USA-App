@@ -1,10 +1,10 @@
-﻿<ion-view view-title="EVENT PLAN" cache-view="false">
+﻿<ion-view view-title="TAILGATE PLAN" cache-view="false">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-buttons side="left">
             <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="goBack();"></button>
         </ion-nav-buttons>
         <ion-nav-buttons side="right">
-            <button class="button button-icon button-clear ion-edit edit_tailgate" ng-click="checkTailgateId();"></button>
+            <button class="button button-icon button-clear ion-edit edit_tailgate" ng-click="checkPlanNow();" ng-show="isTailgateAdmin"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content class="padding" overflow-scroll="false">
