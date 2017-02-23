@@ -59,7 +59,7 @@
         $scope.selectedSupplyListItems = [];
         $scope.allMyTailgateItems = [];
         $scope.newUpdate = { 'amountToPay': '', 'venmoAccountId': '' };
-        $scope.haveTailgatorsDEtail=false;
+        $scope.haveTailgatorsDEtail = false;
 
         $scope.isMobile = {
             Android: function () {
@@ -665,7 +665,17 @@ getTailgateMarkers(tailgateId);
                     })
 
                 }
-            })}
+                getItems();
+            })
+        }
+
+        function getItems() {
+            TailgateService.getItemsByTailgateId(tailGateId).then(function (respData) {
+                $scope.allMyTailgateItems = respData.data;
+                console.log($scope.allMyTailgateItems)
+            });
+        }
+
         $scope.getUserProfile = function(UserDetail) {
             UserService.getUserProfile(UserDetail.userId).then(function(res) {
                     if (res.data.fileEntryId != undefined) {
@@ -831,7 +841,6 @@ getTailgateMarkers(tailgateId);
                 $scope.alltailgateSupplyItem = respData.data;
                 $scope.associateUserWithSupplyItem();
             });
-
         }
 
 
@@ -840,9 +849,6 @@ getTailgateMarkers(tailgateId);
                 value.itemAssignedUserId = getAssigenUserId(decodeURIComponent(value.supplyListItemName));
                 $scope.updateSupplyItems(value);
             })
-
-
-
         };
 
         function getAssigenUserId(supplyItemName) {
