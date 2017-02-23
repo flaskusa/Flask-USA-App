@@ -665,15 +665,7 @@ getTailgateMarkers(tailgateId);
                     })
 
                 }
-                getItems();
             })
-        }
-
-        function getItems() {
-            TailgateService.getItemsByTailgateId(tailGateId).then(function (respData) {
-                $scope.allMyTailgateItems = respData.data;
-                console.log($scope.allMyTailgateItems)
-            });
         }
 
         $scope.getUserProfile = function(UserDetail) {
