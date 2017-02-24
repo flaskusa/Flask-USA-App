@@ -97,7 +97,7 @@
         var deleteTailgateUserUrl = '/flask-user-tailgate-portlet.tailgateusers/delete-tailgate-user';
         var copyTailgateURL = 'flask-user-tailgate-portlet.tailgateinfo/copy-tailgate';
         var addTailgateAdminURL = 'flask-user-tailgate-portlet.tailgateusers/update-tailgate-user-role';
-        var deleteTailgateSupplyItemURL = "/flask-user-tailgate-portlet.supplyitem/delete-supply-item";
+        var deleteTailgateSupplyItemURL = "/flask-user-tailgate-portlet.tailgatesupplyitem/delete-tailgate-supply-item";
         var addSupplyItemUrl = "/flask-user-tailgate-portlet.supplyitem/add-supply-item";
 
         var tailgateServices = {
@@ -650,7 +650,7 @@
         function deleteTailgateSupplyItem(supplyItemId) {
             return $http.get(SERVER.url + deleteTailgateSupplyItemURL, {
                 params: {
-                    'supplyItemId': supplyItemId
+                    'tailgateSupplyItemId': supplyItemId
                 }
             })
                 .then(function success(response) {
