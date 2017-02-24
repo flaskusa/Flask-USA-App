@@ -33,7 +33,7 @@
         $scope.latitude = '42.34';
         $scope.longitude = '-83.0456';
         $scope.sList = [];
-
+        var userDetail = $cookies.getObject('CurrentUser');
 
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd');
@@ -1025,5 +1025,45 @@
                 }
             });
         }
+
+        $scope.deleteTailgateUser = function (currUserId, index) {
+            
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Tailgater ?'
+            });
+            confirmPopup.then(function (res) {
+                
+                if (res) {
+                    if (currUserId != userDetail.data.userId) {
+                        TailgateService.deleteTailgateUser(tailgateId, currUserId).then(function (response) {
+                            $scope.myTailgaters.splice(index, 1)
+                        })
+                    } else {
+                        $flaskUtil.alert("Tailgate admin can't be remove.")
+                    }
+                } else {
+                }
+            });
+
+        }
+
+        $scope.changeTailgaterRole = function (currUserId, index) {
+            var tailgateDetails = $cookies.getObject("editUserTailgate");
+            console.log(tailgateDetails);
+            if (currUserId != tailgateDetails.userId) {
+                if (userDetail.data.userId == tailgateDetails.userId) {
+                    TailgateService.addTailgateAdmin(currUserId, tailgateId).then(function (respData) {
+                        $rootScope.role = respData.data;
+                    });
+                }
+                else {
+                    $ionicLoading.show({ template: 'You do not have the permission to change the role!', noBackdrop: false, duration: 3000 });
+                }
+            }
+            else {
+                $ionicLoading.show({ template: 'Tailgate Admin Cannot be removed!', noBackdrop: false, duration: 3000 });
+            }
+        }
+
     }
 })();
