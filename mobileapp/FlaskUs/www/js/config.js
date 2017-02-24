@@ -8,8 +8,8 @@
     var setMessageReadUrl = "/set-read";
 
     flaskAppConfig.value("SERVER", {
-        "hostName": "http://52.44.202.166/",
-        "url": "http://52.44.202.166/api/jsonws/",
+        "hostName": "http://www.flaskus.com/",
+        "url": "http://www.flaskus.com/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
 		"cacheExpireTime":1000
     })
@@ -165,55 +165,16 @@
             
         })
 
-        .state('app.add_my_tailgate_details', {
-            url: '/add_my_tailgate_details',
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/add_my_tailgate_details.html'
-                }
-            }
-
-        })
-        
-        .state('app.add_my_tailgate_details.add_my_tailgate', {
+        .state('app.add_my_tailgate', {
             url: '/add_my_tailgate',
             views: {
-                'add_my_tailgate': {
+                'menuContent': {
                     templateUrl: 'templates/add_my_tailgate.html',
                     controller: 'add_mytailgateCtrl'
                 }
             }
         })
-        
-        .state('app.add_my_tailgate_details.add_my_tailgate_plan', {
-            url: '/add_my_tailgate_plan',
-            views: {
-                'add_my_tailgate_plan': {
-                        templateUrl: 'templates/add_my_tailgate_plan.html',
-                        controller: 'add_mytailgateCtrl'
-                }
-            }
-        })
 
-        .state('app.add_my_tailgate_details.add_my_tailgate_tailgater', {
-            url: '/add_my_tailgate_tailgater',
-            views: {
-                'add_my_tailgate_tailgater': {
-                        templateUrl: 'templates/add_my_tailgate_tailgater.html',
-                        controller: 'add_mytailgateCtrl'
-                }
-            }
-        })
-
-        .state('app.add_my_tailgate_details.add_my_tailgate_location', {
-            url: '/add_my_tailgate_location',
-            views: {
-                'add_my_tailgate_location': {
-                        templateUrl: 'templates/add_my_tailgate_location.html',
-                        controller: 'mytailgatelocationCtrl'
-                }
-            }
-        })
 
         .state('app.my_tailgateDetails.my_tailgate_event_details', {
             url: "/my_tailgate_event_details/:tailgateId",
