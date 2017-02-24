@@ -134,11 +134,6 @@ public class TailgateInfoServiceUtil {
 		getService().deleteTailgateInfo(tailgateId, serviceContext);
 	}
 
-	public static int compare(com.rumbasolutions.flask.model.TailgateInfo o1,
-		com.rumbasolutions.flask.model.TailgateInfo o2) {
-		return getService().compare(o1, o2);
-	}
-
 	public static void clearService() {
 		_service = null;
 	}

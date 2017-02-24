@@ -93,13 +93,6 @@ public class TailgateInfoServiceClpInvoker {
 		_methodParameterTypes82 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
-
-		_methodName83 = "compare";
-
-		_methodParameterTypes83 = new String[] {
-				"com.rumbasolutions.flask.model.TailgateInfo",
-				"com.rumbasolutions.flask.model.TailgateInfo"
-			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -198,12 +191,6 @@ public class TailgateInfoServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName83.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
-			return TailgateInfoServiceUtil.compare((com.rumbasolutions.flask.model.TailgateInfo)arguments[0],
-				(com.rumbasolutions.flask.model.TailgateInfo)arguments[1]);
-		}
-
 		throw new UnsupportedOperationException();
 	}
 
@@ -233,6 +220,4 @@ public class TailgateInfoServiceClpInvoker {
 	private String[] _methodParameterTypes81;
 	private String _methodName82;
 	private String[] _methodParameterTypes82;
-	private String _methodName83;
-	private String[] _methodParameterTypes83;
 }

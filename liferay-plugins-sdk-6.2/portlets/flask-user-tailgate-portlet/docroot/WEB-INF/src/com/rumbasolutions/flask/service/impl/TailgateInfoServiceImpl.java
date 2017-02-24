@@ -185,26 +185,18 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 	
 	@SuppressWarnings({ "unchecked"})
 	public List<TailgateInfo> getAllMyTailgate(long userId){
-		List<TailgateInfo> tailgateNewList = new ArrayList<TailgateInfo>();
+		List<TailgateInfo> tailgateList = new ArrayList<TailgateInfo>();
 		try{
-			List<TailgateInfo> tailgateList = new ArrayList<TailgateInfo>();
 			DynamicQuery tailgateQuery = DynamicQueryFactoryUtil.forClass(TailgateInfoImpl.class);
 			tailgateQuery.add(PropertyFactoryUtil.forName("userId").eq(new Long(userId)));
 			tailgateQuery.addOrder(PropertyFactoryUtil.forName("tailgateDate").asc());
 			tailgateQuery.addOrder(PropertyFactoryUtil.forName("createdDate").desc());
 			Date now = new Date();
 			tailgateList.addAll(Collections.checkedList((List<TailgateInfo>)TailgateInfoLocalServiceUtil.dynamicQuery(tailgateQuery), TailgateInfo.class));
-			for(TailgateInfo info: tailgateList){
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
-		        Date tailgateDate = sdf.parse(sdf.format(info.getTailgateDate()).split(" ")[0] + " 00:00:00");
-		        if (tailgateDate.compareTo(sdf.parse(sdf.format(now).split(" ")[0]  + " 00:00:00")) >= 0) {
-		            tailgateNewList.add(info);
-		        }
-			}
 		}catch(Exception ex){
 			LOGGER.error("Exception in get All My Tailgate: " + ex.getMessage());
 		}
-		return tailgateNewList;
+		return tailgateList;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -352,10 +344,4 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 			LOGGER.error("Exception in deleteiing Tailgate: " + ex.getMessage());
 		}
 	}
-
-	@Override
-	public int compare(TailgateInfo o1, TailgateInfo o2) {
-		System.out.println("m1.getTailgateDate().compareTo(m2.getTailgateDate() ********* "+o1.getTailgateDate().compareTo(o2.getTailgateDate()));
-        return o1.getTailgateDate().compareTo(o2.getTailgateDate());
-	} 
 }

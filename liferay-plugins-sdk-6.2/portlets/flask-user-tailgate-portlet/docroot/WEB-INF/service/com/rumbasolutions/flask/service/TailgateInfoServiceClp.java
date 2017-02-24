@@ -93,13 +93,6 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		_methodParameterTypes13 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
-
-		_methodName14 = "compare";
-
-		_methodParameterTypes14 = new String[] {
-				"com.rumbasolutions.flask.model.TailgateInfo",
-				"com.rumbasolutions.flask.model.TailgateInfo"
-			};
 	}
 
 	@Override
@@ -487,35 +480,6 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 		}
 	}
 
-	@Override
-	public int compare(com.rumbasolutions.flask.model.TailgateInfo o1,
-		com.rumbasolutions.flask.model.TailgateInfo o2) {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName14,
-					_methodParameterTypes14,
-					new Object[] {
-						ClpSerializer.translateInput(o1),
-						
-					ClpSerializer.translateInput(o2)
-					});
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return ((Integer)returnObj).intValue();
-	}
-
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -543,6 +507,4 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 	private String[] _methodParameterTypes12;
 	private String _methodName13;
 	private String[] _methodParameterTypes13;
-	private String _methodName14;
-	private String[] _methodParameterTypes14;
 }
