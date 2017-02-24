@@ -87,8 +87,7 @@ public class TailgateSupplyItemServiceImpl
 					tailgateSupplyItemNames.add(item.getSupplyListItemName());
 				}
 				for(int i=0; i<supplyListItemNames.length; i++){
-					if(tailgateSupplyItemNames.contains(supplyListItemNames[i])){
-					}else{
+					if(!(tailgateSupplyItemNames.contains(supplyListItemNames[i]))){
 						TailgateSupplyItem tailgateSupplyItem = null;
 						Date now = new Date();
 						tailgateSupplyItem = TailgateSupplyItemLocalServiceUtil.createTailgateSupplyItem(CounterLocalServiceUtil.increment());

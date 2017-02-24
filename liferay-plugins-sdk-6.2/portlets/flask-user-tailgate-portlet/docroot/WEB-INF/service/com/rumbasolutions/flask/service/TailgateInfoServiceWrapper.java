@@ -137,6 +137,12 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 		_tailgateInfoService.deleteTailgateInfo(tailgateId, serviceContext);
 	}
 
+	@Override
+	public int compare(com.rumbasolutions.flask.model.TailgateInfo o1,
+		com.rumbasolutions.flask.model.TailgateInfo o2) {
+		return _tailgateInfoService.compare(o1, o2);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

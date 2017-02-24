@@ -14,7 +14,9 @@
 
 package com.rumbasolutions.flask.service.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -43,7 +45,6 @@ import com.rumbasolutions.flask.service.TailgateSupplyItemServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.TailgateInfoServiceBaseImpl;
-import com.rumbasolutions.flask.service.persistence.TailgateInfoFinderUtil;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoUtil;
 
 /**
@@ -60,7 +61,7 @@ import com.rumbasolutions.flask.service.persistence.TailgateInfoUtil;
  * @see com.rumbasolutions.flask.service.base.TailgateInfoServiceBaseImpl
  * @see com.rumbasolutions.flask.service.TailgateInfoServiceUtil
  */
-public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
+public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 	/*
 	 * NOTE FOR DEVELOPERS:
 	 *
@@ -182,18 +183,31 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 		return tailgateList;
 	}
 	
+	@SuppressWarnings({ "unchecked"})
 	public List<TailgateInfo> getAllMyTailgate(long userId){
-		List<TailgateInfo> tailgateList = null;
+		List<TailgateInfo> tailgateNewList = new ArrayList<TailgateInfo>();
 		try{
-			tailgateList = TailgateInfoFinderUtil.getAllMyTailgate(userId);
-			
+			List<TailgateInfo> tailgateList = new ArrayList<TailgateInfo>();
+			DynamicQuery tailgateQuery = DynamicQueryFactoryUtil.forClass(TailgateInfoImpl.class);
+			tailgateQuery.add(PropertyFactoryUtil.forName("userId").eq(new Long(userId)));
+			tailgateQuery.addOrder(PropertyFactoryUtil.forName("tailgateDate").asc());
+			tailgateQuery.addOrder(PropertyFactoryUtil.forName("createdDate").desc());
+			Date now = new Date();
+			tailgateList.addAll(Collections.checkedList((List<TailgateInfo>)TailgateInfoLocalServiceUtil.dynamicQuery(tailgateQuery), TailgateInfo.class));
+			for(TailgateInfo info: tailgateList){
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+		        Date tailgateDate = sdf.parse(sdf.format(info.getTailgateDate()).split(" ")[0] + " 00:00:00");
+		        if (tailgateDate.compareTo(sdf.parse(sdf.format(now).split(" ")[0]  + " 00:00:00")) >= 0) {
+		            tailgateNewList.add(info);
+		        }
+			}
 		}catch(Exception ex){
 			LOGGER.error("Exception in get All My Tailgate: " + ex.getMessage());
-			tailgateList = new ArrayList<TailgateInfo>(100);
 		}
-		return tailgateList;
+		return tailgateNewList;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<TailgateInfo> getAllTailgeteByUserId(long userId){
 		List<TailgateInfo> tailgateList = null;
 		List<TailgateUsers> tailgateList1 = null;
@@ -337,5 +351,11 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl {
 		}catch(Exception ex){
 			LOGGER.error("Exception in deleteiing Tailgate: " + ex.getMessage());
 		}
+	}
+
+	@Override
+	public int compare(TailgateInfo o1, TailgateInfo o2) {
+		System.out.println("m1.getTailgateDate().compareTo(m2.getTailgateDate() ********* "+o1.getTailgateDate().compareTo(o2.getTailgateDate()));
+        return o1.getTailgateDate().compareTo(o2.getTailgateDate());
 	} 
 }

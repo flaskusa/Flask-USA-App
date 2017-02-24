@@ -241,5 +241,24 @@ public class TailgateInfoServiceSoap {
 		}
 	}
 
+	public static int compare(
+		com.rumbasolutions.flask.model.TailgateInfoSoap o1,
+		com.rumbasolutions.flask.model.TailgateInfoSoap o2)
+		throws RemoteException {
+		try {
+			int returnValue = TailgateInfoServiceUtil.compare(com.rumbasolutions.flask.model.impl.TailgateInfoModelImpl.toModel(
+						o1),
+					com.rumbasolutions.flask.model.impl.TailgateInfoModelImpl.toModel(
+						o2));
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(TailgateInfoServiceSoap.class);
 }

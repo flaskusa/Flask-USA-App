@@ -17,6 +17,7 @@ package com.rumbasolutions.flask.model.impl;
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSON;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
@@ -86,8 +87,8 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 		};
 	public static final String TABLE_SQL_CREATE = "create table flasktailgate_TailgateInfo (tailgateId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,tailgateName VARCHAR(100) null,tailgateDescription VARCHAR(255) null,eventId LONG,eventName VARCHAR(100) null,tailgateDate DATE null,startTime LONG,endTime LONG,isActive INTEGER,isDelete INTEGER,venmoAccountId VARCHAR(75) null,amountToPay DOUBLE,logoId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table flasktailgate_TailgateInfo";
-	public static final String ORDER_BY_JPQL = " ORDER BY tailgateInfo.tailgateId ASC";
-	public static final String ORDER_BY_SQL = " ORDER BY flasktailgate_TailgateInfo.tailgateId ASC";
+	public static final String ORDER_BY_JPQL = " ORDER BY tailgateInfo.tailgateDate ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY flasktailgate_TailgateInfo.tailgateDate ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -591,15 +592,8 @@ public class TailgateInfoModelImpl extends BaseModelImpl<TailgateInfo>
 	public int compareTo(TailgateInfo tailgateInfo) {
 		int value = 0;
 
-		if (getTailgateId() < tailgateInfo.getTailgateId()) {
-			value = -1;
-		}
-		else if (getTailgateId() > tailgateInfo.getTailgateId()) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
+		value = DateUtil.compareTo(getTailgateDate(),
+				tailgateInfo.getTailgateDate());
 
 		if (value != 0) {
 			return value;

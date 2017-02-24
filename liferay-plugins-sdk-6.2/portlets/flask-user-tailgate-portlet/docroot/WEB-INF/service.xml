@@ -37,11 +37,10 @@
 		<!-- Order -->
         <column name="logoId" type="long"></column>
 
-		<order by="asc">
-			<order-column name="tailgateId" />
-		</order>
-
 		<!-- Finder methods -->
+        <order by="asc">
+            <order-column name="tailgateDate" order-by="asc"></order-column>
+        </order>
 	</entity>
 	<entity name="TailgateUsers" local-service="true" remote-service="true">
 

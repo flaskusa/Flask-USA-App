@@ -16,6 +16,7 @@ package com.rumbasolutions.flask.model;
 
 import com.liferay.portal.kernel.bean.AutoEscapeBeanHandler;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.ProxyUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.model.BaseModel;
@@ -699,15 +700,8 @@ public class TailgateInfoClp extends BaseModelImpl<TailgateInfo>
 	public int compareTo(TailgateInfo tailgateInfo) {
 		int value = 0;
 
-		if (getTailgateId() < tailgateInfo.getTailgateId()) {
-			value = -1;
-		}
-		else if (getTailgateId() > tailgateInfo.getTailgateId()) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
+		value = DateUtil.compareTo(getTailgateDate(),
+				tailgateInfo.getTailgateDate());
 
 		if (value != 0) {
 			return value;

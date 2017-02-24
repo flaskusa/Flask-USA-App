@@ -112,4 +112,7 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 
 	public void deleteTailgateInfo(long tailgateId,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public int compare(com.rumbasolutions.flask.model.TailgateInfo o1,
+		com.rumbasolutions.flask.model.TailgateInfo o2);
 }
