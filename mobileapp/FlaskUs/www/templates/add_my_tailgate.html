@@ -5,7 +5,7 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-tabs class="tabs-positive tab_bottom">
-        <ion-tab title="Event Details" >
+        <ion-tab title="Event Details" id="detailsTab">
             <!-- Tab 1 content -->
             <ion-content overflow-scroll="false" header="true" class='has-header has-subheader'>
                 <form class="" novalidate name="tailgateForm">                    
@@ -140,17 +140,17 @@
                 </div>
             </ion-content>
         </ion-tab>
-        <ion-tab title="Plan Now" ng-click="selectTab(3)" disabled="copytTailgateId==0 || copytTailgateId==undefined" id="planNowTab">
+        <ion-tab title="Plan Now" ng-click="selectTab(3)" disabled="copytTailgateId==0 || copytTailgateId==undefined" id="planNowTab" ng-class="{'tab-item-active' : tab == true}">
             <!--FOURTH TAB-->
             <ion-content overflow-scroll="false" class="has-header">
                 <div class="strip paddingTOpSupply" ng-click="collapsed = !collapsed">
-                    <div class="stripPadding expand-collapse-content">
+                    <div class="stripPadding expand-collapse-content" style="margin-top: 45px;">
                         <span><i class="textStyle marginLeftSupplyText">PAYMENT</i></span>
                         <i class="icon ion-chevron-right icon_chevron" ng-show="collapsed"></i>
                         <i class="icon ion-chevron-down icon_chevron" ng-show="!collapsed"></i> 
                     </div>
                 </div>
-                <form class="paynow" style="margin-top: 44px;" name="venmo" novalidate ng-hide="collapsed">
+                <form class="paynow" name="venmo" novalidate ng-hide="collapsed">
                     <div class="tailgateInfo">
                         <div class="item item-input item-floating-label">
                             <span class="input-label">Venmo account:</span>
@@ -203,12 +203,29 @@
                         </div>
                     </div>
                 <ion-list show-delete="false" can-swipe="true" ng-hide="collapsedItems">
+                    <a class="item item-full item-icon-left" ng-click="addNewListItem()">
+                        <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+                        <p class="addText">ADD NEW ITEM</p>
+                    </a>
+                    <div class="item item-input-inset" ng-if="addNewSuppliesItem==true">
+                        <label class="item-input-wrapper" style="background-color: white;">
+                            <div class="inpuBorderEdit" style="width: 80%">
+                                <input type="text" id="addItemBox" style="width:100%" ng-class="{Upper_Case:listItemName!='' && listItemName!=undefined}" placeholder="Item name" ng-model="listItemName">
+                            </div>
+                        </label>
+                        <button class="button button-small suppliesButton">
+                            Save
+                        </button>
+                        <button class="button button-small suppliesButton" ng-click="cancelAdding()">
+                            Cancel
+                        </button>
+                    </div>
                     <ion-item class="myList item-remove-animate" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
                         <div class="col col-15" style="bottom:0px !important;">
                             <i class="supplyItemText"> {{ item.supplyItemName | uppercase}} </i>
 
                         </div>
-                        <select class="col col-70 supply_content1" ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" style="background:inherit">
+                        <select class="col col-70 supply_content1" ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" style="background:inherit" ng-change="updateSupplyItemsUser(item);">
                             <option value="-1">Select attendee</option>
                             <option ng-repeat="attendee in myTailgaters" value="{{attendee.userId}}">{{attendee.userName}}</option>
                         </select>
