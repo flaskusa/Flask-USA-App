@@ -12,7 +12,7 @@
         $scope.tailgateItems = [];
         $scope.myTailgateMember = [];
         $scope.tailgateSupplyItems = [];
-
+        $scope.isTailgateAdmin = false;
         var tailGateId = $cookies.get('currtailGateId');
         
         $scope.userId = "";
@@ -58,7 +58,15 @@
             })
         }
 
-        $scope.checkTailgatePlan = function () {
+        $scope.isUserTailgateAdmin = function (tailGateId) {
+            TailgateService.isUserTailgateAdmin(tailGateId).then(function (respData) {
+                $scope.isTailgateAdmin = respData.data;
+            });
+        };
+
+        $scope.isUserTailgateAdmin(tailGateId);
+
+        $scope.checkTailgateId = function () {
             if (!tailGateId) {
             }
             else {

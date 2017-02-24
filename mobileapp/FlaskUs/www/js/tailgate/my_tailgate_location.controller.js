@@ -10,6 +10,7 @@
         $scope.myTailgaters = [];
         var tailGateId = $cookies.get('currtailGateId');
         $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
+        $scope.isTailgateAdmin = false;
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
@@ -28,13 +29,21 @@
             callMap($scope.taligateMarkers.latitude, $scope.taligateMarkers.longitude); //taking markers from cookies
         }
 
-        $scope.checkTailgateId = function () {
+        $scope.checkTailgateLocation = function () {
             if (!tailGateId) {
             }
             else {
                 editTailgate(tailGateId);
             }
         }
+
+        $scope.isUserTailgateAdmin = function (tailgateId) {
+            TailgateService.isUserTailgateAdmin(tailgateId).then(function (respData) {
+                $scope.isTailgateAdmin = respData.data;
+            });
+        };
+
+        $scope.isUserTailgateAdmin(tailGateId);
 
         function editTailgate(tailGateId) {
             var addTailgateParams = {}
