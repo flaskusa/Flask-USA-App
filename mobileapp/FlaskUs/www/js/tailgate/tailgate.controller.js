@@ -65,7 +65,7 @@
                 addTailgateParams.tailgateDate = respData.data.tailgateDate;
                 addTailgateParams.logoId = respData.data.logoId;
                 $cookies.put('currtailGateId', tailgateId);
-                $state.go("app.add_my_tailgate_details.add_my_tailgate");
+                $state.go("app.add_my_tailgate");
                 $cookies.putObject("editUserTailgate", addTailgateParams);
             });
         };
@@ -89,7 +89,7 @@
         }
         $scope.addMyTailgate = function () {
             $cookies.put("currtailGateId", "0");
-            $state.go("app.add_my_tailgate_details.add_my_tailgate");
+            $state.go("app.add_my_tailgate");
         }
 
         $scope.setTailgateListId = function (selectedTailgateList) {

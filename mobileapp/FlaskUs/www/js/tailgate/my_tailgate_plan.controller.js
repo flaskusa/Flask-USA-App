@@ -12,8 +12,6 @@
         $scope.tailgateItems = [];
         $scope.myTailgateMember = [];
         $scope.tailgateSupplyItems = [];
-        $scope.collapsed = true;
-        $scope.collapsedItems = true;
 
         var tailGateId = $cookies.get('currtailGateId');
         
@@ -25,7 +23,6 @@
         $scope.user = {
             supplyItemName: ['user']
         };
-
 
         function getTailgaters() {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (respData) {
@@ -61,18 +58,26 @@
             })
         }
 
-        $scope.checkPlanNow = function () {
+        $scope.checkTailgatePlan = function () {
             if (!tailGateId) {
             }
             else {
                 editTailgate(tailGateId);
             }
         }
+
         function editTailgate(tailGateId) {
             var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {
                 $cookies.putObject("editUserTailgate", respData.data);
-                $state.go("app.add_my_tailgate_details.add_my_tailgate_plan");
+                $scope.tab = $cookies.getObject("tab4Flag");
+                $state.go("app.add_my_tailgate");
+                if ($scope.tab == true) {
+                    var activeTab = angular.element(document.querySelector('#planNowTab'));
+                    console.log(activeTab);
+                    activeTab.addClass('ion-tab','tab-item-active');
+                }
+               
             });
         }
 

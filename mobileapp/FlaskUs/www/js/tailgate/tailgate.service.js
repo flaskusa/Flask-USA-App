@@ -50,7 +50,7 @@
                 }
             };
         });
-
+    
     TailgateService.$inject = ['$http', 'SERVER', '$q'];
     function TailgateService($http, SERVER, $q) {
         var allTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/add-tailgate-info";
@@ -98,6 +98,7 @@
         var copyTailgateURL = 'flask-user-tailgate-portlet.tailgateinfo/copy-tailgate';
         var addTailgateAdminURL = 'flask-user-tailgate-portlet.tailgateusers/update-tailgate-user-role';
         var deleteTailgateSupplyItemURL = "/flask-user-tailgate-portlet.supplyitem/delete-supply-item";
+        var addSupplyItemUrl = "/flask-user-tailgate-portlet.supplyitem/add-supply-item";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -137,7 +138,8 @@
             deleteTailgateUser: deleteTailgateUser,
             copyTailgate: copyTailgate,
             addTailgateAdmin: addTailgateAdmin,
-            deleteTailgateSupplyItem: deleteTailgateSupplyItem
+            deleteTailgateSupplyItem: deleteTailgateSupplyItem,
+            addSupplyItem: addSupplyItem
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -659,6 +661,22 @@
                 });
         }
         return tailgateServices;
+    }
+
+    //add supply item
+    function addSupplyItem(supplyItemName, supplyListId) {
+        return $http.get(SERVER.url + addSupplyItemUrl, {
+            params: {
+                "supplyItemName": supplyItemName,
+                "supplyListId": supplyListId
+            }
+        })
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling
+            });
     }
 
 })();
