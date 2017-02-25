@@ -10,7 +10,7 @@
             <button class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <div class="bar bar-subheader BgCol" ng-show="searchBox.showBox">
+    <div class="bar bar-subheader BgCol" ng-show="searchBox.showBox" ng-cloak>
         <form name="search_form" novalidate ng-submit="search_form.$valid && get_data_from_search(searchstringList)">
             <div class="row">
                 <div class="col col-100 col-center searchrow">
@@ -40,8 +40,8 @@
             </div>
             </form>
     </div>
-    <ion-content class="has-footer" ng-click="searchBox.showBox = false" overflow-scroll="false">
-        <div>
+    <ion-content class="has-footer" ng-click="searchBox.showBox = false" overflow-scroll="false" >
+        <div ng-cloak>
             <div>
                 <h3 class="eventHeading"><span class="overlineStyle">EVENTS NEAR YOU</span></h3>
             </div>

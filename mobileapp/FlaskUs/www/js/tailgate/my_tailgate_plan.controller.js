@@ -66,26 +66,29 @@
 
         $scope.isUserTailgateAdmin(tailGateId);
 
-        $scope.checkTailgateId = function () {
+        //for editing plan now page on tab
+        $scope.goToPlanNowTab = function () {
+            //add cookie data for editing particular page on tab.
+            $cookies.putObject("tabtoEdit", [3,'planNowTab']);
+            checkTailgateId();            
+        }
+
+        function checkTailgateId() {
             if (!tailGateId) {
             }
             else {
-                editTailgate(tailGateId);
+                //getting the data for editing the tailgate       
+                editTailgate(tailGateId);         
             }
         }
 
         function editTailgate(tailGateId) {
             var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {
-                $cookies.putObject("editUserTailgate", respData.data);
-                $scope.tab = $cookies.getObject("tab4Flag");
+                console.log("console.log(respData.data);");
+                console.log(respData.data);
+                $cookies.putObject("editUserTailgate", respData.data);     
                 $state.go("app.add_my_tailgate");
-                if ($scope.tab == true) {
-                    var activeTab = angular.element(document.querySelector('#planNowTab'));
-                    console.log(activeTab);
-                    activeTab.addClass('ion-tab','tab-item-active');
-                }
-               
             });
         }
 

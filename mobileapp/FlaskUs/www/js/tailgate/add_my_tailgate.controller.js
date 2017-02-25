@@ -1065,5 +1065,10 @@
             }
         }
 
+        $scope.selectTabWithIndex = function (index) {
+            alert("working on tabs");
+            $ionicTabsDelegate.select(index);
+        }
+
     }
 })();
