@@ -303,12 +303,10 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 				Date tailgateDate, long startTime, long endTime, String venmoAccountId, double amountToPay, long logoId, ServiceContext  serviceContext){
 		TailgateInfo userTailgate = null;
 		try{
+			boolean isAdmin = TailgateUsersServiceUtil.isTailgateAdmin(tailgateId, serviceContext);
 			userTailgate = TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId);
-			TailgateUsers tailgateuser = TailgateUsersLocalServiceUtil.getTailgateUsers(serviceContext.getUserId());
-			int isAdmin = tailgateuser.getIsAdmin();
-			if(isAdmin == 1)
 			//make sure user who created the tailgate is the one who can modify it.
-			{
+			if(isAdmin){
 				userTailgate.setTailgateName(tailgateName);
 				userTailgate.setTailgateDescription(tailgateDescription);
 				userTailgate.setEventId(eventId);
