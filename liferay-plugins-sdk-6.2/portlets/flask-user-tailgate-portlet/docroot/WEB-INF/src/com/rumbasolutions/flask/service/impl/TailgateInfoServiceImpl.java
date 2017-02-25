@@ -329,7 +329,6 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 			LOGGER.error("Exception in updating Tailgate: " + ex.getMessage());
 		}
 		return userTailgate;
-		
 		}
 	public void deleteTailgateInfo(long tailgateId, ServiceContext serviceContext){
 		try{
