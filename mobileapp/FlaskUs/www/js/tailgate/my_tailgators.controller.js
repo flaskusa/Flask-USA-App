@@ -216,10 +216,17 @@
             })
         };
 
-        $scope.checkTailgateId = function () {
+        $scope.goToTailgaterTab = function () {
+            //add cookie data for editing particular page on tab.
+            $cookies.putObject("tabtoEdit", [2, 'attendeeTab']);
+            checkTailgateId();
+        }
+
+        function checkTailgateId() {
             if (!tailGateId) {
             }
             else {
+                //getting the data for editing the tailgate       
                 editTailgate(tailGateId);
             }
         }
@@ -228,7 +235,7 @@
             var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {
                 $cookies.putObject("editUserTailgate", respData.data);
-                $state.go("app.my_tailgateDetails.my_tailgate_view_tailgaters");
+                $state.go("app.add_my_tailgate");
             });
         }
 

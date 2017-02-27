@@ -10,6 +10,7 @@
         $scope.myTailgaters = [];
         var tailGateId = $cookies.get('currtailGateId');
         $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
+        console.log($scope.taligateMarkers);
         $scope.isTailgateAdmin = false;
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
@@ -29,10 +30,17 @@
             callMap($scope.taligateMarkers.latitude, $scope.taligateMarkers.longitude); //taking markers from cookies
         }
 
-        $scope.checkTailgateLocation = function () {
+        $scope.goToLocationTab = function () {
+            //add cookie data for editing particular page on tab.
+            $cookies.putObject("tabtoEdit", [1, 'locationTab']);
+            checkTailgateId();
+        }
+
+        function checkTailgateId() {
             if (!tailGateId) {
             }
             else {
+                //getting the data for editing the tailgate       
                 editTailgate(tailGateId);
             }
         }
@@ -49,7 +57,7 @@
             var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {
                 $cookies.putObject("editUserTailgate", respData.data);
-                $state.go("app.my_tailgateDetails.my_tailgate_view_location");
+                $state.go("app.add_my_tailgate");
             });
         }
                 

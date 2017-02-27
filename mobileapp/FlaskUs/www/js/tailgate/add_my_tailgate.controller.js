@@ -34,6 +34,7 @@
         $scope.longitude = '-83.0456';
         $scope.sList = [];
         var userDetail = $cookies.getObject('CurrentUser');
+        $scope.updateFlag = false;
 
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd');
@@ -78,6 +79,7 @@
 
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
+            $cookies.remove('tabtoEdit');
         }
 
         function getTailgateMarkers(tailGateId) {
@@ -134,7 +136,11 @@
 
         }
         $scope.selectTab = function (index) {
-            $ionicTabsDelegate.select(index);
+            $timeout(function () {
+                $ionicTabsDelegate.select(index);
+                $cookies.remove('tabtoEdit');
+            }, 300);
+            //$ionicTabsDelegate.select(index);
             if (tailgateId != undefined && tailgateId > 0) {
                 getItems();
             }
@@ -322,7 +328,6 @@
                 $scope.expiredEventDetail.eventName = tailgateDetails.eventName;
                 $scope.expiredEventDetail.eventId = tailgateDetails.eventId;
                 $scope.disableDorpDown = true;
-
             }
 
             $cookies.remove('newtailgatedata');
@@ -352,7 +357,32 @@
             $scope.editData.endTime = tailgateDetails.endTime
 
             $cookies.putObject('newtailgatedata', $scope.editData);
+            var getTabIndex = $cookies.getObject('tabtoEdit');
+            if (getTabIndex == undefined) {
+                //do nothing
+            } else {
+                getTabWithIndex(getTabIndex);
+            }
+
         };
+
+        /*--get Tab index and go to particular tab with that index--*/
+        function getTabWithIndex(getTabIndex) {
+            if (getTabIndex[1] == 'planNowTab') {
+                $scope.selectTab(getTabIndex[0]);
+            }
+            else {
+                changeTabWithIndex(getTabIndex[0]);
+            }
+        }
+
+        function changeTabWithIndex(index) {
+            //let all the data in html page load properly then redirect to particular tab.
+            $timeout(function () {
+                $ionicTabsDelegate.select(index);
+            }, 300);
+        }
+
         //show actin sheet on picture click
         $scope.show = function () {
             // Show the action sheet
@@ -820,17 +850,15 @@
             angular.forEach($scope.selectedSupplyListItems, function (val, idx) {
 
                 var tempItemName;
-                if (val.itemAssignedUserId > 0) {
                     tempItemName = val.supplyItemName;
                     if (tempItemName.indexOf("/") > -1) {
                         tempItemName = encodeURIComponent(tempItemName);
                     }
                     $scope.items.push(tempItemName);
-                }
             })
             itemArray = $scope.items.toString();
             // var tailgateId = $cookies.get("currtailGateId");
-            TailgateService.addTailgateSupplyItems(itemArray, tailgateId, "-1").then(function (respData) {
+            TailgateService.addTailgateSupplyItems(itemArray, tailgateId, "0").then(function (respData) {
                 $scope.alltailgateSupplyItem = respData.data;
                 $scope.associateUserWithSupplyItem();
             });
@@ -840,6 +868,7 @@
 
         $scope.associateUserWithSupplyItem = function () {
             angular.forEach($scope.alltailgateSupplyItem, function (value, index) {
+                console.log(value.itemAssignedUserId);
                 value.itemAssignedUserId = getAssigenUserId(decodeURIComponent(value.supplyListItemName));
                 $scope.updateSupplyItems(value);
             })
@@ -977,39 +1006,42 @@
 
         $scope.initialize();
 
-         $scope.updateSupplyItemsUser = function (data) {
+        $scope.updateSupplyItemsUser = function (data, index) {
             TailgateService.updateTailgateSupplyItem(data.supplyItemId, data.supplyItemName, tailgateId, data.itemAssignedUserId).then(function (respData) {
-                console.log(respData);
+                $("#" + index).show();
+                $timeout(function () {
+                    $("#" + index).hide();
+                }, 2000);
             });
-         }
+        }
 
         //add supply item
-         $scope.saveItem = function (list) {
-             if (list != undefined && list != "") {
-                 TailgateService.addSupplyItem(list, $scope.listId).then(function (response) {
-                     if (response.supplyListId > 0) {
+        $scope.saveItem = function (list) {
+            if (list != undefined && list != "") {
+                TailgateService.addSupplyItem(list, $scope.listId).then(function (response) {
+                    if (response.supplyListId > 0) {
 
-                         $scope.listValue.push({
-                             supplyItemName: response.supplyItemName,
-                             supplyItemId: response.supplyItemId
-                         });
-                         $scope.addNewSuppliesItem = false;
-                     }
-                 });
+                        $scope.listValue.push({
+                            supplyItemName: response.supplyItemName,
+                            supplyItemId: response.supplyItemId
+                        });
+                        $scope.addNewSuppliesItem = false;
+                    }
+                });
 
-             } else {
-                 $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
-             }
-         };
-         $scope.addNewListItem = function () {
-             $scope.addNewSuppliesItem = !$scope.addNewSuppliesItem
-             if ($scope.addNewSuppliesItem == true) {
+            } else {
+                $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
+            }
+        };
+        $scope.addNewListItem = function () {
+            $scope.addNewSuppliesItem = !$scope.addNewSuppliesItem
+            if ($scope.addNewSuppliesItem == true) {
 
-             }
-         }
-         $scope.cancelAdding = function () {
-             $scope.addNewSuppliesItem = false;
-         }
+            }
+        }
+        $scope.cancelAdding = function () {
+            $scope.addNewSuppliesItem = false;
+        }
 
         $scope.leaveSupplyItem = function (supplyItemId, index) {
             var confirmPopup = $ionicPopup.confirm({
@@ -1027,12 +1059,12 @@
         }
 
         $scope.deleteTailgateUser = function (currUserId, index) {
-            
+
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete Tailgater ?'
             });
             confirmPopup.then(function (res) {
-                
+
                 if (res) {
                     if (currUserId != userDetail.data.userId) {
                         TailgateService.deleteTailgateUser(tailgateId, currUserId).then(function (response) {
@@ -1063,11 +1095,6 @@
             else {
                 $ionicLoading.show({ template: 'Tailgate Admin Cannot be removed!', noBackdrop: false, duration: 3000 });
             }
-        }
-
-        $scope.selectTabWithIndex = function (index) {
-            alert("working on tabs");
-            $ionicTabsDelegate.select(index);
         }
 
     }
