@@ -90,5 +90,6 @@ public interface TailgateUsersService extends BaseService, InvokableService {
 
 	public int updateTailgateUserRole(long userId, long tailgateId);
 
-	public void deleteTailgateUser(long tailgateId, long userId);
+	public void deleteTailgateUser(long tailgateId, long userId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 }

@@ -24,9 +24,11 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.rumbasolutions.flask.model.TailgateSupplyItem;
 import com.rumbasolutions.flask.model.TailgateUsers;
 import com.rumbasolutions.flask.model.impl.TailgateUsersImpl;
 import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
+import com.rumbasolutions.flask.service.TailgateSupplyItemServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.TailgateUsersServiceBaseImpl;
@@ -204,11 +206,17 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 	}
 	
 	@Override
-	public void deleteTailgateUser(long tailgateId,long userId){
+	public void deleteTailgateUser(long tailgateId, long userId, ServiceContext serviceContext){
 		try {
 			TailgateUsersFinderUtil.deleteTailgateUser(tailgateId, userId);
+			List<TailgateSupplyItem> tailgateSupplyItems= TailgateSupplyItemServiceUtil.getItemsByTailgateId(tailgateId, serviceContext);
+			for(TailgateSupplyItem item: tailgateSupplyItems){
+				if(userId == item.getItemAssignedUserId()){
+					TailgateSupplyItemServiceUtil.updateTailgateSupplyItem(item.getTailgateSupplyItemId(), "", item.getTailgateId(), 0, serviceContext);
+				}
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			LOGGER.error("Exception in delete Tailgate User Role:" + e.getMessage());
 		}
 	}
 }

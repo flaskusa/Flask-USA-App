@@ -173,10 +173,12 @@ public class TailgateUsersServiceSoap {
 		}
 	}
 
-	public static void deleteTailgateUser(long tailgateId, long userId)
+	public static void deleteTailgateUser(long tailgateId, long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			TailgateUsersServiceUtil.deleteTailgateUser(tailgateId, userId);
+			TailgateUsersServiceUtil.deleteTailgateUser(tailgateId, userId,
+				serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

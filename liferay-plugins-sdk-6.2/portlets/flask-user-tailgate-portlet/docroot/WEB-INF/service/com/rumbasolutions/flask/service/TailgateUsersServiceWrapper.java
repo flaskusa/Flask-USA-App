@@ -104,8 +104,10 @@ public class TailgateUsersServiceWrapper implements TailgateUsersService,
 	}
 
 	@Override
-	public void deleteTailgateUser(long tailgateId, long userId) {
-		_tailgateUsersService.deleteTailgateUser(tailgateId, userId);
+	public void deleteTailgateUser(long tailgateId, long userId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_tailgateUsersService.deleteTailgateUser(tailgateId, userId,
+			serviceContext);
 	}
 
 	/**

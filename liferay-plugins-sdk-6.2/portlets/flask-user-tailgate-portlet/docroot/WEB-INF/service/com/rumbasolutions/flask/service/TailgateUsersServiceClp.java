@@ -70,7 +70,9 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 
 		_methodName10 = "deleteTailgateUser";
 
-		_methodParameterTypes10 = new String[] { "long", "long" };
+		_methodParameterTypes10 = new String[] {
+				"long", "long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -326,10 +328,18 @@ public class TailgateUsersServiceClp implements TailgateUsersService {
 	}
 
 	@Override
-	public void deleteTailgateUser(long tailgateId, long userId) {
+	public void deleteTailgateUser(long tailgateId, long userId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
 			_invokableService.invokeMethod(_methodName10,
-				_methodParameterTypes10, new Object[] { tailgateId, userId });
+				_methodParameterTypes10,
+				new Object[] {
+					tailgateId,
+					
+				userId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

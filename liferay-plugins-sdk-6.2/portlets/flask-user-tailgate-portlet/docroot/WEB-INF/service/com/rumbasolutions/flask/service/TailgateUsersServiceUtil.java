@@ -103,8 +103,9 @@ public class TailgateUsersServiceUtil {
 		return getService().updateTailgateUserRole(userId, tailgateId);
 	}
 
-	public static void deleteTailgateUser(long tailgateId, long userId) {
-		getService().deleteTailgateUser(tailgateId, userId);
+	public static void deleteTailgateUser(long tailgateId, long userId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteTailgateUser(tailgateId, userId, serviceContext);
 	}
 
 	public static void clearService() {
