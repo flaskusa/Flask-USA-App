@@ -9,10 +9,10 @@
     </ion-nav-bar>
     <ion-content class="">
         <div class="google_map_div">
-                <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+                <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="options">
                     <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
-                        <ui-gmap-window>
-                            <div><b>Name:</b> {{taligateMarkers.name}}<br/> <b>Description:</b> {{taligateMarkers.description}}</div>
+                        <ui-gmap-window options="windowOpt" show="windowOpt.show" closeClick="closeWindow">
+                            <div class="location-marker"><b>Name:</b> {{taligateMarkers.name}}<br/> <b>Description:</b> {{taligateMarkers.description}}</div>
                         </ui-gmap-window>
                     </ui-gmap-marker>
                 </ui-gmap-google-map>
