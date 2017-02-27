@@ -76,12 +76,18 @@
         };
         getTailgateMarkers(tailgateId);
         getMySupplyList();
-
+        getTailgate(tailgateId);
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
             $cookies.remove('tabtoEdit');
         }
-
+        function getTailgate(tailGateId) {
+            if (tailGateId != undefined && tailGateId > 0) {
+                TailgateService.getTailgate(tailGateId).then(function (respData) {
+                    $scope.tUserId = respData.data.userId;
+                });
+            }
+        }
         function getTailgateMarkers(tailGateId) {
             if (tailGateId != undefined && tailGateId > 0) {
                 TailgateService.getMapMarkers(tailGateId).then(function (respData) {
