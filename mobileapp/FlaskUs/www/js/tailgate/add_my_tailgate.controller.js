@@ -153,7 +153,7 @@
                         latitude: currlatitude,
                         longitude: currlongitude
                     },
-                    zoom: 19,
+                    zoom: 16,
                     markers: [],
                     events: {
                         click: function (map, eventName, originalEventArgs) {
@@ -637,6 +637,7 @@
 
         function getTailgaters(newtailgateId) {
             TailgateService.getMyTailgateUsers(newtailgateId).then(function (respData) {
+                console.log(respData);
                 $scope.haveTailgatorsDEtail = true;
                 $scope.myTailgaters = respData.data;
                 $scope.filterMemberToAdd();
@@ -968,7 +969,6 @@
             var x = new Date(date);
             var hour = x.getHours();
             var minute = x.getMinutes();
-            var seconds = x.getSeconds();
             var year = x.getYear() + 1900;
             var month = x.getMonth();
             var day = x.getDate();

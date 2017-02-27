@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     var flaskAppConfig = angular.module('flaskApp');
     var getMessageUrlSubString="/flask-social-portlet.flaskmessages";
     var getmessageBoardsByTailgateIdURL = "/get-message-boards-by-tailgate-id";
@@ -7,13 +7,22 @@
     var getMessageCountUrl="/get-my-flask-messages-count"
     var setMessageReadUrl = "/set-read";
 
-    flaskAppConfig.value("SERVER", {
+  /*  flaskAppConfig.value("SERVER", {
         "hostName": "http://www.flaskus.com/",
         "url": "http://www.flaskus.com/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
 		"cacheExpireTime":1000
     })
-    flaskAppConfig.config(function ($provide) {
+   */
+ 
+ flaskAppConfig.value("SERVER", {
+  "hostName": "http://52.44.202.166/",
+  "url": "http://52.44.202.166/api/jsonws/",
+  "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
+		"cacheExpireTime":1000
+  })
+
+ flaskAppConfig.config(function ($provide) {
             $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
                 return function (exception, cause) {
                     var $rootScope = $injector.get("$rootScope");
@@ -275,7 +284,9 @@
         })
 
         .state('app.tickets', {
-            url: '/tickets/:venueName/:eventDate/:eventName/:venueId',
+            url: '/tickets',
+            params: {eventDetails: null},
+
             views: {
                 'menuContent': {
                     templateUrl: 'templates/tickets.html',

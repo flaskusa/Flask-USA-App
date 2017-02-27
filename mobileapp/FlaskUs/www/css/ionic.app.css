@@ -9939,6 +9939,9 @@ div.ng-binding {
   font-family: 'AGENCYR';
   font-size: 15px; }
 
+.button {
+  color: #F89734 !important; }
+
 .fill-height-or-more {
   min-height: 100%;
   display: flex;
@@ -10012,7 +10015,7 @@ div.ng-binding {
     padding-top: 6px;
     font-size: 16px;
     font-weight: 600;
-    width: 140px; } }
+    width: 155px; } }
 
 .some-area > div {
   padding: 4rem; }
@@ -10081,7 +10084,7 @@ ion-item.item {
   font-size: x-large; }
 
 label.item.item-icon-left.item-checkbox-right.item.item-checkbox {
-  color: darkorange;
+  color: #F89734;
   text-decoration: none;
   font-weight: 700;
   font-size: larger;
@@ -11048,7 +11051,8 @@ span.error_msg {
 .eventHeading2 {
   text-align: center;
   padding-top: 0px;
-  margin-bottom: 5px; }
+  margin-bottom: 5px;
+  text-transform: uppercase; }
 
 .trafficHeading {
   text-align: center;
@@ -11133,7 +11137,7 @@ button.button.button-icon.button-clear.ion-search {
   margin-top: 25px; }
 
 .my-side-menu .item h3 {
-  margin: 22px 0px 0px 0px;
+  margin: 22px 0px 6px 0px;
   font-size: 14px;
   margin-top: 0;
   color: orange; }
@@ -11168,6 +11172,13 @@ img.list-thumbnail.listImages {
   width: 100%;
   height: 100%;
   max-height: 60px; }
+
+.flaskItemImage {
+  width: 100%;
+  height: 100%;
+  max-height: 60px;
+  max-width: 60px;
+  vertical-align: middle; }
 
 img.list-thumbnail.listImages1 {
   position: absolute;
@@ -11283,6 +11294,18 @@ img.footer-img {
   height: 80%;
   padding-left: 20%; }
 
+.requester_name {
+  text-transform: uppercase;
+  color: #F89734;
+  font-weight: 700;
+  margin-top: 17px !important;
+  margin-right: -14px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 78%;
+  width: 100%;
+  white-space: nowrap; }
+
 /*friend details page end*/
 /*tickets start*/
 h3.eventHeading {
@@ -11319,6 +11342,25 @@ a.item.item-avtar.item-icon-right.item-ticket {
   background: rgba(225, 225, 225, 0.7); }
 
 /*login popup end*/
+select.flaskSelect {
+  -webkit-appearance: button;
+  -webkit-border-radius: 2px;
+  -webkit-box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.1);
+  -webkit-padding-end: 5px;
+  -webkit-padding-start: 2px;
+  -webkit-user-select: none;
+  background-image: url(../img/flask_icons/circle_arrow_down.svg);
+  background-position: 99% center;
+  background-repeat: no-repeat;
+  border: 1px solid #AAA;
+  color: #555;
+  font-size: inherit;
+  overflow: hidden;
+  padding: 5px 5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 200px; }
+
 /*css for search box*/
 input.searchboxArea {
   width: 100%;
@@ -11630,7 +11672,7 @@ button.button.button-block.button-positive.friend {
   height: 28%; }
 
 .myTailgatetopImg {
-  height: 155px;
+  height: 200px;
   display: block;
   margin-left: 0px;
   margin-right: 0px;
@@ -11705,10 +11747,9 @@ button.button.button-block.button-positive.invite_friend i {
 .tailgate_slider {
   padding: 0px; }
 
-h2.tailgater_name {
-  text-align: center;
-  margin-top: 4%;
-  font-weight: bold; }
+tailgater_name {
+  font-weight: bold;
+  vertical-align: middle; }
 
 @media screen and (max-width: 321px) {
   .item-icon-left {
@@ -11741,12 +11782,11 @@ h2.tailgater_name {
 
 .suppliesButton {
   background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
-  width: 72px;
+  width: 85px;
   height: 34px;
   border-radius: 8px;
   color: darkorange;
   border-color: white;
-  font-weight: 700;
   font-size: 13.5px; }
 
 /*Start tailgate details bottom tabs*/
@@ -11967,6 +12007,107 @@ a.item.icon.activated:before {
   background-repeat: no-repeat;
   background-position: center center; }
 
+.miniDollarButton {
+  position: relative;
+  background-image: url("../img/dollar_icon.png");
+  display: block;
+  height: 30px;
+  width: 30px;
+  float: right;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center; }
+
+.map_icon_type {
+  border: 2px solid white;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.298039) 0px 2px 6px;
+  cursor: pointer;
+  margin-bottom: 5px;
+  text-align: center;
+  background-color: white; }
+
+.map_icon_type div {
+  color: #191919;
+  font-size: 16px;
+  height: 32px;
+  padding: 2px; }
+
+.tab_div {
+  height: 100%;
+  width: 100%; }
+
+.parking_map_div {
+  margin-right: 5px; }
+
+.parkingInfo {
+  vertical-align: middle; }
+
+/*traffic*/
+.traffic_div {
+  padding: 10px; }
+
+.traffic_details {
+  border-bottom: solid;
+  margin-top: 20px; }
+
+.taffic_heading_div {
+  width: 80%; }
+
+.traffic_ion_content {
+  background: white; }
+
+/*flask Us*/
+.flask_us_div {
+  max-width: 100vw; }
+
+.flask_us_slide_buttons {
+  left: 0px;
+  top: 121px; }
+
+.flask_us_slide_buttons_right {
+  top: 121px; }
+
+.flask_us_details {
+  width: 100%;
+  padding-top: 15px; }
+
+.flask_us_description {
+  width: 100%;
+  font-size: 18px; }
+
+.flask_us_description b {
+  font-size: 20px; }
+
+.full-image {
+  height: 100px;
+  width: 252px; }
+
+.flask_us_form {
+  padding-top: 20px; }
+
+.flask_us_detail_title {
+  width: 90%;
+  padding-left: 85px;
+  text-align: start; }
+
+.flask_us_detail_title b {
+  font-size: 16px; }
+
+.flask_us_detail_title div {
+  float: left;
+  margin-left: -24px; }
+
+.flaskEventHeading2 {
+  padding-top: 30px; }
+
+.flaskOverlineStyle {
+  font-size: 18px; }
+
+/*Night Life*/
+.night_life_ion_content {
+  margin-top: 1px; }
+
 /*Plan now*/
 .item.item-divider.plan_now {
   width: 109%;
@@ -12123,7 +12264,13 @@ a.item.item-full.item-icon-left.attendees {
   padding-top: 58px; }
 
 .emailText {
-  color: darkorange; }
+  color: darkorange;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 246px;
+  width: 100%; }
 
 .friend_group_name {
   padding-top: 4px !important; }
@@ -12295,7 +12442,7 @@ div .extra-right-supply {
 
 #iw-container {
   overflow: hidden;
-  height: 46px;
+  height: 37px;
   transition: height 2s;
   opacity: 1;
   width: 100%; }
@@ -12309,7 +12456,7 @@ div .extra-right-supply {
   color: white;
   border-radius: 2px 2px 0 0;
   width: 100%;
-  max-width: 220px; }
+  max-width: 258px; }
 
 #iw-container #iw-content {
   text-align: center;
@@ -12320,8 +12467,9 @@ div .extra-right-supply {
   background: #ffffff;
   color: #000000;
   position: fixed;
-  max-width: 68%;
-  width: 220px;
+  display: none;
+  width: 100%;
+  max-width: 258px;
   overflow: hidden; }
 
 .iw-fixed-title {
@@ -12350,7 +12498,7 @@ div .extra-right-supply {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  max-width: 160px; }
+  max-width: 199px; }
 
 .iw-sub-title1 {
   font-size: 11px;
@@ -12358,6 +12506,7 @@ div .extra-right-supply {
   overflow: hidden;
   text-overflow: ellipsis;
   max-width: 160px;
+  min-width: 0;
   width: 100%; }
 
 .gm-style-iw {
@@ -12423,6 +12572,11 @@ label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox {
 
 /*Disable button for edit in My tailgate section by Nav*/
 .disablebutton {
+  opacity: .4;
+  cursor: default !important;
+  pointer-events: none; }
+
+.disableoption {
   opacity: .4;
   cursor: default !important;
   pointer-events: none; }
@@ -12615,7 +12769,8 @@ i.choose_picture {
 
 .QuestionInput {
   border: solid .5px;
-  width: 254px; }
+  width: 254px;
+  border-radius: 8px; }
 
 .que-input-label {
   display: table;
@@ -12624,6 +12779,10 @@ i.choose_picture {
   color: #444;
   font-size: 16px;
   left: 30px; }
+
+.que-input-label b {
+  font-size: 12px;
+  float: left; }
 
 .custom-popup.popup-container .popup {
   background-color: #666666;
@@ -12899,7 +13058,8 @@ div .manage_event_default_Image {
   margin-top: 5px; }
 
 .iw-content-text {
-  vertical-align: middle; }
+  vertical-align: middle;
+  text-align: left; }
 
 /*Venue Map*/
 .image_map_div {
@@ -12969,7 +13129,8 @@ div .manage_event_default_Image {
 .map_info_img {
   width: 36px !important;
   height: 32px !important;
-  margin-top: -4px; }
+  margin-top: -4px;
+  margin-left: 17px; }
 
 .ml0 {
   margin-left: 0px !important; }
@@ -12983,9 +13144,9 @@ div .manage_event_default_Image {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  max-width: 180px;
+  max-width: 221px;
   width: 60%;
-  font-size: 14px; }
+  font-size: 10px; }
 
 .placedetail_div {
   width: 100%;
@@ -13028,9 +13189,6 @@ div .manage_event_default_Image {
   border: 2.5px solid #d3d3d3;
   border-left: solid 3.5px #d3d3d3;
   border-right: solid 3.5px #d3d3d3; }
-
-span.badge.span_icon_extraright {
-  right: 22px; }
 
 .inpuBorderEdit {
   border: 2.5px solid #d3d3d3;
@@ -13082,3 +13240,220 @@ span.badge.span_icon_extraright {
 
 .whenNoMatchFound {
   min-height: 35px; }
+
+i.icon.ion-person-stalker {
+  padding-left: 2%; }
+
+i.icon.ion-chatbox {
+  padding-left: 2%; }
+
+.unreadMessageText {
+  font-weight: bold; }
+
+@media only screen and (min-width: 50px) {
+  div.post-content {
+    height: 31px;
+    background-color: rgba(0, 0, 0, 0.63);
+    color: white;
+    margin-top: 14px;
+    text-decoration: none;
+    padding-top: 6px;
+    font-size: 16px;
+    font-weight: 600;
+    width: 140px; } }
+
+div.post-content-Notification {
+  height: 31px;
+  background-color: rgba(0, 0, 0, 0.63);
+  color: white;
+  position: absolute;
+  bottom: 45px;
+  right: 0;
+  float: right;
+  text-decoration: none;
+  padding-top: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 180px; }
+
+div.post-content-Request {
+  height: 31px;
+  background-color: rgba(0, 0, 0, 0.63);
+  color: white;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  margin-bottom: 2%;
+  text-decoration: none;
+  padding-top: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  width: 215px; }
+
+.icon.option_icon:before {
+  font-size: 36px;
+  margin-right: -3px;
+  margin-left: -13px;
+  margin-top: 1px; }
+
+span.badge.span_icon_right {
+  right: -19px;
+  vertical-align: middle; }
+
+.notificationCount {
+  margin-right: 4px;
+  margin-top: 10px;
+  color: #F89734;
+  text-decoration: none;
+  font-size: 24px;
+  font-weight: bold; }
+
+a.menu_notification {
+  text-decoration: none;
+  color: #F89734;
+  background-color: black;
+  font-size: 20px;
+  margin-bottom: 6px;
+  margin-top: 10px !important; }
+
+.menu_span {
+  font-size: 20px;
+  margin-right: 19px; }
+
+label.item.item-icon-left.item-checkbox-right.item.item-checkbox.tailgate_admin {
+  width: 3pc;
+  margin-left: -7px;
+  border: transparent;
+  right: 14px !important; }
+
+.item-checkbox .checkbox {
+  right: 18px !important; }
+
+span.badgeCount {
+  position: absolute;
+  margin-top: -32px;
+  font-size: 14px;
+  border-radius: 9px;
+  width: 18px;
+  padding-left: 5px;
+  height: 17px;
+  color: #F89734;
+  background-color: white; }
+
+.bar .buttons-right span {
+  margin-left: 9px !important; }
+
+.supply_content1 {
+  background: inherit;
+  border: none;
+  max-width: 50%;
+  margin-left: 165px;
+  margin-top: -15%;
+  padding-top: 9px; }
+
+.supplyitem_tailgate {
+  background: inherit;
+  max-width: 50%;
+  float: right; }
+
+.tabs-positive > .tabs, .tabs.tabs-positive {
+  border-color: #ffffff !important;
+  background-color: #000000 !important;
+  background-image: linear-gradient(0deg, #ffffff, #ffffff 50%, transparent 50%) !important;
+  color: #fff !important; }
+
+/*SVG image to add event*/
+.span_plus {
+  height: 29px;
+  width: 20px; }
+
+/*icon Chevron*/
+.icon_chevron {
+  float: right;
+  padding-right: 10px;
+  font-size: 26px;
+  margin-top: -5px; }
+
+/*tailgate supply list*/
+span .span_icon_supply {
+  top: 3px !important; }
+
+/*supply list*/
+.supply_list_name {
+  padding: 10px;
+  font-weight: 500;
+  font-size: 15px; }
+
+#supplyEdit {
+  height: 47px;
+  width: 100%; }
+
+.flask_text {
+  padding: 15px 11px 11px 16px; }
+
+#ItemEditBox {
+  border: solid 2.5px lightgray;
+  width: 100%;
+  height: 47px; }
+
+/*parking*/
+.searchParkingMarker {
+  cursor: pointer; }
+
+/*venueSubDetails*/
+.subDetails {
+  font-family: 'Avenir Next';
+  font-weight: 500;
+  font-size: 14px;
+  margin-top: 12%;
+  background: url(../img/flask_icons/star.svg) no-repeat left top; }
+
+.trafficSubDetail {
+  border-bottom: solid;
+  margin-top: 20px; }
+
+.venueInfoSubDetail {
+  margin-top: 47%; }
+
+.subDetails span {
+  margin-left: 27px;
+  font-weight: 500 !important;
+  font-size: 14px !important;
+  text-transform: none !important; }
+
+/*map*/
+.map_input {
+  margin: 10px;
+  width: 248px; }
+
+/*parking popup*/
+.popover {
+  top: 55% !important;
+  left: 94px !important;
+  margin-left: 28% !important;
+  width: 45% !important;
+  height: 23% !important;
+  opacity: 01 !important;
+  background-color: #f5f2f2 !important;
+  color: black !important; }
+
+.range {
+  margin-left: 3% !important; }
+
+.range img {
+  height: 2pc; }
+
+.range p {
+  margin-left: 10%;
+  font-weight: 500; }
+
+.ion_content_range {
+  margin-left: 10px;
+  margin-top: 7%;
+  background-color: #f5f2f2;
+  opacity: 1; }
+
+.ion_content_range span {
+  margin-left: 20%;
+  font-weight: 700;
+  margin-top: 2%; }
