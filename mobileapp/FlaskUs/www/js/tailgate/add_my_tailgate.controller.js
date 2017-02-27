@@ -852,19 +852,29 @@
 
         //Adding supply items to tailgate
         $scope.addSupplyItems = function () {
+            var str = [];
+            var replaceStr;
             $scope.items = [];
             angular.forEach($scope.selectedSupplyListItems, function (val, idx) {
-
                 var tempItemName;
-                    tempItemName = val.supplyItemName;
-                    if (tempItemName.indexOf("/") > -1) {
-                        tempItemName = encodeURIComponent(tempItemName);
-                    }
-                    $scope.items.push(tempItemName);
+                tempItemName = val.supplyItemName;
+                if (tempItemName.indexOf("/") > -1) {
+                    tempItemName = encodeURIComponent(tempItemName);
+                }
+                $scope.items.push(tempItemName);
             })
-            itemArray = $scope.items.toString();
+            for (var i = 0; i < $scope.items.length; i++) {
+                if ($scope.items[i].match("%2F")) {
+                    replaceStr = $scope.items[i].replace(/%2F/g, " or ");
+                    str.push(replaceStr);
+                }
+                else {
+                    str.push($scope.items[i]);
+                }
+            }
+            itemArray = str.toString();
             // var tailgateId = $cookies.get("currtailGateId");
-            TailgateService.addTailgateSupplyItems(itemArray, tailgateId, "0").then(function (respData) {
+            TailgateService.addTailgateSupplyItems(itemArray, tailgateId, "-1").then(function (respData) {
                 $scope.alltailgateSupplyItem = respData.data;
                 $scope.associateUserWithSupplyItem();
             });
