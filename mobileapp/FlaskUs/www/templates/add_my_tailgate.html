@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="item item-input item-floating-label">
-                            <span class="input-label">Description:</span>
+                            <span class="input-label">Description</span>
                             <input type="text" placeholder="Description" name="Description:" class="form-control" ng-model="addTailgateParams.tailgateDescription">
                         </div>
                         <span class="input-label" style="margin-left: 15px">Select an Event</span>
@@ -236,10 +236,11 @@
                     <ion-item class="myList item-remove-animate" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
                         <span class="emailText"><i class="supplyItemText">{{ item.supplyItemName | uppercase}}</i></span>
                         <select class="supplyitem_tailgate flaskSelect" ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" 
-                                ng-change="updateSupplyItemsUser(item);">
+                                ng-change="updateSupplyItemsUser(item,$index);">
                             <option value="-1">Select attendee</option>
                             <option ng-repeat="attendee in myTailgaters" value="{{attendee.userId}}">{{attendee.userName}}</option>
                         </select>
+                        <p style="margin: 40px 0px -14px 90px;color: green;display:none;" id={{$index}}>Saved Successfully!</p>
                         <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveSupplyItem(item.supplyItemId,$index);"></ion-option-button>
                     </ion-item>
                 </ion-list>
