@@ -189,7 +189,7 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 		try{
 			DynamicQuery tailgateQuery = DynamicQueryFactoryUtil.forClass(TailgateInfoImpl.class);
 			tailgateQuery.add(PropertyFactoryUtil.forName("userId").eq(new Long(userId)));
-			tailgateQuery.addOrder(PropertyFactoryUtil.forName("tailgateDate").asc());
+			tailgateQuery.addOrder(PropertyFactoryUtil.forName("tailgateDate").desc());
 			tailgateQuery.addOrder(PropertyFactoryUtil.forName("createdDate").desc());
 			Date now = new Date();
 			tailgateList.addAll(Collections.checkedList((List<TailgateInfo>)TailgateInfoLocalServiceUtil.dynamicQuery(tailgateQuery), TailgateInfo.class));
