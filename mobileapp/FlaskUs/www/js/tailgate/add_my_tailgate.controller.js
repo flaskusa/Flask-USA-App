@@ -752,7 +752,7 @@
             $scope.friendsToInvite = [];
             angular.forEach($scope.myFriends, function (value, key) {
                 if (!(IsUserTailgateMember(value))) {
-                    $scope.friendsToInvite.push(value)
+                    $scope.friendsToInvite.push(value);
                 }
             });
 
@@ -948,9 +948,6 @@
                         $ionicScrollDelegate.resize();
                     });
                 }
-                else {
-                    $scope.hideSupplyItem = $scope.hideSupplyItem;
-                }
             });
 
         }
@@ -983,6 +980,7 @@
         }
         $scope.selectGameDaySupply = function (list, checked) {
             if (checked == true) {
+                $scope.collapsedItems = false;
                 $scope.taigateSupplyList = list;
                 $scope.copyForMyGameDaySupply(list);
                 $scope.addNewTailgateSuppliesItem = true;
@@ -993,7 +991,8 @@
         /*Save supply Item in selected supply List
         */
         $scope.saveTailgateSupplyItem = function (listItemName) {
-            if ($scope.addNewTailgateSuppliesItem == true) {
+            if (listItemName != undefined && listItemName != "") {
+                if ($scope.addNewTailgateSuppliesItem == true) {
                 TailgateService.addSupplyItem(listItemName, $scope.taigateSupplyList.supplyListId).then(function (response) {
                     if (response.supplyListId > 0) {
                         $scope.selectedSupplyListItems.push({
@@ -1004,12 +1003,16 @@
                     }
                     $ionicLoading.show({ template: listItemName + ' Suppy Item Added in ' + $scope.taigateSupplyList.supplyListName, noBackdrop: false, duration: 2000 });
                 });
+                }
+                else {
+                    $("#addSupplyListError").show();
+                    $timeout(function () {
+                        $("#addSupplyListError").hide();
+                    }, 2000);                    
+                }
             }
             else {
-                $("#addSupplyListError").show();
-                $timeout(function () {
-                    $("#addSupplyListError").hide();
-                }, 2000);
+                $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 2000 });
             }
         }
         $scope.addNewTailgateSupplyListItem = function () {
