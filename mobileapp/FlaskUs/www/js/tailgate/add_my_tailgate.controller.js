@@ -34,7 +34,9 @@
         $scope.longitude = '-83.0456';
         $scope.sList = [];
         var userDetail = $cookies.getObject('CurrentUser');
-        $scope.updateFlag = false;
+        $scope.addNewSuppliesItem = false;
+        $scope.addNewTailgateSuppliesItem = false;
+        $scope.taigateSupplyList = [];
 
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd');
@@ -376,6 +378,11 @@
         function getTabWithIndex(getTabIndex) {
             if (getTabIndex[1] == 'planNowTab') {
                 $scope.selectTab(getTabIndex[0]);
+                $scope.collapsedItems = false;
+            }
+            else if (getTabIndex[1] == 'locationTab') {
+                callMap($scope.latitude, $scope.longitude);
+                changeTabWithIndex(getTabIndex[0]);
             }
             else {
                 changeTabWithIndex(getTabIndex[0]);
@@ -941,6 +948,9 @@
                         $ionicScrollDelegate.resize();
                     });
                 }
+                else {
+                    $scope.hideSupplyItem = $scope.hideSupplyItem;
+                }
             });
 
         }
@@ -973,11 +983,45 @@
         }
         $scope.selectGameDaySupply = function (list, checked) {
             if (checked == true) {
+                $scope.taigateSupplyList = list;
                 $scope.copyForMyGameDaySupply(list);
+                $scope.addNewTailgateSuppliesItem = true;
             } else {
                 $scope.removeSelectedSupply(list);
             }
         }
+        /*Save supply Item in selected supply List
+        */
+        $scope.saveTailgateSupplyItem = function (listItemName) {
+            if ($scope.addNewTailgateSuppliesItem == true) {
+                TailgateService.addSupplyItem(listItemName, $scope.taigateSupplyList.supplyListId).then(function (response) {
+                    if (response.supplyListId > 0) {
+                        $scope.selectedSupplyListItems.push({
+                            supplyItemName: response.supplyItemName,
+                            supplyItemId: response.supplyItemId
+                        });
+                        $scope.addNewSuppliesItem = false;
+                    }
+                    $ionicLoading.show({ template: listItemName + ' Suppy Item Added in ' + $scope.taigateSupplyList.supplyListName, noBackdrop: false, duration: 2000 });
+                });
+            }
+            else {
+                $("#addSupplyListError").show();
+                $timeout(function () {
+                    $("#addSupplyListError").hide();
+                }, 2000);
+            }
+        }
+        $scope.addNewTailgateSupplyListItem = function () {
+            $scope.addNewSuppliesItem = !$scope.addNewSuppliesItem
+            if ($scope.addTailgateSuppliesItem == true) {
+
+            }
+        }
+        $scope.cancelTailgateSupplyItemAdding = function () {
+            $scope.addNewSuppliesItem = false;
+        }
+
         // function getTailgaters() {
         //     var tailgateId = $cookies.get("currtailGateId");
         //     TailgateService.getMyTailgateUsers(tailgateId).then(function (respData) {
@@ -1049,16 +1093,6 @@
                 $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
             }
         };
-        $scope.addNewListItem = function () {
-            $scope.addNewSuppliesItem = !$scope.addNewSuppliesItem
-            if ($scope.addNewSuppliesItem == true) {
-
-            }
-        }
-        $scope.cancelAdding = function () {
-            $scope.addNewSuppliesItem = false;
-        }
-
         $scope.leaveSupplyItem = function (supplyItemId, index) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete Supply Item?'

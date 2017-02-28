@@ -74,7 +74,6 @@
         var deleteTailgateUserIdURL = "flask-user-tailgate-portlet.tailgateusers/delete-tailgate-user";
         /*Supply List Services*/
         var getMySupplyListsURL = "flask-user-tailgate-portlet.supplylist/get-my-supply-lists";
-        var addSupplyListURL = "flask-user-tailgate-portlet.supplylist/add-supply-list";
         var getItemsbylistidURL = "flask-user-tailgate-portlet.supplyitem/get-items-by-list-id";
         var getSupplyListURL = "flask-user-tailgate-portlet.supplylist/get-supply-list";
         /*User group services*/
@@ -660,23 +659,22 @@
                     //add errror handling
                 });
         }
+        //add supply item
+        function addSupplyItem(supplyItemName, supplyListId) {
+            return $http.get(SERVER.url + addSupplyItemUrl, {
+                params: {
+                    'supplyItemName': supplyItemName,
+                    'supplyListId': supplyListId
+                }
+            })
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
         return tailgateServices;
-    }
-
-    //add supply item
-    function addSupplyItem(supplyItemName, supplyListId) {
-        return $http.get(SERVER.url + addSupplyItemUrl, {
-            params: {
-                "supplyItemName": supplyItemName,
-                "supplyListId": supplyListId
-            }
-        })
-            .then(function success(response) {
-                return response.data;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
-            });
     }
 
 })();
