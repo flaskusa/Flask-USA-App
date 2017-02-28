@@ -75,7 +75,7 @@
             </ion-content>
         </ion-tab>
 
-        <ion-tab title="Location" disabled="copytTailgateId==0 || copytTailgateId==undefined" id="locationTab">
+        <ion-tab title="Location" disabled="copytTailgateId==0 || copytTailgateId==undefined" id="locationTab" ng-click="selectTab(1)">
             <ion-content overflow-scroll="false" class="has-header">
                 <div style="margin-top: 44px;">
                     <div style="width:100%;height:100%;" class="add_my_tailgate">
@@ -217,23 +217,24 @@
                         </div>
                     </div>
                 <ion-list show-delete="false" can-swipe="true" ng-hide="collapsedItems">
-                    <a class="item item-full item-icon-left" ng-click="addNewListItem()">
+                    <a class="item item-full item-icon-left" ng-click="addNewTailgateSupplyListItem()">
                         <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
                         <p class="addText">ADD NEW ITEM</p>
                     </a>
-                    <div class="item item-input-inset" ng-if="addNewSuppliesItem==true">
+                    <div class="item item-input-inset" ng-if="addNewSuppliesItem==true" style="border-bottom:none;">
                         <label class="item-input-wrapper" style="background-color: white;">
                             <div class="inpuBorderEdit" style="width: 80%">
-                                <input type="text" id="addItemBox" style="width:100%" ng-class="{Upper_Case:listItemName!='' && listItemName!=undefined}" placeholder="Item name" ng-model="listItemName">
+                                <input type="text" id="addTailgateSupplyItemBox" style="width:100%" ng-class="{Upper_Case:listItemName!='' && listItemName!=undefined}" placeholder="Item name" ng-model="listItemName">
                             </div>
                         </label>
-                        <button class="button button-small suppliesButton">
+                        <button class="button button-small suppliesButton" ng-click="saveTailgateSupplyItem(listItemName);">
                             Save
                         </button>
-                        <button class="button button-small suppliesButton" ng-click="cancelAdding()">
+                        <button class="button button-small suppliesButton" ng-click="cancelTailgateSupplyItemAdding()">
                             Cancel
-                        </button>
+                        </button> 
                     </div>
+                    <p style="margin: 9px 0px 9px 29%;color: red;display:none;" id="addSupplyListError">Select Supply List To Add Supply Item!</p>
                     <ion-item class="myList item-remove-animate" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
                         <span class="emailText"><i class="supplyItemText">{{ item.supplyItemName | uppercase}}</i></span>
                         <select class="supplyitem_tailgate flaskSelect" ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" 
