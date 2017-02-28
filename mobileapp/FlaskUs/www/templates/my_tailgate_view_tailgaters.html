@@ -14,7 +14,7 @@
             <span style="margin-left:75%;font-size: 12px;color: #F89734;font-weight:bold;">Is Admin</span>
         </a>
         <ion-list>
-            <ion-item ng-repeat="data in myTailgaters" class=" item-avatar ">
+            <ion-item ng-repeat="data in myTailgaters | orderBy:'userName'" class=" item-avatar ">
                 <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                 <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                 <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>
