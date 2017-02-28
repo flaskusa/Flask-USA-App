@@ -550,6 +550,7 @@ span.error_msg{color:red;}
     width: 94%;
 }
 
+span.error_msg{color:red;font-size:12px;}
 
 .eventHeading{
     text-align:center; 
@@ -3262,5 +3263,18 @@ span .span_icon_supply{
 /*tailgate location marker*/
 .location-marker{
     font-size:14px;
-    color: black;
+    color: #F89734;
     }
+
+.infobox img{
+    display:none;
+}
+
+/*tailgate supply item*/
+.addNewTailgateItem{border-bottom:none;}
+
+#addSupplyListError{
+    margin: 9px 0px 9px 14%;
+    color: red;
+    display:none;
+}
