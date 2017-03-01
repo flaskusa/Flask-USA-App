@@ -154,7 +154,6 @@
                 if($scope.searchString==""){
                     $scope.searchString="a";
                 }
-
                     EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (resp) {
                         $scope.allEvent = resp.data.Events;
                         if ($scope.allEvent.length == 0) {
@@ -163,10 +162,26 @@
                             $scope.Event_Error = false;
                         }
                     });
-
-
             });
-        }        
+            $("#searchChip").show();
+        }
+
+        /*
+        Function for clearing the search results
+        */
+        $scope.clearSearchResults = function () {
+            $("#searchChip").hide();
+            $scope.searchstringList.searchString = null;
+            $scope.searchstringList.days = "60";
+            EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, 'a', $scope.latitude, $scope.longitude).then(function (resp) {
+                $scope.allEvent = resp.data.Events;
+                if ($scope.allEvent.length == 0) {
+                    $scope.Event_Error = true;
+                } else {
+                    $scope.Event_Error = false;
+                }
+            });
+        };
 
         function ConvertToZip(latitude,longitude) {
             var latlongVar = 'latlng=';
