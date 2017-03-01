@@ -28,10 +28,14 @@
         </ion-list>
         <script id="templates/modal.html" type="text/ng-template">
             <ion-modal-view>
-                <ion-header-bar class="bar bar-header bar-positive black-header">
-                    <h1 class="title">INVITE FRIEND</h1>
-                    <button class="button button-clear button-primary" ng-click="hideModel()">X</button>
-                </ion-header-bar>
+                <ion-nav-bar class="bar-dark" align-title="center">
+                    <ion-nav-buttons side="left">
+                        <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="hideModel();"></button>
+                    </ion-nav-buttons>
+                    <ion-nav-title>
+                        <a href="" style="text-decoration:none;">INVITE FRIEND</a>
+                    </ion-nav-title>
+                </ion-nav-bar>
                 <div class="bar bar-subheader">
                     <div class="row">
                         <div class="col col-90 col-center searchrow">
@@ -48,7 +52,6 @@
                             <ion-item ng-repeat="data in friendsToInvite| filter:searchContact.searchtext " class="item-avatar " item="data">
                                 <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png">
                                 <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}">
-
                                 <h2>{{ data.fullName | uppercase}}</h2>
                                 <p>{{ data.emailAddress}}</p>
                                 <button type="submit" nav-clear class="button button-block button-positive friendButtonStyle invite_friend" ng-click="addTailgateMembers(data,$index)">
