@@ -28,6 +28,7 @@
                 } // when no markers are present
         }else{
             callMap($scope.taligateMarkers.latitude, $scope.taligateMarkers.longitude); //taking markers from cookies
+            //adding window options for marker win
             $scope.windowOpt = {
                 position: {
                     lat: $scope.taligateMarkers.latitude,
