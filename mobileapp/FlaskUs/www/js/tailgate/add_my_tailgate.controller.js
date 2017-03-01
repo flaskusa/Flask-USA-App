@@ -1002,24 +1002,24 @@
         */
         $scope.saveTailgateSupplyItem = function (listItemName) {
             if (listItemName != undefined && listItemName != "") {
-                if ($scope.addNewTailgateSuppliesItem == true) {
-                TailgateService.addSupplyItem(listItemName, $scope.taigateSupplyList.supplyListId).then(function (response) {
-                    if (response.supplyListId > 0) {
-                        $scope.selectedSupplyListItems.push({
-                            supplyItemName: response.supplyItemName,
-                            supplyItemId: response.supplyItemId
+                    if ($scope.taigateSupplyList.supplyListId > 0) {
+                        TailgateService.addSupplyItem(listItemName, $scope.taigateSupplyList.supplyListId).then(function (response) {
+                            $scope.selectedSupplyListItems.push({
+                                supplyItemName: response.supplyItemName,
+                                supplyItemId: response.supplyItemId
+                            });
+                            $scope.addNewSuppliesItem = false;                            
                         });
-                        $scope.addNewSuppliesItem = false;
                     }
-                    $ionicLoading.show({ template: listItemName + ' Suppy item added in ' + $scope.taigateSupplyList.supplyListName, noBackdrop: false, duration: 2000 });
-                });
-                }
-                else {
-                    $("#addSupplyListError").show();
-                    $timeout(function () {
-                        $("#addSupplyListError").hide();
-                    }, 2000);                    
-                }
+                    else {
+                        TailgateService.addTailgateSupplyItem(listItemName, tailgateId, "-1").then(function (response) {
+                            $scope.selectedSupplyListItems.push({
+                                supplyItemName: response.supplyListItemName,
+                                supplyItemId: response.tailgateSupplyItemId
+                            });
+                        });
+                    }
+                    $ionicLoading.show({ template: listItemName + ' Suppy item added', noBackdrop: false, duration: 2000 });
             }
             else {
                 $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 2000 });
@@ -1090,24 +1090,6 @@
             });
         }
 
-        //add supply item
-        $scope.saveItem = function (list) {
-            if (list != undefined && list != "") {
-                TailgateService.addSupplyItem(list, $scope.listId).then(function (response) {
-                    if (response.supplyListId > 0) {
-
-                        $scope.listValue.push({
-                            supplyItemName: response.supplyItemName,
-                            supplyItemId: response.supplyItemId
-                        });
-                        $scope.addNewSuppliesItem = false;
-                    }
-                });
-
-            } else {
-                $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 1000 });
-            }
-        };
         $scope.leaveSupplyItem = function (supplyItemId, index) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete Supply Item?'

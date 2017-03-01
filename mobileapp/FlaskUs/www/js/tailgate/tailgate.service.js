@@ -83,6 +83,7 @@
         /*Get My Tailgate Service*/
         //var getAllTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-tailgate";
         var addTailgateSupplyItemsURL = "flask-user-tailgate-portlet.tailgatesupplyitem/add-tailgate-supply-items";
+        var addTailgateSupplyItemURL = "flask-user-tailgate-portlet.tailgatesupplyitem/add-tailgate-supply-item";
         var updateTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/update-tailgate-info";
         /*Add Supply List*/
         var addSupplyListURL = "flask-user-tailgate-portlet.supplylist/add-supply-list";
@@ -138,7 +139,8 @@
             copyTailgate: copyTailgate,
             addTailgateAdmin: addTailgateAdmin,
             deleteTailgateSupplyItem: deleteTailgateSupplyItem,
-            addSupplyItem: addSupplyItem
+            addSupplyItem: addSupplyItem,
+            addTailgateSupplyItem: addTailgateSupplyItem
         }
 
         function getallFilteredEvents(tailgateParams) {
@@ -665,6 +667,23 @@
                 params: {
                     'supplyItemName': supplyItemName,
                     'supplyListId': supplyListId
+                }
+            })
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+
+        //add Tailgate Supply Item
+        function addTailgateSupplyItem(supplyListItemName, tailgateId, itemAssignedUserId) {
+            return $http.get(SERVER.url + addTailgateSupplyItemURL, {
+                params: {
+                    'supplyListItemName': supplyListItemName,
+                    'tailgateId': tailgateId,
+                    'itemAssignedUserId': itemAssignedUserId
                 }
             })
                 .then(function success(response) {
