@@ -188,6 +188,7 @@
                             //$scope.map.markers.pop();
                             console.log($scope.map.markers);
                             $scope.$apply();
+                            $scope.onClick(marker);
                         }
                     }
                 }
@@ -251,7 +252,7 @@
                 + '        </label>'
                 + '         <label class="item item-input item-floating-label">'
                 + '      <span class="input-label">Description</span>'
-                + '        <input type="text" placeholder="Description" ng-model="loc.description">'
+                + '        <textarea rows="4" cols="50" placeholder="Description" ng-model="loc.description" style="background-color:transparent;"/>'
                 + '       </label>                 '
                 + '    </div>'
                 + '<button nav-clear class="button button-block button-positive pay_now_button" ng-click="markerPOpup.$valid && currMarker(loc);">'
@@ -466,7 +467,7 @@
 
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 if (tailgateId && tailgateId > 0) {
-                    $scope.uploadFileToServer(imageURI, tailgateId, "Image Uploaded");
+                    $scope.uploadFileToServer(imageURI, tailgateId, "Image uploaded");
                 } else {
                     $("#tailgateImage").attr("src", imageURI);
                     $scope.setSelectedImageURIToUpload(imageURI);
@@ -676,6 +677,7 @@
         $scope.collapsed = true;
         $scope.collapsedItems = true;
         $scope.myFriends = [];
+        $scope.taigaterFriends = [];
 
 
         function getTailgaters(newtailgateId) {
@@ -688,6 +690,7 @@
         }
         function getAllFriends() {
             TailgateService.getUserFrends().then(function (response) {
+                $scope.taigaterFriends = response;
                 $scope.friendsResponseLegth = response.length;
                 if ($localStorage["myFriendDetail"].length == response.length) {
                     $scope.myFriends = $localStorage["myFriendDetail"];
@@ -879,7 +882,7 @@
                     str.push($scope.items[i]);
                 }
             }
-            itemArray = str.toString();
+            itemArray = JSON.stringify(str);          
             // var tailgateId = $cookies.get("currtailGateId");
             TailgateService.addTailgateSupplyItems(itemArray, tailgateId, "-1").then(function (respData) {
                 $scope.alltailgateSupplyItem = respData.data;
@@ -957,6 +960,8 @@
                 $ionicScrollDelegate.resize();
             });
         };
+
+        /*Add the supply list items in already existing array*/
         $scope.copyForMyGameDaySupply = function (supplyObject) {
             $scope.MyGameDaysSupply = [];
             angular.forEach($scope.allSupplyList, function (value, key) {
@@ -968,7 +973,11 @@
                 }
             });
             TailgateService.getItemsbylistid(supplyObject.supplyListId).then(function (response) {
-                $scope.selectedSupplyListItems = response.data;
+                var currSupplyItemsLength = response.data;
+                for (var i = 0 ; i < currSupplyItemsLength.length; i++) {
+                    $scope.selectedSupplyListItems.push(currSupplyItemsLength[i]);
+                }
+                console.log( $scope.selectedSupplyListItems);
                 if ($scope.hideItem == false) {
                     $scope.toggleItem();
                 }
@@ -978,6 +987,7 @@
         $scope.removeSelectedSupply = function (list) {
             $scope.selectedSupplyListItems = [];
         }
+
         $scope.selectGameDaySupply = function (list, checked) {
             if (checked == true) {
                 $scope.collapsedItems = false;
@@ -1001,7 +1011,7 @@
                         });
                         $scope.addNewSuppliesItem = false;
                     }
-                    $ionicLoading.show({ template: listItemName + ' Suppy Item Added in ' + $scope.taigateSupplyList.supplyListName, noBackdrop: false, duration: 2000 });
+                    $ionicLoading.show({ template: listItemName + ' Suppy item added in ' + $scope.taigateSupplyList.supplyListName, noBackdrop: false, duration: 2000 });
                 });
                 }
                 else {
@@ -1036,6 +1046,7 @@
             //     data.supplyListItemName = decodeURIComponent(data.supplyListItemName);
             // }
             TailgateService.updateTailgateSupplyItem(data.tailgateSupplyItemId, data.supplyListItemName, data.tailgateId, data.itemAssignedUserId).then(function (respData) {
+                $ionicLoading.show({ template: 'Supply list added successfully', noBackdrop: false, duration: 2000 });
             });
         }
         function getItems() {
@@ -1044,6 +1055,7 @@
                 $scope.toggleItem();
             });
         }
+        //for displaying items from supply list selected
         $scope.setSelectedSupplyItemArray = function (data) {
             $scope.selectedSupplyListItems = [];
             var tempItem = {};
@@ -1139,6 +1151,10 @@
                 if (userDetail.data.userId == tailgateDetails.userId) {
                     TailgateService.addTailgateAdmin(currUserId, tailgateId).then(function (respData) {
                         $rootScope.role = respData.data;
+                        $("#" + index).show();
+                        $timeout(function () {
+                            $("#" + index).hide();
+                        }, 2000);
                     });
                 }
                 else {
