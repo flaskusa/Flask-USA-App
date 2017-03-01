@@ -23,6 +23,7 @@ import java.util.List;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -45,6 +46,7 @@ import com.rumbasolutions.flask.service.TailgateSupplyItemServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.TailgateInfoServiceBaseImpl;
+import com.rumbasolutions.flask.service.persistence.TailgateInfoFinderUtil;
 import com.rumbasolutions.flask.service.persistence.TailgateInfoUtil;
 
 /**
@@ -185,16 +187,12 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 	
 	@SuppressWarnings({ "unchecked"})
 	public List<TailgateInfo> getAllMyTailgate(long userId){
-		List<TailgateInfo> tailgateList = new ArrayList<TailgateInfo>();
+		List<TailgateInfo> tailgateList = null;
 		try{
-			DynamicQuery tailgateQuery = DynamicQueryFactoryUtil.forClass(TailgateInfoImpl.class);
-			tailgateQuery.add(PropertyFactoryUtil.forName("userId").eq(new Long(userId)));
-			tailgateQuery.addOrder(PropertyFactoryUtil.forName("tailgateDate").desc());
-			tailgateQuery.addOrder(PropertyFactoryUtil.forName("createdDate").desc());
-			Date now = new Date();
-			tailgateList.addAll(Collections.checkedList((List<TailgateInfo>)TailgateInfoLocalServiceUtil.dynamicQuery(tailgateQuery), TailgateInfo.class));
+			tailgateList = TailgateInfoFinderUtil.getAllMyTailgate(userId);
 		}catch(Exception ex){
 			LOGGER.error("Exception in get All My Tailgate: " + ex.getMessage());
+			tailgateList = new ArrayList<TailgateInfo>(100);
 		}
 		return tailgateList;
 	}

@@ -11,9 +11,9 @@
 	<sql id="getMyAllTailgate">
 		<![CDATA[
 			SELECT fti.tailgateId,fti.tailgateName,fti.tailgateDescription,fti.eventId,fti.eventName,
-			fti.tailgateDate,fti.startTime,fti.endTime, fti.isActive, fti.isDelete, fti.venmoAccountId, fti.amountToPay,fti.logoId, ftu.isAdmin
-			FROM flasktailgate_TailgateInfo fti INNER JOIN flasktailgate_TailgateUsers ftu ON fti.tailgateid = ftu.tailgateid 
-			WHERE ftu.userId=? AND fti.isActive=1 AND fti.isDelete=0;
+   			fti.tailgateDate,fti.startTime,fti.endTime, fti.isActive, fti.isDelete, fti.venmoAccountId, fti.amountToPay,fti.logoId, ftu.isAdmin
+   			FROM flasktailgate_TailgateInfo fti INNER JOIN flasktailgate_TailgateUsers ftu ON fti.tailgateid = ftu.tailgateid 
+   			WHERE ftu.userId=? AND fti.isActive=1 AND fti.isDelete=0 order by fti.tailgateDate,fti.createdDate desc;
 		]]>
 	</sql>
 	<sql id="deleteTailgate">
