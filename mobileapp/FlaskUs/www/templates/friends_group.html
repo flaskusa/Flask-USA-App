@@ -8,63 +8,58 @@
             <button class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-
     <div class="bar bar-subheader groupSearch" ng-show="searchBox.showBox">
         <div class="row searchrow">
             <div class="col col-100 col-center searchrow">
-                <input type="text" placeholder="Search Group..." class="searchboxArea" ng-model="groupList.searchString" />
+                <input type="text" placeholder="Search Group..." class="searchboxArea" ng-model="groupList.searchString"/>
             </div>
         </div>
     </div>
- <!--<ion-nav-buttons side="right">
+    <!--<ion-nav-buttons side="right">
         <button class="button button-icon button-clear ion-android-more-vertical"ng-click="popover.show($event)"> </button>
     </ion-nav-buttons>-->
     <ion-content class="my-view" overflow-scroll="false">
-        <a class="item item-full list-item-icon-left "class="my-view"ng-if="addingInGroup==false" ng-click="goToCreate()">
-            <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
-            <p class="addText">CREATE GROUP</p>
-        </a>
-      <ion-list >
-          <a class="item" ng-if="groups.length == 0 && addingInGroup==true"> There are no groups to add. </a>
-          <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> There are no groups. </a>
-
-          <ion-item class=" item-remove-animate"ng-repeat="group in groups | filter: groupList.searchString"style="padding: 0px"ng-init="group.showDivByIndex=false">
-              <div ng-if="group.showDivByIndex==true"style="padding-top: 10px">
-                  user Added
-              </div>
-              <div ng-if="group.showDivByIndex==false">
-              <a  class="itemAnchor"ng-click="getGroupDetail(group)">
-              <div class="col-20">
-              <img src = "img/default-group-pic.png"class="groupIcon">
-              </div>
-                  <div>
-              <h3 class="friend_group_name">{{group.groupName}}</h3>
-              <div class="emailText" style="text-overflow: ellipsis;overflow: hidden">{{group.groupDescription}}</div>
-
-              </div>
-              <div class="col-20"ng-if="addingInGroup==false">
-              <span class="badge span_icon span_icon_extraright"style="top:20px"><img src="img/flask_icons/arrow_left.svg"class="arrowIconAlign" ></span>
-              </div>
-                  <div class="col-20"ng-if="addingInGroup==true">
-                <span class="badge span_icon "style="top:7px;right:10px;"> <label class="checkbox"class="labelCheckBox">
-            <input  type="checkbox"ng-click="addFriendToGroup($index,group.groupId,group.showDivByIndex)">
-                </label></span>
+          <a class="item item-full list-item-icon-left "class="my-view"ng-if="addingInGroup==false" ng-click="goToCreate()">
+              <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
+              <p class="addText">CREATE GROUP</p>
+          </a>
+          <ion-list >
+              <a class="item" ng-if="groups.length == 0 && addingInGroup==true"> There are no groups to add. </a>
+              <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> There are no groups. </a>
+              <ion-item class=" item-remove-animate"ng-repeat="group in groups | filter: groupList.searchString"style="padding: 0px"ng-init="group.showDivByIndex=false">
+                  <div ng-if="group.showDivByIndex==true"style="padding-top: 10px">
+                      user Added
                   </div>
-
-              </a>
-              </div>
-              <ion-option-button  class="icon ion-edit"ng-click="editGroup(group)"ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
-              <ion-option-button class="button-assertive icon ion-trash-a"ng-click="deleteGroup(group.groupId,$index)"ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
-              <ion-option-button  class="icon icon ion-android-exit"ng-if="addingInGroup==false && group.isAdmin==0"ng-click="leaveGroup(group.groupId,$index)"></ion-option-button>
-          </ion-item>
-
-
-      </ion-list>
-        <div ng-if="addingInGroup==true && showDoneButton==true"class="padding" align="center">
-            <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="doneAdding()">
-                Close
-            </a></div>
-
-
-  </ion-content>
+                  <div ng-if="group.showDivByIndex==false">
+                      <a  class="itemAnchor"ng-click="getGroupDetail(group)">
+                          <div class="col-20">
+                               <img src = "img/default-group-pic.png"class="groupIcon">
+                          </div>
+                          <div>
+                              <h3 class="emailText" style="font-size: 17px; font-weight: 600;">{{group.groupName}}</h3>
+                              <div class="friend_group_name" style="color: black;font-weight: normal !important;font-size: 14px;text-overflow: ellipsis;overflow: hidden">{{group.groupDescription}}</div>
+                          </div>
+                          <div class="col-20"ng-if="addingInGroup==false">
+                               <span class="badge span_icon span_icon_extraright"style="top:20px"><img src="img/flask_icons/arrow_left.svg"class="arrowIconAlign" ></span>
+                          </div>
+                          <div class="col-20"ng-if="addingInGroup==true">
+                               <span class="badge span_icon "style="top:7px;right:10px;"> 
+                                   <label class="checkbox"class="labelCheckBox">
+                                       <input  type="checkbox"ng-click="addFriendToGroup($index,group.groupId,group.showDivByIndex)">
+                                   </label>
+                               </span>
+                          </div>
+                      </a>
+                  </div>
+                  <ion-option-button  class="icon ion-edit"ng-click="editGroup(group)"ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
+                  <ion-option-button class="button-assertive icon ion-trash-a"ng-click="deleteGroup(group.groupId,$index)"ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
+                  <ion-option-button  class="icon icon ion-android-exit"ng-if="addingInGroup==false && group.isAdmin==0"ng-click="leaveGroup(group.groupId,$index)"></ion-option-button>
+              </ion-item>
+          </ion-list>
+          <div ng-if="addingInGroup==true && showDoneButton==true"class="padding" align="center">
+                <a type="submit" nav-clear class="button button-block button-positive sign_in_button"ng-click="doneAdding()">
+                    Close
+                </a>
+          </div>
+    </ion-content>
 </ion-view>
