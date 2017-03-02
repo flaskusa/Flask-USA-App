@@ -16,7 +16,7 @@
         $scope.tailgateOwner = false;
         $rootScope.role = '0';
         var userDetail = $cookies.getObject('CurrentUser');
-        var userId = userDetail.data.userId;
+        $scope.loggedInUserId = userDetail.data.userId;
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope
         }).then(function (modal) {
@@ -37,7 +37,7 @@
             });
             confirmPopup.then(function (res) {
                 if (res) {
-                    if (currUserId != userId) {
+                    if (currUserId != $scope.loggedInUserId) {
                         TailgateService.deleteTailgateUser(tailGateId, currUserId).then(function (response) {
                             $scope.myTailgaters.splice(index, 1)
                         })
@@ -93,7 +93,7 @@
                 }
                 
             });
-            if (memberDetail.userId == userId || !isMemberMyFrnd(memberDetail)) {
+            if (memberDetail.userId == $scope.loggedInUserId || !isMemberMyFrnd(memberDetail)) {
                 $scope.getUserProfile(memberDetail)
 
             } else {
@@ -242,7 +242,7 @@
         $scope.changeTailgaterRole = function (currUserId, index) {
             console.log($scope.tUserId);
             if (currUserId != $scope.tUserId) {
-                if (userId == $scope.tUserId) {
+                if ($scope.loggedInUserId == $scope.tUserId) {
                     TailgateService.addTailgateAdmin(currUserId, tailGateId).then(function (respData) {
                         $rootScope.role = respData.data;
                         $ionicLoading.show({ template: 'Role changed successfully!', noBackdrop: false, duration: 3000 });
