@@ -13,8 +13,8 @@
                     <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
                         <ui-gmap-window options="windowOpt" show="windowOpt.show" closeClick="closeWindow">
                             <div class="" id="locationMarker" style="padding: 0px 14px 16px 14px;">
-                                <div id="heading" style="text-align:center;"><b>Taligate Location</b></div>
-                                <div id="markercontent" class="location-marker">
+                                <div id="LocationMarkerInfoHeading" style="text-align:center;"><b>Taligate Location</b></div>
+                                <div id="markercontent" class="location-marker" style="height: 65px; overflow: auto;">
                                     <b>Name:</b> {{taligateMarkers.name}}<br />
                                     <b>Description:</b> {{taligateMarkers.description}}
                                 </div>

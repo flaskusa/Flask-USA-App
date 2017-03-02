@@ -104,12 +104,12 @@
                             <div class="expand-collapse-content">
                                 <div>
                                     <div class="list">
-                                        <a class="item item-thumbnail-left item-icon-right eventList" ng-repeat="data in allGroups">
-                                            <img class="list-thumbnail listImages" src = 'img/default-group-pic.png'>
+                                        <ion-item class="item-avatar item-remove-animate" ng-repeat="data in allGroups | orderBy:'groupName'">
+                                            <img class="list-thumbnail listImages" src='img/default-group-pic.png' style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                                             <h2 class="eventNameCol_tailgate">{{ data.groupName | uppercase}}</h2>
                                             <p class="dateCol_tailgate">Created By : {{data.createdBy | uppercase}}</p>
                                             <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="getusersofGroup(data.groupId, $index)"></span>
-                                        </a>
+                                        </ion-item>
                                         <a class="item" ng-if="allGroups.length == 0"> There are no groups to add </a>
                                     </div>
                                 </div>
@@ -125,7 +125,7 @@
                         <div class="slideDown" ng-hide="active1">
                             <div class="expand-collapse-content">
                                 <div>
-                                    <ion-item class="item-avatar" ng-repeat="data in taigaterFriends | orderBy:'userName'">
+                                    <ion-item class="item-avatar item-remove-animate" ng-repeat="data in taigaterFriends | orderBy:'userName'">
                                         <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                                         <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                                         <h2 class="eventNameCol_tailgate">{{ data.fullName | uppercase}}</h2>
@@ -148,19 +148,18 @@
                             <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                             <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                             <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>
-                            <span class="badge span_icon span_icon_right" ng-if="data.userId != tUserId">
+                            <span class="badge span_icon span_icon_right" ng-class="{disablebutton: loggedInUserId != tUserId}">
                                 <a class="item icon ion-trash-a option_icon" ng-click="deleteTailgateUser(data.userId,$index)"></a>
                                 <ion-checkbox class="item item-icon-left item-checkbox-right tailgate_admin" ng-click="changeTailgaterRole(data.userId,$index);" ng-model="data.isAdmin" ng-checked="data.isAdmin=='1'">
                                 </ion-checkbox>
                             </span>
-                            <p style="margin:19px 0px -14px 9px;color: green;display:none;" id={{$index}}>Changed role successfully!</p>
                         </ion-item>
                     </ion-list>
             </ion-content>
         </ion-tab>
         <ion-tab title="Plan Now" ng-click="selectTab(3)" disabled="copytTailgateId==0 || copytTailgateId==undefined" id="planNowTab" ng-class="{'tab-item-active' : tab == true}">
             <!--FOURTH TAB-->
-            <ion-content overflow-scroll="true" class="has-header">
+            <ion-content overflow-scroll="false" class="has-header">
                 <div class="strip paddingTOpSupply" ng-click="collapsed = !collapsed">
                     <div class="stripPadding expand-collapse-content" style="margin-top: 45px;">
                         <span><i class="textStyle marginLeftSupplyText">PAYMENT</i></span>
@@ -246,7 +245,6 @@
                             <option value="-1">Select attendee</option>
                             <option ng-repeat="attendee in myTailgaters" value="{{attendee.userId}}">{{attendee.userName}}</option>
                         </select>
-                        <p style="margin: 40px 0px -14px 90px;color: green;display:none;" id={{$index}}>Saved Successfully!</p>
                         <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveSupplyItem(item.supplyItemId,$index);"></ion-option-button>
                     </ion-item>
                 </ion-list>
