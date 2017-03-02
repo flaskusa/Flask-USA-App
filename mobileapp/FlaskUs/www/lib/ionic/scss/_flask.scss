@@ -1318,6 +1318,11 @@ button.button.button-block.button-positive.invite_friend i{
 h2.tailgater_name{
     font-weight: bold;
     margin: 11px 0px 0px 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    max-width: 162px;
+    width: 100%;
 }
 
 @media screen and (max-width: 321px) {
@@ -3258,14 +3263,40 @@ span .span_icon_supply{
 
 /*tailgate location marker*/
 .location-marker{
-    font-size:14px;
-    color: #F89734;
-    }
+    font-size: 14px;
+    padding-top: 5px;
+    color: #060606;
+}
+div#LocationMarkerInfoHeading {
+    text-align: center;
+    padding: 10px;
+    margin-top: -5px;
+    margin-left: -14px;
+    margin-right: -14px;
+    font-size: 16px;
+    background-color: black;
+    color: darkorange;
+}
+div#locationMarker {
+    padding: 5px 14px 16px 14px;
+    background-color: white;
+}
 
 .infobox img{
     display:none;
 }
-
+/*IOS Specific header*/
+/* iOS Specific Overrides to fix logo overlap */
+.platform-ios7.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
+  margin-top: 25px;
+}
+.platform-ios7.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
+  height: 90px;
+}
+.platform-ios7.platform-cordova:not(.fullscreen) .has-header {
+  top: 90px;
+}
+/*IOS Specific header*/
 /*tailgate supply item*/
 .addNewTailgateItem{border-bottom:none;}
 
