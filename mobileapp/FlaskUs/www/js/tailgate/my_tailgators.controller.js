@@ -245,10 +245,7 @@
                 if (userId == $scope.tUserId) {
                     TailgateService.addTailgateAdmin(currUserId, tailGateId).then(function (respData) {
                         $rootScope.role = respData.data;
-                        $("#" + index).show();
-                        $timeout(function () {
-                            $("#" + index).hide();
-                        }, 2000);
+                        $ionicLoading.show({ template: 'Role changed successfully!', noBackdrop: false, duration: 3000 });
                     });
                 }
                 else {
@@ -256,7 +253,7 @@
                 }
             }
             else {
-                $ionicLoading.show({ template: 'Tailgate Admin Cannot be removed!', noBackdrop: false, duration: 3000 });
+                $ionicLoading.show({ template: 'Tailgate admin cannot be removed!', noBackdrop: false, duration: 3000 });
             }
         }
         getTailgaters();

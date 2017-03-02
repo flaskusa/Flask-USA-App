@@ -28,13 +28,25 @@
                 } // when no markers are present
         }else{
             callMap($scope.taligateMarkers.latitude, $scope.taligateMarkers.longitude); //taking markers from cookies
-            //adding window options for marker win
+            //adding window options for marker pin
             $scope.windowOpt = {
+                boxClass: "infobox",
+                boxStyle: {
+                    backgroundColor: "#040404",
+                    borderRadius: "5px",
+                    width: "240px"
+                },
                 position: {
                     lat: $scope.taligateMarkers.latitude,
                     lng: $scope.taligateMarkers.longitude
                 },
-                show: true
+                show: true,
+                pane: "floatPane",
+                pixelOffset: {
+                    width: -113,
+                    height: -155
+                },
+                enableEventPropagation: false
             }
         }
 

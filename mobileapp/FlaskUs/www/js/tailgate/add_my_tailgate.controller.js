@@ -34,6 +34,7 @@
         $scope.longitude = '-83.0456';
         $scope.sList = [];
         var userDetail = $cookies.getObject('CurrentUser');
+        $scope.loggedInUserId = userDetail.data.userId;
         $scope.addNewSuppliesItem = false;
         $scope.addNewTailgateSuppliesItem = false;
         $scope.taigateSupplyList = [];
@@ -785,6 +786,7 @@
             addUserparams.isPaid = 0;
             addUserparams.paymentMode = "None";
             addUsertoTailgate(addUserparams, index);
+            $scope.taigaterFriends.splice(index, 1)
 
         }
         //get all groups either created by user or is a member of particular group.
@@ -1083,10 +1085,7 @@
 
         $scope.updateSupplyItemsUser = function (data, index) {
             TailgateService.updateTailgateSupplyItem(data.supplyItemId, data.supplyItemName, tailgateId, data.itemAssignedUserId).then(function (respData) {
-                $("#" + index).show();
-                $timeout(function () {
-                    $("#" + index).hide();
-                }, 2000);
+                $ionicLoading.show({ template: 'User changed successfully!', noBackdrop: false, duration: 3000 });
             });
         }
 
@@ -1113,7 +1112,7 @@
             confirmPopup.then(function (res) {
 
                 if (res) {
-                    if (currUserId != userDetail.data.userId) {
+                    if (currUserId != $scope.loggedInUserId) {
                         TailgateService.deleteTailgateUser(tailgateId, currUserId).then(function (response) {
                             $scope.myTailgaters.splice(index, 1)
                         })
@@ -1130,13 +1129,10 @@
             var tailgateDetails = $cookies.getObject("editUserTailgate");
             console.log(tailgateDetails);
             if (currUserId != tailgateDetails.userId) {
-                if (userDetail.data.userId == tailgateDetails.userId) {
+                if ($scope.loggedInUserId == tailgateDetails.userId) {
                     TailgateService.addTailgateAdmin(currUserId, tailgateId).then(function (respData) {
                         $rootScope.role = respData.data;
-                        $("#" + index).show();
-                        $timeout(function () {
-                            $("#" + index).hide();
-                        }, 2000);
+                        $ionicLoading.show({ template: 'Role changed successfully', noBackdrop: false, duration: 3000 });
                     });
                 }
                 else {
@@ -1144,7 +1140,7 @@
                 }
             }
             else {
-                $ionicLoading.show({ template: 'Tailgate Admin Cannot be removed!', noBackdrop: false, duration: 3000 });
+                $ionicLoading.show({ template: 'Tailgate admin cannot be removed!', noBackdrop: false, duration: 3000 });
             }
         }
 
