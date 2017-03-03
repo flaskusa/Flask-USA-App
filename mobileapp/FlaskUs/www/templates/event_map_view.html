@@ -354,30 +354,27 @@
 
                 <ion-tab title="VENUE INFO" ng-click="selectTab(1)">
                     <ion-content overflow-scroll="false" class="traffic_ion_content">
-                        <div ng-repeat="venueInfoDetail in venueInfoDetail" class="flask_us_form">
+                        <div ng-repeat="data in venueInfoDetail" class="flask_us_form">
                             <div align="center">
                                 <div class="taffic_heading_div">
-                                    <i class="trafficDetailHeading">{{venueInfoDetail.infoTitle}}</i>
+                                    <i class="trafficDetailHeading">{{data.infoTitle}}</i>
                                 </div>
                             </div>
                             <div class="TrafficInfoDescDiv">
-                                <div id="venueInfo" class="" compile="venueInfoDetail.infoDesc">
+                                <div id="venueInfo" class="" compile="data.infoDesc">
                                 </div>
                             </div>
-                            
-                            </div><br />
-                        <div ng-repeat="venueInfoSubDetail in venueInfoDetail" class="venueInfoSubDetail">
-                            <div align="center">
-                                <div class="taffic_heading_div">
-                                    <i class="trafficDetailHeading">{{venueInfoSubDetail.venueSubDetailTitle}}</i>
+                            <div ng-repeat="subdetail in data.venueInfoSubDetail">
+                                <div align="center">
+                                    <div class="TrafficInfoDescDiv">
+                                        <div class="subDetails" ng-if="subdetail.venueSubDetailTitle != ''">
+                                            <i class="trafficDetailHeading">{{subdetail.venueSubDetailTitle}}</i><br />
+                                        </div>
+                                        <i class="trafficDetailHeading" style="font-weight:normal !important;">{{subdetail.venueSubDetailDesc}}</i>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="TrafficInfoDescDiv">
-                                <div id="venueInfo" class="subDetails">
-                                    <span>{{venueInfoSubDetail.venueSubDetailDesc}}</span>
-                                </div>
-                            </div>
-                        </div>
+                       </div><br />                        
                     </ion-content>
                 </ion-tab>
                 <ion-tab title="BARS/FOOD" ng-click="selectTab(2)">
