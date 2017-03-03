@@ -8,6 +8,8 @@
     /* @ngInject */
     function eventMapViewCtrl($scope, $stateParams, deviceDetector, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER) {
         /* jshint validthis: true */
+        var detailItem = {};
+        $scope.venueInfoSubDetail = [];
         var self = this;
         var baseImagePath = SERVER.hostName + "c/document_library/get_file";
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 14, control: {} };
@@ -728,8 +730,8 @@
                              '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
                                  '<div class="list">' +
                                  '<span class="range"><img src="../img/map_icons/parking.svg"><p>$0 - $20</p></span>' +
-                                 '<span class="range"><img src="../img/map_icons/parking.svg"><p>$21 - $45</p></span>' +
-                                 '<span class="range"><img src="../img/map_icons/parking.svg"><p>$46 and above</p></span>' +
+                                 '<span class="range"><img src="../img/map_icons/parking_green.svg"><p>$21 - $45</p></span>' +
+                                 '<span class="range"><img src="../img/map_icons/parking_red.svg"><p>$46 and above</p></span>' +
                                  '</div>' +
                              '</ion-content>' +
                         '</ion-popover-view>';
@@ -1022,19 +1024,23 @@
         $scope.setMarkers = function () {
             if (!$scope.isMapMarkersSet) {
                 var tempObject = {};
-                var subDetail = {};
+                var subDetailArray = {};
+                var subDetailsArray = {};
                 var ImgObj = [];
                 $scope.flaskUsDetails = [];
                 angular.forEach($scope.eventDetails, function (value, index) {
                     tempObject = {};
-                    subDetail = {};
+                    subDetailArray = {};
+                    subDetailsArray = {};
                     ImgObj = []
                     ImgObj = angular.fromJson(value.DetailImages);
                     value = angular.fromJson(value);
                     $scope.veueInfoSubDetail = value.VenueSubDetails;
                     for (var i = 0; i < $scope.veueInfoSubDetail.length; i++) {
                         $scope.subDetail[i] = $scope.veueInfoSubDetail[i].SubDetail;
-                        subDetail = angular.fromJson($scope.subDetail[i]);
+                    }
+                    for (var j = 0; j < $scope.subDetail.length;j++){
+                        subDetailArray[j] = angular.fromJson($scope.subDetail[j]);
                     }
                     tempObject = angular.fromJson(value.Detail);
                     tempObject.id = index;
@@ -1046,10 +1052,10 @@
                                     tempObject.icon = 'img/map_icons/parking.svg';
                                 }
                                 else if (tempObject.cost >= 21 && tempObject.cost <= 45) {
-                                    tempObject.icon = 'img/map_icons/icon_bar.png';
+                                    tempObject.icon = 'img/map_icons/parking_green.svg';
                                 }
                                 else if (tempObject.cost >= 46) {
-                                    tempObject.icon = 'img/map_icons/icon_liquor.png';
+                                    tempObject.icon = 'img/map_icons/parking_red.svg';
                                 }
                                 $scope.parkingMarkers.push(tempObject);
                                 $scope.searchParkingMarkers = $scope.parkingMarkers;
@@ -1059,8 +1065,10 @@
                                 $scope.searchBarMarkers = $scope.barMarkers;
                             }
                         } else if ("Traffic" == tempObject.infoTypeCategoryName) {
+                            var trafficInfoSubDetail = { "trafficInfoSubDetail": subDetailArray };
+                            _.merge(tempObject, trafficInfoSubDetail);
                             $scope.trafficDetails.push(tempObject);
-                            $scope.trafficDetails.push(subDetail);
+                            console.log($scope.trafficDetails);
                         } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
                             if (ImgObj.length != 0) {
                                 tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
@@ -1110,8 +1118,16 @@
                                 I have created a directive to compile prepared  href because ng-click will not be bind by ng-bind-html*/
                             })
                             tempObject.infoDesc = $scope.temp.html();
+                            var subDetailLength = Object.keys(subDetailArray).length;
+                            for (var i = 0; i < subDetailLength; i++) {
+                                if (tempObject.venueDetailId == subDetailArray[i].venueDetailId) {
+                                    subDetailsArray = subDetailArray[i];
+                                }
+                            }
+                            var venueInfoSubDetail = { "venueInfoSubDetail": subDetailsArray };
+                            _.merge(tempObject, venueInfoSubDetail);
                             $scope.venueInfoDetail.push(tempObject);
-                            $scope.venueInfoDetail.push(subDetail);
+                            console.log(tempObject);
                         }
                         else if ("Getting home" == tempObject.infoTypeCategoryName) {
                             $scope.gettingHomeDetail.push(tempObject);
