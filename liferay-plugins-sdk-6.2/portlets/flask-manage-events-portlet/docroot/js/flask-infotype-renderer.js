@@ -29,6 +29,12 @@ _infoTypeRenderer.getRenderer = function(type) {
 	case "tickets":
 		renderer = _infoTypeRenderer.INFO_RENDERER.TICKETS;
 		break;
+	case "traffic":
+		renderer = _infoTypeRenderer.INFO_RENDERER.TRAFFIC;
+		break;
+	case "venue info":
+		renderer = _infoTypeRenderer.INFO_RENDERER.VENUE_INFO;
+		break;
 	case "supplies":
 	case "flask us":
 	default:
@@ -65,7 +71,9 @@ _infoTypeRenderer.fnBuildHtml = function(Obj, Type) {
 		case "editor":
 			return _infoTypeRenderer.fnBuildEditor(item.attr);
 			break;
-
+		case "subdetails":
+			return _infoTypeRenderer.fnBuildSubDetails(item.attr, Type);
+			break;
 		case "upload":
 			return _infoTypeRenderer.fnBuildUpload(item.attr, Type);
 			break;
@@ -288,6 +296,44 @@ _infoTypeRenderer.fnBuildEditor = function(Obj) {
 
 }
 
+_infoTypeRenderer.fnBuildSubDetails = function(Obj, Type) {
+	Type = Type.charAt(0).toUpperCase() + Type.slice(1);
+	var label = Type + Obj[0].caption;
+	var objFormHeight = $('<div/>', {
+		'class' : 'divHeight'
+	}).appendTo($(formArea));
+	var objControlLable = $('<label/>', {
+		'class' : 'control-label',
+	}).appendTo(objFormHeight);
+	$(objControlLable).html(label);
+	for(var i=1; i<=5; i++){
+		var objFormGroup = $('<div/>', {
+			'class' : 'control-group'
+		}).appendTo($(objFormHeight));
+		var objControls = $('<div/>', {
+			'class' : 'controls'
+		}).appendTo(objFormGroup);
+		$('<input/>', {
+			'type' : 'Text',
+			'id' : Obj[0].id+i,
+			'placeholder' : Obj[0].placeholder,
+			'maxlength' : Obj[0].maxlength,
+			'class' : 'input-medium sub-detail-text-box'
+		}).appendTo(objControls);
+		$('<textarea/>', {
+			'id' : Obj[0].id1+i,
+			'placeholder' : Obj[0].placeholder1,
+			'maxlength' : Obj[0].maxlength1,
+			'class' : 'Text-Area'
+		}).appendTo(objControls);
+	}
+	$('<input/>', {
+		'type' : 'button',
+		'id' : 'Add5More',
+		'value' : 'Add Rows',
+		'class' : 'btn btn-info clsAdd5More'
+	}).appendTo($(formArea));
+}
 /* Dynamic content type generation logic [End] */
 _infoTypeRenderer.INFO_RENDERER = {
 	GENERAL : [ {// GENERAL
@@ -339,7 +385,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "70",
 			"Class" : ""
 		} ]
-	},/* {
+	}, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -349,7 +395,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	},*/ {
+	}, {
 		"type" : "upload",
 		"attr" : [ {
 			"caption" : "Upload Pictures",
@@ -429,7 +475,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value" : "Yes",
 			"items" : [ "Yes", "No" ]
 		} ]
-	}/*, {
+	}, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -439,7 +485,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	}*/ ],
+	} ],
 	TRAFFIC : [ {// TRAFFIC
 		"type" : "text",
 		"attr" : [ {
@@ -450,6 +496,18 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "70",
 			"Class" : ""
 		} ]
+	},{
+		"type" : "subdetails",
+		"attr" : [ {
+			"caption" : " Details",
+			"id" : "subDetailTitle",
+			"placeholder" : "Enter Title",
+			"maxlength" : "70",
+			"id1" : "subDetailDesc",
+			"placeholder1" : "Enter Description",
+			"maxlength1" : "255",
+			/*"Class" : "input-medium sub-detail-text-box"*/
+		} ]
 	}/*, {
 		"type" : "editor",
 		"attr" : [ {
@@ -461,6 +519,47 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"Class" : ""
 		} ]
 	}*/ ],
+	VENUE_INFO : [ {//VENUE_INFO
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Name",
+			"id" : "infoTitle",
+			"value" : "",
+			"placeholder" : "Enter title here",
+			"maxlength" : "70",
+			"Class" : ""
+		} ]
+	},{
+		"type" : "checkbox",
+		"attr" : [ {
+			"id" : "showDescription",
+			"name" : "showDescription",
+			"caption" : "Show Desciptions",
+			"value" : "1",
+			"checked" : "checked"
+		} ]
+	}, {
+		"type" : "upload",
+		"attr" : [ {
+			"caption" : "Upload Pictures",
+			"action" : $("#imgActionUrl").val(),
+			"id" : "eventId",
+			"value" : $("#eventId").val(),
+			"Class" : ""
+		} ]
+	},{
+		"type" : "subdetails",
+		"attr" : [ {
+			"caption" : " Details",
+			"id" : "subDetailTitle",
+			"placeholder" : "Enter Title",
+			"maxlength" : "70",
+			"id1" : "subDetailDesc",
+			"placeholder1" : "Enter Description",
+			"maxlength1" : "255",
+			/*"Class" : "input-medium sub-detail-text-box"*/
+		} ]
+	}],
 	FOOD : [ {// FOOD
 		"type" : "text",
 		"attr" : [ {
@@ -570,7 +669,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value" : $("#eventId").val(),
 			"Class" : ""
 		} ]
-	}/*, {
+	}, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -580,7 +679,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	}*/ ],
+	} ],
 	LIQUOR : [ {// LIQUOR
 		"type" : "text",
 		"attr" : [ {
@@ -611,7 +710,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "10",
 			"Class" : ""
 		} ]
-	}/*, {
+	}, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -621,7 +720,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	}*/ ],
+	} ],
 	SAFETY : [ {
 		"type" : "text",
 		"attr" : [ {
@@ -662,7 +761,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	}/*, {
+	}, {
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
@@ -672,7 +771,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "255",
 			"Class" : ""
 		} ]
-	}*/ ],
+	} ],
 	GETTING_HOME : [ {
 		"type" : "text",
 		"attr" : [ {

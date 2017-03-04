@@ -3,7 +3,7 @@ var dropZone;
 var JsonObj;
 var JsonEventDetails;
 var iSelected;
-
+var noOfInvitations = 5;
 
 $(document).ready(function() {
 	formArea = $("#contentTypeForm"); // Parent Div
@@ -20,11 +20,19 @@ $(document).ready(function() {
 	                	//,{ input: '#infoDesc', message: 'Info Description is required!', action: 'keyup, blur', rule: 'required' }
 	               ]
 	    });
+		$(".clsAdd5More").click(function(){
+			add5moreRows();
+		});
 	});
 });
 
 function addDetailsClickHandlers() {
 	eventDetailForm = $("#eventForm");
+	
+	$(".clsAdd5More").click(function(){
+		add5moreRows();
+	});
+	
 	/*	Initialize display elements*/
 	$(".cssVdSave").click(function() {
 		$(this).attr("disabled","disabled");
@@ -137,6 +145,18 @@ function loadEventDetailsData(eventId) {
 	$("#action-msg-warning").hide();
 }
 
+function add5moreRows(){
+	for(var i=noOfInvitations+1 ; i <= noOfInvitations+5;i++){
+		var invitationDiv = '<div class="control-group">';
+		invitationDiv = invitationDiv + '<div class="controls">';
+		invitationDiv = invitationDiv + '<input id="subDetailTitle'+i+'" name="subDetailTitle'+i+'" type="text" placeholder="Enter Title" class="input-medium sub-detail-text-box">';
+		invitationDiv = invitationDiv + '<textarea id="subDetailDesc'+i+'" name="subDetailDesc'+i+'" placeholder="Enter Description" class="Text-Area"></textarea>';
+		invitationDiv = invitationDiv + "</div></div>";
+		$(".divHeight").append(invitationDiv);
+	}
+	noOfInvitations +=5;
+}
+
 function contextMenuHandlerDetails(menuItemText, rowData) {
 	var args = event.args;
 	if (menuItemText  == "Edit") {
@@ -197,6 +217,28 @@ function saveEventDetails() {
 				
 				return formData;
 			});
+	params.eventSubDetails = [];
+	for(var i=1; i <=noOfInvitations; i++){
+		var record ={};
+		var title ="";
+		var desc ="";
+		if($("#eventDetailsForm #subDetailTitle"+i).val() == "" || $("#eventDetailsForm #subDetailTitle"+i).val() == null){
+			title = null;
+		}else{
+			title = $.trim($("#eventDetailsForm #subDetailTitle"+i).val());
+		}
+		if($("#eventDetailsForm #subDetailDesc"+i).val() == "" || $("#eventDetailsForm #subDetailDesc"+i).val() == null){
+			desc = null;
+		}else{
+			desc = $.trim($("#eventDetailsForm #subDetailDesc"+i).val());
+		}
+		if((title == "" || title == null) && (desc == "" || desc == null)){
+		}else{
+			record["title"] = title;
+			record["desc"] = desc;
+			params.eventSubDetails.push(record);
+		}
+	}
 	var flaskRequest = new Request();
 	var url = ""
 		if (params.eventDetailId == 0) {
@@ -225,6 +267,41 @@ function saveEventDetails() {
 					_flaskLib.showErrorMessage('action-msg', _eventDetailModel.MESSAGES.DETAIL_ERROR);
 				});
 	$("#slides").html("");
+}
+
+function getEventSubDetails(eventDetailId) {
+	params = {
+		'eventDetailId' : eventDetailId
+	};
+	$( ".divHeight" ).empty();
+	noOfInvitations = 0;
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(
+			_eventDetailModel.SERVICE_ENDPOINTS.GET_EVENT_SUB_DETAIL_BY_EVENT_DETAIL_ID, params,
+			function(data) {
+				$.each(data, function(idx, obj) {
+					fnRenderEventSubDetails(idx+1, obj.eventSubDetailTitle, obj.eventSubDetailDesc);
+				});
+			}, function(data) {
+				console.log(data);
+			});
+} 
+
+function fnRenderEventSubDetails(idx, eventSubDetailTitle, eventSubDetailDesc){
+	var titleid="#subDetailTitle"+idx;
+	var descid="#subDetailDesc"+idx;
+	if($(titleid).length > 0){
+		$(titleid).val(eventSubDetailTitle);
+		$(descid).text(eventSubDetailDesc);
+	}else{
+		var invitationDiv = '<div class="control-group">';
+		invitationDiv = invitationDiv + '<div class="controls">';
+		invitationDiv = invitationDiv + '<input id="subDetailTitle'+idx+'" name="subDetailTitle'+idx+'" type="text" value="'+eventSubDetailTitle+'" placeholder="Enter Title" class="input-medium sub-detail-text-box">';
+		invitationDiv = invitationDiv + '<textarea id="subDetailDesc'+idx+'" name="subDetailDesc'+idx+'" placeholder="Enter Description" class="Text-Area">'+eventSubDetailDesc+'</textarea>';
+		invitationDiv = invitationDiv + "</div></div>";
+		$(".divHeight").append(invitationDiv);
+	}
+	noOfInvitations = idx;
 }
 
 function destroyJQEditor(){
@@ -283,6 +360,7 @@ function editEventDetail(rowData) {
 			$('#addrLine1').val(rowData.addrLine1);
 			$('#jqxEditor').val(rowData.infoDesc);
 		}, 500);
+		getEventSubDetails(rowData.eventDetailId);
 		fnGetEventDetailImages(rowData.eventDetailId,container, true);
 }
 

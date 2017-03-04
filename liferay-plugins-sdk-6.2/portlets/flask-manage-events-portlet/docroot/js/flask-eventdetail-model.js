@@ -16,7 +16,8 @@ _eventDetailModel.SERVICE_ENDPOINTS = {
 	DELETE_FILE_BY_TITLE		: "/dlapp/delete-file-entry-by-title",
 	GET_EVENTDETAIL_IMAGES		: "/flask-rest-events-portlet.event/get-event-detail-images",
 	GET_IMAGE_BY_UUID_GROUPID	: "/dlapp/get-file-entry-by-uuid-and-group-id",
-	DELETE_EVENTDETAIL_IMAGE	: "/flask-rest-events-portlet.event/delete-event-detail-image"
+	DELETE_EVENTDETAIL_IMAGE	: "/flask-rest-events-portlet.event/delete-event-detail-image",
+	GET_EVENT_SUB_DETAIL_BY_EVENT_DETAIL_ID		: "/flask-rest-events-portlet.eventsubdetail/get-event-sub-detail-by-event-detail-id"
 };
 
 _eventDetailModel.DATA_MODEL= {

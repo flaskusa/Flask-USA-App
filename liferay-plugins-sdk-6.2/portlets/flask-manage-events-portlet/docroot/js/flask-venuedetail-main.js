@@ -264,6 +264,9 @@ $(document).ready(
 							// 'required' }
 							]
 						});
+						$(".clsAdd5More").click(function(){
+							add5moreRows();
+						});
 					});
 		});
 
@@ -332,12 +335,12 @@ function saveVenueDetails() {
 		if ($('#venueImages').find('.dz-image').length > 0) {
 			fnSaveImages(data.venueDetailId, data.infoType);
 		} else {
-			$('#jqxEditor').jqxEditor('destroy');
 			$('#venueDetailsForm').hide();
 			$('#venueDetailsDataTable').show();
 			$("#venueDetailId").val(0);
 			$("#infoTypeCategoryId").val(0);
 			loadVenueDetailsData(data.venueId);
+			$('#jqxEditor').jqxEditor('destroy');
 		}
 	}, function(data) {
 		_flaskLib.showErrorMessage('action-msg',
@@ -404,6 +407,7 @@ function editVenueDetail(rowData) {
 	}, 500);
 	// fnShowSlider($('#venueForm
 	// #venueId').val(),container,rowData.venueDetailId,rowData.infoTypeId,rowData.infoTypeCategoryId);
+	getVenueSubDetails(rowData.venueDetailId);
 	fnGetVenueDetailImages(rowData.venueDetailId, container, true);
 }
 
@@ -812,6 +816,42 @@ function fnRenderImage(imageUUID, imageGroupId, container, venueDetailImageId,
 			$('.md-trigger').click();
 		});
 	}
+}
+
+
+function getVenueSubDetails(venueDetailId) {
+	params = {
+		'venueDetailId' : venueDetailId
+	};
+	$(".divHeight").empty();
+	noOfInvitations = 0;
+	var flaskRequest = new Request();
+	flaskRequest.sendGETRequest(
+			_venueDetailModel.SERVICE_ENDPOINTS.GET_VENUE_SUB_DETAIL_BY_VENUE_DETAIL_ID, params,
+			function(data) {
+				$.each(data, function(idx, obj) {
+					fnRenderVenueSubDetails(idx+1, obj.venueSubDetailTitle, obj.venueSubDetailDesc);
+				});
+			}, function(data) {
+				console.log(data);
+			});
+} 
+
+function fnRenderVenueSubDetails(idx, venueSubDetailTitle, venueSubDetailDesc){
+	var titleid="#subDetailTitle"+idx;
+	var descid="#subDetailDesc"+idx;
+	if($(titleid).length > 0){
+		$(titleid).val(venueSubDetailTitle);
+		$(descid).text(venueSubDetailDesc);
+	}else{
+		var invitationDiv = '<div class="control-group">';
+		invitationDiv = invitationDiv + '<div class="controls">';
+		invitationDiv = invitationDiv + '<input id="subDetailTitle'+idx+'" name="subDetailTitle'+idx+'" type="text" value="'+venueSubDetailTitle+'" placeholder="Enter Title" class="input-medium sub-detail-text-box">';
+		invitationDiv = invitationDiv + '<textarea id="subDetailDesc'+idx+'" name="subDetailDesc'+idx+'" placeholder="Enter Description" class="Text-Area">'+venueSubDetailDesc+'</textarea>';
+		invitationDiv = invitationDiv + "</div></div>";
+		$(".divHeight").append(invitationDiv);
+	}
+	noOfInvitations = idx;
 }
 
 function loadVenueData() {

@@ -151,51 +151,6 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 				   <div id="contentTypeForm">
 				   </div>
 				   
-				   <div class="divHeight">
-						<!-- Text input-->
-						<div class="control-group">
-						<label class="control-label" for="textinput">Venue Details </label>
-						  <div class="controls">
-						    <input id="subDetailTitle1" name="subDetailTitle1" type="text" placeholder="Enter Title" class="input-medium sub-detail-text-box">
-						    <textarea id="subDetailDesc1" name="subDetailDesc1" placeholder="Enter Description" class="Text-Area"></textarea>
-						  </div>
-						</div>
-						
-						<!-- Text input-->
-						<div class="control-group">
-						  <div class="controls">
-						    <input id="subDetailTitle2" name="subDetailTitle2" type="text" placeholder="Enter Title" class="input-medium sub-detail-text-box">
-						    <textarea id="subDetailDesc2" name="subDetailDesc2" placeholder="Enter Description" class="Text-Area"></textarea>
-						  </div>
-						</div>
-						<!-- Text input-->
-						<div class="control-group">
-						  <div class="controls">
-						    <input id="subDetailTitle3" name="subDetailTitle3" type="text" placeholder="Enter Title" class="input-medium sub-detail-text-box">
-						    <textarea id="subDetailDesc3" name="subDetailDesc3" placeholder="Enter Description" class="Text-Area"></textarea>
-						  </div>
-						</div>
-						<!-- Text input-->
-						<div class="control-group">
-						  <div class="controls">
-						    <input id="subDetailTitle4" name="subDetailTitle4" type="text" placeholder="Enter Title" class="input-medium sub-detail-text-box">
-						    <textarea id="subDetailDesc4" name="subDetailDesc4" placeholder="Enter Description" class="Text-Area"></textarea>
-						  </div>
-						</div>
-						<!-- Text input-->
-						<div class="control-group">
-						  <div class="controls">
-						    <input id="subDetailTitle5" name="subDetailTitle5" type="text" placeholder="Enter Title" class="input-medium sub-detail-text-box">
-						    <textarea id="subDetailDesc5" name="subDetailDesc5" placeholder="Enter Description" class="Text-Area"></textarea>
-						  </div>
-						</div>
-					</div>
-					<div class="control-group">
-						<div class="controls">
-							<input id="Add5More" class="btn btn-info clsAdd5More" type="button" title="Add 5 more rows to invite friends" value="Add Rows" />
-						</div>
-					</div>
-				   
 				  <input id="venueId" type="hidden" value="0">
 				  <input id="infoTypeId" type="hidden" value="1">
 				  <input id="venueDetailId" type="hidden" name="venueDetailId" value="0">
