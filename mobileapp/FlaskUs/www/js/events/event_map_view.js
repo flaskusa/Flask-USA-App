@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', 'deviceDetector', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, deviceDetector, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER) {
         /* jshint validthis: true */
         var detailItem = {};
         $scope.venueInfoSubDetail = [];
@@ -25,8 +25,8 @@
         $scope.preEventSearch = false;
         $scope.showSearchBox = { "value": true };
         $scope.showsearchDrop = { "value": true };
-        $scope.deviceDetector = deviceDetector;
-        console.log($scope.deviceDetector);
+        $scope.deviceInformation = ionic.Platform.device();
+        $scope.deviceModel = $scope.deviceInformation.model;
         $scope.map.events["click"] = function () {
             return $scope.closeOtherInfoWindows('mapClick');
         };
@@ -1068,13 +1068,12 @@
                             var subDetailLength = Object.keys(subDetailArray).length;
                             for (var i = 0; i < subDetailLength; i++) {
                                 if (tempObject.venueDetailId == subDetailArray[i].venueDetailId) {
-                                    subDetailsArray = subDetailArray[i];
+                                    subDetailsArray[i] = subDetailArray[i];
                                 }
                             }
                             var trafficInfoSubDetail = { "trafficInfoSubDetail": subDetailsArray };
                             _.merge(tempObject, trafficInfoSubDetail);
                             $scope.trafficDetails.push(tempObject);
-                            console.log($scope.trafficDetails);
                         } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
                             if (ImgObj.length != 0) {
                                 tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
@@ -1095,7 +1094,7 @@
                         }
                         else if ("Venue Map" == tempObject.infoTypeCategoryName) {
                             if (ImgObj.length != 0) {
-                                EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceDetector.device).then(function (respData) {
+                                EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceModel).then(function (respData) {
                                     if (respData.length != 0) {
                                         tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
                                     }
@@ -1127,13 +1126,12 @@
                             var subDetailLength = Object.keys(subDetailArray).length;
                             for (var i = 0; i < subDetailLength; i++) {
                                 if (tempObject.venueDetailId == subDetailArray[i].venueDetailId) {
-                                    subDetailsArray = subDetailArray[i];
+                                    subDetailsArray[i] = subDetailArray[i];
                                 }
                             }
                             var venueInfoSubDetail = { "venueInfoSubDetail": subDetailsArray };
                             _.merge(tempObject, venueInfoSubDetail);
                             $scope.venueInfoDetail.push(tempObject);
-                            console.log(tempObject);
                         }
                         else if ("Getting home" == tempObject.infoTypeCategoryName) {
                             $scope.gettingHomeDetail.push(tempObject);

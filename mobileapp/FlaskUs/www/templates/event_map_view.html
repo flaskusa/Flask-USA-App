@@ -12,13 +12,12 @@
     <div class="bar bar-subheader groupSearch" ng-if="searchBox.showBox">
         <div class="row searchrow">
             <div class="col col-100 col-center searchrow">
-                <input type="text" name="unitaccNumber"  id="inputFilter" placeholder="Search..." class="searchboxArea" ng-model="searchObj.searchString" ng-keydown="onSearchKeyDown()" />
+                <input type="text" name="unitaccNumber" id="inputFilter" placeholder="Search..." class="searchboxArea" ng-model="searchObj.searchString" ng-keydown="onSearchKeyDown()" />
             </div>
         </div>
     </div>
-
     <div class="dropdown" ng-if="searchObj.searchString.length != 0 && searchBox.showBox==true && showsearchDrop.value==true">
-        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchParkingMarker.length==0}"ng-if="preEventSearch==true && selectedIndex==0">
+        <ul class="dropdown-content" ng-class="{'whenNoMatchFound':searchParkingMarker.length==0}" ng-if="preEventSearch==true && selectedIndex==0">
 
             <li class="searchParkingMarker" ng-repeat="searchItem in searchParkingMarker  = (searchParkingMarkers | filter:searchObj.searchString) track by $index" ng-click="setNewMarker(searchItem,$index)">
                 {{searchItem.infoTitle}}
@@ -93,53 +92,53 @@
             </table>
         </script>
 
-<script type="text/ng-template" id="markerParkingInfo.tpl.html">
-    <div id="iw-container">
-        <div class="iw-title">
-            <table class="iw-fixed-title" >
-                <tr>
-                    <td class="iw-fixed-title">
-                        <div class="parent_div">
-                            <div class="text_div">{{parameter.infoTitle}}</div>
-                        </div>
-                    </td>
-                    <td rowspan="2" class="parkingInfo">
-                        <div class="iw-content-toggle map_info_img">
-                            <img src="img/map_icons/circle_arrow_left.svg">
-                        </div>
-					</td>
-                </tr>
-                <tr>
-                    <td class="iw-fixed-title">
-                        <div class="iw-sub-title">
-                            {{parameter.subTitle}}
-                        </div>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div id="iw-content">
-            <div>
-                <table class="iw-fixed-title">
-                    <tr>
-                        <td colspan="2">
-                            <div class="alignLeft">
-                                <span class="iw-sub-title1" ng-bind="parameter.addrLine1"> </span>
-                                <div class="biggerFont"> {{parameter.cost}}</div>
-                                <div class="emailText smallerFont"> {{parameter.infoShortDesc}}</div>
-                                <div ng-bind-html="parameter.infoDesc" class="placedetail_div"> </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="iw-content-icon"><img src="img/map_icons/take_me_there.svg"> </td>
-                        <td class="iw-content-text"> <a id="iwTakeMeThere"> Take me there </a> </td>
-                    </tr>
-                </table>
+        <script type="text/ng-template" id="markerParkingInfo.tpl.html">
+            <div id="iw-container">
+                <div class="iw-title">
+                    <table class="iw-fixed-title">
+                        <tr>
+                            <td class="iw-fixed-title">
+                                <div class="parent_div">
+                                    <div class="text_div">{{parameter.infoTitle}}</div>
+                                </div>
+                            </td>
+                            <td rowspan="2" class="parkingInfo">
+                                <div class="iw-content-toggle map_info_img">
+                                    <img src="img/map_icons/circle_arrow_left.svg">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="iw-fixed-title">
+                                <div class="iw-sub-title">
+                                    {{parameter.subTitle}}
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <div id="iw-content">
+                    <div>
+                        <table class="iw-fixed-title">
+                            <tr>
+                                <td colspan="2">
+                                    <div class="alignLeft">
+                                        <span class="iw-sub-title1" ng-bind="parameter.addrLine1"> </span>
+                                        <div class="biggerFont"> {{parameter.cost}}</div>
+                                        <div class="emailText smallerFont"> {{parameter.infoShortDesc}}</div>
+                                        <div ng-bind-html="parameter.infoDesc" class="placedetail_div"> </div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="iw-content-icon"><img src="img/map_icons/take_me_there.svg"> </td>
+                                <td class="iw-content-text"> <a id="iwTakeMeThere"> Take me there </a> </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
-        </div>
-    </div>
-</script>
+        </script>
         <script type="text/ng-template" id="markerBarInfo.tpl.html">
             <div id="iw-container">
                 <div class="iw-title">
@@ -259,30 +258,27 @@
                 <ion-tab title="TRAFFIC" ng-click="selectTab(2)">
                     <div class="traffic_div" ng-if="selectedIndex == 2">
                         <ion-content overflow-scroll="false" class="traffic_ion_content">
-                            <div class="traffic_details" ng-repeat="trafficDetail in trafficDetails">
+                            <div class="traffic_details" ng-repeat="data in trafficDetails">
                                 <div align="center">
                                     <div class="taffic_heading_div">
-                                        <i class="trafficDetailHeading">{{trafficDetail.infoTitle}}</i>
+                                        <i class="trafficDetailHeading">{{data.infoTitle}}</i>
                                     </div>
                                 </div>
                                 <div class="TrafficInfoDescDiv">
-                                    <div id="traffic" class="" ng-bind-html="trafficDetail.infoDesc">
+                                    <div id="traffic" class="" ng-bind-html="data.infoDesc">
                                     </div>
                                 </div>
-                                
-                                </div>
-                            <div ng-repeat="trafficSubDetail in trafficDetails" class="trafficSubDetail">
-                                <div align="center">
-                                    <div class="taffic_heading_div">
-                                        <i class="trafficDetailHeading">{{trafficSubDetail.venueSubDetailTitle}}</i>
+                                <div ng-repeat="subdetail in data.trafficInfoSubDetail">
+                                    <div>
+                                        <div class="TrafficInfoDescDiv">
+                                            <div class="subDetails">
+                                                <i class="trafficSubDetailHeading" ng-if="subdetail.venueSubDetailTitle != ''">{{subdetail.venueSubDetailTitle}}-</i>
+                                                <i class="traffic" style="font-weight:normal !important;">{{subdetail.venueSubDetailDesc}}</i>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="TrafficInfoDescDiv">
-                                    <div id="traffic" class="subDetails">
-                                        <span>{{trafficSubDetail.venueSubDetailDesc}}</span>
-                                    </div>
-                                </div>
-                            </div>
+                            </div><br />
                         </ion-content>
                     </div>
                 </ion-tab>
@@ -365,16 +361,16 @@
                                 </div>
                             </div>
                             <div ng-repeat="subdetail in data.venueInfoSubDetail">
-                                <div align="center">
+                                <div>
                                     <div class="TrafficInfoDescDiv">
-                                        <div class="subDetails" ng-if="subdetail.venueSubDetailTitle != ''">
-                                            <i class="trafficDetailHeading">{{subdetail.venueSubDetailTitle}}</i><br />
-                                        </div>
-                                        <i class="trafficDetailHeading" style="font-weight:normal !important;">{{subdetail.venueSubDetailDesc}}</i>
+                                        <div class="subDetails">
+                                            <i class="trafficDetailHeading" ng-if="subdetail.venueSubDetailTitle != ''">{{subdetail.venueSubDetailTitle}}-</i>
+                                            <i class="trafficSubDetailHeading" style="font-weight:normal !important;">{{subdetail.venueSubDetailDesc}}</i>
+                                        </div>   
                                     </div>
                                 </div>
                             </div>
-                       </div><br />                        
+                        </div><br />
                     </ion-content>
                 </ion-tab>
                 <ion-tab title="BARS/FOOD" ng-click="selectTab(2)">

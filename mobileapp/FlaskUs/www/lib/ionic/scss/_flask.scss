@@ -2810,6 +2810,13 @@ div .manage_event_default_Image{
   text-transform: uppercase;
   width: 80%;
 }
+
+.trafficSubDetailHeading{
+  font-weight: 700;
+  font-size: 14px;
+  width: 80%;
+}
+
 .TrafficInfoDescDiv{
   width:80%;
   margin-left: 30px;
@@ -3195,11 +3202,12 @@ span .span_icon_supply{
 
 /*venueSubDetails*/
 .subDetails{
-    font-family: 'Avenir Next';
-    font-weight: 500;
-    font-size: 14px;
-    margin-top:12%;
     background: url(../img/flask_icons/star.svg) no-repeat left top;
+    background-size: 20px 20px;
+    background-repeat: no-repeat;
+    padding-left: 30px;
+    padding-top: 1px;
+    overflow: visible;
 }
 
 .trafficSubDetail{
@@ -3323,4 +3331,9 @@ div#locationMarker {
 
 .chipStrings{
     text-transform:uppercase;font-size:11px;
+}
+
+/*IOS Specific*/
+.platform-ios.platform-cordova:not(.fullscreen) .has-subheader{
+    top: 17px;
 }
