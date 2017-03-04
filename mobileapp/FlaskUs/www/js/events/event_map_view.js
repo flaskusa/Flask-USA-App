@@ -1035,12 +1035,21 @@
                     ImgObj = []
                     ImgObj = angular.fromJson(value.DetailImages);
                     value = angular.fromJson(value);
-                    $scope.veueInfoSubDetail = value.VenueSubDetails;
-                    for (var i = 0; i < $scope.veueInfoSubDetail.length; i++) {
-                        $scope.subDetail[i] = $scope.veueInfoSubDetail[i].SubDetail;
+                    if (value.VenueSubDetails != undefined) {
+                        for (var i = 0; i < value.VenueSubDetails.length; i++) {
+                            $scope.subDetail[i] = value.VenueSubDetails[i].SubDetail;
+                        }
+                        for (var j = 0; j < $scope.subDetail.length;j++){
+                            subDetailArray[j] = angular.fromJson($scope.subDetail[j]);
+                        }
                     }
-                    for (var j = 0; j < $scope.subDetail.length;j++){
-                        subDetailArray[j] = angular.fromJson($scope.subDetail[j]);
+                    else {
+                        for (var i = 0; i < value.EventSubDetails.length; i++) {
+                            $scope.subDetail[i] = value.EventSubDetails[i].SubDetail;
+                        }
+                        for (var j = 0; j < $scope.subDetail.length; j++) {
+                            subDetailArray[j] = angular.fromJson($scope.subDetail[j]);
+                        }
                     }
                     tempObject = angular.fromJson(value.Detail);
                     tempObject.id = index;
