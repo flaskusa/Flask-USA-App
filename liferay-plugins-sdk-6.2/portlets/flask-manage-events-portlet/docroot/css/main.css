@@ -327,3 +327,17 @@ zoom: 1.8 !important;
 	    overflow-x: hidden;		
 	}
 }
+
+.label-small{
+	width:10%;
+	float:left;
+	
+}
+.upload-small{
+	width:90%;
+	float:left;
+}
+.bold {
+    font-weight: 700 !important;
+    padding-top: 85px;
+}

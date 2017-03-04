@@ -35,6 +35,9 @@ _infoTypeRenderer.getRenderer = function(type) {
 	case "venue info":
 		renderer = _infoTypeRenderer.INFO_RENDERER.VENUE_INFO;
 		break;
+	case "venue map":
+		renderer = _infoTypeRenderer.INFO_RENDERER.VENUE_MAP;
+		break;
 	case "supplies":
 	case "flask us":
 	default:
@@ -73,6 +76,9 @@ _infoTypeRenderer.fnBuildHtml = function(Obj, Type) {
 			break;
 		case "subdetails":
 			return _infoTypeRenderer.fnBuildSubDetails(item.attr, Type);
+			break;
+		case "label":
+			return _infoTypeRenderer.fnBuildLabel(item.attr);
 			break;
 		case "upload":
 			return _infoTypeRenderer.fnBuildUpload(item.attr, Type);
@@ -162,11 +168,25 @@ _infoTypeRenderer.fnBuildChecked = function(Obj) {
 	}).appendTo(objControls);
 }
 
+_infoTypeRenderer.fnBuildLabel = function(Obj) {
+	var myclass = "form-group " +Obj[0].Class;
+	var myclass1 = "control-label " +Obj[0].Class1;
+	var objFormGroup = $('<div/>', {
+		'class' : myclass
+	}).appendTo($(formArea));
+	var objControlLable = $('<label/>', {
+		'class' : myclass1,
+		'id' : Obj[0].id
+	}).appendTo(objFormGroup);
+	$(objControlLable).html(Obj[0].caption);
+}
+
 _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 	var strSelected = "";
 	dropZone = "";
+	var myclass = "form-group " +Obj[0].Class;
 	var objFormGroup = $('<div/>', {
-		'class' : 'form-group'
+		'class' : myclass
 	}).appendTo($(formArea));
 	var objControlLable = $('<label/>', {
 		'class' : 'control-label',
@@ -558,6 +578,43 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"placeholder1" : "Enter Description",
 			"maxlength1" : "255",
 			/*"Class" : "input-medium sub-detail-text-box"*/
+		} ]
+	}],
+	VENUE_MAP : [ {//VENUE_MAP
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Name",
+			"id" : "infoTitle",
+			"value" : "",
+			"placeholder" : "Enter title here",
+			"maxlength" : "70",
+			"Class" : ""
+		} ]
+	},{
+		"type" : "checkbox",
+		"attr" : [ {
+			"id" : "showDescription",
+			"name" : "showDescription",
+			"caption" : "Show Desciptions",
+			"value" : "1",
+			"checked" : "checked"
+		} ]
+	}, {
+		"type" : "label",
+		"attr" : [ {
+			"caption" : "Galaxy S7",
+			"id" : "Galaxy_S7",
+			"Class" : "label-small",
+			"Class1" : "bold"
+		} ]
+	}, {
+		"type" : "upload",
+		"attr" : [ {
+			"caption" : "Upload Pictures",
+			"action" : $("#imgActionUrl").val(),
+			"id" : "eventId",
+			"value" : $("#eventId").val(),
+			"Class" : "upload-small"
 		} ]
 	}],
 	FOOD : [ {// FOOD
