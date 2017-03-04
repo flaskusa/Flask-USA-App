@@ -1065,7 +1065,13 @@
                                 $scope.searchBarMarkers = $scope.barMarkers;
                             }
                         } else if ("Traffic" == tempObject.infoTypeCategoryName) {
-                            var trafficInfoSubDetail = { "trafficInfoSubDetail": subDetailArray };
+                            var subDetailLength = Object.keys(subDetailArray).length;
+                            for (var i = 0; i < subDetailLength; i++) {
+                                if (tempObject.venueDetailId == subDetailArray[i].venueDetailId) {
+                                    subDetailsArray = subDetailArray[i];
+                                }
+                            }
+                            var trafficInfoSubDetail = { "trafficInfoSubDetail": subDetailsArray };
                             _.merge(tempObject, trafficInfoSubDetail);
                             $scope.trafficDetails.push(tempObject);
                             console.log($scope.trafficDetails);
