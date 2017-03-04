@@ -89,6 +89,12 @@ public class VenueSubDetailServiceWrapper implements VenueSubDetailService,
 	}
 
 	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueSubDetail> getVenueSubDetailByVenueDetailId(
+		long venueDetailId) {
+		return _venueSubDetailService.getVenueSubDetailByVenueDetailId(venueDetailId);
+	}
+
+	@Override
 	public java.util.List<com.rumbasolutions.flask.model.VenueSubDetail> getAllVenueSubDetails() {
 		return _venueSubDetailService.getAllVenueSubDetails();
 	}

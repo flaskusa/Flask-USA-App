@@ -126,6 +126,21 @@ public class EventSubDetailServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.EventSubDetailSoap[] getEventSubDetailByEventDetailId(
+		long eventDetailId) throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.EventSubDetail> returnValue =
+				EventSubDetailServiceUtil.getEventSubDetailByEventDetailId(eventDetailId);
+
+			return com.rumbasolutions.flask.model.EventSubDetailSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.EventSubDetailSoap[] getAllEventSubDetails()
 		throws RemoteException {
 		try {

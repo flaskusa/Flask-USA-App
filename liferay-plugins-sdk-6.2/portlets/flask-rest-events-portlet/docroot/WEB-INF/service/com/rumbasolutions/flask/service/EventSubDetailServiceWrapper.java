@@ -89,6 +89,12 @@ public class EventSubDetailServiceWrapper implements EventSubDetailService,
 	}
 
 	@Override
+	public java.util.List<com.rumbasolutions.flask.model.EventSubDetail> getEventSubDetailByEventDetailId(
+		long eventDetailId) {
+		return _eventSubDetailService.getEventSubDetailByEventDetailId(eventDetailId);
+	}
+
+	@Override
 	public java.util.List<com.rumbasolutions.flask.model.EventSubDetail> getAllEventSubDetails() {
 		return _eventSubDetailService.getAllEventSubDetails();
 	}

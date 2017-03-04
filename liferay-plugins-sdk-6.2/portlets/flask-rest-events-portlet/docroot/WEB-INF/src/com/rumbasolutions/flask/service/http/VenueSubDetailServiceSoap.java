@@ -126,6 +126,21 @@ public class VenueSubDetailServiceSoap {
 		}
 	}
 
+	public static com.rumbasolutions.flask.model.VenueSubDetailSoap[] getVenueSubDetailByVenueDetailId(
+		long venueDetailId) throws RemoteException {
+		try {
+			java.util.List<com.rumbasolutions.flask.model.VenueSubDetail> returnValue =
+				VenueSubDetailServiceUtil.getVenueSubDetailByVenueDetailId(venueDetailId);
+
+			return com.rumbasolutions.flask.model.VenueSubDetailSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.VenueSubDetailSoap[] getAllVenueSubDetails()
 		throws RemoteException {
 		try {

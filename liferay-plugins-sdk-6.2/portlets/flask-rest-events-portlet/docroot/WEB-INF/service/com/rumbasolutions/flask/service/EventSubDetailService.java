@@ -82,6 +82,10 @@ public interface EventSubDetailService extends BaseService, InvokableService {
 		long eventSubDetailId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.EventSubDetail> getEventSubDetailByEventDetailId(
+		long eventDetailId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rumbasolutions.flask.model.EventSubDetail> getAllEventSubDetails();
 
 	public void deleteEventSubDetailById(long eventSubDetailId);

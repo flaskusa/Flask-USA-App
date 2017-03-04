@@ -91,6 +91,11 @@ public class VenueSubDetailServiceUtil {
 		return getService().getVenueSubDetailById(venueSubDetailId);
 	}
 
+	public static java.util.List<com.rumbasolutions.flask.model.VenueSubDetail> getVenueSubDetailByVenueDetailId(
+		long venueDetailId) {
+		return getService().getVenueSubDetailByVenueDetailId(venueDetailId);
+	}
+
 	public static java.util.List<com.rumbasolutions.flask.model.VenueSubDetail> getAllVenueSubDetails() {
 		return getService().getAllVenueSubDetails();
 	}

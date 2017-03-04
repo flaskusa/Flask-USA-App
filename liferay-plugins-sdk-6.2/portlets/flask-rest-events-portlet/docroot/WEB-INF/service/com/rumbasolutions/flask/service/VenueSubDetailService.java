@@ -82,6 +82,10 @@ public interface VenueSubDetailService extends BaseService, InvokableService {
 		long venueSubDetailId);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.VenueSubDetail> getVenueSubDetailByVenueDetailId(
+		long venueDetailId);
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rumbasolutions.flask.model.VenueSubDetail> getAllVenueSubDetails();
 
 	public void deletevenueSubDetailById(long venueSubDetailId);

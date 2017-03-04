@@ -52,13 +52,17 @@ public class VenueSubDetailServiceClp implements VenueSubDetailService {
 
 		_methodParameterTypes6 = new String[] { "long" };
 
-		_methodName7 = "getAllVenueSubDetails";
+		_methodName7 = "getVenueSubDetailByVenueDetailId";
 
-		_methodParameterTypes7 = new String[] {  };
+		_methodParameterTypes7 = new String[] { "long" };
 
-		_methodName8 = "deletevenueSubDetailById";
+		_methodName8 = "getAllVenueSubDetails";
 
-		_methodParameterTypes8 = new String[] { "long" };
+		_methodParameterTypes8 = new String[] {  };
+
+		_methodName9 = "deletevenueSubDetailById";
+
+		_methodParameterTypes9 = new String[] { "long" };
 	}
 
 	@Override
@@ -232,12 +236,36 @@ public class VenueSubDetailServiceClp implements VenueSubDetailService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.VenueSubDetail> getAllVenueSubDetails() {
+	public java.util.List<com.rumbasolutions.flask.model.VenueSubDetail> getVenueSubDetailByVenueDetailId(
+		long venueDetailId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] {  });
+					_methodParameterTypes7, new Object[] { venueDetailId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.VenueSubDetail>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueSubDetail> getAllVenueSubDetails() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -257,8 +285,8 @@ public class VenueSubDetailServiceClp implements VenueSubDetailService {
 	@Override
 	public void deletevenueSubDetailById(long venueSubDetailId) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8, new Object[] { venueSubDetailId });
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9, new Object[] { venueSubDetailId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -290,4 +318,6 @@ public class VenueSubDetailServiceClp implements VenueSubDetailService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
 }

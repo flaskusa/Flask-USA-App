@@ -52,13 +52,17 @@ public class VenueSubDetailServiceClpInvoker {
 
 		_methodParameterTypes107 = new String[] { "long" };
 
-		_methodName108 = "getAllVenueSubDetails";
+		_methodName108 = "getVenueSubDetailByVenueDetailId";
 
-		_methodParameterTypes108 = new String[] {  };
+		_methodParameterTypes108 = new String[] { "long" };
 
-		_methodName109 = "deletevenueSubDetailById";
+		_methodName109 = "getAllVenueSubDetails";
 
-		_methodParameterTypes109 = new String[] { "long" };
+		_methodParameterTypes109 = new String[] {  };
+
+		_methodName110 = "deletevenueSubDetailById";
+
+		_methodParameterTypes110 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -101,11 +105,16 @@ public class VenueSubDetailServiceClpInvoker {
 
 		if (_methodName108.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes108, parameterTypes)) {
-			return VenueSubDetailServiceUtil.getAllVenueSubDetails();
+			return VenueSubDetailServiceUtil.getVenueSubDetailByVenueDetailId(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName109.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes109, parameterTypes)) {
+			return VenueSubDetailServiceUtil.getAllVenueSubDetails();
+		}
+
+		if (_methodName110.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes110, parameterTypes)) {
 			VenueSubDetailServiceUtil.deletevenueSubDetailById(((Long)arguments[0]).longValue());
 
 			return null;
@@ -130,4 +139,6 @@ public class VenueSubDetailServiceClpInvoker {
 	private String[] _methodParameterTypes108;
 	private String _methodName109;
 	private String[] _methodParameterTypes109;
+	private String _methodName110;
+	private String[] _methodParameterTypes110;
 }

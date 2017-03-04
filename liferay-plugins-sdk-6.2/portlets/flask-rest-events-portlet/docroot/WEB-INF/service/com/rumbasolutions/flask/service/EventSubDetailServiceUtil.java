@@ -91,6 +91,11 @@ public class EventSubDetailServiceUtil {
 		return getService().getEventSubDetailById(eventSubDetailId);
 	}
 
+	public static java.util.List<com.rumbasolutions.flask.model.EventSubDetail> getEventSubDetailByEventDetailId(
+		long eventDetailId) {
+		return getService().getEventSubDetailByEventDetailId(eventDetailId);
+	}
+
 	public static java.util.List<com.rumbasolutions.flask.model.EventSubDetail> getAllEventSubDetails() {
 		return getService().getAllEventSubDetails();
 	}

@@ -27,6 +27,7 @@ import com.rumbasolutions.flask.model.VenueSubDetail;
 import com.rumbasolutions.flask.service.VenueSubDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.VenueSubDetailServiceUtil;
 import com.rumbasolutions.flask.service.base.VenueSubDetailServiceBaseImpl;
+import com.rumbasolutions.flask.service.persistence.VenueSubDetailUtil;
 
 /**
  * The implementation of the venue sub detail remote service.
@@ -96,6 +97,17 @@ public class VenueSubDetailServiceImpl extends VenueSubDetailServiceBaseImpl {
 		VenueSubDetail venueSubDetail = null;
 		try {
 			venueSubDetail = VenueSubDetailLocalServiceUtil.getVenueSubDetail(venueSubDetailId);
+		} catch (Exception e) {
+			LOGGER.error("Exception in getVenueSubDetailById: "+e.getMessage());
+		}
+		return venueSubDetail;
+	}
+	
+	@Override
+	public List<VenueSubDetail> getVenueSubDetailByVenueDetailId(long venueDetailId){
+		List<VenueSubDetail> venueSubDetail = null;
+		try {
+			venueSubDetail = VenueSubDetailUtil.findByVenueDetailId(venueDetailId);
 		} catch (Exception e) {
 			LOGGER.error("Exception in getVenueSubDetailById: "+e.getMessage());
 		}

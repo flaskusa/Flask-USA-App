@@ -52,13 +52,17 @@ public class EventSubDetailServiceClp implements EventSubDetailService {
 
 		_methodParameterTypes6 = new String[] { "long" };
 
-		_methodName7 = "getAllEventSubDetails";
+		_methodName7 = "getEventSubDetailByEventDetailId";
 
-		_methodParameterTypes7 = new String[] {  };
+		_methodParameterTypes7 = new String[] { "long" };
 
-		_methodName8 = "deleteEventSubDetailById";
+		_methodName8 = "getAllEventSubDetails";
 
-		_methodParameterTypes8 = new String[] { "long" };
+		_methodParameterTypes8 = new String[] {  };
+
+		_methodName9 = "deleteEventSubDetailById";
+
+		_methodParameterTypes9 = new String[] { "long" };
 	}
 
 	@Override
@@ -232,12 +236,36 @@ public class EventSubDetailServiceClp implements EventSubDetailService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.EventSubDetail> getAllEventSubDetails() {
+	public java.util.List<com.rumbasolutions.flask.model.EventSubDetail> getEventSubDetailByEventDetailId(
+		long eventDetailId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] {  });
+					_methodParameterTypes7, new Object[] { eventDetailId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.EventSubDetail>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.EventSubDetail> getAllEventSubDetails() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -257,8 +285,8 @@ public class EventSubDetailServiceClp implements EventSubDetailService {
 	@Override
 	public void deleteEventSubDetailById(long eventSubDetailId) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8, new Object[] { eventSubDetailId });
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9, new Object[] { eventSubDetailId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -290,4 +318,6 @@ public class EventSubDetailServiceClp implements EventSubDetailService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
 }
