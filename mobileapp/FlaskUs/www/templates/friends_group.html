@@ -8,10 +8,15 @@
             <button class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <div class="bar bar-subheader groupSearch" ng-show="searchBox.showBox">
+    <div class="bar bar-subheader srchBgCol" ng-show="searchBox.showBox">
         <div class="row searchrow">
             <div class="col col-100 col-center searchrow">
-                <input type="text" placeholder="Search Group..." class="searchboxArea" ng-model="groupList.searchString"/>
+                <input type="text" placeholder="Search Group..." class="searchboxArea" ng-model="groupList.searchString" autofocus/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-center searchrow">
+                <button class="button button-clear button_search">SEARCH</button>
             </div>
         </div>
     </div>

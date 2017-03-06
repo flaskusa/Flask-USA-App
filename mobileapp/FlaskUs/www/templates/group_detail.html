@@ -55,8 +55,8 @@
                  <h3 class="group_user_name">{{ data.userName | uppercase}}</h3>
                     <i class="group_user_name">{{data.emailAddress}}</i></div>
                     <div>
-                    <span class="badge group_detail_user_role" ng-if="data.isAdmin==1" ng-init="data.checked=true"><i class="adminText">admin</i></span>
-                    <span class="badge group_detail_user_role" ng-if="data.isAdmin==0" ng-init="data.isAdminCheckBox=false"><i class="userText">user</i></span>
+                    <span class="badge group_detail_user_role" ng-if="data.isAdmin==1" ng-init="data.checked=true"><i class="adminText roleText">admin</i></span>
+                    <span class="badge group_detail_user_role" ng-if="data.isAdmin==0" ng-init="data.isAdminCheckBox=false"><i class="userText roleText">user</i></span>
                 </div>
                 </a>
                <ion-option-button  class="icon ion-trash-a"ng-click="removeMember(data,$index)"ng-if="isLoginUserAdmin==true && groupAdminDetail!=data.userName"></ion-option-button>

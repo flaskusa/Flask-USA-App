@@ -8,14 +8,14 @@
         <button class="button button-icon button-clear ion-android-search" ng-click="searchBox.show = !searchBox.show"></button>
     </ion-nav-buttons>    
      <div class="bar bar-subheader srchBgCol" ng-show="searchBox.show">
-        <div class="row">
+        <div class="row searchrow">
             <div class="col col-100 col-center searchrow">
                 <input type="text" placeholder="Search friend..." class="searchboxArea" ng-model="searchBox.searchText" autofocus/>
             </div>
         </div>
         <div class="row">
             <div class="col col-center searchrow">
-                <button class="button button-clear button_search" ng-click="getAllfilteredFrieds(searchBox.searchText)">SEARCH</button>
+                <button class="button button-clear button_search" ng-click="getSearchedFriends(searchBox.searchText)">SEARCH</button>
             </div>
         </div>
     </div>
@@ -69,10 +69,14 @@
 
         <script id="templates/modal.html" type="text/ng-template">
             <ion-modal-view >
-                <ion-header-bar class="bar bar-header bar-positive black-header">
-                    <h1 class="title">Invite Friend</h1>
-                    <button class="button button-clear button-primary" ng-click="closeInviteFriendPopup()">X</button>
-                </ion-header-bar>
+                <ion-nav-bar class="bar-dark" align-title="center">
+                    <ion-nav-buttons side="left">
+                        <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="closeInviteFriendPopup();"></button>
+                    </ion-nav-buttons>
+                    <ion-nav-title>
+                        <a href="" style="text-decoration:none;">INVITE FRIEND</a>
+                    </ion-nav-title>
+                </ion-nav-bar>
                 <div class="bar bar-subheader">
                     <div class="row">
                         <div class="col col-90 col-center searchrow">
