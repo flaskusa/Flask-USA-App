@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsMessageCtrl', FriendsMessageCtrl);
 
-    FriendsMessageCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsNotificationService', '$flaskUtil', '$state','$ionicHistory','$timeout','$ionicLoading'];
+    FriendsMessageCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsNotificationService', '$flaskUtil', '$state','$ionicHistory','$timeout','$ionicLoading', '$ionicPopup'];
 
     /* @ngInject */
-    function FriendsMessageCtrl($scope, $http, $ionicModal, FriendsNotificationService, $flaskUtil, $state,$ionicHistory,$timeout,$ionicLoading) {
+    function FriendsMessageCtrl($scope, $http, $ionicModal, FriendsNotificationService, $flaskUtil, $state, $ionicHistory, $timeout, $ionicLoading, $ionicPopup) {
         $scope.allMessages=[];
         $scope.showTextArea={show:false};
         $scope.textMessage={messageToSend:""};
@@ -175,14 +175,20 @@
    }
 
 
-    $scope.deleteMessage=function(messageId,index){
-    FriendsNotificationService.deleteMessageById(messageId).then(function(response){
-        if(response){
-            $scope.allMessages.splice(index,1);
-        }
-
-    })
-    }
+   $scope.deleteMessage = function (messageId, index) {
+       var confirmPopup = $ionicPopup.confirm({
+           title: 'Delete message ?'
+       });
+       confirmPopup.then(function (res) {
+           if(res){
+               FriendsNotificationService.deleteMessageById(messageId).then(function (response) {
+                       $scope.allMessages.splice(index, 1);
+               })
+           }
+           else {
+           }
+      });
+   }
        /* $timeout(function(){
             $scope.getTimeWithInterval();
         },10000);*/
