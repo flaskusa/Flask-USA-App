@@ -55,26 +55,38 @@
           $scope.endIndex = 9;
           $scope.searchContact.searchtext =  "";
       };
-        $scope.unFriend = function(userId,index) {
+      $scope.unFriend = function (userId, index) {
+          console.log($scope.myFriends);
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Unfriend ?'
             });
             confirmPopup.then(function(res) {
                 if(res) {
-                    FriendsService.unFriend(userId).then(function(res) {
-                        if(res){
+                    FriendsService.unFriend(userId).then(function(response) {
                             $scope.myFriends.splice(index,1)
-                        }else(
-                            $flaskUtil.alert("failed to unFriend")
-                            )
                     });
                 } else {
                 }
             });
-
-
-
         };
+
+        /*$scope.leaveTailgate = function (tailgateId, index) {
+            console.log(tailgateId, index);
+            var confirmPopup = $ionicPopup.confirm({
+                title: 'Delete Tailgate?'
+            });
+            confirmPopup.then(function(res) {
+                if(res) {
+                    TailgateService.deleteTailgate(tailgateId).then(function (respData) {
+                        console.log(respData);
+                        $scope.allTailgate.splice(index, 1);
+                    });
+
+                } else {
+                }
+            });
+        }*/
+
         $scope.blockFriend = function(userId,index) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Block friend?'
@@ -96,11 +108,12 @@
         };
       $scope.getMyFriends = function(searchText) {
           $scope.moreDataCanBeLoaded = true;
-          FriendsService.getMyFriends(searchText).then(function(response){
+          FriendsService.getMyFriends(searchText).then(function (response) {
+              $scope.searchedFriend = response.data;
               $scope.shoeEmptyMessage=true;
               if(response != undefined && Array.isArray(response))   {
                   if($localStorage["myFriendDetail"].length==response.length){
-                      $scope.myFriends=$localStorage["myFriendDetail"];
+                      $scope.myFriends = $localStorage["myFriendDetail"];
                   }
                   else{
                   angular.forEach(response,function(value,key){
@@ -214,6 +227,13 @@
         $scope.groupMemberDetail=function(data){
             $state.go('app.my_friendDetail',{friendId:data.userId});
             FriendsService.data=data;
+        }
+
+        //search friend function
+        $scope.getSearchedFriends = function (searchText) {
+            FriendsService.getMyFriends(searchText).then(function (response) {
+                $scope.myFriends = response;
+            });
         }
 
     }
