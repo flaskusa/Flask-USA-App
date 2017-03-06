@@ -12,16 +12,16 @@
             UserService.saveUser(user, srcname).then(function (respData) {
                 // $scope.user = respData.data;
                 if (respData.data.exception == "com.liferay.portal.DuplicateUserEmailAddressException" || respData.data.exception=="com.liferay.portal.UserScreenNameException") {
-                    $flaskUtil.alert("User already exist")
-
-                    //$state.go("app.login");
-
+                    $flaskUtil.alert("User already exist");
+                }
+                else if (respData.data.message == "com.liferay.portal.UserPasswordException") {
+                    $ionicLoading.show({ template: "Password and confirm password did not match", noBackdrop: false, duration: 3000 });
                 }
                 else if (respData.data.message == "No JSON web service action associated with path /flaskadmin/sign-up and method GET for //flask-rest-users-portlet") {
-                    $ionicLoading.show({ template: 'Please Fill All The Fields', noBackdrop: false, duration: 2000 });
+                    $ionicLoading.show({ template: "Please fill all the fields", noBackdrop: false, duration: 2000 });
                 }
                 else {
-                    $ionicLoading.show({ template: 'User Registered Successfully!', noBackdrop: false, duration: 2000 });
+                    $ionicLoading.show({ template: "User registered successfully!", noBackdrop: false, duration: 2000 });
                     $timeout(function () {
                         $state.go("app.login");
                     },2200);
