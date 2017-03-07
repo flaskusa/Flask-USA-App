@@ -55,47 +55,60 @@
           $scope.endIndex = 9;
           $scope.searchContact.searchtext =  "";
       };
-      $scope.unFriend = function (userId, index) {
-          console.log($scope.myFriends);
+      $scope.unFriend = function (userId) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Unfriend ?'
             });
             confirmPopup.then(function(res) {
                 if(res) {
-                    FriendsService.unFriend(userId).then(function(response) {
-                            $scope.myFriends.splice(index,1)
+                    FriendsService.unFriend(userId).then(function (response) {
+                        for (var i = 0; i < $scope.myFriends.length; i++) {
+                            if ($scope.myFriends[i].userId == userId) {
+                                $scope.myFriends.splice(i, 1);
+                            }
+                        }
+                            
                     });
                 } else {
                 }
             });
-        };
-
-        /*$scope.leaveTailgate = function (tailgateId, index) {
-            console.log(tailgateId, index);
+      };
+        /*
+        $scope.deleteTailgateUser = function (currUserId) {
             var confirmPopup = $ionicPopup.confirm({
-                title: 'Delete Tailgate?'
+                title: 'Delete Tailgater ?'
             });
-            confirmPopup.then(function(res) {
-                if(res) {
-                    TailgateService.deleteTailgate(tailgateId).then(function (respData) {
-                        console.log(respData);
-                        $scope.allTailgate.splice(index, 1);
-                    });
-
+            confirmPopup.then(function (res) {
+                if (res) {
+                    if (currUserId != $scope.loggedInUserId) {
+                        TailgateService.deleteTailgateUser(tailGateId, currUserId).then(function (response) {
+                            for (var i = 0; i < $scope.myTailgaters.length; i++) {
+                                if ($scope.myTailgaters[i].userId == currUserId) {
+                                    $scope.myTailgaters.splice(i,1);
+                                }
+                            }
+                        })
+                    } else {
+                        $flaskUtil.alert("Tailgate admin can't be remove.")
+                    }
                 } else {
                 }
             });
-        }*/
 
-        $scope.blockFriend = function(userId,index) {
+        }*/
+        $scope.blockFriend = function(userId) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Block friend?'
             });
             confirmPopup.then(function(res) {
                 if(res) {
-                    FriendsService.blockUser(userId).then(function(res) {
-                        if(res){
-                            $scope.myFriends.splice(index,1)
+                    FriendsService.blockUser(userId).then(function(response) {
+                        if(response){
+                            for (var i = 0; i < $scope.myFriends; i++) {
+                                if ($scope.myFriends[i].userId == response.userId) {
+                                    $scope.myFriends.splice(i, 1);
+                                }
+                            }
 
                         }else{
                             $flaskUtil.alert("failed to block");

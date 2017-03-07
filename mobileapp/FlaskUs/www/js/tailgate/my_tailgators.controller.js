@@ -31,7 +31,7 @@
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
 
 
-        $scope.deleteTailgateUser = function (currUserId, index) {
+        $scope.deleteTailgateUser = function (currUserId) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete Tailgater ?'
             });
@@ -39,7 +39,11 @@
                 if (res) {
                     if (currUserId != $scope.loggedInUserId) {
                         TailgateService.deleteTailgateUser(tailGateId, currUserId).then(function (response) {
-                            $scope.myTailgaters.splice(index, 1)
+                            for (var i = 0; i < $scope.myTailgaters.length; i++) {
+                                if ($scope.myTailgaters[i].userId == currUserId) {
+                                    $scope.myTailgaters.splice(i,1);
+                                }
+                            }
                         })
                     } else {
                         $flaskUtil.alert("Tailgate admin can't be remove.")
