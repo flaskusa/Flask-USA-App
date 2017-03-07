@@ -57,7 +57,6 @@
              //   $scope.AddedSuccess = true;
                 //    $timeout(function () { $scope.AddedSuccess = false; }, 3000);
                 $ionicLoading.show({ template: 'Event added successfully !', noBackdrop: false, duration: 2000 });
-                $state.go("app.my_events")
             });
         }
     }
