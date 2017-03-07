@@ -205,7 +205,7 @@
 		<id name="venueDeviceImageId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="venueImageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="venueDetailImageId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="venueId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="deviceType" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="venueDeviceImageUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />

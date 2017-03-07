@@ -277,11 +277,11 @@ public class VenueServiceUtil {
 	}
 
 	public static com.rumbasolutions.flask.model.VenueDeviceImage addVenueDeviceImage(
-		long venueImageId, long venueId, java.lang.String deviceType,
+		long venueDetailImageId, long venueId, java.lang.String deviceType,
 		java.lang.String venueDeviceImageUUID, java.lang.String aspectRatio) {
 		return getService()
-				   .addVenueDeviceImage(venueImageId, venueId, deviceType,
-			venueDeviceImageUUID, aspectRatio);
+				   .addVenueDeviceImage(venueDetailImageId, venueId,
+			deviceType, venueDeviceImageUUID, aspectRatio);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueId(
@@ -312,12 +312,13 @@ public class VenueServiceUtil {
 	}
 
 	public static com.rumbasolutions.flask.model.VenueDeviceImage updateVenueDeviceImage(
-		long venueImageDeviceId, long venueImageId, long venueId,
+		long venueImageDeviceId, long venueDetailImageId, long venueId,
 		java.lang.String deviceType, java.lang.String venueDeviceImageUUID,
 		java.lang.String aspectRatio) {
 		return getService()
-				   .updateVenueDeviceImage(venueImageDeviceId, venueImageId,
-			venueId, deviceType, venueDeviceImageUUID, aspectRatio);
+				   .updateVenueDeviceImage(venueImageDeviceId,
+			venueDetailImageId, venueId, deviceType, venueDeviceImageUUID,
+			aspectRatio);
 	}
 
 	public static void deleteVenueDeviceImage(long venueDeviceImageId) {

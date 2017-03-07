@@ -162,7 +162,7 @@ create table flaskevents_VenueDetailImage (
 
 create table flaskevents_VenueDeviceImage (
 	venueDeviceImageId LONG not null primary key,
-	venueImageId LONG,
+	venueDetailImageId LONG,
 	venueId LONG,
 	deviceType VARCHAR(75) null,
 	venueDeviceImageUUID VARCHAR(75) null,
@@ -184,6 +184,6 @@ create table flaskevents_VenueImage (
 create table flaskevents_VenueSubDetail (
 	venueSubDetailId LONG not null primary key,
 	venueDetailId LONG,
-	venueSubDetailTitle VARCHAR(75) null,
-	venueSubDetailDesc VARCHAR(75) null
+	venueSubDetailTitle VARCHAR(100) null,
+	venueSubDetailDesc VARCHAR(255) null
 );

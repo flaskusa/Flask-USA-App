@@ -270,7 +270,7 @@
 	</model>
 	<model name="com.rumbasolutions.flask.model.VenueDeviceImage">
 		<field name="venueDeviceImageId" type="long" />
-		<field name="venueImageId" type="long" />
+		<field name="venueDetailImageId" type="long" />
 		<field name="venueId" type="long" />
 		<field name="deviceType" type="String" />
 		<field name="venueDeviceImageUUID" type="String" />
@@ -294,7 +294,11 @@
 	<model name="com.rumbasolutions.flask.model.VenueSubDetail">
 		<field name="venueSubDetailId" type="long" />
 		<field name="venueDetailId" type="long" />
-		<field name="venueSubDetailTitle" type="String" />
-		<field name="venueSubDetailDesc" type="String" />
+		<field name="venueSubDetailTitle" type="String">
+			<hint-collection name="FLASK-TEXTFIELD" />
+		</field>
+		<field name="venueSubDetailDesc" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 	</model>
 </model-hints>

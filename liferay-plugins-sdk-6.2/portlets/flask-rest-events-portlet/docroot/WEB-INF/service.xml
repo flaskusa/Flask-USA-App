@@ -369,7 +369,7 @@
 
     	<!-- Audit fields -->
         <column name="venueDeviceImageId" primary="true" type="long"></column>
-        <column name="venueImageId" type="long"></column>
+        <column name="venueDetailImageId" type="long"></column>
         <column name="venueId" type="long"></column>
         <column name="deviceType" type="String"></column>
         <column name="venueDeviceImageUUID" type="String"></column>

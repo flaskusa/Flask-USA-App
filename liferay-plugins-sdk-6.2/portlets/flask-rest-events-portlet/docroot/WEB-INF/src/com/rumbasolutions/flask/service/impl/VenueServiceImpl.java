@@ -35,13 +35,11 @@ import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.rumbasolutions.flask.manageevent.FlaskDocLibUtil;
-import com.rumbasolutions.flask.model.EventDetailImage;
 import com.rumbasolutions.flask.model.Venue;
 import com.rumbasolutions.flask.model.VenueDetail;
 import com.rumbasolutions.flask.model.VenueDetailImage;
 import com.rumbasolutions.flask.model.VenueDeviceImage;
 import com.rumbasolutions.flask.model.VenueImage;
-import com.rumbasolutions.flask.service.EventServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeCategoryServiceUtil;
 import com.rumbasolutions.flask.service.InfoTypeServiceUtil;
 import com.rumbasolutions.flask.service.VenueDetailImageLocalServiceUtil;
@@ -655,11 +653,11 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	}
 	
 	@Override
-	public VenueDeviceImage addVenueDeviceImage(long venueImageId, long venueId, String deviceType, String venueDeviceImageUUID, String aspectRatio){
+	public VenueDeviceImage addVenueDeviceImage(long venueDetailImageId, long venueId, String deviceType, String venueDeviceImageUUID, String aspectRatio){
 		VenueDeviceImage venueDeviceImage = null;
 		try{
 			venueDeviceImage = VenueDeviceImageLocalServiceUtil.createVenueDeviceImage(CounterLocalServiceUtil.increment());
-			venueDeviceImage.setVenueImageId(venueImageId);
+			venueDeviceImage.setVenueDetailImageId(venueDetailImageId);
 			venueDeviceImage.setVenueId(venueId);	
 			venueDeviceImage.setDeviceType(deviceType);
 			venueDeviceImage.setVenueDeviceImageUUID(venueDeviceImageUUID);
@@ -702,7 +700,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		try {
 			List<VenueDeviceImage>  venueDeviceImages =  VenueDeviceImageUtil.findByVenueDevice(venueId, deviceType);
 			for(VenueDeviceImage img: venueDeviceImages){
-				venueImages.add(VenueServiceUtil.getVenueImage(img.getVenueImageId(), serviceContext));
+				venueImages.add(VenueServiceUtil.getVenueImage(img.getVenueDetailImageId(), serviceContext));
 			}
 		}
 		catch (SystemException e) {
@@ -736,11 +734,11 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	}
 	
 	@Override
-	public VenueDeviceImage updateVenueDeviceImage(long venueImageDeviceId, long venueImageId, long venueId, String deviceType, String venueDeviceImageUUID, String aspectRatio){
+	public VenueDeviceImage updateVenueDeviceImage(long venueImageDeviceId, long venueDetailImageId, long venueId, String deviceType, String venueDeviceImageUUID, String aspectRatio){
 		VenueDeviceImage venueDeviceImage = null;
 		try{
 			venueDeviceImage = VenueDeviceImageLocalServiceUtil.getVenueDeviceImage(venueImageDeviceId);
-			venueDeviceImage.setVenueImageId(venueImageId);	
+			venueDeviceImage.setVenueDetailImageId(venueDetailImageId);
 			venueDeviceImage.setVenueId(venueId);	
 			venueDeviceImage.setDeviceType(deviceType);
 			venueDeviceImage.setVenueDeviceImageUUID(venueDeviceImageUUID);

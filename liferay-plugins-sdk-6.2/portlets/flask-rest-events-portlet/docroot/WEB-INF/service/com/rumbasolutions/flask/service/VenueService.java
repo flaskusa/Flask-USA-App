@@ -214,7 +214,7 @@ public interface VenueService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.VenueDeviceImage addVenueDeviceImage(
-		long venueImageId, long venueId, java.lang.String deviceType,
+		long venueDetailImageId, long venueId, java.lang.String deviceType,
 		java.lang.String venueDeviceImageUUID, java.lang.String aspectRatio);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
@@ -243,7 +243,7 @@ public interface VenueService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getAllVenueDeviceImages();
 
 	public com.rumbasolutions.flask.model.VenueDeviceImage updateVenueDeviceImage(
-		long venueImageDeviceId, long venueImageId, long venueId,
+		long venueImageDeviceId, long venueDetailImageId, long venueId,
 		java.lang.String deviceType, java.lang.String venueDeviceImageUUID,
 		java.lang.String aspectRatio);
 

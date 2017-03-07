@@ -1258,7 +1258,7 @@ public class VenueServiceClp implements VenueService {
 
 	@Override
 	public com.rumbasolutions.flask.model.VenueDeviceImage addVenueDeviceImage(
-		long venueImageId, long venueId, java.lang.String deviceType,
+		long venueDetailImageId, long venueId, java.lang.String deviceType,
 		java.lang.String venueDeviceImageUUID, java.lang.String aspectRatio) {
 		Object returnObj = null;
 
@@ -1266,7 +1266,7 @@ public class VenueServiceClp implements VenueService {
 			returnObj = _invokableService.invokeMethod(_methodName30,
 					_methodParameterTypes30,
 					new Object[] {
-						venueImageId,
+						venueDetailImageId,
 						
 					venueId,
 						
@@ -1422,7 +1422,7 @@ public class VenueServiceClp implements VenueService {
 
 	@Override
 	public com.rumbasolutions.flask.model.VenueDeviceImage updateVenueDeviceImage(
-		long venueImageDeviceId, long venueImageId, long venueId,
+		long venueImageDeviceId, long venueDetailImageId, long venueId,
 		java.lang.String deviceType, java.lang.String venueDeviceImageUUID,
 		java.lang.String aspectRatio) {
 		Object returnObj = null;
@@ -1433,7 +1433,7 @@ public class VenueServiceClp implements VenueService {
 					new Object[] {
 						venueImageDeviceId,
 						
-					venueImageId,
+					venueDetailImageId,
 						
 					venueId,
 						

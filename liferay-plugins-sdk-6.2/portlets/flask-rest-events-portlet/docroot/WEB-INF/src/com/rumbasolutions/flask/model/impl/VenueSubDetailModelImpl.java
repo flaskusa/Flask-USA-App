@@ -68,7 +68,7 @@ public class VenueSubDetailModelImpl extends BaseModelImpl<VenueSubDetail>
 			{ "venueSubDetailTitle", Types.VARCHAR },
 			{ "venueSubDetailDesc", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueSubDetail (venueSubDetailId LONG not null primary key,venueDetailId LONG,venueSubDetailTitle VARCHAR(75) null,venueSubDetailDesc VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueSubDetail (venueSubDetailId LONG not null primary key,venueDetailId LONG,venueSubDetailTitle VARCHAR(100) null,venueSubDetailDesc VARCHAR(255) null)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_VenueSubDetail";
 	public static final String ORDER_BY_JPQL = " ORDER BY venueSubDetail.venueSubDetailId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_VenueSubDetail.venueSubDetailId ASC";

@@ -288,9 +288,9 @@ public class VenueServiceWrapper implements VenueService,
 
 	@Override
 	public com.rumbasolutions.flask.model.VenueDeviceImage addVenueDeviceImage(
-		long venueImageId, long venueId, java.lang.String deviceType,
+		long venueDetailImageId, long venueId, java.lang.String deviceType,
 		java.lang.String venueDeviceImageUUID, java.lang.String aspectRatio) {
-		return _venueService.addVenueDeviceImage(venueImageId, venueId,
+		return _venueService.addVenueDeviceImage(venueDetailImageId, venueId,
 			deviceType, venueDeviceImageUUID, aspectRatio);
 	}
 
@@ -327,11 +327,12 @@ public class VenueServiceWrapper implements VenueService,
 
 	@Override
 	public com.rumbasolutions.flask.model.VenueDeviceImage updateVenueDeviceImage(
-		long venueImageDeviceId, long venueImageId, long venueId,
+		long venueImageDeviceId, long venueDetailImageId, long venueId,
 		java.lang.String deviceType, java.lang.String venueDeviceImageUUID,
 		java.lang.String aspectRatio) {
 		return _venueService.updateVenueDeviceImage(venueImageDeviceId,
-			venueImageId, venueId, deviceType, venueDeviceImageUUID, aspectRatio);
+			venueDetailImageId, venueId, deviceType, venueDeviceImageUUID,
+			aspectRatio);
 	}
 
 	@Override

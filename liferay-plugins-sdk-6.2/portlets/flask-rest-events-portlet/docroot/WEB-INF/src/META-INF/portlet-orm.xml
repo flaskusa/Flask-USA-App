@@ -251,7 +251,7 @@
 	<mapped-superclass class="com.rumbasolutions.flask.model.impl.VenueDeviceImageModelImpl">
 		<attributes>
 			<id name="venueDeviceImageId" />
-			<basic name="venueImageId" />
+			<basic name="venueDetailImageId" />
 			<basic name="venueId" />
 			<basic name="deviceType" />
 			<basic name="venueDeviceImageUUID" />
