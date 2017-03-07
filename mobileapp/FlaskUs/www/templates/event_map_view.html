@@ -288,14 +288,7 @@
                             <div>
                                 <div class="flask_us_div">
                                     <div>
-                                        <div class="left flask_us_slide_buttons">
-                                            <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('Flask-Detail')"></button>
-                                        </div>
-                                        <div class="right flask_us_slide_buttons_right">
-                                            <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('Flask-Detail')"></button>
-                                        </div>
-                                        <ion-slide-box delegate-handle="Flask-Detail" show-pager='false'>
-                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
+                                            <div ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
                                                 <div class="form-group">
                                                     <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
                                                     <div ng-if="flaskUsDetail.imageUrl">
@@ -309,10 +302,12 @@
                                                         {{flaskUsDetail.infoDesc}}
                                                     </div>
                                                 </div>
+                                            </div>
+                                            <div>
                                                 <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
                                                     <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
                                                 </div>
-                                                <div class="flaskUsQuestionDiv" ng-class="{hideFlaskUsQuestionDiv:toggleQueDiv}" ng-if="hideDiv==false">
+                                                <div class="flaskUsQuestionDiv">
                                                     <div align="center">
                                                         <span class="que-input-label"><b>NAME*</b></span>
                                                         <input type="text" class="QuestionInput">
@@ -327,7 +322,7 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                            </ion-slide>
+                                            </div>
                                         </ion-slide-box>
                                     </div>
                                 </div>
@@ -430,10 +425,12 @@
                                                         {{flaskUsDetail.infoDesc}}
                                                     </div>
                                                 </div>
+                                            </ion-slide>
+                                            <ion-slide>
                                                 <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
                                                     <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
                                                 </div>
-                                                <div class="flaskUsQuestionDiv" ng-class="{hideFlaskUsQuestionDiv:toggleQueDiv}" ng-if="hideDiv==false">
+                                                <div class="flaskUsQuestionDiv">
                                                     <div align="center">
                                                         <span class="que-input-label"><b>NAME*</b></span>
                                                         <input type="text" class="QuestionInput">

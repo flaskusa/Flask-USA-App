@@ -20,16 +20,8 @@
                 <div class="badge supplyDeleteButton extra-right-supply friend_group_notification_div">
                     <span class="button-assertive ion-android-checkbox supplyDeleteIcon supplyEditIconPadding" ng-click="addSocialRelation(request.userId,$index)"></span>
                 </div>
-                <!--  <div style="padding-left: 58px;padding-top: 2px;">
-                  <button class=" ext-right friendRequestButtonStyle extra-top-request"ng-click="addSocialRelation(request.userId,$index)"><i class="emailText">Confirm</i> </button>
-
-                  <button class=" ext-right friendRequestButtonStyle extra-top-request"ng-click="deleteSocialRelation(request.userId,$index)"><i class="emailText">Delete</i> </button>
-                  </div>-->
-                <!--  <ion-option-button  class="icon ion-no-smoking"ng-if="featureToBock==true"></ion-option-button>-->
-
             </ion-item>
-
-            <div class="item " ng-if="requestedUserDetail.length==0 && showEmptymessage==true;">There are no friend requests to show.</div>
+            <div class="item " ng-if="requestedUserDetail.length==0 && showEmptymessage==true;">There are no friend requests.</div>
         </ion-list>
     </ion-content>
 </ion-view>

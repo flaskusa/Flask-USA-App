@@ -42,7 +42,7 @@
             <p class="addText">GROUP MEMBERS</p>
         </a>
        <ion-list>
-           <ion-item ng-repeat="data in allMember track by $index" class="row-no-padding" padding="false">
+           <ion-item ng-repeat="data in allMember | orderBy:'userName'" class="row-no-padding" padding="false">
                 <a class="row-no-padding" ng-click="groupMemberDetail(data)">
 
                    <div class="col col-20" ng-if="data.friendProfilePicUrl==undefined">
@@ -59,7 +59,7 @@
                     <span class="badge group_detail_user_role" ng-if="data.isAdmin==0" ng-init="data.isAdminCheckBox=false"><i class="userText roleText">user</i></span>
                 </div>
                 </a>
-               <ion-option-button  class="icon ion-trash-a"ng-click="removeMember(data,$index)"ng-if="isLoginUserAdmin==true && groupAdminDetail!=data.userName"></ion-option-button>
+               <ion-option-button  class="icon ion-trash-a"ng-click="removeMember(data)"ng-if="isLoginUserAdmin==true && groupAdminDetail!=data.userName"></ion-option-button>
 
            </ion-item>
 
@@ -68,10 +68,14 @@
         </div>
         <script id="templates/modal.html" type="text/ng-template">
             <ion-modal-view >
-                <ion-header-bar class="bar bar-header bar-positive black-header">
-                    <h1 class="title">ADD MEMBER</h1>
-                    <button class="button button-clear button-primary" ng-click="finishAddingMember()">X</button>
-                </ion-header-bar>
+                <ion-nav-bar class="bar-dark" align-title="center">
+                    <ion-nav-buttons side="left">
+                        <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="finishAddingMember();"></button>
+                    </ion-nav-buttons>
+                    <ion-nav-title>
+                        <a href="" style="text-decoration:none;">ADD MEMBER</a>
+                    </ion-nav-title>
+                </ion-nav-bar>
                 <div class="bar bar-subheader">
                     <div class="row">
                         <div class="col col-90 col-center searchrow">

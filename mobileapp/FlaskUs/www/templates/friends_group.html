@@ -31,7 +31,7 @@
           <ion-list >
               <a class="item" ng-if="groups.length == 0 && addingInGroup==true"> There are no groups to add. </a>
               <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> There are no groups. </a>
-              <ion-item class=" item-remove-animate"ng-repeat="group in groups | filter: groupList.searchString"style="padding: 0px"ng-init="group.showDivByIndex=false">
+              <ion-item class=" item-remove-animate"ng-repeat="group in groups | filter: groupList.searchString | orderBy:'groupName'"style="padding: 0px"ng-init="group.showDivByIndex=false">
                   <div ng-if="group.showDivByIndex==true"style="padding-top: 10px">
                       user Added
                   </div>
@@ -57,8 +57,8 @@
                       </a>
                   </div>
                   <ion-option-button  class="icon ion-edit"ng-click="editGroup(group)"ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
-                  <ion-option-button class="button-assertive icon ion-trash-a"ng-click="deleteGroup(group.groupId,$index)"ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
-                  <ion-option-button  class="icon icon ion-android-exit"ng-if="addingInGroup==false && group.isAdmin==0"ng-click="leaveGroup(group.groupId,$index)"></ion-option-button>
+                  <ion-option-button class="button-assertive icon ion-trash-a"ng-click="deleteGroup(group.groupId)"ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
+                  <ion-option-button  class="icon icon ion-android-exit"ng-if="addingInGroup==false && group.isAdmin==0"ng-click="leaveGroup(group.groupId)"></ion-option-button>
               </ion-item>
           </ion-list>
           <div ng-if="addingInGroup==true && showDoneButton==true"class="padding" align="center">

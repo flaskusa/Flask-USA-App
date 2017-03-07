@@ -34,10 +34,14 @@
         </form>
             <script id="templates/modal.html" type="text/ng-template">
             <ion-modal-view >
-                <ion-header-bar class="bar bar-header bar-positive black-header">
-                    <h1 class="title">ADD MEMBER</h1>
-                    <button class="button button-clear button-primary" ng-click="finishAddingMember()">X</button>
-                </ion-header-bar>
+                <ion-nav-bar class="bar-dark" align-title="center">
+                    <ion-nav-buttons side="left">
+                        <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="finishAddingMember();"></button>
+                    </ion-nav-buttons>
+                    <ion-nav-title>
+                        <a href="" style="text-decoration:none;">ADD MEMBER</a>
+                    </ion-nav-title>
+                </ion-nav-bar>
                 <div class="bar bar-subheader">
                     <div class="row">
                         <div class="col col-90 col-center searchrow">
