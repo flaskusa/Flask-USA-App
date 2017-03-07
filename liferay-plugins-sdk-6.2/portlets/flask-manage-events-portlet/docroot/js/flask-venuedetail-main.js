@@ -125,8 +125,8 @@ function add5moreRows(){
 	for(var i=noOfInvitations+1 ; i <= noOfInvitations+5;i++){
 		var invitationDiv = '<div class="control-group">';
 		invitationDiv = invitationDiv + '<div class="controls">';
-		invitationDiv = invitationDiv + '<input id="subDetailTitle'+i+'" name="subDetailTitle'+i+'" type="text" placeholder="Enter Title" class="input-medium sub-detail-text-box">';
-		invitationDiv = invitationDiv + '<textarea id="subDetailDesc'+i+'" name="subDetailDesc'+i+'" placeholder="Enter Description" class="Text-Area"></textarea>';
+		invitationDiv = invitationDiv + '<input id="subDetailTitle'+i+'" name="subDetailTitle'+i+'" type="text" placeholder="Enter Title" maxlength="70" class="input-medium sub-detail-text-box">';
+		invitationDiv = invitationDiv + '<textarea id="subDetailDesc'+i+'" name="subDetailDesc'+i+'" placeholder="Enter Description" maxlength="255" class="Text-Area"></textarea>';
 		invitationDiv = invitationDiv + "</div></div>";
 		$(".divHeight").append(invitationDiv);
 	}
@@ -828,7 +828,8 @@ function getVenueSubDetails(venueDetailId) {
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(
 			_venueDetailModel.SERVICE_ENDPOINTS.GET_VENUE_SUB_DETAIL_BY_VENUE_DETAIL_ID, params,
-			function(data) {
+			function(data) {console.log("data : ");
+			console.log(data);
 				$.each(data, function(idx, obj) {
 					fnRenderVenueSubDetails(idx+1, obj.venueSubDetailTitle, obj.venueSubDetailDesc);
 				});
@@ -840,18 +841,23 @@ function getVenueSubDetails(venueDetailId) {
 function fnRenderVenueSubDetails(idx, venueSubDetailTitle, venueSubDetailDesc){
 	var titleid="#subDetailTitle"+idx;
 	var descid="#subDetailDesc"+idx;
-	if($(titleid).length > 0){
+	if($(titleid).length > 0 || $(descid).length > 0){
 		$(titleid).val(venueSubDetailTitle);
 		$(descid).text(venueSubDetailDesc);
 	}else{
 		var invitationDiv = '<div class="control-group">';
 		invitationDiv = invitationDiv + '<div class="controls">';
-		invitationDiv = invitationDiv + '<input id="subDetailTitle'+idx+'" name="subDetailTitle'+idx+'" type="text" value="'+venueSubDetailTitle+'" placeholder="Enter Title" class="input-medium sub-detail-text-box">';
-		invitationDiv = invitationDiv + '<textarea id="subDetailDesc'+idx+'" name="subDetailDesc'+idx+'" placeholder="Enter Description" class="Text-Area">'+venueSubDetailDesc+'</textarea>';
+		invitationDiv = invitationDiv + '<input id="subDetailTitle'+idx+'" name="subDetailTitle'+idx+'" type="text" value="'+venueSubDetailTitle+'" placeholder="Enter Title" maxlength="70" class="input-medium sub-detail-text-box">';
+		invitationDiv = invitationDiv + '<textarea id="subDetailDesc'+idx+'" name="subDetailDesc'+idx+'" placeholder="Enter Description" maxlength="255" class="Text-Area">'+venueSubDetailDesc+'</textarea>';
 		invitationDiv = invitationDiv + "</div></div>";
 		$(".divHeight").append(invitationDiv);
 	}
-	noOfInvitations = idx;
+	if(idx <= 5){
+		noOfInvitations = 5;
+	}else{
+		noOfInvitations = idx;
+	}
+	
 }
 
 function loadVenueData() {
