@@ -2470,7 +2470,12 @@ i.choose_picture{
 .hideFlaskUsQuestionDiv{
   height:0px;
 }
-.QuestionInput{
+input.QuestionInput{
+  border: solid .5px;
+  width: 254px;
+  border-radius: 8px;
+}
+textarea.QuestionInput{
   border: solid .5px;
   width: 254px;
   border-radius: 8px;
