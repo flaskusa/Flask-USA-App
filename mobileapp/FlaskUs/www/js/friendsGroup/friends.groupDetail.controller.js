@@ -220,7 +220,6 @@
             });
         }
         $scope.removeMember= function(data,index) {
-
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Remove from Group?'
 
@@ -229,7 +228,11 @@
                 if(res) {
                     if(data.userName!=$scope.groupAdminDetail) {
                         GroupService.deleteGroupUser($scope.groupId, data.userId).then(function (response) {
-                            $scope.allMember.splice(index, 1);
+                            for (var i = 0; i < $scope.allMember.length; i++) {
+                                if ($scope.allMember[i].userId == data.userId) {
+                                    $scope.allMember.splice(i, 1);
+                                }
+                            }
                         });
                     }else{
                         $flaskUtil.alert(data.userName +" can't be removed")

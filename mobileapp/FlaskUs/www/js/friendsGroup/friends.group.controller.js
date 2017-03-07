@@ -54,7 +54,8 @@
 
             });
         }
-        $scope.leaveGroup=function(groupId,index){
+        $scope.leaveGroup = function (groupId, index) {
+            console.log($scope.groups);
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Leave Group?'
 
@@ -62,8 +63,12 @@
             confirmPopup.then(function(res) {
                 if(res) {
                     GroupService.leaveGroup(groupId,userId).then(function(response){
-                        if(response){
-                            $scope.groups.splice(index,1)
+                        if (response) {
+                            for (var i = 0; i < $scope.groups.length; i++) {
+                                if ($scope.groups[i].groupId == groupId) {
+                                    $scope.groups.splice(i, 1);
+                                }
+                            }
                         }else{
                             $flaskUtil.alert("failed to leave");
                         }
@@ -161,7 +166,7 @@
                 $state.go('app.groupDetail', {groupName: group.groupName});
             }
         }
-        $scope.deleteGroup = function(groupId,index) {
+        $scope.deleteGroup = function(groupId) {
 
                 var confirmPopup = $ionicPopup.confirm({
                     title: 'Delete Group?'
@@ -169,8 +174,13 @@
                 confirmPopup.then(function(res) {
                     if(res) {
                         GroupService.deleteGroup(groupId).then(function(response){
-                            if(response.statusText=="OK"){
-                                $scope.groups.splice(index,1);
+                            if (response.statusText == "OK") {
+                                for(var i=0;i<$scope.groups.length;i++){
+                                    if ($scope.groups[i].groupId == groupId) {
+                                        $scope.groups.splice(i,1);
+                                    }
+                                }
+                                
                             }
                             else{
                                 $flaskUtil.alert("failed to delete");
