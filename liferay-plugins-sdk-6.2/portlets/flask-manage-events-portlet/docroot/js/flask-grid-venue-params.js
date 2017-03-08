@@ -69,14 +69,11 @@ GRID_PARAM_VENUE.onRowClick =function(venue)
 	var visibleIndex = args.visibleindex;
 
 	if (args.column.text == rowMenuColumnText) {
-		var scrollTop = $(window).scrollTop();
-		var scrollLeft = $(window).scrollLeft();
-		editrow = venue.args.rowindex;
-		var rowsheight = grid.jqxGrid('rowsheight');
-		var top = $(this).offset().top + (2 + editrow) * rowsheight;
-		var left = ($(this).offset().left + parseInt($('#GridContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
-		$('#' +rowMenuDivId).jqxMenu('open', left, top + 5 + scrollTop);
-		return false;
+		  var scrollTop = $(window).scrollTop();
+		  var scrollLeft = $(window).scrollLeft();
+		  editrow = venue.args.rowindex;
+		  top = top + $(this).offset().top; // + (2 + editrow) * rowsheight
+		  $('#' +rowMenuDivId).jqxMenu('open', parseInt(venue.args.originalEvent.clientX) - 165 + scrollLeft, parseInt(venue.args.originalEvent.clientY) + 5 + scrollTop, top + 30);
 	} else {
 		// original event.
 		var ev = args.originalEvent;
