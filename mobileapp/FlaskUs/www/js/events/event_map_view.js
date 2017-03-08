@@ -729,9 +729,11 @@
         var template = '<ion-popover-view class="popover">' +
                              '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
                                  '<div class="list">' +
-                                 '<span class="range"><img src="../img/map_icons/parking.svg"><p>$0 - $20</p></span>' +
-                                 '<span class="range"><img src="../img/map_icons/parking_green.svg"><p>$21 - $45</p></span>' +
-                                 '<span class="range"><img src="../img/map_icons/parking_red.svg"><p>$46 and above</p></span>' +
+                                 '<span class="range"><img src="../img/map_icons/FLASK_PIN_10.png"><p>$10 - $20</p></span>' +
+                                 '<span class="range"><img src="../img/map_icons/FLASK_PIN_20.png"><p>$21 - $30</p></span>' +
+                                 '<span class="range"><img src="../img/map_icons/FLASK_PIN_30.png"><p>$31 - $40</p></span>' +
+                                 '<span class="range"><img src="../img/map_icons/FLASK_PIN_40.png"><p>$41 - $50</p></span>' +
+                                 '<span class="range"><img src="../img/map_icons/FLASK_PIN_50.png"><p>$51 and above</p></span>' +
                                  '</div>' +
                              '</ion-content>' +
                         '</ion-popover-view>';
@@ -1052,15 +1054,38 @@
                             $scope.setMarkerFields(tempObject);
                             if ("Parking" == tempObject.infoTypeCategoryName) {
                                 if (tempObject.cost <= 20) {
-                                    tempObject.icon = 'img/map_icons/parking.svg';
+                                    tempObject.icon= {
+                                        url: 'img/map_icons/FLASK_PIN_10.svg',
+                                        scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                    }
                                 }
-                                else if (tempObject.cost >= 21 && tempObject.cost <= 45) {
-                                    tempObject.icon = 'img/map_icons/parking_green.svg';
+                                else if (tempObject.cost >= 21 && tempObject.cost <= 30) {
+                                    tempObject.icon = {
+                                        url: 'img/map_icons/FLASK_PIN_20.svg',
+                                        scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                    }
                                 }
-                                else if (tempObject.cost >= 46) {
-                                    tempObject.icon = 'img/map_icons/parking_red.svg';
+                                else if (tempObject.cost >= 31 && tempObject.cost <= 40) {
+                                    tempObject.icon = {
+                                        url: 'img/map_icons/FLASK_PIN_30.svg',
+                                        scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                    }
+                                }
+                                else if (tempObject.cost >= 41 && tempObject.cost <= 50) {
+                                    tempObject.icon = {
+                                        url: 'img/map_icons/FLASK_PIN_40.svg',
+                                        scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                    }
+                                }
+                                else if (tempObject.cost >= 51) {
+                                    tempObject.icon = {
+                                        url: 'img/map_icons/FLASK_PIN_50.svg',
+                                        scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                    }
                                 }
                                 $scope.parkingMarkers.push(tempObject);
+                                console.log("tempObject-parking");
+                                console.log(tempObject);
                                 $scope.searchParkingMarkers = $scope.parkingMarkers;
                             } else {
                                 tempObject.icon = 'img/map_icons/bar.svg';
