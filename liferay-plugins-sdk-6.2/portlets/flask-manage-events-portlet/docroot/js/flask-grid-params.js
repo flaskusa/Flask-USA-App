@@ -87,9 +87,8 @@ GRID_PARAM.onRowClick =function(event)
 		var scrollTop = $(window).scrollTop();
 		var scrollLeft = $(window).scrollLeft();
 		editrow = event.args.rowindex;
-		//top = top + $(this).offset().top; // + (2 + editrow) * rowsheight
-		var left = ($(this).offset().left + parseInt($('#GridContainer').css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
-		$('#' +rowMenuDivId).jqxMenu('open', left, top + 30);
+		top = top + $(this).offset().top; // + (2 + editrow) * rowsheight
+		$('#' +rowMenuDivId).jqxMenu('open', parseInt(event.args.originalEvent.clientX) - 165 + scrollLeft, parseInt(event.args.originalEvent.clientY) + 5 + scrollTop, top + 30);
 	} else {
 		// original event.
 		var ev = args.originalEvent;
