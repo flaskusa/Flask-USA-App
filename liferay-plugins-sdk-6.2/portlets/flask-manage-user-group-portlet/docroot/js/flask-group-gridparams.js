@@ -109,10 +109,8 @@ GRID_PARAM_GROUP.onRowClick =function (event)
 		var scrollTop = $(window).scrollTop();
 		var scrollLeft = $(window).scrollLeft();
 		editrow = event.args.rowindex;
-		var rowsheight = grid.jqxGrid('rowsheight');
-		var top = $(this).offset().top + (2 + editrow) * rowsheight;
-		var left = ($(this).offset().left + parseInt($('#'+gridContainerId).css('width'), 10)) - parseInt($('#' + rowMenuDivId).css('width'), 10) - 25;
-		$('#' +rowMenuDivId).jqxMenu('open', left, top + 5 + scrollTop);
+		top = top + $(this).offset().top; // + (2 + editrow) * rowsheight
+		$('#' +rowMenuDivId).jqxMenu('open', parseInt(event.args.originalEvent.clientX) - 165 + scrollLeft, parseInt(event.args.originalEvent.clientY) + 5 + scrollTop, top + 30);
 	} else {
 		// original event.
 		var ev = args.originalEvent;
