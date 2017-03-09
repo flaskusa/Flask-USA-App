@@ -188,8 +188,8 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 		if(dropLength == 1){
 			action = $("#imgActionUrl").val();
 			caption = Obj[0].caption;
-			id = "test";
-			aspectRatio = "test";
+			id = "";
+			aspectRatio = "";
 			venuImageId ='venueImages';
 			deviceTypeId = '_deviceType';
 			aspectRatioId = '_aspectRatio';
