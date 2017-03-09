@@ -48,7 +48,17 @@ _venueDetailModel.DATA_MODEL= {
 				 { name: 'website', type: 'string'},
 				 { name: 'cost', type: 'long' },
 				 { name: 'hoursOfOperation', type:'string'}
-			]
+				 
+			],
+		VENUEDEVICEIMAGE:
+			[
+				{ name: 'deviceType', type: 'string' },
+				{ name: 'venueDeviceImageId', type: 'long' },
+				{ name: 'venueDetailImageId', type: 'long' },
+				{ name: 'venueDeviceImageUUID', type: 'string' },
+				{ name: 'aspectRatio', type:'string'}       
+			              
+		    ]
 	};
 
 _venueDetailModel.GRID_CONTEXT_MENU = {

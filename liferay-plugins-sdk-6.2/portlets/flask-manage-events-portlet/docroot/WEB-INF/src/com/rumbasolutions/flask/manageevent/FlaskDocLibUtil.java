@@ -192,7 +192,6 @@ public class FlaskDocLibUtil {
 													"", file, 
 													serviceContext);
 				setGuestViewPermission(fileEntry);
-				
 			}catch(Exception ex){
 			
 			}

@@ -4,6 +4,7 @@ var JsonObj;
 var JsonEventDetails;
 var iSelected;
 var noOfInvitations = 5;
+var noOfImages = 2
 
 function addDetailsClickHandlers() {
 	venueDetailForm = $("#venueDetailsForm");
@@ -317,11 +318,12 @@ function saveVenueDetails() {
 		}
 		if((title == "" || title == null) && (desc == "" || desc == null)){
 		}else{
-			record["title"] = title;
-			record["desc"] = desc;
+			record["title"] = JSON.stringify(title);
+			record["desc"] = JSON.stringify(desc);
 			params.venueSubDetails.push(record);
 		}
 	}
+	
 	var flaskRequest = new Request();
 	var url = ""
 	if (params.venueDetailId == 0) {
@@ -333,8 +335,9 @@ function saveVenueDetails() {
 		_flaskLib.showSuccessMessage('action-msg',
 				_venueDetailModel.MESSAGES.DETAIL_SAVE);
 		if ($('#venueImages').find('.dz-image').length > 0) {
-			fnSaveImages(data.venueDetailId, data.infoType);
-		} else {
+				fnSaveImages(data.venueDetailId, data.infoType);
+		}else{
+		
 			$('#venueDetailsForm').hide();
 			$('#venueDetailsDataTable').show();
 			$("#venueDetailId").val(0);
@@ -434,7 +437,6 @@ function fnSaveImages(venueDetailId, infoTypeId) {
 		}, 1)
 	});
 }
-
 var wait = function(callback, seconds) {
 	return window.setTimeout(callback, seconds * 1000);
 }
@@ -828,8 +830,7 @@ function getVenueSubDetails(venueDetailId) {
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(
 			_venueDetailModel.SERVICE_ENDPOINTS.GET_VENUE_SUB_DETAIL_BY_VENUE_DETAIL_ID, params,
-			function(data) {console.log("data : ");
-			console.log(data);
+			function(data) {
 				$.each(data, function(idx, obj) {
 					fnRenderVenueSubDetails(idx+1, obj.venueSubDetailTitle, obj.venueSubDetailDesc);
 				});
@@ -841,7 +842,7 @@ function getVenueSubDetails(venueDetailId) {
 function fnRenderVenueSubDetails(idx, venueSubDetailTitle, venueSubDetailDesc){
 	var titleid="#subDetailTitle"+idx;
 	var descid="#subDetailDesc"+idx;
-	if($(titleid).length > 0 || $(descid).length > 0){
+	if($(titleid).length > 0){
 		$(titleid).val(venueSubDetailTitle);
 		$(descid).text(venueSubDetailDesc);
 	}else{

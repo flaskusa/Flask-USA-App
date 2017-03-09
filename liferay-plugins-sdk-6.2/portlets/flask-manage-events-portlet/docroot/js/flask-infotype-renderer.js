@@ -1,4 +1,6 @@
 var _infoTypeRenderer = {};
+var ids = ["default","Galaxy_s7","iphone_7"];
+var aspectRatios = ["1440 x 2560","1440 x 2560","750 x 1334"];
 
 _infoTypeRenderer.getRenderer = function(type) {
 	type = type.toLowerCase();
@@ -76,9 +78,6 @@ _infoTypeRenderer.fnBuildHtml = function(Obj, Type) {
 			break;
 		case "subdetails":
 			return _infoTypeRenderer.fnBuildSubDetails(item.attr, Type);
-			break;
-		case "label":
-			return _infoTypeRenderer.fnBuildLabel(item.attr);
 			break;
 		case "upload":
 			return _infoTypeRenderer.fnBuildUpload(item.attr, Type);
@@ -168,126 +167,161 @@ _infoTypeRenderer.fnBuildChecked = function(Obj) {
 	}).appendTo(objControls);
 }
 
-_infoTypeRenderer.fnBuildLabel = function(Obj) {
-	var myclass = "form-group " +Obj[0].Class;
-	var myclass1 = "control-label " +Obj[0].Class1;
-	var objFormGroup = $('<div/>', {
-		'class' : myclass
-	}).appendTo($(formArea));
-	var objControlLable = $('<label/>', {
-		'class' : myclass1,
-		'id' : Obj[0].id
-	}).appendTo(objFormGroup);
-	$(objControlLable).html(Obj[0].caption);
-}
-
 _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
+	var dropLength = 1;
 	var strSelected = "";
+	var venuImageId ="";
+	var deviceTypeId ="";
+	var aspectRatioId ="";
 	dropZone = "";
 	var myclass = "form-group " +Obj[0].Class;
-	var objFormGroup = $('<div/>', {
-		'class' : myclass
-	}).appendTo($(formArea));
-	var objControlLable = $('<label/>', {
-		'class' : 'control-label',
-		'for' : Obj[0].caption
-	}).appendTo(objFormGroup);
-	$(objControlLable).html(Obj[0].caption);
-	var objControls = $('<div/>', {
-		'class' : 'controls'
-	}).appendTo(objFormGroup);
-	switch (Type) {
-	case "event":
-		var objForm = $('<form/>', {
-			'class' : 'dropzone',
-			'id' : 'eventImages',
-			'action' : Obj[0].action
-		}).appendTo(objFormGroup);
-		$(objForm).appendTo(objControls);
-		var objEventDetailId = $('<input/>', {
-			'name' : '_eventDetailId',
-			'id' : '_eventDetailId',
-			'type' : 'hidden',
-			'value' : '0'
-		});
-		$(objEventDetailId).appendTo(objForm);
-		var objEventId = $('<input/>', {
-			'name' : '_eventId',
-			'id' : '_eventId',
-			'type' : 'hidden',
-			'value' : $("#eventId").val()
-		});
-		$(objEventId).appendTo(objForm);
-		break;
-	case "venue":
-		var objForm = $('<form/>', {
-			'class' : 'dropzone',
-			'id' : 'venueImages',
-			'action' : Obj[0].action
-		}).appendTo(objFormGroup);
-		$(objForm).appendTo(objControls);
-		var objvenueDetailId = $('<input/>', {
-			'name' : '_venueDetailId',
-			'id' : '_venueDetailId',
-			'type' : 'hidden',
-			'value' : '0'
-		});
-		$(objvenueDetailId).appendTo(objForm);
-		var objVenueId = $('<input/>', {
-			'name' : '_venueId',
-			'id' : '_venueId',
-			'type' : 'hidden',
-			'value' : $("#venueId").val()
-		});
-		$(objVenueId).appendTo(objForm);
-		break;
-	default:
-		var objForm = $('<form/>', {
-			'class' : 'dropzone',
-			'id' : 'eventImages',
-			'action' : Obj[0].action
-		}).appendTo(objFormGroup);
-		$(objForm).appendTo(objControls);
-		var objEventDetailId = $('<input/>', {
-			'name' : '_eventDetailId',
-			'id' : '_eventDetailId',
-			'type' : 'hidden',
-			'value' : '0'
-		});
-		$(objEventDetailId).appendTo(objForm);
-		var objEventId = $('<input/>', {
-			'name' : '_eventId',
-			'id' : '_eventId',
-			'type' : 'hidden',
-			'value' : $("#eventId").val()
-		});
-		$(objEventId).appendTo(objForm);
-		break;
+	if(Obj[0].caption == "Upload Pictures"){
+		dropLength = 1;
+	}else{
+		dropLength = Obj[0].caption.length;
 	}
-	var objInfoTypeId = $('<input/>', {
-		'name' : '_infoTypeId',
-		'id' : '_infoTypeId',
-		'type' : 'hidden',
-		'value' : $("#infoTypeId").val()
-	});
-	$(objInfoTypeId).appendTo(objForm);
-	var objInfoTypeCategoryId = $('<input/>', {
-		'name' : '_infoTypeCategoryId',
-		'id' : '_infoTypeCategoryId',
-		'type' : 'hidden',
-		'value' : $("#infoTypeCategoryId").val()
-	});
-	$(objInfoTypeCategoryId).appendTo(objForm);
-	var objIsLogo = $('<input/>', {
-		'name' : '_isLogo',
-		'id' : '_isLogo',
-		'type' : 'hidden',
-		'value' : 'N'
-	});
-	$(objIsLogo).appendTo(objForm);
-	dropZone = new Dropzone($(objForm).get(0), {
-		autoProcessQueue : false
-	});
+	for(var i = 0; i < dropLength; i++){
+		var action = "";
+		var caption = "";
+		var id = "";
+		var aspectRatio = "";
+		if(dropLength == 1){
+			action = $("#imgActionUrl").val();
+			caption = Obj[0].caption;
+			id = "test";
+			aspectRatio = "test";
+			venuImageId ='venueImages';
+			deviceTypeId = '_deviceType';
+			aspectRatioId = '_aspectRatio';
+		}else{
+			action = $("#imgActionUrl_"+Obj[0].caption[i]).val();
+			caption = Obj[0].caption[i];
+			id = Obj[0].id[i];
+			aspectRatio = Obj[0].aspectRatio[i];
+			venuImageId ='venueImages';
+			deviceTypeId = '_deviceType'+i;
+			aspectRatioId = '_aspectRatio'+i;
+		}
+		var objFormGroup = $('<div/>', {
+			'class' : myclass
+		}).appendTo($(formArea));
+		var objControlLable = $('<label/>', {
+			'class' : 'control-label',
+			'for' : caption
+		}).appendTo(objFormGroup);
+		$(objControlLable).html(caption);
+		var objControls = $('<div/>', {
+			'class' : 'controls'
+		}).appendTo(objFormGroup);
+		switch (Type) {
+		case "event":
+			var objForm = $('<form/>', {
+				'class' : 'dropzone',
+				'id' : 'eventImages',
+				'action' : action
+			}).appendTo(objFormGroup);
+			$(objForm).appendTo(objControls);
+			var objEventDetailId = $('<input/>', {
+				'name' : '_eventDetailId',
+				'id' : '_eventDetailId',
+				'type' : 'hidden',
+				'value' : '0'
+			});
+			$(objEventDetailId).appendTo(objForm);
+			var objEventId = $('<input/>', {
+				'name' : '_eventId',
+				'id' : '_eventId',
+				'type' : 'hidden',
+				'value' : $("#eventId").val()
+			});
+			$(objEventId).appendTo(objForm);
+			break;
+		case "venue":
+			var objForm = $('<form/>', {
+				'class' : 'dropzone',
+				'id' : venuImageId,
+				'action' : action
+			}).appendTo(objFormGroup);
+			$(objForm).appendTo(objControls);
+			var objvenueDetailId = $('<input/>', {
+				'name' : '_venueDetailId',
+				'id' : '_venueDetailId',
+				'type' : 'hidden',
+				'value' : '0'
+			});
+			$(objvenueDetailId).appendTo(objForm);
+			var objVenueId = $('<input/>', {
+				'name' : '_venueId',
+				'id' : '_venueId',
+				'type' : 'hidden',
+				'value' : $("#venueId").val()
+			});
+			$(objVenueId).appendTo(objForm);
+			var objDeviceType = $('<input/>', {
+				'name' : deviceTypeId,
+				'id' : deviceTypeId,
+				'type' : 'hidden',
+				'class':'deviceType',
+				'value' : id
+			});
+			$(objDeviceType).appendTo(objForm);
+			var objAspectRatio = $('<input/>', {
+				'name' : aspectRatioId,
+				'id' : aspectRatioId,
+				'type' : 'hidden',
+				'class':'aspectRatio',
+				'value' : aspectRatio
+			});
+			$(objAspectRatio).appendTo(objForm);
+			break;
+		default:
+			var objForm = $('<form/>', {
+				'class' : 'dropzone',
+				'id' : 'eventImages',
+				'action' : action
+			}).appendTo(objFormGroup);
+			$(objForm).appendTo(objControls);
+			var objEventDetailId = $('<input/>', {
+				'name' : '_eventDetailId',
+				'id' : '_eventDetailId',
+				'type' : 'hidden',
+				'value' : '0'
+			});
+			$(objEventDetailId).appendTo(objForm);
+			var objEventId = $('<input/>', {
+				'name' : '_eventId',
+				'id' : '_eventId',
+				'type' : 'hidden',
+				'value' : $("#eventId").val()
+			});
+			$(objEventId).appendTo(objForm);
+			break;
+		}
+		var objInfoTypeId = $('<input/>', {
+			'name' : '_infoTypeId',
+			'id' : '_infoTypeId',
+			'type' : 'hidden',
+			'value' : $("#infoTypeId").val()
+		});
+		$(objInfoTypeId).appendTo(objForm);
+		var objInfoTypeCategoryId = $('<input/>', {
+			'name' : '_infoTypeCategoryId',
+			'id' : '_infoTypeCategoryId',
+			'type' : 'hidden',
+			'value' : $("#infoTypeCategoryId").val()
+		});
+		$(objInfoTypeCategoryId).appendTo(objForm);
+		var objIsLogo = $('<input/>', {
+			'name' : '_isLogo',
+			'id' : '_isLogo',
+			'type' : 'hidden',
+			'value' : 'N'
+		});
+		$(objIsLogo).appendTo(objForm);
+		dropZone = new Dropzone($(objForm).get(0), {
+			autoProcessQueue : false
+		});
+	}
 }
 
 _infoTypeRenderer.fnBuildEditor = function(Obj) {
@@ -600,21 +634,14 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"checked" : "checked"
 		} ]
 	}, {
-		"type" : "label",
-		"attr" : [ {
-			"caption" : "Galaxy S7",
-			"id" : "Galaxy_S7",
-			"Class" : "label-small",
-			"Class1" : "bold"
-		} ]
-	}, {
 		"type" : "upload",
 		"attr" : [ {
-			"caption" : "Upload Pictures",
-			"action" : $("#imgActionUrl").val(),
-			"id" : "eventId",
+			"caption" : ids,
+			"action" : ids,
+			"id" : ids,
+			"aspectRatio" : aspectRatios,
 			"value" : $("#eventId").val(),
-			"Class" : "upload-small"
+			"Class" : ""
 		} ]
 	}],
 	FOOD : [ {// FOOD

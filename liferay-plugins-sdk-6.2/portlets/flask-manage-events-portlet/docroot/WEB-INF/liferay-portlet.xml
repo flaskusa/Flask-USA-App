@@ -98,6 +98,8 @@
 	    <footer-portlet-javascript>/js/modalEffects.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jqxeditor.js</footer-portlet-javascript>
 		<footer-portlet-javascript>/js/jquery.ba-bbq.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/plupload.full.min.js</footer-portlet-javascript>
+		<footer-portlet-javascript>/js/plupload.js</footer-portlet-javascript>
 		<css-class-wrapper>flask-manage-venue-portlet</css-class-wrapper>
 	</portlet>
 	<role-mapper>

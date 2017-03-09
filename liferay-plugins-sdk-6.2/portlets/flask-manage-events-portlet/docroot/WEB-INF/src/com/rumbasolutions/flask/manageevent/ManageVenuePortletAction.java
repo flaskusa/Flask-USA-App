@@ -21,6 +21,7 @@ import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.ServiceContextFactory;
 import com.liferay.util.bridges.mvc.MVCPortlet;
+import com.rumbasolutions.flask.model.VenueDetailImage;
 import com.rumbasolutions.flask.service.VenueServiceUtil;
 
 
@@ -42,14 +43,17 @@ public class ManageVenuePortletAction extends MVCPortlet {
 	private final String VENUE_ID_QSTR = "_venueId";
 	private final String VENUE_DETAIL_ID_QSTR= "_venueDetailId";
 	private final String VENUE_ISLOGO_QSTR= "_isLogo";
+	private final String VENUE_DEVICE_TYPE= "_deviceType";
+	private final String VENUE_ASPECT_RATIO= "_aspectRatio";
 	private long _venueId = 0;
 	private long _venueDetailId = 0;
 	private String _isLogo = "N";
+	private String _deviceType = "";
+	private String _aspectRatio = "";
 	private ServiceContext _serviceContext;
 	Folder _venueFolder=null;
 	
 public void addImages(ActionRequest actionRequest, ActionResponse actionResponse)throws IOException, PortletException {
-		
 		if (!PortletFileUpload.isMultipartContent( actionRequest)) {
 			return;
 		}
@@ -72,9 +76,17 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 		try {
 			// parses the request's content to extract file data
 			List<FileItem> formItems = upload.parseRequest(actionRequest);
+			System.out.println("actionRequest: "+formItems);
 			_venueId = getEventId(formItems);
 			_venueDetailId = getEventDetailId(formItems);
 			_isLogo = getIsLogo(formItems);
+			_deviceType = getDeviceType(formItems);
+			_aspectRatio = getAspectRatio(formItems);
+			System.out.println("_venueId: "+_venueId);
+			System.out.println("_venueDetailId: "+_venueDetailId);
+			System.out.println("_isLogo: "+_isLogo);
+			System.out.println("_aspectRatio: "+_aspectRatio);
+			System.out.println("_deviceType: "+_deviceType);
 			createUploadFolder(uploadPath);
 			
 			for(FileItem item: formItems){
@@ -92,10 +104,14 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 					item.write(storeFile);
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
 					FileEntry fileEntry = FlaskDocLibUtil.addFileEntry(_venueFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
-					if(_venueDetailId>0)
-						VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
-					else
+					if(_venueDetailId>0){
+						VenueDetailImage venueDetailImage = VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
+						if(!_deviceType.isEmpty() && !_aspectRatio.isEmpty()){
+							VenueServiceUtil.addVenueDeviceImage(venueDetailImage.getVenueDetailImageId(),_venueId, _deviceType, fileEntry.getUuid(), _aspectRatio);
+						}
+					}else{
 						VenueServiceUtil.addVenueImage(_venueId, fileTitle, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
+					}
 				}else{
 					
 				}
@@ -198,5 +214,29 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 			}
 		}
 		return isLogo;
+	}	
+	
+	private String getDeviceType(List<FileItem> formItems){
+		String deviceType = "";
+		 
+		for (FileItem item : formItems){
+			if(item.getFieldName().contentEquals(VENUE_DEVICE_TYPE)){
+				deviceType = item.getString();
+				break;
+			}
+		}
+		return deviceType;
+	}	
+	
+	private String getAspectRatio(List<FileItem> formItems){
+		String aspectRatio = "";
+		 
+		for (FileItem item : formItems){
+			if(item.getFieldName().contentEquals(VENUE_ASPECT_RATIO)){
+				aspectRatio = item.getString();
+				break;
+			}
+		}
+		return aspectRatio;
 	}	
 }

@@ -69,11 +69,11 @@ GRID_PARAM_VENUE.onRowClick =function(venue)
 	var visibleIndex = args.visibleindex;
 
 	if (args.column.text == rowMenuColumnText) {
-		  var scrollTop = $(window).scrollTop();
-		  var scrollLeft = $(window).scrollLeft();
-		  editrow = venue.args.rowindex;
-		  top = top + $(this).offset().top; // + (2 + editrow) * rowsheight
-		  $('#' +rowMenuDivId).jqxMenu('open', parseInt(venue.args.originalEvent.clientX) - 165 + scrollLeft, parseInt(venue.args.originalEvent.clientY) + 5 + scrollTop, top + 30);
+		var scrollTop = $(window).scrollTop();
+		var scrollLeft = $(window).scrollLeft();
+		editrow = venue.args.rowindex;
+		top = top + $(this).offset().top; // + (2 + editrow) * rowsheight
+		$('#' +rowMenuDivId).jqxMenu('open', parseInt(venue.args.originalEvent.clientX) - 165 + scrollLeft, parseInt(venue.args.originalEvent.clientY) + 5 + scrollTop, top + 30);
 	} else {
 		// original event.
 		var ev = args.originalEvent;
