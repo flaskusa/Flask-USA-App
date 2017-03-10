@@ -2908,8 +2908,8 @@ div .manage_event_default_Image{
 
 /*map svg images*/
 .map_info_img{
-    width: 36px !important;
-    height: 32px !important;
+    width: 32px !important;
+    height: 28px !important;
     margin-top: -4px;
     margin-left:17px;
 }
@@ -3344,3 +3344,25 @@ div#locationMarker {
     text-transform:uppercase;font-size:11px;
 }
 
+/*modal animation for friend chat window*/
+
+.fade-in {
+  -webkit-transform: scale(0.0);
+  transform: scale(0.0);
+  opacity: 0;
+}
+.fade-in.ng-enter, .fade-in > .ng-enter {
+  -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 250ms;
+  transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 250ms;
+}
+.fade-in.ng-enter-active,
+.fade-in > .ng-enter-active {
+  -webkit-transform: scale(1.0);
+  transform: scale(1.0);
+  opacity: 1;
+}
+
+.fade-in.ng-leave, .fade-in > .ng-leave {
+  -webkit-transition: all ease-in-out 250ms;
+  transition: all ease-in-out 250ms;
+}
