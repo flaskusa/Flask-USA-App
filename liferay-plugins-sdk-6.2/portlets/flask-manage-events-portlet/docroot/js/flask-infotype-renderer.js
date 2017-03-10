@@ -51,14 +51,14 @@ _infoTypeRenderer.getRenderer = function(type) {
 
 _infoTypeRenderer.fnRenderForm = function(contentType, Type) {
 	var obj = _infoTypeRenderer.getRenderer(contentType);
-	_infoTypeRenderer.fnBuildHtml(obj, Type);
+	_infoTypeRenderer.fnBuildHtml(obj, Type, contentType);
 	if ($("#eventDetailId").val() > 0) {
 
 	}
 
 }
 
-_infoTypeRenderer.fnBuildHtml = function(Obj, Type) {
+_infoTypeRenderer.fnBuildHtml = function(Obj, Type, contentType) {
 	var items = Obj.filter(function(item) {
 		switch (item.type) {
 		case "text":
@@ -77,7 +77,7 @@ _infoTypeRenderer.fnBuildHtml = function(Obj, Type) {
 			return _infoTypeRenderer.fnBuildEditor(item.attr);
 			break;
 		case "subdetails":
-			return _infoTypeRenderer.fnBuildSubDetails(item.attr, Type);
+			return _infoTypeRenderer.fnBuildSubDetails(item.attr, contentType);
 			break;
 		case "upload":
 			return _infoTypeRenderer.fnBuildUpload(item.attr, Type);
@@ -174,7 +174,7 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 	var deviceTypeId ="";
 	var aspectRatioId ="";
 	dropZone = "";
-	var myclass = "form-group " +Obj[0].Class;
+	var myclass = "form-group " +Obj[0].Class+ " uploader";
 	if(Obj[0].caption == "Upload Pictures"){
 		dropLength = 1;
 	}else{
@@ -203,7 +203,8 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 			aspectRatioId = '_aspectRatio'+i;
 		}
 		var objFormGroup = $('<div/>', {
-			'class' : myclass
+			'class' : myclass,
+			id:"uploader"
 		}).appendTo($(formArea));
 		var objControlLable = $('<label/>', {
 			'class' : 'control-label',
@@ -350,9 +351,9 @@ _infoTypeRenderer.fnBuildEditor = function(Obj) {
 
 }
 
-_infoTypeRenderer.fnBuildSubDetails = function(Obj, Type) {
-	Type = Type.charAt(0).toUpperCase() + Type.slice(1);
-	var label = Type + Obj[0].caption;
+_infoTypeRenderer.fnBuildSubDetails = function(Obj, contentType) {
+	contentType = contentType.charAt(0).toUpperCase() + contentType.slice(1);
+	var label = contentType + Obj[0].caption;
 	var objFormHeight = $('<div/>', {
 		'class' : 'divHeight'
 	}).appendTo($(formArea));
