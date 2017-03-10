@@ -209,10 +209,12 @@
                                     </div>
                                 </div>
                             </ui-gmap-map-control>
+                            <!--for flask markers and icons-->
                             <ui-gmap-markers models="parkingMarkers" coords="'self'" icon="'icon'" options="markerOptions" click="onClick" control="markerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'" control="windowOptions.control">
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
+                            <!--for google markers and icons-->
                             <ui-gmap-markers models="parkingGoogleMarkers" coords="'self'" icon="'icon'" options="googleMarkerOptions" click="onClick"
                                              control="googleMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
@@ -269,12 +271,13 @@
                                     </div>
                                 </div>
                                 <div ng-repeat="subdetail in data.trafficInfoSubDetail">
-                                    <div>
+                                    <div style="margin-bottom:10px;">
                                         <div class="TrafficInfoDescDiv">
                                             <div class="subDetails">
                                                 <i class="trafficSubDetailHeading" ng-if="subdetail.venueSubDetailTitle != ''">{{subdetail.venueSubDetailTitle}}</i>
-                                                <i class="traffic" style="font-weight:normal !important;">-{{subdetail.venueSubDetailDesc}}</i>
+                                                
                                             </div>
+                                            <i class="traffic" style="font-weight:normal !important;margin-left: 80px;">- {{subdetail.venueSubDetailDesc}}</i>
                                         </div>
                                     </div>
                                 </div>
@@ -288,41 +291,41 @@
                             <div>
                                 <div class="flask_us_div">
                                     <div>
-                                            <div ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
-                                                <div class="form-group">
-                                                    <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
-                                                    <div ng-if="flaskUsDetail.imageUrl">
-                                                        <img class="full-image" src={{flaskUsDetail.imageUrl}}>
-                                                    </div>
-                                                    <div class="form-group flask_us_form">
-                                                        <label class="control-label" for="Descriptions"><div class="flask_us_detail_title"><b>{{flaskUsDetail.infoTitle}}</b></div></label>
-                                                    </div>
-                                                    <div class="col-70 flask_us_detail_title" id="Descriptions">
-                                                        <div class="ion-star"></div>
-                                                        {{flaskUsDetail.infoDesc}}
-                                                    </div>
+                                        <div ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
+                                            <div class="form-group">
+                                                <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
+                                                <div ng-if="flaskUsDetail.imageUrl">
+                                                    <img class="full-image" src={{flaskUsDetail.imageUrl}}>
+                                                </div>
+                                                <div class="form-group flask_us_form">
+                                                    <label class="control-label" for="Descriptions"><div class="flask_us_detail_title"><b>{{flaskUsDetail.infoTitle}}</b></div></label>
+                                                </div>
+                                                <div class="col-70 flask_us_detail_title" id="Descriptions">
+                                                    <div class="ion-star"></div>
+                                                    {{flaskUsDetail.infoDesc}}
                                                 </div>
                                             </div>
-                                            <div>
-                                                <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
-                                                    <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
+                                        </div>
+                                        <div>
+                                            <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
+                                                <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
+                                            </div>
+                                            <div class="flaskUsQuestionDiv">
+                                                <div align="center">
+                                                    <span class="que-input-label"><b>NAME*</b></span>
+                                                    <input type="text" class="QuestionInput">
+                                                    <span class="que-input-label"><b>EMAIL*</b></span>
+                                                    <input type="text" class="QuestionInput">
+                                                    <span class="que-input-label"><b>QUESTION*</b></span>
+                                                    <textarea class="QuestionInput"></textarea>
                                                 </div>
-                                                <div class="flaskUsQuestionDiv">
-                                                    <div align="center">
-                                                        <span class="que-input-label"><b>NAME*</b></span>
-                                                        <input type="text" class="QuestionInput">
-                                                        <span class="que-input-label"><b>EMAIL*</b></span>
-                                                        <input type="text" class="QuestionInput">
-                                                        <span class="que-input-label"><b>QUESTION*</b></span>
-                                                        <textarea class="QuestionInput"></textarea>
-                                                    </div>
-                                                    <div align="center">
-                                                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="toggleMsgDiv()">
-                                                            Send
-                                                        </button>
-                                                    </div>
+                                                <div align="center">
+                                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="toggleMsgDiv()">
+                                                        Send
+                                                    </button>
                                                 </div>
                                             </div>
+                                        </div>
                                         </ion-slide-box>
                                     </div>
                                 </div>
@@ -360,8 +363,8 @@
                                     <div class="TrafficInfoDescDiv">
                                         <div class="subDetails">
                                             <i class="trafficDetailHeading" ng-if="subdetail.venueSubDetailTitle != ''">{{subdetail.venueSubDetailTitle}}</i>
-                                            <i class="trafficSubDetailHeading" style="font-weight:normal !important;">-{{subdetail.venueSubDetailDesc}}</i>
-                                        </div>   
+                                            <i class="trafficSubDetailHeading" style="font-weight:normal !important;">- {{subdetail.venueSubDetailDesc}}</i>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -404,12 +407,6 @@
                             <div>
                                 <div class="flask_us_div">
                                     <div>
-                                        <div class="left flask_us_slide_buttons">
-                                            <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('Flask-Detail')"></button>
-                                        </div>
-                                        <div class="right flask_us_slide_buttons_right">
-                                            <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('Flask-Detail')"></button>
-                                        </div>
                                         <ion-slide-box delegate-handle="Flask-Detail" show-pager='false'>
                                             <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
                                                 <div class="form-group">
@@ -574,12 +571,6 @@
                             <div>
                                 <div class="flask_us_div">
                                     <div>
-                                        <div class="left flask_us_slide_buttons">
-                                            <button class="button button-icon icon ion-chevron-left slider_arrow" ng-click="slidePrevious1('Flask-Detail')"></button>
-                                        </div>
-                                        <div class="right flask_us_slide_buttons_right">
-                                            <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('Flask-Detail')"></button>
-                                        </div>
                                         <ion-slide-box delegate-handle="Flask-Detail" show-pager='false'>
                                             <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
                                                 <div class="form-group">
@@ -595,34 +586,37 @@
                                                         {{flaskUsDetail.infoDesc}}
                                                     </div>
                                                 </div>
-                                                <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
-                                                    <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
-                                                </div>
-                                                <div class="flaskUsQuestionDiv" ng-class="{hideFlaskUsQuestionDiv:toggleQueDiv}" ng-if="hideDiv==false">
-                                                    <div align="center">
-                                                        <span class="que-input-label"><b>NAME*</b></span>
-                                                        <input type="text" class="QuestionInput">
-                                                        <span class="que-input-label"><b>EMAIL*</b></span>
-                                                        <input type="text" class="QuestionInput">
-                                                        <span class="que-input-label"><b>QUESTION*</b></span>
-                                                        <textarea class="QuestionInput"></textarea>
-                                                    </div>
-                                                    <div align="center">
-                                                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="toggleMsgDiv()">
-                                                            Send
-                                                        </button>
-                                                    </div>
-                                                </div>
-                                            </ion-slide>
-                                        </ion-slide-box>
                                     </div>
+                                    <div>
+                                        <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
+                                            <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
+                                        </div>
+                                        <div class="flaskUsQuestionDiv">
+                                            <div align="center">
+                                                <span class="que-input-label"><b>NAME*</b></span>
+                                                <input type="text" class="QuestionInput">
+                                                <span class="que-input-label"><b>EMAIL*</b></span>
+                                                <input type="text" class="QuestionInput">
+                                                <span class="que-input-label"><b>QUESTION*</b></span>
+                                                <textarea class="QuestionInput"></textarea>
+                                            </div>
+                                            <div align="center">
+                                                <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="toggleMsgDiv()">
+                                                    Send
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    </ion-slide>
+                                    </ion-slide-box>
                                 </div>
                             </div>
-                        </ion-content>
                     </div>
-                </ion-tab>
-            </ion-tabs>
-        </div>
+    </ion-content>
+    </div>
+    </ion-tab>
+    </ion-tabs>
+    </div>
     </ion-content>
     <ion-footer-bar class=" bar bar-dark bar-footer bar-assertive customBarPadding">
         <div ng-include="'templates/advertisement.html'" class="footer-img"></div>
