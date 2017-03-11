@@ -729,12 +729,12 @@
         var template = '<ion-popover-view class="popover">' +
                              '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
                                  '<div class="list">' +
-                                 '<span class="range" ng-click="filterMarker(0);"><img src=""><p>All</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(10);"><img src="./img/map_icons/FLASK_PIN_10.png"><p>$10 - $20</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(20);"><img src="./img/map_icons/FLASK_PIN_20.png"><p>$21 - $30</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(30);"><img src="./img/map_icons/FLASK_PIN_30.png"><p>$31 - $40</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(40);"><img src="./img/map_icons/FLASK_PIN_40.png"><p>$41 - $50</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(50);"><img src="./img/map_icons/FLASK_PIN_50.png"><p>$51 and above</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(0,0);"><img src=""><p id="0" style="color:#f7941e;">All</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(10,1);"><img src="./img/map_icons/FLASK_PIN_10.png"><p id="1">$10 - $20</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(20,2);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="2">$21 - $30</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(30,3);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="3">$31 - $40</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(40,4);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="4">$41 - $50</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(50,5);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="5" >$51 and above</p></span>' +
                                  '</div>' +
                              '</ion-content>' +
                         '</ion-popover-view>';
@@ -748,18 +748,27 @@
         };
 
         //function for getting data of filter
-        $scope.filterMarker = function (data) {
-            console.log(data);
+        $scope.previousIndex = -1;
+        $scope.filterMarker = function (data,index) {
+            var index = index;
+
             if (data == 0) {
                 $scope.filterCost = null;
+                $("#0").css("color", "#f7941e");
+                $("#" + $scope.previousIndex).css("color", "#000000");
             } else {
                 $scope.filterCost = parseInt(data);
+                $("#" + $scope.previousIndex).css("color", "#000000");
+                $("#" + index).css("color", "#f7941e");
+                $scope.previousIndex = index;
+                if ($scope.previousIndex >= 0) {
+                    $("#0").css("color", "#000000");
+                }
             }
 
             callMarkersAgain();
         };
         function callMarkersAgain() {
-            console.log("inside call marker");
             $scope.isMapMarkersSet = false;
             $scope.setMarkers();
         }
@@ -1047,6 +1056,7 @@
         $scope.filterCost == null;
 
         $scope.setMarkers = function () {
+
             if (!$scope.isMapMarkersSet) {
 
                 var subDetailArray = {};
@@ -1108,9 +1118,6 @@
                                         }
                                     }
                                     $scope.parkingMarkers.push(tempObject);
-                                    console.log("tempObject-parking");
-                                    console.log(tempObject);
-
                                 } else {
                                     if (index == 0) {
                                         $scope.parkingMarkers = [];
@@ -1217,8 +1224,10 @@
             if ((tempObject.cost >= $scope.filterCost) && (tempObject.cost <= ($scope.filterCost + 10))) {
                 $scope.parkingMarkers.push(tempObject);
             }
-            console.log("tempObject-parking");
-            console.log(tempObject);
+            if (($ionicTabsDelegate.selectedIndex()) > 0) {
+                var value = parseInt("0");
+                $scope.filterMarker(value, value);
+            }
         }
 
         $scope.slidePrevious1 = function (slide) {
