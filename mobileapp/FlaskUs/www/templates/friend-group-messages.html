@@ -8,7 +8,7 @@
         <ion-tab title="My friends" id="myFriendsTab">
             <ion-content style="margin-top:40px;">
                 <ion-list id="myFriendsList">
-                    <ion-item ng-repeat="data in allFriends | orderBy:'fullName'" class="row-no-padding item-remove-animate" padding="false" ng-click="showChatWindowPopup(data)">
+                    <ion-item ng-repeat="data in allFriends | orderBy:'fullName'" class="row-no-padding item-remove-animate" padding="false" ng-click="showChatWindowPopup(data,'user')" style="height: 74px;">
                         <a class="row-no-padding" style="text-decoration: none">
                             <!--href="#/app/my_friendDetail/{{data.userId}}"-->
                             <div class=" col col-20" ng-if="data.friendProfilePicUrl==undefined">
@@ -20,10 +20,10 @@
                             <div class="col col-70" style="padding-top: 16px">
                                 <h3 class="nameText">{{ data.fullName | uppercase}}</h3>
                             </div>
-                            <span class="badge span_icon ext-top span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
+                            <span class="badge badge-assertive badge_count ng-binding" style="margin-top:11px;">0</span>
                         </a>
-                        <ion-option-button class="icon ion-trash-a" ng-click="unFriend(data.userId)"></ion-option-button>
-                        <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(data.userId)"></ion-option-button>
+                        <!--<ion-option-button class="icon ion-trash-a" ng-click="unFriend(data.userId)"></ion-option-button>
+                        <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(data.userId)"></ion-option-button>-->
 
                     </ion-item>
                     <a class="item" ng-if="myFriends.length == 0 && shoeEmptyMessage==true">There are no friends. </a>
@@ -34,7 +34,7 @@
             <ion-content style="margin-top:40px;">
                 <ion-list>
                     <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> There are no groups. </a>
-                    <ion-item class=" item-remove-animate" ng-repeat="group in groups | filter: groupList.searchString | orderBy:'groupName'" style="padding: 0px" ng-init="group.showDivByIndex=false">
+                    <ion-item class=" item-remove-animate" ng-repeat="group in groups | filter: groupList.searchString | orderBy:'groupName'" style="padding: 0px" ng-init="group.showDivByIndex=false" ng-click="showChatWindowPopup(group,'group')">
                         <div ng-if="group.showDivByIndex==true" style="padding-top: 10px">
                             user Added
                         </div>
@@ -52,16 +52,16 @@
                                 </div>
                                 <div class="col-20" ng-if="addingInGroup==true">
                                     <span class="badge span_icon " style="top:7px;right:10px;">
-                                        <label class="checkbox" class="labelCheckBox">
+                                        <label class="checkbox labelCheckBox">
                                             <input type="checkbox" ng-click="addFriendToGroup($index,group.groupId,group.showDivByIndex)">
                                         </label>
                                     </span>
                                 </div>
                             </a>
                         </div>
-                        <ion-option-button class="icon ion-edit" ng-click="editGroup(group)" ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
+                        <!--<ion-option-button class="icon ion-edit" ng-click="editGroup(group)" ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
                         <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteGroup(group.groupId)" ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
-                        <ion-option-button class="icon icon ion-android-exit" ng-if="addingInGroup==false && group.isAdmin==0" ng-click="leaveGroup(group.groupId)"></ion-option-button>
+                        <ion-option-button class="icon icon ion-android-exit" ng-if="addingInGroup==false && group.isAdmin==0" ng-click="leaveGroup(group.groupId)"></ion-option-button>-->
                     </ion-item>
                 </ion-list>
             </ion-content>
@@ -79,29 +79,28 @@
             </ion-nav-bar>
             <ion-content class="has-header padding">
                 <div click-for-options ng-repeat="message in userThreadMessage">
-                    <div style="padding-top:9px;">
+                    <div style="padding-top:9px;margin-left:13px;">
                         <!--<h2 class="emailText">{{message.senderName}}</h2>
                         <h4 style="float: right">{{message.date}}</h4>-->
-                        
-
-                        <div class="col-60" style="border: solid darkorange 1px;border-radius: 16px;padding-top: 9px;width: 50%;background-color: white;">
+                        <div class="col-60 bubble">
                             <center>
-                                <p ng-class="{unreadMessageText: message.read==false}">{{message.receivedMessage}}</p>
+                                <p ng-class="{unreadMessageText: message.read==false}" style="margin: 0 0 1px !important;">{{message.receivedMessage}}</p>
                             </center>
                         </div>
                         <!--<ion-option-button class="icon ion-trash-a" ng-click="deleteMessage(message.messageId)"></ion-option-button>-->
                     </div>
                 </div>
                 <div ng-if="allMessages.length==0" class="item">There are no messages.</div>
-                <ion-footer-bar class="bar bar-footer" style="background-color:transparent;">
-                    <div style="width: 100%;">
-                        <textarea ng-model="textMessage.messageToSend" id="textArea" class="showNotificationTextArea ng-pristine ng-untouched ng-valid ng-empty" autofocus="" style="float: left;height: 35px;margin-right: 12px;"></textarea>
-                        <button style="float: left;" class="button button-small suppliesButton">
-                            Send
-                        </button>
-                    </div>
-                </ion-footer-bar>
+
             </ion-content>
+            <ion-footer-bar class="bar bar-footer" style="background-color:transparent;border-top: solid #f89734 1px;background-image:none !important;">
+                <div style="width: 100%;">
+                    <textarea ng-model="textMessage.messageToSend" id="textArea" class="showNotificationTextArea ng-pristine ng-untouched ng-valid ng-empty" autofocus="" style="float: left;height: 35px;margin-right: 12px;"></textarea>
+                    <button style="float: left;" class="button button-small suppliesButton" ng-click="sendReply(textMessage.messageToSend)">
+                        Send
+                    </button>
+                </div>
+            </ion-footer-bar>
         </ion-modal-view>
     </script>
 </ion-view>
