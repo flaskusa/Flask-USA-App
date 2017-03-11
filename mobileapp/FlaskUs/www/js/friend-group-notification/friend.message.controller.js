@@ -258,15 +258,28 @@
         $scope.closeChatWindowPopup = function () {
             $scope.modal.hide();
         };
-        $scope.showChatWindowPopup = function (data) {
-            console.log(data);
-                $scope.friendName = data.fullName;
+        $scope.showChatWindowPopup = function (data, type) {
+            if(type == 'user'){
+            $scope.friendName = data.fullName;
                 for (var i = 0; i < $scope.allMessages.length; i++) {
                     if (data.userId == $scope.allMessages[i].senderUserId) {
-                        $scope.userThreadMessage.push({"receivedMessage":$scope.allMessages[i].message, "date":$scope.allMessages[i].diffDate}); 
+                        $scope.userThreadMessage.push({ "receivedMessage": $scope.allMessages[i].message, "date": $scope.allMessages[i].diffDate });
+                        $scope.senderId = $scope.allMessages[i].senderUserId;
+                    } else {
+                        $scope.userThreadMessage = [];
                     }
                 }
+            }
+            else {
+                $scope.friendName = data.fullName;
+            }
             $scope.modal.show();
+        }
+        //send message to friend
+        $scope.sendReply = function (message) {
+            FriendsNotificationService.sendMessage($scope.senderId, message).then(function (response) {
+                delete $scope.textMessage.messageToSend;
+            });
         }
     }
 })();
