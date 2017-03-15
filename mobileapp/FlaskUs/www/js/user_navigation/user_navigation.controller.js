@@ -9,11 +9,11 @@
     function user_navigation_menuCtrl($scope, $rootScope, $state,$localStorage,FriendsNotificationService,$timeout,$cookies) {
         var self = this;
         $localStorage["myFriendDetail"] = [];
-        $scope.flag=[];
         $scope.goToMessagePage=false;
         $scope.goToFriendPage=false;
-        $scope.goToRequestPage=false;
-
+        $scope.goToRequestPage = false;
+        $scope.groupMessageCount = 0;
+        $scope.userMessageCount = 0;
         $rootScope.totalMessageNotification=0;
         $rootScope.totalRequestNotification = 0;
          $scope.isUserLogin=function() {
@@ -31,23 +31,17 @@
 
          }
 
-        $scope.initialize = function () {
-
-            FriendsNotificationService.getNotificationCount().then(function (response1) {
-
-
-            FriendsNotificationService.getMyAllMessages().then(function (response) {
-                $scope.allMessages = response;
-                for (var i = 0; i < $scope.allMessages.length; i++) {
-                    if ($scope.allMessages[i].read == false) {
-                        $scope.flag.push($scope.allMessages[i].messageId);
-                    }
-                }
-                $rootScope.totalMessageNotification = parseInt($scope.flag.length);
-                $rootScope.totalRequestNotification = response1;
-
-            });
-            });
+         $scope.initialize = function () {
+             FriendsNotificationService.getNotificationCount().then(function (response) {
+                 $rootScope.totalRequestNotification = response;
+             });
+             FriendsNotificationService.getTotalUnreadMessagesCount().then(function (response1) {
+                 $scope.userMessageCount = response1;
+             });
+             FriendsNotificationService.getTotalUnreadGroupMessagesCount().then(function (response2) {
+                 $scope.groupMessageCount = response2;
+             });
+             $rootScope.totalMessageNotification = $scope.userMessageCount + $scope.groupMessageCount;
         }
         $scope.myEvent = function ()
         {
