@@ -21,10 +21,10 @@
                                 <h3 class="nameText">{{ data.fullName | uppercase}}</h3>
                             </div>
                             <span class="badge badge-assertive badge_count ng-binding" style="margin-top:11px;">0</span>
+                            <span class="badge span_icon span_icon_extraright" style="top:20px"><img src="img/flask_icons/arrow_left.svg" class="arrowIconAlign"></span>
                         </a>
                         <!--<ion-option-button class="icon ion-trash-a" ng-click="unFriend(data.userId)"></ion-option-button>
                         <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(data.userId)"></ion-option-button>-->
-
                     </ion-item>
                     <a class="item" ng-if="myFriends.length == 0 && shoeEmptyMessage==true">There are no friends. </a>
                 </ion-list>
@@ -33,7 +33,6 @@
         <ion-tab title="My groups">
             <ion-content style="margin-top:40px;">
                 <ion-list>
-                    <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> There are no groups. </a>
                     <ion-item class=" item-remove-animate" ng-repeat="group in groups | filter: groupList.searchString | orderBy:'groupName'" style="padding: 0px" ng-init="group.showDivByIndex=false" ng-click="showChatWindowPopup(group,'group')">
                         <div ng-if="group.showDivByIndex==true" style="padding-top: 10px">
                             user Added
@@ -47,16 +46,8 @@
                                     <h3 class="emailText" style="font-size: 17px; font-weight: 600;">{{group.groupName}}</h3>
                                     <div class="friend_group_name" style="color: black;font-weight: normal !important;font-size: 14px;text-overflow: ellipsis;overflow: hidden">{{group.groupDescription}}</div>
                                 </div>
-                                <div class="col-20" ng-if="addingInGroup==false">
-                                    <span class="badge span_icon span_icon_extraright" style="top:20px"><img src="img/flask_icons/arrow_left.svg" class="arrowIconAlign"></span>
-                                </div>
-                                <div class="col-20" ng-if="addingInGroup==true">
-                                    <span class="badge span_icon " style="top:7px;right:10px;">
-                                        <label class="checkbox labelCheckBox">
-                                            <input type="checkbox" ng-click="addFriendToGroup($index,group.groupId,group.showDivByIndex)">
-                                        </label>
-                                    </span>
-                                </div>
+                                <span class="badge badge-assertive badge_count ng-binding" style="margin-top:11px;">0</span>
+                                <span class="badge span_icon span_icon_extraright" style="top:20px"><img src="img/flask_icons/arrow_left.svg" class="arrowIconAlign"></span>
                             </a>
                         </div>
                         <!--<ion-option-button class="icon ion-edit" ng-click="editGroup(group)" ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
@@ -78,14 +69,21 @@
                 </ion-nav-title>
             </ion-nav-bar>
             <ion-content class="has-header padding">
-                <div click-for-options ng-repeat="message in userThreadMessage">
-                    <div style="padding-top:9px;margin-left:13px;">
+                <div click-for-options ng-repeat="message in myMessages">
+                    <div style="padding-top:9px;">
                         <!--<h2 class="emailText">{{message.senderName}}</h2>
-                        <h4 style="float: right">{{message.date}}</h4>-->
-                        <div class="col-60 bubble">
-                            <center>
-                                <p ng-class="{unreadMessageText: message.read==false}" style="margin: 0 0 1px !important;">{{message.receivedMessage}}</p>
-                            </center>
+                        <h4 style="float: right">{{message.dateTime}}</h4>-->
+                        <div style="width:100%">
+                            <div class="col-60 bubble me" ng-if="message.senderUserId != loggedInUser" style="display: block;">
+                                <center>
+                                    <p style="margin: 0 0 1px !important;">{{message.message}}</p>
+                                </center>
+                            </div><br /><!--{{message.diffDate}}-->
+                            <div class="col-60 bubble-you you" ng-if="message.senderUserId == loggedInUser" style="display: block;">
+                                <center>
+                                    <p style="margin: 0 0 1px !important;">{{message.message}}</p>
+                                </center>
+                            </div><br />
                         </div>
                         <!--<ion-option-button class="icon ion-trash-a" ng-click="deleteMessage(message.messageId)"></ion-option-button>-->
                     </div>
