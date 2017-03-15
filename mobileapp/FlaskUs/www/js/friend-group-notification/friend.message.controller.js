@@ -7,13 +7,13 @@
 
     /* @ngInject */
     function FriendsMessageCtrl($scope, $http, $ionicModal, FriendsNotificationService, $flaskUtil, $state, $ionicHistory, $timeout, $ionicLoading, $ionicPopup, $cookies) {
-        $scope.allMessages = [];
+        $scope.myMessages = [];
         $scope.userThreadMessage = [];
         $scope.showTextArea = { show: false };
         $scope.textMessage = { messageToSend: "" };
         $scope.totalNotification = 0;
         var userDetail = $cookies.getObject('CurrentUser');
-        var userId = userDetail.data.userId;
+        $scope.loggedInUser = userDetail.data.userId;
         $scope.allFriends = [];
         $scope.ShowReplyButton = true;
         $scope.addingInGroup = false;
@@ -28,27 +28,7 @@
         }
         getAllGroups();
         getAllFriends();
-        $scope.getNotification = function () {
-            $scope.myTimeOut = $timeout(function () {
-                FriendsNotificationService.getMessageCount().then(function (response2) {
-                    $scope.messageCount = response2;
-                    if ($scope.copyCount != undefined && $scope.messageCount != undefined) {
-                        if ($scope.copyCount != $scope.messageCount) {
-                            FriendsNotificationService.getMyAllMessages().then(function (response) {
-                                $scope.allMessages = response;
-                                $scope.getMessagesTime();
-                            });
-                        }
-                    }
 
-                    $scope.copyCount = angular.copy($scope.messageCount);
-                });
-                $scope.getNotification();
-                $scope.$on('$locationChangeStart', function () {
-                    $timeout.cancel($scope.myTimeOut);
-                });
-            }, 2000);
-        }
         $scope.getTimeWithInterval = function () {
             $scope.messageTimeOut = $timeout(function () {
                 $scope.getMessagesTime();
@@ -57,7 +37,6 @@
 
         };
         $scope.clickedForReply = false;
-
 
         $scope.replyMessage = function (msgDetail, index, textMessage, string) {
             if (msgDetail.read == false) {
@@ -146,23 +125,13 @@
             $scope.messageSentStatus = false;
         }
         $scope.getMessagesTime = function () {
-            angular.forEach($scope.allMessages, function (value, key) {
+            angular.forEach($scope.myMessages, function (value, key) {
                 $scope.messageDate = new Date(value.dateTime);
                 var result = getTimeDifference();
                 value.diffDate = result;
-
             });
         }
 
-
-        FriendsNotificationService.getMyAllMessages().then(function (response) {
-            $scope.allMessages = response;
-            angular.forEach($scope.allMessages, function (value, key) {
-                $scope.messageDate = new Date(value.dateTime);
-                var result = getTimeDifference();
-                value.diffDate = result;
-            });
-        });
         $scope.goBack = function () {
             $ionicHistory.goBack();
         }
@@ -211,7 +180,7 @@
 
         //get all user groups
         function getAllGroups() {
-            FriendsNotificationService.getAllGroups(userId).then(function (response) {
+            FriendsNotificationService.getAllGroups($scope.loggedInUser).then(function (response) {
                 if (response.message != "Authenticated access required") {
                     if ($scope.addingInGroup == true) {
                         $scope.showDoneButton = false;
@@ -258,28 +227,58 @@
         $scope.closeChatWindowPopup = function () {
             $scope.modal.hide();
         };
+        $scope.isUser = false;
+        //show chat window of friend
         $scope.showChatWindowPopup = function (data, type) {
-            if(type == 'user'){
-            $scope.friendName = data.fullName;
-                for (var i = 0; i < $scope.allMessages.length; i++) {
-                    if (data.userId == $scope.allMessages[i].senderUserId) {
-                        $scope.userThreadMessage.push({ "receivedMessage": $scope.allMessages[i].message, "date": $scope.allMessages[i].diffDate });
-                        $scope.senderId = $scope.allMessages[i].senderUserId;
-                    } else {
-                        $scope.userThreadMessage = [];
+            if (type == 'user') {
+                $scope.isUser = true;
+                $scope.receiverId = data.userId;
+                $scope.friendName = data.fullName;
+                //get messages by receiverId on click of friend
+                FriendsNotificationService.getMyAllMessages(data.userId).then(function (response) {
+                    $scope.myMessages = response;
+                    for (var i = 0; i < $scope.myMessages.length; i++) {
+                        if ($scope.myMessages[i].read == false) {
+                            FriendsNotificationService.setReadMessage($scope.myMessages[i].messageId).then(function (response) {
+                            });
+                        }
                     }
-                }
+                    $scope.getMessagesTime();
+                });
             }
             else {
-                $scope.friendName = data.fullName;
+                $scope.isUser = false;
+                $scope.friendName = data.groupName;
+                $scope.groupId = data.groupId;
+                FriendsNotificationService.getAllMyFlaskGroupMessages(data.groupId).then(function (response) {
+                    $scope.myMessages = response;
+                    for (var i = 0; i < $scope.myMessages.length; i++) {
+                        if ($scope.myMessages[i].read == false) {
+                            FriendsNotificationService.setReadMessage($scope.myMessages[i].messageId).then(function (response) {
+                            });
+                        }
+                    }
+                    $scope.getMessagesTime();
+                });
             }
             $scope.modal.show();
         }
         //send message to friend
         $scope.sendReply = function (message) {
-            FriendsNotificationService.sendMessage($scope.senderId, message).then(function (response) {
-                delete $scope.textMessage.messageToSend;
-            });
+            if ($scope.isUser == true){
+                FriendsNotificationService.sendMessage($scope.receiverId, message).then(function (response) {
+                    delete $scope.textMessage.messageToSend;
+                    $scope.myMessages.push(response);
+                    $ionicLoading.show({ template: 'Message sent successfully!', noBackdrop: false, duration: 3000 });
+                });
+            }
+            else {
+                FriendsNotificationService.sendFlaskGroupMessage($scope.groupId, message).then(function (response) {
+                    delete $scope.textMessage.messageToSend;
+                    $scope.myMessages.push(response);
+                    $ionicLoading.show({ template: 'Message sent successfully!', noBackdrop: false, duration: 3000 });
+                });
+            }
         }
     }
 })();

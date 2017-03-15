@@ -9,7 +9,8 @@
     function FriendsNotificationService($http, SERVER, $q) {
         var services = {
             getNotificationCount: getNotificationCount,
-            getMessageCount: getMessageCount,
+            getTotalUnreadMessagesCount: getTotalUnreadMessagesCount,
+            getTotalUnreadGroupMessagesCount:getTotalUnreadGroupMessagesCount,
             getMyAllMessages: getMyAllMessages,
             deleteMessageById: deleteMessageById,
             getRequestToConfirm: getRequestToConfirm,
@@ -19,10 +20,15 @@
             setReadMessage: setReadMessage,
             sendMessage: sendMessage,
             getAllGroups: getAllGroups,
-            getMyFriends: getMyFriends
+            getMyFriends: getMyFriends,
+            getMyUnreadFlaskMessagesCount: getMyUnreadFlaskMessagesCount,
+            getAllMyFlaskGroupMessages: getAllMyFlaskGroupMessages,
+            sendFlaskGroupMessage: sendFlaskGroupMessage
         }
         var getMyNotificationCountUrl = "/flask-social-portlet.entry/get-requests-count"
-        var getMessageCountUrl = "/flask-social-portlet.flaskmessages/get-my-flask-messages-count"
+        var getTotalUnreadMessagesCountUrl = "/flask-social-portlet.flaskmessages/get-total-unread-messages-count";
+        var getTotalUnreadGroupMessagesCountUrl = "/flask-social-portlet.flaskgroupmessages/get-total-unread-group-messages-count";
+        var getMyUnreadFlaskMessagesCountUrl = "flask-social-portlet.flaskmessages/get-my-unread-flask-messages-count";
         var getMyAllMessageUrl = "/flask-social-portlet.flaskmessages/get-all-my-flask-messages";
         var deleteMessageUrl = "/flask-social-portlet.flaskmessages/delete-message";
         var getRequestUrl = "/flask-social-portlet.entry/get-requests-to-confirm";
@@ -34,6 +40,8 @@
         var getUnreadMessagesURL = "/flask-social-portlet.flaskmessages/get-my-unread-flask-messages";
         var searchMyFriend = "/flask-social-portlet.entry/search-my-friends";
         var getAllGroupsURL = "/flask-manage-user-group-portlet.flaskgroup/get-all-my-groups";
+        var getAllMyFlaskGroupMessagesUrl = "/flask-social-portlet.flaskgroupmessages/get-all-my-flask-group-messages";
+        var sendFlaskGroupMessageUrl = "/flask-social-portlet.flaskgroupmessages/send-flask-group-message";
         var companyId = SERVER.companyId;
 
         function getMyFriends(searchText) {
@@ -60,8 +68,9 @@
                     //add errror handling
                 });
         }
-        function getMessageCount() {
-            return $http.get(SERVER.url + getMessageCountUrl)
+        //get global count for user
+        function getTotalUnreadMessagesCount() {
+            return $http.get(SERVER.url + getTotalUnreadMessagesCountUrl)
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
@@ -69,8 +78,50 @@
                     //add errror handling
                 });
         }
-        function getMyAllMessages() {
-            return $http.get(SERVER.url + getMyAllMessageUrl)
+        //get global count for group
+        function getTotalUnreadGroupMessagesCount() {
+            return $http.get(SERVER.url + getTotalUnreadGroupMessagesCountUrl)
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+        //get count per user
+        function getMyUnreadFlaskMessagesCount(receiverId) {
+            return $http.get(SERVER.url + getMyUnreadFlaskMessagesCountUrl, {
+                params: {
+                    receiverId: receiverId
+                }
+            })
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+        function getMyAllMessages(receiverId) {
+            return $http.get(SERVER.url + getMyAllMessageUrl, {
+                params: {
+                    receiverId: receiverId
+                }
+            })
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+        //get group messages
+        function getAllMyFlaskGroupMessages(groupId) {
+            return $http.get(SERVER.url + getAllMyFlaskGroupMessagesUrl, {
+                params: {
+                    groupId: groupId
+                }
+            })
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
@@ -167,7 +218,22 @@
                     //add errror handling
                 });
         }
-
+        //send message to group
+        function sendFlaskGroupMessage(groupId, messgae) {
+            return $http.get(SERVER.url + sendFlaskGroupMessageUrl, {
+                params: {
+                    groupId: groupId,
+                    message: messgae,
+                    sendEmail: true
+                }
+            })
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
         function getAllUnreadMessages() {
             return $http.get(SERVER.url + getUnreadMessagesURL)
                 .then(function success(response) {

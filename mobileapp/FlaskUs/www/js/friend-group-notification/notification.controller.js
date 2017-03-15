@@ -12,9 +12,8 @@
         $scope.requestedUserDetail=[];
         $scope.notificationCount=0;
         $scope.messageCount = 0;
-        $scope.mId = [];
-        $scope.allMessages = {};
-        $scope.flag = [];
+        $scope.groupMessageCount = 0;
+        $scope.userMessageCount = 0;
         $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.showEmptymessage=false;
         $scope.goToNotifications = function (){
@@ -29,31 +28,19 @@
             FriendsNotificationService.getNotificationCount().then(function (response1) {
                 $scope.notificationCount = response1;
             });
-            FriendsNotificationService.getMyAllMessages().then(function (response) {
-                $scope.allMessages = response;
-                for (var i = 0; i < $scope.allMessages.length; i++) {
-                    if ($scope.allMessages[i].read == false) {
-                        $scope.flag.push($scope.allMessages[i].messageId);
-                    }
-                }
-                $scope.messageCount = $scope.flag.length;
+            //count of unread messages
+            FriendsNotificationService.getTotalUnreadMessagesCount().then(function (response1) {
+                $scope.userMessageCount = response1;
             });
+            FriendsNotificationService.getTotalUnreadGroupMessagesCount().then(function (response2) {
+                $scope.groupMessageCount = response2;
+            });
+            $scope.messageCount = $scope.userMessageCount + $scope.groupMessageCount;
         }
-
-
+        //go to messages page
         $scope.goToMessages = function () {
-            $state.go('app.messages');            
-                for (var i = 0; i < $scope.allMessages.length; i++) {
-                    $scope.mId.push($scope.allMessages[i].messageId);
-                }
-                for(var j=0;j<$scope.mId.length;j++){
-                    FriendsNotificationService.setReadMessage($scope.mId[j]).then(function (response) {
-                        $scope.readFlag = response;
-                        console.log($scope.readFlag);
-                    })
-                }  
+            $state.go('app.messages');
         }
-
 
         $scope.goBack = function(){
             $ionicHistory.goBack();
