@@ -11,10 +11,10 @@
         $scope.userThreadMessage = [];
         $scope.showTextArea = { show: false };
         $scope.textMessage = { messageToSend: "" };
-        $scope.totalNotification = 0;
         var userDetail = $cookies.getObject('CurrentUser');
         $scope.loggedInUser = userDetail.data.userId;
         $scope.allFriends = [];
+        $scope.recipientsId = [];
         $scope.ShowReplyButton = true;
         $scope.addingInGroup = false;
         $ionicModal.fromTemplateUrl('templates/modal.html', {
@@ -230,6 +230,7 @@
         $scope.isUser = false;
         //show chat window of friend
         $scope.showChatWindowPopup = function (data, type) {
+            $scope.readFlag;
             if (type == 'user') {
                 $scope.isUser = true;
                 $scope.receiverId = data.userId;
@@ -238,7 +239,7 @@
                 FriendsNotificationService.getMyAllMessages(data.userId).then(function (response) {
                     $scope.myMessages = response;
                     for (var i = 0; i < $scope.myMessages.length; i++) {
-                        if ($scope.myMessages[i].read == false) {
+                        if ($scope.myMessages[i].recipients == $scope.loggedInUser) {
                             FriendsNotificationService.setReadMessage($scope.myMessages[i].messageId).then(function (response) {
                             });
                         }
@@ -252,11 +253,10 @@
                 $scope.groupId = data.groupId;
                 FriendsNotificationService.getAllMyFlaskGroupMessages(data.groupId).then(function (response) {
                     $scope.myMessages = response;
+                    $scope.recipientsId.push($scope.myMessages[0].recipients.split(','));
                     for (var i = 0; i < $scope.myMessages.length; i++) {
-                        if ($scope.myMessages[i].read == false) {
-                            FriendsNotificationService.setReadMessage($scope.myMessages[i].messageId).then(function (response) {
-                            });
-                        }
+                        FriendsNotificationService.setGroupMessageRead($scope.myMessages[i].messageId).then(function (response) {
+                        });
                     }
                     $scope.getMessagesTime();
                 });

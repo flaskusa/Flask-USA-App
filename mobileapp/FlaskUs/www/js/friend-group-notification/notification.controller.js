@@ -12,8 +12,6 @@
         $scope.requestedUserDetail=[];
         $scope.notificationCount=0;
         $scope.messageCount = 0;
-        $scope.groupMessageCount = 0;
-        $scope.userMessageCount = 0;
         $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.showEmptymessage=false;
         $scope.goToNotifications = function (){
@@ -25,17 +23,14 @@
         }
 
         $scope.initialize = function () {
-            FriendsNotificationService.getNotificationCount().then(function (response1) {
-                $scope.notificationCount = response1;
+            FriendsNotificationService.getNotificationCount().then(function (response) {
+                $scope.notificationCount = response;
             });
             //count of unread messages
-            FriendsNotificationService.getTotalUnreadMessagesCount().then(function (response1) {
-                $scope.userMessageCount = response1;
+            FriendsNotificationService.getTotalUnreadChatCount().then(function (response1) {
+                $scope.messageCount = response1;
             });
-            FriendsNotificationService.getTotalUnreadGroupMessagesCount().then(function (response2) {
-                $scope.groupMessageCount = response2;
-            });
-            $scope.messageCount = $scope.userMessageCount + $scope.groupMessageCount;
+            
         }
         //go to messages page
         $scope.goToMessages = function () {

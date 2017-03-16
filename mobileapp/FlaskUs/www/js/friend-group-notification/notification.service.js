@@ -9,8 +9,7 @@
     function FriendsNotificationService($http, SERVER, $q) {
         var services = {
             getNotificationCount: getNotificationCount,
-            getTotalUnreadMessagesCount: getTotalUnreadMessagesCount,
-            getTotalUnreadGroupMessagesCount:getTotalUnreadGroupMessagesCount,
+            getTotalUnreadChatCount: getTotalUnreadChatCount,
             getMyAllMessages: getMyAllMessages,
             deleteMessageById: deleteMessageById,
             getRequestToConfirm: getRequestToConfirm,
@@ -18,17 +17,15 @@
             addSocialRelation: addSocialRelation,
             deleteRequest: deleteRequest,
             setReadMessage: setReadMessage,
+            setGroupMessageRead:setGroupMessageRead,
             sendMessage: sendMessage,
             getAllGroups: getAllGroups,
             getMyFriends: getMyFriends,
-            getMyUnreadFlaskMessagesCount: getMyUnreadFlaskMessagesCount,
             getAllMyFlaskGroupMessages: getAllMyFlaskGroupMessages,
             sendFlaskGroupMessage: sendFlaskGroupMessage
         }
-        var getMyNotificationCountUrl = "/flask-social-portlet.entry/get-requests-count"
-        var getTotalUnreadMessagesCountUrl = "/flask-social-portlet.flaskmessages/get-total-unread-messages-count";
-        var getTotalUnreadGroupMessagesCountUrl = "/flask-social-portlet.flaskgroupmessages/get-total-unread-group-messages-count";
-        var getMyUnreadFlaskMessagesCountUrl = "flask-social-portlet.flaskmessages/get-my-unread-flask-messages-count";
+        var getMyNotificationCountUrl = "/flask-social-portlet.entry/get-requests-count";
+        var getTotalUnreadChatCountUrl = "/flask-social-portlet.flaskmessages/get-total-unread-chat-count";
         var getMyAllMessageUrl = "/flask-social-portlet.flaskmessages/get-all-my-flask-messages";
         var deleteMessageUrl = "/flask-social-portlet.flaskmessages/delete-message";
         var getRequestUrl = "/flask-social-portlet.entry/get-requests-to-confirm";
@@ -37,6 +34,7 @@
         var deleteSocialRelationUrl = "/flask-social-portlet.entry/delete-request";
         var sendFlaskMessage = "/flask-social-portlet.flaskmessages/send-flask-message";
         var setMessageReadUrl = "/flask-social-portlet.flaskrecipients/set-read";
+        var setGroupMessageReadUrl = "/flask-social-portlet.flaskgrouprecipients/set-group-message-read";
         var getUnreadMessagesURL = "/flask-social-portlet.flaskmessages/get-my-unread-flask-messages";
         var searchMyFriend = "/flask-social-portlet.entry/search-my-friends";
         var getAllGroupsURL = "/flask-manage-user-group-portlet.flaskgroup/get-all-my-groups";
@@ -68,33 +66,9 @@
                     //add errror handling
                 });
         }
-        //get global count for user
-        function getTotalUnreadMessagesCount() {
-            return $http.get(SERVER.url + getTotalUnreadMessagesCountUrl)
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
-        }
-        //get global count for group
-        function getTotalUnreadGroupMessagesCount() {
-            return $http.get(SERVER.url + getTotalUnreadGroupMessagesCountUrl)
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
-        }
-        //get count per user
-        function getMyUnreadFlaskMessagesCount(receiverId) {
-            return $http.get(SERVER.url + getMyUnreadFlaskMessagesCountUrl, {
-                params: {
-                    receiverId: receiverId
-                }
-            })
+        //get total unread chat count
+        function getTotalUnreadChatCount() {
+            return $http.get(SERVER.url + getTotalUnreadChatCountUrl)
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
@@ -202,7 +176,20 @@
                     return $q.$inject(response);
                     //add errror handling
                 });
-        };
+        }
+        //set group messages as read
+        function setGroupMessageRead(groupMessageId) {
+            return $http.get(SERVER.url + setGroupMessageReadUrl, {
+                params:
+            { groupMessageId: groupMessageId }
+            })
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
         function sendMessage(userId, messgae) {
             return $http.get(SERVER.url + sendFlaskMessage, {
                 params: {
