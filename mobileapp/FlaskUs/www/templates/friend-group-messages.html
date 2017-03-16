@@ -20,7 +20,7 @@
                             <div class="col col-70" style="padding-top: 16px">
                                 <h3 class="nameText">{{ data.fullName | uppercase}}</h3>
                             </div>
-                            <span class="badge badge-assertive badge_count ng-binding" style="margin-top:11px;">0</span>
+                            <span class="badge badge-assertive badge_count ng-binding" style="margin-top:11px;">{{data.unreadMessageCount}}</span>
                             <span class="badge span_icon span_icon_extraright" style="top:20px"><img src="img/flask_icons/arrow_left.svg" class="arrowIconAlign"></span>
                         </a>
                         <!--<ion-option-button class="icon ion-trash-a" ng-click="unFriend(data.userId)"></ion-option-button>
@@ -46,7 +46,7 @@
                                     <h3 class="emailText" style="font-size: 17px; font-weight: 600;">{{group.groupName}}</h3>
                                     <div class="friend_group_name" style="color: black;font-weight: normal !important;font-size: 14px;text-overflow: ellipsis;overflow: hidden">{{group.groupDescription}}</div>
                                 </div>
-                                <span class="badge badge-assertive badge_count ng-binding" style="margin-top:11px;">0</span>
+                                <span class="badge badge-assertive badge_count ng-binding" style="margin-top:11px;">{{group.unreadGroupMesageCount}}</span>
                                 <span class="badge span_icon span_icon_extraright" style="top:20px"><img src="img/flask_icons/arrow_left.svg" class="arrowIconAlign"></span>
                             </a>
                         </div>
@@ -69,7 +69,7 @@
                 </ion-nav-title>
             </ion-nav-bar>
             <ion-content class="has-header padding">
-                <div click-for-options ng-repeat="message in myMessages">
+                <div click-for-options ng-repeat="message in myMessages | orderBy:'messageId'">
                     <div style="padding-top:9px;">
                         <!--<h2 class="emailText">{{message.senderName}}</h2>
                         <h4 style="float: right">{{message.dateTime}}</h4>-->
