@@ -12,8 +12,6 @@
         $scope.goToMessagePage=false;
         $scope.goToFriendPage=false;
         $scope.goToRequestPage = false;
-        $scope.groupMessageCount = 0;
-        $scope.userMessageCount = 0;
         $rootScope.totalMessageNotification=0;
         $rootScope.totalRequestNotification = 0;
          $scope.isUserLogin=function() {
@@ -35,13 +33,9 @@
              FriendsNotificationService.getNotificationCount().then(function (response) {
                  $rootScope.totalRequestNotification = response;
              });
-             FriendsNotificationService.getTotalUnreadMessagesCount().then(function (response1) {
-                 $scope.userMessageCount = response1;
+             FriendsNotificationService.getTotalUnreadChatCount().then(function (response1) {
+                 $rootScope.totalMessageNotification = response1;
              });
-             FriendsNotificationService.getTotalUnreadGroupMessagesCount().then(function (response2) {
-                 $scope.groupMessageCount = response2;
-             });
-             $rootScope.totalMessageNotification = $scope.userMessageCount + $scope.groupMessageCount;
         }
         $scope.myEvent = function ()
         {
