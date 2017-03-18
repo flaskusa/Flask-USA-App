@@ -168,7 +168,7 @@ function loadGroupData(logginUserId) {
 	};
 	flaskRequest.sendGETRequest(
 			_groupModel.SERVICE_ENDPOINTS.GET_ALL_MY_GROUPS, params, function(
-					data) {/* success handler */
+					data) {/* success handler */console.log("data: "+data);
 				$.each(data, function(index, grpDetail) {
 					if(grpDetail.isAdmin == "1")
 						grpDetail["isGroupAdmin"] = "Admin";

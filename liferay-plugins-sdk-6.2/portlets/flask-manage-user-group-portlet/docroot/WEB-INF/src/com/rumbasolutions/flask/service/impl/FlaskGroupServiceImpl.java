@@ -19,15 +19,21 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.liferay.contacts.model.FlaskGroupRecipients;
+import com.liferay.contacts.service.FlaskGroupRecipientsServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.model.FlaskGroup;
 import com.rumbasolutions.flask.model.FlaskGroupUsers;
 import com.rumbasolutions.flask.service.FlaskGroupLocalServiceUtil;
+import com.rumbasolutions.flask.service.FlaskGroupServiceUtil;
 import com.rumbasolutions.flask.service.base.FlaskGroupServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupFinderUtil;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupUsersUtil;
@@ -69,10 +75,58 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 	}
 	
 	@Override
-	public List<FlaskGroup> getAllMyGroups(long userId){
-		int isAdmin = 1;
-		List<FlaskGroup> myGroupList = null;
-		myGroupList = FlaskGroupFinderUtil.getAllMyGroups(userId);
+	public JSONArray getAllMyGroups(long userId){
+		JSONArray iAarray = JSONFactoryUtil.createJSONArray();
+		try {
+			List<FlaskGroupUsers> grpUsers = FlaskGroupUsersUtil.findByUserId(userId);
+			for(FlaskGroupUsers grpUser: grpUsers){
+				FlaskGroup myGroup = FlaskGroupServiceUtil.getGroup(grpUser.getGroupId());
+				List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupRecipientsServiceUtil.getGroupRecipientsByGroupId(myGroup.getGroupId());
+				JSONObject obj= JSONFactoryUtil.createJSONObject();
+				obj.put("groupId", myGroup.getGroupId());
+				obj.put("groupName", myGroup.getGroupName());
+				obj.put("groupDescription", myGroup.getGroupDescription());
+				obj.put("createdDate", myGroup.getCreatedDate());
+				obj.put("createdBy", myGroup.getCreatedBy());
+				obj.put("isAdmin", grpUser.getIsAdmin());
+				obj.put("isActive", myGroup.getIsActive());
+				obj.put("isDelete", myGroup.getIsDelete());
+				int count = 0;
+				for(FlaskGroupRecipients recp: flaskGroupRecipients){
+					boolean flag = false;
+					String recipient = recp.getRecipients();
+					String read = recp.getRead();
+					String[] recpPart = recipient.split(",");
+					String[] readPart = read.split(","); 
+					for(int j = 0; j <= recpPart.length-1; j++){
+						if((userId == Long.parseLong(recpPart[j])) && (Long.parseLong(readPart[j]) == 0)){
+							flag = true;
+						}
+					}
+					if(flag){
+						count++;
+					}
+				}
+				obj.put("unreadGroupMesageCount", count);
+				iAarray.put(obj);
+			}
+		} catch (Exception e) {
+			LOGGER.error("Exception in getAllMyGroups. " + e.getMessage());
+		}
+		return iAarray;
+	}
+	
+	@Override
+	public List<FlaskGroup> getGroups(long userId){
+		List<FlaskGroup> myGroupList = new ArrayList<FlaskGroup>();
+		try {
+			List<FlaskGroupUsers> grpUsers = FlaskGroupUsersUtil.findByUserId(userId);
+			for(FlaskGroupUsers grpUser: grpUsers){
+				myGroupList.add(FlaskGroupServiceUtil.getGroup(grpUser.getGroupId()));
+			}
+		} catch (SystemException e) {
+			e.printStackTrace();
+		}
 		return myGroupList;
 	}
 	
@@ -83,6 +137,7 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 		myGroupList = FlaskGroupFinderUtil.getGroupList(userId, isAdmin);
 		return myGroupList;
 	}
+	
 	@Override
 	public List<FlaskGroup> getParticipatingGroups(long userId){
 		int isAdmin = 0;

@@ -40,46 +40,50 @@ public class FlaskGroupServiceClpInvoker {
 
 		_methodParameterTypes35 = new String[] { "long" };
 
-		_methodName36 = "getMyGroups";
+		_methodName36 = "getGroups";
 
 		_methodParameterTypes36 = new String[] { "long" };
 
-		_methodName37 = "getParticipatingGroups";
+		_methodName37 = "getMyGroups";
 
 		_methodParameterTypes37 = new String[] { "long" };
 
-		_methodName38 = "getGroup";
+		_methodName38 = "getParticipatingGroups";
 
 		_methodParameterTypes38 = new String[] { "long" };
 
-		_methodName39 = "addGroup";
+		_methodName39 = "getGroup";
 
-		_methodParameterTypes39 = new String[] {
+		_methodParameterTypes39 = new String[] { "long" };
+
+		_methodName40 = "addGroup";
+
+		_methodParameterTypes40 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int", "int",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName40 = "updateGroup";
+		_methodName41 = "updateGroup";
 
-		_methodParameterTypes40 = new String[] {
+		_methodParameterTypes41 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "int", "int"
 			};
 
-		_methodName41 = "deleteGroup";
+		_methodName42 = "deleteGroup";
 
-		_methodParameterTypes41 = new String[] { "long" };
+		_methodParameterTypes42 = new String[] { "long" };
 
-		_methodName42 = "deleteGroups";
+		_methodName43 = "deleteGroups";
 
-		_methodParameterTypes42 = new String[] {
+		_methodParameterTypes43 = new String[] {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName43 = "deactivateGroup";
+		_methodName44 = "deactivateGroup";
 
-		_methodParameterTypes43 = new String[] {
+		_methodParameterTypes44 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -110,21 +114,26 @@ public class FlaskGroupServiceClpInvoker {
 
 		if (_methodName36.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
-			return FlaskGroupServiceUtil.getMyGroups(((Long)arguments[0]).longValue());
+			return FlaskGroupServiceUtil.getGroups(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName37.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
-			return FlaskGroupServiceUtil.getParticipatingGroups(((Long)arguments[0]).longValue());
+			return FlaskGroupServiceUtil.getMyGroups(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName38.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
-			return FlaskGroupServiceUtil.getGroup(((Long)arguments[0]).longValue());
+			return FlaskGroupServiceUtil.getParticipatingGroups(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName39.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
+			return FlaskGroupServiceUtil.getGroup(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName40.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
 			return FlaskGroupServiceUtil.addGroup((java.lang.String)arguments[0],
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
@@ -133,8 +142,8 @@ public class FlaskGroupServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[6]);
 		}
 
-		if (_methodName40.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
+		if (_methodName41.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
 			return FlaskGroupServiceUtil.updateGroup(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -142,23 +151,23 @@ public class FlaskGroupServiceClpInvoker {
 				((Integer)arguments[6]).intValue());
 		}
 
-		if (_methodName41.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
-			FlaskGroupServiceUtil.deleteGroup(((Long)arguments[0]).longValue());
-
-			return null;
-		}
-
 		if (_methodName42.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
-			FlaskGroupServiceUtil.deleteGroups((java.lang.String)arguments[0],
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			FlaskGroupServiceUtil.deleteGroup(((Long)arguments[0]).longValue());
 
 			return null;
 		}
 
 		if (_methodName43.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes43, parameterTypes)) {
+			FlaskGroupServiceUtil.deleteGroups((java.lang.String)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName44.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes44, parameterTypes)) {
 			FlaskGroupServiceUtil.deactivateGroup(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
@@ -192,4 +201,6 @@ public class FlaskGroupServiceClpInvoker {
 	private String[] _methodParameterTypes42;
 	private String _methodName43;
 	private String[] _methodParameterTypes43;
+	private String _methodName44;
+	private String[] _methodParameterTypes44;
 }

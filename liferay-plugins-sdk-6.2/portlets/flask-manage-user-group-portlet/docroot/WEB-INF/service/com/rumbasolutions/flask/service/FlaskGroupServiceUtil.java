@@ -67,9 +67,14 @@ public class FlaskGroupServiceUtil {
 		return getService().getAllGroups();
 	}
 
-	public static java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getAllMyGroups(
+	public static com.liferay.portal.kernel.json.JSONArray getAllMyGroups(
 		long userId) {
 		return getService().getAllMyGroups(userId);
+	}
+
+	public static java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getGroups(
+		long userId) {
+		return getService().getGroups(userId);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getMyGroups(

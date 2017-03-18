@@ -62,9 +62,14 @@ public class FlaskGroupServiceWrapper implements FlaskGroupService,
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getAllMyGroups(
-		long userId) {
+	public com.liferay.portal.kernel.json.JSONArray getAllMyGroups(long userId) {
 		return _flaskGroupService.getAllMyGroups(userId);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getGroups(
+		long userId) {
+		return _flaskGroupService.getGroups(userId);
 	}
 
 	@Override

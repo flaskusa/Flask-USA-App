@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.rumbasolutions.flask.model.FlaskGroupUsers;
 import com.rumbasolutions.flask.model.impl.FlaskGroupUsersImpl;
 import com.rumbasolutions.flask.service.FlaskGroupUsersLocalServiceUtil;
-import com.rumbasolutions.flask.service.FlaskGroupUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.FlaskGroupUsersServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupUsersFinderUtil;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupUsersUtil;

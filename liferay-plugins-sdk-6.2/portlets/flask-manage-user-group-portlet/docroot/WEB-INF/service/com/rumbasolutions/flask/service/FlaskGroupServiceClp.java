@@ -40,46 +40,50 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 
 		_methodParameterTypes4 = new String[] { "long" };
 
-		_methodName5 = "getMyGroups";
+		_methodName5 = "getGroups";
 
 		_methodParameterTypes5 = new String[] { "long" };
 
-		_methodName6 = "getParticipatingGroups";
+		_methodName6 = "getMyGroups";
 
 		_methodParameterTypes6 = new String[] { "long" };
 
-		_methodName7 = "getGroup";
+		_methodName7 = "getParticipatingGroups";
 
 		_methodParameterTypes7 = new String[] { "long" };
 
-		_methodName8 = "addGroup";
+		_methodName8 = "getGroup";
 
-		_methodParameterTypes8 = new String[] {
+		_methodParameterTypes8 = new String[] { "long" };
+
+		_methodName9 = "addGroup";
+
+		_methodParameterTypes9 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "int", "int",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName9 = "updateGroup";
+		_methodName10 = "updateGroup";
 
-		_methodParameterTypes9 = new String[] {
+		_methodParameterTypes10 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "int", "int"
 			};
 
-		_methodName10 = "deleteGroup";
+		_methodName11 = "deleteGroup";
 
-		_methodParameterTypes10 = new String[] { "long" };
+		_methodParameterTypes11 = new String[] { "long" };
 
-		_methodName11 = "deleteGroups";
+		_methodName12 = "deleteGroups";
 
-		_methodParameterTypes11 = new String[] {
+		_methodParameterTypes12 = new String[] {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName12 = "deactivateGroup";
+		_methodName13 = "deactivateGroup";
 
-		_methodParameterTypes12 = new String[] {
+		_methodParameterTypes13 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -158,8 +162,7 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getAllMyGroups(
-		long userId) {
+	public com.liferay.portal.kernel.json.JSONArray getAllMyGroups(long userId) {
 		Object returnObj = null;
 
 		try {
@@ -178,11 +181,11 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 			}
 		}
 
-		return (java.util.List<com.rumbasolutions.flask.model.FlaskGroup>)ClpSerializer.translateOutput(returnObj);
+		return (com.liferay.portal.kernel.json.JSONArray)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getMyGroups(
+	public java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getGroups(
 		long userId) {
 		Object returnObj = null;
 
@@ -206,7 +209,7 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getParticipatingGroups(
+	public java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getMyGroups(
 		long userId) {
 		Object returnObj = null;
 
@@ -230,12 +233,36 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	}
 
 	@Override
-	public com.rumbasolutions.flask.model.FlaskGroup getGroup(long groupId) {
+	public java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getParticipatingGroups(
+		long userId) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName7,
-					_methodParameterTypes7, new Object[] { groupId });
+					_methodParameterTypes7, new Object[] { userId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.FlaskGroup>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public com.rumbasolutions.flask.model.FlaskGroup getGroup(long groupId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -260,8 +287,8 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName8,
-					_methodParameterTypes8,
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9,
 					new Object[] {
 						ClpSerializer.translateInput(groupName),
 						
@@ -301,8 +328,8 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName9,
-					_methodParameterTypes9,
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10,
 					new Object[] {
 						groupId,
 						
@@ -337,8 +364,8 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	@Override
 	public void deleteGroup(long groupId) {
 		try {
-			_invokableService.invokeMethod(_methodName10,
-				_methodParameterTypes10, new Object[] { groupId });
+			_invokableService.invokeMethod(_methodName11,
+				_methodParameterTypes11, new Object[] { groupId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -357,8 +384,8 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	public void deleteGroups(java.lang.String groupList,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName11,
-				_methodParameterTypes11,
+			_invokableService.invokeMethod(_methodName12,
+				_methodParameterTypes12,
 				new Object[] {
 					ClpSerializer.translateInput(groupList),
 					
@@ -382,8 +409,8 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	public void deactivateGroup(long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName12,
-				_methodParameterTypes12,
+			_invokableService.invokeMethod(_methodName13,
+				_methodParameterTypes13,
 				new Object[] {
 					groupId,
 					
@@ -428,4 +455,6 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
+	private String _methodName13;
+	private String[] _methodParameterTypes13;
 }

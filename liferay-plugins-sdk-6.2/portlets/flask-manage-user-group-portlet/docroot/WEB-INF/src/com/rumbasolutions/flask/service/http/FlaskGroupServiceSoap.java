@@ -77,11 +77,25 @@ public class FlaskGroupServiceSoap {
 		}
 	}
 
-	public static com.rumbasolutions.flask.model.FlaskGroupSoap[] getAllMyGroups(
+	public static java.lang.String getAllMyGroups(long userId)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONArray returnValue = FlaskGroupServiceUtil.getAllMyGroups(userId);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.rumbasolutions.flask.model.FlaskGroupSoap[] getGroups(
 		long userId) throws RemoteException {
 		try {
 			java.util.List<com.rumbasolutions.flask.model.FlaskGroup> returnValue =
-				FlaskGroupServiceUtil.getAllMyGroups(userId);
+				FlaskGroupServiceUtil.getGroups(userId);
 
 			return com.rumbasolutions.flask.model.FlaskGroupSoap.toSoapModels(returnValue);
 		}
