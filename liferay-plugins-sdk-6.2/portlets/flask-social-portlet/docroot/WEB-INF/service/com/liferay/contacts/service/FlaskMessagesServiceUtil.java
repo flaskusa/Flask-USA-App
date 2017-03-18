@@ -73,18 +73,31 @@ public class FlaskMessagesServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray getAllMyFlaskMessages(
+		long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return getService().getAllMyFlaskMessages(serviceContext);
+		return getService().getAllMyFlaskMessages(receiverId, serviceContext);
 	}
 
 	public static java.util.List<com.liferay.contacts.model.FlaskMessages> getMyUnreadFlaskMessages(
+		long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return getService().getMyUnreadFlaskMessages(serviceContext);
+		return getService().getMyUnreadFlaskMessages(receiverId, serviceContext);
 	}
 
-	public static int getMyFlaskMessagesCount(
+	public static int getMyFlaskMessagesCount(long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return getService().getMyFlaskMessagesCount(serviceContext);
+		return getService().getMyFlaskMessagesCount(receiverId, serviceContext);
+	}
+
+	public static int getMyUnreadFlaskMessagesCount(long receiverId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .getMyUnreadFlaskMessagesCount(receiverId, serviceContext);
+	}
+
+	public static int getTotalUnreadChatCount(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getTotalUnreadChatCount(serviceContext);
 	}
 
 	public static void deleteMessage(long messageId,

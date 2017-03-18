@@ -56,6 +56,7 @@ public class FlaskRecipientsWrapper implements FlaskRecipients,
 		attributes.put("messageId", getMessageId());
 		attributes.put("read", getRead());
 		attributes.put("receivedDateTime", getReceivedDateTime());
+		attributes.put("senderId", getSenderId());
 
 		return attributes;
 	}
@@ -96,6 +97,12 @@ public class FlaskRecipientsWrapper implements FlaskRecipients,
 
 		if (receivedDateTime != null) {
 			setReceivedDateTime(receivedDateTime);
+		}
+
+		Long senderId = (Long)attributes.get("senderId");
+
+		if (senderId != null) {
+			setSenderId(senderId);
 		}
 	}
 
@@ -269,6 +276,26 @@ public class FlaskRecipientsWrapper implements FlaskRecipients,
 	@Override
 	public void setReceivedDateTime(java.util.Date receivedDateTime) {
 		_flaskRecipients.setReceivedDateTime(receivedDateTime);
+	}
+
+	/**
+	* Returns the sender ID of this flask recipients.
+	*
+	* @return the sender ID of this flask recipients
+	*/
+	@Override
+	public long getSenderId() {
+		return _flaskRecipients.getSenderId();
+	}
+
+	/**
+	* Sets the sender ID of this flask recipients.
+	*
+	* @param senderId the sender ID of this flask recipients
+	*/
+	@Override
+	public void setSenderId(long senderId) {
+		_flaskRecipients.setSenderId(senderId);
 	}
 
 	@Override

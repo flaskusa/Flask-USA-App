@@ -37,6 +37,7 @@ public class FlaskRecipientsSoap implements Serializable {
 		soapModel.setMessageId(model.getMessageId());
 		soapModel.setRead(model.getRead());
 		soapModel.setReceivedDateTime(model.getReceivedDateTime());
+		soapModel.setSenderId(model.getSenderId());
 
 		return soapModel;
 	}
@@ -143,10 +144,19 @@ public class FlaskRecipientsSoap implements Serializable {
 		_receivedDateTime = receivedDateTime;
 	}
 
+	public long getSenderId() {
+		return _senderId;
+	}
+
+	public void setSenderId(long senderId) {
+		_senderId = senderId;
+	}
+
 	private long _recipientId;
 	private long _userId;
 	private String _email;
 	private long _messageId;
 	private boolean _read;
 	private Date _receivedDateTime;
+	private long _senderId;
 }

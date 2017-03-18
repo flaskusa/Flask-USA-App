@@ -72,12 +72,13 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 			{ "email", Types.VARCHAR },
 			{ "messageId", Types.BIGINT },
 			{ "read_", Types.BOOLEAN },
-			{ "receivedDateTime", Types.TIMESTAMP }
+			{ "receivedDateTime", Types.TIMESTAMP },
+			{ "senderId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskRecipients (recipientId LONG not null primary key,userId LONG,email VARCHAR(75) null,messageId LONG,read_ BOOLEAN,receivedDateTime DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskRecipients (recipientId LONG not null primary key,userId LONG,email VARCHAR(75) null,messageId LONG,read_ BOOLEAN,receivedDateTime DATE null,senderId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Contacts_FlaskRecipients";
-	public static final String ORDER_BY_JPQL = " ORDER BY flaskRecipients.receivedDateTime DESC";
-	public static final String ORDER_BY_SQL = " ORDER BY Contacts_FlaskRecipients.receivedDateTime DESC";
+	public static final String ORDER_BY_JPQL = " ORDER BY flaskRecipients.receivedDateTime ASC";
+	public static final String ORDER_BY_SQL = " ORDER BY Contacts_FlaskRecipients.receivedDateTime ASC";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
@@ -92,8 +93,9 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 			true);
 	public static long MESSAGEID_COLUMN_BITMASK = 1L;
 	public static long READ_COLUMN_BITMASK = 2L;
-	public static long USERID_COLUMN_BITMASK = 4L;
-	public static long RECEIVEDDATETIME_COLUMN_BITMASK = 8L;
+	public static long SENDERID_COLUMN_BITMASK = 4L;
+	public static long USERID_COLUMN_BITMASK = 8L;
+	public static long RECEIVEDDATETIME_COLUMN_BITMASK = 16L;
 
 	/**
 	 * Converts the soap model instance into a normal model instance.
@@ -114,6 +116,7 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 		model.setMessageId(soapModel.getMessageId());
 		model.setRead(soapModel.getRead());
 		model.setReceivedDateTime(soapModel.getReceivedDateTime());
+		model.setSenderId(soapModel.getSenderId());
 
 		return model;
 	}
@@ -185,6 +188,7 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 		attributes.put("messageId", getMessageId());
 		attributes.put("read", getRead());
 		attributes.put("receivedDateTime", getReceivedDateTime());
+		attributes.put("senderId", getSenderId());
 
 		return attributes;
 	}
@@ -225,6 +229,12 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 
 		if (receivedDateTime != null) {
 			setReceivedDateTime(receivedDateTime);
+		}
+
+		Long senderId = (Long)attributes.get("senderId");
+
+		if (senderId != null) {
+			setSenderId(senderId);
 		}
 	}
 
@@ -352,6 +362,29 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 		_receivedDateTime = receivedDateTime;
 	}
 
+	@JSON
+	@Override
+	public long getSenderId() {
+		return _senderId;
+	}
+
+	@Override
+	public void setSenderId(long senderId) {
+		_columnBitmask |= SENDERID_COLUMN_BITMASK;
+
+		if (!_setOriginalSenderId) {
+			_setOriginalSenderId = true;
+
+			_originalSenderId = _senderId;
+		}
+
+		_senderId = senderId;
+	}
+
+	public long getOriginalSenderId() {
+		return _originalSenderId;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -389,6 +422,7 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 		flaskRecipientsImpl.setMessageId(getMessageId());
 		flaskRecipientsImpl.setRead(getRead());
 		flaskRecipientsImpl.setReceivedDateTime(getReceivedDateTime());
+		flaskRecipientsImpl.setSenderId(getSenderId());
 
 		flaskRecipientsImpl.resetOriginalValues();
 
@@ -401,8 +435,6 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 
 		value = DateUtil.compareTo(getReceivedDateTime(),
 				flaskRecipients.getReceivedDateTime());
-
-		value = value * -1;
 
 		if (value != 0) {
 			return value;
@@ -454,6 +486,10 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 
 		flaskRecipientsModelImpl._setOriginalRead = false;
 
+		flaskRecipientsModelImpl._originalSenderId = flaskRecipientsModelImpl._senderId;
+
+		flaskRecipientsModelImpl._setOriginalSenderId = false;
+
 		flaskRecipientsModelImpl._columnBitmask = 0;
 	}
 
@@ -486,12 +522,14 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 			flaskRecipientsCacheModel.receivedDateTime = Long.MIN_VALUE;
 		}
 
+		flaskRecipientsCacheModel.senderId = getSenderId();
+
 		return flaskRecipientsCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{recipientId=");
 		sb.append(getRecipientId());
@@ -505,6 +543,8 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 		sb.append(getRead());
 		sb.append(", receivedDateTime=");
 		sb.append(getReceivedDateTime());
+		sb.append(", senderId=");
+		sb.append(getSenderId());
 		sb.append("}");
 
 		return sb.toString();
@@ -512,7 +552,7 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.contacts.model.FlaskRecipients");
@@ -542,6 +582,10 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 			"<column><column-name>receivedDateTime</column-name><column-value><![CDATA[");
 		sb.append(getReceivedDateTime());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>senderId</column-name><column-value><![CDATA[");
+		sb.append(getSenderId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -565,6 +609,9 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 	private boolean _originalRead;
 	private boolean _setOriginalRead;
 	private Date _receivedDateTime;
+	private long _senderId;
+	private long _originalSenderId;
+	private boolean _setOriginalSenderId;
 	private long _columnBitmask;
 	private FlaskRecipients _escapedModel;
 }

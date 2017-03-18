@@ -80,11 +80,12 @@ public class FlaskMessagesServiceSoap {
 		}
 	}
 
-	public static java.lang.String getAllMyFlaskMessages(
+	public static java.lang.String getAllMyFlaskMessages(long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portal.kernel.json.JSONArray returnValue = FlaskMessagesServiceUtil.getAllMyFlaskMessages(serviceContext);
+			com.liferay.portal.kernel.json.JSONArray returnValue = FlaskMessagesServiceUtil.getAllMyFlaskMessages(receiverId,
+					serviceContext);
 
 			return returnValue.toString();
 		}
@@ -96,11 +97,13 @@ public class FlaskMessagesServiceSoap {
 	}
 
 	public static com.liferay.contacts.model.FlaskMessagesSoap[] getMyUnreadFlaskMessages(
+		long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			java.util.List<com.liferay.contacts.model.FlaskMessages> returnValue =
-				FlaskMessagesServiceUtil.getMyUnreadFlaskMessages(serviceContext);
+				FlaskMessagesServiceUtil.getMyUnreadFlaskMessages(receiverId,
+					serviceContext);
 
 			return com.liferay.contacts.model.FlaskMessagesSoap.toSoapModels(returnValue);
 		}
@@ -111,11 +114,43 @@ public class FlaskMessagesServiceSoap {
 		}
 	}
 
-	public static int getMyFlaskMessagesCount(
+	public static int getMyFlaskMessagesCount(long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			int returnValue = FlaskMessagesServiceUtil.getMyFlaskMessagesCount(serviceContext);
+			int returnValue = FlaskMessagesServiceUtil.getMyFlaskMessagesCount(receiverId,
+					serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getMyUnreadFlaskMessagesCount(long receiverId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			int returnValue = FlaskMessagesServiceUtil.getMyUnreadFlaskMessagesCount(receiverId,
+					serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getTotalUnreadChatCount(
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			int returnValue = FlaskMessagesServiceUtil.getTotalUnreadChatCount(serviceContext);
 
 			return returnValue;
 		}

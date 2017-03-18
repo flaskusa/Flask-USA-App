@@ -42,30 +42,42 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 		_methodName4 = "getAllMyFlaskMessages";
 
 		_methodParameterTypes4 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName5 = "getMyUnreadFlaskMessages";
 
 		_methodParameterTypes5 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName6 = "getMyFlaskMessagesCount";
 
 		_methodParameterTypes6 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
+				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName7 = "deleteMessage";
+		_methodName7 = "getMyUnreadFlaskMessagesCount";
 
 		_methodParameterTypes7 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName8 = "deleteMessagesByDateRange";
+		_methodName8 = "getTotalUnreadChatCount";
 
 		_methodParameterTypes8 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName9 = "deleteMessage";
+
+		_methodParameterTypes9 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName10 = "deleteMessagesByDateRange";
+
+		_methodParameterTypes10 = new String[] {
 				"java.util.Date", "java.util.Date",
 				"com.liferay.portal.service.ServiceContext"
 			};
@@ -158,13 +170,18 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 
 	@Override
 	public com.liferay.portal.kernel.json.JSONArray getAllMyFlaskMessages(
+		long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName4,
 					_methodParameterTypes4,
-					new Object[] { ClpSerializer.translateInput(serviceContext) });
+					new Object[] {
+						receiverId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -183,13 +200,18 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 
 	@Override
 	public java.util.List<com.liferay.contacts.model.FlaskMessages> getMyUnreadFlaskMessages(
+		long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName5,
 					_methodParameterTypes5,
-					new Object[] { ClpSerializer.translateInput(serviceContext) });
+					new Object[] {
+						receiverId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -207,13 +229,71 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	}
 
 	@Override
-	public int getMyFlaskMessagesCount(
+	public int getMyFlaskMessagesCount(long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName6,
 					_methodParameterTypes6,
+					new Object[] {
+						receiverId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public int getMyUnreadFlaskMessagesCount(long receiverId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7,
+					new Object[] {
+						receiverId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Integer)returnObj).intValue();
+	}
+
+	@Override
+	public int getTotalUnreadChatCount(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
 					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -235,8 +315,8 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	public void deleteMessage(long messageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName7,
-				_methodParameterTypes7,
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9,
 				new Object[] {
 					messageId,
 					
@@ -261,8 +341,8 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 		java.util.Date endDate,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
+			_invokableService.invokeMethod(_methodName10,
+				_methodParameterTypes10,
 				new Object[] {
 					ClpSerializer.translateInput(startDate),
 					
@@ -301,4 +381,8 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	private String[] _methodParameterTypes7;
 	private String _methodName8;
 	private String[] _methodParameterTypes8;
+	private String _methodName9;
+	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
 }

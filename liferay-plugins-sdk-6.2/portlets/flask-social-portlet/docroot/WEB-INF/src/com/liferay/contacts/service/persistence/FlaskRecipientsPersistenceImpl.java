@@ -1080,6 +1080,7 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 			"findByreadFlag",
 			new String[] {
 				Long.class.getName(), Boolean.class.getName(),
+				Long.class.getName(),
 				
 			Integer.class.getName(), Integer.class.getName(),
 				OrderByComparator.class.getName()
@@ -1089,32 +1090,40 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 			FlaskRecipientsModelImpl.FINDER_CACHE_ENABLED,
 			FlaskRecipientsImpl.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByreadFlag",
-			new String[] { Long.class.getName(), Boolean.class.getName() },
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				Long.class.getName()
+			},
 			FlaskRecipientsModelImpl.USERID_COLUMN_BITMASK |
 			FlaskRecipientsModelImpl.READ_COLUMN_BITMASK |
+			FlaskRecipientsModelImpl.SENDERID_COLUMN_BITMASK |
 			FlaskRecipientsModelImpl.RECEIVEDDATETIME_COLUMN_BITMASK);
 	public static final FinderPath FINDER_PATH_COUNT_BY_READFLAG = new FinderPath(FlaskRecipientsModelImpl.ENTITY_CACHE_ENABLED,
 			FlaskRecipientsModelImpl.FINDER_CACHE_ENABLED, Long.class,
 			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByreadFlag",
-			new String[] { Long.class.getName(), Boolean.class.getName() });
+			new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				Long.class.getName()
+			});
 
 	/**
-	 * Returns all the flask recipientses where userId = &#63; and read = &#63;.
+	 * Returns all the flask recipientses where userId = &#63; and read = &#63; and senderId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param read the read
+	 * @param senderId the sender ID
 	 * @return the matching flask recipientses
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public List<FlaskRecipients> findByreadFlag(long userId, boolean read)
-		throws SystemException {
-		return findByreadFlag(userId, read, QueryUtil.ALL_POS,
+	public List<FlaskRecipients> findByreadFlag(long userId, boolean read,
+		long senderId) throws SystemException {
+		return findByreadFlag(userId, read, senderId, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS, null);
 	}
 
 	/**
-	 * Returns a range of all the flask recipientses where userId = &#63; and read = &#63;.
+	 * Returns a range of all the flask recipientses where userId = &#63; and read = &#63; and senderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.FlaskRecipientsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -1122,6 +1131,7 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	 *
 	 * @param userId the user ID
 	 * @param read the read
+	 * @param senderId the sender ID
 	 * @param start the lower bound of the range of flask recipientses
 	 * @param end the upper bound of the range of flask recipientses (not inclusive)
 	 * @return the range of matching flask recipientses
@@ -1129,12 +1139,12 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	 */
 	@Override
 	public List<FlaskRecipients> findByreadFlag(long userId, boolean read,
-		int start, int end) throws SystemException {
-		return findByreadFlag(userId, read, start, end, null);
+		long senderId, int start, int end) throws SystemException {
+		return findByreadFlag(userId, read, senderId, start, end, null);
 	}
 
 	/**
-	 * Returns an ordered range of all the flask recipientses where userId = &#63; and read = &#63;.
+	 * Returns an ordered range of all the flask recipientses where userId = &#63; and read = &#63; and senderId = &#63;.
 	 *
 	 * <p>
 	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.FlaskRecipientsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -1142,6 +1152,7 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	 *
 	 * @param userId the user ID
 	 * @param read the read
+	 * @param senderId the sender ID
 	 * @param start the lower bound of the range of flask recipientses
 	 * @param end the upper bound of the range of flask recipientses (not inclusive)
 	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -1150,7 +1161,7 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	 */
 	@Override
 	public List<FlaskRecipients> findByreadFlag(long userId, boolean read,
-		int start, int end, OrderByComparator orderByComparator)
+		long senderId, int start, int end, OrderByComparator orderByComparator)
 		throws SystemException {
 		boolean pagination = true;
 		FinderPath finderPath = null;
@@ -1160,12 +1171,12 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 				(orderByComparator == null)) {
 			pagination = false;
 			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_READFLAG;
-			finderArgs = new Object[] { userId, read };
+			finderArgs = new Object[] { userId, read, senderId };
 		}
 		else {
 			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_READFLAG;
 			finderArgs = new Object[] {
-					userId, read,
+					userId, read, senderId,
 					
 					start, end, orderByComparator
 				};
@@ -1177,7 +1188,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 		if ((list != null) && !list.isEmpty()) {
 			for (FlaskRecipients flaskRecipients : list) {
 				if ((userId != flaskRecipients.getUserId()) ||
-						(read != flaskRecipients.getRead())) {
+						(read != flaskRecipients.getRead()) ||
+						(senderId != flaskRecipients.getSenderId())) {
 					list = null;
 
 					break;
@@ -1189,11 +1201,11 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 			StringBundler query = null;
 
 			if (orderByComparator != null) {
-				query = new StringBundler(4 +
+				query = new StringBundler(5 +
 						(orderByComparator.getOrderByFields().length * 3));
 			}
 			else {
-				query = new StringBundler(4);
+				query = new StringBundler(5);
 			}
 
 			query.append(_SQL_SELECT_FLASKRECIPIENTS_WHERE);
@@ -1201,6 +1213,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 			query.append(_FINDER_COLUMN_READFLAG_USERID_2);
 
 			query.append(_FINDER_COLUMN_READFLAG_READ_2);
+
+			query.append(_FINDER_COLUMN_READFLAG_SENDERID_2);
 
 			if (orderByComparator != null) {
 				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
@@ -1225,6 +1239,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 				qPos.add(userId);
 
 				qPos.add(read);
+
+				qPos.add(senderId);
 
 				if (!pagination) {
 					list = (List<FlaskRecipients>)QueryUtil.list(q,
@@ -1257,10 +1273,11 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	}
 
 	/**
-	 * Returns the first flask recipients in the ordered set where userId = &#63; and read = &#63;.
+	 * Returns the first flask recipients in the ordered set where userId = &#63; and read = &#63; and senderId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param read the read
+	 * @param senderId the sender ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching flask recipients
 	 * @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a matching flask recipients could not be found
@@ -1268,16 +1285,16 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	 */
 	@Override
 	public FlaskRecipients findByreadFlag_First(long userId, boolean read,
-		OrderByComparator orderByComparator)
+		long senderId, OrderByComparator orderByComparator)
 		throws NoSuchFlaskRecipientsException, SystemException {
 		FlaskRecipients flaskRecipients = fetchByreadFlag_First(userId, read,
-				orderByComparator);
+				senderId, orderByComparator);
 
 		if (flaskRecipients != null) {
 			return flaskRecipients;
 		}
 
-		StringBundler msg = new StringBundler(6);
+		StringBundler msg = new StringBundler(8);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -1287,25 +1304,30 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 		msg.append(", read=");
 		msg.append(read);
 
+		msg.append(", senderId=");
+		msg.append(senderId);
+
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 		throw new NoSuchFlaskRecipientsException(msg.toString());
 	}
 
 	/**
-	 * Returns the first flask recipients in the ordered set where userId = &#63; and read = &#63;.
+	 * Returns the first flask recipients in the ordered set where userId = &#63; and read = &#63; and senderId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param read the read
+	 * @param senderId the sender ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the first matching flask recipients, or <code>null</code> if a matching flask recipients could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public FlaskRecipients fetchByreadFlag_First(long userId, boolean read,
-		OrderByComparator orderByComparator) throws SystemException {
-		List<FlaskRecipients> list = findByreadFlag(userId, read, 0, 1,
-				orderByComparator);
+		long senderId, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<FlaskRecipients> list = findByreadFlag(userId, read, senderId, 0,
+				1, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1315,10 +1337,11 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	}
 
 	/**
-	 * Returns the last flask recipients in the ordered set where userId = &#63; and read = &#63;.
+	 * Returns the last flask recipients in the ordered set where userId = &#63; and read = &#63; and senderId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param read the read
+	 * @param senderId the sender ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching flask recipients
 	 * @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a matching flask recipients could not be found
@@ -1326,16 +1349,16 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	 */
 	@Override
 	public FlaskRecipients findByreadFlag_Last(long userId, boolean read,
-		OrderByComparator orderByComparator)
+		long senderId, OrderByComparator orderByComparator)
 		throws NoSuchFlaskRecipientsException, SystemException {
 		FlaskRecipients flaskRecipients = fetchByreadFlag_Last(userId, read,
-				orderByComparator);
+				senderId, orderByComparator);
 
 		if (flaskRecipients != null) {
 			return flaskRecipients;
 		}
 
-		StringBundler msg = new StringBundler(6);
+		StringBundler msg = new StringBundler(8);
 
 		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
 
@@ -1345,31 +1368,36 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 		msg.append(", read=");
 		msg.append(read);
 
+		msg.append(", senderId=");
+		msg.append(senderId);
+
 		msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 		throw new NoSuchFlaskRecipientsException(msg.toString());
 	}
 
 	/**
-	 * Returns the last flask recipients in the ordered set where userId = &#63; and read = &#63;.
+	 * Returns the last flask recipients in the ordered set where userId = &#63; and read = &#63; and senderId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param read the read
+	 * @param senderId the sender ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the last matching flask recipients, or <code>null</code> if a matching flask recipients could not be found
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
 	public FlaskRecipients fetchByreadFlag_Last(long userId, boolean read,
-		OrderByComparator orderByComparator) throws SystemException {
-		int count = countByreadFlag(userId, read);
+		long senderId, OrderByComparator orderByComparator)
+		throws SystemException {
+		int count = countByreadFlag(userId, read, senderId);
 
 		if (count == 0) {
 			return null;
 		}
 
-		List<FlaskRecipients> list = findByreadFlag(userId, read, count - 1,
-				count, orderByComparator);
+		List<FlaskRecipients> list = findByreadFlag(userId, read, senderId,
+				count - 1, count, orderByComparator);
 
 		if (!list.isEmpty()) {
 			return list.get(0);
@@ -1379,11 +1407,12 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	}
 
 	/**
-	 * Returns the flask recipientses before and after the current flask recipients in the ordered set where userId = &#63; and read = &#63;.
+	 * Returns the flask recipientses before and after the current flask recipients in the ordered set where userId = &#63; and read = &#63; and senderId = &#63;.
 	 *
 	 * @param recipientId the primary key of the current flask recipients
 	 * @param userId the user ID
 	 * @param read the read
+	 * @param senderId the sender ID
 	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	 * @return the previous, current, and next flask recipients
 	 * @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a flask recipients with the primary key could not be found
@@ -1391,7 +1420,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	 */
 	@Override
 	public FlaskRecipients[] findByreadFlag_PrevAndNext(long recipientId,
-		long userId, boolean read, OrderByComparator orderByComparator)
+		long userId, boolean read, long senderId,
+		OrderByComparator orderByComparator)
 		throws NoSuchFlaskRecipientsException, SystemException {
 		FlaskRecipients flaskRecipients = findByPrimaryKey(recipientId);
 
@@ -1403,12 +1433,12 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 			FlaskRecipients[] array = new FlaskRecipientsImpl[3];
 
 			array[0] = getByreadFlag_PrevAndNext(session, flaskRecipients,
-					userId, read, orderByComparator, true);
+					userId, read, senderId, orderByComparator, true);
 
 			array[1] = flaskRecipients;
 
 			array[2] = getByreadFlag_PrevAndNext(session, flaskRecipients,
-					userId, read, orderByComparator, false);
+					userId, read, senderId, orderByComparator, false);
 
 			return array;
 		}
@@ -1422,7 +1452,7 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 
 	protected FlaskRecipients getByreadFlag_PrevAndNext(Session session,
 		FlaskRecipients flaskRecipients, long userId, boolean read,
-		OrderByComparator orderByComparator, boolean previous) {
+		long senderId, OrderByComparator orderByComparator, boolean previous) {
 		StringBundler query = null;
 
 		if (orderByComparator != null) {
@@ -1438,6 +1468,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 		query.append(_FINDER_COLUMN_READFLAG_USERID_2);
 
 		query.append(_FINDER_COLUMN_READFLAG_READ_2);
+
+		query.append(_FINDER_COLUMN_READFLAG_SENDERID_2);
 
 		if (orderByComparator != null) {
 			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
@@ -1511,6 +1543,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 
 		qPos.add(read);
 
+		qPos.add(senderId);
+
 		if (orderByComparator != null) {
 			Object[] values = orderByComparator.getOrderByConditionValues(flaskRecipients);
 
@@ -1530,47 +1564,51 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	}
 
 	/**
-	 * Removes all the flask recipientses where userId = &#63; and read = &#63; from the database.
+	 * Removes all the flask recipientses where userId = &#63; and read = &#63; and senderId = &#63; from the database.
 	 *
 	 * @param userId the user ID
 	 * @param read the read
+	 * @param senderId the sender ID
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public void removeByreadFlag(long userId, boolean read)
+	public void removeByreadFlag(long userId, boolean read, long senderId)
 		throws SystemException {
 		for (FlaskRecipients flaskRecipients : findByreadFlag(userId, read,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+				senderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
 			remove(flaskRecipients);
 		}
 	}
 
 	/**
-	 * Returns the number of flask recipientses where userId = &#63; and read = &#63;.
+	 * Returns the number of flask recipientses where userId = &#63; and read = &#63; and senderId = &#63;.
 	 *
 	 * @param userId the user ID
 	 * @param read the read
+	 * @param senderId the sender ID
 	 * @return the number of matching flask recipientses
 	 * @throws SystemException if a system exception occurred
 	 */
 	@Override
-	public int countByreadFlag(long userId, boolean read)
+	public int countByreadFlag(long userId, boolean read, long senderId)
 		throws SystemException {
 		FinderPath finderPath = FINDER_PATH_COUNT_BY_READFLAG;
 
-		Object[] finderArgs = new Object[] { userId, read };
+		Object[] finderArgs = new Object[] { userId, read, senderId };
 
 		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
 				this);
 
 		if (count == null) {
-			StringBundler query = new StringBundler(3);
+			StringBundler query = new StringBundler(4);
 
 			query.append(_SQL_COUNT_FLASKRECIPIENTS_WHERE);
 
 			query.append(_FINDER_COLUMN_READFLAG_USERID_2);
 
 			query.append(_FINDER_COLUMN_READFLAG_READ_2);
+
+			query.append(_FINDER_COLUMN_READFLAG_SENDERID_2);
 
 			String sql = query.toString();
 
@@ -1586,6 +1624,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 				qPos.add(userId);
 
 				qPos.add(read);
+
+				qPos.add(senderId);
 
 				count = (Long)q.uniqueResult();
 
@@ -1605,7 +1645,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 	}
 
 	private static final String _FINDER_COLUMN_READFLAG_USERID_2 = "flaskRecipients.userId = ? AND ";
-	private static final String _FINDER_COLUMN_READFLAG_READ_2 = "flaskRecipients.read = ?";
+	private static final String _FINDER_COLUMN_READFLAG_READ_2 = "flaskRecipients.read = ? AND ";
+	private static final String _FINDER_COLUMN_READFLAG_SENDERID_2 = "flaskRecipients.senderId = ?";
 	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_READORNOT =
 		new FinderPath(FlaskRecipientsModelImpl.ENTITY_CACHE_ENABLED,
 			FlaskRecipientsModelImpl.FINDER_CACHE_ENABLED,
@@ -2139,6 +2180,542 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 
 	private static final String _FINDER_COLUMN_READORNOT_USERID_2 = "flaskRecipients.userId = ? AND ";
 	private static final String _FINDER_COLUMN_READORNOT_MESSAGEID_2 = "flaskRecipients.messageId = ?";
+	public static final FinderPath FINDER_PATH_WITH_PAGINATION_FIND_BY_USERIDSENDERID =
+		new FinderPath(FlaskRecipientsModelImpl.ENTITY_CACHE_ENABLED,
+			FlaskRecipientsModelImpl.FINDER_CACHE_ENABLED,
+			FlaskRecipientsImpl.class, FINDER_CLASS_NAME_LIST_WITH_PAGINATION,
+			"findByUserIdSenderId",
+			new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+			Integer.class.getName(), Integer.class.getName(),
+				OrderByComparator.class.getName()
+			});
+	public static final FinderPath FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERIDSENDERID =
+		new FinderPath(FlaskRecipientsModelImpl.ENTITY_CACHE_ENABLED,
+			FlaskRecipientsModelImpl.FINDER_CACHE_ENABLED,
+			FlaskRecipientsImpl.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "findByUserIdSenderId",
+			new String[] { Long.class.getName(), Long.class.getName() },
+			FlaskRecipientsModelImpl.USERID_COLUMN_BITMASK |
+			FlaskRecipientsModelImpl.SENDERID_COLUMN_BITMASK |
+			FlaskRecipientsModelImpl.RECEIVEDDATETIME_COLUMN_BITMASK);
+	public static final FinderPath FINDER_PATH_COUNT_BY_USERIDSENDERID = new FinderPath(FlaskRecipientsModelImpl.ENTITY_CACHE_ENABLED,
+			FlaskRecipientsModelImpl.FINDER_CACHE_ENABLED, Long.class,
+			FINDER_CLASS_NAME_LIST_WITHOUT_PAGINATION, "countByUserIdSenderId",
+			new String[] { Long.class.getName(), Long.class.getName() });
+
+	/**
+	 * Returns all the flask recipientses where userId = &#63; and senderId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param senderId the sender ID
+	 * @return the matching flask recipientses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<FlaskRecipients> findByUserIdSenderId(long userId, long senderId)
+		throws SystemException {
+		return findByUserIdSenderId(userId, senderId, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS, null);
+	}
+
+	/**
+	 * Returns a range of all the flask recipientses where userId = &#63; and senderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.FlaskRecipientsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param senderId the sender ID
+	 * @param start the lower bound of the range of flask recipientses
+	 * @param end the upper bound of the range of flask recipientses (not inclusive)
+	 * @return the range of matching flask recipientses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<FlaskRecipients> findByUserIdSenderId(long userId,
+		long senderId, int start, int end) throws SystemException {
+		return findByUserIdSenderId(userId, senderId, start, end, null);
+	}
+
+	/**
+	 * Returns an ordered range of all the flask recipientses where userId = &#63; and senderId = &#63;.
+	 *
+	 * <p>
+	 * Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.FlaskRecipientsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	 * </p>
+	 *
+	 * @param userId the user ID
+	 * @param senderId the sender ID
+	 * @param start the lower bound of the range of flask recipientses
+	 * @param end the upper bound of the range of flask recipientses (not inclusive)
+	 * @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	 * @return the ordered range of matching flask recipientses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public List<FlaskRecipients> findByUserIdSenderId(long userId,
+		long senderId, int start, int end, OrderByComparator orderByComparator)
+		throws SystemException {
+		boolean pagination = true;
+		FinderPath finderPath = null;
+		Object[] finderArgs = null;
+
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS) &&
+				(orderByComparator == null)) {
+			pagination = false;
+			finderPath = FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERIDSENDERID;
+			finderArgs = new Object[] { userId, senderId };
+		}
+		else {
+			finderPath = FINDER_PATH_WITH_PAGINATION_FIND_BY_USERIDSENDERID;
+			finderArgs = new Object[] {
+					userId, senderId,
+					
+					start, end, orderByComparator
+				};
+		}
+
+		List<FlaskRecipients> list = (List<FlaskRecipients>)FinderCacheUtil.getResult(finderPath,
+				finderArgs, this);
+
+		if ((list != null) && !list.isEmpty()) {
+			for (FlaskRecipients flaskRecipients : list) {
+				if ((userId != flaskRecipients.getUserId()) ||
+						(senderId != flaskRecipients.getSenderId())) {
+					list = null;
+
+					break;
+				}
+			}
+		}
+
+		if (list == null) {
+			StringBundler query = null;
+
+			if (orderByComparator != null) {
+				query = new StringBundler(4 +
+						(orderByComparator.getOrderByFields().length * 3));
+			}
+			else {
+				query = new StringBundler(4);
+			}
+
+			query.append(_SQL_SELECT_FLASKRECIPIENTS_WHERE);
+
+			query.append(_FINDER_COLUMN_USERIDSENDERID_USERID_2);
+
+			query.append(_FINDER_COLUMN_USERIDSENDERID_SENDERID_2);
+
+			if (orderByComparator != null) {
+				appendOrderByComparator(query, _ORDER_BY_ENTITY_ALIAS,
+					orderByComparator);
+			}
+			else
+			 if (pagination) {
+				query.append(FlaskRecipientsModelImpl.ORDER_BY_JPQL);
+			}
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(senderId);
+
+				if (!pagination) {
+					list = (List<FlaskRecipients>)QueryUtil.list(q,
+							getDialect(), start, end, false);
+
+					Collections.sort(list);
+
+					list = new UnmodifiableList<FlaskRecipients>(list);
+				}
+				else {
+					list = (List<FlaskRecipients>)QueryUtil.list(q,
+							getDialect(), start, end);
+				}
+
+				cacheResult(list);
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, list);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return list;
+	}
+
+	/**
+	 * Returns the first flask recipients in the ordered set where userId = &#63; and senderId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param senderId the sender ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching flask recipients
+	 * @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a matching flask recipients could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public FlaskRecipients findByUserIdSenderId_First(long userId,
+		long senderId, OrderByComparator orderByComparator)
+		throws NoSuchFlaskRecipientsException, SystemException {
+		FlaskRecipients flaskRecipients = fetchByUserIdSenderId_First(userId,
+				senderId, orderByComparator);
+
+		if (flaskRecipients != null) {
+			return flaskRecipients;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("userId=");
+		msg.append(userId);
+
+		msg.append(", senderId=");
+		msg.append(senderId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchFlaskRecipientsException(msg.toString());
+	}
+
+	/**
+	 * Returns the first flask recipients in the ordered set where userId = &#63; and senderId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param senderId the sender ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the first matching flask recipients, or <code>null</code> if a matching flask recipients could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public FlaskRecipients fetchByUserIdSenderId_First(long userId,
+		long senderId, OrderByComparator orderByComparator)
+		throws SystemException {
+		List<FlaskRecipients> list = findByUserIdSenderId(userId, senderId, 0,
+				1, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the last flask recipients in the ordered set where userId = &#63; and senderId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param senderId the sender ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching flask recipients
+	 * @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a matching flask recipients could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public FlaskRecipients findByUserIdSenderId_Last(long userId,
+		long senderId, OrderByComparator orderByComparator)
+		throws NoSuchFlaskRecipientsException, SystemException {
+		FlaskRecipients flaskRecipients = fetchByUserIdSenderId_Last(userId,
+				senderId, orderByComparator);
+
+		if (flaskRecipients != null) {
+			return flaskRecipients;
+		}
+
+		StringBundler msg = new StringBundler(6);
+
+		msg.append(_NO_SUCH_ENTITY_WITH_KEY);
+
+		msg.append("userId=");
+		msg.append(userId);
+
+		msg.append(", senderId=");
+		msg.append(senderId);
+
+		msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+		throw new NoSuchFlaskRecipientsException(msg.toString());
+	}
+
+	/**
+	 * Returns the last flask recipients in the ordered set where userId = &#63; and senderId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param senderId the sender ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the last matching flask recipients, or <code>null</code> if a matching flask recipients could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public FlaskRecipients fetchByUserIdSenderId_Last(long userId,
+		long senderId, OrderByComparator orderByComparator)
+		throws SystemException {
+		int count = countByUserIdSenderId(userId, senderId);
+
+		if (count == 0) {
+			return null;
+		}
+
+		List<FlaskRecipients> list = findByUserIdSenderId(userId, senderId,
+				count - 1, count, orderByComparator);
+
+		if (!list.isEmpty()) {
+			return list.get(0);
+		}
+
+		return null;
+	}
+
+	/**
+	 * Returns the flask recipientses before and after the current flask recipients in the ordered set where userId = &#63; and senderId = &#63;.
+	 *
+	 * @param recipientId the primary key of the current flask recipients
+	 * @param userId the user ID
+	 * @param senderId the sender ID
+	 * @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	 * @return the previous, current, and next flask recipients
+	 * @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a flask recipients with the primary key could not be found
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public FlaskRecipients[] findByUserIdSenderId_PrevAndNext(
+		long recipientId, long userId, long senderId,
+		OrderByComparator orderByComparator)
+		throws NoSuchFlaskRecipientsException, SystemException {
+		FlaskRecipients flaskRecipients = findByPrimaryKey(recipientId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			FlaskRecipients[] array = new FlaskRecipientsImpl[3];
+
+			array[0] = getByUserIdSenderId_PrevAndNext(session,
+					flaskRecipients, userId, senderId, orderByComparator, true);
+
+			array[1] = flaskRecipients;
+
+			array[2] = getByUserIdSenderId_PrevAndNext(session,
+					flaskRecipients, userId, senderId, orderByComparator, false);
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	protected FlaskRecipients getByUserIdSenderId_PrevAndNext(Session session,
+		FlaskRecipients flaskRecipients, long userId, long senderId,
+		OrderByComparator orderByComparator, boolean previous) {
+		StringBundler query = null;
+
+		if (orderByComparator != null) {
+			query = new StringBundler(6 +
+					(orderByComparator.getOrderByFields().length * 6));
+		}
+		else {
+			query = new StringBundler(3);
+		}
+
+		query.append(_SQL_SELECT_FLASKRECIPIENTS_WHERE);
+
+		query.append(_FINDER_COLUMN_USERIDSENDERID_USERID_2);
+
+		query.append(_FINDER_COLUMN_USERIDSENDERID_SENDERID_2);
+
+		if (orderByComparator != null) {
+			String[] orderByConditionFields = orderByComparator.getOrderByConditionFields();
+
+			if (orderByConditionFields.length > 0) {
+				query.append(WHERE_AND);
+			}
+
+			for (int i = 0; i < orderByConditionFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByConditionFields[i]);
+
+				if ((i + 1) < orderByConditionFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN_HAS_NEXT);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(WHERE_GREATER_THAN);
+					}
+					else {
+						query.append(WHERE_LESSER_THAN);
+					}
+				}
+			}
+
+			query.append(ORDER_BY_CLAUSE);
+
+			String[] orderByFields = orderByComparator.getOrderByFields();
+
+			for (int i = 0; i < orderByFields.length; i++) {
+				query.append(_ORDER_BY_ENTITY_ALIAS);
+				query.append(orderByFields[i]);
+
+				if ((i + 1) < orderByFields.length) {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC_HAS_NEXT);
+					}
+					else {
+						query.append(ORDER_BY_DESC_HAS_NEXT);
+					}
+				}
+				else {
+					if (orderByComparator.isAscending() ^ previous) {
+						query.append(ORDER_BY_ASC);
+					}
+					else {
+						query.append(ORDER_BY_DESC);
+					}
+				}
+			}
+		}
+		else {
+			query.append(FlaskRecipientsModelImpl.ORDER_BY_JPQL);
+		}
+
+		String sql = query.toString();
+
+		Query q = session.createQuery(sql);
+
+		q.setFirstResult(0);
+		q.setMaxResults(2);
+
+		QueryPos qPos = QueryPos.getInstance(q);
+
+		qPos.add(userId);
+
+		qPos.add(senderId);
+
+		if (orderByComparator != null) {
+			Object[] values = orderByComparator.getOrderByConditionValues(flaskRecipients);
+
+			for (Object value : values) {
+				qPos.add(value);
+			}
+		}
+
+		List<FlaskRecipients> list = q.list();
+
+		if (list.size() == 2) {
+			return list.get(1);
+		}
+		else {
+			return null;
+		}
+	}
+
+	/**
+	 * Removes all the flask recipientses where userId = &#63; and senderId = &#63; from the database.
+	 *
+	 * @param userId the user ID
+	 * @param senderId the sender ID
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public void removeByUserIdSenderId(long userId, long senderId)
+		throws SystemException {
+		for (FlaskRecipients flaskRecipients : findByUserIdSenderId(userId,
+				senderId, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null)) {
+			remove(flaskRecipients);
+		}
+	}
+
+	/**
+	 * Returns the number of flask recipientses where userId = &#63; and senderId = &#63;.
+	 *
+	 * @param userId the user ID
+	 * @param senderId the sender ID
+	 * @return the number of matching flask recipientses
+	 * @throws SystemException if a system exception occurred
+	 */
+	@Override
+	public int countByUserIdSenderId(long userId, long senderId)
+		throws SystemException {
+		FinderPath finderPath = FINDER_PATH_COUNT_BY_USERIDSENDERID;
+
+		Object[] finderArgs = new Object[] { userId, senderId };
+
+		Long count = (Long)FinderCacheUtil.getResult(finderPath, finderArgs,
+				this);
+
+		if (count == null) {
+			StringBundler query = new StringBundler(3);
+
+			query.append(_SQL_COUNT_FLASKRECIPIENTS_WHERE);
+
+			query.append(_FINDER_COLUMN_USERIDSENDERID_USERID_2);
+
+			query.append(_FINDER_COLUMN_USERIDSENDERID_SENDERID_2);
+
+			String sql = query.toString();
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(sql);
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(userId);
+
+				qPos.add(senderId);
+
+				count = (Long)q.uniqueResult();
+
+				FinderCacheUtil.putResult(finderPath, finderArgs, count);
+			}
+			catch (Exception e) {
+				FinderCacheUtil.removeResult(finderPath, finderArgs);
+
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+
+		return count.intValue();
+	}
+
+	private static final String _FINDER_COLUMN_USERIDSENDERID_USERID_2 = "flaskRecipients.userId = ? AND ";
+	private static final String _FINDER_COLUMN_USERIDSENDERID_SENDERID_2 = "flaskRecipients.senderId = ?";
 
 	public FlaskRecipientsPersistenceImpl() {
 		setModelClass(FlaskRecipients.class);
@@ -2407,7 +2984,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_READFLAG.getColumnBitmask()) != 0) {
 				Object[] args = new Object[] {
 						flaskRecipientsModelImpl.getOriginalUserId(),
-						flaskRecipientsModelImpl.getOriginalRead()
+						flaskRecipientsModelImpl.getOriginalRead(),
+						flaskRecipientsModelImpl.getOriginalSenderId()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_READFLAG, args);
@@ -2416,7 +2994,8 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 
 				args = new Object[] {
 						flaskRecipientsModelImpl.getUserId(),
-						flaskRecipientsModelImpl.getRead()
+						flaskRecipientsModelImpl.getRead(),
+						flaskRecipientsModelImpl.getSenderId()
 					};
 
 				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_READFLAG, args);
@@ -2446,6 +3025,29 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_READORNOT,
 					args);
 			}
+
+			if ((flaskRecipientsModelImpl.getColumnBitmask() &
+					FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERIDSENDERID.getColumnBitmask()) != 0) {
+				Object[] args = new Object[] {
+						flaskRecipientsModelImpl.getOriginalUserId(),
+						flaskRecipientsModelImpl.getOriginalSenderId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERIDSENDERID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERIDSENDERID,
+					args);
+
+				args = new Object[] {
+						flaskRecipientsModelImpl.getUserId(),
+						flaskRecipientsModelImpl.getSenderId()
+					};
+
+				FinderCacheUtil.removeResult(FINDER_PATH_COUNT_BY_USERIDSENDERID,
+					args);
+				FinderCacheUtil.removeResult(FINDER_PATH_WITHOUT_PAGINATION_FIND_BY_USERIDSENDERID,
+					args);
+			}
 		}
 
 		EntityCacheUtil.putResult(FlaskRecipientsModelImpl.ENTITY_CACHE_ENABLED,
@@ -2471,6 +3073,7 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 		flaskRecipientsImpl.setMessageId(flaskRecipients.getMessageId());
 		flaskRecipientsImpl.setRead(flaskRecipients.isRead());
 		flaskRecipientsImpl.setReceivedDateTime(flaskRecipients.getReceivedDateTime());
+		flaskRecipientsImpl.setSenderId(flaskRecipients.getSenderId());
 
 		return flaskRecipientsImpl;
 	}

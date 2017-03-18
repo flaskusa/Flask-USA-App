@@ -17,13 +17,34 @@ create table Contacts_Entry (
 	comments STRING null
 );
 
+create table Contacts_FlaskGroupMessages (
+	groupMessagesId LONG not null primary key,
+	senderEmail VARCHAR(75) null,
+	senderUserId LONG,
+	senderName VARCHAR(75) null,
+	groupId LONG,
+	message VARCHAR(255) null,
+	sendEmail BOOLEAN,
+	dateTime DATE null
+);
+
+create table Contacts_FlaskGroupRecipients (
+	groupRecipientId LONG not null primary key,
+	groupId LONG,
+	recipients VARCHAR(75) null,
+	groupMessageId LONG,
+	read_ VARCHAR(75) null,
+	receivedDateTime DATE null,
+	senderId LONG
+);
+
 create table Contacts_FlaskMessages (
 	messageId LONG not null primary key,
 	senderEmail VARCHAR(75) null,
 	senderUserId LONG,
 	senderName VARCHAR(75) null,
 	recipients VARCHAR(75) null,
-	message VARCHAR(75) null,
+	message VARCHAR(255) null,
 	sendEmail BOOLEAN,
 	dateTime DATE null
 );
@@ -34,7 +55,8 @@ create table Contacts_FlaskRecipients (
 	email VARCHAR(75) null,
 	messageId LONG,
 	read_ BOOLEAN,
-	receivedDateTime DATE null
+	receivedDateTime DATE null,
+	senderId LONG
 );
 
 create table Contacts_FlaskUserDeviceRegistration (
@@ -55,6 +77,6 @@ create table Contacts_NotificationAuditLog (
 	senderEmail VARCHAR(75) null,
 	receiverEmail VARCHAR(75) null,
 	messageReason VARCHAR(75) null,
-	message VARCHAR(75) null,
+	message VARCHAR(255) null,
 	notificationTime DATE null
 );

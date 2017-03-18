@@ -69,20 +69,38 @@ public class FlaskMessagesServiceWrapper implements FlaskMessagesService,
 
 	@Override
 	public com.liferay.portal.kernel.json.JSONArray getAllMyFlaskMessages(
+		long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return _flaskMessagesService.getAllMyFlaskMessages(serviceContext);
+		return _flaskMessagesService.getAllMyFlaskMessages(receiverId,
+			serviceContext);
 	}
 
 	@Override
 	public java.util.List<com.liferay.contacts.model.FlaskMessages> getMyUnreadFlaskMessages(
+		long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return _flaskMessagesService.getMyUnreadFlaskMessages(serviceContext);
+		return _flaskMessagesService.getMyUnreadFlaskMessages(receiverId,
+			serviceContext);
 	}
 
 	@Override
-	public int getMyFlaskMessagesCount(
+	public int getMyFlaskMessagesCount(long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return _flaskMessagesService.getMyFlaskMessagesCount(serviceContext);
+		return _flaskMessagesService.getMyFlaskMessagesCount(receiverId,
+			serviceContext);
+	}
+
+	@Override
+	public int getMyUnreadFlaskMessagesCount(long receiverId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskMessagesService.getMyUnreadFlaskMessagesCount(receiverId,
+			serviceContext);
+	}
+
+	@Override
+	public int getTotalUnreadChatCount(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskMessagesService.getTotalUnreadChatCount(serviceContext);
 	}
 
 	@Override

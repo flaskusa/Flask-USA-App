@@ -46,13 +46,36 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 	</model>
+	<model name="com.liferay.contacts.model.FlaskGroupMessages">
+		<field name="groupMessagesId" type="long" />
+		<field name="senderEmail" type="String" />
+		<field name="senderUserId" type="long" />
+		<field name="senderName" type="String" />
+		<field name="groupId" type="long" />
+		<field name="message" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
+		<field name="sendEmail" type="boolean" />
+		<field name="dateTime" type="Date" />
+	</model>
+	<model name="com.liferay.contacts.model.FlaskGroupRecipients">
+		<field name="groupRecipientId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="recipients" type="String" />
+		<field name="groupMessageId" type="long" />
+		<field name="read" type="String" />
+		<field name="receivedDateTime" type="Date" />
+		<field name="senderId" type="long" />
+	</model>
 	<model name="com.liferay.contacts.model.FlaskMessages">
 		<field name="messageId" type="long" />
 		<field name="senderEmail" type="String" />
 		<field name="senderUserId" type="long" />
 		<field name="senderName" type="String" />
 		<field name="recipients" type="String" />
-		<field name="message" type="String" />
+		<field name="message" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 		<field name="sendEmail" type="boolean" />
 		<field name="dateTime" type="Date" />
 	</model>
@@ -63,6 +86,7 @@
 		<field name="messageId" type="long" />
 		<field name="read" type="boolean" />
 		<field name="receivedDateTime" type="Date" />
+		<field name="senderId" type="long" />
 	</model>
 	<model name="com.liferay.contacts.model.FlaskUserDeviceRegistration">
 		<field name="userDeviceRegistrationId" type="long" />
@@ -81,7 +105,9 @@
 		<field name="senderEmail" type="String" />
 		<field name="receiverEmail" type="String" />
 		<field name="messageReason" type="String" />
-		<field name="message" type="String" />
+		<field name="message" type="String">
+			<hint-collection name="FLASK-DESC" />
+		</field>
 		<field name="notificationTime" type="Date" />
 	</model>
 </model-hints>

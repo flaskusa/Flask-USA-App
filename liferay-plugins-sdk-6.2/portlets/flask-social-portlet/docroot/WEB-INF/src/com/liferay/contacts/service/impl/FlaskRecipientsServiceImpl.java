@@ -14,7 +14,6 @@
 
 package com.liferay.contacts.service.impl;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -54,29 +53,29 @@ public class FlaskRecipientsServiceImpl extends FlaskRecipientsServiceBaseImpl {
 			flaskRecipients.setEmail(user.getEmailAddress());
 			flaskRecipients.setMessageId(messageId);
 			flaskRecipients.setRead(read);
+			flaskRecipients.setSenderId(serviceContext.getUserId());
 			Date date = new Date();
 			flaskRecipients.setReceivedDateTime(serviceContext.getCreateDate(date));
 			flaskRecipients = FlaskRecipientsLocalServiceUtil.addFlaskRecipients(flaskRecipients);
 		} catch (Exception e) {
-			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return flaskRecipients;
 	}
 	
 	@Override
-	 public boolean setRead(long messageId){
-	  List<FlaskRecipients> flaskRecipients = new ArrayList<FlaskRecipients>();
+	 public boolean setRead(long messageId, ServiceContext serviceContext){
 	  boolean ret = false;
 	  try {
-	   flaskRecipients = FlaskRecipientsUtil.findBymessageId(messageId);
-	   for(FlaskRecipients recp: flaskRecipients){
-	    recp.setRead(true);
-	    FlaskRecipientsLocalServiceUtil.updateFlaskRecipients(recp);
-	    ret = true;
-	   }
+		   List<FlaskRecipients> flaskRecipients = FlaskRecipientsUtil.findBymessageId(messageId);
+		   for(FlaskRecipients recp: flaskRecipients){
+			   if((recp.getUserId() == serviceContext.getUserId()) && (recp.getRead() == false)){
+				   ret = true;
+				   recp.setRead(ret);
+				   FlaskRecipientsLocalServiceUtil.updateFlaskRecipients(recp);
+			   }
+		   }
 	  } catch (Exception e) {
-	   // TODO: handle exception
 	   e.printStackTrace();
 	  }
 	  return ret;

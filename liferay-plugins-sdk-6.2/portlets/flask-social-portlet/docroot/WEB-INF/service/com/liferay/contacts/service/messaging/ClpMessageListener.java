@@ -19,6 +19,10 @@ import com.liferay.contacts.service.DeviceAwsEndpointLocalServiceUtil;
 import com.liferay.contacts.service.DeviceAwsEndpointServiceUtil;
 import com.liferay.contacts.service.EntryLocalServiceUtil;
 import com.liferay.contacts.service.EntryServiceUtil;
+import com.liferay.contacts.service.FlaskGroupMessagesLocalServiceUtil;
+import com.liferay.contacts.service.FlaskGroupMessagesServiceUtil;
+import com.liferay.contacts.service.FlaskGroupRecipientsLocalServiceUtil;
+import com.liferay.contacts.service.FlaskGroupRecipientsServiceUtil;
 import com.liferay.contacts.service.FlaskMessagesLocalServiceUtil;
 import com.liferay.contacts.service.FlaskMessagesServiceUtil;
 import com.liferay.contacts.service.FlaskRecipientsLocalServiceUtil;
@@ -52,6 +56,12 @@ public class ClpMessageListener extends BaseMessageListener {
 			EntryLocalServiceUtil.clearService();
 
 			EntryServiceUtil.clearService();
+			FlaskGroupMessagesLocalServiceUtil.clearService();
+
+			FlaskGroupMessagesServiceUtil.clearService();
+			FlaskGroupRecipientsLocalServiceUtil.clearService();
+
+			FlaskGroupRecipientsServiceUtil.clearService();
 			FlaskMessagesLocalServiceUtil.clearService();
 
 			FlaskMessagesServiceUtil.clearService();

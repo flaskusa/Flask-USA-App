@@ -53,7 +53,7 @@
         <column name="sendEmail" type="boolean"></column>
         <column name="dateTime" type="Date"></column>
         <order by="asc">
-            <order-column name="dateTime" />
+            <order-column name="dateTime" order-by="asc"/>
         </order>
     </entity>
     <entity name="FlaskRecipients" local-service="true" cache-enabled="false">
@@ -63,10 +63,11 @@
         <column name="messageId" type="long"></column>
         <column name="read" type="boolean"></column>
         <column name="receivedDateTime" type="Date"></column>
-        <order by="desc">
-            <order-column name="receivedDateTime" />
+        <column name="senderId" type="long"></column>
+        <order by="asc">
+            <order-column name="receivedDateTime" order-by="asc"/>
         </order>
-        <finder name="UserId" return-type="Collection">
+        <finder name="UserId" return-type="Collection" unique="false">
 			<finder-column name="userId" />
 		</finder>
 		<finder name="messageId" return-type="Collection">
@@ -75,11 +76,16 @@
 		<finder name="readFlag" return-type="Collection">
 			<finder-column name="userId" />
 			<finder-column name="read" />
+            <finder-column name="senderId"></finder-column>
 		</finder>
 		<finder name="readOrNot" return-type="Collection">
 			<finder-column name="userId" />
 			<finder-column name="messageId" />
 		</finder>
+        <finder name="UserIdSenderId" return-type="Collection">
+            <finder-column name="userId"></finder-column>
+            <finder-column name="senderId"></finder-column>
+        </finder>
     </entity>
     <entity name="FlaskUserDeviceRegistration" local-service="true" cache-enabled="false">
         <column name="userDeviceRegistrationId" type="long" primary="true"></column>
@@ -127,5 +133,46 @@
 			<finder-column name="receiverEmail" />
 		</finder>
     </entity>
-    
+    <entity name="FlaskGroupMessages" local-service="true">
+
+    	<!-- PK fields -->
+
+    	<column name="groupMessagesId" type="long"
+    		primary="true">
+    	</column>
+
+    	<!-- Group instance -->
+        <column name="senderEmail" type="String"></column>
+        <column name="senderUserId" type="long"></column>
+        <column name="senderName" type="String"></column>
+
+    	<column name="groupId" type="long"></column>
+
+    	<!-- Audit fields -->
+        <column name="message" type="String"></column>
+        <column name="sendEmail" type="boolean"></column>
+        <column name="dateTime" type="Date"></column>
+        <order by="asc">
+            <order-column name="dateTime" order-by="asc"></order-column>
+        </order>
+    </entity>
+    <entity name="FlaskGroupRecipients" local-service="true">
+        <column name="groupRecipientId" type="long" primary="true"></column>
+        <column name="groupId" type="long"></column>
+        <column name="recipients" type="String"></column>
+        <column name="groupMessageId" type="long"></column>
+        <column name="read" type="String"></column>
+        <column name="receivedDateTime" type="Date"></column>
+        <column name="senderId" type="long"></column>
+        <order by="asc">
+            <order-column name="receivedDateTime" order-by="asc"></order-column>
+        </order>
+        <finder name="GroupId" return-type="Collection">
+            <finder-column name="groupId"></finder-column>
+        </finder>
+        <finder name="MessageId" return-type="Collection">
+            <finder-column name="groupMessageId"></finder-column>
+        </finder>
+    </entity>
+
 </service-builder>

@@ -82,6 +82,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		attributes.put("messageId", getMessageId());
 		attributes.put("read", getRead());
 		attributes.put("receivedDateTime", getReceivedDateTime());
+		attributes.put("senderId", getSenderId());
 
 		return attributes;
 	}
@@ -122,6 +123,12 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 
 		if (receivedDateTime != null) {
 			setReceivedDateTime(receivedDateTime);
+		}
+
+		Long senderId = (Long)attributes.get("senderId");
+
+		if (senderId != null) {
+			setSenderId(senderId);
 		}
 	}
 
@@ -279,6 +286,29 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		}
 	}
 
+	@Override
+	public long getSenderId() {
+		return _senderId;
+	}
+
+	@Override
+	public void setSenderId(long senderId) {
+		_senderId = senderId;
+
+		if (_flaskRecipientsRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskRecipientsRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setSenderId", long.class);
+
+				method.invoke(_flaskRecipientsRemoteModel, senderId);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getFlaskRecipientsRemoteModel() {
 		return _flaskRecipientsRemoteModel;
 	}
@@ -356,6 +386,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		clone.setMessageId(getMessageId());
 		clone.setRead(getRead());
 		clone.setReceivedDateTime(getReceivedDateTime());
+		clone.setSenderId(getSenderId());
 
 		return clone;
 	}
@@ -366,8 +397,6 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 
 		value = DateUtil.compareTo(getReceivedDateTime(),
 				flaskRecipients.getReceivedDateTime());
-
-		value = value * -1;
 
 		if (value != 0) {
 			return value;
@@ -409,7 +438,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{recipientId=");
 		sb.append(getRecipientId());
@@ -423,6 +452,8 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		sb.append(getRead());
 		sb.append(", receivedDateTime=");
 		sb.append(getReceivedDateTime());
+		sb.append(", senderId=");
+		sb.append(getSenderId());
 		sb.append("}");
 
 		return sb.toString();
@@ -430,7 +461,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(22);
+		StringBundler sb = new StringBundler(25);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.contacts.model.FlaskRecipients");
@@ -460,6 +491,10 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 			"<column><column-name>receivedDateTime</column-name><column-value><![CDATA[");
 		sb.append(getReceivedDateTime());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>senderId</column-name><column-value><![CDATA[");
+		sb.append(getSenderId());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -473,6 +508,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 	private long _messageId;
 	private boolean _read;
 	private Date _receivedDateTime;
+	private long _senderId;
 	private BaseModel<?> _flaskRecipientsRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.contacts.service.ClpSerializer.class;
 }

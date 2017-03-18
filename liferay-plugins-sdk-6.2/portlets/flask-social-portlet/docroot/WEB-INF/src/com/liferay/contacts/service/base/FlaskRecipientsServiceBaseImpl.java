@@ -19,6 +19,8 @@ import com.liferay.contacts.service.FlaskRecipientsService;
 import com.liferay.contacts.service.persistence.DeviceAwsEndpointPersistence;
 import com.liferay.contacts.service.persistence.EntryFinder;
 import com.liferay.contacts.service.persistence.EntryPersistence;
+import com.liferay.contacts.service.persistence.FlaskGroupMessagesPersistence;
+import com.liferay.contacts.service.persistence.FlaskGroupRecipientsPersistence;
 import com.liferay.contacts.service.persistence.FlaskMessagesPersistence;
 import com.liferay.contacts.service.persistence.FlaskRecipientsPersistence;
 import com.liferay.contacts.service.persistence.FlaskUserDeviceRegistrationPersistence;
@@ -183,6 +185,120 @@ public abstract class FlaskRecipientsServiceBaseImpl extends BaseServiceImpl
 	 */
 	public void setEntryFinder(EntryFinder entryFinder) {
 		this.entryFinder = entryFinder;
+	}
+
+	/**
+	 * Returns the flask group messages local service.
+	 *
+	 * @return the flask group messages local service
+	 */
+	public com.liferay.contacts.service.FlaskGroupMessagesLocalService getFlaskGroupMessagesLocalService() {
+		return flaskGroupMessagesLocalService;
+	}
+
+	/**
+	 * Sets the flask group messages local service.
+	 *
+	 * @param flaskGroupMessagesLocalService the flask group messages local service
+	 */
+	public void setFlaskGroupMessagesLocalService(
+		com.liferay.contacts.service.FlaskGroupMessagesLocalService flaskGroupMessagesLocalService) {
+		this.flaskGroupMessagesLocalService = flaskGroupMessagesLocalService;
+	}
+
+	/**
+	 * Returns the flask group messages remote service.
+	 *
+	 * @return the flask group messages remote service
+	 */
+	public com.liferay.contacts.service.FlaskGroupMessagesService getFlaskGroupMessagesService() {
+		return flaskGroupMessagesService;
+	}
+
+	/**
+	 * Sets the flask group messages remote service.
+	 *
+	 * @param flaskGroupMessagesService the flask group messages remote service
+	 */
+	public void setFlaskGroupMessagesService(
+		com.liferay.contacts.service.FlaskGroupMessagesService flaskGroupMessagesService) {
+		this.flaskGroupMessagesService = flaskGroupMessagesService;
+	}
+
+	/**
+	 * Returns the flask group messages persistence.
+	 *
+	 * @return the flask group messages persistence
+	 */
+	public FlaskGroupMessagesPersistence getFlaskGroupMessagesPersistence() {
+		return flaskGroupMessagesPersistence;
+	}
+
+	/**
+	 * Sets the flask group messages persistence.
+	 *
+	 * @param flaskGroupMessagesPersistence the flask group messages persistence
+	 */
+	public void setFlaskGroupMessagesPersistence(
+		FlaskGroupMessagesPersistence flaskGroupMessagesPersistence) {
+		this.flaskGroupMessagesPersistence = flaskGroupMessagesPersistence;
+	}
+
+	/**
+	 * Returns the flask group recipients local service.
+	 *
+	 * @return the flask group recipients local service
+	 */
+	public com.liferay.contacts.service.FlaskGroupRecipientsLocalService getFlaskGroupRecipientsLocalService() {
+		return flaskGroupRecipientsLocalService;
+	}
+
+	/**
+	 * Sets the flask group recipients local service.
+	 *
+	 * @param flaskGroupRecipientsLocalService the flask group recipients local service
+	 */
+	public void setFlaskGroupRecipientsLocalService(
+		com.liferay.contacts.service.FlaskGroupRecipientsLocalService flaskGroupRecipientsLocalService) {
+		this.flaskGroupRecipientsLocalService = flaskGroupRecipientsLocalService;
+	}
+
+	/**
+	 * Returns the flask group recipients remote service.
+	 *
+	 * @return the flask group recipients remote service
+	 */
+	public com.liferay.contacts.service.FlaskGroupRecipientsService getFlaskGroupRecipientsService() {
+		return flaskGroupRecipientsService;
+	}
+
+	/**
+	 * Sets the flask group recipients remote service.
+	 *
+	 * @param flaskGroupRecipientsService the flask group recipients remote service
+	 */
+	public void setFlaskGroupRecipientsService(
+		com.liferay.contacts.service.FlaskGroupRecipientsService flaskGroupRecipientsService) {
+		this.flaskGroupRecipientsService = flaskGroupRecipientsService;
+	}
+
+	/**
+	 * Returns the flask group recipients persistence.
+	 *
+	 * @return the flask group recipients persistence
+	 */
+	public FlaskGroupRecipientsPersistence getFlaskGroupRecipientsPersistence() {
+		return flaskGroupRecipientsPersistence;
+	}
+
+	/**
+	 * Sets the flask group recipients persistence.
+	 *
+	 * @param flaskGroupRecipientsPersistence the flask group recipients persistence
+	 */
+	public void setFlaskGroupRecipientsPersistence(
+		FlaskGroupRecipientsPersistence flaskGroupRecipientsPersistence) {
+		this.flaskGroupRecipientsPersistence = flaskGroupRecipientsPersistence;
 	}
 
 	/**
@@ -598,6 +714,18 @@ public abstract class FlaskRecipientsServiceBaseImpl extends BaseServiceImpl
 	protected EntryPersistence entryPersistence;
 	@BeanReference(type = EntryFinder.class)
 	protected EntryFinder entryFinder;
+	@BeanReference(type = com.liferay.contacts.service.FlaskGroupMessagesLocalService.class)
+	protected com.liferay.contacts.service.FlaskGroupMessagesLocalService flaskGroupMessagesLocalService;
+	@BeanReference(type = com.liferay.contacts.service.FlaskGroupMessagesService.class)
+	protected com.liferay.contacts.service.FlaskGroupMessagesService flaskGroupMessagesService;
+	@BeanReference(type = FlaskGroupMessagesPersistence.class)
+	protected FlaskGroupMessagesPersistence flaskGroupMessagesPersistence;
+	@BeanReference(type = com.liferay.contacts.service.FlaskGroupRecipientsLocalService.class)
+	protected com.liferay.contacts.service.FlaskGroupRecipientsLocalService flaskGroupRecipientsLocalService;
+	@BeanReference(type = com.liferay.contacts.service.FlaskGroupRecipientsService.class)
+	protected com.liferay.contacts.service.FlaskGroupRecipientsService flaskGroupRecipientsService;
+	@BeanReference(type = FlaskGroupRecipientsPersistence.class)
+	protected FlaskGroupRecipientsPersistence flaskGroupRecipientsPersistence;
 	@BeanReference(type = com.liferay.contacts.service.FlaskMessagesLocalService.class)
 	protected com.liferay.contacts.service.FlaskMessagesLocalService flaskMessagesLocalService;
 	@BeanReference(type = com.liferay.contacts.service.FlaskMessagesService.class)

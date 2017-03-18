@@ -167,6 +167,20 @@ public interface FlaskRecipientsModel extends BaseModel<FlaskRecipients> {
 	 */
 	public void setReceivedDateTime(Date receivedDateTime);
 
+	/**
+	 * Returns the sender ID of this flask recipients.
+	 *
+	 * @return the sender ID of this flask recipients
+	 */
+	public long getSenderId();
+
+	/**
+	 * Sets the sender ID of this flask recipients.
+	 *
+	 * @param senderId the sender ID of this flask recipients
+	 */
+	public void setSenderId(long senderId);
+
 	@Override
 	public boolean isNew();
 

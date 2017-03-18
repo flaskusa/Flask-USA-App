@@ -313,19 +313,20 @@ public interface FlaskRecipientsPersistence extends BasePersistence<FlaskRecipie
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns all the flask recipientses where userId = &#63; and read = &#63;.
+	* Returns all the flask recipientses where userId = &#63; and read = &#63; and senderId = &#63;.
 	*
 	* @param userId the user ID
 	* @param read the read
+	* @param senderId the sender ID
 	* @return the matching flask recipientses
 	* @throws SystemException if a system exception occurred
 	*/
 	public java.util.List<com.liferay.contacts.model.FlaskRecipients> findByreadFlag(
-		long userId, boolean read)
+		long userId, boolean read, long senderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns a range of all the flask recipientses where userId = &#63; and read = &#63;.
+	* Returns a range of all the flask recipientses where userId = &#63; and read = &#63; and senderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.FlaskRecipientsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -333,17 +334,18 @@ public interface FlaskRecipientsPersistence extends BasePersistence<FlaskRecipie
 	*
 	* @param userId the user ID
 	* @param read the read
+	* @param senderId the sender ID
 	* @param start the lower bound of the range of flask recipientses
 	* @param end the upper bound of the range of flask recipientses (not inclusive)
 	* @return the range of matching flask recipientses
 	* @throws SystemException if a system exception occurred
 	*/
 	public java.util.List<com.liferay.contacts.model.FlaskRecipients> findByreadFlag(
-		long userId, boolean read, int start, int end)
+		long userId, boolean read, long senderId, int start, int end)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns an ordered range of all the flask recipientses where userId = &#63; and read = &#63;.
+	* Returns an ordered range of all the flask recipientses where userId = &#63; and read = &#63; and senderId = &#63;.
 	*
 	* <p>
 	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.FlaskRecipientsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
@@ -351,6 +353,7 @@ public interface FlaskRecipientsPersistence extends BasePersistence<FlaskRecipie
 	*
 	* @param userId the user ID
 	* @param read the read
+	* @param senderId the sender ID
 	* @param start the lower bound of the range of flask recipientses
 	* @param end the upper bound of the range of flask recipientses (not inclusive)
 	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
@@ -358,106 +361,113 @@ public interface FlaskRecipientsPersistence extends BasePersistence<FlaskRecipie
 	* @throws SystemException if a system exception occurred
 	*/
 	public java.util.List<com.liferay.contacts.model.FlaskRecipients> findByreadFlag(
-		long userId, boolean read, int start, int end,
+		long userId, boolean read, long senderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the first flask recipients in the ordered set where userId = &#63; and read = &#63;.
+	* Returns the first flask recipients in the ordered set where userId = &#63; and read = &#63; and senderId = &#63;.
 	*
 	* @param userId the user ID
 	* @param read the read
+	* @param senderId the sender ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching flask recipients
 	* @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a matching flask recipients could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.contacts.model.FlaskRecipients findByreadFlag_First(
-		long userId, boolean read,
+		long userId, boolean read, long senderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.contacts.NoSuchFlaskRecipientsException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the first flask recipients in the ordered set where userId = &#63; and read = &#63;.
+	* Returns the first flask recipients in the ordered set where userId = &#63; and read = &#63; and senderId = &#63;.
 	*
 	* @param userId the user ID
 	* @param read the read
+	* @param senderId the sender ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the first matching flask recipients, or <code>null</code> if a matching flask recipients could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.contacts.model.FlaskRecipients fetchByreadFlag_First(
-		long userId, boolean read,
+		long userId, boolean read, long senderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the last flask recipients in the ordered set where userId = &#63; and read = &#63;.
+	* Returns the last flask recipients in the ordered set where userId = &#63; and read = &#63; and senderId = &#63;.
 	*
 	* @param userId the user ID
 	* @param read the read
+	* @param senderId the sender ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching flask recipients
 	* @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a matching flask recipients could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.contacts.model.FlaskRecipients findByreadFlag_Last(
-		long userId, boolean read,
+		long userId, boolean read, long senderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.contacts.NoSuchFlaskRecipientsException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the last flask recipients in the ordered set where userId = &#63; and read = &#63;.
+	* Returns the last flask recipients in the ordered set where userId = &#63; and read = &#63; and senderId = &#63;.
 	*
 	* @param userId the user ID
 	* @param read the read
+	* @param senderId the sender ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the last matching flask recipients, or <code>null</code> if a matching flask recipients could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.contacts.model.FlaskRecipients fetchByreadFlag_Last(
-		long userId, boolean read,
+		long userId, boolean read, long senderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the flask recipientses before and after the current flask recipients in the ordered set where userId = &#63; and read = &#63;.
+	* Returns the flask recipientses before and after the current flask recipients in the ordered set where userId = &#63; and read = &#63; and senderId = &#63;.
 	*
 	* @param recipientId the primary key of the current flask recipients
 	* @param userId the user ID
 	* @param read the read
+	* @param senderId the sender ID
 	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
 	* @return the previous, current, and next flask recipients
 	* @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a flask recipients with the primary key could not be found
 	* @throws SystemException if a system exception occurred
 	*/
 	public com.liferay.contacts.model.FlaskRecipients[] findByreadFlag_PrevAndNext(
-		long recipientId, long userId, boolean read,
+		long recipientId, long userId, boolean read, long senderId,
 		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
 		throws com.liferay.contacts.NoSuchFlaskRecipientsException,
 			com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Removes all the flask recipientses where userId = &#63; and read = &#63; from the database.
+	* Removes all the flask recipientses where userId = &#63; and read = &#63; and senderId = &#63; from the database.
 	*
 	* @param userId the user ID
 	* @param read the read
+	* @param senderId the sender ID
 	* @throws SystemException if a system exception occurred
 	*/
-	public void removeByreadFlag(long userId, boolean read)
+	public void removeByreadFlag(long userId, boolean read, long senderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
-	* Returns the number of flask recipientses where userId = &#63; and read = &#63;.
+	* Returns the number of flask recipientses where userId = &#63; and read = &#63; and senderId = &#63;.
 	*
 	* @param userId the user ID
 	* @param read the read
+	* @param senderId the sender ID
 	* @return the number of matching flask recipientses
 	* @throws SystemException if a system exception occurred
 	*/
-	public int countByreadFlag(long userId, boolean read)
+	public int countByreadFlag(long userId, boolean read, long senderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**
@@ -606,6 +616,154 @@ public interface FlaskRecipientsPersistence extends BasePersistence<FlaskRecipie
 	* @throws SystemException if a system exception occurred
 	*/
 	public int countByreadOrNot(long userId, long messageId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns all the flask recipientses where userId = &#63; and senderId = &#63;.
+	*
+	* @param userId the user ID
+	* @param senderId the sender ID
+	* @return the matching flask recipientses
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.contacts.model.FlaskRecipients> findByUserIdSenderId(
+		long userId, long senderId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns a range of all the flask recipientses where userId = &#63; and senderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.FlaskRecipientsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param senderId the sender ID
+	* @param start the lower bound of the range of flask recipientses
+	* @param end the upper bound of the range of flask recipientses (not inclusive)
+	* @return the range of matching flask recipientses
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.contacts.model.FlaskRecipients> findByUserIdSenderId(
+		long userId, long senderId, int start, int end)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns an ordered range of all the flask recipientses where userId = &#63; and senderId = &#63;.
+	*
+	* <p>
+	* Useful when paginating results. Returns a maximum of <code>end - start</code> instances. <code>start</code> and <code>end</code> are not primary keys, they are indexes in the result set. Thus, <code>0</code> refers to the first result in the set. Setting both <code>start</code> and <code>end</code> to {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS} will return the full result set. If <code>orderByComparator</code> is specified, then the query will include the given ORDER BY logic. If <code>orderByComparator</code> is absent and pagination is required (<code>start</code> and <code>end</code> are not {@link com.liferay.portal.kernel.dao.orm.QueryUtil#ALL_POS}), then the query will include the default ORDER BY logic from {@link com.liferay.contacts.model.impl.FlaskRecipientsModelImpl}. If both <code>orderByComparator</code> and pagination are absent, for performance reasons, the query will not have an ORDER BY clause and the returned result set will be sorted on by the primary key in an ascending order.
+	* </p>
+	*
+	* @param userId the user ID
+	* @param senderId the sender ID
+	* @param start the lower bound of the range of flask recipientses
+	* @param end the upper bound of the range of flask recipientses (not inclusive)
+	* @param orderByComparator the comparator to order the results by (optionally <code>null</code>)
+	* @return the ordered range of matching flask recipientses
+	* @throws SystemException if a system exception occurred
+	*/
+	public java.util.List<com.liferay.contacts.model.FlaskRecipients> findByUserIdSenderId(
+		long userId, long senderId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first flask recipients in the ordered set where userId = &#63; and senderId = &#63;.
+	*
+	* @param userId the user ID
+	* @param senderId the sender ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching flask recipients
+	* @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a matching flask recipients could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.contacts.model.FlaskRecipients findByUserIdSenderId_First(
+		long userId, long senderId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.contacts.NoSuchFlaskRecipientsException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the first flask recipients in the ordered set where userId = &#63; and senderId = &#63;.
+	*
+	* @param userId the user ID
+	* @param senderId the sender ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the first matching flask recipients, or <code>null</code> if a matching flask recipients could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.contacts.model.FlaskRecipients fetchByUserIdSenderId_First(
+		long userId, long senderId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last flask recipients in the ordered set where userId = &#63; and senderId = &#63;.
+	*
+	* @param userId the user ID
+	* @param senderId the sender ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching flask recipients
+	* @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a matching flask recipients could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.contacts.model.FlaskRecipients findByUserIdSenderId_Last(
+		long userId, long senderId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.contacts.NoSuchFlaskRecipientsException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the last flask recipients in the ordered set where userId = &#63; and senderId = &#63;.
+	*
+	* @param userId the user ID
+	* @param senderId the sender ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the last matching flask recipients, or <code>null</code> if a matching flask recipients could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.contacts.model.FlaskRecipients fetchByUserIdSenderId_Last(
+		long userId, long senderId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the flask recipientses before and after the current flask recipients in the ordered set where userId = &#63; and senderId = &#63;.
+	*
+	* @param recipientId the primary key of the current flask recipients
+	* @param userId the user ID
+	* @param senderId the sender ID
+	* @param orderByComparator the comparator to order the set by (optionally <code>null</code>)
+	* @return the previous, current, and next flask recipients
+	* @throws com.liferay.contacts.NoSuchFlaskRecipientsException if a flask recipients with the primary key could not be found
+	* @throws SystemException if a system exception occurred
+	*/
+	public com.liferay.contacts.model.FlaskRecipients[] findByUserIdSenderId_PrevAndNext(
+		long recipientId, long userId, long senderId,
+		com.liferay.portal.kernel.util.OrderByComparator orderByComparator)
+		throws com.liferay.contacts.NoSuchFlaskRecipientsException,
+			com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Removes all the flask recipientses where userId = &#63; and senderId = &#63; from the database.
+	*
+	* @param userId the user ID
+	* @param senderId the sender ID
+	* @throws SystemException if a system exception occurred
+	*/
+	public void removeByUserIdSenderId(long userId, long senderId)
+		throws com.liferay.portal.kernel.exception.SystemException;
+
+	/**
+	* Returns the number of flask recipientses where userId = &#63; and senderId = &#63;.
+	*
+	* @param userId the user ID
+	* @param senderId the sender ID
+	* @return the number of matching flask recipientses
+	* @throws SystemException if a system exception occurred
+	*/
+	public int countByUserIdSenderId(long userId, long senderId)
 		throws com.liferay.portal.kernel.exception.SystemException;
 
 	/**

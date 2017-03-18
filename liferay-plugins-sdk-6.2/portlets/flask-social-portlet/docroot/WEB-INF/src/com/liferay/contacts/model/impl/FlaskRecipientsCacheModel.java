@@ -38,7 +38,7 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(13);
+		StringBundler sb = new StringBundler(15);
 
 		sb.append("{recipientId=");
 		sb.append(recipientId);
@@ -52,6 +52,8 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 		sb.append(read);
 		sb.append(", receivedDateTime=");
 		sb.append(receivedDateTime);
+		sb.append(", senderId=");
+		sb.append(senderId);
 		sb.append("}");
 
 		return sb.toString();
@@ -81,6 +83,8 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 			flaskRecipientsImpl.setReceivedDateTime(new Date(receivedDateTime));
 		}
 
+		flaskRecipientsImpl.setSenderId(senderId);
+
 		flaskRecipientsImpl.resetOriginalValues();
 
 		return flaskRecipientsImpl;
@@ -94,6 +98,7 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 		messageId = objectInput.readLong();
 		read = objectInput.readBoolean();
 		receivedDateTime = objectInput.readLong();
+		senderId = objectInput.readLong();
 	}
 
 	@Override
@@ -112,6 +117,7 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 		objectOutput.writeLong(messageId);
 		objectOutput.writeBoolean(read);
 		objectOutput.writeLong(receivedDateTime);
+		objectOutput.writeLong(senderId);
 	}
 
 	public long recipientId;
@@ -120,4 +126,5 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 	public long messageId;
 	public boolean read;
 	public long receivedDateTime;
+	public long senderId;
 }

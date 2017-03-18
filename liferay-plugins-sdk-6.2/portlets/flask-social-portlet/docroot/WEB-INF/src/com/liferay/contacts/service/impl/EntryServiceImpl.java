@@ -17,12 +17,15 @@
 
 package com.liferay.contacts.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.contacts.model.Entry;
+import com.liferay.contacts.model.FlaskRecipients;
 import com.liferay.contacts.service.base.EntryServiceBaseImpl;
+import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.contacts.util.ContactsUtil;
 import com.liferay.contacts.util.PortletKeys;
 import com.liferay.contacts.util.SocialRelationConstants;
@@ -166,8 +169,11 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 			  int cnt = SocialRelationLocalServiceUtil.getRelationsCount(userId, SocialRelationConstants.TYPE_BI_CONNECTION);
 			  List<SocialRelation> relation = SocialRelationLocalServiceUtil.getRelations(userId, SocialRelationConstants.TYPE_BI_CONNECTION, 0, cnt);
 			  for(SocialRelation relObj: relation){
+				  List<FlaskRecipients> flaskRecipients = new ArrayList<FlaskRecipients>();
+				  int count = 0;
 				  if(keywords != ""){
 					  for (BaseModel<?> contact : contacts) {
+						  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), ((User) contact).getUserId());
 						  if(relObj.getUserId2() == ((User) contact).getContact().getUserId()){
 								if (contact instanceof User) {
 									jsonObject = ContactsUtil.getUserJSONObject(
@@ -178,16 +184,21 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 									jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
 									jsonObject.put("portraitId", ((User) contact).getPortraitId());
 								}
-								jsonArray.put(jsonObject);
 							}
 					  }
 				  }else{
+					  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), getUserById(relObj.getUserId2(), serviceContext).getUserId());
 					  User user2 = getUserById(relObj.getUserId2(), serviceContext);
-					   jsonObject = ContactsUtil.getUserJSONObject(
-					     userId, user2);
+					   jsonObject = ContactsUtil.getUserJSONObject( userId, user2);
 					   jsonObject.put("portraitId", getUserById(relObj.getUserId2(), serviceContext).getPortraitId());
-					    jsonArray.put(jsonObject);
 				  }
+				  for(FlaskRecipients recp: flaskRecipients){
+						if(!recp.getRead()){
+							count++;
+						}
+					}
+				   jsonObject.put("unreadMessageCount", count);
+				   jsonArray.put(jsonObject);
 			  }
 			  return jsonArray;
 	}
