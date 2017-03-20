@@ -20,19 +20,19 @@
       <div  align="center">
           <textarea ng-if="showTextArea.show==true"ng-model="message.messageToSend" id="textArea" class="showTextArea hideTexArea"autofocus></textarea>
       </div>
-    <div  align="center">
-
+      <div align="center">
+          <button type="submit" nav-clear="" class="button button-block button-positive friend">
+              Add To Group
+          </button>
         <button type="submit" nav-clear="" class="button button-block button-positive friend "ng-click="toggleMessageBox(message.messageToSend)">
-            Send Message<!--<i class="ion-close-circled icon-right"ng-if='showTextArea.show==true && message.messageToSend ==""'style="float:right"></i>-->
+            Send Message
         </button>
-    </div>
-
+          <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="goToChatWindow();">
+              View Messages
+          </button>
+      </div>
       <a style="text-decoration: none"ng-click="initializeMediatorId(friend.userId)">
-    <div  align="center">
-        <button type="submit" nav-clear="" class="button button-block button-positive friend">
-        Add To Group
-        </button>
-    </div>
+    
 
       </a>
   </ion-content>
