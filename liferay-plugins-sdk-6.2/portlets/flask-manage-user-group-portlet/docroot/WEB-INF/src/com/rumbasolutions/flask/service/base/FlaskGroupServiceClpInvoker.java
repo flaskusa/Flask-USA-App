@@ -73,7 +73,9 @@ public class FlaskGroupServiceClpInvoker {
 
 		_methodName42 = "deleteGroup";
 
-		_methodParameterTypes42 = new String[] { "long" };
+		_methodParameterTypes42 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName43 = "deleteGroups";
 
@@ -153,7 +155,8 @@ public class FlaskGroupServiceClpInvoker {
 
 		if (_methodName42.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes42, parameterTypes)) {
-			FlaskGroupServiceUtil.deleteGroup(((Long)arguments[0]).longValue());
+			FlaskGroupServiceUtil.deleteGroup(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}

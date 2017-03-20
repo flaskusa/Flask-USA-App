@@ -188,9 +188,11 @@ public class FlaskGroupServiceSoap {
 		}
 	}
 
-	public static void deleteGroup(long groupId) throws RemoteException {
+	public static void deleteGroup(long groupId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			FlaskGroupServiceUtil.deleteGroup(groupId);
+			FlaskGroupServiceUtil.deleteGroup(groupId, serviceContext);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

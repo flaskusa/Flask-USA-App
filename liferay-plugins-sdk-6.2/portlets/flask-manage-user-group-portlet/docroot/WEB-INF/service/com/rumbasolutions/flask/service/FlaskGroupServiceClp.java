@@ -73,7 +73,9 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 
 		_methodName11 = "deleteGroup";
 
-		_methodParameterTypes11 = new String[] { "long" };
+		_methodParameterTypes11 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName12 = "deleteGroups";
 
@@ -362,10 +364,16 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	}
 
 	@Override
-	public void deleteGroup(long groupId) {
+	public void deleteGroup(long groupId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
 			_invokableService.invokeMethod(_methodName11,
-				_methodParameterTypes11, new Object[] { groupId });
+				_methodParameterTypes11,
+				new Object[] {
+					groupId,
+					
+				ClpSerializer.translateInput(serviceContext)
+				});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

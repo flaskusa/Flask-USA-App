@@ -34,6 +34,7 @@ import com.rumbasolutions.flask.model.FlaskGroup;
 import com.rumbasolutions.flask.model.FlaskGroupUsers;
 import com.rumbasolutions.flask.service.FlaskGroupLocalServiceUtil;
 import com.rumbasolutions.flask.service.FlaskGroupServiceUtil;
+import com.rumbasolutions.flask.service.FlaskGroupUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.FlaskGroupServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupFinderUtil;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupUsersUtil;
@@ -78,9 +79,9 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 	public JSONArray getAllMyGroups(long userId){
 		JSONArray iAarray = JSONFactoryUtil.createJSONArray();
 		try {
-			List<FlaskGroupUsers> grpUsers = FlaskGroupUsersUtil.findByUserId(userId);
-			for(FlaskGroupUsers grpUser: grpUsers){
-				FlaskGroup myGroup = FlaskGroupServiceUtil.getGroup(grpUser.getGroupId());
+			List<FlaskGroupUsers> userGroups = FlaskGroupUsersUtil.findByUserId(userId);
+			for(FlaskGroupUsers userGroup: userGroups){
+				FlaskGroup myGroup = FlaskGroupServiceUtil.getGroup(userGroup.getGroupId());
 				List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupRecipientsServiceUtil.getGroupRecipientsByGroupId(myGroup.getGroupId());
 				JSONObject obj= JSONFactoryUtil.createJSONObject();
 				obj.put("groupId", myGroup.getGroupId());
@@ -88,7 +89,7 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 				obj.put("groupDescription", myGroup.getGroupDescription());
 				obj.put("createdDate", myGroup.getCreatedDate());
 				obj.put("createdBy", myGroup.getCreatedBy());
-				obj.put("isAdmin", grpUser.getIsAdmin());
+				obj.put("isAdmin", userGroup.getIsAdmin());
 				obj.put("isActive", myGroup.getIsActive());
 				obj.put("isDelete", myGroup.getIsDelete());
 				int count = 0;
@@ -151,9 +152,8 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 		FlaskGroup group = null;
 		try {
 			group = FlaskGroupUtil.fetchByPrimaryKey(groupId);
-		} catch (SystemException e) {
+		} catch (Exception e) {
 			LOGGER.error("Exception in getGroups :" + e.getMessage());
-			e.printStackTrace();
 		}
 		return group;
 	}
@@ -168,17 +168,12 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 			group.setGroupName(groupName);
 			group.setGroupDescription(groupDescription);
 			group.setCreatedBy(createdBy);
-			Date now = new Date();
 			group.setCreatedDate(createdDate);
 			group.setIsActive(isActive);
 			group.setIsDelete(isDelete);
-			
 			group = FlaskGroupLocalServiceUtil.addFlaskGroup(group);
-//			NotificationUtil notifyUtil = new NotificationUtil();
-//			notifyUtil.sendNotifications(JSONFactoryUtil.createJSONObject());
-		} catch (SystemException e) {
+		} catch (Exception e) {
 			LOGGER.error(" Exception in Add Group :" + e.getMessage());
-			e.printStackTrace();
 		}
 		return group;
 	}
@@ -195,50 +190,55 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 			group.setCreatedDate(createdDate);
 			group.setIsActive(isActive);
 			group.setIsDelete(isDelete);
-			
 			group = FlaskGroupLocalServiceUtil.updateFlaskGroup(group);
-
-		} catch (PortalException e) {
+		} catch (Exception e) {
 			LOGGER.error(" Exception in Update Group :" + e.getMessage());
-			e.printStackTrace();
-		} catch (SystemException e) {
-			LOGGER.error(" Exception in Update Group :" + e.getMessage());
-			e.printStackTrace();
 		}
 		return group;
 	}
 
 	@Override
-	public void deleteGroup(long groupId) {
+	public void deleteGroup(long groupId, ServiceContext serviceContext) {
 		try {
-			FlaskGroupLocalServiceUtil.deleteFlaskGroup(groupId);
+			FlaskGroupUsers flaskGroupUser = FlaskGroupUsersUtil.fetchByUserIdGroupId(serviceContext.getUserId(), groupId);
+			if(flaskGroupUser.getIsAdmin() == 1){
+				List <FlaskGroupUsers> flaskGroupUsers = FlaskGroupUsersServiceUtil.getAllGroupUsers(groupId);
+				for(FlaskGroupUsers user: flaskGroupUsers){
+					FlaskGroupUsersServiceUtil.deleteGroupUser(groupId, user.getUserId());
+				}
+				FlaskGroupLocalServiceUtil.deleteFlaskGroup(groupId);
+			}
 		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			LOGGER.error(" Exception in delete Group :" + e.getMessage());
 		}
 	}
 
 	@Override
 	public void deleteGroups(String groupList, ServiceContext serviceContext) {
 		try {
-				FlaskGroupUsers user = null;
-				List<String> grpId = Arrays.asList(groupList.split(","));
-				for(String strGroupId: grpId){
-					long groupId = Long.parseLong(strGroupId);
-					user = FlaskGroupUsersUtil.fetchByUserIdGroupId(serviceContext.getUserId(), groupId);
-					if(user.getIsAdmin()==1){
-						FlaskGroupLocalServiceUtil.deleteFlaskGroup(groupId);
+			List<String> grpId = Arrays.asList(groupList.split(","));
+			for(String strGroupId: grpId){
+				FlaskGroupUsers flaskGroupUser = FlaskGroupUsersUtil.fetchByUserIdGroupId(serviceContext.getUserId(), Long.parseLong(strGroupId));
+				if(flaskGroupUser.getIsAdmin() == 1){
+					List <FlaskGroupUsers> flaskGroupUsers = FlaskGroupUsersServiceUtil.getAllGroupUsers(Long.parseLong(strGroupId));
+					for(FlaskGroupUsers user: flaskGroupUsers){
+						FlaskGroupUsersServiceUtil.deleteGroupUser(Long.parseLong(strGroupId), user.getUserId());
 					}
+					FlaskGroupLocalServiceUtil.deleteFlaskGroup(Long.parseLong(strGroupId));
 				}
+			}
 			
 		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			LOGGER.error(" Exception in delete Groups :" + e.getMessage());
 		}
 	}
 	
 	@Override
 	public void deactivateGroup(long groupId, ServiceContext serviceContext){
-		int res = FlaskGroupFinderUtil.deActivateGroup(groupId);
+		try {
+		FlaskGroupFinderUtil.deActivateGroup(groupId);
+		}catch(Exception e){
+			LOGGER.error(" Exception in deactivate Groups :" + e.getMessage());
+		}
 	}
 }

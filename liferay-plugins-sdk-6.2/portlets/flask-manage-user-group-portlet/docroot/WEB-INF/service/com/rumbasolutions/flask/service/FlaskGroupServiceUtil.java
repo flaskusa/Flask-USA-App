@@ -110,8 +110,9 @@ public class FlaskGroupServiceUtil {
 			createdDate, createdBy, isActive, isDelete);
 	}
 
-	public static void deleteGroup(long groupId) {
-		getService().deleteGroup(groupId);
+	public static void deleteGroup(long groupId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		getService().deleteGroup(groupId, serviceContext);
 	}
 
 	public static void deleteGroups(java.lang.String groupList,

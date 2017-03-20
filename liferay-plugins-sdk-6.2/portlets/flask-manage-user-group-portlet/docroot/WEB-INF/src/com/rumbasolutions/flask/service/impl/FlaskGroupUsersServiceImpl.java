@@ -144,14 +144,12 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 	
 	@Override
 	public void deleteGroupUser(long groupId, long userId) {
-		FlaskGroupUsers groupUser = null;
-		int res = FlaskGroupUsersFinderUtil.deleteGroupUser(groupId, userId);
+		FlaskGroupUsersFinderUtil.deleteGroupUser(groupId, userId);
 	}
 
 	@Override
 	public void deleteGroupUsers(long groupId, String userIds) {
-		List<FlaskGroupUsers> groupUsersList = null;
-				int res = FlaskGroupUsersFinderUtil.deleteGroupUsers(groupId, userIds);
+		FlaskGroupUsersFinderUtil.deleteGroupUsers(groupId, userIds);
 	}
 
 }

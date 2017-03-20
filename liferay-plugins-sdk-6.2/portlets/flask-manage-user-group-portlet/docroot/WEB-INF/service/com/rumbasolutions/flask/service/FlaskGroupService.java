@@ -96,7 +96,8 @@ public interface FlaskGroupService extends BaseService, InvokableService {
 		java.lang.String createdDate, java.lang.String createdBy, int isActive,
 		int isDelete);
 
-	public void deleteGroup(long groupId);
+	public void deleteGroup(long groupId,
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteGroups(java.lang.String groupList,
 		com.liferay.portal.service.ServiceContext serviceContext);

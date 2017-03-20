@@ -108,8 +108,9 @@ public class FlaskGroupServiceWrapper implements FlaskGroupService,
 	}
 
 	@Override
-	public void deleteGroup(long groupId) {
-		_flaskGroupService.deleteGroup(groupId);
+	public void deleteGroup(long groupId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		_flaskGroupService.deleteGroup(groupId, serviceContext);
 	}
 
 	@Override
