@@ -3,18 +3,18 @@
     angular.module('flaskApp')
         .controller('FriendsMessageCtrl', FriendsMessageCtrl);
 
-    FriendsMessageCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsNotificationService', '$flaskUtil', '$state', '$ionicHistory', '$timeout', '$ionicLoading', '$ionicPopup', '$cookies'];
+    FriendsMessageCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsNotificationService', 'UserService', 'SERVER', '$localStorage', '$flaskUtil', '$state', '$ionicHistory', '$timeout', '$ionicLoading', '$ionicPopup', '$cookies'];
 
     /* @ngInject */
-    function FriendsMessageCtrl($scope, $http, $ionicModal, FriendsNotificationService, $flaskUtil, $state, $ionicHistory, $timeout, $ionicLoading, $ionicPopup, $cookies) {
-        $scope.myMessages = [];
+    function FriendsMessageCtrl($scope, $http, $ionicModal, FriendsNotificationService, UserService, SERVER, $localStorage, $flaskUtil, $state, $ionicHistory, $timeout, $ionicLoading, $ionicPopup, $cookies) {
+       
         $scope.userThreadMessage = [];
         $scope.showTextArea = { show: false };
         $scope.textMessage = { messageToSend: "" };
         var userDetail = $cookies.getObject('CurrentUser');
         $scope.loggedInUser = userDetail.data.userId;
         $scope.allFriends = [];
-        $scope.recipientsId = [];
+        $scope.readMsg = false;
         $scope.ShowReplyButton = true;
         $scope.addingInGroup = false;
         $ionicModal.fromTemplateUrl('templates/modal.html', {
@@ -26,6 +26,10 @@
         if ($scope.userId && $scope.userId != 0) {
             $scope.addingInGroup = true;
         }
+        if ($localStorage["myFriendDetails"] == undefined) {
+            $localStorage["myFriendDetails"] = [];
+        }
+        $scope.profilePicUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         getAllGroups();
         getAllFriends();
 
@@ -163,14 +167,18 @@
         }
 
 
-        $scope.deleteMessage = function (messageId, index) {
+        $scope.deleteMessage = function (messageId) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete message ?'
             });
             confirmPopup.then(function (res) {
                 if (res) {
                     FriendsNotificationService.deleteMessageById(messageId).then(function (response) {
-                        $scope.allMessages.splice(index, 1);
+                        for (var i = 0; i < $scope.myMessages.length; i++) {
+                            if ($scope.myMessages[i].messageId == messageId){
+                                $scope.myMessages.splice(i, 1);
+                            }
+                        }
                     })
                 }
                 else {
@@ -221,26 +229,66 @@
         function getAllFriends() {
             $scope.searchText = "";
             FriendsNotificationService.getMyFriends($scope.searchText).then(function (response) {
-                $scope.allFriends = response;
+                angular.forEach(response, function (value, key) {
+                    if (value.portraitId > 0) {
+                        $scope.getUserProfile(value);
+                    }
+                    else {
+                        $scope.allFriends.push(value);
+                        if (userExistInLocalStorage(value) == false) {
+                            $localStorage["myFriendDetails"].push(value)
+                        }
+                    }
+                })
             });
         }
         $scope.closeChatWindowPopup = function () {
             $scope.modal.hide();
         };
+        //get profile picture of friend 
+        $scope.getUserProfile = function (UserDetail) {
+            UserService.getUserProfile(UserDetail.userId).then(function (res) {
+                if (res.data.fileEntryId != undefined) {
+                    UserDetail.friendProfilePicUrl = $scope.profilePicUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                    $scope.allFriends.push(UserDetail);
+                    if (userExistInLocalStorage(UserDetail) == false) {
+                        $localStorage["myFriendDetails"].push(UserDetail);
+                    }
+                } else {
+                    $scope.allFriends.push(UserDetail);
+                    if (userExistInLocalStorage(UserDetail) == false) {
+                    $localStorage["myFriendDetails"].push(UserDetail);
+                }
+                }
+            }, function (err) {
+            })
+        }
+        //add data in localstorage
+        function userExistInLocalStorage(userDetail) {
+            var exist = false;
+            angular.forEach($localStorage["myFriendDetails"], function (value, key) {
+                if (value.userId == userDetail.userId) {
+                    exist = true
+                }
+            })
+            return exist;
+        }
         $scope.isUser = false;
         //show chat window of friend
         $scope.showChatWindowPopup = function (data, type) {
-            $scope.readFlag;
+            $scope.myMessages = [];
             if (type == 'user') {
                 $scope.isUser = true;
                 $scope.receiverId = data.userId;
                 $scope.friendName = data.fullName;
+                $scope.profilePic = data.friendProfilePicUrl;
                 //get messages by receiverId on click of friend
                 FriendsNotificationService.getMyAllMessages(data.userId).then(function (response) {
                     $scope.myMessages = response;
                     for (var i = 0; i < $scope.myMessages.length; i++) {
                         if ($scope.myMessages[i].recipients == $scope.loggedInUser) {
                             FriendsNotificationService.setReadMessage($scope.myMessages[i].messageId).then(function (response) {
+                                $scope.readMsg = true;
                             });
                         }
                     }
@@ -253,31 +301,33 @@
                 $scope.groupId = data.groupId;
                 FriendsNotificationService.getAllMyFlaskGroupMessages(data.groupId).then(function (response) {
                     $scope.myMessages = response;
-                    $scope.recipientsId.push($scope.myMessages[0].recipients.split(','));
-                    for (var i = 0; i < $scope.myMessages.length; i++) {
-                        FriendsNotificationService.setGroupMessageRead($scope.myMessages[i].messageId).then(function (response) {
-                        });
+                    if ($scope.myMessages.length >0) {
+                        for (var i = 0; i < $scope.myMessages.length; i++) {
+                            FriendsNotificationService.setGroupMessageRead($scope.myMessages[i].messageId).then(function (response) {
+                                $scope.readMsg = true;
+                            });
+                        }
+                        $scope.getMessagesTime();
                     }
-                    $scope.getMessagesTime();
                 });
             }
             $scope.modal.show();
         }
         //send message to friend
         $scope.sendReply = function (message) {
-            if ($scope.isUser == true){
-                FriendsNotificationService.sendMessage($scope.receiverId, message).then(function (response) {
-                    delete $scope.textMessage.messageToSend;
-                    $scope.myMessages.push(response);
-                    $ionicLoading.show({ template: 'Message sent successfully!', noBackdrop: false, duration: 3000 });
-                });
-            }
-            else {
-                FriendsNotificationService.sendFlaskGroupMessage($scope.groupId, message).then(function (response) {
-                    delete $scope.textMessage.messageToSend;
-                    $scope.myMessages.push(response);
-                    $ionicLoading.show({ template: 'Message sent successfully!', noBackdrop: false, duration: 3000 });
-                });
+            if(message){
+                if ($scope.isUser == true){
+                    FriendsNotificationService.sendMessage($scope.receiverId, message).then(function (response) {
+                        delete $scope.textMessage.messageToSend;
+                        $scope.myMessages.push(response);
+                    });
+                }
+                else {
+                    FriendsNotificationService.sendFlaskGroupMessage($scope.groupId, message).then(function (response) {
+                        delete $scope.textMessage.messageToSend;
+                        $scope.myMessages.push(response);
+                    });
+                }
             }
         }
     }
