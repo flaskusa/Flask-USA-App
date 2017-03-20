@@ -24,6 +24,9 @@
         FriendsService.mediatorUserId=userId;
             $state.go('app.my_friends_tab.friendsGroup');
         }
+        $scope.goToChatWindow = function () {
+            $state.go('app.messages');
+        }
         $scope.toggleMessageBox=function(message) {
             $scope.showTextArea.show = true;
             setTimeout(startToggleFunction, 20)
