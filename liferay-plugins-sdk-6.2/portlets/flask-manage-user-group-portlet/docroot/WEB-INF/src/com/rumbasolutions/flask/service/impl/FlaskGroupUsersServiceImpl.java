@@ -55,6 +55,7 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 	private static Log LOGGER = LogFactoryUtil
 			.getLog(FlaskGroupUsersServiceImpl.class);
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<FlaskGroupUsers> getAllGroupUsers(long groupId) {
 		List<FlaskGroupUsers> groupUsersList = null;
@@ -91,7 +92,7 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 		FlaskGroupUsers groupUsers = null;
 		try{
 			int userCount = FlaskGroupUsersServiceUtil.getGroupUsersCount(groupId);
-			if(userCount <= 200){
+			if(userCount < 200){
 				groupUsers = FlaskGroupUsersLocalServiceUtil.createFlaskGroupUsers(CounterLocalServiceUtil.increment());
 				groupUsers.setGroupId(groupId);
 				groupUsers.setIsAdmin(isAdmin);
@@ -131,7 +132,6 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 	
 	@Override
 	public int addGroupOwner(long groupId, long userId) {
-		FlaskGroupUsers groupUser = null;
 		int cnt = 0;
 		try{
 			cnt = FlaskGroupUsersUtil.countByUserIdGroupId(userId, groupId);
