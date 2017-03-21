@@ -36,34 +36,38 @@ public class FlaskGroupUsersServiceClpInvoker {
 
 		_methodParameterTypes34 = new String[] { "long" };
 
-		_methodName35 = "addGroupUser";
+		_methodName35 = "getGroupUsersCount";
 
-		_methodParameterTypes35 = new String[] {
+		_methodParameterTypes35 = new String[] { "long" };
+
+		_methodName36 = "addGroupUser";
+
+		_methodParameterTypes36 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String", "int"
 			};
 
-		_methodName36 = "updateGroupUser";
+		_methodName37 = "updateGroupUser";
 
-		_methodParameterTypes36 = new String[] {
+		_methodParameterTypes37 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"int"
 			};
 
-		_methodName37 = "addGroupOwner";
-
-		_methodParameterTypes37 = new String[] { "long", "long" };
-
-		_methodName38 = "removeGroupOwner";
+		_methodName38 = "addGroupOwner";
 
 		_methodParameterTypes38 = new String[] { "long", "long" };
 
-		_methodName39 = "deleteGroupUser";
+		_methodName39 = "removeGroupOwner";
 
 		_methodParameterTypes39 = new String[] { "long", "long" };
 
-		_methodName40 = "deleteGroupUsers";
+		_methodName40 = "deleteGroupUser";
 
-		_methodParameterTypes40 = new String[] { "long", "java.lang.String" };
+		_methodParameterTypes40 = new String[] { "long", "long" };
+
+		_methodName41 = "deleteGroupUsers";
+
+		_methodParameterTypes41 = new String[] { "long", "java.lang.String" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -87,14 +91,19 @@ public class FlaskGroupUsersServiceClpInvoker {
 
 		if (_methodName35.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
+			return FlaskGroupUsersServiceUtil.getGroupUsersCount(((Long)arguments[0]).longValue());
+		}
+
+		if (_methodName36.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
 			return FlaskGroupUsersServiceUtil.addGroupUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				(java.lang.String)arguments[2], (java.lang.String)arguments[3],
 				((Integer)arguments[4]).intValue());
 		}
 
-		if (_methodName36.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes36, parameterTypes)) {
+		if (_methodName37.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
 			return FlaskGroupUsersServiceUtil.updateGroupUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue(),
 				((Long)arguments[2]).longValue(),
@@ -102,23 +111,15 @@ public class FlaskGroupUsersServiceClpInvoker {
 				((Integer)arguments[5]).intValue());
 		}
 
-		if (_methodName37.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes37, parameterTypes)) {
+		if (_methodName38.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
 			return FlaskGroupUsersServiceUtil.addGroupOwner(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 		}
 
-		if (_methodName38.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes38, parameterTypes)) {
-			FlaskGroupUsersServiceUtil.removeGroupOwner(((Long)arguments[0]).longValue(),
-				((Long)arguments[1]).longValue());
-
-			return null;
-		}
-
 		if (_methodName39.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes39, parameterTypes)) {
-			FlaskGroupUsersServiceUtil.deleteGroupUser(((Long)arguments[0]).longValue(),
+			FlaskGroupUsersServiceUtil.removeGroupOwner(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
 
 			return null;
@@ -126,6 +127,14 @@ public class FlaskGroupUsersServiceClpInvoker {
 
 		if (_methodName40.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
+			FlaskGroupUsersServiceUtil.deleteGroupUser(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue());
+
+			return null;
+		}
+
+		if (_methodName41.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
 			FlaskGroupUsersServiceUtil.deleteGroupUsers(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
 
@@ -153,4 +162,6 @@ public class FlaskGroupUsersServiceClpInvoker {
 	private String[] _methodParameterTypes39;
 	private String _methodName40;
 	private String[] _methodParameterTypes40;
+	private String _methodName41;
+	private String[] _methodParameterTypes41;
 }

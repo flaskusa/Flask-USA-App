@@ -65,6 +65,11 @@ public class FlaskGroupUsersServiceWrapper implements FlaskGroupUsersService,
 	}
 
 	@Override
+	public int getGroupUsersCount(long groupId) {
+		return _flaskGroupUsersService.getGroupUsersCount(groupId);
+	}
+
+	@Override
 	public com.rumbasolutions.flask.model.FlaskGroupUsers addGroupUser(
 		long groupId, long userId, java.lang.String userName,
 		java.lang.String emailAddress, int isAdmin) {

@@ -69,6 +69,9 @@ public interface FlaskGroupUsersService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.FlaskGroupUsers> getAllGroupUsers(
 		long groupId);
 
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public int getGroupUsersCount(long groupId);
+
 	public com.rumbasolutions.flask.model.FlaskGroupUsers addGroupUser(
 		long groupId, long userId, java.lang.String userName,
 		java.lang.String emailAddress, int isAdmin);

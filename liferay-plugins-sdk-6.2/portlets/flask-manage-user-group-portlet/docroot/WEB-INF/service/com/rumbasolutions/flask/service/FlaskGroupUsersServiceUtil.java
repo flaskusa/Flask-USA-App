@@ -68,6 +68,10 @@ public class FlaskGroupUsersServiceUtil {
 		return getService().getAllGroupUsers(groupId);
 	}
 
+	public static int getGroupUsersCount(long groupId) {
+		return getService().getGroupUsersCount(groupId);
+	}
+
 	public static com.rumbasolutions.flask.model.FlaskGroupUsers addGroupUser(
 		long groupId, long userId, java.lang.String userName,
 		java.lang.String emailAddress, int isAdmin) {

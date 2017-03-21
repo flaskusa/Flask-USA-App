@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.rumbasolutions.flask.model.FlaskGroupUsers;
 import com.rumbasolutions.flask.model.impl.FlaskGroupUsersImpl;
 import com.rumbasolutions.flask.service.FlaskGroupUsersLocalServiceUtil;
+import com.rumbasolutions.flask.service.FlaskGroupUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.FlaskGroupUsersServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupUsersFinderUtil;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupUsersUtil;
@@ -68,25 +69,40 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 		return groupUsersList;
 	}
 	
+	@SuppressWarnings("unused")
+	@Override
+	public int getGroupUsersCount(long groupId) {
+		int count =0;
+		try{
+			List<FlaskGroupUsers> groupUsersList = FlaskGroupUsersUtil.findByUserGroups(groupId);
+			for(FlaskGroupUsers groupUser: groupUsersList){
+				count++;
+			}
+		}catch(Exception ex){
+			LOGGER.error("Exception in getGroupUsersCount :" + ex.getMessage());
+		}
+		
+		return count;
+	}
+	
+	@SuppressWarnings("unused")
 	@Override
 	public FlaskGroupUsers addGroupUser(long groupId, long userId, String userName, String emailAddress, int isAdmin){
 		FlaskGroupUsers groupUsers = null;
 		try{
-			groupUsers = FlaskGroupUsersLocalServiceUtil.createFlaskGroupUsers(CounterLocalServiceUtil.increment());
-			groupUsers.setGroupId(groupId);
-			groupUsers.setIsAdmin(isAdmin);
-			groupUsers.setUserId(userId);
-			groupUsers.setUserName(userName);
-			groupUsers.setEmailAddress(emailAddress);
-			
-			groupUsers = FlaskGroupUsersLocalServiceUtil.addFlaskGroupUsers(groupUsers);
-			String text = "You are invited to be participants of custom group.";
-//			NotificationUtil notificition = new NotificationUtil();
-//			notificition.sendNotifications(userId, text);
-			
+			int userCount = FlaskGroupUsersServiceUtil.getGroupUsersCount(groupId);
+			if(userCount <= 200){
+				groupUsers = FlaskGroupUsersLocalServiceUtil.createFlaskGroupUsers(CounterLocalServiceUtil.increment());
+				groupUsers.setGroupId(groupId);
+				groupUsers.setIsAdmin(isAdmin);
+				groupUsers.setUserId(userId);
+				groupUsers.setUserName(userName);
+				groupUsers.setEmailAddress(emailAddress);
+				groupUsers = FlaskGroupUsersLocalServiceUtil.addFlaskGroupUsers(groupUsers);
+				String text = "You are invited to be participants of custom group.";
+			}
 		}catch(SystemException e){
 			LOGGER.error("Exception in Add Group User :" + e.getMessage());
-			e.printStackTrace();
 		}
 		return groupUsers;
 	}

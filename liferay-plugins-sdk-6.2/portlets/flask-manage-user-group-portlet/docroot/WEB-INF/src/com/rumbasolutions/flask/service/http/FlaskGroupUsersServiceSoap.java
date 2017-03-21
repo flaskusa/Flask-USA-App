@@ -77,6 +77,20 @@ public class FlaskGroupUsersServiceSoap {
 		}
 	}
 
+	public static int getGroupUsersCount(long groupId)
+		throws RemoteException {
+		try {
+			int returnValue = FlaskGroupUsersServiceUtil.getGroupUsersCount(groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.rumbasolutions.flask.model.FlaskGroupUsersSoap addGroupUser(
 		long groupId, long userId, java.lang.String userName,
 		java.lang.String emailAddress, int isAdmin) throws RemoteException {
