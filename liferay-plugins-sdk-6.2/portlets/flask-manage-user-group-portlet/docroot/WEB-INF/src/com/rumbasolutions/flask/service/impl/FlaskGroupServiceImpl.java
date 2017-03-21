@@ -19,8 +19,13 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import com.liferay.contacts.model.FlaskGroupMessages;
 import com.liferay.contacts.model.FlaskGroupRecipients;
+import com.liferay.contacts.service.FlaskGroupMessagesLocalServiceUtil;
+import com.liferay.contacts.service.FlaskGroupMessagesServiceUtil;
+import com.liferay.contacts.service.FlaskGroupRecipientsLocalServiceUtil;
 import com.liferay.contacts.service.FlaskGroupRecipientsServiceUtil;
+import com.liferay.contacts.service.persistence.FlaskGroupMessagesUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -34,6 +39,7 @@ import com.rumbasolutions.flask.model.FlaskGroup;
 import com.rumbasolutions.flask.model.FlaskGroupUsers;
 import com.rumbasolutions.flask.service.FlaskGroupLocalServiceUtil;
 import com.rumbasolutions.flask.service.FlaskGroupServiceUtil;
+import com.rumbasolutions.flask.service.FlaskGroupUsersLocalServiceUtil;
 import com.rumbasolutions.flask.service.FlaskGroupUsersServiceUtil;
 import com.rumbasolutions.flask.service.base.FlaskGroupServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.FlaskGroupFinderUtil;
@@ -70,7 +76,6 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 			groupList = FlaskGroupUtil.findAll();
 		} catch (SystemException e) {
 			LOGGER.error("Exception in getGroups :" + e.getMessage());
-			e.printStackTrace();
 		}
 		return groupList;
 	}
@@ -126,7 +131,7 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 				myGroupList.add(FlaskGroupServiceUtil.getGroup(grpUser.getGroupId()));
 			}
 		} catch (SystemException e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in getGroups:"+e.getMessage());
 		}
 		return myGroupList;
 	}
@@ -204,7 +209,15 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 			if(flaskGroupUser.getIsAdmin() == 1){
 				List <FlaskGroupUsers> flaskGroupUsers = FlaskGroupUsersServiceUtil.getAllGroupUsers(groupId);
 				for(FlaskGroupUsers user: flaskGroupUsers){
-					FlaskGroupUsersServiceUtil.deleteGroupUser(groupId, user.getUserId());
+					FlaskGroupUsersLocalServiceUtil.deleteFlaskGroupUsers(user.getGroupUserId());
+				}
+				List<FlaskGroupMessages> flaskGroupMessages = FlaskGroupMessagesServiceUtil.getGroupMessages(groupId);
+				for(FlaskGroupMessages flaskGroupMessage : flaskGroupMessages){
+					FlaskGroupMessagesLocalServiceUtil.deleteFlaskGroupMessages(flaskGroupMessage.getGroupMessagesId());
+				}
+				List <FlaskGroupRecipients> flaskGroupRecepients = FlaskGroupRecipientsServiceUtil.getGroupRecipientsByGroupId(groupId);
+				for(FlaskGroupRecipients recp: flaskGroupRecepients){
+					FlaskGroupRecipientsLocalServiceUtil.deleteFlaskGroupRecipients(recp.getGroupRecipientId());
 				}
 				FlaskGroupLocalServiceUtil.deleteFlaskGroup(groupId);
 			}
@@ -222,7 +235,15 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 				if(flaskGroupUser.getIsAdmin() == 1){
 					List <FlaskGroupUsers> flaskGroupUsers = FlaskGroupUsersServiceUtil.getAllGroupUsers(Long.parseLong(strGroupId));
 					for(FlaskGroupUsers user: flaskGroupUsers){
-						FlaskGroupUsersServiceUtil.deleteGroupUser(Long.parseLong(strGroupId), user.getUserId());
+						FlaskGroupUsersLocalServiceUtil.deleteFlaskGroupUsers(user.getGroupUserId());
+					}
+					List<FlaskGroupMessages> flaskGroupMessages = FlaskGroupMessagesServiceUtil.getGroupMessages(Long.parseLong(strGroupId));
+					for(FlaskGroupMessages flaskGroupMessage : flaskGroupMessages){
+						FlaskGroupMessagesLocalServiceUtil.deleteFlaskGroupMessages(flaskGroupMessage.getGroupMessagesId());
+					}
+					List <FlaskGroupRecipients> flaskGroupRecepients = FlaskGroupRecipientsServiceUtil.getGroupRecipientsByGroupId(Long.parseLong(strGroupId));
+					for(FlaskGroupRecipients recp: flaskGroupRecepients){
+						FlaskGroupRecipientsLocalServiceUtil.deleteFlaskGroupRecipients(recp.getGroupRecipientId());
 					}
 					FlaskGroupLocalServiceUtil.deleteFlaskGroup(Long.parseLong(strGroupId));
 				}
