@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendDetailCtrl', FriendDetailCtrl);
 
-    FriendDetailCtrl.$inject = ['$scope','$stateParams','FriendsService','$flaskUtil','SERVER','$state','$ionicModal','$ionicHistory','$timeout'];
+    FriendDetailCtrl.$inject = ['$scope', '$stateParams', 'FriendsService', 'FriendsNotificationService', '$cookies', '$flaskUtil', 'SERVER', '$state', '$ionicModal', '$ionicHistory', '$timeout'];
 
     /* @ngInject */
-    function FriendDetailCtrl($scope,$stateParams,FriendsService, $flaskUtil,SERVER,$state,$ionicModal,$ionicHistory,$timeout) {
+    function FriendDetailCtrl($scope,$stateParams,FriendsService, FriendsNotificationService, $cookies, $flaskUtil,SERVER,$state,$ionicModal,$ionicHistory,$timeout) {
         $scope.friendId =FriendsService.data.userId;
         $scope.friend = {};
         $scope.picUrl = SERVER.url+"c/document_library/get_file?uuid=";
@@ -24,9 +24,12 @@
         FriendsService.mediatorUserId=userId;
             $state.go('app.my_friends_tab.friendsGroup');
         }
-        $scope.goToChatWindow = function () {
+        $scope.goToChatWindow = function (data) {
             $state.go('app.messages');
+            $cookies.putObject('friendData', data);
+            $cookies.putObject('profileUrl', $scope.profilepicUrl);
         }
+        
         $scope.toggleMessageBox=function(message) {
             $scope.showTextArea.show = true;
             setTimeout(startToggleFunction, 20)
