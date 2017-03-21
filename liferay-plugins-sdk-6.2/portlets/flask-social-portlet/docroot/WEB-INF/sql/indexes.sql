@@ -23,6 +23,7 @@ create index IX_A5CECA85 on Contacts_FlaskRecipients (userId, senderId);
 create index IX_549A594C on Contacts_FlaskUserDeviceRegistration (deviceToken);
 create index IX_48681CDA on Contacts_FlaskUserDeviceRegistration (userEmail);
 create index IX_7988B001 on Contacts_FlaskUserDeviceRegistration (userId);
+create index IX_54460652 on Contacts_FlaskUserDeviceRegistration (userId, deviceToken);
 
 create index IX_A14183F7 on Contacts_NotificationAuditLog (receiverEmail);
 create index IX_665C7EF1 on Contacts_NotificationAuditLog (senderEmail);

@@ -13,10 +13,32 @@
 		<typeMapping xmlns:ns="http://theme.portal.liferay.com" qname="ns:ThemeDisplay" type="java:com.liferay.portal.theme.ThemeDisplay" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://util.kernel.portal.liferay.com" qname="ns:StringBundler" type="java:com.liferay.portal.kernel.util.StringBundler" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://xml.apache.org/xml-soap" qname="ns:mapItem" type="java:org.apache.xml.xml_soap.MapItem" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" name="deleteMessage" qname="operNS:deleteMessage" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" name="deleteMessagesByDateRange" qname="operNS:deleteMessagesByDateRange" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDate" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDate" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getAllMyFlaskMessages" qname="operNS:getAllMyFlaskMessages" returnQName="getAllMyFlaskMessagesReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="receiverId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getMyFlaskMessagesCount" qname="operNS:getMyFlaskMessagesCount" returnQName="getMyFlaskMessagesCountReturn" returnType="rtns:int" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="receiverId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getMyUnreadFlaskMessagesCount" qname="operNS:getMyUnreadFlaskMessagesCount" returnQName="getMyUnreadFlaskMessagesCountReturn" returnType="rtns:int" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="receiverId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="urn:http.service.contacts.liferay.com" xmlns:tns2="http://model.contacts.liferay.com" name="getMyUnreadFlaskMessages" qname="operNS:getMyUnreadFlaskMessages" returnQName="getMyUnreadFlaskMessagesReturn" returnType="rtns:ArrayOf_tns13_FlaskMessagesSoap" returnItemType="tns2:FlaskMessagesSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="receiverId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getTotalUnreadChatCount" qname="operNS:getTotalUnreadChatCount" returnQName="getTotalUnreadChatCountReturn" returnType="rtns:int" soapAction="">
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://model.contacts.liferay.com" name="sendFlaskMessage" qname="operNS:sendFlaskMessage" returnQName="sendFlaskMessageReturn" returnType="rtns:FlaskMessagesSoap" soapAction="">
@@ -25,7 +47,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sendEmail" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="getAllMyFlaskMessages getMyUnreadFlaskMessages sendFlaskMessage" />
+		<parameter name="allowedMethods" value="deleteMessage deleteMessagesByDateRange getAllMyFlaskMessages getMyFlaskMessagesCount getMyUnreadFlaskMessages getMyUnreadFlaskMessagesCount getTotalUnreadChatCount sendFlaskMessage" />
 		<parameter name="className" value="com.liferay.contacts.service.http.FlaskMessagesServiceSoap" />
 		<parameter name="schemaUnqualified" value="http://model.contacts.liferay.com,http://model.portal.liferay.com,http://service.portal.liferay.com,http://theme.portal.liferay.com,http://util.kernel.portal.liferay.com,http://xml.apache.org/xml-soap,urn:http.service.contacts.liferay.com" />
 		<parameter name="typeMappingVersion" value="1.2" />

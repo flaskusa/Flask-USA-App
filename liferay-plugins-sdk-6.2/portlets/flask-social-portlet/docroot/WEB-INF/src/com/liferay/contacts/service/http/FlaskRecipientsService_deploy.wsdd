@@ -20,6 +20,7 @@
 		</operation>
 		<operation xmlns:operNS="urn:http.service.contacts.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="setRead" qname="operNS:setRead" returnQName="setReadReturn" returnType="rtns:boolean" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://service.portal.liferay.com" qname="serviceContext" type="tns:ServiceContext"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="addFlaskRecipient setRead" />
 		<parameter name="className" value="com.liferay.contacts.service.http.FlaskRecipientsServiceSoap" />

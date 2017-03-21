@@ -55,7 +55,7 @@ public class FlaskUserDeviceRegistrationServiceImpl
     		 Date lastNotificationTime, String lastNotificationMsg, ServiceContext  serviceContext){
  		FlaskUserDeviceRegistration flaskUserDeviceRegistration = null;
  		try{
- 			List<FlaskUserDeviceRegistration> flaskUser = FlaskUserDeviceRegistrationServiceUtil.getUserDevicesByUserId(userId);
+ 			List<FlaskUserDeviceRegistration> flaskUser = FlaskUserDeviceRegistrationUtil.findByUserIdDeviceToken(userId, deviceToken);
  			if(flaskUser.isEmpty()){
 	 			flaskUserDeviceRegistration = FlaskUserDeviceRegistrationLocalServiceUtil.createFlaskUserDeviceRegistration(CounterLocalServiceUtil.increment());
 	 			flaskUserDeviceRegistration.setUserId(userId);
@@ -68,9 +68,6 @@ public class FlaskUserDeviceRegistrationServiceImpl
 	 			flaskUserDeviceRegistration.setLastNotificationTime(lastNotificationTime);
 	 			flaskUserDeviceRegistration.setLastNotificationMsg(lastNotificationMsg);
 	 			flaskUserDeviceRegistration = FlaskUserDeviceRegistrationLocalServiceUtil.addFlaskUserDeviceRegistration(flaskUserDeviceRegistration);
- 			}else{
- 				flaskUserDeviceRegistration = FlaskUserDeviceRegistrationServiceUtil.updateUserDevices(flaskUser.get(0).getUserDeviceRegistrationId(), userId, 
- 						userEmail, devicePlatform, deviceDetails, deviceToken, registrationTime, active, lastNotificationTime, lastNotificationMsg, serviceContext);
  			}
  		}catch(Exception e){
  			LOGGER.error("Exception in Registraing User Device: " + e.getMessage());
