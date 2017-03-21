@@ -6,10 +6,7 @@
         </ion-nav-buttons>
     </ion-nav-bar>
   <ion-content class="text-center">
-    <div ng-if="profilepicUrl!=undefined"><img src="{{profilepicUrl}}" class="list-thumbnail friend_profilepic"  onError="this.src = 'img/default-profilepic-copy.png'" style="    border-radius: 50%;
-    display: inline-block;
-    width: 200px;
-    height: 200px;margin-top: 9px"/></div>
+    <div ng-if="profilepicUrl!=undefined"><img src="{{profilepicUrl}}" class="list-thumbnail friend_profilepic"  onError="this.src = 'img/default-profilepic-copy.png'" style="border-radius: 50%;display: inline-block;width: 200px;height: 200px;margin-top: 9px"/></div>
       <div ng-if="profilepicUrl==undefined"><img src="img/default-profilepic-copy.png" class="list-thumbnail friend_profilepic"/></div>
     <div>
         <h2 class="eventNameCol" ng-bind-template="{{ friend.firstName }} {{ friend.middleName }} {{friend.lastName}}"></h2>
@@ -27,7 +24,7 @@
         <button type="submit" nav-clear="" class="button button-block button-positive friend "ng-click="toggleMessageBox(message.messageToSend)">
             Send Message
         </button>
-          <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="goToChatWindow();">
+          <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="goToChatWindow(friend);">
               View Messages
           </button>
       </div>
