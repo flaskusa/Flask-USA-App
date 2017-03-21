@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER','$localStorage','$http','UserService','$ionicHistory'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$filter', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER','$localStorage','$http','UserService','$ionicHistory'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER,$localStorage,$http,UserService,$ionicHistory) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $filter, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER,$localStorage,$http,UserService,$ionicHistory) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
@@ -14,7 +14,9 @@
         $scope.user={Email:"",password:"",isChecked:true}
         $scope.rememberUser=true;
         $scope.profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
-     
+        $scope.deviceDetails = ionic.Platform.device();
+        var currentDate = new Date();/*Today's Date*/
+        $scope.regiDate = $filter('date')(new Date(), 'yyyy-MM-dd hh:mm:ss');
         $scope.checkTouch = function (enableChecked) {
             if (enableChecked) {
                 $cordovaTouchID.checkSupport().then(function () {
@@ -49,7 +51,6 @@
                         } else {
                             $rootScope.userProfileUrl = '';
                         }
-
                         if ($scope.rememberUser == true) {
                             $localStorage['RememberUser'] = "";
                             $localStorage['RememberUser'] = user;
@@ -59,30 +60,51 @@
                             .then(function success(response2) {
                                 respData.data.isContentAdmin = response2.data;
                                 $cookies.putObject('CurrentUser', respData);
-                                var usercookie = $cookies.getObject('CurrentUser');
                                 $rootScope.userName = respData.data.firstName + respData.data.lastName;
                                 $rootScope.userEmailId = respData.data.emailAddress;
                                 $rootScope.show_login = true;
                                 document.login_form.reset();
+                                $scope.usercookie = $cookies.getObject('CurrentUser');
+                                $scope.addDeviceDetails($scope.usercookie);
                                 $state.go("app.user_navigation_menu");
-
                             }, function failure(response) {
                                 return $q.$inject(response);
                                 //add errror handling
                             });
-
                     }
                 });
             }else{
                 getCompanyId(user);
             }
         }
+        
+        $scope.addDeviceDetails = function (userdata) {
+             $http.get(SERVER.url + '/flask-social-portlet.flaskuserdeviceregistration/add-user-device', {                           
+                   params: {
+                      'userId': userdata.data.userId,
+                      'userEmail': userdata.data.emailAddress,
+                      'devicePlatform': $scope.deviceDetails.platform,
+                      'deviceDetails': $scope.deviceDetails.model,
+                      'deviceToken': $scope.deviceDetails.uuid,
+                      'registrationTime': $scope.regiDate,
+                      'active': true,
+                      'lastNotificationTime': $scope.regiDate,
+                      'lastNotificationMsg': ""
+                   }
+             })
+                   .then(function success(response) {
+                       console.log("response" + response.data);
+                   }, function failure(response) {
+                       console.log("response1" + response);
+                   });
+        }
+
         function getCompanyId(user) {
             $http.get(SERVER.url + '/flask-rest-users-portlet.flaskadmin/get-company-id'
             )
                 .then(function success(response) {
                     SERVER.companyId = response.data;
-                    $scope.doLogin(user)
+                    $scope.doLogin(user);
                 }, function failure(response) {
                     return $q.$inject(response);
                     //add errror handling
