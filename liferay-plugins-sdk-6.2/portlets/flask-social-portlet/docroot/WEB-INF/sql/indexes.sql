@@ -3,6 +3,8 @@ create index IX_6C32549F on Contacts_DeviceAwsEndpoint (userDeviceRegistrationId
 create index IX_BD6B6406 on Contacts_Entry (userId);
 create index IX_C257DE32 on Contacts_Entry (userId, emailAddress);
 
+create index IX_AAAC3600 on Contacts_FlaskGroupMessages (groupId);
+
 create index IX_535EF312 on Contacts_FlaskGroupRecipients (groupId);
 create index IX_6FE6850F on Contacts_FlaskGroupRecipients (groupMessageId);
 

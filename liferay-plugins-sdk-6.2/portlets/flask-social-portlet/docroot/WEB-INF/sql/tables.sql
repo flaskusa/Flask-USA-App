@@ -31,9 +31,9 @@ create table Contacts_FlaskGroupMessages (
 create table Contacts_FlaskGroupRecipients (
 	groupRecipientId LONG not null primary key,
 	groupId LONG,
-	recipients VARCHAR(75) null,
+	recipients TEXT null,
 	groupMessageId LONG,
-	read_ VARCHAR(75) null,
+	read_ TEXT null,
 	receivedDateTime DATE null,
 	senderId LONG
 );

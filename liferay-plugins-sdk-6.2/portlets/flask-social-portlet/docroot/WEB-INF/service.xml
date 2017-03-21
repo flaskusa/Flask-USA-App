@@ -155,6 +155,9 @@
         <order by="asc">
             <order-column name="dateTime" order-by="asc"></order-column>
         </order>
+        <finder name="groupId" return-type="Collection">
+            <finder-column name="groupId"></finder-column>
+        </finder>
     </entity>
     <entity name="FlaskGroupRecipients" local-service="true">
         <column name="groupRecipientId" type="long" primary="true"></column>

@@ -7,6 +7,9 @@
 	<hint-collection name="FLASK-DESC">
 		<hint name="max-length">255</hint>
 	</hint-collection>
+	<hint-collection name="FLASK-LONG-DESC">
+		<hint name="max-length">10000</hint>
+	</hint-collection>
 	<hint-collection name="FLASK-IMAGE-PATH">
 		<hint name="max-length">30</hint>
 	</hint-collection>
@@ -61,9 +64,13 @@
 	<model name="com.liferay.contacts.model.FlaskGroupRecipients">
 		<field name="groupRecipientId" type="long" />
 		<field name="groupId" type="long" />
-		<field name="recipients" type="String" />
+		<field name="recipients" type="String">
+			<hint-collection name="FLASK-LONG-DESC" />
+		</field>
 		<field name="groupMessageId" type="long" />
-		<field name="read" type="String" />
+		<field name="read" type="String">
+			<hint-collection name="FLASK-LONG-DESC" />
+		</field>
 		<field name="receivedDateTime" type="Date" />
 		<field name="senderId" type="long" />
 	</model>
