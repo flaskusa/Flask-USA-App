@@ -13,6 +13,11 @@
         $scope.textMessage = { messageToSend: "" };
         var userDetail = $cookies.getObject('CurrentUser');
         $scope.loggedInUser = userDetail.data.userId;
+        $scope.friendDetail = [];
+        $scope.friednsCookiesArray = [];
+        $scope.friendDetail = $cookies.getObject('friendData');
+        $scope.picUrl = $cookies.getObject('profileUrl');
+        showPopupFromFriends();
         $scope.allFriends = [];
         $scope.readMsg = false;
         $scope.ShowReplyButton = true;
@@ -242,9 +247,7 @@
                 })
             });
         }
-        $scope.closeChatWindowPopup = function () {
-            $scope.modal.hide();
-        };
+        
         //get profile picture of friend 
         $scope.getUserProfile = function (UserDetail) {
             UserService.getUserProfile(UserDetail.userId).then(function (res) {
@@ -274,6 +277,16 @@
             return exist;
         }
         $scope.isUser = false;
+
+        //show chat window from my_friends tab
+        function showPopupFromFriends() {
+            if ($scope.friendDetail != undefined){
+                $scope.friednsCookiesArray.push({ "userId": $scope.friendDetail.userId, "fullName": $scope.friendDetail.firstName + $scope.friendDetail.lastName, "friendProfilePicUrl": $scope.picUrl });
+                $timeout(function () {
+                    $scope.showChatWindowPopup($scope.friednsCookiesArray[0], 'user');
+                }, 300);  
+            }
+        }
         //show chat window of friend
         $scope.showChatWindowPopup = function (data, type) {
             $scope.myMessages = [];
@@ -313,6 +326,13 @@
             }
             $scope.modal.show();
         }
+        $scope.closeChatWindowPopup = function () {
+            if ($scope.friendDetail != undefined) {
+                $scope.modal.hide();
+                $ionicHistory.goBack();
+            }
+            $scope.modal.hide();
+        };
         //send message to friend
         $scope.sendReply = function (message) {
             if(message){
