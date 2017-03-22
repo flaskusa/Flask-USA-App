@@ -7,7 +7,6 @@
 
     /* @ngInject */
     function FriendsMessageCtrl($scope, $http, $ionicModal, FriendsNotificationService, UserService, SERVER, $localStorage, $flaskUtil, $state, $ionicHistory, $timeout, $ionicLoading, $ionicPopup, $cookies) {
-       
         $scope.userThreadMessage = [];
         $scope.showTextArea = { show: false };
         $scope.textMessage = { messageToSend: "" };
@@ -329,6 +328,8 @@
         $scope.closeChatWindowPopup = function () {
             if ($scope.friendDetail != undefined) {
                 $scope.modal.hide();
+                $cookies.remove('friendData');
+                $cookies.remove('profileUrl');
                 $ionicHistory.goBack();
             }
             $scope.modal.hide();
