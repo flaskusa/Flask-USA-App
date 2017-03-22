@@ -1522,6 +1522,13 @@ position:initial !important;
   height:47px;
   float: left
 }
+.chatIcon{
+    width: 43px;
+    max-width: 65px;
+    height: 41px;
+    margin-top: -9px;
+    border-radius: 50%;
+}
 .arrowIconAlign{
   width:21px;
   height:23px;
@@ -3422,7 +3429,7 @@ div#locationMarker {
 
 .me {
     float: left;   
-    margin: 1px 45px 5px 20px;        
+    margin: 6px 45px 5px 20px;        
 }
 
 .me::before {
@@ -3432,10 +3439,33 @@ div#locationMarker {
 
 .you {
     float: right;    
-    margin: 1px 20px 5px 45px !important;       
+    margin: 6px 20px 5px 45px !important;       
 }
 
 .you::before {
     box-shadow: 2px -2px 2px 0 #908a8a;
     right: -9px;    
+}
+
+.readFlag{
+    margin-top:11px;
+    margin-right: 7px;
+}
+
+.msgDate{
+    margin:-5px 0px -10px 19px;
+    float:right;
+    color:#F89734;
+    font-size: 12px;
+}
+
+.msgSender{
+    margin: -6px 0 5px -3px;
+    color:#F89734;
+    font-size: 12px;
+}
+
+.title.title-center.header-item{
+    left:0px !important;
+    right:0px !important;
 }
