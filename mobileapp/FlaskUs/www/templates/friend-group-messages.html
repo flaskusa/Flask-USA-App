@@ -65,7 +65,8 @@
                         <img src="img/default-group-pic.png" class="chatIcon" ng-if="isUser != true">
                     </div>
                     <div class="col col-20" ng-if="profilePic!=undefined">
-                        <img ng-src="{{profilePic}}" class="chatIcon">
+                        <img ng-src="{{profilePic}}" class="chatIcon" ng-if="isUser == true">
+                        <img src="img/default-group-pic.png" class="chatIcon" ng-if="isUser != true">
                     </div>
                 </ion-nav-buttons>
                 <ion-nav-title class="chatFriendName">
