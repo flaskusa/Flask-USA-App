@@ -265,7 +265,7 @@
         function getVenueDeviceImage(venueId, deviceType) {
             return $http.get(SERVER.url + getVenueDeviceImageURL, {
                 params: {
-                    "venueId ": venueId,
+                    "venueId": venueId,
                     "deviceType": deviceType
                 }
             })

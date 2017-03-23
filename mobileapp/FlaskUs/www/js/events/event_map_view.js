@@ -1163,13 +1163,14 @@
                                 EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceModel).then(function (respData) {
                                     if (respData.length != 0) {
                                         tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
+                                        $scope.venueMapImageUrl = tempObject.imageUrl;
                                     }
                                     else {
                                         tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                        $scope.venueMapImageUrl = tempObject.imageUrl;
                                     }
                                 });
                             }
-                            $scope.venueMapImageUrl = tempObject.imageUrl;
                             $scope.venueMapDetail.push(tempObject);
                         }
                         else if ("Venue Info" == tempObject.infoTypeCategoryName) {
