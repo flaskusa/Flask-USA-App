@@ -24,7 +24,7 @@
         var getVenueDetailURL = "/flask-rest-events-portlet.venue/get-venue-detail";
         var getVenueDetailWithImageURL = "flask-rest-events-portlet.venue/get-venue-details-with-images";
         var deleteEventDetailImage = "/flask-rest-events-portlet.event/delete-event-detail-image";
-        var getVenueDeviceImageURL = "/flask-rest-events-portlet.venue/get-venue-device-images-by-venue-device";
+        var getVenueDeviceImageURL = "/flask-rest-events-portlet.venue/get-venue-images-by-venue-id-and-device-type";
         var googleMapURL = SERVER.googleApi;
 
         var eventServices = {
