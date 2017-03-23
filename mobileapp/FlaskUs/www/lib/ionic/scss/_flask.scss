@@ -2847,7 +2847,7 @@ div .manage_event_default_Image{
 
 /*Venue Map*/
 .image_map_div{
-    height:90% !important;
+    height:100% !important;
   overflow-x: scroll;
   overflow-y: scroll;
 }
@@ -2901,7 +2901,7 @@ div .manage_event_default_Image{
 }
 
 .venueMapImage {
-  height: 100vw;
+  height: 100%;
   width: 100vw;
   -webkit-transition: all .6s ease;
   -moz-transition: all .6s ease;
@@ -3429,7 +3429,7 @@ div#locationMarker {
 
 .me {
     float: left;   
-    margin: 6px 45px 5px 20px;        
+    margin: 1px 45px 5px 20px;        
 }
 
 .me::before {
@@ -3439,7 +3439,7 @@ div#locationMarker {
 
 .you {
     float: right;    
-    margin: 6px 20px 5px 45px !important;       
+    margin: 1px 20px 5px 45px !important;       
 }
 
 .you::before {
