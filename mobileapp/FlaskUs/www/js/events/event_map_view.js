@@ -1160,13 +1160,13 @@
                         }
                         else if ("Venue Map" == tempObject.infoTypeCategoryName) {
                             if (ImgObj.length != 0) {
-                                EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceModel).then(function (respData) {
+                                EventsService.getVenueDeviceImage(tempObject.venueId, "abcd").then(function (respData) {
                                     if (respData.length != 0) {
                                         tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
                                         $scope.venueMapImageUrl = tempObject.imageUrl;
                                     }
                                     else {
-                                        tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                        tempObject.imageUrl = "img/no-image-available.jpg";
                                         $scope.venueMapImageUrl = tempObject.imageUrl;
                                     }
                                 });
