@@ -1161,7 +1161,7 @@
                         else if ("Venue Map" == tempObject.infoTypeCategoryName) {
                             $scope.default = " ";
                             if (ImgObj.length != 0) {
-                                EventsService.getVenueDeviceImage(tempObject.venueId, "default").then(function (respData) {
+                                EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceModel).then(function (respData) {
                                     if (respData.length != 0) {
                                         tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
                                         $scope.venueMapImageUrl = tempObject.imageUrl;
