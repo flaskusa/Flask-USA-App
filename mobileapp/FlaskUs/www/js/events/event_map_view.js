@@ -1159,15 +1159,21 @@
                             $scope.searchHotelMarkers = $scope.hotelMarkers;
                         }
                         else if ("Venue Map" == tempObject.infoTypeCategoryName) {
+                            $scope.default = " ";
                             if (ImgObj.length != 0) {
-                                EventsService.getVenueDeviceImage(tempObject.venueId, "abcd").then(function (respData) {
+                                EventsService.getVenueDeviceImage(tempObject.venueId, "default").then(function (respData) {
                                     if (respData.length != 0) {
                                         tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
                                         $scope.venueMapImageUrl = tempObject.imageUrl;
+                                        if (respData[0].imageTitle.match("default")) {
+                                            $("#venueMapImage").addClass("venueMapImage");
+                                            $scope.default = "default";
+                                        }
                                     }
                                     else {
                                         tempObject.imageUrl = "img/no-image-available.jpg";
                                         $scope.venueMapImageUrl = tempObject.imageUrl;
+                                        console.log($scope.venueMapImageUrl);
                                     }
                                 });
                             }
