@@ -340,7 +340,7 @@
                 <ion-tab title="VENUE MAP" ng-click="selectTab(0)">
                     <ion-content overflow-scroll="false">
                         <div class="image_map_div " draggable="true">
-                            <img id="venueMapImage" ng-class="{ zoomedvenueMapImage: zoomMapImage==true}" on-double-tap="toggleZoomImage()" ng-src="{{venueMapImageUrl}}" />
+                            <img id="image" class="venueMapImage" ng-class="{ zoomedvenueMapImage: zoomMapImage==true}" on-double-tap="toggleZoomImage()" ng-src="{{venueMapImageUrl}}" />
                         </div>
                     </ion-content>
                 </ion-tab>
