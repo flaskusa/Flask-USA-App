@@ -1172,10 +1172,6 @@
                                     if (respData.length != 0) {
                                         tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
                                         $scope.venueMapImageUrl = tempObject.imageUrl;
-                                        if (respData[0].imageTitle.match("default")) {
-                                            $("#venueMapImage").addClass("venueMapImage");
-                                            $scope.default = "default";
-                                        }
                                     }
                                     else {
                                         tempObject.imageUrl = "img/no-image-available.jpg";
