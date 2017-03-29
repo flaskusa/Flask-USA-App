@@ -27,6 +27,13 @@
         $scope.showsearchDrop = { "value": true };
         $scope.deviceInformation = ionic.Platform.device();
         $scope.deviceModel = $scope.deviceInformation.model;
+        $scope.width = window.screen.width;
+        $scope.height = window.screen.height;
+        function gcd(width, height) {
+            return (height == 0) ? width : gcd(height, width % height);
+        }
+        $scope.gcdValue = gcd($scope.width, $scope.height);
+        $scope.aspectRatio =  $scope.width / $scope.gcdValue + " : " + $scope.height / $scope.gcdValue;
         $scope.map.events["click"] = function () {
             return $scope.closeOtherInfoWindows('mapClick');
         };
@@ -1161,7 +1168,7 @@
                         else if ("Venue Map" == tempObject.infoTypeCategoryName) {
                             $scope.default = " ";
                             if (ImgObj.length != 0) {
-                                EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceModel).then(function (respData) {
+                                EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceModel, $scope.aspectRatio).then(function (respData) {
                                     if (respData.length != 0) {
                                         tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
                                         $scope.venueMapImageUrl = tempObject.imageUrl;
