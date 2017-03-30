@@ -262,11 +262,12 @@
                 });
         }
         //get venue image as per device
-        function getVenueDeviceImage(venueId, deviceType) {
+        function getVenueDeviceImage(venueId, deviceType, aspectRatio) {
             return $http.get(SERVER.url + getVenueDeviceImageURL, {
                 params: {
                     "venueId": venueId,
-                    "deviceType": deviceType
+                    "deviceType": deviceType,
+                    "aspectRatio": aspectRatio
                 }
             })
                 .then(function success(resp) {
