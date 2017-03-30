@@ -518,10 +518,33 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		return venueDetailImages;
 	}
 	
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public List<VenueDetailImage> getVenueDetailImagesByVenueIdandDeviceType(long venueDetailId, String deviceType, ServiceContext  serviceContext){
+		List<VenueDetailImage> finalVenueDetailImages = new ArrayList<VenueDetailImage>();
+		try{
+			List<VenueDetailImage> venueDetailImages = VenueDetailImageUtil.findByVenueDetailId(venueDetailId);
+			for(VenueDetailImage venueDetailImage : venueDetailImages){
+				String imageNameParts[] = venueDetailImage.getImageTitle().split("-");
+				String imageName = imageNameParts[0];
+				if(imageName.equalsIgnoreCase(deviceType)){
+					finalVenueDetailImages.add(venueDetailImage);
+				}
+			}
+		}catch(Exception ex){
+			LOGGER.error(ex);
+		}
+		return finalVenueDetailImages;
+	}
+	
 	@Override
 	public void deleteVenueDetailImage(long venueDetailImageId,
 									ServiceContext  serviceContext){
 		try{
+			List<VenueDeviceImage> venueDeviceImages = VenueDeviceImageUtil.findByVenueDetailImageId(venueDetailImageId);
+			for(VenueDeviceImage img : venueDeviceImages){
+				VenueDeviceImageLocalServiceUtil.deleteVenueDeviceImage(img.getVenueDeviceImageId());
+			}
 			VenueDetailImageLocalServiceUtil.deleteVenueDetailImage(venueDetailImageId);
 			
 		}catch(Exception ex){
@@ -681,6 +704,20 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			}
 			return venueDeviceImages;
 	}
+	
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public List<VenueDeviceImage> getVenueDeviceImagesByVenueDetailImageId(long venueDetailImageId){
+			List<VenueDeviceImage>  venueDeviceImages = new ArrayList<VenueDeviceImage>();
+			try {
+				venueDeviceImages =  VenueDeviceImageUtil.findByVenueDetailImageId(venueDetailImageId);
+			}
+			catch (SystemException e) {
+				LOGGER.error("Error in getVenueDeviceImagesByVenueId:" + e );
+			}
+			return venueDeviceImages;
+	}
+	
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public List<VenueDeviceImage> getVenueDeviceImagesByDeviceType(String deviceType){
@@ -695,18 +732,23 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	}
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
-	public List<VenueImage> getVenueImagesByVenueIdAndDeviceType(long venueId, String deviceType, ServiceContext serviceContext){
-		List<VenueImage> venueImages = new ArrayList<VenueImage>();
+	public List<VenueDetailImage> getVenueImagesByVenueIdAndDeviceType(long venueId, String deviceType, String aspectRatio, ServiceContext serviceContext){
+		List<VenueDetailImage> venueDetailImages = new ArrayList<VenueDetailImage>();
 		try {
 			List<VenueDeviceImage>  venueDeviceImages =  VenueDeviceImageUtil.findByVenueDevice(venueId, deviceType);
+			if(venueDeviceImages.isEmpty()){
+				venueDeviceImages =  VenueDeviceImageUtil.findByVenueRatio(venueId, aspectRatio);
+			}if(venueDeviceImages.isEmpty()){
+				venueDeviceImages =  VenueDeviceImageUtil.findByVenueDevice(venueId, "default");
+			}
 			for(VenueDeviceImage img: venueDeviceImages){
-				venueImages.add(VenueServiceUtil.getVenueImage(img.getVenueDetailImageId(), serviceContext));
+				venueDetailImages.add(VenueServiceUtil.getVenueDetailImage(img.getVenueDetailImageId(), serviceContext));
 			}
 		}
 		catch (SystemException e) {
 			LOGGER.error("Error in getVenueDeviceImagesByVenueDevice:" + e.getMessage());
 		}
-		return venueImages;
+		return venueDetailImages;
 	}
 	@AccessControlled(guestAccessEnabled =true)
 	@Override

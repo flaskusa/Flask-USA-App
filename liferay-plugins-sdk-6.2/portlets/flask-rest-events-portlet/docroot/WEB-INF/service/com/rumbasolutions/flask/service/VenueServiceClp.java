@@ -189,82 +189,93 @@ public class VenueServiceClp implements VenueService {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName25 = "deleteVenueDetailImage";
+		_methodName25 = "getVenueDetailImagesByVenueIdandDeviceType";
 
 		_methodParameterTypes25 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"long", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName26 = "deleteAllVenueDetailImages";
+		_methodName26 = "deleteVenueDetailImage";
 
 		_methodParameterTypes26 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName27 = "getVenueDetailsWithImages";
+		_methodName27 = "deleteAllVenueDetailImages";
 
 		_methodParameterTypes27 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName28 = "copyVenueDetailsWithImages";
+		_methodName28 = "getVenueDetailsWithImages";
 
 		_methodParameterTypes28 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName29 = "copyVenueDetailsWithImages";
+
+		_methodParameterTypes29 = new String[] {
 				"long", "long", "long",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName29 = "addFileEntry";
+		_methodName30 = "addFileEntry";
 
-		_methodParameterTypes29 = new String[] {
+		_methodParameterTypes30 = new String[] {
 				"long", "long", "com.rumbasolutions.flask.model.VenueDetail",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName30 = "addVenueDeviceImage";
+		_methodName31 = "addVenueDeviceImage";
 
-		_methodParameterTypes30 = new String[] {
+		_methodParameterTypes31 = new String[] {
 				"long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName31 = "getVenueDeviceImagesByVenueId";
+		_methodName32 = "getVenueDeviceImagesByVenueId";
 
-		_methodParameterTypes31 = new String[] { "long" };
+		_methodParameterTypes32 = new String[] { "long" };
 
-		_methodName32 = "getVenueDeviceImagesByDeviceType";
+		_methodName33 = "getVenueDeviceImagesByVenueDetailImageId";
 
-		_methodParameterTypes32 = new String[] { "java.lang.String" };
+		_methodParameterTypes33 = new String[] { "long" };
 
-		_methodName33 = "getVenueImagesByVenueIdAndDeviceType";
+		_methodName34 = "getVenueDeviceImagesByDeviceType";
 
-		_methodParameterTypes33 = new String[] {
-				"long", "java.lang.String",
+		_methodParameterTypes34 = new String[] { "java.lang.String" };
+
+		_methodName35 = "getVenueImagesByVenueIdAndDeviceType";
+
+		_methodParameterTypes35 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName34 = "getVenueDeviceImage";
+		_methodName36 = "getVenueDeviceImage";
 
-		_methodParameterTypes34 = new String[] { "long" };
+		_methodParameterTypes36 = new String[] { "long" };
 
-		_methodName35 = "getAllVenueDeviceImages";
+		_methodName37 = "getAllVenueDeviceImages";
 
-		_methodParameterTypes35 = new String[] {  };
+		_methodParameterTypes37 = new String[] {  };
 
-		_methodName36 = "updateVenueDeviceImage";
+		_methodName38 = "updateVenueDeviceImage";
 
-		_methodParameterTypes36 = new String[] {
+		_methodParameterTypes38 = new String[] {
 				"long", "long", "long", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
 
-		_methodName37 = "deleteVenueDeviceImage";
+		_methodName39 = "deleteVenueDeviceImage";
 
-		_methodParameterTypes37 = new String[] { "long" };
+		_methodParameterTypes39 = new String[] { "long" };
 
-		_methodName38 = "uploadDeviceImage";
+		_methodName40 = "uploadDeviceImage";
 
-		_methodParameterTypes38 = new String[] {
+		_methodParameterTypes40 = new String[] {
 				"java.io.File", "long", "java.lang.String", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
@@ -1114,11 +1125,43 @@ public class VenueServiceClp implements VenueService {
 	}
 
 	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> getVenueDetailImagesByVenueIdandDeviceType(
+		long venueDetailId, java.lang.String deviceType,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName25,
+					_methodParameterTypes25,
+					new Object[] {
+						venueDetailId,
+						
+					ClpSerializer.translateInput(deviceType),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.VenueDetailImage>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public void deleteVenueDetailImage(long venueDetailImageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName25,
-				_methodParameterTypes25,
+			_invokableService.invokeMethod(_methodName26,
+				_methodParameterTypes26,
 				new Object[] {
 					venueDetailImageId,
 					
@@ -1142,8 +1185,8 @@ public class VenueServiceClp implements VenueService {
 	public void deleteAllVenueDetailImages(long venueDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName26,
-				_methodParameterTypes26,
+			_invokableService.invokeMethod(_methodName27,
+				_methodParameterTypes27,
 				new Object[] {
 					venueDetailId,
 					
@@ -1169,8 +1212,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName27,
-					_methodParameterTypes27,
+			returnObj = _invokableService.invokeMethod(_methodName28,
+					_methodParameterTypes28,
 					new Object[] {
 						venueId,
 						
@@ -1199,8 +1242,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName28,
-					_methodParameterTypes28,
+			returnObj = _invokableService.invokeMethod(_methodName29,
+					_methodParameterTypes29,
 					new Object[] {
 						sourceVenueId,
 						
@@ -1231,8 +1274,8 @@ public class VenueServiceClp implements VenueService {
 		com.rumbasolutions.flask.model.VenueDetail destVenueDetail,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName29,
-				_methodParameterTypes29,
+			_invokableService.invokeMethod(_methodName30,
+				_methodParameterTypes30,
 				new Object[] {
 					destinationVenueId,
 					
@@ -1263,8 +1306,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName30,
-					_methodParameterTypes30,
+			returnObj = _invokableService.invokeMethod(_methodName31,
+					_methodParameterTypes31,
 					new Object[] {
 						venueDetailImageId,
 						
@@ -1298,8 +1341,32 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName31,
-					_methodParameterTypes31, new Object[] { venueId });
+			returnObj = _invokableService.invokeMethod(_methodName32,
+					_methodParameterTypes32, new Object[] { venueId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage>)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
+	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueDetailImageId(
+		long venueDetailImageId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName33,
+					_methodParameterTypes33, new Object[] { venueDetailImageId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1322,8 +1389,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName32,
-					_methodParameterTypes32,
+			returnObj = _invokableService.invokeMethod(_methodName34,
+					_methodParameterTypes34,
 					new Object[] { ClpSerializer.translateInput(deviceType) });
 		}
 		catch (Throwable t) {
@@ -1342,18 +1409,21 @@ public class VenueServiceClp implements VenueService {
 	}
 
 	@Override
-	public java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImagesByVenueIdAndDeviceType(
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> getVenueImagesByVenueIdAndDeviceType(
 		long venueId, java.lang.String deviceType,
+		java.lang.String aspectRatio,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName33,
-					_methodParameterTypes33,
+			returnObj = _invokableService.invokeMethod(_methodName35,
+					_methodParameterTypes35,
 					new Object[] {
 						venueId,
 						
 					ClpSerializer.translateInput(deviceType),
+						
+					ClpSerializer.translateInput(aspectRatio),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -1370,7 +1440,7 @@ public class VenueServiceClp implements VenueService {
 			}
 		}
 
-		return (java.util.List<com.rumbasolutions.flask.model.VenueImage>)ClpSerializer.translateOutput(returnObj);
+		return (java.util.List<com.rumbasolutions.flask.model.VenueDetailImage>)ClpSerializer.translateOutput(returnObj);
 	}
 
 	@Override
@@ -1379,8 +1449,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName34,
-					_methodParameterTypes34, new Object[] { venueDeviceImageId });
+			returnObj = _invokableService.invokeMethod(_methodName36,
+					_methodParameterTypes36, new Object[] { venueDeviceImageId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1402,8 +1472,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName35,
-					_methodParameterTypes35, new Object[] {  });
+			returnObj = _invokableService.invokeMethod(_methodName37,
+					_methodParameterTypes37, new Object[] {  });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1428,8 +1498,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName36,
-					_methodParameterTypes36,
+			returnObj = _invokableService.invokeMethod(_methodName38,
+					_methodParameterTypes38,
 					new Object[] {
 						venueImageDeviceId,
 						
@@ -1462,8 +1532,8 @@ public class VenueServiceClp implements VenueService {
 	@Override
 	public void deleteVenueDeviceImage(long venueDeviceImageId) {
 		try {
-			_invokableService.invokeMethod(_methodName37,
-				_methodParameterTypes37, new Object[] { venueDeviceImageId });
+			_invokableService.invokeMethod(_methodName39,
+				_methodParameterTypes39, new Object[] { venueDeviceImageId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -1486,8 +1556,8 @@ public class VenueServiceClp implements VenueService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName38,
-					_methodParameterTypes38,
+			returnObj = _invokableService.invokeMethod(_methodName40,
+					_methodParameterTypes40,
 					new Object[] {
 						ClpSerializer.translateInput(file),
 						
@@ -1592,4 +1662,8 @@ public class VenueServiceClp implements VenueService {
 	private String[] _methodParameterTypes37;
 	private String _methodName38;
 	private String[] _methodParameterTypes38;
+	private String _methodName39;
+	private String[] _methodParameterTypes39;
+	private String _methodName40;
+	private String[] _methodParameterTypes40;
 }

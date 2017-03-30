@@ -193,6 +193,12 @@ public interface VenueService extends BaseService, InvokableService {
 		long venueDetailId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> getVenueDetailImagesByVenueIdandDeviceType(
+		long venueDetailId, java.lang.String deviceType,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	public void deleteVenueDetailImage(long venueDetailImageId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
@@ -224,13 +230,19 @@ public interface VenueService extends BaseService, InvokableService {
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByVenueDetailImageId(
+		long venueDetailImageId);
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rumbasolutions.flask.model.VenueDeviceImage> getVenueDeviceImagesByDeviceType(
 		java.lang.String deviceType);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public java.util.List<com.rumbasolutions.flask.model.VenueImage> getVenueImagesByVenueIdAndDeviceType(
+	public java.util.List<com.rumbasolutions.flask.model.VenueDetailImage> getVenueImagesByVenueIdAndDeviceType(
 		long venueId, java.lang.String deviceType,
+		java.lang.String aspectRatio,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)

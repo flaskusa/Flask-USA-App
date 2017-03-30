@@ -23,7 +23,9 @@ create index IX_EECBBC33 on flaskevents_VenueDeviceImage (DeviceType);
 create index IX_85E73EB on flaskevents_VenueDeviceImage (VenueId);
 create index IX_8BCD0CAF on flaskevents_VenueDeviceImage (VenueId, DeviceType);
 create index IX_E5006813 on flaskevents_VenueDeviceImage (deviceType);
+create index IX_BADCAF9 on flaskevents_VenueDeviceImage (venueDetailImageId);
 create index IX_90EC540B on flaskevents_VenueDeviceImage (venueId);
+create index IX_6444BFD8 on flaskevents_VenueDeviceImage (venueId, aspectRatio);
 create index IX_152068AF on flaskevents_VenueDeviceImage (venueId, deviceType);
 
 create index IX_F121BA95 on flaskevents_VenueImage (venueId);

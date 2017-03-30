@@ -384,6 +384,13 @@
             <finder-column name="venueId"></finder-column>
             <finder-column name="deviceType"></finder-column>
         </finder>
+        <finder name="VenueDetailImageId" return-type="Collection">
+            <finder-column name="venueDetailImageId"></finder-column>
+        </finder>
+        <finder name="VenueRatio" return-type="Collection">
+            <finder-column name="venueId"></finder-column>
+            <finder-column name="aspectRatio"></finder-column>
+        </finder>
     </entity>
 
 
