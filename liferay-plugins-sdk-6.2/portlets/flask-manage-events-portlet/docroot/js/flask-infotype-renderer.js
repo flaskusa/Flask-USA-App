@@ -1,6 +1,6 @@
 var _infoTypeRenderer = {};
 var ids = ["default","Galaxy_s7","iphone_7"];
-var aspectRatios = ["1440 x 2560","1440 x 2560","750 x 1334"];
+var aspectRatios = ["3:4","9:16","9:16"];
 
 _infoTypeRenderer.getRenderer = function(type) {
 	type = type.toLowerCase();
@@ -174,6 +174,9 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 	var deviceTypeId ="";
 	var aspectRatioId ="";
 	dropZone = "";
+	dropZone0 = "";
+	dropZone1 = "";
+	dropZone2 = "";
 	var myclass = "form-group " +Obj[0].Class+ " uploader";
 	if(Obj[0].caption == "Upload Pictures"){
 		dropLength = 1;
@@ -191,6 +194,7 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 			id = "";
 			aspectRatio = "";
 			venuImageId ='venueImages';
+			venueDetailId = '_venueDetailId';
 			deviceTypeId = '_deviceType';
 			aspectRatioId = '_aspectRatio';
 		}else{
@@ -198,13 +202,14 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 			caption = Obj[0].caption[i];
 			id = Obj[0].id[i];
 			aspectRatio = Obj[0].aspectRatio[i];
-			venuImageId ='venueImages';
-			deviceTypeId = '_deviceType'+i;
-			aspectRatioId = '_aspectRatio'+i;
+			venuImageId ='venueImages'+i;
+			venueDetailId = '_venueDetailId';
+			deviceTypeId = '_deviceType';
+			aspectRatioId = '_aspectRatio';
 		}
 		var objFormGroup = $('<div/>', {
 			'class' : myclass,
-			id:"uploader"
+			id: 'uploader'
 		}).appendTo($(formArea));
 		var objControlLable = $('<label/>', {
 			'class' : 'control-label',
@@ -242,13 +247,13 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 				'class' : 'dropzone',
 				'id' : venuImageId,
 				'action' : action
-			}).appendTo(objFormGroup);
-			$(objForm).appendTo(objControls);
+			}).appendTo(objControls);
 			var objvenueDetailId = $('<input/>', {
-				'name' : '_venueDetailId',
-				'id' : '_venueDetailId',
+				'name' : venueDetailId,
+				'id' : venueDetailId,
+				'class' : venueDetailId,
 				'type' : 'hidden',
-				'value' : '0'
+				'value' : $("#venueDetailId").val()
 			});
 			$(objvenueDetailId).appendTo(objForm);
 			var objVenueId = $('<input/>', {
@@ -274,6 +279,10 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 				'value' : aspectRatio
 			});
 			$(objAspectRatio).appendTo(objForm);
+			var objDynamicDiv = $('<span/>', {
+				'id' : id+"Gallery",
+			}).appendTo(objFormGroup);
+			$(objDynamicDiv).appendTo(objControls);
 			break;
 		default:
 			var objForm = $('<form/>', {
@@ -318,10 +327,74 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 			'type' : 'hidden',
 			'value' : 'N'
 		});
-		$(objIsLogo).appendTo(objForm);
-		dropZone = new Dropzone($(objForm).get(0), {
-			autoProcessQueue : false
-		});
+		if(venuImageId == "venueImages0"){
+			dropZone0 = new Dropzone($(objForm).get(0), {
+				dictDefaultMessage: "Drop files here to upload (width : height = "+aspectRatio+")",
+				maxFiles: 1,
+				autoProcessQueue : false,
+				init: function() {
+				    this.on("thumbnail", function(file) {
+				      var height = (file.height/file.width) * 3;
+				      if (Math.round(height) != 4) {
+				        file.rejectDimensions()
+				      }
+				      else {
+				        file.acceptDimensions();
+				      }
+				    });
+				  },
+				  accept: function(file, done) {
+				    file.acceptDimensions = done;
+				    file.rejectDimensions = function() { done("Invalid image resolution."); };
+				  }
+			});
+		}else if(venuImageId == "venueImages1"){
+			dropZone1 = new Dropzone($(objForm).get(0), {
+				dictDefaultMessage: "Drop files here to upload (width : height = "+aspectRatio+")",
+				maxFiles: 1,
+				autoProcessQueue : false,
+				init: function() {
+				    this.on("thumbnail", function(file) {
+				    	var height = (file.height/file.width) * 9;
+				      if (Math.round(height) != 16) {
+				        file.rejectDimensions()
+				      }
+				      else {
+				        file.acceptDimensions();
+				      }
+				    });
+				  },
+				  accept: function(file, done) {
+				    file.acceptDimensions = done;
+				    file.rejectDimensions = function() { done("Invalid image resolution."); };
+				  }
+			});
+		}else if(venuImageId == "venueImages2"){
+			dropZone2 = new Dropzone($(objForm).get(0), {
+				dictDefaultMessage: "Drop files here to upload (width : height = "+aspectRatio+")",
+				maxFiles: 1,
+				autoProcessQueue : false,
+				init: function() {
+				    this.on("thumbnail", function(file) {
+				    	var height = (file.height/file.width) * 9;
+				      if (Math.round(height) != 16) {
+				        file.rejectDimensions()
+				      }
+				      else {
+				        file.acceptDimensions();
+				      }
+				    });
+				  },
+				  accept: function(file, done) {
+				    file.acceptDimensions = done;
+				    file.rejectDimensions = function() { done("Invalid image resolution."); };
+				  }
+			});
+		}else{
+			dropZone = new Dropzone($(objForm).get(0), {
+				autoProcessQueue : false
+			});
+		}
 	}
 }
 

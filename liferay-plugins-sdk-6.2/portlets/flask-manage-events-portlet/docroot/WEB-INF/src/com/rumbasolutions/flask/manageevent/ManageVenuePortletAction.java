@@ -3,6 +3,7 @@ package com.rumbasolutions.flask.manageevent;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -51,7 +52,7 @@ public class ManageVenuePortletAction extends MVCPortlet {
 	private String _deviceType = "";
 	private String _aspectRatio = "";
 	private ServiceContext _serviceContext;
-	Folder _venueFolder=null;
+	Folder _venueFolder = null;
 	
 public void addImages(ActionRequest actionRequest, ActionResponse actionResponse)throws IOException, PortletException {
 		if (!PortletFileUpload.isMultipartContent( actionRequest)) {
@@ -62,7 +63,6 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 		// configures some settings
 		DiskFileItemFactory factory = new DiskFileItemFactory();
 		factory.setSizeThreshold(THRESHOLD_SIZE);
-		factory.setRepository(new File(System.getProperty("java.io.tmpdir")));
 		
 		PortletFileUpload upload = new PortletFileUpload(factory);
 		upload.setFileSizeMax(MAX_FILE_SIZE);
@@ -76,22 +76,17 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 		try {
 			// parses the request's content to extract file data
 			List<FileItem> formItems = upload.parseRequest(actionRequest);
-			System.out.println("actionRequest: "+formItems);
 			_venueId = getEventId(formItems);
 			_venueDetailId = getEventDetailId(formItems);
 			_isLogo = getIsLogo(formItems);
 			_deviceType = getDeviceType(formItems);
 			_aspectRatio = getAspectRatio(formItems);
-			System.out.println("_venueId: "+_venueId);
-			System.out.println("_venueDetailId: "+_venueDetailId);
-			System.out.println("_isLogo: "+_isLogo);
-			System.out.println("_aspectRatio: "+_aspectRatio);
-			System.out.println("_deviceType: "+_deviceType);
 			createUploadFolder(uploadPath);
 			
 			for(FileItem item: formItems){
 				if (!item.isFormField()) {
-					String fileName = new File(item.getName()).getName();
+					String uuid = UUID.randomUUID().toString();
+					String fileName = new File(_deviceType+"-"+uuid+"-"+item.getName()).getName();
 					String fileTitle = fileName;
 					String fileDesc = fileName; // Change is later for description 
 					//boolean IsLogo =  _isLogo.equals("Y");
@@ -104,11 +99,24 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 					item.write(storeFile);
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
 					FileEntry fileEntry = FlaskDocLibUtil.addFileEntry(_venueFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
-					if(_venueDetailId>0){
-						VenueDetailImage venueDetailImage = VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
-						if(!_deviceType.isEmpty() && !_aspectRatio.isEmpty()){
-							VenueServiceUtil.addVenueDeviceImage(venueDetailImage.getVenueDetailImageId(),_venueId, _deviceType, fileEntry.getUuid(), _aspectRatio);
+					if(_venueDetailId > 0){
+						List<VenueDetailImage> venueDetailImages = VenueServiceUtil.getVenueDetailImagesByVenueIdandDeviceType(_venueDetailId, _deviceType, _serviceContext);
+						if(venueDetailImages.isEmpty()){
+							VenueDetailImage venueDetailImage = VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
+							if(!_deviceType.isEmpty() && !_aspectRatio.isEmpty()){
+								VenueServiceUtil.addVenueDeviceImage(venueDetailImage.getVenueDetailImageId(),_venueId, _deviceType, fileEntry.getUuid(), _aspectRatio);
+							}
+						}else{
+							for(VenueDetailImage VenueDetailImage : venueDetailImages){
+								VenueServiceUtil.deleteVenueDetailImage(VenueDetailImage.getVenueDetailImageId(), _serviceContext);
+								VenueDetailImage venueDetailImage = VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
+								if(!_deviceType.isEmpty() && !_aspectRatio.isEmpty()){
+									VenueServiceUtil.addVenueDeviceImage(venueDetailImage.getVenueDetailImageId(),_venueId, _deviceType, fileEntry.getUuid(), _aspectRatio);
+								}
+							}
 						}
+						
+						_venueDetailId =0;
 					}else{
 						VenueServiceUtil.addVenueImage(_venueId, fileTitle, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 					}

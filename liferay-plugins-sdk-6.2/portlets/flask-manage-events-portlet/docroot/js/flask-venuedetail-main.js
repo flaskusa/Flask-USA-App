@@ -1,5 +1,8 @@
 var venueDetailForm;
 var dropZone;
+var dropZone0;
+var dropZone1;
+var dropZone2;
 var JsonObj;
 var JsonEventDetails;
 var iSelected;
@@ -335,9 +338,14 @@ function saveVenueDetails() {
 		_flaskLib.showSuccessMessage('action-msg',
 				_venueDetailModel.MESSAGES.DETAIL_SAVE);
 		if ($('#venueImages').find('.dz-image').length > 0) {
-				fnSaveImages(data.venueDetailId, data.infoType);
-		}else{
-		
+			fnSaveImages(data.venueDetailId, data.infoType, dropZone);
+		}if ($('#venueImages0').find('.dz-image').length > 0) {
+			setTimeout(function(){ fnSaveImages(data.venueDetailId, data.infoType, dropZone0); }, 1000);
+		}if ($('#venueImages1').find('.dz-image').length > 0) {
+			setTimeout(function(){ fnSaveImages(data.venueDetailId, data.infoType, dropZone1); }, 2000);
+		}if ($('#venueImages2').find('.dz-image').length > 0) {
+			setTimeout(function(){ fnSaveImages(data.venueDetailId, data.infoType, dropZone2); }, 3000);
+		}if($('.dropzone').find('.dz-image').length <= 0){
 			$('#venueDetailsForm').hide();
 			$('#venueDetailsDataTable').show();
 			$("#venueDetailId").val(0);
@@ -394,6 +402,13 @@ function editVenueDetail(rowData) {
 	window.location.hash = "#VenueDetail";
 	var container = $('#venueDetailGallery');
 	container.html("");
+	var defaultContainer = $('#defaultGallery');
+	defaultContainer.html("");
+	var galaxyContainer = $('#Galaxy_s7Gallery');
+	galaxyContainer.html("");
+	var iphoneContainer = $('#iphone_7Gallery');
+	iphoneContainer.html("");
+	var containers = [defaultContainer, galaxyContainer, iphoneContainer];
 	var repositoryId = $("#repositoryId").val();
 	$('#venueDetailsForm #venueId').val($('#venueForm #venueId').val());
 	$('#venueDetailId').val(rowData.venueDetailId);
@@ -411,7 +426,12 @@ function editVenueDetail(rowData) {
 	// fnShowSlider($('#venueForm
 	// #venueId').val(),container,rowData.venueDetailId,rowData.infoTypeId,rowData.infoTypeCategoryId);
 	getVenueSubDetails(rowData.venueDetailId);
-	fnGetVenueDetailImages(rowData.venueDetailId, container, true);
+	if(rowData.infoTypeCategoryId == 101){
+		fnGetVenueDetailImages(rowData.venueDetailId, containers, true);
+	}else{
+		fnGetVenueDetailImages(rowData.venueDetailId, container, true);
+	}
+	
 }
 
 function formatUnixToTime(tdate) {
@@ -422,11 +442,12 @@ function formatUnixToTime(tdate) {
 	return hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
 }
 
-function fnSaveImages(venueDetailId, infoTypeId) {
-	$("#_venueDetailId").val(venueDetailId);
-	dropZone.options.autoProcessQueue = true;
-	dropZone.processQueue();
-	dropZone.on("queuecomplete", function(file) {
+function fnSaveImages(venueDetailId, infoTypeId, dropZoneParam) {
+	console.log("venueDetailId: "+venueDetailId);
+	$("._venueDetailId").val(venueDetailId);
+	dropZoneParam.options.autoProcessQueue = true;
+	dropZoneParam.processQueue();
+	dropZoneParam.on("queuecomplete", function(file) {
 		wait(function() {
 			$('#venueDetailsForm').hide();
 			$('#venueDetailsDataTable').show();
@@ -437,6 +458,7 @@ function fnSaveImages(venueDetailId, infoTypeId) {
 		}, 1)
 	});
 }
+
 var wait = function(callback, seconds) {
 	return window.setTimeout(callback, seconds * 1000);
 }
@@ -692,6 +714,13 @@ function fnDeleteVenueDetailImage(venueDetailImageId) {
 	};
 	var flaskRequest = new Request();
 	flaskRequest.sendGETRequest(
+			_venueDetailModel.SERVICE_ENDPOINTS.DELETE_VENUEDEVICE_IMAGE,
+			params, function(data) {
+				console.log(data);
+			}, function(data) {
+				console.log(data);
+			});
+	flaskRequest.sendGETRequest(
 			_venueDetailModel.SERVICE_ENDPOINTS.DELETE_VENUEDETAIL_IMAGE,
 			params, function(data) {
 				console.log(data);
@@ -710,113 +739,240 @@ function fnGetVenueDetailImages(venueDetailId, container, editable) {
 			function(data) {
 				$.each(data, function(idx, obj) {
 					fnRenderImage(obj.imageUUID, obj.imageGroupId, container,
-							obj.venueDetailImageId, editable);
+							obj.venueDetailImageId, obj.imageTitle, editable);
 				});
 			}, function(data) {
 				console.log(data);
 			});
 }
 
-function fnRenderImage(imageUUID, imageGroupId, container, venueDetailImageId,
+function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, imageTitle,
 		editable) {
+	var fields  = imageTitle.split("-");
+	var name = fields[0];
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + imageUUID
 			+ "&groupId=" + imageGroupId;
-	if (editable) {
-		var objdiv = $('<div/>', {
-			'class' : 'eventLogo',
-			'style' : 'background-image:url(' + imgURL + ')',
-			'data-uuid' : imageUUID,
-			'data-venueDetailImageId' : venueDetailImageId,
-			'data-imageURL' : imgURL
-		});
-		$(objdiv).appendTo($(container));
-		$(objdiv)
-				.click(
-						function() {
-							$(this).toggleClass("activeImage");
-							if ($(".activeImage").length > 0) {
-								if (iSelected == false) {
-									var objDel = $('<input/>', {
-										'class' : 'btn btn-info cssDelImages',
-										'type' : 'button',
-										'value' : 'Delete selected'
-									});
-									$(objDel).appendTo($(container));
-									iSelected = true;
-									$(objDel)
-											.click(
-													function() {
-														$("#spinningSquaresG")
-																.show();
-														$(".activeImage")
-																.each(
-																		function() {
-																			_flaskLib
-																					.deleteImage(
-																							$(
-																									this)
-																									.attr(
-																											"data-uuid"),
-																							imageGroupId,
-																							objDel);
-																			fnDeleteVenueDetailImage($(
-																					this)
-																					.attr(
-																							"data-venueDetailImageId"));
-																			$(
-																					this)
-																					.remove();
-																		});
-														if ($(".activeImage").length == 0) {
-															$(
-																	"#spinningSquaresG")
-																	.hide();
-															$(this).remove();
-															iSelected = false;
-														}
-													});
-								}
-							} else {
-								$(".cssDelImages").remove();
-								iSelected = false;
-							}
-						});
-	} else {
-		var objdiv = $('<div/>', {
-			'class' : 'GridSlides',
-			'style' : 'background-image:url(' + imgURL + ')',
-			'data-uuid' : imageUUID,
-			'data-venueDetailImageId' : venueDetailImageId,
-			'data-imageURL' : imgURL
-		});
-		$(container).owlCarousel(
-				{
-					items : 3,
-					navigation : true,
-					navigationText : [
-							"<i class='icon-chevron-left icon-white'></i>",
-							"<i class='icon-chevron-right icon-white'></i>" ],
-					pagination : true,
-					items : 5,
-					itemsCustom : false,
-					itemsDesktop : [ 1199, 4 ],
-					itemsDesktopSmall : [ 980, 3 ],
-					itemsTablet : [ 768, 2 ],
-					itemsTabletSmall : false,
-					itemsMobile : [ 479, 1 ],
-					singleItem : false,
-					itemsScaleUp : false,
-				});
-		$(container).data('owlCarousel').addItem(objdiv);
-		$(objdiv).click(function() {
-			var imgContainer = $('.imageContainer');
-			imgContainer.html('');
-			var objImage = $('<img/>', {
-				'src' : $(this).attr('data-imageURL')
+	if(containers.length == 1){
+		container = containers.selector;
+		if (editable) {
+			var objdiv = $('<div/>', {
+				'class' : 'eventMainDiv',
 			});
-			imgContainer.append(objImage);
-			$('.md-trigger').click();
-		});
+			$(objdiv).appendTo($(container));
+			/*var objLable = $('<label/>', {
+				'class' : 'eventLable'
+	 		}).appendTo(objdiv);
+			$(objLable).html(name);*/
+			var objImg = $('<div/>', {
+				'class' : 'eventLogo',
+				'style' : 'background-image:url(' + imgURL + ')',
+				'data-uuid' : imageUUID,
+				'data-venueDetailImageId' : venueDetailImageId,
+				'data-imageURL' : imgURL
+			});
+			$(objImg).appendTo($(objdiv));
+			$(objImg)
+					.click(
+							function() {
+								$(this).toggleClass("activeImage");
+								if ($(".activeImage").length > 0) {
+									if (iSelected == false) {
+										var objDel = $('<input/>', {
+											'class' : 'btn btn-info cssDelImages',
+											'type' : 'button',
+											'value' : 'Delete selected'
+										});
+										$(objDel).appendTo($(container));
+										iSelected = true;
+										$(objDel)
+												.click(
+														function() {
+															$("#spinningSquaresG")
+																	.show();
+															$(".activeImage")
+																	.each(
+																			function() {
+																				_flaskLib
+																						.deleteImage(
+																								$(
+																										this)
+																										.attr(
+																												"data-uuid"),
+																								imageGroupId,
+																								objDel);
+																				fnDeleteVenueDetailImage($(
+																						this)
+																						.attr(
+																								"data-venueDetailImageId"));
+																				$(
+																						this)
+																						.remove();
+																			});
+															if ($(".activeImage").length == 0) {
+																$(
+																		"#spinningSquaresG")
+																		.hide();
+																$(this).remove();
+																iSelected = false;
+															}
+														});
+									}
+								} else {
+									$(".cssDelImages").remove();
+									iSelected = false;
+								}
+							});
+		} else {
+			var objdiv = $('<div/>', {
+				'class' : 'GridSlides',
+				'style' : 'background-image:url(' + imgURL + ')',
+				'data-uuid' : imageUUID,
+				'data-venueDetailImageId' : venueDetailImageId,
+				'data-imageURL' : imgURL
+			});
+			$(container).owlCarousel(
+					{
+						items : 3,
+						navigation : true,
+						navigationText : [
+								"<i class='icon-chevron-left icon-white'></i>",
+								"<i class='icon-chevron-right icon-white'></i>" ],
+						pagination : true,
+						items : 5,
+						itemsCustom : false,
+						itemsDesktop : [ 1199, 4 ],
+						itemsDesktopSmall : [ 980, 3 ],
+						itemsTablet : [ 768, 2 ],
+						itemsTabletSmall : false,
+						itemsMobile : [ 479, 1 ],
+						singleItem : false,
+						itemsScaleUp : false,
+					});
+			$(container).data('owlCarousel').addItem(objdiv);
+			$(objdiv).click(function() {
+				var imgContainer = $('.imageContainer');
+				imgContainer.html('');
+				var objImage = $('<img/>', {
+					'src' : $(this).attr('data-imageURL')
+				});
+				imgContainer.append(objImage);
+				$('.md-trigger').click();
+			});
+		}
+	}else{
+		for(var i = 0; i< containers.length; i++){
+			container = containers[i].selector
+			var contFields  = container.split("#");
+			var currentCont  = contFields[1].split("Gallery");
+			var contName = currentCont[0];
+			if(name == contName){
+				if (editable) {
+					var objdiv = $('<div/>', {
+						'class' : 'eventMainDiv',
+					});
+					$(objdiv).appendTo($(container));
+					/*var objLable = $('<label/>', {
+						'class' : 'eventLable'
+			 		}).appendTo(objdiv);
+					$(objLable).html(name);*/
+					var objImg = $('<div/>', {
+						'class' : 'eventLogo',
+						'style' : 'background-image:url(' + imgURL + ')',
+						'data-uuid' : imageUUID,
+						'data-venueDetailImageId' : venueDetailImageId,
+						'data-imageURL' : imgURL
+					});
+					$(objImg).appendTo($(objdiv));
+					$(objImg)
+							.click(
+									function() {
+										$(this).toggleClass("activeImage");
+										if ($(".activeImage").length > 0) {
+											if (iSelected == false) {
+												var objDel = $('<input/>', {
+													'class' : 'btn btn-info cssDelImages',
+													'type' : 'button',
+													'value' : 'Delete selected'
+												});
+												$(objDel).appendTo($(container));
+												iSelected = true;
+												$(objDel)
+														.click(
+																function() {
+																	$("#spinningSquaresG")
+																			.show();
+																	$(".activeImage")
+																			.each(
+																					function() {
+																						_flaskLib
+																								.deleteImage(
+																										$(
+																												this)
+																												.attr(
+																														"data-uuid"),
+																										imageGroupId,
+																										objDel);
+																						fnDeleteVenueDetailImage($(
+																								this)
+																								.attr(
+																										"data-venueDetailImageId"));
+																						$(
+																								this)
+																								.remove();
+																					});
+																	if ($(".activeImage").length == 0) {
+																		$(
+																				"#spinningSquaresG")
+																				.hide();
+																		$(this).remove();
+																		iSelected = false;
+																	}
+																});
+											}
+										} else {
+											$(".cssDelImages").remove();
+											iSelected = false;
+										}
+									});
+				} else {
+					var objdiv = $('<div/>', {
+						'class' : 'GridSlides',
+						'style' : 'background-image:url(' + imgURL + ')',
+						'data-uuid' : imageUUID,
+						'data-venueDetailImageId' : venueDetailImageId,
+						'data-imageURL' : imgURL
+					});
+					$(container).owlCarousel(
+							{
+								items : 3,
+								navigation : true,
+								navigationText : [
+										"<i class='icon-chevron-left icon-white'></i>",
+										"<i class='icon-chevron-right icon-white'></i>" ],
+								pagination : true,
+								items : 5,
+								itemsCustom : false,
+								itemsDesktop : [ 1199, 4 ],
+								itemsDesktopSmall : [ 980, 3 ],
+								itemsTablet : [ 768, 2 ],
+								itemsTabletSmall : false,
+								itemsMobile : [ 479, 1 ],
+								singleItem : false,
+								itemsScaleUp : false,
+							});
+					$(container).data('owlCarousel').addItem(objdiv);
+					$(objdiv).click(function() {
+						var imgContainer = $('.imageContainer');
+						imgContainer.html('');
+						var objImage = $('<img/>', {
+							'src' : $(this).attr('data-imageURL')
+						});
+						imgContainer.append(objImage);
+						$('.md-trigger').click();
+					});
+				}
+			}
+		}
 	}
 }
 
