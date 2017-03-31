@@ -123,18 +123,29 @@ GRID_PARAM_DETAILS.initrowdetails = function(index, parentElement, gridElement, 
 
 	    	var detailsContainer = $('<div/>');
 	    	var html ="<table>";
-	    	for(var index = 0; index < renderer.length; index++){
-	    		var fieldDefinition = renderer[index];
-	    		var fieldVal = eval("datarecord." + fieldDefinition.attr[0].id);
-	    		if (fieldVal == null){
-	    			fieldVal = "";
-	    		}
-	    		if (fieldVal.length > 100 ){
-	    			fieldVal = fieldVal.substring(0, 100) +  " ..."
-	    		}	    		
-	    		html = html + "<tr><td class='filledWidth'> <b>" + fieldDefinition.attr[0].caption + ":</b></td><td> "
-				+ fieldVal + "</td></tr>";
-	    	}
+		    	for(var index = 0; index < renderer.length; index++){
+		    		var fieldDefinition = renderer[index];
+		    		var fieldVal = null;
+		    		if(datarecord.infoTypeCategoryName != "Venue Map" || index != 2){
+		    			fieldVal = eval("datarecord." + fieldDefinition.attr[0].id);
+		    		}else{
+		    			fieldVal = eval("datarecord." + fieldDefinition.attr[0].id[0]);
+		    		}
+		    		if (fieldVal == null){
+		    			fieldVal = "";
+		    		}
+		    		if (fieldVal.length > 100 ){
+		    			fieldVal = fieldVal.substring(0, 100) +  " ..."
+		    		}	
+		    		if(datarecord.infoTypeCategoryName != "Venue Map" || index != 2){
+		    			html = html + "<tr><td class='filledWidth'> <b>" + fieldDefinition.attr[0].caption + ":</b></td><td> "
+						+ fieldVal + "</td></tr>";
+		    		}else{
+		    			html = html + "<tr><td class='filledWidth'> <b>Upload Pictures:</b></td><td> "
+						+ fieldVal + "</td></tr>";
+		    		}
+		    		
+		    	}
 	    	html = html + "</table>"
 	    	
 	    	$(detailsContainer).append(html);
