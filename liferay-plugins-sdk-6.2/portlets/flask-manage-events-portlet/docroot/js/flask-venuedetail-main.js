@@ -868,7 +868,7 @@ function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, 
 			if(name == contName){
 				if (editable) {
 					var objdiv = $('<div/>', {
-						'class' : 'eventMainDiv',
+						'class' : 'venueMainDiv',
 					});
 					$(objdiv).appendTo($(container));
 					/*var objLable = $('<label/>', {
@@ -876,7 +876,7 @@ function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, 
 			 		}).appendTo(objdiv);
 					$(objLable).html(name);*/
 					var objImg = $('<div/>', {
-						'class' : 'eventLogo',
+						'class' : 'venueLogo',
 						'style' : 'background-image:url(' + imgURL + ')',
 						'data-uuid' : imageUUID,
 						'data-venueDetailImageId' : venueDetailImageId,
@@ -890,7 +890,7 @@ function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, 
 										if ($(".activeImage").length > 0) {
 											if (iSelected == false) {
 												var objDel = $('<input/>', {
-													'class' : 'btn btn-info cssDelImages',
+													'class' : 'btn btn-info cssDelVenueImages',
 													'type' : 'button',
 													'value' : 'Delete selected'
 												});

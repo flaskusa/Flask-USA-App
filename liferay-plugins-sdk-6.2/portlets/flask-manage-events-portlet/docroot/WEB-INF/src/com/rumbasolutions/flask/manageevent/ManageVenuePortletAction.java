@@ -108,7 +108,9 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 							}
 						}else{
 							for(VenueDetailImage VenueDetailImage : venueDetailImages){
-								VenueServiceUtil.deleteVenueDetailImage(VenueDetailImage.getVenueDetailImageId(), _serviceContext);
+								if(!_deviceType.isEmpty() && !_aspectRatio.isEmpty()){
+									VenueServiceUtil.deleteVenueDetailImage(VenueDetailImage.getVenueDetailImageId(), _serviceContext);
+								}
 								VenueDetailImage venueDetailImage = VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 								if(!_deviceType.isEmpty() && !_aspectRatio.isEmpty()){
 									VenueServiceUtil.addVenueDeviceImage(venueDetailImage.getVenueDetailImageId(),_venueId, _deviceType, fileEntry.getUuid(), _aspectRatio);

@@ -341,7 +341,7 @@ zoom: 1.8 !important;
     font-weight: 700 !important;
     padding-top: 85px;
 }
-.eventMainDiv{
+.venueMainDiv{
 	display: inline-block;
     width: 130px;
     height: 130px;
@@ -357,12 +357,24 @@ zoom: 1.8 !important;
     text-align: center;
     font-weight: bold !important;
 }
-.eventLogo{
-	margin: 2px 10px auto;
-}
+.venueLogo{
+    margin: 2px 32px auto;
+} 
 .dropzone.dz-clickable{
-	    display: inline-block;
+	display: inline-block;
 }
-.btn.btn-info.cssDelImages{
-	margin-left: 150px !important;
+.btn.btn-info.cssDelVenueImages{
+	margin-left: 65% !important;
+}
+ .uploader{
+	border: 2px solid #f5f5f5;
+	padding: 1%;
+	width: 39%;
+	background: #ececec;
+}
+.dropzone{
+	width: 70% !important;
+}
+.control-label{
+	font-weight: bold !important;
 }
