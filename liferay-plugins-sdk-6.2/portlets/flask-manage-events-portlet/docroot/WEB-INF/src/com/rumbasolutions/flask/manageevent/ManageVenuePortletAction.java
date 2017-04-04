@@ -100,23 +100,22 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 					String mimeType = FlaskDocLibUtil.getMimeType(filePath);
 					FileEntry fileEntry = FlaskDocLibUtil.addFileEntry(_venueFolder, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
 					if(_venueDetailId > 0){
-						List<VenueDetailImage> venueDetailImages = VenueServiceUtil.getVenueDetailImagesByVenueIdandDeviceType(_venueDetailId, _deviceType, _serviceContext);
-						if(venueDetailImages.isEmpty()){
-							VenueDetailImage venueDetailImage = VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
-							if(!_deviceType.isEmpty() && !_aspectRatio.isEmpty()){
-								VenueServiceUtil.addVenueDeviceImage(venueDetailImage.getVenueDetailImageId(),_venueId, _deviceType, fileEntry.getUuid(), _aspectRatio);
-							}
-						}else{
-							for(VenueDetailImage VenueDetailImage : venueDetailImages){
-								if(!_deviceType.isEmpty() && !_aspectRatio.isEmpty()){
-									VenueServiceUtil.deleteVenueDetailImage(VenueDetailImage.getVenueDetailImageId(), _serviceContext);
-								}
+						if(!_deviceType.isEmpty() && !_aspectRatio.isEmpty()){
+							List<VenueDetailImage> venueDetailImages = VenueServiceUtil.getVenueDetailImagesByVenueIdandDeviceType(_venueDetailId, _deviceType, _serviceContext);
+							if(venueDetailImages.isEmpty()){
 								VenueDetailImage venueDetailImage = VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
-								if(!_deviceType.isEmpty() && !_aspectRatio.isEmpty()){
+								VenueServiceUtil.addVenueDeviceImage(venueDetailImage.getVenueDetailImageId(),_venueId, _deviceType, fileEntry.getUuid(), _aspectRatio);
+							}else{
+								for(VenueDetailImage VenueDetailImage : venueDetailImages){
+									VenueServiceUtil.deleteVenueDetailImage(VenueDetailImage.getVenueDetailImageId(), _serviceContext);
+									VenueDetailImage venueDetailImage = VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 									VenueServiceUtil.addVenueDeviceImage(venueDetailImage.getVenueDetailImageId(),_venueId, _deviceType, fileEntry.getUuid(), _aspectRatio);
 								}
 							}
+						}else{
+							VenueServiceUtil.addVenueDetailImage(_venueDetailId, fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 						}
+						
 						
 						_venueDetailId =0;
 					}else{
