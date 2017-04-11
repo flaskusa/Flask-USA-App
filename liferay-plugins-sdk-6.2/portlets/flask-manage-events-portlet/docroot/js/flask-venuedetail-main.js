@@ -930,7 +930,7 @@ function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, 
 																});
 											}
 										} else {
-											$(".cssDelImages").remove();
+											$(".cssDelVenueImages").remove();
 											iSelected = false;
 										}
 									});
