@@ -55,6 +55,11 @@ _adCampaignModel.DATA_MODEL = {
 			fieldName : 'displayGeneral'
 		},
 		{
+			name : 'showAlways',
+			type : 'boolean',
+			fieldName : 'showAlways'
+		},
+		{
 			name : 'displayPreEvent',
 			type : 'boolean',
 			fieldName : 'displayPreEvent'

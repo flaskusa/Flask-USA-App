@@ -212,11 +212,20 @@ function createCampaignTable(data, model, grid, menuDivId, actionColText,context
     var actionRenderer = function(row, columnfield, value, defaulthtml, columnproperties) {
 						return '<i class="icon-wrench" style="margin:3px;"></i>'
 	}
+		var checkbox = function(row, columnfield, value, defaulthtml) {
+			if(value == true){
+				return '<input type ="checkbox" jqx-checkbox-check-checked jqx-checkbox-check-checked-custom checked = "checked" style="margin-left:46px;" disabled/>'
+			}else{
+				return '<input type ="checkbox" style="margin-left:46px;" disabled/>'
+			}
+			
+}
     
     var campaignColumns = [{ text: 'Campaign Name', columntype: 'textbox',  datafield: 'campaignName'},
     	 { text: 'Customer Name', datafield: 'customerName', width: '20%'},
     	 { text: 'Display Times', datafield: 'adDisplayTime', width: '30%'},
-    	 { text: 'Frequency per hour', datafield: 'frequencyPerHour', width: '10%'},
+    	 { text: 'Frequency per hour', datafield: 'frequencyPerHour'},
+    	 { text: 'Show Always', datafield: 'showAlways', cellsalign: 'center',  cellsrenderer: checkbox, width: '100px'},
     	 { text: 'Edit',  datafield: 'campaignId', width: '34px', cellsalign: 'center', cellsrenderer: actionRenderer}];
     	
     

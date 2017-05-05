@@ -21,6 +21,9 @@ function adCampaignClickHandlers() {
 		loadEventData("1");
 		setCampaignFormVisible(true);
 		campaignId = 0;
+		$("#optionalFields").hide();
+		$("#showAlways").val(1);
+		$('#frequencyPerHour').val(0);
 	});
 
 	/* Click handler for save button */
@@ -48,6 +51,7 @@ function adCampaignClickHandlers() {
 		}
 	});
 
+	
 	$("#delCampaignTrash").click(function() {
 		var CampaignList = GRID_PARAM_CAMPAIGN.getCheckedIdList();
 		if (CampaignList.length > 0) {
@@ -64,6 +68,19 @@ function adCampaignClickHandlers() {
 	$('.md-closeBtn').click(function(){
 		$('#modal-advertisement').removeClass('md-show');
 	});	
+	
+	$("#showAlways").change(
+			function() {
+				if(this.checked){
+					$("#optionalFields").hide();
+					$("#showAlways").val(1);
+					$('#frequencyPerHour').val(0);
+				}else{
+					$("#optionalFields").show();
+					$("#showAlways").val(0);
+					$('#frequencyPerHour').val("");
+				}
+			});
 }
 
 function setCampaignFormVisible(visible){

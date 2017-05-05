@@ -83,6 +83,13 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 									</select>
 							</div>
 					</div>
+					<div class="form-group" style="margin:15px 0">
+					        <div class='displayAtChk'>
+									<input type ='checkbox' checked='checked' name='showAlways' id = 'showAlways'/>
+									Show Always
+							</div>
+					</div>
+					<div id="optionalFields" style="display : none;">
 					<div class="form-group">
 						<label class="control-label" for="adDisplayTime">Display At</label>
 						<div class="controls" id="adDisplayTime">
@@ -124,6 +131,7 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 						<div id="campaignJqxwidget">
 									<div id="campaignEvents"></div>
 						</div>
+					</div>
 					</div>
 					<div class="form-group">
 						<label class="control-label" for="campainImagesUpload">Campaign Images</label>
