@@ -23,7 +23,7 @@ function adCampaignClickHandlers() {
 		campaignId = 0;
 		$("#optionalFields").hide();
 		$("#showAlways").val(1);
-		$('#frequencyPerHour').val(0);
+		$('#frequencyPerHour').val(30);
 	});
 
 	/* Click handler for save button */
