@@ -44,7 +44,7 @@ public class AdCampaignServiceClp implements AdCampaignService {
 
 		_methodParameterTypes5 = new String[] {
 				"java.lang.String", "long", "boolean", "boolean", "boolean",
-				"boolean", "long", "long", "java.lang.String",
+				"boolean", "long", "long", "java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -52,7 +52,7 @@ public class AdCampaignServiceClp implements AdCampaignService {
 
 		_methodParameterTypes6 = new String[] {
 				"long", "java.lang.String", "long", "boolean", "boolean",
-				"boolean", "boolean", "long", "java.lang.String",
+				"boolean", "boolean", "long", "java.lang.String", "boolean",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -207,7 +207,7 @@ public class AdCampaignServiceClp implements AdCampaignService {
 		java.lang.String campaignName, long customerId, boolean displayGeneral,
 		boolean displayPreEvent, boolean displayDuringEvent,
 		boolean displayPostEvent, long frequencyPerHour, long eventTypeId,
-		java.lang.String events,
+		java.lang.String events, boolean showAlways,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -233,6 +233,8 @@ public class AdCampaignServiceClp implements AdCampaignService {
 						
 					ClpSerializer.translateInput(events),
 						
+					showAlways,
+						
 					ClpSerializer.translateInput(serviceContext)
 					});
 		}
@@ -256,7 +258,7 @@ public class AdCampaignServiceClp implements AdCampaignService {
 		long campaignId, java.lang.String campaignName, long customerId,
 		boolean displayGeneral, boolean displayPreEvent,
 		boolean displayDuringEvent, boolean displayPostEvent,
-		long frequencyPerHour, java.lang.String events,
+		long frequencyPerHour, java.lang.String events, boolean showAlways,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -281,6 +283,8 @@ public class AdCampaignServiceClp implements AdCampaignService {
 					frequencyPerHour,
 						
 					ClpSerializer.translateInput(events),
+						
+					showAlways,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

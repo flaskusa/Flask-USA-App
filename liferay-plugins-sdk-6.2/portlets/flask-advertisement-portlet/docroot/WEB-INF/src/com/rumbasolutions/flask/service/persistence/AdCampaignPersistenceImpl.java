@@ -853,6 +853,7 @@ public class AdCampaignPersistenceImpl extends BasePersistenceImpl<AdCampaign>
 		adCampaignImpl.setImageDesc(adCampaign.getImageDesc());
 		adCampaignImpl.setImageUUID(adCampaign.getImageUUID());
 		adCampaignImpl.setImageGroupId(adCampaign.getImageGroupId());
+		adCampaignImpl.setShowAlways(adCampaign.isShowAlways());
 
 		return adCampaignImpl;
 	}

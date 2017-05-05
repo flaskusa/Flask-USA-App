@@ -30,7 +30,7 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 			StringBuilder sb = new StringBuilder();
 			String sqlSelect = "  select campaignId, campaignName,  flaskads_AdCustomer.customerId, " +
 						" flaskads_AdCustomer.customerName, displayGeneral, displayPreEvent, " +
-						" displayDuringEvent, displayPostEvent, eventTypeId, frequencyPerHour, " +
+						" displayDuringEvent, displayPostEvent, showAlways, eventTypeId, frequencyPerHour, " +
 						"CONCAT_WS(', ', IF(displayGeneral=1, 'General',null) , IF(displayPreEvent=1, 'Pre-Event',null) ," + 
 						"IF(displayDuringEvent = 1, 'During-Event',null) , IF(displayPostEvent = 1, 'Post-Event', null)) " +
 						" as 'adDisplayTime', flaskads_AdCampaign.imageTitle, flaskads_AdCampaign.imageDesc, "
@@ -51,6 +51,7 @@ public class AdCampaignFinderImpl extends BasePersistenceImpl<AdCampaign> implem
 			queryObj.addScalar("displayPreEvent", Type.BOOLEAN);
 			queryObj.addScalar("displayDuringEvent", Type.BOOLEAN);
 			queryObj.addScalar("displayPostEvent", Type.BOOLEAN);
+			queryObj.addScalar("showAlways", Type.BOOLEAN);
 			queryObj.addScalar("eventTypeId", Type.LONG);
 			queryObj.addScalar("frequencyPerHour", Type.LONG);
 			queryObj.addScalar("adDisplayTime", Type.STRING);

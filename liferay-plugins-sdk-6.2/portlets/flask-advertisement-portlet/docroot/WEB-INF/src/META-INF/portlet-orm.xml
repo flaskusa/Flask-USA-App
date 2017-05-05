@@ -29,6 +29,7 @@
 			<basic name="imageDesc" />
 			<basic name="imageUUID" />
 			<basic name="imageGroupId" />
+			<basic name="showAlways" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

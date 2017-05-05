@@ -72,12 +72,12 @@ public class AdCampaignServiceWrapper implements AdCampaignService,
 		java.lang.String campaignName, long customerId, boolean displayGeneral,
 		boolean displayPreEvent, boolean displayDuringEvent,
 		boolean displayPostEvent, long frequencyPerHour, long eventTypeId,
-		java.lang.String events,
+		java.lang.String events, boolean showAlways,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _adCampaignService.addCampaign(campaignName, customerId,
 			displayGeneral, displayPreEvent, displayDuringEvent,
 			displayPostEvent, frequencyPerHour, eventTypeId, events,
-			serviceContext);
+			showAlways, serviceContext);
 	}
 
 	@Override
@@ -85,11 +85,12 @@ public class AdCampaignServiceWrapper implements AdCampaignService,
 		long campaignId, java.lang.String campaignName, long customerId,
 		boolean displayGeneral, boolean displayPreEvent,
 		boolean displayDuringEvent, boolean displayPostEvent,
-		long frequencyPerHour, java.lang.String events,
+		long frequencyPerHour, java.lang.String events, boolean showAlways,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _adCampaignService.updateCampaign(campaignId, campaignName,
 			customerId, displayGeneral, displayPreEvent, displayDuringEvent,
-			displayPostEvent, frequencyPerHour, events, serviceContext);
+			displayPostEvent, frequencyPerHour, events, showAlways,
+			serviceContext);
 	}
 
 	@Override

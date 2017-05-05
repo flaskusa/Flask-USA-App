@@ -76,24 +76,25 @@ public class AdCampaignServiceUtil {
 		java.lang.String campaignName, long customerId, boolean displayGeneral,
 		boolean displayPreEvent, boolean displayDuringEvent,
 		boolean displayPostEvent, long frequencyPerHour, long eventTypeId,
-		java.lang.String events,
+		java.lang.String events, boolean showAlways,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .addCampaign(campaignName, customerId, displayGeneral,
 			displayPreEvent, displayDuringEvent, displayPostEvent,
-			frequencyPerHour, eventTypeId, events, serviceContext);
+			frequencyPerHour, eventTypeId, events, showAlways, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.AdCampaign updateCampaign(
 		long campaignId, java.lang.String campaignName, long customerId,
 		boolean displayGeneral, boolean displayPreEvent,
 		boolean displayDuringEvent, boolean displayPostEvent,
-		long frequencyPerHour, java.lang.String events,
+		long frequencyPerHour, java.lang.String events, boolean showAlways,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateCampaign(campaignId, campaignName, customerId,
 			displayGeneral, displayPreEvent, displayDuringEvent,
-			displayPostEvent, frequencyPerHour, events, serviceContext);
+			displayPostEvent, frequencyPerHour, events, showAlways,
+			serviceContext);
 	}
 
 	public static void deleteCampaign(long campaignId) {

@@ -80,7 +80,6 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 			for (Object obj : campaignList) {
 				serilizeString = JSONFactoryUtil.serialize(obj);
 				tempArray = JSONFactoryUtil.createJSONArray(serilizeString);
-				
 				JSONObject campJSONObj = JSONFactoryUtil.createJSONObject();
 				campJSONObj.put("campaignId", tempArray.getString(0));
 				campJSONObj.put("campaignName", tempArray.getString(1));
@@ -90,13 +89,14 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 				campJSONObj.put("displayPreEvent", tempArray.getString(5));
 				campJSONObj.put("displayDuringEvent", tempArray.getString(6));
 				campJSONObj.put("displayPostEvent", tempArray.getString(7));
-				campJSONObj.put("eventTypeId", tempArray.getString(8));
-				campJSONObj.put("frequencyPerHour", tempArray.getString(9));
-				campJSONObj.put("adDisplayTime", tempArray.getString(10));
-				campJSONObj.put("imageTitle", tempArray.getString(11));
-				campJSONObj.put("imageDesc", tempArray.getString(12));
-				campJSONObj.put("imageUUID", tempArray.getString(13));
-				campJSONObj.put("imageGroupId", tempArray.getString(14));
+				campJSONObj.put("showAlways", tempArray.getString(8));
+				campJSONObj.put("eventTypeId", tempArray.getString(9));
+				campJSONObj.put("frequencyPerHour", tempArray.getString(10));
+				campJSONObj.put("adDisplayTime", tempArray.getString(11));
+				campJSONObj.put("imageTitle", tempArray.getString(12));
+				campJSONObj.put("imageDesc", tempArray.getString(13));
+				campJSONObj.put("imageUUID", tempArray.getString(14));
+				campJSONObj.put("imageGroupId", tempArray.getString(15));
 				
 				campaignJsonArray.put(campJSONObj);
 			}
@@ -151,7 +151,7 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 	@Override
 	public AdCampaign addCampaign(String campaignName, long customerId,
 			  boolean displayGeneral, boolean displayPreEvent, boolean displayDuringEvent,
-			  boolean displayPostEvent, long frequencyPerHour, long eventTypeId, String events, ServiceContext serviceContext) {
+			  boolean displayPostEvent, long frequencyPerHour, long eventTypeId, String events, boolean showAlways, ServiceContext serviceContext) {
 		AdCampaign adCampaign = null;
 		try {
 			adCampaign = AdCampaignLocalServiceUtil
@@ -163,6 +163,7 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 			adCampaign.setDisplayPreEvent(displayPreEvent);
 			adCampaign.setDisplayDuringEvent(displayDuringEvent);
 			adCampaign.setDisplayPostEvent(displayPostEvent);
+			adCampaign.setShowAlways(showAlways);
 			adCampaign.setFrequencyPerHour(frequencyPerHour);
 			adCampaign.setEventTypeId(eventTypeId);
 			adCampaign.setCreatedDate(date);
@@ -199,7 +200,7 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 	@Override
 	public AdCampaign updateCampaign(long campaignId,String campaignName, long customerId,
 			  boolean displayGeneral, boolean displayPreEvent, boolean displayDuringEvent,
-			  boolean displayPostEvent, long frequencyPerHour, String events, ServiceContext serviceContext) {
+			  boolean displayPostEvent, long frequencyPerHour, String events, boolean showAlways, ServiceContext serviceContext) {
 		AdCampaign adCampaign = null;
 		try {
 			adCampaign = AdCampaignLocalServiceUtil.getAdCampaign(campaignId);
@@ -210,6 +211,7 @@ public class AdCampaignServiceImpl extends AdCampaignServiceBaseImpl {
 			adCampaign.setDisplayPreEvent(displayPreEvent);
 			adCampaign.setDisplayDuringEvent(displayDuringEvent);
 			adCampaign.setDisplayPostEvent(displayPostEvent);
+			adCampaign.setShowAlways(showAlways);
 			adCampaign.setFrequencyPerHour(frequencyPerHour);
 			adCampaign.setModifiedDate(date);
 			adCampaign.setUserId(serviceContext.getUserId());

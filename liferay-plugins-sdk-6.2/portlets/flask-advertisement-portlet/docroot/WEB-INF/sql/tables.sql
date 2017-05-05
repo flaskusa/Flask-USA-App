@@ -14,7 +14,8 @@ create table flaskads_AdCampaign (
 	imageTitle VARCHAR(100) null,
 	imageDesc VARCHAR(255) null,
 	imageUUID VARCHAR(75) null,
-	imageGroupId LONG
+	imageGroupId LONG,
+	showAlways BOOLEAN
 );
 
 create table flaskads_AdCustomer (

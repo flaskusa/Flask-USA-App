@@ -93,14 +93,14 @@ public class AdCampaignServiceSoap {
 		java.lang.String campaignName, long customerId, boolean displayGeneral,
 		boolean displayPreEvent, boolean displayDuringEvent,
 		boolean displayPostEvent, long frequencyPerHour, long eventTypeId,
-		java.lang.String events,
+		java.lang.String events, boolean showAlways,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.AdCampaign returnValue = AdCampaignServiceUtil.addCampaign(campaignName,
 					customerId, displayGeneral, displayPreEvent,
 					displayDuringEvent, displayPostEvent, frequencyPerHour,
-					eventTypeId, events, serviceContext);
+					eventTypeId, events, showAlways, serviceContext);
 
 			return com.rumbasolutions.flask.model.AdCampaignSoap.toSoapModel(returnValue);
 		}
@@ -115,14 +115,14 @@ public class AdCampaignServiceSoap {
 		long campaignId, java.lang.String campaignName, long customerId,
 		boolean displayGeneral, boolean displayPreEvent,
 		boolean displayDuringEvent, boolean displayPostEvent,
-		long frequencyPerHour, java.lang.String events,
+		long frequencyPerHour, java.lang.String events, boolean showAlways,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.AdCampaign returnValue = AdCampaignServiceUtil.updateCampaign(campaignId,
 					campaignName, customerId, displayGeneral, displayPreEvent,
 					displayDuringEvent, displayPostEvent, frequencyPerHour,
-					events, serviceContext);
+					events, showAlways, serviceContext);
 
 			return com.rumbasolutions.flask.model.AdCampaignSoap.toSoapModel(returnValue);
 		}

@@ -81,9 +81,10 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 			{ "imageTitle", Types.VARCHAR },
 			{ "imageDesc", Types.VARCHAR },
 			{ "imageUUID", Types.VARCHAR },
-			{ "imageGroupId", Types.BIGINT }
+			{ "imageGroupId", Types.BIGINT },
+			{ "showAlways", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskads_AdCampaign (campaignId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,campaignName VARCHAR(100) null,customerId LONG,displayGeneral BOOLEAN,displayPreEvent BOOLEAN,displayDuringEvent BOOLEAN,displayPostEvent BOOLEAN,frequencyPerHour LONG,eventTypeId LONG,imageTitle VARCHAR(100) null,imageDesc VARCHAR(255) null,imageUUID VARCHAR(75) null,imageGroupId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table flaskads_AdCampaign (campaignId LONG not null primary key,userId LONG,createdDate DATE null,modifiedDate DATE null,campaignName VARCHAR(100) null,customerId LONG,displayGeneral BOOLEAN,displayPreEvent BOOLEAN,displayDuringEvent BOOLEAN,displayPostEvent BOOLEAN,frequencyPerHour LONG,eventTypeId LONG,imageTitle VARCHAR(100) null,imageDesc VARCHAR(255) null,imageUUID VARCHAR(75) null,imageGroupId LONG,showAlways BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table flaskads_AdCampaign";
 	public static final String ORDER_BY_JPQL = " ORDER BY adCampaign.campaignName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskads_AdCampaign.campaignName ASC";
@@ -131,6 +132,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		model.setImageDesc(soapModel.getImageDesc());
 		model.setImageUUID(soapModel.getImageUUID());
 		model.setImageGroupId(soapModel.getImageGroupId());
+		model.setShowAlways(soapModel.getShowAlways());
 
 		return model;
 	}
@@ -211,6 +213,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		attributes.put("imageDesc", getImageDesc());
 		attributes.put("imageUUID", getImageUUID());
 		attributes.put("imageGroupId", getImageGroupId());
+		attributes.put("showAlways", getShowAlways());
 
 		return attributes;
 	}
@@ -312,6 +315,12 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 
 		if (imageGroupId != null) {
 			setImageGroupId(imageGroupId);
+		}
+
+		Boolean showAlways = (Boolean)attributes.get("showAlways");
+
+		if (showAlways != null) {
+			setShowAlways(showAlways);
 		}
 	}
 
@@ -555,6 +564,22 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		_imageGroupId = imageGroupId;
 	}
 
+	@JSON
+	@Override
+	public boolean getShowAlways() {
+		return _showAlways;
+	}
+
+	@Override
+	public boolean isShowAlways() {
+		return _showAlways;
+	}
+
+	@Override
+	public void setShowAlways(boolean showAlways) {
+		_showAlways = showAlways;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -602,6 +627,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		adCampaignImpl.setImageDesc(getImageDesc());
 		adCampaignImpl.setImageUUID(getImageUUID());
 		adCampaignImpl.setImageGroupId(getImageGroupId());
+		adCampaignImpl.setShowAlways(getShowAlways());
 
 		adCampaignImpl.resetOriginalValues();
 
@@ -733,12 +759,14 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 
 		adCampaignCacheModel.imageGroupId = getImageGroupId();
 
+		adCampaignCacheModel.showAlways = getShowAlways();
+
 		return adCampaignCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{campaignId=");
 		sb.append(getCampaignId());
@@ -772,6 +800,8 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 		sb.append(getImageUUID());
 		sb.append(", imageGroupId=");
 		sb.append(getImageGroupId());
+		sb.append(", showAlways=");
+		sb.append(getShowAlways());
 		sb.append("}");
 
 		return sb.toString();
@@ -779,7 +809,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.AdCampaign");
@@ -849,6 +879,10 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 			"<column><column-name>imageGroupId</column-name><column-value><![CDATA[");
 		sb.append(getImageGroupId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>showAlways</column-name><column-value><![CDATA[");
+		sb.append(getShowAlways());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -878,6 +912,7 @@ public class AdCampaignModelImpl extends BaseModelImpl<AdCampaign>
 	private String _imageDesc;
 	private String _imageUUID;
 	private long _imageGroupId;
+	private boolean _showAlways;
 	private long _columnBitmask;
 	private AdCampaign _escapedModel;
 }

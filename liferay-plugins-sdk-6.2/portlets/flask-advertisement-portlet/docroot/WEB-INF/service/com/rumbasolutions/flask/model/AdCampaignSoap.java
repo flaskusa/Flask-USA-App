@@ -47,6 +47,7 @@ public class AdCampaignSoap implements Serializable {
 		soapModel.setImageDesc(model.getImageDesc());
 		soapModel.setImageUUID(model.getImageUUID());
 		soapModel.setImageGroupId(model.getImageGroupId());
+		soapModel.setShowAlways(model.getShowAlways());
 
 		return soapModel;
 	}
@@ -243,6 +244,18 @@ public class AdCampaignSoap implements Serializable {
 		_imageGroupId = imageGroupId;
 	}
 
+	public boolean getShowAlways() {
+		return _showAlways;
+	}
+
+	public boolean isShowAlways() {
+		return _showAlways;
+	}
+
+	public void setShowAlways(boolean showAlways) {
+		_showAlways = showAlways;
+	}
+
 	private long _campaignId;
 	private long _userId;
 	private Date _createdDate;
@@ -259,4 +272,5 @@ public class AdCampaignSoap implements Serializable {
 	private String _imageDesc;
 	private String _imageUUID;
 	private long _imageGroupId;
+	private boolean _showAlways;
 }

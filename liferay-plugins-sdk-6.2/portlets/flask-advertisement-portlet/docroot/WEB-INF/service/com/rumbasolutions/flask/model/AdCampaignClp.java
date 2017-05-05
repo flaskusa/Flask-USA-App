@@ -91,6 +91,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		attributes.put("imageDesc", getImageDesc());
 		attributes.put("imageUUID", getImageUUID());
 		attributes.put("imageGroupId", getImageGroupId());
+		attributes.put("showAlways", getShowAlways());
 
 		return attributes;
 	}
@@ -192,6 +193,12 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 
 		if (imageGroupId != null) {
 			setImageGroupId(imageGroupId);
+		}
+
+		Boolean showAlways = (Boolean)attributes.get("showAlways");
+
+		if (showAlways != null) {
+			setShowAlways(showAlways);
 		}
 	}
 
@@ -598,6 +605,34 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		}
 	}
 
+	@Override
+	public boolean getShowAlways() {
+		return _showAlways;
+	}
+
+	@Override
+	public boolean isShowAlways() {
+		return _showAlways;
+	}
+
+	@Override
+	public void setShowAlways(boolean showAlways) {
+		_showAlways = showAlways;
+
+		if (_adCampaignRemoteModel != null) {
+			try {
+				Class<?> clazz = _adCampaignRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setShowAlways", boolean.class);
+
+				method.invoke(_adCampaignRemoteModel, showAlways);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getAdCampaignRemoteModel() {
 		return _adCampaignRemoteModel;
 	}
@@ -683,6 +718,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		clone.setImageDesc(getImageDesc());
 		clone.setImageUUID(getImageUUID());
 		clone.setImageGroupId(getImageGroupId());
+		clone.setShowAlways(getShowAlways());
 
 		return clone;
 	}
@@ -733,7 +769,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{campaignId=");
 		sb.append(getCampaignId());
@@ -767,6 +803,8 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 		sb.append(getImageUUID());
 		sb.append(", imageGroupId=");
 		sb.append(getImageGroupId());
+		sb.append(", showAlways=");
+		sb.append(getShowAlways());
 		sb.append("}");
 
 		return sb.toString();
@@ -774,7 +812,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(52);
+		StringBundler sb = new StringBundler(55);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.AdCampaign");
@@ -844,6 +882,10 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 			"<column><column-name>imageGroupId</column-name><column-value><![CDATA[");
 		sb.append(getImageGroupId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>showAlways</column-name><column-value><![CDATA[");
+		sb.append(getShowAlways());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -867,6 +909,7 @@ public class AdCampaignClp extends BaseModelImpl<AdCampaign>
 	private String _imageDesc;
 	private String _imageUUID;
 	private long _imageGroupId;
+	private boolean _showAlways;
 	private BaseModel<?> _adCampaignRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

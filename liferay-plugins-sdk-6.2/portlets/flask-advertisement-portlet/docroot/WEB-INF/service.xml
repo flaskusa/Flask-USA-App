@@ -65,6 +65,7 @@
         <column name="imageDesc" type="String" />
         <column name="imageUUID" type="String" />
         <column name="imageGroupId" type="long" />
+        <column name="showAlways" type="boolean"></column>
 		<order by="asc">
 			<order-column name="campaignName" />
 		</order>

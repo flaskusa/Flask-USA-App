@@ -38,7 +38,7 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(33);
+		StringBundler sb = new StringBundler(35);
 
 		sb.append("{campaignId=");
 		sb.append(campaignId);
@@ -72,6 +72,8 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		sb.append(imageUUID);
 		sb.append(", imageGroupId=");
 		sb.append(imageGroupId);
+		sb.append(", showAlways=");
+		sb.append(showAlways);
 		sb.append("}");
 
 		return sb.toString();
@@ -135,6 +137,7 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		}
 
 		adCampaignImpl.setImageGroupId(imageGroupId);
+		adCampaignImpl.setShowAlways(showAlways);
 
 		adCampaignImpl.resetOriginalValues();
 
@@ -159,6 +162,7 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		imageDesc = objectInput.readUTF();
 		imageUUID = objectInput.readUTF();
 		imageGroupId = objectInput.readLong();
+		showAlways = objectInput.readBoolean();
 	}
 
 	@Override
@@ -206,6 +210,7 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 		}
 
 		objectOutput.writeLong(imageGroupId);
+		objectOutput.writeBoolean(showAlways);
 	}
 
 	public long campaignId;
@@ -224,4 +229,5 @@ public class AdCampaignCacheModel implements CacheModel<AdCampaign>,
 	public String imageDesc;
 	public String imageUUID;
 	public long imageGroupId;
+	public boolean showAlways;
 }

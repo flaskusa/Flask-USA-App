@@ -331,6 +331,27 @@ public interface AdCampaignModel extends BaseModel<AdCampaign> {
 	 */
 	public void setImageGroupId(long imageGroupId);
 
+	/**
+	 * Returns the show always of this ad campaign.
+	 *
+	 * @return the show always of this ad campaign
+	 */
+	public boolean getShowAlways();
+
+	/**
+	 * Returns <code>true</code> if this ad campaign is show always.
+	 *
+	 * @return <code>true</code> if this ad campaign is show always; <code>false</code> otherwise
+	 */
+	public boolean isShowAlways();
+
+	/**
+	 * Sets whether this ad campaign is show always.
+	 *
+	 * @param showAlways the show always of this ad campaign
+	 */
+	public void setShowAlways(boolean showAlways);
+
 	@Override
 	public boolean isNew();
 

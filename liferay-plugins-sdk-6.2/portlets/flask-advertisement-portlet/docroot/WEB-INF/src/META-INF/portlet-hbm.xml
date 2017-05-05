@@ -26,6 +26,7 @@
 		<property name="imageDesc" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="imageUUID" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="imageGroupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="showAlways" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.AdCustomerImpl" table="flaskads_AdCustomer">
 		<cache usage="read-write" />

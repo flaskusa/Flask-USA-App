@@ -76,14 +76,14 @@ public interface AdCampaignService extends BaseService, InvokableService {
 		java.lang.String campaignName, long customerId, boolean displayGeneral,
 		boolean displayPreEvent, boolean displayDuringEvent,
 		boolean displayPostEvent, long frequencyPerHour, long eventTypeId,
-		java.lang.String events,
+		java.lang.String events, boolean showAlways,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public com.rumbasolutions.flask.model.AdCampaign updateCampaign(
 		long campaignId, java.lang.String campaignName, long customerId,
 		boolean displayGeneral, boolean displayPreEvent,
 		boolean displayDuringEvent, boolean displayPostEvent,
-		long frequencyPerHour, java.lang.String events,
+		long frequencyPerHour, java.lang.String events, boolean showAlways,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteCampaign(long campaignId);

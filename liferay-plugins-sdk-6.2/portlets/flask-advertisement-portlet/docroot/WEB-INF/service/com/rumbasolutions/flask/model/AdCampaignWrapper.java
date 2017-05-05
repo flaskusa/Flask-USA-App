@@ -65,6 +65,7 @@ public class AdCampaignWrapper implements AdCampaign, ModelWrapper<AdCampaign> {
 		attributes.put("imageDesc", getImageDesc());
 		attributes.put("imageUUID", getImageUUID());
 		attributes.put("imageGroupId", getImageGroupId());
+		attributes.put("showAlways", getShowAlways());
 
 		return attributes;
 	}
@@ -166,6 +167,12 @@ public class AdCampaignWrapper implements AdCampaign, ModelWrapper<AdCampaign> {
 
 		if (imageGroupId != null) {
 			setImageGroupId(imageGroupId);
+		}
+
+		Boolean showAlways = (Boolean)attributes.get("showAlways");
+
+		if (showAlways != null) {
+			setShowAlways(showAlways);
 		}
 	}
 
@@ -569,6 +576,36 @@ public class AdCampaignWrapper implements AdCampaign, ModelWrapper<AdCampaign> {
 	@Override
 	public void setImageGroupId(long imageGroupId) {
 		_adCampaign.setImageGroupId(imageGroupId);
+	}
+
+	/**
+	* Returns the show always of this ad campaign.
+	*
+	* @return the show always of this ad campaign
+	*/
+	@Override
+	public boolean getShowAlways() {
+		return _adCampaign.getShowAlways();
+	}
+
+	/**
+	* Returns <code>true</code> if this ad campaign is show always.
+	*
+	* @return <code>true</code> if this ad campaign is show always; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isShowAlways() {
+		return _adCampaign.isShowAlways();
+	}
+
+	/**
+	* Sets whether this ad campaign is show always.
+	*
+	* @param showAlways the show always of this ad campaign
+	*/
+	@Override
+	public void setShowAlways(boolean showAlways) {
+		_adCampaign.setShowAlways(showAlways);
 	}
 
 	@Override

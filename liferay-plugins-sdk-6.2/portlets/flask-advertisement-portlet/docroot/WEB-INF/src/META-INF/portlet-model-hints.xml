@@ -45,6 +45,7 @@
 		</field>
 		<field name="imageUUID" type="String" />
 		<field name="imageGroupId" type="long" />
+		<field name="showAlways" type="boolean" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.AdCustomer">
 		<field name="customerId" type="long" />
