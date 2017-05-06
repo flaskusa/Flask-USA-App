@@ -112,7 +112,31 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 		HashMap<Integer, JSONObject> imageMap = new HashMap<Integer, JSONObject>();
 		
 		try{
-			eventIdList = FlaskUtil.sanitizeIdList(eventIdList);
+			
+			campaignList = AdCampaignFinderUtil.getAdCampaginListwithAddress();
+			for (Object obj : campaignList) {
+				serilizeString = JSONFactoryUtil.serialize(obj);
+				tempArray = JSONFactoryUtil.createJSONArray(serilizeString);
+				if(Boolean.parseBoolean(tempArray.getString(8)) == true){
+					Integer campaignId = tempArray.getInt(0);
+					Integer frequencyPerHour = tempArray.getInt(10);
+					JSONArray arr = campaignImageMap.get(campaignId);
+					JSONObject imgJson = getImageJson1(tempArray);
+					uniqueImageArray.put(imgJson);
+					if(arr == null){
+						arr = JSONFactoryUtil.createJSONArray();
+						arr.put(imgJson);
+					}else{
+						arr.put(imgJson);
+					}
+					campaignImageMap.put(campaignId, arr);
+					
+					campaignFrequencyMap.put(campaignId, frequencyPerHour);
+				}
+				
+			}
+			
+			/*eventIdList = FlaskUtil.sanitizeIdList(eventIdList);
 			if(eventIdList.isEmpty()) {
 				return imageJson;
 			}
@@ -137,7 +161,7 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 					
 				campaignFrequencyMap.put(campaignId, frequencyPerHour);
 				
-			}
+			}*/
 			campaignFrequencyMap = setCampaignWeight(campaignFrequencyMap);			
 			LinkedHashMap<Integer, Integer> sortedByFrequencyMap = (LinkedHashMap<Integer, Integer>) FlaskUtil.sortByValue(campaignFrequencyMap);
 			boolean processedAll = false;
@@ -219,6 +243,35 @@ public class CampaignEventServiceImpl extends CampaignEventServiceBaseImpl {
 		campJSONObj.put("email", tempArray.getString(17));
 		campJSONObj.put("url", tempArray.getString(18));
 		campJSONObj.put("phone", tempArray.getString(19));
+		return campJSONObj;
+	}
+	
+	private JSONObject getImageJson1(JSONArray tempArray) {
+		JSONObject campJSONObj = JSONFactoryUtil.createJSONObject();
+		
+		campJSONObj.put("campaignId", tempArray.getLong(0));
+		campJSONObj.put("campaignName", tempArray.getString(1));
+		campJSONObj.put("customerName", tempArray.getString(3));
+		campJSONObj.put("frequencyPerHour", tempArray.getLong(10));
+		
+		campJSONObj.put("imageTitle", tempArray.getString(12));
+		campJSONObj.put("imageDesc", tempArray.getString(13));
+		campJSONObj.put("imageUUID", tempArray.getString(14));
+		campJSONObj.put("imageGroupId", tempArray.getLong(15));
+		
+		campJSONObj.put("addrLine1", tempArray.getString(16));
+		campJSONObj.put("addrLine2", tempArray.getString(17));
+		campJSONObj.put("city", tempArray.getString(18));
+		campJSONObj.put("State", tempArray.getString(19));
+		campJSONObj.put("zipCode", tempArray.getString(20));
+		campJSONObj.put("email", tempArray.getString(21));
+		campJSONObj.put("url", tempArray.getString(22));
+		campJSONObj.put("phone", tempArray.getString(23));
+		
+		campJSONObj.put("fullScreenTitle", tempArray.getString(24));
+		campJSONObj.put("fullScreenDesc", tempArray.getString(25));
+		campJSONObj.put("fullScreenGroupId", tempArray.getLong(26));
+		campJSONObj.put("fullScreenUUID", tempArray.getString(27));
 		return campJSONObj;
 	}
 }

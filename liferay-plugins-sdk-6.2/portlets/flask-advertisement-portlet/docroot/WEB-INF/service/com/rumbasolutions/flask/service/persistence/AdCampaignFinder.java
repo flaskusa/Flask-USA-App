@@ -20,6 +20,8 @@ package com.rumbasolutions.flask.service.persistence;
 public interface AdCampaignFinder {
 	public java.util.List getAdCampaginList();
 
+	public java.util.List getAdCampaginListwithAddress();
+
 	public java.util.List getCampaignDetailsForEvents(
 		java.lang.String eventList);
 }

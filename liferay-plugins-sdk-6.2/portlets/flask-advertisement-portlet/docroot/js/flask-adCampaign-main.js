@@ -23,7 +23,6 @@ function adCampaignClickHandlers() {
 		campaignId = 0;
 		$("#optionalFields").hide();
 		$("#showAlways").val(1);
-		$('#frequencyPerHour').val(30);
 	});
 
 	/* Click handler for save button */
@@ -74,11 +73,9 @@ function adCampaignClickHandlers() {
 				if(this.checked){
 					$("#optionalFields").hide();
 					$("#showAlways").val(1);
-					$('#frequencyPerHour').val(0);
 				}else{
 					$("#optionalFields").show();
 					$("#showAlways").val(0);
-					$('#frequencyPerHour').val("");
 				}
 			});
 }
@@ -205,6 +202,13 @@ function editCampaign(rowData) {
 					model, data) {
 			});
 	$("#adCampaignDataTable").hide();
+	if(rowData.showAlways == true){
+		$("#showAlways").attr("checked", true);
+		$("#optionalFields").hide();
+	}else if(rowData.showAlways == false){
+		$("#showAlways").attr("checked", false);
+		$("#optionalFields").show();
+	}
 	prepareEventTypeDropdown('eventTypeId',rowData.eventTypeId);
 	prepareCustomerDropDownList('customerId', rowData.customerId);
 	fnGetCampaignImages(rowData.campaignId,$("#campaignDetailGallery"), true);

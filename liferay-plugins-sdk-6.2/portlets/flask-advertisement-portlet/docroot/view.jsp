@@ -83,6 +83,12 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 									</select>
 							</div>
 					</div>
+					<div class="form-group">
+						<label class="control-label" for="frequencyPerHour">Frequency per hour:</label>
+						<div class="controls">
+							<input name="frequencyPerHour" id="frequencyPerHour" class="form-control" type="text">
+						</div>
+					</div>
 					<div class="form-group" style="margin:15px 0">
 					        <div class='displayAtChk'>
 									<input type ='checkbox' checked='checked' name='showAlways' id = 'showAlways'/>
@@ -111,12 +117,7 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 							</div>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="control-label" for="frequencyPerHour">Frequency per hour:</label>
-						<div class="controls">
-							<input name="frequencyPerHour" id="frequencyPerHour" class="form-control" type="text">
-						</div>
-					</div>
+					
 					
 					<div class="form-group">
 						<label class="control-label" for="eventTypeId">Event Type:</label>

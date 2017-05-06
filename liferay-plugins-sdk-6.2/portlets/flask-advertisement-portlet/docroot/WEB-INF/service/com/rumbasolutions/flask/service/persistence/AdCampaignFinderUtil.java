@@ -25,6 +25,10 @@ public class AdCampaignFinderUtil {
 		return getFinder().getAdCampaginList();
 	}
 
+	public static java.util.List getAdCampaginListwithAddress() {
+		return getFinder().getAdCampaginListwithAddress();
+	}
+
 	public static java.util.List getCampaignDetailsForEvents(
 		java.lang.String eventList) {
 		return getFinder().getCampaignDetailsForEvents(eventList);

@@ -95,6 +95,7 @@ public class ManageCampaignPortletAction extends MVCPortlet {
 						AdCampaignServiceUtil.addCampaignImage(_campaignId,fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 					}else{
 						fileEntry = FlaskDocLibUtil.addFileEntry(_campaignFullScreen, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
+						System.out.println("fileEntry.getGroupId()--- "+fileEntry.getGroupId());
 						AdCampaign adCampaign = AdCampaignServiceUtil.getCampaign(_campaignId);
 						adCampaign.setImageTitle(fileTitle);
 						adCampaign.setImageDesc(fileDesc);
