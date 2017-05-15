@@ -98,8 +98,8 @@
                     <table class="iw-fixed-title">
                         <tr>
                             <td class="iw-fixed-title">
-                                <div class="parent_div">
-                                    <div class="text_div">{{parameter.infoTitle}}</div>
+                                <div class="parent_div" >
+                                    <div class="text_div tungsten">{{parameter.infoTitle}}</div>
                                 </div>
                             </td>
                             <td rowspan="2" class="parkingInfo">
@@ -110,7 +110,7 @@
                         </tr>
                         <tr>
                             <td class="iw-fixed-title">
-                                <div class="iw-sub-title">
+                                <div class="iw-sub-title tungsten">
                                     {{parameter.subTitle}}
                                 </div>
                             </td>
@@ -123,16 +123,16 @@
                             <tr>
                                 <td colspan="2">
                                     <div class="alignLeft">
-                                        <span class="iw-sub-title1" ng-bind="parameter.addrLine1"> </span>
-                                        <div class="biggerFont"> {{parameter.cost}}</div>
-                                        <div class="emailText smallerFont"> {{parameter.infoShortDesc}}</div>
-                                        <div ng-bind-html="parameter.infoDesc" class="placedetail_div"> </div>
+                                        <span class="iw-sub-title1 tungsten" ng-bind="parameter.addrLine1"> </span>
+                                        <div class="biggerFont tungsten"> {{parameter.cost}}</div>
+                                        <div class="emailText smallerFont tungsten"> {{parameter.infoShortDesc}}</div>
+                                        <div ng-bind-html="parameter.infoDesc" class="placedetail_div tungsten"> </div>
                                     </div>
                                 </td>
                             </tr>
                             <tr>
                                 <td class="iw-content-icon"><img src="img/map_icons/take_me_there.svg"> </td>
-                                <td class="iw-content-text"> <a id="iwTakeMeThere"> Take me there </a> </td>
+                                <td class="iw-content-text"> <a id="iwTakeMeThere"><span class="tungsten">Take me there </span></a> </td>
                             </tr>
                         </table>
                     </div>
