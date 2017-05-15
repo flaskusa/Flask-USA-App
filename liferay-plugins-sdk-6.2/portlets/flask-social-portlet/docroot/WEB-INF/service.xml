@@ -107,6 +107,10 @@
 		<finder name="deviceToken" return-type="Collection">
 			<finder-column name="deviceToken" />
 		</finder>
+        <finder name="UserIdDeviceToken" return-type="Collection">
+            <finder-column name="userId"></finder-column>
+            <finder-column name="deviceToken"></finder-column>
+        </finder>
     </entity>
     <entity name="DeviceAwsEndpoint" local-service="true" cache-enabled="false">
         <column name="deviceEndPointId" type="long" primary="true"></column>        
