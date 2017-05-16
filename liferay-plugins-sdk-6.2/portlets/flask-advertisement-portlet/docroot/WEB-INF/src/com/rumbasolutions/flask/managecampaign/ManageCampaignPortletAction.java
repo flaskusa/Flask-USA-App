@@ -3,6 +3,7 @@ package com.rumbasolutions.flask.managecampaign;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.UUID;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -95,7 +96,6 @@ public class ManageCampaignPortletAction extends MVCPortlet {
 						AdCampaignServiceUtil.addCampaignImage(_campaignId,fileTitle, fileDesc, fileEntry.getUuid(), fileEntry.getGroupId(), _serviceContext);
 					}else{
 						fileEntry = FlaskDocLibUtil.addFileEntry(_campaignFullScreen, fileName, fileTitle, fileDesc, storeFile, mimeType, _serviceContext);
-						System.out.println("fileEntry.getGroupId()--- "+fileEntry.getGroupId());
 						AdCampaign adCampaign = AdCampaignServiceUtil.getCampaign(_campaignId);
 						adCampaign.setImageTitle(fileTitle);
 						adCampaign.setImageDesc(fileDesc);
@@ -151,6 +151,7 @@ public class ManageCampaignPortletAction extends MVCPortlet {
 		for (FileItem item : formItems){
 			if(item.getFieldName().contentEquals(CAMPAIGN_ID_QSTR)){
 				campaingId = Long.parseLong(item.getString());
+				bIsFullScreen = false;
 				break;
 			}
 			if(item.getFieldName().contentEquals(CAMPAIGN_ID_FS_QSTR)){
@@ -158,7 +159,6 @@ public class ManageCampaignPortletAction extends MVCPortlet {
 				bIsFullScreen = true;
 				break;
 			}
-			
 			
 		}
 		return campaingId;

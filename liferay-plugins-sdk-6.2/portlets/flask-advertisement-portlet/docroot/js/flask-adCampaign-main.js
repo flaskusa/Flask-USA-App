@@ -83,8 +83,8 @@ function adCampaignClickHandlers() {
 function setCampaignFormVisible(visible){
 	if(visible == true){
 		$("#adCampaignFormContainer").show();
-		fnBuildCampaignUpload($("#campainImagesUpload"))
-		buildFullScreenImageUpload($("#campainFullScreenImagesUpload"));
+		setTimeout(fnBuildCampaignUpload($("#campainImagesUpload")), 2000);
+		setTimeout(buildFullScreenImageUpload($("#campainFullScreenImagesUpload")), 4000);
 		adCampaignForm.show();
 	}else{
 		$("#adCampaignFormContainer").hide();
