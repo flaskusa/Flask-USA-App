@@ -43,11 +43,17 @@
      inkscape:current-layer="Layer_1" /><style
      type="text/css"
      id="style10">
+      @font-face {
+	      font-family: 'Tungsten-Bold';
+	      src: url('../lib/ionic/fonts/Tungsten-Bold.woff') format('woff');
+	      font-weight: bold;
+	      font-style: normal;
+      }
 	.st0{fill:#FFFFFF;stroke:#F7941E;stroke-width:3;stroke-miterlimit:10;}
 	.st1{fill:none;}
-	.st2{font-family:'Tungsten-Medium';}
+	.st2{font-family:'Tungsten-Bold';}
 	.st3{font-size:90px;}
-	.st4{font-family:'Tungsten-Semibold';}
+	.st4{font-family:'Tungsten-Bold';}
 </style><polygon
      points="130.9,176.7 70.9,176.7 99.6,371 "
      id="polygon12"
@@ -81,10 +87,10 @@
        x="100.08745"
        y="50.517761"
        id="tspan20"
-       style="font-size:37.12379074px;font-family:Tungsten-Medium;stroke-width:0.41248643">$</tspan><tspan
+       style="font-size:37.12379074px;font-family:Tungsten-Bold;stroke-width:0.41248643">$</tspan><tspan
        class="st4 st3"
        x="112.99828"
        y="50.517761"
        id="tspan22"
-       style="font-size:37.12379074px;font-family:Tungsten-Semibold;stroke-width:0.41248643">30+</tspan></text>
+       style="font-size:37.12379074px;font-family:Tungsten-Bold;stroke-width:0.41248643">30+</tspan></text>
 </svg>

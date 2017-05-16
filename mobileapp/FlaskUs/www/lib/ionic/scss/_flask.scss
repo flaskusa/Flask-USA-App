@@ -97,6 +97,13 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Tungsten-Bold';
+	src: url('../lib/ionic/fonts/Tungsten-Bold.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
     font-family: 'Avenir Next';
 }

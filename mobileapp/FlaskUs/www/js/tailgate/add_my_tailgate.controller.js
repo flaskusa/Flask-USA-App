@@ -169,7 +169,9 @@
                         longitude: currlongitude
                     },
                     zoom: 16,
-                    markers: [],
+                    markers: [{
+                        options: { icon: 'img/map_icons/large_marker.svg' }
+                    }],
                     events: {
                         click: function (map, eventName, originalEventArgs) {
                             var e = originalEventArgs[0];
@@ -180,6 +182,8 @@
                                     latitude: lat,
                                     longitude: lon
                                 },
+                                icon: 'img/map_icons/large_marker.svg',
+                                options: { icon: 'img/map_icons/large_marker.svg' },
                                 showWindow: true
                             };
                             $scope.map.markers.push(marker);

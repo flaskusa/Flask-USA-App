@@ -9,19 +9,23 @@
     </ion-nav-bar>
     <ion-content class="">
         <div class="google_map_div">
-                <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="options">
-                    <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" idkey="m.id">
-                        <ui-gmap-window options="windowOpt" show="windowOpt.show" closeClick="closeWindow">
-                            <div class="" id="locationMarker" style="padding: 0px 14px 16px 14px;">
-                                <div id="LocationMarkerInfoHeading" style="text-align:center;"><b>Taligate Location</b></div>
-                                <div id="markercontent" class="location-marker" style="height: 65px; overflow: auto;">
-                                    <b>Name:</b> {{taligateMarkers.name}}<br />
-                                    <b>Description:</b> {{taligateMarkers.description}}
-                                </div>
+            <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="options" data-tap-disabled="true">
+                <ui-gmap-marker ng-repeat="m in map.marker" coords="m.coords" options="m.options" idkey="m.id" events="m.events">
+                    <ui-gmap-window options="windowOpt" show="windowOpt.show" closeClick="closeWindow">
+                        <div id="locationMarker">
+                            <div id="LocationMarkerInfoHeading" style="text-align:center;"><b>Taligate Location</b></div>
+                            <div id="markercontent" class="location-marker" style="height: 68px; overflow: auto; margin: 0px -16px -16px -16px; padding: 2px 10px 2px 10px;">
+                                <b>Name:</b> {{taligateMarkers.name}}<br />
+                                <b>Description:</b> {{taligateMarkers.description}}<br />
+                                <b><a class="positive" ng-click="$root.takemeThere(this);" style=" float: left; color: black;">
+                                        <img src="img/map_icons/take_me_there.svg" alt="Take-Me-There" style="display: block;width: 25px;float: left;margin-right: 10px;">TAKE YOU THERE
+                                    </a>
+                                </b>
                             </div>
-                        </ui-gmap-window>
-                    </ui-gmap-marker>
-                </ui-gmap-google-map>
+                        </div>
+                    </ui-gmap-window>
+                </ui-gmap-marker>
+            </ui-gmap-google-map>
         </div>
     </ion-content>
 </ion-view>
