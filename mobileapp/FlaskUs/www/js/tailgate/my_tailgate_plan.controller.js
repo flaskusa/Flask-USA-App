@@ -136,7 +136,7 @@
         var userDetail = $cookies.getObject('CurrentUser');
         $scope.loggedInUserId = userDetail.data.userId;
         $scope.curritemAssignedUserName = userDetail.data.firstName + " " + userDetail.data.lastName;
-        $scope.curritemAssignedUserId = JSON.stringify(userDetail.data.itemAssignedUserId);
+        $scope.curritemAssignedUserId = JSON.stringify(userDetail.data.userId);
         $scope.currusercompanyId = userDetail.data.companyId;
         var itemArray;
 
@@ -151,6 +151,7 @@
             }
         }
         /*Save supply Item in selected supply List */
+        var currSuppliedItemId;
         $scope.saveTailgateSupplyItem = function (listItemName) {
             if (listItemName != undefined && listItemName != "") {
                 if ($scope.taigateSupplyList.supplyListId > 0) {
@@ -168,12 +169,22 @@
                             supplyListItemName: response.supplyListItemName,
                             tailgateSupplyItemId: response.tailgateSupplyItemId
                         });
+                        currSuppliedItemId=response.tailgateSupplyItemId;
                     });
                 }
-                TailgateService.updateTailgateSupplyItem($scope.allMyTailgateItems.tailgateSupplyItemId, $scope.allMyTailgateItems.supplyListItemName, tailgateId, $scope.curritemAssignedUserId).then(function (respData) {
-                    //$ionicLoading.show({ template: 'User changed successfully!', noBackdrop: false, duration: 3000 });
-                });
                 $ionicLoading.show({ template: listItemName + ' Suppy item added', noBackdrop: false, duration: 2000 });
+                setTimeout(function () {
+                    TailgateService.updateTailgateSupplyItem(currSuppliedItemId, listItemName, tailgateId, $scope.loggedInUserId).then(function (respData) {
+                        var currUserId = $scope.allMyTailgateItems.length-1;
+                        
+                        $scope.allMyTailgateItems[currUserId].itemAssignedUserId = JSON.stringify(respData.data.itemAssignedUserId);
+                        $scope.allMyTailgateItems[currUserId].itemAssignedUserName = $scope.curritemAssignedUserName
+                        $ionicLoading.show({ template: 'User changed successfully!', noBackdrop: false, duration: 3000 });
+    
+                        $("#addTailgateSupplyItemBox").val("");
+                        $scope.showEditForm();
+                });
+                }, 3000);       
             }
             else {
                 $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 2000 });
@@ -181,7 +192,9 @@
         }
         $scope.cancelTailgateSupplyItemAdding = function () {
             $scope.addNewSuppliesItem = false;
-            $scope.listItemName = "";
+            $("#addTailgateSupplyItemBox").val("");
+            $("#editSupplyListItems").hide();
+            $("#showSupplyListItems").show()
         }
 
         $scope.updateSupplyItemsUser = function (data, index) {
