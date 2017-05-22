@@ -121,7 +121,7 @@
         <column name="cost" type="double" />
         <column name="hoursOfOperation" type="String" />
         <column name="showDescription" type="boolean"></column>
-        
+        <column name="premiumDisplayEnabled" type="boolean"></column>
         <!-- Order -->
 		<order by="asc">
 			<order-column name="infoTypeId"/>
@@ -308,7 +308,7 @@
         <column name="cost" type="double" />
         <column name="hoursOfOperation" type="String" />
         <column name="showDescription" type="boolean"></column>
-        
+        <column name="premiumDisplayEnabled" type="boolean"></column>
         <!-- Order -->
 		<order by="asc">
 			<order-column name="infoTypeId"/>
