@@ -307,7 +307,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, 
 		String longitude, String phone, String mobileAppName, String website, 
-		Double cost, String hoursOfOperation, String venueSubDetails, ServiceContext  serviceContext){
+		Double cost, String hoursOfOperation,Boolean premiumDisplayEnabled, String venueSubDetails, ServiceContext  serviceContext){
 		VenueDetail venueDetail=null;
 		try{
 			
@@ -333,6 +333,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setWebsite(website);
 			venueDetail.setCost(cost);
 			venueDetail.setHoursOfOperation(hoursOfOperation);
+			venueDetail.setPremiumDisplayEnabled(premiumDisplayEnabled);
 			
 			Date now = new Date();
 			venueDetail.setCompanyId(serviceContext.getCompanyId());
@@ -352,7 +353,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, 
 		String latitude, String longitude, String phone, 
-		String mobileAppName, String website, Double cost, String hoursOfOperation, String venueSubDetails,
+		String mobileAppName, String website, Double cost, String hoursOfOperation,Boolean premiumDisplayEnabled, String venueSubDetails,
 		ServiceContext  serviceContext){
 		VenueDetail venueDetail=null;
 		try{
@@ -377,7 +378,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venueDetail.setWebsite(website);
 			venueDetail.setCost(cost);
 			venueDetail.setHoursOfOperation(hoursOfOperation);
-			
+			venueDetail.setPremiumDisplayEnabled(premiumDisplayEnabled);
 			Date now = new Date();
 			venueDetail.setUserId(serviceContext.getGuestOrUserId());
 		    venueDetail.setModifiedDate(serviceContext.getModifiedDate(now));

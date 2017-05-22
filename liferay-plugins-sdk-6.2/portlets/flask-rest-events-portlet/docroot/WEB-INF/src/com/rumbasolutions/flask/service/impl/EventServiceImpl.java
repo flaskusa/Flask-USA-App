@@ -276,7 +276,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, String longitude, 
 		String phone, String mobileAppName, String website, Double cost, 
-		String hoursOfOperation, boolean showDescription, String eventSubDetails,
+		String hoursOfOperation, boolean showDescription,Boolean premiumDisplayEnabled, String eventSubDetails,
 		ServiceContext  serviceContext){
 		EventDetail eventDetail=null;
 		try{
@@ -303,6 +303,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setCost(cost);
 			eventDetail.setHoursOfOperation(hoursOfOperation);
 			eventDetail.setShowDescription(showDescription);
+			eventDetail.setPremiumDisplayEnabled(premiumDisplayEnabled);
 			
 			Date now = new Date();
 			eventDetail.setCompanyId(serviceContext.getCompanyId());
@@ -321,7 +322,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 	public EventDetail updateEventDetail(long eventDetailId , long infoTypeId, long infoTypeCategoryId, 
 		String infoTitle, String infoShortDesc, String infoDesc, String addrLine1, String addrLine2, String zipCode,
 		String city, long stateId, long countryId, String latitude, String longitude, String phone, 
-		String mobileAppName, String website, Double cost, String hoursOfOperation, boolean showDescription, String eventSubDetails,
+		String mobileAppName, String website, Double cost, String hoursOfOperation, boolean showDescription,Boolean premiumDisplayEnabled, String eventSubDetails,
 		ServiceContext  serviceContext){
 		EventDetail eventDetail=null;
 		try{
@@ -347,6 +348,7 @@ public class EventServiceImpl extends EventServiceBaseImpl {
 			eventDetail.setCost(cost);
 			eventDetail.setHoursOfOperation(hoursOfOperation);
 			eventDetail.setShowDescription(showDescription);
+			eventDetail.setPremiumDisplayEnabled(premiumDisplayEnabled);
 			
 			Date now = new Date();
 		    eventDetail.setUserId(serviceContext.getGuestOrUserId());
