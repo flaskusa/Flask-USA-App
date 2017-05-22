@@ -170,6 +170,9 @@
                         });
                     });
                 }
+                TailgateService.updateTailgateSupplyItem($scope.allMyTailgateItems.tailgateSupplyItemId, $scope.allMyTailgateItems.supplyListItemName, tailgateId, $scope.curritemAssignedUserId).then(function (respData) {
+                    //$ionicLoading.show({ template: 'User changed successfully!', noBackdrop: false, duration: 3000 });
+                });
                 $ionicLoading.show({ template: listItemName + ' Suppy item added', noBackdrop: false, duration: 2000 });
             }
             else {
