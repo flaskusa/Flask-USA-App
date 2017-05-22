@@ -29,12 +29,13 @@
             </div>
         </div>
         <div class="list">
-            <div class="item item-divider plan_now">
-                WHAT TO BRING
+            <div class="item item-divider plan_now">                
+                <div style="float:left;border: none; padding: 1px; padding-left: 5px; padding-right: 5px;" ng-click="showEditForm();">WHAT TO BRING</div>
+                <div style="float:right;border: 1px solid; padding: 1px; padding-left: 5px; padding-right: 5px;" ng-click="showEditForm();" ng-show="isTailgateAdmin">EDIT ITEM LIST</div>
             </div>
         </div>
         <a class="item" ng-if="allMyTailgateItems.length == 0"> You do not have any supply items... </a>
-        <ion-list>
+        <ion-list id="showSupplyListItems">
             <ion-item ng-repeat="tailgateItem in allMyTailgateItems track by $index">
                 <div class="col-100">                   
                     <div style="float:left"> <i class="supplyItemText">{{tailgateItem.supplyListItemName | uppercase}}</i>
@@ -43,6 +44,34 @@
                 </div>
 
             </ion-item>
+        </ion-list>
+        <ion-list show-delete="false" can-swipe="true" ng-hide="collapsedItems" id="editSupplyListItems" style="display:none;">
+            <div class="item item-input-inset addNewTailgateItem">
+                <label class="item-input-wrapper" style="background-color: white;">
+                    <div class="inpuBorderEdit" style="width: 80%">
+                        <input type="text" id="addTailgateSupplyItemBox" style="width:100%" ng-class="{Upper_Case:listItemName!='' && listItemName!=undefined}" placeholder="Item name" ng-model="listItemName">
+                    </div>
+                </label>
+                <button class="button button-small suppliesButton" ng-click="saveTailgateSupplyItem(listItemName);">
+                    Save
+                </button>
+                <button class="button button-small suppliesButton" ng-click="cancelTailgateSupplyItemAdding();">
+                    Cancel
+                </button>
+            </div>
+            <p id="addSupplyListError">Select Supply List To Add Supply Item!</p>
+            <ion-item class="myList item-remove-animate" ng-repeat="tailgateItem in allMyTailgateItems track by $index" style="font-family:inherit;font-size:inherit">
+                <span class="emailText"><i class="supplyItemText">{{tailgateItem.supplyListItemName | uppercase}}</i></span>
+                <select class="supplyitem_tailgate flaskSelect" ng-model="tailgateItem.itemAssignedUserId" ng-init="tailgateItem.itemAssignedUserId = (tailgateItem.itemAssignedUserId == undefined) ? '-1' : tailgateItem.itemAssignedUserId"
+                        ng-change="updateSupplyItemsUser(tailgateItem,$index);">
+                    <option value="-1">Select attendee</option>
+                    <option ng-repeat="attendee in myTailgaters" value="{{attendee.userId}}">{{attendee.userName}}</option>
+                </select>
+                <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveSupplyItem(tailgateItem.supplyItemId,$index);"></ion-option-button>
+            </ion-item>
+            <button nav-clear class="button button-block button-positive pay_now_button" ng-click="addSupplyItems();">
+                Update Item List and Save Tailgate
+            </button>
         </ion-list>
         <a class="item" ng-if="myTailgaters.length == 0"> You do not have any tailgater yet. Please search and add tailgaters </a>
     </ion-content>
