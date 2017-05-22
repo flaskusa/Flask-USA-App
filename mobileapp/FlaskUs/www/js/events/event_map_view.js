@@ -1117,6 +1117,14 @@
                                             url: 'img/map_icons/FLASK_PIN_40.svg',
                                             scaledSize: { width: 80, height: 60 } //for scaling the svg images
                                         }
+                                    }else if(tempObject.premiumDisplayEnabled== true){                                       
+                                        if (ImgObj.length != 0) {
+                                            var imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                            tempObject.icon = {
+                                                url: imageUrl,
+                                                scaledSize: { width: 20, height: 60 } //for scaling the svg images
+                                            }
+                                        }
                                     }
                                     else if (tempObject.cost >= 51) {
                                         tempObject.icon = {
