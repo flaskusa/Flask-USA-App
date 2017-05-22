@@ -186,7 +186,7 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 	dropZone1 = "";
 	dropZone2 = "";
 	var myclass = "form-group " +Obj[0].Class+ " uploader";
-	if(Obj[0].caption == "Upload Pictures" || Obj[0].caption == "Upload Logo"){
+	if(Obj[0].caption == "Upload Pictures" || Obj[0].caption == "Upload Map Logo"){
 		dropLength = 1;
 	}else{
 		dropLength = Obj[0].caption.length;
@@ -196,7 +196,7 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 		var caption = "";
 		var id = "";
 		var aspectRatio = "";
-		if(dropLength == 1 || Obj[0].caption == "Upload Logo"){
+		if(dropLength == 1 || Obj[0].caption == "Upload Map Logo"){
 			action = $("#imgActionUrl").val();
 			caption = Obj[0].caption;
 			id = "";
@@ -215,11 +215,10 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 			deviceTypeId = '_deviceType';
 			aspectRatioId = '_aspectRatio';
 		}
-		if(Obj[0].caption == "Upload Logo"){
+		if(Obj[0].caption == "Upload Map Logo"){
 			var objFormGroup = $('<div/>', {
 				'class' : myclass,
-				id: 'uploadMapLogo',
-				style: 'display:none;'
+				id: 'uploadMapLogo'
 			}).appendTo($(formArea));
 		}else{
 			var objFormGroup = $('<div/>', {
@@ -631,12 +630,13 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"id" : "premiumDisplayEnabled",
 			"name" : "premiumDisplayEnabled",
 			"caption" : "Enable premium display on Map",
-			"value":"0"
+			"value":"0",
+			"Class":"premiumDisplayEnabled"
 		} ]
 	},{
 		"type" : "upload",
 		"attr" : [ {
-			"caption" : "Upload Logo",
+			"caption" : "Upload Map Logo",
 			"action" : $("#imgActionUrl").val(),
 			"id" : "eventId",
 			"value" : $("#eventId").val(),
@@ -868,7 +868,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 	},,{
 		"type" : "upload",
 		"attr" : [ {
-			"caption" : "Upload Logo",
+			"caption" : "Upload Map Logo",
 			"action" : $("#imgActionUrl").val(),
 			"id" : "eventId",
 			"value" : $("#eventId").val(),
