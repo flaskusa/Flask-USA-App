@@ -422,6 +422,9 @@ function editVenueDetail(rowData) {
 				});
 		$('#addrLine1').val(rowData.addrLine1);
 		$('#jqxEditor').val(rowData.infoDesc);
+		if(rowData.premiumDisplayEnabled === true){
+			$("#premiumDisplayEnabled").attr("checked","checked");
+		}
 	}, 500);
 	// fnShowSlider($('#venueForm
 	// #venueId').val(),container,rowData.venueDetailId,rowData.infoTypeId,rowData.infoTypeCategoryId);

@@ -47,8 +47,9 @@ _venueDetailModel.DATA_MODEL= {
 				 { name: 'mobileAppName', type: 'string'},				 
 				 { name: 'website', type: 'string'},
 				 { name: 'cost', type: 'long' },
-				 { name: 'hoursOfOperation', type:'string'}
-				 
+				 { name: 'hoursOfOperation', type:'string'},
+				 { name: 'premiumDisplayEnabled', type:'boolean'},
+				 { name: 'showDescription', type:'boolean'}				 
 			],
 		VENUEDEVICEIMAGE:
 			[
@@ -56,8 +57,7 @@ _venueDetailModel.DATA_MODEL= {
 				{ name: 'venueDeviceImageId', type: 'long' },
 				{ name: 'venueDetailImageId', type: 'long' },
 				{ name: 'venueDeviceImageUUID', type: 'string' },
-				{ name: 'aspectRatio', type:'string'}       
-			              
+				{ name: 'aspectRatio', type:'string'}       			              
 		    ]
 	};
 

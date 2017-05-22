@@ -45,7 +45,8 @@ _eventDetailModel.DATA_MODEL= {
 				 { name: 'website', type: 'string'},
 				 { name: 'cost', type: 'long' },
 				 { name: 'hoursOfOperation', type:'string'},
-				 { name: 'showDescription', type:'boolean'}
+				 { name: 'showDescription', type:'boolean'},
+				 { name: 'premiumDisplayEnabled', type:'boolean'}
 			]
 	};
 

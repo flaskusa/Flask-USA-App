@@ -55,7 +55,15 @@ _infoTypeRenderer.fnRenderForm = function(contentType, Type) {
 	if ($("#eventDetailId").val() > 0) {
 
 	}
-
+	$("#premiumDisplayEnabled").on('click',function() {
+	    if ($(this).is(':checked')) {
+	        $("#premiumDisplayEnabled").val("1");
+	        $("#uploadMapLogo").attr("style","display:block;");
+	    } else {
+	        $("#premiumDisplayEnabled").val("0");
+	        $("#uploadMapLogo").attr("style","display:none;");
+	    }
+	});
 }
 
 _infoTypeRenderer.fnBuildHtml = function(Obj, Type, contentType) {
@@ -178,7 +186,7 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 	dropZone1 = "";
 	dropZone2 = "";
 	var myclass = "form-group " +Obj[0].Class+ " uploader";
-	if(Obj[0].caption == "Upload Pictures"){
+	if(Obj[0].caption == "Upload Pictures" || Obj[0].caption == "Upload Logo"){
 		dropLength = 1;
 	}else{
 		dropLength = Obj[0].caption.length;
@@ -188,7 +196,7 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 		var caption = "";
 		var id = "";
 		var aspectRatio = "";
-		if(dropLength == 1){
+		if(dropLength == 1 || Obj[0].caption == "Upload Logo"){
 			action = $("#imgActionUrl").val();
 			caption = Obj[0].caption;
 			id = "";
@@ -207,10 +215,18 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 			deviceTypeId = '_deviceType';
 			aspectRatioId = '_aspectRatio';
 		}
-		var objFormGroup = $('<div/>', {
-			'class' : myclass,
-			id: 'uploader'
-		}).appendTo($(formArea));
+		if(Obj[0].caption == "Upload Logo"){
+			var objFormGroup = $('<div/>', {
+				'class' : myclass,
+				id: 'uploadMapLogo',
+				style: 'display:none;'
+			}).appendTo($(formArea));
+		}else{
+			var objFormGroup = $('<div/>', {
+				'class' : myclass,
+				id: 'uploader'
+			}).appendTo($(formArea));
+		}		
 		var objControlLable = $('<label/>', {
 			'class' : 'control-label',
 			'for' : caption
@@ -241,6 +257,14 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 				'value' : $("#eventId").val()
 			});
 			$(objEventId).appendTo(objForm);
+			var objAspectRatio = $('<input/>', {
+				'name' : aspectRatioId,
+				'id' : aspectRatioId,
+				'type' : 'hidden',
+				'class':'aspectRatioMapLogo',
+				'value' : aspectRatio
+			});
+			$(objAspectRatio).appendTo(objForm);
 			break;
 		case "venue":
 			var objForm = $('<form/>', {
@@ -419,9 +443,7 @@ _infoTypeRenderer.fnBuildEditor = function(Obj) {
 				width : '90%',
 				theme : 'custom',
 				tools : "bold italic underline | format size | left center right | outdent indent | ul ol "
-
 			});
-
 }
 
 _infoTypeRenderer.fnBuildSubDetails = function(Obj, contentType) {
@@ -603,6 +625,23 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value" : "Yes",
 			"items" : [ "Yes", "No" ]
 		} ]
+	},{
+		"type" : "checkbox",
+		"attr" : [ {
+			"id" : "premiumDisplayEnabled",
+			"name" : "premiumDisplayEnabled",
+			"caption" : "Enable premium display on Map",
+			"value":"0"
+		} ]
+	},{
+		"type" : "upload",
+		"attr" : [ {
+			"caption" : "Upload Logo",
+			"action" : $("#imgActionUrl").val(),
+			"id" : "eventId",
+			"value" : $("#eventId").val(),
+			"Class" : ""
+		} ]
 	}, {
 		"type" : "editor",
 		"attr" : [ {
@@ -707,7 +746,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value" : "1",
 			"checked" : "checked"
 		} ]
-	}, {
+	},{
 		"type" : "upload",
 		"attr" : [ {
 			"caption" : ids,
@@ -818,7 +857,24 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value" : "1",
 			"checked" : "checked"
 		} ]
-	}, {
+	},{
+		"type" : "checkbox",
+		"attr" : [ {
+			"id" : "premiumDisplayEnabled",
+			"name" : "premiumDisplayEnabled",
+			"caption" : "Enable premium display on Map",
+			"value":"0"
+		} ]
+	},,{
+		"type" : "upload",
+		"attr" : [ {
+			"caption" : "Upload Logo",
+			"action" : $("#imgActionUrl").val(),
+			"id" : "eventId",
+			"value" : $("#eventId").val(),
+			"Class" : ""
+		} ]
+	},{
 		"type" : "upload",
 		"attr" : [ {
 			"caption" : "Upload Pictures",
@@ -827,7 +883,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value" : $("#eventId").val(),
 			"Class" : ""
 		} ]
-	}, {
+	},{
 		"type" : "editor",
 		"attr" : [ {
 			"caption" : "Local Knowledge",
