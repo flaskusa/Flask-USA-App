@@ -2,7 +2,7 @@ var _infoTypeRenderer = {};
 var ids = ["default","Galaxy_s7","iphone_7"];
 var aspectRatios = ["3:4","9:16","9:16"];
 var pIds = ["parking"];
-var pAspectRatios = ["2:3"];
+var pAspectRatios = ["3:2"];
 var bIds = ["barandresto"];
 var bAspectRatios = ["2:3"];
 _infoTypeRenderer.getRenderer = function(type) {
@@ -394,8 +394,8 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 					autoProcessQueue : false,
 					init: function() {
 					    this.on("thumbnail", function(file) {
-					      var height = (file.height/file.width) * 2;
-					      if (Math.round(height) != 3) {
+					      var height = (file.height/file.width) * 3;
+					      if (Math.round(height) != 2) {
 					        file.rejectDimensions()
 					      }
 					      else {
