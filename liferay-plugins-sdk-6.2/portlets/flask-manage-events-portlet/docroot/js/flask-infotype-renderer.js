@@ -1,7 +1,8 @@
 var _infoTypeRenderer = {};
 var ids = ["default","Galaxy_s7","iphone_7"];
 var aspectRatios = ["3:4","9:16","9:16"];
-
+var pIds = ["parking"];
+var pAspectRatios = ["2:3"];
 _infoTypeRenderer.getRenderer = function(type) {
 	type = type.toLowerCase();
 	var renderer;
@@ -186,7 +187,7 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 	dropZone1 = "";
 	dropZone2 = "";
 	var myclass = "form-group " +Obj[0].Class+ " uploader";
-	if(Obj[0].caption == "Upload Pictures" || Obj[0].caption == "Upload Map Logo"){
+	if(Obj[0].caption == "Upload Pictures" || Obj[0].caption == "Upload Logo"){
 		dropLength = 1;
 	}else{
 		dropLength = Obj[0].caption.length;
@@ -196,12 +197,21 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 		var caption = "";
 		var id = "";
 		var aspectRatio = "";
-		if(dropLength == 1 || Obj[0].caption == "Upload Map Logo"){
-			action = $("#imgActionUrl").val();
+		if(dropLength == 1 || Obj[0].caption == "Upload Logo"){
 			caption = Obj[0].caption;
-			id = "";
-			aspectRatio = "";
-			venuImageId ='venueImages';
+			if(Obj[0].aspectRatio != "Upload Logo"){
+				var urlid = $("#imgActionUrl_"+Obj[0].caption);
+				action = urlid.val();
+				id = Obj[0].id;
+				aspectRatio = Obj[0].aspectRatio;
+				venuImageId ='venueImages'+i;
+				caption = "Upload map logo";
+			}else{
+				action = $("#imgActionUrl").val();
+				id = "";
+				aspectRatio = "";
+				venuImageId ='venueImages';
+			}
 			venueDetailId = '_venueDetailId';
 			deviceTypeId = '_deviceType';
 			aspectRatioId = '_aspectRatio';
@@ -215,10 +225,11 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 			deviceTypeId = '_deviceType';
 			aspectRatioId = '_aspectRatio';
 		}
-		if(Obj[0].caption == "Upload Map Logo"){
+		if(Obj[0].caption == "Upload Logo"){
 			var objFormGroup = $('<div/>', {
 				'class' : myclass,
-				id: 'uploadMapLogo'
+				id: 'uploadMapLogo',
+				style: 'display:none;'
 			}).appendTo($(formArea));
 		}else{
 			var objFormGroup = $('<div/>', {
@@ -351,26 +362,50 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 			'value' : 'N'
 		});
 		if(venuImageId == "venueImages0"){
-			dropZone0 = new Dropzone($(objForm).get(0), {
-				dictDefaultMessage: "Drop files here to upload (width : height = "+aspectRatio+")",
-				maxFiles: 1,
-				autoProcessQueue : false,
-				init: function() {
-				    this.on("thumbnail", function(file) {
-				      var height = (file.height/file.width) * 3;
-				      if (Math.round(height) != 4) {
-				        file.rejectDimensions()
-				      }
-				      else {
-				        file.acceptDimensions();
-				      }
-				    });
-				  },
-				  accept: function(file, done) {
-				    file.acceptDimensions = done;
-				    file.rejectDimensions = function() { done("Invalid image resolution."); };
-				  }
-			});
+			if(aspectRatio[0] == "3:4"){
+				dropZone0 = new Dropzone($(objForm).get(0), {
+					dictDefaultMessage: "Drop files here to upload (width : height = "+aspectRatio+")",
+					maxFiles: 1,
+					autoProcessQueue : false,
+					init: function() {
+					    this.on("thumbnail", function(file) {
+					      var height = (file.height/file.width) * 3;
+					      if (Math.round(height) != 4) {
+					        file.rejectDimensions()
+					      }
+					      else {
+					        file.acceptDimensions();
+					      }
+					    });
+					  },
+					  accept: function(file, done) {
+					    file.acceptDimensions = done;
+					    file.rejectDimensions = function() { done("Invalid image resolution."); };
+					  }
+				});
+			}else{
+				dropZone0 = new Dropzone($(objForm).get(0), {
+					dictDefaultMessage: "Drop files here to upload (width : height = "+aspectRatio+")",
+					maxFiles: 1,
+					autoProcessQueue : false,
+					init: function() {
+					    this.on("thumbnail", function(file) {
+					      var height = (file.height/file.width) * 2;
+					      if (Math.round(height) != 3) {
+					        file.rejectDimensions()
+					      }
+					      else {
+					        file.acceptDimensions();
+					      }
+					    });
+					  },
+					  accept: function(file, done) {
+					    file.acceptDimensions = done;
+					    file.rejectDimensions = function() { done("Invalid image resolution."); };
+					  }
+				});
+			}
+			
 		}else if(venuImageId == "venueImages1"){
 			dropZone1 = new Dropzone($(objForm).get(0), {
 				dictDefaultMessage: "Drop files here to upload (width : height = "+aspectRatio+")",
@@ -630,15 +665,15 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"id" : "premiumDisplayEnabled",
 			"name" : "premiumDisplayEnabled",
 			"caption" : "Enable premium display on Map",
-			"value":"0",
-			"Class":"premiumDisplayEnabled"
+			"value":"0"
 		} ]
 	},{
 		"type" : "upload",
 		"attr" : [ {
-			"caption" : "Upload Map Logo",
-			"action" : $("#imgActionUrl").val(),
-			"id" : "eventId",
+			"caption" : pIds,
+			"action" : pIds,
+			"id" : pIds,
+			"aspectRatio" : pAspectRatios,
 			"value" : $("#eventId").val(),
 			"Class" : ""
 		} ]
@@ -868,7 +903,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 	},,{
 		"type" : "upload",
 		"attr" : [ {
-			"caption" : "Upload Map Logo",
+			"caption" : "Upload Logo",
 			"action" : $("#imgActionUrl").val(),
 			"id" : "eventId",
 			"value" : $("#eventId").val(),

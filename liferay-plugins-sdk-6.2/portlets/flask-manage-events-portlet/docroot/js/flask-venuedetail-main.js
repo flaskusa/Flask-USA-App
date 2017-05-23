@@ -402,6 +402,8 @@ function editVenueDetail(rowData) {
 	window.location.hash = "#VenueDetail";
 	var container = $('#venueDetailGallery');
 	container.html("");
+	var parkingContainer = $('#parkingGallery');
+	parkingContainer.html("");
 	var defaultContainer = $('#defaultGallery');
 	defaultContainer.html("");
 	var galaxyContainer = $('#Galaxy_s7Gallery');
@@ -409,6 +411,7 @@ function editVenueDetail(rowData) {
 	var iphoneContainer = $('#iphone_7Gallery');
 	iphoneContainer.html("");
 	var containers = [defaultContainer, galaxyContainer, iphoneContainer];
+	var pContainers = [parkingContainer];
 	var repositoryId = $("#repositoryId").val();
 	$('#venueDetailsForm #venueId').val($('#venueForm #venueId').val());
 	$('#venueDetailId').val(rowData.venueDetailId);
@@ -430,9 +433,11 @@ function editVenueDetail(rowData) {
 	// #venueId').val(),container,rowData.venueDetailId,rowData.infoTypeId,rowData.infoTypeCategoryId);
 	getVenueSubDetails(rowData.venueDetailId);
 	if(rowData.infoTypeCategoryId == 101){
-		fnGetVenueDetailImages(rowData.venueDetailId, containers, true);
+		fnGetVenueDetailImages(rowData.venueDetailId, containers, true, rowData.infoTypeCategoryId);
+	}else if(rowData.infoTypeCategoryId == 1){
+		fnGetVenueDetailImages(rowData.venueDetailId, pContainers, true, rowData.infoTypeCategoryId);
 	}else{
-		fnGetVenueDetailImages(rowData.venueDetailId, container, true);
+		fnGetVenueDetailImages(rowData.venueDetailId, container, true, rowData.infoTypeCategoryId);
 	}
 	
 }
@@ -732,7 +737,7 @@ function fnDeleteVenueDetailImage(venueDetailImageId) {
 			});
 }
 
-function fnGetVenueDetailImages(venueDetailId, container, editable) {
+function fnGetVenueDetailImages(venueDetailId, container, editable, infoTypeCategoryId) {
 	params = {
 		'venueDetailId' : venueDetailId
 	};
@@ -742,7 +747,7 @@ function fnGetVenueDetailImages(venueDetailId, container, editable) {
 			function(data) {
 				$.each(data, function(idx, obj) {
 					fnRenderImage(obj.imageUUID, obj.imageGroupId, container,
-							obj.venueDetailImageId, obj.imageTitle, editable);
+							obj.venueDetailImageId, obj.imageTitle, editable, infoTypeCategoryId);
 				});
 			}, function(data) {
 				console.log(data);
@@ -750,12 +755,127 @@ function fnGetVenueDetailImages(venueDetailId, container, editable) {
 }
 
 function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, imageTitle,
-		editable) {
+		editable, infoTypeCategoryId) {
 	var fields  = imageTitle.split("-");
 	var name = fields[0];
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + imageUUID
 			+ "&groupId=" + imageGroupId;
 	if(containers.length == 1){
+		if(infoTypeCategoryId == 1){
+			
+			container = containers[0].selector
+			var contFields  = container.split("#");
+			var currentCont  = contFields[1].split("Gallery");
+			var contName = currentCont[0];
+			if(name == contName){
+				if (editable) {
+					var objdiv = $('<div/>', {
+						'class' : 'venueMainDiv',
+					});
+					$(objdiv).appendTo($(container));
+					/*var objLable = $('<label/>', {
+						'class' : 'eventLable'
+			 		}).appendTo(objdiv);
+					$(objLable).html(name);*/
+					var objImg = $('<div/>', {
+						'class' : 'venueLogo',
+						'style' : 'background-image:url(' + imgURL + ')',
+						'data-uuid' : imageUUID,
+						'data-venueDetailImageId' : venueDetailImageId,
+						'data-imageURL' : imgURL
+					});
+					$(objImg).appendTo($(objdiv));
+					$(objImg)
+							.click(
+									function() {
+										$(this).toggleClass("activeImage");
+										if ($(".activeImage").length > 0) {
+											if (iSelected == false) {
+												var objDel = $('<input/>', {
+													'class' : 'btn btn-info cssDelVenueImages',
+													'type' : 'button',
+													'value' : 'Delete selected'
+												});
+												$(objDel).appendTo($(container));
+												iSelected = true;
+												$(objDel)
+														.click(
+																function() {
+																	$("#spinningSquaresG")
+																			.show();
+																	$(".activeImage")
+																			.each(
+																					function() {
+																						_flaskLib
+																								.deleteImage(
+																										$(
+																												this)
+																												.attr(
+																														"data-uuid"),
+																										imageGroupId,
+																										objDel);
+																						fnDeleteVenueDetailImage($(
+																								this)
+																								.attr(
+																										"data-venueDetailImageId"));
+																						$(
+																								this)
+																								.remove();
+																					});
+																	if ($(".activeImage").length == 0) {
+																		$(
+																				"#spinningSquaresG")
+																				.hide();
+																		$(this).remove();
+																		iSelected = false;
+																	}
+																});
+											}
+										} else {
+											$(".cssDelVenueImages").remove();
+											iSelected = false;
+										}
+									});
+				} else {
+					var objdiv = $('<div/>', {
+						'class' : 'GridSlides',
+						'style' : 'background-image:url(' + imgURL + ')',
+						'data-uuid' : imageUUID,
+						'data-venueDetailImageId' : venueDetailImageId,
+						'data-imageURL' : imgURL
+					});
+					$(container).owlCarousel(
+							{
+								items : 3,
+								navigation : true,
+								navigationText : [
+										"<i class='icon-chevron-left icon-white'></i>",
+										"<i class='icon-chevron-right icon-white'></i>" ],
+								pagination : true,
+								items : 5,
+								itemsCustom : false,
+								itemsDesktop : [ 1199, 4 ],
+								itemsDesktopSmall : [ 980, 3 ],
+								itemsTablet : [ 768, 2 ],
+								itemsTabletSmall : false,
+								itemsMobile : [ 479, 1 ],
+								singleItem : false,
+								itemsScaleUp : false,
+							});
+					$(container).data('owlCarousel').addItem(objdiv);
+					$(objdiv).click(function() {
+						var imgContainer = $('.imageContainer');
+						imgContainer.html('');
+						var objImage = $('<img/>', {
+							'src' : $(this).attr('data-imageURL')
+						});
+						imgContainer.append(objImage);
+						$('.md-trigger').click();
+					});
+				}
+			}
+			
+		}else{
 		container = containers.selector;
 		if (editable) {
 			var objdiv = $('<div/>', {
@@ -861,6 +981,7 @@ function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, 
 				imgContainer.append(objImage);
 				$('.md-trigger').click();
 			});
+		}
 		}
 	}else{
 		for(var i = 0; i< containers.length; i++){
