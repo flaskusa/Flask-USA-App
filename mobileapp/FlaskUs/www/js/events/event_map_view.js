@@ -1094,11 +1094,21 @@
                             $scope.setMarkerFields(tempObject);
                             if ("Parking" == tempObject.infoTypeCategoryName) {
                                 if ($scope.filterCost == null) {
-                                    if (tempObject.cost >= 10 && tempObject.cost <= 20) {
+                                    if(tempObject.premiumDisplayEnabled==true) {
+
+                                        tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                        tempObject.icon = {
+                                            url: tempObject.imageUrl,
+                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                        }
+                                    }
+                                   else if (tempObject.cost >= 10 && tempObject.cost <= 20) {
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_10.svg',
                                             scaledSize: { width: 80, height: 60 } //for scaling the svg images
                                         }
+
+
                                     }
                                     else if (tempObject.cost >= 21 && tempObject.cost <= 30) {
                                         tempObject.icon = {
@@ -1107,10 +1117,12 @@
                                         }
                                     }
                                     else if (tempObject.cost >= 31 && tempObject.cost <= 40) {
-                                        tempObject.icon = {
-                                            url: 'img/map_icons/FLASK_PIN_30.svg',
-                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
-                                        }
+
+                                            tempObject.icon = {
+                                                url: 'img/map_icons/FLASK_PIN_30.svg',
+                                                scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                            }
+
                                     }
                                     else if (tempObject.cost >= 41 && tempObject.cost <= 50) {
                                         tempObject.icon = {
@@ -1156,7 +1168,7 @@
                             _.merge(tempObject, trafficInfoSubDetail);
                             $scope.trafficDetails.push(tempObject);
                         } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
-                            if (ImgObj.length != 0) {
+                            if (ImgObj && ImgObj.length != 0) {
                                 tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                             }
                             $scope.flaskUsDetails.push(tempObject);
@@ -1175,7 +1187,7 @@
                         }
                         else if ("Venue Map" == tempObject.infoTypeCategoryName) {
                             $scope.default = " ";
-                            if (ImgObj.length != 0) {
+                            if (ImgObj && ImgObj.length != 0) {
                                 EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceModel, $scope.aspectRatio).then(function (respData) {
                                     if (respData.length != 0) {
                                         tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
