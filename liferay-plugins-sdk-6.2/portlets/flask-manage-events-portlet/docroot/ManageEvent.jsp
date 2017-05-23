@@ -142,6 +142,7 @@ function initialize(portletId, portlet) {
 					<form id="eventDetailsForm" style="display:none">
 					  <input type="hidden" id="imgActionUrl" value="<%= addImagesActionURL %>">
 				  <input type="hidden" id="imgActionUrl_parking" value="<%= addImagesActionURL %>">
+				  <input type="hidden" id="imgActionUrl_barandresto" value="<%= addImagesActionURL %>">
 					  <input id="latitude" type="hidden" name="latitude" value="">
 					  <input id="longitude" type="hidden" name="longitude" value="">
 					  <div class="form-group">

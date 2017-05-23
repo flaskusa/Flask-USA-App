@@ -3,6 +3,8 @@ var ids = ["default","Galaxy_s7","iphone_7"];
 var aspectRatios = ["3:4","9:16","9:16"];
 var pIds = ["parking"];
 var pAspectRatios = ["2:3"];
+var bIds = ["barandresto"];
+var bAspectRatios = ["2:3"];
 _infoTypeRenderer.getRenderer = function(type) {
 	type = type.toLowerCase();
 	var renderer;
@@ -60,9 +62,11 @@ _infoTypeRenderer.fnRenderForm = function(contentType, Type) {
 	    if ($(this).is(':checked')) {
 	        $("#premiumDisplayEnabled").val("1");
 	        $("#uploadMapLogo").attr("style","display:block;");
+	        $(".mypremiumDisplayEnabled").show();
 	    } else {
 	        $("#premiumDisplayEnabled").val("0");
 	        $("#uploadMapLogo").attr("style","display:none;");
+	        $(".mypremiumDisplayEnabled").hide();
 	    }
 	});
 }
@@ -183,7 +187,7 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 	var deviceTypeId ="";
 	var aspectRatioId ="";
 	dropZone = "";
-	dropZone0 = "";
+	dropZone0;
 	dropZone1 = "";
 	dropZone2 = "";
 	var myclass = "form-group " +Obj[0].Class+ " uploader";
@@ -199,7 +203,7 @@ _infoTypeRenderer.fnBuildUpload = function(Obj, Type) {
 		var aspectRatio = "";
 		if(dropLength == 1 || Obj[0].caption == "Upload Logo"){
 			caption = Obj[0].caption;
-			if(Obj[0].aspectRatio != "Upload Logo"){
+			if(Obj[0].caption != "Upload Logo" && Obj[0].caption != "Upload Pictures"){
 				var urlid = $("#imgActionUrl_"+Obj[0].caption);
 				action = urlid.val();
 				id = Obj[0].id;
@@ -675,7 +679,7 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"id" : pIds,
 			"aspectRatio" : pAspectRatios,
 			"value" : $("#eventId").val(),
-			"Class" : ""
+			"Class" : "mypremiumDisplayEnabled"
 		} ]
 	}, {
 		"type" : "editor",
@@ -903,11 +907,12 @@ _infoTypeRenderer.INFO_RENDERER = {
 	},,{
 		"type" : "upload",
 		"attr" : [ {
-			"caption" : "Upload Logo",
-			"action" : $("#imgActionUrl").val(),
-			"id" : "eventId",
+			"caption" : bIds,
+			"action" : bIds,
+			"id" : bIds,
+			"aspectRatio" : bAspectRatios,
 			"value" : $("#eventId").val(),
-			"Class" : ""
+			"Class" : "mypremiumDisplayEnabled"
 		} ]
 	},{
 		"type" : "upload",

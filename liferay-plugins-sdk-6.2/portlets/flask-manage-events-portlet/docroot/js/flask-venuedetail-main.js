@@ -339,6 +339,7 @@ function saveVenueDetails() {
 				_venueDetailModel.MESSAGES.DETAIL_SAVE);
 		if ($('#venueImages').find('.dz-image').length > 0) {
 			fnSaveImages(data.venueDetailId, data.infoType, dropZone);
+			$('#venueImages').find('.dz-image').length = 0;
 		}if ($('#venueImages0').find('.dz-image').length > 0) {
 			setTimeout(function(){ fnSaveImages(data.venueDetailId, data.infoType, dropZone0); }, 1000);
 		}if ($('#venueImages1').find('.dz-image').length > 0) {
@@ -404,6 +405,8 @@ function editVenueDetail(rowData) {
 	container.html("");
 	var parkingContainer = $('#parkingGallery');
 	parkingContainer.html("");
+	var barandrestoContainer = $('#barandrestoGallery');
+	barandrestoContainer.html("");
 	var defaultContainer = $('#defaultGallery');
 	defaultContainer.html("");
 	var galaxyContainer = $('#Galaxy_s7Gallery');
@@ -412,6 +415,7 @@ function editVenueDetail(rowData) {
 	iphoneContainer.html("");
 	var containers = [defaultContainer, galaxyContainer, iphoneContainer];
 	var pContainers = [parkingContainer];
+	var bContainers = [barandrestoContainer];
 	var repositoryId = $("#repositoryId").val();
 	$('#venueDetailsForm #venueId').val($('#venueForm #venueId').val());
 	$('#venueDetailId').val(rowData.venueDetailId);
@@ -434,8 +438,11 @@ function editVenueDetail(rowData) {
 	getVenueSubDetails(rowData.venueDetailId);
 	if(rowData.infoTypeCategoryId == 101){
 		fnGetVenueDetailImages(rowData.venueDetailId, containers, true, rowData.infoTypeCategoryId);
-	}else if(rowData.infoTypeCategoryId == 1){
+	}else if(rowData.infoTypeCategoryId == 1 ){
 		fnGetVenueDetailImages(rowData.venueDetailId, pContainers, true, rowData.infoTypeCategoryId);
+	}else if(rowData.infoTypeCategoryId == 4 || rowData.infoTypeCategoryId == 102 || rowData.infoTypeCategoryId == 202 || rowData.infoTypeCategoryId == 205){
+		fnGetVenueDetailImages(rowData.venueDetailId, bContainers, true, rowData.infoTypeCategoryId);
+		fnGetVenueDetailImages(rowData.venueDetailId, container, true, rowData.infoTypeCategoryId);
 	}else{
 		fnGetVenueDetailImages(rowData.venueDetailId, container, true, rowData.infoTypeCategoryId);
 	}
@@ -753,16 +760,16 @@ function fnGetVenueDetailImages(venueDetailId, container, editable, infoTypeCate
 				console.log(data);
 			});
 }
-
+var myImageUUID = [];
 function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, imageTitle,
 		editable, infoTypeCategoryId) {
 	var fields  = imageTitle.split("-");
 	var name = fields[0];
 	var imgURL = _flaskLib.UTILITY.IMAGES_PATH + "?uuid=" + imageUUID
 			+ "&groupId=" + imageGroupId;
+	
 	if(containers.length == 1){
-		if(infoTypeCategoryId == 1){
-			
+		if((infoTypeCategoryId == 1 || infoTypeCategoryId == 4 || infoTypeCategoryId == 102 || infoTypeCategoryId == 202 || infoTypeCategoryId == 205) && containers.selector != "#venueDetailGallery"){
 			container = containers[0].selector
 			var contFields  = container.split("#");
 			var currentCont  = contFields[1].split("Gallery");
@@ -784,6 +791,7 @@ function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, 
 						'data-venueDetailImageId' : venueDetailImageId,
 						'data-imageURL' : imgURL
 					});
+					myImageUUID.push(imageUUID);
 					$(objImg).appendTo($(objdiv));
 					$(objImg)
 							.click(
@@ -877,6 +885,9 @@ function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, 
 			
 		}else{
 		container = containers.selector;
+		if(myImageUUID[0] != imageUUID ){
+			
+		
 		if (editable) {
 			var objdiv = $('<div/>', {
 				'class' : 'eventMainDiv',
@@ -981,7 +992,7 @@ function fnRenderImage(imageUUID, imageGroupId, containers, venueDetailImageId, 
 				imgContainer.append(objImage);
 				$('.md-trigger').click();
 			});
-		}
+		}}
 		}
 	}else{
 		for(var i = 0; i< containers.length; i++){
