@@ -14,6 +14,15 @@
         $scope.tailgateSupplyItems = [];
         $scope.isTailgateAdmin = false;
         var tailGateId = $cookies.get('currtailGateId');
+        $scope.taigateSupplyList = [];
+        var tailgateId = $cookies.get("currtailGateId");
+        $scope.copytTailgateId = tailGateId;
+        var userDetail = $cookies.getObject('CurrentUser');
+        $scope.loggedInUserId = userDetail.data.userId;
+        $scope.curritemAssignedUserName = userDetail.data.firstName + " " + userDetail.data.lastName;
+        $scope.curritemAssignedUserId = JSON.stringify(userDetail.data.userId);
+        $scope.currusercompanyId = userDetail.data.companyId;
+        var itemArray;
         
         $scope.userId = "";
         $scope.goBack = function () {
@@ -108,7 +117,6 @@
             console.log(user_selected);
             $scope.userId = user_selected;
             TailgateService.updateTailgateSupplyItem(data.tailgateSupplyItemId, data.supplyListItemName, tailGateId, $scope.userId).then(function (respData) {
-
             });
         };
 
@@ -129,16 +137,6 @@
             $("#editSupplyListItems").show();
             $("#showSupplyListItems").hide()
         }
-
-        $scope.taigateSupplyList = [];
-        var tailgateId = $cookies.get("currtailGateId");
-        $scope.copytTailgateId = tailgateId;
-        var userDetail = $cookies.getObject('CurrentUser');
-        $scope.loggedInUserId = userDetail.data.userId;
-        $scope.curritemAssignedUserName = userDetail.data.firstName + " " + userDetail.data.lastName;
-        $scope.curritemAssignedUserId = JSON.stringify(userDetail.data.userId);
-        $scope.currusercompanyId = userDetail.data.companyId;
-        var itemArray;
 
         $scope.selectGameDaySupply = function (list, checked) {
             if (checked == true) {
@@ -164,7 +162,7 @@
                     });
                 }
                 else {
-                    TailgateService.addTailgateSupplyItem(listItemName, tailgateId, $scope.loggedInUserId).then(function (response) {
+                    TailgateService.addTailgateSupplyItem(listItemName, tailGateId, $scope.loggedInUserId).then(function (response) {
                         $scope.allMyTailgateItems.push({
                             supplyListItemName: response.supplyListItemName,
                             tailgateSupplyItemId: response.tailgateSupplyItemId
@@ -174,22 +172,22 @@
                 }
                 $ionicLoading.show({ template: listItemName + ' Suppy item added', noBackdrop: false, duration: 2000 });
                 setTimeout(function () {
-                    TailgateService.updateTailgateSupplyItem(currSuppliedItemId, listItemName, tailgateId, $scope.loggedInUserId).then(function (respData) {
-                        var currUserId = $scope.allMyTailgateItems.length-1;
-                        
+                    TailgateService.updateTailgateSupplyItem(currSuppliedItemId, listItemName, tailGateId, $scope.loggedInUserId).then(function (respData) {
+                        var currUserId = $scope.allMyTailgateItems.length-1;                        
                         $scope.allMyTailgateItems[currUserId].itemAssignedUserId = JSON.stringify(respData.data.itemAssignedUserId);
                         $scope.allMyTailgateItems[currUserId].itemAssignedUserName = $scope.curritemAssignedUserName
-                        $ionicLoading.show({ template: 'User changed successfully!', noBackdrop: false, duration: 3000 });
-    
+                        $ionicLoading.show({ template: '' + listItemName.toUpperCase()+ ' assigned to ' + $scope.curritemAssignedUserName + '', noBackdrop: false, duration: 3000 });
                         $("#addTailgateSupplyItemBox").val("");
                         $scope.showEditForm();
                 });
-                }, 3000);       
+                }, 2000);       
             }
             else {
                 $ionicLoading.show({ template: 'Item name should not be empty', noBackdrop: false, duration: 2000 });
             }
         }
+
+        /*on cancel of supply list on view tailgate page*/
         $scope.cancelTailgateSupplyItemAdding = function () {
             $scope.addNewSuppliesItem = false;
             $("#addTailgateSupplyItemBox").val("");
@@ -197,12 +195,19 @@
             $("#showSupplyListItems").show()
         }
 
+        /*on update of supply list on view tailgate page*/
         $scope.updateSupplyItemsUser = function (data, index) {
-            TailgateService.updateTailgateSupplyItem(data.tailgateSupplyItemId, data.supplyListItemName, tailgateId, data.itemAssignedUserId).then(function (respData) {
-                $ionicLoading.show({ template: 'User changed successfully!', noBackdrop: false, duration: 3000 });
+            TailgateService.updateTailgateSupplyItem(data.tailgateSupplyItemId, data.supplyListItemName, tailGateId, data.itemAssignedUserId).then(function (respData) {
+                var assigneduserName='';
+                for (var u = 0; u < $scope.myTailgaters.length; u++) {
+                    if ($scope.myTailgaters[u].userId == respData.data.itemAssignedUserId)
+                        assigneduserName = $scope.myTailgaters[u].userName;
+                }
+                $ionicLoading.show({ template: '' + data.supplyListItemName.toUpperCase() + ' assigned to ' + assigneduserName + '', noBackdrop: false, duration: 3000 });
             });
         }
 
+        /*on delete of supply list item on view tailgate page*/
         $scope.leaveSupplyItem = function (supplyItemId, index) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete Supply Item?'
@@ -233,7 +238,7 @@
             }
             itemArray = JSON.stringify(str);
             // var tailgateId = $cookies.get("currtailGateId");
-            TailgateService.addTailgateSupplyItems(itemArray, tailgateId, "-1").then(function (respData) {
+            TailgateService.addTailgateSupplyItems(itemArray, tailGateId, "-1").then(function (respData) {
                 $scope.alltailgateSupplyItem = respData.data;
                 $scope.associateUserWithSupplyItem();
             });

@@ -139,11 +139,11 @@
                     </div>
                 </div>
                 <ion-list>
-                    <div class="list">
-                        <div class="item item-divider plan_now" style="background-color:black;">
-                            <center>TAILGATERS</center>
+                        <div class="list">
+                            <div class="item item-divider plan_now" style="background-color:black;">
+                                <center>TAILGATERS</center>
+                            </div>
                         </div>
-                    </div>
                         <ion-item ng-repeat="data in myTailgaters | orderBy:'userName'" class="item-avatar ">
                             <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                             <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
@@ -154,7 +154,8 @@
                                 </ion-checkbox>
                             </span>
                         </ion-item>
-                    </ion-list>
+                 </ion-list>
+                <br/><br/><br/>
             </ion-content>
         </ion-tab>
         <ion-tab title="Plan Now" ng-click="selectTab(3)" disabled="copytTailgateId==0 || copytTailgateId==undefined" id="planNowTab" ng-class="{'tab-item-active' : tab == true}">
