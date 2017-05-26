@@ -11,6 +11,7 @@
         var detailItem = {};
         $scope.venueInfoSubDetail = [];
         var self = this;
+        var template = '';
         var baseImagePath = SERVER.hostName + "c/document_library/get_file";
         $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 14, control: {} };
         $scope.map.events = [];
@@ -733,7 +734,7 @@
             }
         };
         //popup for parking map cost range
-        var template = '<ion-popover-view class="popover">' +
+        template = '<ion-popover-view class="popover">' +
                              '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
                                  '<div class="list">' +
                                  '<span class="range" ng-click="filterMarker(0,0);"><img src=""><p id="0" style="color:#f7941e;">All</p></span>' +
@@ -741,7 +742,7 @@
                                  '<span class="range" ng-click="filterMarker(20,2);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="2">$21 - $30</p></span>' +
                                  '<span class="range" ng-click="filterMarker(30,3);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="3">$31 - $40</p></span>' +
                                  '<span class="range" ng-click="filterMarker(40,4);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="4">$41 - $50</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(50,5);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="5" >$51 and above</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(50,5);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="5">$51 and above</p></span>' +
                                  '</div>' +
                              '</ion-content>' +
                         '</ion-popover-view>';
@@ -765,6 +766,7 @@
                 $("#" + $scope.previousIndex).css("color", "#000000");
             } else {
                 $scope.filterCost = parseInt(data);
+                console.log(this);
                 $("#" + $scope.previousIndex).css("color", "#000000");
                 $("#" + index).css("color", "#f7941e");
                 $scope.previousIndex = index;

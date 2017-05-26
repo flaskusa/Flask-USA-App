@@ -45,6 +45,7 @@
 
             </ion-item>
         </ion-list>
+        <br><br><br>
         <ion-list show-delete="false" can-swipe="true" ng-hide="collapsedItems" id="editSupplyListItems" style="display:none;">
             <div class="item item-input-inset addNewTailgateItem">
                 <label class="item-input-wrapper" style="background-color: white;">
@@ -70,7 +71,7 @@
                 <ion-option-button class="button-assertive icon ion-trash-a" ng-click="leaveSupplyItem(tailgateItem.supplyItemId,$index);"></ion-option-button>
             </ion-item>
             <button nav-clear class="button button-block button-positive pay_now_button updateSupllyItemButton" ng-click="addSupplyItems();" >
-                Update Item List and Save Tailgate
+                Update item list
             </button>
         </ion-list>
         <a class="item" ng-if="myTailgaters.length == 0"> You do not have any tailgater yet. Please search and add tailgaters </a>

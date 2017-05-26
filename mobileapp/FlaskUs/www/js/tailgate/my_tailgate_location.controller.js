@@ -127,7 +127,7 @@
                     marker: [{  
                         coords: { 'latitude': currlatitude, 'longitude': currlongitude},
                         id: 0,
-                        options: { icon: 'img/map_icons/large_marker.svg' },
+                        options: { icon: 'img/map_icons/tailgateMarker.svg' },
                     }]
                 }
             });
