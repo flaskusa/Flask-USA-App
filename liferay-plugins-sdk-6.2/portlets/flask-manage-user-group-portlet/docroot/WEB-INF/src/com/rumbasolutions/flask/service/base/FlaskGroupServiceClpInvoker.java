@@ -38,7 +38,9 @@ public class FlaskGroupServiceClpInvoker {
 
 		_methodName35 = "getAllMyGroups";
 
-		_methodParameterTypes35 = new String[] { "long" };
+		_methodParameterTypes35 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName36 = "getGroups";
 
@@ -111,7 +113,8 @@ public class FlaskGroupServiceClpInvoker {
 
 		if (_methodName35.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes35, parameterTypes)) {
-			return FlaskGroupServiceUtil.getAllMyGroups(((Long)arguments[0]).longValue());
+			return FlaskGroupServiceUtil.getAllMyGroups(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName36.equals(name) &&

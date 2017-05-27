@@ -38,7 +38,9 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 
 		_methodName4 = "getAllMyGroups";
 
-		_methodParameterTypes4 = new String[] { "long" };
+		_methodParameterTypes4 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName5 = "getGroups";
 
@@ -164,12 +166,18 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONArray getAllMyGroups(long userId) {
+	public com.liferay.portal.kernel.json.JSONArray getAllMyGroups(
+		long userId, com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName4,
-					_methodParameterTypes4, new Object[] { userId });
+					_methodParameterTypes4,
+					new Object[] {
+						userId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

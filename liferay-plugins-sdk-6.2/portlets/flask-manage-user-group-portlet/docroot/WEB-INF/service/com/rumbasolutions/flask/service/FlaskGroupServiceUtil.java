@@ -68,8 +68,8 @@ public class FlaskGroupServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray getAllMyGroups(
-		long userId) {
-		return getService().getAllMyGroups(userId);
+		long userId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getAllMyGroups(userId, serviceContext);
 	}
 
 	public static java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getGroups(

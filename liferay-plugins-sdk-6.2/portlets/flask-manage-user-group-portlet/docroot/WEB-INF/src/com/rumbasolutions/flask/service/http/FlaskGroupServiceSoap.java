@@ -77,10 +77,12 @@ public class FlaskGroupServiceSoap {
 		}
 	}
 
-	public static java.lang.String getAllMyGroups(long userId)
+	public static java.lang.String getAllMyGroups(long userId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			com.liferay.portal.kernel.json.JSONArray returnValue = FlaskGroupServiceUtil.getAllMyGroups(userId);
+			com.liferay.portal.kernel.json.JSONArray returnValue = FlaskGroupServiceUtil.getAllMyGroups(userId,
+					serviceContext);
 
 			return returnValue.toString();
 		}

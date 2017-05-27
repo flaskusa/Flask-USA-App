@@ -81,7 +81,7 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 	}
 	
 	@Override
-	public JSONArray getAllMyGroups(long userId){
+	public JSONArray getAllMyGroups(long userId, ServiceContext serviceContext){
 		JSONArray iAarray = JSONFactoryUtil.createJSONArray();
 		try {
 			List<FlaskGroupUsers> userGroups = FlaskGroupUsersUtil.findByUserId(userId);
@@ -98,8 +98,8 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 				obj.put("isActive", myGroup.getIsActive());
 				obj.put("isDelete", myGroup.getIsDelete());
 				int count = 0;
+				boolean flag = false;
 				for(FlaskGroupRecipients recp: flaskGroupRecipients){
-					boolean flag = false;
 					String recipient = recp.getRecipients();
 					String read = recp.getRead();
 					String[] recpPart = recipient.split(",");
@@ -113,6 +113,18 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 						count++;
 					}
 				}
+				String dateTime ="";
+				  JSONArray messages = FlaskGroupMessagesServiceUtil.getAllMyFlaskGroupMessages(myGroup.getGroupId(), serviceContext);
+				  if(messages.length() > 0){
+				  for(int n = 0; n < messages.length(); n++)
+				  {
+				      JSONObject object = messages.getJSONObject(n);
+				      dateTime = object.getString("dateTime");
+				      obj.put("lastMessageDateTime", dateTime);
+				  }
+				  }else{
+					  obj.put("lastMessageDateTime", "");
+				  }
 				obj.put("unreadGroupMesageCount", count);
 				iAarray.put(obj);
 			}

@@ -62,8 +62,9 @@ public class FlaskGroupServiceWrapper implements FlaskGroupService,
 	}
 
 	@Override
-	public com.liferay.portal.kernel.json.JSONArray getAllMyGroups(long userId) {
-		return _flaskGroupService.getAllMyGroups(userId);
+	public com.liferay.portal.kernel.json.JSONArray getAllMyGroups(
+		long userId, com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskGroupService.getAllMyGroups(userId, serviceContext);
 	}
 
 	@Override

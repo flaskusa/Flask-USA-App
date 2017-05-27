@@ -69,7 +69,8 @@ public interface FlaskGroupService extends BaseService, InvokableService {
 	public java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getAllGroups();
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
-	public com.liferay.portal.kernel.json.JSONArray getAllMyGroups(long userId);
+	public com.liferay.portal.kernel.json.JSONArray getAllMyGroups(
+		long userId, com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.rumbasolutions.flask.model.FlaskGroup> getGroups(
