@@ -19,6 +19,8 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import sun.security.action.GetLongAction;
+
 import com.liferay.contacts.model.FlaskGroupMessages;
 import com.liferay.contacts.model.FlaskGroupRecipients;
 import com.liferay.contacts.service.FlaskGroupMessagesLocalServiceUtil;
@@ -81,52 +83,53 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 	}
 	
 	@Override
-	public JSONArray getAllMyGroups(long userId, ServiceContext serviceContext){
+	public JSONArray getAllMyGroups(long userId, ServiceContext serviceContext)throws Exception{
 		JSONArray iAarray = JSONFactoryUtil.createJSONArray();
 		try {
 			List<FlaskGroupUsers> userGroups = FlaskGroupUsersUtil.findByUserId(userId);
 			for(FlaskGroupUsers userGroup: userGroups){
 				FlaskGroup myGroup = FlaskGroupServiceUtil.getGroup(userGroup.getGroupId());
-				List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupRecipientsServiceUtil.getGroupRecipientsByGroupId(myGroup.getGroupId());
-				JSONObject obj= JSONFactoryUtil.createJSONObject();
-				obj.put("groupId", myGroup.getGroupId());
-				obj.put("groupName", myGroup.getGroupName());
-				obj.put("groupDescription", myGroup.getGroupDescription());
-				obj.put("createdDate", myGroup.getCreatedDate());
-				obj.put("createdBy", myGroup.getCreatedBy());
-				obj.put("isAdmin", userGroup.getIsAdmin());
-				obj.put("isActive", myGroup.getIsActive());
-				obj.put("isDelete", myGroup.getIsDelete());
-				int count = 0;
-				boolean flag = false;
-				for(FlaskGroupRecipients recp: flaskGroupRecipients){
-					String recipient = recp.getRecipients();
-					String read = recp.getRead();
-					String[] recpPart = recipient.split(",");
-					String[] readPart = read.split(","); 
-					for(int j = 0; j <= recpPart.length-1; j++){
-						if((userId == Long.parseLong(recpPart[j])) && (Long.parseLong(readPart[j]) == 0)){
-							flag = true;
+				if(myGroup != null){
+					List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupRecipientsServiceUtil.getGroupRecipientsByGroupId(myGroup.getGroupId());
+					JSONObject obj= JSONFactoryUtil.createJSONObject();
+					obj.put("groupId", myGroup.getGroupId());
+					obj.put("groupName", myGroup.getGroupName());
+					obj.put("groupDescription", myGroup.getGroupDescription());
+					obj.put("createdDate", myGroup.getCreatedDate());
+					obj.put("createdBy", myGroup.getCreatedBy());
+					obj.put("isAdmin", userGroup.getIsAdmin());
+					obj.put("isActive", myGroup.getIsActive());
+					obj.put("isDelete", myGroup.getIsDelete());
+					int count = 0;
+					boolean flag = false;
+					for(FlaskGroupRecipients recp: flaskGroupRecipients){
+						String recipient = recp.getRecipients();
+						String read = recp.getRead();
+						String[] recpPart = recipient.split(",");
+						String[] readPart = read.split(",");
+						for(int j = 0; j <= recpPart.length-1; j++){
+							if((userId == Long.parseLong(recpPart[j])) && (Long.parseLong(readPart[j]) == 0)){
+								flag = true;
+							}
+						}
+						if(flag){
+							count++;
 						}
 					}
-					if(flag){
-						count++;
-					}
+					String dateTime ="";
+					  JSONArray messages = FlaskGroupMessagesServiceUtil.getAllMyFlaskGroupMessages(myGroup.getGroupId(), serviceContext);
+					  if(messages.length() > 0){
+						  for(int n = 0; n < messages.length(); n++){
+						      JSONObject object = messages.getJSONObject(n);					      
+						      dateTime = object.getString("dateTime");
+						      obj.put("lastMessageDateTime", dateTime);
+						  }
+					  }else{
+						  obj.put("lastMessageDateTime", "");
+					  }
+					obj.put("unreadGroupMesageCount", count);
+					iAarray.put(obj);
 				}
-				String dateTime ="";
-				  JSONArray messages = FlaskGroupMessagesServiceUtil.getAllMyFlaskGroupMessages(myGroup.getGroupId(), serviceContext);
-				  if(messages.length() > 0){
-				  for(int n = 0; n < messages.length(); n++)
-				  {
-				      JSONObject object = messages.getJSONObject(n);
-				      dateTime = object.getString("dateTime");
-				      obj.put("lastMessageDateTime", dateTime);
-				  }
-				  }else{
-					  obj.put("lastMessageDateTime", "");
-				  }
-				obj.put("unreadGroupMesageCount", count);
-				iAarray.put(obj);
 			}
 		} catch (Exception e) {
 			LOGGER.error("Exception in getAllMyGroups. " + e.getMessage());

@@ -167,7 +167,8 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 
 	@Override
 	public com.liferay.portal.kernel.json.JSONArray getAllMyGroups(
-		long userId, com.liferay.portal.service.ServiceContext serviceContext) {
+		long userId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception {
 		Object returnObj = null;
 
 		try {
@@ -181,6 +182,10 @@ public class FlaskGroupServiceClp implements FlaskGroupService {
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof java.lang.Exception) {
+				throw (java.lang.Exception)t;
+			}
 
 			if (t instanceof RuntimeException) {
 				throw (RuntimeException)t;

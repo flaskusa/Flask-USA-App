@@ -68,7 +68,8 @@ public class FlaskGroupServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray getAllMyGroups(
-		long userId, com.liferay.portal.service.ServiceContext serviceContext) {
+		long userId, com.liferay.portal.service.ServiceContext serviceContext)
+		throws java.lang.Exception {
 		return getService().getAllMyGroups(userId, serviceContext);
 	}
 
