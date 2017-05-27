@@ -5,14 +5,56 @@
         .module('flaskApp')
         .service('LoginService', LoginService);
 
-    LoginService.$inject = ['$http', 'SERVER', '$state', '$cookies'];
+    LoginService.$inject = ['$http', 'SERVER', '$state', '$cookies', '$q'];
 
-    function LoginService($http, SERVER, $state, $cookies) {
-//        var baseURL = SERVER.url;
+    function LoginService($http, SERVER, $state, $cookies, $q) {
+        //        var baseURL = SERVER.url;
+        var services = {
+            forgotPasswordFunction: forgotPasswordFunction,
+            resetPasswordFuntion: resetPasswordFuntion,
+            authenticateUser: authenticateUser,
+            getUserProfilePicture: getUserProfilePicture
+        }
+        var forgotPasswordURL = "/flask-rest-users-portlet.flaskadmin/forgot-password";
+        var resetPasswordUrl = "/flask-rest-users-portlet.flaskadmin/reset-password";
 
+
+        var companyId = SERVER.companyId;
         var getUserByEmailId = "user/get-user-by-email-address";
         var getUserProfilePic = "dlapp/get-file-entry";
-        this.authenticateUser = function (scope) {
+
+        function forgotPasswordFunction(emailAddress) {
+            return $http.get(SERVER.url + forgotPasswordURL, {
+                params: {
+                    emailAddress: emailAddress
+                }
+            })
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+
+        function resetPasswordFuntion(emailAddress, password1, password2, otp) {
+            return $http.get(SERVER.url + resetPasswordUrl, {
+                params: {
+                    emailAddress: emailAddress,
+                    password1: password1,
+                    password2: password2,
+                    otp: otp
+                }
+            })
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+
+        function authenticateUser (scope) {
             var authdata = Base64.encode(scope.Email + ':' + scope.password);
             $cookies.put("authData",authdata);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
@@ -24,7 +66,7 @@
                 });
         }
 
-        this.getUserProfilePicture = function () {
+        function getUserProfilePicture () {
             var userPic = $cookies.getObject('CurrentUser');
             return $http.get(SERVER.url + getUserProfilePic, { params: { 'fileEntryId': userPic.data.portraitId } })
             .then(function success(resp) {
@@ -32,7 +74,8 @@
                 return resp;
             });
         }
-    }
+        return services;
+    } 
 
 
     // Base64 encoding service used by AuthenticationService

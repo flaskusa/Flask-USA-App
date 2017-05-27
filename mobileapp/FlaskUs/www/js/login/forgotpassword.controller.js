@@ -3,28 +3,24 @@
     angular.module('flaskApp')
         .controller('ForgotPasswordCtrl', ForgotPasswordCtrl);
 
-    ForgotPasswordCtrl.$inject = ['$scope','$state','$http','SERVER','$flaskUtil', '$ionicLoading','$timeout'];
+    ForgotPasswordCtrl.$inject = ['$scope', '$state', '$http', 'SERVER', '$flaskUtil', '$ionicLoading', '$timeout', 'LoginService', '$cookies'];
 
     / @ngInject /
-    function ForgotPasswordCtrl($scope,$state, $http, SERVER, $flaskUtil,$ionicLoading,$timeout) {
+    function ForgotPasswordCtrl($scope, $state, $http, SERVER, $flaskUtil, $ionicLoading, $timeout, LoginService, $cookies) {
         $scope.user = {'email':''};
-        $scope.sendForgotpasswordLink = function() {
-            $http.get(SERVER.url + "/flask-rest-users-portlet.flaskadmin/reset-password", { params: { 'email': $scope.user.email } })
-                .then(function success(response) {
-                    if(response.data.message == "OK"){
-                        showToastMessage("Password reset link is sent to email");
-                        $timeout(function() {
-                            $state.go("app.login");
-                        },2000)
-                    }
-                    else if(response.data.message == "EmailIdNotRegistered") {
-                        $flaskUtil.alert("Email id not registered");
-                    }else {
-                         $state.go("app.login");
-                    }
-                }, function failure(response) {
-                    console.log("failed");
-                });
+        $scope.sendForgotpasswordLink = function () {
+            LoginService.forgotPasswordFunction($scope.user.email).then(function (response) {
+                if (response == true) {
+                    showToastMessage("Password reset link is sent to email");
+                    $cookies.put("ForgotPasswordUserEmail", $scope.user.email);
+                    $timeout(function () {
+                        $state.go("app.reset_password");
+                    }, 2000)
+                }
+                else {
+                    showToastMessage("Email id not registered");
+                }
+            });
         }
 
         function showToastMessage(message) {

@@ -273,6 +273,16 @@
             }
         })
 
+        .state('app.reset_password', {
+            url: '/reset_password',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/reset_password.html',
+                    controller: 'resetPasswordCtrl'
+                }
+            }
+        })
+
         .state('app.account_settings', {
             url: '/account_settings',
             views: {
