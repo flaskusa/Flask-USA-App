@@ -135,7 +135,7 @@
         $scope.getMessagesTime = function () {
             angular.forEach($scope.myMessages, function (value, key) {
                 $scope.messageDate = new Date(value.dateTime);
-                var result = getTimeDifference();
+                var result = getTimeDifference(value.dateTime);
                 value.diffDate = result;
             });
         }
@@ -143,7 +143,7 @@
         $scope.goBack = function () {
             $ionicHistory.goBack();
         }
-        function getTimeDifference() {
+        function getTimeDifference(dateTime) {
             var todayDate = new Date();
             var differenceTravel = todayDate.getTime() - $scope.messageDate.getTime();
             var seconds = Math.floor((differenceTravel) / (1000));
@@ -158,15 +158,15 @@
             else if (minutes < 60) {
                 return minutes + ' minutes ago';
             } else if (hours < 24) {
-                return hours + " hours ago";
+                return dateTime.substr(11, 5);
             }
             else if (days < 31) {
-                return days + " days ago"
+                return dateTime.substr(0, 16);
             } else if (months < 12) {
-                return months + " months ago"
+                return dateTime.substr(0, 16);
 
             } else {
-                year + " years ago"
+                dateTime.substr(0, 16);
             }
         }
 
