@@ -3489,3 +3489,12 @@ div#locationMarker {
 .whatToShow{
     float:left;border: none; padding: 1px; padding-left: 5px; padding-right: 5px;
 }
+.viewEditSupplyItem{
+    margin-top:-71px;
+}
+.item.item-input-inset.addNewTailgateItem.viewEditSupplyItem {
+    border: solid 1px black;
+}
+button.button.button-block.button-positive.pay_now_button.updateSupllyItemButton {
+    margin-bottom: 30px;
+}

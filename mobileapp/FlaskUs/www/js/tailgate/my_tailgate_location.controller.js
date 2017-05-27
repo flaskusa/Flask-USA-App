@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgatelocationCtrl', mytailgatelocationCtrl);
 
-    mytailgatelocationCtrl.$inject = ['$scope', '$state', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi', 'SERVER', '$cordovaInAppBrowser'];
+    mytailgatelocationCtrl.$inject = ['$scope', '$state', '$ionicPlatform', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi', 'SERVER', '$cordovaInAppBrowser'];
 
     /* @ngInject */
-    function mytailgatelocationCtrl($scope, $state, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi, SERVER, $cordovaInAppBrowser) {
+    function mytailgatelocationCtrl($scope, $state, $ionicPlatform, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi, SERVER, $cordovaInAppBrowser) {
         $scope.myTailgaters = [];
         var tailGateId = $cookies.get('currtailGateId');
         $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
@@ -20,6 +20,19 @@
         $scope.$root.takemeThere = function (value) {
             getReverseGeocodingData(value.coords.latitude, value.coords.longitude);
         }
+        $scope.deviceInformation = ionic.Platform.device();
+        $scope.deviceModel = $scope.deviceInformation.model;
+        $scope.isMobile = {
+            Android: function () {
+                return ionic.Platform.isAndroid();
+            },
+            iOS: function () {
+                return ionic.Platform.isIOS();
+            },
+            Windows: function () {
+                return ionic.Platform.isWindowsPhone();
+            }
+        };
 
         function getReverseGeocodingData(lat, lng) {
             var latlng = new google.maps.LatLng(lat, lng);
@@ -33,12 +46,25 @@
                 // to check Geoeode Status is OK or not
                 if (status == google.maps.GeocoderStatus.OK) {
                     address = (results[0].formatted_address);
-                    var currurl = "http://maps.google.com/?saddr=Current%20Location&daddr=" + address;
+                    var currurl = '';
+                    if ($scope.isMobile.Android()) {
+                        currurl = 'http://maps.google.com/?saddr=Current%20Location&daddr=' + address;
+                    }
+                    else if ($scope.isMobile.iOS()) {
+                        currurl = 'http://maps.apple.com/?saddr=Current%20Location&daddr=' + address;
+                    }
+                    else if ($scope.isMobile.Windows()) {
+                        currurl = 'maps:' + address;
+                    }
+                    else {
+                        currurl = 'http://maps.google.com/?saddr=Current%20Location&daddr=' + address;
+                    }
                     console.log(address);
                     openUrl(currurl, "_system");
                 }
             });            
         }
+
         //open venue URL
         function openUrl(url, target) {
             $cordovaInAppBrowser.open(url, target, { location: 'no' }).
