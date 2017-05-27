@@ -39,48 +39,58 @@ public class FlaskMessagesServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName69 = "getAllMyFlaskMessages";
+		_methodName69 = "sendSnsEmail";
 
 		_methodParameterTypes69 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "java.lang.String"
 			};
 
-		_methodName70 = "getMyUnreadFlaskMessages";
+		_methodName70 = "getAllMyFlaskMessages";
 
 		_methodParameterTypes70 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName71 = "getMyFlaskMessagesCount";
+		_methodName71 = "getMyUnreadFlaskMessages";
 
 		_methodParameterTypes71 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName72 = "getMyUnreadFlaskMessagesCount";
+		_methodName72 = "getMyFlaskMessagesCount";
 
 		_methodParameterTypes72 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName73 = "getTotalUnreadChatCount";
+		_methodName73 = "getMyUnreadFlaskMessagesCount";
 
 		_methodParameterTypes73 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName74 = "deleteMessage";
-
-		_methodParameterTypes74 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName75 = "deleteMessagesByDateRange";
+		_methodName74 = "getTotalUnreadChatCount";
+
+		_methodParameterTypes74 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName75 = "deleteMessage";
 
 		_methodParameterTypes75 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName76 = "deleteMessagesByDateRange";
+
+		_methodParameterTypes76 = new String[] {
 				"java.util.Date", "java.util.Date",
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName77 = "sendPushNotification";
+
+		_methodParameterTypes77 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -107,48 +117,59 @@ public class FlaskMessagesServiceClpInvoker {
 
 		if (_methodName69.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
-			return FlaskMessagesServiceUtil.getAllMyFlaskMessages(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return FlaskMessagesServiceUtil.sendSnsEmail((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1]);
 		}
 
 		if (_methodName70.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes70, parameterTypes)) {
-			return FlaskMessagesServiceUtil.getMyUnreadFlaskMessages(((Long)arguments[0]).longValue(),
+			return FlaskMessagesServiceUtil.getAllMyFlaskMessages(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName71.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes71, parameterTypes)) {
-			return FlaskMessagesServiceUtil.getMyFlaskMessagesCount(((Long)arguments[0]).longValue(),
+			return FlaskMessagesServiceUtil.getMyUnreadFlaskMessages(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName72.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
-			return FlaskMessagesServiceUtil.getMyUnreadFlaskMessagesCount(((Long)arguments[0]).longValue(),
+			return FlaskMessagesServiceUtil.getMyFlaskMessagesCount(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
-			return FlaskMessagesServiceUtil.getTotalUnreadChatCount((com.liferay.portal.service.ServiceContext)arguments[0]);
+			return FlaskMessagesServiceUtil.getMyUnreadFlaskMessagesCount(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 
 		if (_methodName74.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
+			return FlaskMessagesServiceUtil.getTotalUnreadChatCount((com.liferay.portal.service.ServiceContext)arguments[0]);
+		}
+
+		if (_methodName75.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
 			FlaskMessagesServiceUtil.deleteMessage(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName75.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
 			FlaskMessagesServiceUtil.deleteMessagesByDateRange((java.util.Date)arguments[0],
 				(java.util.Date)arguments[1],
 				(com.liferay.portal.service.ServiceContext)arguments[2]);
 
 			return null;
+		}
+
+		if (_methodName77.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+			return FlaskMessagesServiceUtil.sendPushNotification();
 		}
 
 		throw new UnsupportedOperationException();
@@ -174,4 +195,8 @@ public class FlaskMessagesServiceClpInvoker {
 	private String[] _methodParameterTypes74;
 	private String _methodName75;
 	private String[] _methodParameterTypes75;
+	private String _methodName76;
+	private String[] _methodParameterTypes76;
+	private String _methodName77;
+	private String[] _methodParameterTypes77;
 }

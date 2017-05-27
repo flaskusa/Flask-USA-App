@@ -24,6 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.liferay.contacts.model.Entry;
 import com.liferay.contacts.model.FlaskRecipients;
+import com.liferay.contacts.service.FlaskMessagesServiceUtil;
 import com.liferay.contacts.service.base.EntryServiceBaseImpl;
 import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.contacts.util.ContactsUtil;
@@ -52,6 +53,7 @@ import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.model.SocialRequestConstants;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
+import com.rumbasolutions.flask.email.util.SnsUtil;
 
 /**
  * @author Bruno Farache
@@ -161,7 +163,8 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 	public JSONArray searchMyFriends(long companyId, String keywords, ServiceContext serviceContext)
 			  throws PortalException, SystemException{
 			  JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-			  JSONObject jsonObject = null;
+			  JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+			  boolean flag = false;
 			  long userId = getUserId();
 			  int cnt1 = entryLocalService.searchUsersAndContactsCount(companyId, userId, keywords);
 				List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
@@ -171,6 +174,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 			  for(SocialRelation relObj: relation){
 				  List<FlaskRecipients> flaskRecipients = new ArrayList<FlaskRecipients>();
 				  int count = 0;
+				  String dateTime ="";
 				  if(keywords != ""){
 					  for (BaseModel<?> contact : contacts) {
 						  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), ((User) contact).getUserId());
@@ -188,6 +192,17 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 					  }
 				  }else{
 					  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), getUserById(relObj.getUserId2(), serviceContext).getUserId());
+					  if(!flaskRecipients.isEmpty()){
+						  JSONArray messages = FlaskMessagesServiceUtil.getAllMyFlaskMessages(getUserById(relObj.getUserId2(), serviceContext).getUserId(), serviceContext);						  
+						  for(int n = 0; n < messages.length(); n++)
+						  {
+						      JSONObject object = messages.getJSONObject(n);
+						      dateTime = object.getString("dateTime");
+						      jsonObject.put("lastMessageDateTime", dateTime);
+						  }
+					  	  }else {
+					  		  flag = true;
+					  	  }
 					  User user2 = getUserById(relObj.getUserId2(), serviceContext);
 					   jsonObject = ContactsUtil.getUserJSONObject( userId, user2);
 					   jsonObject.put("portraitId", getUserById(relObj.getUserId2(), serviceContext).getPortraitId());
@@ -197,6 +212,9 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 							count++;
 						}
 					}
+				  if(flag){
+					  jsonObject.put("lastMessageDateTime", "");
+				  }
 				   jsonObject.put("unreadMessageCount", count);
 				   jsonArray.put(jsonObject);
 			  }
@@ -233,12 +251,16 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 				}
 			}
 			SocialRelationLocalServiceUtil.addRelation(serviceContext.getUserId(), receiverUserId, SocialRelationConstants.TYPE_BI_CONNECTION);
+//			SnsUtil.sendSnsEmail("Flask Group message from "+user.getFirstName() + " " + user.getLastName(), message);
 	}
 
 	public void requestSocialRelation(long receiverUserId, ServiceContext serviceContext)throws Exception {
 			SocialRequest socialRequest = SocialRequestLocalServiceUtil.addRequest(serviceContext.getUserId(), 0, User.class.getName(),serviceContext.getUserId(),
 					SocialRelationConstants.TYPE_BI_CONNECTION, "", receiverUserId);
 			sendNotificationEvent(socialRequest);
+			String senderName = UserLocalServiceUtil.getUser(serviceContext.getUserId()).getFullName();
+			String receiverName = UserLocalServiceUtil.getUser(receiverUserId).getFullName();
+			SnsUtil.sendSnsEmail("Flask Friend Request from "+senderName, senderName + " Wants to be friend of "+receiverName);
 	}
 	
 	public int getRequestsCount(ServiceContext serviceContext)throws PortalException, SystemException{

@@ -68,6 +68,12 @@ public class FlaskMessagesServiceWrapper implements FlaskMessagesService,
 	}
 
 	@Override
+	public boolean sendSnsEmail(java.lang.String subject,
+		java.lang.String message) {
+		return _flaskMessagesService.sendSnsEmail(subject, message);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.json.JSONArray getAllMyFlaskMessages(
 		long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
@@ -115,6 +121,11 @@ public class FlaskMessagesServiceWrapper implements FlaskMessagesService,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_flaskMessagesService.deleteMessagesByDateRange(startDate, endDate,
 			serviceContext);
+	}
+
+	@Override
+	public boolean sendPushNotification() {
+		return _flaskMessagesService.sendPushNotification();
 	}
 
 	/**

@@ -80,6 +80,21 @@ public class FlaskMessagesServiceSoap {
 		}
 	}
 
+	public static boolean sendSnsEmail(java.lang.String subject,
+		java.lang.String message) throws RemoteException {
+		try {
+			boolean returnValue = FlaskMessagesServiceUtil.sendSnsEmail(subject,
+					message);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String getAllMyFlaskMessages(long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -181,6 +196,19 @@ public class FlaskMessagesServiceSoap {
 		try {
 			FlaskMessagesServiceUtil.deleteMessagesByDateRange(startDate,
 				endDate, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean sendPushNotification() throws RemoteException {
+		try {
+			boolean returnValue = FlaskMessagesServiceUtil.sendPushNotification();
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

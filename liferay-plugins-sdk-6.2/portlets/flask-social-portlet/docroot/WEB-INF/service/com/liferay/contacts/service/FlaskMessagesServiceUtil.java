@@ -72,6 +72,11 @@ public class FlaskMessagesServiceUtil {
 			serviceContext);
 	}
 
+	public static boolean sendSnsEmail(java.lang.String subject,
+		java.lang.String message) {
+		return getService().sendSnsEmail(subject, message);
+	}
+
 	public static com.liferay.portal.kernel.json.JSONArray getAllMyFlaskMessages(
 		long receiverId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
@@ -110,6 +115,10 @@ public class FlaskMessagesServiceUtil {
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService()
 			.deleteMessagesByDateRange(startDate, endDate, serviceContext);
+	}
+
+	public static boolean sendPushNotification() {
+		return getService().sendPushNotification();
 	}
 
 	public static void clearService() {

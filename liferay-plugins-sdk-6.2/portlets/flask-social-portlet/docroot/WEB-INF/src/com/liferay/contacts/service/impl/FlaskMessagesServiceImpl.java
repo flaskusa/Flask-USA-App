@@ -18,6 +18,20 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import com.amazonaws.auth.AWSCredentials;
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.auth.policy.Condition;
+import com.amazonaws.auth.policy.Policy;
+import com.amazonaws.auth.policy.Principal;
+import com.amazonaws.auth.policy.Statement;
+import com.amazonaws.auth.policy.Statement.Effect;
+import com.amazonaws.auth.policy.actions.SNSActions;
+import com.amazonaws.auth.policy.conditions.SNSConditionFactory;
+import com.amazonaws.services.sns.AmazonSNS;
+import com.amazonaws.services.sns.AmazonSNSClient;
+import com.amazonaws.services.sns.AmazonSNSClientBuilder;
+import com.amazonaws.services.sns.model.PublishRequest;
+import com.amazonaws.services.sns.model.SetTopicAttributesRequest;
 import com.liferay.contacts.model.FlaskMessages;
 import com.liferay.contacts.model.FlaskRecipients;
 import com.liferay.contacts.model.impl.FlaskRecipientsImpl;
@@ -40,10 +54,12 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
+import com.rumbasolutions.flask.email.util.SnsUtil;
 import com.rumbasolutions.flask.model.FlaskGroup;
 import com.rumbasolutions.flask.service.FlaskGroupServiceUtil;
 
@@ -84,6 +100,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	   for (String userId : rec){
 		   if(Long.parseLong(userId) > 0){
 			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false, serviceContext);
+			   SnsUtil.sendSnsEmail("Flask message from "+user.getFirstName() + " " + user.getLastName(), message);
 			   if(sendEmail)
 			        EmailInvitationUtil.emailMessage(user.getFullName(), user.getEmailAddress(), recp.getEmail(), message, serviceContext);
 		   }
@@ -92,6 +109,23 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	   e.printStackTrace();
 	  }
 	  return flaskMessage;
+	}
+	
+	@SuppressWarnings("deprecation")
+	@Override
+	public boolean sendSnsEmail(String subject, String message){
+		boolean mailSent = false;
+		try {
+			PublishRequest req = new PublishRequest(PropsUtil.get("flask.push.arn"), message, subject);
+			AWSCredentials cred = new BasicAWSCredentials(PropsUtil.get("flask.push.accessKey"), PropsUtil.get("flask.push.secretKey"));
+			req.setRequestCredentials(cred);
+			AmazonSNSClient client = new AmazonSNSClient(cred);
+			client.publish(req);
+			mailSent = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return mailSent;
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -229,5 +263,11 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	@Override
+	public boolean sendPushNotification() {
+		// TODO Auto-generated method stub
+		return false;
 	}
 }

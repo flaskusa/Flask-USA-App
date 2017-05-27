@@ -70,6 +70,9 @@ public interface FlaskMessagesService extends BaseService, InvokableService {
 		boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	public boolean sendSnsEmail(java.lang.String subject,
+		java.lang.String message);
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONArray getAllMyFlaskMessages(
 		long receiverId,
@@ -98,4 +101,6 @@ public interface FlaskMessagesService extends BaseService, InvokableService {
 	public void deleteMessagesByDateRange(java.util.Date startDate,
 		java.util.Date endDate,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public boolean sendPushNotification();
 }
