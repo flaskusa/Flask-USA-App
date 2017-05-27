@@ -15,7 +15,7 @@
                     $cookies.put("ForgotPasswordUserEmail", $scope.user.email);
                     $timeout(function () {
                         $state.go("app.reset_password");
-                    }, 2000)
+                    }, 1000);
                 }
                 else {
                     showToastMessage("Email id not registered");
