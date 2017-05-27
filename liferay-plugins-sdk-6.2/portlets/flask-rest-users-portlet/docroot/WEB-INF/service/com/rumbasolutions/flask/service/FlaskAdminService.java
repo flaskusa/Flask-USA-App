@@ -261,4 +261,14 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 	public java.util.Map<java.lang.String, java.lang.String> updatePassword(
 		long userId, java.lang.String oldPassword, java.lang.String password1,
 		java.lang.String password2);
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	public boolean forgotPassword(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	public boolean resetPassword(java.lang.String emailAddress,
+		java.lang.String password1, java.lang.String password2, long otp,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.NoSuchTicketException, java.lang.Exception;
 }

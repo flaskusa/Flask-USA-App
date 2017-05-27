@@ -503,5 +503,38 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	public static boolean forgotPassword(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			boolean returnValue = FlaskAdminServiceUtil.forgotPassword(emailAddress,
+					serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean resetPassword(java.lang.String emailAddress,
+		java.lang.String password1, java.lang.String password2, long otp,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			boolean returnValue = FlaskAdminServiceUtil.resetPassword(emailAddress,
+					password1, password2, otp, serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskAdminServiceSoap.class);
 }

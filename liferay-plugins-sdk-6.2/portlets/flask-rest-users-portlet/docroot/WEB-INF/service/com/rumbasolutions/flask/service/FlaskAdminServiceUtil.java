@@ -307,6 +307,20 @@ public class FlaskAdminServiceUtil {
 				   .updatePassword(userId, oldPassword, password1, password2);
 	}
 
+	public static boolean forgotPassword(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().forgotPassword(emailAddress, serviceContext);
+	}
+
+	public static boolean resetPassword(java.lang.String emailAddress,
+		java.lang.String password1, java.lang.String password2, long otp,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.NoSuchTicketException, java.lang.Exception {
+		return getService()
+				   .resetPassword(emailAddress, password1, password2, otp,
+			serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

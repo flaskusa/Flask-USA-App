@@ -213,6 +213,19 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
+
+		_methodName29 = "forgotPassword";
+
+		_methodParameterTypes29 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName30 = "resetPassword";
+
+		_methodParameterTypes30 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	@Override
@@ -1376,6 +1389,80 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		return (java.util.Map<java.lang.String, java.lang.String>)ClpSerializer.translateOutput(returnObj);
 	}
 
+	@Override
+	public boolean forgotPassword(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName29,
+					_methodParameterTypes29,
+					new Object[] {
+						ClpSerializer.translateInput(emailAddress),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
+	@Override
+	public boolean resetPassword(java.lang.String emailAddress,
+		java.lang.String password1, java.lang.String password2, long otp,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.NoSuchTicketException, java.lang.Exception {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName30,
+					_methodParameterTypes30,
+					new Object[] {
+						ClpSerializer.translateInput(emailAddress),
+						
+					ClpSerializer.translateInput(password1),
+						
+					ClpSerializer.translateInput(password2),
+						
+					otp,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.NoSuchTicketException) {
+				throw (com.liferay.portal.NoSuchTicketException)t;
+			}
+
+			if (t instanceof java.lang.Exception) {
+				throw (java.lang.Exception)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -1433,4 +1520,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	private String[] _methodParameterTypes27;
 	private String _methodName28;
 	private String[] _methodParameterTypes28;
+	private String _methodName29;
+	private String[] _methodParameterTypes29;
+	private String _methodName30;
+	private String[] _methodParameterTypes30;
 }

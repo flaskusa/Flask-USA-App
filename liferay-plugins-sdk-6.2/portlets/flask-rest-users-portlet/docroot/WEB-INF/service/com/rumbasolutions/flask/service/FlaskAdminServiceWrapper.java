@@ -323,6 +323,21 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 			password1, password2);
 	}
 
+	@Override
+	public boolean forgotPassword(java.lang.String emailAddress,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskAdminService.forgotPassword(emailAddress, serviceContext);
+	}
+
+	@Override
+	public boolean resetPassword(java.lang.String emailAddress,
+		java.lang.String password1, java.lang.String password2, long otp,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws com.liferay.portal.NoSuchTicketException, java.lang.Exception {
+		return _flaskAdminService.resetPassword(emailAddress, password1,
+			password2, otp, serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

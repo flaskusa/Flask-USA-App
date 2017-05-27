@@ -213,6 +213,19 @@ public class FlaskAdminServiceClpInvoker {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String"
 			};
+
+		_methodName59 = "forgotPassword";
+
+		_methodParameterTypes59 = new String[] {
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName60 = "resetPassword";
+
+		_methodParameterTypes60 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -461,6 +474,20 @@ public class FlaskAdminServiceClpInvoker {
 				(java.lang.String)arguments[3]);
 		}
 
+		if (_methodName59.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes59, parameterTypes)) {
+			return FlaskAdminServiceUtil.forgotPassword((java.lang.String)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName60.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes60, parameterTypes)) {
+			return FlaskAdminServiceUtil.resetPassword((java.lang.String)arguments[0],
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				((Long)arguments[3]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[4]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -520,4 +547,8 @@ public class FlaskAdminServiceClpInvoker {
 	private String[] _methodParameterTypes57;
 	private String _methodName58;
 	private String[] _methodParameterTypes58;
+	private String _methodName59;
+	private String[] _methodParameterTypes59;
+	private String _methodName60;
+	private String[] _methodParameterTypes60;
 }

@@ -20,18 +20,23 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.mail.internet.InternetAddress;
+
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.mail.service.MailServiceUtil;
+import com.liferay.portal.NoSuchTicketException;
 import com.liferay.portal.ReservedUserIdException;
-import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
 import com.liferay.portal.model.Address;
@@ -40,6 +45,7 @@ import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Region;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.Ticket;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -47,6 +53,7 @@ import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.TicketLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.service.persistence.CountryUtil;
@@ -850,6 +857,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		return isContentAdmin;
 		
 	}
+	
 	@AccessControlled(guestAccessEnabled =true)
 	@Override
 	public	Map<String, String> updatePassword(long userId, String oldPassword, String password1, String password2) {
@@ -871,5 +879,62 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			LOGGER.error(exception);
 		}
 		return statusMap;
+	}
+	
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public boolean forgotPassword(String emailAddress, ServiceContext serviceContext){
+		boolean done = false;
+		InternetAddress fromAddress = null; 
+		InternetAddress toAddress = null;
+		try {
+			fromAddress = new InternetAddress("info@flaskus.com");
+			toAddress = new InternetAddress(emailAddress);
+			MailMessage mailMessage = new MailMessage();
+			mailMessage.setTo(toAddress); 
+			mailMessage.setFrom(fromAddress);
+			User user = UserLocalServiceUtil.getUserByEmailAddress(PortalUtil.getDefaultCompanyId(), emailAddress);
+			Calendar calendar = Calendar.getInstance();
+			calendar.add(Calendar.DAY_OF_YEAR, 1);
+			Date tomorrow = calendar.getTime();
+			Ticket ticket = TicketLocalServiceUtil.addTicket(PortalUtil.getDefaultCompanyId(), FlaskAdminServiceImpl.class.getName(), user.getUserId(), 3, "", tomorrow, serviceContext);
+			mailMessage.setSubject("http://flaskus.com: Reset Password OTP");
+			mailMessage.setBody("Dear " + user.getFullName() + ",\n\n" +
+								"You can reset your password for http://flaskus.com using OTP given below which will be expired on " + tomorrow + "\n\n" +
+								"OTP: " + ticket.getTicketId());
+			MailServiceUtil.sendEmail(mailMessage);
+			done = true;
+		} catch (Exception e) {
+			LOGGER.error(e);
+		}
+		return done;
+	}
+	
+	@AccessControlled(guestAccessEnabled = true)
+	@Override
+	public boolean resetPassword(String emailAddress, String password1, String password2, long otp, ServiceContext serviceContext)throws NoSuchTicketException, Exception{
+		boolean done = false;
+		try {
+			Ticket ticket = TicketLocalServiceUtil.getTicket(otp);
+			if(ticket.isExpired())
+				throw new Exception("OTP is expired");
+			if(password1.equals(password2)) {
+				User user = UserLocalServiceUtil.getUserByEmailAddress(PortalUtil.getDefaultCompanyId(), emailAddress);
+				if(ticket.getClassPK() == user.getUserId()){
+					user = UserLocalServiceUtil.updatePassword(user.getUserId(), password1, password2, false,true);
+					TicketLocalServiceUtil.deleteTicket(ticket);
+					done = true;
+				}else{
+					throw new Exception("Invalid OTP");
+				}
+			}
+		} catch(NoSuchTicketException e){
+			LOGGER.error(e);
+			throw new NoSuchTicketException("Invalid OTP");
+		} catch (Exception e) {
+			LOGGER.error(e);
+			throw e;
+		}
+		return done;
 	}
 }
