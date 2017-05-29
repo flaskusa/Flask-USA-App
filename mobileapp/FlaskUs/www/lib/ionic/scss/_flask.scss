@@ -3313,6 +3313,7 @@ div#LocationMarkerInfoHeading {
 div#locationMarker {
     padding: 5px 14px 16px 14px;
     background-color: white;
+    max-height: 950px;
 }
 
 .infobox img{
@@ -3497,4 +3498,20 @@ div#locationMarker {
 }
 button.button.button-block.button-positive.pay_now_button.updateSupllyItemButton {
     margin-bottom: 30px;
+}
+/*for tailgate marker**/
+
+.tailgateLocationMarker{
+    overflow: auto; 
+    margin: 0px -16px -16px -16px; 
+    padding: 2px 10px 2px 10px;
+}
+.tailgatemakerName{
+    float:left;text-overflow: ellipsis;overflow: hidden;height: 20px;width: 170px;
+}
+.tailgateDescriptionMarker{
+    float: left;height: auto;float: left;overflow: scroll;
+}
+.tailgateImageOnMarker{
+    display: block;width: 25px;float: left;margin-right: 10px;
 }

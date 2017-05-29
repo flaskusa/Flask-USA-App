@@ -7,24 +7,27 @@
             <button class="button button-icon button-clear ion-edit edit_tailgate" ng-click="goToTailgaterTab();" ng-show="isTailgateAdmin"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <ion-content class="has-footer">
+    <ion-content >
         <a class="item item-full item-icon-left " ng-click="showModel()">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">INVITE FRIEND</p>            
             <span style="margin-left:75%;font-size: 12px;color: #F89734;font-weight:bold;">Is Admin</span>
         </a>
-        <ion-list>
-            <ion-item ng-repeat="data in myTailgaters | orderBy:'userName'" class=" item-avatar item-remove-animate">
-                <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
-                <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
-                <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>
-                <span class="badge span_icon span_icon_right" ng-class="{disablebutton: loggedInUserId != tUserId}">
-                    <a class="item icon ion-trash-a option_icon" ng-if="data.userId != tUserId" ng-click="deleteTailgateUser(data.userId)"></a>
-                    <ion-checkbox class="item item-icon-left item-checkbox-right tailgate_admin" ng-if="data.userId != tUserId" ng-click="changeTailgaterRole(data.userId,$index);" ng-model="data.isAdmin" ng-checked="data.isAdmin=='1'">
-                    </ion-checkbox>
-                </span>
-            </ion-item>
-        </ion-list>
+        <ion-scroll style="height: 81%; overflow-y:hidden;">
+            <ion-list>
+                <ion-item ng-repeat="data in myTailgaters | orderBy:'userName'" class=" item-avatar item-remove-animate">
+                    <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
+                    <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
+                    <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>
+                    <span class="badge span_icon span_icon_right" ng-class="{disablebutton: loggedInUserId != tUserId}">
+                        <a class="item icon ion-trash-a option_icon" ng-if="data.userId != tUserId" ng-click="deleteTailgateUser(data.userId)"></a>
+                        <ion-checkbox class="item item-icon-left item-checkbox-right tailgate_admin" ng-if="data.userId != tUserId" ng-click="changeTailgaterRole(data.userId,$index);" ng-model="data.isAdmin" ng-checked="data.isAdmin=='1'">
+                        </ion-checkbox>
+                    </span>
+                </ion-item>
+            </ion-list>
+        </ion-scroll>
+        <br/><br /><br />
         <script id="templates/modal.html" type="text/ng-template">
             <ion-modal-view>
                 <ion-nav-bar class="bar-dark" align-title="center">
@@ -59,7 +62,7 @@
                             </ion-item>
                             <div class="item" ng-if="friendsToInvite.length==0">There are no friends to invite</div>
                         </ion-list>
-                    </ion-list>                    
+                    </ion-list>
                 </ion-content>
             </ion-modal-view>
         </script>

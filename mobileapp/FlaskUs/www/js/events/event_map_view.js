@@ -738,10 +738,10 @@
                              '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
                                  '<div class="list">' +
                                  '<span class="range" ng-click="filterMarker(0,0);"><img src=""><p id="0" style="color:#f7941e;">All</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(10,1);"><img src="./img/map_icons/FLASK_PIN_10.png"><p id="1">$10 - $20</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(20,2);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="2">$21 - $30</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(30,3);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="3">$31 - $40</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(40,4);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="4">$41 - $50</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(10,1);"><img src="./img/map_icons/FLASK_PIN_10.png"><p id="1">$10 - $19</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(20,2);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="2">$21 - $29</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(30,3);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="3">$31 - $39</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(40,4);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="4">$41 - $49</p></span>' +
                                  '<span class="range" ng-click="filterMarker(50,5);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="5">$51 and above</p></span>' +
                                  '</div>' +
                              '</ion-content>' +
@@ -1097,36 +1097,31 @@
                             if ("Parking" == tempObject.infoTypeCategoryName) {
                                 if ($scope.filterCost == null) {
                                     if(tempObject.premiumDisplayEnabled==true) {
-
-                                        tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                     tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                                         tempObject.icon = {
                                             url: tempObject.imageUrl,
                                             scaledSize: { width: 80, height: 60 } //for scaling the svg images
                                         }
                                     }
-                                   else if (tempObject.cost >= 10 && tempObject.cost <= 20) {
+                                   else if (tempObject.cost >= 10 && tempObject.cost <= 19) {
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_10.svg',
                                             scaledSize: { width: 80, height: 60 } //for scaling the svg images
                                         }
-
-
                                     }
-                                    else if (tempObject.cost >= 21 && tempObject.cost <= 30) {
+                                    else if (tempObject.cost >= 20 && tempObject.cost <= 29) {
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_20.svg',
                                             scaledSize: { width: 80, height: 60 } //for scaling the svg images
                                         }
                                     }
-                                    else if (tempObject.cost >= 31 && tempObject.cost <= 40) {
-
-                                            tempObject.icon = {
-                                                url: 'img/map_icons/FLASK_PIN_30.svg',
-                                                scaledSize: { width: 80, height: 60 } //for scaling the svg images
-                                            }
-
+                                    else if (tempObject.cost >= 30 && tempObject.cost <= 39) {
+                                        tempObject.icon = {
+                                            url: 'img/map_icons/FLASK_PIN_30.svg',
+                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                        }
                                     }
-                                    else if (tempObject.cost >= 41 && tempObject.cost <= 50) {
+                                    else if (tempObject.cost >= 40 && tempObject.cost <= 49) {
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_40.svg',
                                             scaledSize: { width: 80, height: 60 } //for scaling the svg images
@@ -1140,13 +1135,14 @@
                                             }
                                         }
                                     }
-                                    else if (tempObject.cost >= 51) {
+                                    else if (tempObject.cost >= 50) {
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_50.svg',
                                             scaledSize: { width: 80, height: 60 } //for scaling the svg images
                                         }
                                     }
                                     $scope.parkingMarkers.push(tempObject);
+                                    console.log(tempObject.infoTitle);
                                 } else {
                                     if (index == 0) {
                                         $scope.parkingMarkers = [];

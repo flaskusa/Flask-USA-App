@@ -64,7 +64,7 @@
                 }
             });            
         }
-
+        
         //open venue URL
         function openUrl(url, target) {
             $cordovaInAppBrowser.open(url, target, { location: 'no' }).
@@ -85,16 +85,24 @@
                     scrollwheel: false,
                     zoom: 19
                 } // when no markers are present
-        }else{
+        } else {
+           
             callMap($scope.taligateMarkers.latitude, $scope.taligateMarkers.longitude); //taking markers from cookies
             //adding window options for marker pin
+            var nameLength = $scope.taligateMarkers.name.length;
+            var descLength = $scope.taligateMarkers.description.length;
+            var pixxelOffsetHeight = -155;
+            if (descLength > 46) {
+                pixxelOffsetHeight = -175;
+                setTimeout(function () { $("#descTailgateMarker").css({ height: "40px" }); }, 50);
+            }
+            
             $scope.windowOpt = {
                 boxClass: "infobox",
                 boxStyle: {
                     backgroundColor: "#040404",
                     borderRadius: "5px",
-                    width: "240px",
-                    top:"134px"
+                    width: "240px"
                 },
                 position: {
                     lat: $scope.taligateMarkers.latitude,
@@ -103,11 +111,12 @@
                 show: true,
                 pane: "floatPane",
                 pixelOffset: {
-                    width: -113,
-                    height: -155
+                    width: -114,
+                    height: pixxelOffsetHeight
                 },
                 enableEventPropagation: false,
             }
+            
         }
 
         $scope.goToLocationTab = function () {
@@ -157,7 +166,8 @@
                     }]
                 }
             });
-        }
+           
+        }        
      }
 })();
 
