@@ -8,7 +8,7 @@
         <ion-tab title="My friends" id="myFriendsTab">
             <ion-content style="margin-top:40px;">
                 <ion-list id="myFriendsList">
-                    <ion-item ng-repeat="data in allFriends | orderBy:'fullName'" class="item-remove-animate" padding="false" ng-click="showChatWindowPopup(data,'user')" style="height: 74px;">
+                    <ion-item ng-repeat="data in allFriends" class="item-remove-animate" padding="false" ng-click="showChatWindowPopup(data,'user')" style="height: 74px;" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
                         <a class="row-no-padding" style="text-decoration: none">
                             <!--href="#/app/my_friendDetail/{{data.userId}}"-->
                             <div class=" col col-20" ng-if="data.friendProfilePicUrl==undefined">
@@ -32,7 +32,7 @@
         <ion-tab title="My groups">
             <ion-content style="margin-top:40px;">
                 <ion-list>
-                    <ion-item class="item-remove-animate" ng-repeat="group in groups | filter: groupList.searchString | orderBy:'groupName'" padding="false" style="height: 74px;" ng-init="group.showDivByIndex=false" ng-click="showChatWindowPopup(group,'group')">
+                    <ion-item class="item-remove-animate" ng-repeat="group in groups | filter: groupList.searchString" padding="false" style="height: 74px;" ng-init="group.showDivByIndex=false" ng-click="showChatWindowPopup(group,'group')">
                         <div ng-if="group.showDivByIndex==true" style="padding-top: 10px">
                             user Added
                         </div>

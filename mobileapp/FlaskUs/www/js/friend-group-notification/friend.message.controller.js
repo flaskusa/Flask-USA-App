@@ -18,6 +18,7 @@
         $scope.picUrl = $cookies.getObject('profileUrl');
         showPopupFromFriends();
         $scope.allFriends = [];
+        $scope.allSortedFriends = [];
         $scope.readMsg = false;
         $scope.ShowReplyButton = true;
         $scope.addingInGroup = false;
@@ -159,12 +160,10 @@
                 return minutes + ' minutes ago';
             } else if (hours < 24) {
                 return dateTime.substr(11, 5);
-            }
-            else if (days < 31) {
+            }else if (days < 31) {
                 return dateTime.substr(0, 16);
             } else if (months < 12) {
                 return dateTime.substr(0, 16);
-
             } else {
                 dateTime.substr(0, 16);
             }
@@ -225,8 +224,9 @@
                         $scope.groups = response;
                     }
                 }
-
+                $scope.groups.sort(custom_sort);
             });
+           
         }
 
         //get all friends
@@ -244,9 +244,18 @@
                         }
                     }
                 })
+                $scope.allFriends.sort(custom_sort);
             });
         }
         
+        function custom_sort(a, b) {
+            if (a.lastMessageDateTime < b.lastMessageDateTime)
+                return 1;
+            if (a.lastMessageDateTime > b.lastMessageDateTime)
+                return -1;
+            return 0;
+        }
+
         //get profile picture of friend 
         $scope.getUserProfile = function (UserDetail) {
             UserService.getUserProfile(UserDetail.userId).then(function (res) {
