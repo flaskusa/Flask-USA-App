@@ -170,7 +170,7 @@
                     },
                     zoom: 16,
                     markers: [{
-                        options: { icon: 'img/map_icons/tailgateMarker.svg' }
+                        options: { icon: 'img/map_icons/large_marker.svg' }
                     }],
                     events: {
                         click: function (map, eventName, originalEventArgs) {
@@ -182,8 +182,8 @@
                                     latitude: lat,
                                     longitude: lon
                                 },
-                                icon: 'img/map_icons/tailgateMarker.svg',
-                                options: { icon: 'img/map_icons/tailgateMarker.svg' },
+                                icon: 'img/map_icons/large_marker.svg',
+                                options: { icon: 'img/map_icons/large_marker.svg' },
                                 showWindow: true
                             };
                             $scope.map.markers.push(marker);
