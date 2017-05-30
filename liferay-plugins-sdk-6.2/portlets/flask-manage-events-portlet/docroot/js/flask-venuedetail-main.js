@@ -17,38 +17,27 @@ function addDetailsClickHandlers() {
 	});
 	
 	/* Initialize display elements */
-	$(".cssVdSave")
-			.click(
-					function() {
-						window.location.hash = "#ManageVenueContent";
+	$(".cssVdSave").click(function() {
 						if (fnCheckDuplicateTitle($("#infoTitle").val())) {
-							_flaskLib
-									.showWarningMessage(
-											'action-msg-warning',
-											_venueDetailModel.MESSAGES.DETAIL_DUPLICATE);
+							_flaskLib.showWarningMessage('action-msg-warning',_venueDetailModel.MESSAGES.DETAIL_DUPLICATE);
 						} else {
 							if ($('#venueDetailsForm').jqxValidator('validate')) {
 								if ($('#addrLine1').val() == undefined) {
 									$('#lat').val(0);
 									$('#lng').val(0);
 									saveVenueDetails();
+									window.location.hash = "#ManageVenueContent";
 								} else {
 
 									try {
 										var geocoder = new google.maps.Geocoder();
-										geocoder
-												.geocode(
-														{
-															address : $(
-																	'#addrLine1')
-																	.val(),
+										geocoder.geocode({
+															address : $('#addrLine1').val(),
 															region : 'no'
 														},
-														function(results,
-																status) {
+														function(results,status) {
 															try {
-																if (status
-																		.toLowerCase() == 'ok') {
+																if (status.toLowerCase() == 'ok') {
 																	// Get
 																	// center
 																	var coords = new google.maps.LatLng(
@@ -57,32 +46,33 @@ function addDetailsClickHandlers() {
 																			results[0]['geometry']['location']
 																					.lng());
 
-																	console
-																			.log(coords
-																					.lat());
-																	$('#lat')
-																			.val(
-																					coords
-																							.lat());
-																	$('#lng')
-																			.val(
-																					coords
-																							.lng());
+																	var distInKm = getDistanceFromLatLonInKm($("#venueForm").find("#latitude").val(),
+																			$("#venueForm").find("#longitude").val(),coords.lat(),coords.lng());
+																	console.log(distInKm);
+																	if(distInKm > 5){
+																		$('#lat').val("");
+																		$('#lng').val("");
+																		$('#venueDetailsForm #latitude').val("");
+																		$('#venueDetailsForm #longitude').val("");
+																		throw "Invalid Address";	
+																	}
+																	$('#lat').val(coords.lat());
+																	$('#lng').val(coords.lng());
 																}
 															} catch (ex) {
-																_flaskLib
-																.showErrorMessage(
-																		'action-msg',
-																		_eventDetailModel.MESSAGES.GOCODING_ERROR);
+																_flaskLib.showErrorMessage('action-msg',_venueDetailModel.MESSAGES.GOCODING_ERROR);
 															} finally {
-																saveVenueDetails();
+																console.log($('#lat').val())
+																if($('#lat').val() != "" || $('#lng').val() != ""){
+																	saveVenueDetails();
+																	window.location.hash = "#ManageVenueContent";
+																}else{
+																	_flaskLib.showErrorMessage('action-msg',_venueDetailModel.MESSAGES.GOCODING_ERROR);
+																}
 															}
 														});
 									} catch (ex) {
-										_flaskLib
-												.showErrorMessage(
-														'action-msg',
-														_eventDetailModel.MESSAGES.CHECK_INTERNET_CONNECTION);
+										_flaskLib.showErrorMessage('action-msg',_eventDetailModel.MESSAGES.CHECK_INTERNET_CONNECTION);
 									}
 								}
 
@@ -123,6 +113,25 @@ function addDetailsClickHandlers() {
 		}
 		loadVenueData();
 	});
+}
+
+function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
+  var R = 6371; // Radius of the earth in km
+  var dLat = deg2rad(lat2-lat1);  // deg2rad below
+  var dLon = deg2rad(lon2-lon1); 
+  var a = 
+    Math.sin(dLat/2) * Math.sin(dLat/2) +
+    Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+    Math.sin(dLon/2) * Math.sin(dLon/2)
+    ; 
+  var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+  var d = R * c; // Distance in km
+  return d;
+	console.log(d);
+}
+
+function deg2rad(deg) {
+  return deg * (Math.PI/180)
 }
 
 function add5moreRows(){

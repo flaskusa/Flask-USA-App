@@ -391,3 +391,12 @@ zoom: 1.8 !important;
 .control-label{
 	font-weight: bold !important;
 }
+
+.aui input[type="number"] {
+    border-radius: 5px;
+    font-size: 14px;
+    height: 30px;
+    width: 40%;
+    padding-left: 10px;
+    margin-bottom: 10px;
+}

@@ -84,5 +84,6 @@ _venueDetailModel.MESSAGES= {
 		DETAIL_DEL_ERR: "Error in deleting venue details",
 		DETAIL_DUPLICATE: "Venue detail with same title already exist",
 		DETAIL_NO_IMAGES_INFO: "No images found",
-		COPY_VENUEDETAIL_SUCCESS: "Venue details imported successfully"
+		COPY_VENUEDETAIL_SUCCESS: "Venue details imported successfully",
+		GOCODING_ERROR: "Error in determining co-ordinates for address. Please verify the address"
 };
