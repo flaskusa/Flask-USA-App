@@ -238,14 +238,14 @@
                         $scope.getUserProfile(value);
                     }
                     else {
-                        $scope.allFriends.push(value);
+                        push_friends(value);
                         if (userExistInLocalStorage(value) == false) {
                             $localStorage["myFriendDetails"].push(value)
                         }
                     }
                 })
-                $scope.allFriends.sort(custom_sort);
             });
+            
         }
         
         function custom_sort(a, b) {
@@ -256,17 +256,21 @@
             return 0;
         }
 
+        function push_friends(value) {
+            $scope.allFriends.push(value);
+            $scope.allFriends.sort(custom_sort);
+        }
         //get profile picture of friend 
         $scope.getUserProfile = function (UserDetail) {
             UserService.getUserProfile(UserDetail.userId).then(function (res) {
                 if (res.data.fileEntryId != undefined) {
                     UserDetail.friendProfilePicUrl = $scope.profilePicUrl + res.data.uuid + "&groupId=" + res.data.groupId;
-                    $scope.allFriends.push(UserDetail);
+                    push_friends(UserDetail);
                     if (userExistInLocalStorage(UserDetail) == false) {
                         $localStorage["myFriendDetails"].push(UserDetail);
                     }
                 } else {
-                    $scope.allFriends.push(UserDetail);
+                    push_friends(UserDetail);
                     if (userExistInLocalStorage(UserDetail) == false) {
                     $localStorage["myFriendDetails"].push(UserDetail);
                 }
