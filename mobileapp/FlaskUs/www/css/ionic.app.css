@@ -9913,6 +9913,12 @@ a.button {
   font-weight: normal;
   font-style: normal; }
 
+@font-face {
+  font-family: 'Tungsten-Bold';
+  src: url("../lib/ionic/fonts/Tungsten-Bold.woff") format("woff");
+  font-weight: normal;
+  font-style: normal; }
+
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-family: 'Avenir Next'; }
 
@@ -11042,6 +11048,10 @@ span.error_msg {
   margin-right: -10px !important;
   width: 94%; }
 
+span.error_msg {
+  color: red;
+  font-size: 12px; }
+
 .eventHeading {
   text-align: center;
   padding-top: 20px;
@@ -11492,24 +11502,20 @@ p.addText {
 .span_icon_tailgate img {
   width: 21px;
   height: 20px;
-  padding-left: 0px;
-  padding-right: 0px;
+  margin-top: 5px !important;
   margin-right: -28px; }
 
 .eventNameCol_tailgate {
   font-weight: bold !important;
   text-transform: uppercase;
   font-size: 14px !important;
-  margin-left: 1% !important;
-  margin-right: -10px !important;
-  width: 100%;
-  margin-top: 7px !important; }
+  margin: 4px 0px 0px 10px !important;
+  width: 100%; }
 
 .dateCol_tailgate {
   text-transform: uppercase;
   font-size: 11px !important;
-  margin-top: -4px;
-  margin-left: 0%;
+  margin: 0px 0px 0px 10px;
   color: darkorange !important; }
 
 span.badge.span_icon {
@@ -11747,9 +11753,14 @@ button.button.button-block.button-positive.invite_friend i {
 .tailgate_slider {
   padding: 0px; }
 
-tailgater_name {
+h2.tailgater_name {
   font-weight: bold;
-  vertical-align: middle; }
+  margin: 11px 0px 0px 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 162px;
+  width: 100%; }
 
 @media screen and (max-width: 321px) {
   .item-icon-left {
@@ -11942,6 +11953,13 @@ a.item.icon.activated:before {
   max-width: 47px;
   height: 47px;
   float: left; }
+
+.chatIcon {
+  width: 43px;
+  max-width: 65px;
+  height: 41px;
+  margin-top: -9px;
+  border-radius: 50%; }
 
 .arrowIconAlign {
   width: 21px;
@@ -12269,8 +12287,7 @@ a.item.item-full.item-icon-left.attendees {
   overflow: hidden;
   text-overflow: ellipsis;
   min-width: 0;
-  max-width: 246px;
-  width: 100%; }
+  margin-left: -2px; }
 
 .friend_group_name {
   padding-top: 4px !important; }
@@ -12767,7 +12784,12 @@ i.choose_picture {
 .hideFlaskUsQuestionDiv {
   height: 0px; }
 
-.QuestionInput {
+input.QuestionInput {
+  border: solid .5px;
+  width: 254px;
+  border-radius: 8px; }
+
+textarea.QuestionInput {
   border: solid .5px;
   width: 254px;
   border-radius: 8px; }
@@ -12931,7 +12953,13 @@ label.remember1.item.item-checkbox.ng-valid.ng-not-empty {
 
 /*group detail*/
 .group_detail_user_role {
-  right: 12px !important; }
+  right: 12px !important;
+  height: 27px;
+  border-radius: 12px; }
+
+.roleText {
+  padding-top: 2px;
+  border-radius: 10px; }
 
 .add_member_details {
   padding-top: 4px !important; }
@@ -13052,6 +13080,11 @@ div .manage_event_default_Image {
   text-transform: uppercase;
   width: 80%; }
 
+.trafficSubDetailHeading {
+  font-weight: 700;
+  font-size: 14px;
+  width: 80%; }
+
 .TrafficInfoDescDiv {
   width: 80%;
   margin-left: 30px;
@@ -13063,7 +13096,7 @@ div .manage_event_default_Image {
 
 /*Venue Map*/
 .image_map_div {
-  height: 90% !important;
+  height: 100% !important;
   overflow-x: scroll;
   overflow-y: scroll; }
 
@@ -13114,8 +13147,8 @@ div .manage_event_default_Image {
   padding: 0px 5px; }
 
 .venueMapImage {
-  height: 100vw;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   -webkit-transition: all .6s ease;
   -moz-transition: all .6s ease;
   -ms-transition: all .6s ease;
@@ -13127,8 +13160,8 @@ div .manage_event_default_Image {
 
 /*map svg images*/
 .map_info_img {
-  width: 36px !important;
-  height: 32px !important;
+  width: 32px !important;
+  height: 28px !important;
   margin-top: -4px;
   margin-left: 17px; }
 
@@ -13202,7 +13235,7 @@ div .manage_event_default_Image {
   border: solid .5px;
   resize: none;
   transition: .5s;
-  border-color: orange; }
+  border-color: #f89734; }
 
 .hidemsgTexArea {
   height: 0px;
@@ -13298,7 +13331,7 @@ div.post-content-Request {
 
 span.badge.span_icon_right {
   right: -19px;
-  vertical-align: middle; }
+  margin: -19px 0px 0px 0px; }
 
 .notificationCount {
   margin-right: 4px;
@@ -13324,7 +13357,8 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox.tailgate_admin 
   width: 3pc;
   margin-left: -7px;
   border: transparent;
-  right: 14px !important; }
+  right: 14px !important;
+  margin-top: -17px; }
 
 .item-checkbox .checkbox {
   right: 18px !important; }
@@ -13402,11 +13436,12 @@ span .span_icon_supply {
 
 /*venueSubDetails*/
 .subDetails {
-  font-family: 'Avenir Next';
-  font-weight: 500;
-  font-size: 14px;
-  margin-top: 12%;
-  background: url(../img/flask_icons/star.svg) no-repeat left top; }
+  background: url(../img/flask_icons/star.svg) no-repeat left top;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-top: 1px;
+  overflow: visible; }
 
 .trafficSubDetail {
   border-bottom: solid;
@@ -13457,3 +13492,223 @@ span .span_icon_supply {
   margin-left: 20%;
   font-weight: 700;
   margin-top: 2%; }
+
+/*tailgate location marker*/
+.location-marker {
+  font-size: 14px;
+  padding-top: 5px;
+  color: #060606; }
+
+div#LocationMarkerInfoHeading {
+  text-align: center;
+  padding: 10px;
+  margin-top: -5px;
+  margin-left: -14px;
+  margin-right: -14px;
+  font-size: 16px;
+  background-color: black;
+  color: darkorange; }
+
+div#locationMarker {
+  padding: 5px 14px 16px 14px;
+  background-color: white;
+  max-height: 950px; }
+
+.infobox img {
+  display: none; }
+
+/*IOS Specific header*/
+/* iOS Specific Overrides to fix logo overlap */
+.platform-ios7.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) > * {
+  margin-top: 25px; }
+
+.platform-ios7.platform-cordova:not(.fullscreen) .bar-header:not(.bar-subheader) {
+  height: 90px; }
+
+.platform-ios7.platform-cordova:not(.fullscreen) .has-header {
+  top: 90px; }
+
+/*IOS Specific header*/
+/*tailgate supply item*/
+.addNewTailgateItem {
+  border-bottom: none; }
+
+#addSupplyListError {
+  margin: 9px 0px 9px 14%;
+  color: red;
+  display: none; }
+
+.searchChipDisplay {
+  margin-bottom: 10px;
+  cursor: default;
+  border-radius: 16px;
+  display: none;
+  height: 32px;
+  padding: 0 12px;
+  box-sizing: border-box;
+  max-width: 100%;
+  position: relative;
+  font-size: 14px;
+  border-color: black; }
+
+.chipStrings {
+  text-transform: uppercase;
+  font-size: 11px; }
+
+/*modal animation for friend chat window*/
+.fade-in {
+  -webkit-transform: scale(0);
+  transform: scale(0);
+  opacity: 0; }
+
+.fade-in.ng-enter, .fade-in > .ng-enter {
+  -webkit-transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 250ms;
+  transition: all cubic-bezier(0.1, 0.7, 0.1, 1) 250ms; }
+
+.fade-in.ng-enter-active,
+.fade-in > .ng-enter-active {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  opacity: 1; }
+
+.fade-in.ng-leave, .fade-in > .ng-leave {
+  -webkit-transition: all ease-in-out 250ms;
+  transition: all ease-in-out 250ms; }
+
+/*Chat messaging*/
+.bubble {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 6px #f89734;
+  display: inline-block;
+  padding: 10px 18px;
+  position: relative;
+  vertical-align: top; }
+
+.bubble::before {
+  background-color: white;
+  content: "\00a0";
+  display: block;
+  height: 14px;
+  position: absolute;
+  top: 8px;
+  left: -10px;
+  box-shadow: -2px 2px 2px 0 rgba(248, 51, 52, 0.2);
+  transform: rotate(29deg) skew(-35deg);
+  -moz-transform: rotate(29deg) skew(-35deg);
+  -ms-transform: rotate(29deg) skew(-35deg);
+  -o-transform: rotate(29deg) skew(-35deg);
+  -webkit-transform: rotate(29deg) skew(-35deg);
+  width: 20px; }
+
+.bubble-you {
+  background-color: #ffffff;
+  border-radius: 5px;
+  box-shadow: 0 0 6px;
+  display: inline-block;
+  padding: 10px 18px;
+  position: relative;
+  vertical-align: top; }
+
+.bubble-you::before {
+  background-color: white;
+  content: "\00a0";
+  display: block;
+  height: 14px;
+  position: absolute;
+  top: 8px;
+  box-shadow: -2px 2px 2px 0 rgba(255, 255, 255, 0.2);
+  transform: rotate(29deg) skew(-35deg);
+  -moz-transform: rotate(29deg) skew(-35deg);
+  -ms-transform: rotate(29deg) skew(-35deg);
+  -o-transform: rotate(29deg) skew(-35deg);
+  -webkit-transform: rotate(29deg) skew(-35deg);
+  width: 20px; }
+
+.me {
+  float: left;
+  margin: 1px 45px 5px 20px; }
+
+.me::before {
+  box-shadow: -2px 2px 2px 0 #f9cfa5;
+  left: -9px; }
+
+.you {
+  float: right;
+  margin: 1px 20px 5px 45px !important; }
+
+.you::before {
+  box-shadow: 2px -2px 2px 0 #908a8a;
+  right: -9px; }
+
+.readFlag {
+  margin-top: 11px;
+  margin-right: 7px; }
+
+.msgDate {
+  margin: -5px 0px -10px 19px;
+  float: right;
+  color: #F89734;
+  font-size: 10px; }
+
+.msgSender {
+  margin: -6px 0 5px -3px;
+  color: #F89734;
+  font-size: 12px; }
+
+.title.title-center.header-item {
+  left: 0px !important;
+  right: 0px !important; }
+
+.tungsten {
+  font-family: "Tungsten"; }
+
+.suppliesEditButton {
+  width: 112px;
+  padding: 4px;
+  float: right; }
+
+.updateSupllyItemButton {
+  top: 10px;
+  margin-bottom: 20px; }
+
+.whatToShow {
+  float: left;
+  border: none;
+  padding: 1px;
+  padding-left: 5px;
+  padding-right: 5px; }
+
+.viewEditSupplyItem {
+  margin-top: -71px; }
+
+.item.item-input-inset.addNewTailgateItem.viewEditSupplyItem {
+  border: solid 1px black; }
+
+button.button.button-block.button-positive.pay_now_button.updateSupllyItemButton {
+  margin-bottom: 30px; }
+
+/*for tailgate marker**/
+.tailgateLocationMarker {
+  overflow: auto;
+  margin: 0px -16px -16px -16px;
+  padding: 2px 10px 2px 10px; }
+
+.tailgatemakerName {
+  float: left;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: 20px;
+  width: 170px; }
+
+.tailgateDescriptionMarker {
+  float: left;
+  height: auto;
+  float: left;
+  overflow: scroll; }
+
+.tailgateImageOnMarker {
+  display: block;
+  width: 25px;
+  float: left;
+  margin-right: 10px; }
