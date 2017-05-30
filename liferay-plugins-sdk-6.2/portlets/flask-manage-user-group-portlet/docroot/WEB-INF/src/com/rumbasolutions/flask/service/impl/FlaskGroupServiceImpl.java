@@ -116,16 +116,18 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 							count++;
 						}
 					}
+					
 					String dateTime ="";
 					  JSONArray messages = FlaskGroupMessagesServiceUtil.getAllMyFlaskGroupMessages(myGroup.getGroupId(), serviceContext);
 					  if(messages.length() > 0){
-						  for(int n = 0; n < messages.length(); n++){
-						      JSONObject object = messages.getJSONObject(n);					      
-						      dateTime = object.getString("dateTime");
-						      obj.put("lastMessageDateTime", dateTime);
-						  }
+					  for(int n = 0; n < 1; n++)
+					  {
+					      JSONObject object = messages.getJSONObject(n);
+					      dateTime = object.getString("dateTime");
+					  }
+					  obj.put("lastMessageDateTime", dateTime);
 					  }else{
-						  obj.put("lastMessageDateTime", "");
+						  obj.put("lastMessageDateTime", "0000-00-00 00:00:00:0");
 					  }
 					obj.put("unreadGroupMesageCount", count);
 					iAarray.put(obj);
