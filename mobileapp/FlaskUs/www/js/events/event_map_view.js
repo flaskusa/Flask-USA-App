@@ -739,10 +739,10 @@
                                  '<div class="list">' +
                                  '<span class="range" ng-click="filterMarker(0,0);"><img src=""><p id="0" style="color:#f7941e;">All</p></span>' +
                                  '<span class="range" ng-click="filterMarker(10,1);"><img src="./img/map_icons/FLASK_PIN_10.png"><p id="1">$10 - $19</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(20,2);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="2">$21 - $29</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(30,3);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="3">$31 - $39</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(40,4);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="4">$41 - $49</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(50,5);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="5">$51 and above</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(20,2);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="2">$20 - $29</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(30,3);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="3">$30 - $39</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(40,4);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="4">$40 - $49</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(50,5);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="5">$50 and above</p></span>' +
                                  '</div>' +
                              '</ion-content>' +
                         '</ion-popover-view>';
@@ -1072,6 +1072,7 @@
                 var subDetailsArray = {};
                 var ImgObj = [];
                 $scope.flaskUsDetails = [];
+                $scope.parkingMarkers = [];
                 angular.forEach($scope.eventDetails, function (value, index) {
                     tempObject = {};
                     subDetailArray = {};
@@ -1144,9 +1145,9 @@
                                     $scope.parkingMarkers.push(tempObject);
                                     console.log(tempObject.infoTitle);
                                 } else {
-                                    if (index == 0) {
-                                        $scope.parkingMarkers = [];
-                                    }
+                                    //if (index == 0) {
+                                    //    $scope.parkingMarkers = [];
+                                    //}
                                     showFilteredMarkers(tempObject);
                                 }
                                 $scope.searchParkingMarkers = $scope.parkingMarkers;
