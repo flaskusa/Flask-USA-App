@@ -1,8 +1,8 @@
 <ion-view cache-view="false" view-title="Login" align-title="left" hide-nav-bar="true">
     <ion-nav-bar class="bar-dark" align-title="center">
-        <ion-nav-back-button>
-        </ion-nav-back-button>
         <ion-nav-buttons side="left">
+            </button>
+        </ion-nav-buttons>
             <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
         </ion-nav-buttons>    
     </ion-nav-bar>
@@ -16,16 +16,7 @@
                     User name or password did not match. 
                 </div>
             </div>
-            <li class="item item-toggle">
-                <b style="float: left;margin-left: 14px" ng-if="!testServe">FlaskUs Server</b>
-                <b style="float: left;margin-left: 14px" ng-if="testServe">Test server</b>
-                <label class="toggle toggle-positive" ng-init="serverUrl = (serverUrl == undefined) ? 'http://www.flaskus.com/' : serverUrl">
-                    <input type="checkbox" ng-model="serverUrl" ng-true-value="'http://www.flaskus.com/'" ng-false-value="'http://146.148.83.30/'" ng-change="switchServer(serverUrl)">
-                    <div class="track">
-                        <div class="handle"></div>
-                    </div>
-                </label>
-            </li>
+            
             <form name="login_form" class="loginpane form_div" novalidate  ng-submit="login_form.$valid && doLogin(user)" style="">
                 <div class="list card loginpane_body">
 
@@ -52,8 +43,8 @@
                             </button>
                         </div>
                         <div class="row">
-                            <div class="col"><ion-checkbox ng-model="isChecked" class="remember" ng-click="remembered(isChecked,user)">Remember Me</ion-checkbox></div>
-                            <div class="col"><ion-checkbox ng-model="enableChecked" class="remember1" ng-click="checkTouch(enableChecked)">Enable Touch</ion-checkbox></div>
+                            <div class="col"><ion-checkbox ng-model="user.isChecked" class="remember" ng-click="remembered(user)">Remember Me</ion-checkbox></div>
+                            <div class="col"></div>
                         </div>
                     </div>
                     <div class="navigation">

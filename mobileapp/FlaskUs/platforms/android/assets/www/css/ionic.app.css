@@ -9831,85 +9831,85 @@ a.button {
 /*Font*/
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Regular.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Regular.woff2") format("woff2");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next Ultra';
-  src: url("/lib/ionic/fonts/AvenirNext-UltraLight.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-UltraLight.woff2") format("woff2");
   font-weight: 200;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Regular_1.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Regular_1.woff2") format("woff2");
   font-weight: normal;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-BoldItalic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-BoldItalic.woff2") format("woff2");
   font-weight: bold;
   font-style: italic; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Italic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Italic.woff2") format("woff2");
   font-weight: normal;
   font-style: italic; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Medium.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Medium.woff2") format("woff2");
   font-weight: 500;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next Ultra';
-  src: url("/lib/ionic/fonts/AvenirNext-UltraLightItalic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-UltraLightItalic.woff2") format("woff2");
   font-weight: 200;
   font-style: italic; }
 
 @font-face {
   font-family: 'Avenir Next Demi';
-  src: url("/lib/ionic/fonts/AvenirNext-DemiBold.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-DemiBold.woff2") format("woff2");
   font-weight: 600;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Heavy.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Heavy.woff2") format("woff2");
   font-weight: 900;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-HeavyItalic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-HeavyItalic.woff2") format("woff2");
   font-weight: 900;
   font-style: italic; }
 
 @font-face {
   font-family: 'Avenir Next Demi';
-  src: url("/lib/ionic/fonts/AvenirNext-DemiBoldItalic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-DemiBoldItalic.woff2") format("woff2");
   font-weight: 600;
   font-style: italic; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-Bold.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-Bold.woff2") format("woff2");
   font-weight: bold;
   font-style: normal; }
 
 @font-face {
   font-family: 'Avenir Next';
-  src: url("/lib/ionic/fonts/AvenirNext-MediumItalic.woff2") format("woff2");
+  src: url("../lib/ionic/fonts/AvenirNext-MediumItalic.woff2") format("woff2");
   font-weight: 500;
   font-style: italic; }
 
 @font-face {
   font-family: 'AGENCYR';
-  src: url("/lib/ionic/fonts/AGENCYR.woff") format("woff");
+  src: url("../lib/ionic/fonts/AGENCYR.woff") format("woff");
   font-weight: normal;
   font-style: normal; }
 
@@ -9918,6 +9918,15 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 
 html, body {
   font-family: 'Avenir Next'; }
+
+button {
+  font-family: 'Avenir Next' !important; }
+
+button i {
+  font-family: 'Avenir Next' !important; }
+
+.button {
+  font-family: 'Avenir Next' !important; }
 
 .item-input input, .item-input textarea {
   font-family: 'Avenir Next'; }
@@ -9928,7 +9937,7 @@ div.ng-binding {
 
 .tabs a span {
   font-family: 'AGENCYR';
-  font-size: 14px; }
+  font-size: 15px; }
 
 .fill-height-or-more {
   min-height: 100%;
@@ -10003,7 +10012,7 @@ div.ng-binding {
     padding-top: 6px;
     font-size: 16px;
     font-weight: 600;
-    width: 140px; } }
+    width: 150px; } }
 
 .some-area > div {
   padding: 4rem; }
@@ -10142,6 +10151,10 @@ a.button.button-block.button-positive.sign_in_button {
   padding-top: 15px;
   text-align: center;
   color: darkorange; }
+
+.button {
+  background-image: none;
+  background: black !important; }
 
 .aui label {
   font-size: 14px; }
@@ -11158,13 +11171,19 @@ img.list-thumbnail.listImages {
 
 img.list-thumbnail.listImages1 {
   position: absolute;
-  left: 5px;
+  left: 0px;
   max-width: 55px;
-  max-height: 55px;
+  max-height: 60px;
   width: 100%;
   height: 100%;
-  margin-bottom: 5px;
-  margin-top: -3px; }
+  margin-bottom: 0px !important;
+  margin-top: -5px; }
+
+div.no-padding {
+  padding: 0px !important; }
+
+div .col.col-15 {
+  bottom: 0px !important; }
 
 div.menuDiv {
   padding-bottom: 10px; }
@@ -11428,8 +11447,31 @@ p.addText {
   padding-right: 0px;
   margin-right: -28px; }
 
+.span_icon_tailgate img {
+  width: 21px;
+  height: 20px;
+  padding-left: 0px;
+  padding-right: 0px;
+  margin-right: -28px; }
+
+.eventNameCol_tailgate {
+  font-weight: bold !important;
+  text-transform: uppercase;
+  font-size: 14px !important;
+  margin-left: 1% !important;
+  margin-right: -10px !important;
+  width: 100%;
+  margin-top: 7px !important; }
+
+.dateCol_tailgate {
+  text-transform: uppercase;
+  font-size: 11px !important;
+  margin-top: -4px;
+  margin-left: 0%;
+  color: darkorange !important; }
+
 span.badge.span_icon {
-  right: 14px !important; }
+  right: 14px; }
 
 span.badge.span_icon_supplies {
   top: 14px;
@@ -11588,11 +11630,12 @@ button.button.button-block.button-positive.friend {
   height: 28%; }
 
 .myTailgatetopImg {
-  height: 100px;
-  align-content: center;
+  height: 155px;
   display: block;
-  margin-left: auto;
-  margin-right: auto; }
+  margin-left: 0px;
+  margin-right: 0px;
+  width: 100%;
+  margin-top: -1px; }
 
 .eventDiv {
   text-align: center; }
@@ -11709,7 +11752,7 @@ h2.tailgater_name {
 /*Start tailgate details bottom tabs*/
 .tab_bottom a.tab-item {
   border-right: solid white 1px !important;
-  border-left: solid white 1px !important;
+  border-right: solid white 1px !important;
   color: white !important; }
 
 .tab_bottom a.tab-item.tab-item-active {
@@ -11718,7 +11761,7 @@ h2.tailgater_name {
 
 /*End tailgate details bottom tabs*/
 /*Search icon*/
-.bar-dark .button.button-icon.ion-android-search:before {
+.button.button-icon.ion-android-search:before {
   font-size: 27px !important; }
 
 .form-left {
@@ -11787,7 +11830,7 @@ i.addText {
   background-color: #ffffff;
   height: 50px;
   padding-right: 17px;
-  padding-top: 15px; }
+  padding-top: 9px; }
 
 /*Tickets*/
 .ticketNameCol {
@@ -11986,7 +12029,8 @@ h2.items_user_list {
   border: solid 1px grey;
   border-bottom-style: none;
   border-right-style: none;
-  border-bottom: solid 1px grey; }
+  border-bottom: solid 1px grey;
+  font-weight: normal !important; }
 
 .col.acc_settingsCol:last-child {
   border-right: solid 1px grey; }
@@ -12069,7 +12113,8 @@ label.item.item-icon-left.item-checkbox-right.item.item-checkbox.acc_table {
   font-size: 12px;
   padding-top: 4px;
   font-weight: 500;
-  color: black; }
+  color: black;
+  font-family: Avenir Next !important; }
 
 .item .badge.ext-top {
   top: 21px; }
@@ -12078,8 +12123,10 @@ a.item.item-full.item-icon-left.attendees {
   padding-top: 58px; }
 
 .emailText {
-  color: darkorange;
-  padding-top: 14px; }
+  color: darkorange; }
+
+.friend_group_name {
+  padding-top: 4px !important; }
 
 .my-groupDetail-view .item-content {
   padding-top: 12px;
@@ -12129,7 +12176,12 @@ a.item.item-full.item-icon-left.attendees {
 
 /* Message board in my_tailgate_event_details*/
 .list.list-inset.msgboard {
-  border: solid 1px; }
+  border: solid 1px;
+  margin-top: 7px; }
+
+.msgboard_div {
+  font-weight: 700;
+  font-size: 21px; }
 
 .messageList {
   text-transform: uppercase;
@@ -12156,6 +12208,14 @@ a.item.item-full.item-icon-left.attendees {
   margin-left: -11px;
   color: #F28604; }
 
+.text_div_message {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 260px;
+  width: 16% !important; }
+
 .msg_list {
   display: inline;
   float: left; }
@@ -12175,6 +12235,9 @@ a.item.item-full.item-icon-left.attendees {
 
 .message_username {
   color: orange !important; }
+
+.image_list {
+  padding: 0px; }
 
 .supplyDeleteButton {
   background-image: -webkit-linear-gradient(top, #656262 0, #231f20 100%);
@@ -12214,6 +12277,29 @@ div .extra-right-supply {
 .gm-style-iw + div {
   display: none; }
 
+.map_marker_info {
+  max-width: none;
+  height: 35px;
+  margin-left: 11px; }
+
+.iw_options {
+  font-size: 21px;
+  font-weight: bold;
+  margin-left: 11px;
+  float: left; }
+
+.marker_info_title {
+  font-size: 21px;
+  margin-top: 5px;
+  margin-left: 14px; }
+
+#iw-container {
+  overflow: hidden;
+  height: 46px;
+  transition: height 2s;
+  opacity: 1;
+  width: 100%; }
+
 #iw-container .iw-title {
   font-size: 16px;
   text-transform: uppercase;
@@ -12222,7 +12308,8 @@ div .extra-right-supply {
   background: #000000;
   color: white;
   border-radius: 2px 2px 0 0;
-  /* In accordance with the rounding of the default infowindow corners. */ }
+  width: 100%;
+  max-width: 220px; }
 
 #iw-container #iw-content {
   text-align: center;
@@ -12233,27 +12320,49 @@ div .extra-right-supply {
   background: #ffffff;
   color: #000000;
   position: fixed;
-  width: 311px; }
+  max-width: 68%;
+  width: 220px;
+  overflow: hidden; }
+
+.iw-fixed-title {
+  width: 100%;
+  max-width: 312px; }
 
 #iw-content .padding {
   padding: 10px; }
 
 #iw-content a {
   text-decoration: none !important;
-  color: black; }
+  color: black;
+  margin-left: 7px !important; }
 
-#iw-container .iw-title .iw-sub-title {
+.iw-content-div {
+  margin-left: -11px !important;
+  margin-top: 10px; }
+
+.iw-content-icon {
+  width: 25px; }
+
+#iw-container .iw-sub-title {
   font-size: 10px;
-  color: darkorange; }
+  color: darkorange;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 160px; }
+
+.iw-sub-title1 {
+  font-size: 11px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 160px;
+  width: 100%; }
 
 .gm-style-iw {
   width: 313px !important;
   top: 20px !important; }
-
-#iw-container {
-  overflow: hidden;
-  height: 46px;
-  transition: height 2s; }
 
 .my-message-view .item-content {
   padding-right: 6px; }
@@ -12350,8 +12459,10 @@ label.item.item-icon-left.item-checkbox-right.list-item.item.item-checkbox {
 
 .f-nameText {
   padding-left: 15px;
-  font-size: 14px;
-  font-weight: 600; }
+  font-size: 15px !important;
+  font-weight: 600;
+  margin-top: 16px !important;
+  text-transform: uppercase; }
 
 .supplySaveButtonStyle {
   width: 65px;
@@ -12740,9 +12851,7 @@ div .manage_event_default_Image {
   background-color: #f4f4f4 !important; }
 
 .add_supplies_img {
-  float: right;
-  height: 28px;
-  width: 28px; }
+  float: right; }
 
 /*advertisement Popup*/
 .info_popup {
@@ -12755,5 +12864,221 @@ div .manage_event_default_Image {
   position: absolute;
   font-weight: 500;
   font-size: 26px;
+  z-index: 2; }
+
+#traffic ul {
+  list-style: none; }
+
+#traffic ul {
+  background: url("../img/flask_icons/star.svg") no-repeat left top;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 27px;
+  padding-top: 1px;
+  overflow: visible; }
+
+#traffic li {
+  font-weight: 500;
+  font-size: 14px; }
+
+.fontSizeTrafficHeading {
+  font-size: 18px; }
+
+.removeBorderTraffic {
+  background-image: none; }
+
+.trafficDetailHeading {
+  font-weight: 700;
+  font-size: 14px;
+  text-transform: uppercase;
+  width: 80%; }
+
+.TrafficInfoDescDiv {
+  width: 80%;
+  margin-left: 30px;
+  margin-top: 5px; }
+
+.iw-content-text {
+  vertical-align: middle; }
+
+/*Venue Map*/
+.image_map_div {
+  height: 90% !important;
+  overflow-x: scroll;
+  overflow-y: scroll; }
+
+.venue_info_div {
+  width: 55%;
+  height: 32%;
+  margin-top: 16%;
+  margin-left: 22%; }
+
+.supplyItemText {
+  color: darkorange;
+  font-size: 13px;
+  font-weight: bold; }
+
+#venueInfo ul {
+  list-style: none; }
+
+#venueInfo li {
+  background: url("../img/flask_icons/star.svg") no-repeat left top;
+  background-size: 20px 20px;
+  background-repeat: no-repeat;
+  padding-left: 30px;
+  padding-top: 1px;
+  overflow: visible; }
+
+#venueInfo li {
+  font-weight: 500;
+  font-size: 14px;
+  float: left !important;
+  padding-bottom: 10px !important; }
+
+#venueInfo a {
+  font-weight: 500;
+  font-size: 14px; }
+
+.biggerFont {
+  font-size: 24px;
+  padding-top: 6px; }
+
+.smallerFont {
+  font-size: 13px; }
+
+.alignRight {
+  text-align: right; }
+
+.alignLeft {
+  text-align: left;
+  padding: 0px 5px; }
+
+.venueMapImage {
+  height: 100vw;
+  width: 100vw;
+  -webkit-transition: all .6s ease;
+  -moz-transition: all .6s ease;
+  -ms-transition: all .6s ease;
+  transition: all .6s ease; }
+
+.zoomedvenueMapImage {
+  width: 200vw;
+  height: 200vw; }
+
+/*map svg images*/
+.map_info_img {
+  width: 36px !important;
+  height: 32px !important;
+  margin-top: -4px; }
+
+.ml0 {
+  margin-left: 0px !important; }
+
+.parent_div {
+  display: flex;
+  margin-right: -140px; }
+
+.text_div {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  max-width: 180px;
+  width: 60%;
+  font-size: 14px; }
+
+.placedetail_div {
+  width: 100%;
+  font-size: 10px;
+  /*change By pradeep*/
+  line-height: 15px; }
+
+.list-thumbnail.listImages {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  max-height: 60px; }
+
+.list-thumbnail.listImages1 {
+  position: absolute;
+  left: 5px;
+  max-width: 55px;
+  max-height: 55px;
+  width: 100%;
+  height: 100%;
+  margin-bottom: 5px;
+  margin-top: -3px; }
+
+.thumb-picturs-size {
+  width: 48%;
+  height: 101% !important;
+  border-right: solid white 2px; }
+
+.no-popup-header .popup-head {
+  display: none; }
+
+.my-create-supply-view .item-content {
+  position: relative;
   z-index: 2;
-  margin-left: 121px; }
+  padding: 0;
+  border: none;
+  background-color: #fff; }
+
+.inpuBorder {
+  border: 2.5px solid #d3d3d3;
+  border-left: solid 3.5px #d3d3d3;
+  border-right: solid 3.5px #d3d3d3; }
+
+span.badge.span_icon_extraright {
+  right: 22px; }
+
+.inpuBorderEdit {
+  border: 2.5px solid #d3d3d3;
+  border-left: solid 3.5px #d3d3d3;
+  border-right: solid 3.5px #d3d3d3;
+  width: 60%; }
+
+.showNotificationTextArea {
+  width: 70%;
+  height: 70px;
+  border: solid .5px;
+  resize: none;
+  transition: .5s;
+  border-color: orange; }
+
+.hidemsgTexArea {
+  height: 0px;
+  width: 0px;
+  transition: .5s;
+  overflow: hidden; }
+
+.dropdown {
+  position: relative;
+  display: inline-block; }
+
+.dropdown-content {
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 200px;
+  min-height: 100px;
+  height: 100%;
+  width: 100vw;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 10;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  top: 75px; }
+
+.dropdown:hover .dropdown-content {
+  display: block; }
+
+.dropdown-content li:hover {
+  background-color: lightgray; }
+
+.dropdown-content li {
+  padding-left: 10px;
+  border-color: grey;
+  border-width: 1px; }
+
+.whenNoMatchFound {
+  min-height: 35px; }

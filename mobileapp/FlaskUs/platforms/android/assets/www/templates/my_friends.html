@@ -19,7 +19,7 @@
             </div>
         </div>
     </div>
-    <ion-content class="has-footer" >
+    <ion-content class="has-footer" overflow-scroll="false">
         <a class="item item-full list-item-icon-left "ng-click="showInviteFriendPopup()">
             <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
             <p class="addText">INVITE FRIEND</p>
@@ -33,20 +33,24 @@
             <ion-item ng-repeat="data in myFriends track by $index"class="row-no-padding"padding="false"ng-click="groupMemberDetail(data)">
                 <a class="row-no-padding" style="text-decoration: none">
                     <!--href="#/app/my_friendDetail/{{data.userId}}"-->
-                    <div class="col col-20">
-                        <img src = "img/default-profilepic-copy.png"class="friendIcon">
+                    <div class="col col-20" ng-if="data.friendProfilePicUrl==undefined">
+                        <img src = "img/default-profilepic-copy.png"class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                    </div>
+                    <div class="col col-20" ng-if="data.friendProfilePicUrl!=undefined">
+                        <img ng-src = "{{data.friendProfilePicUrl}}"class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
                     </div>
                     <div class="col col-70"style="padding-top: 16px">
                         <h3 class="nameText">{{ data.fullName | uppercase}}</h3>
                        </div>
-                    <span class="badge span_icon ext-top"><img src="img/flask_icons/arrow_left.svg" ></span>
+                    <span class="badge span_icon ext-top span_icon_extraright"><img src="img/flask_icons/arrow_left.svg" ></span>
                 </a>
-                <a class="item" ng-if="myFriends.length == 0"> You do not have any friends yet. Please search and add friends </a>
 
                 <ion-option-button  class="icon ion-trash-a"ng-click="unFriend(data.userId,$index)"></ion-option-button>
-                <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(data.userId)"></ion-option-button>
+                <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(data.userId,$index)"></ion-option-button>
 
             </ion-item>
+            <a class="item" ng-if="myFriends.length == 0 && shoeEmptyMessage==true">There are no friends. </a>
+
 
         </ion-list>
 
@@ -75,11 +79,11 @@
                             <input type="text" placeholder="Search friend..." class="friendSearch" ng-model="searchContact.searchtext"/>
                         </div>
                          <div class="col col-center searchrow">
-                           <button class="button button-icon button-clear ion-ios-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
+                           <button class="button button-icon button-clear ion-android-search" ng-click="filterUserContact(searchContact.searchtext)"></button>
                         </div>
                     </div>
                 </div>
-                <ion-content class="padding has-subheader">
+                <ion-content class="padding has-subheader" overflow-scroll="false">
                             <ion-list>
                                 <ion-item ng-repeat="data in userContactList track by $index" class="item-avatar " item="data">
 
@@ -92,6 +96,7 @@
                                     <button class="badge ext-right friendButtonStyle unblockButtonStyle" ng-if="data.block" ng-click="unBlockUser(data)"><i class="emailText">Unblock </i></button>
                                     <button class="badge ext-right friendButtonStyle " ng-if="data.connected" disabled><i class="emailText">Friend</i> </button>
                                 </ion-item>
+                                <ion-item ng-if="userContactList.length==0">there are no more friends</ion-item>
                             </ion-list>
                             <ion-infinite-scroll on-infinite="getMoreUserContact(searchContact.searchtext)" distance="10%" ng-if="moreDataCanBeLoaded==true"></ion-infinite-scroll>
                 </ion-content>

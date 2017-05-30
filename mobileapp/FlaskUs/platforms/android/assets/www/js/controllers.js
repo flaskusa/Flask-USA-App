@@ -1,22 +1,19 @@
 angular.module('flaskApp.controllers', [])
 
-.controller('AppCtrl', function ($scope, $ionicModal, $state, $timeout, $cookies, LoginService, $rootScope, SERVER, $ionicLoading) {
+.controller('AppCtrl', function ($scope, $ionicModal, $state, $timeout, $cookies, LoginService, $rootScope, SERVER, $ionicLoading,$localStorage) {
     //controller for splash screen
  /*   $scope.$on('$ionicView.afterEnter', function () {
     })
     */
+
     $scope.doLogout = function () {
         $rootScope.show_login = false;       
         $cookies.remove('CurrentUser');
         $rootScope.userName ='';
         $rootScope.userEmailId ='';
+        $rootScope.userProfileUrl='';
         console.log($cookies.getObject('CurrentUser'));
         $state.go("app.events");
-        $timeout(function(){
-            SERVER.url = "http://www.flaskus.com/api/jsonws/";
-            SERVER.hostName = "http://www.flaskus.com/";
-            SERVER.companyId = 20155;
-        },2000) 
         
     }
     $scope.imgUrl = SERVER.hostName;

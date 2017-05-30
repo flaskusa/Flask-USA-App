@@ -3,28 +3,27 @@
     angular.module('flaskApp')
         .controller('EventsCtrl', EventsCtrl);
 
-    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage','$ionicSlideBoxDelegate'];
+    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage','$ionicSlideBoxDelegate','$rootScope'];
 
     /* @ngInject */
-    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage,$ionicSlideBoxDelegate) {
+    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage,$ionicSlideBoxDelegate,$rootScope) {
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
-        $scope.localstorageData = [];
-        $scope.get_geolocation_data ;
+        $scope.localstorageData = {};
         $scope.showAddv=false;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         var DEFAULT_ZIPCODE = 48226; /*Detroit Zip Code*/
         var currentDate = new Date();/*Today's Date*/
-        $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd h:mm');
+        $scope.startDate = $filter('date')(new Date(), 'yyyy-MM-dd ');
         currentDate.setDate(currentDate.getDate() - 1 ); /*adding days to today's date*/
-        $scope.startDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
+        $scope.startDate = $filter('date')(currentDate, 'yyyy-MM-dd');
         $scope.eventTypeIds = '';
         $scope.searchString = 'a';
         $scope.latitude = '42.34';
         $scope.longitude = '83.0456';
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
-        $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd h:mm');
+        $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd');
         $scope.current_time = currentDate.getTime();
         $scope.constant_time = currentDate.getTime();
         $scope.constant_time += 60 * 60 * 1000;
@@ -32,39 +31,38 @@
         $scope.vId = [];
         $scope.city = [];
         $scope.venuesId = [];
+        var location = 'geolocation';
         $scope.searchstringList = {
-            searchString: 'a',
+            searchString: '',
             days: '60'
         };
+        var searchStringList=angular.copy($scope.searchstringList);
         $scope.allEventId=[];
-
+            getAllEventDetail()
 
         // $scope.localstorageData = $localStorage.getObject('user_location_data');
-        // Retrieve the object from ng-storage  
-        $scope.localstorageData = $localStorage.things;
+        // Retrieve the object from ng-storage
+        $rootScope.$on("LocationOptionSelected", function(){
+            //do something
+            getAllEventDetail()
 
-        
-        //
-        console.log($scope.localstorageData);
-        console.log('stored time', $scope.storedTime);
-        function islocalstorageEmpty() {
-            if ($scope.localstorageData && $scope.localstorageData.length) {
-                return false;
+        });
+        function getAllEventDetail(){
+            if($localStorage.things) {
+                $scope.localstorageData = $localStorage.things;
+                $scope.storedTime = $scope.localstorageData.timestamp;
             }
             //
-        }
+            console.log($scope.localstorageData);
 
-        function isExpired() {
-            if ($scope.constant_time < $scope.current_time - $scope.storedTime) {
-                return false;
+
+
+            if ($scope.localstorageData.latitude!=undefined && $scope.localstorageData.latitude!="" && $scope.localstorageData.longitude!="") {
+                get_from_localStorage();
+
+            } else {
+                get_event_list();
             }
-        }
-
-        if (islocalstorageEmpty() && isExpired()) {
-            get_from_localStorage();
-            $scope.storedTime = $scope.localstorageData.timestamp;
-        } else {
-            get_event_list();
         }
 
         function get_event_list() {
@@ -90,8 +88,8 @@
         //Get venue name for event details
         function getVenueName() {
             EventsService.getAllVenues().then(function (respData) {
-                console.log(respData);
                 $scope.allVenues = respData;
+                $cookies.putObject("eventVenues",$scope.allVenues);
                 for (var i = 0; i < $scope.allVenues.length; i++) {
                     $scope.venuesId.push($scope.allVenues[i].venueId);
                 }
@@ -119,13 +117,20 @@
         }
 
         function get_from_localStorage() {
-            $scope.latitude = $scope.localstorageData.coords.latitude;
-            $scope.longitude = $scope.localstorageData.coords.longitude;
+            getVenueName();
+            $scope.latitude = $scope.localstorageData.latitude;
+            $scope.longitude = $scope.localstorageData.longitude;
             ConvertToZip($scope.latitude, $scope.longitude);
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
                 console.log(respData);
                 $scope.allEvent = respData.data.Events;
-                if ($scope.allEvent && $scope.allEvent.length) {
+                for (var i = 0; i < $scope.allEvent.length; i++) {
+                    $scope.vId.push($scope.allEvent[i].venueId);
+                    $scope.allEventId.push($scope.allEvent[i].eventId)
+                }
+                $cookies.put("AllEventId",$scope.allEventId);
+                $scope.showAddv=true;
+                if ($scope.allEvent && $scope.allEvent.length==0) {
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
@@ -146,14 +151,19 @@
                 $scope.locationList = respData.data.results[0].geometry.location;
                 $scope.latitude = $scope.locationList.lat;
                 $scope.longitude = $scope.locationList.lng;
-                EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (resp) {
-                    $scope.allEvent = resp.data.Events;
-                    if ($scope.allEvent.length ==0) {
-                        $scope.Event_Error = true;
-                    } else {
-                        $scope.Event_Error = false;
-                    }
-                });
+                if($scope.searchString==""){
+                    $scope.searchString="a";
+                }
+
+                    EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (resp) {
+                        $scope.allEvent = resp.data.Events;
+                        if ($scope.allEvent.length == 0) {
+                            $scope.Event_Error = true;
+                        } else {
+                            $scope.Event_Error = false;
+                        }
+                    });
+
 
             });
         }        
@@ -161,20 +171,17 @@
         function ConvertToZip(latitude,longitude) {
             var latlongVar = 'latlng=';
             var sensorVar = '&sensor=true';
-            EventsService.getZiplocation(latlongVar, latitude, longitude, sensorVar).then(function (res) {
+            var My_Zip=""
+                EventsService.getZiplocation(latlongVar, latitude, longitude, sensorVar).then(function (res) {
                 if (res.data.results[0]) {
                     for (var i = 0; i < res.data.results[0].address_components.length; i++) {
                         var postalCode = res.data.results[0].address_components[i].types;
                         if (postalCode == "postal_code") {
-                            var My_Zip = res.data.results[0].address_components[i].long_name;
+                            My_Zip = res.data.results[0].address_components[i].long_name;
                         }
                     }
                 }
-                $scope.searchstringList = {
-                    searchString :'a',
-                    days : '60',
-                    zipcode: My_Zip
-                };
+                $scope.searchstringList = angular.copy(searchStringList);
             });
         }
     }

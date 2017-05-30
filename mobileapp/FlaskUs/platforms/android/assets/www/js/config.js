@@ -1,11 +1,14 @@
 ﻿(function () {
     var flaskAppConfig = angular.module('flaskApp');
     var getMessageUrlSubString="/flask-social-portlet.flaskmessages";
+    var getmessageBoardsByTailgateIdURL = "/get-message-boards-by-tailgate-id";
+    var getUserProfileUrl = "/get-my-file-entry";
+
     flaskAppConfig.value("SERVER", {
         "hostName": "http://www.flaskus.com/",
         "url": "http://www.flaskus.com/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
-        "companyId":20155
+		"cacheExpireTime":1000
     })
     flaskAppConfig.config(function ($provide) {
             $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
@@ -252,7 +255,8 @@
             url: '/forgot_password',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/forgot_password.html'
+                    templateUrl: 'templates/forgot_password.html',
+                    controller: 'ForgotPasswordCtrl'
                 }
             }
         })
@@ -268,7 +272,7 @@
         })
 
         .state('app.tickets', {
-            url: '/tickets/:venueName/:eventDate/:eventName',
+            url: '/tickets/:venueName/:eventDate/:eventName/:venueId',
             views: {
                 'menuContent': {
                     templateUrl: 'templates/tickets.html',
@@ -364,7 +368,7 @@
         $httpProvider.interceptors.push(function ($rootScope) {
             return {
             request: function (config) {
-                if(!config.url.includes(getMessageUrlSubString)) {
+                if(!config.url.includes(getMessageUrlSubString) && !config.url.includes(getmessageBoardsByTailgateIdURL) &&!config.url.includes(getUserProfileUrl)) {
                     $rootScope.$broadcast('loading:show');
                 }
                 return config

@@ -1,11 +1,17 @@
 ﻿<ion-view cache-view="false" view-title="SUPPLIES"ng-init="initialize()">
-  <ion-content>
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button ng-if="MyGameDayList==true" class="button button-icon button-clear ion-chevron-left back_button_css" ng-click="goBack();"></button>
+            <button ng-if="MyGameDayList==false" class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content overflow-scroll="false">
 
       <a class="item item-full item-icon-left "ng-click="addNewSuppliesList()" href="#/app/createSupplies"ng-if="MyGameDayList==false">
           <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons" class="FlaskionIcons"></div>
-          <p class="addText">CREATE NEW SUPPLIES</p>
+          <p class="addText">ADD NEW LIST</p>
       </a>
-      <div class="divText"ng-if="supplies.length==0 && MyGameDayList==false">
+      <div class="divText"ng-if="MyGameDayList==false && emptySupplyMessage==true">
           You don't have any supplies, you can create your own or you can copy.
       </div>
       <div class="divText"ng-if="MyGameDaysSupply.length==0 && MyGameDayList==true && hideCheckBox==false">
@@ -36,8 +42,10 @@
           <ion-item class="suppliesList_ion_item" ng-repeat="data in supplies"ng-if="data.isSystem==false"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)">
               <div ng-class="{draggedLeft:data.swiped ,draggedRight:!data.swiped}">
                   <label ng-if = "data.edit == false" class="supply_list_name"><i class="addText">{{ data.supplyListName | uppercase}}</i> </label>
-                  <input type="text"id="editBox"autofocus ng-model="data.supplyListName "ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
-              </div>
+                  <div class="inpuBorderEdit" ng-if="data.edit == true">
+                  <input type="text"id="editBox"  ng-model="data.supplyListName " style="width: 100%" ng-focus="true"ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}" ng-blur="saveSupply(data)"/>
+                  </div>
+                  </div>
               <a  ng-click="setListId(data)"><span  class="badge badge-assertive"style="margin-right: 25px">{{data.listItem.length}}</span>
                   <div ng-if="MyGameDayList==false">
                   <span class="badge badge_supplies"><img src="img/flask_icons/arrow_left.svg" class="supplies_left_icon"></span>
@@ -70,9 +78,11 @@
           <ion-list>
               <ion-item class="item"  ng-repeat="data in supplies"ng-if="data.isSystem==true"ng-init="data.edit=false" ng-init="data.swiped=false" ng-click="goTOList(data)"on-swipe-left="onSwipeLeft(data)"on-swipe-right="onSwipeRight(data)">
                   <span class="emailText supply_list_name" ng-if = "data.edit == false"><i class="addText">{{ data.supplyListName | uppercase}}</i></span>
-                  <input type="text"id="systemEditBox"autofocus ng-model="data.supplyListName "ng-focus="true"  ng-if="data.edit == true"ng-blur="saveSupply(data)"/>
-                 <div ng-if="MyGameDayList==false">
-                  <span ng-if="agreedToTermsOfUse==false" class="badge badge-assertive"style="cursor: pointer" ng-click="copyList(data)">copy</span>
+                  <div class="inpuBorderEdit" ng-if="data.edit == true">
+                  <input type="text"id="systemEditBox" ng-model="data.supplyListName " style="width: 100%" ng-focus="true" ng-class="{Upper_Case:data.supplyListName!='' && data.supplyListName!=undefined}"  ng-blur="saveSupply(data)"/>
+                 </div>
+                      <div ng-if="MyGameDayList==false">
+                  <span ng-if="agreedToTermsOfUse==false" class="badge badge-assertive"style="cursor: pointer" ng-click="copyList(data)">Copy</span>
 
                      <div ng-if="agreedToTermsOfUse==true ">
                       <span class="badge badge_supplies"><img src="img/flask_icons/arrow_left.svg" class="supplies_left_icon"></span>
