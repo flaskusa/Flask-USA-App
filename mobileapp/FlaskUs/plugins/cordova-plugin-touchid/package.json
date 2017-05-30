@@ -1,7 +1,11 @@
 {
   "name": "cordova-plugin-touchid",
   "version": "0.4.0",
-  "author": "Lee Crossley <leee@hotmail.co.uk> (http://ilee.co.uk/)",
+  "author": {
+    "name": "Lee Crossley",
+    "email": "leee@hotmail.co.uk",
+    "url": "http://ilee.co.uk/"
+  },
   "description": "Cordova Plugin to leverage the iOS local authentication framework to allow in-app user authentication using Touch ID.",
   "cordova": {
     "id": "cordova-plugin-touchid",
@@ -35,5 +39,32 @@
   "bugs": {
     "url": "https://github.com/leecrossley/cordova-plugin-touchid/issues"
   },
-  "homepage": "https://github.com/leecrossley/cordova-plugin-touchid#readme"
+  "homepage": "https://github.com/leecrossley/cordova-plugin-touchid#readme",
+  "gitHead": "7a87a41f7b29c9c87fd59c0b985b6dbe6d50309a",
+  "_id": "cordova-plugin-touchid@0.4.0",
+  "scripts": {},
+  "_shasum": "1654554ad4d5e007ae26df3a1649309117946c94",
+  "_from": "cordova-plugin-touchid@latest",
+  "_npmVersion": "3.10.3",
+  "_nodeVersion": "6.4.0",
+  "_npmUser": {
+    "name": "leecrossley",
+    "email": "leee@hotmail.co.uk"
+  },
+  "maintainers": [
+    {
+      "name": "leecrossley",
+      "email": "leee@hotmail.co.uk"
+    }
+  ],
+  "dist": {
+    "shasum": "1654554ad4d5e007ae26df3a1649309117946c94",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-touchid/-/cordova-plugin-touchid-0.4.0.tgz"
+  },
+  "_npmOperationalInternal": {
+    "host": "packages-16-east.internal.npmjs.com",
+    "tmp": "tmp/cordova-plugin-touchid-0.4.0.tgz_1473954165706_0.2141486459877342"
+  },
+  "directories": {},
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-touchid/-/cordova-plugin-touchid-0.4.0.tgz"
 }
