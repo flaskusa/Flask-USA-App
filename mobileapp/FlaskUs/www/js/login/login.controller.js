@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('LoginCtrl', LoginCtrl);
 
-    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$filter', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID','SERVER','$localStorage','$http','UserService','$ionicHistory'];
+    LoginCtrl.$inject = ['$scope', 'LoginService', '$state', '$ionicPopup', '$filter', '$timeout', '$rootScope', '$cookies', '$ionicLoading', '$ionicPlatform', '$cordovaTouchID', 'SERVER', '$localStorage', '$http', 'UserService', '$ionicHistory', '$q'];
     
     /* @ngInject */
-    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $filter, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID,SERVER,$localStorage,$http,UserService,$ionicHistory) {
+    function LoginCtrl($scope, LoginService, $state, $ionicPopup, $filter, $timeout, $rootScope, $cookies, $ionicLoading, $ionicPlatform, $cordovaTouchID, SERVER, $localStorage, $http, UserService, $ionicHistory, $q) {
         /* jshint validthis: true */
         var self = this;
         $scope.Email = '';
