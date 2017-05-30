@@ -77,6 +77,9 @@ _infoTypeRenderer.fnBuildHtml = function(Obj, Type, contentType) {
 		case "text":
 			return _infoTypeRenderer.fnBuildInput(item.attr);
 			break;
+		case "number":
+			return _infoTypeRenderer.fnBuildNumber(item.attr);
+			break;
 		case "select":
 			return _infoTypeRenderer.fnBuildSelect(item.attr);
 			break;
@@ -119,6 +122,28 @@ _infoTypeRenderer.fnBuildInput = function(Obj) {
 		'value' : Obj[0].value,
 		'placeholder' : Obj[0].placeholder,
 		'maxlength' : Obj[0].maxlength
+	}).appendTo(objControls);
+}
+
+_infoTypeRenderer.fnBuildNumber = function(Obj) {
+	var objFormGroup = $('<div/>', {
+		'class' : 'form-group'
+	}).appendTo($(formArea));
+	var objControlLable = $('<label/>', {
+		'class' : 'control-label',
+		'for' : Obj[0].id
+	}).appendTo(objFormGroup);
+	$(objControlLable).html(Obj[0].caption);
+	var objControls = $('<div/>', {
+		'class' : 'controls'
+	}).appendTo(objFormGroup);
+	$('<input/>', {
+		'type' : 'Number',
+		'id' : Obj[0].id,
+		'value' : Obj[0].value,
+		'placeholder' : Obj[0].placeholder,
+		'maxlength' : Obj[0].maxlength,
+		'step': Obj[0].step,
 	}).appendTo(objControls);
 }
 
@@ -645,16 +670,37 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"Class" : ""
 		} ]
 	}, {
-		"type" : "text",
+		"type" : "number",
 		"attr" : [ {
 			"caption" : "Cost",
 			"id" : "cost",
 			"value" : "",
 			"placeholder" : "Enter Cost here",
 			"maxlength" : "10",
+			"Class" : "inputNumber",
+			"step" : "0.0001"
+		} ]
+	},{
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Latitude",
+			"id" : "latitude",
+			"value" : "",
+			"placeholder" : "Enter Latitude here",
+			"maxlength" : "10",
+			"Class" : "",
+		} ]
+	},{
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Longitude",
+			"id" : "longitude",
+			"value" : "",
+			"placeholder" : "Enter longitude here",
+			"maxlength" : "10",
 			"Class" : ""
 		} ]
-	}, {
+	},{
 		"type" : "boolean",
 		"attr" : [ {
 			"id" : "hoursOfOperation",
