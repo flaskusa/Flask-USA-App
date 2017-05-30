@@ -18,6 +18,8 @@
 package com.liferay.contacts.service.impl;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -192,13 +194,21 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 					  }
 				  }else{
 					  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), getUserById(relObj.getUserId2(), serviceContext).getUserId());
+					  for(FlaskRecipients recp: flaskRecipients){
+							if(!recp.getRead()){
+								count++;
+							}
+						}
+					  if(flaskRecipients.isEmpty()){
+						  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(getUserById(relObj.getUserId2(), serviceContext).getUserId(), serviceContext.getUserId());  
+					  }
 					  if(!flaskRecipients.isEmpty()){
 						  JSONArray messages = FlaskMessagesServiceUtil.getAllMyFlaskMessages(getUserById(relObj.getUserId2(), serviceContext).getUserId(), serviceContext);						  
-						  for(int n = 0; n < messages.length(); n++)
+						  for(int n = 0; n < 1; n++)
 						  {
+							  flag = false;
 						      JSONObject object = messages.getJSONObject(n);
-						      dateTime = object.getString("dateTime");
-						      jsonObject.put("lastMessageDateTime", dateTime);
+						      dateTime = object.getString("dateTime"); 
 						  }
 					  	  }else {
 					  		  flag = true;
@@ -207,13 +217,10 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 					   jsonObject = ContactsUtil.getUserJSONObject( userId, user2);
 					   jsonObject.put("portraitId", getUserById(relObj.getUserId2(), serviceContext).getPortraitId());
 				  }
-				  for(FlaskRecipients recp: flaskRecipients){
-						if(!recp.getRead()){
-							count++;
-						}
-					}
 				  if(flag){
-					  jsonObject.put("lastMessageDateTime", "");
+					  jsonObject.put("lastMessageDateTime", "0000-00-00 00:00:00:0");
+				  }else{
+					  jsonObject.put("lastMessageDateTime", dateTime);
 				  }
 				   jsonObject.put("unreadMessageCount", count);
 				   jsonArray.put(jsonObject);
