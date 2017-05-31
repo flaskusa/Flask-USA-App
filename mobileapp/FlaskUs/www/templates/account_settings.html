@@ -4,7 +4,58 @@
 		</ion-nav-back-button>
 	</ion-nav-bar>
 	<ion-tabs class="tabs-positive tab_bottom">
-		<ion-tab title="Change Password">
+        <ion-tab title="Profile">
+            <ion-content class="" overflow-scroll="false">
+                <div class="list acc_settings1">
+                    <div class="list card add_profile_div">
+                        <div class="item item-image add_profile_img_div">
+                            <span ng-click="show()"><i class="ion-ios-camera" style="width:101px;font-size: 31px;position: fixed;"></i></span>
+                            <img src="img/add_photo.png" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId ==  0">
+                            <img ng-src="{{userProfileUrl}}" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId > 0">
+                        </div>
+                    </div>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">First name</span>
+                        <input type="text" placeholder="First name" ng-model="user.firstName">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Middle name</span>
+                        <input type="text" placeholder="Middle name" ng-model="user.middleName">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Last name</span>
+                        <input type="text" placeholder="Last name" ng-model="user.lastName">
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Email</span>
+                        <input type="text" placeholder="Email" ng-model="user.Email">
+                    </label>
+                    <div class="item item-input item-floating-label item-icon-right">
+                        <span class="input-label">Date of birth</span>
+                        <input type="text" placeholder="DOB" name="DOB" class="form-control" ng-model="user.DOB" ng-click="openDatePickerOne()">
+                        <i class="icon ion-ios-calendar-outline" ng-click="openDatePickerOne();"></i>
+                    </div>
+                    <label class="item item-input">
+                        <span class="input-label" style="width:24%">Gender</span>
+                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value="true" name="rdoResult">Male</ion-radio></pre>
+                        <pre><ion-radio type="radio" ng-model='user.isMale' name="rdoResult" ng-value="false">Female</ion-radio></pre>
+                    </label>
+                    <label class="item item-input item-floating-label">
+                        <span class="input-label">Mobile number</span>
+                        <input type="number" placeholder="Mobile number" ng-model="user.mobileNumber">
+                    </label>
+                    <div class="padding" align="center">
+                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="updateUserInfo(user);">
+                            Save
+                        </button>
+                        <a nav-clear class="button button-block button-positive sign_in_button" href="#/app/user_navigation_menu">
+                            Cancel
+                        </a>
+                    </div>
+                </div>
+            </ion-content>
+        </ion-tab>
+		<ion-tab title="Password">
 			<ion-content class="" overflow-scroll="false">
 				<form name="psform" novalidate ng-submit="psform.$valid  && updateUserPassword(psform)">
 					<div class="list acc_settings1">
@@ -36,50 +87,6 @@
 				</form>
 			</ion-content>
 		</ion-tab>
-		<ion-tab title="Contact">
-			<ion-content class="" overflow-scroll="false">
-				<div class="list acc_settings1">
-					<div class="list card add_profile_div">
-						<div class="item item-image add_profile_img_div">
-                            <span ng-click="show()"><i  class="ion-ios-camera"  style="width:101px;font-size: 31px;position: fixed;"></i></span>
-							<img src="img/add_photo.png" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId ==  0">
-							<img ng-src="{{userProfileUrl}}" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId > 0">
-						</div>
-					</div>
-					<label class="item item-input item-floating-label">
-                        <span class="input-label">First name</span>
-                        <input type="text" placeholder="First name" ng-model="user.firstName">
-                    </label>
-					<label class="item item-input item-floating-label">
-                        <span class="input-label">Middle name</span>
-                        <input type="text" placeholder="Middle name" ng-model="user.middleName">
-                    </label>
-					<label class="item item-input item-floating-label">
-                        <span class="input-label">Last name</span>
-                        <input type="text" placeholder="Last name" ng-model="user.lastName">
-                    </label>					
-					<label class="item item-input item-floating-label">
-                        <span class="input-label">Email</span>
-                        <input type="text" placeholder="Email" ng-model="user.Email">
-                    </label>					
-					<div class="item item-input item-floating-label item-icon-right">
-						<span class="input-label">Date of birth</span>
-						<input type="text" placeholder="DOB" name="DOB" class="form-control" ng-model="user.DOB" ng-click="openDatePickerOne()">
-						<i class="icon ion-ios-calendar-outline" ng-click="openDatePickerOne();"></i>
-					</div>
-					<label class="item item-input">
-                        <span class="input-label" style="width:24%">Gender</span>
-                        <pre><ion-radio type="radio" ng-model='user.isMale' ng-value = "true" name="rdoResult">Male</ion-radio></pre>
-                        <pre><ion-radio type="radio" ng-model='user.isMale' name="rdoResult" ng-value = "false">Female</ion-radio></pre>
-                    </label>
-					<label class="item item-input item-floating-label">
-                        <span class="input-label">Mobile number</span>
-                        <input type="number" placeholder="Mobile number" ng-model="user.mobileNumber">
-                    </label>
-				</div>
-			</ion-content>
-		</ion-tab>
-
 		<ion-tab title="Address">
 			<ion-content class="" overflow-scroll="false">
 				<div class="list acc_settings1">

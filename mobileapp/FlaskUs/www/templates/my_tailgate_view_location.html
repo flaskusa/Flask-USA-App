@@ -15,11 +15,11 @@
                         <div id="locationMarker">
                             <div id="LocationMarkerInfoHeading" style="text-align:center;"><b>Taligate Location</b></div>
                             <div id="markercontent" class="location-marker tailgateLocationMarker" style="">
-                                <div><span style="float:left;"><b>Name:</b></span><span style="float:left;text-overflow: ellipsis;overflow: hidden;height: 17px;width: 170px;">{{taligateMarkers.name}}</span></div>
-                                <div><div id="descTailgateMarker" style="float: left;height: 20px;float: left;overflow: scroll;"><b>Description:</b>{{taligateMarkers.description}}</div></div>
-                                <b><a class="positive" ng-click="$root.takemeThere(this);" style=" float: left; color: black;">
-                                        <img src="img/map_icons/take_me_there.svg" alt="Take-Me-There" style="display: block;width: 25px;float: left;margin-right: 10px;">TAKE YOU THERE
-                                    </a>
+                                <div><span style="float:left;"><b>Name: &nbsp;</b></span><span style="float:left;text-overflow: ellipsis;overflow: hidden;height: 17px;width: 170px;text-transform: none;">{{taligateMarkers.name}}</span></div>
+                                <div><div id="descTailgateMarker" style="float: left;height: 20px;float: left;overflow-y: auto;">Description: &nbsp;{{taligateMarkers.description}}</div></div>
+                                <div><a class="positive" ng-click="$root.takemeThere(this);" style=" float: left; color: black;">
+                                        <img src="img/map_icons/take_me_there.svg" alt="Take-Me-There" style="display: block;width: 25px;float: left;margin-right: 10px;"><div style="font-weight:bold; float:left;margin-top: 3px;">TAKE YOU THERE</div>
+                                    </a></div>
                                 </b>
                             </div>
                         </div>
