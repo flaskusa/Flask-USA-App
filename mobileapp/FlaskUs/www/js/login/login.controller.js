@@ -86,7 +86,7 @@
         }
 
         function getCompanyId(user) {
-            LoginService.registerDeviceFuntion().then(function (response) {
+            LoginService.getCompanyIdFunction().then(function (response) {
                 SERVER.companyId = response.data;
                 $scope.doLogin(user);
             });

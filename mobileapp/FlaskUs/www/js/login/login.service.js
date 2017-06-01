@@ -13,7 +13,8 @@
             forgotPasswordFunction: forgotPasswordFunction,
             resetPasswordFuntion: resetPasswordFuntion,
             authenticateUser: authenticateUser,
-            getUserProfilePicture: getUserProfilePicture
+            getUserProfilePicture: getUserProfilePicture,
+            getCompanyIdFunction: getCompanyIdFunction
         }
         var forgotPasswordURL = "/flask-rest-users-portlet.flaskadmin/forgot-password";
         var resetPasswordUrl = "/flask-rest-users-portlet.flaskadmin/reset-password";
@@ -39,11 +40,8 @@
                 });
         }
 
-        function getCompanyIdFunction(emailAddress) {
+        function getCompanyIdFunction() {
             return $http.get(SERVER.url + getCompanyIdUrl, {
-                params: {
-                    emailAddress: emailAddress
-                }
             })
                 .then(function success(response) {
                     return response.data;
