@@ -1,12 +1,59 @@
 (function () {
     var app = angular.module('flaskApp'); 
-    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage,$state,LoginService,$http,SERVER,UserService) {
+    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage, $state, LoginService, $http, SERVER, UserService, $cordovaPush, $cordovaAppVersion) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
             //  if (cordova.platformId === 'ios' && window.cordova && window.cordova.plugins.Keyboard) {
             //      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             //      cordova.plugins.Keyboard.disableScroll(true);
+            //For Push Notification
+            var push = PushNotification.init({
+                android: {
+                    senderID: "843562154399",
+                    sound: "true",
+                    vibrate: "true",
+                    forceShow: "true"
+                },
+                browser: {
+                    pushServiceURL: 'http://push.api.phonegap.com/v1/push'
+                },
+                ios: {
+                    alert: "true",
+                    badge: "true",
+                    sound: "true"
+                },
+                windows: {}
+            });
+
+            push.on('registration', function (data) {
+                // data.registrationId
+                $cookies.putObject('deviceToken', data.registrationId);
+                //alert("device token" + data.registrationId);
+            });
+
+            push.on('notification', function (data) {
+                // data.message,
+                // data.title,
+                // data.count,
+                // data.sound,
+                // data.image,
+                // data.additionalData
+            });
+
+            push.on('error', function (e) {
+                // e.message
+            });
+            //End of Push Notification
+            //for getting App verion
+            $cordovaAppVersion.getVersionNumber().then(function (version) {
+                $rootScope.appVersion = version;
+            });
+            $cordovaAppVersion.getVersionCode().then(function (build) {
+                $rootScope.appBuild = build;
+            });
+            //End of App version
+
             var profileUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
             
             $localStorage.$default({things:{}});

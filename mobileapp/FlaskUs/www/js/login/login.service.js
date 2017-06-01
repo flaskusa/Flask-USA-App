@@ -17,6 +17,8 @@
         }
         var forgotPasswordURL = "/flask-rest-users-portlet.flaskadmin/forgot-password";
         var resetPasswordUrl = "/flask-rest-users-portlet.flaskadmin/reset-password";
+        var regiterDeviceUrl = "/flask-social-portlet.flaskmessages/register-with-sns";
+        var getCompanyIdUrl = "/flask-rest-users-portlet.flaskadmin/get-company-id";
 
 
         var companyId = SERVER.companyId;
@@ -37,6 +39,20 @@
                 });
         }
 
+        function getCompanyIdFunction(emailAddress) {
+            return $http.get(SERVER.url + getCompanyIdUrl, {
+                params: {
+                    emailAddress: emailAddress
+                }
+            })
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+
         function resetPasswordFuntion(emailAddress, password1, password2, otp) {
             return $http.get(SERVER.url + resetPasswordUrl, {
                 params: {
@@ -44,6 +60,28 @@
                     password1: password1,
                     password2: password2,
                     otp: otp
+                }
+            })
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
+        }
+
+        function registerDeviceFuntion(userId, userEmail, devicePlatform, deviceDetails, deviceToken, registrationTime, active, lastNotificationTime, lastNotificationMsg) {
+            return $http.get(SERVER.url + regiterDeviceUrl, {
+                params: {
+                    'userId': userId,
+                    'userEmail': userEmail,
+                    'devicePlatform': devicePlatform,
+                    'deviceDetails': deviceDetails,
+                    'deviceToken': deviceToken,
+                    'registrationTime': registrationTime,
+                    'active': active,
+                    'lastNotificationTime': lastNotificationTime,
+                    'lastNotificationMsg': lastNotificationMsg
                 }
             })
                 .then(function success(response) {

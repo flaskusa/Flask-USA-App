@@ -22,7 +22,7 @@
                             <span class="input-label">Tailgate name</span>
                             <input type="text" placeholder="Tailgate name" name="TailgateName" class="form-control" ng-model="addTailgateParams.tailgateName"
                                 required>
-                            <div ng-show="tailgateForm.$submitted || tailgateForm.TailgateName.$touched">
+                            <div ng-show="tailgateForm.$submitted || tailgateForm.TailgateName.$touched"  class="ng-hide">
                                 <span ng-show="tailgateForm.TailgateName.$error.required" class="error_msg">Please enter tailgate name</span>
                             </div>
                         </div>

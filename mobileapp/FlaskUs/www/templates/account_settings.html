@@ -62,14 +62,14 @@
 						<label class="item item-input item-floating-label">
                         <span class="input-label">New password</span>
                         <input type="password" placeholder="New password" class="form-control" ng-model="userPassword.newPassword1" name = "newPassword1" required>
-                        <div ng-show="psform.$submitted || psform.newPassword1.$touched">
+                        <div ng-show="psform.$submitted || psform.newPassword1.$touched"  class="ng-hide">
                             <span  ng-show="psform.newPassword1.$error.required" class="error_msg"> Required! </span> 
                         </div>
                     </label>
 						<label class="item item-input item-floating-label">
                         <span class="input-label">Confirm Password</span>
                         <input type="password" placeholder="Confirm password" class="form-control" ng-model="userPassword.newPassword2" name = "newPassword2" required>
-                        <div ng-show="psform.$submitted || psform.newPassword2.$touched">
+                        <div ng-show="psform.$submitted || psform.newPassword2.$touched"  class="ng-hide">
                             <span ng-show="psform.newPassword2.$error.required" class="error_msg"> Required! </span> 
                             <span  ng-show="userPassword.newPassword2.trim().length > 0 && userPassword.newPassword1.trim().length  && userPassword.newPassword1!= userPassword.newPassword2" class="error_msg">
                                     Confirm password did not match!</span>

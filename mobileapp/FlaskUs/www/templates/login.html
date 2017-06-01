@@ -7,7 +7,7 @@
         </ion-nav-buttons>    
     </ion-nav-bar>
     <ion-content>
-        <div class="loginpane form_div">
+        <div class="loginpane form_div" ng-cloak>
             <div class="loginpane_header">
                 <img title="logo_2" alt="logo_2" class="cq-dd-image" style="zoom: 0.3;">
             </div>
@@ -23,7 +23,7 @@
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Email</span>
                         <input type="email" placeholder="Email" class="form-control loginInputs" ng-model="user.Email" name="Email" required>
-                        <div ng-show="login_form.$submitted || login_form.Email.$touched">
+                        <div ng-show="login_form.$submitted || login_form.Email.$touched" class="ng-hide">
                             <span ng-show="login_form.Email.$error.required" class="error_msg">Enter your user name</span>
                             <span ng-show="login_form.Email.$error.email" class="error_msg">This is not a valid email</span>
                         </div>
@@ -31,7 +31,7 @@
                     <label class="item item-input item-floating-label">
                         <span class="input-label">Password</span>
                         <input type="password" placeholder="Password" class="form-control loginInputs" ng-model="user.password" name="password" required>
-                        <div ng-show="login_form.$submitted || login_form.password.$touched">
+                        <div ng-show="login_form.$submitted || login_form.password.$touched" class="ng-hide">
                              <span ng-show="login_form.password.$error.required" class="error_msg">Please enter your password</span>
                         </div>
                     </label>
@@ -49,19 +49,19 @@
                     </div>
                     <div class="navigation">
                         <ul class="taglib-icon-list unstyled">
-                            <li class="" role="presentation">
+                            <li class="listAlign" role="presentation">
                                 <a href="#/app/forgot_password" class=" taglib-icon" role="menuitem" ng-click="login_form.$setPristine();">
                                     <span class="taglib-text"><i class="ion ion-help-circled"></i>Forgot Password</span>
                                 </a>
                             </li>
-                            <li class="" role="presentation">
-                                <a href="#/app/events" class=" taglib-icon" role="menuitem" ng-click="login_form.$setPristine();">
-                                    <span class="taglib-text"><i class="ion ion-edit"></i>Create Account Later</span>
-                                </a>
-                            </li>
-                            <li class="" role="presentation">
+                            <li class="listAlign" role="presentation">
                                 <a href="#/app/reset_password" class=" taglib-icon" role="menuitem" >
                                     <span class="taglib-text"><i class="ion ion-edit"></i>Reset Password</span>
+                                </a>
+                            </li>
+                            <li class="listAlign" role="presentation">
+                                <a href="#/app/events" class=" taglib-icon" role="menuitem" ng-click="login_form.$setPristine();">
+                                    <span class="taglib-text"><i class="ion ion-edit"></i>Create Account Later</span>
                                 </a>
                             </li>
                         </ul>
