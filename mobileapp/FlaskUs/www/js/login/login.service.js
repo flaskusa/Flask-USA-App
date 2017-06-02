@@ -14,7 +14,8 @@
             resetPasswordFuntion: resetPasswordFuntion,
             authenticateUser: authenticateUser,
             getUserProfilePicture: getUserProfilePicture,
-            getCompanyIdFunction: getCompanyIdFunction
+            getCompanyIdFunction: getCompanyIdFunction,
+            registerDeviceFuntion:registerDeviceFuntion
         }
         var forgotPasswordURL = "/flask-rest-users-portlet.flaskadmin/forgot-password";
         var resetPasswordUrl = "/flask-rest-users-portlet.flaskadmin/reset-password";

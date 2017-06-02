@@ -77,39 +77,19 @@
                 getCompanyId(user);
             }
         }
-		
-		$scope.addDeviceDetails = function (userdata) {
-			var currDeviceToken = $cookies.getObject('deviceToken');
-             $http.get(SERVER.url + '/flask-social-portlet.flaskmessages/register-with-sns', {                           
-                   params: {
-                      'userId': userdata.data.userId,
-                      'userEmail': userdata.data.emailAddress,
-                      'devicePlatform': $scope.deviceDetails.platform,
-                      'deviceDetails': $scope.deviceDetails.model,
-                      'deviceToken': currDeviceToken,
-                      'registrationTime': $scope.regiDate,
-                      'active': true,
-                      'lastNotificationTime': $scope.regiDate,
-                      'lastNotificationMsg': ""
-                   }
-             })
-                   .then(function success(response) {
-                       console.log("response" + response.data);
-                   }, function failure(response) {
-                       console.log("response1" + response);
-                   });
+        
+        $scope.addDeviceDetails = function (userdata) {
+            var currDeviceToken = $cookies.getObject('deviceToken');
+            LoginService.registerDeviceFuntion(userdata.data.userId, userdata.data.emailAddress, $scope.deviceDetails.platform, $scope.deviceDetails.model, currDeviceToken, $scope.regiDate, true, $scope.regiDate, '').then(function (response) {
+                console.log("response" + response);
+            });
         }
 
         function getCompanyId(user) {
-            $http.get(SERVER.url + '/flask-rest-users-portlet.flaskadmin/get-company-id'
-            )
-                .then(function success(response) {
-                    SERVER.companyId = response.data;
-                    $scope.doLogin(user);
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            LoginService.getCompanyIdFunction().then(function (response) {
+                SERVER.companyId = response;
+                $scope.doLogin(user);
+            });
         }
 
 
