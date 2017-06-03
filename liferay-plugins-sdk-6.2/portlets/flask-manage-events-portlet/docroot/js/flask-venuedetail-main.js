@@ -22,24 +22,22 @@ function addDetailsClickHandlers() {
 							_flaskLib.showWarningMessage('action-msg-warning',_venueDetailModel.MESSAGES.DETAIL_DUPLICATE);
 						} else {
 							if ($('#venueDetailsForm').jqxValidator('validate')) {
-								if ($('#addrLine1').val() == undefined) {
+								if ($("#venueDetailsForm").find('#addrLine1').val() == undefined || $("#venueDetailsForm").find('#addrLine1').val() == "") {
 									$('#lat').val(0);
 									$('#lng').val(0);
 									saveVenueDetails();
 									window.location.hash = "#ManageVenueContent";
 								} else {
-
 									try {
 										var geocoder = new google.maps.Geocoder();
 										geocoder.geocode({
-															address : $('#addrLine1').val(),
+															address : $("#venueDetailsForm").find('#addrLine1').val(),
 															region : 'no'
 														},
 														function(results,status) {
 															try {
 																if (status.toLowerCase() == 'ok') {
-																	// Get
-																	// center
+																	// Get center
 																	var coords = new google.maps.LatLng(
 																			results[0]['geometry']['location']
 																					.lat(),
@@ -49,15 +47,26 @@ function addDetailsClickHandlers() {
 																	var distInKm = getDistanceFromLatLonInKm($("#venueForm").find("#latitude").val(),
 																			$("#venueForm").find("#longitude").val(),coords.lat(),coords.lng());
 																	console.log(distInKm);
-																	if(distInKm > 5){
-																		$('#lat').val("");
-																		$('#lng').val("");
-																		$('#venueDetailsForm #latitude').val("");
-																		$('#venueDetailsForm #longitude').val("");
-																		throw "Invalid Address";	
+																	if(distInKm <= 5){
+																		$('#lat').val(coords.lat());
+																		$('#lng').val(coords.lng());
+																	}else{
+																		if($('#venueDetailsForm #latitude').val() != "" && $('#venueDetailsForm #longitude').val() != ""){
+																			var distInKm = getDistanceFromLatLonInKm($("#venueForm").find("#latitude").val(),
+																					$("#venueForm").find("#longitude").val(),$('#venueDetailsForm #latitude').val(),
+																					$('#venueDetailsForm #longitude').val());
+																			if(distInKm > 5){
+																				$('#venueDetailsForm #latitude').val("");
+																				$('#venueDetailsForm #longitude').val("");
+																				throw "Invalid Address";
+																			}else{
+																				$('#lat').val($('#venueDetailsForm #latitude').val());
+																				$('#lng').val($('#venueDetailsForm #longitude').val());
+																			}
+																		}else{
+																			throw "Invalid Address";
+																		}
 																	}
-																	$('#lat').val(coords.lat());
-																	$('#lng').val(coords.lng());
 																}
 															} catch (ex) {
 																_flaskLib.showErrorMessage('action-msg',_venueDetailModel.MESSAGES.GOCODING_ERROR);
