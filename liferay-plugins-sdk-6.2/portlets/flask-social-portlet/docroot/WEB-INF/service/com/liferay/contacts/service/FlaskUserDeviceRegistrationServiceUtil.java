@@ -118,6 +118,16 @@ public class FlaskUserDeviceRegistrationServiceUtil {
 		getService().deleteUserDevice(userDeviceRegistrationId);
 	}
 
+	public static boolean deactivateUserForUserDevice(long userId,
+		java.lang.String deviceToken) {
+		return getService().deactivateUserForUserDevice(userId, deviceToken);
+	}
+
+	public static boolean activateUserForUserDevice(
+		long userDeviceRegistrationId) {
+		return getService().activateUserForUserDevice(userDeviceRegistrationId);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

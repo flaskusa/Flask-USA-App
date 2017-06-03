@@ -77,7 +77,7 @@ public class FlaskUserDeviceRegistrationModelImpl extends BaseModelImpl<FlaskUse
 			{ "lastNotificationTime", Types.TIMESTAMP },
 			{ "lastNotificationMsg", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskUserDeviceRegistration (userDeviceRegistrationId LONG not null primary key,userId LONG,userEmail VARCHAR(75) null,devicePlatform VARCHAR(75) null,deviceDetails VARCHAR(75) null,deviceToken VARCHAR(75) null,registrationTime DATE null,active_ BOOLEAN,lastNotificationTime DATE null,lastNotificationMsg VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskUserDeviceRegistration (userDeviceRegistrationId LONG not null primary key,userId LONG,userEmail VARCHAR(75) null,devicePlatform VARCHAR(75) null,deviceDetails VARCHAR(75) null,deviceToken VARCHAR(200) null,registrationTime DATE null,active_ BOOLEAN,lastNotificationTime DATE null,lastNotificationMsg VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Contacts_FlaskUserDeviceRegistration";
 	public static final String ORDER_BY_JPQL = " ORDER BY flaskUserDeviceRegistration.userDeviceRegistrationId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Contacts_FlaskUserDeviceRegistration.userDeviceRegistrationId ASC";

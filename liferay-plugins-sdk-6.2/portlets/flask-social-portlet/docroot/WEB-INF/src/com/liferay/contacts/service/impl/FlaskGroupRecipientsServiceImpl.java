@@ -21,6 +21,7 @@ import java.util.List;
 import com.liferay.contacts.model.FlaskGroupRecipients;
 import com.liferay.contacts.model.impl.FlaskGroupRecipientsImpl;
 import com.liferay.contacts.service.FlaskGroupRecipientsLocalServiceUtil;
+import com.liferay.contacts.service.FlaskMessagesServiceUtil;
 import com.liferay.contacts.service.FlaskRecipientsLocalServiceUtil;
 import com.liferay.contacts.service.base.FlaskGroupRecipientsServiceBaseImpl;
 import com.liferay.contacts.service.persistence.FlaskGroupRecipientsUtil;
@@ -32,7 +33,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
+import com.rumbasolutions.flask.model.FlaskGroup;
 import com.rumbasolutions.flask.model.FlaskGroupUsers;
+import com.rumbasolutions.flask.service.FlaskGroupServiceUtil;
 import com.rumbasolutions.flask.service.FlaskGroupUsersServiceUtil;
 
 /**
@@ -61,6 +64,7 @@ public class FlaskGroupRecipientsServiceImpl
 		try {
 			flaskGroupRecipients = FlaskGroupRecipientsLocalServiceUtil.createFlaskGroupRecipients(CounterLocalServiceUtil.increment());
 			List<FlaskGroupUsers> groupUsers= FlaskGroupUsersServiceUtil.getAllGroupUsers(groupId);
+			FlaskGroup group = FlaskGroupServiceUtil.getGroup(groupId);
 			String recipients ="";
 			String read ="";
 			   for (FlaskGroupUsers groupUser : groupUsers){
@@ -71,7 +75,11 @@ public class FlaskGroupRecipientsServiceImpl
 					   recipients = recipients+ "," +groupUser.getUserId();
 					   read = read+ "," + "0";
 				   }
-				   EmailInvitationUtil.emailMessage(groupUser.getUserName(), senderEmailId, groupUser.getEmailAddress(), message, serviceContext);
+				   FlaskMessagesServiceUtil.sendPush(groupUser.getUserId(), "Flask Group Message", " You have a message from "+group.getGroupName(), "Group_Message", group.getModelAttributes());
+				   try {
+					   EmailInvitationUtil.emailMessage(groupUser.getUserName(), senderEmailId, groupUser.getEmailAddress(), message, serviceContext);
+					} catch (Exception e) {
+					}
 			   }
 			flaskGroupRecipients.setRecipients(recipients);
 			flaskGroupRecipients.setRead(read);
@@ -120,7 +128,7 @@ public class FlaskGroupRecipientsServiceImpl
 		  LOGGER.error("Exception in setGroupMessageRead:"+e.getMessage());
 	  }
 	  return ret;
-	 }
+	}
 	
 	@SuppressWarnings("unchecked")
 	@Override

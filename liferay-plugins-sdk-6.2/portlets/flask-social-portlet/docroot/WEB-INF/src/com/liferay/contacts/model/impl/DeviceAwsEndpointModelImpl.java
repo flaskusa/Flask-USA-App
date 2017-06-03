@@ -67,7 +67,7 @@ public class DeviceAwsEndpointModelImpl extends BaseModelImpl<DeviceAwsEndpoint>
 			{ "awsEndpoint", Types.VARCHAR },
 			{ "userDeviceRegistrationId", Types.BIGINT }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contacts_DeviceAwsEndpoint (deviceEndPointId LONG not null primary key,awsEndpoint VARCHAR(75) null,userDeviceRegistrationId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Contacts_DeviceAwsEndpoint (deviceEndPointId LONG not null primary key,awsEndpoint VARCHAR(200) null,userDeviceRegistrationId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table Contacts_DeviceAwsEndpoint";
 	public static final String ORDER_BY_JPQL = " ORDER BY deviceAwsEndpoint.deviceEndPointId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Contacts_DeviceAwsEndpoint.deviceEndPointId ASC";

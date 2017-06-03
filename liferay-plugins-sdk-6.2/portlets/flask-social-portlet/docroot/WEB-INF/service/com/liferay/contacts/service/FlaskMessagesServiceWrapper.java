@@ -124,8 +124,23 @@ public class FlaskMessagesServiceWrapper implements FlaskMessagesService,
 	}
 
 	@Override
-	public boolean sendPushNotification() {
-		return _flaskMessagesService.sendPushNotification();
+	public boolean registerWithSNS(long userId, java.lang.String userEmail,
+		java.lang.String devicePlatform, java.lang.String deviceDetails,
+		java.lang.String deviceToken, java.util.Date registrationTime,
+		java.lang.Boolean active, java.util.Date lastNotificationTime,
+		java.lang.String lastNotificationMsg,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskMessagesService.registerWithSNS(userId, userEmail,
+			devicePlatform, deviceDetails, deviceToken, registrationTime,
+			active, lastNotificationTime, lastNotificationMsg, serviceContext);
+	}
+
+	@Override
+	public boolean sendPush(long userId, java.lang.String title,
+		java.lang.String message, java.lang.String infoType,
+		java.util.Map<java.lang.String, java.lang.Object> infoDataMap) {
+		return _flaskMessagesService.sendPush(userId, title, message, infoType,
+			infoDataMap);
 	}
 
 	/**

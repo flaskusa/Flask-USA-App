@@ -194,5 +194,34 @@ public class FlaskUserDeviceRegistrationServiceSoap {
 		}
 	}
 
+	public static boolean deactivateUserForUserDevice(long userId,
+		java.lang.String deviceToken) throws RemoteException {
+		try {
+			boolean returnValue = FlaskUserDeviceRegistrationServiceUtil.deactivateUserForUserDevice(userId,
+					deviceToken);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean activateUserForUserDevice(
+		long userDeviceRegistrationId) throws RemoteException {
+		try {
+			boolean returnValue = FlaskUserDeviceRegistrationServiceUtil.activateUserForUserDevice(userDeviceRegistrationId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(FlaskUserDeviceRegistrationServiceSoap.class);
 }

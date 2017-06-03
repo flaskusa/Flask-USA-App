@@ -121,6 +121,18 @@ public class FlaskUserDeviceRegistrationServiceWrapper
 		_flaskUserDeviceRegistrationService.deleteUserDevice(userDeviceRegistrationId);
 	}
 
+	@Override
+	public boolean deactivateUserForUserDevice(long userId,
+		java.lang.String deviceToken) {
+		return _flaskUserDeviceRegistrationService.deactivateUserForUserDevice(userId,
+			deviceToken);
+	}
+
+	@Override
+	public boolean activateUserForUserDevice(long userDeviceRegistrationId) {
+		return _flaskUserDeviceRegistrationService.activateUserForUserDevice(userDeviceRegistrationId);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

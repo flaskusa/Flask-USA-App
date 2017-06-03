@@ -102,4 +102,9 @@ public interface FlaskUserDeviceRegistrationService extends BaseService,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteUserDevice(long userDeviceRegistrationId);
+
+	public boolean deactivateUserForUserDevice(long userId,
+		java.lang.String deviceToken);
+
+	public boolean activateUserForUserDevice(long userDeviceRegistrationId);
 }

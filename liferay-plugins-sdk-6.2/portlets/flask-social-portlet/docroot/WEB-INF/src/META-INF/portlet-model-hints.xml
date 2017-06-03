@@ -25,9 +25,14 @@
 	<hint-collection name="FLASK-PHONE">
 		<hint name="max-length">20</hint>
 	</hint-collection>
+	<hint-collection name="FLASK-DEVICE-TOKEN">
+		<hint name="max-length">200</hint>
+	</hint-collection>
 	<model name="com.liferay.contacts.model.DeviceAwsEndpoint">
 		<field name="deviceEndPointId" type="long" />
-		<field name="awsEndpoint" type="String" />
+		<field name="awsEndpoint" type="String">
+			<hint-collection name="FLASK-DEVICE-TOKEN" />
+		</field>
 		<field name="userDeviceRegistrationId" type="long" />
 	</model>
 	<model name="com.liferay.contacts.model.Entry">
@@ -101,7 +106,9 @@
 		<field name="userEmail" type="String" />
 		<field name="devicePlatform" type="String" />
 		<field name="deviceDetails" type="String" />
-		<field name="deviceToken" type="String" />
+		<field name="deviceToken" type="String">
+			<hint-collection name="FLASK-DEVICE-TOKEN" />
+		</field>
 		<field name="registrationTime" type="Date" />
 		<field name="active" type="boolean" />
 		<field name="lastNotificationTime" type="Date" />

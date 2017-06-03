@@ -117,8 +117,24 @@ public class FlaskMessagesServiceUtil {
 			.deleteMessagesByDateRange(startDate, endDate, serviceContext);
 	}
 
-	public static boolean sendPushNotification() {
-		return getService().sendPushNotification();
+	public static boolean registerWithSNS(long userId,
+		java.lang.String userEmail, java.lang.String devicePlatform,
+		java.lang.String deviceDetails, java.lang.String deviceToken,
+		java.util.Date registrationTime, java.lang.Boolean active,
+		java.util.Date lastNotificationTime,
+		java.lang.String lastNotificationMsg,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .registerWithSNS(userId, userEmail, devicePlatform,
+			deviceDetails, deviceToken, registrationTime, active,
+			lastNotificationTime, lastNotificationMsg, serviceContext);
+	}
+
+	public static boolean sendPush(long userId, java.lang.String title,
+		java.lang.String message, java.lang.String infoType,
+		java.util.Map<java.lang.String, java.lang.Object> infoDataMap) {
+		return getService()
+				   .sendPush(userId, title, message, infoType, infoDataMap);
 	}
 
 	public static void clearService() {

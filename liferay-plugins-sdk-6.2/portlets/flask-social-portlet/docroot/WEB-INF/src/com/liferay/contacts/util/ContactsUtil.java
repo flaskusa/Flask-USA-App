@@ -17,6 +17,7 @@
 
 package com.liferay.contacts.util;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liferay.contacts.model.Entry;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
@@ -49,7 +50,6 @@ import com.liferay.portlet.social.service.SocialRelationLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
 
 import java.lang.reflect.Field;
-
 import java.util.List;
 
 /**
@@ -68,6 +68,15 @@ public class ContactsUtil {
 		jsonObject.put("portalUser", false);
 
 		return jsonObject;
+	}
+	
+	public static String jsonify(Object message) {
+		try {
+			return new ObjectMapper().writeValueAsString(message);
+		} catch (Exception e) {
+			e.printStackTrace();
+			throw (RuntimeException) e;
+		}
 	}
 
 	public static long getGroupId(String filterBy) {

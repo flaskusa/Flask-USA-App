@@ -88,9 +88,21 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName12 = "sendPushNotification";
+		_methodName12 = "registerWithSNS";
 
-		_methodParameterTypes12 = new String[] {  };
+		_methodParameterTypes12 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.util.Date",
+				"java.lang.Boolean", "java.util.Date", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName13 = "sendPush";
+
+		_methodParameterTypes13 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.util.Map"
+			};
 	}
 
 	@Override
@@ -404,12 +416,74 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	}
 
 	@Override
-	public boolean sendPushNotification() {
+	public boolean registerWithSNS(long userId, java.lang.String userEmail,
+		java.lang.String devicePlatform, java.lang.String deviceDetails,
+		java.lang.String deviceToken, java.util.Date registrationTime,
+		java.lang.Boolean active, java.util.Date lastNotificationTime,
+		java.lang.String lastNotificationMsg,
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName12,
-					_methodParameterTypes12, new Object[] {  });
+					_methodParameterTypes12,
+					new Object[] {
+						userId,
+						
+					ClpSerializer.translateInput(userEmail),
+						
+					ClpSerializer.translateInput(devicePlatform),
+						
+					ClpSerializer.translateInput(deviceDetails),
+						
+					ClpSerializer.translateInput(deviceToken),
+						
+					ClpSerializer.translateInput(registrationTime),
+						
+					ClpSerializer.translateInput(active),
+						
+					ClpSerializer.translateInput(lastNotificationTime),
+						
+					ClpSerializer.translateInput(lastNotificationMsg),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
+	@Override
+	public boolean sendPush(long userId, java.lang.String title,
+		java.lang.String message, java.lang.String infoType,
+		java.util.Map<java.lang.String, java.lang.Object> infoDataMap) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName13,
+					_methodParameterTypes13,
+					new Object[] {
+						userId,
+						
+					ClpSerializer.translateInput(title),
+						
+					ClpSerializer.translateInput(message),
+						
+					ClpSerializer.translateInput(infoType),
+						
+					ClpSerializer.translateInput(infoDataMap)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -451,4 +525,6 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	private String[] _methodParameterTypes11;
 	private String _methodName12;
 	private String[] _methodParameterTypes12;
+	private String _methodName13;
+	private String[] _methodParameterTypes13;
 }

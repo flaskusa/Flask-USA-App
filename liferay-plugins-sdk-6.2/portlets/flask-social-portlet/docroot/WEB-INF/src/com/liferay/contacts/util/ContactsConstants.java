@@ -43,6 +43,10 @@ public class ContactsConstants {
 	public static final String FILTER_BY_GROUP = "group_";
 
 	public static final String FILTER_BY_TYPE = "type_";
+	
+	public static final String ANDROID_PLATFORM = "Android";
+	
+	public static final String IOS_PLATFORM = "iOS";
 
 	public static final String FILTER_BY_TYPE_BI_CONNECTION =
 		FILTER_BY_TYPE + SocialRelationConstants.TYPE_BI_CONNECTION;

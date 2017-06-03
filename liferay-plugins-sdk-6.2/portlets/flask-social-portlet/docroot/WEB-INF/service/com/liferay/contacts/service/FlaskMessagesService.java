@@ -102,5 +102,14 @@ public interface FlaskMessagesService extends BaseService, InvokableService {
 		java.util.Date endDate,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
-	public boolean sendPushNotification();
+	public boolean registerWithSNS(long userId, java.lang.String userEmail,
+		java.lang.String devicePlatform, java.lang.String deviceDetails,
+		java.lang.String deviceToken, java.util.Date registrationTime,
+		java.lang.Boolean active, java.util.Date lastNotificationTime,
+		java.lang.String lastNotificationMsg,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public boolean sendPush(long userId, java.lang.String title,
+		java.lang.String message, java.lang.String infoType,
+		java.util.Map<java.lang.String, java.lang.Object> infoDataMap);
 }

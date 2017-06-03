@@ -56,7 +56,8 @@ public class FlaskUserDeviceRegistrationServiceImpl
  		FlaskUserDeviceRegistration flaskUserDeviceRegistration = null;
  		try{
  			List<FlaskUserDeviceRegistration> flaskUser = FlaskUserDeviceRegistrationUtil.findByUserIdDeviceToken(userId, deviceToken);
- 			if(flaskUser.isEmpty()){
+// 			List<FlaskUserDeviceRegistration> flaskUser = FlaskUserDeviceRegistrationUtil.findBydeviceToken(deviceToken);
+ 			if(flaskUser.size()<=0){
 	 			flaskUserDeviceRegistration = FlaskUserDeviceRegistrationLocalServiceUtil.createFlaskUserDeviceRegistration(CounterLocalServiceUtil.increment());
 	 			flaskUserDeviceRegistration.setUserId(userId);
 	 			flaskUserDeviceRegistration.setUserEmail(userEmail);
@@ -163,5 +164,33 @@ public class FlaskUserDeviceRegistrationServiceImpl
 		}catch (Exception e) {
 			LOGGER.error("Exception in Delete Registr User Device: " + e.getMessage());
 		}
+     }
+     
+     @Override
+     public boolean deactivateUserForUserDevice(long userId, String deviceToken){
+    	 boolean done = false;
+    	 try {
+    		 FlaskUserDeviceRegistration userDevice = FlaskUserDeviceRegistrationUtil.findByUserIdDeviceToken(userId, deviceToken).get(0);
+    		 userDevice.setActive(false);
+    		 userDevice = FlaskUserDeviceRegistrationLocalServiceUtil.updateFlaskUserDeviceRegistration(userDevice);
+    		 done = true;
+    	 } catch (Exception e) {
+			e.printStackTrace();
+    	 }
+    	 return done;
+     }
+     
+     @Override
+     public boolean activateUserForUserDevice(long userDeviceRegistrationId){
+    	 boolean done = false;
+    	 try {
+    		 FlaskUserDeviceRegistration userDevice = FlaskUserDeviceRegistrationServiceUtil.getUserDevice(userDeviceRegistrationId);
+    		 userDevice.setActive(true);
+    		 userDevice = FlaskUserDeviceRegistrationLocalServiceUtil.updateFlaskUserDeviceRegistration(userDevice);
+    		 done = true;
+    	 } catch (Exception e) {
+			e.printStackTrace();
+    	 }
+    	 return done;
      }
 }

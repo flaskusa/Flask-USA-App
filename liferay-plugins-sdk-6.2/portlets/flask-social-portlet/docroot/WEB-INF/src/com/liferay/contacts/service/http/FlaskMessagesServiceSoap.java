@@ -204,9 +204,19 @@ public class FlaskMessagesServiceSoap {
 		}
 	}
 
-	public static boolean sendPushNotification() throws RemoteException {
+	public static boolean registerWithSNS(long userId,
+		java.lang.String userEmail, java.lang.String devicePlatform,
+		java.lang.String deviceDetails, java.lang.String deviceToken,
+		java.util.Date registrationTime, java.lang.Boolean active,
+		java.util.Date lastNotificationTime,
+		java.lang.String lastNotificationMsg,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			boolean returnValue = FlaskMessagesServiceUtil.sendPushNotification();
+			boolean returnValue = FlaskMessagesServiceUtil.registerWithSNS(userId,
+					userEmail, devicePlatform, deviceDetails, deviceToken,
+					registrationTime, active, lastNotificationTime,
+					lastNotificationMsg, serviceContext);
 
 			return returnValue;
 		}

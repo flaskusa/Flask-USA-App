@@ -1,6 +1,6 @@
 create table Contacts_DeviceAwsEndpoint (
 	deviceEndPointId LONG not null primary key,
-	awsEndpoint VARCHAR(75) null,
+	awsEndpoint VARCHAR(200) null,
 	userDeviceRegistrationId LONG
 );
 
@@ -65,7 +65,7 @@ create table Contacts_FlaskUserDeviceRegistration (
 	userEmail VARCHAR(75) null,
 	devicePlatform VARCHAR(75) null,
 	deviceDetails VARCHAR(75) null,
-	deviceToken VARCHAR(75) null,
+	deviceToken VARCHAR(200) null,
 	registrationTime DATE null,
 	active_ BOOLEAN,
 	lastNotificationTime DATE null,

@@ -73,6 +73,14 @@ public class FlaskUserDeviceRegistrationServiceClpInvoker {
 		_methodName75 = "deleteUserDevice";
 
 		_methodParameterTypes75 = new String[] { "long" };
+
+		_methodName76 = "deactivateUserForUserDevice";
+
+		_methodParameterTypes76 = new String[] { "long", "java.lang.String" };
+
+		_methodName77 = "activateUserForUserDevice";
+
+		_methodParameterTypes77 = new String[] { "long" };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -142,6 +150,17 @@ public class FlaskUserDeviceRegistrationServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+			return FlaskUserDeviceRegistrationServiceUtil.deactivateUserForUserDevice(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1]);
+		}
+
+		if (_methodName77.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+			return FlaskUserDeviceRegistrationServiceUtil.activateUserForUserDevice(((Long)arguments[0]).longValue());
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -165,4 +184,8 @@ public class FlaskUserDeviceRegistrationServiceClpInvoker {
 	private String[] _methodParameterTypes74;
 	private String _methodName75;
 	private String[] _methodParameterTypes75;
+	private String _methodName76;
+	private String[] _methodParameterTypes76;
+	private String _methodName77;
+	private String[] _methodParameterTypes77;
 }

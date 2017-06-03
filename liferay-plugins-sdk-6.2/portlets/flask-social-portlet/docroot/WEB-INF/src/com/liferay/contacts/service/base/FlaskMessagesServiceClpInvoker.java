@@ -88,9 +88,21 @@ public class FlaskMessagesServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName77 = "sendPushNotification";
+		_methodName77 = "registerWithSNS";
 
-		_methodParameterTypes77 = new String[] {  };
+		_methodParameterTypes77 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "java.util.Date",
+				"java.lang.Boolean", "java.util.Date", "java.lang.String",
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName79 = "sendPush";
+
+		_methodParameterTypes79 = new String[] {
+				"long", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.util.Map"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -169,7 +181,20 @@ public class FlaskMessagesServiceClpInvoker {
 
 		if (_methodName77.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
-			return FlaskMessagesServiceUtil.sendPushNotification();
+			return FlaskMessagesServiceUtil.registerWithSNS(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
+				(java.util.Date)arguments[5], (java.lang.Boolean)arguments[6],
+				(java.util.Date)arguments[7], (java.lang.String)arguments[8],
+				(com.liferay.portal.service.ServiceContext)arguments[9]);
+		}
+
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+			return FlaskMessagesServiceUtil.sendPush(((Long)arguments[0]).longValue(),
+				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
+				(java.lang.String)arguments[3],
+				(java.util.Map<java.lang.String, java.lang.Object>)arguments[4]);
 		}
 
 		throw new UnsupportedOperationException();
@@ -199,4 +224,6 @@ public class FlaskMessagesServiceClpInvoker {
 	private String[] _methodParameterTypes76;
 	private String _methodName77;
 	private String[] _methodParameterTypes77;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
 }

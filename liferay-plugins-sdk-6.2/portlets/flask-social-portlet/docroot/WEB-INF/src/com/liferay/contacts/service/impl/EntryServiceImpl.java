@@ -18,8 +18,6 @@
 package com.liferay.contacts.service.impl;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -48,14 +46,12 @@ import com.liferay.portal.model.UserNotificationDeliveryConstants;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.social.NoSuchRelationException;
 import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.model.SocialRequestConstants;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
-import com.rumbasolutions.flask.email.util.SnsUtil;
 
 /**
  * @author Bruno Farache
@@ -244,7 +240,6 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 	
 	public void addSocialRelation(long receiverUserId, ServiceContext serviceContext)
 		throws Exception {
-			ThemeDisplay themeDisplay = serviceContext.getThemeDisplay();
 			int cnt = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(serviceContext.getUserId());
 			List<SocialRequest> request = SocialRequestLocalServiceUtil.getReceiverUserRequests(serviceContext.getUserId(), 3, 0, cnt);
 			for(SocialRequest socialRequest: request ){
@@ -258,7 +253,6 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 				}
 			}
 			SocialRelationLocalServiceUtil.addRelation(serviceContext.getUserId(), receiverUserId, SocialRelationConstants.TYPE_BI_CONNECTION);
-//			SnsUtil.sendSnsEmail("Flask Group message from "+user.getFirstName() + " " + user.getLastName(), message);
 	}
 
 	public void requestSocialRelation(long receiverUserId, ServiceContext serviceContext)throws Exception {
@@ -266,8 +260,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 					SocialRelationConstants.TYPE_BI_CONNECTION, "", receiverUserId);
 			sendNotificationEvent(socialRequest);
 			String senderName = UserLocalServiceUtil.getUser(serviceContext.getUserId()).getFullName();
-			String receiverName = UserLocalServiceUtil.getUser(receiverUserId).getFullName();
-			SnsUtil.sendSnsEmail("Flask Friend Request from "+senderName, senderName + " Wants to be friend of "+receiverName);
+			FlaskMessagesServiceUtil.sendPush(receiverUserId, "Flask Friend Request", "You have a friend request from "+senderName, "Friend_Request", socialRequest.getModelAttributes());
 	}
 	
 	public int getRequestsCount(ServiceContext serviceContext)throws PortalException, SystemException{

@@ -75,6 +75,14 @@ public class FlaskUserDeviceRegistrationServiceClp
 		_methodName10 = "deleteUserDevice";
 
 		_methodParameterTypes10 = new String[] { "long" };
+
+		_methodName11 = "deactivateUserForUserDevice";
+
+		_methodParameterTypes11 = new String[] { "long", "java.lang.String" };
+
+		_methodName12 = "activateUserForUserDevice";
+
+		_methodParameterTypes12 = new String[] { "long" };
 	}
 
 	@Override
@@ -371,6 +379,59 @@ public class FlaskUserDeviceRegistrationServiceClp
 		}
 	}
 
+	@Override
+	public boolean deactivateUserForUserDevice(long userId,
+		java.lang.String deviceToken) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11,
+					new Object[] {
+						userId,
+						
+					ClpSerializer.translateInput(deviceToken)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
+	@Override
+	public boolean activateUserForUserDevice(long userDeviceRegistrationId) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName12,
+					_methodParameterTypes12,
+					new Object[] { userDeviceRegistrationId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -392,4 +453,8 @@ public class FlaskUserDeviceRegistrationServiceClp
 	private String[] _methodParameterTypes9;
 	private String _methodName10;
 	private String[] _methodParameterTypes10;
+	private String _methodName11;
+	private String[] _methodParameterTypes11;
+	private String _methodName12;
+	private String[] _methodParameterTypes12;
 }

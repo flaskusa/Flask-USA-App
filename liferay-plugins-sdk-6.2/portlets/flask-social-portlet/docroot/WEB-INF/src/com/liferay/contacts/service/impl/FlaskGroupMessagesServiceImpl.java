@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.rumbasolutions.flask.email.util.SnsUtil;
 
 /**
  * The implementation of the flask group messages remote service.
@@ -74,7 +73,6 @@ public class FlaskGroupMessagesServiceImpl
 		   Date date = new Date();
 		   flaskGroupMessage.setDateTime(serviceContext.getCreateDate(date));
 		   flaskGroupMessage = FlaskGroupMessagesLocalServiceUtil.addFlaskGroupMessages(flaskGroupMessage);
-		   SnsUtil.sendSnsEmail("Flask Group message from "+user.getFirstName() + " " + user.getLastName(), message);
 		   FlaskGroupRecipientsServiceUtil.addFlaskGroupRecipients(groupId, user.getEmailAddress(), flaskGroupMessage.getGroupMessagesId(), flaskGroupMessage.getMessage(), flaskGroupMessage.getSendEmail(), serviceContext);
 	   } catch (Exception e) {
 	   e.printStackTrace();
