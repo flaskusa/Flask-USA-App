@@ -872,6 +872,26 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"maxlength" : "10",
 			"Class" : ""
 		} ]
+	},{
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Latitude",
+			"id" : "latitude",
+			"value" : "",
+			"placeholder" : "Enter Latitude here",
+			"maxlength" : "10",
+			"Class" : "",
+		} ]
+	},{
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Longitude",
+			"id" : "longitude",
+			"value" : "",
+			"placeholder" : "Enter longitude here",
+			"maxlength" : "10",
+			"Class" : ""
+		} ]
 	}, {
 		"type" : "text",
 		"attr" : [ {
@@ -931,6 +951,26 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"value" : "",
 			"placeholder" : "",
 			"maxlength" : "255",
+			"Class" : ""
+		} ]
+	},{
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Latitude",
+			"id" : "latitude",
+			"value" : "",
+			"placeholder" : "Enter Latitude here",
+			"maxlength" : "10",
+			"Class" : "",
+		} ]
+	},{
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Longitude",
+			"id" : "longitude",
+			"value" : "",
+			"placeholder" : "Enter longitude here",
+			"maxlength" : "10",
 			"Class" : ""
 		} ]
 	}, {
@@ -1007,6 +1047,26 @@ _infoTypeRenderer.INFO_RENDERER = {
 			"id" : "phone",
 			"value" : "",
 			"placeholder" : "",
+			"maxlength" : "10",
+			"Class" : ""
+		} ]
+	},{
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Latitude",
+			"id" : "latitude",
+			"value" : "",
+			"placeholder" : "Enter Latitude here",
+			"maxlength" : "10",
+			"Class" : "",
+		} ]
+	},{
+		"type" : "text",
+		"attr" : [ {
+			"caption" : "Longitude",
+			"id" : "longitude",
+			"value" : "",
+			"placeholder" : "Enter longitude here",
 			"maxlength" : "10",
 			"Class" : ""
 		} ]
