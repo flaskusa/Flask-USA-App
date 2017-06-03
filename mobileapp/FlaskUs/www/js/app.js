@@ -1,6 +1,6 @@
 (function () {
     var app = angular.module('flaskApp'); 
-    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage, $state, LoginService, $http, SERVER, UserService, $cordovaPush, $cordovaAppVersion) {
+    app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage, $state, LoginService, $http, SERVER, UserService, $cordovaPush, $cordovaAppVersion, $timeout) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -8,37 +8,46 @@
             //      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             //      cordova.plugins.Keyboard.disableScroll(true);
             //For Push Notification
+            var sendInfoData = {};
             var push = PushNotification.init({
-                android: {
-                    senderID: "843562154399",
-                    sound: "true",
-                    vibrate: "true",
-                    forceShow: "true"
+                "android": {
+                    "senderID": "843562154399",
+                    "sound": "true",
+                    "vibrate": "true",
+                    "forceShow": "true"
                 },
                 browser: {
                     pushServiceURL: 'http://push.api.phonegap.com/v1/push'
                 },
-                ios: {
-                    alert: "true",
-                    badge: "true",
-                    sound: "true"
+                "ios": {
+                    "alert": "true",
+                    "badge": "true",
+                    "sound": "true"
                 },
                 windows: {}
             });
 
             push.on('registration', function (data) {
-                // data.registrationId
                 $cookies.putObject('deviceToken', data.registrationId);
-                //alert("device token" + data.registrationId);
             });
 
             push.on('notification', function (data) {
-                // data.message,
-                // data.title,
-                // data.count,
-                // data.sound,
-                // data.image,
-                // data.additionalData
+                $cookies.remove('popupData');
+                console.log(data);
+                console.log(data.additionalData.infoData);
+                sendInfoData = {
+                    'infoData': data.additionalData.infoData,
+                    'coldstart':data.additionalData.coldstart,
+                    'activeUsingPopup':true
+                }
+                var userdata = $cookies.getObject('CurrentUser');
+                var currUserId = userdata.data.userId;
+                $cookies.putObject('infoType', data.additionalData.infoType);
+                if (data.additionalData.coldstart == true) {
+                    $cookies.putObject('coldstart', true);
+                } else {
+                    goToInfotype();
+                }
             });
 
             push.on('error', function (e) {
@@ -97,6 +106,11 @@
                                     $rootScope.userEmailId = respData.data.emailAddress;
                                     $rootScope.show_login = true;
                                     $state.go("app.user_navigation_menu");
+                                    var isColdStart =  $cookies.getObject('coldstart');
+                                    if (isColdStart == true) {
+                                        goToInfotype();
+                                        $cookies.remove('coldstart');
+                                    }
 
                                 }, function failure(response) {
                                     return $q.$inject(response);
@@ -107,6 +121,41 @@
                     });
                 }
             }
+
+            function goToInfotype() {
+                var currinfotype = $cookies.getObject('infoType');
+                switch (currinfotype) {
+                     case "Friend_Message":
+                        sendInfoData.user = 'user';
+                        $cookies.putObject('popupData', sendInfoData);
+                        setTimeout(
+                            $state.go('app.messages'),
+                        1000);
+                        $cookies.remove('infoType');
+                    break;
+                    case "Group_Message":
+                        sendInfoData.user = 'group';
+                        $cookies.putObject('popupData', sendInfoData);
+                        setTimeout(
+                            $state.go('app.messages'),
+                        1000);
+                        $cookies.remove('infoType');
+                    break;
+                    case "Tailgate_invitation":
+                        setTimeout(
+                            $state.go("app.my_tailgateDetails.my_tailgate_event_details", { 'tailgateId': data.additionalData.infoData.tailgateId }),
+                        1000);
+                        $cookies.remove('infoType');
+                    break;
+                    case "Friend_Request":
+                        setTimeout(
+                            $state.go("app.notifications"),
+                        1000);
+                        $cookies.remove('infoType');
+                    break;
+                    }
+            }
+
             function getUserProfile(userId) {
                 UserService.getUserProfile(userId).then(function(res) {
                     if(res.data.fileEntryId != undefined) {

@@ -15,12 +15,14 @@
             authenticateUser: authenticateUser,
             getUserProfilePicture: getUserProfilePicture,
             getCompanyIdFunction: getCompanyIdFunction,
-            registerDeviceFuntion:registerDeviceFuntion
+            registerDeviceFuntion: registerDeviceFuntion,
+            logoutDeactivateUser: logoutDeactivateUser
         }
         var forgotPasswordURL = "/flask-rest-users-portlet.flaskadmin/forgot-password";
         var resetPasswordUrl = "/flask-rest-users-portlet.flaskadmin/reset-password";
         var regiterDeviceUrl = "/flask-social-portlet.flaskmessages/register-with-sns";
         var getCompanyIdUrl = "/flask-rest-users-portlet.flaskadmin/get-company-id";
+        var logoutDeactivateUrl = "/flask-social-portlet.flaskuserdeviceregistration/deactivate-user-for-user-device";
 
 
         var companyId = SERVER.companyId;
@@ -30,7 +32,7 @@
         function forgotPasswordFunction(emailAddress) {
             return $http.get(SERVER.url + forgotPasswordURL, {
                 params: {
-                    emailAddress: emailAddress
+                    "emailAddress": emailAddress
                 }
             })
                 .then(function success(response) {
@@ -52,13 +54,26 @@
                 });
         }
 
+        function logoutDeactivateUser(userId, deviceToken) {
+            return $http.get(SERVER.url + logoutDeactivateUrl, {
+                params: {
+                    "userId":userId,
+                    "deviceToken": deviceToken
+                }
+            }).then(function success(response) {
+                return response.data;
+            }), function failure(response) {
+                return $q.$inject(response);
+            }
+        }
+
         function resetPasswordFuntion(emailAddress, password1, password2, otp) {
             return $http.get(SERVER.url + resetPasswordUrl, {
                 params: {
-                    emailAddress: emailAddress,
-                    password1: password1,
-                    password2: password2,
-                    otp: otp
+                    "emailAddress": emailAddress,
+                    "password1": password1,
+                    "password2": password2,
+                    "otp": otp
                 }
             })
                 .then(function success(response) {

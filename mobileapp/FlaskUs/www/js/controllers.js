@@ -9,20 +9,26 @@ angular.module('flaskApp.controllers', [])
     $scope.doLogout = function () {
         $rootScope.show_login = false;
         $rootScope.totalMessageNotification = 0;
-        $rootScope.totalRequestNotification = 0;
-        $cookies.remove('CurrentUser');
+        $rootScope.totalRequestNotification = 0;        
         $rootScope.userName ='';
         $rootScope.userEmailId ='';
         $rootScope.userProfileUrl='';
         console.log($cookies.getObject('CurrentUser'));
+        var userdata = $cookies.getObject('CurrentUser');
+        var currUserId = userdata.data.userId;
+        var currDeviceToken = $cookies.getObject('deviceToken');
         $state.go("app.events");
-        
+        deactivateUser(currUserId,currDeviceToken);
+    }
+
+    function deactivateUser(userId,currDeviceToken) {
+        LoginService.logoutDeactivateUser(userId, currDeviceToken).then(function (response) {
+           console.log("response" + response);
+           $cookies.remove('CurrentUser');
+       });
     }
     $scope.imgUrl = SERVER.hostName;
 })
-
-
-
 .controller('my_tailgateCtrl', function ($scope) {
 })
 

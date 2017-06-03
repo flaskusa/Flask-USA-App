@@ -35,6 +35,7 @@
             $localStorage["myFriendDetails"] = [];
         }
         $scope.profilePicUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
+        $scope.CurrentUserprofilePic = '';
         getAllGroups();
         getAllFriends();
 
@@ -51,18 +52,13 @@
             if (msgDetail.read == false) {
                 msgDetail.read = true;
                 FriendsNotificationService.setReadMessage(msgDetail.messageId).then(function (response) {
-
                 })
             }
             angular.forEach($scope.allMessages, function (value, key) {
-
                 value.reply = false;
-
             });
 
             $scope.allMessages[index].reply = true;
-
-
             $scope.ShowReplyButton = true;
             if (string != "") {
                 $scope.clickedForReply = true;
@@ -85,8 +81,7 @@
                 if ($scope.messageBoxClasses.contains("hideAll")) {
                     $scope.messageBoxClasses.remove("hideAll");
                     $scope.textMessage.messageToSend = "";
-                }
-                ;
+                };
                 setTimeout(removeText, 10);
                 function removeText() {
                     if ($scope.messageBoxClasses.contains("hidemsgTexArea")) {
@@ -364,5 +359,54 @@
                 }
             }
         }
+
+        //when messages page is opened using popup notification.
+        var activeUsingPopup = $cookies.getObject('popupData');
+        var myObj = {};
+        if (activeUsingPopup.coldstart == true) {
+            $timeout(function () {
+                callPopup();
+            }, 6000);
+        } else {
+            callPopup();
+        }
+
+        function callPopup() {
+            if (activeUsingPopup != undefined) {
+                if (activeUsingPopup.activeUsingPopup == true) {
+                    if (activeUsingPopup.user == "user") {
+                        getUserProficPic(activeUsingPopup.infoData.userId);
+                        myObj = {
+                            "fullName": activeUsingPopup.infoData.firstName + " " + activeUsingPopup.infoData.lastName,
+                            "userId": activeUsingPopup.infoData.userId,
+                            "friendProfilePicUrl": $scope.CurrentUserprofilePic
+                        }
+                    } else {
+                        myObj = {
+                            "groupName": activeUsingPopup.infoData.groupName,
+                            "groupId": activeUsingPopup.infoData.groupId
+                        }
+                    }
+                    $timeout(function () {
+                        $scope.showChatWindowPopup(myObj, activeUsingPopup.user);
+                    }, 300);
+                    $cookies.putObject('popupData', { 'activeUsingPopup': false });
+                }
+            }
+        }
+
+        //to get profile pic of the user
+        function getUserProficPic(UserId) {
+            $scope.storageData = $localStorage.myFriendDetails;
+            for (var i = 0; i < $scope.storageData.length; i++) {
+                if ($scope.storageData[i].userId == UserId && $scope.storageData[i].friendProfilePicUrl != undefined) {
+                    $scope.CurrentUserprofilePic = $scope.storageData[i].friendProfilePicUrl;
+                    break;
+                } else {
+                    $scope.CurrentUserprofilePic = "img/default-profilepic-copy.png";
+                }
+            }            
+        }
+
     }
 })();
