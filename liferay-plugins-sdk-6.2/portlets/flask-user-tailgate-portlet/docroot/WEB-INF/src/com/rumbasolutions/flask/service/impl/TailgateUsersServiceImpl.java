@@ -16,6 +16,7 @@ package com.rumbasolutions.flask.service.impl;
 
 import java.util.List;
 
+import com.liferay.contacts.service.FlaskMessagesServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
@@ -24,6 +25,8 @@ import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.rumbasolutions.flask.model.TailgateInfo;
 import com.rumbasolutions.flask.model.TailgateSupplyItem;
 import com.rumbasolutions.flask.model.TailgateUsers;
 import com.rumbasolutions.flask.model.impl.TailgateUsersImpl;
@@ -56,6 +59,7 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 	 */
 	private static Log LOGGER = LogFactoryUtil.getLog(TailgateUsersServiceImpl.class);
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TailgateUsers> getTailgateMembers(long tailgateId){
 		List<TailgateUsers> tailgateMembers = null;
@@ -65,7 +69,6 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 			tailgateQuery.add(PropertyFactoryUtil.forName("tailgateId").eq(new Long(tailgateId)));
 			tailgateMembers = TailgateUsersLocalServiceUtil.dynamicQuery(tailgateQuery);
 		} catch (SystemException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			LOGGER.error("Exception in get all Tailgate Users :" + e.getMessage());
 		}
@@ -90,6 +93,7 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 		return tailgateAdmin;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<TailgateUsers> getTailgateGroups(long tailgateId, long groupId){
 		List<TailgateUsers> tailgateGroups = null;
@@ -100,13 +104,13 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 			tailgateQuery.add(PropertyFactoryUtil.forName("groupId").eq(new Long(groupId)));
 			tailgateGroups = TailgateUsersLocalServiceUtil.dynamicQuery(tailgateQuery);
 		} catch (SystemException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			LOGGER.error("Exception in get All Tailgate Group :" + e.getMessage());
 		}
 		return tailgateGroups;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean checkTailgateUserExist(long tailgateId, long userId){
 		boolean isUserExist = false;
@@ -120,7 +124,6 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 			if(tailgateGroups.size() > 0)
 				isUserExist = true;
 		} catch (SystemException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			LOGGER.error("Exception in get All Tailgate Group :" + e.getMessage());
 		}
@@ -141,20 +144,20 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 				tailgateUsers.setIsPaid(isPaid);
 				tailgateUsers.setPaymentMode(paymentMode);
 				tailgateUsers.setGroupId(groupId);
-				
+				TailgateInfo tailgate = TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId);
 				tailgateUsers = TailgateUsersLocalServiceUtil.addTailgateUsers(tailgateUsers);
-				String text = "You are invited to be participants of custom group.";
+				FlaskMessagesServiceUtil.sendPush(userId, "Flask Tailgate Invitation", 
+						"You are invited to a tailgate party, " + tailgate.getTailgateName() + " by " + UserLocalServiceUtil.getUser(tailgate.getUserId()).getFullName(),
+						"Tailgate_invitation", tailgate.getModelAttributes());
 			}
-//			NotificationUtil notificition = new NotificationUtil();
-//			notificition.sendNotifications(userId, text);
-			
-		}catch(SystemException e){
+		}catch(Exception e){
 			LOGGER.error("Exception in Add Tailgate User :" + e.getMessage());
 			e.printStackTrace();
 		}
 		return tailgateUsers;
 	}
 	
+	@SuppressWarnings("unchecked")
 	@Override
 	public TailgateUsers updateTailgateUser(long userId, long tailgateId, boolean isPaid, String paymentMode, String description){
 		List<TailgateUsers> tailgateUsers = null;

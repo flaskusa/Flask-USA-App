@@ -14,16 +14,13 @@
 
 package com.rumbasolutions.flask.service.impl;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
-import com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -270,15 +267,8 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 			List<TailgateUsers> allMembers = TailgateUsersServiceUtil.getTailgateMembers(tailgateId);
 			for(TailgateUsers member: allMembers){
 				if(member.getUserId()!= serviceContext.getUserId()){
-					TailgateUsers newMember = TailgateUsersLocalServiceUtil.createTailgateUsers(CounterLocalServiceUtil.increment());
-					newMember.setTailgateId(newUserTailgate.getTailgateId());
-					newMember.setUserId(member.getUserId());
-					newMember.setUserName(member.getUserName());
-					newMember.setEmailAddress(member.getEmailAddress());
-					newMember.setIsPaid(false);
-					newMember.setPaymentMode("None");
-					newMember.setGroupId(0);
-					TailgateUsersLocalServiceUtil.addTailgateUsers(newMember);
+					TailgateUsersServiceUtil.addTailgateUser(newUserTailgate.getTailgateId(), member.getUserId(), member.getUserName(),
+							member.getEmailAddress(), member.getIsAdmin(), false, "None", 0);
 				}
 			}
 			
