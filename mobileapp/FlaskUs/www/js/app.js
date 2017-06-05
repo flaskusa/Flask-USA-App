@@ -143,7 +143,7 @@
                     break;
                     case "Tailgate_invitation":
                         setTimeout(
-                            $state.go("app.my_tailgateDetails.my_tailgate_event_details", { 'tailgateId': data.additionalData.infoData.tailgateId }),
+                            $state.go("app.my_tailgateDetails.my_tailgate_event_details", { 'tailgateId': sendInfoData.infoData.tailgateId }),
                         1000);
                         $cookies.remove('infoType');
                     break;

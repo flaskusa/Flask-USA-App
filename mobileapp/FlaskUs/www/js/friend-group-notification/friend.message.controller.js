@@ -363,16 +363,17 @@
         //when messages page is opened using popup notification.
         var activeUsingPopup = $cookies.getObject('popupData');
         var myObj = {};
-        if (activeUsingPopup.coldstart == true) {
-            $timeout(function () {
+        if (activeUsingPopup != undefined) {
+            if (activeUsingPopup.coldstart == true) {
+                $timeout(function () {
+                    callPopup();
+                }, 6000);
+            } else {
                 callPopup();
-            }, 6000);
-        } else {
-            callPopup();
+            }
         }
 
         function callPopup() {
-            if (activeUsingPopup != undefined) {
                 if (activeUsingPopup.activeUsingPopup == true) {
                     if (activeUsingPopup.user == "user") {
                         getUserProficPic(activeUsingPopup.infoData.userId);
@@ -392,7 +393,6 @@
                     }, 300);
                     $cookies.putObject('popupData', { 'activeUsingPopup': false });
                 }
-            }
         }
 
         //to get profile pic of the user

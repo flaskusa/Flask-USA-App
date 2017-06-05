@@ -77,6 +77,7 @@
                 </ion-nav-buttons>
             </ion-nav-bar>
             <ion-content class="has-header padding" overflow-scroll="false">
+                <div ng-if="myMessages.length==0" class="item">There are no messages.</div>
                 <div click-for-options ng-repeat="message in myMessages | orderBy:'messageId'">
                     <div style="padding-top:9px;">
                         <div style="width:100%">
@@ -93,9 +94,9 @@
                             </div><br />
                         </div>
                     </div>
+                    
                 </div>
-                <div ng-if="myMessages.length==0" class="item">There are no messages.</div>
-                <br/><br/>
+                <br /><br />
             </ion-content>
             <ion-footer-bar class="bar bar-footer" style="background-color:transparent;border-top: solid #f89734 1px;background-image:none !important;">
                 <div style="width: 100%;">
