@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsMessageCtrl', FriendsMessageCtrl);
 
-    FriendsMessageCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsNotificationService', 'UserService', 'SERVER', '$localStorage', '$flaskUtil', '$state', '$ionicHistory', '$timeout', '$ionicLoading', '$ionicPopup', '$cookies'];
+    FriendsMessageCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsNotificationService', 'UserService', 'SERVER', '$localStorage', '$flaskUtil', '$state', '$ionicHistory', '$timeout', '$ionicLoading', '$ionicPopup', '$cookies', '$anchorScroll', '$location', '$ionicScrollDelegate'];
 
     /* @ngInject */
-    function FriendsMessageCtrl($scope, $http, $ionicModal, FriendsNotificationService, UserService, SERVER, $localStorage, $flaskUtil, $state, $ionicHistory, $timeout, $ionicLoading, $ionicPopup, $cookies) {
+    function FriendsMessageCtrl($scope, $http, $ionicModal, FriendsNotificationService, UserService, SERVER, $localStorage, $flaskUtil, $state, $ionicHistory, $timeout, $ionicLoading, $ionicPopup, $cookies, $anchorScroll, $location, $ionicScrollDelegate) {
         $scope.userThreadMessage = [];
         $scope.showTextArea = { show: false };
         $scope.textMessage = { messageToSend: "" };
@@ -22,6 +22,7 @@
         $scope.readMsg = false;
         $scope.ShowReplyButton = true;
         $scope.addingInGroup = false;
+        
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope,
             animation: 'fade-in'
@@ -313,6 +314,7 @@
                         }
                     }
                     $scope.getMessagesTime();
+                    $ionicScrollDelegate.scrollBottom();
                 });
             }
             else {
@@ -328,10 +330,14 @@
                             });
                         }
                         $scope.getMessagesTime();
+                        $ionicScrollDelegate.scrollBottom();
                     }
                 });
             }
             $scope.modal.show();
+            $timeout(function () {
+                $ionicScrollDelegate.scrollBottom();
+            }, 200);
         }
         $scope.closeChatWindowPopup = function () {
             if ($scope.friendDetail != undefined) {
@@ -349,15 +355,17 @@
                     FriendsNotificationService.sendMessage($scope.receiverId, message).then(function (response) {
                         delete $scope.textMessage.messageToSend;
                         $scope.myMessages.push(response);
+                        $ionicScrollDelegate.scrollBottom();
                     });
                 }
                 else {
                     FriendsNotificationService.sendFlaskGroupMessage($scope.groupId, message).then(function (response) {
                         delete $scope.textMessage.messageToSend;
                         $scope.myMessages.push(response);
+                        $ionicScrollDelegate.scrollBottom();
                     });
                 }
-            }
+            }            
         }
 
         //when messages page is opened using popup notification.
@@ -407,6 +415,5 @@
                 }
             }            
         }
-
     }
 })();
