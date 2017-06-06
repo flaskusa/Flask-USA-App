@@ -12,7 +12,9 @@
             var push = PushNotification.init({
                 "android": {
                     "senderID": "843562154399",
+                    "alert":"true",
                     "sound": "true",
+                    "badge": "true",
                     "vibrate": "true",
                     "forceShow": "true"
                 },
@@ -22,7 +24,9 @@
                 "ios": {
                     "alert": "true",
                     "badge": "true",
-                    "sound": "true"
+                    "sound": "true",
+                    "vibrate": "true",
+                    "forceShow": "true",
                 },
                 windows: {}
             });
@@ -49,6 +53,18 @@
                     goToInfotype();
                 }
             });
+
+            push.setApplicationIconBadgeNumber(function () {
+                console.log('success');
+            }, function () {
+                console.log('error');
+            }, 2);
+
+            push.finish(function () {
+                console.log('success');
+            }, function () {
+                console.log('error');
+            }, 'push-1');
 
             push.on('error', function (e) {
                 // e.message
@@ -108,15 +124,15 @@
                                     $state.go("app.user_navigation_menu");
                                     var isColdStart =  $cookies.getObject('coldstart');
                                     if (isColdStart == true) {
-                                        goToInfotype();
-                                        $cookies.remove('coldstart');
+                                        setTimeout(                                           
+                                            goToInfotype(),
+                                            $cookies.remove('coldstart'),
+                                        2000);
                                     }
-
                                 }, function failure(response) {
                                     return $q.$inject(response);
                                     //add errror handling
                                 });
-
                         }
                     });
                 }

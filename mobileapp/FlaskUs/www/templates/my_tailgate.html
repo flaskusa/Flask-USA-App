@@ -5,10 +5,13 @@
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content overflow-scroll="false">
-        
-        <a class="item item-full item-icon-left iconLeft" data-ng-click="addMyTailgate()">
-            <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
-            <p class="addText">CREATE NEW TAILGATE</p>
+        <a class="subheaderLinkStyle" data-ng-click="addMyTailgate()">
+            <div class="row item">
+                <div class="eventHeading2 eventheadeingStyleIonContent">
+                    <img src="img/flask_icons/add_new.svg" class="FlaskionIcons">
+                    <span class="subHeaderStyle">CREATE NEW TAILGATE</span>
+                </div>
+            </div>
         </a>
         <ion-list show-delete="false" can-swipe="true">
             <ion-item class="myList item-remove-animate" href="#/app/my_tailgateDetails/my_tailgate_event_details/{{data.tailgateId}}"

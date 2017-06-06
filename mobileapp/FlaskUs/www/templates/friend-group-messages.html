@@ -6,7 +6,7 @@
     </ion-nav-bar>
     <ion-tabs class="tabs-positive tab_bottom">
         <ion-tab title="My friends" id="myFriendsTab">
-            <ion-content style="margin-top:40px;">
+            <ion-content class="friendlistInMessages">
                 <ion-list id="myFriendsList">
                     <ion-item ng-repeat="data in allFriends" class="item-remove-animate" padding="false" ng-click="showChatWindowPopup(data,'user')" style="height: 74px;" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
                         <a class="row-no-padding" style="text-decoration: none">
@@ -30,7 +30,7 @@
             </ion-content>
         </ion-tab>
         <ion-tab title="My groups">
-            <ion-content style="margin-top:40px;">
+            <ion-content class="friendlistInMessages">
                 <ion-list>
                     <ion-item class="item-remove-animate" ng-repeat="group in groups | filter: groupList.searchString" padding="false" style="height: 74px;" ng-init="group.showDivByIndex=false" ng-click="showChatWindowPopup(group,'group')">
                         <div ng-if="group.showDivByIndex==true" style="padding-top: 10px">
@@ -93,9 +93,8 @@
                                 <p class="msgDate">{{message.diffDate}}</p>
                             </div><br />
                         </div>
-                    </div>
-                    
-                </div>
+                    </div>                      
+                </div>             
                 <br /><br />
             </ion-content>
             <ion-footer-bar class="bar bar-footer" style="background-color:transparent;border-top: solid #f89734 1px;background-image:none !important;">
