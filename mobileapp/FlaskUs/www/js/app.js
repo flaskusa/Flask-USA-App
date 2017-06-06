@@ -8,6 +8,8 @@
             //      cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
             //      cordova.plugins.Keyboard.disableScroll(true);
             //For Push Notification
+            var currentPlatform = ionic.Platform.platform();
+            console.log(currentPlatform);
             var sendInfoData = {};
             var push = PushNotification.init({
                 "android": {
@@ -36,6 +38,7 @@
             });
 
             push.on('notification', function (data) {
+
                 $cookies.remove('popupData');
                 console.log(data);
                 console.log(data.additionalData.infoData);
@@ -47,18 +50,40 @@
                 var userdata = $cookies.getObject('CurrentUser');
                 var currUserId = userdata.data.userId;
                 $cookies.putObject('infoType', data.additionalData.infoType);
-                if (data.additionalData.coldstart == true) {
+                if (currentPlatform == "android" && data.additionalData.coldstart == true) {
+                    $cookies.putObject('coldstart', true);
+                } else if (currentPlatform == "android" && data.additionalData.coldstart != true) {
+                    goToInfotype();
+                }
+                if (currentPlatform == "ios" && data.additionalData.foreground == true) {
+                    showConfirm(data);
+                } else if (currentPlatform == "ios" && data.additionalData.coldstart == true) {
                     $cookies.putObject('coldstart', true);
                 } else {
                     goToInfotype();
                 }
             });
 
+            // A confirm dialog for ios
+            function showConfirm(data) {
+                var confirmPopup = $ionicPopup.confirm({
+                    title: data.title,
+                    template: data.message
+                });
+                confirmPopup.then(function (res) {
+                    if (res) {
+                        goToInfotype();
+                    } else {
+                        console.log('You are not sure');
+                    }
+                });
+            };
+
             push.setApplicationIconBadgeNumber(function () {
                 console.log('success');
             }, function () {
                 console.log('error');
-            }, 2);
+            });
 
             push.finish(function () {
                 console.log('success');
