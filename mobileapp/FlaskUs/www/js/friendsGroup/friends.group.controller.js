@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsGroupCtrl', FriendsGroupCtrl);
 
-    FriendsGroupCtrl.$inject = ['$scope','GroupService','$cookies','$state','$flaskUtil','$ionicPopup','$stateParams','FriendsService','$timeout'];
+    FriendsGroupCtrl.$inject = ['$scope', 'GroupService', '$cookies', '$state', '$flaskUtil', '$ionicPopup', '$stateParams', 'FriendsService', '$timeout', '$ionicLoading'];
 
     /* @ngInject */
-    function FriendsGroupCtrl($scope,GroupService,$cookies,$state,$flaskUtil,$ionicPopup,$stateParams,FriendsService,$timeout) {
+    function FriendsGroupCtrl($scope, GroupService, $cookies, $state, $flaskUtil, $ionicPopup, $stateParams, FriendsService, $timeout, $ionicLoading) {
         $scope.initialize = function() {
             getAllGroups();
         };
@@ -82,26 +82,24 @@
             $scope.isGroupMemberIsAvailable == false;
             GroupService.getMyFriendList().then(function (resopnse) {
                 $scope.userContactList = resopnse;
-
-            GroupService.groupId=groupId;
+                GroupService.groupId=groupId;
                 $scope.addUserToGroup = function () {
                     GroupService.addUserToGroup(groupId, $scope.matchedUser.emailAddress, $scope.matchedUser.userId, $scope.matchedUser.fullName, 0).then(function (response) {
-                                $scope.groups[index].showDivByIndex=true;
-                                $timeout(function () {  $scope.groups.splice(index, 1);
-                                   },1000);
-
-                            });
-                        }
-
-                        angular.forEach($scope.userContactList, function (value, key) {
-                            if (value.userId == $scope.userId) {
-                                $scope.matchedUser = value;
-                                $scope.addUserToGroup();
-                                $scope.isGroupMemberIsAvailable == true;
-                                return false;
-
-                            }
-                        });
+                        $scope.groups[index].showDivByIndex = true;
+                        $ionicLoading.show({ template: "User successfully added to the group", noBackdrop: true, duration: 2000 });
+                        $timeout(function () {
+                            $scope.groups.splice(index, 1);
+                        },1000);
+                    });
+               }
+                angular.forEach($scope.userContactList, function (value, key) {
+                    if (value.userId == $scope.userId) {
+                        $scope.matchedUser = value;
+                        $scope.addUserToGroup();
+                        $scope.isGroupMemberIsAvailable == true;
+                        return false;
+                    }
+                });
             });
         }
         $scope.doneAdding=function(){

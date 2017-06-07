@@ -22,8 +22,8 @@
                 <img ng-if="userProfileUrl.length > 1" class="default_img" ng-src="{{userProfileUrl}}" onError="this.src = 'img/default-profilepic.png';">
                 <h2>{{userName}}</h2>
                 <h3>{{userEmailId}}</h3>
-                <a href="#/app/my_friends_tab/notification_tab" ng-if="totalMessageNotification>0" class="icon-left ion-email menu_notification" menu-close><span class="menu_span">{{totalMessageNotification}}</span></a>
-                <a href="#/app/my_friends_tab/notification_tab" ng-if="totalRequestNotification>0" class="icon-left ion-person-stalker menu_notification" menu-close><span class="menu_span">{{totalRequestNotification}}</span></a>
+                <a href="#/app/my_friends_tab/notification_tab" ng-if="totalMessageNotification>0" class="icon-left ion-email menu_notification" menu-close></a>
+                <a href="#/app/my_friends_tab/notification_tab" ng-if="totalRequestNotification>0" class="icon-left ion-person-stalker menu_notification" menu-close></a>
             </div>
             <ul class="list menuContentList">
                 <div ng-show="show_login">

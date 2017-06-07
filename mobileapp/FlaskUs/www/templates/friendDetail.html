@@ -11,26 +11,22 @@
     <div>
         <h2 class="eventNameCol" ng-bind-template="{{ friend.firstName }} {{ friend.middleName }} {{friend.lastName}}"></h2>
         <p class="friend">{{friend.emailAddress}}</p>
-
     </div>
-      <div id="toaster" ng-if="messageSentStatus==true"class="item toastDiv" style="text-align: center" ><i>Message sent successfully</i> </div>
-      <div  align="center">
-          <textarea ng-if="showTextArea.show==true"ng-model="message.messageToSend" id="textArea" class="showTextArea hideTexArea"autofocus></textarea>
-      </div>
-      <div align="center">
-          <button type="submit" nav-clear="" class="button button-block button-positive friend">
-              Add To Group
-          </button>
-        <button type="submit" nav-clear="" class="button button-block button-positive friend "ng-click="toggleMessageBox(message.messageToSend)">
+    <div id="toaster" ng-if="messageSentStatus==true" class="item toastDiv" style="text-align: center" ><i>Message sent successfully</i> </div>
+    <div  align="center">
+        <textarea ng-if="showTextArea.show==true" ng-model="message.messageToSend" id="textArea" class="showTextArea hideTexArea"autofocus></textarea>
+    </div>
+    <div align="center">
+        <button type="submit" nav-clear="" class="button button-block button-positive friend " ng-click="toggleMessageBox(message.messageToSend);">
             Send Message
         </button>
-          <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="goToChatWindow(friend);">
-              View Messages
-          </button>
-      </div>
-      <a style="text-decoration: none"ng-click="initializeMediatorId(friend.userId)">
-    
-
-      </a>
+        <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="goToChatWindow(friend);">
+            View Messages
+        </button>
+        <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="initializeMediatorId(friend.userId)">
+            Add To Group
+        </button>
+    </div>
+    <a style="text-decoration: none" ng-click="initializeMediatorId(friend.userId)"></a>
   </ion-content>
 </ion-view>

@@ -38,7 +38,6 @@
             });
 
             push.on('notification', function (data) {
-
                 $cookies.remove('popupData');
                 console.log(data);
                 console.log(data.additionalData.infoData);
@@ -50,16 +49,20 @@
                 var userdata = $cookies.getObject('CurrentUser');
                 var currUserId = userdata.data.userId;
                 $cookies.putObject('infoType', data.additionalData.infoType);
-                if (currentPlatform == "android" && data.additionalData.coldstart == true) {
-                    $cookies.putObject('coldstart', true);
-                } else if (currentPlatform == "android" && data.additionalData.coldstart != true) {
-                    goToInfotype();
-                }
+
+                //when ios
                 if (currentPlatform == "ios" && data.additionalData.foreground == true) {
                     showConfirm(data);
                 } else if (currentPlatform == "ios" && data.additionalData.coldstart == true) {
                     $cookies.putObject('coldstart', true);
-                } else {
+                } else if (currentPlatform == "ios" && data.additionalData.coldstart != true) {
+                    goToInfotype();
+                }
+
+                //when android
+                if (currentPlatform == "android" && data.additionalData.coldstart == true) {
+                    $cookies.putObject('coldstart', true);
+                } else if (currentPlatform == "android" && data.additionalData.coldstart != true) {
                     goToInfotype();
                 }
             });
