@@ -260,7 +260,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 					SocialRelationConstants.TYPE_BI_CONNECTION, "", receiverUserId);
 			sendNotificationEvent(socialRequest);
 			String senderName = UserLocalServiceUtil.getUser(serviceContext.getUserId()).getFullName();
-			FlaskMessagesServiceUtil.sendPush(receiverUserId, "Flask Friend Request", "You have a friend request from "+senderName, "Friend_Request", socialRequest.getModelAttributes());
+			FlaskMessagesServiceUtil.sendPush(receiverUserId, "Flask Friend Request", "You have a friend request from "+senderName, "Friend_Request", socialRequest.getModelAttributes(), serviceContext.getUserId());
 	}
 	
 	public int getRequestsCount(ServiceContext serviceContext)throws PortalException, SystemException{

@@ -132,9 +132,11 @@ public class FlaskMessagesServiceUtil {
 
 	public static boolean sendPush(long userId, java.lang.String title,
 		java.lang.String message, java.lang.String infoType,
-		java.util.Map<java.lang.String, java.lang.Object> infoDataMap) {
+		java.util.Map<java.lang.String, java.lang.Object> infoDataMap,
+		long notId) {
 		return getService()
-				   .sendPush(userId, title, message, infoType, infoDataMap);
+				   .sendPush(userId, title, message, infoType, infoDataMap,
+			notId);
 	}
 
 	public static void clearService() {

@@ -101,7 +101,7 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 
 		_methodParameterTypes13 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
-				"java.lang.String", "java.util.Map"
+				"java.lang.String", "java.util.Map", "long"
 			};
 	}
 
@@ -467,7 +467,8 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	@Override
 	public boolean sendPush(long userId, java.lang.String title,
 		java.lang.String message, java.lang.String infoType,
-		java.util.Map<java.lang.String, java.lang.Object> infoDataMap) {
+		java.util.Map<java.lang.String, java.lang.Object> infoDataMap,
+		long notId) {
 		Object returnObj = null;
 
 		try {
@@ -482,7 +483,9 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 						
 					ClpSerializer.translateInput(infoType),
 						
-					ClpSerializer.translateInput(infoDataMap)
+					ClpSerializer.translateInput(infoDataMap),
+						
+					notId
 					});
 		}
 		catch (Throwable t) {

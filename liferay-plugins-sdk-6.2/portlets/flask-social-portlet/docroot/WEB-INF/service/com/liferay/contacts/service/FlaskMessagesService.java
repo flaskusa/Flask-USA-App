@@ -111,5 +111,6 @@ public interface FlaskMessagesService extends BaseService, InvokableService {
 
 	public boolean sendPush(long userId, java.lang.String title,
 		java.lang.String message, java.lang.String infoType,
-		java.util.Map<java.lang.String, java.lang.Object> infoDataMap);
+		java.util.Map<java.lang.String, java.lang.Object> infoDataMap,
+		long notId);
 }

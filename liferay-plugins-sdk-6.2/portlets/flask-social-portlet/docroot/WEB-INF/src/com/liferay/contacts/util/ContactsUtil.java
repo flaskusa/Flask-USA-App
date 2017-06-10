@@ -17,6 +17,22 @@
 
 package com.liferay.contacts.util;
 
+import java.lang.reflect.Field;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import com.amazonaws.services.applicationdiscovery.model.InvalidParameterException;
+import com.amazonaws.services.cognitosync.model.Platform;
+import com.amazonaws.services.sns.AmazonSNSClient;
+import com.amazonaws.services.sns.model.CreatePlatformApplicationRequest;
+import com.amazonaws.services.sns.model.CreatePlatformApplicationResult;
+import com.amazonaws.services.sns.model.CreatePlatformEndpointRequest;
+import com.amazonaws.services.sns.model.CreatePlatformEndpointResult;
+import com.amazonaws.services.sns.model.DeletePlatformApplicationRequest;
+import com.amazonaws.services.sns.model.PlatformApplication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liferay.contacts.model.Entry;
 import com.liferay.portal.kernel.exception.PortalException;
@@ -25,6 +41,7 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.StringBundler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -48,9 +65,6 @@ import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portlet.social.model.SocialRequestConstants;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
-
-import java.lang.reflect.Field;
-import java.util.List;
 
 /**
  * @author Ryan Park
@@ -448,6 +462,72 @@ public class ContactsUtil {
 		}
 
 		return sb.toString();
+	}
+	
+	public static String createPlatformEndpoint(AmazonSNSClient client, String deviceToken, String devicePlatform)throws Exception {
+	    String endpointArn = null;
+	    try {
+				System.out.println("Creating platform endpoint with token: "+deviceToken);
+				List<PlatformApplication> apps = client.listPlatformApplications().getPlatformApplications();
+				String platformApplicationArn = "";
+				if(apps.size()>0){
+					for(PlatformApplication platApps: apps){
+						if(devicePlatform.equals("Android")){
+							if(platApps.getAttributes().containsValue("Google Android"))
+								platformApplicationArn = platApps.getPlatformApplicationArn();
+						}
+						if(devicePlatform.equals("iOS")){
+							if(platApps.getAttributes().containsValue("Apple iOS Dev"))
+								platformApplicationArn = platApps.getPlatformApplicationArn();
+						}
+					}
+				}
+				if(!platformApplicationArn.contains("FLASKUS")){
+						platformApplicationArn = createPlatformApplication(client, devicePlatform);
+				}
+				CreatePlatformEndpointRequest cpeReq = 
+				      new CreatePlatformEndpointRequest().withPlatformApplicationArn(platformApplicationArn).withToken(deviceToken);
+				CreatePlatformEndpointResult cpeRes = client.createPlatformEndpoint(cpeReq);
+				endpointArn = cpeRes.getEndpointArn();
+	    } catch (InvalidParameterException ipe) {
+	      String message = ipe.getErrorMessage();
+	      Pattern p = Pattern
+	        .compile(".*Endpoint (arn:aws:sns[^ ]+) already exists " +
+	                 "with the same token.*");
+	      Matcher m = p.matcher(message);
+	      if (m.matches()) {
+	        // The platform endpoint already exists for this token, but with
+	        // additional custom data that
+	        // createEndpoint doesn't want to overwrite. Just use the
+	        // existing platform endpoint.
+	        endpointArn = m.group(1);
+	      } else {
+	        // Rethrow the exception, the input is actually bad.
+	        throw ipe;
+	      }
+	    }
+	    return endpointArn;
+	}
+	
+	public static String createPlatformApplication(AmazonSNSClient client, String devicePlatform)throws Exception{
+		CreatePlatformApplicationRequest paltformAppReq = new CreatePlatformApplicationRequest();
+		Map<String, String> attributes = new HashMap<String, String>();
+		if(devicePlatform.equals("Android")){
+			attributes.put("PlatformPrincipal", "FLASK");
+			paltformAppReq.setName("FLASK");
+			attributes.put("PlatformCredential", PropsUtil.get("flask.push.gcm.api.key"));
+			paltformAppReq.setPlatform(Platform.GCM.name());
+		}
+		if(devicePlatform.equals("iOS")){
+			attributes.put("PlatformPrincipal", PropsUtil.get("flask.push.apple.certificate"));
+			attributes.put("PlatformCredential", PropsUtil.get("flask.push.apns.private.key"));
+			paltformAppReq.setName("FLASKIOS");
+			paltformAppReq.setPlatform(Platform.APNS_SANDBOX.name());
+		}
+		paltformAppReq.setAttributes(attributes);
+		CreatePlatformApplicationResult platformAppRes = client.createPlatformApplication(paltformAppReq);
+		System.out.println("Platform application arn: "+platformAppRes.getPlatformApplicationArn());
+		return platformAppRes.getPlatformApplicationArn();
 	}
 
 }

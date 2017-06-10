@@ -75,7 +75,9 @@ public class FlaskGroupRecipientsServiceImpl
 					   recipients = recipients+ "," +groupUser.getUserId();
 					   read = read+ "," + "0";
 				   }
-				   FlaskMessagesServiceUtil.sendPush(groupUser.getUserId(), "Flask Group Message", " You have a message from "+group.getGroupName(), "Group_Message", group.getModelAttributes());
+				   if(groupUser.getUserId() != serviceContext.getUserId())
+					   FlaskMessagesServiceUtil.sendPush(groupUser.getUserId(), "Flask Group Message", " You have a message from Group "+group.getGroupName(), "Group_Message", group.getModelAttributes(),
+							   group.getGroupId());
 				   try {
 					   EmailInvitationUtil.emailMessage(groupUser.getUserName(), senderEmailId, groupUser.getEmailAddress(), message, serviceContext);
 					} catch (Exception e) {

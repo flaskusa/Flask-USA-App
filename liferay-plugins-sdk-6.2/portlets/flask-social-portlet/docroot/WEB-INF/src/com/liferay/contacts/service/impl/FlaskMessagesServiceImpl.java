@@ -19,22 +19,14 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.BasicAWSCredentials;
 import com.amazonaws.services.apigateway.model.NotFoundException;
-import com.amazonaws.services.applicationdiscovery.model.InvalidParameterException;
 import com.amazonaws.services.cognitosync.model.Platform;
 import com.amazonaws.services.sns.AmazonSNSClient;
-import com.amazonaws.services.sns.model.CreatePlatformApplicationRequest;
-import com.amazonaws.services.sns.model.CreatePlatformApplicationResult;
-import com.amazonaws.services.sns.model.CreatePlatformEndpointRequest;
-import com.amazonaws.services.sns.model.CreatePlatformEndpointResult;
 import com.amazonaws.services.sns.model.GetEndpointAttributesRequest;
 import com.amazonaws.services.sns.model.GetEndpointAttributesResult;
-import com.amazonaws.services.sns.model.PlatformApplication;
 import com.amazonaws.services.sns.model.PublishRequest;
 import com.amazonaws.services.sns.model.SetEndpointAttributesRequest;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -112,7 +104,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	   for (String userId : rec){
 		   if(Long.parseLong(userId) > 0){
 			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false, serviceContext);
-			   FlaskMessagesServiceUtil.sendPush(Long.parseLong(userId), "Flask Message", "You have a message from "+user.getFullName(), "Friend_Message", user.getModelAttributes());
+			   FlaskMessagesServiceUtil.sendPush(Long.parseLong(userId), "Flask Message", "You have a message from "+user.getFullName(), "Friend_Message", user.getModelAttributes(), user.getUserId());
 			   if(sendEmail)
 			        EmailInvitationUtil.emailMessage(user.getFullName(), user.getEmailAddress(), recp.getEmail(), message, serviceContext);
 		   }
@@ -286,19 +278,23 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		boolean updateNeeded = false;
 	    boolean createNeeded = false;
 		try {
+			LOGGER.debug("Started registring with SNS");
+			System.out.println("Started registring with SNS");
 			AWSCredentials cred = new BasicAWSCredentials(PropsUtil.get("flask.push.accessKey"), PropsUtil.get("flask.push.secretKey"));
 			AmazonSNSClient client = new AmazonSNSClient(cred);
 			long userDeviceRegistrationId = 0;
 			List<FlaskUserDeviceRegistration> registeredDevices = FlaskUserDeviceRegistrationUtil.findByUserIdDeviceToken(userId, deviceToken);
 			if(registeredDevices.size()<=0){
 				LOGGER.debug("Creating platform endpoint");
-				endpointArn = createPlatformEndpoint(client, deviceToken, devicePlatform);
+				System.out.println("Creating platform endpoint");
+				endpointArn = ContactsUtil.createPlatformEndpoint(client, deviceToken, devicePlatform);
 			    createNeeded = false;
 				userDeviceRegistrationId = FlaskUserDeviceRegistrationServiceUtil.addUserDevice(userId, userEmail, devicePlatform, deviceDetails, deviceToken, 
 						registrationTime, active, lastNotificationTime, lastNotificationMsg, serviceContext).getUserDeviceRegistrationId();
 				DeviceAwsEndpointServiceUtil.addDeviceAwsEndpoint(endpointArn, userDeviceRegistrationId);
 			}else{
 				LOGGER.debug("Retrieving platform endpoint");
+				System.out.println("Retrieving platform endpoint");
 				userDeviceRegistrationId = registeredDevices.get(0).getUserDeviceRegistrationId();
 				FlaskUserDeviceRegistrationServiceUtil.activateUserForUserDevice(userDeviceRegistrationId);
 				DeviceAwsEndpoint deviceAwsEndpoint = DeviceAwsEndpointUtil.findByendpointsByRegistrationId(userDeviceRegistrationId).get(0);
@@ -320,13 +316,15 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		    }
 		    if (createNeeded) {		    	
 		    	LOGGER.debug("Creating platform endpoint");
-		    	endpointArn = createPlatformEndpoint(client, deviceToken, devicePlatform);
+		    	System.out.println("Creating platform endpoint");
+		    	endpointArn = ContactsUtil.createPlatformEndpoint(client, deviceToken, devicePlatform);
 		    	DeviceAwsEndpointServiceUtil.addDeviceAwsEndpoint(endpointArn, userDeviceRegistrationId);
 		    }
 		    if (updateNeeded) {
 //		    	The platform endpoint is out of sync with the current data;
 //		    	update the token and enable it.
 		    	LOGGER.debug("Updating platform endpoint");
+		    	System.out.println("Updating platform endpoint");
 		    	Map attribs = new HashMap();
 		    	attribs.put("Token", deviceToken);
 		    	attribs.put("Enabled", "true");
@@ -335,6 +333,8 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		    		.withAttributes(attribs);
 		    	client.setEndpointAttributes(saeReq);
 		    }
+		    LOGGER.debug("Registration with SNS is done");
+		    System.out.println("Registration with SNS is done");
 		    done = true;
 		} catch (Exception e) {
 			LOGGER.error("Error: " + e.getMessage());
@@ -342,71 +342,9 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		return done;
 	}
 	
-	private String createPlatformEndpoint(AmazonSNSClient client, String deviceToken, String devicePlatform) {
-	    String endpointArn = null;
-	    try {
-	    	System.out.println("Creating platform endpoint with token: "+deviceToken);
-	    	List<PlatformApplication> apps = client.listPlatformApplications().getPlatformApplications();
-	    	String platformApplicationArn = "";
-	    	if(apps.size()>0){
-	    		for(PlatformApplication platApps: apps){
-	    			if(devicePlatform.equals("Android")){
-	    				if(platApps.getAttributes().containsValue("Google Android"))
-	    					platformApplicationArn = platApps.getPlatformApplicationArn();
-	    			}
-	    			if(devicePlatform.equals("iOS")){
-	    				if(platApps.getAttributes().containsValue("Apple iOS Dev"))
-	    					platformApplicationArn = platApps.getPlatformApplicationArn();
-	    			}
-	    		}
-	    	}
-	    	if(!platformApplicationArn.contains("FLASK")){
-	    		CreatePlatformApplicationRequest paltformAppReq = new CreatePlatformApplicationRequest();
-				Map<String, String> attributes = new HashMap<String, String>();
-				attributes.put("PlatformPrincipal", "FLASK");
-				if(devicePlatform.equals("Android")){
-					paltformAppReq.setName("FLASK");
-					attributes.put("PlatformCredential", PropsUtil.get("flask.push.gcm.api.key"));
-					paltformAppReq.setPlatform(Platform.GCM.name());
-				}
-				if(devicePlatform.equals("iOS")){
-					paltformAppReq.setName("FLASKiOS");
-					attributes.put("PlatformCredential", PropsUtil.get("flask.push.apns.private.key"));
-					paltformAppReq.setPlatform(Platform.APNS_SANDBOX.name());
-				}
-				paltformAppReq.setAttributes(attributes);
-				CreatePlatformApplicationResult platformAppRes = client.createPlatformApplication(paltformAppReq);
-				System.out.println("platformAppRes.getPlatformApplicationArn(): "+platformAppRes.getPlatformApplicationArn());
-				platformApplicationArn = platformAppRes.getPlatformApplicationArn();
-	    	}
-	      CreatePlatformEndpointRequest cpeReq = 
-	          new CreatePlatformEndpointRequest().withPlatformApplicationArn(platformApplicationArn).withToken(deviceToken);
-	      CreatePlatformEndpointResult cpeRes = client.createPlatformEndpoint(cpeReq);
-	      endpointArn = cpeRes.getEndpointArn();
-	    } catch (InvalidParameterException ipe) {
-	      String message = ipe.getErrorMessage();
-	      LOGGER.error("Exception message: " + message);
-	      Pattern p = Pattern
-	        .compile(".*Endpoint (arn:aws:sns[^ ]+) already exists " +
-	                 "with the same token.*");
-	      Matcher m = p.matcher(message);
-	      if (m.matches()) {
-	        // The platform endpoint already exists for this token, but with
-	        // additional custom data that
-	        // createEndpoint doesn't want to overwrite. Just use the
-	        // existing platform endpoint.
-	        endpointArn = m.group(1);
-	      } else {
-	        // Rethrow the exception, the input is actually bad.
-	        throw ipe;
-	      }
-	    }
-	    return endpointArn;
-	  }
-	
 	@SuppressWarnings({ "deprecation" })
 	@Override
-	public boolean sendPush(long userId, String title, String message, String infoType, Map<String, Object> infoDataMap){
+	public boolean sendPush(long userId, String title, String message, String infoType, Map<String, Object> infoDataMap, long notId){
 		boolean done = true;
 		try {
 			List<FlaskUserDeviceRegistration> registeredUserDevices = FlaskUserDeviceRegistrationUtil.findByUserId(userId);
@@ -420,23 +358,30 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 					PublishRequest req = new PublishRequest();
 					req.setMessageStructure("json");
 					Map<String, Object> messageMap = new HashMap<String, Object>();
-					Map<String, String> payload = new HashMap<String, String>();
+					Map<String, Object> payload = new HashMap<String, Object>();
 					payload.put("title", title);
 					payload.put("image", PropsUtil.get("flask.push.notification.image"));
-					payload.put("infoType", infoType);
-					payload.put("infoData", jsonStringInfoData);
 					Map<String, String> map = new HashMap<String, String>();
 					if(device.getDevicePlatform().equals("Android")){
 						payload.put("message", message);	
+						payload.put("infoType", infoType);
+						payload.put("notId", notId);
+						payload.put("infoData", jsonStringInfoData);
+						int[] led = {0, 0, 25, 0};
+						payload.put("ledColor", led);
 						messageMap.put("data", payload);
-						messageMap.put("collapse_key", "Welcome");
-						messageMap.put("delay_while_idle", true);
 						map.put(Platform.GCM.name(), ContactsUtil.jsonify(messageMap));
 					}
-					if(device.getDevicePlatform().equals("Android")){
-						payload.put("alert", message);	
+					if(device.getDevicePlatform().equals("iOS")){
+						payload.put("alert", message);
+						payload.put("sound", "default");
+						payload.put("badge", true);
+						payload.put("content-available", "1");
 						messageMap.put("aps", payload);
-						map.put(Platform.APNS.name(), ContactsUtil.jsonify(messageMap));
+						messageMap.put("notId", notId);
+						messageMap.put("infoType", infoType);
+						messageMap.put("infoData", infoDataMap);
+						map.put(Platform.APNS_SANDBOX.name(), ContactsUtil.jsonify(messageMap));
 					}
 					String jsonMessage = ContactsUtil.jsonify(map);
 					req.setMessage(jsonMessage);
