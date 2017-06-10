@@ -86,7 +86,6 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 		return count;
 	}
 	
-	@SuppressWarnings("unused")
 	@Override
 	public FlaskGroupUsers addGroupUser(long groupId, long userId, String userName, String emailAddress, int isAdmin){
 		FlaskGroupUsers groupUsers = null;
@@ -100,7 +99,6 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 				groupUsers.setUserName(userName);
 				groupUsers.setEmailAddress(emailAddress);
 				groupUsers = FlaskGroupUsersLocalServiceUtil.addFlaskGroupUsers(groupUsers);
-				String text = "You are invited to be participants of custom group.";
 			}
 		}catch(SystemException e){
 			LOGGER.error("Exception in Add Group User :" + e.getMessage());

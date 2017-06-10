@@ -16,10 +16,7 @@ package com.rumbasolutions.flask.service.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
-
-import sun.security.action.GetLongAction;
 
 import com.liferay.contacts.model.FlaskGroupMessages;
 import com.liferay.contacts.model.FlaskGroupRecipients;
@@ -27,9 +24,7 @@ import com.liferay.contacts.service.FlaskGroupMessagesLocalServiceUtil;
 import com.liferay.contacts.service.FlaskGroupMessagesServiceUtil;
 import com.liferay.contacts.service.FlaskGroupRecipientsLocalServiceUtil;
 import com.liferay.contacts.service.FlaskGroupRecipientsServiceUtil;
-import com.liferay.contacts.service.persistence.FlaskGroupMessagesUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
@@ -107,7 +102,7 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 						String read = recp.getRead();
 						String[] recpPart = recipient.split(",");
 						String[] readPart = read.split(",");
-						for(int j = 0; j <= recpPart.length-1; j++){
+						for(int j = 0; j < recpPart.length; j++){
 							if((userId == Long.parseLong(recpPart[j])) && (Long.parseLong(readPart[j]) == 0)){
 								flag = true;
 							}
@@ -116,19 +111,15 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 							count++;
 						}
 					}
-					
 					String dateTime ="";
-					  JSONArray messages = FlaskGroupMessagesServiceUtil.getAllMyFlaskGroupMessages(myGroup.getGroupId(), serviceContext);
-					  if(messages.length() > 0){
-					  for(int n = 0; n < 1; n++)
-					  {
-					      JSONObject object = messages.getJSONObject(n);
-					      dateTime = object.getString("dateTime");
-					  }
-					  obj.put("lastMessageDateTime", dateTime);
-					  }else{
-						  obj.put("lastMessageDateTime", "0000-00-00 00:00:00:0");
-					  }
+					JSONArray messages = FlaskGroupMessagesServiceUtil.getAllMyFlaskGroupMessages(myGroup.getGroupId(), serviceContext);
+					if(messages.length() > 0){
+						JSONObject object = messages.getJSONObject(0);
+						dateTime = object.getString("dateTime");						
+						obj.put("lastMessageDateTime", dateTime);
+					}else{
+						obj.put("lastMessageDateTime", "0000-00-00 00:00:00:0");
+					}
 					obj.put("unreadGroupMesageCount", count);
 					iAarray.put(obj);
 				}
