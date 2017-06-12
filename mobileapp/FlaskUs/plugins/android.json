@@ -19,9 +19,6 @@
         "cordova-plugin-geolocation": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         },
-        "cordova-plugin-network-information": {
-            "PACKAGE_NAME": "com.flaskus.tailgate"
-        },
         "cordova-plugin-splashscreen": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         },
@@ -50,10 +47,16 @@
         "cordova-plugin-touchid": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         },
-        "cordova-plugin-console": {
+        "cordova-plugin-file-transfer": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         },
-        "cordova-plugin-file-transfer": {
+        "cordova-plugin-network-information": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-app-version": {
+            "PACKAGE_NAME": "com.flaskus.tailgate"
+        },
+        "cordova-plugin-console": {
             "PACKAGE_NAME": "com.flaskus.tailgate"
         }
     },

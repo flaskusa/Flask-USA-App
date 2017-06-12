@@ -1,7 +1,8 @@
 {
   "name": "cordova-plugin-network-information",
-  "version": "1.3.0",
+  "version": "1.3.3",
   "description": "Cordova Network Information Plugin",
+  "types": "./types/index.d.ts",
   "cordova": {
     "id": "cordova-plugin-network-information",
     "platforms": [
@@ -21,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/apache/cordova-plugin-network-information"
+    "url": "git+https://github.com/apache/cordova-plugin-network-information.git"
   },
   "keywords": [
     "cordova",
@@ -45,7 +46,9 @@
     "test": "npm run jshint",
     "jshint": "jshint www && jshint src && jshint tests"
   },
-  "author": "Apache Software Foundation",
+  "author": {
+    "name": "Apache Software Foundation"
+  },
   "license": "Apache-2.0",
   "engines": {
     "cordovaDependencies": {
@@ -56,5 +59,54 @@
   },
   "devDependencies": {
     "jshint": "^2.6.0"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/apache/cordova-plugin-network-information/issues"
+  },
+  "homepage": "https://github.com/apache/cordova-plugin-network-information#readme",
+  "_id": "cordova-plugin-network-information@1.3.3",
+  "_shasum": "0ea9aa5c1124cf7cbd6f84f828a542cbd24a8518",
+  "_resolved": "https://registry.npmjs.org/cordova-plugin-network-information/-/cordova-plugin-network-information-1.3.3.tgz",
+  "_from": "cordova-plugin-network-information@latest",
+  "_npmVersion": "3.10.10",
+  "_nodeVersion": "6.10.1",
+  "_npmUser": {
+    "name": "filmaj",
+    "email": "maj.fil@gmail.com"
+  },
+  "dist": {
+    "shasum": "0ea9aa5c1124cf7cbd6f84f828a542cbd24a8518",
+    "tarball": "https://registry.npmjs.org/cordova-plugin-network-information/-/cordova-plugin-network-information-1.3.3.tgz"
+  },
+  "maintainers": [
+    {
+      "name": "bowserj",
+      "email": "bowserj@apache.org"
+    },
+    {
+      "name": "csantanapr",
+      "email": "csantana23@gmail.com"
+    },
+    {
+      "name": "filmaj",
+      "email": "maj.fil@gmail.com"
+    },
+    {
+      "name": "purplecabbage",
+      "email": "purplecabbage@gmail.com"
+    },
+    {
+      "name": "shazron",
+      "email": "shazron@gmail.com"
+    },
+    {
+      "name": "stevegill",
+      "email": "stevengill97@gmail.com"
+    }
+  ],
+  "_npmOperationalInternal": {
+    "host": "packages-12-west.internal.npmjs.com",
+    "tmp": "tmp/cordova-plugin-network-information-1.3.3.tgz_1493685649926_0.8318859627470374"
+  },
+  "directories": {}
 }
