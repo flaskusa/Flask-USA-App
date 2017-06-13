@@ -280,6 +280,13 @@ $(document).ready(
 								message : 'Info Title is required!',
 								action : 'keyup, blur',
 								rule : 'required'
+							},{
+								input : '#cost',
+								message : 'Minimum cost allowed is $10',
+								action : 'keyup, blur',
+								rule : function(input, commit){
+									return $("#cost").val() >= 10;
+								}
 							}
 							// { input: '#infoDesc', message: 'Info Description
 							// is required!', action: 'keyup, blur', rule:
