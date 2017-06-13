@@ -272,26 +272,28 @@ $(document).ready(
 								.text().toLowerCase();
 						_infoTypeRenderer.fnRenderForm(selectedContentType,
 								"venue");
-						$('#venueDetailsForm').jqxValidator({
-							hintType : 'label',
-							animationDuration : 0,
-							rules : [ {
-								input : '#infoTitle',
-								message : 'Info Title is required!',
-								action : 'keyup, blur',
-								rule : 'required'
-							},{
+						
+						var validatorRules = [ {
+							input : '#infoTitle',
+							message : 'Info Title is required!',
+							action : 'keyup, blur',
+							rule : 'required'
+						}];
+						
+						if(selectedContentType=="parking"){
+							validatorRules.push({
 								input : '#cost',
 								message : 'Minimum cost allowed is $10',
 								action : 'keyup, blur',
 								rule : function(input, commit){
 									return $("#cost").val() >= 10;
 								}
-							}
-							// { input: '#infoDesc', message: 'Info Description
-							// is required!', action: 'keyup, blur', rule:
-							// 'required' }
-							]
+							});
+						}
+						$('#venueDetailsForm').jqxValidator({
+							hintType : 'label',
+							animationDuration : 0,
+							rules : validatorRules
 						});
 						$(".clsAdd5More").click(function(){
 							add5moreRows();
