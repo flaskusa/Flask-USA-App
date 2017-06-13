@@ -17,6 +17,7 @@
         $scope.map.events = [];
         $scope.searchBox = { "showBox": false };
         $scope.searchObj = { "searchString": "" };
+
         $scope.searchParkingMarkers = [];
         $scope.searchBarMarkers = [];
         $scope.searchHotelMarkers = [];
@@ -738,11 +739,12 @@
                              '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
                                  '<div class="list">' +
                                  '<span class="range" ng-click="filterMarker(0,0);"><img src=""><p id="0" style="color:#f7941e;">All</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(10,1);"><img src="./img/map_icons/FLASK_PIN_10.png"><p id="1">$10 - $19</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(20,2);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="2">$20 - $29</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(30,3);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="3">$30 - $39</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(40,4);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="4">$40 - $49</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(50,5);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="5">$50 and above</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(9,1);"><img src="./img/map_icons/FLASK_PIN_9.png"><p id="1">Less than $10</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(10,2);"><img src="./img/map_icons/FLASK_PIN_10.png"><p id="2">$10 - $19</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(20,3);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="3">$20 - $29</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(30,4);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="4">$30 - $39</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(40,5);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="5">$40 - $49</p></span>' +
+                                 '<span class="range" ng-click="filterMarker(50,6);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="6">$50 and above</p></span>' +
                                  '</div>' +
                              '</ion-content>' +
                         '</ion-popover-view>';
@@ -1101,6 +1103,11 @@
                                      tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                                         tempObject.icon = {
                                             url: tempObject.imageUrl,
+                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                        }
+                                    }else if(tempObject.cost < 10){
+                                        tempObject.icon = {
+                                            url: 'img/map_icons/FLASK_PIN_9.svg',
                                             scaledSize: { width: 80, height: 60 } //for scaling the svg images
                                         }
                                     }

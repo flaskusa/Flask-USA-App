@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   version="1.1"
+   id="Layer_1"
+   x="0px"
+   y="0px"
+   viewBox="380 382"
+   style="enable-background:new 0 0 380 382;"
+   xml:space="preserve"
+   sodipodi:docname="FLASK_PIN_9.svg"
+   inkscape:version="0.92.1 r15371"><metadata
+     id="metadata31"><rdf:RDF><cc:Work
+         rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
+     id="defs29" /><sodipodi:namedview
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1"
+     objecttolerance="10"
+     gridtolerance="10"
+     guidetolerance="10"
+     inkscape:pageopacity="0"
+     inkscape:pageshadow="2"
+     inkscape:window-width="1920"
+     inkscape:window-height="1017"
+     id="namedview27"
+     showgrid="false"
+     inkscape:zoom="1.15"
+     inkscape:cx="-95.217391"
+     inkscape:cy="-19.565217"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="Layer_1" /><style
+     type="text/css"
+     id="style10">
+       @font-face {
+	      font-family: 'Tungsten-Bold';
+	      src: url('../lib/ionic/fonts/Tungsten-Bold.woff') format('woff');
+	      font-weight: bold;
+	      font-style: normal;
+      }
+	.st0{fill:#FFFFFF;stroke:#F7941E;stroke-width:3;stroke-miterlimit:10;}
+	.st1{fill:none;}
+	.st2{font-family:'Tungsten-Bold';}
+	.st3{font-size:90px;}
+	.st4{font-family:'Tungsten-Bold';}
+</style><polygon
+     points="70.9,176.7 99.6,371 130.9,176.7 "
+     id="polygon12"
+     transform="matrix(0.49703041,0,0,0.34232339,123.66054,-2.020928)" /><ellipse
+     cx="172.86656"
+     cy="32.00602"
+     id="circle14"
+     rx="43.44046"
+     ry="29.919065"
+     style="stroke-width:0.41248655" /><ellipse
+     class="st0"
+     cx="172.86656"
+     cy="32.00602"
+     id="circle16"
+     rx="36.531727"
+     ry="25.160774"
+     style="fill:#ffffff;stroke:#f7941e;stroke-width:1.23745942;stroke-miterlimit:10" /><rect
+     class="st1"
+     x="173.01564"
+     y="27.869089"
+     width="106.71242"
+     height="48.952248"
+     id="rect18"
+     style="fill:none;stroke-width:0.41248655" /><text
+     transform="scale(1.2049614,0.8299021)"
+     id="text24"
+     x="118.85045"
+     y="51.146442"
+     style="font-size:4.94983816px;stroke-width:0.41248643"><tspan
+       class="st2 st3"
+       x="118.85045"
+       y="51.146442"
+       id="tspan20"
+       style="font-size:37.12379074px;font-family:Tungsten-Bold;stroke-width:0.41248643">$</tspan><tspan
+       class="st4 st3"
+       x="131.76129"
+       y="51.146442"
+       id="tspan22"
+       style="font-size:37.12379074px;font-family:Tungsten-Bold;stroke-width:0.41248643">10</tspan></text>
+<text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.33333206px;line-height:1.25;font-family:Tungsten-Bold;-inkscape-font-specification:Tungsten-Bold;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="99.999992"
+     y="44.869568"
+     id="text25"><tspan
+       sodipodi:role="line"
+       id="tspan23"
+       x="99.999992"
+       y="44.869568">&lt;</tspan></text>
+<text
+     xml:space="preserve"
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.33333206px;line-height:1.25;font-family:Tungsten-Bold;-inkscape-font-specification:Tungsten-Bold;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
+     x="102.24287"
+     y="44.928894"
+     id="text25-6"><tspan
+       sodipodi:role="line"
+       id="tspan23-9"
+       x="102.24287"
+       y="44.928894">&lt;</tspan></text>
+</svg>
