@@ -1820,9 +1820,17 @@ position:initial !important;
     font-weight: bold;
     font-size: 17px;
     color: orange; 
-    padding-top: 40px !important;
     }
-
+    .platform-android .acc_settings1{
+        padding-top: 40px !important;
+    }
+    .accountSettingDob{
+        font-weight: normal;
+    } 
+    .list.acc_settings1.intrestTitle {
+        text-align: center;
+        margin-bottom: 0px;
+    }
     .acc_settings1 h5{
     padding-top: 11px !important;
     color: orange;
