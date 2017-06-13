@@ -85,5 +85,5 @@ _venueDetailModel.MESSAGES= {
 		DETAIL_DUPLICATE: "Venue detail with same title already exist",
 		DETAIL_NO_IMAGES_INFO: "No images found",
 		COPY_VENUEDETAIL_SUCCESS: "Venue details imported successfully",
-		GOCODING_ERROR: "Error in determining co-ordinates for address. Please verify the address"
+		GOCODING_ERROR: "Invalid address or address is too far away from venue, please try entering correct address/lat-long within range of 5KM from venue"
 };

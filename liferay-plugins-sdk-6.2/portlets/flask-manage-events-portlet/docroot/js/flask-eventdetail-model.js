@@ -75,6 +75,6 @@ _eventDetailModel.MESSAGES= {
 		DETAIL_NO_IMAGES_INFO: "No images found",
 		DETAIL_IMAGE_DELETE: "Deleted successfully",
 		CHECK_INTERNET_CONNECTION: "Internet is not connected, Please check your internet connection",
-		GOCODING_ERROR: "Invalid address or address is too far away from venue, please try entering correct address/lat-long withing range of 5KM from venue"
+		GOCODING_ERROR: "Error in determining co-ordinates for address. Please verify the address"
 };
 
