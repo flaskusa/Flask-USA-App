@@ -505,6 +505,27 @@ public interface VenueDetailModel extends BaseModel<VenueDetail> {
 	 */
 	public void setShowDescription(boolean showDescription);
 
+	/**
+	 * Returns the premium display enabled of this venue detail.
+	 *
+	 * @return the premium display enabled of this venue detail
+	 */
+	public boolean getPremiumDisplayEnabled();
+
+	/**
+	 * Returns <code>true</code> if this venue detail is premium display enabled.
+	 *
+	 * @return <code>true</code> if this venue detail is premium display enabled; <code>false</code> otherwise
+	 */
+	public boolean isPremiumDisplayEnabled();
+
+	/**
+	 * Sets whether this venue detail is premium display enabled.
+	 *
+	 * @param premiumDisplayEnabled the premium display enabled of this venue detail
+	 */
+	public void setPremiumDisplayEnabled(boolean premiumDisplayEnabled);
+
 	@Override
 	public boolean isNew();
 

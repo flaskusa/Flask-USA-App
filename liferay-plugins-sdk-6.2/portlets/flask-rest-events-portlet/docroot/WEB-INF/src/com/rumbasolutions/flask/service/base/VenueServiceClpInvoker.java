@@ -50,7 +50,8 @@ public class VenueServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "long", "long", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "int",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName107 = "updateVenue";
@@ -59,7 +60,7 @@ public class VenueServiceClpInvoker {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long", "long",
-				"java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "int",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -121,7 +122,7 @@ public class VenueServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.Boolean", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -133,7 +134,7 @@ public class VenueServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.Boolean", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -316,7 +317,8 @@ public class VenueServiceClpInvoker {
 				((Long)arguments[8]).longValue(),
 				(java.lang.String)arguments[9],
 				(java.lang.String)arguments[10],
-				(com.liferay.portal.service.ServiceContext)arguments[11]);
+				((Integer)arguments[11]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[12]);
 		}
 
 		if (_methodName107.equals(name) &&
@@ -330,7 +332,8 @@ public class VenueServiceClpInvoker {
 				((Long)arguments[9]).longValue(),
 				(java.lang.String)arguments[10],
 				(java.lang.String)arguments[11],
-				(com.liferay.portal.service.ServiceContext)arguments[12]);
+				((Integer)arguments[12]).intValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[13]);
 		}
 
 		if (_methodName108.equals(name) &&
@@ -412,8 +415,9 @@ public class VenueServiceClpInvoker {
 				(java.lang.String)arguments[16],
 				(java.lang.Double)arguments[17],
 				(java.lang.String)arguments[18],
-				(java.lang.String)arguments[19],
-				(com.liferay.portal.service.ServiceContext)arguments[20]);
+				(java.lang.Boolean)arguments[19],
+				(java.lang.String)arguments[20],
+				(com.liferay.portal.service.ServiceContext)arguments[21]);
 		}
 
 		if (_methodName117.equals(name) &&
@@ -434,8 +438,9 @@ public class VenueServiceClpInvoker {
 				(java.lang.String)arguments[16],
 				(java.lang.Double)arguments[17],
 				(java.lang.String)arguments[18],
-				(java.lang.String)arguments[19],
-				(com.liferay.portal.service.ServiceContext)arguments[20]);
+				(java.lang.Boolean)arguments[19],
+				(java.lang.String)arguments[20],
+				(com.liferay.portal.service.ServiceContext)arguments[21]);
 		}
 
 		if (_methodName118.equals(name) &&

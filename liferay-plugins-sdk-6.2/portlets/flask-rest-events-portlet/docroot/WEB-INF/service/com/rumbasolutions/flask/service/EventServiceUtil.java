@@ -132,6 +132,7 @@ public class EventServiceUtil {
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
 		java.lang.String hoursOfOperation, boolean showDescription,
+		java.lang.Boolean premiumDisplayEnabled,
 		java.lang.String eventSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
@@ -139,7 +140,7 @@ public class EventServiceUtil {
 			infoTitle, infoShortDesc, infoDesc, addrLine1, addrLine2, zipCode,
 			city, stateId, countryId, latitude, longitude, phone,
 			mobileAppName, website, cost, hoursOfOperation, showDescription,
-			eventSubDetails, serviceContext);
+			premiumDisplayEnabled, eventSubDetails, serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetail updateEventDetail(
@@ -152,6 +153,7 @@ public class EventServiceUtil {
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
 		java.lang.String hoursOfOperation, boolean showDescription,
+		java.lang.Boolean premiumDisplayEnabled,
 		java.lang.String eventSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
@@ -159,7 +161,8 @@ public class EventServiceUtil {
 			infoTypeCategoryId, infoTitle, infoShortDesc, infoDesc, addrLine1,
 			addrLine2, zipCode, city, stateId, countryId, latitude, longitude,
 			phone, mobileAppName, website, cost, hoursOfOperation,
-			showDescription, eventSubDetails, serviceContext);
+			showDescription, premiumDisplayEnabled, eventSubDetails,
+			serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.EventDetail getEventDetail(

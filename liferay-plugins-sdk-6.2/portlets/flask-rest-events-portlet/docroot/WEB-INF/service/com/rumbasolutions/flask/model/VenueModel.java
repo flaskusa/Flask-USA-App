@@ -338,6 +338,20 @@ public interface VenueModel extends BaseModel<Venue> {
 	 */
 	public void setLatitude(String latitude);
 
+	/**
+	 * Returns the venue details dist range of this venue.
+	 *
+	 * @return the venue details dist range of this venue
+	 */
+	public int getVenueDetailsDistRange();
+
+	/**
+	 * Sets the venue details dist range of this venue.
+	 *
+	 * @param venueDetailsDistRange the venue details dist range of this venue
+	 */
+	public void setVenueDetailsDistRange(int venueDetailsDistRange);
+
 	@Override
 	public boolean isNew();
 

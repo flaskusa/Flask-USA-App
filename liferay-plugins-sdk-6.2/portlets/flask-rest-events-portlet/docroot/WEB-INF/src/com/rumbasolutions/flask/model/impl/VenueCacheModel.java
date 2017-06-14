@@ -37,7 +37,7 @@ import java.util.Date;
 public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{venueId=");
 		sb.append(venueId);
@@ -75,6 +75,8 @@ public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 		sb.append(longitude);
 		sb.append(", latitude=");
 		sb.append(latitude);
+		sb.append(", venueDetailsDistRange=");
+		sb.append(venueDetailsDistRange);
 		sb.append("}");
 
 		return sb.toString();
@@ -183,6 +185,8 @@ public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 			venueImpl.setLatitude(latitude);
 		}
 
+		venueImpl.setVenueDetailsDistRange(venueDetailsDistRange);
+
 		venueImpl.resetOriginalValues();
 
 		return venueImpl;
@@ -208,6 +212,7 @@ public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 		venueMetroArea = objectInput.readUTF();
 		longitude = objectInput.readUTF();
 		latitude = objectInput.readUTF();
+		venueDetailsDistRange = objectInput.readInt();
 	}
 
 	@Override
@@ -299,6 +304,8 @@ public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 		else {
 			objectOutput.writeUTF(latitude);
 		}
+
+		objectOutput.writeInt(venueDetailsDistRange);
 	}
 
 	public long venueId;
@@ -319,4 +326,5 @@ public class VenueCacheModel implements CacheModel<Venue>, Externalizable {
 	public String venueMetroArea;
 	public String longitude;
 	public String latitude;
+	public int venueDetailsDistRange;
 }

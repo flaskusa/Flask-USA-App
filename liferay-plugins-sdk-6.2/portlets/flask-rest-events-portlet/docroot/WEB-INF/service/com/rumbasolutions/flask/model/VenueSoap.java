@@ -49,6 +49,7 @@ public class VenueSoap implements Serializable {
 		soapModel.setVenueMetroArea(model.getVenueMetroArea());
 		soapModel.setLongitude(model.getLongitude());
 		soapModel.setLatitude(model.getLatitude());
+		soapModel.setVenueDetailsDistRange(model.getVenueDetailsDistRange());
 
 		return soapModel;
 	}
@@ -245,6 +246,14 @@ public class VenueSoap implements Serializable {
 		_latitude = latitude;
 	}
 
+	public int getVenueDetailsDistRange() {
+		return _venueDetailsDistRange;
+	}
+
+	public void setVenueDetailsDistRange(int venueDetailsDistRange) {
+		_venueDetailsDistRange = venueDetailsDistRange;
+	}
+
 	private long _venueId;
 	private long _companyId;
 	private long _userId;
@@ -263,4 +272,5 @@ public class VenueSoap implements Serializable {
 	private String _venueMetroArea;
 	private String _longitude;
 	private String _latitude;
+	private int _venueDetailsDistRange;
 }

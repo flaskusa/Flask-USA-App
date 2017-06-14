@@ -72,6 +72,7 @@
 			<basic name="cost" />
 			<basic name="hoursOfOperation" />
 			<basic name="showDescription" />
+			<basic name="premiumDisplayEnabled" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -179,6 +180,7 @@
 			<basic name="venueMetroArea" />
 			<basic name="longitude" />
 			<basic name="latitude" />
+			<basic name="venueDetailsDistRange" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />
@@ -220,6 +222,7 @@
 			<basic name="cost" />
 			<basic name="hoursOfOperation" />
 			<basic name="showDescription" />
+			<basic name="premiumDisplayEnabled" />
 			<transient name="modelAttributes" />
 			<transient name="primaryKey" />
 			<transient name="primaryKeyObj" />

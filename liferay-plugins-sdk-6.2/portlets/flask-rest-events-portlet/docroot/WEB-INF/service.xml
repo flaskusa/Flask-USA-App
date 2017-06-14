@@ -221,6 +221,7 @@
         <!-- Order -->
         <column name="longitude" type="String"></column>
         <column name="latitude" type="String"></column>
+        <column name="venueDetailsDistRange" type="int"></column>
         <order by="asc">
                 <order-column name="venueName" />
         </order>

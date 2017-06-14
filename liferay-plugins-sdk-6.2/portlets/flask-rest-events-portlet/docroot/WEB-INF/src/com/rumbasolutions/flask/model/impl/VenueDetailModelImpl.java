@@ -94,9 +94,10 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 			{ "website", Types.VARCHAR },
 			{ "cost", Types.DOUBLE },
 			{ "hoursOfOperation", Types.VARCHAR },
-			{ "showDescription", Types.BOOLEAN }
+			{ "showDescription", Types.BOOLEAN },
+			{ "premiumDisplayEnabled", Types.BOOLEAN }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueDetail (venueDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName VARCHAR(75) null,infoTitle VARCHAR(100) null,infoShortDesc VARCHAR(100) null,infoDesc TEXT null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(100) null,countryId LONG,countryName VARCHAR(100) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,mobileAppName VARCHAR(75) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null,showDescription BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_VenueDetail (venueDetailId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueId LONG,infoTypeId LONG,infoTypeName VARCHAR(75) null,infoTypeCategoryId LONG,infoTypeCategoryName VARCHAR(75) null,infoTitle VARCHAR(100) null,infoShortDesc VARCHAR(100) null,infoDesc TEXT null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,city VARCHAR(100) null,zipCode VARCHAR(20) null,stateId LONG,stateName VARCHAR(100) null,countryId LONG,countryName VARCHAR(100) null,latitude VARCHAR(20) null,longitude VARCHAR(20) null,phone VARCHAR(20) null,mobileAppName VARCHAR(75) null,website VARCHAR(255) null,cost DOUBLE,hoursOfOperation VARCHAR(255) null,showDescription BOOLEAN,premiumDisplayEnabled BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_VenueDetail";
 	public static final String ORDER_BY_JPQL = " ORDER BY venueDetail.infoTypeId ASC, venueDetail.infoTypeCategoryId ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_VenueDetail.infoTypeId ASC, flaskevents_VenueDetail.infoTypeCategoryId ASC";
@@ -158,6 +159,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		model.setCost(soapModel.getCost());
 		model.setHoursOfOperation(soapModel.getHoursOfOperation());
 		model.setShowDescription(soapModel.getShowDescription());
+		model.setPremiumDisplayEnabled(soapModel.getPremiumDisplayEnabled());
 
 		return model;
 	}
@@ -251,6 +253,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
 		attributes.put("showDescription", getShowDescription());
+		attributes.put("premiumDisplayEnabled", getPremiumDisplayEnabled());
 
 		return attributes;
 	}
@@ -430,6 +433,13 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 		if (showDescription != null) {
 			setShowDescription(showDescription);
+		}
+
+		Boolean premiumDisplayEnabled = (Boolean)attributes.get(
+				"premiumDisplayEnabled");
+
+		if (premiumDisplayEnabled != null) {
+			setPremiumDisplayEnabled(premiumDisplayEnabled);
 		}
 	}
 
@@ -868,6 +878,22 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		_showDescription = showDescription;
 	}
 
+	@JSON
+	@Override
+	public boolean getPremiumDisplayEnabled() {
+		return _premiumDisplayEnabled;
+	}
+
+	@Override
+	public boolean isPremiumDisplayEnabled() {
+		return _premiumDisplayEnabled;
+	}
+
+	@Override
+	public void setPremiumDisplayEnabled(boolean premiumDisplayEnabled) {
+		_premiumDisplayEnabled = premiumDisplayEnabled;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -928,6 +954,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		venueDetailImpl.setCost(getCost());
 		venueDetailImpl.setHoursOfOperation(getHoursOfOperation());
 		venueDetailImpl.setShowDescription(getShowDescription());
+		venueDetailImpl.setPremiumDisplayEnabled(getPremiumDisplayEnabled());
 
 		venueDetailImpl.resetOriginalValues();
 
@@ -1186,12 +1213,14 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 		venueDetailCacheModel.showDescription = getShowDescription();
 
+		venueDetailCacheModel.premiumDisplayEnabled = getPremiumDisplayEnabled();
+
 		return venueDetailCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(59);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("{venueDetailId=");
 		sb.append(getVenueDetailId());
@@ -1251,6 +1280,8 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 		sb.append(getHoursOfOperation());
 		sb.append(", showDescription=");
 		sb.append(getShowDescription());
+		sb.append(", premiumDisplayEnabled=");
+		sb.append(getPremiumDisplayEnabled());
 		sb.append("}");
 
 		return sb.toString();
@@ -1258,7 +1289,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(91);
+		StringBundler sb = new StringBundler(94);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.VenueDetail");
@@ -1380,6 +1411,10 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 			"<column><column-name>showDescription</column-name><column-value><![CDATA[");
 		sb.append(getShowDescription());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>premiumDisplayEnabled</column-name><column-value><![CDATA[");
+		sb.append(getPremiumDisplayEnabled());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1422,6 +1457,7 @@ public class VenueDetailModelImpl extends BaseModelImpl<VenueDetail>
 	private double _cost;
 	private String _hoursOfOperation;
 	private boolean _showDescription;
+	private boolean _premiumDisplayEnabled;
 	private long _columnBitmask;
 	private VenueDetail _escapedModel;
 }

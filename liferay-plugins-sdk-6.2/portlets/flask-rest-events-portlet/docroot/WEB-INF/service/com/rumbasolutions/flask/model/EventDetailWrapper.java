@@ -79,6 +79,7 @@ public class EventDetailWrapper implements EventDetail,
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
 		attributes.put("showDescription", getShowDescription());
+		attributes.put("premiumDisplayEnabled", getPremiumDisplayEnabled());
 
 		return attributes;
 	}
@@ -258,6 +259,13 @@ public class EventDetailWrapper implements EventDetail,
 
 		if (showDescription != null) {
 			setShowDescription(showDescription);
+		}
+
+		Boolean premiumDisplayEnabled = (Boolean)attributes.get(
+				"premiumDisplayEnabled");
+
+		if (premiumDisplayEnabled != null) {
+			setPremiumDisplayEnabled(premiumDisplayEnabled);
 		}
 	}
 
@@ -891,6 +899,36 @@ public class EventDetailWrapper implements EventDetail,
 	@Override
 	public void setShowDescription(boolean showDescription) {
 		_eventDetail.setShowDescription(showDescription);
+	}
+
+	/**
+	* Returns the premium display enabled of this event detail.
+	*
+	* @return the premium display enabled of this event detail
+	*/
+	@Override
+	public boolean getPremiumDisplayEnabled() {
+		return _eventDetail.getPremiumDisplayEnabled();
+	}
+
+	/**
+	* Returns <code>true</code> if this event detail is premium display enabled.
+	*
+	* @return <code>true</code> if this event detail is premium display enabled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPremiumDisplayEnabled() {
+		return _eventDetail.isPremiumDisplayEnabled();
+	}
+
+	/**
+	* Sets whether this event detail is premium display enabled.
+	*
+	* @param premiumDisplayEnabled the premium display enabled of this event detail
+	*/
+	@Override
+	public void setPremiumDisplayEnabled(boolean premiumDisplayEnabled) {
+		_eventDetail.setPremiumDisplayEnabled(premiumDisplayEnabled);
 	}
 
 	@Override

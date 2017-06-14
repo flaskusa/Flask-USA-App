@@ -94,8 +94,8 @@ public class EventServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "boolean", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "boolean", "java.lang.Boolean",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName113 = "updateEventDetail";
@@ -106,8 +106,8 @@ public class EventServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "boolean", "java.lang.String",
-				"com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "boolean", "java.lang.Boolean",
+				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName114 = "getEventDetail";
@@ -318,8 +318,9 @@ public class EventServiceClpInvoker {
 				(java.lang.Double)arguments[17],
 				(java.lang.String)arguments[18],
 				((Boolean)arguments[19]).booleanValue(),
-				(java.lang.String)arguments[20],
-				(com.liferay.portal.service.ServiceContext)arguments[21]);
+				(java.lang.Boolean)arguments[20],
+				(java.lang.String)arguments[21],
+				(com.liferay.portal.service.ServiceContext)arguments[22]);
 		}
 
 		if (_methodName113.equals(name) &&
@@ -341,8 +342,9 @@ public class EventServiceClpInvoker {
 				(java.lang.Double)arguments[17],
 				(java.lang.String)arguments[18],
 				((Boolean)arguments[19]).booleanValue(),
-				(java.lang.String)arguments[20],
-				(com.liferay.portal.service.ServiceContext)arguments[21]);
+				(java.lang.Boolean)arguments[20],
+				(java.lang.String)arguments[21],
+				(com.liferay.portal.service.ServiceContext)arguments[22]);
 		}
 
 		if (_methodName114.equals(name) &&

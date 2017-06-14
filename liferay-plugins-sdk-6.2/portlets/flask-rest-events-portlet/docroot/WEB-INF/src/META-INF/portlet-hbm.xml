@@ -70,6 +70,7 @@
 		<property name="cost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="hoursOfOperation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="showDescription" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="premiumDisplayEnabled" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.EventDetailImageImpl" table="flaskevents_EventDetailImage">
 		<cache usage="read-write" />
@@ -150,6 +151,7 @@
 		<property name="venueMetroArea" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="longitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="latitude" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="venueDetailsDistRange" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.VenueDetailImpl" table="flaskevents_VenueDetail">
 		<cache usage="read-write" />
@@ -184,6 +186,7 @@
 		<property name="cost" type="com.liferay.portal.dao.orm.hibernate.DoubleType" />
 		<property name="hoursOfOperation" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="showDescription" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="premiumDisplayEnabled" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
 	</class>
 	<class name="com.rumbasolutions.flask.model.impl.VenueDetailImageImpl" table="flaskevents_VenueDetailImage">
 		<cache usage="read-write" />

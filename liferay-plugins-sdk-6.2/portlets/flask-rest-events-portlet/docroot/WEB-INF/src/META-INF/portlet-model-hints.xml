@@ -103,6 +103,7 @@
 			<hint-collection name="FLASK-DESC" />
 		</field>
 		<field name="showDescription" type="boolean" />
+		<field name="premiumDisplayEnabled" type="boolean" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.EventDetailImage">
 		<field name="eventDetailImageId" type="long" />
@@ -190,6 +191,7 @@
 		<field name="latitude" type="String">
 			<hint-collection name="FLASK-SPATIAL" />
 		</field>
+		<field name="venueDetailsDistRange" type="int" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.VenueDetail">
 		<field name="venueDetailId" type="long" />
@@ -249,6 +251,7 @@
 			<hint-collection name="FLASK-DESC" />
 		</field>
 		<field name="showDescription" type="boolean" />
+		<field name="premiumDisplayEnabled" type="boolean" />
 	</model>
 	<model name="com.rumbasolutions.flask.model.VenueDetailImage">
 		<field name="venueDetailImageId" type="long" />

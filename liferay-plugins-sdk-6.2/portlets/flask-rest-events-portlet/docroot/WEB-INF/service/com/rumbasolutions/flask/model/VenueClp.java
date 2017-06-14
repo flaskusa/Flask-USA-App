@@ -92,6 +92,7 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 		attributes.put("venueMetroArea", getVenueMetroArea());
 		attributes.put("longitude", getLongitude());
 		attributes.put("latitude", getLatitude());
+		attributes.put("venueDetailsDistRange", getVenueDetailsDistRange());
 
 		return attributes;
 	}
@@ -204,6 +205,13 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 
 		if (latitude != null) {
 			setLatitude(latitude);
+		}
+
+		Integer venueDetailsDistRange = (Integer)attributes.get(
+				"venueDetailsDistRange");
+
+		if (venueDetailsDistRange != null) {
+			setVenueDetailsDistRange(venueDetailsDistRange);
 		}
 	}
 
@@ -635,6 +643,30 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 		}
 	}
 
+	@Override
+	public int getVenueDetailsDistRange() {
+		return _venueDetailsDistRange;
+	}
+
+	@Override
+	public void setVenueDetailsDistRange(int venueDetailsDistRange) {
+		_venueDetailsDistRange = venueDetailsDistRange;
+
+		if (_venueRemoteModel != null) {
+			try {
+				Class<?> clazz = _venueRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setVenueDetailsDistRange",
+						int.class);
+
+				method.invoke(_venueRemoteModel, venueDetailsDistRange);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getVenueRemoteModel() {
 		return _venueRemoteModel;
 	}
@@ -722,6 +754,7 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 		clone.setVenueMetroArea(getVenueMetroArea());
 		clone.setLongitude(getLongitude());
 		clone.setLatitude(getLatitude());
+		clone.setVenueDetailsDistRange(getVenueDetailsDistRange());
 
 		return clone;
 	}
@@ -772,7 +805,7 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{venueId=");
 		sb.append(getVenueId());
@@ -810,6 +843,8 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 		sb.append(getLongitude());
 		sb.append(", latitude=");
 		sb.append(getLatitude());
+		sb.append(", venueDetailsDistRange=");
+		sb.append(getVenueDetailsDistRange());
 		sb.append("}");
 
 		return sb.toString();
@@ -817,7 +852,7 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.Venue");
@@ -895,6 +930,10 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 			"<column><column-name>latitude</column-name><column-value><![CDATA[");
 		sb.append(getLatitude());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>venueDetailsDistRange</column-name><column-value><![CDATA[");
+		sb.append(getVenueDetailsDistRange());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -920,6 +959,7 @@ public class VenueClp extends BaseModelImpl<Venue> implements Venue {
 	private String _venueMetroArea;
 	private String _longitude;
 	private String _latitude;
+	private int _venueDetailsDistRange;
 	private BaseModel<?> _venueRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

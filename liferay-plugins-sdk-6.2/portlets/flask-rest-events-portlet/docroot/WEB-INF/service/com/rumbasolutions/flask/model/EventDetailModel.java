@@ -505,6 +505,27 @@ public interface EventDetailModel extends BaseModel<EventDetail> {
 	 */
 	public void setShowDescription(boolean showDescription);
 
+	/**
+	 * Returns the premium display enabled of this event detail.
+	 *
+	 * @return the premium display enabled of this event detail
+	 */
+	public boolean getPremiumDisplayEnabled();
+
+	/**
+	 * Returns <code>true</code> if this event detail is premium display enabled.
+	 *
+	 * @return <code>true</code> if this event detail is premium display enabled; <code>false</code> otherwise
+	 */
+	public boolean isPremiumDisplayEnabled();
+
+	/**
+	 * Sets whether this event detail is premium display enabled.
+	 *
+	 * @param premiumDisplayEnabled the premium display enabled of this event detail
+	 */
+	public void setPremiumDisplayEnabled(boolean premiumDisplayEnabled);
+
 	@Override
 	public boolean isNew();
 

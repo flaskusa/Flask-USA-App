@@ -75,11 +75,12 @@ public class VenueServiceWrapper implements VenueService,
 		java.lang.String venueZipCode, java.lang.String venueCity,
 		java.lang.String venueMetroArea, long venueStateId,
 		long venueCountryId, java.lang.String longitude,
-		java.lang.String latitude,
+		java.lang.String latitude, int venueDetailsDistRange,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.addVenue(venueName, venueDescription, addrLine1,
 			addrLine2, venueZipCode, venueCity, venueMetroArea, venueStateId,
-			venueCountryId, longitude, latitude, serviceContext);
+			venueCountryId, longitude, latitude, venueDetailsDistRange,
+			serviceContext);
 	}
 
 	@Override
@@ -89,11 +90,12 @@ public class VenueServiceWrapper implements VenueService,
 		java.lang.String venueZipCode, java.lang.String venueCity,
 		java.lang.String venueMetroArea, long venueStateId,
 		long venueCountryId, java.lang.String longitude,
-		java.lang.String latitude,
+		java.lang.String latitude, int venueDetailsDistRange,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.updateVenue(venueId, venueName, venueDescription,
 			addrLine1, addrLine2, venueZipCode, venueCity, venueMetroArea,
-			venueStateId, venueCountryId, longitude, latitude, serviceContext);
+			venueStateId, venueCountryId, longitude, latitude,
+			venueDetailsDistRange, serviceContext);
 	}
 
 	@Override
@@ -164,13 +166,15 @@ public class VenueServiceWrapper implements VenueService,
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
+		java.lang.String hoursOfOperation,
+		java.lang.Boolean premiumDisplayEnabled,
+		java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.addVenueDetail(venueId, infoTypeId,
 			infoTypeCategoryId, infoTitle, infoShortDesc, infoDesc, addrLine1,
 			addrLine2, zipCode, city, stateId, countryId, latitude, longitude,
 			phone, mobileAppName, website, cost, hoursOfOperation,
-			venueSubDetails, serviceContext);
+			premiumDisplayEnabled, venueSubDetails, serviceContext);
 	}
 
 	@Override
@@ -183,13 +187,15 @@ public class VenueServiceWrapper implements VenueService,
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
+		java.lang.String hoursOfOperation,
+		java.lang.Boolean premiumDisplayEnabled,
+		java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _venueService.updateVenueDetail(venueDetailId, infoTypeId,
 			infoTypeCategoryId, infoTitle, infoShortDesc, infoDesc, addrLine1,
 			addrLine2, zipCode, city, stateId, countryId, latitude, longitude,
 			phone, mobileAppName, website, cost, hoursOfOperation,
-			venueSubDetails, serviceContext);
+			premiumDisplayEnabled, venueSubDetails, serviceContext);
 	}
 
 	@Override

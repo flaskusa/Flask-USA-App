@@ -79,6 +79,7 @@ public class VenueDetailWrapper implements VenueDetail,
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
 		attributes.put("showDescription", getShowDescription());
+		attributes.put("premiumDisplayEnabled", getPremiumDisplayEnabled());
 
 		return attributes;
 	}
@@ -258,6 +259,13 @@ public class VenueDetailWrapper implements VenueDetail,
 
 		if (showDescription != null) {
 			setShowDescription(showDescription);
+		}
+
+		Boolean premiumDisplayEnabled = (Boolean)attributes.get(
+				"premiumDisplayEnabled");
+
+		if (premiumDisplayEnabled != null) {
+			setPremiumDisplayEnabled(premiumDisplayEnabled);
 		}
 	}
 
@@ -891,6 +899,36 @@ public class VenueDetailWrapper implements VenueDetail,
 	@Override
 	public void setShowDescription(boolean showDescription) {
 		_venueDetail.setShowDescription(showDescription);
+	}
+
+	/**
+	* Returns the premium display enabled of this venue detail.
+	*
+	* @return the premium display enabled of this venue detail
+	*/
+	@Override
+	public boolean getPremiumDisplayEnabled() {
+		return _venueDetail.getPremiumDisplayEnabled();
+	}
+
+	/**
+	* Returns <code>true</code> if this venue detail is premium display enabled.
+	*
+	* @return <code>true</code> if this venue detail is premium display enabled; <code>false</code> otherwise
+	*/
+	@Override
+	public boolean isPremiumDisplayEnabled() {
+		return _venueDetail.isPremiumDisplayEnabled();
+	}
+
+	/**
+	* Sets whether this venue detail is premium display enabled.
+	*
+	* @param premiumDisplayEnabled the premium display enabled of this venue detail
+	*/
+	@Override
+	public void setPremiumDisplayEnabled(boolean premiumDisplayEnabled) {
+		_venueDetail.setPremiumDisplayEnabled(premiumDisplayEnabled);
 	}
 
 	@Override

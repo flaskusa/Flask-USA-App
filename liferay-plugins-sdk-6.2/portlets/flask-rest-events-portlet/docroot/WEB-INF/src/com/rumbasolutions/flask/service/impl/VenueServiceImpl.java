@@ -112,7 +112,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	@Override
 	public Venue addVenue(String venueName, String venueDescription, String addrLine1, 
 								String addrLine2, String venueZipCode, String venueCity,
-								String venueMetroArea, long venueStateId, long venueCountryId, String longitude, String latitude, 
+								String venueMetroArea, long venueStateId, long venueCountryId, String longitude, String latitude, int venueDetailsDistRange,
 								ServiceContext  serviceContext){
 		Venue venue=null;
 		try{
@@ -130,6 +130,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venue.setVenueCountryId(venueCountryId);
 			venue.setLongitude(longitude);
 			venue.setLatitude(latitude);
+			venue.setVenueDetailsDistRange(venueDetailsDistRange);
 			Date now = new Date();
 			venue.setCompanyId(serviceContext.getCompanyId());
 		    venue.setUserId(serviceContext.getGuestOrUserId());
@@ -146,7 +147,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 	@Override
 	public Venue updateVenue(long venueId, String venueName, String venueDescription, String addrLine1, 
 								String addrLine2, String venueZipCode, String venueCity,
-								String venueMetroArea, long venueStateId, long venueCountryId, String longitude, String latitude, 
+								String venueMetroArea, long venueStateId, long venueCountryId, String longitude, String latitude, int venueDetailsDistRange,
 								ServiceContext  serviceContext){
 		Venue venue=null;
 		try{
@@ -164,6 +165,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			venue.setVenueCountryId(venueCountryId);
 			venue.setLongitude(longitude);
 			venue.setLatitude(latitude);
+			venue.setVenueDetailsDistRange(venueDetailsDistRange);
 			Date now = new Date();
 			venue.setUserId(serviceContext.getGuestOrUserId());
 		    venue.setModifiedDate(serviceContext.getModifiedDate(now));

@@ -60,6 +60,7 @@ public class EventDetailSoap implements Serializable {
 		soapModel.setCost(model.getCost());
 		soapModel.setHoursOfOperation(model.getHoursOfOperation());
 		soapModel.setShowDescription(model.getShowDescription());
+		soapModel.setPremiumDisplayEnabled(model.getPremiumDisplayEnabled());
 
 		return soapModel;
 	}
@@ -348,6 +349,18 @@ public class EventDetailSoap implements Serializable {
 		_showDescription = showDescription;
 	}
 
+	public boolean getPremiumDisplayEnabled() {
+		return _premiumDisplayEnabled;
+	}
+
+	public boolean isPremiumDisplayEnabled() {
+		return _premiumDisplayEnabled;
+	}
+
+	public void setPremiumDisplayEnabled(boolean premiumDisplayEnabled) {
+		_premiumDisplayEnabled = premiumDisplayEnabled;
+	}
+
 	private long _eventDetailId;
 	private long _companyId;
 	private long _userId;
@@ -377,4 +390,5 @@ public class EventDetailSoap implements Serializable {
 	private double _cost;
 	private String _hoursOfOperation;
 	private boolean _showDescription;
+	private boolean _premiumDisplayEnabled;
 }

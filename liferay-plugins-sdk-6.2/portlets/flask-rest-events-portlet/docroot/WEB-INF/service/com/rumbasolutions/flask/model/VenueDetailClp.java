@@ -104,6 +104,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		attributes.put("cost", getCost());
 		attributes.put("hoursOfOperation", getHoursOfOperation());
 		attributes.put("showDescription", getShowDescription());
+		attributes.put("premiumDisplayEnabled", getPremiumDisplayEnabled());
 
 		return attributes;
 	}
@@ -283,6 +284,13 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 		if (showDescription != null) {
 			setShowDescription(showDescription);
+		}
+
+		Boolean premiumDisplayEnabled = (Boolean)attributes.get(
+				"premiumDisplayEnabled");
+
+		if (premiumDisplayEnabled != null) {
+			setPremiumDisplayEnabled(premiumDisplayEnabled);
 		}
 	}
 
@@ -972,6 +980,35 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		}
 	}
 
+	@Override
+	public boolean getPremiumDisplayEnabled() {
+		return _premiumDisplayEnabled;
+	}
+
+	@Override
+	public boolean isPremiumDisplayEnabled() {
+		return _premiumDisplayEnabled;
+	}
+
+	@Override
+	public void setPremiumDisplayEnabled(boolean premiumDisplayEnabled) {
+		_premiumDisplayEnabled = premiumDisplayEnabled;
+
+		if (_venueDetailRemoteModel != null) {
+			try {
+				Class<?> clazz = _venueDetailRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setPremiumDisplayEnabled",
+						boolean.class);
+
+				method.invoke(_venueDetailRemoteModel, premiumDisplayEnabled);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getVenueDetailRemoteModel() {
 		return _venueDetailRemoteModel;
 	}
@@ -1070,6 +1107,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		clone.setCost(getCost());
 		clone.setHoursOfOperation(getHoursOfOperation());
 		clone.setShowDescription(getShowDescription());
+		clone.setPremiumDisplayEnabled(getPremiumDisplayEnabled());
 
 		return clone;
 	}
@@ -1142,7 +1180,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(59);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("{venueDetailId=");
 		sb.append(getVenueDetailId());
@@ -1202,6 +1240,8 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 		sb.append(getHoursOfOperation());
 		sb.append(", showDescription=");
 		sb.append(getShowDescription());
+		sb.append(", premiumDisplayEnabled=");
+		sb.append(getPremiumDisplayEnabled());
 		sb.append("}");
 
 		return sb.toString();
@@ -1209,7 +1249,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(91);
+		StringBundler sb = new StringBundler(94);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.VenueDetail");
@@ -1331,6 +1371,10 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 			"<column><column-name>showDescription</column-name><column-value><![CDATA[");
 		sb.append(getShowDescription());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>premiumDisplayEnabled</column-name><column-value><![CDATA[");
+		sb.append(getPremiumDisplayEnabled());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1367,6 +1411,7 @@ public class VenueDetailClp extends BaseModelImpl<VenueDetail>
 	private double _cost;
 	private String _hoursOfOperation;
 	private boolean _showDescription;
+	private boolean _premiumDisplayEnabled;
 	private BaseModel<?> _venueDetailRemoteModel;
 	private Class<?> _clpSerializerClass = com.rumbasolutions.flask.service.ClpSerializer.class;
 }

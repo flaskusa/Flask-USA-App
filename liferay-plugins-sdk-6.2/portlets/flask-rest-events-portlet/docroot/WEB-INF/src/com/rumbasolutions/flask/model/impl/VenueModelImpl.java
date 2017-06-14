@@ -82,9 +82,10 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 			{ "venueCountryName", Types.VARCHAR },
 			{ "venueMetroArea", Types.VARCHAR },
 			{ "longitude", Types.VARCHAR },
-			{ "latitude", Types.VARCHAR }
+			{ "latitude", Types.VARCHAR },
+			{ "venueDetailsDistRange", Types.INTEGER }
 		};
-	public static final String TABLE_SQL_CREATE = "create table flaskevents_Venue (venueId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueName VARCHAR(100) null,venueDescription VARCHAR(255) null,venueZipCode VARCHAR(20) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,venueCity VARCHAR(100) null,venueStateId LONG,venueStateName VARCHAR(75) null,venueCountryId LONG,venueCountryName VARCHAR(75) null,venueMetroArea VARCHAR(75) null,longitude VARCHAR(20) null,latitude VARCHAR(20) null)";
+	public static final String TABLE_SQL_CREATE = "create table flaskevents_Venue (venueId LONG not null primary key,companyId LONG,userId LONG,createdDate DATE null,modifiedDate DATE null,venueName VARCHAR(100) null,venueDescription VARCHAR(255) null,venueZipCode VARCHAR(20) null,addrLine1 VARCHAR(100) null,addrLine2 VARCHAR(100) null,venueCity VARCHAR(100) null,venueStateId LONG,venueStateName VARCHAR(75) null,venueCountryId LONG,venueCountryName VARCHAR(75) null,venueMetroArea VARCHAR(75) null,longitude VARCHAR(20) null,latitude VARCHAR(20) null,venueDetailsDistRange INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table flaskevents_Venue";
 	public static final String ORDER_BY_JPQL = " ORDER BY venue.venueName ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY flaskevents_Venue.venueName ASC";
@@ -135,6 +136,7 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 		model.setVenueMetroArea(soapModel.getVenueMetroArea());
 		model.setLongitude(soapModel.getLongitude());
 		model.setLatitude(soapModel.getLatitude());
+		model.setVenueDetailsDistRange(soapModel.getVenueDetailsDistRange());
 
 		return model;
 	}
@@ -217,6 +219,7 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 		attributes.put("venueMetroArea", getVenueMetroArea());
 		attributes.put("longitude", getLongitude());
 		attributes.put("latitude", getLatitude());
+		attributes.put("venueDetailsDistRange", getVenueDetailsDistRange());
 
 		return attributes;
 	}
@@ -329,6 +332,13 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 
 		if (latitude != null) {
 			setLatitude(latitude);
+		}
+
+		Integer venueDetailsDistRange = (Integer)attributes.get(
+				"venueDetailsDistRange");
+
+		if (venueDetailsDistRange != null) {
+			setVenueDetailsDistRange(venueDetailsDistRange);
 		}
 	}
 
@@ -617,6 +627,17 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 		_latitude = latitude;
 	}
 
+	@JSON
+	@Override
+	public int getVenueDetailsDistRange() {
+		return _venueDetailsDistRange;
+	}
+
+	@Override
+	public void setVenueDetailsDistRange(int venueDetailsDistRange) {
+		_venueDetailsDistRange = venueDetailsDistRange;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -666,6 +687,7 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 		venueImpl.setVenueMetroArea(getVenueMetroArea());
 		venueImpl.setLongitude(getLongitude());
 		venueImpl.setLatitude(getLatitude());
+		venueImpl.setVenueDetailsDistRange(getVenueDetailsDistRange());
 
 		venueImpl.resetOriginalValues();
 
@@ -843,12 +865,14 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 			venueCacheModel.latitude = null;
 		}
 
+		venueCacheModel.venueDetailsDistRange = getVenueDetailsDistRange();
+
 		return venueCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(37);
+		StringBundler sb = new StringBundler(39);
 
 		sb.append("{venueId=");
 		sb.append(getVenueId());
@@ -886,6 +910,8 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 		sb.append(getLongitude());
 		sb.append(", latitude=");
 		sb.append(getLatitude());
+		sb.append(", venueDetailsDistRange=");
+		sb.append(getVenueDetailsDistRange());
 		sb.append("}");
 
 		return sb.toString();
@@ -893,7 +919,7 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(58);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("<model><model-name>");
 		sb.append("com.rumbasolutions.flask.model.Venue");
@@ -971,6 +997,10 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 			"<column><column-name>latitude</column-name><column-value><![CDATA[");
 		sb.append(getLatitude());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>venueDetailsDistRange</column-name><column-value><![CDATA[");
+		sb.append(getVenueDetailsDistRange());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -1000,6 +1030,7 @@ public class VenueModelImpl extends BaseModelImpl<Venue> implements VenueModel {
 	private String _originalVenueMetroArea;
 	private String _longitude;
 	private String _latitude;
+	private int _venueDetailsDistRange;
 	private long _columnBitmask;
 	private Venue _escapedModel;
 }

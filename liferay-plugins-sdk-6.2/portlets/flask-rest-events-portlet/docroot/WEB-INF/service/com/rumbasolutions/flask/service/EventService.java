@@ -117,6 +117,7 @@ public interface EventService extends BaseService, InvokableService {
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
 		java.lang.String hoursOfOperation, boolean showDescription,
+		java.lang.Boolean premiumDisplayEnabled,
 		java.lang.String eventSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
@@ -130,6 +131,7 @@ public interface EventService extends BaseService, InvokableService {
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
 		java.lang.String hoursOfOperation, boolean showDescription,
+		java.lang.Boolean premiumDisplayEnabled,
 		java.lang.String eventSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext);
 

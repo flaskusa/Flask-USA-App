@@ -67,6 +67,7 @@ public class VenueWrapper implements Venue, ModelWrapper<Venue> {
 		attributes.put("venueMetroArea", getVenueMetroArea());
 		attributes.put("longitude", getLongitude());
 		attributes.put("latitude", getLatitude());
+		attributes.put("venueDetailsDistRange", getVenueDetailsDistRange());
 
 		return attributes;
 	}
@@ -179,6 +180,13 @@ public class VenueWrapper implements Venue, ModelWrapper<Venue> {
 
 		if (latitude != null) {
 			setLatitude(latitude);
+		}
+
+		Integer venueDetailsDistRange = (Integer)attributes.get(
+				"venueDetailsDistRange");
+
+		if (venueDetailsDistRange != null) {
+			setVenueDetailsDistRange(venueDetailsDistRange);
 		}
 	}
 
@@ -582,6 +590,26 @@ public class VenueWrapper implements Venue, ModelWrapper<Venue> {
 	@Override
 	public void setLatitude(java.lang.String latitude) {
 		_venue.setLatitude(latitude);
+	}
+
+	/**
+	* Returns the venue details dist range of this venue.
+	*
+	* @return the venue details dist range of this venue
+	*/
+	@Override
+	public int getVenueDetailsDistRange() {
+		return _venue.getVenueDetailsDistRange();
+	}
+
+	/**
+	* Sets the venue details dist range of this venue.
+	*
+	* @param venueDetailsDistRange the venue details dist range of this venue
+	*/
+	@Override
+	public void setVenueDetailsDistRange(int venueDetailsDistRange) {
+		_venue.setVenueDetailsDistRange(venueDetailsDistRange);
 	}
 
 	@Override

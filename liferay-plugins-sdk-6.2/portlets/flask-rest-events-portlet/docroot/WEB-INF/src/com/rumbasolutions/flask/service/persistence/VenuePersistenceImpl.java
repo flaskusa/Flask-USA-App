@@ -1462,6 +1462,7 @@ public class VenuePersistenceImpl extends BasePersistenceImpl<Venue>
 		venueImpl.setVenueMetroArea(venue.getVenueMetroArea());
 		venueImpl.setLongitude(venue.getLongitude());
 		venueImpl.setLatitude(venue.getLatitude());
+		venueImpl.setVenueDetailsDistRange(venue.getVenueDetailsDistRange());
 
 		return venueImpl;
 	}

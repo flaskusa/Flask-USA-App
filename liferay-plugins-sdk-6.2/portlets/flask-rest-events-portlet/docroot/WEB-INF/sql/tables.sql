@@ -46,7 +46,8 @@ create table flaskevents_EventDetail (
 	website VARCHAR(255) null,
 	cost DOUBLE,
 	hoursOfOperation VARCHAR(255) null,
-	showDescription BOOLEAN
+	showDescription BOOLEAN,
+	premiumDisplayEnabled BOOLEAN
 );
 
 create table flaskevents_EventDetailImage (
@@ -112,7 +113,8 @@ create table flaskevents_Venue (
 	venueCountryName VARCHAR(75) null,
 	venueMetroArea VARCHAR(75) null,
 	longitude VARCHAR(20) null,
-	latitude VARCHAR(20) null
+	latitude VARCHAR(20) null,
+	venueDetailsDistRange INTEGER
 );
 
 create table flaskevents_VenueDetail (
@@ -144,7 +146,8 @@ create table flaskevents_VenueDetail (
 	website VARCHAR(255) null,
 	cost DOUBLE,
 	hoursOfOperation VARCHAR(255) null,
-	showDescription BOOLEAN
+	showDescription BOOLEAN,
+	premiumDisplayEnabled BOOLEAN
 );
 
 create table flaskevents_VenueDetailImage (

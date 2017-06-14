@@ -50,7 +50,8 @@ public class VenueServiceClp implements VenueService {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "long", "long", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "int",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName6 = "updateVenue";
@@ -59,7 +60,7 @@ public class VenueServiceClp implements VenueService {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "long", "long",
-				"java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String", "int",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -121,7 +122,7 @@ public class VenueServiceClp implements VenueService {
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.Boolean", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -133,7 +134,7 @@ public class VenueServiceClp implements VenueService {
 				"java.lang.String", "java.lang.String", "long", "long",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.Double",
-				"java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.Boolean", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
@@ -392,7 +393,7 @@ public class VenueServiceClp implements VenueService {
 		java.lang.String venueZipCode, java.lang.String venueCity,
 		java.lang.String venueMetroArea, long venueStateId,
 		long venueCountryId, java.lang.String longitude,
-		java.lang.String latitude,
+		java.lang.String latitude, int venueDetailsDistRange,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -422,6 +423,8 @@ public class VenueServiceClp implements VenueService {
 						
 					ClpSerializer.translateInput(latitude),
 						
+					venueDetailsDistRange,
+						
 					ClpSerializer.translateInput(serviceContext)
 					});
 		}
@@ -447,7 +450,7 @@ public class VenueServiceClp implements VenueService {
 		java.lang.String venueZipCode, java.lang.String venueCity,
 		java.lang.String venueMetroArea, long venueStateId,
 		long venueCountryId, java.lang.String longitude,
-		java.lang.String latitude,
+		java.lang.String latitude, int venueDetailsDistRange,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -478,6 +481,8 @@ public class VenueServiceClp implements VenueService {
 					ClpSerializer.translateInput(longitude),
 						
 					ClpSerializer.translateInput(latitude),
+						
+					venueDetailsDistRange,
 						
 					ClpSerializer.translateInput(serviceContext)
 					});
@@ -732,7 +737,9 @@ public class VenueServiceClp implements VenueService {
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
+		java.lang.String hoursOfOperation,
+		java.lang.Boolean premiumDisplayEnabled,
+		java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -778,6 +785,8 @@ public class VenueServiceClp implements VenueService {
 						
 					ClpSerializer.translateInput(hoursOfOperation),
 						
+					ClpSerializer.translateInput(premiumDisplayEnabled),
+						
 					ClpSerializer.translateInput(venueSubDetails),
 						
 					ClpSerializer.translateInput(serviceContext)
@@ -808,7 +817,9 @@ public class VenueServiceClp implements VenueService {
 		java.lang.String latitude, java.lang.String longitude,
 		java.lang.String phone, java.lang.String mobileAppName,
 		java.lang.String website, java.lang.Double cost,
-		java.lang.String hoursOfOperation, java.lang.String venueSubDetails,
+		java.lang.String hoursOfOperation,
+		java.lang.Boolean premiumDisplayEnabled,
+		java.lang.String venueSubDetails,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -853,6 +864,8 @@ public class VenueServiceClp implements VenueService {
 					ClpSerializer.translateInput(cost),
 						
 					ClpSerializer.translateInput(hoursOfOperation),
+						
+					ClpSerializer.translateInput(premiumDisplayEnabled),
 						
 					ClpSerializer.translateInput(venueSubDetails),
 						

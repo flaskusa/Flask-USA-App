@@ -38,7 +38,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(59);
+		StringBundler sb = new StringBundler(61);
 
 		sb.append("{eventDetailId=");
 		sb.append(eventDetailId);
@@ -98,6 +98,8 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		sb.append(hoursOfOperation);
 		sb.append(", showDescription=");
 		sb.append(showDescription);
+		sb.append(", premiumDisplayEnabled=");
+		sb.append(premiumDisplayEnabled);
 		sb.append("}");
 
 		return sb.toString();
@@ -256,6 +258,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		}
 
 		eventDetailImpl.setShowDescription(showDescription);
+		eventDetailImpl.setPremiumDisplayEnabled(premiumDisplayEnabled);
 
 		eventDetailImpl.resetOriginalValues();
 
@@ -293,6 +296,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		cost = objectInput.readDouble();
 		hoursOfOperation = objectInput.readUTF();
 		showDescription = objectInput.readBoolean();
+		premiumDisplayEnabled = objectInput.readBoolean();
 	}
 
 	@Override
@@ -434,6 +438,7 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 		}
 
 		objectOutput.writeBoolean(showDescription);
+		objectOutput.writeBoolean(premiumDisplayEnabled);
 	}
 
 	public long eventDetailId;
@@ -465,4 +470,5 @@ public class EventDetailCacheModel implements CacheModel<EventDetail>,
 	public double cost;
 	public String hoursOfOperation;
 	public boolean showDescription;
+	public boolean premiumDisplayEnabled;
 }
