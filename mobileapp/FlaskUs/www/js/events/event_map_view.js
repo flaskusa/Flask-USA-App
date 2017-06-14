@@ -443,6 +443,7 @@
                 $scope.map.center.latitude = parseFloat(venueObj.latitude);
                 $scope.map.center.longitude = parseFloat(venueObj.longitude);
                 //changing venue map zoom level depending upon venueDetailsDistRange
+
                 if (venueObj.venueDetailsDistRange <= 1) {
                     $scope.map.zoom = parseInt(14);
                 } else if (venueObj.venueDetailsDistRange == 2) {
@@ -1268,9 +1269,14 @@
                 url: 'img/map_icons/FLASK_PIN_' + $scope.filterCost + '.svg',
                 scaledSize: { width: 80, height: 60 } //for scaling the svg images
             }
-            if ((tempObject.cost >= $scope.filterCost) && (tempObject.cost <= ($scope.filterCost + 10))) {
-                $scope.parkingMarkers.push(tempObject);
-            }
+            if ($scope.filterCost == 9) {
+                if (tempObject.cost <= 9)
+                    $scope.parkingMarkers.push(tempObject);
+            } else {
+                if ((tempObject.cost >= $scope.filterCost) && (tempObject.cost < ($scope.filterCost + 10))) {
+                    $scope.parkingMarkers.push(tempObject);
+                }
+            }            
             if (($ionicTabsDelegate.selectedIndex()) > 0) {
                 var value = parseInt("0");
                 $scope.filterMarker(value, value);
