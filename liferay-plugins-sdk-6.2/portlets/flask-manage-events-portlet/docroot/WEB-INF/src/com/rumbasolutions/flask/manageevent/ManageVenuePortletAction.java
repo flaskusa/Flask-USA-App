@@ -86,7 +86,7 @@ public void addImages(ActionRequest actionRequest, ActionResponse actionResponse
 			for(FileItem item: formItems){
 				if (!item.isFormField()) {
 					String uuid = UUID.randomUUID().toString();
-					String fileName = new File(_deviceType+"-"+uuid+"-"+item.getName()).getName();
+					String fileName = new File(_deviceType+"-"+uuid).getName();
 					String fileTitle = fileName;
 					String fileDesc = fileName; // Change is later for description 
 					//boolean IsLogo =  _isLogo.equals("Y");

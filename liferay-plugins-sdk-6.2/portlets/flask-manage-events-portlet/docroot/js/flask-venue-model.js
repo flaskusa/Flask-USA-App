@@ -36,7 +36,8 @@ _venueModel.DATA_MODEL= {
 			 { name: 'venueZipCode', type:'string' },
 			 { name: 'venueMetroArea', type:'string' },
 			 { name: 'longitude', type:'string' },
-			 { name: 'latitude', type:'string' }
+			 { name: 'latitude', type:'string' },
+			 { name: 'venueDetailsDistRange', type:'int' }
 		]
 	};
 

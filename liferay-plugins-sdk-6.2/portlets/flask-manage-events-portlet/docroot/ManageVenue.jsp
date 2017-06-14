@@ -14,6 +14,7 @@
  */
 --%>
 
+<%@page import="com.liferay.portal.kernel.util.PropsUtil"%>
 <%@ page import="com.liferay.portal.kernel.servlet.SessionMessages" %>
 
 <%@ include file="init.jsp" %>
@@ -99,6 +100,14 @@ boolean isAuthorised = renderRequest.isUserInRole("administrator") ||
 			    <label class="control-label" for="venueMetroArea">Metro Area:</label>
 			    <div class="controls">
 			      <input name="venueMetroArea" id="venueMetroArea" class="form-control" type="text">
+			    </div>
+			  </div>
+			  
+			   <div class="form-group">
+			    <label class="control-label" for="venueMetroArea">Venue Details distance range from venue (in miles):</label>
+			    <div class="controls">
+			      <input name="venueDetailsDistRange" id="venueDetailsDistRange" class="form-control" type="text">
+			      <input name="maxVenueDetailsDistRange" id="maxVenueDetailsDistRange" class="form-control" type="hidden" value="<%= PropsUtil.get("flask.venue.details.max.distrange") %>">
 			    </div>
 			  </div>
 	

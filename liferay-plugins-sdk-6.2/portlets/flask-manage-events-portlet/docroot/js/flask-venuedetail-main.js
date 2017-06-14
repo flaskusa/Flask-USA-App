@@ -29,6 +29,9 @@ function addDetailsClickHandlers() {
 									window.location.hash = "#ManageVenueContent";
 								} else {
 									try {
+										var venueDetailsDistRange = parseInt($("#venueDetailsDistRange").val());
+										if(venueDetailsDistRange==0)
+											venueDetailsDistRange = 4;
 										var geocoder = new google.maps.Geocoder();
 										geocoder.geocode({
 															address : $("#venueDetailsForm").find('#addrLine1').val(),
@@ -47,7 +50,7 @@ function addDetailsClickHandlers() {
 																	var distInKm = getDistanceFromLatLonInKm($("#venueForm").find("#latitude").val(),
 																			$("#venueForm").find("#longitude").val(),coords.lat(),coords.lng());
 																	console.log(distInKm);
-																	if(distInKm <= 5){
+																	if(distInKm <= venueDetailsDistRange){
 																		$('#lat').val(coords.lat());
 																		$('#lng').val(coords.lng());
 																	}else{
@@ -55,7 +58,7 @@ function addDetailsClickHandlers() {
 																			var distInKm = getDistanceFromLatLonInKm($("#venueForm").find("#latitude").val(),
 																					$("#venueForm").find("#longitude").val(),$('#venueDetailsForm #latitude').val(),
 																					$('#venueDetailsForm #longitude').val());
-																			if(distInKm > 5){
+																			if(distInKm > venueDetailsDistRange){
 																				$('#venueDetailsForm #latitude').val("");
 																				$('#venueDetailsForm #longitude').val("");
 																				throw "Invalid Address";
@@ -125,7 +128,7 @@ function addDetailsClickHandlers() {
 }
 
 function getDistanceFromLatLonInKm(lat1,lon1,lat2,lon2) {
-  var R = 6371; // Radius of the earth in km
+  var R = 3959; // Radius of the earth in miles
   var dLat = deg2rad(lat2-lat1);  // deg2rad below
   var dLon = deg2rad(lon2-lon1); 
   var a = 
@@ -273,27 +276,15 @@ $(document).ready(
 						_infoTypeRenderer.fnRenderForm(selectedContentType,
 								"venue");
 						
-						var validatorRules = [ {
-							input : '#infoTitle',
-							message : 'Info Title is required!',
-							action : 'keyup, blur',
-							rule : 'required'
-						}];
-						
-						if(selectedContentType=="parking"){
-							validatorRules.push({
-								input : '#cost',
-								message : 'Minimum cost allowed is $10',
-								action : 'keyup, blur',
-								rule : function(input, commit){
-									return $("#cost").val() >= 10;
-								}
-							});
-						}
 						$('#venueDetailsForm').jqxValidator({
 							hintType : 'label',
 							animationDuration : 0,
-							rules : validatorRules
+							rules : [ {
+								input : '#infoTitle',
+								message : 'Info Title is required!',
+								action : 'keyup, blur',
+								rule : 'required'
+							}]
 						});
 						$(".clsAdd5More").click(function(){
 							add5moreRows();

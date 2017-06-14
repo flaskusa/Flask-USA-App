@@ -241,12 +241,14 @@ function saveVenue() {
 					});
 		var flaskRequest = new Request();
 		var url = "";
-			console.log(params);
-			if (params.venueId == 0) {
-				url =_venueModel.SERVICE_ENDPOINTS.ADD_VENUE;
-			}else {
-				url = _venueModel.SERVICE_ENDPOINTS.UPDATE_VENUE;
-			}
+		if(params.venueDetailsDistRange=="" || params.venueDetailsDistRange==undefined || params.venueDetailsDistRange==null)
+			params.venueDetailsDistRange = 4;
+		console.log(params);
+		if (params.venueId == 0) {
+			url =_venueModel.SERVICE_ENDPOINTS.ADD_VENUE;
+		}else {
+			url = _venueModel.SERVICE_ENDPOINTS.UPDATE_VENUE;
+		}
 		flaskRequest.sendGETRequest(url, params,
 					function(data) {
 						var IsNew = false;
@@ -345,7 +347,15 @@ $(document).ready(function() {
 	               //{ input: '#addrLine2', message: 'Address 2 is required!', action: 'keyup, blur', rule: 'required' },
 	               { input: '#venueZipCode', message: 'Zip code is required!', action: 'keyup, blur', rule: 'required' },
 	               { input: '#venueCity', message: 'City is required!', action: 'keyup, blur', rule: 'required' },
-	               { input: '#venueMetroArea', message: 'Metro area is required!', action: 'keyup, blur', rule: 'required' }
+	               { input: '#venueMetroArea', message: 'Metro area is required!', action: 'keyup, blur', rule: 'required' },
+	               { input: '#venueDetailsDistRange', message: 'Distance range allowed upto '+$("#maxVenueDetailsDistRange").val()+" miles only", action: 'keyup, blur', rule: function(){
+	            	   if($("#venueDetailsDistRange").val()=="")
+	            		   return true;
+	            	   else if(parseInt($("#venueDetailsDistRange").val()) <= parseInt($("#maxVenueDetailsDistRange").val()))
+	            			   return true;
+	            	   else
+	            		   return false;
+	               } }
 			   ]
 	});
 });
