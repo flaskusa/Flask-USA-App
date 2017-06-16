@@ -103,10 +103,10 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	   String[] rec = recipients.split(",");
 	   for (String userId : rec){
 		   if(Long.parseLong(userId) > 0){
-			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false, serviceContext);
+//			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false, serviceContext);
 			   FlaskMessagesServiceUtil.sendPush(Long.parseLong(userId), "Flask Message", "You have a message from "+user.getFullName(), "Friend_Message", user.getModelAttributes(), user.getUserId());
-			   if(sendEmail)
-			        EmailInvitationUtil.emailMessage(user.getFullName(), user.getEmailAddress(), recp.getEmail(), message, serviceContext);
+//			   if(sendEmail)
+//			        EmailInvitationUtil.emailMessage(user.getFullName(), user.getEmailAddress(), recp.getEmail(), message, serviceContext);
 		   }
 	   }
 	  } catch (Exception e) {
@@ -381,6 +381,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 						messageMap.put("notId", notId);
 						messageMap.put("infoType", infoType);
 						messageMap.put("infoData", infoDataMap);
+						map.put(Platform.APNS.name(), ContactsUtil.jsonify(messageMap));
 						map.put(Platform.APNS_SANDBOX.name(), ContactsUtil.jsonify(messageMap));
 					}
 					String jsonMessage = ContactsUtil.jsonify(map);

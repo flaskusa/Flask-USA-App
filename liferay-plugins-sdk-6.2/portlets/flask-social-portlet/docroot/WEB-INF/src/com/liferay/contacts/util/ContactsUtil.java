@@ -482,7 +482,7 @@ public class ContactsUtil {
 						}
 					}
 				}
-				if(!platformApplicationArn.contains("FLASKUS")){
+				if(!platformApplicationArn.contains("FLASKUSAPP")){
 						platformApplicationArn = createPlatformApplication(client, devicePlatform);
 				}
 				CreatePlatformEndpointRequest cpeReq = 
@@ -513,16 +513,16 @@ public class ContactsUtil {
 		CreatePlatformApplicationRequest paltformAppReq = new CreatePlatformApplicationRequest();
 		Map<String, String> attributes = new HashMap<String, String>();
 		if(devicePlatform.equals("Android")){
-			attributes.put("PlatformPrincipal", "FLASK");
-			paltformAppReq.setName("FLASK");
+			attributes.put("PlatformPrincipal", "FLASKUSAPP");
+			paltformAppReq.setName("FLASKUSAPP");
 			attributes.put("PlatformCredential", PropsUtil.get("flask.push.gcm.api.key"));
 			paltformAppReq.setPlatform(Platform.GCM.name());
 		}
 		if(devicePlatform.equals("iOS")){
 			attributes.put("PlatformPrincipal", PropsUtil.get("flask.push.apple.certificate"));
 			attributes.put("PlatformCredential", PropsUtil.get("flask.push.apns.private.key"));
-			paltformAppReq.setName("FLASKIOS");
-			paltformAppReq.setPlatform(Platform.APNS_SANDBOX.name());
+			paltformAppReq.setName("FLASKUSAPP");
+			paltformAppReq.setPlatform(Platform.APNS.name());
 		}
 		paltformAppReq.setAttributes(attributes);
 		CreatePlatformApplicationResult platformAppRes = client.createPlatformApplication(paltformAppReq);
