@@ -58,6 +58,17 @@
                 }
             }
         })
+
+        .state('app.venueList', {
+            url: '/venueList',
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/venue_List.html',
+                    controller: 'VenueCtrl'
+                }
+            }
+        })
+
         //pre post game page
         .state('app.pre_post_game', {
             url: '/pre_post_game/:eventName/:eventId/:venueId',

@@ -252,10 +252,10 @@
 
         function getVenueDetailWithImage(venueId) {
             return $http.get(SERVER.url + getVenueDetailWithImageURL, {
-                params: { "venueId ": venueId }
+                params: { "venueId": venueId }
             })
                 .then(function success(resp) {
-                    return resp.data;
+                    return resp;
                 },
                 function failure(resp) {
                     console.log("Error Message");

@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('prePostGameCtrl', prePostGameCtrl);
 
-    prePostGameCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$cookies', '$timeout','$localStorage','SERVER','$ionicHistory'];
+    prePostGameCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', '$ionicSlideBoxDelegate', '$ionicScrollDelegate', '$cookies', '$timeout', '$localStorage', 'SERVER', '$ionicHistory', '$ionicLoading'];
 
     /* @ngInject */
-    function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $cookies, $timeout, $localStorage, SERVER,$ionicHistory) {
+    function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $cookies, $timeout, $localStorage, SERVER, $ionicHistory, $ionicLoading) {
         /* jshint validthis: true */
         var self = this;
         $scope.venueDataRecieved=false;
@@ -36,10 +36,9 @@
             var agreedToTermsOfUse = userDetail.data.isContentAdmin;
         }
         if (angular.isUndefined($localStorage["CachedEvents"])) {
-            $localStorage["CachedEvents"] =  {};
+            $localStorage["CachedEvents"] = {};
         }
-
-        if ( $localStorage["CachedEvents"][currEventId] == undefined) {
+        if ( $localStorage["CachedEvents"][currEventId] == undefined ) {
             $localStorage["CachedEvents"][currEventId] = {};
             getEventVenueDatail();
             getCurrentEvent();
@@ -55,7 +54,6 @@
             EventsService.getEventByEventId($scope.currEventId).then(function (respData) {
                 $localStorage["CachedEvents"][currEventId].getCurrentEvent = respData;
                 $localStorage["CachedEvents"][currEventId].addeddTime = new Date().getTime();
-                setCurrentEvent(respData);
                 setCurrentEvent(respData);
             })
         }
@@ -108,19 +106,26 @@
             else {
                 $state.go("app.event_map_view", { eventDetails: $scope.eventDetails, infoType: POST_EVENT, infoTypeCategory: post });
             }
-
-
         }
-
-
-
         function getEventVenueDatail() {
-            EventsService.getEventVenueDatail(currEventId).then(function (respData) {
-                 $localStorage["CachedEvents"][currEventId].getEventVenueDatail = respData;
-                $scope.venueDataRecieved=true;
-                 setEventVenueDatail(respData);
-            });
+            $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
+            console.log($stateParams.eventId);
+            if ($stateParams.eventId == "none") {
+                EventsService.getVenueDetailWithImage(parseInt($stateParams.venueId)).then(function (respData) {
+                    setEventVenueDatail(respData);                    
+                    $scope.venueDataRecieved = true;
+                    $ionicLoading.hide();
+                });
+            } else {
+                EventsService.getEventVenueDatail(currEventId).then(function (respData) {
+                    $localStorage["CachedEvents"][currEventId].getEventVenueDatail = respData;
+                    $scope.venueDataRecieved=true;
+                    setEventVenueDatail(respData);
+                    $ionicLoading.hide();
+                });
+            }
         }
+
         function setEventVenueDatail(respData) {
             $scope.eventDetails = respData.data;
                 var len = respData.data.Details.length - 1;

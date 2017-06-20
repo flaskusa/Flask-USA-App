@@ -444,19 +444,26 @@
                 $scope.map.center.longitude = parseFloat(venueObj.longitude);
                 //changing venue map zoom level depending upon venueDetailsDistRange
 
-                if (venueObj.venueDetailsDistRange <= 1) {
+                if (venueObj.venueDetailsDistRange == 1) {
                     $scope.map.zoom = parseInt(14);
                 } else if (venueObj.venueDetailsDistRange == 2) {
                     $scope.map.zoom = parseInt(13);
-                } else if (venueObj.venueDetailsDistRange > 2 && venueObj.venueDetailsDistRange <= 4) {
+                } else if ((venueObj.venueDetailsDistRange > 2 && venueObj.venueDetailsDistRange <= 4) || venueObj.venueDetailsDistRange == 0) {
                     $scope.map.zoom = parseInt(12);
                 } else if (venueObj.venueDetailsDistRange > 4 && venueObj.venueDetailsDistRange <= 8) {
                     $scope.map.zoom = parseInt(11);
                 } else if (venueObj.venueDetailsDistRange > 8) {
                     $scope.map.zoom = parseInt(10);
                 }
-                var eventObj = angular.fromJson($stateParams.eventDetails.Event);
-                $scope.eventName = eventObj.eventName;
+                
+                if ($stateParams.eventDetails.Event == undefined) {
+                    var eventObj = angular.fromJson($stateParams.eventDetails.Venue);
+                    $scope.eventName = eventObj.venueName;
+                } else {
+                    var eventObj = angular.fromJson($stateParams.eventDetails.Event);
+                    $scope.eventName = eventObj.eventName;
+                }
+                
             } catch (ex) {
 
             }

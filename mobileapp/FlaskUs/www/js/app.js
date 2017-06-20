@@ -42,27 +42,20 @@
                 console.log(data);
                 console.log(data.additionalData.infoData);
                 sendInfoData = {
+                    'infoType':data.additionalData.infoType,
                     'infoData': data.additionalData.infoData,
                     'coldstart':data.additionalData.coldstart,
                     'activeUsingPopup':true
                 }
                 var userdata = $cookies.getObject('CurrentUser');
                 var currUserId = userdata.data.userId;
-                $cookies.putObject('infoType', data.additionalData.infoType);
+                $cookies.putObject('infoType', sendInfoData.infoType);
 
-                //when ios
                 if (currentPlatform == "ios" && data.additionalData.foreground == true) {
                     showConfirm(data);
-                } else if (currentPlatform == "ios" && data.additionalData.coldstart == true) {
-                    $cookies.putObject('coldstart', true);
-                } else if (currentPlatform == "ios" && data.additionalData.coldstart != true) {
-                    goToInfotype();
-                }
-
-                //when android
-                if (currentPlatform == "android" && data.additionalData.coldstart == true) {
-                    $cookies.putObject('coldstart', true);
-                } else if (currentPlatform == "android" && data.additionalData.coldstart != true) {
+                } else if (sendInfoData.coldstart == true) {
+                    $cookies.putObject('coldstart', sendInfoData.coldstart);
+                } else if (sendInfoData.coldstart != true) {
                     goToInfotype();
                 }
             });
@@ -151,11 +144,12 @@
                                     $rootScope.show_login = true;
                                     $state.go("app.user_navigation_menu");
                                     var isColdStart =  $cookies.getObject('coldstart');
-                                    if (isColdStart == true) {
-                                        setTimeout(                                           
+                                    if (sendInfoData.coldstart == true) {
+										setTimeout(function(){
                                             goToInfotype(),
-                                            $cookies.remove('coldstart'),
-                                        2000);
+                                            sendInfoData.coldstart == false;
+											$cookies.putObject('coldstart',false);
+                                        },2000);
                                     }
                                 }, function failure(response) {
                                     return $q.$inject(response);
@@ -168,6 +162,9 @@
 
             function goToInfotype() {
                 var currinfotype = $cookies.getObject('infoType');
+                if(currinfotype == undefined){
+                             currinfotype=sendInfoData.infoType;
+                }
                 switch (currinfotype) {
                      case "Friend_Message":
                         sendInfoData.user = 'user';

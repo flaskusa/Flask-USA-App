@@ -98,6 +98,13 @@
                             $rootScope.show_login = true;
                             document.login_form.reset();
                             $state.go("app.user_navigation_menu");
+                            var isColdStart = $cookies.getObject('coldstart');
+                            if (isColdStart == true) {
+                                setTimeout(
+                                    goToInfotype(),
+                                    $cookies.remove('coldstart'),
+                                2000);
+                            }
                         }, function failure(response) {
                             return $q.$inject(response);
                             //add errror handling
@@ -112,7 +119,41 @@
                 $scope.doLogin(user);
             });
         }
-
+        function goToInfotype() {
+            alert("inside login controller");
+            var currinfotype = $cookies.getObject('infoType');
+            var currsendInfoData = $cookies.getObject('sendInfoData');
+            switch (currinfotype) {
+                case "Friend_Message":
+                    currsendInfoData.user = 'user';
+                    $cookies.putObject('popupData', currsendInfoData);
+                    setTimeout(
+                        $state.go('app.messages'),
+                    1000);
+                    $cookies.remove('infoType');
+                    break;
+                case "Group_Message":
+                    currsendInfoData.user = 'group';
+                    $cookies.putObject('popupData', currsendInfoData);
+                    setTimeout(
+                        $state.go('app.messages'),
+                    1000);
+                    $cookies.remove('infoType');
+                    break;
+                case "Tailgate_invitation":
+                    setTimeout(
+                        $state.go("app.my_tailgateDetails.my_tailgate_event_details", { 'tailgateId': sendInfoData.infoData.tailgateId }),
+                    1000);
+                    $cookies.remove('infoType');
+                    break;
+                case "Friend_Request":
+                    setTimeout(
+                        $state.go("app.notifications"),
+                    1000);
+                    $cookies.remove('infoType');
+                    break;
+            }
+        }
 
         if ($localStorage['RememberUser'] && $localStorage['RememberUser'].Email && $localStorage['RememberUser'].password) {
             $scope.user = $localStorage['RememberUser'];

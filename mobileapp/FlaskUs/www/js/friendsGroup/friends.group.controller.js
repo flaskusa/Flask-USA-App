@@ -221,21 +221,19 @@
         }).then(function (modal) {
             $scope.modal = modal;
         });
+        
         $scope.goBack = function(){
             $ionicHistory.goBack();
         }
+
         $scope.createGroup = function (groupName, description) {
             GroupService.createGroup(groupName, description,userDetail.data.firstName+' '+userDetail.data.lastName).then(function (response) {
                 $scope.groupId = response.groupId
                 GroupService.saveGroup($scope.groupId, userId,userDetail.data.firstName+' '+userDetail.data.lastName,userDetail.data.emailAddress).then(function (response) {
                     $scope.showInviteFriendPopup();
-
-
                 });
-
             });
         }
-
 
         $scope.showInviteFriendPopup = function(){
          // $scope.searchUserContact('',$scope.startIndex, $scope.endIndex);

@@ -1,0 +1,44 @@
+﻿<ion-view cache-view="false" class="customFooter" >
+    <ion-nav-bar class="bar-dark" align-title="center">
+        <ion-nav-buttons side="left">
+            <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
+        </ion-nav-buttons>
+        <ion-nav-title>
+            <a href="#/app/events"><img alt="Flask" height="35" style="margin-bottom: -10px;" src="img/headerFlaskLogo.png" /></a>
+        </ion-nav-title>
+        <ion-nav-buttons side="right">            
+        </ion-nav-buttons>
+    </ion-nav-bar>
+    <ion-content class="has-footer" ng-click="searchBox.showBox = false" overflow-scroll="false">
+        <div ng-cloak>
+            <div>
+                <h3 class="eventHeading"><span class="overlineStyle">AVAILABLE VENUES</span></h3>
+            </div>
+            <div id="searchChip" class="item searchChipDisplay">
+                <div class="row" style="padding: 0px;">
+                    <div class="col" style="width: 100%; max-width: 189px;"><p class="chipStrings" style="width: 126%;"><b>Filtered By : </b>{{searchstringList.searchString}}</p></div>
+                    <div class="col" style="margin-left: 47px;"><p class="chipStrings"><b>Days : </b>{{searchstringList.days}}</p></div>
+                    <div class="col" ng-click="clearSearchResults()"><i class="icon ion-close" style="float:right;"></i></div>
+                </div>
+            </div>
+            <div class="card" ng-show="venue_Error">
+                <div class="item item-text-wrap">
+                    There are no venues available right now.
+                </div>
+            </div>
+            <div class="list">
+                <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/pre_post_game/{{venue.venueName}}/none/{{venue.venueId}}" ng-repeat="venue in allVenues">
+                    <h2 class="eventNameCol">{{venue.venueName}}</h2>
+                    <p class="dateCol">{{venue.addrLine1 | uppercase}}</p>
+                    <p class="timeVenuCol"> {{venue.venueCity}} | <span class="cityVenuCol ml0">{{venue.venueStateName}}</span></p>
+                    <span class="badge span_icon" ng-if="!show_login"><img src="img/flask_icons/arrow_left.svg"></span>
+                    <!--<div star_div_icon" ng-if="data.userEvent=='1'"><></div>-->
+                </a>
+            </div>
+          </div>
+        </div>
+    </ion-content>
+    <ion-footer-bar class=" bar bar-dark bar-footer bar-assertive customBarPadding">
+        <div ng-include="'templates/advertisement.html'" class="footer-img" ng-if="showAddv==true"></div>
+    </ion-footer-bar>
+</ion-view>
