@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- Generator: Adobe Illustrator 19.2.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<!-- Generator: Adobe Illustrator 20.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 
 <svg
    xmlns:dc="http://purl.org/dc/elements/1.1/"
@@ -13,15 +13,15 @@
    id="Layer_1"
    x="0px"
    y="0px"
-   viewBox="380 382"
+   viewBox="0 0 380 382"
    style="enable-background:new 0 0 380 382;"
    xml:space="preserve"
    sodipodi:docname="FLASK_PIN_9.svg"
    inkscape:version="0.92.1 r15371"><metadata
-     id="metadata31"><rdf:RDF><cc:Work
+     id="metadata29"><rdf:RDF><cc:Work
          rdf:about=""><dc:format>image/svg+xml</dc:format><dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" /></cc:Work></rdf:RDF></metadata><defs
-     id="defs29" /><sodipodi:namedview
+     id="defs27" /><sodipodi:namedview
      pagecolor="#ffffff"
      bordercolor="#666666"
      borderopacity="1"
@@ -32,85 +32,78 @@
      inkscape:pageshadow="2"
      inkscape:window-width="1920"
      inkscape:window-height="1017"
-     id="namedview27"
+     id="namedview25"
      showgrid="false"
-     inkscape:zoom="1.15"
-     inkscape:cx="-95.217391"
-     inkscape:cy="-19.565217"
+     inkscape:zoom="0.61780105"
+     inkscape:cx="-350.62712"
+     inkscape:cy="191"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
      inkscape:current-layer="Layer_1" /><style
      type="text/css"
-     id="style10">
-       @font-face {
-	      font-family: 'Tungsten-Bold';
-	      src: url('../lib/ionic/fonts/Tungsten-Bold.woff') format('woff');
-	      font-weight: bold;
-	      font-style: normal;
-      }
+     id="style2">
 	.st0{fill:#FFFFFF;stroke:#F7941E;stroke-width:3;stroke-miterlimit:10;}
 	.st1{fill:none;}
-	.st2{font-family:'Tungsten-Bold';}
-	.st3{font-size:90px;}
-	.st4{font-family:'Tungsten-Bold';}
+	.st2{enable-background:new    ;}
 </style><polygon
-     points="70.9,176.7 99.6,371 130.9,176.7 "
-     id="polygon12"
-     transform="matrix(0.49703041,0,0,0.34232339,123.66054,-2.020928)" /><ellipse
-     cx="172.86656"
-     cy="32.00602"
-     id="circle14"
-     rx="43.44046"
-     ry="29.919065"
-     style="stroke-width:0.41248655" /><ellipse
+     points="170.9,186.7 189.6,371 205.9,186.7 "
+     id="polygon4"
+     inkscape:export-xdpi="72.589996"
+     inkscape:export-ydpi="72.589996" /><circle
+     cx="189"
+     cy="102.4"
+     r="87.4"
+     id="circle6"
+     inkscape:export-xdpi="72.589996"
+     inkscape:export-ydpi="72.589996" /><circle
      class="st0"
-     cx="172.86656"
-     cy="32.00602"
-     id="circle16"
-     rx="36.531727"
-     ry="25.160774"
-     style="fill:#ffffff;stroke:#f7941e;stroke-width:1.23745942;stroke-miterlimit:10" /><rect
+     cx="189"
+     cy="102.4"
+     r="73.5"
+     id="circle8"
+     inkscape:export-xdpi="72.589996"
+     inkscape:export-ydpi="72.589996" /><rect
+     x="129.3"
+     y="69"
      class="st1"
-     x="173.01564"
-     y="27.869089"
-     width="106.71242"
-     height="48.952248"
-     id="rect18"
-     style="fill:none;stroke-width:0.41248655" /><text
-     transform="scale(1.2049614,0.8299021)"
-     id="text24"
-     x="118.85045"
-     y="51.146442"
-     style="font-size:4.94983816px;stroke-width:0.41248643"><tspan
-       class="st2 st3"
-       x="118.85045"
-       y="51.146442"
-       id="tspan20"
-       style="font-size:37.12379074px;font-family:Tungsten-Bold;stroke-width:0.41248643">$</tspan><tspan
-       class="st4 st3"
-       x="131.76129"
-       y="51.146442"
-       id="tspan22"
-       style="font-size:37.12379074px;font-family:Tungsten-Bold;stroke-width:0.41248643">10</tspan></text>
-<text
+     width="214.7"
+     height="143"
+     id="rect10"
+     inkscape:export-xdpi="72.589996"
+     inkscape:export-ydpi="72.589996" /><g
+     class="st2"
+     id="g14"
+     transform="translate(34)"
+     style="enable-background:new"
+     inkscape:export-xdpi="72.589996"
+     inkscape:export-ydpi="72.589996"><path
+       d="m 157.7,112.6 v 8.9 c 0,7.2 -3.2,11.1 -9.8,11.6 v 6.8 h -5.8 v -6.8 c -6.5,-0.6 -9.6,-4.4 -9.6,-11.4 v -13 h 7 v 13.2 c 0,3.2 1.5,4.8 4.8,4.8 h 1.4 c 3.2,0 4.8,-1.5 4.8,-4.8 v -9.2 c 0,-3.1 -1.1,-4.5 -3.1,-6 l -8.8,-6.4 c -4.7,-3.3 -6,-6.6 -6,-11.7 v -7.3 c 0,-7.1 3.1,-11 9.6,-11.6 v -6.4 h 5.8 v 6.4 c 6.4,0.6 9.6,4.5 9.6,11.4 v 11.1 h -7 V 80.9 c 0,-3.2 -1.5,-4.8 -4.8,-4.8 h -1.3 c -3.2,0 -4.8,1.5 -4.8,4.8 v 7.6 c 0,3.1 1.2,4.5 3.2,6 l 8.7,6.3 c 4.6,3.4 6.1,6.4 6.1,11.8 z"
+       id="path12"
+       inkscape:connector-curvature="0" /></g><g
+     class="st2"
+     id="g22"
+     transform="translate(36.279661)"
+     style="enable-background:new"
+     inkscape:export-xdpi="72.589996"
+     inkscape:export-ydpi="72.589996"><path
+       d="m 176.5,132.9 h -9.3 V 82.6 h -5.9 v -7 l 0.7,-0.1 c 3.5,-0.4 5.2,-1.6 7.3,-4.4 l 1.1,-1.4 h 6.1 z"
+       id="path16"
+       inkscape:connector-curvature="0" /><path
+       d="m 199.2,133.4 h -4.8 c -7.8,0 -11.7,-3.9 -11.7,-11.7 V 81.1 c 0,-7.8 3.9,-11.7 11.7,-11.7 h 4.8 c 7.8,0 11.7,3.9 11.7,11.7 v 40.7 c 0,7.8 -3.9,11.6 -11.7,11.6 z m -1.5,-55.6 h -1.8 c -2.5,0 -3.7,1.2 -3.7,3.7 v 39.8 c 0,2.5 1.2,3.7 3.7,3.7 h 1.8 c 2.4,0 3.6,-1.2 3.6,-3.7 V 81.5 c 0,-2.5 -1.2,-3.7 -3.6,-3.7 z"
+       id="path18"
+       inkscape:connector-curvature="0" /></g><text
      xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.33333206px;line-height:1.25;font-family:Tungsten-Bold;-inkscape-font-specification:Tungsten-Bold;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-     x="99.999992"
-     y="44.869568"
-     id="text25"><tspan
+     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:79.21276093px;line-height:1.25;font-family:Tungsten-Bold;-inkscape-font-specification:Tungsten-Bold;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none;stroke-width:2.12177062"
+     x="140.38383"
+     y="110.82875"
+     id="text42"
+     transform="scale(0.83394838,1.199115)"
+     inkscape:export-xdpi="72.589996"
+     inkscape:export-ydpi="72.589996"><tspan
        sodipodi:role="line"
-       id="tspan23"
-       x="99.999992"
-       y="44.869568">&lt;</tspan></text>
-<text
-     xml:space="preserve"
-     style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:37.33333206px;line-height:1.25;font-family:Tungsten-Bold;-inkscape-font-specification:Tungsten-Bold;letter-spacing:0px;word-spacing:0px;fill:#000000;fill-opacity:1;stroke:none"
-     x="102.24287"
-     y="44.928894"
-     id="text25-6"><tspan
-       sodipodi:role="line"
-       id="tspan23-9"
-       x="102.24287"
-       y="44.928894">&lt;</tspan></text>
+       id="tspan40"
+       x="140.38383"
+       y="110.82875"
+       style="stroke-width:2.12177062">&lt;</tspan></text>
 </svg>
