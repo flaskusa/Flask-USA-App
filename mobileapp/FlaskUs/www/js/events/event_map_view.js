@@ -1122,36 +1122,36 @@
                                      tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                                         tempObject.icon = {
                                             url: tempObject.imageUrl,
-                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                         }
                                     }else if(tempObject.cost < 10){
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_9.svg',
-                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                         }
                                     }
                                    else if (tempObject.cost >= 10 && tempObject.cost <= 19) {
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_10.svg',
-                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                         }
                                     }
                                     else if (tempObject.cost >= 20 && tempObject.cost <= 29) {
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_20.svg',
-                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                         }
                                     }
                                     else if (tempObject.cost >= 30 && tempObject.cost <= 39) {
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_30.svg',
-                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                         }
                                     }
                                     else if (tempObject.cost >= 40 && tempObject.cost <= 49) {
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_40.svg',
-                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                         }
                                     }else if(tempObject.premiumDisplayEnabled== true){                                       
                                         if (ImgObj.length != 0) {
@@ -1165,7 +1165,7 @@
                                     else if (tempObject.cost >= 50) {
                                         tempObject.icon = {
                                             url: 'img/map_icons/FLASK_PIN_50.svg',
-                                            scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                         }
                                     }
                                     $scope.parkingMarkers.push(tempObject);
@@ -1274,7 +1274,7 @@
         function showFilteredMarkers(data) {
             tempObject.icon = {
                 url: 'img/map_icons/FLASK_PIN_' + $scope.filterCost + '.svg',
-                scaledSize: { width: 80, height: 60 } //for scaling the svg images
+                scaledSize: { width: 60, height: 60 } //for scaling the svg images
             }
             if ($scope.filterCost == 9) {
                 if (tempObject.cost <= 9)
