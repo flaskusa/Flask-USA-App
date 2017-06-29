@@ -3,12 +3,13 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER', '$ionicLoading'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER, $ionicLoading) {
         /* jshint validthis: true */
         var detailItem = {};
+        $scope.zoomMin = 1;
         $scope.venueInfoSubDetail = [];
         var self = this;
         var template = '';
@@ -46,6 +47,7 @@
         $scope.nightLifes = [];
         $scope.parkingGoogleMarkers = [];
         $scope.tempParkingGoogleMarkers = [];
+        $scope.marker = {};
         $scope.markerOptions = {};
         $scope.markerOptions.control = {};
         $scope.barsGoogleMarkers = [];
@@ -89,6 +91,7 @@
         $scope.flaskUsDetails = {};
         $scope.mapObject = {};
         $scope.selectedIndex = -1;
+        $scope.isUserMarkerShown = false;
         $scope.isFlaskMarkerShown = true;
         $scope.isGoogleMarkerShown = false;
         $scope.isBarFlaskMarkerShown = true;
@@ -753,20 +756,48 @@
                 });
             }
         };
+        //Flask user locator when user clicks on "Find Me" button
+        $scope.centerOnMe = function () {
+            $scope.isUserMarkerShown = !$scope.isUserMarkerShown;
+            if ($scope.isUserMarkerShown) {
+                navigator.geolocation.getCurrentPosition(function (pos) {           
+                    $scope.map = {
+                        center: {
+                            latitude: pos.coords.latitude,
+                            longitude: pos.coords.longitude
+                        },
+                        zoom: 14
+                    }
+                    $scope.marker = {
+                        id: 10,
+                        coords: {
+                            latitude: pos.coords.latitude,
+                            longitude: pos.coords.longitude
+                        },
+                        options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
+                    }
+                }, function (error) {
+                    alert('Unable to get location: ' + error.message);
+                });
+            } else {
+                $scope.closeOtherInfoWindows();
+                $scope.marker = {};
+            }
+        }
         //popup for parking map cost range
         template = '<ion-popover-view class="popover">' +
-                             '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
-                                 '<div class="list">' +
-                                 '<span class="range" ng-click="filterMarker(0,0);"><img src=""><p id="0" style="color:#f7941e;">All</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(9,1);"><img src="./img/map_icons/FLASK_PIN_9.png"><p id="1">Less than $10</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(10,2);"><img src="./img/map_icons/FLASK_PIN_10.png"><p id="2">$10 - $19</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(20,3);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="3">$20 - $29</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(30,4);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="4">$30 - $39</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(40,5);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="5">$40 - $49</p></span>' +
-                                 '<span class="range" ng-click="filterMarker(50,6);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="6">$50 and above</p></span>' +
-                                 '</div>' +
-                             '</ion-content>' +
-                        '</ion-popover-view>';
+                            '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
+                                '<div class="list">' +
+                                '<span class="range" ng-click="filterMarker(0,0);"><img src=""><p id="0" style="color:#f7941e;" class="rangePStyle">ALL</p></span>' +
+                                '<span class="range" ng-click="filterMarker(9,1);"><img src="./img/map_icons/FLASK_PIN_9.png"><p id="1" class="rangePStyle">LESS THAN $10</p></span>' +
+                                '<span class="range" ng-click="filterMarker(10,2);"><img src="./img/map_icons/FLASK_PIN_10.png"><p id="2" class="rangePStyle">$10 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(20,3);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="3" class="rangePStyle">$20 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(30,4);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="4" class="rangePStyle">$30 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(40,5);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="5" class="rangePStyle">$40 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(50,6);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="6" class="rangePStyle">$50 AND ABOVE</p></span>' +
+                                '</div>' +
+                            '</ion-content>' +
+                    '</ion-popover-view>';
 
         $scope.popover = $ionicPopover.fromTemplate(template, {
             scope: $scope

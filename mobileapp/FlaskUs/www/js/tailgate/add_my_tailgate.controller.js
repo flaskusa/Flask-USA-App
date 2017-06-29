@@ -946,20 +946,20 @@
             });
         }
 
-        $scope.toggleItem = function () {
-            var supplyItem = $("#supplyItemDiv");
-            $scope.hideItem = !$scope.hideItem;
-            $("#FlaskUsListdiv").slideToggle("slow", function () {
-                $ionicScrollDelegate.resize();
-                if ($scope.hideItem && supplyItem.is(":visible") === false) {
-                    $scope.hideSupplyItem = !$scope.hideSupplyItem;
-                    supplyItem.slideToggle("slow", function () {
-                        $ionicScrollDelegate.resize();
-                    });
-                }
-            });
+        //$scope.toggleItem = function () {
+        //    var supplyItem = $("#supplyItemDiv");
+        //    $scope.hideItem = !$scope.hideItem;
+        //    $("#FlaskUsListdiv").slideToggle("slow", function () {
+        //        $ionicScrollDelegate.resize();
+        //        if ($scope.hideItem && supplyItem.is(":visible") === false) {
+        //            $scope.hideSupplyItem = !$scope.hideSupplyItem;
+        //            supplyItem.slideToggle("slow", function () {
+        //                $ionicScrollDelegate.resize();
+        //            });
+        //        }
+        //    });
 
-        }
+        //}
         $scope.toggleSupplyItem = function () {
             $scope.hideSupplyItem = !$scope.hideSupplyItem;
             $("#supplyItemDiv").slideToggle("slow", function () {
@@ -985,7 +985,7 @@
                 }
                 console.log( $scope.selectedSupplyListItems);
                 if ($scope.hideItem == false) {
-                    $scope.toggleItem();
+                    //$scope.toggleItem();
                 }
             });
 
@@ -1058,7 +1058,7 @@
         function getItems() {
             TailgateService.getItemsByTailgateId(tailgateId).then(function (respData) {
                 $scope.setSelectedSupplyItemArray(respData.data);
-                $scope.toggleItem();
+               // $scope.toggleItem();
             });
         }
         //for displaying items from supply list selected

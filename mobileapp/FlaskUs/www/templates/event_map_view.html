@@ -117,7 +117,7 @@
                             <tr>
                                 <td colspan="2">
                                     <div class="alignLeft">
-                                        <span class="iw-sub-title1 tungsten" ng-bind="parameter.addrLine1"> </span>
+                                        <span class="iw-sub-title1" ng-bind="parameter.addrLine1"> </span>
                                         <div class="biggerFont tungsten"> {{parameter.cost}}</div>
                                         <div class="emailText smallerFont tungsten"> {{parameter.infoShortDesc}}</div>
                                         <div ng-bind-html="parameter.infoDesc" class="placedetail_div tungsten"> </div>
@@ -126,7 +126,7 @@
                             </tr>
                             <tr>
                                 <td class="iw-content-icon"><img src="img/map_icons/take_me_there.svg"> </td>
-                                <td class="iw-content-text"> <a id="iwTakeMeThere"><span class="tungsten">Take me there </span></a> </td>
+                                <td class="iw-content-text"> <a id="iwTakeMeThere"><span>Take me there </span></a> </td>
                             </tr>
                         </table>
                     </div>
@@ -187,6 +187,11 @@
                                     <div class="parking_map_div">
                                         <div title="Select Type" class="map_icon_type">
                                             <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectFlaskMarker()"></div>
                                             </div>
                                         </div>
@@ -203,6 +208,8 @@
                                     </div>
                                 </div>
                             </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=0>
+                            </ui-gmap-marker>
                             <!--for flask markers and icons-->
                             <ui-gmap-markers models="parkingMarkers" coords="'self'" icon="'icon'" options="markerOptions" click="onClick" control="markerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'" control="windowOptions.control">
@@ -227,6 +234,11 @@
                                     <div class="parking_map_div">
                                         <div title="Select Type" class="map_icon_type">
                                             <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
                                             </div>
                                         </div>
@@ -238,6 +250,8 @@
                                     </div>
                                 </div>
                             </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=01>
+                            </ui-gmap-marker>
                             <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
 
@@ -330,12 +344,22 @@
         </div>
 
         <div ng-if="infoTypeName == 'During-Event'" class="During-Event">
-            <ion-tabs class="tabs-positive tab_bottom">
+            <ion-tabs class="tabs-positive tab_bottom ">
                 <ion-tab title="VENUE MAP" ng-click="selectTab(0)">
                     <ion-content overflow-scroll="false">
-                        <div class="image_map_div " draggable="true">
+                        <!--<div class="image_map_div " draggable="true">
                             <img id="image" class="venueMapImage" ng-class="{ zoomedvenueMapImage: zoomMapImage==true}" on-double-tap="toggleZoomImage()" ng-src="{{venueMapImageUrl}}" />
-                        </div>
+                        </div>-->
+                        <ion-scroll id="mapImage"
+                                    zooming="true"
+                                    direction="xy"
+                                    delegate-handle="zoom-pane"
+                                    class="zoom-pane"
+                                    min-zoom="1"
+                                    max-zoom="15"
+                                    overflow-scroll="false">
+                            <img ng-src={{venueMapImageUrl}}>
+                        </ion-scroll>
                     </ion-content>
                 </ion-tab>
 
@@ -364,12 +388,17 @@
                         </div><br />
                     </ion-content>
                 </ion-tab>
-                <ion-tab title="BARS/FOOD" ng-click="selectTab(2)">
-                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 2">
+                <!--<ion-tab title="BARS/FOOD" ng-click="selectTab(2)" class="tabs-item-hide" style="display:none;">
+                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 2" style="display:none;">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
                             <ui-gmap-map-control position="right_center">
                                 <div ng-controller="refreshMap">
                                     <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
                                         <div title="Select Type" class="map_icon_type">
                                             <div>
                                                 <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
@@ -383,6 +412,8 @@
                                     </div>
                                 </div>
                             </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey="05">
+        </ui-gmap-marker>
                             <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
@@ -393,7 +424,7 @@
                             </ui-gmap-markers>
                         </ui-gmap-google-map>
                     </div>
-                </ion-tab>
+                </ion-tab>-->
                 <ion-tab title="FLASK US" ng-click="selectTab(3)">
                     <div class="traffic_div" ng-if="selectedIndex == 3">
                         <ion-content overflow-scroll="false" class="traffic_ion_content">
@@ -455,6 +486,11 @@
                                     <div class="parking_map_div">
                                         <div title="Select Type" class="map_icon_type">
                                             <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectBarFlaskMarker()"></div>
                                             </div>
                                         </div>
@@ -466,6 +502,8 @@
                                     </div>
                                 </div>
                             </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=02>
+                            </ui-gmap-marker>
                             <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
@@ -486,6 +524,11 @@
                                     <div class="parking_map_div">
                                         <div title="Select Type" class="map_icon_type">
                                             <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectNightLifeFlaskMarker()"></div>
                                             </div>
                                         </div>
@@ -497,6 +540,8 @@
                                     </div>
                                 </div>
                             </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=03>
+                            </ui-gmap-marker>
                             <ui-gmap-markers models="nightLifes" coords="'self'" icon="'icon'" options="nightLifeFlaskMarkerOptions" click="onClick"
                                              control="nightLifeFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
@@ -520,6 +565,11 @@
                                     <div class="parking_map_div">
                                         <div title="Select Type" class="map_icon_type">
                                             <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
                                                 <div class="miniFlaskButton" ng-click="selectHotelFlaskMarker()"></div>
                                             </div>
                                         </div>
@@ -531,6 +581,8 @@
                                     </div>
                                 </div>
                             </ui-gmap-map-control>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=04>
+                            </ui-gmap-marker>
                             <ui-gmap-markers models="hotelMarkers" coords="'self'" icon="'icon'" options="hotelFlaskMarkerOptions" click="onClick" control="hotelFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
 

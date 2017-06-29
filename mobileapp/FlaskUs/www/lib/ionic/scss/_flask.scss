@@ -7,6 +7,12 @@
 }
 
 @font-face {
+	font-family: 'Avenir Next-Bold';
+	src: url('../lib/ionic/fonts/avenir-next-bold.woff') format('woff');
+	font-weight: bold;
+}
+
+@font-face {
 	font-family: 'Avenir Next Ultra';
 	src: url('../lib/ionic/fonts/AvenirNext-UltraLight.woff2') format('woff2');
 	font-weight: 200;
@@ -1287,7 +1293,7 @@ button.button.button-clear.mini-button {
     height: 28%;
 }
 .myTailgatetopImg {
-  height: 200px;
+  height: auto;
   display: block;
   margin-left: 0px;
   margin-right: 0px; 
@@ -1644,6 +1650,18 @@ position:initial !important;
     .miniFlaskButton {
     position: relative;
     background-image: url("../img/flasklogo2.png");
+    display: block;
+    height: 30px;
+    width: 30px;
+    float: right;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    }
+    
+    .miniLocateButton {
+    position: relative;
+    background-image: url("../img/location-arrow.png");
     display: block;
     height: 30px;
     width: 30px;
@@ -2218,25 +2236,33 @@ div .extra-right-supply{
 .iw-content-icon{
   width:25px;
 }
-   #iw-container .iw-sub-title { 
-	 font-size: 10px;
-	  color: darkorange;
-	  white-space: nowrap;
-	  overflow: hidden;
-	  text-overflow: ellipsis;
-	  min-width: 0;
-	  max-width: 199px;
-   }
+#iw-container .iw-sub-title { 
+    font-size: 10px;
+    color: darkorange;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-width: 0;
+    max-width: 199px;
+    font-family: 'Avenir Next-Bold';
+    font-weight: bold;
+}
 
 .iw-sub-title1 { 
-   font-size: 11px;
-   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;  
-  max-width: 160px; 
-  min-width: 0;
-  width: 100%;
-  }
+    font-size: 11px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+    max-width: 160px; 
+    min-width: 0;
+    width: 100%;
+    font-family: 'Avenir Next-Bold';
+    font-weight: bold;
+}
+.rangePStyle {
+// font-size: 12px;
+ margin: 0px 0px 0px 10%;
+}
 .gm-style-iw {
   width: 313px !important;
   top: 20px !important; }
@@ -2906,11 +2932,13 @@ div .manage_event_default_Image{
 .TrafficInfoDescDiv{
   width:80%;
   margin-left: 30px;
-  margin-top: 5px
+  margin-top: 5px;
 }
 .iw-content-text{
   vertical-align: middle;
-  text-align:left
+  text-align:left;
+  font-family: 'Avenir Next-Bold';
+  font-weight: bold;
 }
 
 /*Venue Map*/
@@ -3030,14 +3058,22 @@ div .manage_event_default_Image{
   margin-bottom: 5px;
   margin-top: -3px; 
   }
+ion-content.pane.tab-content.scroll-content.ionic-scroll.overflow-scroll.has-header.has-tabs {
+    top: 20px !important;
+}
 
-  .thumb-picturs-size {
+.platform-android .thumb-picturs-size {
   width: 48%;
   height: 101% !important;
   border-right: solid white 2px;
-  
-   }
-   .no-popup-header .popup-head {
+ }
+
+.thumb-picturs-size {
+    width: 35%;  
+    height: 101% !important;
+    border-right: solid white 2px;
+}
+ .no-popup-header .popup-head {
   display: none;
 }
 .my-create-supply-view {.item-content {
@@ -3598,4 +3634,60 @@ button.button.button-block.button-positive.pay_now_button.updateSupllyItemButton
 }
 .navigation{
     text-align: left;
+}
+//for pinch zoom on venue map
+.zoom-pane {
+width: 100% !important;
+height: 100% !important;
+}
+
+.zoom-pane .scroll {
+    min-height: 100% !important;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-box-direction: normal;
+    -moz-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -moz-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    -webkit-box-pack: center;
+    -moz-box-pack: center;
+    -webkit-justify-content: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-align-content: stretch;
+    -ms-flex-line-pack: stretch;
+    align-content: stretch;
+    -webkit-box-align: center;
+    -moz-box-align: center;
+    -webkit-align-items: center;
+    -ms-flex-align: center;
+    align-items: center;    
+}
+
+.zoom-pane img {
+    width: 100% !important;
+    vertical-align: top !important;
+}
+//find me locator
+
+.UserGeolabels{
+    position: absolute;
+    overflow: hidden;
+    opacity: 1;
+    z-index: 201;
+    display: block;
+    cursor: pointer;
+    background-color: white;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid;
 }
