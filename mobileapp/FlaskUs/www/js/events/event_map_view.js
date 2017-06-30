@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER', '$ionicLoading'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER', '$ionicLoading', '$cordovaGeolocation'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER, $ionicLoading) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER, $ionicLoading, $cordovaGeolocation) {
         /* jshint validthis: true */
         var detailItem = {};
         $scope.zoomMin = 1;
@@ -760,25 +760,30 @@
         $scope.centerOnMe = function () {
             $scope.isUserMarkerShown = !$scope.isUserMarkerShown;
             if ($scope.isUserMarkerShown) {
-                navigator.geolocation.getCurrentPosition(function (pos) {           
-                    $scope.map = {
-                        center: {
-                            latitude: pos.coords.latitude,
-                            longitude: pos.coords.longitude
-                        },
-                        zoom: 14
-                    }
-                    $scope.marker = {
-                        id: 10,
-                        coords: {
-                            latitude: pos.coords.latitude,
-                            longitude: pos.coords.longitude
-                        },
-                        options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
-                    }
-                }, function (error) {
-                    alert('Unable to get location: ' + error.message);
-                });
+                var posOptions = { timeout: 10000, enableHighAccuracy: false };
+                $cordovaGeolocation
+                  .getCurrentPosition(posOptions)
+                  .then(function (pos) {
+                      var lat = pos.coords.latitude;
+                      var long = pos.coords.longitude;
+                      $scope.map = {
+                          center: {
+                              latitude: pos.coords.latitude,
+                              longitude: pos.coords.longitude
+                          },
+                          zoom: 14
+                      }
+                      $scope.marker = {
+                          id: 10,
+                          coords: {
+                              latitude: pos.coords.latitude,
+                              longitude: pos.coords.longitude
+                          },
+                          options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
+                      }
+                  }, function (err) {
+                      // error
+                  });
             } else {
                 $scope.closeOtherInfoWindows();
                 $scope.marker = {};

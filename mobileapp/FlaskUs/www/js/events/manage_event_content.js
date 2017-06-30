@@ -191,7 +191,7 @@
         $scope.addContent=function(content,create_content_form) {
             if (content.eventDetailId <= 0 || content.eventDetailId == undefined) {
                 $ionicScrollDelegate.resize()
-                EventsService.addContentDuringEvent(content.infoTitle, content.infoDesc, $scope.currEventId,$scope.infoTypeCategoryId,$scope.infoTypeId).then(function (response) {
+                EventsService.addContentDuringEvent(content.infoTitle, content.infoDesc,parseInt($scope.currEventId),$scope.infoTypeCategoryId,$scope.infoTypeId).then(function (response) {
                     if(response.data.eventDetailId) {
                         create_content_form.$submitted=false;
                         $scope.flaskUsDetails.push(response.data);
@@ -205,7 +205,7 @@
                 })
             }
             else if (content.eventDetailId > 0) {
-                EventsService.updateEventDetailDuringEvent(content.infoTitle, content.infoDesc, $scope.currEventId, content.eventDetailId,$scope.infoTypeCategoryId,$scope.infoTypeId).then(function (response) {
+                EventsService.updateEventDetailDuringEvent(content.infoTitle, content.infoDesc, parseInt($scope.currEventId), content.eventDetailId, $scope.infoTypeCategoryId, $scope.infoTypeId).then(function (response) {
                     $ionicScrollDelegate.resize()
                     if (response.data.eventDetailId > 0) {
                         create_content_form.$submitted=false;

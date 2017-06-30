@@ -105,27 +105,28 @@
         function addContentDuringEvent(infoTitle,infoDesc,eventId,infoTypeCategoryId,infoTypeId) {
             return $http.get(SERVER.url + addContentDuringGameUrl, {
                 params: {
-                    "eventId": eventId,
-                    "infoTypeId":infoTypeId ,
-                    "infoTypeCategoryId": infoTypeCategoryId,
-                    infoTitle: infoTitle,
-                    "infoShortDesc": '',
-                    "infoDesc": infoDesc,
-                    "addrLine1": '',
-                    "addrLine2": '',
-                    "zipCode": '',
-                    "city": '',
-                    "stateId":0 ,
-                    "countryId": 0,
-                    "latitude": '',
-                    "longitude": '',
-                    "phone": '',
-                    "mobileAppName": '',
-                    "website": '',
-                    "cost": 0,
-                    "hoursOfOperation": '',
-                    "showDescription": true
-
+                    eventId: eventId,
+                    infoTypeId : infoTypeId,
+                    infoTypeCategoryId : infoTypeCategoryId,
+                    infoTitle : infoTitle,
+                    infoShortDesc : '',
+                    infoDesc : infoDesc,
+                    addrLine1 : '',
+                    addrLine2 : '',
+                    zipCode : '',
+                    city : '',
+                    stateId : 0,
+                    countryId : 0,
+                    latitude : '',
+                    longitude : '',
+                    phone : '',
+                    mobileAppName : '',
+                    website : '',
+                    cost :0.0,
+                    hoursOfOperation : '',
+                    showDescription :true,
+                    premiumDisplayEnabled :false,
+                    eventSubDetails : ''
                 }
             })
                 .then(function success(resp) {
@@ -138,7 +139,8 @@
         }
         function updateEventDetailDuringEvent(infoTitle,infoDesc,eventId,eventDetailId,infoTypeCategoryId,infoTypeId) {
             return $http.get(SERVER.url + updateEventDuringGame, {
-                params: {eventDetailId: eventDetailId,
+                params: {
+                    eventDetailId: eventDetailId,
                     infoTypeId: infoTypeId,
                     infoTypeCategoryId: infoTypeCategoryId,
                     infoTitle: infoTitle,
@@ -155,9 +157,12 @@
                     phone: '',
                     mobileAppName: '',
                     website: '',
-                    cost: 0,
+                    cost: 0.0,
                     hoursOfOperation: '',
-                    showDescription: true}
+                    showDescription: true,
+                    premiumDisplayEnabled: false,
+                    eventSubDetails: ''
+                }
             })
                 .then(function success(resp) {
                     return resp;
