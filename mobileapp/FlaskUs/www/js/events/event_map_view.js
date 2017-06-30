@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER', '$ionicLoading', '$cordovaGeolocation'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER', '$ionicLoading', '$cordovaGeolocation', '$flaskUtil'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER, $ionicLoading, $cordovaGeolocation) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER, $ionicLoading, $cordovaGeolocation, $flaskUtil) {
         /* jshint validthis: true */
         var detailItem = {};
         $scope.zoomMin = 1;
@@ -783,6 +783,7 @@
                       }
                   }, function (err) {
                       // error
+                      $flaskUtil.alert("Unable to Get Location");
                   });
             } else {
                 $scope.closeOtherInfoWindows();
