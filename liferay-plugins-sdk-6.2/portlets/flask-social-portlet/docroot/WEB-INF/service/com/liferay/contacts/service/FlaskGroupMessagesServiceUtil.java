@@ -93,7 +93,7 @@ public class FlaskGroupMessagesServiceUtil {
 	}
 
 	public static boolean deleteMyGroupChatMessages(
-		java.util.List<java.lang.Long> groupMessageIds,
+		java.lang.Long[] groupMessageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .deleteMyGroupChatMessages(groupMessageIds, serviceContext);

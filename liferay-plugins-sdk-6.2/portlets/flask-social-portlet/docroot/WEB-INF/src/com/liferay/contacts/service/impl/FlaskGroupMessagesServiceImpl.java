@@ -15,6 +15,7 @@
 package com.liferay.contacts.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -170,11 +171,11 @@ public class FlaskGroupMessagesServiceImpl
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean deleteMyGroupChatMessages(List<Long> groupMessageIds, ServiceContext serviceContext){
+	public boolean deleteMyGroupChatMessages(Long[] groupMessageIds, ServiceContext serviceContext){
 		boolean done = false;
 		try {
 			DynamicQuery recipientQuery = DynamicQueryFactoryUtil.forClass(FlaskGroupRecipientsImpl.class);
-			Criterion criterion = RestrictionsFactoryUtil.in("groupMessageId", groupMessageIds);
+			Criterion criterion = RestrictionsFactoryUtil.in("groupMessageId", Arrays.asList(groupMessageIds));
 			recipientQuery.add(criterion);
 			recipientQuery.addOrder(OrderFactoryUtil.desc("receivedDateTime"));
 			List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupMessagesLocalServiceUtil.dynamicQuery(recipientQuery);

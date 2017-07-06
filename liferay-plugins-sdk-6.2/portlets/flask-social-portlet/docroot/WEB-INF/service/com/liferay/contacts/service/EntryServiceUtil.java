@@ -121,9 +121,7 @@ public class EntryServiceUtil {
 
 	public static com.liferay.portal.kernel.json.JSONArray searchMyFriends(
 		long companyId, java.lang.String keywords,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService().searchMyFriends(companyId, keywords, serviceContext);
 	}
 

@@ -95,8 +95,7 @@ public class FlaskGroupMessagesServiceWrapper
 	}
 
 	@Override
-	public boolean deleteMyGroupChatMessages(
-		java.util.List<java.lang.Long> groupMessageIds,
+	public boolean deleteMyGroupChatMessages(java.lang.Long[] groupMessageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _flaskGroupMessagesService.deleteMyGroupChatMessages(groupMessageIds,
 			serviceContext);

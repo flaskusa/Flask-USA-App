@@ -64,7 +64,8 @@ public class FlaskGroupMessagesServiceClp implements FlaskGroupMessagesService {
 		_methodName8 = "deleteMyGroupChatMessages";
 
 		_methodParameterTypes8 = new String[] {
-				"java.util.List", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Long[][]",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName9 = "deleteGroupMessage";
@@ -277,8 +278,7 @@ public class FlaskGroupMessagesServiceClp implements FlaskGroupMessagesService {
 	}
 
 	@Override
-	public boolean deleteMyGroupChatMessages(
-		java.util.List<java.lang.Long> groupMessageIds,
+	public boolean deleteMyGroupChatMessages(java.lang.Long[] groupMessageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 

@@ -91,7 +91,8 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 		_methodName12 = "deleteMyChatMessages";
 
 		_methodParameterTypes12 = new String[] {
-				"java.util.List", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Long[][]",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName13 = "registerWithSNS";
@@ -422,8 +423,7 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	}
 
 	@Override
-	public boolean deleteMyChatMessages(
-		java.util.List<java.lang.Long> messageIds,
+	public boolean deleteMyChatMessages(java.lang.Long[] messageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 

@@ -91,7 +91,8 @@ public class FlaskMessagesServiceClpInvoker {
 		_methodName77 = "deleteMyChatMessages";
 
 		_methodParameterTypes77 = new String[] {
-				"java.util.List", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Long[][]",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName78 = "registerWithSNS";
@@ -187,7 +188,7 @@ public class FlaskMessagesServiceClpInvoker {
 
 		if (_methodName77.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
-			return FlaskMessagesServiceUtil.deleteMyChatMessages((java.util.List<java.lang.Long>)arguments[0],
+			return FlaskMessagesServiceUtil.deleteMyChatMessages((java.lang.Long[])arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 

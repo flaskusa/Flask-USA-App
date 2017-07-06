@@ -102,8 +102,7 @@ public interface FlaskMessagesService extends BaseService, InvokableService {
 		java.util.Date endDate,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
-	public boolean deleteMyChatMessages(
-		java.util.List<java.lang.Long> messageIds,
+	public boolean deleteMyChatMessages(java.lang.Long[] messageIds,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public boolean registerWithSNS(long userId, java.lang.String userEmail,

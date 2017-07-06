@@ -64,7 +64,8 @@ public class FlaskGroupMessagesServiceClpInvoker {
 		_methodName73 = "deleteMyGroupChatMessages";
 
 		_methodParameterTypes73 = new String[] {
-				"java.util.List", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Long[][]",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName74 = "deleteGroupMessage";
@@ -128,7 +129,7 @@ public class FlaskGroupMessagesServiceClpInvoker {
 
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
-			return FlaskGroupMessagesServiceUtil.deleteMyGroupChatMessages((java.util.List<java.lang.Long>)arguments[0],
+			return FlaskGroupMessagesServiceUtil.deleteMyGroupChatMessages((java.lang.Long[])arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 

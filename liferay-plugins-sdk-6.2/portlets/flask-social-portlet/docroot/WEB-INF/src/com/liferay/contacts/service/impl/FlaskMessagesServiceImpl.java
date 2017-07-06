@@ -276,11 +276,11 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public boolean deleteMyChatMessages(List<Long> messageIds, ServiceContext serviceContext){
+	public boolean deleteMyChatMessages(Long[] messageIds, ServiceContext serviceContext){
 		boolean done = false;
 		try {
 			DynamicQuery recipientQuery = DynamicQueryFactoryUtil.forClass(FlaskRecipientsImpl.class);
-			Criterion criterion = RestrictionsFactoryUtil.in("messageId", messageIds);
+			Criterion criterion = RestrictionsFactoryUtil.in("messageId", Arrays.asList(messageIds));
 			recipientQuery.add(criterion);
 			recipientQuery.addOrder(OrderFactoryUtil.desc("receivedDateTime"));
 			List<FlaskRecipients> flaskRecipients = FlaskRecipientsLocalServiceUtil.dynamicQuery(recipientQuery);

@@ -124,8 +124,7 @@ public class FlaskMessagesServiceWrapper implements FlaskMessagesService,
 	}
 
 	@Override
-	public boolean deleteMyChatMessages(
-		java.util.List<java.lang.Long> messageIds,
+	public boolean deleteMyChatMessages(java.lang.Long[] messageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _flaskMessagesService.deleteMyChatMessages(messageIds,
 			serviceContext);

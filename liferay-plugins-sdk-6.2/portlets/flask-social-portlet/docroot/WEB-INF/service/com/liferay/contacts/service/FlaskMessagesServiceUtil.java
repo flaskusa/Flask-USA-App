@@ -117,8 +117,7 @@ public class FlaskMessagesServiceUtil {
 			.deleteMessagesByDateRange(startDate, endDate, serviceContext);
 	}
 
-	public static boolean deleteMyChatMessages(
-		java.util.List<java.lang.Long> messageIds,
+	public static boolean deleteMyChatMessages(java.lang.Long[] messageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService().deleteMyChatMessages(messageIds, serviceContext);
 	}

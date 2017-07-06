@@ -158,70 +158,73 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 	}
 	
 	
-	public JSONArray searchMyFriends(long companyId, String keywords, ServiceContext serviceContext)
-			  throws PortalException, SystemException{
-			  JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-			  JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
-			  boolean flag = false;
-			  long userId = getUserId();
-			  int cnt1 = entryLocalService.searchUsersAndContactsCount(companyId, userId, keywords);
-				List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
-					companyId, userId, keywords, 0, cnt1);
-			  int cnt = SocialRelationLocalServiceUtil.getRelationsCount(userId, SocialRelationConstants.TYPE_BI_CONNECTION);
-			  List<SocialRelation> relation = SocialRelationLocalServiceUtil.getRelations(userId, SocialRelationConstants.TYPE_BI_CONNECTION, 0, cnt);
-			  for(SocialRelation relObj: relation){
-				  List<FlaskRecipients> flaskRecipients = new ArrayList<FlaskRecipients>();
-				  int count = 0;
-				  String dateTime ="";
-				  if(keywords != ""){
-					  for (BaseModel<?> contact : contacts) {
-						  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), ((User) contact).getUserId());
-						  if(relObj.getUserId2() == ((User) contact).getContact().getUserId()){
-								if (contact instanceof User) {
-									jsonObject = ContactsUtil.getUserJSONObject(
-										userId, (User)contact);
-									jsonObject.put("portraitId", ((User) contact).getPortraitId());
-								}
-								else {
-									jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
-									jsonObject.put("portraitId", ((User) contact).getPortraitId());
-								}
+	public JSONArray searchMyFriends(long companyId, String keywords, ServiceContext serviceContext){
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+		boolean flag = false;
+		try {
+			long userId = getUserId();
+			int cnt1 = entryLocalService.searchUsersAndContactsCount(companyId, userId, keywords);
+			List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
+				companyId, userId, keywords, 0, cnt1);
+		  int cnt = SocialRelationLocalServiceUtil.getRelationsCount(userId, SocialRelationConstants.TYPE_BI_CONNECTION);
+		  List<SocialRelation> relation = SocialRelationLocalServiceUtil.getRelations(userId, SocialRelationConstants.TYPE_BI_CONNECTION, 0, cnt);
+		  for(SocialRelation relObj: relation){
+			  List<FlaskRecipients> flaskRecipients = new ArrayList<FlaskRecipients>();
+			  int count = 0;
+			  String dateTime ="";
+			  if(keywords != ""){
+				  for (BaseModel<?> contact : contacts) {
+					  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), ((User) contact).getUserId());
+					  if(relObj.getUserId2() == ((User) contact).getContact().getUserId()){
+							if (contact instanceof User) {
+								jsonObject = ContactsUtil.getUserJSONObject(
+									userId, (User)contact);
+								jsonObject.put("portraitId", ((User) contact).getPortraitId());
 							}
-					  }
-				  }else{
-					  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), getUserById(relObj.getUserId2(), serviceContext).getUserId());
-					  for(FlaskRecipients recp: flaskRecipients){
-							if(!recp.getRead()){
-								count++;
+							else {
+								jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
+								jsonObject.put("portraitId", ((User) contact).getPortraitId());
 							}
 						}
-					  if(flaskRecipients.isEmpty()){
-						  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(getUserById(relObj.getUserId2(), serviceContext).getUserId(), serviceContext.getUserId());  
+				  }
+			  }else{
+				  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), getUserById(relObj.getUserId2(), serviceContext).getUserId());
+				  for(FlaskRecipients recp: flaskRecipients){
+						if(!recp.getRead()){
+							count++;
+						}
+					}
+				  if(flaskRecipients.isEmpty()){
+					  flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(getUserById(relObj.getUserId2(), serviceContext).getUserId(), serviceContext.getUserId());  
+				  }
+				  if(!flaskRecipients.isEmpty()){
+					  JSONArray messages = FlaskMessagesServiceUtil.getAllMyFlaskMessages(getUserById(relObj.getUserId2(), serviceContext).getUserId(), serviceContext);						  
+					  for(int n = 0; n < 1; n++)
+					  {
+						  flag = false;
+					      JSONObject object = messages.getJSONObject(n);
+					      dateTime = object.getString("dateTime"); 
 					  }
-					  if(!flaskRecipients.isEmpty()){
-						  JSONArray messages = FlaskMessagesServiceUtil.getAllMyFlaskMessages(getUserById(relObj.getUserId2(), serviceContext).getUserId(), serviceContext);						  
-						  for(int n = 0; n < 1; n++)
-						  {
-							  flag = false;
-						      JSONObject object = messages.getJSONObject(n);
-						      dateTime = object.getString("dateTime"); 
-						  }
-					  	  }else {
-					  		  flag = true;
-					  	  }
-					  User user2 = getUserById(relObj.getUserId2(), serviceContext);
-					   jsonObject = ContactsUtil.getUserJSONObject( userId, user2);
-					   jsonObject.put("portraitId", getUserById(relObj.getUserId2(), serviceContext).getPortraitId());
-				  }
-				  if(flag){
-					  jsonObject.put("lastMessageDateTime", "0000-00-00 00:00:00:0");
-				  }else{
-					  jsonObject.put("lastMessageDateTime", dateTime);
-				  }
-				   jsonObject.put("unreadMessageCount", count);
-				   jsonArray.put(jsonObject);
+				  	  }else {
+				  		  flag = true;
+				  	  }
+				  User user2 = getUserById(relObj.getUserId2(), serviceContext);
+				   jsonObject = ContactsUtil.getUserJSONObject( userId, user2);
+				   jsonObject.put("portraitId", getUserById(relObj.getUserId2(), serviceContext).getPortraitId());
 			  }
-			  return jsonArray;
+			  if(flag){
+				  jsonObject.put("lastMessageDateTime", "0000-00-00 00:00:00:0");
+			  }else{
+				  jsonObject.put("lastMessageDateTime", dateTime);
+			  }
+			   jsonObject.put("unreadMessageCount", count);
+			   jsonArray.put(jsonObject);
+		  }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return jsonArray;
 	}
 	
 	@Override
