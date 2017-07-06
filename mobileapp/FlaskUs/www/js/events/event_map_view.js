@@ -102,6 +102,7 @@
         $scope.isHotelGoogleMarkerShown = false;
         $scope.currentMap;
         $scope.toggleQueDiv = true;
+        getGeoLocation();
         $scope.toggleMsgDiv = function () {
             $scope.hideDiv = false;
             if ($scope.toggleQueDiv == false) {
@@ -760,35 +761,38 @@
         $scope.centerOnMe = function () {
             $scope.isUserMarkerShown = !$scope.isUserMarkerShown;
             if ($scope.isUserMarkerShown) {
-                var posOptions = { timeout: 10000, enableHighAccuracy: false };
-                $cordovaGeolocation
-                  .getCurrentPosition(posOptions)
-                  .then(function (pos) {
-                      var lat = pos.coords.latitude;
-                      var long = pos.coords.longitude;
-                      $scope.map = {
-                          center: {
-                              latitude: pos.coords.latitude,
-                              longitude: pos.coords.longitude
-                          },
-                          zoom: 14
-                      }
-                      $scope.marker = {
-                          id: 10,
-                          coords: {
-                              latitude: pos.coords.latitude,
-                              longitude: pos.coords.longitude
-                          },
-                          options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
-                      }
-                  }, function (err) {
-                      // error
-                      $flaskUtil.alert("Unable to Get Location");
-                  });
+                $scope.map = {
+                    center: {
+                        latitude: $scope.lat,
+                        longitude: $scope.long
+                    },
+                    zoom: 14
+                }
+                $scope.marker = {
+                    id: 10,
+                    coords: {
+                        latitude: $scope.lat,
+                        longitude: $scope.long
+                    },
+                    options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
+                }
             } else {
                 $scope.closeOtherInfoWindows();
                 $scope.marker = {};
+                $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 14, control: {} };
             }
+        }
+        function getGeoLocation() {
+            var posOptions = { timeout: 10000, enableHighAccuracy: false };
+            $cordovaGeolocation
+              .getCurrentPosition(posOptions)
+              .then(function (pos) {
+                  $scope.lat = pos.coords.latitude;
+                  $scope.long = pos.coords.longitude;
+              }, function (err) {
+                  // error
+                 // $flaskUtil.alert("Unable to Get Location");
+              });
         }
         //popup for parking map cost range
         template = '<ion-popover-view class="popover">' +

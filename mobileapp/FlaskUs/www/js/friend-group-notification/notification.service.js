@@ -22,7 +22,9 @@
             getAllGroups: getAllGroups,
             getMyFriends: getMyFriends,
             getAllMyFlaskGroupMessages: getAllMyFlaskGroupMessages,
-            sendFlaskGroupMessage: sendFlaskGroupMessage
+            sendFlaskGroupMessage: sendFlaskGroupMessage,
+            deleteIndividualConverstaion: deleteIndividualConverstaion,
+            deleteGroupConverstaion: deleteGroupConverstaion
         }
         var getMyNotificationCountUrl = "/flask-social-portlet.entry/get-requests-count";
         var getTotalUnreadChatCountUrl = "/flask-social-portlet.flaskmessages/get-total-unread-chat-count";
@@ -40,6 +42,8 @@
         var getAllGroupsURL = "/flask-manage-user-group-portlet.flaskgroup/get-all-my-groups";
         var getAllMyFlaskGroupMessagesUrl = "/flask-social-portlet.flaskgroupmessages/get-all-my-flask-group-messages";
         var sendFlaskGroupMessageUrl = "/flask-social-portlet.flaskgroupmessages/send-flask-group-message";
+        var deleteIndividualConversationUrl = "/flask-social-portlet.flaskmessages/delete-my-chat-messages";
+        var deleteGroupConversationUrl = "/flask-social-portlet.flaskgroupmessages/delete-my-group-chat-messages";
         var companyId = SERVER.companyId;
 
         function getMyFriends(searchText) {
@@ -66,6 +70,7 @@
                     //add errror handling
                 });
         }
+
         //get total unread chat count
         function getTotalUnreadChatCount() {
             return $http.get(SERVER.url + getTotalUnreadChatCountUrl)
@@ -116,6 +121,35 @@
                     //add errror handling
                 });
         }
+
+        function deleteIndividualConverstaion(msgIds) {
+            return $http.get(SERVER.url + deleteIndividualConversationUrl, {
+                params: {
+                    messageIds: msgIds
+                }
+            })
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling
+            });
+        }
+
+        function deleteGroupConverstaion(msgIds) {
+            return $http.get(SERVER.url + deleteGroupConversationUrl, {
+                params: {
+                    groupMessageIds: msgIds
+                }
+            })
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling
+            });
+        }
+
         function getRequestToConfirm() {
             return $http.get(SERVER.url + getRequestUrl, {
                 params: {

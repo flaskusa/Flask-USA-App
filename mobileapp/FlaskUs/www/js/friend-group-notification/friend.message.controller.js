@@ -227,7 +227,7 @@
 
         //get all friends
         function getAllFriends() {
-            $scope.searchText = "";
+            $scope.searchText = " ";
             FriendsNotificationService.getMyFriends($scope.searchText).then(function (response) {
                 angular.forEach(response, function (value, key) {
                     if (value.portraitId > 0) {
@@ -295,8 +295,43 @@
                 }, 300);  
             }
         }
+        //to delete the conversation
+        $scope.deleteConversation = function (receipientuserId,conversationType) {
+            $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
+            var deleteConversationMessages = '';
+            var newArray = [];
+            if (conversationType == "user") {
+                FriendsNotificationService.getMyAllMessages(receipientuserId).then(function (response) {
+                    angular.forEach(response, function (index, element) {
+                        newArray.push(index.messageId);
+                        deleteConversationMessages = newArray.join();
+                    });
+                    FriendsNotificationService.deleteIndividualConverstaion(deleteConversationMessages).then(function (response) {
+                        console.log("Deleted");
+                        $scope.allFriends.length = 0;
+                        getAllFriends();
+                    });
+                    $ionicLoading.hide();
+                });
+
+            } else {
+                FriendsNotificationService.getAllMyFlaskGroupMessages(receipientuserId.groupId).then(function (response) {
+                    angular.forEach(response, function (index, element) {
+                        newArray.push(index.messageId);
+                        deleteConversationMessages = newArray.join();
+                    });
+                    FriendsNotificationService.deleteGroupConverstaion(deleteConversationMessages).then(function (response) {
+                        console.log("Deleted");
+                        $scope.groups.length = 0;
+                        getAllGroups();
+                    });
+                    $ionicLoading.hide();
+                });
+            }
+        }
         //show chat window of friend
         $scope.showChatWindowPopup = function (data, type) {
+            $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
             $scope.myMessages = [];
             if (type == 'user') {
                 $scope.isUser = true;
@@ -304,6 +339,7 @@
                 $scope.friendName = data.fullName;
                 $scope.profilePic = data.friendProfilePicUrl;
                 //get messages by receiverId on click of friend
+                $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
                 FriendsNotificationService.getMyAllMessages(data.userId).then(function (response) {
                     $scope.myMessages = response;
                     for (var i = 0; i < $scope.myMessages.length; i++) {
@@ -315,12 +351,14 @@
                     }
                     $scope.getMessagesTime();
                     $ionicScrollDelegate.scrollBottom();
+                    $ionicLoading.hide();
                 });
             }
             else {
                 $scope.isUser = false;
                 $scope.friendName = data.groupName;
                 $scope.groupId = data.groupId;
+                $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
                 FriendsNotificationService.getAllMyFlaskGroupMessages(data.groupId).then(function (response) {
                     $scope.myMessages = response;
                     if ($scope.myMessages.length >0) {
@@ -331,12 +369,14 @@
                         }
                         $scope.getMessagesTime();
                         $ionicScrollDelegate.scrollBottom();
+                        $ionicLoading.hide();
                     }
                 });
             }
             $scope.modal.show();
             $timeout(function () {
                 $ionicScrollDelegate.scrollBottom();
+                $ionicLoading.hide();
             }, 200);
         }
         $scope.closeChatWindowPopup = function () {

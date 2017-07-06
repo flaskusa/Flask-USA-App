@@ -6,12 +6,12 @@
     </ion-nav-bar>
     <ion-tabs class="tabs-positive tab_bottom">
         <ion-tab title="My friends" id="myFriendsTab">
-            <ion-content class="friendlistInMessages">
+            <ion-content class="friendlistInMessages no-Header">
                 <ion-list id="myFriendsList">
-                    <ion-item ng-repeat="data in allFriends" class="item-remove-animate" padding="false" ng-click="showChatWindowPopup(data,'user')" style="height: 74px;" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
+                    <ion-item ng-repeat="data in allFriends" class="row-no-padding item-remove-animate" padding="false" ng-click="showChatWindowPopup(data,'user')" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
                         <a class="row-no-padding" style="text-decoration: none">
                             <!--href="#/app/my_friendDetail/{{data.userId}}"-->
-                            <div class=" col col-20" ng-if="data.friendProfilePicUrl==undefined">
+                            <div class="col col-20" ng-if="data.friendProfilePicUrl==undefined">
                                 <img src="img/default-profilepic-copy.png" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
                             </div>
                             <div class="col col-20" ng-if="data.friendProfilePicUrl!=undefined">
@@ -22,15 +22,15 @@
                             </div>
                             <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="readMsg != true">{{data.unreadMessageCount}}</span>
                             <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="readMsg == true">0</span>
-                            <span class="badge span_icon span_icon_extraright" style="top:24px"><img src="img/flask_icons/arrow_left.svg" class="arrowIconAlign"></span>
+                            <span class="badge span_icon ext-top span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
                         </a>
+                        <ion-option-button class="icon ion-trash-a" ng-click="deleteConversation(data.userId,'user')"></ion-option-button>
                     </ion-item>
-                    <a class="item" ng-if="myFriends.length == 0 && shoeEmptyMessage==true">There are no friends. </a>
                 </ion-list>
             </ion-content>
         </ion-tab>
         <ion-tab title="My groups">
-            <ion-content class="friendlistInMessages">
+            <ion-content class="friendlistInMessages no-Header">
                 <ion-list>
                     <ion-item class="item-remove-animate" ng-repeat="group in groups | filter: groupList.searchString" padding="false" style="height: 74px;" ng-init="group.showDivByIndex=false" ng-click="showChatWindowPopup(group,'group')">
                         <div ng-if="group.showDivByIndex==true" style="padding-top: 10px">
@@ -49,6 +49,7 @@
                                 <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="readMsg == true">0</span>
                                 <span class="badge span_icon span_icon_extraright" style="top:24px"><img src="img/flask_icons/arrow_left.svg" class="arrowIconAlign"></span>
                             </a>
+                            <ion-option-button class="icon ion-trash-a" ng-click="deleteConversation(group,'group')"></ion-option-button>
                         </div>
                     </ion-item>
                     <a class="item" ng-if="groups.length == 0 && shoeEmptyMessage==true">There are no groups. </a>

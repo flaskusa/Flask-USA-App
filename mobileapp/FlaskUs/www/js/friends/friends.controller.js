@@ -14,7 +14,7 @@
       $scope.noFriendAdded = false;
       $scope.shoeEmptyMessage=false;
       $scope.searchBox = {show:false};
-      $scope.searchContact = {"searchtext" :""};
+      $scope.searchContact = {"searchtext" :" "};
       $scope.messsage = {'messsageToSend':''};
         $scope.moreDataCanBeLoaded = true;
         if($localStorage["myFriendDetail"]==undefined) {
