@@ -188,18 +188,5 @@ public class FlaskGroupMessagesServiceSoap {
 		}
 	}
 
-	public static boolean addGrpMsginfoInAll() throws RemoteException {
-		try {
-			boolean returnValue = FlaskGroupMessagesServiceUtil.addGrpMsginfoInAll();
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	private static Log _log = LogFactoryUtil.getLog(FlaskGroupMessagesServiceSoap.class);
 }

@@ -191,6 +191,7 @@ public class FlaskGroupMessagesServiceImpl
 					FlaskGroupRecipientsLocalServiceUtil.updateFlaskGroupRecipients(recp);
 				}
 			}
+			done = true;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -231,33 +232,5 @@ public class FlaskGroupMessagesServiceImpl
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	@Override
-	public boolean addGrpMsginfoInAll(){
-		boolean done = false;
-		try {
-			List<FlaskGroupRecipients> recipients = FlaskGroupRecipientsLocalServiceUtil.getFlaskGroupRecipientses(0, FlaskGroupRecipientsLocalServiceUtil.getFlaskGroupRecipientsesCount());
-			for(FlaskGroupRecipients recp: recipients){
-				String[] rec = recp.getRecipients().split(",");
-				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
-				for(int i=0; i<rec.length; i++){
-					JSONObject obj = JSONFactoryUtil.createJSONObject();
-					if(("0").equals(recp.getRead().split(",")[i]))
-						obj.put("read", false);
-					else
-						obj.put("read", true);
-					obj.put("deleted", false);
-					jsonObj.put(rec[i], obj);
-				}
-				
-				recp.setMessageStatusInfo(jsonObj.toString());
-				FlaskGroupRecipientsLocalServiceUtil.updateFlaskGroupRecipients(recp);
-			}
-			done = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return done;
 	}
 }

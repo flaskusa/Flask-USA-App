@@ -111,10 +111,6 @@ public class FlaskGroupMessagesServiceUtil {
 			.deleteGroupMessagesByDateRange(startDate, endDate, serviceContext);
 	}
 
-	public static boolean addGrpMsginfoInAll() {
-		return getService().addGrpMsginfoInAll();
-	}
-
 	public static void clearService() {
 		_service = null;
 	}

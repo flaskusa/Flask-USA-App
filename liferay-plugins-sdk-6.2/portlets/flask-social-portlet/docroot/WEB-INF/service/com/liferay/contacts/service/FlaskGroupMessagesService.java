@@ -95,6 +95,4 @@ public interface FlaskGroupMessagesService extends BaseService, InvokableService
 	public void deleteGroupMessagesByDateRange(java.util.Date startDate,
 		java.util.Date endDate,
 		com.liferay.portal.service.ServiceContext serviceContext);
-
-	public boolean addGrpMsginfoInAll();
 }

@@ -117,11 +117,6 @@ public class FlaskGroupMessagesServiceWrapper
 			endDate, serviceContext);
 	}
 
-	@Override
-	public boolean addGrpMsginfoInAll() {
-		return _flaskGroupMessagesService.addGrpMsginfoInAll();
-	}
-
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

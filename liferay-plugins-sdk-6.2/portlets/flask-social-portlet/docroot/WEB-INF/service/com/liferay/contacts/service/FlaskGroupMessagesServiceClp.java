@@ -79,10 +79,6 @@ public class FlaskGroupMessagesServiceClp implements FlaskGroupMessagesService {
 				"java.util.Date", "java.util.Date",
 				"com.liferay.portal.service.ServiceContext"
 			};
-
-		_methodName11 = "addGrpMsginfoInAll";
-
-		_methodParameterTypes11 = new String[] {  };
 	}
 
 	@Override
@@ -363,29 +359,6 @@ public class FlaskGroupMessagesServiceClp implements FlaskGroupMessagesService {
 		}
 	}
 
-	@Override
-	public boolean addGrpMsginfoInAll() {
-		Object returnObj = null;
-
-		try {
-			returnObj = _invokableService.invokeMethod(_methodName11,
-					_methodParameterTypes11, new Object[] {  });
-		}
-		catch (Throwable t) {
-			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof RuntimeException) {
-				throw (RuntimeException)t;
-			}
-			else {
-				throw new RuntimeException(t.getClass().getName() +
-					" is not a valid exception");
-			}
-		}
-
-		return ((Boolean)returnObj).booleanValue();
-	}
-
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -407,6 +380,4 @@ public class FlaskGroupMessagesServiceClp implements FlaskGroupMessagesService {
 	private String[] _methodParameterTypes9;
 	private String _methodName10;
 	private String[] _methodParameterTypes10;
-	private String _methodName11;
-	private String[] _methodParameterTypes11;
 }

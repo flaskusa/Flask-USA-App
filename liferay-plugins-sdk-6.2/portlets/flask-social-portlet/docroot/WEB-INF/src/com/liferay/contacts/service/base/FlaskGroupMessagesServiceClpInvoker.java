@@ -79,10 +79,6 @@ public class FlaskGroupMessagesServiceClpInvoker {
 				"java.util.Date", "java.util.Date",
 				"com.liferay.portal.service.ServiceContext"
 			};
-
-		_methodName76 = "addGrpMsginfoInAll";
-
-		_methodParameterTypes76 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -153,11 +149,6 @@ public class FlaskGroupMessagesServiceClpInvoker {
 			return null;
 		}
 
-		if (_methodName76.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
-			return FlaskGroupMessagesServiceUtil.addGrpMsginfoInAll();
-		}
-
 		throw new UnsupportedOperationException();
 	}
 
@@ -181,6 +172,4 @@ public class FlaskGroupMessagesServiceClpInvoker {
 	private String[] _methodParameterTypes74;
 	private String _methodName75;
 	private String[] _methodParameterTypes75;
-	private String _methodName76;
-	private String[] _methodParameterTypes76;
 }
