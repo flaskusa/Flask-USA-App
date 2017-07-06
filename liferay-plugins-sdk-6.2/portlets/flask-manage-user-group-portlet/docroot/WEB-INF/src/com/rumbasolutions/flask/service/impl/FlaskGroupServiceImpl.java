@@ -136,7 +136,9 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 		try {
 			List<FlaskGroupUsers> grpUsers = FlaskGroupUsersUtil.findByUserId(userId);
 			for(FlaskGroupUsers grpUser: grpUsers){
-				myGroupList.add(FlaskGroupServiceUtil.getGroup(grpUser.getGroupId()));
+				FlaskGroup group = FlaskGroupServiceUtil.getGroup(grpUser.getGroupId());
+				if(group != null)
+					myGroupList.add(group);
 			}
 		} catch (SystemException e) {
 			LOGGER.error("Exception in getGroups:"+e.getMessage());
