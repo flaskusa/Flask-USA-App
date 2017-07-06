@@ -78,6 +78,9 @@
 		</field>
 		<field name="receivedDateTime" type="Date" />
 		<field name="senderId" type="long" />
+		<field name="messageStatusInfo" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
 	</model>
 	<model name="com.liferay.contacts.model.FlaskMessages">
 		<field name="messageId" type="long" />
@@ -99,6 +102,7 @@
 		<field name="read" type="boolean" />
 		<field name="receivedDateTime" type="Date" />
 		<field name="senderId" type="long" />
+		<field name="deletedBy" type="String" />
 	</model>
 	<model name="com.liferay.contacts.model.FlaskUserDeviceRegistration">
 		<field name="userDeviceRegistrationId" type="long" />

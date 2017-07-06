@@ -38,7 +38,7 @@ public class FlaskGroupRecipientsCacheModel implements CacheModel<FlaskGroupReci
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{groupRecipientId=");
 		sb.append(groupRecipientId);
@@ -54,6 +54,8 @@ public class FlaskGroupRecipientsCacheModel implements CacheModel<FlaskGroupReci
 		sb.append(receivedDateTime);
 		sb.append(", senderId=");
 		sb.append(senderId);
+		sb.append(", messageStatusInfo=");
+		sb.append(messageStatusInfo);
 		sb.append("}");
 
 		return sb.toString();
@@ -92,6 +94,13 @@ public class FlaskGroupRecipientsCacheModel implements CacheModel<FlaskGroupReci
 
 		flaskGroupRecipientsImpl.setSenderId(senderId);
 
+		if (messageStatusInfo == null) {
+			flaskGroupRecipientsImpl.setMessageStatusInfo(StringPool.BLANK);
+		}
+		else {
+			flaskGroupRecipientsImpl.setMessageStatusInfo(messageStatusInfo);
+		}
+
 		flaskGroupRecipientsImpl.resetOriginalValues();
 
 		return flaskGroupRecipientsImpl;
@@ -106,6 +115,7 @@ public class FlaskGroupRecipientsCacheModel implements CacheModel<FlaskGroupReci
 		read = objectInput.readUTF();
 		receivedDateTime = objectInput.readLong();
 		senderId = objectInput.readLong();
+		messageStatusInfo = objectInput.readUTF();
 	}
 
 	@Override
@@ -132,6 +142,13 @@ public class FlaskGroupRecipientsCacheModel implements CacheModel<FlaskGroupReci
 
 		objectOutput.writeLong(receivedDateTime);
 		objectOutput.writeLong(senderId);
+
+		if (messageStatusInfo == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(messageStatusInfo);
+		}
 	}
 
 	public long groupRecipientId;
@@ -141,4 +158,5 @@ public class FlaskGroupRecipientsCacheModel implements CacheModel<FlaskGroupReci
 	public String read;
 	public long receivedDateTime;
 	public long senderId;
+	public String messageStatusInfo;
 }

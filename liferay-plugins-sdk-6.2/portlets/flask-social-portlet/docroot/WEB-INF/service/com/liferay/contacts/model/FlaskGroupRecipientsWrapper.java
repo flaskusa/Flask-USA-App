@@ -58,6 +58,7 @@ public class FlaskGroupRecipientsWrapper implements FlaskGroupRecipients,
 		attributes.put("read", getRead());
 		attributes.put("receivedDateTime", getReceivedDateTime());
 		attributes.put("senderId", getSenderId());
+		attributes.put("messageStatusInfo", getMessageStatusInfo());
 
 		return attributes;
 	}
@@ -104,6 +105,12 @@ public class FlaskGroupRecipientsWrapper implements FlaskGroupRecipients,
 
 		if (senderId != null) {
 			setSenderId(senderId);
+		}
+
+		String messageStatusInfo = (String)attributes.get("messageStatusInfo");
+
+		if (messageStatusInfo != null) {
+			setMessageStatusInfo(messageStatusInfo);
 		}
 	}
 
@@ -265,6 +272,26 @@ public class FlaskGroupRecipientsWrapper implements FlaskGroupRecipients,
 	@Override
 	public void setSenderId(long senderId) {
 		_flaskGroupRecipients.setSenderId(senderId);
+	}
+
+	/**
+	* Returns the message status info of this flask group recipients.
+	*
+	* @return the message status info of this flask group recipients
+	*/
+	@Override
+	public java.lang.String getMessageStatusInfo() {
+		return _flaskGroupRecipients.getMessageStatusInfo();
+	}
+
+	/**
+	* Sets the message status info of this flask group recipients.
+	*
+	* @param messageStatusInfo the message status info of this flask group recipients
+	*/
+	@Override
+	public void setMessageStatusInfo(java.lang.String messageStatusInfo) {
+		_flaskGroupRecipients.setMessageStatusInfo(messageStatusInfo);
 	}
 
 	@Override

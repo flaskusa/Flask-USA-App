@@ -18,6 +18,7 @@ import com.liferay.contacts.service.FlaskMessagesServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import java.rmi.RemoteException;
 
@@ -196,6 +197,22 @@ public class FlaskMessagesServiceSoap {
 		try {
 			FlaskMessagesServiceUtil.deleteMessagesByDateRange(startDate,
 				endDate, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean deleteMyChatMessages(Long[] messageIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			boolean returnValue = FlaskMessagesServiceUtil.deleteMyChatMessages(ListUtil.toList(
+						messageIds), serviceContext);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

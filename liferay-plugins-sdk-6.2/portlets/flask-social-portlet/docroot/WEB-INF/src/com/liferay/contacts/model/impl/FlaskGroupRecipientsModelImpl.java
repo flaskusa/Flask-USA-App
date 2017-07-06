@@ -71,9 +71,10 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 			{ "groupMessageId", Types.BIGINT },
 			{ "read_", Types.VARCHAR },
 			{ "receivedDateTime", Types.TIMESTAMP },
-			{ "senderId", Types.BIGINT }
+			{ "senderId", Types.BIGINT },
+			{ "messageStatusInfo", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskGroupRecipients (groupRecipientId LONG not null primary key,groupId LONG,recipients TEXT null,groupMessageId LONG,read_ TEXT null,receivedDateTime DATE null,senderId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskGroupRecipients (groupRecipientId LONG not null primary key,groupId LONG,recipients TEXT null,groupMessageId LONG,read_ TEXT null,receivedDateTime DATE null,senderId LONG,messageStatusInfo STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table Contacts_FlaskGroupRecipients";
 	public static final String ORDER_BY_JPQL = " ORDER BY flaskGroupRecipients.receivedDateTime ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Contacts_FlaskGroupRecipients.receivedDateTime ASC";
@@ -114,6 +115,7 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 		model.setRead(soapModel.getRead());
 		model.setReceivedDateTime(soapModel.getReceivedDateTime());
 		model.setSenderId(soapModel.getSenderId());
+		model.setMessageStatusInfo(soapModel.getMessageStatusInfo());
 
 		return model;
 	}
@@ -186,6 +188,7 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 		attributes.put("read", getRead());
 		attributes.put("receivedDateTime", getReceivedDateTime());
 		attributes.put("senderId", getSenderId());
+		attributes.put("messageStatusInfo", getMessageStatusInfo());
 
 		return attributes;
 	}
@@ -232,6 +235,12 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 
 		if (senderId != null) {
 			setSenderId(senderId);
+		}
+
+		String messageStatusInfo = (String)attributes.get("messageStatusInfo");
+
+		if (messageStatusInfo != null) {
+			setMessageStatusInfo(messageStatusInfo);
 		}
 	}
 
@@ -348,6 +357,22 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 		_senderId = senderId;
 	}
 
+	@JSON
+	@Override
+	public String getMessageStatusInfo() {
+		if (_messageStatusInfo == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _messageStatusInfo;
+		}
+	}
+
+	@Override
+	public void setMessageStatusInfo(String messageStatusInfo) {
+		_messageStatusInfo = messageStatusInfo;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -386,6 +411,7 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 		flaskGroupRecipientsImpl.setRead(getRead());
 		flaskGroupRecipientsImpl.setReceivedDateTime(getReceivedDateTime());
 		flaskGroupRecipientsImpl.setSenderId(getSenderId());
+		flaskGroupRecipientsImpl.setMessageStatusInfo(getMessageStatusInfo());
 
 		flaskGroupRecipientsImpl.resetOriginalValues();
 
@@ -485,12 +511,20 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 
 		flaskGroupRecipientsCacheModel.senderId = getSenderId();
 
+		flaskGroupRecipientsCacheModel.messageStatusInfo = getMessageStatusInfo();
+
+		String messageStatusInfo = flaskGroupRecipientsCacheModel.messageStatusInfo;
+
+		if ((messageStatusInfo != null) && (messageStatusInfo.length() == 0)) {
+			flaskGroupRecipientsCacheModel.messageStatusInfo = null;
+		}
+
 		return flaskGroupRecipientsCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{groupRecipientId=");
 		sb.append(getGroupRecipientId());
@@ -506,6 +540,8 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 		sb.append(getReceivedDateTime());
 		sb.append(", senderId=");
 		sb.append(getSenderId());
+		sb.append(", messageStatusInfo=");
+		sb.append(getMessageStatusInfo());
 		sb.append("}");
 
 		return sb.toString();
@@ -513,7 +549,7 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.contacts.model.FlaskGroupRecipients");
@@ -547,6 +583,10 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 			"<column><column-name>senderId</column-name><column-value><![CDATA[");
 		sb.append(getSenderId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>messageStatusInfo</column-name><column-value><![CDATA[");
+		sb.append(getMessageStatusInfo());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -568,6 +608,7 @@ public class FlaskGroupRecipientsModelImpl extends BaseModelImpl<FlaskGroupRecip
 	private String _read;
 	private Date _receivedDateTime;
 	private long _senderId;
+	private String _messageStatusInfo;
 	private long _columnBitmask;
 	private FlaskGroupRecipients _escapedModel;
 }

@@ -88,18 +88,24 @@ public class FlaskMessagesServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName77 = "registerWithSNS";
+		_methodName77 = "deleteMyChatMessages";
 
 		_methodParameterTypes77 = new String[] {
+				"java.util.List", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName78 = "registerWithSNS";
+
+		_methodParameterTypes78 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.util.Date",
 				"java.lang.Boolean", "java.util.Date", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName78 = "sendPush";
+		_methodName79 = "sendPush";
 
-		_methodParameterTypes78 = new String[] {
+		_methodParameterTypes79 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.util.Map", "long"
 			};
@@ -181,6 +187,12 @@ public class FlaskMessagesServiceClpInvoker {
 
 		if (_methodName77.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
+			return FlaskMessagesServiceUtil.deleteMyChatMessages((java.util.List<java.lang.Long>)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName78.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
 			return FlaskMessagesServiceUtil.registerWithSNS(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3], (java.lang.String)arguments[4],
@@ -189,8 +201,8 @@ public class FlaskMessagesServiceClpInvoker {
 				(com.liferay.portal.service.ServiceContext)arguments[9]);
 		}
 
-		if (_methodName78.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
+		if (_methodName79.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
 			return FlaskMessagesServiceUtil.sendPush(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1], (java.lang.String)arguments[2],
 				(java.lang.String)arguments[3],
@@ -227,4 +239,6 @@ public class FlaskMessagesServiceClpInvoker {
 	private String[] _methodParameterTypes77;
 	private String _methodName78;
 	private String[] _methodParameterTypes78;
+	private String _methodName79;
+	private String[] _methodParameterTypes79;
 }

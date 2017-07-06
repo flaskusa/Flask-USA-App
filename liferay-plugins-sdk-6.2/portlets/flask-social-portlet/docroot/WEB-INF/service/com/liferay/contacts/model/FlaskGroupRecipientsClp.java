@@ -82,6 +82,7 @@ public class FlaskGroupRecipientsClp extends BaseModelImpl<FlaskGroupRecipients>
 		attributes.put("read", getRead());
 		attributes.put("receivedDateTime", getReceivedDateTime());
 		attributes.put("senderId", getSenderId());
+		attributes.put("messageStatusInfo", getMessageStatusInfo());
 
 		return attributes;
 	}
@@ -128,6 +129,12 @@ public class FlaskGroupRecipientsClp extends BaseModelImpl<FlaskGroupRecipients>
 
 		if (senderId != null) {
 			setSenderId(senderId);
+		}
+
+		String messageStatusInfo = (String)attributes.get("messageStatusInfo");
+
+		if (messageStatusInfo != null) {
+			setMessageStatusInfo(messageStatusInfo);
 		}
 	}
 
@@ -294,6 +301,31 @@ public class FlaskGroupRecipientsClp extends BaseModelImpl<FlaskGroupRecipients>
 		}
 	}
 
+	@Override
+	public String getMessageStatusInfo() {
+		return _messageStatusInfo;
+	}
+
+	@Override
+	public void setMessageStatusInfo(String messageStatusInfo) {
+		_messageStatusInfo = messageStatusInfo;
+
+		if (_flaskGroupRecipientsRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskGroupRecipientsRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setMessageStatusInfo",
+						String.class);
+
+				method.invoke(_flaskGroupRecipientsRemoteModel,
+					messageStatusInfo);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getFlaskGroupRecipientsRemoteModel() {
 		return _flaskGroupRecipientsRemoteModel;
 	}
@@ -372,6 +404,7 @@ public class FlaskGroupRecipientsClp extends BaseModelImpl<FlaskGroupRecipients>
 		clone.setRead(getRead());
 		clone.setReceivedDateTime(getReceivedDateTime());
 		clone.setSenderId(getSenderId());
+		clone.setMessageStatusInfo(getMessageStatusInfo());
 
 		return clone;
 	}
@@ -423,7 +456,7 @@ public class FlaskGroupRecipientsClp extends BaseModelImpl<FlaskGroupRecipients>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{groupRecipientId=");
 		sb.append(getGroupRecipientId());
@@ -439,6 +472,8 @@ public class FlaskGroupRecipientsClp extends BaseModelImpl<FlaskGroupRecipients>
 		sb.append(getReceivedDateTime());
 		sb.append(", senderId=");
 		sb.append(getSenderId());
+		sb.append(", messageStatusInfo=");
+		sb.append(getMessageStatusInfo());
 		sb.append("}");
 
 		return sb.toString();
@@ -446,7 +481,7 @@ public class FlaskGroupRecipientsClp extends BaseModelImpl<FlaskGroupRecipients>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.contacts.model.FlaskGroupRecipients");
@@ -480,6 +515,10 @@ public class FlaskGroupRecipientsClp extends BaseModelImpl<FlaskGroupRecipients>
 			"<column><column-name>senderId</column-name><column-value><![CDATA[");
 		sb.append(getSenderId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>messageStatusInfo</column-name><column-value><![CDATA[");
+		sb.append(getMessageStatusInfo());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -493,6 +532,7 @@ public class FlaskGroupRecipientsClp extends BaseModelImpl<FlaskGroupRecipients>
 	private String _read;
 	private Date _receivedDateTime;
 	private long _senderId;
+	private String _messageStatusInfo;
 	private BaseModel<?> _flaskGroupRecipientsRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.contacts.service.ClpSerializer.class;
 }

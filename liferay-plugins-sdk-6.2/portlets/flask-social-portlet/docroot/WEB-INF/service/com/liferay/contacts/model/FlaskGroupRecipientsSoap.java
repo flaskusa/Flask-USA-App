@@ -39,6 +39,7 @@ public class FlaskGroupRecipientsSoap implements Serializable {
 		soapModel.setRead(model.getRead());
 		soapModel.setReceivedDateTime(model.getReceivedDateTime());
 		soapModel.setSenderId(model.getSenderId());
+		soapModel.setMessageStatusInfo(model.getMessageStatusInfo());
 
 		return soapModel;
 	}
@@ -150,6 +151,14 @@ public class FlaskGroupRecipientsSoap implements Serializable {
 		_senderId = senderId;
 	}
 
+	public String getMessageStatusInfo() {
+		return _messageStatusInfo;
+	}
+
+	public void setMessageStatusInfo(String messageStatusInfo) {
+		_messageStatusInfo = messageStatusInfo;
+	}
+
 	private long _groupRecipientId;
 	private long _groupId;
 	private String _recipients;
@@ -157,4 +166,5 @@ public class FlaskGroupRecipientsSoap implements Serializable {
 	private String _read;
 	private Date _receivedDateTime;
 	private long _senderId;
+	private String _messageStatusInfo;
 }

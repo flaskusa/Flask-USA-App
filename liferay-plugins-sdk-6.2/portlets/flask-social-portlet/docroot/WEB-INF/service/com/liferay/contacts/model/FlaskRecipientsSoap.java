@@ -38,6 +38,7 @@ public class FlaskRecipientsSoap implements Serializable {
 		soapModel.setRead(model.getRead());
 		soapModel.setReceivedDateTime(model.getReceivedDateTime());
 		soapModel.setSenderId(model.getSenderId());
+		soapModel.setDeletedBy(model.getDeletedBy());
 
 		return soapModel;
 	}
@@ -152,6 +153,14 @@ public class FlaskRecipientsSoap implements Serializable {
 		_senderId = senderId;
 	}
 
+	public String getDeletedBy() {
+		return _deletedBy;
+	}
+
+	public void setDeletedBy(String deletedBy) {
+		_deletedBy = deletedBy;
+	}
+
 	private long _recipientId;
 	private long _userId;
 	private String _email;
@@ -159,4 +168,5 @@ public class FlaskRecipientsSoap implements Serializable {
 	private boolean _read;
 	private Date _receivedDateTime;
 	private long _senderId;
+	private String _deletedBy;
 }

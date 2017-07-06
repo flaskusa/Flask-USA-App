@@ -30,10 +30,12 @@ import com.liferay.contacts.service.persistence.FlaskGroupMessagesUtil;
 import com.liferay.contacts.service.persistence.FlaskGroupRecipientsUtil;
 import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.OrderFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
@@ -91,19 +93,24 @@ public class FlaskGroupMessagesServiceImpl
 			groupQuery.setLimit(0, 100);
 			List<FlaskGroupRecipients> flaskGroupRecipients = FlaskRecipientsLocalServiceUtil.dynamicQuery(groupQuery);
 			for(FlaskGroupRecipients recp: flaskGroupRecipients){
-				JSONObject jsonObj =  JSONFactoryUtil.createJSONObject();
-				FlaskGroupMessages msg = FlaskGroupMessagesLocalServiceUtil.getFlaskGroupMessages(recp.getGroupMessageId());
-				jsonObj.put("dateTime", msg.getDateTime());
-				jsonObj.put("message", msg.getMessage());
-				jsonObj.put("messageId", msg.getGroupMessagesId());
-				jsonObj.put("recipients", recp.getRecipients());
-				jsonObj.put("read", recp.getRead());
-				jsonObj.put("sendEmail", msg.getSendEmail());
-				jsonObj.put("senderEmail", msg.getSenderEmail());
-				jsonObj.put("senderName", msg.getSenderName());
-				jsonObj.put("senderUserId", msg.getSenderUserId());
-				jsonObj.put("portraitId", UserLocalServiceUtil.getUserById(msg.getSenderUserId()).getPortraitId());
-				jsonArray.put(jsonObj);
+				JSONObject recpInfo = JSONFactoryUtil.createJSONObject(recp.getMessageStatusInfo());				
+				if(recpInfo.has(String.valueOf(serviceContext.getUserId()))){
+					if(!recpInfo.getJSONObject(String.valueOf(serviceContext.getUserId())).getBoolean("deleted")){
+						JSONObject jsonObj =  JSONFactoryUtil.createJSONObject();
+						FlaskGroupMessages msg = FlaskGroupMessagesLocalServiceUtil.getFlaskGroupMessages(recp.getGroupMessageId());
+						jsonObj.put("dateTime", msg.getDateTime());
+						jsonObj.put("message", msg.getMessage());
+						jsonObj.put("messageId", msg.getGroupMessagesId());
+						jsonObj.put("recipients", recp.getRecipients());
+						jsonObj.put("read", recp.getRead());
+						jsonObj.put("sendEmail", msg.getSendEmail());
+						jsonObj.put("senderEmail", msg.getSenderEmail());
+						jsonObj.put("senderName", msg.getSenderName());
+						jsonObj.put("senderUserId", msg.getSenderUserId());
+						jsonObj.put("portraitId", UserLocalServiceUtil.getUserById(msg.getSenderUserId()).getPortraitId());
+						jsonArray.put(jsonObj);
+					}
+				}					
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -127,8 +134,13 @@ public class FlaskGroupMessagesServiceImpl
 		int count = 0;
 		try {
 			List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupRecipientsUtil.findByGroupId(groupId);
-			for(@SuppressWarnings("unused") FlaskGroupRecipients recp: flaskGroupRecipients){
-				count++;
+			for(FlaskGroupRecipients recp: flaskGroupRecipients){
+				JSONObject recpInfo = JSONFactoryUtil.createJSONObject(recp.getMessageStatusInfo());				
+				if(recpInfo.has(String.valueOf(serviceContext.getUserId()))){
+					if(!recpInfo.getJSONObject(String.valueOf(serviceContext.getUserId())).getBoolean("deleted")){
+						count++;
+					}
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -142,24 +154,47 @@ public class FlaskGroupMessagesServiceImpl
 		try {
 			List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupRecipientsUtil.findByGroupId(groupId);
 			for(FlaskGroupRecipients recp: flaskGroupRecipients){
-				boolean flag = false;
-				String recipient = recp.getRecipients();
-				String read = recp.getRead();
-				String[] recpPart = recipient.split(",");
-				String[] readPart = read.split(","); 
-				for(int i = 0; i <= recpPart.length-1; i++){
-					if((serviceContext.getUserId() == Long.parseLong(recpPart[i])) && (Long.parseLong(readPart[i]) == 0)){
-						flag = true;
+				JSONObject recpInfo = JSONFactoryUtil.createJSONObject(recp.getMessageStatusInfo());				
+				if(recpInfo.has(String.valueOf(serviceContext.getUserId()))){
+					JSONObject recpObj = recpInfo.getJSONObject(String.valueOf(serviceContext.getUserId()));
+					if(!recpObj.getBoolean("deleted") && !recpObj.getBoolean("read")){
+						count++;
 					}
-				}
-				if(flag){
-					count++;
 				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		return count;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean deleteMyGroupChatMessages(List<Long> groupMessageIds, ServiceContext serviceContext){
+		boolean done = false;
+		try {
+			DynamicQuery recipientQuery = DynamicQueryFactoryUtil.forClass(FlaskGroupRecipientsImpl.class);
+			Criterion criterion = RestrictionsFactoryUtil.in("groupMessageId", groupMessageIds);
+			recipientQuery.add(criterion);
+			recipientQuery.addOrder(OrderFactoryUtil.desc("receivedDateTime"));
+			List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupMessagesLocalServiceUtil.dynamicQuery(recipientQuery);
+			for(FlaskGroupRecipients recp: flaskGroupRecipients){
+				JSONObject recpInfo = JSONFactoryUtil.createJSONObject(recp.getMessageStatusInfo());				
+				if(recpInfo.has(String.valueOf(serviceContext.getUserId()))){
+					JSONObject recpObj = recpInfo.getJSONObject(String.valueOf(serviceContext.getUserId()));
+					JSONObject newObj = JSONFactoryUtil.createJSONObject();
+					newObj.put("deleted", true);
+					newObj.put("read", recpObj.getBoolean("read"));
+					recpInfo.remove(String.valueOf(serviceContext.getUserId()));
+					recpInfo.put(String.valueOf(serviceContext.getUserId()), newObj);
+					recp.setMessageStatusInfo(recpInfo.toString());
+					FlaskGroupRecipientsLocalServiceUtil.updateFlaskGroupRecipients(recp);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return done;
 	}
 	
 	@Override
@@ -196,5 +231,33 @@ public class FlaskGroupMessagesServiceImpl
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public boolean addGrpMsginfoInAll(){
+		boolean done = false;
+		try {
+			List<FlaskGroupRecipients> recipients = FlaskGroupRecipientsLocalServiceUtil.getFlaskGroupRecipientses(0, FlaskGroupRecipientsLocalServiceUtil.getFlaskGroupRecipientsesCount());
+			for(FlaskGroupRecipients recp: recipients){
+				String[] rec = recp.getRecipients().split(",");
+				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+				for(int i=0; i<rec.length; i++){
+					JSONObject obj = JSONFactoryUtil.createJSONObject();
+					if(("0").equals(recp.getRead().split(",")[i]))
+						obj.put("read", false);
+					else
+						obj.put("read", true);
+					obj.put("deleted", false);
+					jsonObj.put(rec[i], obj);
+				}
+				
+				recp.setMessageStatusInfo(jsonObj.toString());
+				FlaskGroupRecipientsLocalServiceUtil.updateFlaskGroupRecipients(recp);
+			}
+			done = true;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return done;
 	}
 }

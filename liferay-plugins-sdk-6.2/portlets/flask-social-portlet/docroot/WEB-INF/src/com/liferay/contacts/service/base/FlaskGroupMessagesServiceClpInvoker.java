@@ -61,18 +61,28 @@ public class FlaskGroupMessagesServiceClpInvoker {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName73 = "deleteGroupMessage";
+		_methodName73 = "deleteMyGroupChatMessages";
 
 		_methodParameterTypes73 = new String[] {
+				"java.util.List", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName74 = "deleteGroupMessage";
+
+		_methodParameterTypes74 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName74 = "deleteGroupMessagesByDateRange";
+		_methodName75 = "deleteGroupMessagesByDateRange";
 
-		_methodParameterTypes74 = new String[] {
+		_methodParameterTypes75 = new String[] {
 				"java.util.Date", "java.util.Date",
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName76 = "addGrpMsginfoInAll";
+
+		_methodParameterTypes76 = new String[] {  };
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -122,19 +132,30 @@ public class FlaskGroupMessagesServiceClpInvoker {
 
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
+			return FlaskGroupMessagesServiceUtil.deleteMyGroupChatMessages((java.util.List<java.lang.Long>)arguments[0],
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+		}
+
+		if (_methodName74.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
 			FlaskGroupMessagesServiceUtil.deleteGroupMessage(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName74.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes74, parameterTypes)) {
+		if (_methodName75.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes75, parameterTypes)) {
 			FlaskGroupMessagesServiceUtil.deleteGroupMessagesByDateRange((java.util.Date)arguments[0],
 				(java.util.Date)arguments[1],
 				(com.liferay.portal.service.ServiceContext)arguments[2]);
 
 			return null;
+		}
+
+		if (_methodName76.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
+			return FlaskGroupMessagesServiceUtil.addGrpMsginfoInAll();
 		}
 
 		throw new UnsupportedOperationException();
@@ -158,4 +179,8 @@ public class FlaskGroupMessagesServiceClpInvoker {
 	private String[] _methodParameterTypes73;
 	private String _methodName74;
 	private String[] _methodParameterTypes74;
+	private String _methodName75;
+	private String[] _methodParameterTypes75;
+	private String _methodName76;
+	private String[] _methodParameterTypes76;
 }

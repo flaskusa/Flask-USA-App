@@ -55,6 +55,7 @@
 		<property name="read" type="com.liferay.portal.dao.orm.hibernate.StringType" column="read_" />
 		<property name="receivedDateTime" type="org.hibernate.type.TimestampType" />
 		<property name="senderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="messageStatusInfo" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.contacts.model.impl.FlaskMessagesImpl" table="Contacts_FlaskMessages">
 		<id name="messageId" type="long">
@@ -78,6 +79,7 @@
 		<property name="read" type="com.liferay.portal.dao.orm.hibernate.BooleanType" column="read_" />
 		<property name="receivedDateTime" type="org.hibernate.type.TimestampType" />
 		<property name="senderId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="deletedBy" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.contacts.model.impl.FlaskUserDeviceRegistrationImpl" table="Contacts_FlaskUserDeviceRegistration">
 		<id name="userDeviceRegistrationId" type="long">

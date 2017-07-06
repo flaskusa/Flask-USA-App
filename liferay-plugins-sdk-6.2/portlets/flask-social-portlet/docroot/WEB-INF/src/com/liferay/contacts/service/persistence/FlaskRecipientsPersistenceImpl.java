@@ -3074,6 +3074,7 @@ public class FlaskRecipientsPersistenceImpl extends BasePersistenceImpl<FlaskRec
 		flaskRecipientsImpl.setRead(flaskRecipients.isRead());
 		flaskRecipientsImpl.setReceivedDateTime(flaskRecipients.getReceivedDateTime());
 		flaskRecipientsImpl.setSenderId(flaskRecipients.getSenderId());
+		flaskRecipientsImpl.setDeletedBy(flaskRecipients.getDeletedBy());
 
 		return flaskRecipientsImpl;
 	}

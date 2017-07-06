@@ -181,6 +181,21 @@ public interface FlaskRecipientsModel extends BaseModel<FlaskRecipients> {
 	 */
 	public void setSenderId(long senderId);
 
+	/**
+	 * Returns the deleted by of this flask recipients.
+	 *
+	 * @return the deleted by of this flask recipients
+	 */
+	@AutoEscape
+	public String getDeletedBy();
+
+	/**
+	 * Sets the deleted by of this flask recipients.
+	 *
+	 * @param deletedBy the deleted by of this flask recipients
+	 */
+	public void setDeletedBy(String deletedBy);
+
 	@Override
 	public boolean isNew();
 

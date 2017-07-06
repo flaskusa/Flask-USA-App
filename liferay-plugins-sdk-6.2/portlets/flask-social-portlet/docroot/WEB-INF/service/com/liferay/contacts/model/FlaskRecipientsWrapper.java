@@ -57,6 +57,7 @@ public class FlaskRecipientsWrapper implements FlaskRecipients,
 		attributes.put("read", getRead());
 		attributes.put("receivedDateTime", getReceivedDateTime());
 		attributes.put("senderId", getSenderId());
+		attributes.put("deletedBy", getDeletedBy());
 
 		return attributes;
 	}
@@ -103,6 +104,12 @@ public class FlaskRecipientsWrapper implements FlaskRecipients,
 
 		if (senderId != null) {
 			setSenderId(senderId);
+		}
+
+		String deletedBy = (String)attributes.get("deletedBy");
+
+		if (deletedBy != null) {
+			setDeletedBy(deletedBy);
 		}
 	}
 
@@ -296,6 +303,26 @@ public class FlaskRecipientsWrapper implements FlaskRecipients,
 	@Override
 	public void setSenderId(long senderId) {
 		_flaskRecipients.setSenderId(senderId);
+	}
+
+	/**
+	* Returns the deleted by of this flask recipients.
+	*
+	* @return the deleted by of this flask recipients
+	*/
+	@Override
+	public java.lang.String getDeletedBy() {
+		return _flaskRecipients.getDeletedBy();
+	}
+
+	/**
+	* Sets the deleted by of this flask recipients.
+	*
+	* @param deletedBy the deleted by of this flask recipients
+	*/
+	@Override
+	public void setDeletedBy(java.lang.String deletedBy) {
+		_flaskRecipients.setDeletedBy(deletedBy);
 	}
 
 	@Override

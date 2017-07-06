@@ -18,6 +18,7 @@ import com.liferay.contacts.service.FlaskGroupMessagesServiceUtil;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import java.rmi.RemoteException;
 
@@ -142,6 +143,22 @@ public class FlaskGroupMessagesServiceSoap {
 		}
 	}
 
+	public static boolean deleteMyGroupChatMessages(Long[] groupMessageIds,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			boolean returnValue = FlaskGroupMessagesServiceUtil.deleteMyGroupChatMessages(ListUtil.toList(
+						groupMessageIds), serviceContext);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteGroupMessage(long groupMessageId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
@@ -163,6 +180,19 @@ public class FlaskGroupMessagesServiceSoap {
 		try {
 			FlaskGroupMessagesServiceUtil.deleteGroupMessagesByDateRange(startDate,
 				endDate, serviceContext);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean addGrpMsginfoInAll() throws RemoteException {
+		try {
+			boolean returnValue = FlaskGroupMessagesServiceUtil.addGrpMsginfoInAll();
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

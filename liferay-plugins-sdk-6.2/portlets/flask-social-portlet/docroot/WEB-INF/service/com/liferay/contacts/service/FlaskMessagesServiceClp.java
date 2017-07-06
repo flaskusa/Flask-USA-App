@@ -88,18 +88,24 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName12 = "registerWithSNS";
+		_methodName12 = "deleteMyChatMessages";
 
 		_methodParameterTypes12 = new String[] {
+				"java.util.List", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName13 = "registerWithSNS";
+
+		_methodParameterTypes13 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.util.Date",
 				"java.lang.Boolean", "java.util.Date", "java.lang.String",
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName13 = "sendPush";
+		_methodName14 = "sendPush";
 
-		_methodParameterTypes13 = new String[] {
+		_methodParameterTypes14 = new String[] {
 				"long", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.util.Map", "long"
 			};
@@ -416,6 +422,36 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	}
 
 	@Override
+	public boolean deleteMyChatMessages(
+		java.util.List<java.lang.Long> messageIds,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName12,
+					_methodParameterTypes12,
+					new Object[] {
+						ClpSerializer.translateInput(messageIds),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
+	@Override
 	public boolean registerWithSNS(long userId, java.lang.String userEmail,
 		java.lang.String devicePlatform, java.lang.String deviceDetails,
 		java.lang.String deviceToken, java.util.Date registrationTime,
@@ -425,8 +461,8 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName12,
-					_methodParameterTypes12,
+			returnObj = _invokableService.invokeMethod(_methodName13,
+					_methodParameterTypes13,
 					new Object[] {
 						userId,
 						
@@ -472,8 +508,8 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName13,
-					_methodParameterTypes13,
+			returnObj = _invokableService.invokeMethod(_methodName14,
+					_methodParameterTypes14,
 					new Object[] {
 						userId,
 						
@@ -530,4 +566,6 @@ public class FlaskMessagesServiceClp implements FlaskMessagesService {
 	private String[] _methodParameterTypes12;
 	private String _methodName13;
 	private String[] _methodParameterTypes13;
+	private String _methodName14;
+	private String[] _methodParameterTypes14;
 }

@@ -83,6 +83,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		attributes.put("read", getRead());
 		attributes.put("receivedDateTime", getReceivedDateTime());
 		attributes.put("senderId", getSenderId());
+		attributes.put("deletedBy", getDeletedBy());
 
 		return attributes;
 	}
@@ -129,6 +130,12 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 
 		if (senderId != null) {
 			setSenderId(senderId);
+		}
+
+		String deletedBy = (String)attributes.get("deletedBy");
+
+		if (deletedBy != null) {
+			setDeletedBy(deletedBy);
 		}
 	}
 
@@ -309,6 +316,29 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		}
 	}
 
+	@Override
+	public String getDeletedBy() {
+		return _deletedBy;
+	}
+
+	@Override
+	public void setDeletedBy(String deletedBy) {
+		_deletedBy = deletedBy;
+
+		if (_flaskRecipientsRemoteModel != null) {
+			try {
+				Class<?> clazz = _flaskRecipientsRemoteModel.getClass();
+
+				Method method = clazz.getMethod("setDeletedBy", String.class);
+
+				method.invoke(_flaskRecipientsRemoteModel, deletedBy);
+			}
+			catch (Exception e) {
+				throw new UnsupportedOperationException(e);
+			}
+		}
+	}
+
 	public BaseModel<?> getFlaskRecipientsRemoteModel() {
 		return _flaskRecipientsRemoteModel;
 	}
@@ -387,6 +417,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		clone.setRead(getRead());
 		clone.setReceivedDateTime(getReceivedDateTime());
 		clone.setSenderId(getSenderId());
+		clone.setDeletedBy(getDeletedBy());
 
 		return clone;
 	}
@@ -438,7 +469,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{recipientId=");
 		sb.append(getRecipientId());
@@ -454,6 +485,8 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 		sb.append(getReceivedDateTime());
 		sb.append(", senderId=");
 		sb.append(getSenderId());
+		sb.append(", deletedBy=");
+		sb.append(getDeletedBy());
 		sb.append("}");
 
 		return sb.toString();
@@ -461,7 +494,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.contacts.model.FlaskRecipients");
@@ -495,6 +528,10 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 			"<column><column-name>senderId</column-name><column-value><![CDATA[");
 		sb.append(getSenderId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>deletedBy</column-name><column-value><![CDATA[");
+		sb.append(getDeletedBy());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -509,6 +546,7 @@ public class FlaskRecipientsClp extends BaseModelImpl<FlaskRecipients>
 	private boolean _read;
 	private Date _receivedDateTime;
 	private long _senderId;
+	private String _deletedBy;
 	private BaseModel<?> _flaskRecipientsRemoteModel;
 	private Class<?> _clpSerializerClass = com.liferay.contacts.service.ClpSerializer.class;
 }

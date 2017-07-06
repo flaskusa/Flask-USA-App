@@ -85,10 +85,16 @@ public interface FlaskGroupMessagesService extends BaseService, InvokableService
 	public int getMyUnreadFlaskGroupMessagesCount(long groupId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	public boolean deleteMyGroupChatMessages(
+		java.util.List<java.lang.Long> groupMessageIds,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	public void deleteGroupMessage(long groupMessageId,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	public void deleteGroupMessagesByDateRange(java.util.Date startDate,
 		java.util.Date endDate,
 		com.liferay.portal.service.ServiceContext serviceContext);
+
+	public boolean addGrpMsginfoInAll();
 }

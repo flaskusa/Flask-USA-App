@@ -35,7 +35,8 @@ create table Contacts_FlaskGroupRecipients (
 	groupMessageId LONG,
 	read_ TEXT null,
 	receivedDateTime DATE null,
-	senderId LONG
+	senderId LONG,
+	messageStatusInfo STRING null
 );
 
 create table Contacts_FlaskMessages (
@@ -56,7 +57,8 @@ create table Contacts_FlaskRecipients (
 	messageId LONG,
 	read_ BOOLEAN,
 	receivedDateTime DATE null,
-	senderId LONG
+	senderId LONG,
+	deletedBy VARCHAR(75) null
 );
 
 create table Contacts_FlaskUserDeviceRegistration (

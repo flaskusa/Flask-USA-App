@@ -92,6 +92,13 @@ public class FlaskGroupMessagesServiceUtil {
 				   .getMyUnreadFlaskGroupMessagesCount(groupId, serviceContext);
 	}
 
+	public static boolean deleteMyGroupChatMessages(
+		java.util.List<java.lang.Long> groupMessageIds,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService()
+				   .deleteMyGroupChatMessages(groupMessageIds, serviceContext);
+	}
+
 	public static void deleteGroupMessage(long groupMessageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService().deleteGroupMessage(groupMessageId, serviceContext);
@@ -102,6 +109,10 @@ public class FlaskGroupMessagesServiceUtil {
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		getService()
 			.deleteGroupMessagesByDateRange(startDate, endDate, serviceContext);
+	}
+
+	public static boolean addGrpMsginfoInAll() {
+		return getService().addGrpMsginfoInAll();
 	}
 
 	public static void clearService() {

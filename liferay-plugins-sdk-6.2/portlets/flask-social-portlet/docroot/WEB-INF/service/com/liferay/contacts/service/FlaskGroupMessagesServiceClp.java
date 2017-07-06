@@ -61,18 +61,28 @@ public class FlaskGroupMessagesServiceClp implements FlaskGroupMessagesService {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName8 = "deleteGroupMessage";
+		_methodName8 = "deleteMyGroupChatMessages";
 
 		_methodParameterTypes8 = new String[] {
+				"java.util.List", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName9 = "deleteGroupMessage";
+
+		_methodParameterTypes9 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName9 = "deleteGroupMessagesByDateRange";
+		_methodName10 = "deleteGroupMessagesByDateRange";
 
-		_methodParameterTypes9 = new String[] {
+		_methodParameterTypes10 = new String[] {
 				"java.util.Date", "java.util.Date",
 				"com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName11 = "addGrpMsginfoInAll";
+
+		_methodParameterTypes11 = new String[] {  };
 	}
 
 	@Override
@@ -271,11 +281,41 @@ public class FlaskGroupMessagesServiceClp implements FlaskGroupMessagesService {
 	}
 
 	@Override
+	public boolean deleteMyGroupChatMessages(
+		java.util.List<java.lang.Long> groupMessageIds,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
+					new Object[] {
+						ClpSerializer.translateInput(groupMessageIds),
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
+	@Override
 	public void deleteGroupMessage(long groupMessageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
+			_invokableService.invokeMethod(_methodName9,
+				_methodParameterTypes9,
 				new Object[] {
 					groupMessageId,
 					
@@ -300,8 +340,8 @@ public class FlaskGroupMessagesServiceClp implements FlaskGroupMessagesService {
 		java.util.Date endDate,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		try {
-			_invokableService.invokeMethod(_methodName9,
-				_methodParameterTypes9,
+			_invokableService.invokeMethod(_methodName10,
+				_methodParameterTypes10,
 				new Object[] {
 					ClpSerializer.translateInput(startDate),
 					
@@ -323,6 +363,29 @@ public class FlaskGroupMessagesServiceClp implements FlaskGroupMessagesService {
 		}
 	}
 
+	@Override
+	public boolean addGrpMsginfoInAll() {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11, new Object[] {  });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
 	private InvokableService _invokableService;
 	private String _methodName0;
 	private String[] _methodParameterTypes0;
@@ -342,4 +405,8 @@ public class FlaskGroupMessagesServiceClp implements FlaskGroupMessagesService {
 	private String[] _methodParameterTypes8;
 	private String _methodName9;
 	private String[] _methodParameterTypes9;
+	private String _methodName10;
+	private String[] _methodParameterTypes10;
+	private String _methodName11;
+	private String[] _methodParameterTypes11;
 }

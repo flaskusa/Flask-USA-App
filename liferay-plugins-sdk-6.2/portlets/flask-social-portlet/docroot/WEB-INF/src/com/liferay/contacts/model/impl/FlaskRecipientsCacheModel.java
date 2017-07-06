@@ -38,7 +38,7 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 	Externalizable {
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{recipientId=");
 		sb.append(recipientId);
@@ -54,6 +54,8 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 		sb.append(receivedDateTime);
 		sb.append(", senderId=");
 		sb.append(senderId);
+		sb.append(", deletedBy=");
+		sb.append(deletedBy);
 		sb.append("}");
 
 		return sb.toString();
@@ -85,6 +87,13 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 
 		flaskRecipientsImpl.setSenderId(senderId);
 
+		if (deletedBy == null) {
+			flaskRecipientsImpl.setDeletedBy(StringPool.BLANK);
+		}
+		else {
+			flaskRecipientsImpl.setDeletedBy(deletedBy);
+		}
+
 		flaskRecipientsImpl.resetOriginalValues();
 
 		return flaskRecipientsImpl;
@@ -99,6 +108,7 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 		read = objectInput.readBoolean();
 		receivedDateTime = objectInput.readLong();
 		senderId = objectInput.readLong();
+		deletedBy = objectInput.readUTF();
 	}
 
 	@Override
@@ -118,6 +128,13 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 		objectOutput.writeBoolean(read);
 		objectOutput.writeLong(receivedDateTime);
 		objectOutput.writeLong(senderId);
+
+		if (deletedBy == null) {
+			objectOutput.writeUTF(StringPool.BLANK);
+		}
+		else {
+			objectOutput.writeUTF(deletedBy);
+		}
 	}
 
 	public long recipientId;
@@ -127,4 +144,5 @@ public class FlaskRecipientsCacheModel implements CacheModel<FlaskRecipients>,
 	public boolean read;
 	public long receivedDateTime;
 	public long senderId;
+	public String deletedBy;
 }

@@ -73,9 +73,10 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 			{ "messageId", Types.BIGINT },
 			{ "read_", Types.BOOLEAN },
 			{ "receivedDateTime", Types.TIMESTAMP },
-			{ "senderId", Types.BIGINT }
+			{ "senderId", Types.BIGINT },
+			{ "deletedBy", Types.VARCHAR }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskRecipients (recipientId LONG not null primary key,userId LONG,email VARCHAR(75) null,messageId LONG,read_ BOOLEAN,receivedDateTime DATE null,senderId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table Contacts_FlaskRecipients (recipientId LONG not null primary key,userId LONG,email VARCHAR(75) null,messageId LONG,read_ BOOLEAN,receivedDateTime DATE null,senderId LONG,deletedBy VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Contacts_FlaskRecipients";
 	public static final String ORDER_BY_JPQL = " ORDER BY flaskRecipients.receivedDateTime ASC";
 	public static final String ORDER_BY_SQL = " ORDER BY Contacts_FlaskRecipients.receivedDateTime ASC";
@@ -117,6 +118,7 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 		model.setRead(soapModel.getRead());
 		model.setReceivedDateTime(soapModel.getReceivedDateTime());
 		model.setSenderId(soapModel.getSenderId());
+		model.setDeletedBy(soapModel.getDeletedBy());
 
 		return model;
 	}
@@ -189,6 +191,7 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 		attributes.put("read", getRead());
 		attributes.put("receivedDateTime", getReceivedDateTime());
 		attributes.put("senderId", getSenderId());
+		attributes.put("deletedBy", getDeletedBy());
 
 		return attributes;
 	}
@@ -235,6 +238,12 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 
 		if (senderId != null) {
 			setSenderId(senderId);
+		}
+
+		String deletedBy = (String)attributes.get("deletedBy");
+
+		if (deletedBy != null) {
+			setDeletedBy(deletedBy);
 		}
 	}
 
@@ -385,6 +394,22 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 		return _originalSenderId;
 	}
 
+	@JSON
+	@Override
+	public String getDeletedBy() {
+		if (_deletedBy == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _deletedBy;
+		}
+	}
+
+	@Override
+	public void setDeletedBy(String deletedBy) {
+		_deletedBy = deletedBy;
+	}
+
 	public long getColumnBitmask() {
 		return _columnBitmask;
 	}
@@ -423,6 +448,7 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 		flaskRecipientsImpl.setRead(getRead());
 		flaskRecipientsImpl.setReceivedDateTime(getReceivedDateTime());
 		flaskRecipientsImpl.setSenderId(getSenderId());
+		flaskRecipientsImpl.setDeletedBy(getDeletedBy());
 
 		flaskRecipientsImpl.resetOriginalValues();
 
@@ -524,12 +550,20 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 
 		flaskRecipientsCacheModel.senderId = getSenderId();
 
+		flaskRecipientsCacheModel.deletedBy = getDeletedBy();
+
+		String deletedBy = flaskRecipientsCacheModel.deletedBy;
+
+		if ((deletedBy != null) && (deletedBy.length() == 0)) {
+			flaskRecipientsCacheModel.deletedBy = null;
+		}
+
 		return flaskRecipientsCacheModel;
 	}
 
 	@Override
 	public String toString() {
-		StringBundler sb = new StringBundler(15);
+		StringBundler sb = new StringBundler(17);
 
 		sb.append("{recipientId=");
 		sb.append(getRecipientId());
@@ -545,6 +579,8 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 		sb.append(getReceivedDateTime());
 		sb.append(", senderId=");
 		sb.append(getSenderId());
+		sb.append(", deletedBy=");
+		sb.append(getDeletedBy());
 		sb.append("}");
 
 		return sb.toString();
@@ -552,7 +588,7 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 
 	@Override
 	public String toXmlString() {
-		StringBundler sb = new StringBundler(25);
+		StringBundler sb = new StringBundler(28);
 
 		sb.append("<model><model-name>");
 		sb.append("com.liferay.contacts.model.FlaskRecipients");
@@ -586,6 +622,10 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 			"<column><column-name>senderId</column-name><column-value><![CDATA[");
 		sb.append(getSenderId());
 		sb.append("]]></column-value></column>");
+		sb.append(
+			"<column><column-name>deletedBy</column-name><column-value><![CDATA[");
+		sb.append(getDeletedBy());
+		sb.append("]]></column-value></column>");
 
 		sb.append("</model>");
 
@@ -612,6 +652,7 @@ public class FlaskRecipientsModelImpl extends BaseModelImpl<FlaskRecipients>
 	private long _senderId;
 	private long _originalSenderId;
 	private boolean _setOriginalSenderId;
+	private String _deletedBy;
 	private long _columnBitmask;
 	private FlaskRecipients _escapedModel;
 }

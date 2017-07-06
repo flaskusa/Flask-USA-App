@@ -1376,6 +1376,7 @@ public class FlaskGroupRecipientsPersistenceImpl extends BasePersistenceImpl<Fla
 		flaskGroupRecipientsImpl.setRead(flaskGroupRecipients.getRead());
 		flaskGroupRecipientsImpl.setReceivedDateTime(flaskGroupRecipients.getReceivedDateTime());
 		flaskGroupRecipientsImpl.setSenderId(flaskGroupRecipients.getSenderId());
+		flaskGroupRecipientsImpl.setMessageStatusInfo(flaskGroupRecipients.getMessageStatusInfo());
 
 		return flaskGroupRecipientsImpl;
 	}

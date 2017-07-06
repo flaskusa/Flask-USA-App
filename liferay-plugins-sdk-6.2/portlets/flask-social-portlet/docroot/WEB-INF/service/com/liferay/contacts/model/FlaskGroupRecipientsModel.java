@@ -159,6 +159,21 @@ public interface FlaskGroupRecipientsModel extends BaseModel<FlaskGroupRecipient
 	 */
 	public void setSenderId(long senderId);
 
+	/**
+	 * Returns the message status info of this flask group recipients.
+	 *
+	 * @return the message status info of this flask group recipients
+	 */
+	@AutoEscape
+	public String getMessageStatusInfo();
+
+	/**
+	 * Sets the message status info of this flask group recipients.
+	 *
+	 * @param messageStatusInfo the message status info of this flask group recipients
+	 */
+	public void setMessageStatusInfo(String messageStatusInfo);
+
 	@Override
 	public boolean isNew();
 

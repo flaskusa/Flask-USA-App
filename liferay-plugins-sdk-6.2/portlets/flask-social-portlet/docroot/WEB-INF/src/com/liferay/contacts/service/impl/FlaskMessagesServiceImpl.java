@@ -15,6 +15,7 @@
 package com.liferay.contacts.service.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -63,7 +64,6 @@ import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.rumbasolutions.flask.email.util.EmailInvitationUtil;
 import com.rumbasolutions.flask.model.FlaskGroup;
 import com.rumbasolutions.flask.service.FlaskGroupServiceUtil;
 
@@ -103,7 +103,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	   String[] rec = recipients.split(",");
 	   for (String userId : rec){
 		   if(Long.parseLong(userId) > 0){
-//			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false, serviceContext);
+			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false, serviceContext);
 			   FlaskMessagesServiceUtil.sendPush(Long.parseLong(userId), "Flask Message", "You have a message from "+user.getFullName(), "Friend_Message", user.getModelAttributes(), user.getUserId());
 //			   if(sendEmail)
 //			        EmailInvitationUtil.emailMessage(user.getFullName(), user.getEmailAddress(), recp.getEmail(), message, serviceContext);
@@ -137,9 +137,10 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		try {
 			DynamicQuery recipientQuery = DynamicQueryFactoryUtil.forClass(FlaskRecipientsImpl.class);
+			Criterion deleteCriterion = RestrictionsFactoryUtil.like("deletedBy", String.valueOf(serviceContext.getUserId()));
 			Criterion criterion1 = RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("userId", receiverId), RestrictionsFactoryUtil.eq("senderId", serviceContext.getUserId()));
 			Criterion criterion2 = RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("senderId", receiverId), RestrictionsFactoryUtil.eq("userId", serviceContext.getUserId()));
-			Criterion criterion = RestrictionsFactoryUtil.or(criterion1, criterion2);
+			Criterion criterion = RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.or(criterion1, criterion2),RestrictionsFactoryUtil.not(deleteCriterion));
 			recipientQuery.add(criterion);
 			recipientQuery.addOrder(OrderFactoryUtil.desc("receivedDateTime"));
 			recipientQuery.setLimit(0, 100);
@@ -171,7 +172,9 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		try {
 			List<FlaskRecipients> flaskRecipients = FlaskRecipientsUtil.findByreadFlag(serviceContext.getUserId(), false, receiverId);
 			for(FlaskRecipients recp: flaskRecipients){
-				flaskMessages.add(FlaskMessagesLocalServiceUtil.getFlaskMessages(recp.getMessageId()));
+				List<String> deletedBy = Arrays.asList(recp.getDeletedBy().split(","));
+				if(!deletedBy.contains(String.valueOf(serviceContext.getUserId())))
+					flaskMessages.add(FlaskMessagesLocalServiceUtil.getFlaskMessages(recp.getMessageId()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -184,8 +187,10 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		int count = 0;
 		try {
 			List<FlaskRecipients> flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), receiverId);
-			for(@SuppressWarnings("unused") FlaskRecipients recp: flaskRecipients){
-				count++;
+			for(FlaskRecipients recp: flaskRecipients){
+				List<String> deletedBy = Arrays.asList(recp.getDeletedBy().split(","));
+				if(!deletedBy.contains(String.valueOf(serviceContext.getUserId())))
+					count++;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -199,7 +204,8 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		try {
 			List<FlaskRecipients> flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), receiverId);
 			for(FlaskRecipients recp: flaskRecipients){
-				if(!recp.getRead()){
+				List<String> deletedBy = Arrays.asList(recp.getDeletedBy().split(","));
+				if(!deletedBy.contains(String.valueOf(serviceContext.getUserId())) && !recp.getRead()){
 					count++;
 				}
 			}
@@ -266,6 +272,29 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public boolean deleteMyChatMessages(List<Long> messageIds, ServiceContext serviceContext){
+		boolean done = false;
+		try {
+			DynamicQuery recipientQuery = DynamicQueryFactoryUtil.forClass(FlaskRecipientsImpl.class);
+			Criterion criterion = RestrictionsFactoryUtil.in("messageId", messageIds);
+			recipientQuery.add(criterion);
+			recipientQuery.addOrder(OrderFactoryUtil.desc("receivedDateTime"));
+			List<FlaskRecipients> flaskRecipients = FlaskRecipientsLocalServiceUtil.dynamicQuery(recipientQuery);
+			for(FlaskRecipients rec: flaskRecipients){
+				String deletedBy = rec.getDeletedBy();
+				deletedBy = deletedBy+String.valueOf(serviceContext.getUserId());
+				rec.setDeletedBy(deletedBy);
+				FlaskRecipientsLocalServiceUtil.updateFlaskRecipients(rec);
+			}
+			done = true;
+		} catch (Exception e) {
+			LOGGER.error("Error in deleteMyChatMessages: " + e.getMessage());
+		}
+		return done;
 	}
 
 	@SuppressWarnings({ "rawtypes", "unchecked", "deprecation" })

@@ -95,6 +95,14 @@ public class FlaskGroupMessagesServiceWrapper
 	}
 
 	@Override
+	public boolean deleteMyGroupChatMessages(
+		java.util.List<java.lang.Long> groupMessageIds,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _flaskGroupMessagesService.deleteMyGroupChatMessages(groupMessageIds,
+			serviceContext);
+	}
+
+	@Override
 	public void deleteGroupMessage(long groupMessageId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_flaskGroupMessagesService.deleteGroupMessage(groupMessageId,
@@ -107,6 +115,11 @@ public class FlaskGroupMessagesServiceWrapper
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		_flaskGroupMessagesService.deleteGroupMessagesByDateRange(startDate,
 			endDate, serviceContext);
+	}
+
+	@Override
+	public boolean addGrpMsginfoInAll() {
+		return _flaskGroupMessagesService.addGrpMsginfoInAll();
 	}
 
 	/**

@@ -64,6 +64,7 @@
         <column name="read" type="boolean"></column>
         <column name="receivedDateTime" type="Date"></column>
         <column name="senderId" type="long"></column>
+        <column name="deletedBy" type="String"></column>
         <order by="asc">
             <order-column name="receivedDateTime" order-by="asc"/>
         </order>
@@ -171,6 +172,7 @@
         <column name="read" type="String"></column>
         <column name="receivedDateTime" type="Date"></column>
         <column name="senderId" type="long"></column>
+        <column name="messageStatusInfo" type="String"></column>
         <order by="asc">
             <order-column name="receivedDateTime" order-by="asc"></order-column>
         </order>

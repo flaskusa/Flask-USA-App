@@ -54,6 +54,7 @@ public class FlaskRecipientsServiceImpl extends FlaskRecipientsServiceBaseImpl {
 			flaskRecipients.setMessageId(messageId);
 			flaskRecipients.setRead(read);
 			flaskRecipients.setSenderId(serviceContext.getUserId());
+			flaskRecipients.setDeletedBy("");
 			Date date = new Date();
 			flaskRecipients.setReceivedDateTime(serviceContext.getCreateDate(date));
 			flaskRecipients = FlaskRecipientsLocalServiceUtil.addFlaskRecipients(flaskRecipients);

@@ -29,6 +29,8 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
@@ -67,28 +69,34 @@ public class FlaskGroupRecipientsServiceImpl
 			FlaskGroup group = FlaskGroupServiceUtil.getGroup(groupId);
 			String recipients ="";
 			String read ="";
-			   for (FlaskGroupUsers groupUser : groupUsers){
-				   if((recipients == null || recipients == "") && (read == null || read == "")){
-					   recipients = String.valueOf(groupUser.getUserId());
-					   read = "0";
-				   }else{
-					   recipients = recipients+ "," +groupUser.getUserId();
-					   read = read+ "," + "0";
-				   }
-				   if(groupUser.getUserId() != serviceContext.getUserId())
-					   FlaskMessagesServiceUtil.sendPush(groupUser.getUserId(), "Flask Group Message", " You have a message from Group "+group.getGroupName(), "Group_Message", group.getModelAttributes(),
-							   group.getGroupId());
-				   try {
-					   EmailInvitationUtil.emailMessage(groupUser.getUserName(), senderEmailId, groupUser.getEmailAddress(), message, serviceContext);
-					} catch (Exception e) {
-					}
-			   }
+			JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+			for (FlaskGroupUsers groupUser : groupUsers){
+				JSONObject obj = JSONFactoryUtil.createJSONObject();
+				obj.put("read", false);
+				obj.put("deleted", false);
+				jsonObj.put(String.valueOf(groupUser.getUserId()), obj);
+//			   if((recipients == null || recipients == "") && (read == null || read == "")){
+//				   recipients = String.valueOf(groupUser.getUserId());
+//				   read = "0";
+//			   }else{
+//				   recipients = recipients+ "," +groupUser.getUserId();
+//				   read = read+ "," + "0";
+//			   }
+			   if(groupUser.getUserId() != serviceContext.getUserId())
+				   FlaskMessagesServiceUtil.sendPush(groupUser.getUserId(), "Flask Group Message", " You have a message from Group "+group.getGroupName(), "Group_Message", group.getModelAttributes(),
+						   group.getGroupId());
+			   try {
+				   EmailInvitationUtil.emailMessage(groupUser.getUserName(), senderEmailId, groupUser.getEmailAddress(), message, serviceContext);
+				} catch (Exception e) {
+				}
+		   	}
 			flaskGroupRecipients.setRecipients(recipients);
 			flaskGroupRecipients.setRead(read);
 			flaskGroupRecipients.setGroupId(groupId);
 			flaskGroupRecipients.setGroupMessageId(groupMessageId);
 			flaskGroupRecipients.setRead(read);
 			flaskGroupRecipients.setSenderId(serviceContext.getUserId());
+			flaskGroupRecipients.setMessageStatusInfo(jsonObj.toString());
 			Date date = new Date();
 			flaskGroupRecipients.setReceivedDateTime(serviceContext.getCreateDate(date));
 			flaskGroupRecipients = FlaskGroupRecipientsLocalServiceUtil.addFlaskGroupRecipients(flaskGroupRecipients);
