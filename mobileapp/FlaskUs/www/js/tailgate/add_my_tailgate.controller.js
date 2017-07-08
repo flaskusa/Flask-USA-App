@@ -38,7 +38,7 @@
         $scope.addNewSuppliesItem = false;
         $scope.addNewTailgateSuppliesItem = false;
         $scope.taigateSupplyList = [];
-
+        $scope.isUserMarkerShown = false;
         currentDate.setDate(currentDate.getDate() + 60); /*adding days to today's date*/
         $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd');
         $scope.tailgateSupplyList = [];
@@ -49,6 +49,7 @@
         var userResponse;
         var UserId;
         var itemArray;
+        $scope.marker = {};
         $scope.supplyItemList = [];
         $scope.downloadProgress = 0;
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
@@ -77,9 +78,11 @@
                 return ionic.Platform.isWindowsPhone();
             }
         };
+
         getTailgateMarkers(tailgateId);
         getMySupplyList();
         getTailgate(tailgateId);
+        getGeoLocation();
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
             $cookies.remove('tabtoEdit');
@@ -1150,6 +1153,44 @@
             else {
                 $ionicLoading.show({ template: 'Tailgate admin cannot be removed!', noBackdrop: false, duration: 3000 });
             }
+        }
+
+
+        //Flask user locator when user clicks on "Find Me" button
+        $scope.centerOnMe = function () {
+            $scope.isUserMarkerShown = !$scope.isUserMarkerShown;
+            if ($scope.isUserMarkerShown) {
+                $scope.map = {
+                    center: {
+                        latitude: $scope.userlat,
+                        longitude: $scope.userlong
+                    },
+                    zoom: 14
+                }
+                $scope.marker = {
+                    id: 1,
+                    coords: {
+                        latitude: $scope.userlat,
+                        longitude: $scope.userlong
+                    },
+                    options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
+                }
+            } else {
+                $scope.marker = {};
+                callMap(VENUEData.latitude, VENUEData.longitude);
+            }
+        }
+        function getGeoLocation() {
+            var posOptions = { timeout: 10000, enableHighAccuracy: false };
+            $cordovaGeolocation
+              .getCurrentPosition(posOptions)
+              .then(function (pos) {
+                  $scope.userlat = pos.coords.latitude;
+                  $scope.userlong = pos.coords.longitude;
+              }, function (err) {
+                  // error
+                  // $flaskUtil.alert("Unable to Get Location");
+              });
         }
 
     }

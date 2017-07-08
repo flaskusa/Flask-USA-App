@@ -154,14 +154,16 @@
 
         //save message Function
         $scope.saveMessage = function (msg) {
-            console.log(msg);
-            $scope.tailgateDetailId = tailGateId;
-            console.log($scope.tailgateDetailId);
-            TailgateService.saveMessage(msg, tailGateId).then(function (respData) {
-                $scope.messageUser=[]
-                get_message_list(tailGateId);
-                $scope.usersMessages.message="";
-            });
+            if (msg != "") {
+                console.log(msg);
+                $scope.tailgateDetailId = tailGateId;
+                console.log($scope.tailgateDetailId);
+                TailgateService.saveMessage(msg, tailGateId).then(function (respData) {
+                    $scope.messageUser = []
+                    get_message_list(tailGateId);
+                    $scope.usersMessages.message = "";
+                });
+            }
         }
 
         function get_message_list(tailGateId) {

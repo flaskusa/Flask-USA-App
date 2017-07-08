@@ -7,8 +7,9 @@
     <ion-tabs class="tabs-positive tab_bottom">
         <ion-tab title="My friends" id="myFriendsTab">
             <ion-content class="friendlistInMessages no-Header">
+                <div ng-if="allFriends.length==0" class="item">There are no Friends in your Chat.</div>
                 <ion-list id="myFriendsList">
-                    <ion-item ng-repeat="data in allFriends" class="row-no-padding item-remove-animate" padding="false" ng-click="showChatWindowPopup(data,'user')" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
+                    <ion-item ng-repeat="data in allFriends" class="row-no-padding" padding="false" ng-click="showChatWindowPopup(data,'user')" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
                         <a class="row-no-padding" style="text-decoration: none">
                             <!--href="#/app/my_friendDetail/{{data.userId}}"-->
                             <div class="col col-20" ng-if="data.friendProfilePicUrl==undefined">
@@ -31,8 +32,9 @@
         </ion-tab>
         <ion-tab title="My groups">
             <ion-content class="friendlistInMessages no-Header">
+                <div ng-if="allGroupChatFriends.length==0" class="item">There are no Groups in your Chat</div>
                 <ion-list>
-                    <ion-item class="item-remove-animate" ng-repeat="group in groups | filter: groupList.searchString" padding="false" style="height: 74px;" ng-init="group.showDivByIndex=false" ng-click="showChatWindowPopup(group,'group')">
+                    <ion-item class="" ng-repeat="group in allGroupChatFriends | filter: groupList.searchString" padding="false" style="height: 74px;" ng-init="group.showDivByIndex=false" ng-click="showChatWindowPopup(group,'group')">
                         <div ng-if="group.showDivByIndex==true" style="padding-top: 10px">
                             user Added
                         </div>

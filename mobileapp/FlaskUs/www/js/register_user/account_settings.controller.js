@@ -417,7 +417,7 @@
                     $scope.user.DOB = currDate;
                 },
 
-                from: new Date(1960, 1, 1),
+                from: new Date(1940, 1, 1),
                 to: new Date(),
                 inputDate: new Date(),
                 mondayFirst: true,

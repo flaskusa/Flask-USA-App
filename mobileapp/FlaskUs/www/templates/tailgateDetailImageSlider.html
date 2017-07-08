@@ -6,7 +6,6 @@
         <div class="right" style="margin-top:60px">
             <button class="button button-icon icon ion-chevron-right slider_arrow" ng-click="slideNext1('tailgateImage-viewer')"></button>
         </div>
-
         <ion-slide-box delegate-handle="tailgateImage-viewer"show-pager='false' active-slide="currentIndex" does-continue="true" >
             <ion-slide  ng-repeat="images in myTailgateImages" style="background-color: #666 !important;">
                 <img ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}" alt="Image not found"
@@ -14,5 +13,4 @@
             </ion-slide>
         </ion-slide-box>
     </div>
-
 </div>

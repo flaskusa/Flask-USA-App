@@ -22,24 +22,27 @@
                 <img ng-if="userProfileUrl.length > 1" class="default_img" ng-src="{{userProfileUrl}}" onError="this.src = 'img/default-profilepic.png';">
                 <h2>{{userName}}</h2>
                 <h3>{{userEmailId}}</h3>
-                <a href="#/app/my_friends_tab/notification_tab" ng-if="totalMessageNotification>0" class="icon-left ion-email menu_notification" menu-close></a>
-                <a href="#/app/my_friends_tab/notification_tab" ng-if="totalRequestNotification>0" class="icon-left ion-person-stalker menu_notification" menu-close></a>
+                <a href="#/app/my_friends_tab/notification_tab" ng-if="totalMessageNotification>0" class="icon-left ion-email menu_notification" menu-toggle></a>
+                <a href="#/app/my_friends_tab/notification_tab" ng-if="totalRequestNotification>0" class="icon-left ion-person-stalker menu_notification" menu-toggle></a>
             </div>
             <ul class="list menuContentList">
                 <div ng-show="show_login">
-                    <a href="#/app/user_navigation_menu" class="item icon ion-home menu_icon" menu-close>HOME</a>
+                    <a href="#/app/user_navigation_menu" class="item icon ion-home menu_icon" menu-toggle>HOME</a>
                 </div>
-                <a href="#/app/events" class="item icon ion-star menu_icon" menu-close>EVENT LIST</a>
-                <a href="#/app/venueList" class="item icon ion-star menu_icon" menu-close>VENUE LIST</a>
+                <a href="#/app/events" class="item icon ion-star menu_icon" menu-toggle>EVENT LIST</a>
+                <a href="#/app/venueList" class="item icon ion-star menu_icon" menu-toggle>VENUE LIST</a>
                 <div ng-show="show_login" style="display:none;">
-                    <a href="#/app/supplies//" class="item icon ion-star menu_icon" menu-close>SUPPLIES</a>
-                </div>
-                <div ng-show="!show_login">
-                    <a href="#/app/login" class="item icon icon-left ion-unlocked menu_icon" menu-close ng-click="login_form.$setPristine();">LOGIN</a>
-                    <a href="#/app/user_registration" class="item icon icon-left ion-person-add menu_icon" menu-close>SIGN UP</a>
+                    <a href="#/app/supplies//" class="item icon ion-star menu_icon" menu-toggle>SUPPLIES</a>
                 </div>
                 <div ng-show="show_login">
-                    <a class="item icon icon-left ion-locked menu_icon" menu-close ng-click="doLogout();">LOGOUT</a>
+                    <a href="#/app/message_detail" class="item icon ion-star menu_icon" menu-toggle>MESSAGES</a>
+                </div>
+                <div ng-show="!show_login">
+                    <a href="#/app/login" class="item icon icon-left ion-unlocked menu_icon" menu-toggle ng-click="login_form.$setPristine();">LOGIN</a>
+                    <a href="#/app/user_registration" class="item icon icon-left ion-person-add menu_icon" menu-toggle>SIGN UP</a>
+                </div>
+                <div ng-show="show_login">
+                    <a class="item icon icon-left ion-locked menu_icon" menu-toggle ng-click="doLogout();">LOGOUT</a>
                 </div>
             </ul>
         </ion-content>

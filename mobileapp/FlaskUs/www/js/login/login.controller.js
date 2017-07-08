@@ -152,6 +152,11 @@
                     1000);
                     $cookies.remove('infoType');
                     break;
+                case "Tailgate_Message":
+                    setTimeout(
+                        $state.go("app.my_tailgateDetails.my_tailgate_event_details", { 'tailgateId': sendInfoData.infoData.tailgateId }),
+                    1000);
+                    $cookies.remove('infoType');
             }
         }
 

@@ -22,7 +22,7 @@
         $scope.readMsg = false;
         $scope.ShowReplyButton = true;
         $scope.addingInGroup = false;
-        
+        $scope.allGroupChatFriends = [];
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope,
             animation: 'fade-in'
@@ -129,6 +129,7 @@
         function hideMessageDiv() {
             $scope.messageSentStatus = false;
         }
+
         $scope.getMessagesTime = function () {
             angular.forEach($scope.myMessages, function (value, key) {
                 $scope.messageDate = new Date(value.dateTime);
@@ -140,6 +141,7 @@
         $scope.goBack = function () {
             $ionicHistory.goBack();
         }
+
         function getTimeDifference(dateTime) {
             var todayDate = new Date();
             var differenceTravel = todayDate.getTime() - $scope.messageDate.getTime();
@@ -187,6 +189,7 @@
 
         //get all user groups
         function getAllGroups() {
+            $scope.allGroupChatFriends = [];
             FriendsNotificationService.getAllGroups($scope.loggedInUser).then(function (response) {
                 if (response.message != "Authenticated access required") {
                     if ($scope.addingInGroup == true) {
@@ -219,10 +222,25 @@
                     else {
                         $scope.groups = response;
                     }
-                }
-                $scope.groups.sort(custom_sort);
+                }                
+                getOnlyGroup();
             });
-           
+            
+        }
+
+        function getOnlyGroup() {
+            angular.forEach($scope.groups, function (value, key) {
+                getAllGroupChatFriends(value);
+            });
+        }
+       
+        function getAllGroupChatFriends(data) {
+            FriendsNotificationService.getAllMyFlaskGroupMessages(data.groupId).then(function (response) {
+                if (response.length != 0) {
+                    $scope.allGroupChatFriends.push(data);
+                    $scope.allGroupChatFriends.sort(custom_sort);
+                }
+            });
         }
 
         //get all friends
@@ -252,10 +270,19 @@
             return 0;
         }
 
-        function push_friends(value) {
-            $scope.allFriends.push(value);
-            $scope.allFriends.sort(custom_sort);
+        function push_friends(value) {           
+            getAllChatFriends(value);
         }
+
+        function getAllChatFriends(value) {
+            FriendsNotificationService.getMyAllMessages(parseInt(value.userId)).then(function (response) {
+                if (response.length!=0) {
+                    $scope.allFriends.push(value);
+                    $scope.allFriends.sort(custom_sort);
+                }
+            });
+        }
+
         //get profile picture of friend 
         $scope.getUserProfile = function (UserDetail) {
             UserService.getUserProfile(UserDetail.userId).then(function (res) {

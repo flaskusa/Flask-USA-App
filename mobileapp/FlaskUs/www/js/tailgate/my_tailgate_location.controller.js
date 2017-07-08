@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgatelocationCtrl', mytailgatelocationCtrl);
 
-    mytailgatelocationCtrl.$inject = ['$scope', '$state', '$ionicPlatform', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi', 'SERVER', '$cordovaInAppBrowser'];
+    mytailgatelocationCtrl.$inject = ['$scope', '$state', '$ionicPlatform', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi', 'SERVER', '$cordovaInAppBrowser', '$cordovaGeolocation'];
 
     /* @ngInject */
-    function mytailgatelocationCtrl($scope, $state, $ionicPlatform, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi, SERVER, $cordovaInAppBrowser) {
+    function mytailgatelocationCtrl($scope, $state, $ionicPlatform, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi, SERVER, $cordovaInAppBrowser, $cordovaGeolocation) {
         $scope.myTailgaters = [];
         var tailGateId = $cookies.get('currtailGateId');
         $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
@@ -15,6 +15,8 @@
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
         }
+        $scope.marker = {};
+        $scope.isUserMarkerShown = false;
         $scope.latitude = 43.4651;
         $scope.longitude = -80.5223;
         $scope.$root.takemeThere = function (value) {
@@ -33,7 +35,7 @@
                 return ionic.Platform.isWindowsPhone();
             }
         };
-
+        getGeoLocation();
         function getReverseGeocodingData(lat, lng) {
             var latlng = new google.maps.LatLng(lat, lng);
             var address = '';
@@ -167,7 +169,46 @@
                 }
             });
            
-        }        
+        }
+
+        
+        //Flask user locator when user clicks on "Find Me" button
+        $scope.centerOnMe = function () {
+            $scope.isUserMarkerShown = !$scope.isUserMarkerShown;
+            if ($scope.isUserMarkerShown) {
+                $scope.map = {
+                    center: {
+                        latitude: $scope.userlat,
+                        longitude: $scope.userlong
+                    },
+                    zoom: 14
+                }
+                $scope.marker = {
+                    id: 1,
+                    coords: {
+                        latitude: $scope.userlat,
+                        longitude: $scope.userlong
+                    },
+                    options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
+                }
+            } else {
+                $scope.marker = {};
+                callMap($scope.taligateMarkers.latitude, $scope.taligateMarkers.longitude); //taking markers from cookies
+            }
+        }
+        function getGeoLocation() {
+            var posOptions = { timeout: 10000, enableHighAccuracy: false };
+            $cordovaGeolocation
+              .getCurrentPosition(posOptions)
+              .then(function (pos) {
+                  $scope.userlat = pos.coords.latitude;
+                  $scope.userlong = pos.coords.longitude;
+              }, function (err) {
+                  // error
+                  // $flaskUtil.alert("Unable to Get Location");
+              });
+        }
+
      }
 })();
 

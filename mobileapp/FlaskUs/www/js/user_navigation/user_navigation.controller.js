@@ -12,7 +12,7 @@
         $scope.goToMessagePage=false;
         $scope.goToFriendPage=false;
         $scope.goToRequestPage = false;
-        $rootScope.totalMessageNotification=0;
+        $rootScope.totalMessageNotification = 0;
         $rootScope.totalRequestNotification = 0;
          $scope.isUserLogin=function() {
              $scope.myTimeOut = $timeout(function () {

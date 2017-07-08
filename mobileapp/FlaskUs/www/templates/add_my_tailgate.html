@@ -79,10 +79,23 @@
                 <div style="margin-top: 44px;">
                     <div style="width:100%;height:100%;" class="add_my_tailgate">
                         <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events">
+                            <ui-gmap-map-control position="right_center">
+                                <div ng-controller="refreshMap">
+                                    <div class="parking_map_div">
+                                        <div title="Select Type" class="map_icon_type">
+                                            <div>
+                                                <div class="miniLocateButton" ng-click="centerOnMe()"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </ui-gmap-map-control>
                             <ui-gmap-window show="map.window.show" coords="map.window.model" options="map.window.options" closeClick="map.window.closeClick()"
                                 templateParameter="map.window">
                                 <div></div>
                             </ui-gmap-window>
+                            <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=0>
+                            </ui-gmap-marker>
                             <ui-gmap-marker ng-repeat="m in map.markers" coords="m.coords" icon="m.icon" options="m.options" idkey="m.id" click="onClick(m)">
                             </ui-gmap-marker>
                         </ui-gmap-google-map>

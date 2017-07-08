@@ -53,7 +53,7 @@
                     //var date1 = new Date(val);
                     // $scope.user.DOB = $filter('date1')(date1, 'yyyy-MM-dd');
                 },
-                from: new Date(1960, 1, 1),
+                from: new Date(1940, 1, 1),
                 to: new Date(),
                 inputDate: new Date(),
                 mondayFirst: true,
