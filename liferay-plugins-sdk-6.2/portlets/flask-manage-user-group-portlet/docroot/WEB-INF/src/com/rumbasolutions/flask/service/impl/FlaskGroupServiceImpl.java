@@ -96,19 +96,13 @@ public class FlaskGroupServiceImpl extends FlaskGroupServiceBaseImpl {
 					obj.put("isActive", myGroup.getIsActive());
 					obj.put("isDelete", myGroup.getIsDelete());
 					int count = 0;
-					boolean flag = false;
 					for(FlaskGroupRecipients recp: flaskGroupRecipients){
-						String recipient = recp.getRecipients();
-						String read = recp.getRead();
-						String[] recpPart = recipient.split(",");
-						String[] readPart = read.split(",");
-						for(int j = 0; j < recpPart.length; j++){
-							if((userId == Long.parseLong(recpPart[j])) && (Long.parseLong(readPart[j]) == 0)){
-								flag = true;
+						JSONObject recpInfo = JSONFactoryUtil.createJSONObject(recp.getMessageStatusInfo());				
+						if(recpInfo.has(String.valueOf(serviceContext.getUserId()))){
+							JSONObject recpObj = recpInfo.getJSONObject(String.valueOf(serviceContext.getUserId()));
+							if(!recpObj.getBoolean("deleted") && !recpObj.getBoolean("read")){
+								count++;
 							}
-						}
-						if(flag){
-							count++;
 						}
 					}
 					String dateTime ="";
