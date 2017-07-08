@@ -77,7 +77,9 @@ public class TailgateMessageBoardServiceImpl
 				tailgateMessageBoard.setCreatedDate(serviceContext.getCreateDate(now));
 				tailgateMessageBoard.setModifiedDate(serviceContext.getModifiedDate(now));
 				tailgateMessageBoard = TailgateMessageBoardLocalServiceUtil.addTailgateMessageBoard(tailgateMessageBoard);
-				FlaskMessagesServiceUtil.sendPush(tailgateInfo.getUserId(), "Flask Tailgate Message", "You have a new message inside tailgate "+tailgateInfo.getTailgateName(), "Tailgate_Message", tailgateMessageBoard.getModelAttributes(), serviceContext.getUserId());
+				for(TailgateUsers tailgateUser: tailgateUsers){
+					FlaskMessagesServiceUtil.sendPush(tailgateUser.getUserId(), "Flask Tailgate Message", "You have a new message inside tailgate "+tailgateInfo.getTailgateName(), "Tailgate_Message", tailgateMessageBoard.getModelAttributes(), tailgateId);
+				}
 			}else{
 				throw new Exception("You do not have required permissions");
 			}
