@@ -75,13 +75,6 @@ public class FlaskGroupRecipientsServiceImpl
 				obj.put("read", false);
 				obj.put("deleted", false);
 				jsonObj.put(String.valueOf(groupUser.getUserId()), obj);
-//			   if((recipients == null || recipients == "") && (read == null || read == "")){
-//				   recipients = String.valueOf(groupUser.getUserId());
-//				   read = "0";
-//			   }else{
-//				   recipients = recipients+ "," +groupUser.getUserId();
-//				   read = read+ "," + "0";
-//			   }
 			   if(groupUser.getUserId() != serviceContext.getUserId())
 				   FlaskMessagesServiceUtil.sendPush(groupUser.getUserId(), "Flask Group Message", " You have a message from Group "+group.getGroupName(), "Group_Message", group.getModelAttributes(),
 						   group.getGroupId());
@@ -113,24 +106,15 @@ public class FlaskGroupRecipientsServiceImpl
 	  try {
 		   List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupRecipientsUtil.findByMessageId(groupMessageId);
 		   for(FlaskGroupRecipients recp: flaskGroupRecipients){
-			    String recipient = recp.getRecipients();
-			    String read = recp.getRead();
-				String[] recpPart = recipient.split(",");
-				String[] readPart = read.split(","); 
-				String updateRead ="";
-				for(int i = 0; i <= recpPart.length-1; i++){
-					if((serviceContext.getUserId() == Long.parseLong(recpPart[i])) && (Long.parseLong(readPart[i]) == 0)){
-						readPart[i] = "1"; 
-						ret = true;
-					}
-					if(updateRead == null || updateRead == ""){
-						updateRead = readPart[i];
-					}else{
-						updateRead = updateRead+ "," + readPart[i];
-					}
-				}
-				if(ret){
-					recp.setRead(updateRead);
+			   	JSONObject recpInfo = JSONFactoryUtil.createJSONObject(recp.getMessageStatusInfo());				
+				if(recpInfo.has(String.valueOf(serviceContext.getUserId()))){
+					JSONObject recpObj = recpInfo.getJSONObject(String.valueOf(serviceContext.getUserId()));
+					JSONObject newObj = JSONFactoryUtil.createJSONObject();
+					newObj.put("deleted", recpObj.getBoolean("deleted"));
+					newObj.put("read", true);
+					recpInfo.remove(String.valueOf(serviceContext.getUserId()));
+					recpInfo.put(String.valueOf(serviceContext.getUserId()), newObj);
+					recp.setMessageStatusInfo(recpInfo.toString());
 					FlaskGroupRecipientsLocalServiceUtil.updateFlaskGroupRecipients(recp);
 				}
 		   }

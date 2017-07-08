@@ -131,7 +131,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		return mailSent;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "deprecation" })
 	@Override
 	public JSONArray getAllMyFlaskMessages(long receiverId, ServiceContext serviceContext){
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
@@ -148,7 +148,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 			for(FlaskRecipients recp: flaskRecipients){
 				JSONObject jsonObj =  JSONFactoryUtil.createJSONObject();
 				FlaskMessages msg = FlaskMessagesLocalServiceUtil.getFlaskMessages(recp.getMessageId());
-				jsonObj.put("dateTime", msg.getDateTime());
+				jsonObj.put("dateTime", msg.getDateTime().toLocaleString());
 				jsonObj.put("message", msg.getMessage());
 				jsonObj.put("messageId", msg.getMessageId());
 				jsonObj.put("recipients", msg.getRecipients());
@@ -204,7 +204,11 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		try {
 			List<FlaskRecipients> flaskRecipients = FlaskRecipientsUtil.findByUserIdSenderId(serviceContext.getUserId(), receiverId);
 			for(FlaskRecipients recp: flaskRecipients){
-				List<String> deletedBy = Arrays.asList(recp.getDeletedBy().split(","));
+				List<String> deletedBy = new ArrayList<String>();
+				if(!recp.getDeletedBy().equals("")){
+					deletedBy = Arrays.asList(recp.getDeletedBy().split(","));
+				}
+					
 				if(!deletedBy.contains(String.valueOf(serviceContext.getUserId())) && !recp.getRead()){
 					count++;
 				}
@@ -223,16 +227,24 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 			List<FlaskGroup> flaskGroups = FlaskGroupServiceUtil.getGroups(serviceContext.getUserId());
 			for(int i =0; i<myFriends.length(); i++ ){
 				int userMessageCount = 0;
+				System.out.println("######################");
+				System.out.println(myFriends.getJSONObject(i).getLong("userId"));
 				userMessageCount = FlaskMessagesServiceUtil.getMyUnreadFlaskMessagesCount(myFriends.getJSONObject(i).getLong("userId"), serviceContext);
+				System.out.println(userMessageCount);
+				System.out.println("########################");
 				if(userMessageCount > 0){
-					count++;
+					count = count + userMessageCount;
 				}
 			}
 			for(FlaskGroup flaskgroup: flaskGroups){
 				int groupMessageCount = 0;
+				System.out.println("********************");
+				System.out.println(flaskgroup.getGroupId());
 				groupMessageCount = FlaskGroupMessagesServiceUtil.getMyUnreadFlaskGroupMessagesCount(flaskgroup.getGroupId(), serviceContext);
+				System.out.println(groupMessageCount);
+				System.out.println("********************");
 				if(groupMessageCount > 0){
-					count++;
+					count = count + groupMessageCount;
 				}
 			}
 		} catch (Exception e) {
