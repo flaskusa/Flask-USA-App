@@ -17,11 +17,13 @@ package com.rumbasolutions.flask.service.impl;
 import java.util.Date;
 import java.util.List;
 
+import com.liferay.contacts.service.FlaskMessagesServiceUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.util.PortalUtil;
+import com.rumbasolutions.flask.model.TailgateInfo;
 import com.rumbasolutions.flask.model.TailgateMessageBoard;
 import com.rumbasolutions.flask.model.TailgateUsers;
 import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
@@ -64,7 +66,8 @@ public class TailgateMessageBoardServiceImpl
 					enableAccess = true;
 				}
 			}
-			if(serviceContext.getUserId() == TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId).getUserId() || enableAccess){
+			TailgateInfo tailgateInfo = TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId);
+			if(serviceContext.getUserId() == tailgateInfo.getUserId() || enableAccess){
 				Date now = new Date();
 				tailgateMessageBoard = TailgateMessageBoardLocalServiceUtil.createTailgateMessageBoard(CounterLocalServiceUtil.increment());
 				tailgateMessageBoard.setMessageText(messageText);
@@ -74,6 +77,7 @@ public class TailgateMessageBoardServiceImpl
 				tailgateMessageBoard.setCreatedDate(serviceContext.getCreateDate(now));
 				tailgateMessageBoard.setModifiedDate(serviceContext.getModifiedDate(now));
 				tailgateMessageBoard = TailgateMessageBoardLocalServiceUtil.addTailgateMessageBoard(tailgateMessageBoard);
+				FlaskMessagesServiceUtil.sendPush(tailgateInfo.getUserId(), "Flask Tailgate Message", "You have a new message inside tailgate "+tailgateInfo.getTailgateName(), "Tailgate_Message", tailgateMessageBoard.getModelAttributes(), serviceContext.getUserId());
 			}else{
 				throw new Exception("You do not have required permissions");
 			}

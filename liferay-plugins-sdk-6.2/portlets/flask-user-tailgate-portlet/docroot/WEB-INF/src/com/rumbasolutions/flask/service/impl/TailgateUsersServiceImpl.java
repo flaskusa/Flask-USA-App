@@ -148,7 +148,7 @@ public class TailgateUsersServiceImpl extends TailgateUsersServiceBaseImpl {
 				tailgateUsers = TailgateUsersLocalServiceUtil.addTailgateUsers(tailgateUsers);
 				FlaskMessagesServiceUtil.sendPush(userId, "Flask Tailgate Invitation", 
 						"You are invited to a tailgate party, " + tailgate.getTailgateName() + " by " + UserLocalServiceUtil.getUser(tailgate.getUserId()).getFullName(),
-						"Tailgate_invitation", tailgate.getModelAttributes());
+						"Tailgate_invitation", tailgate.getModelAttributes(), userId);
 			}
 		}catch(Exception e){
 			LOGGER.error("Exception in Add Tailgate User :" + e.getMessage());
