@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsCtrl', FriendsCtrl);
 
-    FriendsCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsService','$flaskUtil','$state','UserService','SERVER','$localStorage','$ionicScrollDelegate','$ionicPopup'];
+    FriendsCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsService', '$flaskUtil', '$state', 'UserService', 'SERVER', '$localStorage', '$ionicScrollDelegate', '$ionicPopup', '$rootScope'];
 
     /* @ngInject */
-    function FriendsCtrl($scope, $http, $ionicModal,FriendsService,$flaskUtil,$state,UserService,SERVER,$localStorage,$ionicScrollDelegate,$ionicPopup) {
+    function FriendsCtrl($scope, $http, $ionicModal, FriendsService, $flaskUtil, $state, UserService, SERVER, $localStorage, $ionicScrollDelegate, $ionicPopup, $rootScope) {
       $scope.myFriends = [];
       $scope.userContactList = [];
       $scope.startIndex = 0;
@@ -14,7 +14,8 @@
       $scope.noFriendAdded = false;
       $scope.shoeEmptyMessage=false;
       $scope.searchBox = {show:false};
-      $scope.searchContact = {"searchtext" :" "};
+      $scope.searchContact = { "searchtext": " " };
+      $scope.noFriendMsg = "Loading ....";
       $scope.messsage = {'messsageToSend':''};
         $scope.moreDataCanBeLoaded = true;
         if($localStorage["myFriendDetail"]==undefined) {
@@ -32,13 +33,15 @@
         $scope.goTOGroup=function(){
             $state.go('app.my_friendDetail',{userId:0});
         }
-      $scope.initialize = function() {
+        $scope.initialize = function () {
+          $rootScope.$broadcast('loading:show');
           $scope.getMyFriends($scope.searchContact.searchtext);
           $ionicModal.fromTemplateUrl('templates/modal.html', {
               scope: $scope
           }).then(function (modal) {
               $scope.modal = modal;
           });
+         
       }; 
 
       $scope.showInviteFriendPopup = function(){
@@ -141,12 +144,17 @@
                   })
 
                 $scope.searchBox.show  = false;
-                //  $scope.noFriendAdded = $scope.myFriends.length == 0;
+                      //  $scope.noFriendAdded = $scope.myFriends.length == 0;
+                $rootScope.$broadcast('loading:hide');
               }}else{
                   $flaskUtil.alert("Failed to load friends List");
-                  $scope.searchBox.show  = false;
-              }           
+                  $scope.searchBox.show = false;
+                  $scope.noFriendMsg = "There are no friends.";
+                  $rootScope.$broadcast('loading:hide');
+              }
+              $rootScope.$broadcast('loading:hide');
           });
+         
       };
         $scope.getUserProfile = function(UserDetail) {
             UserService.getUserProfile(UserDetail.userId).then(function(res) {

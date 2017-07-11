@@ -418,17 +418,14 @@
                 if(!loaderHide(config.url)) {
                     $rootScope.$broadcast('loading:show');
                 }
-                return config
+                return config;
             },
             response: function (response) {
-                    $rootScope.$broadcast('loading:hide')
-                return response
+                    $rootScope.$broadcast('loading:hide');
+                return response;
                 }
             }
         })
-
-
-
          uiGmapGoogleMapApiProvider.configure({
           key: 'AIzaSyDAFZx0f0rc-vCyx-GHMqy2O9m06Dc-p8Y',
         libraries: 'weather,geometry,visualization,places'

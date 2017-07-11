@@ -53,7 +53,7 @@
                 <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(data.userId)"></ion-option-button>
 
             </ion-item>
-            <a class="item" ng-if="myFriends.length == 0 && shoeEmptyMessage==true">There are no friends. </a>
+            <a class="item" ng-if="myFriends.length == 0 && shoeEmptyMessage==true">{{noFriendMsg}} </a>
 
 
         </ion-list>

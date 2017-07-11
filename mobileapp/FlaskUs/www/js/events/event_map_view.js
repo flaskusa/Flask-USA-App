@@ -446,8 +446,8 @@
                 var venueObj = angular.fromJson($stateParams.eventDetails.Venue);
                 $scope.map.center.latitude = parseFloat(venueObj.latitude);
                 $scope.map.center.longitude = parseFloat(venueObj.longitude);
-                //changing venue map zoom level depending upon venueDetailsDistRange
 
+                //changing venue map zoom level depending upon venueDetailsDistRange
                 if (venueObj.venueDetailsDistRange == 1) {
                     $scope.map.zoom = parseInt(14);
                 } else if (venueObj.venueDetailsDistRange == 2) {

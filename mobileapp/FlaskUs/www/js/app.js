@@ -214,7 +214,7 @@
 
                 })
             }
-                $rootScope.$on('loading:show', function () {
+            $rootScope.$on('loading:show', function () {
                 $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' })
             })
 

@@ -44,18 +44,15 @@
         // Retrieve the object from ng-storage
         $rootScope.$on("LocationOptionSelected", function(){
             //do something
-            getAllEventDetail()
-
+            getAllEventDetail();
         });
+
         function getAllEventDetail(){
             if($localStorage.things) {
                 $scope.localstorageData = $localStorage.things;
                 $scope.storedTime = $scope.localstorageData.timestamp;
             }
-            //
             console.log($scope.localstorageData);
-
-
 
             if ($scope.localstorageData.latitude!=undefined && $scope.localstorageData.latitude!="" && $scope.localstorageData.longitude!="") {
                 get_from_localStorage();
@@ -80,8 +77,7 @@
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
-                }
-                
+                }                
             });
         }
 
@@ -98,10 +94,10 @@
                             $scope.city.push({cityName:$scope.allVenues[j].venueCity});
                     }
                 }
-
             });
         }
-              //Get venue name for event details
+
+        //Get venue name for event details
         $scope.getVenueNameForVenueId  = function (venueId) {
             var venueCity = ""
             if ($scope.allVenues == undefined) {

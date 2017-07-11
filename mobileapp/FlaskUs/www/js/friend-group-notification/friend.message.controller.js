@@ -23,6 +23,9 @@
         $scope.ShowReplyButton = true;
         $scope.addingInGroup = false;
         $scope.allGroupChatFriends = [];
+        $scope.friendChatMessages = " Loading.... ";
+        $scope.groupChatMessages = " Loading.... ";
+        $scope.insideChatMessage = " Loading.... ";
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope,
             animation: 'fade-in'
@@ -133,16 +136,45 @@
         $scope.getMessagesTime = function () {
             angular.forEach($scope.myMessages, function (value, key) {
                 $scope.messageDate = new Date(value.dateTime);
-                var result = getTimeDifference(value.dateTime);
+                var formattedDate = formatDate($scope.messageDate);
+                var result = getTimeDifference(value.dateTime, formattedDate);
                 value.diffDate = result;
             });
+        }
+
+        function formatDate(dateVal) {
+            var newDate = new Date(dateVal);
+
+            var sMonth = padValue(newDate.getMonth() + 1);
+            var sDay = padValue(newDate.getDate());
+            var sYear = newDate.getFullYear().toString().substr(-2)
+            var sHour = newDate.getHours();
+            var sMinute = padValue(newDate.getMinutes());
+            var sAMPM = "AM";
+
+            var iHourCheck = parseInt(sHour);
+
+            if (iHourCheck > 12) {
+                sAMPM = "PM";
+                sHour = iHourCheck - 12;
+            }
+            else if (iHourCheck === 0) {
+                sHour = "12";
+            }
+
+            sHour = padValue(sHour);
+
+            return sMonth + "/" + sDay + "/" + sYear + " " + sHour + ":" + sMinute + " " + sAMPM;
+        }
+
+        function padValue(value) {
+            return (value < 10) ? "0" + value : value;
         }
 
         $scope.goBack = function () {
             $ionicHistory.goBack();
         }
-
-        function getTimeDifference(dateTime) {
+        function getTimeDifference(dateTime, formattedDate) {
             var todayDate = new Date();
             var differenceTravel = todayDate.getTime() - $scope.messageDate.getTime();
             var seconds = Math.floor((differenceTravel) / (1000));
@@ -157,13 +189,13 @@
             else if (minutes < 60) {
                 return minutes + ' minutes ago';
             } else if (hours < 24) {
-                return dateTime.substr(11, 5);
-            }else if (days < 31) {
-                return dateTime.substr(0, 16);
+                return formattedDate.substr(9);
+            } else if (days < 31) {
+                return formattedDate;
             } else if (months < 12) {
-                return dateTime.substr(0, 16);
+                return formattedDate;
             } else {
-                dateTime.substr(0, 16);
+                formattedDate;
             }
         }
 
@@ -239,6 +271,8 @@
                 if (response.length != 0) {
                     $scope.allGroupChatFriends.push(data);
                     $scope.allGroupChatFriends.sort(custom_sort);
+                } else {
+                    $scope.groupChatMessages = "There are no messages.";
                 }
             });
         }
@@ -279,6 +313,8 @@
                 if (response.length!=0) {
                     $scope.allFriends.push(value);
                     $scope.allFriends.sort(custom_sort);
+                } else {
+                    $scope.friendChatMessages = "There are no messages";
                 }
             });
         }
@@ -369,6 +405,9 @@
                 $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
                 FriendsNotificationService.getMyAllMessages(data.userId).then(function (response) {
                     $scope.myMessages = response;
+                    if (response.length == 0) {
+                        $scope.insideChatMessage = "There are no Messages";
+                    }
                     for (var i = 0; i < $scope.myMessages.length; i++) {
                         if ($scope.myMessages[i].recipients == $scope.loggedInUser) {
                             FriendsNotificationService.setReadMessage($scope.myMessages[i].messageId).then(function (response) {
@@ -388,7 +427,7 @@
                 $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
                 FriendsNotificationService.getAllMyFlaskGroupMessages(data.groupId).then(function (response) {
                     $scope.myMessages = response;
-                    if ($scope.myMessages.length >0) {
+                    if ($scope.myMessages.length != 0) {
                         for (var i = 0; i < $scope.myMessages.length; i++) {
                             FriendsNotificationService.setGroupMessageRead($scope.myMessages[i].messageId).then(function (response) {
                                 $scope.readMsg = true;
@@ -397,6 +436,8 @@
                         $scope.getMessagesTime();
                         $ionicScrollDelegate.scrollBottom();
                         $ionicLoading.hide();
+                    } else {
+                            $scope.insideChatMessage = "There are no Messages";
                     }
                 });
             }

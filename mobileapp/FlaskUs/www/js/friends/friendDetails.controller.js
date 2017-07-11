@@ -32,7 +32,7 @@
         
         $scope.toggleMessageBox=function(message) {
             $scope.showTextArea.show = true;
-            setTimeout(startToggleFunction, 20)
+            setTimeout(startToggleFunction, 20);
 
             function startToggleFunction() {
 
@@ -40,8 +40,7 @@
 
                 if ($scope.messageBoxClasses.contains("hideAll")) {
                     $scope.messageBoxClasses.remove("hideAll");
-                }
-                ;
+                };
                 setTimeout(removeText, 10);
                 function removeText() {
                     if ($scope.messageBoxClasses.contains("hideTexArea")) {
