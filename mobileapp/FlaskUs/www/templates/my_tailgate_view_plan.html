@@ -36,7 +36,7 @@
         </div>
         <a class="item" ng-if="allMyTailgateItems.length == 0"> You do not have any supply items... </a>
         <ion-list id="showSupplyListItems">
-            <ion-item ng-repeat="tailgateItem in allMyTailgateItems track by $index">
+            <ion-item ng-repeat="tailgateItem in allMyTailgateItems track by $index" class="animate-in-secondary chat-item.ng-enter-stagger">
                 <div class="col-100">                   
                     <div style="float:left"> <i class="supplyItemText">{{tailgateItem.supplyListItemName | uppercase}}</i>
                     </div>
@@ -61,7 +61,7 @@
                 </button>
             </div>
             <p id="addSupplyListError">Select Supply List To Add Supply Item!</p>
-            <ion-item class="myList item-remove-animate" ng-repeat="tailgateItem in allMyTailgateItems track by $index" style="font-family:inherit;font-size:inherit">
+            <ion-item class="myList item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="tailgateItem in allMyTailgateItems track by $index" style="font-family:inherit;font-size:inherit">
                 <span class="emailText"><i class="supplyItemText">{{tailgateItem.supplyListItemName | uppercase}}</i></span>
                 <select class="supplyitem_tailgate flaskSelect" ng-model="tailgateItem.itemAssignedUserId" ng-init="tailgateItem.itemAssignedUserId = (tailgateItem.itemAssignedUserId == undefined) ? '-1' : tailgateItem.itemAssignedUserId"
                         ng-change="updateSupplyItemsUser(tailgateItem,$index);">

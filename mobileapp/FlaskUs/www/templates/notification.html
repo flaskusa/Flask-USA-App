@@ -6,7 +6,7 @@
     </ion-nav-bar>
     <ion-content >
         <ion-list>
-            <ion-item ng-click="goToMessages()">
+            <ion-item ng-click="goToMessages()" class="animate-in-secondary chat-item.ng-enter-stagger">
                 <h3 class="nameText emailText">MESSAGES</h3>
                 <a ><span  class="badge badge-assertive badge_count">{{messageCount}}</span>
                     <div>
@@ -16,7 +16,7 @@
             </ion-item>
         </ion-list>
         <ion-list>
-            <ion-item ng-click="goToNotifications()">
+            <ion-item ng-click="goToNotifications()" class="animate-in-secondary chat-item.ng-enter-stagger">
                 <h3 class="nameText emailText">FRIEND REQUESTS</h3>
                 <a ><span  class="badge badge-assertive badge_count">{{notificationCount}}</span>
                     <div >

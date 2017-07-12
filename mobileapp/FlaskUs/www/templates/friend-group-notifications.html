@@ -6,7 +6,7 @@
     </ion-nav-bar>
     <ion-content overflow-scroll="false">
         <ion-list>
-            <ion-item ng-repeat="request in requestedUserDetail">
+            <ion-item ng-repeat="request in requestedUserDetail" class="animate-in-secondary chat-item.ng-enter-stagger">
                 <div>
                     <img ng-if="request.requestedPersonPicUrl==undefined" src="img/default-profilepic-copy.png" class="friendIcon">
                     <img ng-if="request.requestedPersonPicUrl.length>0" src="{{request.requestedPersonPicUrl}}" class="friendIcon" style="width: 47px;height: 47px;border-radius: 50%;" />

@@ -54,7 +54,7 @@
                 </div>
                 <ion-content class="padding has-subheader">
                     <ion-list>
-                        <ion-item class="item-avatar item-remove-animate"ng-repeat="data in memberToAddInGroup | filter:searchContact.searchtext" class="item-avatar " item="data">
+                        <ion-item class="item-avatar item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="data in memberToAddInGroup | filter:searchContact.searchtext" class="item-avatar " item="data">
                             <img src = "img/default-profilepic-copy.png" ng-if="data.friendProfilePicUrl==undefined">
                             <img src = "{{data.friendProfilePicUrl}}" ng-if="data.friendProfilePicUrl!=undefined">
 

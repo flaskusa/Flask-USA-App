@@ -1295,6 +1295,7 @@ button.button.button-clear.mini-button {
 }
 .myTailgatetopImg {
   height: auto;
+  max-height: 240px;
   display: block;
   margin-left: 0px;
   margin-right: 0px; 
@@ -3697,4 +3698,50 @@ height: 100% !important;
 
 .noMessage{
     color: #f89734;
+}
+
+@-webkit-keyframes animateInPrimary {
+  0% {
+    -webkit-transform: translate3d(-100%,0,0);
+  }
+ 
+  100% {
+    -webkit-transform: translate3d(0,0,0);
+  }
+}
+ 
+@-webkit-keyframes animateInSecondary{
+ 
+  0% {
+    opacity: 0;
+  }
+ 
+  50% {
+    opacity: 0;
+  }
+ 
+  100% {
+    opacity: 1;
+  }
+}
+ 
+.animate-in-primary {
+    -webkit-animation: animateInPrimary;
+    animation: animateInPrimary;
+    -webkit-animation-duration: 750ms;
+    animation-duraton: 750ms;
+}
+ 
+.animate-in-secondary {
+    -webkit-animation: animateInSecondary ease-in 1;
+    animation: animateInSecondary ease-in 1;
+    -webkit-animation-duration: 750ms;
+    animation-duraton: 750ms;
+}
+
+.chat-item.ng-enter-stagger {
+  -webkit-animation-delay:200ms;
+  animation-delay:200ms;
+  -webkit-animation-duration:0;
+  animation-duration:0;
 }

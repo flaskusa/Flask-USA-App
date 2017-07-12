@@ -8,8 +8,8 @@
         <ion-tab title="My friends" id="myFriendsTab">
             <ion-content class="friendlistInMessages no-Header">
                 <div ng-if="allFriends.length==0" class="item" style="font-weight:normal;">{{friendChatMessages}}</div>
-                <ion-list id="myFriendsList">
-                    <ion-item ng-repeat="data in allFriends" class="row-no-padding" padding="false" ng-click="showChatWindowPopup(data,'user')" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
+                <ion-list id="myFriendsList ">
+                    <ion-item ng-repeat="data in allFriends" class="row-no-padding animate-in-secondary" padding="false" ng-click="showChatWindowPopup(data,'user')" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
                         <a class="row-no-padding" style="text-decoration: none">
                             <!--href="#/app/my_friendDetail/{{data.userId}}"-->
                             <div class="col col-20" ng-if="data.friendProfilePicUrl==undefined">
@@ -34,7 +34,7 @@
             <ion-content class="friendlistInMessages no-Header">
                 <div ng-if="allGroupChatFriends.length==0" class="item" style="font-weight:normal;">{{groupChatMessages}}</div>
                 <ion-list>
-                    <ion-item class="" ng-repeat="group in allGroupChatFriends | filter: groupList.searchString" padding="false" style="height: 74px;" ng-init="group.showDivByIndex=false" ng-click="showChatWindowPopup(group,'group')">
+                    <ion-item class="animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="group in allGroupChatFriends | filter: groupList.searchString" padding="false" style="height: 74px;" ng-init="group.showDivByIndex=false" ng-click="showChatWindowPopup(group,'group')">
                         <div ng-if="group.showDivByIndex==true" style="padding-top: 10px">
                             user Added
                         </div>

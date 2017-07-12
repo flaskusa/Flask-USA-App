@@ -42,7 +42,7 @@
             <p class="addText">GROUP MEMBERS</p>
         </a>
        <ion-list>
-           <ion-item ng-repeat="data in allMember | orderBy:'userName'" class="row-no-padding" padding="false">
+           <ion-item ng-repeat="data in allMember | orderBy:'userName'" class="row-no-padding animate-in-secondary chat-item.ng-enter-stagger" padding="false">
                 <a class="row-no-padding" ng-click="groupMemberDetail(data)">
 
                    <div class="col col-20" ng-if="data.friendProfilePicUrl==undefined">
@@ -88,7 +88,7 @@
                 </div>
                 <ion-content class="padding has-subheader">
                     <ion-list>
-                        <ion-item ng-repeat="data in memberToAddInGroup track by $index" class="item-avatar" item="data">
+                        <ion-item ng-repeat="data in memberToAddInGroup track by $index" class="item-avatar animate-in-secondary chat-item.ng-enter-stagger" item="data">
                             <img src = "img/default-profilepic-copy.png" ng-if="data.friendProfilePicUrl==undefined">
                             <img src = "{{data.friendProfilePicUrl}}" ng-if="data.friendProfilePicUrl!=undefined" >
                             <h2>{{ data.fullName | uppercase}}</h2>

@@ -117,7 +117,7 @@
                             <div class="expand-collapse-content">
                                 <div>
                                     <div class="list">
-                                        <ion-item class="item-avatar item-remove-animate" ng-repeat="data in allGroups | orderBy:'groupName'">
+                                        <ion-item class="item-avatar item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="data in allGroups | orderBy:'groupName'">
                                             <img class="list-thumbnail listImages" src='img/default-group-pic.png' style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                                             <h2 class="eventNameCol_tailgate">{{ data.groupName | uppercase}}</h2>
                                             <p class="dateCol_tailgate">Created By : {{data.createdBy | uppercase}}</p>
@@ -138,7 +138,7 @@
                         <div class="slideDown" ng-hide="active1">
                             <div class="expand-collapse-content">
                                 <div>
-                                    <ion-item class="item-avatar item-remove-animate" ng-repeat="data in taigaterFriends | orderBy:'userName'">
+                                    <ion-item class="item-avatar item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="data in taigaterFriends | orderBy:'userName'">
                                         <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                                         <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                                         <h2 class="eventNameCol_tailgate">{{ data.fullName | uppercase}}</h2>
@@ -157,7 +157,7 @@
                                 <center>TAILGATERS</center>
                             </div>
                         </div>
-                        <ion-item ng-repeat="data in myTailgaters | orderBy:'userName'" class="item-avatar ">
+                        <ion-item ng-repeat="data in myTailgaters | orderBy:'userName'" class="item-avatar animate-in-secondary chat-item.ng-enter-stagger">
                             <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                             <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                             <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>
@@ -252,7 +252,7 @@
                         </button> 
                     </div>
                     <p id="addSupplyListError">Select Supply List To Add Supply Item!</p>
-                    <ion-item class="myList item-remove-animate" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
+                    <ion-item class="myList item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="item in selectedSupplyListItems" style="font-family:inherit;font-size:inherit">
                         <span class="emailText"><i class="supplyItemText">{{ item.supplyItemName | uppercase}}</i></span>
                         <select class="supplyitem_tailgate flaskSelect" ng-model="item.itemAssignedUserId" ng-init="item.itemAssignedUserId = (item.itemAssignedUserId == undefined) ? '-1' : item.itemAssignedUserId" 
                                 ng-change="updateSupplyItemsUser(item,$index);">

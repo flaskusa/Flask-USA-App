@@ -15,7 +15,7 @@
         </a>
         <ion-scroll style="height: 85%;" >
             <ion-list>
-                <ion-item ng-repeat="data in myTailgaters | orderBy:'userName'" class=" item-avatar item-remove-animate">
+                <ion-item ng-repeat="data in myTailgaters | orderBy:'userName'" class=" item-avatar item-remove-animate animate-in-secondary chat-item.ng-enter-stagger">
                     <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                     <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                     <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>

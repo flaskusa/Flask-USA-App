@@ -38,7 +38,7 @@
                 </div>
             </div>
             <ion-list show-delete="false" can-swipe="true">
-                <ion-item class="myList item-remove-animate" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in myEvent | filter: eventList.searchString">
+                <ion-item class="myList item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in myEvent | filter: eventList.searchString">
                     <div class="row no-padding">
                         <div class="col col-15" style="bottom:0px !important;"><img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages1 listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" /></div>
                         <div class="col col-70 event_content1">

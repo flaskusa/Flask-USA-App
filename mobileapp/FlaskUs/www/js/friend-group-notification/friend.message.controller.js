@@ -253,6 +253,11 @@
                     }
                     else {
                         $scope.groups = response;
+                        setTimeout(function () {
+                            if (response.length != 0) {
+                                $scope.groupChatMessages = "There are no messages";
+                            };
+                        }, 3000);
                     }
                 }                
                 getOnlyGroup();
@@ -271,9 +276,7 @@
                 if (response.length != 0) {
                     $scope.allGroupChatFriends.push(data);
                     $scope.allGroupChatFriends.sort(custom_sort);
-                } else {
-                    $scope.groupChatMessages = "There are no messages.";
-                }
+                } 
             });
         }
 
@@ -291,9 +294,13 @@
                             $localStorage["myFriendDetails"].push(value)
                         }
                     }
-                })
-            });
-            
+                });
+                setTimeout(function () {
+                    if (response.length != 0) {
+                        $scope.friendChatMessages = "There are no messages";
+                    };
+                }, 3000);             
+            });            
         }
         
         function custom_sort(a, b) {
@@ -313,8 +320,6 @@
                 if (response.length!=0) {
                     $scope.allFriends.push(value);
                     $scope.allFriends.sort(custom_sort);
-                } else {
-                    $scope.friendChatMessages = "There are no messages";
                 }
             });
         }
@@ -405,9 +410,11 @@
                 $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
                 FriendsNotificationService.getMyAllMessages(data.userId).then(function (response) {
                     $scope.myMessages = response;
-                    if (response.length == 0) {
-                        $scope.insideChatMessage = "There are no Messages";
-                    }
+                    $timeout(function () {
+                        if (response.length == 0) {
+                            $scope.insideChatMessage = "There are no Messages 01";
+                        }
+                    }, 600);
                     for (var i = 0; i < $scope.myMessages.length; i++) {
                         if ($scope.myMessages[i].recipients == $scope.loggedInUser) {
                             FriendsNotificationService.setReadMessage($scope.myMessages[i].messageId).then(function (response) {
@@ -437,7 +444,11 @@
                         $ionicScrollDelegate.scrollBottom();
                         $ionicLoading.hide();
                     } else {
-                            $scope.insideChatMessage = "There are no Messages";
+                        $timeout(function () {
+                            if (response.length == 0) {
+                                $scope.insideChatMessage = "There are no Messages 02";
+                            }
+                        }, 600);
                     }
                 });
             }

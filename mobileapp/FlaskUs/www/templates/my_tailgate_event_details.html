@@ -10,23 +10,22 @@
     <ion-content overflow-scroll="false" >
         <div class="list tab1">
             <!-- Tab 1 content -->
-            <div class="divImage">
-
-                <img class="myTailgatetopImg" src="img/flask_images/Fotolia_20387372_Subscription_Monthly_M.jpg" ng-if="tailgateLogoId == 0"
-                />
-                <img ng-src="{{tailgateLogoUrl}} " class="myTailgatetopImg" alt="Image not found" ng-if="tailgateLogoId>0" />
+            <div class="animate-in-primary">
+                <div ng-if="currTailgateLogo ==false;" style="height:239px;">Loading......</div>
+                <img class="myTailgatetopImg" src="img/flask_images/Fotolia_20387372_Subscription_Monthly_M.jpg" ng-if="tailgateLogoId == 0"/>
+                <img ng-src="{{tailgateLogoUrl}} " class="myTailgatetopImg animate-in-secondary" alt="Image not found" ng-if="tailgateLogoId>0" />
             </div>
-            <div class="mytailgate_Heading">
+            <div class="mytailgate_Heading animate-in-secondary" style="border: solid 1px;border-left-color: white;border-right-color: white;">
                 <h3><span class="overlineStyle">{{myTailgate.tailgateName}}</span></h3>
             </div>
-            <div class="eventDiv">
+            <div class="eventDiv animate-in-secondary chat-item ng-enter-stagger">
                 <a class="item item-icon-right tailgateEventList" href="#/app/pre_post_game/{{myTailgate.eventName}}/{{myTailgate.eventId}}/{{data.venueId}}">
                     <h2 class="tailgateEventNameCol">{{myTailgate.eventName}}</h2>
                     <p class="tailgateDateCol">{{myTailgate.tailgateDate | date:'EEEE, MMMM dd, yyyy'}}</p>
                     <span class="badge span_icon span_icon_extraright "><img src="img/flask_icons/arrow_left.svg"></span>
                 </a>
             </div>
-            <div class="tailgateInfo tailgateInfoborder">
+            <div class="tailgateInfo tailgateInfoborder animate-in-secondary chat-item.ng-enter-stagger">
                 <div class="row">
                     <div class="col" style="width:155px;"><span class="tailgateDescFont">START TIME :</span>{{myTailgate.startTime | date:"h:mma"}}</div>
                     <div class="col"><span class="tailgateDescFont">COST :</span>{{myTailgate.amountToPay | currency}}</div>
@@ -36,7 +35,7 @@
                         <div class="tailgateDescFont">TAILGATE DETAILS</div><span class="tailgate_Info">{{myTailgate.tailgateDescription}}</span></div>
                 </div>
             </div>
-            <div class="pic_gallery tailgateInfoborder">
+            <div class="pic_gallery tailgateInfoborder animate-in-secondary chat-item ng-enter-stagger">
                 <div class="row">
                     <div class="col">
                         <div class="tailgateDescFont">PICTURES</div>
@@ -59,7 +58,7 @@
                 </div>
 
             </div>
-            <div class="message_board">
+            <div class="message_board animate-in-secondary chat-item ng-enter-stagger">
                 <div class="row">
                     <div class="col">
                         <div class="msgboard_div">MESSAGE BOARD</div>
@@ -74,7 +73,7 @@
                                     <span class="badge span_icon" ng-click="saveMessage(usersMessages.message);"><img src="img/flask_icons/arrow_left.svg"></span>
                     </div>
                 </div>
-                <div class="list">
+                <div class="list animate-in-secondary chat-item ng-enter-stagger">
                     <div class="messageList" ng-repeat="data in messageUser">
                         <img ng-if="data.userPicUrl.length==undefined" class="default_img" ng-src='img/default-profilepic-copy.png' style="margin-top: 4px">
                         <img ng-if="data.userPicUrl.length>0" class="default_img" ng-src='{{data.userPicUrl}}' style="width: 40px;max-width: 65px;height: 40px;border-radius: 50%;margin-top: 4px">

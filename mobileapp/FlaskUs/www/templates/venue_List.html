@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="list">
-                <a class="item item-thumbnail-left item-icon-right eventList" href="#/app/pre_post_game/{{venue.venueName}}/none/{{venue.venueId}}" ng-repeat="venue in allVenues">
+                <a class="item item-thumbnail-left item-icon-right eventList animate-in-secondary chat-item.ng-enter-stagger" href="#/app/pre_post_game/{{venue.venueName}}/none/{{venue.venueId}}" ng-repeat="venue in allVenues">
                     <h2 class="eventNameCol">{{venue.venueName}}</h2>
                     <p class="dateCol">{{venue.addrLine1 | uppercase}}</p>
                     <p class="timeVenuCol"> {{venue.venueCity}} | <span class="cityVenuCol ml0">{{venue.venueStateName}}</span></p>

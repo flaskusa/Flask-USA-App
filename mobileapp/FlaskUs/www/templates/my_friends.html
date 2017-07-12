@@ -34,7 +34,7 @@
             </div>
         </div>-->
         <ion-list>
-            <ion-item ng-repeat="data in myFriends | orderBy:'fullName'"class="row-no-padding item-remove-animate"padding="false"ng-click="groupMemberDetail(data)">
+            <ion-item ng-repeat="data in myFriends | orderBy:'fullName'" class="row-no-padding item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" padding="false"ng-click="groupMemberDetail(data)">
                 <a class="row-no-padding" style="text-decoration: none">
                     <!--href="#/app/my_friendDetail/{{data.userId}}"-->
                     <div class="col col-20" ng-if="data.friendProfilePicUrl==undefined">
@@ -93,7 +93,7 @@
                 </div>
                 <ion-content class="padding has-subheader" overflow-scroll="false">
                             <ion-list>
-                                <ion-item ng-repeat="data in userContactList track by $index" class="item-avatar " item="data">
+                                <ion-item ng-repeat="data in userContactList track by $index" class="item-avatar animate-in-secondary chat-item.ng-enter-stagger" item="data">
 
                                     <img src = "img/default-profilepic-copy.png">
                                     <i class="invitationText">{{ data.fullName | uppercase}}</i>
