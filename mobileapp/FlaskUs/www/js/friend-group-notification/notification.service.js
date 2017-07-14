@@ -24,7 +24,8 @@
             getAllMyFlaskGroupMessages: getAllMyFlaskGroupMessages,
             sendFlaskGroupMessage: sendFlaskGroupMessage,
             deleteIndividualConverstaion: deleteIndividualConverstaion,
-            deleteGroupConverstaion: deleteGroupConverstaion
+            deleteGroupConverstaion: deleteGroupConverstaion,
+            getallFriendsandGroupWithMessages: getallFriendsandGroupWithMessages
         }
         var getMyNotificationCountUrl = "/flask-social-portlet.entry/get-requests-count";
         var getTotalUnreadChatCountUrl = "/flask-social-portlet.flaskmessages/get-total-unread-chat-count";
@@ -44,6 +45,7 @@
         var sendFlaskGroupMessageUrl = "/flask-social-portlet.flaskgroupmessages/send-flask-group-message";
         var deleteIndividualConversationUrl = "/flask-social-portlet.flaskmessages/delete-my-chat-messages";
         var deleteGroupConversationUrl = "/flask-social-portlet.flaskgroupmessages/delete-my-group-chat-messages";
+        var getallFriendsandGroupWithMessagesURL = "/flask-social-portlet.entry/get-all-my-messages";
         var companyId = SERVER.companyId;
 
         function getMyFriends(searchText) {
@@ -294,6 +296,16 @@
                 return $q.$inject(response);
                 //add errror handling 
             });
+        }
+
+        function getallFriendsandGroupWithMessages() {
+            return $http.get(SERVER.url + getallFriendsandGroupWithMessagesURL)
+                .then(function success(response) {
+                    return response.data;
+                }, function failure(response) {
+                    return $q.$inject(response);
+                    //add errror handling
+                });
         }
 
         return services;

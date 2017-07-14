@@ -366,9 +366,21 @@
                 });
         }
 
+        // for keyboard functionality on phone
+        $scope.inputUp = function () {
+            if (isIOS) $scope.data.keyboardHeight = 216;
+            $timeout(function () {
+                $ionicScrollDelegate.scrollBottom(true);
+            }, 300);
+        };
 
+        $scope.inputDown = function () {
+            if (isIOS) $scope.data.keyboardHeight = 0;
+            $ionicScrollDelegate.resize();
+        };
 
-
-
+        $scope.closeKeyboard = function () {
+            // cordova.plugins.Keyboard.close();
+        };
     }
 })();

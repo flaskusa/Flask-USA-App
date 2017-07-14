@@ -23,14 +23,24 @@
         $scope.ShowReplyButton = true;
         $scope.addingInGroup = false;
         $scope.allGroupChatFriends = [];
-        $scope.friendChatMessages = " Loading.... ";
+        $scope.allChatMessages = " Loading.... ";
         $scope.groupChatMessages = " Loading.... ";
         $scope.insideChatMessage = " Loading.... ";
+        $scope.newChatData = [];
+        var activeUsingPopup = $cookies.getObject('popupData');
+        var myObj = {};
+        var myContactObj = {};
         $ionicModal.fromTemplateUrl('templates/modal.html', {
             scope: $scope,
             animation: 'fade-in'
         }).then(function (modal) {
             $scope.modal = modal;
+        });
+        $ionicModal.fromTemplateUrl('templates/composeMessagesModal.html', {
+            scope: $scope,
+            animation: 'fade-in'
+        }).then(function (modal) {
+            $scope.composeMessagesModal = modal;
         });
         if ($scope.userId && $scope.userId != 0) {
             $scope.addingInGroup = true;
@@ -40,16 +50,71 @@
         }
         $scope.profilePicUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.CurrentUserprofilePic = '';
-        getAllGroups();
-        getAllFriends();
+        //getAllFriends();
+        getAllFriendsandGroupsWithMessages();
+        $scope.newChatDataUnsorted = [];
+        function getAllFriendsandGroupsWithMessages() {
+            $scope.newChatDataUnsorted = [];
+            $scope.newChatData = [];
+            FriendsNotificationService.getallFriendsandGroupWithMessages().then(function (response) {
+                $scope.allChatMessages = " Loading.... ";
+                console.log("all friends & group with chats messages here");
+                console.log(response);
+                angular.forEach(response, function (value, key) {
+                    if (value.portraitId > 0) {
+                        $scope.getUserProfile(value);                        
+                    }
+                    $scope.newChatDataUnsorted.push(value);
+                    $scope.newChatData.push(value);
+                });
+                $scope.newChatData.sort(custom_sort);
+                //$scope.newChatDataUnsorted = response;
+            });
+        };
+
+        function getOnlychatsWithMsg() {
+            angular.forEach($scope.newChatDataUnsorted, function (value, key) {
+                //$scope.newChatDataUnsorted[key].profilePic = "img/default-profilepic-copy.png";
+                if (value.isUser == 1) {
+                    getAllChatFriends(value);
+                } else {
+                    getAllGroupChatFriends(value);
+                }
+            });
+        }
+
+        function getAllGroupChatFriends(data) {
+            FriendsNotificationService.getAllMyFlaskGroupMessages(data.id).then(function (response) {
+                if (response.length != 0) {
+                    $scope.newChatData.push(data);
+                }
+            });
+            setTimeout(function () {
+                callMeForSorting();
+            }, 1000);
+        }
+        function getAllChatFriends(value) {
+            FriendsNotificationService.getMyAllMessages(parseInt(value.id)).then(function (response) {
+                if (response.length != 0) {
+                    $scope.newChatData.push(value);
+                }
+            });
+            setTimeout(function () {
+                callMeForSorting();
+            }, 1000);
+        }
+        function callMeForSorting() {
+            console.log($scope.newChatData);
+            $scope.newChatData.sort(custom_sort);
+        }
 
         $scope.getTimeWithInterval = function () {
             $scope.messageTimeOut = $timeout(function () {
                 $scope.getMessagesTime();
                 $scope.getTimeWithInterval();
             }, 10000);
-
         };
+
         $scope.clickedForReply = false;
 
         $scope.replyMessage = function (msgDetail, index, textMessage, string) {
@@ -199,7 +264,6 @@
             }
         }
 
-
         $scope.deleteMessage = function (messageId) {
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete message ?'
@@ -260,28 +324,11 @@
                         }, 3000);
                     }
                 }                
-                getOnlyGroup();
-            });
-            
-        }
-
-        function getOnlyGroup() {
-            angular.forEach($scope.groups, function (value, key) {
-                getAllGroupChatFriends(value);
             });
         }
-       
-        function getAllGroupChatFriends(data) {
-            FriendsNotificationService.getAllMyFlaskGroupMessages(data.groupId).then(function (response) {
-                if (response.length != 0) {
-                    $scope.allGroupChatFriends.push(data);
-                    $scope.allGroupChatFriends.sort(custom_sort);
-                } 
-            });
-        }
-
         //get all friends
         function getAllFriends() {
+            $scope.allFriends = [];
             $scope.searchText = " ";
             FriendsNotificationService.getMyFriends($scope.searchText).then(function (response) {
                 angular.forEach(response, function (value, key) {
@@ -295,12 +342,9 @@
                         }
                     }
                 });
-                setTimeout(function () {
-                    if (response.length != 0) {
-                        $scope.friendChatMessages = "There are no messages";
-                    };
-                }, 3000);             
+            
             });            
+            getAllGroups();
         }
         
         function custom_sort(a, b) {
@@ -312,21 +356,18 @@
         }
 
         function push_friends(value) {           
-            getAllChatFriends(value);
-        }
-
-        function getAllChatFriends(value) {
-            FriendsNotificationService.getMyAllMessages(parseInt(value.userId)).then(function (response) {
-                if (response.length!=0) {
-                    $scope.allFriends.push(value);
-                    $scope.allFriends.sort(custom_sort);
-                }
-            });
+            $scope.allFriends.push(value);
         }
 
         //get profile picture of friend 
         $scope.getUserProfile = function (UserDetail) {
-            UserService.getUserProfile(UserDetail.userId).then(function (res) {
+            var currUserId ='';
+            if (UserDetail.createdBy == "" && UserDetail.description == "") {
+                currUserId = UserDetail.id;
+            } else {
+                currUserId = UserDetail.userId;
+            }
+            UserService.getUserProfile( currUserId).then(function (res) {
                 if (res.data.fileEntryId != undefined) {
                     UserDetail.friendProfilePicUrl = $scope.profilePicUrl + res.data.uuid + "&groupId=" + res.data.groupId;
                     push_friends(UserDetail);
@@ -336,8 +377,20 @@
                 } else {
                     push_friends(UserDetail);
                     if (userExistInLocalStorage(UserDetail) == false) {
-                    $localStorage["myFriendDetails"].push(UserDetail);
+                        $localStorage["myFriendDetails"].push(UserDetail);
+                    }
                 }
+                if (UserDetail.createdBy == "" && UserDetail.description == "") {
+                    UserDetail.profilePic = $scope.profilePicUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                    $scope.newChatDataUnsorted.push(UserDetail);
+                    $scope.newChatData.push(data);
+                    $scope.newChatData.sort(custom_sort);
+                    //getOnlychatsWithMsg();
+                    setTimeout(function () {
+                        if ($scope.newChatDataUnsorted.length == 0) {
+                            $scope.allChatMessages = "There are no messages";
+                        };
+                    }, 3000);
                 }
             }, function (err) {
             })
@@ -364,11 +417,11 @@
             }
         }
         //to delete the conversation
-        $scope.deleteConversation = function (receipientuserId,conversationType) {
+        $scope.deleteConversation = function (receipientuserId, isUser) {
             $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
             var deleteConversationMessages = '';
             var newArray = [];
-            if (conversationType == "user") {
+            if (isUser == 1) {
                 FriendsNotificationService.getMyAllMessages(receipientuserId).then(function (response) {
                     angular.forEach(response, function (index, element) {
                         newArray.push(index.messageId);
@@ -376,45 +429,73 @@
                     });
                     FriendsNotificationService.deleteIndividualConverstaion(deleteConversationMessages).then(function (response) {
                         console.log("Deleted");
-                        $scope.allFriends.length = 0;
-                        getAllFriends();
+                        $ionicLoading.hide();
+                        var MessageAlert = $ionicPopup.alert({
+                            title: "Message Alert",
+                            template: "Messages In Conversation is Successfully Deleted"
+                        }).then(function (res) {
+                            $scope.newChatData.length = 0;
+                            getAllFriendsandGroupsWithMessages();
+                            setTimeout(function () {
+                                callMeForSorting();
+                            }, 1000);
+                        });
                     });
-                    $ionicLoading.hide();
                 });
 
             } else {
-                FriendsNotificationService.getAllMyFlaskGroupMessages(receipientuserId.groupId).then(function (response) {
+                FriendsNotificationService.getAllMyFlaskGroupMessages(receipientuserId).then(function (response) {
                     angular.forEach(response, function (index, element) {
                         newArray.push(index.messageId);
                         deleteConversationMessages = newArray.join();
                     });
                     FriendsNotificationService.deleteGroupConverstaion(deleteConversationMessages).then(function (response) {
                         console.log("Deleted");
-                        $scope.groups.length = 0;
-                        getAllGroups();
-                    });
-                    $ionicLoading.hide();
+                        $ionicLoading.hide();
+                        var MessageAlert = $ionicPopup.alert({
+                            title: "Message Alert",
+                            template: "Messages In Conversation is Successfully Deleted"
+                        }).then(function (res) {
+                            $scope.newChatData.length = 0;
+                            getAllFriendsandGroupsWithMessages();
+                            setTimeout(function () {
+                                callMeForSorting();
+                            }, 1000);
+                        });
+                    });                    
                 });
             }
         }
+
+        //for getting proper msg type
+        $scope.getMsgType = function (data, isUser) {
+            if (isUser == 0) {
+                $scope.showChatWindowPopup(data, 'group');
+            } else {
+                $scope.showChatWindowPopup(data, 'user');
+            }            
+        }
+
         //show chat window of friend
         $scope.showChatWindowPopup = function (data, type) {
+            $scope.insideChatMessage = " Loading.... ";
             $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
             $scope.myMessages = [];
             if (type == 'user') {
                 $scope.isUser = true;
-                $scope.receiverId = data.userId;
-                $scope.friendName = data.fullName;
+                $scope.receiverId = data.id;
+                $scope.friendName = data.name;
                 $scope.profilePic = data.friendProfilePicUrl;
+                getUserProficPic(data.id);
                 //get messages by receiverId on click of friend
                 $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
-                FriendsNotificationService.getMyAllMessages(data.userId).then(function (response) {
+                FriendsNotificationService.getMyAllMessages(data.id).then(function (response) {
                     $scope.myMessages = response;
                     $timeout(function () {
                         if (response.length == 0) {
-                            $scope.insideChatMessage = "There are no Messages 01";
+                            $scope.insideChatMessage = "There are no Messages";
                         }
-                    }, 600);
+                    }, 3000);
                     for (var i = 0; i < $scope.myMessages.length; i++) {
                         if ($scope.myMessages[i].recipients == $scope.loggedInUser) {
                             FriendsNotificationService.setReadMessage($scope.myMessages[i].messageId).then(function (response) {
@@ -423,16 +504,16 @@
                         }
                     }
                     $scope.getMessagesTime();
-                    $ionicScrollDelegate.scrollBottom();
+                    $ionicScrollDelegate.scrollBottom(true);
                     $ionicLoading.hide();
                 });
             }
             else {
                 $scope.isUser = false;
-                $scope.friendName = data.groupName;
-                $scope.groupId = data.groupId;
+                $scope.friendName = data.name;
+                $scope.groupId = data.id;
                 $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
-                FriendsNotificationService.getAllMyFlaskGroupMessages(data.groupId).then(function (response) {
+                FriendsNotificationService.getAllMyFlaskGroupMessages(data.id).then(function (response) {
                     $scope.myMessages = response;
                     if ($scope.myMessages.length != 0) {
                         for (var i = 0; i < $scope.myMessages.length; i++) {
@@ -441,20 +522,20 @@
                             });
                         }
                         $scope.getMessagesTime();
-                        $ionicScrollDelegate.scrollBottom();
+                        $ionicScrollDelegate.scrollBottom(true);
                         $ionicLoading.hide();
                     } else {
                         $timeout(function () {
                             if (response.length == 0) {
-                                $scope.insideChatMessage = "There are no Messages 02";
+                                $scope.insideChatMessage = "There are no Messages";
                             }
-                        }, 600);
+                        }, 3000);
                     }
                 });
             }
             $scope.modal.show();
             $timeout(function () {
-                $ionicScrollDelegate.scrollBottom();
+                $ionicScrollDelegate.scrollBottom(true);
                 $ionicLoading.hide();
             }, 200);
         }
@@ -465,31 +546,60 @@
                 $cookies.remove('profileUrl');
                 $ionicHistory.goBack();
             }
+            $ionicScrollDelegate.scrollTop(true);
             $scope.modal.hide();
         };
+        $scope.showContactList = function () {
+            getAllFriends();
+            $scope.composeMessagesModal.show();
+        }
+        $scope.closeshowContactListWindowPopup = function () {
+            getAllFriendsandGroupsWithMessages();
+            callMeForSorting();
+            $scope.composeMessagesModal.hide();
+        };
+        $scope.callConactsPopup = function (data, userType) {
+            $scope.closeshowContactListWindowPopup();
+                if (userType == "user") {
+                    getUserProficPic(data.userId);
+                    myContactObj = {
+                        "name": data.fullName,
+                        "id": data.userId,
+                        "friendProfilePicUrl": $scope.CurrentUserprofilePic
+                    }
+                } else {
+                    myContactObj = {
+                        "name": data.groupName,
+                        "id": data.groupId
+                    }
+                }
+                $timeout(function () {
+                    $scope.showChatWindowPopup(myContactObj, userType);
+                }, 300);
+        }
+        //allGroupChatFriends for ser4aching
         //send message to friend
         $scope.sendReply = function (message) {
+            //delete $scope.textMessage.messageToSend;
+            $scope.textMessage.messageToSend = '';
             if(message){
                 if ($scope.isUser == true){
-                    FriendsNotificationService.sendMessage($scope.receiverId, message).then(function (response) {
-                        delete $scope.textMessage.messageToSend;
+                    FriendsNotificationService.sendMessage($scope.receiverId, message).then(function (response) {                        
                         $scope.myMessages.push(response);
-                        $ionicScrollDelegate.scrollBottom();
+                        $ionicScrollDelegate.scrollBottom(true);
                     });
                 }
                 else {
                     FriendsNotificationService.sendFlaskGroupMessage($scope.groupId, message).then(function (response) {
-                        delete $scope.textMessage.messageToSend;
                         $scope.myMessages.push(response);
-                        $ionicScrollDelegate.scrollBottom();
+                        $ionicScrollDelegate.scrollBottom(true);
                     });
                 }
             }            
         }
 
         //when messages page is opened using popup notification.
-        var activeUsingPopup = $cookies.getObject('popupData');
-        var myObj = {};
+
         if (activeUsingPopup != undefined) {
             if (activeUsingPopup.coldstart == true) {
                 $timeout(function () {
@@ -505,14 +615,14 @@
                     if (activeUsingPopup.user == "user") {
                         getUserProficPic(activeUsingPopup.infoData.userId);
                         myObj = {
-                            "fullName": activeUsingPopup.infoData.firstName + " " + activeUsingPopup.infoData.lastName,
-                            "userId": activeUsingPopup.infoData.userId,
+                            "name": activeUsingPopup.infoData.firstName + " " + activeUsingPopup.infoData.lastName,
+                            "id": activeUsingPopup.infoData.userId,
                             "friendProfilePicUrl": $scope.CurrentUserprofilePic
                         }
                     } else {
                         myObj = {
-                            "groupName": activeUsingPopup.infoData.groupName,
-                            "groupId": activeUsingPopup.infoData.groupId
+                            "name": activeUsingPopup.infoData.groupName,
+                            "id": activeUsingPopup.infoData.groupId
                         }
                     }
                     $timeout(function () {
@@ -528,11 +638,29 @@
             for (var i = 0; i < $scope.storageData.length; i++) {
                 if ($scope.storageData[i].userId == UserId && $scope.storageData[i].friendProfilePicUrl != undefined) {
                     $scope.CurrentUserprofilePic = $scope.storageData[i].friendProfilePicUrl;
+                    $scope.friendProfilePicUrl = $scope.storageData[i].friendProfilePicUrl;
                     break;
                 } else {
                     $scope.CurrentUserprofilePic = "img/default-profilepic-copy.png";
                 }
             }            
         }
+
+        //chat layout for keyboard keyup on mobile
+        $scope.inputUp = function () {
+            if (isIOS) $scope.data.keyboardHeight = 216;
+            $timeout(function () {
+                $ionicScrollDelegate.scrollBottom(true);
+            }, 300);
+        };
+
+        $scope.inputDown = function () {
+            if (isIOS) $scope.data.keyboardHeight = 0;
+            $ionicScrollDelegate.resize();
+        };
+
+        $scope.closeKeyboard = function () {
+            // cordova.plugins.Keyboard.close();
+        };
     }
 })();

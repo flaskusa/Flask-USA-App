@@ -3640,8 +3640,8 @@ button.button.button-block.button-positive.pay_now_button.updateSupllyItemButton
 }
 //for pinch zoom on venue map
 .zoom-pane {
-width: 100% !important;
-height: 100% !important;
+    width: 100% !important;
+    height: 100% !important;
 }
 
 .zoom-pane .scroll {
@@ -3744,4 +3744,12 @@ height: 100% !important;
   animation-delay:200ms;
   -webkit-animation-duration:0;
   animation-duration:0;
+}
+
+.barStable{
+    background-image: linear-gradient(180deg, #db8e28, #db8e28 50%, transparent 50%);
+}
+.barMessageInput{
+    background: #fff;
+    border: 1px solid #db8e28;
 }
