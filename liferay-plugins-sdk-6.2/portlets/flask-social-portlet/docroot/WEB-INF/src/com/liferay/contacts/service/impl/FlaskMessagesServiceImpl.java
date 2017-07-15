@@ -131,24 +131,30 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		return mailSent;
 	}
 	
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public JSONArray getAllMyFlaskMessages(long receiverId, ServiceContext serviceContext){
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		try {
 			DynamicQuery recipientQuery = DynamicQueryFactoryUtil.forClass(FlaskRecipientsImpl.class);
-			Criterion deleteCriterion = RestrictionsFactoryUtil.like("deletedBy", String.valueOf(serviceContext.getUserId()));
 			Criterion criterion1 = RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("userId", receiverId), RestrictionsFactoryUtil.eq("senderId", serviceContext.getUserId()));
 			Criterion criterion2 = RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.eq("senderId", receiverId), RestrictionsFactoryUtil.eq("userId", serviceContext.getUserId()));
-			Criterion criterion = RestrictionsFactoryUtil.and(RestrictionsFactoryUtil.or(criterion1, criterion2),RestrictionsFactoryUtil.not(deleteCriterion));
+			Criterion criterion = RestrictionsFactoryUtil.or(criterion1, criterion2);
 			recipientQuery.add(criterion);
 			recipientQuery.addOrder(OrderFactoryUtil.desc("receivedDateTime"));
 			recipientQuery.setLimit(0, 100);
 			List<FlaskRecipients> flaskRecipients = FlaskRecipientsLocalServiceUtil.dynamicQuery(recipientQuery);
 			for(FlaskRecipients recp: flaskRecipients){
+				if(!recp.getDeletedBy().equals("")){
+					List<String> deletedBy = Arrays.asList(recp.getDeletedBy().split(","));
+					if(deletedBy.contains(String.valueOf(serviceContext.getUserId())))
+						continue;
+				}
+					
+				
 				JSONObject jsonObj =  JSONFactoryUtil.createJSONObject();
 				FlaskMessages msg = FlaskMessagesLocalServiceUtil.getFlaskMessages(recp.getMessageId());
-				jsonObj.put("dateTime", msg.getDateTime().toLocaleString());
+				jsonObj.put("dateTime", msg.getDateTime().getTime());
 				jsonObj.put("message", msg.getMessage());
 				jsonObj.put("messageId", msg.getMessageId());
 				jsonObj.put("recipients", msg.getRecipients());
@@ -227,22 +233,14 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 			List<FlaskGroup> flaskGroups = FlaskGroupServiceUtil.getGroups(serviceContext.getUserId());
 			for(int i =0; i<myFriends.length(); i++ ){
 				int userMessageCount = 0;
-				System.out.println("######################");
-				System.out.println(myFriends.getJSONObject(i).getLong("userId"));
 				userMessageCount = FlaskMessagesServiceUtil.getMyUnreadFlaskMessagesCount(myFriends.getJSONObject(i).getLong("userId"), serviceContext);
-				System.out.println(userMessageCount);
-				System.out.println("########################");
 				if(userMessageCount > 0){
 					count = count + userMessageCount;
 				}
 			}
 			for(FlaskGroup flaskgroup: flaskGroups){
 				int groupMessageCount = 0;
-				System.out.println("********************");
-				System.out.println(flaskgroup.getGroupId());
 				groupMessageCount = FlaskGroupMessagesServiceUtil.getMyUnreadFlaskGroupMessagesCount(flaskgroup.getGroupId(), serviceContext);
-				System.out.println(groupMessageCount);
-				System.out.println("********************");
 				if(groupMessageCount > 0){
 					count = count + groupMessageCount;
 				}
@@ -298,7 +296,10 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 			List<FlaskRecipients> flaskRecipients = FlaskRecipientsLocalServiceUtil.dynamicQuery(recipientQuery);
 			for(FlaskRecipients rec: flaskRecipients){
 				String deletedBy = rec.getDeletedBy();
-				deletedBy = deletedBy+String.valueOf(serviceContext.getUserId());
+				if(deletedBy.isEmpty() || deletedBy=="")
+					deletedBy = deletedBy+String.valueOf(serviceContext.getUserId());
+				else
+					deletedBy = deletedBy+","+String.valueOf(serviceContext.getUserId());
 				rec.setDeletedBy(deletedBy);
 				FlaskRecipientsLocalServiceUtil.updateFlaskRecipients(rec);
 			}

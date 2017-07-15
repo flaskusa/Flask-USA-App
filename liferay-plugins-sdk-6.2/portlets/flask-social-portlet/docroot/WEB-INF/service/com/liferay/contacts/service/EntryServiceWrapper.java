@@ -160,6 +160,12 @@ public class EntryServiceWrapper implements EntryService,
 		_entryService.deleteSocialRelation(receiverUserId, serviceContext);
 	}
 
+	@Override
+	public java.util.Map<java.util.Date, com.liferay.portal.kernel.json.JSONObject> getAllMyMessages(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _entryService.getAllMyMessages(serviceContext);
+	}
+
 	/**
 	 * @deprecated As of 6.1.0, replaced by {@link #getWrappedService}
 	 */

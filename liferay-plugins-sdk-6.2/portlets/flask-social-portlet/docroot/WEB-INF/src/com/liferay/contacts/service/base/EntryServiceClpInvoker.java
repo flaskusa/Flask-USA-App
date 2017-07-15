@@ -113,6 +113,12 @@ public class EntryServiceClpInvoker {
 		_methodParameterTypes81 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
+
+		_methodName83 = "getAllMyMessages";
+
+		_methodParameterTypes83 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
 	}
 
 	public Object invokeMethod(String name, String[] parameterTypes,
@@ -221,6 +227,11 @@ public class EntryServiceClpInvoker {
 			return null;
 		}
 
+		if (_methodName83.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
+			return EntryServiceUtil.getAllMyMessages((com.liferay.portal.service.ServiceContext)arguments[0]);
+		}
+
 		throw new UnsupportedOperationException();
 	}
 
@@ -254,4 +265,6 @@ public class EntryServiceClpInvoker {
 	private String[] _methodParameterTypes79;
 	private String _methodName81;
 	private String[] _methodParameterTypes81;
+	private String _methodName83;
+	private String[] _methodParameterTypes83;
 }

@@ -155,6 +155,11 @@ public class EntryServiceUtil {
 		getService().deleteSocialRelation(receiverUserId, serviceContext);
 	}
 
+	public static java.util.Map<java.util.Date, com.liferay.portal.kernel.json.JSONObject> getAllMyMessages(
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getAllMyMessages(serviceContext);
+	}
+
 	public static void clearService() {
 		_service = null;
 	}

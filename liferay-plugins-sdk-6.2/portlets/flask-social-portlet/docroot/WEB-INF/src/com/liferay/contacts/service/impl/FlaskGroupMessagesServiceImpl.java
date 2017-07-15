@@ -83,7 +83,7 @@ public class FlaskGroupMessagesServiceImpl
 	  return flaskGroupMessage;
 	}
 	
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked" })
 	@Override
 	public JSONArray getAllMyFlaskGroupMessages(long groupId, ServiceContext serviceContext){
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
@@ -99,7 +99,7 @@ public class FlaskGroupMessagesServiceImpl
 					if(!recpInfo.getJSONObject(String.valueOf(serviceContext.getUserId())).getBoolean("deleted")){
 						JSONObject jsonObj =  JSONFactoryUtil.createJSONObject();
 						FlaskGroupMessages msg = FlaskGroupMessagesLocalServiceUtil.getFlaskGroupMessages(recp.getGroupMessageId());
-						jsonObj.put("dateTime", msg.getDateTime().toLocaleString());
+						jsonObj.put("dateTime", msg.getDateTime().getTime());
 						jsonObj.put("message", msg.getMessage());
 						jsonObj.put("messageId", msg.getGroupMessagesId());
 						jsonObj.put("recipients", recp.getRecipients());

@@ -133,4 +133,8 @@ public interface EntryService extends BaseService, InvokableService {
 	public void deleteSocialRelation(long receiverUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception;
+
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public java.util.Map<java.util.Date, com.liferay.portal.kernel.json.JSONObject> getAllMyMessages(
+		com.liferay.portal.service.ServiceContext serviceContext);
 }
