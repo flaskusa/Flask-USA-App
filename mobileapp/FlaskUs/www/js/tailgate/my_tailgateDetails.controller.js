@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgateDetailsCtrl', mytailgateDetailsCtrl);
 
-    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope','$ionicSlideBoxDelegate','$localStorage','UserService','$q','$http'];
+    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicSlideBoxDelegate', '$localStorage', 'UserService', '$q', '$http', '$ionicBackdrop', '$ionicModal', '$ionicScrollDelegate'];
 
     /* @ngInject */
-    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope,$ionicSlideBoxDelegate,$localStorage,UserService,$q,$http) {
+    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicSlideBoxDelegate, $localStorage, UserService, $q, $http, $ionicBackdrop, $ionicModal, $ionicScrollDelegate) {
         $cookies.remove("currtailGateMakers");
         $scope.myTailgaters = [];
         $scope.allMessages = [];
@@ -70,6 +70,35 @@
             $ionicSlideBoxDelegate.$getByHandle(tailgateImageViewer).next();
         }
 
+        $scope.zoomMin = 1;
+
+        $scope.showImages = function (index) {
+            $scope.activeSlide = index;
+            $scope.showModal('templates/pictureModal.html');
+        };
+
+        $scope.showModal = function (templateUrl) {
+            $ionicModal.fromTemplateUrl(templateUrl, {
+                scope: $scope
+            }).then(function (modal) {
+                $scope.pictureModal = modal;
+                $scope.pictureModal.show();
+            });
+        }
+
+        $scope.closeModal = function () {
+            $scope.pictureModal.hide();
+            $scope.pictureModal.remove();
+        };
+
+        $scope.updateSlideStatus = function (slide) {
+            var zoomFactor = $ionicScrollDelegate.$getByHandle('scrollHandle' + slide).getScrollPosition().zoom;
+            if (zoomFactor == $scope.zoomMin) {
+                $ionicSlideBoxDelegate.enableSlide(true);
+            } else {
+                $ionicSlideBoxDelegate.enableSlide(false);
+            }
+        };
 
         function getMyTailgate() {
             TailgateService.getTailgate(tailGateId).then(function (respData) {

@@ -49,7 +49,7 @@
                                     <span ng-repeat="images in myTailgateImages">
                                     <span data-ng-click="removeTailgateImage($index,images.tailgateImageId,images.imageUUID)" ng-if = "isTailgateAdmin"><i  class="crossIconTailgate"><img src="img/flask_icons/delete.svg" style="width: 20px;height: 20px;"/></i></span>
                         <img ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}"  class="list-thumbnail thumb-picturs-size " alt="Image not found"
-                            onError="this.src = 'img/FlaskRed.png';" ng-click="showPopup($index)"/>
+                            onError="this.src = 'img/FlaskRed.png';" ng-click="showImages($index)"/>
                         </span>
                         </ion-scroll>
                         </a>
@@ -89,4 +89,29 @@
             </div>
         </div>
     </ion-content>
+    <script id="templates/pictureModal.html" type="text/ng-template">
+        <ion-header-bar class="bar-dark">
+            <ion-nav-bar class="bar-dark" align-title="center">
+                <ion-nav-title class="chatFriendName">
+                    <a href="" style="text-decoration:none;">Photo Gallery</a>
+                </ion-nav-title>
+                <ion-nav-buttons side="right">
+                    <button class="button button-icon button-clear" ng-click="closeModal();" style="font-weight: bold;font-size: 23px;">X</button>
+                </ion-nav-buttons>
+            </ion-nav-bar>
+        </ion-header-bar>
+        <ion-content class="content-stable">
+            <div class="modal image-modal transparent" on-swipe-down="closeModal()">
+                <ion-slide-box on-slide-changed="slideChanged(index)" active-slide="activeSlide">
+                    <ion-slide ng-repeat="image in myTailgateImages">
+                        <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false"
+                                    zooming="true" min-zoom="{{zoomMin}}" style="width: 100%; height: 100%"
+                                    delegate-handle="scrollHandle{{$index}}" on-scroll="updateSlideStatus(activeSlide)" on-release="updateSlideStatus(activeSlide)">
+                                    <div class="image" style="background-image: url( {{imgUrl}}{{image.imageUUID}}&groupId={{image.imageGroupId}} )"></div>
+                        </ion-scroll>
+                    </ion-slide>
+                </ion-slide-box>
+            </div>
+       </ion-content>
+</script>
 </ion-view>

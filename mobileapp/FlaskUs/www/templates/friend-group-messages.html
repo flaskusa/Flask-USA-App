@@ -10,7 +10,7 @@
             <ion-content class="friendlistInMessages no-Header">
                 <div ng-if="newChatData.length==0" class="item" style="font-weight:normal;">{{allChatMessages}}</div>
                 <ion-list>
-                    <ion-item ng-repeat="data in newChatData" class="row-no-padding animate-in-secondary" padding="false" ng-click="getMsgType(data,data.isUser)" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
+                    <ion-item ng-repeat="data in newChatData track by $index" class="row-no-padding animate-in-secondary" padding="false" ng-click="getMsgType(data,data.isUser)" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
                         <a class="row-no-padding" style="text-decoration: none">
                             <!--href="#/app/my_friendDetail/{{data.userId}}"-->
                             <div ng-if="data.isUser==0">
@@ -57,22 +57,23 @@
                         </ion-nav-buttons>
                     </ion-nav-bar>
                 </ion-header-bar>
-                <ion-content class="content-stable" style="background-color: rgba(211, 211, 211, 0.43);">
+                <ion-content class="content-stable" style="background-color: rgba(211, 211, 211, 0.43); padding-bottom:15px;">
                     <div ng-if="myMessages.length==0" class="item">{{insideChatMessage}}</div>
-                    <div click-for-options ng-repeat="message in myMessages | orderBy:'messageId'">
-                        <div style="padding-top:9px;">
-                            <div style="width:100%">
-                                <div class="col-60 bubble me" ng-if="message.senderUserId != loggedInUser" style="display: block;">
-                                    <p class="msgSender" ng-if="isUser != true">{{message.senderName}}</p>
-                                    <!--<p style="margin:-5px 0px -10px 19px;float:right;color:#F89734;font-size: 12px;" ng-click="deleteMessage(message.messageId);">X</p>-->
-                                    <p style="margin: -7px 0 1px !important;">{{message.message}}</p>
-                                    <p class="msgDate">{{message.diffDate}}</p>
+                    <div style="padding-bottom:25px;padding-top: 20px;">
+                        <div click-for-options ng-repeat="message in myMessages | orderBy:'messageId' track by $index" class="messages">
+                            <div style="width: 100%;float: right;">
+                                <div style="width:100%">
+                                    <div class="col-60 bubble me" ng-if="message.senderUserId != loggedInUser" style="display: block;">
+                                        <p class="msgSender" ng-if="isUser != true">{{message.senderName}}</p>
+                                        <!--<p style="margin:-5px 0px -10px 19px;float:right;color:#F89734;font-size: 12px;" ng-click="deleteMessage(message.messageId);">X</p>-->
+                                        <p style="margin: -7px 0 1px !important;">{{message.message}}</p>
+                                        <p class="msgDate">{{message.diffDate}}</p>
+                                    </div>
+                                    <div class="col-60 bubble-you you slide-right" ng-if="message.senderUserId == loggedInUser" style="display: block;">
+                                        <p style="margin: -7px 0 1px !important;">{{message.message}}</p>
+                                        <p class="msgDate">{{message.diffDate}}</p>
+                                    </div>
                                 </div>
-                                <br />
-                                <div class="col-60 bubble-you you slide-right" ng-if="message.senderUserId == loggedInUser" style="display: block;">
-                                    <p style="margin: -7px 0 1px !important;">{{message.message}}</p>
-                                    <p class="msgDate">{{message.diffDate}}</p>
-                                </div><br />
                             </div>
                         </div>
                     </div> 
@@ -100,27 +101,34 @@
                             <button class="button button-icon button-clear" ng-click="closeshowContactListWindowPopup();" style="font-weight: bold;font-size: 23px;">X</button>
                         </ion-nav-buttons>
                     </ion-nav-bar>
+                    <div class="bar bar-subheader">
+                        <div class="row">
+                            <div class="col col-100 col-center searchrow">
+                                <input type="text" placeholder="Search..." class="friendSearch" ng-model="searchContact" />
+                            </div>
+                        </div>
+                    </div>
                 </ion-header-bar>
-                <ion-content class="content-stable">
+                <ion-content class="content-stable has-subheader">
                     <ion-list>
-                        <ion-item ng-repeat="data in allFriends | orderBy:'fullName'" class="row-no-padding item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" padding="false" ng-click="callConactsPopup(data,'user')">
+                        <ion-item ng-repeat="friend in allFriends | orderBy:'fullName' | filter:searchContact track by $index" class="row-no-padding item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" padding="false" ng-click="callConactsPopup(friend,'user')">
                             <a class="row-no-padding" style="text-decoration: none">
-                                <!--href="#/app/my_friendDetail/{{data.userId}}"-->
-                                <div class="col col-20" ng-if="data.friendProfilePicUrl==undefined">
+                                <!--href="#/app/my_friendDetail/{{friend.userId}}"-->
+                                <div class="col col-20" ng-if="friend.friendProfilePicUrl==undefined">
                                     <img src="img/default-profilepic-copy.png" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
                                 </div>
-                                <div class="col col-20" ng-if="data.friendProfilePicUrl!=undefined">
-                                    <img ng-src="{{data.friendProfilePicUrl}}" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                                <div class="col col-20" ng-if="friend.friendProfilePicUrl!=undefined">
+                                    <img ng-src="{{friend.friendProfilePicUrl}}" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
                                 </div>
                                 <div class="col col-70" style="padding-top: 16px">
-                                    <h3 class="nameText">{{ data.fullName | uppercase}}</h3>
+                                    <h3 class="nameText">{{ friend.fullName | uppercase}}</h3>
                                 </div>
                                 <span class="badge span_icon ext-top span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
                             </a>
-                            <ion-option-button class="icon ion-trash-a" ng-click="unFriend(data.userId)" style="display:none;"></ion-option-button>
-                            <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(data.userId)" style="display:none;"></ion-option-button>
+                            <ion-option-button class="icon ion-trash-a" ng-click="unFriend(friend.userId)" style="display:none;"></ion-option-button>
+                            <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(friend.userId)" style="display:none;"></ion-option-button>
                         </ion-item>
-                        <ion-item class="animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="group in groups" padding="false" style="height: 74px;" ng-click="callConactsPopup(group,'group')">
+                        <ion-item class="animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="group in groups | filter:searchContact track by $index" padding="false" style="height: 74px;" ng-click="callConactsPopup(group,'group')">
                             <div >
                                 <a class="itemAnchor">
                                     <div>

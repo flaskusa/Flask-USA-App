@@ -61,13 +61,15 @@
                 console.log("all friends & group with chats messages here");
                 console.log(response);
                 angular.forEach(response, function (value, key) {
-                    if (value.portraitId > 0) {
+                    if (value.portraitId != 0) {
                         $scope.getUserProfile(value);                        
+                    } else {
+                        value.profilePic = "img/default-profilepic-copy.png";
+                        $scope.newChatDataUnsorted.push(value);
+                        $scope.newChatData.push(value);
                     }
-                    $scope.newChatDataUnsorted.push(value);
-                    $scope.newChatData.push(value);
                 });
-                $scope.newChatData.sort(custom_sort);
+                //$scope.newChatData.sort(custom_sort);
                 //$scope.newChatDataUnsorted = response;
             });
         };
@@ -383,8 +385,8 @@
                 if (UserDetail.createdBy == "" && UserDetail.description == "") {
                     UserDetail.profilePic = $scope.profilePicUrl + res.data.uuid + "&groupId=" + res.data.groupId;
                     $scope.newChatDataUnsorted.push(UserDetail);
-                    $scope.newChatData.push(data);
-                    $scope.newChatData.sort(custom_sort);
+                    $scope.newChatData.push(UserDetail);
+                    //$scope.newChatData.sort(custom_sort);
                     //getOnlychatsWithMsg();
                     setTimeout(function () {
                         if ($scope.newChatDataUnsorted.length == 0) {
