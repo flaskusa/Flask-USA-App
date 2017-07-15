@@ -101,48 +101,49 @@
                             <button class="button button-icon button-clear" ng-click="closeshowContactListWindowPopup();" style="font-weight: bold;font-size: 23px;">X</button>
                         </ion-nav-buttons>
                     </ion-nav-bar>
-                    <div class="bar bar-subheader">
-                        <div class="row">
-                            <div class="col col-100 col-center searchrow">
-                                <input type="text" placeholder="Search..." class="friendSearch" ng-model="searchContact" />
-                            </div>
+                </ion-header-bar>
+                <ion-content class="content-stable">
+                    <div class="row">
+                        <div class="col col-100 col-center searchrow">
+                            <input type="text" placeholder="Search..." class="friendSearch" ng-model="searchContact" />
                         </div>
                     </div>
-                </ion-header-bar>
-                <ion-content class="content-stable has-subheader">
-                    <ion-list>
-                        <ion-item ng-repeat="friend in allFriends | orderBy:'fullName' | filter:searchContact track by $index" class="row-no-padding item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" padding="false" ng-click="callConactsPopup(friend,'user')">
-                            <a class="row-no-padding" style="text-decoration: none">
-                                <!--href="#/app/my_friendDetail/{{friend.userId}}"-->
-                                <div class="col col-20" ng-if="friend.friendProfilePicUrl==undefined">
-                                    <img src="img/default-profilepic-copy.png" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
-                                </div>
-                                <div class="col col-20" ng-if="friend.friendProfilePicUrl!=undefined">
-                                    <img ng-src="{{friend.friendProfilePicUrl}}" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
-                                </div>
-                                <div class="col col-70" style="padding-top: 16px">
-                                    <h3 class="nameText">{{ friend.fullName | uppercase}}</h3>
-                                </div>
-                                <span class="badge span_icon ext-top span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
-                            </a>
-                            <ion-option-button class="icon ion-trash-a" ng-click="unFriend(friend.userId)" style="display:none;"></ion-option-button>
-                            <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(friend.userId)" style="display:none;"></ion-option-button>
-                        </ion-item>
-                        <ion-item class="animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="group in groups | filter:searchContact track by $index" padding="false" style="height: 74px;" ng-click="callConactsPopup(group,'group')">
-                            <div >
-                                <a class="itemAnchor">
-                                    <div>
-                                        <img src="img/default-group-pic.png" class="groupIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                    <ion-scroll style="height: 90%;">
+                        <ion-list>
+
+                            <ion-item ng-repeat="friend in allFriends | orderBy:'fullName' | filter:searchContact track by $index" class="row-no-padding item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" padding="false" ng-click="callConactsPopup(friend,'user')">
+                                <a class="row-no-padding" style="text-decoration: none">
+                                    <!--href="#/app/my_friendDetail/{{friend.userId}}"-->
+                                    <div class="col col-20" ng-if="friend.friendProfilePicUrl==undefined">
+                                        <img src="img/default-profilepic-copy.png" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
                                     </div>
-                                    <div>
-                                        <h3 class="emailText" style="font-size: 17px; font-weight: 600;">{{group.groupName}}</h3>
-                                        <div class="friend_group_name" style="color: black;font-weight: normal !important;font-size: 14px;text-overflow: ellipsis;overflow: hidden">{{group.groupDescription}}</div>
+                                    <div class="col col-20" ng-if="friend.friendProfilePicUrl!=undefined">
+                                        <img ng-src="{{friend.friendProfilePicUrl}}" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
                                     </div>
-                                    <span class="badge span_icon span_icon_extraright" style="top:24px"><img src="img/flask_icons/arrow_left.svg" class="arrowIconAlign"></span>
+                                    <div class="col col-70" style="padding-top: 16px">
+                                        <h3 class="nameText">{{ friend.fullName | uppercase}}</h3>
+                                    </div>
+                                    <span class="badge span_icon ext-top span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
                                 </a>
-                            </div>
-                        </ion-item>
-                    </ion-list>
+                                <ion-option-button class="icon ion-trash-a" ng-click="unFriend(friend.userId)" style="display:none;"></ion-option-button>
+                                <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(friend.userId)" style="display:none;"></ion-option-button>
+                            </ion-item>
+                            <ion-item class="animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="group in groups | filter:searchContact track by $index" padding="false" style="height: 74px;" ng-click="callConactsPopup(group,'group')">
+                                <div>
+                                    <a class="itemAnchor">
+                                        <div>
+                                            <img src="img/default-group-pic.png" class="groupIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                                        </div>
+                                        <div>
+                                            <h3 class="emailText" style="font-size: 17px; font-weight: 600;">{{group.groupName}}</h3>
+                                            <div class="friend_group_name" style="color: black;font-weight: normal !important;font-size: 14px;text-overflow: ellipsis;overflow: hidden">{{group.groupDescription}}</div>
+                                        </div>
+                                        <span class="badge span_icon span_icon_extraright" style="top:24px"><img src="img/flask_icons/arrow_left.svg" class="arrowIconAlign"></span>
+                                    </a>
+                                </div>
+                            </ion-item>
+                        </ion-list>
+                    </ion-scroll>
                 </ion-content>
             </ion-pane>
         </ion-modal-view>

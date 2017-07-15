@@ -331,7 +331,7 @@
         //get all friends
         function getAllFriends() {
             $scope.allFriends = [];
-            $scope.searchText = " ";
+            $scope.searchText = "";
             FriendsNotificationService.getMyFriends($scope.searchText).then(function (response) {
                 angular.forEach(response, function (value, key) {
                     if (value.portraitId > 0) {
@@ -556,6 +556,7 @@
             $scope.composeMessagesModal.show();
         }
         $scope.closeshowContactListWindowPopup = function () {
+            $scope.searchContact='';
             getAllFriendsandGroupsWithMessages();
             callMeForSorting();
             $scope.composeMessagesModal.hide();
