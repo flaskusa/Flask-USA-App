@@ -19,7 +19,8 @@
         showPopupFromFriends();
         $scope.allFriends = [];
         $scope.allSortedFriends = [];
-        $scope.readMsg = false;
+        $scope.readIndividualMsg = false;
+        $scope.readGroupMsg = false;
         $scope.ShowReplyButton = true;
         $scope.addingInGroup = false;
         $scope.allGroupChatFriends = [];
@@ -60,16 +61,19 @@
                 $scope.allChatMessages = " Loading.... ";
                 console.log("all friends & group with chats messages here");
                 console.log(response);
+                $scope.newChatData = response;
                 angular.forEach(response, function (value, key) {
                     if (value.portraitId != 0) {
                         $scope.getUserProfile(value);                        
                     } else {
                         value.profilePic = "img/default-profilepic-copy.png";
                         $scope.newChatDataUnsorted.push(value);
-                        $scope.newChatData.push(value);
+                        //$scope.newChatData.push(value);
                     }
+                    $scope.newChatDataUnsorted.sort(custom_sort);
+                    //$scope.newChatData.sort(custom_sort);
                 });
-                //$scope.newChatData.sort(custom_sort);
+
                 //$scope.newChatDataUnsorted = response;
             });
         };
@@ -385,14 +389,14 @@
                 if (UserDetail.createdBy == "" && UserDetail.description == "") {
                     UserDetail.profilePic = $scope.profilePicUrl + res.data.uuid + "&groupId=" + res.data.groupId;
                     $scope.newChatDataUnsorted.push(UserDetail);
-                    $scope.newChatData.push(UserDetail);
-                    //$scope.newChatData.sort(custom_sort);
-                    //getOnlychatsWithMsg();
+                    //$scope.newChatData.push(UserDetail);
                     setTimeout(function () {
-                        if ($scope.newChatDataUnsorted.length == 0) {
+                        if ($scope.newChatData.length == 0) {
                             $scope.allChatMessages = "There are no messages";
                         };
                     }, 3000);
+                    $scope.newChatDataUnsorted.sort(custom_sort);
+                    //$scope.newChatData.sort(custom_sort);
                 }
             }, function (err) {
             })
@@ -483,6 +487,10 @@
             $scope.insideChatMessage = " Loading.... ";
             $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
             $scope.myMessages = [];
+            $scope.myNewIndividualMessageIdstoRead = [];
+            $scope.myNewGroupMessageIdstoRead = [];
+            $scope.myIndividualMessageIdstoRead = [];
+            $scope.myGroupMessageIdstoRead = [];
             if (type == 'user') {
                 $scope.isUser = true;
                 $scope.receiverId = data.id;
@@ -499,11 +507,16 @@
                         }
                     }, 3000);
                     for (var i = 0; i < $scope.myMessages.length; i++) {
-                        if ($scope.myMessages[i].recipients == $scope.loggedInUser) {
-                            FriendsNotificationService.setReadMessage($scope.myMessages[i].messageId).then(function (response) {
-                                $scope.readMsg = true;
-                            });
+                        if ($scope.myMessages[i].recipients == $scope.loggedInUser && $scope.myMessages[i].read!=true) {
+                            $scope.myNewGroupMessageIdstoRead.push($scope.myMessages[i].messageId);
+                            
                         }
+                    }
+                    $scope.myIndividualMessageIdstoRead = $scope.myNewGroupMessageIdstoRead.join();
+                    if ($scope.myIndividualMessageIdstoRead != "") {
+                        FriendsNotificationService.setReadMessage($scope.myIndividualMessageIdstoRead).then(function (response) {
+                            $scope.readIndividualMsg = true;
+                        });
                     }
                     $scope.getMessagesTime();
                     $ionicScrollDelegate.scrollBottom(true);
@@ -519,8 +532,14 @@
                     $scope.myMessages = response;
                     if ($scope.myMessages.length != 0) {
                         for (var i = 0; i < $scope.myMessages.length; i++) {
-                            FriendsNotificationService.setGroupMessageRead($scope.myMessages[i].messageId).then(function (response) {
-                                $scope.readMsg = true;
+                            if ($scope.myMessages[i].read != true) {
+                                $scope.myNewGroupMessageIdstoRead.push($scope.myMessages[i].messageId);
+                            }
+                        }
+                        $scope.myGroupMessageIdstoRead = $scope.myNewGroupMessageIdstoRead.join();
+                        if ($scope.myGroupMessageIdstoRead != "") {
+                            FriendsNotificationService.setGroupMessageRead($scope.myGroupMessageIdstoRead).then(function (response) {
+                                $scope.readGroupMsg = true;
                             });
                         }
                         $scope.getMessagesTime();

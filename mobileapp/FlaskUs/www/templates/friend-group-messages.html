@@ -9,31 +9,37 @@
     </ion-nav-bar>
             <ion-content class="friendlistInMessages no-Header">
                 <div ng-if="newChatData.length==0" class="item" style="font-weight:normal;">{{allChatMessages}}</div>
-                <ion-list>
-                    <ion-item ng-repeat="data in newChatData track by $index" class="row-no-padding animate-in-secondary" padding="false" ng-click="getMsgType(data,data.isUser)" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
-                        <a class="row-no-padding" style="text-decoration: none">
-                            <!--href="#/app/my_friendDetail/{{data.userId}}"-->
-                            <div ng-if="data.isUser==0">
-                                <img src="img/default-group-pic.png" class="groupIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
-                            </div>
-                            <div class="col col-20" ng-if="data.isUser==1">
-                                <img ng-src="{{data.profilePic}}" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
-                            </div>
-                            <div class="col col-70" style="padding-top: 16px" ng-if="data.isUser==1">
-                                <h3 class="nameText">{{ data.name | uppercase}}</h3>
-                            </div>
-                            <div ng-if="data.isUser==0"> 
-                                <h3 class="emailText" style="font-size: 17px; font-weight: 600;">{{data.name}}</h3>
-                                <div class="friend_group_name" style="color: black;font-weight: normal !important;font-size: 14px;text-overflow: ellipsis;overflow: hidden">{{data.description}}</div>
-                            </div>
-                            <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="readMsg != true">{{data.unreadMessageCount}}</span>
-                            <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="readMsg == true">0</span>
-                            <span class="badge span_icon ext-top span_icon_extraright" ><img src="img/flask_icons/arrow_left.svg"></span>
-                        </a>
-                        <ion-option-button class="icon ion-trash-a" ng-click="deleteConversation(data.id,data.isUser)"></ion-option-button>
-                    </ion-item>
-                </ion-list>
-            </ion-content>
+                <ion-scroll style="height: 99%;">
+                    <ion-list>
+                        <ion-item ng-repeat="data in newChatData track by $index" class="row-no-padding animate-in-secondary" padding="false" ng-click="getMsgType(data,data.isUser)" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
+                            <a class="row-no-padding" style="text-decoration: none">
+                                <!--href="#/app/my_friendDetail/{{data.userId}}"-->
+                                <div ng-if="data.isUser==0">
+                                    <img src="img/default-group-pic.png" class="groupIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                                </div>
+                                <div class="col col-20" ng-if="data.isUser==1">
+                                    <img ng-src="{{data.profilePic}}" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                                </div>
+                                <div class="col col-70" style="padding-top: 16px" ng-if="data.isUser==1">
+                                    <h3 class="nameText">{{ data.name | uppercase}}</h3>
+                                </div>
+                                <div ng-if="data.isUser==0">
+                                    <h3 class="emailText" style="font-size: 17px; font-weight: 600;">{{data.name}}</h3>
+                                    <div class="friend_group_name" style="color: black;font-weight: normal !important;font-size: 14px;text-overflow: ellipsis;overflow: hidden">{{data.description}}</div>
+                                </div>
+                                <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="readIndividualMsg != true && data.isUser==1">{{data.unreadMessageCount}}</span>
+                                <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="readIndividualMsg == true && data.isUser==1">0</span>
+
+                                <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="readGroupMsg != true && data.isUser==0">{{data.unreadMessageCount}}</span>
+                                <span class="badge badge-assertive badge_count ng-binding readFlag" ng-if="readGroupMsg == true && data.isUser==0">0</span>
+
+                                <span class="badge span_icon ext-top span_icon_extraright"><img src="img/flask_icons/arrow_left.svg"></span>
+                            </a>
+                            <ion-option-button class="icon ion-trash-a" ng-click="deleteConversation(data.id,data.isUser)"></ion-option-button>
+                        </ion-item>
+                    </ion-list>
+              </ion-scroll>
+</ion-content>
     <script id="templates/modal.html" type="text/ng-template">
         <ion-modal-view>
             <ion-pane class="messaging-view">

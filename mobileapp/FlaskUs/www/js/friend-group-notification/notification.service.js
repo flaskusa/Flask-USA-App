@@ -179,8 +179,7 @@
         }
         function addSocialRelation(receiverUserId) {
             return $http.get(SERVER.url + addSocialRelationUrl, {
-                params:
-                { receiverUserId: receiverUserId }
+                params:{ receiverUserId: receiverUserId }
             })
                 .then(function success(response) {
                     return response.data;
@@ -191,33 +190,30 @@
         }
         function deleteRequest(receiverUserId) {
             return $http.get(SERVER.url + deleteSocialRelationUrl, {
-                params:
-                { receiverUserId: receiverUserId }
+                params:{ receiverUserId: receiverUserId }
             })
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function success(response) {
+            return response.data;
+            }, function failure(response) {
+            return $q.$inject(response);
+            //add errror handling
+            });
         }
-        function setReadMessage(messageId) {
+        function setReadMessage(messageIds) {
             return $http.get(SERVER.url + setMessageReadUrl, {
-                params:
-            { messageId: messageId }
+                params: { messageIds: messageIds}
             })
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function success(response) {
+                return response.data;
+            }, function failure(response) {
+                return $q.$inject(response);
+                //add errror handling
+            });
         }
         //set group messages as read
-        function setGroupMessageRead(groupMessageId) {
+        function setGroupMessageRead(groupMessageIds) {
             return $http.get(SERVER.url + setGroupMessageReadUrl, {
-                params:
-            { groupMessageId: groupMessageId }
+                params: { groupMessageIds: groupMessageIds }
             })
                 .then(function success(response) {
                     return response.data;
