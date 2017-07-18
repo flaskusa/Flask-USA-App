@@ -505,7 +505,6 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 		} 
 		
 		Calendar cal = FlaskModelUtil.parseDate(DOB);
-		System.out.println(user.toString());
 		user = UserLocalServiceUtil.updateUser( userId /*long userId*/,
 				user.getPassword()/*String oldPassword*/,
 				password1 /*String newPassword1*/,

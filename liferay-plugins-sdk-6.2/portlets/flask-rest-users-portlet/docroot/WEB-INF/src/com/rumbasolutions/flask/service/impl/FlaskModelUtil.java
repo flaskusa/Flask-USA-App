@@ -1,6 +1,5 @@
 package com.rumbasolutions.flask.service.impl;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -34,7 +33,6 @@ import com.liferay.portal.model.ResourcePermission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
@@ -378,7 +376,6 @@ public class FlaskModelUtil {
 	public static void setMyGuestViewPermission( FileEntry fileEntry) throws PortalException, SystemException{
 		ResourcePermission resourcePermission = null;
 		Role guestRole = getMyGuestRole();
-		System.out.println("Guest ROle is " + guestRole + " Id is "+guestRole.getRoleId());
 		try
 		   {
 			
@@ -387,16 +384,13 @@ public class FlaskModelUtil {
 		    					ResourceConstants.SCOPE_INDIVIDUAL, 
 		    					String.valueOf(fileEntry.getPrimaryKey()),
 		    					guestRole.getRoleId());
-		    System.out.println("Guest ROle is 1 " + guestRole + " Id is "+guestRole.getRoleId());
 		    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
-		    System.out.println("Guest ROle is 2 " + guestRole + " Id is "+guestRole.getRoleId());
 		    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
 		    {
 		      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
 		      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
 		    }
 		   }catch(Exception ex){
-			   System.out.println("Exception is " + ex.getMessage());
 			      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
 			      resourcePermission.setCompanyId(fileEntry.getCompanyId());
 			      resourcePermission.setName(DLFileEntry.class.getName());
@@ -462,10 +456,7 @@ public class FlaskModelUtil {
 	
 	public static Role getGuestRole(){
 		try {
-			System.out.println("Defuaault compay Id" + PortalUtil.getDefaultCompanyId());
-			System.out.println("Role Constant" + RoleConstants.GUEST);
 			if(_guestRole == null){
-				System.out.println(" Guest Rolle  ==  null");
 				_guestRole =RoleServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), RoleConstants.GUEST);
 			}
 		}
@@ -481,7 +472,6 @@ public class FlaskModelUtil {
 	public static void setGuestViewPermission( FileEntry fileEntry) throws PortalException, SystemException{
 		ResourcePermission resourcePermission = null;
 		Role guestRole = getGuestRole();
-		System.out.println("Guest ROle Id Is " + guestRole.getRoleId());
 		try
 		   {
 			
