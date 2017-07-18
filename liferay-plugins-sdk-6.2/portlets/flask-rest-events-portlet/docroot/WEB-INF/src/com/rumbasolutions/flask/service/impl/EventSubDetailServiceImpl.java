@@ -24,12 +24,10 @@ import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.rumbasolutions.flask.model.EventSubDetail;
-import com.rumbasolutions.flask.model.VenueSubDetail;
 import com.rumbasolutions.flask.service.EventSubDetailLocalServiceUtil;
 import com.rumbasolutions.flask.service.EventSubDetailServiceUtil;
 import com.rumbasolutions.flask.service.base.EventSubDetailServiceBaseImpl;
 import com.rumbasolutions.flask.service.persistence.EventSubDetailUtil;
-import com.rumbasolutions.flask.service.persistence.VenueSubDetailUtil;
 
 /**
  * The implementation of the event sub detail remote service.

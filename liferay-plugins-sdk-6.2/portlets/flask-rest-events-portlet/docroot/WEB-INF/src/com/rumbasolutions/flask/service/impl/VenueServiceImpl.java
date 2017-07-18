@@ -59,7 +59,6 @@ import com.rumbasolutions.flask.service.persistence.VenueUtil;
 
 /**
  * The implementation of the venue remote service.
- *
  * <p>
  * All custom service methods should be put in this class. Whenever methods are added, rerun ServiceBuilder to copy their definitions into the {@link com.rumbasolutions.flask.service.VenueService} interface.
  *
@@ -620,7 +619,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 				}	
 			}
 		} catch (Exception e) {
-			LOGGER.error(e);
+			LOGGER.error("Exception in copyVenueDetailsWithImages: "+e.getMessage());
 		}finally{
 			destinationObject = VenueServiceUtil.getVenueDetailsWithImages(destinationVenueId, serviceContext);
 		}
@@ -650,7 +649,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 				}
 			}
 		} catch (Exception e) {
-			LOGGER.error(e);
+			LOGGER.error("Exception in addFileEntry: "+e.getMessage());
 		}
 	}
 	
@@ -664,7 +663,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			VenueLocalServiceUtil.deleteVenue(venueId);
 		}
 		catch (Exception e) {
-			LOGGER.error(e);
+			LOGGER.error("Exception in deleteVenueCascade: "+e.getMessage());
 		}
 	}
 	
@@ -674,7 +673,7 @@ public class VenueServiceImpl extends VenueServiceBaseImpl {
 			deleteVenueDetail(venueDetailId, serviceContext);
 		}
 		catch (Exception e) {
-			LOGGER.error(e);
+			LOGGER.error("Exception in deleteDetailCascade: "+e.getMessage());
 		}
 	}
 	
