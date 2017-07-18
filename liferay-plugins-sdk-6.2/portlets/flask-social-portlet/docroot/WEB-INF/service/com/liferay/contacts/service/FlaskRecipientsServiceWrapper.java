@@ -67,9 +67,9 @@ public class FlaskRecipientsServiceWrapper implements FlaskRecipientsService,
 	}
 
 	@Override
-	public boolean setRead(long messageId,
+	public boolean setRead(java.lang.Long[] messageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return _flaskRecipientsService.setRead(messageId, serviceContext);
+		return _flaskRecipientsService.setRead(messageIds, serviceContext);
 	}
 
 	/**

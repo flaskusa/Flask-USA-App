@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see com.liferay.contacts.service.base.DeviceAwsEndpointServiceBaseImpl
  * @see com.liferay.contacts.service.DeviceAwsEndpointServiceUtil
  */

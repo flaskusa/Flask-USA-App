@@ -68,6 +68,6 @@ public interface FlaskRecipientsService extends BaseService, InvokableService {
 		long userId, long messageId, boolean read,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
-	public boolean setRead(long messageId,
+	public boolean setRead(java.lang.Long[] messageIds,
 		com.liferay.portal.service.ServiceContext serviceContext);
 }

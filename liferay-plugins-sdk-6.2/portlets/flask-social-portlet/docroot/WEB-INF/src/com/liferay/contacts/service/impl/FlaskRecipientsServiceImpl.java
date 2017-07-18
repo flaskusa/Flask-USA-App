@@ -22,6 +22,8 @@ import com.liferay.contacts.service.FlaskRecipientsLocalServiceUtil;
 import com.liferay.contacts.service.base.FlaskRecipientsServiceBaseImpl;
 import com.liferay.contacts.service.persistence.FlaskRecipientsUtil;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -42,6 +44,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
  */
 public class FlaskRecipientsServiceImpl extends FlaskRecipientsServiceBaseImpl {
 	
+	private static Log LOGGER = LogFactoryUtil.getLog(FlaskRecipientsServiceImpl.class);
 	
 	@Override
 	public FlaskRecipients addFlaskRecipient(long userId, long messageId, boolean read, ServiceContext serviceContext){
@@ -59,25 +62,27 @@ public class FlaskRecipientsServiceImpl extends FlaskRecipientsServiceBaseImpl {
 			flaskRecipients.setReceivedDateTime(serviceContext.getCreateDate(date));
 			flaskRecipients = FlaskRecipientsLocalServiceUtil.addFlaskRecipients(flaskRecipients);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in addFlaskRecipient: "+e.getMessage());
 		}
 		return flaskRecipients;
 	}
 	
 	@Override
-	 public boolean setRead(long messageId, ServiceContext serviceContext){
+	 public boolean setRead(Long[] messageIds, ServiceContext serviceContext){
 	  boolean ret = false;
 	  try {
-		   List<FlaskRecipients> flaskRecipients = FlaskRecipientsUtil.findBymessageId(messageId);
-		   for(FlaskRecipients recp: flaskRecipients){
-			   if((recp.getUserId() == serviceContext.getUserId()) && (recp.getRead() == false)){
-				   ret = true;
-				   recp.setRead(ret);
-				   FlaskRecipientsLocalServiceUtil.updateFlaskRecipients(recp);
+		  for(long messageId: messageIds){
+			  List<FlaskRecipients> flaskRecipients = FlaskRecipientsUtil.findBymessageId(messageId);
+			   for(FlaskRecipients recp: flaskRecipients){
+				   if((recp.getUserId() == serviceContext.getUserId()) && (recp.getRead() == false)){
+					   ret = true;
+					   recp.setRead(ret);
+					   FlaskRecipientsLocalServiceUtil.updateFlaskRecipients(recp);
+				   }
 			   }
-		   }
+		  }
 	  } catch (Exception e) {
-	   e.printStackTrace();
+		  LOGGER.error("Exception in setRead: "+e.getMessage());
 	  }
 	  return ret;
 	 }

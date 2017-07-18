@@ -73,7 +73,7 @@ import com.rumbasolutions.flask.model.FlaskGroup;
 import com.rumbasolutions.flask.service.FlaskGroupServiceUtil;
 
 /**
- * @author Bruno Farache
+ * @author Kiran
  */
 public class EntryServiceImpl extends EntryServiceBaseImpl {
 	
@@ -184,7 +184,6 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		try {
 			long userId = getUserId();
-			
 		  int cnt = SocialRelationLocalServiceUtil.getRelationsCount(userId, SocialRelationConstants.TYPE_BI_CONNECTION);
 		  List<SocialRelation> relation = SocialRelationLocalServiceUtil.getRelations(userId, SocialRelationConstants.TYPE_BI_CONNECTION, 0, cnt);
 		  for(SocialRelation relObj: relation){
@@ -239,9 +238,13 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 								List<String> deletedBy = new ArrayList<String>();
 								if(!recp.getDeletedBy().equals("")){
 									deletedBy = Arrays.asList(recp.getDeletedBy().split(","));
-									if(!deletedBy.contains(String.valueOf(serviceContext.getUserId())) && !recp.getRead()){
-										unread++;
+									if(!deletedBy.contains(String.valueOf(serviceContext.getUserId()))){
+										if(!recp.getRead() && recp.getUserId()==serviceContext.getUserId())
+											unread++;
 									}
+								}else{
+									if(!recp.getRead() && recp.getUserId()==serviceContext.getUserId())
+										unread++;
 								}
 								
 							}
@@ -259,7 +262,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 			  jsonArray.put(jsonObject);
 		  }
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in searchMyFriends: "+e.getMessage());
 		}
 		return jsonArray;
 	}
@@ -373,8 +376,6 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
                 });
 		try {
 			long userId = getUserId();
-//			int cnt1 = entryLocalService.searchUsersAndContactsCount(companyId, userId, " ");
-//			List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(companyId, userId, " ", 0, cnt1);
 			int cnt = SocialRelationLocalServiceUtil.getRelationsCount(userId, SocialRelationConstants.TYPE_BI_CONNECTION);
 			List<SocialRelation> relation = SocialRelationLocalServiceUtil.getRelations(userId, SocialRelationConstants.TYPE_BI_CONNECTION, 0, cnt);
 			for(SocialRelation relObj: relation){
@@ -400,17 +401,16 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 									deletedBy = Arrays.asList(recp.getDeletedBy().split(","));
 									if(!deletedBy.contains(String.valueOf(serviceContext.getUserId()))){
 										count++;
-										if(!recp.getRead())
+										if(!recp.getRead() && recp.getUserId()==serviceContext.getUserId())
 											unread++;
 									}
 								}else{
 									count++;
-									if(!recp.getRead())
+									if(!recp.getRead() && recp.getUserId()==serviceContext.getUserId())
 										unread++;
 								}
 							}
 						}finally{
-							System.out.println("count: "+count);
 							if(count>0){
 								JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 								jsonObject.put("name", user2.getFullName());
@@ -466,14 +466,13 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 							Date receivedDate = flaskGroupRecipients.get(msgSize-1).getReceivedDateTime();
 							obj.put("lastMessageDateTime", receivedDate);
 							obj.put("unreadMessageCount", grpMsgCount);
-							System.out.println(receivedDate);
 							treeMap.put(receivedDate, obj);
 						}
 					}
 				}
 			}
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.error("Exception in getAllMyMessages: "+e.getMessage());
 		}
 		return treeMap;
 	}

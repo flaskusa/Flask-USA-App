@@ -71,7 +71,7 @@ public interface FlaskGroupRecipientsService extends BaseService,
 		java.lang.String message, java.lang.Boolean sendEmail,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
-	public boolean setGroupMessageRead(long groupMessageId,
+	public boolean setGroupMessageRead(java.lang.Long[] groupMessageIds,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)

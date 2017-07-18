@@ -70,9 +70,9 @@ public class FlaskRecipientsServiceUtil {
 				   .addFlaskRecipient(userId, messageId, read, serviceContext);
 	}
 
-	public static boolean setRead(long messageId,
+	public static boolean setRead(java.lang.Long[] messageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return getService().setRead(messageId, serviceContext);
+		return getService().setRead(messageIds, serviceContext);
 	}
 
 	public static void clearService() {

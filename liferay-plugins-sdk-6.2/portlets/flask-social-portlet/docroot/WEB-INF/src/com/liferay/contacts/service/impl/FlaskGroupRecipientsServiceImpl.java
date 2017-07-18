@@ -50,15 +50,14 @@ import com.rumbasolutions.flask.service.FlaskGroupUsersServiceUtil;
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see com.liferay.contacts.service.base.FlaskGroupRecipientsServiceBaseImpl
  * @see com.liferay.contacts.service.FlaskGroupRecipientsServiceUtil
  */
 public class FlaskGroupRecipientsServiceImpl
 	extends FlaskGroupRecipientsServiceBaseImpl {
 	
-	private static Log LOGGER = LogFactoryUtil
-			.getLog(FlaskGroupRecipientsServiceImpl.class);
+	private static Log LOGGER = LogFactoryUtil.getLog(FlaskGroupRecipientsServiceImpl.class);
 	
 	@Override
 	public FlaskGroupRecipients addFlaskGroupRecipients(long groupId, String senderEmailId, long groupMessageId, String message, Boolean sendEmail, ServiceContext serviceContext){
@@ -93,7 +92,8 @@ public class FlaskGroupRecipientsServiceImpl
 			Date date = new Date();
 			flaskGroupRecipients.setReceivedDateTime(serviceContext.getCreateDate(date));
 			flaskGroupRecipients = FlaskGroupRecipientsLocalServiceUtil.addFlaskGroupRecipients(flaskGroupRecipients);
-			setGroupMessageRead(groupMessageId, serviceContext);
+			Long[] grpMessages = {groupMessageId};
+			setGroupMessageRead(grpMessages, serviceContext);
 		} catch (Exception e) {
 			LOGGER.error("Exception in addFlaskGroupRecipients:"+e.getMessage());
 		}
@@ -101,27 +101,30 @@ public class FlaskGroupRecipientsServiceImpl
 	}
 	
 	@Override
-	 public boolean setGroupMessageRead(long groupMessageId, ServiceContext serviceContext){
-	  boolean ret = false;
+	 public boolean setGroupMessageRead(Long[] groupMessageIds, ServiceContext serviceContext){
+	  boolean done = false;
 	  try {
-		   List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupRecipientsUtil.findByMessageId(groupMessageId);
-		   for(FlaskGroupRecipients recp: flaskGroupRecipients){
-			   	JSONObject recpInfo = JSONFactoryUtil.createJSONObject(recp.getMessageStatusInfo());				
-				if(recpInfo.has(String.valueOf(serviceContext.getUserId()))){
-					JSONObject recpObj = recpInfo.getJSONObject(String.valueOf(serviceContext.getUserId()));
-					JSONObject newObj = JSONFactoryUtil.createJSONObject();
-					newObj.put("deleted", recpObj.getBoolean("deleted"));
-					newObj.put("read", true);
-					recpInfo.remove(String.valueOf(serviceContext.getUserId()));
-					recpInfo.put(String.valueOf(serviceContext.getUserId()), newObj);
-					recp.setMessageStatusInfo(recpInfo.toString());
-					FlaskGroupRecipientsLocalServiceUtil.updateFlaskGroupRecipients(recp);
-				}
-		   }
+		  for(long groupMessageId: groupMessageIds){
+			  List<FlaskGroupRecipients> flaskGroupRecipients = FlaskGroupRecipientsUtil.findByMessageId(groupMessageId);
+			   for(FlaskGroupRecipients recp: flaskGroupRecipients){
+				   	JSONObject recpInfo = JSONFactoryUtil.createJSONObject(recp.getMessageStatusInfo());				
+					if(recpInfo.has(String.valueOf(serviceContext.getUserId()))){
+						JSONObject recpObj = recpInfo.getJSONObject(String.valueOf(serviceContext.getUserId()));
+						JSONObject newObj = JSONFactoryUtil.createJSONObject();
+						newObj.put("deleted", recpObj.getBoolean("deleted"));
+						newObj.put("read", true);
+						recpInfo.remove(String.valueOf(serviceContext.getUserId()));
+						recpInfo.put(String.valueOf(serviceContext.getUserId()), newObj);
+						recp.setMessageStatusInfo(recpInfo.toString());
+						FlaskGroupRecipientsLocalServiceUtil.updateFlaskGroupRecipients(recp);
+					}
+			   }  
+		  }
+		  done = true;
 	  } catch (Exception e) {
 		  LOGGER.error("Exception in setGroupMessageRead:"+e.getMessage());
 	  }
-	  return ret;
+	  return done;
 	}
 	
 	@SuppressWarnings("unchecked")

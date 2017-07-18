@@ -42,7 +42,8 @@ public class FlaskRecipientsServiceClp implements FlaskRecipientsService {
 		_methodName4 = "setRead";
 
 		_methodParameterTypes4 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Long[][]",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -131,7 +132,7 @@ public class FlaskRecipientsServiceClp implements FlaskRecipientsService {
 	}
 
 	@Override
-	public boolean setRead(long messageId,
+	public boolean setRead(java.lang.Long[] messageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -139,7 +140,7 @@ public class FlaskRecipientsServiceClp implements FlaskRecipientsService {
 			returnObj = _invokableService.invokeMethod(_methodName4,
 					_methodParameterTypes4,
 					new Object[] {
-						messageId,
+						ClpSerializer.translateInput(messageIds),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

@@ -79,11 +79,11 @@ public class FlaskRecipientsServiceSoap {
 		}
 	}
 
-	public static boolean setRead(long messageId,
+	public static boolean setRead(java.lang.Long[] messageIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			boolean returnValue = FlaskRecipientsServiceUtil.setRead(messageId,
+			boolean returnValue = FlaskRecipientsServiceUtil.setRead(messageIds,
 					serviceContext);
 
 			return returnValue;

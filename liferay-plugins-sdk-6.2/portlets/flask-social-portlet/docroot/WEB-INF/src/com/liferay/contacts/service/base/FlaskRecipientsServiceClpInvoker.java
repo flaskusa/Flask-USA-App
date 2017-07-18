@@ -42,7 +42,8 @@ public class FlaskRecipientsServiceClpInvoker {
 		_methodName69 = "setRead";
 
 		_methodParameterTypes69 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Long[][]",
+				"com.liferay.portal.service.ServiceContext"
 			};
 	}
 
@@ -70,7 +71,7 @@ public class FlaskRecipientsServiceClpInvoker {
 
 		if (_methodName69.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes69, parameterTypes)) {
-			return FlaskRecipientsServiceUtil.setRead(((Long)arguments[0]).longValue(),
+			return FlaskRecipientsServiceUtil.setRead((java.lang.Long[])arguments[0],
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 		}
 

@@ -17,6 +17,9 @@
 
 package com.liferay.contacts.service.impl;
 
+import java.util.Date;
+import java.util.List;
+
 import com.liferay.contacts.DuplicateEntryEmailAddressException;
 import com.liferay.contacts.EntryEmailAddressException;
 import com.liferay.contacts.RequiredEntryEmailAddressException;
@@ -29,9 +32,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.User;
-
-import java.util.Date;
-import java.util.List;
 
 /**
  * @author Kiran

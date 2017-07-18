@@ -40,6 +40,8 @@ import com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil;
 import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -54,12 +56,14 @@ import com.liferay.portal.service.UserLocalServiceUtil;
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see com.liferay.contacts.service.base.FlaskGroupMessagesServiceBaseImpl
  * @see com.liferay.contacts.service.FlaskGroupMessagesServiceUtil
  */
 public class FlaskGroupMessagesServiceImpl
 	extends FlaskGroupMessagesServiceBaseImpl {
+	
+	private static Log LOGGER = LogFactoryUtil.getLog(EntryServiceImpl.class);
 	
 	@Override
 	 public FlaskGroupMessages sendFlaskGroupMessage(long groupId, String message, boolean sendEmail, ServiceContext serviceContext){
@@ -78,7 +82,7 @@ public class FlaskGroupMessagesServiceImpl
 		   flaskGroupMessage = FlaskGroupMessagesLocalServiceUtil.addFlaskGroupMessages(flaskGroupMessage);
 		   FlaskGroupRecipientsServiceUtil.addFlaskGroupRecipients(groupId, user.getEmailAddress(), flaskGroupMessage.getGroupMessagesId(), flaskGroupMessage.getMessage(), flaskGroupMessage.getSendEmail(), serviceContext);
 	   } catch (Exception e) {
-	   e.printStackTrace();
+		   LOGGER.error("Exception in sendFlaskGroupMessage: "+e.getMessage());
 	  }
 	  return flaskGroupMessage;
 	}
@@ -114,7 +118,7 @@ public class FlaskGroupMessagesServiceImpl
 				}					
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in getAllMyFlaskGroupMessages: "+e.getMessage());
 		}
 		return jsonArray;
 	}
@@ -125,7 +129,7 @@ public class FlaskGroupMessagesServiceImpl
 		try {
 			flaskGroupMessages = FlaskGroupMessagesUtil.findBygroupId(groupId);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in getGroupMessages: "+e.getMessage());
 		}
 		return flaskGroupMessages;
 	}
@@ -144,7 +148,7 @@ public class FlaskGroupMessagesServiceImpl
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in getMyFlaskGroupMessagesCount: "+e.getMessage());
 		}
 		return count;
 	}
@@ -164,7 +168,7 @@ public class FlaskGroupMessagesServiceImpl
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in getMyUnreadFlaskGroupMessagesCount: "+e.getMessage());
 		}
 		return count;
 	}
@@ -194,7 +198,7 @@ public class FlaskGroupMessagesServiceImpl
 			}
 			done = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in deleteMyGroupChatMessages: "+e.getMessage());
 		}
 		return done;
 	}
@@ -210,7 +214,7 @@ public class FlaskGroupMessagesServiceImpl
 				FlaskGroupMessagesLocalServiceUtil.deleteFlaskGroupMessages(msg);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in deleteGroupMessage: "+e.getMessage());
 		}
 	}
 	
@@ -231,7 +235,7 @@ public class FlaskGroupMessagesServiceImpl
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in deleteGroupMessagesByDateRange: "+e.getMessage());
 		}
 	}
 }

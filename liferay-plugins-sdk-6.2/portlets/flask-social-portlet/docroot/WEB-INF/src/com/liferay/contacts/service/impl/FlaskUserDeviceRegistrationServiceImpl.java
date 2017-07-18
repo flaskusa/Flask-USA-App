@@ -40,7 +40,7 @@ import com.liferay.portal.service.ServiceContext;
  * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
  * </p>
  *
- * @author Brian Wing Shun Chan
+ * @author Kiran
  * @see com.liferay.contacts.service.base.FlaskUserDeviceRegistrationServiceBaseImpl
  * @see com.liferay.contacts.service.FlaskUserDeviceRegistrationServiceUtil
  */
@@ -73,7 +73,6 @@ public class FlaskUserDeviceRegistrationServiceImpl
  		}catch(Exception e){
  			LOGGER.error("Exception in Registraing User Device: " + e.getMessage());
  		}
- 		System.out.println(flaskUserDeviceRegistration);
  		return flaskUserDeviceRegistration;
  	}
      
@@ -175,7 +174,7 @@ public class FlaskUserDeviceRegistrationServiceImpl
     		 userDevice = FlaskUserDeviceRegistrationLocalServiceUtil.updateFlaskUserDeviceRegistration(userDevice);
     		 done = true;
     	 } catch (Exception e) {
-			e.printStackTrace();
+    		 LOGGER.error("Exception in deactivateUserForUserDevice: " + e.getMessage());
     	 }
     	 return done;
      }
@@ -189,7 +188,7 @@ public class FlaskUserDeviceRegistrationServiceImpl
     		 userDevice = FlaskUserDeviceRegistrationLocalServiceUtil.updateFlaskUserDeviceRegistration(userDevice);
     		 done = true;
     	 } catch (Exception e) {
-			e.printStackTrace();
+    		 LOGGER.error("Exception in activateUserForUserDevice: " + e.getMessage());
     	 }
     	 return done;
      }

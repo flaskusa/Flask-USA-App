@@ -72,9 +72,10 @@ public class FlaskGroupRecipientsServiceUtil {
 			groupMessageId, message, sendEmail, serviceContext);
 	}
 
-	public static boolean setGroupMessageRead(long groupMessageId,
+	public static boolean setGroupMessageRead(
+		java.lang.Long[] groupMessageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return getService().setGroupMessageRead(groupMessageId, serviceContext);
+		return getService().setGroupMessageRead(groupMessageIds, serviceContext);
 	}
 
 	public static java.util.List<com.liferay.contacts.model.FlaskGroupRecipients> getGroupRecipientsByGroupId(

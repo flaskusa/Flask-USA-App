@@ -103,14 +103,14 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	   String[] rec = recipients.split(",");
 	   for (String userId : rec){
 		   if(Long.parseLong(userId) > 0){
-			   FlaskRecipients recp = FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false, serviceContext);
+			   FlaskRecipientsServiceUtil.addFlaskRecipient(Long.parseLong(userId), flaskMessage.getMessageId(), false, serviceContext);
 			   FlaskMessagesServiceUtil.sendPush(Long.parseLong(userId), "Flask Message", "You have a message from "+user.getFullName(), "Friend_Message", user.getModelAttributes(), user.getUserId());
 //			   if(sendEmail)
 //			        EmailInvitationUtil.emailMessage(user.getFullName(), user.getEmailAddress(), recp.getEmail(), message, serviceContext);
 		   }
 	   }
 	  } catch (Exception e) {
-		  System.err.println(e.getMessage());
+		  LOGGER.error("Exception in sendFlaskMessage: "+e.getMessage());
 	  }
 	  return flaskMessage;
 	}
@@ -126,7 +126,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 			client.publish(req);
 			mailSent = true;
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in sendSnsEmail: "+e.getMessage());
 		}
 		return mailSent;
 	}
@@ -167,7 +167,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 				jsonArray.put(jsonObj);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in getAllMyFlaskMessages: "+e.getMessage());
 		}
 		return jsonArray;
 	}
@@ -183,7 +183,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 					flaskMessages.add(FlaskMessagesLocalServiceUtil.getFlaskMessages(recp.getMessageId()));
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in getMyUnreadFlaskMessages: "+e.getMessage());
 		}
 		return flaskMessages;
 	}
@@ -199,7 +199,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 					count++;
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in getMyFlaskMessagesCount: "+e.getMessage());
 		}
 		return count;
 	}
@@ -220,7 +220,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in getMyUnreadFlaskMessagesCount: "+e.getMessage());
 		}
 		return count;
 	}
@@ -246,7 +246,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in getTotalUnreadChatCount: "+e.getMessage());
 		}
 		return count;
 	}
@@ -262,7 +262,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 				FlaskMessagesLocalServiceUtil.deleteFlaskMessages(msg);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in deleteMessage: "+e.getMessage());
 		}
 	}
 	
@@ -280,7 +280,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error("Exception in deleteMessagesByDateRange: "+e.getMessage());
 		}
 	}
 	
@@ -321,14 +321,12 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	    boolean createNeeded = false;
 		try {
 			LOGGER.debug("Started registring with SNS");
-			System.out.println("Started registring with SNS");
 			AWSCredentials cred = new BasicAWSCredentials(PropsUtil.get("flask.push.accessKey"), PropsUtil.get("flask.push.secretKey"));
 			AmazonSNSClient client = new AmazonSNSClient(cred);
 			long userDeviceRegistrationId = 0;
 			List<FlaskUserDeviceRegistration> registeredDevices = FlaskUserDeviceRegistrationUtil.findByUserIdDeviceToken(userId, deviceToken);
 			if(registeredDevices.size()<=0){
 				LOGGER.debug("Creating platform endpoint");
-				System.out.println("Creating platform endpoint");
 				endpointArn = ContactsUtil.createPlatformEndpoint(client, deviceToken, devicePlatform);
 			    createNeeded = false;
 				userDeviceRegistrationId = FlaskUserDeviceRegistrationServiceUtil.addUserDevice(userId, userEmail, devicePlatform, deviceDetails, deviceToken, 
@@ -336,7 +334,6 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 				DeviceAwsEndpointServiceUtil.addDeviceAwsEndpoint(endpointArn, userDeviceRegistrationId);
 			}else{
 				LOGGER.debug("Retrieving platform endpoint");
-				System.out.println("Retrieving platform endpoint");
 				userDeviceRegistrationId = registeredDevices.get(0).getUserDeviceRegistrationId();
 				FlaskUserDeviceRegistrationServiceUtil.activateUserForUserDevice(userDeviceRegistrationId);
 				DeviceAwsEndpoint deviceAwsEndpoint = DeviceAwsEndpointUtil.findByendpointsByRegistrationId(userDeviceRegistrationId).get(0);
@@ -358,7 +355,6 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		    }
 		    if (createNeeded) {		    	
 		    	LOGGER.debug("Creating platform endpoint");
-		    	System.out.println("Creating platform endpoint");
 		    	endpointArn = ContactsUtil.createPlatformEndpoint(client, deviceToken, devicePlatform);
 		    	DeviceAwsEndpointServiceUtil.addDeviceAwsEndpoint(endpointArn, userDeviceRegistrationId);
 		    }
@@ -366,7 +362,6 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 //		    	The platform endpoint is out of sync with the current data;
 //		    	update the token and enable it.
 		    	LOGGER.debug("Updating platform endpoint");
-		    	System.out.println("Updating platform endpoint");
 		    	Map attribs = new HashMap();
 		    	attribs.put("Token", deviceToken);
 		    	attribs.put("Enabled", "true");
@@ -376,10 +371,9 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		    	client.setEndpointAttributes(saeReq);
 		    }
 		    LOGGER.debug("Registration with SNS is done");
-		    System.out.println("Registration with SNS is done");
 		    done = true;
 		} catch (Exception e) {
-			LOGGER.error("Error: " + e.getMessage());
+			LOGGER.error("Exception in registerWithSNS: "+e.getMessage());
 		}
 		return done;
 	}
@@ -448,7 +442,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 			}
 			done = true;
 		} catch (Exception e) {
-			LOGGER.error("Error: " + e.getMessage());
+			LOGGER.error("Exception in sendPush: "+e.getMessage());
 		}
 		return done;
 	}

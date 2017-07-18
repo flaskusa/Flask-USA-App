@@ -43,7 +43,8 @@ public class FlaskGroupRecipientsServiceClp
 		_methodName4 = "setGroupMessageRead";
 
 		_methodParameterTypes4 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
+				"java.lang.Long[][]",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName5 = "getGroupRecipientsByGroupId";
@@ -141,7 +142,7 @@ public class FlaskGroupRecipientsServiceClp
 	}
 
 	@Override
-	public boolean setGroupMessageRead(long groupMessageId,
+	public boolean setGroupMessageRead(java.lang.Long[] groupMessageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
@@ -149,7 +150,7 @@ public class FlaskGroupRecipientsServiceClp
 			returnObj = _invokableService.invokeMethod(_methodName4,
 					_methodParameterTypes4,
 					new Object[] {
-						groupMessageId,
+						ClpSerializer.translateInput(groupMessageIds),
 						
 					ClpSerializer.translateInput(serviceContext)
 					});

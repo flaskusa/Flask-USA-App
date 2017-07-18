@@ -69,9 +69,9 @@ public class FlaskGroupRecipientsServiceWrapper
 	}
 
 	@Override
-	public boolean setGroupMessageRead(long groupMessageId,
+	public boolean setGroupMessageRead(java.lang.Long[] groupMessageIds,
 		com.liferay.portal.service.ServiceContext serviceContext) {
-		return _flaskGroupRecipientsService.setGroupMessageRead(groupMessageId,
+		return _flaskGroupRecipientsService.setGroupMessageRead(groupMessageIds,
 			serviceContext);
 	}
 

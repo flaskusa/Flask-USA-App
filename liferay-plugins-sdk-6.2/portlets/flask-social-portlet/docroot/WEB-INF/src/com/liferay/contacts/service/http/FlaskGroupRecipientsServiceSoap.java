@@ -81,11 +81,12 @@ public class FlaskGroupRecipientsServiceSoap {
 		}
 	}
 
-	public static boolean setGroupMessageRead(long groupMessageId,
+	public static boolean setGroupMessageRead(
+		java.lang.Long[] groupMessageIds,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			boolean returnValue = FlaskGroupRecipientsServiceUtil.setGroupMessageRead(groupMessageId,
+			boolean returnValue = FlaskGroupRecipientsServiceUtil.setGroupMessageRead(groupMessageIds,
 					serviceContext);
 
 			return returnValue;
