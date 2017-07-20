@@ -229,7 +229,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 	public int getTotalUnreadChatCount(ServiceContext serviceContext){
 		int count = 0;
 		try {
-			JSONArray myFriends = EntryServiceUtil.searchMyFriends(serviceContext.getCompanyId(), " ", serviceContext);
+			JSONArray myFriends = EntryServiceUtil.searchMyFriends(serviceContext.getCompanyId(), "", serviceContext);
 			List<FlaskGroup> flaskGroups = FlaskGroupServiceUtil.getGroups(serviceContext.getUserId());
 			for(int i =0; i<myFriends.length(); i++ ){
 				int userMessageCount = 0;
