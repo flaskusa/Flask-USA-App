@@ -32,9 +32,7 @@
             $state.go("app.my_tailgate");
         }
         getMyTailgate();
-        $scope.setLogoImageUrl = function (groupId, uuid) {
-            $scope.tailgateLogoUrl = $scope.imgUrl + uuid + "&groupId=" + groupId;
-        }
+
         $scope.isTailgateMember = function () {
             return true;
         }
@@ -62,12 +60,14 @@
                 $scope.myPopup.close();
             }
         };
-        $scope.slidePrevious1 = function (tailgateImageViewer) {
-            $ionicSlideBoxDelegate.$getByHandle(tailgateImageViewer).previous();
+        $scope.slidePrevious1 = function () {
+            //$ionicSlideBoxDelegate.$getByHandle(tailgateImageViewer).previous();
+            $ionicSlideBoxDelegate.previous();
         }
 
-        $scope.slideNext1 = function (tailgateImageViewer) {
-            $ionicSlideBoxDelegate.$getByHandle(tailgateImageViewer).next();
+        $scope.slideNext1 = function () {
+            //$ionicSlideBoxDelegate.$getByHandle(tailgateImageViewer).next();
+            $ionicSlideBoxDelegate.next();
         }
 
         $scope.zoomMin = 1;
@@ -102,35 +102,39 @@
 
         function getMyTailgate() {
             TailgateService.getTailgate(tailGateId).then(function (respData) {
-                $scope.myTailgate = respData.data;
-                setTimeout(function () {
+                
+                    $scope.myTailgate = respData.data;
                     var getEvent = $http.get(SERVER.url + geteventURL, { params: { 'eventId': $scope.myTailgate.eventId } });
                     var getTailgateImages = $http.get(SERVER.url + getTailgateImagesURL, { params: { 'tailgateId': tailGateId } });
                     var getTalgetUsers = $http.get(SERVER.url + getTalgetUsersURL, { params: { 'tailgateId': tailGateId } });
                     var getmapMarkers = $http.get(SERVER.url + getmapMarkersURL, { params: { 'tailgateId': tailGateId } });
                     var getTailgateLogo = $http.get(SERVER.url + getTailgateLogoURL, { params: { 'tailgateId': tailGateId } });
 
-                    $q.all([getEvent, getTailgateImages,getTalgetUsers,getmapMarkers,getTailgateLogo]).then(function(values) {
+                    $q.all([getEvent, getTailgateImages, getTalgetUsers, getmapMarkers, getTailgateLogo]).then(function (values) {
                         /*$scope.results = MyService.doCalculation(values[0], values[1]);*/
-                        $scope.getTailGateLogo(values[4]);
-                        getlocationName(values[0]);
-                        getMyTailgateImages(values[1]);
-                        getTailgaters(values[2]);
-                        getTailgateMarkers(values[3]);                    
+                            $scope.getTailGateLogo(values[4]);
+                            getlocationName(values[0]);
+                            getMyTailgateImages(values[1]);
+                            getTailgaters(values[2]);
+                            getTailgateMarkers(values[3]);
                     });
-                }, 400);
             });
         }
+
         $scope.getTailGateLogo = function (respData) {
                 var groupId = respData.data.groupId;
                 if (groupId != undefined && groupId > 0) {
                     $scope.tailgateLogoId = 1;
-                    $scope.setLogoImageUrl(groupId, respData.data.uuid);
+                    //$scope.setLogoImageUrl(groupId, respData.data.uuid);
+                    $scope.tailgateLogoUrl = $scope.imgUrl + respData.data.uuid + "&groupId=" + groupId;
                 } else {
                     $scope.tailgateLogoId = 0;
                 }
                 $scope.currTailgateLogo = true;
         };
+        $scope.setLogoImageUrl = function (groupId, uuid) {
+            $scope.tailgateLogoUrl = $scope.imgUrl + uuid + "&groupId=" + groupId;
+        }
         function getlocationName(respData) {
                 $scope.myeventLocation = respData.data;
         }
@@ -150,32 +154,27 @@
         }
 
         $scope.getUserProfile = function(UserDetail) {
-            UserService.getUserProfile(UserDetail.userId).then(function(res) {
-               if(res.data.fileEntryId != undefined) {
-                    UserDetail.friendProfilePicUrl = $scope.imgUrl + res.data.uuid + "&groupId=" + res.data.groupId;
-                    $scope.myTailgaters.push(UserDetail);
-                   if($scope.allTailgatersLength==$scope.myTailgaters.length){
-                       get_message_list(tailGateId);
-
-                   }
-
-
-                }else{
-                    $scope.myTailgaters.push(UserDetail);
-                   if($scope.allTailgatersLength==$scope.myTailgaters.length){
-                       get_message_list(tailGateId);
-
-                   }
-                }
-
-
+            UserService.getUserProfile(UserDetail.userId).then(function (res) {
+                $scope.$applyAsync(function () {
+                    if(res.data.fileEntryId != undefined) {
+                        UserDetail.friendProfilePicUrl = $scope.imgUrl + res.data.uuid + "&groupId=" + res.data.groupId;
+                        $scope.myTailgaters.push(UserDetail);
+                        if($scope.allTailgatersLength==$scope.myTailgaters.length){
+                            get_message_list(tailGateId);
+                        }
+                    }else{
+                        $scope.myTailgaters.push(UserDetail);
+                        if($scope.allTailgatersLength==$scope.myTailgaters.length){
+                            get_message_list(tailGateId);
+                        }
+                    }
+                });
             },function(err) {
             })
         };
+
         function getTailgateMarkers(respData) {
-
-                $cookies.putObject('currtailGateMakers', respData.data);
-
+            $cookies.putObject('currtailGateMakers', respData.data);
         }
 
         //save message Function
@@ -212,7 +211,6 @@
                     $scope.messageUser.push({ message: userMessage, username: value.userName,userPicUrl:value.friendProfilePicUrl});
                 }
             });
-
         }
 
         $scope.checkTailgateId = function () {

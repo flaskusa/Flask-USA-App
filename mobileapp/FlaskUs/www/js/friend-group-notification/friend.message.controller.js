@@ -515,7 +515,9 @@
                     $scope.myIndividualMessageIdstoRead = $scope.myNewGroupMessageIdstoRead.join();
                     if ($scope.myIndividualMessageIdstoRead != "") {
                         FriendsNotificationService.setReadMessage($scope.myIndividualMessageIdstoRead).then(function (response) {
-                            $scope.readIndividualMsg = true;
+                            //$scope.readIndividualMsg = true;
+                            getAllFriendsandGroupsWithMessages();
+                            callMeForSorting();
                         });
                     }
                     $scope.getMessagesTime();
@@ -539,7 +541,9 @@
                         $scope.myGroupMessageIdstoRead = $scope.myNewGroupMessageIdstoRead.join();
                         if ($scope.myGroupMessageIdstoRead != "") {
                             FriendsNotificationService.setGroupMessageRead($scope.myGroupMessageIdstoRead).then(function (response) {
-                                $scope.readGroupMsg = true;
+                                //$scope.readGroupMsg = true;
+                                getAllFriendsandGroupsWithMessages();
+                                callMeForSorting();
                             });
                         }
                         $scope.getMessagesTime();
