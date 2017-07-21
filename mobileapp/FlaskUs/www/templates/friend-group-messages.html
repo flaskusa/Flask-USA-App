@@ -122,7 +122,7 @@
                                         <img src="img/default-profilepic-copy.png" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
                                     </div>
                                     <div class="col col-20" ng-if="friend.friendProfilePicUrl!=undefined">
-                                        <img ng-src="{{friend.friendProfilePicUrl}}" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                                        <img ng-src="{{friend.friendProfilePicUrl}}" onError="this.src = 'img/default-profilepic-copy.png';" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
                                     </div>
                                     <div class="col col-70" style="padding-top: 16px">
                                         <h3 class="nameText">{{ friend.fullName | uppercase}}</h3>

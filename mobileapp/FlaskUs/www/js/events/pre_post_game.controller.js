@@ -109,7 +109,7 @@
         }
         function getEventVenueDatail() {
             $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
-            console.log($stateParams.eventId);
+            //console.log($stateParams.eventId);
             if ($stateParams.eventId == "none") {
                 EventsService.getVenueDetailWithImage(parseInt($stateParams.venueId)).then(function (respData) {
                     setEventVenueDatail(respData);                    

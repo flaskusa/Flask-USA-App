@@ -9,7 +9,7 @@
             //      cordova.plugins.Keyboard.disableScroll(true);
             //For Push Notification
             var currentPlatform = ionic.Platform.platform();
-            console.log(currentPlatform);
+            //console.log(currentPlatform);
             var sendInfoData = {};
             var push = PushNotification.init({
                 "android": {
@@ -39,8 +39,8 @@
 
             push.on('notification', function (data) {
                 $cookies.remove('popupData');
-                console.log(data);
-                console.log(data.additionalData.infoData);
+                //console.log(data);
+                //console.log(data.additionalData.infoData);
                 sendInfoData = {
                     'infoType':data.additionalData.infoType,
                     'infoData': data.additionalData.infoData,
@@ -70,21 +70,21 @@
                     if (res) {
                         goToInfotype();
                     } else {
-                        console.log('You are not sure');
+                        //console.log('You are not sure');
                     }
                 });
             };
 
             push.setApplicationIconBadgeNumber(function () {
-                console.log('success');
+                //console.log('success');
             }, function () {
-                console.log('error');
+                //console.log('error');
             });
 
             push.finish(function () {
-                console.log('success');
+                //console.log('success');
             }, function () {
-                console.log('error');
+                //console.log('error');
             }, 'push-1');
 
             push.on('error', function (e) {

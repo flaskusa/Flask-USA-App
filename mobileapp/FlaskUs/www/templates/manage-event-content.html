@@ -43,7 +43,7 @@
                         <p>{{ data.infoDesc}}</p>
                     </div>
 
-                    <div class="item item-body" ng-if="data.imageUrl" style="overflow: scroll;overflow-x: scroll" overflow-scroll="false">
+                    <div class="item item-body" ng-if="data.imageUrl != undefined" style="overflow: scroll;overflow-x: scroll" overflow-scroll="false">
                         <img class="manage_event_full_image" src={{data.imageUrl}}>
                     </div>
                     <!-- <a class="row-no-padding" style="text-decoration: none">

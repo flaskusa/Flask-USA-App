@@ -52,7 +52,7 @@
         $scope.editTailgate = function (tailgateId, index) {
             var addTailgateParams = {}
             TailgateService.getTailgate(tailgateId).then(function (respData) {
-                console.log(respData.data);
+                //console.log(respData.data);
                 addTailgateParams.tailgateId = tailgateId;
                 addTailgateParams.tailgateName = respData.data.tailgateName;
                 addTailgateParams.tailgateDescription = respData.data.tailgateDescription;
@@ -72,14 +72,14 @@
        
 
         $scope.leaveTailgate = function (tailgateId, index) {
-            console.log(tailgateId, index);
+            //console.log(tailgateId, index);
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Delete Tailgate?'
             });
             confirmPopup.then(function(res) {
                 if(res) {
                     TailgateService.deleteTailgate(tailgateId).then(function (respData) {
-                        console.log(respData);
+                        //console.log(respData);
                         $scope.allTailgate.splice(index, 1);
                     });
 

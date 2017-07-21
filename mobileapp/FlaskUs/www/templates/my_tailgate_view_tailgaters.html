@@ -17,7 +17,7 @@
             <ion-list>
                 <ion-item ng-repeat="data in myTailgaters | orderBy:'userName'" class=" item-avatar item-remove-animate animate-in-secondary chat-item.ng-enter-stagger">
                     <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
-                    <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
+                    <img ng-if="data.friendProfilePicUrl!=undefined" ng-src="{{data.friendProfilePicUrl}}" onError="this.src = 'img/default-profilepic-copy.png';" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                     <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>
                     <span class="badge span_icon span_icon_right" ng-class="{disablebutton: loggedInUserId != tUserId}">
                         <a class="item icon ion-trash-a option_icon" ng-if="data.userId != tUserId" ng-click="deleteTailgateUser(data.userId)"></a>
@@ -52,8 +52,8 @@
                     <ion-list>
                         <ion-list>
                             <ion-item ng-repeat="data in friendsToInvite| filter:searchContact.searchtext " class="item-avatar " item="data">
-                                <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png">
-                                <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}">
+                                <img ng-if="data.friendProfilePicUrl==undefined" ng-src="img/default-profilepic-copy.png">
+                                <img ng-if="data.friendProfilePicUrl!=undefined" ng-src="{{data.friendProfilePicUrl}}" onError="this.src = 'img/default-profilepic-copy.png';">
                                 <h2>{{ data.fullName | uppercase}}</h2>
                                 <p>{{ data.emailAddress}}</p>
                                 <button type="submit" nav-clear class="button button-block button-positive friendButtonStyle invite_friend" ng-click="addTailgateMembers(data,$index)">

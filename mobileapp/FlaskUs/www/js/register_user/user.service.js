@@ -34,7 +34,7 @@
 
         function saveUser(user, srcname) {
 
-            console.log(user);
+            //console.log(user);
             var params = {
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -55,7 +55,7 @@
                 return response;
             }, function failure(response) {
                 //add errror handling 
-                console.log("failed");
+                //console.log("failed");
             });
         }
 
@@ -64,7 +64,7 @@
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
-                    console.log("failed");
+                    //console.log("failed");
                 });
         }
 
@@ -73,7 +73,7 @@
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
-                    console.log("failed");
+                    //console.log("failed");
                 });
         }
         function removeProfilePicture (userId) {
@@ -81,7 +81,7 @@
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
-                    console.log("failed");
+                    //console.log("failed");
                 });
         }
 
@@ -90,7 +90,7 @@
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
-                    console.log("failed");
+                    //console.log("failed");
                 });
         }
 
@@ -103,7 +103,7 @@
                .then(function success(response) {
                    return response.data;
                }, function failure(response) {
-                   console.log("failed");
+                   //console.log("failed");
                });
         }
 
@@ -137,7 +137,7 @@
                 return response;
             }, function failure(response) {
                 //add errror handling 
-                console.log("failed");
+                //console.log("failed");
             });
         }
 
@@ -146,7 +146,7 @@
                .then(function success(response) {
                    return response;
                }, function failure(response) {
-                   console.log("failed");
+                   //console.log("failed");
                });
         }
 
@@ -159,7 +159,7 @@
                .then(function success(response) {
                    return response;
                }, function failure(response) {
-                   console.log("failed");
+                   //console.log("failed");
                });
         }
 
@@ -168,7 +168,7 @@
                .then(function success(response) {
                    return response;
                }, function failure(response) {
-                   console.log("failed");
+                   //console.log("failed");
                });
         }
 

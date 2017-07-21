@@ -778,8 +778,9 @@
                 }
             } else {
                 $scope.closeOtherInfoWindows();
+                var currVenueObj = angular.fromJson($stateParams.eventDetails.Venue);
                 $scope.marker = {};
-                $scope.map = { center: { latitude: 42.3314, longitude: -83.0458 }, zoom: 14, control: {} };
+                $scope.map = { center: { latitude: parseFloat(currVenueObj.latitude), longitude: parseFloat(currVenueObj.longitude) }, zoom: 14, control: {} };
             }
         }
         function getGeoLocation() {
@@ -828,7 +829,7 @@
                 $("#" + $scope.previousIndex).css("color", "#000000");
             } else {
                 $scope.filterCost = parseInt(data);
-                console.log(this);
+                //console.log(this);
                 $("#" + $scope.previousIndex).css("color", "#000000");
                 $("#" + index).css("color", "#f7941e");
                 $scope.previousIndex = index;
@@ -1085,7 +1086,7 @@
                     scheme,
                     function () {
                         window.open('uber://', '_system', 'location=no');
-                        console.log('uber is available');
+                        //console.log('uber is available');
                     },
                     function () {
                         if (AppName.phone != "") {
@@ -1093,7 +1094,7 @@
                             openUrl(telephoneToCall, "_system");
                         } else {
                             window.open('https://m.uber.com/ul/?action=setPickup', '_system', 'location=no');
-                            console.log('uber is not available');
+                            //console.log('uber is not available');
                         }
                     }
                 );
@@ -1108,7 +1109,7 @@
                     scheme,
                     function () {
                         window.open('lyft://', '_system', 'location=no');
-                        console.log('uber is available');
+                        //console.log('uber is available');
                     },
                     function () {
                         if (AppName.phone != "") {
@@ -1116,7 +1117,7 @@
                             openUrl(telephoneToCall, "_system");
                         } else {
                             window.open('https://www.lyft.com/', '_system', 'location=no');
-                            console.log('uber is not available');
+                            //console.log('uber is not available');
                         }
                     }
                 );
@@ -1210,7 +1211,7 @@
                                         }
                                     }
                                     $scope.parkingMarkers.push(tempObject);
-                                    console.log(tempObject.infoTitle);
+                                    //console.log(tempObject.infoTitle);
                                 } else {
                                     //if (index == 0) {
                                     //    $scope.parkingMarkers = [];
@@ -1234,10 +1235,13 @@
                             _.merge(tempObject, trafficInfoSubDetail);
                             $scope.trafficDetails.push(tempObject);
                         } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
-                            if (ImgObj && ImgObj.length != 0) {
+                            if (ImgObj && ImgObj.length != 0 && ImgObj != undefined) {
                                 tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                $scope.flaskUsDetails.push(tempObject);
+                            } else {
+                                tempObject.imageUrl = "img/no-image-available.jpg";
+                                $scope.flaskUsDetails.push(tempObject);
                             }
-                            $scope.flaskUsDetails.push(tempObject);
                         }
                         else if ("Nightlife" == tempObject.infoTypeCategoryName) {
                             $scope.setMarkerFields(tempObject);
@@ -1255,14 +1259,14 @@
                             $scope.default = " ";
                             if (ImgObj && ImgObj.length != 0) {
                                 EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceModel, $scope.aspectRatio).then(function (respData) {
-                                    if (respData.length != 0) {
+                                    if (respData.length != 0 && respData.length != undefined) {
                                         tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
                                         $scope.venueMapImageUrl = tempObject.imageUrl;
                                     }
                                     else {
                                         tempObject.imageUrl = "img/no-image-available.jpg";
                                         $scope.venueMapImageUrl = tempObject.imageUrl;
-                                        console.log($scope.venueMapImageUrl);
+                                        //console.log($scope.venueMapImageUrl);
                                     }
                                 });
                             }

@@ -244,7 +244,7 @@
         }
         /*for changing role of tailgater in view tailgater page*/
         $scope.changeTailgaterRole = function (currUserId, index) {
-            console.log($scope.tUserId);
+            //console.log($scope.tUserId);
             if (currUserId != $scope.tUserId) {
                 if ($scope.loggedInUserId == $scope.tUserId) {
                     TailgateService.addTailgateAdmin(currUserId, tailGateId).then(function (respData) {

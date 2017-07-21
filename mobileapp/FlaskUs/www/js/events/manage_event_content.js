@@ -175,8 +175,8 @@
                     $scope.reSetSelectedImageURIToUpload();
                     $rootScope.$broadcast('loading:hide')
                     alert("An error has occurred: Code = " + error.code);
-                    console.log("upload error source " + error.source);
-                    console.log("upload error target " + error.target);
+                    //console.log("upload error source " + error.source);
+                    //console.log("upload error target " + error.target);
                 }, function (progress) {
                     //                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
                 });

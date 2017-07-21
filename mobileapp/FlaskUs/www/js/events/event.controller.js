@@ -52,7 +52,7 @@
                 $scope.localstorageData = $localStorage.things;
                 $scope.storedTime = $scope.localstorageData.timestamp;
             }
-            console.log($scope.localstorageData);
+            //console.log($scope.localstorageData);
 
             if ($scope.localstorageData.latitude!=undefined && $scope.localstorageData.latitude!="" && $scope.localstorageData.longitude!="") {
                 get_from_localStorage();
@@ -65,7 +65,7 @@
         function get_event_list() {
             getVenueName();
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
-                console.log(respData);
+                //console.log(respData);
                 $scope.allEvent = respData.data.Events;
                 for (var i = 0; i < $scope.allEvent.length; i++) {
                     $scope.vId.push($scope.allEvent[i].venueId);
@@ -118,7 +118,7 @@
             $scope.longitude = $scope.localstorageData.longitude;
             ConvertToZip($scope.latitude, $scope.longitude);
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
-                console.log(respData);
+                //console.log(respData);
                 $scope.allEvent = respData.data.Events;
                 for (var i = 0; i < $scope.allEvent.length; i++) {
                     $scope.vId.push($scope.allEvent[i].venueId);

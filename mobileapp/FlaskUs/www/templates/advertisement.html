@@ -1,7 +1,7 @@
 <div ng-controller="AdvertisementCtrl"cache-view="false" style="max-width:100vw">
     <ion-slide-box delegate-handle="advertisement-viewer"show-pager='false' auto-play="true" slide-interval="7000" does-continue="true">
         <ion-slide  ng-repeat="imageURL in ImageUrls">
-            <img src={{imageURL}} class="footer-img " ng-click="showPopup($index)"/>
+            <img ng-src={{imageURL}} onError="this.src = 'img/Noadvert.jpg';" class="footer-img " ng-click="showPopup($index)"/>
         </ion-slide>
     </ion-slide-box>
 </div>

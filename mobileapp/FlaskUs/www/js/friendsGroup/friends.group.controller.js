@@ -55,7 +55,7 @@
             });
         }
         $scope.leaveGroup = function (groupId, index) {
-            console.log($scope.groups);
+            //console.log($scope.groups);
             var confirmPopup = $ionicPopup.confirm({
                 title: 'Leave Group?'
 

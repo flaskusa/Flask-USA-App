@@ -114,7 +114,7 @@
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
-                    console.log("failed");
+                    //console.log("failed");
                 });
         }
 

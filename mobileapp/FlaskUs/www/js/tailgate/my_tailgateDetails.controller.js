@@ -115,7 +115,7 @@
                             $scope.getTailGateLogo(values[4]);
                             getlocationName(values[0]);
                             getMyTailgateImages(values[1]);
-                            getTailgaters(values[2]);
+                            //getTailgaters(values[2]);
                             getTailgateMarkers(values[3]);
                     });
             });
@@ -180,9 +180,9 @@
         //save message Function
         $scope.saveMessage = function (msg) {
             if (msg != "") {
-                console.log(msg);
+                //console.log(msg);
                 $scope.tailgateDetailId = tailGateId;
-                console.log($scope.tailgateDetailId);
+                //console.log($scope.tailgateDetailId);
                 TailgateService.saveMessage(msg, tailGateId).then(function (respData) {
                     $scope.messageUser = [];
                     get_message_list(tailGateId);
@@ -193,12 +193,12 @@
 
         function get_message_list(tailGateId) {
             TailgateService.getAllMessages(tailGateId).then(function (respData) {
-                console.log(respData.data.length);
+                //console.log(respData.data.length);
                 $scope.allMessages = respData.data;
                 for (var i = 0; i < $scope.allMessages.length; i++) {
                     userId = respData.data[i].userId;
                     userMessage = respData.data[i].messageText;
-                    console.log(userId);
+                    //console.log(userId);
                     getTailgateUser(userId, userMessage);
                 }
             });
@@ -387,8 +387,8 @@
                     $scope.myTailgateImages.push(tempData);
                 }, function (error) {
                     $rootScope.$broadcast('loading:hide')
-                    console.log("upload error source " + error.source);
-                    console.log("upload error target " + error.target);
+                    //console.log("upload error source " + error.source);
+                    //console.log("upload error target " + error.target);
                 }, function (progress) {
                 });
         }

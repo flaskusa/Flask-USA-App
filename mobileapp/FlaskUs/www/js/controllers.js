@@ -13,7 +13,7 @@ angular.module('flaskApp.controllers', [])
         $rootScope.userName ='';
         $rootScope.userEmailId ='';
         $rootScope.userProfileUrl='';
-        console.log($cookies.getObject('CurrentUser'));
+        //console.log($cookies.getObject('CurrentUser'));
         var userdata = $cookies.getObject('CurrentUser');
         var currUserId = userdata.data.userId;
         var currDeviceToken = $cookies.getObject('deviceToken');
@@ -23,7 +23,7 @@ angular.module('flaskApp.controllers', [])
 
     function deactivateUser(userId,currDeviceToken) {
         LoginService.logoutDeactivateUser(userId, currDeviceToken).then(function (response) {
-           console.log("response" + response);
+           //console.log("response" + response);
            $cookies.remove('CurrentUser');
        });
     }

@@ -18,7 +18,7 @@
                 ng-repeat="data in allTailgate">
                 <div class="row no-padding">
                     <div class="col col-15" style="bottom:0px !important;">
-                        <img ng-src="img/events.jpg"  class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" ng-if="data.logoId == 0"/>
+                        <img ng-src="img/FlaskRed.png"  class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" ng-if="data.logoId == 0"/>
                         <img ng-src="{{data.logoUrl}}"  class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';"  ng-if="data.logoId > 0"/>
                         </div>
                     <div class="col col-70 event_content1">

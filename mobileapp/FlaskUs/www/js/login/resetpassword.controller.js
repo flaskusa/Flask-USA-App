@@ -10,7 +10,7 @@
         $scope.resetPassword = { 'email': '', 'newPassword': '', 'confirmNewPassword': '', 'otp': '' };
         $scope.resetPassword.email = $cookies.get("ForgotPasswordUserEmail");
         $scope.resetPasswordLink = function () {
-            console.log($scope.resetPassword);
+            //console.log($scope.resetPassword);
             LoginService.resetPasswordFuntion($scope.resetPassword.email, $scope.resetPassword.newPassword, $scope.resetPassword.confirmNewPassword, $scope.resetPassword.otp).then(function (response) {
                     if (response == true) {
                         showToastMessage("Password reset Successfully !!");

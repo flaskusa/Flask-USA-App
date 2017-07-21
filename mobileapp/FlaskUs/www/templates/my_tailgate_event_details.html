@@ -47,12 +47,12 @@
                             <a class="item item-list-detail image_list">
                                 <ion-scroll direction="x" class="tailgate_thumb" style="overflow: scroll;overflow-x: scroll" overflow-scroll="false">
                                     <span ng-repeat="images in myTailgateImages">
-                                    <span data-ng-click="removeTailgateImage($index,images.tailgateImageId,images.imageUUID)" ng-if = "isTailgateAdmin"><i  class="crossIconTailgate"><img src="img/flask_icons/delete.svg" style="width: 20px;height: 20px;"/></i></span>
-                        <img ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}"  class="list-thumbnail thumb-picturs-size " alt="Image not found"
-                            onError="this.src = 'img/FlaskRed.png';" ng-click="showImages($index)"/>
-                        </span>
-                        </ion-scroll>
-                        </a>
+                                        <span data-ng-click="removeTailgateImage($index,images.tailgateImageId,images.imageUUID)" ng-if = "isTailgateAdmin"><i  class="crossIconTailgate"><img src="img/flask_icons/delete.svg" style="width: 20px;height: 20px;"/></i></span>
+                                        <img ng-src="{{imgUrl}}{{images.imageUUID}}&groupId={{images.imageGroupId}}"  class="list-thumbnail thumb-picturs-size " alt="Image not found"
+                                        onError="this.src = 'img/FlaskRed.png';" ng-click="showImages($index)"/>
+                                    </span>
+                                </ion-scroll>
+                            </a>
                         </span>
                     </div>
                 </div>
@@ -102,12 +102,18 @@
         </ion-header-bar>
         <ion-content class="content-stable">
             <div class="modal image-modal transparentModal" on-swipe-down="closeModal()">
-                <ion-slide-box on-slide-changed="slideChanged(index)" active-slide="activeSlide">
-                    <ion-slide ng-repeat="image in myTailgateImages">
+                <!--<div class="left" style="height: 100% !important;left:0px !important;">
+                    <button class="button button-icon icon ion-chevron-left slider_arrow" style="opacity:2 !important" ng-click="slidePrevious1()"></button>
+                </div>
+                <div class="right" style="height: 100% !important;">
+                    <button class="button button-icon icon ion-chevron-right slider_arrow" style="opacity:2 !important" ng-click="slideNext1()"></button>
+                </div>-->
+                <ion-slide-box on-slide-changed="slideChanged(index)" show-pager='true' active-slide="activeSlide">
+                    <ion-slide ng-repeat="image in myTailgateImages" style="background: rgba(211, 211, 211, 0);">
                         <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false"
                                     zooming="true" min-zoom="{{zoomMin}}" style="width: 100%; height: 100%"
                                     delegate-handle="scrollHandle{{$index}}" on-scroll="updateSlideStatus(activeSlide)" on-release="updateSlideStatus(activeSlide)">
-                                    <div class="ZoomImage" style="background-image: url( {{imgUrl}}{{image.imageUUID}}&groupId={{image.imageGroupId}} )"></div>
+                                    <div class="ZoomImage" style="height: 100% !important;background-image: url( {{imgUrl}}{{image.imageUUID}}&groupId={{image.imageGroupId}} )"></div>
                         </ion-scroll>
                     </ion-slide>
                 </ion-slide-box>

@@ -94,8 +94,8 @@
         function editTailgate(tailGateId) {
             var addTailgateParams = {}
             TailgateService.getTailgate(tailGateId).then(function (respData) {
-                console.log("console.log(respData.data);");
-                console.log(respData.data);
+                //console.log("console.log(respData.data);");
+                //console.log(respData.data);
                 $cookies.putObject("editUserTailgate", respData.data);     
                 $state.go("app.add_my_tailgate");
             });
@@ -114,7 +114,7 @@
         }
         //Adding supply items to tailgate
         $scope.updateSupplyItems = function (data, user_selected) {
-            console.log(user_selected);
+            //console.log(user_selected);
             $scope.userId = user_selected;
             TailgateService.updateTailgateSupplyItem(data.tailgateSupplyItemId, data.supplyListItemName, tailGateId, $scope.userId).then(function (respData) {
             });
@@ -247,7 +247,7 @@
 
         $scope.associateUserWithSupplyItem = function () {
             angular.forEach($scope.alltailgateSupplyItem, function (value, index) {
-                console.log(value.itemAssignedUserId);
+                //console.log(value.itemAssignedUserId);
                 value.itemAssignedUserId = getAssigenUserId(decodeURIComponent(value.supplyListItemName));
                 $scope.updateSupplyItems(value);
             })

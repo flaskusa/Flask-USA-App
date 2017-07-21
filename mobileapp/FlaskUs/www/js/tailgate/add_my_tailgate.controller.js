@@ -194,7 +194,7 @@
                                 $scope.map.markers.shift();
                             }
                             //$scope.map.markers.pop();
-                            console.log($scope.map.markers);
+                            //console.log($scope.map.markers);
                             $scope.$apply();
                             $scope.onClick(marker);
                         }
@@ -222,7 +222,7 @@
         };
         $scope.currMarker = function (loc) {
             var markerData = {};
-            console.log(loc, $scope.map.markers[0].coords);
+            //console.log(loc, $scope.map.markers[0].coords);
             markerData.tailgateId = tailgateId;
             markerData.latitude = $scope.map.markers[0].coords.latitude;
             markerData.longitude = $scope.map.markers[0].coords.longitude;
@@ -575,8 +575,8 @@
                     $scope.reSetSelectedImageURIToUpload();
                     $rootScope.$broadcast('loading:hide');
                     alert("An error has occurred: Code = " + error.code);
-                    console.log("upload error source " + error.source);
-                    console.log("upload error target " + error.target);
+                    //console.log("upload error source " + error.source);
+                    //console.log("upload error target " + error.target);
                 }, function (progress) {
                     //                    $scope.downloadProgress = (progress.loaded / progress.total) * 100;
                 });
@@ -640,7 +640,7 @@
             var updateData = $cookies.getObject("newtailgatedata");
             updateData.venmoAccountId = newUpdate.venmoAccountId;
             updateData.amountToPay = parseFloat(newUpdate.amountToPay);
-            console.log(updateData);
+            //console.log(updateData);
             TailgateService.updateTailgateInfo(updateData).then(function (respdata) {
                 showToastMessage('Payment details saved');
             });
@@ -690,7 +690,7 @@
 
         function getTailgaters(newtailgateId) {
             TailgateService.getMyTailgateUsers(newtailgateId).then(function (respData) {
-                console.log(respData);
+                //console.log(respData);
                 $scope.haveTailgatorsDEtail = true;
                 $scope.myTailgaters = respData.data;
                 $scope.filterMemberToAdd();
@@ -831,7 +831,7 @@
                     addUsertoTailgate(adduser);
                 }
                 $scope.allGroups.splice(index, 1);
-                console.log($scope.getUseData)
+                //console.log($scope.getUseData)
                 $scope.groupUserDetails = respData;
             });
         }
@@ -903,7 +903,7 @@
 
         $scope.associateUserWithSupplyItem = function () {
             angular.forEach($scope.alltailgateSupplyItem, function (value, index) {
-                console.log(value.itemAssignedUserId);
+                //console.log(value.itemAssignedUserId);
                 value.itemAssignedUserId = getAssigenUserId(decodeURIComponent(value.supplyListItemName));
                 $scope.updateSupplyItems(value);
             })
@@ -986,7 +986,7 @@
                 for (var i = 0 ; i < currSupplyItemsLength.length; i++) {
                     $scope.selectedSupplyListItems.push(currSupplyItemsLength[i]);
                 }
-                console.log( $scope.selectedSupplyListItems);
+                //console.log( $scope.selectedSupplyListItems);
                 if ($scope.hideItem == false) {
                     //$scope.toggleItem();
                 }
@@ -1138,7 +1138,7 @@
 
         $scope.changeTailgaterRole = function (currUserId, index) {
             var tailgateDetails = $cookies.getObject("editUserTailgate");
-            console.log(tailgateDetails);
+            //console.log(tailgateDetails);
             if (currUserId != tailgateDetails.userId) {
                 if ($scope.loggedInUserId == tailgateDetails.userId) {
                     TailgateService.addTailgateAdmin(currUserId, tailgateId).then(function (respData) {

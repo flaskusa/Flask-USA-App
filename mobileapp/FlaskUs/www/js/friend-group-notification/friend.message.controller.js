@@ -59,8 +59,8 @@
             $scope.newChatData = [];
             FriendsNotificationService.getallFriendsandGroupWithMessages().then(function (response) {
                 $scope.allChatMessages = " Loading.... ";
-                console.log("all friends & group with chats messages here");
-                console.log(response);
+                //console.log("all friends & group with chats messages here");
+                //console.log(response);
                 $scope.newChatData = response;
                 angular.forEach(response, function (value, key) {
                     if (value.portraitId != 0) {
@@ -110,8 +110,8 @@
             }, 1000);
         }
         function callMeForSorting() {
-            console.log($scope.newChatData);
-            $scope.newChatData.sort(custom_sort);
+            //console.log($scope.newChatData);
+            //$scope.newChatData.sort(custom_sort);
         }
 
         $scope.getTimeWithInterval = function () {
@@ -434,7 +434,7 @@
                         deleteConversationMessages = newArray.join();
                     });
                     FriendsNotificationService.deleteIndividualConverstaion(deleteConversationMessages).then(function (response) {
-                        console.log("Deleted");
+                        //console.log("Deleted");
                         $ionicLoading.hide();
                         var MessageAlert = $ionicPopup.alert({
                             title: "Message Alert",
@@ -456,7 +456,7 @@
                         deleteConversationMessages = newArray.join();
                     });
                     FriendsNotificationService.deleteGroupConverstaion(deleteConversationMessages).then(function (response) {
-                        console.log("Deleted");
+                        //console.log("Deleted");
                         $ionicLoading.hide();
                         var MessageAlert = $ionicPopup.alert({
                             title: "Message Alert",

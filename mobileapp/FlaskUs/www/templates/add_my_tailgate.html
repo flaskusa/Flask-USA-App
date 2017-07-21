@@ -140,7 +140,7 @@
                                 <div>
                                     <ion-item class="item-avatar item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="data in taigaterFriends | orderBy:'userName'">
                                         <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
-                                        <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
+                                        <img ng-if="data.friendProfilePicUrl!=undefined" ng-src="{{data.friendProfilePicUrl}}" onError="this.src = 'img/default-profilepic-copy.png';" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                                         <h2 class="eventNameCol_tailgate">{{ data.fullName | uppercase}}</h2>
                                         <p class="dateCol_tailgate">{{ data.emailAddress}}</p>
                                         <span class="badge span_icon_tailgate"><img src="img/flask_icons/add_new.svg" ng-click="addTailgateMembers(data,$index)"></span>
@@ -159,7 +159,7 @@
                         </div>
                         <ion-item ng-repeat="data in myTailgaters | orderBy:'userName'" class="item-avatar animate-in-secondary chat-item.ng-enter-stagger">
                             <img ng-if="data.friendProfilePicUrl==undefined" src="img/default-profilepic-copy.png" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
-                            <img ng-if="data.friendProfilePicUrl!=undefined" src="{{data.friendProfilePicUrl}}" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
+                            <img ng-if="data.friendProfilePicUrl!=undefined" ng-src="{{data.friendProfilePicUrl}}" onError="this.src = 'img/default-profilepic-copy.png';" style="top: 6px;left: 16px;max-width:60px;max-height: 60px;">
                             <h2 class="tailgater_name">{{ data.userName | uppercase}}</h2>
                             <span class="badge span_icon span_icon_right" ng-class="{disablebutton: loggedInUserId != tUserId}">
                                 <a class="item icon ion-trash-a option_icon" ng-if="data.userId != tUserId" ng-click="deleteTailgateUser(data.userId)"></a>

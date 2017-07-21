@@ -35,7 +35,7 @@
         this.getMyEvents = function() {           
             return $http.get(SERVER.url + myEventsURL)
             .then(function success(response) {
-                console.log(response);
+                //console.log(response);
                 return response;
             }, function failure(response) {
                 //add errror handling 

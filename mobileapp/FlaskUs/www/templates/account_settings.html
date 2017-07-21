@@ -11,7 +11,7 @@
                         <div class="item item-image add_profile_img_div">
                             <span ng-click="show()"><i class="ion-ios-camera" style="width:101px;font-size: 31px;position: fixed;"></i></span>
                             <img src="img/add_photo.png" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId ==  0">
-                            <img ng-src="{{userProfileUrl}}" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId > 0">
+                            <img ng-src="{{userProfileUrl}}" onError="this.src = 'img/default-profilepic-copy.png';" class="profilepicAvatar add_profile_img" ng-click="show()" ng-if="fileEntryId > 0">
                         </div>
                     </div>
                     <label class="item item-input item-floating-label">

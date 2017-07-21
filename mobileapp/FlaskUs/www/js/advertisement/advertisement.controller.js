@@ -33,20 +33,15 @@
 
         $scope.initialize=function(allEventId) {
             AdvertisementService.getAllAdvertisementDetail(allEventId).then(function (response) {
-                if (response.Images != undefined) {
-                    $scope.ImageUrls = [];
-                    $scope.imageDetail = response.Images;
-                    angular.forEach($scope.imageDetail, function (vlaue, key) {
-                        var imageURL = baseImagePath + "?uuid=" + vlaue.imageUUID + "&groupId=" + vlaue.imageGroupId;
-                        $scope.ImageUrls.push(imageURL);
-
-
-                    })
-                    showAdv();
-
-                } else {
-
-                }
+                    if (response.Images != undefined) {
+                        $scope.ImageUrls = [];
+                        $scope.imageDetail = response.Images;
+                        angular.forEach($scope.imageDetail, function (vlaue, key) {
+                            var imageURL = baseImagePath + "?uuid=" + vlaue.imageUUID + "&groupId=" + vlaue.imageGroupId;
+                            $scope.ImageUrls.push(imageURL);
+                        })
+                        showAdv();
+                    }
             });
         }
        /* $scope.checkForCookiesChanges=function(allEventId){
@@ -153,9 +148,9 @@
         $scope.$on ('$ionicView.beforeEnter',
         ionic.trigger('resize', {target: window}));
         function showAdv() {
-            $timeout(function () {
+            //$timeout(function () {
                 $ionicSlideBoxDelegate.$getByHandle('advertisement-viewer').update();
-            }, 4000);
+           // }, 2000);
         }
 
 

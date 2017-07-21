@@ -10,7 +10,7 @@
         $scope.myTailgaters = [];
         var tailGateId = $cookies.get('currtailGateId');
         $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
-        console.log($scope.taligateMarkers);
+        //console.log($scope.taligateMarkers);
         $scope.isTailgateAdmin = false;
         $scope.goBack = function () {
             $state.go("app.my_tailgate");
@@ -43,7 +43,7 @@
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode({ 'latLng': latlng }, function (results, status) {
                 if (status !== google.maps.GeocoderStatus.OK) {
-                    console.log(status);
+                    //console.log(status);
                 }
                 // to check Geoeode Status is OK or not
                 if (status == google.maps.GeocoderStatus.OK) {
@@ -61,7 +61,7 @@
                     else {
                         currurl = 'http://maps.google.com/?saddr=Current%20Location&daddr=' + address;
                     }
-                    console.log(address);
+                    //console.log(address);
                     openUrl(currurl, "_system");
                 }
             });            

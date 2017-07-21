@@ -23,10 +23,10 @@
                     $cordovaTouchID.authenticate("You must authenticate").then(function () {
                         alert("The authentication was successful");
                     }, function (error) {
-                        console.log(JSON.stringify(error));
+                        //console.log(JSON.stringify(error));
                     });
                 }, function (error) {
-                    console.log(JSON.stringify(error));
+                    //console.log(JSON.stringify(error));
                 });
             }
         }
