@@ -35,6 +35,7 @@
         }
 
         $scope.doLogin = function (user) {
+            $cookies.put("userLoggedOut", "false");
             if (SERVER.companyId != undefined) {
                 LoginService.authenticateUser(user).then(function (respData) {
                     if (respData.data.message == "Authenticated access required") {
@@ -97,7 +98,10 @@
                             $rootScope.userEmailId = respData.data.emailAddress;
                             $rootScope.show_login = true;
                             document.login_form.reset();
-                            $state.go("app.user_navigation_menu");
+                            var userLoggedOut = $cookies.get("userLoggedOut");
+                            if (userLoggedOut != "true") {
+                                $state.go("app.user_navigation_menu");
+                            }
                             var isColdStart = $cookies.getObject('coldstart');
                             if (isColdStart == true) {
                                 setTimeout(

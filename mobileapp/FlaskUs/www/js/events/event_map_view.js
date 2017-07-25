@@ -621,7 +621,12 @@
         function createGoogleBarMarker(place) {
             var marker = {};
             marker.id = place.id;
-            marker.icon = "img/map_icons/google-map-pin.png";
+            //marker.icon = "img/map_icons/google-map-pin.png";
+            //marker.icon = "img/map_icons/FLASK_GOOGLE_PIN.svg";
+            marker.icon = {
+                url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
+                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+            }
             marker.latitude = place.geometry.location.lat();
             marker.longitude = place.geometry.location.lng();
             marker.show = false;
@@ -640,7 +645,10 @@
         function createGoogleNightLifeMarker(place) {
             var marker = {};
             marker.id = place.id;
-            marker.icon = "img/map_icons/google-map-pin.png";
+            marker.icon = {
+                url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
+                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+            }
             marker.latitude = place.geometry.location.lat();
             marker.longitude = place.geometry.location.lng();
             marker.show = false;
@@ -659,7 +667,10 @@
         function createGoogleParkingMarker(place) {
             var marker = {};
             marker.id = place.id;
-            marker.icon = "img/map_icons/google-map-pin.png";
+            marker.icon = {
+                url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
+                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+            }
             marker.latitude = place.geometry.location.lat();
             marker.longitude = place.geometry.location.lng();
             marker.show = false;
@@ -679,7 +690,10 @@
         function createGoogleHotelMarker(place) {
             var marker = {};
             marker.id = place.id;
-            marker.icon = "img/map_icons/google-map-pin.png";
+            marker.icon = {
+                url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
+                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+            }
             marker.latitude = place.geometry.location.lat();
             marker.longitude = place.geometry.location.lng();
             marker.addrLine1 = place.vicinity;

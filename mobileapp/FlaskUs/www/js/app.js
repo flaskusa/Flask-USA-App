@@ -142,7 +142,10 @@
                                     $rootScope.userName = respData.data.firstName + respData.data.lastName;
                                     $rootScope.userEmailId = respData.data.emailAddress;
                                     $rootScope.show_login = true;
-                                    $state.go("app.user_navigation_menu");
+                                    var userLoggedOut = $cookies.get("userLoggedOut");
+                                    if (userLoggedOut != "true") {
+                                        $state.go("app.user_navigation_menu");
+                                    }
                                     var isColdStart =  $cookies.getObject('coldstart');
                                     if (sendInfoData.coldstart == true) {
 										setTimeout(function(){

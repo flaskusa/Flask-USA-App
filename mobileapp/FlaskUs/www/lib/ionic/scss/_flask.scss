@@ -3824,3 +3824,46 @@ button.button.button-block.button-positive.pay_now_button.updateSupllyItemButton
     font-size: 24px;
     font-weight: bold;
 }
+
+.messagesGroupTitle{
+    font-size: 17px !important; 
+    font-weight: 600;
+    color: darkorange;
+    padding-left: 10px;
+}
+.messagesGroupSubTitle{
+    padding-left: 10px !important; 
+    color: black !important; 
+    font-weight: normal !important; 
+    font-size: 14px; 
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    padding-top: 4px !important;
+}
+.markerTakeMeThereImage{
+    display: block !important;
+    width: 25px;
+    float: left;
+    margin-right: 10px;
+}
+.markerTakeMeTherImageDivText{
+    font-weight:bold; 
+    float:left;
+    margin-top: 3px;
+}
+.markerTakeMeThereAHref{
+    float: left !important;  
+    color: black !important;
+}
+.markerTailgateDescription{
+    float: left !important;
+    height: 20px !important;
+    overflow-y: auto !important;
+}
+.markerTailgateName{
+    text-overflow: ellipsis !important;
+    overflow: hidden !important;
+    height: 17px !important;
+    width: 170px !important;
+    text-transform: none !important;
+}
