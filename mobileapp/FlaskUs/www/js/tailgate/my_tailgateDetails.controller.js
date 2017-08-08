@@ -115,7 +115,7 @@
                             $scope.getTailGateLogo(values[4]);
                             getlocationName(values[0]);
                             getMyTailgateImages(values[1]);
-                            //getTailgaters(values[2]);
+                            getTailgaters(values[2]);
                             getTailgateMarkers(values[3]);
                     });
             });

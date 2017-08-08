@@ -104,7 +104,7 @@
                                     <button class="badge ext-right friendButtonStyle unblockButtonStyle" ng-if="data.block" ng-click="unBlockUser(data)"><i class="emailText">Unblock </i></button>
                                     <button class="badge ext-right friendButtonStyle " ng-if="data.connected" disabled><i class="emailText">Friend</i> </button>
                                 </ion-item>
-                                <ion-item ng-if="userContactList.length==0">there are no more friends</ion-item>
+                                <ion-item ng-if="userContactList.length==0">There are no more friends</ion-item>
                             </ion-list>
                             <ion-infinite-scroll on-infinite="getMoreUserContact(searchContact.searchtext)" distance="10%" ng-if="moreDataCanBeLoaded==true"></ion-infinite-scroll>
                 </ion-content>

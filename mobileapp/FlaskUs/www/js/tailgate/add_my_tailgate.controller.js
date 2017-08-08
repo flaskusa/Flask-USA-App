@@ -172,6 +172,8 @@
                         longitude: currlongitude
                     },
                     zoom: 16,
+                    icon: 'img/map_icons/large_marker.svg',
+                    options: { icon: 'img/map_icons/large_marker.svg' },
                     markers: [{
                         options: { icon: 'img/map_icons/large_marker.svg' }
                     }],
@@ -208,6 +210,8 @@
                         latitude: currlatitude,
                         longitude: currlongitude
                     },
+                    icon: 'img/map_icons/large_marker.svg',
+                    options: { icon: 'img/map_icons/large_marker.svg' },
                     showWindow: true,
                     name: $scope.taligateMarkers.name,
                     description: $scope.taligateMarkers.description
@@ -1177,7 +1181,7 @@
                 }
             } else {
                 $scope.marker = {};
-                callMap(VENUEData.latitude, VENUEData.longitude);
+                callMap($scope.latitude, $scope.longitude);
             }
         }
         function getGeoLocation() {

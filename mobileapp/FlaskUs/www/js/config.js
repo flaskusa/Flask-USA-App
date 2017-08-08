@@ -7,22 +7,21 @@
     var getMessageCountUrl="/get-my-flask-messages-count"
     var setMessageReadUrl = "/set-read";
 
-  /*  flaskAppConfig.value("SERVER", {
-        "hostName": "http://www.flaskus.com/",
-        "url": "http://www.flaskus.com/api/jsonws/",
+    flaskAppConfig.value("SERVER", {
+        "hostName": "http://52.54.164.161/",
+        "url": "http://52.54.164.161/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
 		"cacheExpireTime":1000
     })
-   */
  
- flaskAppConfig.value("SERVER", {
-  "hostName": "http://52.44.202.166/",
-  "url": "http://52.44.202.166/api/jsonws/",
-  "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
-		"cacheExpireTime":1000
-  })
+    //flaskAppConfig.value("SERVER", {
+    //  "hostName": "http://52.44.202.166/",
+    //  "url": "http://52.44.202.166/api/jsonws/",
+    //  "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
+    //  "cacheExpireTime":1000
+    //})
 
- flaskAppConfig.config(function ($provide) {
+    flaskAppConfig.config(function ($provide) {
             $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
                 return function (exception, cause) {
                     var $rootScope = $injector.get("$rootScope");
@@ -31,6 +30,7 @@
             };
         });
     });
+
     flaskAppConfig.config(function ($httpProvider, $stateProvider, $urlRouterProvider, $ionicConfigProvider,uiGmapGoogleMapApiProvider) {
         $stateProvider
           .state('app', {
@@ -141,7 +141,7 @@
             }
         })
 
-            /*My_events Controller*/
+       /*My_events Controller*/
         .state('app.my_events', {
             url: '/my_events',
             views: {
