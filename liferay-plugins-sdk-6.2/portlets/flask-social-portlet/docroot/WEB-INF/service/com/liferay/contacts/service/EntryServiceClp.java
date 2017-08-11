@@ -174,9 +174,7 @@ public class EntryServiceClp implements EntryService {
 	@Override
 	public com.liferay.portal.kernel.json.JSONArray searchUsersAndContacts(
 		long companyId, java.lang.String keywords, int start, int end,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
@@ -196,14 +194,6 @@ public class EntryServiceClp implements EntryService {
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
 
 			if (t instanceof RuntimeException) {
 				throw (RuntimeException)t;

@@ -68,9 +68,7 @@ public interface EntryService extends BaseService, InvokableService {
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.kernel.json.JSONArray searchUsersAndContacts(
 		long companyId, java.lang.String keywords, int start, int end,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException;
+		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public java.util.List<com.liferay.portlet.social.model.SocialRequest> getRequestsToConfirm(

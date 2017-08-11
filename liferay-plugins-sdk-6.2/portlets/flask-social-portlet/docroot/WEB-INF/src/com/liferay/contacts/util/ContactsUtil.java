@@ -482,7 +482,7 @@ public class ContactsUtil {
 						}
 					}
 				}
-				if(!platformApplicationArn.contains("FLASKUSAPP")){
+				if(!platformApplicationArn.contains("FLASKUSA")){
 						platformApplicationArn = createPlatformApplication(client, devicePlatform);
 				}
 				CreatePlatformEndpointRequest cpeReq = 
@@ -513,15 +513,15 @@ public class ContactsUtil {
 		CreatePlatformApplicationRequest paltformAppReq = new CreatePlatformApplicationRequest();
 		Map<String, String> attributes = new HashMap<String, String>();
 		if(devicePlatform.equals("Android")){
-			attributes.put("PlatformPrincipal", "FLASKUSAPP");
-			paltformAppReq.setName("FLASKUSAPP");
+			attributes.put("PlatformPrincipal", "FLASKUSA");
+			paltformAppReq.setName("FLASKUSA");
 			attributes.put("PlatformCredential", PropsUtil.get("flask.push.gcm.api.key"));
 			paltformAppReq.setPlatform(Platform.GCM.name());
 		}
 		if(devicePlatform.equals("iOS")){
 			attributes.put("PlatformPrincipal", PropsUtil.get("flask.push.apple.certificate"));
 			attributes.put("PlatformCredential", PropsUtil.get("flask.push.apns.private.key"));
-			paltformAppReq.setName("FLASKUSAPP");
+			paltformAppReq.setName("FLASKUSA");
 			paltformAppReq.setPlatform(Platform.APNS.name());
 		}
 		paltformAppReq.setAttributes(attributes);

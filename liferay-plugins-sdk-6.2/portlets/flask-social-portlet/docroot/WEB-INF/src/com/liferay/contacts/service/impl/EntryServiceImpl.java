@@ -81,30 +81,30 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 	
 	long socialRequestId;
 	public JSONArray searchUsersAndContacts(
-			long companyId, String keywords, int start, int end, ServiceContext serviceContext)
-		throws PortalException, SystemException {
-
+			long companyId, String keywords, int start, int end, ServiceContext serviceContext){
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-
-		long userId = getUserId();
-		List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
-			companyId, userId, keywords, start, end);
-
-		for (BaseModel<?> contact : contacts) {
-			JSONObject jsonObject = null;
-			if (contact instanceof User) {
-				if(((User) contact).getContact().getUserId() == serviceContext.getUserId()){
-					continue;
+		try {
+			long userId = getUserId();
+			List<BaseModel<?>> contacts = entryLocalService.searchUsersAndContacts(
+				companyId, userId, keywords, start, end);
+			for (BaseModel<?> contact : contacts) {
+				JSONObject jsonObject = null;
+				if (contact instanceof User) {
+					if(((User) contact).getContact().getUserId() == serviceContext.getUserId()){
+						continue;
+					}
+					jsonObject = ContactsUtil.getUserJSONObject(
+						userId, (User)contact);
+					jsonObject.put("portraitId", ((User) contact).getPortraitId());
 				}
-				jsonObject = ContactsUtil.getUserJSONObject(
-					userId, (User)contact);
-				jsonObject.put("portraitId", ((User) contact).getPortraitId());
+				else {
+					jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
+					jsonObject.put("portraitId", ((User) contact).getPortraitId());
+				}
+				jsonArray.put(jsonObject);
 			}
-			else {
-				jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
-				jsonObject.put("portraitId", ((User) contact).getPortraitId());
-			}
-			jsonArray.put(jsonObject);
+		} catch (Exception e) {
+			System.err.println(e.getMessage());
 		}
 		return jsonArray;
 	}

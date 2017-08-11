@@ -17,6 +17,10 @@
 
 package com.liferay.contacts.service.persistence;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import com.liferay.contacts.model.Entry;
 import com.liferay.contacts.model.impl.EntryImpl;
 import com.liferay.contacts.service.EntryLocalServiceUtil;
@@ -32,10 +36,6 @@ import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
 
 /**
  * @author Brian Wing Shun Chan
@@ -156,9 +156,7 @@ public class EntryFinderImpl
 
 		try {
 			session = openSession();
-
 			String sql = CustomSQLUtil.get(COUNT_BY_C_U_FN_EA);
-
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(User_.firstName)", StringPool.LIKE, false,
 				fullNames);
@@ -310,9 +308,7 @@ public class EntryFinderImpl
 
 		try {
 			session = openSession();
-
 			String sql = CustomSQLUtil.get(FIND_BY_C_U_FN_EA);
-
 			sql = CustomSQLUtil.replaceKeywords(
 				sql, "lower(User_.firstName)", StringPool.LIKE, false,
 				fullNames);
@@ -329,10 +325,10 @@ public class EntryFinderImpl
 				sql, "lower(User_.emailAddress)", StringPool.LIKE, true,
 				emailAddresses);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Contacts_Entry.fullName)", StringPool.LIKE, false,
+				sql, "lower(Contact_.fullName)", StringPool.LIKE, false,
 				fullNames);
 			sql = CustomSQLUtil.replaceKeywords(
-				sql, "lower(Contacts_Entry.emailAddress)", StringPool.LIKE,
+				sql, "lower(Contact_.emailAddress)", StringPool.LIKE,
 				true, emailAddresses);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
