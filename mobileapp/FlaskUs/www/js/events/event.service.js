@@ -5,9 +5,9 @@
         .module('flaskApp')
         .service('EventsService', EventsService);
 
-    EventsService.$inject = ['$http', 'SERVER'];
+    EventsService.$inject = ['$http', 'SERVER', '$q'];
 
-    function EventsService($http, SERVER) {
+    function EventsService($http, SERVER, $q) {
         var allEventsURL = "flask-rest-events-portlet.event/get-simple-filtered-events";
         var addEventURL = "flask-rest-events-portlet.event/add-event";
         var addEventDetailsURL = "flask-rest-events-portlet.event/add-event-detail";
@@ -59,6 +59,7 @@
                     return response;
                 }, function failure(response) {
                     //add errror handling 
+                    return $q.$inject(response);
                 });
         }
         function getlocation(addressVar, zipcode) {
@@ -67,6 +68,7 @@
                     return response;
                 }, function failure(response) {
                     //add errror handling
+                    return $q.$inject(response);
                 });
         }
         function getZiplocation(latlongVar, lat, long, sensorVar) {
@@ -75,6 +77,7 @@
                     return response;
                 }, function failure(response) {
                     //add errror handling
+                    return $q.$inject(response);
                 });
         }
         function getEventVenueDatail(currEventId) {
@@ -87,6 +90,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
         }
 
@@ -99,6 +103,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
 
         }
@@ -134,6 +139,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
 
         }
@@ -169,6 +175,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
 
         }
@@ -181,6 +188,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
 
         }
@@ -193,6 +201,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
 
         }
@@ -205,6 +214,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
         }
         //get all event detail with image
@@ -216,6 +226,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
         }
         // Get venue by id for event details
@@ -228,6 +239,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
         }
 
@@ -240,6 +252,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
         }
 
@@ -252,6 +265,7 @@
                 },
                 function failure(resp) {
                     console.log("Error Message");
+                    return $q.$inject(resp);
                 });
         }
 
@@ -263,7 +277,8 @@
                     return resp;
                 },
                 function failure(resp) {
-                    console.log("Error Message");
+                    //console.log("Error Message");
+                    return $q.$inject(resp);
                 });
         }
         //get venue image as per device
@@ -279,7 +294,8 @@
                     return resp.data;
                 },
                 function failure(resp) {
-                    console.log("Error Message");
+                    //console.log("Error Message");
+                    return $q.$inject(resp);
                 });
         }
 

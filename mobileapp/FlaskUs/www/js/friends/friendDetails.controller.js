@@ -17,7 +17,9 @@
             $scope.getFriendByUserId( $scope.friendId);
         };
         $scope.goBack = function(){
-            $ionicHistory.goBack();
+            $timeout(function () {
+                $ionicHistory.goBack();
+            }, 1000);
         }
         $scope.initializeMediatorId=function(userId){
 

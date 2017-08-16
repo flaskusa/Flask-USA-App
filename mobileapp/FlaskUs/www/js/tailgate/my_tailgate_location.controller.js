@@ -3,17 +3,19 @@
     angular.module('flaskApp')
         .controller('mytailgatelocationCtrl', mytailgatelocationCtrl);
 
-    mytailgatelocationCtrl.$inject = ['$scope', '$state', '$ionicPlatform', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi', 'SERVER', '$cordovaInAppBrowser', '$cordovaGeolocation'];
+    mytailgatelocationCtrl.$inject = ['$scope', '$state', '$ionicPlatform', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi', 'SERVER', '$cordovaInAppBrowser', '$cordovaGeolocation', '$timeout'];
 
     /* @ngInject */
-    function mytailgatelocationCtrl($scope, $state, $ionicPlatform, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi, SERVER, $cordovaInAppBrowser, $cordovaGeolocation) {
+    function mytailgatelocationCtrl($scope, $state, $ionicPlatform, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi, SERVER, $cordovaInAppBrowser, $cordovaGeolocation, $timeout) {
         $scope.myTailgaters = [];
         var tailGateId = $cookies.get('currtailGateId');
         $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');
         //console.log($scope.taligateMarkers);
         $scope.isTailgateAdmin = false;
         $scope.goBack = function () {
-            $state.go("app.my_tailgate");
+            $timeout(function () {
+                $state.go("app.my_tailgate");
+            }, 1000);            
         }
         $scope.marker = {};
         $scope.isUserMarkerShown = false;

@@ -31,7 +31,9 @@
             }
         }
         $scope.goBack = function () {
-            $state.go("app.events");
+            $timeout(function () {
+               $state.go("app.events");
+            }, 1000);            
         }
 
         $scope.doLogin = function (user) {

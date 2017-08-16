@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsNotificationCtrl', FriendsNotificationCtrl);
 
-    FriendsNotificationCtrl.$inject = ['$scope', '$http','$ionicModal','FriendsNotificationService','$flaskUtil','$state','$ionicHistory','UserService','SERVER'];
+    FriendsNotificationCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsNotificationService', '$flaskUtil', '$state', '$ionicHistory', 'UserService', 'SERVER', '$timeout'];
 
     /* @ngInject */
-    function FriendsNotificationCtrl($scope, $http, $ionicModal,FriendsNotificationService,$flaskUtil,$state,$ionicHistory,UserService,SERVER) {
+    function FriendsNotificationCtrl($scope, $http, $ionicModal, FriendsNotificationService, $flaskUtil, $state, $ionicHistory, UserService, SERVER, $timeout) {
 
         $scope.requestDetail=[];
         $scope.requestedUserDetail=[];
@@ -36,7 +36,9 @@
         }
 
         $scope.goBack = function(){
-            $ionicHistory.goBack();
+            $timeout(function () {
+                $ionicHistory.goBack();
+            }, 1000);
         }
         
        $scope.getRequestToConfirm=function(){

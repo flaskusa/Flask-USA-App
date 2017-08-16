@@ -38,7 +38,7 @@
         };
         var searchStringList=angular.copy($scope.searchstringList);
         $scope.allEventId=[];
-            getAllEventDetail()
+        getAllEventDetail()
 
         // $scope.localstorageData = $localStorage.getObject('user_location_data');
         // Retrieve the object from ng-storage
@@ -143,11 +143,11 @@
             var endDate = setEndDate.setDate(setEndDate.getDate() + parseInt(searchstringList.days));
             $scope.endDate = $filter('date')(setEndDate, 'yyyy-MM-dd h:mm');
             $scope.searchString = searchstringList.searchString;
-            EventsService.getlocation(addressVar, searchstringList.zipcode).then(function (respData) {
-                $scope.locationList = respData.data.results[0].geometry.location;
-                $scope.latitude = $scope.locationList.lat;
-                $scope.longitude = $scope.locationList.lng;
-                if($scope.searchString==""){
+            //EventsService.getlocation(addressVar, searchstringList.zipcode).then(function (respData) {
+            //    $scope.locationList = respData.data.results[0].geometry.location;
+            //    $scope.latitude = $scope.locationList.lat;
+            //    $scope.longitude = $scope.locationList.lng;
+            if ($scope.searchString == "" || $scope.searchString == null) {
                     $scope.searchString="a";
                 }
                     EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (resp) {
@@ -158,7 +158,7 @@
                             $scope.Event_Error = false;
                         }
                     });
-            });
+            //});
             $("#searchChip").show();
         }
 
@@ -169,6 +169,7 @@
             $("#searchChip").hide();
             $scope.searchstringList.searchString = null;
             $scope.searchstringList.days = "60";
+            $scope.endDate = $filter('date')(currentDate, 'yyyy-MM-dd');
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, 'a', $scope.latitude, $scope.longitude).then(function (resp) {
                 $scope.allEvent = resp.data.Events;
                 if ($scope.allEvent.length == 0) {

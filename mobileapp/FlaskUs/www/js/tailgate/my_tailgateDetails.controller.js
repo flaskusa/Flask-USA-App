@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgateDetailsCtrl', mytailgateDetailsCtrl);
 
-    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicSlideBoxDelegate', '$localStorage', 'UserService', '$q', '$http', '$ionicBackdrop', '$ionicModal', '$ionicScrollDelegate'];
+    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicSlideBoxDelegate', '$localStorage', 'UserService', '$q', '$http', '$ionicBackdrop', '$ionicModal', '$ionicScrollDelegate', '$timeout'];
 
     /* @ngInject */
-    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicSlideBoxDelegate, $localStorage, UserService, $q, $http, $ionicBackdrop, $ionicModal, $ionicScrollDelegate) {
+    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicSlideBoxDelegate, $localStorage, UserService, $q, $http, $ionicBackdrop, $ionicModal, $ionicScrollDelegate, $timeout) {
         $cookies.remove("currtailGateMakers");
         $scope.myTailgaters = [];
         $scope.allMessages = [];
@@ -29,7 +29,9 @@
         $cookies.put('currtailGateId', tailGateId);
         $scope.isTailgateAdmin = false;
         $scope.goBack = function () {
-            $state.go("app.my_tailgate");
+            $timeout(function () {
+                $state.go("app.my_tailgate");
+            }, 1000);
         }
         getMyTailgate();
 

@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('my_tailgateCtrl', my_tailgateCtrl);
 
-    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate', '$cookies', 'SERVER', '$ionicPopup', '$ionicLoading'];
+    my_tailgateCtrl.$inject = ['$scope', 'TailgateService', '$state', '$ionicSlideBoxDelegate', '$cookies', 'SERVER', '$ionicPopup', '$ionicLoading', '$timeout'];
 
     /* @ngInject */
-    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies, SERVER, $ionicPopup, $ionicLoading) {
+    function my_tailgateCtrl($scope, TailgateService, $state, $ionicSlideBoxDelegate, $cookies, SERVER, $ionicPopup, $ionicLoading, $timeout) {
         var self = this;
         $scope.myTailgate = [];
         $cookies.remove("editUserTailgate");
@@ -19,7 +19,9 @@
         $scope.copiedTailgates = [];
         getAlltailgates();
         $scope.goBack = function () {
-            $state.go("app.user_navigation_menu");
+            $timeout(function () {
+                $state.go("app.user_navigation_menu");
+            }, 1000);            
         }
 
         function getAlltailgates() {

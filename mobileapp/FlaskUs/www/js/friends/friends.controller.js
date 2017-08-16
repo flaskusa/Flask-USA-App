@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsCtrl', FriendsCtrl);
 
-    FriendsCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsService', '$flaskUtil', '$state', 'UserService', 'SERVER', '$localStorage', '$ionicScrollDelegate', '$ionicPopup', '$rootScope'];
+    FriendsCtrl.$inject = ['$scope', '$http', '$ionicModal', 'FriendsService', '$flaskUtil', '$state', 'UserService', 'SERVER', '$localStorage', '$ionicScrollDelegate', '$ionicPopup', '$rootScope','$timeout'];
 
     /* @ngInject */
-    function FriendsCtrl($scope, $http, $ionicModal, FriendsService, $flaskUtil, $state, UserService, SERVER, $localStorage, $ionicScrollDelegate, $ionicPopup, $rootScope) {
+    function FriendsCtrl($scope, $http, $ionicModal, FriendsService, $flaskUtil, $state, UserService, SERVER, $localStorage, $ionicScrollDelegate, $ionicPopup, $rootScope, $timeout) {
       $scope.myFriends = [];
       $scope.userContactList = [];
       $scope.startIndex = 0;
@@ -28,7 +28,9 @@
             FriendsService.mediatorUserId=0;
         }
         $scope.goBack = function () {
-            $state.go("app.user_navigation_menu");
+            $timeout(function () {
+                $state.go("app.user_navigation_menu");
+            }, 1000);            
         }
         $scope.goTOGroup=function(){
             $state.go('app.my_friendDetail',{userId:0});

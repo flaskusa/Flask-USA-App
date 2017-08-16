@@ -108,7 +108,9 @@
         };
 
         $scope.goBack = function () {
-            $state.go("app.user_navigation_menu");
+            $timeout(function () {
+                $state.go("app.user_navigation_menu");
+            }, 1000);
         }
         Array.prototype.clean = function(deleteValue) {
             for (var i = 0; i < this.length; i++) {

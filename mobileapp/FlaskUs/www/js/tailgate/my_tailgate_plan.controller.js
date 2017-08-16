@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgatePlanCtrl', mytailgatePlanCtrl);
 
-    mytailgatePlanCtrl.$inject = ['$scope', '$state', '$stateParams', 'TailgateService', '$cookies', '$ionicModal', '$ionicLoading', '$ionicPopup'];
+    mytailgatePlanCtrl.$inject = ['$scope', '$state', '$stateParams', 'TailgateService', '$cookies', '$ionicModal', '$ionicLoading', '$ionicPopup', '$timeout'];
 
     /* @ngInject */
-    function mytailgatePlanCtrl($scope, $state, $stateParams, TailgateService, $cookies, $ionicModal, $ionicLoading, $ionicPopup) {
+    function mytailgatePlanCtrl($scope, $state, $stateParams, TailgateService, $cookies, $ionicModal, $ionicLoading, $ionicPopup, $timeout) {
         $scope.myTailgaters;
         var supplyItemName;
         $scope.tailgateItems = [];
@@ -26,7 +26,9 @@
         
         $scope.userId = "";
         $scope.goBack = function () {
-            $state.go("app.my_tailgate");
+            $timeout(function () {
+                $state.go("app.my_tailgate");
+            }, 1000);
         }
 
         $scope.user = {

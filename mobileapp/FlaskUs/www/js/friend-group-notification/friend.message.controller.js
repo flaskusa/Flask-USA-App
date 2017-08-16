@@ -59,8 +59,6 @@
             $scope.newChatData = [];
             FriendsNotificationService.getallFriendsandGroupWithMessages().then(function (response) {
                 $scope.allChatMessages = " Loading.... ";
-                //console.log("all friends & group with chats messages here");
-                //console.log(response);
                 $scope.newChatData = response;
                 angular.forEach(response, function (value, key) {
                     if (value.portraitId != 0) {
@@ -243,7 +241,9 @@
         }
 
         $scope.goBack = function () {
-            $ionicHistory.goBack();
+            $timeout(function () {
+                $ionicHistory.goBack();
+            }, 1000);
         }
         function getTimeDifference(dateTime, formattedDate) {
             var todayDate = new Date();

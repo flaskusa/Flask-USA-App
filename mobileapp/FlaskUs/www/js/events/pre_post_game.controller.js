@@ -25,8 +25,10 @@
         $scope.currEventId = $stateParams.eventId;
         var currEventId = $scope.currEventId;
         $scope.showAddv = false;
-        $scope.goBack = function(){
-            $ionicHistory.goBack();
+        $scope.goBack = function () {
+            $timeout(function () {
+                $ionicHistory.goBack();
+            }, 1000);
         }
         var PRE_EVENT = "Pre-Event";
         var AT_EVENT = "During-Event";

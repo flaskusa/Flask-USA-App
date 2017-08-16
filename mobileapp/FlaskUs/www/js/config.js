@@ -7,13 +7,15 @@
     var getMessageCountUrl="/get-my-flask-messages-count"
     var setMessageReadUrl = "/set-read";
 
+    //production server settings
     flaskAppConfig.value("SERVER", {
-        "hostName": "http://52.54.164.161/",
-        "url": "http://52.54.164.161/api/jsonws/",
+        "hostName": "http://flask-usa.com/",
+        "url": "http://flask-usa.com/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
 		"cacheExpireTime":1000
     })
  
+    //test server settings
     //flaskAppConfig.value("SERVER", {
     //  "hostName": "http://52.44.202.166/",
     //  "url": "http://52.44.202.166/api/jsonws/",

@@ -23,7 +23,9 @@
             $scope.modal = modal;
         });
         $scope.goBack = function () {
-            $state.go("app.my_tailgate");
+            $timeout(function () {
+                $state.go("app.my_tailgate");
+            }, 1000);
         }
         var tailGateId = $cookies.get('currtailGateId');
         var tailgateOwnerId = $cookies.get('currtailGateUserId');
