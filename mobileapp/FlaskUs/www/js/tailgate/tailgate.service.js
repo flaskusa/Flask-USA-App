@@ -142,414 +142,542 @@
             addSupplyItem: addSupplyItem,
             addTailgateSupplyItem: addTailgateSupplyItem
         }
-
         function getallFilteredEvents(tailgateParams) {
-            return $http.get(SERVER.url + getFilteredEventsURL, {
-                params: tailgateParams
-            }
-            )
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getFilteredEventsURL, {params: tailgateParams})
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function deleteTailgateImageByImageId(imageId) {
-            return $http.get(SERVER.url + deleteTailgateImageURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + deleteTailgateImageURL, {
                 params: { 'tailgateImageId': imageId }
-            }
-            )
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function deleteTailgateMarker(tailgateId) {
-            return $http.get(SERVER.url + deleteTailgateMarkerURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + deleteTailgateMarkerURL, {
                 params: { 'tailgateId': tailgateId }
-            }
-            )
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
-        }
-        function deleteTailgateUser(tailgateId,userId) {
-            return $http.get(SERVER.url + deleteTailgateUserUrl, {
-                    params: { 'tailgateId': tailgateId,'userId':userId }
+            })
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
                 }
-            )
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            });
+            return deferred.promise;
+        }
+        function deleteTailgateUser(tailgateId, userId) {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + deleteTailgateUserUrl, {
+                params: { 'tailgateId': tailgateId, 'userId': userId }
+            })
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         //update tailgate
         function updateTailgateInfo(tailgateParams) {
-            return $http.get(SERVER.url + updateTailgateURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + updateTailgateURL, {
                 params: tailgateParams
-            }
-            )
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         //get all groups
         function getallFilteredEvents(tailgateParams) {
-            return $http.get(SERVER.url + getFilteredEventsURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getFilteredEventsURL, {
                 params: tailgateParams
-            }
-            )
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         //get all groups
         function getGroupList() {
-            return $http.get(SERVER.url + getGroupListURL
-            )
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getGroupListURL)
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         //get all group users by group id
         function getGroupUsers(groupId) {
-            return $http.get(SERVER.url + getGroupUsersURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getGroupUsersURL, {
                 params: {
                     'groupId': groupId
                 }
-            }
-            )
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         //GET Group by userId
         function getGroupbyId(userid) {
-            return $http.get(SERVER.url + getGroupByUserIdURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getGroupByUserIdURL, {
                 params: {
                     'userId': userid
                 }
-            }).then(function success(response) {
-                return response.data;
-            }, function failure(response) {
-                return $q.$inject(response);
-                //add errror handling
+            })
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
             });
+            return deferred.promise;
         }
+
         function getvenueDetails(venueId) {
-            return $http.get(SERVER.url + getVenuebyVenueIdURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getVenuebyVenueIdURL, {
                 params: { 'venueId': venueId }
-            }
-            )
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function addTailgate(currTailgateparams) {
-            return $http.get(SERVER.url + allTailgateURL, { params: currTailgateparams })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    //add errror handling
-                });
+            var deferred = $q.defer();
+            $http.get(SERVER.url + allTailgateURL, { params: currTailgateparams })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function deleteTailgate(tailgateId) {
-            return $http.get(SERVER.url + deleteTailgateInfoURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + deleteTailgateInfoURL, {
                 params: { 'tailgateId': tailgateId }
-            }
-            )
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function getUserFrends() {
-            return $http.get(SERVER.url + inviteFriendsTailgateURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + inviteFriendsTailgateURL, {
                 params: {
                     companyId: SERVER.companyId,
                     keywords: ''
                 }
             })
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
-        }
-        function getEvent(eventId) {
-            return $http.get(SERVER.url + geteventURL, {
-                params: { 'eventId': eventId }
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
+        function getEvent(eventId) {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + geteventURL, {
+                params: { 'eventId': eventId }
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
+        }
         function getMapMarkers(tailgateId) {
-            return $http.get(SERVER.url + getmapMarkersURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getmapMarkersURL, {
                 params: { 'tailgateId': tailgateId }
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function deleteMapMarkers(tailgateId) {
-            return $http.get(SERVER.url + deleteTailgateUserIdURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + deleteTailgateUserIdURL, {
                 params: { 'tailgateId': tailgateId }
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function getallEvents() {
-            return $http.get(SERVER.url + getAllEventsURL
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getAllEventsURL)
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function addcurrentUser(user) {
-            return $http.get(SERVER.url + addtailgateUserURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + addtailgateUserURL, {
                 params: user
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getAllTailgate() {
-            return $http.get(SERVER.url + allTailgateURL)
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            var deferred = $q.defer();
+            $http.get(SERVER.url + allTailgateURL)
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getMyTailgates(uId) {
-            return $http.get(SERVER.url + myTailgatesURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + myTailgatesURL, {
                 params: { 'userId': uId }
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function getTailgate(tailgateId) {
-            return $http.get(SERVER.url + getTailGateURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getTailGateURL, {
                 params: { 'tailgateId': tailgateId }
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getMyTailgateImages(tailgateId) {
-            return $http.get(SERVER.url + getTailgateImagesURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getTailgateImagesURL, {
                 params: { 'tailgateId': tailgateId }
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getMyTailgateUsers(tailgateId) {
-            return $http.get(SERVER.url + getTalgetUsersURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getTalgetUsersURL, {
                 params: { 'tailgateId': tailgateId }
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
-
         function addTailgateMarkers(param) {
-            return $http.get(SERVER.url + addTialgateMarkerURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + addTialgateMarkerURL, {
                 params: param
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getAllMessages(tailgateId) {
-            return $http.get(SERVER.url + getmessageBoardsByTailgateIdURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getmessageBoardsByTailgateIdURL, {
                 params: { 'tailgateId': tailgateId }
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function saveMessage(msgtxt, tailgateId) {
-            return $http.get(SERVER.url + addMessageBoardURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + addMessageBoardURL, {
                 params: {
                     'messageText': msgtxt,
                     'tailgateId': tailgateId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getAllUser(userId) {
-            return $http.get(SERVER.url + getUserByIdURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getUserByIdURL, {
                 params: { 'userId': userId }
-            }
-            )
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getMySupplyLists() {
-            return $http.get(SERVER.url + getMySupplyListsURL)
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getMySupplyListsURL)
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getSupplyList(supplyListId) {
-            return $http.get(SERVER.url + getSupplyListURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getSupplyListURL, {
                 params: {
                     'supplyListId': supplyListId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         //get Items By TailgateId
         function getItemsByTailgateId(tailgateId) {
-            return $http.get(SERVER.url + getItemsByTailgateIdURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getItemsByTailgateIdURL, {
                 params: {
                     'tailgateId': tailgateId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function getItemsbylistid(supplyListId) {
-            return $http.get(SERVER.url + getItemsbylistidURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getItemsbylistidURL, {
                 params: {
                     'supplyListId': supplyListId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function addTailgateSupplyItems(supplyListItemNames, tailgateId, itemAssignedUserId) {
-            return $http.get(SERVER.url + addTailgateSupplyItemsURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + addTailgateSupplyItemsURL, {
                 params: {
                     'supplyListItemNames': supplyListItemNames,
                     'tailgateId': tailgateId,
                     'itemAssignedUserId': itemAssignedUserId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function updateTailgateSupplyItem(tailgateSupplyItemId, supplyListItemName, tailgateId, itemAssignedUserId) {
-            return $http.get(SERVER.url + updateTailgateSupplyItemURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + updateTailgateSupplyItemURL, {
                 params: {
                     'tailgateSupplyItemId': tailgateSupplyItemId,
                     'supplyListItemName': supplyListItemName,
@@ -557,13 +685,18 @@
                     'itemAssignedUserId': itemAssignedUserId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
+
         //        function checkTailgateUserExist(userId, tailgateId) {
         //         return $http.get(SERVER.url + checkTailgateUserExist, {
         //            params: {
@@ -578,121 +711,163 @@
         //            //add errror handling
         //        });
         //        }
+
         function isUserTailgateAdmin(tailgateId) {
-            return $http.get(SERVER.url + isTailgateAdminURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + isTailgateAdminURL, {
                 params: {
                     'tailgateId': tailgateId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
 
         function getTailgateLogo(tailgateId) {
-            return $http.get(SERVER.url + getTailgateLogoURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getTailgateLogoURL, {
                 params: {
                     'tailgateId': tailgateId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
+
         function removeTailgateLogo(tailgateId) {
-            return $http.get(SERVER.url + removeTailgateLogoURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + removeTailgateLogoURL, {
                 params: {
                     'tailgateId': tailgateId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
+
         function copyTailgate(tailgateId) {
-            return $http.get(SERVER.url + copyTailgateURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + copyTailgateURL, {
                 params: {
                     'tailgateId': tailgateId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function addTailgateAdmin(userId, tailgateId) {
-            return $http.get(SERVER.url + addTailgateAdminURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + addTailgateAdminURL, {
                 params: {
-                    'userId':userId,
+                    'userId': userId,
                     'tailgateId': tailgateId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function deleteTailgateSupplyItem(supplyItemId) {
-            return $http.get(SERVER.url + deleteTailgateSupplyItemURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + deleteTailgateSupplyItemURL, {
                 params: {
                     'tailgateSupplyItemId': supplyItemId
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         //add supply item
         function addSupplyItem(supplyItemName, supplyListId) {
-            return $http.get(SERVER.url + addSupplyItemUrl, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + addSupplyItemUrl, {
                 params: {
                     'supplyItemName': supplyItemName,
                     'supplyListId': supplyListId
                 }
             })
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
-        //add Tailgate Supply Item
         function addTailgateSupplyItem(supplyListItemName, tailgateId, itemAssignedUserId) {
-            return $http.get(SERVER.url + addTailgateSupplyItemURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + addTailgateSupplyItemURL, {
                 params: {
                     'supplyListItemName': supplyListItemName,
                     'tailgateId': tailgateId,
                     'itemAssignedUserId': itemAssignedUserId
                 }
             })
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
+
         return tailgateServices;
     }
 

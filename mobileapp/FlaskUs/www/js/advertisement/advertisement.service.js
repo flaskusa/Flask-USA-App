@@ -13,17 +13,21 @@
         var advertisementServices = {
             getAllAdvertisementDetail: getAllAdvertisementDetail
         }
-        function getAllAdvertisementDetail(allEventId){
-            return $http.get(SERVER.url + getAdvertisementDetailUrl, {
-                params: {eventIdList:allEventId}
+        function getAllAdvertisementDetail(allEventId) {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getAdvertisementDetailUrl, {
+                params: { eventIdList: allEventId }
             })
-                .then(function success(resp) {
-                    return resp.data;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
+            .then(function (resp) {
+                deferred.resolve(resp.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         return advertisementServices;

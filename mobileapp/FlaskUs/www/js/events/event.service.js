@@ -45,7 +45,8 @@
             getVenueDeviceImage: getVenueDeviceImage
         }
         function getAllEvents(eventIds, sDate, eDate, sString, lat, long) {
-            return $http.get(SERVER.url + allEventsURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + allEventsURL, {
                 params: {
                     eventTypeIds: eventIds,
                     startDate: sDate,
@@ -55,96 +56,120 @@
                     longitude: long
                 }
             })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    //add errror handling 
-                    return $q.$inject(response);
-                });
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function getlocation(addressVar, zipcode) {
-            return $http.get(googleMapURL + addressVar + zipcode)
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    //add errror handling
-                    return $q.$inject(response);
-                });
+            var deferred = $q.defer();
+            $http.get(googleMapURL + addressVar + zipcode)
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function getZiplocation(latlongVar, lat, long, sensorVar) {
-            return $http.get(googleMapURL + latlongVar + lat + ',' + long + sensorVar)
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    //add errror handling
-                    return $q.$inject(response);
-                });
+            var deferred = $q.defer();
+            $http.get(googleMapURL + latlongVar + lat + ',' + long + sensorVar)
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function getEventVenueDatail(currEventId) {
-            return $http.get(SERVER.url + getEvent_Venue_Details_with_Images, {
-                    params: { 'eventId': currEventId }
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getEvent_Venue_Details_with_Images, {
+                params: { 'eventId': currEventId }
+            })
+            .then(function (resp) {
+                deferred.resolve(resp);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
                 }
-            )
-                .then(function success(resp) {
-                    return resp;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
+            });
+            return deferred.promise;
         }
-
         function getEventByEventId(eventId) {
-            return $http.get(SERVER.url + getEventByIdURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getEventByIdURL, {
                 params: { 'eventId': eventId }
             })
-                .then(function success(resp) {
-                    return resp;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
-
+            .then(function (resp) {
+                deferred.resolve(resp);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-        function addContentDuringEvent(infoTitle,infoDesc,eventId,infoTypeCategoryId,infoTypeId) {
-            return $http.get(SERVER.url + addContentDuringGameUrl, {
+        function addContentDuringEvent(infoTitle, infoDesc, eventId, infoTypeCategoryId, infoTypeId) {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + addContentDuringGameUrl, {
                 params: {
                     eventId: eventId,
-                    infoTypeId : infoTypeId,
-                    infoTypeCategoryId : infoTypeCategoryId,
-                    infoTitle : infoTitle,
-                    infoShortDesc : '',
-                    infoDesc : infoDesc,
-                    addrLine1 : '',
-                    addrLine2 : '',
-                    zipCode : '',
-                    city : '',
-                    stateId : 0,
-                    countryId : 0,
-                    latitude : '',
-                    longitude : '',
-                    phone : '',
-                    mobileAppName : '',
-                    website : '',
-                    cost :0.0,
-                    hoursOfOperation : '',
-                    showDescription :true,
-                    premiumDisplayEnabled :false,
-                    eventSubDetails : ''
+                    infoTypeId: infoTypeId,
+                    infoTypeCategoryId: infoTypeCategoryId,
+                    infoTitle: infoTitle,
+                    infoShortDesc: '',
+                    infoDesc: infoDesc,
+                    addrLine1: '',
+                    addrLine2: '',
+                    zipCode: '',
+                    city: '',
+                    stateId: 0,
+                    countryId: 0,
+                    latitude: '',
+                    longitude: '',
+                    phone: '',
+                    mobileAppName: '',
+                    website: '',
+                    cost: 0.0,
+                    hoursOfOperation: '',
+                    showDescription: true,
+                    premiumDisplayEnabled: false,
+                    eventSubDetails: ''
                 }
             })
-                .then(function success(resp) {
-                    return resp;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
-
+            .then(function (resp) {
+                deferred.resolve(resp);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-        function updateEventDetailDuringEvent(infoTitle,infoDesc,eventId,eventDetailId,infoTypeCategoryId,infoTypeId) {
-            return $http.get(SERVER.url + updateEventDuringGame, {
+
+        function updateEventDetailDuringEvent(infoTitle, infoDesc, eventId, infoTypeCategoryId, infoTypeId) {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + updateEventDuringGame, {
                 params: {
                     eventDetailId: eventDetailId,
                     infoTypeId: infoTypeId,
@@ -170,133 +195,167 @@
                     eventSubDetails: ''
                 }
             })
-                .then(function success(resp) {
-                    return resp;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
-
+            .then(function (resp) {
+                deferred.resolve(resp);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function deleteEventDetailById(eventDetailId) {
-            return $http.get(SERVER.url + deleteEventDetailUrl, {
-                params: {"eventDetailId":eventDetailId}
+            var deferred = $q.defer();
+            $http.get(SERVER.url + deleteEventDetailUrl, {
+                params: { "eventDetailId": eventDetailId }
             })
-                .then(function success(resp) {
-                    return resp;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
-
+            .then(function (resp) {
+                deferred.resolve(resp);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         function deleteEventDetailImageById(eventDetailImageId) {
-            return $http.get(SERVER.url + deleteEventDetailImage, {
-                params: {"eventDetailImageId":eventDetailImageId}
+            var deferred = $q.defer();
+            $http.get(SERVER.url + deleteEventDetailImage, {
+                params: { "eventDetailImageId": eventDetailImageId }
             })
-                .then(function success(resp) {
-                    return resp;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
-
+            .then(function (resp) {
+                deferred.resolve(resp);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         // Get All venues for event details
         function getAllVenues() {
-            return $http.get(SERVER.url + getAllVenuesURL)
-                .then(function success(resp) {
-                    return resp.data;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getAllVenuesURL)
+            .then(function (resp) {
+                deferred.resolve(resp.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         //get all event detail with image
         function getAllEventDetailWithImage(eventId) {
-            return $http.get(SERVER.url + getAllEventDetailWithImageUrl,{
-                params: {eventId:eventId}})
-                .then(function success(resp) {
-                    return resp.data;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getAllEventDetailWithImageUrl, {
+                params: { eventId: eventId }
+            })
+            .then(function (resp) {
+                deferred.resolve(resp.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         // Get venue by id for event details
         function getVenueByid(vid) {
-            return $http.get(SERVER.url + getVenuesByIdURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getVenuesByIdURL, {
                 params: { "venueId ": venueId }
             })
-                .then(function success(resp) {
-                    return resp.data;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
+            .then(function (resp) {
+                deferred.resolve(resp.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getVenueDetails(venueId) {
-            return $http.get(SERVER.url + getVenueDetailsURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getVenueDetailsURL, {
                 params: { "venueId": venueId }
             })
-                .then(function success(resp) {
-                    return resp.data;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
+            .then(function (resp) {
+                deferred.resolve(resp.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getVenueDetail(venueDetailId) {
-            return $http.get(SERVER.url + getVenueDetailURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getVenueDetailURL, {
                 params: { "venueDetailId ": venueDetailId }
             })
-                .then(function success(resp) {
-                    return resp.data;
-                },
-                function failure(resp) {
-                    console.log("Error Message");
-                    return $q.$inject(resp);
-                });
+            .then(function (resp) {
+                deferred.resolve(resp.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
-
         function getVenueDetailWithImage(venueId) {
-            return $http.get(SERVER.url + getVenueDetailWithImageURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getVenueDetailWithImageURL, {
                 params: { "venueId": venueId }
             })
-                .then(function success(resp) {
-                    return resp;
-                },
-                function failure(resp) {
-                    //console.log("Error Message");
-                    return $q.$inject(resp);
-                });
+            .then(function (resp) {
+                deferred.resolve(resp);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
         //get venue image as per device
         function getVenueDeviceImage(venueId, deviceType, aspectRatio) {
-            return $http.get(SERVER.url + getVenueDeviceImageURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getVenueDeviceImageURL, {
                 params: {
                     "venueId": venueId,
                     "deviceType": deviceType,
                     "aspectRatio": aspectRatio
                 }
             })
-                .then(function success(resp) {
-                    return resp.data;
-                },
-                function failure(resp) {
-                    //console.log("Error Message");
-                    return $q.$inject(resp);
-                });
+            .then(function (resp) {
+                deferred.resolve(resp.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         return eventServices;
