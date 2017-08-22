@@ -62,7 +62,8 @@ public class FlaskAdminServiceClpInvoker {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"java.lang.String", "boolean", "java.lang.String",
-				"java.lang.String", "com.liferay.portal.service.ServiceContext"
+				"java.lang.String", "boolean",
+				"com.liferay.portal.service.ServiceContext"
 			};
 
 		_methodName31 = "updateFlaskAdmin";
@@ -280,7 +281,8 @@ public class FlaskAdminServiceClpInvoker {
 				(java.lang.String)arguments[5], (java.lang.String)arguments[6],
 				((Boolean)arguments[7]).booleanValue(),
 				(java.lang.String)arguments[8], (java.lang.String)arguments[9],
-				(com.liferay.portal.service.ServiceContext)arguments[10]);
+				((Boolean)arguments[10]).booleanValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[11]);
 		}
 
 		if (_methodName31.equals(name) &&

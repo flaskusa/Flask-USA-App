@@ -181,7 +181,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 	public	FlaskAdmin signUp(String firstName, String lastName, 
 					String email, String screenName,String password1, String password2,  
 					String DOB, boolean isMale,	String areaCode,
-					String mobileNumber,
+					String mobileNumber, boolean agreedToTermsOfUse,
 					ServiceContext serviceContext) throws SystemException, PortalException
 	{
 		FlaskAdmin adminUser=null;
@@ -192,6 +192,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 				areaCode, "",
 				0, 0,
 				mobileNumber, "", serviceContext);
+		user = UserLocalServiceUtil.updateAgreedToTermsOfUse(user.getUserId(), agreedToTermsOfUse);
 		if(user != null) {
 			adminUser = FlaskModelUtil.getFlaskUser(user, false, serviceContext);
 		}

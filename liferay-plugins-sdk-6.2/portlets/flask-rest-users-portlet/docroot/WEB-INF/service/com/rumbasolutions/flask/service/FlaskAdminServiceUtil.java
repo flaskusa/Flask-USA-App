@@ -97,13 +97,14 @@ public class FlaskAdminServiceUtil {
 		java.lang.String email, java.lang.String screenName,
 		java.lang.String password1, java.lang.String password2,
 		java.lang.String DOB, boolean isMale, java.lang.String areaCode,
-		java.lang.String mobileNumber,
+		java.lang.String mobileNumber, boolean agreedToTermsOfUse,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		return getService()
 				   .signUp(firstName, lastName, email, screenName, password1,
-			password2, DOB, isMale, areaCode, mobileNumber, serviceContext);
+			password2, DOB, isMale, areaCode, mobileNumber, agreedToTermsOfUse,
+			serviceContext);
 	}
 
 	public static com.rumbasolutions.flask.model.FlaskAdmin updateFlaskAdmin(
