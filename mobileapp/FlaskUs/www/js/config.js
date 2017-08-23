@@ -9,12 +9,14 @@
 
     //production server settings
     flaskAppConfig.value("SERVER", {
-        "hostName": "http://flask-usa.com/",
-        "url": "http://flask-usa.com/api/jsonws/",
+        "hostName": "https://www.flask-usa.com/",
+        "url": "https://www.flask-usa.com/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
 		"cacheExpireTime":1000
     })
  
+    //production server ip 52.54.164.161
+
     //test server settings
     //flaskAppConfig.value("SERVER", {
     //  "hostName": "http://52.44.202.166/",
@@ -38,7 +40,7 @@
           .state('app', {
               url: '/app',
               abstract: true,
-              templateUrl: 'templates/menu.html',
+              templateUrl: "./templates/menu.html",
               controller: 'AppCtrl'
           })
 
@@ -46,7 +48,7 @@
             url: '/search',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/search.html'
+                    templateUrl: "./templates/search.html"
                 }
             }
         })
@@ -55,7 +57,7 @@
             url: '/events',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/events.html',
+                    templateUrl: "./templates/events.html",
                     controller: 'EventsCtrl'
                 }
             }
@@ -65,7 +67,7 @@
             url: '/venueList',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/venue_List.html',
+                    templateUrl: "./templates/venue_List.html",
                     controller: 'VenueCtrl'
                 }
             }
@@ -76,7 +78,7 @@
             url: '/pre_post_game/:eventName/:eventId/:venueId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/pre_post_game.html',
+                    templateUrl: "./templates/pre_post_game.html",
                     controller: 'prePostGameCtrl'
                 }
             }
@@ -88,7 +90,7 @@
             params: {eventDetails: null, infoType: null, infoTypeCategory: null },
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/event_map_view.html',
+                    templateUrl: "./templates/event_map_view.html",
                     controller: 'eventMapViewCtrl'
                 }
             }
@@ -97,7 +99,7 @@
             url: '/login',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/login.html',
+                    templateUrl: "./templates/login.html",
                     controller: 'LoginCtrl'
                 }
             }
@@ -108,7 +110,7 @@
             url: '/supplies/:myListName/:currEventId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/supplies.html',
+                    templateUrl: "./templates/supplies.html",
                     controller: 'SuppliesCtrl'
                 }
             }
@@ -117,7 +119,7 @@
                 url: '/createSupplies',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/createSupplies.html',
+                        templateUrl: "./templates/createSupplies.html",
                         controller: 'SuppliesCtrl'
                     }
                 }
@@ -127,7 +129,7 @@
             url: '/suppliesList/:listName/:supplyListId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/supplies_list.html',
+                    templateUrl: "./templates/supplies_list.html",
                     controller: 'SuppliesListCtrl'
                 }
             }
@@ -137,7 +139,7 @@
             url: '/user_navigation_menu',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/user_navigation_menu.html',
+                    templateUrl: "./templates/user_navigation_menu.html",
                     controller: 'user_navigation_menuCtrl'
                 }
             }
@@ -148,7 +150,7 @@
             url: '/my_events',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_events.html',
+                    templateUrl: "./templates/my_events.html",
                     controller: 'my_eventsCtrl'
                 }
             }
@@ -158,7 +160,7 @@
              url: '/add_my_event',
              views: {
                  'menuContent': {
-                     templateUrl: 'templates/add_my_event.html',
+                     templateUrl: "./templates/add_my_event.html",
                      controller: 'addMyEventCtrl'
                  }
              }
@@ -171,7 +173,7 @@
             url: '/my_tailgate',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_tailgate.html',
+                    templateUrl: "./templates/my_tailgate.html",
                     controller: 'my_tailgateCtrl'
                 }
             }
@@ -181,7 +183,7 @@
             url: '/my_tailgateDetails',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/my_tailgateDetails.html'
+                    templateUrl: "./templates/my_tailgateDetails.html"
                 }
             }
             
@@ -191,7 +193,7 @@
             url: '/add_my_tailgate',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/add_my_tailgate.html',
+                    templateUrl: "./templates/add_my_tailgate.html",
                     controller: 'add_mytailgateCtrl'
                 }
             }
@@ -202,7 +204,7 @@
             url: "/my_tailgate_event_details/:tailgateId",
             views: {
                 'evnts-tab': {
-                    templateUrl: "templates/my_tailgate_event_details.html",
+                    templateUrl: "./templates/my_tailgate_event_details.html",
                     controller: 'mytailgateDetailsCtrl'
                 }
             }
@@ -212,7 +214,7 @@
             url: "/my_tailgate_view_location",
             views: {
                 'location-tab': {
-                    templateUrl: "templates/my_tailgate_view_location.html",
+                    templateUrl: "./templates/my_tailgate_view_location.html",
                     controller: 'mytailgatelocationCtrl'
                 }
             }
@@ -222,7 +224,7 @@
             url: "/my_tailgate_view_tailgaters",
             views: {
                 'tailgaters-tab': {
-                    templateUrl: "templates/my_tailgate_view_tailgaters.html",
+                    templateUrl: "./templates/my_tailgate_view_tailgaters.html",
                     controller: 'mytailgatorsCtrl'
                 }
             }
@@ -231,7 +233,7 @@
             url: "/my_tailgate_view_plan",
             views: {
                 'plan-tab': {
-                    templateUrl: "templates/my_tailgate_view_plan.html",
+                    templateUrl: "./templates/my_tailgate_view_plan.html",
                     controller: 'mytailgatePlanCtrl'
                 }
             }
@@ -242,7 +244,7 @@
             url: '/my_friends_tab',
             views: {
                 'menuContent': {
-                        templateUrl: 'templates/my_friends_tab.html',
+                        templateUrl: "./templates/my_friends_tab.html",
                         controller: "FriendsCtrl"
                     }
                 }
@@ -252,7 +254,7 @@
                 url: '/my_friends',
                 views: {
                         'myFriend_tab': {
-                            templateUrl: 'templates/my_friends.html',
+                            templateUrl: "./templates/my_friends.html",
                             controller: "FriendsCtrl"
                         }
                     }
@@ -261,7 +263,7 @@
             url: '/my_friendDetail:friendId',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/friendDetail.html',
+                    templateUrl: "./templates/friendDetail.html",
                     controller:"FriendDetailCtrl"
                 }
             }
@@ -270,7 +272,7 @@
             url: '/user_registration',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/user_registration.html',
+                    templateUrl: "./templates/user_registration.html",
                     controller: 'user_registrationCtrl'
                 }
             }
@@ -280,7 +282,7 @@
             url: '/forgot_password',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/forgot_password.html',
+                    templateUrl: "./templates/forgot_password.html",
                     controller: 'ForgotPasswordCtrl'
                 }
             }
@@ -290,7 +292,7 @@
             url: '/reset_password',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/reset_password.html',
+                    templateUrl: "./templates/reset_password.html",
                     controller: 'resetPasswordCtrl'
                 }
             }
@@ -300,7 +302,7 @@
             url: '/account_settings',
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/account_settings.html',
+                    templateUrl: "./templates/account_settings.html",
                     controller: 'account_settingsCtrl'
                 }
             }
@@ -312,7 +314,7 @@
 
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/tickets.html',
+                    templateUrl: "./templates/tickets.html",
                     controller: 'ticketsCtrl'
                 }
             }
@@ -321,7 +323,7 @@
             url: '/friends_group/:userId',
             views: {
                 'myGroup_tab': {
-                    templateUrl: 'templates/friends_group.html',
+                    templateUrl: "./templates/friends_group.html",
                     controller: 'FriendsGroupCtrl'
                 }
             }
@@ -330,7 +332,7 @@
                 url: '/notification_tab',
                 views: {
                     'notification_tab': {
-                        templateUrl: 'templates/notification.html',
+                        templateUrl: "./templates/notification.html",
                         controller:'FriendsNotificationCtrl'
                     }
                 }
@@ -339,7 +341,7 @@
                 url: '/create_group',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/create_group.html',
+                        templateUrl: "./templates/create_group.html",
                         controller: 'CreateGroupCtrl'
                     }
                 }
@@ -348,7 +350,7 @@
                 url: '/group_detail/:groupName',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/group_detail.html',
+                        templateUrl: "./templates/group_detail.html",
                         controller: 'FriendsGroupDetailCtrl'
                     }
                 }
@@ -358,7 +360,7 @@
                 url: '/group_member_detail',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/group_member_detail.html',
+                        templateUrl: "./templates/group_member_detail.html",
                         controller: 'FriendsGroupMemberDetailCtrl'
                     }
                 }
@@ -367,7 +369,7 @@
                 url: '/message_detail',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/friend-group-messages.html',
+                        templateUrl: "./templates/friend-group-messages.html",
                         controller: 'FriendsMessageCtrl'
                     }
                 }
@@ -376,7 +378,7 @@
                 url: '/notification_detail',
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/friend-group-notifications.html',
+                        templateUrl: "./templates/friend-group-notifications.html",
                         controller: 'FriendsNotificationCtrl'
                     }
                 }
@@ -386,23 +388,19 @@
             params: {eventDetails: null, infoType: null, infoTypeCategory: null,currEventName:null,currEventId:null },
             views: {
                 'menuContent': {
-                    templateUrl: 'templates/manage-event-content.html',
+                    templateUrl: "./templates/manage-event-content.html",
                     controller: 'ManageEventCtrl'
                 }
             }
         });
 
-
-
-        function loaderHide(url){
+        function loaderHide(url) {
             var hide=false;
             if(url.includes(getMessageUrlSubString) || url.includes(getmessageBoardsByTailgateIdURL) || url.includes(getMyNotificationCountUrl) || url.includes(getMessageCountUrl) ||url.includes(setMessageReadUrl)){
                      hide=true;
             }
             return hide;
         }
-
-
 
         /*
         if none of the above states are matched, use this as the fallback*/

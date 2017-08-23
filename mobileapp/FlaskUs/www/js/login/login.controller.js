@@ -103,6 +103,8 @@
                             var userLoggedOut = $cookies.get("userLoggedOut");
                             if (userLoggedOut != "true") {
                                 $state.go("app.user_navigation_menu");
+                            } else {
+                                $state.go("app.events");
                             }
                             var isColdStart = $cookies.getObject('coldstart');
                             if (isColdStart == true) {

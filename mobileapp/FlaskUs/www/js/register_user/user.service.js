@@ -33,8 +33,6 @@
         }
 
         function saveUser(user, srcname) {
-
-            //console.log(user);
             var params = {
                 firstName: user.firstName,
                 lastName: user.lastName,
@@ -45,7 +43,8 @@
                 DOB: user.DOB,
                 isMale: user.isMale,
                 areaCode: user.areaCode,
-                mobileNumber: user.mobileNumber
+                mobileNumber: user.mobileNumber,
+                agreedToTermsOfUse: user.agreedToTermsOfUse
             };
             return $http.get(SERVER.url + addUserURL, {
                 params:params

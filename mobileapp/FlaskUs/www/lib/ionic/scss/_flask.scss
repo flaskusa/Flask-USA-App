@@ -2601,6 +2601,54 @@ textarea.QuestionInput{
   background-color: #666666;
   width: 90%;
 }
+
+.eula-popup.popup-container .popup {
+    width: 90%;
+    font-family: 'Avenir Next' !important;
+    border: 1px solid black;
+}
+.eula-popup .popup-title {
+    margin: 0;
+    padding: 0;
+    font-size: 17px;
+    color: orange;
+}
+.eula-popup .popup-head {
+    padding: 15px 10px;
+    border-bottom: 1px solid #080808;
+    text-align: center;
+    background: #737373;
+}
+
+.eula-popup .popup-body {
+    padding: 10px;
+    overflow: auto;
+    font-family: 'Avenir Next';
+}
+
+.eula-popup .popup-buttons {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -moz-box;
+    display: -moz-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-direction: normal;
+    -webkit-box-orient: horizontal;
+    -webkit-flex-direction: row;
+    -moz-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    padding: 10px;
+    min-height: 65px;
+    background: #737373;
+    border-top: 1px solid black;
+}
+.item-checkbox .eulacheckbox {
+  right: auto !important;
+  background-color: #f9f9f9;
+}
+
 .custom-class .popup-head {
   display: none;
 }
