@@ -30,45 +30,62 @@
         var getUserProfilePic = "dlapp/get-file-entry";
 
         function forgotPasswordFunction(emailAddress) {
-            return $http.get(SERVER.url + forgotPasswordURL, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + forgotPasswordURL, {
                 params: {
                     "emailAddress": emailAddress
                 }
             })
                 .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function getCompanyIdFunction() {
-            return $http.get(SERVER.url + getCompanyIdUrl, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getCompanyIdUrl, {
             })
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function success(response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function logoutDeactivateUser(userId, deviceToken) {
-            return $http.get(SERVER.url + logoutDeactivateUrl, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + logoutDeactivateUrl, {
                 params: {
                     "userId":userId,
                     "deviceToken": deviceToken
                 }
             }).then(function success(response) {
-                return response.data;
-            }), function failure(response) {
-                return $q.$inject(response);
-            }
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function resetPasswordFuntion(emailAddress, password1, password2, otp) {
-            return $http.get(SERVER.url + resetPasswordUrl, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + resetPasswordUrl, {
                 params: {
                     "emailAddress": emailAddress,
                     "password1": password1,
@@ -76,16 +93,21 @@
                     "otp": otp
                 }
             })
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function success(response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function registerDeviceFuntion(userId, userEmail, devicePlatform, deviceDetails, deviceToken, registrationTime, active, lastNotificationTime, lastNotificationMsg) {
-            return $http.get(SERVER.url + regiterDeviceUrl, {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + regiterDeviceUrl, {
                 params: {
                     'userId': userId,
                     'userEmail': userEmail,
@@ -98,33 +120,56 @@
                     'lastNotificationMsg': lastNotificationMsg
                 }
             })
-                .then(function success(response) {
-                    return response.data;
-                }, function failure(response) {
-                    return $q.$inject(response);
-                    //add errror handling
-                });
+            .then(function success(response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function authenticateUser (scope) {
             var authdata = Base64.encode(scope.Email + ':' + scope.password);
             $cookies.put("authData",authdata);
             $http.defaults.headers.common['Authorization'] = 'Basic ' + authdata;
-            return $http.get(SERVER.url + getUserByEmailId, { params: { 'companyId': SERVER.companyId, 'emailAddress': scope.Email } })
-                .then(function success(response) {
-                    return response;
-                }, function failure(response) {
-                    //console.log("failed");
-                });
+
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getUserByEmailId, { 
+            params: { 
+                'companyId': SERVER.companyId, 
+                'emailAddress': scope.Email } 
+            })
+            .then(function success(response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
         }
 
         function getUserProfilePicture () {
             var userPic = $cookies.getObject('CurrentUser');
-            return $http.get(SERVER.url + getUserProfilePic, { params: { 'fileEntryId': userPic.data.portraitId } })
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getUserProfilePic, { params: { 'fileEntryId': userPic.data.portraitId } })
             .then(function success(resp) {
                 $cookies.putObject('CurrentUserPic', resp);
-                return resp;
+                deferred.resolve(resp);
+            }, function (reason) {
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
             });
+            return deferred.promise;
         }
         return services;
     } 

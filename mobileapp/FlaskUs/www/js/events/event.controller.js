@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('EventsCtrl', EventsCtrl);
 
-    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage','$ionicSlideBoxDelegate','$rootScope'];
+    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage','$ionicSlideBoxDelegate','$rootScope','$flaskUtil'];
 
     /* @ngInject */
-    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage,$ionicSlideBoxDelegate,$rootScope) {
+    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage,$ionicSlideBoxDelegate,$rootScope,$flaskUtil) {
         /* jshint validthis: true */
         var self = this;
         $scope.allEvents = [];
@@ -73,11 +73,15 @@
                 }
                 $cookies.put("AllEventId",$scope.allEventId);
                 $scope.showAddv=true;
-                if ($scope.allEvent.length == 0) {
+                if ($scope.allEvent.length == 0 || $scope.allEvent.length == undefined) {
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
-                }                
+                }        
+
+                if (respData.data.exception) {
+                    $flaskUtil.alert(respData.data.exception);
+                }        
             });
         }
 
@@ -131,6 +135,10 @@
                 } else {
                     $scope.Event_Error = false;
                 }
+
+                if (respData.data.exception) {
+                    $flaskUtil.alert(respData.data.exception);
+                }      
             });
         }
 
