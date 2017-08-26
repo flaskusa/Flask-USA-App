@@ -87,7 +87,7 @@
                     }
                   },
                   {
-                    text: 'Agree',
+                    text: 'Accept',
                     onTap: function(e) {
                         return $scope.user.agreedToTermsOfUse = true;
                     }
