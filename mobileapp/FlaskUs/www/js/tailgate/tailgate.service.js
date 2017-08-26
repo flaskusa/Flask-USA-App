@@ -51,8 +51,8 @@
             };
         });
     
-    TailgateService.$inject = ['$http', 'SERVER', '$q'];
-    function TailgateService($http, SERVER, $q) {
+    TailgateService.$inject = ['$http', 'SERVER', '$q','$flaskUtil', '$state'];
+    function TailgateService($http, SERVER, $q, $flaskUtil, $state) {
         var allTailgateURL = "flask-user-tailgate-portlet.tailgateinfo/add-tailgate-info";
         var myTailgatesURL = "flask-user-tailgate-portlet.tailgateinfo/get-all-my-tailgate";
         var getTailgateImagesURL = "flask-user-tailgate-portlet.tailgateimages/get-tailgate-images";
@@ -140,14 +140,15 @@
             addTailgateAdmin: addTailgateAdmin,
             deleteTailgateSupplyItem: deleteTailgateSupplyItem,
             addSupplyItem: addSupplyItem,
-            addTailgateSupplyItem: addTailgateSupplyItem
+            addTailgateSupplyItem: addTailgateSupplyItem,
+            showStatusofAPIonFaliure: showStatusofAPIonFaliure
         }
         function getallFilteredEvents(tailgateParams) {
             var deferred = $q.defer();
             $http.get(SERVER.url + getFilteredEventsURL, {params: tailgateParams})
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -163,7 +164,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -179,7 +180,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -195,7 +196,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -212,7 +213,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -229,7 +230,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -244,7 +245,7 @@
             $http.get(SERVER.url + getGroupListURL)
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -263,7 +264,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -282,7 +283,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -299,7 +300,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -314,7 +315,7 @@
             $http.get(SERVER.url + allTailgateURL, { params: currTailgateparams })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -330,7 +331,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -349,7 +350,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -366,7 +367,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -382,7 +383,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -398,7 +399,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -413,7 +414,7 @@
             $http.get(SERVER.url + getAllEventsURL)
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -429,7 +430,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -443,7 +444,7 @@
             $http.get(SERVER.url + allTailgateURL)
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -459,7 +460,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -475,7 +476,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -491,7 +492,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -507,7 +508,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -523,7 +524,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -539,7 +540,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -558,7 +559,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -574,7 +575,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -588,7 +589,7 @@
             $http.get(SERVER.url + getMySupplyListsURL)
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -606,7 +607,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -625,7 +626,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -644,7 +645,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -665,7 +666,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -687,7 +688,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -721,7 +722,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -740,7 +741,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -759,7 +760,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -778,7 +779,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -798,7 +799,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -817,7 +818,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -837,7 +838,7 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -858,7 +859,8 @@
             })
             .then(function (response) {
                 deferred.resolve(response.data);
-            }, function (reason) {
+            }, function (reason) {showStatusofAPIonFaliure(reason);
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -866,6 +868,34 @@
                 }
             });
             return deferred.promise;
+        }
+
+        function showStatusofAPIonFaliure(err){
+            if(err.status == 400){
+                $flaskUtil.alert('Bad Request from server');
+            }else if(err.status == 401){
+                $flaskUtil.alert('Please check if your username and password are correct.');}
+            else if(err.status == 403){
+                $flaskUtil.alert('Too many connections on server');
+            }else if(err.status == 500){
+                $flaskUtil.alert('Something wrong with server');
+                $state.go("app.events");
+            }else if(err.status == -1){
+                $flaskUtil.alert(" Please Check your Internet Connection and restart App again");                
+            }else if(err.status == 503){
+                $flaskUtil.alert("Server is currently Unavailable, please try after sometime");
+                $state.go("app.events");
+            }else if(err.status == 404){
+                $flaskUtil.alert("Requested data not found on server");
+            }else if(err.status == 502){
+                $flaskUtil.alert("Invalid response from server");
+                $state.go("app.events");
+            }else if(err.status == 504){
+                $flaskUtil.alert("Server response timeout");
+                $state.go("app.events");
+            }else{
+                $state.go("app.events");
+            }
         }
 
         return tailgateServices;

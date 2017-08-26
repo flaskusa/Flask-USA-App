@@ -4,9 +4,9 @@
         .module('flaskApp')
         .service('UserService', UserService);
 
-    UserService.$inject = ['$http', '$state', 'SERVER'];
+    UserService.$inject = ['$http', '$state', 'SERVER', '$flaskUtil'];
 
-    function UserService($http, $state, SERVER) {
+    function UserService($http, $state, SERVER, $flaskUtil) {
         var addUserURL = "/flask-rest-users-portlet.flaskadmin/sign-up";
         var getUserByEmailIdUrl = "/flask-rest-users-portlet.flaskadmin/get-user-for-email";
         var updateUserURL = "flask-rest-users-portlet.flaskadmin/update-flask-user";
@@ -28,7 +28,8 @@
             uploadProfile: uploadProfile,
             getUserProfile : getUserProfile,
             removeProfilePicture :removeProfilePicture ,
-            updatePasssword:updatePasssword
+            updatePasssword:updatePasssword,
+            showStatusofAPIonFaliure: showStatusofAPIonFaliure 
            
         }
 
@@ -55,6 +56,7 @@
             }, function failure(response) {
                 //add errror handling 
                 //console.log("failed");
+                showStatusofAPIonFaliure(response);
             });
         }
 
@@ -64,6 +66,7 @@
                     return response;
                 }, function failure(response) {
                     //console.log("failed");
+                    showStatusofAPIonFaliure(response);
                 });
         }
 
@@ -73,6 +76,7 @@
                     return response;
                 }, function failure(response) {
                     //console.log("failed");
+                    showStatusofAPIonFaliure(response);
                 });
         }
         function removeProfilePicture (userId) {
@@ -81,6 +85,7 @@
                     return response;
                 }, function failure(response) {
                     //console.log("failed");
+                    showStatusofAPIonFaliure(response);
                 });
         }
 
@@ -90,6 +95,7 @@
                     return response;
                 }, function failure(response) {
                     //console.log("failed");
+                    showStatusofAPIonFaliure(response);
                 });
         }
 
@@ -103,6 +109,7 @@
                    return response.data;
                }, function failure(response) {
                    //console.log("failed");
+                   showStatusofAPIonFaliure(response);
                });
         }
 
@@ -137,6 +144,7 @@
             }, function failure(response) {
                 //add errror handling 
                 //console.log("failed");
+                showStatusofAPIonFaliure(response);
             });
         }
 
@@ -146,6 +154,7 @@
                    return response;
                }, function failure(response) {
                    //console.log("failed");
+                   showStatusofAPIonFaliure(response);
                });
         }
 
@@ -159,6 +168,7 @@
                    return response;
                }, function failure(response) {
                    //console.log("failed");
+                   showStatusofAPIonFaliure(response);
                });
         }
 
@@ -168,7 +178,36 @@
                    return response;
                }, function failure(response) {
                    //console.log("failed");
+                   showStatusofAPIonFaliure(response);
                });
+        }
+
+        function showStatusofAPIonFaliure(err){
+            if(err.status == 400){
+                $flaskUtil.alert('Bad Request from server');
+            }else if(err.status == 401){
+                $flaskUtil.alert('Please check if your username and password are correct.');}
+            else if(err.status == 403){
+                $flaskUtil.alert('Too many connections on server');
+            }else if(err.status == 500){
+                $flaskUtil.alert('Something wrong with server');
+                $state.go("app.events");
+            }else if(err.status == -1){
+                $flaskUtil.alert(" Please Check your Internet Connection and restart App again");                
+            }else if(err.status == 503){
+                $flaskUtil.alert("Server is currently Unavailable, please try after sometime");
+                $state.go("app.events");
+            }else if(err.status == 404){
+                $flaskUtil.alert("Requested data not found on server");
+            }else if(err.status == 502){
+                $flaskUtil.alert("Invalid response from server");
+                $state.go("app.events");
+            }else if(err.status == 504){
+                $flaskUtil.alert("Server response timeout");
+                $state.go("app.events");
+            }else{
+                $state.go("app.events");
+            }
         }
 
         return userServices;

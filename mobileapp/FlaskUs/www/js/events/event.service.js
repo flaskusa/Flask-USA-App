@@ -5,9 +5,9 @@
         .module('flaskApp')
         .service('EventsService', EventsService);
 
-    EventsService.$inject = ['$http', 'SERVER', '$q'];
+    EventsService.$inject = ['$http', 'SERVER', '$q','$flaskUtil','$state'];
 
-    function EventsService($http, SERVER, $q) {
+    function EventsService($http, SERVER, $q, $flaskUtil, $state) {
         var allEventsURL = "flask-rest-events-portlet.event/get-simple-filtered-events";
         var addEventURL = "flask-rest-events-portlet.event/add-event";
         var addEventDetailsURL = "flask-rest-events-portlet.event/add-event-detail";
@@ -42,7 +42,8 @@
             getVenueDetail: getVenueDetail,
             deleteEventDetailImageById: deleteEventDetailImageById,
             getVenueDetailWithImage: getVenueDetailWithImage,
-            getVenueDeviceImage: getVenueDeviceImage
+            getVenueDeviceImage: getVenueDeviceImage,
+            showStatusofAPIonFaliure: showStatusofAPIonFaliure
         }
         function getAllEvents(eventIds, sDate, eDate, sString, lat, long) {
             var deferred = $q.defer();
@@ -59,7 +60,8 @@
             .then(function (response) {
                 deferred.resolve(response);
             }, function (reason) {
-                if (reason.statusText) {
+                showStatusofAPIonFaliure(reason);
+                if (reason.status) {
                     deferred.reject(reason);
                 } else {
                     deferred.reject({ statusText: 'Call error', status: 500 });
@@ -73,6 +75,7 @@
             .then(function (response) {
                 deferred.resolve(response);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -87,6 +90,7 @@
             .then(function (response) {
                 deferred.resolve(response);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -103,6 +107,7 @@
             .then(function (resp) {
                 deferred.resolve(resp);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -119,6 +124,7 @@
             .then(function (resp) {
                 deferred.resolve(resp);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -158,6 +164,7 @@
             .then(function (resp) {
                 deferred.resolve(resp);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -198,6 +205,7 @@
             .then(function (resp) {
                 deferred.resolve(resp);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -214,6 +222,7 @@
             .then(function (resp) {
                 deferred.resolve(resp);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -230,6 +239,7 @@
             .then(function (resp) {
                 deferred.resolve(resp);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -246,6 +256,7 @@
             .then(function (resp) {
                 deferred.resolve(resp.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -263,6 +274,7 @@
             .then(function (resp) {
                 deferred.resolve(resp.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -280,6 +292,7 @@
             .then(function (resp) {
                 deferred.resolve(resp.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -296,6 +309,7 @@
             .then(function (resp) {
                 deferred.resolve(resp.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -312,6 +326,7 @@
             .then(function (resp) {
                 deferred.resolve(resp.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -328,6 +343,7 @@
             .then(function (resp) {
                 deferred.resolve(resp);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -349,6 +365,7 @@
             .then(function (resp) {
                 deferred.resolve(resp.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -356,6 +373,34 @@
                 }
             });
             return deferred.promise;
+        }
+
+        function showStatusofAPIonFaliure(err){
+            if(err.status == 400){
+                $flaskUtil.alert('Bad Request from server');
+            }else if(err.status == 401){
+                $flaskUtil.alert('Please check if your username and password are correct.');}
+            else if(err.status == 403){
+                $flaskUtil.alert('Too many connections on server');
+            }else if(err.status == 500){
+                $flaskUtil.alert('Something wrong with server');
+                $state.go("app.events");
+            }else if(err.status == -1){
+                $flaskUtil.alert(" Please Check your Internet Connection and restart the App");     
+            }else if(err.status == 503){
+                $flaskUtil.alert("Server is currently Unavailable, please try after sometime");
+                $state.go("app.events");
+            }else if(err.status == 404){
+                $flaskUtil.alert("Requested data not found on server");
+            }else if(err.status == 502){
+                $flaskUtil.alert("Invalid response from server");
+                $state.go("app.events");
+            }else if(err.status == 504){
+                $flaskUtil.alert("Server response timeout");
+                $state.go("app.events");
+            }else{
+                $state.go("app.events");
+            }
         }
 
         return eventServices;

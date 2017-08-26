@@ -5,9 +5,9 @@
         .module('flaskApp')
         .service('LoginService', LoginService);
 
-    LoginService.$inject = ['$http', 'SERVER', '$state', '$cookies', '$q'];
+    LoginService.$inject = ['$http', 'SERVER', '$state', '$cookies', '$q', '$flaskUtil'];
 
-    function LoginService($http, SERVER, $state, $cookies, $q) {
+    function LoginService($http, SERVER, $state, $cookies, $q, $flaskUtil) {
         //        var baseURL = SERVER.url;
         var services = {
             forgotPasswordFunction: forgotPasswordFunction,
@@ -16,7 +16,8 @@
             getUserProfilePicture: getUserProfilePicture,
             getCompanyIdFunction: getCompanyIdFunction,
             registerDeviceFuntion: registerDeviceFuntion,
-            logoutDeactivateUser: logoutDeactivateUser
+            logoutDeactivateUser: logoutDeactivateUser,
+            showStatusofAPIonFaliure: showStatusofAPIonFaliure
         }
         var forgotPasswordURL = "/flask-rest-users-portlet.flaskadmin/forgot-password";
         var resetPasswordUrl = "/flask-rest-users-portlet.flaskadmin/reset-password";
@@ -36,9 +37,10 @@
                     "emailAddress": emailAddress
                 }
             })
-                .then(function success(response) {
+                .then(function (response) {
                 deferred.resolve(response.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -52,9 +54,10 @@
             var deferred = $q.defer();
             $http.get(SERVER.url + getCompanyIdUrl, {
             })
-            .then(function success(response) {
+            .then(function (response) {
                 deferred.resolve(response.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -71,9 +74,10 @@
                     "userId":userId,
                     "deviceToken": deviceToken
                 }
-            }).then(function success(response) {
+            }).then(function (response) {
                 deferred.resolve(response.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -93,9 +97,10 @@
                     "otp": otp
                 }
             })
-            .then(function success(response) {
+            .then(function (response) {
                 deferred.resolve(response.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -120,9 +125,10 @@
                     'lastNotificationMsg': lastNotificationMsg
                 }
             })
-            .then(function success(response) {
+            .then(function (response) {
                 deferred.resolve(response.data);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -143,9 +149,10 @@
                 'companyId': SERVER.companyId, 
                 'emailAddress': scope.Email } 
             })
-            .then(function success(response) {
+            .then(function (response) {
                 deferred.resolve(response);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -159,10 +166,11 @@
             var userPic = $cookies.getObject('CurrentUser');
             var deferred = $q.defer();
             $http.get(SERVER.url + getUserProfilePic, { params: { 'fileEntryId': userPic.data.portraitId } })
-            .then(function success(resp) {
+            .then(function (resp) {
                 $cookies.putObject('CurrentUserPic', resp);
                 deferred.resolve(resp);
             }, function (reason) {
+                showStatusofAPIonFaliure(reason);
                 if (reason.statusText) {
                     deferred.reject(reason);
                 } else {
@@ -171,6 +179,35 @@
             });
             return deferred.promise;
         }
+
+        function showStatusofAPIonFaliure(err){
+            if(err.status == 400){
+                $flaskUtil.alert('Bad Request from server');
+            }else if(err.status == 401){
+                $flaskUtil.alert('Please check if your username and password are correct.');}
+            else if(err.status == 403){
+                $flaskUtil.alert('Too many connections on server');
+            }else if(err.status == 500){
+                $flaskUtil.alert('Something wrong with server');
+                $state.go("app.events");
+            }else if(err.status == -1){
+                $flaskUtil.alert(" Please Check your Internet Connection and restart App again");                
+            }else if(err.status == 503){
+                $flaskUtil.alert("Server is currently Unavailable, please try after sometime");
+                $state.go("app.events");
+            }else if(err.status == 404){
+                $flaskUtil.alert("Requested data not found on server");
+            }else if(err.status == 502){
+                $flaskUtil.alert("Invalid response from server");
+                $state.go("app.events");
+            }else if(err.status == 504){
+                $flaskUtil.alert("Server response timeout");
+                $state.go("app.events");
+            }else{
+                $state.go("app.events");
+            }
+        }
+
         return services;
     } 
 
