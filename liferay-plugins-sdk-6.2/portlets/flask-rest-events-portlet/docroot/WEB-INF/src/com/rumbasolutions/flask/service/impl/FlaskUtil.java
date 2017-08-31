@@ -48,6 +48,7 @@ import com.rumbasolutions.flask.model.InfoType;
 import com.rumbasolutions.flask.model.InfoTypeCategory;
 import com.rumbasolutions.flask.model.Venue;
 import com.rumbasolutions.flask.model.VenueDetail;
+import com.rumbasolutions.flask.service.VenueLocalServiceUtil;
 import com.rumbasolutions.flask.service.persistence.EventTypeUtil;
 import com.rumbasolutions.flask.service.persistence.InfoTypeCategoryUtil;
 import com.rumbasolutions.flask.service.persistence.InfoTypeUtil;
@@ -224,7 +225,7 @@ public class FlaskUtil {
 			return event;
 	}
 	
-	public static JSONArray setStringNamesForEvents(List<Event> eventList, List<Long> myEventList){
+	public static JSONArray setStringNamesForEvents(List<Event> eventList, List<Long> myEventList)throws Exception{
 		JSONArray eventListJsonArr =  JSONFactoryUtil.createJSONArray();
 
 		for (Event event : eventList){
@@ -236,6 +237,8 @@ public class FlaskUtil {
 					if(myEventList != null && myEventList.contains(event.getEventId())){
 						userEvent = 1;
 					}
+					Venue venue = VenueLocalServiceUtil.getVenue(event.getVenueId());
+					obj.put("cityName", venue.getVenueCity());
 					obj.put("userEvent", userEvent);
 					eventListJsonArr.put(obj);
 				}
