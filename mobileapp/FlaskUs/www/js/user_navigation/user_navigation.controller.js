@@ -31,10 +31,14 @@
 
          $scope.initialize = function () {
              FriendsNotificationService.getNotificationCount().then(function (response) {
-                 $rootScope.totalRequestNotification = response;
+                 $timeout(function () {
+                     $rootScope.totalRequestNotification = response;
+                 }, 0);
              });
              FriendsNotificationService.getTotalUnreadChatCount().then(function (response1) {
-                 $rootScope.totalMessageNotification = response1;
+                 $timeout(function () {
+                     $rootScope.totalMessageNotification = response1;
+                 }, 0);
              });
         }
         $scope.myEvent = function ()

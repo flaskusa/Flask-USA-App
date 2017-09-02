@@ -1,4 +1,4 @@
-﻿(function () {
+(function () {
     'use strict';
     angular.module('flaskApp')
         .controller('prePostGameCtrl', prePostGameCtrl);
@@ -8,7 +8,9 @@
     /* @ngInject */
     function prePostGameCtrl($scope, $stateParams, $state, EventsService, $ionicSlideBoxDelegate, $ionicScrollDelegate, $cookies, $timeout, $localStorage, SERVER, $ionicHistory, $ionicLoading) {
         /* jshint validthis: true */
+        console.log('inside prePostGameCtrl');
         var self = this;
+ 
         $scope.venueDataRecieved=false;
         $scope.eventDetails = {};
         $scope.event = {};
@@ -26,16 +28,17 @@
         var currEventId = $scope.currEventId;
         $scope.showAddv = false;
         $scope.goBack = function () {
-            $timeout(function () {
+            //$timeout(function () {
                 $ionicHistory.goBack();
-            }, 1000);
+            //}, 1000);
         }
         var PRE_EVENT = "Pre-Event";
         var AT_EVENT = "During-Event";
         var POST_EVENT = "Post-Event";
         var userDetail = $cookies.getObject('CurrentUser');
+        var agreedToTermsOfUse = false;
         if (userDetail != undefined) {
-            var agreedToTermsOfUse = userDetail.data.isContentAdmin;
+            agreedToTermsOfUse = userDetail.data.isContentAdmin;
         }
         if (angular.isUndefined($localStorage["CachedEvents"])) {
             $localStorage["CachedEvents"] = {};
@@ -47,13 +50,14 @@
         } else if(checkExpiryTime($localStorage["CachedEvents"][currEventId].addeddTime)) {
             getEventVenueDatail();
             getCurrentEvent();
-        }
-         else {
+        } else {
             setEventVenueDatail($localStorage["CachedEvents"][currEventId].getEventVenueDatail);
             setCurrentEvent($localStorage["CachedEvents"][currEventId].getCurrentEvent);
         }
         function getCurrentEvent() {
+ console.log('Inside getCurrentEvent fn');
             EventsService.getEventByEventId($scope.currEventId).then(function (respData) {
+                                                                      console.log('Inside EventsService.getEventByEventId fn');
                 $localStorage["CachedEvents"][currEventId].getCurrentEvent = respData;
                 $localStorage["CachedEvents"][currEventId].addeddTime = new Date().getTime();
                 setCurrentEvent(respData);
@@ -71,42 +75,46 @@
             }
         }
         function setCurrentEvent(respData) {
+ console.log('Inside setCurrentEvent');
             $scope.currVenueName = respData.data.venueName;
             $scope.currEventDate = respData.data.eventDate;
             $scope.currVenueId = respData.data.venueId;
-            $scope.currEventName = $stateParams.eventName;
         }
        
         $scope.preEvent = function (pre) {
+        console.log('Inside preEvent'+$scope.currEventName+'-'+$scope.currEventId);
+
             if (pre == "Tickets") {
-                $state.go("app.tickets", { eventDetails: $scope.eventDetails });
+                $state.go("app.tickets", { eventDetails: $localStorage["eventDetails"] });
             }
 
             else if (pre == "Game Day Needs" || pre == "Supplies") {
                 $state.go("app.supplies", { myListName: "My Supply", currEventId: $scope.currEventId });
             }
             else if (pre == "Add Content") {
-                $state.go("app.manage_event_content", { eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: pre, currEventName: $scope.currEventName, currEventId: $scope.currEventId });
+                $state.go("app.manage_event_content", { eventDetails: $localStorage["eventDetails"], infoType: PRE_EVENT, infoTypeCategory: pre, currEventName: $scope.currEventName, currEventId: $scope.currEventId });
             }
             else {
-                $state.go("app.event_map_view", { eventDetails: $scope.eventDetails, infoType: PRE_EVENT, infoTypeCategory: pre });
+                $state.go("app.event_map_view", { eventDetails: $localStorage["eventDetails"], infoType: PRE_EVENT, infoTypeCategory: pre });
             }
         }
         $scope.atEvent = function (during) {
+        console.log('Inside atEvent'+$scope.currEventName+'-'+$scope.currEventId);
             if (during == "Add Content") {
-                $state.go("app.manage_event_content", { eventDetails: $scope.eventDetails, infoType: AT_EVENT, infoTypeCategory: during, currEventName: $scope.currEventName, currEventId: $scope.currEventId });
+                $state.go("app.manage_event_content", { eventDetails: $localStorage["eventDetails"], infoType: AT_EVENT, infoTypeCategory: during, currEventName: $scope.currEventName, currEventId: $scope.currEventId });
             }
             else {
-                $state.go("app.event_map_view", { eventDetails: $scope.eventDetails, infoType: AT_EVENT, infoTypeCategory: during });
+                $state.go("app.event_map_view", { eventDetails: $localStorage["eventDetails"], infoType: AT_EVENT, infoTypeCategory: during });
 
             }
         }
         $scope.postEvent = function (post) {
+        console.log('Inside postEvent'+$scope.currEventName+'-'+$scope.currEventId);
             if (post == "Add Content") {
-                $state.go("app.manage_event_content", { eventDetails: $scope.eventDetails, infoType: POST_EVENT, infoTypeCategory: post, currEventName: $scope.currEventName, currEventId: $scope.currEventId });
+                $state.go("app.manage_event_content", { eventDetails: $localStorage["eventDetails"], infoType: POST_EVENT, infoTypeCategory: post, currEventName: $scope.currEventName, currEventId: $scope.currEventId });
             }
             else {
-                $state.go("app.event_map_view", { eventDetails: $scope.eventDetails, infoType: POST_EVENT, infoTypeCategory: post });
+                $state.go("app.event_map_view", { eventDetails: $localStorage["eventDetails"], infoType: POST_EVENT, infoTypeCategory: post });
             }
         }
         function getEventVenueDatail() {
@@ -114,22 +122,27 @@
             //console.log($stateParams.eventId);
             if ($stateParams.eventId == "none") {
                 EventsService.getVenueDetailWithImage(parseInt($stateParams.venueId)).then(function (respData) {
-                    setEventVenueDatail(respData);                    
-                    $scope.venueDataRecieved = true;
-                    $ionicLoading.hide();
+                    //$timeout(function () {
+                        setEventVenueDatail(respData);
+                        $scope.venueDataRecieved = true;
+                        $ionicLoading.hide();
+                    //}, 600);
                 });
             } else {
                 EventsService.getEventVenueDatail(currEventId).then(function (respData) {
-                    $localStorage["CachedEvents"][currEventId].getEventVenueDatail = respData;
-                    $scope.venueDataRecieved=true;
-                    setEventVenueDatail(respData);
-                    $ionicLoading.hide();
+                    //$timeout(function () {
+                        $localStorage["CachedEvents"][currEventId].getEventVenueDatail = respData;
+                        $scope.venueDataRecieved = true;
+                        setEventVenueDatail(respData);
+                        $ionicLoading.hide();
+                    //}, 600);
                 });
             }
         }
 
         function setEventVenueDatail(respData) {
-            $scope.eventDetails = respData.data;
+                $scope.eventDetails = respData.data;
+                $localStorage["eventDetails"]=respData.data;
                 var len = respData.data.Details.length - 1;
                 for (var i = 0; i <= len; i++) {
                     $scope.Details.push(angular.fromJson(respData.data.Details[i].Detail))
@@ -160,8 +173,6 @@
                     $scope.showAddv = true;
                 }, 100);
                 $ionicScrollDelegate.resize();
-
-
 
                 if ($scope.Post_Game.length >= 0) {
                     if (userDetail != undefined && agreedToTermsOfUse == true) {

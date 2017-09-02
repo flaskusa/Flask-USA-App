@@ -1,4 +1,4 @@
-﻿<ion-view cache-view="false" class="customFooter">
+<ion-view cache-view="true" class="customFooter">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button>
         </ion-nav-back-button>
@@ -303,7 +303,7 @@
                                             <div class="form-group">
                                                 <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
                                                 <div ng-if="flaskUsDetail.imageUrl && flaskUsDetail.length !=0">
-                                                    <img class="full-image" src={{flaskUsDetail.imageUrl}} style="width:100% !important; height: auto !important;">
+                                                    <img class="full-image" src={{flaskUsDetail.imageUrl}} onError="this.src='img/no-image-available.jpg'" style="width:100% !important; height: auto !important;">
                                                 </div>
                                                 <div class="form-group flask_us_form">
                                                     <label class="control-label" for="Descriptions"><div class="flask_us_detail_title"><b>{{flaskUsDetail.infoTitle}}</b></div></label>
@@ -431,8 +431,8 @@
                             <div>
                                 <div class="flask_us_div">
                                     <div>
-                                        <ion-slide-box delegate-handle="Flask-Detail" show-pager='false'>
-                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
+                                        <div delegate-handle="Flask-Detail" show-pager='false'>
+                                            <div ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
                                                 <div class="form-group">
                                                     <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
                                                     <div ng-if="flaskUsDetail.imageUrl && flaskUsDetail.length !=0">
@@ -446,8 +446,8 @@
                                                         {{flaskUsDetail.infoDesc}}
                                                     </div>
                                                 </div>
-                                            </ion-slide>
-                                            <ion-slide>
+                                            </div>
+                                            <div>
                                                 <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
                                                     <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
                                                 </div>
@@ -466,8 +466,8 @@
                                                         </button>
                                                     </div>
                                                 </div>
-                                            </ion-slide>
-                                        </ion-slide-box>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>

@@ -6,17 +6,17 @@
     var getMyNotificationCountUrl="/get-requests-count"
     var getMessageCountUrl="/get-my-flask-messages-count"
     var setMessageReadUrl = "/set-read";
-
+    var errorLog = [];
     //production server settings
     flaskAppConfig.value("SERVER", {
-        "hostName": "https://www.flask-usa.com/",
-        "url": "https://www.flask-usa.com/api/jsonws/",
+         "hostName": "https://www.flask-usa.com/",
+         "url": "https://www.flask-usa.com/api/jsonws/",
+        //"hostName": "http://52.54.164.161/", //production ip
+        //"url": "http://52.54.164.161/api/jsonws/",
         "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
 		"cacheExpireTime":1000
     })
  
-    //production server ip 52.54.164.161
-
     //test server settings
     //flaskAppConfig.value("SERVER", {
     //  "hostName": "http://52.44.202.166/",
@@ -24,13 +24,19 @@
     //  "googleApi": "http://maps.googleapis.com/maps/api/geocode/json?",
     //  "cacheExpireTime":1000
     //})
-
     flaskAppConfig.config(function ($provide) {
             $provide.decorator("$exceptionHandler", function ($delegate, $injector) {
                 return function (exception, cause) {
                     var $rootScope = $injector.get("$rootScope");
+                    var $state = $injector.get("$state");
+                    var $timeout = $injector.get("$timeout");
                     $rootScope.$broadcast("catchAll:exception",{exception:exception}); // This represents a custom method that exists within $rootScope
                     $delegate(exception, cause);
+                    $rootScope.$broadcast('loading:show');
+                    $timeout(function () {
+                        $state.go("app.events");
+                        $rootScope.$broadcast('loading:hide');
+                    }, 500);
             };
         });
     });
@@ -63,6 +69,15 @@
             }
         })
 
+        .state('app.errors', {
+            url: '/error',
+            views: {
+                'menuContent': {
+                    templateUrl: "./templates/error.html"
+                }
+            }
+        })
+
         .state('app.venueList', {
             url: '/venueList',
             views: {
@@ -84,7 +99,7 @@
             }
         })
 
-                //event map view
+        //event map view
         .state('app.event_map_view', {
             url: '/event_map_view',
             params: {eventDetails: null, infoType: null, infoTypeCategory: null },
@@ -383,52 +398,51 @@
                     }
                 }
             })
-        .state('app.manage_event_content', {
-            url: '/manage-event-content',
-            params: {eventDetails: null, infoType: null, infoTypeCategory: null,currEventName:null,currEventId:null },
-            views: {
-                'menuContent': {
-                    templateUrl: "./templates/manage-event-content.html",
-                    controller: 'ManageEventCtrl'
+            .state('app.manage_event_content', {
+                url: '/manage-event-content',
+                params: {eventDetails: null, infoType: null, infoTypeCategory: null,currEventName:null,currEventId:null },
+                views: {
+                    'menuContent': {
+                        templateUrl: "./templates/manage-event-content.html",
+                        controller: 'ManageEventCtrl'
+                    }
                 }
+            });
+
+            function loaderHide(url){
+                var hide=false;
+                if(url.includes(getMessageUrlSubString) || url.includes(getmessageBoardsByTailgateIdURL) || url.includes(getMyNotificationCountUrl) || url.includes(getMessageCountUrl) ||url.includes(setMessageReadUrl)){
+                         hide=true;
+                }
+                return hide;
             }
+
+            /* if none of the above states are matched, use this as the fallback */
+             $urlRouterProvider.otherwise('/app/events');
+             $ionicConfigProvider.tabs.position('bottom');
+             $ionicConfigProvider.views.swipeBackEnabled(false);
+
+            // remove back button text completely
+             $ionicConfigProvider.backButton.previousTitleText(false).text(' ');
+
+            // Http Interceptors for showing and hiding 
+            $httpProvider.interceptors.push(function ($rootScope) {
+                return {
+                request: function (config) {
+                    if(!loaderHide(config.url)) {
+                        $rootScope.$broadcast('loading:show');
+                    }
+                    return config;
+                },
+                response: function (response) {
+                        $rootScope.$broadcast('loading:hide');
+                    return response;
+                    }
+                }
+            })
+             uiGmapGoogleMapApiProvider.configure({
+              key: 'AIzaSyDAFZx0f0rc-vCyx-GHMqy2O9m06Dc-p8Y',
+            libraries: 'weather,geometry,visualization,places'
         });
-
-        function loaderHide(url) {
-            var hide=false;
-            if(url.includes(getMessageUrlSubString) || url.includes(getmessageBoardsByTailgateIdURL) || url.includes(getMyNotificationCountUrl) || url.includes(getMessageCountUrl) ||url.includes(setMessageReadUrl)){
-                     hide=true;
-            }
-            return hide;
-        }
-
-        /*
-        if none of the above states are matched, use this as the fallback*/
-         $urlRouterProvider.otherwise('/app/events');   
-         $ionicConfigProvider.tabs.position('bottom');
-
-
-        // remove back button text completely
-         $ionicConfigProvider.backButton.previousTitleText(false).text(' ');
-
-        //Http Interceptors for showing and hiding 
-        $httpProvider.interceptors.push(function ($rootScope) {
-            return {
-            request: function (config) {
-                if(!loaderHide(config.url)) {
-                    $rootScope.$broadcast('loading:show');
-                }
-                return config;
-            },
-            response: function (response) {
-                    $rootScope.$broadcast('loading:hide');
-                return response;
-                }
-            }
-        })
-         uiGmapGoogleMapApiProvider.configure({
-          key: 'AIzaSyDAFZx0f0rc-vCyx-GHMqy2O9m06Dc-p8Y',
-        libraries: 'weather,geometry,visualization,places'
-    });
     })
 })();

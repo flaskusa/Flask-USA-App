@@ -30,11 +30,6 @@
                 });
             }
         }
-        $scope.goBack = function () {
-            $timeout(function () {
-               $state.go("app.events");
-            }, 1000);            
-        }
 
         $scope.doLogin = function (user) {
             $cookies.put("userLoggedOut", "false");
@@ -103,7 +98,7 @@
                             var userLoggedOut = $cookies.get("userLoggedOut");
                             if (userLoggedOut != "true") {
                                 $state.go("app.user_navigation_menu");
-                            } else {
+                            }else{
                                 $state.go("app.events");
                             }
                             var isColdStart = $cookies.getObject('coldstart');

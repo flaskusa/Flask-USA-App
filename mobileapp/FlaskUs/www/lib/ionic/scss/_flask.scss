@@ -2601,9 +2601,14 @@ textarea.QuestionInput{
   background-color: #666666;
   width: 90%;
 }
+.eula-popup.popup-container{
+    background:rgba(8,8,8,0.67);
+}
 
 .eula-popup.popup-container .popup {
-    width: 90%;
+    width: 96%;
+    max-height: 96%; 
+    margin-top: 20px;
     font-family: 'Avenir Next' !important;
     border: 1px solid black;
 }

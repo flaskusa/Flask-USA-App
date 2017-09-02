@@ -143,19 +143,12 @@
             }
             return findUs;
         }
-
-
         $scope.$on ('$ionicView.beforeEnter',
         ionic.trigger('resize', {target: window}));
         function showAdv() {
             //$timeout(function () {
                 $ionicSlideBoxDelegate.$getByHandle('advertisement-viewer').update();
-           // }, 2000);
+            //}, 2000);
         }
-
-
-
-
-
     }
 })();

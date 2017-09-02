@@ -3,11 +3,14 @@
     angular.module('flaskApp')
         .controller('eventMapViewCtrl', eventMapViewCtrl);
 
-    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER', '$ionicLoading', '$cordovaGeolocation', '$flaskUtil'];
+    eventMapViewCtrl.$inject = ['$scope', '$stateParams', '$state', '$ionicPlatform', '$ionicPopover', 'EventsService', 'uiGmapGoogleMapApi', '$ionicTabsDelegate', '$timeout', 'uiGmapIsReady', '$ionicSlideBoxDelegate', '$cordovaInAppBrowser', 'SERVER', '$ionicLoading', '$cordovaGeolocation', '$flaskUtil', '$ionicHistory'];
 
     /* @ngInject */
-    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER, $ionicLoading, $cordovaGeolocation, $flaskUtil) {
+    function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER, $ionicLoading, $cordovaGeolocation, $flaskUtil, $ionicHistory) {
         /* jshint validthis: true */
+        console.log('Inside eventMapViewCtrl');
+        $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
+        //$ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
         var detailItem = {};
         $scope.zoomMin = 1;
         $scope.venueInfoSubDetail = [];
@@ -117,6 +120,11 @@
                     $scope.toggleQueDiv = !$scope.toggleQueDiv;
                 }, 30);
             }
+        }
+        $scope.goBack = function () {
+            //$timeout(function () {
+                $ionicHistory.goBack();
+            //}, 1000);
         }
         //console.log($scope.deviceDetector);
         $scope.toggleZoomImage = function () {
@@ -434,11 +442,14 @@
         uiGmapIsReady.promise()
             .then(function (maps) {
                 $scope.currentMap = $scope.map.control.getGMap();
+                if($scope.currentMap!=undefined){
                 var map2 = maps[0].map;
                 getGoogleMarkers($scope.currentMap, $scope.infoTypeName);
+                }
             });
         function initEventData() {
             try {
+                console.log('inside initEventData');
                 $scope.eventDetails = $stateParams.eventDetails.Details;
                 $scope.infoTypeName = setInfoType($stateParams.infoType);
                 $scope.infoTypeCategoryName = $scope.setInfoTypeCategory($stateParams.infoTypeCategory);
@@ -469,7 +480,8 @@
                 }
                 
             } catch (ex) {
-
+                console.log(ex);
+                //$state.go("app.events");
             }
         }
         //set selected tab index
@@ -546,205 +558,236 @@
         }
         //get google markers
         function getGoogleMarkers(map, infoTypeName) {
-            $scope.service = new google.maps.places.PlacesService(map);
-            $scope.pyrmont = new google.maps.LatLng(map.center.lat(), map.center.lng());
-            $scope.request = {
-                location: $scope.pyrmont,
-                radius: '2000'
-            }
-            if (infoTypeName === PRE_EVENT) {
-                getPreEventGoogleMarkers();
-            } else if (infoTypeName === AT_EVENT) {
-                getAtEventGoogleMarker();
-            } else if (infoTypeName === POST_EVENT) {
-                getPostEventGoogleMarkers();
-            }
+            $timeout(function () {
+                $scope.service = new google.maps.places.PlacesService(map);
+                $scope.pyrmont = new google.maps.LatLng(map.center.lat(), map.center.lng());
+                $scope.request = {
+                    location: $scope.pyrmont,
+                    radius: '2000'
+                }
+                if (infoTypeName === PRE_EVENT) {
+                    getPreEventGoogleMarkers();
+                } else if (infoTypeName === AT_EVENT) {
+                    getAtEventGoogleMarker();
+                } else if (infoTypeName === POST_EVENT) {
+                    getPostEventGoogleMarkers();
+                }
+                $ionicLoading.hide();
+            }, 0);
+            
         }
         //get google markers for post event
         function getPostEventGoogleMarkers() {
-            $scope.request.types = ['bar', 'restaurant'];
-            $scope.service.nearbySearch($scope.request, setGoogleBarMarker);
-            $scope.request.types = ['night_club']
-            $scope.service.nearbySearch($scope.request, setGoogleNightLifeMarker);
-            $scope.request.types = ['hotel']
-            $scope.service.nearbySearch($scope.request, setGoogleHotelMarker);
+            $timeout(function () {
+                $scope.request.types = ['bar', 'restaurant'];
+                $scope.service.nearbySearch($scope.request, setGoogleBarMarker);
+                $scope.request.types = ['night_club']
+                $scope.service.nearbySearch($scope.request, setGoogleNightLifeMarker);
+                $scope.request.types = ['hotel']
+                $scope.service.nearbySearch($scope.request, setGoogleHotelMarker);
+                $ionicLoading.hide();
+            }, 0);
         }
         //get google markers for pre event
         function getPreEventGoogleMarkers() {
-            $scope.request.types = ['parking'];
-            $scope.service.nearbySearch($scope.request, setGoogleParkingMarker);
-            $scope.request.types = ['bar', 'restaurant'];
-            $scope.service.nearbySearch($scope.request, setGoogleBarMarker);
+            $timeout(function () {
+                $scope.request.types = ['parking'];
+                $scope.service.nearbySearch($scope.request, setGoogleParkingMarker);
+                $scope.request.types = ['bar', 'restaurant'];
+                $scope.service.nearbySearch($scope.request, setGoogleBarMarker);
+                $ionicLoading.hide();
+            }, 0);
         }
         //get google markers for during event
         function getAtEventGoogleMarker() {
-            $scope.request.types = ['bar', 'restaurant'];
-            $scope.service.nearbySearch($scope.request, setGoogleBarMarker);
+            $timeout(function () {
+                $scope.request.types = ['bar', 'restaurant'];
+                $scope.service.nearbySearch($scope.request, setGoogleBarMarker);
+                $ionicLoading.hide();
+            }, 0);
         }
         //set Google Marker for nightlife
         function setGoogleNightLifeMarker(results, status) {
-            if (status == google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
-                    var place = results[i];
-                    createGoogleNightLifeMarker(place);
+            $timeout(function () {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    for (var i = 0; i < results.length; i++) {
+                        var place = results[i];
+                        createGoogleNightLifeMarker(place);
+                    }
                 }
-            }
+            }, 0);
         }
         //set Google Marker for parking
         function setGoogleParkingMarker(results, status) {
-            if (status == google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
-                    var place = results[i];
-                    createGoogleParkingMarker(place);
+            $timeout(function () {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    for (var i = 0; i < results.length; i++) {
+                        var place = results[i];
+                        createGoogleParkingMarker(place);
+                    }
                 }
-            }
+            }, 0);
         }
         //set Google Marker for bars and restaurant
         function setGoogleBarMarker(results, status) {
-            if (status == google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
-                    var place = results[i];
-                    createGoogleBarMarker(place);
+            $timeout(function () {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    for (var i = 0; i < results.length; i++) {
+                        var place = results[i];
+                        createGoogleBarMarker(place);
+                    }
                 }
-            }
+            }, 0);
         }
         //set Google Marker for hotel
         function setGoogleHotelMarker(results, status) {
-            if (status == google.maps.places.PlacesServiceStatus.OK) {
-                for (var i = 0; i < results.length; i++) {
-                    var place = results[i];
-                    createGoogleHotelMarker(place);
+            $timeout(function () {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                    for (var i = 0; i < results.length; i++) {
+                        var place = results[i];
+                        createGoogleHotelMarker(place);
+                    }
                 }
-            }
+            }, 0);
         }
         //create google marker
         function createGoogleBarMarker(place) {
-            var marker = {};
-            marker.id = place.id;
-            //marker.icon = "img/map_icons/google-map-pin.png";
-            //marker.icon = "img/map_icons/FLASK_GOOGLE_PIN.svg";
-            marker.icon = {
-                url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
-                scaledSize: { width: 60, height: 60 } //for scaling the svg images
-            }
-            marker.latitude = place.geometry.location.lat();
-            marker.longitude = place.geometry.location.lng();
-            marker.show = false;
-            marker.addrLine1 = place.vicinity;
-            marker.map = $scope.currentPosition;
-            marker.templateUrl = "markerBarInfo.tpl.html";
-            marker.templateParameter = {
-                infoTitle: place.name,
-                addrLine1: place.vicinity,
-                icon: place.icon,
-                type: "GOOGLE"
-            };
-            $scope.barsGoogleMarkers.push(marker);
+            $timeout(function () {
+                var marker = {};
+                marker.id = place.id;
+                //marker.icon = "img/map_icons/google-map-pin.png";
+                //marker.icon = "img/map_icons/FLASK_GOOGLE_PIN.svg";
+                marker.icon = {
+                    url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
+                    scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                }
+                marker.latitude = place.geometry.location.lat();
+                marker.longitude = place.geometry.location.lng();
+                marker.show = false;
+                marker.addrLine1 = place.vicinity;
+                marker.map = $scope.currentPosition;
+                marker.templateUrl = "markerBarInfo.tpl.html";
+                marker.templateParameter = {
+                    infoTitle: place.name,
+                    addrLine1: place.vicinity,
+                    icon: place.icon,
+                    type: "GOOGLE"
+                };
+                $scope.barsGoogleMarkers.push(marker);
+            }, 0);
         }
         //create Google Marker for nightlife
         function createGoogleNightLifeMarker(place) {
-            var marker = {};
-            marker.id = place.id;
-            marker.icon = {
-                url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
-                scaledSize: { width: 60, height: 60 } //for scaling the svg images
-            }
-            marker.latitude = place.geometry.location.lat();
-            marker.longitude = place.geometry.location.lng();
-            marker.show = false;
-            marker.addrLine1 = place.vicinity;
-            marker.map = $scope.currentPosition;
-            marker.templateUrl = "markerBarInfo.tpl.html";
-            marker.templateParameter = {
-                infoTitle: place.name,
-                addrLine1: place.vicinity,
-                icon: place.icon,
-                type: "GOOGLE"
-            };
-            $scope.nightLifesGoogleMarkers.push(marker);
+            $timeout(function () {
+                var marker = {};
+                marker.id = place.id;
+                marker.icon = {
+                    url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
+                    scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                }
+                marker.latitude = place.geometry.location.lat();
+                marker.longitude = place.geometry.location.lng();
+                marker.show = false;
+                marker.addrLine1 = place.vicinity;
+                marker.map = $scope.currentPosition;
+                marker.templateUrl = "markerBarInfo.tpl.html";
+                marker.templateParameter = {
+                    infoTitle: place.name,
+                    addrLine1: place.vicinity,
+                    icon: place.icon,
+                    type: "GOOGLE"
+                };
+                $scope.nightLifesGoogleMarkers.push(marker);
+            }, 0);
         }
         //creat Google Marker for parking
         function createGoogleParkingMarker(place) {
-            var marker = {};
-            marker.id = place.id;
-            marker.icon = {
-                url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
-                scaledSize: { width: 60, height: 60 } //for scaling the svg images
-            }
-            marker.latitude = place.geometry.location.lat();
-            marker.longitude = place.geometry.location.lng();
-            marker.show = false;
-            marker.map = $scope.currentPosition;
-            marker.templateUrl = "markerParkingInfo.tpl.html";
-            marker.addrLine1 = place.vicinity;
-            marker.templateParameter = {
-                infoTitle: place.name,
-                subTitle: place.vicinity,
-                addrLine1: place.vicinity,
-                icon: place.icon,
-                type: "GOOGLE"
-            };
-            $scope.parkingGoogleMarkers.push(marker);
+            $timeout(function () {
+                var marker = {};
+                marker.id = place.id;
+                marker.icon = {
+                    url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
+                    scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                }
+                marker.latitude = place.geometry.location.lat();
+                marker.longitude = place.geometry.location.lng();
+                marker.show = false;
+                marker.map = $scope.currentPosition;
+                marker.templateUrl = "markerParkingInfo.tpl.html";
+                marker.addrLine1 = place.vicinity;
+                marker.templateParameter = {
+                    infoTitle: place.name,
+                    subTitle: place.vicinity,
+                    addrLine1: place.vicinity,
+                    icon: place.icon,
+                    type: "GOOGLE"
+                };
+                $scope.parkingGoogleMarkers.push(marker);
+            }, 0);
         }
         //creat Google Marker for hotel
         function createGoogleHotelMarker(place) {
-            var marker = {};
-            marker.id = place.id;
-            marker.icon = {
-                url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
-                scaledSize: { width: 60, height: 60 } //for scaling the svg images
-            }
-            marker.latitude = place.geometry.location.lat();
-            marker.longitude = place.geometry.location.lng();
-            marker.addrLine1 = place.vicinity;
-            marker.show = false;
-            marker.map = $scope.currentPosition;
-            marker.templateUrl = "markerBarInfo.tpl.html";
-            marker.templateParameter = {
-                infoTitle: place.name,
-                addrLine1: place.vicinity,
-                icon: place.icon,
-                type: "GOOGLE"
-            };
-            $scope.hotelGoogleMarkers.push(marker);
+            $timeout(function () {
+                var marker = {};
+                marker.id = place.id;
+                marker.icon = {
+                    url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
+                    scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                }
+                marker.latitude = place.geometry.location.lat();
+                marker.longitude = place.geometry.location.lng();
+                marker.addrLine1 = place.vicinity;
+                marker.show = false;
+                marker.map = $scope.currentPosition;
+                marker.templateUrl = "markerBarInfo.tpl.html";
+                marker.templateParameter = {
+                    infoTitle: place.name,
+                    addrLine1: place.vicinity,
+                    icon: place.icon,
+                    type: "GOOGLE"
+                };
+                $scope.hotelGoogleMarkers.push(marker);
+            }, 0);
         }
         //set Marker Fields
         $scope.setMarkerFields = function (tempObject) {
-            tempObject.show = false;
-            tempObject.isIconVisibleOnClick = "true";
-            var templateName;
-            var shortDesc;
-            if (tempObject.infoShortDesc == null || tempObject.infoShortDesc == "") {
-                shortDesc = "15 min walk to stadium";
-            }
-            else {
-                shortDesc = tempObject.infoShortDesc;
-            }
-            if (tempObject.infoTypeCategoryName == "Parking") {
-                templateName = "markerParkingInfo.tpl.html";
-                tempObject.templateParameter = {
-                    id: tempObject.id,
-                    infoTitle: tempObject.infoTitle,
-                    cost: "$" + tempObject.cost,
-                    addrLine1: tempObject.addrLine1,
-                    infoShortDesc: shortDesc,
-                    subTitle: "$" + tempObject.cost + " | " + shortDesc,
-                    infoDesc: tempObject.infoDesc,
-                    phone: tempObject.phone,
-                    type: "FLASK"
-                };
-            } else {
-                templateName = "markerBarInfo.tpl.html";
-                tempObject.templateParameter = {
-                    id: tempObject.id,
-                    infoTitle: tempObject.infoTitle,
-                    addrLine1: tempObject.addrLine1,
-                    infoDesc: tempObject.infoDesc,
-                    phone: tempObject.phone,
-                    type: "FLASK"
+            $timeout(function () {
+                tempObject.show = false;
+                tempObject.isIconVisibleOnClick = "true";
+                var templateName;
+                var shortDesc;
+                if (tempObject.infoShortDesc == null || tempObject.infoShortDesc == "") {
+                    shortDesc = "15 min walk to stadium";
                 }
-            }
-            tempObject.templateUrl = templateName;
+                else {
+                    shortDesc = tempObject.infoShortDesc;
+                }
+                if (tempObject.infoTypeCategoryName == "Parking") {
+                    templateName = "markerParkingInfo.tpl.html";
+                    tempObject.templateParameter = {
+                        id: tempObject.id,
+                        infoTitle: tempObject.infoTitle,
+                        cost: "$" + tempObject.cost,
+                        addrLine1: tempObject.addrLine1,
+                        infoShortDesc: shortDesc,
+                        subTitle: "$" + tempObject.cost + " | " + shortDesc,
+                        infoDesc: tempObject.infoDesc,
+                        phone: tempObject.phone,
+                        type: "FLASK"
+                    };
+                } else {
+                    templateName = "markerBarInfo.tpl.html";
+                    tempObject.templateParameter = {
+                        id: tempObject.id,
+                        infoTitle: tempObject.infoTitle,
+                        addrLine1: tempObject.addrLine1,
+                        infoDesc: tempObject.infoDesc,
+                        phone: tempObject.phone,
+                        type: "FLASK"
+                    }
+                }
+                tempObject.templateUrl = templateName;
+            }, 0);
         };
         function fixUrl(url) {
             if (url) {
@@ -757,57 +800,63 @@
         }
         //select Flask Marker
         $scope.selectFlaskMarker = function () {
-            $scope.isFlaskMarkerShown = !$scope.isFlaskMarkerShown;
-            if ($scope.isFlaskMarkerShown) {
-                $scope.markerOptions.visible = true;
-                angular.forEach($scope.markerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(true);
-                });
-            } else {
-                $scope.closeOtherInfoWindows();
-                $scope.markerOptions.visible = false;
-                angular.forEach($scope.markerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(false);
-                });
-            }
+            $timeout(function () {
+                $scope.isFlaskMarkerShown = !$scope.isFlaskMarkerShown;
+                if ($scope.isFlaskMarkerShown) {
+                    $scope.markerOptions.visible = true;
+                    angular.forEach($scope.markerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(true);
+                    });
+                } else {
+                    $scope.closeOtherInfoWindows();
+                    $scope.markerOptions.visible = false;
+                    angular.forEach($scope.markerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(false);
+                    });
+                }
+            }, 0);
         };
         //Flask user locator when user clicks on "Find Me" button
         $scope.centerOnMe = function () {
-            $scope.isUserMarkerShown = !$scope.isUserMarkerShown;
-            if ($scope.isUserMarkerShown) {
-                $scope.map = {
-                    center: {
-                        latitude: $scope.lat,
-                        longitude: $scope.long
-                    },
-                    zoom: 14
+            $timeout(function () {
+                $scope.isUserMarkerShown = !$scope.isUserMarkerShown;
+                if ($scope.isUserMarkerShown) {
+                    $scope.map = {
+                        center: {
+                            latitude: $scope.lat,
+                            longitude: $scope.long
+                        },
+                        zoom: 14
+                    }
+                    $scope.marker = {
+                        id: 10,
+                        coords: {
+                            latitude: $scope.lat,
+                            longitude: $scope.long
+                        },
+                        options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
+                    }
+                } else {
+                    $scope.closeOtherInfoWindows();
+                    var currVenueObj = angular.fromJson($stateParams.eventDetails.Venue);
+                    $scope.marker = {};
+                    $scope.map = { center: { latitude: parseFloat(currVenueObj.latitude), longitude: parseFloat(currVenueObj.longitude) }, zoom: 14, control: {} };
                 }
-                $scope.marker = {
-                    id: 10,
-                    coords: {
-                        latitude: $scope.lat,
-                        longitude: $scope.long
-                    },
-                    options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
-                }
-            } else {
-                $scope.closeOtherInfoWindows();
-                var currVenueObj = angular.fromJson($stateParams.eventDetails.Venue);
-                $scope.marker = {};
-                $scope.map = { center: { latitude: parseFloat(currVenueObj.latitude), longitude: parseFloat(currVenueObj.longitude) }, zoom: 14, control: {} };
-            }
+            }, 0);
         }
         function getGeoLocation() {
-            var posOptions = { timeout: 10000, enableHighAccuracy: false };
-            $cordovaGeolocation
-              .getCurrentPosition(posOptions)
-              .then(function (pos) {
-                  $scope.lat = pos.coords.latitude;
-                  $scope.long = pos.coords.longitude;
-              }, function (err) {
-                  // error
-                 // $flaskUtil.alert("Unable to Get Location");
-              });
+            $timeout(function () {
+                var posOptions = { timeout: 10000, enableHighAccuracy: false };
+                $cordovaGeolocation
+                  .getCurrentPosition(posOptions)
+                  .then(function (pos) {
+                      $scope.lat = pos.coords.latitude;
+                      $scope.long = pos.coords.longitude;
+                  }, function (err) {
+                      // error
+                      // $flaskUtil.alert("Unable to Get Location");
+                  });
+            }, 0);
         }
         //popup for parking map cost range
         template = '<ion-popover-view class="popover">' +
@@ -834,25 +883,27 @@
 
         //function for getting data of filter
         $scope.previousIndex = -1;
-        $scope.filterMarker = function (data,index) {
-            var index = index;
+        $scope.filterMarker = function (data, index) {
+            $timeout(function () {
+                var index = index;
 
-            if (data == 0) {
-                $scope.filterCost = null;
-                $("#0").css("color", "#f7941e");
-                $("#" + $scope.previousIndex).css("color", "#000000");
-            } else {
-                $scope.filterCost = parseInt(data);
-                //console.log(this);
-                $("#" + $scope.previousIndex).css("color", "#000000");
-                $("#" + index).css("color", "#f7941e");
-                $scope.previousIndex = index;
-                if ($scope.previousIndex >= 0) {
-                    $("#0").css("color", "#000000");
+                if (data == 0) {
+                    $scope.filterCost = null;
+                    $("#0").css("color", "#f7941e");
+                    $("#" + $scope.previousIndex).css("color", "#000000");
+                } else {
+                    $scope.filterCost = parseInt(data);
+                    //console.log(this);
+                    $("#" + $scope.previousIndex).css("color", "#000000");
+                    $("#" + index).css("color", "#f7941e");
+                    $scope.previousIndex = index;
+                    if ($scope.previousIndex >= 0) {
+                        $("#0").css("color", "#000000");
+                    }
                 }
-            }
 
-            callMarkersAgain();
+                callMarkersAgain();
+            }, 0);
         };
         function callMarkersAgain() {
             $scope.isMapMarkersSet = false;
@@ -860,110 +911,124 @@
         }
         //select Google Marker
         $scope.selectGoogleMarker = function () {
-            $scope.isGoogleMarkerShown = !$scope.isGoogleMarkerShown;
-            if ($scope.isGoogleMarkerShown) {
-                $scope.googleMarkerOptions.visible = true;
-                angular.forEach($scope.googleMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(true);
-                });
-            } else {
-                $scope.googleMarkerOptions.visible = false;
-                angular.forEach($scope.googleMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(false);
-                });
-            }
+            $timeout(function () {
+                $scope.isGoogleMarkerShown = !$scope.isGoogleMarkerShown;
+                if ($scope.isGoogleMarkerShown) {
+                    $scope.googleMarkerOptions.visible = true;
+                    angular.forEach($scope.googleMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(true);
+                    });
+                } else {
+                    $scope.googleMarkerOptions.visible = false;
+                    angular.forEach($scope.googleMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(false);
+                    });
+                }
+            }, 0);
         };
         //select NightLife Google Marker
         $scope.selectNightLifeGoogleMarker = function () {
-            $scope.isNightLifeGoogleMarkerShown = !$scope.isNightLifeGoogleMarkerShown;
-            if ($scope.isNightLifeGoogleMarkerShown) {
-                $scope.nightLifeGoogleMarkerOptions.visible = true;
-                angular.forEach($scope.nightLifeGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(true);
-                });
-            } else {
-                $scope.nightLifeGoogleMarkerOptions.visible = false;
-                angular.forEach($scope.nightLifeGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(false);
-                });
-            }
+            $timeout(function () {
+                $scope.isNightLifeGoogleMarkerShown = !$scope.isNightLifeGoogleMarkerShown;
+                if ($scope.isNightLifeGoogleMarkerShown) {
+                    $scope.nightLifeGoogleMarkerOptions.visible = true;
+                    angular.forEach($scope.nightLifeGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(true);
+                    });
+                } else {
+                    $scope.nightLifeGoogleMarkerOptions.visible = false;
+                    angular.forEach($scope.nightLifeGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(false);
+                    });
+                }
+            }, 0);
         }
         //select NightLife Flask Marker
         $scope.selectNightLifeFlaskMarker = function () {
-            $scope.isNightLifeFlaskMarkerShown = !$scope.isNightLifeFlaskMarkerShown;
-            if ($scope.isNightLifeFlaskMarkerShown) {
-                $scope.nightLifeFlaskMarkerOptions.visible = true;
-                angular.forEach($scope.nightLifeFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(true);
-                });
-            } else {
-                $scope.nightLifeFlaskMarkerOptions.visible = false;
-                angular.forEach($scope.nightLifeFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(false);
-                });
-            }
+            $timeout(function () {
+                $scope.isNightLifeFlaskMarkerShown = !$scope.isNightLifeFlaskMarkerShown;
+                if ($scope.isNightLifeFlaskMarkerShown) {
+                    $scope.nightLifeFlaskMarkerOptions.visible = true;
+                    angular.forEach($scope.nightLifeFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(true);
+                    });
+                } else {
+                    $scope.nightLifeFlaskMarkerOptions.visible = false;
+                    angular.forEach($scope.nightLifeFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(false);
+                    });
+                }
+            }, 0);
         }
         //select Hotel Google Marker
         $scope.selectHotelGoogleMarker = function () {
-            $scope.isHotelGoogleMarkerShown = !$scope.isHotelGoogleMarkerShown;
-            if ($scope.isHotelGoogleMarkerShown) {
-                $scope.hotelGoogleMarkerOptions.visible = true;
-                angular.forEach($scope.hotelGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(true);
-                });
-            } else {
-                $scope.hotelGoogleMarkerOptions.visible = false;
-                angular.forEach($scope.hotelGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(false);
-                });
-            }
+            $timeout(function () {
+                $scope.isHotelGoogleMarkerShown = !$scope.isHotelGoogleMarkerShown;
+                if ($scope.isHotelGoogleMarkerShown) {
+                    $scope.hotelGoogleMarkerOptions.visible = true;
+                    angular.forEach($scope.hotelGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(true);
+                    });
+                } else {
+                    $scope.hotelGoogleMarkerOptions.visible = false;
+                    angular.forEach($scope.hotelGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(false);
+                    });
+                }
+            }, 0);
         }
         //select Hotel Flask Marker
         $scope.selectHotelFlaskMarker = function () {
-            $scope.isHotelFlaskMarkerShown = !$scope.isHotelFlaskMarkerShown;
-            if ($scope.isHotelFlaskMarkerShown) {
-                $scope.hotelFlaskMarkerOptions.visible = true;
-                angular.forEach($scope.hotelFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(true);
-                });
-            } else {
-                $scope.closeOtherInfoWindows();
-                $scope.hotelFlaskMarkerOptions.visible = false;
-                angular.forEach($scope.hotelFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(false);
-                });
-            }
+            $timeout(function () {
+                $scope.isHotelFlaskMarkerShown = !$scope.isHotelFlaskMarkerShown;
+                if ($scope.isHotelFlaskMarkerShown) {
+                    $scope.hotelFlaskMarkerOptions.visible = true;
+                    angular.forEach($scope.hotelFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(true);
+                    });
+                } else {
+                    $scope.closeOtherInfoWindows();
+                    $scope.hotelFlaskMarkerOptions.visible = false;
+                    angular.forEach($scope.hotelFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(false);
+                    });
+                }
+            },0);
         }
         //select Bar Flask Marker
         $scope.selectBarFlaskMarker = function () {
-            $scope.isBarFlaskMarkerShown = !$scope.isBarFlaskMarkerShown;
-            if ($scope.isBarFlaskMarkerShown) {
-                $scope.barFlaskMarkerOptions.visible = true;
-                angular.forEach($scope.barFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(true);
-                });
-            } else {
-                $scope.closeOtherInfoWindows();
-                $scope.barFlaskMarkerOptions.visible = false;
-                angular.forEach($scope.barFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(false);
-                });
-            }
+            $timeout(function () {
+                $scope.isBarFlaskMarkerShown = !$scope.isBarFlaskMarkerShown;
+                if ($scope.isBarFlaskMarkerShown) {
+                    $scope.barFlaskMarkerOptions.visible = true;
+                    angular.forEach($scope.barFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(true);
+                    });
+                } else {
+                    $scope.closeOtherInfoWindows();
+                    $scope.barFlaskMarkerOptions.visible = false;
+                    angular.forEach($scope.barFlaskMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(false);
+                    });
+                }
+            },0);
         };
         //select Bar Google Marker
         $scope.selectBarGoogleMarker = function () {
-            $scope.isBarGoogleMarkerShown = !$scope.isBarGoogleMarkerShown;
-            if ($scope.isBarGoogleMarkerShown) {
-                $scope.barGoogleMarkerOptions.visible = true;
-                angular.forEach($scope.barGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(true);
-                });
-            } else {
-                $scope.barGoogleMarkerOptions.visible = false;
-                angular.forEach($scope.barGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
-                    value.setVisible(false);
-                });
-            }
+            $timeout(function () {
+                $scope.isBarGoogleMarkerShown = !$scope.isBarGoogleMarkerShown;
+                if ($scope.isBarGoogleMarkerShown) {
+                    $scope.barGoogleMarkerOptions.visible = true;
+                    angular.forEach($scope.barGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(true);
+                    });
+                } else {
+                    $scope.barGoogleMarkerOptions.visible = false;
+                    angular.forEach($scope.barGoogleMarkerOptions.control.getGMarkers(), function (value, idx) {
+                        value.setVisible(false);
+                    });
+                }
+            }, 0);
         };
         //set Info Type Category
         $scope.setInfoTypeCategory = function (infoTypeCategory) {
@@ -1058,7 +1123,7 @@
                 if ($scope.infoTypeName == 'Pre-Event') {
                     $ionicTabsDelegate.select(3)
                 } else if ($scope.infoTypeName == 'During-Event') {
-                    $ionicTabsDelegate.select(3)
+                    $ionicTabsDelegate.select(2)
                 } else {
                     $ionicTabsDelegate.select(4);
                 }
@@ -1142,211 +1207,213 @@
         $scope.filterCost == null;
 
         $scope.setMarkers = function () {
+            $timeout(function () {
+                if (!$scope.isMapMarkersSet) {
 
-            if (!$scope.isMapMarkersSet) {
-
-                var subDetailArray = {};
-                var subDetailsArray = {};
-                var ImgObj = [];
-                $scope.flaskUsDetails = [];
-                $scope.parkingMarkers = [];
-                angular.forEach($scope.eventDetails, function (value, index) {
-                    tempObject = {};
-                    subDetailArray = {};
-                    subDetailsArray = {};
-                    ImgObj = []
-                    ImgObj = angular.fromJson(value.DetailImages);
-                    value = angular.fromJson(value);
-                    if (value.VenueSubDetails != undefined) {
-                        for (var j = 0; j < value.VenueSubDetails.length; j++) {
-                            subDetailArray[j] = angular.fromJson(value.VenueSubDetails[j].SubDetail);
+                    var subDetailArray = {};
+                    var subDetailsArray = {};
+                    var ImgObj = [];
+                    $scope.flaskUsDetails = [];
+                    $scope.parkingMarkers = [];
+                    angular.forEach($scope.eventDetails, function (value, index) {
+                        tempObject = {};
+                        subDetailArray = {};
+                        subDetailsArray = {};
+                        ImgObj = []
+                        ImgObj = angular.fromJson(value.DetailImages);
+                        value = angular.fromJson(value);
+                        if (value.VenueSubDetails != undefined) {
+                            for (var j = 0; j < value.VenueSubDetails.length; j++) {
+                                subDetailArray[j] = angular.fromJson(value.VenueSubDetails[j].SubDetail);
+                            }
                         }
-                    }
-                    else {
-                        for (var j = 0; j < value.EventSubDetails.length; j++) {
-                            subDetailArray[j] = angular.fromJson(value.EventSubDetails[j].SubDetail);
+                        else {
+                            for (var j = 0; j < value.EventSubDetails.length; j++) {
+                                subDetailArray[j] = angular.fromJson(value.EventSubDetails[j].SubDetail);
+                            }
                         }
-                    }
-                    tempObject = angular.fromJson(value.Detail);
-                    tempObject.id = index;
-                    if ($scope.infoTypeName == tempObject.infoTypeName) {
-                        if ("Parking" == tempObject.infoTypeCategoryName || "Bar & Restaurants" == tempObject.infoTypeCategoryName) {
-                            $scope.setMarkerFields(tempObject);
-                            if ("Parking" == tempObject.infoTypeCategoryName) {
-                                if ($scope.filterCost == null) {
-                                    if(tempObject.premiumDisplayEnabled==true) {
-                                     tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
-                                        tempObject.icon = {
-                                            url: tempObject.imageUrl,
-                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
-                                        }
-                                    }else if(tempObject.cost < 10){
-                                        tempObject.icon = {
-                                            url: 'img/map_icons/FLASK_PIN_9.svg',
-                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
-                                        }
-                                    }
-                                   else if (tempObject.cost >= 10 && tempObject.cost <= 19) {
-                                        tempObject.icon = {
-                                            url: 'img/map_icons/FLASK_PIN_10.svg',
-                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
-                                        }
-                                    }
-                                    else if (tempObject.cost >= 20 && tempObject.cost <= 29) {
-                                        tempObject.icon = {
-                                            url: 'img/map_icons/FLASK_PIN_20.svg',
-                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
-                                        }
-                                    }
-                                    else if (tempObject.cost >= 30 && tempObject.cost <= 39) {
-                                        tempObject.icon = {
-                                            url: 'img/map_icons/FLASK_PIN_30.svg',
-                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
-                                        }
-                                    }
-                                    else if (tempObject.cost >= 40 && tempObject.cost <= 49) {
-                                        tempObject.icon = {
-                                            url: 'img/map_icons/FLASK_PIN_40.svg',
-                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
-                                        }
-                                    }else if(tempObject.premiumDisplayEnabled== true){                                       
-                                        if (ImgObj.length != 0) {
-                                            var imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                        tempObject = angular.fromJson(value.Detail);
+                        tempObject.id = index;
+                        if ($scope.infoTypeName == tempObject.infoTypeName) {
+                            if ("Parking" == tempObject.infoTypeCategoryName || "Bar & Restaurants" == tempObject.infoTypeCategoryName) {
+                                $scope.setMarkerFields(tempObject);
+                                if ("Parking" == tempObject.infoTypeCategoryName) {
+                                    if ($scope.filterCost == null) {
+                                        if (tempObject.premiumDisplayEnabled == true) {
+                                            tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                                             tempObject.icon = {
-                                                url: imageUrl,
-                                                scaledSize: { width: 20, height: 60 } //for scaling the svg images
+                                                url: tempObject.imageUrl,
+                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                            }
+                                        } else if (tempObject.cost < 10) {
+                                            tempObject.icon = {
+                                                url: 'img/map_icons/FLASK_PIN_9.svg',
+                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                             }
                                         }
-                                    }
-                                    else if (tempObject.cost >= 50) {
-                                        tempObject.icon = {
-                                            url: 'img/map_icons/FLASK_PIN_50.svg',
-                                            scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                        else if (tempObject.cost >= 10 && tempObject.cost <= 19) {
+                                            tempObject.icon = {
+                                                url: 'img/map_icons/FLASK_PIN_10.svg',
+                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                            }
                                         }
+                                        else if (tempObject.cost >= 20 && tempObject.cost <= 29) {
+                                            tempObject.icon = {
+                                                url: 'img/map_icons/FLASK_PIN_20.svg',
+                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                            }
+                                        }
+                                        else if (tempObject.cost >= 30 && tempObject.cost <= 39) {
+                                            tempObject.icon = {
+                                                url: 'img/map_icons/FLASK_PIN_30.svg',
+                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                            }
+                                        }
+                                        else if (tempObject.cost >= 40 && tempObject.cost <= 49) {
+                                            tempObject.icon = {
+                                                url: 'img/map_icons/FLASK_PIN_40.svg',
+                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                            }
+                                        } else if (tempObject.premiumDisplayEnabled == true) {
+                                            if (ImgObj.length != 0) {
+                                                var imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                                tempObject.icon = {
+                                                    url: imageUrl,
+                                                    scaledSize: { width: 20, height: 60 } //for scaling the svg images
+                                                }
+                                            }
+                                        }
+                                        else if (tempObject.cost >= 50) {
+                                            tempObject.icon = {
+                                                url: 'img/map_icons/FLASK_PIN_50.svg',
+                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                            }
+                                        }
+                                        $scope.parkingMarkers.push(tempObject);
+                                        //console.log(tempObject.infoTitle);
+                                    } else {
+                                        //if (index == 0) {
+                                        //    $scope.parkingMarkers = [];
+                                        //}
+                                        showFilteredMarkers(tempObject);
                                     }
-                                    $scope.parkingMarkers.push(tempObject);
-                                    //console.log(tempObject.infoTitle);
+                                    $scope.searchParkingMarkers = $scope.parkingMarkers;
                                 } else {
-                                    //if (index == 0) {
-                                    //    $scope.parkingMarkers = [];
-                                    //}
-                                    showFilteredMarkers(tempObject);
+                                    tempObject.icon = 'img/map_icons/bar.svg';
+                                    $scope.barMarkers.push(tempObject);
+                                    $scope.searchBarMarkers = $scope.barMarkers;
                                 }
-                                $scope.searchParkingMarkers = $scope.parkingMarkers;
-                            } else {
+                            } else if ("Traffic" == tempObject.infoTypeCategoryName) {
+                                var subDetailLength = Object.keys(subDetailArray).length;
+                                for (var i = 0; i < subDetailLength; i++) {
+                                    if (tempObject.venueDetailId == subDetailArray[i].venueDetailId) {
+                                        subDetailsArray[i] = subDetailArray[i];
+                                    }
+                                }
+                                var trafficInfoSubDetail = { "trafficInfoSubDetail": subDetailsArray };
+                                _.merge(tempObject, trafficInfoSubDetail);
+                                $scope.trafficDetails.push(tempObject);
+                            } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
+                                if (ImgObj && ImgObj.length != 0) {
+                                    tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                }
+                                $scope.flaskUsDetails.push(tempObject);
+                            }
+                            else if ("Nightlife" == tempObject.infoTypeCategoryName) {
+                                $scope.setMarkerFields(tempObject);
+                                tempObject.icon = 'img/map_icons/nightlife.svg';
+                                $scope.nightLifes.push(tempObject);
+                                $scope.searchNightLifesMarkers = $scope.nightLifes;
+                            }
+                            else if ("Hotels" == tempObject.infoTypeCategoryName) {
+                                $scope.setMarkerFields(tempObject);
+                                tempObject.icon = 'img/map_icons/hotel.svg';
+                                $scope.hotelMarkers.push(tempObject);
+                                $scope.searchHotelMarkers = $scope.hotelMarkers;
+                            }
+                            else if ("Venue Map" == tempObject.infoTypeCategoryName) {
+                                $scope.default = " ";
+                                if (ImgObj && ImgObj.length != 0) {
+                                    EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceModel, $scope.aspectRatio).then(function (respData) {
+                                        $timeout(function () {
+                                            if (respData.length != 0 && respData.length != undefined) {
+                                                tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
+                                                $scope.venueMapImageUrl = tempObject.imageUrl;
+                                            }
+                                            else {
+                                                tempObject.imageUrl = "img/no-image-available.jpg";
+                                                $scope.venueMapImageUrl = tempObject.imageUrl;
+                                                //console.log($scope.venueMapImageUrl);
+                                            }
+                                        }, 0);
+                                    });
+                                }
+                                $scope.venueMapDetail.push(tempObject);
+                            }
+                            else if ("Venue Info" == tempObject.infoTypeCategoryName) {
+                                $scope.temp = $("<div>");
+                                $scope.temp2 = $("<div>");
+                                $scope.temp2.html(tempObject.infoDesc);
+                                $scope.temp.html(tempObject.infoDesc);
+                                $scope.anchor = $scope.temp2.find("a");
+                                angular.forEach($scope.anchor, function (vals, index) {
+                                    var temp1 = $("<div>");
+                                    temp1.html(vals);
+                                    var anchorValue = temp1.find("a").attr("href");
+                                    var hrefValue = "'" + anchorValue + "'";
+                                    $scope.temp.find("a").removeAttr("href");
+                                    $scope.temp.find("a").attr("ng-click", "setNavigate(" + hrefValue + ")");
+                                    /* I have to take two temp  variable because of in angular.forEach it was changing the value of temp to empty, same memory location issue.
+                                    I have created a directive to compile prepared  href because ng-click will not be bind by ng-bind-html*/
+                                })
+                                tempObject.infoDesc = $scope.temp.html();
+                                var subDetailLength = Object.keys(subDetailArray).length;
+                                for (var i = 0; i < subDetailLength; i++) {
+                                    if (tempObject.venueDetailId == subDetailArray[i].venueDetailId) {
+                                        subDetailsArray[i] = subDetailArray[i];
+                                    }
+                                }
+                                var venueInfoSubDetail = { "venueInfoSubDetail": subDetailsArray };
+                                _.merge(tempObject, venueInfoSubDetail);
+                                $scope.venueInfoDetail.push(tempObject);
+                            }
+                            else if ("Getting home" == tempObject.infoTypeCategoryName) {
+                                $scope.gettingHomeDetail.push(tempObject);
+                            }
+                        } else {
+                            if ("Bar & Restaurants" == tempObject.infoTypeCategoryName) {
+                                $scope.setMarkerFields(tempObject)
                                 tempObject.icon = 'img/map_icons/bar.svg';
                                 $scope.barMarkers.push(tempObject);
                                 $scope.searchBarMarkers = $scope.barMarkers;
                             }
-                        } else if ("Traffic" == tempObject.infoTypeCategoryName) {
-                            var subDetailLength = Object.keys(subDetailArray).length;
-                            for (var i = 0; i < subDetailLength; i++) {
-                                if (tempObject.venueDetailId == subDetailArray[i].venueDetailId) {
-                                    subDetailsArray[i] = subDetailArray[i];
-                                }
-                            }
-                            var trafficInfoSubDetail = { "trafficInfoSubDetail": subDetailsArray };
-                            _.merge(tempObject, trafficInfoSubDetail);
-                            $scope.trafficDetails.push(tempObject);
-                        } else if ("Flask Us" == tempObject.infoTypeCategoryName) {
-                            if (ImgObj && ImgObj.length != 0 && ImgObj != undefined) {
-                                tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
-                                $scope.flaskUsDetails.push(tempObject);
-                            } else {
-                                tempObject.imageUrl = "img/no-image-available.jpg";
-                                $scope.flaskUsDetails.push(tempObject);
-                            }
                         }
-                        else if ("Nightlife" == tempObject.infoTypeCategoryName) {
-                            $scope.setMarkerFields(tempObject);
-                            tempObject.icon = 'img/map_icons/nightlife.svg';
-                            $scope.nightLifes.push(tempObject);
-                            $scope.searchNightLifesMarkers = $scope.nightLifes;
-                        }
-                        else if ("Hotels" == tempObject.infoTypeCategoryName) {
-                            $scope.setMarkerFields(tempObject);
-                            tempObject.icon = 'img/map_icons/hotel.svg';
-                            $scope.hotelMarkers.push(tempObject);
-                            $scope.searchHotelMarkers = $scope.hotelMarkers;
-                        }
-                        else if ("Venue Map" == tempObject.infoTypeCategoryName) {
-                            $scope.default = " ";
-                            if (ImgObj && ImgObj.length != 0) {
-                                EventsService.getVenueDeviceImage(tempObject.venueId, $scope.deviceModel, $scope.aspectRatio).then(function (respData) {
-                                    if (respData.length != 0 && respData.length != undefined) {
-                                        tempObject.imageUrl = baseImagePath + "?uuid=" + respData[0].imageUUID + "&groupId=" + respData[0].imageGroupId;
-                                        $scope.venueMapImageUrl = tempObject.imageUrl;
-                                    }
-                                    else {
-                                        tempObject.imageUrl = "img/no-image-available.jpg";
-                                        $scope.venueMapImageUrl = tempObject.imageUrl;
-                                        //console.log($scope.venueMapImageUrl);
-                                    }
-                                });
-                            }
-                            $scope.venueMapDetail.push(tempObject);
-                        }
-                        else if ("Venue Info" == tempObject.infoTypeCategoryName) {
-                            $scope.temp = $("<div>");
-                            $scope.temp2 = $("<div>");
-                            $scope.temp2.html(tempObject.infoDesc);
-                            $scope.temp.html(tempObject.infoDesc);
-                            $scope.anchor = $scope.temp2.find("a");
-                            angular.forEach($scope.anchor, function (vals, index) {
-                                var temp1 = $("<div>");
-                                temp1.html(vals);
-                                var anchorValue = temp1.find("a").attr("href");
-                                var hrefValue = "'" + anchorValue + "'";
-                                $scope.temp.find("a").removeAttr("href");
-                                $scope.temp.find("a").attr("ng-click", "setNavigate(" + hrefValue + ")");
-                                /* I have to take two temp  variable because of in angular.forEach it was changing the value of temp to empty, same memory location issue.
-                                I have created a directive to compile prepared  href because ng-click will not be bind by ng-bind-html*/
-                            })
-                            tempObject.infoDesc = $scope.temp.html();
-                            var subDetailLength = Object.keys(subDetailArray).length;
-                            for (var i = 0; i < subDetailLength; i++) {
-                                if (tempObject.venueDetailId == subDetailArray[i].venueDetailId) {
-                                    subDetailsArray[i] = subDetailArray[i];
-                                }
-                            }
-                            var venueInfoSubDetail = { "venueInfoSubDetail": subDetailsArray };
-                            _.merge(tempObject, venueInfoSubDetail);
-                            $scope.venueInfoDetail.push(tempObject);
-                        }
-                        else if ("Getting home" == tempObject.infoTypeCategoryName) {
-                            $scope.gettingHomeDetail.push(tempObject);
-                        }
-                    } else {
-                        if ("Bar & Restaurants" == tempObject.infoTypeCategoryName) {
-                            $scope.setMarkerFields(tempObject)
-                            tempObject.icon = 'img/map_icons/bar.svg';
-                            $scope.barMarkers.push(tempObject);
-                            $scope.searchBarMarkers = $scope.barMarkers;
-                        }
-                    }
-                })
-                $ionicSlideBoxDelegate.update();
-                $scope.isMapMarkersSet = true;
-            }
+                    })
+                    $ionicSlideBoxDelegate.update();
+                    $scope.isMapMarkersSet = true;
+                }
+            }, 0);
         };
 
         function showFilteredMarkers(data) {
-            tempObject.icon = {
-                url: 'img/map_icons/FLASK_PIN_' + $scope.filterCost + '.svg',
-                scaledSize: { width: 60, height: 60 } //for scaling the svg images
-            }
-            if ($scope.filterCost == 9) {
-                if (tempObject.cost <= 9)
-                    $scope.parkingMarkers.push(tempObject);
-            } else {
-                if ((tempObject.cost >= $scope.filterCost) && (tempObject.cost < ($scope.filterCost + 10))) {
-                    $scope.parkingMarkers.push(tempObject);
+            $timeout(function () {
+                tempObject.icon = {
+                    url: 'img/map_icons/FLASK_PIN_' + $scope.filterCost + '.svg',
+                    scaledSize: { width: 60, height: 60 } //for scaling the svg images
                 }
-            }            
-            if (($ionicTabsDelegate.selectedIndex()) > 0) {
-                var value = parseInt("0");
-                $scope.filterMarker(value, value);
-            }
+                if ($scope.filterCost == 9) {
+                    if (tempObject.cost <= 9)
+                        $scope.parkingMarkers.push(tempObject);
+                } else {
+                    if ((tempObject.cost >= $scope.filterCost) && (tempObject.cost < ($scope.filterCost + 10))) {
+                        $scope.parkingMarkers.push(tempObject);
+                    }
+                }
+                if (($ionicTabsDelegate.selectedIndex()) > 0) {
+                    var value = parseInt("0");
+                    $scope.filterMarker(value, value);
+                }
+            }, 0);
         }
 
         $scope.slidePrevious1 = function (slide) {
@@ -1424,18 +1491,27 @@
         }
         initEventData();
     }
-    angular.module('flaskApp').controller('refreshMap', function ($scope, $controller, uiGmapIsReady, mapServices) {
+    angular.module('flaskApp').controller('refreshMap', function ($scope, $controller, uiGmapIsReady, mapServices, $timeout, $ionicLoading) {
+        console.log('inside refreshMap');
         uiGmapIsReady.promise()
             .then(function (instances) {
+                $timeout(function () {
                 $scope.refreshMap_maps = instances[0].map;    // can use std google.maps methods on this returned map object
                 $scope.refreshMap = function () {
                     mapServices.refreshMap();
+                    
                 };
+                }, 0);
+            },
+            function(err){
+                console.log(err);console.log('err map'+err);
+                $state.go("app.events");
             });
     });
 
     /* =========== This is the service which uses the $scope.map.control functions ============== */
     angular.module('flaskApp').service('mapServices', function () {
+        console.log('inside mapServices');
         this.map_control = function (scope_map_control) {
             var scope_map_controls = scope_map_control;
             this.refreshMap = function () {
@@ -1445,6 +1521,7 @@
         };
     });
     angular.module('flaskApp').directive('compile', ['$compile', function ($compile) {
+        console.log('inside directive compile');
         return function (scope, element, attrs) {
             scope.$watch(
                 function (scope) {

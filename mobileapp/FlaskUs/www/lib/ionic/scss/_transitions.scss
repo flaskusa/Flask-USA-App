@@ -19,7 +19,7 @@ $ios-transition-container-bg-color:    #000 !default;
 
   &[nav-view-direction="forward"],
   &[nav-view-direction="back"] {
-    background-color: $ios-transition-container-bg-color;
+    background-color: transparent;
   }
 
   [nav-view="active"],

@@ -1,4 +1,4 @@
-﻿<ion-view cache-view="false" class="customFooter">
+<ion-view cache-view="true" class="customFooter">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-buttons side="left">
             <button class="button button-icon button-clear ion-navicon" menu-toggle="left"></button>
@@ -57,12 +57,17 @@
                     There are no events.
                 </div>
             </div>
-            <div class="list">
-                <a class="item item-thumbnail-left item-icon-right eventList animate-in-secondary chat-item.ng-enter-stagger" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent">
+            <div class="card" ng-show="Event_loading">
+                <div class="item item-text-wrap">
+                    Loading events...
+                </div>
+            </div>
+            <div class="list" ng-show="Event_loading == false">
+                <a class="item item-thumbnail-left item-icon-right eventList chat-item.ng-enter-stagger" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent">
                     <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>
-                    <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}} | <span class="cityVenuCol ml0">{{getVenueNameForVenueId(data.venueId)}}</span></p>
+                    <p class="timeVenuCol">{{data.startTime | date:"h:mma"}} | {{data.venueName}} | <span class="cityVenuCol ml0">{{data.cityName}}</span></p>
                     <span class="badge span_icon" ng-if="!data.userEvent=='1' && show_login"><img src="img/flask_icons/arrow_left.svg"></span>
                     <span class="badge span_icon" ng-if="data.userEvent=='1' && show_login"><img class="star_icon_svg" src="img/flask_icons/ARROW_STAR.svg"></span>
                     <span class="badge span_icon" ng-if="!show_login"><img src="img/flask_icons/arrow_left.svg"></span> 

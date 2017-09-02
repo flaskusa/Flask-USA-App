@@ -1,5 +1,6 @@
 (function () {
     var app = angular.module('flaskApp'); 
+    //var errorList = ['Start'];
     app.run(function ($ionicPlatform, $rootScope, $ionicLoading, $ionicPopup, $cookies, $localStorage, $state, LoginService, $http, SERVER, UserService, $cordovaPush, $cordovaAppVersion, $timeout) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
@@ -11,6 +12,7 @@
             var currentPlatform = ionic.Platform.platform();
             //console.log(currentPlatform);
             var sendInfoData = {};
+
             var push = PushNotification.init({
                 "android": {
                     "senderID": "843562154399",
@@ -28,7 +30,7 @@
                     "badge": "true",
                     "sound": "true",
                     "vibrate": "true",
-                    "forceShow": "true",
+                    "forceShow": "true"
                 },
                 windows: {}
             });
@@ -145,8 +147,8 @@
                                     var userLoggedOut = $cookies.get("userLoggedOut");
                                     if (userLoggedOut != "true") {
                                         $state.go("app.user_navigation_menu");
-                                    } else {
-                                        $state.go("app.events");
+                                    }else{
+                                      $state.go("app.events");
                                     }
                                     var isColdStart =  $cookies.getObject('coldstart');
                                     if (sendInfoData.coldstart == true) {
@@ -164,6 +166,9 @@
                     });
                 }
             }
+
+            
+
 
             function goToInfotype() {
                 var currinfotype = $cookies.getObject('infoType');
@@ -220,18 +225,30 @@
                 })
             }
             $rootScope.$on('loading:show', function () {
-                $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' })
+                $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
             })
 
             $rootScope.$on('loading:hide', function () {
-                $ionicLoading.hide()
+                $ionicLoading.hide();
             })
              $rootScope.$on('catchAll:exception', function (event, data) { 
-                 $ionicLoading.hide()
+                 $ionicLoading.show();
                  // if exception occurs the  redirect ro events page
-                $state.go("app.events");
-            })
+                 //errorList.push(event.message);
+                $timeout(function () {
+                    $state.go("app.events");
+                    $ionicLoading.hide();
+                }, 500);
 
+                
+            })
+            $rootScope.$on('$stateChangeError', function (event, toState, toParams, fromState, fromParams, error) {
+                    alert(toState.name);
+            });
+
+            $rootScope.$on("$routeChangeError", function () {
+                alert("failed to change routes");
+            });
             //user_location_data.push({ code: "stored" });
             // Gelocation On ionic ready
             var geooobj={"latitude":"","longitude":"","timestamp":""};
