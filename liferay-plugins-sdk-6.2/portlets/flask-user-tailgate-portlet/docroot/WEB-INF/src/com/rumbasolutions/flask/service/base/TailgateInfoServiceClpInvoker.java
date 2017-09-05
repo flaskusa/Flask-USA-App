@@ -77,7 +77,7 @@ public class TailgateInfoServiceClpInvoker {
 
 		_methodName80 = "getTailgate";
 
-		_methodParameterTypes80 = new String[] { "int" };
+		_methodParameterTypes80 = new String[] { "long" };
 
 		_methodName81 = "copyTailgate";
 
@@ -172,7 +172,7 @@ public class TailgateInfoServiceClpInvoker {
 
 		if (_methodName80.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
-			return TailgateInfoServiceUtil.getTailgate(((Integer)arguments[0]).intValue());
+			return TailgateInfoServiceUtil.getTailgate(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName81.equals(name) &&

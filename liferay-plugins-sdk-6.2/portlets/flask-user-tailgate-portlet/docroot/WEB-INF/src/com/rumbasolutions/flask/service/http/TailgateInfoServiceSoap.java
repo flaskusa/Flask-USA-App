@@ -191,7 +191,7 @@ public class TailgateInfoServiceSoap {
 	}
 
 	public static com.rumbasolutions.flask.model.TailgateInfoSoap getTailgate(
-		int tailgateId) throws RemoteException {
+		long tailgateId) throws RemoteException {
 		try {
 			com.rumbasolutions.flask.model.TailgateInfo returnValue = TailgateInfoServiceUtil.getTailgate(tailgateId);
 

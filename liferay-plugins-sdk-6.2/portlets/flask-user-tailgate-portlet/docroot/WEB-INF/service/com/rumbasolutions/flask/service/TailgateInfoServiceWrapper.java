@@ -114,7 +114,7 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 
 	@Override
 	public com.rumbasolutions.flask.model.TailgateInfo getTailgate(
-		int tailgateId) {
+		long tailgateId) {
 		return _tailgateInfoService.getTailgate(tailgateId);
 	}
 

@@ -113,7 +113,7 @@ public class TailgateInfoServiceUtil {
 	}
 
 	public static com.rumbasolutions.flask.model.TailgateInfo getTailgate(
-		int tailgateId) {
+		long tailgateId) {
 		return getService().getTailgate(tailgateId);
 	}
 

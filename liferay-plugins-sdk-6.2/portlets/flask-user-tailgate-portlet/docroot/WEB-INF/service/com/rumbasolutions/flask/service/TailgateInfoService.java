@@ -103,7 +103,7 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.rumbasolutions.flask.model.TailgateInfo getTailgate(
-		int tailgateId);
+		long tailgateId);
 
 	public com.rumbasolutions.flask.model.TailgateInfo copyTailgate(
 		int tailgateId, com.liferay.portal.service.ServiceContext serviceContext);

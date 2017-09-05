@@ -153,6 +153,7 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 			List<TailgateUsers> tailgateMembers = TailgateUsersServiceUtil.getTailgateMembers(tailgateId);
 			TailgateMarker marker = TailgateMarkerServiceUtil.getTailgateMarker(tailgateId);
 			List<TailgateImages> tailgateImages = TailgateImagesServiceUtil.getTailgateImages(tailgateId, serviceContext);
+			TailgateInfo tailgateInfo = getTailgate(tailgateId);
 			JSONArray membersJson = JSONFactoryUtil.createJSONArray();
 			if(tailgateMembers.size()>0)
 				membersJson = JSONFactoryUtil.createJSONArray(JSONFactoryUtil.looseSerialize(tailgateMembers));
@@ -164,10 +165,14 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 				imagesJson = JSONFactoryUtil.createJSONArray(JSONFactoryUtil.looseSerialize(tailgateImages));
 			if(tailgateLogo != null)
 				tailgateLogoUrl = "c/document_library/get_file?uuid="+tailgateLogo.getUuid()+"&groupId="+tailgateLogo.getGroupId();
+			JSONObject tailgateJson = JSONFactoryUtil.createJSONObject();
+			if(tailgateInfo != null)
+				tailgateJson = JSONFactoryUtil.createJSONObject(JSONFactoryUtil.looseSerialize(tailgateInfo));
 			jsonObject.put("tailgateLogo", tailgateLogoUrl);
 			jsonObject.put("tailgateUsers", membersJson);
 			jsonObject.put("mapMarker", markerJson);
 			jsonObject.put("tailgateImages", imagesJson);
+			jsonObject.put("tailgateInfo", tailgateJson);
 		} catch (Exception e) {
 			LOGGER.error("Exception in get Tailgate Logo: " + e.getMessage());
 		}
@@ -251,7 +256,7 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 		return tailgateList;
 	}
 	
-	public TailgateInfo getTailgate(int tailgateId){
+	public TailgateInfo getTailgate(long tailgateId){
 		TailgateInfo userTailgate = null;
 		try{
 			userTailgate = TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId);

@@ -77,7 +77,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 
 		_methodName11 = "getTailgate";
 
-		_methodParameterTypes11 = new String[] { "int" };
+		_methodParameterTypes11 = new String[] { "long" };
 
 		_methodName12 = "copyTailgate";
 
@@ -386,7 +386,7 @@ public class TailgateInfoServiceClp implements TailgateInfoService {
 
 	@Override
 	public com.rumbasolutions.flask.model.TailgateInfo getTailgate(
-		int tailgateId) {
+		long tailgateId) {
 		Object returnObj = null;
 
 		try {
