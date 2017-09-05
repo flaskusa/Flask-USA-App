@@ -98,6 +98,22 @@ public class TailgateInfoServiceSoap {
 		}
 	}
 
+	public static java.lang.String getTailgetDetails(long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
+		try {
+			com.liferay.portal.kernel.json.JSONObject returnValue = TailgateInfoServiceUtil.getTailgetDetails(tailgateId,
+					serviceContext);
+
+			return returnValue.toString();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.kernel.repository.model.FileEntrySoap updateTailgateLogo(
 		long tailgateId, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext)

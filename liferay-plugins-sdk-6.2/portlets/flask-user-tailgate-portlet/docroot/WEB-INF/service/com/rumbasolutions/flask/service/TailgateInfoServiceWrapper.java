@@ -75,6 +75,13 @@ public class TailgateInfoServiceWrapper implements TailgateInfoService,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.json.JSONObject getTailgetDetails(
+		long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _tailgateInfoService.getTailgetDetails(tailgateId, serviceContext);
+	}
+
+	@Override
 	public com.liferay.portal.kernel.repository.model.FileEntry updateTailgateLogo(
 		long tailgateId, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext) {

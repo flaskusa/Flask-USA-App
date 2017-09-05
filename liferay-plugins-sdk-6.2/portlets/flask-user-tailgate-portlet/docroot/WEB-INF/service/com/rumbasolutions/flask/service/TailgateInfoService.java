@@ -77,6 +77,12 @@ public interface TailgateInfoService extends BaseService, InvokableService {
 	public com.liferay.portal.kernel.repository.model.FileEntry getTailgateLogo(
 		long tailgateId);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.json.JSONObject getTailgetDetails(
+		long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext);
+
 	public com.liferay.portal.kernel.repository.model.FileEntry updateTailgateLogo(
 		long tailgateId, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext);

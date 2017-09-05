@@ -80,6 +80,12 @@ public class TailgateInfoServiceUtil {
 		return getService().getTailgateLogo(tailgateId);
 	}
 
+	public static com.liferay.portal.kernel.json.JSONObject getTailgetDetails(
+		long tailgateId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return getService().getTailgetDetails(tailgateId, serviceContext);
+	}
+
 	public static com.liferay.portal.kernel.repository.model.FileEntry updateTailgateLogo(
 		long tailgateId, long logoId,
 		com.liferay.portal.service.ServiceContext serviceContext) {

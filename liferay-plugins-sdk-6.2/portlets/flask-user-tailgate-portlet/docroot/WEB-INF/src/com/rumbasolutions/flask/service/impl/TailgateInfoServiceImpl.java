@@ -22,6 +22,9 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.repository.model.FileEntry;
@@ -30,11 +33,13 @@ import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.rumbasolutions.flask.model.TailgateImages;
 import com.rumbasolutions.flask.model.TailgateInfo;
 import com.rumbasolutions.flask.model.TailgateMarker;
 import com.rumbasolutions.flask.model.TailgateUsers;
 import com.rumbasolutions.flask.model.impl.TailgateInfoImpl;
 import com.rumbasolutions.flask.model.impl.TailgateUsersImpl;
+import com.rumbasolutions.flask.service.TailgateImagesServiceUtil;
 import com.rumbasolutions.flask.service.TailgateInfoLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateMarkerLocalServiceUtil;
 import com.rumbasolutions.flask.service.TailgateMarkerServiceUtil;
@@ -130,12 +135,43 @@ public class TailgateInfoServiceImpl extends TailgateInfoServiceBaseImpl{
 		FileEntry fileEntry=null;	
 		try{	
 			TailgateInfo tailgateInfo = TailgateInfoLocalServiceUtil.getTailgateInfo(tailgateId);
-			if(tailgateInfo.getLogoId()>0)
+			if(tailgateInfo != null)
 				fileEntry = DLAppLocalServiceUtil.getFileEntry(tailgateInfo.getLogoId());
 		}catch(Exception e){
 			LOGGER.error("Exception in get Tailgate Logo: " + e.getMessage());
 		}
 		return fileEntry;
+	}
+	
+	@Override
+	@AccessControlled(guestAccessEnabled =true)
+	public JSONObject getTailgetDetails(long tailgateId, ServiceContext serviceContext){
+		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
+		try {
+			FileEntry tailgateLogo = getTailgateLogo(tailgateId);
+			String tailgateLogoUrl = "";
+			List<TailgateUsers> tailgateMembers = TailgateUsersServiceUtil.getTailgateMembers(tailgateId);
+			TailgateMarker marker = TailgateMarkerServiceUtil.getTailgateMarker(tailgateId);
+			List<TailgateImages> tailgateImages = TailgateImagesServiceUtil.getTailgateImages(tailgateId, serviceContext);
+			JSONArray membersJson = JSONFactoryUtil.createJSONArray();
+			if(tailgateMembers.size()>0)
+				membersJson = JSONFactoryUtil.createJSONArray(JSONFactoryUtil.looseSerialize(tailgateMembers));
+			JSONObject markerJson = JSONFactoryUtil.createJSONObject();
+			if(marker != null)
+				markerJson = JSONFactoryUtil.createJSONObject(JSONFactoryUtil.looseSerialize(marker));
+			JSONArray imagesJson = JSONFactoryUtil.createJSONArray();
+			if(tailgateImages.size()>0)
+				imagesJson = JSONFactoryUtil.createJSONArray(JSONFactoryUtil.looseSerialize(tailgateImages));
+			if(tailgateLogo != null)
+				tailgateLogoUrl = "c/document_library/get_file?uuid="+tailgateLogo.getUuid()+"&groupId="+tailgateLogo.getGroupId();
+			jsonObject.put("tailgateLogo", tailgateLogoUrl);
+			jsonObject.put("tailgateUsers", membersJson);
+			jsonObject.put("mapMarker", markerJson);
+			jsonObject.put("tailgateImages", imagesJson);
+		} catch (Exception e) {
+			LOGGER.error("Exception in get Tailgate Logo: " + e.getMessage());
+		}
+		return jsonObject;
 	}
 	
 	@Override
