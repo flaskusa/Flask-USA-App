@@ -17,10 +17,11 @@
          $scope.isUserLogin=function() {
              $scope.myTimeOut = $timeout(function () {
                  var userDetail = $cookies.getObject('CurrentUser');
-                 if (userDetail.data.userId > 0) {
-
-                     $scope.initialize();
-                 }
+                    if(userDetail != undefined){
+                        if (userDetail.data.userId > 0) {
+                            $scope.initialize();
+                        }
+                    }
                  $scope.isUserLogin();
                  if (userDetail.data.userId > 0)
                  $timeout.cancel($scope.myTimeOut);

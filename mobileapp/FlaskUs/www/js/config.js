@@ -69,15 +69,6 @@
             }
         })
 
-        .state('app.errors', {
-            url: '/error',
-            views: {
-                'menuContent': {
-                    templateUrl: "./templates/error.html"
-                }
-            }
-        })
-
         .state('app.venueList', {
             url: '/venueList',
             views: {

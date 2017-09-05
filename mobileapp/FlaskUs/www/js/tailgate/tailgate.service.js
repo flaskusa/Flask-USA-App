@@ -99,6 +99,8 @@
         var addTailgateAdminURL = 'flask-user-tailgate-portlet.tailgateusers/update-tailgate-user-role';
         var deleteTailgateSupplyItemURL = "/flask-user-tailgate-portlet.tailgatesupplyitem/delete-tailgate-supply-item";
         var addSupplyItemUrl = "/flask-user-tailgate-portlet.supplyitem/add-supply-item";
+        //get current tailgate all details
+        var getallDataofCurrentTailgateUrl = "/flask-user-tailgate-portlet.tailgateinfo/get-tailget-details";
 
         var tailgateServices = {
             getEvent: getEvent,
@@ -141,7 +143,8 @@
             deleteTailgateSupplyItem: deleteTailgateSupplyItem,
             addSupplyItem: addSupplyItem,
             addTailgateSupplyItem: addTailgateSupplyItem,
-            showStatusofAPIonFaliure: showStatusofAPIonFaliure
+            showStatusofAPIonFaliure: showStatusofAPIonFaliure,
+            getallDataofCurrentTailgate: getallDataofCurrentTailgate
         }
         function getallFilteredEvents(tailgateParams) {
             var deferred = $q.defer();
@@ -157,6 +160,27 @@
             });
             return deferred.promise;
         }
+
+        //Get all data of current tailgate
+        function getallDataofCurrentTailgate(tailgateId) {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + getallDataofCurrentTailgateUrl, {
+                params: { 'tailgateId': tailgateId }
+            })
+            .then(function (response) {
+                deferred.resolve(response.data);
+            }, function (reason) {
+                showStatusofAPIonFaliure(reason);
+                if (reason.statusText) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
+        }
+
+
         function deleteTailgateImageByImageId(imageId) {
             var deferred = $q.defer();
             $http.get(SERVER.url + deleteTailgateImageURL, {
