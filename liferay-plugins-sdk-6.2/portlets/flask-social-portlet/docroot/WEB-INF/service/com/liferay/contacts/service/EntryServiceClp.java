@@ -86,7 +86,9 @@ public class EntryServiceClp implements EntryService {
 
 		_methodName11 = "getMyFileEntry";
 
-		_methodParameterTypes11 = new String[] { "long" };
+		_methodParameterTypes11 = new String[] {
+				"long", "long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName12 = "getUserById";
 
@@ -469,14 +471,22 @@ public class EntryServiceClp implements EntryService {
 
 	@Override
 	public com.liferay.portal.kernel.repository.model.FileEntry getMyFileEntry(
-		long portraitId)
+		long portraitId, long companyId,
+		com.liferay.portal.service.ServiceContext serviceContext)
 		throws com.liferay.portal.kernel.exception.PortalException,
 			com.liferay.portal.kernel.exception.SystemException {
 		Object returnObj = null;
 
 		try {
 			returnObj = _invokableService.invokeMethod(_methodName11,
-					_methodParameterTypes11, new Object[] { portraitId });
+					_methodParameterTypes11,
+					new Object[] {
+						portraitId,
+						
+					companyId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);

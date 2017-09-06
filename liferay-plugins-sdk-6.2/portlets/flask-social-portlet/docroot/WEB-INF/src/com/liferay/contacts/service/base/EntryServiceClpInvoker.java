@@ -86,7 +86,9 @@ public class EntryServiceClpInvoker {
 
 		_methodName76 = "getMyFileEntry";
 
-		_methodParameterTypes76 = new String[] { "long" };
+		_methodParameterTypes76 = new String[] {
+				"long", "long", "com.liferay.portal.service.ServiceContext"
+			};
 
 		_methodName77 = "getUserById";
 
@@ -198,7 +200,9 @@ public class EntryServiceClpInvoker {
 
 		if (_methodName76.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
-			return EntryServiceUtil.getMyFileEntry(((Long)arguments[0]).longValue());
+			return EntryServiceUtil.getMyFileEntry(((Long)arguments[0]).longValue(),
+				((Long)arguments[1]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[2]);
 		}
 
 		if (_methodName77.equals(name) &&

@@ -182,7 +182,6 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		return entryLocalService.searchUsersAndContactsCount(companyId, serviceContext.getUserId(), keywords);
 	}
 	
-	
 	public JSONArray searchMyFriends(long companyId, String keywords, ServiceContext serviceContext){
 		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
 		try {
@@ -227,7 +226,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 							  jsonObject.put("lastMessageDateTime", lastMsgTime);
 						  }
 						  if(jsonObject.getLong("portraitId")>0){
-							  FileEntry fileEntry = getMyFileEntry(jsonObject.getLong("portraitId"));
+							  FileEntry fileEntry = getMyFileEntry(jsonObject.getLong("portraitId"), companyId, serviceContext);
 							  if(fileEntry != null){
 								  jsonObject.put("portraitUuid", fileEntry.getUuid());
 								  jsonObject.put("portraitGroupId", fileEntry.getGroupId());
@@ -270,7 +269,6 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 									if(!recp.getRead() && recp.getUserId()==serviceContext.getUserId())
 										unread++;
 								}
-								
 							}
 						}
 						jsonObject = ContactsUtil.getUserJSONObject(userId, user2);
@@ -281,7 +279,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 							  jsonObject.put("lastMessageDateTime", lastMsgTime);
 						  }
 						  if(jsonObject.getLong("portraitId")>0){
-							  FileEntry fileEntry = getMyFileEntry(jsonObject.getLong("portraitId"));
+							  FileEntry fileEntry = getMyFileEntry(jsonObject.getLong("portraitId"), companyId, serviceContext);
 							  if(fileEntry != null){
 								  jsonObject.put("portraitUuid", fileEntry.getUuid());
 								  jsonObject.put("portraitGroupId", fileEntry.getGroupId());
@@ -306,11 +304,11 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 	}
 	
 	@AccessControlled(guestAccessEnabled =true)
-	public FileEntry getMyFileEntry(long portraitId)throws PortalException, SystemException{
+	public FileEntry getMyFileEntry(long portraitId, long companyId, ServiceContext serviceContext)throws PortalException, SystemException{
 		FileEntry fileEntry=null;	
 		try{	
 				fileEntry = DLAppLocalServiceUtil.getFileEntry(portraitId);
-				ContactsUtil.setMyGuestViewPermission(fileEntry);
+				ContactsUtil.setMyRoleViewPermission(fileEntry, companyId, serviceContext);
 				
 			}catch(Exception ex){
 				

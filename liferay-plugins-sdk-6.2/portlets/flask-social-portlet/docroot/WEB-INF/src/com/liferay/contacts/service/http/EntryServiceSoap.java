@@ -190,9 +190,12 @@ public class EntryServiceSoap {
 	}
 
 	public static com.liferay.portal.kernel.repository.model.FileEntrySoap getMyFileEntry(
-		long portraitId) throws RemoteException {
+		long portraitId, long companyId,
+		com.liferay.portal.service.ServiceContext serviceContext)
+		throws RemoteException {
 		try {
-			com.liferay.portal.kernel.repository.model.FileEntry returnValue = EntryServiceUtil.getMyFileEntry(portraitId);
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = EntryServiceUtil.getMyFileEntry(portraitId,
+					companyId, serviceContext);
 
 			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModel(returnValue);
 		}

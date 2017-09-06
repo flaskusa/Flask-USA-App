@@ -70,7 +70,9 @@ import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.RegionServiceUtil;
 import com.liferay.portal.service.ResourceActionLocalServiceUtil;
 import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
+import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -546,36 +548,37 @@ public class ContactsUtil {
 		return platformAppRes.getPlatformApplicationArn();
 	}
 	
-	public static void setMyGuestViewPermission( FileEntry fileEntry) throws PortalException, SystemException{
+	public static void setMyRoleViewPermission( FileEntry fileEntry, long companyId, ServiceContext serviceContext) throws PortalException, SystemException{
 		ResourcePermission resourcePermission = null;
-		Role guestRole = getMyGuestRole();
-		try
-		   {
-			
-		    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(fileEntry.getCompanyId(),
-		    					DLFileEntry.class.getName(),
-		    					ResourceConstants.SCOPE_INDIVIDUAL, 
-		    					String.valueOf(fileEntry.getPrimaryKey()),
-		    					guestRole.getRoleId());
-		    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
-		    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
-		    {
-		      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
-		      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
-		    }
-		   }catch(Exception ex){
-			      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
-			      resourcePermission.setCompanyId(fileEntry.getCompanyId());
-			      resourcePermission.setName(DLFileEntry.class.getName());
-			      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
-			      resourcePermission.setPrimKey(String.valueOf(fileEntry.getPrimaryKey()));
-			      resourcePermission.setRoleId(guestRole.getRoleId());
-			    
-			      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
-			      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
-			      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
-			   
-		   }
+//		Role guestRole = getMyGuestRole();
+		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
+		for(Role role: roles){
+			try{
+			    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(fileEntry.getCompanyId(),
+			    					DLFileEntry.class.getName(),
+			    					ResourceConstants.SCOPE_INDIVIDUAL, 
+			    					String.valueOf(fileEntry.getPrimaryKey()),
+			    					role.getRoleId());
+			    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+			    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
+			    {
+			      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+			      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
+			    }
+			   }catch(Exception ex){
+				      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
+				      resourcePermission.setCompanyId(fileEntry.getCompanyId());
+				      resourcePermission.setName(DLFileEntry.class.getName());
+				      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+				      resourcePermission.setPrimKey(String.valueOf(fileEntry.getPrimaryKey()));
+				      resourcePermission.setRoleId(role.getRoleId());
+				    
+				      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+				      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+				      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+				   
+			   }
+		}
 	}
 	
 	public static Role getMyGuestRole(){
