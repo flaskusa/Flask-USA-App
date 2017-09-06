@@ -84,39 +84,43 @@ public class EntryServiceClpInvoker {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName76 = "getUserById";
+		_methodName76 = "getMyFileEntry";
 
-		_methodParameterTypes76 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes76 = new String[] { "long" };
 
-		_methodName77 = "addSocialRelation";
+		_methodName77 = "getUserById";
 
 		_methodParameterTypes77 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName78 = "requestSocialRelation";
+		_methodName78 = "addSocialRelation";
 
 		_methodParameterTypes78 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName79 = "getRequestsCount";
+		_methodName79 = "requestSocialRelation";
 
 		_methodParameterTypes79 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName81 = "deleteSocialRelation";
-
-		_methodParameterTypes81 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName83 = "getAllMyMessages";
+		_methodName80 = "getRequestsCount";
 
-		_methodParameterTypes83 = new String[] {
+		_methodParameterTypes80 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName82 = "deleteSocialRelation";
+
+		_methodParameterTypes82 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName84 = "getAllMyMessages";
+
+		_methodParameterTypes84 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -194,21 +198,18 @@ public class EntryServiceClpInvoker {
 
 		if (_methodName76.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes76, parameterTypes)) {
-			return EntryServiceUtil.getUserById(((Long)arguments[0]).longValue(),
-				(com.liferay.portal.service.ServiceContext)arguments[1]);
+			return EntryServiceUtil.getMyFileEntry(((Long)arguments[0]).longValue());
 		}
 
 		if (_methodName77.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes77, parameterTypes)) {
-			EntryServiceUtil.addSocialRelation(((Long)arguments[0]).longValue(),
+			return EntryServiceUtil.getUserById(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
-
-			return null;
 		}
 
 		if (_methodName78.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes78, parameterTypes)) {
-			EntryServiceUtil.requestSocialRelation(((Long)arguments[0]).longValue(),
+			EntryServiceUtil.addSocialRelation(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
@@ -216,19 +217,27 @@ public class EntryServiceClpInvoker {
 
 		if (_methodName79.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes79, parameterTypes)) {
+			EntryServiceUtil.requestSocialRelation(((Long)arguments[0]).longValue(),
+				(com.liferay.portal.service.ServiceContext)arguments[1]);
+
+			return null;
+		}
+
+		if (_methodName80.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes80, parameterTypes)) {
 			return EntryServiceUtil.getRequestsCount((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
-		if (_methodName81.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes81, parameterTypes)) {
+		if (_methodName82.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes82, parameterTypes)) {
 			EntryServiceUtil.deleteSocialRelation(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
 
 			return null;
 		}
 
-		if (_methodName83.equals(name) &&
-				Arrays.deepEquals(_methodParameterTypes83, parameterTypes)) {
+		if (_methodName84.equals(name) &&
+				Arrays.deepEquals(_methodParameterTypes84, parameterTypes)) {
 			return EntryServiceUtil.getAllMyMessages((com.liferay.portal.service.ServiceContext)arguments[0]);
 		}
 
@@ -263,8 +272,10 @@ public class EntryServiceClpInvoker {
 	private String[] _methodParameterTypes78;
 	private String _methodName79;
 	private String[] _methodParameterTypes79;
-	private String _methodName81;
-	private String[] _methodParameterTypes81;
-	private String _methodName83;
-	private String[] _methodParameterTypes83;
+	private String _methodName80;
+	private String[] _methodParameterTypes80;
+	private String _methodName82;
+	private String[] _methodParameterTypes82;
+	private String _methodName84;
+	private String[] _methodParameterTypes84;
 }

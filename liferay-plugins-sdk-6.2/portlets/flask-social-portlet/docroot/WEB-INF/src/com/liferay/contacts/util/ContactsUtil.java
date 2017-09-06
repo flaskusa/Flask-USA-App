@@ -31,14 +31,15 @@ import com.amazonaws.services.sns.model.CreatePlatformApplicationRequest;
 import com.amazonaws.services.sns.model.CreatePlatformApplicationResult;
 import com.amazonaws.services.sns.model.CreatePlatformEndpointRequest;
 import com.amazonaws.services.sns.model.CreatePlatformEndpointResult;
-import com.amazonaws.services.sns.model.DeletePlatformApplicationRequest;
 import com.amazonaws.services.sns.model.PlatformApplication;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.liferay.contacts.model.Entry;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.kernel.exception.PortalException;
 import com.liferay.portal.kernel.exception.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PropsUtil;
@@ -53,15 +54,26 @@ import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.model.ResourceAction;
+import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.ResourcePermission;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.RegionServiceUtil;
+import com.liferay.portal.service.ResourceActionLocalServiceUtil;
+import com.liferay.portal.service.ResourcePermissionLocalServiceUtil;
+import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.social.model.SocialRequestConstants;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceUtil;
 import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
@@ -72,6 +84,9 @@ import com.liferay.portlet.social.service.SocialRequestLocalServiceUtil;
  */
 public class ContactsUtil {
 
+	
+	public static Role _guestRole =null;
+	
 	public static JSONObject getEntryJSONObject(Entry entry) {
 		JSONObject jsonObject = JSONFactoryUtil.createJSONObject();
 
@@ -145,6 +160,7 @@ public class ContactsUtil {
 		jsonObject.put("portraitId", String.valueOf(user.getPortraitId()));
 		jsonObject.put("userId", String.valueOf(user.getUserId()));
 		jsonObject.put("uuid", user.getUuid());
+		jsonObject.put("groupId", user.getGroupId());
 
 		if (!SocialRelationLocalServiceUtil.hasRelation(
 				user.getUserId(), userId,
@@ -528,6 +544,53 @@ public class ContactsUtil {
 		CreatePlatformApplicationResult platformAppRes = client.createPlatformApplication(paltformAppReq);
 		System.out.println("Platform application arn: "+platformAppRes.getPlatformApplicationArn());
 		return platformAppRes.getPlatformApplicationArn();
+	}
+	
+	public static void setMyGuestViewPermission( FileEntry fileEntry) throws PortalException, SystemException{
+		ResourcePermission resourcePermission = null;
+		Role guestRole = getMyGuestRole();
+		try
+		   {
+			
+		    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(fileEntry.getCompanyId(),
+		    					DLFileEntry.class.getName(),
+		    					ResourceConstants.SCOPE_INDIVIDUAL, 
+		    					String.valueOf(fileEntry.getPrimaryKey()),
+		    					guestRole.getRoleId());
+		    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+		    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
+		    {
+		      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+		      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
+		    }
+		   }catch(Exception ex){
+			      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
+			      resourcePermission.setCompanyId(fileEntry.getCompanyId());
+			      resourcePermission.setName(DLFileEntry.class.getName());
+			      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+			      resourcePermission.setPrimKey(String.valueOf(fileEntry.getPrimaryKey()));
+			      resourcePermission.setRoleId(guestRole.getRoleId());
+			    
+			      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+			      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+			      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+			   
+		   }
+	}
+	
+	public static Role getMyGuestRole(){
+		try {
+			if(_guestRole == null){
+				_guestRole =RoleServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), RoleConstants.GUEST);
+			}
+		}
+		catch (PortalException e) {
+			e.printStackTrace();
+		}
+		catch (SystemException e) {
+			e.printStackTrace();
+		}
+		return _guestRole;
 	}
 
 }

@@ -123,6 +123,13 @@ public class EntryServiceUtil {
 		return getService().searchMyFriends(companyId, keywords, serviceContext);
 	}
 
+	public static com.liferay.portal.kernel.repository.model.FileEntry getMyFileEntry(
+		long portraitId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return getService().getMyFileEntry(portraitId);
+	}
+
 	public static com.liferay.portal.model.User getUserById(long userId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService().getUserById(userId, serviceContext);

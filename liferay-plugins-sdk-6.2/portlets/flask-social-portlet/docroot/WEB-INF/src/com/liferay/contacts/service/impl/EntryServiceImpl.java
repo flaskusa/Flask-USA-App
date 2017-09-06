@@ -55,14 +55,17 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.notifications.NotificationEvent;
 import com.liferay.portal.kernel.notifications.NotificationEventFactoryUtil;
 import com.liferay.portal.kernel.notifications.UserNotificationManagerUtil;
+import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserNotificationDeliveryConstants;
+import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserNotificationEventLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
 import com.liferay.portlet.social.NoSuchRelationException;
 import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.model.SocialRequest;
@@ -218,6 +221,27 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 							  jsonObject = ContactsUtil.getEntryJSONObject((Entry)contact);
 							  jsonObject.put("portraitId", ((User) contact).getPortraitId());
 						  }
+						  if(lastMsgTime.equals("")){
+							  jsonObject.put("lastMessageDateTime", "0000-00-00 00:00:00:0");
+						  }else{
+							  jsonObject.put("lastMessageDateTime", lastMsgTime);
+						  }
+						  if(jsonObject.getLong("portraitId")>0){
+							  FileEntry fileEntry = getMyFileEntry(jsonObject.getLong("portraitId"));
+							  if(fileEntry != null){
+								  jsonObject.put("portraitUuid", fileEntry.getUuid());
+								  jsonObject.put("portraitGroupId", fileEntry.getGroupId());
+							  }else{
+								  jsonObject.put("portraitUuid", "");
+								  jsonObject.put("portraitGroupId", 0);
+							  }
+							    
+						  }else{
+							  jsonObject.put("portraitUuid", "");
+							  jsonObject.put("portraitGroupId", 0);  
+						  }
+						  jsonObject.put("unreadMessageCount", unread);
+						  jsonArray.put(jsonObject);
 					  }
 				  }
 			  }else{
@@ -251,20 +275,47 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 						}
 						jsonObject = ContactsUtil.getUserJSONObject(userId, user2);
 						jsonObject.put("portraitId", getUserById(relObj.getUserId2(), serviceContext).getPortraitId());
+						if(lastMsgTime.equals("")){
+							  jsonObject.put("lastMessageDateTime", "0000-00-00 00:00:00:0");
+						  }else{
+							  jsonObject.put("lastMessageDateTime", lastMsgTime);
+						  }
+						  if(jsonObject.getLong("portraitId")>0){
+							  FileEntry fileEntry = getMyFileEntry(jsonObject.getLong("portraitId"));
+							  if(fileEntry != null){
+								  jsonObject.put("portraitUuid", fileEntry.getUuid());
+								  jsonObject.put("portraitGroupId", fileEntry.getGroupId());
+							  }else{
+								  jsonObject.put("portraitUuid", "");
+								  jsonObject.put("portraitGroupId", 0);
+							  }
+							    
+						  }else{
+							  jsonObject.put("portraitUuid", "");
+							  jsonObject.put("portraitGroupId", 0);  
+						  }
+						  jsonObject.put("unreadMessageCount", unread);
+						  jsonArray.put(jsonObject);
 					}
 			  }
-			  if(lastMsgTime.equals("")){
-				  jsonObject.put("lastMessageDateTime", "0000-00-00 00:00:00:0");
-			  }else{
-				  jsonObject.put("lastMessageDateTime", lastMsgTime);
-			  }
-			  jsonObject.put("unreadMessageCount", unread);
-			  jsonArray.put(jsonObject);
 		  }
 		} catch (Exception e) {
 			LOGGER.error("Exception in searchMyFriends: "+e.getMessage());
 		}
 		return jsonArray;
+	}
+	
+	@AccessControlled(guestAccessEnabled =true)
+	public FileEntry getMyFileEntry(long portraitId)throws PortalException, SystemException{
+		FileEntry fileEntry=null;	
+		try{	
+				fileEntry = DLAppLocalServiceUtil.getFileEntry(portraitId);
+				ContactsUtil.setMyGuestViewPermission(fileEntry);
+				
+			}catch(Exception ex){
+				
+			}
+		return fileEntry;
 	}
 	
 	@Override

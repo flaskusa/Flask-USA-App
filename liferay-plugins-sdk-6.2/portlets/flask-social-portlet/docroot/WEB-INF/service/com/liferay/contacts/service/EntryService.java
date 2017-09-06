@@ -110,6 +110,13 @@ public interface EntryService extends BaseService, InvokableService {
 		long companyId, java.lang.String keywords,
 		com.liferay.portal.service.ServiceContext serviceContext);
 
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
+	public com.liferay.portal.kernel.repository.model.FileEntry getMyFileEntry(
+		long portraitId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException;
+
 	@Transactional(propagation = Propagation.SUPPORTS, readOnly = true)
 	public com.liferay.portal.model.User getUserById(long userId,
 		com.liferay.portal.service.ServiceContext serviceContext);

@@ -189,6 +189,20 @@ public class EntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.kernel.repository.model.FileEntrySoap getMyFileEntry(
+		long portraitId) throws RemoteException {
+		try {
+			com.liferay.portal.kernel.repository.model.FileEntry returnValue = EntryServiceUtil.getMyFileEntry(portraitId);
+
+			return com.liferay.portal.kernel.repository.model.FileEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.User getUserById(long userId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {

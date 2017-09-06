@@ -84,39 +84,43 @@ public class EntryServiceClp implements EntryService {
 				"com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName11 = "getUserById";
+		_methodName11 = "getMyFileEntry";
 
-		_methodParameterTypes11 = new String[] {
-				"long", "com.liferay.portal.service.ServiceContext"
-			};
+		_methodParameterTypes11 = new String[] { "long" };
 
-		_methodName12 = "addSocialRelation";
+		_methodName12 = "getUserById";
 
 		_methodParameterTypes12 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName13 = "requestSocialRelation";
+		_methodName13 = "addSocialRelation";
 
 		_methodParameterTypes13 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName14 = "getRequestsCount";
+		_methodName14 = "requestSocialRelation";
 
 		_methodParameterTypes14 = new String[] {
-				"com.liferay.portal.service.ServiceContext"
-			};
-
-		_methodName15 = "deleteSocialRelation";
-
-		_methodParameterTypes15 = new String[] {
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName16 = "getAllMyMessages";
+		_methodName15 = "getRequestsCount";
+
+		_methodParameterTypes15 = new String[] {
+				"com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName16 = "deleteSocialRelation";
 
 		_methodParameterTypes16 = new String[] {
+				"long", "com.liferay.portal.service.ServiceContext"
+			};
+
+		_methodName17 = "getAllMyMessages";
+
+		_methodParameterTypes17 = new String[] {
 				"com.liferay.portal.service.ServiceContext"
 			};
 	}
@@ -464,13 +468,47 @@ public class EntryServiceClp implements EntryService {
 	}
 
 	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry getMyFileEntry(
+		long portraitId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName11,
+					_methodParameterTypes11, new Object[] { portraitId });
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
+				throw (com.liferay.portal.kernel.exception.PortalException)t;
+			}
+
+			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
+				throw (com.liferay.portal.kernel.exception.SystemException)t;
+			}
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return (com.liferay.portal.kernel.repository.model.FileEntry)ClpSerializer.translateOutput(returnObj);
+	}
+
+	@Override
 	public com.liferay.portal.model.User getUserById(long userId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName11,
-					_methodParameterTypes11,
+			returnObj = _invokableService.invokeMethod(_methodName12,
+					_methodParameterTypes12,
 					new Object[] {
 						userId,
 						
@@ -497,8 +535,8 @@ public class EntryServiceClp implements EntryService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
-			_invokableService.invokeMethod(_methodName12,
-				_methodParameterTypes12,
+			_invokableService.invokeMethod(_methodName13,
+				_methodParameterTypes13,
 				new Object[] {
 					receiverUserId,
 					
@@ -527,8 +565,8 @@ public class EntryServiceClp implements EntryService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
-			_invokableService.invokeMethod(_methodName13,
-				_methodParameterTypes13,
+			_invokableService.invokeMethod(_methodName14,
+				_methodParameterTypes14,
 				new Object[] {
 					receiverUserId,
 					
@@ -560,8 +598,8 @@ public class EntryServiceClp implements EntryService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName14,
-					_methodParameterTypes14,
+			returnObj = _invokableService.invokeMethod(_methodName15,
+					_methodParameterTypes15,
 					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -592,8 +630,8 @@ public class EntryServiceClp implements EntryService {
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws java.lang.Exception {
 		try {
-			_invokableService.invokeMethod(_methodName15,
-				_methodParameterTypes15,
+			_invokableService.invokeMethod(_methodName16,
+				_methodParameterTypes16,
 				new Object[] {
 					receiverUserId,
 					
@@ -623,8 +661,8 @@ public class EntryServiceClp implements EntryService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName16,
-					_methodParameterTypes16,
+			returnObj = _invokableService.invokeMethod(_methodName17,
+					_methodParameterTypes17,
 					new Object[] { ClpSerializer.translateInput(serviceContext) });
 		}
 		catch (Throwable t) {
@@ -675,4 +713,6 @@ public class EntryServiceClp implements EntryService {
 	private String[] _methodParameterTypes15;
 	private String _methodName16;
 	private String[] _methodParameterTypes16;
+	private String _methodName17;
+	private String[] _methodParameterTypes17;
 }

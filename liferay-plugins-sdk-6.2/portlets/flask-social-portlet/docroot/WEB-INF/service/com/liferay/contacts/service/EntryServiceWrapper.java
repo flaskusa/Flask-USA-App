@@ -124,6 +124,14 @@ public class EntryServiceWrapper implements EntryService,
 	}
 
 	@Override
+	public com.liferay.portal.kernel.repository.model.FileEntry getMyFileEntry(
+		long portraitId)
+		throws com.liferay.portal.kernel.exception.PortalException,
+			com.liferay.portal.kernel.exception.SystemException {
+		return _entryService.getMyFileEntry(portraitId);
+	}
+
+	@Override
 	public com.liferay.portal.model.User getUserById(long userId,
 		com.liferay.portal.service.ServiceContext serviceContext) {
 		return _entryService.getUserById(userId, serviceContext);
