@@ -36,9 +36,9 @@
         }
 
         $scope.goBack = function(){
-            $timeout(function () {
+            //$timeout(function () {
                 $ionicHistory.goBack();
-            }, 1000);
+            //}, 1000);
         }
         
        $scope.getRequestToConfirm=function(){
@@ -70,9 +70,7 @@
                 }else {
                     $scope.requestedUserDetail.push(response2);
                 }
-            },function(err) {
-
-            })
+            });
         }
 
         $scope.addSocialRelation=function(userId,index){
@@ -84,7 +82,7 @@
         $scope.deleteSocialRelation=function(userId,index){
             FriendsNotificationService.deleteRequest(userId).then(function(response){
                 $scope.requestedUserDetail.splice(index,1);
-            })
+            });
         }
     }
 })();

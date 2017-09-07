@@ -58,8 +58,11 @@
             $scope.newChatDataUnsorted = [];
             $scope.newChatData = [];
             FriendsNotificationService.getallFriendsandGroupWithMessages().then(function (response) {
-                $scope.allChatMessages = " Loading.... ";
+                
                 $scope.newChatData = response;
+                if(Object.keys(response).length==0){
+                    $scope.allChatMessages = "No Messages Available.";
+                }
                 angular.forEach(response, function (value, key) {
                     if (value.portraitId != 0) {
                         $scope.getUserProfile(value);                        

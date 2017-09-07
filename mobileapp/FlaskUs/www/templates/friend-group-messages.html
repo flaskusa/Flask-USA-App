@@ -10,7 +10,6 @@
         </ion-nav-buttons>
     </ion-nav-bar>
             <ion-content class="has-header">
-                <div ng-if="newChatData.length==0" class="item" style="font-weight:normal;">{{allChatMessages}}</div>
                 <ion-scroll style="height: 99%;">
                     <ion-list>
                         <ion-item ng-repeat="data in newChatData track by $index" class="row-no-padding animate-in-secondary" padding="false" ng-click="getMsgType(data,data.isUser)" ng-if="data.lastMessageDateTime!='0000-00-00 00:00:00:0'">
@@ -37,7 +36,7 @@
                             </a>
                             <ion-option-button class="icon ion-trash-a" ng-click="deleteConversation(data.id,data.isUser)"></ion-option-button>
                         </ion-item>
-                        <div class="item" ng-show="newChatDataUnsorted.length==0">No Messages Available.</div>
+                        <div class="item" ng-show="newChatDataUnsorted.length==0">{{allChatMessages}}</div>
                     </ion-list>
               </ion-scroll>
 </ion-content>

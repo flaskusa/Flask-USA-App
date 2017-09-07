@@ -43,7 +43,7 @@
           <ion-list >
               <a class="item" ng-if="groups.length == 0 && addingInGroup==true"> There are no groups to add. </a>
               <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> There are no groups. </a>
-              <ion-item class=" item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" ng-repeat="group in groups | orderBy:'groupName'" style="padding: 0px" ng-init="group.showDivByIndex=false">
+              <ion-item class=" item-remove-animate chat-item.ng-enter-stagger" ng-repeat="group in groups | orderBy:'groupName'" style="padding: 0px" ng-init="group.showDivByIndex=false">
                   <div ng-if="group.showDivByIndex==true" style="padding-top: 10px">
                       user Added
                   </div>

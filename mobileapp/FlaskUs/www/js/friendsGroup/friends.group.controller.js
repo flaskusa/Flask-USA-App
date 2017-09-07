@@ -182,7 +182,7 @@
                                 }                                
                             }
                             else{
-                                $flaskUtil.alert("failed to delete");
+                                $flaskUtil.alert("Failed to delete");
                             }
                         });
                     } else {
@@ -259,10 +259,12 @@
             $scope.modal.hide();
             $scope.resetPopup();
         };
+
         $scope.resetPopup = function() {
             $scope.endIndex = 9;
             $scope.searchContact.searchtext =  "";
         };
+        
         $scope.memberNotAdded=function(userId){
             $scope.memberToAddInGroup=[];
             var counter=-1;
@@ -284,34 +286,28 @@
             angular.forEach($localStorage["myFriendDetail"],function(value,key){
                 if(value.friendProfilePicUrl!=undefined){
                     if(value.userId==memberDetail.userId){
-                        memberDetail.friendProfilePicUrl=value.friendProfilePicUrl
-
+                        memberDetail.friendProfilePicUrl=value.friendProfilePicUrl;
                     }
                 }
-
-
-
             });
             $scope.memberToAddInGroup.push(memberDetail)
-
         }
+
         $scope.addUserToGroup=function(data){
             GroupService.addUserToGroup($scope.groupId,data.emailAddress,data.userId,data.fullName,0).then(function(response){
                 var userId=response.userId;
                 $scope.memberNotAdded(userId);
             });
-
         }
 
         $scope.finishAddingMember=function(){
             $scope.modal.hide();
             $state.go('app.my_friends_tab.friendsGroup');
         }
+
         $scope.cancel=function(){
             $state.go('app.my_friends_tab.friendsGroup');
         }
-
-
     }
 
 })();
