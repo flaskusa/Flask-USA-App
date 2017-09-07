@@ -12,7 +12,7 @@
       $scope.startIndex = 0;
       $scope.endIndex = 9;
       $scope.noFriendAdded = false;
-      $scope.shoeEmptyMessage=false;
+      $scope.showEmptyMessage=false;
       $scope.searchBox = {show:false};
       $scope.searchContact = { "searchtext": "" };
       $scope.noFriendMsg = "Loading ....";
@@ -42,8 +42,7 @@
               scope: $scope
           }).then(function (modal) {
               $scope.modal = modal;
-          });
-         
+          });         
       }; 
 
       $scope.showInviteFriendPopup = function(){
@@ -123,60 +122,40 @@
                 }
             });
 
-        };
-      $scope.getMyFriends = function(searchText) {
-          $scope.moreDataCanBeLoaded = true;
-          FriendsService.getMyFriends(searchText).then(function (response) {
-              $scope.searchedFriend = response.data;
-              $scope.shoeEmptyMessage=true;
-              if(response != undefined && Array.isArray(response))   {
-                  if($localStorage["myFriendDetail"].length==response.length){
-                      $scope.myFriends = $localStorage["myFriendDetail"];
-                  }
-                  else{
-                  angular.forEach(response,function(value,key){
-                      if(value.portraitId>0) {
-                          $scope.getUserProfile(value);
-                      }else{
-                          $scope.myFriends.push(value);
-                          if(userExistInLocal(value)==false){
-                              $localStorage["myFriendDetail"].push(value)
-                          }
-                      }
-                  })
+        }
 
-                $scope.searchBox.show  = false;
-                      //  $scope.noFriendAdded = $scope.myFriends.length == 0;
-                $rootScope.$broadcast('loading:hide');
-              }}else{
-                  $flaskUtil.alert("Failed to load friends List");
-                  $scope.searchBox.show = false;
-                  $scope.noFriendMsg = "There are no friends.";
-                  $rootScope.$broadcast('loading:hide');
-              }
-              $rootScope.$broadcast('loading:hide');
-          });
-         
-      };
-        $scope.getUserProfile = function(UserDetail) {
-            UserService.getUserProfile(UserDetail.userId).then(function(res) {
-                if(res.data.fileEntryId != undefined) {
-                    UserDetail.friendProfilePicUrl = $scope.profileUrl + res.data.uuid + "&groupId=" + res.data.groupId;
-                    $scope.myFriends.push(UserDetail);
-
-                    if(userExistInLocal(UserDetail)==false) {
-                        $localStorage["myFriendDetail"].push(UserDetail);
-                    }
-                }else{
-                    $scope.myFriends.push(UserDetail);
-
-                    if(userExistInLocal(UserDetail)==false) {
-                        $localStorage["myFriendDetail"].push(UserDetail);
-                    }
+        $scope.getMyFriends = function(searchText) {
+            $scope.moreDataCanBeLoaded = true;
+            $scope.myFriends =[];
+            FriendsService.getMyFriends(searchText).then(function (response) {
+                $scope.showEmptyMessage=true;
+                if(response != undefined && Array.isArray(response) && response.length !=0)   {
+                    angular.forEach(response,function(value,key){
+                        if(value.portraitId) {
+                            value.friendProfilePicUrl = $scope.profileUrl + value.portraitUuid + "&groupId=" + value.portraitGroupId;
+                        }else{
+                            value.friendProfilePicUrl = "img/default-profilepic-copy.png";
+                        }
+                        $scope.myFriends.push(value);
+                        if(userExistInLocal(value)==false){
+                          $localStorage["myFriendDetail"].push(value);
+                        }
+                    })
+                    $scope.searchBox.show  = false;
+                    //  $scope.noFriendAdded = $scope.myFriends.length == 0;
+                    $rootScope.$broadcast('loading:hide');
+              }else{
+                    //$flaskUtil.alert("Failed to load friends List");
+                    $scope.searchBox.show = false;
+                    $scope.noFriendMsg = "There are no friends.";
+                    $rootScope.$broadcast('loading:hide');
                 }
-            },function(err) {
-            })
-        };
+                $scope.searchBox.show  = false;
+                $rootScope.$broadcast('loading:hide');
+            });
+           
+        }
+
         function userExistInLocal(userDetail){
             var exist=false;
             angular.forEach($localStorage["myFriendDetail"],function(value,key){
@@ -187,38 +166,39 @@
             return exist;
         }
 
-      $scope.getAllfilteredFrieds = function(searchText) {
-          $scope.getMyFriends (searchText);
-      };
+        $scope.getAllfilteredFrieds = function(searchText) {
+            $scope.getMyFriends (searchText);
+        }
 
-      $scope.filterUserContact = function(searchText) {
-          $scope.endIndex = 9;
-          $scope.searchUserContact(searchText,$scope.startIndex,$scope.endIndex);
-      };
+        $scope.filterUserContact = function(searchText) {
+            $scope.endIndex = 9;
+            $scope.searchUserContact(searchText,$scope.startIndex,$scope.endIndex);
+        }
 
-      $scope.getMoreUserContact = function(searchText)  {
-          $scope.endIndex +=10;
-          $scope.searchUserContact(searchText, $scope.startIndex, $scope.endIndex);
-      }
-      $scope.searchUserContact = function(searchText, startIndex, endIndex) {
-           FriendsService.searchUserContact( $scope.searchContact.searchtext, $scope.startIndex, $scope.endIndex).then(function(response){
-                if(response != undefined && Array.isArray(response))   {
-                        $scope.userContactList = response;
-                        if($scope.userContactList.length<10){
-                            $ionicScrollDelegate.scrollTop();
-                        }
-                        if($scope.userContactList.length < $scope.endIndex-1) {
+        $scope.getMoreUserContact = function(searchText)  {
+            $scope.endIndex +=10;
+            $scope.searchUserContact(searchText, $scope.startIndex, $scope.endIndex);
+        }
 
-                            $scope.moreDataCanBeLoaded = false;
-                        }else{
-                            $scope.moreDataCanBeLoaded = true;
-                        }
-                        $scope.$broadcast('scroll.infiniteScrollComplete');
-              }else{
-                  $flaskUtil.alert("Failed to load contact List");
-              }   
-           });
-      };
+        $scope.searchUserContact = function(searchText, startIndex, endIndex) {
+             FriendsService.searchUserContact( $scope.searchContact.searchtext, $scope.startIndex, $scope.endIndex).then(function(response){
+                  if(response != undefined && Array.isArray(response))   {
+                          $scope.userContactList = response;
+                          if($scope.userContactList.length<10){
+                              $ionicScrollDelegate.scrollTop();
+                          }
+                          if($scope.userContactList.length < $scope.endIndex-1) {
+
+                              $scope.moreDataCanBeLoaded = false;
+                          }else{
+                              $scope.moreDataCanBeLoaded = true;
+                          }
+                          $scope.$broadcast('scroll.infiniteScrollComplete');
+                }else{
+                    $flaskUtil.alert("Failed to load contact List");
+                }   
+             });
+        };
 
         $scope.unBlockUser = function(userObject) {
             FriendsService.unBlockUser(userObject.userId).then(function(response){
@@ -253,8 +233,9 @@
         }
 
         //search friend function
-        $scope.getSearchedFriends = function (searchText) {
+        $scope.getSearchedFriends = function (searchText) {           
             FriendsService.getMyFriends(searchText).then(function (response) {
+              $scope.myFriends =[];
                 $scope.myFriends = response;
             });
         }

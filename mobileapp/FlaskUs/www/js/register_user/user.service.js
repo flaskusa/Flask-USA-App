@@ -209,7 +209,6 @@
                 $state.go("app.events");
             }
         }
-
         return userServices;
     }
 })();

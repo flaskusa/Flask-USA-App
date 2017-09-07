@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('FriendsGroupCtrl', FriendsGroupCtrl);
 
-    FriendsGroupCtrl.$inject = ['$scope', 'GroupService', '$cookies', '$state', '$flaskUtil', '$ionicPopup', '$stateParams', 'FriendsService', '$timeout', '$ionicLoading'];
+    FriendsGroupCtrl.$inject = ['$scope', 'GroupService', '$cookies', '$state', '$flaskUtil', '$ionicPopup', '$stateParams', 'FriendsService', '$timeout', '$ionicLoading','$filter'];
 
     /* @ngInject */
-    function FriendsGroupCtrl($scope, GroupService, $cookies, $state, $flaskUtil, $ionicPopup, $stateParams, FriendsService, $timeout, $ionicLoading) {
+    function FriendsGroupCtrl($scope, GroupService, $cookies, $state, $flaskUtil, $ionicPopup, $stateParams, FriendsService, $timeout, $ionicLoading,$filter) {
         $scope.initialize = function() {
             getAllGroups();
         };
@@ -16,6 +16,7 @@
         $scope.allMember=[];
         $scope.memberToAddInGroup=[];
         $scope.groups = [];
+        $scope.tempGroups = [];
         $scope.groups=GroupService.group;
         $scope.searchBox={showBox:false};
         var userDetail=$cookies.getObject('CurrentUser');
@@ -63,14 +64,14 @@
             confirmPopup.then(function(res) {
                 if(res) {
                     GroupService.leaveGroup(groupId,userId).then(function(response){
-                        if (response) {
+                        if (response==true) {
                             for (var i = 0; i < $scope.groups.length; i++) {
                                 if ($scope.groups[i].groupId == groupId) {
                                     $scope.groups.splice(i, 1);
                                 }
                             }
                         }else{
-                            $flaskUtil.alert("failed to leave");
+                            $flaskUtil.alert("Failed to leave the group");
                         }
                     });
                 } else {
@@ -108,9 +109,7 @@
         };
 
         $scope.goBack = function () {
-            $timeout(function () {
                 $state.go("app.user_navigation_menu");
-            }, 1000);
         }
         Array.prototype.clean = function(deleteValue) {
             for (var i = 0; i < this.length; i++) {
@@ -153,6 +152,7 @@
                     }
                     else{
                         $scope.groups=response;
+                        $scope.tempGroups = response; //adding data to temp group for searching
                     }
                 }
 
@@ -179,8 +179,7 @@
                                     if ($scope.groups[i].groupId == groupId) {
                                         $scope.groups.splice(i,1);
                                     }
-                                }
-                                
+                                }                                
                             }
                             else{
                                 $flaskUtil.alert("failed to delete");
@@ -190,6 +189,15 @@
                     }
                 });
 
+        }
+        //search on list
+        $scope.searchFriendsGroup=function(searchText){
+            if(searchText!=""){
+                $scope.groups = $filter('filter')($scope.tempGroups, { groupName: searchText });
+            }else{
+                $scope.groups=$scope.tempGroups;
+            }            
+            $scope.searchBox={showBox:false};
         }
 
         $scope.editGroup=function(data){
@@ -302,6 +310,8 @@
         $scope.cancel=function(){
             $state.go('app.my_friends_tab.friendsGroup');
         }
+
+
     }
 
 })();

@@ -1,7 +1,9 @@
 ﻿<ion-view cache-view="false" view-title="MY FRIENDS" class="my-view" ng-init="initialize()">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-buttons side="left">
-            <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="goBack();"></button>
+            <button class="button back-button buttons button-clear header-item" ng-click="goBack()">
+                <i class="icon ion-ios-arrow-back"></i> 
+            </button>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-buttons side="right">
@@ -15,12 +17,12 @@
         </div>
         <div class="row">
             <div class="col col-center searchrow">
-                <button class="button button-clear button_search" ng-click="getSearchedFriends(searchBox.searchText)">SEARCH</button>
+                <button class="button button-clear button_search" ng-click="getMyFriends(searchBox.searchText)">SEARCH</button>
             </div>
         </div>
     </div>
     <ion-content overflow-scroll="false">
-        <a class="subheaderLinkStyle" ng-click="showInviteFriendPopup()">
+        <a class="subheaderLinkStyle" ng-click="showInviteFriendPopup();">
             <div class="row item">
                 <div class="eventHeading2 eventheadeingStyleIonContent">
                     <img src="img/flask_icons/add_new.svg" class="FlaskionIcons">
@@ -36,11 +38,10 @@
         <ion-list>
             <ion-item ng-repeat="data in myFriends | orderBy:'fullName'" class="row-no-padding item-remove-animate animate-in-secondary chat-item.ng-enter-stagger" padding="false"ng-click="groupMemberDetail(data)">
                 <a class="row-no-padding" style="text-decoration: none">
-                    <!--href="#/app/my_friendDetail/{{data.userId}}"-->
-                    <div class="col col-20" ng-if="data.friendProfilePicUrl==undefined">
-                        <img src = "img/default-profilepic-copy.png"class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
+                    <div class="col col-20" ng-if="data.portraitId== 0">
+                        <img ng-src = "{{data.friendProfilePicUrl}}" onerror="this.src = 'img/default-profilepic-copy.png';" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
                     </div>
-                    <div class="col col-20" ng-if="data.friendProfilePicUrl!=undefined">
+                    <div class="col col-20" ng-if="data.portraitId!= 0">
                         <img ng-src = "{{data.friendProfilePicUrl}}" onerror="this.src = 'img/default-profilepic-copy.png';" class="friendIcon" style="width: 56px;max-width: 65px;height: 56px;margin-top: -5px;border-radius: 50%;">
                     </div>
                     <div class="col col-70"style="padding-top: 16px">
@@ -48,14 +49,10 @@
                        </div>
                     <span class="badge span_icon ext-top span_icon_extraright"><img src="img/flask_icons/arrow_left.svg" ></span>
                 </a>
-
                 <ion-option-button  class="icon ion-trash-a"ng-click="unFriend(data.userId)"></ion-option-button>
                 <ion-option-button class="icon ion-no-smoking" ng-click="blockFriend(data.userId)"></ion-option-button>
-
             </ion-item>
-            <a class="item" ng-if="myFriends.length == 0 && shoeEmptyMessage==true">{{noFriendMsg}} </a>
-
-
+            <a class="item" ng-if="myFriends.length == 0 && showEmptyMessage==true">{{noFriendMsg}} </a>
         </ion-list>
 
            <!--     <ion-list>
@@ -75,7 +72,9 @@
             <ion-modal-view >
                 <ion-nav-bar class="bar-dark" align-title="center">
                     <ion-nav-buttons side="left">
-                        <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="closeInviteFriendPopup();"></button>
+                        <button class="button back-button buttons button-clear header-item" ng-click="closeInviteFriendPopup()()">
+                            <i class="icon ion-ios-arrow-back"></i> 
+                        </button>
                     </ion-nav-buttons>
                     <ion-nav-title>
                         <a href="" style="text-decoration:none;">INVITE FRIEND</a>

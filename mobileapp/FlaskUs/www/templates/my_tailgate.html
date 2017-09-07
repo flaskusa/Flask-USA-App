@@ -1,7 +1,9 @@
 ﻿<ion-view cache-view="false" view-title="MY TAILGATE">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-buttons side="left">
-            <button class="button button-icon button-clear ion-android-arrow-back back_button_css" ng-click="goBack();"></button>
+            <button class="button back-button buttons button-clear header-item" ng-click="goBack()">
+                <i class="icon ion-ios-arrow-back"></i> 
+            </button>
         </ion-nav-buttons>
     </ion-nav-bar>
     <ion-content overflow-scroll="false">
@@ -14,8 +16,13 @@
             </div>
         </a>
         <ion-list show-delete="false" can-swipe="true">
+            <div class="card" ng-show="allTailgate.length==0">
+                <div class="item item-text-wrap">
+                    There are no tailgate added.
+                </div>
+            </div>
             <ion-item class="myList item-remove-animate animate-in-secondary chat-item ng-enter-stagger bounceInLeft" href="#/app/my_tailgateDetails/my_tailgate_event_details/{{data.tailgateId}}"
-                ng-repeat="data in allTailgate">
+                ng-repeat="data in allTailgate" ng-show="allTailgate.length!=0">
                 <div class="row no-padding">
                     <div class="col col-15" style="bottom:0px !important;">
                         <img ng-src="img/FlaskRed.png"  class="list-thumbnail listImages1" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" ng-if="data.logoId == 0"/>

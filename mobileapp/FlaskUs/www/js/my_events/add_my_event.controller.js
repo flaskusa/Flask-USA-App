@@ -24,6 +24,7 @@
 
         $scope.myEvent = [];
         $scope.myFilteredEvent = [];
+        $scope.tempMyFilteredEvents = [];
         showEvents();
         function showEvents() {
             myEventService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
@@ -41,6 +42,8 @@
                         $scope.Add_Event_Error = false;
                     }
                 }
+                $timeout(function () { $scope.tempMyFilteredEvents =$scope.myFilteredEvent; }, 3000);
+                
             });
         }
         
@@ -58,6 +61,16 @@
                 //    $timeout(function () { $scope.AddedSuccess = false; }, 3000);
                 $ionicLoading.show({ template: 'Event added successfully !', noBackdrop: false, duration: 2000 });
             });
+        }
+
+        $scope.searchMyEvents = function(searchText){
+            if(searchText!=""){
+                $scope.myFilteredEvent = $filter('filter')($scope.tempMyFilteredEvents, { eventName: searchText });
+            }else{
+                $scope.myFilteredEvent = $scope.tempMyFilteredEvents;
+            }  
+
+            $scope.searchBox={showBox:false};
         }
     }
 })();

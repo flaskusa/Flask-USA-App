@@ -9,10 +9,15 @@
             <button class="button button-icon button-clear ion-android-search" ng-click="searchBox.showBox = !searchBox.showBox"></button>
         </ion-nav-buttons>
     </ion-nav-bar>
-    <div class="bar bar-subheader BgCol1" ng-show="searchBox.showBox">
+    <div class="bar bar-subheader srchBgCol" ng-show="searchBox.showBox">
         <div class="row searchrow">
-            <div class="col col-33 col-center searchrow">
-                <input type="text" placeholder="Search event..." class="searchboxArea" id="zipCode" name="zipCode" ng-model="eventList.zipcode" ng-blur="getAllfilteredEvents(eventList.zipcode)" />
+            <div class="col col-100 col-center searchrow">
+                <input type="text" placeholder="Search event..." class="searchboxArea" ng-model="eventList.searchString" autofocus/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col col-center searchrow">
+                <button class="button button-clear button_search" ng-click="searchMyEvents(eventList.searchString);">SEARCH</button>
             </div>
         </div>
     </div>
@@ -32,7 +37,7 @@
                 </div>
             </div>
             <div class="list">
-                <a class="item item-thumbnail-left item-icon-right eventList item-remove-animate" ng-repeat="data in myFilteredEvent | filter: eventList.searchString">
+                <a class="item item-thumbnail-left item-icon-right eventList item-remove-animate" ng-repeat="data in myFilteredEvent">
                     <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
                     <p class="dateCol">{{data.eventDate | date:'EEEE, MMMM dd, yyyy'}}</p>

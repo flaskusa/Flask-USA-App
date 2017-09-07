@@ -13,7 +13,7 @@
         $scope.allEvents = [];
         $scope.localstorageData = {};
         $scope.showAddv=false;
-        $scope.Event_loading = true;
+        $scope.eventList_data = "Loading Events....";
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         var DEFAULT_ZIPCODE = 48226; /*Detroit Zip Code*/
         var currentDate = new Date();/*Today's Date*/
@@ -69,21 +69,20 @@
 
         function get_event_list() {
             EventsService.getAllEvents($scope.eventTypeIds, $scope.startDate, $scope.endDate, $scope.searchString, $scope.latitude, $scope.longitude).then(function (respData) {
-                                                                                                                                            //console.log(respData);
+                //console.log(respData);
                 console.log('inside get_event_list');
                     $scope.allEvent = respData.data.Events;
                     for (var i = 0; i < $scope.allEvent.length; i++) {
                         $scope.vId.push($scope.allEvent[i].venueId);
                         $scope.allEventId.push($scope.allEvent[i].eventId)
                     }
-                    $scope.Event_loading = false;
                     $cookies.put("AllEventId", $scope.allEventId);
                     $scope.showAddv = true;
                     if ($scope.allEvent.length == 0 || $scope.allEvent.length == undefined) {
+                        $scope.eventList_data = "No Events Available";
                         $scope.Event_Error = true;
                     } else {
                         $scope.Event_Error = false;
-
                     }
 
                     if (respData.data.exception) {
@@ -108,6 +107,7 @@
                 $cookies.put("AllEventId",$scope.allEventId);
                 $scope.showAddv=true;
                 if ($scope.allEvent && $scope.allEvent.length==0) {
+                    $scope.eventList_data = "No Events Available";
                     $scope.Event_Error = true;
                 } else {
                     $scope.Event_Error = false;
@@ -139,6 +139,7 @@
                         $timeout(function () {
                             $scope.allEvent = resp.data.Events;
                             if ($scope.allEvent.length == 0) {
+                                $scope.eventList_data = "No Events Available";
                                 $scope.Event_Error = true;
                             } else {
                                 $scope.Event_Error = false;
@@ -162,6 +163,7 @@
                 $timeout(function () {
                     $scope.allEvent = resp.data.Events;
                     if ($scope.allEvent.length == 0) {
+                        $scope.eventList_data = "No Events Available";
                         $scope.Event_Error = true;
                     } else {
                         $scope.Event_Error = false;

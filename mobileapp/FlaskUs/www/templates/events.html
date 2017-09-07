@@ -54,15 +54,10 @@
             </div>
             <div class="card" ng-show="Event_Error">
                 <div class="item item-text-wrap">
-                    There are no events.
+                    {{eventList_data}}
                 </div>
             </div>
-            <div class="card" ng-show="Event_loading">
-                <div class="item item-text-wrap">
-                    Loading events...
-                </div>
-            </div>
-            <div class="list" ng-show="Event_loading == false">
+            <div class="list" ng-show="Event_Error == false">
                 <a class="item item-thumbnail-left item-icon-right eventList chat-item.ng-enter-stagger" href="#/app/pre_post_game/{{data.eventName}}/{{data.eventId}}/{{data.venueId}}" ng-repeat="data in allEvent">
                     <img ng-src="{{imgUrl}}{{data.eventImageUUID}}&groupId={{data.eventImageGroupId}}" class="list-thumbnail listImages" alt="Image not found" onError="this.src = 'img/FlaskRed.png';" />
                     <h2 class="eventNameCol">{{data.eventName}}</h2>
@@ -79,6 +74,5 @@
 
     <ion-footer-bar class=" bar bar-dark bar-footer bar-assertive customBarPadding">
         <div ng-include="'templates/advertisement.html'"class="footer-img" ng-if="showAddv==true"></div>
-
     </ion-footer-bar>
 </ion-view>

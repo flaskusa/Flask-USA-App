@@ -21,13 +21,11 @@
                         if (userDetail.data.userId > 0) {
                             $scope.initialize();
                         }
+                        $scope.isUserLogin();
+                        if (userDetail.data.userId > 0)
+                        $timeout.cancel($scope.myTimeOut);
                     }
-                 $scope.isUserLogin();
-                 if (userDetail.data.userId > 0)
-                 $timeout.cancel($scope.myTimeOut);
-
              }, 1000);
-
          }
 
          $scope.initialize = function () {
