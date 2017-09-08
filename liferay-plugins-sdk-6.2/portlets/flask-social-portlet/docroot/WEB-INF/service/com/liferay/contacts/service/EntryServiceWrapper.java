@@ -91,19 +91,15 @@ public class EntryServiceWrapper implements EntryService,
 	}
 
 	@Override
-	public void blockUser(long blockUserId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_entryService.blockUser(blockUserId, serviceContext);
+	public boolean blockUser(long blockUserId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _entryService.blockUser(blockUserId, serviceContext);
 	}
 
 	@Override
-	public void unblockUser(long unblockUserId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
-		_entryService.unblockUser(unblockUserId, serviceContext);
+	public boolean unblockUser(long unblockUserId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		return _entryService.unblockUser(unblockUserId, serviceContext);
 	}
 
 	@Override

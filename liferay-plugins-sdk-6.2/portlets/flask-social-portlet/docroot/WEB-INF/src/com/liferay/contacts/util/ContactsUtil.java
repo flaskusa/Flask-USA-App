@@ -548,10 +548,10 @@ public class ContactsUtil {
 		return platformAppRes.getPlatformApplicationArn();
 	}
 	
-	public static void setMyRoleViewPermission( FileEntry fileEntry, long companyId, ServiceContext serviceContext) throws PortalException, SystemException{
+	public static void setAllRoleViewPermission( FileEntry fileEntry, ServiceContext serviceContext) throws PortalException, SystemException{
 		ResourcePermission resourcePermission = null;
 //		Role guestRole = getMyGuestRole();
-		List<Role> roles = RoleLocalServiceUtil.getRoles(companyId);
+		List<Role> roles = RoleLocalServiceUtil.getRoles(0, RoleLocalServiceUtil.getRolesCount());
 		for(Role role: roles){
 			try{
 			    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(fileEntry.getCompanyId(),

@@ -165,17 +165,30 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		return jsonArray;
 	}
 	
-	public void blockUser(long blockUserId, ServiceContext serviceContext)throws PortalException, SystemException{
-		  long userId1 = serviceContext.getUserId();
-		  SocialRelation socialRelation = SocialRelationLocalServiceUtil.getRelation(userId1, blockUserId, SocialRelationConstants.TYPE_BI_CONNECTION);
-		  SocialRelationLocalServiceUtil.deleteRelation(socialRelation);
-		  SocialRelationLocalServiceUtil.addRelation(userId1, blockUserId, SocialRelationConstants.TYPE_UNI_ENEMY);
+	@Override
+	public boolean blockUser(long blockUserId, ServiceContext serviceContext){
+		  boolean done = false;
+		  try {
+			  SocialRelation socialRelation = SocialRelationLocalServiceUtil.getRelation(serviceContext.getUserId(), blockUserId, SocialRelationConstants.TYPE_BI_CONNECTION);
+			  SocialRelationLocalServiceUtil.deleteRelation(socialRelation);
+			  SocialRelationLocalServiceUtil.addRelation(serviceContext.getUserId(), blockUserId, SocialRelationConstants.TYPE_UNI_ENEMY);
+			  done = true;
+		  } catch (Exception e) {
+			  LOGGER.error("Exception in blockUser: "+e.getMessage());
+		  }
+		  return done;
 	}
-		 
-	public void unblockUser(long unblockUserId, ServiceContext serviceContext)throws PortalException, SystemException{
-		  long userId1 = serviceContext.getUserId();
-		  SocialRelation socialRelation = SocialRelationLocalServiceUtil.getRelation(userId1, unblockUserId, SocialRelationConstants.TYPE_UNI_ENEMY);
-		  SocialRelationLocalServiceUtil.deleteRelation(socialRelation);
+	
+	@Override
+	public boolean unblockUser(long unblockUserId, ServiceContext serviceContext){
+		 boolean done = false;
+		 try {
+			 SocialRelation socialRelation = SocialRelationLocalServiceUtil.getRelation(serviceContext.getUserId(), unblockUserId, SocialRelationConstants.TYPE_UNI_ENEMY);
+			 SocialRelationLocalServiceUtil.deleteRelation(socialRelation);
+		 } catch (Exception e) {
+			 LOGGER.error("Exception in blockUser: "+e.getMessage());
+		 }
+		 return done;
 	}
 	
 	public int getUsersAndContactsCount(long companyId, String keywords, ServiceContext serviceContext)throws PortalException, SystemException {
@@ -308,7 +321,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		FileEntry fileEntry=null;	
 		try{	
 				fileEntry = DLAppLocalServiceUtil.getFileEntry(portraitId);
-				ContactsUtil.setMyRoleViewPermission(fileEntry, companyId, serviceContext);
+				ContactsUtil.setAllRoleViewPermission(fileEntry, serviceContext);
 				
 			}catch(Exception ex){
 				

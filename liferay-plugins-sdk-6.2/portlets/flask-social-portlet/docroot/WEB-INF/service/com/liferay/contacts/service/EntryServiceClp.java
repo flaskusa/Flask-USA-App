@@ -326,29 +326,21 @@ public class EntryServiceClp implements EntryService {
 	}
 
 	@Override
-	public void blockUser(long blockUserId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public boolean blockUser(long blockUserId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName7,
-				_methodParameterTypes7,
-				new Object[] {
-					blockUserId,
-					
-				ClpSerializer.translateInput(serviceContext)
-				});
+			returnObj = _invokableService.invokeMethod(_methodName7,
+					_methodParameterTypes7,
+					new Object[] {
+						blockUserId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
 
 			if (t instanceof RuntimeException) {
 				throw (RuntimeException)t;
@@ -358,32 +350,26 @@ public class EntryServiceClp implements EntryService {
 					" is not a valid exception");
 			}
 		}
+
+		return ((Boolean)returnObj).booleanValue();
 	}
 
 	@Override
-	public void unblockUser(long unblockUserId,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+	public boolean unblockUser(long unblockUserId,
+		com.liferay.portal.service.ServiceContext serviceContext) {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName8,
-				_methodParameterTypes8,
-				new Object[] {
-					unblockUserId,
-					
-				ClpSerializer.translateInput(serviceContext)
-				});
+			returnObj = _invokableService.invokeMethod(_methodName8,
+					_methodParameterTypes8,
+					new Object[] {
+						unblockUserId,
+						
+					ClpSerializer.translateInput(serviceContext)
+					});
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
-
-			if (t instanceof com.liferay.portal.kernel.exception.PortalException) {
-				throw (com.liferay.portal.kernel.exception.PortalException)t;
-			}
-
-			if (t instanceof com.liferay.portal.kernel.exception.SystemException) {
-				throw (com.liferay.portal.kernel.exception.SystemException)t;
-			}
 
 			if (t instanceof RuntimeException) {
 				throw (RuntimeException)t;
@@ -393,6 +379,8 @@ public class EntryServiceClp implements EntryService {
 					" is not a valid exception");
 			}
 		}
+
+		return ((Boolean)returnObj).booleanValue();
 	}
 
 	@Override

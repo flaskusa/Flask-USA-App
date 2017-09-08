@@ -170,18 +170,14 @@ public class EntryServiceClpInvoker {
 
 		if (_methodName72.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes72, parameterTypes)) {
-			EntryServiceUtil.blockUser(((Long)arguments[0]).longValue(),
+			return EntryServiceUtil.blockUser(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
-
-			return null;
 		}
 
 		if (_methodName73.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes73, parameterTypes)) {
-			EntryServiceUtil.unblockUser(((Long)arguments[0]).longValue(),
+			return EntryServiceUtil.unblockUser(((Long)arguments[0]).longValue(),
 				(com.liferay.portal.service.ServiceContext)arguments[1]);
-
-			return null;
 		}
 
 		if (_methodName74.equals(name) &&

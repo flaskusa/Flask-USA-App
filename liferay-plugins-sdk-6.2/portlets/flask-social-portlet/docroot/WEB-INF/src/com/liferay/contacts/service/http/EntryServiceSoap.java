@@ -129,11 +129,14 @@ public class EntryServiceSoap {
 		}
 	}
 
-	public static void blockUser(long blockUserId,
+	public static boolean blockUser(long blockUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			EntryServiceUtil.blockUser(blockUserId, serviceContext);
+			boolean returnValue = EntryServiceUtil.blockUser(blockUserId,
+					serviceContext);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -142,11 +145,14 @@ public class EntryServiceSoap {
 		}
 	}
 
-	public static void unblockUser(long unblockUserId,
+	public static boolean unblockUser(long unblockUserId,
 		com.liferay.portal.service.ServiceContext serviceContext)
 		throws RemoteException {
 		try {
-			EntryServiceUtil.unblockUser(unblockUserId, serviceContext);
+			boolean returnValue = EntryServiceUtil.unblockUser(unblockUserId,
+					serviceContext);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
