@@ -28,9 +28,9 @@
             FriendsService.mediatorUserId=0;
         }
         $scope.goBack = function () {
-            $timeout(function () {
+            //$timeout(function () {
                 $state.go("app.user_navigation_menu");
-            }, 1000);            
+            //}, 1000);            
         }
         $scope.goTOGroup=function(){
             $state.go('app.my_friendDetail',{userId:0});
@@ -47,6 +47,8 @@
 
       $scope.showInviteFriendPopup = function(){
           $scope.moreDataCanBeLoaded = true;
+          $rootScope.isPopupOpen=true;
+          //alert($rootScope.isPopupOpen);
           $scope.searchUserContact('',$scope.startIndex, $scope.endIndex);
           $scope.modal.show();
       };
@@ -71,9 +73,10 @@
                                 $scope.myFriends.splice(i, 1);
                             }
                         }
-                            
+                        if($scope.myFriends.length==0){
+                          $scope.noFriendMsg = "There are no friends.";
+                        }                            
                     });
-                } else {
                 }
             });
       };
@@ -107,18 +110,19 @@
             confirmPopup.then(function(res) {
                 if(res) {
                     FriendsService.blockUser(userId).then(function(response) {
-                        if(response){
-                            for (var i = 0; i < $scope.myFriends; i++) {
-                                if ($scope.myFriends[i].userId == response.userId) {
+                        if(response==true){
+                            for (var i = 0; i < $scope.myFriends.length; i++) {
+                                if ($scope.myFriends[i].userId == userId) {
                                     $scope.myFriends.splice(i, 1);
                                 }
                             }
-
+                            if($scope.myFriends.length==0){
+                              $scope.noFriendMsg = "There are no friends.";
+                            }  
                         }else{
-                            $flaskUtil.alert("failed to block");
+                            $flaskUtil.alert("Failed to block");
                         }
                     });
-                } else {
                 }
             });
 
