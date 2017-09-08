@@ -1,0 +1,9 @@
+{
+  "name": "FlaskUs",
+  "app_id": "ee069d26",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic1",
+  "watchPatterns": []
+}
