@@ -136,7 +136,7 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 			if(cnt>0)
 				FlaskGroupUsersFinderUtil.addGroupOwner(groupId, userId);
 		}catch(Exception e){
-			e.printStackTrace();
+			LOGGER.error("Exception in addGroupOwner :" + e.getMessage());
 		}
 		return cnt;
 	}
@@ -147,23 +147,39 @@ public class FlaskGroupUsersServiceImpl extends FlaskGroupUsersServiceBaseImpl {
 		try {
 			flaskGroupUser = FlaskGroupUsersUtil.findByUserIdGroupId(userId, groupId);
 			flaskGroupUser.setIsAdmin(0);
-			FlaskGroupUsersLocalServiceUtil.updateFlaskGroupUsers(flaskGroupUser);
+			FlaskGroupUsersUtil.update(flaskGroupUser);
 		} catch (Exception e) {
-			// TODO: handle exception
-			e.printStackTrace();
+			LOGGER.error("Exception in removeGroupOwner :" + e.getMessage());
 		}
 		
 	}
 	
 	
 	@Override
-	public void deleteGroupUser(long groupId, long userId) {
-		FlaskGroupUsersFinderUtil.deleteGroupUser(groupId, userId);
+	public boolean deleteGroupUser(long groupId, long userId) {
+		boolean done = false;
+		try {
+			FlaskGroupUsersUtil.removeByUserIdGroupId(userId, groupId);
+			done = true;
+		} catch (Exception e) {
+			LOGGER.error("Exception in deleteGroupUser :" + e.getMessage());
+		}
+		return done;
 	}
 
 	@Override
-	public void deleteGroupUsers(long groupId, String userIds) {
-		FlaskGroupUsersFinderUtil.deleteGroupUsers(groupId, userIds);
+	public boolean deleteGroupUsers(long groupId, String userIds) {
+		boolean done = false;
+		try {
+			String[] userIdArr = userIds.split(",");
+			for(String userId: userIdArr){
+				FlaskGroupUsersUtil.removeByUserIdGroupId(Long.valueOf(userId), groupId);
+			}
+			done = true;
+		} catch (Exception e) {
+			LOGGER.error("Exception in deleteGroupUsers :" + e.getMessage());
+		}	
+		return done;
 	}
 
 }

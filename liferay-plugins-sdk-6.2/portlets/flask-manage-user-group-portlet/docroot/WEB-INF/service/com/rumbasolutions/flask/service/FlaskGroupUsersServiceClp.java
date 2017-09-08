@@ -284,10 +284,12 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 	}
 
 	@Override
-	public void deleteGroupUser(long groupId, long userId) {
+	public boolean deleteGroupUser(long groupId, long userId) {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName9,
-				_methodParameterTypes9, new Object[] { groupId, userId });
+			returnObj = _invokableService.invokeMethod(_methodName9,
+					_methodParameterTypes9, new Object[] { groupId, userId });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -300,14 +302,19 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 					" is not a valid exception");
 			}
 		}
+
+		return ((Boolean)returnObj).booleanValue();
 	}
 
 	@Override
-	public void deleteGroupUsers(long groupId, java.lang.String userIds) {
+	public boolean deleteGroupUsers(long groupId, java.lang.String userIds) {
+		Object returnObj = null;
+
 		try {
-			_invokableService.invokeMethod(_methodName10,
-				_methodParameterTypes10,
-				new Object[] { groupId, ClpSerializer.translateInput(userIds) });
+			returnObj = _invokableService.invokeMethod(_methodName10,
+					_methodParameterTypes10,
+					new Object[] { groupId, ClpSerializer.translateInput(
+							userIds) });
 		}
 		catch (Throwable t) {
 			t = ClpSerializer.translateThrowable(t);
@@ -320,6 +327,8 @@ public class FlaskGroupUsersServiceClp implements FlaskGroupUsersService {
 					" is not a valid exception");
 			}
 		}
+
+		return ((Boolean)returnObj).booleanValue();
 	}
 
 	private InvokableService _invokableService;

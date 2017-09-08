@@ -84,7 +84,7 @@ public interface FlaskGroupUsersService extends BaseService, InvokableService {
 
 	public void removeGroupOwner(long groupId, long userId);
 
-	public void deleteGroupUser(long groupId, long userId);
+	public boolean deleteGroupUser(long groupId, long userId);
 
-	public void deleteGroupUsers(long groupId, java.lang.String userIds);
+	public boolean deleteGroupUsers(long groupId, java.lang.String userIds);
 }

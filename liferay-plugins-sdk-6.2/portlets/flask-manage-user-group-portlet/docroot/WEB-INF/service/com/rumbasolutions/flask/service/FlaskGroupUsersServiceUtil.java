@@ -96,12 +96,13 @@ public class FlaskGroupUsersServiceUtil {
 		getService().removeGroupOwner(groupId, userId);
 	}
 
-	public static void deleteGroupUser(long groupId, long userId) {
-		getService().deleteGroupUser(groupId, userId);
+	public static boolean deleteGroupUser(long groupId, long userId) {
+		return getService().deleteGroupUser(groupId, userId);
 	}
 
-	public static void deleteGroupUsers(long groupId, java.lang.String userIds) {
-		getService().deleteGroupUsers(groupId, userIds);
+	public static boolean deleteGroupUsers(long groupId,
+		java.lang.String userIds) {
+		return getService().deleteGroupUsers(groupId, userIds);
 	}
 
 	public static void clearService() {

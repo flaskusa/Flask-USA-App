@@ -127,18 +127,14 @@ public class FlaskGroupUsersServiceClpInvoker {
 
 		if (_methodName40.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes40, parameterTypes)) {
-			FlaskGroupUsersServiceUtil.deleteGroupUser(((Long)arguments[0]).longValue(),
+			return FlaskGroupUsersServiceUtil.deleteGroupUser(((Long)arguments[0]).longValue(),
 				((Long)arguments[1]).longValue());
-
-			return null;
 		}
 
 		if (_methodName41.equals(name) &&
 				Arrays.deepEquals(_methodParameterTypes41, parameterTypes)) {
-			FlaskGroupUsersServiceUtil.deleteGroupUsers(((Long)arguments[0]).longValue(),
+			return FlaskGroupUsersServiceUtil.deleteGroupUsers(((Long)arguments[0]).longValue(),
 				(java.lang.String)arguments[1]);
-
-			return null;
 		}
 
 		throw new UnsupportedOperationException();

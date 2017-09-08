@@ -150,10 +150,13 @@ public class FlaskGroupUsersServiceSoap {
 		}
 	}
 
-	public static void deleteGroupUser(long groupId, long userId)
+	public static boolean deleteGroupUser(long groupId, long userId)
 		throws RemoteException {
 		try {
-			FlaskGroupUsersServiceUtil.deleteGroupUser(groupId, userId);
+			boolean returnValue = FlaskGroupUsersServiceUtil.deleteGroupUser(groupId,
+					userId);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -162,10 +165,13 @@ public class FlaskGroupUsersServiceSoap {
 		}
 	}
 
-	public static void deleteGroupUsers(long groupId, java.lang.String userIds)
-		throws RemoteException {
+	public static boolean deleteGroupUsers(long groupId,
+		java.lang.String userIds) throws RemoteException {
 		try {
-			FlaskGroupUsersServiceUtil.deleteGroupUsers(groupId, userIds);
+			boolean returnValue = FlaskGroupUsersServiceUtil.deleteGroupUsers(groupId,
+					userIds);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

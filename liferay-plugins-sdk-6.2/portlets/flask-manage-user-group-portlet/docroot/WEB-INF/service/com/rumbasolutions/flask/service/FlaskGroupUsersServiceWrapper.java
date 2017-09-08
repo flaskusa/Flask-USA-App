@@ -96,13 +96,13 @@ public class FlaskGroupUsersServiceWrapper implements FlaskGroupUsersService,
 	}
 
 	@Override
-	public void deleteGroupUser(long groupId, long userId) {
-		_flaskGroupUsersService.deleteGroupUser(groupId, userId);
+	public boolean deleteGroupUser(long groupId, long userId) {
+		return _flaskGroupUsersService.deleteGroupUser(groupId, userId);
 	}
 
 	@Override
-	public void deleteGroupUsers(long groupId, java.lang.String userIds) {
-		_flaskGroupUsersService.deleteGroupUsers(groupId, userIds);
+	public boolean deleteGroupUsers(long groupId, java.lang.String userIds) {
+		return _flaskGroupUsersService.deleteGroupUsers(groupId, userIds);
 	}
 
 	/**
