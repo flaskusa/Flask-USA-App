@@ -1,0 +1,7 @@
+Steps for publish app to publish
+
+$ ionic cordova build --release android
+
+jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore flaskusa-release-key.keystore android-release-unsigned.apk flask_usa
+
+zipalign -v 4 android-release-unsigned.apk FlaskUSA.apk
