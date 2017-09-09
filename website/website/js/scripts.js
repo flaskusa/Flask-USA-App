@@ -66,12 +66,12 @@ $(".downloadapp").click(function(){
 	
 var agent = navigator.userAgent;
 if(agent.indexOf("iPhone") > -1) {
-	location.href = "https://itunes.apple.com/us/app/flaskus/id1146208430?mt=8";
+	location.href = "https://itunes.apple.com/us/app/flaskusa/id1268927425?ls=1&mt=8";
 } else if(agent.indexOf("Android") > -1) {
 	location.href = "https://play.google.com/store/apps/details?id=com.flaskus.tailgate&hl=en";
 }
 else{
-location.href = "https://itunes.apple.com/us/app/flaskus/id1146208430?mt=8";
+location.href = "https://itunes.apple.com/us/app/flaskusa/id1268927425?ls=1&mt=8";
 }	
 		
  
@@ -80,7 +80,7 @@ $(".downloadandroidapp").click(function(){
 	
 var agent = navigator.userAgent;
 if(agent.indexOf("iPhone") > -1) {
-	location.href = "https://itunes.apple.com/us/app/flaskus/id1146208430?mt=8";
+	location.href = "https://itunes.apple.com/us/app/flaskusa/id1268927425?ls=1&mt=8";
 } else if(agent.indexOf("Android") > -1) {
 	location.href = "https://play.google.com/store/apps/details?id=com.flaskus.tailgate&hl=en";
 }
