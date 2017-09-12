@@ -267,6 +267,11 @@ public interface FlaskAdminService extends BaseService, InvokableService {
 		com.liferay.portal.service.ServiceContext serviceContext);
 
 	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
+	public boolean contactUs(java.lang.String name,
+		java.lang.String emailAddress, java.lang.String phoneNumber,
+		java.lang.String subject, java.lang.String message);
+
+	@com.liferay.portal.security.ac.AccessControlled(guestAccessEnabled = true)
 	public boolean resetPassword(java.lang.String emailAddress,
 		java.lang.String password1, java.lang.String password2, long otp,
 		com.liferay.portal.service.ServiceContext serviceContext)

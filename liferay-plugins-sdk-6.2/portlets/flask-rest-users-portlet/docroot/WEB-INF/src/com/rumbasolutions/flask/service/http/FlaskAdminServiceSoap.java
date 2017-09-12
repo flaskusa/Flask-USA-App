@@ -520,6 +520,23 @@ public class FlaskAdminServiceSoap {
 		}
 	}
 
+	public static boolean contactUs(java.lang.String name,
+		java.lang.String emailAddress, java.lang.String phoneNumber,
+		java.lang.String subject, java.lang.String message)
+		throws RemoteException {
+		try {
+			boolean returnValue = FlaskAdminServiceUtil.contactUs(name,
+					emailAddress, phoneNumber, subject, message);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static boolean resetPassword(java.lang.String emailAddress,
 		java.lang.String password1, java.lang.String password2, long otp,
 		com.liferay.portal.service.ServiceContext serviceContext)

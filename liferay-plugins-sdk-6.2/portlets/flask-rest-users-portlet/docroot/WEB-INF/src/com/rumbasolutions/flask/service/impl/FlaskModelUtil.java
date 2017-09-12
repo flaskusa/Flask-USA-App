@@ -502,6 +502,43 @@ public class FlaskModelUtil {
 			   
 		   }
 	}
+	
+	public static void setAllRoleViewPermission( FileEntry fileEntry) throws PortalException, SystemException{
+		ResourcePermission resourcePermission = null;
+		List<Role> roles = RoleLocalServiceUtil.getRoles(0, RoleLocalServiceUtil.getRolesCount());
+		for(Role role: roles){
+			try
+			   {
+				
+			    resourcePermission = ResourcePermissionLocalServiceUtil.getResourcePermission(fileEntry.getCompanyId(),
+			    					DLFileEntry.class.getName(),
+			    					ResourceConstants.SCOPE_INDIVIDUAL, 
+			    					String.valueOf(fileEntry.getPrimaryKey()),
+			    					role.getRoleId());
+			        
+			    ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+			  
+			    if(Validator.isNotNull(resourcePermission) && !ResourcePermissionLocalServiceUtil.hasActionId(resourcePermission,resourceAction))
+			    {
+			      resourcePermission.setActionIds(resourcePermission.getActionIds() + resourceAction.getBitwiseValue());
+			      ResourcePermissionLocalServiceUtil.updateResourcePermission(resourcePermission);
+			    }
+			   }catch(Exception ex){
+				      resourcePermission = ResourcePermissionLocalServiceUtil.createResourcePermission(CounterLocalServiceUtil.increment());
+				      resourcePermission.setCompanyId(fileEntry.getCompanyId());
+				      resourcePermission.setName(DLFileEntry.class.getName());
+				      resourcePermission.setScope(ResourceConstants.SCOPE_INDIVIDUAL);
+				      resourcePermission.setPrimKey(String.valueOf(fileEntry.getPrimaryKey()));
+				      resourcePermission.setRoleId(role.getRoleId());
+				    
+				      ResourceAction resourceAction = ResourceActionLocalServiceUtil.getResourceAction(DLFileEntry.class.getName(), ActionKeys.VIEW);
+				      resourcePermission.setActionIds(resourceAction.getBitwiseValue());// (ActionKeys.VIEW);
+				      ResourcePermissionLocalServiceUtil.addResourcePermission(resourcePermission);
+				   
+			   }
+		}
+		
+	}
 	/**
 	 * 
 	 * @param fullFileName

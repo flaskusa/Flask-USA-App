@@ -313,6 +313,13 @@ public class FlaskAdminServiceUtil {
 		return getService().forgotPassword(emailAddress, serviceContext);
 	}
 
+	public static boolean contactUs(java.lang.String name,
+		java.lang.String emailAddress, java.lang.String phoneNumber,
+		java.lang.String subject, java.lang.String message) {
+		return getService()
+				   .contactUs(name, emailAddress, phoneNumber, subject, message);
+	}
+
 	public static boolean resetPassword(java.lang.String emailAddress,
 		java.lang.String password1, java.lang.String password2, long otp,
 		com.liferay.portal.service.ServiceContext serviceContext)

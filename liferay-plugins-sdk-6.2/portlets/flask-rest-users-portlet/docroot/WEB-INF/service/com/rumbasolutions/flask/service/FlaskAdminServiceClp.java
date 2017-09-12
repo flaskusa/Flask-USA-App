@@ -221,9 +221,16 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 				"java.lang.String", "com.liferay.portal.service.ServiceContext"
 			};
 
-		_methodName30 = "resetPassword";
+		_methodName30 = "contactUs";
 
 		_methodParameterTypes30 = new String[] {
+				"java.lang.String", "java.lang.String", "java.lang.String",
+				"java.lang.String", "java.lang.String"
+			};
+
+		_methodName31 = "resetPassword";
+
+		_methodParameterTypes31 = new String[] {
 				"java.lang.String", "java.lang.String", "java.lang.String",
 				"long", "com.liferay.portal.service.ServiceContext"
 			};
@@ -1422,6 +1429,42 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	}
 
 	@Override
+	public boolean contactUs(java.lang.String name,
+		java.lang.String emailAddress, java.lang.String phoneNumber,
+		java.lang.String subject, java.lang.String message) {
+		Object returnObj = null;
+
+		try {
+			returnObj = _invokableService.invokeMethod(_methodName30,
+					_methodParameterTypes30,
+					new Object[] {
+						ClpSerializer.translateInput(name),
+						
+					ClpSerializer.translateInput(emailAddress),
+						
+					ClpSerializer.translateInput(phoneNumber),
+						
+					ClpSerializer.translateInput(subject),
+						
+					ClpSerializer.translateInput(message)
+					});
+		}
+		catch (Throwable t) {
+			t = ClpSerializer.translateThrowable(t);
+
+			if (t instanceof RuntimeException) {
+				throw (RuntimeException)t;
+			}
+			else {
+				throw new RuntimeException(t.getClass().getName() +
+					" is not a valid exception");
+			}
+		}
+
+		return ((Boolean)returnObj).booleanValue();
+	}
+
+	@Override
 	public boolean resetPassword(java.lang.String emailAddress,
 		java.lang.String password1, java.lang.String password2, long otp,
 		com.liferay.portal.service.ServiceContext serviceContext)
@@ -1429,8 +1472,8 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 		Object returnObj = null;
 
 		try {
-			returnObj = _invokableService.invokeMethod(_methodName30,
-					_methodParameterTypes30,
+			returnObj = _invokableService.invokeMethod(_methodName31,
+					_methodParameterTypes31,
 					new Object[] {
 						ClpSerializer.translateInput(emailAddress),
 						
@@ -1527,4 +1570,6 @@ public class FlaskAdminServiceClp implements FlaskAdminService {
 	private String[] _methodParameterTypes29;
 	private String _methodName30;
 	private String[] _methodParameterTypes30;
+	private String _methodName31;
+	private String[] _methodParameterTypes31;
 }

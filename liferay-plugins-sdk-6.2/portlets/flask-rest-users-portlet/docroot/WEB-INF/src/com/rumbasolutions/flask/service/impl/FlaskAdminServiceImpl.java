@@ -816,7 +816,7 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			String name = userId +"_"+ file.getName();
 			Folder folder = FlaskModelUtil.getOrCreateFolder(_userProfilesFolder, DLFolderConstants.DEFAULT_PARENT_FOLDER_ID, repositoryId, userId, serviceContext);
 			fileEntry = DLAppLocalServiceUtil.addFileEntry(serviceContext.getUserId(), folder.getRepositoryId(), folder.getFolderId(), name, mimeType, name, name, "", file, serviceContext);
-			FlaskModelUtil.setGuestViewPermission(fileEntry);
+			FlaskModelUtil.setAllRoleViewPermission(fileEntry);
 			long portraitId = UserLocalServiceUtil.getUser(userId).getPortraitId();
 			FlaskAdminServiceUtil.updateUserForFileEntry(userId, fileEntry.getFileEntryId(), serviceContext);
 			if(portraitId>0)
@@ -898,10 +898,32 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			calendar.add(Calendar.DAY_OF_YEAR, 1);
 			Date tomorrow = calendar.getTime();
 			Ticket ticket = TicketLocalServiceUtil.addTicket(PortalUtil.getDefaultCompanyId(), FlaskAdminServiceImpl.class.getName(), user.getUserId(), 3, "", tomorrow, serviceContext);
-			mailMessage.setSubject("http://flaskus.com: Reset Password OTP");
+			mailMessage.setSubject("https://www.flask-usa.com: Reset Password OTP");
 			mailMessage.setBody("Dear " + user.getFullName() + ",\n\n" +
-								"You can reset your password for http://flaskus.com using OTP given below which will be expired on " + tomorrow + "\n\n" +
+								"You can reset your password for https://www.flask-usa.com using OTP given below which will be expired on " + tomorrow + "\n\n" +
 								"OTP: " + ticket.getTicketId());
+			MailServiceUtil.sendEmail(mailMessage);
+			done = true;
+		} catch (Exception e) {
+			LOGGER.error(e);
+		}
+		return done;
+	}
+	
+	@AccessControlled(guestAccessEnabled =true)
+	@Override
+	public boolean contactUs(String name, String emailAddress, String phoneNumber, String subject, String message){
+		boolean done = false;
+		InternetAddress fromAddress = null; 
+		InternetAddress toAddress = null;
+		try {
+			fromAddress = new InternetAddress("info@flaskus.com");
+			toAddress = new InternetAddress("info@flaskus.com");
+			MailMessage mailMessage = new MailMessage();
+			mailMessage.setTo(toAddress);
+			mailMessage.setFrom(fromAddress);
+			mailMessage.setSubject(subject);
+			mailMessage.setBody("Contact Us message from "+name+", "+emailAddress+ ", "+phoneNumber+" \n"+message);
 			MailServiceUtil.sendEmail(mailMessage);
 			done = true;
 		} catch (Exception e) {

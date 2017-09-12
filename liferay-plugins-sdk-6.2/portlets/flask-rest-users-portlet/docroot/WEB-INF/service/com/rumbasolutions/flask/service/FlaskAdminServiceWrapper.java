@@ -330,6 +330,14 @@ public class FlaskAdminServiceWrapper implements FlaskAdminService,
 	}
 
 	@Override
+	public boolean contactUs(java.lang.String name,
+		java.lang.String emailAddress, java.lang.String phoneNumber,
+		java.lang.String subject, java.lang.String message) {
+		return _flaskAdminService.contactUs(name, emailAddress, phoneNumber,
+			subject, message);
+	}
+
+	@Override
 	public boolean resetPassword(java.lang.String emailAddress,
 		java.lang.String password1, java.lang.String password2, long otp,
 		com.liferay.portal.service.ServiceContext serviceContext)
