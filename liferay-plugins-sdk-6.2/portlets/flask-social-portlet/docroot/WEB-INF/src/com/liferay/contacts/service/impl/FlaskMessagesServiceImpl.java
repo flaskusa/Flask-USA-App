@@ -320,6 +320,7 @@ public class FlaskMessagesServiceImpl extends FlaskMessagesServiceBaseImpl {
 		boolean updateNeeded = false;
 	    boolean createNeeded = false;
 		try {
+			System.out.println("Started registring with SNS");
 			LOGGER.debug("Started registring with SNS");
 			AWSCredentials cred = new BasicAWSCredentials(PropsUtil.get("flask.push.accessKey"), PropsUtil.get("flask.push.secretKey"));
 			AmazonSNSClient client = new AmazonSNSClient(cred);

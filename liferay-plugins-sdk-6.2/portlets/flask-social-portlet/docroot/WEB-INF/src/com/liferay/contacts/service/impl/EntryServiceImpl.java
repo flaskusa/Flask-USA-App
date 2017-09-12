@@ -330,7 +330,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 	}
 	
 	@Override
-	public  User getUserById(long userId, ServiceContext serviceContext)
+	public User getUserById(long userId, ServiceContext serviceContext)
 	{
 		User user=null;
 		try{
@@ -343,8 +343,7 @@ public class EntryServiceImpl extends EntryServiceBaseImpl {
 		return user;
 	}
 	
-	public void addSocialRelation(long receiverUserId, ServiceContext serviceContext)
-		throws Exception {
+	public void addSocialRelation(long receiverUserId, ServiceContext serviceContext)throws Exception {
 			int cnt = SocialRequestLocalServiceUtil.getReceiverUserRequestsCount(serviceContext.getUserId());
 			List<SocialRequest> request = SocialRequestLocalServiceUtil.getReceiverUserRequests(serviceContext.getUserId(), 3, 0, cnt);
 			for(SocialRequest socialRequest: request ){
