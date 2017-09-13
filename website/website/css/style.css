@@ -42,7 +42,7 @@ body {
     margin: 0;
     height: 100%;
     padding: 0;
-    overflow: hidden;
+/*    overflow: hidden;*/
 }
 a {
     color: #000;
@@ -1070,4 +1070,18 @@ button.login_button{
     border: none;
     margin-top: 18%;
 	cursor:pointer;
+}
+
+.privacy{
+    padding: 15px;
+    border: 1px solid rgb(0, 0, 0);
+    text-align: justify;
+    font-family: 'Agency';
+    font-size: 20px;
+}
+
+.privacyHeading{
+    text-transform: uppercase;
+    margin-top: 0px;
+    border-bottom: 10px solid rgba(0, 0, 0, 0.86);
 }
