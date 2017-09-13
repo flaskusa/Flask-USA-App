@@ -38,7 +38,6 @@
  
  
 $('#submit').click(function(){
-    alert("https://www.flask-usa.com/api/jsonws/flask-rest-users-portlet.flaskadmin/contact-us/name/"+$("#name").val()+"/email-address/"+$("#email").val()+"/phone-number/"+$("#phone").val()+"/subject/"+$("#subject").val()+"/message/"+$("#message").val());
     $.post("https://www.flask-usa.com/api/jsonws/flask-rest-users-portlet.flaskadmin/contact-us/name/"+$("#name").val()+"/email-address/"+$("#email").val()+"/phone-number/"+$("#phone").val()+"/subject/"+$("#subject").val()+"/message/"+$("#message").val(),  function(response) {
         if(response==true){
             //$('#success').attr('display','block');
@@ -88,29 +87,4 @@ if(agent.indexOf("iPhone") > -1) {
 else{
 location.href = "https://play.google.com/store/apps/details?id=com.flaskusa.tailgate";
 }	
-
-function sendMail() {
-    $.ajax({
-      type: 'POST',
-      url: 'https://www.flask-usa.com/api/jsonws/flask-rest-users-portlet.flaskadmin/contact-us',
-      data: {
-        'key': 'YOUR API KEY HERE',
-        'message': {
-          'from_email': 'YOUR@EMAIL.HERE',
-          'to': [
-              {
-                'email': 'RECIPIENT@EMAIL.HERE',
-                'name': 'RECIPIENT NAME (OPTIONAL)',
-                'type': 'to'
-              }
-            ],
-          'autotext': 'true',
-          'subject': 'YOUR SUBJECT HERE!',
-          'html': 'YOUR EMAIL CONTENT HERE! YOU CAN USE HTML!'
-        }
-      }
-     }).done(function(response) {
-       console.log(response); // on success
-     });
-} 
 });
