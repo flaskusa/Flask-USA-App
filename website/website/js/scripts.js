@@ -42,8 +42,8 @@ $('#submit').click(function(){
         if(response==true){
             //$('#success').attr('display','block');
             $('#success').show();
-            //$('#success').fadeIn().html(response);
-            //$('#success').delay(2000).fadeOut();
+            $('#success').fadeIn().html(response);
+            $('#success').delay(2000).fadeOut();
         }
     });
     return false; 
