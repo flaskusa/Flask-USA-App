@@ -185,9 +185,7 @@ public class FlaskAdminServiceUtil {
 		java.lang.String areaCode, java.lang.String city, long stateId,
 		long countryId, java.lang.String mobileNumber,
 		java.lang.String userInterests,
-		com.liferay.portal.service.ServiceContext serviceContext)
-		throws com.liferay.portal.kernel.exception.PortalException,
-			com.liferay.portal.kernel.exception.SystemException {
+		com.liferay.portal.service.ServiceContext serviceContext) {
 		return getService()
 				   .updateFlaskUser(userId, firstName, middleName, lastName,
 			email, screenName, password1, password2, DOB, isMale, streetName,

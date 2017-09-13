@@ -39,18 +39,24 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.repository.model.FileEntry;
 import com.liferay.portal.kernel.repository.model.Folder;
+import com.liferay.portal.kernel.webdav.Resource;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleConstants;
 import com.liferay.portal.model.Ticket;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ac.AccessControlled;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.AddressLocalServiceUtil;
+import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ServiceContext;
 import com.liferay.portal.service.TicketLocalServiceUtil;
@@ -62,7 +68,12 @@ import com.liferay.portal.service.persistence.RegionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFolderConstants;
 import com.liferay.portlet.documentlibrary.service.DLAppLocalServiceUtil;
+import com.liferay.portlet.expando.model.ExpandoBridge;
+import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.model.ExpandoTableConstants;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
+import com.liferay.portlet.expando.util.ExpandoBridgeFactoryUtil;
 import com.rumbasolutions.flask.model.FlaskAdmin;
 import com.rumbasolutions.flask.model.FlaskRole;
 import com.rumbasolutions.flask.service.FlaskAdminServiceUtil;
@@ -364,19 +375,19 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			 return user;
 	}
 	
-	private void addUserInterest(String userInterests, User user)
-			throws PortalException {
-		
-		if(userInterests.isEmpty()) {
-			return;
+	private void addUserInterest(String userInterests, User user){
+		try {
+			if(userInterests.isEmpty()) {
+				return;
+			}
+			//JSONArray json = JSONFactoryUtil.createJSONArray(userInterests); //this should validate JSON else throw JSON exception
+			if (user.getExpandoBridge() != null && !user.getExpandoBridge().hasAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS)){
+				 user.getExpandoBridge().addAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, ExpandoColumnConstants.STRING, false);
+			}
+			user.getExpandoBridge().setAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, userInterests, false);
+		} catch (Exception e) {
+			LOGGER.error("Exception in addUserInterest: "+e.getMessage());
 		}
-		
-		//JSONArray json = JSONFactoryUtil.createJSONArray(userInterests); //this should validate JSON else throw JSON exception
-		
-		if (!user.getExpandoBridge().hasAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS)){
-			 user.getExpandoBridge().addAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, ExpandoColumnConstants.STRING);
-		}
-		user.getExpandoBridge().setAttribute(FlaskModelUtil.EXPANDO_COL_USER_INTERESTS, userInterests, false);
 	}
 
 	private void addMobile(String mobileNumber, User user, ServiceContext serviceContext){
@@ -606,15 +617,19 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 					String areaCode, String city,
 					long stateId, long countryId,
 					String mobileNumber, String userInterests, 
-					ServiceContext serviceContext) throws SystemException, PortalException
+					ServiceContext serviceContext) 
 	{
 		FlaskAdmin adminUser=null;
-		Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_USER.getRoleName());
-		User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, screenName, email,
-				password1, password2, DOB, isMale, streetName, aptNo, areaCode, city, stateId, countryId, mobileNumber, userInterests, serviceContext);
-		if(user != null) {
-			adminUser = FlaskModelUtil.getFlaskUser(user, true, serviceContext);
-		}
+		try {
+			Role role = RoleLocalServiceUtil.getRole(PortalUtil.getDefaultCompanyId(), FlaskModelUtil.FlaskRoleEnum.FLASK_USER.getRoleName());
+			User user = updateUser(userId, role.getRoleId(), serviceContext.getUserId(), firstName, middleName, lastName, screenName, email,
+					password1, password2, DOB, isMale, streetName, aptNo, areaCode, city, stateId, countryId, mobileNumber, userInterests, serviceContext);
+			if(user != null) {
+				adminUser = FlaskModelUtil.getFlaskUser(user, true, serviceContext);
+			}
+		} catch (Exception e) {
+			LOGGER.error("Exception in updateFlaskUser: "+e.getMessage());
+		}		
 		return adminUser;
 	}
 	
