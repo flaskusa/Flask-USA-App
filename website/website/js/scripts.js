@@ -42,7 +42,7 @@ $('#submit').click(function(){
         if(response==true){
             //$('#success').attr('display','block');
             $('#success').show();
-            $('#success').fadeIn().html(response);
+            $('#success').fadeIn().html("Mail Sent Successfully");
             $('#success').delay(2000).fadeOut();
         }
     });
