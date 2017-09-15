@@ -592,7 +592,7 @@
 
 				'height': '100%',
 
-				'position': ''
+				'position': 'relative'
 
 			});
 

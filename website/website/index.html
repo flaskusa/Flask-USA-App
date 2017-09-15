@@ -18,7 +18,7 @@
 			<span class="flaticon-menu9"></span>
 		</a>
 		
-		<a id="main-button">
+		<a id="main-nav"  style="float:right;margin-right:5px">
 		<button href="#" class="login_button" onclick="gotoFlask()">Login</button>
 		</a>
 		</div>
@@ -70,7 +70,9 @@
 			</ul>
 		</div>
 		
-		<div id="fullpage">		
+		<div id="fullpage">
+			
+			
 		<!-- RIGHT HAND & PHONE MOCK-UP IMAGES -->
 			<div class="wrap">
 				<div class="section-image">
@@ -86,13 +88,17 @@
 				</div>
 				<div id="hand"></div>
 			</div>
-			<nav id="stickynav">				
+			<nav id="stickynav">
+				
 				<div id="nav" class="clearfix">
 				    <a class="logo" href="#Home"><img src="html/website/images/menu_logo.png" alt=""></a>
-				</div>				
-			</nav>		
+				</div>
+				
+			</nav>
 			
-		<div class="section " id="section0" data-anchor="Home">			
+			
+		<div class="section " id="section0" data-anchor="Home">
+			
 			<div class="wrap">
 				<div class="box">
 					<h1><strong>YOUR GAME PLAN</br>FOR GAMEDAY!</strong></h1>
@@ -276,13 +282,13 @@
 						</ul>
 						<br><h3 class="enquiry-form">Enquiry Form</h2>
 						<form role="form" method="post" id="contact-form">
-							<input type="text" placeholder="Name" name="Name" id="name" required>
-							<input type="email" placeholder="Email" name="Email" id="email" required>
-							<input type="number" placeholder="Phone" name="Phone" id="phone" min="6" max="10">
-							<input type="text" placeholder="Subject" name="Subject" id="subject">
-							<textarea placeholder="Message" name="Message" id="message" required></textarea>
+							<input type="text" placeholder="Name" name="Name" id="Name" required>
+							<input type="email" placeholder="Email" name="Email" id="Email" required>
+							<input type="text" placeholder="Phone" name="Phone" id="Phone" oninput="this.value=this.value.replace(/[^0-9]/g,'');" min="6" max="10" maxlength="10" >
+							<input type="text" placeholder="Subject" name="Subject" id="Subject">
+							<textarea placeholder="Message" name="Message" id="Message" required></textarea>
 							<button type="submit" id="submit">Send</button>
-							<div id="success" style="display: none;">Your Mail sent Successfully</div>
+							<div id="success"></div>
 						</form>
 					</div>
 				</div>

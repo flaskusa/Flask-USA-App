@@ -38,21 +38,25 @@
  
  
 $('#submit').click(function(){
-    $.post("https://www.flask-usa.com/api/jsonws/flask-rest-users-portlet.flaskadmin/contact-us/name/"+$("#name").val()+"/email-address/"+$("#email").val()+"/phone-number/"+$("#phone").val()+"/subject/"+$("#subject").val()+"/message/"+$("#message").val(),  function(response) {
-        if(response==true){
-            //$('#success').attr('display','block');
-            $('#success').show();
-            $('#success').fadeIn().html("Mail Sent Successfully");
-            $('#success').delay(2000).fadeOut();
-        }
-    });
-    return false; 
+        $.post("https://www.flask-usa.com/api/jsonws/flask-rest-users-portlet.flaskadmin/contact-us/name/"+$("#Name").val()+"/email-address/"+$("#Email").val()+"/phone-number/"+$("#Phone").val()+"/subject/"+$("#Subject").val()+"/message/"+$("#Message").val(),  function(response) {
+            if(response==true){
+                $('#success').show();
+                $('#success').fadeIn().html("Mail Sent Successfully");
+                $('#success').delay(2000).fadeOut();
+            }else{
+                $('#success').fadeIn().html("Unable to Send Mail");
+                $('#success').delay(2000).fadeOut();
+            }
+        });
+        return false;  
 });
+ 
 
 
-});
+
+  });
   
-setTimeout(function(){  
+  setTimeout(function(){  
     $('#preloader').fadeOut();
     $('.preloader_img').delay(150).fadeOut('slow');
 	$(".logo").show();
