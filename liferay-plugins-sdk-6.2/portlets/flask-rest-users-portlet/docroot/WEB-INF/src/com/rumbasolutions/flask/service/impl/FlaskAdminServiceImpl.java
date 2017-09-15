@@ -913,10 +913,10 @@ public class FlaskAdminServiceImpl extends FlaskAdminServiceBaseImpl {
 			calendar.add(Calendar.DAY_OF_YEAR, 1);
 			Date tomorrow = calendar.getTime();
 			Ticket ticket = TicketLocalServiceUtil.addTicket(PortalUtil.getDefaultCompanyId(), FlaskAdminServiceImpl.class.getName(), user.getUserId(), 3, "", tomorrow, serviceContext);
-			mailMessage.setSubject("https://www.flask-usa.com: Reset Password OTP");
+			mailMessage.setSubject("https://www.flask-usa.com: Reset Password verification code");
 			mailMessage.setBody("Dear " + user.getFullName() + ",\n\n" +
-								"You can reset your password for https://www.flask-usa.com using OTP given below which will be expired on " + tomorrow + "\n\n" +
-								"OTP: " + ticket.getTicketId());
+								"You can reset your password for https://www.flask-usa.com using verification code given below which will be expired on " + tomorrow + "\n\n" +
+								"verification code: " + ticket.getTicketId());
 			MailServiceUtil.sendEmail(mailMessage);
 			done = true;
 		} catch (Exception e) {
