@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgateDetailsCtrl', mytailgateDetailsCtrl);
 
-    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicSlideBoxDelegate', '$localStorage', 'UserService', '$q', '$http', '$ionicBackdrop', '$ionicModal', '$ionicScrollDelegate', '$timeout'];
+    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicSlideBoxDelegate', '$localStorage', 'UserService', '$q', '$http', '$ionicBackdrop', '$ionicModal', '$ionicScrollDelegate', '$timeout','$flaskUtil'];
 
     /* @ngInject */
-    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicSlideBoxDelegate, $localStorage, UserService, $q, $http, $ionicBackdrop, $ionicModal, $ionicScrollDelegate, $timeout) {
+    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicSlideBoxDelegate, $localStorage, UserService, $q, $http, $ionicBackdrop, $ionicModal, $ionicScrollDelegate, $timeout, $flaskUtil) {
         $cookies.remove("currtailGateMakers");
         $scope.myTailgaters = [];
         $scope.allMessages = [];
@@ -301,7 +301,7 @@
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.uploadFileToServer(imageURI);
             }, function (err) {
-
+                //$flaskUtil.alert("Please Allow all permissions to access Camera.");
             });
         };
         $scope.checkPermission = function () {
@@ -347,6 +347,7 @@
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.uploadFileToServer(imageURI);
             }, function (err) {
+                //$flaskUtil.alert("Please Allow all permissions to access Gallery.");
             });
 
         }

@@ -3,12 +3,14 @@
     angular.module('flaskApp')
         .controller('EventsCtrl', EventsCtrl);
 
-    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage', '$ionicSlideBoxDelegate', '$rootScope', '$flaskUtil', '$timeout'];
+    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage', '$ionicSlideBoxDelegate', '$rootScope', '$flaskUtil', '$timeout','$ionicHistory'];
 
     /* @ngInject */
-    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage, $ionicSlideBoxDelegate, $rootScope, $flaskUtil, $timeout) {
+    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage, $ionicSlideBoxDelegate, $rootScope, $flaskUtil, $timeout,$ionicHistory) {
         /* jshint validthis: true */
  console.log('inside event controller');
+        $ionicHistory.clearHistory();
+        $ionicHistory.clearCache();
         var self = this;
         $scope.allEvents = [];
         $scope.localstorageData = {};
@@ -84,11 +86,9 @@
                     } else {
                         $scope.Event_Error = false;
                     }
-
                     if (respData.data.exception) {
                         $flaskUtil.alert(respData.data.exception);
                     }
-               
             });
         }
 

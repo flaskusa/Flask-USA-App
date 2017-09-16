@@ -3,33 +3,39 @@
     angular.module('flaskApp')
         .controller('FriendDetailCtrl', FriendDetailCtrl);
 
-    FriendDetailCtrl.$inject = ['$scope', '$stateParams', 'FriendsService', 'FriendsNotificationService', '$cookies', '$flaskUtil', 'SERVER', '$state', '$ionicModal', '$ionicHistory', '$timeout'];
+    FriendDetailCtrl.$inject = ['$scope', '$stateParams', 'FriendsService', 'FriendsNotificationService', '$cookies', '$flaskUtil', 'SERVER', '$state', '$ionicModal', '$ionicHistory', '$timeout', '$ionicLoading'];
 
     /* @ngInject */
-    function FriendDetailCtrl($scope,$stateParams,FriendsService, FriendsNotificationService, $cookies, $flaskUtil,SERVER,$state,$ionicModal,$ionicHistory,$timeout) {
-        $scope.friendId =FriendsService.data.userId;
+    function FriendDetailCtrl($scope, $stateParams, FriendsService, FriendsNotificationService, $cookies, $flaskUtil, SERVER, $state, $ionicModal, $ionicHistory, $timeout, $ionicLoading) {
+        $scope.friendId = FriendsService.data.userId;
+        $scope.showenablebuttons = false;
         $scope.friend = {};
         $scope.picUrl = SERVER.url+"c/document_library/get_file?uuid=";
         $scope.profilepicUrl=FriendsService.data.friendProfilePicUrl;
         $scope.showTextArea={show:false};
         $scope.message={messageToSend:""};
         $scope.initialize = function() {
-            $scope.getFriendByUserId( $scope.friendId);
+            $scope.getFriendByUserId($scope.friendId);
+            $cookies.put('fromPage', 'MyFriends');
+            $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
+            $timeout(function () { $scope.showenablebuttons = true; $ionicLoading.hide(); }, 2000);
         };
         $scope.goBack = function(){
-            $timeout(function () {
+            //$timeout(function () {
                 $ionicHistory.goBack();
-            }, 1000);
+            //}, 1000);
         }
         $scope.initializeMediatorId=function(userId){
 
         FriendsService.mediatorUserId=userId;
             $state.go('app.my_friends_tab.friendsGroup');
         }
-        $scope.goToChatWindow = function (data) {
-            $state.go('app.messages');
-            $cookies.putObject('friendData', data);
-            $cookies.putObject('profileUrl', $scope.profilepicUrl);
+        $scope.goToChatWindow = function (data) {         
+            $timeout(function () {
+                $cookies.putObject('friendData', $scope.friend);
+                $cookies.putObject('profileUrl', $scope.profilepicUrl);            
+                $state.go('app.messages');
+            }, 1000);            
         }
         
         $scope.toggleMessageBox=function(message) {
@@ -82,8 +88,7 @@
         $scope.getFriendByUserId = function(userId) {
             FriendsService.getFriendByUserId(userId).then(function(response) {
                 if(response != undefined && response.exception == undefined) {
-
-                    $scope.friend = response;
+                    $scope.friend = response;                    
                 } else{
                     $flaskUtil.alert("Failed to load details");
                 }

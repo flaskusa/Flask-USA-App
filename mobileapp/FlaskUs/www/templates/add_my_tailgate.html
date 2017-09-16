@@ -77,8 +77,8 @@
         </ion-tab>
 
         <ion-tab title="Location" disabled="copytTailgateId==0 || copytTailgateId==undefined" id="locationTab" ng-click="selectTab(1)">
-            <ion-content overflow-scroll="false" class="has-header">
-                <div style="margin-top: 44px;">
+            <ion-content overflow-scroll="false" class="has-header" style="bottom:0px !important;">
+                <div>
                     <div style="width:100%;height:100%;" class="add_my_tailgate">
                         <ui-gmap-google-map center="map.center" zoom="map.zoom" draggable="true" events="map.events" options="map.options">
                             <ui-gmap-map-control position="right_center">

@@ -47,8 +47,6 @@
 
       $scope.showInviteFriendPopup = function(){
           $scope.moreDataCanBeLoaded = true;
-          $rootScope.isPopupOpen=true;
-          //alert($rootScope.isPopupOpen);
           $scope.searchUserContact('',$scope.startIndex, $scope.endIndex);
           $scope.modal.show();
       };
@@ -77,6 +75,7 @@
                           $scope.noFriendMsg = "There are no friends.";
                         }                            
                     });
+                } else {
                 }
             });
       };
@@ -123,6 +122,7 @@
                             $flaskUtil.alert("Failed to block");
                         }
                     });
+                } else {
                 }
             });
 

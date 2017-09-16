@@ -14,9 +14,17 @@
         $scope.loggedInUser = userDetail.data.userId;
         $scope.friendDetail = [];
         $scope.friednsCookiesArray = [];
-        $scope.friendDetail = $cookies.getObject('friendData');
-        $scope.picUrl = $cookies.getObject('profileUrl');
-        showPopupFromFriends();
+        if ($cookies.get('fromPage') != 'MyFriends') {
+            $cookies.remove('friendData');
+            $cookies.remove('profileUrl');
+            $scope.friendDetail = [];
+            $scope.picUrl = [];
+        } else {
+            $scope.friendDetail = $cookies.getObject('friendData');
+            $scope.picUrl = $cookies.getObject('profileUrl');
+        }
+        $cookies.remove('fromPage');
+        showPopupFromFriends();        
         $scope.allFriends = [];
         $scope.allSortedFriends = [];
         $scope.readIndividualMsg = false;
@@ -418,8 +426,8 @@
 
         //show chat window from my_friends tab
         function showPopupFromFriends() {
-            if ($scope.friendDetail != undefined){
-                $scope.friednsCookiesArray.push({ "userId": $scope.friendDetail.userId, "fullName": $scope.friendDetail.firstName + $scope.friendDetail.lastName, "friendProfilePicUrl": $scope.picUrl });
+            if ($scope.friendDetail != undefined && $scope.friendDetail.length != 0) {
+                $scope.friednsCookiesArray.push({ "id": $scope.friendDetail.userId, "name": $scope.friendDetail.firstName +" "+ $scope.friendDetail.lastName, "friendProfilePicUrl": $scope.picUrl });
                 $timeout(function () {
                     $scope.showChatWindowPopup($scope.friednsCookiesArray[0], 'user');
                 }, 300);  
@@ -568,10 +576,11 @@
             }, 200);
         }
         $scope.closeChatWindowPopup = function () {
-            if ($scope.friendDetail != undefined) {
-                $scope.modal.hide();
+            if ($scope.friendDetail != undefined && $scope.friendDetail.length != 0) {
+                $cookies.remove('fromPage');
                 $cookies.remove('friendData');
                 $cookies.remove('profileUrl');
+                $scope.modal.hide();
                 $ionicHistory.goBack();
             }
             $ionicScrollDelegate.scrollTop(true);

@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('VenueCtrl', VenueCtrl);
 
-    VenueCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage', '$ionicSlideBoxDelegate', '$rootScope', '$ionicModal', "$state"];
+    VenueCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage', '$ionicSlideBoxDelegate', '$rootScope', '$ionicModal', "$state",'$ionicHistory'];
 
     /* @ngInject */
-    function VenueCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage, $ionicSlideBoxDelegate, $rootScope, $ionicModal, $state) {
+    function VenueCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage, $ionicSlideBoxDelegate, $rootScope, $ionicModal, $state, $ionicHistory) {
         /* jshint validthis: true */
         var self = this;
         $scope.allVenues = [];
@@ -15,7 +15,8 @@
         var searchStringList = angular.copy($scope.searchstringList);
         $scope.allEventId = [];
         getVenueName();
-
+        $ionicHistory.clearHistory();
+        $ionicHistory.clearCache();
         //Get venue name for event details
         function getVenueName() {
             EventsService.getAllVenues().then(function (respData) {

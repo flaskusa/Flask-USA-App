@@ -124,6 +124,8 @@
         $scope.goBack = function () {
             //$timeout(function () {
                 $ionicHistory.goBack();
+                $ionicHistory.clearHistory();
+                $ionicHistory.clearCache();
             //}, 1000);
         }
         //console.log($scope.deviceDetector);
@@ -422,13 +424,13 @@
         // initMap();
         uiGmapGoogleMapApi.then(function (maps) {
             maps.visualRefresh = true;
-            $scope.markerOptions.animation = maps.Animation.DROP;
+            //$scope.markerOptions.animation = maps.Animation.DROP;
             $scope.markerOptions.visible = true;
-            $scope.googleMarkerOptions.animation = maps.Animation.DROP;
+            //$scope.googleMarkerOptions.animation = maps.Animation.DROP;
             $scope.googleMarkerOptions.visible = false;
-            $scope.barFlaskMarkerOptions.animation = maps.Animation.DROP;
+            //$scope.barFlaskMarkerOptions.animation = maps.Animation.DROP;
             $scope.barFlaskMarkerOptions.visible = true;
-            $scope.barGoogleMarkerOptions.animation = maps.Animation.DROP;
+            //$scope.barGoogleMarkerOptions.animation = maps.Animation.DROP;
             $scope.barGoogleMarkerOptions.visible = false;
             $scope.nightLifeFlaskMarkerOptions.animation = maps.Animation.DROP;
             $scope.nightLifeFlaskMarkerOptions.visible = true;
@@ -659,7 +661,7 @@
                 //marker.icon = "img/map_icons/FLASK_GOOGLE_PIN.svg";
                 marker.icon = {
                     url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
-                    scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                    //scaledSize: { width: 60, height: 60 } //for scaling the svg images
                 }
                 marker.latitude = place.geometry.location.lat();
                 marker.longitude = place.geometry.location.lng();
@@ -683,7 +685,7 @@
                 marker.id = place.id;
                 marker.icon = {
                     url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
-                    scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                   // scaledSize: { width: 60, height: 60 } //for scaling the svg images
                 }
                 marker.latitude = place.geometry.location.lat();
                 marker.longitude = place.geometry.location.lng();
@@ -707,7 +709,7 @@
                 marker.id = place.id;
                 marker.icon = {
                     url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
-                    scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                   // scaledSize: { width: 60, height: 60 } //for scaling the svg images
                 }
                 marker.latitude = place.geometry.location.lat();
                 marker.longitude = place.geometry.location.lng();
@@ -732,7 +734,7 @@
                 marker.id = place.id;
                 marker.icon = {
                     url: 'img/map_icons/FLASK_GOOGLE_PIN.svg',
-                    scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                   // scaledSize: { width: 60, height: 60 } //for scaling the svg images
                 }
                 marker.latitude = place.geometry.location.lat();
                 marker.longitude = place.geometry.location.lng();
@@ -863,12 +865,12 @@
                             '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
                                 '<div class="list">' +
                                 '<span class="range" ng-click="filterMarker(0,0);"><img src=""><p id="0" style="color:#f7941e;" class="rangePStyle">ALL</p></span>' +
-                                '<span class="range" ng-click="filterMarker(9,1);"><img src="./img/map_icons/FLASK_PIN_9.png"><p id="1" class="rangePStyle">LESS THAN $10</p></span>' +
-                                '<span class="range" ng-click="filterMarker(10,2);"><img src="./img/map_icons/FLASK_PIN_10.png"><p id="2" class="rangePStyle">$10 AND ABOVE</p></span>' +
-                                '<span class="range" ng-click="filterMarker(20,3);"><img src="./img/map_icons/FLASK_PIN_20.png"><p id="3" class="rangePStyle">$20 AND ABOVE</p></span>' +
-                                '<span class="range" ng-click="filterMarker(30,4);"><img src="./img/map_icons/FLASK_PIN_30.png"><p id="4" class="rangePStyle">$30 AND ABOVE</p></span>' +
-                                '<span class="range" ng-click="filterMarker(40,5);"><img src="./img/map_icons/FLASK_PIN_40.png"><p id="5" class="rangePStyle">$40 AND ABOVE</p></span>' +
-                                '<span class="range" ng-click="filterMarker(50,6);"><img src="./img/map_icons/FLASK_PIN_50.png"><p id="6" class="rangePStyle">$50 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(9,1);"><img src="./img/map_icons/FLASK_PIN_9.svg"><p id="1" class="rangePStyle">LESS THAN $10</p></span>' +
+                                '<span class="range" ng-click="filterMarker(10,2);"><img src="./img/map_icons/FLASK_PIN_10.svg"><p id="2" class="rangePStyle">$10 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(20,3);"><img src="./img/map_icons/FLASK_PIN_20.svg"><p id="3" class="rangePStyle">$20 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(30,4);"><img src="./img/map_icons/FLASK_PIN_30.svg"><p id="4" class="rangePStyle">$30 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(40,5);"><img src="./img/map_icons/FLASK_PIN_40.svg"><p id="5" class="rangePStyle">$40 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(50,6);"><img src="./img/map_icons/FLASK_PIN_50.svg"><p id="6" class="rangePStyle">$50 AND ABOVE</p></span>' +
                                 '</div>' +
                             '</ion-content>' +
                     '</ion-popover-view>';
@@ -883,9 +885,9 @@
 
         //function for getting data of filter
         $scope.previousIndex = -1;
-        $scope.filterMarker = function (data, index) {
-            $timeout(function () {
-                var index = index;
+        $scope.filterMarker = function (data, val) {
+            //$timeout(function () {
+                //var index = index;
 
                 if (data == 0) {
                     $scope.filterCost = null;
@@ -895,15 +897,15 @@
                     $scope.filterCost = parseInt(data);
                     //console.log(this);
                     $("#" + $scope.previousIndex).css("color", "#000000");
-                    $("#" + index).css("color", "#f7941e");
-                    $scope.previousIndex = index;
+                    $("#" + val).css("color", "#f7941e");
+                    $scope.previousIndex = val;
                     if ($scope.previousIndex >= 0) {
                         $("#0").css("color", "#000000");
                     }
                 }
 
                 callMarkersAgain();
-            }, 0);
+            //}, 0);
         };
         function callMarkersAgain() {
             $scope.isMapMarkersSet = false;
@@ -1243,50 +1245,50 @@
                                             tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                                             tempObject.icon = {
                                                 url: tempObject.imageUrl,
-                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                                //scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                             }
                                         } else if (tempObject.cost < 10) {
                                             tempObject.icon = {
                                                 url: 'img/map_icons/FLASK_PIN_9.svg',
-                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                                //scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                             }
                                         }
                                         else if (tempObject.cost >= 10 && tempObject.cost <= 19) {
                                             tempObject.icon = {
                                                 url: 'img/map_icons/FLASK_PIN_10.svg',
-                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                                //scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                             }
                                         }
                                         else if (tempObject.cost >= 20 && tempObject.cost <= 29) {
                                             tempObject.icon = {
                                                 url: 'img/map_icons/FLASK_PIN_20.svg',
-                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                                //scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                             }
                                         }
                                         else if (tempObject.cost >= 30 && tempObject.cost <= 39) {
                                             tempObject.icon = {
                                                 url: 'img/map_icons/FLASK_PIN_30.svg',
-                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                                //scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                             }
                                         }
                                         else if (tempObject.cost >= 40 && tempObject.cost <= 49) {
                                             tempObject.icon = {
                                                 url: 'img/map_icons/FLASK_PIN_40.svg',
-                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                                //scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                             }
                                         } else if (tempObject.premiumDisplayEnabled == true) {
                                             if (ImgObj.length != 0) {
                                                 var imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                                                 tempObject.icon = {
                                                     url: imageUrl,
-                                                    scaledSize: { width: 20, height: 60 } //for scaling the svg images
+                                                    //scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                                 }
                                             }
                                         }
                                         else if (tempObject.cost >= 50) {
                                             tempObject.icon = {
                                                 url: 'img/map_icons/FLASK_PIN_50.svg',
-                                                scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                                //scaledSize: { width: 60, height: 60 } //for scaling the svg images
                                             }
                                         }
                                         $scope.parkingMarkers.push(tempObject);
@@ -1396,24 +1398,24 @@
         };
 
         function showFilteredMarkers(data) {
-            $timeout(function () {
-                tempObject.icon = {
+            //$timeout(function () {
+                data.icon = {
                     url: 'img/map_icons/FLASK_PIN_' + $scope.filterCost + '.svg',
-                    scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                    //scaledSize: { width: 60, height: 60 } //for scaling the svg images
                 }
                 if ($scope.filterCost == 9) {
-                    if (tempObject.cost <= 9)
-                        $scope.parkingMarkers.push(tempObject);
+                    if (data.cost <= 9)
+                        $scope.parkingMarkers.push(data);
                 } else {
-                    if ((tempObject.cost >= $scope.filterCost) && (tempObject.cost < ($scope.filterCost + 10))) {
-                        $scope.parkingMarkers.push(tempObject);
+                    if ((data.cost >= $scope.filterCost) && (data.cost < ($scope.filterCost + 10))) {
+                        $scope.parkingMarkers.push(data);
                     }
                 }
                 if (($ionicTabsDelegate.selectedIndex()) > 0) {
                     var value = parseInt("0");
                     $scope.filterMarker(value, value);
                 }
-            }, 0);
+            //}, 0);
         }
 
         $scope.slidePrevious1 = function (slide) {
@@ -1495,13 +1497,14 @@
         console.log('inside refreshMap');
         uiGmapIsReady.promise()
             .then(function (instances) {
-                $timeout(function () {
-                $scope.refreshMap_maps = instances[0].map;    // can use std google.maps methods on this returned map object
+                //$timeout(function () {
+                //$scope.refreshMap_maps = instances[0].map;    // can use std google.maps methods on this returned map object
                 $scope.refreshMap = function () {
                     mapServices.refreshMap();
                     
                 };
-                }, 0);
+                console.log('map loaded');
+                //}, 0);
             },
             function(err){
                 console.log(err);console.log('err map'+err);

@@ -432,7 +432,7 @@
                 }
             })
              uiGmapGoogleMapApiProvider.configure({
-              key: 'AIzaSyDAFZx0f0rc-vCyx-GHMqy2O9m06Dc-p8Y',
+                 key: 'AIzaSyCzRrLPlhKG194XQ63Sby9GykJaplE3cvw',
             libraries: 'weather,geometry,visualization,places'
         });
     })

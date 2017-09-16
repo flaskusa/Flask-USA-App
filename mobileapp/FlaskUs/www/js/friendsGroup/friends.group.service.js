@@ -20,7 +20,8 @@
             updateGroup:updateGroup,
             deleteGroupUser:deleteGroupUser,
             searchGroupMember:searchGroupMember,
-            leaveGroup:leaveGroup
+            leaveGroup:leaveGroup,
+            showStatusofAPIonFaliure : showStatusofAPIonFaliure
         }
         this.groupMemberDetail={};
         this.groupDetail={};
@@ -39,9 +40,7 @@
         var updateGroupUrl="/flask-manage-user-group-portlet.flaskgroup/update-group";
         var DeleteGroupUserUrl="/flask-manage-user-group-portlet.flaskgroupusers/delete-group-user";
         var searchFriendUrl="/flask-social-portlet.entry/search-my-friends";
-        var leaveGroupUrl="/flask-manage-user-group-portlet.flaskgroupusers/delete-group-user"
-
-
+        var leaveGroupUrl="/flask-manage-user-group-portlet.flaskgroupusers/delete-group-user";
 
         function getAllGroups(userId) {
             return $http.get(SERVER.url+getAllGroupsURL,{params:{
@@ -50,6 +49,7 @@
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
+                    showStatusofAPIonFaliure(response);
                     return $q.$inject(response);
                     //add errror handling
                 });
@@ -65,6 +65,7 @@
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
+                    showStatusofAPIonFaliure(response);
                     return $q.$inject(response);
                     //add errror handling
                 });
@@ -78,6 +79,7 @@
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
+                    showStatusofAPIonFaliure(response);
                     return $q.$inject(response);
                     //add errror handling
                 });
@@ -87,6 +89,7 @@
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
+                    showStatusofAPIonFaliure(response);
                     return $q.$inject(response);
                     //add errror handling
                 });
@@ -96,6 +99,7 @@
                 .then(function success(response) {
                     return response;
                 }, function failure(response) {
+                    showStatusofAPIonFaliure(response);
                     return $q.$inject(response);
                     //add errror handling
                 });
@@ -106,6 +110,7 @@
                 .then(function success(response) {
                     return response.data;
                 }, function failure(response) {
+                    showStatusofAPIonFaliure(response);
                     return $q.$inject(response);
                     //add errror handling
                 });
@@ -124,6 +129,7 @@
                 }).then(function success(response) {
                     return response.data;
                 }, function failure(response) {
+                    showStatusofAPIonFaliure(response);
                     return $q.$inject(response);
                     //add errror handling
                 });
@@ -138,6 +144,7 @@
             }).then(function success(response) {
                 return response.data;
             }, function failure(response) {
+                showStatusofAPIonFaliure(response);
                 return $q.$inject(response);
                 //add errror handling
             });
@@ -152,6 +159,7 @@
             }).then(function success(response) {
                 return response.data;
             }, function failure(response) {
+                showStatusofAPIonFaliure(response);
                 return $q.$inject(response);
                 //add errror handling
             });
@@ -170,6 +178,7 @@
             }).then(function success(response) {
                 return response.data;
             }, function failure(response) {
+                showStatusofAPIonFaliure(response);
                 return $q.$inject(response);
                 //add errror handling
             });
@@ -182,6 +191,7 @@
             }).then(function success(response) {
                 return response.data;
             }, function failure(response) {
+                showStatusofAPIonFaliure(response);
                 return $q.$inject(response);
                 //add errror handling
             });
@@ -192,6 +202,7 @@
             }).then(function success(response) {
                 return response.data;
             }, function failure(response) {
+                showStatusofAPIonFaliure(response);
                 return $q.$inject(response);
                 //add errror handling
             });
@@ -202,9 +213,38 @@
             }).then(function success(response) {
                 return response.data;
             }, function failure(response) {
+                showStatusofAPIonFaliure(response);
                 return $q.$inject(response);
                 //add errror handling
             });
+        }
+
+        function showStatusofAPIonFaliure(err){
+            if(err.status == 400){
+                $flaskUtil.alert('Bad Request from server');
+            }else if(err.status == 401){
+                $flaskUtil.alert('Please check if your username and password are correct.');}
+            else if(err.status == 403){
+                $flaskUtil.alert('Too many connections on server');
+            }else if(err.status == 500){
+                $flaskUtil.alert('Something wrong with server');
+                $state.go("app.events");
+            }else if(err.status == -1){
+                $flaskUtil.alert(" Please Check your Internet Connection and restart the App");     
+            }else if(err.status == 503){
+                $flaskUtil.alert("Server is currently Unavailable, please try after sometime");
+                $state.go("app.events");
+            }else if(err.status == 404){
+                $flaskUtil.alert("Requested data not found on server");
+            }else if(err.status == 502){
+                $flaskUtil.alert("Invalid response from server");
+                $state.go("app.events");
+            }else if(err.status == 504){
+                $flaskUtil.alert("Server response timeout");
+                $state.go("app.events");
+            }else{
+                $state.go("app.events");
+            }
         }
         return services;
 

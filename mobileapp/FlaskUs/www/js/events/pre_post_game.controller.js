@@ -10,7 +10,7 @@
         /* jshint validthis: true */
         console.log('inside prePostGameCtrl');
         var self = this;
- 
+        $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
         $scope.venueDataRecieved=false;
         $scope.eventDetails = {};
         $scope.event = {};
@@ -55,9 +55,9 @@
             setCurrentEvent($localStorage["CachedEvents"][currEventId].getCurrentEvent);
         }
         function getCurrentEvent() {
- console.log('Inside getCurrentEvent fn');
+            console.log('Inside getCurrentEvent fn');
             EventsService.getEventByEventId($scope.currEventId).then(function (respData) {
-                                                                      console.log('Inside EventsService.getEventByEventId fn');
+                console.log('Inside EventsService.getEventByEventId fn');
                 $localStorage["CachedEvents"][currEventId].getCurrentEvent = respData;
                 $localStorage["CachedEvents"][currEventId].addeddTime = new Date().getTime();
                 setCurrentEvent(respData);
@@ -75,14 +75,14 @@
             }
         }
         function setCurrentEvent(respData) {
- console.log('Inside setCurrentEvent');
+            console.log('Inside setCurrentEvent');
             $scope.currVenueName = respData.data.venueName;
             $scope.currEventDate = respData.data.eventDate;
             $scope.currVenueId = respData.data.venueId;
         }
        
         $scope.preEvent = function (pre) {
-        console.log('Inside preEvent'+$scope.currEventName+'-'+$scope.currEventId);
+            console.log('Inside preEvent'+$scope.currEventName+'-'+$scope.currEventId);
 
             if (pre == "Tickets") {
                 $state.go("app.tickets", { eventDetails: $localStorage["eventDetails"] });
@@ -99,7 +99,7 @@
             }
         }
         $scope.atEvent = function (during) {
-        console.log('Inside atEvent'+$scope.currEventName+'-'+$scope.currEventId);
+            console.log('Inside atEvent'+$scope.currEventName+'-'+$scope.currEventId);
             if (during == "Add Content") {
                 $state.go("app.manage_event_content", { eventDetails: $localStorage["eventDetails"], infoType: AT_EVENT, infoTypeCategory: during, currEventName: $scope.currEventName, currEventId: $scope.currEventId });
             }
@@ -109,7 +109,7 @@
             }
         }
         $scope.postEvent = function (post) {
-        console.log('Inside postEvent'+$scope.currEventName+'-'+$scope.currEventId);
+            console.log('Inside postEvent'+$scope.currEventName+'-'+$scope.currEventId);
             if (post == "Add Content") {
                 $state.go("app.manage_event_content", { eventDetails: $localStorage["eventDetails"], infoType: POST_EVENT, infoTypeCategory: post, currEventName: $scope.currEventName, currEventId: $scope.currEventId });
             }
@@ -118,14 +118,14 @@
             }
         }
         function getEventVenueDatail() {
-            $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
+            //$ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
             //console.log($stateParams.eventId);
             if ($stateParams.eventId == "none") {
                 EventsService.getVenueDetailWithImage(parseInt($stateParams.venueId)).then(function (respData) {
                     //$timeout(function () {
                         setEventVenueDatail(respData);
                         $scope.venueDataRecieved = true;
-                        $ionicLoading.hide();
+                        //$ionicLoading.hide();
                     //}, 600);
                 });
             } else {
@@ -134,10 +134,13 @@
                         $localStorage["CachedEvents"][currEventId].getEventVenueDatail = respData;
                         $scope.venueDataRecieved = true;
                         setEventVenueDatail(respData);
-                        $ionicLoading.hide();
+                        //$ionicLoading.hide();
                     //}, 600);
                 });
             }
+            $timeout(function () {
+                $ionicLoading.hide();
+            }, 4000);
         }
 
         function setEventVenueDatail(respData) {

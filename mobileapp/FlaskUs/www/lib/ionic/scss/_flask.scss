@@ -1709,6 +1709,7 @@ position:initial !important;
 
    .parking_map_div{
        margin-right: 5px;
+       margin-top:-55% !important;
    }
 
    .parkingInfo{
@@ -2215,6 +2216,7 @@ div .extra-right-supply{
   max-width: 258px;
   overflow: hidden;
    }
+
 .iw-fixed-title{
   width: 100%;
   max-width: 312px;
@@ -2245,7 +2247,7 @@ div .extra-right-supply{
     overflow: hidden;
     text-overflow: ellipsis;
     min-width: 0;
-    max-width: 199px;
+    max-width: 159px;
     font-family: 'Avenir Next-Bold';
     font-weight: bold;
 }
@@ -3428,6 +3430,7 @@ span .span_icon_supply{
 
 .range img{
    height:2pc;
+   margin-left: -16px;
 }
 
 .range p{

@@ -12,10 +12,9 @@
             var currentPlatform = ionic.Platform.platform();
             //console.log(currentPlatform);
             var sendInfoData = {};
-
             var push = PushNotification.init({
                 "android": {
-                    "senderID": "843562154399",
+                    "senderID": "29209311839",
                     "alert":"true",
                     "sound": "true",
                     "badge": "true",
