@@ -1,7 +1,13 @@
 Steps for publish app to publish
 
-$ ionic cordova build --release android
+1. $ ionic cordova build --release android.
 
-jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore flaskusa-release-key.keystore android-release-unsigned.apk flask_usa
+2. copy android-release-unsigned.apk outside to www folder.
 
-zipalign -v 4 android-release-unsigned.apk FlaskUSA.apk
+3. run following command: jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore flaskusa-release-key.keystore android-release-unsigned.apk flask_usa
+
+4. copy android-release-unsigned.apk to sdk\build-tools\<latest sdk version> 
+
+5. run following command to sign the apk file: zipalign -v 4 android-release-unsigned.apk FlaskUSA.apk
+
+6. copy signed apk to google play store to upload new release.
