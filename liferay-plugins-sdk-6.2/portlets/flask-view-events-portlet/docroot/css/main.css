@@ -789,3 +789,11 @@ div#fixedfooter2
 .icon-remove{
 	padding-top: 1px !important;
 }
+
+/* Slider svg image lable nav */
+.slideImageLabel{
+    position: absolute;
+    bottom: 0;
+    margin-left: -36%;
+    width: 85%;
+}

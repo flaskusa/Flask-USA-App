@@ -765,6 +765,7 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase();
 	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
 	var slideBackgroundImage = '/flask-view-events-portlet/img/'+_eventModel.getBackgroundImage(infoTypeCategoryName);
+	var slideBackgroundImageLabel = '/flask-view-events-portlet/img/flask_icons/'+_eventModel.getImageLabel(infoTypeCategoryName);
 	$.each(distinctInfoTypeCategory,function(index,KeyVal){
 		var elementPosition = $.inArray(KeyVal[0], temp);
 		if(infoTypeCategoryName.toUpperCase()==KeyVal[0].toUpperCase() && elementPosition == -1){
@@ -773,6 +774,8 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 			$.each(objFields, function(idx, obj){
 				var objContent = $("<div/>",{'class':'eventDetailBox','data-infoTypeCategory':objEventDetails.infoTypeCategoryName});
 				objContent.css('background-image','url("'+slideBackgroundImage+'")');
+				var slideImageLabel = $('<img/>',{'class':'slideImageLabel','src':slideBackgroundImageLabel});
+				objContent.append(slideImageLabel);
 				objContent.css('background-repeat','no-repeat');
 				objContent.css('background-size','100% 100%');
 				if(infoTypeCategoryName.toUpperCase()=='FLASK US'){

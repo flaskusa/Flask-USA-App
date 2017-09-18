@@ -149,48 +149,124 @@ _eventModel.DETAIL_DATA_MODEL = {
              "website":"Website"
          }]          
 }
-
+//for getting slider images in background -nav
 _eventModel.getBackgroundImage = function(infoTypeCategory){
-	var renderer;
+    var defaultExt = ".jpg";
+    var fileName;
 	switch(infoTypeCategory) {
-		case "tradition":
-			renderer = 'Flask_Tradition.jpg';
-			break;
-		case "parking":
-			renderer = 'Flask_Parking.jpg';
-			break;
-		case "bar & restaurants":
-			renderer = 'Flask_Bars.jpg';
-			break;
-		case "traffic":
-			renderer = 'Flask_Traffic.jpg';
-			break;
-		case "supplies":
-			renderer = 'Flask_Supplies.jpg';
-			break;			
-		case "getting home":
-			renderer = 'flask_GettingHome.jpg';
-			break;
-		case "nightlife":
-			renderer = 'flask_nightlife.jpg';
-			break;
-		case "liquor store":
-			renderer = 'flask_restaurantBar_post.jpg';
-			break;
-		case "venue info":
-			renderer = 'venue_info.jpg'
-			break;				
-		case "venue map":
-			renderer = 'Venue_map.jpg'
-			break;				
-		case "flask us":
-			renderer = 'Flask_FlaskUs.jpg'
-			break;				
-		default:
-			renderer = 'Flask_Default_Image.jpg';
+    case "tradition":
+        fileName = 'Flask_Tradition';
+        break;
+    case "parking":
+        fileName = 'PRE_PARKING';
+        break;
+    case "bar & restaurants":
+        fileName = 'PRE_BAR_RESTAURANTS';
+        break;
+    case "traffic":
+        fileName = 'PRE_TRAFFIC';
+        break;
+    case "supplies":
+        fileName = 'PRE_SUPPLIES';
+        break;
+    case "getting home":
+        fileName = 'flask_GettingHome';
+        break;
+    case "nightlife":
+        fileName = 'POST_NIGHTLIFE';
+        break;
+    case "liquor store":
+        fileName = 'flask_restaurantBar_post';
+        break;
+    case "venue info":
+        fileName = 'venue_info';
+        break;
+    case "venue map":
+        fileName = 'Venue_map';
+        break;
+    case "flask us":
+        fileName = 'Flask_FlaskUs' + "_" + infoTypeCategory;
+        break;
+    case "tickets":
+        fileName = 'tickets';
+        break;
+    case "game day needs":
+        fileName = 'PRE_SUPPLIES';
+        break;
+    case "add content":
+        fileName = 'Add_Event_Content'
+        break;
+    case "hotels":
+        fileName = 'POST_HOTEL'
+        break;
+    case "getting home":
+        fileName = 'POST_GETTINGHOME'
+        break;
+    default:
+        fileName = 'Flask_Default_Image';
+	}
+	fileName = fileName + defaultExt;
+	return fileName;
+}
+//for getting slider images lables -nav
+_eventModel.getImageLabel = function(infoTypeCategory){
+    var defaultExt = ".svg";
+    var fileName
+	switch(infoTypeCategory) {
+    case "tradition":
+        fileName = 'Flask_Tradition';
+        break;
+    case "parking":
+        fileName = 'PRE_PARKING';
+        break;
+    case "bar & restaurants":
+        fileName = 'PRE_BAR_RESTAURANTS';
+        break;
+    case "traffic":
+        fileName = 'PRE_TRAFFIC';
+        break;
+    case "supplies":
+        fileName = 'PRE_SUPPLIES';
+        break;
+    case "getting home":
+        fileName = 'flask_GettingHome';
+        break;
+    case "nightlife":
+        fileName = 'POST_NIGHTLIFE';
+        break;
+    case "liquor store":
+        fileName = 'flask_restaurantBar_post';
+        break;
+    case "venue info":
+        fileName = 'venue_info';
+        break;
+    case "venue map":
+        fileName = 'VENUE_MAP';
+        break;
+    case "flask us":
+        fileName = 'Flask_FlaskUs' + "_" + infoTypeCategory;
+        break;
+    case "tickets":
+        fileName = 'tickets';
+        break;
+    case "game day needs":
+        fileName = 'PRE_SUPPLIES';
+        break;
+    case "add content":
+        fileName = 'Add_Event_Content'
+        break;
+    case "hotels":
+        fileName = 'POST_HOTEL'
+        break;
+    case "getting home":
+        fileName = 'POST_GETTINGHOME'
+        break;
+    default:
+        fileName = 'Flask_Default_Image';
 			break;
 	}
-	return renderer;
+    fileName = fileName + defaultExt;
+	return fileName;
 }
 
 _eventModel.BACKGROUNDIMAGE = {

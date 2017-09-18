@@ -263,6 +263,7 @@ _flaskMap.createMarkers = function (results, status) {
             var infowindow = new google.maps.InfoWindow();
             google.maps.event.addListener(_flaskMap.map, 'click', function(map) {
         		_flaskMap.clearInfos();
+        		alert("clicked here");
         	});
             google.maps.event.addListener(mark, 'click', (function(mark, i) {
             	return function() {
