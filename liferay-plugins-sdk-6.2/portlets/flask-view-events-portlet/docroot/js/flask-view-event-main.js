@@ -247,7 +247,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 									divControls.append(objAnchor);
 							        break;
 							    case "Website":
-									var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
+									var objAnchor = $("<a/>",{'href':'httpss://'+evalue,'target':'_blank'});
 									objAnchor.html(evalue);
 									divControls.append(objAnchor);							
 							        break;
@@ -321,7 +321,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 							divControls.append(objAnchor);
 					        break;
 					    case "Website":
-							var objAnchor = $("<a/>",{'href':'http://'+evalue,'target':'_blank'});
+							var objAnchor = $("<a/>",{'href':'https://'+evalue,'target':'_blank'});
 							objAnchor.html(evalue);
 							divControls.append(objAnchor);							
 					        break;

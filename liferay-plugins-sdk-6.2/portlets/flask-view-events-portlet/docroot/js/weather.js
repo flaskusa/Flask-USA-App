@@ -111,11 +111,11 @@ WeatherInfo = {
     },
 
     getWeatherData: function(searchQuery) {
-    	w.searchQuery = 'http://api.openweathermap.org/data/2.5/weather?lat='+ _flaskMap.latitude +'&lon='+ _flaskMap.longitude +'&APPID=dc5abcaac280f51b6b82fe97b62e404d';
+    	w.searchQuery = 'https://api.openweathermap.org/data/2.5/weather?lat='+ _flaskMap.latitude +'&lon='+ _flaskMap.longitude +'&APPID=dc5abcaac280f51b6b82fe97b62e404d';
         $.getJSON(w.searchQuery, function(data) {
             WeatherInfo.setWeatherData(data);
         });
-        w.searchQuery1 = 'http://api.openweathermap.org/data/2.5/forecast?lat='+ _flaskMap.latitude +'&lon='+ _flaskMap.longitude +'&cnt=15&APPID=dc5abcaac280f51b6b82fe97b62e404d';
+        w.searchQuery1 = 'https://api.openweathermap.org/data/2.5/forecast?lat='+ _flaskMap.latitude +'&lon='+ _flaskMap.longitude +'&cnt=15&APPID=dc5abcaac280f51b6b82fe97b62e404d';
         $.getJSON(w.searchQuery1, function(data) {
         	showForecastSmall(data.list);
         });

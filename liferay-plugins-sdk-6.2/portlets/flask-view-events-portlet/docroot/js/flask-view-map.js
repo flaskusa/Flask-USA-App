@@ -263,7 +263,6 @@ _flaskMap.createMarkers = function (results, status) {
             var infowindow = new google.maps.InfoWindow();
             google.maps.event.addListener(_flaskMap.map, 'click', function(map) {
         		_flaskMap.clearInfos();
-        		alert("clicked here");
         	});
             google.maps.event.addListener(mark, 'click', (function(mark, i) {
             	return function() {
@@ -501,16 +500,16 @@ _flaskMap.createMapLink = function(address1){
 		findUs = '<a href="geo:'+address1+'" class="addressLink">'+address1+'</a>'
 	}
 	else if(isMobile.BlackBerry()=="BlackBerry"){
-		findUs = '<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
+		findUs = '<a href="https://maps.google.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
 	}
 	else if(isMobile.iOS()=="iPhone" || isMobile.iOS()=="iPad" || isMobile.iOS()=="iPod"){
-		findUs = '<a href="http://maps.apple.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
+		findUs = '<a href="https://maps.apple.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
 	}
 	else if(isMobile.Windows()=="IEMobile"){
 		findUs = '<a href="maps:'+address1+'">'+address1+'</a>'
 	}
 	else{
-		findUs = '<a href="http://maps.google.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
+		findUs = '<a href="https://maps.google.com/?saddr=Current%20Location&daddr='+address1+'">'+address1+'</a>';
 	}
 	return findUs;
 }
