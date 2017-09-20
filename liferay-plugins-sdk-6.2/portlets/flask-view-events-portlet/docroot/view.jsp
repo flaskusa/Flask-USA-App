@@ -18,7 +18,7 @@
 <%@page import="com.liferay.portal.kernel.util.WebKeys"%>
 <%@	page import="com.liferay.portal.model.Address" %>
 <%@ taglib uri="http://alloy.liferay.com/tld/aui" prefix="aui" %>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzRrLPlhKG194XQ63Sby9GykJaplE3cvw&libraries=places" type="text/javascript"></script>
+<!-- <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCzRrLPlhKG194XQ63Sby9GykJaplE3cvw&libraries=places" type="text/javascript"></script> -->
 <!-- <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&key=AIzaSyCzRrLPlhKG194XQ63Sby9GykJaplE3cvw&callback=initMap&libraries=places" type="text/javascript"></script> -->
 <%
   com.liferay.portal.theme.ThemeDisplay themeDisplay = (com.liferay.portal.theme.ThemeDisplay)request.getAttribute(WebKeys.THEME_DISPLAY);
