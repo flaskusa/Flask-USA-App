@@ -329,6 +329,9 @@ _flaskMap.myMarkers = function(){
 		if(_flaskMap.placeType == 'liquor store'){
 			_flaskMap.placeType = "liquor_store";
 		}
+		if(_flaskMap.placeType=="hotels"){
+			_flaskMap.placeType = "hotels"
+		}
 
 		if(obj.latitude!= "" && _flaskMap.placeType == obj.infoTypeCategoryName.toLowerCase()){
 			var mark;
@@ -346,7 +349,9 @@ _flaskMap.myMarkers = function(){
 	    		if(_flaskMap.placeType=="liquor_store"){
 	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
 	    		}
-
+	    		if(_flaskMap.placeType=="hotels"){
+	    			icon_url = '/flask-view-events-portlet/img/map_icons/hotel.svg';
+	    		}
 				mark = new google.maps.Marker({
 			        position: myLatlng,
 			        map: _flaskMap.map,
@@ -418,6 +423,9 @@ _flaskMap.myMarkers = function(){
 	    		if(_flaskMap.placeType=="liquor_store"){
 	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
 	    		}
+	    		if(_flaskMap.placeType=="hotels"){
+	    			icon_url = '/flask-view-events-portlet/img/map_icons/hotel.svg';
+	    		}
 			}
 		}else{
 			document.getElementById('searchClear').style.display = 'block';
@@ -444,6 +452,9 @@ _flaskMap.myMarkers = function(){
     	    		}
     	    		if(_flaskMap.placeType=="liquor_store"){
     	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
+    	    		}
+    	    		if(_flaskMap.placeType=="hotels"){
+    	    			icon_url = '/flask-view-events-portlet/img/map_icons/hotel.svg';
     	    		}
      				/*setTimeout(function(){
      					for(var j=0; j<_flaskMap.flaskMarkers.length; j++){
@@ -475,6 +486,9 @@ _flaskMap.myMarkers = function(){
     	    		}
     	    		if(_flaskMap.placeType=="liquor_store"){
     	    			icon_url = '/flask-view-events-portlet/img/icon_liquor.png';
+    	    		}
+    	    		if(_flaskMap.placeType=="hotels"){
+    	    			icon_url = '/flask-view-events-portlet/img/map_icons/hotel.svg';
     	    		}
     			}
      		}
