@@ -150,7 +150,7 @@ _eventModel.DETAIL_DATA_MODEL = {
          }]          
 }
 //for getting slider images in background -nav
-_eventModel.getBackgroundImage = function(infoTypeCategory){
+_eventModel.getBackgroundImage = function(infoTypeCategory,infoTypeName){
     var defaultExt = ".jpg";
     var fileName;
 	switch(infoTypeCategory) {
@@ -185,7 +185,7 @@ _eventModel.getBackgroundImage = function(infoTypeCategory){
         fileName = 'Venue_map';
         break;
     case "flask us":
-        fileName = 'Flask_FlaskUs' + "_" + infoTypeCategory;
+        fileName = 'Flask_FlaskUs' + "_" + infoTypeName;
         break;
     case "tickets":
         fileName = 'tickets';
@@ -209,7 +209,7 @@ _eventModel.getBackgroundImage = function(infoTypeCategory){
 	return fileName;
 }
 //for getting slider images lables -nav
-_eventModel.getImageLabel = function(infoTypeCategory){
+_eventModel.getImageLabel = function(infoTypeCategory,infoTypeName){
     var defaultExt = ".svg";
     var fileName
 	switch(infoTypeCategory) {
@@ -244,7 +244,7 @@ _eventModel.getImageLabel = function(infoTypeCategory){
         fileName = 'VENUE_MAP';
         break;
     case "flask us":
-        fileName = 'Flask_FlaskUs' + "_" + infoTypeCategory;
+        fileName = 'Flask_FlaskUs' + "_" + infoTypeName;
         break;
     case "tickets":
         fileName = 'tickets';

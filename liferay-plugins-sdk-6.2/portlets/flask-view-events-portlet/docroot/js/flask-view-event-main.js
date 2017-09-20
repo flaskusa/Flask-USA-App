@@ -223,7 +223,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objEventDetails = jQuery.parseJSON(eventDetails);
 	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase();
 	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
-	if(eventDetailImages.length>0){
+	if(eventDetailImages.length>0 && eventDetailImages.length!= undefined){
 		$.each(eventDetailImages, function(idx, objImg) {
 			if(objEventDetails.showDescription){
 				var imgURL = "";
@@ -764,8 +764,8 @@ function fnFillSlides(eventDetailImages,eventDetails,objArray,distinctInfoTypeCa
 	var objEventDetails = jQuery.parseJSON(eventDetails);
 	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase();
 	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
-	var slideBackgroundImage = '/flask-view-events-portlet/img/'+_eventModel.getBackgroundImage(infoTypeCategoryName);
-	var slideBackgroundImageLabel = '/flask-view-events-portlet/img/flask_icons/'+_eventModel.getImageLabel(infoTypeCategoryName);
+	var slideBackgroundImage = '/flask-view-events-portlet/img/'+_eventModel.getBackgroundImage(infoTypeCategoryName,objEventDetails.infoTypeName);
+	var slideBackgroundImageLabel = '/flask-view-events-portlet/img/flask_icons/'+_eventModel.getImageLabel(infoTypeCategoryName,objEventDetails.infoTypeName);
 	$.each(distinctInfoTypeCategory,function(index,KeyVal){
 		var elementPosition = $.inArray(KeyVal[0], temp);
 		if(infoTypeCategoryName.toUpperCase()==KeyVal[0].toUpperCase() && elementPosition == -1){
