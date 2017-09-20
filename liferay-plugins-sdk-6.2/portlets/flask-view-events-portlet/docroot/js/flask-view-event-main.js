@@ -223,7 +223,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objEventDetails = jQuery.parseJSON(eventDetails);
 	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase();
 	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
-	if(eventDetailImages.length>0 && eventDetailImages.length!= undefined){
+	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
 			if(objEventDetails.showDescription){
 				var imgURL = "";
