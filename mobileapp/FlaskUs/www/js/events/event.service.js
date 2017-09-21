@@ -399,6 +399,7 @@
                 $flaskUtil.alert("Server response timeout");
                 $state.go("app.events");
             }else{
+                $flaskUtil.alert("Erorr with no status code "+JSON.stringify(err));
                 $state.go("app.events");
             }
         }

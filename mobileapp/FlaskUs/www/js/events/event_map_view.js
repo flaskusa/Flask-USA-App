@@ -10,7 +10,6 @@
         /* jshint validthis: true */
         console.log('Inside eventMapViewCtrl');
         $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
-        //$ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
         var detailItem = {};
         $scope.zoomMin = 1;
         $scope.venueInfoSubDetail = [];
@@ -856,7 +855,7 @@
                       $scope.long = pos.coords.longitude;
                   }, function (err) {
                       // error
-                      // $flaskUtil.alert("Unable to Get Location");
+                      $flaskUtil.alert("Unable to Get Location");
                   });
             }, 0);
         }
@@ -1245,7 +1244,7 @@
                                             tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                                             tempObject.icon = {
                                                 url: tempObject.imageUrl,
-                                                //scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                                scaledSize: { width: 45, height: 45 } //for scaling the svg images
                                             }
                                         } else if (tempObject.cost < 10) {
                                             tempObject.icon = {
@@ -1281,7 +1280,7 @@
                                                 var imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
                                                 tempObject.icon = {
                                                     url: imageUrl,
-                                                    //scaledSize: { width: 60, height: 60 } //for scaling the svg images
+                                                    scaledSize: { width: 45, height: 45 } //for scaling the svg images
                                                 }
                                             }
                                         }
@@ -1507,7 +1506,9 @@
                 //}, 0);
             },
             function(err){
-                console.log(err);console.log('err map'+err);
+                console.log(err);
+                //alert('err map '+JSON.stringify(err));
+                $ionicLoading.show({ template: 'Bad Network,processing..!', noBackdrop: false, duration: 2000 });
                 $state.go("app.events");
             });
     });

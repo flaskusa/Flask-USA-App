@@ -77,6 +77,7 @@
                 })
                 .catch(function (event) {
                     // error
+                    $ionicLoading.show({ template: 'Error in Processing URL..!', noBackdrop: false, duration: 2000 });
                 });
         }
 
@@ -207,6 +208,7 @@
                   $scope.userlong = pos.coords.longitude;
               }, function (err) {
                   // error
+                  $ionicLoading.show({ template: 'Unable to Get Location', noBackdrop: false, duration: 2000 });
                   // $flaskUtil.alert("Unable to Get Location");
               });
         }

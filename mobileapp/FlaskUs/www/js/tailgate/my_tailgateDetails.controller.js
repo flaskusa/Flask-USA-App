@@ -156,7 +156,8 @@
                         }
                     }
                 });
-            },function(err) {
+            }, function (err) {
+                $ionicLoading.show({ template: 'Error in getting user profile pic !', noBackdrop: false, duration: 2000 });
             })
         };
 
@@ -301,6 +302,7 @@
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.uploadFileToServer(imageURI);
             }, function (err) {
+                $ionicLoading.show({ template: 'Processing Camera Permissions..!', noBackdrop: false, duration: 2000 });
                 //$flaskUtil.alert("Please Allow all permissions to access Camera.");
             });
         };
@@ -347,6 +349,7 @@
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.uploadFileToServer(imageURI);
             }, function (err) {
+                $ionicLoading.show({ template: 'Processing Gallery Permissions..!', noBackdrop: false, duration: 2000 });
                 //$flaskUtil.alert("Please Allow all permissions to access Gallery.");
             });
 

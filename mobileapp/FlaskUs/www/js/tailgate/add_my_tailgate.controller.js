@@ -485,6 +485,7 @@
                     $scope.setSelectedImageURIToUpload(imageURI);
                 }
             }, function (err) {
+                $ionicLoading.show({ template: 'Processing Camera Permissions..!', noBackdrop: false, duration: 2000 });
             });
         };
         $scope.checkPermission = function () {
@@ -533,7 +534,7 @@
                     $scope.setSelectedImageURIToUpload(imageURI);
                 }
             }, function (err) {
-
+                $ionicLoading.show({ template: 'Processing Gallery Permissions..!', noBackdrop: false, duration: 2000 });
             });
 
         }
@@ -579,6 +580,7 @@
                     $scope.reSetSelectedImageURIToUpload();
                     $rootScope.$broadcast('loading:hide');
                     alert("An error has occurred: Code = " + error.code);
+                    //$ionicLoading.show({ template: 'An error has occurred: Code ..!'+error.code, noBackdrop: false, duration: 2000 });
                     //console.log("upload error source " + error.source);
                     //console.log("upload error target " + error.target);
                 }, function (progress) {
@@ -752,6 +754,7 @@
 
 
             }, function (err) {
+                $ionicLoading.show({ template: 'Error in getting user Profile Picture!', noBackdrop: false, duration: 2000 });
             })
         };
         function userExistInLocal(userDetail) {
@@ -1194,6 +1197,7 @@
               }, function (err) {
                   // error
                   // $flaskUtil.alert("Unable to Get Location");
+                  $ionicLoading.show({ template: 'Unable to Get Location!', noBackdrop: false, duration: 2000 });
               });
         }
 
