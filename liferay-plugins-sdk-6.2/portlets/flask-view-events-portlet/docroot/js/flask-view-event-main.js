@@ -436,9 +436,11 @@ $(document).ready(function(){
 	        "applyClass": "btn btn-info btn-calendar",
 	        "cancelClass": "btn btn-info btn-calendar"
 	    }, cb);
-	    
-	    $('#reportrange').data('daterangepicker').setStartDate(moment());
-	    $('#reportrange').data('daterangepicker').setEndDate(moment().add(14, 'days'));		    	
+	    //to set start date only when event page is loaded.
+	    if($('#reportrange').data('daterangepicker')!=undefined){
+		    $('#reportrange').data('daterangepicker').setStartDate(moment());
+		    $('#reportrange').data('daterangepicker').setEndDate(moment().add(14, 'days'));		
+	    }    	
 	});	
  	
  	$("#txtSearch").change(function(){
