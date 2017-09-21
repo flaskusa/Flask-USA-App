@@ -223,6 +223,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 	var objEventDetails = jQuery.parseJSON(eventDetails);
 	var infoTypeCategoryName = objEventDetails.infoTypeCategoryName.toLowerCase();
 	var objFields =_eventModel.getObjectFields(infoTypeCategoryName);
+	if(eventDetailImages!=undefined){
 	if(eventDetailImages.length>0){
 		$.each(eventDetailImages, function(idx, objImg) {
 			if(objEventDetails.showDescription){
@@ -361,6 +362,7 @@ function fnFillImageArray(eventDetailImages,eventDetails,objArray){
 			objArray.push(objContent);		
 		});
 	}
+}
 	return objArray;
 }
 
