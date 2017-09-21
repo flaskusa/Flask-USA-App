@@ -19,13 +19,13 @@
         <textarea ng-if="showTextArea.show==true" ng-model="message.messageToSend" id="textArea" class="showTextArea hideTexArea"autofocus></textarea>
     </div>
     <div align="center">
-        <button type="submit" ng-disabled="showenablebuttons!=true" nav-clear="" class="button button-block button-positive friend " ng-click="toggleMessageBox(message.messageToSend);">
+        <button type="submit" nav-clear="" class="button button-block button-positive friend " ng-click="toggleMessageBox(message.messageToSend);">
             Send Message
         </button>
         <button type="submit" ng-disabled="showenablebuttons!=true" nav-clear="" class="button button-block button-positive friend" ng-click="goToChatWindow(friend);">
             View Messages
         </button>
-        <button type="submit" ng-disabled="showenablebuttons!=true" nav-clear="" class="button button-block button-positive friend" ng-click="initializeMediatorId(friend.userId)">
+        <button type="submit" nav-clear="" class="button button-block button-positive friend" ng-click="initializeMediatorId(friend.userId)">
             Add To Group
         </button>
     </div>
