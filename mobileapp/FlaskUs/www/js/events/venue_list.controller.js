@@ -14,7 +14,10 @@
         var location = 'geolocation';
         var searchStringList = angular.copy($scope.searchstringList);
         $scope.allEventId = [];
-        getVenueName();
+        $scope.$on('$ionicView.beforeEnter', function () {
+            getVenueName();
+        });
+        
         $ionicHistory.clearHistory();
         $ionicHistory.clearCache();
         //Get venue name for event details

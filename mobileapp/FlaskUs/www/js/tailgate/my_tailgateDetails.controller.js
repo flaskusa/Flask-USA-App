@@ -26,7 +26,9 @@
         $scope.goBack = function () {
                 $state.go("app.my_tailgate");
         }
-        getMyTailgate();
+        $scope.$on('$ionicView.beforeEnter', function () {
+            getMyTailgate();
+        });        
 
         $scope.isTailgateMember = function () {
             return true;

@@ -14,10 +14,14 @@
         $cookies.remove("newtailgatedata");
         var userResponse = $cookies.getObject('CurrentUser');
         var UserId = userResponse.data.userId;
+        $scope.tailgateMsg = "Loading....";
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
         $scope.allTailgate = [];
         $scope.copiedTailgates = [];
-        getAlltailgates();
+        $scope.$on('$ionicView.beforeEnter', function () {
+            getAlltailgates();
+        });
+        
         $scope.goBack = function () {
             $timeout(function () {
                 $state.go("app.user_navigation_menu");
@@ -28,6 +32,9 @@
             TailgateService.getMyTailgates(UserId).then(function (respData) {
                 var myTailgates = respData.data;
                 setLogoUrl(myTailgates);
+                if (myTailgates.length == 0) {
+                    $scope.tailgateMsg = "No Tailgate Added Yet."
+                }
             });
         }
         function setLogoUrl(myTailgates) {

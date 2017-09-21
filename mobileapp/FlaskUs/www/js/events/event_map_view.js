@@ -855,14 +855,14 @@
                       $scope.long = pos.coords.longitude;
                   }, function (err) {
                       // error
-                      $flaskUtil.alert("Unable to Get Location");
+                    $flaskUtil.alert("Unable to Get Location, Please Switch on GPS and Check App Location Permissions");
                   });
             }, 0);
         }
         //popup for parking map cost range
         template = '<ion-popover-view class="popover">' +
                             '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
-                                '<div class="list">' +
+                                '<div class="list" style="height:inherit;overflow:auto;padding-bottom:16px;">' +
                                 '<span class="range" ng-click="filterMarker(0,0);"><img src=""><p id="0" style="color:#f7941e;" class="rangePStyle">ALL</p></span>' +
                                 '<span class="range" ng-click="filterMarker(9,1);"><img src="./img/map_icons/FLASK_PIN_9.svg"><p id="1" class="rangePStyle">LESS THAN $10</p></span>' +
                                 '<span class="range" ng-click="filterMarker(10,2);"><img src="./img/map_icons/FLASK_PIN_10.svg"><p id="2" class="rangePStyle">$10 AND ABOVE</p></span>' +

@@ -3,14 +3,12 @@
     angular.module('flaskApp')
         .controller('EventsCtrl', EventsCtrl);
 
-    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage', '$ionicSlideBoxDelegate', '$rootScope', '$flaskUtil', '$timeout','$ionicHistory'];
+    EventsCtrl.$inject = ['$scope', 'EventsService', '$cordovaGeolocation', '$http', '$ionicPopup', 'SERVER', '$filter', '$cookies', '$localStorage', '$ionicSlideBoxDelegate', '$rootScope', '$flaskUtil', '$timeout'];
 
     /* @ngInject */
-    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage, $ionicSlideBoxDelegate, $rootScope, $flaskUtil, $timeout,$ionicHistory) {
+    function EventsCtrl($scope, EventsService, $cordovaGeolocation, $http, $ionicPopup, SERVER, $filter, $cookies, $localStorage, $ionicSlideBoxDelegate, $rootScope, $flaskUtil, $timeout) {
         /* jshint validthis: true */
  console.log('inside event controller');
-        $ionicHistory.clearHistory();
-        $ionicHistory.clearCache();
         var self = this;
         $scope.allEvents = [];
         $scope.localstorageData = {};
@@ -41,9 +39,10 @@
             days: '60'
         };
         var searchStringList=angular.copy($scope.searchstringList);
-        $scope.allEventId=[];
-        getAllEventDetail()
-
+        $scope.allEventId = [];
+        $scope.$on('$ionicView.beforeEnter', function () {
+            getAllEventDetail();
+        });
         // $scope.localstorageData = $localStorage.getObject('user_location_data');
         // Retrieve the object from ng-storage
         $rootScope.$on("LocationOptionSelected", function(){
