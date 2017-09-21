@@ -797,3 +797,6 @@ div#fixedfooter2
     margin-left: -36%;
     width: 85%;
 }
+div#Description {
+    word-wrap: break-word;
+}
