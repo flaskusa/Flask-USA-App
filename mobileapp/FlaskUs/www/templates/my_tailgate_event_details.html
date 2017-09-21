@@ -112,7 +112,7 @@
                     <ion-slide ng-repeat="image in myTailgateImages" style="background: rgba(211, 211, 211, 0);">
                         <ion-scroll direction="xy" scrollbar-x="false" scrollbar-y="false"
                                     zooming="true" min-zoom="{{zoomMin}}" style="width: 100%; height: 100%"
-                                    delegate-handle="scrollHandle{{$index}}" on-scroll="updateSlideStatus(activeSlide)" on-release="updateSlideStatus(activeSlide)">
+                                    delegate-handle="scrollHandle{{$index}}" on-scroll="updateSlideStatus(activeSlide)" on-release="updateSlideStatus(activeSlide)" Overflow-scroll="false">
                                     <div class="ZoomImage" style="height: 100% !important;background-image: url( {{imgUrl}}{{image.imageUUID}}&groupId={{image.imageGroupId}} )"></div>
                         </ion-scroll>
                     </ion-slide>
