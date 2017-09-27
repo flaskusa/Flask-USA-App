@@ -1,9 +1,19 @@
 {
-  "name": "FlaskUs",
+  "name": "FlaskUSA",
   "app_id": "ee069d26",
-  "integrations": {
-    "cordova": {}
-  },
+  "gulpStartupTasks": [
+    "sass",
+    "watch"
+  ],
+  "watchPatterns": [
+    "www/**/*",
+    "!www/lib/**/*",
+    "!www/**/*.map",
+    "scss/**/*"
+  ],
   "type": "ionic1",
-  "watchPatterns": []
+  "integrations": {
+    "cordova": {},
+    "gulp": {}
+  }
 }
