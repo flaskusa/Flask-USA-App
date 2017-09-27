@@ -100,7 +100,7 @@ public class EmailInvitationUtil {
 	
 	public static void emailAskUs(String fromMail, String subject, String description, ServiceContext serviceContext){
 		try {
-			InternetAddress fromAddress = new InternetAddress(fromMail);
+			InternetAddress fromAddress = new InternetAddress("info@flaskus.com");
 	        InternetAddress toAddress = new InternetAddress("info@flaskus.com");  // to address
 
 	        String body = ContentUtil.get("/template/emailAskUsTemplate.tmpl", true);  // email body , here we are getting email structure creating the content folder in the src and create the file with the extension as tmpl.
