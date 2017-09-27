@@ -252,9 +252,9 @@
         }
 
         $scope.goBack = function () {
-            $timeout(function () {
+            //$timeout(function () {
                 $ionicHistory.goBack();
-            }, 1000);
+            //}, 1000);
         }
         function getTimeDifference(dateTime, formattedDate) {
             var todayDate = new Date();

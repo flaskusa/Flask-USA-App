@@ -43,30 +43,26 @@
           <ion-list >
               <a class="item" ng-if="groups.length == 0 && addingInGroup==true"> There are no groups to add. </a>
               <a class="item" ng-if="groups.length == 0 && addingInGroup==false"> There are no groups. </a>
-              <ion-item class=" item-remove-animate chat-item.ng-enter-stagger" ng-repeat="group in groups | orderBy:'groupName'" style="padding: 0px" ng-init="group.showDivByIndex=false">
+              <ion-item class=" item-remove-animate chat-item ng-enter-stagger bounceInLeft" ng-repeat="group in groups | orderBy:'groupName'" style="padding: 0px" ng-init="group.showDivByIndex=false">
                   <div ng-if="group.showDivByIndex==true" style="padding-top: 10px">
                       user Added
                   </div>
-                  <div ng-if="group.showDivByIndex==false">
-                      <a  class="itemAnchor" ng-click="getGroupDetail(group)">
+                  <div ng-if="group.showDivByIndex==false" ng-click="getGroupDetail(group)" class="row no-padding">
                           <div class="col-20">
                                <img src = "img/default-group-pic.png" class="groupIcon">
                           </div>
-                          <div>
+                          <div style="width: 100%;text-align: -webkit-center;">
                               <h3 class="emailText" style="font-size: 17px; font-weight: 600;">{{group.groupName}}</h3>
                               <div class="friend_group_name" style="color: black;font-weight: normal !important;font-size: 14px;text-overflow: ellipsis;overflow: hidden">{{group.groupDescription}}</div>
                           </div>
-                          <div class="col-20" ng-if="addingInGroup==false">
-                               <span class="badge span_icon span_icon_extraright" style="top:20px"><img src="img/flask_icons/arrow_left.svg"class="arrowIconAlign" ></span>
-                          </div>
-                          <div class="col-20" ng-if="addingInGroup==true">
-                               <span class="badge span_icon " style="top:7px;right:10px;"> 
+                          <div class="col-10" >
+                               <span class="badge span_icon " style="top:7px;right:10px;" ng-if="addingInGroup==true"> 
                                    <label class="checkbox" class="labelCheckBox">
                                        <input  type="checkbox" ng-click="addFriendToGroup($index,group.groupId,group.showDivByIndex)">
                                    </label>
                                </span>
+                               <span class="badge span_icon span_icon_extraright" style="top:20px"><img src="img/flask_icons/arrow_left.svg"class="arrowIconAlign" ng-if="addingInGroup==false"></span>
                           </div>
-                      </a>
                   </div>
                   <ion-option-button  class="icon ion-edit" ng-click="editGroup(group)" ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>
                   <ion-option-button class="button-assertive icon ion-trash-a" ng-click="deleteGroup(group.groupId)" ng-if="addingInGroup==false && group.isAdmin==1"></ion-option-button>

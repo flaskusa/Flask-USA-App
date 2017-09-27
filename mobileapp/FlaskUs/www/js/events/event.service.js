@@ -5,28 +5,28 @@
         .module('flaskApp')
         .service('EventsService', EventsService);
 
-    EventsService.$inject = ['$http', 'SERVER', '$q','$flaskUtil','$state'];
+    EventsService.$inject = ['$http', 'SERVER', '$q','$flaskUtil','$ionicLoading','$state'];
 
-    function EventsService($http, SERVER, $q, $flaskUtil, $state) {
+    function EventsService($http, SERVER, $q, $flaskUtil,$ionicLoading, $state) {
         var allEventsURL = "flask-rest-events-portlet.event/get-simple-filtered-events";
         var addEventURL = "flask-rest-events-portlet.event/add-event";
         var addEventDetailsURL = "flask-rest-events-portlet.event/add-event-detail";
         var getFilteredEvents = "flask-rest-events-portlet.event/get-simple-filtered-events";
         var getEvent_Venue_Details_with_Images = "flask-rest-events-portlet.event/get-event-venue-details-with-images";
         var getEventByIdURL = "flask-rest-events-portlet.event/get-event";
-        var addContentDuringGameUrl="/flask-rest-events-portlet.event/add-event-detail";
-        var updateEventDuringGame="/flask-rest-events-portlet.event/update-event-detail";
-        var deleteEventDetailUrl = "/flask-rest-events-portlet.event/delete-event-detail";
+        var addContentDuringGameUrl="flask-rest-events-portlet.event/add-event-detail";
+        var updateEventDuringGame="flask-rest-events-portlet.event/update-event-detail";
+        var deleteEventDetailUrl = "flask-rest-events-portlet.event/delete-event-detail";
         var getAllVenuesURL = "flask-rest-events-portlet.venue/get-all-venues";
         var getVenuesByIdURL = "flask-rest-events-portlet.venue/get-venue";
-        var getAllEventDetailWithImageUrl = "/flask-rest-events-portlet.event/get-event-details-with-images";
-        var getVenueDetailsURL = "/flask-rest-events-portlet.venue/get-venue-details";
-        var getVenueDetailURL = "/flask-rest-events-portlet.venue/get-venue-detail";
+        var getAllEventDetailWithImageUrl = "flask-rest-events-portlet.event/get-event-details-with-images";
+        var getVenueDetailsURL = "flask-rest-events-portlet.venue/get-venue-details";
+        var getVenueDetailURL = "flask-rest-events-portlet.venue/get-venue-detail";
         var getVenueDetailWithImageURL = "flask-rest-events-portlet.venue/get-venue-details-with-images";
-        var deleteEventDetailImage = "/flask-rest-events-portlet.event/delete-event-detail-image";
-        var getVenueDeviceImageURL = "/flask-rest-events-portlet.venue/get-venue-images-by-venue-id-and-device-type";
+        var deleteEventDetailImage = "flask-rest-events-portlet.event/delete-event-detail-image";
+        var getVenueDeviceImageURL = "flask-rest-events-portlet.venue/get-venue-images-by-venue-id-and-device-type";
+        var sendFlaskUsDataURL = "flask-email-notification-portlet.invitationinfo/ask-us";
         var googleMapURL = SERVER.googleApi;
-
         var eventServices = {
             getAllEvents: getAllEvents,
             getlocation: getlocation,
@@ -43,8 +43,32 @@
             deleteEventDetailImageById: deleteEventDetailImageById,
             getVenueDetailWithImage: getVenueDetailWithImage,
             getVenueDeviceImage: getVenueDeviceImage,
-            showStatusofAPIonFaliure: showStatusofAPIonFaliure
+            showStatusofAPIonFaliure: showStatusofAPIonFaliure,
+            sendFlaskUsData: sendFlaskUsData
         }
+
+        function sendFlaskUsData(fromMail, subject, description) {
+            var deferred = $q.defer();
+            $http.get(SERVER.url + sendFlaskUsDataURL, {
+                params: {
+                    fromMail: fromMail ,
+                    subject: subject,
+                    description : description
+                }
+            })
+            .then(function (response) {
+                deferred.resolve(response);
+            }, function (reason) {
+                showStatusofAPIonFaliure(reason);
+                if (reason.status) {
+                    deferred.reject(reason);
+                } else {
+                    deferred.reject({ statusText: 'Call error', status: 500 });
+                }
+            });
+            return deferred.promise;
+        }
+
         function getAllEvents(eventIds, sDate, eDate, sString, lat, long) {
             var deferred = $q.defer();
             $http.get(SERVER.url + allEventsURL, {
@@ -377,16 +401,16 @@
 
         function showStatusofAPIonFaliure(err){
             if(err.status == 400){
-                $flaskUtil.alert('Bad Request from server');
+                $ionicLoading.show({ template: 'Bad Request from server', noBackdrop: false, duration: 2000 });
             }else if(err.status == 401){
-                $flaskUtil.alert('Please check if your username and password are correct.');}
-            else if(err.status == 403){
-                $flaskUtil.alert('Too many connections on server');
+                $ionicLoading.show({ template: 'Please check if your username and password are correct.', noBackdrop: false, duration: 2000 });
+            }else if(err.status == 403){
+                $ionicLoading.show({ template: 'Too many connections on server.', noBackdrop: false, duration: 2000 });
             }else if(err.status == 500){
                 $flaskUtil.alert('Something wrong with server');
                 $state.go("app.events");
             }else if(err.status == -1){
-                $flaskUtil.alert(" Please Check your Internet Connection and restart the App");     
+                $ionicLoading.show({ template: 'Please Check your Internet Connection and restart the App', noBackdrop: false, duration: 2000 });  
             }else if(err.status == 503){
                 $flaskUtil.alert("Server is currently Unavailable, please try after sometime");
                 $state.go("app.events");

@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgatelocationCtrl', mytailgatelocationCtrl);
 
-    mytailgatelocationCtrl.$inject = ['$scope', '$state', '$ionicPlatform', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi', 'SERVER', '$cordovaInAppBrowser', '$cordovaGeolocation', '$timeout'];
+    mytailgatelocationCtrl.$inject = ['$scope', '$state', '$ionicPlatform', '$stateParams', 'TailgateService', '$cookies', 'uiGmapGoogleMapApi', 'SERVER', '$cordovaInAppBrowser', '$cordovaGeolocation', '$timeout','$ionicLoading'];
 
     /* @ngInject */
-    function mytailgatelocationCtrl($scope, $state, $ionicPlatform, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi, SERVER, $cordovaInAppBrowser, $cordovaGeolocation, $timeout) {
+    function mytailgatelocationCtrl($scope, $state, $ionicPlatform, $stateParams, TailgateService, $cookies, uiGmapGoogleMapApi, SERVER, $cordovaInAppBrowser, $cordovaGeolocation, $timeout,$ionicLoading) {
         $scope.myTailgaters = [];
         var tailGateId = $cookies.get('currtailGateId');
         $scope.taligateMarkers = $cookies.getObject('currtailGateMakers');

@@ -48,7 +48,7 @@
                      $scope.fileEntryId = 0;
                 }
             },function(err) {
-
+                $ionicLoading.show({ template: 'Unable to get user profile from server.', noBackdrop: false, duration: 2000 });
             })
         }
 
@@ -307,23 +307,43 @@
             }
         }
         $scope.openCamera = function () {
-            var options = {
+            // var options = {
+            //     quality: 50,
+            //     destinationType: Camera.DestinationType.FILE_URI,
+            //     sourceType: Camera.PictureSourceType.CAMERA,
+            //     allowEdit: true,
+            //     encodingType: Camera.EncodingType.JPEG,
+            //     popoverOptions: CameraPopoverOptions,
+            //     saveToPhotoAlbum: false,
+            //     correctOrientation: true
+            // };
+
+            // $cordovaCamera.getPicture(options).then(function (imageURI) {
+            //     $scope.uploadFileToServer(imageURI);
+            // }, function (err) {
+            //         $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+err+'</div>', noBackdrop: false, duration: 2000 });
+            // });
+            navigator.camera.getPicture(onSuccess, onFail, { 
                 quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false,
-                correctOrientation: true
-            };
-
-            $cordovaCamera.getPicture(options).then(function (imageURI) {
-                $scope.uploadFileToServer(imageURI);
-            }, function (err) {
-
+                correctOrientation: true,
+                destinationType: Camera.DestinationType.NATIVE_URI,
+                targetWidth: 760,
+                targetHeight: 760 
             });
         };
+
+        function onSuccess(imageURI) {
+            $scope.uploadFileToServer(imageURI);
+        }
+
+        function onFail(message) {
+            $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+message+'</div>', noBackdrop: false, duration: 2000 });
+        }
+
         $scope.checkPermission = function () {
             var hasPermission = false;
             var permissions = cordova.plugins.permissions;
@@ -365,7 +385,11 @@
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.uploadFileToServer(imageURI);
             }, function (err) {
-
+                if(err=='has no access to assets'){
+                    $ionicLoading.show({ template: '<div style="text-transform: capitalize;"> Please provide permission to Access Gallery</div>', noBackdrop: false, duration: 2000 });
+                }else{
+                    $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+err+'</div>', noBackdrop: false, duration: 2000 });
+                }
             });
 
         }
@@ -387,7 +411,7 @@
                       showToastMessage("Profile Picture updated");
                   }, function (error) {
                       $rootScope.$broadcast('loading:hide')
-                      alert("An error has occurred");
+                      $ionicLoading.show({ template: error, noBackdrop: false, duration: 2000 });
                   }, function (progress) {
                   });
         }

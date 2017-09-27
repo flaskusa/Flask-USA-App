@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('ManageEventCtrl', ManageEventCtrl);
 
-    ManageEventCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', 'SERVER','$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope','$cookies','$ionicScrollDelegate'];
+    ManageEventCtrl.$inject = ['$scope', '$stateParams', '$state', 'EventsService', 'SERVER','$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope','$cookies','$ionicScrollDelegate','$ionicLoading'];
 
     /* @ngInject */
-    function ManageEventCtrl($scope, $stateParams, $state, EventsService, SERVER,$ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService,$rootScope,$cookies,$ionicScrollDelegate) {
+    function ManageEventCtrl($scope, $stateParams, $state, EventsService, SERVER,$ionicPopup, $cordovaCamera, $cordovaFileTransfer,IonicClosePopupService,$rootScope,$cookies,$ionicScrollDelegate,$ionicLoading) {
         $scope.eventDetails = [];
         var test=$stateParams.eventDetails
         $scope.eventName=$stateParams.currEventName;
@@ -72,23 +72,42 @@
             }
         };
         $scope.openCamera = function () {
-            var options = {
+            // var options = {
+            //     quality: 50,
+            //     destinationType: Camera.DestinationType.FILE_URI,
+            //     sourceType: Camera.PictureSourceType.CAMERA,
+            //     allowEdit: true,
+            //     encodingType: Camera.EncodingType.JPEG,
+            //     popoverOptions: CameraPopoverOptions,
+            //     saveToPhotoAlbum: false,
+            //     correctOrientation: true
+            // };
+
+            // $cordovaCamera.getPicture(options).then(function (imageURI) {
+            //     $scope.setSelectedImageURIToUpload(imageURI);
+            // }, function (err) {
+
+            // });
+            navigator.camera.getPicture(onSuccess, onFail, { 
                 quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false,
-                correctOrientation: true
-            };
-
-            $cordovaCamera.getPicture(options).then(function (imageURI) {
-                $scope.setSelectedImageURIToUpload(imageURI);
-            }, function (err) {
-
+                correctOrientation: true,
+                destinationType: Camera.DestinationType.NATIVE_URI,
+                targetWidth: 760,
+                targetHeight: 760 
             });
         };
+
+        function onSuccess(imageURI) {
+            $scope.uploadFileToServer(imageURI);
+        }
+
+        function onFail(message) {
+            $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+message+'</div>', noBackdrop: false, duration: 2000 });
+        }
         $scope.gallery = function () {
             $scope.cameraPopup.close();
             var options = {

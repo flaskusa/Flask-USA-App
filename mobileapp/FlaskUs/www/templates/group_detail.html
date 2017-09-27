@@ -35,13 +35,23 @@
             </div>
         </div>
     </form>
-</div>
-        <a class="item item-full list-item-icon-left" ng-click="showInviteFriendPopup()" ng-if="isLoginUserAdmin==true">
-            <div style="float:left;"><img src="img/flask_icons/add_new.svg" class="FlaskionIcons"></div>
-            <p class="addText">ADD MEMBER</p>
+</div>        
+        <a class="item item-full" ng-click="showInviteFriendPopup()" ng-if="isLoginUserAdmin==true" style="text-align: -webkit-center;">
+            <div>
+                <span>
+                    <img src="img/flask_icons/add_new.svg" class="FlaskionIcons">
+                </span>
+                <span style="padding-left: 10px;color: #f89734;font-weight: 700;font-size: larger;vertical-align: super;">
+                    ADD MEMBER
+                </span>
+            </div>
         </a>
-        <a class="item item-full list-item-icon-left" ng-if="isLoginUserAdmin==false">
-            <p class="addText">GROUP MEMBERS</p>
+        <a class="item item-full" ng-if="isLoginUserAdmin==false" style="text-align: -webkit-center;">
+            <div>
+                <span style="padding-left: 10px;color: #f89734;font-weight: 700;font-size: larger;vertical-align: super;">
+                    GROUP MEMBERS
+                </span>
+            </div>
         </a>
        <ion-list>
            <ion-item ng-repeat="data in allMember | orderBy:'userName'" class="row-no-padding animate-in-secondary chat-item.ng-enter-stagger" padding="false">

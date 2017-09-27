@@ -466,28 +466,54 @@
             }
         }
         $scope.openCamera = function () {
-            var options = {
+            // var options = {
+            //     quality: 50,
+            //     destinationType: Camera.DestinationType.FILE_URI,
+            //     sourceType: Camera.PictureSourceType.CAMERA,
+            //     allowEdit: true,
+            //     encodingType: Camera.EncodingType.JPEG,
+            //     popoverOptions: CameraPopoverOptions,
+            //     saveToPhotoAlbum: false,
+            //     correctOrientation: true
+            // };
+
+            // $cordovaCamera.getPicture(options).then(function (imageURI) {
+            //     if (tailgateId && tailgateId > 0) {
+            //         $scope.uploadFileToServer(imageURI, tailgateId, "Image uploaded");
+            //     } else {
+            //         $("#tailgateImage").attr("src", imageURI);
+            //         $scope.setSelectedImageURIToUpload(imageURI);
+            //     }
+            // }, function (err) {
+            //     $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+err+'</div>', noBackdrop: false, duration: 2000 });
+            // });
+
+            navigator.camera.getPicture(onSuccess, onFail, { 
                 quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false,
-                correctOrientation: true
-            };
-
-            $cordovaCamera.getPicture(options).then(function (imageURI) {
-                if (tailgateId && tailgateId > 0) {
-                    $scope.uploadFileToServer(imageURI, tailgateId, "Image uploaded");
-                } else {
-                    $("#tailgateImage").attr("src", imageURI);
-                    $scope.setSelectedImageURIToUpload(imageURI);
-                }
-            }, function (err) {
-                $ionicLoading.show({ template: 'Processing Camera Permissions..!', noBackdrop: false, duration: 2000 });
+                correctOrientation: true,
+                destinationType: Camera.DestinationType.NATIVE_URI,
+                targetWidth: 760,
+                targetHeight: 760 
             });
         };
+
+        function onSuccess(imageURI) {
+            if (tailgateId && tailgateId > 0) {
+                $scope.uploadFileToServer(imageURI, tailgateId, "Image uploaded");
+            } else {
+                $("#tailgateImage").attr("src", imageURI);
+                $scope.setSelectedImageURIToUpload(imageURI);
+            }
+        }
+
+        function onFail(message) {
+            $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+message+'</div>', noBackdrop: false, duration: 2000 });
+        }
+
         $scope.checkPermission = function () {
             var hasPermission = false;
             var permissions = cordova.plugins.permissions;
@@ -534,7 +560,11 @@
                     $scope.setSelectedImageURIToUpload(imageURI);
                 }
             }, function (err) {
-                $ionicLoading.show({ template: 'Processing Gallery Permissions..!', noBackdrop: false, duration: 2000 });
+                if(err=='has no access to assets'){
+                    $ionicLoading.show({ template: '<div style="text-transform: capitalize;"> Please provide permission to Access Gallery</div>', noBackdrop: false, duration: 2000 });
+                }else{
+                    $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+err+'</div>', noBackdrop: false, duration: 2000 });
+                }
             });
 
         }
@@ -579,7 +609,8 @@
                 }, function (error) {
                     $scope.reSetSelectedImageURIToUpload();
                     $rootScope.$broadcast('loading:hide');
-                    alert("An error has occurred: Code = " + error.code);
+                    $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+error.code+'</div>', noBackdrop: false, duration: 2000 });
+                    //alert("An error has occurred: Code = " + error.code);
                     //$ionicLoading.show({ template: 'An error has occurred: Code ..!'+error.code, noBackdrop: false, duration: 2000 });
                     //console.log("upload error source " + error.source);
                     //console.log("upload error target " + error.target);
@@ -1167,21 +1198,25 @@
         $scope.centerOnMe = function () {
             $scope.isUserMarkerShown = !$scope.isUserMarkerShown;
             if ($scope.isUserMarkerShown) {
-                $scope.map = {
-                    center: {
-                        latitude: $scope.userlat,
-                        longitude: $scope.userlong
-                    },
-                    zoom: 14
-                }
-                $scope.marker = {
-                    id: 1,
-                    coords: {
-                        latitude: $scope.userlat,
-                        longitude: $scope.userlong
-                    },
-                    options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
-                }
+                    if($scope.userlat!=undefined && $scope.userlong!=undefined){
+                        $scope.map = {
+                            center: {
+                                latitude: $scope.userlat,
+                                longitude: $scope.userlong
+                            },
+                            zoom: 14
+                        }
+                        $scope.marker = {
+                            id: 1,
+                            coords: {
+                                latitude: $scope.userlat,
+                                longitude: $scope.userlong
+                            },
+                            options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
+                        }
+                    }else{
+                        $flaskUtil.alert("Unable to Get Location, Please Switch on GPS and Check App Location Permissions");
+                    }
             } else {
                 $scope.marker = {};
                 callMap($scope.latitude, $scope.longitude);

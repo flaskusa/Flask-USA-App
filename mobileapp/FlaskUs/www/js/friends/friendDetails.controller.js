@@ -18,7 +18,7 @@
             $scope.getFriendByUserId($scope.friendId);
             $cookies.put('fromPage', 'MyFriends');
             $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
-            $timeout(function () { $scope.showenablebuttons = true; $ionicLoading.hide(); }, 2000);
+            $timeout(function () {  $ionicLoading.hide(); $scope.showenablebuttons = true; }, 1000);
         };
         $scope.goBack = function(){
             //$timeout(function () {

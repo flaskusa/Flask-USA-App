@@ -3,10 +3,10 @@
     angular.module('flaskApp')
         .controller('mytailgateDetailsCtrl', mytailgateDetailsCtrl);
 
-    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicSlideBoxDelegate', '$localStorage', 'UserService', '$q', '$http', '$ionicBackdrop', '$ionicModal', '$ionicScrollDelegate', '$timeout','$flaskUtil'];
+    mytailgateDetailsCtrl.$inject = ['$scope', '$state', 'SERVER', '$stateParams', 'TailgateService', '$cookies', '$ionicPopup', '$cordovaCamera', '$cordovaFileTransfer', 'IonicClosePopupService', '$rootScope', '$ionicSlideBoxDelegate', '$localStorage', 'UserService', '$q', '$http', '$ionicBackdrop', '$ionicModal', '$ionicScrollDelegate', '$timeout','$flaskUtil','$ionicLoading'];
 
     /* @ngInject */
-    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicSlideBoxDelegate, $localStorage, UserService, $q, $http, $ionicBackdrop, $ionicModal, $ionicScrollDelegate, $timeout, $flaskUtil) {
+    function mytailgateDetailsCtrl($scope, $state, SERVER, $stateParams, TailgateService, $cookies, $ionicPopup, $cordovaCamera, $cordovaFileTransfer, IonicClosePopupService, $rootScope, $ionicSlideBoxDelegate, $localStorage, UserService, $q, $http, $ionicBackdrop, $ionicModal, $ionicScrollDelegate, $timeout, $flaskUtil,$ionicLoading) {
         $cookies.remove("currtailGateMakers");
         $scope.myTailgaters = [];
         $scope.allMessages = [];
@@ -28,7 +28,7 @@
         }
         $scope.$on('$ionicView.beforeEnter', function () {
             getMyTailgate();
-        });        
+        });
 
         $scope.isTailgateMember = function () {
             return true;
@@ -159,7 +159,7 @@
                     }
                 });
             }, function (err) {
-                $ionicLoading.show({ template: 'Error in getting user profile pic !', noBackdrop: false, duration: 2000 });
+                $ionicLoading.show({ template: "Unable to get user profile from server.", noBackdrop: false, duration: 2000 });
             })
         };
 
@@ -290,24 +290,42 @@
         }
 
         $scope.openCamera = function () {
-            var options = {
+            // var options = {
+            //     quality: 50,
+            //     destinationType: Camera.DestinationType.FILE_URI,
+            //     sourceType: Camera.PictureSourceType.CAMERA,
+            //     allowEdit: true,
+            //     encodingType: Camera.EncodingType.JPEG,
+            //     popoverOptions: CameraPopoverOptions,
+            //     saveToPhotoAlbum: false,
+            //     correctOrientation: true
+            // };
+
+            // $cordovaCamera.getPicture(options).then(function (imageURI) {
+            //     $scope.uploadFileToServer(imageURI);
+            // }, function (err) {
+            //     $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+err+'</div>', noBackdrop: false, duration: 2000 });
+            // });
+            navigator.camera.getPicture(onSuccess, onFail, { 
                 quality: 50,
-                destinationType: Camera.DestinationType.FILE_URI,
-                sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false,
-                correctOrientation: true
-            };
-
-            $cordovaCamera.getPicture(options).then(function (imageURI) {
-                $scope.uploadFileToServer(imageURI);
-            }, function (err) {
-                $ionicLoading.show({ template: 'Processing Camera Permissions..!', noBackdrop: false, duration: 2000 });
-                //$flaskUtil.alert("Please Allow all permissions to access Camera.");
+                correctOrientation: true,
+                destinationType: Camera.DestinationType.NATIVE_URI,
+                targetWidth: 760,
+                targetHeight: 760 
             });
         };
+
+        function onSuccess(imageURI) {
+            $scope.uploadFileToServer(imageURI);
+        }
+
+        function onFail(message) {
+            $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+message+'</div>', noBackdrop: false, duration: 2000 });
+        }
         $scope.checkPermission = function () {
             var hasPermission = false;
             var permissions = cordova.plugins.permissions;
@@ -316,6 +334,7 @@
                 if (!status.hasPermission) {
                     var errorCallback = function () {
                         console.warn('READ_EXTERNAL_STORAGE permission is not turned on');
+                        $ionicLoading.show({ template: "Please Check app permissions for Storage.", noBackdrop: false, duration: 2000 });
                     }
 
                     permissions.requestPermission(
@@ -351,8 +370,11 @@
             $cordovaCamera.getPicture(options).then(function (imageURI) {
                 $scope.uploadFileToServer(imageURI);
             }, function (err) {
-                $ionicLoading.show({ template: 'Processing Gallery Permissions..!', noBackdrop: false, duration: 2000 });
-                //$flaskUtil.alert("Please Allow all permissions to access Gallery.");
+                if(err=='has no access to assets'){
+                    $ionicLoading.show({ template: '<div style="text-transform: capitalize;"> Please provide permission to Access Gallery</div>', noBackdrop: false, duration: 2000 });
+                }else{
+                    $ionicLoading.show({ template: '<div style="text-transform: capitalize;">'+err+'</div>', noBackdrop: false, duration: 2000 });
+                }
             });
 
         }
@@ -382,6 +404,7 @@
                     $scope.myTailgateImages.push(tempData);
                 }, function (error) {
                     $rootScope.$broadcast('loading:hide')
+                    $ionicLoading.show({ template: error, noBackdrop: false, duration: 2000 });
                     //console.log("upload error source " + error.source);
                     //console.log("upload error target " + error.target);
                 }, function (progress) {

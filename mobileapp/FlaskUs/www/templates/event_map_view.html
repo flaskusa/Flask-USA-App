@@ -1,4 +1,4 @@
-<ion-view cache-view="true" class="customFooter">
+<ion-view cache-view="false" class="customFooter">
     <ion-nav-bar class="bar-dark" align-title="center">
         <ion-nav-back-button class="button-icon icon  ion-ios-arrow-back ">
         </ion-nav-back-button>
@@ -210,12 +210,12 @@
                             <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=0>
                             </ui-gmap-marker>
                             <!--for flask markers and icons-->
-                            <ui-gmap-markers models="parkingMarkers" coords="'self'" icon="'icon'" options="markerOptions" click="onClick" control="markerOptions.control">
+                            <ui-gmap-markers models="parkingMarkers" coords="'self'"    icon="'icon'" options="markerOptions" click="onClick" control="markerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'" control="windowOptions.control">
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
                             <!--for google markers and icons-->
-                            <ui-gmap-markers models="parkingGoogleMarkers" coords="'self'" icon="'icon'" options="googleMarkerOptions" click="onClick"
+                            <ui-gmap-markers models="parkingGoogleMarkers" coords="'self'"    icon="'icon'" options="googleMarkerOptions" click="onClick"
                                              control="googleMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
@@ -251,12 +251,12 @@
                             </ui-gmap-map-control>
                             <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=01>
                             </ui-gmap-marker>
-                            <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
+                            <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'"  options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
 
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
-                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick"
+                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'"  icon="'icon'" options="barGoogleMarkerOptions" click="onClick"
                                              control="barGoogleMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
@@ -298,7 +298,7 @@
                             <div>
                                 <div class="flask_us_div">
                                     <div>
-                                        <div ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
+                                        <div ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details" style="display: none;">
                                             <div class="form-group">
                                                 <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
                                                 <div ng-if="flaskUsDetail.imageUrl && flaskUsDetail.length !=0">
@@ -314,23 +314,34 @@
                                             </div>
                                         </div>
                                         <div>
-                                            <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
+                                            <div class="eventHeading2 flaskEventHeading2">
                                                 <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
                                             </div>
                                             <div class="flaskUsQuestionDiv">
+                                                <form name="flaskus_form1" novalidate  ng-submit="flaskus_form1.$valid && toggleMsgDiv(flaskUsData)">
                                                 <div align="center">
                                                     <span class="que-input-label"><b>NAME*</b></span>
-                                                    <input type="text" class="QuestionInput">
+                                                    <input type="text" name="subject" ng-model="flaskUsData.subject" class="QuestionInput" style="padding:10px;" required>
+                                                    <div ng-show="flaskus_form1.$submitted || flaskus_form1.subject.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form1.subject.$error.required" style="float: left;" class="error_msg">Please enter Name</span>
+                                                    </div>
                                                     <span class="que-input-label"><b>EMAIL*</b></span>
-                                                    <input type="text" class="QuestionInput">
+                                                    <input type="email" style="padding:10px;" name="fromMail" ng-model="flaskUsData.fromMail" class="QuestionInput" required>
+                                                    <div ng-show="flaskus_form1.$submitted || flaskus_form1.fromMail.$touched"     class="ng-hide que-input-label">
+                                                        <span ng-show="flaskus_form1.fromMail.$error.required || flaskus_form1.fromMail.$error.email" style="float: left;" class="error_msg">Please enter valid email Id</span>
+                                                        </div>
                                                     <span class="que-input-label"><b>QUESTION*</b></span>
-                                                    <textarea class="QuestionInput"></textarea>
+                                                    <textarea class="QuestionInput" style="padding:10px;" name="description" ng-model="flaskUsData.description" required></textarea>
+                                                    <div ng-show="flaskus_form1.$submitted || flaskus_form1.description.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form1.description.$error.required" style="float: left;" class="error_msg">Please enter Description</span>
+                                                    </div>
                                                 </div>
                                                 <div align="center">
-                                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="toggleMsgDiv()">
+                                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
                                                         Send
                                                     </button>
                                                 </div>
+                                                </form>
                                             </div>
                                         </div>
                                     </div>
@@ -431,7 +442,7 @@
                                 <div class="flask_us_div">
                                     <div>
                                         <div delegate-handle="Flask-Detail" show-pager='false'>
-                                            <div ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
+                                            <div ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details" style="display: none;">
                                                 <div class="form-group">
                                                     <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
                                                     <div ng-if="flaskUsDetail.imageUrl && flaskUsDetail.length !=0">
@@ -447,23 +458,34 @@
                                                 </div>
                                             </div>
                                             <div>
-                                                <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
+                                                <div class="eventHeading2 flaskEventHeading2">
                                                     <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
                                                 </div>
                                                 <div class="flaskUsQuestionDiv">
-                                                    <div align="center">
-                                                        <span class="que-input-label"><b>NAME*</b></span>
-                                                        <input type="text" class="QuestionInput">
-                                                        <span class="que-input-label"><b>EMAIL*</b></span>
-                                                        <input type="text" class="QuestionInput">
-                                                        <span class="que-input-label"><b>QUESTION*</b></span>
-                                                        <textarea class="QuestionInput"></textarea>
+                                                <form name="flaskus_form2" novalidate  ng-submit="flaskus_form2.$valid && toggleMsgDiv(flaskUsData)">
+                                                <div align="center">
+                                                    <span class="que-input-label"><b>NAME*</b></span>
+                                                    <input type="text" style="padding:10px;" name="subject" ng-model="flaskUsData.subject" class="QuestionInput" required>
+                                                    <div ng-show="flaskus_form2.$submitted || flaskus_form2.subject.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form2.subject.$error.required" style="float: left;" class="error_msg">Please enter Name</span>
                                                     </div>
-                                                    <div align="center">
-                                                        <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="toggleMsgDiv()">
-                                                            Send
-                                                        </button>
+                                                    <span class="que-input-label"><b>EMAIL*</b></span>
+                                                    <input type="email" style="padding:10px;" name="fromMail" ng-model="flaskUsData.fromMail" class="QuestionInput" required>
+                                                        <div ng-show="flaskus_form2.$submitted || flaskus_form2.fromMail.$touched"     class="ng-hide que-input-label">
+                                                        <span ng-show="flaskus_form2.fromMail.$error.required || flaskus_form2.fromMail.$error.email" style="float: left;" class="error_msg">Please enter valid email Id</span>
+                                                        </div>
+                                                    <span class="que-input-label"><b>QUESTION*</b></span>
+                                                    <textarea class="QuestionInput" style="padding:10px;" name="description" ng-model="flaskUsData.description" required></textarea>
+                                                    <div ng-show="flaskus_form2.$submitted || flaskus_form2.description.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form2.description.$error.required" style="float: left;" class="error_msg">Please enter Description</span>
                                                     </div>
+                                                </div>
+                                                <div align="center">
+                                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
+                                                        Send
+                                                    </button>
+                                                </div>
+                                                </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -503,11 +525,11 @@
                             </ui-gmap-map-control>
                             <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=02>
                             </ui-gmap-marker>
-                            <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'" options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
+                            <ui-gmap-markers models="barMarkers" coords="'self'" icon="'icon'"    options="barFlaskMarkerOptions" click="onClick" control="barFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
-                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'" icon="'icon'" options="barGoogleMarkerOptions" click="onClick" control="barGoogleMarkerOptions.control">
+                            <ui-gmap-markers models="barsGoogleMarkers" coords="'self'"    icon="'icon'" options="barGoogleMarkerOptions" click="onClick" control="barGoogleMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
@@ -541,13 +563,13 @@
                             </ui-gmap-map-control>
                             <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=03>
                             </ui-gmap-marker>
-                            <ui-gmap-markers models="nightLifes" coords="'self'" icon="'icon'" options="nightLifeFlaskMarkerOptions" click="onClick"
+                            <ui-gmap-markers models="nightLifes" coords="'self'" icon="'icon'"   options="nightLifeFlaskMarkerOptions" click="onClick"
                                              control="nightLifeFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
 
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
-                            <ui-gmap-markers models="nightLifesGoogleMarkers" coords="'self'" icon="'icon'" options="nightLifeGoogleMarkerOptions" click="onClick"
+                            <ui-gmap-markers models="nightLifesGoogleMarkers"   coords="'self'" icon="'icon'" options="nightLifeGoogleMarkerOptions" click="onClick"
                                              control="nightLifeGoogleMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
@@ -582,12 +604,12 @@
                             </ui-gmap-map-control>
                             <ui-gmap-marker coords="marker.coords" options="marker.options" events="marker.events" idkey=04>
                             </ui-gmap-marker>
-                            <ui-gmap-markers models="hotelMarkers" coords="'self'" icon="'icon'" options="hotelFlaskMarkerOptions" click="onClick" control="hotelFlaskMarkerOptions.control">
+                            <ui-gmap-markers models="hotelMarkers" coords="'self'" icon="'icon'"    options="hotelFlaskMarkerOptions" click="onClick" control="hotelFlaskMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
 
                                 </ui-gmap-windows>
                             </ui-gmap-markers>
-                            <ui-gmap-markers models="hotelGoogleMarkers" coords="'self'" icon="'icon'" options="hotelGoogleMarkerOptions" click="onClick"
+                            <ui-gmap-markers models="hotelGoogleMarkers" coords="'self'"    icon="'icon'" options="hotelGoogleMarkerOptions" click="onClick"
                                              control="hotelGoogleMarkerOptions.control">
                                 <ui-gmap-windows show="'show'" templateUrl="'templateUrl'" templateParameter="'templateParameter'">
                                 </ui-gmap-windows>
@@ -616,7 +638,7 @@
                                 <div class="flask_us_div">
                                     <div>
                                         <ion-slide-box delegate-handle="Flask-Detail" show-pager='false'>
-                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details">
+                                            <ion-slide ng-repeat="flaskUsDetail in flaskUsDetails" class="flask_us_details" style="display: none;">
                                                 <div class="form-group">
                                                     <label class="control-label" for="Descriptionss"><div class="flask_us_description"><b>Flask us</b></div></label>
                                                     <div ng-if="flaskUsDetail.imageUrl && flaskUsDetail.length !=0">
@@ -632,24 +654,35 @@
                                                 </div>
                                     </div>
                                     <div>
-                                        <div class="eventHeading2 flaskEventHeading2" ng-click="toggleMsgDiv()">
+                                        <div class="eventHeading2 flaskEventHeading2">
                                             <span class="overlineStyle flaskOverlineStyle">FLASK US YOUR QUESTIONS</span>
                                         </div>
-                                        <div class="flaskUsQuestionDiv">
-                                            <div align="center">
-                                                <span class="que-input-label"><b>NAME*</b></span>
-                                                <input type="text" class="QuestionInput">
-                                                <span class="que-input-label"><b>EMAIL*</b></span>
-                                                <input type="text" class="QuestionInput">
-                                                <span class="que-input-label"><b>QUESTION*</b></span>
-                                                <textarea class="QuestionInput"></textarea>
+                                            <div class="flaskUsQuestionDiv">
+                                                <form name="flaskus_form3" novalidate  ng-submit="flaskus_form3.$valid && toggleMsgDiv(flaskUsData)">
+                                                <div align="center">
+                                                    <span class="que-input-label"><b>NAME*</b></span>
+                                                    <input type="text" style="padding:10px;" name="subject" ng-model="flaskUsData.subject" class="QuestionInput" required>
+                                                    <div ng-show="flaskus_form3.$submitted || flaskus_form3.subject.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form3.subject.$error.required" style="float: left;" class="error_msg">Please enter Name</span>
+                                                    </div>
+                                                    <span class="que-input-label"><b>EMAIL*</b></span>
+                                                    <input type="email" style="padding:10px;" name="fromMail" ng-model="flaskUsData.fromMail" class="QuestionInput" required>
+                                                    <div ng-show="flaskus_form3.$submitted || flaskus_form3.fromMail.$touched"     class="ng-hide que-input-label">
+                                                        <span ng-show="flaskus_form3.fromMail.$error.required || flaskus_form3.fromMail.$error.email" style="float: left;" class="error_msg">Please enter valid email</span>
+                                                    </div>
+                                                    <span class="que-input-label"><b>QUESTION*</b></span>
+                                                    <textarea class="QuestionInput" name="description" ng-model="flaskUsData.description" style="padding:10px;" required></textarea>
+                                                    <div ng-show="flaskus_form3.$submitted || flaskus_form3.description.$touched"     class="ng-hide que-input-label">
+                                                    <span ng-show="flaskus_form3.description.$error.required" style="float: left;" class="error_msg">Please enter Description</span>
+                                                    </div>
+                                                </div>
+                                                <div align="center">
+                                                    <button type="submit" nav-clear class="button button-block button-positive sign_in_button">
+                                                        Send
+                                                    </button>
+                                                </div>
+                                                </form>
                                             </div>
-                                            <div align="center">
-                                                <button type="submit" nav-clear class="button button-block button-positive sign_in_button" ng-click="toggleMsgDiv()">
-                                                    Send
-                                                </button>
-                                            </div>
-                                        </div>
                                     </div>
                                     </ion-slide>
                                     </ion-slide-box>

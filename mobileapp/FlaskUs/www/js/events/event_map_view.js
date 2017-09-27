@@ -9,10 +9,12 @@
     function eventMapViewCtrl($scope, $stateParams, $state, $ionicPlatform, $ionicPopover, EventsService, uiGmapGoogleMapApi, $ionicTabsDelegate, $timeout, uiGmapIsReady, $ionicSlideBoxDelegate, $cordovaInAppBrowser, SERVER, $ionicLoading, $cordovaGeolocation, $flaskUtil, $ionicHistory) {
         /* jshint validthis: true */
         console.log('Inside eventMapViewCtrl');
+        $scope.$on('$ionicView.beforeEnter', function () {
         $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
         var detailItem = {};
         $scope.zoomMin = 1;
         $scope.venueInfoSubDetail = [];
+        $scope.idSelected = null;
         var self = this;
         var template = '';
         var baseImagePath = SERVER.hostName + "c/document_library/get_file";
@@ -104,27 +106,24 @@
         $scope.isHotelGoogleMarkerShown = false;
         $scope.currentMap;
         $scope.toggleQueDiv = true;
+        $scope.flaskUsData = { fromMail: "", subject: "", description: "" };
         getGeoLocation();
-        $scope.toggleMsgDiv = function () {
-            $scope.hideDiv = false;
-            if ($scope.toggleQueDiv == false) {
-                $scope.toggleQueDiv = !$scope.toggleQueDiv;
-                if ($scope.toggleQueDiv == true) {
-                    $timeout(function () {
-                        $scope.hideDiv = true;
-                    }, 500);
+        $scope.toggleMsgDiv = function (formdata) {
+            EventsService.sendFlaskUsData(formdata.fromMail, formdata.subject, formdata.description).then(function (respData) {
+                if(respData.status==200){
+                    $ionicLoading.show({ template: 'Your Query Sent successfully!', noBackdrop: false, duration: 2000 });
+                }else{
+                    $ionicLoading.show({ template: 'Error Occurred', noBackdrop: false, duration: 2000 });
                 }
-            } else {
-                $timeout(function () {
-                    $scope.toggleQueDiv = !$scope.toggleQueDiv;
-                }, 30);
-            }
+                
+            });            
+
         }
         $scope.goBack = function () {
             //$timeout(function () {
                 $ionicHistory.goBack();
-                $ionicHistory.clearHistory();
-                $ionicHistory.clearCache();
+                //$ionicHistory.clearHistory();
+                //$ionicHistory.clearCache();
             //}, 1000);
         }
         //console.log($scope.deviceDetector);
@@ -423,13 +422,13 @@
         // initMap();
         uiGmapGoogleMapApi.then(function (maps) {
             maps.visualRefresh = true;
-            //$scope.markerOptions.animation = maps.Animation.DROP;
+            $scope.markerOptions.animation = maps.Animation.DROP;
             $scope.markerOptions.visible = true;
-            //$scope.googleMarkerOptions.animation = maps.Animation.DROP;
+            $scope.googleMarkerOptions.animation = maps.Animation.DROP;
             $scope.googleMarkerOptions.visible = false;
-            //$scope.barFlaskMarkerOptions.animation = maps.Animation.DROP;
+            $scope.barFlaskMarkerOptions.animation = maps.Animation.DROP;
             $scope.barFlaskMarkerOptions.visible = true;
-            //$scope.barGoogleMarkerOptions.animation = maps.Animation.DROP;
+            $scope.barGoogleMarkerOptions.animation = maps.Animation.DROP;
             $scope.barGoogleMarkerOptions.visible = false;
             $scope.nightLifeFlaskMarkerOptions.animation = maps.Animation.DROP;
             $scope.nightLifeFlaskMarkerOptions.visible = true;
@@ -750,9 +749,9 @@
                 $scope.hotelGoogleMarkers.push(marker);
             }, 0);
         }
+
         //set Marker Fields
         $scope.setMarkerFields = function (tempObject) {
-            $timeout(function () {
                 tempObject.show = false;
                 tempObject.isIconVisibleOnClick = "true";
                 var templateName;
@@ -788,8 +787,8 @@
                     }
                 }
                 tempObject.templateUrl = templateName;
-            }, 0);
         };
+
         function fixUrl(url) {
             if (url) {
                 if (url.indexOf("http://") > -1 || "https://" > -1) {
@@ -799,6 +798,7 @@
                 }
             }
         }
+
         //select Flask Marker
         $scope.selectFlaskMarker = function () {
             $timeout(function () {
@@ -822,21 +822,26 @@
             $timeout(function () {
                 $scope.isUserMarkerShown = !$scope.isUserMarkerShown;
                 if ($scope.isUserMarkerShown) {
-                    $scope.map = {
-                        center: {
-                            latitude: $scope.lat,
-                            longitude: $scope.long
-                        },
-                        zoom: 14
+                    if($scope.lat!=undefined && $scope.long!=undefined){
+                            $scope.map = {
+                                center: {
+                                    latitude: $scope.lat,
+                                    longitude: $scope.long
+                                },
+                                zoom: 14
+                            }
+                            $scope.marker = {
+                                id: 10,
+                                coords: {
+                                    latitude: $scope.lat,
+                                    longitude: $scope.long
+                                },
+                                options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
+                            }
+                    }else{
+                        $flaskUtil.alert("Unable to Get Location, Please Switch on GPS and Check App Location Permissions");
                     }
-                    $scope.marker = {
-                        id: 10,
-                        coords: {
-                            latitude: $scope.lat,
-                            longitude: $scope.long
-                        },
-                        options: { icon: 'img/map_icons/tailgateMarker.svg', labelContent: "You Are Here", labelAnchor: "50 85", labelClass: 'UserGeolabels' }
-                    }
+
                 } else {
                     $scope.closeOtherInfoWindows();
                     var currVenueObj = angular.fromJson($stateParams.eventDetails.Venue);
@@ -855,21 +860,21 @@
                       $scope.long = pos.coords.longitude;
                   }, function (err) {
                       // error
-                    $flaskUtil.alert("Unable to Get Location, Please Switch on GPS and Check App Location Permissions");
+                      $flaskUtil.alert("Unable to Get Location, Please Switch on GPS and Check App Location Permissions");
                   });
             }, 0);
         }
         //popup for parking map cost range
         template = '<ion-popover-view class="popover">' +
                             '<ion-content class="ion_content_range"><span>COST RANGE</span><br />' +
-                                '<div class="list" style="height:inherit;overflow:auto;padding-bottom:16px;">' +
-                                '<span class="range" ng-click="filterMarker(0,0);"><img src=""><p id="0" style="color:#f7941e;" class="rangePStyle">ALL</p></span>' +
-                                '<span class="range" ng-click="filterMarker(9,1);"><img src="./img/map_icons/FLASK_PIN_9.svg"><p id="1" class="rangePStyle">LESS THAN $10</p></span>' +
-                                '<span class="range" ng-click="filterMarker(10,2);"><img src="./img/map_icons/FLASK_PIN_10.svg"><p id="2" class="rangePStyle">$10 AND ABOVE</p></span>' +
-                                '<span class="range" ng-click="filterMarker(20,3);"><img src="./img/map_icons/FLASK_PIN_20.svg"><p id="3" class="rangePStyle">$20 AND ABOVE</p></span>' +
-                                '<span class="range" ng-click="filterMarker(30,4);"><img src="./img/map_icons/FLASK_PIN_30.svg"><p id="4" class="rangePStyle">$30 AND ABOVE</p></span>' +
-                                '<span class="range" ng-click="filterMarker(40,5);"><img src="./img/map_icons/FLASK_PIN_40.svg"><p id="5" class="rangePStyle">$40 AND ABOVE</p></span>' +
-                                '<span class="range" ng-click="filterMarker(50,6);"><img src="./img/map_icons/FLASK_PIN_50.svg"><p id="6" class="rangePStyle">$50 AND ABOVE</p></span>' +
+                                '<div class="list">' +
+                                '<span class="range" ng-click="filterMarker(0,0,$event);" ng-class="{selectedFilter : 0 === idSelected}"><img src=""><p id="0" style="color:#f7941e;" class="rangePStyle">ALL</p></span>' +
+                                '<span class="range" ng-click="filterMarker(9,1,$event);" ng-class="{selectedFilter : 1 === idSelected}"><img src="./img/map_icons/FLASK_PIN_9.svg"><p id="1" class="rangePStyle">LESS THAN $10</p></span>' +
+                                '<span class="range" ng-click="filterMarker(10,2,$event);" ng-class="{selectedFilter : 2 === idSelected}"><img src="./img/map_icons/FLASK_PIN_10.svg"><p id="2" class="rangePStyle">$10 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(20,3,$event);" ng-class="{selectedFilter : 3 === idSelected}"><img src="./img/map_icons/FLASK_PIN_20.svg"><p id="3" class="rangePStyle">$20 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(30,4,$event);" ng-class="{selectedFilter : 4 === idSelected}"><img src="./img/map_icons/FLASK_PIN_30.svg"><p id="4" class="rangePStyle">$30 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(40,5,$event);" ng-class="{selectedFilter : 5 === idSelected}"><img src="./img/map_icons/FLASK_PIN_40.svg"><p id="5" class="rangePStyle">$40 AND ABOVE</p></span>' +
+                                '<span class="range" ng-click="filterMarker(50,6,$event);" ng-class="{selectedFilter : 6 === idSelected}"><img src="./img/map_icons/FLASK_PIN_50.svg"><p id="6" class="rangePStyle">$50 AND ABOVE</p></span>' +
                                 '</div>' +
                             '</ion-content>' +
                     '</ion-popover-view>';
@@ -884,10 +889,14 @@
 
         //function for getting data of filter
         $scope.previousIndex = -1;
-        $scope.filterMarker = function (data, val) {
+        $scope.filterMarker = function (data, val, event) {
+            $scope.closeOtherInfoWindows();
             //$timeout(function () {
                 //var index = index;
-
+                $scope.idSelected = val;
+                event.target.disabled = true;
+                $timeout(function() {event.target.disabled = false;}, 3000);
+                
                 if (data == 0) {
                     $scope.filterCost = null;
                     $("#0").css("color", "#f7941e");
@@ -1241,9 +1250,14 @@
                                 if ("Parking" == tempObject.infoTypeCategoryName) {
                                     if ($scope.filterCost == null) {
                                         if (tempObject.premiumDisplayEnabled == true) {
-                                            tempObject.imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                            var imageUrl ='';
+                                            if (ImgObj.length != 0) {
+                                                imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
+                                            }else{
+                                                imageUrl = 'img/map_icons/bar.svg'; //if map marker icon is unable to load from server use default image.
+                                            }
                                             tempObject.icon = {
-                                                url: tempObject.imageUrl,
+                                                url: imageUrl,
                                                 scaledSize: { width: 45, height: 45 } //for scaling the svg images
                                             }
                                         } else if (tempObject.cost < 10) {
@@ -1274,14 +1288,6 @@
                                             tempObject.icon = {
                                                 url: 'img/map_icons/FLASK_PIN_40.svg',
                                                 //scaledSize: { width: 60, height: 60 } //for scaling the svg images
-                                            }
-                                        } else if (tempObject.premiumDisplayEnabled == true) {
-                                            if (ImgObj.length != 0) {
-                                                var imageUrl = baseImagePath + "?uuid=" + angular.fromJson(ImgObj[0].DetailImage).imageUUID + "&groupId=" + angular.fromJson(ImgObj[0].DetailImage).imageGroupId;
-                                                tempObject.icon = {
-                                                    url: imageUrl,
-                                                    scaledSize: { width: 45, height: 45 } //for scaling the svg images
-                                                }
                                             }
                                         }
                                         else if (tempObject.cost >= 50) {
@@ -1491,6 +1497,7 @@
             return findUs;
         }
         initEventData();
+        });
     }
     angular.module('flaskApp').controller('refreshMap', function ($scope, $controller, uiGmapIsReady, mapServices, $timeout, $ionicLoading) {
         console.log('inside refreshMap');
@@ -1508,7 +1515,7 @@
             function(err){
                 console.log(err);
                 //alert('err map '+JSON.stringify(err));
-                $ionicLoading.show({ template: 'Bad Network,processing..!', noBackdrop: false, duration: 2000 });
+                $ionicLoading.show({ template: 'Bad Network,processing error..!', noBackdrop: false, duration: 2000 });
                 $state.go("app.events");
             });
     });

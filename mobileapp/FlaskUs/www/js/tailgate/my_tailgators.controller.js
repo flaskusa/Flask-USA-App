@@ -25,13 +25,11 @@
         $scope.goBack = function () {
             $timeout(function () {
                 $state.go("app.my_tailgate");
-            }, 1000);
+            }, 300);
         }
         var tailGateId = $cookies.get('currtailGateId');
         var tailgateOwnerId = $cookies.get('currtailGateUserId');
         $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
-        $scope.imgUrl = SERVER.hostName + "c/document_library/get_file?uuid=";
-
 
         $scope.deleteTailgateUser = function (currUserId) {
             var confirmPopup = $ionicPopup.confirm({
@@ -46,9 +44,10 @@
                                     $scope.myTailgaters.splice(i,1);
                                 }
                             }
+                            $flaskUtil.alert("Tailgate User Removed successfully");
                         })
                     } else {
-                        $flaskUtil.alert("Tailgate admin can't be remove.")
+                        $flaskUtil.alert("Tailgate admin can't be remove.");
                     }
                 } else {
                 }
@@ -62,8 +61,6 @@
         };
 
         $scope.isUserTailgateAdmin(tailGateId);
-
-
         
         function getTailgaters() {
             TailgateService.getMyTailgateUsers(tailGateId).then(function (response) {
@@ -72,19 +69,15 @@
                 angular.forEach(response.data, function (value, key) {
                     haveProfilePic(value)
                 })
-                
-
             });
             getAllFriends();
             getTailgateUser();
-            
         }
 
         function getTailgateUser() {
             TailgateService.getTailgate(tailGateId).then(function (respData) {
                 $scope.tUserId = respData.data.userId; 
             });
-            
         }
 
         function haveProfilePic(memberDetail) {
@@ -94,31 +87,25 @@
                     PicExist = true
                     if (value.userId == memberDetail.userId) {
                         memberDetail.friendProfilePicUrl = value.friendProfilePicUrl
-
                     }
                 }
                 
             });
             if (memberDetail.userId == $scope.loggedInUserId || !isMemberMyFrnd(memberDetail)) {
                 $scope.getUserProfile(memberDetail)
-
             } else {
                 $scope.myTailgaters.push(memberDetail);
             }
         }
         function isMemberMyFrnd(memberDetail) {
             var friend = false;
-
-
             angular.forEach($localStorage["myFriendDetail"], function (value2, key) {
                 if (memberDetail.userId == value2.userId) {
                     friend = true;
                     return friend;
                 }
             })
-
             return friend;
-
         }
 
         function getAllFriends() {

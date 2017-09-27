@@ -10,6 +10,7 @@
         /* jshint validthis: true */
         console.log('inside prePostGameCtrl');
         var self = this;
+        $scope.$on('$ionicView.beforeEnter', function () {
         $ionicLoading.show({ template: '<ion-spinner icon="spiral" class="flask-spinner"></ion-spinner>' });
         $scope.venueDataRecieved=false;
         $scope.eventDetails = {};
@@ -320,6 +321,6 @@
             fileName = fileName + defaultExt;
             return fileName;
         }
-
+        });
     }
 })(); 
