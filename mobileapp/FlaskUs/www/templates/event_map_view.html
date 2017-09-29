@@ -125,7 +125,7 @@
                             </tr>
                             <tr>
                                 <td class="iw-content-icon"><img src="img/map_icons/take_me_there.svg"> </td>
-                                <td class="iw-content-text"> <a id="iwTakeMeThere"><span>Take me there </span></a> </td>
+                                <td class="iw-content-text" style="vertical-align: middle !important;"> <a id="iwTakeMeThere"><span>Take me there </span></a> </td>
                             </tr>
                         </table>
                     </div>
@@ -177,7 +177,7 @@
         <div ng-if="infoTypeName == 'Pre-Event'" class="Pre-Event">
             <ion-tabs class="tabs-positive tab_bottom">
                 <ion-tab title="PARKING" ng-click="selectTab(0)">
-                    <div id="parkingDiv" class="tab_div" ng-if="selectedIndex == 0">
+                    <div id="parkingDiv" class="tab_div" ng-if="selectedIndex == 0" data-tap-disabled="true">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" idkey="id" control="map.control" events="map.events">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <!--<ui-gmap-map-control template="custom.controls.tpl.html" index="-1"	position="RIGHT_CENTER" controller = "refreshMap"> </ui-gmap-map-control>-->
@@ -225,7 +225,7 @@
                     </div>
                 </ion-tab>
                 <ion-tab title="BARS/FOOD" ng-click="selectTab(1)">
-                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 1">
+                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 1" data-tap-disabled="true">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">
@@ -399,7 +399,7 @@
                     </ion-content>
                 </ion-tab>
                 <!--<ion-tab title="BARS/FOOD" ng-click="selectTab(2)" class="tabs-item-hide" style="display:none;">
-                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 2" style="display:none;">
+                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 2" style="display:none;"  data-tap-disabled="true">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
                             <ui-gmap-map-control position="right_center">
                                 <div ng-controller="refreshMap">
@@ -500,7 +500,7 @@
         <div ng-if="infoTypeName == 'Post-Event'" class="Post-Event">
             <ion-tabs class="tabs-positive tab_bottom">
                 <ion-tab title="BARS/FOOD" ng-click="selectTab(0)">
-                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 0">
+                    <div id="barTab" class="tab_div" ng-if="selectedIndex == 0" data-tap-disabled="true">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
                             <ui-gmap-map-control position="right_center">
                                 <div ng-controller="refreshMap">
@@ -537,7 +537,7 @@
                     </div>
                 </ion-tab>
                 <ion-tab title="Nightlife" ng-click="selectTab(1)" events="map.events">
-                    <div id="nightLifeTab" class="tab_div" ng-if="selectedIndex == 1">
+                    <div id="nightLifeTab" class="tab_div" ng-if="selectedIndex == 1" data-tap-disabled="true">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">
@@ -578,7 +578,7 @@
                     </div>
                 </ion-tab>
                 <ion-tab title="HOTELS" ng-click="selectTab(2)">
-                    <div id="hoteltab" class="tab_div" ng-if="selectedIndex == 2">
+                    <div id="hoteltab" class="tab_div" ng-if="selectedIndex == 2" data-tap-disabled="true">
                         <ui-gmap-google-map center='map.center' zoom='map.zoom' options="options" control="map.control" events="map.events">
                             <!--<ui-gmap-search-box template="searchbox.template" events="searchbox.events" options="searchbox.options"></ui-gmap-search-box>-->
                             <ui-gmap-map-control position="right_center">

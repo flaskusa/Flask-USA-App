@@ -61,10 +61,8 @@
                 $scope.storedTime = $scope.localstorageData.timestamp;
             }
             //console.log($scope.localstorageData);
-
             if (navigator.connection.type == undefined || navigator.connection.type == "none") {
                 get_from_localStorage();
-
             } else {
                 get_event_list();
             }

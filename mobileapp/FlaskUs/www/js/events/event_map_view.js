@@ -1515,8 +1515,8 @@
             function(err){
                 console.log(err);
                 //alert('err map '+JSON.stringify(err));
-                $ionicLoading.show({ template: 'Bad Network,processing error..!', noBackdrop: false, duration: 2000 });
-                $state.go("app.events");
+                $ionicLoading.show({ template: 'Bad Network,processing error '+err, noBackdrop: false, duration: 2000 });
+                //$state.go("app.events");
             });
     });
 
